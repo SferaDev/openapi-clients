@@ -35,7 +35,6 @@ jobs:
         run: pnpm generate
 
       - run: git add .
-      - run: npx lint-staged --allow-empty
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
