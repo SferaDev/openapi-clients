@@ -1,7 +1,6 @@
 import typescript from "@rollup/plugin-typescript";
 import builtins from "builtin-modules";
 import dts from "rollup-plugin-dts";
-import pkg from "./package.json";
 
 export default [
     {
@@ -16,7 +15,7 @@ export default [
                 format: "esm",
             },
         ],
-        external: [...builtins, ...Object.keys(pkg.dependencies || {})],
+        external: builtins,
         plugins: [typescript()],
     },
     {
