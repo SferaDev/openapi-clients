@@ -1,6 +1,7 @@
 import { operationsByTag } from "./api/components";
 import { FetcherExtraProps } from "./api/fetcher";
 import { FetchImpl } from "./utils/fetch";
+import { RequiredKeys } from "./utils/types";
 
 export interface VercelApiOptions {
   token: string;
@@ -12,7 +13,11 @@ type ApiProxy = {
     [Method in keyof (typeof operationsByTag)[Tag]]: (typeof operationsByTag)[Tag][Method] extends infer Operation extends (
       ...args: any
     ) => any
-      ? (params: Omit<Parameters<Operation>[0], keyof FetcherExtraProps>) => ReturnType<Operation>
+      ? Omit<Parameters<Operation>[0], keyof FetcherExtraProps> extends infer Params
+        ? RequiredKeys<Params> extends never
+          ? (params?: Params) => ReturnType<Operation>
+          : (params: Params) => ReturnType<Operation>
+        : never
       : never;
   };
 };
