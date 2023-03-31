@@ -4,5 +4,6 @@ Unofficial Vercel API JavaScript SDK built from the OpenAPI specification and wi
 
 ```ts
 const vercel = new VercelApi({ token: "token" });
-const { projects } = await vercel.api.projects.getProjects({});
+await vercel.api.projects.createProject({ body: { name: "Awesome project", buildCommand: "pnpm build" } });
+const { projects } = await vercel.api.projects.getProjects();
 ```
