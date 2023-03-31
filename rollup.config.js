@@ -16,7 +16,7 @@ export default [
                 format: "esm",
             },
         ],
-        external: [...builtins, ...Object.keys(pkg.dependencies)],
+        external: [...builtins, ...Object.keys(pkg.dependencies || {})],
         plugins: [typescript()],
     },
     {

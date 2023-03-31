@@ -8,10 +8,12 @@ export interface VercelApiOptions {
 }
 
 type ApiProxy = {
-  [K in keyof typeof operationsByTag]: {
-    [P in keyof (typeof operationsByTag)[K]]: (
-      params: Omit<Parameters<(typeof operationsByTag)[K][P]>[0], keyof FetcherExtraProps>
-    ) => ReturnType<(typeof operationsByTag)[K][P]>;
+  [Tag in keyof typeof operationsByTag]: {
+    [Method in keyof (typeof operationsByTag)[Tag]]: (typeof operationsByTag)[Tag][Method] extends infer Operation extends (
+      ...args: any
+    ) => any
+      ? (params: Omit<Parameters<Operation>[0], keyof FetcherExtraProps>) => ReturnType<Operation>
+      : never;
   };
 };
 
