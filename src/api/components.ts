@@ -13134,15 +13134,15 @@ export type GetEdgeConfigsQueryParams = {
 export type GetEdgeConfigsError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetEdgeConfigsResponse = {
-  createdAt?: number | null;
-  creator?: string;
-  domain?: string;
   id?: string;
-  name?: string;
-  recordType?: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS";
-  ttl?: number;
-  type?: "record" | "record-sys";
-  value?: string;
+  createdAt?: number;
+  ownerId?: string;
+  /**
+   * Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
+   */
+  slug?: string;
+  updatedAt?: number;
+  digest?: string;
   sizeInBytes: number;
   itemCount: number;
 };
@@ -13156,7 +13156,7 @@ export type GetEdgeConfigsVariables = {
  */
 export const getEdgeConfigs = (variables: GetEdgeConfigsVariables, signal?: AbortSignal) =>
   fetch<GetEdgeConfigsResponse, GetEdgeConfigsError, undefined, {}, GetEdgeConfigsQueryParams, {}>({
-    url: "/edge-config",
+    url: "/v1/edge-config",
     method: "get",
     ...variables,
     signal,
@@ -13172,15 +13172,15 @@ export type CreateEdgeConfigQueryParams = {
 export type CreateEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
 
 export type CreateEdgeConfigResponse = {
-  createdAt?: number | null;
-  creator?: string;
-  domain?: string;
   id?: string;
-  name?: string;
-  recordType?: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS";
-  ttl?: number;
-  type?: "record" | "record-sys";
-  value?: string;
+  createdAt?: number;
+  ownerId?: string;
+  /**
+   * Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
+   */
+  slug?: string;
+  updatedAt?: number;
+  digest?: string;
   sizeInBytes: number;
   itemCount: number;
 };
@@ -13214,7 +13214,7 @@ export const createEdgeConfig = (variables: CreateEdgeConfigVariables, signal?: 
     {},
     CreateEdgeConfigQueryParams,
     {}
-  >({ url: "/edge-config", method: "post", ...variables, signal });
+  >({ url: "/v1/edge-config", method: "post", ...variables, signal });
 
 export type GetEdgeConfigPathParams = {
   edgeConfigId: string;
@@ -13230,15 +13230,15 @@ export type GetEdgeConfigQueryParams = {
 export type GetEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetEdgeConfigResponse = {
-  createdAt?: number | null;
-  creator?: string;
-  domain?: string;
   id?: string;
-  name?: string;
-  recordType?: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS";
-  ttl?: number;
-  type?: "record" | "record-sys";
-  value?: string;
+  createdAt?: number;
+  ownerId?: string;
+  /**
+   * Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
+   */
+  slug?: string;
+  updatedAt?: number;
+  digest?: string;
   sizeInBytes: number;
   itemCount: number;
 };
@@ -13253,7 +13253,7 @@ export type GetEdgeConfigVariables = {
  */
 export const getEdgeConfig = (variables: GetEdgeConfigVariables, signal?: AbortSignal) =>
   fetch<GetEdgeConfigResponse, GetEdgeConfigError, undefined, {}, GetEdgeConfigQueryParams, GetEdgeConfigPathParams>({
-    url: "/edge-config/{edgeConfigId}",
+    url: "/v1/edge-config/{edgeConfigId}",
     method: "get",
     ...variables,
     signal,
@@ -13273,15 +13273,15 @@ export type UpdateEdgeConfigQueryParams = {
 export type UpdateEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
 
 export type UpdateEdgeConfigResponse = {
-  createdAt?: number | null;
-  creator?: string;
-  domain?: string;
   id?: string;
-  name?: string;
-  recordType?: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS";
-  ttl?: number;
-  type?: "record" | "record-sys";
-  value?: string;
+  createdAt?: number;
+  ownerId?: string;
+  /**
+   * Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
+   */
+  slug?: string;
+  updatedAt?: number;
+  digest?: string;
   sizeInBytes: number;
   itemCount: number;
 };
@@ -13311,7 +13311,7 @@ export const updateEdgeConfig = (variables: UpdateEdgeConfigVariables, signal?: 
     {},
     UpdateEdgeConfigQueryParams,
     UpdateEdgeConfigPathParams
-  >({ url: "/edge-config/{edgeConfigId}", method: "put", ...variables, signal });
+  >({ url: "/v1/edge-config/{edgeConfigId}", method: "put", ...variables, signal });
 
 export type DeleteEdgeConfigPathParams = {
   edgeConfigId: string;
@@ -13336,7 +13336,7 @@ export type DeleteEdgeConfigVariables = {
  */
 export const deleteEdgeConfig = (variables: DeleteEdgeConfigVariables, signal?: AbortSignal) =>
   fetch<undefined, DeleteEdgeConfigError, undefined, {}, DeleteEdgeConfigQueryParams, DeleteEdgeConfigPathParams>({
-    url: "/edge-config/{edgeConfigId}",
+    url: "/v1/edge-config/{edgeConfigId}",
     method: "delete",
     ...variables,
     signal,
@@ -13371,7 +13371,7 @@ export const getEdgeConfigItems = (variables: GetEdgeConfigItemsVariables, signa
     {},
     GetEdgeConfigItemsQueryParams,
     GetEdgeConfigItemsPathParams
-  >({ url: "/edge-config/{edgeConfigId}/items", method: "get", ...variables, signal });
+  >({ url: "/v1/edge-config/{edgeConfigId}/items", method: "get", ...variables, signal });
 
 export type PatchtEdgeConfigItemsPathParams = {
   edgeConfigId: string;
@@ -13431,7 +13431,7 @@ export const patchtEdgeConfigItems = (variables: PatchtEdgeConfigItemsVariables,
     {},
     PatchtEdgeConfigItemsQueryParams,
     PatchtEdgeConfigItemsPathParams
-  >({ url: "/edge-config/{edgeConfigId}/items", method: "patch", ...variables, signal });
+  >({ url: "/v1/edge-config/{edgeConfigId}/items", method: "patch", ...variables, signal });
 
 export type GetEdgeConfigItemPathParams = {
   edgeConfigId: string;
@@ -13463,7 +13463,7 @@ export const getEdgeConfigItem = (variables: GetEdgeConfigItemVariables, signal?
     {},
     GetEdgeConfigItemQueryParams,
     GetEdgeConfigItemPathParams
-  >({ url: "/edge-config/{edgeConfigId}/item/{edgeConfigItemKey}", method: "get", ...variables, signal });
+  >({ url: "/v1/edge-config/{edgeConfigId}/item/{edgeConfigItemKey}", method: "get", ...variables, signal });
 
 export type GetEdgeConfigTokensPathParams = {
   edgeConfigId: string;
@@ -13494,7 +13494,7 @@ export const getEdgeConfigTokens = (variables: GetEdgeConfigTokensVariables, sig
     {},
     GetEdgeConfigTokensQueryParams,
     GetEdgeConfigTokensPathParams
-  >({ url: "/edge-config/{edgeConfigId}/tokens", method: "get", ...variables, signal });
+  >({ url: "/v1/edge-config/{edgeConfigId}/tokens", method: "get", ...variables, signal });
 
 export type DeleteEdgeConfigTokensPathParams = {
   edgeConfigId: string;
@@ -13530,7 +13530,7 @@ export const deleteEdgeConfigTokens = (variables: DeleteEdgeConfigTokensVariable
     {},
     DeleteEdgeConfigTokensQueryParams,
     DeleteEdgeConfigTokensPathParams
-  >({ url: "/edge-config/{edgeConfigId}/tokens", method: "delete", ...variables, signal });
+  >({ url: "/v1/edge-config/{edgeConfigId}/tokens", method: "delete", ...variables, signal });
 
 export type GetEdgeConfigTokenPathParams = {
   edgeConfigId: string;
@@ -13562,7 +13562,7 @@ export const getEdgeConfigToken = (variables: GetEdgeConfigTokenVariables, signa
     {},
     GetEdgeConfigTokenQueryParams,
     GetEdgeConfigTokenPathParams
-  >({ url: "/edge-config/{edgeConfigId}/token/{token}", method: "get", ...variables, signal });
+  >({ url: "/v1/edge-config/{edgeConfigId}/token/{token}", method: "get", ...variables, signal });
 
 export type CreateEdgeConfigTokenPathParams = {
   edgeConfigId: string;
@@ -13606,7 +13606,7 @@ export const createEdgeConfigToken = (variables: CreateEdgeConfigTokenVariables,
     {},
     CreateEdgeConfigTokenQueryParams,
     CreateEdgeConfigTokenPathParams
-  >({ url: "/edge-config/{edgeConfigId}/token", method: "post", ...variables, signal });
+  >({ url: "/v1/edge-config/{edgeConfigId}/token", method: "post", ...variables, signal });
 
 export const operationsByTag = {
   artifacts: { recordEvents, status, uploadArtifact, downloadArtifact, artifactQuery },
