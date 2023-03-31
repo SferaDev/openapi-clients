@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+      - gh-readonly-queue/main/**
+  pull_request:
+    types: [opened, synchronize, reopened, labeled]
+    branches:
+      - '**'
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
