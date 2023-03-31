@@ -1,0 +1,54 @@
+{
+    "name": "vercel-api-js",
+    "version": "0.0.1",
+    "description": "Vercel API client for Node.js",
+    "author": "SferaDev",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/SferaDev/vercel-api/issues"
+    },
+    "homepage": "https://github.com/SferaDev/vercel-api#readme",
+    "main": "dist/index.cjs",
+    "module": "dist/index.mjs",
+    "typings": "dist/index.d.ts",
+    "exports": {
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.cjs"
+    },
+    "scripts": {
+        "build": "rimraf dist && rollup -c",
+        "dev": "rollup -c -w",
+        "test": "vitest",
+        "generate": "openapi-codegen vercel"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/SferaDev/vercel-api.git"
+    },
+    "devDependencies": {
+        "@openapi-codegen/cli": "^2.0.0",
+        "@openapi-codegen/typescript": "^6.1.2",
+        "@rollup/plugin-typescript": "^8.3.2",
+        "@types/isomorphic-fetch": "^0.0.36",
+        "@types/node": "^17.0.25",
+        "builtin-modules": "^3.2.0",
+        "isomorphic-fetch": "^3.0.0",
+        "rimraf": "^3.0.2",
+        "rollup": "^2.70.2",
+        "rollup-plugin-dts": "^4.2.1",
+        "rollup-plugin-dts-bundle": "^1.0.0",
+        "rollup-plugin-virtual-fs": "^4.0.1-alpha.0",
+        "ts-node": "^10.7.0",
+        "tslib": "^2.4.0",
+        "typescript": "^4.6.3",
+        "vitest": "^0.9.4"
+    },
+    "peerDependencies": {
+        "rollup": "^2.70.2"
+    },
+    "prettier": {
+        "tabWidth": 2,
+        "singleQuote": false,
+        "printWidth": 120
+    }
+}
