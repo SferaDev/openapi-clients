@@ -2,3 +2,6 @@
 /test
 /rollup.config.js
 /src
+/.github
+/.changeset
+/openapi-codegen.config.ts
