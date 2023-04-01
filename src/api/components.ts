@@ -13134,15 +13134,15 @@ export type GetEdgeConfigsQueryParams = {
 export type GetEdgeConfigsError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetEdgeConfigsResponse = {
+  createdAt?: number | null;
+  creator?: string;
+  domain?: string;
   id?: string;
-  createdAt?: number;
-  ownerId?: string;
-  /**
-   * Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
-   */
-  slug?: string;
-  updatedAt?: number;
-  digest?: string;
+  name?: string;
+  recordType?: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS";
+  ttl?: number;
+  type?: "record" | "record-sys";
+  value?: string;
   sizeInBytes: number;
   itemCount: number;
 };
@@ -13172,15 +13172,15 @@ export type CreateEdgeConfigQueryParams = {
 export type CreateEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
 
 export type CreateEdgeConfigResponse = {
+  createdAt?: number | null;
+  creator?: string;
+  domain?: string;
   id?: string;
-  createdAt?: number;
-  ownerId?: string;
-  /**
-   * Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
-   */
-  slug?: string;
-  updatedAt?: number;
-  digest?: string;
+  name?: string;
+  recordType?: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS";
+  ttl?: number;
+  type?: "record" | "record-sys";
+  value?: string;
   sizeInBytes: number;
   itemCount: number;
 };
@@ -13230,15 +13230,15 @@ export type GetEdgeConfigQueryParams = {
 export type GetEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetEdgeConfigResponse = {
+  createdAt?: number | null;
+  creator?: string;
+  domain?: string;
   id?: string;
-  createdAt?: number;
-  ownerId?: string;
-  /**
-   * Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
-   */
-  slug?: string;
-  updatedAt?: number;
-  digest?: string;
+  name?: string;
+  recordType?: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS";
+  ttl?: number;
+  type?: "record" | "record-sys";
+  value?: string;
   sizeInBytes: number;
   itemCount: number;
 };
@@ -13273,15 +13273,15 @@ export type UpdateEdgeConfigQueryParams = {
 export type UpdateEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
 
 export type UpdateEdgeConfigResponse = {
+  createdAt?: number | null;
+  creator?: string;
+  domain?: string;
   id?: string;
-  createdAt?: number;
-  ownerId?: string;
-  /**
-   * Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
-   */
-  slug?: string;
-  updatedAt?: number;
-  digest?: string;
+  name?: string;
+  recordType?: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS";
+  ttl?: number;
+  type?: "record" | "record-sys";
+  value?: string;
   sizeInBytes: number;
   itemCount: number;
 };
