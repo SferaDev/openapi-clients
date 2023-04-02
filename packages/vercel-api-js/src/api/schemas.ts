@@ -29,23 +29,23 @@ export type UserEvent = {
      * @example author
      */
     type:
-      | "target"
-      | "author"
-      | "bitbucket_login"
-      | "bold"
-      | "deployment_host"
-      | "dns_record"
-      | "git_link"
-      | "github_login"
-      | "gitlab_login"
-      | "hook_name"
-      | "integration"
-      | "edge-config"
-      | "link"
-      | "project_name"
-      | "scaling_rules"
-      | "env_var_name"
-      | "system";
+      | 'target'
+      | 'author'
+      | 'bitbucket_login'
+      | 'bold'
+      | 'deployment_host'
+      | 'dns_record'
+      | 'git_link'
+      | 'github_login'
+      | 'gitlab_login'
+      | 'hook_name'
+      | 'integration'
+      | 'edge-config'
+      | 'link'
+      | 'project_name'
+      | 'scaling_rules'
+      | 'env_var_name'
+      | 'system';
     /**
      * The index of where the entity begins within the `text` (inclusive).
      *
@@ -123,19 +123,19 @@ export type AuthUser = {
   softBlock: {
     blockedAt: number;
     reason:
-      | "FAIR_USE_LIMITS_EXCEEDED"
-      | "ENTERPRISE_TRIAL_ENDED"
-      | "BLOCKED_FOR_PLATFORM_ABUSE"
-      | "UNPAID_INVOICE"
-      | "SUBSCRIPTION_EXPIRED"
-      | "SUBSCRIPTION_CANCELED";
+      | 'FAIR_USE_LIMITS_EXCEEDED'
+      | 'ENTERPRISE_TRIAL_ENDED'
+      | 'BLOCKED_FOR_PLATFORM_ABUSE'
+      | 'UNPAID_INVOICE'
+      | 'SUBSCRIPTION_EXPIRED'
+      | 'SUBSCRIPTION_CANCELED';
   } | null;
   /**
    * An object containing billing infomation associated with the User account.
    */
   billing: {
-    currency?: "usd" | "eur";
-    addons?: ("custom-deployment-suffix" | "live-support")[] | null;
+    currency?: 'usd' | 'eur';
+    addons?: ('custom-deployment-suffix' | 'live-support')[] | null;
     cancelation?: number | null;
     period: {
       start: number;
@@ -145,9 +145,9 @@ export type AuthUser = {
       start: number;
       end: number;
     } | null;
-    plan: "hobby" | "enterprise" | "pro";
-    platform?: "stripe" | "stripeTestMode";
-    programType?: "startup" | "agency";
+    plan: 'hobby' | 'enterprise' | 'pro';
+    platform?: 'stripe' | 'stripeTestMode';
+    programType?: 'startup' | 'agency';
     trial?: {
       start: number;
       end: number;
@@ -181,7 +181,7 @@ export type AuthUser = {
         createdAt?: number;
         disabledAt?: number | null;
         frequency?: {
-          interval: "month";
+          interval: 'month';
           intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
@@ -198,7 +198,7 @@ export type AuthUser = {
         createdAt?: number;
         disabledAt?: number | null;
         frequency?: {
-          interval: "month";
+          interval: 'month';
           intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
@@ -215,7 +215,7 @@ export type AuthUser = {
         createdAt?: number;
         disabledAt?: number | null;
         frequency?: {
-          interval: "month";
+          interval: 'month';
           intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
@@ -232,7 +232,7 @@ export type AuthUser = {
         createdAt?: number;
         disabledAt?: number | null;
         frequency?: {
-          interval: "month";
+          interval: 'month';
           intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
@@ -249,7 +249,7 @@ export type AuthUser = {
         createdAt?: number;
         disabledAt?: number | null;
         frequency?: {
-          interval: "month";
+          interval: 'month';
           intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
@@ -266,7 +266,7 @@ export type AuthUser = {
         createdAt?: number;
         disabledAt?: number | null;
         frequency?: {
-          interval: "month";
+          interval: 'month';
           intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
@@ -283,7 +283,7 @@ export type AuthUser = {
         createdAt?: number;
         disabledAt?: number | null;
         frequency?: {
-          interval: "month";
+          interval: 'month';
           intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
@@ -300,7 +300,7 @@ export type AuthUser = {
         createdAt?: number;
         disabledAt?: number | null;
         frequency?: {
-          interval: "month";
+          interval: 'month';
           intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
@@ -317,7 +317,7 @@ export type AuthUser = {
         createdAt?: number;
         disabledAt?: number | null;
         frequency?: {
-          interval: "month";
+          interval: 'month';
           intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
@@ -334,7 +334,7 @@ export type AuthUser = {
         createdAt?: number;
         disabledAt?: number | null;
         frequency?: {
-          interval: "month";
+          interval: 'month';
           intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
@@ -351,7 +351,7 @@ export type AuthUser = {
         createdAt?: number;
         disabledAt?: number | null;
         frequency?: {
-          interval: "month";
+          interval: 'month';
           intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
@@ -368,7 +368,7 @@ export type AuthUser = {
         createdAt?: number;
         disabledAt?: number | null;
         frequency?: {
-          interval: "month";
+          interval: 'month';
           intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
@@ -493,7 +493,7 @@ export type AuthUser = {
             end: number;
           };
           frequency: {
-            interval: "month" | "day" | "week" | "year";
+            interval: 'month' | 'day' | 'week' | 'year';
             intervalCount: number;
           };
           discount: {
@@ -504,7 +504,7 @@ export type AuthUser = {
               amountOff: number | null;
               percentageOff: number | null;
               durationInMonths: number | null;
-              duration: "forever" | "repeating" | "once";
+              duration: 'forever' | 'repeating' | 'once';
             };
           } | null;
           items: {
@@ -521,8 +521,8 @@ export type AuthUser = {
       analyticsSpendLimitInDollars?: number | null;
     } | null;
     purchaseOrder?: string | null;
-    status?: "active" | "canceled" | "trialing" | "overdue" | "expired";
-    pricingExperiment?: "august-2022";
+    status?: 'active' | 'canceled' | 'trialing' | 'overdue' | 'expired';
+    pricingExperiment?: 'august-2022';
   } | null;
   /**
    * An object containing infomation related to the amount of platform resources may be allocated to the User account.
@@ -551,11 +551,11 @@ export type AuthUser = {
    */
   activeDashboardViews?: {
     scopeId: string;
-    viewPreference: "cards" | "list";
+    viewPreference: 'cards' | 'list';
   }[];
   importFlowGitNamespace?: string | number | null;
   importFlowGitNamespaceId?: string | number | null;
-  importFlowGitProvider?: "github" | "gitlab" | "bitbucket";
+  importFlowGitProvider?: 'github' | 'gitlab' | 'bitbucket';
   preferredScopesAndGitNamespaces?: {
     scopeId: string;
     gitNamespaceId: string | number | null;
@@ -683,15 +683,15 @@ export type AuthToken = {
    */
   scopes?: (
     | {
-        type: "user";
-        origin: "saml" | "github" | "gitlab" | "bitbucket" | "email" | "manual";
+        type: 'user';
+        origin: 'saml' | 'github' | 'gitlab' | 'bitbucket' | 'email' | 'manual';
         createdAt: number;
         expiresAt?: number;
       }
     | {
-        type: "team";
+        type: 'team';
         teamId: string;
-        origin: "saml" | "github" | "gitlab" | "bitbucket" | "email" | "manual";
+        origin: 'saml' | 'github' | 'gitlab' | 'bitbucket' | 'email' | 'manual';
         createdAt: number;
         expiresAt?: number;
       }
@@ -719,7 +719,7 @@ export type AuthToken = {
 /**
  * Enum containing the actions that can be performed against a resource. Group operations are included.
  */
-export type ACLAction = "create" | "delete" | "read" | "update" | "list" | "count";
+export type ACLAction = 'create' | 'delete' | 'read' | 'update' | 'list' | 'count';
 
 /**
  * Data representing a Team.
@@ -747,9 +747,9 @@ export type TeamLimited = {
       domain: string;
       id: string;
       name: string;
-      recordType: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS";
+      recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
       ttl?: number;
-      type: "record" | "record-sys";
+      type: 'record' | 'record-sys';
       value: string;
     };
     /**
@@ -761,9 +761,9 @@ export type TeamLimited = {
       domain: string;
       id: string;
       name: string;
-      recordType: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS";
+      recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
       ttl?: number;
-      type: "record" | "record-sys";
+      type: 'record' | 'record-sys';
       value: string;
     };
     /**
@@ -800,24 +800,24 @@ export type TeamLimited = {
         confirmed: boolean;
         confirmedAt: number;
         accessRequestedAt?: number;
-        role: "MEMBER" | "OWNER" | "VIEWER" | "DEVELOPER" | "BILLING";
+        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING';
         teamId?: string;
         uid: string;
         createdAt: number;
         created: number;
         joinedFrom?: {
           origin:
-            | "import"
-            | "saml"
-            | "mail"
-            | "link"
-            | "teams"
-            | "github"
-            | "gitlab"
-            | "bitbucket"
-            | "dsync"
-            | "feedback"
-            | "organization-teams";
+            | 'import'
+            | 'saml'
+            | 'mail'
+            | 'link'
+            | 'teams'
+            | 'github'
+            | 'gitlab'
+            | 'bitbucket'
+            | 'dsync'
+            | 'feedback'
+            | 'organization-teams';
           commitId?: string;
           repoId?: string;
           repoPath?: string;
@@ -834,24 +834,24 @@ export type TeamLimited = {
         confirmed: boolean;
         confirmedAt?: number;
         accessRequestedAt: number;
-        role: "MEMBER" | "OWNER" | "VIEWER" | "DEVELOPER" | "BILLING";
+        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING';
         teamId?: string;
         uid: string;
         createdAt: number;
         created: number;
         joinedFrom?: {
           origin:
-            | "import"
-            | "saml"
-            | "mail"
-            | "link"
-            | "teams"
-            | "github"
-            | "gitlab"
-            | "bitbucket"
-            | "dsync"
-            | "feedback"
-            | "organization-teams";
+            | 'import'
+            | 'saml'
+            | 'mail'
+            | 'link'
+            | 'teams'
+            | 'github'
+            | 'gitlab'
+            | 'bitbucket'
+            | 'dsync'
+            | 'feedback'
+            | 'organization-teams';
           commitId?: string;
           repoId?: string;
           repoPath?: string;
@@ -891,7 +891,7 @@ export type FileTree = {
    *
    * @example file
    */
-  type: "directory" | "file" | "symlink" | "lambda" | "middleware" | "invalid";
+  type: 'directory' | 'file' | 'symlink' | 'lambda' | 'middleware' | 'invalid';
   /**
    * The unique identifier of the file (only valid for the `file` type)
    *

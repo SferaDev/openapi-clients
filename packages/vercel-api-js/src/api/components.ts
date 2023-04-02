@@ -3,9 +3,9 @@
  *
  * @version 0.0.1
  */
-import type * as Fetcher from "./fetcher";
-import { fetch, FetcherExtraProps } from "./fetcher";
-import type * as Schemas from "./schemas";
+import type * as Fetcher from './fetcher';
+import { fetch, FetcherExtraProps } from './fetcher';
+import type * as Schemas from './schemas';
 
 export type RecordEventsQueryParams = {
   /**
@@ -21,7 +21,7 @@ export type RecordEventsHeaders = {
    * @example VERCEL
    * @maxLength 50
    */
-  ["x-artifact-client-ci"]?: string;
+  ['x-artifact-client-ci']?: string;
   /**
    * 1 if the client is an interactive shell. Otherwise 0
    *
@@ -29,7 +29,7 @@ export type RecordEventsHeaders = {
    * @minimum 0
    * @maximum 1
    */
-  ["x-artifact-client-interactive"]?: number;
+  ['x-artifact-client-interactive']?: number;
 };
 
 export type RecordEventsError = Fetcher.ErrorWrapper<undefined>;
@@ -42,11 +42,11 @@ export type RecordEventsRequestBody = {
   /**
    * One of `LOCAL` or `REMOTE`. `LOCAL` specifies that the cache event was from the user's filesystem cache. `REMOTE` specifies that the cache event is from a remote cache.
    */
-  source: "LOCAL" | "REMOTE";
+  source: 'LOCAL' | 'REMOTE';
   /**
    * One of `HIT` or `MISS`. `HIT` specifies that a cached artifact for `hash` was found in the cache. `MISS` specifies that a cached artifact with `hash` was not found.
    */
-  event: "HIT" | "MISS";
+  event: 'HIT' | 'MISS';
   /**
    * The artifact hash
    *
@@ -72,10 +72,10 @@ export type RecordEventsVariables = {
  */
 export const recordEvents = (variables: RecordEventsVariables, signal?: AbortSignal) =>
   fetch<undefined, RecordEventsError, RecordEventsRequestBody, RecordEventsHeaders, RecordEventsQueryParams, {}>({
-    url: "/v8/artifacts/events",
-    method: "post",
+    url: '/v8/artifacts/events',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type StatusQueryParams = {
@@ -88,7 +88,7 @@ export type StatusQueryParams = {
 export type StatusError = Fetcher.ErrorWrapper<undefined>;
 
 export type StatusResponse = {
-  status: "disabled" | "enabled" | "over_limit" | "paused";
+  status: 'disabled' | 'enabled' | 'over_limit' | 'paused';
 };
 
 export type StatusVariables = {
@@ -100,10 +100,10 @@ export type StatusVariables = {
  */
 export const status = (variables: StatusVariables, signal?: AbortSignal) =>
   fetch<StatusResponse, StatusError, undefined, {}, StatusQueryParams, {}>({
-    url: "/v8/artifacts/status",
-    method: "get",
+    url: '/v8/artifacts/status',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type UploadArtifactPathParams = {
@@ -126,20 +126,20 @@ export type UploadArtifactHeaders = {
   /**
    * The artifact size in bytes
    */
-  ["Content-Length"]: number;
+  ['Content-Length']: number;
   /**
    * The time taken to generate the uploaded artifact in milliseconds.
    *
    * @example 400
    */
-  ["x-artifact-duration"]?: number;
+  ['x-artifact-duration']?: number;
   /**
    * The continuous integration or delivery environment where this artifact was generated.
    *
    * @example VERCEL
    * @maxLength 50
    */
-  ["x-artifact-client-ci"]?: string;
+  ['x-artifact-client-ci']?: string;
   /**
    * 1 if the client is an interactive shell. Otherwise 0
    *
@@ -147,14 +147,14 @@ export type UploadArtifactHeaders = {
    * @minimum 0
    * @maximum 1
    */
-  ["x-artifact-client-interactive"]?: number;
+  ['x-artifact-client-interactive']?: number;
   /**
    * The base64 encoded tag for this artifact. The value is sent back to clients when the artifact is downloaded as the header `x-artifact-tag`
    *
    * @example Tc0BmHvJYMIYJ62/zx87YqO0Flxk+5Ovip25NY825CQ=
    * @maxLength 600
    */
-  ["x-artifact-tag"]?: string;
+  ['x-artifact-tag']?: string;
 };
 
 export type UploadArtifactError = Fetcher.ErrorWrapper<undefined>;
@@ -186,7 +186,7 @@ export const uploadArtifact = (variables: UploadArtifactVariables, signal?: Abor
     UploadArtifactHeaders,
     UploadArtifactQueryParams,
     UploadArtifactPathParams
-  >({ url: "/v8/artifacts/{hash}", method: "put", ...variables, signal });
+  >({ url: '/v8/artifacts/{hash}', method: 'put', ...variables, signal });
 
 export type DownloadArtifactPathParams = {
   /**
@@ -211,7 +211,7 @@ export type DownloadArtifactHeaders = {
    * @example VERCEL
    * @maxLength 50
    */
-  ["x-artifact-client-ci"]?: string;
+  ['x-artifact-client-ci']?: string;
   /**
    * 1 if the client is an interactive shell. Otherwise 0
    *
@@ -219,7 +219,7 @@ export type DownloadArtifactHeaders = {
    * @minimum 0
    * @maximum 1
    */
-  ["x-artifact-client-interactive"]?: number;
+  ['x-artifact-client-interactive']?: number;
 };
 
 export type DownloadArtifactError = Fetcher.ErrorWrapper<undefined>;
@@ -241,7 +241,7 @@ export const downloadArtifact = (variables: DownloadArtifactVariables, signal?: 
     DownloadArtifactHeaders,
     DownloadArtifactQueryParams,
     DownloadArtifactPathParams
-  >({ url: "/v8/artifacts/{hash}", method: "get", ...variables, signal });
+  >({ url: '/v8/artifacts/{hash}', method: 'get', ...variables, signal });
 
 export type ArtifactQueryQueryParams = {
   /**
@@ -284,10 +284,10 @@ export type ArtifactQueryVariables = {
  */
 export const artifactQuery = (variables: ArtifactQueryVariables, signal?: AbortSignal) =>
   fetch<ArtifactQueryResponse, ArtifactQueryError, ArtifactQueryRequestBody, {}, ArtifactQueryQueryParams, {}>({
-    url: "/v8/artifacts",
-    method: "post",
+    url: '/v8/artifacts',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetDeploymentPathParams = {
@@ -404,7 +404,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          *
          * @example pro
          */
-        plan: "hobby" | "enterprise" | "pro" | "oss";
+        plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
         /**
          * The ID of the project the deployment is associated with
          *
@@ -425,7 +425,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
                     [key: string]: string;
                   };
                   methods?: string[];
-                  ["continue"]?: boolean;
+                  ['continue']?: boolean;
                   override?: boolean;
                   caseSensitive?: boolean;
                   check?: boolean;
@@ -433,22 +433,22 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
                   status?: number;
                   has?: (
                     | {
-                        type: "host";
+                        type: 'host';
                         value: string;
                       }
                     | {
-                        type: "header" | "cookie" | "query";
+                        type: 'header' | 'cookie' | 'query';
                         key: string;
                         value?: string;
                       }
                   )[];
                   missing?: (
                     | {
-                        type: "host";
+                        type: 'host';
                         value: string;
                       }
                     | {
-                        type: "header" | "cookie" | "query";
+                        type: 'header' | 'cookie' | 'query';
                         key: string;
                         value?: string;
                       }
@@ -476,14 +476,14 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
                   middleware?: number;
                 }
               | {
-                  handle: "filesystem" | "hit" | "miss" | "rewrite" | "error" | "resource";
+                  handle: 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'error' | 'resource';
                   src?: string;
                   dest?: string;
                   status?: number;
                 }
               | {
                   src: string;
-                  ["continue"]: boolean;
+                  ['continue']: boolean;
                   middleware: 0;
                 }
             )[]
@@ -492,37 +492,37 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
           | {
               namespace: string;
               projectId: number;
-              type: "gitlab";
+              type: 'gitlab';
               url: string;
               path: string;
               defaultBranch: string;
               name: string;
               private: boolean;
-              ownerType: "team" | "user";
+              ownerType: 'team' | 'user';
             }
           | {
               org: string;
               repo: string;
               repoId: number;
-              type: "github";
+              type: 'github';
               repoOwnerId: string;
               path: string;
               defaultBranch: string;
               name: string;
               private: boolean;
-              ownerType: "team" | "user";
+              ownerType: 'team' | 'user';
             }
           | {
               owner: string;
               repoUuid: string;
               slug: string;
-              type: "bitbucket";
+              type: 'bitbucket';
               workspaceUuid: string;
               path: string;
               defaultBranch: string;
               name: string;
               private: boolean;
-              ownerType: "team" | "user";
+              ownerType: 'team' | 'user';
             }
           | null;
         /**
@@ -556,8 +556,8 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         buildErrorAt?: number;
         buildingAt: number;
         canceledAt?: number;
-        checksState?: "registered" | "running" | "completed";
-        checksConclusion?: "succeeded" | "failed" | "skipped" | "canceled";
+        checksState?: 'registered' | 'running' | 'completed';
+        checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
         /**
          * A number containing the date when the deployment was created in milliseconds
          *
@@ -587,14 +587,14 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         errorStep?: string;
         gitSource?:
           | {
-              type: "github";
+              type: 'github';
               repoId: string | number;
               ref?: string | null;
               sha?: string;
               prId?: number | null;
             }
           | {
-              type: "github";
+              type: 'github';
               org: string;
               repo: string;
               ref?: string | null;
@@ -602,14 +602,14 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               prId?: number | null;
             }
           | {
-              type: "gitlab";
+              type: 'gitlab';
               projectId: string | number;
               ref?: string | null;
               sha?: string;
               prId?: number | null;
             }
           | {
-              type: "bitbucket";
+              type: 'bitbucket';
               workspaceUuid?: string;
               repoUuid: string;
               ref?: string | null;
@@ -617,7 +617,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               prId?: number | null;
             }
           | {
-              type: "bitbucket";
+              type: 'bitbucket';
               owner: string;
               slug: string;
               ref?: string | null;
@@ -625,13 +625,13 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               prId?: number | null;
             }
           | {
-              type: "custom";
+              type: 'custom';
               ref: string;
               sha: string;
               gitUrl: string;
             }
           | {
-              type: "github";
+              type: 'github';
               ref: string;
               sha: string;
               repoId: number;
@@ -639,13 +639,13 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               repo?: string;
             }
           | {
-              type: "gitlab";
+              type: 'gitlab';
               ref: string;
               sha: string;
               projectId: number;
             }
           | {
-              type: "bitbucket";
+              type: 'bitbucket';
               ref: string;
               sha: string;
               owner?: string;
@@ -663,7 +663,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
           id: string;
           createdAt?: number;
           entrypoint?: string | null;
-          readyState?: "BUILDING" | "ERROR" | "INITIALIZING" | "READY";
+          readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
           readyStateAt?: number;
           output: {
             path: string;
@@ -681,7 +681,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          *
          * @example READY
          */
-        readyState: "QUEUED" | "BUILDING" | "ERROR" | "INITIALIZING" | "READY" | "CANCELED";
+        readyState: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
         /**
          * The regions the deployment exists in
          *
@@ -693,13 +693,13 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          *
          * @example cli
          */
-        source?: "cli" | "git" | "import" | "import/repo" | "clone/repo";
+        source?: 'cli' | 'git' | 'import' | 'import/repo' | 'clone/repo';
         /**
          * If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned
          *
          * @example null
          */
-        target?: "production" | "staging" | null;
+        target?: 'production' | 'staging' | null;
         /**
          * The team that owns the deployment if any
          */
@@ -723,7 +723,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
            */
           slug: string;
         };
-        type: "LAMBDAS";
+        type: 'LAMBDAS';
         /**
          * A string with the unique URL of the deployment
          *
@@ -782,8 +782,8 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         buildErrorAt?: number;
         buildingAt: number;
         canceledAt?: number;
-        checksState?: "registered" | "running" | "completed";
-        checksConclusion?: "succeeded" | "failed" | "skipped" | "canceled";
+        checksState?: 'registered' | 'running' | 'completed';
+        checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
         /**
          * A number containing the date when the deployment was created in milliseconds
          *
@@ -813,14 +813,14 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         errorStep?: string;
         gitSource?:
           | {
-              type: "github";
+              type: 'github';
               repoId: string | number;
               ref?: string | null;
               sha?: string;
               prId?: number | null;
             }
           | {
-              type: "github";
+              type: 'github';
               org: string;
               repo: string;
               ref?: string | null;
@@ -828,14 +828,14 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               prId?: number | null;
             }
           | {
-              type: "gitlab";
+              type: 'gitlab';
               projectId: string | number;
               ref?: string | null;
               sha?: string;
               prId?: number | null;
             }
           | {
-              type: "bitbucket";
+              type: 'bitbucket';
               workspaceUuid?: string;
               repoUuid: string;
               ref?: string | null;
@@ -843,7 +843,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               prId?: number | null;
             }
           | {
-              type: "bitbucket";
+              type: 'bitbucket';
               owner: string;
               slug: string;
               ref?: string | null;
@@ -851,13 +851,13 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               prId?: number | null;
             }
           | {
-              type: "custom";
+              type: 'custom';
               ref: string;
               sha: string;
               gitUrl: string;
             }
           | {
-              type: "github";
+              type: 'github';
               ref: string;
               sha: string;
               repoId: number;
@@ -865,13 +865,13 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               repo?: string;
             }
           | {
-              type: "gitlab";
+              type: 'gitlab';
               ref: string;
               sha: string;
               projectId: number;
             }
           | {
-              type: "bitbucket";
+              type: 'bitbucket';
               ref: string;
               sha: string;
               owner?: string;
@@ -889,7 +889,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
           id: string;
           createdAt?: number;
           entrypoint?: string | null;
-          readyState?: "BUILDING" | "ERROR" | "INITIALIZING" | "READY";
+          readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
           readyStateAt?: number;
           output: {
             path: string;
@@ -921,7 +921,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          *
          * @example READY
          */
-        readyState: "QUEUED" | "BUILDING" | "ERROR" | "INITIALIZING" | "READY" | "CANCELED";
+        readyState: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
         /**
          * The regions the deployment exists in
          *
@@ -933,13 +933,13 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          *
          * @example cli
          */
-        source?: "cli" | "git" | "import" | "import/repo" | "clone/repo";
+        source?: 'cli' | 'git' | 'import' | 'import/repo' | 'clone/repo';
         /**
          * If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned
          *
          * @example null
          */
-        target?: "production" | "staging" | null;
+        target?: 'production' | 'staging' | null;
         /**
          * The team that owns the deployment if any
          */
@@ -963,7 +963,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
            */
           slug: string;
         };
-        type: "LAMBDAS";
+        type: 'LAMBDAS';
         /**
          * A string with the unique URL of the deployment
          *
@@ -995,17 +995,17 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
     {},
     GetDeploymentQueryParams,
     GetDeploymentPathParams
-  >({ url: "/v13/deployments/{idOrUrl}", method: "get", ...variables, signal });
+  >({ url: '/v13/deployments/{idOrUrl}', method: 'get', ...variables, signal });
 
 export type CreateDeploymentQueryParams = {
   /**
    * Forces a new deployment even if there is a previous similar deployment
    */
-  forceNew?: "0" | "1";
+  forceNew?: '0' | '1';
   /**
    * Allows to skip framework detection so the API would not fail to ask for confirmation
    */
-  skipAutoDetectionConfirmation?: "0" | "1";
+  skipAutoDetectionConfirmation?: '0' | '1';
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
@@ -1105,7 +1105,7 @@ export type CreateDeploymentResponse = {
    *
    * @example pro
    */
-  plan: "hobby" | "enterprise" | "pro" | "oss";
+  plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
   /**
    * The ID of the project the deployment is associated with
    *
@@ -1126,7 +1126,7 @@ export type CreateDeploymentResponse = {
               [key: string]: string;
             };
             methods?: string[];
-            ["continue"]?: boolean;
+            ['continue']?: boolean;
             override?: boolean;
             caseSensitive?: boolean;
             check?: boolean;
@@ -1134,22 +1134,22 @@ export type CreateDeploymentResponse = {
             status?: number;
             has?: (
               | {
-                  type: "host";
+                  type: 'host';
                   value: string;
                 }
               | {
-                  type: "header" | "cookie" | "query";
+                  type: 'header' | 'cookie' | 'query';
                   key: string;
                   value?: string;
                 }
             )[];
             missing?: (
               | {
-                  type: "host";
+                  type: 'host';
                   value: string;
                 }
               | {
-                  type: "header" | "cookie" | "query";
+                  type: 'header' | 'cookie' | 'query';
                   key: string;
                   value?: string;
                 }
@@ -1177,14 +1177,14 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: "filesystem" | "hit" | "miss" | "rewrite" | "error" | "resource";
+            handle: 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'error' | 'resource';
             src?: string;
             dest?: string;
             status?: number;
           }
         | {
             src: string;
-            ["continue"]: boolean;
+            ['continue']: boolean;
             middleware: 0;
           }
       )[]
@@ -1193,37 +1193,37 @@ export type CreateDeploymentResponse = {
     | {
         namespace: string;
         projectId: number;
-        type: "gitlab";
+        type: 'gitlab';
         url: string;
         path: string;
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: "team" | "user";
+        ownerType: 'team' | 'user';
       }
     | {
         org: string;
         repo: string;
         repoId: number;
-        type: "github";
+        type: 'github';
         repoOwnerId: string;
         path: string;
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: "team" | "user";
+        ownerType: 'team' | 'user';
       }
     | {
         owner: string;
         repoUuid: string;
         slug: string;
-        type: "bitbucket";
+        type: 'bitbucket';
         workspaceUuid: string;
         path: string;
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: "team" | "user";
+        ownerType: 'team' | 'user';
       }
     | null;
   /**
@@ -1257,8 +1257,8 @@ export type CreateDeploymentResponse = {
   buildErrorAt?: number;
   buildingAt: number;
   canceledAt?: number;
-  checksState?: "registered" | "running" | "completed";
-  checksConclusion?: "succeeded" | "failed" | "skipped" | "canceled";
+  checksState?: 'registered' | 'running' | 'completed';
+  checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
   /**
    * A number containing the date when the deployment was created in milliseconds
    *
@@ -1288,14 +1288,14 @@ export type CreateDeploymentResponse = {
   errorStep?: string;
   gitSource?:
     | {
-        type: "github";
+        type: 'github';
         repoId: string | number;
         ref?: string | null;
         sha?: string;
         prId?: number | null;
       }
     | {
-        type: "github";
+        type: 'github';
         org: string;
         repo: string;
         ref?: string | null;
@@ -1303,14 +1303,14 @@ export type CreateDeploymentResponse = {
         prId?: number | null;
       }
     | {
-        type: "gitlab";
+        type: 'gitlab';
         projectId: string | number;
         ref?: string | null;
         sha?: string;
         prId?: number | null;
       }
     | {
-        type: "bitbucket";
+        type: 'bitbucket';
         workspaceUuid?: string;
         repoUuid: string;
         ref?: string | null;
@@ -1318,7 +1318,7 @@ export type CreateDeploymentResponse = {
         prId?: number | null;
       }
     | {
-        type: "bitbucket";
+        type: 'bitbucket';
         owner: string;
         slug: string;
         ref?: string | null;
@@ -1326,13 +1326,13 @@ export type CreateDeploymentResponse = {
         prId?: number | null;
       }
     | {
-        type: "custom";
+        type: 'custom';
         ref: string;
         sha: string;
         gitUrl: string;
       }
     | {
-        type: "github";
+        type: 'github';
         ref: string;
         sha: string;
         repoId: number;
@@ -1340,13 +1340,13 @@ export type CreateDeploymentResponse = {
         repo?: string;
       }
     | {
-        type: "gitlab";
+        type: 'gitlab';
         ref: string;
         sha: string;
         projectId: number;
       }
     | {
-        type: "bitbucket";
+        type: 'bitbucket';
         ref: string;
         sha: string;
         owner?: string;
@@ -1364,7 +1364,7 @@ export type CreateDeploymentResponse = {
     id: string;
     createdAt?: number;
     entrypoint?: string | null;
-    readyState?: "BUILDING" | "ERROR" | "INITIALIZING" | "READY";
+    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
     readyStateAt?: number;
     output: {
       path: string;
@@ -1382,7 +1382,7 @@ export type CreateDeploymentResponse = {
    *
    * @example READY
    */
-  readyState: "QUEUED" | "BUILDING" | "ERROR" | "INITIALIZING" | "READY" | "CANCELED";
+  readyState: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
   /**
    * The regions the deployment exists in
    *
@@ -1394,13 +1394,13 @@ export type CreateDeploymentResponse = {
    *
    * @example cli
    */
-  source?: "cli" | "git" | "import" | "import/repo" | "clone/repo";
+  source?: 'cli' | 'git' | 'import' | 'import/repo' | 'clone/repo';
   /**
    * If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned
    *
    * @example null
    */
-  target?: "production" | "staging" | null;
+  target?: 'production' | 'staging' | null;
   /**
    * The team that owns the deployment if any
    */
@@ -1424,7 +1424,7 @@ export type CreateDeploymentResponse = {
      */
     slug: string;
   };
-  type: "LAMBDAS";
+  type: 'LAMBDAS';
   /**
    * A string with the unique URL of the deployment
    *
@@ -1617,7 +1617,7 @@ export type CreateDeploymentRequestBody = {
           /**
            * The type of request element to check
            */
-          type: "host";
+          type: 'host';
           /**
            * A regular expression used to match the value. Named groups can be used in the destination
            *
@@ -1629,7 +1629,7 @@ export type CreateDeploymentRequestBody = {
           /**
            * The type of request element to check
            */
-          type: "header" | "cookie" | "query";
+          type: 'header' | 'cookie' | 'query';
           /**
            * The name of the element contained in the particular type
            *
@@ -1654,7 +1654,7 @@ export type CreateDeploymentRequestBody = {
           /**
            * The type of request element to check
            */
-          type: "host";
+          type: 'host';
           /**
            * A regular expression used to match the value. Named groups can be used in the destination
            *
@@ -1666,7 +1666,7 @@ export type CreateDeploymentRequestBody = {
           /**
            * The type of request element to check
            */
-          type: "header" | "cookie" | "query";
+          type: 'header' | 'cookie' | 'query';
           /**
            * The name of the element contained in the particular type
            *
@@ -1683,7 +1683,7 @@ export type CreateDeploymentRequestBody = {
     )[];
   }[];
   images?: {
-    contentDispositionType?: "inline" | "attachment";
+    contentDispositionType?: 'inline' | 'attachment';
     /**
      * @maxLength 256
      */
@@ -1698,7 +1698,7 @@ export type CreateDeploymentRequestBody = {
      * @minItems 1
      * @maxItems 4
      */
-    formats?: ("image/avif" | "image/webp" | "image/jpeg" | "image/png")[];
+    formats?: ('image/avif' | 'image/webp' | 'image/jpeg' | 'image/png')[];
     /**
      * @minimum 1
      * @maximum 315360000
@@ -1709,7 +1709,7 @@ export type CreateDeploymentRequestBody = {
      * @maxItems 50
      */
     remotePatterns?: {
-      protocol?: "http" | "https";
+      protocol?: 'http' | 'https';
       /**
        * @maxLength 256
        */
@@ -1771,7 +1771,7 @@ export type CreateDeploymentRequestBody = {
           /**
            * The type of request element to check
            */
-          type: "host";
+          type: 'host';
           /**
            * A regular expression used to match the value. Named groups can be used in the destination
            *
@@ -1783,7 +1783,7 @@ export type CreateDeploymentRequestBody = {
           /**
            * The type of request element to check
            */
-          type: "header" | "cookie" | "query";
+          type: 'header' | 'cookie' | 'query';
           /**
            * The name of the element contained in the particular type
            *
@@ -1808,7 +1808,7 @@ export type CreateDeploymentRequestBody = {
           /**
            * The type of request element to check
            */
-          type: "host";
+          type: 'host';
           /**
            * A regular expression used to match the value. Named groups can be used in the destination
            *
@@ -1820,7 +1820,7 @@ export type CreateDeploymentRequestBody = {
           /**
            * The type of request element to check
            */
-          type: "header" | "cookie" | "query";
+          type: 'header' | 'cookie' | 'query';
           /**
            * The name of the element contained in the particular type
            *
@@ -1873,7 +1873,7 @@ export type CreateDeploymentRequestBody = {
           /**
            * The type of request element to check
            */
-          type: "host";
+          type: 'host';
           /**
            * A regular expression used to match the value. Named groups can be used in the destination
            *
@@ -1885,7 +1885,7 @@ export type CreateDeploymentRequestBody = {
           /**
            * The type of request element to check
            */
-          type: "header" | "cookie" | "query";
+          type: 'header' | 'cookie' | 'query';
           /**
            * The name of the element contained in the particular type
            *
@@ -1910,7 +1910,7 @@ export type CreateDeploymentRequestBody = {
           /**
            * The type of request element to check
            */
-          type: "host";
+          type: 'host';
           /**
            * A regular expression used to match the value. Named groups can be used in the destination
            *
@@ -1922,7 +1922,7 @@ export type CreateDeploymentRequestBody = {
           /**
            * The type of request element to check
            */
-          type: "header" | "cookie" | "query";
+          type: 'header' | 'cookie' | 'query';
           /**
            * The name of the element contained in the particular type
            *
@@ -1969,7 +1969,7 @@ export type CreateDeploymentRequestBody = {
         caseSensitive?: boolean;
         important?: boolean;
         user?: boolean;
-        ["continue"]?: boolean;
+        ['continue']?: boolean;
         override?: boolean;
         check?: boolean;
         /**
@@ -2003,7 +2003,7 @@ export type CreateDeploymentRequestBody = {
           /**
            * @maxLength 4096
            */
-          ["default"]?: string;
+          ['default']?: string;
         };
         middleware?: number;
         middlewarePath?: string;
@@ -2018,7 +2018,7 @@ export type CreateDeploymentRequestBody = {
               /**
                * The type of request element to check
                */
-              type: "host";
+              type: 'host';
               /**
                * A regular expression used to match the value. Named groups can be used in the destination
                *
@@ -2030,7 +2030,7 @@ export type CreateDeploymentRequestBody = {
               /**
                * The type of request element to check
                */
-              type: "header" | "cookie" | "query";
+              type: 'header' | 'cookie' | 'query';
               /**
                * The name of the element contained in the particular type
                *
@@ -2055,7 +2055,7 @@ export type CreateDeploymentRequestBody = {
               /**
                * The type of request element to check
                */
-              type: "host";
+              type: 'host';
               /**
                * A regular expression used to match the value. Named groups can be used in the destination
                *
@@ -2067,7 +2067,7 @@ export type CreateDeploymentRequestBody = {
               /**
                * The type of request element to check
                */
-              type: "header" | "cookie" | "query";
+              type: 'header' | 'cookie' | 'query';
               /**
                * The name of the element contained in the particular type
                *
@@ -2087,7 +2087,7 @@ export type CreateDeploymentRequestBody = {
         /**
          * @maxLength 32
          */
-        handle: "error" | "filesystem" | "hit" | "miss" | "resource" | "rewrite";
+        handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
       }
   )[];
   /**
@@ -2115,47 +2115,47 @@ export type CreateDeploymentRequestBody = {
    */
   framework?:
     | any
-    | "blitzjs"
-    | "nextjs"
-    | "gatsby"
-    | "remix"
-    | "astro"
-    | "hexo"
-    | "eleventy"
-    | "docusaurus-2"
-    | "docusaurus"
-    | "preact"
-    | "solidstart"
-    | "dojo"
-    | "ember"
-    | "vue"
-    | "scully"
-    | "ionic-angular"
-    | "angular"
-    | "polymer"
-    | "svelte"
-    | "sveltekit"
-    | "sveltekit-1"
-    | "ionic-react"
-    | "create-react-app"
-    | "gridsome"
-    | "umijs"
-    | "sapper"
-    | "saber"
-    | "stencil"
-    | "nuxtjs"
-    | "redwoodjs"
-    | "hugo"
-    | "jekyll"
-    | "brunch"
-    | "middleman"
-    | "zola"
-    | "hydrogen"
-    | "vite"
-    | "vitepress"
-    | "vuepress"
-    | "parcel"
-    | "sanity"
+    | 'blitzjs'
+    | 'nextjs'
+    | 'gatsby'
+    | 'remix'
+    | 'astro'
+    | 'hexo'
+    | 'eleventy'
+    | 'docusaurus-2'
+    | 'docusaurus'
+    | 'preact'
+    | 'solidstart'
+    | 'dojo'
+    | 'ember'
+    | 'vue'
+    | 'scully'
+    | 'ionic-angular'
+    | 'angular'
+    | 'polymer'
+    | 'svelte'
+    | 'sveltekit'
+    | 'sveltekit-1'
+    | 'ionic-react'
+    | 'create-react-app'
+    | 'gridsome'
+    | 'umijs'
+    | 'sapper'
+    | 'saber'
+    | 'stencil'
+    | 'nuxtjs'
+    | 'redwoodjs'
+    | 'hugo'
+    | 'jekyll'
+    | 'brunch'
+    | 'middleman'
+    | 'zola'
+    | 'hydrogen'
+    | 'vite'
+    | 'vitepress'
+    | 'vuepress'
+    | 'parcel'
+    | 'sanity'
     | null;
   /**
    * The install command for this project. When `null` is used this value will be automatically detected
@@ -2201,7 +2201,7 @@ export type CreateDeploymentRequestBody = {
         /**
          * The file content encoding, it could be either a base64 (useful for images, etc.) of the files or the plain text for source code.
          */
-        encoding?: "base64" | "utf-8";
+        encoding?: 'base64' | 'utf-8';
         /**
          * The file name including the whole path
          *
@@ -2275,26 +2275,26 @@ export type CreateDeploymentRequestBody = {
         ref: string;
         repoId: number | string;
         sha?: string;
-        type: "github";
+        type: 'github';
       }
     | {
         org: string;
         ref: string;
         repo: string;
         sha?: string;
-        type: "github";
+        type: 'github';
       }
     | {
         projectId: number | string;
         ref: string;
         sha?: string;
-        type: "gitlab";
+        type: 'gitlab';
       }
     | {
         ref: string;
         repoUuid: string;
         sha?: string;
-        type: "bitbucket";
+        type: 'bitbucket';
         workspaceUuid?: string;
       }
     | {
@@ -2302,7 +2302,7 @@ export type CreateDeploymentRequestBody = {
         ref: string;
         sha?: string;
         slug: string;
-        type: "bitbucket";
+        type: 'bitbucket';
       };
   /**
    * An object containing the deployment's metadata. Multiple key-value pairs can be attached to a deployment
@@ -2348,47 +2348,47 @@ export type CreateDeploymentRequestBody = {
      */
     framework?:
       | any
-      | "blitzjs"
-      | "nextjs"
-      | "gatsby"
-      | "remix"
-      | "astro"
-      | "hexo"
-      | "eleventy"
-      | "docusaurus-2"
-      | "docusaurus"
-      | "preact"
-      | "solidstart"
-      | "dojo"
-      | "ember"
-      | "vue"
-      | "scully"
-      | "ionic-angular"
-      | "angular"
-      | "polymer"
-      | "svelte"
-      | "sveltekit"
-      | "sveltekit-1"
-      | "ionic-react"
-      | "create-react-app"
-      | "gridsome"
-      | "umijs"
-      | "sapper"
-      | "saber"
-      | "stencil"
-      | "nuxtjs"
-      | "redwoodjs"
-      | "hugo"
-      | "jekyll"
-      | "brunch"
-      | "middleman"
-      | "zola"
-      | "hydrogen"
-      | "vite"
-      | "vitepress"
-      | "vuepress"
-      | "parcel"
-      | "sanity"
+      | 'blitzjs'
+      | 'nextjs'
+      | 'gatsby'
+      | 'remix'
+      | 'astro'
+      | 'hexo'
+      | 'eleventy'
+      | 'docusaurus-2'
+      | 'docusaurus'
+      | 'preact'
+      | 'solidstart'
+      | 'dojo'
+      | 'ember'
+      | 'vue'
+      | 'scully'
+      | 'ionic-angular'
+      | 'angular'
+      | 'polymer'
+      | 'svelte'
+      | 'sveltekit'
+      | 'sveltekit-1'
+      | 'ionic-react'
+      | 'create-react-app'
+      | 'gridsome'
+      | 'umijs'
+      | 'sapper'
+      | 'saber'
+      | 'stencil'
+      | 'nuxtjs'
+      | 'redwoodjs'
+      | 'hugo'
+      | 'jekyll'
+      | 'brunch'
+      | 'middleman'
+      | 'zola'
+      | 'hydrogen'
+      | 'vite'
+      | 'vitepress'
+      | 'vuepress'
+      | 'parcel'
+      | 'sanity'
       | null;
     /**
      * The install command for this project. When `null` is used this value will be automatically detected
@@ -2428,7 +2428,7 @@ export type CreateDeploymentRequestBody = {
   /**
    * Either not defined, `staging`, or `production`. If `staging`, a staging alias in the format `<project>.<team>.now.sh` will be assigned. If `production`, any aliases defined in `alias` will be assigned
    */
-  target?: "staging" | "production";
+  target?: 'staging' | 'production';
   /**
    * When `true` and `deploymentId` is passed in, the sha from the previous deployment's `gitSource` is removed forcing the latest commit to be used.
    */
@@ -2451,7 +2451,7 @@ export const createDeployment = (variables: CreateDeploymentVariables, signal?: 
     {},
     CreateDeploymentQueryParams,
     {}
-  >({ url: "/v13/deployments", method: "post", ...variables, signal });
+  >({ url: '/v13/deployments', method: 'post', ...variables, signal });
 
 export type CancelDeploymentPathParams = {
   /**
@@ -2562,7 +2562,7 @@ export type CancelDeploymentResponse = {
    *
    * @example pro
    */
-  plan: "hobby" | "enterprise" | "pro" | "oss";
+  plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
   /**
    * The ID of the project the deployment is associated with
    *
@@ -2583,7 +2583,7 @@ export type CancelDeploymentResponse = {
               [key: string]: string;
             };
             methods?: string[];
-            ["continue"]?: boolean;
+            ['continue']?: boolean;
             override?: boolean;
             caseSensitive?: boolean;
             check?: boolean;
@@ -2591,22 +2591,22 @@ export type CancelDeploymentResponse = {
             status?: number;
             has?: (
               | {
-                  type: "host";
+                  type: 'host';
                   value: string;
                 }
               | {
-                  type: "header" | "cookie" | "query";
+                  type: 'header' | 'cookie' | 'query';
                   key: string;
                   value?: string;
                 }
             )[];
             missing?: (
               | {
-                  type: "host";
+                  type: 'host';
                   value: string;
                 }
               | {
-                  type: "header" | "cookie" | "query";
+                  type: 'header' | 'cookie' | 'query';
                   key: string;
                   value?: string;
                 }
@@ -2634,14 +2634,14 @@ export type CancelDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: "filesystem" | "hit" | "miss" | "rewrite" | "error" | "resource";
+            handle: 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'error' | 'resource';
             src?: string;
             dest?: string;
             status?: number;
           }
         | {
             src: string;
-            ["continue"]: boolean;
+            ['continue']: boolean;
             middleware: 0;
           }
       )[]
@@ -2650,37 +2650,37 @@ export type CancelDeploymentResponse = {
     | {
         namespace: string;
         projectId: number;
-        type: "gitlab";
+        type: 'gitlab';
         url: string;
         path: string;
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: "user" | "team";
+        ownerType: 'user' | 'team';
       }
     | {
         org: string;
         repo: string;
         repoId: number;
-        type: "github";
+        type: 'github';
         repoOwnerId: string;
         path: string;
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: "user" | "team";
+        ownerType: 'user' | 'team';
       }
     | {
         owner: string;
         repoUuid: string;
         slug: string;
-        type: "bitbucket";
+        type: 'bitbucket';
         workspaceUuid: string;
         path: string;
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: "user" | "team";
+        ownerType: 'user' | 'team';
       }
     | null;
   /**
@@ -2714,8 +2714,8 @@ export type CancelDeploymentResponse = {
   buildErrorAt?: number;
   buildingAt: number;
   canceledAt?: number;
-  checksState?: "registered" | "running" | "completed";
-  checksConclusion?: "succeeded" | "failed" | "skipped" | "canceled";
+  checksState?: 'registered' | 'running' | 'completed';
+  checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
   /**
    * A number containing the date when the deployment was created in milliseconds
    *
@@ -2745,14 +2745,14 @@ export type CancelDeploymentResponse = {
   errorStep?: string;
   gitSource?:
     | {
-        type: "github";
+        type: 'github';
         repoId: string | number;
         ref?: string | null;
         sha?: string;
         prId?: number | null;
       }
     | {
-        type: "github";
+        type: 'github';
         org: string;
         repo: string;
         ref?: string | null;
@@ -2760,14 +2760,14 @@ export type CancelDeploymentResponse = {
         prId?: number | null;
       }
     | {
-        type: "gitlab";
+        type: 'gitlab';
         projectId: string | number;
         ref?: string | null;
         sha?: string;
         prId?: number | null;
       }
     | {
-        type: "bitbucket";
+        type: 'bitbucket';
         workspaceUuid?: string;
         repoUuid: string;
         ref?: string | null;
@@ -2775,7 +2775,7 @@ export type CancelDeploymentResponse = {
         prId?: number | null;
       }
     | {
-        type: "bitbucket";
+        type: 'bitbucket';
         owner: string;
         slug: string;
         ref?: string | null;
@@ -2783,13 +2783,13 @@ export type CancelDeploymentResponse = {
         prId?: number | null;
       }
     | {
-        type: "custom";
+        type: 'custom';
         ref: string;
         sha: string;
         gitUrl: string;
       }
     | {
-        type: "github";
+        type: 'github';
         ref: string;
         sha: string;
         repoId: number;
@@ -2797,13 +2797,13 @@ export type CancelDeploymentResponse = {
         repo?: string;
       }
     | {
-        type: "gitlab";
+        type: 'gitlab';
         ref: string;
         sha: string;
         projectId: number;
       }
     | {
-        type: "bitbucket";
+        type: 'bitbucket';
         ref: string;
         sha: string;
         owner?: string;
@@ -2821,7 +2821,7 @@ export type CancelDeploymentResponse = {
     id: string;
     createdAt?: number;
     entrypoint?: string | null;
-    readyState?: "INITIALIZING" | "BUILDING" | "READY" | "ERROR";
+    readyState?: 'INITIALIZING' | 'BUILDING' | 'READY' | 'ERROR';
     readyStateAt?: number;
     output: {
       path: string;
@@ -2839,7 +2839,7 @@ export type CancelDeploymentResponse = {
    *
    * @example READY
    */
-  readyState: "INITIALIZING" | "BUILDING" | "READY" | "ERROR" | "QUEUED" | "CANCELED";
+  readyState: 'INITIALIZING' | 'BUILDING' | 'READY' | 'ERROR' | 'QUEUED' | 'CANCELED';
   /**
    * The regions the deployment exists in
    *
@@ -2851,13 +2851,13 @@ export type CancelDeploymentResponse = {
    *
    * @example cli
    */
-  source?: "cli" | "git" | "import" | "import/repo" | "clone/repo";
+  source?: 'cli' | 'git' | 'import' | 'import/repo' | 'clone/repo';
   /**
    * If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned
    *
    * @example null
    */
-  target?: "staging" | "production" | null;
+  target?: 'staging' | 'production' | null;
   /**
    * The team that owns the deployment if any
    */
@@ -2881,7 +2881,7 @@ export type CancelDeploymentResponse = {
      */
     slug: string;
   };
-  type: "LAMBDAS";
+  type: 'LAMBDAS';
   /**
    * A string with the unique URL of the deployment
    *
@@ -2925,7 +2925,7 @@ export const cancelDeployment = (variables: CancelDeploymentVariables, signal?: 
     {},
     CancelDeploymentQueryParams,
     CancelDeploymentPathParams
-  >({ url: "/v12/deployments/{id}/cancel", method: "patch", ...variables, signal });
+  >({ url: '/v12/deployments/{id}/cancel', method: 'patch', ...variables, signal });
 
 export type GetCertByIdPathParams = {
   /**
@@ -2961,10 +2961,10 @@ export type GetCertByIdVariables = {
  */
 export const getCertById = (variables: GetCertByIdVariables, signal?: AbortSignal) =>
   fetch<GetCertByIdResponse, GetCertByIdError, undefined, {}, GetCertByIdQueryParams, GetCertByIdPathParams>({
-    url: "/v7/certs/{id}",
-    method: "get",
+    url: '/v7/certs/{id}',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type RemoveCertPathParams = {
@@ -2993,10 +2993,10 @@ export type RemoveCertVariables = {
  */
 export const removeCert = (variables: RemoveCertVariables, signal?: AbortSignal) =>
   fetch<Record<string, any>, RemoveCertError, undefined, {}, RemoveCertQueryParams, RemoveCertPathParams>({
-    url: "/v7/certs/{id}",
-    method: "delete",
+    url: '/v7/certs/{id}',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type IssueCertQueryParams = {
@@ -3033,10 +3033,10 @@ export type IssueCertVariables = {
  */
 export const issueCert = (variables: IssueCertVariables, signal?: AbortSignal) =>
   fetch<IssueCertResponse, IssueCertError, IssueCertRequestBody, {}, IssueCertQueryParams, {}>({
-    url: "/v7/certs",
-    method: "post",
+    url: '/v7/certs',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type UploadCertQueryParams = {
@@ -3085,10 +3085,10 @@ export type UploadCertVariables = {
  */
 export const uploadCert = (variables: UploadCertVariables, signal?: AbortSignal) =>
   fetch<UploadCertResponse, UploadCertError, UploadCertRequestBody, {}, UploadCertQueryParams, {}>({
-    url: "/v7/certs",
-    method: "put",
+    url: '/v7/certs',
+    method: 'put',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetDeploymentEventsPathParams = {
@@ -3107,7 +3107,7 @@ export type GetDeploymentEventsQueryParams = {
    * @default forward
    * @example backward
    */
-  direction?: "backward" | "forward";
+  direction?: 'backward' | 'forward';
   /**
    * When enabled, this endpoint will return live events as they happen.
    *
@@ -3162,7 +3162,7 @@ export type GetDeploymentEventsError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetDeploymentEventsResponse = (
   | {
-      type: "command";
+      type: 'command';
       created: number;
       payload: {
         deploymentId: string;
@@ -3173,7 +3173,7 @@ export type GetDeploymentEventsResponse = (
       };
     }
   | {
-      type: "deployment-state";
+      type: 'deployment-state';
       created: number;
       payload: {
         deploymentId: string;
@@ -3190,7 +3190,7 @@ export type GetDeploymentEventsResponse = (
       };
     }
   | {
-      type: "delimiter";
+      type: 'delimiter';
       created: number;
       payload: {
         deploymentId: string;
@@ -3207,7 +3207,7 @@ export type GetDeploymentEventsResponse = (
       };
     }
   | {
-      type: "exit";
+      type: 'exit';
       created: number;
       payload: {
         date: number;
@@ -3219,7 +3219,7 @@ export type GetDeploymentEventsResponse = (
       };
     }
   | {
-      type: "middleware";
+      type: 'middleware';
       created: number;
       payload: {
         deploymentId: string;
@@ -3239,16 +3239,16 @@ export type GetDeploymentEventsResponse = (
     }
   | {
       type:
-        | "delimiter"
-        | "command"
-        | "stdout"
-        | "stderr"
-        | "exit"
-        | "deployment-state"
-        | "middleware"
-        | "middleware-invocation"
-        | "edge-function-invocation"
-        | "fatal";
+        | 'delimiter'
+        | 'command'
+        | 'stdout'
+        | 'stderr'
+        | 'exit'
+        | 'deployment-state'
+        | 'middleware'
+        | 'middleware-invocation'
+        | 'edge-function-invocation'
+        | 'fatal';
       created: number;
       payload: {
         deploymentId: string;
@@ -3285,7 +3285,7 @@ export const getDeploymentEvents = (variables: GetDeploymentEventsVariables, sig
     {},
     GetDeploymentEventsQueryParams,
     GetDeploymentEventsPathParams
-  >({ url: "/v2/deployments/{idOrUrl}/events", method: "get", ...variables, signal });
+  >({ url: '/v2/deployments/{idOrUrl}/events', method: 'get', ...variables, signal });
 
 export type ListUserEventsQueryParams = {
   /**
@@ -3342,10 +3342,10 @@ export type ListUserEventsVariables = {
  */
 export const listUserEvents = (variables: ListUserEventsVariables, signal?: AbortSignal) =>
   fetch<ListUserEventsResponse, ListUserEventsError, undefined, {}, ListUserEventsQueryParams, {}>({
-    url: "/v3/events",
-    method: "get",
+    url: '/v3/events',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type ListAliasesQueryParams = {
@@ -3523,10 +3523,10 @@ export type ListAliasesVariables = {
  */
 export const listAliases = (variables: ListAliasesVariables, signal?: AbortSignal) =>
   fetch<ListAliasesResponse, ListAliasesError, undefined, {}, ListAliasesQueryParams, {}>({
-    url: "/v4/aliases",
-    method: "get",
+    url: '/v4/aliases',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetAliasPathParams = {
@@ -3692,10 +3692,10 @@ export type GetAliasVariables = {
  */
 export const getAlias = (variables: GetAliasVariables, signal?: AbortSignal) =>
   fetch<GetAliasResponse, GetAliasError, undefined, {}, GetAliasQueryParams, GetAliasPathParams>({
-    url: "/v4/aliases/{idOrAlias}",
-    method: "get",
+    url: '/v4/aliases/{idOrAlias}',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type DeleteAliasPathParams = {
@@ -3717,7 +3717,7 @@ export type DeleteAliasQueryParams = {
 export type DeleteAliasError = Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAliasResponse = {
-  status: "SUCCESS";
+  status: 'SUCCESS';
 };
 
 export type DeleteAliasVariables = {
@@ -3730,10 +3730,10 @@ export type DeleteAliasVariables = {
  */
 export const deleteAlias = (variables: DeleteAliasVariables, signal?: AbortSignal) =>
   fetch<DeleteAliasResponse, DeleteAliasError, undefined, {}, DeleteAliasQueryParams, DeleteAliasPathParams>({
-    url: "/v2/aliases/{aliasId}",
-    method: "delete",
+    url: '/v2/aliases/{aliasId}',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type ListDeploymentAliasesPathParams = {
@@ -3807,7 +3807,7 @@ export const listDeploymentAliases = (variables: ListDeploymentAliasesVariables,
     {},
     ListDeploymentAliasesQueryParams,
     ListDeploymentAliasesPathParams
-  >({ url: "/v2/deployments/{id}/aliases", method: "get", ...variables, signal });
+  >({ url: '/v2/deployments/{id}/aliases', method: 'get', ...variables, signal });
 
 export type AssignAliasPathParams = {
   /**
@@ -3887,7 +3887,7 @@ export const assignAlias = (variables: AssignAliasVariables, signal?: AbortSigna
     {},
     AssignAliasQueryParams,
     AssignAliasPathParams
-  >({ url: "/v2/deployments/{id}/aliases", method: "post", ...variables, signal });
+  >({ url: '/v2/deployments/{id}/aliases', method: 'post', ...variables, signal });
 
 export type UploadFileQueryParams = {
   /**
@@ -3900,26 +3900,26 @@ export type UploadFileHeaders = {
   /**
    * The file size in bytes
    */
-  ["Content-Length"]?: number;
+  ['Content-Length']?: number;
   /**
    * The file SHA1 used to check the integrity
    *
    * @maxLength 40
    */
-  ["x-vercel-digest"]?: string;
+  ['x-vercel-digest']?: string;
   /**
    * The file SHA1 used to check the integrity
    *
    * @deprecated true
    * @maxLength 40
    */
-  ["x-now-digest"]?: string;
+  ['x-now-digest']?: string;
   /**
    * The file size as an alternative to `Content-Length`
    *
    * @deprecated true
    */
-  ["x-now-size"]?: number;
+  ['x-now-size']?: number;
 };
 
 export type UploadFileError = Fetcher.ErrorWrapper<undefined>;
@@ -3948,7 +3948,7 @@ export const uploadFile = (variables: UploadFileVariables, signal?: AbortSignal)
     UploadFileHeaders,
     UploadFileQueryParams,
     {}
-  >({ url: "/v2/files", method: "post", ...variables, signal });
+  >({ url: '/v2/files', method: 'post', ...variables, signal });
 
 export type GetAuthUserError = Fetcher.ErrorWrapper<undefined>;
 
@@ -3963,10 +3963,10 @@ export type GetAuthUserVariables = FetcherExtraProps;
  */
 export const getAuthUser = (variables: GetAuthUserVariables, signal?: AbortSignal) =>
   fetch<GetAuthUserResponse, GetAuthUserError, undefined, {}, {}, {}>({
-    url: "/v2/user",
-    method: "get",
+    url: '/v2/user',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type RequestDeleteError = Fetcher.ErrorWrapper<undefined>;
@@ -4013,10 +4013,10 @@ export type RequestDeleteVariables = {
  */
 export const requestDelete = (variables: RequestDeleteVariables, signal?: AbortSignal) =>
   fetch<RequestDeleteResponse, RequestDeleteError, RequestDeleteRequestBody, {}, {}, {}>({
-    url: "/v1/user",
-    method: "delete",
+    url: '/v1/user',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type ListAuthTokensError = Fetcher.ErrorWrapper<undefined>;
@@ -4034,10 +4034,10 @@ export type ListAuthTokensVariables = FetcherExtraProps;
  */
 export const listAuthTokens = (variables: ListAuthTokensVariables, signal?: AbortSignal) =>
   fetch<ListAuthTokensResponse, ListAuthTokensError, undefined, {}, {}, {}>({
-    url: "/v5/user/tokens",
-    method: "get",
+    url: '/v5/user/tokens',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type CreateAuthTokenQueryParams = {
@@ -4066,7 +4066,7 @@ export type CreateAuthTokenVariables = {
         expiresAt?: number;
       }
     | {
-        type: "oauth2-token";
+        type: 'oauth2-token';
         name: string;
         clientId?: string;
         installationId?: string;
@@ -4087,7 +4087,7 @@ export const createAuthToken = (variables: CreateAuthTokenVariables, signal?: Ab
         expiresAt?: number;
       }
     | {
-        type: "oauth2-token";
+        type: 'oauth2-token';
         name: string;
         clientId?: string;
         installationId?: string;
@@ -4096,7 +4096,7 @@ export const createAuthToken = (variables: CreateAuthTokenVariables, signal?: Ab
     {},
     CreateAuthTokenQueryParams,
     {}
-  >({ url: "/v3/user/tokens", method: "post", ...variables, signal });
+  >({ url: '/v3/user/tokens', method: 'post', ...variables, signal });
 
 export type GetAuthTokenPathParams = {
   /**
@@ -4122,10 +4122,10 @@ export type GetAuthTokenVariables = {
  */
 export const getAuthToken = (variables: GetAuthTokenVariables, signal?: AbortSignal) =>
   fetch<GetAuthTokenResponse, GetAuthTokenError, undefined, {}, {}, GetAuthTokenPathParams>({
-    url: "/v5/user/tokens/{tokenId}",
-    method: "get",
+    url: '/v5/user/tokens/{tokenId}',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type DeleteAuthTokenPathParams = {
@@ -4157,10 +4157,10 @@ export type DeleteAuthTokenVariables = {
  */
 export const deleteAuthToken = (variables: DeleteAuthTokenVariables, signal?: AbortSignal) =>
   fetch<DeleteAuthTokenResponse, DeleteAuthTokenError, undefined, {}, {}, DeleteAuthTokenPathParams>({
-    url: "/v3/user/tokens/{tokenId}",
-    method: "delete",
+    url: '/v3/user/tokens/{tokenId}',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetRecordsPathParams = {
@@ -4213,7 +4213,7 @@ export const getRecords = (variables: GetRecordsVariables, signal?: AbortSignal)
           id: string;
           slug: string;
           name: string;
-          type: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS";
+          type: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
           value: string;
           mxPriority?: number;
           priority?: number;
@@ -4229,7 +4229,7 @@ export const getRecords = (variables: GetRecordsVariables, signal?: AbortSignal)
           id: string;
           slug: string;
           name: string;
-          type: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS";
+          type: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
           value: string;
           mxPriority?: number;
           priority?: number;
@@ -4246,7 +4246,7 @@ export const getRecords = (variables: GetRecordsVariables, signal?: AbortSignal)
     {},
     GetRecordsQueryParams,
     GetRecordsPathParams
-  >({ url: "/v4/domains/{domain}/records", method: "get", ...variables, signal });
+  >({ url: '/v4/domains/{domain}/records', method: 'get', ...variables, signal });
 
 export type CreateRecordPathParams = {
   /**
@@ -4278,7 +4278,7 @@ export type CreateRecordVariables = {
         /**
          * Must be of type `A`.
          */
-        type: "A";
+        type: 'A';
         /**
          * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
          *
@@ -4305,7 +4305,7 @@ export type CreateRecordVariables = {
         /**
          * Must be of type `AAAA`.
          */
-        type: "AAAA";
+        type: 'AAAA';
         /**
          * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
          *
@@ -4332,7 +4332,7 @@ export type CreateRecordVariables = {
         /**
          * Must be of type `ALIAS`.
          */
-        type: "ALIAS";
+        type: 'ALIAS';
         /**
          * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
          *
@@ -4358,7 +4358,7 @@ export type CreateRecordVariables = {
         /**
          * Must be of type `CAA`.
          */
-        type: "CAA";
+        type: 'CAA';
         /**
          * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
          *
@@ -4384,7 +4384,7 @@ export type CreateRecordVariables = {
         /**
          * Must be of type `CNAME`.
          */
-        type: "CNAME";
+        type: 'CNAME';
         /**
          * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
          *
@@ -4410,7 +4410,7 @@ export type CreateRecordVariables = {
         /**
          * Must be of type `MX`.
          */
-        type: "MX";
+        type: 'MX';
         /**
          * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
          *
@@ -4440,7 +4440,7 @@ export type CreateRecordVariables = {
         /**
          * Must be of type `SRV`.
          */
-        type: "SRV";
+        type: 'SRV';
         /**
          * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
          *
@@ -4467,7 +4467,7 @@ export type CreateRecordVariables = {
         /**
          * Must be of type `TXT`.
          */
-        type: "TXT";
+        type: 'TXT';
         /**
          * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
          *
@@ -4493,7 +4493,7 @@ export type CreateRecordVariables = {
         /**
          * Must be of type `NS`.
          */
-        type: "NS";
+        type: 'NS';
         /**
          * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
          *
@@ -4541,7 +4541,7 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
         /**
          * Must be of type `A`.
          */
-        type: "A";
+        type: 'A';
         /**
          * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
          *
@@ -4568,7 +4568,7 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
         /**
          * Must be of type `AAAA`.
          */
-        type: "AAAA";
+        type: 'AAAA';
         /**
          * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
          *
@@ -4595,7 +4595,7 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
         /**
          * Must be of type `ALIAS`.
          */
-        type: "ALIAS";
+        type: 'ALIAS';
         /**
          * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
          *
@@ -4621,7 +4621,7 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
         /**
          * Must be of type `CAA`.
          */
-        type: "CAA";
+        type: 'CAA';
         /**
          * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
          *
@@ -4647,7 +4647,7 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
         /**
          * Must be of type `CNAME`.
          */
-        type: "CNAME";
+        type: 'CNAME';
         /**
          * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
          *
@@ -4673,7 +4673,7 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
         /**
          * Must be of type `MX`.
          */
-        type: "MX";
+        type: 'MX';
         /**
          * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
          *
@@ -4703,7 +4703,7 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
         /**
          * Must be of type `SRV`.
          */
-        type: "SRV";
+        type: 'SRV';
         /**
          * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
          *
@@ -4730,7 +4730,7 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
         /**
          * Must be of type `TXT`.
          */
-        type: "TXT";
+        type: 'TXT';
         /**
          * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
          *
@@ -4756,7 +4756,7 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
         /**
          * Must be of type `NS`.
          */
-        type: "NS";
+        type: 'NS';
         /**
          * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
          *
@@ -4775,7 +4775,7 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
     {},
     CreateRecordQueryParams,
     CreateRecordPathParams
-  >({ url: "/v2/domains/{domain}/records", method: "post", ...variables, signal });
+  >({ url: '/v2/domains/{domain}/records', method: 'post', ...variables, signal });
 
 export type UpdateRecordPathParams = {
   /**
@@ -4801,9 +4801,9 @@ export type UpdateRecordResponse = {
   domain: string;
   id: string;
   name: string;
-  recordType: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS";
+  recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
   ttl?: number;
-  type: "record" | "record-sys";
+  type: 'record' | 'record-sys';
   value: string;
 };
 
@@ -4827,7 +4827,7 @@ export type UpdateRecordRequestBody = {
    * @example A
    * @maxLength 255
    */
-  type?: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS" | null;
+  type?: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS' | null;
   /**
    * The Time to live (TTL) value of the DNS record
    *
@@ -4869,7 +4869,7 @@ export const updateRecord = (variables: UpdateRecordVariables, signal?: AbortSig
     {},
     UpdateRecordQueryParams,
     UpdateRecordPathParams
-  >({ url: "/v1/domains/records/{recordId}", method: "patch", ...variables, signal });
+  >({ url: '/v1/domains/records/{recordId}', method: 'patch', ...variables, signal });
 
 export type RemoveRecordPathParams = {
   /**
@@ -4901,10 +4901,10 @@ export type RemoveRecordVariables = {
  */
 export const removeRecord = (variables: RemoveRecordVariables, signal?: AbortSignal) =>
   fetch<Record<string, any>, RemoveRecordError, undefined, {}, RemoveRecordQueryParams, RemoveRecordPathParams>({
-    url: "/v2/domains/{domain}/records/{recordId}",
-    method: "delete",
+    url: '/v2/domains/{domain}/records/{recordId}',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type CheckDomainStatusQueryParams = {
@@ -4935,10 +4935,10 @@ export type CheckDomainStatusVariables = {
  */
 export const checkDomainStatus = (variables: CheckDomainStatusVariables, signal?: AbortSignal) =>
   fetch<CheckDomainStatusResponse, CheckDomainStatusError, undefined, {}, CheckDomainStatusQueryParams, {}>({
-    url: "/v4/domains/status",
-    method: "get",
+    url: '/v4/domains/status',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type CheckDomainPriceQueryParams = {
@@ -4953,7 +4953,7 @@ export type CheckDomainPriceQueryParams = {
    *
    * @example new
    */
-  type?: "new" | "renewal";
+  type?: 'new' | 'renewal';
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
@@ -4986,10 +4986,10 @@ export type CheckDomainPriceVariables = {
  */
 export const checkDomainPrice = (variables: CheckDomainPriceVariables, signal?: AbortSignal) =>
   fetch<CheckDomainPriceResponse, CheckDomainPriceError, undefined, {}, CheckDomainPriceQueryParams, {}>({
-    url: "/v4/domains/price",
-    method: "get",
+    url: '/v4/domains/price',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type BuyDomainQueryParams = {
@@ -5042,10 +5042,10 @@ export type BuyDomainVariables = {
  */
 export const buyDomain = (variables: BuyDomainVariables, signal?: AbortSignal) =>
   fetch<BuyDomainResponse, BuyDomainError, BuyDomainRequestBody, {}, BuyDomainQueryParams, {}>({
-    url: "/v4/domains/buy",
-    method: "post",
+    url: '/v4/domains/buy',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetDomainConfigPathParams = {
@@ -5070,11 +5070,11 @@ export type GetDomainConfigResponse = {
   /**
    * How we see the domain's configuration. - `CNAME`: Domain has a CNAME pointing to Vercel. - `A`: Domain's A record is resolving to Vercel. - `http`: Domain is resolving to Vercel but may be behind a Proxy. - `null`: Domain is not resolving to Vercel.
    */
-  configuredBy?: "CNAME" | "A" | "http" | null;
+  configuredBy?: 'CNAME' | 'A' | 'http' | null;
   /**
    * Which challenge types the domain can use for issuing certs.
    */
-  acceptedChallenges?: ("dns-01" | "http-01")[];
+  acceptedChallenges?: ('dns-01' | 'http-01')[];
   /**
    * Whether or not the domain is configured AND we can automatically generate a TLS certificate.
    */
@@ -5097,7 +5097,7 @@ export const getDomainConfig = (variables: GetDomainConfigVariables, signal?: Ab
     {},
     GetDomainConfigQueryParams,
     GetDomainConfigPathParams
-  >({ url: "/v6/domains/{domain}/config", method: "get", ...variables, signal });
+  >({ url: '/v6/domains/{domain}/config', method: 'get', ...variables, signal });
 
 export type GetDomainPathParams = {
   /**
@@ -5206,7 +5206,7 @@ export type GetDomainResponse = {
      *
      * @example zeit.world
      */
-    serviceType: "zeit.world" | "external" | "na";
+    serviceType: 'zeit.world' | 'external' | 'na';
     /**
      * Timestamp in milliseconds at which the domain was successfully transferred into Vercel. `null` if the transfer is still processing or was never transferred in.
      *
@@ -5232,10 +5232,10 @@ export type GetDomainVariables = {
  */
 export const getDomain = (variables: GetDomainVariables, signal?: AbortSignal) =>
   fetch<GetDomainResponse, GetDomainError, undefined, {}, GetDomainQueryParams, GetDomainPathParams>({
-    url: "/v5/domains/{domain}",
-    method: "get",
+    url: '/v5/domains/{domain}',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetDomainsQueryParams = {
@@ -5353,7 +5353,7 @@ export type GetDomainsResponse = {
      *
      * @example zeit.world
      */
-    serviceType: "zeit.world" | "external" | "na";
+    serviceType: 'zeit.world' | 'external' | 'na';
     /**
      * Timestamp in milliseconds at which the domain was successfully transferred into Vercel. `null` if the transfer is still processing or was never transferred in.
      *
@@ -5379,10 +5379,10 @@ export type GetDomainsVariables = {
  */
 export const getDomains = (variables: GetDomainsVariables, signal?: AbortSignal) =>
   fetch<GetDomainsResponse, GetDomainsError, undefined, {}, GetDomainsQueryParams, {}>({
-    url: "/v5/domains",
-    method: "get",
+    url: '/v5/domains',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type CreateOrTransferDomainQueryParams = {
@@ -5482,7 +5482,7 @@ export type CreateOrTransferDomainResponse = {
      *
      * @example zeit.world
      */
-    serviceType: "zeit.world" | "external" | "na";
+    serviceType: 'zeit.world' | 'external' | 'na';
     /**
      * Timestamp in milliseconds at which the domain was successfully transferred into Vercel. `null` if the transfer is still processing or was never transferred in.
      *
@@ -5647,7 +5647,7 @@ export const createOrTransferDomain = (variables: CreateOrTransferDomainVariable
     {},
     CreateOrTransferDomainQueryParams,
     {}
-  >({ url: "/v5/domains", method: "post", ...variables, signal });
+  >({ url: '/v5/domains', method: 'post', ...variables, signal });
 
 export type DeleteDomainPathParams = {
   /**
@@ -5681,10 +5681,10 @@ export type DeleteDomainVariables = {
  */
 export const deleteDomain = (variables: DeleteDomainVariables, signal?: AbortSignal) =>
   fetch<DeleteDomainResponse, DeleteDomainError, undefined, {}, DeleteDomainQueryParams, DeleteDomainPathParams>({
-    url: "/v6/domains/{domain}",
-    method: "delete",
+    url: '/v6/domains/{domain}',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetSecretsQueryParams = {
@@ -5778,10 +5778,10 @@ export type GetSecretsVariables = {
  */
 export const getSecrets = (variables: GetSecretsVariables, signal?: AbortSignal) =>
   fetch<GetSecretsResponse, GetSecretsError, undefined, {}, GetSecretsQueryParams, {}>({
-    url: "/v3/secrets",
-    method: "get",
+    url: '/v3/secrets',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type CreateSecretQueryParams = {
@@ -5795,7 +5795,7 @@ export type CreateSecretError = Fetcher.ErrorWrapper<undefined>;
 
 export type CreateSecretResponse = {
   value: {
-    type?: "Buffer";
+    type?: 'Buffer';
     data?: number[];
   };
   /**
@@ -5888,10 +5888,10 @@ export type CreateSecretVariables = {
  */
 export const createSecret = (variables: CreateSecretVariables, signal?: AbortSignal) =>
   fetch<CreateSecretResponse, CreateSecretError, CreateSecretRequestBody, {}, CreateSecretQueryParams, {}>({
-    url: "/v2/secrets/{name}",
-    method: "post",
+    url: '/v2/secrets/{name}',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type RenameSecretPathParams = {
@@ -5951,7 +5951,7 @@ export const renameSecret = (variables: RenameSecretVariables, signal?: AbortSig
     {},
     RenameSecretQueryParams,
     RenameSecretPathParams
-  >({ url: "/v2/secrets/{name}", method: "patch", ...variables, signal });
+  >({ url: '/v2/secrets/{name}', method: 'patch', ...variables, signal });
 
 export type GetSecretPathParams = {
   /**
@@ -5968,7 +5968,7 @@ export type GetSecretQueryParams = {
    *
    * @example true
    */
-  decrypt?: "true" | "false";
+  decrypt?: 'true' | 'false';
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
@@ -6043,10 +6043,10 @@ export type GetSecretVariables = {
  */
 export const getSecret = (variables: GetSecretVariables, signal?: AbortSignal) =>
   fetch<GetSecretResponse, GetSecretError, undefined, {}, GetSecretQueryParams, GetSecretPathParams>({
-    url: "/v3/secrets/{idOrName}",
-    method: "get",
+    url: '/v3/secrets/{idOrName}',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type DeleteSecretPathParams = {
@@ -6098,10 +6098,10 @@ export type DeleteSecretVariables = {
  */
 export const deleteSecret = (variables: DeleteSecretVariables, signal?: AbortSignal) =>
   fetch<DeleteSecretResponse, DeleteSecretError, undefined, {}, DeleteSecretQueryParams, DeleteSecretPathParams>({
-    url: "/v2/secrets/{idOrName}",
-    method: "delete",
+    url: '/v2/secrets/{idOrName}',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type DeleteDeploymentPathParams = {
@@ -6138,7 +6138,7 @@ export type DeleteDeploymentResponse = {
   /**
    * A constant with the final state of the deployment.
    */
-  state: "DELETED";
+  state: 'DELETED';
 };
 
 export type DeleteDeploymentVariables = {
@@ -6157,7 +6157,7 @@ export const deleteDeployment = (variables: DeleteDeploymentVariables, signal?: 
     {},
     DeleteDeploymentQueryParams,
     DeleteDeploymentPathParams
-  >({ url: "/v13/deployments/{id}", method: "delete", ...variables, signal });
+  >({ url: '/v13/deployments/{id}', method: 'delete', ...variables, signal });
 
 export type GetDeploymentsQueryParams = {
   /**
@@ -6190,7 +6190,7 @@ export type GetDeploymentsQueryParams = {
    *
    * @example production
    */
-  target?: "production" | "preview";
+  target?: 'production' | 'preview';
   /**
    * Gets the deployment created before this Date timestamp. (default: current time)
    *
@@ -6266,19 +6266,19 @@ export type GetDeploymentsResponse = {
      *
      * @example cli
      */
-    source?: "cli" | "git" | "import" | "import/repo" | "clone/repo";
+    source?: 'cli' | 'git' | 'import' | 'import/repo' | 'clone/repo';
     /**
      * In which state is the deployment.
      *
      * @example READY
      */
-    state?: "BUILDING" | "ERROR" | "INITIALIZING" | "QUEUED" | "READY" | "CANCELED";
+    state?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
     /**
      * The type of the deployment.
      *
      * @example LAMBDAS
      */
-    type: "LAMBDAS";
+    type: 'LAMBDAS';
     /**
      * Metadata information of the user who created the deployment.
      */
@@ -6327,7 +6327,7 @@ export type GetDeploymentsResponse = {
      *
      * @example production
      */
-    target?: "production" | "staging" | null;
+    target?: 'production' | 'staging' | null;
     /**
      * An error object in case aliasing of the deployment failed.
      */
@@ -6357,11 +6357,11 @@ export type GetDeploymentsResponse = {
     /**
      * State of all registered checks
      */
-    checksState?: "registered" | "running" | "completed";
+    checksState?: 'registered' | 'running' | 'completed';
     /**
      * Conclusion for checks
      */
-    checksConclusion?: "succeeded" | "failed" | "skipped" | "canceled";
+    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
     /**
      * Vercel URL to inspect the deployment.
      *
@@ -6377,54 +6377,54 @@ export type GetDeploymentsResponse = {
      */
     projectSettings?: {
       framework?:
-        | "blitzjs"
-        | "nextjs"
-        | "gatsby"
-        | "remix"
-        | "astro"
-        | "hexo"
-        | "eleventy"
-        | "docusaurus-2"
-        | "docusaurus"
-        | "preact"
-        | "solidstart"
-        | "dojo"
-        | "ember"
-        | "vue"
-        | "scully"
-        | "ionic-angular"
-        | "angular"
-        | "polymer"
-        | "svelte"
-        | "sveltekit"
-        | "sveltekit-1"
-        | "ionic-react"
-        | "create-react-app"
-        | "gridsome"
-        | "umijs"
-        | "sapper"
-        | "saber"
-        | "stencil"
-        | "nuxtjs"
-        | "redwoodjs"
-        | "hugo"
-        | "jekyll"
-        | "brunch"
-        | "middleman"
-        | "zola"
-        | "hydrogen"
-        | "vite"
-        | "vitepress"
-        | "vuepress"
-        | "parcel"
-        | "sanity"
+        | 'blitzjs'
+        | 'nextjs'
+        | 'gatsby'
+        | 'remix'
+        | 'astro'
+        | 'hexo'
+        | 'eleventy'
+        | 'docusaurus-2'
+        | 'docusaurus'
+        | 'preact'
+        | 'solidstart'
+        | 'dojo'
+        | 'ember'
+        | 'vue'
+        | 'scully'
+        | 'ionic-angular'
+        | 'angular'
+        | 'polymer'
+        | 'svelte'
+        | 'sveltekit'
+        | 'sveltekit-1'
+        | 'ionic-react'
+        | 'create-react-app'
+        | 'gridsome'
+        | 'umijs'
+        | 'sapper'
+        | 'saber'
+        | 'stencil'
+        | 'nuxtjs'
+        | 'redwoodjs'
+        | 'hugo'
+        | 'jekyll'
+        | 'brunch'
+        | 'middleman'
+        | 'zola'
+        | 'hydrogen'
+        | 'vite'
+        | 'vitepress'
+        | 'vuepress'
+        | 'parcel'
+        | 'sanity'
         | null;
       gitForkProtection?: boolean;
       gitLFS?: boolean;
       devCommand?: string | null;
       installCommand?: string | null;
       buildCommand?: string | null;
-      nodeVersion?: "18.x" | "16.x" | "14.x" | "12.x" | "10.x";
+      nodeVersion?: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
       outputDirectory?: string | null;
       publicSource?: boolean | null;
       rootDirectory?: string | null;
@@ -6446,10 +6446,10 @@ export type GetDeploymentsVariables = {
  */
 export const getDeployments = (variables: GetDeploymentsVariables, signal?: AbortSignal) =>
   fetch<GetDeploymentsResponse, GetDeploymentsError, undefined, {}, GetDeploymentsQueryParams, {}>({
-    url: "/v6/deployments",
-    method: "get",
+    url: '/v6/deployments',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetProjectsQueryParams = {
@@ -6462,7 +6462,7 @@ export type GetProjectsQueryParams = {
    *
    * @example 1
    */
-  gitForkProtection?: "1" | "0";
+  gitForkProtection?: '1' | '0';
   /**
    * Limit the number of projects returned
    */
@@ -6528,9 +6528,9 @@ export type GetProjectsResponse = {
     installCommand?: string | null;
     env?: {
       target?:
-        | ("production" | "preview" | "development" | "preview" | "development")[]
-        | ("production" | "preview" | "development" | "preview" | "development");
-      type: "secret" | "system" | "encrypted" | "plain" | "sensitive";
+        | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+        | ('production' | 'preview' | 'development' | 'preview' | 'development');
+      type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
       id?: string;
       key: string;
       value: string;
@@ -6548,47 +6548,47 @@ export type GetProjectsResponse = {
       decrypted?: boolean;
     }[];
     framework?:
-      | "blitzjs"
-      | "nextjs"
-      | "gatsby"
-      | "remix"
-      | "astro"
-      | "hexo"
-      | "eleventy"
-      | "docusaurus-2"
-      | "docusaurus"
-      | "preact"
-      | "solidstart"
-      | "dojo"
-      | "ember"
-      | "vue"
-      | "scully"
-      | "ionic-angular"
-      | "angular"
-      | "polymer"
-      | "svelte"
-      | "sveltekit"
-      | "sveltekit-1"
-      | "ionic-react"
-      | "create-react-app"
-      | "gridsome"
-      | "umijs"
-      | "sapper"
-      | "saber"
-      | "stencil"
-      | "nuxtjs"
-      | "redwoodjs"
-      | "hugo"
-      | "jekyll"
-      | "brunch"
-      | "middleman"
-      | "zola"
-      | "hydrogen"
-      | "vite"
-      | "vitepress"
-      | "vuepress"
-      | "parcel"
-      | "sanity"
+      | 'blitzjs'
+      | 'nextjs'
+      | 'gatsby'
+      | 'remix'
+      | 'astro'
+      | 'hexo'
+      | 'eleventy'
+      | 'docusaurus-2'
+      | 'docusaurus'
+      | 'preact'
+      | 'solidstart'
+      | 'dojo'
+      | 'ember'
+      | 'vue'
+      | 'scully'
+      | 'ionic-angular'
+      | 'angular'
+      | 'polymer'
+      | 'svelte'
+      | 'sveltekit'
+      | 'sveltekit-1'
+      | 'ionic-react'
+      | 'create-react-app'
+      | 'gridsome'
+      | 'umijs'
+      | 'sapper'
+      | 'saber'
+      | 'stencil'
+      | 'nuxtjs'
+      | 'redwoodjs'
+      | 'hugo'
+      | 'jekyll'
+      | 'brunch'
+      | 'middleman'
+      | 'zola'
+      | 'hydrogen'
+      | 'vite'
+      | 'vitepress'
+      | 'vuepress'
+      | 'parcel'
+      | 'sanity'
       | null;
     gitForkProtection?: boolean;
     gitLFS?: boolean;
@@ -6627,18 +6627,18 @@ export type GetProjectsResponse = {
         [key: string]: string;
       };
       monorepoManager?: string | null;
-      plan: "hobby" | "enterprise" | "pro" | "oss";
+      plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
       private: boolean;
-      readyState: "BUILDING" | "ERROR" | "INITIALIZING" | "QUEUED" | "READY" | "CANCELED";
+      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
-      type: "LAMBDAS";
+      type: 'LAMBDAS';
       url: string;
       userId: string;
       withCache?: boolean;
-      checksConclusion?: "succeeded" | "failed" | "skipped" | "canceled";
-      checksState?: "registered" | "running" | "completed";
+      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+      checksState?: 'registered' | 'running' | 'completed';
       readyAt?: number;
       buildingAt?: number;
       /**
@@ -6653,7 +6653,7 @@ export type GetProjectsResponse = {
           org?: string;
           repo?: string;
           repoId?: number;
-          type?: "github";
+          type?: 'github';
           createdAt?: number;
           deployHooks: {
             createdAt?: number;
@@ -6673,7 +6673,7 @@ export type GetProjectsResponse = {
           projectNameWithNamespace?: string;
           projectNamespace?: string;
           projectUrl?: string;
-          type?: "gitlab";
+          type?: 'gitlab';
           createdAt?: number;
           deployHooks: {
             createdAt?: number;
@@ -6691,7 +6691,7 @@ export type GetProjectsResponse = {
           name?: string;
           slug?: string;
           owner?: string;
-          type?: "bitbucket";
+          type?: 'bitbucket';
           uuid?: string;
           workspaceUuid?: string;
           createdAt?: number;
@@ -6708,10 +6708,10 @@ export type GetProjectsResponse = {
           productionBranch?: string;
         };
     name: string;
-    nodeVersion: "18.x" | "16.x" | "14.x" | "12.x" | "10.x";
+    nodeVersion: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
     outputDirectory?: string | null;
     passwordProtection?: {
-      deploymentType: "preview" | "all";
+      deploymentType: 'preview' | 'all';
     } | null;
     publicSource?: boolean | null;
     rootDirectory?: string | null;
@@ -6719,7 +6719,7 @@ export type GetProjectsResponse = {
     skipGitConnectDuringLink?: boolean;
     sourceFilesOutsideRootDirectory?: boolean;
     ssoProtection?: {
-      deploymentType: "preview" | "all";
+      deploymentType: 'preview' | 'all';
     } | null;
     /**
      * An object containing the deployment's metadata
@@ -6848,14 +6848,14 @@ export type GetProjectsResponse = {
       edgeConfigItem?: Schemas.ACLAction[];
       edgeConfigToken?: Schemas.ACLAction[];
       webhook?: Schemas.ACLAction[];
-      ["webhook-event"]?: Schemas.ACLAction[];
+      ['webhook-event']?: Schemas.ACLAction[];
       endpointVerification?: Schemas.ACLAction[];
       aliasProtectionBypass?: Schemas.ACLAction[];
     };
     lastRollbackTarget?: {
       fromDeploymentId: string;
       toDeploymentId: string;
-      jobStatus: "succeeded" | "failed" | "skipped" | "pending" | "in-progress";
+      jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
       requestedAt: number;
     } | null;
     hasFloatingAliases?: boolean;
@@ -6879,10 +6879,10 @@ export type GetProjectsVariables = {
  */
 export const getProjects = (variables: GetProjectsVariables, signal?: AbortSignal) =>
   fetch<GetProjectsResponse, GetProjectsError, undefined, {}, GetProjectsQueryParams, {}>({
-    url: "/v9/projects",
-    method: "get",
+    url: '/v9/projects',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type CreateProjectQueryParams = {
@@ -6916,9 +6916,9 @@ export type CreateProjectResponse = {
   installCommand?: string | null;
   env?: {
     target?:
-      | ("production" | "preview" | "development" | "preview" | "development")[]
-      | ("production" | "preview" | "development" | "preview" | "development");
-    type: "secret" | "system" | "encrypted" | "plain" | "sensitive";
+      | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+      | ('production' | 'preview' | 'development' | 'preview' | 'development');
+    type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
     id?: string;
     key: string;
     value: string;
@@ -6936,47 +6936,47 @@ export type CreateProjectResponse = {
     decrypted?: boolean;
   }[];
   framework?:
-    | "blitzjs"
-    | "nextjs"
-    | "gatsby"
-    | "remix"
-    | "astro"
-    | "hexo"
-    | "eleventy"
-    | "docusaurus-2"
-    | "docusaurus"
-    | "preact"
-    | "solidstart"
-    | "dojo"
-    | "ember"
-    | "vue"
-    | "scully"
-    | "ionic-angular"
-    | "angular"
-    | "polymer"
-    | "svelte"
-    | "sveltekit"
-    | "sveltekit-1"
-    | "ionic-react"
-    | "create-react-app"
-    | "gridsome"
-    | "umijs"
-    | "sapper"
-    | "saber"
-    | "stencil"
-    | "nuxtjs"
-    | "redwoodjs"
-    | "hugo"
-    | "jekyll"
-    | "brunch"
-    | "middleman"
-    | "zola"
-    | "hydrogen"
-    | "vite"
-    | "vitepress"
-    | "vuepress"
-    | "parcel"
-    | "sanity"
+    | 'blitzjs'
+    | 'nextjs'
+    | 'gatsby'
+    | 'remix'
+    | 'astro'
+    | 'hexo'
+    | 'eleventy'
+    | 'docusaurus-2'
+    | 'docusaurus'
+    | 'preact'
+    | 'solidstart'
+    | 'dojo'
+    | 'ember'
+    | 'vue'
+    | 'scully'
+    | 'ionic-angular'
+    | 'angular'
+    | 'polymer'
+    | 'svelte'
+    | 'sveltekit'
+    | 'sveltekit-1'
+    | 'ionic-react'
+    | 'create-react-app'
+    | 'gridsome'
+    | 'umijs'
+    | 'sapper'
+    | 'saber'
+    | 'stencil'
+    | 'nuxtjs'
+    | 'redwoodjs'
+    | 'hugo'
+    | 'jekyll'
+    | 'brunch'
+    | 'middleman'
+    | 'zola'
+    | 'hydrogen'
+    | 'vite'
+    | 'vitepress'
+    | 'vuepress'
+    | 'parcel'
+    | 'sanity'
     | null;
   gitForkProtection?: boolean;
   gitLFS?: boolean;
@@ -7015,18 +7015,18 @@ export type CreateProjectResponse = {
       [key: string]: string;
     };
     monorepoManager?: string | null;
-    plan: "hobby" | "enterprise" | "pro" | "oss";
+    plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
     private: boolean;
-    readyState: "BUILDING" | "ERROR" | "INITIALIZING" | "QUEUED" | "READY" | "CANCELED";
+    readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
     requestedAt?: number;
     target?: string | null;
     teamId?: string | null;
-    type: "LAMBDAS";
+    type: 'LAMBDAS';
     url: string;
     userId: string;
     withCache?: boolean;
-    checksConclusion?: "succeeded" | "failed" | "skipped" | "canceled";
-    checksState?: "registered" | "running" | "completed";
+    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+    checksState?: 'registered' | 'running' | 'completed';
     readyAt?: number;
     buildingAt?: number;
     /**
@@ -7041,7 +7041,7 @@ export type CreateProjectResponse = {
         org?: string;
         repo?: string;
         repoId?: number;
-        type?: "github";
+        type?: 'github';
         createdAt?: number;
         deployHooks: {
           createdAt?: number;
@@ -7061,7 +7061,7 @@ export type CreateProjectResponse = {
         projectNameWithNamespace?: string;
         projectNamespace?: string;
         projectUrl?: string;
-        type?: "gitlab";
+        type?: 'gitlab';
         createdAt?: number;
         deployHooks: {
           createdAt?: number;
@@ -7079,7 +7079,7 @@ export type CreateProjectResponse = {
         name?: string;
         slug?: string;
         owner?: string;
-        type?: "bitbucket";
+        type?: 'bitbucket';
         uuid?: string;
         workspaceUuid?: string;
         createdAt?: number;
@@ -7096,10 +7096,10 @@ export type CreateProjectResponse = {
         productionBranch?: string;
       };
   name: string;
-  nodeVersion: "18.x" | "16.x" | "14.x" | "12.x" | "10.x";
+  nodeVersion: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
   outputDirectory?: string | null;
   passwordProtection?: {
-    deploymentType: "preview" | "all";
+    deploymentType: 'preview' | 'all';
   } | null;
   publicSource?: boolean | null;
   rootDirectory?: string | null;
@@ -7107,7 +7107,7 @@ export type CreateProjectResponse = {
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
   ssoProtection?: {
-    deploymentType: "preview" | "all";
+    deploymentType: 'preview' | 'all';
   } | null;
   /**
    * An object containing the deployment's metadata
@@ -7236,14 +7236,14 @@ export type CreateProjectResponse = {
     edgeConfigItem?: Schemas.ACLAction[];
     edgeConfigToken?: Schemas.ACLAction[];
     webhook?: Schemas.ACLAction[];
-    ["webhook-event"]?: Schemas.ACLAction[];
+    ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: "succeeded" | "failed" | "skipped" | "pending" | "in-progress";
+    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
     requestedAt: number;
   } | null;
   hasFloatingAliases?: boolean;
@@ -7305,7 +7305,7 @@ export type CreateProjectRequestBody = {
     /**
      * Type of the ENV variable
      */
-    type?: "system" | "secret" | "encrypted" | "plain";
+    type?: 'system' | 'secret' | 'encrypted' | 'plain';
     /**
      * Value for the ENV variable
      */
@@ -7316,47 +7316,47 @@ export type CreateProjectRequestBody = {
    */
   framework?:
     | any
-    | "blitzjs"
-    | "nextjs"
-    | "gatsby"
-    | "remix"
-    | "astro"
-    | "hexo"
-    | "eleventy"
-    | "docusaurus-2"
-    | "docusaurus"
-    | "preact"
-    | "solidstart"
-    | "dojo"
-    | "ember"
-    | "vue"
-    | "scully"
-    | "ionic-angular"
-    | "angular"
-    | "polymer"
-    | "svelte"
-    | "sveltekit"
-    | "sveltekit-1"
-    | "ionic-react"
-    | "create-react-app"
-    | "gridsome"
-    | "umijs"
-    | "sapper"
-    | "saber"
-    | "stencil"
-    | "nuxtjs"
-    | "redwoodjs"
-    | "hugo"
-    | "jekyll"
-    | "brunch"
-    | "middleman"
-    | "zola"
-    | "hydrogen"
-    | "vite"
-    | "vitepress"
-    | "vuepress"
-    | "parcel"
-    | "sanity";
+    | 'blitzjs'
+    | 'nextjs'
+    | 'gatsby'
+    | 'remix'
+    | 'astro'
+    | 'hexo'
+    | 'eleventy'
+    | 'docusaurus-2'
+    | 'docusaurus'
+    | 'preact'
+    | 'solidstart'
+    | 'dojo'
+    | 'ember'
+    | 'vue'
+    | 'scully'
+    | 'ionic-angular'
+    | 'angular'
+    | 'polymer'
+    | 'svelte'
+    | 'sveltekit'
+    | 'sveltekit-1'
+    | 'ionic-react'
+    | 'create-react-app'
+    | 'gridsome'
+    | 'umijs'
+    | 'sapper'
+    | 'saber'
+    | 'stencil'
+    | 'nuxtjs'
+    | 'redwoodjs'
+    | 'hugo'
+    | 'jekyll'
+    | 'brunch'
+    | 'middleman'
+    | 'zola'
+    | 'hydrogen'
+    | 'vite'
+    | 'vitepress'
+    | 'vuepress'
+    | 'parcel'
+    | 'sanity';
   /**
    * The Git Repository that will be connected to the project. When this is defined, any pushes to the specified connected Git Repository will be automatically deployed
    */
@@ -7368,7 +7368,7 @@ export type CreateProjectRequestBody = {
     /**
      * The Git Provider of the repository
      */
-    type: "github" | "gitlab" | "bitbucket";
+    type: 'github' | 'gitlab' | 'bitbucket';
   };
   /**
    * The install command for this project. When `null` is used this value will be automatically detected
@@ -7424,10 +7424,10 @@ export type CreateProjectVariables = {
  */
 export const createProject = (variables: CreateProjectVariables, signal?: AbortSignal) =>
   fetch<CreateProjectResponse, CreateProjectError, CreateProjectRequestBody, {}, CreateProjectQueryParams, {}>({
-    url: "/v9/projects",
-    method: "post",
+    url: '/v9/projects',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetProjectPathParams = {
@@ -7468,9 +7468,9 @@ export type GetProjectResponse = {
   installCommand?: string | null;
   env?: {
     target?:
-      | ("production" | "preview" | "development" | "preview" | "development")[]
-      | ("production" | "preview" | "development" | "preview" | "development");
-    type: "secret" | "system" | "encrypted" | "plain" | "sensitive";
+      | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+      | ('production' | 'preview' | 'development' | 'preview' | 'development');
+    type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
     id?: string;
     key: string;
     value: string;
@@ -7488,47 +7488,47 @@ export type GetProjectResponse = {
     decrypted?: boolean;
   }[];
   framework?:
-    | "blitzjs"
-    | "nextjs"
-    | "gatsby"
-    | "remix"
-    | "astro"
-    | "hexo"
-    | "eleventy"
-    | "docusaurus-2"
-    | "docusaurus"
-    | "preact"
-    | "solidstart"
-    | "dojo"
-    | "ember"
-    | "vue"
-    | "scully"
-    | "ionic-angular"
-    | "angular"
-    | "polymer"
-    | "svelte"
-    | "sveltekit"
-    | "sveltekit-1"
-    | "ionic-react"
-    | "create-react-app"
-    | "gridsome"
-    | "umijs"
-    | "sapper"
-    | "saber"
-    | "stencil"
-    | "nuxtjs"
-    | "redwoodjs"
-    | "hugo"
-    | "jekyll"
-    | "brunch"
-    | "middleman"
-    | "zola"
-    | "hydrogen"
-    | "vite"
-    | "vitepress"
-    | "vuepress"
-    | "parcel"
-    | "sanity"
+    | 'blitzjs'
+    | 'nextjs'
+    | 'gatsby'
+    | 'remix'
+    | 'astro'
+    | 'hexo'
+    | 'eleventy'
+    | 'docusaurus-2'
+    | 'docusaurus'
+    | 'preact'
+    | 'solidstart'
+    | 'dojo'
+    | 'ember'
+    | 'vue'
+    | 'scully'
+    | 'ionic-angular'
+    | 'angular'
+    | 'polymer'
+    | 'svelte'
+    | 'sveltekit'
+    | 'sveltekit-1'
+    | 'ionic-react'
+    | 'create-react-app'
+    | 'gridsome'
+    | 'umijs'
+    | 'sapper'
+    | 'saber'
+    | 'stencil'
+    | 'nuxtjs'
+    | 'redwoodjs'
+    | 'hugo'
+    | 'jekyll'
+    | 'brunch'
+    | 'middleman'
+    | 'zola'
+    | 'hydrogen'
+    | 'vite'
+    | 'vitepress'
+    | 'vuepress'
+    | 'parcel'
+    | 'sanity'
     | null;
   gitForkProtection?: boolean;
   gitLFS?: boolean;
@@ -7567,18 +7567,18 @@ export type GetProjectResponse = {
       [key: string]: string;
     };
     monorepoManager?: string | null;
-    plan: "hobby" | "enterprise" | "pro" | "oss";
+    plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
     private: boolean;
-    readyState: "BUILDING" | "ERROR" | "INITIALIZING" | "QUEUED" | "READY" | "CANCELED";
+    readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
     requestedAt?: number;
     target?: string | null;
     teamId?: string | null;
-    type: "LAMBDAS";
+    type: 'LAMBDAS';
     url: string;
     userId: string;
     withCache?: boolean;
-    checksConclusion?: "succeeded" | "failed" | "skipped" | "canceled";
-    checksState?: "registered" | "running" | "completed";
+    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+    checksState?: 'registered' | 'running' | 'completed';
     readyAt?: number;
     buildingAt?: number;
     /**
@@ -7593,7 +7593,7 @@ export type GetProjectResponse = {
         org?: string;
         repo?: string;
         repoId?: number;
-        type?: "github";
+        type?: 'github';
         createdAt?: number;
         deployHooks: {
           createdAt?: number;
@@ -7613,7 +7613,7 @@ export type GetProjectResponse = {
         projectNameWithNamespace?: string;
         projectNamespace?: string;
         projectUrl?: string;
-        type?: "gitlab";
+        type?: 'gitlab';
         createdAt?: number;
         deployHooks: {
           createdAt?: number;
@@ -7631,7 +7631,7 @@ export type GetProjectResponse = {
         name?: string;
         slug?: string;
         owner?: string;
-        type?: "bitbucket";
+        type?: 'bitbucket';
         uuid?: string;
         workspaceUuid?: string;
         createdAt?: number;
@@ -7648,10 +7648,10 @@ export type GetProjectResponse = {
         productionBranch?: string;
       };
   name: string;
-  nodeVersion: "18.x" | "16.x" | "14.x" | "12.x" | "10.x";
+  nodeVersion: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
   outputDirectory?: string | null;
   passwordProtection?: {
-    deploymentType: "preview" | "all";
+    deploymentType: 'preview' | 'all';
   } | null;
   publicSource?: boolean | null;
   rootDirectory?: string | null;
@@ -7659,7 +7659,7 @@ export type GetProjectResponse = {
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
   ssoProtection?: {
-    deploymentType: "preview" | "all";
+    deploymentType: 'preview' | 'all';
   } | null;
   /**
    * An object containing the deployment's metadata
@@ -7788,14 +7788,14 @@ export type GetProjectResponse = {
     edgeConfigItem?: Schemas.ACLAction[];
     edgeConfigToken?: Schemas.ACLAction[];
     webhook?: Schemas.ACLAction[];
-    ["webhook-event"]?: Schemas.ACLAction[];
+    ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: "succeeded" | "failed" | "skipped" | "pending" | "in-progress";
+    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
     requestedAt: number;
   } | null;
   hasFloatingAliases?: boolean;
@@ -7818,10 +7818,10 @@ export type GetProjectVariables = {
  */
 export const getProject = (variables: GetProjectVariables, signal?: AbortSignal) =>
   fetch<GetProjectResponse, GetProjectError, undefined, {}, GetProjectQueryParams, GetProjectPathParams>({
-    url: "/v9/projects/{idOrName}",
-    method: "get",
+    url: '/v9/projects/{idOrName}',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type UpdateProjectPathParams = {
@@ -7864,9 +7864,9 @@ export type UpdateProjectResponse = {
   installCommand?: string | null;
   env?: {
     target?:
-      | ("production" | "preview" | "development" | "preview" | "development")[]
-      | ("production" | "preview" | "development" | "preview" | "development");
-    type: "secret" | "system" | "encrypted" | "plain" | "sensitive";
+      | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+      | ('production' | 'preview' | 'development' | 'preview' | 'development');
+    type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
     id?: string;
     key: string;
     value: string;
@@ -7884,47 +7884,47 @@ export type UpdateProjectResponse = {
     decrypted?: boolean;
   }[];
   framework?:
-    | "blitzjs"
-    | "nextjs"
-    | "gatsby"
-    | "remix"
-    | "astro"
-    | "hexo"
-    | "eleventy"
-    | "docusaurus-2"
-    | "docusaurus"
-    | "preact"
-    | "solidstart"
-    | "dojo"
-    | "ember"
-    | "vue"
-    | "scully"
-    | "ionic-angular"
-    | "angular"
-    | "polymer"
-    | "svelte"
-    | "sveltekit"
-    | "sveltekit-1"
-    | "ionic-react"
-    | "create-react-app"
-    | "gridsome"
-    | "umijs"
-    | "sapper"
-    | "saber"
-    | "stencil"
-    | "nuxtjs"
-    | "redwoodjs"
-    | "hugo"
-    | "jekyll"
-    | "brunch"
-    | "middleman"
-    | "zola"
-    | "hydrogen"
-    | "vite"
-    | "vitepress"
-    | "vuepress"
-    | "parcel"
-    | "sanity"
+    | 'blitzjs'
+    | 'nextjs'
+    | 'gatsby'
+    | 'remix'
+    | 'astro'
+    | 'hexo'
+    | 'eleventy'
+    | 'docusaurus-2'
+    | 'docusaurus'
+    | 'preact'
+    | 'solidstart'
+    | 'dojo'
+    | 'ember'
+    | 'vue'
+    | 'scully'
+    | 'ionic-angular'
+    | 'angular'
+    | 'polymer'
+    | 'svelte'
+    | 'sveltekit'
+    | 'sveltekit-1'
+    | 'ionic-react'
+    | 'create-react-app'
+    | 'gridsome'
+    | 'umijs'
+    | 'sapper'
+    | 'saber'
+    | 'stencil'
+    | 'nuxtjs'
+    | 'redwoodjs'
+    | 'hugo'
+    | 'jekyll'
+    | 'brunch'
+    | 'middleman'
+    | 'zola'
+    | 'hydrogen'
+    | 'vite'
+    | 'vitepress'
+    | 'vuepress'
+    | 'parcel'
+    | 'sanity'
     | null;
   gitForkProtection?: boolean;
   gitLFS?: boolean;
@@ -7963,18 +7963,18 @@ export type UpdateProjectResponse = {
       [key: string]: string;
     };
     monorepoManager?: string | null;
-    plan: "hobby" | "enterprise" | "pro" | "oss";
+    plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
     private: boolean;
-    readyState: "BUILDING" | "ERROR" | "INITIALIZING" | "QUEUED" | "READY" | "CANCELED";
+    readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
     requestedAt?: number;
     target?: string | null;
     teamId?: string | null;
-    type: "LAMBDAS";
+    type: 'LAMBDAS';
     url: string;
     userId: string;
     withCache?: boolean;
-    checksConclusion?: "succeeded" | "failed" | "skipped" | "canceled";
-    checksState?: "registered" | "running" | "completed";
+    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+    checksState?: 'registered' | 'running' | 'completed';
     readyAt?: number;
     buildingAt?: number;
     /**
@@ -7989,7 +7989,7 @@ export type UpdateProjectResponse = {
         org?: string;
         repo?: string;
         repoId?: number;
-        type?: "github";
+        type?: 'github';
         createdAt?: number;
         deployHooks: {
           createdAt?: number;
@@ -8009,7 +8009,7 @@ export type UpdateProjectResponse = {
         projectNameWithNamespace?: string;
         projectNamespace?: string;
         projectUrl?: string;
-        type?: "gitlab";
+        type?: 'gitlab';
         createdAt?: number;
         deployHooks: {
           createdAt?: number;
@@ -8027,7 +8027,7 @@ export type UpdateProjectResponse = {
         name?: string;
         slug?: string;
         owner?: string;
-        type?: "bitbucket";
+        type?: 'bitbucket';
         uuid?: string;
         workspaceUuid?: string;
         createdAt?: number;
@@ -8044,10 +8044,10 @@ export type UpdateProjectResponse = {
         productionBranch?: string;
       };
   name: string;
-  nodeVersion: "18.x" | "16.x" | "14.x" | "12.x" | "10.x";
+  nodeVersion: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
   outputDirectory?: string | null;
   passwordProtection?: {
-    deploymentType: "all" | "preview";
+    deploymentType: 'all' | 'preview';
   } | null;
   publicSource?: boolean | null;
   rootDirectory?: string | null;
@@ -8055,7 +8055,7 @@ export type UpdateProjectResponse = {
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
   ssoProtection?: {
-    deploymentType: "all" | "preview";
+    deploymentType: 'all' | 'preview';
   } | null;
   /**
    * An object containing the deployment's metadata
@@ -8184,14 +8184,14 @@ export type UpdateProjectResponse = {
     edgeConfigItem?: Schemas.ACLAction[];
     edgeConfigToken?: Schemas.ACLAction[];
     webhook?: Schemas.ACLAction[];
-    ["webhook-event"]?: Schemas.ACLAction[];
+    ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: "succeeded" | "failed" | "skipped" | "pending" | "in-progress";
+    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
     requestedAt: number;
   } | null;
   hasFloatingAliases?: boolean;
@@ -8228,47 +8228,47 @@ export type UpdateProjectRequestBody = {
    */
   framework?:
     | any
-    | "blitzjs"
-    | "nextjs"
-    | "gatsby"
-    | "remix"
-    | "astro"
-    | "hexo"
-    | "eleventy"
-    | "docusaurus-2"
-    | "docusaurus"
-    | "preact"
-    | "solidstart"
-    | "dojo"
-    | "ember"
-    | "vue"
-    | "scully"
-    | "ionic-angular"
-    | "angular"
-    | "polymer"
-    | "svelte"
-    | "sveltekit"
-    | "sveltekit-1"
-    | "ionic-react"
-    | "create-react-app"
-    | "gridsome"
-    | "umijs"
-    | "sapper"
-    | "saber"
-    | "stencil"
-    | "nuxtjs"
-    | "redwoodjs"
-    | "hugo"
-    | "jekyll"
-    | "brunch"
-    | "middleman"
-    | "zola"
-    | "hydrogen"
-    | "vite"
-    | "vitepress"
-    | "vuepress"
-    | "parcel"
-    | "sanity"
+    | 'blitzjs'
+    | 'nextjs'
+    | 'gatsby'
+    | 'remix'
+    | 'astro'
+    | 'hexo'
+    | 'eleventy'
+    | 'docusaurus-2'
+    | 'docusaurus'
+    | 'preact'
+    | 'solidstart'
+    | 'dojo'
+    | 'ember'
+    | 'vue'
+    | 'scully'
+    | 'ionic-angular'
+    | 'angular'
+    | 'polymer'
+    | 'svelte'
+    | 'sveltekit'
+    | 'sveltekit-1'
+    | 'ionic-react'
+    | 'create-react-app'
+    | 'gridsome'
+    | 'umijs'
+    | 'sapper'
+    | 'saber'
+    | 'stencil'
+    | 'nuxtjs'
+    | 'redwoodjs'
+    | 'hugo'
+    | 'jekyll'
+    | 'brunch'
+    | 'middleman'
+    | 'zola'
+    | 'hydrogen'
+    | 'vite'
+    | 'vitepress'
+    | 'vuepress'
+    | 'parcel'
+    | 'sanity'
     | null;
   /**
    * Specifies whether PRs from Git forks should require a team member's authorization before it can be deployed
@@ -8292,7 +8292,7 @@ export type UpdateProjectRequestBody = {
    * @pattern ^[a-z0-9]([a-z0-9]|-[a-z0-9])*$
    */
   name?: string;
-  nodeVersion?: "18.x" | "16.x" | "14.x" | "12.x" | "10.x";
+  nodeVersion?: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
   /**
    * The output directory of the project. When `null` is used this value will be automatically detected
    *
@@ -8306,7 +8306,7 @@ export type UpdateProjectRequestBody = {
     /**
      * Specify if the password will apply to every Deployment Target or just Preview
      */
-    deploymentType: "all" | "preview";
+    deploymentType: 'all' | 'preview';
     /**
      * The password that will be used to protect Project Deployments
      *
@@ -8349,7 +8349,7 @@ export type UpdateProjectRequestBody = {
      *
      * @default preview
      */
-    deploymentType: "all" | "preview";
+    deploymentType: 'all' | 'preview';
   } | null;
   /**
    * Opt-in to Preview comments on the project level
@@ -8374,7 +8374,7 @@ export const updateProject = (variables: UpdateProjectVariables, signal?: AbortS
     {},
     UpdateProjectQueryParams,
     UpdateProjectPathParams
-  >({ url: "/v9/projects/{idOrName}", method: "patch", ...variables, signal });
+  >({ url: '/v9/projects/{idOrName}', method: 'patch', ...variables, signal });
 
 export type DeleteProjectPathParams = {
   /**
@@ -8404,10 +8404,10 @@ export type DeleteProjectVariables = {
  */
 export const deleteProject = (variables: DeleteProjectVariables, signal?: AbortSignal) =>
   fetch<undefined, DeleteProjectError, undefined, {}, DeleteProjectQueryParams, DeleteProjectPathParams>({
-    url: "/v9/projects/{idOrName}",
-    method: "delete",
+    url: '/v9/projects/{idOrName}',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetProjectDomainsPathParams = {
@@ -8423,7 +8423,7 @@ export type GetProjectDomainsQueryParams = {
    *
    * @default false
    */
-  production?: "true" | "false";
+  production?: 'true' | 'false';
   /**
    * Filters domains based on specific branch.
    */
@@ -8433,7 +8433,7 @@ export type GetProjectDomainsQueryParams = {
    *
    * @default true
    */
-  redirects?: "true" | "false";
+  redirects?: 'true' | 'false';
   /**
    * Filters domains based on their redirect target.
    *
@@ -8443,7 +8443,7 @@ export type GetProjectDomainsQueryParams = {
   /**
    * Filters domains based on their verification status.
    */
-  verified?: "true" | "false";
+  verified?: 'true' | 'false';
   /**
    * Maximum number of domains to list from a request (max 100).
    *
@@ -8467,7 +8467,7 @@ export type GetProjectDomainsQueryParams = {
    *
    * @default DESC
    */
-  order?: "ASC" | "DESC";
+  order?: 'ASC' | 'DESC';
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
@@ -8519,7 +8519,7 @@ export const getProjectDomains = (variables: GetProjectDomainsVariables, signal?
     {},
     GetProjectDomainsQueryParams,
     GetProjectDomainsPathParams
-  >({ url: "/v9/projects/{idOrName}/domains", method: "get", ...variables, signal });
+  >({ url: '/v9/projects/{idOrName}/domains', method: 'get', ...variables, signal });
 
 export type GetProjectDomainPathParams = {
   /**
@@ -8583,7 +8583,7 @@ export const getProjectDomain = (variables: GetProjectDomainVariables, signal?: 
     {},
     GetProjectDomainQueryParams,
     GetProjectDomainPathParams
-  >({ url: "/v9/projects/{idOrName}/domains/{domain}", method: "get", ...variables, signal });
+  >({ url: '/v9/projects/{idOrName}/domains/{domain}', method: 'get', ...variables, signal });
 
 export type UpdateProjectDomainPathParams = {
   /**
@@ -8670,7 +8670,7 @@ export const updateProjectDomain = (variables: UpdateProjectDomainVariables, sig
     {},
     UpdateProjectDomainQueryParams,
     UpdateProjectDomainPathParams
-  >({ url: "/v9/projects/{idOrName}/domains/{domain}", method: "patch", ...variables, signal });
+  >({ url: '/v9/projects/{idOrName}/domains/{domain}', method: 'patch', ...variables, signal });
 
 export type RemoveProjectDomainPathParams = {
   /**
@@ -8710,7 +8710,7 @@ export const removeProjectDomain = (variables: RemoveProjectDomainVariables, sig
     {},
     RemoveProjectDomainQueryParams,
     RemoveProjectDomainPathParams
-  >({ url: "/v9/projects/{idOrName}/domains/{domain}", method: "delete", ...variables, signal });
+  >({ url: '/v9/projects/{idOrName}/domains/{domain}', method: 'delete', ...variables, signal });
 
 export type AddProjectDomainPathParams = {
   /**
@@ -8797,7 +8797,7 @@ export const addProjectDomain = (variables: AddProjectDomainVariables, signal?: 
     {},
     AddProjectDomainQueryParams,
     AddProjectDomainPathParams
-  >({ url: "/v10/projects/{idOrName}/domains", method: "post", ...variables, signal });
+  >({ url: '/v10/projects/{idOrName}/domains', method: 'post', ...variables, signal });
 
 export type VerifyProjectDomainPathParams = {
   /**
@@ -8863,7 +8863,7 @@ export const verifyProjectDomain = (variables: VerifyProjectDomainVariables, sig
     {},
     VerifyProjectDomainQueryParams,
     VerifyProjectDomainPathParams
-  >({ url: "/v9/projects/{idOrName}/domains/{domain}/verify", method: "post", ...variables, signal });
+  >({ url: '/v9/projects/{idOrName}/domains/{domain}/verify', method: 'post', ...variables, signal });
 
 export type FilterProjectEnvsPathParams = {
   /**
@@ -8888,7 +8888,7 @@ export type FilterProjectEnvsQueryParams = {
    * @example true
    * @deprecated true
    */
-  decrypt?: "true" | "false";
+  decrypt?: 'true' | 'false';
   /**
    * The source that is calling the endpoint.
    *
@@ -8915,9 +8915,9 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
   fetch<
     | {
         target?:
-          | ("production" | "preview" | "development" | "preview" | "development")[]
-          | ("production" | "preview" | "development" | "preview" | "development");
-        type?: "secret" | "system" | "encrypted" | "plain" | "sensitive";
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
+        type?: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
         id?: string;
         key?: string;
         value?: string;
@@ -8938,9 +8938,9 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
     | {
         envs: {
           target?:
-            | ("production" | "preview" | "development" | "preview" | "development")[]
-            | ("production" | "preview" | "development" | "preview" | "development");
-          type?: "secret" | "system" | "encrypted" | "plain" | "sensitive";
+            | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+            | ('production' | 'preview' | 'development' | 'preview' | 'development');
+          type?: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
           id?: string;
           key?: string;
           value?: string;
@@ -8963,9 +8963,9 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
     | {
         envs: {
           target?:
-            | ("production" | "preview" | "development" | "preview" | "development")[]
-            | ("production" | "preview" | "development" | "preview" | "development");
-          type?: "secret" | "system" | "encrypted" | "plain" | "sensitive";
+            | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+            | ('production' | 'preview' | 'development' | 'preview' | 'development');
+          type?: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
           id?: string;
           key?: string;
           value?: string;
@@ -8989,7 +8989,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
     {},
     FilterProjectEnvsQueryParams,
     FilterProjectEnvsPathParams
-  >({ url: "/v9/projects/{idOrName}/env", method: "get", ...variables, signal });
+  >({ url: '/v9/projects/{idOrName}/env', method: 'get', ...variables, signal });
 
 export type GetProjectEnvPathParams = {
   /**
@@ -9015,9 +9015,9 @@ export type GetProjectEnvError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetProjectEnvResponse = {
   target?:
-    | ("production" | "preview" | "development" | "preview" | "development")[]
-    | ("production" | "preview" | "development" | "preview" | "development");
-  type: "secret" | "system" | "encrypted" | "plain" | "sensitive";
+    | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+    | ('production' | 'preview' | 'development' | 'preview' | 'development');
+  type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
   id?: string;
   key: string;
   value: string;
@@ -9045,10 +9045,10 @@ export type GetProjectEnvVariables = {
  */
 export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortSignal) =>
   fetch<GetProjectEnvResponse, GetProjectEnvError, undefined, {}, GetProjectEnvQueryParams, GetProjectEnvPathParams>({
-    url: "/v1/projects/{idOrName}/env/{id}",
-    method: "get",
+    url: '/v1/projects/{idOrName}/env/{id}',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type CreateProjectEnvPathParams = {
@@ -9079,9 +9079,9 @@ export type CreateProjectEnvResponse = {
   created:
     | {
         target?:
-          | ("production" | "preview" | "development" | "preview" | "development" | "preview" | "development")[]
-          | ("production" | "preview" | "development" | "preview" | "development" | "preview" | "development");
-        type?: "secret" | "system" | "encrypted" | "plain" | "sensitive";
+          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
+        type?: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
         id?: string;
         key?: string;
         value?: string;
@@ -9101,9 +9101,9 @@ export type CreateProjectEnvResponse = {
       }
     | {
         target?:
-          | ("production" | "preview" | "development" | "preview" | "development" | "preview" | "development")[]
-          | ("production" | "preview" | "development" | "preview" | "development" | "preview" | "development");
-        type?: "secret" | "system" | "encrypted" | "plain" | "sensitive";
+          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
+        type?: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
         id?: string;
         key?: string;
         value?: string;
@@ -9132,11 +9132,11 @@ export type CreateProjectEnvResponse = {
       link?: string;
       value?:
         | string
-        | ("production" | "preview" | "development" | "preview" | "development" | "preview" | "development")[];
+        | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[];
       gitBranch?: string;
       target?:
-        | ("production" | "preview" | "development" | "preview" | "development" | "preview" | "development")[]
-        | ("production" | "preview" | "development" | "preview" | "development" | "preview" | "development");
+        | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
+        | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
       project?: string;
     };
   }[];
@@ -9162,7 +9162,7 @@ export type CreateProjectEnvVariables = {
          *
          * @example plain
          */
-        type: "system" | "secret" | "encrypted" | "plain" | "sensitive";
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * The target environment of the environment variable
          *
@@ -9200,7 +9200,7 @@ export type CreateProjectEnvVariables = {
          *
          * @example plain
          */
-        type: "system" | "secret" | "encrypted" | "plain" | "sensitive";
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * The target environment of the environment variable
          *
@@ -9249,7 +9249,7 @@ export const createProjectEnv = (variables: CreateProjectEnvVariables, signal?: 
          *
          * @example plain
          */
-        type: "system" | "secret" | "encrypted" | "plain" | "sensitive";
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * The target environment of the environment variable
          *
@@ -9287,7 +9287,7 @@ export const createProjectEnv = (variables: CreateProjectEnvVariables, signal?: 
          *
          * @example plain
          */
-        type: "system" | "secret" | "encrypted" | "plain" | "sensitive";
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * The target environment of the environment variable
          *
@@ -9310,7 +9310,7 @@ export const createProjectEnv = (variables: CreateProjectEnvVariables, signal?: 
     {},
     CreateProjectEnvQueryParams,
     CreateProjectEnvPathParams
-  >({ url: "/v10/projects/{idOrName}/env", method: "post", ...variables, signal });
+  >({ url: '/v10/projects/{idOrName}/env', method: 'post', ...variables, signal });
 
 export type RemoveProjectEnvPathParams = {
   /**
@@ -9348,9 +9348,9 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
   fetch<
     | {
         target?:
-          | ("production" | "preview" | "development" | "preview" | "development" | "preview" | "development")[]
-          | ("production" | "preview" | "development" | "preview" | "development" | "preview" | "development");
-        type: "secret" | "system" | "encrypted" | "plain" | "sensitive";
+          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
+        type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
         id?: string;
         key: string;
         value: string;
@@ -9370,9 +9370,9 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
     | {
         system?: boolean;
         target?:
-          | ("production" | "preview" | "development" | "preview" | "development" | "preview" | "development")[]
-          | ("production" | "preview" | "development" | "preview" | "development" | "preview" | "development");
-        type: "secret" | "system" | "encrypted" | "plain" | "sensitive";
+          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
+        type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
         id?: string;
         key: string;
         value: string;
@@ -9391,9 +9391,9 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
       }
     | {
         target?:
-          | ("production" | "preview" | "development" | "preview" | "development" | "preview" | "development")[]
-          | ("production" | "preview" | "development" | "preview" | "development" | "preview" | "development");
-        type: "secret" | "system" | "encrypted" | "plain" | "sensitive";
+          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
+        type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
         id?: string;
         key: string;
         value: string;
@@ -9415,7 +9415,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
     {},
     RemoveProjectEnvQueryParams,
     RemoveProjectEnvPathParams
-  >({ url: "/v9/projects/{idOrName}/env/{id}", method: "delete", ...variables, signal });
+  >({ url: '/v9/projects/{idOrName}/env/{id}', method: 'delete', ...variables, signal });
 
 export type EditProjectEnvPathParams = {
   /**
@@ -9443,9 +9443,9 @@ export type EditProjectEnvError = Fetcher.ErrorWrapper<undefined>;
 
 export type EditProjectEnvResponse = {
   target?:
-    | ("production" | "preview" | "development" | "preview" | "development")[]
-    | ("production" | "preview" | "development" | "preview" | "development");
-  type: "system" | "encrypted" | "plain" | "sensitive" | "secret";
+    | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+    | ('production' | 'preview' | 'development' | 'preview' | 'development');
+  type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
   id?: string;
   key: string;
   value: string;
@@ -9492,7 +9492,7 @@ export type EditProjectEnvRequestBody = {
    *
    * @example plain
    */
-  type?: "system" | "secret" | "encrypted" | "plain" | "sensitive";
+  type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
   /**
    * The value of the environment variable
    *
@@ -9518,7 +9518,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
     {},
     EditProjectEnvQueryParams,
     EditProjectEnvPathParams
-  >({ url: "/v9/projects/{idOrName}/env/{id}", method: "patch", ...variables, signal });
+  >({ url: '/v9/projects/{idOrName}/env/{id}', method: 'patch', ...variables, signal });
 
 export type VerifyTokenQueryParams = {
   /**
@@ -9573,10 +9573,10 @@ export type VerifyTokenVariables = {
  */
 export const verifyToken = (variables: VerifyTokenVariables, signal?: AbortSignal) =>
   fetch<VerifyTokenResponse, VerifyTokenError, undefined, {}, VerifyTokenQueryParams, {}>({
-    url: "/registration/verify",
-    method: "get",
+    url: '/registration/verify',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type EmailLoginError = Fetcher.ErrorWrapper<undefined>;
@@ -9620,14 +9620,14 @@ export type EmailLoginVariables = {
  */
 export const emailLogin = (variables: EmailLoginVariables, signal?: AbortSignal) =>
   fetch<EmailLoginResponse, EmailLoginError, EmailLoginRequestBody, {}, {}, {}>({
-    url: "/registration",
-    method: "post",
+    url: '/registration',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetConfigurationsQueryParams = {
-  view: "account" | "project";
+  view: 'account' | 'project';
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
@@ -9693,7 +9693,7 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          *
          * @example marketplace
          */
-        source?: "marketplace" | "deploy-button" | "oauth" | "external";
+        source?: 'marketplace' | 'deploy-button' | 'oauth' | 'external';
         removedLogDrainsAt?: number;
         removedProjectEnvsAt?: number;
         removedTokensAt?: number;
@@ -9710,7 +9710,7 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          * @example team_nLlpyC6RE1qxydlFKbrxDlud
          */
         teamId?: string | null;
-        type: "integration-configuration";
+        type: 'integration-configuration';
         /**
          * A timestamp that tells you when the configuration was updated.
          *
@@ -9733,42 +9733,42 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
         scopesQueue?: {
           scopes: {
             added: (
-              | "read:integration-configuration"
-              | "read-write:integration-configuration"
-              | "read:deployment"
-              | "read-write:deployment"
-              | "read-write:deployment-check"
-              | "read:project"
-              | "read-write:project"
-              | "read-write:project-env-vars"
-              | "read-write:global-project-env-vars"
-              | "read:team"
-              | "read:user"
-              | "read-write:log-drain"
-              | "read:domain"
-              | "read-write:domain"
-              | "read-write:edge-config"
-              | "read-write:otel-endpoint"
-              | "read:monitoring"
+              | 'read:integration-configuration'
+              | 'read-write:integration-configuration'
+              | 'read:deployment'
+              | 'read-write:deployment'
+              | 'read-write:deployment-check'
+              | 'read:project'
+              | 'read-write:project'
+              | 'read-write:project-env-vars'
+              | 'read-write:global-project-env-vars'
+              | 'read:team'
+              | 'read:user'
+              | 'read-write:log-drain'
+              | 'read:domain'
+              | 'read-write:domain'
+              | 'read-write:edge-config'
+              | 'read-write:otel-endpoint'
+              | 'read:monitoring'
             )[];
             upgraded: (
-              | "read:integration-configuration"
-              | "read-write:integration-configuration"
-              | "read:deployment"
-              | "read-write:deployment"
-              | "read-write:deployment-check"
-              | "read:project"
-              | "read-write:project"
-              | "read-write:project-env-vars"
-              | "read-write:global-project-env-vars"
-              | "read:team"
-              | "read:user"
-              | "read-write:log-drain"
-              | "read:domain"
-              | "read-write:domain"
-              | "read-write:edge-config"
-              | "read-write:otel-endpoint"
-              | "read:monitoring"
+              | 'read:integration-configuration'
+              | 'read-write:integration-configuration'
+              | 'read:deployment'
+              | 'read-write:deployment'
+              | 'read-write:deployment-check'
+              | 'read:project'
+              | 'read-write:project'
+              | 'read-write:project-env-vars'
+              | 'read-write:global-project-env-vars'
+              | 'read:team'
+              | 'read:user'
+              | 'read-write:log-drain'
+              | 'read:domain'
+              | 'read-write:domain'
+              | 'read-write:edge-config'
+              | 'read-write:otel-endpoint'
+              | 'read:monitoring'
             )[];
           };
           note: string;
@@ -9844,7 +9844,7 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          *
          * @example marketplace
          */
-        source?: "marketplace" | "deploy-button" | "oauth" | "external";
+        source?: 'marketplace' | 'deploy-button' | 'oauth' | 'external';
         removedLogDrainsAt?: number;
         removedProjectEnvsAt?: number;
         removedTokensAt?: number;
@@ -9861,7 +9861,7 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          * @example team_nLlpyC6RE1qxydlFKbrxDlud
          */
         teamId?: string | null;
-        type: "integration-configuration";
+        type: 'integration-configuration';
         /**
          * A timestamp that tells you when the configuration was updated.
          *
@@ -9884,42 +9884,42 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
         scopesQueue?: {
           scopes: {
             added: (
-              | "read:integration-configuration"
-              | "read-write:integration-configuration"
-              | "read:deployment"
-              | "read-write:deployment"
-              | "read-write:deployment-check"
-              | "read:project"
-              | "read-write:project"
-              | "read-write:project-env-vars"
-              | "read-write:global-project-env-vars"
-              | "read:team"
-              | "read:user"
-              | "read-write:log-drain"
-              | "read:domain"
-              | "read-write:domain"
-              | "read-write:edge-config"
-              | "read-write:otel-endpoint"
-              | "read:monitoring"
+              | 'read:integration-configuration'
+              | 'read-write:integration-configuration'
+              | 'read:deployment'
+              | 'read-write:deployment'
+              | 'read-write:deployment-check'
+              | 'read:project'
+              | 'read-write:project'
+              | 'read-write:project-env-vars'
+              | 'read-write:global-project-env-vars'
+              | 'read:team'
+              | 'read:user'
+              | 'read-write:log-drain'
+              | 'read:domain'
+              | 'read-write:domain'
+              | 'read-write:edge-config'
+              | 'read-write:otel-endpoint'
+              | 'read:monitoring'
             )[];
             upgraded: (
-              | "read:integration-configuration"
-              | "read-write:integration-configuration"
-              | "read:deployment"
-              | "read-write:deployment"
-              | "read-write:deployment-check"
-              | "read:project"
-              | "read-write:project"
-              | "read-write:project-env-vars"
-              | "read-write:global-project-env-vars"
-              | "read:team"
-              | "read:user"
-              | "read-write:log-drain"
-              | "read:domain"
-              | "read-write:domain"
-              | "read-write:edge-config"
-              | "read-write:otel-endpoint"
-              | "read:monitoring"
+              | 'read:integration-configuration'
+              | 'read-write:integration-configuration'
+              | 'read:deployment'
+              | 'read-write:deployment'
+              | 'read-write:deployment-check'
+              | 'read:project'
+              | 'read-write:project'
+              | 'read-write:project-env-vars'
+              | 'read-write:global-project-env-vars'
+              | 'read:team'
+              | 'read:user'
+              | 'read-write:log-drain'
+              | 'read:domain'
+              | 'read-write:domain'
+              | 'read-write:edge-config'
+              | 'read-write:otel-endpoint'
+              | 'read:monitoring'
             )[];
           };
           note: string;
@@ -9944,7 +9944,7 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
     {},
     GetConfigurationsQueryParams,
     {}
-  >({ url: "/v1/integrations/configurations", method: "get", ...variables, signal });
+  >({ url: '/v1/integrations/configurations', method: 'get', ...variables, signal });
 
 export type GetConfigurationPathParams = {
   /**
@@ -10022,7 +10022,7 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          *
          * @example marketplace
          */
-        source?: "marketplace" | "deploy-button" | "oauth" | "external";
+        source?: 'marketplace' | 'deploy-button' | 'oauth' | 'external';
         removedLogDrainsAt?: number;
         removedProjectEnvsAt?: number;
         removedTokensAt?: number;
@@ -10039,7 +10039,7 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          * @example team_nLlpyC6RE1qxydlFKbrxDlud
          */
         teamId?: string | null;
-        type: "integration-configuration";
+        type: 'integration-configuration';
         /**
          * A timestamp that tells you when the configuration was updated.
          *
@@ -10062,42 +10062,42 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
         scopesQueue?: {
           scopes: {
             added: (
-              | "read:integration-configuration"
-              | "read-write:integration-configuration"
-              | "read:deployment"
-              | "read-write:deployment"
-              | "read-write:deployment-check"
-              | "read:project"
-              | "read-write:project"
-              | "read-write:project-env-vars"
-              | "read-write:global-project-env-vars"
-              | "read:team"
-              | "read:user"
-              | "read-write:log-drain"
-              | "read:domain"
-              | "read-write:domain"
-              | "read-write:edge-config"
-              | "read-write:otel-endpoint"
-              | "read:monitoring"
+              | 'read:integration-configuration'
+              | 'read-write:integration-configuration'
+              | 'read:deployment'
+              | 'read-write:deployment'
+              | 'read-write:deployment-check'
+              | 'read:project'
+              | 'read-write:project'
+              | 'read-write:project-env-vars'
+              | 'read-write:global-project-env-vars'
+              | 'read:team'
+              | 'read:user'
+              | 'read-write:log-drain'
+              | 'read:domain'
+              | 'read-write:domain'
+              | 'read-write:edge-config'
+              | 'read-write:otel-endpoint'
+              | 'read:monitoring'
             )[];
             upgraded: (
-              | "read:integration-configuration"
-              | "read-write:integration-configuration"
-              | "read:deployment"
-              | "read-write:deployment"
-              | "read-write:deployment-check"
-              | "read:project"
-              | "read-write:project"
-              | "read-write:project-env-vars"
-              | "read-write:global-project-env-vars"
-              | "read:team"
-              | "read:user"
-              | "read-write:log-drain"
-              | "read:domain"
-              | "read-write:domain"
-              | "read-write:edge-config"
-              | "read-write:otel-endpoint"
-              | "read:monitoring"
+              | 'read:integration-configuration'
+              | 'read-write:integration-configuration'
+              | 'read:deployment'
+              | 'read-write:deployment'
+              | 'read-write:deployment-check'
+              | 'read:project'
+              | 'read-write:project'
+              | 'read-write:project-env-vars'
+              | 'read-write:global-project-env-vars'
+              | 'read:team'
+              | 'read:user'
+              | 'read-write:log-drain'
+              | 'read:domain'
+              | 'read-write:domain'
+              | 'read-write:edge-config'
+              | 'read-write:otel-endpoint'
+              | 'read:monitoring'
             )[];
           };
           note: string;
@@ -10123,7 +10123,7 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          *
          * @example all
          */
-        projectSelection: "selected" | "all";
+        projectSelection: 'selected' | 'all';
         /**
          * A timestamp that tells you when the configuration was created
          *
@@ -10208,7 +10208,7 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          *
          * @example marketplace
          */
-        source?: "marketplace" | "deploy-button" | "oauth" | "external";
+        source?: 'marketplace' | 'deploy-button' | 'oauth' | 'external';
         canConfigureOpenTelemetry?: boolean;
       },
     GetConfigurationError,
@@ -10216,7 +10216,7 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
     {},
     GetConfigurationQueryParams,
     GetConfigurationPathParams
-  >({ url: "/v1/integrations/configuration/{id}", method: "get", ...variables, signal });
+  >({ url: '/v1/integrations/configuration/{id}', method: 'get', ...variables, signal });
 
 export type DeleteConfigurationPathParams = {
   id: string;
@@ -10247,7 +10247,7 @@ export const deleteConfiguration = (variables: DeleteConfigurationVariables, sig
     {},
     DeleteConfigurationQueryParams,
     DeleteConfigurationPathParams
-  >({ url: "/v1/integrations/configuration/{id}", method: "delete", ...variables, signal });
+  >({ url: '/v1/integrations/configuration/{id}', method: 'delete', ...variables, signal });
 
 export type GetIntegrationLogDrainsQueryParams = {
   /**
@@ -10288,7 +10288,7 @@ export type GetIntegrationLogDrainsResponse = {
    *
    * @example json
    */
-  deliveryFormat?: "json" | "ndjson" | "syslog";
+  deliveryFormat?: 'json' | 'ndjson' | 'syslog';
   /**
    * The name of the log drain
    *
@@ -10323,13 +10323,13 @@ export type GetIntegrationLogDrainsResponse = {
    * @example build
    * @example edge
    */
-  sources?: ("static" | "lambda" | "build" | "edge" | "external" | "deployment")[];
+  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
   /**
    * Whether the log drain was created by an integration or by a user
    *
    * @example integration
    */
-  createdFrom?: "self-served" | "integration";
+  createdFrom?: 'self-served' | 'integration';
   /**
    * Construct a type with a set of properties K of type T
    *
@@ -10343,7 +10343,7 @@ export type GetIntegrationLogDrainsResponse = {
    *
    * @example production
    */
-  environment?: "production" | "preview";
+  environment?: 'production' | 'preview';
   /**
    * The branch regexp of log drain
    *
@@ -10367,7 +10367,7 @@ export const getIntegrationLogDrains = (variables: GetIntegrationLogDrainsVariab
     {},
     GetIntegrationLogDrainsQueryParams,
     {}
-  >({ url: "/v2/integrations/log-drains", method: "get", ...variables, signal });
+  >({ url: '/v2/integrations/log-drains', method: 'get', ...variables, signal });
 
 export type CreateLogDrainQueryParams = {
   /**
@@ -10408,7 +10408,7 @@ export type CreateLogDrainResponse = {
    *
    * @example json
    */
-  deliveryFormat?: "json" | "ndjson" | "syslog";
+  deliveryFormat?: 'json' | 'ndjson' | 'syslog';
   /**
    * The name of the log drain
    *
@@ -10443,13 +10443,13 @@ export type CreateLogDrainResponse = {
    * @example build
    * @example edge
    */
-  sources?: ("static" | "lambda" | "build" | "edge" | "external" | "deployment")[];
+  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
   /**
    * Whether the log drain was created by an integration or by a user
    *
    * @example integration
    */
-  createdFrom?: "self-served" | "integration";
+  createdFrom?: 'self-served' | 'integration';
   /**
    * Construct a type with a set of properties K of type T
    *
@@ -10463,7 +10463,7 @@ export type CreateLogDrainResponse = {
    *
    * @example production
    */
-  environment?: "preview" | "production";
+  environment?: 'preview' | 'production';
   /**
    * The branch regexp of log drain
    *
@@ -10499,7 +10499,7 @@ export type CreateLogDrainRequestBody = {
    *
    * @example json
    */
-  deliveryFormat?: "json" | "ndjson" | "syslog";
+  deliveryFormat?: 'json' | 'ndjson' | 'syslog';
   /**
    * The url where you will receive logs. The protocol must be `https://` or `http://` when type is `json` and `ndjson`, and `syslog+tls:` or `syslog:` when the type is `syslog`.
    *
@@ -10512,7 +10512,7 @@ export type CreateLogDrainRequestBody = {
    * @uniqueItems true
    * @minItems 1
    */
-  sources?: ("static" | "lambda" | "build" | "edge" | "external")[];
+  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external')[];
   /**
    * Headers to be sent together with the request
    */
@@ -10524,7 +10524,7 @@ export type CreateLogDrainRequestBody = {
    *
    * @example production
    */
-  environment?: "preview" | "production";
+  environment?: 'preview' | 'production';
   /**
    * The branch regexp of log drain
    *
@@ -10543,10 +10543,10 @@ export type CreateLogDrainVariables = {
  */
 export const createLogDrain = (variables: CreateLogDrainVariables, signal?: AbortSignal) =>
   fetch<CreateLogDrainResponse, CreateLogDrainError, CreateLogDrainRequestBody, {}, CreateLogDrainQueryParams, {}>({
-    url: "/v2/integrations/log-drains",
-    method: "post",
+    url: '/v2/integrations/log-drains',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type DeleteIntegrationLogDrainPathParams = {
@@ -10581,10 +10581,10 @@ export const deleteIntegrationLogDrain = (variables: DeleteIntegrationLogDrainVa
     {},
     DeleteIntegrationLogDrainQueryParams,
     DeleteIntegrationLogDrainPathParams
-  >({ url: "/v1/integrations/log-drains/{id}", method: "delete", ...variables, signal });
+  >({ url: '/v1/integrations/log-drains/{id}', method: 'delete', ...variables, signal });
 
 export type GitNamespacesQueryParams = {
-  provider?: "github" | "gitlab" | "bitbucket";
+  provider?: 'github' | 'gitlab' | 'bitbucket';
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
@@ -10610,16 +10610,16 @@ export type GitNamespacesVariables = {
  */
 export const gitNamespaces = (variables: GitNamespacesVariables, signal?: AbortSignal) =>
   fetch<GitNamespacesResponse, GitNamespacesError, undefined, {}, GitNamespacesQueryParams, {}>({
-    url: "/v1/integrations/git-namespaces",
-    method: "get",
+    url: '/v1/integrations/git-namespaces',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type SearchRepoQueryParams = {
   query?: string;
   namespaceId?: void | null;
-  provider?: "github" | "gitlab" | "bitbucket";
+  provider?: 'github' | 'gitlab' | 'bitbucket';
   installationId?: string;
   /**
    * The Team identifier or slug to perform the request on behalf of.
@@ -10631,7 +10631,7 @@ export type SearchRepoError = Fetcher.ErrorWrapper<undefined>;
 
 export type SearchRepoResponse = {
   gitAccount: {
-    provider: "github" | "gitlab" | "bitbucket";
+    provider: 'github' | 'gitlab' | 'bitbucket';
     namespaceId: string | number | null;
   };
   repos: {
@@ -10643,7 +10643,7 @@ export type SearchRepoResponse = {
     defaultBranch: string;
     url: string;
     updatedAt: number;
-    ownerType: "team" | "user";
+    ownerType: 'team' | 'user';
   }[];
 };
 
@@ -10656,10 +10656,10 @@ export type SearchRepoVariables = {
  */
 export const searchRepo = (variables: SearchRepoVariables, signal?: AbortSignal) =>
   fetch<SearchRepoResponse, SearchRepoError, undefined, {}, SearchRepoQueryParams, {}>({
-    url: "/v1/integrations/search-repo",
-    method: "get",
+    url: '/v1/integrations/search-repo',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type CreateWebhookQueryParams = {
@@ -10682,31 +10682,31 @@ export type CreateWebhookResponse = {
    * @example deployment.created
    */
   events: (
-    | "domain.created"
-    | "deployment.created"
-    | "deployment.error"
-    | "deployment.canceled"
-    | "deployment.succeeded"
-    | "deployment.ready"
-    | "deployment.check-rerequested"
-    | "integration-configuration.permission-upgraded"
-    | "integration-configuration.removed"
-    | "integration-configuration.scope-change-confirmed"
-    | "project.created"
-    | "project.removed"
-    | "deployment-checks-completed"
-    | "deployment-ready"
-    | "deployment-prepared"
-    | "deployment-error"
-    | "deployment-check-rerequested"
-    | "deployment-canceled"
-    | "project-created"
-    | "project-removed"
-    | "domain-created"
-    | "deployment"
-    | "integration-configuration-permission-updated"
-    | "integration-configuration-removed"
-    | "integration-configuration-scope-change-confirmed"
+    | 'domain.created'
+    | 'deployment.created'
+    | 'deployment.error'
+    | 'deployment.canceled'
+    | 'deployment.succeeded'
+    | 'deployment.ready'
+    | 'deployment.check-rerequested'
+    | 'integration-configuration.permission-upgraded'
+    | 'integration-configuration.removed'
+    | 'integration-configuration.scope-change-confirmed'
+    | 'project.created'
+    | 'project.removed'
+    | 'deployment-checks-completed'
+    | 'deployment-ready'
+    | 'deployment-prepared'
+    | 'deployment-error'
+    | 'deployment-check-rerequested'
+    | 'deployment-canceled'
+    | 'project-created'
+    | 'project-removed'
+    | 'domain-created'
+    | 'deployment'
+    | 'integration-configuration-permission-updated'
+    | 'integration-configuration-removed'
+    | 'integration-configuration-scope-change-confirmed'
   )[];
   /**
    * The webhook id
@@ -10799,10 +10799,10 @@ export type CreateWebhookVariables = {
  */
 export const createWebhook = (variables: CreateWebhookVariables, signal?: AbortSignal) =>
   fetch<CreateWebhookResponse, CreateWebhookError, CreateWebhookRequestBody, {}, CreateWebhookQueryParams, {}>({
-    url: "/v1/webhooks",
-    method: "post",
+    url: '/v1/webhooks',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetWebhooksQueryParams = {
@@ -10833,47 +10833,47 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
               id: string;
               name: string;
               framework?:
-                | "blitzjs"
-                | "nextjs"
-                | "gatsby"
-                | "remix"
-                | "astro"
-                | "hexo"
-                | "eleventy"
-                | "docusaurus-2"
-                | "docusaurus"
-                | "preact"
-                | "solidstart"
-                | "dojo"
-                | "ember"
-                | "vue"
-                | "scully"
-                | "ionic-angular"
-                | "angular"
-                | "polymer"
-                | "svelte"
-                | "sveltekit"
-                | "sveltekit-1"
-                | "ionic-react"
-                | "create-react-app"
-                | "gridsome"
-                | "umijs"
-                | "sapper"
-                | "saber"
-                | "stencil"
-                | "nuxtjs"
-                | "redwoodjs"
-                | "hugo"
-                | "jekyll"
-                | "brunch"
-                | "middleman"
-                | "zola"
-                | "hydrogen"
-                | "vite"
-                | "vitepress"
-                | "vuepress"
-                | "parcel"
-                | "sanity"
+                | 'blitzjs'
+                | 'nextjs'
+                | 'gatsby'
+                | 'remix'
+                | 'astro'
+                | 'hexo'
+                | 'eleventy'
+                | 'docusaurus-2'
+                | 'docusaurus'
+                | 'preact'
+                | 'solidstart'
+                | 'dojo'
+                | 'ember'
+                | 'vue'
+                | 'scully'
+                | 'ionic-angular'
+                | 'angular'
+                | 'polymer'
+                | 'svelte'
+                | 'sveltekit'
+                | 'sveltekit-1'
+                | 'ionic-react'
+                | 'create-react-app'
+                | 'gridsome'
+                | 'umijs'
+                | 'sapper'
+                | 'saber'
+                | 'stencil'
+                | 'nuxtjs'
+                | 'redwoodjs'
+                | 'hugo'
+                | 'jekyll'
+                | 'brunch'
+                | 'middleman'
+                | 'zola'
+                | 'hydrogen'
+                | 'vite'
+                | 'vitepress'
+                | 'vuepress'
+                | 'parcel'
+                | 'sanity'
                 | null;
               latestDeployment?: string;
             }[]
@@ -10884,31 +10884,31 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
          * @example deployment.created
          */
         events: (
-          | "domain.created"
-          | "deployment.created"
-          | "deployment.error"
-          | "deployment.canceled"
-          | "deployment.succeeded"
-          | "deployment.ready"
-          | "deployment.check-rerequested"
-          | "integration-configuration.permission-upgraded"
-          | "integration-configuration.removed"
-          | "integration-configuration.scope-change-confirmed"
-          | "project.created"
-          | "project.removed"
-          | "deployment-checks-completed"
-          | "deployment-ready"
-          | "deployment-prepared"
-          | "deployment-error"
-          | "deployment-check-rerequested"
-          | "deployment-canceled"
-          | "project-created"
-          | "project-removed"
-          | "domain-created"
-          | "deployment"
-          | "integration-configuration-permission-updated"
-          | "integration-configuration-removed"
-          | "integration-configuration-scope-change-confirmed"
+          | 'domain.created'
+          | 'deployment.created'
+          | 'deployment.error'
+          | 'deployment.canceled'
+          | 'deployment.succeeded'
+          | 'deployment.ready'
+          | 'deployment.check-rerequested'
+          | 'integration-configuration.permission-upgraded'
+          | 'integration-configuration.removed'
+          | 'integration-configuration.scope-change-confirmed'
+          | 'project.created'
+          | 'project.removed'
+          | 'deployment-checks-completed'
+          | 'deployment-ready'
+          | 'deployment-prepared'
+          | 'deployment-error'
+          | 'deployment-check-rerequested'
+          | 'deployment-canceled'
+          | 'project-created'
+          | 'project-removed'
+          | 'domain-created'
+          | 'deployment'
+          | 'integration-configuration-permission-updated'
+          | 'integration-configuration-removed'
+          | 'integration-configuration-scope-change-confirmed'
         )[];
         /**
          * The webhook id
@@ -10954,31 +10954,31 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
          * @example deployment.created
          */
         events: (
-          | "domain.created"
-          | "deployment.created"
-          | "deployment.error"
-          | "deployment.canceled"
-          | "deployment.succeeded"
-          | "deployment.ready"
-          | "deployment.check-rerequested"
-          | "integration-configuration.permission-upgraded"
-          | "integration-configuration.removed"
-          | "integration-configuration.scope-change-confirmed"
-          | "project.created"
-          | "project.removed"
-          | "deployment-checks-completed"
-          | "deployment-ready"
-          | "deployment-prepared"
-          | "deployment-error"
-          | "deployment-check-rerequested"
-          | "deployment-canceled"
-          | "project-created"
-          | "project-removed"
-          | "domain-created"
-          | "deployment"
-          | "integration-configuration-permission-updated"
-          | "integration-configuration-removed"
-          | "integration-configuration-scope-change-confirmed"
+          | 'domain.created'
+          | 'deployment.created'
+          | 'deployment.error'
+          | 'deployment.canceled'
+          | 'deployment.succeeded'
+          | 'deployment.ready'
+          | 'deployment.check-rerequested'
+          | 'integration-configuration.permission-upgraded'
+          | 'integration-configuration.removed'
+          | 'integration-configuration.scope-change-confirmed'
+          | 'project.created'
+          | 'project.removed'
+          | 'deployment-checks-completed'
+          | 'deployment-ready'
+          | 'deployment-prepared'
+          | 'deployment-error'
+          | 'deployment-check-rerequested'
+          | 'deployment-canceled'
+          | 'project-created'
+          | 'project-removed'
+          | 'domain-created'
+          | 'deployment'
+          | 'integration-configuration-permission-updated'
+          | 'integration-configuration-removed'
+          | 'integration-configuration-scope-change-confirmed'
         )[];
         /**
          * The webhook id
@@ -11022,7 +11022,7 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
     {},
     GetWebhooksQueryParams,
     {}
-  >({ url: "/v1/webhooks", method: "get", ...variables, signal });
+  >({ url: '/v1/webhooks', method: 'get', ...variables, signal });
 
 export type GetWebhookPathParams = {
   id: string;
@@ -11044,31 +11044,31 @@ export type GetWebhookResponse = {
    * @example deployment.created
    */
   events: (
-    | "domain.created"
-    | "deployment.created"
-    | "deployment.error"
-    | "deployment.canceled"
-    | "deployment.succeeded"
-    | "deployment.ready"
-    | "deployment.check-rerequested"
-    | "integration-configuration.permission-upgraded"
-    | "integration-configuration.removed"
-    | "integration-configuration.scope-change-confirmed"
-    | "project.created"
-    | "project.removed"
-    | "deployment-checks-completed"
-    | "deployment-ready"
-    | "deployment-prepared"
-    | "deployment-error"
-    | "deployment-check-rerequested"
-    | "deployment-canceled"
-    | "project-created"
-    | "project-removed"
-    | "domain-created"
-    | "deployment"
-    | "integration-configuration-permission-updated"
-    | "integration-configuration-removed"
-    | "integration-configuration-scope-change-confirmed"
+    | 'domain.created'
+    | 'deployment.created'
+    | 'deployment.error'
+    | 'deployment.canceled'
+    | 'deployment.succeeded'
+    | 'deployment.ready'
+    | 'deployment.check-rerequested'
+    | 'integration-configuration.permission-upgraded'
+    | 'integration-configuration.removed'
+    | 'integration-configuration.scope-change-confirmed'
+    | 'project.created'
+    | 'project.removed'
+    | 'deployment-checks-completed'
+    | 'deployment-ready'
+    | 'deployment-prepared'
+    | 'deployment-error'
+    | 'deployment-check-rerequested'
+    | 'deployment-canceled'
+    | 'project-created'
+    | 'project-removed'
+    | 'domain-created'
+    | 'deployment'
+    | 'integration-configuration-permission-updated'
+    | 'integration-configuration-removed'
+    | 'integration-configuration-scope-change-confirmed'
   )[];
   /**
    * The webhook id
@@ -11118,10 +11118,10 @@ export type GetWebhookVariables = {
  */
 export const getWebhook = (variables: GetWebhookVariables, signal?: AbortSignal) =>
   fetch<GetWebhookResponse, GetWebhookError, undefined, {}, GetWebhookQueryParams, GetWebhookPathParams>({
-    url: "/v1/webhooks/{id}",
-    method: "get",
+    url: '/v1/webhooks/{id}',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type DeleteWebhookPathParams = {
@@ -11147,10 +11147,10 @@ export type DeleteWebhookVariables = {
  */
 export const deleteWebhook = (variables: DeleteWebhookVariables, signal?: AbortSignal) =>
   fetch<undefined, DeleteWebhookError, undefined, {}, DeleteWebhookQueryParams, DeleteWebhookPathParams>({
-    url: "/v1/webhooks/{id}",
-    method: "delete",
+    url: '/v1/webhooks/{id}',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetConfigurableLogDrainPathParams = {
@@ -11172,7 +11172,7 @@ export type GetConfigurableLogDrainResponse = {
    *
    * @example production
    */
-  environment?: "preview" | "production";
+  environment?: 'preview' | 'production';
   /**
    * The branch to filter logs by
    *
@@ -11221,14 +11221,14 @@ export type GetConfigurableLogDrainResponse = {
    * @example lambda
    * @example build
    */
-  sources?: ("static" | "lambda" | "build" | "edge" | "external" | "deployment")[];
+  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
   /**
    * The log-drain defined delivery format
    *
    * @example json
    * @example ndjson
    */
-  deliveryFormat: "json" | "ndjson" | "syslog";
+  deliveryFormat: 'json' | 'ndjson' | 'syslog';
   /**
    * A string with the URL of the log-drain
    *
@@ -11253,7 +11253,7 @@ export const getConfigurableLogDrain = (variables: GetConfigurableLogDrainVariab
     {},
     GetConfigurableLogDrainQueryParams,
     GetConfigurableLogDrainPathParams
-  >({ url: "/v1/log-drains/{id}", method: "get", ...variables, signal });
+  >({ url: '/v1/log-drains/{id}', method: 'get', ...variables, signal });
 
 export type DeleteConfigurableLogDrainPathParams = {
   id: string;
@@ -11284,7 +11284,7 @@ export const deleteConfigurableLogDrain = (variables: DeleteConfigurableLogDrain
     {},
     DeleteConfigurableLogDrainQueryParams,
     DeleteConfigurableLogDrainPathParams
-  >({ url: "/v1/log-drains/{id}", method: "delete", ...variables, signal });
+  >({ url: '/v1/log-drains/{id}', method: 'delete', ...variables, signal });
 
 export type GetConfigurableLogDrainsQueryParams = {
   /**
@@ -11305,7 +11305,7 @@ export type GetConfigurableLogDrainsResponse = {
    *
    * @example production
    */
-  environment?: "preview" | "production";
+  environment?: 'preview' | 'production';
   /**
    * The branch to filter logs by
    *
@@ -11354,14 +11354,14 @@ export type GetConfigurableLogDrainsResponse = {
    * @example lambda
    * @example build
    */
-  sources?: ("static" | "lambda" | "build" | "edge" | "external" | "deployment")[];
+  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
   /**
    * The log-drain defined delivery format
    *
    * @example json
    * @example ndjson
    */
-  deliveryFormat: "json" | "ndjson" | "syslog";
+  deliveryFormat: 'json' | 'ndjson' | 'syslog';
   /**
    * A string with the URL of the log-drain
    *
@@ -11385,7 +11385,7 @@ export const getConfigurableLogDrains = (variables: GetConfigurableLogDrainsVari
     {},
     GetConfigurableLogDrainsQueryParams,
     {}
-  >({ url: "/v1/log-drains", method: "get", ...variables, signal });
+  >({ url: '/v1/log-drains', method: 'get', ...variables, signal });
 
 export type CreateConfigurableLogDrainQueryParams = {
   /**
@@ -11406,7 +11406,7 @@ export type CreateConfigurableLogDrainResponse = {
    *
    * @example production
    */
-  environment?: "preview" | "production";
+  environment?: 'preview' | 'production';
   /**
    * The branch to filter logs by
    *
@@ -11455,14 +11455,14 @@ export type CreateConfigurableLogDrainResponse = {
    * @example lambda
    * @example build
    */
-  sources?: ("static" | "lambda" | "build" | "edge" | "external" | "deployment")[];
+  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
   /**
    * The log-drain defined delivery format
    *
    * @example json
    * @example ndjson
    */
-  deliveryFormat: "json" | "ndjson" | "syslog";
+  deliveryFormat: 'json' | 'ndjson' | 'syslog';
   /**
    * A string with the URL of the log-drain
    *
@@ -11477,7 +11477,7 @@ export type CreateConfigurableLogDrainRequestBody = {
    *
    * @example json
    */
-  deliveryFormat: "json" | "ndjson";
+  deliveryFormat: 'json' | 'ndjson';
   /**
    * The log drain url
    *
@@ -11500,13 +11500,13 @@ export type CreateConfigurableLogDrainRequestBody = {
    * @uniqueItems true
    * @minItems 1
    */
-  sources: ("static" | "lambda" | "build" | "edge" | "external")[];
+  sources: ('static' | 'lambda' | 'build' | 'edge' | 'external')[];
   /**
    * The environment of log drain
    *
    * @example production
    */
-  environment?: "preview" | "production";
+  environment?: 'preview' | 'production';
   /**
    * The branch regexp of log drain
    *
@@ -11531,7 +11531,7 @@ export const createConfigurableLogDrain = (variables: CreateConfigurableLogDrain
     {},
     CreateConfigurableLogDrainQueryParams,
     {}
-  >({ url: "/v1/log-drains", method: "post", ...variables, signal });
+  >({ url: '/v1/log-drains', method: 'post', ...variables, signal });
 
 export type GetTeamPathParams = {
   /**
@@ -11556,10 +11556,10 @@ export type GetTeamVariables = {
  */
 export const getTeam = (variables: GetTeamVariables, signal?: AbortSignal) =>
   fetch<Schemas.Team, GetTeamError, undefined, {}, GetTeamQueryParams, GetTeamPathParams>({
-    url: "/v2/teams/{teamId}",
-    method: "get",
+    url: '/v2/teams/{teamId}',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type PatchTeamPathParams = {
@@ -11618,7 +11618,7 @@ export type PatchTeamRequestBody = {
      */
     enforced?: boolean;
     roles?: {
-      [key: string]: "OWNER" | "MEMBER" | "VIEWER" | "DEVELOPER" | "BILLING";
+      [key: string]: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING';
     };
   };
   /**
@@ -11668,10 +11668,10 @@ export type PatchTeamVariables = {
  */
 export const patchTeam = (variables: PatchTeamVariables, signal?: AbortSignal) =>
   fetch<Schemas.Team, PatchTeamError, PatchTeamRequestBody, {}, {}, PatchTeamPathParams>({
-    url: "/v2/teams/{teamId}",
-    method: "patch",
+    url: '/v2/teams/{teamId}',
+    method: 'patch',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetTeamsQueryParams = {
@@ -11711,10 +11711,10 @@ export type GetTeamsVariables = {
  */
 export const getTeams = (variables: GetTeamsVariables, signal?: AbortSignal) =>
   fetch<GetTeamsResponse, GetTeamsError, undefined, {}, GetTeamsQueryParams, {}>({
-    url: "/v2/teams",
-    method: "get",
+    url: '/v2/teams',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type CreateTeamError = Fetcher.ErrorWrapper<undefined>;
@@ -11754,10 +11754,10 @@ export type CreateTeamVariables = {
  */
 export const createTeam = (variables: CreateTeamVariables, signal?: AbortSignal) =>
   fetch<CreateTeamResponse, CreateTeamError, CreateTeamRequestBody, {}, {}, {}>({
-    url: "/v1/teams",
-    method: "post",
+    url: '/v1/teams',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type DeleteTeamPathParams = {
@@ -11804,10 +11804,10 @@ export type DeleteTeamVariables = {
  */
 export const deleteTeam = (variables: DeleteTeamVariables, signal?: AbortSignal) =>
   fetch<DeleteTeamResponse, DeleteTeamError, DeleteTeamRequestBody, {}, {}, DeleteTeamPathParams>({
-    url: "/v1/teams/{teamId}",
-    method: "delete",
+    url: '/v1/teams/{teamId}',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type DeleteTeamInviteCodePathParams = {
@@ -11837,10 +11837,10 @@ export type DeleteTeamInviteCodeVariables = {
  */
 export const deleteTeamInviteCode = (variables: DeleteTeamInviteCodeVariables, signal?: AbortSignal) =>
   fetch<DeleteTeamInviteCodeResponse, DeleteTeamInviteCodeError, undefined, {}, {}, DeleteTeamInviteCodePathParams>({
-    url: "/v1/teams/{teamId}/invites/{inviteId}",
-    method: "delete",
+    url: '/v1/teams/{teamId}/invites/{inviteId}',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetTeamMembersQueryParams = {
@@ -11871,7 +11871,7 @@ export type GetTeamMembersQueryParams = {
    *
    * @example OWNER
    */
-  role?: "OWNER" | "MEMBER" | "DEVELOPER" | "VIEWER";
+  role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'VIEWER';
   /**
    * Exclude members who belong to the specified project.
    */
@@ -11932,7 +11932,7 @@ export type GetTeamMembersResponse = {
      *
      * @example OWNER
      */
-    role: "MEMBER" | "OWNER" | "VIEWER" | "DEVELOPER" | "BILLING";
+    role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING';
     /**
      * The ID of this user.
      *
@@ -11968,17 +11968,17 @@ export type GetTeamMembersResponse = {
      */
     joinedFrom?: {
       origin:
-        | "import"
-        | "gitlab"
-        | "bitbucket"
-        | "github"
-        | "mail"
-        | "link"
-        | "teams"
-        | "saml"
-        | "dsync"
-        | "feedback"
-        | "organization-teams";
+        | 'import'
+        | 'gitlab'
+        | 'bitbucket'
+        | 'github'
+        | 'mail'
+        | 'link'
+        | 'teams'
+        | 'saml'
+        | 'dsync'
+        | 'feedback'
+        | 'organization-teams';
       commitId?: string;
       repoId?: string;
       repoPath?: string;
@@ -11994,7 +11994,7 @@ export type GetTeamMembersResponse = {
   emailInviteCodes?: {
     id: string;
     email?: string;
-    role?: "MEMBER" | "OWNER" | "VIEWER" | "DEVELOPER" | "BILLING";
+    role?: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING';
     isDSyncUser: boolean;
     createdAt?: number;
   }[];
@@ -12030,10 +12030,10 @@ export type GetTeamMembersVariables = {
  */
 export const getTeamMembers = (variables: GetTeamMembersVariables, signal?: AbortSignal) =>
   fetch<GetTeamMembersResponse, GetTeamMembersError, undefined, {}, GetTeamMembersQueryParams, {}>({
-    url: "/v2/teams/{teamId}/members",
-    method: "get",
+    url: '/v2/teams/{teamId}/members',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type InviteUserToTeamError = Fetcher.ErrorWrapper<undefined>;
@@ -12091,10 +12091,10 @@ export type InviteUserToTeamVariables = {
  */
 export const inviteUserToTeam = (variables: InviteUserToTeamVariables, signal?: AbortSignal) =>
   fetch<InviteUserToTeamResponse, InviteUserToTeamError, InviteUserToTeamRequestBody, {}, {}, {}>({
-    url: "/v1/teams/{teamId}/members",
-    method: "post",
+    url: '/v1/teams/{teamId}/members',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type RequestAccessToTeamError = Fetcher.ErrorWrapper<undefined>;
@@ -12105,17 +12105,17 @@ export type RequestAccessToTeamResponse = {
   confirmed?: boolean;
   joinedFrom?: {
     origin:
-      | "import"
-      | "teams"
-      | "github"
-      | "gitlab"
-      | "bitbucket"
-      | "feedback"
-      | "organization-teams"
-      | "mail"
-      | "link"
-      | "saml"
-      | "dsync";
+      | 'import'
+      | 'teams'
+      | 'github'
+      | 'gitlab'
+      | 'bitbucket'
+      | 'feedback'
+      | 'organization-teams'
+      | 'mail'
+      | 'link'
+      | 'saml'
+      | 'dsync';
     commitId?: string;
     repoId?: string;
     repoPath?: string;
@@ -12146,7 +12146,7 @@ export type RequestAccessToTeamRequestBody = {
      *
      * @example github
      */
-    origin: "import" | "teams" | "github" | "gitlab" | "bitbucket" | "feedback" | "organization-teams";
+    origin: 'import' | 'teams' | 'github' | 'gitlab' | 'bitbucket' | 'feedback' | 'organization-teams';
     /**
      * The commit sha if the origin is a git provider.
      *
@@ -12189,10 +12189,10 @@ export type RequestAccessToTeamVariables = {
  */
 export const requestAccessToTeam = (variables: RequestAccessToTeamVariables, signal?: AbortSignal) =>
   fetch<RequestAccessToTeamResponse, RequestAccessToTeamError, RequestAccessToTeamRequestBody, {}, {}, {}>({
-    url: "/v1/teams/{teamId}/request",
-    method: "post",
+    url: '/v1/teams/{teamId}/request',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetTeamAccessRequestPathParams = {
@@ -12225,17 +12225,17 @@ export type GetTeamAccessRequestResponse = {
    */
   joinedFrom: {
     origin:
-      | "import"
-      | "mail"
-      | "link"
-      | "teams"
-      | "github"
-      | "gitlab"
-      | "bitbucket"
-      | "saml"
-      | "dsync"
-      | "feedback"
-      | "organization-teams";
+      | 'import'
+      | 'mail'
+      | 'link'
+      | 'teams'
+      | 'github'
+      | 'gitlab'
+      | 'bitbucket'
+      | 'saml'
+      | 'dsync'
+      | 'feedback'
+      | 'organization-teams';
     commitId?: string;
     repoId?: string;
     repoPath?: string;
@@ -12282,10 +12282,10 @@ export type GetTeamAccessRequestVariables = {
  */
 export const getTeamAccessRequest = (variables: GetTeamAccessRequestVariables, signal?: AbortSignal) =>
   fetch<GetTeamAccessRequestResponse, GetTeamAccessRequestError, undefined, {}, {}, GetTeamAccessRequestPathParams>({
-    url: "/v1/teams/{teamId}/request/{userId}",
-    method: "get",
+    url: '/v1/teams/{teamId}/request/{userId}',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type JoinTeamError = Fetcher.ErrorWrapper<undefined>;
@@ -12341,10 +12341,10 @@ export type JoinTeamVariables = {
  */
 export const joinTeam = (variables: JoinTeamVariables, signal?: AbortSignal) =>
   fetch<JoinTeamResponse, JoinTeamError, JoinTeamRequestBody, {}, {}, {}>({
-    url: "/v1/teams/{teamId}/members/teams/join",
-    method: "post",
+    url: '/v1/teams/{teamId}/members/teams/join',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type UpdateTeamMemberPathParams = {
@@ -12402,7 +12402,7 @@ export const updateTeamMember = (variables: UpdateTeamMemberVariables, signal?: 
     {},
     {},
     UpdateTeamMemberPathParams
-  >({ url: "/v1/teams/{teamId}/members/{uid}", method: "patch", ...variables, signal });
+  >({ url: '/v1/teams/{teamId}/members/{uid}', method: 'patch', ...variables, signal });
 
 export type RemoveTeamMemberPathParams = {
   /**
@@ -12431,10 +12431,10 @@ export type RemoveTeamMemberVariables = {
  */
 export const removeTeamMember = (variables: RemoveTeamMemberVariables, signal?: AbortSignal) =>
   fetch<RemoveTeamMemberResponse, RemoveTeamMemberError, undefined, {}, {}, RemoveTeamMemberPathParams>({
-    url: "/v1/teams/{teamId}/members/{uid}",
-    method: "delete",
+    url: '/v1/teams/{teamId}/members/{uid}',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type ListDeploymentFilesPathParams = {
@@ -12471,7 +12471,7 @@ export const listDeploymentFiles = (variables: ListDeploymentFilesVariables, sig
     {},
     ListDeploymentFilesQueryParams,
     ListDeploymentFilesPathParams
-  >({ url: "/v6/deployments/{id}/files", method: "get", ...variables, signal });
+  >({ url: '/v6/deployments/{id}/files', method: 'get', ...variables, signal });
 
 export type GetDeploymentFileContentsPathParams = {
   /**
@@ -12509,7 +12509,7 @@ export const getDeploymentFileContents = (variables: GetDeploymentFileContentsVa
     {},
     GetDeploymentFileContentsQueryParams,
     GetDeploymentFileContentsPathParams
-  >({ url: "/v6/deployments/{id}/files/{fileId}", method: "get", ...variables, signal });
+  >({ url: '/v6/deployments/{id}/files/{fileId}', method: 'get', ...variables, signal });
 
 export type ListDeploymentBuildsPathParams = {
   /**
@@ -12553,15 +12553,15 @@ export type ListDeploymentBuildsResponse = {
      * @example READY
      */
     readyState:
-      | "BUILDING"
-      | "ERROR"
-      | "INITIALIZING"
-      | "QUEUED"
-      | "READY"
-      | "CANCELED"
-      | "UPLOADING"
-      | "DEPLOYING"
-      | "ARCHIVED";
+      | 'BUILDING'
+      | 'ERROR'
+      | 'INITIALIZING'
+      | 'QUEUED'
+      | 'READY'
+      | 'CANCELED'
+      | 'UPLOADING'
+      | 'DEPLOYING'
+      | 'ARCHIVED';
     /**
      * The time at which the Build state was last modified
      *
@@ -12616,7 +12616,7 @@ export type ListDeploymentBuildsResponse = {
       /**
        * The type of the output
        */
-      type?: "lambda" | "file" | "edge";
+      type?: 'lambda' | 'file' | 'edge';
       /**
        * The absolute path of the file or Serverless Function
        */
@@ -12679,7 +12679,7 @@ export const listDeploymentBuilds = (variables: ListDeploymentBuildsVariables, s
     {},
     ListDeploymentBuildsQueryParams,
     ListDeploymentBuildsPathParams
-  >({ url: "/v11/deployments/{deploymentId}/builds", method: "get", ...variables, signal });
+  >({ url: '/v11/deployments/{deploymentId}/builds', method: 'get', ...variables, signal });
 
 export type CreateCheckPathParams = {
   /**
@@ -12705,9 +12705,9 @@ export type CreateCheckResponse = {
   domain: string;
   id: string;
   name: string;
-  recordType: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS";
+  recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
   ttl?: number;
-  type: "record" | "record-sys";
+  type: 'record' | 'record-sys';
   value: string;
 };
 
@@ -12769,7 +12769,7 @@ export const createCheck = (variables: CreateCheckVariables, signal?: AbortSigna
     {},
     CreateCheckQueryParams,
     CreateCheckPathParams
-  >({ url: "/v1/deployments/{deploymentId}/checks", method: "post", ...variables, signal });
+  >({ url: '/v1/deployments/{deploymentId}/checks', method: 'post', ...variables, signal });
 
 export type GetAllChecksPathParams = {
   /**
@@ -12792,7 +12792,7 @@ export type GetAllChecksError = Fetcher.ErrorWrapper<undefined>;
 export type GetAllChecksResponse = {
   checks: {
     completedAt?: number;
-    conclusion?: "canceled" | "failed" | "neutral" | "succeeded" | "skipped" | "stale";
+    conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped' | 'stale';
     createdAt: number;
     detailsUrl?: string;
     id: string;
@@ -12803,34 +12803,34 @@ export type GetAllChecksResponse = {
         FCP: {
           value: number | null;
           previousValue?: number;
-          source: "web-vitals";
+          source: 'web-vitals';
         };
         LCP: {
           value: number | null;
           previousValue?: number;
-          source: "web-vitals";
+          source: 'web-vitals';
         };
         CLS: {
           value: number | null;
           previousValue?: number;
-          source: "web-vitals";
+          source: 'web-vitals';
         };
         TBT: {
           value: number | null;
           previousValue?: number;
-          source: "web-vitals";
+          source: 'web-vitals';
         };
         virtualExperienceScore?: {
           value: number | null;
           previousValue?: number;
-          source: "web-vitals";
+          source: 'web-vitals';
         };
       };
     };
     path?: string;
     rerequestable: boolean;
     startedAt?: number;
-    status: "registered" | "running" | "completed";
+    status: 'registered' | 'running' | 'completed';
     updatedAt: number;
   }[];
 };
@@ -12845,10 +12845,10 @@ export type GetAllChecksVariables = {
  */
 export const getAllChecks = (variables: GetAllChecksVariables, signal?: AbortSignal) =>
   fetch<GetAllChecksResponse, GetAllChecksError, undefined, {}, GetAllChecksQueryParams, GetAllChecksPathParams>({
-    url: "/v1/deployments/{deploymentId}/checks",
-    method: "get",
+    url: '/v1/deployments/{deploymentId}/checks',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetCheckPathParams = {
@@ -12881,9 +12881,9 @@ export type GetCheckResponse = {
   domain: string;
   id: string;
   name: string;
-  recordType: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS";
+  recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
   ttl?: number;
-  type: "record" | "record-sys";
+  type: 'record' | 'record-sys';
   value: string;
 };
 
@@ -12897,10 +12897,10 @@ export type GetCheckVariables = {
  */
 export const getCheck = (variables: GetCheckVariables, signal?: AbortSignal) =>
   fetch<GetCheckResponse, GetCheckError, undefined, {}, GetCheckQueryParams, GetCheckPathParams>({
-    url: "/v1/deployments/{deploymentId}/checks/{checkId}",
-    method: "get",
+    url: '/v1/deployments/{deploymentId}/checks/{checkId}',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type UpdateCheckPathParams = {
@@ -12933,9 +12933,9 @@ export type UpdateCheckResponse = {
   domain: string;
   id: string;
   name: string;
-  recordType: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS";
+  recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
   ttl?: number;
-  type: "record" | "record-sys";
+  type: 'record' | 'record-sys';
   value: string;
 };
 
@@ -12957,11 +12957,11 @@ export type UpdateCheckRequestBody = {
   /**
    * The current status of the check
    */
-  status?: "running" | "completed";
+  status?: 'running' | 'completed';
   /**
    * The result of the check being run
    */
-  conclusion?: "canceled" | "failed" | "neutral" | "succeeded" | "skipped";
+  conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped';
   /**
    * A URL a user may visit to see more information about the check
    *
@@ -12989,7 +12989,7 @@ export type UpdateCheckRequestBody = {
          * @example 900
          */
         previousValue?: number;
-        source: "web-vitals";
+        source: 'web-vitals';
       };
       LCP: {
         /**
@@ -13004,7 +13004,7 @@ export type UpdateCheckRequestBody = {
          * @example 1000
          */
         previousValue?: number;
-        source: "web-vitals";
+        source: 'web-vitals';
       };
       CLS: {
         /**
@@ -13019,7 +13019,7 @@ export type UpdateCheckRequestBody = {
          * @example 2
          */
         previousValue?: number;
-        source: "web-vitals";
+        source: 'web-vitals';
       };
       TBT: {
         /**
@@ -13034,7 +13034,7 @@ export type UpdateCheckRequestBody = {
          * @example 3500
          */
         previousValue?: number;
-        source: "web-vitals";
+        source: 'web-vitals';
       };
       virtualExperienceScore?: {
         /**
@@ -13053,7 +13053,7 @@ export type UpdateCheckRequestBody = {
          * @example 35
          */
         previousValue?: number;
-        source: "web-vitals";
+        source: 'web-vitals';
       };
     };
   };
@@ -13082,7 +13082,7 @@ export const updateCheck = (variables: UpdateCheckVariables, signal?: AbortSigna
     {},
     UpdateCheckQueryParams,
     UpdateCheckPathParams
-  >({ url: "/v1/deployments/{deploymentId}/checks/{checkId}", method: "patch", ...variables, signal });
+  >({ url: '/v1/deployments/{deploymentId}/checks/{checkId}', method: 'patch', ...variables, signal });
 
 export type RerequestCheckPathParams = {
   /**
@@ -13118,10 +13118,10 @@ export type RerequestCheckVariables = {
  */
 export const rerequestCheck = (variables: RerequestCheckVariables, signal?: AbortSignal) =>
   fetch<Record<string, any>, RerequestCheckError, undefined, {}, RerequestCheckQueryParams, RerequestCheckPathParams>({
-    url: "/v1/deployments/{deploymentId}/checks/{checkId}/rerequest",
-    method: "post",
+    url: '/v1/deployments/{deploymentId}/checks/{checkId}/rerequest',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetEdgeConfigsQueryParams = {
@@ -13139,9 +13139,9 @@ export type GetEdgeConfigsResponse = {
   domain?: string;
   id?: string;
   name?: string;
-  recordType?: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS";
+  recordType?: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
   ttl?: number;
-  type?: "record" | "record-sys";
+  type?: 'record' | 'record-sys';
   value?: string;
   sizeInBytes: number;
   itemCount: number;
@@ -13156,10 +13156,10 @@ export type GetEdgeConfigsVariables = {
  */
 export const getEdgeConfigs = (variables: GetEdgeConfigsVariables, signal?: AbortSignal) =>
   fetch<GetEdgeConfigsResponse, GetEdgeConfigsError, undefined, {}, GetEdgeConfigsQueryParams, {}>({
-    url: "/v1/edge-config",
-    method: "get",
+    url: '/v1/edge-config',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type CreateEdgeConfigQueryParams = {
@@ -13177,9 +13177,9 @@ export type CreateEdgeConfigResponse = {
   domain?: string;
   id?: string;
   name?: string;
-  recordType?: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS";
+  recordType?: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
   ttl?: number;
-  type?: "record" | "record-sys";
+  type?: 'record' | 'record-sys';
   value?: string;
   sizeInBytes: number;
   itemCount: number;
@@ -13214,7 +13214,7 @@ export const createEdgeConfig = (variables: CreateEdgeConfigVariables, signal?: 
     {},
     CreateEdgeConfigQueryParams,
     {}
-  >({ url: "/v1/edge-config", method: "post", ...variables, signal });
+  >({ url: '/v1/edge-config', method: 'post', ...variables, signal });
 
 export type GetEdgeConfigPathParams = {
   edgeConfigId: string;
@@ -13235,9 +13235,9 @@ export type GetEdgeConfigResponse = {
   domain?: string;
   id?: string;
   name?: string;
-  recordType?: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS";
+  recordType?: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
   ttl?: number;
-  type?: "record" | "record-sys";
+  type?: 'record' | 'record-sys';
   value?: string;
   sizeInBytes: number;
   itemCount: number;
@@ -13253,10 +13253,10 @@ export type GetEdgeConfigVariables = {
  */
 export const getEdgeConfig = (variables: GetEdgeConfigVariables, signal?: AbortSignal) =>
   fetch<GetEdgeConfigResponse, GetEdgeConfigError, undefined, {}, GetEdgeConfigQueryParams, GetEdgeConfigPathParams>({
-    url: "/v1/edge-config/{edgeConfigId}",
-    method: "get",
+    url: '/v1/edge-config/{edgeConfigId}',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type UpdateEdgeConfigPathParams = {
@@ -13278,9 +13278,9 @@ export type UpdateEdgeConfigResponse = {
   domain?: string;
   id?: string;
   name?: string;
-  recordType?: "A" | "AAAA" | "ALIAS" | "CAA" | "CNAME" | "MX" | "SRV" | "TXT" | "NS";
+  recordType?: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
   ttl?: number;
-  type?: "record" | "record-sys";
+  type?: 'record' | 'record-sys';
   value?: string;
   sizeInBytes: number;
   itemCount: number;
@@ -13311,7 +13311,7 @@ export const updateEdgeConfig = (variables: UpdateEdgeConfigVariables, signal?: 
     {},
     UpdateEdgeConfigQueryParams,
     UpdateEdgeConfigPathParams
-  >({ url: "/v1/edge-config/{edgeConfigId}", method: "put", ...variables, signal });
+  >({ url: '/v1/edge-config/{edgeConfigId}', method: 'put', ...variables, signal });
 
 export type DeleteEdgeConfigPathParams = {
   edgeConfigId: string;
@@ -13336,10 +13336,10 @@ export type DeleteEdgeConfigVariables = {
  */
 export const deleteEdgeConfig = (variables: DeleteEdgeConfigVariables, signal?: AbortSignal) =>
   fetch<undefined, DeleteEdgeConfigError, undefined, {}, DeleteEdgeConfigQueryParams, DeleteEdgeConfigPathParams>({
-    url: "/v1/edge-config/{edgeConfigId}",
-    method: "delete",
+    url: '/v1/edge-config/{edgeConfigId}',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetEdgeConfigItemsPathParams = {
@@ -13371,7 +13371,7 @@ export const getEdgeConfigItems = (variables: GetEdgeConfigItemsVariables, signa
     {},
     GetEdgeConfigItemsQueryParams,
     GetEdgeConfigItemsPathParams
-  >({ url: "/v1/edge-config/{edgeConfigId}/items", method: "get", ...variables, signal });
+  >({ url: '/v1/edge-config/{edgeConfigId}/items', method: 'get', ...variables, signal });
 
 export type PatchtEdgeConfigItemsPathParams = {
   edgeConfigId: string;
@@ -13431,7 +13431,7 @@ export const patchtEdgeConfigItems = (variables: PatchtEdgeConfigItemsVariables,
     {},
     PatchtEdgeConfigItemsQueryParams,
     PatchtEdgeConfigItemsPathParams
-  >({ url: "/v1/edge-config/{edgeConfigId}/items", method: "patch", ...variables, signal });
+  >({ url: '/v1/edge-config/{edgeConfigId}/items', method: 'patch', ...variables, signal });
 
 export type GetEdgeConfigItemPathParams = {
   edgeConfigId: string;
@@ -13463,7 +13463,7 @@ export const getEdgeConfigItem = (variables: GetEdgeConfigItemVariables, signal?
     {},
     GetEdgeConfigItemQueryParams,
     GetEdgeConfigItemPathParams
-  >({ url: "/v1/edge-config/{edgeConfigId}/item/{edgeConfigItemKey}", method: "get", ...variables, signal });
+  >({ url: '/v1/edge-config/{edgeConfigId}/item/{edgeConfigItemKey}', method: 'get', ...variables, signal });
 
 export type GetEdgeConfigTokensPathParams = {
   edgeConfigId: string;
@@ -13494,7 +13494,7 @@ export const getEdgeConfigTokens = (variables: GetEdgeConfigTokensVariables, sig
     {},
     GetEdgeConfigTokensQueryParams,
     GetEdgeConfigTokensPathParams
-  >({ url: "/v1/edge-config/{edgeConfigId}/tokens", method: "get", ...variables, signal });
+  >({ url: '/v1/edge-config/{edgeConfigId}/tokens', method: 'get', ...variables, signal });
 
 export type DeleteEdgeConfigTokensPathParams = {
   edgeConfigId: string;
@@ -13530,7 +13530,7 @@ export const deleteEdgeConfigTokens = (variables: DeleteEdgeConfigTokensVariable
     {},
     DeleteEdgeConfigTokensQueryParams,
     DeleteEdgeConfigTokensPathParams
-  >({ url: "/v1/edge-config/{edgeConfigId}/tokens", method: "delete", ...variables, signal });
+  >({ url: '/v1/edge-config/{edgeConfigId}/tokens', method: 'delete', ...variables, signal });
 
 export type GetEdgeConfigTokenPathParams = {
   edgeConfigId: string;
@@ -13562,7 +13562,7 @@ export const getEdgeConfigToken = (variables: GetEdgeConfigTokenVariables, signa
     {},
     GetEdgeConfigTokenQueryParams,
     GetEdgeConfigTokenPathParams
-  >({ url: "/v1/edge-config/{edgeConfigId}/token/{token}", method: "get", ...variables, signal });
+  >({ url: '/v1/edge-config/{edgeConfigId}/token/{token}', method: 'get', ...variables, signal });
 
 export type CreateEdgeConfigTokenPathParams = {
   edgeConfigId: string;
@@ -13606,7 +13606,7 @@ export const createEdgeConfigToken = (variables: CreateEdgeConfigTokenVariables,
     {},
     CreateEdgeConfigTokenQueryParams,
     CreateEdgeConfigTokenPathParams
-  >({ url: "/v1/edge-config/{edgeConfigId}/token", method: "post", ...variables, signal });
+  >({ url: '/v1/edge-config/{edgeConfigId}/token', method: 'post', ...variables, signal });
 
 export const operationsByTag = {
   artifacts: { recordEvents, status, uploadArtifact, downloadArtifact, artifactQuery },
@@ -13620,7 +13620,7 @@ export const operationsByTag = {
     getDeployments,
     listDeploymentFiles,
     getDeploymentFileContents,
-    listDeploymentBuilds,
+    listDeploymentBuilds
   },
   certs: { getCertById, removeCert, issueCert, uploadCert },
   user: { listUserEvents, getAuthUser, requestDelete },
@@ -13635,7 +13635,7 @@ export const operationsByTag = {
     getDomain,
     getDomains,
     createOrTransferDomain,
-    deleteDomain,
+    deleteDomain
   },
   secrets: { getSecrets, createSecret, renameSecret, getSecret, deleteSecret },
   projects: {
@@ -13654,7 +13654,7 @@ export const operationsByTag = {
     getProjectEnv,
     createProjectEnv,
     removeProjectEnv,
-    editProjectEnv,
+    editProjectEnv
   },
   integrations: { getConfigurations, getConfiguration, deleteConfiguration, gitNamespaces, searchRepo },
   logDrains: {
@@ -13664,7 +13664,7 @@ export const operationsByTag = {
     getConfigurableLogDrain,
     deleteConfigurableLogDrain,
     getConfigurableLogDrains,
-    createConfigurableLogDrain,
+    createConfigurableLogDrain
   },
   webhooks: { createWebhook, getWebhooks, getWebhook, deleteWebhook },
   teams: {
@@ -13680,7 +13680,7 @@ export const operationsByTag = {
     getTeamAccessRequest,
     joinTeam,
     updateTeamMember,
-    removeTeamMember,
+    removeTeamMember
   },
   checks: { createCheck, getAllChecks, getCheck, updateCheck, rerequestCheck },
   edgeConfig: {
@@ -13695,6 +13695,6 @@ export const operationsByTag = {
     getEdgeConfigTokens,
     deleteEdgeConfigTokens,
     getEdgeConfigToken,
-    createEdgeConfigToken,
-  },
+    createEdgeConfigToken
+  }
 };
