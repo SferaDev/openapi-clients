@@ -4,7 +4,7 @@
     "generate": {
       "dependsOn": ["^generate"],
       "inputs": ["openapi-codegen.config.ts"],
-      "outputs": ["src/**"]
+      "outputs": []
     },
     "tsc": {
       "dependsOn": ["^tsc"],
