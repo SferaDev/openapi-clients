@@ -1,7 +1,7 @@
-import { operationsByTag } from "./api/components";
-import { FetcherExtraProps } from "./api/fetcher";
-import { FetchImpl } from "./utils/fetch";
-import { RequiredKeys } from "./utils/types";
+import { operationsByTag } from './api/components';
+import { FetcherExtraProps } from './api/fetcher';
+import { FetchImpl } from './utils/fetch';
+import { RequiredKeys } from './utils/types';
 
 export interface VercelApiOptions {
   token: string;
@@ -28,10 +28,10 @@ export class VercelApi {
 
   constructor(options: VercelApiOptions) {
     this.#token = options.token;
-    if (!options.token) throw new Error("Token is required");
+    if (!options.token) throw new Error('Token is required');
 
-    this.#fetch = options.fetch || fetch;
-    if (!this.#fetch) throw new Error("Fetch is required");
+    this.#fetch = options.fetch || (fetch as FetchImpl);
+    if (!this.#fetch) throw new Error('Fetch is required');
   }
 
   get api() {
@@ -59,10 +59,10 @@ export class VercelApi {
                 return (params: Record<string, unknown>) => {
                   return method({ ...params, token, fetchImpl });
                 };
-              },
+              }
             }
           );
-        },
+        }
       }
     ) as ApiProxy;
   }
