@@ -3,6 +3,7 @@ import { FetchImpl } from '../utils/fetch';
 export type FetcherExtraProps = {
   token: string;
   fetchImpl: FetchImpl;
+  basePath: string;
 };
 
 const baseUrl = 'https://api.netlify.com';
@@ -35,7 +36,8 @@ export async function fetch<
   queryParams,
   signal,
   token,
-  fetchImpl
+  fetchImpl,
+  basePath
 }: FetcherOptions<TBody, THeaders, TQueryParams, TPathParams>): Promise<TData> {
   try {
     const requestHeaders: HeadersInit = {
@@ -54,7 +56,7 @@ export async function fetch<
       delete requestHeaders['Content-Type'];
     }
 
-    const response = await fetchImpl(`${baseUrl}${resolveUrl(url, queryParams, pathParams)}`, {
+    const response = await fetchImpl(`${baseUrl}${basePath}${resolveUrl(url, queryParams, pathParams)}`, {
       signal,
       method: method.toUpperCase(),
       body: body ? (body instanceof FormData ? body : JSON.stringify(body)) : undefined,

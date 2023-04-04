@@ -6,6 +6,7 @@ import { RequiredKeys } from './utils/types';
 export interface NetlifyApiOptions {
   token: string;
   fetch?: FetchImpl;
+  basePath?: string;
 }
 
 type ApiProxy = {
@@ -25,6 +26,7 @@ type ApiProxy = {
 export class NetlifyApi {
   #token: string;
   #fetch: FetchImpl;
+  #basePath: string;
 
   constructor(options: NetlifyApiOptions) {
     this.#token = options.token;
@@ -32,11 +34,14 @@ export class NetlifyApi {
 
     this.#fetch = options.fetch || (fetch as FetchImpl);
     if (!this.#fetch) throw new Error('Fetch is required');
+
+    this.#basePath = options.basePath || '/api/v1';
   }
 
   get api() {
     const token = this.#token;
     const fetchImpl = this.#fetch;
+    const basePath = this.#basePath;
 
     return new Proxy(
       {},
@@ -57,7 +62,7 @@ export class NetlifyApi {
                 const method = operationsByTag[namespace][operation] as any;
 
                 return (params: Record<string, unknown>) => {
-                  return method({ ...params, token, fetchImpl });
+                  return method({ ...params, token, fetchImpl, basePath });
                 };
               }
             }
