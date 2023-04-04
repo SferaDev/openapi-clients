@@ -336,6 +336,10 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         };
         builds?: Record<string, any>[];
         /**
+         * The ID of Vercel Connect configuration used for this deployment
+         */
+        connectConfigurationId?: string;
+        /**
          * The region where the deployment was first created
          *
          * @example sfo1
@@ -1036,6 +1040,10 @@ export type CreateDeploymentResponse = {
       [key: string]: string;
     };
   }[];
+  /**
+   * The ID of Vercel Connect configuration used for this deployment
+   */
+  connectConfigurationId?: string;
   /**
    * The region where the deployment was first created
    *
@@ -2426,7 +2434,7 @@ export type CreateDeploymentRequestBody = {
     sourceFilesOutsideRootDirectory?: boolean;
   };
   /**
-   * Either not defined, `staging`, or `production`. If `staging`, a staging alias in the format `<project>.<team>.now.sh` will be assigned. If `production`, any aliases defined in `alias` will be assigned
+   * Either not defined, `staging`, or `production`. If `staging`, a staging alias in the format `<project>-<team>.vercel.app` will be assigned. If `production`, any aliases defined in `alias` will be assigned. If omitted, the target will be `preview`
    */
   target?: 'staging' | 'production';
   /**
@@ -2493,6 +2501,10 @@ export type CancelDeploymentResponse = {
       [key: string]: string;
     };
   }[];
+  /**
+   * The ID of Vercel Connect configuration used for this deployment
+   */
+  connectConfigurationId?: string;
   /**
    * The region where the deployment was first created
    *
@@ -6434,6 +6446,10 @@ export type GetDeploymentsResponse = {
       createdAt?: number;
       skipGitConnectDuringLink?: boolean;
     };
+    /**
+     * The ID of Vercel Connect configuration used for this deployment
+     */
+    connectConfigurationId?: string;
   }[];
 };
 
@@ -6607,6 +6623,7 @@ export type GetProjectsResponse = {
         src?: string;
         dest?: string;
       }[];
+      connectConfigurationId?: string;
       createdAt: number;
       createdIn: string;
       creator: {
@@ -6995,6 +7012,7 @@ export type CreateProjectResponse = {
       src?: string;
       dest?: string;
     }[];
+    connectConfigurationId?: string;
     createdAt: number;
     createdIn: string;
     creator: {
@@ -7547,6 +7565,7 @@ export type GetProjectResponse = {
       src?: string;
       dest?: string;
     }[];
+    connectConfigurationId?: string;
     createdAt: number;
     createdIn: string;
     creator: {
@@ -7943,6 +7962,7 @@ export type UpdateProjectResponse = {
       src?: string;
       dest?: string;
     }[];
+    connectConfigurationId?: string;
     createdAt: number;
     createdIn: string;
     creator: {
