@@ -1,5 +1,5 @@
 import { operationsByTag } from './api/components';
-import { FetcherExtraProps } from './api/fetcher';
+import { FetcherExtraProps, baseUrl } from './api/fetcher';
 import { FetchImpl } from './utils/fetch';
 import { RequiredKeys } from './utils/types';
 
@@ -71,4 +71,28 @@ export class NetlifyApi {
       }
     ) as ApiProxy;
   }
+
+  get auth() {
+    return {
+      refreshToken: ({ refreshToken, authToken, clientId, clientSecret }: RefreshTokenOptions) => {
+        return this.#fetch(`${baseUrl}/oauth/token`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${authToken}` },
+          body: JSON.stringify({
+            grant_type: 'refresh_token',
+            refresh_token: refreshToken,
+            client_id: clientId,
+            client_secret: clientSecret
+          })
+        });
+      }
+    };
+  }
 }
+
+type RefreshTokenOptions = {
+  refreshToken: string;
+  authToken: string;
+  clientId: string;
+  clientSecret: string;
+};

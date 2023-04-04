@@ -6,7 +6,7 @@ export type FetcherExtraProps = {
   basePath: string;
 };
 
-const baseUrl = 'https://api.netlify.com';
+export const baseUrl = 'https://api.netlify.com';
 
 export type ErrorWrapper<TError> = TError | { status: 'unknown'; payload: string };
 
