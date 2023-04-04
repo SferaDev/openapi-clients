@@ -26,11 +26,7 @@ type ApiProxy = {
 type RequestEndpointParams<T extends keyof typeof operationsByPath> = Omit<
   Parameters<(typeof operationsByPath)[T]>[0],
   keyof FetcherExtraProps
-> extends infer Params
-  ? RequiredKeys<Params> extends never
-    ? Params | undefined
-    : Params
-  : never;
+>;
 
 export class VercelApi {
   #token: string;
