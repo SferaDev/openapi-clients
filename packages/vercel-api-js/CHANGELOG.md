@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.1.2
+
+### Patch Changes
+
+- 660d05b: Add `connectConfigurationId` to schema
+
 ## 0.1.1
 
 ### Patch Changes
