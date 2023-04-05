@@ -1,5 +1,6 @@
 import { operationsByTag } from './api/components';
-import { FetcherExtraProps } from './api/fetcher';
+import { FetcherExtraProps, fetch as vercelFetch } from './api/fetcher';
+import { operationsByPath } from './api/extra';
 import { FetchImpl } from './utils/fetch';
 import { RequiredKeys } from './utils/types';
 
@@ -21,6 +22,11 @@ type ApiProxy = {
       : never;
   };
 };
+
+type RequestEndpointParams<T extends keyof typeof operationsByPath> = Omit<
+  Parameters<(typeof operationsByPath)[T]>[0],
+  keyof FetcherExtraProps
+>;
 
 export class VercelApi {
   #token: string;
@@ -65,5 +71,15 @@ export class VercelApi {
         }
       }
     ) as ApiProxy;
+  }
+
+  public async request<Endpoint extends keyof typeof operationsByPath>(
+    endpoint: Endpoint,
+    params: RequestEndpointParams<Endpoint>
+  ) {
+    const [method = '', url = ''] = endpoint.split(' ');
+    const extraParams = (params || {}) as Record<string, unknown>;
+
+    return vercelFetch({ ...extraParams, method, url, token: this.#token, fetchImpl: this.#fetch });
   }
 }
