@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.1.3
+
+### Patch Changes
+
+- dd84ad5: Add `request` method with string literals"
+
 ## 0.1.2
 
 ### Patch Changes
