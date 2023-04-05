@@ -28,6 +28,8 @@ type RequestEndpointParams<T extends keyof typeof operationsByPath> = Omit<
   keyof FetcherExtraProps
 >;
 
+type RequestEndpointResult<T extends keyof typeof operationsByPath> = ReturnType<(typeof operationsByPath)[T]>;
+
 export class VercelApi {
   #token: string;
   #fetch: FetchImpl;
@@ -80,6 +82,7 @@ export class VercelApi {
     const [method = '', url = ''] = endpoint.split(' ');
     const extraParams = (params || {}) as Record<string, unknown>;
 
-    return vercelFetch({ ...extraParams, method, url, token: this.#token, fetchImpl: this.#fetch });
+    const result = await vercelFetch({ ...extraParams, method, url, token: this.#token, fetchImpl: this.#fetch });
+    return result as RequestEndpointResult<Endpoint>;
   }
 }
