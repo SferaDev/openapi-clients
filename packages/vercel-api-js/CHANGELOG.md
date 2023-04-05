@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.1.4
+
+### Patch Changes
+
+- 4264ad4: Fix return type of `request` method
+
 ## 0.1.3
 
 ### Patch Changes
