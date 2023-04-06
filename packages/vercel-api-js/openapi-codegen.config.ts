@@ -22,6 +22,52 @@ export default defineConfig({
         update: (operation) => ({ ...operation, operationId: 'searchRepo' })
       });
 
+      // Rewrite invalid enum values
+      context.openAPIDocument = updateStrings({
+        openAPIDocument: context.openAPIDocument,
+        updates: {
+          'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Productio': 'production',
+          'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Previe': 'preview',
+          'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Developmen': 'development',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DomainCreate': 'domain.created',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentCreate': 'deployment.created',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentErro': 'deployment.error',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentCancele': 'deployment.canceled',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentSucceede': 'deployment.succeeded',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentRead': 'deployment.ready',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentCheckRerequeste':
+            'deployment.check-rerequested',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.IntegrationConfigurationPermissionUpgrade':
+            'integration-configuration.permission-upgraded',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.IntegrationConfigurationRemove':
+            'integration-configuration.removed',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.IntegrationConfigurationScopeChangeConfirme':
+            'integration-configuration.scope-change-confirmed',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.ProjectCreate': 'project.created',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.ProjectRemove': 'project.removed',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentChecksComplete':
+            'deployment-checks-completed',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentRead': 'deployment-ready',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentPrepare':
+            'deployment-prepared',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentErro': 'deployment-error',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentCheckRerequeste':
+            'deployment-check-rerequested',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentCancele':
+            'deployment-canceled',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyProjectCreate': 'project-created',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyProjectRemove': 'project-removed',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDomainCreate': 'domain-created',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymen': 'deployment',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyIntegrationConfigurationPermissionUpdate':
+            'integration-configuration-permission-updated',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyIntegrationConfigurationRemove':
+            'integration-configuration-removed',
+          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyIntegrationConfigurationScopeChangeConfirme':
+            'integration-configuration-scope-change-confirmed'
+        }
+      });
+
       const { schemasFiles } = await generateSchemaTypes(context, { filenamePrefix });
       await generateFetchers(context, { filenamePrefix, schemasFiles });
       await context.writeFile('extra.ts', buildExtraFile(context));
@@ -48,6 +94,24 @@ function updateMethod({
   openAPIDocument.paths[path][method] = { ...operation, ...update(operation) };
 
   return openAPIDocument;
+}
+
+function updateStrings({
+  openAPIDocument,
+  updates
+}: {
+  openAPIDocument: Context['openAPIDocument'];
+  updates: Record<string, string>;
+}) {
+  const updatedOpenAPIDocument = JSON.stringify(openAPIDocument, (key, value) => {
+    if (typeof value === 'string') {
+      return updates[value] ?? value;
+    }
+
+    return value;
+  });
+
+  return JSON.parse(updatedOpenAPIDocument);
 }
 
 function buildExtraFile(context: Context) {
