@@ -7302,17 +7302,7 @@ export type CreateProjectRequestBody = {
     /**
      * Deployment Target or Targets in which the ENV variable will be used
      */
-    target:
-      | (
-          | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Productio'
-          | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Previe'
-          | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Developmen'
-        )
-      | (
-          | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Productio'
-          | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Previe'
-          | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Developmen'
-        )[];
+    target: ('production' | 'preview' | 'development') | ('production' | 'preview' | 'development')[];
     /**
      * The git branch of the environment variable
      *
@@ -9189,11 +9179,7 @@ export type CreateProjectEnvVariables = {
          * @example production
          * @example preview
          */
-        target: (
-          | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Productio'
-          | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Previe'
-          | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Developmen'
-        )[];
+        target: ('production' | 'preview' | 'development')[];
         /**
          * The git branch of the environment variable
          *
@@ -9227,11 +9213,7 @@ export type CreateProjectEnvVariables = {
          * @example production
          * @example preview
          */
-        target: (
-          | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Productio'
-          | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Previe'
-          | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Developmen'
-        )[];
+        target: ('production' | 'preview' | 'development')[];
         /**
          * The git branch of the environment variable
          *
@@ -9276,11 +9258,7 @@ export const createProjectEnv = (variables: CreateProjectEnvVariables, signal?: 
          * @example production
          * @example preview
          */
-        target: (
-          | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Productio'
-          | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Previe'
-          | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Developmen'
-        )[];
+        target: ('production' | 'preview' | 'development')[];
         /**
          * The git branch of the environment variable
          *
@@ -9314,11 +9292,7 @@ export const createProjectEnv = (variables: CreateProjectEnvVariables, signal?: 
          * @example production
          * @example preview
          */
-        target: (
-          | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Productio'
-          | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Previe'
-          | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Developmen'
-        )[];
+        target: ('production' | 'preview' | 'development')[];
         /**
          * The git branch of the environment variable
          *
@@ -9495,11 +9469,7 @@ export type EditProjectEnvRequestBody = {
    *
    * @example preview
    */
-  target?: (
-    | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Productio'
-    | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Previe'
-    | 'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Developmen'
-  )[];
+  target?: ('production' | 'preview' | 'development')[];
   /**
    * The git branch of the environment variable
    *
@@ -10776,31 +10746,31 @@ export type CreateWebhookRequestBody = {
    * @minItems 1
    */
   events: (
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DomainCreate'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentCreate'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentErro'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentCancele'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentSucceede'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentRead'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentCheckRerequeste'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.IntegrationConfigurationPermissionUpgrade'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.IntegrationConfigurationRemove'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.IntegrationConfigurationScopeChangeConfirme'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.ProjectCreate'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.ProjectRemove'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentChecksComplete'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentRead'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentPrepare'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentErro'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentCheckRerequeste'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentCancele'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyProjectCreate'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyProjectRemove'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDomainCreate'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymen'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyIntegrationConfigurationPermissionUpdate'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyIntegrationConfigurationRemove'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyIntegrationConfigurationScopeChangeConfirme'
+    | 'domain.created'
+    | 'deployment.created'
+    | 'deployment.error'
+    | 'deployment.canceled'
+    | 'deployment.succeeded'
+    | 'deployment.ready'
+    | 'deployment.check-rerequested'
+    | 'integration-configuration.permission-upgraded'
+    | 'integration-configuration.removed'
+    | 'integration-configuration.scope-change-confirmed'
+    | 'project.created'
+    | 'project.removed'
+    | 'deployment-checks-completed'
+    | 'deployment-ready'
+    | 'deployment-prepared'
+    | 'deployment-error'
+    | 'deployment-check-rerequested'
+    | 'deployment-canceled'
+    | 'project-created'
+    | 'project-removed'
+    | 'domain-created'
+    | 'deployment'
+    | 'integration-configuration-permission-updated'
+    | 'integration-configuration-removed'
+    | 'integration-configuration-scope-change-confirmed'
   )[];
   /**
    * @minItems 1
