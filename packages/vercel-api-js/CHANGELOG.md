@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.1.5
+
+### Patch Changes
+
+- d535c65: Fix enum values
+
 ## 0.1.4
 
 ### Patch Changes
