@@ -2,7 +2,7 @@ import { defineConfig } from '@openapi-codegen/cli';
 import { generateFetchers, generateSchemaTypes } from '@openapi-codegen/typescript';
 
 export default defineConfig({
-  vercel: {
+  dhis2: {
     from: {
       source: 'url',
       url: 'https://admin:district@play.dhis2.org/dev/api/openapi.json'
