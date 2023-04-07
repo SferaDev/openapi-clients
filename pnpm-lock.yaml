@@ -6,8 +6,8 @@ importers:
     specifiers:
       '@changesets/cli': ^2.26.1
       '@openapi-codegen/cli': ^2.0.0
-      '@openapi-codegen/typescript': ^6.1.2
-      '@rollup/plugin-typescript': ^11.0.0
+      '@openapi-codegen/typescript': ^6.1.3
+      '@rollup/plugin-typescript': ^11.1.0
       '@types/isomorphic-fetch': ^0.0.36
       '@types/node': ^18.15.11
       builtin-modules: ^3.3.0
@@ -26,8 +26,8 @@ importers:
     devDependencies:
       '@changesets/cli': 2.26.1
       '@openapi-codegen/cli': 2.0.0
-      '@openapi-codegen/typescript': 6.1.2
-      '@rollup/plugin-typescript': 11.0.0_arrnfnpvhdqbfckwo3rdb7mowy
+      '@openapi-codegen/typescript': 6.1.3
+      '@rollup/plugin-typescript': 11.1.0_arrnfnpvhdqbfckwo3rdb7mowy
       '@types/isomorphic-fetch': 0.0.36
       '@types/node': 18.15.11
       builtin-modules: 3.3.0
@@ -608,8 +608,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@openapi-codegen/typescript/6.1.2:
-    resolution: {integrity: sha512-YAF+z4w31eR+d1DOq7ElSqj7TnlH89gKdaNbHLcJZtqEVxKz9rM/Zxw+QUb868S0MAB0URcExLByjHFOfUJStQ==}
+  /@openapi-codegen/typescript/6.1.3:
+    resolution: {integrity: sha512-P18U4Omh2WsQfPAwxOo9bhi2Lsvfuma8h5X8V7Getb2gFCcBD1B6IMG2wUnbv95+zRXBJ+ACHdsjSbVcnFmZ+Q==}
     dependencies:
       case: 1.6.3
       lodash: 4.17.21
@@ -620,8 +620,8 @@ packages:
       typescript: 4.8.2
     dev: true
 
-  /@rollup/plugin-typescript/11.0.0_arrnfnpvhdqbfckwo3rdb7mowy:
-    resolution: {integrity: sha512-goPyCWBiimk1iJgSTgsehFD5OOFHiAknrRJjqFCudcW8JtWiBlK284Xnn4flqMqg6YAjVG/EE+3aVzrL5qNSzQ==}
+  /@rollup/plugin-typescript/11.1.0_arrnfnpvhdqbfckwo3rdb7mowy:
+    resolution: {integrity: sha512-86flrfE+bSHB69znnTV6kVjkncs2LBMhcTCyxWgRxLyfXfQrxg4UwlAqENnjrrxnSNS/XKCDJCl8EkdFJVHOxw==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       rollup: ^2.14.0||^3.0.0
