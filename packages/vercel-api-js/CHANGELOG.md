@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.1.6
+
+### Patch Changes
+
+- 53e14fe: Add accessToken auth method
+
 ## 0.1.5
 
 ### Patch Changes
