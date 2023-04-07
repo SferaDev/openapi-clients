@@ -5,7 +5,7 @@ export type FetcherExtraProps = {
   fetchImpl: FetchImpl;
 };
 
-const baseUrl = 'https://api.vercel.com';
+export const baseUrl = 'https://api.vercel.com';
 
 export type ErrorWrapper<TError> = TError | { status: 'unknown'; payload: string };
 

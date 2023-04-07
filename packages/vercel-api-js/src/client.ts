@@ -1,7 +1,7 @@
 import { operationsByTag } from './api/components';
-import { FetcherExtraProps, fetch as vercelFetch } from './api/fetcher';
+import { FetcherExtraProps, baseUrl, fetch as vercelFetch } from './api/fetcher';
 import { operationsByPath } from './api/extra';
-import { FetchImpl } from './utils/fetch';
+import { FetchImpl, formEncoded } from './utils/fetch';
 import { RequiredKeys } from './utils/types';
 
 export interface VercelApiOptions {
@@ -64,8 +64,8 @@ export class VercelApi {
 
                 const method = operationsByTag[namespace][operation] as any;
 
-                return (params: Record<string, unknown>) => {
-                  return method({ ...params, token, fetchImpl });
+                return async (params: Record<string, unknown>) => {
+                  return await method({ ...params, token, fetchImpl });
                 };
               }
             }
@@ -73,6 +73,18 @@ export class VercelApi {
         }
       }
     ) as ApiProxy;
+  }
+
+  get auth() {
+    return {
+      accessToken: async ({ code, redirectUri, clientId, clientSecret }: AccessTokenOptions) => {
+        return await this.#fetch(`${baseUrl}/v2/oauth/access_token`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: formEncoded({ code, redirect_uri: redirectUri, client_id: clientId, client_secret: clientSecret })
+        });
+      }
+    };
   }
 
   public async request<Endpoint extends keyof typeof operationsByPath>(
@@ -86,3 +98,10 @@ export class VercelApi {
     return result as RequestEndpointResult<Endpoint>;
   }
 }
+
+type AccessTokenOptions = {
+  redirectUri: string;
+  code: string;
+  clientId: string;
+  clientSecret: string;
+};
