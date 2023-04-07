@@ -5,9 +5,9 @@
   "author": "SferaDev",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/SferaDev/vercel-api/issues"
+    "url": "https://github.com/SferaDev/openapi-clients/issues"
   },
-  "homepage": "https://github.com/SferaDev/vercel-api#readme",
+  "homepage": "https://github.com/SferaDev/openapi-clients#readme",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "typings": "dist/index.d.ts",
@@ -22,6 +22,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SferaDev/vercel-api.git"
+    "url": "git+https://github.com/SferaDev/openapi-clients.git"
   }
 }

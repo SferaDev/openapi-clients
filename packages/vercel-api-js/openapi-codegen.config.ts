@@ -103,7 +103,7 @@ function updateStrings({
   openAPIDocument: Context['openAPIDocument'];
   updates: Record<string, string>;
 }) {
-  const updatedOpenAPIDocument = JSON.stringify(openAPIDocument, (key, value) => {
+  const updatedOpenAPIDocument = JSON.stringify(openAPIDocument, (_key, value) => {
     if (typeof value === 'string') {
       return updates[value] ?? value;
     }
