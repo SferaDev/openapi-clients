@@ -4625,7 +4625,7 @@ export type ImportConflicts = {
    * @format int32
    */
   conflictCount: number;
-  conflicts?: ImportConflict[];
+  conflicts: boolean;
   conflictsDescription?: string;
   /**
    * @format int32
