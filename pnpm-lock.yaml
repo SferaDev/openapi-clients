@@ -47,6 +47,9 @@ importers:
   packages/dhis2-api:
     specifiers: {}
 
+  packages/dhis2-openapi:
+    specifiers: {}
+
   packages/netlify-api:
     specifiers: {}
 
