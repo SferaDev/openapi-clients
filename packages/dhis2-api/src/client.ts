@@ -16,7 +16,7 @@ export type Credentials =
       token: string;
     };
 
-export interface VercelApiOptions<Version extends DHIS2Version> {
+export interface Dhis2ApiOptions<Version extends DHIS2Version> {
   version: Version;
   baseUrl: string;
   credentials: Credentials;
@@ -43,13 +43,13 @@ type ApiProxy<Version extends DHIS2Version> = {
   };
 };
 
-export class VercelApi<Version extends DHIS2Version> {
+export class Dhis2Api<Version extends DHIS2Version> {
   #version: Version;
   #baseUrl: string;
   #credentials: Credentials;
   #fetch: FetchImpl;
 
-  constructor(options: VercelApiOptions<Version>) {
+  constructor(options: Dhis2ApiOptions<Version>) {
     this.#version = options.version;
     if (!options.version) throw new Error('Version is required');
 

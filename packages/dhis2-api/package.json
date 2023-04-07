@@ -18,7 +18,7 @@
   "scripts": {
     "tsc": "tsc --noEmit",
     "build": "rimraf dist && rollup -c",
-    "generate": "openapi-codegen vercel"
+    "generate": "openapi-codegen dhis2"
   },
   "repository": {
     "type": "git",
