@@ -18,6 +18,7 @@ export type Credentials =
 
 export interface VercelApiOptions<Version extends DHIS2Version> {
   version: Version;
+  baseUrl: string;
   credentials: Credentials;
   fetch?: FetchImpl;
 }
@@ -44,6 +45,7 @@ type ApiProxy<Version extends DHIS2Version> = {
 
 export class VercelApi<Version extends DHIS2Version> {
   #version: Version;
+  #baseUrl: string;
   #credentials: Credentials;
   #fetch: FetchImpl;
 
@@ -58,10 +60,14 @@ export class VercelApi<Version extends DHIS2Version> {
     if (!['basic', 'apiToken'].includes(options.credentials.type)) {
       throw new Error('Invalid credentials type');
     }
+
+    this.#baseUrl = options.baseUrl;
+    if (!options.baseUrl) throw new Error('Base URL is required');
   }
 
   get api() {
     const fetchImpl = this.#fetch;
+    const baseUrl = this.#baseUrl;
     const credentials = this.#credentials;
     const operationsByTag: Record<string, Record<string, unknown>> = operationsByTagDict[this.#version];
 
@@ -84,7 +90,7 @@ export class VercelApi<Version extends DHIS2Version> {
                 const method = operationsByTag[namespace]?.[operation] as any;
 
                 return async (params: Record<string, unknown>) => {
-                  return await method({ ...params, credentials, fetchImpl });
+                  return await method({ ...params, baseUrl, credentials, fetchImpl });
                 };
               }
             }
