@@ -1,5 +1,6 @@
 import { operationsByTag } from './api/components';
-import { FetcherExtraProps, baseUrl } from './api/fetcher';
+import { operationsByPath } from './api/extra';
+import { FetcherExtraProps, baseUrl, fetch as netlifyFetch } from './api/fetcher';
 import { FetchImpl } from './utils/fetch';
 import { RequiredKeys } from './utils/types';
 
@@ -22,6 +23,13 @@ type ApiProxy = {
       : never;
   };
 };
+
+type RequestEndpointParams<T extends keyof typeof operationsByPath> = Omit<
+  Parameters<(typeof operationsByPath)[T]>[0],
+  keyof FetcherExtraProps
+>;
+
+type RequestEndpointResult<T extends keyof typeof operationsByPath> = ReturnType<(typeof operationsByPath)[T]>;
 
 export class NetlifyApi {
   #token: string;
@@ -61,8 +69,8 @@ export class NetlifyApi {
 
                 const method = operationsByTag[namespace][operation] as any;
 
-                return (params: Record<string, unknown>) => {
-                  return method({ ...params, token, fetchImpl, basePath });
+                return async (params: Record<string, unknown>) => {
+                  return await method({ ...params, token, fetchImpl, basePath });
                 };
               }
             }
@@ -74,8 +82,8 @@ export class NetlifyApi {
 
   get auth() {
     return {
-      refreshToken: ({ refreshToken, authToken, clientId, clientSecret }: RefreshTokenOptions) => {
-        return this.#fetch(`${baseUrl}/oauth/token`, {
+      refreshToken: async ({ refreshToken, authToken, clientId, clientSecret }: RefreshTokenOptions) => {
+        return await this.#fetch(`${baseUrl}/oauth/token`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${authToken}` },
           body: JSON.stringify({
@@ -87,6 +95,25 @@ export class NetlifyApi {
         });
       }
     };
+  }
+
+  public async request<Endpoint extends keyof typeof operationsByPath>(
+    endpoint: Endpoint,
+    params: RequestEndpointParams<Endpoint>
+  ) {
+    const [method = '', url = ''] = endpoint.split(' ');
+    const extraParams = (params || {}) as Record<string, unknown>;
+
+    const result = await netlifyFetch({
+      ...extraParams,
+      method,
+      url,
+      token: this.#token,
+      fetchImpl: this.#fetch,
+      basePath: this.#basePath
+    });
+
+    return result as RequestEndpointResult<Endpoint>;
   }
 }
 
