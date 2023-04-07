@@ -5,8 +5,20 @@ import { RequiredKeys } from './utils/types';
 
 type DHIS2Version = 'v40';
 
+export type Credentials =
+  | {
+      type: 'basic';
+      username: string;
+      password: string;
+    }
+  | {
+      type: 'apiToken';
+      token: string;
+    };
+
 export interface VercelApiOptions<Version extends DHIS2Version> {
   version: Version;
+  credentials: Credentials;
   fetch?: FetchImpl;
 }
 
@@ -32,6 +44,7 @@ type ApiProxy<Version extends DHIS2Version> = {
 
 export class VercelApi<Version extends DHIS2Version> {
   #version: Version;
+  #credentials: Credentials;
   #fetch: FetchImpl;
 
   constructor(options: VercelApiOptions<Version>) {
@@ -40,10 +53,16 @@ export class VercelApi<Version extends DHIS2Version> {
 
     this.#fetch = options.fetch || (fetch as FetchImpl);
     if (!this.#fetch) throw new Error('Fetch is required');
+
+    this.#credentials = options.credentials;
+    if (!['basic', 'apiToken'].includes(options.credentials.type)) {
+      throw new Error('Invalid credentials type');
+    }
   }
 
   get api() {
     const fetchImpl = this.#fetch;
+    const credentials = this.#credentials;
     const operationsByTag: Record<string, Record<string, unknown>> = operationsByTagDict[this.#version];
 
     return new Proxy(
@@ -65,7 +84,7 @@ export class VercelApi<Version extends DHIS2Version> {
                 const method = operationsByTag[namespace]?.[operation] as any;
 
                 return async (params: Record<string, unknown>) => {
-                  return await method({ ...params, fetchImpl });
+                  return await method({ ...params, credentials, fetchImpl });
                 };
               }
             }

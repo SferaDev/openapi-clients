@@ -1,10 +1,22 @@
+import { Credentials } from '../client';
 import { FetchImpl } from '../utils/fetch';
 
 export type FetcherExtraProps = {
   fetchImpl: FetchImpl;
+  credentials: Credentials;
 };
 
 const baseUrl = 'https://play.dhis2.org/dev/api';
+
+function credentialsHeader(credentials: Credentials) {
+  if (credentials.type === 'basic') {
+    return `Basic ${btoa(`${credentials.username}:${credentials.password}`)}`;
+  } else if (credentials.type === 'apiToken') {
+    return `ApiToken ${credentials.token}`;
+  }
+
+  throw new Error('Invalid credentials');
+}
 
 export type ErrorWrapper<TError> = TError | { status: 'unknown'; payload: string };
 
@@ -33,10 +45,12 @@ export async function fetch<
   pathParams,
   queryParams,
   signal,
+  credentials,
   fetchImpl
 }: FetcherOptions<TBody, THeaders, TQueryParams, TPathParams>): Promise<TData> {
   try {
     const requestHeaders: HeadersInit = {
+      Authorization: credentialsHeader(credentials),
       'Content-Type': 'application/json',
       ...headers
     };
