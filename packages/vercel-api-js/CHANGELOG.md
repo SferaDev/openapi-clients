@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.1.7
+
+### Patch Changes
+
+- 64b81ee: Update accessToken helper
+
 ## 0.1.6
 
 ### Patch Changes
