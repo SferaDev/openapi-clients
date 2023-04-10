@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.1.8
+
+### Patch Changes
+
+- 13148b3: Update accessToken result to match types
+
 ## 0.1.7
 
 ### Patch Changes
