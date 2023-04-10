@@ -1,11 +1,12 @@
 import { FetchImpl } from '../utils/fetch';
+import { compactObject } from '../utils/lang';
 
 export type FetcherExtraProps = {
-  token: string;
+  token: string | null;
   fetchImpl: FetchImpl;
 };
 
-export const baseUrl = 'https://api.vercel.com';
+const baseUrl = 'https://api.vercel.com';
 
 export type ErrorWrapper<TError> = TError | { status: 'unknown'; payload: string };
 
@@ -38,11 +39,11 @@ export async function fetch<
   fetchImpl
 }: FetcherOptions<TBody, THeaders, TQueryParams, TPathParams>): Promise<TData> {
   try {
-    const requestHeaders: HeadersInit = {
+    const requestHeaders: HeadersInit = compactObject({
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`,
+      Authorization: token ? `Bearer ${token}` : undefined,
       ...headers
-    };
+    });
 
     /**
      * As the fetch API is being used, when multipart/form-data is specified
@@ -54,12 +55,20 @@ export async function fetch<
       delete requestHeaders['Content-Type'];
     }
 
+    const payload =
+      body instanceof FormData
+        ? body
+        : requestHeaders['Content-Type'] === 'application/json'
+        ? JSON.stringify(body)
+        : (body as string);
+
     const response = await fetchImpl(`${baseUrl}${resolveUrl(url, queryParams, pathParams)}`, {
       signal,
       method: method.toUpperCase(),
-      body: body ? (body instanceof FormData ? body : JSON.stringify(body)) : undefined,
+      body: payload,
       headers: requestHeaders
     });
+
     if (!response.ok) {
       let error: ErrorWrapper<TError>;
       try {
