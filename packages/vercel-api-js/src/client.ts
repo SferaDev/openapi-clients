@@ -82,7 +82,13 @@ export class VercelApi {
         clientId,
         clientSecret
       }: AccessTokenOptions): Promise<AccessTokenResult> => {
-        return await vercelFetch({
+        const result: {
+          access_token: string;
+          token_type: string;
+          installation_id: string;
+          user_id: string;
+          team_id: string | null;
+        } = await vercelFetch({
           method: 'POST',
           url: `/v2/oauth/access_token`,
           token: null,
@@ -90,6 +96,14 @@ export class VercelApi {
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: formEncoded({ code, redirect_uri: redirectUri, client_id: clientId, client_secret: clientSecret })
         });
+
+        return {
+          accessToken: result.access_token,
+          tokenType: result.token_type,
+          installationId: result.installation_id,
+          userId: result.user_id,
+          teamId: result.team_id
+        };
       }
     };
   }
