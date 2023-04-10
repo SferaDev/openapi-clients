@@ -1,11 +1,11 @@
 import { operationsByTag } from './api/components';
-import { FetcherExtraProps, baseUrl, fetch as vercelFetch } from './api/fetcher';
 import { operationsByPath } from './api/extra';
+import { FetcherExtraProps, fetch as vercelFetch } from './api/fetcher';
 import { FetchImpl, formEncoded } from './utils/fetch';
 import { RequiredKeys } from './utils/types';
 
 export interface VercelApiOptions {
-  token: string;
+  token: string | null;
   fetch?: FetchImpl;
 }
 
@@ -31,12 +31,11 @@ type RequestEndpointParams<T extends keyof typeof operationsByPath> = Omit<
 type RequestEndpointResult<T extends keyof typeof operationsByPath> = ReturnType<(typeof operationsByPath)[T]>;
 
 export class VercelApi {
-  #token: string;
+  #token: string | null;
   #fetch: FetchImpl;
 
   constructor(options: VercelApiOptions) {
     this.#token = options.token;
-    if (!options.token) throw new Error('Token is required');
 
     this.#fetch = options.fetch || (fetch as FetchImpl);
     if (!this.#fetch) throw new Error('Fetch is required');
@@ -77,9 +76,17 @@ export class VercelApi {
 
   get auth() {
     return {
-      accessToken: async ({ code, redirectUri, clientId, clientSecret }: AccessTokenOptions) => {
-        return await this.#fetch(`${baseUrl}/v2/oauth/access_token`, {
+      accessToken: async ({
+        code,
+        redirectUri,
+        clientId,
+        clientSecret
+      }: AccessTokenOptions): Promise<AccessTokenResult> => {
+        return await vercelFetch({
           method: 'POST',
+          url: `/v2/oauth/access_token`,
+          token: null,
+          fetchImpl: this.#fetch,
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: formEncoded({ code, redirect_uri: redirectUri, client_id: clientId, client_secret: clientSecret })
         });
@@ -104,4 +111,12 @@ type AccessTokenOptions = {
   code: string;
   clientId: string;
   clientSecret: string;
+};
+
+type AccessTokenResult = {
+  accessToken: string;
+  tokenType: string;
+  installationId: string;
+  userId: string;
+  teamId: string | null;
 };
