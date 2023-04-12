@@ -147,6 +147,7 @@ export type AuthUser = {
     } | null;
     plan: 'hobby' | 'enterprise' | 'pro';
     platform?: 'stripe' | 'stripeTestMode';
+    orbCustomerId?: string;
     programType?: 'startup' | 'agency';
     trial?: {
       start: number;

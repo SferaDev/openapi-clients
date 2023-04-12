@@ -1000,7 +1000,18 @@ export type CreateDeploymentResponse = {
      */
     env: string[];
   };
-  builds?: Record<string, any>[];
+  builds?: {
+    use: string;
+    src?: string;
+    /**
+     * An object containing the deployment's metadata
+     *
+     * @example {"foo":"bar"}
+     */
+    config?: {
+      [key: string]: string;
+    };
+  }[];
   /**
    * The ID of Vercel Connect configuration used for this deployment
    */
@@ -12652,36 +12663,15 @@ export type CreateCheckQueryParams = {
 export type CreateCheckError = Fetcher.ErrorWrapper<undefined>;
 
 export type CreateCheckResponse = {
-  /**
-   * The Identity Provider "type", for example Okta.
-   *
-   * @example OktaSAML
-   */
-  type: string;
-  /**
-   * Current status of the connection.
-   *
-   * @example linked
-   */
-  status: string;
-  /**
-   * Current state of the connection.
-   *
-   * @example active
-   */
-  state: string;
-  /**
-   * Timestamp (in milliseconds) of when the configuration was connected.
-   *
-   * @example 1611796915677
-   */
-  connectedAt: number;
-  /**
-   * Timestamp (in milliseconds) of when the last webhook event was recieved from WorkOS.
-   *
-   * @example 1611796915677
-   */
-  lastReceivedWebhookEvent?: number;
+  createdAt?: number | null;
+  creator: string;
+  domain: string;
+  id: string;
+  name: string;
+  recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
+  ttl?: number;
+  type: 'record' | 'record-sys';
+  value: string;
 };
 
 export type CreateCheckRequestBody = {
@@ -12901,36 +12891,15 @@ export type UpdateCheckQueryParams = {
 export type UpdateCheckError = Fetcher.ErrorWrapper<undefined>;
 
 export type UpdateCheckResponse = {
-  /**
-   * The Identity Provider "type", for example Okta.
-   *
-   * @example OktaSAML
-   */
-  type: string;
-  /**
-   * Current status of the connection.
-   *
-   * @example linked
-   */
-  status: string;
-  /**
-   * Current state of the connection.
-   *
-   * @example active
-   */
-  state: string;
-  /**
-   * Timestamp (in milliseconds) of when the configuration was connected.
-   *
-   * @example 1611796915677
-   */
-  connectedAt: number;
-  /**
-   * Timestamp (in milliseconds) of when the last webhook event was recieved from WorkOS.
-   *
-   * @example 1611796915677
-   */
-  lastReceivedWebhookEvent?: number;
+  createdAt?: number | null;
+  creator: string;
+  domain: string;
+  id: string;
+  name: string;
+  recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
+  ttl?: number;
+  type: 'record' | 'record-sys';
+  value: string;
 };
 
 export type UpdateCheckRequestBody = {
@@ -13166,36 +13135,15 @@ export type CreateEdgeConfigQueryParams = {
 export type CreateEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
 
 export type CreateEdgeConfigResponse = {
-  /**
-   * The Identity Provider "type", for example Okta.
-   *
-   * @example OktaSAML
-   */
-  type?: string;
-  /**
-   * Current status of the connection.
-   *
-   * @example linked
-   */
-  status?: string;
-  /**
-   * Current state of the connection.
-   *
-   * @example active
-   */
-  state?: string;
-  /**
-   * Timestamp (in milliseconds) of when the configuration was connected.
-   *
-   * @example 1611796915677
-   */
-  connectedAt?: number;
-  /**
-   * Timestamp (in milliseconds) of when the last webhook event was recieved from WorkOS.
-   *
-   * @example 1611796915677
-   */
-  lastReceivedWebhookEvent?: number;
+  createdAt?: number | null;
+  creator?: string;
+  domain?: string;
+  id?: string;
+  name?: string;
+  recordType?: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
+  ttl?: number;
+  type?: 'record' | 'record-sys';
+  value?: string;
   sizeInBytes: number;
   itemCount: number;
 };
@@ -13288,36 +13236,15 @@ export type UpdateEdgeConfigQueryParams = {
 export type UpdateEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
 
 export type UpdateEdgeConfigResponse = {
-  /**
-   * The Identity Provider "type", for example Okta.
-   *
-   * @example OktaSAML
-   */
-  type?: string;
-  /**
-   * Current status of the connection.
-   *
-   * @example linked
-   */
-  status?: string;
-  /**
-   * Current state of the connection.
-   *
-   * @example active
-   */
-  state?: string;
-  /**
-   * Timestamp (in milliseconds) of when the configuration was connected.
-   *
-   * @example 1611796915677
-   */
-  connectedAt?: number;
-  /**
-   * Timestamp (in milliseconds) of when the last webhook event was recieved from WorkOS.
-   *
-   * @example 1611796915677
-   */
-  lastReceivedWebhookEvent?: number;
+  createdAt?: number | null;
+  creator?: string;
+  domain?: string;
+  id?: string;
+  name?: string;
+  recordType?: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
+  ttl?: number;
+  type?: 'record' | 'record-sys';
+  value?: string;
   sizeInBytes: number;
   itemCount: number;
 };
