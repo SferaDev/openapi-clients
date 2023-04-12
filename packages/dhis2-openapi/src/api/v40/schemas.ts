@@ -56,7 +56,7 @@ export type AggregateDataExchange = {
 };
 
 export type AggregateDataExchangeJobParameters = {
-  dataExchangeIds?: string[];
+  dataExchangeIds?: Record<string, any>[];
 };
 
 export type AnalyticsJobParameters = {
@@ -64,7 +64,7 @@ export type AnalyticsJobParameters = {
    * @format int32
    */
   lastYears?: number;
-  skipPrograms?: string[];
+  skipPrograms?: Record<string, any>[];
   skipResourceTables: boolean;
   skipTableTypes?: (
     | 'DATA_VALUE'
@@ -302,9 +302,9 @@ export type ApprovalStatusDto = {
 
 export type ApprovalsDto = {
   approvals?: ApprovalDto[];
-  ds?: UIDDataSet[];
+  ds?: Record<string, any>[];
   pe?: string[];
-  wf?: UIDDataApprovalWorkflow[];
+  wf?: Record<string, any>[];
 };
 
 export type Attribute = {
@@ -2101,7 +2101,7 @@ export type DataValueAuditDto = {
 
 export type DataValueCategoryDto = {
   combo?: UIDCategoryCombo;
-  options?: UIDCategoryOption[];
+  options?: Record<string, any>[];
 };
 
 export type DataValueContextDto = {
@@ -3175,6 +3175,22 @@ export type EventDataFilter = {
   le?: string;
   like?: string;
   lt?: string;
+};
+
+export type EventDataValue = {
+  /**
+   * @format date-time
+   */
+  created?: string;
+  createdByUserInfo?: UserInfoSnapshot;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  lastUpdatedByUserInfo?: UserInfoSnapshot;
+  providedElsewhere?: boolean;
+  storedBy?: string;
+  value?: string;
 };
 
 export type EventFilter = {
@@ -5931,7 +5947,7 @@ export type MonitoringJobParameters = {
    */
   relativeStart: number;
   sendNotifications: boolean;
-  validationRuleGroups?: string[];
+  validationRuleGroups?: Record<string, any>[];
 };
 
 export type Node = {
@@ -7125,8 +7141,8 @@ export type PredictorGroup = {
 };
 
 export type PredictorJobParameters = {
-  predictorGroups?: string[];
-  predictors?: string[];
+  predictorGroups?: Record<string, any>[];
+  predictors?: Record<string, any>[];
   /**
    * @format int32
    */
@@ -7831,6 +7847,73 @@ export type ProgramStage = {
   validationStrategy: 'ON_COMPLETE' | 'ON_UPDATE_AND_INSERT';
 };
 
+export type ProgramStageInstance = {
+  access?: Access;
+  assignedUser?: RefUser;
+  attributeOptionCombo?: RefCategoryOptionCombo;
+  attributeValues?: AttributeValue[];
+  code?: string;
+  comments?: RefTrackedEntityComment[];
+  completed: boolean;
+  completedBy?: string;
+  /**
+   * @format date-time
+   */
+  completedDate?: string;
+  creatableInSearchScope: boolean;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  /**
+   * @format date-time
+   */
+  createdAtClient?: string;
+  createdBy?: RefUser;
+  createdByUserInfo?: UserInfoSnapshot;
+  deleted: boolean;
+  displayName?: string;
+  /**
+   * @format date-time
+   */
+  dueDate?: string;
+  eventDataValues?: EventDataValue[];
+  /**
+   * @format date-time
+   */
+  eventDate?: string;
+  externalAccess: boolean;
+  favorite: boolean;
+  favorites?: string[];
+  geometry?: Record<string, any>;
+  href?: string;
+  id?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdatedAtClient?: string;
+  lastUpdatedBy?: RefUser;
+  lastUpdatedByUserInfo?: UserInfoSnapshot;
+  messageConversations?: RefMessageConversation[];
+  name?: string;
+  organisationUnit?: RefOrganisationUnit;
+  programInstance?: RefProgramInstance;
+  programStage?: RefProgramStage;
+  publicAccess?: string;
+  relationshipItems?: RelationshipRelationshipItem[];
+  sharing?: Sharing;
+  status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
+  storedBy?: string;
+  translations?: Translation[];
+  user?: RefUser;
+  userAccesses?: UserAccess[];
+  userGroupAccesses?: UserGroupAccess[];
+};
+
 export type ProgramStageInstanceFilter = {
   access?: Access;
   attributeValues?: AttributeValue[];
@@ -8099,7 +8182,7 @@ export type PushAnalysis = {
 };
 
 export type PushAnalysisJobParameters = {
-  pushAnalysis: string[];
+  pushAnalysis: Record<string, any>[];
 };
 
 export type QueryModifiers = {
@@ -8197,6 +8280,13 @@ export type Relationship = {
   relationshipName?: string;
   relationshipType?: string;
   to?: RelationshipItem;
+};
+
+export type RelationshipRelationshipItem = {
+  programInstance?: RefProgramInstance;
+  programStageInstance?: RefProgramStageInstance;
+  relationship?: RefRelationshipRelationship;
+  trackedEntityInstance?: RefTrackedEntityInstance;
 };
 
 export type RelationshipConstraint = {
@@ -8631,7 +8721,7 @@ export type SchedulerEntryJob = {
 export type SchedulerQueue = {
   cronExpression: string;
   name?: string;
-  sequence: UIDJobConfiguration[];
+  sequence: Record<string, any>[];
 };
 
 export type Section = {
@@ -8869,7 +8959,7 @@ export type SqlView = {
 };
 
 export type SqlViewUpdateParameters = {
-  sqlViews?: string[];
+  sqlViews?: Record<string, any>[];
 };
 
 export type Stage = {
@@ -9190,11 +9280,76 @@ export type TrackedEntityAttributeDimension = {
   legendSet?: RefLegendSet;
 };
 
+export type TrackedEntityAttributeValue = {
+  /**
+   * @format date-time
+   */
+  created?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  storedBy?: string;
+  trackedEntityAttribute?: RefTrackedEntityAttribute;
+  trackedEntityInstance?: RefTrackedEntityInstance;
+  value?: string;
+};
+
 export type TrackedEntityDataElementDimension = {
   dataElement?: RefDataElement;
   filter?: string;
   legendSet?: RefLegendSet;
   programStage?: RefProgramStage;
+};
+
+export type TrackedEntityInstance = {
+  access?: Access;
+  attributeValues?: AttributeValue[];
+  code?: string;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  /**
+   * @format date-time
+   */
+  createdAtClient?: string;
+  createdBy?: RefUser;
+  createdByUserInfo?: UserInfoSnapshot;
+  deleted: boolean;
+  displayName?: string;
+  externalAccess: boolean;
+  favorite: boolean;
+  favorites?: string[];
+  geometry?: Record<string, any>;
+  href?: string;
+  id?: string;
+  inactive?: boolean;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdatedAtClient?: string;
+  lastUpdatedBy?: RefUser;
+  lastUpdatedByUserInfo?: UserInfoSnapshot;
+  name?: string;
+  organisationUnit?: RefOrganisationUnit;
+  potentialDuplicate: boolean;
+  programInstances?: RefProgramInstance[];
+  programOwners?: TrackedEntityProgramOwner[];
+  publicAccess?: string;
+  relationshipItems?: RelationshipRelationshipItem[];
+  sharing?: Sharing;
+  storedBy?: string;
+  trackedEntityAttributeValues?: TrackedEntityAttributeValue[];
+  trackedEntityType?: RefTrackedEntityType;
+  translations?: Translation[];
+  user?: RefUser;
+  userAccesses?: UserAccess[];
+  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type TrackedEntityInstanceFilter = {
@@ -9243,6 +9398,12 @@ export type TrackedEntityProgramIndicatorDimension = {
   filter?: string;
   legendSet?: RefLegendSet;
   programIndicator?: RefProgramIndicator;
+};
+
+export type TrackedEntityProgramOwner = {
+  organisationUnit?: RefOrganisationUnit;
+  program?: RefProgram;
+  trackedEntityInstance?: RefTrackedEntityInstance;
 };
 
 export type TrackedEntityType = {
@@ -9350,7 +9511,7 @@ export type TrackerReportStats = {
 };
 
 export type TrackerTrigramIndexJobParameters = {
-  attributes?: string[];
+  attributes?: Record<string, any>[];
   skipIndexDeletion: boolean;
 };
 
@@ -14603,6 +14764,21 @@ export type RefMessage = {
 };
 
 /**
+ * A UID reference to a MessageConversation
+ * (Java name `org.hisp.dhis.message.MessageConversation`)
+ */
+export type RefMessageConversation = {
+  /**
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example y9ANI1cRMYj
+   */
+  id: string;
+};
+
+/**
  * A UID reference to a Option
  * (Java name `org.hisp.dhis.option.Option`)
  */
@@ -14978,6 +15154,21 @@ export type RefProgramTrackedEntityAttributeDimensionItem = {
 };
 
 /**
+ * A UID reference to a Relationship-Relationship
+ * (Java name `org.hisp.dhis.relationship.Relationship`)
+ */
+export type RefRelationshipRelationship = {
+  /**
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example w2moUWfrJLZ
+   */
+  id: string;
+};
+
+/**
  * A UID reference to a Report
  * (Java name `org.hisp.dhis.report.Report`)
  */
@@ -15063,6 +15254,21 @@ export type RefTrackedEntityAttribute = {
    * @minLength 11
    * @maxLength 11
    * @example IplAV2eWO79
+   */
+  id: string;
+};
+
+/**
+ * A UID reference to a TrackedEntityComment
+ * (Java name `org.hisp.dhis.trackedentitycomment.TrackedEntityComment`)
+ */
+export type RefTrackedEntityComment = {
+  /**
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example GnjyT0cUM57
    */
   id: string;
 };
@@ -15991,18 +16197,6 @@ export type UIDProgramSection = string;
 export type UIDProgramStage = string;
 
 /**
- * A UID for an ProgramStageInstance object
- * (Java name `org.hisp.dhis.program.ProgramStageInstance`)
- *
- * @format uid
- * @pattern ^[0-9a-zA-Z]{11}$
- * @minLength 11
- * @maxLength 11
- * @example CnxC0Wl8SM5
- */
-export type UIDProgramStageInstance = string;
-
-/**
  * A UID for an ProgramStageInstanceFilter object
  * (Java name `org.hisp.dhis.programstagefilter.ProgramStageInstanceFilter`)
  *
@@ -16133,18 +16327,6 @@ export type UIDSqlView = string;
  * @example IplAV2eWO79
  */
 export type UIDTrackedEntityAttribute = string;
-
-/**
- * A UID for an TrackedEntityInstance object
- * (Java name `org.hisp.dhis.trackedentity.TrackedEntityInstance`)
- *
- * @format uid
- * @pattern ^[0-9a-zA-Z]{11}$
- * @minLength 11
- * @maxLength 11
- * @example HokzU1dVN68
- */
-export type UIDTrackedEntityInstance = string;
 
 /**
  * A UID for an TrackedEntityInstanceFilter object

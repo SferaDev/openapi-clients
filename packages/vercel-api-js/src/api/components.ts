@@ -1980,6 +1980,7 @@ export type CreateDeploymentRequestBody = {
         ['continue']?: boolean;
         override?: boolean;
         check?: boolean;
+        isInternal?: boolean;
         /**
          * @minimum 100
          * @maximum 999
