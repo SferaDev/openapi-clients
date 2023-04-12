@@ -374,6 +374,7 @@ export type AuthUser = {
         maxQuantity?: number;
       };
       analyticsUsage?: {
+        tier?: number;
         price: number;
         batch: number;
         threshold: number;
@@ -382,6 +383,7 @@ export type AuthUser = {
         disabledAt?: number | null;
       };
       artifacts?: {
+        tier?: number;
         price: number;
         batch: number;
         threshold: number;
@@ -390,6 +392,7 @@ export type AuthUser = {
         disabledAt?: number | null;
       };
       bandwidth?: {
+        tier?: number;
         price: number;
         batch: number;
         threshold: number;
@@ -398,6 +401,7 @@ export type AuthUser = {
         disabledAt?: number | null;
       };
       builds?: {
+        tier?: number;
         price: number;
         batch: number;
         threshold: number;
@@ -406,6 +410,7 @@ export type AuthUser = {
         disabledAt?: number | null;
       };
       edgeMiddlewareInvocations?: {
+        tier?: number;
         price: number;
         batch: number;
         threshold: number;
@@ -414,6 +419,7 @@ export type AuthUser = {
         disabledAt?: number | null;
       };
       edgeFunctionExecutionUnits?: {
+        tier?: number;
         price: number;
         batch: number;
         threshold: number;
@@ -422,6 +428,7 @@ export type AuthUser = {
         disabledAt?: number | null;
       };
       monitoringMetric?: {
+        tier?: number;
         price: number;
         batch: number;
         threshold: number;
@@ -430,6 +437,7 @@ export type AuthUser = {
         disabledAt?: number | null;
       };
       serverlessFunctionExecution?: {
+        tier?: number;
         price: number;
         batch: number;
         threshold: number;
@@ -438,6 +446,7 @@ export type AuthUser = {
         disabledAt?: number | null;
       };
       sourceImages?: {
+        tier?: number;
         price: number;
         batch: number;
         threshold: number;
@@ -446,6 +455,7 @@ export type AuthUser = {
         disabledAt?: number | null;
       };
       webAnalyticsEvent?: {
+        tier?: number;
         price: number;
         batch: number;
         threshold: number;
@@ -454,6 +464,7 @@ export type AuthUser = {
         disabledAt?: number | null;
       };
       edgeConfigRead?: {
+        tier?: number;
         price: number;
         batch: number;
         threshold: number;
@@ -462,6 +473,7 @@ export type AuthUser = {
         disabledAt?: number | null;
       };
       edgeConfigWrite?: {
+        tier?: number;
         price: number;
         batch: number;
         threshold: number;
@@ -470,6 +482,7 @@ export type AuthUser = {
         disabledAt?: number | null;
       };
       cronJobInvocation?: {
+        tier?: number;
         price: number;
         batch: number;
         threshold: number;

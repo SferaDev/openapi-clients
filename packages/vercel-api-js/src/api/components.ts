@@ -87,10 +87,6 @@ export type StatusQueryParams = {
 
 export type StatusError = Fetcher.ErrorWrapper<undefined>;
 
-export type StatusResponse = {
-  status: 'disabled' | 'enabled' | 'over_limit' | 'paused';
-};
-
 export type StatusVariables = {
   queryParams?: StatusQueryParams;
 } & FetcherExtraProps;
@@ -99,7 +95,7 @@ export type StatusVariables = {
  * Check the status of Remote Caching for this principal. Returns a JSON-encoded status indicating if Remote Caching is enabled, disabled, or disabled due to usage limits.
  */
 export const status = (variables: StatusVariables, signal?: AbortSignal) =>
-  fetch<StatusResponse, StatusError, undefined, {}, StatusQueryParams, {}>({
+  fetch<undefined, StatusError, undefined, {}, StatusQueryParams, {}>({
     url: '/v8/artifacts/status',
     method: 'get',
     ...variables,
@@ -159,15 +155,6 @@ export type UploadArtifactHeaders = {
 
 export type UploadArtifactError = Fetcher.ErrorWrapper<undefined>;
 
-export type UploadArtifactResponse = {
-  /**
-   * Array of URLs where the artifact was updated
-   *
-   * @example https://api.vercel.com/v2/now/artifact/12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-   */
-  urls: string[];
-};
-
 export type UploadArtifactVariables = {
   body?: Blob;
   headers: UploadArtifactHeaders;
@@ -180,7 +167,7 @@ export type UploadArtifactVariables = {
  */
 export const uploadArtifact = (variables: UploadArtifactVariables, signal?: AbortSignal) =>
   fetch<
-    UploadArtifactResponse,
+    undefined,
     UploadArtifactError,
     Blob,
     UploadArtifactHeaders,
@@ -235,7 +222,7 @@ export type DownloadArtifactVariables = {
  */
 export const downloadArtifact = (variables: DownloadArtifactVariables, signal?: AbortSignal) =>
   fetch<
-    Blob,
+    undefined,
     DownloadArtifactError,
     undefined,
     DownloadArtifactHeaders,
@@ -251,21 +238,6 @@ export type ArtifactQueryQueryParams = {
 };
 
 export type ArtifactQueryError = Fetcher.ErrorWrapper<undefined>;
-
-export type ArtifactQueryResponse = {
-  [key: string]:
-    | {
-        size: number;
-        taskDurationMs: number;
-        tag?: string;
-      }
-    | {
-        name: string;
-        message: string;
-        stack?: string;
-      }
-    | null;
-};
 
 export type ArtifactQueryRequestBody = {
   /**
@@ -283,7 +255,7 @@ export type ArtifactQueryVariables = {
  * Query information about an array of artifacts.
  */
 export const artifactQuery = (variables: ArtifactQueryVariables, signal?: AbortSignal) =>
-  fetch<ArtifactQueryResponse, ArtifactQueryError, ArtifactQueryRequestBody, {}, ArtifactQueryQueryParams, {}>({
+  fetch<undefined, ArtifactQueryError, ArtifactQueryRequestBody, {}, ArtifactQueryQueryParams, {}>({
     url: '/v8/artifacts',
     method: 'post',
     ...variables,
@@ -1028,18 +1000,7 @@ export type CreateDeploymentResponse = {
      */
     env: string[];
   };
-  builds?: {
-    use: string;
-    src?: string;
-    /**
-     * An object containing the deployment's metadata
-     *
-     * @example {"foo":"bar"}
-     */
-    config?: {
-      [key: string]: string;
-    };
-  }[];
+  builds?: Record<string, any>[];
   /**
    * The ID of Vercel Connect configuration used for this deployment
    */
@@ -12691,15 +12652,36 @@ export type CreateCheckQueryParams = {
 export type CreateCheckError = Fetcher.ErrorWrapper<undefined>;
 
 export type CreateCheckResponse = {
-  createdAt?: number | null;
-  creator: string;
-  domain: string;
-  id: string;
-  name: string;
-  recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
-  ttl?: number;
-  type: 'record' | 'record-sys';
-  value: string;
+  /**
+   * The Identity Provider "type", for example Okta.
+   *
+   * @example OktaSAML
+   */
+  type: string;
+  /**
+   * Current status of the connection.
+   *
+   * @example linked
+   */
+  status: string;
+  /**
+   * Current state of the connection.
+   *
+   * @example active
+   */
+  state: string;
+  /**
+   * Timestamp (in milliseconds) of when the configuration was connected.
+   *
+   * @example 1611796915677
+   */
+  connectedAt: number;
+  /**
+   * Timestamp (in milliseconds) of when the last webhook event was recieved from WorkOS.
+   *
+   * @example 1611796915677
+   */
+  lastReceivedWebhookEvent?: number;
 };
 
 export type CreateCheckRequestBody = {
@@ -12919,15 +12901,36 @@ export type UpdateCheckQueryParams = {
 export type UpdateCheckError = Fetcher.ErrorWrapper<undefined>;
 
 export type UpdateCheckResponse = {
-  createdAt?: number | null;
-  creator: string;
-  domain: string;
-  id: string;
-  name: string;
-  recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
-  ttl?: number;
-  type: 'record' | 'record-sys';
-  value: string;
+  /**
+   * The Identity Provider "type", for example Okta.
+   *
+   * @example OktaSAML
+   */
+  type: string;
+  /**
+   * Current status of the connection.
+   *
+   * @example linked
+   */
+  status: string;
+  /**
+   * Current state of the connection.
+   *
+   * @example active
+   */
+  state: string;
+  /**
+   * Timestamp (in milliseconds) of when the configuration was connected.
+   *
+   * @example 1611796915677
+   */
+  connectedAt: number;
+  /**
+   * Timestamp (in milliseconds) of when the last webhook event was recieved from WorkOS.
+   *
+   * @example 1611796915677
+   */
+  lastReceivedWebhookEvent?: number;
 };
 
 export type UpdateCheckRequestBody = {
@@ -13163,15 +13166,36 @@ export type CreateEdgeConfigQueryParams = {
 export type CreateEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
 
 export type CreateEdgeConfigResponse = {
-  createdAt?: number | null;
-  creator?: string;
-  domain?: string;
-  id?: string;
-  name?: string;
-  recordType?: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
-  ttl?: number;
-  type?: 'record' | 'record-sys';
-  value?: string;
+  /**
+   * The Identity Provider "type", for example Okta.
+   *
+   * @example OktaSAML
+   */
+  type?: string;
+  /**
+   * Current status of the connection.
+   *
+   * @example linked
+   */
+  status?: string;
+  /**
+   * Current state of the connection.
+   *
+   * @example active
+   */
+  state?: string;
+  /**
+   * Timestamp (in milliseconds) of when the configuration was connected.
+   *
+   * @example 1611796915677
+   */
+  connectedAt?: number;
+  /**
+   * Timestamp (in milliseconds) of when the last webhook event was recieved from WorkOS.
+   *
+   * @example 1611796915677
+   */
+  lastReceivedWebhookEvent?: number;
   sizeInBytes: number;
   itemCount: number;
 };
@@ -13264,15 +13288,36 @@ export type UpdateEdgeConfigQueryParams = {
 export type UpdateEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
 
 export type UpdateEdgeConfigResponse = {
-  createdAt?: number | null;
-  creator?: string;
-  domain?: string;
-  id?: string;
-  name?: string;
-  recordType?: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
-  ttl?: number;
-  type?: 'record' | 'record-sys';
-  value?: string;
+  /**
+   * The Identity Provider "type", for example Okta.
+   *
+   * @example OktaSAML
+   */
+  type?: string;
+  /**
+   * Current status of the connection.
+   *
+   * @example linked
+   */
+  status?: string;
+  /**
+   * Current state of the connection.
+   *
+   * @example active
+   */
+  state?: string;
+  /**
+   * Timestamp (in milliseconds) of when the configuration was connected.
+   *
+   * @example 1611796915677
+   */
+  connectedAt?: number;
+  /**
+   * Timestamp (in milliseconds) of when the last webhook event was recieved from WorkOS.
+   *
+   * @example 1611796915677
+   */
+  lastReceivedWebhookEvent?: number;
   sizeInBytes: number;
   itemCount: number;
 };
