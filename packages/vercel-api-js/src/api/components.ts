@@ -12001,33 +12001,6 @@ export const getTeamMembers = (variables: GetTeamMembersVariables, signal?: Abor
 
 export type InviteUserToTeamError = Fetcher.ErrorWrapper<undefined>;
 
-export type InviteUserToTeamResponse = {
-  /**
-   * The ID of the invited user
-   *
-   * @example kr1PsOIzqEL5Xg6M4VZcZosf
-   */
-  uid: string;
-  /**
-   * The username of the invited user
-   *
-   * @example john-doe
-   */
-  username: string;
-  /**
-   * The email of the invited user
-   *
-   * @example john@user.co
-   */
-  email: string;
-  /**
-   * The role used for the invitation
-   *
-   * @example MEMBER
-   */
-  role: string;
-};
-
 export type InviteUserToTeamRequestBody = {
   /**
    * The id of the user to invite
@@ -12053,12 +12026,44 @@ export type InviteUserToTeamVariables = {
  * Invite a user to join the team specified in the URL. The authenticated user needs to be an `OWNER` in order to successfully invoke this endpoint. The user can be specified with an email or an ID. If both email and ID are provided, ID will take priority.
  */
 export const inviteUserToTeam = (variables: InviteUserToTeamVariables, signal?: AbortSignal) =>
-  fetch<InviteUserToTeamResponse, InviteUserToTeamError, InviteUserToTeamRequestBody, {}, {}, {}>({
-    url: '/v1/teams/{teamId}/members',
-    method: 'post',
-    ...variables,
-    signal
-  });
+  fetch<
+    | {
+        /**
+         * The ID of the invited user
+         *
+         * @example kr1PsOIzqEL5Xg6M4VZcZosf
+         */
+        uid: string;
+        /**
+         * The username of the invited user
+         *
+         * @example john-doe
+         */
+        username: string;
+        /**
+         * The email of the invited user. Not included if the user was invited via their UID.
+         *
+         * @example john@user.co
+         */
+        email: string;
+        /**
+         * The role used for the invitation
+         *
+         * @example MEMBER
+         */
+        role: string;
+      }
+    | {
+        uid: string;
+        username: string;
+        role: string;
+      },
+    InviteUserToTeamError,
+    InviteUserToTeamRequestBody,
+    {},
+    {},
+    {}
+  >({ url: '/v1/teams/{teamId}/members', method: 'post', ...variables, signal });
 
 export type RequestAccessToTeamError = Fetcher.ErrorWrapper<undefined>;
 
