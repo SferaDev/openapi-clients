@@ -1,6 +1,6 @@
 import { operationsByTag } from './api/components';
 import { operationsByPath } from './api/extra';
-import { FetcherExtraProps, baseUrl, fetch as netlifyFetch } from './api/fetcher';
+import { FetcherExtraProps, fetch as netlifyFetch } from './api/fetcher';
 import { FetchImpl } from './utils/fetch';
 import { RequiredKeys } from './utils/types';
 
