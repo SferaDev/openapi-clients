@@ -1,5 +1,11 @@
 # netlify-api
 
+## 0.1.4
+
+### Patch Changes
+
+- 32af887: Update return type for refresh token
+
 ## 0.1.3
 
 ### Patch Changes
