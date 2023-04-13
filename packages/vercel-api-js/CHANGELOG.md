@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.1.10
+
+### Patch Changes
+
+- 7445ccd: [OpenAPI] Update InviteUserToTeamResponse
+
 ## 0.1.9
 
 ### Patch Changes
