@@ -1000,18 +1000,7 @@ export type CreateDeploymentResponse = {
      */
     env: string[];
   };
-  builds?: {
-    use: string;
-    src?: string;
-    /**
-     * An object containing the deployment's metadata
-     *
-     * @example {"foo":"bar"}
-     */
-    config?: {
-      [key: string]: string;
-    };
-  }[];
+  builds?: Record<string, any>[];
   /**
    * The ID of Vercel Connect configuration used for this deployment
    */
@@ -6741,6 +6730,7 @@ export type GetProjectsResponse = {
       billingPlan?: Schemas.ACLAction[];
       billingPurchaseOrder?: Schemas.ACLAction[];
       billingTaxId?: Schemas.ACLAction[];
+      blob?: Schemas.ACLAction[];
       cacheArtifact?: Schemas.ACLAction[];
       cacheArtifactUsageEvent?: Schemas.ACLAction[];
       concurrentBuilds?: Schemas.ACLAction[];
@@ -7130,6 +7120,7 @@ export type CreateProjectResponse = {
     billingPlan?: Schemas.ACLAction[];
     billingPurchaseOrder?: Schemas.ACLAction[];
     billingTaxId?: Schemas.ACLAction[];
+    blob?: Schemas.ACLAction[];
     cacheArtifact?: Schemas.ACLAction[];
     cacheArtifactUsageEvent?: Schemas.ACLAction[];
     concurrentBuilds?: Schemas.ACLAction[];
@@ -7673,6 +7664,7 @@ export type GetProjectResponse = {
     billingPlan?: Schemas.ACLAction[];
     billingPurchaseOrder?: Schemas.ACLAction[];
     billingTaxId?: Schemas.ACLAction[];
+    blob?: Schemas.ACLAction[];
     cacheArtifact?: Schemas.ACLAction[];
     cacheArtifactUsageEvent?: Schemas.ACLAction[];
     concurrentBuilds?: Schemas.ACLAction[];
@@ -8070,6 +8062,7 @@ export type UpdateProjectResponse = {
     billingPlan?: Schemas.ACLAction[];
     billingPurchaseOrder?: Schemas.ACLAction[];
     billingTaxId?: Schemas.ACLAction[];
+    blob?: Schemas.ACLAction[];
     cacheArtifact?: Schemas.ACLAction[];
     cacheArtifactUsageEvent?: Schemas.ACLAction[];
     concurrentBuilds?: Schemas.ACLAction[];
