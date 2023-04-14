@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.1.11
+
+### Patch Changes
+
+- eacb118: [OpenAPI] Update schemas for projects and deployments
+
 ## 0.1.10
 
 ### Patch Changes
