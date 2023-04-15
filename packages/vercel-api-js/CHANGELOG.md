@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.1.12
+
+### Patch Changes
+
+- 04b419b: [OpenAPI] Revert change to schema
+
 ## 0.1.11
 
 ### Patch Changes
