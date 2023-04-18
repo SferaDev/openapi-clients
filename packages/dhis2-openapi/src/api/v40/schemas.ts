@@ -4756,6 +4756,7 @@ export type ImportSummary = {
   importCount?: ImportCount;
   importOptions?: ImportOptions;
   reference?: string;
+  rejectedIndexes?: number[];
   relationships?: ImportSummaries;
   responseType?: string;
   status: 'SUCCESS' | 'WARNING' | 'ERROR';

@@ -10298,7 +10298,7 @@ export type GetIntegrationLogDrainsResponse = {
    */
   createdFrom?: 'self-served' | 'integration';
   /**
-   * Construct a type with a set of properties K of type T
+   * The headers to send with the request
    *
    * @example {"Authorization": "Bearer 123"}
    */
@@ -10418,7 +10418,7 @@ export type CreateLogDrainResponse = {
    */
   createdFrom?: 'self-served' | 'integration';
   /**
-   * Construct a type with a set of properties K of type T
+   * The headers to send with the request
    *
    * @example {"Authorization": "Bearer 123"}
    */
