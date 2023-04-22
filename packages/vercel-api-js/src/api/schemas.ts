@@ -585,6 +585,14 @@ export type AuthUser = {
     }[];
   }[];
   /**
+   * A list of projects across teams that a user has marked as a favorite.
+   */
+  favoriteProjects?: {
+    projectId: string;
+    scopeId: string;
+    scopeSlug: string;
+  }[];
+  /**
    * Whether the user has a trial available for a paid plan subscription.
    */
   hasTrialAvailable: boolean;
@@ -753,74 +761,32 @@ export type TeamLimited = {
    */
   saml?: {
     /**
-     * Information for the SAML Single Sign-On configuration.
+     * From T, pick a set of properties whose keys are in the union K
      */
     connection?: {
-      /**
-       * The Identity Provider "type", for example Okta.
-       *
-       * @example OktaSAML
-       */
-      type: string;
-      /**
-       * Current status of the connection.
-       *
-       * @example linked
-       */
-      status: string;
-      /**
-       * Current state of the connection.
-       *
-       * @example active
-       */
-      state: string;
-      /**
-       * Timestamp (in milliseconds) of when the configuration was connected.
-       *
-       * @example 1611796915677
-       */
-      connectedAt: number;
-      /**
-       * Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.
-       *
-       * @example 1611796915677
-       */
-      lastReceivedWebhookEvent?: number;
+      createdAt?: number | null;
+      creator: string;
+      domain: string;
+      id: string;
+      name: string;
+      recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
+      ttl?: number;
+      type: 'record' | 'record-sys';
+      value: string;
     };
     /**
-     * Information for the SAML Single Sign-On configuration.
+     * From T, pick a set of properties whose keys are in the union K
      */
     directory?: {
-      /**
-       * The Identity Provider "type", for example Okta.
-       *
-       * @example OktaSAML
-       */
-      type: string;
-      /**
-       * Current status of the connection.
-       *
-       * @example linked
-       */
-      status: string;
-      /**
-       * Current state of the connection.
-       *
-       * @example active
-       */
-      state: string;
-      /**
-       * Timestamp (in milliseconds) of when the configuration was connected.
-       *
-       * @example 1611796915677
-       */
-      connectedAt: number;
-      /**
-       * Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.
-       *
-       * @example 1611796915677
-       */
-      lastReceivedWebhookEvent?: number;
+      createdAt?: number | null;
+      creator: string;
+      domain: string;
+      id: string;
+      name: string;
+      recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
+      ttl?: number;
+      type: 'record' | 'record-sys';
+      value: string;
     };
     /**
      * When `true`, interactions with the Team **must** be done with an authentication token that has been authenticated with the Team's SAML Single Sign-On provider.

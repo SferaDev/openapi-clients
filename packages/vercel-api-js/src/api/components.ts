@@ -1000,18 +1000,7 @@ export type CreateDeploymentResponse = {
      */
     env: string[];
   };
-  builds?: {
-    use: string;
-    src?: string;
-    /**
-     * An object containing the deployment's metadata
-     *
-     * @example {"foo":"bar"}
-     */
-    config?: {
-      [key: string]: string;
-    };
-  }[];
+  builds?: Record<string, any>[];
   /**
    * The ID of Vercel Connect configuration used for this deployment
    */
@@ -2216,7 +2205,7 @@ export type CreateDeploymentRequestBody = {
      *
      * @example https://github.com/vercel/next.js
      */
-    remoteUrl: string;
+    remoteUrl?: string;
     /**
      * The name of the author of the commit
      *
@@ -3224,12 +3213,12 @@ export type GetDeploymentEventsResponse = (
     }
   | {
       type:
-        | 'delimiter'
         | 'command'
         | 'stdout'
         | 'stderr'
         | 'exit'
         | 'deployment-state'
+        | 'delimiter'
         | 'middleware'
         | 'middleware-invocation'
         | 'edge-function-invocation'
@@ -8043,13 +8032,63 @@ export type UpdateProjectResponse = {
   ssoProtection?: {
     deploymentType: 'all' | 'preview';
   } | null;
-  /**
-   * An object containing the deployment's metadata
-   *
-   * @example {"foo":"bar"}
-   */
   targets?: {
-    [key: string]: string;
+    [key: string]: {
+      alias?: string[];
+      aliasAssigned?: number | boolean | null;
+      aliasError?: {
+        code: string;
+        message: string;
+      } | null;
+      aliasFinal?: string | null;
+      automaticAliases?: string[];
+      builds?: {
+        use: string;
+        src?: string;
+        dest?: string;
+      }[];
+      connectConfigurationId?: string;
+      createdAt: number;
+      createdIn: string;
+      creator: {
+        email: string;
+        githubLogin?: string;
+        gitlabLogin?: string;
+        uid: string;
+        username: string;
+      } | null;
+      deploymentHostname: string;
+      name: string;
+      forced?: boolean;
+      id: string;
+      /**
+       * Construct a type with a set of properties K of type T
+       */
+      meta?: {
+        [key: string]: string;
+      };
+      monorepoManager?: string | null;
+      plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
+      private: boolean;
+      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+      requestedAt?: number;
+      target?: string | null;
+      teamId?: string | null;
+      type: 'LAMBDAS';
+      url: string;
+      userId: string;
+      withCache?: boolean;
+      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+      checksState?: 'registered' | 'running' | 'completed';
+      readyAt?: number;
+      buildingAt?: number;
+      /**
+       * Whether or not preview comments are enabled for the deployment
+       *
+       * @example false
+       */
+      previewCommentsEnabled?: boolean;
+    } | null;
   };
   transferCompletedAt?: number;
   transferStartedAt?: number;
@@ -10298,7 +10337,7 @@ export type GetIntegrationLogDrainsResponse = {
    */
   createdFrom?: 'self-served' | 'integration';
   /**
-   * The headers to send with the request
+   * Construct a type with a set of properties K of type T
    *
    * @example {"Authorization": "Bearer 123"}
    */
@@ -10418,7 +10457,7 @@ export type CreateLogDrainResponse = {
    */
   createdFrom?: 'self-served' | 'integration';
   /**
-   * The headers to send with the request
+   * Construct a type with a set of properties K of type T
    *
    * @example {"Authorization": "Bearer 123"}
    */
@@ -12672,15 +12711,36 @@ export type CreateCheckQueryParams = {
 export type CreateCheckError = Fetcher.ErrorWrapper<undefined>;
 
 export type CreateCheckResponse = {
-  createdAt?: number | null;
-  creator: string;
-  domain: string;
-  id: string;
-  name: string;
-  recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
-  ttl?: number;
-  type: 'record' | 'record-sys';
-  value: string;
+  /**
+   * The Identity Provider "type", for example Okta.
+   *
+   * @example OktaSAML
+   */
+  type: string;
+  /**
+   * Current status of the connection.
+   *
+   * @example linked
+   */
+  status: string;
+  /**
+   * Current state of the connection.
+   *
+   * @example active
+   */
+  state: string;
+  /**
+   * Timestamp (in milliseconds) of when the configuration was connected.
+   *
+   * @example 1611796915677
+   */
+  connectedAt: number;
+  /**
+   * Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.
+   *
+   * @example 1611796915677
+   */
+  lastReceivedWebhookEvent?: number;
 };
 
 export type CreateCheckRequestBody = {
@@ -12900,15 +12960,36 @@ export type UpdateCheckQueryParams = {
 export type UpdateCheckError = Fetcher.ErrorWrapper<undefined>;
 
 export type UpdateCheckResponse = {
-  createdAt?: number | null;
-  creator: string;
-  domain: string;
-  id: string;
-  name: string;
-  recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
-  ttl?: number;
-  type: 'record' | 'record-sys';
-  value: string;
+  /**
+   * The Identity Provider "type", for example Okta.
+   *
+   * @example OktaSAML
+   */
+  type: string;
+  /**
+   * Current status of the connection.
+   *
+   * @example linked
+   */
+  status: string;
+  /**
+   * Current state of the connection.
+   *
+   * @example active
+   */
+  state: string;
+  /**
+   * Timestamp (in milliseconds) of when the configuration was connected.
+   *
+   * @example 1611796915677
+   */
+  connectedAt: number;
+  /**
+   * Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.
+   *
+   * @example 1611796915677
+   */
+  lastReceivedWebhookEvent?: number;
 };
 
 export type UpdateCheckRequestBody = {
@@ -13144,15 +13225,36 @@ export type CreateEdgeConfigQueryParams = {
 export type CreateEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
 
 export type CreateEdgeConfigResponse = {
-  createdAt?: number | null;
-  creator?: string;
-  domain?: string;
-  id?: string;
-  name?: string;
-  recordType?: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
-  ttl?: number;
-  type?: 'record' | 'record-sys';
-  value?: string;
+  /**
+   * The Identity Provider "type", for example Okta.
+   *
+   * @example OktaSAML
+   */
+  type?: string;
+  /**
+   * Current status of the connection.
+   *
+   * @example linked
+   */
+  status?: string;
+  /**
+   * Current state of the connection.
+   *
+   * @example active
+   */
+  state?: string;
+  /**
+   * Timestamp (in milliseconds) of when the configuration was connected.
+   *
+   * @example 1611796915677
+   */
+  connectedAt?: number;
+  /**
+   * Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.
+   *
+   * @example 1611796915677
+   */
+  lastReceivedWebhookEvent?: number;
   sizeInBytes: number;
   itemCount: number;
 };
@@ -13245,15 +13347,36 @@ export type UpdateEdgeConfigQueryParams = {
 export type UpdateEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
 
 export type UpdateEdgeConfigResponse = {
-  createdAt?: number | null;
-  creator?: string;
-  domain?: string;
-  id?: string;
-  name?: string;
-  recordType?: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
-  ttl?: number;
-  type?: 'record' | 'record-sys';
-  value?: string;
+  /**
+   * The Identity Provider "type", for example Okta.
+   *
+   * @example OktaSAML
+   */
+  type?: string;
+  /**
+   * Current status of the connection.
+   *
+   * @example linked
+   */
+  status?: string;
+  /**
+   * Current state of the connection.
+   *
+   * @example active
+   */
+  state?: string;
+  /**
+   * Timestamp (in milliseconds) of when the configuration was connected.
+   *
+   * @example 1611796915677
+   */
+  connectedAt?: number;
+  /**
+   * Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.
+   *
+   * @example 1611796915677
+   */
+  lastReceivedWebhookEvent?: number;
   sizeInBytes: number;
   itemCount: number;
 };
