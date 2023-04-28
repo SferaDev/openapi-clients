@@ -491,6 +491,42 @@ export type AuthUser = {
         hidden: boolean;
         disabledAt?: number | null;
       };
+      postgresComputeTime?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+      };
+      postgresDataStorage?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+      };
+      postgresDataTransfer?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+      };
+      postgresWrittenData?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+      };
     } | null;
     invoiceSettings?: {
       footer?: string;
@@ -555,6 +591,14 @@ export type AuthUser = {
      * To overwrite the maximum size of an Edge Config per account. Size is in kilobytes, eg 64 leads to 64kB or 64_000 bytes worth of storage
      */
     edgeConfigSize?: number;
+    /**
+     * The maximum size for an Edge Function per account. Format is in bytes. eg output of `bytes('3mb')`
+     */
+    edgeFunctionMaxSizeBytes?: number;
+    /**
+     * The maximum time to wait (in milliseconds) for the response headers.
+     */
+    edgeFunctionExecutionTimeoutMs?: number;
   };
   /**
    * Prefix that will be used in the URL of "Preview" deployments created by the User account.
@@ -584,6 +628,21 @@ export type AuthUser = {
       createdAt: number;
     }[];
   }[];
+  /**
+   * A list of projects and spaces across teams that a user has marked as a favorite.
+   */
+  favoriteProjectsAndSpaces?: (
+    | {
+        projectId: string;
+        scopeSlug: string;
+        scopeId: string;
+      }
+    | {
+        spaceId: string;
+        scopeSlug: string;
+        scopeId: string;
+      }
+  )[];
   /**
    * Whether the user has a trial available for a paid plan subscription.
    */
@@ -753,74 +812,32 @@ export type TeamLimited = {
    */
   saml?: {
     /**
-     * Information for the SAML Single Sign-On configuration.
+     * From T, pick a set of properties whose keys are in the union K
      */
     connection?: {
-      /**
-       * The Identity Provider "type", for example Okta.
-       *
-       * @example OktaSAML
-       */
-      type: string;
-      /**
-       * Current status of the connection.
-       *
-       * @example linked
-       */
-      status: string;
-      /**
-       * Current state of the connection.
-       *
-       * @example active
-       */
-      state: string;
-      /**
-       * Timestamp (in milliseconds) of when the configuration was connected.
-       *
-       * @example 1611796915677
-       */
-      connectedAt: number;
-      /**
-       * Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.
-       *
-       * @example 1611796915677
-       */
-      lastReceivedWebhookEvent?: number;
+      createdAt?: number | null;
+      creator: string;
+      domain: string;
+      id: string;
+      name: string;
+      recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
+      ttl?: number;
+      type: 'record' | 'record-sys';
+      value: string;
     };
     /**
-     * Information for the SAML Single Sign-On configuration.
+     * From T, pick a set of properties whose keys are in the union K
      */
     directory?: {
-      /**
-       * The Identity Provider "type", for example Okta.
-       *
-       * @example OktaSAML
-       */
-      type: string;
-      /**
-       * Current status of the connection.
-       *
-       * @example linked
-       */
-      status: string;
-      /**
-       * Current state of the connection.
-       *
-       * @example active
-       */
-      state: string;
-      /**
-       * Timestamp (in milliseconds) of when the configuration was connected.
-       *
-       * @example 1611796915677
-       */
-      connectedAt: number;
-      /**
-       * Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.
-       *
-       * @example 1611796915677
-       */
-      lastReceivedWebhookEvent?: number;
+      createdAt?: number | null;
+      creator: string;
+      domain: string;
+      id: string;
+      name: string;
+      recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
+      ttl?: number;
+      type: 'record' | 'record-sys';
+      value: string;
     };
     /**
      * When `true`, interactions with the Team **must** be done with an authentication token that has been authenticated with the Team's SAML Single Sign-On provider.

@@ -2167,6 +2167,124 @@ export type CreateDeploymentRequestBody = {
     path: string;
   }[];
   /**
+   * The target project identifier in which the deployment will be created. When defined, this parameter overrides name
+   *
+   * @example my-deployment-project
+   */
+  project: string;
+  /**
+   * @maxItems 10
+   */
+  connection_uris: {
+    /**
+     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
+     */
+    connection_uri: string;
+  }[];
+  /**
+   * @maxItems 10
+   */
+  roles: {
+    branch_id: string;
+    name: string;
+    created_at: string;
+    updated_at: string;
+    protected?: boolean;
+    password?: string;
+  }[];
+  /**
+   * @maxItems 10
+   */
+  databases: {
+    id: number;
+    branch_id: string;
+    name: string;
+    owner_name: string;
+    created_at: string;
+    updated_at: string;
+  }[];
+  branch: {
+    id: string;
+    project_id: string;
+    name: string;
+    current_state: 'init' | 'ready';
+    primary: boolean;
+    created_at: string;
+    updated_at: string;
+    parent_id?: string;
+  };
+  /**
+   * @maxItems 10
+   */
+  endpoints: {
+    host: string;
+    id: string;
+    project_id: string;
+    branch_id: string;
+    autoscaling_limit_min_cu: number;
+    autoscaling_limit_max_cu: number;
+    region_id: string;
+    type: string;
+    current_state: string;
+    pooler_enabled: boolean;
+    pooler_mode: string;
+    disabled: boolean;
+    passwordless_access: boolean;
+    last_active?: string;
+    created_at: string;
+    updated_at: string;
+    suspend_timeout_seconds: number;
+  }[];
+  endpoint: {
+    host: string;
+    id: string;
+    project_id: string;
+    branch_id: string;
+    autoscaling_limit_min_cu: number;
+    autoscaling_limit_max_cu: number;
+    region_id: string;
+    type: string;
+    current_state: string;
+    pooler_enabled: boolean;
+    pooler_mode: string;
+    disabled: boolean;
+    passwordless_access: boolean;
+    last_active?: string;
+    created_at: string;
+    updated_at: string;
+    suspend_timeout_seconds: number;
+  };
+  database: {
+    id: number;
+    branch_id: string;
+    name: string;
+    owner_name: string;
+    created_at: string;
+    updated_at: string;
+  };
+  role: {
+    branch_id: string;
+    name: string;
+    created_at: string;
+    updated_at: string;
+    protected?: boolean;
+    password?: string;
+  };
+  password: string;
+  /**
+   * @maxItems 1000
+   */
+  projects: {
+    id: string;
+    data_storage_bytes_hour: number;
+    data_transfer_bytes: number;
+    written_data_bytes: number;
+    compute_time_seconds: number;
+  }[];
+  pagination: {
+    cursor: string;
+  };
+  /**
    * An deployment id for an existing deployment to redeploy
    */
   deploymentId?: string;
@@ -2216,7 +2334,7 @@ export type CreateDeploymentRequestBody = {
      *
      * @example https://github.com/vercel/next.js
      */
-    remoteUrl: string;
+    remoteUrl?: string;
     /**
      * The name of the author of the commit
      *
@@ -2298,12 +2416,6 @@ export type CreateDeploymentRequestBody = {
    * The monorepo manager that is being used for this deployment. When `null` is used no monorepo manager is selected
    */
   monorepoManager?: string | null;
-  /**
-   * The target project identifier in which the deployment will be created. When defined, this parameter overrides name
-   *
-   * @example my-deployment-project
-   */
-  project?: string;
   /**
    * Project settings that will be applied to the deployment. It is required for the first deployment of a project and will be saved for any following deployments
    */
@@ -5421,6 +5533,12 @@ export type CreateOrTransferDomainResponse = {
       id: string;
     };
     /**
+     * The domain name.
+     *
+     * @example example.com
+     */
+    name: string;
+    /**
      * Timestamp in milliseconds when the domain was created in the registry.
      *
      * @example 1613602938882
@@ -5432,12 +5550,6 @@ export type CreateOrTransferDomainResponse = {
      * @example EmTbe5CEJyTk2yVAHBUWy4A3sRusca3GCwRjTC1bpeVnt1
      */
     id: string;
-    /**
-     * The domain name.
-     *
-     * @example example.com
-     */
-    name: string;
     /**
      * Timestamp in milliseconds at which the domain is set to expire. `null` if not bought with Vercel.
      *
@@ -6312,7 +6424,7 @@ export type GetDeploymentsResponse = {
      *
      * @example production
      */
-    target?: 'production' | 'staging' | null;
+    target?: 'staging' | 'production' | null;
     /**
      * An error object in case aliasing of the deployment failed.
      */
@@ -6531,6 +6643,56 @@ export type GetProjectsResponse = {
       gitBranch?: string;
       edgeConfigId?: string | null;
       edgeConfigTokenId?: string | null;
+      contentHint?:
+        | {
+            type: 'redis-url';
+            storeId: string;
+          }
+        | {
+            type: 'redis-rest-api-url';
+            storeId: string;
+          }
+        | {
+            type: 'redis-rest-api-token';
+            storeId: string;
+          }
+        | {
+            type: 'redis-rest-api-read-only-token';
+            storeId: string;
+          }
+        | {
+            type: 'blob-read-write-token';
+            storeId: string;
+          }
+        | {
+            type: 'postgres-url';
+            storeId: string;
+          }
+        | {
+            type: 'postgres-url-non-pooling';
+            storeId: string;
+          }
+        | {
+            type: 'postgres-prisma-url';
+            storeId: string;
+          }
+        | {
+            type: 'postgres-user';
+            storeId: string;
+          }
+        | {
+            type: 'postgres-host';
+            storeId: string;
+          }
+        | {
+            type: 'postgres-password';
+            storeId: string;
+          }
+        | {
+            type: 'postgres-database';
+            storeId: string;
+          }
+        | null;
       /**
        * Whether `value` is decrypted.
        */
@@ -6821,6 +6983,7 @@ export type GetProjectsResponse = {
       spendCapState?: Schemas.ACLAction[];
       supportCase?: Schemas.ACLAction[];
       supportCaseComment?: Schemas.ACLAction[];
+      DataCacheNamespace?: Schemas.ACLAction[];
       team?: Schemas.ACLAction[];
       teamAccessRequest?: Schemas.ACLAction[];
       teamFellowMembership?: Schemas.ACLAction[];
@@ -6921,6 +7084,56 @@ export type CreateProjectResponse = {
     gitBranch?: string;
     edgeConfigId?: string | null;
     edgeConfigTokenId?: string | null;
+    contentHint?:
+      | {
+          type: 'redis-url';
+          storeId: string;
+        }
+      | {
+          type: 'redis-rest-api-url';
+          storeId: string;
+        }
+      | {
+          type: 'redis-rest-api-token';
+          storeId: string;
+        }
+      | {
+          type: 'redis-rest-api-read-only-token';
+          storeId: string;
+        }
+      | {
+          type: 'blob-read-write-token';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-url';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-url-non-pooling';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-prisma-url';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-user';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-host';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-password';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-database';
+          storeId: string;
+        }
+      | null;
     /**
      * Whether `value` is decrypted.
      */
@@ -7211,6 +7424,7 @@ export type CreateProjectResponse = {
     spendCapState?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
+    DataCacheNamespace?: Schemas.ACLAction[];
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
     teamFellowMembership?: Schemas.ACLAction[];
@@ -7465,6 +7679,56 @@ export type GetProjectResponse = {
     gitBranch?: string;
     edgeConfigId?: string | null;
     edgeConfigTokenId?: string | null;
+    contentHint?:
+      | {
+          type: 'redis-url';
+          storeId: string;
+        }
+      | {
+          type: 'redis-rest-api-url';
+          storeId: string;
+        }
+      | {
+          type: 'redis-rest-api-token';
+          storeId: string;
+        }
+      | {
+          type: 'redis-rest-api-read-only-token';
+          storeId: string;
+        }
+      | {
+          type: 'blob-read-write-token';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-url';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-url-non-pooling';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-prisma-url';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-user';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-host';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-password';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-database';
+          storeId: string;
+        }
+      | null;
     /**
      * Whether `value` is decrypted.
      */
@@ -7755,6 +8019,7 @@ export type GetProjectResponse = {
     spendCapState?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
+    DataCacheNamespace?: Schemas.ACLAction[];
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
     teamFellowMembership?: Schemas.ACLAction[];
@@ -7863,6 +8128,56 @@ export type UpdateProjectResponse = {
     gitBranch?: string;
     edgeConfigId?: string | null;
     edgeConfigTokenId?: string | null;
+    contentHint?:
+      | {
+          type: 'redis-url';
+          storeId: string;
+        }
+      | {
+          type: 'redis-rest-api-url';
+          storeId: string;
+        }
+      | {
+          type: 'redis-rest-api-token';
+          storeId: string;
+        }
+      | {
+          type: 'redis-rest-api-read-only-token';
+          storeId: string;
+        }
+      | {
+          type: 'blob-read-write-token';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-url';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-url-non-pooling';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-prisma-url';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-user';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-host';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-password';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-database';
+          storeId: string;
+        }
+      | null;
     /**
      * Whether `value` is decrypted.
      */
@@ -8153,6 +8468,7 @@ export type UpdateProjectResponse = {
     spendCapState?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
+    DataCacheNamespace?: Schemas.ACLAction[];
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
     teamFellowMembership?: Schemas.ACLAction[];
@@ -8916,6 +9232,56 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
         gitBranch?: string;
         edgeConfigId?: string | null;
         edgeConfigTokenId?: string | null;
+        contentHint?:
+          | {
+              type: 'redis-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-token';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-read-only-token';
+              storeId: string;
+            }
+          | {
+              type: 'blob-read-write-token';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-non-pooling';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-prisma-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-user';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-host';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-password';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-database';
+              storeId: string;
+            }
+          | null;
         /**
          * Whether `value` is decrypted.
          */
@@ -8939,6 +9305,56 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           gitBranch?: string;
           edgeConfigId?: string | null;
           edgeConfigTokenId?: string | null;
+          contentHint?:
+            | {
+                type: 'redis-url';
+                storeId: string;
+              }
+            | {
+                type: 'redis-rest-api-url';
+                storeId: string;
+              }
+            | {
+                type: 'redis-rest-api-token';
+                storeId: string;
+              }
+            | {
+                type: 'redis-rest-api-read-only-token';
+                storeId: string;
+              }
+            | {
+                type: 'blob-read-write-token';
+                storeId: string;
+              }
+            | {
+                type: 'postgres-url';
+                storeId: string;
+              }
+            | {
+                type: 'postgres-url-non-pooling';
+                storeId: string;
+              }
+            | {
+                type: 'postgres-prisma-url';
+                storeId: string;
+              }
+            | {
+                type: 'postgres-user';
+                storeId: string;
+              }
+            | {
+                type: 'postgres-host';
+                storeId: string;
+              }
+            | {
+                type: 'postgres-password';
+                storeId: string;
+              }
+            | {
+                type: 'postgres-database';
+                storeId: string;
+              }
+            | null;
           /**
            * Whether `value` is decrypted.
            */
@@ -8964,6 +9380,56 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           gitBranch?: string;
           edgeConfigId?: string | null;
           edgeConfigTokenId?: string | null;
+          contentHint?:
+            | {
+                type: 'redis-url';
+                storeId: string;
+              }
+            | {
+                type: 'redis-rest-api-url';
+                storeId: string;
+              }
+            | {
+                type: 'redis-rest-api-token';
+                storeId: string;
+              }
+            | {
+                type: 'redis-rest-api-read-only-token';
+                storeId: string;
+              }
+            | {
+                type: 'blob-read-write-token';
+                storeId: string;
+              }
+            | {
+                type: 'postgres-url';
+                storeId: string;
+              }
+            | {
+                type: 'postgres-url-non-pooling';
+                storeId: string;
+              }
+            | {
+                type: 'postgres-prisma-url';
+                storeId: string;
+              }
+            | {
+                type: 'postgres-user';
+                storeId: string;
+              }
+            | {
+                type: 'postgres-host';
+                storeId: string;
+              }
+            | {
+                type: 'postgres-password';
+                storeId: string;
+              }
+            | {
+                type: 'postgres-database';
+                storeId: string;
+              }
+            | null;
           /**
            * Whether `value` is decrypted.
            */
@@ -9016,6 +9482,56 @@ export type GetProjectEnvResponse = {
   gitBranch?: string;
   edgeConfigId?: string | null;
   edgeConfigTokenId?: string | null;
+  contentHint?:
+    | {
+        type: 'redis-url';
+        storeId: string;
+      }
+    | {
+        type: 'redis-rest-api-url';
+        storeId: string;
+      }
+    | {
+        type: 'redis-rest-api-token';
+        storeId: string;
+      }
+    | {
+        type: 'redis-rest-api-read-only-token';
+        storeId: string;
+      }
+    | {
+        type: 'blob-read-write-token';
+        storeId: string;
+      }
+    | {
+        type: 'postgres-url';
+        storeId: string;
+      }
+    | {
+        type: 'postgres-url-non-pooling';
+        storeId: string;
+      }
+    | {
+        type: 'postgres-prisma-url';
+        storeId: string;
+      }
+    | {
+        type: 'postgres-user';
+        storeId: string;
+      }
+    | {
+        type: 'postgres-host';
+        storeId: string;
+      }
+    | {
+        type: 'postgres-password';
+        storeId: string;
+      }
+    | {
+        type: 'postgres-database';
+        storeId: string;
+      }
+    | null;
   /**
    * Whether `value` is decrypted.
    */
@@ -9080,6 +9596,56 @@ export type CreateProjectEnvResponse = {
         gitBranch?: string;
         edgeConfigId?: string | null;
         edgeConfigTokenId?: string | null;
+        contentHint?:
+          | {
+              type: 'redis-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-token';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-read-only-token';
+              storeId: string;
+            }
+          | {
+              type: 'blob-read-write-token';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-non-pooling';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-prisma-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-user';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-host';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-password';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-database';
+              storeId: string;
+            }
+          | null;
         /**
          * Whether `value` is decrypted.
          */
@@ -9102,6 +9668,56 @@ export type CreateProjectEnvResponse = {
         gitBranch?: string;
         edgeConfigId?: string | null;
         edgeConfigTokenId?: string | null;
+        contentHint?:
+          | {
+              type: 'redis-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-token';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-read-only-token';
+              storeId: string;
+            }
+          | {
+              type: 'blob-read-write-token';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-non-pooling';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-prisma-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-user';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-host';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-password';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-database';
+              storeId: string;
+            }
+          | null;
         /**
          * Whether `value` is decrypted.
          */
@@ -9333,6 +9949,56 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         gitBranch?: string;
         edgeConfigId?: string | null;
         edgeConfigTokenId?: string | null;
+        contentHint?:
+          | {
+              type: 'redis-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-token';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-read-only-token';
+              storeId: string;
+            }
+          | {
+              type: 'blob-read-write-token';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-non-pooling';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-prisma-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-user';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-host';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-password';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-database';
+              storeId: string;
+            }
+          | null;
         /**
          * Whether `value` is decrypted.
          */
@@ -9355,6 +10021,56 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         gitBranch?: string;
         edgeConfigId?: string | null;
         edgeConfigTokenId?: string | null;
+        contentHint?:
+          | {
+              type: 'redis-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-token';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-read-only-token';
+              storeId: string;
+            }
+          | {
+              type: 'blob-read-write-token';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-non-pooling';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-prisma-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-user';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-host';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-password';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-database';
+              storeId: string;
+            }
+          | null;
         /**
          * Whether `value` is decrypted.
          */
@@ -9376,6 +10092,56 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         gitBranch?: string;
         edgeConfigId?: string | null;
         edgeConfigTokenId?: string | null;
+        contentHint?:
+          | {
+              type: 'redis-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-token';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-read-only-token';
+              storeId: string;
+            }
+          | {
+              type: 'blob-read-write-token';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-non-pooling';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-prisma-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-user';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-host';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-password';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-database';
+              storeId: string;
+            }
+          | null;
         /**
          * Whether `value` is decrypted.
          */
@@ -9428,6 +10194,56 @@ export type EditProjectEnvResponse = {
   gitBranch?: string;
   edgeConfigId?: string | null;
   edgeConfigTokenId?: string | null;
+  contentHint?:
+    | {
+        type: 'redis-url';
+        storeId: string;
+      }
+    | {
+        type: 'redis-rest-api-url';
+        storeId: string;
+      }
+    | {
+        type: 'redis-rest-api-token';
+        storeId: string;
+      }
+    | {
+        type: 'redis-rest-api-read-only-token';
+        storeId: string;
+      }
+    | {
+        type: 'blob-read-write-token';
+        storeId: string;
+      }
+    | {
+        type: 'postgres-url';
+        storeId: string;
+      }
+    | {
+        type: 'postgres-url-non-pooling';
+        storeId: string;
+      }
+    | {
+        type: 'postgres-prisma-url';
+        storeId: string;
+      }
+    | {
+        type: 'postgres-user';
+        storeId: string;
+      }
+    | {
+        type: 'postgres-host';
+        storeId: string;
+      }
+    | {
+        type: 'postgres-password';
+        storeId: string;
+      }
+    | {
+        type: 'postgres-database';
+        storeId: string;
+      }
+    | null;
   /**
    * Whether `value` is decrypted.
    */
@@ -10177,6 +10993,62 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          */
         source?: 'marketplace' | 'deploy-button' | 'oauth' | 'external';
         canConfigureOpenTelemetry?: boolean;
+        removedLogDrainsAt?: number;
+        removedProjectEnvsAt?: number;
+        removedTokensAt?: number;
+        removedWebhooksAt?: number;
+        type: 'integration-configuration';
+        scopesQueue?: {
+          scopes: {
+            added: (
+              | 'read:integration-configuration'
+              | 'read-write:integration-configuration'
+              | 'read:deployment'
+              | 'read-write:deployment'
+              | 'read-write:deployment-check'
+              | 'read:project'
+              | 'read-write:project'
+              | 'read-write:project-env-vars'
+              | 'read-write:global-project-env-vars'
+              | 'read:team'
+              | 'read:user'
+              | 'read-write:log-drain'
+              | 'read:domain'
+              | 'read-write:domain'
+              | 'read-write:edge-config'
+              | 'read-write:otel-endpoint'
+              | 'read:monitoring'
+            )[];
+            upgraded: (
+              | 'read:integration-configuration'
+              | 'read-write:integration-configuration'
+              | 'read:deployment'
+              | 'read-write:deployment'
+              | 'read-write:deployment-check'
+              | 'read:project'
+              | 'read-write:project'
+              | 'read-write:project-env-vars'
+              | 'read-write:global-project-env-vars'
+              | 'read:team'
+              | 'read:user'
+              | 'read-write:log-drain'
+              | 'read:domain'
+              | 'read-write:domain'
+              | 'read-write:edge-config'
+              | 'read-write:otel-endpoint'
+              | 'read:monitoring'
+            )[];
+          };
+          note: string;
+          requestedAt: number;
+          confirmedAt?: number;
+        }[];
+        /**
+         * A timestamp that tells you when the configuration was updated.
+         *
+         * @example 1558531915505
+         */
+        deletedAt?: number | null;
       },
     GetConfigurationError,
     undefined,
@@ -10298,7 +11170,7 @@ export type GetIntegrationLogDrainsResponse = {
    */
   createdFrom?: 'self-served' | 'integration';
   /**
-   * The headers to send with the request
+   * Construct a type with a set of properties K of type T
    *
    * @example {"Authorization": "Bearer 123"}
    */
@@ -10418,7 +11290,7 @@ export type CreateLogDrainResponse = {
    */
   createdFrom?: 'self-served' | 'integration';
   /**
-   * The headers to send with the request
+   * Construct a type with a set of properties K of type T
    *
    * @example {"Authorization": "Bearer 123"}
    */
