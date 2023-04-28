@@ -39,6 +39,8 @@ export type ListSitesResponse = {
   name?: string;
   custom_domain?: string;
   domain_aliases?: string[];
+  branch_deploy_custom_domain?: string;
+  deploy_preview_custom_domain?: string;
   password?: string;
   notification_email?: string;
   url?: string;
@@ -194,6 +196,8 @@ export type CreateSiteResponse = {
   name?: string;
   custom_domain?: string;
   domain_aliases?: string[];
+  branch_deploy_custom_domain?: string;
+  deploy_preview_custom_domain?: string;
   password?: string;
   notification_email?: string;
   url?: string;
@@ -350,6 +354,8 @@ export type GetSiteResponse = {
   name?: string;
   custom_domain?: string;
   domain_aliases?: string[];
+  branch_deploy_custom_domain?: string;
+  deploy_preview_custom_domain?: string;
   password?: string;
   notification_email?: string;
   url?: string;
@@ -505,6 +511,8 @@ export type UpdateSiteResponse = {
   name?: string;
   custom_domain?: string;
   domain_aliases?: string[];
+  branch_deploy_custom_domain?: string;
+  deploy_preview_custom_domain?: string;
   password?: string;
   notification_email?: string;
   url?: string;
@@ -3121,6 +3129,8 @@ export type UnlinkSiteRepoResponse = {
   name?: string;
   custom_domain?: string;
   domain_aliases?: string[];
+  branch_deploy_custom_domain?: string;
+  deploy_preview_custom_domain?: string;
   password?: string;
   notification_email?: string;
   url?: string;
@@ -4653,6 +4663,8 @@ export type CreateSiteInTeamResponse = {
   name?: string;
   custom_domain?: string;
   domain_aliases?: string[];
+  branch_deploy_custom_domain?: string;
+  deploy_preview_custom_domain?: string;
   password?: string;
   notification_email?: string;
   url?: string;
@@ -4778,6 +4790,8 @@ export type CreateSiteInTeamRequestBody = {
   name?: string;
   custom_domain?: string;
   domain_aliases?: string[];
+  branch_deploy_custom_domain?: string;
+  deploy_preview_custom_domain?: string;
   password?: string;
   notification_email?: string;
   url?: string;
@@ -4968,6 +4982,8 @@ export type ListSitesForAccountResponse = {
   name?: string;
   custom_domain?: string;
   domain_aliases?: string[];
+  branch_deploy_custom_domain?: string;
+  deploy_preview_custom_domain?: string;
   password?: string;
   notification_email?: string;
   url?: string;

@@ -59,6 +59,11 @@ export type CreateSiteSnippetSnippet = {
  */
 export type UploadDeployFileFileBody = Blob;
 
+export type CreateSiteBuildHookBuildhook = {
+  title?: string;
+  branch?: string;
+};
+
 export type CreateSiteSite = {
   id?: string;
   state?: string;
@@ -66,6 +71,8 @@ export type CreateSiteSite = {
   name?: string;
   custom_domain?: string;
   domain_aliases?: string[];
+  branch_deploy_custom_domain?: string;
+  deploy_preview_custom_domain?: string;
   password?: string;
   notification_email?: string;
   url?: string;
@@ -201,11 +208,6 @@ export type CreateSiteSite = {
     installation_id?: number;
     stop_builds?: boolean;
   };
-};
-
-export type CreateSiteBuildHookBuildhook = {
-  title?: string;
-  branch?: string;
 };
 
 export type CreateSplitTestBranchTests = {

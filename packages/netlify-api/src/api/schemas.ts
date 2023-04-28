@@ -99,6 +99,8 @@ export type Site = {
   name?: string;
   custom_domain?: string;
   domain_aliases?: string[];
+  branch_deploy_custom_domain?: string;
+  deploy_preview_custom_domain?: string;
   password?: string;
   notification_email?: string;
   url?: string;
@@ -224,6 +226,8 @@ export type SiteSetup = {
   name?: string;
   custom_domain?: string;
   domain_aliases?: string[];
+  branch_deploy_custom_domain?: string;
+  deploy_preview_custom_domain?: string;
   password?: string;
   notification_email?: string;
   url?: string;
