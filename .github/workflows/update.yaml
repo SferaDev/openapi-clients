@@ -8,10 +8,11 @@ on:
 jobs:
   openapi-gen:
     runs-on: ubuntu-latest
+    continue-on-error: true
 
     strategy:
       matrix:
-        package: [[vercel-api-js], [cloudflare-api], [netlify-api], [dhis2-openapi]]
+        package: [[vercel-api-js], [netlify-api], [dhis2-openapi]]
 
     steps:
       - name: Checkout repo

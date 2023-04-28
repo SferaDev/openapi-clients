@@ -125,7 +125,11 @@ function buildExtraFile(context: Context) {
   const operationsByPath = Object.fromEntries(
     Object.entries(context.openAPIDocument.paths ?? {}).flatMap(([path, methods]) => {
       return Object.entries(methods)
-        .filter(([method]) => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].includes(method.toUpperCase()))
+        .filter(
+          ([method, operation]: [string, any]) =>
+            ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].includes(method.toUpperCase()) &&
+            operation?.operationId !== undefined
+        )
         .map(([method, operation]: [string, any]) => [`${method.toUpperCase()} ${path}`, operation.operationId]);
     })
   );
