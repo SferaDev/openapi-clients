@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.1.13
+
+### Patch Changes
+
+- c903731: [OpenAPI] Spec updates
+
 ## 0.1.12
 
 ### Patch Changes

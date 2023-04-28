@@ -1,5 +1,11 @@
 # netlify-api
 
+## 0.1.5
+
+### Patch Changes
+
+- bd49651: Add `branch_deploy_custom_domain` and `deploy_preview_custom_domain`
+
 ## 0.1.4
 
 ### Patch Changes
