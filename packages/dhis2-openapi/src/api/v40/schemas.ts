@@ -34,7 +34,6 @@ export type AggregateDataExchange = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -45,14 +44,11 @@ export type AggregateDataExchange = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   source?: Source;
   target?: Target;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type AggregateDataExchangeJobParameters = {
@@ -103,7 +99,6 @@ export type AnalyticsTableHook = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -115,7 +110,6 @@ export type AnalyticsTableHook = {
   lastUpdatedBy?: RefUser;
   name?: string;
   phase: 'RESOURCE_TABLE_POPULATED' | 'ANALYTICS_TABLE_POPULATED';
-  publicAccess?: string;
   resourceTableType:
     | 'ORG_UNIT_STRUCTURE'
     | 'DATA_SET_ORG_UNIT_CATEGORY'
@@ -134,8 +128,6 @@ export type AnalyticsTableHook = {
   sql?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type Api = {
@@ -160,7 +152,6 @@ export type ApiToken = {
    * @format int64
    */
   expire?: number;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -171,13 +162,10 @@ export type ApiToken = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   type: 'PERSONAL_ACCESS_TOKEN';
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   /**
    * @format int32
    */
@@ -334,7 +322,6 @@ export type Attribute = {
   documentAttribute: boolean;
   eventChartAttribute: boolean;
   eventReportAttribute: boolean;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   formName?: string;
@@ -361,7 +348,6 @@ export type Attribute = {
   programAttribute: boolean;
   programIndicatorAttribute: boolean;
   programStageAttribute: boolean;
-  publicAccess?: string;
   relationshipTypeAttribute: boolean;
   sectionAttribute: boolean;
   sharing?: Sharing;
@@ -376,9 +362,7 @@ export type Attribute = {
   translations?: Translation[];
   unique: boolean;
   user?: RefUser;
-  userAccesses?: UserAccess[];
   userAttribute: boolean;
-  userGroupAccesses?: UserGroupAccess[];
   userGroupAttribute: boolean;
   validationRuleAttribute: boolean;
   validationRuleGroupAttribute: boolean;
@@ -489,7 +473,6 @@ export type BaseIdentifiableObject = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -500,12 +483,9 @@ export type BaseIdentifiableObject = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type BatchResponseStatus = {
@@ -592,7 +572,6 @@ export type Category = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   filter?: string;
@@ -609,14 +588,11 @@ export type Category = {
   name?: string;
   optionSet?: RefOptionSet;
   programStage?: RefProgramStage;
-  publicAccess?: string;
   repetition?: EventRepetition;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -661,7 +637,6 @@ export type CategoryCombo = {
   createdBy?: RefUser;
   dataDimensionType: 'DISAGGREGATION' | 'ATTRIBUTE';
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -673,13 +648,10 @@ export type CategoryCombo = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   skipTotal: boolean;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type CategoryDimension = {
@@ -714,6 +686,7 @@ export type CategoryOption = {
   attributeValues?: AttributeValue[];
   categories?: RefCategory[];
   categoryOptionCombos?: RefCategoryOptionCombo[];
+  categoryOptionGroups?: RefCategoryOptionGroup[];
   code?: string;
   /**
    * @format date-time
@@ -730,11 +703,9 @@ export type CategoryOption = {
    * @format date-time
    */
   endDate?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   formName?: string;
-  groups?: RefCategoryOptionGroup[];
   href?: string;
   id?: string;
   isDefault: boolean;
@@ -747,7 +718,6 @@ export type CategoryOption = {
   legendSets?: RefLegendSet[];
   name?: string;
   organisationUnits?: RefOrganisationUnit[];
-  publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
   shortName?: string;
@@ -758,8 +728,6 @@ export type CategoryOption = {
   style?: ObjectStyle;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type CategoryOptionCombo = {
@@ -817,7 +785,6 @@ export type CategoryOptionCombo = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   formName?: string;
@@ -831,13 +798,10 @@ export type CategoryOptionCombo = {
   lastUpdatedBy?: RefUser;
   legendSet?: RefLegendSet;
   legendSets?: RefLegendSet[];
-  publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type CategoryOptionGroup = {
@@ -879,7 +843,6 @@ export type CategoryOptionGroup = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   formName?: string;
@@ -894,14 +857,11 @@ export type CategoryOptionGroup = {
   legendSet?: RefLegendSet;
   legendSets?: RefLegendSet[];
   name?: string;
-  publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type CategoryOptionGroupSet = {
@@ -946,7 +906,6 @@ export type CategoryOptionGroupSet = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   filter?: string;
@@ -963,14 +922,11 @@ export type CategoryOptionGroupSet = {
   name?: string;
   optionSet?: RefOptionSet;
   programStage?: RefProgramStage;
-  publicAccess?: string;
   repetition?: EventRepetition;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -1073,6 +1029,7 @@ export type Configuration = {
     | 'FinancialOct'
     | 'Monthly'
     | 'Quarterly'
+    | 'QuarterlyNov'
     | 'SixMonthlyApril'
     | 'SixMonthlyNov'
     | 'SixMonthly'
@@ -1109,7 +1066,6 @@ export type Constant = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   formName?: string;
@@ -1121,13 +1077,10 @@ export type Constant = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   /**
    * @format double
    */
@@ -1185,7 +1138,6 @@ export type Dashboard = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   formName?: string;
@@ -1203,14 +1155,11 @@ export type Dashboard = {
   lastUpdatedBy?: RefUser;
   layout?: Layout;
   name?: string;
-  publicAccess?: string;
   restrictFilters: boolean;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type DashboardItem = {
@@ -1231,7 +1180,6 @@ export type DashboardItem = {
   eventChart?: RefEventChart;
   eventReport?: RefEventReport;
   eventVisualization?: RefEventVisualization;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   /**
@@ -1256,7 +1204,6 @@ export type DashboardItem = {
   map?: RefMap;
   messages?: boolean;
   name?: string;
-  publicAccess?: string;
   reports?: RefReport[];
   resources?: RefDocument[];
   shape: 'NORMAL' | 'DOUBLE_WIDTH' | 'FULL_WIDTH';
@@ -1276,8 +1223,6 @@ export type DashboardItem = {
     | 'MESSAGES'
     | 'APP';
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   users?: RefUser[];
   visualization?: RefVisualization;
   /**
@@ -1372,7 +1317,6 @@ export type DataApprovalLevel = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -1392,12 +1336,9 @@ export type DataApprovalLevel = {
    */
   orgUnitLevel: number;
   orgUnitLevelName?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type DataApprovalPermissions = {
@@ -1432,7 +1373,6 @@ export type DataApprovalWorkflow = {
   dataApprovalLevels?: RefDataApprovalLevel[];
   dataSets?: RefDataSet[];
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -1453,6 +1393,7 @@ export type DataApprovalWorkflow = {
     | 'FinancialOct'
     | 'Monthly'
     | 'Quarterly'
+    | 'QuarterlyNov'
     | 'SixMonthlyApril'
     | 'SixMonthlyNov'
     | 'SixMonthly'
@@ -1463,12 +1404,9 @@ export type DataApprovalWorkflow = {
     | 'WeeklyThursday'
     | 'WeeklyWednesday'
     | 'Yearly';
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type DataDimensionItem = {
@@ -1535,7 +1473,6 @@ export type DataElement = {
   displayName?: string;
   displayShortName?: string;
   domainType: 'AGGREGATE' | 'TRACKER';
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   fieldMask?: string;
@@ -1552,7 +1489,6 @@ export type DataElement = {
   name?: string;
   optionSet?: RefOptionSet;
   optionSetValue: boolean;
-  publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
   shortName?: string;
@@ -1560,8 +1496,6 @@ export type DataElement = {
   translations?: Translation[];
   url?: string;
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -1611,7 +1545,6 @@ export type DataElementGroup = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   formName?: string;
@@ -1626,14 +1559,11 @@ export type DataElementGroup = {
   legendSet?: RefLegendSet;
   legendSets?: RefLegendSet[];
   name?: string;
-  publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type DataElementGroupSet = {
@@ -1679,7 +1609,6 @@ export type DataElementGroupSet = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   filter?: string;
@@ -1696,14 +1625,11 @@ export type DataElementGroupSet = {
   name?: string;
   optionSet?: RefOptionSet;
   programStage?: RefProgramStage;
-  publicAccess?: string;
   repetition?: EventRepetition;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -1750,7 +1676,6 @@ export type DataEntryForm = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   /**
@@ -1766,13 +1691,10 @@ export type DataEntryForm = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   style: 'COMFORTABLE' | 'NORMAL' | 'COMPACT' | 'NONE';
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type DataInputPeriod = {
@@ -1896,7 +1818,6 @@ export type DataSet = {
    * @format int32
    */
   expiryDays: number;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   fieldCombinationRequired: boolean;
@@ -1937,6 +1858,7 @@ export type DataSet = {
     | 'FinancialOct'
     | 'Monthly'
     | 'Quarterly'
+    | 'QuarterlyNov'
     | 'SixMonthlyApril'
     | 'SixMonthlyNov'
     | 'SixMonthly'
@@ -1947,7 +1869,6 @@ export type DataSet = {
     | 'WeeklyThursday'
     | 'WeeklyWednesday'
     | 'Yearly';
-  publicAccess?: string;
   queryMods?: QueryModifiers;
   renderAsTabs: boolean;
   renderHorizontally: boolean;
@@ -1962,8 +1883,6 @@ export type DataSet = {
   timelyDays: number;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   validCompleteOnly: boolean;
   /**
    * @format int32
@@ -2001,7 +1920,6 @@ export type DataSetNotificationTemplate = {
   displayMessageTemplate?: string;
   displayName?: string;
   displaySubjectTemplate?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -2016,7 +1934,6 @@ export type DataSetNotificationTemplate = {
   notificationRecipient: 'ORGANISATION_UNIT_CONTACT' | 'USER_GROUP';
   notifyParentOrganisationUnitOnly?: boolean;
   notifyUsersInHierarchyOnly?: boolean;
-  publicAccess?: string;
   recipientUserGroup?: RefUserGroup;
   /**
    * @format int32
@@ -2027,8 +1944,6 @@ export type DataSetNotificationTemplate = {
   subjectTemplate?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type DataSummary = {
@@ -2193,7 +2108,6 @@ export type DatastoreEntry = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -2206,12 +2120,9 @@ export type DatastoreEntry = {
   lastUpdatedBy?: RefUser;
   name?: string;
   namespace?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   value?: string;
 };
 
@@ -2424,7 +2335,6 @@ export type DimensionalObject = {
   displayName?: string;
   displayShortName?: string;
   eventRepetition?: EventRepetition;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   filter?: string;
@@ -2450,14 +2360,11 @@ export type DimensionalObject = {
   name?: string;
   optionSet?: RefOptionSet;
   programStage?: RefProgramStage;
-  publicAccess?: string;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
   uid?: string;
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -2513,7 +2420,6 @@ export type Document = {
   createdBy?: RefUser;
   displayName?: string;
   external: boolean;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -2524,13 +2430,10 @@ export type Document = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   url?: string;
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type Dxf2EventsEventDataValue = {
@@ -2542,6 +2445,44 @@ export type Dxf2EventsEventDataValue = {
   providedElsewhere?: boolean;
   storedBy?: string;
   value?: string;
+};
+
+export type Dxf2EventsEventEvent = {
+  assignedUser?: string;
+  assignedUserDisplayName?: string;
+  assignedUserFirstName?: string;
+  assignedUserSurname?: string;
+  assignedUserUsername?: string;
+  attributeCategoryOptions?: string;
+  attributeOptionCombo?: string;
+  completedBy?: string;
+  completedDate?: string;
+  created?: string;
+  createdAtClient: string;
+  createdByUserInfo?: UserInfoSnapshot;
+  dataValues?: Dxf2EventsEventDataValue[];
+  deleted?: boolean;
+  dueDate?: string;
+  enrollment: string;
+  enrollmentStatus: 'ACTIVE' | 'COMPLETED' | 'CANCELLED';
+  event: string;
+  eventDate: string;
+  followup?: boolean;
+  geometry?: Record<string, any>;
+  href?: string;
+  lastUpdated?: string;
+  lastUpdatedAtClient: string;
+  lastUpdatedByUserInfo?: UserInfoSnapshot;
+  notes?: Note[];
+  orgUnit?: string;
+  orgUnitName?: string;
+  program: string;
+  programStage: string;
+  programType: 'WITH_REGISTRATION' | 'WITHOUT_REGISTRATION';
+  relationships?: Relationship[];
+  status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
+  storedBy?: string;
+  trackedEntityInstance?: string;
 };
 
 export type Dxf2EventsTrackedentityAttribute = {
@@ -2629,7 +2570,7 @@ export type Enrollment = {
    * @format date-time
    */
   enrollmentDate: string;
-  events?: Event[];
+  events?: Dxf2EventsEventEvent[];
   followup?: boolean;
   geometry?: Record<string, any>;
   /**
@@ -3016,6 +2957,7 @@ export type ErrorReport = {
     | 'E7139'
     | 'E7140'
     | 'E7141'
+    | 'E7142'
     | 'E7200'
     | 'E7201'
     | 'E7202'
@@ -3128,41 +3070,66 @@ export type ErrorReport = {
 };
 
 export type Event = {
-  assignedUser?: string;
-  assignedUserDisplayName?: string;
-  assignedUserFirstName?: string;
-  assignedUserSurname?: string;
-  assignedUserUsername?: string;
-  attributeCategoryOptions?: string;
-  attributeOptionCombo?: string;
+  access?: Access;
+  assignedUser?: RefUser;
+  attributeOptionCombo?: RefCategoryOptionCombo;
+  attributeValues?: AttributeValue[];
+  code?: string;
+  comments?: RefTrackedEntityComment[];
+  completed: boolean;
   completedBy?: string;
+  /**
+   * @format date-time
+   */
   completedDate?: string;
+  creatableInSearchScope: boolean;
+  /**
+   * @format date-time
+   */
   created?: string;
-  createdAtClient: string;
+  /**
+   * @format date-time
+   */
+  createdAtClient?: string;
+  createdBy?: RefUser;
   createdByUserInfo?: UserInfoSnapshot;
-  dataValues?: Dxf2EventsEventDataValue[];
-  deleted?: boolean;
+  deleted: boolean;
+  displayName?: string;
+  /**
+   * @format date-time
+   */
   dueDate?: string;
-  enrollment: string;
-  enrollmentStatus: 'ACTIVE' | 'COMPLETED' | 'CANCELLED';
-  event: string;
-  eventDate: string;
-  followup?: boolean;
+  eventDataValues?: EventDataValue[];
+  /**
+   * @format date-time
+   */
+  eventDate?: string;
+  favorite: boolean;
+  favorites?: string[];
   geometry?: Record<string, any>;
   href?: string;
+  id?: string;
+  /**
+   * @format date-time
+   */
   lastUpdated?: string;
-  lastUpdatedAtClient: string;
+  /**
+   * @format date-time
+   */
+  lastUpdatedAtClient?: string;
+  lastUpdatedBy?: RefUser;
   lastUpdatedByUserInfo?: UserInfoSnapshot;
-  notes?: Note[];
-  orgUnit?: string;
-  orgUnitName?: string;
-  program: string;
-  programStage: string;
-  programType: 'WITH_REGISTRATION' | 'WITHOUT_REGISTRATION';
-  relationships?: Relationship[];
+  messageConversations?: RefMessageConversation[];
+  name?: string;
+  organisationUnit?: RefOrganisationUnit;
+  programInstance?: RefProgramInstance;
+  programStage?: RefProgramStage;
+  relationshipItems?: RelationshipRelationshipItem[];
+  sharing?: Sharing;
   status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
   storedBy?: string;
-  trackedEntityInstance?: string;
+  translations?: Translation[];
+  user?: RefUser;
 };
 
 export type EventDataFilter = {
@@ -3213,7 +3180,6 @@ export type EventHook = {
   description?: string;
   disabled: boolean;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -3224,14 +3190,11 @@ export type EventHook = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   source: EventhookSource;
   targets: (WebhookTarget | ConsoleTarget | JmsTarget | KafkaTarget)[];
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type EventProgramsDataSynchronizationJobParameters = {
@@ -3363,7 +3326,6 @@ export type EventVisualization = {
    */
   endDate?: string;
   eventStatus: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   filterDimensions?: string[];
@@ -3403,7 +3365,6 @@ export type EventVisualization = {
   programIndicatorDimensions?: TrackedEntityProgramIndicatorDimension[];
   programStage?: RefProgramStage;
   programStatus: 'ACTIVE' | 'COMPLETED' | 'CANCELLED';
-  publicAccess?: string;
   /**
    * @format int32
    */
@@ -3476,8 +3437,6 @@ export type EventVisualization = {
     | 'SCATTER'
     | 'BUBBLE';
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   userOrgUnitType: 'DATA_CAPTURE' | 'DATA_OUTPUT' | 'TEI_SEARCH';
   userOrganisationUnit: boolean;
   userOrganisationUnitChildren: boolean;
@@ -3556,7 +3515,6 @@ export type ExpressionDimensionItem = {
   displayName?: string;
   displayShortName?: string;
   expression?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   formName?: string;
@@ -3571,15 +3529,12 @@ export type ExpressionDimensionItem = {
   legendSets?: RefLegendSet[];
   missingValueStrategy: 'SKIP_IF_ANY_VALUE_MISSING' | 'SKIP_IF_ALL_VALUES_MISSING' | 'NEVER_SKIP';
   name?: string;
-  publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
   shortName?: string;
   slidingWindow?: boolean;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type ExternalMapLayer = {
@@ -3593,7 +3548,6 @@ export type ExternalMapLayer = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -3610,13 +3564,10 @@ export type ExternalMapLayer = {
   mapLayerPosition: 'BASEMAP' | 'OVERLAY';
   mapService: 'WMS' | 'TMS' | 'XYZ' | 'VECTOR_STYLE';
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   url?: string;
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type FavoriteStatistics = {
@@ -3707,8 +3658,14 @@ export type FileResource = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  domain: 'DATA_VALUE' | 'PUSH_ANALYSIS' | 'DOCUMENT' | 'MESSAGE_ATTACHMENT' | 'USER_AVATAR' | 'ORG_UNIT';
-  externalAccess: boolean;
+  domain:
+    | 'DATA_VALUE'
+    | 'PUSH_ANALYSIS'
+    | 'DOCUMENT'
+    | 'MESSAGE_ATTACHMENT'
+    | 'USER_AVATAR'
+    | 'ORG_UNIT'
+    | 'CUSTOM_ICON';
   favorite: boolean;
   favorites?: string[];
   hasMultipleStorageFiles: boolean;
@@ -3720,19 +3677,23 @@ export type FileResource = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   storageStatus: 'NONE' | 'PENDING' | 'FAILED' | 'STORED';
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type FileResourceOwner = {
   co?: string;
   de?: string;
-  domain: 'DATA_VALUE' | 'PUSH_ANALYSIS' | 'DOCUMENT' | 'MESSAGE_ATTACHMENT' | 'USER_AVATAR' | 'ORG_UNIT';
+  domain:
+    | 'DATA_VALUE'
+    | 'PUSH_ANALYSIS'
+    | 'DOCUMENT'
+    | 'MESSAGE_ATTACHMENT'
+    | 'USER_AVATAR'
+    | 'ORG_UNIT'
+    | 'CUSTOM_ICON';
   id?: string;
   ou?: string;
   pe?: string;
@@ -3992,6 +3953,14 @@ export type Grid = {
   metadataHeaders?: GridHeader[];
   performanceMetrics?: PerformanceMetrics;
   refs?: Reference[];
+  /**
+   * keys are class java.lang.Integer
+   */
+  rowContext?: {
+    [key: string]: {
+      [key: string]: Record<string, any>;
+    };
+  };
   rows?: Record<string, any>[][];
   subtitle?: string;
   table?: string;
@@ -4090,7 +4059,6 @@ export type I18nLocale = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -4102,12 +4070,9 @@ export type I18nLocale = {
   lastUpdatedBy?: RefUser;
   locale?: string;
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type I18nOutput = {
@@ -4168,7 +4133,6 @@ export type IdentifiableObject = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -4182,13 +4146,10 @@ export type IdentifiableObject = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   uid?: string;
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type IdentifiableObjects = {
@@ -4535,6 +4496,7 @@ export type ImportConflict = {
     | 'E7139'
     | 'E7140'
     | 'E7141'
+    | 'E7142'
     | 'E7200'
     | 'E7201'
     | 'E7202'
@@ -4772,7 +4734,6 @@ export type IncomingSms = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   gatewayid?: string;
@@ -4785,7 +4746,6 @@ export type IncomingSms = {
   lastUpdatedBy?: RefUser;
   name?: string;
   originator?: string;
-  publicAccess?: string;
   /**
    * @format date-time
    */
@@ -4800,8 +4760,6 @@ export type IncomingSms = {
   text?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type IndexResource = {
@@ -4866,7 +4824,6 @@ export type Indicator = {
   displayShortName?: string;
   explodedDenominator?: string;
   explodedNumerator?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   formName?: string;
@@ -4884,7 +4841,6 @@ export type Indicator = {
   name?: string;
   numerator?: string;
   numeratorDescription?: string;
-  publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
   shortName?: string;
@@ -4892,8 +4848,6 @@ export type Indicator = {
   translations?: Translation[];
   url?: string;
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type IndicatorGroup = {
@@ -4907,7 +4861,6 @@ export type IndicatorGroup = {
   createdBy?: RefUser;
   description?: string;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   groupSets?: RefIndicatorGroupSet[];
@@ -4921,12 +4874,9 @@ export type IndicatorGroup = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type IndicatorGroupSet = {
@@ -4941,7 +4891,6 @@ export type IndicatorGroupSet = {
   createdBy?: RefUser;
   description?: string;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -4953,13 +4902,10 @@ export type IndicatorGroupSet = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type IndicatorType = {
@@ -4972,7 +4918,6 @@ export type IndicatorType = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  externalAccess: boolean;
   /**
    * @format int32
    */
@@ -4988,12 +4933,9 @@ export type IndicatorType = {
   lastUpdatedBy?: RefUser;
   name?: string;
   number: boolean;
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type Interpretation = {
@@ -5011,7 +4953,6 @@ export type Interpretation = {
   eventChart?: RefEventChart;
   eventReport?: RefEventReport;
   eventVisualization?: RefEventVisualization;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -5033,14 +4974,11 @@ export type Interpretation = {
    * @format period
    */
   period?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   text?: string;
   translations?: Translation[];
   type: 'VISUALIZATION' | 'EVENT_VISUALIZATION' | 'MAP' | 'EVENT_REPORT' | 'EVENT_CHART' | 'DATASET_REPORT';
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   visualization?: RefVisualization;
 };
 
@@ -5102,7 +5040,6 @@ export type JobConfiguration = {
   delay?: number;
   displayName?: string;
   enabled: boolean;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -5189,13 +5126,10 @@ export type JobConfiguration = {
    * @format date-time
    */
   nextExecutionTime?: string;
-  publicAccess?: string;
   schedulingType: 'CRON' | 'FIXED_DELAY';
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   userUid?: string;
 };
 
@@ -5310,7 +5244,6 @@ export type LegendSet = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -5322,13 +5255,10 @@ export type LegendSet = {
   lastUpdatedBy?: RefUser;
   legends?: RefLegend[];
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   symbolizer?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type Line = {
@@ -5364,7 +5294,6 @@ export type Map = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   formName?: string;
@@ -5386,7 +5315,6 @@ export type Map = {
   longitude?: number;
   mapViews?: RefMapView[];
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   shortName?: string;
   subscribed: boolean;
@@ -5394,8 +5322,6 @@ export type Map = {
   title?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   /**
    * @format int32
    */
@@ -5474,7 +5400,6 @@ export type MapView = {
    */
   eventPointRadius: number;
   eventStatus: 'ACTIVE' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   filterDimensions?: string[];
@@ -5531,7 +5456,6 @@ export type MapView = {
   programIndicatorDimensions?: TrackedEntityProgramIndicatorDimension[];
   programStage?: RefProgramStage;
   programStatus: 'ACTIVE' | 'COMPLETED' | 'CANCELLED';
-  publicAccess?: string;
   /**
    * @format int32
    */
@@ -5571,8 +5495,6 @@ export type MapView = {
   trackedEntityType?: RefTrackedEntityType;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   userOrgUnitType: 'DATA_CAPTURE' | 'DATA_OUTPUT' | 'TEI_SEARCH';
   userOrganisationUnit: boolean;
   userOrganisationUnitChildren: boolean;
@@ -5662,7 +5584,6 @@ export type MessageConversation = {
   createdBy?: RefUser;
   displayName?: string;
   extMessageId?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   followUp: boolean;
@@ -5687,16 +5608,13 @@ export type MessageConversation = {
   messageType: 'PRIVATE' | 'SYSTEM' | 'VALIDATION_RESULT' | 'TICKET' | 'SYSTEM_VERSION_UPDATE';
   messages?: RefMessage[];
   priority: 'NONE' | 'LOW' | 'MEDIUM' | 'HIGH';
-  publicAccess?: string;
   read: boolean;
   sharing?: Sharing;
   status: 'NONE' | 'OPEN' | 'PENDING' | 'INVALID' | 'SOLVED';
   subject?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
   userFirstname?: string;
-  userGroupAccesses?: UserGroupAccess[];
   userMessages?: UserMessage[];
   userSurname?: string;
 };
@@ -5888,7 +5806,6 @@ export type MetadataVersion = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   hashCode?: string;
@@ -5904,13 +5821,10 @@ export type MetadataVersion = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   type: 'BEST_EFFORT' | 'ATOMIC';
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type MethodAllowedList = {
@@ -6054,7 +5968,6 @@ export type OAuth2Client = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   grantTypes?: string[];
@@ -6066,14 +5979,11 @@ export type OAuth2Client = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   redirectUris?: string[];
   secret?: string;
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type ObjectCount = {
@@ -6173,7 +6083,6 @@ export type Option = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   formName?: string;
@@ -6186,7 +6095,6 @@ export type Option = {
   lastUpdatedBy?: RefUser;
   name?: string;
   optionSet?: RefOptionSet;
-  publicAccess?: string;
   sharing?: Sharing;
   shortName?: string;
   /**
@@ -6196,8 +6104,6 @@ export type Option = {
   style?: ObjectStyle;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type OptionGroup = {
@@ -6237,7 +6143,6 @@ export type OptionGroup = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   formName?: string;
@@ -6253,14 +6158,11 @@ export type OptionGroup = {
   name?: string;
   optionSet?: RefOptionSet;
   options?: RefOption[];
-  publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type OptionGroupSet = {
@@ -6304,7 +6206,6 @@ export type OptionGroupSet = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   filter?: string;
@@ -6322,14 +6223,11 @@ export type OptionGroupSet = {
   optionGroups?: RefOptionGroup[];
   optionSet?: RefOptionSet;
   programStage?: RefProgramStage;
-  publicAccess?: string;
   repetition?: EventRepetition;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -6372,7 +6270,6 @@ export type OptionSet = {
   createdBy?: RefUser;
   description?: string;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -6384,12 +6281,9 @@ export type OptionSet = {
   lastUpdatedBy?: RefUser;
   name?: string;
   options?: RefOption[];
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -6544,7 +6438,6 @@ export type OrganisationUnit = {
   displayName?: string;
   displayShortName?: string;
   email?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   formName?: string;
@@ -6578,7 +6471,6 @@ export type OrganisationUnit = {
   path?: string;
   phoneNumber?: string;
   programs?: RefProgram[];
-  publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
   shortName?: string;
@@ -6586,8 +6478,6 @@ export type OrganisationUnit = {
   type?: string;
   url?: string;
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   users?: RefUser[];
 };
 
@@ -6629,7 +6519,6 @@ export type OrganisationUnitGroup = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   featureType: 'NONE' | 'MULTI_POLYGON' | 'POLYGON' | 'POINT' | 'SYMBOL';
@@ -6647,15 +6536,12 @@ export type OrganisationUnitGroup = {
   legendSets?: RefLegendSet[];
   name?: string;
   organisationUnits?: RefOrganisationUnit[];
-  publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
   shortName?: string;
   symbol?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type OrganisationUnitGroupSet = {
@@ -6700,7 +6586,6 @@ export type OrganisationUnitGroupSet = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   filter?: string;
@@ -6719,14 +6604,11 @@ export type OrganisationUnitGroupSet = {
   optionSet?: RefOptionSet;
   organisationUnitGroups?: RefOrganisationUnitGroup[];
   programStage?: RefProgramStage;
-  publicAccess?: string;
   repetition?: EventRepetition;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -6773,7 +6655,6 @@ export type OrganisationUnitLevel = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -6792,12 +6673,9 @@ export type OrganisationUnitLevel = {
    * @format int32
    */
   offlineLevels?: number;
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type OutboundMessageResponseSummary = {
@@ -6837,7 +6715,6 @@ export type OutboundSms = {
    */
   date?: string;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -6849,7 +6726,6 @@ export type OutboundSms = {
   lastUpdatedBy?: RefUser;
   message?: string;
   name?: string;
-  publicAccess?: string;
   recipients?: string[];
   sender?: string;
   sharing?: Sharing;
@@ -6857,8 +6733,6 @@ export type OutboundSms = {
   subject?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type OutlierAnalysis = {
@@ -6995,7 +6869,7 @@ export type Period = string;
 
 export type PersistenceReport = {
   /**
-   * keys are class org.hisp.dhis.tracker.TrackerType
+   * keys are class org.hisp.dhis.tracker.imports.TrackerType
    */
   typeReportMap?: {
     [key: string]: TrackerTypeReport;
@@ -7014,7 +6888,6 @@ export type PotentialDuplicate = {
   createdByUserName?: string;
   displayName?: string;
   duplicate?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -7027,13 +6900,10 @@ export type PotentialDuplicate = {
   lastUpdatedByUserName?: string;
   name?: string;
   original?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   status: 'ALL' | 'OPEN' | 'INVALID' | 'MERGED';
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type Predictor = {
@@ -7054,7 +6924,6 @@ export type Predictor = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   formName?: string;
@@ -7081,6 +6950,7 @@ export type Predictor = {
     | 'FinancialOct'
     | 'Monthly'
     | 'Quarterly'
+    | 'QuarterlyNov'
     | 'SixMonthlyApril'
     | 'SixMonthlyNov'
     | 'SixMonthly'
@@ -7092,7 +6962,6 @@ export type Predictor = {
     | 'WeeklyWednesday'
     | 'Yearly';
   predictorGroups?: RefPredictorGroup[];
-  publicAccess?: string;
   sampleSkipTest?: Expression;
   /**
    * @format int32
@@ -7106,8 +6975,6 @@ export type Predictor = {
   shortName?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type PredictorGroup = {
@@ -7121,7 +6988,6 @@ export type PredictorGroup = {
   createdBy?: RefUser;
   description?: string;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -7133,12 +6999,9 @@ export type PredictorGroup = {
   lastUpdatedBy?: RefUser;
   name?: string;
   predictors?: RefPredictor[];
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type PredictorJobParameters = {
@@ -7247,6 +7110,7 @@ export type Program = {
     | 'FinancialOct'
     | 'Monthly'
     | 'Quarterly'
+    | 'QuarterlyNov'
     | 'SixMonthlyApril'
     | 'SixMonthlyNov'
     | 'SixMonthly'
@@ -7257,7 +7121,6 @@ export type Program = {
     | 'WeeklyThursday'
     | 'WeeklyWednesday'
     | 'Yearly';
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   featureType: 'NONE' | 'MULTI_POLYGON' | 'POLYGON' | 'POINT' | 'SYMBOL';
@@ -7293,7 +7156,6 @@ export type Program = {
   programStages?: RefProgramStage[];
   programTrackedEntityAttributes?: RefProgramTrackedEntityAttribute[];
   programType: 'WITH_REGISTRATION' | 'WITHOUT_REGISTRATION';
-  publicAccess?: string;
   registration: boolean;
   relatedProgram?: RefProgram;
   selectEnrollmentDatesInFuture?: boolean;
@@ -7306,8 +7168,6 @@ export type Program = {
   translations?: Translation[];
   useFirstStageDuringRegistration?: boolean;
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   userRoles?: RefUserRole[];
   /**
    * @format int32
@@ -7363,7 +7223,6 @@ export type ProgramIndicator = {
   displayName?: string;
   displayShortName?: string;
   expression?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   filter?: string;
@@ -7381,15 +7240,12 @@ export type ProgramIndicator = {
   orgUnitField?: string;
   program?: RefProgram;
   programIndicatorGroups?: RefProgramIndicatorGroup[];
-  publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
   shortName?: string;
   style?: ObjectStyle;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type ProgramIndicatorGroup = {
@@ -7403,7 +7259,6 @@ export type ProgramIndicatorGroup = {
   createdBy?: RefUser;
   description?: string;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -7415,12 +7270,9 @@ export type ProgramIndicatorGroup = {
   lastUpdatedBy?: RefUser;
   name?: string;
   programIndicators?: RefProgramIndicator[];
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type ProgramMessage = {
@@ -7434,7 +7286,7 @@ export type ProgramMessage = {
   createdBy?: RefUser;
   deliveryChannels?: ('SMS' | 'EMAIL' | 'HTTP')[];
   displayName?: string;
-  externalAccess: boolean;
+  event?: RefEvent;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -7452,8 +7304,6 @@ export type ProgramMessage = {
    */
   processedDate?: string;
   programInstance?: RefProgramInstance;
-  programStageInstance?: RefProgramStageInstance;
-  publicAccess?: string;
   recipients?: ProgramMessageRecipients;
   sharing?: Sharing;
   storeCopy: boolean;
@@ -7461,8 +7311,6 @@ export type ProgramMessage = {
   text?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type ProgramMessageRecipients = {
@@ -7485,7 +7333,6 @@ export type ProgramNotificationTemplate = {
   displayMessageTemplate?: string;
   displayName?: string;
   displaySubjectTemplate?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -7514,7 +7361,6 @@ export type ProgramNotificationTemplate = {
     | 'SCHEDULED_DAYS_ENROLLMENT_DATE';
   notifyParentOrganisationUnitOnly?: boolean;
   notifyUsersInHierarchyOnly?: boolean;
-  publicAccess?: string;
   recipientDataElement?: RefDataElement;
   recipientProgramAttribute?: RefTrackedEntityAttribute;
   recipientUserGroup?: RefUserGroup;
@@ -7527,8 +7373,6 @@ export type ProgramNotificationTemplate = {
   subjectTemplate?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type ProgramOwner = {
@@ -7549,7 +7393,6 @@ export type ProgramRule = {
   createdBy?: RefUser;
   description?: string;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -7567,12 +7410,9 @@ export type ProgramRule = {
   program?: RefProgram;
   programRuleActions?: RefProgramRuleAction[];
   programStage?: RefProgramStage;
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type ProgramRuleAction = {
@@ -7589,7 +7429,6 @@ export type ProgramRuleAction = {
   dataElement?: RefDataElement;
   displayContent?: string;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -7627,14 +7466,11 @@ export type ProgramRuleAction = {
     | 'HIDEOPTIONGROUP';
   programStage?: RefProgramStage;
   programStageSection?: RefProgramStageSection;
-  publicAccess?: string;
   sharing?: Sharing;
   templateUid?: string;
   trackedEntityAttribute?: RefTrackedEntityAttribute;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type ProgramRuleVariable = {
@@ -7648,7 +7484,6 @@ export type ProgramRuleVariable = {
   createdBy?: RefUser;
   dataElement?: RefDataElement;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -7668,14 +7503,11 @@ export type ProgramRuleVariable = {
     | 'CALCULATED_VALUE'
     | 'TEI_ATTRIBUTE';
   programStage?: RefProgramStage;
-  publicAccess?: string;
   sharing?: Sharing;
   trackedEntityAttribute?: RefTrackedEntityAttribute;
   translations?: Translation[];
   useCodeForOptionSet: boolean;
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -7721,7 +7553,6 @@ export type ProgramSection = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   formName?: string;
@@ -7734,7 +7565,6 @@ export type ProgramSection = {
   lastUpdatedBy?: RefUser;
   name?: string;
   program?: RefProgram;
-  publicAccess?: string;
   /**
    * The exact type is unknown.
    * (Java type was: `org.hisp.dhis.render.DeviceRenderTypeMap<org.hisp.dhis.render.type.SectionRenderingObject>`)
@@ -7750,8 +7580,6 @@ export type ProgramSection = {
   trackedEntityAttributes?: RefTrackedEntityAttribute[];
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type ProgramStage = {
@@ -7778,7 +7606,6 @@ export type ProgramStage = {
   dueDateLabel?: string;
   enableUserAssignment?: boolean;
   executionDateLabel?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   featureType: 'NONE' | 'MULTI_POLYGON' | 'POLYGON' | 'POINT' | 'SYMBOL';
@@ -7811,6 +7638,7 @@ export type ProgramStage = {
     | 'FinancialOct'
     | 'Monthly'
     | 'Quarterly'
+    | 'QuarterlyNov'
     | 'SixMonthlyApril'
     | 'SixMonthlyNov'
     | 'SixMonthly'
@@ -7825,7 +7653,6 @@ export type ProgramStage = {
   program?: RefProgram;
   programStageDataElements?: RefProgramStageDataElement[];
   programStageSections?: RefProgramStageSection[];
-  publicAccess?: string;
   referral: boolean;
   remindCompleted?: boolean;
   repeatable: boolean;
@@ -7843,76 +7670,7 @@ export type ProgramStage = {
   style?: ObjectStyle;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   validationStrategy: 'ON_COMPLETE' | 'ON_UPDATE_AND_INSERT';
-};
-
-export type ProgramStageInstance = {
-  access?: Access;
-  assignedUser?: RefUser;
-  attributeOptionCombo?: RefCategoryOptionCombo;
-  attributeValues?: AttributeValue[];
-  code?: string;
-  comments?: RefTrackedEntityComment[];
-  completed: boolean;
-  completedBy?: string;
-  /**
-   * @format date-time
-   */
-  completedDate?: string;
-  creatableInSearchScope: boolean;
-  /**
-   * @format date-time
-   */
-  created?: string;
-  /**
-   * @format date-time
-   */
-  createdAtClient?: string;
-  createdBy?: RefUser;
-  createdByUserInfo?: UserInfoSnapshot;
-  deleted: boolean;
-  displayName?: string;
-  /**
-   * @format date-time
-   */
-  dueDate?: string;
-  eventDataValues?: EventDataValue[];
-  /**
-   * @format date-time
-   */
-  eventDate?: string;
-  externalAccess: boolean;
-  favorite: boolean;
-  favorites?: string[];
-  geometry?: Record<string, any>;
-  href?: string;
-  id?: string;
-  /**
-   * @format date-time
-   */
-  lastUpdated?: string;
-  /**
-   * @format date-time
-   */
-  lastUpdatedAtClient?: string;
-  lastUpdatedBy?: RefUser;
-  lastUpdatedByUserInfo?: UserInfoSnapshot;
-  messageConversations?: RefMessageConversation[];
-  name?: string;
-  organisationUnit?: RefOrganisationUnit;
-  programInstance?: RefProgramInstance;
-  programStage?: RefProgramStage;
-  publicAccess?: string;
-  relationshipItems?: RelationshipRelationshipItem[];
-  sharing?: Sharing;
-  status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
-  storedBy?: string;
-  translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type ProgramStageInstanceFilter = {
@@ -7928,7 +7686,6 @@ export type ProgramStageInstanceFilter = {
   displayDescription?: string;
   displayName?: string;
   eventQueryCriteria?: EventQueryCriteria;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -7941,12 +7698,9 @@ export type ProgramStageInstanceFilter = {
   name?: string;
   program?: string;
   programStage?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type ProgramStageQueryCriteria = {
@@ -7982,7 +7736,6 @@ export type ProgramStageSection = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   formName?: string;
@@ -7996,7 +7749,6 @@ export type ProgramStageSection = {
   name?: string;
   programIndicators?: RefProgramIndicator[];
   programStage?: RefProgramStage;
-  publicAccess?: string;
   /**
    * The exact type is unknown.
    * (Java type was: `org.hisp.dhis.render.DeviceRenderTypeMap<org.hisp.dhis.render.type.SectionRenderingObject>`)
@@ -8011,8 +7763,6 @@ export type ProgramStageSection = {
   style?: ObjectStyle;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type ProgramStageWorkingList = {
@@ -8027,7 +7777,6 @@ export type ProgramStageWorkingList = {
   description?: string;
   displayDescription?: string;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -8041,12 +7790,9 @@ export type ProgramStageWorkingList = {
   program?: RefProgram;
   programStage?: RefProgramStage;
   programStageQueryCriteria?: ProgramStageQueryCriteria;
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type Property = {
@@ -8160,7 +7906,6 @@ export type PushAnalysis = {
   createdBy?: RefUser;
   dashboard?: RefDashboard;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -8172,14 +7917,11 @@ export type PushAnalysis = {
   lastUpdatedBy?: RefUser;
   message?: string;
   name?: string;
-  publicAccess?: string;
   recipientUserGroups?: RefUserGroup[];
   sharing?: Sharing;
   title?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type PushAnalysisJobParameters = {
@@ -8284,8 +8026,8 @@ export type Relationship = {
 };
 
 export type RelationshipRelationshipItem = {
+  event?: RefEvent;
   programInstance?: RefProgramInstance;
-  programStageInstance?: RefProgramStageInstance;
   relationship?: RefRelationshipRelationship;
   trackedEntityInstance?: RefTrackedEntityInstance;
 };
@@ -8300,7 +8042,7 @@ export type RelationshipConstraint = {
 
 export type RelationshipItem = {
   enrollment?: Enrollment;
-  event?: Event;
+  event?: Dxf2EventsEventEvent;
   trackedEntityInstance?: Dxf2EventsTrackedentityTrackedEntityInstance;
 };
 
@@ -8318,7 +8060,6 @@ export type RelationshipType = {
   displayFromToName?: string;
   displayName?: string;
   displayToFromName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   fromConstraint?: RelationshipConstraint;
@@ -8331,15 +8072,12 @@ export type RelationshipType = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   referral: boolean;
   sharing?: Sharing;
   toConstraint?: RelationshipConstraint;
   toFromName?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type RelativePeriods = {
@@ -8428,7 +8166,6 @@ export type Report = {
   createdBy?: RefUser;
   designContent?: string;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -8439,15 +8176,12 @@ export type Report = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   relativePeriods?: RelativePeriods;
   reportParams?: ReportingParams;
   sharing?: Sharing;
   translations?: Translation[];
   type: 'JASPER_REPORT_TABLE' | 'JASPER_JDBC' | 'HTML';
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   visualization?: RefVisualization;
 };
 
@@ -8509,7 +8243,6 @@ export type Route = {
   description?: string;
   disabled: boolean;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   headers: {
@@ -8523,13 +8256,10 @@ export type Route = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   url: string;
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type SMPPGatewayConfig = {
@@ -8596,7 +8326,6 @@ export type SMSCommand = {
   dataset?: RefDataSet;
   defaultMessage?: string;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -8619,7 +8348,6 @@ export type SMSCommand = {
     | 'EVENT_REGISTRATION_PARSER';
   program?: RefProgram;
   programStage?: RefProgramStage;
-  publicAccess?: string;
   receivedMessage?: string;
   separator?: string;
   sharing?: Sharing;
@@ -8628,9 +8356,7 @@ export type SMSCommand = {
   successMessage?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
   userGroup?: RefUserGroup;
-  userGroupAccesses?: UserGroupAccess[];
   wrongFormatMessage?: string;
 };
 
@@ -8740,7 +8466,6 @@ export type Section = {
   description?: string;
   disableDataElementAutoGroup: boolean;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   greyedFields?: RefDataElementOperand[];
@@ -8753,7 +8478,6 @@ export type Section = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   showColumnTotals: boolean;
   showRowTotals: boolean;
@@ -8763,8 +8487,6 @@ export type Section = {
   sortOrder: number;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type Series = {
@@ -8802,10 +8524,10 @@ export type Sharing = {
   owner?: string;
   public?: string;
   userGroups?: {
-    [key: string]: UserSharingUserGroupAccess;
+    [key: string]: UserGroupAccess;
   };
   users?: {
-    [key: string]: UserSharingUserAccess;
+    [key: string]: UserAccess;
   };
 };
 
@@ -8878,6 +8600,7 @@ export type SourceParams = {
     | 'FINANCIAL_OCT'
     | 'MONTHLY'
     | 'QUARTERLY'
+    | 'QUARTERLY_NOV'
     | 'SIX_MONTHLY_APRIL'
     | 'SIX_MONTHLY_NOV'
     | 'SIX_MONTHLY'
@@ -8937,7 +8660,6 @@ export type SqlView = {
   createdBy?: RefUser;
   description?: string;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -8948,15 +8670,12 @@ export type SqlView = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   sqlQuery?: string;
   translations?: Translation[];
   type: 'VIEW' | 'MATERIALIZED_VIEW' | 'QUERY';
   updateJobId?: string;
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type SqlViewUpdateParameters = {
@@ -9204,7 +8923,6 @@ export type TrackedEntityAttribute = {
   displayOnVisitSchedule?: boolean;
   displayShortName?: string;
   expression?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   fieldMask?: string;
@@ -9225,7 +8943,6 @@ export type TrackedEntityAttribute = {
   optionSetValue: boolean;
   orgunitScope?: boolean;
   pattern?: string;
-  publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
   shortName?: string;
@@ -9242,8 +8959,6 @@ export type TrackedEntityAttribute = {
   translations?: Translation[];
   unique?: boolean;
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -9319,7 +9034,6 @@ export type TrackedEntityInstance = {
   createdByUserInfo?: UserInfoSnapshot;
   deleted: boolean;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   geometry?: Record<string, any>;
@@ -9341,7 +9055,6 @@ export type TrackedEntityInstance = {
   potentialDuplicate: boolean;
   programInstances?: RefProgramInstance[];
   programOwners?: TrackedEntityProgramOwner[];
-  publicAccess?: string;
   relationshipItems?: RelationshipRelationshipItem[];
   sharing?: Sharing;
   storedBy?: string;
@@ -9349,8 +9062,6 @@ export type TrackedEntityInstance = {
   trackedEntityType?: RefTrackedEntityType;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type TrackedEntityInstanceFilter = {
@@ -9369,7 +9080,6 @@ export type TrackedEntityInstanceFilter = {
   enrollmentStatus: 'ACTIVE' | 'COMPLETED' | 'CANCELLED';
   entityQueryCriteria?: EntityQueryCriteria;
   eventFilters?: EventFilter[];
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   followup?: boolean;
@@ -9382,7 +9092,6 @@ export type TrackedEntityInstanceFilter = {
   lastUpdatedBy?: RefUser;
   name?: string;
   program?: RefProgram;
-  publicAccess?: string;
   sharing?: Sharing;
   /**
    * @format int32
@@ -9391,8 +9100,6 @@ export type TrackedEntityInstanceFilter = {
   style?: ObjectStyle;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type TrackedEntityProgramIndicatorDimension = {
@@ -9422,7 +9129,6 @@ export type TrackedEntityType = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   featureType: 'NONE' | 'MULTI_POLYGON' | 'POLYGON' | 'POINT' | 'SYMBOL';
@@ -9443,15 +9149,12 @@ export type TrackedEntityType = {
    */
   minAttributesRequiredToSearch: number;
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   shortName?: string;
   style?: ObjectStyle;
   trackedEntityTypeAttributes?: RefTrackedEntityTypeAttribute[];
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
 };
 
 export type TrackerDataView = {
@@ -9472,23 +9175,16 @@ export type TrackerIdSchemeParam = {
   idScheme: 'UID' | 'CODE' | 'NAME' | 'ATTRIBUTE';
 };
 
-export type TrackerProgramsDataSynchronizationJobParameters = {
-  /**
-   * @format int32
-   */
-  pageSize: number;
-};
-
-export type TrackerReportImportReport = {
+export type TrackerImportsReportImportReport = {
   bundleReport?: PersistenceReport;
   message?: string;
-  stats?: TrackerReportStats;
+  stats?: TrackerImportsReportStats;
   status: 'OK' | 'WARNING' | 'ERROR';
   timingsStats?: TimingsStats;
   validationReport?: ValidationReport;
 };
 
-export type TrackerReportStats = {
+export type TrackerImportsReportStats = {
   /**
    * @format int32
    */
@@ -9511,6 +9207,13 @@ export type TrackerReportStats = {
   updated: number;
 };
 
+export type TrackerProgramsDataSynchronizationJobParameters = {
+  /**
+   * @format int32
+   */
+  pageSize: number;
+};
+
 export type TrackerTrigramIndexJobParameters = {
   attributes?: Record<string, any>[];
   skipIndexDeletion: boolean;
@@ -9518,7 +9221,7 @@ export type TrackerTrigramIndexJobParameters = {
 
 export type TrackerTypeReport = {
   objectReports?: Entity[];
-  stats?: TrackerReportStats;
+  stats?: TrackerImportsReportStats;
   trackerType: 'TRACKED_ENTITY' | 'ENROLLMENT' | 'EVENT' | 'RELATIONSHIP';
 };
 
@@ -9577,7 +9280,6 @@ export type User = {
   education?: string;
   email?: string;
   employer?: string;
-  externalAccess: boolean;
   externalAuth: boolean;
   facebookMessenger?: string;
   favorite: boolean;
@@ -9614,7 +9316,6 @@ export type User = {
    */
   passwordLastUpdated?: string;
   phoneNumber?: string;
-  publicAccess?: string;
   selfRegistered: boolean;
   settings?: UserSettings;
   sharing?: Sharing;
@@ -9626,9 +9327,7 @@ export type User = {
   twitter?: string;
   twoFactorEnabled: boolean;
   user?: RefUser;
-  userAccesses?: UserAccess[];
   userCredentials?: UserCredentialsDto;
-  userGroupAccesses?: UserGroupAccess[];
   userGroups?: RefUserGroup[];
   userRoles?: RefUserRole[];
   username?: string;
@@ -9640,7 +9339,6 @@ export type UserAccess = {
   access?: string;
   displayName?: string;
   id?: string;
-  userUid?: string;
 };
 
 export type UserCredentialsDto = {
@@ -9692,7 +9390,6 @@ export type UserGroup = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -9705,12 +9402,9 @@ export type UserGroup = {
   managedByGroups?: RefUserGroup[];
   managedGroups?: RefUserGroup[];
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   users?: RefUser[];
 };
 
@@ -9718,7 +9412,6 @@ export type UserGroupAccess = {
   access?: string;
   displayName?: string;
   id?: string;
-  userGroupUid?: string;
 };
 
 export type UserInfoSnapshot = {
@@ -9759,7 +9452,6 @@ export type UserRole = {
   createdBy?: RefUser;
   description?: string;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -9770,13 +9462,10 @@ export type UserRole = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   restrictions?: string[];
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   users?: RefUser[];
 };
 
@@ -9788,18 +9477,6 @@ export type UserSettings = {
   style?: string;
   trackerDashboardLayout?: string;
   uiLocale?: string;
-};
-
-export type UserSharingUserAccess = {
-  access?: string;
-  displayName?: string;
-  id?: string;
-};
-
-export type UserSharingUserGroupAccess = {
-  access?: string;
-  displayName?: string;
-  id?: string;
 };
 
 export type ValidationNotificationTemplate = {
@@ -9814,7 +9491,6 @@ export type ValidationNotificationTemplate = {
   displayMessageTemplate?: string;
   displayName?: string;
   displaySubjectTemplate?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -9828,15 +9504,12 @@ export type ValidationNotificationTemplate = {
   name?: string;
   notifyParentOrganisationUnitOnly?: boolean;
   notifyUsersInHierarchyOnly?: boolean;
-  publicAccess?: string;
   recipientUserGroups?: RefUserGroup[];
   sendStrategy: 'COLLECTIVE_SUMMARY' | 'SINGLE_NOTIFICATION';
   sharing?: Sharing;
   subjectTemplate?: string;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   validationRules?: RefValidationRule[];
 };
 
@@ -9955,7 +9628,6 @@ export type ValidationRule = {
   displayInstruction?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   formName?: string;
@@ -9993,6 +9665,7 @@ export type ValidationRule = {
     | 'FinancialOct'
     | 'Monthly'
     | 'Quarterly'
+    | 'QuarterlyNov'
     | 'SixMonthlyApril'
     | 'SixMonthlyNov'
     | 'SixMonthly'
@@ -10003,7 +9676,6 @@ export type ValidationRule = {
     | 'WeeklyThursday'
     | 'WeeklyWednesday'
     | 'Yearly';
-  publicAccess?: string;
   queryMods?: QueryModifiers;
   rightSide?: Expression;
   sharing?: Sharing;
@@ -10011,8 +9683,6 @@ export type ValidationRule = {
   skipFormValidation: boolean;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   validationRuleGroups?: RefValidationRuleGroup[];
 };
 
@@ -10036,7 +9706,6 @@ export type ValidationRuleGroup = {
   createdBy?: RefUser;
   description?: string;
   displayName?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   href?: string;
@@ -10047,12 +9716,9 @@ export type ValidationRuleGroup = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   validationRules?: RefValidationRule[];
 };
 
@@ -10150,7 +9816,6 @@ export type Visualization = {
    * @format date-time
    */
   endDate?: string;
-  externalAccess: boolean;
   favorite: boolean;
   favorites?: string[];
   filterDimensions?: string[];
@@ -10193,7 +9858,6 @@ export type Visualization = {
   percentStackedValues: boolean;
   periods?: string[];
   programIndicatorDimensions?: TrackedEntityProgramIndicatorDimension[];
-  publicAccess?: string;
   /**
    * @format int32
    */
@@ -10268,8 +9932,6 @@ export type Visualization = {
     | 'SINGLE_VALUE'
     | 'PIVOT_TABLE';
   user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
   userOrgUnitType: 'DATA_CAPTURE' | 'DATA_OUTPUT' | 'TEI_SEARCH';
   userOrganisationUnit: boolean;
   userOrganisationUnitChildren: boolean;
@@ -10665,6 +10327,7 @@ export type WebMessage = {
     | 'E7139'
     | 'E7140'
     | 'E7141'
+    | 'E7142'
     | 'E7200'
     | 'E7201'
     | 'E7202'
@@ -11078,7 +10741,6 @@ export type PropertyNamesAggregateDataExchange =
   | 'created'
   | 'createdBy'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -11086,14 +10748,11 @@ export type PropertyNamesAggregateDataExchange =
   | 'lastUpdated'
   | 'lastUpdatedBy'
   | 'name'
-  | 'publicAccess'
   | 'sharing'
   | 'source'
   | 'target'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesAnalyticsTableHook =
   | 'access'
@@ -11103,7 +10762,6 @@ export type PropertyNamesAnalyticsTableHook =
   | 'created'
   | 'createdBy'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -11112,14 +10770,11 @@ export type PropertyNamesAnalyticsTableHook =
   | 'lastUpdatedBy'
   | 'name'
   | 'phase'
-  | 'publicAccess'
   | 'resourceTableType'
   | 'sharing'
   | 'sql'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesApiToken =
   | 'access'
@@ -11130,7 +10785,6 @@ export type PropertyNamesApiToken =
   | 'createdBy'
   | 'displayName'
   | 'expire'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -11138,13 +10792,10 @@ export type PropertyNamesApiToken =
   | 'lastUpdated'
   | 'lastUpdatedBy'
   | 'name'
-  | 'publicAccess'
   | 'sharing'
   | 'translations'
   | 'type'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'version';
 
 export type PropertyNamesAttribute =
@@ -11171,7 +10822,6 @@ export type PropertyNamesAttribute =
   | 'documentAttribute'
   | 'eventChartAttribute'
   | 'eventReportAttribute'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'formName'
@@ -11195,7 +10845,6 @@ export type PropertyNamesAttribute =
   | 'programAttribute'
   | 'programIndicatorAttribute'
   | 'programStageAttribute'
-  | 'publicAccess'
   | 'relationshipTypeAttribute'
   | 'sectionAttribute'
   | 'sharing'
@@ -11207,9 +10856,7 @@ export type PropertyNamesAttribute =
   | 'translations'
   | 'unique'
   | 'user'
-  | 'userAccesses'
   | 'userAttribute'
-  | 'userGroupAccesses'
   | 'userGroupAttribute'
   | 'validationRuleAttribute'
   | 'validationRuleGroupAttribute'
@@ -11235,7 +10882,6 @@ export type PropertyNamesCategory =
   | 'displayFormName'
   | 'displayName'
   | 'displayShortName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'filter'
@@ -11249,14 +10895,11 @@ export type PropertyNamesCategory =
   | 'name'
   | 'optionSet'
   | 'programStage'
-  | 'publicAccess'
   | 'repetition'
   | 'sharing'
   | 'shortName'
   | 'translations'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'valueType';
 
 export type PropertyNamesCategoryCombo =
@@ -11269,7 +10912,6 @@ export type PropertyNamesCategoryCombo =
   | 'createdBy'
   | 'dataDimensionType'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -11278,13 +10920,10 @@ export type PropertyNamesCategoryCombo =
   | 'lastUpdated'
   | 'lastUpdatedBy'
   | 'name'
-  | 'publicAccess'
   | 'sharing'
   | 'skipTotal'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesCategoryOption =
   | 'access'
@@ -11292,6 +10931,7 @@ export type PropertyNamesCategoryOption =
   | 'attributeValues'
   | 'categories'
   | 'categoryOptionCombos'
+  | 'categoryOptionGroups'
   | 'code'
   | 'created'
   | 'createdBy'
@@ -11302,11 +10942,9 @@ export type PropertyNamesCategoryOption =
   | 'displayName'
   | 'displayShortName'
   | 'endDate'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'formName'
-  | 'groups'
   | 'href'
   | 'id'
   | 'isDefault'
@@ -11316,16 +10954,13 @@ export type PropertyNamesCategoryOption =
   | 'legendSets'
   | 'name'
   | 'organisationUnits'
-  | 'publicAccess'
   | 'queryMods'
   | 'sharing'
   | 'shortName'
   | 'startDate'
   | 'style'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesCategoryOptionCombo =
   | 'access'
@@ -11343,7 +10978,6 @@ export type PropertyNamesCategoryOptionCombo =
   | 'displayFormName'
   | 'displayName'
   | 'displayShortName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'formName'
@@ -11354,13 +10988,10 @@ export type PropertyNamesCategoryOptionCombo =
   | 'lastUpdatedBy'
   | 'legendSet'
   | 'legendSets'
-  | 'publicAccess'
   | 'queryMods'
   | 'sharing'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesCategoryOptionGroup =
   | 'access'
@@ -11377,7 +11008,6 @@ export type PropertyNamesCategoryOptionGroup =
   | 'displayFormName'
   | 'displayName'
   | 'displayShortName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'formName'
@@ -11389,14 +11019,11 @@ export type PropertyNamesCategoryOptionGroup =
   | 'legendSet'
   | 'legendSets'
   | 'name'
-  | 'publicAccess'
   | 'queryMods'
   | 'sharing'
   | 'shortName'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesCategoryOptionGroupSet =
   | 'access'
@@ -11416,7 +11043,6 @@ export type PropertyNamesCategoryOptionGroupSet =
   | 'displayFormName'
   | 'displayName'
   | 'displayShortName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'filter'
@@ -11430,14 +11056,11 @@ export type PropertyNamesCategoryOptionGroupSet =
   | 'name'
   | 'optionSet'
   | 'programStage'
-  | 'publicAccess'
   | 'repetition'
   | 'sharing'
   | 'shortName'
   | 'translations'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'valueType';
 
 export type PropertyNamesConstant =
@@ -11451,7 +11074,6 @@ export type PropertyNamesConstant =
   | 'displayFormName'
   | 'displayName'
   | 'displayShortName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'formName'
@@ -11460,13 +11082,10 @@ export type PropertyNamesConstant =
   | 'lastUpdated'
   | 'lastUpdatedBy'
   | 'name'
-  | 'publicAccess'
   | 'sharing'
   | 'shortName'
   | 'translations'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'value';
 
 export type PropertyNamesDashboard =
@@ -11482,7 +11101,6 @@ export type PropertyNamesDashboard =
   | 'displayFormName'
   | 'displayName'
   | 'displayShortName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'formName'
@@ -11494,14 +11112,11 @@ export type PropertyNamesDashboard =
   | 'lastUpdatedBy'
   | 'layout'
   | 'name'
-  | 'publicAccess'
   | 'restrictFilters'
   | 'sharing'
   | 'shortName'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesDashboardItem =
   | 'access'
@@ -11515,7 +11130,6 @@ export type PropertyNamesDashboardItem =
   | 'eventChart'
   | 'eventReport'
   | 'eventVisualization'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'height'
@@ -11528,7 +11142,6 @@ export type PropertyNamesDashboardItem =
   | 'map'
   | 'messages'
   | 'name'
-  | 'publicAccess'
   | 'reports'
   | 'resources'
   | 'shape'
@@ -11537,8 +11150,6 @@ export type PropertyNamesDashboardItem =
   | 'translations'
   | 'type'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'users'
   | 'visualization'
   | 'width'
@@ -11553,7 +11164,6 @@ export type PropertyNamesDataApprovalLevel =
   | 'created'
   | 'createdBy'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -11564,12 +11174,9 @@ export type PropertyNamesDataApprovalLevel =
   | 'name'
   | 'orgUnitLevel'
   | 'orgUnitLevelName'
-  | 'publicAccess'
   | 'sharing'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesDataApprovalWorkflow =
   | 'access'
@@ -11581,7 +11188,6 @@ export type PropertyNamesDataApprovalWorkflow =
   | 'dataApprovalLevels'
   | 'dataSets'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -11590,12 +11196,9 @@ export type PropertyNamesDataApprovalWorkflow =
   | 'lastUpdatedBy'
   | 'name'
   | 'periodType'
-  | 'publicAccess'
   | 'sharing'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesDataElement =
   | 'access'
@@ -11616,7 +11219,6 @@ export type PropertyNamesDataElement =
   | 'displayName'
   | 'displayShortName'
   | 'domainType'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'fieldMask'
@@ -11630,7 +11232,6 @@ export type PropertyNamesDataElement =
   | 'name'
   | 'optionSet'
   | 'optionSetValue'
-  | 'publicAccess'
   | 'queryMods'
   | 'sharing'
   | 'shortName'
@@ -11638,8 +11239,6 @@ export type PropertyNamesDataElement =
   | 'translations'
   | 'url'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'valueType'
   | 'valueTypeOptions'
   | 'zeroIsSignificant';
@@ -11657,7 +11256,6 @@ export type PropertyNamesDataElementGroup =
   | 'displayFormName'
   | 'displayName'
   | 'displayShortName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'formName'
@@ -11669,14 +11267,11 @@ export type PropertyNamesDataElementGroup =
   | 'legendSet'
   | 'legendSets'
   | 'name'
-  | 'publicAccess'
   | 'queryMods'
   | 'sharing'
   | 'shortName'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesDataElementGroupSet =
   | 'access'
@@ -11697,7 +11292,6 @@ export type PropertyNamesDataElementGroupSet =
   | 'displayFormName'
   | 'displayName'
   | 'displayShortName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'filter'
@@ -11711,14 +11305,11 @@ export type PropertyNamesDataElementGroupSet =
   | 'name'
   | 'optionSet'
   | 'programStage'
-  | 'publicAccess'
   | 'repetition'
   | 'sharing'
   | 'shortName'
   | 'translations'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'valueType';
 
 export type PropertyNamesDataEntryForm =
@@ -11728,7 +11319,6 @@ export type PropertyNamesDataEntryForm =
   | 'created'
   | 'createdBy'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'format'
@@ -11738,13 +11328,10 @@ export type PropertyNamesDataEntryForm =
   | 'lastUpdated'
   | 'lastUpdatedBy'
   | 'name'
-  | 'publicAccess'
   | 'sharing'
   | 'style'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesDataSet =
   | 'access'
@@ -11767,7 +11354,6 @@ export type PropertyNamesDataSet =
   | 'displayName'
   | 'displayShortName'
   | 'expiryDays'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'fieldCombinationRequired'
@@ -11790,7 +11376,6 @@ export type PropertyNamesDataSet =
   | 'openPeriodsAfterCoEndDate'
   | 'organisationUnits'
   | 'periodType'
-  | 'publicAccess'
   | 'queryMods'
   | 'renderAsTabs'
   | 'renderHorizontally'
@@ -11802,8 +11387,6 @@ export type PropertyNamesDataSet =
   | 'timelyDays'
   | 'translations'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'validCompleteOnly'
   | 'version'
   | 'workflow';
@@ -11820,7 +11403,6 @@ export type PropertyNamesDataSetNotificationTemplate =
   | 'displayMessageTemplate'
   | 'displayName'
   | 'displaySubjectTemplate'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -11832,16 +11414,13 @@ export type PropertyNamesDataSetNotificationTemplate =
   | 'notificationRecipient'
   | 'notifyParentOrganisationUnitOnly'
   | 'notifyUsersInHierarchyOnly'
-  | 'publicAccess'
   | 'recipientUserGroup'
   | 'relativeScheduledDays'
   | 'sendStrategy'
   | 'sharing'
   | 'subjectTemplate'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesDimensionalObject =
   | 'access'
@@ -11864,7 +11443,6 @@ export type PropertyNamesDimensionalObject =
   | 'displayName'
   | 'displayShortName'
   | 'eventRepetition'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'filter'
@@ -11880,14 +11458,11 @@ export type PropertyNamesDimensionalObject =
   | 'name'
   | 'optionSet'
   | 'programStage'
-  | 'publicAccess'
   | 'sharing'
   | 'shortName'
   | 'translations'
   | 'uid'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'valueType';
 
 export type PropertyNamesDocument =
@@ -11900,7 +11475,6 @@ export type PropertyNamesDocument =
   | 'createdBy'
   | 'displayName'
   | 'external'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -11908,13 +11482,10 @@ export type PropertyNamesDocument =
   | 'lastUpdated'
   | 'lastUpdatedBy'
   | 'name'
-  | 'publicAccess'
   | 'sharing'
   | 'translations'
   | 'url'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesEventHook =
   | 'access'
@@ -11925,7 +11496,6 @@ export type PropertyNamesEventHook =
   | 'description'
   | 'disabled'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -11933,14 +11503,11 @@ export type PropertyNamesEventHook =
   | 'lastUpdated'
   | 'lastUpdatedBy'
   | 'name'
-  | 'publicAccess'
   | 'sharing'
   | 'source'
   | 'targets'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesEventVisualization =
   | 'access'
@@ -11983,7 +11550,6 @@ export type PropertyNamesEventVisualization =
   | 'domainAxisLabel'
   | 'endDate'
   | 'eventStatus'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'filterDimensions'
@@ -12018,7 +11584,6 @@ export type PropertyNamesEventVisualization =
   | 'programIndicatorDimensions'
   | 'programStage'
   | 'programStatus'
-  | 'publicAccess'
   | 'rangeAxisDecimals'
   | 'rangeAxisLabel'
   | 'rangeAxisMaxValue'
@@ -12050,8 +11615,6 @@ export type PropertyNamesEventVisualization =
   | 'translations'
   | 'type'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'userOrgUnitType'
   | 'userOrganisationUnit'
   | 'userOrganisationUnitChildren'
@@ -12074,7 +11637,6 @@ export type PropertyNamesExpressionDimensionItem =
   | 'displayName'
   | 'displayShortName'
   | 'expression'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'formName'
@@ -12086,15 +11648,12 @@ export type PropertyNamesExpressionDimensionItem =
   | 'legendSets'
   | 'missingValueStrategy'
   | 'name'
-  | 'publicAccess'
   | 'queryMods'
   | 'sharing'
   | 'shortName'
   | 'slidingWindow'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesExternalMapLayer =
   | 'access'
@@ -12104,7 +11663,6 @@ export type PropertyNamesExternalMapLayer =
   | 'created'
   | 'createdBy'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -12118,13 +11676,10 @@ export type PropertyNamesExternalMapLayer =
   | 'mapLayerPosition'
   | 'mapService'
   | 'name'
-  | 'publicAccess'
   | 'sharing'
   | 'translations'
   | 'url'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesFileResource =
   | 'access'
@@ -12137,7 +11692,6 @@ export type PropertyNamesFileResource =
   | 'createdBy'
   | 'displayName'
   | 'domain'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'hasMultipleStorageFiles'
@@ -12146,13 +11700,10 @@ export type PropertyNamesFileResource =
   | 'lastUpdated'
   | 'lastUpdatedBy'
   | 'name'
-  | 'publicAccess'
   | 'sharing'
   | 'storageStatus'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesIdentifiableObject =
   | 'access'
@@ -12161,7 +11712,6 @@ export type PropertyNamesIdentifiableObject =
   | 'created'
   | 'createdBy'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -12169,13 +11719,10 @@ export type PropertyNamesIdentifiableObject =
   | 'lastUpdated'
   | 'lastUpdatedBy'
   | 'name'
-  | 'publicAccess'
   | 'sharing'
   | 'translations'
   | 'uid'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesIncomingSms =
   | 'access'
@@ -12184,7 +11731,6 @@ export type PropertyNamesIncomingSms =
   | 'created'
   | 'createdBy'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'gatewayid'
@@ -12194,7 +11740,6 @@ export type PropertyNamesIncomingSms =
   | 'lastUpdatedBy'
   | 'name'
   | 'originator'
-  | 'publicAccess'
   | 'receiveddate'
   | 'sentdate'
   | 'sharing'
@@ -12202,9 +11747,7 @@ export type PropertyNamesIncomingSms =
   | 'smsstatus'
   | 'text'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesIndicator =
   | 'access'
@@ -12230,7 +11773,6 @@ export type PropertyNamesIndicator =
   | 'displayShortName'
   | 'explodedDenominator'
   | 'explodedNumerator'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'formName'
@@ -12245,16 +11787,13 @@ export type PropertyNamesIndicator =
   | 'name'
   | 'numerator'
   | 'numeratorDescription'
-  | 'publicAccess'
   | 'queryMods'
   | 'sharing'
   | 'shortName'
   | 'style'
   | 'translations'
   | 'url'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesIndicatorGroup =
   | 'access'
@@ -12264,7 +11803,6 @@ export type PropertyNamesIndicatorGroup =
   | 'createdBy'
   | 'description'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'groupSets'
@@ -12275,12 +11813,9 @@ export type PropertyNamesIndicatorGroup =
   | 'lastUpdated'
   | 'lastUpdatedBy'
   | 'name'
-  | 'publicAccess'
   | 'sharing'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesIndicatorGroupSet =
   | 'access'
@@ -12291,7 +11826,6 @@ export type PropertyNamesIndicatorGroupSet =
   | 'createdBy'
   | 'description'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -12300,13 +11834,10 @@ export type PropertyNamesIndicatorGroupSet =
   | 'lastUpdated'
   | 'lastUpdatedBy'
   | 'name'
-  | 'publicAccess'
   | 'sharing'
   | 'shortName'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesIndicatorType =
   | 'access'
@@ -12315,7 +11846,6 @@ export type PropertyNamesIndicatorType =
   | 'created'
   | 'createdBy'
   | 'displayName'
-  | 'externalAccess'
   | 'factor'
   | 'favorite'
   | 'favorites'
@@ -12325,12 +11855,9 @@ export type PropertyNamesIndicatorType =
   | 'lastUpdatedBy'
   | 'name'
   | 'number'
-  | 'publicAccess'
   | 'sharing'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesInterpretation =
   | 'access'
@@ -12344,7 +11871,6 @@ export type PropertyNamesInterpretation =
   | 'eventChart'
   | 'eventReport'
   | 'eventVisualization'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -12357,14 +11883,11 @@ export type PropertyNamesInterpretation =
   | 'mentions'
   | 'organisationUnit'
   | 'period'
-  | 'publicAccess'
   | 'sharing'
   | 'text'
   | 'translations'
   | 'type'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'visualization';
 
 export type PropertyNamesJobConfiguration =
@@ -12378,7 +11901,6 @@ export type PropertyNamesJobConfiguration =
   | 'delay'
   | 'displayName'
   | 'enabled'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -12394,13 +11916,10 @@ export type PropertyNamesJobConfiguration =
   | 'leaderOnlyJob'
   | 'name'
   | 'nextExecutionTime'
-  | 'publicAccess'
   | 'schedulingType'
   | 'sharing'
   | 'translations'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'userUid';
 
 export type PropertyNamesLegendSet =
@@ -12410,7 +11929,6 @@ export type PropertyNamesLegendSet =
   | 'created'
   | 'createdBy'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -12419,13 +11937,10 @@ export type PropertyNamesLegendSet =
   | 'lastUpdatedBy'
   | 'legends'
   | 'name'
-  | 'publicAccess'
   | 'sharing'
   | 'symbolizer'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesLockException = 'created' | 'dataSet' | 'name' | 'organisationUnit' | 'period';
 
@@ -12441,7 +11956,6 @@ export type PropertyNamesMap =
   | 'displayFormName'
   | 'displayName'
   | 'displayShortName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'formName'
@@ -12454,7 +11968,6 @@ export type PropertyNamesMap =
   | 'longitude'
   | 'mapViews'
   | 'name'
-  | 'publicAccess'
   | 'sharing'
   | 'shortName'
   | 'subscribed'
@@ -12462,8 +11975,6 @@ export type PropertyNamesMap =
   | 'title'
   | 'translations'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'zoom';
 
 export type PropertyNamesMapView =
@@ -12502,7 +12013,6 @@ export type PropertyNamesMapView =
   | 'eventPointColor'
   | 'eventPointRadius'
   | 'eventStatus'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'filterDimensions'
@@ -12545,7 +12055,6 @@ export type PropertyNamesMapView =
   | 'programIndicatorDimensions'
   | 'programStage'
   | 'programStatus'
-  | 'publicAccess'
   | 'radiusHigh'
   | 'radiusLow'
   | 'relativePeriods'
@@ -12566,8 +12075,6 @@ export type PropertyNamesMapView =
   | 'trackedEntityType'
   | 'translations'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'userOrgUnitType'
   | 'userOrganisationUnit'
   | 'userOrganisationUnitChildren'
@@ -12582,7 +12089,6 @@ export type PropertyNamesMessageConversation =
   | 'createdBy'
   | 'displayName'
   | 'extMessageId'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'followUp'
@@ -12598,16 +12104,13 @@ export type PropertyNamesMessageConversation =
   | 'messageType'
   | 'messages'
   | 'priority'
-  | 'publicAccess'
   | 'read'
   | 'sharing'
   | 'status'
   | 'subject'
   | 'translations'
   | 'user'
-  | 'userAccesses'
   | 'userFirstname'
-  | 'userGroupAccesses'
   | 'userMessages'
   | 'userSurname';
 
@@ -12633,7 +12136,6 @@ export type PropertyNamesOAuth2Client =
   | 'created'
   | 'createdBy'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'grantTypes'
@@ -12642,14 +12144,11 @@ export type PropertyNamesOAuth2Client =
   | 'lastUpdated'
   | 'lastUpdatedBy'
   | 'name'
-  | 'publicAccess'
   | 'redirectUris'
   | 'secret'
   | 'sharing'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesOption =
   | 'access'
@@ -12662,7 +12161,6 @@ export type PropertyNamesOption =
   | 'displayFormName'
   | 'displayName'
   | 'displayShortName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'formName'
@@ -12672,15 +12170,12 @@ export type PropertyNamesOption =
   | 'lastUpdatedBy'
   | 'name'
   | 'optionSet'
-  | 'publicAccess'
   | 'sharing'
   | 'shortName'
   | 'sortOrder'
   | 'style'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesOptionGroup =
   | 'access'
@@ -12695,7 +12190,6 @@ export type PropertyNamesOptionGroup =
   | 'displayFormName'
   | 'displayName'
   | 'displayShortName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'formName'
@@ -12708,14 +12202,11 @@ export type PropertyNamesOptionGroup =
   | 'name'
   | 'optionSet'
   | 'options'
-  | 'publicAccess'
   | 'queryMods'
   | 'sharing'
   | 'shortName'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesOptionGroupSet =
   | 'access'
@@ -12734,7 +12225,6 @@ export type PropertyNamesOptionGroupSet =
   | 'displayFormName'
   | 'displayName'
   | 'displayShortName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'filter'
@@ -12749,14 +12239,11 @@ export type PropertyNamesOptionGroupSet =
   | 'optionGroups'
   | 'optionSet'
   | 'programStage'
-  | 'publicAccess'
   | 'repetition'
   | 'sharing'
   | 'shortName'
   | 'translations'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'valueType';
 
 export type PropertyNamesOptionSet =
@@ -12767,7 +12254,6 @@ export type PropertyNamesOptionSet =
   | 'createdBy'
   | 'description'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -12776,12 +12262,9 @@ export type PropertyNamesOptionSet =
   | 'lastUpdatedBy'
   | 'name'
   | 'options'
-  | 'publicAccess'
   | 'sharing'
   | 'translations'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'valueType'
   | 'version';
 
@@ -12806,7 +12289,6 @@ export type PropertyNamesOrganisationUnit =
   | 'displayName'
   | 'displayShortName'
   | 'email'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'formName'
@@ -12828,7 +12310,6 @@ export type PropertyNamesOrganisationUnit =
   | 'path'
   | 'phoneNumber'
   | 'programs'
-  | 'publicAccess'
   | 'queryMods'
   | 'sharing'
   | 'shortName'
@@ -12836,8 +12317,6 @@ export type PropertyNamesOrganisationUnit =
   | 'type'
   | 'url'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'users';
 
 export type PropertyNamesOrganisationUnitGroup =
@@ -12854,7 +12333,6 @@ export type PropertyNamesOrganisationUnitGroup =
   | 'displayFormName'
   | 'displayName'
   | 'displayShortName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'featureType'
@@ -12869,15 +12347,12 @@ export type PropertyNamesOrganisationUnitGroup =
   | 'legendSets'
   | 'name'
   | 'organisationUnits'
-  | 'publicAccess'
   | 'queryMods'
   | 'sharing'
   | 'shortName'
   | 'symbol'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesOrganisationUnitGroupSet =
   | 'access'
@@ -12897,7 +12372,6 @@ export type PropertyNamesOrganisationUnitGroupSet =
   | 'displayFormName'
   | 'displayName'
   | 'displayShortName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'filter'
@@ -12913,14 +12387,11 @@ export type PropertyNamesOrganisationUnitGroupSet =
   | 'optionSet'
   | 'organisationUnitGroups'
   | 'programStage'
-  | 'publicAccess'
   | 'repetition'
   | 'sharing'
   | 'shortName'
   | 'translations'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'valueType';
 
 export type PropertyNamesOrganisationUnitLevel =
@@ -12930,7 +12401,6 @@ export type PropertyNamesOrganisationUnitLevel =
   | 'created'
   | 'createdBy'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -12940,12 +12410,9 @@ export type PropertyNamesOrganisationUnitLevel =
   | 'level'
   | 'name'
   | 'offlineLevels'
-  | 'publicAccess'
   | 'sharing'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesOutboundSms =
   | 'access'
@@ -12955,7 +12422,6 @@ export type PropertyNamesOutboundSms =
   | 'createdBy'
   | 'date'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -12964,16 +12430,13 @@ export type PropertyNamesOutboundSms =
   | 'lastUpdatedBy'
   | 'message'
   | 'name'
-  | 'publicAccess'
   | 'recipients'
   | 'sender'
   | 'sharing'
   | 'status'
   | 'subject'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesPredictor =
   | 'access'
@@ -12987,7 +12450,6 @@ export type PropertyNamesPredictor =
   | 'displayFormName'
   | 'displayName'
   | 'displayShortName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'formName'
@@ -13003,16 +12465,13 @@ export type PropertyNamesPredictor =
   | 'outputCombo'
   | 'periodType'
   | 'predictorGroups'
-  | 'publicAccess'
   | 'sampleSkipTest'
   | 'sequentialSampleCount'
   | 'sequentialSkipCount'
   | 'sharing'
   | 'shortName'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesPredictorGroup =
   | 'access'
@@ -13022,7 +12481,6 @@ export type PropertyNamesPredictorGroup =
   | 'createdBy'
   | 'description'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -13031,12 +12489,9 @@ export type PropertyNamesPredictorGroup =
   | 'lastUpdatedBy'
   | 'name'
   | 'predictors'
-  | 'publicAccess'
   | 'sharing'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesProgram =
   | 'access'
@@ -13060,7 +12515,6 @@ export type PropertyNamesProgram =
   | 'enrollmentDateLabel'
   | 'expiryDays'
   | 'expiryPeriodType'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'featureType'
@@ -13084,7 +12538,6 @@ export type PropertyNamesProgram =
   | 'programStages'
   | 'programTrackedEntityAttributes'
   | 'programType'
-  | 'publicAccess'
   | 'registration'
   | 'relatedProgram'
   | 'selectEnrollmentDatesInFuture'
@@ -13097,8 +12550,6 @@ export type PropertyNamesProgram =
   | 'translations'
   | 'useFirstStageDuringRegistration'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'userRoles'
   | 'version'
   | 'withoutRegistration';
@@ -13123,7 +12574,6 @@ export type PropertyNamesProgramIndicator =
   | 'displayName'
   | 'displayShortName'
   | 'expression'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'filter'
@@ -13138,15 +12588,12 @@ export type PropertyNamesProgramIndicator =
   | 'orgUnitField'
   | 'program'
   | 'programIndicatorGroups'
-  | 'publicAccess'
   | 'queryMods'
   | 'sharing'
   | 'shortName'
   | 'style'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesProgramIndicatorGroup =
   | 'access'
@@ -13156,7 +12603,6 @@ export type PropertyNamesProgramIndicatorGroup =
   | 'createdBy'
   | 'description'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -13165,12 +12611,9 @@ export type PropertyNamesProgramIndicatorGroup =
   | 'lastUpdatedBy'
   | 'name'
   | 'programIndicators'
-  | 'publicAccess'
   | 'sharing'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesProgramMessage =
   | 'access'
@@ -13180,7 +12623,7 @@ export type PropertyNamesProgramMessage =
   | 'createdBy'
   | 'deliveryChannels'
   | 'displayName'
-  | 'externalAccess'
+  | 'event'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -13192,17 +12635,13 @@ export type PropertyNamesProgramMessage =
   | 'notificationTemplate'
   | 'processedDate'
   | 'programInstance'
-  | 'programStageInstance'
-  | 'publicAccess'
   | 'recipients'
   | 'sharing'
   | 'storeCopy'
   | 'subject'
   | 'text'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesProgramNotificationTemplate =
   | 'access'
@@ -13214,7 +12653,6 @@ export type PropertyNamesProgramNotificationTemplate =
   | 'displayMessageTemplate'
   | 'displayName'
   | 'displaySubjectTemplate'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -13227,7 +12665,6 @@ export type PropertyNamesProgramNotificationTemplate =
   | 'notificationTrigger'
   | 'notifyParentOrganisationUnitOnly'
   | 'notifyUsersInHierarchyOnly'
-  | 'publicAccess'
   | 'recipientDataElement'
   | 'recipientProgramAttribute'
   | 'recipientUserGroup'
@@ -13236,9 +12673,7 @@ export type PropertyNamesProgramNotificationTemplate =
   | 'sharing'
   | 'subjectTemplate'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesProgramRule =
   | 'access'
@@ -13249,7 +12684,6 @@ export type PropertyNamesProgramRule =
   | 'createdBy'
   | 'description'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -13261,12 +12695,9 @@ export type PropertyNamesProgramRule =
   | 'program'
   | 'programRuleActions'
   | 'programStage'
-  | 'publicAccess'
   | 'sharing'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesProgramRuleAction =
   | 'access'
@@ -13279,7 +12710,6 @@ export type PropertyNamesProgramRuleAction =
   | 'dataElement'
   | 'displayContent'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -13297,14 +12727,11 @@ export type PropertyNamesProgramRuleAction =
   | 'programRuleActionType'
   | 'programStage'
   | 'programStageSection'
-  | 'publicAccess'
   | 'sharing'
   | 'templateUid'
   | 'trackedEntityAttribute'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesProgramRuleVariable =
   | 'access'
@@ -13314,7 +12741,6 @@ export type PropertyNamesProgramRuleVariable =
   | 'createdBy'
   | 'dataElement'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -13325,14 +12751,11 @@ export type PropertyNamesProgramRuleVariable =
   | 'program'
   | 'programRuleVariableSourceType'
   | 'programStage'
-  | 'publicAccess'
   | 'sharing'
   | 'trackedEntityAttribute'
   | 'translations'
   | 'useCodeForOptionSet'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'valueType';
 
 export type PropertyNamesProgramSection =
@@ -13346,7 +12769,6 @@ export type PropertyNamesProgramSection =
   | 'displayFormName'
   | 'displayName'
   | 'displayShortName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'formName'
@@ -13356,7 +12778,6 @@ export type PropertyNamesProgramSection =
   | 'lastUpdatedBy'
   | 'name'
   | 'program'
-  | 'publicAccess'
   | 'renderType'
   | 'sharing'
   | 'shortName'
@@ -13364,9 +12785,7 @@ export type PropertyNamesProgramSection =
   | 'style'
   | 'trackedEntityAttributes'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesProgramStage =
   | 'access'
@@ -13389,7 +12808,6 @@ export type PropertyNamesProgramStage =
   | 'dueDateLabel'
   | 'enableUserAssignment'
   | 'executionDateLabel'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'featureType'
@@ -13411,7 +12829,6 @@ export type PropertyNamesProgramStage =
   | 'program'
   | 'programStageDataElements'
   | 'programStageSections'
-  | 'publicAccess'
   | 'referral'
   | 'remindCompleted'
   | 'repeatable'
@@ -13423,8 +12840,6 @@ export type PropertyNamesProgramStage =
   | 'style'
   | 'translations'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'validationStrategy';
 
 export type PropertyNamesProgramStageInstanceFilter =
@@ -13437,7 +12852,6 @@ export type PropertyNamesProgramStageInstanceFilter =
   | 'displayDescription'
   | 'displayName'
   | 'eventQueryCriteria'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -13447,12 +12861,9 @@ export type PropertyNamesProgramStageInstanceFilter =
   | 'name'
   | 'program'
   | 'programStage'
-  | 'publicAccess'
   | 'sharing'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesProgramStageSection =
   | 'access'
@@ -13466,7 +12877,6 @@ export type PropertyNamesProgramStageSection =
   | 'displayFormName'
   | 'displayName'
   | 'displayShortName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'formName'
@@ -13477,16 +12887,13 @@ export type PropertyNamesProgramStageSection =
   | 'name'
   | 'programIndicators'
   | 'programStage'
-  | 'publicAccess'
   | 'renderType'
   | 'sharing'
   | 'shortName'
   | 'sortOrder'
   | 'style'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesProgramStageWorkingList =
   | 'access'
@@ -13497,7 +12904,6 @@ export type PropertyNamesProgramStageWorkingList =
   | 'description'
   | 'displayDescription'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -13508,12 +12914,9 @@ export type PropertyNamesProgramStageWorkingList =
   | 'program'
   | 'programStage'
   | 'programStageQueryCriteria'
-  | 'publicAccess'
   | 'sharing'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesPushAnalysis =
   | 'access'
@@ -13523,7 +12926,6 @@ export type PropertyNamesPushAnalysis =
   | 'createdBy'
   | 'dashboard'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -13532,14 +12934,11 @@ export type PropertyNamesPushAnalysis =
   | 'lastUpdatedBy'
   | 'message'
   | 'name'
-  | 'publicAccess'
   | 'recipientUserGroups'
   | 'sharing'
   | 'title'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesRelationshipType =
   | 'access'
@@ -13552,7 +12951,6 @@ export type PropertyNamesRelationshipType =
   | 'displayFromToName'
   | 'displayName'
   | 'displayToFromName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'fromConstraint'
@@ -13562,15 +12960,12 @@ export type PropertyNamesRelationshipType =
   | 'lastUpdated'
   | 'lastUpdatedBy'
   | 'name'
-  | 'publicAccess'
   | 'referral'
   | 'sharing'
   | 'toConstraint'
   | 'toFromName'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesReport =
   | 'access'
@@ -13581,7 +12976,6 @@ export type PropertyNamesReport =
   | 'createdBy'
   | 'designContent'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -13589,15 +12983,12 @@ export type PropertyNamesReport =
   | 'lastUpdated'
   | 'lastUpdatedBy'
   | 'name'
-  | 'publicAccess'
   | 'relativePeriods'
   | 'reportParams'
   | 'sharing'
   | 'translations'
   | 'type'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'visualization';
 
 export type PropertyNamesRoute =
@@ -13611,7 +13002,6 @@ export type PropertyNamesRoute =
   | 'description'
   | 'disabled'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'headers'
@@ -13620,13 +13010,10 @@ export type PropertyNamesRoute =
   | 'lastUpdated'
   | 'lastUpdatedBy'
   | 'name'
-  | 'publicAccess'
   | 'sharing'
   | 'translations'
   | 'url'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesSMSCommand =
   | 'access'
@@ -13640,7 +13027,6 @@ export type PropertyNamesSMSCommand =
   | 'dataset'
   | 'defaultMessage'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -13653,7 +13039,6 @@ export type PropertyNamesSMSCommand =
   | 'parserType'
   | 'program'
   | 'programStage'
-  | 'publicAccess'
   | 'receivedMessage'
   | 'separator'
   | 'sharing'
@@ -13662,9 +13047,7 @@ export type PropertyNamesSMSCommand =
   | 'successMessage'
   | 'translations'
   | 'user'
-  | 'userAccesses'
   | 'userGroup'
-  | 'userGroupAccesses'
   | 'wrongFormatMessage';
 
 export type PropertyNamesSection =
@@ -13679,7 +13062,6 @@ export type PropertyNamesSection =
   | 'description'
   | 'disableDataElementAutoGroup'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'greyedFields'
@@ -13689,15 +13071,12 @@ export type PropertyNamesSection =
   | 'lastUpdated'
   | 'lastUpdatedBy'
   | 'name'
-  | 'publicAccess'
   | 'sharing'
   | 'showColumnTotals'
   | 'showRowTotals'
   | 'sortOrder'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesSqlView =
   | 'access'
@@ -13708,7 +13087,6 @@ export type PropertyNamesSqlView =
   | 'createdBy'
   | 'description'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -13716,15 +13094,12 @@ export type PropertyNamesSqlView =
   | 'lastUpdated'
   | 'lastUpdatedBy'
   | 'name'
-  | 'publicAccess'
   | 'sharing'
   | 'sqlQuery'
   | 'translations'
   | 'type'
   | 'updateJobId'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesTrackedEntityAttribute =
   | 'access'
@@ -13743,7 +13118,6 @@ export type PropertyNamesTrackedEntityAttribute =
   | 'displayOnVisitSchedule'
   | 'displayShortName'
   | 'expression'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'fieldMask'
@@ -13761,7 +13135,6 @@ export type PropertyNamesTrackedEntityAttribute =
   | 'optionSetValue'
   | 'orgunitScope'
   | 'pattern'
-  | 'publicAccess'
   | 'queryMods'
   | 'sharing'
   | 'shortName'
@@ -13772,8 +13145,6 @@ export type PropertyNamesTrackedEntityAttribute =
   | 'translations'
   | 'unique'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'valueType';
 
 export type PropertyNamesTrackedEntityInstanceFilter =
@@ -13789,7 +13160,6 @@ export type PropertyNamesTrackedEntityInstanceFilter =
   | 'enrollmentStatus'
   | 'entityQueryCriteria'
   | 'eventFilters'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'followup'
@@ -13799,14 +13169,11 @@ export type PropertyNamesTrackedEntityInstanceFilter =
   | 'lastUpdatedBy'
   | 'name'
   | 'program'
-  | 'publicAccess'
   | 'sharing'
   | 'sortOrder'
   | 'style'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesTrackedEntityType =
   | 'access'
@@ -13820,7 +13187,6 @@ export type PropertyNamesTrackedEntityType =
   | 'displayFormName'
   | 'displayName'
   | 'displayShortName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'featureType'
@@ -13832,15 +13198,12 @@ export type PropertyNamesTrackedEntityType =
   | 'maxTeiCountToReturn'
   | 'minAttributesRequiredToSearch'
   | 'name'
-  | 'publicAccess'
   | 'sharing'
   | 'shortName'
   | 'style'
   | 'trackedEntityTypeAttributes'
   | 'translations'
-  | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses';
+  | 'user';
 
 export type PropertyNamesUser =
   | 'access'
@@ -13860,7 +13223,6 @@ export type PropertyNamesUser =
   | 'education'
   | 'email'
   | 'employer'
-  | 'externalAccess'
   | 'externalAuth'
   | 'facebookMessenger'
   | 'favorite'
@@ -13885,7 +13247,6 @@ export type PropertyNamesUser =
   | 'password'
   | 'passwordLastUpdated'
   | 'phoneNumber'
-  | 'publicAccess'
   | 'selfRegistered'
   | 'settings'
   | 'sharing'
@@ -13897,9 +13258,7 @@ export type PropertyNamesUser =
   | 'twitter'
   | 'twoFactorEnabled'
   | 'user'
-  | 'userAccesses'
   | 'userCredentials'
-  | 'userGroupAccesses'
   | 'userGroups'
   | 'userRoles'
   | 'username'
@@ -13913,7 +13272,6 @@ export type PropertyNamesUserGroup =
   | 'created'
   | 'createdBy'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -13923,12 +13281,9 @@ export type PropertyNamesUserGroup =
   | 'managedByGroups'
   | 'managedGroups'
   | 'name'
-  | 'publicAccess'
   | 'sharing'
   | 'translations'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'users';
 
 export type PropertyNamesUserRole =
@@ -13940,7 +13295,6 @@ export type PropertyNamesUserRole =
   | 'createdBy'
   | 'description'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -13948,13 +13302,10 @@ export type PropertyNamesUserRole =
   | 'lastUpdated'
   | 'lastUpdatedBy'
   | 'name'
-  | 'publicAccess'
   | 'restrictions'
   | 'sharing'
   | 'translations'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'users';
 
 export type PropertyNamesValidationNotificationTemplate =
@@ -13966,7 +13317,6 @@ export type PropertyNamesValidationNotificationTemplate =
   | 'displayMessageTemplate'
   | 'displayName'
   | 'displaySubjectTemplate'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -13977,15 +13327,12 @@ export type PropertyNamesValidationNotificationTemplate =
   | 'name'
   | 'notifyParentOrganisationUnitOnly'
   | 'notifyUsersInHierarchyOnly'
-  | 'publicAccess'
   | 'recipientUserGroups'
   | 'sendStrategy'
   | 'sharing'
   | 'subjectTemplate'
   | 'translations'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'validationRules';
 
 export type PropertyNamesValidationRule =
@@ -14005,7 +13352,6 @@ export type PropertyNamesValidationRule =
   | 'displayInstruction'
   | 'displayName'
   | 'displayShortName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'formName'
@@ -14023,7 +13369,6 @@ export type PropertyNamesValidationRule =
   | 'operator'
   | 'organisationUnitLevels'
   | 'periodType'
-  | 'publicAccess'
   | 'queryMods'
   | 'rightSide'
   | 'sharing'
@@ -14031,8 +13376,6 @@ export type PropertyNamesValidationRule =
   | 'skipFormValidation'
   | 'translations'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'validationRuleGroups';
 
 export type PropertyNamesValidationRuleGroup =
@@ -14043,7 +13386,6 @@ export type PropertyNamesValidationRuleGroup =
   | 'createdBy'
   | 'description'
   | 'displayName'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -14051,12 +13393,9 @@ export type PropertyNamesValidationRuleGroup =
   | 'lastUpdated'
   | 'lastUpdatedBy'
   | 'name'
-  | 'publicAccess'
   | 'sharing'
   | 'translations'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'validationRules';
 
 export type PropertyNamesVisualization =
@@ -14097,7 +13436,6 @@ export type PropertyNamesVisualization =
   | 'displayTitle'
   | 'domainAxisLabel'
   | 'endDate'
-  | 'externalAccess'
   | 'favorite'
   | 'favorites'
   | 'filterDimensions'
@@ -14135,7 +13473,6 @@ export type PropertyNamesVisualization =
   | 'percentStackedValues'
   | 'periods'
   | 'programIndicatorDimensions'
-  | 'publicAccess'
   | 'rangeAxisDecimals'
   | 'rangeAxisLabel'
   | 'rangeAxisMaxValue'
@@ -14170,8 +13507,6 @@ export type PropertyNamesVisualization =
   | 'translations'
   | 'type'
   | 'user'
-  | 'userAccesses'
-  | 'userGroupAccesses'
   | 'userOrgUnitType'
   | 'userOrganisationUnit'
   | 'userOrganisationUnitChildren'
@@ -14505,6 +13840,21 @@ export type RefDocument = {
    * @minLength 11
    * @maxLength 11
    * @example e89EJOatUOP
+   */
+  id: string;
+};
+
+/**
+ * A UID reference to a Event
+ * (Java name `org.hisp.dhis.program.Event`)
+ */
+export type RefEvent = {
+  /**
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example cc8uNffbxQi
    */
   id: string;
 };
@@ -15090,21 +14440,6 @@ export type RefProgramStageDataElement = {
    * @minLength 11
    * @maxLength 11
    * @example FqAF3ZobVP8
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ProgramStageInstance
- * (Java name `org.hisp.dhis.program.ProgramStageInstance`)
- */
-export type RefProgramStageInstance = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example CnxC0Wl8SM5
    */
   id: string;
 };
