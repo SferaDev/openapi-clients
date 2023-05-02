@@ -527,6 +527,42 @@ export type AuthUser = {
         hidden: boolean;
         disabledAt?: number | null;
       };
+      storageRedisTotalCommands?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+      };
+      storageRedisTotalBandwidthInBytes?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+      };
+      storageRedisTotalDailyAvgStorageInBytes?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+      };
+      storageRedisTotalDatabases?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+      };
     } | null;
     invoiceSettings?: {
       footer?: string;
