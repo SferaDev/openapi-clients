@@ -6,14 +6,14 @@ importers:
     specifiers:
       '@changesets/cli': ^2.26.1
       '@openapi-codegen/cli': ^2.0.0
-      '@openapi-codegen/typescript': ^6.2.1
+      '@openapi-codegen/typescript': ^6.2.2
       '@rollup/plugin-typescript': ^11.1.0
       '@types/isomorphic-fetch': ^0.0.36
       '@types/node': ^18.16.3
       builtin-modules: ^3.3.0
       isomorphic-fetch: ^3.0.0
       rimraf: ^5.0.0
-      rollup: ^3.21.2
+      rollup: ^3.21.3
       rollup-plugin-dts: ^5.3.0
       rollup-plugin-dts-bundle: ^1.0.0
       rollup-plugin-virtual-fs: ^4.0.1-alpha.0
@@ -26,15 +26,15 @@ importers:
     devDependencies:
       '@changesets/cli': 2.26.1
       '@openapi-codegen/cli': 2.0.0
-      '@openapi-codegen/typescript': 6.2.1
-      '@rollup/plugin-typescript': 11.1.0_3iz5aekbc5nd2z3nnfyqb5wciu
+      '@openapi-codegen/typescript': 6.2.2
+      '@rollup/plugin-typescript': 11.1.0_4ilpgte4uab6ksmrqjrzvhtdpu
       '@types/isomorphic-fetch': 0.0.36
       '@types/node': 18.16.3
       builtin-modules: 3.3.0
       isomorphic-fetch: 3.0.0
       rimraf: 5.0.0
-      rollup: 3.21.2
-      rollup-plugin-dts: 5.3.0_avmrdw7ntesq2nuyntszkb4oee
+      rollup: 3.21.3
+      rollup-plugin-dts: 5.3.0_enlefojnmpwsbnjrufommarvom
       rollup-plugin-dts-bundle: 1.0.0
       rollup-plugin-virtual-fs: 4.0.1-alpha.0
       ts-morph: 18.0.0
@@ -611,8 +611,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@openapi-codegen/typescript/6.2.1:
-    resolution: {integrity: sha512-kNWupq3dcMGLfldnp1NxjFQqEStvV7y2wlcQPTkYiX5kSnzOyM8aK1hZrHfjYQ1OGNyy5JyFU0/I5y+a8raBLA==}
+  /@openapi-codegen/typescript/6.2.2:
+    resolution: {integrity: sha512-G6trk5jcJIWK04hi152Yo7r+KpuP19kKG6WIVldxDh1Z2fD48N75hRQpEdKzzw5ufxqQE3q2fTcm7Inru8dwiQ==}
     dependencies:
       case: 1.6.3
       lodash: 4.17.21
@@ -623,7 +623,7 @@ packages:
       typescript: 4.8.2
     dev: true
 
-  /@rollup/plugin-typescript/11.1.0_3iz5aekbc5nd2z3nnfyqb5wciu:
+  /@rollup/plugin-typescript/11.1.0_4ilpgte4uab6ksmrqjrzvhtdpu:
     resolution: {integrity: sha512-86flrfE+bSHB69znnTV6kVjkncs2LBMhcTCyxWgRxLyfXfQrxg4UwlAqENnjrrxnSNS/XKCDJCl8EkdFJVHOxw==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -636,14 +636,14 @@ packages:
       tslib:
         optional: true
     dependencies:
-      '@rollup/pluginutils': 5.0.2_rollup@3.21.2
+      '@rollup/pluginutils': 5.0.2_rollup@3.21.3
       resolve: 1.22.1
-      rollup: 3.21.2
+      rollup: 3.21.3
       tslib: 2.5.0
       typescript: 5.0.4
     dev: true
 
-  /@rollup/pluginutils/5.0.2_rollup@3.21.2:
+  /@rollup/pluginutils/5.0.2_rollup@3.21.3:
     resolution: {integrity: sha512-pTd9rIsP92h+B6wWwFbW8RkZv4hiR/xKsqre4SIuAOaOEQRxi0lqLke9k2/7WegC85GgUs9pjmOjCUi3In4vwA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -655,7 +655,7 @@ packages:
       '@types/estree': 1.0.0
       estree-walker: 2.0.2
       picomatch: 2.3.1
-      rollup: 3.21.2
+      rollup: 3.21.3
     dev: true
 
   /@sindresorhus/is/5.3.0:
@@ -3095,7 +3095,7 @@ packages:
       dts-bundle: 0.7.3
     dev: true
 
-  /rollup-plugin-dts/5.3.0_avmrdw7ntesq2nuyntszkb4oee:
+  /rollup-plugin-dts/5.3.0_enlefojnmpwsbnjrufommarvom:
     resolution: {integrity: sha512-8FXp0ZkyZj1iU5klkIJYLjIq/YZSwBoERu33QBDxm/1yw5UU4txrEtcmMkrq+ZiKu3Q4qvPCNqc3ovX6rjqzbQ==}
     engines: {node: '>=v14'}
     peerDependencies:
@@ -3103,7 +3103,7 @@ packages:
       typescript: ^4.1 || ^5.0
     dependencies:
       magic-string: 0.30.0
-      rollup: 3.21.2
+      rollup: 3.21.3
       typescript: 5.0.4
     optionalDependencies:
       '@babel/code-frame': 7.18.6
@@ -3113,8 +3113,8 @@ packages:
     resolution: {integrity: sha512-tQ0SymyiUeA4Xn0nT5eP7gwGMiEewL6qyPvOc3xkaaLRILCr+wqWBQNh2a9SfpaMDJdoRt+68sk9TAhC24ZeVA==}
     dev: true
 
-  /rollup/3.21.2:
-    resolution: {integrity: sha512-c4vC+JZ3bbF4Kqq2TtM7zSKtSyMybFOjqmomFax3xpfYaPZDZ4iz8NMIuBRMjnXOcKYozw7bC6vhJjiWD6JpzQ==}
+  /rollup/3.21.3:
+    resolution: {integrity: sha512-VnPfEG51nIv2xPLnZaekkuN06q9ZbnyDcLkaBdJa/W7UddyhOfMP2yOPziYQfeY7k++fZM8FdQIummFN5y14kA==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     hasBin: true
     optionalDependencies:
@@ -3773,7 +3773,7 @@ packages:
       esbuild: 0.17.14
       postcss: 8.4.21
       resolve: 1.22.1
-      rollup: 3.21.2
+      rollup: 3.21.3
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
