@@ -9,11 +9,11 @@ importers:
       '@openapi-codegen/typescript': ^6.2.1
       '@rollup/plugin-typescript': ^11.1.0
       '@types/isomorphic-fetch': ^0.0.36
-      '@types/node': ^18.16.2
+      '@types/node': ^18.16.3
       builtin-modules: ^3.3.0
       isomorphic-fetch: ^3.0.0
       rimraf: ^5.0.0
-      rollup: ^3.21.0
+      rollup: ^3.21.2
       rollup-plugin-dts: ^5.3.0
       rollup-plugin-dts-bundle: ^1.0.0
       rollup-plugin-virtual-fs: ^4.0.1-alpha.0
@@ -27,18 +27,18 @@ importers:
       '@changesets/cli': 2.26.1
       '@openapi-codegen/cli': 2.0.0
       '@openapi-codegen/typescript': 6.2.1
-      '@rollup/plugin-typescript': 11.1.0_bb3vhmi3rdlkarve2rihl6ezbi
+      '@rollup/plugin-typescript': 11.1.0_3iz5aekbc5nd2z3nnfyqb5wciu
       '@types/isomorphic-fetch': 0.0.36
-      '@types/node': 18.16.2
+      '@types/node': 18.16.3
       builtin-modules: 3.3.0
       isomorphic-fetch: 3.0.0
       rimraf: 5.0.0
-      rollup: 3.21.0
-      rollup-plugin-dts: 5.3.0_mjeapf7d7hsdiibr254b7iwsba
+      rollup: 3.21.2
+      rollup-plugin-dts: 5.3.0_avmrdw7ntesq2nuyntszkb4oee
       rollup-plugin-dts-bundle: 1.0.0
       rollup-plugin-virtual-fs: 4.0.1-alpha.0
       ts-morph: 18.0.0
-      ts-node: 10.9.1_lkf4wh2ebpcidx5lpd7uwjviue
+      ts-node: 10.9.1_tz4znfsbt2bp6kjvaww33rryty
       tslib: 2.5.0
       turbo: 1.9.3
       typescript: 5.0.4
@@ -623,7 +623,7 @@ packages:
       typescript: 4.8.2
     dev: true
 
-  /@rollup/plugin-typescript/11.1.0_bb3vhmi3rdlkarve2rihl6ezbi:
+  /@rollup/plugin-typescript/11.1.0_3iz5aekbc5nd2z3nnfyqb5wciu:
     resolution: {integrity: sha512-86flrfE+bSHB69znnTV6kVjkncs2LBMhcTCyxWgRxLyfXfQrxg4UwlAqENnjrrxnSNS/XKCDJCl8EkdFJVHOxw==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -636,14 +636,14 @@ packages:
       tslib:
         optional: true
     dependencies:
-      '@rollup/pluginutils': 5.0.2_rollup@3.21.0
+      '@rollup/pluginutils': 5.0.2_rollup@3.21.2
       resolve: 1.22.1
-      rollup: 3.21.0
+      rollup: 3.21.2
       tslib: 2.5.0
       typescript: 5.0.4
     dev: true
 
-  /@rollup/pluginutils/5.0.2_rollup@3.21.0:
+  /@rollup/pluginutils/5.0.2_rollup@3.21.2:
     resolution: {integrity: sha512-pTd9rIsP92h+B6wWwFbW8RkZv4hiR/xKsqre4SIuAOaOEQRxi0lqLke9k2/7WegC85GgUs9pjmOjCUi3In4vwA==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
@@ -655,7 +655,7 @@ packages:
       '@types/estree': 1.0.0
       estree-walker: 2.0.2
       picomatch: 2.3.1
-      rollup: 3.21.0
+      rollup: 3.21.2
     dev: true
 
   /@sindresorhus/is/5.3.0:
@@ -828,7 +828,7 @@ packages:
     resolution: {integrity: sha512-ZM05wDByI+WA153sfirJyEHoYYoIuZ7lA2dB/Gl8ymmpMTR78fNRtDMqa7Z6SdH4fZdLWZNRE6mZpx3XqBOrHw==}
     dependencies:
       '@types/minimatch': 5.1.2
-      '@types/node': 18.16.2
+      '@types/node': 18.16.3
     dev: true
 
   /@types/http-cache-semantics/4.0.1:
@@ -861,8 +861,8 @@ packages:
     resolution: {integrity: sha512-J8xLz7q2OFulZ2cyGTLE1TbbZcjpno7FaN6zdJNrgAdrJ+DZzh/uFR6YrTb4C+nXakvud8Q4+rbhoIWlYQbUFQ==}
     dev: true
 
-  /@types/node/18.16.2:
-    resolution: {integrity: sha512-GQW/JL/5Fz/0I8RpeBG9lKp0+aNcXEaVL71c0D2Q0QHDTFvlYKT7an0onCUXj85anv7b4/WesqdfchLc0jtsCg==}
+  /@types/node/18.16.3:
+    resolution: {integrity: sha512-OPs5WnnT1xkCBiuQrZA4+YAV4HEJejmHneyraIaxsbev5yCEr6KMwINNFP9wQeFIw8FWcoTqF3vQsa5CDaI+8Q==}
     dev: true
 
   /@types/node/8.0.0:
@@ -3095,7 +3095,7 @@ packages:
       dts-bundle: 0.7.3
     dev: true
 
-  /rollup-plugin-dts/5.3.0_mjeapf7d7hsdiibr254b7iwsba:
+  /rollup-plugin-dts/5.3.0_avmrdw7ntesq2nuyntszkb4oee:
     resolution: {integrity: sha512-8FXp0ZkyZj1iU5klkIJYLjIq/YZSwBoERu33QBDxm/1yw5UU4txrEtcmMkrq+ZiKu3Q4qvPCNqc3ovX6rjqzbQ==}
     engines: {node: '>=v14'}
     peerDependencies:
@@ -3103,7 +3103,7 @@ packages:
       typescript: ^4.1 || ^5.0
     dependencies:
       magic-string: 0.30.0
-      rollup: 3.21.0
+      rollup: 3.21.2
       typescript: 5.0.4
     optionalDependencies:
       '@babel/code-frame': 7.18.6
@@ -3113,8 +3113,8 @@ packages:
     resolution: {integrity: sha512-tQ0SymyiUeA4Xn0nT5eP7gwGMiEewL6qyPvOc3xkaaLRILCr+wqWBQNh2a9SfpaMDJdoRt+68sk9TAhC24ZeVA==}
     dev: true
 
-  /rollup/3.21.0:
-    resolution: {integrity: sha512-ANPhVcyeHvYdQMUyCbczy33nbLzI7RzrBje4uvNiTDJGIMtlKoOStmympwr9OtS1LZxiDmE2wvxHyVhoLtf1KQ==}
+  /rollup/3.21.2:
+    resolution: {integrity: sha512-c4vC+JZ3bbF4Kqq2TtM7zSKtSyMybFOjqmomFax3xpfYaPZDZ4iz8NMIuBRMjnXOcKYozw7bC6vhJjiWD6JpzQ==}
     engines: {node: '>=14.18.0', npm: '>=8.0.0'}
     hasBin: true
     optionalDependencies:
@@ -3511,7 +3511,7 @@ packages:
       code-block-writer: 12.0.0
     dev: true
 
-  /ts-node/10.9.1_lkf4wh2ebpcidx5lpd7uwjviue:
+  /ts-node/10.9.1_tz4znfsbt2bp6kjvaww33rryty:
     resolution: {integrity: sha512-NtVysVPkxxrwFGUUxGYhfux8k78pQB3JqYBXlLRZgdGUqTO5wU/UyHop5p70iEbGhB7q5KmiZiU0Y3KlJrScEw==}
     hasBin: true
     peerDependencies:
@@ -3530,7 +3530,7 @@ packages:
       '@tsconfig/node12': 1.0.11
       '@tsconfig/node14': 1.0.3
       '@tsconfig/node16': 1.0.3
-      '@types/node': 18.16.2
+      '@types/node': 18.16.3
       acorn: 8.8.2
       acorn-walk: 8.2.0
       arg: 4.1.3
@@ -3723,7 +3723,7 @@ packages:
       spdx-expression-parse: 3.0.1
     dev: true
 
-  /vite-node/0.30.1_@types+node@18.16.2:
+  /vite-node/0.30.1_@types+node@18.16.3:
     resolution: {integrity: sha512-vTikpU/J7e6LU/8iM3dzBo8ZhEiKZEKRznEMm+mJh95XhWaPrJQraT/QsT2NWmuEf+zgAoMe64PKT7hfZ1Njmg==}
     engines: {node: '>=v14.18.0'}
     hasBin: true
@@ -3733,7 +3733,7 @@ packages:
       mlly: 1.2.0
       pathe: 1.1.0
       picocolors: 1.0.0
-      vite: 4.2.1_@types+node@18.16.2
+      vite: 4.2.1_@types+node@18.16.3
     transitivePeerDependencies:
       - '@types/node'
       - less
@@ -3744,7 +3744,7 @@ packages:
       - terser
     dev: true
 
-  /vite/4.2.1_@types+node@18.16.2:
+  /vite/4.2.1_@types+node@18.16.3:
     resolution: {integrity: sha512-7MKhqdy0ISo4wnvwtqZkjke6XN4taqQ2TBaTccLIpOKv7Vp2h4Y+NpmWCnGDeSvvn45KxvWgGyb0MkHvY1vgbg==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
@@ -3769,11 +3769,11 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 18.16.2
+      '@types/node': 18.16.3
       esbuild: 0.17.14
       postcss: 8.4.21
       resolve: 1.22.1
-      rollup: 3.21.0
+      rollup: 3.21.2
     optionalDependencies:
       fsevents: 2.3.2
     dev: true
@@ -3811,7 +3811,7 @@ packages:
     dependencies:
       '@types/chai': 4.3.4
       '@types/chai-subset': 1.3.3
-      '@types/node': 18.16.2
+      '@types/node': 18.16.3
       '@vitest/expect': 0.30.1
       '@vitest/runner': 0.30.1
       '@vitest/snapshot': 0.30.1
@@ -3832,8 +3832,8 @@ packages:
       strip-literal: 1.0.1
       tinybench: 2.4.0
       tinypool: 0.4.0
-      vite: 4.2.1_@types+node@18.16.2
-      vite-node: 0.30.1_@types+node@18.16.2
+      vite: 4.2.1_@types+node@18.16.3
+      vite-node: 0.30.1_@types+node@18.16.3
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
       - less
