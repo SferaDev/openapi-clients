@@ -1,5 +1,12 @@
 # vercel-api-js
 
+## 0.1.14
+
+### Patch Changes
+
+- a8b7568: [OpenAPI] Remove `listDeploymentBuilds`
+- 1f06b87: [OpenAPI] Spec updates for Vercel
+
 ## 0.1.13
 
 ### Patch Changes
