@@ -4270,6 +4270,7 @@ export type GetProjectsResponse = {
       fileUpload?: Schemas.ACLAction[];
       gitRepository?: Schemas.ACLAction[];
       ipBlocking?: Schemas.ACLAction[];
+      ipAllowlist?: Schemas.ACLAction[];
       integration?: Schemas.ACLAction[];
       integrationConfiguration?: Schemas.ACLAction[];
       integrationConfigurationTransfer?: Schemas.ACLAction[];
@@ -4358,6 +4359,11 @@ export type GetProjectsResponse = {
       [key: string]: string;
     };
     hasActiveBranches?: boolean;
+    ipAllowlist?: {
+      deploymentType: 'preview' | 'all';
+      ipAddresses: string[];
+      protectionMode: 'additional' | 'exclusive';
+    } | null;
   }[];
   pagination: Schemas.Pagination;
 };
@@ -4711,6 +4717,7 @@ export type CreateProjectResponse = {
     fileUpload?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
+    ipAllowlist?: Schemas.ACLAction[];
     integration?: Schemas.ACLAction[];
     integrationConfiguration?: Schemas.ACLAction[];
     integrationConfigurationTransfer?: Schemas.ACLAction[];
@@ -4799,6 +4806,11 @@ export type CreateProjectResponse = {
     [key: string]: string;
   };
   hasActiveBranches?: boolean;
+  ipAllowlist?: {
+    deploymentType: 'preview' | 'all';
+    ipAddresses: string[];
+    protectionMode: 'additional' | 'exclusive';
+  } | null;
 };
 
 export type CreateProjectVariables = {
@@ -5150,6 +5162,7 @@ export type GetProjectResponse = {
     fileUpload?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
+    ipAllowlist?: Schemas.ACLAction[];
     integration?: Schemas.ACLAction[];
     integrationConfiguration?: Schemas.ACLAction[];
     integrationConfigurationTransfer?: Schemas.ACLAction[];
@@ -5238,6 +5251,11 @@ export type GetProjectResponse = {
     [key: string]: string;
   };
   hasActiveBranches?: boolean;
+  ipAllowlist?: {
+    deploymentType: 'preview' | 'all';
+    ipAddresses: string[];
+    protectionMode: 'additional' | 'exclusive';
+  } | null;
 };
 
 export type GetProjectVariables = {
@@ -5589,6 +5607,7 @@ export type UpdateProjectResponse = {
     fileUpload?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
+    ipAllowlist?: Schemas.ACLAction[];
     integration?: Schemas.ACLAction[];
     integrationConfiguration?: Schemas.ACLAction[];
     integrationConfigurationTransfer?: Schemas.ACLAction[];
@@ -5677,6 +5696,11 @@ export type UpdateProjectResponse = {
     [key: string]: string;
   };
   hasActiveBranches?: boolean;
+  ipAllowlist?: {
+    deploymentType: 'all' | 'preview';
+    ipAddresses: string[];
+    protectionMode: 'exclusive' | 'additional';
+  } | null;
 };
 
 export type UpdateProjectVariables = {
@@ -9296,166 +9320,6 @@ export const getDeploymentFileContents = (variables: GetDeploymentFileContentsVa
     signal
   });
 
-export type ListDeploymentBuildsQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type ListDeploymentBuildsError = Fetcher.ErrorWrapper<undefined>;
-
-export type ListDeploymentBuildsResponse = {
-  builds: {
-    /**
-     * The unique identifier of the Build
-     *
-     * @example bld_q5fj68jh7eewfe8
-     */
-    id: string;
-    /**
-     * The unique identifier of the deployment
-     *
-     * @example dpl_BRGyoU2Jzzwx7myBnqv3xjRDD2GnHTwUWyFybnrUvjDD
-     */
-    deploymentId: string;
-    /**
-     * The entrypoint of the deployment
-     *
-     * @example api/index.js
-     */
-    entrypoint: string;
-    /**
-     * The state of the deployment depending on the process of deploying, or if it is ready or in an error state
-     *
-     * @example READY
-     */
-    readyState:
-      | 'BUILDING'
-      | 'ERROR'
-      | 'INITIALIZING'
-      | 'QUEUED'
-      | 'READY'
-      | 'CANCELED'
-      | 'UPLOADING'
-      | 'DEPLOYING'
-      | 'ARCHIVED';
-    /**
-     * The time at which the Build state was last modified
-     *
-     * @example 1567024758130
-     */
-    readyStateAt?: number;
-    /**
-     * The time at which the Build was scheduled to be built
-     *
-     * @example 1567024756543
-     */
-    scheduledAt?: number | null;
-    /**
-     * The time at which the Build was created
-     *
-     * @example 1567071524208
-     */
-    createdAt?: number;
-    /**
-     * The time at which the Build was deployed
-     *
-     * @example 1567071598563
-     */
-    deployedAt?: number;
-    /**
-     * The region where the Build was first created
-     *
-     * @example sfo1
-     */
-    createdIn?: string;
-    /**
-     * The Runtime the Build used to generate the output
-     *
-     * @example @vercel/node
-     */
-    use?: string;
-    /**
-     * An object that contains the Build's configuration
-     *
-     * @example {"zeroConfig":true}
-     */
-    config?: {
-      distDir?: string;
-      forceBuildIn?: string;
-      reuseWorkPathFrom?: string;
-      zeroConfig?: boolean;
-    };
-    /**
-     * A list of outputs for the Build that can be either Serverless Functions or static files
-     */
-    output: {
-      /**
-       * The type of the output
-       */
-      type?: 'lambda' | 'file' | 'edge';
-      /**
-       * The absolute path of the file or Serverless Function
-       */
-      path: string;
-      /**
-       * The SHA1 of the file
-       */
-      digest: string;
-      /**
-       * The POSIX file permissions
-       */
-      mode: number;
-      /**
-       * The size of the file in bytes
-       */
-      size?: number;
-      /**
-       * If the output is a Serverless Function, an object containing the name, location and memory size of the function
-       */
-      lambda?: {
-        functionName: string;
-        deployedTo: string[];
-        memorySize?: number;
-        timeout?: number;
-        layers?: string[];
-      } | null;
-      /**
-       * Exists if the output is an edge function.
-       */
-      edge?: {
-        /**
-         * The regions where the edge function will be invoked. Only exists if the edge function as a regional edge function, see: https://vercel.com/docs/concepts/edge-network/regions#setting-edge-function-regions
-         */
-        regions: string[] | null;
-      } | null;
-    }[];
-    /**
-     * If the Build uses the `@vercel/static` Runtime, it contains a hashed string of all outputs
-     *
-     * @example null
-     */
-    fingerprint?: string | null;
-    copiedFrom?: string;
-  }[];
-};
-
-export type ListDeploymentBuildsVariables = {
-  queryParams?: ListDeploymentBuildsQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieves the list of builds given their deployment's unique identifier.
- */
-export const listDeploymentBuilds = (variables: ListDeploymentBuildsVariables, signal?: AbortSignal) =>
-  fetch<ListDeploymentBuildsResponse, ListDeploymentBuildsError, undefined, {}, ListDeploymentBuildsQueryParams, {}>({
-    url: '/v11/deployments/{deploymentId}/builds',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
 export type CreateCheckQueryParams = {
   /**
    * The Team identifier or slug to perform the request on behalf of.
@@ -10016,8 +9880,7 @@ export const operationsByTag = {
     deleteDeployment,
     getDeployments,
     listDeploymentFiles,
-    getDeploymentFileContents,
-    listDeploymentBuilds
+    getDeploymentFileContents
   },
   certs: { getCertById, removeCert, issueCert, uploadCert },
   user: { listUserEvents, getAuthUser, requestDelete },
