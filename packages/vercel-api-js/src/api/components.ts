@@ -3104,46 +3104,6 @@ export const removeCert = (variables: RemoveCertVariables, signal?: AbortSignal)
     signal
   });
 
-export type IssueCertQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type IssueCertError = Fetcher.ErrorWrapper<undefined>;
-
-export type IssueCertResponse = {
-  id: string;
-  createdAt: number;
-  expiresAt: number;
-  autoRenew: boolean;
-  cns: string[];
-};
-
-export type IssueCertRequestBody = {
-  /**
-   * The common names the cert should be issued for
-   */
-  cns?: string[];
-};
-
-export type IssueCertVariables = {
-  body?: IssueCertRequestBody;
-  queryParams?: IssueCertQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Issue a new cert
- */
-export const issueCert = (variables: IssueCertVariables, signal?: AbortSignal) =>
-  fetch<IssueCertResponse, IssueCertError, IssueCertRequestBody, {}, IssueCertQueryParams, {}>({
-    url: '/v7/certs',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
 export type UploadCertQueryParams = {
   /**
    * The Team identifier or slug to perform the request on behalf of.
@@ -3192,6 +3152,46 @@ export const uploadCert = (variables: UploadCertVariables, signal?: AbortSignal)
   fetch<UploadCertResponse, UploadCertError, UploadCertRequestBody, {}, UploadCertQueryParams, {}>({
     url: '/v7/certs',
     method: 'put',
+    ...variables,
+    signal
+  });
+
+export type IssueCertQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type IssueCertError = Fetcher.ErrorWrapper<undefined>;
+
+export type IssueCertResponse = {
+  id: string;
+  createdAt: number;
+  expiresAt: number;
+  autoRenew: boolean;
+  cns: string[];
+};
+
+export type IssueCertRequestBody = {
+  /**
+   * The common names the cert should be issued for
+   */
+  cns?: string[];
+};
+
+export type IssueCertVariables = {
+  body?: IssueCertRequestBody;
+  queryParams?: IssueCertQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Issue a new cert
+ */
+export const issueCert = (variables: IssueCertVariables, signal?: AbortSignal) =>
+  fetch<IssueCertResponse, IssueCertError, IssueCertRequestBody, {}, IssueCertQueryParams, {}>({
+    url: '/v7/certs',
+    method: 'post',
     ...variables,
     signal
   });
@@ -7624,17 +7624,7 @@ export type CreateProjectRequestBody = {
     /**
      * Deployment Target or Targets in which the ENV variable will be used
      */
-    target:
-      | (
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Productio'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Previe'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Developmen'
-        )
-      | (
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Productio'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Previe'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Developmen'
-        )[];
+    target: ('production' | 'preview' | 'development') | ('production' | 'preview' | 'development')[];
     /**
      * The git branch of the environment variable
      *
@@ -10048,11 +10038,7 @@ export type CreateProjectEnvVariables = {
          * @example production
          * @example preview
          */
-        target: (
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Productio'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Previe'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Developmen'
-        )[];
+        target: ('production' | 'preview' | 'development')[];
         /**
          * The git branch of the environment variable
          *
@@ -10086,11 +10072,7 @@ export type CreateProjectEnvVariables = {
          * @example production
          * @example preview
          */
-        target: (
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Productio'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Previe'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Developmen'
-        )[];
+        target: ('production' | 'preview' | 'development')[];
         /**
          * The git branch of the environment variable
          *
@@ -10135,11 +10117,7 @@ export const createProjectEnv = (variables: CreateProjectEnvVariables, signal?: 
          * @example production
          * @example preview
          */
-        target: (
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Productio'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Previe'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Developmen'
-        )[];
+        target: ('production' | 'preview' | 'development')[];
         /**
          * The git branch of the environment variable
          *
@@ -10173,11 +10151,7 @@ export const createProjectEnv = (variables: CreateProjectEnvVariables, signal?: 
          * @example production
          * @example preview
          */
-        target: (
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Productio'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Previe'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Developmen'
-        )[];
+        target: ('production' | 'preview' | 'development')[];
         /**
          * The git branch of the environment variable
          *
@@ -10554,11 +10528,7 @@ export type EditProjectEnvRequestBody = {
    *
    * @example preview
    */
-  target?: (
-    | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Productio'
-    | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Previe'
-    | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Developmen'
-  )[];
+  target?: ('production' | 'preview' | 'development')[];
   /**
    * The git branch of the environment variable
    *
@@ -14743,7 +14713,7 @@ export const operationsByTag = {
     listDeploymentFiles,
     getDeploymentFileContents
   },
-  certs: { getCertById, removeCert, issueCert, uploadCert },
+  certs: { getCertById, removeCert, uploadCert, issueCert },
   user: { listUserEvents, getAuthUser, requestDelete },
   aliases: { listAliases, getAlias, deleteAlias, listDeploymentAliases, assignAlias },
   authentication: { listAuthTokens, createAuthToken, getAuthToken, deleteAuthToken, verifyToken, emailLogin },
