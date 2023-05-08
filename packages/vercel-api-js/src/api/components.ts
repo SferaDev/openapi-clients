@@ -3104,46 +3104,6 @@ export const removeCert = (variables: RemoveCertVariables, signal?: AbortSignal)
     signal
   });
 
-export type IssueCertQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type IssueCertError = Fetcher.ErrorWrapper<undefined>;
-
-export type IssueCertResponse = {
-  id: string;
-  createdAt: number;
-  expiresAt: number;
-  autoRenew: boolean;
-  cns: string[];
-};
-
-export type IssueCertRequestBody = {
-  /**
-   * The common names the cert should be issued for
-   */
-  cns?: string[];
-};
-
-export type IssueCertVariables = {
-  body?: IssueCertRequestBody;
-  queryParams?: IssueCertQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Issue a new cert
- */
-export const issueCert = (variables: IssueCertVariables, signal?: AbortSignal) =>
-  fetch<IssueCertResponse, IssueCertError, IssueCertRequestBody, {}, IssueCertQueryParams, {}>({
-    url: '/v7/certs',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
 export type UploadCertQueryParams = {
   /**
    * The Team identifier or slug to perform the request on behalf of.
@@ -3192,6 +3152,46 @@ export const uploadCert = (variables: UploadCertVariables, signal?: AbortSignal)
   fetch<UploadCertResponse, UploadCertError, UploadCertRequestBody, {}, UploadCertQueryParams, {}>({
     url: '/v7/certs',
     method: 'put',
+    ...variables,
+    signal
+  });
+
+export type IssueCertQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type IssueCertError = Fetcher.ErrorWrapper<undefined>;
+
+export type IssueCertResponse = {
+  id: string;
+  createdAt: number;
+  expiresAt: number;
+  autoRenew: boolean;
+  cns: string[];
+};
+
+export type IssueCertRequestBody = {
+  /**
+   * The common names the cert should be issued for
+   */
+  cns?: string[];
+};
+
+export type IssueCertVariables = {
+  body?: IssueCertRequestBody;
+  queryParams?: IssueCertQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Issue a new cert
+ */
+export const issueCert = (variables: IssueCertVariables, signal?: AbortSignal) =>
+  fetch<IssueCertResponse, IssueCertError, IssueCertRequestBody, {}, IssueCertQueryParams, {}>({
+    url: '/v7/certs',
+    method: 'post',
     ...variables,
     signal
   });
@@ -14743,7 +14743,7 @@ export const operationsByTag = {
     listDeploymentFiles,
     getDeploymentFileContents
   },
-  certs: { getCertById, removeCert, issueCert, uploadCert },
+  certs: { getCertById, removeCert, uploadCert, issueCert },
   user: { listUserEvents, getAuthUser, requestDelete },
   aliases: { listAliases, getAlias, deleteAlias, listDeploymentAliases, assignAlias },
   authentication: { listAuthTokens, createAuthToken, getAuthToken, deleteAuthToken, verifyToken, emailLogin },
