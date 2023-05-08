@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.1.16
+
+### Patch Changes
+
+- 43a95cc: Fix env variables
+
 ## 0.1.15
 
 ### Patch Changes
