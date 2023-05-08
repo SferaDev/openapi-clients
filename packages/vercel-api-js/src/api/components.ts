@@ -7624,17 +7624,7 @@ export type CreateProjectRequestBody = {
     /**
      * Deployment Target or Targets in which the ENV variable will be used
      */
-    target:
-      | (
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Productio'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Previe'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Developmen'
-        )
-      | (
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Productio'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Previe'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Developmen'
-        )[];
+    target: ('production' | 'preview' | 'development') | ('production' | 'preview' | 'development')[];
     /**
      * The git branch of the environment variable
      *
@@ -10048,11 +10038,7 @@ export type CreateProjectEnvVariables = {
          * @example production
          * @example preview
          */
-        target: (
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Productio'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Previe'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Developmen'
-        )[];
+        target: ('production' | 'preview' | 'development')[];
         /**
          * The git branch of the environment variable
          *
@@ -10086,11 +10072,7 @@ export type CreateProjectEnvVariables = {
          * @example production
          * @example preview
          */
-        target: (
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Productio'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Previe'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Developmen'
-        )[];
+        target: ('production' | 'preview' | 'development')[];
         /**
          * The git branch of the environment variable
          *
@@ -10135,11 +10117,7 @@ export const createProjectEnv = (variables: CreateProjectEnvVariables, signal?: 
          * @example production
          * @example preview
          */
-        target: (
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Productio'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Previe'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Developmen'
-        )[];
+        target: ('production' | 'preview' | 'development')[];
         /**
          * The git branch of the environment variable
          *
@@ -10173,11 +10151,7 @@ export const createProjectEnv = (variables: CreateProjectEnvVariables, signal?: 
          * @example production
          * @example preview
          */
-        target: (
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Productio'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Previe'
-          | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Developmen'
-        )[];
+        target: ('production' | 'preview' | 'development')[];
         /**
          * The git branch of the environment variable
          *
@@ -10554,11 +10528,7 @@ export type EditProjectEnvRequestBody = {
    *
    * @example preview
    */
-  target?: (
-    | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Productio'
-    | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Previe'
-    | 'mport("/Users/andy/projects/vercel/api/utils/env-variable-util/types").EnvTarget.Developmen'
-  )[];
+  target?: ('production' | 'preview' | 'development')[];
   /**
    * The git branch of the environment variable
    *
