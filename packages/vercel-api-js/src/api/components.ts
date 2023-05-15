@@ -260,9 +260,9 @@ export type ArtifactQueryResponse = {
         tag?: string;
       }
     | {
-        name: string;
-        message: string;
-        stack?: string;
+        error: {
+          message: string;
+        };
       }
     | null;
 };
@@ -289,6 +289,750 @@ export const artifactQuery = (variables: ArtifactQueryVariables, signal?: AbortS
     ...variables,
     signal
   });
+
+export type GetAllChecksPathParams = {
+  /**
+   * The deployment to get all checks for
+   *
+   * @example dpl_2qn7PZrx89yxY34vEZPD31Y9XVj6
+   */
+  deploymentId: string;
+};
+
+export type GetAllChecksQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetAllChecksError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetAllChecksResponse = {
+  checks: {
+    completedAt?: number;
+    conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped' | 'stale';
+    createdAt: number;
+    detailsUrl?: string;
+    id: string;
+    integrationId: string;
+    name: string;
+    output?: {
+      metrics?: {
+        FCP: {
+          value: number | null;
+          previousValue?: number;
+          source: 'web-vitals';
+        };
+        LCP: {
+          value: number | null;
+          previousValue?: number;
+          source: 'web-vitals';
+        };
+        CLS: {
+          value: number | null;
+          previousValue?: number;
+          source: 'web-vitals';
+        };
+        TBT: {
+          value: number | null;
+          previousValue?: number;
+          source: 'web-vitals';
+        };
+        virtualExperienceScore?: {
+          value: number | null;
+          previousValue?: number;
+          source: 'web-vitals';
+        };
+      };
+    };
+    path?: string;
+    rerequestable: boolean;
+    startedAt?: number;
+    status: 'registered' | 'running' | 'completed';
+    updatedAt: number;
+  }[];
+};
+
+export type GetAllChecksVariables = {
+  pathParams: GetAllChecksPathParams;
+  queryParams?: GetAllChecksQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * List all of the checks created for a deployment.
+ */
+export const getAllChecks = (variables: GetAllChecksVariables, signal?: AbortSignal) =>
+  fetch<GetAllChecksResponse, GetAllChecksError, undefined, {}, GetAllChecksQueryParams, GetAllChecksPathParams>({
+    url: '/v1/deployments/{deploymentId}/checks',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type CreateCheckPathParams = {
+  /**
+   * The deployment to create the check for.
+   *
+   * @example dpl_2qn7PZrx89yxY34vEZPD31Y9XVj6
+   */
+  deploymentId: string;
+};
+
+export type CreateCheckQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type CreateCheckError = Fetcher.ErrorWrapper<undefined>;
+
+export type CreateCheckResponse = {
+  id: string;
+  name: string;
+  path?: string;
+  status: 'registered' | 'running' | 'completed';
+  conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped' | 'stale';
+  blocking: boolean;
+  output?: {
+    metrics?: {
+      FCP: {
+        value: number | null;
+        previousValue?: number;
+        source: 'web-vitals';
+      };
+      LCP: {
+        value: number | null;
+        previousValue?: number;
+        source: 'web-vitals';
+      };
+      CLS: {
+        value: number | null;
+        previousValue?: number;
+        source: 'web-vitals';
+      };
+      TBT: {
+        value: number | null;
+        previousValue?: number;
+        source: 'web-vitals';
+      };
+      virtualExperienceScore?: {
+        value: number | null;
+        previousValue?: number;
+        source: 'web-vitals';
+      };
+    };
+  };
+  detailsUrl?: string;
+  integrationId: string;
+  deploymentId: string;
+  externalId?: string;
+  createdAt: number;
+  updatedAt: number;
+  startedAt?: number;
+  completedAt?: number;
+  rerequestable?: boolean;
+};
+
+export type CreateCheckRequestBody = {
+  /**
+   * The name of the check being created
+   *
+   * @maxLength 100
+   * @example Performance Check
+   */
+  name: string;
+  /**
+   * Path of the page that is being checked
+   *
+   * @maxLength 255
+   * @example /
+   */
+  path?: string;
+  /**
+   * Whether the check should block a deployment from succeeding
+   *
+   * @example true
+   */
+  blocking: boolean;
+  /**
+   * URL to display for further details
+   *
+   * @example http://example.com
+   */
+  detailsUrl?: string;
+  /**
+   * An identifier that can be used as an external reference
+   *
+   * @example 1234abc
+   */
+  externalId?: string;
+  /**
+   * Whether a user should be able to request for the check to be rerun if it fails
+   *
+   * @example true
+   */
+  rerequestable?: boolean;
+};
+
+export type CreateCheckVariables = {
+  body: CreateCheckRequestBody;
+  pathParams: CreateCheckPathParams;
+  queryParams?: CreateCheckQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Creates a new check. This endpoint must be called with an OAuth2 or it will produce a 400 error.
+ */
+export const createCheck = (variables: CreateCheckVariables, signal?: AbortSignal) =>
+  fetch<
+    CreateCheckResponse,
+    CreateCheckError,
+    CreateCheckRequestBody,
+    {},
+    CreateCheckQueryParams,
+    CreateCheckPathParams
+  >({ url: '/v1/deployments/{deploymentId}/checks', method: 'post', ...variables, signal });
+
+export type GetCheckPathParams = {
+  /**
+   * The deployment to get the check for.
+   *
+   * @example dpl_2qn7PZrx89yxY34vEZPD31Y9XVj6
+   */
+  deploymentId: string;
+  /**
+   * The check to fetch
+   *
+   * @example check_2qn7PZrx89yxY34vEZPD31Y9XVj6
+   */
+  checkId: string;
+};
+
+export type GetCheckQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetCheckError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetCheckResponse = {
+  id: string;
+  name: string;
+  path?: string;
+  status: 'registered' | 'running' | 'completed';
+  conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped' | 'stale';
+  blocking: boolean;
+  output?: {
+    metrics?: {
+      FCP: {
+        value: number | null;
+        previousValue?: number;
+        source: 'web-vitals';
+      };
+      LCP: {
+        value: number | null;
+        previousValue?: number;
+        source: 'web-vitals';
+      };
+      CLS: {
+        value: number | null;
+        previousValue?: number;
+        source: 'web-vitals';
+      };
+      TBT: {
+        value: number | null;
+        previousValue?: number;
+        source: 'web-vitals';
+      };
+      virtualExperienceScore?: {
+        value: number | null;
+        previousValue?: number;
+        source: 'web-vitals';
+      };
+    };
+  };
+  detailsUrl?: string;
+  integrationId: string;
+  deploymentId: string;
+  externalId?: string;
+  createdAt: number;
+  updatedAt: number;
+  startedAt?: number;
+  completedAt?: number;
+  rerequestable?: boolean;
+};
+
+export type GetCheckVariables = {
+  pathParams: GetCheckPathParams;
+  queryParams?: GetCheckQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Return a detailed response for a single check.
+ */
+export const getCheck = (variables: GetCheckVariables, signal?: AbortSignal) =>
+  fetch<GetCheckResponse, GetCheckError, undefined, {}, GetCheckQueryParams, GetCheckPathParams>({
+    url: '/v1/deployments/{deploymentId}/checks/{checkId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type UpdateCheckPathParams = {
+  /**
+   * The deployment to update the check for.
+   *
+   * @example dpl_2qn7PZrx89yxY34vEZPD31Y9XVj6
+   */
+  deploymentId: string;
+  /**
+   * The check being updated
+   *
+   * @example check_2qn7PZrx89yxY34vEZPD31Y9XVj6
+   */
+  checkId: string;
+};
+
+export type UpdateCheckQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type UpdateCheckError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateCheckResponse = {
+  id: string;
+  name: string;
+  path?: string;
+  status: 'registered' | 'running' | 'completed';
+  conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped' | 'stale';
+  blocking: boolean;
+  output?: {
+    metrics?: {
+      FCP: {
+        value: number | null;
+        previousValue?: number;
+        source: 'web-vitals';
+      };
+      LCP: {
+        value: number | null;
+        previousValue?: number;
+        source: 'web-vitals';
+      };
+      CLS: {
+        value: number | null;
+        previousValue?: number;
+        source: 'web-vitals';
+      };
+      TBT: {
+        value: number | null;
+        previousValue?: number;
+        source: 'web-vitals';
+      };
+      virtualExperienceScore?: {
+        value: number | null;
+        previousValue?: number;
+        source: 'web-vitals';
+      };
+    };
+  };
+  detailsUrl?: string;
+  integrationId: string;
+  deploymentId: string;
+  externalId?: string;
+  createdAt: number;
+  updatedAt: number;
+  startedAt?: number;
+  completedAt?: number;
+  rerequestable?: boolean;
+};
+
+export type UpdateCheckRequestBody = {
+  /**
+   * The name of the check being created
+   *
+   * @maxLength 100
+   * @example Performance Check
+   */
+  name?: string;
+  /**
+   * Path of the page that is being checked
+   *
+   * @maxLength 255
+   * @example /
+   */
+  path?: string;
+  /**
+   * The current status of the check
+   */
+  status?: 'running' | 'completed';
+  /**
+   * The result of the check being run
+   */
+  conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped';
+  /**
+   * A URL a user may visit to see more information about the check
+   *
+   * @example https://example.com/check/run/1234abc
+   */
+  detailsUrl?: string;
+  /**
+   * The results of the check Run
+   */
+  output?: {
+    /**
+     * Metrics about the page
+     */
+    metrics?: {
+      FCP: {
+        /**
+         * First Contentful Paint value
+         *
+         * @example 1200
+         */
+        value: number | null;
+        /**
+         * Previous First Contentful Paint value to display a delta
+         *
+         * @example 900
+         */
+        previousValue?: number;
+        source: 'web-vitals';
+      };
+      LCP: {
+        /**
+         * Largest Contentful Paint value
+         *
+         * @example 1200
+         */
+        value: number | null;
+        /**
+         * Previous Largest Contentful Paint value to display a delta
+         *
+         * @example 1000
+         */
+        previousValue?: number;
+        source: 'web-vitals';
+      };
+      CLS: {
+        /**
+         * Cumulative Layout Shift value
+         *
+         * @example 4
+         */
+        value: number | null;
+        /**
+         * Previous Cumulative Layout Shift value to display a delta
+         *
+         * @example 2
+         */
+        previousValue?: number;
+        source: 'web-vitals';
+      };
+      TBT: {
+        /**
+         * Total Blocking Time value
+         *
+         * @example 3000
+         */
+        value: number | null;
+        /**
+         * Previous Total Blocking Time value to display a delta
+         *
+         * @example 3500
+         */
+        previousValue?: number;
+        source: 'web-vitals';
+      };
+      virtualExperienceScore?: {
+        /**
+         * The calculated Virtual Experience Score value, between 0 and 100
+         *
+         * @maximum 100
+         * @minimum 0
+         * @example 30
+         */
+        value: number | null;
+        /**
+         * A previous Virtual Experience Score value to display a delta, between 0 and 100
+         *
+         * @maximum 100
+         * @minimum 0
+         * @example 35
+         */
+        previousValue?: number;
+        source: 'web-vitals';
+      };
+    };
+  };
+  /**
+   * An identifier that can be used as an external reference
+   *
+   * @example 1234abc
+   */
+  externalId?: string;
+};
+
+export type UpdateCheckVariables = {
+  body?: UpdateCheckRequestBody;
+  pathParams: UpdateCheckPathParams;
+  queryParams?: UpdateCheckQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Update an existing check. This endpoint must be called with an OAuth2 or it will produce a 400 error.
+ */
+export const updateCheck = (variables: UpdateCheckVariables, signal?: AbortSignal) =>
+  fetch<
+    UpdateCheckResponse,
+    UpdateCheckError,
+    UpdateCheckRequestBody,
+    {},
+    UpdateCheckQueryParams,
+    UpdateCheckPathParams
+  >({ url: '/v1/deployments/{deploymentId}/checks/{checkId}', method: 'patch', ...variables, signal });
+
+export type RerequestCheckPathParams = {
+  /**
+   * The deployment to rerun the check for.
+   *
+   * @example dpl_2qn7PZrx89yxY34vEZPD31Y9XVj6
+   */
+  deploymentId: string;
+  /**
+   * The check to rerun
+   *
+   * @example check_2qn7PZrx89yxY34vEZPD31Y9XVj6
+   */
+  checkId: string;
+};
+
+export type RerequestCheckQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type RerequestCheckError = Fetcher.ErrorWrapper<undefined>;
+
+export type RerequestCheckVariables = {
+  pathParams: RerequestCheckPathParams;
+  queryParams?: RerequestCheckQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Rerequest a selected check that has failed.
+ */
+export const rerequestCheck = (variables: RerequestCheckVariables, signal?: AbortSignal) =>
+  fetch<Record<string, any>, RerequestCheckError, undefined, {}, RerequestCheckQueryParams, RerequestCheckPathParams>({
+    url: '/v1/deployments/{deploymentId}/checks/{checkId}/rerequest',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type GetDeploymentEventsPathParams = {
+  /**
+   * The unique identifier or hostname of the deployment.
+   *
+   * @example dpl_5WJWYSyB7BpgTj3EuwF37WMRBXBtPQ2iTMJHJBJyRfd
+   */
+  idOrUrl: string;
+};
+
+export type GetDeploymentEventsQueryParams = {
+  /**
+   * Order of the returned events based on the timestamp.
+   *
+   * @default forward
+   * @example backward
+   */
+  direction?: 'backward' | 'forward';
+  /**
+   * When enabled, this endpoint will return live events as they happen.
+   *
+   * @example 1
+   */
+  follow?: 0 | 1;
+  /**
+   * Maximum number of events to return. Provide `-1` to return all available logs.
+   *
+   * @example 100
+   */
+  limit?: number;
+  /**
+   * Deployment build ID.
+   *
+   * @example bld_cotnkcr76
+   */
+  name?: string;
+  /**
+   * Timestamp for when build logs should be pulled from.
+   *
+   * @example 1540095775941
+   */
+  since?: number;
+  /**
+   * Timestamp for when the build logs should be pulled up until.
+   *
+   * @example 1540106318643
+   */
+  until?: number;
+  /**
+   * HTTP status code range to filter events by.
+   *
+   * @example 5xx
+   */
+  statusCode?: number | string;
+  /**
+   * @example 1
+   */
+  delimiter?: 0 | 1;
+  /**
+   * @example 1
+   */
+  builds?: 0 | 1;
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetDeploymentEventsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetDeploymentEventsResponse = (
+  | {
+      type: 'command';
+      created: number;
+      payload: {
+        deploymentId: string;
+        text?: string;
+        id: string;
+        date: number;
+        serial: string;
+      };
+    }
+  | {
+      type: 'deployment-state';
+      created: number;
+      payload: {
+        deploymentId: string;
+        info: {
+          type: string;
+          name: string;
+          entrypoint?: string;
+          path?: string;
+          step?: string;
+        };
+        id: string;
+        date: number;
+        serial: string;
+      };
+    }
+  | {
+      type: 'delimiter';
+      created: number;
+      payload: {
+        deploymentId: string;
+        info: {
+          type: string;
+          name: string;
+          entrypoint?: string;
+          path?: string;
+          step?: string;
+        };
+        id: string;
+        date: number;
+        serial: string;
+      };
+    }
+  | {
+      type: 'exit';
+      created: number;
+      payload: {
+        date: number;
+        text?: string;
+        id: string;
+        deploymentId: string;
+        created: number;
+        serial: string;
+      };
+    }
+  | {
+      type: 'middleware';
+      created: number;
+      payload: {
+        deploymentId: string;
+        info: {
+          type: string;
+          name: string;
+          entrypoint?: string;
+          path?: string;
+          step?: string;
+        };
+        text?: string;
+        id: string;
+        date: number;
+        serial: string;
+        requestId?: string;
+      };
+    }
+  | {
+      type:
+        | 'delimiter'
+        | 'command'
+        | 'stdout'
+        | 'stderr'
+        | 'exit'
+        | 'deployment-state'
+        | 'middleware'
+        | 'middleware-invocation'
+        | 'edge-function-invocation'
+        | 'fatal';
+      created: number;
+      payload: {
+        deploymentId: string;
+        info: {
+          type: string;
+          name: string;
+          entrypoint?: string;
+          path?: string;
+          step?: string;
+        };
+        text?: string;
+        id: string;
+        date: number;
+        serial: string;
+        statusCode?: number;
+        requestId?: string;
+      };
+    }
+)[];
+
+export type GetDeploymentEventsVariables = {
+  pathParams: GetDeploymentEventsPathParams;
+  queryParams?: GetDeploymentEventsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Get the build logs of a deployment by deployment ID and build ID. It can work as an infinite stream of logs or as a JSON endpoint depending on the input parameters.
+ */
+export const getDeploymentEvents = (variables: GetDeploymentEventsVariables, signal?: AbortSignal) =>
+  fetch<
+    GetDeploymentEventsResponse,
+    GetDeploymentEventsError,
+    undefined,
+    {},
+    GetDeploymentEventsQueryParams,
+    GetDeploymentEventsPathParams
+  >({ url: '/v2/deployments/{idOrUrl}/events', method: 'get', ...variables, signal });
 
 export type GetDeploymentPathParams = {
   /**
@@ -458,9 +1202,6 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
                       }
                   )[];
                   locale?: {
-                    /**
-                     * Construct a type with a set of properties K of type T
-                     */
                     redirect?: {
                       [key: string]: string;
                     };
@@ -703,7 +1444,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          *
          * @example null
          */
-        target?: 'production' | 'staging' | null;
+        target?: 'staging' | 'production' | null;
         /**
          * The team that owns the deployment if any
          */
@@ -943,7 +1684,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          *
          * @example null
          */
-        target?: 'production' | 'staging' | null;
+        target?: 'staging' | 'production' | null;
         /**
          * The team that owns the deployment if any
          */
@@ -1152,9 +1893,6 @@ export type CreateDeploymentResponse = {
                 }
             )[];
             locale?: {
-              /**
-               * Construct a type with a set of properties K of type T
-               */
               redirect?: {
                 [key: string]: string;
               };
@@ -1397,7 +2135,7 @@ export type CreateDeploymentResponse = {
    *
    * @example null
    */
-  target?: 'production' | 'staging' | null;
+  target?: 'staging' | 'production' | null;
   /**
    * The team that owns the deployment if any
    */
@@ -2185,124 +2923,6 @@ export type CreateDeploymentRequestBody = {
     path: string;
   }[];
   /**
-   * The target project identifier in which the deployment will be created. When defined, this parameter overrides name
-   *
-   * @example my-deployment-project
-   */
-  project: string;
-  /**
-   * @maxItems 10
-   */
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  /**
-   * @maxItems 10
-   */
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  /**
-   * @maxItems 10
-   */
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  /**
-   * @maxItems 10
-   */
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  /**
-   * @maxItems 1000
-   */
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_transfer_bytes: number;
-    written_data_bytes: number;
-    compute_time_seconds: number;
-  }[];
-  pagination: {
-    cursor: string;
-  };
-  /**
    * An deployment id for an existing deployment to redeploy
    */
   deploymentId?: string;
@@ -2434,6 +3054,59 @@ export type CreateDeploymentRequestBody = {
    * The monorepo manager that is being used for this deployment. When `null` is used no monorepo manager is selected
    */
   monorepoManager?: string | null;
+  project: {
+    id: string;
+    region_id: string;
+    name: string;
+    pg_version: number;
+    proxy_host: string;
+    /**
+     * The logical size limit for a branch in MiB.
+     */
+    branch_logical_size_limit: number;
+    /**
+     * The logical size limit for a branch in bytes.
+     */
+    branch_logical_size_limit_bytes: number;
+    /**
+     * The data storage size in bytes.
+     */
+    synthetic_storage_size?: number;
+    store_passwords: boolean;
+    created_at: string;
+    updated_at: string;
+    owner_id: string;
+    quota_reset_at?: string;
+    data_storage_bytes_hour?: number;
+    data_transfer_bytes?: number;
+    written_data_bytes?: number;
+    active_time_seconds?: number;
+    compute_time_seconds?: number;
+    settings?: {
+      quota?: {
+        /**
+         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
+         */
+        compute_time_seconds?: number;
+        /**
+         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
+         */
+        active_time_seconds?: number;
+        /**
+         * The total amount of data written to all project's branches.
+         */
+        written_data_bytes?: number;
+        /**
+         * The total amount of data transferred from all project's branches using proxy.
+         */
+        data_transfer_bytes?: number;
+        /**
+         * The logical size of every project's branch.
+         */
+        logical_size_bytes?: number;
+      };
+    };
+  };
   /**
    * Project settings that will be applied to the deployment. It is required for the first deployment of a project and will be saved for any following deployments
    */
@@ -2545,6 +3218,118 @@ export type CreateDeploymentRequestBody = {
    * When `true` and `deploymentId` is passed in, the sha from the previous deployment's `gitSource` is removed forcing the latest commit to be used.
    */
   withLatestCommit?: boolean;
+  /**
+   * @maxItems 10
+   */
+  connection_uris: {
+    /**
+     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
+     */
+    connection_uri: string;
+  }[];
+  /**
+   * @maxItems 10
+   */
+  roles: {
+    branch_id: string;
+    name: string;
+    created_at: string;
+    updated_at: string;
+    protected?: boolean;
+    password?: string;
+  }[];
+  /**
+   * @maxItems 10
+   */
+  databases: {
+    id: number;
+    branch_id: string;
+    name: string;
+    owner_name: string;
+    created_at: string;
+    updated_at: string;
+  }[];
+  branch: {
+    id: string;
+    project_id: string;
+    name: string;
+    current_state: 'init' | 'ready';
+    primary: boolean;
+    created_at: string;
+    updated_at: string;
+    parent_id?: string;
+  };
+  /**
+   * @maxItems 10
+   */
+  endpoints: {
+    host: string;
+    id: string;
+    project_id: string;
+    branch_id: string;
+    autoscaling_limit_min_cu: number;
+    autoscaling_limit_max_cu: number;
+    region_id: string;
+    type: string;
+    current_state: string;
+    pooler_enabled: boolean;
+    pooler_mode: string;
+    disabled: boolean;
+    passwordless_access: boolean;
+    last_active?: string;
+    created_at: string;
+    updated_at: string;
+    suspend_timeout_seconds: number;
+  }[];
+  endpoint: {
+    host: string;
+    id: string;
+    project_id: string;
+    branch_id: string;
+    autoscaling_limit_min_cu: number;
+    autoscaling_limit_max_cu: number;
+    region_id: string;
+    type: string;
+    current_state: string;
+    pooler_enabled: boolean;
+    pooler_mode: string;
+    disabled: boolean;
+    passwordless_access: boolean;
+    last_active?: string;
+    created_at: string;
+    updated_at: string;
+    suspend_timeout_seconds: number;
+  };
+  database: {
+    id: number;
+    branch_id: string;
+    name: string;
+    owner_name: string;
+    created_at: string;
+    updated_at: string;
+  };
+  role: {
+    branch_id: string;
+    name: string;
+    created_at: string;
+    updated_at: string;
+    protected?: boolean;
+    password?: string;
+  };
+  password: string;
+  /**
+   * @maxItems 1000
+   */
+  projects: {
+    id: string;
+    data_storage_bytes_hour: number;
+    data_transfer_bytes: number;
+    written_data_bytes: number;
+    compute_time_seconds: number;
+  }[];
+  pagination: {
+    cursor: string;
+  };
 };
 
 export type CreateDeploymentVariables = {
@@ -2717,9 +3502,6 @@ export type CancelDeploymentResponse = {
                 }
             )[];
             locale?: {
-              /**
-               * Construct a type with a set of properties K of type T
-               */
               redirect?: {
                 [key: string]: string;
               };
@@ -3032,1338 +3814,112 @@ export const cancelDeployment = (variables: CancelDeploymentVariables, signal?: 
     CancelDeploymentPathParams
   >({ url: '/v12/deployments/{id}/cancel', method: 'patch', ...variables, signal });
 
-export type GetCertByIdPathParams = {
-  /**
-   * The cert id
-   */
-  id: string;
-};
-
-export type GetCertByIdQueryParams = {
+export type BuyDomainQueryParams = {
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
   teamId?: string;
 };
 
-export type GetCertByIdError = Fetcher.ErrorWrapper<undefined>;
+export type BuyDomainError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetCertByIdResponse = {
-  id: string;
-  createdAt: number;
-  expiresAt: number;
-  autoRenew: boolean;
-  cns: string[];
+export type BuyDomainResponse = {
+  domain: {
+    uid: string;
+    ns: string[];
+    verified: boolean;
+    created: number;
+    pending: boolean;
+  };
 };
 
-export type GetCertByIdVariables = {
-  pathParams: GetCertByIdPathParams;
-  queryParams?: GetCertByIdQueryParams;
+export type BuyDomainRequestBody = {
+  /**
+   * The domain name to purchase.
+   *
+   * @example example.com
+   */
+  name: string;
+  /**
+   * The price you expect to be charged for the purchase.
+   *
+   * @example 10
+   */
+  expectedPrice?: number;
+  /**
+   * Indicates whether the domain should be automatically renewed.
+   *
+   * @example true
+   */
+  renew?: boolean;
+};
+
+export type BuyDomainVariables = {
+  body: BuyDomainRequestBody;
+  queryParams?: BuyDomainQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Get cert by id
+ * Allows to purchase the specified domain.
  */
-export const getCertById = (variables: GetCertByIdVariables, signal?: AbortSignal) =>
-  fetch<GetCertByIdResponse, GetCertByIdError, undefined, {}, GetCertByIdQueryParams, GetCertByIdPathParams>({
-    url: '/v7/certs/{id}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type RemoveCertPathParams = {
-  /**
-   * The cert id to remove
-   */
-  id: string;
-};
-
-export type RemoveCertQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type RemoveCertError = Fetcher.ErrorWrapper<undefined>;
-
-export type RemoveCertVariables = {
-  pathParams: RemoveCertPathParams;
-  queryParams?: RemoveCertQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Remove cert
- */
-export const removeCert = (variables: RemoveCertVariables, signal?: AbortSignal) =>
-  fetch<Record<string, any>, RemoveCertError, undefined, {}, RemoveCertQueryParams, RemoveCertPathParams>({
-    url: '/v7/certs/{id}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
-
-export type UploadCertQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type UploadCertError = Fetcher.ErrorWrapper<undefined>;
-
-export type UploadCertResponse = {
-  id: string;
-  createdAt: number;
-  expiresAt: number;
-  autoRenew: boolean;
-  cns: string[];
-};
-
-export type UploadCertRequestBody = {
-  /**
-   * The certificate authority
-   */
-  ca: string;
-  /**
-   * The certificate key
-   */
-  key: string;
-  /**
-   * The certificate
-   */
-  cert: string;
-  /**
-   * Skip validation of the certificate
-   */
-  skipValidation?: boolean;
-};
-
-export type UploadCertVariables = {
-  body: UploadCertRequestBody;
-  queryParams?: UploadCertQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Upload a cert
- */
-export const uploadCert = (variables: UploadCertVariables, signal?: AbortSignal) =>
-  fetch<UploadCertResponse, UploadCertError, UploadCertRequestBody, {}, UploadCertQueryParams, {}>({
-    url: '/v7/certs',
-    method: 'put',
-    ...variables,
-    signal
-  });
-
-export type IssueCertQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type IssueCertError = Fetcher.ErrorWrapper<undefined>;
-
-export type IssueCertResponse = {
-  id: string;
-  createdAt: number;
-  expiresAt: number;
-  autoRenew: boolean;
-  cns: string[];
-};
-
-export type IssueCertRequestBody = {
-  /**
-   * The common names the cert should be issued for
-   */
-  cns?: string[];
-};
-
-export type IssueCertVariables = {
-  body?: IssueCertRequestBody;
-  queryParams?: IssueCertQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Issue a new cert
- */
-export const issueCert = (variables: IssueCertVariables, signal?: AbortSignal) =>
-  fetch<IssueCertResponse, IssueCertError, IssueCertRequestBody, {}, IssueCertQueryParams, {}>({
-    url: '/v7/certs',
+export const buyDomain = (variables: BuyDomainVariables, signal?: AbortSignal) =>
+  fetch<BuyDomainResponse, BuyDomainError, BuyDomainRequestBody, {}, BuyDomainQueryParams, {}>({
+    url: '/v4/domains/buy',
     method: 'post',
     ...variables,
     signal
   });
 
-export type GetDeploymentEventsPathParams = {
+export type CheckDomainPriceQueryParams = {
   /**
-   * The unique identifier or hostname of the deployment.
+   * The name of the domain for which the price needs to be checked.
    *
-   * @example dpl_5WJWYSyB7BpgTj3EuwF37WMRBXBtPQ2iTMJHJBJyRfd
-   */
-  idOrUrl: string;
-};
-
-export type GetDeploymentEventsQueryParams = {
-  /**
-   * Order of the returned events based on the timestamp.
-   *
-   * @default forward
-   * @example backward
-   */
-  direction?: 'backward' | 'forward';
-  /**
-   * When enabled, this endpoint will return live events as they happen.
-   *
-   * @example 1
-   */
-  follow?: 0 | 1;
-  /**
-   * Maximum number of events to return. Provide `-1` to return all available logs.
-   *
-   * @example 100
-   */
-  limit?: number;
-  /**
-   * Deployment build ID.
-   *
-   * @example bld_cotnkcr76
-   */
-  name?: string;
-  /**
-   * Timestamp for when build logs should be pulled from.
-   *
-   * @example 1540095775941
-   */
-  since?: number;
-  /**
-   * Timestamp for when the build logs should be pulled up until.
-   *
-   * @example 1540106318643
-   */
-  until?: number;
-  /**
-   * HTTP status code range to filter events by.
-   *
-   * @example 5xx
-   */
-  statusCode?: number | string;
-  /**
-   * @example 1
-   */
-  delimiter?: 0 | 1;
-  /**
-   * @example 1
-   */
-  builds?: 0 | 1;
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type GetDeploymentEventsError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetDeploymentEventsResponse = (
-  | {
-      type: 'command';
-      created: number;
-      payload: {
-        deploymentId: string;
-        text?: string;
-        id: string;
-        date: number;
-        serial: string;
-      };
-    }
-  | {
-      type: 'deployment-state';
-      created: number;
-      payload: {
-        deploymentId: string;
-        info: {
-          type: string;
-          name: string;
-          entrypoint?: string;
-          path?: string;
-          step?: string;
-        };
-        id: string;
-        date: number;
-        serial: string;
-      };
-    }
-  | {
-      type: 'delimiter';
-      created: number;
-      payload: {
-        deploymentId: string;
-        info: {
-          type: string;
-          name: string;
-          entrypoint?: string;
-          path?: string;
-          step?: string;
-        };
-        id: string;
-        date: number;
-        serial: string;
-      };
-    }
-  | {
-      type: 'exit';
-      created: number;
-      payload: {
-        date: number;
-        text?: string;
-        id: string;
-        deploymentId: string;
-        created: number;
-        serial: string;
-      };
-    }
-  | {
-      type: 'middleware';
-      created: number;
-      payload: {
-        deploymentId: string;
-        info: {
-          type: string;
-          name: string;
-          entrypoint?: string;
-          path?: string;
-          step?: string;
-        };
-        text?: string;
-        id: string;
-        date: number;
-        serial: string;
-        requestId?: string;
-      };
-    }
-  | {
-      type:
-        | 'command'
-        | 'stdout'
-        | 'stderr'
-        | 'exit'
-        | 'deployment-state'
-        | 'delimiter'
-        | 'middleware'
-        | 'middleware-invocation'
-        | 'edge-function-invocation'
-        | 'fatal';
-      created: number;
-      payload: {
-        deploymentId: string;
-        info: {
-          type: string;
-          name: string;
-          entrypoint?: string;
-          path?: string;
-          step?: string;
-        };
-        text?: string;
-        id: string;
-        date: number;
-        serial: string;
-        statusCode?: number;
-        requestId?: string;
-      };
-    }
-)[];
-
-export type GetDeploymentEventsVariables = {
-  pathParams: GetDeploymentEventsPathParams;
-  queryParams?: GetDeploymentEventsQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Get the build logs of a deployment by deployment ID and build ID. It can work as an infinite stream of logs or as a JSON endpoint depending on the input parameters.
- */
-export const getDeploymentEvents = (variables: GetDeploymentEventsVariables, signal?: AbortSignal) =>
-  fetch<
-    GetDeploymentEventsResponse,
-    GetDeploymentEventsError,
-    undefined,
-    {},
-    GetDeploymentEventsQueryParams,
-    GetDeploymentEventsPathParams
-  >({ url: '/v2/deployments/{idOrUrl}/events', method: 'get', ...variables, signal });
-
-export type ListUserEventsQueryParams = {
-  /**
-   * Maximum number of items which may be returned.
-   *
-   * @example 20
-   */
-  limit?: number;
-  /**
-   * Timestamp to only include items created since then.
-   *
-   * @example 2019-12-08T10:00:38.976Z
-   */
-  since?: string;
-  /**
-   * Timestamp to only include items created until then.
-   *
-   * @example 2019-12-09T23:00:38.976Z
-   */
-  until?: string;
-  /**
-   * Comma-delimited list of event \"types\" to filter the results by.
-   *
-   * @example login,team-member-join,domain-buy
-   */
-  types?: string;
-  /**
-   * When retrieving events for a Team, the `userId` parameter may be specified to filter events generated by a specific member of the Team.
-   *
-   * @example aeIInYVk59zbFF2SxfyxxmuO
-   */
-  userId?: string;
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type ListUserEventsError = Fetcher.ErrorWrapper<undefined>;
-
-export type ListUserEventsResponse = {
-  /**
-   * Array of events generated by the User.
-   */
-  events: Schemas.UserEvent[];
-};
-
-export type ListUserEventsVariables = {
-  queryParams?: ListUserEventsQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieves a list of "events" generated by the User on Vercel. Events are generated when the User performs a particular action, such as logging in, creating a deployment, and joining a Team (just to name a few). When the `teamId` parameter is supplied, then the events that are returned will be in relation to the Team that was specified.
- */
-export const listUserEvents = (variables: ListUserEventsVariables, signal?: AbortSignal) =>
-  fetch<ListUserEventsResponse, ListUserEventsError, undefined, {}, ListUserEventsQueryParams, {}>({
-    url: '/v3/events',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type ListAliasesQueryParams = {
-  /**
-   * Get only aliases of the given domain name
-   *
-   * @example my-test-domain.com
-   * @maxItems 20
-   */
-  domain?: string[] | string;
-  /**
-   * Get only aliases created after the provided timestamp
-   *
-   * @deprecated true
-   * @example 1540095775951
-   */
-  from?: number;
-  /**
-   * Maximum number of aliases to list from a request
-   *
-   * @example 10
-   */
-  limit?: number;
-  /**
-   * Filter aliases from the given `projectId`
-   *
-   * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-   */
-  projectId?: string;
-  /**
-   * Get aliases created after this JavaScript timestamp
-   *
-   * @example 1540095775941
-   */
-  since?: number;
-  /**
-   * Get aliases created before this JavaScript timestamp
-   *
-   * @example 1540095775951
-   */
-  until?: number;
-  /**
-   * Get aliases that would be rolled back for the given deployment
-   *
-   * @example dpl_XXX
-   */
-  rollbackDeploymentId?: string;
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type ListAliasesError = Fetcher.ErrorWrapper<undefined>;
-
-export type ListAliasesResponse = {
-  aliases: {
-    /**
-     * The alias name, it could be a `.vercel.app` subdomain or a custom domain
-     *
-     * @example my-alias.vercel.app
-     */
-    alias: string;
-    /**
-     * The date when the alias was created
-     *
-     * @format date-time
-     * @example 2017-04-26T23:00:34.232Z
-     */
-    created: string;
-    /**
-     * The date when the alias was created in milliseconds since the UNIX epoch
-     *
-     * @example 1540095775941
-     */
-    createdAt?: number;
-    /**
-     * Information of the user who created the alias
-     */
-    creator?: {
-      /**
-       * ID of the user who created the alias
-       *
-       * @example 96SnxkFiMyVKsK3pnoHfx3Hz
-       */
-      uid: string;
-      /**
-       * Email of the user who created the alias
-       *
-       * @example john-doe@gmail.com
-       */
-      email: string;
-      /**
-       * Username of the user who created the alias
-       *
-       * @example john-doe
-       */
-      username: string;
-    };
-    /**
-     * The date when the alias was deleted in milliseconds since the UNIX epoch
-     *
-     * @example 1540095775941
-     */
-    deletedAt?: number;
-    /**
-     * A map with the deployment ID, URL and metadata
-     */
-    deployment?: {
-      /**
-       * The deployment unique identifier
-       *
-       * @example dpl_5m8CQaRBm3FnWRW1od3wKTpaECPx
-       */
-      id: string;
-      /**
-       * The deployment unique URL
-       *
-       * @example my-instant-deployment-3ij3cxz9qr.now.sh
-       */
-      url: string;
-      /**
-       * The deployment metadata
-       *
-       * @example {}
-       */
-      meta?: string;
-    };
-    /**
-     * The deployment ID
-     *
-     * @example dpl_5m8CQaRBm3FnWRW1od3wKTpaECPx
-     */
-    deploymentId: string | null;
-    /**
-     * The unique identifier of the project
-     *
-     * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-     */
-    projectId: string | null;
-    /**
-     * Target destination domain for redirect when the alias is a redirect
-     */
-    redirect?: string | null;
-    /**
-     * Status code to be used on redirect
-     */
-    redirectStatusCode?: 301 | 302 | 307 | 308 | null;
-    /**
-     * The unique identifier of the alias
-     */
-    uid: string;
-    /**
-     * The date when the alias was updated in milliseconds since the UNIX epoch
-     *
-     * @example 1540095775941
-     */
-    updatedAt?: number;
-    /**
-     * The protection bypass for the alias
-     */
-    protectionBypass?: {
-      [key: string]: {
-        createdAt: number;
-        createdBy: string;
-        scope?: 'automation-bypass' | 'shareable-link';
-      };
-    };
-  }[];
-  pagination: Schemas.Pagination;
-};
-
-export type ListAliasesVariables = {
-  queryParams?: ListAliasesQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieves a list of aliases for the authenticated User or Team. When `domain` is provided, only aliases for that domain will be returned. When `projectId` is provided, it will only return the given project aliases.
- */
-export const listAliases = (variables: ListAliasesVariables, signal?: AbortSignal) =>
-  fetch<ListAliasesResponse, ListAliasesError, undefined, {}, ListAliasesQueryParams, {}>({
-    url: '/v4/aliases',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type GetAliasPathParams = {
-  /**
-   * The alias or alias ID to be retrieved
-   *
-   * @example example.vercel.app
-   */
-  idOrAlias: string;
-};
-
-export type GetAliasQueryParams = {
-  /**
-   * Get the alias only if it was created after the provided timestamp
-   *
-   * @deprecated true
-   * @example 1540095775951
-   */
-  from?: number;
-  /**
-   * Get the alias only if it is assigned to the provided project ID
-   *
-   * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-   */
-  projectId?: string;
-  /**
-   * Get the alias only if it was created after this JavaScript timestamp
-   *
-   * @example 1540095775941
-   */
-  since?: number;
-  /**
-   * Get the alias only if it was created before this JavaScript timestamp
-   *
-   * @example 1540095775951
-   */
-  until?: number;
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type GetAliasError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetAliasResponse = {
-  /**
-   * The alias name, it could be a `.vercel.app` subdomain or a custom domain
-   *
-   * @example my-alias.vercel.app
-   */
-  alias: string;
-  /**
-   * The date when the alias was created
-   *
-   * @format date-time
-   * @example 2017-04-26T23:00:34.232Z
-   */
-  created: string;
-  /**
-   * The date when the alias was created in milliseconds since the UNIX epoch
-   *
-   * @example 1540095775941
-   */
-  createdAt?: number;
-  /**
-   * Information of the user who created the alias
-   */
-  creator?: {
-    /**
-     * ID of the user who created the alias
-     *
-     * @example 96SnxkFiMyVKsK3pnoHfx3Hz
-     */
-    uid: string;
-    /**
-     * Email of the user who created the alias
-     *
-     * @example john-doe@gmail.com
-     */
-    email: string;
-    /**
-     * Username of the user who created the alias
-     *
-     * @example john-doe
-     */
-    username: string;
-  };
-  /**
-   * The date when the alias was deleted in milliseconds since the UNIX epoch
-   *
-   * @example 1540095775941
-   */
-  deletedAt?: number;
-  /**
-   * A map with the deployment ID, URL and metadata
-   */
-  deployment?: {
-    /**
-     * The deployment unique identifier
-     *
-     * @example dpl_5m8CQaRBm3FnWRW1od3wKTpaECPx
-     */
-    id: string;
-    /**
-     * The deployment unique URL
-     *
-     * @example my-instant-deployment-3ij3cxz9qr.now.sh
-     */
-    url: string;
-    /**
-     * The deployment metadata
-     *
-     * @example {}
-     */
-    meta?: string;
-  };
-  /**
-   * The deployment ID
-   *
-   * @example dpl_5m8CQaRBm3FnWRW1od3wKTpaECPx
-   */
-  deploymentId: string | null;
-  /**
-   * The unique identifier of the project
-   *
-   * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-   */
-  projectId: string | null;
-  /**
-   * Target destination domain for redirect when the alias is a redirect
-   */
-  redirect?: string | null;
-  /**
-   * Status code to be used on redirect
-   */
-  redirectStatusCode?: 301 | 302 | 307 | 308 | null;
-  /**
-   * The unique identifier of the alias
-   */
-  uid: string;
-  /**
-   * The date when the alias was updated in milliseconds since the UNIX epoch
-   *
-   * @example 1540095775941
-   */
-  updatedAt?: number;
-  /**
-   * The protection bypass for the alias
-   */
-  protectionBypass?: {
-    [key: string]: {
-      createdAt: number;
-      createdBy: string;
-      scope?: 'automation-bypass' | 'shareable-link';
-    };
-  };
-};
-
-export type GetAliasVariables = {
-  pathParams: GetAliasPathParams;
-  queryParams?: GetAliasQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieves an Alias for the given host name or alias ID.
- */
-export const getAlias = (variables: GetAliasVariables, signal?: AbortSignal) =>
-  fetch<GetAliasResponse, GetAliasError, undefined, {}, GetAliasQueryParams, GetAliasPathParams>({
-    url: '/v4/aliases/{idOrAlias}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type DeleteAliasPathParams = {
-  /**
-   * The ID or alias that will be removed
-   *
-   * @example 2WjyKQmM8ZnGcJsPWMrHRHrE
-   */
-  aliasId: string;
-};
-
-export type DeleteAliasQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type DeleteAliasError = Fetcher.ErrorWrapper<undefined>;
-
-export type DeleteAliasResponse = {
-  status: 'SUCCESS';
-};
-
-export type DeleteAliasVariables = {
-  pathParams: DeleteAliasPathParams;
-  queryParams?: DeleteAliasQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Delete an Alias with the specified ID.
- */
-export const deleteAlias = (variables: DeleteAliasVariables, signal?: AbortSignal) =>
-  fetch<DeleteAliasResponse, DeleteAliasError, undefined, {}, DeleteAliasQueryParams, DeleteAliasPathParams>({
-    url: '/v2/aliases/{aliasId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
-
-export type ListDeploymentAliasesPathParams = {
-  /**
-   * The ID of the deployment the aliases should be listed for
-   *
-   * @example dpl_FjvFJncQHQcZMznrUm9EoB8sFuPa
-   */
-  id: string;
-};
-
-export type ListDeploymentAliasesQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type ListDeploymentAliasesError = Fetcher.ErrorWrapper<undefined>;
-
-export type ListDeploymentAliasesResponse = {
-  /**
-   * A list of the aliases assigned to the deployment
-   */
-  aliases: {
-    /**
-     * The unique identifier of the alias
-     *
-     * @example 2WjyKQmM8ZnGcJsPWMrHRHrE
-     */
-    uid: string;
-    /**
-     * The alias name, it could be a `.vercel.app` subdomain or a custom domain
-     *
-     * @example my-alias.vercel.app
-     */
-    alias: string;
-    /**
-     * The date when the alias was created
-     *
-     * @format date-time
-     * @example 2017-04-26T23:00:34.232Z
-     */
-    created: string;
-    /**
-     * Target destination domain for redirect when the alias is a redirect
-     */
-    redirect?: string | null;
-    /**
-     * The protection bypass for the alias
-     */
-    protectionBypass?: {
-      [key: string]: {
-        createdAt: number;
-        createdBy: string;
-        scope?: 'automation-bypass' | 'shareable-link';
-      };
-    };
-  }[];
-};
-
-export type ListDeploymentAliasesVariables = {
-  pathParams: ListDeploymentAliasesPathParams;
-  queryParams?: ListDeploymentAliasesQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieves all Aliases for the Deployment with the given ID. The authenticated User must own the deployment.
- */
-export const listDeploymentAliases = (variables: ListDeploymentAliasesVariables, signal?: AbortSignal) =>
-  fetch<
-    ListDeploymentAliasesResponse,
-    ListDeploymentAliasesError,
-    undefined,
-    {},
-    ListDeploymentAliasesQueryParams,
-    ListDeploymentAliasesPathParams
-  >({ url: '/v2/deployments/{id}/aliases', method: 'get', ...variables, signal });
-
-export type AssignAliasPathParams = {
-  /**
-   * The ID of the deployment the aliases should be listed for
-   *
-   * @example dpl_FjvFJncQHQcZMznrUm9EoB8sFuPa
-   */
-  id: string;
-};
-
-export type AssignAliasQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type AssignAliasError = Fetcher.ErrorWrapper<undefined>;
-
-export type AssignAliasResponse = {
-  /**
-   * The unique identifier of the alias
-   *
-   * @example 2WjyKQmM8ZnGcJsPWMrHRHrE
-   */
-  uid: string;
-  /**
-   * The assigned alias name
-   *
-   * @example my-alias.vercel.app
-   */
-  alias: string;
-  /**
-   * The date when the alias was created
-   *
-   * @format date-time
-   * @example 2017-04-26T23:00:34.232Z
-   */
-  created: string;
-  /**
-   * The unique identifier of the previously aliased deployment, only received when the alias was used before
-   *
-   * @example dpl_FjvFJncQHQcZMznrUm9EoB8sFuPa
-   */
-  oldDeploymentId?: string | null;
-};
-
-export type AssignAliasRequestBody = {
-  /**
-   * The alias we want to assign to the deployment defined in the URL
-   *
-   * @example my-alias.vercel.app
-   */
-  alias?: string;
-  /**
-   * The redirect property will take precedence over the deployment id from the URL and consists of a hostname (like test.com) to which the alias should redirect using status code 307
-   *
-   * @example null
-   */
-  redirect?: string | null;
-};
-
-export type AssignAliasVariables = {
-  body?: AssignAliasRequestBody;
-  pathParams: AssignAliasPathParams;
-  queryParams?: AssignAliasQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Creates a new alias for the deployment with the given deployment ID. The authenticated user must own this deployment. If the desired alias is already assigned to another deployment, then it will be removed from the old deployment and assigned to the new one.
- */
-export const assignAlias = (variables: AssignAliasVariables, signal?: AbortSignal) =>
-  fetch<
-    AssignAliasResponse,
-    AssignAliasError,
-    AssignAliasRequestBody,
-    {},
-    AssignAliasQueryParams,
-    AssignAliasPathParams
-  >({ url: '/v2/deployments/{id}/aliases', method: 'post', ...variables, signal });
-
-export type UploadFileQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type UploadFileHeaders = {
-  /**
-   * The file size in bytes
-   */
-  ['Content-Length']?: number;
-  /**
-   * The file SHA1 used to check the integrity
-   *
-   * @maxLength 40
-   */
-  ['x-vercel-digest']?: string;
-  /**
-   * The file SHA1 used to check the integrity
-   *
-   * @deprecated true
-   * @maxLength 40
-   */
-  ['x-now-digest']?: string;
-  /**
-   * The file size as an alternative to `Content-Length`
-   *
-   * @deprecated true
-   */
-  ['x-now-size']?: number;
-};
-
-export type UploadFileError = Fetcher.ErrorWrapper<undefined>;
-
-export type UploadFileVariables = {
-  headers?: UploadFileHeaders;
-  queryParams?: UploadFileQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Before you create a deployment you need to upload the required files for that deployment. To do it, you need to first upload each file to this endpoint. Once that's completed, you can create a new deployment with the uploaded files. The file content must be placed inside the body of the request. In the case of a successful response you'll receive a status code 200 with an empty body.
- */
-export const uploadFile = (variables: UploadFileVariables, signal?: AbortSignal) =>
-  fetch<
-    | {
-        /**
-         * Array of URLs where the file was updated
-         *
-         * @example example-upload.aws.com
-         */
-        urls: string[];
-      }
-    | Record<string, any>,
-    UploadFileError,
-    undefined,
-    UploadFileHeaders,
-    UploadFileQueryParams,
-    {}
-  >({ url: '/v2/files', method: 'post', ...variables, signal });
-
-export type GetAuthUserError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetAuthUserResponse = {
-  user: Schemas.AuthUser | Schemas.AuthUserLimited;
-};
-
-export type GetAuthUserVariables = FetcherExtraProps;
-
-/**
- * Retrieves information related to the currently authenticated User.
- */
-export const getAuthUser = (variables: GetAuthUserVariables, signal?: AbortSignal) =>
-  fetch<GetAuthUserResponse, GetAuthUserError, undefined, {}, {}, {}>({
-    url: '/v2/user',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type RequestDeleteError = Fetcher.ErrorWrapper<undefined>;
-
-export type RequestDeleteResponse = {
-  /**
-   * Unique identifier of the User who has initiated deletion.
-   */
-  id: string;
-  /**
-   * Email address of the User who has initiated deletion.
-   */
-  email: string;
-  /**
-   * User deletion progress status.
-   *
-   * @example Verification email sent
-   */
-  message: string;
-};
-
-export type RequestDeleteRequestBody = {
-  /**
-   * Optional array of objects that describe the reason why the User account is being deleted.
-   */
-  reasons?: {
-    /**
-     * Idenitifier slug of the reason why the User account is being deleted.
-     */
-    slug: string;
-    /**
-     * Description of the reason why the User account is being deleted.
-     */
-    description: string;
-  }[];
-};
-
-export type RequestDeleteVariables = {
-  body?: RequestDeleteRequestBody;
-} & FetcherExtraProps;
-
-/**
- * Initiates the deletion process for the currently authenticated User, by sending a deletion confirmation email. The email contains a link that the user needs to visit in order to proceed with the deletion process.
- */
-export const requestDelete = (variables: RequestDeleteVariables, signal?: AbortSignal) =>
-  fetch<RequestDeleteResponse, RequestDeleteError, RequestDeleteRequestBody, {}, {}, {}>({
-    url: '/v1/user',
-    method: 'delete',
-    ...variables,
-    signal
-  });
-
-export type ListAuthTokensError = Fetcher.ErrorWrapper<undefined>;
-
-export type ListAuthTokensResponse = {
-  tokens: Schemas.AuthToken[];
-  testingToken?: Schemas.AuthToken;
-  pagination: Schemas.Pagination;
-};
-
-export type ListAuthTokensVariables = FetcherExtraProps;
-
-/**
- * Retrieve a list of the current User's authentication tokens.
- */
-export const listAuthTokens = (variables: ListAuthTokensVariables, signal?: AbortSignal) =>
-  fetch<ListAuthTokensResponse, ListAuthTokensError, undefined, {}, {}, {}>({
-    url: '/v5/user/tokens',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type CreateAuthTokenQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type CreateAuthTokenError = Fetcher.ErrorWrapper<undefined>;
-
-export type CreateAuthTokenResponse = {
-  token: Schemas.AuthToken;
-  /**
-   * The authentication token's actual value. This token is only provided in this response, and can never be retrieved again in the future. Be sure to save it somewhere safe!
-   *
-   * @example uRKJSTt0L4RaSkiMj41QTkxM
-   */
-  bearerToken: string;
-};
-
-export type CreateAuthTokenVariables = {
-  body?:
-    | {
-        name: string;
-        expiresAt?: number;
-      }
-    | {
-        type: 'oauth2-token';
-        name: string;
-        clientId?: string;
-        installationId?: string;
-        expiresAt?: number;
-      };
-  queryParams?: CreateAuthTokenQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Creates and returns a new authentication token for the currently authenticated User. The `bearerToken` property is only provided once, in the response body, so be sure to save it on the client for use with API requests.
- */
-export const createAuthToken = (variables: CreateAuthTokenVariables, signal?: AbortSignal) =>
-  fetch<
-    CreateAuthTokenResponse,
-    CreateAuthTokenError,
-    | {
-        name: string;
-        expiresAt?: number;
-      }
-    | {
-        type: 'oauth2-token';
-        name: string;
-        clientId?: string;
-        installationId?: string;
-        expiresAt?: number;
-      },
-    {},
-    CreateAuthTokenQueryParams,
-    {}
-  >({ url: '/v3/user/tokens', method: 'post', ...variables, signal });
-
-export type GetAuthTokenPathParams = {
-  /**
-   * The identifier of the token to retrieve. The special value \"current\" may be supplied, which returns the metadata for the token that the current HTTP request is authenticated with.
-   *
-   * @example 5d9f2ebd38ddca62e5d51e9c1704c72530bdc8bfdd41e782a6687c48399e8391
-   */
-  tokenId: string;
-};
-
-export type GetAuthTokenError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetAuthTokenResponse = {
-  token: Schemas.AuthToken;
-};
-
-export type GetAuthTokenVariables = {
-  pathParams: GetAuthTokenPathParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieve metadata about an authentication token belonging to the currently authenticated User.
- */
-export const getAuthToken = (variables: GetAuthTokenVariables, signal?: AbortSignal) =>
-  fetch<GetAuthTokenResponse, GetAuthTokenError, undefined, {}, {}, GetAuthTokenPathParams>({
-    url: '/v5/user/tokens/{tokenId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type DeleteAuthTokenPathParams = {
-  /**
-   * The identifier of the token to invalidate. The special value \"current\" may be supplied, which invalidates the token that the HTTP request was authenticated with.
-   *
-   * @example 5d9f2ebd38ddca62e5d51e9c1704c72530bdc8bfdd41e782a6687c48399e8391
-   */
-  tokenId: string;
-};
-
-export type DeleteAuthTokenError = Fetcher.ErrorWrapper<undefined>;
-
-export type DeleteAuthTokenResponse = {
-  /**
-   * The unique identifier of the token that was deleted.
-   *
-   * @example 5d9f2ebd38ddca62e5d51e9c1704c72530bdc8bfdd41e782a6687c48399e8391
-   */
-  tokenId: string;
-};
-
-export type DeleteAuthTokenVariables = {
-  pathParams: DeleteAuthTokenPathParams;
-} & FetcherExtraProps;
-
-/**
- * Invalidate an authentication token, such that it will no longer be valid for future HTTP requests.
- */
-export const deleteAuthToken = (variables: DeleteAuthTokenVariables, signal?: AbortSignal) =>
-  fetch<DeleteAuthTokenResponse, DeleteAuthTokenError, undefined, {}, {}, DeleteAuthTokenPathParams>({
-    url: '/v3/user/tokens/{tokenId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
-
-export type GetRecordsPathParams = {
-  /**
    * @example example.com
    */
-  domain: string;
-};
-
-export type GetRecordsQueryParams = {
+  name: string;
   /**
-   * Maximum number of records to list from a request.
+   * In which status of the domain the price needs to be checked.
    *
-   * @example 20
+   * @example new
    */
-  limit?: string;
-  /**
-   * Get records created after this JavaScript timestamp.
-   *
-   * @example 1609499532000
-   */
-  since?: string;
-  /**
-   * Get records created before this JavaScript timestamp.
-   *
-   * @example 1612264332000
-   */
-  until?: string;
+  type?: 'new' | 'renewal';
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
   teamId?: string;
 };
 
-export type GetRecordsError = Fetcher.ErrorWrapper<undefined>;
+export type CheckDomainPriceError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetRecordsVariables = {
-  pathParams: GetRecordsPathParams;
-  queryParams?: GetRecordsQueryParams;
+export type CheckDomainPriceResponse = {
+  /**
+   * The domain price in USD.
+   *
+   * @example 20
+   */
+  price: number;
+  /**
+   * The number of years the domain could be held before paying again.
+   *
+   * @example 1
+   */
+  period: number;
+};
+
+export type CheckDomainPriceVariables = {
+  queryParams: CheckDomainPriceQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Retrieves a list of DNS records created for a domain name. By default it returns 20 records if no limit is provided. The rest can be retrieved using the pagination options.
+ * Check the price to purchase a domain and how long a single purchase period is.
  */
-export const getRecords = (variables: GetRecordsVariables, signal?: AbortSignal) =>
-  fetch<
-    | string
-    | {
-        records: {
-          id: string;
-          slug: string;
-          name: string;
-          type: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
-          value: string;
-          mxPriority?: number;
-          priority?: number;
-          creator: string;
-          created: number | null;
-          updated: number | null;
-          createdAt: number | null;
-          updatedAt: number | null;
-        }[];
-      }
-    | {
-        records: {
-          id: string;
-          slug: string;
-          name: string;
-          type: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
-          value: string;
-          mxPriority?: number;
-          priority?: number;
-          creator: string;
-          created: number | null;
-          updated: number | null;
-          createdAt: number | null;
-          updatedAt: number | null;
-        }[];
-        pagination: Schemas.Pagination;
-      },
-    GetRecordsError,
-    undefined,
-    {},
-    GetRecordsQueryParams,
-    GetRecordsPathParams
-  >({ url: '/v4/domains/{domain}/records', method: 'get', ...variables, signal });
+export const checkDomainPrice = (variables: CheckDomainPriceVariables, signal?: AbortSignal) =>
+  fetch<CheckDomainPriceResponse, CheckDomainPriceError, undefined, {}, CheckDomainPriceQueryParams, {}>({
+    url: '/v4/domains/price',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type CreateRecordPathParams = {
   /**
@@ -4894,6 +4450,91 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
     CreateRecordPathParams
   >({ url: '/v2/domains/{domain}/records', method: 'post', ...variables, signal });
 
+export type GetRecordsPathParams = {
+  /**
+   * @example example.com
+   */
+  domain: string;
+};
+
+export type GetRecordsQueryParams = {
+  /**
+   * Maximum number of records to list from a request.
+   *
+   * @example 20
+   */
+  limit?: string;
+  /**
+   * Get records created after this JavaScript timestamp.
+   *
+   * @example 1609499532000
+   */
+  since?: string;
+  /**
+   * Get records created before this JavaScript timestamp.
+   *
+   * @example 1612264332000
+   */
+  until?: string;
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetRecordsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetRecordsVariables = {
+  pathParams: GetRecordsPathParams;
+  queryParams?: GetRecordsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves a list of DNS records created for a domain name. By default it returns 20 records if no limit is provided. The rest can be retrieved using the pagination options.
+ */
+export const getRecords = (variables: GetRecordsVariables, signal?: AbortSignal) =>
+  fetch<
+    | string
+    | {
+        records: {
+          id: string;
+          slug: string;
+          name: string;
+          type: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
+          value: string;
+          mxPriority?: number;
+          priority?: number;
+          creator: string;
+          created: number | null;
+          updated: number | null;
+          createdAt: number | null;
+          updatedAt: number | null;
+        }[];
+      }
+    | {
+        records: {
+          id: string;
+          slug: string;
+          name: string;
+          type: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
+          value: string;
+          mxPriority?: number;
+          priority?: number;
+          creator: string;
+          created: number | null;
+          updated: number | null;
+          createdAt: number | null;
+          updatedAt: number | null;
+        }[];
+        pagination: Schemas.Pagination;
+      },
+    GetRecordsError,
+    undefined,
+    {},
+    GetRecordsQueryParams,
+    GetRecordsPathParams
+  >({ url: '/v4/domains/{domain}/records', method: 'get', ...variables, signal });
+
 export type UpdateRecordPathParams = {
   /**
    * The id of the DNS record
@@ -5058,113 +4699,6 @@ export const checkDomainStatus = (variables: CheckDomainStatusVariables, signal?
     signal
   });
 
-export type CheckDomainPriceQueryParams = {
-  /**
-   * The name of the domain for which the price needs to be checked.
-   *
-   * @example example.com
-   */
-  name: string;
-  /**
-   * In which status of the domain the price needs to be checked.
-   *
-   * @example new
-   */
-  type?: 'new' | 'renewal';
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type CheckDomainPriceError = Fetcher.ErrorWrapper<undefined>;
-
-export type CheckDomainPriceResponse = {
-  /**
-   * The domain price in USD.
-   *
-   * @example 20
-   */
-  price: number;
-  /**
-   * The number of years the domain could be held before paying again.
-   *
-   * @example 1
-   */
-  period: number;
-};
-
-export type CheckDomainPriceVariables = {
-  queryParams: CheckDomainPriceQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Check the price to purchase a domain and how long a single purchase period is.
- */
-export const checkDomainPrice = (variables: CheckDomainPriceVariables, signal?: AbortSignal) =>
-  fetch<CheckDomainPriceResponse, CheckDomainPriceError, undefined, {}, CheckDomainPriceQueryParams, {}>({
-    url: '/v4/domains/price',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type BuyDomainQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type BuyDomainError = Fetcher.ErrorWrapper<undefined>;
-
-export type BuyDomainResponse = {
-  domain: {
-    uid: string;
-    ns: string[];
-    verified: boolean;
-    created: number;
-    pending: boolean;
-  };
-};
-
-export type BuyDomainRequestBody = {
-  /**
-   * The domain name to purchase.
-   *
-   * @example example.com
-   */
-  name: string;
-  /**
-   * The price you expect to be charged for the purchase.
-   *
-   * @example 10
-   */
-  expectedPrice?: number;
-  /**
-   * Indicates whether the domain should be automatically renewed.
-   *
-   * @example true
-   */
-  renew?: boolean;
-};
-
-export type BuyDomainVariables = {
-  body: BuyDomainRequestBody;
-  queryParams?: BuyDomainQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Allows to purchase the specified domain.
- */
-export const buyDomain = (variables: BuyDomainVariables, signal?: AbortSignal) =>
-  fetch<BuyDomainResponse, BuyDomainError, BuyDomainRequestBody, {}, BuyDomainQueryParams, {}>({
-    url: '/v4/domains/buy',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
 export type GetDomainConfigPathParams = {
   /**
    * The name of the domain.
@@ -5277,6 +4811,12 @@ export type GetDomainResponse = {
       id: string;
     };
     /**
+     * The domain name.
+     *
+     * @example example.com
+     */
+    name: string;
+    /**
      * Timestamp in milliseconds when the domain was created in the registry.
      *
      * @example 1613602938882
@@ -5288,12 +4828,6 @@ export type GetDomainResponse = {
      * @example EmTbe5CEJyTk2yVAHBUWy4A3sRusca3GCwRjTC1bpeVnt1
      */
     id: string;
-    /**
-     * The domain name.
-     *
-     * @example example.com
-     */
-    name: string;
     /**
      * Timestamp in milliseconds at which the domain is set to expire. `null` if not bought with Vercel.
      *
@@ -5424,6 +4958,12 @@ export type GetDomainsResponse = {
       id: string;
     };
     /**
+     * The domain name.
+     *
+     * @example example.com
+     */
+    name: string;
+    /**
      * Timestamp in milliseconds when the domain was created in the registry.
      *
      * @example 1613602938882
@@ -5435,12 +4975,6 @@ export type GetDomainsResponse = {
      * @example EmTbe5CEJyTk2yVAHBUWy4A3sRusca3GCwRjTC1bpeVnt1
      */
     id: string;
-    /**
-     * The domain name.
-     *
-     * @example example.com
-     */
-    name: string;
     /**
      * Timestamp in milliseconds at which the domain is set to expire. `null` if not bought with Vercel.
      *
@@ -5553,6 +5087,12 @@ export type CreateOrTransferDomainResponse = {
       id: string;
     };
     /**
+     * The domain name.
+     *
+     * @example example.com
+     */
+    name: string;
+    /**
      * Timestamp in milliseconds when the domain was created in the registry.
      *
      * @example 1613602938882
@@ -5564,12 +5104,6 @@ export type CreateOrTransferDomainResponse = {
      * @example EmTbe5CEJyTk2yVAHBUWy4A3sRusca3GCwRjTC1bpeVnt1
      */
     id: string;
-    /**
-     * The domain name.
-     *
-     * @example example.com
-     */
-    name: string;
     /**
      * Timestamp in milliseconds at which the domain is set to expire. `null` if not bought with Vercel.
      *
@@ -5804,773 +5338,2022 @@ export const deleteDomain = (variables: DeleteDomainVariables, signal?: AbortSig
     signal
   });
 
-export type GetSecretsQueryParams = {
+export type GetEdgeConfigsQueryParams = {
   /**
-   * Filter out secrets based on comma separated secret ids.
-   *
-   * @example sec_RKc5iV0rV3ZSrFrHiruRno7k,sec_fGc5iV0rV3ZSrFrHiruRnouQ
-   * @deprecated true
+   * The Team identifier or slug to perform the request on behalf of.
    */
+  teamId?: string;
+};
+
+export type GetEdgeConfigsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetEdgeConfigsResponse = {
+  id?: string;
+  createdAt?: number;
+  ownerId?: string;
+  /**
+   * Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
+   */
+  slug?: string;
+  updatedAt?: number;
+  digest?: string;
+  sizeInBytes: number;
+  itemCount: number;
+};
+
+export type GetEdgeConfigsVariables = {
+  queryParams?: GetEdgeConfigsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Returns all Edge Configs.
+ */
+export const getEdgeConfigs = (variables: GetEdgeConfigsVariables, signal?: AbortSignal) =>
+  fetch<GetEdgeConfigsResponse, GetEdgeConfigsError, undefined, {}, GetEdgeConfigsQueryParams, {}>({
+    url: '/v1/edge-config',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type CreateEdgeConfigQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type CreateEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
+
+export type CreateEdgeConfigResponse = {
+  createdAt?: number;
+  updatedAt?: number;
   id?: string;
   /**
-   * Filter out secrets that belong to a project.
-   *
-   * @example prj_2WjyKQmM8ZnGcJsPWMrHRHrE
-   * @deprecated true
+   * Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
    */
-  projectId?: string;
+  slug?: string;
+  ownerId?: string;
+  digest?: string;
+  sizeInBytes: number;
+  itemCount: number;
+};
+
+export type CreateEdgeConfigRequestBody = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * @maxLength 32
+   * @pattern ^[\\w-]+$
    */
-  teamId?: string;
-};
-
-export type GetSecretsError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetSecretsResponse = {
-  secrets: {
-    /**
-     * The date when the secret was created.
-     *
-     * @format date-time
-     * @example 2021-02-10T13:11:49.180Z
-     */
-    created: string;
-    /**
-     * The name of the secret.
-     *
-     * @example my-api-key
-     */
-    name: string;
-    /**
-     * The unique identifier of the team the secret was created for.
-     *
-     * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
-     */
-    teamId?: string | null;
-    /**
-     * The unique identifier of the secret.
-     *
-     * @example sec_XCG7t7AIHuO2SBA8667zNUiM
-     */
-    uid: string;
-    /**
-     * The unique identifier of the user who created the secret.
-     *
-     * @example 2qDDuGFTWXBLDNnqZfWPDp1A
-     */
-    userId?: string;
-    /**
-     * The value of the secret.
-     */
-    value?: string;
-    /**
-     * Timestamp for when the secret was created.
-     *
-     * @example 1609492210000
-     */
-    createdAt?: number;
-    /**
-     * The unique identifier of the project which the secret belongs to.
-     *
-     * @example prj_2WjyKQmM8ZnGcJsPWMrHRHrE
-     */
-    projectId?: string;
-    /**
-     * Indicates whether the secret value can be decrypted after it has been created.
-     *
-     * @example true
-     */
-    decryptable?: boolean;
-  }[];
-  pagination: Schemas.Pagination;
-};
-
-export type GetSecretsVariables = {
-  queryParams?: GetSecretsQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieves the active Vercel secrets for the authenticated user. By default it returns 20 secrets. The rest can be retrieved using the pagination options. The body will contain an entry for each secret.
- */
-export const getSecrets = (variables: GetSecretsVariables, signal?: AbortSignal) =>
-  fetch<GetSecretsResponse, GetSecretsError, undefined, {}, GetSecretsQueryParams, {}>({
-    url: '/v3/secrets',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type CreateSecretQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type CreateSecretError = Fetcher.ErrorWrapper<undefined>;
-
-export type CreateSecretResponse = {
-  value: {
-    type?: 'Buffer';
-    data?: number[];
+  slug: string;
+  items?: {
+    [key: string]:
+      | (string | number | boolean | null | Record<string, any>)
+      | (string | number | boolean | null | Record<string, any>)[];
   };
-  /**
-   * The date when the secret was created.
-   *
-   * @format date-time
-   * @example 2021-02-10T13:11:49.180Z
-   */
-  created: string;
-  /**
-   * The name of the secret.
-   *
-   * @example my-api-key
-   */
-  name: string;
-  /**
-   * The unique identifier of the team the secret was created for.
-   *
-   * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
-   */
-  teamId?: string | null;
-  /**
-   * The unique identifier of the secret.
-   *
-   * @example sec_XCG7t7AIHuO2SBA8667zNUiM
-   */
-  uid: string;
-  /**
-   * The unique identifier of the user who created the secret.
-   *
-   * @example 2qDDuGFTWXBLDNnqZfWPDp1A
-   */
-  userId?: string;
-  /**
-   * Timestamp for when the secret was created.
-   *
-   * @example 1609492210000
-   */
-  createdAt?: number;
-  /**
-   * The unique identifier of the project which the secret belongs to.
-   *
-   * @example prj_2WjyKQmM8ZnGcJsPWMrHRHrE
-   */
-  projectId?: string;
-  /**
-   * Indicates whether the secret value can be decrypted after it has been created.
-   *
-   * @example true
-   */
-  decryptable?: boolean;
 };
 
-export type CreateSecretRequestBody = {
-  /**
-   * The name of the secret (max 100 characters).
-   *
-   * @example my-api-key
-   * @maximum 100
-   */
-  name: string;
-  /**
-   * The value of the new secret.
-   *
-   * @example some secret value
-   */
-  value: string;
-  /**
-   * Whether the secret value can be decrypted after it has been created.
-   *
-   * @example true
-   */
-  decryptable?: boolean;
-  /**
-   * Associate a secret to a project.
-   *
-   * @example prj_2WjyKQmM8ZnGcJsPWMrHRHrE
-   * @deprecated true
-   */
-  projectId?: string;
-};
-
-export type CreateSecretVariables = {
-  body: CreateSecretRequestBody;
-  queryParams?: CreateSecretQueryParams;
+export type CreateEdgeConfigVariables = {
+  body: CreateEdgeConfigRequestBody;
+  queryParams?: CreateEdgeConfigQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Allows to create a new secret.
+ * Creates an Edge Config.
  */
-export const createSecret = (variables: CreateSecretVariables, signal?: AbortSignal) =>
-  fetch<CreateSecretResponse, CreateSecretError, CreateSecretRequestBody, {}, CreateSecretQueryParams, {}>({
-    url: '/v2/secrets/{name}',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
-export type RenameSecretPathParams = {
-  /**
-   * The name of the secret.
-   *
-   * @example my-api-key
-   */
-  name: string;
-};
-
-export type RenameSecretQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type RenameSecretError = Fetcher.ErrorWrapper<undefined>;
-
-export type RenameSecretResponse = {
-  uid: string;
-  name: string;
-  /**
-   * Enables basic storage and retrieval of dates and times.
-   *
-   * @format date-time
-   */
-  created: string;
-  oldName: string;
-};
-
-export type RenameSecretRequestBody = {
-  /**
-   * The name of the new secret.
-   *
-   * @example my-api-key
-   * @maximum 100
-   */
-  name: string;
-};
-
-export type RenameSecretVariables = {
-  body: RenameSecretRequestBody;
-  pathParams: RenameSecretPathParams;
-  queryParams?: RenameSecretQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Enables to edit the name of a user's secret. The name has to be unique to that user's secrets.
- */
-export const renameSecret = (variables: RenameSecretVariables, signal?: AbortSignal) =>
+export const createEdgeConfig = (variables: CreateEdgeConfigVariables, signal?: AbortSignal) =>
   fetch<
-    RenameSecretResponse,
-    RenameSecretError,
-    RenameSecretRequestBody,
+    CreateEdgeConfigResponse,
+    CreateEdgeConfigError,
+    CreateEdgeConfigRequestBody,
     {},
-    RenameSecretQueryParams,
-    RenameSecretPathParams
-  >({ url: '/v2/secrets/{name}', method: 'patch', ...variables, signal });
+    CreateEdgeConfigQueryParams,
+    {}
+  >({ url: '/v1/edge-config', method: 'post', ...variables, signal });
 
-export type GetSecretPathParams = {
-  /**
-   * The name or the unique identifier to which the secret belongs to.
-   *
-   * @example sec_RKc5iV0rV3ZSrFrHiruRno7k
-   */
-  idOrName: string;
+export type GetEdgeConfigPathParams = {
+  edgeConfigId: string;
 };
 
-export type GetSecretQueryParams = {
-  /**
-   * Whether to try to decrypt the value of the secret. Only works if `decryptable` has been set to `true` when the secret was created.
-   *
-   * @example true
-   */
-  decrypt?: 'true' | 'false';
+export type GetEdgeConfigQueryParams = {
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
   teamId?: string;
 };
 
-export type GetSecretError = Fetcher.ErrorWrapper<undefined>;
+export type GetEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetSecretResponse = {
-  /**
-   * The date when the secret was created.
-   *
-   * @format date-time
-   * @example 2021-02-10T13:11:49.180Z
-   */
-  created: string;
-  /**
-   * The name of the secret.
-   *
-   * @example my-api-key
-   */
-  name: string;
-  /**
-   * The unique identifier of the team the secret was created for.
-   *
-   * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
-   */
-  teamId?: string | null;
-  /**
-   * The unique identifier of the secret.
-   *
-   * @example sec_XCG7t7AIHuO2SBA8667zNUiM
-   */
-  uid: string;
-  /**
-   * The unique identifier of the user who created the secret.
-   *
-   * @example 2qDDuGFTWXBLDNnqZfWPDp1A
-   */
-  userId?: string;
-  /**
-   * The value of the secret.
-   */
-  value?: string;
-  /**
-   * Timestamp for when the secret was created.
-   *
-   * @example 1609492210000
-   */
+export type GetEdgeConfigResponse = {
   createdAt?: number;
+  updatedAt?: number;
+  id?: string;
   /**
-   * The unique identifier of the project which the secret belongs to.
-   *
-   * @example prj_2WjyKQmM8ZnGcJsPWMrHRHrE
+   * Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
    */
-  projectId?: string;
-  /**
-   * Indicates whether the secret value can be decrypted after it has been created.
-   *
-   * @example true
-   */
-  decryptable?: boolean;
+  slug?: string;
+  ownerId?: string;
+  digest?: string;
+  sizeInBytes: number;
+  itemCount: number;
 };
 
-export type GetSecretVariables = {
-  pathParams: GetSecretPathParams;
-  queryParams?: GetSecretQueryParams;
+export type GetEdgeConfigVariables = {
+  pathParams: GetEdgeConfigPathParams;
+  queryParams?: GetEdgeConfigQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Retrieves the information for a specific secret by passing either the secret id or name in the URL.
+ * Returns an Edge Config.
  */
-export const getSecret = (variables: GetSecretVariables, signal?: AbortSignal) =>
-  fetch<GetSecretResponse, GetSecretError, undefined, {}, GetSecretQueryParams, GetSecretPathParams>({
-    url: '/v3/secrets/{idOrName}',
+export const getEdgeConfig = (variables: GetEdgeConfigVariables, signal?: AbortSignal) =>
+  fetch<GetEdgeConfigResponse, GetEdgeConfigError, undefined, {}, GetEdgeConfigQueryParams, GetEdgeConfigPathParams>({
+    url: '/v1/edge-config/{edgeConfigId}',
     method: 'get',
     ...variables,
     signal
   });
 
-export type DeleteSecretPathParams = {
-  /**
-   * The name or the unique identifier to which the secret belongs to.
-   *
-   * @example sec_RKc5iV0rV3ZSrFrHiruRno7k
-   */
-  idOrName: string;
+export type UpdateEdgeConfigPathParams = {
+  edgeConfigId: string;
 };
 
-export type DeleteSecretQueryParams = {
+export type UpdateEdgeConfigQueryParams = {
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
   teamId?: string;
 };
 
-export type DeleteSecretError = Fetcher.ErrorWrapper<undefined>;
+export type UpdateEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteSecretResponse = {
+export type UpdateEdgeConfigResponse = {
+  createdAt?: number;
+  updatedAt?: number;
+  id?: string;
   /**
-   * The unique identifier of the deleted secret.
-   *
-   * @example sec_XCG7t7AIHuO2SBA8667zNUiM
+   * Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
    */
-  uid: string;
-  /**
-   * The name of the deleted secret.
-   *
-   * @example my-api-key
-   */
-  name: string;
-  /**
-   * The date when the secret was created.
-   *
-   * @example 2021-02-10T13:11:49.180Z
-   */
-  created: number;
+  slug?: string;
+  ownerId?: string;
+  digest?: string;
+  sizeInBytes: number;
+  itemCount: number;
 };
 
-export type DeleteSecretVariables = {
-  pathParams: DeleteSecretPathParams;
-  queryParams?: DeleteSecretQueryParams;
+export type UpdateEdgeConfigRequestBody = {
+  /**
+   * @maxLength 32
+   * @pattern ^[\\w-]+$
+   */
+  slug: string;
+};
+
+export type UpdateEdgeConfigVariables = {
+  body: UpdateEdgeConfigRequestBody;
+  pathParams: UpdateEdgeConfigPathParams;
+  queryParams?: UpdateEdgeConfigQueryParams;
 } & FetcherExtraProps;
 
 /**
- * This deletes the user's secret defined in the URL.
+ * Updates an Edge Config.
  */
-export const deleteSecret = (variables: DeleteSecretVariables, signal?: AbortSignal) =>
-  fetch<DeleteSecretResponse, DeleteSecretError, undefined, {}, DeleteSecretQueryParams, DeleteSecretPathParams>({
-    url: '/v2/secrets/{idOrName}',
+export const updateEdgeConfig = (variables: UpdateEdgeConfigVariables, signal?: AbortSignal) =>
+  fetch<
+    UpdateEdgeConfigResponse,
+    UpdateEdgeConfigError,
+    UpdateEdgeConfigRequestBody,
+    {},
+    UpdateEdgeConfigQueryParams,
+    UpdateEdgeConfigPathParams
+  >({ url: '/v1/edge-config/{edgeConfigId}', method: 'put', ...variables, signal });
+
+export type DeleteEdgeConfigPathParams = {
+  edgeConfigId: string;
+};
+
+export type DeleteEdgeConfigQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type DeleteEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteEdgeConfigVariables = {
+  pathParams: DeleteEdgeConfigPathParams;
+  queryParams?: DeleteEdgeConfigQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Delete an Edge Config by id.
+ */
+export const deleteEdgeConfig = (variables: DeleteEdgeConfigVariables, signal?: AbortSignal) =>
+  fetch<undefined, DeleteEdgeConfigError, undefined, {}, DeleteEdgeConfigQueryParams, DeleteEdgeConfigPathParams>({
+    url: '/v1/edge-config/{edgeConfigId}',
     method: 'delete',
     ...variables,
     signal
   });
 
-export type DeleteDeploymentPathParams = {
+export type GetEdgeConfigItemsPathParams = {
+  edgeConfigId: string;
+};
+
+export type GetEdgeConfigItemsQueryParams = {
   /**
-   * The ID of the deployment to be deleted
-   *
-   * @example dpl_5WJWYSyB7BpgTj3EuwF37WMRBXBtPQ2iTMJHJBJyRfd
+   * The Team identifier or slug to perform the request on behalf of.
    */
+  teamId?: string;
+};
+
+export type GetEdgeConfigItemsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetEdgeConfigItemsVariables = {
+  pathParams: GetEdgeConfigItemsPathParams;
+  queryParams?: GetEdgeConfigItemsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Returns all items of an Edge Config.
+ */
+export const getEdgeConfigItems = (variables: GetEdgeConfigItemsVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.EdgeConfigItem,
+    GetEdgeConfigItemsError,
+    undefined,
+    {},
+    GetEdgeConfigItemsQueryParams,
+    GetEdgeConfigItemsPathParams
+  >({ url: '/v1/edge-config/{edgeConfigId}/items', method: 'get', ...variables, signal });
+
+export type PatchtEdgeConfigItemsPathParams = {
+  edgeConfigId: string;
+};
+
+export type PatchtEdgeConfigItemsQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type PatchtEdgeConfigItemsError = Fetcher.ErrorWrapper<undefined>;
+
+export type PatchtEdgeConfigItemsResponse = {
+  status: string;
+};
+
+export type PatchtEdgeConfigItemsRequestBody = {
+  items: (
+    | {
+        operation: void | void | void;
+        /**
+         * @maxLength 256
+         * @pattern ^[\\w-]+$
+         */
+        key: string;
+        value:
+          | (string | number | boolean | null | Record<string, any>)
+          | (string | number | boolean | null | Record<string, any>)[];
+      }
+    | {
+        operation: void;
+        /**
+         * @maxLength 256
+         * @pattern ^[\\w-]+$
+         */
+        key: string;
+      }
+  )[];
+};
+
+export type PatchtEdgeConfigItemsVariables = {
+  body: PatchtEdgeConfigItemsRequestBody;
+  pathParams: PatchtEdgeConfigItemsPathParams;
+  queryParams?: PatchtEdgeConfigItemsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Update multiple Edge Config Items in batch.
+ */
+export const patchtEdgeConfigItems = (variables: PatchtEdgeConfigItemsVariables, signal?: AbortSignal) =>
+  fetch<
+    PatchtEdgeConfigItemsResponse,
+    PatchtEdgeConfigItemsError,
+    PatchtEdgeConfigItemsRequestBody,
+    {},
+    PatchtEdgeConfigItemsQueryParams,
+    PatchtEdgeConfigItemsPathParams
+  >({ url: '/v1/edge-config/{edgeConfigId}/items', method: 'patch', ...variables, signal });
+
+export type GetEdgeConfigItemPathParams = {
+  edgeConfigId: string;
+  edgeConfigItemKey: string;
+};
+
+export type GetEdgeConfigItemQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetEdgeConfigItemError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetEdgeConfigItemVariables = {
+  pathParams: GetEdgeConfigItemPathParams;
+  queryParams?: GetEdgeConfigItemQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Returns a specific Edge Config Item.
+ */
+export const getEdgeConfigItem = (variables: GetEdgeConfigItemVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.EdgeConfigItem,
+    GetEdgeConfigItemError,
+    undefined,
+    {},
+    GetEdgeConfigItemQueryParams,
+    GetEdgeConfigItemPathParams
+  >({ url: '/v1/edge-config/{edgeConfigId}/item/{edgeConfigItemKey}', method: 'get', ...variables, signal });
+
+export type GetEdgeConfigTokensPathParams = {
+  edgeConfigId: string;
+};
+
+export type GetEdgeConfigTokensQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetEdgeConfigTokensError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetEdgeConfigTokensVariables = {
+  pathParams: GetEdgeConfigTokensPathParams;
+  queryParams?: GetEdgeConfigTokensQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Returns all tokens of an Edge Config.
+ */
+export const getEdgeConfigTokens = (variables: GetEdgeConfigTokensVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.EdgeConfigToken,
+    GetEdgeConfigTokensError,
+    undefined,
+    {},
+    GetEdgeConfigTokensQueryParams,
+    GetEdgeConfigTokensPathParams
+  >({ url: '/v1/edge-config/{edgeConfigId}/tokens', method: 'get', ...variables, signal });
+
+export type DeleteEdgeConfigTokensPathParams = {
+  edgeConfigId: string;
+};
+
+export type DeleteEdgeConfigTokensQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type DeleteEdgeConfigTokensError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteEdgeConfigTokensRequestBody = {
+  tokens: string[];
+};
+
+export type DeleteEdgeConfigTokensVariables = {
+  body: DeleteEdgeConfigTokensRequestBody;
+  pathParams: DeleteEdgeConfigTokensPathParams;
+  queryParams?: DeleteEdgeConfigTokensQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Deletes one or more tokens of an existing Edge Config.
+ */
+export const deleteEdgeConfigTokens = (variables: DeleteEdgeConfigTokensVariables, signal?: AbortSignal) =>
+  fetch<
+    undefined,
+    DeleteEdgeConfigTokensError,
+    DeleteEdgeConfigTokensRequestBody,
+    {},
+    DeleteEdgeConfigTokensQueryParams,
+    DeleteEdgeConfigTokensPathParams
+  >({ url: '/v1/edge-config/{edgeConfigId}/tokens', method: 'delete', ...variables, signal });
+
+export type GetEdgeConfigTokenPathParams = {
+  edgeConfigId: string;
+  token: string;
+};
+
+export type GetEdgeConfigTokenQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetEdgeConfigTokenError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetEdgeConfigTokenVariables = {
+  pathParams: GetEdgeConfigTokenPathParams;
+  queryParams?: GetEdgeConfigTokenQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Return meta data about an Edge Config token.
+ */
+export const getEdgeConfigToken = (variables: GetEdgeConfigTokenVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.EdgeConfigToken,
+    GetEdgeConfigTokenError,
+    undefined,
+    {},
+    GetEdgeConfigTokenQueryParams,
+    GetEdgeConfigTokenPathParams
+  >({ url: '/v1/edge-config/{edgeConfigId}/token/{token}', method: 'get', ...variables, signal });
+
+export type CreateEdgeConfigTokenPathParams = {
+  edgeConfigId: string;
+};
+
+export type CreateEdgeConfigTokenQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type CreateEdgeConfigTokenError = Fetcher.ErrorWrapper<undefined>;
+
+export type CreateEdgeConfigTokenResponse = {
+  token: string;
   id: string;
 };
 
-export type DeleteDeploymentQueryParams = {
+export type CreateEdgeConfigTokenRequestBody = {
   /**
-   * A Deployment or Alias URL. In case it is passed, the ID will be ignored
-   *
-   * @example https://files-orcin-xi.vercel.app/
+   * @maxLength 52
    */
-  url?: string;
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
+  label: string;
 };
 
-export type DeleteDeploymentError = Fetcher.ErrorWrapper<undefined>;
-
-export type DeleteDeploymentResponse = {
-  /**
-   * The removed deployment ID.
-   *
-   * @example dpl_5WJWYSyB7BpgTj3EuwF37WMRBXBtPQ2iTMJHJBJyRfd
-   */
-  uid: string;
-  /**
-   * A constant with the final state of the deployment.
-   */
-  state: 'DELETED';
-};
-
-export type DeleteDeploymentVariables = {
-  pathParams: DeleteDeploymentPathParams;
-  queryParams?: DeleteDeploymentQueryParams;
+export type CreateEdgeConfigTokenVariables = {
+  body: CreateEdgeConfigTokenRequestBody;
+  pathParams: CreateEdgeConfigTokenPathParams;
+  queryParams?: CreateEdgeConfigTokenQueryParams;
 } & FetcherExtraProps;
 
 /**
- * This API allows you to delete a deployment, either by supplying its `id` in the URL or the `url` of the deployment as a query parameter. You can obtain the ID, for example, by listing all deployments.
+ * Adds a token to an existing Edge Config.
  */
-export const deleteDeployment = (variables: DeleteDeploymentVariables, signal?: AbortSignal) =>
+export const createEdgeConfigToken = (variables: CreateEdgeConfigTokenVariables, signal?: AbortSignal) =>
   fetch<
-    DeleteDeploymentResponse,
-    DeleteDeploymentError,
-    undefined,
+    CreateEdgeConfigTokenResponse,
+    CreateEdgeConfigTokenError,
+    CreateEdgeConfigTokenRequestBody,
     {},
-    DeleteDeploymentQueryParams,
-    DeleteDeploymentPathParams
-  >({ url: '/v13/deployments/{id}', method: 'delete', ...variables, signal });
+    CreateEdgeConfigTokenQueryParams,
+    CreateEdgeConfigTokenPathParams
+  >({ url: '/v1/edge-config/{edgeConfigId}/token', method: 'post', ...variables, signal });
 
-export type GetDeploymentsQueryParams = {
+export type ListUserEventsQueryParams = {
   /**
-   * Name of the deployment.
+   * Maximum number of items which may be returned.
    *
-   * @example docs
-   */
-  app?: string;
-  /**
-   * Gets the deployment created after this Date timestamp. (default: current time)
-   *
-   * @example 1612948664566
-   * @deprecated true
-   */
-  from?: number;
-  /**
-   * Maximum number of deployments to list from a request.
-   *
-   * @example 10
+   * @example 20
    */
   limit?: number;
   /**
-   * Filter deployments from the given `projectId`.
+   * Timestamp to only include items created since then.
    *
-   * @example QmXGTs7mvAMMC7WW5ebrM33qKG32QK3h4vmQMjmY
+   * @example 2019-12-08T10:00:38.976Z
    */
-  projectId?: string;
+  since?: string;
   /**
-   * Filter deployments based on the environment.
+   * Timestamp to only include items created until then.
    *
-   * @example production
+   * @example 2019-12-09T23:00:38.976Z
    */
-  target?: 'production' | 'preview';
+  until?: string;
   /**
-   * Gets the deployment created before this Date timestamp. (default: current time)
+   * Comma-delimited list of event \"types\" to filter the results by.
    *
-   * @example 1612948664566
-   * @deprecated true
+   * @example login,team-member-join,domain-buy
    */
-  to?: number;
+  types?: string;
   /**
-   * Filter out deployments based on users who have created the deployment.
+   * When retrieving events for a Team, the `userId` parameter may be specified to filter events generated by a specific member of the Team.
    *
-   * @example kr1PsOIzqEL5Xg6M4VZcZosf,K4amb7K9dAt5R2vBJWF32bmY
+   * @example aeIInYVk59zbFF2SxfyxxmuO
    */
-  users?: string;
-  /**
-   * Get Deployments created after this JavaScript timestamp.
-   *
-   * @example 1540095775941
-   */
-  since?: number;
-  /**
-   * Get Deployments created before this JavaScript timestamp.
-   *
-   * @example 1540095775951
-   */
-  until?: number;
-  /**
-   * Filter deployments based on their state (`BUILDING`, `ERROR`, `INITIALIZING`, `QUEUED`, `READY`, `CANCELED`)
-   *
-   * @example BUILDING,READY
-   */
-  state?: string;
-  /**
-   * Filter deployments based on their rollback candidacy
-   */
-  rollbackCandidate?: boolean;
+  userId?: string;
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
   teamId?: string;
 };
 
-export type GetDeploymentsError = Fetcher.ErrorWrapper<undefined>;
+export type ListUserEventsError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetDeploymentsResponse = {
-  pagination: Schemas.Pagination;
-  deployments: {
-    /**
-     * The unique identifier of the deployment.
-     *
-     * @example dpl_2euZBFqxYdDMDG1jTrHFnNZ2eUVa
-     */
-    uid: string;
-    /**
-     * The name of the deployment.
-     *
-     * @example docs
-     */
-    name: string;
-    /**
-     * The URL of the deployment.
-     *
-     * @example docs-9jaeg38me.vercel.app
-     */
-    url: string;
-    /**
-     * Timestamp of when the deployment got created.
-     *
-     * @example 1609492210000
-     */
-    created: number;
-    /**
-     * The source of the deployment.
-     *
-     * @example cli
-     */
-    source?: 'cli' | 'git' | 'import' | 'import/repo' | 'clone/repo';
-    /**
-     * In which state is the deployment.
-     *
-     * @example READY
-     */
-    state?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-    /**
-     * The type of the deployment.
-     *
-     * @example LAMBDAS
-     */
-    type: 'LAMBDAS';
-    /**
-     * Metadata information of the user who created the deployment.
-     */
-    creator: {
-      /**
-       * The unique identifier of the user.
-       *
-       * @example eLrCnEgbKhsHyfbiNR7E8496
-       */
-      uid: string;
-      /**
-       * The email address of the user.
-       *
-       * @example example@example.com
-       */
-      email?: string;
-      /**
-       * The username of the user.
-       *
-       * @example johndoe
-       */
-      username?: string;
-      /**
-       * The GitHub login of the user.
-       *
-       * @example johndoe
-       */
-      githubLogin?: string;
-      /**
-       * The GitLab login of the user.
-       *
-       * @example johndoe
-       */
-      gitlabLogin?: string;
-    };
-    /**
-     * Metadata information from the Git provider.
-     */
-    meta?: {
-      [key: string]: string;
-    };
-    /**
-     * On which environment has the deployment been deployed to.
-     *
-     * @example production
-     */
-    target?: 'production' | 'staging' | null;
-    /**
-     * An error object in case aliasing of the deployment failed.
-     */
-    aliasError?: {
-      code: string;
-      message: string;
-    } | null;
-    aliasAssigned?: number | boolean | null;
-    /**
-     * Timestamp of when the deployment got created.
-     *
-     * @example 1609492210000
-     */
-    createdAt?: number;
-    /**
-     * Timestamp of when the deployment started building at.
-     *
-     * @example 1609492210000
-     */
-    buildingAt?: number;
-    /**
-     * Timestamp of when the deployment got ready.
-     *
-     * @example 1609492210000
-     */
-    ready?: number;
-    /**
-     * State of all registered checks
-     */
-    checksState?: 'registered' | 'running' | 'completed';
-    /**
-     * Conclusion for checks
-     */
-    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-    /**
-     * Vercel URL to inspect the deployment.
-     *
-     * @example https://vercel.com/acme/nextjs/J1hXN00qjUeoYfpEEf7dnDtpSiVq
-     */
-    inspectorUrl: string | null;
-    /**
-     * Deployment can be used for instant rollback
-     */
-    isRollbackCandidate?: boolean | null;
-    /**
-     * The project settings which was used for this deployment
-     */
-    projectSettings?: {
-      framework?:
-        | 'blitzjs'
-        | 'nextjs'
-        | 'gatsby'
-        | 'remix'
-        | 'astro'
-        | 'hexo'
-        | 'eleventy'
-        | 'docusaurus-2'
-        | 'docusaurus'
-        | 'preact'
-        | 'solidstart'
-        | 'dojo'
-        | 'ember'
-        | 'vue'
-        | 'scully'
-        | 'ionic-angular'
-        | 'angular'
-        | 'polymer'
-        | 'svelte'
-        | 'sveltekit'
-        | 'sveltekit-1'
-        | 'ionic-react'
-        | 'create-react-app'
-        | 'gridsome'
-        | 'umijs'
-        | 'sapper'
-        | 'saber'
-        | 'stencil'
-        | 'nuxtjs'
-        | 'redwoodjs'
-        | 'hugo'
-        | 'jekyll'
-        | 'brunch'
-        | 'middleman'
-        | 'zola'
-        | 'hydrogen'
-        | 'vite'
-        | 'vitepress'
-        | 'vuepress'
-        | 'parcel'
-        | 'sanity'
-        | 'storybook'
-        | null;
-      gitForkProtection?: boolean;
-      gitLFS?: boolean;
-      devCommand?: string | null;
-      installCommand?: string | null;
-      buildCommand?: string | null;
-      nodeVersion?: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
-      outputDirectory?: string | null;
-      publicSource?: boolean | null;
-      rootDirectory?: string | null;
-      serverlessFunctionRegion?: string | null;
-      sourceFilesOutsideRootDirectory?: boolean;
-      commandForIgnoringBuildStep?: string | null;
-      createdAt?: number;
-      skipGitConnectDuringLink?: boolean;
-    };
-    /**
-     * The ID of Vercel Connect configuration used for this deployment
-     */
-    connectConfigurationId?: string;
-  }[];
+export type ListUserEventsResponse = {
+  /**
+   * Array of events generated by the User.
+   */
+  events: Schemas.UserEvent[];
 };
 
-export type GetDeploymentsVariables = {
-  queryParams?: GetDeploymentsQueryParams;
+export type ListUserEventsVariables = {
+  queryParams?: ListUserEventsQueryParams;
 } & FetcherExtraProps;
 
 /**
- * List deployments under the account corresponding to the API token. If a deployment hasn't finished uploading (is incomplete), the `url` property will have a value of `null`.
+ * Retrieves a list of "events" generated by the User on Vercel. Events are generated when the User performs a particular action, such as logging in, creating a deployment, and joining a Team (just to name a few). When the `teamId` parameter is supplied, then the events that are returned will be in relation to the Team that was specified.
  */
-export const getDeployments = (variables: GetDeploymentsVariables, signal?: AbortSignal) =>
-  fetch<GetDeploymentsResponse, GetDeploymentsError, undefined, {}, GetDeploymentsQueryParams, {}>({
-    url: '/v6/deployments',
+export const listUserEvents = (variables: ListUserEventsVariables, signal?: AbortSignal) =>
+  fetch<ListUserEventsResponse, ListUserEventsError, undefined, {}, ListUserEventsQueryParams, {}>({
+    url: '/v3/events',
     method: 'get',
     ...variables,
     signal
   });
+
+export type GetConfigurationsQueryParams = {
+  view: 'account' | 'project';
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetConfigurationsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetConfigurationsVariables = {
+  queryParams: GetConfigurationsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Allows to retrieve all configurations for an authenticated integration. When the `project` view is used, configurations generated for the authorization flow will be filtered out of the results.
+ */
+export const getConfigurations = (variables: GetConfigurationsVariables, signal?: AbortSignal) =>
+  fetch<
+    | {
+        /**
+         * A timestamp that tells you when the configuration was installed successfully
+         *
+         * @example 1558531915505
+         */
+        completedAt?: number;
+        /**
+         * A timestamp that tells you when the configuration was created
+         *
+         * @example 1558531915505
+         */
+        createdAt: number;
+        /**
+         * The unique identifier of the configuration
+         *
+         * @example icfg_3bwCLgxL8qt5kjRLcv2Dit7F
+         */
+        id: string;
+        /**
+         * The unique identifier of the app the configuration was created for
+         *
+         * @example oac_xzpVzcUOgcB1nrVlirtKhbWV
+         */
+        integrationId: string;
+        /**
+         * Will be truthy in those cases where the configuration was created to authorize a client through the OAuth2 flow.
+         *
+         * @example false
+         */
+        oauthConfiguration?: boolean;
+        /**
+         * The user or team ID that owns the configuration
+         *
+         * @example kr1PsOIzqEL5Xg6M4VZcZosf
+         */
+        ownerId: string;
+        /**
+         * When a configuration is limited to access certain projects, this will contain each of the project ID it is allowed to access. If it is not defined, the configuration has full access.
+         *
+         * @example prj_xQxbutw1HpL6HLYPAzt5h75m8NjO
+         */
+        projects?: string[];
+        /**
+         * Source defines where the configuration was installed from. It is used to analyze user engagement for integration installations in product metrics.
+         *
+         * @example marketplace
+         */
+        source?: 'marketplace' | 'deploy-button' | 'oauth' | 'external';
+        removedLogDrainsAt?: number;
+        removedProjectEnvsAt?: number;
+        removedTokensAt?: number;
+        removedWebhooksAt?: number;
+        /**
+         * The slug of the integration the configuration is created for.
+         *
+         * @example slack
+         */
+        slug: string;
+        /**
+         * When the configuration was created for a team, this will show the ID of the team.
+         *
+         * @example team_nLlpyC6RE1qxydlFKbrxDlud
+         */
+        teamId?: string | null;
+        type: 'integration-configuration';
+        /**
+         * A timestamp that tells you when the configuration was updated.
+         *
+         * @example 1558531915505
+         */
+        updatedAt: number;
+        /**
+         * The ID of the user that created the configuration.
+         *
+         * @example kr1PsOIzqEL5Xg6M4VZcZosf
+         */
+        userId: string;
+        /**
+         * The resources that are allowed to be accessed by the configuration.
+         *
+         * @example read:project
+         * @example read-write:log-drain
+         */
+        scopes: string[];
+        scopesQueue?: {
+          scopes: {
+            added: (
+              | 'read:integration-configuration'
+              | 'read-write:integration-configuration'
+              | 'read:deployment'
+              | 'read-write:deployment'
+              | 'read-write:deployment-check'
+              | 'read:project'
+              | 'read-write:project'
+              | 'read-write:project-env-vars'
+              | 'read-write:global-project-env-vars'
+              | 'read:team'
+              | 'read:user'
+              | 'read-write:log-drain'
+              | 'read:domain'
+              | 'read-write:domain'
+              | 'read-write:edge-config'
+              | 'read-write:otel-endpoint'
+              | 'read:monitoring'
+            )[];
+            upgraded: (
+              | 'read:integration-configuration'
+              | 'read-write:integration-configuration'
+              | 'read:deployment'
+              | 'read-write:deployment'
+              | 'read-write:deployment-check'
+              | 'read:project'
+              | 'read-write:project'
+              | 'read-write:project-env-vars'
+              | 'read-write:global-project-env-vars'
+              | 'read:team'
+              | 'read:user'
+              | 'read-write:log-drain'
+              | 'read:domain'
+              | 'read-write:domain'
+              | 'read-write:edge-config'
+              | 'read-write:otel-endpoint'
+              | 'read:monitoring'
+            )[];
+          };
+          note: string;
+          requestedAt: number;
+          confirmedAt?: number;
+        }[];
+        /**
+         * A timestamp that tells you when the configuration was disabled. Note: Configurations can be disabled when the associated user loses access to a team. They do not function during this time until the configuration is 'transferred', meaning the associated user is changed to one with access to the team.
+         *
+         * @example 1558531915505
+         */
+        disabledAt?: number;
+        /**
+         * A timestamp that tells you when the configuration was updated.
+         *
+         * @example 1558531915505
+         */
+        deletedAt?: number | null;
+      }[]
+    | {
+        integration: {
+          name: string;
+          icon: string;
+          category: string;
+          isLegacy: boolean;
+          flags?: string[];
+          assignedBetaLabelAt?: number;
+        };
+        /**
+         * A timestamp that tells you when the configuration was installed successfully
+         *
+         * @example 1558531915505
+         */
+        completedAt?: number;
+        /**
+         * A timestamp that tells you when the configuration was created
+         *
+         * @example 1558531915505
+         */
+        createdAt: number;
+        /**
+         * The unique identifier of the configuration
+         *
+         * @example icfg_3bwCLgxL8qt5kjRLcv2Dit7F
+         */
+        id: string;
+        /**
+         * The unique identifier of the app the configuration was created for
+         *
+         * @example oac_xzpVzcUOgcB1nrVlirtKhbWV
+         */
+        integrationId: string;
+        /**
+         * Will be truthy in those cases where the configuration was created to authorize a client through the OAuth2 flow.
+         *
+         * @example false
+         */
+        oauthConfiguration?: boolean;
+        /**
+         * The user or team ID that owns the configuration
+         *
+         * @example kr1PsOIzqEL5Xg6M4VZcZosf
+         */
+        ownerId: string;
+        /**
+         * When a configuration is limited to access certain projects, this will contain each of the project ID it is allowed to access. If it is not defined, the configuration has full access.
+         *
+         * @example prj_xQxbutw1HpL6HLYPAzt5h75m8NjO
+         */
+        projects?: string[];
+        /**
+         * Source defines where the configuration was installed from. It is used to analyze user engagement for integration installations in product metrics.
+         *
+         * @example marketplace
+         */
+        source?: 'marketplace' | 'deploy-button' | 'oauth' | 'external';
+        removedLogDrainsAt?: number;
+        removedProjectEnvsAt?: number;
+        removedTokensAt?: number;
+        removedWebhooksAt?: number;
+        /**
+         * The slug of the integration the configuration is created for.
+         *
+         * @example slack
+         */
+        slug: string;
+        /**
+         * When the configuration was created for a team, this will show the ID of the team.
+         *
+         * @example team_nLlpyC6RE1qxydlFKbrxDlud
+         */
+        teamId?: string | null;
+        type: 'integration-configuration';
+        /**
+         * A timestamp that tells you when the configuration was updated.
+         *
+         * @example 1558531915505
+         */
+        updatedAt: number;
+        /**
+         * The ID of the user that created the configuration.
+         *
+         * @example kr1PsOIzqEL5Xg6M4VZcZosf
+         */
+        userId: string;
+        /**
+         * The resources that are allowed to be accessed by the configuration.
+         *
+         * @example read:project
+         * @example read-write:log-drain
+         */
+        scopes: string[];
+        scopesQueue?: {
+          scopes: {
+            added: (
+              | 'read:integration-configuration'
+              | 'read-write:integration-configuration'
+              | 'read:deployment'
+              | 'read-write:deployment'
+              | 'read-write:deployment-check'
+              | 'read:project'
+              | 'read-write:project'
+              | 'read-write:project-env-vars'
+              | 'read-write:global-project-env-vars'
+              | 'read:team'
+              | 'read:user'
+              | 'read-write:log-drain'
+              | 'read:domain'
+              | 'read-write:domain'
+              | 'read-write:edge-config'
+              | 'read-write:otel-endpoint'
+              | 'read:monitoring'
+            )[];
+            upgraded: (
+              | 'read:integration-configuration'
+              | 'read-write:integration-configuration'
+              | 'read:deployment'
+              | 'read-write:deployment'
+              | 'read-write:deployment-check'
+              | 'read:project'
+              | 'read-write:project'
+              | 'read-write:project-env-vars'
+              | 'read-write:global-project-env-vars'
+              | 'read:team'
+              | 'read:user'
+              | 'read-write:log-drain'
+              | 'read:domain'
+              | 'read-write:domain'
+              | 'read-write:edge-config'
+              | 'read-write:otel-endpoint'
+              | 'read:monitoring'
+            )[];
+          };
+          note: string;
+          requestedAt: number;
+          confirmedAt?: number;
+        }[];
+        /**
+         * A timestamp that tells you when the configuration was disabled. Note: Configurations can be disabled when the associated user loses access to a team. They do not function during this time until the configuration is 'transferred', meaning the associated user is changed to one with access to the team.
+         *
+         * @example 1558531915505
+         */
+        disabledAt?: number;
+        /**
+         * A timestamp that tells you when the configuration was updated.
+         *
+         * @example 1558531915505
+         */
+        deletedAt?: number | null;
+      }[],
+    GetConfigurationsError,
+    undefined,
+    {},
+    GetConfigurationsQueryParams,
+    {}
+  >({ url: '/v1/integrations/configurations', method: 'get', ...variables, signal });
+
+export type GetConfigurationPathParams = {
+  /**
+   * ID of the configuration to check
+   *
+   * @example icfg_cuwj0AdCdH3BwWT4LPijCC7t
+   */
+  id: string;
+};
+
+export type GetConfigurationQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetConfigurationError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetConfigurationVariables = {
+  pathParams: GetConfigurationPathParams;
+  queryParams?: GetConfigurationQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Allows to retrieve a the configuration with the provided id in case it exists. The authenticated user or team must be the owner of the config in order to access it.
+ */
+export const getConfiguration = (variables: GetConfigurationVariables, signal?: AbortSignal) =>
+  fetch<
+    | {
+        /**
+         * A timestamp that tells you when the configuration was installed successfully
+         *
+         * @example 1558531915505
+         */
+        completedAt?: number;
+        /**
+         * A timestamp that tells you when the configuration was created
+         *
+         * @example 1558531915505
+         */
+        createdAt: number;
+        /**
+         * The unique identifier of the configuration
+         *
+         * @example icfg_3bwCLgxL8qt5kjRLcv2Dit7F
+         */
+        id: string;
+        /**
+         * The unique identifier of the app the configuration was created for
+         *
+         * @example oac_xzpVzcUOgcB1nrVlirtKhbWV
+         */
+        integrationId: string;
+        /**
+         * Will be truthy in those cases where the configuration was created to authorize a client through the OAuth2 flow.
+         *
+         * @example false
+         */
+        oauthConfiguration?: boolean;
+        /**
+         * The user or team ID that owns the configuration
+         *
+         * @example kr1PsOIzqEL5Xg6M4VZcZosf
+         */
+        ownerId: string;
+        /**
+         * When a configuration is limited to access certain projects, this will contain each of the project ID it is allowed to access. If it is not defined, the configuration has full access.
+         *
+         * @example prj_xQxbutw1HpL6HLYPAzt5h75m8NjO
+         */
+        projects?: string[];
+        /**
+         * Source defines where the configuration was installed from. It is used to analyze user engagement for integration installations in product metrics.
+         *
+         * @example marketplace
+         */
+        source?: 'marketplace' | 'deploy-button' | 'oauth' | 'external';
+        removedLogDrainsAt?: number;
+        removedProjectEnvsAt?: number;
+        removedTokensAt?: number;
+        removedWebhooksAt?: number;
+        /**
+         * The slug of the integration the configuration is created for.
+         *
+         * @example slack
+         */
+        slug: string;
+        /**
+         * When the configuration was created for a team, this will show the ID of the team.
+         *
+         * @example team_nLlpyC6RE1qxydlFKbrxDlud
+         */
+        teamId?: string | null;
+        type: 'integration-configuration';
+        /**
+         * A timestamp that tells you when the configuration was updated.
+         *
+         * @example 1558531915505
+         */
+        updatedAt: number;
+        /**
+         * The ID of the user that created the configuration.
+         *
+         * @example kr1PsOIzqEL5Xg6M4VZcZosf
+         */
+        userId: string;
+        /**
+         * The resources that are allowed to be accessed by the configuration.
+         *
+         * @example read:project
+         * @example read-write:log-drain
+         */
+        scopes: string[];
+        scopesQueue?: {
+          scopes: {
+            added: (
+              | 'read:integration-configuration'
+              | 'read-write:integration-configuration'
+              | 'read:deployment'
+              | 'read-write:deployment'
+              | 'read-write:deployment-check'
+              | 'read:project'
+              | 'read-write:project'
+              | 'read-write:project-env-vars'
+              | 'read-write:global-project-env-vars'
+              | 'read:team'
+              | 'read:user'
+              | 'read-write:log-drain'
+              | 'read:domain'
+              | 'read-write:domain'
+              | 'read-write:edge-config'
+              | 'read-write:otel-endpoint'
+              | 'read:monitoring'
+            )[];
+            upgraded: (
+              | 'read:integration-configuration'
+              | 'read-write:integration-configuration'
+              | 'read:deployment'
+              | 'read-write:deployment'
+              | 'read-write:deployment-check'
+              | 'read:project'
+              | 'read-write:project'
+              | 'read-write:project-env-vars'
+              | 'read-write:global-project-env-vars'
+              | 'read:team'
+              | 'read:user'
+              | 'read-write:log-drain'
+              | 'read:domain'
+              | 'read-write:domain'
+              | 'read-write:edge-config'
+              | 'read-write:otel-endpoint'
+              | 'read:monitoring'
+            )[];
+          };
+          note: string;
+          requestedAt: number;
+          confirmedAt?: number;
+        }[];
+        /**
+         * A timestamp that tells you when the configuration was disabled. Note: Configurations can be disabled when the associated user loses access to a team. They do not function during this time until the configuration is 'transferred', meaning the associated user is changed to one with access to the team.
+         *
+         * @example 1558531915505
+         */
+        disabledAt?: number;
+        /**
+         * A timestamp that tells you when the configuration was updated.
+         *
+         * @example 1558531915505
+         */
+        deletedAt?: number | null;
+      }
+    | {
+        /**
+         * A string representing the permission for projects. Possible values are `all` or `selected`.
+         *
+         * @example all
+         */
+        projectSelection: 'selected' | 'all';
+        /**
+         * A timestamp that tells you when the configuration was installed successfully
+         *
+         * @example 1558531915505
+         */
+        completedAt?: number;
+        /**
+         * A timestamp that tells you when the configuration was created
+         *
+         * @example 1558531915505
+         */
+        createdAt: number;
+        /**
+         * The unique identifier of the configuration
+         *
+         * @example icfg_3bwCLgxL8qt5kjRLcv2Dit7F
+         */
+        id: string;
+        /**
+         * The unique identifier of the app the configuration was created for
+         *
+         * @example oac_xzpVzcUOgcB1nrVlirtKhbWV
+         */
+        integrationId: string;
+        /**
+         * Will be truthy in those cases where the configuration was created to authorize a client through the OAuth2 flow.
+         *
+         * @example false
+         */
+        oauthConfiguration?: boolean;
+        /**
+         * The user or team ID that owns the configuration
+         *
+         * @example kr1PsOIzqEL5Xg6M4VZcZosf
+         */
+        ownerId: string;
+        /**
+         * When a configuration is limited to access certain projects, this will contain each of the project ID it is allowed to access. If it is not defined, the configuration has full access.
+         *
+         * @example prj_xQxbutw1HpL6HLYPAzt5h75m8NjO
+         */
+        projects?: string[];
+        /**
+         * Source defines where the configuration was installed from. It is used to analyze user engagement for integration installations in product metrics.
+         *
+         * @example marketplace
+         */
+        source?: 'marketplace' | 'deploy-button' | 'oauth' | 'external';
+        removedLogDrainsAt?: number;
+        removedProjectEnvsAt?: number;
+        removedTokensAt?: number;
+        removedWebhooksAt?: number;
+        /**
+         * The slug of the integration the configuration is created for.
+         *
+         * @example slack
+         */
+        slug: string;
+        /**
+         * When the configuration was created for a team, this will show the ID of the team.
+         *
+         * @example team_nLlpyC6RE1qxydlFKbrxDlud
+         */
+        teamId?: string | null;
+        type: 'integration-configuration';
+        /**
+         * A timestamp that tells you when the configuration was updated.
+         *
+         * @example 1558531915505
+         */
+        updatedAt: number;
+        /**
+         * The ID of the user that created the configuration.
+         *
+         * @example kr1PsOIzqEL5Xg6M4VZcZosf
+         */
+        userId: string;
+        /**
+         * The resources that are allowed to be accessed by the configuration.
+         *
+         * @example read:project
+         * @example read-write:log-drain
+         */
+        scopes: string[];
+        scopesQueue?: {
+          scopes: {
+            added: (
+              | 'read:integration-configuration'
+              | 'read-write:integration-configuration'
+              | 'read:deployment'
+              | 'read-write:deployment'
+              | 'read-write:deployment-check'
+              | 'read:project'
+              | 'read-write:project'
+              | 'read-write:project-env-vars'
+              | 'read-write:global-project-env-vars'
+              | 'read:team'
+              | 'read:user'
+              | 'read-write:log-drain'
+              | 'read:domain'
+              | 'read-write:domain'
+              | 'read-write:edge-config'
+              | 'read-write:otel-endpoint'
+              | 'read:monitoring'
+            )[];
+            upgraded: (
+              | 'read:integration-configuration'
+              | 'read-write:integration-configuration'
+              | 'read:deployment'
+              | 'read-write:deployment'
+              | 'read-write:deployment-check'
+              | 'read:project'
+              | 'read-write:project'
+              | 'read-write:project-env-vars'
+              | 'read-write:global-project-env-vars'
+              | 'read:team'
+              | 'read:user'
+              | 'read-write:log-drain'
+              | 'read:domain'
+              | 'read-write:domain'
+              | 'read-write:edge-config'
+              | 'read-write:otel-endpoint'
+              | 'read:monitoring'
+            )[];
+          };
+          note: string;
+          requestedAt: number;
+          confirmedAt?: number;
+        }[];
+        /**
+         * A timestamp that tells you when the configuration was disabled. Note: Configurations can be disabled when the associated user loses access to a team. They do not function during this time until the configuration is 'transferred', meaning the associated user is changed to one with access to the team.
+         *
+         * @example 1558531915505
+         */
+        disabledAt?: number;
+        /**
+         * A timestamp that tells you when the configuration was updated.
+         *
+         * @example 1558531915505
+         */
+        deletedAt?: number | null;
+        canConfigureOpenTelemetry?: boolean;
+      },
+    GetConfigurationError,
+    undefined,
+    {},
+    GetConfigurationQueryParams,
+    GetConfigurationPathParams
+  >({ url: '/v1/integrations/configuration/{id}', method: 'get', ...variables, signal });
+
+export type DeleteConfigurationPathParams = {
+  id: string;
+};
+
+export type DeleteConfigurationQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type DeleteConfigurationError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteConfigurationVariables = {
+  pathParams: DeleteConfigurationPathParams;
+  queryParams?: DeleteConfigurationQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Allows to remove the configuration with the `id` provided in the parameters. The configuration and all of its resources will be removed. This includes Webhooks, LogDrains and Project Env variables.
+ */
+export const deleteConfiguration = (variables: DeleteConfigurationVariables, signal?: AbortSignal) =>
+  fetch<
+    undefined,
+    DeleteConfigurationError,
+    undefined,
+    {},
+    DeleteConfigurationQueryParams,
+    DeleteConfigurationPathParams
+  >({ url: '/v1/integrations/configuration/{id}', method: 'delete', ...variables, signal });
+
+export type GetIntegrationLogDrainsQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetIntegrationLogDrainsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetIntegrationLogDrainsResponse = {
+  /**
+   * The oauth2 client application id that created this log drain
+   *
+   * @example oac_xRhY4LAB7yLhUADD69EvV7ct
+   */
+  clientId?: string;
+  /**
+   * The client configuration this log drain was created with
+   *
+   * @example icfg_cuwj0AdCdH3BwWT4LPijCC7t
+   */
+  configurationId?: string;
+  /**
+   * A timestamp that tells you when the log drain was created
+   *
+   * @example 1558531915505
+   */
+  createdAt: number;
+  /**
+   * The unique identifier of the log drain. Always prefixed with `ld_`
+   *
+   * @example ld_nBuA7zCID8g4QZ8g
+   */
+  id: string;
+  /**
+   * The delivery log format
+   *
+   * @example json
+   */
+  deliveryFormat?: 'json' | 'ndjson' | 'syslog';
+  /**
+   * The name of the log drain
+   *
+   * @example My first log drain
+   */
+  name: string;
+  /**
+   * The identifier of the team or user whose events will trigger the log drain
+   *
+   * @example kr1PsOIzqEL5Xg6M4VZcZosf
+   */
+  ownerId: string;
+  /**
+   * @example AbCgVkqoxXeXCDWehVir51LHGrrcWL4mkYm14W6UBPWQeb
+   */
+  projectId?: string | null;
+  /**
+   * The identifier of the projects this log drain is associated with
+   *
+   * @example AbCgVkqoxXeXCDWehVir51LHGrrcWL4mkYm14W6UBPWQeb
+   */
+  projectIds?: string[];
+  /**
+   * The URL to call when logs are generated
+   *
+   * @example https://example.com/log-drain
+   */
+  url: string;
+  /**
+   * The sources from which logs are currently being delivered to this log drain.
+   *
+   * @example build
+   * @example edge
+   */
+  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
+  /**
+   * Whether the log drain was created by an integration or by a user
+   *
+   * @example integration
+   */
+  createdFrom?: 'self-served' | 'integration';
+  /**
+   * The headers to send with the request
+   *
+   * @example {"Authorization": "Bearer 123"}
+   */
+  headers?: {
+    [key: string]: string;
+  };
+  /**
+   * The environment of log drain
+   *
+   * @example production
+   */
+  environment?: 'production' | 'preview';
+  /**
+   * The branch regexp of log drain
+   *
+   * @example feature/*
+   */
+  branch?: string;
+}[];
+
+export type GetIntegrationLogDrainsVariables = {
+  queryParams?: GetIntegrationLogDrainsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves a list of all Integration log drains that are defined for the authorized account. When using an OAuth2 token, the list is limited to log drains created by the authenticated integration.
+ */
+export const getIntegrationLogDrains = (variables: GetIntegrationLogDrainsVariables, signal?: AbortSignal) =>
+  fetch<
+    GetIntegrationLogDrainsResponse,
+    GetIntegrationLogDrainsError,
+    undefined,
+    {},
+    GetIntegrationLogDrainsQueryParams,
+    {}
+  >({ url: '/v2/integrations/log-drains', method: 'get', ...variables, signal });
+
+export type CreateLogDrainQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type CreateLogDrainError = Fetcher.ErrorWrapper<undefined>;
+
+export type CreateLogDrainResponse = {
+  /**
+   * The oauth2 client application id that created this log drain
+   *
+   * @example oac_xRhY4LAB7yLhUADD69EvV7ct
+   */
+  clientId?: string;
+  /**
+   * The client configuration this log drain was created with
+   *
+   * @example icfg_cuwj0AdCdH3BwWT4LPijCC7t
+   */
+  configurationId?: string;
+  /**
+   * A timestamp that tells you when the log drain was created
+   *
+   * @example 1558531915505
+   */
+  createdAt: number;
+  /**
+   * The unique identifier of the log drain. Always prefixed with `ld_`
+   *
+   * @example ld_nBuA7zCID8g4QZ8g
+   */
+  id: string;
+  /**
+   * The delivery log format
+   *
+   * @example json
+   */
+  deliveryFormat?: 'json' | 'ndjson' | 'syslog';
+  /**
+   * The name of the log drain
+   *
+   * @example My first log drain
+   */
+  name: string;
+  /**
+   * The identifier of the team or user whose events will trigger the log drain
+   *
+   * @example kr1PsOIzqEL5Xg6M4VZcZosf
+   */
+  ownerId: string;
+  /**
+   * @example AbCgVkqoxXeXCDWehVir51LHGrrcWL4mkYm14W6UBPWQeb
+   */
+  projectId?: string | null;
+  /**
+   * The identifier of the projects this log drain is associated with
+   *
+   * @example AbCgVkqoxXeXCDWehVir51LHGrrcWL4mkYm14W6UBPWQeb
+   */
+  projectIds?: string[];
+  /**
+   * The URL to call when logs are generated
+   *
+   * @example https://example.com/log-drain
+   */
+  url: string;
+  /**
+   * The sources from which logs are currently being delivered to this log drain.
+   *
+   * @example build
+   * @example edge
+   */
+  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
+  /**
+   * Whether the log drain was created by an integration or by a user
+   *
+   * @example integration
+   */
+  createdFrom?: 'self-served' | 'integration';
+  /**
+   * The headers to send with the request
+   *
+   * @example {"Authorization": "Bearer 123"}
+   */
+  headers?: {
+    [key: string]: string;
+  };
+  /**
+   * The environment of log drain
+   *
+   * @example production
+   */
+  environment?: 'preview' | 'production';
+  /**
+   * The branch regexp of log drain
+   *
+   * @example feature/*
+   */
+  branch?: string;
+};
+
+export type CreateLogDrainRequestBody = {
+  /**
+   * The name of the log drain
+   *
+   * @example My first log drain
+   * @maxLength 100
+   * @pattern ^[A-z0-9_ -]+$
+   */
+  name: string;
+  /**
+   * @minItems 1
+   * @maxItems 50
+   */
+  projectIds?: string[];
+  /**
+   * A secret to sign log drain notification headers so a consumer can verify their authenticity
+   *
+   * @example a1Xsfd325fXcs
+   * @maxLength 100
+   * @pattern ^[A-z0-9_ -]+$
+   */
+  secret?: string;
+  /**
+   * The delivery log format
+   *
+   * @example json
+   */
+  deliveryFormat?: 'json' | 'ndjson' | 'syslog';
+  /**
+   * The url where you will receive logs. The protocol must be `https://` or `http://` when type is `json` and `ndjson`, and `syslog+tls:` or `syslog:` when the type is `syslog`.
+   *
+   * @example https://example.com/log-drain
+   * @format uri
+   * @pattern ^(https?|syslog\\+tls|syslog)://
+   */
+  url: string;
+  /**
+   * @uniqueItems true
+   * @minItems 1
+   */
+  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external')[];
+  /**
+   * Headers to be sent together with the request
+   */
+  headers?: {
+    [key: string]: string;
+  };
+  /**
+   * The environment of log drain
+   *
+   * @example production
+   */
+  environment?: 'preview' | 'production';
+  /**
+   * The branch regexp of log drain
+   *
+   * @example feature/*
+   */
+  branch?: string;
+};
+
+export type CreateLogDrainVariables = {
+  body: CreateLogDrainRequestBody;
+  queryParams?: CreateLogDrainQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Creates an Integration log drain. This endpoint must be called with an OAuth2 client (integration), since log drains are tied to integrations. If it is called with a different token type it will produce a 400 error.
+ */
+export const createLogDrain = (variables: CreateLogDrainVariables, signal?: AbortSignal) =>
+  fetch<CreateLogDrainResponse, CreateLogDrainError, CreateLogDrainRequestBody, {}, CreateLogDrainQueryParams, {}>({
+    url: '/v2/integrations/log-drains',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type DeleteIntegrationLogDrainPathParams = {
+  /**
+   * ID of the log drain to be deleted
+   */
+  id: string;
+};
+
+export type DeleteIntegrationLogDrainQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type DeleteIntegrationLogDrainError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteIntegrationLogDrainVariables = {
+  pathParams: DeleteIntegrationLogDrainPathParams;
+  queryParams?: DeleteIntegrationLogDrainQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Deletes the Integration log drain with the provided `id`. When using an OAuth2 Token, the log drain can be deleted only if the integration owns it.
+ */
+export const deleteIntegrationLogDrain = (variables: DeleteIntegrationLogDrainVariables, signal?: AbortSignal) =>
+  fetch<
+    undefined,
+    DeleteIntegrationLogDrainError,
+    undefined,
+    {},
+    DeleteIntegrationLogDrainQueryParams,
+    DeleteIntegrationLogDrainPathParams
+  >({ url: '/v1/integrations/log-drains/{id}', method: 'delete', ...variables, signal });
+
+export type GitNamespacesQueryParams = {
+  provider?: 'github' | 'gitlab' | 'bitbucket';
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GitNamespacesError = Fetcher.ErrorWrapper<undefined>;
+
+export type GitNamespacesResponse = {
+  provider: string;
+  slug: string;
+  id: string | number;
+  name?: string;
+  ownerType: string;
+}[];
+
+export type GitNamespacesVariables = {
+  queryParams?: GitNamespacesQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Lists git namespaces for a supported provider. Supported providers are `github`, `gitlab` and `bitbucket`. If the provider is not provided, it will try to obtain it from the user that authenticated the request.
+ */
+export const gitNamespaces = (variables: GitNamespacesVariables, signal?: AbortSignal) =>
+  fetch<GitNamespacesResponse, GitNamespacesError, undefined, {}, GitNamespacesQueryParams, {}>({
+    url: '/v1/integrations/git-namespaces',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type SearchRepoQueryParams = {
+  query?: string;
+  namespaceId?: void | null;
+  provider?: 'github' | 'gitlab' | 'bitbucket';
+  installationId?: string;
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type SearchRepoError = Fetcher.ErrorWrapper<undefined>;
+
+export type SearchRepoResponse = {
+  gitAccount: {
+    provider: 'github' | 'gitlab' | 'bitbucket';
+    namespaceId: string | number | null;
+  };
+  repos: {
+    id: string | number;
+    name: string;
+    slug: string;
+    namespace: string;
+    private: boolean;
+    defaultBranch: string;
+    url: string;
+    updatedAt: number;
+    ownerType: 'team' | 'user';
+  }[];
+};
+
+export type SearchRepoVariables = {
+  queryParams?: SearchRepoQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Lists git repositories linked to a namespace `id` for a supported provider. A specific namespace `id` can be obtained via the `git-namespaces`  endpoint. Supported providers are `github`, `gitlab` and `bitbucket`. If the provider or namespace is not provided, it will try to obtain it from the user that authenticated the request.
+ */
+export const searchRepo = (variables: SearchRepoVariables, signal?: AbortSignal) =>
+  fetch<SearchRepoResponse, SearchRepoError, undefined, {}, SearchRepoQueryParams, {}>({
+    url: '/v1/integrations/search-repo',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type GetConfigurableLogDrainPathParams = {
+  id: string;
+};
+
+export type GetConfigurableLogDrainQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetConfigurableLogDrainResponse = {
+  /**
+   * The environment to filter logs by
+   *
+   * @example production
+   */
+  environment?: 'preview' | 'production';
+  /**
+   * The branch to filter logs by
+   *
+   * @example main
+   */
+  branch?: string;
+  /**
+   * The ID of the related integration configuration
+   */
+  configurationId?: string;
+  /**
+   * The key/value pairs that will be sent as headers to the log-drain
+   *
+   * @example {"foo":"bar"}
+   */
+  headers?: {
+    [key: string]: string;
+  };
+  /**
+   * The ID of the projects the deployment is associated with
+   *
+   * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
+   */
+  projectIds?: string[];
+  /**
+   * A number containing the date when the log-drain was created in in milliseconds
+   *
+   * @example 1567024758130
+   */
+  createdAt: number;
+  /**
+   * The log-drain id
+   *
+   * @example ld_GflD6EYyo7F4ViYS
+   */
+  id: string;
+  /**
+   * The unique ID of the team the deployment belongs to
+   *
+   * @example team_ZspSRT4ljIEEmMHgoDwKWDei
+   */
+  ownerId: string;
+  /**
+   * The log-drain defined sources
+   *
+   * @example lambda
+   * @example build
+   */
+  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
+  /**
+   * The log-drain defined delivery format
+   *
+   * @example json
+   * @example ndjson
+   */
+  deliveryFormat: 'json' | 'ndjson' | 'syslog';
+  /**
+   * A string with the URL of the log-drain
+   *
+   * @example https://my-log-drain.com
+   */
+  url: string;
+};
+
+export type GetConfigurableLogDrainVariables = {
+  pathParams: GetConfigurableLogDrainPathParams;
+  queryParams?: GetConfigurableLogDrainQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves a Configurable Log Drain. This endpoint must be called with a team AccessToken (integration OAuth2 clients are not allowed). Only log drains owned by the authenticated team can be accessed.
+ */
+export const getConfigurableLogDrain = (variables: GetConfigurableLogDrainVariables, signal?: AbortSignal) =>
+  fetch<
+    GetConfigurableLogDrainResponse,
+    GetConfigurableLogDrainError,
+    undefined,
+    {},
+    GetConfigurableLogDrainQueryParams,
+    GetConfigurableLogDrainPathParams
+  >({ url: '/v1/log-drains/{id}', method: 'get', ...variables, signal });
+
+export type DeleteConfigurableLogDrainPathParams = {
+  id: string;
+};
+
+export type DeleteConfigurableLogDrainQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type DeleteConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteConfigurableLogDrainVariables = {
+  pathParams: DeleteConfigurableLogDrainPathParams;
+  queryParams?: DeleteConfigurableLogDrainQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Deletes a Configurable Log Drain. This endpoint must be called with a team AccessToken (integration OAuth2 clients are not allowed). Only log drains owned by the authenticated team can be deleted.
+ */
+export const deleteConfigurableLogDrain = (variables: DeleteConfigurableLogDrainVariables, signal?: AbortSignal) =>
+  fetch<
+    undefined,
+    DeleteConfigurableLogDrainError,
+    undefined,
+    {},
+    DeleteConfigurableLogDrainQueryParams,
+    DeleteConfigurableLogDrainPathParams
+  >({ url: '/v1/log-drains/{id}', method: 'delete', ...variables, signal });
+
+export type GetConfigurableLogDrainsQueryParams = {
+  /**
+   * @pattern ^[a-zA-z0-9_]+$
+   */
+  projectId?: string;
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetConfigurableLogDrainsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetConfigurableLogDrainsResponse = {
+  /**
+   * The environment to filter logs by
+   *
+   * @example production
+   */
+  environment?: 'preview' | 'production';
+  /**
+   * The branch to filter logs by
+   *
+   * @example main
+   */
+  branch?: string;
+  /**
+   * The ID of the related integration configuration
+   */
+  configurationId?: string;
+  /**
+   * The key/value pairs that will be sent as headers to the log-drain
+   *
+   * @example {"foo":"bar"}
+   */
+  headers?: {
+    [key: string]: string;
+  };
+  /**
+   * The ID of the projects the deployment is associated with
+   *
+   * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
+   */
+  projectIds?: string[];
+  /**
+   * A number containing the date when the log-drain was created in in milliseconds
+   *
+   * @example 1567024758130
+   */
+  createdAt: number;
+  /**
+   * The log-drain id
+   *
+   * @example ld_GflD6EYyo7F4ViYS
+   */
+  id: string;
+  /**
+   * The unique ID of the team the deployment belongs to
+   *
+   * @example team_ZspSRT4ljIEEmMHgoDwKWDei
+   */
+  ownerId: string;
+  /**
+   * The log-drain defined sources
+   *
+   * @example lambda
+   * @example build
+   */
+  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
+  /**
+   * The log-drain defined delivery format
+   *
+   * @example json
+   * @example ndjson
+   */
+  deliveryFormat: 'json' | 'ndjson' | 'syslog';
+  /**
+   * A string with the URL of the log-drain
+   *
+   * @example https://my-log-drain.com
+   */
+  url: string;
+}[];
+
+export type GetConfigurableLogDrainsVariables = {
+  queryParams?: GetConfigurableLogDrainsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves a list of Configurable Log Drains. This endpoint must be called with a team AccessToken (integration OAuth2 clients are not allowed). Only log drains owned by the authenticated team can be accessed.
+ */
+export const getConfigurableLogDrains = (variables: GetConfigurableLogDrainsVariables, signal?: AbortSignal) =>
+  fetch<
+    GetConfigurableLogDrainsResponse,
+    GetConfigurableLogDrainsError,
+    undefined,
+    {},
+    GetConfigurableLogDrainsQueryParams,
+    {}
+  >({ url: '/v1/log-drains', method: 'get', ...variables, signal });
+
+export type CreateConfigurableLogDrainQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type CreateConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
+
+export type CreateConfigurableLogDrainResponse = {
+  /**
+   * The secret to validate the log-drain payload
+   */
+  secret?: string;
+  /**
+   * The environment to filter logs by
+   *
+   * @example production
+   */
+  environment?: 'preview' | 'production';
+  /**
+   * The branch to filter logs by
+   *
+   * @example main
+   */
+  branch?: string;
+  /**
+   * The ID of the related integration configuration
+   */
+  configurationId?: string;
+  /**
+   * The key/value pairs that will be sent as headers to the log-drain
+   *
+   * @example {"foo":"bar"}
+   */
+  headers?: {
+    [key: string]: string;
+  };
+  /**
+   * The ID of the projects the deployment is associated with
+   *
+   * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
+   */
+  projectIds?: string[];
+  /**
+   * A number containing the date when the log-drain was created in in milliseconds
+   *
+   * @example 1567024758130
+   */
+  createdAt: number;
+  /**
+   * The log-drain id
+   *
+   * @example ld_GflD6EYyo7F4ViYS
+   */
+  id: string;
+  /**
+   * The unique ID of the team the deployment belongs to
+   *
+   * @example team_ZspSRT4ljIEEmMHgoDwKWDei
+   */
+  ownerId: string;
+  /**
+   * The log-drain defined sources
+   *
+   * @example lambda
+   * @example build
+   */
+  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
+  /**
+   * The log-drain defined delivery format
+   *
+   * @example json
+   * @example ndjson
+   */
+  deliveryFormat: 'json' | 'ndjson' | 'syslog';
+  /**
+   * A string with the URL of the log-drain
+   *
+   * @example https://my-log-drain.com
+   */
+  url: string;
+};
+
+export type CreateConfigurableLogDrainRequestBody = {
+  /**
+   * The delivery log format
+   *
+   * @example json
+   */
+  deliveryFormat: 'json' | 'ndjson';
+  /**
+   * The log drain url
+   *
+   * @format uri
+   * @pattern ^(http|https)?://
+   */
+  url: string;
+  /**
+   * Headers to be sent together with the request
+   */
+  headers?: {
+    [key: string]: string;
+  };
+  /**
+   * @minItems 1
+   * @maxItems 50
+   */
+  projectIds?: string[];
+  /**
+   * @uniqueItems true
+   * @minItems 1
+   */
+  sources: ('static' | 'lambda' | 'build' | 'edge' | 'external')[];
+  /**
+   * The environment of log drain
+   *
+   * @example production
+   */
+  environment?: 'preview' | 'production';
+  /**
+   * The branch regexp of log drain
+   *
+   * @example feature/*
+   */
+  branch?: string;
+};
+
+export type CreateConfigurableLogDrainVariables = {
+  body: CreateConfigurableLogDrainRequestBody;
+  queryParams?: CreateConfigurableLogDrainQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Creates a configurable log drain. This endpoint must be called with a team AccessToken (integration OAuth2 clients are not allowed)
+ */
+export const createConfigurableLogDrain = (variables: CreateConfigurableLogDrainVariables, signal?: AbortSignal) =>
+  fetch<
+    CreateConfigurableLogDrainResponse,
+    CreateConfigurableLogDrainError,
+    CreateConfigurableLogDrainRequestBody,
+    {},
+    CreateConfigurableLogDrainQueryParams,
+    {}
+  >({ url: '/v1/log-drains', method: 'post', ...variables, signal });
 
 export type GetProjectsQueryParams = {
   /**
@@ -6792,9 +7575,6 @@ export type GetProjectsResponse = {
       name: string;
       forced?: boolean;
       id: string;
-      /**
-       * Construct a type with a set of properties K of type T
-       */
       meta?: {
         [key: string]: string;
       };
@@ -6922,9 +7702,6 @@ export type GetProjectsResponse = {
         name: string;
         forced?: boolean;
         id: string;
-        /**
-         * Construct a type with a set of properties K of type T
-         */
         meta?: {
           [key: string]: string;
         };
@@ -6987,6 +7764,7 @@ export type GetProjectsResponse = {
       deploymentPreview?: Schemas.ACLAction[];
       deploymentPrivate?: Schemas.ACLAction[];
       deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
+      deploymentPromote?: Schemas.ACLAction[];
       deploymentRollback?: Schemas.ACLAction[];
       domain?: Schemas.ACLAction[];
       domainAcceptDelegation?: Schemas.ACLAction[];
@@ -7083,12 +7861,20 @@ export type GetProjectsResponse = {
       jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
       requestedAt: number;
     } | null;
+    lastAliasRequest?: {
+      fromDeploymentId: string;
+      toDeploymentId: string;
+      jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+      requestedAt: number;
+      type: 'promote' | 'rollback';
+    } | null;
     hasFloatingAliases?: boolean;
-    /**
-     * Construct a type with a set of properties K of type T
-     */
     protectionBypass?: {
-      [key: string]: string;
+      [key: string]: {
+        createdAt: number;
+        createdBy: string;
+        scope?: 'automation-bypass' | 'shareable-link';
+      };
     };
     hasActiveBranches?: boolean;
     ipAllowlist?: {
@@ -7290,9 +8076,6 @@ export type CreateProjectResponse = {
     name: string;
     forced?: boolean;
     id: string;
-    /**
-     * Construct a type with a set of properties K of type T
-     */
     meta?: {
       [key: string]: string;
     };
@@ -7420,9 +8203,6 @@ export type CreateProjectResponse = {
       name: string;
       forced?: boolean;
       id: string;
-      /**
-       * Construct a type with a set of properties K of type T
-       */
       meta?: {
         [key: string]: string;
       };
@@ -7485,6 +8265,7 @@ export type CreateProjectResponse = {
     deploymentPreview?: Schemas.ACLAction[];
     deploymentPrivate?: Schemas.ACLAction[];
     deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
+    deploymentPromote?: Schemas.ACLAction[];
     deploymentRollback?: Schemas.ACLAction[];
     domain?: Schemas.ACLAction[];
     domainAcceptDelegation?: Schemas.ACLAction[];
@@ -7581,12 +8362,20 @@ export type CreateProjectResponse = {
     jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
     requestedAt: number;
   } | null;
+  lastAliasRequest?: {
+    fromDeploymentId: string;
+    toDeploymentId: string;
+    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+    requestedAt: number;
+    type: 'promote' | 'rollback';
+  } | null;
   hasFloatingAliases?: boolean;
-  /**
-   * Construct a type with a set of properties K of type T
-   */
   protectionBypass?: {
-    [key: string]: string;
+    [key: string]: {
+      createdAt: number;
+      createdBy: string;
+      scope?: 'automation-bypass' | 'shareable-link';
+    };
   };
   hasActiveBranches?: boolean;
   ipAllowlist?: {
@@ -7943,9 +8732,6 @@ export type GetProjectResponse = {
     name: string;
     forced?: boolean;
     id: string;
-    /**
-     * Construct a type with a set of properties K of type T
-     */
     meta?: {
       [key: string]: string;
     };
@@ -8073,9 +8859,6 @@ export type GetProjectResponse = {
       name: string;
       forced?: boolean;
       id: string;
-      /**
-       * Construct a type with a set of properties K of type T
-       */
       meta?: {
         [key: string]: string;
       };
@@ -8138,6 +8921,7 @@ export type GetProjectResponse = {
     deploymentPreview?: Schemas.ACLAction[];
     deploymentPrivate?: Schemas.ACLAction[];
     deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
+    deploymentPromote?: Schemas.ACLAction[];
     deploymentRollback?: Schemas.ACLAction[];
     domain?: Schemas.ACLAction[];
     domainAcceptDelegation?: Schemas.ACLAction[];
@@ -8234,12 +9018,20 @@ export type GetProjectResponse = {
     jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
     requestedAt: number;
   } | null;
+  lastAliasRequest?: {
+    fromDeploymentId: string;
+    toDeploymentId: string;
+    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+    requestedAt: number;
+    type: 'promote' | 'rollback';
+  } | null;
   hasFloatingAliases?: boolean;
-  /**
-   * Construct a type with a set of properties K of type T
-   */
   protectionBypass?: {
-    [key: string]: string;
+    [key: string]: {
+      createdAt: number;
+      createdBy: string;
+      scope?: 'automation-bypass' | 'shareable-link';
+    };
   };
   hasActiveBranches?: boolean;
   ipAllowlist?: {
@@ -8449,9 +9241,6 @@ export type UpdateProjectResponse = {
     name: string;
     forced?: boolean;
     id: string;
-    /**
-     * Construct a type with a set of properties K of type T
-     */
     meta?: {
       [key: string]: string;
     };
@@ -8579,9 +9368,6 @@ export type UpdateProjectResponse = {
       name: string;
       forced?: boolean;
       id: string;
-      /**
-       * Construct a type with a set of properties K of type T
-       */
       meta?: {
         [key: string]: string;
       };
@@ -8644,6 +9430,7 @@ export type UpdateProjectResponse = {
     deploymentPreview?: Schemas.ACLAction[];
     deploymentPrivate?: Schemas.ACLAction[];
     deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
+    deploymentPromote?: Schemas.ACLAction[];
     deploymentRollback?: Schemas.ACLAction[];
     domain?: Schemas.ACLAction[];
     domainAcceptDelegation?: Schemas.ACLAction[];
@@ -8740,12 +9527,20 @@ export type UpdateProjectResponse = {
     jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
     requestedAt: number;
   } | null;
+  lastAliasRequest?: {
+    fromDeploymentId: string;
+    toDeploymentId: string;
+    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+    requestedAt: number;
+    type: 'promote' | 'rollback';
+  } | null;
   hasFloatingAliases?: boolean;
-  /**
-   * Construct a type with a set of properties K of type T
-   */
   protectionBypass?: {
-    [key: string]: string;
+    [key: string]: {
+      createdAt: number;
+      createdBy: string;
+      scope?: 'automation-bypass' | 'shareable-link';
+    };
   };
   hasActiveBranches?: boolean;
   ipAllowlist?: {
@@ -10569,1200 +11364,1237 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
     EditProjectEnvPathParams
   >({ url: '/v9/projects/{idOrName}/env/{id}', method: 'patch', ...variables, signal });
 
-export type VerifyTokenQueryParams = {
+export type GetTeamMembersQueryParams = {
   /**
-   * Email to verify the login.
-   */
-  email?: string;
-  /**
-   * The token returned when the login was requested.
-   */
-  token: string;
-  /**
-   * The desired name for the token. It will be displayed on the user account details.
+   * Limit how many teams should be returned
    *
-   * @example Your Client App Name
+   * @example 20
    */
-  tokenName?: string;
+  limit?: number;
   /**
-   * The SAML Profile ID, when connecting a SAML Profile to a Team member for the first time.
+   * Timestamp in milliseconds to only include members added since then.
+   *
+   * @example 1540095775951
    */
-  ssoUserId?: string;
+  since?: number;
+  /**
+   * Timestamp in milliseconds to only include members added until then.
+   *
+   * @example 1540095775951
+   */
+  until?: number;
+  /**
+   * Search team members by their name, username, and email.
+   */
+  search?: string;
+  /**
+   * Only return members with the specified team role.
+   *
+   * @example OWNER
+   */
+  role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'VIEWER';
+  /**
+   * Exclude members who belong to the specified project.
+   */
+  excludeProject?: string;
 };
 
-export type VerifyTokenError = Fetcher.ErrorWrapper<undefined>;
+export type GetTeamMembersError = Fetcher.ErrorWrapper<undefined>;
 
-export type VerifyTokenResponse = {
-  /**
-   * The user authentication token that can be used to perform API requests.
-   *
-   * @example 1ioXyz9Ue4xdCYGROet1dlKd
-   */
-  token: string;
-  /**
-   * Email address of the authenticated user.
-   *
-   * @example amy@example.com
-   */
-  email: string;
-  /**
-   * When completing SAML Single Sign-On authentication, this will be the ID of the Team that was authenticated for.
-   *
-   * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
-   */
-  teamId?: string;
-};
-
-export type VerifyTokenVariables = {
-  queryParams: VerifyTokenQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Verify the user accepted the login request and get a authentication token. The user email address and the token received after requesting the login must be added to the URL as a query string with the names `email` and `token`.
- */
-export const verifyToken = (variables: VerifyTokenVariables, signal?: AbortSignal) =>
-  fetch<VerifyTokenResponse, VerifyTokenError, undefined, {}, VerifyTokenQueryParams, {}>({
-    url: '/registration/verify',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type EmailLoginError = Fetcher.ErrorWrapper<undefined>;
-
-export type EmailLoginResponse = {
-  /**
-   * The token used to verify the user accepted the login request
-   *
-   * @example T1dmvPu36nmyYisXAs7IRzcR
-   */
-  token: string;
-  /**
-   * The code the user is going to receive on the email. **Must** be displayed to the user so they can verify the request is the correct.
-   *
-   * @example Practical Saola
-   */
-  securityCode: string;
-};
-
-export type EmailLoginRequestBody = {
-  /**
-   * The user email.
-   *
-   * @example user@mail.com
-   */
-  email: string;
-  /**
-   * The desired name for the token. It will be displayed on the user account details.
-   *
-   * @example Your Client App Name
-   */
-  tokenName?: string;
-};
-
-export type EmailLoginVariables = {
-  body: EmailLoginRequestBody;
-} & FetcherExtraProps;
-
-/**
- * Request a new login for a user to get a token. This will respond with a verification token and send an email to confirm the request. Once confirmed you can use the verification token to get an authentication token.
- */
-export const emailLogin = (variables: EmailLoginVariables, signal?: AbortSignal) =>
-  fetch<EmailLoginResponse, EmailLoginError, EmailLoginRequestBody, {}, {}, {}>({
-    url: '/registration',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
-export type GetConfigurationsQueryParams = {
-  view: 'account' | 'project';
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type GetConfigurationsError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetConfigurationsVariables = {
-  queryParams: GetConfigurationsQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Allows to retrieve all configurations for an authenticated integration. When the `project` view is used, configurations generated for the authorization flow will be filtered out of the results.
- */
-export const getConfigurations = (variables: GetConfigurationsVariables, signal?: AbortSignal) =>
-  fetch<
+export type GetTeamMembersResponse = {
+  members: (
     | {
-        /**
-         * A timestamp that tells you when the configuration was installed successfully
-         *
-         * @example 1558531915505
-         */
-        completedAt?: number;
-        /**
-         * A timestamp that tells you when the configuration was created
-         *
-         * @example 1558531915505
-         */
+        avatar?: string;
+        confirmed: boolean;
+        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING';
+        uid: string;
+        username: string;
+        name?: string;
         createdAt: number;
+        accessRequestedAt: number;
+        joinedFrom?: {
+          origin:
+            | 'import'
+            | 'github'
+            | 'gitlab'
+            | 'bitbucket'
+            | 'link'
+            | 'mail'
+            | 'teams'
+            | 'saml'
+            | 'dsync'
+            | 'feedback'
+            | 'organization-teams';
+          commitId?: string;
+          repoId?: string;
+          repoPath?: string;
+          gitUserId?: string | number;
+          gitUserLogin?: string;
+          ssoUserId?: string;
+          ssoConnectedAt?: number;
+          idpUserId?: string;
+          dsyncUserId?: string;
+          dsyncConnectedAt?: number;
+        };
+        email: string;
         /**
-         * The unique identifier of the configuration
-         *
-         * @example icfg_3bwCLgxL8qt5kjRLcv2Dit7F
+         * Information about the GitHub account for this user.
          */
-        id: string;
-        /**
-         * The unique identifier of the app the configuration was created for
-         *
-         * @example oac_xzpVzcUOgcB1nrVlirtKhbWV
-         */
-        integrationId: string;
-        /**
-         * Will be truthy in those cases where the configuration was created to authorize a client through the OAuth2 flow.
-         *
-         * @example false
-         */
-        oauthConfiguration?: boolean;
-        /**
-         * The user or team ID that owns the configuration
-         *
-         * @example kr1PsOIzqEL5Xg6M4VZcZosf
-         */
-        ownerId: string;
-        /**
-         * When a configuration is limited to access certain projects, this will contain each of the project ID it is allowed to access. If it is not defined, the configuration has full access.
-         *
-         * @example prj_xQxbutw1HpL6HLYPAzt5h75m8NjO
-         */
-        projects?: string[];
-        /**
-         * Source defines where the configuration was installed from. It is used to analyze user engagement for integration installations in product metrics.
-         *
-         * @example marketplace
-         */
-        source?: 'marketplace' | 'deploy-button' | 'oauth' | 'external';
-        removedLogDrainsAt?: number;
-        removedProjectEnvsAt?: number;
-        removedTokensAt?: number;
-        removedWebhooksAt?: number;
-        /**
-         * The slug of the integration the configuration is created for.
-         *
-         * @example slack
-         */
-        slug: string;
-        /**
-         * When the configuration was created for a team, this will show the ID of the team.
-         *
-         * @example team_nLlpyC6RE1qxydlFKbrxDlud
-         */
-        teamId?: string | null;
-        type: 'integration-configuration';
-        /**
-         * A timestamp that tells you when the configuration was updated.
-         *
-         * @example 1558531915505
-         */
-        updatedAt: number;
-        /**
-         * The ID of the user that created the configuration.
-         *
-         * @example kr1PsOIzqEL5Xg6M4VZcZosf
-         */
-        userId: string;
-        /**
-         * The resources that are allowed to be accessed by the configuration.
-         *
-         * @example read:project
-         * @example read-write:log-drain
-         */
-        scopes: string[];
-        scopesQueue?: {
-          scopes: {
-            added: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-            )[];
-            upgraded: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-            )[];
-          };
-          note: string;
-          requestedAt: number;
-          confirmedAt?: number;
-        }[];
-        /**
-         * A timestamp that tells you when the configuration was disabled. Note: Configurations can be disabled when the associated user loses access to a team. They do not function during this time until the configuration is 'transferred', meaning the associated user is changed to one with access to the team.
-         *
-         * @example 1558531915505
-         */
-        disabledAt?: number;
-        /**
-         * A timestamp that tells you when the configuration was updated.
-         *
-         * @example 1558531915505
-         */
-        deletedAt?: number | null;
-      }[]
-    | {
-        integration: {
-          name: string;
-          icon: string;
-          category: string;
-          isLegacy: boolean;
-          flags?: string[];
-          assignedBetaLabelAt?: number;
+        github?: {
+          login?: string;
         };
         /**
-         * A timestamp that tells you when the configuration was installed successfully
-         *
-         * @example 1558531915505
+         * Information about the GitLab account of this user.
          */
-        completedAt?: number;
+        gitlab?: {
+          login?: string;
+        };
         /**
-         * A timestamp that tells you when the configuration was created
-         *
-         * @example 1558531915505
+         * Information about the Bitbucket account of this user.
          */
-        createdAt: number;
-        /**
-         * The unique identifier of the configuration
-         *
-         * @example icfg_3bwCLgxL8qt5kjRLcv2Dit7F
-         */
-        id: string;
-        /**
-         * The unique identifier of the app the configuration was created for
-         *
-         * @example oac_xzpVzcUOgcB1nrVlirtKhbWV
-         */
-        integrationId: string;
-        /**
-         * Will be truthy in those cases where the configuration was created to authorize a client through the OAuth2 flow.
-         *
-         * @example false
-         */
-        oauthConfiguration?: boolean;
-        /**
-         * The user or team ID that owns the configuration
-         *
-         * @example kr1PsOIzqEL5Xg6M4VZcZosf
-         */
-        ownerId: string;
-        /**
-         * When a configuration is limited to access certain projects, this will contain each of the project ID it is allowed to access. If it is not defined, the configuration has full access.
-         *
-         * @example prj_xQxbutw1HpL6HLYPAzt5h75m8NjO
-         */
-        projects?: string[];
-        /**
-         * Source defines where the configuration was installed from. It is used to analyze user engagement for integration installations in product metrics.
-         *
-         * @example marketplace
-         */
-        source?: 'marketplace' | 'deploy-button' | 'oauth' | 'external';
-        removedLogDrainsAt?: number;
-        removedProjectEnvsAt?: number;
-        removedTokensAt?: number;
-        removedWebhooksAt?: number;
-        /**
-         * The slug of the integration the configuration is created for.
-         *
-         * @example slack
-         */
-        slug: string;
-        /**
-         * When the configuration was created for a team, this will show the ID of the team.
-         *
-         * @example team_nLlpyC6RE1qxydlFKbrxDlud
-         */
-        teamId?: string | null;
-        type: 'integration-configuration';
-        /**
-         * A timestamp that tells you when the configuration was updated.
-         *
-         * @example 1558531915505
-         */
-        updatedAt: number;
-        /**
-         * The ID of the user that created the configuration.
-         *
-         * @example kr1PsOIzqEL5Xg6M4VZcZosf
-         */
-        userId: string;
-        /**
-         * The resources that are allowed to be accessed by the configuration.
-         *
-         * @example read:project
-         * @example read-write:log-drain
-         */
-        scopes: string[];
-        scopesQueue?: {
-          scopes: {
-            added: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-            )[];
-            upgraded: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-            )[];
-          };
-          note: string;
-          requestedAt: number;
-          confirmedAt?: number;
-        }[];
-        /**
-         * A timestamp that tells you when the configuration was disabled. Note: Configurations can be disabled when the associated user loses access to a team. They do not function during this time until the configuration is 'transferred', meaning the associated user is changed to one with access to the team.
-         *
-         * @example 1558531915505
-         */
-        disabledAt?: number;
-        /**
-         * A timestamp that tells you when the configuration was updated.
-         *
-         * @example 1558531915505
-         */
-        deletedAt?: number | null;
-      }[],
-    GetConfigurationsError,
-    undefined,
-    {},
-    GetConfigurationsQueryParams,
-    {}
-  >({ url: '/v1/integrations/configurations', method: 'get', ...variables, signal });
-
-export type GetConfigurationPathParams = {
-  /**
-   * ID of the configuration to check
-   *
-   * @example icfg_cuwj0AdCdH3BwWT4LPijCC7t
-   */
-  id: string;
-};
-
-export type GetConfigurationQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type GetConfigurationError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetConfigurationVariables = {
-  pathParams: GetConfigurationPathParams;
-  queryParams?: GetConfigurationQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Allows to retrieve a the configuration with the provided id in case it exists. The authenticated user or team must be the owner of the config in order to access it.
- */
-export const getConfiguration = (variables: GetConfigurationVariables, signal?: AbortSignal) =>
-  fetch<
-    | {
-        /**
-         * A timestamp that tells you when the configuration was installed successfully
-         *
-         * @example 1558531915505
-         */
-        completedAt?: number;
-        /**
-         * A timestamp that tells you when the configuration was created
-         *
-         * @example 1558531915505
-         */
-        createdAt: number;
-        /**
-         * The unique identifier of the configuration
-         *
-         * @example icfg_3bwCLgxL8qt5kjRLcv2Dit7F
-         */
-        id: string;
-        /**
-         * The unique identifier of the app the configuration was created for
-         *
-         * @example oac_xzpVzcUOgcB1nrVlirtKhbWV
-         */
-        integrationId: string;
-        /**
-         * Will be truthy in those cases where the configuration was created to authorize a client through the OAuth2 flow.
-         *
-         * @example false
-         */
-        oauthConfiguration?: boolean;
-        /**
-         * The user or team ID that owns the configuration
-         *
-         * @example kr1PsOIzqEL5Xg6M4VZcZosf
-         */
-        ownerId: string;
-        /**
-         * When a configuration is limited to access certain projects, this will contain each of the project ID it is allowed to access. If it is not defined, the configuration has full access.
-         *
-         * @example prj_xQxbutw1HpL6HLYPAzt5h75m8NjO
-         */
-        projects?: string[];
-        /**
-         * Source defines where the configuration was installed from. It is used to analyze user engagement for integration installations in product metrics.
-         *
-         * @example marketplace
-         */
-        source?: 'marketplace' | 'deploy-button' | 'oauth' | 'external';
-        removedLogDrainsAt?: number;
-        removedProjectEnvsAt?: number;
-        removedTokensAt?: number;
-        removedWebhooksAt?: number;
-        /**
-         * The slug of the integration the configuration is created for.
-         *
-         * @example slack
-         */
-        slug: string;
-        /**
-         * When the configuration was created for a team, this will show the ID of the team.
-         *
-         * @example team_nLlpyC6RE1qxydlFKbrxDlud
-         */
-        teamId?: string | null;
-        type: 'integration-configuration';
-        /**
-         * A timestamp that tells you when the configuration was updated.
-         *
-         * @example 1558531915505
-         */
-        updatedAt: number;
-        /**
-         * The ID of the user that created the configuration.
-         *
-         * @example kr1PsOIzqEL5Xg6M4VZcZosf
-         */
-        userId: string;
-        /**
-         * The resources that are allowed to be accessed by the configuration.
-         *
-         * @example read:project
-         * @example read-write:log-drain
-         */
-        scopes: string[];
-        scopesQueue?: {
-          scopes: {
-            added: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-            )[];
-            upgraded: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-            )[];
-          };
-          note: string;
-          requestedAt: number;
-          confirmedAt?: number;
-        }[];
-        /**
-         * A timestamp that tells you when the configuration was disabled. Note: Configurations can be disabled when the associated user loses access to a team. They do not function during this time until the configuration is 'transferred', meaning the associated user is changed to one with access to the team.
-         *
-         * @example 1558531915505
-         */
-        disabledAt?: number;
-        /**
-         * A timestamp that tells you when the configuration was updated.
-         *
-         * @example 1558531915505
-         */
-        deletedAt?: number | null;
+        bitbucket?: {
+          login?: string;
+        };
       }
     | {
         /**
-         * A string representing the permission for projects. Possible values are `all` or `selected`.
+         * ID of the file for the Avatar of this member.
          *
-         * @example all
+         * @example 123a6c5209bc3778245d011443644c8d27dc2c50
          */
-        projectSelection: 'selected' | 'all';
+        avatar?: string;
         /**
-         * A timestamp that tells you when the configuration was installed successfully
+         * Boolean that indicates if this member was confirmed by an owner.
          *
-         * @example 1558531915505
+         * @example true
          */
-        completedAt?: number;
+        confirmed: boolean;
         /**
-         * A timestamp that tells you when the configuration was created
+         * The email of this member.
          *
-         * @example 1558531915505
+         * @example jane.doe@example.com
+         */
+        email: string;
+        /**
+         * Information about the GitHub account for this user.
+         */
+        github?: {
+          login?: string;
+        };
+        /**
+         * Information about the GitLab account of this user.
+         */
+        gitlab?: {
+          login?: string;
+        };
+        /**
+         * Information about the Bitbucket account of this user.
+         */
+        bitbucket?: {
+          login?: string;
+        };
+        /**
+         * Role of this user in the team.
+         *
+         * @example OWNER
+         */
+        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING';
+        /**
+         * The ID of this user.
+         *
+         * @example zTuNVUXEAvvnNN3IaqinkyMw
+         */
+        uid: string;
+        /**
+         * The unique username of this user.
+         *
+         * @example jane-doe
+         */
+        username: string;
+        /**
+         * The name of this user.
+         *
+         * @example Jane Doe
+         */
+        name?: string;
+        /**
+         * Timestamp in milliseconds when this member was added.
+         *
+         * @example 1588720733602
          */
         createdAt: number;
         /**
-         * The unique identifier of the configuration
+         * Timestamp in milliseconds for when this team member was accepted by an owner.
          *
-         * @example icfg_3bwCLgxL8qt5kjRLcv2Dit7F
+         * @example 1588820733602
          */
-        id: string;
+        accessRequestedAt?: number;
         /**
-         * The unique identifier of the app the configuration was created for
-         *
-         * @example oac_xzpVzcUOgcB1nrVlirtKhbWV
+         * Map with information about the members origin if they joined by requesting access.
          */
-        integrationId: string;
+        joinedFrom?: {
+          origin:
+            | 'import'
+            | 'github'
+            | 'gitlab'
+            | 'bitbucket'
+            | 'link'
+            | 'mail'
+            | 'teams'
+            | 'saml'
+            | 'dsync'
+            | 'feedback'
+            | 'organization-teams';
+          commitId?: string;
+          repoId?: string;
+          repoPath?: string;
+          gitUserId?: string | number;
+          gitUserLogin?: string;
+          ssoUserId?: string;
+          ssoConnectedAt?: number;
+          idpUserId?: string;
+          dsyncUserId?: string;
+          dsyncConnectedAt?: number;
+        };
+      }
+  )[];
+  emailInviteCodes?: {
+    id: string;
+    email?: string;
+    role?: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING';
+    isDSyncUser: boolean;
+    createdAt?: number;
+  }[];
+  pagination: {
+    hasNext: boolean;
+    /**
+     * Amount of items in the current page.
+     *
+     * @example 20
+     */
+    count: number;
+    /**
+     * Timestamp that must be used to request the next page.
+     *
+     * @example 1540095775951
+     */
+    next: number | null;
+    /**
+     * Timestamp that must be used to request the previous page.
+     *
+     * @example 1540095775951
+     */
+    prev: number | null;
+  };
+};
+
+export type GetTeamMembersVariables = {
+  queryParams?: GetTeamMembersQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Get a paginated list of team members for the provided team.
+ */
+export const getTeamMembers = (variables: GetTeamMembersVariables, signal?: AbortSignal) =>
+  fetch<GetTeamMembersResponse, GetTeamMembersError, undefined, {}, GetTeamMembersQueryParams, {}>({
+    url: '/v2/teams/{teamId}/members',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type InviteUserToTeamError = Fetcher.ErrorWrapper<undefined>;
+
+export type InviteUserToTeamRequestBody = {
+  /**
+   * The id of the user to invite
+   *
+   * @example kr1PsOIzqEL5Xg6M4VZcZosf
+   */
+  uid?: string;
+  /**
+   * The email address of the user to invite
+   *
+   * @format email
+   * @example john@example.com
+   */
+  email?: string;
+  role?: void;
+};
+
+export type InviteUserToTeamVariables = {
+  body?: InviteUserToTeamRequestBody;
+} & FetcherExtraProps;
+
+/**
+ * Invite a user to join the team specified in the URL. The authenticated user needs to be an `OWNER` in order to successfully invoke this endpoint. The user can be specified with an email or an ID. If both email and ID are provided, ID will take priority.
+ */
+export const inviteUserToTeam = (variables: InviteUserToTeamVariables, signal?: AbortSignal) =>
+  fetch<
+    | {
         /**
-         * Will be truthy in those cases where the configuration was created to authorize a client through the OAuth2 flow.
-         *
-         * @example false
-         */
-        oauthConfiguration?: boolean;
-        /**
-         * The user or team ID that owns the configuration
+         * The ID of the invited user
          *
          * @example kr1PsOIzqEL5Xg6M4VZcZosf
          */
-        ownerId: string;
+        uid: string;
         /**
-         * When a configuration is limited to access certain projects, this will contain each of the project ID it is allowed to access. If it is not defined, the configuration has full access.
+         * The username of the invited user
          *
-         * @example prj_xQxbutw1HpL6HLYPAzt5h75m8NjO
+         * @example john-doe
          */
-        projects?: string[];
+        username: string;
         /**
-         * Source defines where the configuration was installed from. It is used to analyze user engagement for integration installations in product metrics.
+         * The email of the invited user. Not included if the user was invited via their UID.
          *
-         * @example marketplace
+         * @example john@user.co
          */
-        source?: 'marketplace' | 'deploy-button' | 'oauth' | 'external';
-        removedLogDrainsAt?: number;
-        removedProjectEnvsAt?: number;
-        removedTokensAt?: number;
-        removedWebhooksAt?: number;
+        email: string;
         /**
-         * The slug of the integration the configuration is created for.
+         * The role used for the invitation
          *
-         * @example slack
+         * @example MEMBER
          */
-        slug: string;
-        /**
-         * When the configuration was created for a team, this will show the ID of the team.
-         *
-         * @example team_nLlpyC6RE1qxydlFKbrxDlud
-         */
-        teamId?: string | null;
-        type: 'integration-configuration';
-        /**
-         * A timestamp that tells you when the configuration was updated.
-         *
-         * @example 1558531915505
-         */
-        updatedAt: number;
-        /**
-         * The ID of the user that created the configuration.
-         *
-         * @example kr1PsOIzqEL5Xg6M4VZcZosf
-         */
-        userId: string;
-        /**
-         * The resources that are allowed to be accessed by the configuration.
-         *
-         * @example read:project
-         * @example read-write:log-drain
-         */
-        scopes: string[];
-        scopesQueue?: {
-          scopes: {
-            added: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-            )[];
-            upgraded: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-            )[];
-          };
-          note: string;
-          requestedAt: number;
-          confirmedAt?: number;
-        }[];
-        /**
-         * A timestamp that tells you when the configuration was disabled. Note: Configurations can be disabled when the associated user loses access to a team. They do not function during this time until the configuration is 'transferred', meaning the associated user is changed to one with access to the team.
-         *
-         * @example 1558531915505
-         */
-        disabledAt?: number;
-        /**
-         * A timestamp that tells you when the configuration was updated.
-         *
-         * @example 1558531915505
-         */
-        deletedAt?: number | null;
-        canConfigureOpenTelemetry?: boolean;
+        role: string;
+      }
+    | {
+        uid: string;
+        username: string;
+        role: string;
       },
-    GetConfigurationError,
-    undefined,
+    InviteUserToTeamError,
+    InviteUserToTeamRequestBody,
     {},
-    GetConfigurationQueryParams,
-    GetConfigurationPathParams
-  >({ url: '/v1/integrations/configuration/{id}', method: 'get', ...variables, signal });
-
-export type DeleteConfigurationPathParams = {
-  id: string;
-};
-
-export type DeleteConfigurationQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type DeleteConfigurationError = Fetcher.ErrorWrapper<undefined>;
-
-export type DeleteConfigurationVariables = {
-  pathParams: DeleteConfigurationPathParams;
-  queryParams?: DeleteConfigurationQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Allows to remove the configuration with the `id` provided in the parameters. The configuration and all of its resources will be removed. This includes Webhooks, LogDrains and Project Env variables.
- */
-export const deleteConfiguration = (variables: DeleteConfigurationVariables, signal?: AbortSignal) =>
-  fetch<
-    undefined,
-    DeleteConfigurationError,
-    undefined,
     {},
-    DeleteConfigurationQueryParams,
-    DeleteConfigurationPathParams
-  >({ url: '/v1/integrations/configuration/{id}', method: 'delete', ...variables, signal });
-
-export type GetIntegrationLogDrainsQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type GetIntegrationLogDrainsError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetIntegrationLogDrainsResponse = {
-  /**
-   * The oauth2 client application id that created this log drain
-   *
-   * @example oac_xRhY4LAB7yLhUADD69EvV7ct
-   */
-  clientId?: string;
-  /**
-   * The client configuration this log drain was created with
-   *
-   * @example icfg_cuwj0AdCdH3BwWT4LPijCC7t
-   */
-  configurationId?: string;
-  /**
-   * A timestamp that tells you when the log drain was created
-   *
-   * @example 1558531915505
-   */
-  createdAt: number;
-  /**
-   * The unique identifier of the log drain. Always prefixed with `ld_`
-   *
-   * @example ld_nBuA7zCID8g4QZ8g
-   */
-  id: string;
-  /**
-   * The delivery log format
-   *
-   * @example json
-   */
-  deliveryFormat?: 'json' | 'ndjson' | 'syslog';
-  /**
-   * The name of the log drain
-   *
-   * @example My first log drain
-   */
-  name: string;
-  /**
-   * The identifier of the team or user whose events will trigger the log drain
-   *
-   * @example kr1PsOIzqEL5Xg6M4VZcZosf
-   */
-  ownerId: string;
-  /**
-   * @example AbCgVkqoxXeXCDWehVir51LHGrrcWL4mkYm14W6UBPWQeb
-   */
-  projectId?: string | null;
-  /**
-   * The identifier of the projects this log drain is associated with
-   *
-   * @example AbCgVkqoxXeXCDWehVir51LHGrrcWL4mkYm14W6UBPWQeb
-   */
-  projectIds?: string[];
-  /**
-   * The URL to call when logs are generated
-   *
-   * @example https://example.com/log-drain
-   */
-  url: string;
-  /**
-   * The sources from which logs are currently being delivered to this log drain.
-   *
-   * @example build
-   * @example edge
-   */
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
-  /**
-   * Whether the log drain was created by an integration or by a user
-   *
-   * @example integration
-   */
-  createdFrom?: 'self-served' | 'integration';
-  /**
-   * The headers to send with the request
-   *
-   * @example {"Authorization": "Bearer 123"}
-   */
-  headers?: {
-    [key: string]: string;
-  };
-  /**
-   * The environment of log drain
-   *
-   * @example production
-   */
-  environment?: 'production' | 'preview';
-  /**
-   * The branch regexp of log drain
-   *
-   * @example feature/*
-   */
-  branch?: string;
-}[];
-
-export type GetIntegrationLogDrainsVariables = {
-  queryParams?: GetIntegrationLogDrainsQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieves a list of all Integration log drains that are defined for the authorized account. When using an OAuth2 token, the list is limited to log drains created by the authenticated integration.
- */
-export const getIntegrationLogDrains = (variables: GetIntegrationLogDrainsVariables, signal?: AbortSignal) =>
-  fetch<
-    GetIntegrationLogDrainsResponse,
-    GetIntegrationLogDrainsError,
-    undefined,
-    {},
-    GetIntegrationLogDrainsQueryParams,
     {}
-  >({ url: '/v2/integrations/log-drains', method: 'get', ...variables, signal });
+  >({ url: '/v1/teams/{teamId}/members', method: 'post', ...variables, signal });
 
-export type CreateLogDrainQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
+export type RequestAccessToTeamError = Fetcher.ErrorWrapper<undefined>;
 
-export type CreateLogDrainError = Fetcher.ErrorWrapper<undefined>;
-
-export type CreateLogDrainResponse = {
-  /**
-   * The oauth2 client application id that created this log drain
-   *
-   * @example oac_xRhY4LAB7yLhUADD69EvV7ct
-   */
-  clientId?: string;
-  /**
-   * The client configuration this log drain was created with
-   *
-   * @example icfg_cuwj0AdCdH3BwWT4LPijCC7t
-   */
-  configurationId?: string;
-  /**
-   * A timestamp that tells you when the log drain was created
-   *
-   * @example 1558531915505
-   */
-  createdAt: number;
-  /**
-   * The unique identifier of the log drain. Always prefixed with `ld_`
-   *
-   * @example ld_nBuA7zCID8g4QZ8g
-   */
-  id: string;
-  /**
-   * The delivery log format
-   *
-   * @example json
-   */
-  deliveryFormat?: 'json' | 'ndjson' | 'syslog';
-  /**
-   * The name of the log drain
-   *
-   * @example My first log drain
-   */
-  name: string;
-  /**
-   * The identifier of the team or user whose events will trigger the log drain
-   *
-   * @example kr1PsOIzqEL5Xg6M4VZcZosf
-   */
-  ownerId: string;
-  /**
-   * @example AbCgVkqoxXeXCDWehVir51LHGrrcWL4mkYm14W6UBPWQeb
-   */
-  projectId?: string | null;
-  /**
-   * The identifier of the projects this log drain is associated with
-   *
-   * @example AbCgVkqoxXeXCDWehVir51LHGrrcWL4mkYm14W6UBPWQeb
-   */
-  projectIds?: string[];
-  /**
-   * The URL to call when logs are generated
-   *
-   * @example https://example.com/log-drain
-   */
-  url: string;
-  /**
-   * The sources from which logs are currently being delivered to this log drain.
-   *
-   * @example build
-   * @example edge
-   */
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
-  /**
-   * Whether the log drain was created by an integration or by a user
-   *
-   * @example integration
-   */
-  createdFrom?: 'self-served' | 'integration';
-  /**
-   * The headers to send with the request
-   *
-   * @example {"Authorization": "Bearer 123"}
-   */
-  headers?: {
-    [key: string]: string;
+export type RequestAccessToTeamResponse = {
+  teamSlug: string;
+  teamName: string;
+  confirmed?: boolean;
+  joinedFrom?: {
+    origin:
+      | 'link'
+      | 'import'
+      | 'teams'
+      | 'github'
+      | 'gitlab'
+      | 'bitbucket'
+      | 'feedback'
+      | 'organization-teams'
+      | 'mail'
+      | 'saml'
+      | 'dsync';
+    commitId?: string;
+    repoId?: string;
+    repoPath?: string;
+    gitUserId?: string | number;
+    gitUserLogin?: string;
+    ssoUserId?: string;
+    ssoConnectedAt?: number;
+    idpUserId?: string;
+    dsyncUserId?: string;
+    dsyncConnectedAt?: number;
   };
-  /**
-   * The environment of log drain
-   *
-   * @example production
-   */
-  environment?: 'preview' | 'production';
-  /**
-   * The branch regexp of log drain
-   *
-   * @example feature/*
-   */
-  branch?: string;
+  accessRequestedAt?: number;
+  github: {
+    login?: string;
+  } | null;
+  gitlab: {
+    login?: string;
+  } | null;
+  bitbucket: {
+    login?: string;
+  } | null;
 };
 
-export type CreateLogDrainRequestBody = {
-  /**
-   * The name of the log drain
-   *
-   * @example My first log drain
-   * @maxLength 100
-   * @pattern ^[A-z0-9_ -]+$
-   */
-  name: string;
-  /**
-   * @minItems 1
-   * @maxItems 50
-   */
-  projectIds?: string[];
-  /**
-   * A secret to sign log drain notification headers so a consumer can verify their authenticity
-   *
-   * @example a1Xsfd325fXcs
-   * @maxLength 100
-   * @pattern ^[A-z0-9_ -]+$
-   */
-  secret?: string;
-  /**
-   * The delivery log format
-   *
-   * @example json
-   */
-  deliveryFormat?: 'json' | 'ndjson' | 'syslog';
-  /**
-   * The url where you will receive logs. The protocol must be `https://` or `http://` when type is `json` and `ndjson`, and `syslog+tls:` or `syslog:` when the type is `syslog`.
-   *
-   * @example https://example.com/log-drain
-   * @format uri
-   * @pattern ^(https?|syslog\\+tls|syslog)://
-   */
-  url: string;
-  /**
-   * @uniqueItems true
-   * @minItems 1
-   */
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external')[];
-  /**
-   * Headers to be sent together with the request
-   */
-  headers?: {
-    [key: string]: string;
+export type RequestAccessToTeamRequestBody = {
+  joinedFrom: {
+    /**
+     * The origin of the request.
+     *
+     * @example github
+     */
+    origin: 'import' | 'teams' | 'github' | 'gitlab' | 'bitbucket' | 'feedback' | 'organization-teams';
+    /**
+     * The commit sha if the origin is a git provider.
+     *
+     * @example f498d25d8bd654b578716203be73084b31130cd7
+     */
+    commitId?: string;
+    /**
+     * The ID of the repository for the given Git provider.
+     *
+     * @example 67753070
+     */
+    repoId?: string;
+    /**
+     * The path to the repository for the given Git provider.
+     *
+     * @example jane-doe/example
+     */
+    repoPath?: string;
+    /**
+     * The ID of the Git account of the user who requests access.
+     *
+     * @example 103053343
+     */
+    gitUserId?: string | number;
+    /**
+     * The login name for the Git account of the user who requests access.
+     *
+     * @example jane-doe
+     */
+    gitUserLogin?: string;
   };
-  /**
-   * The environment of log drain
-   *
-   * @example production
-   */
-  environment?: 'preview' | 'production';
-  /**
-   * The branch regexp of log drain
-   *
-   * @example feature/*
-   */
-  branch?: string;
 };
 
-export type CreateLogDrainVariables = {
-  body: CreateLogDrainRequestBody;
-  queryParams?: CreateLogDrainQueryParams;
+export type RequestAccessToTeamVariables = {
+  body: RequestAccessToTeamRequestBody;
 } & FetcherExtraProps;
 
 /**
- * Creates an Integration log drain. This endpoint must be called with an OAuth2 client (integration), since log drains are tied to integrations. If it is called with a different token type it will produce a 400 error.
+ * Request access to a team as a member. An owner has to approve the request. Only 10 users can request access to a team at the same time.
  */
-export const createLogDrain = (variables: CreateLogDrainVariables, signal?: AbortSignal) =>
-  fetch<CreateLogDrainResponse, CreateLogDrainError, CreateLogDrainRequestBody, {}, CreateLogDrainQueryParams, {}>({
-    url: '/v2/integrations/log-drains',
+export const requestAccessToTeam = (variables: RequestAccessToTeamVariables, signal?: AbortSignal) =>
+  fetch<RequestAccessToTeamResponse, RequestAccessToTeamError, RequestAccessToTeamRequestBody, {}, {}, {}>({
+    url: '/v1/teams/{teamId}/request',
     method: 'post',
     ...variables,
     signal
   });
 
-export type DeleteIntegrationLogDrainPathParams = {
-  /**
-   * ID of the log drain to be deleted
-   */
-  id: string;
+export type GetTeamAccessRequestPathParams = {
+  userId?: string;
 };
 
-export type DeleteIntegrationLogDrainQueryParams = {
+export type GetTeamAccessRequestError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetTeamAccessRequestResponse = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The slug of the team.
+   *
+   * @example my-team
    */
-  teamId?: string;
+  teamSlug: string;
+  /**
+   * The name of the team.
+   *
+   * @example My Team
+   */
+  teamName: string;
+  /**
+   * Current status of the membership. Will be `true` if confirmed, if pending it'll be `false`.
+   *
+   * @example false
+   */
+  confirmed: boolean;
+  /**
+   * A map that describes the origin from where the user joined.
+   */
+  joinedFrom: {
+    origin:
+      | 'link'
+      | 'import'
+      | 'mail'
+      | 'teams'
+      | 'github'
+      | 'gitlab'
+      | 'bitbucket'
+      | 'saml'
+      | 'dsync'
+      | 'feedback'
+      | 'organization-teams';
+    commitId?: string;
+    repoId?: string;
+    repoPath?: string;
+    gitUserId?: string | number;
+    gitUserLogin?: string;
+    ssoUserId?: string;
+    ssoConnectedAt?: number;
+    idpUserId?: string;
+    dsyncUserId?: string;
+    dsyncConnectedAt?: number;
+  };
+  /**
+   * Timestamp in milliseconds when the user requested access to the team.
+   *
+   * @example 1588720733602
+   */
+  accessRequestedAt: number;
+  /**
+   * Map of the connected GitHub account.
+   */
+  github: {
+    login?: string;
+  } | null;
+  /**
+   * Map of the connected GitLab account.
+   */
+  gitlab: {
+    login?: string;
+  } | null;
+  /**
+   * Map of the connected Bitbucket account.
+   */
+  bitbucket: {
+    login?: string;
+  } | null;
 };
 
-export type DeleteIntegrationLogDrainError = Fetcher.ErrorWrapper<undefined>;
-
-export type DeleteIntegrationLogDrainVariables = {
-  pathParams: DeleteIntegrationLogDrainPathParams;
-  queryParams?: DeleteIntegrationLogDrainQueryParams;
+export type GetTeamAccessRequestVariables = {
+  pathParams?: GetTeamAccessRequestPathParams;
 } & FetcherExtraProps;
 
 /**
- * Deletes the Integration log drain with the provided `id`. When using an OAuth2 Token, the log drain can be deleted only if the integration owns it.
+ * Check the status of a join request. It'll respond with a 404 if the request has been declined. If no `userId` path segment was provided, this endpoint will instead return the status of the authenticated user.
  */
-export const deleteIntegrationLogDrain = (variables: DeleteIntegrationLogDrainVariables, signal?: AbortSignal) =>
-  fetch<
-    undefined,
-    DeleteIntegrationLogDrainError,
-    undefined,
-    {},
-    DeleteIntegrationLogDrainQueryParams,
-    DeleteIntegrationLogDrainPathParams
-  >({ url: '/v1/integrations/log-drains/{id}', method: 'delete', ...variables, signal });
-
-export type GitNamespacesQueryParams = {
-  provider?: 'github' | 'gitlab' | 'bitbucket';
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type GitNamespacesError = Fetcher.ErrorWrapper<undefined>;
-
-export type GitNamespacesResponse = {
-  provider: string;
-  slug: string;
-  id: string | number;
-  name?: string;
-  ownerType: string;
-}[];
-
-export type GitNamespacesVariables = {
-  queryParams?: GitNamespacesQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Lists git namespaces for a supported provider. Supported providers are `github`, `gitlab` and `bitbucket`. If the provider is not provided, it will try to obtain it from the user that authenticated the request.
- */
-export const gitNamespaces = (variables: GitNamespacesVariables, signal?: AbortSignal) =>
-  fetch<GitNamespacesResponse, GitNamespacesError, undefined, {}, GitNamespacesQueryParams, {}>({
-    url: '/v1/integrations/git-namespaces',
+export const getTeamAccessRequest = (variables: GetTeamAccessRequestVariables, signal?: AbortSignal) =>
+  fetch<GetTeamAccessRequestResponse, GetTeamAccessRequestError, undefined, {}, {}, GetTeamAccessRequestPathParams>({
+    url: '/v1/teams/{teamId}/request/{userId}',
     method: 'get',
     ...variables,
     signal
   });
 
-export type SearchRepoQueryParams = {
-  query?: string;
-  namespaceId?: void | null;
-  provider?: 'github' | 'gitlab' | 'bitbucket';
-  installationId?: string;
+export type JoinTeamError = Fetcher.ErrorWrapper<undefined>;
+
+export type JoinTeamResponse = {
+  /**
+   * The ID of the team the user joined.
+   *
+   * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
+   */
+  teamId: string;
+  /**
+   * The slug of the team the user joined.
+   *
+   * @example my-team
+   */
+  slug: string;
+  /**
+   * The name of the team the user joined.
+   *
+   * @example My Team
+   */
+  name: string;
+  /**
+   * The origin of how the user joined.
+   *
+   * @example email
+   */
+  from: string;
+};
+
+export type JoinTeamRequestBody = {
+  /**
+   * The invite code to join the team.
+   *
+   * @example fisdh38aejkeivn34nslfore9vjtn4ls
+   */
+  inviteCode?: string;
+  /**
+   * The team ID.
+   *
+   * @example team_3oNwMKqLHqEBh02CTPsrbNbe
+   */
+  teamId?: string;
+};
+
+export type JoinTeamVariables = {
+  body?: JoinTeamRequestBody;
+} & FetcherExtraProps;
+
+/**
+ * Join a team with a provided invite code or team ID.
+ */
+export const joinTeam = (variables: JoinTeamVariables, signal?: AbortSignal) =>
+  fetch<JoinTeamResponse, JoinTeamError, JoinTeamRequestBody, {}, {}, {}>({
+    url: '/v1/teams/{teamId}/members/teams/join',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type UpdateTeamMemberPathParams = {
+  /**
+   * The ID of the member.
+   *
+   * @example ndfasllgPyCtREAqxxdyFKb
+   */
+  uid: string;
+};
+
+export type UpdateTeamMemberError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateTeamMemberResponse = {
+  /**
+   * ID of the team.
+   */
+  id: string;
+};
+
+export type UpdateTeamMemberRequestBody = {
+  /**
+   * Accept a user who requested access to the team.
+   *
+   * @example true
+   */
+  confirmed?: true;
+  /**
+   * The role in the team of the member.
+   *
+   * @default MEMBER
+   * @default VIEWER
+   * @example MEMBER
+   * @example VIEWER
+   */
+  role?: string;
+  joinedFrom?: {
+    ssoUserId?: null;
+  };
+};
+
+export type UpdateTeamMemberVariables = {
+  body?: UpdateTeamMemberRequestBody;
+  pathParams: UpdateTeamMemberPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Update the membership of a Team Member on the Team specified by `teamId`, such as changing the _role_ of the member, or confirming a request to join the Team for an unconfirmed member. The authenticated user must be an `OWNER` of the Team.
+ */
+export const updateTeamMember = (variables: UpdateTeamMemberVariables, signal?: AbortSignal) =>
+  fetch<
+    UpdateTeamMemberResponse,
+    UpdateTeamMemberError,
+    UpdateTeamMemberRequestBody,
+    {},
+    {},
+    UpdateTeamMemberPathParams
+  >({ url: '/v1/teams/{teamId}/members/{uid}', method: 'patch', ...variables, signal });
+
+export type RemoveTeamMemberPathParams = {
+  /**
+   * The user ID of the member.
+   *
+   * @example ndlgr43fadlPyCtREAqxxdyFK
+   */
+  uid: string;
+};
+
+export type RemoveTeamMemberError = Fetcher.ErrorWrapper<undefined>;
+
+export type RemoveTeamMemberResponse = {
+  /**
+   * ID of the team.
+   */
+  id: string;
+};
+
+export type RemoveTeamMemberVariables = {
+  pathParams: RemoveTeamMemberPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Remove a Team Member from the Team, or dismiss a user that requested access, or leave a team.
+ */
+export const removeTeamMember = (variables: RemoveTeamMemberVariables, signal?: AbortSignal) =>
+  fetch<RemoveTeamMemberResponse, RemoveTeamMemberError, undefined, {}, {}, RemoveTeamMemberPathParams>({
+    url: '/v1/teams/{teamId}/members/{uid}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type GetTeamPathParams = {
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
   teamId?: string;
 };
 
-export type SearchRepoError = Fetcher.ErrorWrapper<undefined>;
-
-export type SearchRepoResponse = {
-  gitAccount: {
-    provider: 'github' | 'gitlab' | 'bitbucket';
-    namespaceId: string | number | null;
-  };
-  repos: {
-    id: string | number;
-    name: string;
-    slug: string;
-    namespace: string;
-    private: boolean;
-    defaultBranch: string;
-    url: string;
-    updatedAt: number;
-    ownerType: 'team' | 'user';
-  }[];
+export type GetTeamQueryParams = {
+  slug?: string;
 };
 
-export type SearchRepoVariables = {
-  queryParams?: SearchRepoQueryParams;
+export type GetTeamError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetTeamVariables = {
+  pathParams?: GetTeamPathParams;
+  queryParams?: GetTeamQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Lists git repositories linked to a namespace `id` for a supported provider. A specific namespace `id` can be obtained via the `git-namespaces`  endpoint. Supported providers are `github`, `gitlab` and `bitbucket`. If the provider or namespace is not provided, it will try to obtain it from the user that authenticated the request.
+ * Get information for the Team specified by the `teamId` parameter.
  */
-export const searchRepo = (variables: SearchRepoVariables, signal?: AbortSignal) =>
-  fetch<SearchRepoResponse, SearchRepoError, undefined, {}, SearchRepoQueryParams, {}>({
-    url: '/v1/integrations/search-repo',
+export const getTeam = (variables: GetTeamVariables, signal?: AbortSignal) =>
+  fetch<Schemas.Team, GetTeamError, undefined, {}, GetTeamQueryParams, GetTeamPathParams>({
+    url: '/v2/teams/{teamId}',
     method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PatchTeamPathParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId: string;
+};
+
+export type PatchTeamError = Fetcher.ErrorWrapper<undefined>;
+
+export type PatchTeamRequestBody = {
+  /**
+   * The hash value of an uploaded image.
+   *
+   * @format regex
+   */
+  avatar?: string;
+  /**
+   * A short text that describes the team.
+   *
+   * @maxLength 140
+   * @example Our mission is to make cloud computing accessible to everyone
+   */
+  description?: string;
+  /**
+   * @format regex
+   * @example example.com
+   */
+  emailDomain?: string | null;
+  /**
+   * The name of the team.
+   *
+   * @maxLength 256
+   * @example My Team
+   */
+  name?: string;
+  /**
+   * Suffix that will be used for all preview deployments.
+   *
+   * @format hostname
+   * @example example.dev
+   */
+  previewDeploymentSuffix?: string | null;
+  /**
+   * Create a new invite code and replace the current one.
+   *
+   * @example true
+   */
+  regenerateInviteCode?: boolean;
+  saml?: {
+    /**
+     * Require that members of the team use SAML Single Sign-On.
+     *
+     * @example true
+     */
+    enforced?: boolean;
+    roles?: {
+      [key: string]: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING';
+    };
+  };
+  /**
+   * A new slug for the team.
+   *
+   * @example my-team
+   */
+  slug?: string;
+  /**
+   * Enable preview comments: one of on, off or default.
+   *
+   * @example on
+   */
+  enablePreviewFeedback?: string;
+  /**
+   * Sensitive environment variable policy: one of on, off or default.
+   *
+   * @example on
+   */
+  sensitiveEnvironmentVariablePolicy?: string;
+  /**
+   * Runs a task that migrates all existing environment variables to sensitive environment variables.
+   *
+   * @example false
+   */
+  migrateExistingEnvVariablesToSensitive?: boolean;
+  /**
+   * Whether or not remote caching is enabled for the team
+   */
+  remoteCaching?: {
+    /**
+     * Enable or disable remote caching for the team.
+     *
+     * @example true
+     */
+    enabled?: boolean;
+  };
+  /**
+   * Display or hide IP addresses in Monitoring queries.
+   *
+   * @example false
+   */
+  hideIpAddresses?: boolean;
+};
+
+export type PatchTeamVariables = {
+  body?: PatchTeamRequestBody;
+  pathParams: PatchTeamPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Update the information of a Team specified by the `teamId` parameter. The request body should contain the information that will be updated on the Team.
+ */
+export const patchTeam = (variables: PatchTeamVariables, signal?: AbortSignal) =>
+  fetch<Schemas.Team, PatchTeamError, PatchTeamRequestBody, {}, {}, PatchTeamPathParams>({
+    url: '/v2/teams/{teamId}',
+    method: 'patch',
+    ...variables,
+    signal
+  });
+
+export type GetTeamsQueryParams = {
+  /**
+   * Maximum number of Teams which may be returned.
+   *
+   * @example 20
+   */
+  limit?: number;
+  /**
+   * Timestamp (in milliseconds) to only include Teams created since then.
+   *
+   * @example 1540095775951
+   */
+  since?: number;
+  /**
+   * Timestamp (in milliseconds) to only include Teams created until then.
+   *
+   * @example 1540095775951
+   */
+  until?: number;
+};
+
+export type GetTeamsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetTeamsResponse = {
+  teams: (Schemas.Team | Schemas.TeamLimited)[];
+  pagination: Schemas.Pagination;
+};
+
+export type GetTeamsVariables = {
+  queryParams?: GetTeamsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Get a paginated list of all the Teams the authenticated User is a member of.
+ */
+export const getTeams = (variables: GetTeamsVariables, signal?: AbortSignal) =>
+  fetch<GetTeamsResponse, GetTeamsError, undefined, {}, GetTeamsQueryParams, {}>({
+    url: '/v2/teams',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type CreateTeamError = Fetcher.ErrorWrapper<undefined>;
+
+export type CreateTeamResponse = {
+  /**
+   * Id of the created team
+   *
+   * @example team_nLlpyC6RE1qxqglFKbrMxlud
+   */
+  id: string;
+};
+
+export type CreateTeamRequestBody = {
+  /**
+   * The desired slug for the Team
+   *
+   * @example a-random-team
+   * @maxLength 48
+   */
+  slug: string;
+  /**
+   * The desired name for the Team. It will be generated from the provided slug if nothing is provided
+   *
+   * @example A Random Team
+   * @maxLength 256
+   */
+  name?: string;
+};
+
+export type CreateTeamVariables = {
+  body: CreateTeamRequestBody;
+} & FetcherExtraProps;
+
+/**
+ * Create a new Team under your account. You need to send a POST request with the desired Team slug, and optionally the Team name.
+ */
+export const createTeam = (variables: CreateTeamVariables, signal?: AbortSignal) =>
+  fetch<CreateTeamResponse, CreateTeamError, CreateTeamRequestBody, {}, {}, {}>({
+    url: '/v1/teams',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type DeleteTeamPathParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId: string;
+};
+
+export type DeleteTeamError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteTeamResponse = {
+  /**
+   * The ID of the deleted Team
+   *
+   * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
+   */
+  id: string;
+};
+
+export type DeleteTeamRequestBody = {
+  /**
+   * Optional array of objects that describe the reason why the team is being deleted.
+   */
+  reasons?: {
+    /**
+     * Idenitifier slug of the reason why the team is being deleted.
+     */
+    slug: string;
+    /**
+     * Description of the reason why the team is being deleted.
+     */
+    description: string;
+  }[];
+};
+
+export type DeleteTeamVariables = {
+  body?: DeleteTeamRequestBody;
+  pathParams: DeleteTeamPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Delete a team under your account. You need to send a `DELETE` request with the desired team `id`. An optional array of reasons for deletion may also be sent.
+ */
+export const deleteTeam = (variables: DeleteTeamVariables, signal?: AbortSignal) =>
+  fetch<DeleteTeamResponse, DeleteTeamError, DeleteTeamRequestBody, {}, {}, DeleteTeamPathParams>({
+    url: '/v1/teams/{teamId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type DeleteTeamInviteCodePathParams = {
+  /**
+   * The Team invite code ID.
+   *
+   * @example 2wn2hudbr4chb1ecywo9dvzo7g9sscs6mzcz8htdde0txyom4l
+   */
+  inviteId: string;
+};
+
+export type DeleteTeamInviteCodeError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteTeamInviteCodeResponse = {
+  /**
+   * ID of the team.
+   */
+  id: string;
+};
+
+export type DeleteTeamInviteCodeVariables = {
+  pathParams: DeleteTeamInviteCodePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Delete an active Team invite code.
+ */
+export const deleteTeamInviteCode = (variables: DeleteTeamInviteCodeVariables, signal?: AbortSignal) =>
+  fetch<DeleteTeamInviteCodeResponse, DeleteTeamInviteCodeError, undefined, {}, {}, DeleteTeamInviteCodePathParams>({
+    url: '/v1/teams/{teamId}/invites/{inviteId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type UploadFileQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type UploadFileHeaders = {
+  /**
+   * The file size in bytes
+   */
+  ['Content-Length']?: number;
+  /**
+   * The file SHA1 used to check the integrity
+   *
+   * @maxLength 40
+   */
+  ['x-vercel-digest']?: string;
+  /**
+   * The file SHA1 used to check the integrity
+   *
+   * @deprecated true
+   * @maxLength 40
+   */
+  ['x-now-digest']?: string;
+  /**
+   * The file size as an alternative to `Content-Length`
+   *
+   * @deprecated true
+   */
+  ['x-now-size']?: number;
+};
+
+export type UploadFileError = Fetcher.ErrorWrapper<undefined>;
+
+export type UploadFileVariables = {
+  headers?: UploadFileHeaders;
+  queryParams?: UploadFileQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Before you create a deployment you need to upload the required files for that deployment. To do it, you need to first upload each file to this endpoint. Once that's completed, you can create a new deployment with the uploaded files. The file content must be placed inside the body of the request. In the case of a successful response you'll receive a status code 200 with an empty body.
+ */
+export const uploadFile = (variables: UploadFileVariables, signal?: AbortSignal) =>
+  fetch<
+    | {
+        /**
+         * Array of URLs where the file was updated
+         *
+         * @example example-upload.aws.com
+         */
+        urls: string[];
+      }
+    | Record<string, any>,
+    UploadFileError,
+    undefined,
+    UploadFileHeaders,
+    UploadFileQueryParams,
+    {}
+  >({ url: '/v2/files', method: 'post', ...variables, signal });
+
+export type RequestDeleteError = Fetcher.ErrorWrapper<undefined>;
+
+export type RequestDeleteResponse = {
+  /**
+   * Unique identifier of the User who has initiated deletion.
+   */
+  id: string;
+  /**
+   * Email address of the User who has initiated deletion.
+   */
+  email: string;
+  /**
+   * User deletion progress status.
+   *
+   * @example Verification email sent
+   */
+  message: string;
+};
+
+export type RequestDeleteRequestBody = {
+  /**
+   * Optional array of objects that describe the reason why the User account is being deleted.
+   */
+  reasons?: {
+    /**
+     * Idenitifier slug of the reason why the User account is being deleted.
+     */
+    slug: string;
+    /**
+     * Description of the reason why the User account is being deleted.
+     */
+    description: string;
+  }[];
+};
+
+export type RequestDeleteVariables = {
+  body?: RequestDeleteRequestBody;
+} & FetcherExtraProps;
+
+/**
+ * Initiates the deletion process for the currently authenticated User, by sending a deletion confirmation email. The email contains a link that the user needs to visit in order to proceed with the deletion process.
+ */
+export const requestDelete = (variables: RequestDeleteVariables, signal?: AbortSignal) =>
+  fetch<RequestDeleteResponse, RequestDeleteError, RequestDeleteRequestBody, {}, {}, {}>({
+    url: '/v1/user',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type GetAuthUserError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetAuthUserResponse = {
+  user: Schemas.AuthUser | Schemas.AuthUserLimited;
+};
+
+export type GetAuthUserVariables = FetcherExtraProps;
+
+/**
+ * Retrieves information related to the currently authenticated User.
+ */
+export const getAuthUser = (variables: GetAuthUserVariables, signal?: AbortSignal) =>
+  fetch<GetAuthUserResponse, GetAuthUserError, undefined, {}, {}, {}>({
+    url: '/v2/user',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type ListAuthTokensError = Fetcher.ErrorWrapper<undefined>;
+
+export type ListAuthTokensResponse = {
+  tokens: Schemas.AuthToken[];
+  testingToken?: Schemas.AuthToken;
+  pagination: Schemas.Pagination;
+};
+
+export type ListAuthTokensVariables = FetcherExtraProps;
+
+/**
+ * Retrieve a list of the current User's authentication tokens.
+ */
+export const listAuthTokens = (variables: ListAuthTokensVariables, signal?: AbortSignal) =>
+  fetch<ListAuthTokensResponse, ListAuthTokensError, undefined, {}, {}, {}>({
+    url: '/v5/user/tokens',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type CreateAuthTokenQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type CreateAuthTokenError = Fetcher.ErrorWrapper<undefined>;
+
+export type CreateAuthTokenResponse = {
+  token: Schemas.AuthToken;
+  /**
+   * The authentication token's actual value. This token is only provided in this response, and can never be retrieved again in the future. Be sure to save it somewhere safe!
+   *
+   * @example uRKJSTt0L4RaSkiMj41QTkxM
+   */
+  bearerToken: string;
+};
+
+export type CreateAuthTokenVariables = {
+  body?:
+    | {
+        name: string;
+        expiresAt?: number;
+      }
+    | {
+        type: 'oauth2-token';
+        name: string;
+        clientId?: string;
+        installationId?: string;
+        expiresAt?: number;
+      };
+  queryParams?: CreateAuthTokenQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Creates and returns a new authentication token for the currently authenticated User. The `bearerToken` property is only provided once, in the response body, so be sure to save it on the client for use with API requests.
+ */
+export const createAuthToken = (variables: CreateAuthTokenVariables, signal?: AbortSignal) =>
+  fetch<
+    CreateAuthTokenResponse,
+    CreateAuthTokenError,
+    | {
+        name: string;
+        expiresAt?: number;
+      }
+    | {
+        type: 'oauth2-token';
+        name: string;
+        clientId?: string;
+        installationId?: string;
+        expiresAt?: number;
+      },
+    {},
+    CreateAuthTokenQueryParams,
+    {}
+  >({ url: '/v3/user/tokens', method: 'post', ...variables, signal });
+
+export type GetAuthTokenPathParams = {
+  /**
+   * The identifier of the token to retrieve. The special value \"current\" may be supplied, which returns the metadata for the token that the current HTTP request is authenticated with.
+   *
+   * @example 5d9f2ebd38ddca62e5d51e9c1704c72530bdc8bfdd41e782a6687c48399e8391
+   */
+  tokenId: string;
+};
+
+export type GetAuthTokenError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetAuthTokenResponse = {
+  token: Schemas.AuthToken;
+};
+
+export type GetAuthTokenVariables = {
+  pathParams: GetAuthTokenPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieve metadata about an authentication token belonging to the currently authenticated User.
+ */
+export const getAuthToken = (variables: GetAuthTokenVariables, signal?: AbortSignal) =>
+  fetch<GetAuthTokenResponse, GetAuthTokenError, undefined, {}, {}, GetAuthTokenPathParams>({
+    url: '/v5/user/tokens/{tokenId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type DeleteAuthTokenPathParams = {
+  /**
+   * The identifier of the token to invalidate. The special value \"current\" may be supplied, which invalidates the token that the HTTP request was authenticated with.
+   *
+   * @example 5d9f2ebd38ddca62e5d51e9c1704c72530bdc8bfdd41e782a6687c48399e8391
+   */
+  tokenId: string;
+};
+
+export type DeleteAuthTokenError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteAuthTokenResponse = {
+  /**
+   * The unique identifier of the token that was deleted.
+   *
+   * @example 5d9f2ebd38ddca62e5d51e9c1704c72530bdc8bfdd41e782a6687c48399e8391
+   */
+  tokenId: string;
+};
+
+export type DeleteAuthTokenVariables = {
+  pathParams: DeleteAuthTokenPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Invalidate an authentication token, such that it will no longer be valid for future HTTP requests.
+ */
+export const deleteAuthToken = (variables: DeleteAuthTokenVariables, signal?: AbortSignal) =>
+  fetch<DeleteAuthTokenResponse, DeleteAuthTokenError, undefined, {}, {}, DeleteAuthTokenPathParams>({
+    url: '/v3/user/tokens/{tokenId}',
+    method: 'delete',
     ...variables,
     signal
   });
@@ -11861,31 +12693,31 @@ export type CreateWebhookRequestBody = {
    * @minItems 1
    */
   events: (
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.DomainCreate'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.DeploymentCreate'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.DeploymentErro'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.DeploymentCancele'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.DeploymentSucceede'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.DeploymentRead'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.DeploymentCheckRerequeste'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.IntegrationConfigurationPermissionUpgrade'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.IntegrationConfigurationRemove'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.IntegrationConfigurationScopeChangeConfirme'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.ProjectCreate'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.ProjectRemove'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentChecksComplete'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentRead'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentPrepare'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentErro'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentCheckRerequeste'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentCancele'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.LegacyProjectCreate'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.LegacyProjectRemove'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.LegacyDomainCreate'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymen'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.LegacyIntegrationConfigurationPermissionUpdate'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.LegacyIntegrationConfigurationRemove'
-    | 'mport("/Users/andy/projects/vercel/api/utils/webhooks/webhooks/types").WebhookName.LegacyIntegrationConfigurationScopeChangeConfirme'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DomainCreate'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentCreate'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentErro'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentCancele'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentSucceede'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentRead'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentCheckRerequeste'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.IntegrationConfigurationPermissionUpgrade'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.IntegrationConfigurationRemove'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.IntegrationConfigurationScopeChangeConfirme'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.ProjectCreate'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.ProjectRemove'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentChecksComplete'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentRead'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentPrepare'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentErro'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentCheckRerequeste'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentCancele'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyProjectCreate'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyProjectRemove'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDomainCreate'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymen'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyIntegrationConfigurationPermissionUpdate'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyIntegrationConfigurationRemove'
+    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyIntegrationConfigurationScopeChangeConfirme'
   )[];
   /**
    * @minItems 1
@@ -12259,1337 +13091,719 @@ export const deleteWebhook = (variables: DeleteWebhookVariables, signal?: AbortS
     signal
   });
 
-export type GetConfigurableLogDrainPathParams = {
-  id: string;
+export type GetAliasPathParams = {
+  /**
+   * The alias or alias ID to be retrieved
+   *
+   * @example example.vercel.app
+   */
+  idOrAlias: string;
 };
 
-export type GetConfigurableLogDrainQueryParams = {
+export type GetAliasQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type GetConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetConfigurableLogDrainResponse = {
-  /**
-   * The environment to filter logs by
+   * Get the alias only if it was created after the provided timestamp
    *
-   * @example production
+   * @deprecated true
+   * @example 1540095775951
    */
-  environment?: 'preview' | 'production';
+  from?: number;
   /**
-   * The branch to filter logs by
-   *
-   * @example main
-   */
-  branch?: string;
-  /**
-   * The ID of the related integration configuration
-   */
-  configurationId?: string;
-  /**
-   * The key/value pairs that will be sent as headers to the log-drain
-   *
-   * @example {"foo":"bar"}
-   */
-  headers?: {
-    [key: string]: string;
-  };
-  /**
-   * The ID of the projects the deployment is associated with
+   * Get the alias only if it is assigned to the provided project ID
    *
    * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-   */
-  projectIds?: string[];
-  /**
-   * A number containing the date when the log-drain was created in in milliseconds
-   *
-   * @example 1567024758130
-   */
-  createdAt: number;
-  /**
-   * The log-drain id
-   *
-   * @example ld_GflD6EYyo7F4ViYS
-   */
-  id: string;
-  /**
-   * The unique ID of the team the deployment belongs to
-   *
-   * @example team_ZspSRT4ljIEEmMHgoDwKWDei
-   */
-  ownerId: string;
-  /**
-   * The log-drain defined sources
-   *
-   * @example lambda
-   * @example build
-   */
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
-  /**
-   * The log-drain defined delivery format
-   *
-   * @example json
-   * @example ndjson
-   */
-  deliveryFormat: 'json' | 'ndjson' | 'syslog';
-  /**
-   * A string with the URL of the log-drain
-   *
-   * @example https://my-log-drain.com
-   */
-  url: string;
-};
-
-export type GetConfigurableLogDrainVariables = {
-  pathParams: GetConfigurableLogDrainPathParams;
-  queryParams?: GetConfigurableLogDrainQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieves a Configurable Log Drain. This endpoint must be called with a team AccessToken (integration OAuth2 clients are not allowed). Only log drains owned by the authenticated team can be accessed.
- */
-export const getConfigurableLogDrain = (variables: GetConfigurableLogDrainVariables, signal?: AbortSignal) =>
-  fetch<
-    GetConfigurableLogDrainResponse,
-    GetConfigurableLogDrainError,
-    undefined,
-    {},
-    GetConfigurableLogDrainQueryParams,
-    GetConfigurableLogDrainPathParams
-  >({ url: '/v1/log-drains/{id}', method: 'get', ...variables, signal });
-
-export type DeleteConfigurableLogDrainPathParams = {
-  id: string;
-};
-
-export type DeleteConfigurableLogDrainQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type DeleteConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
-
-export type DeleteConfigurableLogDrainVariables = {
-  pathParams: DeleteConfigurableLogDrainPathParams;
-  queryParams?: DeleteConfigurableLogDrainQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Deletes a Configurable Log Drain. This endpoint must be called with a team AccessToken (integration OAuth2 clients are not allowed). Only log drains owned by the authenticated team can be deleted.
- */
-export const deleteConfigurableLogDrain = (variables: DeleteConfigurableLogDrainVariables, signal?: AbortSignal) =>
-  fetch<
-    undefined,
-    DeleteConfigurableLogDrainError,
-    undefined,
-    {},
-    DeleteConfigurableLogDrainQueryParams,
-    DeleteConfigurableLogDrainPathParams
-  >({ url: '/v1/log-drains/{id}', method: 'delete', ...variables, signal });
-
-export type GetConfigurableLogDrainsQueryParams = {
-  /**
-   * @pattern ^[a-zA-z0-9_]+$
    */
   projectId?: string;
   /**
+   * Get the alias only if it was created after this JavaScript timestamp
+   *
+   * @example 1540095775941
+   */
+  since?: number;
+  /**
+   * Get the alias only if it was created before this JavaScript timestamp
+   *
+   * @example 1540095775951
+   */
+  until?: number;
+  /**
    * The Team identifier or slug to perform the request on behalf of.
    */
   teamId?: string;
 };
 
-export type GetConfigurableLogDrainsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAliasError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetConfigurableLogDrainsResponse = {
+export type GetAliasResponse = {
   /**
-   * The environment to filter logs by
+   * The alias name, it could be a `.vercel.app` subdomain or a custom domain
    *
-   * @example production
+   * @example my-alias.vercel.app
    */
-  environment?: 'preview' | 'production';
+  alias: string;
   /**
-   * The branch to filter logs by
+   * The date when the alias was created
    *
-   * @example main
+   * @format date-time
+   * @example 2017-04-26T23:00:34.232Z
    */
-  branch?: string;
+  created: string;
   /**
-   * The ID of the related integration configuration
-   */
-  configurationId?: string;
-  /**
-   * The key/value pairs that will be sent as headers to the log-drain
+   * The date when the alias was created in milliseconds since the UNIX epoch
    *
-   * @example {"foo":"bar"}
+   * @example 1540095775941
    */
-  headers?: {
-    [key: string]: string;
+  createdAt?: number;
+  /**
+   * Information of the user who created the alias
+   */
+  creator?: {
+    /**
+     * ID of the user who created the alias
+     *
+     * @example 96SnxkFiMyVKsK3pnoHfx3Hz
+     */
+    uid: string;
+    /**
+     * Email of the user who created the alias
+     *
+     * @example john-doe@gmail.com
+     */
+    email: string;
+    /**
+     * Username of the user who created the alias
+     *
+     * @example john-doe
+     */
+    username: string;
   };
   /**
-   * The ID of the projects the deployment is associated with
+   * The date when the alias was deleted in milliseconds since the UNIX epoch
+   *
+   * @example 1540095775941
+   */
+  deletedAt?: number;
+  /**
+   * A map with the deployment ID, URL and metadata
+   */
+  deployment?: {
+    /**
+     * The deployment unique identifier
+     *
+     * @example dpl_5m8CQaRBm3FnWRW1od3wKTpaECPx
+     */
+    id: string;
+    /**
+     * The deployment unique URL
+     *
+     * @example my-instant-deployment-3ij3cxz9qr.now.sh
+     */
+    url: string;
+    /**
+     * The deployment metadata
+     *
+     * @example {}
+     */
+    meta?: string;
+  };
+  /**
+   * The deployment ID
+   *
+   * @example dpl_5m8CQaRBm3FnWRW1od3wKTpaECPx
+   */
+  deploymentId: string | null;
+  /**
+   * The unique identifier of the project
    *
    * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
    */
-  projectIds?: string[];
+  projectId: string | null;
   /**
-   * A number containing the date when the log-drain was created in in milliseconds
+   * Target destination domain for redirect when the alias is a redirect
+   */
+  redirect?: string | null;
+  /**
+   * Status code to be used on redirect
+   */
+  redirectStatusCode?: 301 | 302 | 307 | 308 | null;
+  /**
+   * The unique identifier of the alias
+   */
+  uid: string;
+  /**
+   * The date when the alias was updated in milliseconds since the UNIX epoch
    *
-   * @example 1567024758130
+   * @example 1540095775941
    */
-  createdAt: number;
+  updatedAt?: number;
   /**
-   * The log-drain id
-   *
-   * @example ld_GflD6EYyo7F4ViYS
+   * The protection bypass for the alias
    */
-  id: string;
-  /**
-   * The unique ID of the team the deployment belongs to
-   *
-   * @example team_ZspSRT4ljIEEmMHgoDwKWDei
-   */
-  ownerId: string;
-  /**
-   * The log-drain defined sources
-   *
-   * @example lambda
-   * @example build
-   */
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
-  /**
-   * The log-drain defined delivery format
-   *
-   * @example json
-   * @example ndjson
-   */
-  deliveryFormat: 'json' | 'ndjson' | 'syslog';
-  /**
-   * A string with the URL of the log-drain
-   *
-   * @example https://my-log-drain.com
-   */
-  url: string;
-}[];
-
-export type GetConfigurableLogDrainsVariables = {
-  queryParams?: GetConfigurableLogDrainsQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieves a list of Configurable Log Drains. This endpoint must be called with a team AccessToken (integration OAuth2 clients are not allowed). Only log drains owned by the authenticated team can be accessed.
- */
-export const getConfigurableLogDrains = (variables: GetConfigurableLogDrainsVariables, signal?: AbortSignal) =>
-  fetch<
-    GetConfigurableLogDrainsResponse,
-    GetConfigurableLogDrainsError,
-    undefined,
-    {},
-    GetConfigurableLogDrainsQueryParams,
-    {}
-  >({ url: '/v1/log-drains', method: 'get', ...variables, signal });
-
-export type CreateConfigurableLogDrainQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type CreateConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
-
-export type CreateConfigurableLogDrainResponse = {
-  /**
-   * The secret to validate the log-drain payload
-   */
-  secret?: string;
-  /**
-   * The environment to filter logs by
-   *
-   * @example production
-   */
-  environment?: 'preview' | 'production';
-  /**
-   * The branch to filter logs by
-   *
-   * @example main
-   */
-  branch?: string;
-  /**
-   * The ID of the related integration configuration
-   */
-  configurationId?: string;
-  /**
-   * The key/value pairs that will be sent as headers to the log-drain
-   *
-   * @example {"foo":"bar"}
-   */
-  headers?: {
-    [key: string]: string;
+  protectionBypass?: {
+    [key: string]: {
+      createdAt: number;
+      createdBy: string;
+      scope?: 'automation-bypass' | 'shareable-link';
+    };
   };
-  /**
-   * The ID of the projects the deployment is associated with
-   *
-   * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-   */
-  projectIds?: string[];
-  /**
-   * A number containing the date when the log-drain was created in in milliseconds
-   *
-   * @example 1567024758130
-   */
-  createdAt: number;
-  /**
-   * The log-drain id
-   *
-   * @example ld_GflD6EYyo7F4ViYS
-   */
-  id: string;
-  /**
-   * The unique ID of the team the deployment belongs to
-   *
-   * @example team_ZspSRT4ljIEEmMHgoDwKWDei
-   */
-  ownerId: string;
-  /**
-   * The log-drain defined sources
-   *
-   * @example lambda
-   * @example build
-   */
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
-  /**
-   * The log-drain defined delivery format
-   *
-   * @example json
-   * @example ndjson
-   */
-  deliveryFormat: 'json' | 'ndjson' | 'syslog';
-  /**
-   * A string with the URL of the log-drain
-   *
-   * @example https://my-log-drain.com
-   */
-  url: string;
 };
 
-export type CreateConfigurableLogDrainRequestBody = {
-  /**
-   * The delivery log format
-   *
-   * @example json
-   */
-  deliveryFormat: 'json' | 'ndjson';
-  /**
-   * The log drain url
-   *
-   * @format uri
-   * @pattern ^(http|https)?://
-   */
-  url: string;
-  /**
-   * Headers to be sent together with the request
-   */
-  headers?: {
-    [key: string]: string;
-  };
-  /**
-   * @minItems 1
-   * @maxItems 50
-   */
-  projectIds?: string[];
-  /**
-   * @uniqueItems true
-   * @minItems 1
-   */
-  sources: ('static' | 'lambda' | 'build' | 'edge' | 'external')[];
-  /**
-   * The environment of log drain
-   *
-   * @example production
-   */
-  environment?: 'preview' | 'production';
-  /**
-   * The branch regexp of log drain
-   *
-   * @example feature/*
-   */
-  branch?: string;
-};
-
-export type CreateConfigurableLogDrainVariables = {
-  body: CreateConfigurableLogDrainRequestBody;
-  queryParams?: CreateConfigurableLogDrainQueryParams;
+export type GetAliasVariables = {
+  pathParams: GetAliasPathParams;
+  queryParams?: GetAliasQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Creates a configurable log drain. This endpoint must be called with a team AccessToken (integration OAuth2 clients are not allowed)
+ * Retrieves an Alias for the given host name or alias ID.
  */
-export const createConfigurableLogDrain = (variables: CreateConfigurableLogDrainVariables, signal?: AbortSignal) =>
-  fetch<
-    CreateConfigurableLogDrainResponse,
-    CreateConfigurableLogDrainError,
-    CreateConfigurableLogDrainRequestBody,
-    {},
-    CreateConfigurableLogDrainQueryParams,
-    {}
-  >({ url: '/v1/log-drains', method: 'post', ...variables, signal });
-
-export type GetTeamPathParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type GetTeamQueryParams = {
-  slug?: string;
-};
-
-export type GetTeamError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetTeamVariables = {
-  pathParams?: GetTeamPathParams;
-  queryParams?: GetTeamQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Get information for the Team specified by the `teamId` parameter.
- */
-export const getTeam = (variables: GetTeamVariables, signal?: AbortSignal) =>
-  fetch<Schemas.Team, GetTeamError, undefined, {}, GetTeamQueryParams, GetTeamPathParams>({
-    url: '/v2/teams/{teamId}',
+export const getAlias = (variables: GetAliasVariables, signal?: AbortSignal) =>
+  fetch<GetAliasResponse, GetAliasError, undefined, {}, GetAliasQueryParams, GetAliasPathParams>({
+    url: '/v4/aliases/{idOrAlias}',
     method: 'get',
     ...variables,
     signal
   });
 
-export type PatchTeamPathParams = {
+export type ListAliasesQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId: string;
-};
-
-export type PatchTeamError = Fetcher.ErrorWrapper<undefined>;
-
-export type PatchTeamRequestBody = {
-  /**
-   * The hash value of an uploaded image.
+   * Get only aliases of the given domain name
    *
-   * @format regex
+   * @example my-test-domain.com
+   * @maxItems 20
    */
-  avatar?: string;
+  domain?: string[] | string;
   /**
-   * A short text that describes the team.
+   * Get only aliases created after the provided timestamp
    *
-   * @maxLength 140
-   * @example Our mission is to make cloud computing accessible to everyone
+   * @deprecated true
+   * @example 1540095775951
    */
-  description?: string;
+  from?: number;
   /**
-   * @format regex
-   * @example example.com
-   */
-  emailDomain?: string | null;
-  /**
-   * The name of the team.
+   * Maximum number of aliases to list from a request
    *
-   * @maxLength 256
-   * @example My Team
-   */
-  name?: string;
-  /**
-   * Suffix that will be used for all preview deployments.
-   *
-   * @format hostname
-   * @example example.dev
-   */
-  previewDeploymentSuffix?: string | null;
-  /**
-   * Create a new invite code and replace the current one.
-   *
-   * @example true
-   */
-  regenerateInviteCode?: boolean;
-  saml?: {
-    /**
-     * Require that members of the team use SAML Single Sign-On.
-     *
-     * @example true
-     */
-    enforced?: boolean;
-    roles?: {
-      [key: string]: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING';
-    };
-  };
-  /**
-   * A new slug for the team.
-   *
-   * @example my-team
-   */
-  slug?: string;
-  /**
-   * Enable preview comments: one of on, off or default.
-   *
-   * @example on
-   */
-  enablePreviewFeedback?: string;
-  /**
-   * Sensitive environment variable policy: one of on, off or default.
-   *
-   * @example on
-   */
-  sensitiveEnvironmentVariablePolicy?: string;
-  /**
-   * Runs a task that migrates all existing environment variables to sensitive environment variables.
-   *
-   * @example false
-   */
-  migrateExistingEnvVariablesToSensitive?: boolean;
-  /**
-   * Whether or not remote caching is enabled for the team
-   */
-  remoteCaching?: {
-    /**
-     * Enable or disable remote caching for the team.
-     *
-     * @example true
-     */
-    enabled?: boolean;
-  };
-};
-
-export type PatchTeamVariables = {
-  body?: PatchTeamRequestBody;
-  pathParams: PatchTeamPathParams;
-} & FetcherExtraProps;
-
-/**
- * Update the information of a Team specified by the `teamId` parameter. The request body should contain the information that will be updated on the Team.
- */
-export const patchTeam = (variables: PatchTeamVariables, signal?: AbortSignal) =>
-  fetch<Schemas.Team, PatchTeamError, PatchTeamRequestBody, {}, {}, PatchTeamPathParams>({
-    url: '/v2/teams/{teamId}',
-    method: 'patch',
-    ...variables,
-    signal
-  });
-
-export type GetTeamsQueryParams = {
-  /**
-   * Maximum number of Teams which may be returned.
-   *
-   * @example 20
+   * @example 10
    */
   limit?: number;
   /**
-   * Timestamp (in milliseconds) to only include Teams created since then.
+   * Filter aliases from the given `projectId`
    *
-   * @example 1540095775951
+   * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
+   */
+  projectId?: string;
+  /**
+   * Get aliases created after this JavaScript timestamp
+   *
+   * @example 1540095775941
    */
   since?: number;
   /**
-   * Timestamp (in milliseconds) to only include Teams created until then.
+   * Get aliases created before this JavaScript timestamp
    *
    * @example 1540095775951
    */
   until?: number;
+  /**
+   * Get aliases that would be rolled back for the given deployment
+   *
+   * @example dpl_XXX
+   */
+  rollbackDeploymentId?: string;
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
 };
 
-export type GetTeamsError = Fetcher.ErrorWrapper<undefined>;
+export type ListAliasesError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetTeamsResponse = {
-  teams: (Schemas.Team | Schemas.TeamLimited)[];
+export type ListAliasesResponse = {
+  aliases: {
+    /**
+     * The alias name, it could be a `.vercel.app` subdomain or a custom domain
+     *
+     * @example my-alias.vercel.app
+     */
+    alias: string;
+    /**
+     * The date when the alias was created
+     *
+     * @format date-time
+     * @example 2017-04-26T23:00:34.232Z
+     */
+    created: string;
+    /**
+     * The date when the alias was created in milliseconds since the UNIX epoch
+     *
+     * @example 1540095775941
+     */
+    createdAt?: number;
+    /**
+     * Information of the user who created the alias
+     */
+    creator?: {
+      /**
+       * ID of the user who created the alias
+       *
+       * @example 96SnxkFiMyVKsK3pnoHfx3Hz
+       */
+      uid: string;
+      /**
+       * Email of the user who created the alias
+       *
+       * @example john-doe@gmail.com
+       */
+      email: string;
+      /**
+       * Username of the user who created the alias
+       *
+       * @example john-doe
+       */
+      username: string;
+    };
+    /**
+     * The date when the alias was deleted in milliseconds since the UNIX epoch
+     *
+     * @example 1540095775941
+     */
+    deletedAt?: number;
+    /**
+     * A map with the deployment ID, URL and metadata
+     */
+    deployment?: {
+      /**
+       * The deployment unique identifier
+       *
+       * @example dpl_5m8CQaRBm3FnWRW1od3wKTpaECPx
+       */
+      id: string;
+      /**
+       * The deployment unique URL
+       *
+       * @example my-instant-deployment-3ij3cxz9qr.now.sh
+       */
+      url: string;
+      /**
+       * The deployment metadata
+       *
+       * @example {}
+       */
+      meta?: string;
+    };
+    /**
+     * The deployment ID
+     *
+     * @example dpl_5m8CQaRBm3FnWRW1od3wKTpaECPx
+     */
+    deploymentId: string | null;
+    /**
+     * The unique identifier of the project
+     *
+     * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
+     */
+    projectId: string | null;
+    /**
+     * Target destination domain for redirect when the alias is a redirect
+     */
+    redirect?: string | null;
+    /**
+     * Status code to be used on redirect
+     */
+    redirectStatusCode?: 301 | 302 | 307 | 308 | null;
+    /**
+     * The unique identifier of the alias
+     */
+    uid: string;
+    /**
+     * The date when the alias was updated in milliseconds since the UNIX epoch
+     *
+     * @example 1540095775941
+     */
+    updatedAt?: number;
+    /**
+     * The protection bypass for the alias
+     */
+    protectionBypass?: {
+      [key: string]: {
+        createdAt: number;
+        createdBy: string;
+        scope?: 'automation-bypass' | 'shareable-link';
+      };
+    };
+  }[];
   pagination: Schemas.Pagination;
 };
 
-export type GetTeamsVariables = {
-  queryParams?: GetTeamsQueryParams;
+export type ListAliasesVariables = {
+  queryParams?: ListAliasesQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Get a paginated list of all the Teams the authenticated User is a member of.
+ * Retrieves a list of aliases for the authenticated User or Team. When `domain` is provided, only aliases for that domain will be returned. When `projectId` is provided, it will only return the given project aliases.
  */
-export const getTeams = (variables: GetTeamsVariables, signal?: AbortSignal) =>
-  fetch<GetTeamsResponse, GetTeamsError, undefined, {}, GetTeamsQueryParams, {}>({
-    url: '/v2/teams',
+export const listAliases = (variables: ListAliasesVariables, signal?: AbortSignal) =>
+  fetch<ListAliasesResponse, ListAliasesError, undefined, {}, ListAliasesQueryParams, {}>({
+    url: '/v4/aliases',
     method: 'get',
     ...variables,
     signal
   });
 
-export type CreateTeamError = Fetcher.ErrorWrapper<undefined>;
-
-export type CreateTeamResponse = {
+export type DeleteAliasPathParams = {
   /**
-   * Id of the created team
+   * The ID or alias that will be removed
    *
-   * @example team_nLlpyC6RE1qxqglFKbrMxlud
+   * @example 2WjyKQmM8ZnGcJsPWMrHRHrE
    */
-  id: string;
+  aliasId: string;
 };
 
-export type CreateTeamRequestBody = {
-  /**
-   * The desired slug for the Team
-   *
-   * @example a-random-team
-   * @maxLength 48
-   */
-  slug: string;
-  /**
-   * The desired name for the Team. It will be generated from the provided slug if nothing is provided
-   *
-   * @example A Random Team
-   * @maxLength 256
-   */
-  name?: string;
-};
-
-export type CreateTeamVariables = {
-  body: CreateTeamRequestBody;
-} & FetcherExtraProps;
-
-/**
- * Create a new Team under your account. You need to send a POST request with the desired Team slug, and optionally the Team name.
- */
-export const createTeam = (variables: CreateTeamVariables, signal?: AbortSignal) =>
-  fetch<CreateTeamResponse, CreateTeamError, CreateTeamRequestBody, {}, {}, {}>({
-    url: '/v1/teams',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
-export type DeleteTeamPathParams = {
+export type DeleteAliasQueryParams = {
   /**
    * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId: string;
-};
-
-export type DeleteTeamError = Fetcher.ErrorWrapper<undefined>;
-
-export type DeleteTeamResponse = {
-  /**
-   * The ID of the deleted Team
-   *
-   * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
-   */
-  id: string;
-};
-
-export type DeleteTeamRequestBody = {
-  /**
-   * Optional array of objects that describe the reason why the team is being deleted.
-   */
-  reasons?: {
-    /**
-     * Idenitifier slug of the reason why the team is being deleted.
-     */
-    slug: string;
-    /**
-     * Description of the reason why the team is being deleted.
-     */
-    description: string;
-  }[];
-};
-
-export type DeleteTeamVariables = {
-  body?: DeleteTeamRequestBody;
-  pathParams: DeleteTeamPathParams;
-} & FetcherExtraProps;
-
-/**
- * Delete a team under your account. You need to send a `DELETE` request with the desired team `id`. An optional array of reasons for deletion may also be sent.
- */
-export const deleteTeam = (variables: DeleteTeamVariables, signal?: AbortSignal) =>
-  fetch<DeleteTeamResponse, DeleteTeamError, DeleteTeamRequestBody, {}, {}, DeleteTeamPathParams>({
-    url: '/v1/teams/{teamId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
-
-export type DeleteTeamInviteCodePathParams = {
-  /**
-   * The Team invite code ID.
-   *
-   * @example 2wn2hudbr4chb1ecywo9dvzo7g9sscs6mzcz8htdde0txyom4l
-   */
-  inviteId: string;
-};
-
-export type DeleteTeamInviteCodeError = Fetcher.ErrorWrapper<undefined>;
-
-export type DeleteTeamInviteCodeResponse = {
-  /**
-   * ID of the team.
-   */
-  id: string;
-};
-
-export type DeleteTeamInviteCodeVariables = {
-  pathParams: DeleteTeamInviteCodePathParams;
-} & FetcherExtraProps;
-
-/**
- * Delete an active Team invite code.
- */
-export const deleteTeamInviteCode = (variables: DeleteTeamInviteCodeVariables, signal?: AbortSignal) =>
-  fetch<DeleteTeamInviteCodeResponse, DeleteTeamInviteCodeError, undefined, {}, {}, DeleteTeamInviteCodePathParams>({
-    url: '/v1/teams/{teamId}/invites/{inviteId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
-
-export type GetTeamMembersQueryParams = {
-  /**
-   * Limit how many teams should be returned
-   *
-   * @example 20
-   */
-  limit?: number;
-  /**
-   * Timestamp in milliseconds to only include members added since then.
-   *
-   * @example 1540095775951
-   */
-  since?: number;
-  /**
-   * Timestamp in milliseconds to only include members added until then.
-   *
-   * @example 1540095775951
-   */
-  until?: number;
-  /**
-   * Search team members by their name, username, and email.
-   */
-  search?: string;
-  /**
-   * Only return members with the specified team role.
-   *
-   * @example OWNER
-   */
-  role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'VIEWER';
-  /**
-   * Exclude members who belong to the specified project.
-   */
-  excludeProject?: string;
-};
-
-export type GetTeamMembersError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetTeamMembersResponse = {
-  members: (
-    | {
-        avatar?: string;
-        confirmed: boolean;
-        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING';
-        uid: string;
-        username: string;
-        name?: string;
-        createdAt: number;
-        accessRequestedAt: number;
-        joinedFrom?: {
-          origin:
-            | 'import'
-            | 'gitlab'
-            | 'bitbucket'
-            | 'github'
-            | 'mail'
-            | 'link'
-            | 'teams'
-            | 'saml'
-            | 'dsync'
-            | 'feedback'
-            | 'organization-teams';
-          commitId?: string;
-          repoId?: string;
-          repoPath?: string;
-          gitUserId?: string | number;
-          gitUserLogin?: string;
-          ssoUserId?: string;
-          ssoConnectedAt?: number;
-          idpUserId?: string;
-          dsyncUserId?: string;
-          dsyncConnectedAt?: number;
-        };
-        email: string;
-        /**
-         * Information about the GitHub account for this user.
-         */
-        github?: {
-          login?: string;
-        };
-        /**
-         * Information about the GitLab account of this user.
-         */
-        gitlab?: {
-          login?: string;
-        };
-        /**
-         * Information about the Bitbucket account of this user.
-         */
-        bitbucket?: {
-          login?: string;
-        };
-      }
-    | {
-        /**
-         * ID of the file for the Avatar of this member.
-         *
-         * @example 123a6c5209bc3778245d011443644c8d27dc2c50
-         */
-        avatar?: string;
-        /**
-         * Boolean that indicates if this member was confirmed by an owner.
-         *
-         * @example true
-         */
-        confirmed: boolean;
-        /**
-         * The email of this member.
-         *
-         * @example jane.doe@example.com
-         */
-        email: string;
-        /**
-         * Information about the GitHub account for this user.
-         */
-        github?: {
-          login?: string;
-        };
-        /**
-         * Information about the GitLab account of this user.
-         */
-        gitlab?: {
-          login?: string;
-        };
-        /**
-         * Information about the Bitbucket account of this user.
-         */
-        bitbucket?: {
-          login?: string;
-        };
-        /**
-         * Role of this user in the team.
-         *
-         * @example OWNER
-         */
-        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING';
-        /**
-         * The ID of this user.
-         *
-         * @example zTuNVUXEAvvnNN3IaqinkyMw
-         */
-        uid: string;
-        /**
-         * The unique username of this user.
-         *
-         * @example jane-doe
-         */
-        username: string;
-        /**
-         * The name of this user.
-         *
-         * @example Jane Doe
-         */
-        name?: string;
-        /**
-         * Timestamp in milliseconds when this member was added.
-         *
-         * @example 1588720733602
-         */
-        createdAt: number;
-        /**
-         * Timestamp in milliseconds for when this team member was accepted by an owner.
-         *
-         * @example 1588820733602
-         */
-        accessRequestedAt?: number;
-        /**
-         * Map with information about the members origin if they joined by requesting access.
-         */
-        joinedFrom?: {
-          origin:
-            | 'import'
-            | 'gitlab'
-            | 'bitbucket'
-            | 'github'
-            | 'mail'
-            | 'link'
-            | 'teams'
-            | 'saml'
-            | 'dsync'
-            | 'feedback'
-            | 'organization-teams';
-          commitId?: string;
-          repoId?: string;
-          repoPath?: string;
-          gitUserId?: string | number;
-          gitUserLogin?: string;
-          ssoUserId?: string;
-          ssoConnectedAt?: number;
-          idpUserId?: string;
-          dsyncUserId?: string;
-          dsyncConnectedAt?: number;
-        };
-      }
-  )[];
-  emailInviteCodes?: {
-    id: string;
-    email?: string;
-    role?: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING';
-    isDSyncUser: boolean;
-    createdAt?: number;
-  }[];
-  pagination: {
-    hasNext: boolean;
-    /**
-     * Amount of items in the current page.
-     *
-     * @example 20
-     */
-    count: number;
-    /**
-     * Timestamp that must be used to request the next page.
-     *
-     * @example 1540095775951
-     */
-    next: number | null;
-    /**
-     * Timestamp that must be used to request the previous page.
-     *
-     * @example 1540095775951
-     */
-    prev: number | null;
-  };
-};
-
-export type GetTeamMembersVariables = {
-  queryParams?: GetTeamMembersQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Get a paginated list of team members for the provided team.
- */
-export const getTeamMembers = (variables: GetTeamMembersVariables, signal?: AbortSignal) =>
-  fetch<GetTeamMembersResponse, GetTeamMembersError, undefined, {}, GetTeamMembersQueryParams, {}>({
-    url: '/v2/teams/{teamId}/members',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type InviteUserToTeamError = Fetcher.ErrorWrapper<undefined>;
-
-export type InviteUserToTeamRequestBody = {
-  /**
-   * The id of the user to invite
-   *
-   * @example kr1PsOIzqEL5Xg6M4VZcZosf
-   */
-  uid?: string;
-  /**
-   * The email address of the user to invite
-   *
-   * @format email
-   * @example john@example.com
-   */
-  email?: string;
-  role?: void;
-};
-
-export type InviteUserToTeamVariables = {
-  body?: InviteUserToTeamRequestBody;
-} & FetcherExtraProps;
-
-/**
- * Invite a user to join the team specified in the URL. The authenticated user needs to be an `OWNER` in order to successfully invoke this endpoint. The user can be specified with an email or an ID. If both email and ID are provided, ID will take priority.
- */
-export const inviteUserToTeam = (variables: InviteUserToTeamVariables, signal?: AbortSignal) =>
-  fetch<
-    | {
-        /**
-         * The ID of the invited user
-         *
-         * @example kr1PsOIzqEL5Xg6M4VZcZosf
-         */
-        uid: string;
-        /**
-         * The username of the invited user
-         *
-         * @example john-doe
-         */
-        username: string;
-        /**
-         * The email of the invited user. Not included if the user was invited via their UID.
-         *
-         * @example john@user.co
-         */
-        email: string;
-        /**
-         * The role used for the invitation
-         *
-         * @example MEMBER
-         */
-        role: string;
-      }
-    | {
-        uid: string;
-        username: string;
-        role: string;
-      },
-    InviteUserToTeamError,
-    InviteUserToTeamRequestBody,
-    {},
-    {},
-    {}
-  >({ url: '/v1/teams/{teamId}/members', method: 'post', ...variables, signal });
-
-export type RequestAccessToTeamError = Fetcher.ErrorWrapper<undefined>;
-
-export type RequestAccessToTeamResponse = {
-  teamSlug: string;
-  teamName: string;
-  confirmed?: boolean;
-  joinedFrom?: {
-    origin:
-      | 'import'
-      | 'teams'
-      | 'github'
-      | 'gitlab'
-      | 'bitbucket'
-      | 'feedback'
-      | 'organization-teams'
-      | 'mail'
-      | 'link'
-      | 'saml'
-      | 'dsync';
-    commitId?: string;
-    repoId?: string;
-    repoPath?: string;
-    gitUserId?: string | number;
-    gitUserLogin?: string;
-    ssoUserId?: string;
-    ssoConnectedAt?: number;
-    idpUserId?: string;
-    dsyncUserId?: string;
-    dsyncConnectedAt?: number;
-  };
-  accessRequestedAt?: number;
-  github: {
-    login?: string;
-  } | null;
-  gitlab: {
-    login?: string;
-  } | null;
-  bitbucket: {
-    login?: string;
-  } | null;
-};
-
-export type RequestAccessToTeamRequestBody = {
-  joinedFrom: {
-    /**
-     * The origin of the request.
-     *
-     * @example github
-     */
-    origin: 'import' | 'teams' | 'github' | 'gitlab' | 'bitbucket' | 'feedback' | 'organization-teams';
-    /**
-     * The commit sha if the origin is a git provider.
-     *
-     * @example f498d25d8bd654b578716203be73084b31130cd7
-     */
-    commitId?: string;
-    /**
-     * The ID of the repository for the given Git provider.
-     *
-     * @example 67753070
-     */
-    repoId?: string;
-    /**
-     * The path to the repository for the given Git provider.
-     *
-     * @example jane-doe/example
-     */
-    repoPath?: string;
-    /**
-     * The ID of the Git account of the user who requests access.
-     *
-     * @example 103053343
-     */
-    gitUserId?: string | number;
-    /**
-     * The login name for the Git account of the user who requests access.
-     *
-     * @example jane-doe
-     */
-    gitUserLogin?: string;
-  };
-};
-
-export type RequestAccessToTeamVariables = {
-  body: RequestAccessToTeamRequestBody;
-} & FetcherExtraProps;
-
-/**
- * Request access to a team as a member. An owner has to approve the request. Only 10 users can request access to a team at the same time.
- */
-export const requestAccessToTeam = (variables: RequestAccessToTeamVariables, signal?: AbortSignal) =>
-  fetch<RequestAccessToTeamResponse, RequestAccessToTeamError, RequestAccessToTeamRequestBody, {}, {}, {}>({
-    url: '/v1/teams/{teamId}/request',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
-export type GetTeamAccessRequestPathParams = {
-  userId?: string;
-};
-
-export type GetTeamAccessRequestError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetTeamAccessRequestResponse = {
-  /**
-   * The slug of the team.
-   *
-   * @example my-team
-   */
-  teamSlug: string;
-  /**
-   * The name of the team.
-   *
-   * @example My Team
-   */
-  teamName: string;
-  /**
-   * Current status of the membership. Will be `true` if confirmed, if pending it'll be `false`.
-   *
-   * @example false
-   */
-  confirmed: boolean;
-  /**
-   * A map that describes the origin from where the user joined.
-   */
-  joinedFrom: {
-    origin:
-      | 'import'
-      | 'mail'
-      | 'link'
-      | 'teams'
-      | 'github'
-      | 'gitlab'
-      | 'bitbucket'
-      | 'saml'
-      | 'dsync'
-      | 'feedback'
-      | 'organization-teams';
-    commitId?: string;
-    repoId?: string;
-    repoPath?: string;
-    gitUserId?: string | number;
-    gitUserLogin?: string;
-    ssoUserId?: string;
-    ssoConnectedAt?: number;
-    idpUserId?: string;
-    dsyncUserId?: string;
-    dsyncConnectedAt?: number;
-  };
-  /**
-   * Timestamp in milliseconds when the user requested access to the team.
-   *
-   * @example 1588720733602
-   */
-  accessRequestedAt: number;
-  /**
-   * Map of the connected GitHub account.
-   */
-  github: {
-    login?: string;
-  } | null;
-  /**
-   * Map of the connected GitLab account.
-   */
-  gitlab: {
-    login?: string;
-  } | null;
-  /**
-   * Map of the connected Bitbucket account.
-   */
-  bitbucket: {
-    login?: string;
-  } | null;
-};
-
-export type GetTeamAccessRequestVariables = {
-  pathParams?: GetTeamAccessRequestPathParams;
-} & FetcherExtraProps;
-
-/**
- * Check the status of a join request. It'll respond with a 404 if the request has been declined. If no `userId` path segment was provided, this endpoint will instead return the status of the authenticated user.
- */
-export const getTeamAccessRequest = (variables: GetTeamAccessRequestVariables, signal?: AbortSignal) =>
-  fetch<GetTeamAccessRequestResponse, GetTeamAccessRequestError, undefined, {}, {}, GetTeamAccessRequestPathParams>({
-    url: '/v1/teams/{teamId}/request/{userId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type JoinTeamError = Fetcher.ErrorWrapper<undefined>;
-
-export type JoinTeamResponse = {
-  /**
-   * The ID of the team the user joined.
-   *
-   * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
-   */
-  teamId: string;
-  /**
-   * The slug of the team the user joined.
-   *
-   * @example my-team
-   */
-  slug: string;
-  /**
-   * The name of the team the user joined.
-   *
-   * @example My Team
-   */
-  name: string;
-  /**
-   * The origin of how the user joined.
-   *
-   * @example email
-   */
-  from: string;
-};
-
-export type JoinTeamRequestBody = {
-  /**
-   * The invite code to join the team.
-   *
-   * @example fisdh38aejkeivn34nslfore9vjtn4ls
-   */
-  inviteCode?: string;
-  /**
-   * The team ID.
-   *
-   * @example team_3oNwMKqLHqEBh02CTPsrbNbe
    */
   teamId?: string;
 };
 
-export type JoinTeamVariables = {
-  body?: JoinTeamRequestBody;
+export type DeleteAliasError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteAliasResponse = {
+  status: 'SUCCESS';
+};
+
+export type DeleteAliasVariables = {
+  pathParams: DeleteAliasPathParams;
+  queryParams?: DeleteAliasQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Join a team with a provided invite code or team ID.
+ * Delete an Alias with the specified ID.
  */
-export const joinTeam = (variables: JoinTeamVariables, signal?: AbortSignal) =>
-  fetch<JoinTeamResponse, JoinTeamError, JoinTeamRequestBody, {}, {}, {}>({
-    url: '/v1/teams/{teamId}/members/teams/join',
+export const deleteAlias = (variables: DeleteAliasVariables, signal?: AbortSignal) =>
+  fetch<DeleteAliasResponse, DeleteAliasError, undefined, {}, DeleteAliasQueryParams, DeleteAliasPathParams>({
+    url: '/v2/aliases/{aliasId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type ListDeploymentAliasesPathParams = {
+  /**
+   * The ID of the deployment the aliases should be listed for
+   *
+   * @example dpl_FjvFJncQHQcZMznrUm9EoB8sFuPa
+   */
+  id: string;
+};
+
+export type ListDeploymentAliasesQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type ListDeploymentAliasesError = Fetcher.ErrorWrapper<undefined>;
+
+export type ListDeploymentAliasesResponse = {
+  /**
+   * A list of the aliases assigned to the deployment
+   */
+  aliases: {
+    /**
+     * The unique identifier of the alias
+     *
+     * @example 2WjyKQmM8ZnGcJsPWMrHRHrE
+     */
+    uid: string;
+    /**
+     * The alias name, it could be a `.vercel.app` subdomain or a custom domain
+     *
+     * @example my-alias.vercel.app
+     */
+    alias: string;
+    /**
+     * The date when the alias was created
+     *
+     * @format date-time
+     * @example 2017-04-26T23:00:34.232Z
+     */
+    created: string;
+    /**
+     * Target destination domain for redirect when the alias is a redirect
+     */
+    redirect?: string | null;
+    /**
+     * The protection bypass for the alias
+     */
+    protectionBypass?: {
+      [key: string]: {
+        createdAt: number;
+        createdBy: string;
+        scope?: 'automation-bypass' | 'shareable-link';
+      };
+    };
+  }[];
+};
+
+export type ListDeploymentAliasesVariables = {
+  pathParams: ListDeploymentAliasesPathParams;
+  queryParams?: ListDeploymentAliasesQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves all Aliases for the Deployment with the given ID. The authenticated User must own the deployment.
+ */
+export const listDeploymentAliases = (variables: ListDeploymentAliasesVariables, signal?: AbortSignal) =>
+  fetch<
+    ListDeploymentAliasesResponse,
+    ListDeploymentAliasesError,
+    undefined,
+    {},
+    ListDeploymentAliasesQueryParams,
+    ListDeploymentAliasesPathParams
+  >({ url: '/v2/deployments/{id}/aliases', method: 'get', ...variables, signal });
+
+export type AssignAliasPathParams = {
+  /**
+   * The ID of the deployment the aliases should be listed for
+   *
+   * @example dpl_FjvFJncQHQcZMznrUm9EoB8sFuPa
+   */
+  id: string;
+};
+
+export type AssignAliasQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type AssignAliasError = Fetcher.ErrorWrapper<undefined>;
+
+export type AssignAliasResponse = {
+  /**
+   * The unique identifier of the alias
+   *
+   * @example 2WjyKQmM8ZnGcJsPWMrHRHrE
+   */
+  uid: string;
+  /**
+   * The assigned alias name
+   *
+   * @example my-alias.vercel.app
+   */
+  alias: string;
+  /**
+   * The date when the alias was created
+   *
+   * @format date-time
+   * @example 2017-04-26T23:00:34.232Z
+   */
+  created: string;
+  /**
+   * The unique identifier of the previously aliased deployment, only received when the alias was used before
+   *
+   * @example dpl_FjvFJncQHQcZMznrUm9EoB8sFuPa
+   */
+  oldDeploymentId?: string | null;
+};
+
+export type AssignAliasRequestBody = {
+  /**
+   * The alias we want to assign to the deployment defined in the URL
+   *
+   * @example my-alias.vercel.app
+   */
+  alias?: string;
+  /**
+   * The redirect property will take precedence over the deployment id from the URL and consists of a hostname (like test.com) to which the alias should redirect using status code 307
+   *
+   * @example null
+   */
+  redirect?: string | null;
+};
+
+export type AssignAliasVariables = {
+  body?: AssignAliasRequestBody;
+  pathParams: AssignAliasPathParams;
+  queryParams?: AssignAliasQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Creates a new alias for the deployment with the given deployment ID. The authenticated user must own this deployment. If the desired alias is already assigned to another deployment, then it will be removed from the old deployment and assigned to the new one.
+ */
+export const assignAlias = (variables: AssignAliasVariables, signal?: AbortSignal) =>
+  fetch<
+    AssignAliasResponse,
+    AssignAliasError,
+    AssignAliasRequestBody,
+    {},
+    AssignAliasQueryParams,
+    AssignAliasPathParams
+  >({ url: '/v2/deployments/{id}/aliases', method: 'post', ...variables, signal });
+
+export type GetCertByIdPathParams = {
+  /**
+   * The cert id
+   */
+  id: string;
+};
+
+export type GetCertByIdQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetCertByIdError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetCertByIdResponse = {
+  id: string;
+  createdAt: number;
+  expiresAt: number;
+  autoRenew: boolean;
+  cns: string[];
+};
+
+export type GetCertByIdVariables = {
+  pathParams: GetCertByIdPathParams;
+  queryParams?: GetCertByIdQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Get cert by id
+ */
+export const getCertById = (variables: GetCertByIdVariables, signal?: AbortSignal) =>
+  fetch<GetCertByIdResponse, GetCertByIdError, undefined, {}, GetCertByIdQueryParams, GetCertByIdPathParams>({
+    url: '/v7/certs/{id}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type RemoveCertPathParams = {
+  /**
+   * The cert id to remove
+   */
+  id: string;
+};
+
+export type RemoveCertQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type RemoveCertError = Fetcher.ErrorWrapper<undefined>;
+
+export type RemoveCertVariables = {
+  pathParams: RemoveCertPathParams;
+  queryParams?: RemoveCertQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Remove cert
+ */
+export const removeCert = (variables: RemoveCertVariables, signal?: AbortSignal) =>
+  fetch<Record<string, any>, RemoveCertError, undefined, {}, RemoveCertQueryParams, RemoveCertPathParams>({
+    url: '/v7/certs/{id}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type IssueCertQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type IssueCertError = Fetcher.ErrorWrapper<undefined>;
+
+export type IssueCertResponse = {
+  id: string;
+  createdAt: number;
+  expiresAt: number;
+  autoRenew: boolean;
+  cns: string[];
+};
+
+export type IssueCertRequestBody = {
+  /**
+   * The common names the cert should be issued for
+   */
+  cns?: string[];
+};
+
+export type IssueCertVariables = {
+  body?: IssueCertRequestBody;
+  queryParams?: IssueCertQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Issue a new cert
+ */
+export const issueCert = (variables: IssueCertVariables, signal?: AbortSignal) =>
+  fetch<IssueCertResponse, IssueCertError, IssueCertRequestBody, {}, IssueCertQueryParams, {}>({
+    url: '/v7/certs',
     method: 'post',
     ...variables,
     signal
   });
 
-export type UpdateTeamMemberPathParams = {
+export type UploadCertQueryParams = {
   /**
-   * The ID of the member.
-   *
-   * @example ndfasllgPyCtREAqxxdyFKb
+   * The Team identifier or slug to perform the request on behalf of.
    */
-  uid: string;
+  teamId?: string;
 };
 
-export type UpdateTeamMemberError = Fetcher.ErrorWrapper<undefined>;
+export type UploadCertError = Fetcher.ErrorWrapper<undefined>;
 
-export type UpdateTeamMemberResponse = {
-  /**
-   * ID of the team.
-   */
+export type UploadCertResponse = {
   id: string;
+  createdAt: number;
+  expiresAt: number;
+  autoRenew: boolean;
+  cns: string[];
 };
 
-export type UpdateTeamMemberRequestBody = {
+export type UploadCertRequestBody = {
   /**
-   * Accept a user who requested access to the team.
-   *
-   * @example true
+   * The certificate authority
    */
-  confirmed?: true;
+  ca: string;
   /**
-   * The role in the team of the member.
-   *
-   * @default MEMBER
-   * @default VIEWER
-   * @example MEMBER
-   * @example VIEWER
+   * The certificate key
    */
-  role?: string;
-  joinedFrom?: {
-    ssoUserId?: null;
-  };
+  key: string;
+  /**
+   * The certificate
+   */
+  cert: string;
+  /**
+   * Skip validation of the certificate
+   */
+  skipValidation?: boolean;
 };
 
-export type UpdateTeamMemberVariables = {
-  body?: UpdateTeamMemberRequestBody;
-  pathParams: UpdateTeamMemberPathParams;
+export type UploadCertVariables = {
+  body: UploadCertRequestBody;
+  queryParams?: UploadCertQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Update the membership of a Team Member on the Team specified by `teamId`, such as changing the _role_ of the member, or confirming a request to join the Team for an unconfirmed member. The authenticated user must be an `OWNER` of the Team.
+ * Upload a cert
  */
-export const updateTeamMember = (variables: UpdateTeamMemberVariables, signal?: AbortSignal) =>
-  fetch<
-    UpdateTeamMemberResponse,
-    UpdateTeamMemberError,
-    UpdateTeamMemberRequestBody,
-    {},
-    {},
-    UpdateTeamMemberPathParams
-  >({ url: '/v1/teams/{teamId}/members/{uid}', method: 'patch', ...variables, signal });
-
-export type RemoveTeamMemberPathParams = {
-  /**
-   * The user ID of the member.
-   *
-   * @example ndlgr43fadlPyCtREAqxxdyFK
-   */
-  uid: string;
-};
-
-export type RemoveTeamMemberError = Fetcher.ErrorWrapper<undefined>;
-
-export type RemoveTeamMemberResponse = {
-  /**
-   * ID of the team.
-   */
-  id: string;
-};
-
-export type RemoveTeamMemberVariables = {
-  pathParams: RemoveTeamMemberPathParams;
-} & FetcherExtraProps;
-
-/**
- * Remove a Team Member from the Team, or dismiss a user that requested access, or leave a team.
- */
-export const removeTeamMember = (variables: RemoveTeamMemberVariables, signal?: AbortSignal) =>
-  fetch<RemoveTeamMemberResponse, RemoveTeamMemberError, undefined, {}, {}, RemoveTeamMemberPathParams>({
-    url: '/v1/teams/{teamId}/members/{uid}',
-    method: 'delete',
+export const uploadCert = (variables: UploadCertVariables, signal?: AbortSignal) =>
+  fetch<UploadCertResponse, UploadCertError, UploadCertRequestBody, {}, UploadCertQueryParams, {}>({
+    url: '/v7/certs',
+    method: 'put',
     ...variables,
     signal
   });
@@ -13668,1067 +13882,928 @@ export const getDeploymentFileContents = (variables: GetDeploymentFileContentsVa
     GetDeploymentFileContentsPathParams
   >({ url: '/v6/deployments/{id}/files/{fileId}', method: 'get', ...variables, signal });
 
-export type CreateCheckPathParams = {
+export type GetDeploymentsQueryParams = {
   /**
-   * The deployment to create the check for.
+   * Name of the deployment.
    *
-   * @example dpl_2qn7PZrx89yxY34vEZPD31Y9XVj6
+   * @example docs
    */
-  deploymentId: string;
-};
-
-export type CreateCheckQueryParams = {
+  app?: string;
+  /**
+   * Gets the deployment created after this Date timestamp. (default: current time)
+   *
+   * @example 1612948664566
+   * @deprecated true
+   */
+  from?: number;
+  /**
+   * Maximum number of deployments to list from a request.
+   *
+   * @example 10
+   */
+  limit?: number;
+  /**
+   * Filter deployments from the given `projectId`.
+   *
+   * @example QmXGTs7mvAMMC7WW5ebrM33qKG32QK3h4vmQMjmY
+   */
+  projectId?: string;
+  /**
+   * Filter deployments based on the environment.
+   *
+   * @example production
+   */
+  target?: 'production' | 'preview';
+  /**
+   * Gets the deployment created before this Date timestamp. (default: current time)
+   *
+   * @example 1612948664566
+   * @deprecated true
+   */
+  to?: number;
+  /**
+   * Filter out deployments based on users who have created the deployment.
+   *
+   * @example kr1PsOIzqEL5Xg6M4VZcZosf,K4amb7K9dAt5R2vBJWF32bmY
+   */
+  users?: string;
+  /**
+   * Get Deployments created after this JavaScript timestamp.
+   *
+   * @example 1540095775941
+   */
+  since?: number;
+  /**
+   * Get Deployments created before this JavaScript timestamp.
+   *
+   * @example 1540095775951
+   */
+  until?: number;
+  /**
+   * Filter deployments based on their state (`BUILDING`, `ERROR`, `INITIALIZING`, `QUEUED`, `READY`, `CANCELED`)
+   *
+   * @example BUILDING,READY
+   */
+  state?: string;
+  /**
+   * Filter deployments based on their rollback candidacy
+   */
+  rollbackCandidate?: boolean;
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
   teamId?: string;
 };
 
-export type CreateCheckError = Fetcher.ErrorWrapper<undefined>;
+export type GetDeploymentsError = Fetcher.ErrorWrapper<undefined>;
 
-export type CreateCheckResponse = {
-  id: string;
-  name: string;
-  path?: string;
-  status: 'registered' | 'running' | 'completed';
-  conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped' | 'stale';
-  blocking: boolean;
-  output?: {
-    metrics?: {
-      FCP: {
-        value: number | null;
-        previousValue?: number;
-        source: 'web-vitals';
-      };
-      LCP: {
-        value: number | null;
-        previousValue?: number;
-        source: 'web-vitals';
-      };
-      CLS: {
-        value: number | null;
-        previousValue?: number;
-        source: 'web-vitals';
-      };
-      TBT: {
-        value: number | null;
-        previousValue?: number;
-        source: 'web-vitals';
-      };
-      virtualExperienceScore?: {
-        value: number | null;
-        previousValue?: number;
-        source: 'web-vitals';
-      };
-    };
-  };
-  detailsUrl?: string;
-  integrationId: string;
-  deploymentId: string;
-  externalId?: string;
-  createdAt: number;
-  updatedAt: number;
-  startedAt?: number;
-  completedAt?: number;
-  rerequestable?: boolean;
-};
-
-export type CreateCheckRequestBody = {
-  /**
-   * The name of the check being created
-   *
-   * @maxLength 100
-   * @example Performance Check
-   */
-  name: string;
-  /**
-   * Path of the page that is being checked
-   *
-   * @maxLength 255
-   * @example /
-   */
-  path?: string;
-  /**
-   * Whether the check should block a deployment from succeeding
-   *
-   * @example true
-   */
-  blocking: boolean;
-  /**
-   * URL to display for further details
-   *
-   * @example http://example.com
-   */
-  detailsUrl?: string;
-  /**
-   * An identifier that can be used as an external reference
-   *
-   * @example 1234abc
-   */
-  externalId?: string;
-  /**
-   * Whether a user should be able to request for the check to be rerun if it fails
-   *
-   * @example true
-   */
-  rerequestable?: boolean;
-};
-
-export type CreateCheckVariables = {
-  body: CreateCheckRequestBody;
-  pathParams: CreateCheckPathParams;
-  queryParams?: CreateCheckQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Creates a new check. This endpoint must be called with an OAuth2 or it will produce a 400 error.
- */
-export const createCheck = (variables: CreateCheckVariables, signal?: AbortSignal) =>
-  fetch<
-    CreateCheckResponse,
-    CreateCheckError,
-    CreateCheckRequestBody,
-    {},
-    CreateCheckQueryParams,
-    CreateCheckPathParams
-  >({ url: '/v1/deployments/{deploymentId}/checks', method: 'post', ...variables, signal });
-
-export type GetAllChecksPathParams = {
-  /**
-   * The deployment to get all checks for
-   *
-   * @example dpl_2qn7PZrx89yxY34vEZPD31Y9XVj6
-   */
-  deploymentId: string;
-};
-
-export type GetAllChecksQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type GetAllChecksError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetAllChecksResponse = {
-  checks: {
-    completedAt?: number;
-    conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped' | 'stale';
-    createdAt: number;
-    detailsUrl?: string;
-    id: string;
-    integrationId: string;
+export type GetDeploymentsResponse = {
+  pagination: Schemas.Pagination;
+  deployments: {
+    /**
+     * The unique identifier of the deployment.
+     *
+     * @example dpl_2euZBFqxYdDMDG1jTrHFnNZ2eUVa
+     */
+    uid: string;
+    /**
+     * The name of the deployment.
+     *
+     * @example docs
+     */
     name: string;
-    output?: {
-      metrics?: {
-        FCP: {
-          value: number | null;
-          previousValue?: number;
-          source: 'web-vitals';
-        };
-        LCP: {
-          value: number | null;
-          previousValue?: number;
-          source: 'web-vitals';
-        };
-        CLS: {
-          value: number | null;
-          previousValue?: number;
-          source: 'web-vitals';
-        };
-        TBT: {
-          value: number | null;
-          previousValue?: number;
-          source: 'web-vitals';
-        };
-        virtualExperienceScore?: {
-          value: number | null;
-          previousValue?: number;
-          source: 'web-vitals';
-        };
-      };
+    /**
+     * The URL of the deployment.
+     *
+     * @example docs-9jaeg38me.vercel.app
+     */
+    url: string;
+    /**
+     * Timestamp of when the deployment got created.
+     *
+     * @example 1609492210000
+     */
+    created: number;
+    /**
+     * The source of the deployment.
+     *
+     * @example cli
+     */
+    source?: 'cli' | 'git' | 'import' | 'import/repo' | 'clone/repo';
+    /**
+     * In which state is the deployment.
+     *
+     * @example READY
+     */
+    state?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+    /**
+     * The type of the deployment.
+     *
+     * @example LAMBDAS
+     */
+    type: 'LAMBDAS';
+    /**
+     * Metadata information of the user who created the deployment.
+     */
+    creator: {
+      /**
+       * The unique identifier of the user.
+       *
+       * @example eLrCnEgbKhsHyfbiNR7E8496
+       */
+      uid: string;
+      /**
+       * The email address of the user.
+       *
+       * @example example@example.com
+       */
+      email?: string;
+      /**
+       * The username of the user.
+       *
+       * @example johndoe
+       */
+      username?: string;
+      /**
+       * The GitHub login of the user.
+       *
+       * @example johndoe
+       */
+      githubLogin?: string;
+      /**
+       * The GitLab login of the user.
+       *
+       * @example johndoe
+       */
+      gitlabLogin?: string;
     };
-    path?: string;
-    rerequestable: boolean;
-    startedAt?: number;
-    status: 'registered' | 'running' | 'completed';
-    updatedAt: number;
+    /**
+     * Metadata information from the Git provider.
+     */
+    meta?: {
+      [key: string]: string;
+    };
+    /**
+     * On which environment has the deployment been deployed to.
+     *
+     * @example production
+     */
+    target?: 'production' | 'staging' | null;
+    /**
+     * An error object in case aliasing of the deployment failed.
+     */
+    aliasError?: {
+      code: string;
+      message: string;
+    } | null;
+    aliasAssigned?: number | boolean | null;
+    /**
+     * Timestamp of when the deployment got created.
+     *
+     * @example 1609492210000
+     */
+    createdAt?: number;
+    /**
+     * Timestamp of when the deployment started building at.
+     *
+     * @example 1609492210000
+     */
+    buildingAt?: number;
+    /**
+     * Timestamp of when the deployment got ready.
+     *
+     * @example 1609492210000
+     */
+    ready?: number;
+    /**
+     * State of all registered checks
+     */
+    checksState?: 'registered' | 'running' | 'completed';
+    /**
+     * Conclusion for checks
+     */
+    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+    /**
+     * Vercel URL to inspect the deployment.
+     *
+     * @example https://vercel.com/acme/nextjs/J1hXN00qjUeoYfpEEf7dnDtpSiVq
+     */
+    inspectorUrl: string | null;
+    /**
+     * Deployment can be used for instant rollback
+     */
+    isRollbackCandidate?: boolean | null;
+    /**
+     * The project settings which was used for this deployment
+     */
+    projectSettings?: {
+      framework?:
+        | 'blitzjs'
+        | 'nextjs'
+        | 'gatsby'
+        | 'remix'
+        | 'astro'
+        | 'hexo'
+        | 'eleventy'
+        | 'docusaurus-2'
+        | 'docusaurus'
+        | 'preact'
+        | 'solidstart'
+        | 'dojo'
+        | 'ember'
+        | 'vue'
+        | 'scully'
+        | 'ionic-angular'
+        | 'angular'
+        | 'polymer'
+        | 'svelte'
+        | 'sveltekit'
+        | 'sveltekit-1'
+        | 'ionic-react'
+        | 'create-react-app'
+        | 'gridsome'
+        | 'umijs'
+        | 'sapper'
+        | 'saber'
+        | 'stencil'
+        | 'nuxtjs'
+        | 'redwoodjs'
+        | 'hugo'
+        | 'jekyll'
+        | 'brunch'
+        | 'middleman'
+        | 'zola'
+        | 'hydrogen'
+        | 'vite'
+        | 'vitepress'
+        | 'vuepress'
+        | 'parcel'
+        | 'sanity'
+        | 'storybook'
+        | null;
+      gitForkProtection?: boolean;
+      gitLFS?: boolean;
+      devCommand?: string | null;
+      installCommand?: string | null;
+      buildCommand?: string | null;
+      nodeVersion?: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
+      outputDirectory?: string | null;
+      publicSource?: boolean | null;
+      rootDirectory?: string | null;
+      serverlessFunctionRegion?: string | null;
+      sourceFilesOutsideRootDirectory?: boolean;
+      commandForIgnoringBuildStep?: string | null;
+      createdAt?: number;
+      skipGitConnectDuringLink?: boolean;
+    };
+    /**
+     * The ID of Vercel Connect configuration used for this deployment
+     */
+    connectConfigurationId?: string;
   }[];
 };
 
-export type GetAllChecksVariables = {
-  pathParams: GetAllChecksPathParams;
-  queryParams?: GetAllChecksQueryParams;
+export type GetDeploymentsVariables = {
+  queryParams?: GetDeploymentsQueryParams;
 } & FetcherExtraProps;
 
 /**
- * List all of the checks created for a deployment.
+ * List deployments under the account corresponding to the API token. If a deployment hasn't finished uploading (is incomplete), the `url` property will have a value of `null`.
  */
-export const getAllChecks = (variables: GetAllChecksVariables, signal?: AbortSignal) =>
-  fetch<GetAllChecksResponse, GetAllChecksError, undefined, {}, GetAllChecksQueryParams, GetAllChecksPathParams>({
-    url: '/v1/deployments/{deploymentId}/checks',
+export const getDeployments = (variables: GetDeploymentsVariables, signal?: AbortSignal) =>
+  fetch<GetDeploymentsResponse, GetDeploymentsError, undefined, {}, GetDeploymentsQueryParams, {}>({
+    url: '/v6/deployments',
     method: 'get',
     ...variables,
     signal
   });
 
-export type GetCheckPathParams = {
+export type EmailLoginError = Fetcher.ErrorWrapper<undefined>;
+
+export type EmailLoginResponse = {
   /**
-   * The deployment to get the check for.
+   * The token used to verify the user accepted the login request
    *
-   * @example dpl_2qn7PZrx89yxY34vEZPD31Y9XVj6
+   * @example T1dmvPu36nmyYisXAs7IRzcR
    */
-  deploymentId: string;
+  token: string;
   /**
-   * The check to fetch
+   * The code the user is going to receive on the email. **Must** be displayed to the user so they can verify the request is the correct.
    *
-   * @example check_2qn7PZrx89yxY34vEZPD31Y9XVj6
+   * @example Practical Saola
    */
-  checkId: string;
+  securityCode: string;
 };
 
-export type GetCheckQueryParams = {
+export type EmailLoginRequestBody = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The user email.
+   *
+   * @example user@mail.com
    */
-  teamId?: string;
+  email: string;
+  /**
+   * The desired name for the token. It will be displayed on the user account details.
+   *
+   * @example Your Client App Name
+   */
+  tokenName?: string;
 };
 
-export type GetCheckError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetCheckResponse = {
-  id: string;
-  name: string;
-  path?: string;
-  status: 'registered' | 'running' | 'completed';
-  conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped' | 'stale';
-  blocking: boolean;
-  output?: {
-    metrics?: {
-      FCP: {
-        value: number | null;
-        previousValue?: number;
-        source: 'web-vitals';
-      };
-      LCP: {
-        value: number | null;
-        previousValue?: number;
-        source: 'web-vitals';
-      };
-      CLS: {
-        value: number | null;
-        previousValue?: number;
-        source: 'web-vitals';
-      };
-      TBT: {
-        value: number | null;
-        previousValue?: number;
-        source: 'web-vitals';
-      };
-      virtualExperienceScore?: {
-        value: number | null;
-        previousValue?: number;
-        source: 'web-vitals';
-      };
-    };
-  };
-  detailsUrl?: string;
-  integrationId: string;
-  deploymentId: string;
-  externalId?: string;
-  createdAt: number;
-  updatedAt: number;
-  startedAt?: number;
-  completedAt?: number;
-  rerequestable?: boolean;
-};
-
-export type GetCheckVariables = {
-  pathParams: GetCheckPathParams;
-  queryParams?: GetCheckQueryParams;
+export type EmailLoginVariables = {
+  body: EmailLoginRequestBody;
 } & FetcherExtraProps;
 
 /**
- * Return a detailed response for a single check.
+ * Request a new login for a user to get a token. This will respond with a verification token and send an email to confirm the request. Once confirmed you can use the verification token to get an authentication token.
  */
-export const getCheck = (variables: GetCheckVariables, signal?: AbortSignal) =>
-  fetch<GetCheckResponse, GetCheckError, undefined, {}, GetCheckQueryParams, GetCheckPathParams>({
-    url: '/v1/deployments/{deploymentId}/checks/{checkId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type UpdateCheckPathParams = {
-  /**
-   * The deployment to update the check for.
-   *
-   * @example dpl_2qn7PZrx89yxY34vEZPD31Y9XVj6
-   */
-  deploymentId: string;
-  /**
-   * The check being updated
-   *
-   * @example check_2qn7PZrx89yxY34vEZPD31Y9XVj6
-   */
-  checkId: string;
-};
-
-export type UpdateCheckQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type UpdateCheckError = Fetcher.ErrorWrapper<undefined>;
-
-export type UpdateCheckResponse = {
-  id: string;
-  name: string;
-  path?: string;
-  status: 'registered' | 'running' | 'completed';
-  conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped' | 'stale';
-  blocking: boolean;
-  output?: {
-    metrics?: {
-      FCP: {
-        value: number | null;
-        previousValue?: number;
-        source: 'web-vitals';
-      };
-      LCP: {
-        value: number | null;
-        previousValue?: number;
-        source: 'web-vitals';
-      };
-      CLS: {
-        value: number | null;
-        previousValue?: number;
-        source: 'web-vitals';
-      };
-      TBT: {
-        value: number | null;
-        previousValue?: number;
-        source: 'web-vitals';
-      };
-      virtualExperienceScore?: {
-        value: number | null;
-        previousValue?: number;
-        source: 'web-vitals';
-      };
-    };
-  };
-  detailsUrl?: string;
-  integrationId: string;
-  deploymentId: string;
-  externalId?: string;
-  createdAt: number;
-  updatedAt: number;
-  startedAt?: number;
-  completedAt?: number;
-  rerequestable?: boolean;
-};
-
-export type UpdateCheckRequestBody = {
-  /**
-   * The name of the check being created
-   *
-   * @maxLength 100
-   * @example Performance Check
-   */
-  name?: string;
-  /**
-   * Path of the page that is being checked
-   *
-   * @maxLength 255
-   * @example /
-   */
-  path?: string;
-  /**
-   * The current status of the check
-   */
-  status?: 'running' | 'completed';
-  /**
-   * The result of the check being run
-   */
-  conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped';
-  /**
-   * A URL a user may visit to see more information about the check
-   *
-   * @example https://example.com/check/run/1234abc
-   */
-  detailsUrl?: string;
-  /**
-   * The results of the check Run
-   */
-  output?: {
-    /**
-     * Metrics about the page
-     */
-    metrics?: {
-      FCP: {
-        /**
-         * First Contentful Paint value
-         *
-         * @example 1200
-         */
-        value: number | null;
-        /**
-         * Previous First Contentful Paint value to display a delta
-         *
-         * @example 900
-         */
-        previousValue?: number;
-        source: 'web-vitals';
-      };
-      LCP: {
-        /**
-         * Largest Contentful Paint value
-         *
-         * @example 1200
-         */
-        value: number | null;
-        /**
-         * Previous Largest Contentful Paint value to display a delta
-         *
-         * @example 1000
-         */
-        previousValue?: number;
-        source: 'web-vitals';
-      };
-      CLS: {
-        /**
-         * Cumulative Layout Shift value
-         *
-         * @example 4
-         */
-        value: number | null;
-        /**
-         * Previous Cumulative Layout Shift value to display a delta
-         *
-         * @example 2
-         */
-        previousValue?: number;
-        source: 'web-vitals';
-      };
-      TBT: {
-        /**
-         * Total Blocking Time value
-         *
-         * @example 3000
-         */
-        value: number | null;
-        /**
-         * Previous Total Blocking Time value to display a delta
-         *
-         * @example 3500
-         */
-        previousValue?: number;
-        source: 'web-vitals';
-      };
-      virtualExperienceScore?: {
-        /**
-         * The calculated Virtual Experience Score value, between 0 and 100
-         *
-         * @maximum 100
-         * @minimum 0
-         * @example 30
-         */
-        value: number | null;
-        /**
-         * A previous Virtual Experience Score value to display a delta, between 0 and 100
-         *
-         * @maximum 100
-         * @minimum 0
-         * @example 35
-         */
-        previousValue?: number;
-        source: 'web-vitals';
-      };
-    };
-  };
-  /**
-   * An identifier that can be used as an external reference
-   *
-   * @example 1234abc
-   */
-  externalId?: string;
-};
-
-export type UpdateCheckVariables = {
-  body?: UpdateCheckRequestBody;
-  pathParams: UpdateCheckPathParams;
-  queryParams?: UpdateCheckQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Update an existing check. This endpoint must be called with an OAuth2 or it will produce a 400 error.
- */
-export const updateCheck = (variables: UpdateCheckVariables, signal?: AbortSignal) =>
-  fetch<
-    UpdateCheckResponse,
-    UpdateCheckError,
-    UpdateCheckRequestBody,
-    {},
-    UpdateCheckQueryParams,
-    UpdateCheckPathParams
-  >({ url: '/v1/deployments/{deploymentId}/checks/{checkId}', method: 'patch', ...variables, signal });
-
-export type RerequestCheckPathParams = {
-  /**
-   * The deployment to rerun the check for.
-   *
-   * @example dpl_2qn7PZrx89yxY34vEZPD31Y9XVj6
-   */
-  deploymentId: string;
-  /**
-   * The check to rerun
-   *
-   * @example check_2qn7PZrx89yxY34vEZPD31Y9XVj6
-   */
-  checkId: string;
-};
-
-export type RerequestCheckQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type RerequestCheckError = Fetcher.ErrorWrapper<undefined>;
-
-export type RerequestCheckVariables = {
-  pathParams: RerequestCheckPathParams;
-  queryParams?: RerequestCheckQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Rerequest a selected check that has failed.
- */
-export const rerequestCheck = (variables: RerequestCheckVariables, signal?: AbortSignal) =>
-  fetch<Record<string, any>, RerequestCheckError, undefined, {}, RerequestCheckQueryParams, RerequestCheckPathParams>({
-    url: '/v1/deployments/{deploymentId}/checks/{checkId}/rerequest',
+export const emailLogin = (variables: EmailLoginVariables, signal?: AbortSignal) =>
+  fetch<EmailLoginResponse, EmailLoginError, EmailLoginRequestBody, {}, {}, {}>({
+    url: '/registration',
     method: 'post',
     ...variables,
     signal
   });
 
-export type GetEdgeConfigsQueryParams = {
+export type VerifyTokenQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * Email to verify the login.
+   */
+  email?: string;
+  /**
+   * The token returned when the login was requested.
+   */
+  token: string;
+  /**
+   * The desired name for the token. It will be displayed on the user account details.
+   *
+   * @example Your Client App Name
+   */
+  tokenName?: string;
+  /**
+   * The SAML Profile ID, when connecting a SAML Profile to a Team member for the first time.
+   */
+  ssoUserId?: string;
+};
+
+export type VerifyTokenError = Fetcher.ErrorWrapper<undefined>;
+
+export type VerifyTokenResponse = {
+  /**
+   * The user authentication token that can be used to perform API requests.
+   *
+   * @example 1ioXyz9Ue4xdCYGROet1dlKd
+   */
+  token: string;
+  /**
+   * Email address of the authenticated user.
+   *
+   * @example amy@example.com
+   */
+  email: string;
+  /**
+   * When completing SAML Single Sign-On authentication, this will be the ID of the Team that was authenticated for.
+   *
+   * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
    */
   teamId?: string;
 };
 
-export type GetEdgeConfigsError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetEdgeConfigsResponse = {
-  id?: string;
-  createdAt?: number;
-  ownerId?: string;
-  /**
-   * Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
-   */
-  slug?: string;
-  updatedAt?: number;
-  digest?: string;
-  sizeInBytes: number;
-  itemCount: number;
-};
-
-export type GetEdgeConfigsVariables = {
-  queryParams?: GetEdgeConfigsQueryParams;
+export type VerifyTokenVariables = {
+  queryParams: VerifyTokenQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Returns all Edge Configs.
+ * Verify the user accepted the login request and get a authentication token. The user email address and the token received after requesting the login must be added to the URL as a query string with the names `email` and `token`.
  */
-export const getEdgeConfigs = (variables: GetEdgeConfigsVariables, signal?: AbortSignal) =>
-  fetch<GetEdgeConfigsResponse, GetEdgeConfigsError, undefined, {}, GetEdgeConfigsQueryParams, {}>({
-    url: '/v1/edge-config',
+export const verifyToken = (variables: VerifyTokenVariables, signal?: AbortSignal) =>
+  fetch<VerifyTokenResponse, VerifyTokenError, undefined, {}, VerifyTokenQueryParams, {}>({
+    url: '/registration/verify',
     method: 'get',
     ...variables,
     signal
   });
 
-export type CreateEdgeConfigQueryParams = {
+export type DeleteDeploymentPathParams = {
+  /**
+   * The ID of the deployment to be deleted
+   *
+   * @example dpl_5WJWYSyB7BpgTj3EuwF37WMRBXBtPQ2iTMJHJBJyRfd
+   */
+  id: string;
+};
+
+export type DeleteDeploymentQueryParams = {
+  /**
+   * A Deployment or Alias URL. In case it is passed, the ID will be ignored
+   *
+   * @example https://files-orcin-xi.vercel.app/
+   */
+  url?: string;
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
   teamId?: string;
 };
 
-export type CreateEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteDeploymentError = Fetcher.ErrorWrapper<undefined>;
 
-export type CreateEdgeConfigResponse = {
-  createdAt?: number;
-  updatedAt?: number;
-  id?: string;
+export type DeleteDeploymentResponse = {
   /**
-   * Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
+   * The removed deployment ID.
+   *
+   * @example dpl_5WJWYSyB7BpgTj3EuwF37WMRBXBtPQ2iTMJHJBJyRfd
    */
-  slug?: string;
-  ownerId?: string;
-  digest?: string;
-  sizeInBytes: number;
-  itemCount: number;
+  uid: string;
+  /**
+   * A constant with the final state of the deployment.
+   */
+  state: 'DELETED';
 };
 
-export type CreateEdgeConfigRequestBody = {
+export type DeleteDeploymentVariables = {
+  pathParams: DeleteDeploymentPathParams;
+  queryParams?: DeleteDeploymentQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * This API allows you to delete a deployment, either by supplying its `id` in the URL or the `url` of the deployment as a query parameter. You can obtain the ID, for example, by listing all deployments.
+ */
+export const deleteDeployment = (variables: DeleteDeploymentVariables, signal?: AbortSignal) =>
+  fetch<
+    DeleteDeploymentResponse,
+    DeleteDeploymentError,
+    undefined,
+    {},
+    DeleteDeploymentQueryParams,
+    DeleteDeploymentPathParams
+  >({ url: '/v13/deployments/{id}', method: 'delete', ...variables, signal });
+
+export type CreateSecretQueryParams = {
   /**
-   * @maxLength 32
-   * @pattern ^[\\w-]+$
+   * The Team identifier or slug to perform the request on behalf of.
    */
-  slug: string;
-  items?: {
-    [key: string]:
-      | (string | number | boolean | null | Record<string, any>)
-      | (string | number | boolean | null | Record<string, any>)[];
+  teamId?: string;
+};
+
+export type CreateSecretError = Fetcher.ErrorWrapper<undefined>;
+
+export type CreateSecretResponse = {
+  value: {
+    type?: 'Buffer';
+    data?: number[];
   };
+  /**
+   * The date when the secret was created.
+   *
+   * @format date-time
+   * @example 2021-02-10T13:11:49.180Z
+   */
+  created: string;
+  /**
+   * The name of the secret.
+   *
+   * @example my-api-key
+   */
+  name: string;
+  /**
+   * The unique identifier of the team the secret was created for.
+   *
+   * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
+   */
+  teamId?: string | null;
+  /**
+   * The unique identifier of the secret.
+   *
+   * @example sec_XCG7t7AIHuO2SBA8667zNUiM
+   */
+  uid: string;
+  /**
+   * The unique identifier of the user who created the secret.
+   *
+   * @example 2qDDuGFTWXBLDNnqZfWPDp1A
+   */
+  userId?: string;
+  /**
+   * Timestamp for when the secret was created.
+   *
+   * @example 1609492210000
+   */
+  createdAt?: number;
+  /**
+   * The unique identifier of the project which the secret belongs to.
+   *
+   * @example prj_2WjyKQmM8ZnGcJsPWMrHRHrE
+   */
+  projectId?: string;
+  /**
+   * Indicates whether the secret value can be decrypted after it has been created.
+   *
+   * @example true
+   */
+  decryptable?: boolean;
 };
 
-export type CreateEdgeConfigVariables = {
-  body: CreateEdgeConfigRequestBody;
-  queryParams?: CreateEdgeConfigQueryParams;
+export type CreateSecretRequestBody = {
+  /**
+   * The name of the secret (max 100 characters).
+   *
+   * @example my-api-key
+   * @maximum 100
+   */
+  name: string;
+  /**
+   * The value of the new secret.
+   *
+   * @example some secret value
+   */
+  value: string;
+  /**
+   * Whether the secret value can be decrypted after it has been created.
+   *
+   * @example true
+   */
+  decryptable?: boolean;
+  /**
+   * Associate a secret to a project.
+   *
+   * @example prj_2WjyKQmM8ZnGcJsPWMrHRHrE
+   * @deprecated true
+   */
+  projectId?: string;
+};
+
+export type CreateSecretVariables = {
+  body: CreateSecretRequestBody;
+  queryParams?: CreateSecretQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Creates an Edge Config.
+ * Allows to create a new secret.
  */
-export const createEdgeConfig = (variables: CreateEdgeConfigVariables, signal?: AbortSignal) =>
-  fetch<
-    CreateEdgeConfigResponse,
-    CreateEdgeConfigError,
-    CreateEdgeConfigRequestBody,
-    {},
-    CreateEdgeConfigQueryParams,
-    {}
-  >({ url: '/v1/edge-config', method: 'post', ...variables, signal });
+export const createSecret = (variables: CreateSecretVariables, signal?: AbortSignal) =>
+  fetch<CreateSecretResponse, CreateSecretError, CreateSecretRequestBody, {}, CreateSecretQueryParams, {}>({
+    url: '/v2/secrets/{name}',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
-export type GetEdgeConfigPathParams = {
-  edgeConfigId: string;
+export type RenameSecretPathParams = {
+  /**
+   * The name of the secret.
+   *
+   * @example my-api-key
+   */
+  name: string;
 };
 
-export type GetEdgeConfigQueryParams = {
+export type RenameSecretQueryParams = {
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
   teamId?: string;
 };
 
-export type GetEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
+export type RenameSecretError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetEdgeConfigResponse = {
-  createdAt?: number;
-  updatedAt?: number;
-  id?: string;
+export type RenameSecretResponse = {
+  uid: string;
+  name: string;
   /**
-   * Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
+   * @format date-time
    */
-  slug?: string;
-  ownerId?: string;
-  digest?: string;
-  sizeInBytes: number;
-  itemCount: number;
+  created: string;
+  oldName: string;
 };
 
-export type GetEdgeConfigVariables = {
-  pathParams: GetEdgeConfigPathParams;
-  queryParams?: GetEdgeConfigQueryParams;
+export type RenameSecretRequestBody = {
+  /**
+   * The name of the new secret.
+   *
+   * @example my-api-key
+   * @maximum 100
+   */
+  name: string;
+};
+
+export type RenameSecretVariables = {
+  body: RenameSecretRequestBody;
+  pathParams: RenameSecretPathParams;
+  queryParams?: RenameSecretQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Returns an Edge Config.
+ * Enables to edit the name of a user's secret. The name has to be unique to that user's secrets.
  */
-export const getEdgeConfig = (variables: GetEdgeConfigVariables, signal?: AbortSignal) =>
-  fetch<GetEdgeConfigResponse, GetEdgeConfigError, undefined, {}, GetEdgeConfigQueryParams, GetEdgeConfigPathParams>({
-    url: '/v1/edge-config/{edgeConfigId}',
+export const renameSecret = (variables: RenameSecretVariables, signal?: AbortSignal) =>
+  fetch<
+    RenameSecretResponse,
+    RenameSecretError,
+    RenameSecretRequestBody,
+    {},
+    RenameSecretQueryParams,
+    RenameSecretPathParams
+  >({ url: '/v2/secrets/{name}', method: 'patch', ...variables, signal });
+
+export type GetSecretsQueryParams = {
+  /**
+   * Filter out secrets based on comma separated secret ids.
+   *
+   * @example sec_RKc5iV0rV3ZSrFrHiruRno7k,sec_fGc5iV0rV3ZSrFrHiruRnouQ
+   * @deprecated true
+   */
+  id?: string;
+  /**
+   * Filter out secrets that belong to a project.
+   *
+   * @example prj_2WjyKQmM8ZnGcJsPWMrHRHrE
+   * @deprecated true
+   */
+  projectId?: string;
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetSecretsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetSecretsResponse = {
+  secrets: {
+    /**
+     * The date when the secret was created.
+     *
+     * @format date-time
+     * @example 2021-02-10T13:11:49.180Z
+     */
+    created: string;
+    /**
+     * The name of the secret.
+     *
+     * @example my-api-key
+     */
+    name: string;
+    /**
+     * The unique identifier of the team the secret was created for.
+     *
+     * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
+     */
+    teamId?: string | null;
+    /**
+     * The unique identifier of the secret.
+     *
+     * @example sec_XCG7t7AIHuO2SBA8667zNUiM
+     */
+    uid: string;
+    /**
+     * The unique identifier of the user who created the secret.
+     *
+     * @example 2qDDuGFTWXBLDNnqZfWPDp1A
+     */
+    userId?: string;
+    /**
+     * The value of the secret.
+     */
+    value?: string;
+    /**
+     * Timestamp for when the secret was created.
+     *
+     * @example 1609492210000
+     */
+    createdAt?: number;
+    /**
+     * The unique identifier of the project which the secret belongs to.
+     *
+     * @example prj_2WjyKQmM8ZnGcJsPWMrHRHrE
+     */
+    projectId?: string;
+    /**
+     * Indicates whether the secret value can be decrypted after it has been created.
+     *
+     * @example true
+     */
+    decryptable?: boolean;
+  }[];
+  pagination: Schemas.Pagination;
+};
+
+export type GetSecretsVariables = {
+  queryParams?: GetSecretsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves the active Vercel secrets for the authenticated user. By default it returns 20 secrets. The rest can be retrieved using the pagination options. The body will contain an entry for each secret.
+ */
+export const getSecrets = (variables: GetSecretsVariables, signal?: AbortSignal) =>
+  fetch<GetSecretsResponse, GetSecretsError, undefined, {}, GetSecretsQueryParams, {}>({
+    url: '/v3/secrets',
     method: 'get',
     ...variables,
     signal
   });
 
-export type UpdateEdgeConfigPathParams = {
-  edgeConfigId: string;
+export type GetSecretPathParams = {
+  /**
+   * The name or the unique identifier to which the secret belongs to.
+   *
+   * @example sec_RKc5iV0rV3ZSrFrHiruRno7k
+   */
+  idOrName: string;
 };
 
-export type UpdateEdgeConfigQueryParams = {
+export type GetSecretQueryParams = {
+  /**
+   * Whether to try to decrypt the value of the secret. Only works if `decryptable` has been set to `true` when the secret was created.
+   *
+   * @example true
+   */
+  decrypt?: 'true' | 'false';
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
   teamId?: string;
 };
 
-export type UpdateEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
+export type GetSecretError = Fetcher.ErrorWrapper<undefined>;
 
-export type UpdateEdgeConfigResponse = {
+export type GetSecretResponse = {
+  /**
+   * The date when the secret was created.
+   *
+   * @format date-time
+   * @example 2021-02-10T13:11:49.180Z
+   */
+  created: string;
+  /**
+   * The name of the secret.
+   *
+   * @example my-api-key
+   */
+  name: string;
+  /**
+   * The unique identifier of the team the secret was created for.
+   *
+   * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
+   */
+  teamId?: string | null;
+  /**
+   * The unique identifier of the secret.
+   *
+   * @example sec_XCG7t7AIHuO2SBA8667zNUiM
+   */
+  uid: string;
+  /**
+   * The unique identifier of the user who created the secret.
+   *
+   * @example 2qDDuGFTWXBLDNnqZfWPDp1A
+   */
+  userId?: string;
+  /**
+   * The value of the secret.
+   */
+  value?: string;
+  /**
+   * Timestamp for when the secret was created.
+   *
+   * @example 1609492210000
+   */
   createdAt?: number;
-  updatedAt?: number;
-  id?: string;
   /**
-   * Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
+   * The unique identifier of the project which the secret belongs to.
+   *
+   * @example prj_2WjyKQmM8ZnGcJsPWMrHRHrE
    */
-  slug?: string;
-  ownerId?: string;
-  digest?: string;
-  sizeInBytes: number;
-  itemCount: number;
+  projectId?: string;
+  /**
+   * Indicates whether the secret value can be decrypted after it has been created.
+   *
+   * @example true
+   */
+  decryptable?: boolean;
 };
 
-export type UpdateEdgeConfigRequestBody = {
-  /**
-   * @maxLength 32
-   * @pattern ^[\\w-]+$
-   */
-  slug: string;
-};
-
-export type UpdateEdgeConfigVariables = {
-  body: UpdateEdgeConfigRequestBody;
-  pathParams: UpdateEdgeConfigPathParams;
-  queryParams?: UpdateEdgeConfigQueryParams;
+export type GetSecretVariables = {
+  pathParams: GetSecretPathParams;
+  queryParams?: GetSecretQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Updates an Edge Config.
+ * Retrieves the information for a specific secret by passing either the secret id or name in the URL.
  */
-export const updateEdgeConfig = (variables: UpdateEdgeConfigVariables, signal?: AbortSignal) =>
-  fetch<
-    UpdateEdgeConfigResponse,
-    UpdateEdgeConfigError,
-    UpdateEdgeConfigRequestBody,
-    {},
-    UpdateEdgeConfigQueryParams,
-    UpdateEdgeConfigPathParams
-  >({ url: '/v1/edge-config/{edgeConfigId}', method: 'put', ...variables, signal });
+export const getSecret = (variables: GetSecretVariables, signal?: AbortSignal) =>
+  fetch<GetSecretResponse, GetSecretError, undefined, {}, GetSecretQueryParams, GetSecretPathParams>({
+    url: '/v3/secrets/{idOrName}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
-export type DeleteEdgeConfigPathParams = {
-  edgeConfigId: string;
+export type DeleteSecretPathParams = {
+  /**
+   * The name or the unique identifier to which the secret belongs to.
+   *
+   * @example sec_RKc5iV0rV3ZSrFrHiruRno7k
+   */
+  idOrName: string;
 };
 
-export type DeleteEdgeConfigQueryParams = {
+export type DeleteSecretQueryParams = {
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
   teamId?: string;
 };
 
-export type DeleteEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteSecretError = Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteEdgeConfigVariables = {
-  pathParams: DeleteEdgeConfigPathParams;
-  queryParams?: DeleteEdgeConfigQueryParams;
+export type DeleteSecretResponse = {
+  /**
+   * The unique identifier of the deleted secret.
+   *
+   * @example sec_XCG7t7AIHuO2SBA8667zNUiM
+   */
+  uid: string;
+  /**
+   * The name of the deleted secret.
+   *
+   * @example my-api-key
+   */
+  name: string;
+  /**
+   * The date when the secret was created.
+   *
+   * @example 2021-02-10T13:11:49.180Z
+   */
+  created: number;
+};
+
+export type DeleteSecretVariables = {
+  pathParams: DeleteSecretPathParams;
+  queryParams?: DeleteSecretQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Delete an Edge Config by id.
+ * This deletes the user's secret defined in the URL.
  */
-export const deleteEdgeConfig = (variables: DeleteEdgeConfigVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteEdgeConfigError, undefined, {}, DeleteEdgeConfigQueryParams, DeleteEdgeConfigPathParams>({
-    url: '/v1/edge-config/{edgeConfigId}',
+export const deleteSecret = (variables: DeleteSecretVariables, signal?: AbortSignal) =>
+  fetch<DeleteSecretResponse, DeleteSecretError, undefined, {}, DeleteSecretQueryParams, DeleteSecretPathParams>({
+    url: '/v2/secrets/{idOrName}',
     method: 'delete',
     ...variables,
     signal
   });
 
-export type GetEdgeConfigItemsPathParams = {
-  edgeConfigId: string;
-};
-
-export type GetEdgeConfigItemsQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type GetEdgeConfigItemsError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetEdgeConfigItemsVariables = {
-  pathParams: GetEdgeConfigItemsPathParams;
-  queryParams?: GetEdgeConfigItemsQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Returns all items of an Edge Config.
- */
-export const getEdgeConfigItems = (variables: GetEdgeConfigItemsVariables, signal?: AbortSignal) =>
-  fetch<
-    Schemas.EdgeConfigItem,
-    GetEdgeConfigItemsError,
-    undefined,
-    {},
-    GetEdgeConfigItemsQueryParams,
-    GetEdgeConfigItemsPathParams
-  >({ url: '/v1/edge-config/{edgeConfigId}/items', method: 'get', ...variables, signal });
-
-export type PatchtEdgeConfigItemsPathParams = {
-  edgeConfigId: string;
-};
-
-export type PatchtEdgeConfigItemsQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type PatchtEdgeConfigItemsError = Fetcher.ErrorWrapper<undefined>;
-
-export type PatchtEdgeConfigItemsResponse = {
-  status: string;
-};
-
-export type PatchtEdgeConfigItemsRequestBody = {
-  items: (
-    | {
-        operation: void | void | void;
-        /**
-         * @maxLength 256
-         * @pattern ^[\\w-]+$
-         */
-        key: string;
-        value:
-          | (string | number | boolean | null | Record<string, any>)
-          | (string | number | boolean | null | Record<string, any>)[];
-      }
-    | {
-        operation: void;
-        /**
-         * @maxLength 256
-         * @pattern ^[\\w-]+$
-         */
-        key: string;
-      }
-  )[];
-};
-
-export type PatchtEdgeConfigItemsVariables = {
-  body: PatchtEdgeConfigItemsRequestBody;
-  pathParams: PatchtEdgeConfigItemsPathParams;
-  queryParams?: PatchtEdgeConfigItemsQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Update multiple Edge Config Items in batch.
- */
-export const patchtEdgeConfigItems = (variables: PatchtEdgeConfigItemsVariables, signal?: AbortSignal) =>
-  fetch<
-    PatchtEdgeConfigItemsResponse,
-    PatchtEdgeConfigItemsError,
-    PatchtEdgeConfigItemsRequestBody,
-    {},
-    PatchtEdgeConfigItemsQueryParams,
-    PatchtEdgeConfigItemsPathParams
-  >({ url: '/v1/edge-config/{edgeConfigId}/items', method: 'patch', ...variables, signal });
-
-export type GetEdgeConfigItemPathParams = {
-  edgeConfigId: string;
-  edgeConfigItemKey: string;
-};
-
-export type GetEdgeConfigItemQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type GetEdgeConfigItemError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetEdgeConfigItemVariables = {
-  pathParams: GetEdgeConfigItemPathParams;
-  queryParams?: GetEdgeConfigItemQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Returns a specific Edge Config Item.
- */
-export const getEdgeConfigItem = (variables: GetEdgeConfigItemVariables, signal?: AbortSignal) =>
-  fetch<
-    Schemas.EdgeConfigItem,
-    GetEdgeConfigItemError,
-    undefined,
-    {},
-    GetEdgeConfigItemQueryParams,
-    GetEdgeConfigItemPathParams
-  >({ url: '/v1/edge-config/{edgeConfigId}/item/{edgeConfigItemKey}', method: 'get', ...variables, signal });
-
-export type GetEdgeConfigTokensPathParams = {
-  edgeConfigId: string;
-};
-
-export type GetEdgeConfigTokensQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type GetEdgeConfigTokensError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetEdgeConfigTokensVariables = {
-  pathParams: GetEdgeConfigTokensPathParams;
-  queryParams?: GetEdgeConfigTokensQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Returns all tokens of an Edge Config.
- */
-export const getEdgeConfigTokens = (variables: GetEdgeConfigTokensVariables, signal?: AbortSignal) =>
-  fetch<
-    Schemas.EdgeConfigToken,
-    GetEdgeConfigTokensError,
-    undefined,
-    {},
-    GetEdgeConfigTokensQueryParams,
-    GetEdgeConfigTokensPathParams
-  >({ url: '/v1/edge-config/{edgeConfigId}/tokens', method: 'get', ...variables, signal });
-
-export type DeleteEdgeConfigTokensPathParams = {
-  edgeConfigId: string;
-};
-
-export type DeleteEdgeConfigTokensQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type DeleteEdgeConfigTokensError = Fetcher.ErrorWrapper<undefined>;
-
-export type DeleteEdgeConfigTokensRequestBody = {
-  tokens: string[];
-};
-
-export type DeleteEdgeConfigTokensVariables = {
-  body: DeleteEdgeConfigTokensRequestBody;
-  pathParams: DeleteEdgeConfigTokensPathParams;
-  queryParams?: DeleteEdgeConfigTokensQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Deletes one or more tokens of an existing Edge Config.
- */
-export const deleteEdgeConfigTokens = (variables: DeleteEdgeConfigTokensVariables, signal?: AbortSignal) =>
-  fetch<
-    undefined,
-    DeleteEdgeConfigTokensError,
-    DeleteEdgeConfigTokensRequestBody,
-    {},
-    DeleteEdgeConfigTokensQueryParams,
-    DeleteEdgeConfigTokensPathParams
-  >({ url: '/v1/edge-config/{edgeConfigId}/tokens', method: 'delete', ...variables, signal });
-
-export type GetEdgeConfigTokenPathParams = {
-  edgeConfigId: string;
-  token: string;
-};
-
-export type GetEdgeConfigTokenQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type GetEdgeConfigTokenError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetEdgeConfigTokenVariables = {
-  pathParams: GetEdgeConfigTokenPathParams;
-  queryParams?: GetEdgeConfigTokenQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Return meta data about an Edge Config token.
- */
-export const getEdgeConfigToken = (variables: GetEdgeConfigTokenVariables, signal?: AbortSignal) =>
-  fetch<
-    Schemas.EdgeConfigToken,
-    GetEdgeConfigTokenError,
-    undefined,
-    {},
-    GetEdgeConfigTokenQueryParams,
-    GetEdgeConfigTokenPathParams
-  >({ url: '/v1/edge-config/{edgeConfigId}/token/{token}', method: 'get', ...variables, signal });
-
-export type CreateEdgeConfigTokenPathParams = {
-  edgeConfigId: string;
-};
-
-export type CreateEdgeConfigTokenQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type CreateEdgeConfigTokenError = Fetcher.ErrorWrapper<undefined>;
-
-export type CreateEdgeConfigTokenResponse = {
-  token: string;
-  id: string;
-};
-
-export type CreateEdgeConfigTokenRequestBody = {
-  /**
-   * @maxLength 52
-   */
-  label: string;
-};
-
-export type CreateEdgeConfigTokenVariables = {
-  body: CreateEdgeConfigTokenRequestBody;
-  pathParams: CreateEdgeConfigTokenPathParams;
-  queryParams?: CreateEdgeConfigTokenQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Adds a token to an existing Edge Config.
- */
-export const createEdgeConfigToken = (variables: CreateEdgeConfigTokenVariables, signal?: AbortSignal) =>
-  fetch<
-    CreateEdgeConfigTokenResponse,
-    CreateEdgeConfigTokenError,
-    CreateEdgeConfigTokenRequestBody,
-    {},
-    CreateEdgeConfigTokenQueryParams,
-    CreateEdgeConfigTokenPathParams
-  >({ url: '/v1/edge-config/{edgeConfigId}/token', method: 'post', ...variables, signal });
-
 export const operationsByTag = {
   artifacts: { recordEvents, status, uploadArtifact, downloadArtifact, artifactQuery },
+  checks: { getAllChecks, createCheck, getCheck, updateCheck, rerequestCheck },
   deployments: {
+    getDeploymentEvents,
     getDeployment,
     createDeployment,
     cancelDeployment,
-    getDeploymentEvents,
     uploadFile,
-    deleteDeployment,
-    getDeployments,
     listDeploymentFiles,
-    getDeploymentFileContents
+    getDeploymentFileContents,
+    getDeployments,
+    deleteDeployment
   },
-  certs: { getCertById, removeCert, uploadCert, issueCert },
-  user: { listUserEvents, getAuthUser, requestDelete },
-  aliases: { listAliases, getAlias, deleteAlias, listDeploymentAliases, assignAlias },
-  authentication: { listAuthTokens, createAuthToken, getAuthToken, deleteAuthToken, verifyToken, emailLogin },
-  dns: { getRecords, createRecord, updateRecord, removeRecord },
   domains: {
-    checkDomainStatus,
-    checkDomainPrice,
     buyDomain,
+    checkDomainPrice,
+    checkDomainStatus,
     getDomainConfig,
     getDomain,
     getDomains,
     createOrTransferDomain,
     deleteDomain
   },
-  secrets: { getSecrets, createSecret, renameSecret, getSecret, deleteSecret },
+  dns: { createRecord, getRecords, updateRecord, removeRecord },
+  edgeConfig: {
+    getEdgeConfigs,
+    createEdgeConfig,
+    getEdgeConfig,
+    updateEdgeConfig,
+    deleteEdgeConfig,
+    getEdgeConfigItems,
+    patchtEdgeConfigItems,
+    getEdgeConfigItem,
+    getEdgeConfigTokens,
+    deleteEdgeConfigTokens,
+    getEdgeConfigToken,
+    createEdgeConfigToken
+  },
+  user: { listUserEvents, requestDelete, getAuthUser },
+  integrations: { getConfigurations, getConfiguration, deleteConfiguration, gitNamespaces, searchRepo },
+  logDrains: {
+    getIntegrationLogDrains,
+    createLogDrain,
+    deleteIntegrationLogDrain,
+    getConfigurableLogDrain,
+    deleteConfigurableLogDrain,
+    getConfigurableLogDrains,
+    createConfigurableLogDrain
+  },
   projects: {
     getProjects,
     createProject,
@@ -14747,45 +14822,24 @@ export const operationsByTag = {
     removeProjectEnv,
     editProjectEnv
   },
-  integrations: { getConfigurations, getConfiguration, deleteConfiguration, gitNamespaces, searchRepo },
-  logDrains: {
-    getIntegrationLogDrains,
-    createLogDrain,
-    deleteIntegrationLogDrain,
-    getConfigurableLogDrain,
-    deleteConfigurableLogDrain,
-    getConfigurableLogDrains,
-    createConfigurableLogDrain
-  },
-  webhooks: { createWebhook, getWebhooks, getWebhook, deleteWebhook },
   teams: {
-    getTeam,
-    patchTeam,
-    getTeams,
-    createTeam,
-    deleteTeam,
-    deleteTeamInviteCode,
     getTeamMembers,
     inviteUserToTeam,
     requestAccessToTeam,
     getTeamAccessRequest,
     joinTeam,
     updateTeamMember,
-    removeTeamMember
+    removeTeamMember,
+    getTeam,
+    patchTeam,
+    getTeams,
+    createTeam,
+    deleteTeam,
+    deleteTeamInviteCode
   },
-  checks: { createCheck, getAllChecks, getCheck, updateCheck, rerequestCheck },
-  edgeConfig: {
-    getEdgeConfigs,
-    createEdgeConfig,
-    getEdgeConfig,
-    updateEdgeConfig,
-    deleteEdgeConfig,
-    getEdgeConfigItems,
-    patchtEdgeConfigItems,
-    getEdgeConfigItem,
-    getEdgeConfigTokens,
-    deleteEdgeConfigTokens,
-    getEdgeConfigToken,
-    createEdgeConfigToken
-  }
+  authentication: { listAuthTokens, createAuthToken, getAuthToken, deleteAuthToken, emailLogin, verifyToken },
+  webhooks: { createWebhook, getWebhooks, getWebhook, deleteWebhook },
+  aliases: { getAlias, listAliases, deleteAlias, listDeploymentAliases, assignAlias },
+  certs: { getCertById, removeCert, issueCert, uploadCert },
+  secrets: { createSecret, renameSecret, getSecrets, getSecret, deleteSecret }
 };
