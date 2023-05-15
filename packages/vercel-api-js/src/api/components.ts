@@ -1221,7 +1221,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
                   middleware?: number;
                 }
               | {
-                  handle: 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'error' | 'resource';
+                  handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
                   src?: string;
                   dest?: string;
                   status?: number;
@@ -1912,7 +1912,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'error' | 'resource';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
             src?: string;
             dest?: string;
             status?: number;
@@ -3521,7 +3521,7 @@ export type CancelDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'error' | 'resource';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
             src?: string;
             dest?: string;
             status?: number;
