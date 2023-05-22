@@ -4,6 +4,11 @@
  * @version 0.0.1
  */
 /**
+ * Enum containing the actions that can be performed against a resource. Group operations are included.
+ */
+export type ACLAction = 'create' | 'delete' | 'read' | 'update' | 'list' | 'count';
+
+/**
  * This object contains information related to the pagination of the current request, including the necessary parameters to get the next or previous page of data.
  */
 export type Pagination = {
@@ -143,11 +148,6 @@ export type UserEvent = {
 };
 
 /**
- * Enum containing the actions that can be performed against a resource. Group operations are included.
- */
-export type ACLAction = 'create' | 'delete' | 'read' | 'update' | 'list' | 'count';
-
-/**
  * Data representing a Team.
  */
 export type Team = Record<string, any>;
@@ -275,8 +275,8 @@ export type TeamLimited = {
         created: number;
         joinedFrom?: {
           origin:
-            | 'import'
             | 'link'
+            | 'import'
             | 'saml'
             | 'mail'
             | 'teams'
@@ -309,8 +309,8 @@ export type TeamLimited = {
         created: number;
         joinedFrom?: {
           origin:
-            | 'import'
             | 'link'
+            | 'import'
             | 'saml'
             | 'mail'
             | 'teams'
@@ -372,7 +372,6 @@ export type AuthUser = {
    */
   billing: {
     currency?: 'usd' | 'eur';
-    addons?: ('custom-deployment-suffix' | 'live-support')[] | null;
     cancelation?: number | null;
     period: {
       start: number;
@@ -800,6 +799,33 @@ export type AuthUser = {
         hidden: boolean;
         disabledAt?: number | null;
       };
+      dataCacheRead?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+      };
+      dataCacheRevalidation?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+      };
+      dataCacheWrite?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+      };
     } | null;
     invoiceSettings?: {
       footer?: string;
@@ -851,37 +877,52 @@ export type AuthUser = {
    * An object containing infomation related to the amount of platform resources may be allocated to the User account.
    */
   resourceConfig: {
+    /**
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+     */
     nodeType?: string;
+    /**
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+     */
     concurrentBuilds?: number;
+    /**
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+     */
     awsAccountType?: string;
+    /**
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+     */
     awsAccountIds?: string[];
+    /**
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+     */
     cfZoneName?: string;
     /**
-     * To overwrite the number of Edge Configs an account can create.
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
     edgeConfigs?: number;
     /**
-     * To overwrite the maximum size of an Edge Config per account. Size is in kilobytes, eg 64 leads to 64kB or 64_000 bytes worth of storage
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
     edgeConfigSize?: number;
     /**
-     * The maximum size for an Edge Function per account. Format is in bytes. eg output of `bytes('3mb')`
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
     edgeFunctionMaxSizeBytes?: number;
     /**
-     * The maximum time to wait (in milliseconds) for the response headers.
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
     edgeFunctionExecutionTimeoutMs?: number;
     /**
-     * To overwrite the number of KV databases an account can create.
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
     kvDatabases?: number;
     /**
-     * To overwrite the number of Postgres databases an account can create.
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
     postgresDatabases?: number;
     /**
-     * To overwrite the number of Blob stores an account can create.
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
     blobStores?: number;
   };
@@ -937,6 +978,12 @@ export type AuthUser = {
    */
   remoteCaching?: {
     enabled?: boolean;
+  };
+  /**
+   * data cache settings
+   */
+  dataCache?: {
+    excessBillingEnabled?: boolean;
   };
   /**
    * The User's unique identifier.
