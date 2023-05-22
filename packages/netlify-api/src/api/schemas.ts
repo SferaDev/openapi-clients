@@ -441,7 +441,11 @@ export type EnvVar = {
     /**
      * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
      */
-    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production';
+    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+    /**
+     * An additional parameter for custom branches. Currently, this is used for specifying a branch name when `context=branch`.
+     */
+    context_parameter?: string;
   }[];
   /**
    * The timestamp of when the value was last updated
@@ -497,7 +501,11 @@ export type EnvVarValue = {
   /**
    * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
    */
-  context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production';
+  context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+  /**
+   * An additional parameter for custom branches. Currently, this is used for specifying a branch name when `context=branch`.
+   */
+  context_parameter?: string;
 };
 
 export type EnvVarUser = {

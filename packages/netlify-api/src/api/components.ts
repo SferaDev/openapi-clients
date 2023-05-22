@@ -838,7 +838,11 @@ export type GetEnvVarsResponse = {
     /**
      * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
      */
-    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production';
+    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+    /**
+     * An additional parameter for custom branches. Currently, this is used for specifying a branch name when `context=branch`.
+     */
+    context_parameter?: string;
   }[];
   /**
    * The timestamp of when the value was last updated
@@ -948,7 +952,11 @@ export type CreateEnvVarsResponse = {
     /**
      * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
      */
-    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production';
+    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+    /**
+     * An additional parameter for custom branches. Currently, this is used for specifying a branch name when `context=branch`.
+     */
+    context_parameter?: string;
   }[];
   /**
    * The timestamp of when the value was last updated
@@ -1010,7 +1018,11 @@ export type CreateEnvVarsRequestBody = {
     /**
      * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
      */
-    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production';
+    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+    /**
+     * An additional parameter for custom branches. Currently, this is used for specifying a branch name when `context=branch`.
+     */
+    context_parameter?: string;
   }[];
 }[];
 
@@ -1094,7 +1106,11 @@ export type GetEnvVarResponse = {
     /**
      * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
      */
-    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production';
+    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+    /**
+     * An additional parameter for custom branches. Currently, this is used for specifying a branch name when `context=branch`.
+     */
+    context_parameter?: string;
   }[];
   /**
    * The timestamp of when the value was last updated
@@ -1208,7 +1224,11 @@ export type UpdateEnvVarResponse = {
     /**
      * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
      */
-    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production';
+    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+    /**
+     * An additional parameter for custom branches. Currently, this is used for specifying a branch name when `context=branch`.
+     */
+    context_parameter?: string;
   }[];
   /**
    * The timestamp of when the value was last updated
@@ -1270,7 +1290,11 @@ export type UpdateEnvVarRequestBody = {
     /**
      * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
      */
-    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production';
+    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+    /**
+     * An additional parameter for custom branches. Currently, this is used for specifying a branch name when `context=branch`.
+     */
+    context_parameter?: string;
   }[];
 };
 
@@ -1354,7 +1378,11 @@ export type SetEnvVarValueResponse = {
     /**
      * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
      */
-    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production';
+    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+    /**
+     * An additional parameter for custom branches. Currently, this is used for specifying a branch name when `context=branch`.
+     */
+    context_parameter?: string;
   }[];
   /**
    * The timestamp of when the value was last updated
@@ -1393,9 +1421,13 @@ export type SetEnvVarValueResponse = {
 
 export type SetEnvVarValueRequestBody = {
   /**
-   * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
+   * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`. `branch` must be provided with a value in `context_parameter`.
    */
-  context?: 'dev' | 'branch-deploy' | 'deploy-preview' | 'production';
+  context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+  /**
+   * An additional parameter for custom branches. Currently, this is used for providing a branch name when `context=branch`.
+   */
+  context_parameter?: string;
   /**
    * The environment variable's unencrypted value
    */
