@@ -290,86 +290,6 @@ export const artifactQuery = (variables: ArtifactQueryVariables, signal?: AbortS
     signal
   });
 
-export type GetAllChecksPathParams = {
-  /**
-   * The deployment to get all checks for
-   *
-   * @example dpl_2qn7PZrx89yxY34vEZPD31Y9XVj6
-   */
-  deploymentId: string;
-};
-
-export type GetAllChecksQueryParams = {
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type GetAllChecksError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetAllChecksResponse = {
-  checks: {
-    completedAt?: number;
-    conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped' | 'stale';
-    createdAt: number;
-    detailsUrl?: string;
-    id: string;
-    integrationId: string;
-    name: string;
-    output?: {
-      metrics?: {
-        FCP: {
-          value: number | null;
-          previousValue?: number;
-          source: 'web-vitals';
-        };
-        LCP: {
-          value: number | null;
-          previousValue?: number;
-          source: 'web-vitals';
-        };
-        CLS: {
-          value: number | null;
-          previousValue?: number;
-          source: 'web-vitals';
-        };
-        TBT: {
-          value: number | null;
-          previousValue?: number;
-          source: 'web-vitals';
-        };
-        virtualExperienceScore?: {
-          value: number | null;
-          previousValue?: number;
-          source: 'web-vitals';
-        };
-      };
-    };
-    path?: string;
-    rerequestable: boolean;
-    startedAt?: number;
-    status: 'registered' | 'running' | 'completed';
-    updatedAt: number;
-  }[];
-};
-
-export type GetAllChecksVariables = {
-  pathParams: GetAllChecksPathParams;
-  queryParams?: GetAllChecksQueryParams;
-} & FetcherExtraProps;
-
-/**
- * List all of the checks created for a deployment.
- */
-export const getAllChecks = (variables: GetAllChecksVariables, signal?: AbortSignal) =>
-  fetch<GetAllChecksResponse, GetAllChecksError, undefined, {}, GetAllChecksQueryParams, GetAllChecksPathParams>({
-    url: '/v1/deployments/{deploymentId}/checks',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
 export type CreateCheckPathParams = {
   /**
    * The deployment to create the check for.
@@ -494,6 +414,86 @@ export const createCheck = (variables: CreateCheckVariables, signal?: AbortSigna
     CreateCheckQueryParams,
     CreateCheckPathParams
   >({ url: '/v1/deployments/{deploymentId}/checks', method: 'post', ...variables, signal });
+
+export type GetAllChecksPathParams = {
+  /**
+   * The deployment to get all checks for
+   *
+   * @example dpl_2qn7PZrx89yxY34vEZPD31Y9XVj6
+   */
+  deploymentId: string;
+};
+
+export type GetAllChecksQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetAllChecksError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetAllChecksResponse = {
+  checks: {
+    completedAt?: number;
+    conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped' | 'stale';
+    createdAt: number;
+    detailsUrl?: string;
+    id: string;
+    integrationId: string;
+    name: string;
+    output?: {
+      metrics?: {
+        FCP: {
+          value: number | null;
+          previousValue?: number;
+          source: 'web-vitals';
+        };
+        LCP: {
+          value: number | null;
+          previousValue?: number;
+          source: 'web-vitals';
+        };
+        CLS: {
+          value: number | null;
+          previousValue?: number;
+          source: 'web-vitals';
+        };
+        TBT: {
+          value: number | null;
+          previousValue?: number;
+          source: 'web-vitals';
+        };
+        virtualExperienceScore?: {
+          value: number | null;
+          previousValue?: number;
+          source: 'web-vitals';
+        };
+      };
+    };
+    path?: string;
+    rerequestable: boolean;
+    startedAt?: number;
+    status: 'registered' | 'running' | 'completed';
+    updatedAt: number;
+  }[];
+};
+
+export type GetAllChecksVariables = {
+  pathParams: GetAllChecksPathParams;
+  queryParams?: GetAllChecksQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * List all of the checks created for a deployment.
+ */
+export const getAllChecks = (variables: GetAllChecksVariables, signal?: AbortSignal) =>
+  fetch<GetAllChecksResponse, GetAllChecksError, undefined, {}, GetAllChecksQueryParams, GetAllChecksPathParams>({
+    url: '/v1/deployments/{deploymentId}/checks',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetCheckPathParams = {
   /**
@@ -837,6 +837,570 @@ export const rerequestCheck = (variables: RerequestCheckVariables, signal?: Abor
     ...variables,
     signal
   });
+
+export type UpdateProjectDataCachePathParams = {
+  /**
+   * The unique project identifier
+   *
+   * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
+   */
+  projectId: string;
+};
+
+export type UpdateProjectDataCacheQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type UpdateProjectDataCacheError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateProjectDataCacheResponse = {
+  accountId: string;
+  analytics?: {
+    id: string;
+    canceledAt: number | null;
+    disabledAt: number;
+    enabledAt: number;
+    paidAt?: number;
+    sampleRatePercent?: number | null;
+    spendLimitInDollars?: number | null;
+  };
+  autoExposeSystemEnvs?: boolean;
+  buildCommand?: string | null;
+  commandForIgnoringBuildStep?: string | null;
+  connectConfigurationId?: string | null;
+  connectBuildsEnabled?: boolean;
+  createdAt?: number;
+  dataCache?: {
+    userEnabled: boolean;
+    enableAt: number | null;
+  };
+  crons?: {
+    /**
+     * The time the feature was enabled for this project. Note: It enables automatically with the first Deployment that outputs cronjobs.
+     */
+    enabledAt: number;
+    /**
+     * The time the feature was disabled for this project.
+     */
+    disabledAt: number | null;
+    updatedAt: number;
+    /**
+     * The ID of the Deployment from which the definitions originated.
+     */
+    deploymentId: string | null;
+    definitions: {
+      /**
+       * The hostname that should be used.
+       *
+       * @example vercel.com
+       */
+      host: string;
+      /**
+       * The path that should be called for the cronjob.
+       *
+       * @example /api/crons/sync-something?hello=world
+       */
+      path: string;
+      /**
+       * The cron expression.
+       *
+       * @example 0 0 * * *
+       */
+      schedule: string;
+    }[];
+  };
+  devCommand?: string | null;
+  directoryListing: boolean;
+  installCommand?: string | null;
+  env?: {
+    target?:
+      | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+      | ('production' | 'preview' | 'development' | 'preview' | 'development');
+    type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+    id?: string;
+    key: string;
+    value: string;
+    configurationId?: string | null;
+    createdAt?: number;
+    updatedAt?: number;
+    createdBy?: string | null;
+    updatedBy?: string | null;
+    gitBranch?: string;
+    edgeConfigId?: string | null;
+    edgeConfigTokenId?: string | null;
+    contentHint?:
+      | {
+          type: 'redis-url';
+          storeId: string;
+        }
+      | {
+          type: 'redis-rest-api-url';
+          storeId: string;
+        }
+      | {
+          type: 'redis-rest-api-token';
+          storeId: string;
+        }
+      | {
+          type: 'redis-rest-api-read-only-token';
+          storeId: string;
+        }
+      | {
+          type: 'blob-read-write-token';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-url';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-url-non-pooling';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-prisma-url';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-user';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-host';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-password';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-database';
+          storeId: string;
+        }
+      | null;
+    /**
+     * Whether `value` is decrypted.
+     */
+    decrypted?: boolean;
+  }[];
+  framework?:
+    | 'blitzjs'
+    | 'nextjs'
+    | 'gatsby'
+    | 'remix'
+    | 'astro'
+    | 'hexo'
+    | 'eleventy'
+    | 'docusaurus-2'
+    | 'docusaurus'
+    | 'preact'
+    | 'solidstart'
+    | 'dojo'
+    | 'ember'
+    | 'vue'
+    | 'scully'
+    | 'ionic-angular'
+    | 'angular'
+    | 'polymer'
+    | 'svelte'
+    | 'sveltekit'
+    | 'sveltekit-1'
+    | 'ionic-react'
+    | 'create-react-app'
+    | 'gridsome'
+    | 'umijs'
+    | 'sapper'
+    | 'saber'
+    | 'stencil'
+    | 'nuxtjs'
+    | 'redwoodjs'
+    | 'hugo'
+    | 'jekyll'
+    | 'brunch'
+    | 'middleman'
+    | 'zola'
+    | 'hydrogen'
+    | 'vite'
+    | 'vitepress'
+    | 'vuepress'
+    | 'parcel'
+    | 'sanity'
+    | 'storybook'
+    | null;
+  gitForkProtection?: boolean;
+  gitLFS?: boolean;
+  id: string;
+  latestDeployments?: {
+    alias?: string[];
+    aliasAssigned?: number | boolean | null;
+    aliasError?: {
+      code: string;
+      message: string;
+    } | null;
+    aliasFinal?: string | null;
+    automaticAliases?: string[];
+    builds?: {
+      use: string;
+      src?: string;
+      dest?: string;
+    }[];
+    connectConfigurationId?: string;
+    createdAt: number;
+    createdIn: string;
+    creator: {
+      email: string;
+      githubLogin?: string;
+      gitlabLogin?: string;
+      uid: string;
+      username: string;
+    } | null;
+    deploymentHostname: string;
+    name: string;
+    forced?: boolean;
+    id: string;
+    meta?: {
+      [key: string]: string;
+    };
+    monorepoManager?: string | null;
+    plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
+    private: boolean;
+    readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+    requestedAt?: number;
+    target?: string | null;
+    teamId?: string | null;
+    type: 'LAMBDAS';
+    url: string;
+    userId: string;
+    withCache?: boolean;
+    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+    checksState?: 'registered' | 'running' | 'completed';
+    readyAt?: number;
+    buildingAt?: number;
+    /**
+     * Whether or not preview comments are enabled for the deployment
+     *
+     * @example false
+     */
+    previewCommentsEnabled?: boolean;
+  }[];
+  link?:
+    | {
+        org?: string;
+        repo?: string;
+        repoId?: number;
+        type?: 'github';
+        createdAt?: number;
+        deployHooks: {
+          createdAt?: number;
+          id: string;
+          name: string;
+          ref: string;
+          url: string;
+        }[];
+        gitCredentialId?: string;
+        updatedAt?: number;
+        sourceless?: boolean;
+        productionBranch?: string;
+      }
+    | {
+        projectId?: string;
+        projectName?: string;
+        projectNameWithNamespace?: string;
+        projectNamespace?: string;
+        projectUrl?: string;
+        type?: 'gitlab';
+        createdAt?: number;
+        deployHooks: {
+          createdAt?: number;
+          id: string;
+          name: string;
+          ref: string;
+          url: string;
+        }[];
+        gitCredentialId?: string;
+        updatedAt?: number;
+        sourceless?: boolean;
+        productionBranch?: string;
+      }
+    | {
+        name?: string;
+        slug?: string;
+        owner?: string;
+        type?: 'bitbucket';
+        uuid?: string;
+        workspaceUuid?: string;
+        createdAt?: number;
+        deployHooks: {
+          createdAt?: number;
+          id: string;
+          name: string;
+          ref: string;
+          url: string;
+        }[];
+        gitCredentialId?: string;
+        updatedAt?: number;
+        sourceless?: boolean;
+        productionBranch?: string;
+      };
+  name: string;
+  nodeVersion: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
+  outputDirectory?: string | null;
+  passwordProtection?: {
+    deploymentType: 'preview' | 'all';
+  } | null;
+  publicSource?: boolean | null;
+  rootDirectory?: string | null;
+  serverlessFunctionRegion?: string | null;
+  skipGitConnectDuringLink?: boolean;
+  sourceFilesOutsideRootDirectory?: boolean;
+  ssoProtection?: {
+    deploymentType: 'preview' | 'all';
+  } | null;
+  targets?: {
+    [key: string]: {
+      alias?: string[];
+      aliasAssigned?: number | boolean | null;
+      aliasError?: {
+        code: string;
+        message: string;
+      } | null;
+      aliasFinal?: string | null;
+      automaticAliases?: string[];
+      builds?: {
+        use: string;
+        src?: string;
+        dest?: string;
+      }[];
+      connectConfigurationId?: string;
+      createdAt: number;
+      createdIn: string;
+      creator: {
+        email: string;
+        githubLogin?: string;
+        gitlabLogin?: string;
+        uid: string;
+        username: string;
+      } | null;
+      deploymentHostname: string;
+      name: string;
+      forced?: boolean;
+      id: string;
+      meta?: {
+        [key: string]: string;
+      };
+      monorepoManager?: string | null;
+      plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
+      private: boolean;
+      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+      requestedAt?: number;
+      target?: string | null;
+      teamId?: string | null;
+      type: 'LAMBDAS';
+      url: string;
+      userId: string;
+      withCache?: boolean;
+      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+      checksState?: 'registered' | 'running' | 'completed';
+      readyAt?: number;
+      buildingAt?: number;
+      /**
+       * Whether or not preview comments are enabled for the deployment
+       *
+       * @example false
+       */
+      previewCommentsEnabled?: boolean;
+    } | null;
+  };
+  transferCompletedAt?: number;
+  transferStartedAt?: number;
+  transferToAccountId?: string;
+  transferredFromAccountId?: string;
+  updatedAt?: number;
+  live?: boolean;
+  enablePreviewFeedback?: boolean | null;
+  permissions?: {
+    aliasGlobal?: Schemas.ACLAction[];
+    aliasProject?: Schemas.ACLAction[];
+    analytics?: Schemas.ACLAction[];
+    analyticsSampling?: Schemas.ACLAction[];
+    analyticsUsage?: Schemas.ACLAction[];
+    auditLog?: Schemas.ACLAction[];
+    billingAddress?: Schemas.ACLAction[];
+    billingInformation?: Schemas.ACLAction[];
+    billingInvoice?: Schemas.ACLAction[];
+    billingInvoiceEmailRecipient?: Schemas.ACLAction[];
+    billingInvoiceLanguage?: Schemas.ACLAction[];
+    billingPlan?: Schemas.ACLAction[];
+    billingPurchaseOrder?: Schemas.ACLAction[];
+    billingTaxId?: Schemas.ACLAction[];
+    blob?: Schemas.ACLAction[];
+    cacheArtifact?: Schemas.ACLAction[];
+    cacheArtifactUsageEvent?: Schemas.ACLAction[];
+    concurrentBuilds?: Schemas.ACLAction[];
+    connect?: Schemas.ACLAction[];
+    connectConfiguration?: Schemas.ACLAction[];
+    connectConfigurationLink?: Schemas.ACLAction[];
+    deployment?: Schemas.ACLAction[];
+    deploymentProductionGit?: Schemas.ACLAction[];
+    deploymentCheck?: Schemas.ACLAction[];
+    deploymentCheckPreview?: Schemas.ACLAction[];
+    deploymentPreview?: Schemas.ACLAction[];
+    deploymentPrivate?: Schemas.ACLAction[];
+    deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
+    deploymentPromote?: Schemas.ACLAction[];
+    deploymentRollback?: Schemas.ACLAction[];
+    domain?: Schemas.ACLAction[];
+    domainAcceptDelegation?: Schemas.ACLAction[];
+    domainAuthCodes?: Schemas.ACLAction[];
+    domainCertificate?: Schemas.ACLAction[];
+    domainCheckConfig?: Schemas.ACLAction[];
+    domainMove?: Schemas.ACLAction[];
+    domainPurchase?: Schemas.ACLAction[];
+    domainRecord?: Schemas.ACLAction[];
+    domainTransferIn?: Schemas.ACLAction[];
+    event?: Schemas.ACLAction[];
+    sensitiveEnvironmentVariablePolicy?: Schemas.ACLAction[];
+    fileUpload?: Schemas.ACLAction[];
+    gitRepository?: Schemas.ACLAction[];
+    ipBlocking?: Schemas.ACLAction[];
+    trustedIps?: Schemas.ACLAction[];
+    integration?: Schemas.ACLAction[];
+    integrationConfiguration?: Schemas.ACLAction[];
+    integrationConfigurationTransfer?: Schemas.ACLAction[];
+    integrationConfigurationProjects?: Schemas.ACLAction[];
+    integrationVercelConfigurationOverride?: Schemas.ACLAction[];
+    job?: Schemas.ACLAction[];
+    logDrain?: Schemas.ACLAction[];
+    Monitoring?: Schemas.ACLAction[];
+    monitoringQuery?: Schemas.ACLAction[];
+    monitoringChart?: Schemas.ACLAction[];
+    notificationDomainConfiguration?: Schemas.ACLAction[];
+    notificationDomainExpire?: Schemas.ACLAction[];
+    notificationDomainMoved?: Schemas.ACLAction[];
+    notificationDomainPurchase?: Schemas.ACLAction[];
+    notificationDomainRenewal?: Schemas.ACLAction[];
+    notificationDomainTransfer?: Schemas.ACLAction[];
+    notificationDomainUnverified?: Schemas.ACLAction[];
+    notificationPaymentFailed?: Schemas.ACLAction[];
+    notificationUsageAlert?: Schemas.ACLAction[];
+    notificationSpendCap?: Schemas.ACLAction[];
+    openTelemetryEndpoint?: Schemas.ACLAction[];
+    passwordProtection?: Schemas.ACLAction[];
+    paymentMethod?: Schemas.ACLAction[];
+    permissions?: Schemas.ACLAction[];
+    postgres?: Schemas.ACLAction[];
+    previewDeploymentSuffix?: Schemas.ACLAction[];
+    proTrialOnboarding?: Schemas.ACLAction[];
+    project?: Schemas.ACLAction[];
+    projectDeploymentHook?: Schemas.ACLAction[];
+    projectDomain?: Schemas.ACLAction[];
+    projectDomainMove?: Schemas.ACLAction[];
+    projectEnvVars?: Schemas.ACLAction[];
+    projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+    sharedEnvVars?: Schemas.ACLAction[];
+    projectEnvVarsProduction?: Schemas.ACLAction[];
+    sharedEnvVarsProduction?: Schemas.ACLAction[];
+    projectIntegrationConfiguration?: Schemas.ACLAction[];
+    projectLink?: Schemas.ACLAction[];
+    projectMember?: Schemas.ACLAction[];
+    projectProductionBranch?: Schemas.ACLAction[];
+    projectTransfer?: Schemas.ACLAction[];
+    projectProtectionBypass?: Schemas.ACLAction[];
+    rateLimit?: Schemas.ACLAction[];
+    redis?: Schemas.ACLAction[];
+    remoteCaching?: Schemas.ACLAction[];
+    samlConfig?: Schemas.ACLAction[];
+    secret?: Schemas.ACLAction[];
+    spendCapConfiguration?: Schemas.ACLAction[];
+    spendCapState?: Schemas.ACLAction[];
+    supportCase?: Schemas.ACLAction[];
+    supportCaseComment?: Schemas.ACLAction[];
+    DataCacheNamespace?: Schemas.ACLAction[];
+    DataCacheBillingSettings?: Schemas.ACLAction[];
+    team?: Schemas.ACLAction[];
+    teamAccessRequest?: Schemas.ACLAction[];
+    teamFellowMembership?: Schemas.ACLAction[];
+    teamInvite?: Schemas.ACLAction[];
+    teamInviteCode?: Schemas.ACLAction[];
+    teamJoin?: Schemas.ACLAction[];
+    teamOwnMembership?: Schemas.ACLAction[];
+    teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
+    token?: Schemas.ACLAction[];
+    usage?: Schemas.ACLAction[];
+    user?: Schemas.ACLAction[];
+    userConnection?: Schemas.ACLAction[];
+    webAnalytics?: Schemas.ACLAction[];
+    webAnalyticsPlan?: Schemas.ACLAction[];
+    edgeConfig?: Schemas.ACLAction[];
+    edgeConfigItem?: Schemas.ACLAction[];
+    edgeConfigToken?: Schemas.ACLAction[];
+    webhook?: Schemas.ACLAction[];
+    ['webhook-event']?: Schemas.ACLAction[];
+    endpointVerification?: Schemas.ACLAction[];
+    aliasProtectionBypass?: Schemas.ACLAction[];
+  };
+  lastRollbackTarget?: {
+    fromDeploymentId: string;
+    toDeploymentId: string;
+    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+    requestedAt: number;
+  } | null;
+  lastAliasRequest?: {
+    fromDeploymentId: string;
+    toDeploymentId: string;
+    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+    requestedAt: number;
+    type: 'promote' | 'rollback';
+  } | null;
+  hasFloatingAliases?: boolean;
+  protectionBypass?: {
+    [key: string]: {
+      createdAt: number;
+      createdBy: string;
+      scope?: 'automation-bypass' | 'shareable-link';
+    };
+  };
+  hasActiveBranches?: boolean;
+  trustedIps?: {
+    deploymentType: 'preview' | 'all';
+    addresses: {
+      value: string;
+      note?: string;
+    }[];
+    protectionMode: 'additional' | 'exclusive';
+  } | null;
+};
+
+export type UpdateProjectDataCacheRequestBody = {
+  /**
+   * Enable or disable data cache for the project
+   *
+   * @example true
+   */
+  enabled?: boolean;
+};
+
+export type UpdateProjectDataCacheVariables = {
+  body?: UpdateProjectDataCacheRequestBody;
+  pathParams: UpdateProjectDataCachePathParams;
+  queryParams?: UpdateProjectDataCacheQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Update the cron job feature on a project.
+ */
+export const updateProjectDataCache = (variables: UpdateProjectDataCacheVariables, signal?: AbortSignal) =>
+  fetch<
+    UpdateProjectDataCacheResponse,
+    UpdateProjectDataCacheError,
+    UpdateProjectDataCacheRequestBody,
+    {},
+    UpdateProjectDataCacheQueryParams,
+    UpdateProjectDataCachePathParams
+  >({ url: '/v1/data-cache/projects/{projectId}', method: 'patch', ...variables, signal });
 
 export type GetDeploymentEventsPathParams = {
   /**
@@ -1296,6 +1860,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
           link?: string;
           action?: string;
         } | null;
+        autoAssignCustomDomains?: boolean;
         automaticAliases?: string[];
         bootedAt: number;
         buildErrorAt?: number;
@@ -1522,6 +2087,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
           link?: string;
           action?: string;
         } | null;
+        autoAssignCustomDomains?: boolean;
         automaticAliases?: string[];
         bootedAt: number;
         buildErrorAt?: number;
@@ -1987,6 +2553,7 @@ export type CreateDeploymentResponse = {
     link?: string;
     action?: string;
   } | null;
+  autoAssignCustomDomains?: boolean;
   automaticAliases?: string[];
   bootedAt: number;
   buildErrorAt?: number;
@@ -3326,6 +3893,7 @@ export type CreateDeploymentRequestBody = {
     data_transfer_bytes: number;
     written_data_bytes: number;
     compute_time_seconds: number;
+    synthetic_storage_size: number;
   }[];
   pagination: {
     cursor: string;
@@ -3596,6 +4164,7 @@ export type CancelDeploymentResponse = {
     link?: string;
     action?: string;
   } | null;
+  autoAssignCustomDomains?: boolean;
   automaticAliases?: string[];
   bootedAt: number;
   buildErrorAt?: number;
@@ -3920,6 +4489,91 @@ export const checkDomainPrice = (variables: CheckDomainPriceVariables, signal?: 
     ...variables,
     signal
   });
+
+export type GetRecordsPathParams = {
+  /**
+   * @example example.com
+   */
+  domain: string;
+};
+
+export type GetRecordsQueryParams = {
+  /**
+   * Maximum number of records to list from a request.
+   *
+   * @example 20
+   */
+  limit?: string;
+  /**
+   * Get records created after this JavaScript timestamp.
+   *
+   * @example 1609499532000
+   */
+  since?: string;
+  /**
+   * Get records created before this JavaScript timestamp.
+   *
+   * @example 1612264332000
+   */
+  until?: string;
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetRecordsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetRecordsVariables = {
+  pathParams: GetRecordsPathParams;
+  queryParams?: GetRecordsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves a list of DNS records created for a domain name. By default it returns 20 records if no limit is provided. The rest can be retrieved using the pagination options.
+ */
+export const getRecords = (variables: GetRecordsVariables, signal?: AbortSignal) =>
+  fetch<
+    | string
+    | {
+        records: {
+          id: string;
+          slug: string;
+          name: string;
+          type: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
+          value: string;
+          mxPriority?: number;
+          priority?: number;
+          creator: string;
+          created: number | null;
+          updated: number | null;
+          createdAt: number | null;
+          updatedAt: number | null;
+        }[];
+      }
+    | {
+        records: {
+          id: string;
+          slug: string;
+          name: string;
+          type: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
+          value: string;
+          mxPriority?: number;
+          priority?: number;
+          creator: string;
+          created: number | null;
+          updated: number | null;
+          createdAt: number | null;
+          updatedAt: number | null;
+        }[];
+        pagination: Schemas.Pagination;
+      },
+    GetRecordsError,
+    undefined,
+    {},
+    GetRecordsQueryParams,
+    GetRecordsPathParams
+  >({ url: '/v4/domains/{domain}/records', method: 'get', ...variables, signal });
 
 export type CreateRecordPathParams = {
   /**
@@ -4449,91 +5103,6 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
     CreateRecordQueryParams,
     CreateRecordPathParams
   >({ url: '/v2/domains/{domain}/records', method: 'post', ...variables, signal });
-
-export type GetRecordsPathParams = {
-  /**
-   * @example example.com
-   */
-  domain: string;
-};
-
-export type GetRecordsQueryParams = {
-  /**
-   * Maximum number of records to list from a request.
-   *
-   * @example 20
-   */
-  limit?: string;
-  /**
-   * Get records created after this JavaScript timestamp.
-   *
-   * @example 1609499532000
-   */
-  since?: string;
-  /**
-   * Get records created before this JavaScript timestamp.
-   *
-   * @example 1612264332000
-   */
-  until?: string;
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type GetRecordsError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetRecordsVariables = {
-  pathParams: GetRecordsPathParams;
-  queryParams?: GetRecordsQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieves a list of DNS records created for a domain name. By default it returns 20 records if no limit is provided. The rest can be retrieved using the pagination options.
- */
-export const getRecords = (variables: GetRecordsVariables, signal?: AbortSignal) =>
-  fetch<
-    | string
-    | {
-        records: {
-          id: string;
-          slug: string;
-          name: string;
-          type: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
-          value: string;
-          mxPriority?: number;
-          priority?: number;
-          creator: string;
-          created: number | null;
-          updated: number | null;
-          createdAt: number | null;
-          updatedAt: number | null;
-        }[];
-      }
-    | {
-        records: {
-          id: string;
-          slug: string;
-          name: string;
-          type: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
-          value: string;
-          mxPriority?: number;
-          priority?: number;
-          creator: string;
-          created: number | null;
-          updated: number | null;
-          createdAt: number | null;
-          updatedAt: number | null;
-        }[];
-        pagination: Schemas.Pagination;
-      },
-    GetRecordsError,
-    undefined,
-    {},
-    GetRecordsQueryParams,
-    GetRecordsPathParams
-  >({ url: '/v4/domains/{domain}/records', method: 'get', ...variables, signal });
 
 export type UpdateRecordPathParams = {
   /**
@@ -7057,6 +7626,9 @@ export type GetConfigurableLogDrainResponse = {
    * @example https://my-log-drain.com
    */
   url: string;
+  status?: 'enabled' | 'disabled';
+  disabledAt?: number;
+  disabledReason?: string;
 };
 
 export type GetConfigurableLogDrainVariables = {
@@ -7190,6 +7762,9 @@ export type GetConfigurableLogDrainsResponse = {
    * @example https://my-log-drain.com
    */
   url: string;
+  status?: 'enabled' | 'disabled';
+  disabledAt?: number;
+  disabledReason?: string;
 }[];
 
 export type GetConfigurableLogDrainsVariables = {
@@ -7291,6 +7866,9 @@ export type CreateConfigurableLogDrainResponse = {
    * @example https://my-log-drain.com
    */
   url: string;
+  status?: 'enabled' | 'disabled';
+  disabledAt?: number;
+  disabledReason?: string;
 };
 
 export type CreateConfigurableLogDrainRequestBody = {
@@ -7426,6 +8004,45 @@ export type GetProjectsResponse = {
     connectConfigurationId?: string | null;
     connectBuildsEnabled?: boolean;
     createdAt?: number;
+    dataCache?: {
+      userEnabled: boolean;
+      enableAt: number | null;
+    };
+    crons?: {
+      /**
+       * The time the feature was enabled for this project. Note: It enables automatically with the first Deployment that outputs cronjobs.
+       */
+      enabledAt: number;
+      /**
+       * The time the feature was disabled for this project.
+       */
+      disabledAt: number | null;
+      updatedAt: number;
+      /**
+       * The ID of the Deployment from which the definitions originated.
+       */
+      deploymentId: string | null;
+      definitions: {
+        /**
+         * The hostname that should be used.
+         *
+         * @example vercel.com
+         */
+        host: string;
+        /**
+         * The path that should be called for the cronjob.
+         *
+         * @example /api/crons/sync-something?hello=world
+         */
+        path: string;
+        /**
+         * The cron expression.
+         *
+         * @example 0 0 * * *
+         */
+        schedule: string;
+      }[];
+    };
     devCommand?: string | null;
     directoryListing: boolean;
     installCommand?: string | null;
@@ -7780,7 +8397,7 @@ export type GetProjectsResponse = {
       fileUpload?: Schemas.ACLAction[];
       gitRepository?: Schemas.ACLAction[];
       ipBlocking?: Schemas.ACLAction[];
-      ipAllowlist?: Schemas.ACLAction[];
+      trustedIps?: Schemas.ACLAction[];
       integration?: Schemas.ACLAction[];
       integrationConfiguration?: Schemas.ACLAction[];
       integrationConfigurationTransfer?: Schemas.ACLAction[];
@@ -7833,6 +8450,7 @@ export type GetProjectsResponse = {
       supportCase?: Schemas.ACLAction[];
       supportCaseComment?: Schemas.ACLAction[];
       DataCacheNamespace?: Schemas.ACLAction[];
+      DataCacheBillingSettings?: Schemas.ACLAction[];
       team?: Schemas.ACLAction[];
       teamAccessRequest?: Schemas.ACLAction[];
       teamFellowMembership?: Schemas.ACLAction[];
@@ -7877,9 +8495,12 @@ export type GetProjectsResponse = {
       };
     };
     hasActiveBranches?: boolean;
-    ipAllowlist?: {
+    trustedIps?: {
       deploymentType: 'preview' | 'all';
-      ipAddresses: string[];
+      addresses: {
+        value: string;
+        note?: string;
+      }[];
       protectionMode: 'additional' | 'exclusive';
     } | null;
   }[];
@@ -7927,6 +8548,45 @@ export type CreateProjectResponse = {
   connectConfigurationId?: string | null;
   connectBuildsEnabled?: boolean;
   createdAt?: number;
+  dataCache?: {
+    userEnabled: boolean;
+    enableAt: number | null;
+  };
+  crons?: {
+    /**
+     * The time the feature was enabled for this project. Note: It enables automatically with the first Deployment that outputs cronjobs.
+     */
+    enabledAt: number;
+    /**
+     * The time the feature was disabled for this project.
+     */
+    disabledAt: number | null;
+    updatedAt: number;
+    /**
+     * The ID of the Deployment from which the definitions originated.
+     */
+    deploymentId: string | null;
+    definitions: {
+      /**
+       * The hostname that should be used.
+       *
+       * @example vercel.com
+       */
+      host: string;
+      /**
+       * The path that should be called for the cronjob.
+       *
+       * @example /api/crons/sync-something?hello=world
+       */
+      path: string;
+      /**
+       * The cron expression.
+       *
+       * @example 0 0 * * *
+       */
+      schedule: string;
+    }[];
+  };
   devCommand?: string | null;
   directoryListing: boolean;
   installCommand?: string | null;
@@ -8281,7 +8941,7 @@ export type CreateProjectResponse = {
     fileUpload?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
-    ipAllowlist?: Schemas.ACLAction[];
+    trustedIps?: Schemas.ACLAction[];
     integration?: Schemas.ACLAction[];
     integrationConfiguration?: Schemas.ACLAction[];
     integrationConfigurationTransfer?: Schemas.ACLAction[];
@@ -8334,6 +8994,7 @@ export type CreateProjectResponse = {
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     DataCacheNamespace?: Schemas.ACLAction[];
+    DataCacheBillingSettings?: Schemas.ACLAction[];
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
     teamFellowMembership?: Schemas.ACLAction[];
@@ -8378,9 +9039,12 @@ export type CreateProjectResponse = {
     };
   };
   hasActiveBranches?: boolean;
-  ipAllowlist?: {
+  trustedIps?: {
     deploymentType: 'preview' | 'all';
-    ipAddresses: string[];
+    addresses: {
+      value: string;
+      note?: string;
+    }[];
     protectionMode: 'additional' | 'exclusive';
   } | null;
 };
@@ -8583,6 +9247,45 @@ export type GetProjectResponse = {
   connectConfigurationId?: string | null;
   connectBuildsEnabled?: boolean;
   createdAt?: number;
+  dataCache?: {
+    userEnabled: boolean;
+    enableAt: number | null;
+  };
+  crons?: {
+    /**
+     * The time the feature was enabled for this project. Note: It enables automatically with the first Deployment that outputs cronjobs.
+     */
+    enabledAt: number;
+    /**
+     * The time the feature was disabled for this project.
+     */
+    disabledAt: number | null;
+    updatedAt: number;
+    /**
+     * The ID of the Deployment from which the definitions originated.
+     */
+    deploymentId: string | null;
+    definitions: {
+      /**
+       * The hostname that should be used.
+       *
+       * @example vercel.com
+       */
+      host: string;
+      /**
+       * The path that should be called for the cronjob.
+       *
+       * @example /api/crons/sync-something?hello=world
+       */
+      path: string;
+      /**
+       * The cron expression.
+       *
+       * @example 0 0 * * *
+       */
+      schedule: string;
+    }[];
+  };
   devCommand?: string | null;
   directoryListing: boolean;
   installCommand?: string | null;
@@ -8937,7 +9640,7 @@ export type GetProjectResponse = {
     fileUpload?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
-    ipAllowlist?: Schemas.ACLAction[];
+    trustedIps?: Schemas.ACLAction[];
     integration?: Schemas.ACLAction[];
     integrationConfiguration?: Schemas.ACLAction[];
     integrationConfigurationTransfer?: Schemas.ACLAction[];
@@ -8990,6 +9693,7 @@ export type GetProjectResponse = {
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     DataCacheNamespace?: Schemas.ACLAction[];
+    DataCacheBillingSettings?: Schemas.ACLAction[];
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
     teamFellowMembership?: Schemas.ACLAction[];
@@ -9034,9 +9738,12 @@ export type GetProjectResponse = {
     };
   };
   hasActiveBranches?: boolean;
-  ipAllowlist?: {
+  trustedIps?: {
     deploymentType: 'preview' | 'all';
-    ipAddresses: string[];
+    addresses: {
+      value: string;
+      note?: string;
+    }[];
     protectionMode: 'additional' | 'exclusive';
   } | null;
 };
@@ -9092,6 +9799,45 @@ export type UpdateProjectResponse = {
   connectConfigurationId?: string | null;
   connectBuildsEnabled?: boolean;
   createdAt?: number;
+  dataCache?: {
+    userEnabled: boolean;
+    enableAt: number | null;
+  };
+  crons?: {
+    /**
+     * The time the feature was enabled for this project. Note: It enables automatically with the first Deployment that outputs cronjobs.
+     */
+    enabledAt: number;
+    /**
+     * The time the feature was disabled for this project.
+     */
+    disabledAt: number | null;
+    updatedAt: number;
+    /**
+     * The ID of the Deployment from which the definitions originated.
+     */
+    deploymentId: string | null;
+    definitions: {
+      /**
+       * The hostname that should be used.
+       *
+       * @example vercel.com
+       */
+      host: string;
+      /**
+       * The path that should be called for the cronjob.
+       *
+       * @example /api/crons/sync-something?hello=world
+       */
+      path: string;
+      /**
+       * The cron expression.
+       *
+       * @example 0 0 * * *
+       */
+      schedule: string;
+    }[];
+  };
   devCommand?: string | null;
   directoryListing: boolean;
   installCommand?: string | null;
@@ -9446,7 +10192,7 @@ export type UpdateProjectResponse = {
     fileUpload?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
-    ipAllowlist?: Schemas.ACLAction[];
+    trustedIps?: Schemas.ACLAction[];
     integration?: Schemas.ACLAction[];
     integrationConfiguration?: Schemas.ACLAction[];
     integrationConfigurationTransfer?: Schemas.ACLAction[];
@@ -9499,6 +10245,7 @@ export type UpdateProjectResponse = {
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     DataCacheNamespace?: Schemas.ACLAction[];
+    DataCacheBillingSettings?: Schemas.ACLAction[];
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
     teamFellowMembership?: Schemas.ACLAction[];
@@ -9543,9 +10290,12 @@ export type UpdateProjectResponse = {
     };
   };
   hasActiveBranches?: boolean;
-  ipAllowlist?: {
+  trustedIps?: {
     deploymentType: 'all' | 'preview';
-    ipAddresses: string[];
+    addresses: {
+      value: string;
+      note?: string;
+    }[];
     protectionMode: 'exclusive' | 'additional';
   } | null;
 };
@@ -9701,15 +10451,24 @@ export type UpdateProjectRequestBody = {
   /**
    * Restricts access to deployments based on the incoming request IP address
    */
-  ipAllowlist?: {
+  trustedIps?: {
     /**
-     * Specify if the IP Allowlist will apply to every Deployment Target or just Preview
+     * Specify if the Trusted IPs will apply to every Deployment Target or just Preview
      */
     deploymentType: 'all' | 'preview';
     /**
-     * The IP addresses that are allowlisted e.g. 127.0.0.1, 192.168.0.0/16, ::1, fe80::/32
+     * @minItems 1
      */
-    ipAddresses: string[];
+    addresses: {
+      /**
+       * The IP addresses that are allowlisted. Supported formats are IPv4, IPv6 and CIDR.
+       */
+      value: string;
+      /**
+       * An optional note explaining what the IP address or subnet is used for
+       */
+      note?: string;
+    }[];
     /**
      * exclusive: ip match is enough to bypass deployment protection (regardless of other settings). additional: ip must match + any other protection should be also provided (password, vercel auth, shareable link, automation bypass header, automation bypass query param)
      */
@@ -11414,11 +12173,11 @@ export type GetTeamMembersResponse = {
         accessRequestedAt: number;
         joinedFrom?: {
           origin:
+            | 'link'
             | 'import'
             | 'github'
             | 'gitlab'
             | 'bitbucket'
-            | 'link'
             | 'mail'
             | 'teams'
             | 'saml'
@@ -11534,11 +12293,11 @@ export type GetTeamMembersResponse = {
          */
         joinedFrom?: {
           origin:
+            | 'link'
             | 'import'
             | 'github'
             | 'gitlab'
             | 'bitbucket'
-            | 'link'
             | 'mail'
             | 'teams'
             | 'saml'
@@ -12386,6 +13145,25 @@ export const uploadFile = (variables: UploadFileVariables, signal?: AbortSignal)
     {}
   >({ url: '/v2/files', method: 'post', ...variables, signal });
 
+export type GetAuthUserError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetAuthUserResponse = {
+  user: Schemas.AuthUser | Schemas.AuthUserLimited;
+};
+
+export type GetAuthUserVariables = FetcherExtraProps;
+
+/**
+ * Retrieves information related to the currently authenticated User.
+ */
+export const getAuthUser = (variables: GetAuthUserVariables, signal?: AbortSignal) =>
+  fetch<GetAuthUserResponse, GetAuthUserError, undefined, {}, {}, {}>({
+    url: '/v2/user',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
 export type RequestDeleteError = Fetcher.ErrorWrapper<undefined>;
 
 export type RequestDeleteResponse = {
@@ -12432,25 +13210,6 @@ export const requestDelete = (variables: RequestDeleteVariables, signal?: AbortS
   fetch<RequestDeleteResponse, RequestDeleteError, RequestDeleteRequestBody, {}, {}, {}>({
     url: '/v1/user',
     method: 'delete',
-    ...variables,
-    signal
-  });
-
-export type GetAuthUserError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetAuthUserResponse = {
-  user: Schemas.AuthUser | Schemas.AuthUserLimited;
-};
-
-export type GetAuthUserVariables = FetcherExtraProps;
-
-/**
- * Retrieves information related to the currently authenticated User.
- */
-export const getAuthUser = (variables: GetAuthUserVariables, signal?: AbortSignal) =>
-  fetch<GetAuthUserResponse, GetAuthUserError, undefined, {}, {}, {}>({
-    url: '/v2/user',
-    method: 'get',
     ...variables,
     signal
   });
@@ -13091,179 +13850,6 @@ export const deleteWebhook = (variables: DeleteWebhookVariables, signal?: AbortS
     signal
   });
 
-export type GetAliasPathParams = {
-  /**
-   * The alias or alias ID to be retrieved
-   *
-   * @example example.vercel.app
-   */
-  idOrAlias: string;
-};
-
-export type GetAliasQueryParams = {
-  /**
-   * Get the alias only if it was created after the provided timestamp
-   *
-   * @deprecated true
-   * @example 1540095775951
-   */
-  from?: number;
-  /**
-   * Get the alias only if it is assigned to the provided project ID
-   *
-   * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-   */
-  projectId?: string;
-  /**
-   * Get the alias only if it was created after this JavaScript timestamp
-   *
-   * @example 1540095775941
-   */
-  since?: number;
-  /**
-   * Get the alias only if it was created before this JavaScript timestamp
-   *
-   * @example 1540095775951
-   */
-  until?: number;
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type GetAliasError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetAliasResponse = {
-  /**
-   * The alias name, it could be a `.vercel.app` subdomain or a custom domain
-   *
-   * @example my-alias.vercel.app
-   */
-  alias: string;
-  /**
-   * The date when the alias was created
-   *
-   * @format date-time
-   * @example 2017-04-26T23:00:34.232Z
-   */
-  created: string;
-  /**
-   * The date when the alias was created in milliseconds since the UNIX epoch
-   *
-   * @example 1540095775941
-   */
-  createdAt?: number;
-  /**
-   * Information of the user who created the alias
-   */
-  creator?: {
-    /**
-     * ID of the user who created the alias
-     *
-     * @example 96SnxkFiMyVKsK3pnoHfx3Hz
-     */
-    uid: string;
-    /**
-     * Email of the user who created the alias
-     *
-     * @example john-doe@gmail.com
-     */
-    email: string;
-    /**
-     * Username of the user who created the alias
-     *
-     * @example john-doe
-     */
-    username: string;
-  };
-  /**
-   * The date when the alias was deleted in milliseconds since the UNIX epoch
-   *
-   * @example 1540095775941
-   */
-  deletedAt?: number;
-  /**
-   * A map with the deployment ID, URL and metadata
-   */
-  deployment?: {
-    /**
-     * The deployment unique identifier
-     *
-     * @example dpl_5m8CQaRBm3FnWRW1od3wKTpaECPx
-     */
-    id: string;
-    /**
-     * The deployment unique URL
-     *
-     * @example my-instant-deployment-3ij3cxz9qr.now.sh
-     */
-    url: string;
-    /**
-     * The deployment metadata
-     *
-     * @example {}
-     */
-    meta?: string;
-  };
-  /**
-   * The deployment ID
-   *
-   * @example dpl_5m8CQaRBm3FnWRW1od3wKTpaECPx
-   */
-  deploymentId: string | null;
-  /**
-   * The unique identifier of the project
-   *
-   * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-   */
-  projectId: string | null;
-  /**
-   * Target destination domain for redirect when the alias is a redirect
-   */
-  redirect?: string | null;
-  /**
-   * Status code to be used on redirect
-   */
-  redirectStatusCode?: 301 | 302 | 307 | 308 | null;
-  /**
-   * The unique identifier of the alias
-   */
-  uid: string;
-  /**
-   * The date when the alias was updated in milliseconds since the UNIX epoch
-   *
-   * @example 1540095775941
-   */
-  updatedAt?: number;
-  /**
-   * The protection bypass for the alias
-   */
-  protectionBypass?: {
-    [key: string]: {
-      createdAt: number;
-      createdBy: string;
-      scope?: 'automation-bypass' | 'shareable-link';
-    };
-  };
-};
-
-export type GetAliasVariables = {
-  pathParams: GetAliasPathParams;
-  queryParams?: GetAliasQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieves an Alias for the given host name or alias ID.
- */
-export const getAlias = (variables: GetAliasVariables, signal?: AbortSignal) =>
-  fetch<GetAliasResponse, GetAliasError, undefined, {}, GetAliasQueryParams, GetAliasPathParams>({
-    url: '/v4/aliases/{idOrAlias}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
 export type ListAliasesQueryParams = {
   /**
    * Get only aliases of the given domain name
@@ -13444,6 +14030,179 @@ export type ListAliasesVariables = {
 export const listAliases = (variables: ListAliasesVariables, signal?: AbortSignal) =>
   fetch<ListAliasesResponse, ListAliasesError, undefined, {}, ListAliasesQueryParams, {}>({
     url: '/v4/aliases',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type GetAliasPathParams = {
+  /**
+   * The alias or alias ID to be retrieved
+   *
+   * @example example.vercel.app
+   */
+  idOrAlias: string;
+};
+
+export type GetAliasQueryParams = {
+  /**
+   * Get the alias only if it was created after the provided timestamp
+   *
+   * @deprecated true
+   * @example 1540095775951
+   */
+  from?: number;
+  /**
+   * Get the alias only if it is assigned to the provided project ID
+   *
+   * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
+   */
+  projectId?: string;
+  /**
+   * Get the alias only if it was created after this JavaScript timestamp
+   *
+   * @example 1540095775941
+   */
+  since?: number;
+  /**
+   * Get the alias only if it was created before this JavaScript timestamp
+   *
+   * @example 1540095775951
+   */
+  until?: number;
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetAliasError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetAliasResponse = {
+  /**
+   * The alias name, it could be a `.vercel.app` subdomain or a custom domain
+   *
+   * @example my-alias.vercel.app
+   */
+  alias: string;
+  /**
+   * The date when the alias was created
+   *
+   * @format date-time
+   * @example 2017-04-26T23:00:34.232Z
+   */
+  created: string;
+  /**
+   * The date when the alias was created in milliseconds since the UNIX epoch
+   *
+   * @example 1540095775941
+   */
+  createdAt?: number;
+  /**
+   * Information of the user who created the alias
+   */
+  creator?: {
+    /**
+     * ID of the user who created the alias
+     *
+     * @example 96SnxkFiMyVKsK3pnoHfx3Hz
+     */
+    uid: string;
+    /**
+     * Email of the user who created the alias
+     *
+     * @example john-doe@gmail.com
+     */
+    email: string;
+    /**
+     * Username of the user who created the alias
+     *
+     * @example john-doe
+     */
+    username: string;
+  };
+  /**
+   * The date when the alias was deleted in milliseconds since the UNIX epoch
+   *
+   * @example 1540095775941
+   */
+  deletedAt?: number;
+  /**
+   * A map with the deployment ID, URL and metadata
+   */
+  deployment?: {
+    /**
+     * The deployment unique identifier
+     *
+     * @example dpl_5m8CQaRBm3FnWRW1od3wKTpaECPx
+     */
+    id: string;
+    /**
+     * The deployment unique URL
+     *
+     * @example my-instant-deployment-3ij3cxz9qr.now.sh
+     */
+    url: string;
+    /**
+     * The deployment metadata
+     *
+     * @example {}
+     */
+    meta?: string;
+  };
+  /**
+   * The deployment ID
+   *
+   * @example dpl_5m8CQaRBm3FnWRW1od3wKTpaECPx
+   */
+  deploymentId: string | null;
+  /**
+   * The unique identifier of the project
+   *
+   * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
+   */
+  projectId: string | null;
+  /**
+   * Target destination domain for redirect when the alias is a redirect
+   */
+  redirect?: string | null;
+  /**
+   * Status code to be used on redirect
+   */
+  redirectStatusCode?: 301 | 302 | 307 | 308 | null;
+  /**
+   * The unique identifier of the alias
+   */
+  uid: string;
+  /**
+   * The date when the alias was updated in milliseconds since the UNIX epoch
+   *
+   * @example 1540095775941
+   */
+  updatedAt?: number;
+  /**
+   * The protection bypass for the alias
+   */
+  protectionBypass?: {
+    [key: string]: {
+      createdAt: number;
+      createdBy: string;
+      scope?: 'automation-bypass' | 'shareable-link';
+    };
+  };
+};
+
+export type GetAliasVariables = {
+  pathParams: GetAliasPathParams;
+  queryParams?: GetAliasQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves an Alias for the given host name or alias ID.
+ */
+export const getAlias = (variables: GetAliasVariables, signal?: AbortSignal) =>
+  fetch<GetAliasResponse, GetAliasError, undefined, {}, GetAliasQueryParams, GetAliasPathParams>({
+    url: '/v4/aliases/{idOrAlias}',
     method: 'get',
     ...variables,
     signal
@@ -14178,53 +14937,6 @@ export const getDeployments = (variables: GetDeploymentsVariables, signal?: Abor
     signal
   });
 
-export type EmailLoginError = Fetcher.ErrorWrapper<undefined>;
-
-export type EmailLoginResponse = {
-  /**
-   * The token used to verify the user accepted the login request
-   *
-   * @example T1dmvPu36nmyYisXAs7IRzcR
-   */
-  token: string;
-  /**
-   * The code the user is going to receive on the email. **Must** be displayed to the user so they can verify the request is the correct.
-   *
-   * @example Practical Saola
-   */
-  securityCode: string;
-};
-
-export type EmailLoginRequestBody = {
-  /**
-   * The user email.
-   *
-   * @example user@mail.com
-   */
-  email: string;
-  /**
-   * The desired name for the token. It will be displayed on the user account details.
-   *
-   * @example Your Client App Name
-   */
-  tokenName?: string;
-};
-
-export type EmailLoginVariables = {
-  body: EmailLoginRequestBody;
-} & FetcherExtraProps;
-
-/**
- * Request a new login for a user to get a token. This will respond with a verification token and send an email to confirm the request. Once confirmed you can use the verification token to get an authentication token.
- */
-export const emailLogin = (variables: EmailLoginVariables, signal?: AbortSignal) =>
-  fetch<EmailLoginResponse, EmailLoginError, EmailLoginRequestBody, {}, {}, {}>({
-    url: '/registration',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
 export type VerifyTokenQueryParams = {
   /**
    * Email to verify the login.
@@ -14284,6 +14996,53 @@ export const verifyToken = (variables: VerifyTokenVariables, signal?: AbortSigna
     signal
   });
 
+export type EmailLoginError = Fetcher.ErrorWrapper<undefined>;
+
+export type EmailLoginResponse = {
+  /**
+   * The token used to verify the user accepted the login request
+   *
+   * @example T1dmvPu36nmyYisXAs7IRzcR
+   */
+  token: string;
+  /**
+   * The code the user is going to receive on the email. **Must** be displayed to the user so they can verify the request is the correct.
+   *
+   * @example Practical Saola
+   */
+  securityCode: string;
+};
+
+export type EmailLoginRequestBody = {
+  /**
+   * The user email.
+   *
+   * @example user@mail.com
+   */
+  email: string;
+  /**
+   * The desired name for the token. It will be displayed on the user account details.
+   *
+   * @example Your Client App Name
+   */
+  tokenName?: string;
+};
+
+export type EmailLoginVariables = {
+  body: EmailLoginRequestBody;
+} & FetcherExtraProps;
+
+/**
+ * Request a new login for a user to get a token. This will respond with a verification token and send an email to confirm the request. Once confirmed you can use the verification token to get an authentication token.
+ */
+export const emailLogin = (variables: EmailLoginVariables, signal?: AbortSignal) =>
+  fetch<EmailLoginResponse, EmailLoginError, EmailLoginRequestBody, {}, {}, {}>({
+    url: '/registration',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
 export type DeleteDeploymentPathParams = {
   /**
    * The ID of the deployment to be deleted
@@ -14338,6 +15097,103 @@ export const deleteDeployment = (variables: DeleteDeploymentVariables, signal?: 
     DeleteDeploymentQueryParams,
     DeleteDeploymentPathParams
   >({ url: '/v13/deployments/{id}', method: 'delete', ...variables, signal });
+
+export type GetSecretsQueryParams = {
+  /**
+   * Filter out secrets based on comma separated secret ids.
+   *
+   * @example sec_RKc5iV0rV3ZSrFrHiruRno7k,sec_fGc5iV0rV3ZSrFrHiruRnouQ
+   * @deprecated true
+   */
+  id?: string;
+  /**
+   * Filter out secrets that belong to a project.
+   *
+   * @example prj_2WjyKQmM8ZnGcJsPWMrHRHrE
+   * @deprecated true
+   */
+  projectId?: string;
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetSecretsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetSecretsResponse = {
+  secrets: {
+    /**
+     * The date when the secret was created.
+     *
+     * @format date-time
+     * @example 2021-02-10T13:11:49.180Z
+     */
+    created: string;
+    /**
+     * The name of the secret.
+     *
+     * @example my-api-key
+     */
+    name: string;
+    /**
+     * The unique identifier of the team the secret was created for.
+     *
+     * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
+     */
+    teamId?: string | null;
+    /**
+     * The unique identifier of the secret.
+     *
+     * @example sec_XCG7t7AIHuO2SBA8667zNUiM
+     */
+    uid: string;
+    /**
+     * The unique identifier of the user who created the secret.
+     *
+     * @example 2qDDuGFTWXBLDNnqZfWPDp1A
+     */
+    userId?: string;
+    /**
+     * The value of the secret.
+     */
+    value?: string;
+    /**
+     * Timestamp for when the secret was created.
+     *
+     * @example 1609492210000
+     */
+    createdAt?: number;
+    /**
+     * The unique identifier of the project which the secret belongs to.
+     *
+     * @example prj_2WjyKQmM8ZnGcJsPWMrHRHrE
+     */
+    projectId?: string;
+    /**
+     * Indicates whether the secret value can be decrypted after it has been created.
+     *
+     * @example true
+     */
+    decryptable?: boolean;
+  }[];
+  pagination: Schemas.Pagination;
+};
+
+export type GetSecretsVariables = {
+  queryParams?: GetSecretsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves the active Vercel secrets for the authenticated user. By default it returns 20 secrets. The rest can be retrieved using the pagination options. The body will contain an entry for each secret.
+ */
+export const getSecrets = (variables: GetSecretsVariables, signal?: AbortSignal) =>
+  fetch<GetSecretsResponse, GetSecretsError, undefined, {}, GetSecretsQueryParams, {}>({
+    url: '/v3/secrets',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type CreateSecretQueryParams = {
   /**
@@ -14506,103 +15362,6 @@ export const renameSecret = (variables: RenameSecretVariables, signal?: AbortSig
     RenameSecretPathParams
   >({ url: '/v2/secrets/{name}', method: 'patch', ...variables, signal });
 
-export type GetSecretsQueryParams = {
-  /**
-   * Filter out secrets based on comma separated secret ids.
-   *
-   * @example sec_RKc5iV0rV3ZSrFrHiruRno7k,sec_fGc5iV0rV3ZSrFrHiruRnouQ
-   * @deprecated true
-   */
-  id?: string;
-  /**
-   * Filter out secrets that belong to a project.
-   *
-   * @example prj_2WjyKQmM8ZnGcJsPWMrHRHrE
-   * @deprecated true
-   */
-  projectId?: string;
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
-};
-
-export type GetSecretsError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetSecretsResponse = {
-  secrets: {
-    /**
-     * The date when the secret was created.
-     *
-     * @format date-time
-     * @example 2021-02-10T13:11:49.180Z
-     */
-    created: string;
-    /**
-     * The name of the secret.
-     *
-     * @example my-api-key
-     */
-    name: string;
-    /**
-     * The unique identifier of the team the secret was created for.
-     *
-     * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
-     */
-    teamId?: string | null;
-    /**
-     * The unique identifier of the secret.
-     *
-     * @example sec_XCG7t7AIHuO2SBA8667zNUiM
-     */
-    uid: string;
-    /**
-     * The unique identifier of the user who created the secret.
-     *
-     * @example 2qDDuGFTWXBLDNnqZfWPDp1A
-     */
-    userId?: string;
-    /**
-     * The value of the secret.
-     */
-    value?: string;
-    /**
-     * Timestamp for when the secret was created.
-     *
-     * @example 1609492210000
-     */
-    createdAt?: number;
-    /**
-     * The unique identifier of the project which the secret belongs to.
-     *
-     * @example prj_2WjyKQmM8ZnGcJsPWMrHRHrE
-     */
-    projectId?: string;
-    /**
-     * Indicates whether the secret value can be decrypted after it has been created.
-     *
-     * @example true
-     */
-    decryptable?: boolean;
-  }[];
-  pagination: Schemas.Pagination;
-};
-
-export type GetSecretsVariables = {
-  queryParams?: GetSecretsQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieves the active Vercel secrets for the authenticated user. By default it returns 20 secrets. The rest can be retrieved using the pagination options. The body will contain an entry for each secret.
- */
-export const getSecrets = (variables: GetSecretsVariables, signal?: AbortSignal) =>
-  fetch<GetSecretsResponse, GetSecretsError, undefined, {}, GetSecretsQueryParams, {}>({
-    url: '/v3/secrets',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
 export type GetSecretPathParams = {
   /**
    * The name or the unique identifier to which the secret belongs to.
@@ -14756,7 +15515,26 @@ export const deleteSecret = (variables: DeleteSecretVariables, signal?: AbortSig
 
 export const operationsByTag = {
   artifacts: { recordEvents, status, uploadArtifact, downloadArtifact, artifactQuery },
-  checks: { getAllChecks, createCheck, getCheck, updateCheck, rerequestCheck },
+  checks: { createCheck, getAllChecks, getCheck, updateCheck, rerequestCheck },
+  projects: {
+    updateProjectDataCache,
+    getProjects,
+    createProject,
+    getProject,
+    updateProject,
+    deleteProject,
+    getProjectDomains,
+    getProjectDomain,
+    updateProjectDomain,
+    removeProjectDomain,
+    addProjectDomain,
+    verifyProjectDomain,
+    filterProjectEnvs,
+    getProjectEnv,
+    createProjectEnv,
+    removeProjectEnv,
+    editProjectEnv
+  },
   deployments: {
     getDeploymentEvents,
     getDeployment,
@@ -14778,7 +15556,7 @@ export const operationsByTag = {
     createOrTransferDomain,
     deleteDomain
   },
-  dns: { createRecord, getRecords, updateRecord, removeRecord },
+  dns: { getRecords, createRecord, updateRecord, removeRecord },
   edgeConfig: {
     getEdgeConfigs,
     createEdgeConfig,
@@ -14793,7 +15571,7 @@ export const operationsByTag = {
     getEdgeConfigToken,
     createEdgeConfigToken
   },
-  user: { listUserEvents, requestDelete, getAuthUser },
+  user: { listUserEvents, getAuthUser, requestDelete },
   integrations: { getConfigurations, getConfiguration, deleteConfiguration, gitNamespaces, searchRepo },
   logDrains: {
     getIntegrationLogDrains,
@@ -14803,24 +15581,6 @@ export const operationsByTag = {
     deleteConfigurableLogDrain,
     getConfigurableLogDrains,
     createConfigurableLogDrain
-  },
-  projects: {
-    getProjects,
-    createProject,
-    getProject,
-    updateProject,
-    deleteProject,
-    getProjectDomains,
-    getProjectDomain,
-    updateProjectDomain,
-    removeProjectDomain,
-    addProjectDomain,
-    verifyProjectDomain,
-    filterProjectEnvs,
-    getProjectEnv,
-    createProjectEnv,
-    removeProjectEnv,
-    editProjectEnv
   },
   teams: {
     getTeamMembers,
@@ -14837,9 +15597,9 @@ export const operationsByTag = {
     deleteTeam,
     deleteTeamInviteCode
   },
-  authentication: { listAuthTokens, createAuthToken, getAuthToken, deleteAuthToken, emailLogin, verifyToken },
+  authentication: { listAuthTokens, createAuthToken, getAuthToken, deleteAuthToken, verifyToken, emailLogin },
   webhooks: { createWebhook, getWebhooks, getWebhook, deleteWebhook },
-  aliases: { getAlias, listAliases, deleteAlias, listDeploymentAliases, assignAlias },
+  aliases: { listAliases, getAlias, deleteAlias, listDeploymentAliases, assignAlias },
   certs: { getCertById, removeCert, issueCert, uploadCert },
-  secrets: { createSecret, renameSecret, getSecrets, getSecret, deleteSecret }
+  secrets: { getSecrets, createSecret, renameSecret, getSecret, deleteSecret }
 };
