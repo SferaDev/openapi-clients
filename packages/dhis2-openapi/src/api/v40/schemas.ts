@@ -5,17 +5,17 @@
  */
 export type Access = {
   data?: AccessData;
-  ['delete']: boolean;
-  externalize: boolean;
-  manage: boolean;
-  read: boolean;
-  update: boolean;
-  write: boolean;
+  ['delete']?: boolean;
+  externalize?: boolean;
+  manage?: boolean;
+  read?: boolean;
+  update?: boolean;
+  write?: boolean;
 };
 
 export type AccessData = {
-  read: boolean;
-  write: boolean;
+  read?: boolean;
+  write?: boolean;
 };
 
 export type AddOperation = {
@@ -34,7 +34,7 @@ export type AggregateDataExchange = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -61,7 +61,7 @@ export type AnalyticsJobParameters = {
    */
   lastYears?: number;
   skipPrograms?: Record<string, any>[];
-  skipResourceTables: boolean;
+  skipResourceTables?: boolean;
   skipTableTypes?: (
     | 'DATA_VALUE'
     | 'COMPLETENESS'
@@ -75,6 +75,62 @@ export type AnalyticsJobParameters = {
     | 'TRACKED_ENTITY_INSTANCE_ENROLLMENTS'
     | 'TRACKED_ENTITY_INSTANCE'
   )[];
+};
+
+export type AnalyticsPeriodBoundary = {
+  access?: Access;
+  analyticsPeriodBoundaryType:
+    | 'BEFORE_START_OF_REPORTING_PERIOD'
+    | 'BEFORE_END_OF_REPORTING_PERIOD'
+    | 'AFTER_START_OF_REPORTING_PERIOD'
+    | 'AFTER_END_OF_REPORTING_PERIOD';
+  attributeValues?: AttributeValue[];
+  boundaryTarget?: string;
+  code?: string;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  createdBy?: RefUser;
+  displayName?: string;
+  favorite?: boolean;
+  favorites?: string[];
+  href?: string;
+  id?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  lastUpdatedBy?: RefUser;
+  name?: string;
+  offsetPeriodType?:
+    | 'BiMonthly'
+    | 'BiWeekly'
+    | 'Daily'
+    | 'FinancialApril'
+    | 'FinancialJuly'
+    | 'FinancialNov'
+    | 'FinancialOct'
+    | 'Monthly'
+    | 'Quarterly'
+    | 'QuarterlyNov'
+    | 'SixMonthlyApril'
+    | 'SixMonthlyNov'
+    | 'SixMonthly'
+    | 'TwoYearly'
+    | 'Weekly'
+    | 'WeeklySaturday'
+    | 'WeeklySunday'
+    | 'WeeklyThursday'
+    | 'WeeklyWednesday'
+    | 'Yearly';
+  /**
+   * @format int32
+   */
+  offsetPeriods?: number;
+  sharing?: Sharing;
+  translations?: Translation[];
+  user?: RefUser;
 };
 
 export type AnalyticsTableHook = {
@@ -99,7 +155,7 @@ export type AnalyticsTableHook = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -152,7 +208,7 @@ export type ApiToken = {
    * @format int64
    */
   expire?: number;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -164,7 +220,7 @@ export type ApiToken = {
   name?: string;
   sharing?: Sharing;
   translations?: Translation[];
-  type: 'PERSONAL_ACCESS_TOKEN';
+  type: 'PERSONAL_ACCESS_TOKEN_V1';
   user?: RefUser;
   /**
    * @format int32
@@ -199,8 +255,8 @@ export type App = {
   app_hub_id?: string;
   authorities?: string[];
   baseUrl?: string;
-  bundled: boolean;
-  core_app: boolean;
+  bundled?: boolean;
+  core_app?: boolean;
   default_locale?: string;
   description?: string;
   developer?: AppDeveloper;
@@ -298,74 +354,74 @@ export type ApprovalsDto = {
 export type Attribute = {
   access?: Access;
   attributeValues?: AttributeValue[];
-  categoryAttribute: boolean;
-  categoryOptionAttribute: boolean;
-  categoryOptionComboAttribute: boolean;
-  categoryOptionGroupAttribute: boolean;
-  categoryOptionGroupSetAttribute: boolean;
+  categoryAttribute?: boolean;
+  categoryOptionAttribute?: boolean;
+  categoryOptionComboAttribute?: boolean;
+  categoryOptionGroupAttribute?: boolean;
+  categoryOptionGroupSetAttribute?: boolean;
   code?: string;
-  constantAttribute: boolean;
+  constantAttribute?: boolean;
   /**
    * @format date-time
    */
   created?: string;
   createdBy?: RefUser;
-  dataElementAttribute: boolean;
-  dataElementGroupAttribute: boolean;
-  dataElementGroupSetAttribute: boolean;
-  dataSetAttribute: boolean;
+  dataElementAttribute?: boolean;
+  dataElementGroupAttribute?: boolean;
+  dataElementGroupSetAttribute?: boolean;
+  dataSetAttribute?: boolean;
   description?: string;
   displayDescription?: string;
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  documentAttribute: boolean;
-  eventChartAttribute: boolean;
-  eventReportAttribute: boolean;
-  favorite: boolean;
+  documentAttribute?: boolean;
+  eventChartAttribute?: boolean;
+  eventReportAttribute?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
   id?: string;
-  indicatorAttribute: boolean;
-  indicatorGroupAttribute: boolean;
+  indicatorAttribute?: boolean;
+  indicatorGroupAttribute?: boolean;
   /**
    * @format date-time
    */
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
-  legendSetAttribute: boolean;
-  mandatory: boolean;
-  mapAttribute: boolean;
+  legendSetAttribute?: boolean;
+  mandatory?: boolean;
+  mapAttribute?: boolean;
   name?: string;
   objectTypes?: string[];
-  optionAttribute: boolean;
+  optionAttribute?: boolean;
   optionSet?: RefOptionSet;
-  optionSetAttribute: boolean;
-  organisationUnitAttribute: boolean;
-  organisationUnitGroupAttribute: boolean;
-  organisationUnitGroupSetAttribute: boolean;
-  programAttribute: boolean;
-  programIndicatorAttribute: boolean;
-  programStageAttribute: boolean;
-  relationshipTypeAttribute: boolean;
-  sectionAttribute: boolean;
+  optionSetAttribute?: boolean;
+  organisationUnitAttribute?: boolean;
+  organisationUnitGroupAttribute?: boolean;
+  organisationUnitGroupSetAttribute?: boolean;
+  programAttribute?: boolean;
+  programIndicatorAttribute?: boolean;
+  programStageAttribute?: boolean;
+  relationshipTypeAttribute?: boolean;
+  sectionAttribute?: boolean;
   sharing?: Sharing;
   shortName?: string;
   /**
    * @format int32
    */
   sortOrder?: number;
-  sqlViewAttribute: boolean;
-  trackedEntityAttributeAttribute: boolean;
-  trackedEntityTypeAttribute: boolean;
+  sqlViewAttribute?: boolean;
+  trackedEntityAttributeAttribute?: boolean;
+  trackedEntityTypeAttribute?: boolean;
   translations?: Translation[];
-  unique: boolean;
+  unique?: boolean;
   user?: RefUser;
-  userAttribute: boolean;
-  userGroupAttribute: boolean;
-  validationRuleAttribute: boolean;
-  validationRuleGroupAttribute: boolean;
+  userAttribute?: boolean;
+  userGroupAttribute?: boolean;
+  validationRuleAttribute?: boolean;
+  validationRuleGroupAttribute?: boolean;
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -395,7 +451,7 @@ export type Attribute = {
     | 'FILE_RESOURCE'
     | 'IMAGE'
     | 'GEOJSON';
-  visualizationAttribute: boolean;
+  visualizationAttribute?: boolean;
 };
 
 export type AttributeValue = {
@@ -418,7 +474,7 @@ export type AttributeValueFilter = {
 };
 
 export type AvailabilityStatus = {
-  available: boolean;
+  available?: boolean;
   message?: string;
   /**
    * @format int32
@@ -473,7 +529,7 @@ export type BaseIdentifiableObject = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -508,11 +564,11 @@ export type BulkJsonPatch = {
 
 export type BulkSmsGatewayConfig = {
   id?: string;
-  isDefault: boolean;
+  isDefault?: boolean;
   maxSmsLength?: string;
   name?: string;
   password?: string;
-  sendUrlParameters: boolean;
+  sendUrlParameters?: boolean;
   uid?: string;
   urlTemplate?: string;
   username?: string;
@@ -553,7 +609,7 @@ export type Category = {
     | 'NONE'
     | 'CUSTOM'
     | 'DEFAULT';
-  allItems: boolean;
+  allItems?: boolean;
   attributeValues?: AttributeValue[];
   categoryCombos?: RefCategoryCombo[];
   categoryOptions?: RefCategoryOption[];
@@ -563,7 +619,7 @@ export type Category = {
    */
   created?: string;
   createdBy?: RefUser;
-  dataDimension: boolean;
+  dataDimension?: boolean;
   dataDimensionType: 'DISAGGREGATION' | 'ATTRIBUTE';
   description?: string;
   dimension?: string;
@@ -572,7 +628,7 @@ export type Category = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   filter?: string;
   formName?: string;
@@ -637,11 +693,11 @@ export type CategoryCombo = {
   createdBy?: RefUser;
   dataDimensionType: 'DISAGGREGATION' | 'ATTRIBUTE';
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
-  isDefault: boolean;
+  isDefault?: boolean;
   /**
    * @format date-time
    */
@@ -649,7 +705,7 @@ export type CategoryCombo = {
   lastUpdatedBy?: RefUser;
   name?: string;
   sharing?: Sharing;
-  skipTotal: boolean;
+  skipTotal?: boolean;
   translations?: Translation[];
   user?: RefUser;
 };
@@ -703,12 +759,12 @@ export type CategoryOption = {
    * @format date-time
    */
   endDate?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
   id?: string;
-  isDefault: boolean;
+  isDefault?: boolean;
   /**
    * @format date-time
    */
@@ -780,17 +836,18 @@ export type CategoryOptionCombo = {
     | 'DATA_ELEMENT_GROUP'
     | 'ORGANISATION_UNIT_GROUP'
     | 'CATEGORY_OPTION_GROUP'
-    | 'EXPRESSION_DIMENSION_ITEM';
+    | 'EXPRESSION_DIMENSION_ITEM'
+    | 'SUBEXPRESSION_DIMENSION_ITEM';
   displayDescription?: string;
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
   id?: string;
-  ignoreApproval: boolean;
+  ignoreApproval?: boolean;
   /**
    * @format date-time
    */
@@ -843,7 +900,7 @@ export type CategoryOptionGroup = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   groupSets?: RefCategoryOptionGroupSet[];
@@ -888,7 +945,7 @@ export type CategoryOptionGroupSet = {
     | 'NONE'
     | 'CUSTOM'
     | 'DEFAULT';
-  allItems: boolean;
+  allItems?: boolean;
   attributeValues?: AttributeValue[];
   categoryOptionGroups?: RefCategoryOptionGroup[];
   code?: string;
@@ -897,7 +954,7 @@ export type CategoryOptionGroupSet = {
    */
   created?: string;
   createdBy?: RefUser;
-  dataDimension: boolean;
+  dataDimension?: boolean;
   dataDimensionType: 'DISAGGREGATION' | 'ATTRIBUTE';
   description?: string;
   dimension?: string;
@@ -906,7 +963,7 @@ export type CategoryOptionGroupSet = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   filter?: string;
   formName?: string;
@@ -966,11 +1023,11 @@ export type CategoryOptionGroupSetDimension = {
 export type ClickatellGatewayConfig = {
   authToken?: string;
   id?: string;
-  isDefault: boolean;
+  isDefault?: boolean;
   maxSmsLength?: string;
   name?: string;
   password?: string;
-  sendUrlParameters: boolean;
+  sendUrlParameters?: boolean;
   uid?: string;
   urlTemplate?: string;
   username?: string;
@@ -992,7 +1049,7 @@ export type Column = {
 };
 
 export type CompleteStatusDto = {
-  complete: boolean;
+  complete?: boolean;
   /**
    * @format date-time
    */
@@ -1066,7 +1123,7 @@ export type Constant = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
@@ -1132,13 +1189,13 @@ export type Dashboard = {
    */
   created?: string;
   createdBy?: RefUser;
-  dashboardItems?: RefDashboardItem[];
+  dashboardItems?: DashboardItem[];
   description?: string;
   displayDescription?: string;
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
@@ -1155,7 +1212,7 @@ export type Dashboard = {
   lastUpdatedBy?: RefUser;
   layout?: Layout;
   name?: string;
-  restrictFilters: boolean;
+  restrictFilters?: boolean;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
@@ -1180,7 +1237,7 @@ export type DashboardItem = {
   eventChart?: RefEventChart;
   eventReport?: RefEventReport;
   eventVisualization?: RefEventVisualization;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   /**
    * @format int32
@@ -1317,7 +1374,7 @@ export type DataApprovalLevel = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -1352,11 +1409,11 @@ export type DataApprovalPermissions = {
    */
   approvedAt?: string;
   approvedBy?: string;
-  mayAccept: boolean;
-  mayApprove: boolean;
-  mayReadData: boolean;
-  mayUnaccept: boolean;
-  mayUnapprove: boolean;
+  mayAccept?: boolean;
+  mayApprove?: boolean;
+  mayReadData?: boolean;
+  mayUnaccept?: boolean;
+  mayUnapprove?: boolean;
   state?: string;
 };
 
@@ -1373,7 +1430,7 @@ export type DataApprovalWorkflow = {
   dataApprovalLevels?: RefDataApprovalLevel[];
   dataSets?: RefDataSet[];
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -1419,15 +1476,17 @@ export type DataDimensionItem = {
     | 'PROGRAM_DATA_ELEMENT'
     | 'PROGRAM_ATTRIBUTE'
     | 'EXPRESSION_DIMENSION_ITEM'
+    | 'SUBEXPRESSION_DIMENSION_ITEM'
     | 'VALIDATION_RULE';
   dataElement?: RefDataElement;
-  dataElementOperand?: RefDataElementOperand;
+  dataElementOperand?: DataElementOperand;
   expressionDimensionItem?: RefExpressionDimensionItem;
   indicator?: RefIndicator;
-  programAttribute?: RefProgramTrackedEntityAttributeDimensionItem;
-  programDataElement?: RefProgramDataElementDimensionItem;
+  programAttribute?: ProgramTrackedEntityAttributeDimensionItem;
+  programDataElement?: ProgramDataElementDimensionItem;
   programIndicator?: RefProgramIndicator;
-  reportingRate?: RefReportingRate;
+  reportingRate?: ReportingRate;
+  subexpressionDimensionItem?: RefSubexpressionDimensionItem;
 };
 
 export type DataElement = {
@@ -1473,7 +1532,7 @@ export type DataElement = {
   displayName?: string;
   displayShortName?: string;
   domainType: 'AGGREGATE' | 'TRACKER';
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   fieldMask?: string;
   formName?: string;
@@ -1488,7 +1547,7 @@ export type DataElement = {
   legendSets?: RefLegendSet[];
   name?: string;
   optionSet?: RefOptionSet;
-  optionSetValue: boolean;
+  optionSetValue?: boolean;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
   shortName?: string;
@@ -1526,7 +1585,7 @@ export type DataElement = {
     | 'IMAGE'
     | 'GEOJSON';
   valueTypeOptions?: FileTypeValueOptions;
-  zeroIsSignificant: boolean;
+  zeroIsSignificant?: boolean;
 };
 
 export type DataElementGroup = {
@@ -1545,7 +1604,7 @@ export type DataElementGroup = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   groupSets?: RefDataElementGroupSet[];
@@ -1590,7 +1649,7 @@ export type DataElementGroupSet = {
     | 'NONE'
     | 'CUSTOM'
     | 'DEFAULT';
-  allItems: boolean;
+  allItems?: boolean;
   attributeValues?: AttributeValue[];
   code?: string;
   compulsory?: boolean;
@@ -1599,7 +1658,7 @@ export type DataElementGroupSet = {
    */
   created?: string;
   createdBy?: RefUser;
-  dataDimension: boolean;
+  dataDimension?: boolean;
   dataDimensionType: 'DISAGGREGATION' | 'ATTRIBUTE';
   dataElementGroups?: RefDataElementGroup[];
   description?: string;
@@ -1609,7 +1668,7 @@ export type DataElementGroupSet = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   filter?: string;
   formName?: string;
@@ -1666,6 +1725,38 @@ export type DataElementGroupSetDimension = {
   dataElementGroups?: RefDataElementGroup[];
 };
 
+export type DataElementOperand = {
+  access?: Access;
+  attributeOptionCombo?: RefCategoryOptionCombo;
+  attributeValues?: AttributeValue[];
+  categoryOptionCombo?: RefCategoryOptionCombo;
+  code?: string;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  createdBy?: RefUser;
+  dataElement?: RefDataElement;
+  description?: string;
+  displayDescription?: string;
+  displayFormName?: string;
+  favorite?: boolean;
+  favorites?: string[];
+  formName?: string;
+  href?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  lastUpdatedBy?: RefUser;
+  legendSet?: RefLegendSet;
+  legendSets?: RefLegendSet[];
+  queryMods?: QueryModifiers;
+  sharing?: Sharing;
+  translations?: Translation[];
+  user?: RefUser;
+};
+
 export type DataEntryForm = {
   access?: Access;
   attributeValues?: AttributeValue[];
@@ -1676,7 +1767,7 @@ export type DataEntryForm = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   /**
    * @format int32
@@ -1717,7 +1808,7 @@ export type DataIntegrityCheck = {
   description?: string;
   displayName?: string;
   introduction?: string;
-  isSlow: boolean;
+  isSlow?: boolean;
   issuesIdType?: string;
   name?: string;
   recommendation?: string;
@@ -1797,14 +1888,14 @@ export type DataSet = {
   attributeValues?: AttributeValue[];
   categoryCombo?: RefCategoryCombo;
   code?: string;
-  compulsoryDataElementOperands?: RefDataElementOperand[];
-  compulsoryFieldsCompleteOnly: boolean;
+  compulsoryDataElementOperands?: DataElementOperand[];
+  compulsoryFieldsCompleteOnly?: boolean;
   /**
    * @format date-time
    */
   created?: string;
   createdBy?: RefUser;
-  dataElementDecoration: boolean;
+  dataElementDecoration?: boolean;
   dataEntryForm?: RefDataEntryForm;
   dataInputPeriods?: DataInputPeriod[];
   dataSetElements?: DataSetElement[];
@@ -1818,9 +1909,9 @@ export type DataSet = {
    * @format int32
    */
   expiryDays: number;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
-  fieldCombinationRequired: boolean;
+  fieldCombinationRequired?: boolean;
   formName?: string;
   formType: 'DEFAULT' | 'CUSTOM' | 'SECTION' | 'SECTION_MULTIORG';
   href?: string;
@@ -1834,11 +1925,11 @@ export type DataSet = {
   lastUpdatedBy?: RefUser;
   legendSet?: RefLegendSet;
   legendSets?: RefLegendSet[];
-  mobile: boolean;
+  mobile?: boolean;
   name?: string;
-  noValueRequiresComment: boolean;
+  noValueRequiresComment?: boolean;
   notificationRecipients?: RefUserGroup;
-  notifyCompletingUser: boolean;
+  notifyCompletingUser?: boolean;
   /**
    * @format int32
    */
@@ -1870,12 +1961,12 @@ export type DataSet = {
     | 'WeeklyWednesday'
     | 'Yearly';
   queryMods?: QueryModifiers;
-  renderAsTabs: boolean;
-  renderHorizontally: boolean;
+  renderAsTabs?: boolean;
+  renderHorizontally?: boolean;
   sections?: RefSection[];
   sharing?: Sharing;
   shortName?: string;
-  skipOffline: boolean;
+  skipOffline?: boolean;
   style?: ObjectStyle;
   /**
    * @format int32
@@ -1883,7 +1974,7 @@ export type DataSet = {
   timelyDays: number;
   translations?: Translation[];
   user?: RefUser;
-  validCompleteOnly: boolean;
+  validCompleteOnly?: boolean;
   /**
    * @format int32
    */
@@ -1920,7 +2011,7 @@ export type DataSetNotificationTemplate = {
   displayMessageTemplate?: string;
   displayName?: string;
   displaySubjectTemplate?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -1988,7 +2079,7 @@ export type DataValue = {
   created?: string;
   dataElement?: string;
   deleted?: boolean;
-  followup: boolean;
+  followup?: boolean;
   lastUpdated?: string;
   orgUnit?: string;
   period?: string;
@@ -2093,7 +2184,7 @@ export type DataValuesFollowUpRequest = {
 export type DatabaseInfo = {
   databaseVersion?: string;
   name?: string;
-  spatialSupport: boolean;
+  spatialSupport?: boolean;
   url?: string;
   user?: string;
 };
@@ -2108,7 +2199,7 @@ export type DatastoreEntry = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -2208,8 +2299,8 @@ export type DeflatedDataValue = {
    */
   dataElementId: number;
   dataElementName?: string;
-  deleted: boolean;
-  followup: boolean;
+  deleted?: boolean;
+  followup?: boolean;
   /**
    * @format int32
    */
@@ -2268,132 +2359,16 @@ export type Dhis2Info = {
 };
 
 export type DimensionItemKeywords = {
-  empty: boolean;
+  empty?: boolean;
   keywords?: Keyword[];
 };
 
+export type DimensionalItemObject = {
+  id?: string;
+};
+
 export type DimensionalObject = {
-  access?: Access;
-  aggregationType:
-    | 'SUM'
-    | 'AVERAGE'
-    | 'AVERAGE_SUM_ORG_UNIT'
-    | 'LAST'
-    | 'LAST_AVERAGE_ORG_UNIT'
-    | 'LAST_LAST_ORG_UNIT'
-    | 'LAST_IN_PERIOD'
-    | 'LAST_IN_PERIOD_AVERAGE_ORG_UNIT'
-    | 'FIRST'
-    | 'FIRST_AVERAGE_ORG_UNIT'
-    | 'FIRST_FIRST_ORG_UNIT'
-    | 'COUNT'
-    | 'STDDEV'
-    | 'VARIANCE'
-    | 'MIN'
-    | 'MAX'
-    | 'MIN_SUM_ORG_UNIT'
-    | 'MAX_SUM_ORG_UNIT'
-    | 'NONE'
-    | 'CUSTOM'
-    | 'DEFAULT';
-  allItems: boolean;
-  analyticsType: 'AGGREGATE' | 'EVENT';
-  attributeValues?: AttributeValue[];
-  code?: string;
-  /**
-   * @format date-time
-   */
-  created?: string;
-  createdBy?: RefUser;
-  dataDimension: boolean;
-  dataDimensionType: 'DISAGGREGATION' | 'ATTRIBUTE';
-  description?: string;
-  dimension?: string;
-  dimensionDisplayName?: string;
-  dimensionItemKeywords?: DimensionItemKeywords;
-  dimensionName?: string;
-  dimensionType:
-    | 'DATA_X'
-    | 'PROGRAM_DATA_ELEMENT'
-    | 'PROGRAM_ATTRIBUTE'
-    | 'PROGRAM_INDICATOR'
-    | 'DATA_COLLAPSED'
-    | 'CATEGORY_OPTION_COMBO'
-    | 'ATTRIBUTE_OPTION_COMBO'
-    | 'PERIOD'
-    | 'ORGANISATION_UNIT'
-    | 'CATEGORY_OPTION_GROUP_SET'
-    | 'DATA_ELEMENT_GROUP_SET'
-    | 'ORGANISATION_UNIT_GROUP_SET'
-    | 'ORGANISATION_UNIT_GROUP'
-    | 'CATEGORY'
-    | 'OPTION_GROUP_SET'
-    | 'VALIDATION_RULE'
-    | 'STATIC'
-    | 'ORGANISATION_UNIT_LEVEL';
-  displayDescription?: string;
-  displayName?: string;
-  displayShortName?: string;
-  eventRepetition?: EventRepetition;
-  favorite: boolean;
-  favorites?: string[];
-  filter?: string;
-  fixed: boolean;
-  /**
-   * @format uuid
-   * @pattern ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
-   */
-  groupUUID?: string;
-  href?: string;
-  /**
-   * @format int64
-   */
-  id: number;
-  items: boolean;
-  key?: string;
-  /**
-   * @format date-time
-   */
-  lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legendSet: boolean;
-  name?: string;
-  optionSet?: RefOptionSet;
-  programStage?: RefProgramStage;
-  sharing?: Sharing;
-  shortName?: string;
-  translations?: Translation[];
-  uid?: string;
-  user?: RefUser;
-  valueType:
-    | 'TEXT'
-    | 'LONG_TEXT'
-    | 'MULTI_TEXT'
-    | 'LETTER'
-    | 'PHONE_NUMBER'
-    | 'EMAIL'
-    | 'BOOLEAN'
-    | 'TRUE_ONLY'
-    | 'DATE'
-    | 'DATETIME'
-    | 'TIME'
-    | 'NUMBER'
-    | 'UNIT_INTERVAL'
-    | 'PERCENTAGE'
-    | 'INTEGER'
-    | 'INTEGER_POSITIVE'
-    | 'INTEGER_NEGATIVE'
-    | 'INTEGER_ZERO_OR_POSITIVE'
-    | 'TRACKER_ASSOCIATE'
-    | 'USERNAME'
-    | 'COORDINATE'
-    | 'ORGANISATION_UNIT'
-    | 'REFERENCE'
-    | 'AGE'
-    | 'URL'
-    | 'FILE_RESOURCE'
-    | 'IMAGE'
-    | 'GEOJSON';
+  id?: string;
 };
 
 export type DisableInactiveUsersJobParameters = {
@@ -2419,8 +2394,8 @@ export type Document = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  external: boolean;
-  favorite: boolean;
+  external?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -2436,7 +2411,7 @@ export type Document = {
   user?: RefUser;
 };
 
-export type Dxf2EventsEventDataValue = {
+export type Dxf2DeprecatedTrackerEventDataValue = {
   created?: string;
   createdByUserInfo?: UserInfoSnapshot;
   dataElement?: string;
@@ -2447,7 +2422,7 @@ export type Dxf2EventsEventDataValue = {
   value?: string;
 };
 
-export type Dxf2EventsEventEvent = {
+export type Dxf2DeprecatedTrackerEventEvent = {
   assignedUser?: string;
   assignedUserDisplayName?: string;
   assignedUserFirstName?: string;
@@ -2460,7 +2435,7 @@ export type Dxf2EventsEventEvent = {
   created?: string;
   createdAtClient: string;
   createdByUserInfo?: UserInfoSnapshot;
-  dataValues?: Dxf2EventsEventDataValue[];
+  dataValues?: Dxf2DeprecatedTrackerEventDataValue[];
   deleted?: boolean;
   dueDate?: string;
   enrollment: string;
@@ -2485,7 +2460,7 @@ export type Dxf2EventsEventEvent = {
   trackedEntityInstance?: string;
 };
 
-export type Dxf2EventsTrackedentityAttribute = {
+export type Dxf2DeprecatedTrackerTrackedentityAttribute = {
   attribute?: string;
   code?: string;
   created?: string;
@@ -2524,29 +2499,6 @@ export type Dxf2EventsTrackedentityAttribute = {
     | 'GEOJSON';
 };
 
-export type Dxf2EventsTrackedentityTrackedEntityInstance = {
-  attributes?: Dxf2EventsTrackedentityAttribute[];
-  coordinates?: string;
-  created: string;
-  createdAtClient: string;
-  createdByUserInfo?: UserInfoSnapshot;
-  deleted?: boolean;
-  enrollments?: Enrollment[];
-  featureType: 'NONE' | 'MULTI_POLYGON' | 'POLYGON' | 'POINT' | 'SYMBOL';
-  geometry?: Record<string, any>;
-  inactive?: boolean;
-  lastUpdated: string;
-  lastUpdatedAtClient: string;
-  lastUpdatedByUserInfo?: UserInfoSnapshot;
-  orgUnit: string;
-  potentialDuplicate?: boolean;
-  programOwners?: ProgramOwner[];
-  relationships?: Relationship[];
-  storedBy?: string;
-  trackedEntityInstance: string;
-  trackedEntityType: string;
-};
-
 export type Email = {
   recipients?: RefUser[];
   sender?: RefUser;
@@ -2555,7 +2507,7 @@ export type Email = {
 };
 
 export type Enrollment = {
-  attributes?: Dxf2EventsTrackedentityAttribute[];
+  attributes?: Dxf2DeprecatedTrackerTrackedentityAttribute[];
   completedBy?: string;
   /**
    * @format date-time
@@ -2570,7 +2522,7 @@ export type Enrollment = {
    * @format date-time
    */
   enrollmentDate: string;
-  events?: Dxf2EventsEventEvent[];
+  events?: Dxf2DeprecatedTrackerEventEvent[];
   followup?: boolean;
   geometry?: Record<string, any>;
   /**
@@ -2828,6 +2780,7 @@ export type ErrorReport = {
     | 'E4052'
     | 'E4053'
     | 'E4057'
+    | 'E4058'
     | 'E4060'
     | 'E4061'
     | 'E4062'
@@ -3076,13 +3029,13 @@ export type Event = {
   attributeValues?: AttributeValue[];
   code?: string;
   comments?: RefTrackedEntityComment[];
-  completed: boolean;
+  completed?: boolean;
   completedBy?: string;
   /**
    * @format date-time
    */
   completedDate?: string;
-  creatableInSearchScope: boolean;
+  creatableInSearchScope?: boolean;
   /**
    * @format date-time
    */
@@ -3093,18 +3046,19 @@ export type Event = {
   createdAtClient?: string;
   createdBy?: RefUser;
   createdByUserInfo?: UserInfoSnapshot;
-  deleted: boolean;
+  deleted?: boolean;
   displayName?: string;
   /**
    * @format date-time
    */
   dueDate?: string;
+  enrollment?: RefProgramEnrollment;
   eventDataValues?: EventDataValue[];
   /**
    * @format date-time
    */
   eventDate?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   geometry?: Record<string, any>;
   href?: string;
@@ -3122,7 +3076,6 @@ export type Event = {
   messageConversations?: RefMessageConversation[];
   name?: string;
   organisationUnit?: RefOrganisationUnit;
-  programInstance?: RefProgramInstance;
   programStage?: RefProgramStage;
   relationshipItems?: RelationshipRelationshipItem[];
   sharing?: Sharing;
@@ -3161,11 +3114,33 @@ export type EventDataValue = {
 };
 
 export type EventFilter = {
-  assignedUserMode: 'CURRENT' | 'PROVIDED' | 'NONE' | 'ANY' | 'ALL';
-  assignedUsers?: string[];
-  eventCreatedPeriod?: FilterPeriod;
-  eventStatus: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
+  access?: Access;
+  attributeValues?: AttributeValue[];
+  code?: string;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  createdBy?: RefUser;
+  description?: string;
+  displayDescription?: string;
+  displayName?: string;
+  eventQueryCriteria?: EventQueryCriteria;
+  favorite?: boolean;
+  favorites?: string[];
+  href?: string;
+  id?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  lastUpdatedBy?: RefUser;
+  name?: string;
+  program?: string;
   programStage?: string;
+  sharing?: Sharing;
+  translations?: Translation[];
+  user?: RefUser;
 };
 
 export type EventHook = {
@@ -3180,7 +3155,7 @@ export type EventHook = {
   description?: string;
   disabled: boolean;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -3229,9 +3204,9 @@ export type EventRepetition = {
 
 export type EventRow = {
   attributeCategoryOptions?: string;
-  attributes?: Dxf2EventsTrackedentityAttribute[];
-  dataValues?: Dxf2EventsEventDataValue[];
-  deleted: boolean;
+  attributes?: Dxf2DeprecatedTrackerTrackedentityAttribute[];
+  dataValues?: Dxf2DeprecatedTrackerEventDataValue[];
+  deleted?: boolean;
   dueDate?: string;
   enrollment?: string;
   event?: string;
@@ -3245,7 +3220,7 @@ export type EventRow = {
   programStage?: string;
   trackedEntityInstance?: string;
   trackedEntityInstanceCreated?: string;
-  trackedEntityInstanceInactive: boolean;
+  trackedEntityInstanceInactive?: boolean;
   trackedEntityInstanceOrgUnit?: string;
   trackedEntityInstanceOrgUnitName?: string;
 };
@@ -3290,18 +3265,18 @@ export type EventVisualization = {
   categoryDimensions?: CategoryDimension[];
   categoryOptionGroupSetDimensions?: CategoryOptionGroupSetDimension[];
   code?: string;
-  colSubTotals: boolean;
-  colTotals: boolean;
-  collapseDataDimensions: boolean;
+  colSubTotals?: boolean;
+  colTotals?: boolean;
+  collapseDataDimensions?: boolean;
   columnDimensions?: string[];
   columns?: RefDimensionalObject[];
-  completedOnly: boolean;
+  completedOnly?: boolean;
   /**
    * @format date-time
    */
   created?: string;
   createdBy?: RefUser;
-  cumulativeValues: boolean;
+  cumulativeValues?: boolean;
   dataDimensionItems?: DataDimensionItem[];
   dataElementDimensions?: TrackedEntityDataElementDimension[];
   dataElementGroupSetDimensions?: DataElementGroupSetDimension[];
@@ -3326,18 +3301,18 @@ export type EventVisualization = {
    */
   endDate?: string;
   eventStatus: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   filterDimensions?: string[];
   filters?: RefDimensionalObject[];
   fontSize: 'LARGE' | 'NORMAL' | 'SMALL';
   formName?: string;
   hideEmptyRowItems: 'NONE' | 'BEFORE_FIRST' | 'AFTER_LAST' | 'BEFORE_FIRST_AFTER_LAST' | 'ALL';
-  hideEmptyRows: boolean;
-  hideLegend: boolean;
-  hideNaData: boolean;
-  hideSubtitle: boolean;
-  hideTitle: boolean;
+  hideEmptyRows?: boolean;
+  hideLegend?: boolean;
+  hideNaData?: boolean;
+  hideSubtitle?: boolean;
+  hideTitle?: boolean;
   href?: string;
   id?: string;
   interpretations?: RefInterpretation[];
@@ -3347,10 +3322,10 @@ export type EventVisualization = {
    */
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
-  legacy: boolean;
+  legacy?: boolean;
   legend?: LegendDefinitions;
   name?: string;
-  noSpaceBetweenColumns: boolean;
+  noSpaceBetweenColumns?: boolean;
   orgUnitField?: string;
   organisationUnitGroupSetDimensions?: OrganisationUnitGroupSetDimension[];
   organisationUnitLevels?: number[];
@@ -3359,7 +3334,7 @@ export type EventVisualization = {
   parentGraphMap?: {
     [key: string]: string;
   };
-  percentStackedValues: boolean;
+  percentStackedValues?: boolean;
   periods?: string[];
   program?: RefProgram;
   programIndicatorDimensions?: TrackedEntityProgramIndicatorDimension[];
@@ -3386,14 +3361,14 @@ export type EventVisualization = {
   relativePeriods?: RelativePeriods;
   repetitions?: EventRepetition[];
   rowDimensions?: string[];
-  rowSubTotals: boolean;
-  rowTotals: boolean;
+  rowSubTotals?: boolean;
+  rowTotals?: boolean;
   rows?: RefDimensionalObject[];
   sharing?: Sharing;
   shortName?: string;
-  showData: boolean;
-  showDimensionLabels: boolean;
-  showHierarchy: boolean;
+  showData?: boolean;
+  showDimensionLabels?: boolean;
+  showHierarchy?: boolean;
   simpleDimensions?: SimpleDimension[];
   /**
    * @format int32
@@ -3403,7 +3378,7 @@ export type EventVisualization = {
    * @format date-time
    */
   startDate?: string;
-  subscribed: boolean;
+  subscribed?: boolean;
   subscribers?: string[];
   subtitle?: string;
   targetLineLabel?: string;
@@ -3438,9 +3413,9 @@ export type EventVisualization = {
     | 'BUBBLE';
   user?: RefUser;
   userOrgUnitType: 'DATA_CAPTURE' | 'DATA_OUTPUT' | 'TEI_SEARCH';
-  userOrganisationUnit: boolean;
-  userOrganisationUnitChildren: boolean;
-  userOrganisationUnitGrandChildren: boolean;
+  userOrganisationUnit?: boolean;
+  userOrganisationUnitChildren?: boolean;
+  userOrganisationUnitGrandChildren?: boolean;
   value?: RefDimensionalItemObject;
 };
 
@@ -3515,7 +3490,7 @@ export type ExpressionDimensionItem = {
   displayName?: string;
   displayShortName?: string;
   expression?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
@@ -3548,7 +3523,7 @@ export type ExternalMapLayer = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -3626,14 +3601,14 @@ export type Field = {
 };
 
 export type FieldPath = {
-  exclude: boolean;
+  exclude?: boolean;
   fullPath?: string;
   name?: string;
   path?: string[];
-  preset: boolean;
+  preset?: boolean;
   property?: Property;
-  root: boolean;
-  transformer: boolean;
+  root?: boolean;
+  transformer?: boolean;
   transformers?: FieldPathTransformer[];
 };
 
@@ -3666,9 +3641,9 @@ export type FileResource = {
     | 'USER_AVATAR'
     | 'ORG_UNIT'
     | 'CUSTOM_ICON';
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
-  hasMultipleStorageFiles: boolean;
+  hasMultipleStorageFiles?: boolean;
   href?: string;
   id?: string;
   /**
@@ -3763,7 +3738,7 @@ export type FollowupParams = {
    * @format int32
    */
   dataElementId: number;
-  followup: boolean;
+  followup?: boolean;
   /**
    * @format int32
    */
@@ -3840,9 +3815,9 @@ export type Form = {
 };
 
 export type GenericGatewayParameter = {
-  confidential: boolean;
-  encode: boolean;
-  header: boolean;
+  confidential?: boolean;
+  encode?: boolean;
+  header?: boolean;
   key?: string;
   value?: string;
 };
@@ -3851,15 +3826,15 @@ export type GenericHttpGatewayConfig = {
   configurationTemplate?: string;
   contentType: 'APPLICATION_JSON' | 'APPLICATION_XML' | 'TEXT_PLAIN' | 'FORM_URL_ENCODED';
   id?: string;
-  isDefault: boolean;
+  isDefault?: boolean;
   maxSmsLength?: string;
   name?: string;
   parameters?: GenericGatewayParameter[];
   password?: string;
-  sendUrlParameters: boolean;
+  sendUrlParameters?: boolean;
   uid?: string;
   urlTemplate?: string;
-  useGet: boolean;
+  useGet?: boolean;
   username?: string;
 };
 
@@ -3869,8 +3844,8 @@ export type GeoFeature = {
   dimensions?: {
     [key: string]: string;
   };
-  hcd: boolean;
-  hcu: boolean;
+  hcd?: boolean;
+  hcu?: boolean;
   id?: string;
   /**
    * @format int32
@@ -3945,7 +3920,7 @@ export type Grid = {
   internalMetaData?: {
     [key: string]: Record<string, any>;
   };
-  lastDataRow: boolean;
+  lastDataRow?: boolean;
   metaColumnIndexes?: number[];
   metaData?: {
     [key: string]: Record<string, any>;
@@ -3979,9 +3954,9 @@ export type Grid = {
 
 export type GridHeader = {
   column?: string;
-  hidden: boolean;
+  hidden?: boolean;
   legendSet?: string;
-  meta: boolean;
+  meta?: boolean;
   name?: string;
   optionSet?: string;
   programStage?: string;
@@ -4059,7 +4034,7 @@ export type I18nLocale = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -4085,11 +4060,20 @@ export type Icon = {
   type: 'DATA_ITEM';
 };
 
-export type IconData = {
+export type IconDto = {
   description?: string;
+  fileResourceUid?: string;
+  key?: string;
+  keywords?: string[];
+};
+
+export type IconResponse = {
+  description?: string;
+  fileResourceUid?: string;
   href?: string;
   key?: string;
   keywords?: string[];
+  userUid?: string;
 };
 
 export type IdObject = {
@@ -4101,8 +4085,8 @@ export type IdScheme = {
   attribute?: string;
   identifiableProperty: 'ID' | 'UID' | 'UUID' | 'NAME' | 'CODE' | 'ATTRIBUTE';
   identifiableString?: string;
-  notNull: boolean;
-  ['null']: boolean;
+  notNull?: boolean;
+  ['null']?: boolean;
 };
 
 export type IdSchemes = {
@@ -4124,32 +4108,7 @@ export type IdSchemes = {
 };
 
 export type IdentifiableObject = {
-  access?: Access;
-  attributeValues?: AttributeValue[];
-  code?: string;
-  /**
-   * @format date-time
-   */
-  created?: string;
-  createdBy?: RefUser;
-  displayName?: string;
-  favorite: boolean;
-  favorites?: string[];
-  href?: string;
-  /**
-   * @format int64
-   */
-  id: number;
-  /**
-   * @format date-time
-   */
-  lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  name?: string;
-  sharing?: Sharing;
-  translations?: Translation[];
-  uid?: string;
-  user?: RefUser;
+  id?: string;
 };
 
 export type IdentifiableObjects = {
@@ -4171,7 +4130,7 @@ export type ImageResource = {
    * @format date-time
    */
   lastUpdated?: string;
-  logo: boolean;
+  logo?: boolean;
 };
 
 export type ImportConflict = {
@@ -4367,6 +4326,7 @@ export type ImportConflict = {
     | 'E4052'
     | 'E4053'
     | 'E4057'
+    | 'E4058'
     | 'E4060'
     | 'E4061'
     | 'E4062'
@@ -4631,15 +4591,15 @@ export type ImportCount = {
 };
 
 export type ImportOptions = {
-  async: boolean;
+  async?: boolean;
   dataSet?: string;
-  datasetAllowsPeriods: boolean;
-  dryRun: boolean;
+  datasetAllowsPeriods?: boolean;
+  dryRun?: boolean;
   filename?: string;
-  firstRowIsHeader: boolean;
-  force: boolean;
+  firstRowIsHeader?: boolean;
+  force?: boolean;
   idSchemes?: IdSchemes;
-  ignoreEmptyCollection: boolean;
+  ignoreEmptyCollection?: boolean;
   importStrategy:
     | 'CREATE'
     | 'UPDATE'
@@ -4650,28 +4610,28 @@ export type ImportOptions = {
     | 'NEW'
     | 'UPDATES'
     | 'DELETES';
-  mergeDataValues: boolean;
+  mergeDataValues?: boolean;
   mergeMode: 'MERGE_ALWAYS' | 'MERGE_IF_NOT_NULL' | 'MERGE' | 'REPLACE' | 'NONE';
   notificationLevel: 'OFF' | 'DEBUG' | 'LOOP' | 'INFO' | 'WARN' | 'ERROR';
   preheatCache?: boolean;
   reportMode: 'FULL' | 'ERRORS' | 'ERRORS_NOT_OWNER' | 'DEBUG';
-  requireAttributeOptionCombo: boolean;
-  requireCategoryOptionCombo: boolean;
-  sharing: boolean;
-  skipAudit: boolean;
-  skipCache: boolean;
-  skipExistingCheck: boolean;
-  skipLastUpdated: boolean;
-  skipNotifications: boolean;
-  skipPatternValidation: boolean;
-  strictAttributeOptionCombos: boolean;
-  strictCategoryOptionCombos: boolean;
-  strictDataElements: boolean;
-  strictDataSetApproval: boolean;
-  strictDataSetInputPeriods: boolean;
-  strictDataSetLocking: boolean;
-  strictOrganisationUnits: boolean;
-  strictPeriods: boolean;
+  requireAttributeOptionCombo?: boolean;
+  requireCategoryOptionCombo?: boolean;
+  sharing?: boolean;
+  skipAudit?: boolean;
+  skipCache?: boolean;
+  skipExistingCheck?: boolean;
+  skipLastUpdated?: boolean;
+  skipNotifications?: boolean;
+  skipPatternValidation?: boolean;
+  strictAttributeOptionCombos?: boolean;
+  strictCategoryOptionCombos?: boolean;
+  strictDataElements?: boolean;
+  strictDataSetApproval?: boolean;
+  strictDataSetInputPeriods?: boolean;
+  strictDataSetLocking?: boolean;
+  strictOrganisationUnits?: boolean;
+  strictPeriods?: boolean;
 };
 
 export type ImportReport = {
@@ -4734,7 +4694,7 @@ export type IncomingSms = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   gatewayid?: string;
   href?: string;
@@ -4799,7 +4759,7 @@ export type Indicator = {
     | 'NONE'
     | 'CUSTOM'
     | 'DEFAULT';
-  annualized: boolean;
+  annualized?: boolean;
   attributeValues?: AttributeValue[];
   code?: string;
   /**
@@ -4824,7 +4784,7 @@ export type Indicator = {
   displayShortName?: string;
   explodedDenominator?: string;
   explodedNumerator?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
@@ -4861,7 +4821,7 @@ export type IndicatorGroup = {
   createdBy?: RefUser;
   description?: string;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   groupSets?: RefIndicatorGroupSet[];
   href?: string;
@@ -4891,7 +4851,7 @@ export type IndicatorGroupSet = {
   createdBy?: RefUser;
   description?: string;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -4922,7 +4882,7 @@ export type IndicatorType = {
    * @format int32
    */
   factor: number;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -4932,7 +4892,7 @@ export type IndicatorType = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  number: boolean;
+  number?: boolean;
   sharing?: Sharing;
   translations?: Translation[];
   user?: RefUser;
@@ -4953,7 +4913,7 @@ export type Interpretation = {
   eventChart?: RefEventChart;
   eventReport?: RefEventReport;
   eventVisualization?: RefEventVisualization;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -4988,7 +4948,7 @@ export type IpAllowedList = {
 };
 
 export type Item = {
-  complete: boolean;
+  complete?: boolean;
   /**
    * @format date-time
    */
@@ -5019,7 +4979,7 @@ export type JmsTarget = {
   groupId: string;
   password?: string;
   type?: string;
-  useQueue: boolean;
+  useQueue?: boolean;
   username?: string;
 };
 
@@ -5027,7 +4987,7 @@ export type JobConfiguration = {
   access?: Access;
   attributeValues?: AttributeValue[];
   code?: string;
-  configurable: boolean;
+  configurable?: boolean;
   /**
    * @format date-time
    */
@@ -5039,8 +4999,9 @@ export type JobConfiguration = {
    */
   delay?: number;
   displayName?: string;
-  enabled: boolean;
-  favorite: boolean;
+  enabled?: boolean;
+  executedBy?: string;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -5120,7 +5081,7 @@ export type JobConfiguration = {
    */
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
-  leaderOnlyJob: boolean;
+  leaderOnlyJob?: boolean;
   name?: string;
   /**
    * @format date-time
@@ -5222,14 +5183,49 @@ export type Layout = {
 export type LeaderNodeInfo = {
   currentNodeId?: string;
   currentNodeUuid?: string;
-  leader: boolean;
+  leader?: boolean;
   leaderNodeId?: string;
   leaderNodeUuid?: string;
 };
 
+export type Legend = {
+  access?: Access;
+  attributeValues?: AttributeValue[];
+  code?: string;
+  color?: string;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  createdBy?: RefUser;
+  displayName?: string;
+  /**
+   * @format double
+   */
+  endValue?: number;
+  favorite?: boolean;
+  favorites?: string[];
+  href?: string;
+  id?: string;
+  image?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  lastUpdatedBy?: RefUser;
+  name?: string;
+  sharing?: Sharing;
+  /**
+   * @format double
+   */
+  startValue?: number;
+  translations?: Translation[];
+  user?: RefUser;
+};
+
 export type LegendDefinitions = {
   set?: RefLegendSet;
-  showKey: boolean;
+  showKey?: boolean;
   strategy: 'FIXED' | 'BY_DATA_ITEM';
   style: 'FILL' | 'TEXT';
 };
@@ -5244,7 +5240,7 @@ export type LegendSet = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -5253,7 +5249,7 @@ export type LegendSet = {
    */
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
-  legends?: RefLegend[];
+  legends?: Legend[];
   name?: string;
   sharing?: Sharing;
   symbolizer?: string;
@@ -5294,7 +5290,7 @@ export type Map = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
@@ -5313,11 +5309,11 @@ export type Map = {
    * @format double
    */
   longitude?: number;
-  mapViews?: RefMapView[];
+  mapViews?: MapView[];
   name?: string;
   sharing?: Sharing;
   shortName?: string;
-  subscribed: boolean;
+  subscribed?: boolean;
   subscribers?: string[];
   title?: string;
   translations?: Translation[];
@@ -5370,7 +5366,7 @@ export type MapView = {
   colorScale?: string;
   columnDimensions?: string[];
   columns?: RefDimensionalObject[];
-  completedOnly: boolean;
+  completedOnly?: boolean;
   config?: string;
   /**
    * @format date-time
@@ -5392,7 +5388,7 @@ export type MapView = {
    * @format date-time
    */
   endDate?: string;
-  eventClustering: boolean;
+  eventClustering?: boolean;
   eventCoordinateField?: string;
   eventPointColor?: string;
   /**
@@ -5400,15 +5396,15 @@ export type MapView = {
    */
   eventPointRadius: number;
   eventStatus: 'ACTIVE' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   filterDimensions?: string[];
   filters?: RefDimensionalObject[];
   followUp?: boolean;
   formName?: string;
   hidden?: boolean;
-  hideSubtitle: boolean;
-  hideTitle: boolean;
+  hideSubtitle?: boolean;
+  hideTitle?: boolean;
   href?: string;
   id?: string;
   interpretations?: RefInterpretation[];
@@ -5482,7 +5478,7 @@ export type MapView = {
    * (Java type was: `class java.lang.Object`)
    */
   styleDataItem?: Record<string, any>;
-  subscribed: boolean;
+  subscribed?: boolean;
   subscribers?: string[];
   subtitle?: string;
   thematicMapType: 'CHOROPLETH' | 'BUBBLE';
@@ -5496,9 +5492,9 @@ export type MapView = {
   translations?: Translation[];
   user?: RefUser;
   userOrgUnitType: 'DATA_CAPTURE' | 'DATA_OUTPUT' | 'TEI_SEARCH';
-  userOrganisationUnit: boolean;
-  userOrganisationUnitChildren: boolean;
-  userOrganisationUnitGrandChildren: boolean;
+  userOrganisationUnit?: boolean;
+  userOrganisationUnitChildren?: boolean;
+  userOrganisationUnitGrandChildren?: boolean;
 };
 
 export type MeDto = {
@@ -5584,9 +5580,9 @@ export type MessageConversation = {
   createdBy?: RefUser;
   displayName?: string;
   extMessageId?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
-  followUp: boolean;
+  followUp?: boolean;
   href?: string;
   id?: string;
   /**
@@ -5608,7 +5604,7 @@ export type MessageConversation = {
   messageType: 'PRIVATE' | 'SYSTEM' | 'VALIDATION_RESULT' | 'TICKET' | 'SYSTEM_VERSION_UPDATE';
   messages?: RefMessage[];
   priority: 'NONE' | 'LOW' | 'MEDIUM' | 'HIGH';
-  read: boolean;
+  read?: boolean;
   sharing?: Sharing;
   status: 'NONE' | 'OPEN' | 'PENDING' | 'INVALID' | 'SOLVED';
   subject?: string;
@@ -5620,8 +5616,8 @@ export type MessageConversation = {
 };
 
 export type Meta = {
-  allowExternalAccess: boolean;
-  allowPublicAccess: boolean;
+  allowExternalAccess?: boolean;
+  allowPublicAccess?: boolean;
 };
 
 export type MetadataAdjustParams = {
@@ -5635,11 +5631,11 @@ export type MetadataExportParams = {
   defaultFilter?: string[];
   defaultOrder?: string[];
   defaults: 'INCLUDE' | 'EXCLUDE';
-  download: boolean;
-  exportWithDependencies: boolean;
+  download?: boolean;
+  exportWithDependencies?: boolean;
   inclusionStrategy?: 'ALWAYS' | 'NON_NULL' | 'NON_EMPTY';
   objectExportWithDependencies?: RefIdentifiableObject;
-  skipSharing: boolean;
+  skipSharing?: boolean;
   user?: RefUser;
   username?: string;
 };
@@ -5661,11 +5657,11 @@ export type MetadataImportParams = {
     | 'UPDATES'
     | 'DELETES';
   mergeMode: 'MERGE_ALWAYS' | 'MERGE_IF_NOT_NULL' | 'MERGE' | 'REPLACE' | 'NONE';
-  metadataSyncImport: boolean;
+  metadataSyncImport?: boolean;
   preheatMode: 'REFERENCE' | 'ALL' | 'NONE';
-  skipSharing: boolean;
-  skipTranslation: boolean;
-  skipValidation: boolean;
+  skipSharing?: boolean;
+  skipTranslation?: boolean;
+  skipValidation?: boolean;
   userOverrideMode: 'NONE' | 'CURRENT' | 'SELECTED';
 };
 
@@ -5709,7 +5705,8 @@ export type MetadataItem = {
     | 'DATA_ELEMENT_GROUP'
     | 'ORGANISATION_UNIT_GROUP'
     | 'CATEGORY_OPTION_GROUP'
-    | 'EXPRESSION_DIMENSION_ITEM';
+    | 'EXPRESSION_DIMENSION_ITEM'
+    | 'SUBEXPRESSION_DIMENSION_ITEM';
   dimensionType:
     | 'DATA_X'
     | 'PROGRAM_DATA_ELEMENT'
@@ -5806,7 +5803,7 @@ export type MetadataVersion = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   hashCode?: string;
   href?: string;
@@ -5852,7 +5849,7 @@ export type MinMaxValueParams = {
 };
 
 export type MonitoringJobParameters = {
-  persistResults: boolean;
+  persistResults?: boolean;
   /**
    * @format int32
    */
@@ -5861,16 +5858,16 @@ export type MonitoringJobParameters = {
    * @format int32
    */
   relativeStart: number;
-  sendNotifications: boolean;
+  sendNotifications?: boolean;
   validationRuleGroups?: Record<string, any>[];
 };
 
 export type Node = {
   children?: Node[];
-  collection: boolean;
+  collection?: boolean;
   comment?: string;
-  complex: boolean;
-  metadata: boolean;
+  complex?: boolean;
+  metadata?: boolean;
   name?: string;
   namespace?: string;
   /**
@@ -5879,7 +5876,7 @@ export type Node = {
   order: number;
   parent?: Node;
   property?: Property;
-  simple: boolean;
+  simple?: boolean;
   type: 'SIMPLE' | 'COMPLEX' | 'COLLECTION';
   unorderedChildren?: Node[];
 };
@@ -5944,7 +5941,7 @@ export type Notification = {
     | 'GML_IMPORT'
     | 'ANALYTICSTABLE_UPDATE'
     | 'PROGRAM_DATA_SYNC';
-  completed: boolean;
+  completed?: boolean;
   data?: Record<string, any>;
   dataType: 'PARAMETERS';
   id?: string;
@@ -5955,35 +5952,6 @@ export type Notification = {
    */
   time?: string;
   uid?: string;
-};
-
-export type OAuth2Client = {
-  access?: Access;
-  attributeValues?: AttributeValue[];
-  cid?: string;
-  code?: string;
-  /**
-   * @format date-time
-   */
-  created?: string;
-  createdBy?: RefUser;
-  displayName?: string;
-  favorite: boolean;
-  favorites?: string[];
-  grantTypes?: string[];
-  href?: string;
-  id?: string;
-  /**
-   * @format date-time
-   */
-  lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  name?: string;
-  redirectUris?: string[];
-  secret?: string;
-  sharing?: Sharing;
-  translations?: Translation[];
-  user?: RefUser;
 };
 
 export type ObjectCount = {
@@ -6016,7 +5984,7 @@ export type ObjectValueTypeRenderingOption = {
    * @format class
    */
   clazz?: string;
-  hasOptionSet: boolean;
+  hasOptionSet?: boolean;
   renderingTypes?: (
     | 'DEFAULT'
     | 'DROPDOWN'
@@ -6083,7 +6051,7 @@ export type Option = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
@@ -6143,7 +6111,7 @@ export type OptionGroup = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
@@ -6189,7 +6157,7 @@ export type OptionGroupSet = {
     | 'NONE'
     | 'CUSTOM'
     | 'DEFAULT';
-  allItems: boolean;
+  allItems?: boolean;
   attributeValues?: AttributeValue[];
   code?: string;
   /**
@@ -6197,7 +6165,7 @@ export type OptionGroupSet = {
    */
   created?: string;
   createdBy?: RefUser;
-  dataDimension: boolean;
+  dataDimension?: boolean;
   dataDimensionType: 'DISAGGREGATION' | 'ATTRIBUTE';
   description?: string;
   dimension?: string;
@@ -6206,7 +6174,7 @@ export type OptionGroupSet = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   filter?: string;
   formName?: string;
@@ -6270,7 +6238,7 @@ export type OptionSet = {
   createdBy?: RefUser;
   description?: string;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -6438,7 +6406,7 @@ export type OrganisationUnit = {
   displayName?: string;
   displayShortName?: string;
   email?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   geometry?: Record<string, any>;
@@ -6450,7 +6418,7 @@ export type OrganisationUnit = {
    */
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
-  leaf: boolean;
+  leaf?: boolean;
   legendSet?: RefLegendSet;
   legendSets?: RefLegendSet[];
   /**
@@ -6519,7 +6487,7 @@ export type OrganisationUnitGroup = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   featureType: 'NONE' | 'MULTI_POLYGON' | 'POLYGON' | 'POINT' | 'SYMBOL';
   formName?: string;
@@ -6568,16 +6536,16 @@ export type OrganisationUnitGroupSet = {
     | 'NONE'
     | 'CUSTOM'
     | 'DEFAULT';
-  allItems: boolean;
+  allItems?: boolean;
   attributeValues?: AttributeValue[];
   code?: string;
-  compulsory: boolean;
+  compulsory?: boolean;
   /**
    * @format date-time
    */
   created?: string;
   createdBy?: RefUser;
-  dataDimension: boolean;
+  dataDimension?: boolean;
   dataDimensionType: 'DISAGGREGATION' | 'ATTRIBUTE';
   description?: string;
   dimension?: string;
@@ -6586,13 +6554,13 @@ export type OrganisationUnitGroupSet = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   filter?: string;
   formName?: string;
   href?: string;
   id?: string;
-  includeSubhierarchyInAnalytics: boolean;
+  includeSubhierarchyInAnalytics?: boolean;
   items?: RefDimensionalItemObject[];
   /**
    * @format date-time
@@ -6655,7 +6623,7 @@ export type OrganisationUnitLevel = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -6715,7 +6683,7 @@ export type OutboundSms = {
    */
   date?: string;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -6736,7 +6704,7 @@ export type OutboundSms = {
 };
 
 export type OutlierAnalysis = {
-  enabled: boolean;
+  enabled?: boolean;
   extremeLines?: OutlierLine;
   normalizationMethod: 'Y_RESIDUALS_LINEAR';
   outlierMethod: 'IQR' | 'STANDARD_Z_SCORE' | 'MODIFIED_Z_SCORE';
@@ -6777,7 +6745,7 @@ export type OutlierDetectionResponse = {
 };
 
 export type OutlierLine = {
-  enabled: boolean;
+  enabled?: boolean;
   /**
    * @format double
    */
@@ -6888,7 +6856,7 @@ export type PotentialDuplicate = {
   createdByUserName?: string;
   displayName?: string;
   duplicate?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -6924,7 +6892,7 @@ export type Predictor = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   generator?: Expression;
@@ -6988,7 +6956,7 @@ export type PredictorGroup = {
   createdBy?: RefUser;
   description?: string;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -7022,7 +6990,7 @@ export type Process = {
    * @format date-time
    */
   cancelledTime?: string;
-  complete: boolean;
+  complete?: boolean;
   /**
    * @format date-time
    */
@@ -7037,6 +7005,7 @@ export type Process = {
   stages?: Stage[];
   status: 'RUNNING' | 'SUCCESS' | 'ERROR' | 'CANCELLED';
   summary?: string;
+  userId?: string;
 };
 
 export type ProcessInfo = {
@@ -7121,7 +7090,7 @@ export type Program = {
     | 'WeeklyThursday'
     | 'WeeklyWednesday'
     | 'Yearly';
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   featureType: 'NONE' | 'MULTI_POLYGON' | 'POLYGON' | 'POINT' | 'SYMBOL';
   formName?: string;
@@ -7154,15 +7123,15 @@ export type Program = {
   programRuleVariables?: RefProgramRuleVariable[];
   programSections?: RefProgramSection[];
   programStages?: RefProgramStage[];
-  programTrackedEntityAttributes?: RefProgramTrackedEntityAttribute[];
+  programTrackedEntityAttributes?: ProgramTrackedEntityAttribute[];
   programType: 'WITH_REGISTRATION' | 'WITHOUT_REGISTRATION';
-  registration: boolean;
+  registration?: boolean;
   relatedProgram?: RefProgram;
   selectEnrollmentDatesInFuture?: boolean;
   selectIncidentDatesInFuture?: boolean;
   sharing?: Sharing;
   shortName?: string;
-  skipOffline: boolean;
+  skipOffline?: boolean;
   style?: ObjectStyle;
   trackedEntityType?: RefTrackedEntityType;
   translations?: Translation[];
@@ -7173,7 +7142,69 @@ export type Program = {
    * @format int32
    */
   version: number;
-  withoutRegistration: boolean;
+  withoutRegistration?: boolean;
+};
+
+export type ProgramDataElementDimensionItem = {
+  access?: Access;
+  attributeValues?: AttributeValue[];
+  code?: string;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  createdBy?: RefUser;
+  dataElement?: RefDataElement;
+  description?: string;
+  displayDescription?: string;
+  displayFormName?: string;
+  displayName?: string;
+  displayShortName?: string;
+  favorite?: boolean;
+  favorites?: string[];
+  formName?: string;
+  href?: string;
+  id?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  lastUpdatedBy?: RefUser;
+  legendSet?: RefLegendSet;
+  program?: RefProgram;
+  queryMods?: QueryModifiers;
+  sharing?: Sharing;
+  translations?: Translation[];
+  user?: RefUser;
+  valueType:
+    | 'TEXT'
+    | 'LONG_TEXT'
+    | 'MULTI_TEXT'
+    | 'LETTER'
+    | 'PHONE_NUMBER'
+    | 'EMAIL'
+    | 'BOOLEAN'
+    | 'TRUE_ONLY'
+    | 'DATE'
+    | 'DATETIME'
+    | 'TIME'
+    | 'NUMBER'
+    | 'UNIT_INTERVAL'
+    | 'PERCENTAGE'
+    | 'INTEGER'
+    | 'INTEGER_POSITIVE'
+    | 'INTEGER_NEGATIVE'
+    | 'INTEGER_ZERO_OR_POSITIVE'
+    | 'TRACKER_ASSOCIATE'
+    | 'USERNAME'
+    | 'COORDINATE'
+    | 'ORGANISATION_UNIT'
+    | 'REFERENCE'
+    | 'AGE'
+    | 'URL'
+    | 'FILE_RESOURCE'
+    | 'IMAGE'
+    | 'GEOJSON';
 };
 
 export type ProgramIndicator = {
@@ -7202,7 +7233,7 @@ export type ProgramIndicator = {
     | 'NONE'
     | 'CUSTOM'
     | 'DEFAULT';
-  analyticsPeriodBoundaries?: RefAnalyticsPeriodBoundary[];
+  analyticsPeriodBoundaries?: AnalyticsPeriodBoundary[];
   analyticsType: 'EVENT' | 'ENROLLMENT';
   attributeValues?: AttributeValue[];
   code?: string;
@@ -7223,7 +7254,7 @@ export type ProgramIndicator = {
   displayName?: string;
   displayShortName?: string;
   expression?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   filter?: string;
   formName?: string;
@@ -7259,7 +7290,7 @@ export type ProgramIndicatorGroup = {
   createdBy?: RefUser;
   description?: string;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -7286,8 +7317,9 @@ export type ProgramMessage = {
   createdBy?: RefUser;
   deliveryChannels?: ('SMS' | 'EMAIL' | 'HTTP')[];
   displayName?: string;
+  enrollment?: RefProgramEnrollment;
   event?: RefEvent;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -7303,10 +7335,9 @@ export type ProgramMessage = {
    * @format date-time
    */
   processedDate?: string;
-  programInstance?: RefProgramInstance;
   recipients?: ProgramMessageRecipients;
   sharing?: Sharing;
-  storeCopy: boolean;
+  storeCopy?: boolean;
   subject?: string;
   text?: string;
   translations?: Translation[];
@@ -7317,7 +7348,7 @@ export type ProgramMessageRecipients = {
   emailAddresses?: string[];
   organisationUnit?: RefOrganisationUnit;
   phoneNumbers?: string[];
-  trackedEntityInstance?: RefTrackedEntityInstance;
+  trackedEntity?: RefTrackedEntity;
 };
 
 export type ProgramNotificationTemplate = {
@@ -7333,7 +7364,7 @@ export type ProgramNotificationTemplate = {
   displayMessageTemplate?: string;
   displayName?: string;
   displaySubjectTemplate?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -7368,7 +7399,7 @@ export type ProgramNotificationTemplate = {
    * @format int32
    */
   relativeScheduledDays?: number;
-  sendRepeatable: boolean;
+  sendRepeatable?: boolean;
   sharing?: Sharing;
   subjectTemplate?: string;
   translations?: Translation[];
@@ -7393,7 +7424,7 @@ export type ProgramRule = {
   createdBy?: RefUser;
   description?: string;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -7429,7 +7460,7 @@ export type ProgramRuleAction = {
   dataElement?: RefDataElement;
   displayContent?: string;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -7484,7 +7515,7 @@ export type ProgramRuleVariable = {
   createdBy?: RefUser;
   dataElement?: RefDataElement;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -7506,7 +7537,7 @@ export type ProgramRuleVariable = {
   sharing?: Sharing;
   trackedEntityAttribute?: RefTrackedEntityAttribute;
   translations?: Translation[];
-  useCodeForOptionSet: boolean;
+  useCodeForOptionSet?: boolean;
   user?: RefUser;
   valueType:
     | 'TEXT'
@@ -7553,7 +7584,7 @@ export type ProgramSection = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
@@ -7606,7 +7637,7 @@ export type ProgramStage = {
   dueDateLabel?: string;
   enableUserAssignment?: boolean;
   executionDateLabel?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   featureType: 'NONE' | 'MULTI_POLYGON' | 'POLYGON' | 'POINT' | 'SYMBOL';
   formName?: string;
@@ -7651,11 +7682,11 @@ export type ProgramStage = {
     | 'Yearly';
   preGenerateUID?: boolean;
   program?: RefProgram;
-  programStageDataElements?: RefProgramStageDataElement[];
+  programStageDataElements?: ProgramStageDataElement[];
   programStageSections?: RefProgramStageSection[];
-  referral: boolean;
+  referral?: boolean;
   remindCompleted?: boolean;
-  repeatable: boolean;
+  repeatable?: boolean;
   reportDateToUse?: string;
   sharing?: Sharing;
   shortName?: string;
@@ -7673,20 +7704,22 @@ export type ProgramStage = {
   validationStrategy: 'ON_COMPLETE' | 'ON_UPDATE_AND_INSERT';
 };
 
-export type ProgramStageInstanceFilter = {
+export type ProgramStageDataElement = {
   access?: Access;
+  allowFutureDate?: boolean;
+  allowProvidedElsewhere?: boolean;
   attributeValues?: AttributeValue[];
   code?: string;
+  compulsory?: boolean;
   /**
    * @format date-time
    */
   created?: string;
   createdBy?: RefUser;
-  description?: string;
-  displayDescription?: string;
+  dataElement?: RefDataElement;
+  displayInReports?: boolean;
   displayName?: string;
-  eventQueryCriteria?: EventQueryCriteria;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -7696,9 +7729,20 @@ export type ProgramStageInstanceFilter = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  program?: string;
-  programStage?: string;
+  programStage?: RefProgramStage;
+  renderOptionsAsRadio?: boolean;
+  /**
+   * The exact type is unknown.
+   * (Java type was: `org.hisp.dhis.render.DeviceRenderTypeMap<org.hisp.dhis.render.type.ValueTypeRenderingObject>`)
+   */
+  renderType?: void;
   sharing?: Sharing;
+  skipAnalytics?: boolean;
+  skipSynchronization?: boolean;
+  /**
+   * @format int32
+   */
+  sortOrder?: number;
   translations?: Translation[];
   user?: RefUser;
 };
@@ -7736,7 +7780,7 @@ export type ProgramStageSection = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
@@ -7777,7 +7821,7 @@ export type ProgramStageWorkingList = {
   description?: string;
   displayDescription?: string;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -7795,12 +7839,114 @@ export type ProgramStageWorkingList = {
   user?: RefUser;
 };
 
+export type ProgramTrackedEntityAttribute = {
+  access?: Access;
+  allowFutureDate?: boolean;
+  attributeValues?: AttributeValue[];
+  code?: string;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  createdBy?: RefUser;
+  displayInList?: boolean;
+  displayName?: string;
+  displayShortName?: string;
+  favorite?: boolean;
+  favorites?: string[];
+  href?: string;
+  id?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  lastUpdatedBy?: RefUser;
+  mandatory?: boolean;
+  program?: RefProgram;
+  renderOptionsAsRadio?: boolean;
+  /**
+   * The exact type is unknown.
+   * (Java type was: `org.hisp.dhis.render.DeviceRenderTypeMap<org.hisp.dhis.render.type.ValueTypeRenderingObject>`)
+   */
+  renderType?: void;
+  searchable?: boolean;
+  sharing?: Sharing;
+  /**
+   * @format int32
+   */
+  sortOrder?: number;
+  trackedEntityAttribute?: RefTrackedEntityAttribute;
+  translations?: Translation[];
+  user?: RefUser;
+  valueType:
+    | 'TEXT'
+    | 'LONG_TEXT'
+    | 'MULTI_TEXT'
+    | 'LETTER'
+    | 'PHONE_NUMBER'
+    | 'EMAIL'
+    | 'BOOLEAN'
+    | 'TRUE_ONLY'
+    | 'DATE'
+    | 'DATETIME'
+    | 'TIME'
+    | 'NUMBER'
+    | 'UNIT_INTERVAL'
+    | 'PERCENTAGE'
+    | 'INTEGER'
+    | 'INTEGER_POSITIVE'
+    | 'INTEGER_NEGATIVE'
+    | 'INTEGER_ZERO_OR_POSITIVE'
+    | 'TRACKER_ASSOCIATE'
+    | 'USERNAME'
+    | 'COORDINATE'
+    | 'ORGANISATION_UNIT'
+    | 'REFERENCE'
+    | 'AGE'
+    | 'URL'
+    | 'FILE_RESOURCE'
+    | 'IMAGE'
+    | 'GEOJSON';
+};
+
+export type ProgramTrackedEntityAttributeDimensionItem = {
+  access?: Access;
+  attribute?: RefTrackedEntityAttribute;
+  attributeValues?: AttributeValue[];
+  code?: string;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  createdBy?: RefUser;
+  description?: string;
+  displayDescription?: string;
+  displayFormName?: string;
+  favorite?: boolean;
+  favorites?: string[];
+  formName?: string;
+  href?: string;
+  id?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  lastUpdatedBy?: RefUser;
+  legendSet?: RefLegendSet;
+  program?: RefProgram;
+  queryMods?: QueryModifiers;
+  sharing?: Sharing;
+  shortName?: string;
+  translations?: Translation[];
+  user?: RefUser;
+};
+
 export type Property = {
-  analyticalObject: boolean;
+  analyticalObject?: boolean;
   apiEndpoint?: string;
-  attribute: boolean;
+  attribute?: boolean;
   cascade?: string;
-  collection: boolean;
+  collection?: boolean;
   collectionName?: string;
   collectionWrapping?: boolean;
   constants?: string[];
@@ -7810,12 +7956,12 @@ export type Property = {
    */
   defaultValue?: Record<string, any>;
   description?: string;
-  embeddedObject: boolean;
+  embeddedObject?: boolean;
   fieldName?: string;
   gistPreferences?: GistPreferences;
   href?: string;
   i18nTranslationKey?: string;
-  identifiableObject: boolean;
+  identifiableObject?: boolean;
   inverseRole?: string;
   /**
    * @format class
@@ -7847,8 +7993,8 @@ export type Property = {
    * @format int32
    */
   length?: number;
-  manyToMany: boolean;
-  manyToOne: boolean;
+  manyToMany?: boolean;
+  manyToOne?: boolean;
   /**
    * @format double
    */
@@ -7858,15 +8004,15 @@ export type Property = {
    */
   min?: number;
   name?: string;
-  nameableObject: boolean;
+  nameableObject?: boolean;
   namespace?: string;
-  oneToMany: boolean;
-  oneToOne: boolean;
-  ordered: boolean;
-  owner: boolean;
+  oneToMany?: boolean;
+  oneToOne?: boolean;
+  ordered?: boolean;
+  owner?: boolean;
   owningRole?: string;
-  persisted: boolean;
-  propertyTransformer: boolean;
+  persisted?: boolean;
+  propertyTransformer?: boolean;
   propertyType:
     | 'IDENTIFIER'
     | 'TEXT'
@@ -7885,14 +8031,14 @@ export type Property = {
     | 'COMPLEX'
     | 'COLLECTION'
     | 'REFERENCE';
-  readable: boolean;
+  readable?: boolean;
   relativeApiEndpoint?: string;
-  required: boolean;
-  simple: boolean;
-  translatable: boolean;
+  required?: boolean;
+  simple?: boolean;
+  translatable?: boolean;
   translationKey?: string;
-  unique: boolean;
-  writable: boolean;
+  unique?: boolean;
+  writable?: boolean;
 };
 
 export type PushAnalysis = {
@@ -7906,7 +8052,7 @@ export type PushAnalysis = {
   createdBy?: RefUser;
   dashboard?: RefDashboard;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -7963,7 +8109,6 @@ export type QueryModifiers = {
    * @format int32
    */
   periodOffset: number;
-  subExpression?: string;
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -7993,7 +8138,7 @@ export type QueryModifiers = {
     | 'FILE_RESOURCE'
     | 'IMAGE'
     | 'GEOJSON';
-  yearToDate: boolean;
+  yearToDate?: boolean;
 };
 
 export type Rectangle = {
@@ -8015,7 +8160,7 @@ export type RefererAllowedList = {
 };
 
 export type Relationship = {
-  bidirectional: boolean;
+  bidirectional?: boolean;
   created?: string;
   from?: RelationshipItem;
   lastUpdated?: string;
@@ -8026,10 +8171,10 @@ export type Relationship = {
 };
 
 export type RelationshipRelationshipItem = {
+  enrollment?: RefProgramEnrollment;
   event?: RefEvent;
-  programInstance?: RefProgramInstance;
   relationship?: RefRelationshipRelationship;
-  trackedEntityInstance?: RefTrackedEntityInstance;
+  trackedEntity?: RefTrackedEntity;
 };
 
 export type RelationshipConstraint = {
@@ -8042,14 +8187,14 @@ export type RelationshipConstraint = {
 
 export type RelationshipItem = {
   enrollment?: Enrollment;
-  event?: Dxf2EventsEventEvent;
-  trackedEntityInstance?: Dxf2EventsTrackedentityTrackedEntityInstance;
+  event?: Dxf2DeprecatedTrackerEventEvent;
+  trackedEntityInstance?: TrackedEntityInstance;
 };
 
 export type RelationshipType = {
   access?: Access;
   attributeValues?: AttributeValue[];
-  bidirectional: boolean;
+  bidirectional?: boolean;
   code?: string;
   /**
    * @format date-time
@@ -8060,7 +8205,7 @@ export type RelationshipType = {
   displayFromToName?: string;
   displayName?: string;
   displayToFromName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   fromConstraint?: RelationshipConstraint;
   fromToName?: string;
@@ -8072,7 +8217,7 @@ export type RelationshipType = {
   lastUpdated?: string;
   lastUpdatedBy?: RefUser;
   name?: string;
-  referral: boolean;
+  referral?: boolean;
   sharing?: Sharing;
   toConstraint?: RelationshipConstraint;
   toFromName?: string;
@@ -8081,51 +8226,51 @@ export type RelationshipType = {
 };
 
 export type RelativePeriods = {
-  biMonthsThisYear: boolean;
-  last10FinancialYears: boolean;
-  last10Years: boolean;
-  last12Months: boolean;
-  last12Weeks: boolean;
-  last14Days: boolean;
-  last180Days: boolean;
-  last2SixMonths: boolean;
-  last30Days: boolean;
-  last3Days: boolean;
-  last3Months: boolean;
-  last4BiWeeks: boolean;
-  last4Quarters: boolean;
-  last4Weeks: boolean;
-  last52Weeks: boolean;
-  last5FinancialYears: boolean;
-  last5Years: boolean;
-  last60Days: boolean;
-  last6BiMonths: boolean;
-  last6Months: boolean;
-  last7Days: boolean;
-  last90Days: boolean;
-  lastBiWeek: boolean;
-  lastBimonth: boolean;
-  lastFinancialYear: boolean;
-  lastMonth: boolean;
-  lastQuarter: boolean;
-  lastSixMonth: boolean;
-  lastWeek: boolean;
-  lastYear: boolean;
-  monthsLastYear: boolean;
-  monthsThisYear: boolean;
-  quartersLastYear: boolean;
-  quartersThisYear: boolean;
-  thisBiWeek: boolean;
-  thisBimonth: boolean;
-  thisDay: boolean;
-  thisFinancialYear: boolean;
-  thisMonth: boolean;
-  thisQuarter: boolean;
-  thisSixMonth: boolean;
-  thisWeek: boolean;
-  thisYear: boolean;
-  weeksThisYear: boolean;
-  yesterday: boolean;
+  biMonthsThisYear?: boolean;
+  last10FinancialYears?: boolean;
+  last10Years?: boolean;
+  last12Months?: boolean;
+  last12Weeks?: boolean;
+  last14Days?: boolean;
+  last180Days?: boolean;
+  last2SixMonths?: boolean;
+  last30Days?: boolean;
+  last3Days?: boolean;
+  last3Months?: boolean;
+  last4BiWeeks?: boolean;
+  last4Quarters?: boolean;
+  last4Weeks?: boolean;
+  last52Weeks?: boolean;
+  last5FinancialYears?: boolean;
+  last5Years?: boolean;
+  last60Days?: boolean;
+  last6BiMonths?: boolean;
+  last6Months?: boolean;
+  last7Days?: boolean;
+  last90Days?: boolean;
+  lastBiWeek?: boolean;
+  lastBimonth?: boolean;
+  lastFinancialYear?: boolean;
+  lastMonth?: boolean;
+  lastQuarter?: boolean;
+  lastSixMonth?: boolean;
+  lastWeek?: boolean;
+  lastYear?: boolean;
+  monthsLastYear?: boolean;
+  monthsThisYear?: boolean;
+  quartersLastYear?: boolean;
+  quartersThisYear?: boolean;
+  thisBiWeek?: boolean;
+  thisBimonth?: boolean;
+  thisDay?: boolean;
+  thisFinancialYear?: boolean;
+  thisMonth?: boolean;
+  thisQuarter?: boolean;
+  thisSixMonth?: boolean;
+  thisWeek?: boolean;
+  thisYear?: boolean;
+  weeksThisYear?: boolean;
+  yesterday?: boolean;
 };
 
 export type RemoveByIdOperation = {
@@ -8166,7 +8311,7 @@ export type Report = {
   createdBy?: RefUser;
   designContent?: string;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -8186,10 +8331,69 @@ export type Report = {
 };
 
 export type ReportingParams = {
-  grandParentOrganisationUnit: boolean;
-  organisationUnit: boolean;
-  parentOrganisationUnit: boolean;
-  reportingPeriod: boolean;
+  grandParentOrganisationUnit?: boolean;
+  organisationUnit?: boolean;
+  parentOrganisationUnit?: boolean;
+  reportingPeriod?: boolean;
+};
+
+export type ReportingRate = {
+  access?: Access;
+  aggregationType:
+    | 'SUM'
+    | 'AVERAGE'
+    | 'AVERAGE_SUM_ORG_UNIT'
+    | 'LAST'
+    | 'LAST_AVERAGE_ORG_UNIT'
+    | 'LAST_LAST_ORG_UNIT'
+    | 'LAST_IN_PERIOD'
+    | 'LAST_IN_PERIOD_AVERAGE_ORG_UNIT'
+    | 'FIRST'
+    | 'FIRST_AVERAGE_ORG_UNIT'
+    | 'FIRST_FIRST_ORG_UNIT'
+    | 'COUNT'
+    | 'STDDEV'
+    | 'VARIANCE'
+    | 'MIN'
+    | 'MAX'
+    | 'MIN_SUM_ORG_UNIT'
+    | 'MAX_SUM_ORG_UNIT'
+    | 'NONE'
+    | 'CUSTOM'
+    | 'DEFAULT';
+  attributeValues?: AttributeValue[];
+  code?: string;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  createdBy?: RefUser;
+  dataSet?: RefDataSet;
+  description?: string;
+  displayDescription?: string;
+  displayFormName?: string;
+  displayName?: string;
+  displayShortName?: string;
+  favorite?: boolean;
+  favorites?: string[];
+  formName?: string;
+  href?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  lastUpdatedBy?: RefUser;
+  legendSet?: RefLegendSet;
+  metric:
+    | 'REPORTING_RATE'
+    | 'REPORTING_RATE_ON_TIME'
+    | 'ACTUAL_REPORTS'
+    | 'ACTUAL_REPORTS_ON_TIME'
+    | 'EXPECTED_REPORTS';
+  queryMods?: QueryModifiers;
+  sharing?: Sharing;
+  translations?: Translation[];
+  user?: RefUser;
 };
 
 export type RequestInfo = {
@@ -8243,7 +8447,7 @@ export type Route = {
   description?: string;
   disabled: boolean;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   headers: {
     [key: string]: string;
@@ -8264,10 +8468,10 @@ export type Route = {
 
 export type SMPPGatewayConfig = {
   bindType: 'BIND_TX' | 'BIND_RX' | 'BIND_TRX';
-  compressed: boolean;
+  compressed?: boolean;
   host?: string;
   id?: string;
-  isDefault: boolean;
+  isDefault?: boolean;
   maxSmsLength?: string;
   name?: string;
   numberPlanIndicator:
@@ -8286,7 +8490,7 @@ export type SMPPGatewayConfig = {
    * @format int32
    */
   port: number;
-  sendUrlParameters: boolean;
+  sendUrlParameters?: boolean;
   systemId?: string;
   systemType?: string;
   typeOfNumber:
@@ -8304,7 +8508,7 @@ export type SMPPGatewayConfig = {
 
 export type SMSCode = {
   code?: string;
-  compulsory: boolean;
+  compulsory?: boolean;
   dataElement?: RefDataElement;
   formula?: string;
   optionId?: RefCategoryOptionCombo;
@@ -8322,11 +8526,11 @@ export type SMSCommand = {
    */
   created?: string;
   createdBy?: RefUser;
-  currentPeriodUsedForReporting: boolean;
+  currentPeriodUsedForReporting?: boolean;
   dataset?: RefDataSet;
   defaultMessage?: string;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -8366,13 +8570,13 @@ export type SMSSpecialCharacter = {
 };
 
 export type SchedulerEntry = {
-  configurable: boolean;
+  configurable?: boolean;
   cronExpression?: string;
   /**
    * @format int32
    */
   delay?: number;
-  enabled: boolean;
+  enabled?: boolean;
   name?: string;
   /**
    * @format date-time
@@ -8464,11 +8668,11 @@ export type Section = {
   dataElements?: RefDataElement[];
   dataSet?: RefDataSet;
   description?: string;
-  disableDataElementAutoGroup: boolean;
+  disableDataElementAutoGroup?: boolean;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
-  greyedFields?: RefDataElementOperand[];
+  greyedFields?: DataElementOperand[];
   href?: string;
   id?: string;
   indicators?: RefIndicator[];
@@ -8479,8 +8683,8 @@ export type Section = {
   lastUpdatedBy?: RefUser;
   name?: string;
   sharing?: Sharing;
-  showColumnTotals: boolean;
-  showRowTotals: boolean;
+  showColumnTotals?: boolean;
+  showRowTotals?: boolean;
   /**
    * @format int32
    */
@@ -8515,12 +8719,12 @@ export type Series = {
 };
 
 export type SeriesKey = {
-  hidden: boolean;
+  hidden?: boolean;
   label?: StyledObject;
 };
 
 export type Sharing = {
-  external: boolean;
+  external?: boolean;
   owner?: string;
   public?: string;
   userGroups?: {
@@ -8533,7 +8737,7 @@ export type Sharing = {
 
 export type SharingObject = {
   displayName?: string;
-  externalAccess: boolean;
+  externalAccess?: boolean;
   id?: string;
   name?: string;
   publicAccess?: string;
@@ -8660,7 +8864,7 @@ export type SqlView = {
   createdBy?: RefUser;
   description?: string;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -8683,7 +8887,7 @@ export type SqlViewUpdateParameters = {
 };
 
 export type Stage = {
-  complete: boolean;
+  complete?: boolean;
   /**
    * @format date-time
    */
@@ -8753,8 +8957,8 @@ export type SystemInfo = {
   cpuCores?: number;
   databaseInfo?: DatabaseInfo;
   dateFormat?: string;
-  emailConfigured: boolean;
-  encryption: boolean;
+  emailConfigured?: boolean;
+  encryption?: boolean;
   environmentVariable?: string;
   externalDirectory?: string;
   fileStoreProvider?: string;
@@ -8795,7 +8999,7 @@ export type SystemInfo = {
    * @format int32
    */
   readReplicaCount?: number;
-  redisEnabled: boolean;
+  redisEnabled?: boolean;
   redisHostname?: string;
   revision?: string;
   /**
@@ -8834,7 +9038,7 @@ export type TestJobParameters = {
    * @format int32
    */
   failAtStage?: number;
-  failWithException: boolean;
+  failWithException?: boolean;
   failWithMessage?: string;
   failWithPolicy: 'PARENT' | 'FAIL' | 'SKIP_STAGE' | 'SKIP_ITEM' | 'SKIP_ITEM_OUTLIER';
   /**
@@ -8845,7 +9049,7 @@ export type TestJobParameters = {
    * @format int32
    */
   items?: number;
-  runStagesParallel: boolean;
+  runStagesParallel?: boolean;
   /**
    * @format int32
    */
@@ -8863,23 +9067,49 @@ export type TimingsStats = {
 };
 
 export type TrackedEntity = {
-  attributes?: WebapiControllerTrackerViewAttribute[];
-  createdAt?: string | number;
-  createdAtClient?: string | number;
-  createdBy?: WebapiControllerTrackerViewUser;
-  deleted: boolean;
-  enrollments?: WebapiControllerTrackerViewRelationshipItemEnrollment[];
+  access?: Access;
+  attributeValues?: AttributeValue[];
+  code?: string;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  /**
+   * @format date-time
+   */
+  createdAtClient?: string;
+  createdBy?: RefUser;
+  createdByUserInfo?: UserInfoSnapshot;
+  deleted?: boolean;
+  displayName?: string;
+  enrollments?: RefProgramEnrollment[];
+  favorite?: boolean;
+  favorites?: string[];
   geometry?: Record<string, any>;
-  inactive: boolean;
-  orgUnit?: string;
-  potentialDuplicate: boolean;
-  programOwners?: WebapiControllerTrackerViewProgramOwner[];
+  href?: string;
+  id?: string;
+  inactive?: boolean;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdatedAtClient?: string;
+  lastUpdatedBy?: RefUser;
+  lastUpdatedByUserInfo?: UserInfoSnapshot;
+  name?: string;
+  organisationUnit?: RefOrganisationUnit;
+  potentialDuplicate?: boolean;
+  programOwners?: TrackedEntityProgramOwner[];
+  relationshipItems?: RelationshipRelationshipItem[];
+  sharing?: Sharing;
   storedBy?: string;
-  trackedEntity?: string;
-  trackedEntityType?: string;
-  updatedAt?: string | number;
-  updatedAtClient?: string | number;
-  updatedBy?: WebapiControllerTrackerViewUser;
+  trackedEntityAttributeValues?: TrackedEntityAttributeValue[];
+  trackedEntityType?: RefTrackedEntityType;
+  translations?: Translation[];
+  user?: RefUser;
 };
 
 export type TrackedEntityAttribute = {
@@ -8923,7 +9153,7 @@ export type TrackedEntityAttribute = {
   displayOnVisitSchedule?: boolean;
   displayShortName?: string;
   expression?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   fieldMask?: string;
   formName?: string;
@@ -8940,7 +9170,7 @@ export type TrackedEntityAttribute = {
   legendSets?: RefLegendSet[];
   name?: string;
   optionSet?: RefOptionSet;
-  optionSetValue: boolean;
+  optionSetValue?: boolean;
   orgunitScope?: boolean;
   pattern?: string;
   queryMods?: QueryModifiers;
@@ -9007,7 +9237,7 @@ export type TrackedEntityAttributeValue = {
   lastUpdated?: string;
   storedBy?: string;
   trackedEntityAttribute?: RefTrackedEntityAttribute;
-  trackedEntityInstance?: RefTrackedEntityInstance;
+  trackedEntityInstance?: RefTrackedEntity;
   value?: string;
 };
 
@@ -9018,53 +9248,7 @@ export type TrackedEntityDataElementDimension = {
   programStage?: RefProgramStage;
 };
 
-export type TrackedEntityInstance = {
-  access?: Access;
-  attributeValues?: AttributeValue[];
-  code?: string;
-  /**
-   * @format date-time
-   */
-  created?: string;
-  /**
-   * @format date-time
-   */
-  createdAtClient?: string;
-  createdBy?: RefUser;
-  createdByUserInfo?: UserInfoSnapshot;
-  deleted: boolean;
-  displayName?: string;
-  favorite: boolean;
-  favorites?: string[];
-  geometry?: Record<string, any>;
-  href?: string;
-  id?: string;
-  inactive?: boolean;
-  /**
-   * @format date-time
-   */
-  lastUpdated?: string;
-  /**
-   * @format date-time
-   */
-  lastUpdatedAtClient?: string;
-  lastUpdatedBy?: RefUser;
-  lastUpdatedByUserInfo?: UserInfoSnapshot;
-  name?: string;
-  organisationUnit?: RefOrganisationUnit;
-  potentialDuplicate: boolean;
-  programInstances?: RefProgramInstance[];
-  programOwners?: TrackedEntityProgramOwner[];
-  relationshipItems?: RelationshipRelationshipItem[];
-  sharing?: Sharing;
-  storedBy?: string;
-  trackedEntityAttributeValues?: TrackedEntityAttributeValue[];
-  trackedEntityType?: RefTrackedEntityType;
-  translations?: Translation[];
-  user?: RefUser;
-};
-
-export type TrackedEntityInstanceFilter = {
+export type TrackedEntityFilter = {
   access?: Access;
   attributeValues?: AttributeValue[];
   code?: string;
@@ -9079,8 +9263,8 @@ export type TrackedEntityInstanceFilter = {
   enrollmentCreatedPeriod?: FilterPeriod;
   enrollmentStatus: 'ACTIVE' | 'COMPLETED' | 'CANCELLED';
   entityQueryCriteria?: EntityQueryCriteria;
-  eventFilters?: EventFilter[];
-  favorite: boolean;
+  eventFilters?: TrackedentityfilterEventFilter[];
+  favorite?: boolean;
   favorites?: string[];
   followup?: boolean;
   href?: string;
@@ -9102,6 +9286,29 @@ export type TrackedEntityInstanceFilter = {
   user?: RefUser;
 };
 
+export type TrackedEntityInstance = {
+  attributes?: Dxf2DeprecatedTrackerTrackedentityAttribute[];
+  coordinates?: string;
+  created: string;
+  createdAtClient: string;
+  createdByUserInfo?: UserInfoSnapshot;
+  deleted?: boolean;
+  enrollments?: Enrollment[];
+  featureType: 'NONE' | 'MULTI_POLYGON' | 'POLYGON' | 'POINT' | 'SYMBOL';
+  geometry?: Record<string, any>;
+  inactive?: boolean;
+  lastUpdated: string;
+  lastUpdatedAtClient: string;
+  lastUpdatedByUserInfo?: UserInfoSnapshot;
+  orgUnit: string;
+  potentialDuplicate?: boolean;
+  programOwners?: ProgramOwner[];
+  relationships?: Relationship[];
+  storedBy?: string;
+  trackedEntityInstance: string;
+  trackedEntityType: string;
+};
+
 export type TrackedEntityProgramIndicatorDimension = {
   filter?: string;
   legendSet?: RefLegendSet;
@@ -9111,12 +9318,12 @@ export type TrackedEntityProgramIndicatorDimension = {
 export type TrackedEntityProgramOwner = {
   organisationUnit?: RefOrganisationUnit;
   program?: RefProgram;
-  trackedEntityInstance?: RefTrackedEntityInstance;
+  trackedEntityInstance?: RefTrackedEntity;
 };
 
 export type TrackedEntityType = {
   access?: Access;
-  allowAuditLog: boolean;
+  allowAuditLog?: boolean;
   attributeValues?: AttributeValue[];
   code?: string;
   /**
@@ -9129,7 +9336,7 @@ export type TrackedEntityType = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   featureType: 'NONE' | 'MULTI_POLYGON' | 'POLYGON' | 'POINT' | 'SYMBOL';
   formName?: string;
@@ -9152,9 +9359,76 @@ export type TrackedEntityType = {
   sharing?: Sharing;
   shortName?: string;
   style?: ObjectStyle;
-  trackedEntityTypeAttributes?: RefTrackedEntityTypeAttribute[];
+  trackedEntityTypeAttributes?: TrackedEntityTypeAttribute[];
   translations?: Translation[];
   user?: RefUser;
+};
+
+export type TrackedEntityTypeAttribute = {
+  access?: Access;
+  attributeValues?: AttributeValue[];
+  code?: string;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  createdBy?: RefUser;
+  displayInList?: boolean;
+  displayName?: string;
+  displayShortName?: string;
+  favorite?: boolean;
+  favorites?: string[];
+  href?: string;
+  id?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  lastUpdatedBy?: RefUser;
+  mandatory?: boolean;
+  searchable?: boolean;
+  sharing?: Sharing;
+  trackedEntityAttribute?: RefTrackedEntityAttribute;
+  trackedEntityType?: RefTrackedEntityType;
+  translations?: Translation[];
+  user?: RefUser;
+  valueType:
+    | 'TEXT'
+    | 'LONG_TEXT'
+    | 'MULTI_TEXT'
+    | 'LETTER'
+    | 'PHONE_NUMBER'
+    | 'EMAIL'
+    | 'BOOLEAN'
+    | 'TRUE_ONLY'
+    | 'DATE'
+    | 'DATETIME'
+    | 'TIME'
+    | 'NUMBER'
+    | 'UNIT_INTERVAL'
+    | 'PERCENTAGE'
+    | 'INTEGER'
+    | 'INTEGER_POSITIVE'
+    | 'INTEGER_NEGATIVE'
+    | 'INTEGER_ZERO_OR_POSITIVE'
+    | 'TRACKER_ASSOCIATE'
+    | 'USERNAME'
+    | 'COORDINATE'
+    | 'ORGANISATION_UNIT'
+    | 'REFERENCE'
+    | 'AGE'
+    | 'URL'
+    | 'FILE_RESOURCE'
+    | 'IMAGE'
+    | 'GEOJSON';
+};
+
+export type TrackedentityfilterEventFilter = {
+  assignedUserMode: 'CURRENT' | 'PROVIDED' | 'NONE' | 'ANY' | 'ALL';
+  assignedUsers?: string[];
+  eventCreatedPeriod?: FilterPeriod;
+  eventStatus: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
+  programStage?: string;
 };
 
 export type TrackerDataView = {
@@ -9216,7 +9490,7 @@ export type TrackerProgramsDataSynchronizationJobParameters = {
 
 export type TrackerTrigramIndexJobParameters = {
   attributes?: Record<string, any>[];
-  skipIndexDeletion: boolean;
+  skipIndexDeletion?: boolean;
 };
 
 export type TrackerTypeReport = {
@@ -9275,14 +9549,14 @@ export type User = {
    */
   dataViewMaxOrganisationUnitLevel?: number;
   dataViewOrganisationUnits?: RefOrganisationUnit[];
-  disabled: boolean;
+  disabled?: boolean;
   displayName?: string;
   education?: string;
   email?: string;
   employer?: string;
-  externalAuth: boolean;
+  externalAuth?: boolean;
   facebookMessenger?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   firstName?: string;
   gender?: string;
@@ -9290,7 +9564,7 @@ export type User = {
   id?: string;
   interests?: string;
   introduction?: string;
-  invitation: boolean;
+  invitation?: boolean;
   jobTitle?: string;
   languages?: string;
   /**
@@ -9316,7 +9590,7 @@ export type User = {
    */
   passwordLastUpdated?: string;
   phoneNumber?: string;
-  selfRegistered: boolean;
+  selfRegistered?: boolean;
   settings?: UserSettings;
   sharing?: Sharing;
   skype?: string;
@@ -9325,7 +9599,7 @@ export type User = {
   telegram?: string;
   translations?: Translation[];
   twitter?: string;
-  twoFactorEnabled: boolean;
+  twoFactorEnabled?: boolean;
   user?: RefUser;
   userCredentials?: UserCredentialsDto;
   userGroups?: RefUserGroup[];
@@ -9349,11 +9623,11 @@ export type UserCredentialsDto = {
   accountExpiry?: string;
   catDimensionConstraints?: RefCategory[];
   cogsDimensionConstraints?: RefCategoryOptionGroupSet[];
-  disabled: boolean;
-  externalAuth: boolean;
+  disabled?: boolean;
+  externalAuth?: boolean;
   id?: string;
   idToken?: string;
-  invitation: boolean;
+  invitation?: boolean;
   /**
    * @format date-time
    */
@@ -9371,9 +9645,9 @@ export type UserCredentialsDto = {
    */
   restoreExpiry?: string;
   restoreToken?: string;
-  selfRegistered: boolean;
+  selfRegistered?: boolean;
   sharing?: Sharing;
-  twoFA: boolean;
+  twoFA?: boolean;
   uid?: string;
   userRoles?: RefUserRole[];
   username?: string;
@@ -9390,7 +9664,7 @@ export type UserGroup = {
   created?: string;
   createdBy?: RefUser;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -9434,9 +9708,9 @@ export type UserLookups = {
 };
 
 export type UserMessage = {
-  followUp: boolean;
+  followUp?: boolean;
   key?: string;
-  read: boolean;
+  read?: boolean;
   user?: RefUser;
 };
 
@@ -9452,7 +9726,7 @@ export type UserRole = {
   createdBy?: RefUser;
   description?: string;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -9491,7 +9765,7 @@ export type ValidationNotificationTemplate = {
   displayMessageTemplate?: string;
   displayName?: string;
   displaySubjectTemplate?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -9622,13 +9896,14 @@ export type ValidationRule = {
     | 'DATA_ELEMENT_GROUP'
     | 'ORGANISATION_UNIT_GROUP'
     | 'CATEGORY_OPTION_GROUP'
-    | 'EXPRESSION_DIMENSION_ITEM';
+    | 'EXPRESSION_DIMENSION_ITEM'
+    | 'SUBEXPRESSION_DIMENSION_ITEM';
   displayDescription?: string;
   displayFormName?: string;
   displayInstruction?: string;
   displayName?: string;
   displayShortName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
@@ -9680,7 +9955,7 @@ export type ValidationRule = {
   rightSide?: Expression;
   sharing?: Sharing;
   shortName?: string;
-  skipFormValidation: boolean;
+  skipFormValidation?: boolean;
   translations?: Translation[];
   user?: RefUser;
   validationRuleGroups?: RefValidationRuleGroup[];
@@ -9706,7 +9981,7 @@ export type ValidationRuleGroup = {
   createdBy?: RefUser;
   description?: string;
   displayName?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -9724,15 +9999,15 @@ export type ValidationRuleGroup = {
 
 export type ValidationRulesAnalysisParams = {
   endDate?: string;
-  notification: boolean;
+  notification?: boolean;
   ou?: string;
-  persist: boolean;
+  persist?: boolean;
   startDate?: string;
   vrg?: string;
 };
 
 export type ValidationSummary = {
-  commentRequiredViolations?: RefDataElementOperand[];
+  commentRequiredViolations?: DataElementOperand[];
   validationRuleViolations?: ValidationResult[];
 };
 
@@ -9783,18 +10058,18 @@ export type Visualization = {
   categoryDimensions?: CategoryDimension[];
   categoryOptionGroupSetDimensions?: CategoryOptionGroupSetDimension[];
   code?: string;
-  colSubTotals: boolean;
-  colTotals: boolean;
+  colSubTotals?: boolean;
+  colTotals?: boolean;
   colorSet?: string;
   columnDimensions?: string[];
   columns?: RefDimensionalObject[];
-  completedOnly: boolean;
+  completedOnly?: boolean;
   /**
    * @format date-time
    */
   created?: string;
   createdBy?: RefUser;
-  cumulativeValues: boolean;
+  cumulativeValues?: boolean;
   dataDimensionItems?: DataDimensionItem[];
   dataElementDimensions?: TrackedEntityDataElementDimension[];
   dataElementGroupSetDimensions?: DataElementGroupSetDimension[];
@@ -9816,21 +10091,21 @@ export type Visualization = {
    * @format date-time
    */
   endDate?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   filterDimensions?: string[];
   filters?: RefDimensionalObject[];
-  fixColumnHeaders: boolean;
-  fixRowHeaders: boolean;
+  fixColumnHeaders?: boolean;
+  fixRowHeaders?: boolean;
   fontSize: 'LARGE' | 'NORMAL' | 'SMALL';
   fontStyle?: VisualizationFontStyle;
   formName?: string;
-  hideEmptyColumns: boolean;
+  hideEmptyColumns?: boolean;
   hideEmptyRowItems: 'NONE' | 'BEFORE_FIRST' | 'AFTER_LAST' | 'BEFORE_FIRST_AFTER_LAST' | 'ALL';
-  hideEmptyRows: boolean;
-  hideLegend: boolean;
-  hideSubtitle: boolean;
-  hideTitle: boolean;
+  hideEmptyRows?: boolean;
+  hideLegend?: boolean;
+  hideSubtitle?: boolean;
+  hideTitle?: boolean;
   href?: string;
   icons?: Icon[];
   id?: string;
@@ -9844,7 +10119,7 @@ export type Visualization = {
   legend?: LegendDefinitions;
   measureCriteria?: string;
   name?: string;
-  noSpaceBetweenColumns: boolean;
+  noSpaceBetweenColumns?: boolean;
   numberType: 'VALUE' | 'ROW_PERCENTAGE' | 'COLUMN_PERCENTAGE';
   optionalAxes?: Axis[];
   orgUnitField?: string;
@@ -9855,7 +10130,7 @@ export type Visualization = {
   parentGraphMap?: {
     [key: string]: string;
   };
-  percentStackedValues: boolean;
+  percentStackedValues?: boolean;
   periods?: string[];
   programIndicatorDimensions?: TrackedEntityProgramIndicatorDimension[];
   /**
@@ -9875,22 +10150,22 @@ export type Visualization = {
    * @format int32
    */
   rangeAxisSteps?: number;
-  regression: boolean;
+  regression?: boolean;
   regressionType: 'NONE' | 'LINEAR' | 'POLYNOMIAL' | 'LOESS';
   relativePeriods?: RelativePeriods;
   reportingParams?: ReportingParams;
   rowDimensions?: string[];
-  rowSubTotals: boolean;
-  rowTotals: boolean;
+  rowSubTotals?: boolean;
+  rowTotals?: boolean;
   rows?: RefDimensionalObject[];
   series?: Series[];
   seriesKey?: SeriesKey;
   sharing?: Sharing;
   shortName?: string;
-  showData: boolean;
-  showDimensionLabels: boolean;
-  showHierarchy: boolean;
-  skipRounding: boolean;
+  showData?: boolean;
+  showDimensionLabels?: boolean;
+  showHierarchy?: boolean;
+  skipRounding?: boolean;
   /**
    * @format int32
    */
@@ -9899,7 +10174,7 @@ export type Visualization = {
    * @format date-time
    */
   startDate?: string;
-  subscribed: boolean;
+  subscribed?: boolean;
   subscribers?: string[];
   subtitle?: string;
   targetLineLabel?: string;
@@ -9933,9 +10208,9 @@ export type Visualization = {
     | 'PIVOT_TABLE';
   user?: RefUser;
   userOrgUnitType: 'DATA_CAPTURE' | 'DATA_OUTPUT' | 'TEI_SEARCH';
-  userOrganisationUnit: boolean;
-  userOrganisationUnitChildren: boolean;
-  userOrganisationUnitGrandChildren: boolean;
+  userOrganisationUnit?: boolean;
+  userOrganisationUnitChildren?: boolean;
+  userOrganisationUnitGrandChildren?: boolean;
   visualizationPeriodName?: string;
   yearlySeries?: string[];
 };
@@ -9996,6 +10271,7 @@ export type WebApp = {
 };
 
 export type WebLocale = {
+  displayName?: string;
   locale?: string;
   name?: string;
 };
@@ -10198,6 +10474,7 @@ export type WebMessage = {
     | 'E4052'
     | 'E4053'
     | 'E4057'
+    | 'E4058'
     | 'E4060'
     | 'E4061'
     | 'E4062'
@@ -10451,7 +10728,7 @@ export type WebapiControllerDatastoreControllerPager = {
 };
 
 export type WebapiControllerTrackerViewAttribute = {
-  attribute?: string;
+  attribute?: UIDWebapiControllerTrackerViewAttribute;
   code?: string;
   createdAt?: string | number;
   displayName?: string;
@@ -10492,8 +10769,8 @@ export type WebapiControllerTrackerViewAttribute = {
 export type WebapiControllerTrackerViewDataValue = {
   createdAt?: string | number;
   createdBy?: WebapiControllerTrackerViewUser;
-  dataElement?: string;
-  providedElsewhere: boolean;
+  dataElement?: UIDDataElement;
+  providedElsewhere?: boolean;
   storedBy?: string;
   updatedAt?: string | number;
   updatedBy?: WebapiControllerTrackerViewUser;
@@ -10507,11 +10784,11 @@ export type WebapiControllerTrackerViewEnrollment = {
   createdAt?: string | number;
   createdAtClient?: string | number;
   createdBy?: WebapiControllerTrackerViewUser;
-  deleted: boolean;
+  deleted?: boolean;
   enrolledAt?: string | number;
-  enrollment?: string;
+  enrollment?: UIDWebapiControllerTrackerViewEnrollment;
   events?: WebapiControllerTrackerViewEvent[];
-  followUp: boolean;
+  followUp?: boolean;
   geometry?: Record<string, any>;
   notes?: WebapiControllerTrackerViewNote[];
   occurredAt?: string | number;
@@ -10521,7 +10798,7 @@ export type WebapiControllerTrackerViewEnrollment = {
   relationships?: WebapiControllerTrackerViewRelationship[];
   status: 'ACTIVE' | 'COMPLETED' | 'CANCELLED';
   storedBy?: string;
-  trackedEntity?: string;
+  trackedEntity?: UIDWebapiControllerTrackerViewTrackedEntity;
   updatedAt?: string | number;
   updatedAtClient?: string | number;
   updatedBy?: WebapiControllerTrackerViewUser;
@@ -10537,10 +10814,10 @@ export type WebapiControllerTrackerViewEvent = {
   createdAtClient?: string | number;
   createdBy?: WebapiControllerTrackerViewUser;
   dataValues?: WebapiControllerTrackerViewDataValue[];
-  deleted: boolean;
-  enrollment?: string;
-  event?: string;
-  followup: boolean;
+  deleted?: boolean;
+  enrollment?: UIDWebapiControllerTrackerViewEnrollment;
+  event?: UIDWebapiControllerTrackerViewEvent;
+  followup?: boolean;
   geometry?: Record<string, any>;
   notes?: WebapiControllerTrackerViewNote[];
   occurredAt?: string | number;
@@ -10552,7 +10829,7 @@ export type WebapiControllerTrackerViewEvent = {
   scheduledAt?: string | number;
   status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
   storedBy?: string;
-  trackedEntity?: string;
+  trackedEntity?: UIDWebapiControllerTrackerViewTrackedEntity;
   updatedAt?: string | number;
   updatedAtClient?: string | number;
   updatedBy?: WebapiControllerTrackerViewUser;
@@ -10560,7 +10837,7 @@ export type WebapiControllerTrackerViewEvent = {
 
 export type WebapiControllerTrackerViewNote = {
   createdBy?: WebapiControllerTrackerViewUser;
-  note?: string;
+  note?: UIDWebapiControllerTrackerViewNote;
   storedAt?: string | number;
   storedBy?: string;
   value?: string;
@@ -10569,16 +10846,16 @@ export type WebapiControllerTrackerViewNote = {
 export type WebapiControllerTrackerViewProgramOwner = {
   orgUnit?: string;
   program?: string;
-  trackedEntity?: string;
+  trackedEntity?: UIDWebapiControllerTrackerViewTrackedEntity;
 };
 
 export type WebapiControllerTrackerViewRelationship = {
-  bidirectional: boolean;
+  bidirectional?: boolean;
   createdAt?: string | number;
   from?: WebapiControllerTrackerViewRelationshipItem;
-  relationship?: string;
+  relationship?: UIDWebapiControllerTrackerViewRelationship;
   relationshipName?: string;
-  relationshipType?: string;
+  relationshipType?: UIDRelationshipType;
   to?: WebapiControllerTrackerViewRelationshipItem;
   updatedAt?: string | number;
 };
@@ -10586,7 +10863,7 @@ export type WebapiControllerTrackerViewRelationship = {
 export type WebapiControllerTrackerViewRelationshipItem = {
   enrollment?: WebapiControllerTrackerViewRelationshipItemEnrollment;
   event?: WebapiControllerTrackerViewRelationshipItemEvent;
-  trackedEntity?: TrackedEntity;
+  trackedEntity?: WebapiControllerTrackerViewRelationshipItemTrackedEntity;
 };
 
 export type WebapiControllerTrackerViewTrackedEntity = {
@@ -10594,16 +10871,16 @@ export type WebapiControllerTrackerViewTrackedEntity = {
   createdAt?: string | number;
   createdAtClient?: string | number;
   createdBy?: WebapiControllerTrackerViewUser;
-  deleted: boolean;
+  deleted?: boolean;
   enrollments?: WebapiControllerTrackerViewEnrollment[];
   geometry?: Record<string, any>;
-  inactive: boolean;
+  inactive?: boolean;
   orgUnit?: string;
-  potentialDuplicate: boolean;
+  potentialDuplicate?: boolean;
   programOwners?: WebapiControllerTrackerViewProgramOwner[];
   relationships?: WebapiControllerTrackerViewRelationship[];
   storedBy?: string;
-  trackedEntity?: string;
+  trackedEntity?: UIDWebapiControllerTrackerViewTrackedEntity;
   trackedEntityType?: string;
   updatedAt?: string | number;
   updatedAtClient?: string | number;
@@ -10614,7 +10891,7 @@ export type WebapiControllerTrackerViewUser = {
   displayName?: string;
   firstName?: string;
   surname?: string;
-  uid?: string;
+  uid?: UIDWebapiControllerTrackerViewUser;
   username?: string;
 };
 
@@ -10625,11 +10902,11 @@ export type WebapiControllerTrackerViewRelationshipItemEnrollment = {
   createdAt?: string | number;
   createdAtClient?: string | number;
   createdBy?: WebapiControllerTrackerViewUser;
-  deleted: boolean;
+  deleted?: boolean;
   enrolledAt?: string | number;
-  enrollment?: string;
+  enrollment?: UIDWebapiControllerTrackerViewRelationshipItemEnrollment;
   events?: WebapiControllerTrackerViewRelationshipItemEvent[];
-  followUp: boolean;
+  followUp?: boolean;
   geometry?: Record<string, any>;
   notes?: WebapiControllerTrackerViewNote[];
   occurredAt?: string | number;
@@ -10654,10 +10931,10 @@ export type WebapiControllerTrackerViewRelationshipItemEvent = {
   createdAtClient?: string | number;
   createdBy?: WebapiControllerTrackerViewUser;
   dataValues?: WebapiControllerTrackerViewDataValue[];
-  deleted: boolean;
+  deleted?: boolean;
   enrollment?: string;
-  event?: string;
-  followup: boolean;
+  event?: UIDWebapiControllerTrackerViewRelationshipItemEvent;
+  followup?: boolean;
   geometry?: Record<string, any>;
   notes?: WebapiControllerTrackerViewNote[];
   occurredAt?: string | number;
@@ -10668,6 +10945,26 @@ export type WebapiControllerTrackerViewRelationshipItemEvent = {
   scheduledAt?: string | number;
   status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
   storedBy?: string;
+  updatedAt?: string | number;
+  updatedAtClient?: string | number;
+  updatedBy?: WebapiControllerTrackerViewUser;
+};
+
+export type WebapiControllerTrackerViewRelationshipItemTrackedEntity = {
+  attributes?: WebapiControllerTrackerViewAttribute[];
+  createdAt?: string | number;
+  createdAtClient?: string | number;
+  createdBy?: WebapiControllerTrackerViewUser;
+  deleted?: boolean;
+  enrollments?: WebapiControllerTrackerViewRelationshipItemEnrollment[];
+  geometry?: Record<string, any>;
+  inactive?: boolean;
+  orgUnit?: string;
+  potentialDuplicate?: boolean;
+  programOwners?: WebapiControllerTrackerViewProgramOwner[];
+  storedBy?: string;
+  trackedEntity?: UIDWebapiControllerTrackerViewRelationshipItemTrackedEntity;
+  trackedEntityType?: string;
   updatedAt?: string | number;
   updatedAtClient?: string | number;
   updatedBy?: WebapiControllerTrackerViewUser;
@@ -11422,48 +11719,7 @@ export type PropertyNamesDataSetNotificationTemplate =
   | 'translations'
   | 'user';
 
-export type PropertyNamesDimensionalObject =
-  | 'access'
-  | 'aggregationType'
-  | 'allItems'
-  | 'analyticsType'
-  | 'attributeValues'
-  | 'code'
-  | 'created'
-  | 'createdBy'
-  | 'dataDimension'
-  | 'dataDimensionType'
-  | 'description'
-  | 'dimension'
-  | 'dimensionDisplayName'
-  | 'dimensionItemKeywords'
-  | 'dimensionName'
-  | 'dimensionType'
-  | 'displayDescription'
-  | 'displayName'
-  | 'displayShortName'
-  | 'eventRepetition'
-  | 'favorite'
-  | 'favorites'
-  | 'filter'
-  | 'fixed'
-  | 'groupUUID'
-  | 'href'
-  | 'id'
-  | 'items'
-  | 'key'
-  | 'lastUpdated'
-  | 'lastUpdatedBy'
-  | 'legendSet'
-  | 'name'
-  | 'optionSet'
-  | 'programStage'
-  | 'sharing'
-  | 'shortName'
-  | 'translations'
-  | 'uid'
-  | 'user'
-  | 'valueType';
+export type PropertyNamesDimensionalObject = 'id';
 
 export type PropertyNamesDocument =
   | 'access'
@@ -11485,6 +11741,29 @@ export type PropertyNamesDocument =
   | 'sharing'
   | 'translations'
   | 'url'
+  | 'user';
+
+export type PropertyNamesEventFilter =
+  | 'access'
+  | 'attributeValues'
+  | 'code'
+  | 'created'
+  | 'createdBy'
+  | 'description'
+  | 'displayDescription'
+  | 'displayName'
+  | 'eventQueryCriteria'
+  | 'favorite'
+  | 'favorites'
+  | 'href'
+  | 'id'
+  | 'lastUpdated'
+  | 'lastUpdatedBy'
+  | 'name'
+  | 'program'
+  | 'programStage'
+  | 'sharing'
+  | 'translations'
   | 'user';
 
 export type PropertyNamesEventHook =
@@ -11705,24 +11984,7 @@ export type PropertyNamesFileResource =
   | 'translations'
   | 'user';
 
-export type PropertyNamesIdentifiableObject =
-  | 'access'
-  | 'attributeValues'
-  | 'code'
-  | 'created'
-  | 'createdBy'
-  | 'displayName'
-  | 'favorite'
-  | 'favorites'
-  | 'href'
-  | 'id'
-  | 'lastUpdated'
-  | 'lastUpdatedBy'
-  | 'name'
-  | 'sharing'
-  | 'translations'
-  | 'uid'
-  | 'user';
+export type PropertyNamesIdentifiableObject = 'id';
 
 export type PropertyNamesIncomingSms =
   | 'access'
@@ -11901,6 +12163,7 @@ export type PropertyNamesJobConfiguration =
   | 'delay'
   | 'displayName'
   | 'enabled'
+  | 'executedBy'
   | 'favorite'
   | 'favorites'
   | 'href'
@@ -12127,28 +12390,6 @@ export type PropertyNamesMetadataProposal =
   | 'target'
   | 'targetId'
   | 'type';
-
-export type PropertyNamesOAuth2Client =
-  | 'access'
-  | 'attributeValues'
-  | 'cid'
-  | 'code'
-  | 'created'
-  | 'createdBy'
-  | 'displayName'
-  | 'favorite'
-  | 'favorites'
-  | 'grantTypes'
-  | 'href'
-  | 'id'
-  | 'lastUpdated'
-  | 'lastUpdatedBy'
-  | 'name'
-  | 'redirectUris'
-  | 'secret'
-  | 'sharing'
-  | 'translations'
-  | 'user';
 
 export type PropertyNamesOption =
   | 'access'
@@ -12623,6 +12864,7 @@ export type PropertyNamesProgramMessage =
   | 'createdBy'
   | 'deliveryChannels'
   | 'displayName'
+  | 'enrollment'
   | 'event'
   | 'favorite'
   | 'favorites'
@@ -12634,7 +12876,6 @@ export type PropertyNamesProgramMessage =
   | 'name'
   | 'notificationTemplate'
   | 'processedDate'
-  | 'programInstance'
   | 'recipients'
   | 'sharing'
   | 'storeCopy'
@@ -12841,29 +13082,6 @@ export type PropertyNamesProgramStage =
   | 'translations'
   | 'user'
   | 'validationStrategy';
-
-export type PropertyNamesProgramStageInstanceFilter =
-  | 'access'
-  | 'attributeValues'
-  | 'code'
-  | 'created'
-  | 'createdBy'
-  | 'description'
-  | 'displayDescription'
-  | 'displayName'
-  | 'eventQueryCriteria'
-  | 'favorite'
-  | 'favorites'
-  | 'href'
-  | 'id'
-  | 'lastUpdated'
-  | 'lastUpdatedBy'
-  | 'name'
-  | 'program'
-  | 'programStage'
-  | 'sharing'
-  | 'translations'
-  | 'user';
 
 export type PropertyNamesProgramStageSection =
   | 'access'
@@ -13147,7 +13365,7 @@ export type PropertyNamesTrackedEntityAttribute =
   | 'user'
   | 'valueType';
 
-export type PropertyNamesTrackedEntityInstanceFilter =
+export type PropertyNamesTrackedEntityFilter =
   | 'access'
   | 'attributeValues'
   | 'code'
@@ -13515,21 +13733,6 @@ export type PropertyNamesVisualization =
   | 'yearlySeries';
 
 /**
- * A UID reference to a AnalyticsPeriodBoundary
- * (Java name `org.hisp.dhis.program.AnalyticsPeriodBoundary`)
- */
-export type RefAnalyticsPeriodBoundary = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example qmmKaikrUy6
-   */
-  id: string;
-};
-
-/**
  * A UID reference to a Attribute
  * (Java name `org.hisp.dhis.attribute.Attribute`)
  */
@@ -13665,21 +13868,6 @@ export type RefDashboard = {
 };
 
 /**
- * A UID reference to a DashboardItem
- * (Java name `org.hisp.dhis.dashboard.DashboardItem`)
- */
-export type RefDashboardItem = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example jZuwD32wvhb
-   */
-  id: string;
-};
-
-/**
  * A UID reference to a DataApprovalLevel
  * (Java name `org.hisp.dhis.dataapproval.DataApprovalLevel`)
  */
@@ -13750,21 +13938,6 @@ export type RefDataElementGroupSet = {
    * @minLength 11
    * @maxLength 11
    * @example p5Bvg6cxCYh
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a DataElementOperand
- * (Java name `org.hisp.dhis.dataelement.DataElementOperand`)
- */
-export type RefDataElementOperand = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example o4Auf5bwBXg
    */
   id: string;
 };
@@ -14040,21 +14213,6 @@ export type RefInterpretationComment = {
 };
 
 /**
- * A UID reference to a Legend
- * (Java name `org.hisp.dhis.legend.Legend`)
- */
-export type RefLegend = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example kWbmILAcrCY
-   */
-  id: string;
-};
-
-/**
  * A UID reference to a LegendSet
  * (Java name `org.hisp.dhis.legend.LegendSet`)
  */
@@ -14080,21 +14238,6 @@ export type RefMap = {
    * @minLength 11
    * @maxLength 11
    * @example iPhVsUy5xbI
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a MapView
- * (Java name `org.hisp.dhis.mapping.MapView`)
- */
-export type RefMapView = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example mTl8ENiPmOB
    */
   id: string;
 };
@@ -14280,16 +14423,16 @@ export type RefProgram = {
 };
 
 /**
- * A UID reference to a ProgramDataElementDimensionItem
- * (Java name `org.hisp.dhis.program.ProgramDataElementDimensionItem`)
+ * A UID reference to a Program-Enrollment
+ * (Java name `org.hisp.dhis.program.Enrollment`)
  */
-export type RefProgramDataElementDimensionItem = {
+export type RefProgramEnrollment = {
   /**
    * @format uid
    * @pattern ^[0-9a-zA-Z]{11}$
    * @minLength 11
    * @maxLength 11
-   * @example NyINb7w4Kga
+   * @example h9qAKXbgCVn
    */
   id: string;
 };
@@ -14320,21 +14463,6 @@ export type RefProgramIndicatorGroup = {
    * @minLength 11
    * @maxLength 11
    * @example DoyD1XmZNQ8
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ProgramInstance
- * (Java name `org.hisp.dhis.program.ProgramInstance`)
- */
-export type RefProgramInstance = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example xisxVRgTHZd
    */
   id: string;
 };
@@ -14430,21 +14558,6 @@ export type RefProgramStage = {
 };
 
 /**
- * A UID reference to a ProgramStageDataElement
- * (Java name `org.hisp.dhis.program.ProgramStageDataElement`)
- */
-export type RefProgramStageDataElement = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example FqAF3ZobVP8
-   */
-  id: string;
-};
-
-/**
  * A UID reference to a ProgramStageSection
  * (Java name `org.hisp.dhis.program.ProgramStageSection`)
  */
@@ -14455,36 +14568,6 @@ export type RefProgramStageSection = {
    * @minLength 11
    * @maxLength 11
    * @example BmwBZVk7RL4
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ProgramTrackedEntityAttribute
- * (Java name `org.hisp.dhis.program.ProgramTrackedEntityAttribute`)
- */
-export type RefProgramTrackedEntityAttribute = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example LwGL95uiZVa
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ProgramTrackedEntityAttributeDimensionItem
- * (Java name `org.hisp.dhis.program.ProgramTrackedEntityAttributeDimensionItem`)
- */
-export type RefProgramTrackedEntityAttributeDimensionItem = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example YJTYmiHvc8n
    */
   id: string;
 };
@@ -14515,21 +14598,6 @@ export type RefReport = {
    * @minLength 11
    * @maxLength 11
    * @example qWkwM1GcAM2
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ReportingRate
- * (Java name `org.hisp.dhis.common.ReportingRate`)
- */
-export type RefReportingRate = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example x3rDT8asyqS
    */
   id: string;
 };
@@ -14580,6 +14648,36 @@ export type RefSimpleVisualizationView = {
 };
 
 /**
+ * A UID reference to a SubexpressionDimensionItem
+ * (Java name `org.hisp.dhis.subexpression.SubexpressionDimensionItem`)
+ */
+export type RefSubexpressionDimensionItem = {
+  /**
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example LwqGchwwXad
+   */
+  id: string;
+};
+
+/**
+ * A UID reference to a TrackedEntity
+ * (Java name `org.hisp.dhis.trackedentity.TrackedEntity`)
+ */
+export type RefTrackedEntity = {
+  /**
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example zgcrMT5NFY0
+   */
+  id: string;
+};
+
+/**
  * A UID reference to a TrackedEntityAttribute
  * (Java name `org.hisp.dhis.trackedentity.TrackedEntityAttribute`)
  */
@@ -14610,21 +14708,6 @@ export type RefTrackedEntityComment = {
 };
 
 /**
- * A UID reference to a TrackedEntityInstance
- * (Java name `org.hisp.dhis.trackedentity.TrackedEntityInstance`)
- */
-export type RefTrackedEntityInstance = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example HokzU1dVN68
-   */
-  id: string;
-};
-
-/**
  * A UID reference to a TrackedEntityType
  * (Java name `org.hisp.dhis.trackedentity.TrackedEntityType`)
  */
@@ -14635,21 +14718,6 @@ export type RefTrackedEntityType = {
    * @minLength 11
    * @maxLength 11
    * @example DkgvQX9RJ24
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a TrackedEntityTypeAttribute
- * (Java name `org.hisp.dhis.trackedentity.TrackedEntityTypeAttribute`)
- */
-export type RefTrackedEntityTypeAttribute = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example MtpEZ6i0Sbd
    */
   id: string;
 };
@@ -15036,6 +15104,18 @@ export type UIDDimensionalObject = string;
 export type UIDDocument = string;
 
 /**
+ * A UID for an EventFilter object
+ * (Java name `org.hisp.dhis.programstagefilter.EventFilter`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example iieATm8oJH7
+ */
+export type UIDEventFilter = string;
+
+/**
  * A UID for an EventHook object
  * (Java name `org.hisp.dhis.eventhook.EventHook`)
  *
@@ -15262,18 +15342,6 @@ export type UIDMessageConversation = string;
  * @example v6ysISoieZ9
  */
 export type UIDMetadataProposal = string;
-
-/**
- * A UID for an OAuth2Client object
- * (Java name `org.hisp.dhis.security.oauth2.OAuth2Client`)
- *
- * @format uid
- * @pattern ^[0-9a-zA-Z]{11}$
- * @minLength 11
- * @maxLength 11
- * @example tsvHI3xpzI4
- */
-export type UIDOAuth2Client = string;
 
 /**
  * A UID for an Option object
@@ -15533,18 +15601,6 @@ export type UIDProgramSection = string;
 export type UIDProgramStage = string;
 
 /**
- * A UID for an ProgramStageInstanceFilter object
- * (Java name `org.hisp.dhis.programstagefilter.ProgramStageInstanceFilter`)
- *
- * @format uid
- * @pattern ^[0-9a-zA-Z]{11}$
- * @minLength 11
- * @maxLength 11
- * @example ItDI62reYSb
- */
-export type UIDProgramStageInstanceFilter = string;
-
-/**
  * A UID for an ProgramStageSection object
  * (Java name `org.hisp.dhis.program.ProgramStageSection`)
  *
@@ -15665,16 +15721,16 @@ export type UIDSqlView = string;
 export type UIDTrackedEntityAttribute = string;
 
 /**
- * A UID for an TrackedEntityInstanceFilter object
- * (Java name `org.hisp.dhis.trackedentityfilter.TrackedEntityInstanceFilter`)
+ * A UID for an TrackedEntityFilter object
+ * (Java name `org.hisp.dhis.trackedentityfilter.TrackedEntityFilter`)
  *
  * @format uid
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example NuqF07j1Tce
+ * @example FmixSZbTL46
  */
-export type UIDTrackedEntityInstanceFilter = string;
+export type UIDTrackedEntityFilter = string;
 
 /**
  * A UID for an TrackedEntityType object
@@ -15771,3 +15827,123 @@ export type UIDValidationRuleGroup = string;
  * @example B7uJC0aEsY0
  */
 export type UIDVisualization = string;
+
+/**
+ * A UID for an WebapiControllerTrackerView-Attribute object
+ * (Java name `org.hisp.dhis.webapi.controller.tracker.view.Attribute`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example cerCGMius57
+ */
+export type UIDWebapiControllerTrackerViewAttribute = string;
+
+/**
+ * A UID for an WebapiControllerTrackerView-Enrollment object
+ * (Java name `org.hisp.dhis.webapi.controller.tracker.view.Enrollment`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example h9qAKXbgCVn
+ */
+export type UIDWebapiControllerTrackerViewEnrollment = string;
+
+/**
+ * A UID for an WebapiControllerTrackerView-Event object
+ * (Java name `org.hisp.dhis.webapi.controller.tracker.view.Event`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example cc8uNffbxQi
+ */
+export type UIDWebapiControllerTrackerViewEvent = string;
+
+/**
+ * A UID for an WebapiControllerTrackerView-Note object
+ * (Java name `org.hisp.dhis.webapi.controller.tracker.view.Note`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example k4mkaUca0K2
+ */
+export type UIDWebapiControllerTrackerViewNote = string;
+
+/**
+ * A UID for an WebapiControllerTrackerView-Relationship object
+ * (Java name `org.hisp.dhis.webapi.controller.tracker.view.Relationship`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example w2moUWfrJLZ
+ */
+export type UIDWebapiControllerTrackerViewRelationship = string;
+
+/**
+ * A UID for an WebapiControllerTrackerView-TrackedEntity object
+ * (Java name `org.hisp.dhis.webapi.controller.tracker.view.TrackedEntity`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example zgcrMT5NFY0
+ */
+export type UIDWebapiControllerTrackerViewTrackedEntity = string;
+
+/**
+ * A UID for an WebapiControllerTrackerView-User object
+ * (Java name `org.hisp.dhis.webapi.controller.tracker.view.User`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example r87xhYXn7ON
+ */
+export type UIDWebapiControllerTrackerViewUser = string;
+
+/**
+ * A UID for an WebapiControllerTrackerViewRelationshipItem-Enrollment object
+ * (Java name `org.hisp.dhis.webapi.controller.tracker.view.RelationshipItem$Enrollment`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example h9qAKXbgCVn
+ */
+export type UIDWebapiControllerTrackerViewRelationshipItemEnrollment = string;
+
+/**
+ * A UID for an WebapiControllerTrackerViewRelationshipItem-Event object
+ * (Java name `org.hisp.dhis.webapi.controller.tracker.view.RelationshipItem$Event`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example cc8uNffbxQi
+ */
+export type UIDWebapiControllerTrackerViewRelationshipItemEvent = string;
+
+/**
+ * A UID for an WebapiControllerTrackerViewRelationshipItem-TrackedEntity object
+ * (Java name `org.hisp.dhis.webapi.controller.tracker.view.RelationshipItem$TrackedEntity`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example zgcrMT5NFY0
+ */
+export type UIDWebapiControllerTrackerViewRelationshipItemTrackedEntity = string;
