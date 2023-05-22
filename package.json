@@ -13,19 +13,19 @@
     "@openapi-codegen/typescript": "^6.2.4",
     "@rollup/plugin-typescript": "^11.1.1",
     "@types/isomorphic-fetch": "^0.0.36",
-    "@types/node": "^20.1.4",
+    "@types/node": "^20.2.3",
     "builtin-modules": "^3.3.0",
     "isomorphic-fetch": "^3.0.0",
-    "rimraf": "^5.0.0",
-    "rollup": "^3.21.7",
+    "rimraf": "^5.0.1",
+    "rollup": "^3.22.1",
     "rollup-plugin-dts": "^5.3.0",
     "rollup-plugin-dts-bundle": "^1.0.0",
     "rollup-plugin-virtual-fs": "^4.0.1-alpha.0",
     "ts-morph": "^18.0.0",
     "ts-node": "^10.9.1",
-    "tslib": "^2.5.0",
-    "turbo": "^1.9.4",
+    "tslib": "^2.5.2",
+    "turbo": "^1.9.8",
     "typescript": "^5.0.4",
-    "vitest": "^0.31.0"
+    "vitest": "^0.31.1"
   }
 }
