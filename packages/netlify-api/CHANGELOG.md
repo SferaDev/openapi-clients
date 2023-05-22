@@ -1,5 +1,11 @@
 # netlify-api
 
+## 0.1.6
+
+### Patch Changes
+
+- 5da1e9e: [OpenAPI] Add context branch parameter
+
 ## 0.1.5
 
 ### Patch Changes
