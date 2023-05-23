@@ -1277,6 +1277,7 @@ export type UpdateProjectDataCacheResponse = {
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
     monitoringChart?: Schemas.ACLAction[];
+    monitoringAlert?: Schemas.ACLAction[];
     notificationDomainConfiguration?: Schemas.ACLAction[];
     notificationDomainExpire?: Schemas.ACLAction[];
     notificationDomainMoved?: Schemas.ACLAction[];
@@ -8408,6 +8409,7 @@ export type GetProjectsResponse = {
       Monitoring?: Schemas.ACLAction[];
       monitoringQuery?: Schemas.ACLAction[];
       monitoringChart?: Schemas.ACLAction[];
+      monitoringAlert?: Schemas.ACLAction[];
       notificationDomainConfiguration?: Schemas.ACLAction[];
       notificationDomainExpire?: Schemas.ACLAction[];
       notificationDomainMoved?: Schemas.ACLAction[];
@@ -8952,6 +8954,7 @@ export type CreateProjectResponse = {
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
     monitoringChart?: Schemas.ACLAction[];
+    monitoringAlert?: Schemas.ACLAction[];
     notificationDomainConfiguration?: Schemas.ACLAction[];
     notificationDomainExpire?: Schemas.ACLAction[];
     notificationDomainMoved?: Schemas.ACLAction[];
@@ -9651,6 +9654,7 @@ export type GetProjectResponse = {
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
     monitoringChart?: Schemas.ACLAction[];
+    monitoringAlert?: Schemas.ACLAction[];
     notificationDomainConfiguration?: Schemas.ACLAction[];
     notificationDomainExpire?: Schemas.ACLAction[];
     notificationDomainMoved?: Schemas.ACLAction[];
@@ -10203,6 +10207,7 @@ export type UpdateProjectResponse = {
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
     monitoringChart?: Schemas.ACLAction[];
+    monitoringAlert?: Schemas.ACLAction[];
     notificationDomainConfiguration?: Schemas.ACLAction[];
     notificationDomainExpire?: Schemas.ACLAction[];
     notificationDomainMoved?: Schemas.ACLAction[];
