@@ -986,6 +986,16 @@ export type AuthUser = {
     excessBillingEnabled?: boolean;
   };
   /**
+   * Feature blocks for the user
+   */
+  featureBlocks?: {
+    webAnalytics?: {
+      blockedFrom?: number;
+      blockedUntil?: number;
+      isCurrentlyBlocked: boolean;
+    };
+  };
+  /**
    * The User's unique identifier.
    *
    * @example AEIIDYVk59zbFF2Sxfyxxmua
