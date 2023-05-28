@@ -874,7 +874,7 @@ export type UpdateProjectDataCacheResponse = {
   connectBuildsEnabled?: boolean;
   createdAt?: number;
   dataCache?: {
-    userEnabled: boolean;
+    userDisabled: boolean;
     enableAt: number | null;
   };
   crons?: {
@@ -1319,8 +1319,8 @@ export type UpdateProjectDataCacheResponse = {
     spendCapState?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
-    DataCacheNamespace?: Schemas.ACLAction[];
-    DataCacheBillingSettings?: Schemas.ACLAction[];
+    dataCacheNamespace?: Schemas.ACLAction[];
+    dataCacheBillingSettings?: Schemas.ACLAction[];
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
     teamFellowMembership?: Schemas.ACLAction[];
@@ -1343,12 +1343,7 @@ export type UpdateProjectDataCacheResponse = {
     endpointVerification?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
   };
-  lastRollbackTarget?: {
-    fromDeploymentId: string;
-    toDeploymentId: string;
-    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
-    requestedAt: number;
-  } | null;
+  lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
@@ -1377,11 +1372,11 @@ export type UpdateProjectDataCacheResponse = {
 
 export type UpdateProjectDataCacheRequestBody = {
   /**
-   * Enable or disable data cache for the project
+   * Enable or disable data cache for the project - default: false
    *
    * @example true
    */
-  enabled?: boolean;
+  disabled?: boolean;
 };
 
 export type UpdateProjectDataCacheVariables = {
@@ -8451,8 +8446,8 @@ export type GetProjectsResponse = {
       spendCapState?: Schemas.ACLAction[];
       supportCase?: Schemas.ACLAction[];
       supportCaseComment?: Schemas.ACLAction[];
-      DataCacheNamespace?: Schemas.ACLAction[];
-      DataCacheBillingSettings?: Schemas.ACLAction[];
+      dataCacheNamespace?: Schemas.ACLAction[];
+      dataCacheBillingSettings?: Schemas.ACLAction[];
       team?: Schemas.ACLAction[];
       teamAccessRequest?: Schemas.ACLAction[];
       teamFellowMembership?: Schemas.ACLAction[];
@@ -8475,12 +8470,7 @@ export type GetProjectsResponse = {
       endpointVerification?: Schemas.ACLAction[];
       aliasProtectionBypass?: Schemas.ACLAction[];
     };
-    lastRollbackTarget?: {
-      fromDeploymentId: string;
-      toDeploymentId: string;
-      jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
-      requestedAt: number;
-    } | null;
+    lastRollbackTarget?: Record<string, any> | null;
     lastAliasRequest?: {
       fromDeploymentId: string;
       toDeploymentId: string;
@@ -8996,8 +8986,8 @@ export type CreateProjectResponse = {
     spendCapState?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
-    DataCacheNamespace?: Schemas.ACLAction[];
-    DataCacheBillingSettings?: Schemas.ACLAction[];
+    dataCacheNamespace?: Schemas.ACLAction[];
+    dataCacheBillingSettings?: Schemas.ACLAction[];
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
     teamFellowMembership?: Schemas.ACLAction[];
@@ -9020,12 +9010,7 @@ export type CreateProjectResponse = {
     endpointVerification?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
   };
-  lastRollbackTarget?: {
-    fromDeploymentId: string;
-    toDeploymentId: string;
-    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
-    requestedAt: number;
-  } | null;
+  lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
@@ -9696,8 +9681,8 @@ export type GetProjectResponse = {
     spendCapState?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
-    DataCacheNamespace?: Schemas.ACLAction[];
-    DataCacheBillingSettings?: Schemas.ACLAction[];
+    dataCacheNamespace?: Schemas.ACLAction[];
+    dataCacheBillingSettings?: Schemas.ACLAction[];
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
     teamFellowMembership?: Schemas.ACLAction[];
@@ -9720,12 +9705,7 @@ export type GetProjectResponse = {
     endpointVerification?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
   };
-  lastRollbackTarget?: {
-    fromDeploymentId: string;
-    toDeploymentId: string;
-    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
-    requestedAt: number;
-  } | null;
+  lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
@@ -10249,8 +10229,8 @@ export type UpdateProjectResponse = {
     spendCapState?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
-    DataCacheNamespace?: Schemas.ACLAction[];
-    DataCacheBillingSettings?: Schemas.ACLAction[];
+    dataCacheNamespace?: Schemas.ACLAction[];
+    dataCacheBillingSettings?: Schemas.ACLAction[];
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
     teamFellowMembership?: Schemas.ACLAction[];
@@ -10273,12 +10253,7 @@ export type UpdateProjectResponse = {
     endpointVerification?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
   };
-  lastRollbackTarget?: {
-    fromDeploymentId: string;
-    toDeploymentId: string;
-    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
-    requestedAt: number;
-  } | null;
+  lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
