@@ -5,7 +5,7 @@ export default defineConfig({
   dhis2: {
     from: {
       source: 'url',
-      url: 'https://admin:district@play.dhis2.org/dev/api/openapi.json'
+      url: 'https://admin:district@play.dhis2.org/40.0.0/api/openapi.json'
     },
     outputDir: 'src/api/v40',
     to: async (context) => {
