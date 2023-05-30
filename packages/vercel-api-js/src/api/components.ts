@@ -8001,7 +8001,7 @@ export type GetProjectsResponse = {
     connectBuildsEnabled?: boolean;
     createdAt?: number;
     dataCache?: {
-      userEnabled: boolean;
+      userDisabled: boolean;
       enableAt: number | null;
     };
     crons?: {
@@ -8541,7 +8541,7 @@ export type CreateProjectResponse = {
   connectBuildsEnabled?: boolean;
   createdAt?: number;
   dataCache?: {
-    userEnabled: boolean;
+    userDisabled: boolean;
     enableAt: number | null;
   };
   crons?: {
@@ -9236,7 +9236,7 @@ export type GetProjectResponse = {
   connectBuildsEnabled?: boolean;
   createdAt?: number;
   dataCache?: {
-    userEnabled: boolean;
+    userDisabled: boolean;
     enableAt: number | null;
   };
   crons?: {
@@ -9784,7 +9784,7 @@ export type UpdateProjectResponse = {
   connectBuildsEnabled?: boolean;
   createdAt?: number;
   dataCache?: {
-    userEnabled: boolean;
+    userDisabled: boolean;
     enableAt: number | null;
   };
   crons?: {
