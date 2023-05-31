@@ -8487,14 +8487,19 @@ export type GetProjectsResponse = {
       };
     };
     hasActiveBranches?: boolean;
-    trustedIps?: {
-      deploymentType: 'preview' | 'all';
-      addresses: {
-        value: string;
-        note?: string;
-      }[];
-      protectionMode: 'additional' | 'exclusive';
-    } | null;
+    trustedIps?:
+      | {
+          deploymentType: 'preview' | 'all';
+          addresses: {
+            value: string;
+            note?: string;
+          }[];
+          protectionMode: 'additional' | 'exclusive';
+        }
+      | {
+          deploymentType: 'preview' | 'all';
+        }
+      | null;
   }[];
   pagination: Schemas.Pagination;
 };
@@ -9027,14 +9032,19 @@ export type CreateProjectResponse = {
     };
   };
   hasActiveBranches?: boolean;
-  trustedIps?: {
-    deploymentType: 'preview' | 'all';
-    addresses: {
-      value: string;
-      note?: string;
-    }[];
-    protectionMode: 'additional' | 'exclusive';
-  } | null;
+  trustedIps?:
+    | {
+        deploymentType: 'preview' | 'all';
+        addresses: {
+          value: string;
+          note?: string;
+        }[];
+        protectionMode: 'additional' | 'exclusive';
+      }
+    | {
+        deploymentType: 'preview' | 'all';
+      }
+    | null;
 };
 
 export type CreateProjectRequestBody = {
@@ -9722,14 +9732,19 @@ export type GetProjectResponse = {
     };
   };
   hasActiveBranches?: boolean;
-  trustedIps?: {
-    deploymentType: 'preview' | 'all';
-    addresses: {
-      value: string;
-      note?: string;
-    }[];
-    protectionMode: 'additional' | 'exclusive';
-  } | null;
+  trustedIps?:
+    | {
+        deploymentType: 'preview' | 'all';
+        addresses: {
+          value: string;
+          note?: string;
+        }[];
+        protectionMode: 'additional' | 'exclusive';
+      }
+    | {
+        deploymentType: 'preview' | 'all';
+      }
+    | null;
 };
 
 export type GetProjectVariables = {
@@ -10270,14 +10285,19 @@ export type UpdateProjectResponse = {
     };
   };
   hasActiveBranches?: boolean;
-  trustedIps?: {
-    deploymentType: 'all' | 'preview';
-    addresses: {
-      value: string;
-      note?: string;
-    }[];
-    protectionMode: 'exclusive' | 'additional';
-  } | null;
+  trustedIps?:
+    | {
+        deploymentType: 'all' | 'preview';
+        addresses: {
+          value: string;
+          note?: string;
+        }[];
+        protectionMode: 'exclusive' | 'additional';
+      }
+    | {
+        deploymentType: 'all' | 'preview';
+      }
+    | null;
 };
 
 export type UpdateProjectRequestBody = {
