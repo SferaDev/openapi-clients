@@ -1360,14 +1360,19 @@ export type UpdateProjectDataCacheResponse = {
     };
   };
   hasActiveBranches?: boolean;
-  trustedIps?: {
-    deploymentType: 'preview' | 'all';
-    addresses: {
-      value: string;
-      note?: string;
-    }[];
-    protectionMode: 'additional' | 'exclusive';
-  } | null;
+  trustedIps?:
+    | {
+        deploymentType: 'preview' | 'all';
+        addresses: {
+          value: string;
+          note?: string;
+        }[];
+        protectionMode: 'additional' | 'exclusive';
+      }
+    | {
+        deploymentType: 'preview' | 'all';
+      }
+    | null;
 };
 
 export type UpdateProjectDataCacheRequestBody = {
