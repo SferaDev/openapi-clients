@@ -12170,7 +12170,7 @@ export type GetTeamMembersResponse = {
     | {
         avatar?: string;
         confirmed: boolean;
-        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING';
+        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'PROJECT_CONTRIBUTOR';
         uid: string;
         username: string;
         name?: string;
@@ -12262,7 +12262,7 @@ export type GetTeamMembersResponse = {
          *
          * @example OWNER
          */
-        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING';
+        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'PROJECT_CONTRIBUTOR';
         /**
          * The ID of this user.
          *
@@ -12325,7 +12325,7 @@ export type GetTeamMembersResponse = {
   emailInviteCodes?: {
     id: string;
     email?: string;
-    role?: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING';
+    role?: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'PROJECT_CONTRIBUTOR';
     isDSyncUser: boolean;
     createdAt?: number;
   }[];
@@ -12383,7 +12383,15 @@ export type InviteUserToTeamRequestBody = {
    * @example john@example.com
    */
   email?: string;
-  role?: void;
+  /**
+   * The role of the user to invite
+   *
+   * @default MEMBER
+   * @default VIEWER
+   * @example MEMBER
+   * @example VIEWER
+   */
+  role?: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'PROJECT_CONTRIBUTOR';
 };
 
 export type InviteUserToTeamVariables = {
@@ -12419,12 +12427,12 @@ export const inviteUserToTeam = (variables: InviteUserToTeamVariables, signal?: 
          *
          * @example MEMBER
          */
-        role: string;
+        role: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'PROJECT_CONTRIBUTOR';
       }
     | {
         uid: string;
         username: string;
-        role: string;
+        role: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'PROJECT_CONTRIBUTOR';
       },
     InviteUserToTeamError,
     InviteUserToTeamRequestBody,
@@ -12858,7 +12866,7 @@ export type PatchTeamRequestBody = {
      */
     enforced?: boolean;
     roles?: {
-      [key: string]: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING';
+      [key: string]: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'PROJECT_CONTRIBUTOR';
     };
   };
   /**
