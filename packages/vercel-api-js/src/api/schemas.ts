@@ -268,7 +268,7 @@ export type TeamLimited = {
         confirmed: boolean;
         confirmedAt: number;
         accessRequestedAt?: number;
-        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING';
+        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'PROJECT_CONTRIBUTOR';
         teamId?: string;
         uid: string;
         createdAt: number;
@@ -302,7 +302,7 @@ export type TeamLimited = {
         confirmed: boolean;
         confirmedAt?: number;
         accessRequestedAt: number;
-        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING';
+        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'PROJECT_CONTRIBUTOR';
         teamId?: string;
         uid: string;
         createdAt: number;
