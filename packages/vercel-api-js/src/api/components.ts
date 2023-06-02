@@ -10466,7 +10466,7 @@ export type UpdateProjectRequestBody = {
      */
     addresses: {
       /**
-       * The IP addresses that are allowlisted. Supported formats are IPv4, IPv6 and CIDR.
+       * The IP addresses that are allowlisted. Supported formats are IPv4 and CIDR.
        */
       value: string;
       /**
