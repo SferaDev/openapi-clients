@@ -12166,162 +12166,107 @@ export type GetTeamMembersQueryParams = {
 export type GetTeamMembersError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetTeamMembersResponse = {
-  members: (
-    | {
-        avatar?: string;
-        confirmed: boolean;
-        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'PROJECT_CONTRIBUTOR';
-        uid: string;
-        username: string;
-        name?: string;
-        createdAt: number;
-        accessRequestedAt: number;
-        joinedFrom?: {
-          origin:
-            | 'link'
-            | 'import'
-            | 'github'
-            | 'gitlab'
-            | 'bitbucket'
-            | 'mail'
-            | 'teams'
-            | 'saml'
-            | 'dsync'
-            | 'feedback'
-            | 'organization-teams';
-          commitId?: string;
-          repoId?: string;
-          repoPath?: string;
-          gitUserId?: string | number;
-          gitUserLogin?: string;
-          ssoUserId?: string;
-          ssoConnectedAt?: number;
-          idpUserId?: string;
-          dsyncUserId?: string;
-          dsyncConnectedAt?: number;
-        };
-        email: string;
-        /**
-         * Information about the GitHub account for this user.
-         */
-        github?: {
-          login?: string;
-        };
-        /**
-         * Information about the GitLab account of this user.
-         */
-        gitlab?: {
-          login?: string;
-        };
-        /**
-         * Information about the Bitbucket account of this user.
-         */
-        bitbucket?: {
-          login?: string;
-        };
-      }
-    | {
-        /**
-         * ID of the file for the Avatar of this member.
-         *
-         * @example 123a6c5209bc3778245d011443644c8d27dc2c50
-         */
-        avatar?: string;
-        /**
-         * Boolean that indicates if this member was confirmed by an owner.
-         *
-         * @example true
-         */
-        confirmed: boolean;
-        /**
-         * The email of this member.
-         *
-         * @example jane.doe@example.com
-         */
-        email: string;
-        /**
-         * Information about the GitHub account for this user.
-         */
-        github?: {
-          login?: string;
-        };
-        /**
-         * Information about the GitLab account of this user.
-         */
-        gitlab?: {
-          login?: string;
-        };
-        /**
-         * Information about the Bitbucket account of this user.
-         */
-        bitbucket?: {
-          login?: string;
-        };
-        /**
-         * Role of this user in the team.
-         *
-         * @example OWNER
-         */
-        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'PROJECT_CONTRIBUTOR';
-        /**
-         * The ID of this user.
-         *
-         * @example zTuNVUXEAvvnNN3IaqinkyMw
-         */
-        uid: string;
-        /**
-         * The unique username of this user.
-         *
-         * @example jane-doe
-         */
-        username: string;
-        /**
-         * The name of this user.
-         *
-         * @example Jane Doe
-         */
-        name?: string;
-        /**
-         * Timestamp in milliseconds when this member was added.
-         *
-         * @example 1588720733602
-         */
-        createdAt: number;
-        /**
-         * Timestamp in milliseconds for when this team member was accepted by an owner.
-         *
-         * @example 1588820733602
-         */
-        accessRequestedAt?: number;
-        /**
-         * Map with information about the members origin if they joined by requesting access.
-         */
-        joinedFrom?: {
-          origin:
-            | 'link'
-            | 'import'
-            | 'github'
-            | 'gitlab'
-            | 'bitbucket'
-            | 'mail'
-            | 'teams'
-            | 'saml'
-            | 'dsync'
-            | 'feedback'
-            | 'organization-teams';
-          commitId?: string;
-          repoId?: string;
-          repoPath?: string;
-          gitUserId?: string | number;
-          gitUserLogin?: string;
-          ssoUserId?: string;
-          ssoConnectedAt?: number;
-          idpUserId?: string;
-          dsyncUserId?: string;
-          dsyncConnectedAt?: number;
-        };
-      }
-  )[];
+  members: {
+    /**
+     * ID of the file for the Avatar of this member.
+     *
+     * @example 123a6c5209bc3778245d011443644c8d27dc2c50
+     */
+    avatar?: string;
+    /**
+     * Boolean that indicates if this member was confirmed by an owner.
+     *
+     * @example true
+     */
+    confirmed: boolean;
+    /**
+     * The email of this member.
+     *
+     * @example jane.doe@example.com
+     */
+    email: string;
+    /**
+     * Information about the GitHub account for this user.
+     */
+    github?: {
+      login?: string;
+    };
+    /**
+     * Information about the GitLab account of this user.
+     */
+    gitlab?: {
+      login?: string;
+    };
+    /**
+     * Information about the Bitbucket account of this user.
+     */
+    bitbucket?: {
+      login?: string;
+    };
+    /**
+     * Role of this user in the team.
+     *
+     * @example OWNER
+     */
+    role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'PROJECT_CONTRIBUTOR';
+    /**
+     * The ID of this user.
+     *
+     * @example zTuNVUXEAvvnNN3IaqinkyMw
+     */
+    uid: string;
+    /**
+     * The unique username of this user.
+     *
+     * @example jane-doe
+     */
+    username: string;
+    /**
+     * The name of this user.
+     *
+     * @example Jane Doe
+     */
+    name?: string;
+    /**
+     * Timestamp in milliseconds when this member was added.
+     *
+     * @example 1588720733602
+     */
+    createdAt: number;
+    /**
+     * Timestamp in milliseconds for when this team member was accepted by an owner.
+     *
+     * @example 1588820733602
+     */
+    accessRequestedAt?: number;
+    /**
+     * Map with information about the members origin if they joined by requesting access.
+     */
+    joinedFrom?: {
+      origin:
+        | 'link'
+        | 'import'
+        | 'mail'
+        | 'teams'
+        | 'github'
+        | 'gitlab'
+        | 'bitbucket'
+        | 'saml'
+        | 'dsync'
+        | 'feedback'
+        | 'organization-teams';
+      commitId?: string;
+      repoId?: string;
+      repoPath?: string;
+      gitUserId?: string | number;
+      gitUserLogin?: string;
+      ssoUserId?: string;
+      ssoConnectedAt?: number;
+      idpUserId?: string;
+      dsyncUserId?: string;
+      dsyncConnectedAt?: number;
+    };
+  }[];
   emailInviteCodes?: {
     id: string;
     email?: string;
