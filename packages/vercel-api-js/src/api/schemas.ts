@@ -276,9 +276,9 @@ export type TeamLimited = {
         joinedFrom?: {
           origin:
             | 'link'
-            | 'import'
             | 'saml'
             | 'mail'
+            | 'import'
             | 'teams'
             | 'github'
             | 'gitlab'
@@ -310,9 +310,9 @@ export type TeamLimited = {
         joinedFrom?: {
           origin:
             | 'link'
-            | 'import'
             | 'saml'
             | 'mail'
+            | 'import'
             | 'teams'
             | 'github'
             | 'gitlab'
@@ -870,7 +870,7 @@ export type AuthUser = {
       analyticsSpendLimitInDollars?: number | null;
     } | null;
     purchaseOrder?: string | null;
-    status?: 'active' | 'canceled' | 'trialing' | 'overdue' | 'expired';
+    status?: 'active' | 'trialing' | 'overdue' | 'expired' | 'canceled';
     pricingExperiment?: 'august-2022';
   } | null;
   /**
@@ -935,7 +935,7 @@ export type AuthUser = {
    */
   activeDashboardViews?: {
     scopeId: string;
-    viewPreference: 'list' | 'cards';
+    viewPreference: 'cards' | 'list';
   }[];
   importFlowGitNamespace?: string | number | null;
   importFlowGitNamespaceId?: string | number | null;

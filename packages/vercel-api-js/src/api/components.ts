@@ -868,6 +868,8 @@ export type UpdateProjectDataCacheResponse = {
     spendLimitInDollars?: number | null;
   };
   autoExposeSystemEnvs?: boolean;
+  autoAssignCustomDomains?: boolean;
+  autoAssignCustomDomainsUpdatedBy?: string;
   buildCommand?: string | null;
   commandForIgnoringBuildStep?: string | null;
   connectConfigurationId?: string | null;
@@ -1295,7 +1297,6 @@ export type UpdateProjectDataCacheResponse = {
     postgres?: Schemas.ACLAction[];
     previewDeploymentSuffix?: Schemas.ACLAction[];
     proTrialOnboarding?: Schemas.ACLAction[];
-    project?: Schemas.ACLAction[];
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
     projectDomainMove?: Schemas.ACLAction[];
@@ -1327,6 +1328,7 @@ export type UpdateProjectDataCacheResponse = {
     teamInvite?: Schemas.ACLAction[];
     teamInviteCode?: Schemas.ACLAction[];
     teamJoin?: Schemas.ACLAction[];
+    teamMemberProject?: Schemas.ACLAction[];
     teamOwnMembership?: Schemas.ACLAction[];
     teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
     token?: Schemas.ACLAction[];
@@ -1342,6 +1344,7 @@ export type UpdateProjectDataCacheResponse = {
     ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
+    project?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
@@ -7226,7 +7229,7 @@ export type GetIntegrationLogDrainsResponse = {
    *
    * @example production
    */
-  environment?: 'production' | 'preview';
+  environment?: 'preview' | 'production';
   /**
    * The branch regexp of log drain
    *
@@ -7526,7 +7529,7 @@ export type SearchRepoResponse = {
     defaultBranch: string;
     url: string;
     updatedAt: number;
-    ownerType: 'team' | 'user';
+    ownerType: 'user' | 'team';
   }[];
 };
 
@@ -8000,6 +8003,8 @@ export type GetProjectsResponse = {
       spendLimitInDollars?: number | null;
     };
     autoExposeSystemEnvs?: boolean;
+    autoAssignCustomDomains?: boolean;
+    autoAssignCustomDomainsUpdatedBy?: string;
     buildCommand?: string | null;
     commandForIgnoringBuildStep?: string | null;
     connectConfigurationId?: string | null;
@@ -8427,7 +8432,6 @@ export type GetProjectsResponse = {
       postgres?: Schemas.ACLAction[];
       previewDeploymentSuffix?: Schemas.ACLAction[];
       proTrialOnboarding?: Schemas.ACLAction[];
-      project?: Schemas.ACLAction[];
       projectDeploymentHook?: Schemas.ACLAction[];
       projectDomain?: Schemas.ACLAction[];
       projectDomainMove?: Schemas.ACLAction[];
@@ -8459,6 +8463,7 @@ export type GetProjectsResponse = {
       teamInvite?: Schemas.ACLAction[];
       teamInviteCode?: Schemas.ACLAction[];
       teamJoin?: Schemas.ACLAction[];
+      teamMemberProject?: Schemas.ACLAction[];
       teamOwnMembership?: Schemas.ACLAction[];
       teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
       token?: Schemas.ACLAction[];
@@ -8474,6 +8479,7 @@ export type GetProjectsResponse = {
       ['webhook-event']?: Schemas.ACLAction[];
       endpointVerification?: Schemas.ACLAction[];
       aliasProtectionBypass?: Schemas.ACLAction[];
+      project?: Schemas.ACLAction[];
     };
     lastRollbackTarget?: Record<string, any> | null;
     lastAliasRequest?: {
@@ -8545,6 +8551,8 @@ export type CreateProjectResponse = {
     spendLimitInDollars?: number | null;
   };
   autoExposeSystemEnvs?: boolean;
+  autoAssignCustomDomains?: boolean;
+  autoAssignCustomDomainsUpdatedBy?: string;
   buildCommand?: string | null;
   commandForIgnoringBuildStep?: string | null;
   connectConfigurationId?: string | null;
@@ -8972,7 +8980,6 @@ export type CreateProjectResponse = {
     postgres?: Schemas.ACLAction[];
     previewDeploymentSuffix?: Schemas.ACLAction[];
     proTrialOnboarding?: Schemas.ACLAction[];
-    project?: Schemas.ACLAction[];
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
     projectDomainMove?: Schemas.ACLAction[];
@@ -9004,6 +9011,7 @@ export type CreateProjectResponse = {
     teamInvite?: Schemas.ACLAction[];
     teamInviteCode?: Schemas.ACLAction[];
     teamJoin?: Schemas.ACLAction[];
+    teamMemberProject?: Schemas.ACLAction[];
     teamOwnMembership?: Schemas.ACLAction[];
     teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
     token?: Schemas.ACLAction[];
@@ -9019,6 +9027,7 @@ export type CreateProjectResponse = {
     ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
+    project?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
@@ -9245,6 +9254,8 @@ export type GetProjectResponse = {
     spendLimitInDollars?: number | null;
   };
   autoExposeSystemEnvs?: boolean;
+  autoAssignCustomDomains?: boolean;
+  autoAssignCustomDomainsUpdatedBy?: string;
   buildCommand?: string | null;
   commandForIgnoringBuildStep?: string | null;
   connectConfigurationId?: string | null;
@@ -9672,7 +9683,6 @@ export type GetProjectResponse = {
     postgres?: Schemas.ACLAction[];
     previewDeploymentSuffix?: Schemas.ACLAction[];
     proTrialOnboarding?: Schemas.ACLAction[];
-    project?: Schemas.ACLAction[];
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
     projectDomainMove?: Schemas.ACLAction[];
@@ -9704,6 +9714,7 @@ export type GetProjectResponse = {
     teamInvite?: Schemas.ACLAction[];
     teamInviteCode?: Schemas.ACLAction[];
     teamJoin?: Schemas.ACLAction[];
+    teamMemberProject?: Schemas.ACLAction[];
     teamOwnMembership?: Schemas.ACLAction[];
     teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
     token?: Schemas.ACLAction[];
@@ -9719,6 +9730,7 @@ export type GetProjectResponse = {
     ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
+    project?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
@@ -9798,6 +9810,8 @@ export type UpdateProjectResponse = {
     spendLimitInDollars?: number | null;
   };
   autoExposeSystemEnvs?: boolean;
+  autoAssignCustomDomains?: boolean;
+  autoAssignCustomDomainsUpdatedBy?: string;
   buildCommand?: string | null;
   commandForIgnoringBuildStep?: string | null;
   connectConfigurationId?: string | null;
@@ -10225,7 +10239,6 @@ export type UpdateProjectResponse = {
     postgres?: Schemas.ACLAction[];
     previewDeploymentSuffix?: Schemas.ACLAction[];
     proTrialOnboarding?: Schemas.ACLAction[];
-    project?: Schemas.ACLAction[];
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
     projectDomainMove?: Schemas.ACLAction[];
@@ -10257,6 +10270,7 @@ export type UpdateProjectResponse = {
     teamInvite?: Schemas.ACLAction[];
     teamInviteCode?: Schemas.ACLAction[];
     teamJoin?: Schemas.ACLAction[];
+    teamMemberProject?: Schemas.ACLAction[];
     teamOwnMembership?: Schemas.ACLAction[];
     teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
     token?: Schemas.ACLAction[];
@@ -10272,6 +10286,7 @@ export type UpdateProjectResponse = {
     ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
+    project?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
@@ -12245,8 +12260,8 @@ export type GetTeamMembersResponse = {
     joinedFrom?: {
       origin:
         | 'link'
-        | 'import'
         | 'mail'
+        | 'import'
         | 'teams'
         | 'github'
         | 'gitlab'
@@ -12515,8 +12530,8 @@ export type GetTeamAccessRequestResponse = {
   joinedFrom: {
     origin:
       | 'link'
-      | 'import'
       | 'mail'
+      | 'import'
       | 'teams'
       | 'github'
       | 'gitlab'
