@@ -1049,6 +1049,7 @@ export type UpdateProjectDataCacheResponse = {
       src?: string;
       dest?: string;
     }[];
+    connectBuildsEnabled?: boolean;
     connectConfigurationId?: string;
     createdAt: number;
     createdIn: string;
@@ -1176,6 +1177,7 @@ export type UpdateProjectDataCacheResponse = {
         src?: string;
         dest?: string;
       }[];
+      connectBuildsEnabled?: boolean;
       connectConfigurationId?: string;
       createdAt: number;
       createdIn: string;
@@ -1225,8 +1227,6 @@ export type UpdateProjectDataCacheResponse = {
   enablePreviewFeedback?: boolean | null;
   permissions?: {
     aliasGlobal?: Schemas.ACLAction[];
-    aliasProject?: Schemas.ACLAction[];
-    analytics?: Schemas.ACLAction[];
     analyticsSampling?: Schemas.ACLAction[];
     analyticsUsage?: Schemas.ACLAction[];
     auditLog?: Schemas.ACLAction[];
@@ -1244,16 +1244,6 @@ export type UpdateProjectDataCacheResponse = {
     concurrentBuilds?: Schemas.ACLAction[];
     connect?: Schemas.ACLAction[];
     connectConfiguration?: Schemas.ACLAction[];
-    connectConfigurationLink?: Schemas.ACLAction[];
-    deployment?: Schemas.ACLAction[];
-    deploymentProductionGit?: Schemas.ACLAction[];
-    deploymentCheck?: Schemas.ACLAction[];
-    deploymentCheckPreview?: Schemas.ACLAction[];
-    deploymentPreview?: Schemas.ACLAction[];
-    deploymentPrivate?: Schemas.ACLAction[];
-    deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
-    deploymentPromote?: Schemas.ACLAction[];
-    deploymentRollback?: Schemas.ACLAction[];
     domain?: Schemas.ACLAction[];
     domainAcceptDelegation?: Schemas.ACLAction[];
     domainAuthCodes?: Schemas.ACLAction[];
@@ -1268,13 +1258,12 @@ export type UpdateProjectDataCacheResponse = {
     fileUpload?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
-    trustedIps?: Schemas.ACLAction[];
     integration?: Schemas.ACLAction[];
     integrationConfiguration?: Schemas.ACLAction[];
     integrationConfigurationTransfer?: Schemas.ACLAction[];
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
-    job?: Schemas.ACLAction[];
+    jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
@@ -1291,26 +1280,14 @@ export type UpdateProjectDataCacheResponse = {
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationSpendCap?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
-    passwordProtection?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
     postgres?: Schemas.ACLAction[];
     previewDeploymentSuffix?: Schemas.ACLAction[];
     proTrialOnboarding?: Schemas.ACLAction[];
-    projectDeploymentHook?: Schemas.ACLAction[];
-    projectDomain?: Schemas.ACLAction[];
-    projectDomainMove?: Schemas.ACLAction[];
-    projectEnvVars?: Schemas.ACLAction[];
-    projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
     sharedEnvVars?: Schemas.ACLAction[];
-    projectEnvVarsProduction?: Schemas.ACLAction[];
     sharedEnvVarsProduction?: Schemas.ACLAction[];
-    projectIntegrationConfiguration?: Schemas.ACLAction[];
-    projectLink?: Schemas.ACLAction[];
-    projectMember?: Schemas.ACLAction[];
-    projectProductionBranch?: Schemas.ACLAction[];
-    projectTransfer?: Schemas.ACLAction[];
-    projectProtectionBypass?: Schemas.ACLAction[];
+    passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
     remoteCaching?: Schemas.ACLAction[];
@@ -1320,7 +1297,6 @@ export type UpdateProjectDataCacheResponse = {
     spendCapState?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
-    dataCacheNamespace?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
@@ -1328,14 +1304,12 @@ export type UpdateProjectDataCacheResponse = {
     teamInvite?: Schemas.ACLAction[];
     teamInviteCode?: Schemas.ACLAction[];
     teamJoin?: Schemas.ACLAction[];
-    teamMemberProject?: Schemas.ACLAction[];
     teamOwnMembership?: Schemas.ACLAction[];
     teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
     token?: Schemas.ACLAction[];
     usage?: Schemas.ACLAction[];
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
-    webAnalytics?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
     edgeConfigItem?: Schemas.ACLAction[];
@@ -1343,8 +1317,38 @@ export type UpdateProjectDataCacheResponse = {
     webhook?: Schemas.ACLAction[];
     ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
+    aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
+    analytics?: Schemas.ACLAction[];
+    connectConfigurationLink?: Schemas.ACLAction[];
+    dataCacheNamespace?: Schemas.ACLAction[];
+    deployment?: Schemas.ACLAction[];
+    deploymentCheck?: Schemas.ACLAction[];
+    deploymentCheckPreview?: Schemas.ACLAction[];
+    deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
+    deploymentProductionGit?: Schemas.ACLAction[];
+    deploymentPreview?: Schemas.ACLAction[];
+    deploymentPrivate?: Schemas.ACLAction[];
+    deploymentPromote?: Schemas.ACLAction[];
+    deploymentRollback?: Schemas.ACLAction[];
+    passwordProtection?: Schemas.ACLAction[];
+    job?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
+    projectAnalyticsSampling?: Schemas.ACLAction[];
+    projectDeploymentHook?: Schemas.ACLAction[];
+    projectDomain?: Schemas.ACLAction[];
+    projectDomainMove?: Schemas.ACLAction[];
+    projectEnvVars?: Schemas.ACLAction[];
+    projectEnvVarsProduction?: Schemas.ACLAction[];
+    projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+    projectIntegrationConfiguration?: Schemas.ACLAction[];
+    projectLink?: Schemas.ACLAction[];
+    projectMember?: Schemas.ACLAction[];
+    projectProductionBranch?: Schemas.ACLAction[];
+    projectTransfer?: Schemas.ACLAction[];
+    projectProtectionBypass?: Schemas.ACLAction[];
+    trustedIps?: Schemas.ACLAction[];
+    webAnalytics?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
@@ -1356,11 +1360,19 @@ export type UpdateProjectDataCacheResponse = {
   } | null;
   hasFloatingAliases?: boolean;
   protectionBypass?: {
-    [key: string]: {
-      createdAt: number;
-      createdBy: string;
-      scope?: 'automation-bypass' | 'shareable-link';
-    };
+    [key: string]:
+      | {
+          createdAt: number;
+          createdBy: string;
+          scope: 'shareable-link' | 'automation-bypass';
+        }
+      | {
+          createdAt: number;
+          lastUpdatedAt: number;
+          lastUpdatedBy: string;
+          access: 'requested' | 'granted';
+          scope: 'user';
+        };
   };
   hasActiveBranches?: boolean;
   trustedIps?:
@@ -1647,6 +1659,10 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
           env: string[];
         };
         builds?: Record<string, any>[];
+        /**
+         * The flag saying if Vercel Connect configuration is used for builds
+         */
+        connectBuildsEnabled?: boolean;
         /**
          * The ID of Vercel Connect configuration used for this deployment
          */
@@ -2340,6 +2356,10 @@ export type CreateDeploymentResponse = {
     env: string[];
   };
   builds?: Record<string, any>[];
+  /**
+   * The flag saying if Vercel Connect configuration is used for builds
+   */
+  connectBuildsEnabled?: boolean;
   /**
    * The ID of Vercel Connect configuration used for this deployment
    */
@@ -3951,6 +3971,10 @@ export type CancelDeploymentResponse = {
     env: string[];
   };
   builds?: Record<string, any>[];
+  /**
+   * The flag saying if Vercel Connect configuration is used for builds
+   */
+  connectBuildsEnabled?: boolean;
   /**
    * The ID of Vercel Connect configuration used for this deployment
    */
@@ -6617,6 +6641,11 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          * @example 1558531915505
          */
         deletedAt?: number | null;
+        disabledReason?:
+          | 'log-drain-high-error-rate'
+          | 'log-drains-add-on-disabled-by-owner'
+          | 'account-plan-downgrade'
+          | 'original-owner-left-the-team';
       }[]
     | {
         integration: {
@@ -6768,6 +6797,11 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          * @example 1558531915505
          */
         deletedAt?: number | null;
+        disabledReason?:
+          | 'log-drain-high-error-rate'
+          | 'log-drains-add-on-disabled-by-owner'
+          | 'account-plan-downgrade'
+          | 'original-owner-left-the-team';
       }[],
     GetConfigurationsError,
     undefined,
@@ -6946,6 +6980,11 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          * @example 1558531915505
          */
         deletedAt?: number | null;
+        disabledReason?:
+          | 'log-drain-high-error-rate'
+          | 'log-drains-add-on-disabled-by-owner'
+          | 'account-plan-downgrade'
+          | 'original-owner-left-the-team';
       }
     | {
         /**
@@ -7095,6 +7134,11 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          * @example 1558531915505
          */
         deletedAt?: number | null;
+        disabledReason?:
+          | 'log-drain-high-error-rate'
+          | 'log-drains-add-on-disabled-by-owner'
+          | 'account-plan-downgrade'
+          | 'original-owner-left-the-team';
         canConfigureOpenTelemetry?: boolean;
       },
     GetConfigurationError,
@@ -7632,7 +7676,7 @@ export type GetConfigurableLogDrainResponse = {
   url: string;
   status?: 'enabled' | 'disabled';
   disabledAt?: number;
-  disabledReason?: string;
+  disabledReason?: 'log-drain-high-error-rate' | 'log-drains-add-on-disabled-by-owner' | 'account-plan-downgrade';
 };
 
 export type GetConfigurableLogDrainVariables = {
@@ -7768,7 +7812,7 @@ export type GetConfigurableLogDrainsResponse = {
   url: string;
   status?: 'enabled' | 'disabled';
   disabledAt?: number;
-  disabledReason?: string;
+  disabledReason?: 'log-drain-high-error-rate' | 'log-drains-add-on-disabled-by-owner' | 'account-plan-downgrade';
 }[];
 
 export type GetConfigurableLogDrainsVariables = {
@@ -7872,7 +7916,7 @@ export type CreateConfigurableLogDrainResponse = {
   url: string;
   status?: 'enabled' | 'disabled';
   disabledAt?: number;
-  disabledReason?: string;
+  disabledReason?: 'log-drain-high-error-rate' | 'log-drains-add-on-disabled-by-owner' | 'account-plan-downgrade';
 };
 
 export type CreateConfigurableLogDrainRequestBody = {
@@ -8184,6 +8228,7 @@ export type GetProjectsResponse = {
         src?: string;
         dest?: string;
       }[];
+      connectBuildsEnabled?: boolean;
       connectConfigurationId?: string;
       createdAt: number;
       createdIn: string;
@@ -8311,6 +8356,7 @@ export type GetProjectsResponse = {
           src?: string;
           dest?: string;
         }[];
+        connectBuildsEnabled?: boolean;
         connectConfigurationId?: string;
         createdAt: number;
         createdIn: string;
@@ -8360,8 +8406,6 @@ export type GetProjectsResponse = {
     enablePreviewFeedback?: boolean | null;
     permissions?: {
       aliasGlobal?: Schemas.ACLAction[];
-      aliasProject?: Schemas.ACLAction[];
-      analytics?: Schemas.ACLAction[];
       analyticsSampling?: Schemas.ACLAction[];
       analyticsUsage?: Schemas.ACLAction[];
       auditLog?: Schemas.ACLAction[];
@@ -8379,16 +8423,6 @@ export type GetProjectsResponse = {
       concurrentBuilds?: Schemas.ACLAction[];
       connect?: Schemas.ACLAction[];
       connectConfiguration?: Schemas.ACLAction[];
-      connectConfigurationLink?: Schemas.ACLAction[];
-      deployment?: Schemas.ACLAction[];
-      deploymentProductionGit?: Schemas.ACLAction[];
-      deploymentCheck?: Schemas.ACLAction[];
-      deploymentCheckPreview?: Schemas.ACLAction[];
-      deploymentPreview?: Schemas.ACLAction[];
-      deploymentPrivate?: Schemas.ACLAction[];
-      deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
-      deploymentPromote?: Schemas.ACLAction[];
-      deploymentRollback?: Schemas.ACLAction[];
       domain?: Schemas.ACLAction[];
       domainAcceptDelegation?: Schemas.ACLAction[];
       domainAuthCodes?: Schemas.ACLAction[];
@@ -8403,13 +8437,12 @@ export type GetProjectsResponse = {
       fileUpload?: Schemas.ACLAction[];
       gitRepository?: Schemas.ACLAction[];
       ipBlocking?: Schemas.ACLAction[];
-      trustedIps?: Schemas.ACLAction[];
       integration?: Schemas.ACLAction[];
       integrationConfiguration?: Schemas.ACLAction[];
       integrationConfigurationTransfer?: Schemas.ACLAction[];
       integrationConfigurationProjects?: Schemas.ACLAction[];
       integrationVercelConfigurationOverride?: Schemas.ACLAction[];
-      job?: Schemas.ACLAction[];
+      jobGlobal?: Schemas.ACLAction[];
       logDrain?: Schemas.ACLAction[];
       Monitoring?: Schemas.ACLAction[];
       monitoringQuery?: Schemas.ACLAction[];
@@ -8426,26 +8459,14 @@ export type GetProjectsResponse = {
       notificationUsageAlert?: Schemas.ACLAction[];
       notificationSpendCap?: Schemas.ACLAction[];
       openTelemetryEndpoint?: Schemas.ACLAction[];
-      passwordProtection?: Schemas.ACLAction[];
       paymentMethod?: Schemas.ACLAction[];
       permissions?: Schemas.ACLAction[];
       postgres?: Schemas.ACLAction[];
       previewDeploymentSuffix?: Schemas.ACLAction[];
       proTrialOnboarding?: Schemas.ACLAction[];
-      projectDeploymentHook?: Schemas.ACLAction[];
-      projectDomain?: Schemas.ACLAction[];
-      projectDomainMove?: Schemas.ACLAction[];
-      projectEnvVars?: Schemas.ACLAction[];
-      projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
       sharedEnvVars?: Schemas.ACLAction[];
-      projectEnvVarsProduction?: Schemas.ACLAction[];
       sharedEnvVarsProduction?: Schemas.ACLAction[];
-      projectIntegrationConfiguration?: Schemas.ACLAction[];
-      projectLink?: Schemas.ACLAction[];
-      projectMember?: Schemas.ACLAction[];
-      projectProductionBranch?: Schemas.ACLAction[];
-      projectTransfer?: Schemas.ACLAction[];
-      projectProtectionBypass?: Schemas.ACLAction[];
+      passwordProtectionInvoiceItem?: Schemas.ACLAction[];
       rateLimit?: Schemas.ACLAction[];
       redis?: Schemas.ACLAction[];
       remoteCaching?: Schemas.ACLAction[];
@@ -8455,7 +8476,6 @@ export type GetProjectsResponse = {
       spendCapState?: Schemas.ACLAction[];
       supportCase?: Schemas.ACLAction[];
       supportCaseComment?: Schemas.ACLAction[];
-      dataCacheNamespace?: Schemas.ACLAction[];
       dataCacheBillingSettings?: Schemas.ACLAction[];
       team?: Schemas.ACLAction[];
       teamAccessRequest?: Schemas.ACLAction[];
@@ -8463,14 +8483,12 @@ export type GetProjectsResponse = {
       teamInvite?: Schemas.ACLAction[];
       teamInviteCode?: Schemas.ACLAction[];
       teamJoin?: Schemas.ACLAction[];
-      teamMemberProject?: Schemas.ACLAction[];
       teamOwnMembership?: Schemas.ACLAction[];
       teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
       token?: Schemas.ACLAction[];
       usage?: Schemas.ACLAction[];
       user?: Schemas.ACLAction[];
       userConnection?: Schemas.ACLAction[];
-      webAnalytics?: Schemas.ACLAction[];
       webAnalyticsPlan?: Schemas.ACLAction[];
       edgeConfig?: Schemas.ACLAction[];
       edgeConfigItem?: Schemas.ACLAction[];
@@ -8478,8 +8496,38 @@ export type GetProjectsResponse = {
       webhook?: Schemas.ACLAction[];
       ['webhook-event']?: Schemas.ACLAction[];
       endpointVerification?: Schemas.ACLAction[];
+      aliasProject?: Schemas.ACLAction[];
       aliasProtectionBypass?: Schemas.ACLAction[];
+      analytics?: Schemas.ACLAction[];
+      connectConfigurationLink?: Schemas.ACLAction[];
+      dataCacheNamespace?: Schemas.ACLAction[];
+      deployment?: Schemas.ACLAction[];
+      deploymentCheck?: Schemas.ACLAction[];
+      deploymentCheckPreview?: Schemas.ACLAction[];
+      deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
+      deploymentProductionGit?: Schemas.ACLAction[];
+      deploymentPreview?: Schemas.ACLAction[];
+      deploymentPrivate?: Schemas.ACLAction[];
+      deploymentPromote?: Schemas.ACLAction[];
+      deploymentRollback?: Schemas.ACLAction[];
+      passwordProtection?: Schemas.ACLAction[];
+      job?: Schemas.ACLAction[];
       project?: Schemas.ACLAction[];
+      projectAnalyticsSampling?: Schemas.ACLAction[];
+      projectDeploymentHook?: Schemas.ACLAction[];
+      projectDomain?: Schemas.ACLAction[];
+      projectDomainMove?: Schemas.ACLAction[];
+      projectEnvVars?: Schemas.ACLAction[];
+      projectEnvVarsProduction?: Schemas.ACLAction[];
+      projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+      projectIntegrationConfiguration?: Schemas.ACLAction[];
+      projectLink?: Schemas.ACLAction[];
+      projectMember?: Schemas.ACLAction[];
+      projectProductionBranch?: Schemas.ACLAction[];
+      projectTransfer?: Schemas.ACLAction[];
+      projectProtectionBypass?: Schemas.ACLAction[];
+      trustedIps?: Schemas.ACLAction[];
+      webAnalytics?: Schemas.ACLAction[];
     };
     lastRollbackTarget?: Record<string, any> | null;
     lastAliasRequest?: {
@@ -8491,11 +8539,19 @@ export type GetProjectsResponse = {
     } | null;
     hasFloatingAliases?: boolean;
     protectionBypass?: {
-      [key: string]: {
-        createdAt: number;
-        createdBy: string;
-        scope?: 'automation-bypass' | 'shareable-link';
-      };
+      [key: string]:
+        | {
+            createdAt: number;
+            createdBy: string;
+            scope: 'shareable-link' | 'automation-bypass';
+          }
+        | {
+            createdAt: number;
+            lastUpdatedAt: number;
+            lastUpdatedBy: string;
+            access: 'requested' | 'granted';
+            scope: 'user';
+          };
     };
     hasActiveBranches?: boolean;
     trustedIps?:
@@ -8732,6 +8788,7 @@ export type CreateProjectResponse = {
       src?: string;
       dest?: string;
     }[];
+    connectBuildsEnabled?: boolean;
     connectConfigurationId?: string;
     createdAt: number;
     createdIn: string;
@@ -8859,6 +8916,7 @@ export type CreateProjectResponse = {
         src?: string;
         dest?: string;
       }[];
+      connectBuildsEnabled?: boolean;
       connectConfigurationId?: string;
       createdAt: number;
       createdIn: string;
@@ -8908,8 +8966,6 @@ export type CreateProjectResponse = {
   enablePreviewFeedback?: boolean | null;
   permissions?: {
     aliasGlobal?: Schemas.ACLAction[];
-    aliasProject?: Schemas.ACLAction[];
-    analytics?: Schemas.ACLAction[];
     analyticsSampling?: Schemas.ACLAction[];
     analyticsUsage?: Schemas.ACLAction[];
     auditLog?: Schemas.ACLAction[];
@@ -8927,16 +8983,6 @@ export type CreateProjectResponse = {
     concurrentBuilds?: Schemas.ACLAction[];
     connect?: Schemas.ACLAction[];
     connectConfiguration?: Schemas.ACLAction[];
-    connectConfigurationLink?: Schemas.ACLAction[];
-    deployment?: Schemas.ACLAction[];
-    deploymentProductionGit?: Schemas.ACLAction[];
-    deploymentCheck?: Schemas.ACLAction[];
-    deploymentCheckPreview?: Schemas.ACLAction[];
-    deploymentPreview?: Schemas.ACLAction[];
-    deploymentPrivate?: Schemas.ACLAction[];
-    deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
-    deploymentPromote?: Schemas.ACLAction[];
-    deploymentRollback?: Schemas.ACLAction[];
     domain?: Schemas.ACLAction[];
     domainAcceptDelegation?: Schemas.ACLAction[];
     domainAuthCodes?: Schemas.ACLAction[];
@@ -8951,13 +8997,12 @@ export type CreateProjectResponse = {
     fileUpload?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
-    trustedIps?: Schemas.ACLAction[];
     integration?: Schemas.ACLAction[];
     integrationConfiguration?: Schemas.ACLAction[];
     integrationConfigurationTransfer?: Schemas.ACLAction[];
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
-    job?: Schemas.ACLAction[];
+    jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
@@ -8974,26 +9019,14 @@ export type CreateProjectResponse = {
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationSpendCap?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
-    passwordProtection?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
     postgres?: Schemas.ACLAction[];
     previewDeploymentSuffix?: Schemas.ACLAction[];
     proTrialOnboarding?: Schemas.ACLAction[];
-    projectDeploymentHook?: Schemas.ACLAction[];
-    projectDomain?: Schemas.ACLAction[];
-    projectDomainMove?: Schemas.ACLAction[];
-    projectEnvVars?: Schemas.ACLAction[];
-    projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
     sharedEnvVars?: Schemas.ACLAction[];
-    projectEnvVarsProduction?: Schemas.ACLAction[];
     sharedEnvVarsProduction?: Schemas.ACLAction[];
-    projectIntegrationConfiguration?: Schemas.ACLAction[];
-    projectLink?: Schemas.ACLAction[];
-    projectMember?: Schemas.ACLAction[];
-    projectProductionBranch?: Schemas.ACLAction[];
-    projectTransfer?: Schemas.ACLAction[];
-    projectProtectionBypass?: Schemas.ACLAction[];
+    passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
     remoteCaching?: Schemas.ACLAction[];
@@ -9003,7 +9036,6 @@ export type CreateProjectResponse = {
     spendCapState?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
-    dataCacheNamespace?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
@@ -9011,14 +9043,12 @@ export type CreateProjectResponse = {
     teamInvite?: Schemas.ACLAction[];
     teamInviteCode?: Schemas.ACLAction[];
     teamJoin?: Schemas.ACLAction[];
-    teamMemberProject?: Schemas.ACLAction[];
     teamOwnMembership?: Schemas.ACLAction[];
     teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
     token?: Schemas.ACLAction[];
     usage?: Schemas.ACLAction[];
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
-    webAnalytics?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
     edgeConfigItem?: Schemas.ACLAction[];
@@ -9026,8 +9056,38 @@ export type CreateProjectResponse = {
     webhook?: Schemas.ACLAction[];
     ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
+    aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
+    analytics?: Schemas.ACLAction[];
+    connectConfigurationLink?: Schemas.ACLAction[];
+    dataCacheNamespace?: Schemas.ACLAction[];
+    deployment?: Schemas.ACLAction[];
+    deploymentCheck?: Schemas.ACLAction[];
+    deploymentCheckPreview?: Schemas.ACLAction[];
+    deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
+    deploymentProductionGit?: Schemas.ACLAction[];
+    deploymentPreview?: Schemas.ACLAction[];
+    deploymentPrivate?: Schemas.ACLAction[];
+    deploymentPromote?: Schemas.ACLAction[];
+    deploymentRollback?: Schemas.ACLAction[];
+    passwordProtection?: Schemas.ACLAction[];
+    job?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
+    projectAnalyticsSampling?: Schemas.ACLAction[];
+    projectDeploymentHook?: Schemas.ACLAction[];
+    projectDomain?: Schemas.ACLAction[];
+    projectDomainMove?: Schemas.ACLAction[];
+    projectEnvVars?: Schemas.ACLAction[];
+    projectEnvVarsProduction?: Schemas.ACLAction[];
+    projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+    projectIntegrationConfiguration?: Schemas.ACLAction[];
+    projectLink?: Schemas.ACLAction[];
+    projectMember?: Schemas.ACLAction[];
+    projectProductionBranch?: Schemas.ACLAction[];
+    projectTransfer?: Schemas.ACLAction[];
+    projectProtectionBypass?: Schemas.ACLAction[];
+    trustedIps?: Schemas.ACLAction[];
+    webAnalytics?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
@@ -9039,11 +9099,19 @@ export type CreateProjectResponse = {
   } | null;
   hasFloatingAliases?: boolean;
   protectionBypass?: {
-    [key: string]: {
-      createdAt: number;
-      createdBy: string;
-      scope?: 'automation-bypass' | 'shareable-link';
-    };
+    [key: string]:
+      | {
+          createdAt: number;
+          createdBy: string;
+          scope: 'shareable-link' | 'automation-bypass';
+        }
+      | {
+          createdAt: number;
+          lastUpdatedAt: number;
+          lastUpdatedBy: string;
+          access: 'requested' | 'granted';
+          scope: 'user';
+        };
   };
   hasActiveBranches?: boolean;
   trustedIps?:
@@ -9435,6 +9503,7 @@ export type GetProjectResponse = {
       src?: string;
       dest?: string;
     }[];
+    connectBuildsEnabled?: boolean;
     connectConfigurationId?: string;
     createdAt: number;
     createdIn: string;
@@ -9562,6 +9631,7 @@ export type GetProjectResponse = {
         src?: string;
         dest?: string;
       }[];
+      connectBuildsEnabled?: boolean;
       connectConfigurationId?: string;
       createdAt: number;
       createdIn: string;
@@ -9611,8 +9681,6 @@ export type GetProjectResponse = {
   enablePreviewFeedback?: boolean | null;
   permissions?: {
     aliasGlobal?: Schemas.ACLAction[];
-    aliasProject?: Schemas.ACLAction[];
-    analytics?: Schemas.ACLAction[];
     analyticsSampling?: Schemas.ACLAction[];
     analyticsUsage?: Schemas.ACLAction[];
     auditLog?: Schemas.ACLAction[];
@@ -9630,16 +9698,6 @@ export type GetProjectResponse = {
     concurrentBuilds?: Schemas.ACLAction[];
     connect?: Schemas.ACLAction[];
     connectConfiguration?: Schemas.ACLAction[];
-    connectConfigurationLink?: Schemas.ACLAction[];
-    deployment?: Schemas.ACLAction[];
-    deploymentProductionGit?: Schemas.ACLAction[];
-    deploymentCheck?: Schemas.ACLAction[];
-    deploymentCheckPreview?: Schemas.ACLAction[];
-    deploymentPreview?: Schemas.ACLAction[];
-    deploymentPrivate?: Schemas.ACLAction[];
-    deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
-    deploymentPromote?: Schemas.ACLAction[];
-    deploymentRollback?: Schemas.ACLAction[];
     domain?: Schemas.ACLAction[];
     domainAcceptDelegation?: Schemas.ACLAction[];
     domainAuthCodes?: Schemas.ACLAction[];
@@ -9654,13 +9712,12 @@ export type GetProjectResponse = {
     fileUpload?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
-    trustedIps?: Schemas.ACLAction[];
     integration?: Schemas.ACLAction[];
     integrationConfiguration?: Schemas.ACLAction[];
     integrationConfigurationTransfer?: Schemas.ACLAction[];
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
-    job?: Schemas.ACLAction[];
+    jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
@@ -9677,26 +9734,14 @@ export type GetProjectResponse = {
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationSpendCap?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
-    passwordProtection?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
     postgres?: Schemas.ACLAction[];
     previewDeploymentSuffix?: Schemas.ACLAction[];
     proTrialOnboarding?: Schemas.ACLAction[];
-    projectDeploymentHook?: Schemas.ACLAction[];
-    projectDomain?: Schemas.ACLAction[];
-    projectDomainMove?: Schemas.ACLAction[];
-    projectEnvVars?: Schemas.ACLAction[];
-    projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
     sharedEnvVars?: Schemas.ACLAction[];
-    projectEnvVarsProduction?: Schemas.ACLAction[];
     sharedEnvVarsProduction?: Schemas.ACLAction[];
-    projectIntegrationConfiguration?: Schemas.ACLAction[];
-    projectLink?: Schemas.ACLAction[];
-    projectMember?: Schemas.ACLAction[];
-    projectProductionBranch?: Schemas.ACLAction[];
-    projectTransfer?: Schemas.ACLAction[];
-    projectProtectionBypass?: Schemas.ACLAction[];
+    passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
     remoteCaching?: Schemas.ACLAction[];
@@ -9706,7 +9751,6 @@ export type GetProjectResponse = {
     spendCapState?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
-    dataCacheNamespace?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
@@ -9714,14 +9758,12 @@ export type GetProjectResponse = {
     teamInvite?: Schemas.ACLAction[];
     teamInviteCode?: Schemas.ACLAction[];
     teamJoin?: Schemas.ACLAction[];
-    teamMemberProject?: Schemas.ACLAction[];
     teamOwnMembership?: Schemas.ACLAction[];
     teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
     token?: Schemas.ACLAction[];
     usage?: Schemas.ACLAction[];
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
-    webAnalytics?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
     edgeConfigItem?: Schemas.ACLAction[];
@@ -9729,8 +9771,38 @@ export type GetProjectResponse = {
     webhook?: Schemas.ACLAction[];
     ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
+    aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
+    analytics?: Schemas.ACLAction[];
+    connectConfigurationLink?: Schemas.ACLAction[];
+    dataCacheNamespace?: Schemas.ACLAction[];
+    deployment?: Schemas.ACLAction[];
+    deploymentCheck?: Schemas.ACLAction[];
+    deploymentCheckPreview?: Schemas.ACLAction[];
+    deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
+    deploymentProductionGit?: Schemas.ACLAction[];
+    deploymentPreview?: Schemas.ACLAction[];
+    deploymentPrivate?: Schemas.ACLAction[];
+    deploymentPromote?: Schemas.ACLAction[];
+    deploymentRollback?: Schemas.ACLAction[];
+    passwordProtection?: Schemas.ACLAction[];
+    job?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
+    projectAnalyticsSampling?: Schemas.ACLAction[];
+    projectDeploymentHook?: Schemas.ACLAction[];
+    projectDomain?: Schemas.ACLAction[];
+    projectDomainMove?: Schemas.ACLAction[];
+    projectEnvVars?: Schemas.ACLAction[];
+    projectEnvVarsProduction?: Schemas.ACLAction[];
+    projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+    projectIntegrationConfiguration?: Schemas.ACLAction[];
+    projectLink?: Schemas.ACLAction[];
+    projectMember?: Schemas.ACLAction[];
+    projectProductionBranch?: Schemas.ACLAction[];
+    projectTransfer?: Schemas.ACLAction[];
+    projectProtectionBypass?: Schemas.ACLAction[];
+    trustedIps?: Schemas.ACLAction[];
+    webAnalytics?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
@@ -9742,11 +9814,19 @@ export type GetProjectResponse = {
   } | null;
   hasFloatingAliases?: boolean;
   protectionBypass?: {
-    [key: string]: {
-      createdAt: number;
-      createdBy: string;
-      scope?: 'automation-bypass' | 'shareable-link';
-    };
+    [key: string]:
+      | {
+          createdAt: number;
+          createdBy: string;
+          scope: 'shareable-link' | 'automation-bypass';
+        }
+      | {
+          createdAt: number;
+          lastUpdatedAt: number;
+          lastUpdatedBy: string;
+          access: 'requested' | 'granted';
+          scope: 'user';
+        };
   };
   hasActiveBranches?: boolean;
   trustedIps?:
@@ -9991,6 +10071,7 @@ export type UpdateProjectResponse = {
       src?: string;
       dest?: string;
     }[];
+    connectBuildsEnabled?: boolean;
     connectConfigurationId?: string;
     createdAt: number;
     createdIn: string;
@@ -10118,6 +10199,7 @@ export type UpdateProjectResponse = {
         src?: string;
         dest?: string;
       }[];
+      connectBuildsEnabled?: boolean;
       connectConfigurationId?: string;
       createdAt: number;
       createdIn: string;
@@ -10167,8 +10249,6 @@ export type UpdateProjectResponse = {
   enablePreviewFeedback?: boolean | null;
   permissions?: {
     aliasGlobal?: Schemas.ACLAction[];
-    aliasProject?: Schemas.ACLAction[];
-    analytics?: Schemas.ACLAction[];
     analyticsSampling?: Schemas.ACLAction[];
     analyticsUsage?: Schemas.ACLAction[];
     auditLog?: Schemas.ACLAction[];
@@ -10186,16 +10266,6 @@ export type UpdateProjectResponse = {
     concurrentBuilds?: Schemas.ACLAction[];
     connect?: Schemas.ACLAction[];
     connectConfiguration?: Schemas.ACLAction[];
-    connectConfigurationLink?: Schemas.ACLAction[];
-    deployment?: Schemas.ACLAction[];
-    deploymentProductionGit?: Schemas.ACLAction[];
-    deploymentCheck?: Schemas.ACLAction[];
-    deploymentCheckPreview?: Schemas.ACLAction[];
-    deploymentPreview?: Schemas.ACLAction[];
-    deploymentPrivate?: Schemas.ACLAction[];
-    deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
-    deploymentPromote?: Schemas.ACLAction[];
-    deploymentRollback?: Schemas.ACLAction[];
     domain?: Schemas.ACLAction[];
     domainAcceptDelegation?: Schemas.ACLAction[];
     domainAuthCodes?: Schemas.ACLAction[];
@@ -10210,13 +10280,12 @@ export type UpdateProjectResponse = {
     fileUpload?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
-    trustedIps?: Schemas.ACLAction[];
     integration?: Schemas.ACLAction[];
     integrationConfiguration?: Schemas.ACLAction[];
     integrationConfigurationTransfer?: Schemas.ACLAction[];
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
-    job?: Schemas.ACLAction[];
+    jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
@@ -10233,26 +10302,14 @@ export type UpdateProjectResponse = {
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationSpendCap?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
-    passwordProtection?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
     postgres?: Schemas.ACLAction[];
     previewDeploymentSuffix?: Schemas.ACLAction[];
     proTrialOnboarding?: Schemas.ACLAction[];
-    projectDeploymentHook?: Schemas.ACLAction[];
-    projectDomain?: Schemas.ACLAction[];
-    projectDomainMove?: Schemas.ACLAction[];
-    projectEnvVars?: Schemas.ACLAction[];
-    projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
     sharedEnvVars?: Schemas.ACLAction[];
-    projectEnvVarsProduction?: Schemas.ACLAction[];
     sharedEnvVarsProduction?: Schemas.ACLAction[];
-    projectIntegrationConfiguration?: Schemas.ACLAction[];
-    projectLink?: Schemas.ACLAction[];
-    projectMember?: Schemas.ACLAction[];
-    projectProductionBranch?: Schemas.ACLAction[];
-    projectTransfer?: Schemas.ACLAction[];
-    projectProtectionBypass?: Schemas.ACLAction[];
+    passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
     remoteCaching?: Schemas.ACLAction[];
@@ -10262,7 +10319,6 @@ export type UpdateProjectResponse = {
     spendCapState?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
-    dataCacheNamespace?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
@@ -10270,14 +10326,12 @@ export type UpdateProjectResponse = {
     teamInvite?: Schemas.ACLAction[];
     teamInviteCode?: Schemas.ACLAction[];
     teamJoin?: Schemas.ACLAction[];
-    teamMemberProject?: Schemas.ACLAction[];
     teamOwnMembership?: Schemas.ACLAction[];
     teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
     token?: Schemas.ACLAction[];
     usage?: Schemas.ACLAction[];
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
-    webAnalytics?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
     edgeConfigItem?: Schemas.ACLAction[];
@@ -10285,8 +10339,38 @@ export type UpdateProjectResponse = {
     webhook?: Schemas.ACLAction[];
     ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
+    aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
+    analytics?: Schemas.ACLAction[];
+    connectConfigurationLink?: Schemas.ACLAction[];
+    dataCacheNamespace?: Schemas.ACLAction[];
+    deployment?: Schemas.ACLAction[];
+    deploymentCheck?: Schemas.ACLAction[];
+    deploymentCheckPreview?: Schemas.ACLAction[];
+    deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
+    deploymentProductionGit?: Schemas.ACLAction[];
+    deploymentPreview?: Schemas.ACLAction[];
+    deploymentPrivate?: Schemas.ACLAction[];
+    deploymentPromote?: Schemas.ACLAction[];
+    deploymentRollback?: Schemas.ACLAction[];
+    passwordProtection?: Schemas.ACLAction[];
+    job?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
+    projectAnalyticsSampling?: Schemas.ACLAction[];
+    projectDeploymentHook?: Schemas.ACLAction[];
+    projectDomain?: Schemas.ACLAction[];
+    projectDomainMove?: Schemas.ACLAction[];
+    projectEnvVars?: Schemas.ACLAction[];
+    projectEnvVarsProduction?: Schemas.ACLAction[];
+    projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+    projectIntegrationConfiguration?: Schemas.ACLAction[];
+    projectLink?: Schemas.ACLAction[];
+    projectMember?: Schemas.ACLAction[];
+    projectProductionBranch?: Schemas.ACLAction[];
+    projectTransfer?: Schemas.ACLAction[];
+    projectProtectionBypass?: Schemas.ACLAction[];
+    trustedIps?: Schemas.ACLAction[];
+    webAnalytics?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
@@ -10298,11 +10382,19 @@ export type UpdateProjectResponse = {
   } | null;
   hasFloatingAliases?: boolean;
   protectionBypass?: {
-    [key: string]: {
-      createdAt: number;
-      createdBy: string;
-      scope?: 'automation-bypass' | 'shareable-link';
-    };
+    [key: string]:
+      | {
+          createdAt: number;
+          createdBy: string;
+          scope: 'shareable-link' | 'automation-bypass';
+        }
+      | {
+          createdAt: number;
+          lastUpdatedAt: number;
+          lastUpdatedBy: string;
+          access: 'requested' | 'granted';
+          scope: 'user';
+        };
   };
   hasActiveBranches?: boolean;
   trustedIps?:
@@ -10322,6 +10414,8 @@ export type UpdateProjectResponse = {
 
 export type UpdateProjectRequestBody = {
   autoExposeSystemEnvs?: boolean;
+  autoAssignCustomDomains?: boolean;
+  autoAssignCustomDomainsUpdatedBy?: string;
   /**
    * The build command for this project. When `null` is used this value will be automatically detected
    *
@@ -12171,7 +12265,7 @@ export type GetTeamMembersQueryParams = {
    *
    * @example OWNER
    */
-  role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'VIEWER';
+  role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'VIEWER' | 'BILLING';
   /**
    * Exclude members who belong to the specified project.
    */
@@ -12940,6 +13034,489 @@ export type CreateTeamResponse = {
    * @example team_nLlpyC6RE1qxqglFKbrMxlud
    */
   id: string;
+  billing: {
+    currency?: 'usd' | 'eur';
+    cancelation?: number | null;
+    period: {
+      start: number;
+      end: number;
+    } | null;
+    contract?: {
+      start: number;
+      end: number;
+    } | null;
+    plan: 'enterprise' | 'pro' | 'hobby';
+    platform?: 'stripeTestMode' | 'stripe';
+    orbCustomerId?: string;
+    programType?: 'startup' | 'agency';
+    trial?: {
+      start: number;
+      end: number;
+    } | null;
+    email?: string | null;
+    tax?: {
+      type: string;
+      id: string;
+    } | null;
+    language?: string | null;
+    address?: {
+      line1: string;
+      line2?: string;
+      postalCode?: string;
+      city?: string;
+      country?: string;
+      state?: string;
+    } | null;
+    name?: string | null;
+    overdue?: boolean | null;
+    invoiceItems?: {
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      pro?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      enterprise?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      concurrentBuilds?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      teamSeats?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      saml?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      previewDeploymentSuffix?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      passwordProtection?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      analytics?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      monitoring?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      webAnalytics?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      analyticsUsage?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      artifacts?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      bandwidth?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      edgeMiddlewareInvocations?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      edgeFunctionExecutionUnits?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      monitoringMetric?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      serverlessFunctionExecution?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      sourceImages?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      webAnalyticsEvent?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      edgeConfigRead?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      edgeConfigWrite?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      cronJobInvocation?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      postgresComputeTime?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      postgresDataStorage?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      postgresDataTransfer?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      postgresWrittenData?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      storageRedisTotalCommands?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      storageRedisTotalBandwidthInBytes?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      storageRedisTotalDailyAvgStorageInBytes?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      storageRedisTotalDatabases?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      dataCacheRead?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      dataCacheRevalidation?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      dataCacheWrite?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+    } | null;
+    invoiceSettings?: {
+      footer?: string;
+    };
+    subscriptions?:
+      | {
+          id: string;
+          trial: {
+            start: number;
+            end: number;
+          } | null;
+          period: {
+            start: number;
+            end: number;
+          };
+          frequency: {
+            interval: 'day' | 'month' | 'week' | 'year';
+            intervalCount: number;
+          };
+          discount: {
+            id: string;
+            coupon: {
+              id: string;
+              name: string | null;
+              amountOff: number | null;
+              percentageOff: number | null;
+              durationInMonths: number | null;
+              duration: 'forever' | 'repeating' | 'once';
+            };
+          } | null;
+          items: {
+            id: string;
+            priceId: string;
+            productId: string;
+            amount: number;
+            quantity: number;
+          }[];
+        }[]
+      | null;
+    controls?: {
+      analyticsSampleRateInPercent?: number | null;
+      analyticsSpendLimitInDollars?: number | null;
+    } | null;
+    purchaseOrder?: string | null;
+    status?: 'active' | 'trialing' | 'overdue' | 'expired' | 'canceled';
+    pricingExperiment?: 'august-2022';
+  };
 };
 
 export type CreateTeamRequestBody = {
@@ -13983,11 +14560,19 @@ export type ListAliasesResponse = {
      * The protection bypass for the alias
      */
     protectionBypass?: {
-      [key: string]: {
-        createdAt: number;
-        createdBy: string;
-        scope?: 'automation-bypass' | 'shareable-link';
-      };
+      [key: string]:
+        | {
+            createdAt: number;
+            createdBy: string;
+            scope: 'shareable-link' | 'automation-bypass';
+          }
+        | {
+            createdAt: number;
+            lastUpdatedAt: number;
+            lastUpdatedBy: string;
+            access: 'requested' | 'granted';
+            scope: 'user';
+          };
     };
   }[];
   pagination: Schemas.Pagination;
@@ -14157,11 +14742,19 @@ export type GetAliasResponse = {
    * The protection bypass for the alias
    */
   protectionBypass?: {
-    [key: string]: {
-      createdAt: number;
-      createdBy: string;
-      scope?: 'automation-bypass' | 'shareable-link';
-    };
+    [key: string]:
+      | {
+          createdAt: number;
+          createdBy: string;
+          scope: 'shareable-link' | 'automation-bypass';
+        }
+      | {
+          createdAt: number;
+          lastUpdatedAt: number;
+          lastUpdatedBy: string;
+          access: 'requested' | 'granted';
+          scope: 'user';
+        };
   };
 };
 
@@ -14269,11 +14862,19 @@ export type ListDeploymentAliasesResponse = {
      * The protection bypass for the alias
      */
     protectionBypass?: {
-      [key: string]: {
-        createdAt: number;
-        createdBy: string;
-        scope?: 'automation-bypass' | 'shareable-link';
-      };
+      [key: string]:
+        | {
+            createdAt: number;
+            createdBy: string;
+            scope: 'shareable-link' | 'automation-bypass';
+          }
+        | {
+            createdAt: number;
+            lastUpdatedAt: number;
+            lastUpdatedBy: string;
+            access: 'requested' | 'granted';
+            scope: 'user';
+          };
     };
   }[];
 };
@@ -14887,7 +15488,24 @@ export type GetDeploymentsResponse = {
       commandForIgnoringBuildStep?: string | null;
       createdAt?: number;
       skipGitConnectDuringLink?: boolean;
+      /**
+       * Since June '23
+       */
+      gitComments?: {
+        /**
+         * Whether the Vercel bot should comment on PRs
+         */
+        onPullRequest: boolean;
+        /**
+         * Whether the Vercel bot should comment on commits
+         */
+        onCommit: boolean;
+      };
     };
+    /**
+     * The flag saying if Vercel Connect configuration is used for builds
+     */
+    connectBuildsEnabled?: boolean;
     /**
      * The ID of Vercel Connect configuration used for this deployment
      */
