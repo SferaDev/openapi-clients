@@ -460,23 +460,6 @@ export type AuthUser = {
       /**
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
        */
-      saml?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
       teamSeats?: {
         tier?: number;
         price: number;
@@ -494,7 +477,7 @@ export type AuthUser = {
       /**
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
        */
-      customCerts?: {
+      saml?: {
         tier?: number;
         price: number;
         quantity: number;
@@ -529,23 +512,6 @@ export type AuthUser = {
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
        */
       passwordProtection?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      ssoProtection?: {
         tier?: number;
         price: number;
         quantity: number;
@@ -618,6 +584,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       artifacts?: {
         tier?: number;
@@ -627,6 +594,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       bandwidth?: {
         tier?: number;
@@ -636,15 +604,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
-      };
-      builds?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       edgeMiddlewareInvocations?: {
         tier?: number;
@@ -654,6 +614,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       edgeFunctionExecutionUnits?: {
         tier?: number;
@@ -663,6 +624,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       monitoringMetric?: {
         tier?: number;
@@ -672,6 +634,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       serverlessFunctionExecution?: {
         tier?: number;
@@ -681,6 +644,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       sourceImages?: {
         tier?: number;
@@ -690,6 +654,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       webAnalyticsEvent?: {
         tier?: number;
@@ -699,6 +664,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       edgeConfigRead?: {
         tier?: number;
@@ -708,6 +674,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       edgeConfigWrite?: {
         tier?: number;
@@ -717,6 +684,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       cronJobInvocation?: {
         tier?: number;
@@ -726,6 +694,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       postgresComputeTime?: {
         tier?: number;
@@ -735,6 +704,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       postgresDataStorage?: {
         tier?: number;
@@ -744,6 +714,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       postgresDataTransfer?: {
         tier?: number;
@@ -753,6 +724,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       postgresWrittenData?: {
         tier?: number;
@@ -762,6 +734,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       storageRedisTotalCommands?: {
         tier?: number;
@@ -771,6 +744,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       storageRedisTotalBandwidthInBytes?: {
         tier?: number;
@@ -780,6 +754,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       storageRedisTotalDailyAvgStorageInBytes?: {
         tier?: number;
@@ -789,6 +764,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       storageRedisTotalDatabases?: {
         tier?: number;
@@ -798,6 +774,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       dataCacheRead?: {
         tier?: number;
@@ -807,6 +784,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       dataCacheRevalidation?: {
         tier?: number;
@@ -816,6 +794,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       dataCacheWrite?: {
         tier?: number;
@@ -825,6 +804,7 @@ export type AuthUser = {
         name?: string;
         hidden: boolean;
         disabledAt?: number | null;
+        enabledAt?: number | null;
       };
     } | null;
     invoiceSettings?: {
@@ -913,6 +893,10 @@ export type AuthUser = {
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
     edgeFunctionExecutionTimeoutMs?: number;
+    /**
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+     */
+    serverlessFunctionDefaultMaxExecutionTime?: number;
     /**
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
