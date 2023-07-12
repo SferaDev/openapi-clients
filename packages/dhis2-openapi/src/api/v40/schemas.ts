@@ -2430,7 +2430,7 @@ export type DimensionalObject = {
    * @format int64
    */
   id: number;
-  items: boolean;
+  items?: RefDimensionalItemObject[];
   key?: string;
   /**
    * @format date-time
