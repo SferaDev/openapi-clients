@@ -877,7 +877,8 @@ export type UpdateProjectDataCacheResponse = {
   createdAt?: number;
   dataCache?: {
     userDisabled: boolean;
-    enableAt: number | null;
+    storageSizeBytes?: number | null;
+    unlimited?: boolean;
   };
   crons?: {
     /**
@@ -1071,6 +1072,7 @@ export type UpdateProjectDataCacheResponse = {
     plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
     private: boolean;
     readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+    readySubstate?: 'STAGED' | 'PROMOTED';
     requestedAt?: number;
     target?: string | null;
     teamId?: string | null;
@@ -1199,6 +1201,7 @@ export type UpdateProjectDataCacheResponse = {
       plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
       private: boolean;
       readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+      readySubstate?: 'STAGED' | 'PROMOTED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
@@ -1254,6 +1257,7 @@ export type UpdateProjectDataCacheResponse = {
     domainRecord?: Schemas.ACLAction[];
     domainTransferIn?: Schemas.ACLAction[];
     event?: Schemas.ACLAction[];
+    ownEvent?: Schemas.ACLAction[];
     sensitiveEnvironmentVariablePolicy?: Schemas.ACLAction[];
     fileUpload?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
@@ -1269,6 +1273,7 @@ export type UpdateProjectDataCacheResponse = {
     monitoringQuery?: Schemas.ACLAction[];
     monitoringChart?: Schemas.ACLAction[];
     monitoringAlert?: Schemas.ACLAction[];
+    notificationDeploymentFailed?: Schemas.ACLAction[];
     notificationDomainConfiguration?: Schemas.ACLAction[];
     notificationDomainExpire?: Schemas.ACLAction[];
     notificationDomainMoved?: Schemas.ACLAction[];
@@ -1276,6 +1281,7 @@ export type UpdateProjectDataCacheResponse = {
     notificationDomainRenewal?: Schemas.ACLAction[];
     notificationDomainTransfer?: Schemas.ACLAction[];
     notificationDomainUnverified?: Schemas.ACLAction[];
+    NotificationMonitoringAlert?: Schemas.ACLAction[];
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationSpendCap?: Schemas.ACLAction[];
@@ -1285,8 +1291,10 @@ export type UpdateProjectDataCacheResponse = {
     postgres?: Schemas.ACLAction[];
     previewDeploymentSuffix?: Schemas.ACLAction[];
     proTrialOnboarding?: Schemas.ACLAction[];
+    seawallConfig?: Schemas.ACLAction[];
     sharedEnvVars?: Schemas.ACLAction[];
     sharedEnvVarsProduction?: Schemas.ACLAction[];
+    space?: Schemas.ACLAction[];
     passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
@@ -1319,7 +1327,6 @@ export type UpdateProjectDataCacheResponse = {
     endpointVerification?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
-    analytics?: Schemas.ACLAction[];
     connectConfigurationLink?: Schemas.ACLAction[];
     dataCacheNamespace?: Schemas.ACLAction[];
     deployment?: Schemas.ACLAction[];
@@ -1344,9 +1351,11 @@ export type UpdateProjectDataCacheResponse = {
     projectIntegrationConfiguration?: Schemas.ACLAction[];
     projectLink?: Schemas.ACLAction[];
     projectMember?: Schemas.ACLAction[];
+    projectPermissions?: Schemas.ACLAction[];
     projectProductionBranch?: Schemas.ACLAction[];
     projectTransfer?: Schemas.ACLAction[];
     projectProtectionBypass?: Schemas.ACLAction[];
+    analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
   };
@@ -1388,6 +1397,16 @@ export type UpdateProjectDataCacheResponse = {
         deploymentType: 'preview' | 'all';
       }
     | null;
+  gitComments?: {
+    /**
+     * Whether the Vercel bot should comment on PRs
+     */
+    onPullRequest: boolean;
+    /**
+     * Whether the Vercel bot should comment on commits
+     */
+    onCommit: boolean;
+  };
 };
 
 export type UpdateProjectDataCacheRequestBody = {
@@ -1649,7 +1668,6 @@ export type GetDeploymentVariables = {
 export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortSignal) =>
   fetch<
     | {
-        aliasAssignedAt?: number | boolean | null;
         build: {
           /**
            * The keys of the environment variables that were assigned during the build phase.
@@ -1854,141 +1872,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               ownerType: 'team' | 'user';
             }
           | null;
-        /**
-         * A list of all the aliases (default aliases, staging aliases and production aliases) that were assigned upon deployment creation
-         */
-        alias: string[];
-        /**
-         * A boolean that will be true when the aliases from the alias property were assigned successfully
-         *
-         * @example true
-         */
-        aliasAssigned: boolean;
-        /**
-         * An object that will contain a `code` and a `message` when the aliasing fails, otherwise the value will be `null`
-         *
-         * @example null
-         */
-        aliasError?: {
-          code: string;
-          message: string;
-        } | null;
-        aliasFinal?: string | null;
-        aliasWarning?: {
-          code: string;
-          message: string;
-          link?: string;
-          action?: string;
-        } | null;
-        autoAssignCustomDomains?: boolean;
-        automaticAliases?: string[];
-        bootedAt: number;
-        buildErrorAt?: number;
-        buildingAt: number;
-        canceledAt?: number;
-        checksState?: 'registered' | 'running' | 'completed';
-        checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-        /**
-         * A number containing the date when the deployment was created in milliseconds
-         *
-         * @example 1540257589405
-         */
-        createdAt: number;
-        /**
-         * Information about the deployment creator
-         */
-        creator: {
-          /**
-           * The ID of the user that created the deployment
-           *
-           * @example 96SnxkFiMyVKsK3pnoHfx3Hz
-           */
-          uid: string;
-          /**
-           * The username of the user that created the deployment
-           *
-           * @example john-doe
-           */
-          username?: string;
-        };
-        errorCode?: string;
-        errorLink?: string;
-        errorMessage?: string | null;
-        errorStep?: string;
-        gitSource?:
-          | {
-              type: 'github';
-              repoId: string | number;
-              ref?: string | null;
-              sha?: string;
-              prId?: number | null;
-            }
-          | {
-              type: 'github';
-              org: string;
-              repo: string;
-              ref?: string | null;
-              sha?: string;
-              prId?: number | null;
-            }
-          | {
-              type: 'gitlab';
-              projectId: string | number;
-              ref?: string | null;
-              sha?: string;
-              prId?: number | null;
-            }
-          | {
-              type: 'bitbucket';
-              workspaceUuid?: string;
-              repoUuid: string;
-              ref?: string | null;
-              sha?: string;
-              prId?: number | null;
-            }
-          | {
-              type: 'bitbucket';
-              owner: string;
-              slug: string;
-              ref?: string | null;
-              sha?: string;
-              prId?: number | null;
-            }
-          | {
-              type: 'custom';
-              ref: string;
-              sha: string;
-              gitUrl: string;
-            }
-          | {
-              type: 'github';
-              ref: string;
-              sha: string;
-              repoId: number;
-              org?: string;
-              repo?: string;
-            }
-          | {
-              type: 'gitlab';
-              ref: string;
-              sha: string;
-              projectId: number;
-            }
-          | {
-              type: 'bitbucket';
-              ref: string;
-              sha: string;
-              owner?: string;
-              slug?: string;
-              workspaceUuid: string;
-              repoUuid: string;
-            };
-        /**
-         * A string holding the unique ID of the deployment
-         *
-         * @example dpl_89qyp1cskzkLrVicDaZoDbjyHuDJ
-         */
-        id: string;
+        aliasAssignedAt?: number | boolean | null;
         lambdas?: {
           id: string;
           createdAt?: number;
@@ -2012,6 +1896,12 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          * @example READY
          */
         readyState: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
+        /**
+         * The substate of the deployment when the state is "READY"
+         *
+         * @example STAGED
+         */
+        readySubstate?: 'STAGED' | 'PROMOTED';
         /**
          * The regions the deployment exists in
          *
@@ -2079,8 +1969,6 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          * @example false
          */
         previewCommentsEnabled?: boolean;
-      }
-    | {
         /**
          * A list of all the aliases (default aliases, staging aliases and production aliases) that were assigned upon deployment creation
          */
@@ -2216,6 +2104,8 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          * @example dpl_89qyp1cskzkLrVicDaZoDbjyHuDJ
          */
         id: string;
+      }
+    | {
         lambdas?: {
           id: string;
           createdAt?: number;
@@ -2254,6 +2144,12 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          */
         readyState: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
         /**
+         * The substate of the deployment when the state is "READY"
+         *
+         * @example STAGED
+         */
+        readySubstate?: 'STAGED' | 'PROMOTED';
+        /**
          * The regions the deployment exists in
          *
          * @example sfo1
@@ -2320,6 +2216,141 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          * @example false
          */
         previewCommentsEnabled?: boolean;
+        /**
+         * A list of all the aliases (default aliases, staging aliases and production aliases) that were assigned upon deployment creation
+         */
+        alias: string[];
+        /**
+         * A boolean that will be true when the aliases from the alias property were assigned successfully
+         *
+         * @example true
+         */
+        aliasAssigned: boolean;
+        /**
+         * An object that will contain a `code` and a `message` when the aliasing fails, otherwise the value will be `null`
+         *
+         * @example null
+         */
+        aliasError?: {
+          code: string;
+          message: string;
+        } | null;
+        aliasFinal?: string | null;
+        aliasWarning?: {
+          code: string;
+          message: string;
+          link?: string;
+          action?: string;
+        } | null;
+        autoAssignCustomDomains?: boolean;
+        automaticAliases?: string[];
+        bootedAt: number;
+        buildErrorAt?: number;
+        buildingAt: number;
+        canceledAt?: number;
+        checksState?: 'registered' | 'running' | 'completed';
+        checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+        /**
+         * A number containing the date when the deployment was created in milliseconds
+         *
+         * @example 1540257589405
+         */
+        createdAt: number;
+        /**
+         * Information about the deployment creator
+         */
+        creator: {
+          /**
+           * The ID of the user that created the deployment
+           *
+           * @example 96SnxkFiMyVKsK3pnoHfx3Hz
+           */
+          uid: string;
+          /**
+           * The username of the user that created the deployment
+           *
+           * @example john-doe
+           */
+          username?: string;
+        };
+        errorCode?: string;
+        errorLink?: string;
+        errorMessage?: string | null;
+        errorStep?: string;
+        gitSource?:
+          | {
+              type: 'github';
+              repoId: string | number;
+              ref?: string | null;
+              sha?: string;
+              prId?: number | null;
+            }
+          | {
+              type: 'github';
+              org: string;
+              repo: string;
+              ref?: string | null;
+              sha?: string;
+              prId?: number | null;
+            }
+          | {
+              type: 'gitlab';
+              projectId: string | number;
+              ref?: string | null;
+              sha?: string;
+              prId?: number | null;
+            }
+          | {
+              type: 'bitbucket';
+              workspaceUuid?: string;
+              repoUuid: string;
+              ref?: string | null;
+              sha?: string;
+              prId?: number | null;
+            }
+          | {
+              type: 'bitbucket';
+              owner: string;
+              slug: string;
+              ref?: string | null;
+              sha?: string;
+              prId?: number | null;
+            }
+          | {
+              type: 'custom';
+              ref: string;
+              sha: string;
+              gitUrl: string;
+            }
+          | {
+              type: 'github';
+              ref: string;
+              sha: string;
+              repoId: number;
+              org?: string;
+              repo?: string;
+            }
+          | {
+              type: 'gitlab';
+              ref: string;
+              sha: string;
+              projectId: number;
+            }
+          | {
+              type: 'bitbucket';
+              ref: string;
+              sha: string;
+              owner?: string;
+              slug?: string;
+              workspaceUuid: string;
+              repoUuid: string;
+            };
+        /**
+         * A string holding the unique ID of the deployment
+         *
+         * @example dpl_89qyp1cskzkLrVicDaZoDbjyHuDJ
+         */
+        id: string;
       },
     GetDeploymentError,
     undefined,
@@ -2346,7 +2377,6 @@ export type CreateDeploymentQueryParams = {
 export type CreateDeploymentError = Fetcher.ErrorWrapper<undefined>;
 
 export type CreateDeploymentResponse = {
-  aliasAssignedAt?: number | boolean | null;
   build: {
     /**
      * The keys of the environment variables that were assigned during the build phase.
@@ -2551,6 +2581,103 @@ export type CreateDeploymentResponse = {
         ownerType: 'team' | 'user';
       }
     | null;
+  aliasAssignedAt?: number | boolean | null;
+  lambdas?: {
+    id: string;
+    createdAt?: number;
+    entrypoint?: string | null;
+    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    readyStateAt?: number;
+    output: {
+      path: string;
+      functionName: string;
+    }[];
+  }[];
+  /**
+   * A boolean representing if the deployment is public or not. By default this is `false`
+   *
+   * @example false
+   */
+  public: boolean;
+  /**
+   * The state of the deployment depending on the process of deploying, or if it is ready or in an error state
+   *
+   * @example READY
+   */
+  readyState: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
+  /**
+   * The substate of the deployment when the state is "READY"
+   *
+   * @example STAGED
+   */
+  readySubstate?: 'STAGED' | 'PROMOTED';
+  /**
+   * The regions the deployment exists in
+   *
+   * @example sfo1
+   */
+  regions: string[];
+  /**
+   * Where was the deployment created from
+   *
+   * @example cli
+   */
+  source?: 'cli' | 'git' | 'import' | 'import/repo' | 'clone/repo';
+  /**
+   * If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned
+   *
+   * @example null
+   */
+  target?: 'staging' | 'production' | null;
+  /**
+   * The team that owns the deployment if any
+   */
+  team?: {
+    /**
+     * The ID of the team owner
+     *
+     * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
+     */
+    id: string;
+    /**
+     * The name of the team owner
+     *
+     * @example FSociety
+     */
+    name: string;
+    /**
+     * The slug of the team owner
+     *
+     * @example fsociety
+     */
+    slug: string;
+  };
+  type: 'LAMBDAS';
+  /**
+   * A string with the unique URL of the deployment
+   *
+   * @example my-instant-deployment-3ij3cxz9qr.now.sh
+   */
+  url: string;
+  /**
+   * An array of domains that were provided by the user when creating the Deployment.
+   *
+   * @example sub1.example.com
+   * @example sub2.example.com
+   */
+  userAliases?: string[];
+  /**
+   * The platform version that was used to create the deployment.
+   *
+   * @example 2
+   */
+  version: 2;
+  /**
+   * Whether or not preview comments are enabled for the deployment
+   *
+   * @example false
+   */
+  previewCommentsEnabled?: boolean;
   /**
    * A list of all the aliases (default aliases, staging aliases and production aliases) that were assigned upon deployment creation
    */
@@ -2686,96 +2813,6 @@ export type CreateDeploymentResponse = {
    * @example dpl_89qyp1cskzkLrVicDaZoDbjyHuDJ
    */
   id: string;
-  lambdas?: {
-    id: string;
-    createdAt?: number;
-    entrypoint?: string | null;
-    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
-    readyStateAt?: number;
-    output: {
-      path: string;
-      functionName: string;
-    }[];
-  }[];
-  /**
-   * A boolean representing if the deployment is public or not. By default this is `false`
-   *
-   * @example false
-   */
-  public: boolean;
-  /**
-   * The state of the deployment depending on the process of deploying, or if it is ready or in an error state
-   *
-   * @example READY
-   */
-  readyState: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
-  /**
-   * The regions the deployment exists in
-   *
-   * @example sfo1
-   */
-  regions: string[];
-  /**
-   * Where was the deployment created from
-   *
-   * @example cli
-   */
-  source?: 'cli' | 'git' | 'import' | 'import/repo' | 'clone/repo';
-  /**
-   * If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned
-   *
-   * @example null
-   */
-  target?: 'staging' | 'production' | null;
-  /**
-   * The team that owns the deployment if any
-   */
-  team?: {
-    /**
-     * The ID of the team owner
-     *
-     * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
-     */
-    id: string;
-    /**
-     * The name of the team owner
-     *
-     * @example FSociety
-     */
-    name: string;
-    /**
-     * The slug of the team owner
-     *
-     * @example fsociety
-     */
-    slug: string;
-  };
-  type: 'LAMBDAS';
-  /**
-   * A string with the unique URL of the deployment
-   *
-   * @example my-instant-deployment-3ij3cxz9qr.now.sh
-   */
-  url: string;
-  /**
-   * An array of domains that were provided by the user when creating the Deployment.
-   *
-   * @example sub1.example.com
-   * @example sub2.example.com
-   */
-  userAliases?: string[];
-  /**
-   * The platform version that was used to create the deployment.
-   *
-   * @example 2
-   */
-  version: 2;
-  /**
-   * Whether or not preview comments are enabled for the deployment
-   *
-   * @example false
-   */
-  previewCommentsEnabled?: boolean;
 };
 
 export type CreateDeploymentRequestBody = {
@@ -3914,10 +3951,15 @@ export type CreateDeploymentRequestBody = {
   projects: {
     id: string;
     data_storage_bytes_hour: number;
+    data_storage_bytes_hour_updated_at?: string;
     data_transfer_bytes: number;
+    data_transfer_bytes_updated_at?: string;
     written_data_bytes: number;
+    written_data_bytes_updated_at?: string;
     compute_time_seconds: number;
+    compute_time_seconds_updated_at?: string;
     synthetic_storage_size: number;
+    synthetic_storage_size_updated_at?: string;
   }[];
   pagination: {
     cursor: string;
@@ -3961,7 +4003,6 @@ export type CancelDeploymentQueryParams = {
 export type CancelDeploymentError = Fetcher.ErrorWrapper<undefined>;
 
 export type CancelDeploymentResponse = {
-  aliasAssignedAt?: number | boolean | null;
   build: {
     /**
      * The keys of the environment variables that were assigned during the build phase.
@@ -4166,6 +4207,103 @@ export type CancelDeploymentResponse = {
         ownerType: 'user' | 'team';
       }
     | null;
+  aliasAssignedAt?: number | boolean | null;
+  lambdas?: {
+    id: string;
+    createdAt?: number;
+    entrypoint?: string | null;
+    readyState?: 'INITIALIZING' | 'BUILDING' | 'READY' | 'ERROR';
+    readyStateAt?: number;
+    output: {
+      path: string;
+      functionName: string;
+    }[];
+  }[];
+  /**
+   * A boolean representing if the deployment is public or not. By default this is `false`
+   *
+   * @example false
+   */
+  public: boolean;
+  /**
+   * The state of the deployment depending on the process of deploying, or if it is ready or in an error state
+   *
+   * @example READY
+   */
+  readyState: 'INITIALIZING' | 'BUILDING' | 'READY' | 'ERROR' | 'QUEUED' | 'CANCELED';
+  /**
+   * The substate of the deployment when the state is "READY"
+   *
+   * @example STAGED
+   */
+  readySubstate?: 'STAGED' | 'PROMOTED';
+  /**
+   * The regions the deployment exists in
+   *
+   * @example sfo1
+   */
+  regions: string[];
+  /**
+   * Where was the deployment created from
+   *
+   * @example cli
+   */
+  source?: 'cli' | 'git' | 'import' | 'import/repo' | 'clone/repo';
+  /**
+   * If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned
+   *
+   * @example null
+   */
+  target?: 'staging' | 'production' | null;
+  /**
+   * The team that owns the deployment if any
+   */
+  team?: {
+    /**
+     * The ID of the team owner
+     *
+     * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
+     */
+    id: string;
+    /**
+     * The name of the team owner
+     *
+     * @example FSociety
+     */
+    name: string;
+    /**
+     * The slug of the team owner
+     *
+     * @example fsociety
+     */
+    slug: string;
+  };
+  type: 'LAMBDAS';
+  /**
+   * A string with the unique URL of the deployment
+   *
+   * @example my-instant-deployment-3ij3cxz9qr.now.sh
+   */
+  url: string;
+  /**
+   * An array of domains that were provided by the user when creating the Deployment.
+   *
+   * @example sub1.example.com
+   * @example sub2.example.com
+   */
+  userAliases?: string[];
+  /**
+   * The platform version that was used to create the deployment.
+   *
+   * @example 2
+   */
+  version: 2;
+  /**
+   * Whether or not preview comments are enabled for the deployment
+   *
+   * @example false
+   */
+  previewCommentsEnabled?: boolean;
   /**
    * A list of all the aliases (default aliases, staging aliases and production aliases) that were assigned upon deployment creation
    */
@@ -4301,96 +4439,6 @@ export type CancelDeploymentResponse = {
    * @example dpl_89qyp1cskzkLrVicDaZoDbjyHuDJ
    */
   id: string;
-  lambdas?: {
-    id: string;
-    createdAt?: number;
-    entrypoint?: string | null;
-    readyState?: 'INITIALIZING' | 'BUILDING' | 'READY' | 'ERROR';
-    readyStateAt?: number;
-    output: {
-      path: string;
-      functionName: string;
-    }[];
-  }[];
-  /**
-   * A boolean representing if the deployment is public or not. By default this is `false`
-   *
-   * @example false
-   */
-  public: boolean;
-  /**
-   * The state of the deployment depending on the process of deploying, or if it is ready or in an error state
-   *
-   * @example READY
-   */
-  readyState: 'INITIALIZING' | 'BUILDING' | 'READY' | 'ERROR' | 'QUEUED' | 'CANCELED';
-  /**
-   * The regions the deployment exists in
-   *
-   * @example sfo1
-   */
-  regions: string[];
-  /**
-   * Where was the deployment created from
-   *
-   * @example cli
-   */
-  source?: 'cli' | 'git' | 'import' | 'import/repo' | 'clone/repo';
-  /**
-   * If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned
-   *
-   * @example null
-   */
-  target?: 'staging' | 'production' | null;
-  /**
-   * The team that owns the deployment if any
-   */
-  team?: {
-    /**
-     * The ID of the team owner
-     *
-     * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
-     */
-    id: string;
-    /**
-     * The name of the team owner
-     *
-     * @example FSociety
-     */
-    name: string;
-    /**
-     * The slug of the team owner
-     *
-     * @example fsociety
-     */
-    slug: string;
-  };
-  type: 'LAMBDAS';
-  /**
-   * A string with the unique URL of the deployment
-   *
-   * @example my-instant-deployment-3ij3cxz9qr.now.sh
-   */
-  url: string;
-  /**
-   * An array of domains that were provided by the user when creating the Deployment.
-   *
-   * @example sub1.example.com
-   * @example sub2.example.com
-   */
-  userAliases?: string[];
-  /**
-   * The platform version that was used to create the deployment.
-   *
-   * @example 2
-   */
-  version: 2;
-  /**
-   * Whether or not preview comments are enabled for the deployment
-   *
-   * @example false
-   */
-  previewCommentsEnabled?: boolean;
 };
 
 export type CancelDeploymentVariables = {
@@ -5954,6 +6002,14 @@ export type GetEdgeConfigsResponse = {
   slug?: string;
   updatedAt?: number;
   digest?: string;
+  /**
+   * Keeps track of the current state of the Edge Config while it gets transferred.
+   */
+  transfer?: {
+    fromAccountId: string;
+    startedAt: number;
+    doneAt: number | null;
+  };
   sizeInBytes: number;
   itemCount: number;
 };
@@ -5992,6 +6048,14 @@ export type CreateEdgeConfigResponse = {
   slug?: string;
   ownerId?: string;
   digest?: string;
+  /**
+   * Keeps track of the current state of the Edge Config while it gets transferred.
+   */
+  transfer?: {
+    fromAccountId: string;
+    startedAt: number;
+    doneAt: number | null;
+  };
   sizeInBytes: number;
   itemCount: number;
 };
@@ -6050,6 +6114,14 @@ export type GetEdgeConfigResponse = {
   slug?: string;
   ownerId?: string;
   digest?: string;
+  /**
+   * Keeps track of the current state of the Edge Config while it gets transferred.
+   */
+  transfer?: {
+    fromAccountId: string;
+    startedAt: number;
+    doneAt: number | null;
+  };
   sizeInBytes: number;
   itemCount: number;
 };
@@ -6093,6 +6165,14 @@ export type UpdateEdgeConfigResponse = {
   slug?: string;
   ownerId?: string;
   digest?: string;
+  /**
+   * Keeps track of the current state of the Edge Config while it gets transferred.
+   */
+  transfer?: {
+    fromAccountId: string;
+    startedAt: number;
+    doneAt: number | null;
+  };
   sizeInBytes: number;
   itemCount: number;
 };
@@ -6645,6 +6725,7 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
           | 'log-drain-high-error-rate'
           | 'log-drains-add-on-disabled-by-owner'
           | 'account-plan-downgrade'
+          | 'disabled-by-admin'
           | 'original-owner-left-the-team';
       }[]
     | {
@@ -6801,6 +6882,7 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
           | 'log-drain-high-error-rate'
           | 'log-drains-add-on-disabled-by-owner'
           | 'account-plan-downgrade'
+          | 'disabled-by-admin'
           | 'original-owner-left-the-team';
       }[],
     GetConfigurationsError,
@@ -6984,6 +7066,7 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
           | 'log-drain-high-error-rate'
           | 'log-drains-add-on-disabled-by-owner'
           | 'account-plan-downgrade'
+          | 'disabled-by-admin'
           | 'original-owner-left-the-team';
       }
     | {
@@ -7138,6 +7221,7 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
           | 'log-drain-high-error-rate'
           | 'log-drains-add-on-disabled-by-owner'
           | 'account-plan-downgrade'
+          | 'disabled-by-admin'
           | 'original-owner-left-the-team';
         canConfigureOpenTelemetry?: boolean;
       },
@@ -7566,14 +7650,19 @@ export type SearchRepoResponse = {
   };
   repos: {
     id: string | number;
+    provider: 'github' | 'gitlab' | 'bitbucket';
+    url: string;
     name: string;
     slug: string;
     namespace: string;
+    owner: {
+      id: string | number;
+      name: string;
+    };
+    ownerType: 'user' | 'team';
     private: boolean;
     defaultBranch: string;
-    url: string;
     updatedAt: number;
-    ownerType: 'user' | 'team';
   }[];
 };
 
@@ -7606,77 +7695,33 @@ export type GetConfigurableLogDrainQueryParams = {
 export type GetConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetConfigurableLogDrainResponse = {
-  /**
-   * The environment to filter logs by
-   *
-   * @example production
-   */
-  environment?: 'preview' | 'production';
-  /**
-   * The branch to filter logs by
-   *
-   * @example main
-   */
-  branch?: string;
-  /**
-   * The ID of the related integration configuration
-   */
+  id: string;
+  deliveryFormat: 'json' | 'ndjson' | 'syslog';
+  url: string;
+  name: string;
+  clientId?: string;
   configurationId?: string;
-  /**
-   * The key/value pairs that will be sent as headers to the log-drain
-   *
-   * @example {"foo":"bar"}
-   */
+  teamId?: string | null;
+  ownerId: string;
+  projectIds?: string[];
+  createdAt: number;
+  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
   headers?: {
     [key: string]: string;
   };
-  /**
-   * The ID of the projects the deployment is associated with
-   *
-   * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-   */
-  projectIds?: string[];
-  /**
-   * A number containing the date when the log-drain was created in in milliseconds
-   *
-   * @example 1567024758130
-   */
-  createdAt: number;
-  /**
-   * The log-drain id
-   *
-   * @example ld_GflD6EYyo7F4ViYS
-   */
-  id: string;
-  /**
-   * The unique ID of the team the deployment belongs to
-   *
-   * @example team_ZspSRT4ljIEEmMHgoDwKWDei
-   */
-  ownerId: string;
-  /**
-   * The log-drain defined sources
-   *
-   * @example lambda
-   * @example build
-   */
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
-  /**
-   * The log-drain defined delivery format
-   *
-   * @example json
-   * @example ndjson
-   */
-  deliveryFormat: 'json' | 'ndjson' | 'syslog';
-  /**
-   * A string with the URL of the log-drain
-   *
-   * @example https://my-log-drain.com
-   */
-  url: string;
-  status?: 'enabled' | 'disabled';
+  environment?: 'preview' | 'production';
+  branch?: string;
+  status?: 'enabled' | 'disabled' | 'errored';
   disabledAt?: number;
-  disabledReason?: 'log-drain-high-error-rate' | 'log-drains-add-on-disabled-by-owner' | 'account-plan-downgrade';
+  disabledReason?:
+    | 'log-drain-high-error-rate'
+    | 'log-drains-add-on-disabled-by-owner'
+    | 'disabled-by-admin'
+    | 'account-plan-downgrade';
+  disabledBy?: string;
+  firstErrorTimestamp?: number;
+  secret: string;
+  createdFrom?: 'self-served';
 };
 
 export type GetConfigurableLogDrainVariables = {
@@ -7742,77 +7787,33 @@ export type GetConfigurableLogDrainsQueryParams = {
 export type GetConfigurableLogDrainsError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetConfigurableLogDrainsResponse = {
-  /**
-   * The environment to filter logs by
-   *
-   * @example production
-   */
-  environment?: 'preview' | 'production';
-  /**
-   * The branch to filter logs by
-   *
-   * @example main
-   */
-  branch?: string;
-  /**
-   * The ID of the related integration configuration
-   */
+  id: string;
+  deliveryFormat: 'json' | 'ndjson' | 'syslog';
+  url: string;
+  name: string;
+  clientId?: string;
   configurationId?: string;
-  /**
-   * The key/value pairs that will be sent as headers to the log-drain
-   *
-   * @example {"foo":"bar"}
-   */
+  teamId?: string | null;
+  ownerId: string;
+  projectIds?: string[];
+  createdAt: number;
+  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
   headers?: {
     [key: string]: string;
   };
-  /**
-   * The ID of the projects the deployment is associated with
-   *
-   * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-   */
-  projectIds?: string[];
-  /**
-   * A number containing the date when the log-drain was created in in milliseconds
-   *
-   * @example 1567024758130
-   */
-  createdAt: number;
-  /**
-   * The log-drain id
-   *
-   * @example ld_GflD6EYyo7F4ViYS
-   */
-  id: string;
-  /**
-   * The unique ID of the team the deployment belongs to
-   *
-   * @example team_ZspSRT4ljIEEmMHgoDwKWDei
-   */
-  ownerId: string;
-  /**
-   * The log-drain defined sources
-   *
-   * @example lambda
-   * @example build
-   */
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
-  /**
-   * The log-drain defined delivery format
-   *
-   * @example json
-   * @example ndjson
-   */
-  deliveryFormat: 'json' | 'ndjson' | 'syslog';
-  /**
-   * A string with the URL of the log-drain
-   *
-   * @example https://my-log-drain.com
-   */
-  url: string;
-  status?: 'enabled' | 'disabled';
+  environment?: 'preview' | 'production';
+  branch?: string;
+  status?: 'enabled' | 'disabled' | 'errored';
   disabledAt?: number;
-  disabledReason?: 'log-drain-high-error-rate' | 'log-drains-add-on-disabled-by-owner' | 'account-plan-downgrade';
+  disabledReason?:
+    | 'log-drain-high-error-rate'
+    | 'log-drains-add-on-disabled-by-owner'
+    | 'disabled-by-admin'
+    | 'account-plan-downgrade';
+  disabledBy?: string;
+  firstErrorTimestamp?: number;
+  secret: string;
+  createdFrom?: 'self-served';
 }[];
 
 export type GetConfigurableLogDrainsVariables = {
@@ -7846,77 +7847,32 @@ export type CreateConfigurableLogDrainResponse = {
    * The secret to validate the log-drain payload
    */
   secret?: string;
-  /**
-   * The environment to filter logs by
-   *
-   * @example production
-   */
-  environment?: 'preview' | 'production';
-  /**
-   * The branch to filter logs by
-   *
-   * @example main
-   */
-  branch?: string;
-  /**
-   * The ID of the related integration configuration
-   */
+  id: string;
+  deliveryFormat: 'json' | 'ndjson' | 'syslog';
+  url: string;
+  name: string;
+  clientId?: string;
   configurationId?: string;
-  /**
-   * The key/value pairs that will be sent as headers to the log-drain
-   *
-   * @example {"foo":"bar"}
-   */
+  teamId?: string | null;
+  ownerId: string;
+  projectIds?: string[];
+  createdAt: number;
+  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
   headers?: {
     [key: string]: string;
   };
-  /**
-   * The ID of the projects the deployment is associated with
-   *
-   * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-   */
-  projectIds?: string[];
-  /**
-   * A number containing the date when the log-drain was created in in milliseconds
-   *
-   * @example 1567024758130
-   */
-  createdAt: number;
-  /**
-   * The log-drain id
-   *
-   * @example ld_GflD6EYyo7F4ViYS
-   */
-  id: string;
-  /**
-   * The unique ID of the team the deployment belongs to
-   *
-   * @example team_ZspSRT4ljIEEmMHgoDwKWDei
-   */
-  ownerId: string;
-  /**
-   * The log-drain defined sources
-   *
-   * @example lambda
-   * @example build
-   */
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
-  /**
-   * The log-drain defined delivery format
-   *
-   * @example json
-   * @example ndjson
-   */
-  deliveryFormat: 'json' | 'ndjson' | 'syslog';
-  /**
-   * A string with the URL of the log-drain
-   *
-   * @example https://my-log-drain.com
-   */
-  url: string;
-  status?: 'enabled' | 'disabled';
+  environment?: 'preview' | 'production';
+  branch?: string;
+  status?: 'enabled' | 'disabled' | 'errored';
   disabledAt?: number;
-  disabledReason?: 'log-drain-high-error-rate' | 'log-drains-add-on-disabled-by-owner' | 'account-plan-downgrade';
+  disabledReason?:
+    | 'log-drain-high-error-rate'
+    | 'log-drains-add-on-disabled-by-owner'
+    | 'disabled-by-admin'
+    | 'account-plan-downgrade';
+  disabledBy?: string;
+  firstErrorTimestamp?: number;
+  createdFrom?: 'self-served';
 };
 
 export type CreateConfigurableLogDrainRequestBody = {
@@ -7961,6 +7917,10 @@ export type CreateConfigurableLogDrainRequestBody = {
    * @example feature/*
    */
   branch?: string;
+  /**
+   * Custom secret of log drain
+   */
+  secret?: string;
 };
 
 export type CreateConfigurableLogDrainVariables = {
@@ -8056,7 +8016,8 @@ export type GetProjectsResponse = {
     createdAt?: number;
     dataCache?: {
       userDisabled: boolean;
-      enableAt: number | null;
+      storageSizeBytes?: number | null;
+      unlimited?: boolean;
     };
     crons?: {
       /**
@@ -8250,6 +8211,7 @@ export type GetProjectsResponse = {
       plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
       private: boolean;
       readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+      readySubstate?: 'STAGED' | 'PROMOTED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
@@ -8378,6 +8340,7 @@ export type GetProjectsResponse = {
         plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
         private: boolean;
         readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+        readySubstate?: 'STAGED' | 'PROMOTED';
         requestedAt?: number;
         target?: string | null;
         teamId?: string | null;
@@ -8433,6 +8396,7 @@ export type GetProjectsResponse = {
       domainRecord?: Schemas.ACLAction[];
       domainTransferIn?: Schemas.ACLAction[];
       event?: Schemas.ACLAction[];
+      ownEvent?: Schemas.ACLAction[];
       sensitiveEnvironmentVariablePolicy?: Schemas.ACLAction[];
       fileUpload?: Schemas.ACLAction[];
       gitRepository?: Schemas.ACLAction[];
@@ -8448,6 +8412,7 @@ export type GetProjectsResponse = {
       monitoringQuery?: Schemas.ACLAction[];
       monitoringChart?: Schemas.ACLAction[];
       monitoringAlert?: Schemas.ACLAction[];
+      notificationDeploymentFailed?: Schemas.ACLAction[];
       notificationDomainConfiguration?: Schemas.ACLAction[];
       notificationDomainExpire?: Schemas.ACLAction[];
       notificationDomainMoved?: Schemas.ACLAction[];
@@ -8455,6 +8420,7 @@ export type GetProjectsResponse = {
       notificationDomainRenewal?: Schemas.ACLAction[];
       notificationDomainTransfer?: Schemas.ACLAction[];
       notificationDomainUnverified?: Schemas.ACLAction[];
+      NotificationMonitoringAlert?: Schemas.ACLAction[];
       notificationPaymentFailed?: Schemas.ACLAction[];
       notificationUsageAlert?: Schemas.ACLAction[];
       notificationSpendCap?: Schemas.ACLAction[];
@@ -8464,8 +8430,10 @@ export type GetProjectsResponse = {
       postgres?: Schemas.ACLAction[];
       previewDeploymentSuffix?: Schemas.ACLAction[];
       proTrialOnboarding?: Schemas.ACLAction[];
+      seawallConfig?: Schemas.ACLAction[];
       sharedEnvVars?: Schemas.ACLAction[];
       sharedEnvVarsProduction?: Schemas.ACLAction[];
+      space?: Schemas.ACLAction[];
       passwordProtectionInvoiceItem?: Schemas.ACLAction[];
       rateLimit?: Schemas.ACLAction[];
       redis?: Schemas.ACLAction[];
@@ -8498,7 +8466,6 @@ export type GetProjectsResponse = {
       endpointVerification?: Schemas.ACLAction[];
       aliasProject?: Schemas.ACLAction[];
       aliasProtectionBypass?: Schemas.ACLAction[];
-      analytics?: Schemas.ACLAction[];
       connectConfigurationLink?: Schemas.ACLAction[];
       dataCacheNamespace?: Schemas.ACLAction[];
       deployment?: Schemas.ACLAction[];
@@ -8523,9 +8490,11 @@ export type GetProjectsResponse = {
       projectIntegrationConfiguration?: Schemas.ACLAction[];
       projectLink?: Schemas.ACLAction[];
       projectMember?: Schemas.ACLAction[];
+      projectPermissions?: Schemas.ACLAction[];
       projectProductionBranch?: Schemas.ACLAction[];
       projectTransfer?: Schemas.ACLAction[];
       projectProtectionBypass?: Schemas.ACLAction[];
+      analytics?: Schemas.ACLAction[];
       trustedIps?: Schemas.ACLAction[];
       webAnalytics?: Schemas.ACLAction[];
     };
@@ -8567,6 +8536,16 @@ export type GetProjectsResponse = {
           deploymentType: 'preview' | 'all';
         }
       | null;
+    gitComments?: {
+      /**
+       * Whether the Vercel bot should comment on PRs
+       */
+      onPullRequest: boolean;
+      /**
+       * Whether the Vercel bot should comment on commits
+       */
+      onCommit: boolean;
+    };
   }[];
   pagination: Schemas.Pagination;
 };
@@ -8616,7 +8595,8 @@ export type CreateProjectResponse = {
   createdAt?: number;
   dataCache?: {
     userDisabled: boolean;
-    enableAt: number | null;
+    storageSizeBytes?: number | null;
+    unlimited?: boolean;
   };
   crons?: {
     /**
@@ -8810,6 +8790,7 @@ export type CreateProjectResponse = {
     plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
     private: boolean;
     readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+    readySubstate?: 'STAGED' | 'PROMOTED';
     requestedAt?: number;
     target?: string | null;
     teamId?: string | null;
@@ -8938,6 +8919,7 @@ export type CreateProjectResponse = {
       plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
       private: boolean;
       readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+      readySubstate?: 'STAGED' | 'PROMOTED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
@@ -8993,6 +8975,7 @@ export type CreateProjectResponse = {
     domainRecord?: Schemas.ACLAction[];
     domainTransferIn?: Schemas.ACLAction[];
     event?: Schemas.ACLAction[];
+    ownEvent?: Schemas.ACLAction[];
     sensitiveEnvironmentVariablePolicy?: Schemas.ACLAction[];
     fileUpload?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
@@ -9008,6 +8991,7 @@ export type CreateProjectResponse = {
     monitoringQuery?: Schemas.ACLAction[];
     monitoringChart?: Schemas.ACLAction[];
     monitoringAlert?: Schemas.ACLAction[];
+    notificationDeploymentFailed?: Schemas.ACLAction[];
     notificationDomainConfiguration?: Schemas.ACLAction[];
     notificationDomainExpire?: Schemas.ACLAction[];
     notificationDomainMoved?: Schemas.ACLAction[];
@@ -9015,6 +8999,7 @@ export type CreateProjectResponse = {
     notificationDomainRenewal?: Schemas.ACLAction[];
     notificationDomainTransfer?: Schemas.ACLAction[];
     notificationDomainUnverified?: Schemas.ACLAction[];
+    NotificationMonitoringAlert?: Schemas.ACLAction[];
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationSpendCap?: Schemas.ACLAction[];
@@ -9024,8 +9009,10 @@ export type CreateProjectResponse = {
     postgres?: Schemas.ACLAction[];
     previewDeploymentSuffix?: Schemas.ACLAction[];
     proTrialOnboarding?: Schemas.ACLAction[];
+    seawallConfig?: Schemas.ACLAction[];
     sharedEnvVars?: Schemas.ACLAction[];
     sharedEnvVarsProduction?: Schemas.ACLAction[];
+    space?: Schemas.ACLAction[];
     passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
@@ -9058,7 +9045,6 @@ export type CreateProjectResponse = {
     endpointVerification?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
-    analytics?: Schemas.ACLAction[];
     connectConfigurationLink?: Schemas.ACLAction[];
     dataCacheNamespace?: Schemas.ACLAction[];
     deployment?: Schemas.ACLAction[];
@@ -9083,9 +9069,11 @@ export type CreateProjectResponse = {
     projectIntegrationConfiguration?: Schemas.ACLAction[];
     projectLink?: Schemas.ACLAction[];
     projectMember?: Schemas.ACLAction[];
+    projectPermissions?: Schemas.ACLAction[];
     projectProductionBranch?: Schemas.ACLAction[];
     projectTransfer?: Schemas.ACLAction[];
     projectProtectionBypass?: Schemas.ACLAction[];
+    analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
   };
@@ -9127,6 +9115,16 @@ export type CreateProjectResponse = {
         deploymentType: 'preview' | 'all';
       }
     | null;
+  gitComments?: {
+    /**
+     * Whether the Vercel bot should comment on PRs
+     */
+    onPullRequest: boolean;
+    /**
+     * Whether the Vercel bot should comment on commits
+     */
+    onCommit: boolean;
+  };
 };
 
 export type CreateProjectRequestBody = {
@@ -9331,7 +9329,8 @@ export type GetProjectResponse = {
   createdAt?: number;
   dataCache?: {
     userDisabled: boolean;
-    enableAt: number | null;
+    storageSizeBytes?: number | null;
+    unlimited?: boolean;
   };
   crons?: {
     /**
@@ -9525,6 +9524,7 @@ export type GetProjectResponse = {
     plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
     private: boolean;
     readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+    readySubstate?: 'STAGED' | 'PROMOTED';
     requestedAt?: number;
     target?: string | null;
     teamId?: string | null;
@@ -9653,6 +9653,7 @@ export type GetProjectResponse = {
       plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
       private: boolean;
       readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+      readySubstate?: 'STAGED' | 'PROMOTED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
@@ -9708,6 +9709,7 @@ export type GetProjectResponse = {
     domainRecord?: Schemas.ACLAction[];
     domainTransferIn?: Schemas.ACLAction[];
     event?: Schemas.ACLAction[];
+    ownEvent?: Schemas.ACLAction[];
     sensitiveEnvironmentVariablePolicy?: Schemas.ACLAction[];
     fileUpload?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
@@ -9723,6 +9725,7 @@ export type GetProjectResponse = {
     monitoringQuery?: Schemas.ACLAction[];
     monitoringChart?: Schemas.ACLAction[];
     monitoringAlert?: Schemas.ACLAction[];
+    notificationDeploymentFailed?: Schemas.ACLAction[];
     notificationDomainConfiguration?: Schemas.ACLAction[];
     notificationDomainExpire?: Schemas.ACLAction[];
     notificationDomainMoved?: Schemas.ACLAction[];
@@ -9730,6 +9733,7 @@ export type GetProjectResponse = {
     notificationDomainRenewal?: Schemas.ACLAction[];
     notificationDomainTransfer?: Schemas.ACLAction[];
     notificationDomainUnverified?: Schemas.ACLAction[];
+    NotificationMonitoringAlert?: Schemas.ACLAction[];
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationSpendCap?: Schemas.ACLAction[];
@@ -9739,8 +9743,10 @@ export type GetProjectResponse = {
     postgres?: Schemas.ACLAction[];
     previewDeploymentSuffix?: Schemas.ACLAction[];
     proTrialOnboarding?: Schemas.ACLAction[];
+    seawallConfig?: Schemas.ACLAction[];
     sharedEnvVars?: Schemas.ACLAction[];
     sharedEnvVarsProduction?: Schemas.ACLAction[];
+    space?: Schemas.ACLAction[];
     passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
@@ -9773,7 +9779,6 @@ export type GetProjectResponse = {
     endpointVerification?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
-    analytics?: Schemas.ACLAction[];
     connectConfigurationLink?: Schemas.ACLAction[];
     dataCacheNamespace?: Schemas.ACLAction[];
     deployment?: Schemas.ACLAction[];
@@ -9798,9 +9803,11 @@ export type GetProjectResponse = {
     projectIntegrationConfiguration?: Schemas.ACLAction[];
     projectLink?: Schemas.ACLAction[];
     projectMember?: Schemas.ACLAction[];
+    projectPermissions?: Schemas.ACLAction[];
     projectProductionBranch?: Schemas.ACLAction[];
     projectTransfer?: Schemas.ACLAction[];
     projectProtectionBypass?: Schemas.ACLAction[];
+    analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
   };
@@ -9842,6 +9849,16 @@ export type GetProjectResponse = {
         deploymentType: 'preview' | 'all';
       }
     | null;
+  gitComments?: {
+    /**
+     * Whether the Vercel bot should comment on PRs
+     */
+    onPullRequest: boolean;
+    /**
+     * Whether the Vercel bot should comment on commits
+     */
+    onCommit: boolean;
+  };
 };
 
 export type GetProjectVariables = {
@@ -9899,7 +9916,8 @@ export type UpdateProjectResponse = {
   createdAt?: number;
   dataCache?: {
     userDisabled: boolean;
-    enableAt: number | null;
+    storageSizeBytes?: number | null;
+    unlimited?: boolean;
   };
   crons?: {
     /**
@@ -10093,6 +10111,7 @@ export type UpdateProjectResponse = {
     plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
     private: boolean;
     readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+    readySubstate?: 'STAGED' | 'PROMOTED';
     requestedAt?: number;
     target?: string | null;
     teamId?: string | null;
@@ -10221,6 +10240,7 @@ export type UpdateProjectResponse = {
       plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
       private: boolean;
       readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+      readySubstate?: 'STAGED' | 'PROMOTED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
@@ -10276,6 +10296,7 @@ export type UpdateProjectResponse = {
     domainRecord?: Schemas.ACLAction[];
     domainTransferIn?: Schemas.ACLAction[];
     event?: Schemas.ACLAction[];
+    ownEvent?: Schemas.ACLAction[];
     sensitiveEnvironmentVariablePolicy?: Schemas.ACLAction[];
     fileUpload?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
@@ -10291,6 +10312,7 @@ export type UpdateProjectResponse = {
     monitoringQuery?: Schemas.ACLAction[];
     monitoringChart?: Schemas.ACLAction[];
     monitoringAlert?: Schemas.ACLAction[];
+    notificationDeploymentFailed?: Schemas.ACLAction[];
     notificationDomainConfiguration?: Schemas.ACLAction[];
     notificationDomainExpire?: Schemas.ACLAction[];
     notificationDomainMoved?: Schemas.ACLAction[];
@@ -10298,6 +10320,7 @@ export type UpdateProjectResponse = {
     notificationDomainRenewal?: Schemas.ACLAction[];
     notificationDomainTransfer?: Schemas.ACLAction[];
     notificationDomainUnverified?: Schemas.ACLAction[];
+    NotificationMonitoringAlert?: Schemas.ACLAction[];
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationSpendCap?: Schemas.ACLAction[];
@@ -10307,8 +10330,10 @@ export type UpdateProjectResponse = {
     postgres?: Schemas.ACLAction[];
     previewDeploymentSuffix?: Schemas.ACLAction[];
     proTrialOnboarding?: Schemas.ACLAction[];
+    seawallConfig?: Schemas.ACLAction[];
     sharedEnvVars?: Schemas.ACLAction[];
     sharedEnvVarsProduction?: Schemas.ACLAction[];
+    space?: Schemas.ACLAction[];
     passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
@@ -10341,7 +10366,6 @@ export type UpdateProjectResponse = {
     endpointVerification?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
-    analytics?: Schemas.ACLAction[];
     connectConfigurationLink?: Schemas.ACLAction[];
     dataCacheNamespace?: Schemas.ACLAction[];
     deployment?: Schemas.ACLAction[];
@@ -10366,9 +10390,11 @@ export type UpdateProjectResponse = {
     projectIntegrationConfiguration?: Schemas.ACLAction[];
     projectLink?: Schemas.ACLAction[];
     projectMember?: Schemas.ACLAction[];
+    projectPermissions?: Schemas.ACLAction[];
     projectProductionBranch?: Schemas.ACLAction[];
     projectTransfer?: Schemas.ACLAction[];
     projectProtectionBypass?: Schemas.ACLAction[];
+    analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
   };
@@ -10410,6 +10436,16 @@ export type UpdateProjectResponse = {
         deploymentType: 'all' | 'preview';
       }
     | null;
+  gitComments?: {
+    /**
+     * Whether the Vercel bot should comment on PRs
+     */
+    onPullRequest: boolean;
+    /**
+     * Whether the Vercel bot should comment on commits
+     */
+    onCommit: boolean;
+  };
 };
 
 export type UpdateProjectRequestBody = {
@@ -12270,6 +12306,10 @@ export type GetTeamMembersQueryParams = {
    * Exclude members who belong to the specified project.
    */
   excludeProject?: string;
+  /**
+   * Include team members who are eligible to be members of the specified project.
+   */
+  eligibleMembersForProjectId?: string;
 };
 
 export type GetTeamMembersError = Fetcher.ErrorWrapper<undefined>;
@@ -12317,7 +12357,7 @@ export type GetTeamMembersResponse = {
      *
      * @example OWNER
      */
-    role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'PROJECT_CONTRIBUTOR';
+    role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
     /**
      * The ID of this user.
      *
@@ -12375,13 +12415,22 @@ export type GetTeamMembersResponse = {
       dsyncUserId?: string;
       dsyncConnectedAt?: number;
     };
+    /**
+     * Array of project memberships
+     */
+    projects?: {
+      name?: string;
+      id?: string;
+      role?: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+    }[];
   }[];
   emailInviteCodes?: {
     id: string;
     email?: string;
-    role?: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'PROJECT_CONTRIBUTOR';
+    role?: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
     isDSyncUser: boolean;
     createdAt?: number;
+    expired?: boolean;
   }[];
   pagination: {
     hasNext: boolean;
@@ -12445,7 +12494,22 @@ export type InviteUserToTeamRequestBody = {
    * @example MEMBER
    * @example VIEWER
    */
-  role?: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'PROJECT_CONTRIBUTOR';
+  role?: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
+  projects?: {
+    /**
+     * The ID of the project.
+     *
+     * @maxLength 256
+     * @example prj_ndlgr43fadlPyCtREAqxxdyFK
+     */
+    projectId: string;
+    /**
+     * Sets the project roles for the invited user
+     *
+     * @example ADMIN
+     */
+    role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER';
+  }[];
 };
 
 export type InviteUserToTeamVariables = {
@@ -12456,44 +12520,12 @@ export type InviteUserToTeamVariables = {
  * Invite a user to join the team specified in the URL. The authenticated user needs to be an `OWNER` in order to successfully invoke this endpoint. The user can be specified with an email or an ID. If both email and ID are provided, ID will take priority.
  */
 export const inviteUserToTeam = (variables: InviteUserToTeamVariables, signal?: AbortSignal) =>
-  fetch<
-    | {
-        /**
-         * The ID of the invited user
-         *
-         * @example kr1PsOIzqEL5Xg6M4VZcZosf
-         */
-        uid: string;
-        /**
-         * The username of the invited user
-         *
-         * @example john-doe
-         */
-        username: string;
-        /**
-         * The email of the invited user. Not included if the user was invited via their UID.
-         *
-         * @example john@user.co
-         */
-        email: string;
-        /**
-         * The role used for the invitation
-         *
-         * @example MEMBER
-         */
-        role: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'PROJECT_CONTRIBUTOR';
-      }
-    | {
-        uid: string;
-        username: string;
-        role: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'PROJECT_CONTRIBUTOR';
-      },
-    InviteUserToTeamError,
-    InviteUserToTeamRequestBody,
-    {},
-    {},
-    {}
-  >({ url: '/v1/teams/{teamId}/members', method: 'post', ...variables, signal });
+  fetch<Record<string, any>, InviteUserToTeamError, InviteUserToTeamRequestBody, {}, {}, {}>({
+    url: '/v1/teams/{teamId}/members',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type RequestAccessToTeamError = Fetcher.ErrorWrapper<undefined>;
 
@@ -12920,7 +12952,7 @@ export type PatchTeamRequestBody = {
      */
     enforced?: boolean;
     roles?: {
-      [key: string]: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'PROJECT_CONTRIBUTOR';
+      [key: string]: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
     };
   };
   /**
@@ -13073,7 +13105,7 @@ export type CreateTeamResponse = {
       /**
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
        */
-      pro?: {
+      analytics?: {
         tier?: number;
         price: number;
         quantity: number;
@@ -13107,58 +13139,41 @@ export type CreateTeamResponse = {
       /**
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
        */
+      monitoring?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      pro?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
       concurrentBuilds?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      teamSeats?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      saml?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      previewDeploymentSuffix?: {
         tier?: number;
         price: number;
         quantity: number;
@@ -13192,24 +13207,7 @@ export type CreateTeamResponse = {
       /**
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
        */
-      analytics?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      monitoring?: {
+      previewDeploymentSuffix?: {
         tier?: number;
         price: number;
         quantity: number;
@@ -13227,6 +13225,40 @@ export type CreateTeamResponse = {
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
        */
       webAnalytics?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      saml?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      teamSeats?: {
         tier?: number;
         price: number;
         quantity: number;
@@ -13270,7 +13302,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         enabledAt?: number | null;
       };
-      edgeMiddlewareInvocations?: {
+      cronJobInvocation?: {
         tier?: number;
         price: number;
         batch: number;
@@ -13280,7 +13312,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         enabledAt?: number | null;
       };
-      edgeFunctionExecutionUnits?: {
+      dataCacheRead?: {
         tier?: number;
         price: number;
         batch: number;
@@ -13290,7 +13322,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         enabledAt?: number | null;
       };
-      monitoringMetric?: {
+      dataCacheRevalidation?: {
         tier?: number;
         price: number;
         batch: number;
@@ -13300,27 +13332,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         enabledAt?: number | null;
       };
-      serverlessFunctionExecution?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      sourceImages?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      webAnalyticsEvent?: {
+      dataCacheWrite?: {
         tier?: number;
         price: number;
         batch: number;
@@ -13350,7 +13362,27 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         enabledAt?: number | null;
       };
-      cronJobInvocation?: {
+      edgeFunctionExecutionUnits?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      edgeMiddlewareInvocations?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      monitoringMetric?: {
         tier?: number;
         price: number;
         batch: number;
@@ -13361,6 +13393,16 @@ export type CreateTeamResponse = {
         enabledAt?: number | null;
       };
       postgresComputeTime?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      postgresDatabase?: {
         tier?: number;
         price: number;
         batch: number;
@@ -13400,7 +13442,17 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         enabledAt?: number | null;
       };
-      storageRedisTotalCommands?: {
+      serverlessFunctionExecution?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      sourceImages?: {
         tier?: number;
         price: number;
         batch: number;
@@ -13411,6 +13463,16 @@ export type CreateTeamResponse = {
         enabledAt?: number | null;
       };
       storageRedisTotalBandwidthInBytes?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      storageRedisTotalCommands?: {
         tier?: number;
         price: number;
         batch: number;
@@ -13440,27 +13502,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         enabledAt?: number | null;
       };
-      dataCacheRead?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      dataCacheRevalidation?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      dataCacheWrite?: {
+      webAnalyticsEvent?: {
         tier?: number;
         price: number;
         batch: number;
@@ -14002,31 +14044,31 @@ export type CreateWebhookRequestBody = {
    * @minItems 1
    */
   events: (
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DomainCreate'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentCreate'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentErro'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentCancele'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentSucceede'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentRead'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentCheckRerequeste'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.IntegrationConfigurationPermissionUpgrade'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.IntegrationConfigurationRemove'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.IntegrationConfigurationScopeChangeConfirme'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.ProjectCreate'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.ProjectRemove'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentChecksComplete'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentRead'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentPrepare'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentErro'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentCheckRerequeste'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentCancele'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyProjectCreate'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyProjectRemove'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDomainCreate'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymen'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyIntegrationConfigurationPermissionUpdate'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyIntegrationConfigurationRemove'
-    | 'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyIntegrationConfigurationScopeChangeConfirme'
+    | 'domain.created'
+    | 'deployment.created'
+    | 'deployment.error'
+    | 'deployment.canceled'
+    | 'deployment.succeeded'
+    | 'deployment.ready'
+    | 'deployment.check-rerequested'
+    | 'integration-configuration.permission-upgraded'
+    | 'integration-configuration.removed'
+    | 'integration-configuration.scope-change-confirmed'
+    | 'project.created'
+    | 'project.removed'
+    | 'deployment-checks-completed'
+    | 'deployment-ready'
+    | 'deployment-prepared'
+    | 'deployment-error'
+    | 'deployment-check-rerequested'
+    | 'deployment-canceled'
+    | 'project-created'
+    | 'project-removed'
+    | 'domain-created'
+    | 'deployment'
+    | 'integration-configuration-permission-updated'
+    | 'integration-configuration-removed'
+    | 'integration-configuration-scope-change-confirmed'
   )[];
   /**
    * @minItems 1
@@ -14915,34 +14957,6 @@ export type AssignAliasQueryParams = {
 
 export type AssignAliasError = Fetcher.ErrorWrapper<undefined>;
 
-export type AssignAliasResponse = {
-  /**
-   * The unique identifier of the alias
-   *
-   * @example 2WjyKQmM8ZnGcJsPWMrHRHrE
-   */
-  uid: string;
-  /**
-   * The assigned alias name
-   *
-   * @example my-alias.vercel.app
-   */
-  alias: string;
-  /**
-   * The date when the alias was created
-   *
-   * @format date-time
-   * @example 2017-04-26T23:00:34.232Z
-   */
-  created: string;
-  /**
-   * The unique identifier of the previously aliased deployment, only received when the alias was used before
-   *
-   * @example dpl_FjvFJncQHQcZMznrUm9EoB8sFuPa
-   */
-  oldDeploymentId?: string | null;
-};
-
 export type AssignAliasRequestBody = {
   /**
    * The alias we want to assign to the deployment defined in the URL
@@ -14969,7 +14983,7 @@ export type AssignAliasVariables = {
  */
 export const assignAlias = (variables: AssignAliasVariables, signal?: AbortSignal) =>
   fetch<
-    AssignAliasResponse,
+    Record<string, any>,
     AssignAliasError,
     AssignAliasRequestBody,
     {},
@@ -15408,6 +15422,10 @@ export type GetDeploymentsResponse = {
      * @example 1609492210000
      */
     ready?: number;
+    /**
+     * Since June 2023 Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - PROMOTED: has seen production traffic
+     */
+    readySubstate?: 'STAGED' | 'PROMOTED';
     /**
      * State of all registered checks
      */
