@@ -268,7 +268,7 @@ export type TeamLimited = {
         confirmed: boolean;
         confirmedAt: number;
         accessRequestedAt?: number;
-        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'PROJECT_CONTRIBUTOR';
+        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
         teamId?: string;
         uid: string;
         createdAt: number;
@@ -302,7 +302,7 @@ export type TeamLimited = {
         confirmed: boolean;
         confirmedAt?: number;
         accessRequestedAt: number;
-        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'PROJECT_CONTRIBUTOR';
+        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
         teamId?: string;
         uid: string;
         createdAt: number;
@@ -409,7 +409,24 @@ export type AuthUser = {
       /**
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
        */
-      pro?: {
+      concurrentBuilds?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      webAnalytics?: {
         tier?: number;
         price: number;
         quantity: number;
@@ -443,75 +460,7 @@ export type AuthUser = {
       /**
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
        */
-      concurrentBuilds?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      teamSeats?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      saml?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      previewDeploymentSuffix?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      passwordProtection?: {
+      pro?: {
         tier?: number;
         price: number;
         quantity: number;
@@ -562,7 +511,58 @@ export type AuthUser = {
       /**
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
        */
-      webAnalytics?: {
+      passwordProtection?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      previewDeploymentSuffix?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      saml?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      teamSeats?: {
         tier?: number;
         price: number;
         quantity: number;
@@ -606,7 +606,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         enabledAt?: number | null;
       };
-      edgeMiddlewareInvocations?: {
+      cronJobInvocation?: {
         tier?: number;
         price: number;
         batch: number;
@@ -616,7 +616,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         enabledAt?: number | null;
       };
-      edgeFunctionExecutionUnits?: {
+      dataCacheRead?: {
         tier?: number;
         price: number;
         batch: number;
@@ -626,7 +626,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         enabledAt?: number | null;
       };
-      monitoringMetric?: {
+      dataCacheRevalidation?: {
         tier?: number;
         price: number;
         batch: number;
@@ -636,27 +636,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         enabledAt?: number | null;
       };
-      serverlessFunctionExecution?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      sourceImages?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      webAnalyticsEvent?: {
+      dataCacheWrite?: {
         tier?: number;
         price: number;
         batch: number;
@@ -686,7 +666,27 @@ export type AuthUser = {
         disabledAt?: number | null;
         enabledAt?: number | null;
       };
-      cronJobInvocation?: {
+      edgeFunctionExecutionUnits?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      edgeMiddlewareInvocations?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      monitoringMetric?: {
         tier?: number;
         price: number;
         batch: number;
@@ -697,6 +697,16 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       postgresComputeTime?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      postgresDatabase?: {
         tier?: number;
         price: number;
         batch: number;
@@ -736,7 +746,17 @@ export type AuthUser = {
         disabledAt?: number | null;
         enabledAt?: number | null;
       };
-      storageRedisTotalCommands?: {
+      serverlessFunctionExecution?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      sourceImages?: {
         tier?: number;
         price: number;
         batch: number;
@@ -747,6 +767,16 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       storageRedisTotalBandwidthInBytes?: {
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      storageRedisTotalCommands?: {
         tier?: number;
         price: number;
         batch: number;
@@ -776,27 +806,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         enabledAt?: number | null;
       };
-      dataCacheRead?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      dataCacheRevalidation?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      dataCacheWrite?: {
+      webAnalyticsEvent?: {
         tier?: number;
         price: number;
         batch: number;
