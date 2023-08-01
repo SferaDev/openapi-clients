@@ -12431,6 +12431,9 @@ export type GetTeamMembersResponse = {
     isDSyncUser: boolean;
     createdAt?: number;
     expired?: boolean;
+    projects?: {
+      [key: string]: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+    };
   }[];
   pagination: {
     hasNext: boolean;
