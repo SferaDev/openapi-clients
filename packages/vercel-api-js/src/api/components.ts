@@ -12790,6 +12790,21 @@ export type UpdateTeamMemberRequestBody = {
    * @example VIEWER
    */
   role?: string;
+  projects?: {
+    /**
+     * The ID of the project.
+     *
+     * @maxLength 256
+     * @example prj_ndlgr43fadlPyCtREAqxxdyFK
+     */
+    projectId: string;
+    /**
+     * The project role of the member that will be added. \"null\" will remove this project level role.
+     *
+     * @example ADMIN
+     */
+    role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
+  }[];
   joinedFrom?: {
     ssoUserId?: null;
   };
