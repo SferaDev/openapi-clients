@@ -8184,7 +8184,7 @@ export type GetProjectsResponse = {
         [key: string]: string;
       };
       monorepoManager?: string | null;
-      plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
+      plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
       private: boolean;
       readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
       readySubstate?: 'STAGED' | 'PROMOTED';
@@ -8313,7 +8313,7 @@ export type GetProjectsResponse = {
           [key: string]: string;
         };
         monorepoManager?: string | null;
-        plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
+        plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
         private: boolean;
         readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
         readySubstate?: 'STAGED' | 'PROMOTED';
@@ -8763,7 +8763,7 @@ export type CreateProjectResponse = {
       [key: string]: string;
     };
     monorepoManager?: string | null;
-    plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
+    plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
     private: boolean;
     readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
     readySubstate?: 'STAGED' | 'PROMOTED';
@@ -8892,7 +8892,7 @@ export type CreateProjectResponse = {
         [key: string]: string;
       };
       monorepoManager?: string | null;
-      plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
+      plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
       private: boolean;
       readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
       readySubstate?: 'STAGED' | 'PROMOTED';
@@ -9497,7 +9497,7 @@ export type GetProjectResponse = {
       [key: string]: string;
     };
     monorepoManager?: string | null;
-    plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
+    plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
     private: boolean;
     readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
     readySubstate?: 'STAGED' | 'PROMOTED';
@@ -9626,7 +9626,7 @@ export type GetProjectResponse = {
         [key: string]: string;
       };
       monorepoManager?: string | null;
-      plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
+      plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
       private: boolean;
       readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
       readySubstate?: 'STAGED' | 'PROMOTED';
@@ -10084,7 +10084,7 @@ export type UpdateProjectResponse = {
       [key: string]: string;
     };
     monorepoManager?: string | null;
-    plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
+    plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
     private: boolean;
     readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
     readySubstate?: 'STAGED' | 'PROMOTED';
@@ -10213,7 +10213,7 @@ export type UpdateProjectResponse = {
         [key: string]: string;
       };
       monorepoManager?: string | null;
-      plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
+      plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
       private: boolean;
       readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
       readySubstate?: 'STAGED' | 'PROMOTED';
