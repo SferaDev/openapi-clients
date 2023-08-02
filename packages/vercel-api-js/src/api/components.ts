@@ -6605,12 +6605,6 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          */
         integrationId: string;
         /**
-         * Will be truthy in those cases where the configuration was created to authorize a client through the OAuth2 flow.
-         *
-         * @example false
-         */
-        oauthConfiguration?: boolean;
-        /**
          * The user or team ID that owns the configuration
          *
          * @example kr1PsOIzqEL5Xg6M4VZcZosf
@@ -6627,7 +6621,7 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          *
          * @example marketplace
          */
-        source?: 'marketplace' | 'deploy-button' | 'oauth' | 'external';
+        source?: 'marketplace' | 'deploy-button' | 'external';
         removedLogDrainsAt?: number;
         removedProjectEnvsAt?: number;
         removedTokensAt?: number;
@@ -6762,12 +6756,6 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          */
         integrationId: string;
         /**
-         * Will be truthy in those cases where the configuration was created to authorize a client through the OAuth2 flow.
-         *
-         * @example false
-         */
-        oauthConfiguration?: boolean;
-        /**
          * The user or team ID that owns the configuration
          *
          * @example kr1PsOIzqEL5Xg6M4VZcZosf
@@ -6784,7 +6772,7 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          *
          * @example marketplace
          */
-        source?: 'marketplace' | 'deploy-button' | 'oauth' | 'external';
+        source?: 'marketplace' | 'deploy-button' | 'external';
         removedLogDrainsAt?: number;
         removedProjectEnvsAt?: number;
         removedTokensAt?: number;
@@ -6946,12 +6934,6 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          */
         integrationId: string;
         /**
-         * Will be truthy in those cases where the configuration was created to authorize a client through the OAuth2 flow.
-         *
-         * @example false
-         */
-        oauthConfiguration?: boolean;
-        /**
          * The user or team ID that owns the configuration
          *
          * @example kr1PsOIzqEL5Xg6M4VZcZosf
@@ -6968,7 +6950,7 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          *
          * @example marketplace
          */
-        source?: 'marketplace' | 'deploy-button' | 'oauth' | 'external';
+        source?: 'marketplace' | 'deploy-button' | 'external';
         removedLogDrainsAt?: number;
         removedProjectEnvsAt?: number;
         removedTokensAt?: number;
@@ -7101,12 +7083,6 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          */
         integrationId: string;
         /**
-         * Will be truthy in those cases where the configuration was created to authorize a client through the OAuth2 flow.
-         *
-         * @example false
-         */
-        oauthConfiguration?: boolean;
-        /**
          * The user or team ID that owns the configuration
          *
          * @example kr1PsOIzqEL5Xg6M4VZcZosf
@@ -7123,7 +7099,7 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          *
          * @example marketplace
          */
-        source?: 'marketplace' | 'deploy-button' | 'oauth' | 'external';
+        source?: 'marketplace' | 'deploy-button' | 'external';
         removedLogDrainsAt?: number;
         removedProjectEnvsAt?: number;
         removedTokensAt?: number;
