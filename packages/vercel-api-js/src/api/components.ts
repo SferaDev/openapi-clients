@@ -1754,7 +1754,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          *
          * @example pro
          */
-        plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
+        plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
         /**
          * The ID of the project the deployment is associated with
          *
@@ -2463,7 +2463,7 @@ export type CreateDeploymentResponse = {
    *
    * @example pro
    */
-  plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
+  plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
   /**
    * The ID of the project the deployment is associated with
    *
@@ -4089,7 +4089,7 @@ export type CancelDeploymentResponse = {
    *
    * @example pro
    */
-  plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
+  plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
   /**
    * The ID of the project the deployment is associated with
    *
