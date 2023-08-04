@@ -1069,7 +1069,7 @@ export type UpdateProjectDataCacheResponse = {
       [key: string]: string;
     };
     monorepoManager?: string | null;
-    plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
+    plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
     private: boolean;
     readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
     readySubstate?: 'STAGED' | 'PROMOTED';
@@ -1198,7 +1198,7 @@ export type UpdateProjectDataCacheResponse = {
         [key: string]: string;
       };
       monorepoManager?: string | null;
-      plan: 'hobby' | 'enterprise' | 'pro' | 'oss';
+      plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
       private: boolean;
       readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
       readySubstate?: 'STAGED' | 'PROMOTED';

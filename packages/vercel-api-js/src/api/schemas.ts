@@ -360,12 +360,12 @@ export type AuthUser = {
   softBlock: {
     blockedAt: number;
     reason:
-      | 'FAIR_USE_LIMITS_EXCEEDED'
-      | 'ENTERPRISE_TRIAL_ENDED'
-      | 'BLOCKED_FOR_PLATFORM_ABUSE'
-      | 'UNPAID_INVOICE'
+      | 'SUBSCRIPTION_CANCELED'
       | 'SUBSCRIPTION_EXPIRED'
-      | 'SUBSCRIPTION_CANCELED';
+      | 'UNPAID_INVOICE'
+      | 'ENTERPRISE_TRIAL_ENDED'
+      | 'FAIR_USE_LIMITS_EXCEEDED'
+      | 'BLOCKED_FOR_PLATFORM_ABUSE';
   } | null;
   /**
    * An object containing billing infomation associated with the User account.
@@ -381,7 +381,7 @@ export type AuthUser = {
       start: number;
       end: number;
     } | null;
-    plan: 'hobby' | 'enterprise' | 'pro';
+    plan: 'pro' | 'enterprise' | 'hobby';
     platform?: 'stripe' | 'stripeTestMode';
     orbCustomerId?: string;
     programType?: 'startup' | 'agency';
@@ -443,7 +443,7 @@ export type AuthUser = {
       /**
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
        */
-      enterprise?: {
+      pro?: {
         tier?: number;
         price: number;
         quantity: number;
@@ -460,7 +460,7 @@ export type AuthUser = {
       /**
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
        */
-      pro?: {
+      enterprise?: {
         tier?: number;
         price: number;
         quantity: number;
