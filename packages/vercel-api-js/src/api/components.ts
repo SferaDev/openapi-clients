@@ -12277,7 +12277,7 @@ export type GetTeamMembersQueryParams = {
    *
    * @example OWNER
    */
-  role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'VIEWER' | 'BILLING';
+  role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'VIEWER' | 'BILLING' | 'CONTRIBUTOR';
   /**
    * Exclude members who belong to the specified project.
    */
