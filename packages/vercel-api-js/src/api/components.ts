@@ -8410,6 +8410,7 @@ export type GetProjectsResponse = {
       sharedEnvVars?: Schemas.ACLAction[];
       sharedEnvVarsProduction?: Schemas.ACLAction[];
       space?: Schemas.ACLAction[];
+      spaceRun?: Schemas.ACLAction[];
       passwordProtectionInvoiceItem?: Schemas.ACLAction[];
       rateLimit?: Schemas.ACLAction[];
       redis?: Schemas.ACLAction[];
@@ -8501,7 +8502,7 @@ export type GetProjectsResponse = {
     hasActiveBranches?: boolean;
     trustedIps?:
       | {
-          deploymentType: 'preview' | 'all';
+          deploymentType: 'preview' | 'all' | 'production';
           addresses: {
             value: string;
             note?: string;
@@ -8509,7 +8510,7 @@ export type GetProjectsResponse = {
           protectionMode: 'additional' | 'exclusive';
         }
       | {
-          deploymentType: 'preview' | 'all';
+          deploymentType: 'preview' | 'all' | 'production';
         }
       | null;
     gitComments?: {
@@ -8989,6 +8990,7 @@ export type CreateProjectResponse = {
     sharedEnvVars?: Schemas.ACLAction[];
     sharedEnvVarsProduction?: Schemas.ACLAction[];
     space?: Schemas.ACLAction[];
+    spaceRun?: Schemas.ACLAction[];
     passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
@@ -9080,7 +9082,7 @@ export type CreateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'preview' | 'all';
+        deploymentType: 'preview' | 'all' | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -9088,7 +9090,7 @@ export type CreateProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'preview' | 'all';
+        deploymentType: 'preview' | 'all' | 'production';
       }
     | null;
   gitComments?: {
@@ -9723,6 +9725,7 @@ export type GetProjectResponse = {
     sharedEnvVars?: Schemas.ACLAction[];
     sharedEnvVarsProduction?: Schemas.ACLAction[];
     space?: Schemas.ACLAction[];
+    spaceRun?: Schemas.ACLAction[];
     passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
@@ -9814,7 +9817,7 @@ export type GetProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'preview' | 'all';
+        deploymentType: 'preview' | 'all' | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -9822,7 +9825,7 @@ export type GetProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'preview' | 'all';
+        deploymentType: 'preview' | 'all' | 'production';
       }
     | null;
   gitComments?: {
@@ -10310,6 +10313,7 @@ export type UpdateProjectResponse = {
     sharedEnvVars?: Schemas.ACLAction[];
     sharedEnvVarsProduction?: Schemas.ACLAction[];
     space?: Schemas.ACLAction[];
+    spaceRun?: Schemas.ACLAction[];
     passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
@@ -10401,7 +10405,7 @@ export type UpdateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'all' | 'preview';
+        deploymentType: 'all' | 'preview' | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -10409,7 +10413,7 @@ export type UpdateProjectResponse = {
         protectionMode: 'exclusive' | 'additional';
       }
     | {
-        deploymentType: 'all' | 'preview';
+        deploymentType: 'all' | 'preview' | 'production';
       }
     | null;
   gitComments?: {
@@ -10581,7 +10585,7 @@ export type UpdateProjectRequestBody = {
     /**
      * Specify if the Trusted IPs will apply to every Deployment Target or just Preview
      */
-    deploymentType: 'all' | 'preview';
+    deploymentType: 'all' | 'preview' | 'production';
     /**
      * @minItems 1
      */
