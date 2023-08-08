@@ -13136,7 +13136,6 @@ export type CreateTeamResponse = {
       state?: string;
     } | null;
     name?: string | null;
-    overdue?: boolean | null;
     invoiceItems?: {
       /**
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
