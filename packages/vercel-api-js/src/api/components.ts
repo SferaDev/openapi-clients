@@ -1269,6 +1269,7 @@ export type UpdateProjectDataCacheResponse = {
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
+    logsPreset?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
     monitoringChart?: Schemas.ACLAction[];
@@ -1295,6 +1296,7 @@ export type UpdateProjectDataCacheResponse = {
     sharedEnvVars?: Schemas.ACLAction[];
     sharedEnvVarsProduction?: Schemas.ACLAction[];
     space?: Schemas.ACLAction[];
+    spaceRun?: Schemas.ACLAction[];
     passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
@@ -1386,7 +1388,7 @@ export type UpdateProjectDataCacheResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'preview' | 'all';
+        deploymentType: 'preview' | 'all' | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -1394,7 +1396,7 @@ export type UpdateProjectDataCacheResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'preview' | 'all';
+        deploymentType: 'preview' | 'all' | 'production';
       }
     | null;
   gitComments?: {
@@ -8384,6 +8386,7 @@ export type GetProjectsResponse = {
       integrationVercelConfigurationOverride?: Schemas.ACLAction[];
       jobGlobal?: Schemas.ACLAction[];
       logDrain?: Schemas.ACLAction[];
+      logsPreset?: Schemas.ACLAction[];
       Monitoring?: Schemas.ACLAction[];
       monitoringQuery?: Schemas.ACLAction[];
       monitoringChart?: Schemas.ACLAction[];
@@ -8964,6 +8967,7 @@ export type CreateProjectResponse = {
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
+    logsPreset?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
     monitoringChart?: Schemas.ACLAction[];
@@ -9699,6 +9703,7 @@ export type GetProjectResponse = {
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
+    logsPreset?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
     monitoringChart?: Schemas.ACLAction[];
@@ -10287,6 +10292,7 @@ export type UpdateProjectResponse = {
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
+    logsPreset?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
     monitoringChart?: Schemas.ACLAction[];
@@ -12503,12 +12509,44 @@ export type InviteUserToTeamVariables = {
  * Invite a user to join the team specified in the URL. The authenticated user needs to be an `OWNER` in order to successfully invoke this endpoint. The user can be specified with an email or an ID. If both email and ID are provided, ID will take priority.
  */
 export const inviteUserToTeam = (variables: InviteUserToTeamVariables, signal?: AbortSignal) =>
-  fetch<Record<string, any>, InviteUserToTeamError, InviteUserToTeamRequestBody, {}, {}, {}>({
-    url: '/v1/teams/{teamId}/members',
-    method: 'post',
-    ...variables,
-    signal
-  });
+  fetch<
+    | {
+        /**
+         * The ID of the invited user
+         *
+         * @example kr1PsOIzqEL5Xg6M4VZcZosf
+         */
+        uid: string;
+        /**
+         * The username of the invited user
+         *
+         * @example john-doe
+         */
+        username: string;
+        /**
+         * The email of the invited user. Not included if the user was invited via their UID.
+         *
+         * @example john@user.co
+         */
+        email: string;
+        /**
+         * The role used for the invitation
+         *
+         * @example MEMBER
+         */
+        role: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
+      }
+    | {
+        uid: string;
+        username: string;
+        role: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
+      },
+    InviteUserToTeamError,
+    InviteUserToTeamRequestBody,
+    {},
+    {},
+    {}
+  >({ url: '/v1/teams/{teamId}/members', method: 'post', ...variables, signal });
 
 export type RequestAccessToTeamError = Fetcher.ErrorWrapper<undefined>;
 
@@ -14955,6 +14993,34 @@ export type AssignAliasQueryParams = {
 
 export type AssignAliasError = Fetcher.ErrorWrapper<undefined>;
 
+export type AssignAliasResponse = {
+  /**
+   * The unique identifier of the alias
+   *
+   * @example 2WjyKQmM8ZnGcJsPWMrHRHrE
+   */
+  uid: string;
+  /**
+   * The assigned alias name
+   *
+   * @example my-alias.vercel.app
+   */
+  alias: string;
+  /**
+   * The date when the alias was created
+   *
+   * @format date-time
+   * @example 2017-04-26T23:00:34.232Z
+   */
+  created: string;
+  /**
+   * The unique identifier of the previously aliased deployment, only received when the alias was used before
+   *
+   * @example dpl_FjvFJncQHQcZMznrUm9EoB8sFuPa
+   */
+  oldDeploymentId?: string | null;
+};
+
 export type AssignAliasRequestBody = {
   /**
    * The alias we want to assign to the deployment defined in the URL
@@ -14981,7 +15047,7 @@ export type AssignAliasVariables = {
  */
 export const assignAlias = (variables: AssignAliasVariables, signal?: AbortSignal) =>
   fetch<
-    Record<string, any>,
+    AssignAliasResponse,
     AssignAliasError,
     AssignAliasRequestBody,
     {},
