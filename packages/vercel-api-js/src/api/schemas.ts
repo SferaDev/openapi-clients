@@ -366,6 +366,31 @@ export type AuthUser = {
       | 'ENTERPRISE_TRIAL_ENDED'
       | 'FAIR_USE_LIMITS_EXCEEDED'
       | 'BLOCKED_FOR_PLATFORM_ABUSE';
+    blockedDueToOverageType?:
+      | 'analyticsUsage'
+      | 'artifacts'
+      | 'bandwidth'
+      | 'cronJobInvocation'
+      | 'dataCacheRead'
+      | 'dataCacheRevalidation'
+      | 'dataCacheWrite'
+      | 'edgeConfigRead'
+      | 'edgeConfigWrite'
+      | 'edgeFunctionExecutionUnits'
+      | 'edgeMiddlewareInvocations'
+      | 'monitoringMetric'
+      | 'postgresComputeTime'
+      | 'postgresDatabase'
+      | 'postgresDataStorage'
+      | 'postgresDataTransfer'
+      | 'postgresWrittenData'
+      | 'serverlessFunctionExecution'
+      | 'sourceImages'
+      | 'storageRedisTotalBandwidthInBytes'
+      | 'storageRedisTotalCommands'
+      | 'storageRedisTotalDailyAvgStorageInBytes'
+      | 'storageRedisTotalDatabases'
+      | 'webAnalyticsEvent';
   } | null;
   /**
    * An object containing billing infomation associated with the User account.
@@ -404,7 +429,6 @@ export type AuthUser = {
       state?: string;
     } | null;
     name?: string | null;
-    overdue?: boolean | null;
     invoiceItems?: {
       /**
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
