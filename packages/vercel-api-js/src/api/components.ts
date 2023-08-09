@@ -1242,6 +1242,7 @@ export type UpdateProjectDataCacheResponse = {
     billingPurchaseOrder?: Schemas.ACLAction[];
     billingTaxId?: Schemas.ACLAction[];
     blob?: Schemas.ACLAction[];
+    budget?: Schemas.ACLAction[];
     cacheArtifact?: Schemas.ACLAction[];
     cacheArtifactUsageEvent?: Schemas.ACLAction[];
     concurrentBuilds?: Schemas.ACLAction[];
@@ -8273,6 +8274,7 @@ export type GetProjectsResponse = {
     passwordProtection?: {
       deploymentType: 'preview' | 'all';
     } | null;
+    productionDeploymentsFastLane?: boolean;
     publicSource?: boolean | null;
     rootDirectory?: string | null;
     serverlessFunctionRegion?: string | null;
@@ -8359,6 +8361,7 @@ export type GetProjectsResponse = {
       billingPurchaseOrder?: Schemas.ACLAction[];
       billingTaxId?: Schemas.ACLAction[];
       blob?: Schemas.ACLAction[];
+      budget?: Schemas.ACLAction[];
       cacheArtifact?: Schemas.ACLAction[];
       cacheArtifactUsageEvent?: Schemas.ACLAction[];
       concurrentBuilds?: Schemas.ACLAction[];
@@ -8854,6 +8857,7 @@ export type CreateProjectResponse = {
   passwordProtection?: {
     deploymentType: 'preview' | 'all';
   } | null;
+  productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -8940,6 +8944,7 @@ export type CreateProjectResponse = {
     billingPurchaseOrder?: Schemas.ACLAction[];
     billingTaxId?: Schemas.ACLAction[];
     blob?: Schemas.ACLAction[];
+    budget?: Schemas.ACLAction[];
     cacheArtifact?: Schemas.ACLAction[];
     cacheArtifactUsageEvent?: Schemas.ACLAction[];
     concurrentBuilds?: Schemas.ACLAction[];
@@ -9590,6 +9595,7 @@ export type GetProjectResponse = {
   passwordProtection?: {
     deploymentType: 'preview' | 'all';
   } | null;
+  productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -9676,6 +9682,7 @@ export type GetProjectResponse = {
     billingPurchaseOrder?: Schemas.ACLAction[];
     billingTaxId?: Schemas.ACLAction[];
     blob?: Schemas.ACLAction[];
+    budget?: Schemas.ACLAction[];
     cacheArtifact?: Schemas.ACLAction[];
     cacheArtifactUsageEvent?: Schemas.ACLAction[];
     concurrentBuilds?: Schemas.ACLAction[];
@@ -10179,6 +10186,7 @@ export type UpdateProjectResponse = {
   passwordProtection?: {
     deploymentType: 'all' | 'preview';
   } | null;
+  productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -10265,6 +10273,7 @@ export type UpdateProjectResponse = {
     billingPurchaseOrder?: Schemas.ACLAction[];
     billingTaxId?: Schemas.ACLAction[];
     blob?: Schemas.ACLAction[];
+    budget?: Schemas.ACLAction[];
     cacheArtifact?: Schemas.ACLAction[];
     cacheArtifactUsageEvent?: Schemas.ACLAction[];
     concurrentBuilds?: Schemas.ACLAction[];
