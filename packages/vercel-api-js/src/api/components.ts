@@ -5202,6 +5202,7 @@ export type UpdateRecordQueryParams = {
 export type UpdateRecordError = Fetcher.ErrorWrapper<undefined>;
 
 export type UpdateRecordResponse = {
+  comment?: string;
   createdAt?: number | null;
   creator: string;
   domain: string;
@@ -5256,6 +5257,13 @@ export type UpdateRecordRequestBody = {
     port: number | null;
     priority: number | null;
   } | null;
+  /**
+   * A comment to add context on what this DNS record is for
+   *
+   * @example used to verify ownership of domain
+   * @maxLength 500
+   */
+  comment?: string;
 };
 
 export type UpdateRecordVariables = {
