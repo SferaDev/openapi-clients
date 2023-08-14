@@ -1156,6 +1156,7 @@ export type UpdateProjectDataCacheResponse = {
   passwordProtection?: {
     deploymentType: 'preview' | 'all';
   } | null;
+  productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -1428,7 +1429,7 @@ export type UpdateProjectDataCacheVariables = {
 } & FetcherExtraProps;
 
 /**
- * Update the cron job feature on a project.
+ * Update the data cache feature on a project.
  */
 export const updateProjectDataCache = (variables: UpdateProjectDataCacheVariables, signal?: AbortSignal) =>
   fetch<
