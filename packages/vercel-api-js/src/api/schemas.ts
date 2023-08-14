@@ -109,6 +109,7 @@ export type UserEvent = {
       | 'project_name'
       | 'scaling_rules'
       | 'env_var_name'
+      | 'store'
       | 'system';
     /**
      * The index of where the entity begins within the `text` (inclusive).
