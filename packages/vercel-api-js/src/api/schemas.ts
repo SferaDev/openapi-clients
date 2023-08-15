@@ -1015,6 +1015,10 @@ export type AuthUser = {
     };
   };
   /**
+   * The user's default team. Only applies if the user's `version` is `'northstar'`.
+   */
+  defaultTeamId: string | null;
+  /**
    * The User's unique identifier.
    *
    * @example AEIIDYVk59zbFF2Sxfyxxmua
@@ -1044,6 +1048,10 @@ export type AuthUser = {
    * @example 22cb30c85ff45ac4c72de8981500006b28114aa1
    */
   avatar: string | null;
+  /**
+   * The user's version. Will either be unset or `northstar`.
+   */
+  version: 'northstar' | null;
 };
 
 /**
@@ -1084,6 +1092,10 @@ export type AuthUserLimited = {
    * @example 22cb30c85ff45ac4c72de8981500006b28114aa1
    */
   avatar: string | null;
+  /**
+   * The user's version. Will either be unset or `northstar`.
+   */
+  version: 'northstar' | null;
 };
 
 /**

@@ -4701,6 +4701,13 @@ export type CreateRecordVariables = {
          * @example 192.0.2.42
          */
         value: string;
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       }
     | {
         /**
@@ -4728,6 +4735,13 @@ export type CreateRecordVariables = {
          * @example 2001:DB8::42
          */
         value: string;
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       }
     | {
         /**
@@ -4754,6 +4768,13 @@ export type CreateRecordVariables = {
          * @example cname.vercel-dns.com
          */
         value: string;
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       }
     | {
         /**
@@ -4780,6 +4801,13 @@ export type CreateRecordVariables = {
          * @example 0 issue \"letsencrypt.org\"
          */
         value: string;
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       }
     | {
         /**
@@ -4806,6 +4834,13 @@ export type CreateRecordVariables = {
          * @example cname.vercel-dns.com
          */
         value?: string;
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       }
     | {
         /**
@@ -4838,6 +4873,13 @@ export type CreateRecordVariables = {
          * @example 10
          */
         mxPriority: number;
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       }
     | {
         /**
@@ -4865,6 +4907,13 @@ export type CreateRecordVariables = {
            */
           target?: string;
         };
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       }
     | {
         /**
@@ -4889,6 +4938,13 @@ export type CreateRecordVariables = {
          * @example hello
          */
         value: string;
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       }
     | {
         /**
@@ -4915,6 +4971,13 @@ export type CreateRecordVariables = {
          * @example ns1.example.com
          */
         value?: string;
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       };
   pathParams: CreateRecordPathParams;
   queryParams?: CreateRecordQueryParams;
@@ -4964,6 +5027,13 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
          * @example 192.0.2.42
          */
         value: string;
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       }
     | {
         /**
@@ -4991,6 +5061,13 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
          * @example 2001:DB8::42
          */
         value: string;
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       }
     | {
         /**
@@ -5017,6 +5094,13 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
          * @example cname.vercel-dns.com
          */
         value: string;
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       }
     | {
         /**
@@ -5043,6 +5127,13 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
          * @example 0 issue \"letsencrypt.org\"
          */
         value: string;
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       }
     | {
         /**
@@ -5069,6 +5160,13 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
          * @example cname.vercel-dns.com
          */
         value?: string;
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       }
     | {
         /**
@@ -5101,6 +5199,13 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
          * @example 10
          */
         mxPriority: number;
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       }
     | {
         /**
@@ -5128,6 +5233,13 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
            */
           target?: string;
         };
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       }
     | {
         /**
@@ -5152,6 +5264,13 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
          * @example hello
          */
         value: string;
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       }
     | {
         /**
@@ -5178,6 +5297,13 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
          * @example ns1.example.com
          */
         value?: string;
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       },
     {},
     CreateRecordQueryParams,
