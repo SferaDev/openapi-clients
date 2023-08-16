@@ -15404,7 +15404,7 @@ export type GetDeploymentFileContentsPathParams = {
    */
   id: string;
   /**
-   * The unique file identifier
+   * The unique file identifier or URL encoded file path
    */
   fileId: string;
 };
