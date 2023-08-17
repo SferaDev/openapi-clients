@@ -15404,12 +15404,16 @@ export type GetDeploymentFileContentsPathParams = {
    */
   id: string;
   /**
-   * The unique file identifier or URL encoded file path
+   * The unique file identifier
    */
   fileId: string;
 };
 
 export type GetDeploymentFileContentsQueryParams = {
+  /**
+   * Path to the file to fetch (only for Git deployments)
+   */
+  path?: string;
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
