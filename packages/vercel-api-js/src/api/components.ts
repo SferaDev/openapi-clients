@@ -5482,6 +5482,49 @@ export const checkDomainStatus = (variables: CheckDomainStatusVariables, signal?
     signal
   });
 
+export type GetDomainTransferQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetDomainTransferError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetDomainTransferVariables = {
+  queryParams?: GetDomainTransferQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Fetch domain transfer availability or transfer status if a transfer is in progress.
+ */
+export const getDomainTransfer = (variables: GetDomainTransferVariables, signal?: AbortSignal) =>
+  fetch<
+    | {
+        reason: string;
+        status: string;
+        transferable: boolean;
+      }
+    | {
+        reason: string;
+        status:
+          | 'unknown'
+          | 'pending_owner'
+          | 'pending_admin'
+          | 'pending_registry'
+          | 'completed'
+          | 'cancelled'
+          | 'undef';
+        transferable: boolean;
+        transferPolicy: 'charge-and-renew' | 'no-charge-no-change' | 'no-change' | 'new-term' | 'not-supported' | null;
+      },
+    GetDomainTransferError,
+    undefined,
+    {},
+    GetDomainTransferQueryParams,
+    {}
+  >({ url: '/v1/domains/{domain}/registry', method: 'get', ...variables, signal });
+
 export type GetDomainConfigPathParams = {
   /**
    * The name of the domain.
@@ -16370,6 +16413,7 @@ export const operationsByTag = {
     buyDomain,
     checkDomainPrice,
     checkDomainStatus,
+    getDomainTransfer,
     getDomainConfig,
     getDomain,
     getDomains,
