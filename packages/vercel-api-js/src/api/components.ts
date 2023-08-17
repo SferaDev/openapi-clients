@@ -5491,6 +5491,25 @@ export type GetDomainTransferQueryParams = {
 
 export type GetDomainTransferError = Fetcher.ErrorWrapper<undefined>;
 
+export type GetDomainTransferResponse = {
+  /**
+   * Whether or not the domain is transferable
+   */
+  transferable: boolean;
+  /**
+   * The domain's transfer policy (depends on TLD requirements). `charge-and-renew`: transfer will charge for renewal and will renew the existing domain's registration. `no-charge-no-change`: transfer will have no change to registration period and does not require charge. `no-change`: transfer charge is required, but no change in registration period. `new-term`: transfer charge is required and a new registry term is set based on the transfer date. `not-supported`: transfers are not supported for this domain or TLD. `null`: This TLD is not supported by Vercel's Registrar.
+   */
+  transferPolicy: 'charge-and-renew' | 'no-charge-no-change' | 'no-change' | 'new-term' | 'not-supported' | null;
+  /**
+   * Description associated with transferable state.
+   */
+  reason: string;
+  /**
+   * The current state of an ongoing transfer. `pending_owner`: Awaiting approval by domain's admin contact (every transfer begins with this status). If approval is not given within five days, the transfer is cancelled. `pending_admin`: Waiting for approval by Vercel Registrar admin. `pending_registry`: Awaiting registry approval (the transfer completes after 7 days unless it is declined by the current registrar). `completed`: The transfer completed successfully. `cancelled`: The transfer was cancelled. `undef`: No transfer exists for this domain. `unknown`: This TLD is not supported by Vercel's Registrar.
+   */
+  status: 'pending_owner' | 'pending_admin' | 'pending_registry' | 'completed' | 'cancelled' | 'undef' | 'unknown';
+};
+
 export type GetDomainTransferVariables = {
   queryParams?: GetDomainTransferQueryParams;
 } & FetcherExtraProps;
@@ -5499,31 +5518,12 @@ export type GetDomainTransferVariables = {
  * Fetch domain transfer availability or transfer status if a transfer is in progress.
  */
 export const getDomainTransfer = (variables: GetDomainTransferVariables, signal?: AbortSignal) =>
-  fetch<
-    | {
-        reason: string;
-        status: string;
-        transferable: boolean;
-      }
-    | {
-        reason: string;
-        status:
-          | 'unknown'
-          | 'pending_owner'
-          | 'pending_admin'
-          | 'pending_registry'
-          | 'completed'
-          | 'cancelled'
-          | 'undef';
-        transferable: boolean;
-        transferPolicy: 'charge-and-renew' | 'no-charge-no-change' | 'no-change' | 'new-term' | 'not-supported' | null;
-      },
-    GetDomainTransferError,
-    undefined,
-    {},
-    GetDomainTransferQueryParams,
-    {}
-  >({ url: '/v1/domains/{domain}/registry', method: 'get', ...variables, signal });
+  fetch<GetDomainTransferResponse, GetDomainTransferError, undefined, {}, GetDomainTransferQueryParams, {}>({
+    url: '/v1/domains/{domain}/registry',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetDomainConfigPathParams = {
   /**
