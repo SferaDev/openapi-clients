@@ -1,5 +1,14 @@
 # vercel-api-js
 
+## 0.1.20
+
+### Patch Changes
+
+- 22694e7: [OpenAPI] Spec updates for vercel-api-js
+- b0d9604: [OpenAPI] Spec updates for vercel-api-js
+- c2b314e: [OpenAPI] Remove oauth configurations
+- 7f508cc: [OpenAPI] Add new projects array response
+
 ## 0.1.19
 
 ### Patch Changes
