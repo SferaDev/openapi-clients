@@ -1,5 +1,12 @@
 # vercel-api-js
 
+## 0.1.21
+
+### Patch Changes
+
+- 8faaa44: [OpenAPI] Add patch domain endpoint
+- 3b9bfd6: [OpenAPI] Add getDomainTransfer endpoint
+
 ## 0.1.20
 
 ### Patch Changes
