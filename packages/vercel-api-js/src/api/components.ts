@@ -14195,6 +14195,7 @@ export type CreateWebhookResponse = {
    * @example deployment.created
    */
   events: (
+    | 'budget.reached'
     | 'domain.created'
     | 'deployment.created'
     | 'deployment.error'
@@ -14269,6 +14270,7 @@ export type CreateWebhookRequestBody = {
    * @minItems 1
    */
   events: (
+    | 'budget.reached'
     | 'domain.created'
     | 'deployment.created'
     | 'deployment.error'
@@ -14398,6 +14400,7 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
          * @example deployment.created
          */
         events: (
+          | 'budget.reached'
           | 'domain.created'
           | 'deployment.created'
           | 'deployment.error'
@@ -14468,6 +14471,7 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
          * @example deployment.created
          */
         events: (
+          | 'budget.reached'
           | 'domain.created'
           | 'deployment.created'
           | 'deployment.error'
@@ -14558,6 +14562,7 @@ export type GetWebhookResponse = {
    * @example deployment.created
    */
   events: (
+    | 'budget.reached'
     | 'domain.created'
     | 'deployment.created'
     | 'deployment.error'
