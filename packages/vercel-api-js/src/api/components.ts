@@ -5985,6 +5985,27 @@ export type CreateOrTransferDomainVariables = {
          */
         name: string;
         /**
+         * Whether the domain has the Vercel Edge Network enabled or not.
+         *
+         * @example true
+         */
+        cdnEnabled?: boolean;
+        zone?: boolean;
+        /**
+         * The domain operation to perform.
+         *
+         * @example add
+         */
+        method?: string;
+      }
+    | {
+        /**
+         * The domain name you want to add.
+         *
+         * @example example.com
+         */
+        name: string;
+        /**
          * The domain operation to perform.
          *
          * @example move-in
@@ -6022,33 +6043,12 @@ export type CreateOrTransferDomainVariables = {
          * @example 8
          */
         expectedPrice?: number;
-      }
-    | {
-        /**
-         * The domain name you want to add.
-         *
-         * @example example.com
-         */
-        name: string;
-        /**
-         * Whether the domain has the Vercel Edge Network enabled or not.
-         *
-         * @example true
-         */
-        cdnEnabled?: boolean;
-        zone?: boolean;
-        /**
-         * The domain operation to perform.
-         *
-         * @example add
-         */
-        method?: string;
       };
   queryParams?: CreateOrTransferDomainQueryParams;
 } & FetcherExtraProps;
 
 /**
- * This endpoint is used for registering a new domain name with Vercel for the authenticating user, and also for initiating a domain transfer request from an external Registrar to Vercel.
+ * This endpoint is used for adding a new apex domain name with Vercel for the authenticating user. Can also be used for initiating a domain transfer request from an external Registrar to Vercel.
  */
 export const createOrTransferDomain = (variables: CreateOrTransferDomainVariables, signal?: AbortSignal) =>
   fetch<
@@ -6062,6 +6062,27 @@ export const createOrTransferDomain = (variables: CreateOrTransferDomainVariable
          */
         name: string;
         /**
+         * Whether the domain has the Vercel Edge Network enabled or not.
+         *
+         * @example true
+         */
+        cdnEnabled?: boolean;
+        zone?: boolean;
+        /**
+         * The domain operation to perform.
+         *
+         * @example add
+         */
+        method?: string;
+      }
+    | {
+        /**
+         * The domain name you want to add.
+         *
+         * @example example.com
+         */
+        name: string;
+        /**
          * The domain operation to perform.
          *
          * @example move-in
@@ -6099,27 +6120,6 @@ export const createOrTransferDomain = (variables: CreateOrTransferDomainVariable
          * @example 8
          */
         expectedPrice?: number;
-      }
-    | {
-        /**
-         * The domain name you want to add.
-         *
-         * @example example.com
-         */
-        name: string;
-        /**
-         * Whether the domain has the Vercel Edge Network enabled or not.
-         *
-         * @example true
-         */
-        cdnEnabled?: boolean;
-        zone?: boolean;
-        /**
-         * The domain operation to perform.
-         *
-         * @example add
-         */
-        method?: string;
       },
     {},
     CreateOrTransferDomainQueryParams,
