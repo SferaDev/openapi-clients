@@ -6126,6 +6126,112 @@ export const createOrTransferDomain = (variables: CreateOrTransferDomainVariable
     {}
   >({ url: '/v5/domains', method: 'post', ...variables, signal });
 
+export type PatchDomainPathParams = {
+  domain?: string;
+};
+
+export type PatchDomainQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type PatchDomainError = Fetcher.ErrorWrapper<undefined>;
+
+export type PatchDomainVariables = {
+  body?:
+    | {
+        /**
+         * @example update
+         */
+        op?: string;
+        /**
+         * Specifies whether domain should be renewed.
+         */
+        renew?: boolean;
+        /**
+         * The custom nameservers for this project.
+         *
+         * @maxItems 4
+         * @minItems 0
+         * @uniqueItems true
+         */
+        customNameservers?: string[];
+        /**
+         * Specifies whether this is a DNS zone that intends to use Vercel's nameservers.
+         */
+        zone?: boolean;
+      }
+    | {
+        /**
+         * @example move-out
+         */
+        op?: string;
+        /**
+         * User or team to move domain to
+         */
+        destination?: string;
+      };
+  pathParams?: PatchDomainPathParams;
+  queryParams?: PatchDomainQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Update or move apex domain.
+ */
+export const patchDomain = (variables: PatchDomainVariables, signal?: AbortSignal) =>
+  fetch<
+    | {
+        moved: boolean;
+      }
+    | {
+        moved: boolean;
+        token: string;
+      }
+    | {
+        renew?: boolean;
+        customNameservers?: string[];
+        zone?: boolean;
+      },
+    PatchDomainError,
+    | {
+        /**
+         * @example update
+         */
+        op?: string;
+        /**
+         * Specifies whether domain should be renewed.
+         */
+        renew?: boolean;
+        /**
+         * The custom nameservers for this project.
+         *
+         * @maxItems 4
+         * @minItems 0
+         * @uniqueItems true
+         */
+        customNameservers?: string[];
+        /**
+         * Specifies whether this is a DNS zone that intends to use Vercel's nameservers.
+         */
+        zone?: boolean;
+      }
+    | {
+        /**
+         * @example move-out
+         */
+        op?: string;
+        /**
+         * User or team to move domain to
+         */
+        destination?: string;
+      },
+    {},
+    PatchDomainQueryParams,
+    PatchDomainPathParams
+  >({ url: '/v3/domains/{domain}', method: 'patch', ...variables, signal });
+
 export type DeleteDomainPathParams = {
   /**
    * The name of the domain.
@@ -16426,6 +16532,7 @@ export const operationsByTag = {
     getDomain,
     getDomains,
     createOrTransferDomain,
+    patchDomain,
     deleteDomain
   },
   dns: { getRecords, createRecord, updateRecord, removeRecord },
