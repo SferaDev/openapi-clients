@@ -7768,8 +7768,11 @@ export type GitNamespacesResponse = {
   provider: string;
   slug: string;
   id: string | number;
-  name?: string;
   ownerType: string;
+  name?: string;
+  isAccessRestricted?: boolean;
+  installationId?: number;
+  requireReauth?: boolean;
 }[];
 
 export type GitNamespacesVariables = {
