@@ -8280,11 +8280,7 @@ export type GetProjectsResponse = {
     connectConfigurationId?: string | null;
     connectBuildsEnabled?: boolean;
     createdAt?: number;
-    dataCache?: {
-      userDisabled: boolean;
-      storageSizeBytes?: number | null;
-      unlimited?: boolean;
-    };
+    customerSupportCodeVisibility?: boolean;
     crons?: {
       /**
        * The time the feature was enabled for this project. Note: It enables automatically with the first Deployment that outputs cronjobs.
@@ -8319,6 +8315,11 @@ export type GetProjectsResponse = {
          */
         schedule: string;
       }[];
+    };
+    dataCache?: {
+      userDisabled: boolean;
+      storageSizeBytes?: number | null;
+      unlimited?: boolean;
     };
     devCommand?: string | null;
     directoryListing: boolean;
@@ -8693,6 +8694,7 @@ export type GetProjectsResponse = {
       notificationPaymentFailed?: Schemas.ACLAction[];
       notificationUsageAlert?: Schemas.ACLAction[];
       notificationSpendCap?: Schemas.ACLAction[];
+      notificationCustomerBudgetReached?: Schemas.ACLAction[];
       openTelemetryEndpoint?: Schemas.ACLAction[];
       paymentMethod?: Schemas.ACLAction[];
       permissions?: Schemas.ACLAction[];
@@ -8764,6 +8766,8 @@ export type GetProjectsResponse = {
       projectProductionBranch?: Schemas.ACLAction[];
       projectTransfer?: Schemas.ACLAction[];
       projectProtectionBypass?: Schemas.ACLAction[];
+      projectUsage?: Schemas.ACLAction[];
+      projectAnalyticsUsage?: Schemas.ACLAction[];
       analytics?: Schemas.ACLAction[];
       trustedIps?: Schemas.ACLAction[];
       webAnalytics?: Schemas.ACLAction[];
@@ -8863,11 +8867,7 @@ export type CreateProjectResponse = {
   connectConfigurationId?: string | null;
   connectBuildsEnabled?: boolean;
   createdAt?: number;
-  dataCache?: {
-    userDisabled: boolean;
-    storageSizeBytes?: number | null;
-    unlimited?: boolean;
-  };
+  customerSupportCodeVisibility?: boolean;
   crons?: {
     /**
      * The time the feature was enabled for this project. Note: It enables automatically with the first Deployment that outputs cronjobs.
@@ -8902,6 +8902,11 @@ export type CreateProjectResponse = {
        */
       schedule: string;
     }[];
+  };
+  dataCache?: {
+    userDisabled: boolean;
+    storageSizeBytes?: number | null;
+    unlimited?: boolean;
   };
   devCommand?: string | null;
   directoryListing: boolean;
@@ -9276,6 +9281,7 @@ export type CreateProjectResponse = {
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationSpendCap?: Schemas.ACLAction[];
+    notificationCustomerBudgetReached?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
@@ -9347,6 +9353,8 @@ export type CreateProjectResponse = {
     projectProductionBranch?: Schemas.ACLAction[];
     projectTransfer?: Schemas.ACLAction[];
     projectProtectionBypass?: Schemas.ACLAction[];
+    projectUsage?: Schemas.ACLAction[];
+    projectAnalyticsUsage?: Schemas.ACLAction[];
     analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
@@ -9601,11 +9609,7 @@ export type GetProjectResponse = {
   connectConfigurationId?: string | null;
   connectBuildsEnabled?: boolean;
   createdAt?: number;
-  dataCache?: {
-    userDisabled: boolean;
-    storageSizeBytes?: number | null;
-    unlimited?: boolean;
-  };
+  customerSupportCodeVisibility?: boolean;
   crons?: {
     /**
      * The time the feature was enabled for this project. Note: It enables automatically with the first Deployment that outputs cronjobs.
@@ -9640,6 +9644,11 @@ export type GetProjectResponse = {
        */
       schedule: string;
     }[];
+  };
+  dataCache?: {
+    userDisabled: boolean;
+    storageSizeBytes?: number | null;
+    unlimited?: boolean;
   };
   devCommand?: string | null;
   directoryListing: boolean;
@@ -10014,6 +10023,7 @@ export type GetProjectResponse = {
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationSpendCap?: Schemas.ACLAction[];
+    notificationCustomerBudgetReached?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
@@ -10085,6 +10095,8 @@ export type GetProjectResponse = {
     projectProductionBranch?: Schemas.ACLAction[];
     projectTransfer?: Schemas.ACLAction[];
     projectProtectionBypass?: Schemas.ACLAction[];
+    projectUsage?: Schemas.ACLAction[];
+    projectAnalyticsUsage?: Schemas.ACLAction[];
     analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
@@ -10192,11 +10204,7 @@ export type UpdateProjectResponse = {
   connectConfigurationId?: string | null;
   connectBuildsEnabled?: boolean;
   createdAt?: number;
-  dataCache?: {
-    userDisabled: boolean;
-    storageSizeBytes?: number | null;
-    unlimited?: boolean;
-  };
+  customerSupportCodeVisibility?: boolean;
   crons?: {
     /**
      * The time the feature was enabled for this project. Note: It enables automatically with the first Deployment that outputs cronjobs.
@@ -10231,6 +10239,11 @@ export type UpdateProjectResponse = {
        */
       schedule: string;
     }[];
+  };
+  dataCache?: {
+    userDisabled: boolean;
+    storageSizeBytes?: number | null;
+    unlimited?: boolean;
   };
   devCommand?: string | null;
   directoryListing: boolean;
@@ -10605,6 +10618,7 @@ export type UpdateProjectResponse = {
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationSpendCap?: Schemas.ACLAction[];
+    notificationCustomerBudgetReached?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
@@ -10676,6 +10690,8 @@ export type UpdateProjectResponse = {
     projectProductionBranch?: Schemas.ACLAction[];
     projectTransfer?: Schemas.ACLAction[];
     projectProtectionBypass?: Schemas.ACLAction[];
+    projectUsage?: Schemas.ACLAction[];
+    projectAnalyticsUsage?: Schemas.ACLAction[];
     analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
@@ -10744,6 +10760,10 @@ export type UpdateProjectRequestBody = {
    * @maxLength 256
    */
   commandForIgnoringBuildStep?: string | null;
+  /**
+   * Specifies whether customer support can see git source for a deployment
+   */
+  customerSupportCodeVisibility?: boolean;
   /**
    * The dev command for this project. When `null` is used this value will be automatically detected
    *
