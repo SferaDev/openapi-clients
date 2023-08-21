@@ -875,11 +875,7 @@ export type UpdateProjectDataCacheResponse = {
   connectConfigurationId?: string | null;
   connectBuildsEnabled?: boolean;
   createdAt?: number;
-  dataCache?: {
-    userDisabled: boolean;
-    storageSizeBytes?: number | null;
-    unlimited?: boolean;
-  };
+  customerSupportCodeVisibility?: boolean;
   crons?: {
     /**
      * The time the feature was enabled for this project. Note: It enables automatically with the first Deployment that outputs cronjobs.
@@ -914,6 +910,11 @@ export type UpdateProjectDataCacheResponse = {
        */
       schedule: string;
     }[];
+  };
+  dataCache?: {
+    userDisabled: boolean;
+    storageSizeBytes?: number | null;
+    unlimited?: boolean;
   };
   devCommand?: string | null;
   directoryListing: boolean;
@@ -1288,6 +1289,7 @@ export type UpdateProjectDataCacheResponse = {
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationSpendCap?: Schemas.ACLAction[];
+    notificationCustomerBudgetReached?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
@@ -1320,6 +1322,7 @@ export type UpdateProjectDataCacheResponse = {
     teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
     token?: Schemas.ACLAction[];
     usage?: Schemas.ACLAction[];
+    usageCycle?: Schemas.ACLAction[];
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
@@ -1359,6 +1362,8 @@ export type UpdateProjectDataCacheResponse = {
     projectProductionBranch?: Schemas.ACLAction[];
     projectTransfer?: Schemas.ACLAction[];
     projectProtectionBypass?: Schemas.ACLAction[];
+    projectUsage?: Schemas.ACLAction[];
+    projectAnalyticsUsage?: Schemas.ACLAction[];
     analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
@@ -7975,7 +7980,7 @@ export type GetConfigurableLogDrainResponse = {
   headers?: {
     [key: string]: string;
   };
-  environment?: 'preview' | 'production';
+  environment?: 'production' | 'preview';
   branch?: string;
   status?: 'enabled' | 'disabled' | 'errored';
   disabledAt?: number;
@@ -8067,7 +8072,7 @@ export type GetConfigurableLogDrainsResponse = {
   headers?: {
     [key: string]: string;
   };
-  environment?: 'preview' | 'production';
+  environment?: 'production' | 'preview';
   branch?: string;
   status?: 'enabled' | 'disabled' | 'errored';
   disabledAt?: number;
@@ -8127,7 +8132,7 @@ export type CreateConfigurableLogDrainResponse = {
   headers?: {
     [key: string]: string;
   };
-  environment?: 'preview' | 'production';
+  environment?: 'production' | 'preview';
   branch?: string;
   status?: 'enabled' | 'disabled' | 'errored';
   disabledAt?: number;
@@ -15885,6 +15890,7 @@ export type GetDeploymentsResponse = {
         | 'storybook'
         | null;
       gitForkProtection?: boolean;
+      customerSupportCodeVisibility?: boolean;
       gitLFS?: boolean;
       devCommand?: string | null;
       installCommand?: string | null;
