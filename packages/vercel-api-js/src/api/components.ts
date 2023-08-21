@@ -8727,6 +8727,7 @@ export type GetProjectsResponse = {
       teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
       token?: Schemas.ACLAction[];
       usage?: Schemas.ACLAction[];
+      usageCycle?: Schemas.ACLAction[];
       user?: Schemas.ACLAction[];
       userConnection?: Schemas.ACLAction[];
       webAnalyticsPlan?: Schemas.ACLAction[];
@@ -9314,6 +9315,7 @@ export type CreateProjectResponse = {
     teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
     token?: Schemas.ACLAction[];
     usage?: Schemas.ACLAction[];
+    usageCycle?: Schemas.ACLAction[];
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
@@ -10056,6 +10058,7 @@ export type GetProjectResponse = {
     teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
     token?: Schemas.ACLAction[];
     usage?: Schemas.ACLAction[];
+    usageCycle?: Schemas.ACLAction[];
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
@@ -10651,6 +10654,7 @@ export type UpdateProjectResponse = {
     teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
     token?: Schemas.ACLAction[];
     usage?: Schemas.ACLAction[];
+    usageCycle?: Schemas.ACLAction[];
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
