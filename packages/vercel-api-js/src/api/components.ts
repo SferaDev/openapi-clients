@@ -1288,7 +1288,6 @@ export type UpdateProjectDataCacheResponse = {
     NotificationMonitoringAlert?: Schemas.ACLAction[];
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
-    notificationSpendCap?: Schemas.ACLAction[];
     notificationCustomerBudgetReached?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
@@ -1307,8 +1306,6 @@ export type UpdateProjectDataCacheResponse = {
     remoteCaching?: Schemas.ACLAction[];
     samlConfig?: Schemas.ACLAction[];
     secret?: Schemas.ACLAction[];
-    spendCapConfiguration?: Schemas.ACLAction[];
-    spendCapState?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -3855,18 +3852,12 @@ export type CreateDeploymentRequestBody = {
    * When `true` and `deploymentId` is passed in, the sha from the previous deployment's `gitSource` is removed forcing the latest commit to be used.
    */
   withLatestCommit?: boolean;
-  /**
-   * @maxItems 10
-   */
   connection_uris: {
     /**
      * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
      */
     connection_uri: string;
   }[];
-  /**
-   * @maxItems 10
-   */
   roles: {
     branch_id: string;
     name: string;
@@ -3875,9 +3866,6 @@ export type CreateDeploymentRequestBody = {
     protected?: boolean;
     password?: string;
   }[];
-  /**
-   * @maxItems 10
-   */
   databases: {
     id: number;
     branch_id: string;
@@ -3896,9 +3884,6 @@ export type CreateDeploymentRequestBody = {
     updated_at: string;
     parent_id?: string;
   };
-  /**
-   * @maxItems 10
-   */
   endpoints: {
     host: string;
     id: string;
@@ -3954,9 +3939,6 @@ export type CreateDeploymentRequestBody = {
     password?: string;
   };
   password: string;
-  /**
-   * @maxItems 1000
-   */
   projects: {
     id: string;
     data_storage_bytes_hour: number;
@@ -8698,8 +8680,7 @@ export type GetProjectsResponse = {
       NotificationMonitoringAlert?: Schemas.ACLAction[];
       notificationPaymentFailed?: Schemas.ACLAction[];
       notificationUsageAlert?: Schemas.ACLAction[];
-      notificationSpendCap?: Schemas.ACLAction[];
-      notificationCustomerBudgetReached?: Schemas.ACLAction[];
+      notificationCustomerBudget?: Schemas.ACLAction[];
       openTelemetryEndpoint?: Schemas.ACLAction[];
       paymentMethod?: Schemas.ACLAction[];
       permissions?: Schemas.ACLAction[];
@@ -8717,8 +8698,6 @@ export type GetProjectsResponse = {
       remoteCaching?: Schemas.ACLAction[];
       samlConfig?: Schemas.ACLAction[];
       secret?: Schemas.ACLAction[];
-      spendCapConfiguration?: Schemas.ACLAction[];
-      spendCapState?: Schemas.ACLAction[];
       supportCase?: Schemas.ACLAction[];
       supportCaseComment?: Schemas.ACLAction[];
       dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -9286,8 +9265,7 @@ export type CreateProjectResponse = {
     NotificationMonitoringAlert?: Schemas.ACLAction[];
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
-    notificationSpendCap?: Schemas.ACLAction[];
-    notificationCustomerBudgetReached?: Schemas.ACLAction[];
+    notificationCustomerBudget?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
@@ -9305,8 +9283,6 @@ export type CreateProjectResponse = {
     remoteCaching?: Schemas.ACLAction[];
     samlConfig?: Schemas.ACLAction[];
     secret?: Schemas.ACLAction[];
-    spendCapConfiguration?: Schemas.ACLAction[];
-    spendCapState?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -10029,8 +10005,7 @@ export type GetProjectResponse = {
     NotificationMonitoringAlert?: Schemas.ACLAction[];
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
-    notificationSpendCap?: Schemas.ACLAction[];
-    notificationCustomerBudgetReached?: Schemas.ACLAction[];
+    notificationCustomerBudget?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
@@ -10048,8 +10023,6 @@ export type GetProjectResponse = {
     remoteCaching?: Schemas.ACLAction[];
     samlConfig?: Schemas.ACLAction[];
     secret?: Schemas.ACLAction[];
-    spendCapConfiguration?: Schemas.ACLAction[];
-    spendCapState?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -10625,8 +10598,7 @@ export type UpdateProjectResponse = {
     NotificationMonitoringAlert?: Schemas.ACLAction[];
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
-    notificationSpendCap?: Schemas.ACLAction[];
-    notificationCustomerBudgetReached?: Schemas.ACLAction[];
+    notificationCustomerBudget?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
@@ -10644,8 +10616,6 @@ export type UpdateProjectResponse = {
     remoteCaching?: Schemas.ACLAction[];
     samlConfig?: Schemas.ACLAction[];
     secret?: Schemas.ACLAction[];
-    spendCapConfiguration?: Schemas.ACLAction[];
-    spendCapState?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
