@@ -1288,7 +1288,7 @@ export type UpdateProjectDataCacheResponse = {
     NotificationMonitoringAlert?: Schemas.ACLAction[];
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
-    notificationCustomerBudgetReached?: Schemas.ACLAction[];
+    notificationCustomerBudget?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
