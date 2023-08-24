@@ -8664,6 +8664,7 @@ export type GetProjectsResponse = {
       integrationVercelConfigurationOverride?: Schemas.ACLAction[];
       jobGlobal?: Schemas.ACLAction[];
       logDrain?: Schemas.ACLAction[];
+      logs?: Schemas.ACLAction[];
       logsPreset?: Schemas.ACLAction[];
       Monitoring?: Schemas.ACLAction[];
       monitoringQuery?: Schemas.ACLAction[];
@@ -9251,6 +9252,7 @@ export type CreateProjectResponse = {
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
+    logs?: Schemas.ACLAction[];
     logsPreset?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
@@ -9993,6 +9995,7 @@ export type GetProjectResponse = {
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
+    logs?: Schemas.ACLAction[];
     logsPreset?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
@@ -10588,6 +10591,7 @@ export type UpdateProjectResponse = {
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
+    logs?: Schemas.ACLAction[];
     logsPreset?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
