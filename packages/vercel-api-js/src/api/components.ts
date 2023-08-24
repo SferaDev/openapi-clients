@@ -8721,6 +8721,7 @@ export type GetProjectsResponse = {
       webhook?: Schemas.ACLAction[];
       ['webhook-event']?: Schemas.ACLAction[];
       endpointVerification?: Schemas.ACLAction[];
+      projectTransferIn?: Schemas.ACLAction[];
       aliasProject?: Schemas.ACLAction[];
       aliasProtectionBypass?: Schemas.ACLAction[];
       connectConfigurationLink?: Schemas.ACLAction[];
@@ -8750,6 +8751,7 @@ export type GetProjectsResponse = {
       projectPermissions?: Schemas.ACLAction[];
       projectProductionBranch?: Schemas.ACLAction[];
       projectTransfer?: Schemas.ACLAction[];
+      projectTransferOut?: Schemas.ACLAction[];
       projectProtectionBypass?: Schemas.ACLAction[];
       projectUsage?: Schemas.ACLAction[];
       projectAnalyticsUsage?: Schemas.ACLAction[];
@@ -9306,6 +9308,7 @@ export type CreateProjectResponse = {
     webhook?: Schemas.ACLAction[];
     ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
+    projectTransferIn?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
     connectConfigurationLink?: Schemas.ACLAction[];
@@ -9335,6 +9338,7 @@ export type CreateProjectResponse = {
     projectPermissions?: Schemas.ACLAction[];
     projectProductionBranch?: Schemas.ACLAction[];
     projectTransfer?: Schemas.ACLAction[];
+    projectTransferOut?: Schemas.ACLAction[];
     projectProtectionBypass?: Schemas.ACLAction[];
     projectUsage?: Schemas.ACLAction[];
     projectAnalyticsUsage?: Schemas.ACLAction[];
@@ -10046,6 +10050,7 @@ export type GetProjectResponse = {
     webhook?: Schemas.ACLAction[];
     ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
+    projectTransferIn?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
     connectConfigurationLink?: Schemas.ACLAction[];
@@ -10075,6 +10080,7 @@ export type GetProjectResponse = {
     projectPermissions?: Schemas.ACLAction[];
     projectProductionBranch?: Schemas.ACLAction[];
     projectTransfer?: Schemas.ACLAction[];
+    projectTransferOut?: Schemas.ACLAction[];
     projectProtectionBypass?: Schemas.ACLAction[];
     projectUsage?: Schemas.ACLAction[];
     projectAnalyticsUsage?: Schemas.ACLAction[];
@@ -10639,6 +10645,7 @@ export type UpdateProjectResponse = {
     webhook?: Schemas.ACLAction[];
     ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
+    projectTransferIn?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
     connectConfigurationLink?: Schemas.ACLAction[];
@@ -10668,6 +10675,7 @@ export type UpdateProjectResponse = {
     projectPermissions?: Schemas.ACLAction[];
     projectProductionBranch?: Schemas.ACLAction[];
     projectTransfer?: Schemas.ACLAction[];
+    projectTransferOut?: Schemas.ACLAction[];
     projectProtectionBypass?: Schemas.ACLAction[];
     projectUsage?: Schemas.ACLAction[];
     projectAnalyticsUsage?: Schemas.ACLAction[];
