@@ -1272,6 +1272,7 @@ export type UpdateProjectDataCacheResponse = {
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
+    logs?: Schemas.ACLAction[];
     logsPreset?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
@@ -1329,6 +1330,7 @@ export type UpdateProjectDataCacheResponse = {
     webhook?: Schemas.ACLAction[];
     ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
+    projectTransferIn?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
     connectConfigurationLink?: Schemas.ACLAction[];
@@ -1358,6 +1360,7 @@ export type UpdateProjectDataCacheResponse = {
     projectPermissions?: Schemas.ACLAction[];
     projectProductionBranch?: Schemas.ACLAction[];
     projectTransfer?: Schemas.ACLAction[];
+    projectTransferOut?: Schemas.ACLAction[];
     projectProtectionBypass?: Schemas.ACLAction[];
     projectUsage?: Schemas.ACLAction[];
     projectAnalyticsUsage?: Schemas.ACLAction[];
