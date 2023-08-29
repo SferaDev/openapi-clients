@@ -410,7 +410,6 @@ export type AuthUser = {
     plan: 'pro' | 'enterprise' | 'hobby';
     platform?: 'stripe' | 'stripeTestMode';
     orbCustomerId?: string;
-    syncedAt?: number;
     programType?: 'startup' | 'agency';
     trial?: {
       start: number;
