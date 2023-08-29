@@ -13426,6 +13426,7 @@ export type CreateTeamResponse = {
     plan: 'enterprise' | 'pro' | 'hobby';
     platform?: 'stripeTestMode' | 'stripe';
     orbCustomerId?: string;
+    syncedAt?: number;
     programType?: 'startup' | 'agency';
     trial?: {
       start: number;
