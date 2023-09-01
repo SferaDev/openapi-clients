@@ -13904,7 +13904,6 @@ export type CreateTeamResponse = {
     purchaseOrder?: string | null;
     status?: 'active' | 'trialing' | 'overdue' | 'expired' | 'canceled';
     pricingExperiment?: 'august-2022';
-    orbMigrationScheduledAt?: number | null;
   };
 };
 
