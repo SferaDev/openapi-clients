@@ -6,7 +6,7 @@
 /**
  * Enum containing the actions that can be performed against a resource. Group operations are included.
  */
-export type ACLAction = 'create' | 'delete' | 'read' | 'update' | 'list' | 'count';
+export type ACLAction = 'create' | 'delete' | 'read' | 'update' | 'list';
 
 /**
  * This object contains information related to the pagination of the current request, including the necessary parameters to get the next or previous page of data.
@@ -93,7 +93,6 @@ export type UserEvent = {
      * @example author
      */
     type:
-      | 'target'
       | 'bold'
       | 'link'
       | 'author'
@@ -109,6 +108,7 @@ export type UserEvent = {
       | 'project_name'
       | 'scaling_rules'
       | 'env_var_name'
+      | 'target'
       | 'store'
       | 'system';
     /**
@@ -269,7 +269,7 @@ export type TeamLimited = {
         confirmed: boolean;
         confirmedAt: number;
         accessRequestedAt?: number;
-        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
+        role: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
         teamId?: string;
         uid: string;
         createdAt: number;
@@ -303,7 +303,7 @@ export type TeamLimited = {
         confirmed: boolean;
         confirmedAt?: number;
         accessRequestedAt: number;
-        role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
+        role: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
         teamId?: string;
         uid: string;
         createdAt: number;

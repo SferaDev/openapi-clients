@@ -5627,11 +5627,11 @@ export type GetDomainResponse = {
       id: string;
     };
     /**
-     * The domain name.
+     * If it was purchased through Vercel, the timestamp in milliseconds when it was purchased.
      *
-     * @example example.com
+     * @example 1613602938882
      */
-    name: string;
+    boughtAt: number | null;
     /**
      * Timestamp in milliseconds when the domain was created in the registry.
      *
@@ -5639,23 +5639,23 @@ export type GetDomainResponse = {
      */
     createdAt: number;
     /**
-     * The unique identifier of the domain.
-     *
-     * @example EmTbe5CEJyTk2yVAHBUWy4A3sRusca3GCwRjTC1bpeVnt1
-     */
-    id: string;
-    /**
      * Timestamp in milliseconds at which the domain is set to expire. `null` if not bought with Vercel.
      *
      * @example 1613602938882
      */
     expiresAt: number | null;
     /**
-     * If it was purchased through Vercel, the timestamp in milliseconds when it was purchased.
+     * The unique identifier of the domain.
      *
-     * @example 1613602938882
+     * @example EmTbe5CEJyTk2yVAHBUWy4A3sRusca3GCwRjTC1bpeVnt1
      */
-    boughtAt: number | null;
+    id: string;
+    /**
+     * The domain name.
+     *
+     * @example example.com
+     */
+    name: string;
     /**
      * Timestamp in milliseconds at which the domain was ordered.
      *
@@ -5774,30 +5774,6 @@ export type GetDomainsResponse = {
       id: string;
     };
     /**
-     * The domain name.
-     *
-     * @example example.com
-     */
-    name: string;
-    /**
-     * Timestamp in milliseconds when the domain was created in the registry.
-     *
-     * @example 1613602938882
-     */
-    createdAt: number;
-    /**
-     * The unique identifier of the domain.
-     *
-     * @example EmTbe5CEJyTk2yVAHBUWy4A3sRusca3GCwRjTC1bpeVnt1
-     */
-    id: string;
-    /**
-     * Timestamp in milliseconds at which the domain is set to expire. `null` if not bought with Vercel.
-     *
-     * @example 1613602938882
-     */
-    expiresAt: number | null;
-    /**
      * Indicates whether the domain is set to automatically renew.
      *
      * @example true
@@ -5809,6 +5785,30 @@ export type GetDomainsResponse = {
      * @example 1613602938882
      */
     boughtAt: number | null;
+    /**
+     * Timestamp in milliseconds when the domain was created in the registry.
+     *
+     * @example 1613602938882
+     */
+    createdAt: number;
+    /**
+     * Timestamp in milliseconds at which the domain is set to expire. `null` if not bought with Vercel.
+     *
+     * @example 1613602938882
+     */
+    expiresAt: number | null;
+    /**
+     * The unique identifier of the domain.
+     *
+     * @example EmTbe5CEJyTk2yVAHBUWy4A3sRusca3GCwRjTC1bpeVnt1
+     */
+    id: string;
+    /**
+     * The domain name.
+     *
+     * @example example.com
+     */
+    name: string;
     /**
      * Timestamp in milliseconds at which the domain was ordered.
      *
@@ -5903,11 +5903,17 @@ export type CreateOrTransferDomainResponse = {
       id: string;
     };
     /**
-     * The domain name.
+     * The unique identifier of the domain.
      *
-     * @example example.com
+     * @example EmTbe5CEJyTk2yVAHBUWy4A3sRusca3GCwRjTC1bpeVnt1
      */
-    name: string;
+    id: string;
+    /**
+     * If it was purchased through Vercel, the timestamp in milliseconds when it was purchased.
+     *
+     * @example 1613602938882
+     */
+    boughtAt: number | null;
     /**
      * Timestamp in milliseconds when the domain was created in the registry.
      *
@@ -5915,23 +5921,17 @@ export type CreateOrTransferDomainResponse = {
      */
     createdAt: number;
     /**
-     * The unique identifier of the domain.
-     *
-     * @example EmTbe5CEJyTk2yVAHBUWy4A3sRusca3GCwRjTC1bpeVnt1
-     */
-    id: string;
-    /**
      * Timestamp in milliseconds at which the domain is set to expire. `null` if not bought with Vercel.
      *
      * @example 1613602938882
      */
     expiresAt: number | null;
     /**
-     * If it was purchased through Vercel, the timestamp in milliseconds when it was purchased.
+     * The domain name.
      *
-     * @example 1613602938882
+     * @example example.com
      */
-    boughtAt: number | null;
+    name: string;
     /**
      * Timestamp in milliseconds at which the domain was ordered.
      *
@@ -8197,6 +8197,393 @@ export const createConfigurableLogDrain = (variables: CreateConfigurableLogDrain
     {}
   >({ url: '/v1/log-drains', method: 'post', ...variables, signal });
 
+export type GetProjectMembersPathParams = {
+  /**
+   * The ID or name of the Project.
+   *
+   * @example prj_pavWOn1iLObbXLRiwVvzmPrTWyTf
+   */
+  idOrName: string;
+};
+
+export type GetProjectMembersQueryParams = {
+  /**
+   * Limit how many project members should be returned
+   *
+   * @example 20
+   * @minimum 1
+   * @maximum 100
+   */
+  limit?: number;
+  /**
+   * Timestamp in milliseconds to only include members added since then.
+   *
+   * @example 1540095775951
+   */
+  since?: number;
+  /**
+   * Timestamp in milliseconds to only include members added until then.
+   *
+   * @example 1540095775951
+   */
+  until?: number;
+  /**
+   * Search project members by their name, username, and email.
+   */
+  search?: string;
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetProjectMembersError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetProjectMembersVariables = {
+  pathParams: GetProjectMembersPathParams;
+  queryParams?: GetProjectMembersQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Lists all members of a project.
+ */
+export const getProjectMembers = (variables: GetProjectMembersVariables, signal?: AbortSignal) =>
+  fetch<
+    | Record<string, any>
+    | {
+        members: {
+          /**
+           * ID of the file for the Avatar of this member.
+           *
+           * @example 123a6c5209bc3778245d011443644c8d27dc2c50
+           */
+          avatar?: string;
+          /**
+           * The email of this member.
+           *
+           * @example jane.doe@example.com
+           */
+          email: string;
+          /**
+           * Role of this user in the project.
+           *
+           * @example ADMIN
+           */
+          role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+          /**
+           * The ID of this user.
+           *
+           * @example zTuNVUXEAvvnNN3IaqinkyMw
+           */
+          uid: string;
+          /**
+           * The unique username of this user.
+           *
+           * @example jane-doe
+           */
+          username: string;
+          /**
+           * The name of this user.
+           *
+           * @example Jane Doe
+           */
+          name?: string;
+          /**
+           * Timestamp in milliseconds when this member was added.
+           *
+           * @example 1588720733602
+           */
+          createdAt: number;
+        }[];
+        pagination: {
+          hasNext: boolean;
+          /**
+           * Amount of items in the current page.
+           *
+           * @example 20
+           */
+          count: number;
+          /**
+           * Timestamp that must be used to request the next page.
+           *
+           * @example 1540095775951
+           */
+          next: number | null;
+          /**
+           * Timestamp that must be used to request the previous page.
+           *
+           * @example 1540095775951
+           */
+          prev: number | null;
+        };
+      },
+    GetProjectMembersError,
+    undefined,
+    {},
+    GetProjectMembersQueryParams,
+    GetProjectMembersPathParams
+  >({ url: '/v1/projects/{idOrName}/members', method: 'get', ...variables, signal });
+
+export type AddProjectMemberPathParams = {
+  /**
+   * The ID or name of the Project.
+   *
+   * @example prj_pavWOn1iLObbXLRiwVvzmPrTWyTf
+   */
+  idOrName: string;
+};
+
+export type AddProjectMemberQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type AddProjectMemberError = Fetcher.ErrorWrapper<undefined>;
+
+export type AddProjectMemberResponse = {
+  id: string;
+};
+
+export type AddProjectMemberVariables = {
+  body:
+    | {
+        /**
+         * The ID of the team member that should be added to this project.
+         *
+         * @maxLength 256
+         * @example ndlgr43fadlPyCtREAqxxdyFK
+         */
+        uid: string;
+        /**
+         * The username of the team member that should be added to this project.
+         *
+         * @maxLength 256
+         * @example example
+         */
+        username?: string;
+        /**
+         * The email of the team member that should be added to this project.
+         *
+         * @format email
+         * @example entity@example.com
+         */
+        email?: string;
+        /**
+         * The project role of the member that will be added.
+         *
+         * @example ADMIN
+         */
+        role?: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+      }
+    | {
+        /**
+         * The ID of the team member that should be added to this project.
+         *
+         * @maxLength 256
+         * @example ndlgr43fadlPyCtREAqxxdyFK
+         */
+        uid?: string;
+        /**
+         * The username of the team member that should be added to this project.
+         *
+         * @maxLength 256
+         * @example example
+         */
+        username: string;
+        /**
+         * The email of the team member that should be added to this project.
+         *
+         * @format email
+         * @example entity@example.com
+         */
+        email?: string;
+        /**
+         * The project role of the member that will be added.
+         *
+         * @example ADMIN
+         */
+        role?: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+      }
+    | {
+        /**
+         * The ID of the team member that should be added to this project.
+         *
+         * @maxLength 256
+         * @example ndlgr43fadlPyCtREAqxxdyFK
+         */
+        uid?: string;
+        /**
+         * The username of the team member that should be added to this project.
+         *
+         * @maxLength 256
+         * @example example
+         */
+        username?: string;
+        /**
+         * The email of the team member that should be added to this project.
+         *
+         * @format email
+         * @example entity@example.com
+         */
+        email: string;
+        /**
+         * The project role of the member that will be added.
+         *
+         * @example ADMIN
+         */
+        role?: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+      };
+  pathParams: AddProjectMemberPathParams;
+  queryParams?: AddProjectMemberQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Adds a new member to the project.
+ */
+export const addProjectMember = (variables: AddProjectMemberVariables, signal?: AbortSignal) =>
+  fetch<
+    AddProjectMemberResponse,
+    AddProjectMemberError,
+    | {
+        /**
+         * The ID of the team member that should be added to this project.
+         *
+         * @maxLength 256
+         * @example ndlgr43fadlPyCtREAqxxdyFK
+         */
+        uid: string;
+        /**
+         * The username of the team member that should be added to this project.
+         *
+         * @maxLength 256
+         * @example example
+         */
+        username?: string;
+        /**
+         * The email of the team member that should be added to this project.
+         *
+         * @format email
+         * @example entity@example.com
+         */
+        email?: string;
+        /**
+         * The project role of the member that will be added.
+         *
+         * @example ADMIN
+         */
+        role?: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+      }
+    | {
+        /**
+         * The ID of the team member that should be added to this project.
+         *
+         * @maxLength 256
+         * @example ndlgr43fadlPyCtREAqxxdyFK
+         */
+        uid?: string;
+        /**
+         * The username of the team member that should be added to this project.
+         *
+         * @maxLength 256
+         * @example example
+         */
+        username: string;
+        /**
+         * The email of the team member that should be added to this project.
+         *
+         * @format email
+         * @example entity@example.com
+         */
+        email?: string;
+        /**
+         * The project role of the member that will be added.
+         *
+         * @example ADMIN
+         */
+        role?: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+      }
+    | {
+        /**
+         * The ID of the team member that should be added to this project.
+         *
+         * @maxLength 256
+         * @example ndlgr43fadlPyCtREAqxxdyFK
+         */
+        uid?: string;
+        /**
+         * The username of the team member that should be added to this project.
+         *
+         * @maxLength 256
+         * @example example
+         */
+        username?: string;
+        /**
+         * The email of the team member that should be added to this project.
+         *
+         * @format email
+         * @example entity@example.com
+         */
+        email: string;
+        /**
+         * The project role of the member that will be added.
+         *
+         * @example ADMIN
+         */
+        role?: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+      },
+    {},
+    AddProjectMemberQueryParams,
+    AddProjectMemberPathParams
+  >({ url: '/v1/projects/{idOrName}/members', method: 'post', ...variables, signal });
+
+export type RemoveProjectMemberPathParams = {
+  /**
+   * The ID or name of the Project.
+   *
+   * @example prj_pavWOn1iLObbXLRiwVvzmPrTWyTf
+   */
+  idOrName: string;
+  /**
+   * The user ID of the member.
+   *
+   * @example ndlgr43fadlPyCtREAqxxdyFK
+   */
+  uid: string;
+};
+
+export type RemoveProjectMemberQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type RemoveProjectMemberError = Fetcher.ErrorWrapper<undefined>;
+
+export type RemoveProjectMemberResponse = {
+  id: string;
+};
+
+export type RemoveProjectMemberVariables = {
+  pathParams: RemoveProjectMemberPathParams;
+  queryParams?: RemoveProjectMemberQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Remove a member from a specific project
+ */
+export const removeProjectMember = (variables: RemoveProjectMemberVariables, signal?: AbortSignal) =>
+  fetch<
+    RemoveProjectMemberResponse,
+    RemoveProjectMemberError,
+    undefined,
+    {},
+    RemoveProjectMemberQueryParams,
+    RemoveProjectMemberPathParams
+  >({ url: '/v1/projects/{idOrName}/members/{uid}', method: 'delete', ...variables, signal });
+
 export type GetProjectsQueryParams = {
   /**
    * Query only projects updated after the given timestamp
@@ -8549,9 +8936,7 @@ export type GetProjectsResponse = {
     name: string;
     nodeVersion: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
     outputDirectory?: string | null;
-    passwordProtection?: {
-      deploymentType: 'preview' | 'all';
-    } | null;
+    passwordProtection?: Record<string, any> | null;
     productionDeploymentsFastLane?: boolean;
     publicSource?: boolean | null;
     rootDirectory?: string | null;
@@ -8559,7 +8944,7 @@ export type GetProjectsResponse = {
     skipGitConnectDuringLink?: boolean;
     sourceFilesOutsideRootDirectory?: boolean;
     ssoProtection?: {
-      deploymentType: 'preview' | 'all';
+      deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
     } | null;
     targets?: {
       [key: string]: {
@@ -8626,6 +9011,42 @@ export type GetProjectsResponse = {
     live?: boolean;
     enablePreviewFeedback?: boolean | null;
     permissions?: {
+      aliasProject?: Schemas.ACLAction[];
+      aliasProtectionBypass?: Schemas.ACLAction[];
+      connectConfigurationLink?: Schemas.ACLAction[];
+      dataCacheNamespace?: Schemas.ACLAction[];
+      deployment?: Schemas.ACLAction[];
+      deploymentCheck?: Schemas.ACLAction[];
+      deploymentCheckPreview?: Schemas.ACLAction[];
+      deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
+      deploymentProductionGit?: Schemas.ACLAction[];
+      deploymentPreview?: Schemas.ACLAction[];
+      deploymentPrivate?: Schemas.ACLAction[];
+      deploymentPromote?: Schemas.ACLAction[];
+      deploymentRollback?: Schemas.ACLAction[];
+      passwordProtection?: Schemas.ACLAction[];
+      job?: Schemas.ACLAction[];
+      project?: Schemas.ACLAction[];
+      projectAnalyticsSampling?: Schemas.ACLAction[];
+      projectDeploymentHook?: Schemas.ACLAction[];
+      projectDomain?: Schemas.ACLAction[];
+      projectDomainMove?: Schemas.ACLAction[];
+      projectEnvVars?: Schemas.ACLAction[];
+      projectEnvVarsProduction?: Schemas.ACLAction[];
+      projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+      projectIntegrationConfiguration?: Schemas.ACLAction[];
+      projectLink?: Schemas.ACLAction[];
+      projectMember?: Schemas.ACLAction[];
+      projectPermissions?: Schemas.ACLAction[];
+      projectProductionBranch?: Schemas.ACLAction[];
+      projectTransfer?: Schemas.ACLAction[];
+      projectTransferOut?: Schemas.ACLAction[];
+      projectProtectionBypass?: Schemas.ACLAction[];
+      projectUsage?: Schemas.ACLAction[];
+      projectAnalyticsUsage?: Schemas.ACLAction[];
+      analytics?: Schemas.ACLAction[];
+      trustedIps?: Schemas.ACLAction[];
+      webAnalytics?: Schemas.ACLAction[];
       aliasGlobal?: Schemas.ACLAction[];
       analyticsSampling?: Schemas.ACLAction[];
       analyticsUsage?: Schemas.ACLAction[];
@@ -8726,42 +9147,6 @@ export type GetProjectsResponse = {
       ['webhook-event']?: Schemas.ACLAction[];
       endpointVerification?: Schemas.ACLAction[];
       projectTransferIn?: Schemas.ACLAction[];
-      aliasProject?: Schemas.ACLAction[];
-      aliasProtectionBypass?: Schemas.ACLAction[];
-      connectConfigurationLink?: Schemas.ACLAction[];
-      dataCacheNamespace?: Schemas.ACLAction[];
-      deployment?: Schemas.ACLAction[];
-      deploymentCheck?: Schemas.ACLAction[];
-      deploymentCheckPreview?: Schemas.ACLAction[];
-      deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
-      deploymentProductionGit?: Schemas.ACLAction[];
-      deploymentPreview?: Schemas.ACLAction[];
-      deploymentPrivate?: Schemas.ACLAction[];
-      deploymentPromote?: Schemas.ACLAction[];
-      deploymentRollback?: Schemas.ACLAction[];
-      passwordProtection?: Schemas.ACLAction[];
-      job?: Schemas.ACLAction[];
-      project?: Schemas.ACLAction[];
-      projectAnalyticsSampling?: Schemas.ACLAction[];
-      projectDeploymentHook?: Schemas.ACLAction[];
-      projectDomain?: Schemas.ACLAction[];
-      projectDomainMove?: Schemas.ACLAction[];
-      projectEnvVars?: Schemas.ACLAction[];
-      projectEnvVarsProduction?: Schemas.ACLAction[];
-      projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
-      projectIntegrationConfiguration?: Schemas.ACLAction[];
-      projectLink?: Schemas.ACLAction[];
-      projectMember?: Schemas.ACLAction[];
-      projectPermissions?: Schemas.ACLAction[];
-      projectProductionBranch?: Schemas.ACLAction[];
-      projectTransfer?: Schemas.ACLAction[];
-      projectTransferOut?: Schemas.ACLAction[];
-      projectProtectionBypass?: Schemas.ACLAction[];
-      projectUsage?: Schemas.ACLAction[];
-      projectAnalyticsUsage?: Schemas.ACLAction[];
-      analytics?: Schemas.ACLAction[];
-      trustedIps?: Schemas.ACLAction[];
-      webAnalytics?: Schemas.ACLAction[];
     };
     lastRollbackTarget?: Record<string, any> | null;
     lastAliasRequest?: {
@@ -8790,7 +9175,7 @@ export type GetProjectsResponse = {
     hasActiveBranches?: boolean;
     trustedIps?:
       | {
-          deploymentType: 'preview' | 'all' | 'production';
+          deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
           addresses: {
             value: string;
             note?: string;
@@ -8798,7 +9183,7 @@ export type GetProjectsResponse = {
           protectionMode: 'additional' | 'exclusive';
         }
       | {
-          deploymentType: 'preview' | 'all' | 'production';
+          deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         }
       | null;
     gitComments?: {
@@ -8906,7 +9291,7 @@ export type CreateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
     id?: string;
     key: string;
     value: string;
@@ -9137,9 +9522,7 @@ export type CreateProjectResponse = {
   name: string;
   nodeVersion: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
   outputDirectory?: string | null;
-  passwordProtection?: {
-    deploymentType: 'preview' | 'all';
-  } | null;
+  passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   rootDirectory?: string | null;
@@ -9147,7 +9530,7 @@ export type CreateProjectResponse = {
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
   ssoProtection?: {
-    deploymentType: 'preview' | 'all';
+    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
@@ -9378,7 +9761,7 @@ export type CreateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'preview' | 'all' | 'production';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -9386,7 +9769,7 @@ export type CreateProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'preview' | 'all' | 'production';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
       }
     | null;
   gitComments?: {
@@ -9880,9 +10263,7 @@ export type GetProjectResponse = {
   name: string;
   nodeVersion: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
   outputDirectory?: string | null;
-  passwordProtection?: {
-    deploymentType: 'preview' | 'all';
-  } | null;
+  passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   rootDirectory?: string | null;
@@ -9890,7 +10271,7 @@ export type GetProjectResponse = {
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
   ssoProtection?: {
-    deploymentType: 'preview' | 'all';
+    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
@@ -10121,7 +10502,7 @@ export type GetProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'preview' | 'all' | 'production';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -10129,7 +10510,7 @@ export type GetProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'preview' | 'all' | 'production';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
       }
     | null;
   gitComments?: {
@@ -10476,9 +10857,7 @@ export type UpdateProjectResponse = {
   name: string;
   nodeVersion: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
   outputDirectory?: string | null;
-  passwordProtection?: {
-    deploymentType: 'all' | 'preview';
-  } | null;
+  passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   rootDirectory?: string | null;
@@ -10486,7 +10865,7 @@ export type UpdateProjectResponse = {
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
   ssoProtection?: {
-    deploymentType: 'all' | 'preview';
+    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
@@ -10717,7 +11096,7 @@ export type UpdateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'all' | 'preview' | 'production';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -10725,7 +11104,7 @@ export type UpdateProjectResponse = {
         protectionMode: 'exclusive' | 'additional';
       }
     | {
-        deploymentType: 'all' | 'preview' | 'production';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
       }
     | null;
   gitComments?: {
@@ -10849,7 +11228,7 @@ export type UpdateProjectRequestBody = {
     /**
      * Specify if the password will apply to every Deployment Target or just Preview
      */
-    deploymentType: 'all' | 'preview';
+    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
     /**
      * The password that will be used to protect Project Deployments
      *
@@ -10892,7 +11271,7 @@ export type UpdateProjectRequestBody = {
      *
      * @default preview
      */
-    deploymentType: 'all' | 'preview';
+    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   /**
    * Restricts access to deployments based on the incoming request IP address
@@ -10901,7 +11280,7 @@ export type UpdateProjectRequestBody = {
     /**
      * Specify if the Trusted IPs will apply to every Deployment Target or just Preview
      */
-    deploymentType: 'all' | 'preview' | 'production';
+    deploymentType: 'all' | 'preview' | 'production' | 'prod_deployment_urls_and_all_previews';
     /**
      * @minItems 1
      */
@@ -11850,7 +12229,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         id?: string;
         key?: string;
         value?: string;
@@ -11922,7 +12301,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         id?: string;
         key?: string;
         value?: string;
@@ -12203,7 +12582,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         id?: string;
         key: string;
         value: string;
@@ -12275,7 +12654,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         id?: string;
         key: string;
         value: string;
@@ -12346,7 +12725,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         id?: string;
         key: string;
         value: string;
@@ -12653,7 +13032,7 @@ export type GetTeamMembersResponse = {
      *
      * @example OWNER
      */
-    role: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
+    role: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'VIEWER' | 'BILLING' | 'CONTRIBUTOR';
     /**
      * The ID of this user.
      *
@@ -12723,7 +13102,7 @@ export type GetTeamMembersResponse = {
   emailInviteCodes?: {
     id: string;
     email?: string;
-    role?: 'MEMBER' | 'OWNER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
+    role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'VIEWER' | 'BILLING' | 'CONTRIBUTOR';
     isDSyncUser: boolean;
     createdAt?: number;
     expired?: boolean;
@@ -13461,7 +13840,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 1 | 12 | 2 | 3 | 6;
         };
         maxQuantity?: number;
       };
@@ -13478,7 +13857,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 1 | 12 | 2 | 3 | 6;
         };
         maxQuantity?: number;
       };
@@ -13495,7 +13874,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 1 | 12 | 2 | 3 | 6;
         };
         maxQuantity?: number;
       };
@@ -13512,7 +13891,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 1 | 12 | 2 | 3 | 6;
         };
         maxQuantity?: number;
       };
@@ -13529,7 +13908,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 1 | 12 | 2 | 3 | 6;
         };
         maxQuantity?: number;
       };
@@ -13546,7 +13925,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 1 | 12 | 2 | 3 | 6;
         };
         maxQuantity?: number;
       };
@@ -13563,7 +13942,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 1 | 12 | 2 | 3 | 6;
         };
         maxQuantity?: number;
       };
@@ -13580,7 +13959,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 1 | 12 | 2 | 3 | 6;
         };
         maxQuantity?: number;
       };
@@ -13597,7 +13976,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 1 | 12 | 2 | 3 | 6;
         };
         maxQuantity?: number;
       };
@@ -13614,7 +13993,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 1 | 12 | 2 | 3 | 6;
         };
         maxQuantity?: number;
       };
@@ -13902,7 +14281,7 @@ export type CreateTeamResponse = {
       analyticsSpendLimitInDollars?: number | null;
     } | null;
     purchaseOrder?: string | null;
-    status?: 'active' | 'trialing' | 'overdue' | 'expired' | 'canceled';
+    status?: 'trialing' | 'active' | 'overdue' | 'expired' | 'canceled';
     pricingExperiment?: 'august-2022';
     orbMigrationScheduledAt?: number | null;
   };
@@ -16578,6 +16957,7 @@ export const operationsByTag = {
     getConfigurableLogDrains,
     createConfigurableLogDrain
   },
+  projectMembers: { getProjectMembers, addProjectMember, removeProjectMember },
   teams: {
     getTeamMembers,
     inviteUserToTeam,
