@@ -1154,9 +1154,7 @@ export type UpdateProjectDataCacheResponse = {
   name: string;
   nodeVersion: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
   outputDirectory?: string | null;
-  passwordProtection?: {
-    deploymentType: 'preview' | 'all';
-  } | null;
+  passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   rootDirectory?: string | null;
@@ -1164,7 +1162,7 @@ export type UpdateProjectDataCacheResponse = {
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
   ssoProtection?: {
-    deploymentType: 'preview' | 'all';
+    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
@@ -1354,6 +1352,7 @@ export type UpdateProjectDataCacheResponse = {
     projectEnvVars?: Schemas.ACLAction[];
     projectEnvVarsProduction?: Schemas.ACLAction[];
     projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+    projectId?: Schemas.ACLAction[];
     projectIntegrationConfiguration?: Schemas.ACLAction[];
     projectLink?: Schemas.ACLAction[];
     projectMember?: Schemas.ACLAction[];
@@ -1395,7 +1394,7 @@ export type UpdateProjectDataCacheResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'preview' | 'all' | 'production';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -1403,7 +1402,7 @@ export type UpdateProjectDataCacheResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'preview' | 'all' | 'production';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
       }
     | null;
   gitComments?: {
@@ -9034,6 +9033,7 @@ export type GetProjectsResponse = {
       projectEnvVars?: Schemas.ACLAction[];
       projectEnvVarsProduction?: Schemas.ACLAction[];
       projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+      projectId?: Schemas.ACLAction[];
       projectIntegrationConfiguration?: Schemas.ACLAction[];
       projectLink?: Schemas.ACLAction[];
       projectMember?: Schemas.ACLAction[];
@@ -9720,6 +9720,7 @@ export type CreateProjectResponse = {
     projectEnvVars?: Schemas.ACLAction[];
     projectEnvVarsProduction?: Schemas.ACLAction[];
     projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+    projectId?: Schemas.ACLAction[];
     projectIntegrationConfiguration?: Schemas.ACLAction[];
     projectLink?: Schemas.ACLAction[];
     projectMember?: Schemas.ACLAction[];
@@ -10461,6 +10462,7 @@ export type GetProjectResponse = {
     projectEnvVars?: Schemas.ACLAction[];
     projectEnvVarsProduction?: Schemas.ACLAction[];
     projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+    projectId?: Schemas.ACLAction[];
     projectIntegrationConfiguration?: Schemas.ACLAction[];
     projectLink?: Schemas.ACLAction[];
     projectMember?: Schemas.ACLAction[];
@@ -11055,6 +11057,7 @@ export type UpdateProjectResponse = {
     projectEnvVars?: Schemas.ACLAction[];
     projectEnvVarsProduction?: Schemas.ACLAction[];
     projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+    projectId?: Schemas.ACLAction[];
     projectIntegrationConfiguration?: Schemas.ACLAction[];
     projectLink?: Schemas.ACLAction[];
     projectMember?: Schemas.ACLAction[];
