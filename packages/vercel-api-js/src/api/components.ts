@@ -13571,6 +13571,15 @@ export type RemoveTeamMemberPathParams = {
   uid: string;
 };
 
+export type RemoveTeamMemberQueryParams = {
+  /**
+   * The ID of the team to set as the new default team for the Northstar user.
+   *
+   * @example team_nllPyCtREAqxxdyFKbbMDlxd
+   */
+  newDefaultTeamId?: string;
+};
+
 export type RemoveTeamMemberError = Fetcher.ErrorWrapper<undefined>;
 
 export type RemoveTeamMemberResponse = {
@@ -13578,22 +13587,26 @@ export type RemoveTeamMemberResponse = {
    * ID of the team.
    */
   id: string;
+  newDefaultTeamIdError: boolean;
 };
 
 export type RemoveTeamMemberVariables = {
   pathParams: RemoveTeamMemberPathParams;
+  queryParams?: RemoveTeamMemberQueryParams;
 } & FetcherExtraProps;
 
 /**
  * Remove a Team Member from the Team, or dismiss a user that requested access, or leave a team.
  */
 export const removeTeamMember = (variables: RemoveTeamMemberVariables, signal?: AbortSignal) =>
-  fetch<RemoveTeamMemberResponse, RemoveTeamMemberError, undefined, {}, {}, RemoveTeamMemberPathParams>({
-    url: '/v1/teams/{teamId}/members/{uid}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
+  fetch<
+    RemoveTeamMemberResponse,
+    RemoveTeamMemberError,
+    undefined,
+    {},
+    RemoveTeamMemberQueryParams,
+    RemoveTeamMemberPathParams
+  >({ url: '/v1/teams/{teamId}/members/{uid}', method: 'delete', ...variables, signal });
 
 export type GetTeamPathParams = {
   /**
@@ -13805,7 +13818,7 @@ export type CreateTeamResponse = {
       start: number;
       end: number;
     } | null;
-    plan: 'enterprise' | 'pro' | 'hobby';
+    plan: 'enterprise' | 'hobby' | 'pro';
     platform?: 'stripeTestMode' | 'stripe';
     orbCustomerId?: string;
     syncedAt?: number;
@@ -13843,7 +13856,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 12 | 2 | 3 | 6;
+          intervalCount: 1 | 2 | 12 | 3 | 6;
         };
         maxQuantity?: number;
       };
@@ -13860,7 +13873,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 12 | 2 | 3 | 6;
+          intervalCount: 1 | 2 | 12 | 3 | 6;
         };
         maxQuantity?: number;
       };
@@ -13877,7 +13890,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 12 | 2 | 3 | 6;
+          intervalCount: 1 | 2 | 12 | 3 | 6;
         };
         maxQuantity?: number;
       };
@@ -13894,7 +13907,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 12 | 2 | 3 | 6;
+          intervalCount: 1 | 2 | 12 | 3 | 6;
         };
         maxQuantity?: number;
       };
@@ -13911,7 +13924,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 12 | 2 | 3 | 6;
+          intervalCount: 1 | 2 | 12 | 3 | 6;
         };
         maxQuantity?: number;
       };
@@ -13928,7 +13941,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 12 | 2 | 3 | 6;
+          intervalCount: 1 | 2 | 12 | 3 | 6;
         };
         maxQuantity?: number;
       };
@@ -13945,7 +13958,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 12 | 2 | 3 | 6;
+          intervalCount: 1 | 2 | 12 | 3 | 6;
         };
         maxQuantity?: number;
       };
@@ -13962,7 +13975,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 12 | 2 | 3 | 6;
+          intervalCount: 1 | 2 | 12 | 3 | 6;
         };
         maxQuantity?: number;
       };
@@ -13979,7 +13992,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 12 | 2 | 3 | 6;
+          intervalCount: 1 | 2 | 12 | 3 | 6;
         };
         maxQuantity?: number;
       };
@@ -13996,7 +14009,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 12 | 2 | 3 | 6;
+          intervalCount: 1 | 2 | 12 | 3 | 6;
         };
         maxQuantity?: number;
       };
@@ -14329,6 +14342,15 @@ export type DeleteTeamPathParams = {
   teamId: string;
 };
 
+export type DeleteTeamQueryParams = {
+  /**
+   * Id of the team to be set as the new default team
+   *
+   * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
+   */
+  newDefaultTeamId?: string;
+};
+
 export type DeleteTeamError = Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteTeamResponse = {
@@ -14338,6 +14360,12 @@ export type DeleteTeamResponse = {
    * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
    */
   id: string;
+  /**
+   * Signifies whether the default team update has failed, when newDefaultTeamId is provided in request query.
+   *
+   * @example true
+   */
+  newDefaultTeamIdError?: boolean;
 };
 
 export type DeleteTeamRequestBody = {
@@ -14359,13 +14387,14 @@ export type DeleteTeamRequestBody = {
 export type DeleteTeamVariables = {
   body?: DeleteTeamRequestBody;
   pathParams: DeleteTeamPathParams;
+  queryParams?: DeleteTeamQueryParams;
 } & FetcherExtraProps;
 
 /**
  * Delete a team under your account. You need to send a `DELETE` request with the desired team `id`. An optional array of reasons for deletion may also be sent.
  */
 export const deleteTeam = (variables: DeleteTeamVariables, signal?: AbortSignal) =>
-  fetch<DeleteTeamResponse, DeleteTeamError, DeleteTeamRequestBody, {}, {}, DeleteTeamPathParams>({
+  fetch<DeleteTeamResponse, DeleteTeamError, DeleteTeamRequestBody, {}, DeleteTeamQueryParams, DeleteTeamPathParams>({
     url: '/v1/teams/{teamId}',
     method: 'delete',
     ...variables,
