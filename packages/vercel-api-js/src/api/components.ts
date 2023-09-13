@@ -1356,6 +1356,7 @@ export type UpdateProjectDataCacheResponse = {
     projectIntegrationConfiguration?: Schemas.ACLAction[];
     projectLink?: Schemas.ACLAction[];
     projectMember?: Schemas.ACLAction[];
+    projectMonitoring?: Schemas.ACLAction[];
     projectPermissions?: Schemas.ACLAction[];
     projectProductionBranch?: Schemas.ACLAction[];
     projectTransfer?: Schemas.ACLAction[];
