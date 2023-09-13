@@ -16258,6 +16258,12 @@ export type GetDeploymentsResponse = {
      */
     state?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
     /**
+     * In which state is the deployment.
+     *
+     * @example READY
+     */
+    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+    /**
      * The type of the deployment.
      *
      * @example LAMBDAS
