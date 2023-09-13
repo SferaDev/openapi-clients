@@ -93,10 +93,9 @@ export type UserEvent = {
      * @example author
      */
     type:
-      | 'bold'
-      | 'link'
       | 'author'
       | 'bitbucket_login'
+      | 'bold'
       | 'deployment_host'
       | 'dns_record'
       | 'git_link'
@@ -105,6 +104,7 @@ export type UserEvent = {
       | 'hook_name'
       | 'integration'
       | 'edge-config'
+      | 'link'
       | 'project_name'
       | 'scaling_rules'
       | 'env_var_name'
