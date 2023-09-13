@@ -1621,6 +1621,115 @@ export type GetDeploymentEventsResponse = (
         requestId?: string;
       };
     }
+  | (
+      | Record<string, any>
+      | {
+          type: 'command';
+          created: number;
+          payload: {
+            deploymentId: string;
+            text?: string;
+            id: string;
+            date: number;
+            serial: string;
+          };
+        }
+      | {
+          type: 'deployment-state';
+          created: number;
+          payload: {
+            deploymentId: string;
+            info: {
+              type: string;
+              name: string;
+              entrypoint?: string;
+              path?: string;
+              step?: string;
+            };
+            id: string;
+            date: number;
+            serial: string;
+          };
+        }
+      | {
+          type: 'delimiter';
+          created: number;
+          payload: {
+            deploymentId: string;
+            info: {
+              type: string;
+              name: string;
+              entrypoint?: string;
+              path?: string;
+              step?: string;
+            };
+            id: string;
+            date: number;
+            serial: string;
+          };
+        }
+      | {
+          type: 'exit';
+          created: number;
+          payload: {
+            date: number;
+            text?: string;
+            id: string;
+            deploymentId: string;
+            created: number;
+            serial: string;
+          };
+        }
+      | {
+          type: 'middleware';
+          created: number;
+          payload: {
+            deploymentId: string;
+            info: {
+              type: string;
+              name: string;
+              entrypoint?: string;
+              path?: string;
+              step?: string;
+            };
+            text?: string;
+            id: string;
+            date: number;
+            serial: string;
+            requestId?: string;
+          };
+        }
+      | {
+          type:
+            | 'delimiter'
+            | 'command'
+            | 'stdout'
+            | 'stderr'
+            | 'exit'
+            | 'deployment-state'
+            | 'middleware'
+            | 'middleware-invocation'
+            | 'edge-function-invocation'
+            | 'fatal';
+          created: number;
+          payload: {
+            deploymentId: string;
+            info: {
+              type: string;
+              name: string;
+              entrypoint?: string;
+              path?: string;
+              step?: string;
+            };
+            text?: string;
+            id: string;
+            date: number;
+            serial: string;
+            statusCode?: number;
+            requestId?: string;
+          };
+        }
+    )
 )[];
 
 export type GetDeploymentEventsVariables = {
@@ -9037,6 +9146,7 @@ export type GetProjectsResponse = {
       projectIntegrationConfiguration?: Schemas.ACLAction[];
       projectLink?: Schemas.ACLAction[];
       projectMember?: Schemas.ACLAction[];
+      projectMonitoring?: Schemas.ACLAction[];
       projectPermissions?: Schemas.ACLAction[];
       projectProductionBranch?: Schemas.ACLAction[];
       projectTransfer?: Schemas.ACLAction[];
@@ -9724,6 +9834,7 @@ export type CreateProjectResponse = {
     projectIntegrationConfiguration?: Schemas.ACLAction[];
     projectLink?: Schemas.ACLAction[];
     projectMember?: Schemas.ACLAction[];
+    projectMonitoring?: Schemas.ACLAction[];
     projectPermissions?: Schemas.ACLAction[];
     projectProductionBranch?: Schemas.ACLAction[];
     projectTransfer?: Schemas.ACLAction[];
@@ -10466,6 +10577,7 @@ export type GetProjectResponse = {
     projectIntegrationConfiguration?: Schemas.ACLAction[];
     projectLink?: Schemas.ACLAction[];
     projectMember?: Schemas.ACLAction[];
+    projectMonitoring?: Schemas.ACLAction[];
     projectPermissions?: Schemas.ACLAction[];
     projectProductionBranch?: Schemas.ACLAction[];
     projectTransfer?: Schemas.ACLAction[];
@@ -11061,6 +11173,7 @@ export type UpdateProjectResponse = {
     projectIntegrationConfiguration?: Schemas.ACLAction[];
     projectLink?: Schemas.ACLAction[];
     projectMember?: Schemas.ACLAction[];
+    projectMonitoring?: Schemas.ACLAction[];
     projectPermissions?: Schemas.ACLAction[];
     projectProductionBranch?: Schemas.ACLAction[];
     projectTransfer?: Schemas.ACLAction[];
@@ -13071,8 +13184,8 @@ export type GetTeamMembersResponse = {
      */
     joinedFrom?: {
       origin:
-        | 'link'
         | 'mail'
+        | 'link'
         | 'import'
         | 'teams'
         | 'github'
@@ -13248,7 +13361,6 @@ export type RequestAccessToTeamResponse = {
   confirmed?: boolean;
   joinedFrom?: {
     origin:
-      | 'link'
       | 'import'
       | 'teams'
       | 'github'
@@ -13257,6 +13369,7 @@ export type RequestAccessToTeamResponse = {
       | 'feedback'
       | 'organization-teams'
       | 'mail'
+      | 'link'
       | 'saml'
       | 'dsync';
     commitId?: string;
@@ -13368,8 +13481,8 @@ export type GetTeamAccessRequestResponse = {
    */
   joinedFrom: {
     origin:
-      | 'link'
       | 'mail'
+      | 'link'
       | 'import'
       | 'teams'
       | 'github'
