@@ -1367,6 +1367,7 @@ export type UpdateProjectDataCacheResponse = {
     analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
+    sharedEnvVarConnection?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
@@ -9158,6 +9159,7 @@ export type GetProjectsResponse = {
       analytics?: Schemas.ACLAction[];
       trustedIps?: Schemas.ACLAction[];
       webAnalytics?: Schemas.ACLAction[];
+      sharedEnvVarConnection?: Schemas.ACLAction[];
       aliasGlobal?: Schemas.ACLAction[];
       analyticsSampling?: Schemas.ACLAction[];
       analyticsUsage?: Schemas.ACLAction[];
@@ -9846,6 +9848,7 @@ export type CreateProjectResponse = {
     analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
+    sharedEnvVarConnection?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
@@ -10589,6 +10592,7 @@ export type GetProjectResponse = {
     analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
+    sharedEnvVarConnection?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
@@ -11185,6 +11189,7 @@ export type UpdateProjectResponse = {
     analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
+    sharedEnvVarConnection?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
