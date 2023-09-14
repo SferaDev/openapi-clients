@@ -1270,7 +1270,6 @@ export type UpdateProjectDataCacheResponse = {
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
-    logs?: Schemas.ACLAction[];
     logsPreset?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
@@ -1342,6 +1341,7 @@ export type UpdateProjectDataCacheResponse = {
     deploymentPrivate?: Schemas.ACLAction[];
     deploymentPromote?: Schemas.ACLAction[];
     deploymentRollback?: Schemas.ACLAction[];
+    logs?: Schemas.ACLAction[];
     passwordProtection?: Schemas.ACLAction[];
     job?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
@@ -9134,6 +9134,7 @@ export type GetProjectsResponse = {
       deploymentPrivate?: Schemas.ACLAction[];
       deploymentPromote?: Schemas.ACLAction[];
       deploymentRollback?: Schemas.ACLAction[];
+      logs?: Schemas.ACLAction[];
       passwordProtection?: Schemas.ACLAction[];
       job?: Schemas.ACLAction[];
       project?: Schemas.ACLAction[];
@@ -9201,7 +9202,6 @@ export type GetProjectsResponse = {
       integrationVercelConfigurationOverride?: Schemas.ACLAction[];
       jobGlobal?: Schemas.ACLAction[];
       logDrain?: Schemas.ACLAction[];
-      logs?: Schemas.ACLAction[];
       logsPreset?: Schemas.ACLAction[];
       Monitoring?: Schemas.ACLAction[];
       monitoringQuery?: Schemas.ACLAction[];
@@ -9751,7 +9751,6 @@ export type CreateProjectResponse = {
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
-    logs?: Schemas.ACLAction[];
     logsPreset?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
@@ -9823,6 +9822,7 @@ export type CreateProjectResponse = {
     deploymentPrivate?: Schemas.ACLAction[];
     deploymentPromote?: Schemas.ACLAction[];
     deploymentRollback?: Schemas.ACLAction[];
+    logs?: Schemas.ACLAction[];
     passwordProtection?: Schemas.ACLAction[];
     job?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
@@ -10495,7 +10495,6 @@ export type GetProjectResponse = {
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
-    logs?: Schemas.ACLAction[];
     logsPreset?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
@@ -10567,6 +10566,7 @@ export type GetProjectResponse = {
     deploymentPrivate?: Schemas.ACLAction[];
     deploymentPromote?: Schemas.ACLAction[];
     deploymentRollback?: Schemas.ACLAction[];
+    logs?: Schemas.ACLAction[];
     passwordProtection?: Schemas.ACLAction[];
     job?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
@@ -11092,7 +11092,6 @@ export type UpdateProjectResponse = {
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
-    logs?: Schemas.ACLAction[];
     logsPreset?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
@@ -11164,6 +11163,7 @@ export type UpdateProjectResponse = {
     deploymentPrivate?: Schemas.ACLAction[];
     deploymentPromote?: Schemas.ACLAction[];
     deploymentRollback?: Schemas.ACLAction[];
+    logs?: Schemas.ACLAction[];
     passwordProtection?: Schemas.ACLAction[];
     job?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
