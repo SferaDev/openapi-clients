@@ -13926,6 +13926,7 @@ export type CreateTeamResponse = {
    * @example team_nLlpyC6RE1qxqglFKbrMxlud
    */
   id: string;
+  slug: string;
   billing: {
     currency?: 'usd' | 'eur';
     cancelation?: number | null;
