@@ -368,6 +368,7 @@ export type AuthUser = {
       | 'FAIR_USE_LIMITS_EXCEEDED'
       | 'BLOCKED_FOR_PLATFORM_ABUSE';
     blockedDueToOverageType?:
+      | 'blobStores'
       | 'analyticsUsage'
       | 'artifacts'
       | 'bandwidth'
@@ -391,7 +392,11 @@ export type AuthUser = {
       | 'storageRedisTotalCommands'
       | 'storageRedisTotalDailyAvgStorageInBytes'
       | 'storageRedisTotalDatabases'
-      | 'webAnalyticsEvent';
+      | 'webAnalyticsEvent'
+      | 'blobTotalSimpleRequests'
+      | 'blobTotalAdvancedRequests'
+      | 'blobTotalAvgSizeInBytes'
+      | 'blobTotalGetResponseObjectSizeInBytes';
   } | null;
   /**
    * An object containing billing infomation associated with the User account.
