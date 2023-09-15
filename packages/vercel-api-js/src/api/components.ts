@@ -8005,8 +8005,14 @@ export const gitNamespaces = (variables: GitNamespacesVariables, signal?: AbortS
 export type SearchRepoQueryParams = {
   query?: string;
   namespaceId?: void | null;
-  provider?: 'github' | 'gitlab' | 'bitbucket';
+  provider?: 'github' | 'github-custom-host' | 'gitlab' | 'bitbucket';
   installationId?: string;
+  /**
+   * The custom Git host if using a custom Git provider, like GitHub Enterprise Server
+   *
+   * @example ghes-test.now.systems
+   */
+  host?: string;
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
@@ -8017,12 +8023,12 @@ export type SearchRepoError = Fetcher.ErrorWrapper<undefined>;
 
 export type SearchRepoResponse = {
   gitAccount: {
-    provider: 'github' | 'gitlab' | 'bitbucket';
+    provider: 'github' | 'github-custom-host' | 'gitlab' | 'bitbucket';
     namespaceId: string | number | null;
   };
   repos: {
     id: string | number;
-    provider: 'github' | 'gitlab' | 'bitbucket';
+    provider: 'github' | 'github-custom-host' | 'gitlab' | 'bitbucket';
     url: string;
     name: string;
     slug: string;
