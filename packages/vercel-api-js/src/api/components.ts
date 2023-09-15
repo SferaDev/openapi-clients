@@ -7961,7 +7961,13 @@ export const deleteIntegrationLogDrain = (variables: DeleteIntegrationLogDrainVa
   >({ url: '/v1/integrations/log-drains/{id}', method: 'delete', ...variables, signal });
 
 export type GitNamespacesQueryParams = {
-  provider?: 'github' | 'gitlab' | 'bitbucket';
+  /**
+   * The custom Git host if using a custom Git provider, like GitHub Enterprise Server
+   *
+   * @example ghes-test.now.systems
+   */
+  host?: string;
+  provider?: 'github' | 'github-custom-host' | 'gitlab' | 'bitbucket';
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
