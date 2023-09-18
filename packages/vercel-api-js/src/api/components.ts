@@ -13228,8 +13228,8 @@ export type GetTeamMembersResponse = {
      * Array of project memberships
      */
     projects?: {
-      name?: string;
       id?: string;
+      name?: string;
       role?: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
     }[];
   }[];
