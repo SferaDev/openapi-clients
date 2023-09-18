@@ -15501,7 +15501,7 @@ export type ListAliasesResponse = {
         | {
             createdAt: number;
             createdBy: string;
-            scope: 'shareable-link' | 'automation-bypass';
+            scope: 'shareable-link';
           }
         | {
             createdAt: number;
@@ -15509,6 +15509,11 @@ export type ListAliasesResponse = {
             lastUpdatedBy: string;
             access: 'requested' | 'granted';
             scope: 'user';
+          }
+        | {
+            createdAt: number;
+            createdBy: string;
+            scope: 'alias-protection-override';
           };
     };
   }[];
@@ -15683,7 +15688,7 @@ export type GetAliasResponse = {
       | {
           createdAt: number;
           createdBy: string;
-          scope: 'shareable-link' | 'automation-bypass';
+          scope: 'shareable-link';
         }
       | {
           createdAt: number;
@@ -15691,6 +15696,11 @@ export type GetAliasResponse = {
           lastUpdatedBy: string;
           access: 'requested' | 'granted';
           scope: 'user';
+        }
+      | {
+          createdAt: number;
+          createdBy: string;
+          scope: 'alias-protection-override';
         };
   };
 };
