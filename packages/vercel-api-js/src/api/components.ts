@@ -1349,6 +1349,7 @@ export type UpdateProjectDataCacheResponse = {
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
     projectDomainMove?: Schemas.ACLAction[];
+    projectDomainCheckConfig?: Schemas.ACLAction[];
     projectEnvVars?: Schemas.ACLAction[];
     projectEnvVarsProduction?: Schemas.ACLAction[];
     projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
@@ -1379,19 +1380,11 @@ export type UpdateProjectDataCacheResponse = {
   } | null;
   hasFloatingAliases?: boolean;
   protectionBypass?: {
-    [key: string]:
-      | {
-          createdAt: number;
-          createdBy: string;
-          scope: 'shareable-link' | 'automation-bypass';
-        }
-      | {
-          createdAt: number;
-          lastUpdatedAt: number;
-          lastUpdatedBy: string;
-          access: 'requested' | 'granted';
-          scope: 'user';
-        };
+    [key: string]: {
+      createdAt: number;
+      createdBy: string;
+      scope: 'automation-bypass';
+    };
   };
   hasActiveBranches?: boolean;
   trustedIps?:
@@ -9155,6 +9148,7 @@ export type GetProjectsResponse = {
       projectDeploymentHook?: Schemas.ACLAction[];
       projectDomain?: Schemas.ACLAction[];
       projectDomainMove?: Schemas.ACLAction[];
+      projectDomainCheckConfig?: Schemas.ACLAction[];
       projectEnvVars?: Schemas.ACLAction[];
       projectEnvVarsProduction?: Schemas.ACLAction[];
       projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
@@ -9283,19 +9277,11 @@ export type GetProjectsResponse = {
     } | null;
     hasFloatingAliases?: boolean;
     protectionBypass?: {
-      [key: string]:
-        | {
-            createdAt: number;
-            createdBy: string;
-            scope: 'shareable-link' | 'automation-bypass';
-          }
-        | {
-            createdAt: number;
-            lastUpdatedAt: number;
-            lastUpdatedBy: string;
-            access: 'requested' | 'granted';
-            scope: 'user';
-          };
+      [key: string]: {
+        createdAt: number;
+        createdBy: string;
+        scope: 'automation-bypass';
+      };
     };
     hasActiveBranches?: boolean;
     trustedIps?:
@@ -9842,6 +9828,7 @@ export type CreateProjectResponse = {
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
     projectDomainMove?: Schemas.ACLAction[];
+    projectDomainCheckConfig?: Schemas.ACLAction[];
     projectEnvVars?: Schemas.ACLAction[];
     projectEnvVarsProduction?: Schemas.ACLAction[];
     projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
@@ -9872,19 +9859,11 @@ export type CreateProjectResponse = {
   } | null;
   hasFloatingAliases?: boolean;
   protectionBypass?: {
-    [key: string]:
-      | {
-          createdAt: number;
-          createdBy: string;
-          scope: 'shareable-link' | 'automation-bypass';
-        }
-      | {
-          createdAt: number;
-          lastUpdatedAt: number;
-          lastUpdatedBy: string;
-          access: 'requested' | 'granted';
-          scope: 'user';
-        };
+    [key: string]: {
+      createdAt: number;
+      createdBy: string;
+      scope: 'automation-bypass';
+    };
   };
   hasActiveBranches?: boolean;
   trustedIps?:
@@ -10586,6 +10565,7 @@ export type GetProjectResponse = {
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
     projectDomainMove?: Schemas.ACLAction[];
+    projectDomainCheckConfig?: Schemas.ACLAction[];
     projectEnvVars?: Schemas.ACLAction[];
     projectEnvVarsProduction?: Schemas.ACLAction[];
     projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
@@ -10616,19 +10596,11 @@ export type GetProjectResponse = {
   } | null;
   hasFloatingAliases?: boolean;
   protectionBypass?: {
-    [key: string]:
-      | {
-          createdAt: number;
-          createdBy: string;
-          scope: 'shareable-link' | 'automation-bypass';
-        }
-      | {
-          createdAt: number;
-          lastUpdatedAt: number;
-          lastUpdatedBy: string;
-          access: 'requested' | 'granted';
-          scope: 'user';
-        };
+    [key: string]: {
+      createdAt: number;
+      createdBy: string;
+      scope: 'automation-bypass';
+    };
   };
   hasActiveBranches?: boolean;
   trustedIps?:
@@ -11183,6 +11155,7 @@ export type UpdateProjectResponse = {
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
     projectDomainMove?: Schemas.ACLAction[];
+    projectDomainCheckConfig?: Schemas.ACLAction[];
     projectEnvVars?: Schemas.ACLAction[];
     projectEnvVarsProduction?: Schemas.ACLAction[];
     projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
@@ -11213,19 +11186,11 @@ export type UpdateProjectResponse = {
   } | null;
   hasFloatingAliases?: boolean;
   protectionBypass?: {
-    [key: string]:
-      | {
-          createdAt: number;
-          createdBy: string;
-          scope: 'shareable-link' | 'automation-bypass';
-        }
-      | {
-          createdAt: number;
-          lastUpdatedAt: number;
-          lastUpdatedBy: string;
-          access: 'requested' | 'granted';
-          scope: 'user';
-        };
+    [key: string]: {
+      createdAt: number;
+      createdBy: string;
+      scope: 'automation-bypass';
+    };
   };
   hasActiveBranches?: boolean;
   trustedIps?:
@@ -15813,7 +15778,7 @@ export type ListDeploymentAliasesResponse = {
         | {
             createdAt: number;
             createdBy: string;
-            scope: 'shareable-link' | 'automation-bypass';
+            scope: 'shareable-link';
           }
         | {
             createdAt: number;
@@ -15821,6 +15786,11 @@ export type ListDeploymentAliasesResponse = {
             lastUpdatedBy: string;
             access: 'requested' | 'granted';
             scope: 'user';
+          }
+        | {
+            createdAt: number;
+            createdBy: string;
+            scope: 'alias-protection-override';
           };
     };
   }[];
