@@ -1270,6 +1270,7 @@ export type UpdateProjectDataCacheResponse = {
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
+    logsPreset?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
     monitoringChart?: Schemas.ACLAction[];
@@ -1341,7 +1342,6 @@ export type UpdateProjectDataCacheResponse = {
     deploymentPromote?: Schemas.ACLAction[];
     deploymentRollback?: Schemas.ACLAction[];
     logs?: Schemas.ACLAction[];
-    logsPreset?: Schemas.ACLAction[];
     passwordProtection?: Schemas.ACLAction[];
     job?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
@@ -1349,7 +1349,6 @@ export type UpdateProjectDataCacheResponse = {
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
     projectDomainMove?: Schemas.ACLAction[];
-    projectDomainCheckConfig?: Schemas.ACLAction[];
     projectEnvVars?: Schemas.ACLAction[];
     projectEnvVarsProduction?: Schemas.ACLAction[];
     projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
@@ -1380,11 +1379,19 @@ export type UpdateProjectDataCacheResponse = {
   } | null;
   hasFloatingAliases?: boolean;
   protectionBypass?: {
-    [key: string]: {
-      createdAt: number;
-      createdBy: string;
-      scope: 'automation-bypass';
-    };
+    [key: string]:
+      | {
+          createdAt: number;
+          createdBy: string;
+          scope: 'shareable-link' | 'automation-bypass';
+        }
+      | {
+          createdAt: number;
+          lastUpdatedAt: number;
+          lastUpdatedBy: string;
+          access: 'requested' | 'granted';
+          scope: 'user';
+        };
   };
   hasActiveBranches?: boolean;
   trustedIps?:
@@ -15778,7 +15785,7 @@ export type ListDeploymentAliasesResponse = {
         | {
             createdAt: number;
             createdBy: string;
-            scope: 'shareable-link';
+            scope: 'shareable-link' | 'automation-bypass';
           }
         | {
             createdAt: number;
@@ -15786,11 +15793,6 @@ export type ListDeploymentAliasesResponse = {
             lastUpdatedBy: string;
             access: 'requested' | 'granted';
             scope: 'user';
-          }
-        | {
-            createdAt: number;
-            createdBy: string;
-            scope: 'alias-protection-override';
           };
     };
   }[];
