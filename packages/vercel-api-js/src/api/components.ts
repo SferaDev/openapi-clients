@@ -1782,7 +1782,7 @@ export type GetDeploymentVariables = {
 } & FetcherExtraProps;
 
 /**
- * Retrieves information for a deployment either by supplying its ID (`id` property) or Hostname (`url` property). Additional details will be included when the authenticated user is an owner of the deployment.
+ * Retrieves information for a deployment either by supplying its ID (`id` property) or Hostname (`url` property). Additional details will be included when the authenticated user or team is an owner of the deployment.
  */
 export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortSignal) =>
   fetch<
@@ -5952,7 +5952,7 @@ export type GetDomainsVariables = {
 } & FetcherExtraProps;
 
 /**
- * Retrieves a list of domains registered for the authenticating user. By default it returns the last 20 domains if no limit is provided.
+ * Retrieves a list of domains registered for the authenticated user or team. By default it returns the last 20 domains if no limit is provided.
  */
 export const getDomains = (variables: GetDomainsVariables, signal?: AbortSignal) =>
   fetch<GetDomainsResponse, GetDomainsError, undefined, {}, GetDomainsQueryParams, {}>({
@@ -7734,7 +7734,7 @@ export type GetIntegrationLogDrainsVariables = {
 } & FetcherExtraProps;
 
 /**
- * Retrieves a list of all Integration log drains that are defined for the authorized account. When using an OAuth2 token, the list is limited to log drains created by the authenticated integration.
+ * Retrieves a list of all Integration log drains that are defined for the authenticated user or team. When using an OAuth2 token, the list is limited to log drains created by the authenticated integration.
  */
 export const getIntegrationLogDrains = (variables: GetIntegrationLogDrainsVariables, signal?: AbortSignal) =>
   fetch<
@@ -9323,7 +9323,7 @@ export type GetProjectsVariables = {
 } & FetcherExtraProps;
 
 /**
- * Allows to retrieve the list of projects of the authenticated user. The list will be paginated and the provided query parameters allow filtering the returned projects.
+ * Allows to retrieve the list of projects of the authenticated user or team. The list will be paginated and the provided query parameters allow filtering the returned projects.
  */
 export const getProjects = (variables: GetProjectsVariables, signal?: AbortSignal) =>
   fetch<GetProjectsResponse, GetProjectsError, undefined, {}, GetProjectsQueryParams, {}>({
@@ -15785,7 +15785,7 @@ export type ListDeploymentAliasesResponse = {
         | {
             createdAt: number;
             createdBy: string;
-            scope: 'shareable-link' | 'automation-bypass';
+            scope: 'shareable-link';
           }
         | {
             createdAt: number;
@@ -15793,6 +15793,11 @@ export type ListDeploymentAliasesResponse = {
             lastUpdatedBy: string;
             access: 'requested' | 'granted';
             scope: 'user';
+          }
+        | {
+            createdAt: number;
+            createdBy: string;
+            scope: 'alias-protection-override';
           };
     };
   }[];
@@ -15804,7 +15809,7 @@ export type ListDeploymentAliasesVariables = {
 } & FetcherExtraProps;
 
 /**
- * Retrieves all Aliases for the Deployment with the given ID. The authenticated User must own the deployment.
+ * Retrieves all Aliases for the Deployment with the given ID. The authenticated user or team must own the deployment.
  */
 export const listDeploymentAliases = (variables: ListDeploymentAliasesVariables, signal?: AbortSignal) =>
   fetch<
@@ -15884,7 +15889,7 @@ export type AssignAliasVariables = {
 } & FetcherExtraProps;
 
 /**
- * Creates a new alias for the deployment with the given deployment ID. The authenticated user must own this deployment. If the desired alias is already assigned to another deployment, then it will be removed from the old deployment and assigned to the new one.
+ * Creates a new alias for the deployment with the given deployment ID. The authenticated user or team must own this deployment. If the desired alias is already assigned to another deployment, then it will be removed from the old deployment and assigned to the new one.
  */
 export const assignAlias = (variables: AssignAliasVariables, signal?: AbortSignal) =>
   fetch<
@@ -16452,7 +16457,7 @@ export type GetDeploymentsVariables = {
 } & FetcherExtraProps;
 
 /**
- * List deployments under the account corresponding to the API token. If a deployment hasn't finished uploading (is incomplete), the `url` property will have a value of `null`.
+ * List deployments under the authenticated user or team. If a deployment hasn't finished uploading (is incomplete), the `url` property will have a value of `null`.
  */
 export const getDeployments = (variables: GetDeploymentsVariables, signal?: AbortSignal) =>
   fetch<GetDeploymentsResponse, GetDeploymentsError, undefined, {}, GetDeploymentsQueryParams, {}>({
@@ -16710,7 +16715,7 @@ export type GetSecretsVariables = {
 } & FetcherExtraProps;
 
 /**
- * Retrieves the active Vercel secrets for the authenticated user. By default it returns 20 secrets. The rest can be retrieved using the pagination options. The body will contain an entry for each secret.
+ * Retrieves the active Vercel secrets for the authenticated user or team. By default it returns 20 secrets. The rest can be retrieved using the pagination options. The body will contain an entry for each secret.
  */
 export const getSecrets = (variables: GetSecretsVariables, signal?: AbortSignal) =>
   fetch<GetSecretsResponse, GetSecretsError, undefined, {}, GetSecretsQueryParams, {}>({
@@ -16875,7 +16880,7 @@ export type RenameSecretVariables = {
 } & FetcherExtraProps;
 
 /**
- * Enables to edit the name of a user's secret. The name has to be unique to that user's secrets.
+ * Enables to edit the name of a secret. The name has to be unique to the user or team’s secrets.
  */
 export const renameSecret = (variables: RenameSecretVariables, signal?: AbortSignal) =>
   fetch<
@@ -17028,7 +17033,7 @@ export type DeleteSecretVariables = {
 } & FetcherExtraProps;
 
 /**
- * This deletes the user's secret defined in the URL.
+ * This deletes the user or team’s secret defined in the URL.
  */
 export const deleteSecret = (variables: DeleteSecretVariables, signal?: AbortSignal) =>
   fetch<DeleteSecretResponse, DeleteSecretError, undefined, {}, DeleteSecretQueryParams, DeleteSecretPathParams>({
