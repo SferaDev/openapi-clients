@@ -7908,6 +7908,12 @@ export type CreateLogDrainRequestBody = {
    * @example feature/*
    */
   branch?: string;
+  /**
+   * The id of the log drain that was previously created and deleted
+   *
+   * @example ld_1
+   */
+  previousLogDrainId?: string;
 };
 
 export type CreateLogDrainVariables = {
@@ -7934,6 +7940,10 @@ export type DeleteIntegrationLogDrainPathParams = {
 };
 
 export type DeleteIntegrationLogDrainQueryParams = {
+  /**
+   * If this API is being called as part of an update flow, this should be set to true
+   */
+  updateFlow?: boolean;
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
