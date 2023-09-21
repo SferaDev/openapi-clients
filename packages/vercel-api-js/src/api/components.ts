@@ -9317,6 +9317,7 @@ export type GetProjectsResponse = {
        */
       onCommit: boolean;
     };
+    paused?: boolean;
   }[];
   pagination: Schemas.Pagination;
 };
@@ -9899,6 +9900,7 @@ export type CreateProjectResponse = {
      */
     onCommit: boolean;
   };
+  paused?: boolean;
 };
 
 export type CreateProjectRequestBody = {
@@ -10636,6 +10638,7 @@ export type GetProjectResponse = {
      */
     onCommit: boolean;
   };
+  paused?: boolean;
 };
 
 export type GetProjectVariables = {
@@ -11226,6 +11229,7 @@ export type UpdateProjectResponse = {
      */
     onCommit: boolean;
   };
+  paused?: boolean;
 };
 
 export type UpdateProjectRequestBody = {
@@ -13925,8 +13929,8 @@ export type CreateTeamResponse = {
       start: number;
       end: number;
     } | null;
-    plan: 'enterprise' | 'hobby' | 'pro';
-    platform?: 'stripeTestMode' | 'stripe';
+    plan: 'hobby' | 'pro' | 'enterprise';
+    platform?: 'stripe' | 'stripeTestMode';
     orbCustomerId?: string;
     syncedAt?: number;
     programType?: 'startup' | 'agency';
@@ -13953,40 +13957,6 @@ export type CreateTeamResponse = {
       /**
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
        */
-      analytics?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 6 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      enterprise?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 6 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
       monitoring?: {
         tier?: number;
         price: number;
@@ -13997,7 +13967,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 6 | 3 | 12;
+          intervalCount: 1 | 2 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -14014,7 +13984,41 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 6 | 3 | 12;
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      enterprise?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      analytics?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -14031,41 +14035,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 6 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      previewDeploymentSuffix?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 6 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      saml?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 6 | 3 | 12;
+          intervalCount: 1 | 2 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -14082,7 +14052,41 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 6 | 3 | 12;
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      previewDeploymentSuffix?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      saml?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 2 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -14099,7 +14103,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 6 | 3 | 12;
+          intervalCount: 1 | 2 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -14116,7 +14120,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 6 | 3 | 12;
+          intervalCount: 1 | 2 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -14376,7 +14380,7 @@ export type CreateTeamResponse = {
             end: number;
           };
           frequency: {
-            interval: 'day' | 'month' | 'week' | 'year';
+            interval: 'month' | 'day' | 'week' | 'year';
             intervalCount: number;
           };
           discount: {
@@ -14404,7 +14408,7 @@ export type CreateTeamResponse = {
       analyticsSpendLimitInDollars?: number | null;
     } | null;
     purchaseOrder?: string | null;
-    status?: 'trialing' | 'active' | 'overdue' | 'expired' | 'canceled';
+    status?: 'active' | 'trialing' | 'overdue' | 'expired' | 'canceled';
     pricingExperiment?: 'august-2022';
     orbMigrationScheduledAt?: number | null;
   };
@@ -16489,6 +16493,18 @@ export type VerifyTokenQueryParams = {
    * The SAML Profile ID, when connecting a SAML Profile to a Team member for the first time.
    */
   ssoUserId?: string;
+  /**
+   * The name of this user's team.
+   */
+  teamName?: string;
+  /**
+   * The slug for this user's team.
+   */
+  teamSlug?: string;
+  /**
+   * The plan for this user's team (pro or hobby).
+   */
+  teamPlan?: 'pro' | 'hobby';
 };
 
 export type VerifyTokenError = Fetcher.ErrorWrapper<undefined>;
