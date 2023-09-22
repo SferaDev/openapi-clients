@@ -1410,6 +1410,7 @@ export type UpdateProjectDataCacheResponse = {
      */
     onCommit: boolean;
   };
+  paused?: boolean;
 };
 
 export type UpdateProjectDataCacheRequestBody = {
