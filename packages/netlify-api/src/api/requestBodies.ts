@@ -3,31 +3,6 @@
  *
  * @version 2.22.0
  */
-export type CreateSiteDeployDeploy = {
-  files?: Record<string, any>;
-  draft?: boolean;
-  async?: boolean;
-  functions?: Record<string, any>;
-  function_schedules?: {
-    name?: string;
-    cron?: string;
-  }[];
-  functions_config?: {
-    [key: string]: {
-      display_name?: string;
-      generator?: string;
-      routes?: {
-        pattern?: string;
-        literal?: string;
-        expression?: string;
-        methods?: ('GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS')[];
-      }[];
-    };
-  };
-  branch?: string;
-  framework?: string;
-};
-
 export type UpdateSiteMetadataMetadata = Record<string, any>;
 
 export type CreateHookBySiteIdHook = {
@@ -214,6 +189,32 @@ export type CreateSiteSite = {
     installation_id?: number;
     stop_builds?: boolean;
   };
+};
+
+export type CreateSiteDeployDeploy = {
+  files?: Record<string, any>;
+  draft?: boolean;
+  async?: boolean;
+  functions?: Record<string, any>;
+  function_schedules?: {
+    name?: string;
+    cron?: string;
+  }[];
+  functions_config?: {
+    [key: string]: {
+      display_name?: string;
+      generator?: string;
+      build_data?: Record<string, any>;
+      routes?: {
+        pattern?: string;
+        literal?: string;
+        expression?: string;
+        methods?: ('GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS')[];
+      }[];
+    };
+  };
+  branch?: string;
+  framework?: string;
 };
 
 export type CreateSplitTestBranchTests = {
