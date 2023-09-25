@@ -7897,12 +7897,6 @@ export type CreateLogDrainRequestBody = {
    */
   environment?: 'preview' | 'production';
   /**
-   * The branch regexp of log drain
-   *
-   * @example feature/*
-   */
-  branch?: string;
-  /**
    * The id of the log drain that was previously created and deleted
    *
    * @example ld_1
@@ -8092,7 +8086,6 @@ export type GetConfigurableLogDrainResponse = {
     [key: string]: string;
   };
   environment?: 'production' | 'preview';
-  branch?: string;
   status?: 'enabled' | 'disabled' | 'errored';
   disabledAt?: number;
   disabledReason?:
@@ -8184,7 +8177,6 @@ export type GetConfigurableLogDrainsResponse = {
     [key: string]: string;
   };
   environment?: 'production' | 'preview';
-  branch?: string;
   status?: 'enabled' | 'disabled' | 'errored';
   disabledAt?: number;
   disabledReason?:
@@ -8244,7 +8236,6 @@ export type CreateConfigurableLogDrainResponse = {
     [key: string]: string;
   };
   environment?: 'production' | 'preview';
-  branch?: string;
   status?: 'enabled' | 'disabled' | 'errored';
   disabledAt?: number;
   disabledReason?:
@@ -8293,12 +8284,6 @@ export type CreateConfigurableLogDrainRequestBody = {
    * @example production
    */
   environment?: 'preview' | 'production';
-  /**
-   * The branch regexp of log drain
-   *
-   * @example feature/*
-   */
-  branch?: string;
   /**
    * Custom secret of log drain
    */
