@@ -8882,6 +8882,7 @@ export type GetProjectsResponse = {
        * Whether `value` is decrypted.
        */
       decrypted?: boolean;
+      comment?: string;
     }[];
     framework?:
       | 'blitzjs'
@@ -9465,6 +9466,7 @@ export type CreateProjectResponse = {
      * Whether `value` is decrypted.
      */
     decrypted?: boolean;
+    comment?: string;
   }[];
   framework?:
     | 'blitzjs'
@@ -10203,6 +10205,7 @@ export type GetProjectResponse = {
      * Whether `value` is decrypted.
      */
     decrypted?: boolean;
+    comment?: string;
   }[];
   framework?:
     | 'blitzjs'
@@ -10794,6 +10797,7 @@ export type UpdateProjectResponse = {
      * Whether `value` is decrypted.
      */
     decrypted?: boolean;
+    comment?: string;
   }[];
   framework?:
     | 'blitzjs'
@@ -12030,6 +12034,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
          * Whether `value` is decrypted.
          */
         decrypted?: boolean;
+        comment?: string;
         system?: boolean;
       }
     | {
@@ -12103,6 +12108,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
            * Whether `value` is decrypted.
            */
           decrypted?: boolean;
+          comment?: string;
           system?: boolean;
         }[];
         pagination: Schemas.Pagination;
@@ -12178,6 +12184,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
            * Whether `value` is decrypted.
            */
           decrypted?: boolean;
+          comment?: string;
           system?: boolean;
         }[];
       },
@@ -12280,6 +12287,7 @@ export type GetProjectEnvResponse = {
    * Whether `value` is decrypted.
    */
   decrypted?: boolean;
+  comment?: string;
 };
 
 export type GetProjectEnvVariables = {
@@ -12394,6 +12402,7 @@ export type CreateProjectEnvResponse = {
          * Whether `value` is decrypted.
          */
         decrypted?: boolean;
+        comment?: string;
         system?: boolean;
       }
     | {
@@ -12466,6 +12475,7 @@ export type CreateProjectEnvResponse = {
          * Whether `value` is decrypted.
          */
         decrypted?: boolean;
+        comment?: string;
         system?: boolean;
       }[];
   failed: {
@@ -12524,6 +12534,13 @@ export type CreateProjectEnvVariables = {
          * @example feature-1
          */
         gitBranch?: string | null;
+        /**
+         * A comment to add context on what this environment variable is for
+         *
+         * @example database connection string for production
+         * @maxLength 500
+         */
+        comment?: string;
       }
     | {
         /**
@@ -12558,6 +12575,13 @@ export type CreateProjectEnvVariables = {
          * @example feature-1
          */
         gitBranch?: string | null;
+        /**
+         * A comment to add context on what this environment variable is for
+         *
+         * @example database connection string for production
+         * @maxLength 500
+         */
+        comment?: string;
       }[];
   pathParams: CreateProjectEnvPathParams;
   queryParams?: CreateProjectEnvQueryParams;
@@ -12603,6 +12627,13 @@ export const createProjectEnv = (variables: CreateProjectEnvVariables, signal?: 
          * @example feature-1
          */
         gitBranch?: string | null;
+        /**
+         * A comment to add context on what this environment variable is for
+         *
+         * @example database connection string for production
+         * @maxLength 500
+         */
+        comment?: string;
       }
     | {
         /**
@@ -12637,6 +12668,13 @@ export const createProjectEnv = (variables: CreateProjectEnvVariables, signal?: 
          * @example feature-1
          */
         gitBranch?: string | null;
+        /**
+         * A comment to add context on what this environment variable is for
+         *
+         * @example database connection string for production
+         * @maxLength 500
+         */
+        comment?: string;
       }[],
     {},
     CreateProjectEnvQueryParams,
@@ -12747,6 +12785,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
          * Whether `value` is decrypted.
          */
         decrypted?: boolean;
+        comment?: string;
       }[]
     | {
         system?: boolean;
@@ -12819,6 +12858,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
          * Whether `value` is decrypted.
          */
         decrypted?: boolean;
+        comment?: string;
       }
     | {
         target?:
@@ -12890,6 +12930,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
          * Whether `value` is decrypted.
          */
         decrypted?: boolean;
+        comment?: string;
       },
     RemoveProjectEnvError,
     undefined,
@@ -12992,6 +13033,7 @@ export type EditProjectEnvResponse = {
    * Whether `value` is decrypted.
    */
   decrypted?: boolean;
+  comment?: string;
 };
 
 export type EditProjectEnvRequestBody = {
@@ -13026,6 +13068,13 @@ export type EditProjectEnvRequestBody = {
    * @example bkWIjbnxcvo78
    */
   value?: string;
+  /**
+   * A comment to add context on what this env var is for
+   *
+   * @example database connection string for production
+   * @maxLength 500
+   */
+  comment?: string;
 };
 
 export type EditProjectEnvVariables = {
