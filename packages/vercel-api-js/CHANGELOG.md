@@ -1,5 +1,14 @@
 # vercel-api-js
 
+## 0.1.22
+
+### Patch Changes
+
+- 352a83a: [OpenAPI] Spec updates for vercel-api-js
+- f587d3d: [OpenAPI] Spec updates for vercel-api-js
+- a267e20: [OpenAPI] Spec updates for vercel-api-js
+- 64b8c15: [OpenAPI] Spec updates for vercel-api-js
+
 ## 0.1.21
 
 ### Patch Changes
