@@ -989,6 +989,7 @@ export type UpdateProjectDataCacheResponse = {
      * Whether `value` is decrypted.
      */
     decrypted?: boolean;
+    comment?: string;
   }[];
   framework?:
     | 'blitzjs'
