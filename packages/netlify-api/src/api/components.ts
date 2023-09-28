@@ -3406,6 +3406,11 @@ export type NotifyBuildStartPathParams = {
   buildId: string;
 };
 
+export type NotifyBuildStartQueryParams = {
+  buildbot_version?: string;
+  build_version?: string;
+};
+
 export type NotifyBuildStartError = Fetcher.ErrorWrapper<{
   status: Exclude<ClientErrorStatus | ServerErrorStatus, 204>;
   payload: {
@@ -3419,10 +3424,11 @@ export type NotifyBuildStartError = Fetcher.ErrorWrapper<{
 
 export type NotifyBuildStartVariables = {
   pathParams: NotifyBuildStartPathParams;
+  queryParams?: NotifyBuildStartQueryParams;
 } & FetcherExtraProps;
 
 export const notifyBuildStart = (variables: NotifyBuildStartVariables, signal?: AbortSignal) =>
-  fetch<undefined, NotifyBuildStartError, undefined, {}, {}, NotifyBuildStartPathParams>({
+  fetch<undefined, NotifyBuildStartError, undefined, {}, NotifyBuildStartQueryParams, NotifyBuildStartPathParams>({
     url: '/builds/{buildId}/start',
     method: 'post',
     ...variables,
