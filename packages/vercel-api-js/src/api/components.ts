@@ -7715,7 +7715,7 @@ export type GetIntegrationLogDrainsResponse = {
    *
    * @example production
    */
-  environment?: 'preview' | 'production';
+  environments: ('production' | 'preview')[];
   /**
    * The branch regexp of log drain
    *
@@ -7835,7 +7835,7 @@ export type CreateLogDrainResponse = {
    *
    * @example production
    */
-  environment?: 'preview' | 'production';
+  environments: ('production' | 'preview')[];
   /**
    * The branch regexp of log drain
    *
@@ -7892,11 +7892,10 @@ export type CreateLogDrainRequestBody = {
     [key: string]: string;
   };
   /**
-   * The environment of log drain
-   *
-   * @example production
+   * @uniqueItems true
+   * @minItems 1
    */
-  environment?: 'preview' | 'production';
+  environments?: ('preview' | 'production')[];
   /**
    * The id of the log drain that was previously created and deleted
    *
@@ -8086,7 +8085,7 @@ export type GetConfigurableLogDrainResponse = {
   headers?: {
     [key: string]: string;
   };
-  environment?: 'production' | 'preview';
+  environments: ('production' | 'preview')[];
   status?: 'enabled' | 'disabled' | 'errored';
   disabledAt?: number;
   disabledReason?:
@@ -8177,7 +8176,7 @@ export type GetConfigurableLogDrainsResponse = {
   headers?: {
     [key: string]: string;
   };
-  environment?: 'production' | 'preview';
+  environments: ('production' | 'preview')[];
   status?: 'enabled' | 'disabled' | 'errored';
   disabledAt?: number;
   disabledReason?:
@@ -8236,7 +8235,7 @@ export type CreateConfigurableLogDrainResponse = {
   headers?: {
     [key: string]: string;
   };
-  environment?: 'production' | 'preview';
+  environments: ('production' | 'preview')[];
   status?: 'enabled' | 'disabled' | 'errored';
   disabledAt?: number;
   disabledReason?:
@@ -8280,11 +8279,10 @@ export type CreateConfigurableLogDrainRequestBody = {
    */
   sources: ('static' | 'lambda' | 'build' | 'edge' | 'external')[];
   /**
-   * The environment of log drain
-   *
-   * @example production
+   * @uniqueItems true
+   * @minItems 1
    */
-  environment?: 'preview' | 'production';
+  environments?: ('preview' | 'production')[];
   /**
    * Custom secret of log drain
    */
