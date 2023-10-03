@@ -2027,7 +2027,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          *
          * @example cli
          */
-        source?: 'cli' | 'git' | 'import' | 'import/repo' | 'clone/repo';
+        source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo';
         /**
          * If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned
          *
@@ -2274,7 +2274,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          *
          * @example cli
          */
-        source?: 'cli' | 'git' | 'import' | 'import/repo' | 'clone/repo';
+        source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo';
         /**
          * If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned
          *
@@ -2736,7 +2736,7 @@ export type CreateDeploymentResponse = {
    *
    * @example cli
    */
-  source?: 'cli' | 'git' | 'import' | 'import/repo' | 'clone/repo';
+  source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo';
   /**
    * If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned
    *
@@ -4347,7 +4347,7 @@ export type CancelDeploymentResponse = {
    *
    * @example cli
    */
-  source?: 'cli' | 'git' | 'import' | 'import/repo' | 'clone/repo';
+  source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo';
   /**
    * If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned
    *
@@ -16296,7 +16296,7 @@ export type GetDeploymentsResponse = {
      *
      * @example cli
      */
-    source?: 'cli' | 'git' | 'import' | 'import/repo' | 'clone/repo';
+    source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo';
     /**
      * In which state is the deployment.
      *
