@@ -13095,6 +13095,70 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
     EditProjectEnvPathParams
   >({ url: '/v9/projects/{idOrName}/env/{id}', method: 'patch', ...variables, signal });
 
+export type PauseProjectPathParams = {
+  /**
+   * The unique project identifier
+   */
+  projectId: string;
+};
+
+export type PauseProjectQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type PauseProjectError = Fetcher.ErrorWrapper<undefined>;
+
+export type PauseProjectVariables = {
+  pathParams: PauseProjectPathParams;
+  queryParams?: PauseProjectQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Pause a project by passing its project `id` in the URL. If the project does not exist given the id then the request will fail with 400 status code. If the project disables auto assigning custom production domains and blocks the active Production Deployment then the request will return with 200 status code.
+ */
+export const pauseProject = (variables: PauseProjectVariables, signal?: AbortSignal) =>
+  fetch<undefined, PauseProjectError, undefined, {}, PauseProjectQueryParams, PauseProjectPathParams>({
+    url: '/v1/projects/{projectId}/pause',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type UnpauseProjectPathParams = {
+  /**
+   * The unique project identifier
+   */
+  projectId: string;
+};
+
+export type UnpauseProjectQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type UnpauseProjectError = Fetcher.ErrorWrapper<undefined>;
+
+export type UnpauseProjectVariables = {
+  pathParams: UnpauseProjectPathParams;
+  queryParams?: UnpauseProjectQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Unpause a project by passing its project `id` in the URL. If the project does not exist given the id then the request will fail with 400 status code. If the project enables auto assigning custom production domains and unblocks the active Production Deployment then the request will return with 200 status code.
+ */
+export const unpauseProject = (variables: UnpauseProjectVariables, signal?: AbortSignal) =>
+  fetch<undefined, UnpauseProjectError, undefined, {}, UnpauseProjectQueryParams, UnpauseProjectPathParams>({
+    url: '/v1/projects/{projectId}/unpause',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
 export type GetTeamMembersQueryParams = {
   /**
    * Limit how many teams should be returned
@@ -17121,7 +17185,9 @@ export const operationsByTag = {
     getProjectEnv,
     createProjectEnv,
     removeProjectEnv,
-    editProjectEnv
+    editProjectEnv,
+    pauseProject,
+    unpauseProject
   },
   deployments: {
     getDeploymentEvents,
