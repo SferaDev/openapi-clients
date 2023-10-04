@@ -9124,6 +9124,7 @@ export type GetProjectsResponse = {
     permissions?: {
       aliasProject?: Schemas.ACLAction[];
       aliasProtectionBypass?: Schemas.ACLAction[];
+      productionAliasProtectionBypass?: Schemas.ACLAction[];
       connectConfigurationLink?: Schemas.ACLAction[];
       dataCacheNamespace?: Schemas.ACLAction[];
       deployment?: Schemas.ACLAction[];
@@ -9806,6 +9807,7 @@ export type CreateProjectResponse = {
     projectTransferIn?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
+    productionAliasProtectionBypass?: Schemas.ACLAction[];
     connectConfigurationLink?: Schemas.ACLAction[];
     dataCacheNamespace?: Schemas.ACLAction[];
     deployment?: Schemas.ACLAction[];
@@ -10545,6 +10547,7 @@ export type GetProjectResponse = {
     projectTransferIn?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
+    productionAliasProtectionBypass?: Schemas.ACLAction[];
     connectConfigurationLink?: Schemas.ACLAction[];
     dataCacheNamespace?: Schemas.ACLAction[];
     deployment?: Schemas.ACLAction[];
@@ -11137,6 +11140,7 @@ export type UpdateProjectResponse = {
     projectTransferIn?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
+    productionAliasProtectionBypass?: Schemas.ACLAction[];
     connectConfigurationLink?: Schemas.ACLAction[];
     dataCacheNamespace?: Schemas.ACLAction[];
     deployment?: Schemas.ACLAction[];
