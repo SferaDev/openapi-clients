@@ -7442,6 +7442,12 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          */
         projectSelection: 'selected' | 'all';
         /**
+         * When a configuration is limited to access certain projects, this will contain each of the project ID it is allowed to access. If it is not defined, the configuration has full access.
+         *
+         * @example prj_xQxbutw1HpL6HLYPAzt5h75m8NjO
+         */
+        projects?: string[];
+        /**
          * A timestamp that tells you when the configuration was installed successfully
          *
          * @example 1558531915505
@@ -7471,12 +7477,6 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          * @example kr1PsOIzqEL5Xg6M4VZcZosf
          */
         ownerId: string;
-        /**
-         * When a configuration is limited to access certain projects, this will contain each of the project ID it is allowed to access. If it is not defined, the configuration has full access.
-         *
-         * @example prj_xQxbutw1HpL6HLYPAzt5h75m8NjO
-         */
-        projects?: string[];
         /**
          * Source defines where the configuration was installed from. It is used to analyze user engagement for integration installations in product metrics.
          *
