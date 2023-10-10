@@ -9162,6 +9162,8 @@ export type GetProjectsResponse = {
       projectProtectionBypass?: Schemas.ACLAction[];
       projectUsage?: Schemas.ACLAction[];
       projectAnalyticsUsage?: Schemas.ACLAction[];
+      projectSupportCase?: Schemas.ACLAction[];
+      projectSupportCaseComment?: Schemas.ACLAction[];
       analytics?: Schemas.ACLAction[];
       trustedIps?: Schemas.ACLAction[];
       webAnalytics?: Schemas.ACLAction[];
@@ -9845,6 +9847,8 @@ export type CreateProjectResponse = {
     projectProtectionBypass?: Schemas.ACLAction[];
     projectUsage?: Schemas.ACLAction[];
     projectAnalyticsUsage?: Schemas.ACLAction[];
+    projectSupportCase?: Schemas.ACLAction[];
+    projectSupportCaseComment?: Schemas.ACLAction[];
     analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
@@ -10585,6 +10589,8 @@ export type GetProjectResponse = {
     projectProtectionBypass?: Schemas.ACLAction[];
     projectUsage?: Schemas.ACLAction[];
     projectAnalyticsUsage?: Schemas.ACLAction[];
+    projectSupportCase?: Schemas.ACLAction[];
+    projectSupportCaseComment?: Schemas.ACLAction[];
     analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
@@ -11178,6 +11184,8 @@ export type UpdateProjectResponse = {
     projectProtectionBypass?: Schemas.ACLAction[];
     projectUsage?: Schemas.ACLAction[];
     projectAnalyticsUsage?: Schemas.ACLAction[];
+    projectSupportCase?: Schemas.ACLAction[];
+    projectSupportCaseComment?: Schemas.ACLAction[];
     analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
