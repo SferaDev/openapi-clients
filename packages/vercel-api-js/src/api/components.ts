@@ -1330,6 +1330,7 @@ export type UpdateProjectDataCacheResponse = {
     projectTransferIn?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
+    productionAliasProtectionBypass?: Schemas.ACLAction[];
     connectConfigurationLink?: Schemas.ACLAction[];
     dataCacheNamespace?: Schemas.ACLAction[];
     deployment?: Schemas.ACLAction[];
