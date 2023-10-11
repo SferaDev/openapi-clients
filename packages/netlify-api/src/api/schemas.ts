@@ -217,6 +217,7 @@ export type Site = {
   };
   build_image?: string;
   prerender?: string;
+  functions_region?: string;
 };
 
 export type SiteSetup = {
@@ -344,6 +345,7 @@ export type SiteSetup = {
   };
   build_image?: string;
   prerender?: string;
+  functions_region?: string;
   repo?: {
     id?: number;
     provider?: string;

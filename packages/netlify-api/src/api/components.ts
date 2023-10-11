@@ -157,6 +157,7 @@ export type ListSitesResponse = {
   };
   build_image?: string;
   prerender?: string;
+  functions_region?: string;
 }[];
 
 export type ListSitesVariables = {
@@ -314,6 +315,7 @@ export type CreateSiteResponse = {
   };
   build_image?: string;
   prerender?: string;
+  functions_region?: string;
 };
 
 export type CreateSiteVariables = {
@@ -476,6 +478,7 @@ export type GetSiteResponse = {
   };
   build_image?: string;
   prerender?: string;
+  functions_region?: string;
 };
 
 export type GetSiteVariables = {
@@ -634,6 +637,7 @@ export type UpdateSiteResponse = {
   };
   build_image?: string;
   prerender?: string;
+  functions_region?: string;
 };
 
 export type UpdateSiteVariables = {
@@ -3314,6 +3318,7 @@ export type UnlinkSiteRepoResponse = {
   };
   build_image?: string;
   prerender?: string;
+  functions_region?: string;
 };
 
 export type UnlinkSiteRepoVariables = {
@@ -4855,6 +4860,7 @@ export type CreateSiteInTeamResponse = {
   };
   build_image?: string;
   prerender?: string;
+  functions_region?: string;
 };
 
 export type CreateSiteInTeamRequestBody = {
@@ -4982,6 +4988,7 @@ export type CreateSiteInTeamRequestBody = {
   };
   build_image?: string;
   prerender?: string;
+  functions_region?: string;
   repo?: {
     id?: number;
     provider?: string;
@@ -5174,6 +5181,7 @@ export type ListSitesForAccountResponse = {
   };
   build_image?: string;
   prerender?: string;
+  functions_region?: string;
 }[];
 
 export type ListSitesForAccountVariables = {
