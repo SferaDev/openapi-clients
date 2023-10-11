@@ -170,6 +170,7 @@ export type CreateSiteSite = {
   };
   build_image?: string;
   prerender?: string;
+  functions_region?: string;
   repo?: {
     id?: number;
     provider?: string;
