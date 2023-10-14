@@ -1,5 +1,12 @@
 # vercel-api-js
 
+## 0.1.23
+
+### Patch Changes
+
+- 2da8330: [OpenAPI] Spec updates for vercel-api-js
+- 73631f0: [OpenAPI] Add pause project endpoints
+
 ## 0.1.22
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # netlify-api
 
+## 0.1.8
+
+### Patch Changes
+
+- 5e1feed: [OpenAPI] Spec updates for netlify-api
+
 ## 0.1.7
 
 ### Patch Changes
