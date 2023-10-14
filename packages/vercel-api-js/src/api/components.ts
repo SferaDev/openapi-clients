@@ -1367,6 +1367,8 @@ export type UpdateProjectDataCacheResponse = {
     projectProtectionBypass?: Schemas.ACLAction[];
     projectUsage?: Schemas.ACLAction[];
     projectAnalyticsUsage?: Schemas.ACLAction[];
+    projectSupportCase?: Schemas.ACLAction[];
+    projectSupportCaseComment?: Schemas.ACLAction[];
     analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
@@ -16549,6 +16551,20 @@ export type GetDeploymentsResponse = {
       sourceFilesOutsideRootDirectory?: boolean;
       commandForIgnoringBuildStep?: string | null;
       createdAt?: number;
+      speedInsights?: {
+        id: string;
+        enabledAt?: number;
+        disabledAt?: number;
+        canceledAt?: number;
+        hasData?: boolean;
+      };
+      webAnalytics?: {
+        id: string;
+        disabledAt?: number;
+        canceledAt?: number;
+        enabledAt?: number;
+        hasData?: boolean;
+      };
       skipGitConnectDuringLink?: boolean;
       /**
        * Since June '23
