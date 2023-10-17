@@ -867,6 +867,13 @@ export type UpdateProjectDataCacheResponse = {
     sampleRatePercent?: number | null;
     spendLimitInDollars?: number | null;
   };
+  speedInsights?: {
+    id: string;
+    enabledAt?: number;
+    disabledAt?: number;
+    canceledAt?: number;
+    hasData?: boolean;
+  };
   autoExposeSystemEnvs?: boolean;
   autoAssignCustomDomains?: boolean;
   autoAssignCustomDomainsUpdatedBy?: string;
@@ -8407,6 +8414,12 @@ export const getProjectMembers = (variables: GetProjectMembersVariables, signal?
            * @example 1588720733602
            */
           createdAt: number;
+          /**
+           * The role of this user in the team.
+           *
+           * @example CONTRIBUTOR
+           */
+          teamRole: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
         }[];
         pagination: {
           hasNext: boolean;
@@ -8761,6 +8774,13 @@ export type GetProjectsResponse = {
       paidAt?: number;
       sampleRatePercent?: number | null;
       spendLimitInDollars?: number | null;
+    };
+    speedInsights?: {
+      id: string;
+      enabledAt?: number;
+      disabledAt?: number;
+      canceledAt?: number;
+      hasData?: boolean;
     };
     autoExposeSystemEnvs?: boolean;
     autoAssignCustomDomains?: boolean;
@@ -9348,6 +9368,13 @@ export type CreateProjectResponse = {
     paidAt?: number;
     sampleRatePercent?: number | null;
     spendLimitInDollars?: number | null;
+  };
+  speedInsights?: {
+    id: string;
+    enabledAt?: number;
+    disabledAt?: number;
+    canceledAt?: number;
+    hasData?: boolean;
   };
   autoExposeSystemEnvs?: boolean;
   autoAssignCustomDomains?: boolean;
@@ -10091,6 +10118,13 @@ export type GetProjectResponse = {
     sampleRatePercent?: number | null;
     spendLimitInDollars?: number | null;
   };
+  speedInsights?: {
+    id: string;
+    enabledAt?: number;
+    disabledAt?: number;
+    canceledAt?: number;
+    hasData?: boolean;
+  };
   autoExposeSystemEnvs?: boolean;
   autoAssignCustomDomains?: boolean;
   autoAssignCustomDomainsUpdatedBy?: string;
@@ -10685,6 +10719,13 @@ export type UpdateProjectResponse = {
     paidAt?: number;
     sampleRatePercent?: number | null;
     spendLimitInDollars?: number | null;
+  };
+  speedInsights?: {
+    id: string;
+    enabledAt?: number;
+    disabledAt?: number;
+    canceledAt?: number;
+    hasData?: boolean;
   };
   autoExposeSystemEnvs?: boolean;
   autoAssignCustomDomains?: boolean;
@@ -14058,7 +14099,7 @@ export type CreateTeamResponse = {
     } | null;
     language?: string | null;
     address?: {
-      line1: string;
+      line1?: string;
       line2?: string;
       postalCode?: string;
       city?: string;
