@@ -428,7 +428,7 @@ export type AuthUser = {
     } | null;
     language?: string | null;
     address?: {
-      line1: string;
+      line1?: string;
       line2?: string;
       postalCode?: string;
       city?: string;
