@@ -15964,6 +15964,12 @@ export type ListDeploymentAliasesResponse = {
             createdAt: number;
             createdBy: string;
             scope: 'alias-protection-override';
+          }
+        | {
+            createdAt: number;
+            lastUpdatedAt: number;
+            lastUpdatedBy: string;
+            scope: 'email_invite';
           };
     };
   }[];
