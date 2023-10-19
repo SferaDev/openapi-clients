@@ -8158,7 +8158,7 @@ export const deleteConfigurableLogDrain = (variables: DeleteConfigurableLogDrain
     DeleteConfigurableLogDrainPathParams
   >({ url: '/v1/log-drains/{id}', method: 'delete', ...variables, signal });
 
-export type GetConfigurableLogDrainsQueryParams = {
+export type GetAllLogDrainsQueryParams = {
   /**
    * @pattern ^[a-zA-z0-9_]+$
    */
@@ -8169,9 +8169,9 @@ export type GetConfigurableLogDrainsQueryParams = {
   teamId?: string;
 };
 
-export type GetConfigurableLogDrainsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAllLogDrainsError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetConfigurableLogDrainsResponse = {
+export type GetAllLogDrainsResponse = {
   id: string;
   deliveryFormat: 'json' | 'ndjson' | 'syslog';
   url: string;
@@ -8200,22 +8200,20 @@ export type GetConfigurableLogDrainsResponse = {
   createdFrom?: 'self-served';
 }[];
 
-export type GetConfigurableLogDrainsVariables = {
-  queryParams?: GetConfigurableLogDrainsQueryParams;
+export type GetAllLogDrainsVariables = {
+  queryParams?: GetAllLogDrainsQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Retrieves a list of Configurable Log Drains. This endpoint must be called with a team AccessToken (integration OAuth2 clients are not allowed). Only log drains owned by the authenticated team can be accessed.
+ * Retrieves a list of all the Log Drains owned by the account. This endpoint must be called with an account AccessToken (integration OAuth2 clients are not allowed). Only log drains owned by the authenticated account can be accessed.
  */
-export const getConfigurableLogDrains = (variables: GetConfigurableLogDrainsVariables, signal?: AbortSignal) =>
-  fetch<
-    GetConfigurableLogDrainsResponse,
-    GetConfigurableLogDrainsError,
-    undefined,
-    {},
-    GetConfigurableLogDrainsQueryParams,
-    {}
-  >({ url: '/v1/log-drains', method: 'get', ...variables, signal });
+export const getAllLogDrains = (variables: GetAllLogDrainsVariables, signal?: AbortSignal) =>
+  fetch<GetAllLogDrainsResponse, GetAllLogDrainsError, undefined, {}, GetAllLogDrainsQueryParams, {}>({
+    url: '/v1/log-drains',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type CreateConfigurableLogDrainQueryParams = {
   /**
@@ -17311,7 +17309,7 @@ export const operationsByTag = {
     deleteIntegrationLogDrain,
     getConfigurableLogDrain,
     deleteConfigurableLogDrain,
-    getConfigurableLogDrains,
+    getAllLogDrains,
     createConfigurableLogDrain
   },
   projectMembers: { getProjectMembers, addProjectMember, removeProjectMember },
