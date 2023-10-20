@@ -15650,6 +15650,12 @@ export type ListAliasesResponse = {
             createdAt: number;
             createdBy: string;
             scope: 'alias-protection-override';
+          }
+        | {
+            createdAt: number;
+            lastUpdatedAt: number;
+            lastUpdatedBy: string;
+            scope: 'email_invite';
           };
     };
   }[];
@@ -15837,6 +15843,12 @@ export type GetAliasResponse = {
           createdAt: number;
           createdBy: string;
           scope: 'alias-protection-override';
+        }
+      | {
+          createdAt: number;
+          lastUpdatedAt: number;
+          lastUpdatedBy: string;
+          scope: 'email_invite';
         };
   };
 };
