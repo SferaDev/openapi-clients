@@ -11276,6 +11276,58 @@ export type UpdateProjectResponse = {
 };
 
 export type UpdateProjectRequestBody = {
+  /**
+   * Allows to protect project deployments with a password
+   */
+  passwordProtection?: {
+    /**
+     * Specify if the password will apply to every Deployment Target or just Preview
+     */
+    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
+    /**
+     * The password that will be used to protect Project Deployments
+     *
+     * @maxLength 72
+     */
+    password?: string | null;
+  } | null;
+  /**
+   * Ensures visitors to your Preview Deployments are logged into Vercel and have a minimum of Viewer access on your team
+   */
+  ssoProtection?: {
+    /**
+     * Specify if the Vercel Authentication (SSO Protection) will apply to every Deployment Target or just Preview
+     *
+     * @default preview
+     */
+    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
+  } | null;
+  /**
+   * Restricts access to deployments based on the incoming request IP address
+   */
+  trustedIps?: {
+    /**
+     * Specify if the Trusted IPs will apply to every Deployment Target or just Preview
+     */
+    deploymentType: 'all' | 'preview' | 'production' | 'prod_deployment_urls_and_all_previews';
+    /**
+     * @minItems 1
+     */
+    addresses: {
+      /**
+       * The IP addresses that are allowlisted. Supports IPv4 addresses and CIDR notations. IPv6 is not supported
+       */
+      value: string;
+      /**
+       * An optional note explaining what the IP address or subnet is used for
+       */
+      note?: string;
+    }[];
+    /**
+     * exclusive: ip match is enough to bypass deployment protection (regardless of other settings). additional: ip must match + any other protection should be also provided (password, vercel auth, shareable link, automation bypass header, automation bypass query param)
+     */
+    protectionMode: 'exclusive' | 'additional';
+  } | null;
   autoExposeSystemEnvs?: boolean;
   autoAssignCustomDomains?: boolean;
   autoAssignCustomDomainsUpdatedBy?: string;
@@ -11378,21 +11430,6 @@ export type UpdateProjectRequestBody = {
    */
   outputDirectory?: string | null;
   /**
-   * Allows to protect project deployments with a password
-   */
-  passwordProtection?: {
-    /**
-     * Specify if the password will apply to every Deployment Target or just Preview
-     */
-    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
-    /**
-     * The password that will be used to protect Project Deployments
-     *
-     * @maxLength 72
-     */
-    password?: string | null;
-  } | null;
-  /**
    * Specifies whether the source code and logs of the deployments for this project should be public or not
    */
   publicSource?: boolean | null;
@@ -11418,43 +11455,6 @@ export type UpdateProjectRequestBody = {
    * Indicates if there are source files outside of the root directory
    */
   sourceFilesOutsideRootDirectory?: boolean;
-  /**
-   * Ensures visitors to your Preview Deployments are logged into Vercel and have a minimum of Viewer access on your team
-   */
-  ssoProtection?: {
-    /**
-     * Specify if the Vercel Authentication (SSO Protection) will apply to every Deployment Target or just Preview
-     *
-     * @default preview
-     */
-    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
-  } | null;
-  /**
-   * Restricts access to deployments based on the incoming request IP address
-   */
-  trustedIps?: {
-    /**
-     * Specify if the Trusted IPs will apply to every Deployment Target or just Preview
-     */
-    deploymentType: 'all' | 'preview' | 'production' | 'prod_deployment_urls_and_all_previews';
-    /**
-     * @minItems 1
-     */
-    addresses: {
-      /**
-       * The IP addresses that are allowlisted. Supported formats are IPv4 and CIDR.
-       */
-      value: string;
-      /**
-       * An optional note explaining what the IP address or subnet is used for
-       */
-      note?: string;
-    }[];
-    /**
-     * exclusive: ip match is enough to bypass deployment protection (regardless of other settings). additional: ip must match + any other protection should be also provided (password, vercel auth, shareable link, automation bypass header, automation bypass query param)
-     */
-    protectionMode: 'exclusive' | 'additional';
-  } | null;
   /**
    * Opt-in to Preview comments on the project level
    */
