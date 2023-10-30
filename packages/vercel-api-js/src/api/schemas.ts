@@ -444,7 +444,6 @@ export type AuthUser = {
         tier?: number;
         price: number;
         quantity: number;
-        highestQuantity?: number;
         name?: string;
         hidden: boolean;
         createdAt?: number;
@@ -462,7 +461,6 @@ export type AuthUser = {
         tier?: number;
         price: number;
         quantity: number;
-        highestQuantity?: number;
         name?: string;
         hidden: boolean;
         createdAt?: number;
@@ -480,7 +478,6 @@ export type AuthUser = {
         tier?: number;
         price: number;
         quantity: number;
-        highestQuantity?: number;
         name?: string;
         hidden: boolean;
         createdAt?: number;
@@ -498,7 +495,6 @@ export type AuthUser = {
         tier?: number;
         price: number;
         quantity: number;
-        highestQuantity?: number;
         name?: string;
         hidden: boolean;
         createdAt?: number;
@@ -516,7 +512,6 @@ export type AuthUser = {
         tier?: number;
         price: number;
         quantity: number;
-        highestQuantity?: number;
         name?: string;
         hidden: boolean;
         createdAt?: number;
@@ -534,7 +529,6 @@ export type AuthUser = {
         tier?: number;
         price: number;
         quantity: number;
-        highestQuantity?: number;
         name?: string;
         hidden: boolean;
         createdAt?: number;
@@ -552,7 +546,6 @@ export type AuthUser = {
         tier?: number;
         price: number;
         quantity: number;
-        highestQuantity?: number;
         name?: string;
         hidden: boolean;
         createdAt?: number;
@@ -570,7 +563,6 @@ export type AuthUser = {
         tier?: number;
         price: number;
         quantity: number;
-        highestQuantity?: number;
         name?: string;
         hidden: boolean;
         createdAt?: number;
@@ -588,7 +580,6 @@ export type AuthUser = {
         tier?: number;
         price: number;
         quantity: number;
-        highestQuantity?: number;
         name?: string;
         hidden: boolean;
         createdAt?: number;
@@ -606,7 +597,6 @@ export type AuthUser = {
         tier?: number;
         price: number;
         quantity: number;
-        highestQuantity?: number;
         name?: string;
         hidden: boolean;
         createdAt?: number;
