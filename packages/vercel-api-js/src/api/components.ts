@@ -2154,6 +2154,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         errorLink?: string;
         errorMessage?: string | null;
         errorStep?: string;
+        passiveRegions?: string[];
         gitSource?:
           | {
               type: 'github';
@@ -2401,6 +2402,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         errorLink?: string;
         errorMessage?: string | null;
         errorStep?: string;
+        passiveRegions?: string[];
         gitSource?:
           | {
               type: 'github';
@@ -2863,6 +2865,7 @@ export type CreateDeploymentResponse = {
   errorLink?: string;
   errorMessage?: string | null;
   errorStep?: string;
+  passiveRegions?: string[];
   gitSource?:
     | {
         type: 'github';
@@ -3012,6 +3015,15 @@ export type CreateDeploymentRequestBody = {
   env?: {
     [key: string]: string;
   };
+  /**
+   * An array of the passive regions the deployment's Serverless Functions should be deployed to that can be failed over to during a lambda outage
+   *
+   * @example iad1
+   * @example cle1
+   * @maxItems 4
+   * @minItems 1
+   */
+  passiveRegions?: string[];
   /**
    * An object describing custom options for your Serverless Functions. Each key must be glob pattern that matches the paths of the Serverless Functions you would like to customize (like `api/*.js` or `api/test.js`).
    *
@@ -4474,6 +4486,7 @@ export type CancelDeploymentResponse = {
   errorLink?: string;
   errorMessage?: string | null;
   errorStep?: string;
+  passiveRegions?: string[];
   gitSource?:
     | {
         type: 'github';
