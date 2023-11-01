@@ -9275,6 +9275,9 @@ export type GetProjectsResponse = {
       remoteCaching?: Schemas.ACLAction[];
       samlConfig?: Schemas.ACLAction[];
       secret?: Schemas.ACLAction[];
+      redisStoreTokenSet?: Schemas.ACLAction[];
+      blobStoreTokenSet?: Schemas.ACLAction[];
+      postgresStoreTokenSet?: Schemas.ACLAction[];
       supportCase?: Schemas.ACLAction[];
       supportCaseComment?: Schemas.ACLAction[];
       dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -9292,6 +9295,7 @@ export type GetProjectsResponse = {
       user?: Schemas.ACLAction[];
       userConnection?: Schemas.ACLAction[];
       webAnalyticsPlan?: Schemas.ACLAction[];
+      webAuthn?: Schemas.ACLAction[];
       edgeConfig?: Schemas.ACLAction[];
       edgeConfigItem?: Schemas.ACLAction[];
       edgeConfigToken?: Schemas.ACLAction[];
@@ -9824,6 +9828,9 @@ export type CreateProjectResponse = {
     remoteCaching?: Schemas.ACLAction[];
     samlConfig?: Schemas.ACLAction[];
     secret?: Schemas.ACLAction[];
+    redisStoreTokenSet?: Schemas.ACLAction[];
+    blobStoreTokenSet?: Schemas.ACLAction[];
+    postgresStoreTokenSet?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -9841,6 +9848,7 @@ export type CreateProjectResponse = {
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
+    webAuthn?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
     edgeConfigItem?: Schemas.ACLAction[];
     edgeConfigToken?: Schemas.ACLAction[];
@@ -10573,6 +10581,9 @@ export type GetProjectResponse = {
     remoteCaching?: Schemas.ACLAction[];
     samlConfig?: Schemas.ACLAction[];
     secret?: Schemas.ACLAction[];
+    redisStoreTokenSet?: Schemas.ACLAction[];
+    blobStoreTokenSet?: Schemas.ACLAction[];
+    postgresStoreTokenSet?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -10590,6 +10601,7 @@ export type GetProjectResponse = {
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
+    webAuthn?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
     edgeConfigItem?: Schemas.ACLAction[];
     edgeConfigToken?: Schemas.ACLAction[];
@@ -11175,6 +11187,9 @@ export type UpdateProjectResponse = {
     remoteCaching?: Schemas.ACLAction[];
     samlConfig?: Schemas.ACLAction[];
     secret?: Schemas.ACLAction[];
+    redisStoreTokenSet?: Schemas.ACLAction[];
+    blobStoreTokenSet?: Schemas.ACLAction[];
+    postgresStoreTokenSet?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -11192,6 +11207,7 @@ export type UpdateProjectResponse = {
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
+    webAuthn?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
     edgeConfigItem?: Schemas.ACLAction[];
     edgeConfigToken?: Schemas.ACLAction[];
@@ -14126,6 +14142,7 @@ export type CreateTeamResponse = {
         tier?: number;
         price: number;
         quantity: number;
+        highestQuantity?: number;
         name?: string;
         hidden: boolean;
         createdAt?: number;
@@ -14143,6 +14160,7 @@ export type CreateTeamResponse = {
         tier?: number;
         price: number;
         quantity: number;
+        highestQuantity?: number;
         name?: string;
         hidden: boolean;
         createdAt?: number;
@@ -14160,6 +14178,7 @@ export type CreateTeamResponse = {
         tier?: number;
         price: number;
         quantity: number;
+        highestQuantity?: number;
         name?: string;
         hidden: boolean;
         createdAt?: number;
@@ -14177,6 +14196,7 @@ export type CreateTeamResponse = {
         tier?: number;
         price: number;
         quantity: number;
+        highestQuantity?: number;
         name?: string;
         hidden: boolean;
         createdAt?: number;
@@ -14194,6 +14214,7 @@ export type CreateTeamResponse = {
         tier?: number;
         price: number;
         quantity: number;
+        highestQuantity?: number;
         name?: string;
         hidden: boolean;
         createdAt?: number;
@@ -14211,6 +14232,7 @@ export type CreateTeamResponse = {
         tier?: number;
         price: number;
         quantity: number;
+        highestQuantity?: number;
         name?: string;
         hidden: boolean;
         createdAt?: number;
@@ -14228,6 +14250,7 @@ export type CreateTeamResponse = {
         tier?: number;
         price: number;
         quantity: number;
+        highestQuantity?: number;
         name?: string;
         hidden: boolean;
         createdAt?: number;
@@ -14245,6 +14268,7 @@ export type CreateTeamResponse = {
         tier?: number;
         price: number;
         quantity: number;
+        highestQuantity?: number;
         name?: string;
         hidden: boolean;
         createdAt?: number;
@@ -14262,6 +14286,7 @@ export type CreateTeamResponse = {
         tier?: number;
         price: number;
         quantity: number;
+        highestQuantity?: number;
         name?: string;
         hidden: boolean;
         createdAt?: number;
@@ -14279,6 +14304,7 @@ export type CreateTeamResponse = {
         tier?: number;
         price: number;
         quantity: number;
+        highestQuantity?: number;
         name?: string;
         hidden: boolean;
         createdAt?: number;
