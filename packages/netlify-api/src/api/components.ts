@@ -116,18 +116,6 @@ export type ListSitesResponse = {
     [key: string]: Record<string, any>;
   };
   processing_settings?: {
-    skip?: boolean;
-    css?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    js?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    images?: {
-      optimize?: boolean;
-    };
     html?: {
       pretty_urls?: boolean;
     };
@@ -274,18 +262,6 @@ export type CreateSiteResponse = {
     [key: string]: Record<string, any>;
   };
   processing_settings?: {
-    skip?: boolean;
-    css?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    js?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    images?: {
-      optimize?: boolean;
-    };
     html?: {
       pretty_urls?: boolean;
     };
@@ -437,18 +413,6 @@ export type GetSiteResponse = {
     [key: string]: Record<string, any>;
   };
   processing_settings?: {
-    skip?: boolean;
-    css?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    js?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    images?: {
-      optimize?: boolean;
-    };
     html?: {
       pretty_urls?: boolean;
     };
@@ -596,18 +560,6 @@ export type UpdateSiteResponse = {
     [key: string]: Record<string, any>;
   };
   processing_settings?: {
-    skip?: boolean;
-    css?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    js?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    images?: {
-      optimize?: boolean;
-    };
     html?: {
       pretty_urls?: boolean;
     };
@@ -3300,18 +3252,6 @@ export type UnlinkSiteRepoResponse = {
     [key: string]: Record<string, any>;
   };
   processing_settings?: {
-    skip?: boolean;
-    css?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    js?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    images?: {
-      optimize?: boolean;
-    };
     html?: {
       pretty_urls?: boolean;
     };
@@ -4842,18 +4782,6 @@ export type CreateSiteInTeamResponse = {
     [key: string]: Record<string, any>;
   };
   processing_settings?: {
-    skip?: boolean;
-    css?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    js?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    images?: {
-      optimize?: boolean;
-    };
     html?: {
       pretty_urls?: boolean;
     };
@@ -4970,18 +4898,6 @@ export type CreateSiteInTeamRequestBody = {
     [key: string]: Record<string, any>;
   };
   processing_settings?: {
-    skip?: boolean;
-    css?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    js?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    images?: {
-      optimize?: boolean;
-    };
     html?: {
       pretty_urls?: boolean;
     };
@@ -5163,18 +5079,6 @@ export type ListSitesForAccountResponse = {
     [key: string]: Record<string, any>;
   };
   processing_settings?: {
-    skip?: boolean;
-    css?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    js?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    images?: {
-      optimize?: boolean;
-    };
     html?: {
       pretty_urls?: boolean;
     };

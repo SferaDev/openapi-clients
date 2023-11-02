@@ -5,73 +5,6 @@
  */
 export type UpdateSiteMetadataMetadata = Record<string, any>;
 
-export type CreateSiteDeployDeploy = {
-  files?: Record<string, any>;
-  draft?: boolean;
-  async?: boolean;
-  functions?: Record<string, any>;
-  function_schedules?: {
-    name?: string;
-    cron?: string;
-  }[];
-  functions_config?: {
-    [key: string]: {
-      display_name?: string;
-      generator?: string;
-      build_data?: Record<string, any>;
-      routes?: {
-        pattern?: string;
-        literal?: string;
-        expression?: string;
-        methods?: ('GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS')[];
-      }[];
-    };
-  };
-  branch?: string;
-  framework?: string;
-  framework_version?: string;
-};
-
-export type CreateHookBySiteIdHook = {
-  id?: string;
-  site_id?: string;
-  type?: string;
-  event?: string;
-  data?: Record<string, any>;
-  /**
-   * @format dateTime
-   */
-  created_at?: string;
-  /**
-   * @format dateTime
-   */
-  updated_at?: string;
-  disabled?: boolean;
-};
-
-export type CreateSiteSnippetSnippet = {
-  /**
-   * @format int32
-   */
-  id?: number;
-  site_id?: string;
-  title?: string;
-  general?: string;
-  general_position?: string;
-  goal?: string;
-  goal_position?: string;
-};
-
-/**
- * @format binary
- */
-export type UploadDeployFileFileBody = Blob;
-
-export type CreateSiteBuildHookBuildhook = {
-  title?: string;
-  branch?: string;
-};
-
 export type CreateSiteSite = {
   id?: string;
   state?: string;
@@ -156,18 +89,6 @@ export type CreateSiteSite = {
     [key: string]: Record<string, any>;
   };
   processing_settings?: {
-    skip?: boolean;
-    css?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    js?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    images?: {
-      optimize?: boolean;
-    };
     html?: {
       pretty_urls?: boolean;
     };
@@ -217,6 +138,73 @@ export type CreateSiteSite = {
     installation_id?: number;
     stop_builds?: boolean;
   };
+};
+
+export type CreateSiteDeployDeploy = {
+  files?: Record<string, any>;
+  draft?: boolean;
+  async?: boolean;
+  functions?: Record<string, any>;
+  function_schedules?: {
+    name?: string;
+    cron?: string;
+  }[];
+  functions_config?: {
+    [key: string]: {
+      display_name?: string;
+      generator?: string;
+      build_data?: Record<string, any>;
+      routes?: {
+        pattern?: string;
+        literal?: string;
+        expression?: string;
+        methods?: ('GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS')[];
+      }[];
+    };
+  };
+  branch?: string;
+  framework?: string;
+  framework_version?: string;
+};
+
+export type CreateHookBySiteIdHook = {
+  id?: string;
+  site_id?: string;
+  type?: string;
+  event?: string;
+  data?: Record<string, any>;
+  /**
+   * @format dateTime
+   */
+  created_at?: string;
+  /**
+   * @format dateTime
+   */
+  updated_at?: string;
+  disabled?: boolean;
+};
+
+export type CreateSiteSnippetSnippet = {
+  /**
+   * @format int32
+   */
+  id?: number;
+  site_id?: string;
+  title?: string;
+  general?: string;
+  general_position?: string;
+  goal?: string;
+  goal_position?: string;
+};
+
+/**
+ * @format binary
+ */
+export type UploadDeployFileFileBody = Blob;
+
+export type CreateSiteBuildHookBuildhook = {
+  title?: string;
+  branch?: string;
 };
 
 export type CreateSplitTestBranchTests = {
