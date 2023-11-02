@@ -7745,6 +7745,12 @@ export type GetIntegrationLogDrainsResponse = {
    * @example feature/*
    */
   branch?: string;
+  /**
+   * The sampling rate of log drain
+   *
+   * @example 0.5
+   */
+  samplingRate?: number;
 }[];
 
 export type GetIntegrationLogDrainsVariables = {
@@ -7865,6 +7871,12 @@ export type CreateLogDrainResponse = {
    * @example feature/*
    */
   branch?: string;
+  /**
+   * The sampling rate of log drain
+   *
+   * @example 0.5
+   */
+  samplingRate?: number;
 };
 
 export type CreateLogDrainRequestBody = {
@@ -8118,6 +8130,7 @@ export type GetConfigurableLogDrainResponse = {
     | 'account-plan-downgrade';
   disabledBy?: string;
   firstErrorTimestamp?: number;
+  samplingRate?: number;
   secret: string;
   createdFrom?: 'self-served';
 };
@@ -8209,6 +8222,7 @@ export type GetAllLogDrainsResponse = {
     | 'account-plan-downgrade';
   disabledBy?: string;
   firstErrorTimestamp?: number;
+  samplingRate?: number;
   secret: string;
   createdFrom?: 'self-served';
 }[];
@@ -8266,6 +8280,7 @@ export type CreateConfigurableLogDrainResponse = {
     | 'account-plan-downgrade';
   disabledBy?: string;
   firstErrorTimestamp?: number;
+  samplingRate?: number;
   createdFrom?: 'self-served';
 };
 
