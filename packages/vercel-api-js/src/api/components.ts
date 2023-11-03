@@ -1311,6 +1311,9 @@ export type UpdateProjectDataCacheResponse = {
     remoteCaching?: Schemas.ACLAction[];
     samlConfig?: Schemas.ACLAction[];
     secret?: Schemas.ACLAction[];
+    redisStoreTokenSet?: Schemas.ACLAction[];
+    blobStoreTokenSet?: Schemas.ACLAction[];
+    postgresStoreTokenSet?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -1328,6 +1331,7 @@ export type UpdateProjectDataCacheResponse = {
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
+    webAuthn?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
     edgeConfigItem?: Schemas.ACLAction[];
     edgeConfigToken?: Schemas.ACLAction[];
