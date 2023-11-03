@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.1.24
+
+### Patch Changes
+
+- 0be29c9: Export `types`
+
 ## 0.1.23
 
 ### Patch Changes
