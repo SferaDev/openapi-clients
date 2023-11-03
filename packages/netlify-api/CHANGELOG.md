@@ -1,5 +1,12 @@
 # netlify-api
 
+## 0.1.9
+
+### Patch Changes
+
+- 605bae6: [OpenAPI] Spec updates for netlify-api
+- 0be29c9: Export `types`
+
 ## 0.1.8
 
 ### Patch Changes
