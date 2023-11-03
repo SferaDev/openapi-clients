@@ -176,18 +176,6 @@ export type Site = {
     [key: string]: Record<string, any>;
   };
   processing_settings?: {
-    skip?: boolean;
-    css?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    js?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    images?: {
-      optimize?: boolean;
-    };
     html?: {
       pretty_urls?: boolean;
     };
@@ -304,18 +292,6 @@ export type SiteSetup = {
     [key: string]: Record<string, any>;
   };
   processing_settings?: {
-    skip?: boolean;
-    css?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    js?: {
-      bundle?: boolean;
-      minify?: boolean;
-    };
-    images?: {
-      optimize?: boolean;
-    };
     html?: {
       pretty_urls?: boolean;
     };
@@ -1163,11 +1139,6 @@ export type AuditLog = {
 export type AccountUsageCapability = {
   included?: number;
   used?: number;
-};
-
-export type MinifyOptions = {
-  bundle?: boolean;
-  minify?: boolean;
 };
 
 export type BuildSetup = {
