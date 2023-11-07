@@ -153,7 +153,7 @@ export type ListSitesVariables = {
 } & FetcherExtraProps;
 
 /**
- * **Note:** Environment variable keys and values will soon be moved from `build_settings.env` and `repo.env` to a new endpoint. Please use [getEnvVars](#tag/environmentVariables/operation/getEnvVars) to retrieve site environment variables.
+ * **Note:** Environment variable keys and values have moved from `build_settings.env` and `repo.env` to a new endpoint. Please use [getEnvVars](#tag/environmentVariables/operation/getEnvVars) to retrieve site environment variables.
  */
 export const listSites = (variables: ListSitesVariables, signal?: AbortSignal) =>
   fetch<ListSitesResponse, ListSitesError, undefined, {}, ListSitesQueryParams, {}>({
@@ -300,7 +300,7 @@ export type CreateSiteVariables = {
 } & FetcherExtraProps;
 
 /**
- * **Note:** Environment variable keys and values will soon be moved from `build_settings.env` and `repo.env` to a new endpoint. Please use [createEnvVars](#tag/environmentVariables/operation/createEnvVars) to create environment variables for a site.
+ * **Note:** Environment variable keys and values have moved from `build_settings.env` and `repo.env` to a new endpoint. Please use [createEnvVars](#tag/environmentVariables/operation/createEnvVars) to create environment variables for a site.
  */
 export const createSite = (variables: CreateSiteVariables, signal?: AbortSignal) =>
   fetch<CreateSiteResponse, CreateSiteError, RequestBodies.CreateSiteSite, {}, CreateSiteQueryParams, {}>({
@@ -451,7 +451,7 @@ export type GetSiteVariables = {
 } & FetcherExtraProps;
 
 /**
- * **Note:** Environment variable keys and values will soon be moved from `build_settings.env` and `repo.env` to a new endpoint. Please use [getEnvVars](#tag/environmentVariables/operation/getEnvVars) to retrieve site environment variables.
+ * **Note:** Environment variable keys and values have moved from `build_settings.env` and `repo.env` to a new endpoint. Please use [getEnvVars](#tag/environmentVariables/operation/getEnvVars) to retrieve site environment variables.
  */
 export const getSite = (variables: GetSiteVariables, signal?: AbortSignal) =>
   fetch<GetSiteResponse, GetSiteError, undefined, {}, GetSiteQueryParams, GetSitePathParams>({
@@ -598,7 +598,7 @@ export type UpdateSiteVariables = {
 } & FetcherExtraProps;
 
 /**
- * **Note:** Environment variable keys and values will soon be moved from `build_settings.env` and `repo.env` to a new endpoint. Please use [updateEnvVar](#tag/environmentVariables/operation/updateEnvVar) to update a site's environment variables.
+ * **Note:** Environment variable keys and values have moved from `build_settings.env` and `repo.env` to a new endpoint. Please use [updateEnvVar](#tag/environmentVariables/operation/updateEnvVar) to update a site's environment variables.
  */
 export const updateSite = (variables: UpdateSiteVariables, signal?: AbortSignal) =>
   fetch<UpdateSiteResponse, UpdateSiteError, RequestBodies.CreateSiteSite, {}, {}, UpdateSitePathParams>({
@@ -1017,6 +1017,130 @@ export const createEnvVars = (variables: CreateEnvVarsVariables, signal?: AbortS
     CreateEnvVarsQueryParams,
     CreateEnvVarsPathParams
   >({ url: '/accounts/{accountId}/env', method: 'post', ...variables, signal });
+
+export type GetSiteEnvVarsPathParams = {
+  /**
+   * Scope response to site_id
+   */
+  siteId: string;
+};
+
+export type GetSiteEnvVarsQueryParams = {
+  /**
+   * Filter by deploy context
+   */
+  context_name?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production';
+  /**
+   * Filter by scope
+   */
+  scope?: 'builds' | 'functions' | 'runtime' | 'post_processing';
+};
+
+export type GetSiteEnvVarsError = Fetcher.ErrorWrapper<{
+  status: Exclude<ClientErrorStatus | ServerErrorStatus, 200>;
+  payload: {
+    /**
+     * @format int64
+     */
+    code?: number;
+    message: string;
+  };
+}>;
+
+export type GetSiteEnvVarsResponse = {
+  /**
+   * The environment variable key, like ALGOLIA_ID (case-sensitive)
+   *
+   * @x-faker commerce.productName
+   */
+  key?: string;
+  /**
+   * The scopes that this environment variable is set to
+   */
+  scopes?: ('builds' | 'functions' | 'runtime' | 'post-processing')[];
+  /**
+   * An array of Value objects containing values and metadata
+   *
+   * @x-faker internet.password
+   */
+  values?: {
+    /**
+     * The environment variable value's universally unique ID
+     *
+     * @x-faker datatype.uuid
+     */
+    id?: string;
+    /**
+     * The environment variable's unencrypted value
+     *
+     * @x-faker internet.password
+     */
+    value?: string;
+    /**
+     * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
+     */
+    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+    /**
+     * An additional parameter for custom branches. Currently, this is used for specifying a branch name when `context=branch`.
+     */
+    context_parameter?: string;
+  }[];
+  /**
+   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret. (Enterprise plans only)
+   */
+  is_secret?: boolean;
+  /**
+   * The timestamp of when the value was last updated
+   *
+   * @format date-time
+   * @x-faker date.past
+   */
+  updated_at?: string;
+  updated_by?: {
+    /**
+     * The user's unique identifier
+     *
+     * @x-faker datatype.number
+     */
+    id?: string;
+    /**
+     * The user's full name (first and last)
+     *
+     * @x-faker name.findName
+     */
+    full_name?: string;
+    /**
+     * The user's email address
+     *
+     * @x-faker internet.email
+     */
+    email?: string;
+    /**
+     * A URL pointing to the user's avatar
+     *
+     * @x-faker internet.avatar
+     */
+    avatar_url?: string;
+  };
+}[];
+
+export type GetSiteEnvVarsVariables = {
+  pathParams: GetSiteEnvVarsPathParams;
+  queryParams?: GetSiteEnvVarsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Returns all environment variables for a site. This convenience method behaves the same as `getEnvVars` but doesn't require an `account_id` as input.
+ */
+export const getSiteEnvVars = (variables: GetSiteEnvVarsVariables, signal?: AbortSignal) =>
+  fetch<
+    GetSiteEnvVarsResponse,
+    GetSiteEnvVarsError,
+    undefined,
+    {},
+    GetSiteEnvVarsQueryParams,
+    GetSiteEnvVarsPathParams
+  >({ url: '/api/v1/sites/{siteId}/env', method: 'get', ...variables, signal });
 
 export type GetEnvVarPathParams = {
   /**
@@ -4956,7 +5080,7 @@ export type CreateSiteInTeamVariables = {
 } & FetcherExtraProps;
 
 /**
- * **Note:** Environment variable keys and values will soon be moved from `build_settings.env` and `repo.env` to a new endpoint. Please use [createEnvVars](#tag/environmentVariables/operation/createEnvVars) to create environment variables for a site.
+ * **Note:** Environment variable keys and values have moved from `build_settings.env` and `repo.env` to a new endpoint. Please use [createEnvVars](#tag/environmentVariables/operation/createEnvVars) to create environment variables for a site.
  */
 export const createSiteInTeam = (variables: CreateSiteInTeamVariables, signal?: AbortSignal) =>
   fetch<
@@ -5117,7 +5241,7 @@ export type ListSitesForAccountVariables = {
 } & FetcherExtraProps;
 
 /**
- * **Note:** Environment variable keys and values will soon be moved from `build_settings.env` and `repo.env` to a new endpoint. Please use [getEnvVars](#tag/environmentVariables/operation/getEnvVars) to retrieve site environment variables.
+ * **Note:** Environment variable keys and values have moved from `build_settings.env` and `repo.env` to a new endpoint. Please use [getEnvVars](#tag/environmentVariables/operation/getEnvVars) to retrieve site environment variables.
  */
 export const listSitesForAccount = (variables: ListSitesForAccountVariables, signal?: AbortSignal) =>
   fetch<
@@ -7002,6 +7126,7 @@ export const operationsByTag = {
   environmentVariables: {
     getEnvVars,
     createEnvVars,
+    getSiteEnvVars,
     getEnvVar,
     updateEnvVar,
     setEnvVarValue,
