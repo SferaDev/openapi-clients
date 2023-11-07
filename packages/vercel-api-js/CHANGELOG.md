@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.1.25
+
+### Patch Changes
+
+- 7405cf2: Add support for node 20
+
 ## 0.1.24
 
 ### Patch Changes

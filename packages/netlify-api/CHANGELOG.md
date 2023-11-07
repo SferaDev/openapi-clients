@@ -1,5 +1,11 @@
 # netlify-api
 
+## 0.2.0
+
+### Minor Changes
+
+- 8512044: Add new get site env vars
+
 ## 0.1.9
 
 ### Patch Changes
