@@ -1160,7 +1160,7 @@ export type UpdateProjectDataCacheResponse = {
         productionBranch?: string;
       };
   name: string;
-  nodeVersion: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
+  nodeVersion: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
   outputDirectory?: string | null;
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
@@ -9098,8 +9098,9 @@ export type GetProjectsResponse = {
           productionBranch?: string;
         };
     name: string;
-    nodeVersion: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
+    nodeVersion: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
     outputDirectory?: string | null;
+    passiveConnectConfigurationId?: string | null;
     passwordProtection?: Record<string, any> | null;
     productionDeploymentsFastLane?: boolean;
     publicSource?: boolean | null;
@@ -9696,8 +9697,9 @@ export type CreateProjectResponse = {
         productionBranch?: string;
       };
   name: string;
-  nodeVersion: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
+  nodeVersion: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
   outputDirectory?: string | null;
+  passiveConnectConfigurationId?: string | null;
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
@@ -10449,8 +10451,9 @@ export type GetProjectResponse = {
         productionBranch?: string;
       };
   name: string;
-  nodeVersion: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
+  nodeVersion: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
   outputDirectory?: string | null;
+  passiveConnectConfigurationId?: string | null;
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
@@ -11055,8 +11058,9 @@ export type UpdateProjectResponse = {
         productionBranch?: string;
       };
   name: string;
-  nodeVersion: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
+  nodeVersion: '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '20.x';
   outputDirectory?: string | null;
+  passiveConnectConfigurationId?: string | null;
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
@@ -16658,7 +16662,7 @@ export type GetDeploymentsResponse = {
       devCommand?: string | null;
       installCommand?: string | null;
       buildCommand?: string | null;
-      nodeVersion?: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
+      nodeVersion?: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
       outputDirectory?: string | null;
       publicSource?: boolean | null;
       rootDirectory?: string | null;
