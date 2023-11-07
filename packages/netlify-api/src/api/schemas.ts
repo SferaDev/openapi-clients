@@ -659,6 +659,7 @@ export type DeployFiles = {
         literal?: string;
         expression?: string;
         methods?: ('GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS')[];
+        prefer_static?: boolean;
       }[];
     };
   };
@@ -1219,6 +1220,7 @@ export type FunctionConfig = {
     literal?: string;
     expression?: string;
     methods?: ('GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS')[];
+    prefer_static?: boolean;
   }[];
 };
 
@@ -1227,4 +1229,5 @@ export type FunctionRoute = {
   literal?: string;
   expression?: string;
   methods?: ('GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS')[];
+  prefer_static?: boolean;
 };
