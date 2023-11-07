@@ -140,33 +140,6 @@ export type CreateSiteSite = {
   };
 };
 
-export type CreateSiteDeployDeploy = {
-  files?: Record<string, any>;
-  draft?: boolean;
-  async?: boolean;
-  functions?: Record<string, any>;
-  function_schedules?: {
-    name?: string;
-    cron?: string;
-  }[];
-  functions_config?: {
-    [key: string]: {
-      display_name?: string;
-      generator?: string;
-      build_data?: Record<string, any>;
-      routes?: {
-        pattern?: string;
-        literal?: string;
-        expression?: string;
-        methods?: ('GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS')[];
-      }[];
-    };
-  };
-  branch?: string;
-  framework?: string;
-  framework_version?: string;
-};
-
 export type CreateHookBySiteIdHook = {
   id?: string;
   site_id?: string;
@@ -201,6 +174,34 @@ export type CreateSiteSnippetSnippet = {
  * @format binary
  */
 export type UploadDeployFileFileBody = Blob;
+
+export type CreateSiteDeployDeploy = {
+  files?: Record<string, any>;
+  draft?: boolean;
+  async?: boolean;
+  functions?: Record<string, any>;
+  function_schedules?: {
+    name?: string;
+    cron?: string;
+  }[];
+  functions_config?: {
+    [key: string]: {
+      display_name?: string;
+      generator?: string;
+      build_data?: Record<string, any>;
+      routes?: {
+        pattern?: string;
+        literal?: string;
+        expression?: string;
+        methods?: ('GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS')[];
+        prefer_static?: boolean;
+      }[];
+    };
+  };
+  branch?: string;
+  framework?: string;
+  framework_version?: string;
+};
 
 export type CreateSiteBuildHookBuildhook = {
   title?: string;
