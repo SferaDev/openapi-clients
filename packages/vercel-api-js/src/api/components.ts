@@ -873,6 +873,7 @@ export type UpdateProjectDataCacheResponse = {
     disabledAt?: number;
     canceledAt?: number;
     hasData?: boolean;
+    paidAt?: number;
   };
   autoExposeSystemEnvs?: boolean;
   autoAssignCustomDomains?: boolean;
@@ -1162,6 +1163,7 @@ export type UpdateProjectDataCacheResponse = {
   name: string;
   nodeVersion: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
   outputDirectory?: string | null;
+  passiveConnectConfigurationId?: string | null;
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
@@ -1237,6 +1239,7 @@ export type UpdateProjectDataCacheResponse = {
   live?: boolean;
   enablePreviewFeedback?: boolean | null;
   permissions?: {
+    accessGroup?: Schemas.ACLAction[];
     aliasGlobal?: Schemas.ACLAction[];
     analyticsSampling?: Schemas.ACLAction[];
     analyticsUsage?: Schemas.ACLAction[];
@@ -1334,6 +1337,7 @@ export type UpdateProjectDataCacheResponse = {
     webAuthn?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
     edgeConfigItem?: Schemas.ACLAction[];
+    edgeConfigSchema?: Schemas.ACLAction[];
     edgeConfigToken?: Schemas.ACLAction[];
     webhook?: Schemas.ACLAction[];
     ['webhook-event']?: Schemas.ACLAction[];
@@ -1877,6 +1881,10 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          * @example ZspSRT4ljIEEmMHgoDwKWDei
          */
         ownerId: string;
+        /**
+         * The connect configuration ID used to deploy passive lambdas into for secure compute enabled deployments.
+         */
+        passiveConnectConfigurationId?: string;
         /**
          * The pricing plan the deployment was made under
          *
@@ -2588,6 +2596,10 @@ export type CreateDeploymentResponse = {
    * @example ZspSRT4ljIEEmMHgoDwKWDei
    */
   ownerId: string;
+  /**
+   * The connect configuration ID used to deploy passive lambdas into for secure compute enabled deployments.
+   */
+  passiveConnectConfigurationId?: string;
   /**
    * The pricing plan the deployment was made under
    *
@@ -3440,6 +3452,13 @@ export type CreateDeploymentRequestBody = {
           value?: string;
         }
     )[];
+    /**
+     * An optional integer to override the status code of the response.
+     *
+     * @minimum 100
+     * @maximum 999
+     */
+    statusCode?: number;
   }[];
   /**
    * A list of routes objects used to rewrite paths to point towards other internal or external paths
@@ -4209,6 +4228,10 @@ export type CancelDeploymentResponse = {
    * @example ZspSRT4ljIEEmMHgoDwKWDei
    */
   ownerId: string;
+  /**
+   * The connect configuration ID used to deploy passive lambdas into for secure compute enabled deployments.
+   */
+  passiveConnectConfigurationId?: string;
   /**
    * The pricing plan the deployment was made under
    *
@@ -6419,6 +6442,7 @@ export type GetEdgeConfigsResponse = {
     startedAt: number;
     doneAt: number | null;
   };
+  schema?: Record<string, any>;
   sizeInBytes: number;
   itemCount: number;
 };
@@ -6465,6 +6489,7 @@ export type CreateEdgeConfigResponse = {
     startedAt: number;
     doneAt: number | null;
   };
+  schema?: Record<string, any>;
   sizeInBytes: number;
   itemCount: number;
 };
@@ -6531,6 +6556,7 @@ export type GetEdgeConfigResponse = {
     startedAt: number;
     doneAt: number | null;
   };
+  schema?: Record<string, any>;
   sizeInBytes: number;
   itemCount: number;
 };
@@ -6582,6 +6608,7 @@ export type UpdateEdgeConfigResponse = {
     startedAt: number;
     doneAt: number | null;
   };
+  schema?: Record<string, any>;
   sizeInBytes: number;
   itemCount: number;
 };
@@ -6673,24 +6700,25 @@ export const getEdgeConfigItems = (variables: GetEdgeConfigItemsVariables, signa
     GetEdgeConfigItemsPathParams
   >({ url: '/v1/edge-config/{edgeConfigId}/items', method: 'get', ...variables, signal });
 
-export type PatchtEdgeConfigItemsPathParams = {
+export type PatchEdgeConfigItemsPathParams = {
   edgeConfigId: string;
 };
 
-export type PatchtEdgeConfigItemsQueryParams = {
+export type PatchEdgeConfigItemsQueryParams = {
+  edgeConfigId: string;
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
   teamId?: string;
 };
 
-export type PatchtEdgeConfigItemsError = Fetcher.ErrorWrapper<undefined>;
+export type PatchEdgeConfigItemsError = Fetcher.ErrorWrapper<undefined>;
 
-export type PatchtEdgeConfigItemsResponse = {
+export type PatchEdgeConfigItemsResponse = {
   status: string;
 };
 
-export type PatchtEdgeConfigItemsRequestBody = {
+export type PatchEdgeConfigItemsRequestBody = {
   items: (
     | {
         operation: void | void | void;
@@ -6712,25 +6740,26 @@ export type PatchtEdgeConfigItemsRequestBody = {
         key: string;
       }
   )[];
+  definition: void;
 };
 
-export type PatchtEdgeConfigItemsVariables = {
-  body: PatchtEdgeConfigItemsRequestBody;
-  pathParams: PatchtEdgeConfigItemsPathParams;
-  queryParams?: PatchtEdgeConfigItemsQueryParams;
+export type PatchEdgeConfigItemsVariables = {
+  body: PatchEdgeConfigItemsRequestBody;
+  pathParams: PatchEdgeConfigItemsPathParams;
+  queryParams: PatchEdgeConfigItemsQueryParams;
 } & FetcherExtraProps;
 
 /**
  * Update multiple Edge Config Items in batch.
  */
-export const patchtEdgeConfigItems = (variables: PatchtEdgeConfigItemsVariables, signal?: AbortSignal) =>
+export const patchEdgeConfigItems = (variables: PatchEdgeConfigItemsVariables, signal?: AbortSignal) =>
   fetch<
-    PatchtEdgeConfigItemsResponse,
-    PatchtEdgeConfigItemsError,
-    PatchtEdgeConfigItemsRequestBody,
+    PatchEdgeConfigItemsResponse,
+    PatchEdgeConfigItemsError,
+    PatchEdgeConfigItemsRequestBody,
     {},
-    PatchtEdgeConfigItemsQueryParams,
-    PatchtEdgeConfigItemsPathParams
+    PatchEdgeConfigItemsQueryParams,
+    PatchEdgeConfigItemsPathParams
   >({ url: '/v1/edge-config/{edgeConfigId}/items', method: 'patch', ...variables, signal });
 
 export type GetEdgeConfigItemPathParams = {
@@ -8811,6 +8840,7 @@ export type GetProjectsResponse = {
       disabledAt?: number;
       canceledAt?: number;
       hasData?: boolean;
+      paidAt?: number;
     };
     autoExposeSystemEnvs?: boolean;
     autoAssignCustomDomains?: boolean;
@@ -9221,6 +9251,7 @@ export type GetProjectsResponse = {
       trustedIps?: Schemas.ACLAction[];
       webAnalytics?: Schemas.ACLAction[];
       sharedEnvVarConnection?: Schemas.ACLAction[];
+      accessGroup?: Schemas.ACLAction[];
       aliasGlobal?: Schemas.ACLAction[];
       analyticsSampling?: Schemas.ACLAction[];
       analyticsUsage?: Schemas.ACLAction[];
@@ -9318,6 +9349,7 @@ export type GetProjectsResponse = {
       webAuthn?: Schemas.ACLAction[];
       edgeConfig?: Schemas.ACLAction[];
       edgeConfigItem?: Schemas.ACLAction[];
+      edgeConfigSchema?: Schemas.ACLAction[];
       edgeConfigToken?: Schemas.ACLAction[];
       webhook?: Schemas.ACLAction[];
       ['webhook-event']?: Schemas.ACLAction[];
@@ -9410,6 +9442,7 @@ export type CreateProjectResponse = {
     disabledAt?: number;
     canceledAt?: number;
     hasData?: boolean;
+    paidAt?: number;
   };
   autoExposeSystemEnvs?: boolean;
   autoAssignCustomDomains?: boolean;
@@ -9775,6 +9808,7 @@ export type CreateProjectResponse = {
   live?: boolean;
   enablePreviewFeedback?: boolean | null;
   permissions?: {
+    accessGroup?: Schemas.ACLAction[];
     aliasGlobal?: Schemas.ACLAction[];
     analyticsSampling?: Schemas.ACLAction[];
     analyticsUsage?: Schemas.ACLAction[];
@@ -9872,6 +9906,7 @@ export type CreateProjectResponse = {
     webAuthn?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
     edgeConfigItem?: Schemas.ACLAction[];
+    edgeConfigSchema?: Schemas.ACLAction[];
     edgeConfigToken?: Schemas.ACLAction[];
     webhook?: Schemas.ACLAction[];
     ['webhook-event']?: Schemas.ACLAction[];
@@ -10164,6 +10199,7 @@ export type GetProjectResponse = {
     disabledAt?: number;
     canceledAt?: number;
     hasData?: boolean;
+    paidAt?: number;
   };
   autoExposeSystemEnvs?: boolean;
   autoAssignCustomDomains?: boolean;
@@ -10529,6 +10565,7 @@ export type GetProjectResponse = {
   live?: boolean;
   enablePreviewFeedback?: boolean | null;
   permissions?: {
+    accessGroup?: Schemas.ACLAction[];
     aliasGlobal?: Schemas.ACLAction[];
     analyticsSampling?: Schemas.ACLAction[];
     analyticsUsage?: Schemas.ACLAction[];
@@ -10626,6 +10663,7 @@ export type GetProjectResponse = {
     webAuthn?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
     edgeConfigItem?: Schemas.ACLAction[];
+    edgeConfigSchema?: Schemas.ACLAction[];
     edgeConfigToken?: Schemas.ACLAction[];
     webhook?: Schemas.ACLAction[];
     ['webhook-event']?: Schemas.ACLAction[];
@@ -10771,6 +10809,7 @@ export type UpdateProjectResponse = {
     disabledAt?: number;
     canceledAt?: number;
     hasData?: boolean;
+    paidAt?: number;
   };
   autoExposeSystemEnvs?: boolean;
   autoAssignCustomDomains?: boolean;
@@ -11058,7 +11097,7 @@ export type UpdateProjectResponse = {
         productionBranch?: string;
       };
   name: string;
-  nodeVersion: '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '20.x';
+  nodeVersion: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
   outputDirectory?: string | null;
   passiveConnectConfigurationId?: string | null;
   passwordProtection?: Record<string, any> | null;
@@ -11136,6 +11175,7 @@ export type UpdateProjectResponse = {
   live?: boolean;
   enablePreviewFeedback?: boolean | null;
   permissions?: {
+    accessGroup?: Schemas.ACLAction[];
     aliasGlobal?: Schemas.ACLAction[];
     analyticsSampling?: Schemas.ACLAction[];
     analyticsUsage?: Schemas.ACLAction[];
@@ -11233,6 +11273,7 @@ export type UpdateProjectResponse = {
     webAuthn?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
     edgeConfigItem?: Schemas.ACLAction[];
+    edgeConfigSchema?: Schemas.ACLAction[];
     edgeConfigToken?: Schemas.ACLAction[];
     webhook?: Schemas.ACLAction[];
     ['webhook-event']?: Schemas.ACLAction[];
@@ -11474,7 +11515,7 @@ export type UpdateProjectRequestBody = {
    * @pattern ^[a-z0-9]([a-z0-9]|-[a-z0-9])*$
    */
   name?: string;
-  nodeVersion?: '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
+  nodeVersion?: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
   /**
    * The output directory of the project. When `null` is used this value will be automatically detected
    *
@@ -14368,16 +14409,6 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         enabledAt?: number | null;
       };
-      cronJobInvocation?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
       dataCacheRead?: {
         tier?: number;
         price: number;
@@ -16676,6 +16707,7 @@ export type GetDeploymentsResponse = {
         disabledAt?: number;
         canceledAt?: number;
         hasData?: boolean;
+        paidAt?: number;
       };
       webAnalytics?: {
         id: string;
@@ -16707,6 +16739,10 @@ export type GetDeploymentsResponse = {
      * The ID of Vercel Connect configuration used for this deployment
      */
     connectConfigurationId?: string;
+    /**
+     * The ID of Vercel Connect configuration used for this deployment's passive functions
+     */
+    passiveConnectConfigurationId?: string;
   }[];
 };
 
@@ -17368,7 +17404,7 @@ export const operationsByTag = {
     updateEdgeConfig,
     deleteEdgeConfig,
     getEdgeConfigItems,
-    patchtEdgeConfigItems,
+    patchEdgeConfigItems,
     getEdgeConfigItem,
     getEdgeConfigTokens,
     deleteEdgeConfigTokens,
