@@ -1,5 +1,11 @@
 # netlify-api
 
+## 0.2.1
+
+### Patch Changes
+
+- d441527: [OpenAPI] Add site functions
+
 ## 0.2.0
 
 ### Minor Changes
