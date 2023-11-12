@@ -372,7 +372,6 @@ export type AuthUser = {
       | 'analyticsUsage'
       | 'artifacts'
       | 'bandwidth'
-      | 'cronJobInvocation'
       | 'dataCacheRead'
       | 'dataCacheRevalidation'
       | 'dataCacheWrite'
@@ -638,16 +637,6 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       bandwidth?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      cronJobInvocation?: {
         tier?: number;
         price: number;
         batch: number;
@@ -961,6 +950,10 @@ export type AuthUser = {
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
     blobStores?: number;
+    /**
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+     */
+    cronJobs?: number;
   };
   /**
    * Prefix that will be used in the URL of "Preview" deployments created by the User account.
@@ -1147,14 +1140,14 @@ export type AuthToken = {
   scopes?: (
     | {
         type: 'user';
-        origin: 'saml' | 'github' | 'gitlab' | 'bitbucket' | 'email' | 'manual';
+        origin: 'saml' | 'github' | 'gitlab' | 'bitbucket' | 'email' | 'manual' | 'passkey';
         createdAt: number;
         expiresAt?: number;
       }
     | {
         type: 'team';
         teamId: string;
-        origin: 'saml' | 'github' | 'gitlab' | 'bitbucket' | 'email' | 'manual';
+        origin: 'saml' | 'github' | 'gitlab' | 'bitbucket' | 'email' | 'manual' | 'passkey';
         createdAt: number;
         expiresAt?: number;
       }
