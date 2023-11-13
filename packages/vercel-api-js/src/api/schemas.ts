@@ -48,6 +48,7 @@ export type EdgeConfigItemValue =
 export type EdgeConfigItem = {
   key: string;
   value: EdgeConfigItemValue;
+  description?: string;
   edgeConfigId: string;
   createdAt: number;
   updatedAt: number;
