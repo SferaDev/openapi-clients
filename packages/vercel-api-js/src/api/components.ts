@@ -6721,23 +6721,16 @@ export type PatchEdgeConfigItemsResponse = {
 export type PatchEdgeConfigItemsRequestBody = {
   items: (
     | {
-        operation: void | void | void;
-        /**
-         * @maxLength 256
-         * @pattern ^[\\w-]+$
-         */
-        key: string;
-        value:
-          | (string | number | boolean | null | Record<string, any>)
-          | (string | number | boolean | null | Record<string, any>)[];
+        operation: void;
+      }
+    | {
+        operation: 'update' | 'upsert';
+      }
+    | {
+        operation: 'update' | 'upsert';
       }
     | {
         operation: void;
-        /**
-         * @maxLength 256
-         * @pattern ^[\\w-]+$
-         */
-        key: string;
       }
   )[];
   definition: void;
