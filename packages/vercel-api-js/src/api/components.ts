@@ -7152,7 +7152,7 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
           | 'account-plan-downgrade'
           | 'disabled-by-admin'
           | 'original-owner-left-the-team';
-      }[]
+      }
     | {
         integration: {
           name: string;
