@@ -1161,7 +1161,7 @@ export type UpdateProjectDataCacheResponse = {
         productionBranch?: string;
       };
   name: string;
-  nodeVersion: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
+  nodeVersion: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
   outputDirectory?: string | null;
   passiveConnectConfigurationId?: string | null;
   passwordProtection?: Record<string, any> | null;
