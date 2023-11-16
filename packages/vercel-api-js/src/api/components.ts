@@ -3041,6 +3041,15 @@ export type CreateDeploymentRequestBody = {
    */
   passiveRegions?: string[];
   /**
+   * Same as passiveRegions. An array of the passive regions the deployment's Serverless Functions should be deployed to so we can failover to these regions on lambda outages
+   *
+   * @example iad1
+   * @example cle1
+   * @maxItems 4
+   * @minItems 1
+   */
+  functionFailoverRegions?: string[];
+  /**
    * An object describing custom options for your Serverless Functions. Each key must be glob pattern that matches the paths of the Serverless Functions you would like to customize (like `api/*.js` or `api/test.js`).
    *
    * @example {"src/pages/**":{"maxDuration":6,"memory":1024}}
@@ -15104,6 +15113,7 @@ export type CreateWebhookResponse = {
     | 'integration-configuration-permission-updated'
     | 'integration-configuration-removed'
     | 'integration-configuration-scope-change-confirmed'
+    | 'test-webhook'
   )[];
   /**
    * The webhook id
@@ -15180,6 +15190,7 @@ export type CreateWebhookRequestBody = {
     | 'integration-configuration-permission-updated'
     | 'integration-configuration-removed'
     | 'integration-configuration-scope-change-confirmed'
+    | 'test-webhook'
   )[];
   /**
    * @minItems 1
@@ -15311,6 +15322,7 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'integration-configuration-permission-updated'
           | 'integration-configuration-removed'
           | 'integration-configuration-scope-change-confirmed'
+          | 'test-webhook'
         )[];
         /**
          * The webhook id
@@ -15383,6 +15395,7 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'integration-configuration-permission-updated'
           | 'integration-configuration-removed'
           | 'integration-configuration-scope-change-confirmed'
+          | 'test-webhook'
         )[];
         /**
          * The webhook id
@@ -15475,6 +15488,7 @@ export type GetWebhookResponse = {
     | 'integration-configuration-permission-updated'
     | 'integration-configuration-removed'
     | 'integration-configuration-scope-change-confirmed'
+    | 'test-webhook'
   )[];
   /**
    * The webhook id
