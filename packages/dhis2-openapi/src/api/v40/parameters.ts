@@ -3,30 +3,118 @@
  *
  * @version 2.40
  */
-import type * as Schemas from './schemas';
+/**
+ * A UID for an CategoryCombo object
+ * (Java name `org.hisp.dhis.category.CategoryCombo`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example iZ9tI8jD7T4
+ */
+export type DataSetValueQueryParamsCc = string;
 
-export type DataSetValueQueryParamsCc = Schemas.UIDCategoryCombo;
+/**
+ * A UID for an CategoryOption object
+ * (Java name `org.hisp.dhis.category.CategoryOption`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example j0wu64kE8Vc
+ */
+export type DataSetValueQueryParamsCp = string;
 
-export type DataSetValueQueryParamsCp = Schemas.UIDCategoryOption;
+/**
+ * A UID for an DataElement object
+ * (Java name `org.hisp.dhis.dataelement.DataElement`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example hX7n8Y4pu89
+ */
+export type DataSetValueQueryParamsDs = string;
 
-export type DataSetValueQueryParamsDs = Schemas.UIDDataElement;
-
-export type DataSetValueQueryParamsOu = Schemas.UIDOrganisationUnit;
+/**
+ * A UID for an OrganisationUnit object
+ * (Java name `org.hisp.dhis.organisationunit.OrganisationUnit`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example xj2sS1ni0Q9
+ */
+export type DataSetValueQueryParamsOu = string;
 
 /**
  * @format period
  */
 export type DataSetValueQueryParamsPe = string;
 
-export type DataValueQueryParamsCc = Schemas.UIDCategoryCombo;
+/**
+ * A UID for an CategoryCombo object
+ * (Java name `org.hisp.dhis.category.CategoryCombo`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example iZ9tI8jD7T4
+ */
+export type DataValueQueryParamsCc = string;
 
-export type DataValueQueryParamsCo = Schemas.UIDCategoryOptionCombo;
+/**
+ * A UID for an CategoryOptionCombo object
+ * (Java name `org.hisp.dhis.category.CategoryOptionCombo`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example o5Bz19pJ30h
+ */
+export type DataValueQueryParamsCo = string;
 
-export type DataValueQueryParamsCp = Schemas.UIDCategoryOption;
+/**
+ * A UID for an CategoryOption object
+ * (Java name `org.hisp.dhis.category.CategoryOption`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example j0wu64kE8Vc
+ */
+export type DataValueQueryParamsCp = string;
 
-export type DataValueQueryParamsDe = Schemas.UIDDataElement;
+/**
+ * A UID for an DataElement object
+ * (Java name `org.hisp.dhis.dataelement.DataElement`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example hX7n8Y4pu89
+ */
+export type DataValueQueryParamsDe = string;
 
-export type DataValueQueryParamsOu = Schemas.UIDOrganisationUnit;
+/**
+ * A UID for an OrganisationUnit object
+ * (Java name `org.hisp.dhis.organisationunit.OrganisationUnit`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example xj2sS1ni0Q9
+ */
+export type DataValueQueryParamsOu = string;
 
 /**
  * @format period
@@ -56,6 +144,8 @@ export type GistParamsOrder = string;
  */
 export type GistParamsPage = number;
 
+export type GistParamsPageListName = string;
+
 /**
  * @format int32
  */
@@ -71,11 +161,23 @@ export type GistParamsTranslate = boolean;
 
 export type ImportOptionsAsync = boolean;
 
+export type ImportOptionsCategoryIdScheme = string;
+
+export type ImportOptionsCategoryOptionComboIdScheme = string;
+
+export type ImportOptionsCategoryOptionIdScheme = string;
+
+export type ImportOptionsDataElementIdScheme = string;
+
 export type ImportOptionsDataSet = string;
+
+export type ImportOptionsDataSetIdScheme = string;
 
 export type ImportOptionsDatasetAllowsPeriods = boolean;
 
 export type ImportOptionsDryRun = boolean;
+
+export type ImportOptionsEventIdScheme = string;
 
 export type ImportOptionsFilename = string;
 
@@ -83,7 +185,7 @@ export type ImportOptionsFirstRowIsHeader = boolean;
 
 export type ImportOptionsForce = boolean;
 
-export type ImportOptionsIdSchemes = Schemas.IdSchemes;
+export type ImportOptionsIdScheme = string;
 
 export type ImportOptionsIgnoreEmptyCollection = boolean;
 
@@ -104,7 +206,13 @@ export type ImportOptionsMergeMode = 'MERGE_ALWAYS' | 'MERGE_IF_NOT_NULL' | 'MER
 
 export type ImportOptionsNotificationLevel = 'OFF' | 'DEBUG' | 'LOOP' | 'INFO' | 'WARN' | 'ERROR';
 
+export type ImportOptionsOrgUnitIdScheme = string;
+
 export type ImportOptionsPreheatCache = boolean;
+
+export type ImportOptionsProgramIdScheme = string;
+
+export type ImportOptionsProgramStageIdScheme = string;
 
 export type ImportOptionsReportMode = 'FULL' | 'ERRORS' | 'ERRORS_NOT_OWNER' | 'DEBUG';
 
@@ -142,6 +250,10 @@ export type ImportOptionsStrictOrganisationUnits = boolean;
 
 export type ImportOptionsStrictPeriods = boolean;
 
+export type ImportOptionsTrackedEntityAttributeIdScheme = string;
+
+export type ImportOptionsTrackedEntityIdScheme = string;
+
 export type MetadataImportParamsAtomicMode = 'ALL' | 'NONE';
 
 export type MetadataImportParamsFlushMode = 'OBJECT' | 'AUTO';
@@ -177,11 +289,41 @@ export type MetadataImportParamsSkipValidation = boolean;
 
 export type MetadataImportParamsUserOverrideMode = 'NONE' | 'CURRENT' | 'SELECTED';
 
-export type MinMaxValueQueryParamsCo = Schemas.UIDCategoryOptionCombo;
+/**
+ * A UID for an CategoryOptionCombo object
+ * (Java name `org.hisp.dhis.category.CategoryOptionCombo`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example o5Bz19pJ30h
+ */
+export type MinMaxValueQueryParamsCo = string;
 
-export type MinMaxValueQueryParamsDe = Schemas.UIDDataElement;
+/**
+ * A UID for an DataElement object
+ * (Java name `org.hisp.dhis.dataelement.DataElement`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example hX7n8Y4pu89
+ */
+export type MinMaxValueQueryParamsDe = string;
 
-export type MinMaxValueQueryParamsOu = Schemas.UIDOrganisationUnit;
+/**
+ * A UID for an OrganisationUnit object
+ * (Java name `org.hisp.dhis.organisationunit.OrganisationUnit`)
+ *
+ * @format uid
+ * @pattern ^[0-9a-zA-Z]{11}$
+ * @minLength 11
+ * @maxLength 11
+ * @example xj2sS1ni0Q9
+ */
+export type MinMaxValueQueryParamsOu = string;
 
 export type OrderParamsOrders = string[];
 

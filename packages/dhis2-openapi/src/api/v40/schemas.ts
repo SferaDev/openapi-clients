@@ -5,17 +5,17 @@
  */
 export type Access = {
   data?: AccessData;
-  ['delete']: boolean;
-  externalize: boolean;
-  manage: boolean;
-  read: boolean;
-  update: boolean;
-  write: boolean;
+  ['delete']?: boolean;
+  externalize?: boolean;
+  manage?: boolean;
+  read?: boolean;
+  update?: boolean;
+  write?: boolean;
 };
 
 export type AccessData = {
-  read: boolean;
-  write: boolean;
+  read?: boolean;
+  write?: boolean;
 };
 
 export type AddOperation = {
@@ -32,10 +32,23 @@ export type AggregateDataExchange = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -43,20 +56,46 @@ export type AggregateDataExchange = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
-  source?: Source;
-  target?: Target;
+  source?: ExchangeSource;
+  target?: ExchangeTarget;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type AggregateDataExchangeJobParameters = {
-  dataExchangeIds?: string[];
+  dataExchangeIds?: Uid[];
 };
 
 export type AnalyticsJobParameters = {
@@ -64,8 +103,8 @@ export type AnalyticsJobParameters = {
    * @format int32
    */
   lastYears?: number;
-  skipPrograms?: string[];
-  skipResourceTables: boolean;
+  skipPrograms?: Uid[];
+  skipResourceTables?: boolean;
   skipTableTypes?: (
     | 'DATA_VALUE'
     | 'COMPLETENESS'
@@ -76,6 +115,105 @@ export type AnalyticsJobParameters = {
     | 'OWNERSHIP'
     | 'VALIDATION_RESULT'
   )[];
+};
+
+export type AnalyticsPeriodBoundary = {
+  access?: Access;
+  analyticsPeriodBoundaryType:
+    | 'BEFORE_START_OF_REPORTING_PERIOD'
+    | 'BEFORE_END_OF_REPORTING_PERIOD'
+    | 'AFTER_START_OF_REPORTING_PERIOD'
+    | 'AFTER_END_OF_REPORTING_PERIOD';
+  attributeValues?: AttributeValue[];
+  boundaryTarget?: string;
+  code?: string;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  displayName?: string;
+  externalAccess?: boolean;
+  favorite?: boolean;
+  favorites?: string[];
+  href?: string;
+  id?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  name?: string;
+  offsetPeriodType?:
+    | 'BiMonthly'
+    | 'BiWeekly'
+    | 'Daily'
+    | 'FinancialApril'
+    | 'FinancialJuly'
+    | 'FinancialNov'
+    | 'FinancialOct'
+    | 'Monthly'
+    | 'Quarterly'
+    | 'QuarterlyNov'
+    | 'SixMonthlyApril'
+    | 'SixMonthlyNov'
+    | 'SixMonthly'
+    | 'TwoYearly'
+    | 'Weekly'
+    | 'WeeklySaturday'
+    | 'WeeklySunday'
+    | 'WeeklyThursday'
+    | 'WeeklyWednesday'
+    | 'Yearly';
+  /**
+   * @format int32
+   */
+  offsetPeriods?: number;
+  publicAccess?: string;
+  sharing?: Sharing;
+  translations?: Translation[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type AnalyticsTableHook = {
@@ -95,10 +233,23 @@ export type AnalyticsTableHook = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -106,7 +257,20 @@ export type AnalyticsTableHook = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   phase: 'RESOURCE_TABLE_POPULATED' | 'ANALYTICS_TABLE_POPULATED';
   publicAccess?: string;
@@ -127,9 +291,22 @@ export type AnalyticsTableHook = {
   sharing?: Sharing;
   sql?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type Api = {
@@ -148,14 +325,27 @@ export type ApiToken = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
   /**
    * @format int64
    */
   expire?: number;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -163,15 +353,41 @@ export type ApiToken = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   type: 'PERSONAL_ACCESS_TOKEN';
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
   /**
    * @format int32
    */
@@ -205,8 +421,8 @@ export type App = {
   app_hub_id?: string;
   authorities?: string[];
   baseUrl?: string;
-  bundled: boolean;
-  core_app: boolean;
+  bundled?: boolean;
+  core_app?: boolean;
   default_locale?: string;
   description?: string;
   developer?: AppDeveloper;
@@ -269,14 +485,54 @@ export type AppVersion = {
 };
 
 export type ApprovalDto = {
-  aoc?: UIDCategoryOptionCombo;
-  ou?: UIDOrganisationUnit;
+  /**
+   * A UID for an CategoryOptionCombo object
+   * (Java name `org.hisp.dhis.category.CategoryOptionCombo`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example o5Bz19pJ30h
+   */
+  aoc?: string;
+  /**
+   * A UID for an OrganisationUnit object
+   * (Java name `org.hisp.dhis.organisationunit.OrganisationUnit`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example xj2sS1ni0Q9
+   */
+  ou?: string;
 };
 
 export type ApprovalStatusDto = {
-  aoc?: UIDCategoryOptionCombo;
+  /**
+   * A UID for an CategoryOptionCombo object
+   * (Java name `org.hisp.dhis.category.CategoryOptionCombo`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example o5Bz19pJ30h
+   */
+  aoc?: string;
   level?: string;
-  ou?: UIDOrganisationUnit;
+  /**
+   * A UID for an OrganisationUnit object
+   * (Java name `org.hisp.dhis.organisationunit.OrganisationUnit`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example xj2sS1ni0Q9
+   */
+  ou?: string;
   ouName?: string;
   /**
    * @format period
@@ -291,91 +547,153 @@ export type ApprovalStatusDto = {
     | 'APPROVED_ABOVE'
     | 'APPROVED_HERE'
     | 'ACCEPTED_HERE';
-  wf?: UIDDataApprovalWorkflow;
+  /**
+   * A UID for an DataApprovalWorkflow object
+   * (Java name `org.hisp.dhis.dataapproval.DataApprovalWorkflow`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example q6Cw2bo1N7Z
+   */
+  wf?: string;
 };
 
 export type ApprovalsDto = {
   approvals?: ApprovalDto[];
-  ds?: UIDDataSet[];
+  ds?: Uid[];
   pe?: string[];
-  wf?: UIDDataApprovalWorkflow[];
+  wf?: Uid[];
 };
 
 export type Attribute = {
   access?: Access;
   attributeValues?: AttributeValue[];
-  categoryAttribute: boolean;
-  categoryOptionAttribute: boolean;
-  categoryOptionComboAttribute: boolean;
-  categoryOptionGroupAttribute: boolean;
-  categoryOptionGroupSetAttribute: boolean;
+  categoryAttribute?: boolean;
+  categoryOptionAttribute?: boolean;
+  categoryOptionComboAttribute?: boolean;
+  categoryOptionGroupAttribute?: boolean;
+  categoryOptionGroupSetAttribute?: boolean;
   code?: string;
-  constantAttribute: boolean;
+  constantAttribute?: boolean;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dataElementAttribute: boolean;
-  dataElementGroupAttribute: boolean;
-  dataElementGroupSetAttribute: boolean;
-  dataSetAttribute: boolean;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  dataElementAttribute?: boolean;
+  dataElementGroupAttribute?: boolean;
+  dataElementGroupSetAttribute?: boolean;
+  dataSetAttribute?: boolean;
   description?: string;
   displayDescription?: string;
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  documentAttribute: boolean;
-  eventChartAttribute: boolean;
-  eventReportAttribute: boolean;
-  externalAccess: boolean;
-  favorite: boolean;
+  documentAttribute?: boolean;
+  eventChartAttribute?: boolean;
+  eventReportAttribute?: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
   id?: string;
-  indicatorAttribute: boolean;
-  indicatorGroupAttribute: boolean;
+  indicatorAttribute?: boolean;
+  indicatorGroupAttribute?: boolean;
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legendSetAttribute: boolean;
-  mandatory: boolean;
-  mapAttribute: boolean;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  legendSetAttribute?: boolean;
+  mandatory?: boolean;
+  mapAttribute?: boolean;
   name?: string;
   objectTypes?: string[];
-  optionAttribute: boolean;
-  optionSet?: RefOptionSet;
-  optionSetAttribute: boolean;
-  organisationUnitAttribute: boolean;
-  organisationUnitGroupAttribute: boolean;
-  organisationUnitGroupSetAttribute: boolean;
-  programAttribute: boolean;
-  programIndicatorAttribute: boolean;
-  programStageAttribute: boolean;
+  optionAttribute?: boolean;
+  /**
+   * A UID reference to a OptionSet
+   * (Java name `org.hisp.dhis.option.OptionSet`)
+   */
+  optionSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example qa5tM4Kf3j3
+     */
+    id: string;
+  };
+  optionSetAttribute?: boolean;
+  organisationUnitAttribute?: boolean;
+  organisationUnitGroupAttribute?: boolean;
+  organisationUnitGroupSetAttribute?: boolean;
+  programAttribute?: boolean;
+  programIndicatorAttribute?: boolean;
+  programStageAttribute?: boolean;
   publicAccess?: string;
-  relationshipTypeAttribute: boolean;
-  sectionAttribute: boolean;
+  relationshipTypeAttribute?: boolean;
+  sectionAttribute?: boolean;
   sharing?: Sharing;
   shortName?: string;
   /**
    * @format int32
    */
   sortOrder?: number;
-  sqlViewAttribute: boolean;
-  trackedEntityAttributeAttribute: boolean;
-  trackedEntityTypeAttribute: boolean;
+  sqlViewAttribute?: boolean;
+  trackedEntityAttributeAttribute?: boolean;
+  trackedEntityTypeAttribute?: boolean;
   translations?: Translation[];
-  unique: boolean;
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userAttribute: boolean;
-  userGroupAccesses?: UserGroupAccess[];
-  userGroupAttribute: boolean;
-  validationRuleAttribute: boolean;
-  validationRuleGroupAttribute: boolean;
+  unique?: boolean;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userAttribute?: boolean;
+  userGroupAccesses?: LegacyUserGroupAccess[];
+  userGroupAttribute?: boolean;
+  validationRuleAttribute?: boolean;
+  validationRuleGroupAttribute?: boolean;
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -405,11 +723,63 @@ export type Attribute = {
     | 'FILE_RESOURCE'
     | 'IMAGE'
     | 'GEOJSON';
-  visualizationAttribute: boolean;
+  visualizationAttribute?: boolean;
+};
+
+export type AttributeInfo = {
+  attribute?: string;
+  code?: string;
+  createdAt?: string | number;
+  displayName?: string;
+  storedBy?: string;
+  updatedAt?: string | number;
+  value?: string;
+  valueType:
+    | 'TEXT'
+    | 'LONG_TEXT'
+    | 'MULTI_TEXT'
+    | 'LETTER'
+    | 'PHONE_NUMBER'
+    | 'EMAIL'
+    | 'BOOLEAN'
+    | 'TRUE_ONLY'
+    | 'DATE'
+    | 'DATETIME'
+    | 'TIME'
+    | 'NUMBER'
+    | 'UNIT_INTERVAL'
+    | 'PERCENTAGE'
+    | 'INTEGER'
+    | 'INTEGER_POSITIVE'
+    | 'INTEGER_NEGATIVE'
+    | 'INTEGER_ZERO_OR_POSITIVE'
+    | 'TRACKER_ASSOCIATE'
+    | 'USERNAME'
+    | 'COORDINATE'
+    | 'ORGANISATION_UNIT'
+    | 'REFERENCE'
+    | 'AGE'
+    | 'URL'
+    | 'FILE_RESOURCE'
+    | 'IMAGE'
+    | 'GEOJSON';
 };
 
 export type AttributeValue = {
-  attribute?: RefAttribute;
+  /**
+   * A UID reference to a Attribute
+   * (Java name `org.hisp.dhis.attribute.Attribute`)
+   */
+  attribute?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example ce5CG4iu357
+     */
+    id: string;
+  };
   value?: string;
 };
 
@@ -428,7 +798,7 @@ export type AttributeValueFilter = {
 };
 
 export type AvailabilityStatus = {
-  available: boolean;
+  available?: boolean;
   message?: string;
   /**
    * @format int32
@@ -481,10 +851,23 @@ export type BaseIdentifiableObject = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -492,14 +875,40 @@ export type BaseIdentifiableObject = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type BatchResponseStatus = {
@@ -507,10 +916,10 @@ export type BatchResponseStatus = {
 };
 
 export type Body = {
-  enrollments?: WebapiControllerTrackerViewEnrollment[];
-  events?: WebapiControllerTrackerViewEvent[];
-  relationships?: WebapiControllerTrackerViewRelationship[];
-  trackedEntities?: WebapiControllerTrackerViewTrackedEntity[];
+  enrollments?: EnrollmentInfo[];
+  events?: EventInfo[];
+  relationships?: RelationshipInfo[];
+  trackedEntities?: TrackedEntityInfo[];
 };
 
 export type BulkJsonPatch = {
@@ -522,11 +931,11 @@ export type BulkJsonPatch = {
 
 export type BulkSmsGatewayConfig = {
   id?: string;
-  isDefault: boolean;
+  isDefault?: boolean;
   maxSmsLength?: string;
   name?: string;
   password?: string;
-  sendUrlParameters: boolean;
+  sendUrlParameters?: boolean;
   uid?: string;
   urlTemplate?: string;
   username?: string;
@@ -567,17 +976,48 @@ export type Category = {
     | 'NONE'
     | 'CUSTOM'
     | 'DEFAULT';
-  allItems: boolean;
+  allItems?: boolean;
   attributeValues?: AttributeValue[];
-  categoryCombos?: RefCategoryCombo[];
-  categoryOptions?: RefCategoryOption[];
+  categoryCombos?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example iZ9tI8jD7T4
+     */
+    id: string;
+  }[];
+  categoryOptions?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example j0wu64kE8Vc
+     */
+    id: string;
+  }[];
   code?: string;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dataDimension: boolean;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  dataDimension?: boolean;
   dataDimensionType: 'DISAGGREGATION' | 'ATTRIBUTE';
   description?: string;
   dimension?: string;
@@ -586,31 +1026,105 @@ export type Category = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   filter?: string;
   formName?: string;
   href?: string;
   id?: string;
-  items?: RefDimensionalItemObject[];
+  items?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example rf7BX6iB5Nb
+     */
+    id: string;
+  }[];
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legendSet?: RefLegendSet;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
   name?: string;
-  optionSet?: RefOptionSet;
-  programStage?: RefProgramStage;
+  /**
+   * A UID reference to a OptionSet
+   * (Java name `org.hisp.dhis.option.OptionSet`)
+   */
+  optionSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example qa5tM4Kf3j3
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a ProgramStage
+   * (Java name `org.hisp.dhis.program.ProgramStage`)
+   */
+  programStage?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example uf8uS7d0KE2
+     */
+    id: string;
+  };
   publicAccess?: string;
   repetition?: EventRepetition;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -645,40 +1159,119 @@ export type Category = {
 export type CategoryCombo = {
   access?: Access;
   attributeValues?: AttributeValue[];
-  categories?: RefCategory[];
-  categoryOptionCombos?: RefCategoryOptionCombo[];
+  categories?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example dU4oD3ey2A6
+     */
+    id: string;
+  }[];
+  categoryOptionCombos?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example o5Bz19pJ30h
+     */
+    id: string;
+  }[];
   code?: string;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   dataDimensionType: 'DISAGGREGATION' | 'ATTRIBUTE';
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
-  isDefault: boolean;
+  isDefault?: boolean;
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
-  skipTotal: boolean;
+  skipTotal?: boolean;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type CategoryDimension = {
-  category?: RefCategory;
-  categoryOptions?: RefCategoryOption[];
+  /**
+   * A UID reference to a Category
+   * (Java name `org.hisp.dhis.category.Category`)
+   */
+  category?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example dU4oD3ey2A6
+     */
+    id: string;
+  };
+  categoryOptions?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example j0wu64kE8Vc
+     */
+    id: string;
+  }[];
 };
 
 export type CategoryOption = {
@@ -706,15 +1299,55 @@ export type CategoryOption = {
     | 'CUSTOM'
     | 'DEFAULT';
   attributeValues?: AttributeValue[];
-  categories?: RefCategory[];
-  categoryOptionCombos?: RefCategoryOptionCombo[];
-  categoryOptionGroups?: RefCategoryOptionGroup[];
+  categories?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example dU4oD3ey2A6
+     */
+    id: string;
+  }[];
+  categoryOptionCombos?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example o5Bz19pJ30h
+     */
+    id: string;
+  }[];
+  categoryOptionGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example o5Bz19pJ30h
+     */
+    id: string;
+  }[];
   code?: string;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   dimensionItem?: string;
   displayDescription?: string;
@@ -725,22 +1358,66 @@ export type CategoryOption = {
    * @format date-time
    */
   endDate?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
   id?: string;
-  isDefault: boolean;
+  isDefault?: boolean;
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legendSet?: RefLegendSet;
-  legendSets?: RefLegendSet[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  legendSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  }[];
   name?: string;
-  organisationUnits?: RefOrganisationUnit[];
+  organisationUnits?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  }[];
   publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
@@ -751,9 +1428,22 @@ export type CategoryOption = {
   startDate?: string;
   style?: ObjectStyle;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type CategoryOptionCombo = {
@@ -781,14 +1471,49 @@ export type CategoryOptionCombo = {
     | 'CUSTOM'
     | 'DEFAULT';
   attributeValues?: AttributeValue[];
-  categoryCombo?: RefCategoryCombo;
-  categoryOptions?: RefCategoryOption[];
+  /**
+   * A UID reference to a CategoryCombo
+   * (Java name `org.hisp.dhis.category.CategoryCombo`)
+   */
+  categoryCombo?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example iZ9tI8jD7T4
+     */
+    id: string;
+  };
+  categoryOptions?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example j0wu64kE8Vc
+     */
+    id: string;
+  }[];
   code?: string;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   dimensionItem?: string;
   dimensionItemType:
@@ -811,27 +1536,75 @@ export type CategoryOptionCombo = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
   id?: string;
-  ignoreApproval: boolean;
+  ignoreApproval?: boolean;
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legendSet?: RefLegendSet;
-  legendSets?: RefLegendSet[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  legendSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  }[];
   publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type CategoryOptionGroup = {
@@ -859,13 +1632,35 @@ export type CategoryOptionGroup = {
     | 'CUSTOM'
     | 'DEFAULT';
   attributeValues?: AttributeValue[];
-  categoryOptions?: RefCategoryOption[];
+  categoryOptions?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example j0wu64kE8Vc
+     */
+    id: string;
+  }[];
   code?: string;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   dataDimensionType: 'DISAGGREGATION' | 'ATTRIBUTE';
   description?: string;
   dimensionItem?: string;
@@ -873,29 +1668,86 @@ export type CategoryOptionGroup = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
-  groupSets?: RefCategoryOptionGroupSet[];
+  groupSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r8EC4cs3j3k
+     */
+    id: string;
+  }[];
   href?: string;
   id?: string;
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legendSet?: RefLegendSet;
-  legendSets?: RefLegendSet[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  legendSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  }[];
   name?: string;
   publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type CategoryOptionGroupSet = {
@@ -922,16 +1774,38 @@ export type CategoryOptionGroupSet = {
     | 'NONE'
     | 'CUSTOM'
     | 'DEFAULT';
-  allItems: boolean;
+  allItems?: boolean;
   attributeValues?: AttributeValue[];
-  categoryOptionGroups?: RefCategoryOptionGroup[];
+  categoryOptionGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example o5Bz19pJ30h
+     */
+    id: string;
+  }[];
   code?: string;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dataDimension: boolean;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  dataDimension?: boolean;
   dataDimensionType: 'DISAGGREGATION' | 'ATTRIBUTE';
   description?: string;
   dimension?: string;
@@ -940,31 +1814,105 @@ export type CategoryOptionGroupSet = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   filter?: string;
   formName?: string;
   href?: string;
   id?: string;
-  items?: RefDimensionalItemObject[];
+  items?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example rf7BX6iB5Nb
+     */
+    id: string;
+  }[];
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legendSet?: RefLegendSet;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
   name?: string;
-  optionSet?: RefOptionSet;
-  programStage?: RefProgramStage;
+  /**
+   * A UID reference to a OptionSet
+   * (Java name `org.hisp.dhis.option.OptionSet`)
+   */
+  optionSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example qa5tM4Kf3j3
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a ProgramStage
+   * (Java name `org.hisp.dhis.program.ProgramStage`)
+   */
+  programStage?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example uf8uS7d0KE2
+     */
+    id: string;
+  };
   publicAccess?: string;
   repetition?: EventRepetition;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -997,18 +1945,40 @@ export type CategoryOptionGroupSet = {
 };
 
 export type CategoryOptionGroupSetDimension = {
-  categoryOptionGroupSet?: RefCategoryOptionGroupSet;
-  categoryOptionGroups?: RefCategoryOptionGroup[];
+  /**
+   * A UID reference to a CategoryOptionGroupSet
+   * (Java name `org.hisp.dhis.category.CategoryOptionGroupSet`)
+   */
+  categoryOptionGroupSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r8EC4cs3j3k
+     */
+    id: string;
+  };
+  categoryOptionGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example o5Bz19pJ30h
+     */
+    id: string;
+  }[];
 };
 
 export type ClickatellGatewayConfig = {
   authToken?: string;
   id?: string;
-  isDefault: boolean;
+  isDefault?: boolean;
   maxSmsLength?: string;
   name?: string;
   password?: string;
-  sendUrlParameters: boolean;
+  sendUrlParameters?: boolean;
   uid?: string;
   urlTemplate?: string;
   username?: string;
@@ -1030,7 +2000,7 @@ export type Column = {
 };
 
 export type CompleteStatusDto = {
-  complete: boolean;
+  complete?: boolean;
   /**
    * @format date-time
    */
@@ -1052,11 +2022,76 @@ export type Config = {
 
 export type Configuration = {
   corsWhitelist?: string[];
-  facilityOrgUnitGroupSet?: RefOrganisationUnitGroupSet;
-  facilityOrgUnitLevel?: RefOrganisationUnitLevel;
-  feedbackRecipients?: RefUserGroup;
-  infrastructuralDataElements?: RefDataElementGroup;
-  infrastructuralIndicators?: RefIndicatorGroup;
+  /**
+   * A UID reference to a OrganisationUnitGroupSet
+   * (Java name `org.hisp.dhis.organisationunit.OrganisationUnitGroupSet`)
+   */
+  facilityOrgUnitGroupSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Fr0A08vq8Yh
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a OrganisationUnitLevel
+   * (Java name `org.hisp.dhis.organisationunit.OrganisationUnitLevel`)
+   */
+  facilityOrgUnitLevel?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Co7xX6sn5Ve
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a UserGroup
+   * (Java name `org.hisp.dhis.user.UserGroup`)
+   */
+  feedbackRecipients?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example wd5C82cv3p6
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a DataElementGroup
+   * (Java name `org.hisp.dhis.dataelement.DataElementGroup`)
+   */
+  infrastructuralDataElements?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example m2ys839uz3e
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a IndicatorGroup
+   * (Java name `org.hisp.dhis.indicator.IndicatorGroup`)
+   */
+  infrastructuralIndicators?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pd0yF9mu8ga
+     */
+    id: string;
+  };
   infrastructuralPeriodType?:
     | 'BiMonthly'
     | 'BiWeekly'
@@ -1067,6 +2102,7 @@ export type Configuration = {
     | 'FinancialOct'
     | 'Monthly'
     | 'Quarterly'
+    | 'QuarterlyNov'
     | 'SixMonthlyApril'
     | 'SixMonthlyNov'
     | 'SixMonthly'
@@ -1077,11 +2113,63 @@ export type Configuration = {
     | 'WeeklyThursday'
     | 'WeeklyWednesday'
     | 'Yearly';
-  offlineOrganisationUnitLevel?: RefOrganisationUnitLevel;
-  selfRegistrationOrgUnit?: RefOrganisationUnit;
-  selfRegistrationRole?: RefUserRole;
+  /**
+   * A UID reference to a OrganisationUnitLevel
+   * (Java name `org.hisp.dhis.organisationunit.OrganisationUnitLevel`)
+   */
+  offlineOrganisationUnitLevel?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Co7xX6sn5Ve
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a OrganisationUnit
+   * (Java name `org.hisp.dhis.organisationunit.OrganisationUnit`)
+   */
+  selfRegistrationOrgUnit?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a UserRole
+   * (Java name `org.hisp.dhis.user.UserRole`)
+   */
+  selfRegistrationRole?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example vc4Bi38eb5R
+     */
+    id: string;
+  };
   systemId?: string;
-  systemUpdateNotificationRecipients?: RefUserGroup;
+  /**
+   * A UID reference to a UserGroup
+   * (Java name `org.hisp.dhis.user.UserGroup`)
+   */
+  systemUpdateNotificationRecipients?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example wd5C82cv3p6
+     */
+    id: string;
+  };
 };
 
 export type ConsoleTarget = {
@@ -1097,14 +2185,27 @@ export type Constant = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   displayDescription?: string;
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
@@ -1113,15 +2214,41 @@ export type Constant = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
   /**
    * @format double
    */
@@ -1169,15 +2296,28 @@ export type Dashboard = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dashboardItems?: RefDashboardItem[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  dashboardItems?: DashboardItem[];
   description?: string;
   displayDescription?: string;
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
@@ -1191,17 +2331,54 @@ export type Dashboard = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   layout?: Layout;
   name?: string;
   publicAccess?: string;
-  restrictFilters: boolean;
+  restrictFilters?: boolean;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+};
+
+export type DashboardInfo = {
+  /**
+   * @format int64
+   */
+  unreadInterpretations: number;
+  /**
+   * @format int64
+   */
+  unreadMessageConversations: number;
 };
 
 export type DashboardItem = {
@@ -1217,13 +2394,65 @@ export type DashboardItem = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
-  eventChart?: RefEventChart;
-  eventReport?: RefEventReport;
-  eventVisualization?: RefEventVisualization;
-  externalAccess: boolean;
-  favorite: boolean;
+  /**
+   * A UID reference to a EventChart
+   * (Java name `org.hisp.dhis.eventchart.EventChart`)
+   */
+  eventChart?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example hh6zS56cG7n
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a EventReport
+   * (Java name `org.hisp.dhis.eventreport.EventReport`)
+   */
+  eventReport?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example ii7AT64sE89
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a EventVisualization
+   * (Java name `org.hisp.dhis.eventvisualization.EventVisualization`)
+   */
+  eventVisualization?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pp4H0Jf9RK8
+     */
+    id: string;
+  };
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   /**
    * @format int32
@@ -1243,13 +2472,57 @@ export type DashboardItem = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  map?: RefMap;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a Map
+   * (Java name `org.hisp.dhis.mapping.Map`)
+   */
+  map?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example iP9Vs8y5xb3
+     */
+    id: string;
+  };
   messages?: boolean;
   name?: string;
   publicAccess?: string;
-  reports?: RefReport[];
-  resources?: RefDocument[];
+  reports?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example qW2wM1Gc0M2
+     */
+    id: string;
+  }[];
+  resources?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example e89EJ3at2OP
+     */
+    id: string;
+  }[];
   shape: 'NORMAL' | 'DOUBLE_WIDTH' | 'FULL_WIDTH';
   sharing?: Sharing;
   text?: string;
@@ -1266,11 +2539,46 @@ export type DashboardItem = {
     | 'TEXT'
     | 'MESSAGES'
     | 'APP';
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
-  users?: RefUser[];
-  visualization?: RefVisualization;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+  users?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  }[];
+  /**
+   * A UID reference to a Visualization
+   * (Java name `org.hisp.dhis.visualization.Visualization`)
+   */
+  visualization?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example B7uJ50aE7Y0
+     */
+    id: string;
+  };
   /**
    * @format int32
    */
@@ -1295,32 +2603,86 @@ export type DashboardSearchResult = {
    * @format int32
    */
   eventChartCount: number;
-  eventCharts?: RefEventVisualization[];
+  eventCharts?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pp4H0Jf9RK8
+     */
+    id: string;
+  }[];
   /**
    * @format int32
    */
   eventReportCount: number;
-  eventReports?: RefEventVisualization[];
+  eventReports?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pp4H0Jf9RK8
+     */
+    id: string;
+  }[];
   /**
    * @format int32
    */
   eventVisualizationCount: number;
-  eventVisualizations?: RefSimpleEventVisualizationView[];
+  eventVisualizations?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Nm4T28PP27q
+     */
+    id: string;
+  }[];
   /**
    * @format int32
    */
   mapCount: number;
-  maps?: RefMap[];
+  maps?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example iP9Vs8y5xb3
+     */
+    id: string;
+  }[];
   /**
    * @format int32
    */
   reportCount: number;
-  reports?: RefReport[];
+  reports?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example qW2wM1Gc0M2
+     */
+    id: string;
+  }[];
   /**
    * @format int32
    */
   resourceCount: number;
-  resources?: RefDocument[];
+  resources?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example e89EJ3at2OP
+     */
+    id: string;
+  }[];
   /**
    * @format int32
    */
@@ -1329,12 +2691,30 @@ export type DashboardSearchResult = {
    * @format int32
    */
   userCount: number;
-  users?: RefUser[];
+  users?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  }[];
   /**
    * @format int32
    */
   visualizationCount: number;
-  visualizations?: RefSimpleVisualizationView[];
+  visualizations?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Ih9OX81xU02
+     */
+    id: string;
+  }[];
 };
 
 export type DashboardWidgetAppSettings = {
@@ -1355,16 +2735,42 @@ export type DataAnalysisParams = {
 export type DataApprovalLevel = {
   access?: Access;
   attributeValues?: AttributeValue[];
-  categoryOptionGroupSet?: RefCategoryOptionGroupSet;
+  /**
+   * A UID reference to a CategoryOptionGroupSet
+   * (Java name `org.hisp.dhis.category.CategoryOptionGroupSet`)
+   */
+  categoryOptionGroupSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r8EC4cs3j3k
+     */
+    id: string;
+  };
   code?: string;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -1372,7 +2778,20 @@ export type DataApprovalLevel = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   /**
    * @format int32
    */
@@ -1386,9 +2805,22 @@ export type DataApprovalLevel = {
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type DataApprovalPermissions = {
@@ -1402,29 +2834,73 @@ export type DataApprovalPermissions = {
    */
   approvedAt?: string;
   approvedBy?: string;
-  mayAccept: boolean;
-  mayApprove: boolean;
-  mayReadData: boolean;
-  mayUnaccept: boolean;
-  mayUnapprove: boolean;
+  mayAccept?: boolean;
+  mayApprove?: boolean;
+  mayReadData?: boolean;
+  mayUnaccept?: boolean;
+  mayUnapprove?: boolean;
   state?: string;
 };
 
 export type DataApprovalWorkflow = {
   access?: Access;
   attributeValues?: AttributeValue[];
-  categoryCombo?: RefCategoryCombo;
+  /**
+   * A UID reference to a CategoryCombo
+   * (Java name `org.hisp.dhis.category.CategoryCombo`)
+   */
+  categoryCombo?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example iZ9tI8jD7T4
+     */
+    id: string;
+  };
   code?: string;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dataApprovalLevels?: RefDataApprovalLevel[];
-  dataSets?: RefDataSet[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  dataApprovalLevels?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example n3zt98lA14W
+     */
+    id: string;
+  }[];
+  dataSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example dT3ji2fG1SM
+     */
+    id: string;
+  }[];
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -1432,7 +2908,20 @@ export type DataApprovalWorkflow = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   periodType?:
     | 'BiMonthly'
@@ -1444,6 +2933,7 @@ export type DataApprovalWorkflow = {
     | 'FinancialOct'
     | 'Monthly'
     | 'Quarterly'
+    | 'QuarterlyNov'
     | 'SixMonthlyApril'
     | 'SixMonthlyNov'
     | 'SixMonthly'
@@ -1457,9 +2947,22 @@ export type DataApprovalWorkflow = {
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type DataDimensionItem = {
@@ -1473,14 +2976,66 @@ export type DataDimensionItem = {
     | 'PROGRAM_ATTRIBUTE'
     | 'EXPRESSION_DIMENSION_ITEM'
     | 'VALIDATION_RULE';
-  dataElement?: RefDataElement;
-  dataElementOperand?: RefDataElementOperand;
-  expressionDimensionItem?: RefExpressionDimensionItem;
-  indicator?: RefIndicator;
-  programAttribute?: RefProgramTrackedEntityAttributeDimensionItem;
-  programDataElement?: RefProgramDataElementDimensionItem;
-  programIndicator?: RefProgramIndicator;
-  reportingRate?: RefReportingRate;
+  /**
+   * A UID reference to a DataElement
+   * (Java name `org.hisp.dhis.dataelement.DataElement`)
+   */
+  dataElement?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example hX7n8Y4pu89
+     */
+    id: string;
+  };
+  dataElementOperand?: DataElementOperand;
+  /**
+   * A UID reference to a ExpressionDimensionItem
+   * (Java name `org.hisp.dhis.expressiondimensionitem.ExpressionDimensionItem`)
+   */
+  expressionDimensionItem?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example uw9QQ8ux72z
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a Indicator
+   * (Java name `org.hisp.dhis.indicator.Indicator`)
+   */
+  indicator?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example k8bt1Lh0Fd9
+     */
+    id: string;
+  };
+  programAttribute?: ProgramTrackedEntityAttributeDimensionItem;
+  programDataElement?: ProgramDataElementDimensionItem;
+  /**
+   * A UID reference to a ProgramIndicator
+   * (Java name `org.hisp.dhis.program.ProgramIndicator`)
+   */
+  programIndicator?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example yj2yW1hU0L3
+     */
+    id: string;
+  };
+  reportingRate?: ReportingRate;
 };
 
 export type DataElement = {
@@ -1509,15 +3064,63 @@ export type DataElement = {
     | 'CUSTOM'
     | 'DEFAULT';
   attributeValues?: AttributeValue[];
-  categoryCombo?: RefCategoryCombo;
+  /**
+   * A UID reference to a CategoryCombo
+   * (Java name `org.hisp.dhis.category.CategoryCombo`)
+   */
+  categoryCombo?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example iZ9tI8jD7T4
+     */
+    id: string;
+  };
   code?: string;
-  commentOptionSet?: RefOptionSet;
+  /**
+   * A UID reference to a OptionSet
+   * (Java name `org.hisp.dhis.option.OptionSet`)
+   */
+  commentOptionSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example qa5tM4Kf3j3
+     */
+    id: string;
+  };
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dataElementGroups?: RefDataElementGroup[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  dataElementGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example m2ys839uz3e
+     */
+    id: string;
+  }[];
   dataSetElements?: DataSetElement[];
   description?: string;
   dimensionItem?: string;
@@ -1526,8 +3129,8 @@ export type DataElement = {
   displayName?: string;
   displayShortName?: string;
   domainType: 'AGGREGATE' | 'TRACKER';
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   fieldMask?: string;
   formName?: string;
@@ -1537,12 +3140,60 @@ export type DataElement = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legendSet?: RefLegendSet;
-  legendSets?: RefLegendSet[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  legendSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  }[];
   name?: string;
-  optionSet?: RefOptionSet;
-  optionSetValue: boolean;
+  /**
+   * A UID reference to a OptionSet
+   * (Java name `org.hisp.dhis.option.OptionSet`)
+   */
+  optionSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example qa5tM4Kf3j3
+     */
+    id: string;
+  };
+  optionSetValue?: boolean;
   publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
@@ -1550,9 +3201,22 @@ export type DataElement = {
   style?: ObjectStyle;
   translations?: Translation[];
   url?: string;
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -1583,7 +3247,7 @@ export type DataElement = {
     | 'IMAGE'
     | 'GEOJSON';
   valueTypeOptions?: FileTypeValueOptions;
-  zeroIsSignificant: boolean;
+  zeroIsSignificant?: boolean;
 };
 
 export type DataElementGroup = {
@@ -1594,37 +3258,116 @@ export type DataElementGroup = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dataElements?: RefDataElement[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  dataElements?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example hX7n8Y4pu89
+     */
+    id: string;
+  }[];
   description?: string;
   dimensionItem?: string;
   displayDescription?: string;
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
-  groupSets?: RefDataElementGroupSet[];
+  groupSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example p5Bv16cx3Yh
+     */
+    id: string;
+  }[];
   href?: string;
   id?: string;
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legendSet?: RefLegendSet;
-  legendSets?: RefLegendSet[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  legendSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  }[];
   name?: string;
   publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type DataElementGroupSet = {
@@ -1651,7 +3394,7 @@ export type DataElementGroupSet = {
     | 'NONE'
     | 'CUSTOM'
     | 'DEFAULT';
-  allItems: boolean;
+  allItems?: boolean;
   attributeValues?: AttributeValue[];
   code?: string;
   compulsory?: boolean;
@@ -1659,10 +3402,32 @@ export type DataElementGroupSet = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dataDimension: boolean;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  dataDimension?: boolean;
   dataDimensionType: 'DISAGGREGATION' | 'ATTRIBUTE';
-  dataElementGroups?: RefDataElementGroup[];
+  dataElementGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example m2ys839uz3e
+     */
+    id: string;
+  }[];
   description?: string;
   dimension?: string;
   dimensionItemKeywords?: DimensionItemKeywords;
@@ -1670,31 +3435,105 @@ export type DataElementGroupSet = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   filter?: string;
   formName?: string;
   href?: string;
   id?: string;
-  items?: RefDimensionalItemObject[];
+  items?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example rf7BX6iB5Nb
+     */
+    id: string;
+  }[];
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legendSet?: RefLegendSet;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
   name?: string;
-  optionSet?: RefOptionSet;
-  programStage?: RefProgramStage;
+  /**
+   * A UID reference to a OptionSet
+   * (Java name `org.hisp.dhis.option.OptionSet`)
+   */
+  optionSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example qa5tM4Kf3j3
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a ProgramStage
+   * (Java name `org.hisp.dhis.program.ProgramStage`)
+   */
+  programStage?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example uf8uS7d0KE2
+     */
+    id: string;
+  };
   publicAccess?: string;
   repetition?: EventRepetition;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -1727,8 +3566,166 @@ export type DataElementGroupSet = {
 };
 
 export type DataElementGroupSetDimension = {
-  dataElementGroupSet?: RefDataElementGroupSet;
-  dataElementGroups?: RefDataElementGroup[];
+  /**
+   * A UID reference to a DataElementGroupSet
+   * (Java name `org.hisp.dhis.dataelement.DataElementGroupSet`)
+   */
+  dataElementGroupSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example p5Bv16cx3Yh
+     */
+    id: string;
+  };
+  dataElementGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example m2ys839uz3e
+     */
+    id: string;
+  }[];
+};
+
+export type DataElementOperand = {
+  access?: Access;
+  /**
+   * A UID reference to a CategoryOptionCombo
+   * (Java name `org.hisp.dhis.category.CategoryOptionCombo`)
+   */
+  attributeOptionCombo?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example o5Bz19pJ30h
+     */
+    id: string;
+  };
+  attributeValues?: AttributeValue[];
+  /**
+   * A UID reference to a CategoryOptionCombo
+   * (Java name `org.hisp.dhis.category.CategoryOptionCombo`)
+   */
+  categoryOptionCombo?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example o5Bz19pJ30h
+     */
+    id: string;
+  };
+  code?: string;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a DataElement
+   * (Java name `org.hisp.dhis.dataelement.DataElement`)
+   */
+  dataElement?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example hX7n8Y4pu89
+     */
+    id: string;
+  };
+  description?: string;
+  displayDescription?: string;
+  displayFormName?: string;
+  externalAccess?: boolean;
+  favorite?: boolean;
+  favorites?: string[];
+  formName?: string;
+  href?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  legendSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  }[];
+  publicAccess?: string;
+  queryMods?: QueryModifiers;
+  sharing?: Sharing;
+  translations?: Translation[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type DataEntryForm = {
@@ -1739,10 +3736,23 @@ export type DataEntryForm = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   /**
    * @format int32
@@ -1755,15 +3765,41 @@ export type DataEntryForm = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
   style: 'COMFORTABLE' | 'NORMAL' | 'COMPACT' | 'NONE';
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type DataInputPeriod = {
@@ -1786,7 +3822,7 @@ export type DataIntegrityCheck = {
   description?: string;
   displayName?: string;
   introduction?: string;
-  isSlow: boolean;
+  isSlow?: boolean;
   issuesIdType?: string;
   name?: string;
   recommendation?: string;
@@ -1864,17 +3900,56 @@ export type DataSet = {
     | 'CUSTOM'
     | 'DEFAULT';
   attributeValues?: AttributeValue[];
-  categoryCombo?: RefCategoryCombo;
+  /**
+   * A UID reference to a CategoryCombo
+   * (Java name `org.hisp.dhis.category.CategoryCombo`)
+   */
+  categoryCombo?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example iZ9tI8jD7T4
+     */
+    id: string;
+  };
   code?: string;
-  compulsoryDataElementOperands?: RefDataElementOperand[];
-  compulsoryFieldsCompleteOnly: boolean;
+  compulsoryDataElementOperands?: DataElementOperand[];
+  compulsoryFieldsCompleteOnly?: boolean;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dataElementDecoration: boolean;
-  dataEntryForm?: RefDataEntryForm;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  dataElementDecoration?: boolean;
+  /**
+   * A UID reference to a DataEntryForm
+   * (Java name `org.hisp.dhis.dataentryform.DataEntryForm`)
+   */
+  dataEntryForm?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example jZ9pa8lw7e6
+     */
+    id: string;
+  };
   dataInputPeriods?: DataInputPeriod[];
   dataSetElements?: DataSetElement[];
   description?: string;
@@ -1887,28 +3962,94 @@ export type DataSet = {
    * @format int32
    */
   expiryDays: number;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
-  fieldCombinationRequired: boolean;
+  fieldCombinationRequired?: boolean;
   formName?: string;
   formType: 'DEFAULT' | 'CUSTOM' | 'SECTION' | 'SECTION_MULTIORG';
   href?: string;
   id?: string;
-  indicators?: RefIndicator[];
-  interpretations?: RefInterpretation[];
+  indicators?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example k8bt1Lh0Fd9
+     */
+    id: string;
+  }[];
+  interpretations?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pd0uU9kk8Gc
+     */
+    id: string;
+  }[];
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legendSet?: RefLegendSet;
-  legendSets?: RefLegendSet[];
-  mobile: boolean;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  legendSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  }[];
+  mobile?: boolean;
   name?: string;
-  noValueRequiresComment: boolean;
-  notificationRecipients?: RefUserGroup;
-  notifyCompletingUser: boolean;
+  noValueRequiresComment?: boolean;
+  /**
+   * A UID reference to a UserGroup
+   * (Java name `org.hisp.dhis.user.UserGroup`)
+   */
+  notificationRecipients?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example wd5C82cv3p6
+     */
+    id: string;
+  };
+  notifyCompletingUser?: boolean;
   /**
    * @format int32
    */
@@ -1917,7 +4058,16 @@ export type DataSet = {
    * @format int32
    */
   openPeriodsAfterCoEndDate: number;
-  organisationUnits?: RefOrganisationUnit[];
+  organisationUnits?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  }[];
   periodType?:
     | 'BiMonthly'
     | 'BiWeekly'
@@ -1928,6 +4078,7 @@ export type DataSet = {
     | 'FinancialOct'
     | 'Monthly'
     | 'Quarterly'
+    | 'QuarterlyNov'
     | 'SixMonthlyApril'
     | 'SixMonthlyNov'
     | 'SixMonthly'
@@ -1940,27 +4091,62 @@ export type DataSet = {
     | 'Yearly';
   publicAccess?: string;
   queryMods?: QueryModifiers;
-  renderAsTabs: boolean;
-  renderHorizontally: boolean;
-  sections?: RefSection[];
+  renderAsTabs?: boolean;
+  renderHorizontally?: boolean;
+  sections?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example sX3CE29Vq45
+     */
+    id: string;
+  }[];
   sharing?: Sharing;
   shortName?: string;
-  skipOffline: boolean;
+  skipOffline?: boolean;
   style?: ObjectStyle;
   /**
    * @format int32
    */
   timelyDays: number;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
-  validCompleteOnly: boolean;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+  validCompleteOnly?: boolean;
   /**
    * @format int32
    */
   version: number;
-  workflow?: RefDataApprovalWorkflow;
+  /**
+   * A UID reference to a DataApprovalWorkflow
+   * (Java name `org.hisp.dhis.dataapproval.DataApprovalWorkflow`)
+   */
+  workflow?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example q6Cw2bo1N7Z
+     */
+    id: string;
+  };
 };
 
 export type DataSetCompletionDto = {
@@ -1972,9 +4158,48 @@ export type DataSetCompletionDto = {
 };
 
 export type DataSetElement = {
-  categoryCombo?: RefCategoryCombo;
-  dataElement?: RefDataElement;
-  dataSet?: RefDataSet;
+  /**
+   * A UID reference to a CategoryCombo
+   * (Java name `org.hisp.dhis.category.CategoryCombo`)
+   */
+  categoryCombo?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example iZ9tI8jD7T4
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a DataElement
+   * (Java name `org.hisp.dhis.dataelement.DataElement`)
+   */
+  dataElement?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example hX7n8Y4pu89
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a DataSet
+   * (Java name `org.hisp.dhis.dataset.DataSet`)
+   */
+  dataSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example dT3ji2fG1SM
+     */
+    id: string;
+  };
 };
 
 export type DataSetNotificationTemplate = {
@@ -1985,15 +4210,37 @@ export type DataSetNotificationTemplate = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   dataSetNotificationTrigger: 'DATA_SET_COMPLETION' | 'SCHEDULED_DAYS';
-  dataSets?: RefDataSet[];
+  dataSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example dT3ji2fG1SM
+     */
+    id: string;
+  }[];
   deliveryChannels?: ('SMS' | 'EMAIL' | 'HTTP')[];
   displayMessageTemplate?: string;
   displayName?: string;
   displaySubjectTemplate?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -2001,14 +4248,40 @@ export type DataSetNotificationTemplate = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   messageTemplate?: string;
   name?: string;
   notificationRecipient: 'ORGANISATION_UNIT_CONTACT' | 'USER_GROUP';
   notifyParentOrganisationUnitOnly?: boolean;
   notifyUsersInHierarchyOnly?: boolean;
   publicAccess?: string;
-  recipientUserGroup?: RefUserGroup;
+  /**
+   * A UID reference to a UserGroup
+   * (Java name `org.hisp.dhis.user.UserGroup`)
+   */
+  recipientUserGroup?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example wd5C82cv3p6
+     */
+    id: string;
+  };
   /**
    * @format int32
    */
@@ -2017,9 +4290,22 @@ export type DataSetNotificationTemplate = {
   sharing?: Sharing;
   subjectTemplate?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type DataSummary = {
@@ -2064,7 +4350,7 @@ export type DataValue = {
   created?: string;
   dataElement?: string;
   deleted?: boolean;
-  followup: boolean;
+  followup?: boolean;
   lastUpdated?: string;
   orgUnit?: string;
   period?: string;
@@ -2073,16 +4359,56 @@ export type DataValue = {
 };
 
 export type DataValueAuditDto = {
-  attributeOptionCombo?: UIDCategoryOptionCombo;
+  /**
+   * A UID for an CategoryOptionCombo object
+   * (Java name `org.hisp.dhis.category.CategoryOptionCombo`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example o5Bz19pJ30h
+   */
+  attributeOptionCombo?: string;
   auditType: 'CREATE' | 'UPDATE' | 'DELETE' | 'READ' | 'SEARCH';
-  categoryOptionCombo?: UIDCategoryOptionCombo;
+  /**
+   * A UID for an CategoryOptionCombo object
+   * (Java name `org.hisp.dhis.category.CategoryOptionCombo`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example o5Bz19pJ30h
+   */
+  categoryOptionCombo?: string;
   /**
    * @format date-time
    */
   created?: string;
-  dataElement?: UIDDataElement;
+  /**
+   * A UID for an DataElement object
+   * (Java name `org.hisp.dhis.dataelement.DataElement`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example hX7n8Y4pu89
+   */
+  dataElement?: string;
   modifiedBy?: string;
-  orgUnit?: UIDOrganisationUnit;
+  /**
+   * A UID for an OrganisationUnit object
+   * (Java name `org.hisp.dhis.organisationunit.OrganisationUnit`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example xj2sS1ni0Q9
+   */
+  orgUnit?: string;
   /**
    * @format period
    */
@@ -2091,8 +4417,18 @@ export type DataValueAuditDto = {
 };
 
 export type DataValueCategoryDto = {
-  combo?: UIDCategoryCombo;
-  options?: UIDCategoryOption[];
+  /**
+   * A UID for an CategoryCombo object
+   * (Java name `org.hisp.dhis.category.CategoryCombo`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example iZ9tI8jD7T4
+   */
+  combo?: string;
+  options?: Uid[];
 };
 
 export type DataValueContextDto = {
@@ -2102,21 +4438,61 @@ export type DataValueContextDto = {
 
 export type DataValueDto = {
   attribute?: DataValueCategoryDto;
-  categoryOptionCombo?: UIDCategoryOptionCombo;
+  /**
+   * A UID for an CategoryOptionCombo object
+   * (Java name `org.hisp.dhis.category.CategoryOptionCombo`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example o5Bz19pJ30h
+   */
+  categoryOptionCombo?: string;
   comment?: string;
   /**
    * @format date-time
    */
   created?: string;
-  dataElement?: UIDDataElement;
-  dataSet?: UIDDataSet;
+  /**
+   * A UID for an DataElement object
+   * (Java name `org.hisp.dhis.dataelement.DataElement`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example hX7n8Y4pu89
+   */
+  dataElement?: string;
+  /**
+   * A UID for an DataSet object
+   * (Java name `org.hisp.dhis.dataset.DataSet`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example dT3ji2fG1SM
+   */
+  dataSet?: string;
   followUp?: boolean;
   force?: boolean;
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  orgUnit?: UIDOrganisationUnit;
+  /**
+   * A UID for an OrganisationUnit object
+   * (Java name `org.hisp.dhis.organisationunit.OrganisationUnit`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example xj2sS1ni0Q9
+   */
+  orgUnit?: string;
   /**
    * @format period
    */
@@ -2127,15 +4503,66 @@ export type DataValueDto = {
 
 export type DataValueFollowUpRequest = {
   attribute?: DataValueCategoryDto;
-  attributeOptionCombo?: UIDCategoryOptionCombo;
-  categoryOptionCombo?: UIDCategoryOptionCombo;
-  dataElement?: UIDDataSet;
+  /**
+   * A UID for an CategoryOptionCombo object
+   * (Java name `org.hisp.dhis.category.CategoryOptionCombo`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example o5Bz19pJ30h
+   */
+  attributeOptionCombo?: string;
+  /**
+   * A UID for an CategoryOptionCombo object
+   * (Java name `org.hisp.dhis.category.CategoryOptionCombo`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example o5Bz19pJ30h
+   */
+  categoryOptionCombo?: string;
+  /**
+   * A UID for an DataSet object
+   * (Java name `org.hisp.dhis.dataset.DataSet`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example dT3ji2fG1SM
+   */
+  dataElement?: string;
   followup?: boolean;
-  orgUnit?: UIDOrganisationUnit;
+  /**
+   * A UID for an OrganisationUnit object
+   * (Java name `org.hisp.dhis.organisationunit.OrganisationUnit`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example xj2sS1ni0Q9
+   */
+  orgUnit?: string;
   /**
    * @format period
    */
   period?: string;
+};
+
+export type DataValueInfo = {
+  createdAt?: string | number;
+  createdBy?: TrackerUser;
+  dataElement?: string;
+  providedElsewhere?: boolean;
+  storedBy?: string;
+  updatedAt?: string | number;
+  updatedBy?: TrackerUser;
+  value?: string;
 };
 
 export type DataValueSet = {
@@ -2169,7 +4596,7 @@ export type DataValuesFollowUpRequest = {
 export type DatabaseInfo = {
   databaseVersion?: string;
   name?: string;
-  spatialSupport: boolean;
+  spatialSupport?: boolean;
   url?: string;
   user?: string;
 };
@@ -2182,10 +4609,23 @@ export type DatastoreEntry = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -2194,15 +4634,41 @@ export type DatastoreEntry = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   namespace?: string;
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
   value?: string;
 };
 
@@ -2288,8 +4754,8 @@ export type DeflatedDataValue = {
    */
   dataElementId: number;
   dataElementName?: string;
-  deleted: boolean;
-  followup: boolean;
+  deleted?: boolean;
+  followup?: boolean;
   /**
    * @format int32
    */
@@ -2348,7 +4814,7 @@ export type Dhis2Info = {
 };
 
 export type DimensionItemKeywords = {
-  empty: boolean;
+  empty?: boolean;
   keywords?: Keyword[];
 };
 
@@ -2376,7 +4842,7 @@ export type DimensionalObject = {
     | 'NONE'
     | 'CUSTOM'
     | 'DEFAULT';
-  allItems: boolean;
+  allItems?: boolean;
   analyticsType: 'AGGREGATE' | 'EVENT';
   attributeValues?: AttributeValue[];
   code?: string;
@@ -2384,8 +4850,21 @@ export type DimensionalObject = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dataDimension: boolean;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  dataDimension?: boolean;
   dataDimensionType: 'DISAGGREGATION' | 'ATTRIBUTE';
   description?: string;
   dimension?: string;
@@ -2415,11 +4894,11 @@ export type DimensionalObject = {
   displayName?: string;
   displayShortName?: string;
   eventRepetition?: EventRepetition;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   filter?: string;
-  fixed: boolean;
+  fixed?: boolean;
   /**
    * @format uuid
    * @pattern ^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$
@@ -2430,25 +4909,77 @@ export type DimensionalObject = {
    * @format int64
    */
   id: number;
-  items: boolean;
+  items?: boolean;
   key?: string;
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legendSet: boolean;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  legendSet?: boolean;
   name?: string;
-  optionSet?: RefOptionSet;
-  programStage?: RefProgramStage;
+  /**
+   * A UID reference to a OptionSet
+   * (Java name `org.hisp.dhis.option.OptionSet`)
+   */
+  optionSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example qa5tM4Kf3j3
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a ProgramStage
+   * (Java name `org.hisp.dhis.program.ProgramStage`)
+   */
+  programStage?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example uf8uS7d0KE2
+     */
+    id: string;
+  };
   publicAccess?: string;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
   uid?: string;
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -2501,11 +5032,24 @@ export type Document = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
-  external: boolean;
-  externalAccess: boolean;
-  favorite: boolean;
+  external?: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -2513,99 +5057,74 @@ export type Document = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   url?: string;
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
-};
-
-export type Dxf2EventsEventDataValue = {
-  created?: string;
-  createdByUserInfo?: UserInfoSnapshot;
-  dataElement?: string;
-  lastUpdated?: string;
-  lastUpdatedByUserInfo?: UserInfoSnapshot;
-  providedElsewhere?: boolean;
-  storedBy?: string;
-  value?: string;
-};
-
-export type Dxf2EventsTrackedentityAttribute = {
-  attribute?: string;
-  code?: string;
-  created?: string;
-  displayName?: string;
-  lastUpdated?: string;
-  storedBy?: string;
-  value?: string;
-  valueType:
-    | 'TEXT'
-    | 'LONG_TEXT'
-    | 'MULTI_TEXT'
-    | 'LETTER'
-    | 'PHONE_NUMBER'
-    | 'EMAIL'
-    | 'BOOLEAN'
-    | 'TRUE_ONLY'
-    | 'DATE'
-    | 'DATETIME'
-    | 'TIME'
-    | 'NUMBER'
-    | 'UNIT_INTERVAL'
-    | 'PERCENTAGE'
-    | 'INTEGER'
-    | 'INTEGER_POSITIVE'
-    | 'INTEGER_NEGATIVE'
-    | 'INTEGER_ZERO_OR_POSITIVE'
-    | 'TRACKER_ASSOCIATE'
-    | 'USERNAME'
-    | 'COORDINATE'
-    | 'ORGANISATION_UNIT'
-    | 'REFERENCE'
-    | 'AGE'
-    | 'URL'
-    | 'FILE_RESOURCE'
-    | 'IMAGE'
-    | 'GEOJSON';
-};
-
-export type Dxf2EventsTrackedentityTrackedEntityInstance = {
-  attributes?: Dxf2EventsTrackedentityAttribute[];
-  coordinates?: string;
-  created: string;
-  createdAtClient: string;
-  createdByUserInfo?: UserInfoSnapshot;
-  deleted?: boolean;
-  enrollments?: Enrollment[];
-  featureType: 'NONE' | 'MULTI_POLYGON' | 'POLYGON' | 'POINT' | 'SYMBOL';
-  geometry?: Record<string, any>;
-  inactive?: boolean;
-  lastUpdated: string;
-  lastUpdatedAtClient: string;
-  lastUpdatedByUserInfo?: UserInfoSnapshot;
-  orgUnit: string;
-  potentialDuplicate?: boolean;
-  programOwners?: ProgramOwner[];
-  relationships?: Relationship[];
-  storedBy?: string;
-  trackedEntityInstance: string;
-  trackedEntityType: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type Email = {
-  recipients?: RefUser[];
-  sender?: RefUser;
+  recipients?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  }[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  sender?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   subject?: string;
   text?: string;
 };
 
 export type Enrollment = {
-  attributes?: Dxf2EventsTrackedentityAttribute[];
+  attributes?: TrackerAttribute[];
   completedBy?: string;
   /**
    * @format date-time
@@ -2620,7 +5139,7 @@ export type Enrollment = {
    * @format date-time
    */
   enrollmentDate: string;
-  events?: Event[];
+  events?: TrackerEvent[];
   followup?: boolean;
   geometry?: Record<string, any>;
   /**
@@ -2639,6 +5158,33 @@ export type Enrollment = {
   storedBy?: string;
   trackedEntityInstance: string;
   trackedEntityType: string;
+};
+
+export type EnrollmentInfo = {
+  attributes?: AttributeInfo[];
+  completedAt?: string | number;
+  completedBy?: string;
+  createdAt?: string | number;
+  createdAtClient?: string | number;
+  createdBy?: TrackerUser;
+  deleted?: boolean;
+  enrolledAt?: string | number;
+  enrollment?: string;
+  events?: EventInfo[];
+  followUp?: boolean;
+  geometry?: Record<string, any>;
+  notes?: NoteInfo[];
+  occurredAt?: string | number;
+  orgUnit?: string;
+  orgUnitName?: string;
+  program?: string;
+  relationships?: RelationshipInfo[];
+  status: 'ACTIVE' | 'COMPLETED' | 'CANCELLED';
+  storedBy?: string;
+  trackedEntity?: string;
+  updatedAt?: string | number;
+  updatedAtClient?: string | number;
+  updatedBy?: TrackerUser;
 };
 
 export type Entity = {
@@ -2675,7 +5221,16 @@ export type EntriesResponse = {
   entries?: {
     [key: string]: Record<string, any>;
   }[];
-  pager?: WebapiControllerDatastoreControllerPager;
+  pager?: {
+    /**
+     * @format int32
+     */
+    page: number;
+    /**
+     * @format int32
+     */
+    pageSize: number;
+  };
 };
 
 export type Error = {
@@ -3001,6 +5556,8 @@ export type ErrorReport = {
     | 'E7133'
     | 'E7134'
     | 'E7135'
+    | 'E7136'
+    | 'E7143'
     | 'E7200'
     | 'E7201'
     | 'E7202'
@@ -3035,6 +5592,9 @@ export type ErrorReport = {
     | 'E7231'
     | 'E7232'
     | 'E7234'
+    | 'E7237'
+    | 'E7238'
+    | 'E7250'
     | 'E7300'
     | 'E7301'
     | 'E7400'
@@ -3111,44 +5671,6 @@ export type ErrorReport = {
   value?: Record<string, any>;
 };
 
-export type Event = {
-  assignedUser?: string;
-  assignedUserDisplayName?: string;
-  assignedUserFirstName?: string;
-  assignedUserSurname?: string;
-  assignedUserUsername?: string;
-  attributeCategoryOptions?: string;
-  attributeOptionCombo?: string;
-  completedBy?: string;
-  completedDate?: string;
-  created?: string;
-  createdAtClient: string;
-  createdByUserInfo?: UserInfoSnapshot;
-  dataValues?: Dxf2EventsEventDataValue[];
-  deleted?: boolean;
-  dueDate?: string;
-  enrollment: string;
-  enrollmentStatus: 'ACTIVE' | 'COMPLETED' | 'CANCELLED';
-  event: string;
-  eventDate: string;
-  followup?: boolean;
-  geometry?: Record<string, any>;
-  href?: string;
-  lastUpdated?: string;
-  lastUpdatedAtClient: string;
-  lastUpdatedByUserInfo?: UserInfoSnapshot;
-  notes?: Note[];
-  orgUnit?: string;
-  orgUnitName?: string;
-  program: string;
-  programStage: string;
-  programType: 'WITH_REGISTRATION' | 'WITHOUT_REGISTRATION';
-  relationships?: Relationship[];
-  status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
-  storedBy?: string;
-  trackedEntityInstance?: string;
-};
-
 export type EventDataFilter = {
   dataItem?: string;
   dateFilter?: DateFilterPeriod;
@@ -3161,7 +5683,23 @@ export type EventDataFilter = {
   lt?: string;
 };
 
-export type EventFilter = {
+export type EventDataValue = {
+  /**
+   * @format date-time
+   */
+  created?: string;
+  createdByUserInfo?: UserInfoSnapshot;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  lastUpdatedByUserInfo?: UserInfoSnapshot;
+  providedElsewhere?: boolean;
+  storedBy?: string;
+  value?: string;
+};
+
+export type EventFilterInfo = {
   assignedUserMode: 'CURRENT' | 'PROVIDED' | 'NONE' | 'ANY' | 'ALL';
   assignedUsers?: string[];
   eventCreatedPeriod?: FilterPeriod;
@@ -3177,12 +5715,25 @@ export type EventHook = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   disabled: boolean;
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -3190,16 +5741,73 @@ export type EventHook = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
-  source: EventhookSource;
+  source: Source;
   targets: (WebhookTarget | ConsoleTarget | JmsTarget | KafkaTarget)[];
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+};
+
+export type EventInfo = {
+  assignedUser?: TrackerUser;
+  attributeCategoryOptions?: string;
+  attributeOptionCombo?: string;
+  completedAt?: string | number;
+  completedBy?: string;
+  createdAt?: string | number;
+  createdAtClient?: string | number;
+  createdBy?: TrackerUser;
+  dataValues?: DataValueInfo[];
+  deleted?: boolean;
+  enrollment?: string;
+  event?: string;
+  followup?: boolean;
+  geometry?: Record<string, any>;
+  notes?: NoteInfo[];
+  occurredAt?: string | number;
+  orgUnit?: string;
+  orgUnitName?: string;
+  program?: string;
+  programStage?: string;
+  relationships?: RelationshipInfo[];
+  scheduledAt?: string | number;
+  status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
+  storedBy?: string;
+  trackedEntity?: string;
+  updatedAt?: string | number;
+  updatedAtClient?: string | number;
+  updatedBy?: TrackerUser;
 };
 
 export type EventProgramsDataSynchronizationJobParameters = {
@@ -3232,34 +5840,6 @@ export type EventRepetition = {
   parent: 'COLUMN' | 'ROW' | 'FILTER';
 };
 
-export type EventRow = {
-  attributeCategoryOptions?: string;
-  attributes?: Dxf2EventsTrackedentityAttribute[];
-  dataValues?: Dxf2EventsEventDataValue[];
-  deleted: boolean;
-  dueDate?: string;
-  enrollment?: string;
-  event?: string;
-  eventDate: string;
-  followup?: boolean;
-  href?: string;
-  notes?: Note[];
-  orgUnit?: string;
-  orgUnitName?: string;
-  program?: string;
-  programStage?: string;
-  trackedEntityInstance?: string;
-  trackedEntityInstanceCreated?: string;
-  trackedEntityInstanceInactive: boolean;
-  trackedEntityInstanceOrgUnit?: string;
-  trackedEntityInstanceOrgUnitName?: string;
-};
-
-export type EventRows = {
-  eventRows?: EventRow[];
-  pager?: Pager;
-};
-
 export type EventVisualization = {
   access?: Access;
   aggregationType:
@@ -3285,7 +5865,20 @@ export type EventVisualization = {
     | 'CUSTOM'
     | 'DEFAULT';
   attributeDimensions?: TrackedEntityAttributeDimension[];
-  attributeValueDimension?: RefTrackedEntityAttribute;
+  /**
+   * A UID reference to a TrackedEntityAttribute
+   * (Java name `org.hisp.dhis.trackedentity.TrackedEntityAttribute`)
+   */
+  attributeValueDimension?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Ip8AV7eW679
+     */
+    id: string;
+  };
   attributeValues?: AttributeValue[];
   baseLineLabel?: string;
   /**
@@ -3295,22 +5888,57 @@ export type EventVisualization = {
   categoryDimensions?: CategoryDimension[];
   categoryOptionGroupSetDimensions?: CategoryOptionGroupSetDimension[];
   code?: string;
-  colSubTotals: boolean;
-  colTotals: boolean;
-  collapseDataDimensions: boolean;
+  colSubTotals?: boolean;
+  colTotals?: boolean;
+  collapseDataDimensions?: boolean;
   columnDimensions?: string[];
-  columns?: RefDimensionalObject[];
-  completedOnly: boolean;
+  columns?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nb3xT2ex1J7
+     */
+    id: string;
+  }[];
+  completedOnly?: boolean;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  cumulativeValues: boolean;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  cumulativeValues?: boolean;
   dataDimensionItems?: DataDimensionItem[];
   dataElementDimensions?: TrackedEntityDataElementDimension[];
   dataElementGroupSetDimensions?: DataElementGroupSetDimension[];
-  dataElementValueDimension?: RefDataElement;
+  /**
+   * A UID reference to a DataElement
+   * (Java name `org.hisp.dhis.dataelement.DataElement`)
+   */
+  dataElementValueDimension?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example hX7n8Y4pu89
+     */
+    id: string;
+  };
   dataType: 'AGGREGATED_VALUES' | 'EVENTS';
   description?: string;
   digitGroupSeparator: 'COMMA' | 'SPACE' | 'NONE';
@@ -3331,45 +5959,120 @@ export type EventVisualization = {
    */
   endDate?: string;
   eventStatus: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   filterDimensions?: string[];
-  filters?: RefDimensionalObject[];
+  filters?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nb3xT2ex1J7
+     */
+    id: string;
+  }[];
   fontSize: 'LARGE' | 'NORMAL' | 'SMALL';
   formName?: string;
   hideEmptyRowItems: 'NONE' | 'BEFORE_FIRST' | 'AFTER_LAST' | 'BEFORE_FIRST_AFTER_LAST' | 'ALL';
-  hideEmptyRows: boolean;
-  hideLegend: boolean;
-  hideNaData: boolean;
-  hideSubtitle: boolean;
-  hideTitle: boolean;
+  hideEmptyRows?: boolean;
+  hideLegend?: boolean;
+  hideNaData?: boolean;
+  hideSubtitle?: boolean;
+  hideTitle?: boolean;
   href?: string;
   id?: string;
-  interpretations?: RefInterpretation[];
-  itemOrganisationUnitGroups?: RefOrganisationUnitGroup[];
+  interpretations?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pd0uU9kk8Gc
+     */
+    id: string;
+  }[];
+  itemOrganisationUnitGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Co7xX6sn5Ve
+     */
+    id: string;
+  }[];
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legacy: boolean;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  legacy?: boolean;
   legend?: LegendDefinitions;
   name?: string;
-  noSpaceBetweenColumns: boolean;
+  noSpaceBetweenColumns?: boolean;
   orgUnitField?: string;
   organisationUnitGroupSetDimensions?: OrganisationUnitGroupSetDimension[];
   organisationUnitLevels?: number[];
-  organisationUnits?: RefOrganisationUnit[];
+  organisationUnits?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  }[];
   outputType: 'EVENT' | 'ENROLLMENT' | 'TRACKED_ENTITY_INSTANCE';
   parentGraphMap?: {
     [key: string]: string;
   };
-  percentStackedValues: boolean;
+  percentStackedValues?: boolean;
   periods?: string[];
-  program?: RefProgram;
+  /**
+   * A UID reference to a Program
+   * (Java name `org.hisp.dhis.program.Program`)
+   */
+  program?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pa3pN28SD4S
+     */
+    id: string;
+  };
   programIndicatorDimensions?: TrackedEntityProgramIndicatorDimension[];
-  programStage?: RefProgramStage;
+  /**
+   * A UID reference to a ProgramStage
+   * (Java name `org.hisp.dhis.program.ProgramStage`)
+   */
+  programStage?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example uf8uS7d0KE2
+     */
+    id: string;
+  };
   programStatus: 'ACTIVE' | 'COMPLETED' | 'CANCELLED';
   publicAccess?: string;
   /**
@@ -3393,24 +6096,35 @@ export type EventVisualization = {
   relativePeriods?: RelativePeriods;
   repetitions?: EventRepetition[];
   rowDimensions?: string[];
-  rowSubTotals: boolean;
-  rowTotals: boolean;
-  rows?: RefDimensionalObject[];
+  rowSubTotals?: boolean;
+  rowTotals?: boolean;
+  rows?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nb3xT2ex1J7
+     */
+    id: string;
+  }[];
   sharing?: Sharing;
   shortName?: string;
-  showData: boolean;
-  showDimensionLabels: boolean;
-  showHierarchy: boolean;
+  showData?: boolean;
+  showDimensionLabels?: boolean;
+  showHierarchy?: boolean;
   simpleDimensions?: SimpleDimension[];
+  skipRounding?: boolean;
   /**
    * @format int32
    */
   sortOrder: number;
+  sorting?: Sorting[];
   /**
    * @format date-time
    */
   startDate?: string;
-  subscribed: boolean;
+  subscribed?: boolean;
   subscribers?: string[];
   subtitle?: string;
   targetLineLabel?: string;
@@ -3443,19 +6157,51 @@ export type EventVisualization = {
     | 'PIVOT_TABLE'
     | 'SCATTER'
     | 'BUBBLE';
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
   userOrgUnitType: 'DATA_CAPTURE' | 'DATA_OUTPUT' | 'TEI_SEARCH';
-  userOrganisationUnit: boolean;
-  userOrganisationUnitChildren: boolean;
-  userOrganisationUnitGrandChildren: boolean;
-  value?: RefDimensionalItemObject;
+  userOrganisationUnit?: boolean;
+  userOrganisationUnitChildren?: boolean;
+  userOrganisationUnitGrandChildren?: boolean;
+  /**
+   * A UID reference to a DimensionalItemObject
+   * (Java name `org.hisp.dhis.common.DimensionalItemObject`)
+   */
+  value?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example rf7BX6iB5Nb
+     */
+    id: string;
+  };
 };
 
-export type EventhookSource = {
-  fields: string;
-  path: string;
+export type ExchangeSource = {
+  params?: SourceParams;
+  requests?: SourceRequest[];
+};
+
+export type ExchangeTarget = {
+  api?: Api;
+  request?: TargetRequest;
+  type: 'INTERNAL' | 'EXTERNAL';
 };
 
 export type ExecutionPlan = {
@@ -3516,7 +6262,20 @@ export type ExpressionDimensionItem = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   dimensionItem?: string;
   displayDescription?: string;
@@ -3524,8 +6283,8 @@ export type ExpressionDimensionItem = {
   displayName?: string;
   displayShortName?: string;
   expression?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
@@ -3534,9 +6293,44 @@ export type ExpressionDimensionItem = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legendSet?: RefLegendSet;
-  legendSets?: RefLegendSet[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  legendSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  }[];
   missingValueStrategy: 'SKIP_IF_ANY_VALUE_MISSING' | 'SKIP_IF_ALL_VALUES_MISSING' | 'NEVER_SKIP';
   name?: string;
   publicAccess?: string;
@@ -3545,9 +6339,22 @@ export type ExpressionDimensionItem = {
   shortName?: string;
   slidingWindow?: boolean;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type ExternalMapLayer = {
@@ -3559,10 +6366,23 @@ export type ExternalMapLayer = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -3571,9 +6391,35 @@ export type ExternalMapLayer = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   layers?: string;
-  legendSet?: RefLegendSet;
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
   legendSetUrl?: string;
   mapLayerPosition: 'BASEMAP' | 'OVERLAY';
   mapService: 'WMS' | 'TMS' | 'XYZ' | 'VECTOR_STYLE';
@@ -3582,9 +6428,22 @@ export type ExternalMapLayer = {
   sharing?: Sharing;
   translations?: Translation[];
   url?: string;
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type FavoriteStatistics = {
@@ -3643,14 +6502,14 @@ export type Field = {
 };
 
 export type FieldPath = {
-  exclude: boolean;
+  exclude?: boolean;
   fullPath?: string;
   name?: string;
   path?: string[];
-  preset: boolean;
+  preset?: boolean;
   property?: Property;
-  root: boolean;
-  transformer: boolean;
+  root?: boolean;
+  transformer?: boolean;
   transformers?: FieldPathTransformer[];
 };
 
@@ -3673,28 +6532,67 @@ export type FileResource = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
   domain: 'DATA_VALUE' | 'PUSH_ANALYSIS' | 'DOCUMENT' | 'MESSAGE_ATTACHMENT' | 'USER_AVATAR' | 'ORG_UNIT';
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
-  hasMultipleStorageFiles: boolean;
+  hasMultipleStorageFiles?: boolean;
   href?: string;
   id?: string;
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
   storageStatus: 'NONE' | 'PENDING' | 'FAILED' | 'STORED';
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type FileTypeValueOptions = {
@@ -3761,7 +6659,7 @@ export type FollowupParams = {
    * @format int32
    */
   dataElementId: number;
-  followup: boolean;
+  followup?: boolean;
   /**
    * @format int32
    */
@@ -3828,7 +6726,35 @@ export type FontStyle = {
 };
 
 export type Form = {
-  categoryCombo?: WebapiWebdomainFormCategoryCombo;
+  categoryCombo?: {
+    categories?: {
+      categoryOptions?: {
+        /**
+         * @format date-time
+         */
+        endDate?: string;
+        id?: string;
+        label?: string;
+        organisationUnits?: {
+          /**
+           * @format uid
+           * @pattern ^[0-9a-zA-Z]{11}$
+           * @minLength 11
+           * @maxLength 11
+           * @example xj2sS1ni0Q9
+           */
+          id: string;
+        }[];
+        /**
+         * @format date-time
+         */
+        startDate?: string;
+      }[];
+      id?: string;
+      label?: string;
+    }[];
+    id?: string;
+  };
   groups?: Group[];
   label?: string;
   options?: {
@@ -3838,9 +6764,9 @@ export type Form = {
 };
 
 export type GenericGatewayParameter = {
-  confidential: boolean;
-  encode: boolean;
-  header: boolean;
+  confidential?: boolean;
+  encode?: boolean;
+  header?: boolean;
   key?: string;
   value?: string;
 };
@@ -3849,15 +6775,15 @@ export type GenericHttpGatewayConfig = {
   configurationTemplate?: string;
   contentType: 'APPLICATION_JSON' | 'APPLICATION_XML' | 'TEXT_PLAIN' | 'FORM_URL_ENCODED';
   id?: string;
-  isDefault: boolean;
+  isDefault?: boolean;
   maxSmsLength?: string;
   name?: string;
   parameters?: GenericGatewayParameter[];
   password?: string;
-  sendUrlParameters: boolean;
+  sendUrlParameters?: boolean;
   uid?: string;
   urlTemplate?: string;
-  useGet: boolean;
+  useGet?: boolean;
   username?: string;
 };
 
@@ -3867,8 +6793,8 @@ export type GeoFeature = {
   dimensions?: {
     [key: string]: string;
   };
-  hcd: boolean;
-  hcu: boolean;
+  hcd?: boolean;
+  hcu?: boolean;
   id?: string;
   /**
    * @format int32
@@ -3943,7 +6869,7 @@ export type Grid = {
   internalMetaData?: {
     [key: string]: Record<string, any>;
   };
-  lastDataRow: boolean;
+  lastDataRow?: boolean;
   metaColumnIndexes?: number[];
   metaData?: {
     [key: string]: Record<string, any>;
@@ -3969,9 +6895,9 @@ export type Grid = {
 
 export type GridHeader = {
   column?: string;
-  hidden: boolean;
+  hidden?: boolean;
   legendSet?: string;
-  meta: boolean;
+  meta?: boolean;
   name?: string;
   optionSet?: string;
   programStage?: string;
@@ -4047,10 +6973,23 @@ export type I18nLocale = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -4058,15 +6997,41 @@ export type I18nLocale = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   locale?: string;
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type I18nOutput = {
@@ -4091,32 +7056,6 @@ export type IdObject = {
   name?: string;
 };
 
-export type IdScheme = {
-  attribute?: string;
-  identifiableProperty: 'ID' | 'UID' | 'UUID' | 'NAME' | 'CODE' | 'ATTRIBUTE';
-  identifiableString?: string;
-  notNull: boolean;
-  ['null']: boolean;
-};
-
-export type IdSchemes = {
-  attributeOptionComboIdScheme?: IdScheme;
-  categoryIdScheme?: IdScheme;
-  categoryOptionComboIdScheme?: IdScheme;
-  categoryOptionIdScheme?: IdScheme;
-  dataElementGroupIdScheme?: IdScheme;
-  dataElementIdScheme?: IdScheme;
-  dataSetIdScheme?: IdScheme;
-  idScheme?: IdScheme;
-  orgUnitGroupIdScheme?: IdScheme;
-  orgUnitIdScheme?: IdScheme;
-  programIdScheme?: IdScheme;
-  programStageIdScheme?: IdScheme;
-  programStageInstanceIdScheme?: IdScheme;
-  trackedEntityAttributeIdScheme?: IdScheme;
-  trackedEntityIdScheme?: IdScheme;
-};
-
 export type IdentifiableObject = {
   access?: Access;
   attributeValues?: AttributeValue[];
@@ -4125,10 +7064,23 @@ export type IdentifiableObject = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   /**
@@ -4139,21 +7091,74 @@ export type IdentifiableObject = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   uid?: string;
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type IdentifiableObjects = {
-  additions?: RefBaseIdentifiableObject[];
-  deletions?: RefBaseIdentifiableObject[];
-  identifiableObjects?: RefBaseIdentifiableObject[];
+  additions?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example q8DC41fB6W6
+     */
+    id: string;
+  }[];
+  deletions?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example q8DC41fB6W6
+     */
+    id: string;
+  }[];
+  identifiableObjects?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example q8DC41fB6W6
+     */
+    id: string;
+  }[];
 };
 
 export type ImageResource = {
@@ -4169,7 +7174,7 @@ export type ImageResource = {
    * @format date-time
    */
   lastUpdated?: string;
-  logo: boolean;
+  logo?: boolean;
 };
 
 export type ImportConflict = {
@@ -4488,6 +7493,8 @@ export type ImportConflict = {
     | 'E7133'
     | 'E7134'
     | 'E7135'
+    | 'E7136'
+    | 'E7143'
     | 'E7200'
     | 'E7201'
     | 'E7202'
@@ -4522,6 +7529,9 @@ export type ImportConflict = {
     | 'E7231'
     | 'E7232'
     | 'E7234'
+    | 'E7237'
+    | 'E7238'
+    | 'E7250'
     | 'E7300'
     | 'E7301'
     | 'E7400'
@@ -4621,15 +7631,21 @@ export type ImportCount = {
 };
 
 export type ImportOptions = {
-  async: boolean;
+  async?: boolean;
+  categoryIdScheme?: string;
+  categoryOptionComboIdScheme?: string;
+  categoryOptionIdScheme?: string;
+  dataElementIdScheme?: string;
   dataSet?: string;
-  datasetAllowsPeriods: boolean;
-  dryRun: boolean;
+  dataSetIdScheme?: string;
+  datasetAllowsPeriods?: boolean;
+  dryRun?: boolean;
+  eventIdScheme?: string;
   filename?: string;
-  firstRowIsHeader: boolean;
-  force: boolean;
-  idSchemes?: IdSchemes;
-  ignoreEmptyCollection: boolean;
+  firstRowIsHeader?: boolean;
+  force?: boolean;
+  idScheme?: string;
+  ignoreEmptyCollection?: boolean;
   importStrategy:
     | 'CREATE'
     | 'UPDATE'
@@ -4640,35 +7656,40 @@ export type ImportOptions = {
     | 'NEW'
     | 'UPDATES'
     | 'DELETES';
-  mergeDataValues: boolean;
+  mergeDataValues?: boolean;
   mergeMode: 'MERGE_ALWAYS' | 'MERGE_IF_NOT_NULL' | 'MERGE' | 'REPLACE' | 'NONE';
   notificationLevel: 'OFF' | 'DEBUG' | 'LOOP' | 'INFO' | 'WARN' | 'ERROR';
+  orgUnitIdScheme?: string;
   preheatCache?: boolean;
+  programIdScheme?: string;
+  programStageIdScheme?: string;
   reportMode: 'FULL' | 'ERRORS' | 'ERRORS_NOT_OWNER' | 'DEBUG';
-  requireAttributeOptionCombo: boolean;
-  requireCategoryOptionCombo: boolean;
-  sharing: boolean;
-  skipAudit: boolean;
-  skipCache: boolean;
-  skipExistingCheck: boolean;
-  skipLastUpdated: boolean;
-  skipNotifications: boolean;
-  skipPatternValidation: boolean;
-  strictAttributeOptionCombos: boolean;
-  strictCategoryOptionCombos: boolean;
-  strictDataElements: boolean;
-  strictDataSetApproval: boolean;
-  strictDataSetInputPeriods: boolean;
-  strictDataSetLocking: boolean;
-  strictOrganisationUnits: boolean;
-  strictPeriods: boolean;
+  requireAttributeOptionCombo?: boolean;
+  requireCategoryOptionCombo?: boolean;
+  sharing?: boolean;
+  skipAudit?: boolean;
+  skipCache?: boolean;
+  skipExistingCheck?: boolean;
+  skipLastUpdated?: boolean;
+  skipNotifications?: boolean;
+  skipPatternValidation?: boolean;
+  strictAttributeOptionCombos?: boolean;
+  strictCategoryOptionCombos?: boolean;
+  strictDataElements?: boolean;
+  strictDataSetApproval?: boolean;
+  strictDataSetInputPeriods?: boolean;
+  strictDataSetLocking?: boolean;
+  strictOrganisationUnits?: boolean;
+  strictPeriods?: boolean;
+  trackedEntityAttributeIdScheme?: string;
+  trackedEntityIdScheme?: string;
 };
 
 export type ImportReport = {
   importParams?: MetadataImportParams;
   stats?: Stats;
   status: 'OK' | 'WARNING' | 'ERROR';
-  typeReports?: TypeReport[];
+  typeReports: TypeReport[];
 };
 
 export type ImportSummaries = {
@@ -4708,6 +7729,7 @@ export type ImportSummary = {
   importCount?: ImportCount;
   importOptions?: ImportOptions;
   reference?: string;
+  rejectedIndexes?: number[];
   relationships?: ImportSummaries;
   responseType?: string;
   status: 'SUCCESS' | 'WARNING' | 'ERROR';
@@ -4721,10 +7743,23 @@ export type IncomingSms = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   gatewayid?: string;
   href?: string;
@@ -4733,7 +7768,20 @@ export type IncomingSms = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   originator?: string;
   publicAccess?: string;
@@ -4750,9 +7798,22 @@ export type IncomingSms = {
   smsstatus?: 'INCOMING' | 'PROCESSING' | 'UNHANDLED' | 'FAILED' | 'PROCESSED' | 'SENT';
   text?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type IndexResource = {
@@ -4792,15 +7853,37 @@ export type Indicator = {
     | 'NONE'
     | 'CUSTOM'
     | 'DEFAULT';
-  annualized: boolean;
+  annualized?: boolean;
   attributeValues?: AttributeValue[];
   code?: string;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dataSets?: RefDataSet[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  dataSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example dT3ji2fG1SM
+     */
+    id: string;
+  }[];
   /**
    * @format int32
    */
@@ -4817,21 +7900,78 @@ export type Indicator = {
   displayShortName?: string;
   explodedDenominator?: string;
   explodedNumerator?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
   id?: string;
-  indicatorGroups?: RefIndicatorGroup[];
-  indicatorType?: RefIndicatorType;
+  indicatorGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pd0yF9mu8ga
+     */
+    id: string;
+  }[];
+  /**
+   * A UID reference to a IndicatorType
+   * (Java name `org.hisp.dhis.indicator.IndicatorType`)
+   */
+  indicatorType?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example oc9xE8lt7sg
+     */
+    id: string;
+  };
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legendSet?: RefLegendSet;
-  legendSets?: RefLegendSet[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  legendSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  }[];
   name?: string;
   numerator?: string;
   numeratorDescription?: string;
@@ -4842,9 +7982,22 @@ export type Indicator = {
   style?: ObjectStyle;
   translations?: Translation[];
   url?: string;
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type IndicatorGroup = {
@@ -4855,29 +8008,99 @@ export type IndicatorGroup = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
-  groupSets?: RefIndicatorGroupSet[];
+  groupSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example sg3BI2px1jd
+     */
+    id: string;
+  }[];
   href?: string;
   id?: string;
-  indicatorGroupSet?: RefIndicatorGroupSet;
-  indicators?: RefIndicator[];
+  /**
+   * A UID reference to a IndicatorGroupSet
+   * (Java name `org.hisp.dhis.indicator.IndicatorGroupSet`)
+   */
+  indicatorGroupSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example sg3BI2px1jd
+     */
+    id: string;
+  };
+  indicators?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example k8bt1Lh0Fd9
+     */
+    id: string;
+  }[];
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type IndicatorGroupSet = {
@@ -4889,28 +8112,76 @@ export type IndicatorGroupSet = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
-  indicatorGroups?: RefIndicatorGroup[];
+  indicatorGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pd0yF9mu8ga
+     */
+    id: string;
+  }[];
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type IndicatorType = {
@@ -4921,14 +8192,27 @@ export type IndicatorType = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
-  externalAccess: boolean;
+  externalAccess?: boolean;
   /**
    * @format int32
    */
   factor: number;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -4936,34 +8220,134 @@ export type IndicatorType = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
-  number: boolean;
+  number?: boolean;
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type Interpretation = {
   access?: Access;
   attributeValues?: AttributeValue[];
   code?: string;
-  comments?: RefInterpretationComment[];
+  comments?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example wk7B1cr2TN1
+     */
+    id: string;
+  }[];
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dataSet?: RefDataSet;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a DataSet
+   * (Java name `org.hisp.dhis.dataset.DataSet`)
+   */
+  dataSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example dT3ji2fG1SM
+     */
+    id: string;
+  };
   displayName?: string;
-  eventChart?: RefEventChart;
-  eventReport?: RefEventReport;
-  eventVisualization?: RefEventVisualization;
-  externalAccess: boolean;
-  favorite: boolean;
+  /**
+   * A UID reference to a EventChart
+   * (Java name `org.hisp.dhis.eventchart.EventChart`)
+   */
+  eventChart?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example hh6zS56cG7n
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a EventReport
+   * (Java name `org.hisp.dhis.eventreport.EventReport`)
+   */
+  eventReport?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example ii7AT64sE89
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a EventVisualization
+   * (Java name `org.hisp.dhis.eventvisualization.EventVisualization`)
+   */
+  eventVisualization?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pp4H0Jf9RK8
+     */
+    id: string;
+  };
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -4971,15 +8355,63 @@ export type Interpretation = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  likedBy?: RefUser[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  likedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  }[];
   /**
    * @format int32
    */
   likes: number;
-  map?: RefMap;
+  /**
+   * A UID reference to a Map
+   * (Java name `org.hisp.dhis.mapping.Map`)
+   */
+  map?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example iP9Vs8y5xb3
+     */
+    id: string;
+  };
   mentions?: Mention[];
-  organisationUnit?: RefOrganisationUnit;
+  /**
+   * A UID reference to a OrganisationUnit
+   * (Java name `org.hisp.dhis.organisationunit.OrganisationUnit`)
+   */
+  organisationUnit?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  };
   /**
    * @format period
    */
@@ -4989,10 +8421,36 @@ export type Interpretation = {
   text?: string;
   translations?: Translation[];
   type: 'VISUALIZATION' | 'EVENT_VISUALIZATION' | 'MAP' | 'EVENT_REPORT' | 'EVENT_CHART' | 'DATASET_REPORT';
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
-  visualization?: RefVisualization;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+  /**
+   * A UID reference to a Visualization
+   * (Java name `org.hisp.dhis.visualization.Visualization`)
+   */
+  visualization?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example B7uJ50aE7Y0
+     */
+    id: string;
+  };
 };
 
 export type IpAllowedList = {
@@ -5001,7 +8459,7 @@ export type IpAllowedList = {
 };
 
 export type Item = {
-  complete: boolean;
+  complete?: boolean;
   /**
    * @format date-time
    */
@@ -5032,7 +8490,7 @@ export type JmsTarget = {
   groupId: string;
   password?: string;
   type?: string;
-  useQueue: boolean;
+  useQueue?: boolean;
   username?: string;
 };
 
@@ -5040,21 +8498,34 @@ export type JobConfiguration = {
   access?: Access;
   attributeValues?: AttributeValue[];
   code?: string;
-  configurable: boolean;
+  configurable?: boolean;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   cronExpression?: string;
   /**
    * @format int32
    */
   delay?: number;
   displayName?: string;
-  enabled: boolean;
-  externalAccess: boolean;
-  favorite: boolean;
+  enabled?: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -5132,8 +8603,21 @@ export type JobConfiguration = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  leaderOnlyJob: boolean;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  leaderOnlyJob?: boolean;
   name?: string;
   /**
    * @format date-time
@@ -5143,9 +8627,22 @@ export type JobConfiguration = {
   schedulingType: 'CRON' | 'FIXED_DELAY';
   sharing?: Sharing;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
   userUid?: string;
 };
 
@@ -5237,14 +8734,147 @@ export type Layout = {
 export type LeaderNodeInfo = {
   currentNodeId?: string;
   currentNodeUuid?: string;
-  leader: boolean;
+  leader?: boolean;
   leaderNodeId?: string;
   leaderNodeUuid?: string;
 };
 
+export type LegacyUserAccess = {
+  access?: string;
+  displayName?: string;
+  id?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userUid?: string;
+};
+
+export type LegacyUserGroupAccess = {
+  access?: string;
+  displayName?: string;
+  id?: string;
+  /**
+   * A UID reference to a UserGroup
+   * (Java name `org.hisp.dhis.user.UserGroup`)
+   */
+  userGroup: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example wd5C82cv3p6
+     */
+    id: string;
+  };
+  userGroupUid?: string;
+};
+
+export type Legend = {
+  access?: Access;
+  attributeValues?: AttributeValue[];
+  code?: string;
+  color?: string;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  displayName?: string;
+  /**
+   * @format double
+   */
+  endValue?: number;
+  externalAccess?: boolean;
+  favorite?: boolean;
+  favorites?: string[];
+  href?: string;
+  id?: string;
+  image?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  name?: string;
+  publicAccess?: string;
+  sharing?: Sharing;
+  /**
+   * @format double
+   */
+  startValue?: number;
+  translations?: Translation[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+};
+
 export type LegendDefinitions = {
-  set?: RefLegendSet;
-  showKey: boolean;
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  set?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  showKey?: boolean;
   strategy: 'FIXED' | 'BY_DATA_ITEM';
   style: 'FILL' | 'TEXT';
 };
@@ -5257,10 +8887,23 @@ export type LegendSet = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -5268,16 +8911,42 @@ export type LegendSet = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legends?: RefLegend[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  legends?: Legend[];
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
   symbolizer?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type Line = {
@@ -5307,24 +8976,59 @@ export type Map = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   displayDescription?: string;
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
   id?: string;
-  interpretations?: RefInterpretation[];
+  interpretations?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pd0uU9kk8Gc
+     */
+    id: string;
+  }[];
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   /**
    * @format double
    */
@@ -5333,18 +9037,31 @@ export type Map = {
    * @format double
    */
   longitude?: number;
-  mapViews?: RefMapView[];
+  mapViews?: MapView[];
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
   shortName?: string;
-  subscribed: boolean;
+  subscribed?: boolean;
   subscribers?: string[];
   title?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
   /**
    * @format int32
    */
@@ -5392,14 +9109,36 @@ export type MapView = {
   colorLow?: string;
   colorScale?: string;
   columnDimensions?: string[];
-  columns?: RefDimensionalObject[];
-  completedOnly: boolean;
+  columns?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nb3xT2ex1J7
+     */
+    id: string;
+  }[];
+  completedOnly?: boolean;
   config?: string;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   dataDimensionItems?: DataDimensionItem[];
   dataElementDimensions?: TrackedEntityDataElementDimension[];
   dataElementGroupSetDimensions?: DataElementGroupSetDimension[];
@@ -5415,7 +9154,7 @@ export type MapView = {
    * @format date-time
    */
   endDate?: string;
-  eventClustering: boolean;
+  eventClustering?: boolean;
   eventCoordinateField?: string;
   eventPointColor?: string;
   /**
@@ -5423,20 +9162,47 @@ export type MapView = {
    */
   eventPointRadius: number;
   eventStatus: 'ACTIVE' | 'COMPLETED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   filterDimensions?: string[];
-  filters?: RefDimensionalObject[];
+  filters?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nb3xT2ex1J7
+     */
+    id: string;
+  }[];
   followUp?: boolean;
   formName?: string;
   hidden?: boolean;
-  hideSubtitle: boolean;
-  hideTitle: boolean;
+  hideSubtitle?: boolean;
+  hideTitle?: boolean;
   href?: string;
   id?: string;
-  interpretations?: RefInterpretation[];
-  itemOrganisationUnitGroups?: RefOrganisationUnitGroup[];
+  interpretations?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pd0uU9kk8Gc
+     */
+    id: string;
+  }[];
+  itemOrganisationUnitGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Co7xX6sn5Ve
+     */
+    id: string;
+  }[];
   labelFontColor?: string;
   labelFontSize?: string;
   labelFontStyle?: string;
@@ -5447,9 +9213,35 @@ export type MapView = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   layer?: string;
-  legendSet?: RefLegendSet;
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
   /**
    * @format int32
    */
@@ -5462,11 +9254,33 @@ export type MapView = {
   orgUnitField?: string;
   orgUnitFieldDisplayName?: string;
   organisationUnitColor?: string;
-  organisationUnitGroupSet?: RefOrganisationUnitGroupSet;
+  /**
+   * A UID reference to a OrganisationUnitGroupSet
+   * (Java name `org.hisp.dhis.organisationunit.OrganisationUnitGroupSet`)
+   */
+  organisationUnitGroupSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Fr0A08vq8Yh
+     */
+    id: string;
+  };
   organisationUnitGroupSetDimensions?: OrganisationUnitGroupSetDimension[];
   organisationUnitLevels?: number[];
   organisationUnitSelectionMode: 'SELECTED' | 'CHILDREN' | 'DESCENDANTS' | 'ACCESSIBLE' | 'CAPTURE' | 'ALL';
-  organisationUnits?: RefOrganisationUnit[];
+  organisationUnits?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  }[];
   parentGraph?: string;
   parentGraphMap?: {
     [key: string]: string;
@@ -5476,9 +9290,35 @@ export type MapView = {
    */
   parentLevel: number;
   periods?: string[];
-  program?: RefProgram;
+  /**
+   * A UID reference to a Program
+   * (Java name `org.hisp.dhis.program.Program`)
+   */
+  program?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pa3pN28SD4S
+     */
+    id: string;
+  };
   programIndicatorDimensions?: TrackedEntityProgramIndicatorDimension[];
-  programStage?: RefProgramStage;
+  /**
+   * A UID reference to a ProgramStage
+   * (Java name `org.hisp.dhis.program.ProgramStage`)
+   */
+  programStage?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example uf8uS7d0KE2
+     */
+    id: string;
+  };
   programStatus: 'ACTIVE' | 'COMPLETED' | 'CANCELLED';
   publicAccess?: string;
   /**
@@ -5491,9 +9331,19 @@ export type MapView = {
   radiusLow?: number;
   relativePeriods?: RelativePeriods;
   renderingStrategy: 'SINGLE' | 'SPLIT_BY_PERIOD' | 'TIMELINE';
-  rows?: RefDimensionalObject[];
+  rows?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nb3xT2ex1J7
+     */
+    id: string;
+  }[];
   sharing?: Sharing;
   shortName?: string;
+  skipRounding?: boolean;
   /**
    * @format int32
    */
@@ -5507,7 +9357,7 @@ export type MapView = {
    * (Java type was: `class java.lang.Object`)
    */
   styleDataItem?: Record<string, any>;
-  subscribed: boolean;
+  subscribed?: boolean;
   subscribers?: string[];
   subtitle?: string;
   thematicMapType: 'CHOROPLETH' | 'BUBBLE';
@@ -5517,21 +9367,60 @@ export type MapView = {
    * @format int32
    */
   topLimit: number;
-  trackedEntityType?: RefTrackedEntityType;
+  /**
+   * A UID reference to a TrackedEntityType
+   * (Java name `org.hisp.dhis.trackedentity.TrackedEntityType`)
+   */
+  trackedEntityType?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Dk3vQ29RJ44
+     */
+    id: string;
+  };
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
   userOrgUnitType: 'DATA_CAPTURE' | 'DATA_OUTPUT' | 'TEI_SEARCH';
-  userOrganisationUnit: boolean;
-  userOrganisationUnitChildren: boolean;
-  userOrganisationUnitGrandChildren: boolean;
+  userOrganisationUnit?: boolean;
+  userOrganisationUnitChildren?: boolean;
+  userOrganisationUnitGrandChildren?: boolean;
 };
 
 export type MeDto = {
   access?: Access;
   authorities?: string[];
-  avatar?: RefFileResource;
+  /**
+   * A UID reference to a FileResource
+   * (Java name `org.hisp.dhis.fileresource.FileResource`)
+   */
+  avatar?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example k6ms4Sj3LV2
+     */
+    id: string;
+  };
   /**
    * @format date-time
    */
@@ -5541,7 +9430,16 @@ export type MeDto = {
    */
   created?: string;
   dataSets?: string[];
-  dataViewOrganisationUnits?: RefOrganisationUnit[];
+  dataViewOrganisationUnits?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  }[];
   displayName?: string;
   education?: string;
   email?: string;
@@ -5563,7 +9461,16 @@ export type MeDto = {
   lastUpdated?: string;
   name?: string;
   nationality?: string;
-  organisationUnits?: RefOrganisationUnit[];
+  organisationUnits?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  }[];
   phoneNumber?: string;
   programs?: string[];
   settings?: {
@@ -5572,15 +9479,42 @@ export type MeDto = {
   sharing?: Sharing;
   skype?: string;
   surname?: string;
-  teiSearchOrganisationUnits?: RefOrganisationUnit[];
+  teiSearchOrganisationUnits?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  }[];
   telegram?: string;
   translations?: Translation[];
   twitter?: string;
-  userAccesses?: UserAccess[];
+  userAccesses?: LegacyUserAccess[];
   userCredentials?: UserCredentialsDto;
-  userGroupAccesses?: UserGroupAccess[];
-  userGroups?: RefUserGroup[];
-  userRoles?: RefUserRole[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+  userGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example wd5C82cv3p6
+     */
+    id: string;
+  }[];
+  userRoles?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example vc4Bi38eb5R
+     */
+    id: string;
+  }[];
   username?: string;
   whatsApp?: string;
 };
@@ -5601,58 +9535,177 @@ export type MergeObject = {
 
 export type MessageConversation = {
   access?: Access;
-  assignee?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  assignee?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   attributeValues?: AttributeValue[];
   code?: string;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
   extMessageId?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
-  followUp: boolean;
+  followUp?: boolean;
   href?: string;
   id?: string;
   /**
    * @format date-time
    */
   lastMessage?: string;
-  lastSender?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastSender?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   lastSenderFirstname?: string;
   lastSenderSurname?: string;
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   /**
    * @format int32
    */
   messageCount: number;
   messageType: 'PRIVATE' | 'SYSTEM' | 'VALIDATION_RESULT' | 'TICKET' | 'SYSTEM_VERSION_UPDATE';
-  messages?: RefMessage[];
+  messages?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example mX3Bw20Pq44
+     */
+    id: string;
+  }[];
   priority: 'NONE' | 'LOW' | 'MEDIUM' | 'HIGH';
   publicAccess?: string;
-  read: boolean;
+  read?: boolean;
   sharing?: Sharing;
   status: 'NONE' | 'OPEN' | 'PENDING' | 'INVALID' | 'SOLVED';
   subject?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
   userFirstname?: string;
-  userGroupAccesses?: UserGroupAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
   userMessages?: UserMessage[];
   userSurname?: string;
 };
 
+export type MessageConversationInfo = {
+  attachments?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example k6ms4Sj3LV2
+     */
+    id: string;
+  }[];
+  organisationUnits?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  }[];
+  subject?: string;
+  text?: string;
+  userGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example wd5C82cv3p6
+     */
+    id: string;
+  }[];
+  users?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  }[];
+};
+
 export type Meta = {
-  allowExternalAccess: boolean;
-  allowPublicAccess: boolean;
+  allowExternalAccess?: boolean;
+  allowPublicAccess?: boolean;
 };
 
 export type MetadataAdjustParams = {
@@ -5666,12 +9719,38 @@ export type MetadataExportParams = {
   defaultFilter?: string[];
   defaultOrder?: string[];
   defaults: 'INCLUDE' | 'EXCLUDE';
-  download: boolean;
-  exportWithDependencies: boolean;
+  download?: boolean;
+  exportWithDependencies?: boolean;
   inclusionStrategy?: 'ALWAYS' | 'NON_NULL' | 'NON_EMPTY';
-  objectExportWithDependencies?: RefIdentifiableObject;
-  skipSharing: boolean;
-  user?: RefUser;
+  /**
+   * A UID reference to a any type of object
+   * (Java name `org.hisp.dhis.common.IdentifiableObject`)
+   */
+  objectExportWithDependencies?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example t7lH02cs2L8
+     */
+    id: string;
+  };
+  skipSharing?: boolean;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   username?: string;
 };
 
@@ -5692,11 +9771,11 @@ export type MetadataImportParams = {
     | 'UPDATES'
     | 'DELETES';
   mergeMode: 'MERGE_ALWAYS' | 'MERGE_IF_NOT_NULL' | 'MERGE' | 'REPLACE' | 'NONE';
-  metadataSyncImport: boolean;
+  metadataSyncImport?: boolean;
   preheatMode: 'REFERENCE' | 'ALL' | 'NONE';
-  skipSharing: boolean;
-  skipTranslation: boolean;
-  skipValidation: boolean;
+  skipSharing?: boolean;
+  skipTranslation?: boolean;
+  skipValidation?: boolean;
   userOverrideMode: 'NONE' | 'CURRENT' | 'SELECTED';
 };
 
@@ -5765,7 +9844,20 @@ export type MetadataItem = {
    */
   endDate?: string;
   expression?: string;
-  indicatorType?: RefIndicatorType;
+  /**
+   * A UID reference to a IndicatorType
+   * (Java name `org.hisp.dhis.indicator.IndicatorType`)
+   */
+  indicatorType?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example oc9xE8lt7sg
+     */
+    id: string;
+  };
   legendSet?: string;
   name?: string;
   /**
@@ -5835,10 +9927,23 @@ export type MetadataVersion = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   hashCode?: string;
   href?: string;
@@ -5851,15 +9956,41 @@ export type MetadataVersion = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   type: 'BEST_EFFORT' | 'ATOMIC';
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type MethodAllowedList = {
@@ -5868,8 +9999,28 @@ export type MethodAllowedList = {
 };
 
 export type MinMaxValueDto = {
-  categoryOptionCombo?: UIDCategoryOptionCombo;
-  dataElement?: UIDDataElement;
+  /**
+   * A UID for an CategoryOptionCombo object
+   * (Java name `org.hisp.dhis.category.CategoryOptionCombo`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example o5Bz19pJ30h
+   */
+  categoryOptionCombo?: string;
+  /**
+   * A UID for an DataElement object
+   * (Java name `org.hisp.dhis.dataelement.DataElement`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example hX7n8Y4pu89
+   */
+  dataElement?: string;
   /**
    * @format int32
    */
@@ -5878,7 +10029,17 @@ export type MinMaxValueDto = {
    * @format int32
    */
   minValue?: number;
-  orgUnit?: UIDOrganisationUnit;
+  /**
+   * A UID for an OrganisationUnit object
+   * (Java name `org.hisp.dhis.organisationunit.OrganisationUnit`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example xj2sS1ni0Q9
+   */
+  orgUnit?: string;
 };
 
 export type MinMaxValueParams = {
@@ -5887,7 +10048,7 @@ export type MinMaxValueParams = {
 };
 
 export type MonitoringJobParameters = {
-  persistResults: boolean;
+  persistResults?: boolean;
   /**
    * @format int32
    */
@@ -5896,16 +10057,16 @@ export type MonitoringJobParameters = {
    * @format int32
    */
   relativeStart: number;
-  sendNotifications: boolean;
-  validationRuleGroups?: string[];
+  sendNotifications?: boolean;
+  validationRuleGroups?: Uid[];
 };
 
 export type Node = {
   children?: Node[];
-  collection: boolean;
+  collection?: boolean;
   comment?: string;
-  complex: boolean;
-  metadata: boolean;
+  complex?: boolean;
+  metadata?: boolean;
   name?: string;
   namespace?: string;
   /**
@@ -5914,7 +10075,7 @@ export type Node = {
   order: number;
   parent?: Node;
   property?: Property;
-  simple: boolean;
+  simple?: boolean;
   type: 'SIMPLE' | 'COMPLEX' | 'COLLECTION';
   unorderedChildren?: Node[];
 };
@@ -5928,6 +10089,14 @@ export type Note = {
   note?: string;
   storedBy?: string;
   storedDate?: string;
+  value?: string;
+};
+
+export type NoteInfo = {
+  createdBy?: TrackerUser;
+  note?: string;
+  storedAt?: string | number;
+  storedBy?: string;
   value?: string;
 };
 
@@ -5978,7 +10147,7 @@ export type Notification = {
     | 'GML_IMPORT'
     | 'ANALYTICSTABLE_UPDATE'
     | 'PROGRAM_DATA_SYNC';
-  completed: boolean;
+  completed?: boolean;
   data?: Record<string, any>;
   dataType: 'PARAMETERS';
   id?: string;
@@ -6000,10 +10169,23 @@ export type OAuth2Client = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   grantTypes?: string[];
   href?: string;
@@ -6012,16 +10194,42 @@ export type OAuth2Client = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
   redirectUris?: string[];
   secret?: string;
   sharing?: Sharing;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type ObjectCount = {
@@ -6032,7 +10240,7 @@ export type ObjectCount = {
 
 export type ObjectReport = {
   displayName?: string;
-  errorReports?: ErrorReport[];
+  errorReports: ErrorReport[];
   /**
    * @format int32
    */
@@ -6054,7 +10262,7 @@ export type ObjectValueTypeRenderingOption = {
    * @format class
    */
   clazz?: string;
-  hasOptionSet: boolean;
+  hasOptionSet?: boolean;
   renderingTypes?: (
     | 'DEFAULT'
     | 'DROPDOWN'
@@ -6115,14 +10323,27 @@ export type Option = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   displayDescription?: string;
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
@@ -6131,9 +10352,35 @@ export type Option = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
-  optionSet?: RefOptionSet;
+  /**
+   * A UID reference to a OptionSet
+   * (Java name `org.hisp.dhis.option.OptionSet`)
+   */
+  optionSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example qa5tM4Kf3j3
+     */
+    id: string;
+  };
   publicAccess?: string;
   sharing?: Sharing;
   shortName?: string;
@@ -6143,9 +10390,22 @@ export type Option = {
   sortOrder?: number;
   style?: ObjectStyle;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type OptionGroup = {
@@ -6178,15 +10438,28 @@ export type OptionGroup = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   dimensionItem?: string;
   displayDescription?: string;
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
@@ -6195,20 +10468,90 @@ export type OptionGroup = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legendSet?: RefLegendSet;
-  legendSets?: RefLegendSet[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  legendSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  }[];
   name?: string;
-  optionSet?: RefOptionSet;
-  options?: RefOption[];
+  /**
+   * A UID reference to a OptionSet
+   * (Java name `org.hisp.dhis.option.OptionSet`)
+   */
+  optionSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example qa5tM4Kf3j3
+     */
+    id: string;
+  };
+  options?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example n7oq8VD7EG6
+     */
+    id: string;
+  }[];
   publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type OptionGroupSet = {
@@ -6235,15 +10578,28 @@ export type OptionGroupSet = {
     | 'NONE'
     | 'CUSTOM'
     | 'DEFAULT';
-  allItems: boolean;
+  allItems?: boolean;
   attributeValues?: AttributeValue[];
   code?: string;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dataDimension: boolean;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  dataDimension?: boolean;
   dataDimensionType: 'DISAGGREGATION' | 'ATTRIBUTE';
   description?: string;
   dimension?: string;
@@ -6252,32 +10608,115 @@ export type OptionGroupSet = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   filter?: string;
   formName?: string;
   href?: string;
   id?: string;
-  items?: RefDimensionalItemObject[];
+  items?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example rf7BX6iB5Nb
+     */
+    id: string;
+  }[];
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legendSet?: RefLegendSet;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
   name?: string;
-  optionGroups?: RefOptionGroup[];
-  optionSet?: RefOptionSet;
-  programStage?: RefProgramStage;
+  optionGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example sc7vO6Au5X5
+     */
+    id: string;
+  }[];
+  /**
+   * A UID reference to a OptionSet
+   * (Java name `org.hisp.dhis.option.OptionSet`)
+   */
+  optionSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example qa5tM4Kf3j3
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a ProgramStage
+   * (Java name `org.hisp.dhis.program.ProgramStage`)
+   */
+  programStage?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example uf8uS7d0KE2
+     */
+    id: string;
+  };
   publicAccess?: string;
   repetition?: EventRepetition;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -6317,11 +10756,24 @@ export type OptionSet = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -6329,15 +10781,50 @@ export type OptionSet = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
-  options?: RefOption[];
+  options?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example n7oq8VD7EG6
+     */
+    id: string;
+  }[];
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -6469,9 +10956,27 @@ export type OrganisationUnit = {
     | 'NONE'
     | 'CUSTOM'
     | 'DEFAULT';
-  ancestors?: RefOrganisationUnit[];
+  ancestors?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  }[];
   attributeValues?: AttributeValue[];
-  children?: RefOrganisationUnit[];
+  children?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  }[];
   /**
    * @format date-time
    */
@@ -6483,8 +10988,30 @@ export type OrganisationUnit = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dataSets?: RefDataSet[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  dataSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example dT3ji2fG1SM
+     */
+    id: string;
+  }[];
   description?: string;
   dimensionItem?: string;
   displayDescription?: string;
@@ -6492,22 +11019,70 @@ export type OrganisationUnit = {
   displayName?: string;
   displayShortName?: string;
   email?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   geometry?: Record<string, any>;
   href?: string;
   id?: string;
-  image?: RefFileResource;
+  /**
+   * A UID reference to a FileResource
+   * (Java name `org.hisp.dhis.fileresource.FileResource`)
+   */
+  image?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example k6ms4Sj3LV2
+     */
+    id: string;
+  };
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  leaf: boolean;
-  legendSet?: RefLegendSet;
-  legendSets?: RefLegendSet[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  leaf?: boolean;
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  legendSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  }[];
   /**
    * @format int32
    */
@@ -6521,11 +11096,42 @@ export type OrganisationUnit = {
    * @format date-time
    */
   openingDate?: string;
-  organisationUnitGroups?: RefOrganisationUnitGroup[];
-  parent?: RefOrganisationUnit;
+  organisationUnitGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Co7xX6sn5Ve
+     */
+    id: string;
+  }[];
+  /**
+   * A UID reference to a OrganisationUnit
+   * (Java name `org.hisp.dhis.organisationunit.OrganisationUnit`)
+   */
+  parent?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  };
   path?: string;
   phoneNumber?: string;
-  programs?: RefProgram[];
+  programs?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pa3pN28SD4S
+     */
+    id: string;
+  }[];
   publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
@@ -6533,10 +11139,32 @@ export type OrganisationUnit = {
   translations?: Translation[];
   type?: string;
   url?: string;
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
-  users?: RefUser[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+  users?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  }[];
 };
 
 export type OrganisationUnitGroup = {
@@ -6570,40 +11198,119 @@ export type OrganisationUnitGroup = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   dimensionItem?: string;
   displayDescription?: string;
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   featureType: 'NONE' | 'MULTI_POLYGON' | 'POLYGON' | 'POINT' | 'SYMBOL';
   formName?: string;
   geometry?: Record<string, any>;
-  groupSets?: RefOrganisationUnitGroupSet[];
+  groupSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Fr0A08vq8Yh
+     */
+    id: string;
+  }[];
   href?: string;
   id?: string;
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legendSet?: RefLegendSet;
-  legendSets?: RefLegendSet[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  legendSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  }[];
   name?: string;
-  organisationUnits?: RefOrganisationUnit[];
+  organisationUnits?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  }[];
   publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
   shortName?: string;
   symbol?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type OrganisationUnitGroupSet = {
@@ -6630,16 +11337,29 @@ export type OrganisationUnitGroupSet = {
     | 'NONE'
     | 'CUSTOM'
     | 'DEFAULT';
-  allItems: boolean;
+  allItems?: boolean;
   attributeValues?: AttributeValue[];
   code?: string;
-  compulsory: boolean;
+  compulsory?: boolean;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dataDimension: boolean;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  dataDimension?: boolean;
   dataDimensionType: 'DISAGGREGATION' | 'ATTRIBUTE';
   description?: string;
   dimension?: string;
@@ -6648,33 +11368,116 @@ export type OrganisationUnitGroupSet = {
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   filter?: string;
   formName?: string;
   href?: string;
   id?: string;
-  includeSubhierarchyInAnalytics: boolean;
-  items?: RefDimensionalItemObject[];
+  includeSubhierarchyInAnalytics?: boolean;
+  items?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example rf7BX6iB5Nb
+     */
+    id: string;
+  }[];
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legendSet?: RefLegendSet;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
   name?: string;
-  optionSet?: RefOptionSet;
-  organisationUnitGroups?: RefOrganisationUnitGroup[];
-  programStage?: RefProgramStage;
+  /**
+   * A UID reference to a OptionSet
+   * (Java name `org.hisp.dhis.option.OptionSet`)
+   */
+  optionSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example qa5tM4Kf3j3
+     */
+    id: string;
+  };
+  organisationUnitGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Co7xX6sn5Ve
+     */
+    id: string;
+  }[];
+  /**
+   * A UID reference to a ProgramStage
+   * (Java name `org.hisp.dhis.program.ProgramStage`)
+   */
+  programStage?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example uf8uS7d0KE2
+     */
+    id: string;
+  };
   publicAccess?: string;
   repetition?: EventRepetition;
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -6707,8 +11510,30 @@ export type OrganisationUnitGroupSet = {
 };
 
 export type OrganisationUnitGroupSetDimension = {
-  organisationUnitGroupSet?: RefOrganisationUnitGroupSet;
-  organisationUnitGroups?: RefOrganisationUnitGroup[];
+  /**
+   * A UID reference to a OrganisationUnitGroupSet
+   * (Java name `org.hisp.dhis.organisationunit.OrganisationUnitGroupSet`)
+   */
+  organisationUnitGroupSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Fr0A08vq8Yh
+     */
+    id: string;
+  };
+  organisationUnitGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Co7xX6sn5Ve
+     */
+    id: string;
+  }[];
 };
 
 export type OrganisationUnitLevel = {
@@ -6719,10 +11544,23 @@ export type OrganisationUnitLevel = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -6730,7 +11568,20 @@ export type OrganisationUnitLevel = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   /**
    * @format int32
    */
@@ -6743,9 +11594,22 @@ export type OrganisationUnitLevel = {
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type OutboundMessageResponseSummary = {
@@ -6779,14 +11643,27 @@ export type OutboundSms = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   /**
    * @format date-time
    */
   date?: string;
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -6794,7 +11671,20 @@ export type OutboundSms = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   message?: string;
   name?: string;
   publicAccess?: string;
@@ -6804,13 +11694,26 @@ export type OutboundSms = {
   status: 'OUTBOUND' | 'SENT' | 'ERROR' | 'PENDING' | 'SCHEDULED' | 'DELIVERED' | 'FAILED';
   subject?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type OutlierAnalysis = {
-  enabled: boolean;
+  enabled?: boolean;
   extremeLines?: OutlierLine;
   normalizationMethod: 'Y_RESIDUALS_LINEAR';
   outlierMethod: 'IQR' | 'STANDARD_Z_SCORE' | 'MODIFIED_Z_SCORE';
@@ -6851,7 +11754,7 @@ export type OutlierDetectionResponse = {
 };
 
 export type OutlierLine = {
-  enabled: boolean;
+  enabled?: boolean;
   /**
    * @format double
    */
@@ -6936,11 +11839,6 @@ export type PerformanceMetrics = {
   totalTimeInMillis: number;
 };
 
-/**
- * @format period
- */
-export type Period = string;
-
 export type PersistenceReport = {
   /**
    * keys are class org.hisp.dhis.tracker.TrackerType
@@ -6958,12 +11856,25 @@ export type PotentialDuplicate = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   createdByUserName?: string;
   displayName?: string;
   duplicate?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -6971,7 +11882,20 @@ export type PotentialDuplicate = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   lastUpdatedByUserName?: string;
   name?: string;
   original?: string;
@@ -6979,9 +11903,22 @@ export type PotentialDuplicate = {
   sharing?: Sharing;
   status: 'ALL' | 'OPEN' | 'INVALID' | 'MERGED';
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type Predictor = {
@@ -6996,14 +11933,27 @@ export type Predictor = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   displayDescription?: string;
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   generator?: Expression;
@@ -7013,12 +11963,60 @@ export type Predictor = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   organisationUnitDescendants: 'SELECTED' | 'DESCENDANTS';
-  organisationUnitLevels?: RefOrganisationUnitLevel[];
-  output?: RefDataElement;
-  outputCombo?: RefCategoryOptionCombo;
+  organisationUnitLevels?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Co7xX6sn5Ve
+     */
+    id: string;
+  }[];
+  /**
+   * A UID reference to a DataElement
+   * (Java name `org.hisp.dhis.dataelement.DataElement`)
+   */
+  output?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example hX7n8Y4pu89
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a CategoryOptionCombo
+   * (Java name `org.hisp.dhis.category.CategoryOptionCombo`)
+   */
+  outputCombo?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example o5Bz19pJ30h
+     */
+    id: string;
+  };
   periodType?:
     | 'BiMonthly'
     | 'BiWeekly'
@@ -7029,6 +12027,7 @@ export type Predictor = {
     | 'FinancialOct'
     | 'Monthly'
     | 'Quarterly'
+    | 'QuarterlyNov'
     | 'SixMonthlyApril'
     | 'SixMonthlyNov'
     | 'SixMonthly'
@@ -7039,7 +12038,16 @@ export type Predictor = {
     | 'WeeklyThursday'
     | 'WeeklyWednesday'
     | 'Yearly';
-  predictorGroups?: RefPredictorGroup[];
+  predictorGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example wh0tL9mu8ga
+     */
+    id: string;
+  }[];
   publicAccess?: string;
   sampleSkipTest?: Expression;
   /**
@@ -7053,9 +12061,22 @@ export type Predictor = {
   sharing?: Sharing;
   shortName?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type PredictorGroup = {
@@ -7066,11 +12087,24 @@ export type PredictorGroup = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -7078,20 +12112,55 @@ export type PredictorGroup = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
-  predictors?: RefPredictor[];
+  predictors?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example rc5oG4hp3k5
+     */
+    id: string;
+  }[];
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type PredictorJobParameters = {
-  predictorGroups?: string[];
-  predictors?: string[];
+  predictorGroups?: Uid[];
+  predictors?: Uid[];
   /**
    * @format int32
    */
@@ -7107,7 +12176,7 @@ export type Process = {
    * @format date-time
    */
   cancelledTime?: string;
-  complete: boolean;
+  complete?: boolean;
   /**
    * @format date-time
    */
@@ -7159,7 +12228,20 @@ export type Program = {
   access?: Access;
   accessLevel: 'OPEN' | 'AUDITED' | 'PROTECTED' | 'CLOSED';
   attributeValues?: AttributeValue[];
-  categoryCombo?: RefCategoryCombo;
+  /**
+   * A UID reference to a CategoryCombo
+   * (Java name `org.hisp.dhis.category.CategoryCombo`)
+   */
+  categoryCombo?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example iZ9tI8jD7T4
+     */
+    id: string;
+  };
   code?: string;
   /**
    * @format int32
@@ -7169,8 +12251,34 @@ export type Program = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dataEntryForm?: RefDataEntryForm;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a DataEntryForm
+   * (Java name `org.hisp.dhis.dataentryform.DataEntryForm`)
+   */
+  dataEntryForm?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example jZ9pa8lw7e6
+     */
+    id: string;
+  };
   description?: string;
   displayDescription?: string;
   displayEnrollmentDateLabel?: string;
@@ -7195,6 +12303,7 @@ export type Program = {
     | 'FinancialOct'
     | 'Monthly'
     | 'Quarterly'
+    | 'QuarterlyNov'
     | 'SixMonthlyApril'
     | 'SixMonthlyNov'
     | 'SixMonthly'
@@ -7205,8 +12314,8 @@ export type Program = {
     | 'WeeklyThursday'
     | 'WeeklyWednesday'
     | 'Yearly';
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   featureType: 'NONE' | 'MULTI_POLYGON' | 'POLYGON' | 'POINT' | 'SYMBOL';
   formName?: string;
@@ -7218,7 +12327,20 @@ export type Program = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   /**
    * @format int32
    */
@@ -7228,40 +12350,286 @@ export type Program = {
    */
   minAttributesRequiredToSearch: number;
   name?: string;
-  notificationTemplates?: RefProgramNotificationTemplate[];
+  notificationTemplates?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Ju3J73sa1ce
+     */
+    id: string;
+  }[];
   onlyEnrollOnce?: boolean;
   /**
    * @format int32
    */
   openDaysAfterCoEndDate: number;
-  organisationUnits?: RefOrganisationUnit[];
-  programIndicators?: RefProgramIndicator[];
-  programRuleVariables?: RefProgramRuleVariable[];
-  programSections?: RefProgramSection[];
-  programStages?: RefProgramStage[];
-  programTrackedEntityAttributes?: RefProgramTrackedEntityAttribute[];
+  organisationUnits?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  }[];
+  programIndicators?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example yj2yW1hU0L3
+     */
+    id: string;
+  }[];
+  programRuleVariables?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Bm5BZ4k6SW9
+     */
+    id: string;
+  }[];
+  programSections?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example wh0wU9f2xI4
+     */
+    id: string;
+  }[];
+  programStages?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example uf8uS7d0KE2
+     */
+    id: string;
+  }[];
+  programTrackedEntityAttributes?: ProgramTrackedEntityAttribute[];
   programType: 'WITH_REGISTRATION' | 'WITHOUT_REGISTRATION';
   publicAccess?: string;
-  registration: boolean;
-  relatedProgram?: RefProgram;
+  registration?: boolean;
+  /**
+   * A UID reference to a Program
+   * (Java name `org.hisp.dhis.program.Program`)
+   */
+  relatedProgram?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pa3pN28SD4S
+     */
+    id: string;
+  };
   selectEnrollmentDatesInFuture?: boolean;
   selectIncidentDatesInFuture?: boolean;
   sharing?: Sharing;
   shortName?: string;
-  skipOffline: boolean;
+  skipOffline?: boolean;
   style?: ObjectStyle;
-  trackedEntityType?: RefTrackedEntityType;
+  /**
+   * A UID reference to a TrackedEntityType
+   * (Java name `org.hisp.dhis.trackedentity.TrackedEntityType`)
+   */
+  trackedEntityType?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Dk3vQ29RJ44
+     */
+    id: string;
+  };
   translations?: Translation[];
   useFirstStageDuringRegistration?: boolean;
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
-  userRoles?: RefUserRole[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+  userRoles?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example vc4Bi38eb5R
+     */
+    id: string;
+  }[];
   /**
    * @format int32
    */
   version: number;
-  withoutRegistration: boolean;
+  withoutRegistration?: boolean;
+};
+
+export type ProgramDataElementDimensionItem = {
+  access?: Access;
+  attributeValues?: AttributeValue[];
+  code?: string;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a DataElement
+   * (Java name `org.hisp.dhis.dataelement.DataElement`)
+   */
+  dataElement?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example hX7n8Y4pu89
+     */
+    id: string;
+  };
+  description?: string;
+  displayDescription?: string;
+  displayFormName?: string;
+  displayName?: string;
+  displayShortName?: string;
+  externalAccess?: boolean;
+  favorite?: boolean;
+  favorites?: string[];
+  formName?: string;
+  href?: string;
+  id?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a Program
+   * (Java name `org.hisp.dhis.program.Program`)
+   */
+  program?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pa3pN28SD4S
+     */
+    id: string;
+  };
+  publicAccess?: string;
+  queryMods?: QueryModifiers;
+  sharing?: Sharing;
+  translations?: Translation[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+  valueType:
+    | 'TEXT'
+    | 'LONG_TEXT'
+    | 'MULTI_TEXT'
+    | 'LETTER'
+    | 'PHONE_NUMBER'
+    | 'EMAIL'
+    | 'BOOLEAN'
+    | 'TRUE_ONLY'
+    | 'DATE'
+    | 'DATETIME'
+    | 'TIME'
+    | 'NUMBER'
+    | 'UNIT_INTERVAL'
+    | 'PERCENTAGE'
+    | 'INTEGER'
+    | 'INTEGER_POSITIVE'
+    | 'INTEGER_NEGATIVE'
+    | 'INTEGER_ZERO_OR_POSITIVE'
+    | 'TRACKER_ASSOCIATE'
+    | 'USERNAME'
+    | 'COORDINATE'
+    | 'ORGANISATION_UNIT'
+    | 'REFERENCE'
+    | 'AGE'
+    | 'URL'
+    | 'FILE_RESOURCE'
+    | 'IMAGE'
+    | 'GEOJSON';
 };
 
 export type ProgramIndicator = {
@@ -7290,7 +12658,7 @@ export type ProgramIndicator = {
     | 'NONE'
     | 'CUSTOM'
     | 'DEFAULT';
-  analyticsPeriodBoundaries?: RefAnalyticsPeriodBoundary[];
+  analyticsPeriodBoundaries?: AnalyticsPeriodBoundary[];
   analyticsType: 'EVENT' | 'ENROLLMENT';
   attributeValues?: AttributeValue[];
   code?: string;
@@ -7298,7 +12666,20 @@ export type ProgramIndicator = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   /**
    * @format int32
    */
@@ -7311,8 +12692,8 @@ export type ProgramIndicator = {
   displayName?: string;
   displayShortName?: string;
   expression?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   filter?: string;
   formName?: string;
@@ -7322,22 +12703,92 @@ export type ProgramIndicator = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legendSet?: RefLegendSet;
-  legendSets?: RefLegendSet[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  legendSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  }[];
   name?: string;
   orgUnitField?: string;
-  program?: RefProgram;
-  programIndicatorGroups?: RefProgramIndicatorGroup[];
+  /**
+   * A UID reference to a Program
+   * (Java name `org.hisp.dhis.program.Program`)
+   */
+  program?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pa3pN28SD4S
+     */
+    id: string;
+  };
+  programIndicatorGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Do7D1Xm2NQ1
+     */
+    id: string;
+  }[];
   publicAccess?: string;
   queryMods?: QueryModifiers;
   sharing?: Sharing;
   shortName?: string;
   style?: ObjectStyle;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type ProgramIndicatorGroup = {
@@ -7348,11 +12799,24 @@ export type ProgramIndicatorGroup = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -7360,15 +12824,50 @@ export type ProgramIndicatorGroup = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
-  programIndicators?: RefProgramIndicator[];
+  programIndicators?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example yj2yW1hU0L3
+     */
+    id: string;
+  }[];
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type ProgramMessage = {
@@ -7379,11 +12878,24 @@ export type ProgramMessage = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   deliveryChannels?: ('SMS' | 'EMAIL' | 'HTTP')[];
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -7391,7 +12903,20 @@ export type ProgramMessage = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   messageStatus: 'SENT' | 'FAILED' | 'SCHEDULED' | 'OUTBOUND';
   name?: string;
   notificationTemplate?: string;
@@ -7399,25 +12924,90 @@ export type ProgramMessage = {
    * @format date-time
    */
   processedDate?: string;
-  programInstance?: RefProgramInstance;
-  programStageInstance?: RefProgramStageInstance;
+  /**
+   * A UID reference to a ProgramInstance
+   * (Java name `org.hisp.dhis.program.ProgramInstance`)
+   */
+  programInstance?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xi1xV0gT9Zd
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a ProgramStageInstance
+   * (Java name `org.hisp.dhis.program.ProgramStageInstance`)
+   */
+  programStageInstance?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Cn6C0Wl1SM0
+     */
+    id: string;
+  };
   publicAccess?: string;
   recipients?: ProgramMessageRecipients;
   sharing?: Sharing;
-  storeCopy: boolean;
+  storeCopy?: boolean;
   subject?: string;
   text?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type ProgramMessageRecipients = {
   emailAddresses?: string[];
-  organisationUnit?: RefOrganisationUnit;
+  /**
+   * A UID reference to a OrganisationUnit
+   * (Java name `org.hisp.dhis.organisationunit.OrganisationUnit`)
+   */
+  organisationUnit?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  };
   phoneNumbers?: string[];
-  trackedEntityInstance?: RefTrackedEntityInstance;
+  /**
+   * A UID reference to a TrackedEntityInstance
+   * (Java name `org.hisp.dhis.trackedentity.TrackedEntityInstance`)
+   */
+  trackedEntityInstance?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Ho7zU6dV568
+     */
+    id: string;
+  };
 };
 
 export type ProgramNotificationTemplate = {
@@ -7428,13 +13018,26 @@ export type ProgramNotificationTemplate = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   deliveryChannels?: ('SMS' | 'EMAIL' | 'HTTP')[];
   displayMessageTemplate?: string;
   displayName?: string;
   displaySubjectTemplate?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -7442,7 +13045,20 @@ export type ProgramNotificationTemplate = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   messageTemplate?: string;
   name?: string;
   notificationRecipient:
@@ -7463,26 +13079,84 @@ export type ProgramNotificationTemplate = {
   notifyParentOrganisationUnitOnly?: boolean;
   notifyUsersInHierarchyOnly?: boolean;
   publicAccess?: string;
-  recipientDataElement?: RefDataElement;
-  recipientProgramAttribute?: RefTrackedEntityAttribute;
-  recipientUserGroup?: RefUserGroup;
+  /**
+   * A UID reference to a DataElement
+   * (Java name `org.hisp.dhis.dataelement.DataElement`)
+   */
+  recipientDataElement?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example hX7n8Y4pu89
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a TrackedEntityAttribute
+   * (Java name `org.hisp.dhis.trackedentity.TrackedEntityAttribute`)
+   */
+  recipientProgramAttribute?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Ip8AV7eW679
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a UserGroup
+   * (Java name `org.hisp.dhis.user.UserGroup`)
+   */
+  recipientUserGroup?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example wd5C82cv3p6
+     */
+    id: string;
+  };
   /**
    * @format int32
    */
   relativeScheduledDays?: number;
-  sendRepeatable: boolean;
+  sendRepeatable?: boolean;
   sharing?: Sharing;
   subjectTemplate?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type ProgramOwner = {
   ownerOrgUnit?: string;
   program?: string;
   trackedEntityInstance?: string;
+};
+
+export type ProgramOwnerInfo = {
+  orgUnit?: string;
+  program?: string;
+  trackedEntity?: string;
 };
 
 export type ProgramRule = {
@@ -7494,11 +13168,24 @@ export type ProgramRule = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -7506,21 +13193,82 @@ export type ProgramRule = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   /**
    * @format int32
    */
   priority?: number;
-  program?: RefProgram;
-  programRuleActions?: RefProgramRuleAction[];
-  programStage?: RefProgramStage;
+  /**
+   * A UID reference to a Program
+   * (Java name `org.hisp.dhis.program.Program`)
+   */
+  program?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pa3pN28SD4S
+     */
+    id: string;
+  };
+  programRuleActions?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example zk3zX2i4QU7
+     */
+    id: string;
+  }[];
+  /**
+   * A UID reference to a ProgramStage
+   * (Java name `org.hisp.dhis.program.ProgramStage`)
+   */
+  programStage?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example uf8uS7d0KE2
+     */
+    id: string;
+  };
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type ProgramRuleAction = {
@@ -7532,13 +13280,39 @@ export type ProgramRuleAction = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   data?: string;
-  dataElement?: RefDataElement;
+  /**
+   * A UID reference to a DataElement
+   * (Java name `org.hisp.dhis.dataelement.DataElement`)
+   */
+  dataElement?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example hX7n8Y4pu89
+     */
+    id: string;
+  };
   displayContent?: string;
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -7546,13 +13320,78 @@ export type ProgramRuleAction = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   location?: string;
   name?: string;
-  option?: RefOption;
-  optionGroup?: RefOptionGroup;
-  programIndicator?: RefProgramIndicator;
-  programRule?: RefProgramRule;
+  /**
+   * A UID reference to a Option
+   * (Java name `org.hisp.dhis.option.Option`)
+   */
+  option?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example n7oq8VD7EG6
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a OptionGroup
+   * (Java name `org.hisp.dhis.option.OptionGroup`)
+   */
+  optionGroup?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example sc7vO6Au5X5
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a ProgramIndicator
+   * (Java name `org.hisp.dhis.program.ProgramIndicator`)
+   */
+  programIndicator?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example yj2yW1hU0L3
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a ProgramRule
+   * (Java name `org.hisp.dhis.programrule.ProgramRule`)
+   */
+  programRule?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example te7tR6cY5OU
+     */
+    id: string;
+  };
   programRuleActionEvaluationEnvironments?: ('WEB' | 'ANDROID')[];
   programRuleActionEvaluationTime: 'ON_DATA_ENTRY' | 'ON_COMPLETE' | 'ALWAYS';
   programRuleActionType:
@@ -7573,16 +13412,68 @@ export type ProgramRuleAction = {
     | 'HIDEOPTION'
     | 'SHOWOPTIONGROUP'
     | 'HIDEOPTIONGROUP';
-  programStage?: RefProgramStage;
-  programStageSection?: RefProgramStageSection;
+  /**
+   * A UID reference to a ProgramStage
+   * (Java name `org.hisp.dhis.program.ProgramStage`)
+   */
+  programStage?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example uf8uS7d0KE2
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a ProgramStageSection
+   * (Java name `org.hisp.dhis.program.ProgramStageSection`)
+   */
+  programStageSection?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Bm5BZ4k7RL9
+     */
+    id: string;
+  };
   publicAccess?: string;
   sharing?: Sharing;
   templateUid?: string;
-  trackedEntityAttribute?: RefTrackedEntityAttribute;
+  /**
+   * A UID reference to a TrackedEntityAttribute
+   * (Java name `org.hisp.dhis.trackedentity.TrackedEntityAttribute`)
+   */
+  trackedEntityAttribute?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Ip8AV7eW679
+     */
+    id: string;
+  };
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type ProgramRuleVariable = {
@@ -7593,11 +13484,37 @@ export type ProgramRuleVariable = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dataElement?: RefDataElement;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a DataElement
+   * (Java name `org.hisp.dhis.dataelement.DataElement`)
+   */
+  dataElement?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example hX7n8Y4pu89
+     */
+    id: string;
+  };
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -7605,9 +13522,35 @@ export type ProgramRuleVariable = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
-  program?: RefProgram;
+  /**
+   * A UID reference to a Program
+   * (Java name `org.hisp.dhis.program.Program`)
+   */
+  program?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pa3pN28SD4S
+     */
+    id: string;
+  };
   programRuleVariableSourceType:
     | 'DATAELEMENT_NEWEST_EVENT_PROGRAM_STAGE'
     | 'DATAELEMENT_NEWEST_EVENT_PROGRAM'
@@ -7615,15 +13558,54 @@ export type ProgramRuleVariable = {
     | 'DATAELEMENT_PREVIOUS_EVENT'
     | 'CALCULATED_VALUE'
     | 'TEI_ATTRIBUTE';
-  programStage?: RefProgramStage;
+  /**
+   * A UID reference to a ProgramStage
+   * (Java name `org.hisp.dhis.program.ProgramStage`)
+   */
+  programStage?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example uf8uS7d0KE2
+     */
+    id: string;
+  };
   publicAccess?: string;
   sharing?: Sharing;
-  trackedEntityAttribute?: RefTrackedEntityAttribute;
+  /**
+   * A UID reference to a TrackedEntityAttribute
+   * (Java name `org.hisp.dhis.trackedentity.TrackedEntityAttribute`)
+   */
+  trackedEntityAttribute?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Ip8AV7eW679
+     */
+    id: string;
+  };
   translations?: Translation[];
-  useCodeForOptionSet: boolean;
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  useCodeForOptionSet?: boolean;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -7663,14 +13645,27 @@ export type ProgramSection = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   displayDescription?: string;
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
@@ -7679,9 +13674,35 @@ export type ProgramSection = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
-  program?: RefProgram;
+  /**
+   * A UID reference to a Program
+   * (Java name `org.hisp.dhis.program.Program`)
+   */
+  program?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pa3pN28SD4S
+     */
+    id: string;
+  };
   publicAccess?: string;
   /**
    * The exact type is unknown.
@@ -7695,11 +13716,33 @@ export type ProgramSection = {
    */
   sortOrder?: number;
   style?: ObjectStyle;
-  trackedEntityAttributes?: RefTrackedEntityAttribute[];
+  trackedEntityAttributes?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Ip8AV7eW679
+     */
+    id: string;
+  }[];
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type ProgramStage = {
@@ -7713,8 +13756,34 @@ export type ProgramStage = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dataEntryForm?: RefDataEntryForm;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a DataEntryForm
+   * (Java name `org.hisp.dhis.dataentryform.DataEntryForm`)
+   */
+  dataEntryForm?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example jZ9pa8lw7e6
+     */
+    id: string;
+  };
   description?: string;
   displayDescription?: string;
   displayDueDateLabel?: string;
@@ -7726,8 +13795,8 @@ export type ProgramStage = {
   dueDateLabel?: string;
   enableUserAssignment?: boolean;
   executionDateLabel?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   featureType: 'NONE' | 'MULTI_POLYGON' | 'POLYGON' | 'POINT' | 'SYMBOL';
   formName?: string;
@@ -7740,14 +13809,49 @@ export type ProgramStage = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   /**
    * @format int32
    */
   minDaysFromStart: number;
   name?: string;
-  nextScheduleDate?: RefDataElement;
-  notificationTemplates?: RefProgramNotificationTemplate[];
+  /**
+   * A UID reference to a DataElement
+   * (Java name `org.hisp.dhis.dataelement.DataElement`)
+   */
+  nextScheduleDate?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example hX7n8Y4pu89
+     */
+    id: string;
+  };
+  notificationTemplates?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Ju3J73sa1ce
+     */
+    id: string;
+  }[];
   openAfterEnrollment?: boolean;
   periodType?:
     | 'BiMonthly'
@@ -7759,6 +13863,7 @@ export type ProgramStage = {
     | 'FinancialOct'
     | 'Monthly'
     | 'Quarterly'
+    | 'QuarterlyNov'
     | 'SixMonthlyApril'
     | 'SixMonthlyNov'
     | 'SixMonthly'
@@ -7770,13 +13875,35 @@ export type ProgramStage = {
     | 'WeeklyWednesday'
     | 'Yearly';
   preGenerateUID?: boolean;
-  program?: RefProgram;
-  programStageDataElements?: RefProgramStageDataElement[];
-  programStageSections?: RefProgramStageSection[];
+  /**
+   * A UID reference to a Program
+   * (Java name `org.hisp.dhis.program.Program`)
+   */
+  program?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pa3pN28SD4S
+     */
+    id: string;
+  };
+  programStageDataElements?: ProgramStageDataElement[];
+  programStageSections?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Bm5BZ4k7RL9
+     */
+    id: string;
+  }[];
   publicAccess?: string;
-  referral: boolean;
+  referral?: boolean;
   remindCompleted?: boolean;
-  repeatable: boolean;
+  repeatable?: boolean;
   reportDateToUse?: string;
   sharing?: Sharing;
   shortName?: string;
@@ -7790,10 +13917,324 @@ export type ProgramStage = {
   standardInterval?: number;
   style?: ObjectStyle;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
   validationStrategy: 'ON_COMPLETE' | 'ON_UPDATE_AND_INSERT';
+};
+
+export type ProgramStageDataElement = {
+  access?: Access;
+  allowFutureDate?: boolean;
+  allowProvidedElsewhere?: boolean;
+  attributeValues?: AttributeValue[];
+  code?: string;
+  compulsory?: boolean;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a DataElement
+   * (Java name `org.hisp.dhis.dataelement.DataElement`)
+   */
+  dataElement?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example hX7n8Y4pu89
+     */
+    id: string;
+  };
+  displayInReports?: boolean;
+  displayName?: string;
+  externalAccess?: boolean;
+  favorite?: boolean;
+  favorites?: string[];
+  href?: string;
+  id?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  name?: string;
+  /**
+   * A UID reference to a ProgramStage
+   * (Java name `org.hisp.dhis.program.ProgramStage`)
+   */
+  programStage?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example uf8uS7d0KE2
+     */
+    id: string;
+  };
+  publicAccess?: string;
+  renderOptionsAsRadio?: boolean;
+  /**
+   * The exact type is unknown.
+   * (Java type was: `org.hisp.dhis.render.DeviceRenderTypeMap<org.hisp.dhis.render.type.ValueTypeRenderingObject>`)
+   */
+  renderType?: void;
+  sharing?: Sharing;
+  skipAnalytics?: boolean;
+  skipSynchronization?: boolean;
+  /**
+   * @format int32
+   */
+  sortOrder?: number;
+  translations?: Translation[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+};
+
+export type ProgramStageInstance = {
+  access?: Access;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  assignedUser?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a CategoryOptionCombo
+   * (Java name `org.hisp.dhis.category.CategoryOptionCombo`)
+   */
+  attributeOptionCombo?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example o5Bz19pJ30h
+     */
+    id: string;
+  };
+  attributeValues?: AttributeValue[];
+  code?: string;
+  comments?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Gn6yT5cU457
+     */
+    id: string;
+  }[];
+  completed?: boolean;
+  completedBy?: string;
+  /**
+   * @format date-time
+   */
+  completedDate?: string;
+  creatableInSearchScope?: boolean;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  /**
+   * @format date-time
+   */
+  createdAtClient?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  createdByUserInfo?: UserInfoSnapshot;
+  deleted?: boolean;
+  displayName?: string;
+  /**
+   * @format date-time
+   */
+  dueDate?: string;
+  eventDataValues?: EventDataValue[];
+  /**
+   * @format date-time
+   */
+  eventDate?: string;
+  externalAccess?: boolean;
+  favorite?: boolean;
+  favorites?: string[];
+  geometry?: Record<string, any>;
+  href?: string;
+  id?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdatedAtClient?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  lastUpdatedByUserInfo?: UserInfoSnapshot;
+  messageConversations?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example y9AN11cR3Yj
+     */
+    id: string;
+  }[];
+  name?: string;
+  /**
+   * A UID reference to a OrganisationUnit
+   * (Java name `org.hisp.dhis.organisationunit.OrganisationUnit`)
+   */
+  organisationUnit?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a ProgramInstance
+   * (Java name `org.hisp.dhis.program.ProgramInstance`)
+   */
+  programInstance?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xi1xV0gT9Zd
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a ProgramStage
+   * (Java name `org.hisp.dhis.program.ProgramStage`)
+   */
+  programStage?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example uf8uS7d0KE2
+     */
+    id: string;
+  };
+  publicAccess?: string;
+  relationshipItems?: RelationshipItem[];
+  sharing?: Sharing;
+  status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
+  storedBy?: string;
+  translations?: Translation[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type ProgramStageInstanceFilter = {
@@ -7804,13 +14245,26 @@ export type ProgramStageInstanceFilter = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   displayDescription?: string;
   displayName?: string;
   eventQueryCriteria?: EventQueryCriteria;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -7818,16 +14272,42 @@ export type ProgramStageInstanceFilter = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   program?: string;
   programStage?: string;
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type ProgramStageQueryCriteria = {
@@ -7856,15 +14336,37 @@ export type ProgramStageSection = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dataElements?: RefDataElement[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  dataElements?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example hX7n8Y4pu89
+     */
+    id: string;
+  }[];
   description?: string;
   displayDescription?: string;
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
@@ -7873,10 +14375,45 @@ export type ProgramStageSection = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
-  programIndicators?: RefProgramIndicator[];
-  programStage?: RefProgramStage;
+  programIndicators?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example yj2yW1hU0L3
+     */
+    id: string;
+  }[];
+  /**
+   * A UID reference to a ProgramStage
+   * (Java name `org.hisp.dhis.program.ProgramStage`)
+   */
+  programStage?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example uf8uS7d0KE2
+     */
+    id: string;
+  };
   publicAccess?: string;
   /**
    * The exact type is unknown.
@@ -7891,9 +14428,22 @@ export type ProgramStageSection = {
   sortOrder?: number;
   style?: ObjectStyle;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type ProgramStageWorkingList = {
@@ -7904,12 +14454,25 @@ export type ProgramStageWorkingList = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   displayDescription?: string;
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -7917,25 +14480,330 @@ export type ProgramStageWorkingList = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
-  program?: RefProgram;
-  programStage?: RefProgramStage;
+  /**
+   * A UID reference to a Program
+   * (Java name `org.hisp.dhis.program.Program`)
+   */
+  program?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pa3pN28SD4S
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a ProgramStage
+   * (Java name `org.hisp.dhis.program.ProgramStage`)
+   */
+  programStage?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example uf8uS7d0KE2
+     */
+    id: string;
+  };
   programStageQueryCriteria?: ProgramStageQueryCriteria;
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+};
+
+export type ProgramTrackedEntityAttribute = {
+  access?: Access;
+  allowFutureDate?: boolean;
+  attributeValues?: AttributeValue[];
+  code?: string;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  displayInList?: boolean;
+  displayName?: string;
+  displayShortName?: string;
+  externalAccess?: boolean;
+  favorite?: boolean;
+  favorites?: string[];
+  href?: string;
+  id?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  mandatory?: boolean;
+  /**
+   * A UID reference to a Program
+   * (Java name `org.hisp.dhis.program.Program`)
+   */
+  program?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pa3pN28SD4S
+     */
+    id: string;
+  };
+  publicAccess?: string;
+  renderOptionsAsRadio?: boolean;
+  /**
+   * The exact type is unknown.
+   * (Java type was: `org.hisp.dhis.render.DeviceRenderTypeMap<org.hisp.dhis.render.type.ValueTypeRenderingObject>`)
+   */
+  renderType?: void;
+  searchable?: boolean;
+  sharing?: Sharing;
+  /**
+   * @format int32
+   */
+  sortOrder?: number;
+  /**
+   * A UID reference to a TrackedEntityAttribute
+   * (Java name `org.hisp.dhis.trackedentity.TrackedEntityAttribute`)
+   */
+  trackedEntityAttribute?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Ip8AV7eW679
+     */
+    id: string;
+  };
+  translations?: Translation[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+  valueType:
+    | 'TEXT'
+    | 'LONG_TEXT'
+    | 'MULTI_TEXT'
+    | 'LETTER'
+    | 'PHONE_NUMBER'
+    | 'EMAIL'
+    | 'BOOLEAN'
+    | 'TRUE_ONLY'
+    | 'DATE'
+    | 'DATETIME'
+    | 'TIME'
+    | 'NUMBER'
+    | 'UNIT_INTERVAL'
+    | 'PERCENTAGE'
+    | 'INTEGER'
+    | 'INTEGER_POSITIVE'
+    | 'INTEGER_NEGATIVE'
+    | 'INTEGER_ZERO_OR_POSITIVE'
+    | 'TRACKER_ASSOCIATE'
+    | 'USERNAME'
+    | 'COORDINATE'
+    | 'ORGANISATION_UNIT'
+    | 'REFERENCE'
+    | 'AGE'
+    | 'URL'
+    | 'FILE_RESOURCE'
+    | 'IMAGE'
+    | 'GEOJSON';
+};
+
+export type ProgramTrackedEntityAttributeDimensionItem = {
+  access?: Access;
+  /**
+   * A UID reference to a TrackedEntityAttribute
+   * (Java name `org.hisp.dhis.trackedentity.TrackedEntityAttribute`)
+   */
+  attribute?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Ip8AV7eW679
+     */
+    id: string;
+  };
+  attributeValues?: AttributeValue[];
+  code?: string;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  description?: string;
+  displayDescription?: string;
+  displayFormName?: string;
+  externalAccess?: boolean;
+  favorite?: boolean;
+  favorites?: string[];
+  formName?: string;
+  href?: string;
+  id?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a Program
+   * (Java name `org.hisp.dhis.program.Program`)
+   */
+  program?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pa3pN28SD4S
+     */
+    id: string;
+  };
+  publicAccess?: string;
+  queryMods?: QueryModifiers;
+  sharing?: Sharing;
+  shortName?: string;
+  translations?: Translation[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type Property = {
-  analyticalObject: boolean;
+  analyticalObject?: boolean;
   apiEndpoint?: string;
-  attribute: boolean;
+  attribute?: boolean;
   cascade?: string;
-  collection: boolean;
+  collection?: boolean;
   collectionName?: string;
   collectionWrapping?: boolean;
   constants?: string[];
@@ -7945,12 +14813,12 @@ export type Property = {
    */
   defaultValue?: Record<string, any>;
   description?: string;
-  embeddedObject: boolean;
+  embeddedObject?: boolean;
   fieldName?: string;
   gistPreferences?: GistPreferences;
   href?: string;
   i18nTranslationKey?: string;
-  identifiableObject: boolean;
+  identifiableObject?: boolean;
   inverseRole?: string;
   /**
    * @format class
@@ -7982,8 +14850,8 @@ export type Property = {
    * @format int32
    */
   length?: number;
-  manyToMany: boolean;
-  manyToOne: boolean;
+  manyToMany?: boolean;
+  manyToOne?: boolean;
   /**
    * @format double
    */
@@ -7993,15 +14861,15 @@ export type Property = {
    */
   min?: number;
   name?: string;
-  nameableObject: boolean;
+  nameableObject?: boolean;
   namespace?: string;
-  oneToMany: boolean;
-  oneToOne: boolean;
-  ordered: boolean;
-  owner: boolean;
+  oneToMany?: boolean;
+  oneToOne?: boolean;
+  ordered?: boolean;
+  owner?: boolean;
   owningRole?: string;
-  persisted: boolean;
-  propertyTransformer: boolean;
+  persisted?: boolean;
+  propertyTransformer?: boolean;
   propertyType:
     | 'IDENTIFIER'
     | 'TEXT'
@@ -8020,14 +14888,14 @@ export type Property = {
     | 'COMPLEX'
     | 'COLLECTION'
     | 'REFERENCE';
-  readable: boolean;
+  readable?: boolean;
   relativeApiEndpoint?: string;
-  required: boolean;
-  simple: boolean;
-  translatable: boolean;
+  required?: boolean;
+  simple?: boolean;
+  translatable?: boolean;
   translationKey?: string;
-  unique: boolean;
-  writable: boolean;
+  unique?: boolean;
+  writable?: boolean;
 };
 
 export type PushAnalysis = {
@@ -8038,11 +14906,37 @@ export type PushAnalysis = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dashboard?: RefDashboard;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a Dashboard
+   * (Java name `org.hisp.dhis.dashboard.Dashboard`)
+   */
+  dashboard?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example fV5sz4Ys38O
+     */
+    id: string;
+  };
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -8050,21 +14944,56 @@ export type PushAnalysis = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   message?: string;
   name?: string;
   publicAccess?: string;
-  recipientUserGroups?: RefUserGroup[];
+  recipientUserGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example wd5C82cv3p6
+     */
+    id: string;
+  }[];
   sharing?: Sharing;
   title?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type PushAnalysisJobParameters = {
-  pushAnalysis: string[];
+  pushAnalysis: Uid[];
 };
 
 export type QueryModifiers = {
@@ -8132,7 +15061,7 @@ export type QueryModifiers = {
     | 'FILE_RESOURCE'
     | 'IMAGE'
     | 'GEOJSON';
-  yearToDate: boolean;
+  yearToDate?: boolean;
 };
 
 export type Rectangle = {
@@ -8154,46 +15083,315 @@ export type RefererAllowedList = {
 };
 
 export type Relationship = {
-  bidirectional: boolean;
+  bidirectional?: boolean;
   created?: string;
-  from?: RelationshipItem;
+  from?: TrackerRelationshipItem;
   lastUpdated?: string;
   relationship?: string;
   relationshipName?: string;
   relationshipType?: string;
-  to?: RelationshipItem;
+  to?: TrackerRelationshipItem;
 };
 
 export type RelationshipConstraint = {
-  program?: RefProgram;
-  programStage?: RefProgramStage;
+  /**
+   * A UID reference to a Program
+   * (Java name `org.hisp.dhis.program.Program`)
+   */
+  program?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pa3pN28SD4S
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a ProgramStage
+   * (Java name `org.hisp.dhis.program.ProgramStage`)
+   */
+  programStage?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example uf8uS7d0KE2
+     */
+    id: string;
+  };
   relationshipEntity: 'TRACKED_ENTITY_INSTANCE' | 'PROGRAM_INSTANCE' | 'PROGRAM_STAGE_INSTANCE';
-  trackedEntityType?: RefTrackedEntityType;
+  /**
+   * A UID reference to a TrackedEntityType
+   * (Java name `org.hisp.dhis.trackedentity.TrackedEntityType`)
+   */
+  trackedEntityType?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Dk3vQ29RJ44
+     */
+    id: string;
+  };
   trackerDataView?: TrackerDataView;
 };
 
+export type RelationshipInfo = {
+  bidirectional?: boolean;
+  createdAt?: string | number;
+  from?: RelationshipItemInfo;
+  relationship?: string;
+  relationshipName?: string;
+  relationshipType?: string;
+  to?: RelationshipItemInfo;
+  updatedAt?: string | number;
+};
+
 export type RelationshipItem = {
-  enrollment?: Enrollment;
-  event?: Event;
-  trackedEntityInstance?: Dxf2EventsTrackedentityTrackedEntityInstance;
+  /**
+   * A UID reference to a ProgramInstance
+   * (Java name `org.hisp.dhis.program.ProgramInstance`)
+   */
+  programInstance?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xi1xV0gT9Zd
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a ProgramStageInstance
+   * (Java name `org.hisp.dhis.program.ProgramStageInstance`)
+   */
+  programStageInstance?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Cn6C0Wl1SM0
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a Relationship
+   * (Java name `org.hisp.dhis.relationship.Relationship`)
+   */
+  relationship?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example w2mo4Wf3JL2
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a TrackedEntityInstance
+   * (Java name `org.hisp.dhis.trackedentity.TrackedEntityInstance`)
+   */
+  trackedEntityInstance?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Ho7zU6dV568
+     */
+    id: string;
+  };
+};
+
+export type RelationshipItemInfo = {
+  enrollment?: {
+    attributes?: AttributeInfo[];
+    completedAt?: string | number;
+    completedBy?: string;
+    createdAt?: string | number;
+    createdAtClient?: string | number;
+    createdBy?: TrackerUser;
+    deleted?: boolean;
+    enrolledAt?: string | number;
+    enrollment?: string;
+    events?: {
+      assignedUser?: TrackerUser;
+      attributeCategoryOptions?: string;
+      attributeOptionCombo?: string;
+      completedAt?: string | number;
+      completedBy?: string;
+      createdAt?: string | number;
+      createdAtClient?: string | number;
+      createdBy?: TrackerUser;
+      dataValues?: DataValueInfo[];
+      deleted?: boolean;
+      enrollment?: string;
+      event?: string;
+      followup?: boolean;
+      geometry?: Record<string, any>;
+      notes?: NoteInfo[];
+      occurredAt?: string | number;
+      orgUnit?: string;
+      orgUnitName?: string;
+      program?: string;
+      programStage?: string;
+      scheduledAt?: string | number;
+      status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
+      storedBy?: string;
+      updatedAt?: string | number;
+      updatedAtClient?: string | number;
+      updatedBy?: TrackerUser;
+    }[];
+    followUp?: boolean;
+    geometry?: Record<string, any>;
+    notes?: NoteInfo[];
+    occurredAt?: string | number;
+    orgUnit?: string;
+    orgUnitName?: string;
+    program?: string;
+    status: 'ACTIVE' | 'COMPLETED' | 'CANCELLED';
+    storedBy?: string;
+    trackedEntity?: string;
+    updatedAt?: string | number;
+    updatedAtClient?: string | number;
+    updatedBy?: TrackerUser;
+  };
+  event?: {
+    assignedUser?: TrackerUser;
+    attributeCategoryOptions?: string;
+    attributeOptionCombo?: string;
+    completedAt?: string | number;
+    completedBy?: string;
+    createdAt?: string | number;
+    createdAtClient?: string | number;
+    createdBy?: TrackerUser;
+    dataValues?: DataValueInfo[];
+    deleted?: boolean;
+    enrollment?: string;
+    event?: string;
+    followup?: boolean;
+    geometry?: Record<string, any>;
+    notes?: NoteInfo[];
+    occurredAt?: string | number;
+    orgUnit?: string;
+    orgUnitName?: string;
+    program?: string;
+    programStage?: string;
+    scheduledAt?: string | number;
+    status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
+    storedBy?: string;
+    updatedAt?: string | number;
+    updatedAtClient?: string | number;
+    updatedBy?: TrackerUser;
+  };
+  trackedEntity?: {
+    attributes?: AttributeInfo[];
+    createdAt?: string | number;
+    createdAtClient?: string | number;
+    createdBy?: TrackerUser;
+    deleted?: boolean;
+    enrollments?: {
+      attributes?: AttributeInfo[];
+      completedAt?: string | number;
+      completedBy?: string;
+      createdAt?: string | number;
+      createdAtClient?: string | number;
+      createdBy?: TrackerUser;
+      deleted?: boolean;
+      enrolledAt?: string | number;
+      enrollment?: string;
+      events?: {
+        assignedUser?: TrackerUser;
+        attributeCategoryOptions?: string;
+        attributeOptionCombo?: string;
+        completedAt?: string | number;
+        completedBy?: string;
+        createdAt?: string | number;
+        createdAtClient?: string | number;
+        createdBy?: TrackerUser;
+        dataValues?: DataValueInfo[];
+        deleted?: boolean;
+        enrollment?: string;
+        event?: string;
+        followup?: boolean;
+        geometry?: Record<string, any>;
+        notes?: NoteInfo[];
+        occurredAt?: string | number;
+        orgUnit?: string;
+        orgUnitName?: string;
+        program?: string;
+        programStage?: string;
+        scheduledAt?: string | number;
+        status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
+        storedBy?: string;
+        updatedAt?: string | number;
+        updatedAtClient?: string | number;
+        updatedBy?: TrackerUser;
+      }[];
+      followUp?: boolean;
+      geometry?: Record<string, any>;
+      notes?: NoteInfo[];
+      occurredAt?: string | number;
+      orgUnit?: string;
+      orgUnitName?: string;
+      program?: string;
+      status: 'ACTIVE' | 'COMPLETED' | 'CANCELLED';
+      storedBy?: string;
+      trackedEntity?: string;
+      updatedAt?: string | number;
+      updatedAtClient?: string | number;
+      updatedBy?: TrackerUser;
+    }[];
+    geometry?: Record<string, any>;
+    inactive?: boolean;
+    orgUnit?: string;
+    potentialDuplicate?: boolean;
+    programOwners?: ProgramOwnerInfo[];
+    storedBy?: string;
+    trackedEntity?: string;
+    trackedEntityType?: string;
+    updatedAt?: string | number;
+    updatedAtClient?: string | number;
+    updatedBy?: TrackerUser;
+  };
 };
 
 export type RelationshipType = {
   access?: Access;
   attributeValues?: AttributeValue[];
-  bidirectional: boolean;
+  bidirectional?: boolean;
   code?: string;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   displayFromToName?: string;
   displayName?: string;
   displayToFromName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   fromConstraint?: RelationshipConstraint;
   fromToName?: string;
@@ -8203,65 +15401,91 @@ export type RelationshipType = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
-  referral: boolean;
+  referral?: boolean;
   sharing?: Sharing;
   toConstraint?: RelationshipConstraint;
   toFromName?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type RelativePeriods = {
-  biMonthsThisYear: boolean;
-  last10FinancialYears: boolean;
-  last10Years: boolean;
-  last12Months: boolean;
-  last12Weeks: boolean;
-  last14Days: boolean;
-  last180Days: boolean;
-  last2SixMonths: boolean;
-  last30Days: boolean;
-  last3Days: boolean;
-  last3Months: boolean;
-  last4BiWeeks: boolean;
-  last4Quarters: boolean;
-  last4Weeks: boolean;
-  last52Weeks: boolean;
-  last5FinancialYears: boolean;
-  last5Years: boolean;
-  last60Days: boolean;
-  last6BiMonths: boolean;
-  last6Months: boolean;
-  last7Days: boolean;
-  last90Days: boolean;
-  lastBiWeek: boolean;
-  lastBimonth: boolean;
-  lastFinancialYear: boolean;
-  lastMonth: boolean;
-  lastQuarter: boolean;
-  lastSixMonth: boolean;
-  lastWeek: boolean;
-  lastYear: boolean;
-  monthsLastYear: boolean;
-  monthsThisYear: boolean;
-  quartersLastYear: boolean;
-  quartersThisYear: boolean;
-  thisBiWeek: boolean;
-  thisBimonth: boolean;
-  thisDay: boolean;
-  thisFinancialYear: boolean;
-  thisMonth: boolean;
-  thisQuarter: boolean;
-  thisSixMonth: boolean;
-  thisWeek: boolean;
-  thisYear: boolean;
-  weeksThisYear: boolean;
-  yesterday: boolean;
+  biMonthsThisYear?: boolean;
+  last10FinancialYears?: boolean;
+  last10Years?: boolean;
+  last12Months?: boolean;
+  last12Weeks?: boolean;
+  last14Days?: boolean;
+  last180Days?: boolean;
+  last2SixMonths?: boolean;
+  last30Days?: boolean;
+  last3Days?: boolean;
+  last3Months?: boolean;
+  last4BiWeeks?: boolean;
+  last4Quarters?: boolean;
+  last4Weeks?: boolean;
+  last52Weeks?: boolean;
+  last5FinancialYears?: boolean;
+  last5Years?: boolean;
+  last60Days?: boolean;
+  last6BiMonths?: boolean;
+  last6Months?: boolean;
+  last7Days?: boolean;
+  last90Days?: boolean;
+  lastBiWeek?: boolean;
+  lastBimonth?: boolean;
+  lastFinancialYear?: boolean;
+  lastMonth?: boolean;
+  lastQuarter?: boolean;
+  lastSixMonth?: boolean;
+  lastWeek?: boolean;
+  lastYear?: boolean;
+  monthsLastYear?: boolean;
+  monthsThisYear?: boolean;
+  quartersLastYear?: boolean;
+  quartersThisYear?: boolean;
+  thisBiWeek?: boolean;
+  thisBimonth?: boolean;
+  thisDay?: boolean;
+  thisFinancialYear?: boolean;
+  thisMonth?: boolean;
+  thisQuarter?: boolean;
+  thisSixMonth?: boolean;
+  thisWeek?: boolean;
+  thisYear?: boolean;
+  weeksThisYear?: boolean;
+  yesterday?: boolean;
 };
 
 export type RemoveByIdOperation = {
@@ -8299,11 +15523,24 @@ export type Report = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   designContent?: string;
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -8311,7 +15548,20 @@ export type Report = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
   relativePeriods?: RelativePeriods;
@@ -8319,17 +15569,171 @@ export type Report = {
   sharing?: Sharing;
   translations?: Translation[];
   type: 'JASPER_REPORT_TABLE' | 'JASPER_JDBC' | 'HTML';
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
-  visualization?: RefVisualization;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+  /**
+   * A UID reference to a Visualization
+   * (Java name `org.hisp.dhis.visualization.Visualization`)
+   */
+  visualization?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example B7uJ50aE7Y0
+     */
+    id: string;
+  };
 };
 
 export type ReportingParams = {
-  grandParentOrganisationUnit: boolean;
-  organisationUnit: boolean;
-  parentOrganisationUnit: boolean;
-  reportingPeriod: boolean;
+  grandParentOrganisationUnit?: boolean;
+  organisationUnit?: boolean;
+  parentOrganisationUnit?: boolean;
+  reportingPeriod?: boolean;
+};
+
+export type ReportingRate = {
+  access?: Access;
+  aggregationType:
+    | 'SUM'
+    | 'AVERAGE'
+    | 'AVERAGE_SUM_ORG_UNIT'
+    | 'LAST'
+    | 'LAST_AVERAGE_ORG_UNIT'
+    | 'LAST_LAST_ORG_UNIT'
+    | 'LAST_IN_PERIOD'
+    | 'LAST_IN_PERIOD_AVERAGE_ORG_UNIT'
+    | 'FIRST'
+    | 'FIRST_AVERAGE_ORG_UNIT'
+    | 'FIRST_FIRST_ORG_UNIT'
+    | 'COUNT'
+    | 'STDDEV'
+    | 'VARIANCE'
+    | 'MIN'
+    | 'MAX'
+    | 'MIN_SUM_ORG_UNIT'
+    | 'MAX_SUM_ORG_UNIT'
+    | 'NONE'
+    | 'CUSTOM'
+    | 'DEFAULT';
+  attributeValues?: AttributeValue[];
+  code?: string;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a DataSet
+   * (Java name `org.hisp.dhis.dataset.DataSet`)
+   */
+  dataSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example dT3ji2fG1SM
+     */
+    id: string;
+  };
+  description?: string;
+  displayDescription?: string;
+  displayFormName?: string;
+  displayName?: string;
+  displayShortName?: string;
+  externalAccess?: boolean;
+  favorite?: boolean;
+  favorites?: string[];
+  formName?: string;
+  href?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  metric:
+    | 'REPORTING_RATE'
+    | 'REPORTING_RATE_ON_TIME'
+    | 'ACTUAL_REPORTS'
+    | 'ACTUAL_REPORTS_ON_TIME'
+    | 'EXPECTED_REPORTS';
+  publicAccess?: string;
+  queryMods?: QueryModifiers;
+  sharing?: Sharing;
+  translations?: Translation[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type RequestInfo = {
@@ -8379,12 +15783,25 @@ export type Route = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   disabled: boolean;
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   headers: {
     [key: string]: string;
@@ -8395,23 +15812,49 @@ export type Route = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
   url: string;
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type SMPPGatewayConfig = {
   bindType: 'BIND_TX' | 'BIND_RX' | 'BIND_TRX';
-  compressed: boolean;
+  compressed?: boolean;
   host?: string;
   id?: string;
-  isDefault: boolean;
+  isDefault?: boolean;
   maxSmsLength?: string;
   name?: string;
   numberPlanIndicator:
@@ -8430,7 +15873,7 @@ export type SMPPGatewayConfig = {
    * @format int32
    */
   port: number;
-  sendUrlParameters: boolean;
+  sendUrlParameters?: boolean;
   systemId?: string;
   systemType?: string;
   typeOfNumber:
@@ -8448,11 +15891,50 @@ export type SMPPGatewayConfig = {
 
 export type SMSCode = {
   code?: string;
-  compulsory: boolean;
-  dataElement?: RefDataElement;
+  compulsory?: boolean;
+  /**
+   * A UID reference to a DataElement
+   * (Java name `org.hisp.dhis.dataelement.DataElement`)
+   */
+  dataElement?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example hX7n8Y4pu89
+     */
+    id: string;
+  };
   formula?: string;
-  optionId?: RefCategoryOptionCombo;
-  trackedEntityAttribute?: RefTrackedEntityAttribute;
+  /**
+   * A UID reference to a CategoryOptionCombo
+   * (Java name `org.hisp.dhis.category.CategoryOptionCombo`)
+   */
+  optionId?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example o5Bz19pJ30h
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a TrackedEntityAttribute
+   * (Java name `org.hisp.dhis.trackedentity.TrackedEntityAttribute`)
+   */
+  trackedEntityAttribute?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Ip8AV7eW679
+     */
+    id: string;
+  };
 };
 
 export type SMSCommand = {
@@ -8465,13 +15947,39 @@ export type SMSCommand = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  currentPeriodUsedForReporting: boolean;
-  dataset?: RefDataSet;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  currentPeriodUsedForReporting?: boolean;
+  /**
+   * A UID reference to a DataSet
+   * (Java name `org.hisp.dhis.dataset.DataSet`)
+   */
+  dataset?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example dT3ji2fG1SM
+     */
+    id: string;
+  };
   defaultMessage?: string;
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -8479,7 +15987,20 @@ export type SMSCommand = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   moreThanOneOrgUnitMessage?: string;
   name?: string;
   noUserMessage?: string;
@@ -8491,8 +16012,34 @@ export type SMSCommand = {
     | 'TRACKED_ENTITY_REGISTRATION_PARSER'
     | 'PROGRAM_STAGE_DATAENTRY_PARSER'
     | 'EVENT_REGISTRATION_PARSER';
-  program?: RefProgram;
-  programStage?: RefProgramStage;
+  /**
+   * A UID reference to a Program
+   * (Java name `org.hisp.dhis.program.Program`)
+   */
+  program?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pa3pN28SD4S
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a ProgramStage
+   * (Java name `org.hisp.dhis.program.ProgramStage`)
+   */
+  programStage?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example uf8uS7d0KE2
+     */
+    id: string;
+  };
   publicAccess?: string;
   receivedMessage?: string;
   separator?: string;
@@ -8501,10 +16048,36 @@ export type SMSCommand = {
   specialCharacters?: SMSSpecialCharacter[];
   successMessage?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroup?: RefUserGroup;
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  /**
+   * A UID reference to a UserGroup
+   * (Java name `org.hisp.dhis.user.UserGroup`)
+   */
+  userGroup?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example wd5C82cv3p6
+     */
+    id: string;
+  };
+  userGroupAccesses?: LegacyUserGroupAccess[];
   wrongFormatMessage?: string;
 };
 
@@ -8514,13 +16087,13 @@ export type SMSSpecialCharacter = {
 };
 
 export type SchedulerEntry = {
-  configurable: boolean;
+  configurable?: boolean;
   cronExpression?: string;
   /**
    * @format int32
    */
   delay?: number;
-  enabled: boolean;
+  enabled?: boolean;
   name?: string;
   /**
    * @format date-time
@@ -8537,7 +16110,17 @@ export type SchedulerEntryJob = {
    * @format int32
    */
   delay?: number;
-  id?: UIDJobConfiguration;
+  /**
+   * A UID for an JobConfiguration object
+   * (Java name `org.hisp.dhis.scheduling.JobConfiguration`)
+   *
+   * @format uid
+   * @pattern ^[0-9a-zA-Z]{11}$
+   * @minLength 11
+   * @maxLength 11
+   * @example sg2YT1aq02c
+   */
+  id?: string;
   name?: string;
   /**
    * @format date-time
@@ -8595,49 +16178,128 @@ export type SchedulerEntryJob = {
 export type SchedulerQueue = {
   cronExpression: string;
   name?: string;
-  sequence: UIDJobConfiguration[];
+  sequence: Uid[];
 };
 
 export type Section = {
   access?: Access;
   attributeValues?: AttributeValue[];
-  categoryCombos?: RefCategoryCombo[];
+  categoryCombos?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example iZ9tI8jD7T4
+     */
+    id: string;
+  }[];
   code?: string;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  dataElements?: RefDataElement[];
-  dataSet?: RefDataSet;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  dataElements?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example hX7n8Y4pu89
+     */
+    id: string;
+  }[];
+  /**
+   * A UID reference to a DataSet
+   * (Java name `org.hisp.dhis.dataset.DataSet`)
+   */
+  dataSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example dT3ji2fG1SM
+     */
+    id: string;
+  };
   description?: string;
-  disableDataElementAutoGroup: boolean;
+  disableDataElementAutoGroup?: boolean;
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
-  greyedFields?: RefDataElementOperand[];
+  greyedFields?: DataElementOperand[];
   href?: string;
   id?: string;
-  indicators?: RefIndicator[];
+  indicators?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example k8bt1Lh0Fd9
+     */
+    id: string;
+  }[];
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
-  showColumnTotals: boolean;
-  showRowTotals: boolean;
+  showColumnTotals?: boolean;
+  showRowTotals?: boolean;
   /**
    * @format int32
    */
   sortOrder: number;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type Series = {
@@ -8666,25 +16328,30 @@ export type Series = {
 };
 
 export type SeriesKey = {
-  hidden: boolean;
+  hidden?: boolean;
   label?: StyledObject;
 };
 
 export type Sharing = {
-  external: boolean;
+  external?: boolean;
   owner?: string;
   public?: string;
   userGroups?: {
-    [key: string]: UserSharingUserGroupAccess;
+    [key: string]: UserGroupAccess;
   };
   users?: {
-    [key: string]: UserSharingUserAccess;
+    [key: string]: UserAccess;
   };
+};
+
+export type SharingInfo = {
+  meta?: Meta;
+  object?: SharingObject;
 };
 
 export type SharingObject = {
   displayName?: string;
-  externalAccess: boolean;
+  externalAccess?: boolean;
   id?: string;
   name?: string;
   publicAccess?: string;
@@ -8735,9 +16402,14 @@ export type SmsJobParameters = {
   smsSubject?: string;
 };
 
+export type Sorting = {
+  dimension: string;
+  direction: 'ASC' | 'DESC';
+};
+
 export type Source = {
-  params?: SourceParams;
-  requests?: SourceRequest[];
+  fields: string;
+  path: string;
 };
 
 export type SourceParams = {
@@ -8751,6 +16423,7 @@ export type SourceParams = {
     | 'FINANCIAL_OCT'
     | 'MONTHLY'
     | 'QUARTERLY'
+    | 'QUARTERLY_NOV'
     | 'SIX_MONTHLY_APRIL'
     | 'SIX_MONTHLY_NOV'
     | 'SIX_MONTHLY'
@@ -8765,6 +16438,28 @@ export type SourceParams = {
 };
 
 export type SourceRequest = {
+  aggregationType:
+    | 'SUM'
+    | 'AVERAGE'
+    | 'AVERAGE_SUM_ORG_UNIT'
+    | 'LAST'
+    | 'LAST_AVERAGE_ORG_UNIT'
+    | 'LAST_LAST_ORG_UNIT'
+    | 'LAST_IN_PERIOD'
+    | 'LAST_IN_PERIOD_AVERAGE_ORG_UNIT'
+    | 'FIRST'
+    | 'FIRST_AVERAGE_ORG_UNIT'
+    | 'FIRST_FIRST_ORG_UNIT'
+    | 'COUNT'
+    | 'STDDEV'
+    | 'VARIANCE'
+    | 'MIN'
+    | 'MAX'
+    | 'MIN_SUM_ORG_UNIT'
+    | 'MAX_SUM_ORG_UNIT'
+    | 'NONE'
+    | 'CUSTOM'
+    | 'DEFAULT';
   dx?: string[];
   filters?: Filter[];
   inputIdScheme?: string;
@@ -8807,11 +16502,24 @@ export type SqlView = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -8819,7 +16527,20 @@ export type SqlView = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
@@ -8827,17 +16548,30 @@ export type SqlView = {
   translations?: Translation[];
   type: 'VIEW' | 'MATERIALIZED_VIEW' | 'QUERY';
   updateJobId?: string;
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type SqlViewUpdateParameters = {
-  sqlViews?: string[];
+  sqlViews?: Uid[];
 };
 
 export type Stage = {
-  complete: boolean;
+  complete?: boolean;
   /**
    * @format date-time
    */
@@ -8907,8 +16641,8 @@ export type SystemInfo = {
   cpuCores?: number;
   databaseInfo?: DatabaseInfo;
   dateFormat?: string;
-  emailConfigured: boolean;
-  encryption: boolean;
+  emailConfigured?: boolean;
+  encryption?: boolean;
   environmentVariable?: string;
   externalDirectory?: string;
   fileStoreProvider?: string;
@@ -8949,7 +16683,7 @@ export type SystemInfo = {
    * @format int32
    */
   readReplicaCount?: number;
-  redisEnabled: boolean;
+  redisEnabled?: boolean;
   redisHostname?: string;
   revision?: string;
   /**
@@ -8964,12 +16698,6 @@ export type SystemInfo = {
   systemName?: string;
   userAgent?: string;
   version?: string;
-};
-
-export type Target = {
-  api?: Api;
-  request?: TargetRequest;
-  type: 'INTERNAL' | 'EXTERNAL';
 };
 
 export type TargetRequest = {
@@ -8988,7 +16716,7 @@ export type TestJobParameters = {
    * @format int32
    */
   failAtStage?: number;
-  failWithException: boolean;
+  failWithException?: boolean;
   failWithMessage?: string;
   failWithPolicy: 'PARENT' | 'FAIL' | 'SKIP_STAGE' | 'SKIP_ITEM' | 'SKIP_ITEM_OUTLIER';
   /**
@@ -8999,7 +16727,7 @@ export type TestJobParameters = {
    * @format int32
    */
   items?: number;
-  runStagesParallel: boolean;
+  runStagesParallel?: boolean;
   /**
    * @format int32
    */
@@ -9017,23 +16745,26 @@ export type TimingsStats = {
 };
 
 export type TrackedEntity = {
-  attributes?: WebapiControllerTrackerViewAttribute[];
-  createdAt?: string | number;
-  createdAtClient?: string | number;
-  createdBy?: WebapiControllerTrackerViewUser;
-  deleted: boolean;
-  enrollments?: WebapiControllerTrackerViewRelationshipItemEnrollment[];
+  attributes?: TrackerAttribute[];
+  coordinates?: string;
+  created: string;
+  createdAtClient: string;
+  createdByUserInfo?: UserInfoSnapshot;
+  deleted?: boolean;
+  enrollments?: Enrollment[];
+  featureType: 'NONE' | 'MULTI_POLYGON' | 'POLYGON' | 'POINT' | 'SYMBOL';
   geometry?: Record<string, any>;
-  inactive: boolean;
-  orgUnit?: string;
-  potentialDuplicate: boolean;
-  programOwners?: WebapiControllerTrackerViewProgramOwner[];
+  inactive?: boolean;
+  lastUpdated: string;
+  lastUpdatedAtClient: string;
+  lastUpdatedByUserInfo?: UserInfoSnapshot;
+  orgUnit: string;
+  potentialDuplicate?: boolean;
+  programOwners?: ProgramOwner[];
+  relationships?: Relationship[];
   storedBy?: string;
-  trackedEntity?: string;
-  trackedEntityType?: string;
-  updatedAt?: string | number;
-  updatedAtClient?: string | number;
-  updatedBy?: WebapiControllerTrackerViewUser;
+  trackedEntityInstance: string;
+  trackedEntityType: string;
 };
 
 export type TrackedEntityAttribute = {
@@ -9067,7 +16798,20 @@ export type TrackedEntityAttribute = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   dimensionItem?: string;
   displayDescription?: string;
@@ -9077,8 +16821,8 @@ export type TrackedEntityAttribute = {
   displayOnVisitSchedule?: boolean;
   displayShortName?: string;
   expression?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   fieldMask?: string;
   formName?: string;
@@ -9090,12 +16834,60 @@ export type TrackedEntityAttribute = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  legendSet?: RefLegendSet;
-  legendSets?: RefLegendSet[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  legendSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  }[];
   name?: string;
-  optionSet?: RefOptionSet;
-  optionSetValue: boolean;
+  /**
+   * A UID reference to a OptionSet
+   * (Java name `org.hisp.dhis.option.OptionSet`)
+   */
+  optionSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example qa5tM4Kf3j3
+     */
+    id: string;
+  };
+  optionSetValue?: boolean;
   orgunitScope?: boolean;
   pattern?: string;
   publicAccess?: string;
@@ -9114,9 +16906,22 @@ export type TrackedEntityAttribute = {
   style?: ObjectStyle;
   translations?: Translation[];
   unique?: boolean;
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -9149,16 +16954,267 @@ export type TrackedEntityAttribute = {
 };
 
 export type TrackedEntityAttributeDimension = {
-  attribute?: RefTrackedEntityAttribute;
+  /**
+   * A UID reference to a TrackedEntityAttribute
+   * (Java name `org.hisp.dhis.trackedentity.TrackedEntityAttribute`)
+   */
+  attribute?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Ip8AV7eW679
+     */
+    id: string;
+  };
   filter?: string;
-  legendSet?: RefLegendSet;
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+};
+
+export type TrackedEntityAttributeValue = {
+  /**
+   * @format date-time
+   */
+  created?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  storedBy?: string;
+  /**
+   * A UID reference to a TrackedEntityAttribute
+   * (Java name `org.hisp.dhis.trackedentity.TrackedEntityAttribute`)
+   */
+  trackedEntityAttribute?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Ip8AV7eW679
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a TrackedEntityInstance
+   * (Java name `org.hisp.dhis.trackedentity.TrackedEntityInstance`)
+   */
+  trackedEntityInstance?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Ho7zU6dV568
+     */
+    id: string;
+  };
+  value?: string;
 };
 
 export type TrackedEntityDataElementDimension = {
-  dataElement?: RefDataElement;
+  /**
+   * A UID reference to a DataElement
+   * (Java name `org.hisp.dhis.dataelement.DataElement`)
+   */
+  dataElement?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example hX7n8Y4pu89
+     */
+    id: string;
+  };
   filter?: string;
-  legendSet?: RefLegendSet;
-  programStage?: RefProgramStage;
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a ProgramStage
+   * (Java name `org.hisp.dhis.program.ProgramStage`)
+   */
+  programStage?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example uf8uS7d0KE2
+     */
+    id: string;
+  };
+};
+
+export type TrackedEntityInfo = {
+  attributes?: AttributeInfo[];
+  createdAt?: string | number;
+  createdAtClient?: string | number;
+  createdBy?: TrackerUser;
+  deleted?: boolean;
+  enrollments?: EnrollmentInfo[];
+  geometry?: Record<string, any>;
+  inactive?: boolean;
+  orgUnit?: string;
+  potentialDuplicate?: boolean;
+  programOwners?: ProgramOwnerInfo[];
+  relationships?: RelationshipInfo[];
+  storedBy?: string;
+  trackedEntity?: string;
+  trackedEntityType?: string;
+  updatedAt?: string | number;
+  updatedAtClient?: string | number;
+  updatedBy?: TrackerUser;
+};
+
+export type TrackedEntityInstance = {
+  access?: Access;
+  attributeValues?: AttributeValue[];
+  code?: string;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  /**
+   * @format date-time
+   */
+  createdAtClient?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  createdByUserInfo?: UserInfoSnapshot;
+  deleted?: boolean;
+  displayName?: string;
+  externalAccess?: boolean;
+  favorite?: boolean;
+  favorites?: string[];
+  geometry?: Record<string, any>;
+  href?: string;
+  id?: string;
+  inactive?: boolean;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdatedAtClient?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  lastUpdatedByUserInfo?: UserInfoSnapshot;
+  name?: string;
+  /**
+   * A UID reference to a OrganisationUnit
+   * (Java name `org.hisp.dhis.organisationunit.OrganisationUnit`)
+   */
+  organisationUnit?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  };
+  potentialDuplicate?: boolean;
+  programInstances?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xi1xV0gT9Zd
+     */
+    id: string;
+  }[];
+  programOwners?: TrackedEntityProgramOwner[];
+  publicAccess?: string;
+  relationshipItems?: RelationshipItem[];
+  sharing?: Sharing;
+  storedBy?: string;
+  trackedEntityAttributeValues?: TrackedEntityAttributeValue[];
+  /**
+   * A UID reference to a TrackedEntityType
+   * (Java name `org.hisp.dhis.trackedentity.TrackedEntityType`)
+   */
+  trackedEntityType?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Dk3vQ29RJ44
+     */
+    id: string;
+  };
+  translations?: Translation[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type TrackedEntityInstanceFilter = {
@@ -9169,16 +17225,29 @@ export type TrackedEntityInstanceFilter = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   displayDescription?: string;
   displayName?: string;
   enrollmentCreatedPeriod?: FilterPeriod;
   enrollmentStatus: 'ACTIVE' | 'COMPLETED' | 'CANCELLED';
   entityQueryCriteria?: EntityQueryCriteria;
-  eventFilters?: EventFilter[];
-  externalAccess: boolean;
-  favorite: boolean;
+  eventFilters?: EventFilterInfo[];
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   followup?: boolean;
   href?: string;
@@ -9187,9 +17256,35 @@ export type TrackedEntityInstanceFilter = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
-  program?: RefProgram;
+  /**
+   * A UID reference to a Program
+   * (Java name `org.hisp.dhis.program.Program`)
+   */
+  program?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pa3pN28SD4S
+     */
+    id: string;
+  };
   publicAccess?: string;
   sharing?: Sharing;
   /**
@@ -9198,34 +17293,131 @@ export type TrackedEntityInstanceFilter = {
   sortOrder: number;
   style?: ObjectStyle;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
 };
 
 export type TrackedEntityProgramIndicatorDimension = {
   filter?: string;
-  legendSet?: RefLegendSet;
-  programIndicator?: RefProgramIndicator;
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a ProgramIndicator
+   * (Java name `org.hisp.dhis.program.ProgramIndicator`)
+   */
+  programIndicator?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example yj2yW1hU0L3
+     */
+    id: string;
+  };
+};
+
+export type TrackedEntityProgramOwner = {
+  /**
+   * A UID reference to a OrganisationUnit
+   * (Java name `org.hisp.dhis.organisationunit.OrganisationUnit`)
+   */
+  organisationUnit?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a Program
+   * (Java name `org.hisp.dhis.program.Program`)
+   */
+  program?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pa3pN28SD4S
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a TrackedEntityInstance
+   * (Java name `org.hisp.dhis.trackedentity.TrackedEntityInstance`)
+   */
+  trackedEntityInstance?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Ho7zU6dV568
+     */
+    id: string;
+  };
 };
 
 export type TrackedEntityType = {
   access?: Access;
-  allowAuditLog: boolean;
+  allowAuditLog?: boolean;
   attributeValues?: AttributeValue[];
   code?: string;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   displayDescription?: string;
   displayFormName?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   featureType: 'NONE' | 'MULTI_POLYGON' | 'POLYGON' | 'POINT' | 'SYMBOL';
   formName?: string;
@@ -9235,7 +17427,20 @@ export type TrackedEntityType = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   /**
    * @format int32
    */
@@ -9249,11 +17454,202 @@ export type TrackedEntityType = {
   sharing?: Sharing;
   shortName?: string;
   style?: ObjectStyle;
-  trackedEntityTypeAttributes?: RefTrackedEntityTypeAttribute[];
+  trackedEntityTypeAttributes?: TrackedEntityTypeAttribute[];
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+};
+
+export type TrackedEntityTypeAttribute = {
+  access?: Access;
+  attributeValues?: AttributeValue[];
+  code?: string;
+  /**
+   * @format date-time
+   */
+  created?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  displayInList?: boolean;
+  displayName?: string;
+  displayShortName?: string;
+  externalAccess?: boolean;
+  favorite?: boolean;
+  favorites?: string[];
+  href?: string;
+  id?: string;
+  /**
+   * @format date-time
+   */
+  lastUpdated?: string;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  mandatory?: boolean;
+  publicAccess?: string;
+  searchable?: boolean;
+  sharing?: Sharing;
+  /**
+   * A UID reference to a TrackedEntityAttribute
+   * (Java name `org.hisp.dhis.trackedentity.TrackedEntityAttribute`)
+   */
+  trackedEntityAttribute?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Ip8AV7eW679
+     */
+    id: string;
+  };
+  /**
+   * A UID reference to a TrackedEntityType
+   * (Java name `org.hisp.dhis.trackedentity.TrackedEntityType`)
+   */
+  trackedEntityType?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Dk3vQ29RJ44
+     */
+    id: string;
+  };
+  translations?: Translation[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+  valueType:
+    | 'TEXT'
+    | 'LONG_TEXT'
+    | 'MULTI_TEXT'
+    | 'LETTER'
+    | 'PHONE_NUMBER'
+    | 'EMAIL'
+    | 'BOOLEAN'
+    | 'TRUE_ONLY'
+    | 'DATE'
+    | 'DATETIME'
+    | 'TIME'
+    | 'NUMBER'
+    | 'UNIT_INTERVAL'
+    | 'PERCENTAGE'
+    | 'INTEGER'
+    | 'INTEGER_POSITIVE'
+    | 'INTEGER_NEGATIVE'
+    | 'INTEGER_ZERO_OR_POSITIVE'
+    | 'TRACKER_ASSOCIATE'
+    | 'USERNAME'
+    | 'COORDINATE'
+    | 'ORGANISATION_UNIT'
+    | 'REFERENCE'
+    | 'AGE'
+    | 'URL'
+    | 'FILE_RESOURCE'
+    | 'IMAGE'
+    | 'GEOJSON';
+};
+
+export type TrackerAttribute = {
+  attribute?: string;
+  code?: string;
+  created?: string;
+  displayName?: string;
+  lastUpdated?: string;
+  storedBy?: string;
+  value?: string;
+  valueType:
+    | 'TEXT'
+    | 'LONG_TEXT'
+    | 'MULTI_TEXT'
+    | 'LETTER'
+    | 'PHONE_NUMBER'
+    | 'EMAIL'
+    | 'BOOLEAN'
+    | 'TRUE_ONLY'
+    | 'DATE'
+    | 'DATETIME'
+    | 'TIME'
+    | 'NUMBER'
+    | 'UNIT_INTERVAL'
+    | 'PERCENTAGE'
+    | 'INTEGER'
+    | 'INTEGER_POSITIVE'
+    | 'INTEGER_NEGATIVE'
+    | 'INTEGER_ZERO_OR_POSITIVE'
+    | 'TRACKER_ASSOCIATE'
+    | 'USERNAME'
+    | 'COORDINATE'
+    | 'ORGANISATION_UNIT'
+    | 'REFERENCE'
+    | 'AGE'
+    | 'URL'
+    | 'FILE_RESOURCE'
+    | 'IMAGE'
+    | 'GEOJSON';
+};
+
+export type TrackerDataValue = {
+  created?: string;
+  createdByUserInfo?: UserInfoSnapshot;
+  dataElement?: string;
+  lastUpdated?: string;
+  lastUpdatedByUserInfo?: UserInfoSnapshot;
+  providedElsewhere?: boolean;
+  storedBy?: string;
+  value?: string;
 };
 
 export type TrackerDataView = {
@@ -9269,9 +17665,51 @@ export type TrackerDataView = {
   dataElements?: void;
 };
 
-export type TrackerIdSchemeParam = {
-  attributeUid?: string;
-  idScheme: 'UID' | 'CODE' | 'NAME' | 'ATTRIBUTE';
+export type TrackerEvent = {
+  assignedUser?: string;
+  assignedUserDisplayName?: string;
+  assignedUserFirstName?: string;
+  assignedUserSurname?: string;
+  assignedUserUsername?: string;
+  attributeCategoryOptions?: string;
+  attributeOptionCombo?: string;
+  completedBy?: string;
+  completedDate?: string;
+  created?: string;
+  createdAtClient: string;
+  createdByUserInfo?: UserInfoSnapshot;
+  dataValues?: TrackerDataValue[];
+  deleted?: boolean;
+  dueDate?: string;
+  enrollment: string;
+  enrollmentStatus: 'ACTIVE' | 'COMPLETED' | 'CANCELLED';
+  event: string;
+  eventDate: string;
+  followup?: boolean;
+  geometry?: Record<string, any>;
+  href?: string;
+  lastUpdated?: string;
+  lastUpdatedAtClient: string;
+  lastUpdatedByUserInfo?: UserInfoSnapshot;
+  notes?: Note[];
+  orgUnit?: string;
+  orgUnitName?: string;
+  program: string;
+  programStage: string;
+  programType: 'WITH_REGISTRATION' | 'WITHOUT_REGISTRATION';
+  relationships?: Relationship[];
+  status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
+  storedBy?: string;
+  trackedEntityInstance?: string;
+};
+
+export type TrackerImportReport = {
+  bundleReport?: PersistenceReport;
+  message?: string;
+  stats?: TrackerStats;
+  status: 'OK' | 'WARNING' | 'ERROR';
+  timingsStats?: TimingsStats;
+  validationReport?: ValidationReport;
 };
 
 export type TrackerProgramsDataSynchronizationJobParameters = {
@@ -9281,16 +17719,13 @@ export type TrackerProgramsDataSynchronizationJobParameters = {
   pageSize: number;
 };
 
-export type TrackerReportImportReport = {
-  bundleReport?: PersistenceReport;
-  message?: string;
-  stats?: TrackerReportStats;
-  status: 'OK' | 'WARNING' | 'ERROR';
-  timingsStats?: TimingsStats;
-  validationReport?: ValidationReport;
+export type TrackerRelationshipItem = {
+  enrollment?: Enrollment;
+  event?: TrackerEvent;
+  trackedEntityInstance?: TrackedEntity;
 };
 
-export type TrackerReportStats = {
+export type TrackerStats = {
   /**
    * @format int32
    */
@@ -9314,14 +17749,22 @@ export type TrackerReportStats = {
 };
 
 export type TrackerTrigramIndexJobParameters = {
-  attributes?: string[];
-  skipIndexDeletion: boolean;
+  attributes?: Uid[];
+  skipIndexDeletion?: boolean;
 };
 
 export type TrackerTypeReport = {
   objectReports?: Entity[];
-  stats?: TrackerReportStats;
+  stats?: TrackerStats;
   trackerType: 'TRACKED_ENTITY' | 'ENROLLMENT' | 'EVENT' | 'RELATIONSHIP';
+};
+
+export type TrackerUser = {
+  displayName?: string;
+  firstName?: string;
+  surname?: string;
+  uid?: string;
+  username?: string;
 };
 
 export type Translation = {
@@ -9341,9 +17784,15 @@ export type TypeReport = {
    * @format class
    */
   klass?: string;
-  objectReports?: ObjectReport[];
+  objectReports: ObjectReport[];
   stats?: Stats;
 };
+
+/**
+ * The actual type is unknown.
+ * (Java type was: `class org.hisp.dhis.common.UID`)
+ */
+export type Uid = Record<string, any>;
 
 export type UpdateFollowUpForDataValuesRequest = {
   followups?: FollowupParams[];
@@ -9356,33 +17805,86 @@ export type User = {
    */
   accountExpiry?: string;
   attributeValues?: AttributeValue[];
-  avatar?: RefFileResource;
+  /**
+   * A UID reference to a FileResource
+   * (Java name `org.hisp.dhis.fileresource.FileResource`)
+   */
+  avatar?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example k6ms4Sj3LV2
+     */
+    id: string;
+  };
   /**
    * @format date-time
    */
   birthday?: string;
-  catDimensionConstraints?: RefCategory[];
+  catDimensionConstraints?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example dU4oD3ey2A6
+     */
+    id: string;
+  }[];
   code?: string;
-  cogsDimensionConstraints?: RefCategoryOptionGroupSet[];
+  cogsDimensionConstraints?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r8EC4cs3j3k
+     */
+    id: string;
+  }[];
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   /**
    * @format int32
    */
   dataViewMaxOrganisationUnitLevel?: number;
-  dataViewOrganisationUnits?: RefOrganisationUnit[];
-  disabled: boolean;
+  dataViewOrganisationUnits?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  }[];
+  disabled?: boolean;
   displayName?: string;
   education?: string;
   email?: string;
   employer?: string;
-  externalAccess: boolean;
-  externalAuth: boolean;
+  externalAccess?: boolean;
+  externalAuth?: boolean;
   facebookMessenger?: string;
-  favorite: boolean;
+  favorite?: boolean;
   favorites?: string[];
   firstName?: string;
   gender?: string;
@@ -9390,7 +17892,7 @@ export type User = {
   id?: string;
   interests?: string;
   introduction?: string;
-  invitation: boolean;
+  invitation?: boolean;
   jobTitle?: string;
   languages?: string;
   /**
@@ -9405,11 +17907,33 @@ export type User = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   ldapId?: string;
   nationality?: string;
   openId?: string;
-  organisationUnits?: RefOrganisationUnit[];
+  organisationUnits?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  }[];
   password?: string;
   /**
    * @format date-time
@@ -9417,22 +17941,62 @@ export type User = {
   passwordLastUpdated?: string;
   phoneNumber?: string;
   publicAccess?: string;
-  selfRegistered: boolean;
+  selfRegistered?: boolean;
   settings?: UserSettings;
   sharing?: Sharing;
   skype?: string;
   surname?: string;
-  teiSearchOrganisationUnits?: RefOrganisationUnit[];
+  teiSearchOrganisationUnits?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  }[];
   telegram?: string;
   translations?: Translation[];
   twitter?: string;
-  twoFactorEnabled: boolean;
-  user?: RefUser;
-  userAccesses?: UserAccess[];
+  twoFactorEnabled?: boolean;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
   userCredentials?: UserCredentialsDto;
-  userGroupAccesses?: UserGroupAccess[];
-  userGroups?: RefUserGroup[];
-  userRoles?: RefUserRole[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+  userGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example wd5C82cv3p6
+     */
+    id: string;
+  }[];
+  userRoles?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example vc4Bi38eb5R
+     */
+    id: string;
+  }[];
   username?: string;
   welcomeMessage?: string;
   whatsApp?: string;
@@ -9442,7 +18006,6 @@ export type UserAccess = {
   access?: string;
   displayName?: string;
   id?: string;
-  userUid?: string;
 };
 
 export type UserCredentialsDto = {
@@ -9451,13 +18014,31 @@ export type UserCredentialsDto = {
    * @format date-time
    */
   accountExpiry?: string;
-  catDimensionConstraints?: RefCategory[];
-  cogsDimensionConstraints?: RefCategoryOptionGroupSet[];
-  disabled: boolean;
-  externalAuth: boolean;
+  catDimensionConstraints?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example dU4oD3ey2A6
+     */
+    id: string;
+  }[];
+  cogsDimensionConstraints?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r8EC4cs3j3k
+     */
+    id: string;
+  }[];
+  disabled?: boolean;
+  externalAuth?: boolean;
   id?: string;
   idToken?: string;
-  invitation: boolean;
+  invitation?: boolean;
   /**
    * @format date-time
    */
@@ -9475,11 +18056,20 @@ export type UserCredentialsDto = {
    */
   restoreExpiry?: string;
   restoreToken?: string;
-  selfRegistered: boolean;
+  selfRegistered?: boolean;
   sharing?: Sharing;
-  twoFA: boolean;
+  twoFA?: boolean;
   uid?: string;
-  userRoles?: RefUserRole[];
+  userRoles?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example vc4Bi38eb5R
+     */
+    id: string;
+  }[];
   username?: string;
   uuid?: string;
 };
@@ -9492,10 +18082,23 @@ export type UserGroup = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -9503,24 +18106,76 @@ export type UserGroup = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
-  managedByGroups?: RefUserGroup[];
-  managedGroups?: RefUserGroup[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  managedByGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example wd5C82cv3p6
+     */
+    id: string;
+  }[];
+  managedGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example wd5C82cv3p6
+     */
+    id: string;
+  }[];
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
-  users?: RefUser[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+  users?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  }[];
 };
 
 export type UserGroupAccess = {
   access?: string;
   displayName?: string;
   id?: string;
-  userGroupUid?: string;
 };
 
 export type UserInfoSnapshot = {
@@ -9543,10 +18198,23 @@ export type UserLookups = {
 };
 
 export type UserMessage = {
-  followUp: boolean;
+  followUp?: boolean;
   key?: string;
-  read: boolean;
-  user?: RefUser;
+  read?: boolean;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
 };
 
 export type UserRole = {
@@ -9558,11 +18226,24 @@ export type UserRole = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -9570,16 +18251,51 @@ export type UserRole = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
   restrictions?: string[];
   sharing?: Sharing;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
-  users?: RefUser[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+  users?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  }[];
 };
 
 export type UserSettings = {
@@ -9592,18 +18308,6 @@ export type UserSettings = {
   uiLocale?: string;
 };
 
-export type UserSharingUserAccess = {
-  access?: string;
-  displayName?: string;
-  id?: string;
-};
-
-export type UserSharingUserGroupAccess = {
-  access?: string;
-  displayName?: string;
-  id?: string;
-};
-
 export type ValidationNotificationTemplate = {
   access?: Access;
   attributeValues?: AttributeValue[];
@@ -9612,12 +18316,25 @@ export type ValidationNotificationTemplate = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   displayMessageTemplate?: string;
   displayName?: string;
   displaySubjectTemplate?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -9625,21 +18342,65 @@ export type ValidationNotificationTemplate = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   messageTemplate?: string;
   name?: string;
   notifyParentOrganisationUnitOnly?: boolean;
   notifyUsersInHierarchyOnly?: boolean;
   publicAccess?: string;
-  recipientUserGroups?: RefUserGroup[];
+  recipientUserGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example wd5C82cv3p6
+     */
+    id: string;
+  }[];
   sendStrategy: 'COLLECTIVE_SUMMARY' | 'SINGLE_NOTIFICATION';
   sharing?: Sharing;
   subjectTemplate?: string;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
-  validationRules?: RefValidationRule[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+  validationRules?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example C0oy6Qm5HT4
+     */
+    id: string;
+  }[];
 };
 
 export type ValidationReport = {
@@ -9648,7 +18409,20 @@ export type ValidationReport = {
 };
 
 export type ValidationResult = {
-  attributeOptionCombo?: RefCategoryOptionCombo;
+  /**
+   * A UID reference to a CategoryOptionCombo
+   * (Java name `org.hisp.dhis.category.CategoryOptionCombo`)
+   */
+  attributeOptionCombo?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example o5Bz19pJ30h
+     */
+    id: string;
+  };
   /**
    * @format date-time
    */
@@ -9666,7 +18440,20 @@ export type ValidationResult = {
    */
   leftsideValue?: number;
   notificationSent?: boolean;
-  organisationUnit?: RefOrganisationUnit;
+  /**
+   * A UID reference to a OrganisationUnit
+   * (Java name `org.hisp.dhis.organisationunit.OrganisationUnit`)
+   */
+  organisationUnit?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  };
   /**
    * @format period
    */
@@ -9675,7 +18462,20 @@ export type ValidationResult = {
    * @format double
    */
   rightsideValue?: number;
-  validationRule?: RefValidationRule;
+  /**
+   * A UID reference to a ValidationRule
+   * (Java name `org.hisp.dhis.validation.ValidationRule`)
+   */
+  validationRule?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example C0oy6Qm5HT4
+     */
+    id: string;
+  };
 };
 
 export type ValidationResultView = {
@@ -9733,7 +18533,20 @@ export type ValidationRule = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   dimensionItem?: string;
   dimensionItemType:
@@ -9757,8 +18570,8 @@ export type ValidationRule = {
   displayInstruction?: string;
   displayName?: string;
   displayShortName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   formName?: string;
   href?: string;
@@ -9769,12 +18582,56 @@ export type ValidationRule = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   leftSide?: Expression;
-  legendSet?: RefLegendSet;
-  legendSets?: RefLegendSet[];
+  /**
+   * A UID reference to a LegendSet
+   * (Java name `org.hisp.dhis.legend.LegendSet`)
+   */
+  legendSet?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  };
+  legendSets?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nZ5pL4Kf3gS
+     */
+    id: string;
+  }[];
   name?: string;
-  notificationTemplates?: RefValidationNotificationTemplate[];
+  notificationTemplates?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Sg6OW5CE49Q
+     */
+    id: string;
+  }[];
   operator:
     | 'equal_to'
     | 'not_equal_to'
@@ -9795,6 +18652,7 @@ export type ValidationRule = {
     | 'FinancialOct'
     | 'Monthly'
     | 'Quarterly'
+    | 'QuarterlyNov'
     | 'SixMonthlyApril'
     | 'SixMonthlyNov'
     | 'SixMonthly'
@@ -9810,12 +18668,34 @@ export type ValidationRule = {
   rightSide?: Expression;
   sharing?: Sharing;
   shortName?: string;
-  skipFormValidation: boolean;
+  skipFormValidation?: boolean;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
-  validationRuleGroups?: RefValidationRuleGroup[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+  validationRuleGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example H5tD1Vr0MY9
+     */
+    id: string;
+  }[];
 };
 
 export type ValidationRuleExpressionDetails = {
@@ -9835,11 +18715,24 @@ export type ValidationRuleGroup = {
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   description?: string;
   displayName?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   href?: string;
   id?: string;
@@ -9847,41 +18740,64 @@ export type ValidationRuleGroup = {
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
   translations?: Translation[];
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
-  validationRules?: RefValidationRule[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
+  validationRules?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example C0oy6Qm5HT4
+     */
+    id: string;
+  }[];
 };
 
 export type ValidationRulesAnalysisParams = {
   endDate?: string;
-  notification: boolean;
+  notification?: boolean;
   ou?: string;
-  persist: boolean;
+  persist?: boolean;
   startDate?: string;
   vrg?: string;
 };
 
 export type ValidationSummary = {
-  commentRequiredViolations?: RefDataElementOperand[];
+  commentRequiredViolations?: DataElementOperand[];
   validationRuleViolations?: ValidationResult[];
-};
-
-export type ValueTypeOptions = {
-  allowedContentTypes?: string[];
-  /**
-   * @format int64
-   */
-  maxFileSize: number;
-  /**
-   * @format int64
-   */
-  version: number;
 };
 
 export type Visualization = {
@@ -9919,18 +18835,40 @@ export type Visualization = {
   categoryDimensions?: CategoryDimension[];
   categoryOptionGroupSetDimensions?: CategoryOptionGroupSetDimension[];
   code?: string;
-  colSubTotals: boolean;
-  colTotals: boolean;
+  colSubTotals?: boolean;
+  colTotals?: boolean;
   colorSet?: string;
   columnDimensions?: string[];
-  columns?: RefDimensionalObject[];
-  completedOnly: boolean;
+  columns?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nb3xT2ex1J7
+     */
+    id: string;
+  }[];
+  completedOnly?: boolean;
   /**
    * @format date-time
    */
   created?: string;
-  createdBy?: RefUser;
-  cumulativeValues: boolean;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  createdBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  cumulativeValues?: boolean;
   dataDimensionItems?: DataDimensionItem[];
   dataElementDimensions?: TrackedEntityDataElementDimension[];
   dataElementGroupSetDimensions?: DataElementGroupSetDimension[];
@@ -9952,47 +18890,96 @@ export type Visualization = {
    * @format date-time
    */
   endDate?: string;
-  externalAccess: boolean;
-  favorite: boolean;
+  externalAccess?: boolean;
+  favorite?: boolean;
   favorites?: string[];
   filterDimensions?: string[];
-  filters?: RefDimensionalObject[];
-  fixColumnHeaders: boolean;
-  fixRowHeaders: boolean;
+  filters?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nb3xT2ex1J7
+     */
+    id: string;
+  }[];
+  fixColumnHeaders?: boolean;
+  fixRowHeaders?: boolean;
   fontSize: 'LARGE' | 'NORMAL' | 'SMALL';
   fontStyle?: VisualizationFontStyle;
   formName?: string;
-  hideEmptyColumns: boolean;
+  hideEmptyColumns?: boolean;
   hideEmptyRowItems: 'NONE' | 'BEFORE_FIRST' | 'AFTER_LAST' | 'BEFORE_FIRST_AFTER_LAST' | 'ALL';
-  hideEmptyRows: boolean;
-  hideLegend: boolean;
-  hideSubtitle: boolean;
-  hideTitle: boolean;
+  hideEmptyRows?: boolean;
+  hideLegend?: boolean;
+  hideSubtitle?: boolean;
+  hideTitle?: boolean;
   href?: string;
   icons?: Icon[];
   id?: string;
-  interpretations?: RefInterpretation[];
-  itemOrganisationUnitGroups?: RefOrganisationUnitGroup[];
+  interpretations?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example pd0uU9kk8Gc
+     */
+    id: string;
+  }[];
+  itemOrganisationUnitGroups?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Co7xX6sn5Ve
+     */
+    id: string;
+  }[];
   /**
    * @format date-time
    */
   lastUpdated?: string;
-  lastUpdatedBy?: RefUser;
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  lastUpdatedBy?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
   legend?: LegendDefinitions;
   measureCriteria?: string;
   name?: string;
-  noSpaceBetweenColumns: boolean;
+  noSpaceBetweenColumns?: boolean;
   numberType: 'VALUE' | 'ROW_PERCENTAGE' | 'COLUMN_PERCENTAGE';
   optionalAxes?: Axis[];
   orgUnitField?: string;
   organisationUnitGroupSetDimensions?: OrganisationUnitGroupSetDimension[];
   organisationUnitLevels?: number[];
-  organisationUnits?: RefOrganisationUnit[];
+  organisationUnits?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example xj2sS1ni0Q9
+     */
+    id: string;
+  }[];
   outlierAnalysis?: OutlierAnalysis;
   parentGraphMap?: {
     [key: string]: string;
   };
-  percentStackedValues: boolean;
+  percentStackedValues?: boolean;
   periods?: string[];
   programIndicatorDimensions?: TrackedEntityProgramIndicatorDimension[];
   publicAccess?: string;
@@ -10013,22 +19000,31 @@ export type Visualization = {
    * @format int32
    */
   rangeAxisSteps?: number;
-  regression: boolean;
+  regression?: boolean;
   regressionType: 'NONE' | 'LINEAR' | 'POLYNOMIAL' | 'LOESS';
   relativePeriods?: RelativePeriods;
   reportingParams?: ReportingParams;
   rowDimensions?: string[];
-  rowSubTotals: boolean;
-  rowTotals: boolean;
-  rows?: RefDimensionalObject[];
+  rowSubTotals?: boolean;
+  rowTotals?: boolean;
+  rows?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example nb3xT2ex1J7
+     */
+    id: string;
+  }[];
   series?: Series[];
   seriesKey?: SeriesKey;
   sharing?: Sharing;
   shortName?: string;
-  showData: boolean;
-  showDimensionLabels: boolean;
-  showHierarchy: boolean;
-  skipRounding: boolean;
+  showData?: boolean;
+  showDimensionLabels?: boolean;
+  showHierarchy?: boolean;
+  skipRounding?: boolean;
   /**
    * @format int32
    */
@@ -10037,7 +19033,7 @@ export type Visualization = {
    * @format date-time
    */
   startDate?: string;
-  subscribed: boolean;
+  subscribed?: boolean;
   subscribers?: string[];
   subtitle?: string;
   targetLineLabel?: string;
@@ -10069,13 +19065,26 @@ export type Visualization = {
     | 'BUBBLE'
     | 'SINGLE_VALUE'
     | 'PIVOT_TABLE';
-  user?: RefUser;
-  userAccesses?: UserAccess[];
-  userGroupAccesses?: UserGroupAccess[];
+  /**
+   * A UID reference to a User
+   * (Java name `org.hisp.dhis.user.User`)
+   */
+  user?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example r87xh9Xn8ON
+     */
+    id: string;
+  };
+  userAccesses?: LegacyUserAccess[];
+  userGroupAccesses?: LegacyUserGroupAccess[];
   userOrgUnitType: 'DATA_CAPTURE' | 'DATA_OUTPUT' | 'TEI_SEARCH';
-  userOrganisationUnit: boolean;
-  userOrganisationUnitChildren: boolean;
-  userOrganisationUnitGrandChildren: boolean;
+  userOrganisationUnit?: boolean;
+  userOrganisationUnitChildren?: boolean;
+  userOrganisationUnitGrandChildren?: boolean;
   visualizationPeriodName?: string;
   yearlySeries?: string[];
 };
@@ -10461,6 +19470,8 @@ export type WebMessage = {
     | 'E7133'
     | 'E7134'
     | 'E7135'
+    | 'E7136'
+    | 'E7143'
     | 'E7200'
     | 'E7201'
     | 'E7202'
@@ -10495,6 +19506,9 @@ export type WebMessage = {
     | 'E7231'
     | 'E7232'
     | 'E7234'
+    | 'E7237'
+    | 'E7238'
+    | 'E7250'
     | 'E7300'
     | 'E7301'
     | 'E7400'
@@ -10569,290 +19583,6 @@ export type WebModule = {
   icon?: string;
   name?: string;
   namespace?: string;
-};
-
-export type WebapiControllerDatastoreControllerPager = {
-  /**
-   * @format int32
-   */
-  page: number;
-  /**
-   * @format int32
-   */
-  pageSize: number;
-};
-
-export type WebapiControllerTrackerViewAttribute = {
-  attribute?: string;
-  code?: string;
-  createdAt?: string | number;
-  displayName?: string;
-  storedBy?: string;
-  updatedAt?: string | number;
-  value?: string;
-  valueType:
-    | 'TEXT'
-    | 'LONG_TEXT'
-    | 'MULTI_TEXT'
-    | 'LETTER'
-    | 'PHONE_NUMBER'
-    | 'EMAIL'
-    | 'BOOLEAN'
-    | 'TRUE_ONLY'
-    | 'DATE'
-    | 'DATETIME'
-    | 'TIME'
-    | 'NUMBER'
-    | 'UNIT_INTERVAL'
-    | 'PERCENTAGE'
-    | 'INTEGER'
-    | 'INTEGER_POSITIVE'
-    | 'INTEGER_NEGATIVE'
-    | 'INTEGER_ZERO_OR_POSITIVE'
-    | 'TRACKER_ASSOCIATE'
-    | 'USERNAME'
-    | 'COORDINATE'
-    | 'ORGANISATION_UNIT'
-    | 'REFERENCE'
-    | 'AGE'
-    | 'URL'
-    | 'FILE_RESOURCE'
-    | 'IMAGE'
-    | 'GEOJSON';
-};
-
-export type WebapiControllerTrackerViewDataValue = {
-  createdAt?: string | number;
-  createdBy?: WebapiControllerTrackerViewUser;
-  dataElement?: string;
-  providedElsewhere: boolean;
-  storedBy?: string;
-  updatedAt?: string | number;
-  updatedBy?: WebapiControllerTrackerViewUser;
-  value?: string;
-};
-
-export type WebapiControllerTrackerViewEnrollment = {
-  attributes?: WebapiControllerTrackerViewAttribute[];
-  completedAt?: string | number;
-  completedBy?: string;
-  createdAt?: string | number;
-  createdAtClient?: string | number;
-  createdBy?: WebapiControllerTrackerViewUser;
-  deleted: boolean;
-  enrolledAt?: string | number;
-  enrollment?: string;
-  events?: WebapiControllerTrackerViewEvent[];
-  followUp: boolean;
-  geometry?: Record<string, any>;
-  notes?: WebapiControllerTrackerViewNote[];
-  occurredAt?: string | number;
-  orgUnit?: string;
-  orgUnitName?: string;
-  program?: string;
-  relationships?: WebapiControllerTrackerViewRelationship[];
-  status: 'ACTIVE' | 'COMPLETED' | 'CANCELLED';
-  storedBy?: string;
-  trackedEntity?: string;
-  updatedAt?: string | number;
-  updatedAtClient?: string | number;
-  updatedBy?: WebapiControllerTrackerViewUser;
-};
-
-export type WebapiControllerTrackerViewEvent = {
-  assignedUser?: WebapiControllerTrackerViewUser;
-  attributeCategoryOptions?: string;
-  attributeOptionCombo?: string;
-  completedAt?: string | number;
-  completedBy?: string;
-  createdAt?: string | number;
-  createdAtClient?: string | number;
-  createdBy?: WebapiControllerTrackerViewUser;
-  dataValues?: WebapiControllerTrackerViewDataValue[];
-  deleted: boolean;
-  enrollment?: string;
-  event?: string;
-  followup: boolean;
-  geometry?: Record<string, any>;
-  notes?: WebapiControllerTrackerViewNote[];
-  occurredAt?: string | number;
-  orgUnit?: string;
-  orgUnitName?: string;
-  program?: string;
-  programStage?: string;
-  relationships?: WebapiControllerTrackerViewRelationship[];
-  scheduledAt?: string | number;
-  status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
-  storedBy?: string;
-  trackedEntity?: string;
-  updatedAt?: string | number;
-  updatedAtClient?: string | number;
-  updatedBy?: WebapiControllerTrackerViewUser;
-};
-
-export type WebapiControllerTrackerViewNote = {
-  createdBy?: WebapiControllerTrackerViewUser;
-  note?: string;
-  storedAt?: string | number;
-  storedBy?: string;
-  value?: string;
-};
-
-export type WebapiControllerTrackerViewProgramOwner = {
-  orgUnit?: string;
-  program?: string;
-  trackedEntity?: string;
-};
-
-export type WebapiControllerTrackerViewRelationship = {
-  bidirectional: boolean;
-  createdAt?: string | number;
-  from?: WebapiControllerTrackerViewRelationshipItem;
-  relationship?: string;
-  relationshipName?: string;
-  relationshipType?: string;
-  to?: WebapiControllerTrackerViewRelationshipItem;
-  updatedAt?: string | number;
-};
-
-export type WebapiControllerTrackerViewRelationshipItem = {
-  enrollment?: WebapiControllerTrackerViewRelationshipItemEnrollment;
-  event?: WebapiControllerTrackerViewRelationshipItemEvent;
-  trackedEntity?: TrackedEntity;
-};
-
-export type WebapiControllerTrackerViewTrackedEntity = {
-  attributes?: WebapiControllerTrackerViewAttribute[];
-  createdAt?: string | number;
-  createdAtClient?: string | number;
-  createdBy?: WebapiControllerTrackerViewUser;
-  deleted: boolean;
-  enrollments?: WebapiControllerTrackerViewEnrollment[];
-  geometry?: Record<string, any>;
-  inactive: boolean;
-  orgUnit?: string;
-  potentialDuplicate: boolean;
-  programOwners?: WebapiControllerTrackerViewProgramOwner[];
-  relationships?: WebapiControllerTrackerViewRelationship[];
-  storedBy?: string;
-  trackedEntity?: string;
-  trackedEntityType?: string;
-  updatedAt?: string | number;
-  updatedAtClient?: string | number;
-  updatedBy?: WebapiControllerTrackerViewUser;
-};
-
-export type WebapiControllerTrackerViewUser = {
-  displayName?: string;
-  firstName?: string;
-  surname?: string;
-  uid?: string;
-  username?: string;
-};
-
-export type WebapiControllerTrackerViewRelationshipItemEnrollment = {
-  attributes?: WebapiControllerTrackerViewAttribute[];
-  completedAt?: string | number;
-  completedBy?: string;
-  createdAt?: string | number;
-  createdAtClient?: string | number;
-  createdBy?: WebapiControllerTrackerViewUser;
-  deleted: boolean;
-  enrolledAt?: string | number;
-  enrollment?: string;
-  events?: WebapiControllerTrackerViewRelationshipItemEvent[];
-  followUp: boolean;
-  geometry?: Record<string, any>;
-  notes?: WebapiControllerTrackerViewNote[];
-  occurredAt?: string | number;
-  orgUnit?: string;
-  orgUnitName?: string;
-  program?: string;
-  status: 'ACTIVE' | 'COMPLETED' | 'CANCELLED';
-  storedBy?: string;
-  trackedEntity?: string;
-  updatedAt?: string | number;
-  updatedAtClient?: string | number;
-  updatedBy?: WebapiControllerTrackerViewUser;
-};
-
-export type WebapiControllerTrackerViewRelationshipItemEvent = {
-  assignedUser?: WebapiControllerTrackerViewUser;
-  attributeCategoryOptions?: string;
-  attributeOptionCombo?: string;
-  completedAt?: string | number;
-  completedBy?: string;
-  createdAt?: string | number;
-  createdAtClient?: string | number;
-  createdBy?: WebapiControllerTrackerViewUser;
-  dataValues?: WebapiControllerTrackerViewDataValue[];
-  deleted: boolean;
-  enrollment?: string;
-  event?: string;
-  followup: boolean;
-  geometry?: Record<string, any>;
-  notes?: WebapiControllerTrackerViewNote[];
-  occurredAt?: string | number;
-  orgUnit?: string;
-  orgUnitName?: string;
-  program?: string;
-  programStage?: string;
-  scheduledAt?: string | number;
-  status: 'ACTIVE' | 'COMPLETED' | 'VISITED' | 'SCHEDULE' | 'OVERDUE' | 'SKIPPED';
-  storedBy?: string;
-  updatedAt?: string | number;
-  updatedAtClient?: string | number;
-  updatedBy?: WebapiControllerTrackerViewUser;
-};
-
-export type WebapiWebdomainDashboard = {
-  /**
-   * @format int64
-   */
-  unreadInterpretations: number;
-  /**
-   * @format int64
-   */
-  unreadMessageConversations: number;
-};
-
-export type WebapiWebdomainMessageConversation = {
-  attachments?: RefFileResource[];
-  organisationUnits?: RefOrganisationUnit[];
-  subject?: string;
-  text?: string;
-  userGroups?: RefUserGroup[];
-  users?: RefUser[];
-};
-
-export type WebapiWebdomainFormCategory = {
-  categoryOptions?: WebapiWebdomainFormOption[];
-  id?: string;
-  label?: string;
-};
-
-export type WebapiWebdomainFormCategoryCombo = {
-  categories?: WebapiWebdomainFormCategory[];
-  id?: string;
-};
-
-export type WebapiWebdomainFormOption = {
-  /**
-   * @format date-time
-   */
-  endDate?: string;
-  id?: string;
-  label?: string;
-  organisationUnits?: RefOrganisationUnit[];
-  /**
-   * @format date-time
-   */
-  startDate?: string;
-};
-
-export type WebapiWebdomainSharingSharing = {
-  meta?: Meta;
-  object?: SharingObject;
 };
 
 export type WebhookTarget = {
@@ -11832,7 +20562,9 @@ export type PropertyNamesEventVisualization =
   | 'showDimensionLabels'
   | 'showHierarchy'
   | 'simpleDimensions'
+  | 'skipRounding'
   | 'sortOrder'
+  | 'sorting'
   | 'startDate'
   | 'subscribed'
   | 'subscribers'
@@ -12320,6 +21052,7 @@ export type PropertyNamesMapView =
   | 'rows'
   | 'sharing'
   | 'shortName'
+  | 'skipRounding'
   | 'sortOrder'
   | 'startDate'
   | 'styleDataItem'
@@ -13947,1206 +22680,6 @@ export type PropertyNamesVisualization =
   | 'yearlySeries';
 
 /**
- * A UID reference to a AnalyticsPeriodBoundary
- * (Java name `org.hisp.dhis.program.AnalyticsPeriodBoundary`)
- */
-export type RefAnalyticsPeriodBoundary = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example qmmKaikrUy6
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a Attribute
- * (Java name `org.hisp.dhis.attribute.Attribute`)
- */
-export type RefAttribute = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example cerCGMius57
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a any type of object
- * (Java name `org.hisp.dhis.common.BaseIdentifiableObject`)
- */
-export type RefBaseIdentifiableObject = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example q8DCn1fBUW6
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a Category
- * (Java name `org.hisp.dhis.category.Category`)
- */
-export type RefCategory = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example dUqoDYeyTA6
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a CategoryCombo
- * (Java name `org.hisp.dhis.category.CategoryCombo`)
- */
-export type RefCategoryCombo = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example iZvtI3jDYT4
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a CategoryOption
- * (Java name `org.hisp.dhis.category.CategoryOption`)
- */
-export type RefCategoryOption = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example j0wuJ4kEbVc
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a CategoryOptionCombo
- * (Java name `org.hisp.dhis.category.CategoryOptionCombo`)
- */
-export type RefCategoryOptionCombo = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example o5BzO9pJg0h
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a CategoryOptionGroup
- * (Java name `org.hisp.dhis.category.CategoryOptionGroup`)
- */
-export type RefCategoryOptionGroup = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example o5BzO9pJg0h
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a CategoryOptionGroupSet
- * (Java name `org.hisp.dhis.category.CategoryOptionGroupSet`)
- */
-export type RefCategoryOptionGroupSet = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example r8ECRcsMj3k
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a Dashboard
- * (Java name `org.hisp.dhis.dashboard.Dashboard`)
- */
-export type RefDashboard = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example fVqszZYsr8O
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a DashboardItem
- * (Java name `org.hisp.dhis.dashboard.DashboardItem`)
- */
-export type RefDashboardItem = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example jZuwD32wvhb
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a DataApprovalLevel
- * (Java name `org.hisp.dhis.dataapproval.DataApprovalLevel`)
- */
-export type RefDataApprovalLevel = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example n3zta8lAK4W
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a DataApprovalWorkflow
- * (Java name `org.hisp.dhis.dataapproval.DataApprovalWorkflow`)
- */
-export type RefDataApprovalWorkflow = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example q6CwdboDN7Z
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a DataElement
- * (Java name `org.hisp.dhis.dataelement.DataElement`)
- */
-export type RefDataElement = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example hXtn8Y4puQ9
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a DataElementGroup
- * (Java name `org.hisp.dhis.dataelement.DataElementGroup`)
- */
-export type RefDataElementGroup = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example m2ysd39uzVe
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a DataElementGroupSet
- * (Java name `org.hisp.dhis.dataelement.DataElementGroupSet`)
- */
-export type RefDataElementGroupSet = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example p5Bvg6cxCYh
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a DataElementOperand
- * (Java name `org.hisp.dhis.dataelement.DataElementOperand`)
- */
-export type RefDataElementOperand = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example o4Auf5bwBXg
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a DataEntryForm
- * (Java name `org.hisp.dhis.dataentryform.DataEntryForm`)
- */
-export type RefDataEntryForm = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example jZvpa2lwQe6
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a DataSet
- * (Java name `org.hisp.dhis.dataset.DataSet`)
- */
-export type RefDataSet = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example dTpjiNfGmSM
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a DimensionalItemObject
- * (Java name `org.hisp.dhis.common.DimensionalItemObject`)
- */
-export type RefDimensionalItemObject = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example rfwBXfiBNNb
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a DimensionalObject
- * (Java name `org.hisp.dhis.common.DimensionalObject`)
- */
-export type RefDimensionalObject = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example nbsxTbexJJ7
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a Document
- * (Java name `org.hisp.dhis.document.Document`)
- */
-export type RefDocument = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example e89EJOatUOP
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a EventChart
- * (Java name `org.hisp.dhis.eventchart.EventChart`)
- */
-export type RefEventChart = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example hhdzSi6cGVn
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a EventReport
- * (Java name `org.hisp.dhis.eventreport.EventReport`)
- */
-export type RefEventReport = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example iieATy4sEU9
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a EventVisualization
- * (Java name `org.hisp.dhis.eventvisualization.EventVisualization`)
- */
-export type RefEventVisualization = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example pplH0JfCRK8
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ExpressionDimensionItem
- * (Java name `org.hisp.dhis.expressiondimensionitem.ExpressionDimensionItem`)
- */
-export type RefExpressionDimensionItem = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example uwBQQhuxQ2z
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a FileResource
- * (Java name `org.hisp.dhis.fileresource.FileResource`)
- */
-export type RefFileResource = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example k6msmSjsLVT
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a any type of object
- * (Java name `org.hisp.dhis.common.IdentifiableObject`)
- */
-export type RefIdentifiableObject = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example t7lH02csxL8
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a Indicator
- * (Java name `org.hisp.dhis.indicator.Indicator`)
- */
-export type RefIndicator = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example k8btALhpFd1
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a IndicatorGroup
- * (Java name `org.hisp.dhis.indicator.IndicatorGroup`)
- */
-export type RefIndicatorGroup = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example pdgyFQmuKga
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a IndicatorGroupSet
- * (Java name `org.hisp.dhis.indicator.IndicatorGroupSet`)
- */
-export type RefIndicatorGroupSet = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example sgjBITpxNjd
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a IndicatorType
- * (Java name `org.hisp.dhis.indicator.IndicatorType`)
- */
-export type RefIndicatorType = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example ocfxEPltJsg
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a Interpretation
- * (Java name `org.hisp.dhis.interpretation.Interpretation`)
- */
-export type RefInterpretation = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example pdwuU5kkMGc
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a InterpretationComment
- * (Java name `org.hisp.dhis.interpretation.InterpretationComment`)
- */
-export type RefInterpretationComment = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example wkDB1crrTNj
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a Legend
- * (Java name `org.hisp.dhis.legend.Legend`)
- */
-export type RefLegend = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example kWbmILAcrCY
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a LegendSet
- * (Java name `org.hisp.dhis.legend.LegendSet`)
- */
-export type RefLegendSet = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example nZepLOKfHgS
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a Map
- * (Java name `org.hisp.dhis.mapping.Map`)
- */
-export type RefMap = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example iPhVsUy5xbI
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a MapView
- * (Java name `org.hisp.dhis.mapping.MapView`)
- */
-export type RefMapView = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example mTl8ENiPmOB
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a Message
- * (Java name `org.hisp.dhis.message.Message`)
- */
-export type RefMessage = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example mXoBwP0PqR4
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a Option
- * (Java name `org.hisp.dhis.option.Option`)
- */
-export type RefOption = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example n7oqJVDnEGZ
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a OptionGroup
- * (Java name `org.hisp.dhis.option.OptionGroup`)
- */
-export type RefOptionGroup = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example sctvO0AuEX5
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a OptionSet
- * (Java name `org.hisp.dhis.option.OptionSet`)
- */
-export type RefOptionSet = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example qartMYKfHj3
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a OrganisationUnit
- * (Java name `org.hisp.dhis.organisationunit.OrganisationUnit`)
- */
-export type RefOrganisationUnit = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example xjlsS0niOQ9
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a OrganisationUnitGroup
- * (Java name `org.hisp.dhis.organisationunit.OrganisationUnitGroup`)
- */
-export type RefOrganisationUnitGroup = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example CoqxX5snTVe
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a OrganisationUnitGroupSet
- * (Java name `org.hisp.dhis.organisationunit.OrganisationUnitGroupSet`)
- */
-export type RefOrganisationUnitGroupSet = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example FrtA08vqWYh
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a OrganisationUnitLevel
- * (Java name `org.hisp.dhis.organisationunit.OrganisationUnitLevel`)
- */
-export type RefOrganisationUnitLevel = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example CoqxX5snTVe
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a Predictor
- * (Java name `org.hisp.dhis.predictor.Predictor`)
- */
-export type RefPredictor = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example rccoGNhpFk5
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a PredictorGroup
- * (Java name `org.hisp.dhis.predictor.PredictorGroup`)
- */
-export type RefPredictorGroup = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example whhtLSmuKga
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a Program
- * (Java name `org.hisp.dhis.program.Program`)
- */
-export type RefProgram = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example pakpNJ8SDNS
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ProgramDataElementDimensionItem
- * (Java name `org.hisp.dhis.program.ProgramDataElementDimensionItem`)
- */
-export type RefProgramDataElementDimensionItem = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example NyINb7w4Kga
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ProgramIndicator
- * (Java name `org.hisp.dhis.program.ProgramIndicator`)
- */
-export type RefProgramIndicator = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example yjtyWShUIL3
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ProgramIndicatorGroup
- * (Java name `org.hisp.dhis.program.ProgramIndicatorGroup`)
- */
-export type RefProgramIndicatorGroup = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example DoyD1XmZNQ8
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ProgramInstance
- * (Java name `org.hisp.dhis.program.ProgramInstance`)
- */
-export type RefProgramInstance = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example xisxVRgTHZd
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ProgramNotificationTemplate
- * (Java name `org.hisp.dhis.program.notification.ProgramNotificationTemplate`)
- */
-export type RefProgramNotificationTemplate = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example JuEJ73saUce
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ProgramRule
- * (Java name `org.hisp.dhis.programrule.ProgramRule`)
- */
-export type RefProgramRule = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example teotRNcYKOU
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ProgramRuleAction
- * (Java name `org.hisp.dhis.programrule.ProgramRuleAction`)
- */
-export type RefProgramRuleAction = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example zkuzXTi4QU0
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ProgramRuleVariable
- * (Java name `org.hisp.dhis.programrule.ProgramRuleVariable`)
- */
-export type RefProgramRuleVariable = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example BmwBZVk6SW2
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ProgramSection
- * (Java name `org.hisp.dhis.program.ProgramSection`)
- */
-export type RefProgramSection = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example whrwUQf2xIc
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ProgramStage
- * (Java name `org.hisp.dhis.program.ProgramStage`)
- */
-export type RefProgramStage = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example ufpuSOd0KEX
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ProgramStageDataElement
- * (Java name `org.hisp.dhis.program.ProgramStageDataElement`)
- */
-export type RefProgramStageDataElement = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example FqAF3ZobVP8
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ProgramStageInstance
- * (Java name `org.hisp.dhis.program.ProgramStageInstance`)
- */
-export type RefProgramStageInstance = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example CnxC0Wl8SM5
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ProgramStageSection
- * (Java name `org.hisp.dhis.program.ProgramStageSection`)
- */
-export type RefProgramStageSection = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example BmwBZVk7RL4
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ProgramTrackedEntityAttribute
- * (Java name `org.hisp.dhis.program.ProgramTrackedEntityAttribute`)
- */
-export type RefProgramTrackedEntityAttribute = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example LwGL95uiZVa
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ProgramTrackedEntityAttributeDimensionItem
- * (Java name `org.hisp.dhis.program.ProgramTrackedEntityAttributeDimensionItem`)
- */
-export type RefProgramTrackedEntityAttributeDimensionItem = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example YJTYmiHvc8n
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a Report
- * (Java name `org.hisp.dhis.report.Report`)
- */
-export type RefReport = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example qWkwM1GcAM2
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ReportingRate
- * (Java name `org.hisp.dhis.common.ReportingRate`)
- */
-export type RefReportingRate = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example x3rDT8asyqS
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a Section
- * (Java name `org.hisp.dhis.dataset.Section`)
- */
-export type RefSection = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example sX8CEX9VqB5
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a SimpleEventVisualizationView
- * (Java name `org.hisp.dhis.eventvisualization.SimpleEventVisualizationView`)
- */
-export type RefSimpleEventVisualizationView = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example NmDT28PPL7q
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a SimpleVisualizationView
- * (Java name `org.hisp.dhis.visualization.SimpleVisualizationView`)
- */
-export type RefSimpleVisualizationView = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example IhyOX31xU92
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a TrackedEntityAttribute
- * (Java name `org.hisp.dhis.trackedentity.TrackedEntityAttribute`)
- */
-export type RefTrackedEntityAttribute = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example IplAV2eWO79
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a TrackedEntityInstance
- * (Java name `org.hisp.dhis.trackedentity.TrackedEntityInstance`)
- */
-export type RefTrackedEntityInstance = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example HokzU1dVN68
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a TrackedEntityType
- * (Java name `org.hisp.dhis.trackedentity.TrackedEntityType`)
- */
-export type RefTrackedEntityType = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example DkgvQX9RJ24
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a TrackedEntityTypeAttribute
- * (Java name `org.hisp.dhis.trackedentity.TrackedEntityTypeAttribute`)
- */
-export type RefTrackedEntityTypeAttribute = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example MtpEZ6i0Sbd
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a User
- * (Java name `org.hisp.dhis.user.User`)
- */
-export type RefUser = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example r87xhYXn7ON
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a UserGroup
- * (Java name `org.hisp.dhis.user.UserGroup`)
- */
-export type RefUserGroup = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example wdcC82cvDp6
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a UserRole
- * (Java name `org.hisp.dhis.user.UserRole`)
- */
-export type RefUserRole = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example vcbBiY8ebSR
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ValidationNotificationTemplate
- * (Java name `org.hisp.dhis.validation.notification.ValidationNotificationTemplate`)
- */
-export type RefValidationNotificationTemplate = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example SgEOW6CEX9Q
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ValidationRule
- * (Java name `org.hisp.dhis.validation.ValidationRule`)
- */
-export type RefValidationRule = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example C0oyGQmoHTE
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a ValidationRuleGroup
- * (Java name `org.hisp.dhis.validation.ValidationRuleGroup`)
- */
-export type RefValidationRuleGroup = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example H5tDLVrtMYJ
-   */
-  id: string;
-};
-
-/**
- * A UID reference to a Visualization
- * (Java name `org.hisp.dhis.visualization.Visualization`)
- */
-export type RefVisualization = {
-  /**
-   * @format uid
-   * @pattern ^[0-9a-zA-Z]{11}$
-   * @minLength 11
-   * @maxLength 11
-   * @example B7uJC0aEsY0
-   */
-  id: string;
-};
-
-/**
  * A UID for an AggregateDataExchange object
  * (Java name `org.hisp.dhis.dataexchange.aggregate.AggregateDataExchange`)
  *
@@ -15154,7 +22687,7 @@ export type RefVisualization = {
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example odqOO3aGEk0
+ * @example od7OO6aG5k0
  */
 export type UIDAggregateDataExchange = string;
 
@@ -15166,7 +22699,7 @@ export type UIDAggregateDataExchange = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example lhhF5dfmPxX
+ * @example lh4F5df9Px8
  */
 export type UIDAnalyticsTableHook = string;
 
@@ -15178,7 +22711,7 @@ export type UIDAnalyticsTableHook = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example b9f7LU1nRPV
+ * @example b9f7LU6nR5V
  */
 export type UIDApiToken = string;
 
@@ -15190,7 +22723,7 @@ export type UIDApiToken = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example cerCGMius57
+ * @example ce5CG4iu357
  */
 export type UIDAttribute = string;
 
@@ -15202,7 +22735,7 @@ export type UIDAttribute = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example dUqoDYeyTA6
+ * @example dU4oD3ey2A6
  */
 export type UIDCategory = string;
 
@@ -15214,7 +22747,7 @@ export type UIDCategory = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example iZvtI3jDYT4
+ * @example iZ9tI8jD7T4
  */
 export type UIDCategoryCombo = string;
 
@@ -15226,7 +22759,7 @@ export type UIDCategoryCombo = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example j0wuJ4kEbVc
+ * @example j0wu64kE8Vc
  */
 export type UIDCategoryOption = string;
 
@@ -15238,7 +22771,7 @@ export type UIDCategoryOption = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example o5BzO9pJg0h
+ * @example o5Bz19pJ30h
  */
 export type UIDCategoryOptionCombo = string;
 
@@ -15250,7 +22783,7 @@ export type UIDCategoryOptionCombo = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example o5BzO9pJg0h
+ * @example o5Bz19pJ30h
  */
 export type UIDCategoryOptionGroup = string;
 
@@ -15262,7 +22795,7 @@ export type UIDCategoryOptionGroup = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example r8ECRcsMj3k
+ * @example r8EC4cs3j3k
  */
 export type UIDCategoryOptionGroupSet = string;
 
@@ -15274,7 +22807,7 @@ export type UIDCategoryOptionGroupSet = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example d8kCQKatTO0
+ * @example d8kC0Ka9TO8
  */
 export type UIDConstant = string;
 
@@ -15286,7 +22819,7 @@ export type UIDConstant = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example fVqszZYsr8O
+ * @example fV5sz4Ys38O
  */
 export type UIDDashboard = string;
 
@@ -15298,7 +22831,7 @@ export type UIDDashboard = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example jZuwD32wvhb
+ * @example jZ9wD82wv0b
  */
 export type UIDDashboardItem = string;
 
@@ -15310,7 +22843,7 @@ export type UIDDashboardItem = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example n3zta8lAK4W
+ * @example n3zt98lA14W
  */
 export type UIDDataApprovalLevel = string;
 
@@ -15322,7 +22855,7 @@ export type UIDDataApprovalLevel = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example q6CwdboDN7Z
+ * @example q6Cw2bo1N7Z
  */
 export type UIDDataApprovalWorkflow = string;
 
@@ -15334,7 +22867,7 @@ export type UIDDataApprovalWorkflow = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example hXtn8Y4puQ9
+ * @example hX7n8Y4pu89
  */
 export type UIDDataElement = string;
 
@@ -15346,7 +22879,7 @@ export type UIDDataElement = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example m2ysd39uzVe
+ * @example m2ys839uz3e
  */
 export type UIDDataElementGroup = string;
 
@@ -15358,7 +22891,7 @@ export type UIDDataElementGroup = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example p5Bvg6cxCYh
+ * @example p5Bv16cx3Yh
  */
 export type UIDDataElementGroupSet = string;
 
@@ -15370,7 +22903,7 @@ export type UIDDataElementGroupSet = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example jZvpa2lwQe6
+ * @example jZ9pa8lw7e6
  */
 export type UIDDataEntryForm = string;
 
@@ -15382,7 +22915,7 @@ export type UIDDataEntryForm = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example dTpjiNfGmSM
+ * @example dT3ji2fG1SM
  */
 export type UIDDataSet = string;
 
@@ -15394,7 +22927,7 @@ export type UIDDataSet = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example xdJDC7zaUce
+ * @example xd3DC2za1ce
  */
 export type UIDDataSetNotificationTemplate = string;
 
@@ -15406,7 +22939,7 @@ export type UIDDataSetNotificationTemplate = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example nbsxTbexJJ7
+ * @example nb3xT2ex1J7
  */
 export type UIDDimensionalObject = string;
 
@@ -15418,7 +22951,7 @@ export type UIDDimensionalObject = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example e89EJOatUOP
+ * @example e89EJ3at2OP
  */
 export type UIDDocument = string;
 
@@ -15430,7 +22963,7 @@ export type UIDDocument = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example ggcyRmcpy99
+ * @example gg5yR4cp399
  */
 export type UIDEventHook = string;
 
@@ -15442,7 +22975,7 @@ export type UIDEventHook = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example pplH0JfCRK8
+ * @example pp4H0Jf9RK8
  */
 export type UIDEventVisualization = string;
 
@@ -15454,7 +22987,7 @@ export type UIDEventVisualization = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example uwBQQhuxQ2z
+ * @example uw9QQ8ux72z
  */
 export type UIDExpressionDimensionItem = string;
 
@@ -15466,7 +22999,7 @@ export type UIDExpressionDimensionItem = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example npywW55tbIa
+ * @example np2wW15tb3a
  */
 export type UIDExternalMapLayer = string;
 
@@ -15478,7 +23011,7 @@ export type UIDExternalMapLayer = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example k6msmSjsLVT
+ * @example k6ms4Sj3LV2
  */
 export type UIDFileResource = string;
 
@@ -15490,7 +23023,7 @@ export type UIDFileResource = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example t7lH02csxL8
+ * @example t7lH02cs2L8
  */
 export type UIDIdentifiableObject = string;
 
@@ -15502,7 +23035,7 @@ export type UIDIdentifiableObject = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example macBMVdjcP8
+ * @example ma7BM6dj5P8
  */
 export type UIDIncomingSms = string;
 
@@ -15514,7 +23047,7 @@ export type UIDIncomingSms = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example k8btALhpFd1
+ * @example k8bt1Lh0Fd9
  */
 export type UIDIndicator = string;
 
@@ -15526,7 +23059,7 @@ export type UIDIndicator = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example pdgyFQmuKga
+ * @example pd0yF9mu8ga
  */
 export type UIDIndicatorGroup = string;
 
@@ -15538,7 +23071,7 @@ export type UIDIndicatorGroup = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example sgjBITpxNjd
+ * @example sg3BI2px1jd
  */
 export type UIDIndicatorGroupSet = string;
 
@@ -15550,7 +23083,7 @@ export type UIDIndicatorGroupSet = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example ocfxEPltJsg
+ * @example oc9xE8lt7sg
  */
 export type UIDIndicatorType = string;
 
@@ -15562,7 +23095,7 @@ export type UIDIndicatorType = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example pdwuU5kkMGc
+ * @example pd0uU9kk8Gc
  */
 export type UIDInterpretation = string;
 
@@ -15574,7 +23107,7 @@ export type UIDInterpretation = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example sggYT5aqB2c
+ * @example sg2YT1aq02c
  */
 export type UIDJobConfiguration = string;
 
@@ -15586,7 +23119,7 @@ export type UIDJobConfiguration = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example nZepLOKfHgS
+ * @example nZ5pL4Kf3gS
  */
 export type UIDLegendSet = string;
 
@@ -15598,7 +23131,7 @@ export type UIDLegendSet = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example rdezac4jHY0
+ * @example rd9za84jH00
  */
 export type UIDLockException = string;
 
@@ -15610,7 +23143,7 @@ export type UIDLockException = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example iPhVsUy5xbI
+ * @example iP9Vs8y5xb3
  */
 export type UIDMap = string;
 
@@ -15622,7 +23155,7 @@ export type UIDMap = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example mTl8ENiPmOB
+ * @example mT38EN5Pm4B
  */
 export type UIDMapView = string;
 
@@ -15634,7 +23167,7 @@ export type UIDMapView = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example y9ANI1cRMYj
+ * @example y9AN11cR3Yj
  */
 export type UIDMessageConversation = string;
 
@@ -15646,7 +23179,7 @@ export type UIDMessageConversation = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example v6ysISoieZ9
+ * @example v6ys8So7eZ6
  */
 export type UIDMetadataProposal = string;
 
@@ -15658,7 +23191,7 @@ export type UIDMetadataProposal = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example tsvHI3xpzI4
+ * @example ts8HI7xp6I4
  */
 export type UIDOAuth2Client = string;
 
@@ -15670,7 +23203,7 @@ export type UIDOAuth2Client = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example n7oqJVDnEGZ
+ * @example n7oq8VD7EG6
  */
 export type UIDOption = string;
 
@@ -15682,7 +23215,7 @@ export type UIDOption = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example sctvO0AuEX5
+ * @example sc7vO6Au5X5
  */
 export type UIDOptionGroup = string;
 
@@ -15694,7 +23227,7 @@ export type UIDOptionGroup = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example vfwyR3DxH08
+ * @example vf0yR9Dx808
  */
 export type UIDOptionGroupSet = string;
 
@@ -15706,7 +23239,7 @@ export type UIDOptionGroupSet = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example qartMYKfHj3
+ * @example qa5tM4Kf3j3
  */
 export type UIDOptionSet = string;
 
@@ -15718,7 +23251,7 @@ export type UIDOptionSet = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example xjlsS0niOQ9
+ * @example xj2sS1ni0Q9
  */
 export type UIDOrganisationUnit = string;
 
@@ -15730,7 +23263,7 @@ export type UIDOrganisationUnit = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example CoqxX5snTVe
+ * @example Co7xX6sn5Ve
  */
 export type UIDOrganisationUnitGroup = string;
 
@@ -15742,7 +23275,7 @@ export type UIDOrganisationUnitGroup = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example FrtA08vqWYh
+ * @example Fr0A08vq8Yh
  */
 export type UIDOrganisationUnitGroupSet = string;
 
@@ -15754,7 +23287,7 @@ export type UIDOrganisationUnitGroupSet = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example CoqxX5snTVe
+ * @example Co7xX6sn5Ve
  */
 export type UIDOrganisationUnitLevel = string;
 
@@ -15766,14 +23299,9 @@ export type UIDOrganisationUnitLevel = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example shtoO7dgcP8
+ * @example sh7oO6dg5P8
  */
 export type UIDOutboundSms = string;
-
-/**
- * @format period
- */
-export type UIDPeriod = string;
 
 /**
  * A UID for an Predictor object
@@ -15783,7 +23311,7 @@ export type UIDPeriod = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example rccoGNhpFk5
+ * @example rc5oG4hp3k5
  */
 export type UIDPredictor = string;
 
@@ -15795,7 +23323,7 @@ export type UIDPredictor = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example whhtLSmuKga
+ * @example wh0tL9mu8ga
  */
 export type UIDPredictorGroup = string;
 
@@ -15807,7 +23335,7 @@ export type UIDPredictorGroup = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example pakpNJ8SDNS
+ * @example pa3pN28SD4S
  */
 export type UIDProgram = string;
 
@@ -15819,7 +23347,7 @@ export type UIDProgram = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example yjtyWShUIL3
+ * @example yj2yW1hU0L3
  */
 export type UIDProgramIndicator = string;
 
@@ -15831,7 +23359,7 @@ export type UIDProgramIndicator = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example DoyD1XmZNQ8
+ * @example Do7D1Xm2NQ1
  */
 export type UIDProgramIndicatorGroup = string;
 
@@ -15843,7 +23371,7 @@ export type UIDProgramIndicatorGroup = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example whrwUQfWxYb
+ * @example wh0wU9fW8Yb
  */
 export type UIDProgramMessage = string;
 
@@ -15855,7 +23383,7 @@ export type UIDProgramMessage = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example JuEJ73saUce
+ * @example Ju3J73sa1ce
  */
 export type UIDProgramNotificationTemplate = string;
 
@@ -15867,7 +23395,7 @@ export type UIDProgramNotificationTemplate = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example teotRNcYKOU
+ * @example te7tR6cY5OU
  */
 export type UIDProgramRule = string;
 
@@ -15879,7 +23407,7 @@ export type UIDProgramRule = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example zkuzXTi4QU0
+ * @example zk3zX2i4QU7
  */
 export type UIDProgramRuleAction = string;
 
@@ -15891,7 +23419,7 @@ export type UIDProgramRuleAction = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example BmwBZVk6SW2
+ * @example Bm5BZ4k6SW9
  */
 export type UIDProgramRuleVariable = string;
 
@@ -15903,7 +23431,7 @@ export type UIDProgramRuleVariable = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example whrwUQf2xIc
+ * @example wh0wU9f2xI4
  */
 export type UIDProgramSection = string;
 
@@ -15915,21 +23443,9 @@ export type UIDProgramSection = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example ufpuSOd0KEX
+ * @example uf8uS7d0KE2
  */
 export type UIDProgramStage = string;
-
-/**
- * A UID for an ProgramStageInstance object
- * (Java name `org.hisp.dhis.program.ProgramStageInstance`)
- *
- * @format uid
- * @pattern ^[0-9a-zA-Z]{11}$
- * @minLength 11
- * @maxLength 11
- * @example CnxC0Wl8SM5
- */
-export type UIDProgramStageInstance = string;
 
 /**
  * A UID for an ProgramStageInstanceFilter object
@@ -15939,7 +23455,7 @@ export type UIDProgramStageInstance = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example ItDI62reYSb
+ * @example It2I62re0Sb
  */
 export type UIDProgramStageInstanceFilter = string;
 
@@ -15951,7 +23467,7 @@ export type UIDProgramStageInstanceFilter = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example BmwBZVk7RL4
+ * @example Bm5BZ4k7RL9
  */
 export type UIDProgramStageSection = string;
 
@@ -15963,7 +23479,7 @@ export type UIDProgramStageSection = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example FqAF3ZobVP8
+ * @example Fq9F3Zo4VP3
  */
 export type UIDProgramStageWorkingList = string;
 
@@ -15975,7 +23491,7 @@ export type UIDProgramStageWorkingList = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example uitv511pPWZ
+ * @example ui8v511pP9Z
  */
 export type UIDPushAnalysis = string;
 
@@ -15987,7 +23503,7 @@ export type UIDPushAnalysis = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example A6qsY0jvNP3
+ * @example A6qs80jv0P3
  */
 export type UIDRelationshipType = string;
 
@@ -15999,7 +23515,7 @@ export type UIDRelationshipType = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example qWkwM1GcAM2
+ * @example qW2wM1Gc0M2
  */
 export type UIDReport = string;
 
@@ -16011,7 +23527,7 @@ export type UIDReport = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example p5oAys8rDBv
+ * @example p5oA7s8rD2v
  */
 export type UIDRoute = string;
 
@@ -16023,7 +23539,7 @@ export type UIDRoute = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example vCVSNYbcCFB
+ * @example vC6SN5bc4FB
  */
 export type UIDSMSCommand = string;
 
@@ -16035,7 +23551,7 @@ export type UIDSMSCommand = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example sX8CEX9VqB5
+ * @example sX3CE29Vq45
  */
 export type UIDSection = string;
 
@@ -16047,7 +23563,7 @@ export type UIDSection = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example s9h8ENiVCKB
+ * @example s9h8EN5VC4B
  */
 export type UIDSqlView = string;
 
@@ -16059,21 +23575,9 @@ export type UIDSqlView = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example IplAV2eWO79
+ * @example Ip8AV7eW679
  */
 export type UIDTrackedEntityAttribute = string;
-
-/**
- * A UID for an TrackedEntityInstance object
- * (Java name `org.hisp.dhis.trackedentity.TrackedEntityInstance`)
- *
- * @format uid
- * @pattern ^[0-9a-zA-Z]{11}$
- * @minLength 11
- * @maxLength 11
- * @example HokzU1dVN68
- */
-export type UIDTrackedEntityInstance = string;
 
 /**
  * A UID for an TrackedEntityInstanceFilter object
@@ -16083,7 +23587,7 @@ export type UIDTrackedEntityInstance = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example NuqF07j1Tce
+ * @example Nu3F07j1Tc7
  */
 export type UIDTrackedEntityInstanceFilter = string;
 
@@ -16095,7 +23599,7 @@ export type UIDTrackedEntityInstanceFilter = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example DkgvQX9RJ24
+ * @example Dk3vQ29RJ44
  */
 export type UIDTrackedEntityType = string;
 
@@ -16107,7 +23611,7 @@ export type UIDTrackedEntityType = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example r87xhYXn7ON
+ * @example r87xh9Xn8ON
  */
 export type UIDUser = string;
 
@@ -16119,7 +23623,7 @@ export type UIDUser = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example wdcC82cvDp6
+ * @example wd5C82cv3p6
  */
 export type UIDUserGroup = string;
 
@@ -16131,7 +23635,7 @@ export type UIDUserGroup = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example vcbBiY8ebSR
+ * @example vc4Bi38eb5R
  */
 export type UIDUserRole = string;
 
@@ -16143,7 +23647,7 @@ export type UIDUserRole = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example SgEOW6CEX9Q
+ * @example Sg6OW5CE49Q
  */
 export type UIDValidationNotificationTemplate = string;
 
@@ -16155,7 +23659,7 @@ export type UIDValidationNotificationTemplate = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example C0oyGQmoHTE
+ * @example C0oy6Qm5HT4
  */
 export type UIDValidationRule = string;
 
@@ -16167,7 +23671,7 @@ export type UIDValidationRule = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example H5tDLVrtMYJ
+ * @example H5tD1Vr0MY9
  */
 export type UIDValidationRuleGroup = string;
 
@@ -16179,6 +23683,11 @@ export type UIDValidationRuleGroup = string;
  * @pattern ^[0-9a-zA-Z]{11}$
  * @minLength 11
  * @maxLength 11
- * @example B7uJC0aEsY0
+ * @example B7uJ50aE7Y0
  */
 export type UIDVisualization = string;
+
+/**
+ * @format period
+ */
+export type UIDNull = string;
