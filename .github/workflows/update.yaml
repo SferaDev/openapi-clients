@@ -25,7 +25,7 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 7
+          version: 8
 
       - name: Use Node.js ${{ steps.nvm.outputs.NVMRC }}
         uses: actions/setup-node@v3
@@ -38,6 +38,8 @@ jobs:
 
       - name: Build OpenAPI spec from PR
         run: pnpm generate --filter=${{ matrix.package[0] }}
+
+      - run: tsx ./.github/workflows/scripts/changes.ts ${{ matrix.package[0] }}
 
       - run: git add .
 
