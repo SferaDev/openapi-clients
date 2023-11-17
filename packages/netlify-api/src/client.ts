@@ -1,6 +1,6 @@
 import { operationsByTag } from './api/components';
 import { operationsByPath } from './api/extra';
-import { FetcherExtraProps, baseUrl, fetch as netlifyFetch } from './api/fetcher';
+import { FetcherExtraProps, fetch as netlifyFetch } from './api/fetcher';
 import { FetchImpl } from './utils/fetch';
 import { RequiredKeys } from './utils/types';
 
@@ -82,17 +82,39 @@ export class NetlifyApi {
 
   get auth() {
     return {
-      refreshToken: async ({ refreshToken, authToken, clientId, clientSecret }: RefreshTokenOptions) => {
-        return await this.#fetch(`${baseUrl}/oauth/token`, {
+      refreshToken: async ({
+        refreshToken,
+        authToken,
+        clientId,
+        clientSecret
+      }: RefreshTokenOptions): Promise<RefreshTokenResult> => {
+        const result: {
+          token_type: string;
+          access_token: string;
+          refresh_token: string;
+          scope: string;
+          created_at: number;
+        } = await netlifyFetch({
           method: 'POST',
-          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${authToken}` },
-          body: JSON.stringify({
+          url: '/oauth/token',
+          body: {
             grant_type: 'refresh_token',
             refresh_token: refreshToken,
             client_id: clientId,
             client_secret: clientSecret
-          })
+          },
+          token: authToken || this.#token,
+          fetchImpl: this.#fetch,
+          basePath: ''
         });
+
+        return {
+          tokenType: result.token_type,
+          accessToken: result.access_token,
+          refreshToken: result.refresh_token,
+          scope: result.scope,
+          createdAt: result.created_at
+        };
       }
     };
   }
@@ -119,7 +141,15 @@ export class NetlifyApi {
 
 type RefreshTokenOptions = {
   refreshToken: string;
-  authToken: string;
+  authToken?: string;
   clientId: string;
   clientSecret: string;
+};
+
+type RefreshTokenResult = {
+  tokenType: string;
+  accessToken: string;
+  refreshToken: string;
+  scope: string;
+  createdAt: number;
 };

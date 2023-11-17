@@ -1,0 +1,27 @@
+{
+  "name": "dhis2-openapi",
+  "version": "0.0.5",
+  "description": "DHIS2 API client for Node.js",
+  "author": "SferaDev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SferaDev/openapi-clients/issues"
+  },
+  "homepage": "https://github.com/SferaDev/openapi-clients#readme",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "typings": "dist/index.d.ts",
+  "exports": {
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.cjs"
+  },
+  "scripts": {
+    "tsc": "tsc --noEmit",
+    "build": "rimraf dist && rollup -c",
+    "generate": "openapi-codegen dhis2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SferaDev/openapi-clients.git"
+  }
+}

@@ -6,9 +6,6 @@ on:
       - main
       - gh-readonly-queue/main/**
   pull_request:
-    types: [opened, synchronize, reopened, labeled]
-    branches:
-      - '**'
 
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 
@@ -27,13 +24,13 @@ jobs:
       - name: Install pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 7
+          version: 8
 
       - name: Use Node.js ${{ steps.config.outputs.NVMRC }}
         uses: actions/setup-node@v3
         with:
           node-version: ${{ steps.config.outputs.NVMRC }}
-          cache: "pnpm"
+          cache: 'pnpm'
 
       - name: Install dependencies
         run: pnpm install

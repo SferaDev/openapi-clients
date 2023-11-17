@@ -25,46 +25,42 @@ export default defineConfig({
       // Rewrite invalid enum values
       context.openAPIDocument = updateStrings({
         openAPIDocument: context.openAPIDocument,
-        updates: {
-          'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Productio': 'production',
-          'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Previe': 'preview',
-          'mport("/vercel/path0/utils/env-variable-util/types").EnvTarget.Developmen': 'development',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DomainCreate': 'domain.created',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentCreate': 'deployment.created',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentErro': 'deployment.error',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentCancele': 'deployment.canceled',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentSucceede': 'deployment.succeeded',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentRead': 'deployment.ready',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.DeploymentCheckRerequeste':
-            'deployment.check-rerequested',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.IntegrationConfigurationPermissionUpgrade':
-            'integration-configuration.permission-upgraded',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.IntegrationConfigurationRemove':
-            'integration-configuration.removed',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.IntegrationConfigurationScopeChangeConfirme':
-            'integration-configuration.scope-change-confirmed',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.ProjectCreate': 'project.created',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.ProjectRemove': 'project.removed',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentChecksComplete':
-            'deployment-checks-completed',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentRead': 'deployment-ready',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentPrepare':
-            'deployment-prepared',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentErro': 'deployment-error',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentCheckRerequeste':
-            'deployment-check-rerequested',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymentCancele':
-            'deployment-canceled',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyProjectCreate': 'project-created',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyProjectRemove': 'project-removed',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDomainCreate': 'domain-created',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyDeploymen': 'deployment',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyIntegrationConfigurationPermissionUpdate':
-            'integration-configuration-permission-updated',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyIntegrationConfigurationRemove':
-            'integration-configuration-removed',
-          'mport("/vercel/path0/utils/webhooks/webhooks/types").WebhookName.LegacyIntegrationConfigurationScopeChangeConfirme':
-            'integration-configuration-scope-change-confirmed'
+        updater: (_key, value) => {
+          if (value.endsWith('EnvTarget.Productio')) return 'production';
+          if (value.endsWith('EnvTarget.Previe')) return 'preview';
+          if (value.endsWith('EnvTarget.Developmen')) return 'development';
+          if (value.endsWith("WebhookName.DomainCreate'")) return 'domain.created';
+          if (value.endsWith("WebhookName.DeploymentCreate'")) return 'deployment.created';
+          if (value.endsWith("WebhookName.DeploymentErro'")) return 'deployment.error';
+          if (value.endsWith("WebhookName.DeploymentCancele'")) return 'deployment.canceled';
+          if (value.endsWith("WebhookName.DeploymentSucceede'")) return 'deployment.succeeded';
+          if (value.endsWith("WebhookName.DeploymentRead'")) return 'deployment.ready';
+          if (value.endsWith("WebhookName.DeploymentCheckRerequeste'")) return 'deployment.check-rerequested';
+          if (value.endsWith("WebhookName.IntegrationConfigurationPermissionUpgrade'"))
+            return 'integration-configuration.permission-upgraded';
+          if (value.endsWith("WebhookName.IntegrationConfigurationRemove'")) return 'integration-configuration.removed';
+          if (value.endsWith("WebhookName.IntegrationConfigurationScopeChangeConfirme'"))
+            return 'integration-configuration.scope-change-confirmed';
+          if (value.endsWith("WebhookName.ProjectCreate'")) return 'project.created';
+          if (value.endsWith("WebhookName.ProjectRemove'")) return 'project.removed';
+          if (value.endsWith("WebhookName.LegacyDeploymentChecksComplete'")) return 'deployment-checks-completed';
+          if (value.endsWith("WebhookName.LegacyDeploymentRead'")) return 'deployment-ready';
+          if (value.endsWith("WebhookName.LegacyDeploymentPrepare'")) return 'deployment-prepared';
+          if (value.endsWith("WebhookName.LegacyDeploymentErro'")) return 'deployment-error';
+          if (value.endsWith("WebhookName.LegacyDeploymentCheckRerequeste'")) return 'deployment-check-rerequested';
+          if (value.endsWith("WebhookName.LegacyDeploymentCancele'")) return 'deployment-canceled';
+          if (value.endsWith("WebhookName.LegacyProjectCreate'")) return 'project-created';
+          if (value.endsWith("WebhookName.LegacyProjectRemove'")) return 'project-removed';
+          if (value.endsWith("WebhookName.LegacyDomainCreate'")) return 'domain-created';
+          if (value.endsWith("WebhookName.LegacyDeploymen'")) return 'deployment';
+          if (value.endsWith("WebhookName.LegacyIntegrationConfigurationPermissionUpdate'"))
+            return 'integration-configuration-permission-updated';
+          if (value.endsWith("WebhookName.LegacyIntegrationConfigurationRemove'"))
+            return 'integration-configuration-removed';
+          if (value.endsWith("WebhookName.LegacyIntegrationConfigurationScopeChangeConfirme'"))
+            return 'integration-configuration-scope-change-confirmed';
+
+          return null;
         }
       });
 
@@ -98,14 +94,14 @@ function updateMethod({
 
 function updateStrings({
   openAPIDocument,
-  updates
+  updater
 }: {
   openAPIDocument: Context['openAPIDocument'];
-  updates: Record<string, string>;
+  updater: (key: string, value: string) => string | null;
 }) {
-  const updatedOpenAPIDocument = JSON.stringify(openAPIDocument, (_key, value) => {
+  const updatedOpenAPIDocument = JSON.stringify(openAPIDocument, (key, value) => {
     if (typeof value === 'string') {
-      return updates[value] ?? value;
+      return updater(key, value) ?? value;
     }
 
     return value;
@@ -125,7 +121,11 @@ function buildExtraFile(context: Context) {
   const operationsByPath = Object.fromEntries(
     Object.entries(context.openAPIDocument.paths ?? {}).flatMap(([path, methods]) => {
       return Object.entries(methods)
-        .filter(([method]) => ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].includes(method.toUpperCase()))
+        .filter(
+          ([method, operation]: [string, any]) =>
+            ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].includes(method.toUpperCase()) &&
+            operation?.operationId !== undefined
+        )
         .map(([method, operation]: [string, any]) => [`${method.toUpperCase()} ${path}`, operation.operationId]);
     })
   );
