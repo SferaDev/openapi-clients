@@ -39,6 +39,8 @@ jobs:
       - name: Build OpenAPI spec from PR
         run: pnpm generate --filter=${{ matrix.package[0] }}
 
+      - run: tsx ./.github/workflows/scripts/changes.ts ${{ matrix.package[0] }}
+
       - run: git add .
 
       - name: Create Pull Request
