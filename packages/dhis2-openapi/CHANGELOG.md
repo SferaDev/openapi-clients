@@ -1,5 +1,11 @@
 # dhis2-openapi
 
+## 0.0.6
+
+### Patch Changes
+
+- 70b43f5: [OpenAPI] Spec updates for dhis2-openapi
+
 ## 0.0.5
 
 ### Patch Changes
