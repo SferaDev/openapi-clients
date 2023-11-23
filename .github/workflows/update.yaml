@@ -40,6 +40,8 @@ jobs:
         run: pnpm generate --filter=${{ matrix.package[0] }}
 
       - run: npx tsx ./.github/workflows/scripts/changes.ts ${{ matrix.package[0] }}
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
 
       - run: git add .
 
