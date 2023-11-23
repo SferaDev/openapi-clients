@@ -121,26 +121,42 @@ export type DataValueQueryParamsOu = string;
  */
 export type DataValueQueryParamsPe = string;
 
+/**
+ * @default false
+ */
 export type GistParamsAbsoluteUrls = boolean;
 
 export type GistParamsAuto = 'XL' | 'L' | 'M' | 'S' | 'XS';
 
+/**
+ * @default false
+ */
 export type GistParamsDescribe = boolean;
 
 export type GistParamsFields = string;
 
 export type GistParamsFilter = string;
 
+/**
+ * @default false
+ */
 export type GistParamsHeadless = boolean;
 
+/**
+ * @default false
+ */
 export type GistParamsInverse = boolean;
 
+/**
+ * @default
+ */
 export type GistParamsLocale = string;
 
 export type GistParamsOrder = string;
 
 /**
  * @format int32
+ * @default 1
  */
 export type GistParamsPage = number;
 
@@ -148,17 +164,33 @@ export type GistParamsPageListName = string;
 
 /**
  * @format int32
+ * @default 50
  */
 export type GistParamsPageSize = number;
 
+/**
+ * @default true
+ */
 export type GistParamsReferences = boolean;
 
+/**
+ * @default AND
+ */
 export type GistParamsRootJunction = 'AND' | 'OR';
 
+/**
+ * @default false
+ */
 export type GistParamsTotal = boolean;
 
+/**
+ * @default true
+ */
 export type GistParamsTranslate = boolean;
 
+/**
+ * @default false
+ */
 export type ImportOptionsAsync = boolean;
 
 export type ImportOptionsCategoryIdScheme = string;
@@ -173,22 +205,40 @@ export type ImportOptionsDataSet = string;
 
 export type ImportOptionsDataSetIdScheme = string;
 
+/**
+ * @default false
+ */
 export type ImportOptionsDatasetAllowsPeriods = boolean;
 
+/**
+ * @default false
+ */
 export type ImportOptionsDryRun = boolean;
 
 export type ImportOptionsEventIdScheme = string;
 
 export type ImportOptionsFilename = string;
 
+/**
+ * @default true
+ */
 export type ImportOptionsFirstRowIsHeader = boolean;
 
+/**
+ * @default false
+ */
 export type ImportOptionsForce = boolean;
 
 export type ImportOptionsIdScheme = string;
 
+/**
+ * @default false
+ */
 export type ImportOptionsIgnoreEmptyCollection = boolean;
 
+/**
+ * @default CREATE_AND_UPDATE
+ */
 export type ImportOptionsImportStrategy =
   | 'CREATE'
   | 'UPDATE'
@@ -200,8 +250,14 @@ export type ImportOptionsImportStrategy =
   | 'UPDATES'
   | 'DELETES';
 
+/**
+ * @default false
+ */
 export type ImportOptionsMergeDataValues = boolean;
 
+/**
+ * @default REPLACE
+ */
 export type ImportOptionsMergeMode = 'MERGE_ALWAYS' | 'MERGE_IF_NOT_NULL' | 'MERGE' | 'REPLACE' | 'NONE';
 
 export type ImportOptionsNotificationLevel = 'OFF' | 'DEBUG' | 'LOOP' | 'INFO' | 'WARN' | 'ERROR';
@@ -214,56 +270,128 @@ export type ImportOptionsProgramIdScheme = string;
 
 export type ImportOptionsProgramStageIdScheme = string;
 
+/**
+ * @default FULL
+ */
 export type ImportOptionsReportMode = 'FULL' | 'ERRORS' | 'ERRORS_NOT_OWNER' | 'DEBUG';
 
+/**
+ * @default false
+ */
 export type ImportOptionsRequireAttributeOptionCombo = boolean;
 
+/**
+ * @default false
+ */
 export type ImportOptionsRequireCategoryOptionCombo = boolean;
 
+/**
+ * @default false
+ */
 export type ImportOptionsSharing = boolean;
 
+/**
+ * @default false
+ */
 export type ImportOptionsSkipAudit = boolean;
 
+/**
+ * @default false
+ */
 export type ImportOptionsSkipCache = boolean;
 
+/**
+ * @default false
+ */
 export type ImportOptionsSkipExistingCheck = boolean;
 
+/**
+ * @default false
+ */
 export type ImportOptionsSkipLastUpdated = boolean;
 
+/**
+ * @default false
+ */
 export type ImportOptionsSkipNotifications = boolean;
 
+/**
+ * @default false
+ */
 export type ImportOptionsSkipPatternValidation = boolean;
 
+/**
+ * @default false
+ */
 export type ImportOptionsStrictAttributeOptionCombos = boolean;
 
+/**
+ * @default false
+ */
 export type ImportOptionsStrictCategoryOptionCombos = boolean;
 
+/**
+ * @default false
+ */
 export type ImportOptionsStrictDataElements = boolean;
 
+/**
+ * @default false
+ */
 export type ImportOptionsStrictDataSetApproval = boolean;
 
+/**
+ * @default false
+ */
 export type ImportOptionsStrictDataSetInputPeriods = boolean;
 
+/**
+ * @default false
+ */
 export type ImportOptionsStrictDataSetLocking = boolean;
 
+/**
+ * @default false
+ */
 export type ImportOptionsStrictOrganisationUnits = boolean;
 
+/**
+ * @default false
+ */
 export type ImportOptionsStrictPeriods = boolean;
 
 export type ImportOptionsTrackedEntityAttributeIdScheme = string;
 
 export type ImportOptionsTrackedEntityIdScheme = string;
 
+/**
+ * @default ALL
+ */
 export type MetadataImportParamsAtomicMode = 'ALL' | 'NONE';
 
+/**
+ * @default AUTO
+ */
 export type MetadataImportParamsFlushMode = 'OBJECT' | 'AUTO';
 
+/**
+ * @default UID
+ */
 export type MetadataImportParamsIdentifier = 'UID' | 'CODE';
 
+/**
+ * @default COMMIT
+ */
 export type MetadataImportParamsImportMode = 'COMMIT' | 'VALIDATE';
 
+/**
+ * @default ERRORS
+ */
 export type MetadataImportParamsImportReportMode = 'FULL' | 'ERRORS' | 'ERRORS_NOT_OWNER' | 'DEBUG';
 
+/**
+ * @default CREATE_AND_UPDATE
+ */
 export type MetadataImportParamsImportStrategy =
   | 'CREATE'
   | 'UPDATE'
@@ -275,18 +403,39 @@ export type MetadataImportParamsImportStrategy =
   | 'UPDATES'
   | 'DELETES';
 
+/**
+ * @default REPLACE
+ */
 export type MetadataImportParamsMergeMode = 'MERGE_ALWAYS' | 'MERGE_IF_NOT_NULL' | 'MERGE' | 'REPLACE' | 'NONE';
 
+/**
+ * @default false
+ */
 export type MetadataImportParamsMetadataSyncImport = boolean;
 
+/**
+ * @default REFERENCE
+ */
 export type MetadataImportParamsPreheatMode = 'REFERENCE' | 'ALL' | 'NONE';
 
+/**
+ * @default false
+ */
 export type MetadataImportParamsSkipSharing = boolean;
 
+/**
+ * @default false
+ */
 export type MetadataImportParamsSkipTranslation = boolean;
 
+/**
+ * @default false
+ */
 export type MetadataImportParamsSkipValidation = boolean;
 
+/**
+ * @default NONE
+ */
 export type MetadataImportParamsUserOverrideMode = 'NONE' | 'CURRENT' | 'SELECTED';
 
 /**
@@ -329,6 +478,9 @@ export type OrderParamsOrders = string[];
 
 export type TranslateParamsLocale = string;
 
+/**
+ * @default true
+ */
 export type TranslateParamsTranslate = boolean;
 
 /**

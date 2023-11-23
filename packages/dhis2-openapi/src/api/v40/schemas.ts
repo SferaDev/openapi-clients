@@ -95,7 +95,7 @@ export type AggregateDataExchange = {
 };
 
 export type AggregateDataExchangeJobParameters = {
-  dataExchangeIds?: Uid[];
+  dataExchangeIds?: string[];
 };
 
 export type AnalyticsJobParameters = {
@@ -103,7 +103,7 @@ export type AnalyticsJobParameters = {
    * @format int32
    */
   lastYears?: number;
-  skipPrograms?: Uid[];
+  skipPrograms?: string[];
   skipResourceTables?: boolean;
   skipTableTypes?: (
     | 'DATA_VALUE'
@@ -562,9 +562,9 @@ export type ApprovalStatusDto = {
 
 export type ApprovalsDto = {
   approvals?: ApprovalDto[];
-  ds?: Uid[];
+  ds?: string[];
   pe?: string[];
-  wf?: Uid[];
+  wf?: string[];
 };
 
 export type Attribute = {
@@ -1531,7 +1531,8 @@ export type CategoryOptionCombo = {
     | 'DATA_ELEMENT_GROUP'
     | 'ORGANISATION_UNIT_GROUP'
     | 'CATEGORY_OPTION_GROUP'
-    | 'EXPRESSION_DIMENSION_ITEM';
+    | 'EXPRESSION_DIMENSION_ITEM'
+    | 'SUBEXPRESSION_DIMENSION_ITEM';
   displayDescription?: string;
   displayFormName?: string;
   displayName?: string;
@@ -2975,6 +2976,7 @@ export type DataDimensionItem = {
     | 'PROGRAM_DATA_ELEMENT'
     | 'PROGRAM_ATTRIBUTE'
     | 'EXPRESSION_DIMENSION_ITEM'
+    | 'SUBEXPRESSION_DIMENSION_ITEM'
     | 'VALIDATION_RULE';
   /**
    * A UID reference to a DataElement
@@ -3036,6 +3038,20 @@ export type DataDimensionItem = {
     id: string;
   };
   reportingRate?: ReportingRate;
+  /**
+   * A UID reference to a SubexpressionDimensionItem
+   * (Java name `org.hisp.dhis.subexpression.SubexpressionDimensionItem`)
+   */
+  subexpressionDimensionItem?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example Lw2Gc1ww0ad
+     */
+    id: string;
+  };
 };
 
 export type DataElement = {
@@ -4428,7 +4444,7 @@ export type DataValueCategoryDto = {
    * @example iZ9tI8jD7T4
    */
   combo?: string;
-  options?: Uid[];
+  options?: string[];
 };
 
 export type DataValueContextDto = {
@@ -4909,7 +4925,16 @@ export type DimensionalObject = {
    * @format int64
    */
   id: number;
-  items?: boolean;
+  items?: {
+    /**
+     * @format uid
+     * @pattern ^[0-9a-zA-Z]{11}$
+     * @minLength 11
+     * @maxLength 11
+     * @example rf7BX6iB5Nb
+     */
+    id: string;
+  }[];
   key?: string;
   /**
    * @format date-time
@@ -5375,6 +5400,7 @@ export type ErrorReport = {
     | 'E3031'
     | 'E3032'
     | 'E3040'
+    | 'E3041'
     | 'E4000'
     | 'E4001'
     | 'E4002'
@@ -5558,6 +5584,8 @@ export type ErrorReport = {
     | 'E7135'
     | 'E7136'
     | 'E7143'
+    | 'E7144'
+    | 'E7145'
     | 'E7200'
     | 'E7201'
     | 'E7202'
@@ -5597,6 +5625,7 @@ export type ErrorReport = {
     | 'E7250'
     | 'E7300'
     | 'E7301'
+    | 'E7302'
     | 'E7400'
     | 'E7500'
     | 'E7501'
@@ -6422,7 +6451,7 @@ export type ExternalMapLayer = {
   };
   legendSetUrl?: string;
   mapLayerPosition: 'BASEMAP' | 'OVERLAY';
-  mapService: 'WMS' | 'TMS' | 'XYZ' | 'VECTOR_STYLE';
+  mapService: 'WMS' | 'TMS' | 'XYZ' | 'VECTOR_STYLE' | 'GEOJSON_URL' | 'ARCGIS_FEATURE';
   name?: string;
   publicAccess?: string;
   sharing?: Sharing;
@@ -6877,6 +6906,14 @@ export type Grid = {
   metadataHeaders?: GridHeader[];
   performanceMetrics?: PerformanceMetrics;
   refs?: Reference[];
+  /**
+   * keys are class java.lang.Integer
+   */
+  rowContext?: {
+    [key: string]: {
+      [key: string]: Record<string, any>;
+    };
+  };
   rows?: Record<string, any>[][];
   subtitle?: string;
   table?: string;
@@ -7312,6 +7349,7 @@ export type ImportConflict = {
     | 'E3031'
     | 'E3032'
     | 'E3040'
+    | 'E3041'
     | 'E4000'
     | 'E4001'
     | 'E4002'
@@ -7495,6 +7533,8 @@ export type ImportConflict = {
     | 'E7135'
     | 'E7136'
     | 'E7143'
+    | 'E7144'
+    | 'E7145'
     | 'E7200'
     | 'E7201'
     | 'E7202'
@@ -7534,6 +7574,7 @@ export type ImportConflict = {
     | 'E7250'
     | 'E7300'
     | 'E7301'
+    | 'E7302'
     | 'E7400'
     | 'E7500'
     | 'E7501'
@@ -7603,7 +7644,7 @@ export type ImportConflicts = {
    * @format int32
    */
   conflictCount: number;
-  conflicts?: ImportConflict[];
+  conflicts?: boolean;
   conflictsDescription?: string;
   /**
    * @format int32
@@ -9819,7 +9860,8 @@ export type MetadataItem = {
     | 'DATA_ELEMENT_GROUP'
     | 'ORGANISATION_UNIT_GROUP'
     | 'CATEGORY_OPTION_GROUP'
-    | 'EXPRESSION_DIMENSION_ITEM';
+    | 'EXPRESSION_DIMENSION_ITEM'
+    | 'SUBEXPRESSION_DIMENSION_ITEM';
   dimensionType:
     | 'DATA_X'
     | 'PROGRAM_DATA_ELEMENT'
@@ -9860,6 +9902,9 @@ export type MetadataItem = {
   };
   legendSet?: string;
   name?: string;
+  options?: {
+    [key: string]: string;
+  }[];
   /**
    * @format date-time
    */
@@ -10058,7 +10103,7 @@ export type MonitoringJobParameters = {
    */
   relativeStart: number;
   sendNotifications?: boolean;
-  validationRuleGroups?: Uid[];
+  validationRuleGroups?: string[];
 };
 
 export type Node = {
@@ -10240,7 +10285,7 @@ export type ObjectCount = {
 
 export type ObjectReport = {
   displayName?: string;
-  errorReports: ErrorReport[];
+  errorReports?: ErrorReport[];
   /**
    * @format int32
    */
@@ -12159,8 +12204,8 @@ export type PredictorGroup = {
 };
 
 export type PredictorJobParameters = {
-  predictorGroups?: Uid[];
-  predictors?: Uid[];
+  predictorGroups?: string[];
+  predictors?: string[];
   /**
    * @format int32
    */
@@ -14993,7 +15038,7 @@ export type PushAnalysis = {
 };
 
 export type PushAnalysisJobParameters = {
-  pushAnalysis: Uid[];
+  pushAnalysis: string[];
 };
 
 export type QueryModifiers = {
@@ -15031,7 +15076,6 @@ export type QueryModifiers = {
    * @format int32
    */
   periodOffset: number;
-  subExpression?: string;
   valueType:
     | 'TEXT'
     | 'LONG_TEXT'
@@ -16178,7 +16222,7 @@ export type SchedulerEntryJob = {
 export type SchedulerQueue = {
   cronExpression: string;
   name?: string;
-  sequence: Uid[];
+  sequence: string[];
 };
 
 export type Section = {
@@ -16351,7 +16395,7 @@ export type SharingInfo = {
 
 export type SharingObject = {
   displayName?: string;
-  externalAccess?: boolean;
+  externalAccess: boolean;
   id?: string;
   name?: string;
   publicAccess?: string;
@@ -16567,7 +16611,7 @@ export type SqlView = {
 };
 
 export type SqlViewUpdateParameters = {
-  sqlViews?: Uid[];
+  sqlViews?: string[];
 };
 
 export type Stage = {
@@ -17749,7 +17793,7 @@ export type TrackerStats = {
 };
 
 export type TrackerTrigramIndexJobParameters = {
-  attributes?: Uid[];
+  attributes?: string[];
   skipIndexDeletion?: boolean;
 };
 
@@ -17787,12 +17831,6 @@ export type TypeReport = {
   objectReports: ObjectReport[];
   stats?: Stats;
 };
-
-/**
- * The actual type is unknown.
- * (Java type was: `class org.hisp.dhis.common.UID`)
- */
-export type Uid = Record<string, any>;
 
 export type UpdateFollowUpForDataValuesRequest = {
   followups?: FollowupParams[];
@@ -18564,7 +18602,8 @@ export type ValidationRule = {
     | 'DATA_ELEMENT_GROUP'
     | 'ORGANISATION_UNIT_GROUP'
     | 'CATEGORY_OPTION_GROUP'
-    | 'EXPRESSION_DIMENSION_ITEM';
+    | 'EXPRESSION_DIMENSION_ITEM'
+    | 'SUBEXPRESSION_DIMENSION_ITEM';
   displayDescription?: string;
   displayFormName?: string;
   displayInstruction?: string;
@@ -19289,6 +19328,7 @@ export type WebMessage = {
     | 'E3031'
     | 'E3032'
     | 'E3040'
+    | 'E3041'
     | 'E4000'
     | 'E4001'
     | 'E4002'
@@ -19472,6 +19512,8 @@ export type WebMessage = {
     | 'E7135'
     | 'E7136'
     | 'E7143'
+    | 'E7144'
+    | 'E7145'
     | 'E7200'
     | 'E7201'
     | 'E7202'
@@ -19511,6 +19553,7 @@ export type WebMessage = {
     | 'E7250'
     | 'E7300'
     | 'E7301'
+    | 'E7302'
     | 'E7400'
     | 'E7500'
     | 'E7501'
