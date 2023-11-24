@@ -37,6 +37,10 @@ async function main() {
 
   try {
     const diff = await getChangeDiff();
+    if (diff.trim().length === 0) {
+      console.log('No changes detected');
+      return;
+    }
 
     const prompt = `
     You are an assistant to a software developer working on a project called "${projectName}".
