@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        package: [[vercel-api-js], [netlify-api], [dhis2-openapi]]
+        package: [[vercel-api-js], [netlify-api]]
 
     steps:
       - name: Checkout repo
