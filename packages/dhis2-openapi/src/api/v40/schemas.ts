@@ -4925,16 +4925,7 @@ export type DimensionalObject = {
    * @format int64
    */
   id: number;
-  items?: {
-    /**
-     * @format uid
-     * @pattern ^[0-9a-zA-Z]{11}$
-     * @minLength 11
-     * @maxLength 11
-     * @example rf7BX6iB5Nb
-     */
-    id: string;
-  }[];
+  items?: boolean;
   key?: string;
   /**
    * @format date-time
@@ -4970,20 +4961,7 @@ export type DimensionalObject = {
      */
     id: string;
   };
-  /**
-   * A UID reference to a ProgramStage
-   * (Java name `org.hisp.dhis.program.ProgramStage`)
-   */
-  programStage?: {
-    /**
-     * @format uid
-     * @pattern ^[0-9a-zA-Z]{11}$
-     * @minLength 11
-     * @maxLength 11
-     * @example uf8uS7d0KE2
-     */
-    id: string;
-  };
+  programStage?: boolean;
   publicAccess?: string;
   sharing?: Sharing;
   shortName?: string;
