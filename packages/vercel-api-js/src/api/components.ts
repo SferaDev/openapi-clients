@@ -6679,6 +6679,9 @@ export const deleteEdgeConfig = (variables: DeleteEdgeConfigVariables, signal?: 
   });
 
 export type GetEdgeConfigItemsPathParams = {
+  /**
+   * @pattern ^ecfg_
+   */
   edgeConfigId: string;
 };
 
@@ -6710,6 +6713,9 @@ export const getEdgeConfigItems = (variables: GetEdgeConfigItemsVariables, signa
   >({ url: '/v1/edge-config/{edgeConfigId}/items', method: 'get', ...variables, signal });
 
 export type PatchEdgeConfigItemsPathParams = {
+  /**
+   * @pattern ^ecfg_
+   */
   edgeConfigId: string;
 };
 
@@ -6765,6 +6771,9 @@ export const patchEdgeConfigItems = (variables: PatchEdgeConfigItemsVariables, s
   >({ url: '/v1/edge-config/{edgeConfigId}/items', method: 'patch', ...variables, signal });
 
 export type GetEdgeConfigItemPathParams = {
+  /**
+   * @pattern ^ecfg_
+   */
   edgeConfigId: string;
   edgeConfigItemKey: string;
 };
