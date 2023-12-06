@@ -8367,6 +8367,13 @@ export type CreateConfigurableLogDrainRequestBody = {
    * Custom secret of log drain
    */
   secret?: string;
+  /**
+   * The sampling rate for this log drain. It should be a percentage rate between 0 and 100. With max 2 decimal points
+   *
+   * @minimum 0.01
+   * @maximum 1
+   */
+  samplingRate?: number;
 };
 
 export type CreateConfigurableLogDrainVariables = {
