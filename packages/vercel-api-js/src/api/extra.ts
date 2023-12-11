@@ -230,7 +230,7 @@ export const operationsByPath = {
   'POST /v7/certs': issueCert,
   'PUT /v7/certs': uploadCert,
   'GET /v6/deployments/{id}/files': listDeploymentFiles,
-  'GET /v6/deployments/{id}/files/{fileId}': getDeploymentFileContents,
+  'GET /v7/deployments/{id}/files/{fileId}': getDeploymentFileContents,
   'GET /v6/deployments': getDeployments,
   'GET /registration/verify': verifyToken,
   'POST /registration': emailLogin,

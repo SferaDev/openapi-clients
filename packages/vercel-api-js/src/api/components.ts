@@ -17055,7 +17055,7 @@ export type GetDeploymentFileContentsVariables = {
 } & FetcherExtraProps;
 
 /**
- * Allows to retrieve the content of a file by supplying the file identifier and the deployment unique identifier. The response body will contain the raw content of the file.
+ * Allows to retrieve the content of a file by supplying the file identifier and the deployment unique identifier. The response body will contain a JSON response containing the contents of the file encoded as base64.
  */
 export const getDeploymentFileContents = (variables: GetDeploymentFileContentsVariables, signal?: AbortSignal) =>
   fetch<
@@ -17065,7 +17065,7 @@ export const getDeploymentFileContents = (variables: GetDeploymentFileContentsVa
     {},
     GetDeploymentFileContentsQueryParams,
     GetDeploymentFileContentsPathParams
-  >({ url: '/v6/deployments/{id}/files/{fileId}', method: 'get', ...variables, signal });
+  >({ url: '/v7/deployments/{id}/files/{fileId}', method: 'get', ...variables, signal });
 
 export type GetDeploymentsQueryParams = {
   /**
