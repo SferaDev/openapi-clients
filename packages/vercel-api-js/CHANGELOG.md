@@ -1,5 +1,20 @@
 # vercel-api-js
 
+## 0.2.0
+
+### Minor Changes
+
+- ce46c2b: [BREAKING] Change endpoint URL from v6 to v7 for file retrieval
+- 37f6643: [BREAKING] Add new request body for DeleteConfiguration
+- 668433e: Add new request body type for cancelling deployment
+- e4b3662: Add sampling rate option to CreateConfigurableLogDrainRequestBody
+
+### Patch Changes
+
+- 4991311: Remove redundant comment and re-order properties in AuthUser type
+- 350a358: Add validation pattern for edgeConfigId in endpoint path params
+- dd972a2: [BREAKING] Remove 'previousLogDrainId' field from 'CreateLogDrainRequestBody'
+
 ## 0.1.25
 
 ### Patch Changes
