@@ -14466,12 +14466,6 @@ export type JoinTeamRequestBody = {
    * @example fisdh38aejkeivn34nslfore9vjtn4ls
    */
   inviteCode?: string;
-  /**
-   * The team ID.
-   *
-   * @example team_3oNwMKqLHqEBh02CTPsrbNbe
-   */
-  teamId?: string;
 };
 
 export type JoinTeamVariables = {
