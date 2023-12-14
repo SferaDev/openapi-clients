@@ -3435,6 +3435,765 @@ export type CreateDeploymentResponse = {
 
 export type CreateDeploymentRequestBody = {
   /**
+   * Ignored. Can be set to get completions, validations and documentation in some editors.
+   *
+   * @example https://openapi.vercel.sh/vercel.json
+   */
+  $schema?: string;
+  /**
+   * Aliases that will get assigned when the deployment is `READY` and the target is `production`. The client needs to make a `GET` request to its API to ensure the assignment
+   *
+   * @example example.vercel.app
+   * @maxItems 50
+   * @maxLength 253
+   */
+  alias?: string[];
+  /**
+   * An object containing another object with information to be passed to the Build Process
+   *
+   * @deprecated true
+   */
+  build?: {
+    /**
+     * An object containing the deployment's environment variable names and values to be passed to Builds. Secrets can be referenced by prefixing the value with `@`
+     *
+     * @example {"A_SECRET":"@a-secret"}
+     * @deprecated true
+     * @maxProperties 100
+     * @minProperties 0
+     */
+    env?: {
+      [key: string]: string;
+    };
+  };
+  /**
+   * A list of build descriptions whose src references valid source files.
+   *
+   * @deprecated true
+   * @maxItems 128
+   * @minItems 0
+   */
+  builds?: {
+    /**
+     * Optionally, an object including arbitrary metadata to be passed to the Builder
+     */
+    config?: Record<string, any>;
+    /**
+     * A glob expression or pathname. If more than one file is resolved, one build will be created per matched file. It can include `*` and `**`
+     *
+     * @maxLength 4096
+     */
+    src?: string;
+    /**
+     * An npm module to be installed by the build process. It can include a semver compatible version (e.g.: `@org/proj@1`)
+     *
+     * @maxLength 256
+     */
+    use: string;
+  }[];
+  /**
+   * When set to `true`, all HTML files and Serverless Functions will have their extension removed. When visiting a path that ends with the extension, a 308 response will redirect the client to the extensionless path.
+   */
+  cleanUrls?: boolean;
+  /**
+   * An object containing the deployment's environment variable names and values. Secrets can be referenced by prefixing the value with `@`
+   *
+   * @example {"A_SECRET":"@a-secret"}
+   * @deprecated true
+   * @maxProperties 100
+   * @minProperties 0
+   */
+  env?: {
+    [key: string]: string;
+  };
+  /**
+   * An array of the passive regions the deployment's Serverless Functions should be deployed to that can be failed over to during a lambda outage
+   *
+   * @example iad1
+   * @example cle1
+   * @maxItems 4
+   * @minItems 1
+   */
+  passiveRegions?: string[];
+  /**
+   * Same as passiveRegions. An array of the passive regions the deployment's Serverless Functions should be deployed to so we can failover to these regions on lambda outages
+   *
+   * @example iad1
+   * @example cle1
+   * @maxItems 4
+   * @minItems 1
+   */
+  functionFailoverRegions?: string[];
+  /**
+   * An object describing custom options for your Serverless Functions. Each key must be glob pattern that matches the paths of the Serverless Functions you would like to customize (like `api/*.js` or `api/test.js`).
+   *
+   * @example {"src/pages/**":{"maxDuration":6,"memory":1024}}
+   * @maxProperties 50
+   * @minProperties 1
+   */
+  functions?: {
+    [key: string]: {
+      /**
+       * A glob pattern to match files that should be excluded from your Serverless Function. If you’re using a Community Runtime, the behavior might vary.
+       *
+       * @maxLength 256
+       */
+      excludeFiles?: string;
+      /**
+       * A glob pattern to match files that should be included in your Serverless Function. If you’re using a Community Runtime, the behavior might vary.
+       *
+       * @maxLength 256
+       */
+      includeFiles?: string;
+      /**
+       * An integer defining how long your Serverless Function should be allowed to run on every request in seconds (between 1 and the maximum limit of your plan).
+       *
+       * @maximum 900
+       * @minimum 1
+       */
+      maxDuration?: number;
+      /**
+       * An integer defining the memory your Serverless Function should be provided with (between 128 and 3008).
+       *
+       * @maximum 3008
+       * @minimum 128
+       */
+      memory?: number;
+      /**
+       * The npm package name of a Runtime, including its version
+       *
+       * @maxLength 256
+       */
+      runtime?: string;
+    };
+  };
+  git?: {
+    /**
+     * Specifies the branches that will not trigger an auto-deployment when committing to them. Any non specified branch is `true` by default.
+     *
+     * @example {"main":false}
+     */
+    deploymentEnabled?:
+      | boolean
+      | {
+          [key: string]: boolean;
+        };
+  };
+  /**
+   * A list of header definitions.
+   *
+   * @maxItems 1024
+   */
+  headers?: {
+    /**
+     * A pattern that matches each incoming pathname (excluding querystring)
+     *
+     * @maxLength 4096
+     */
+    source: string;
+    /**
+     * An array of key/value pairs representing each response header.
+     *
+     * @maxItems 1024
+     */
+    headers: {
+      /**
+       * @maxLength 4096
+       */
+      key: string;
+      /**
+       * @maxLength 4096
+       */
+      value: string;
+    }[];
+    /**
+     * An array of requirements that are needed to match
+     *
+     * @maxItems 16
+     */
+    has?: (
+      | {
+          /**
+           * The type of request element to check
+           */
+          type: 'host';
+          /**
+           * A regular expression used to match the value. Named groups can be used in the destination
+           *
+           * @maxLength 4096
+           */
+          value: string;
+        }
+      | {
+          /**
+           * The type of request element to check
+           */
+          type: 'header' | 'cookie' | 'query';
+          /**
+           * The name of the element contained in the particular type
+           *
+           * @maxLength 4096
+           */
+          key: string;
+          /**
+           * A regular expression used to match the value. Named groups can be used in the destination
+           *
+           * @maxLength 4096
+           */
+          value?: string;
+        }
+    )[];
+    /**
+     * An array of requirements that are needed to match
+     *
+     * @maxItems 16
+     */
+    missing?: (
+      | {
+          /**
+           * The type of request element to check
+           */
+          type: 'host';
+          /**
+           * A regular expression used to match the value. Named groups can be used in the destination
+           *
+           * @maxLength 4096
+           */
+          value: string;
+        }
+      | {
+          /**
+           * The type of request element to check
+           */
+          type: 'header' | 'cookie' | 'query';
+          /**
+           * The name of the element contained in the particular type
+           *
+           * @maxLength 4096
+           */
+          key: string;
+          /**
+           * A regular expression used to match the value. Named groups can be used in the destination
+           *
+           * @maxLength 4096
+           */
+          value?: string;
+        }
+    )[];
+  }[];
+  images?: {
+    contentDispositionType?: 'inline' | 'attachment';
+    /**
+     * @maxLength 256
+     */
+    contentSecurityPolicy?: string;
+    dangerouslyAllowSVG?: boolean;
+    /**
+     * @minItems 0
+     * @maxItems 50
+     */
+    domains?: string[];
+    /**
+     * @minItems 1
+     * @maxItems 4
+     */
+    formats?: ('image/avif' | 'image/webp' | 'image/jpeg' | 'image/png')[];
+    /**
+     * @minimum 1
+     * @maximum 315360000
+     */
+    minimumCacheTTL?: number;
+    /**
+     * @minItems 0
+     * @maxItems 50
+     */
+    remotePatterns?: {
+      protocol?: 'http' | 'https';
+      /**
+       * @maxLength 256
+       */
+      hostname: string;
+      /**
+       * @maxLength 5
+       */
+      port?: string;
+      /**
+       * @maxLength 256
+       */
+      pathname?: string;
+    }[];
+    /**
+     * @minItems 1
+     * @maxItems 50
+     */
+    sizes: number[];
+  };
+  /**
+   * A string with the project name used in the deployment URL
+   *
+   * @example my-instant-deployment
+   */
+  name: string;
+  /**
+   * Whether a deployment's source and logs are available publicly
+   */
+  public?: boolean;
+  /**
+   * A list of redirect definitions.
+   *
+   * @maxItems 1024
+   */
+  redirects?: {
+    /**
+     * A pattern that matches each incoming pathname (excluding querystring).
+     *
+     * @maxLength 4096
+     */
+    source: string;
+    /**
+     * A location destination defined as an absolute pathname or external URL.
+     *
+     * @maxLength 4096
+     */
+    destination: string;
+    /**
+     * A boolean to toggle between permanent and temporary redirect. When `true`, the status code is `308`. When `false` the status code is `307`.
+     */
+    permanent?: boolean;
+    /**
+     * An array of requirements that are needed to match
+     *
+     * @maxItems 16
+     */
+    has?: (
+      | {
+          /**
+           * The type of request element to check
+           */
+          type: 'host';
+          /**
+           * A regular expression used to match the value. Named groups can be used in the destination
+           *
+           * @maxLength 4096
+           */
+          value: string;
+        }
+      | {
+          /**
+           * The type of request element to check
+           */
+          type: 'header' | 'cookie' | 'query';
+          /**
+           * The name of the element contained in the particular type
+           *
+           * @maxLength 4096
+           */
+          key: string;
+          /**
+           * A regular expression used to match the value. Named groups can be used in the destination
+           *
+           * @maxLength 4096
+           */
+          value?: string;
+        }
+    )[];
+    /**
+     * An array of requirements that are needed to match
+     *
+     * @maxItems 16
+     */
+    missing?: (
+      | {
+          /**
+           * The type of request element to check
+           */
+          type: 'host';
+          /**
+           * A regular expression used to match the value. Named groups can be used in the destination
+           *
+           * @maxLength 4096
+           */
+          value: string;
+        }
+      | {
+          /**
+           * The type of request element to check
+           */
+          type: 'header' | 'cookie' | 'query';
+          /**
+           * The name of the element contained in the particular type
+           *
+           * @maxLength 4096
+           */
+          key: string;
+          /**
+           * A regular expression used to match the value. Named groups can be used in the destination
+           *
+           * @maxLength 4096
+           */
+          value?: string;
+        }
+    )[];
+  }[];
+  /**
+   * An array of the regions the deployment's Serverless Functions should be deployed to
+   *
+   * @example sfo
+   * @example bru
+   * @maxItems 1000
+   * @minItems 1
+   */
+  regions?: string[];
+  /**
+   * A list of rewrite definitions.
+   *
+   * @maxItems 1024
+   */
+  rewrites?: {
+    /**
+     * A pattern that matches each incoming pathname (excluding querystring).
+     *
+     * @maxLength 4096
+     */
+    source: string;
+    /**
+     * An absolute pathname to an existing resource or an external URL.
+     *
+     * @maxLength 4096
+     */
+    destination: string;
+    /**
+     * An array of requirements that are needed to match
+     *
+     * @maxItems 16
+     */
+    has?: (
+      | {
+          /**
+           * The type of request element to check
+           */
+          type: 'host';
+          /**
+           * A regular expression used to match the value. Named groups can be used in the destination
+           *
+           * @maxLength 4096
+           */
+          value: string;
+        }
+      | {
+          /**
+           * The type of request element to check
+           */
+          type: 'header' | 'cookie' | 'query';
+          /**
+           * The name of the element contained in the particular type
+           *
+           * @maxLength 4096
+           */
+          key: string;
+          /**
+           * A regular expression used to match the value. Named groups can be used in the destination
+           *
+           * @maxLength 4096
+           */
+          value?: string;
+        }
+    )[];
+    /**
+     * An array of requirements that are needed to match
+     *
+     * @maxItems 16
+     */
+    missing?: (
+      | {
+          /**
+           * The type of request element to check
+           */
+          type: 'host';
+          /**
+           * A regular expression used to match the value. Named groups can be used in the destination
+           *
+           * @maxLength 4096
+           */
+          value: string;
+        }
+      | {
+          /**
+           * The type of request element to check
+           */
+          type: 'header' | 'cookie' | 'query';
+          /**
+           * The name of the element contained in the particular type
+           *
+           * @maxLength 4096
+           */
+          key: string;
+          /**
+           * A regular expression used to match the value. Named groups can be used in the destination
+           *
+           * @maxLength 4096
+           */
+          value?: string;
+        }
+    )[];
+    /**
+     * An optional integer to override the status code of the response.
+     *
+     * @minimum 100
+     * @maximum 999
+     */
+    statusCode?: number;
+  }[];
+  /**
+   * A list of routes objects used to rewrite paths to point towards other internal or external paths
+   *
+   * @maxItems 1024
+   * @deprecated true
+   * @example {"dest":"https://docs.example.com","src":"/docs"}
+   */
+  routes?: (
+    | {
+        /**
+         * @maxLength 4096
+         */
+        src: string;
+        /**
+         * @maxLength 4096
+         */
+        dest?: string;
+        /**
+         * @minProperties 1
+         * @maxProperties 100
+         */
+        headers?: {
+          [key: string]: string;
+        };
+        /**
+         * @maxItems 10
+         */
+        methods?: string[];
+        caseSensitive?: boolean;
+        important?: boolean;
+        user?: boolean;
+        ['continue']?: boolean;
+        override?: boolean;
+        check?: boolean;
+        isInternal?: boolean;
+        /**
+         * @minimum 100
+         * @maximum 999
+         */
+        status?: number;
+        /**
+         * @minProperties 1
+         */
+        locale?: {
+          /**
+           * @minProperties 1
+           * @maxProperties 100
+           */
+          redirect?: {
+            [key: string]: string;
+          };
+          /**
+           * @maxLength 4096
+           */
+          value?: string;
+          /**
+           * @maxLength 4096
+           */
+          path?: string;
+          /**
+           * @maxLength 4096
+           */
+          cookie?: string;
+          /**
+           * @maxLength 4096
+           */
+          ['default']?: string;
+        };
+        middleware?: number;
+        middlewarePath?: string;
+        middlewareRawSrc?: string[];
+        /**
+         * An array of requirements that are needed to match
+         *
+         * @maxItems 16
+         */
+        has?: (
+          | {
+              /**
+               * The type of request element to check
+               */
+              type: 'host';
+              /**
+               * A regular expression used to match the value. Named groups can be used in the destination
+               *
+               * @maxLength 4096
+               */
+              value: string;
+            }
+          | {
+              /**
+               * The type of request element to check
+               */
+              type: 'header' | 'cookie' | 'query';
+              /**
+               * The name of the element contained in the particular type
+               *
+               * @maxLength 4096
+               */
+              key: string;
+              /**
+               * A regular expression used to match the value. Named groups can be used in the destination
+               *
+               * @maxLength 4096
+               */
+              value?: string;
+            }
+        )[];
+        /**
+         * An array of requirements that are needed to match
+         *
+         * @maxItems 16
+         */
+        missing?: (
+          | {
+              /**
+               * The type of request element to check
+               */
+              type: 'host';
+              /**
+               * A regular expression used to match the value. Named groups can be used in the destination
+               *
+               * @maxLength 4096
+               */
+              value: string;
+            }
+          | {
+              /**
+               * The type of request element to check
+               */
+              type: 'header' | 'cookie' | 'query';
+              /**
+               * The name of the element contained in the particular type
+               *
+               * @maxLength 4096
+               */
+              key: string;
+              /**
+               * A regular expression used to match the value. Named groups can be used in the destination
+               *
+               * @maxLength 4096
+               */
+              value?: string;
+            }
+        )[];
+      }
+    | {
+        /**
+         * @maxLength 32
+         */
+        handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
+      }
+  )[];
+  /**
+   * When `false`, visiting a path that ends with a forward slash will respond with a `308` status code and redirect to the path without the trailing slash.
+   */
+  trailingSlash?: boolean;
+  /**
+   * The build command for this project. When `null` is used this value will be automatically detected
+   *
+   * @maxLength 256
+   */
+  buildCommand?: string | null;
+  /**
+   * @maxLength 256
+   */
+  ignoreCommand?: string | null;
+  /**
+   * The dev command for this project. When `null` is used this value will be automatically detected
+   *
+   * @maxLength 256
+   */
+  devCommand?: string | null;
+  /**
+   * The framework that is being used for this project. When `null` is used no framework is selected
+   */
+  framework?:
+    | any
+    | 'blitzjs'
+    | 'nextjs'
+    | 'gatsby'
+    | 'remix'
+    | 'astro'
+    | 'hexo'
+    | 'eleventy'
+    | 'docusaurus-2'
+    | 'docusaurus'
+    | 'preact'
+    | 'solidstart'
+    | 'dojo'
+    | 'ember'
+    | 'vue'
+    | 'scully'
+    | 'ionic-angular'
+    | 'angular'
+    | 'polymer'
+    | 'svelte'
+    | 'sveltekit'
+    | 'sveltekit-1'
+    | 'ionic-react'
+    | 'create-react-app'
+    | 'gridsome'
+    | 'umijs'
+    | 'sapper'
+    | 'saber'
+    | 'stencil'
+    | 'nuxtjs'
+    | 'redwoodjs'
+    | 'hugo'
+    | 'jekyll'
+    | 'brunch'
+    | 'middleman'
+    | 'zola'
+    | 'hydrogen'
+    | 'vite'
+    | 'vitepress'
+    | 'vuepress'
+    | 'parcel'
+    | 'sanity'
+    | 'storybook'
+    | null;
+  /**
+   * The install command for this project. When `null` is used this value will be automatically detected
+   *
+   * @maxLength 256
+   */
+  installCommand?: string | null;
+  /**
+   * The output directory of the project. When `null` is used this value will be automatically detected
+   *
+   * @maxLength 256
+   */
+  outputDirectory?: string | null;
+  /**
+   * An array of cron jobs that should be created for production Deployments.
+   *
+   * @maxItems 20
+   */
+  crons?: {
+    /**
+     * @maxLength 256
+     */
+    schedule: string;
+    /**
+     * @maxLength 512
+     * @pattern ^/.*
+     */
+    path: string;
+  }[];
+  /**
    * An deployment id for an existing deployment to redeploy
    */
   deploymentId?: string;
@@ -3566,18 +4325,59 @@ export type CreateDeploymentRequestBody = {
    * The monorepo manager that is being used for this deployment. When `null` is used no monorepo manager is selected
    */
   monorepoManager?: string | null;
-  /**
-   * A string with the project name used in the deployment URL
-   *
-   * @example my-instant-deployment
-   */
-  name: string;
-  /**
-   * The target project identifier in which the deployment will be created. When defined, this parameter overrides name
-   *
-   * @example my-deployment-project
-   */
-  project?: string;
+  project: {
+    id: string;
+    region_id: string;
+    name: string;
+    pg_version: number;
+    proxy_host: string;
+    /**
+     * The logical size limit for a branch in MiB.
+     */
+    branch_logical_size_limit: number;
+    /**
+     * The logical size limit for a branch in bytes.
+     */
+    branch_logical_size_limit_bytes: number;
+    /**
+     * The data storage size in bytes.
+     */
+    synthetic_storage_size?: number;
+    store_passwords: boolean;
+    created_at: string;
+    updated_at: string;
+    owner_id: string;
+    quota_reset_at?: string;
+    data_storage_bytes_hour?: number;
+    data_transfer_bytes?: number;
+    written_data_bytes?: number;
+    active_time_seconds?: number;
+    compute_time_seconds?: number;
+    settings?: {
+      quota?: {
+        /**
+         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
+         */
+        compute_time_seconds?: number;
+        /**
+         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
+         */
+        active_time_seconds?: number;
+        /**
+         * The total amount of data written to all project's branches.
+         */
+        written_data_bytes?: number;
+        /**
+         * The total amount of data transferred from all project's branches using proxy.
+         */
+        data_transfer_bytes?: number;
+        /**
+         * The logical size of every project's branch.
+         */
+        logical_size_bytes?: number;
+      };
+    };
+  };
   /**
    * Project settings that will be applied to the deployment. It is required for the first deployment of a project and will be saved for any following deployments
    */
@@ -3689,6 +4489,109 @@ export type CreateDeploymentRequestBody = {
    * When `true` and `deploymentId` is passed in, the sha from the previous deployment's `gitSource` is removed forcing the latest commit to be used.
    */
   withLatestCommit?: boolean;
+  connection_uris: {
+    /**
+     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
+     */
+    connection_uri: string;
+  }[];
+  roles: {
+    branch_id: string;
+    name: string;
+    created_at: string;
+    updated_at: string;
+    protected?: boolean;
+    password?: string;
+  }[];
+  databases: {
+    id: number;
+    branch_id: string;
+    name: string;
+    owner_name: string;
+    created_at: string;
+    updated_at: string;
+  }[];
+  branch: {
+    id: string;
+    project_id: string;
+    name: string;
+    current_state: 'init' | 'ready';
+    primary: boolean;
+    created_at: string;
+    updated_at: string;
+    parent_id?: string;
+  };
+  endpoints: {
+    host: string;
+    id: string;
+    project_id: string;
+    branch_id: string;
+    autoscaling_limit_min_cu: number;
+    autoscaling_limit_max_cu: number;
+    region_id: string;
+    type: string;
+    current_state: string;
+    pooler_enabled: boolean;
+    pooler_mode: string;
+    disabled: boolean;
+    passwordless_access: boolean;
+    last_active?: string;
+    created_at: string;
+    updated_at: string;
+    suspend_timeout_seconds: number;
+  }[];
+  endpoint: {
+    host: string;
+    id: string;
+    project_id: string;
+    branch_id: string;
+    autoscaling_limit_min_cu: number;
+    autoscaling_limit_max_cu: number;
+    region_id: string;
+    type: string;
+    current_state: string;
+    pooler_enabled: boolean;
+    pooler_mode: string;
+    disabled: boolean;
+    passwordless_access: boolean;
+    last_active?: string;
+    created_at: string;
+    updated_at: string;
+    suspend_timeout_seconds: number;
+  };
+  database: {
+    id: number;
+    branch_id: string;
+    name: string;
+    owner_name: string;
+    created_at: string;
+    updated_at: string;
+  };
+  role: {
+    branch_id: string;
+    name: string;
+    created_at: string;
+    updated_at: string;
+    protected?: boolean;
+    password?: string;
+  };
+  password: string;
+  projects: {
+    id: string;
+    data_storage_bytes_hour: number;
+    data_storage_bytes_hour_updated_at?: string;
+    data_transfer_bytes: number;
+    data_transfer_bytes_updated_at?: string;
+    written_data_bytes: number;
+    written_data_bytes_updated_at?: string;
+    compute_time_seconds: number;
+    compute_time_seconds_updated_at?: string;
+    synthetic_storage_size: number;
+    synthetic_storage_size_updated_at?: string;
+  }[];
+  pagination: {
+    cursor: string;
+  };
 };
 
 export type CreateDeploymentVariables = {
@@ -4171,7 +5074,167 @@ export type CancelDeploymentResponse = {
   id: string;
 };
 
+export type CancelDeploymentRequestBody = {
+  project: {
+    id: string;
+    region_id: string;
+    name: string;
+    pg_version: number;
+    proxy_host: string;
+    /**
+     * The logical size limit for a branch in MiB.
+     */
+    branch_logical_size_limit: number;
+    /**
+     * The logical size limit for a branch in bytes.
+     */
+    branch_logical_size_limit_bytes: number;
+    /**
+     * The data storage size in bytes.
+     */
+    synthetic_storage_size?: number;
+    store_passwords: boolean;
+    created_at: string;
+    updated_at: string;
+    owner_id: string;
+    quota_reset_at?: string;
+    data_storage_bytes_hour?: number;
+    data_transfer_bytes?: number;
+    written_data_bytes?: number;
+    active_time_seconds?: number;
+    compute_time_seconds?: number;
+    settings?: {
+      quota?: {
+        /**
+         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
+         */
+        compute_time_seconds?: number;
+        /**
+         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
+         */
+        active_time_seconds?: number;
+        /**
+         * The total amount of data written to all project's branches.
+         */
+        written_data_bytes?: number;
+        /**
+         * The total amount of data transferred from all project's branches using proxy.
+         */
+        data_transfer_bytes?: number;
+        /**
+         * The logical size of every project's branch.
+         */
+        logical_size_bytes?: number;
+      };
+    };
+  };
+  connection_uris: {
+    /**
+     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
+     */
+    connection_uri: string;
+  }[];
+  roles: {
+    branch_id: string;
+    name: string;
+    created_at: string;
+    updated_at: string;
+    protected?: boolean;
+    password?: string;
+  }[];
+  databases: {
+    id: number;
+    branch_id: string;
+    name: string;
+    owner_name: string;
+    created_at: string;
+    updated_at: string;
+  }[];
+  branch: {
+    id: string;
+    project_id: string;
+    name: string;
+    current_state: 'init' | 'ready';
+    primary: boolean;
+    created_at: string;
+    updated_at: string;
+    parent_id?: string;
+  };
+  endpoints: {
+    host: string;
+    id: string;
+    project_id: string;
+    branch_id: string;
+    autoscaling_limit_min_cu: number;
+    autoscaling_limit_max_cu: number;
+    region_id: string;
+    type: string;
+    current_state: string;
+    pooler_enabled: boolean;
+    pooler_mode: string;
+    disabled: boolean;
+    passwordless_access: boolean;
+    last_active?: string;
+    created_at: string;
+    updated_at: string;
+    suspend_timeout_seconds: number;
+  }[];
+  endpoint: {
+    host: string;
+    id: string;
+    project_id: string;
+    branch_id: string;
+    autoscaling_limit_min_cu: number;
+    autoscaling_limit_max_cu: number;
+    region_id: string;
+    type: string;
+    current_state: string;
+    pooler_enabled: boolean;
+    pooler_mode: string;
+    disabled: boolean;
+    passwordless_access: boolean;
+    last_active?: string;
+    created_at: string;
+    updated_at: string;
+    suspend_timeout_seconds: number;
+  };
+  database: {
+    id: number;
+    branch_id: string;
+    name: string;
+    owner_name: string;
+    created_at: string;
+    updated_at: string;
+  };
+  role: {
+    branch_id: string;
+    name: string;
+    created_at: string;
+    updated_at: string;
+    protected?: boolean;
+    password?: string;
+  };
+  password: string;
+  projects: {
+    id: string;
+    data_storage_bytes_hour: number;
+    data_storage_bytes_hour_updated_at?: string;
+    data_transfer_bytes: number;
+    data_transfer_bytes_updated_at?: string;
+    written_data_bytes: number;
+    written_data_bytes_updated_at?: string;
+    compute_time_seconds: number;
+    compute_time_seconds_updated_at?: string;
+    synthetic_storage_size: number;
+    synthetic_storage_size_updated_at?: string;
+  }[];
+  pagination: {
+    cursor: string;
+  };
+};
+
 export type CancelDeploymentVariables = {
+  body: CancelDeploymentRequestBody;
   pathParams: CancelDeploymentPathParams;
   queryParams?: CancelDeploymentQueryParams;
 } & FetcherExtraProps;
@@ -4183,7 +5246,7 @@ export const cancelDeployment = (variables: CancelDeploymentVariables, signal?: 
   fetch<
     CancelDeploymentResponse,
     CancelDeploymentError,
-    undefined,
+    CancelDeploymentRequestBody,
     {},
     CancelDeploymentQueryParams,
     CancelDeploymentPathParams
@@ -14049,166 +15112,34 @@ export type InviteUserToTeamRequestBody = {
    * @example john@example.com
    */
   email?: string;
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
+  /**
+   * The role of the user to invite
+   *
+   * @default MEMBER
+   * @default VIEWER
+   * @example MEMBER
+   * @example VIEWER
+   */
+  role?: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
+  projects?: {
     /**
-     * The logical size limit for a branch in MiB.
+     * The ID of the project.
+     *
+     * @maxLength 256
+     * @example prj_ndlgr43fadlPyCtREAqxxdyFK
      */
-    branch_logical_size_limit: number;
+    projectId: string;
     /**
-     * The logical size limit for a branch in bytes.
+     * Sets the project roles for the invited user
+     *
+     * @example ADMIN
      */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
+    role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER';
   }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  password: string;
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type InviteUserToTeamVariables = {
-  body: InviteUserToTeamRequestBody;
+  body?: InviteUserToTeamRequestBody;
 } & FetcherExtraProps;
 
 /**
@@ -14334,162 +15265,6 @@ export type RequestAccessToTeamRequestBody = {
      * @example jane-doe
      */
     gitUserLogin?: string;
-  };
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
   };
 };
 
@@ -14637,166 +15412,10 @@ export type JoinTeamRequestBody = {
    * @example fisdh38aejkeivn34nslfore9vjtn4ls
    */
   inviteCode?: string;
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type JoinTeamVariables = {
-  body: JoinTeamRequestBody;
+  body?: JoinTeamRequestBody;
 } & FetcherExtraProps;
 
 /**
@@ -14835,169 +15454,37 @@ export type UpdateTeamMemberRequestBody = {
    * @example true
    */
   confirmed?: true;
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
+  /**
+   * The role in the team of the member.
+   *
+   * @default MEMBER
+   * @default VIEWER
+   * @example MEMBER
+   * @example VIEWER
+   */
+  role?: string;
+  projects?: {
+    /**
+     * The ID of the project.
+     *
+     * @maxLength 256
+     * @example prj_ndlgr43fadlPyCtREAqxxdyFK
+     */
+    projectId: string;
+    /**
+     * The project role of the member that will be added. \"null\" will remove this project level role.
+     *
+     * @example ADMIN
+     */
+    role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
   }[];
   joinedFrom?: {
     ssoUserId?: null;
   };
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  password: string;
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type UpdateTeamMemberVariables = {
-  body: UpdateTeamMemberRequestBody;
+  body?: UpdateTeamMemberRequestBody;
   pathParams: UpdateTeamMemberPathParams;
 } & FetcherExtraProps;
 
@@ -15042,167 +15529,7 @@ export type RemoveTeamMemberResponse = {
   newDefaultTeamIdError: boolean;
 };
 
-export type RemoveTeamMemberRequestBody = {
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
-};
-
 export type RemoveTeamMemberVariables = {
-  body: RemoveTeamMemberRequestBody;
   pathParams: RemoveTeamMemberPathParams;
   queryParams?: RemoveTeamMemberQueryParams;
 } & FetcherExtraProps;
@@ -15214,7 +15541,7 @@ export const removeTeamMember = (variables: RemoveTeamMemberVariables, signal?: 
   fetch<
     RemoveTeamMemberResponse,
     RemoveTeamMemberError,
-    RemoveTeamMemberRequestBody,
+    undefined,
     {},
     RemoveTeamMemberQueryParams,
     RemoveTeamMemberPathParams
@@ -19373,162 +19700,6 @@ export type EmailLoginResponse = {
 };
 
 export type EmailLoginRequestBody = {
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
   /**
    * The user email.
    *
