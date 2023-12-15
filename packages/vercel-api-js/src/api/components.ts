@@ -394,162 +394,6 @@ export type CreateCheckRequestBody = {
    * @example true
    */
   rerequestable?: boolean;
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type CreateCheckVariables = {
@@ -933,166 +777,10 @@ export type UpdateCheckRequestBody = {
    * @example 1234abc
    */
   externalId?: string;
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type UpdateCheckVariables = {
-  body: UpdateCheckRequestBody;
+  body?: UpdateCheckRequestBody;
   pathParams: UpdateCheckPathParams;
   queryParams?: UpdateCheckQueryParams;
 } & FetcherExtraProps;
@@ -1134,167 +822,7 @@ export type RerequestCheckQueryParams = {
 
 export type RerequestCheckError = Fetcher.ErrorWrapper<undefined>;
 
-export type RerequestCheckRequestBody = {
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
-};
-
 export type RerequestCheckVariables = {
-  body: RerequestCheckRequestBody;
   pathParams: RerequestCheckPathParams;
   queryParams?: RerequestCheckQueryParams;
 } & FetcherExtraProps;
@@ -1303,14 +831,12 @@ export type RerequestCheckVariables = {
  * Rerequest a selected check that has failed.
  */
 export const rerequestCheck = (variables: RerequestCheckVariables, signal?: AbortSignal) =>
-  fetch<
-    Record<string, any>,
-    RerequestCheckError,
-    RerequestCheckRequestBody,
-    {},
-    RerequestCheckQueryParams,
-    RerequestCheckPathParams
-  >({ url: '/v1/deployments/{deploymentId}/checks/{checkId}/rerequest', method: 'post', ...variables, signal });
+  fetch<Record<string, any>, RerequestCheckError, undefined, {}, RerequestCheckQueryParams, RerequestCheckPathParams>({
+    url: '/v1/deployments/{deploymentId}/checks/{checkId}/rerequest',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type UpdateProjectDataCachePathParams = {
   /**
@@ -5230,167 +4756,7 @@ export type CancelDeploymentResponse = {
   id: string;
 };
 
-export type CancelDeploymentRequestBody = {
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
-};
-
 export type CancelDeploymentVariables = {
-  body: CancelDeploymentRequestBody;
   pathParams: CancelDeploymentPathParams;
   queryParams?: CancelDeploymentQueryParams;
 } & FetcherExtraProps;
@@ -5402,7 +4768,7 @@ export const cancelDeployment = (variables: CancelDeploymentVariables, signal?: 
   fetch<
     CancelDeploymentResponse,
     CancelDeploymentError,
-    CancelDeploymentRequestBody,
+    undefined,
     {},
     CancelDeploymentQueryParams,
     CancelDeploymentPathParams
@@ -5446,162 +4812,6 @@ export type BuyDomainRequestBody = {
    * @example true
    */
   renew?: boolean;
-  project?: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris?: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles?: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases?: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch?: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints?: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint?: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database?: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role?: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password?: string;
-  projects?: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination?: {
-    cursor: string;
-  };
 };
 
 export type BuyDomainVariables = {
@@ -7461,162 +6671,6 @@ export type CreateEdgeConfigRequestBody = {
       | (string | number | boolean | null | Record<string, any>)
       | (string | number | boolean | null | Record<string, any>)[];
   };
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type CreateEdgeConfigVariables = {
@@ -7731,162 +6785,6 @@ export type UpdateEdgeConfigRequestBody = {
    * @pattern ^[\\w-]+$
    */
   slug: string;
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type UpdateEdgeConfigVariables = {
@@ -7921,167 +6819,7 @@ export type DeleteEdgeConfigQueryParams = {
 
 export type DeleteEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteEdgeConfigRequestBody = {
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
-};
-
 export type DeleteEdgeConfigVariables = {
-  body: DeleteEdgeConfigRequestBody;
   pathParams: DeleteEdgeConfigPathParams;
   queryParams?: DeleteEdgeConfigQueryParams;
 } & FetcherExtraProps;
@@ -8090,14 +6828,12 @@ export type DeleteEdgeConfigVariables = {
  * Delete an Edge Config by id.
  */
 export const deleteEdgeConfig = (variables: DeleteEdgeConfigVariables, signal?: AbortSignal) =>
-  fetch<
-    undefined,
-    DeleteEdgeConfigError,
-    DeleteEdgeConfigRequestBody,
-    {},
-    DeleteEdgeConfigQueryParams,
-    DeleteEdgeConfigPathParams
-  >({ url: '/v1/edge-config/{edgeConfigId}', method: 'delete', ...variables, signal });
+  fetch<undefined, DeleteEdgeConfigError, undefined, {}, DeleteEdgeConfigQueryParams, DeleteEdgeConfigPathParams>({
+    url: '/v1/edge-config/{edgeConfigId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetEdgeConfigItemsPathParams = {
   /**
@@ -8170,162 +6906,6 @@ export type PatchEdgeConfigItemsRequestBody = {
       }
   )[];
   definition: void;
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type PatchEdgeConfigItemsVariables = {
@@ -8428,162 +7008,6 @@ export type DeleteEdgeConfigTokensError = Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteEdgeConfigTokensRequestBody = {
   tokens: string[];
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type DeleteEdgeConfigTokensVariables = {
@@ -8660,162 +7084,6 @@ export type CreateEdgeConfigTokenRequestBody = {
    * @maxLength 52
    */
   label: string;
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type CreateEdgeConfigTokenVariables = {
@@ -10089,7 +8357,167 @@ export type DeleteConfigurableLogDrainQueryParams = {
 
 export type DeleteConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
 
+export type DeleteConfigurableLogDrainRequestBody = {
+  project: {
+    id: string;
+    region_id: string;
+    name: string;
+    pg_version: number;
+    proxy_host: string;
+    /**
+     * The logical size limit for a branch in MiB.
+     */
+    branch_logical_size_limit: number;
+    /**
+     * The logical size limit for a branch in bytes.
+     */
+    branch_logical_size_limit_bytes: number;
+    /**
+     * The data storage size in bytes.
+     */
+    synthetic_storage_size?: number;
+    store_passwords: boolean;
+    created_at: string;
+    updated_at: string;
+    owner_id: string;
+    quota_reset_at?: string;
+    data_storage_bytes_hour?: number;
+    data_transfer_bytes?: number;
+    written_data_bytes?: number;
+    active_time_seconds?: number;
+    compute_time_seconds?: number;
+    settings?: {
+      quota?: {
+        /**
+         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
+         */
+        compute_time_seconds?: number;
+        /**
+         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
+         */
+        active_time_seconds?: number;
+        /**
+         * The total amount of data written to all project's branches.
+         */
+        written_data_bytes?: number;
+        /**
+         * The total amount of data transferred from all project's branches using proxy.
+         */
+        data_transfer_bytes?: number;
+        /**
+         * The logical size of every project's branch.
+         */
+        logical_size_bytes?: number;
+      };
+    };
+  };
+  connection_uris: {
+    /**
+     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
+     */
+    connection_uri: string;
+  }[];
+  roles: {
+    branch_id: string;
+    name: string;
+    created_at: string;
+    updated_at: string;
+    protected?: boolean;
+    password?: string;
+  }[];
+  databases: {
+    id: number;
+    branch_id: string;
+    name: string;
+    owner_name: string;
+    created_at: string;
+    updated_at: string;
+  }[];
+  branch: {
+    id: string;
+    project_id: string;
+    name: string;
+    current_state: 'init' | 'ready';
+    primary: boolean;
+    created_at: string;
+    updated_at: string;
+    parent_id?: string;
+  };
+  endpoints: {
+    host: string;
+    id: string;
+    project_id: string;
+    branch_id: string;
+    autoscaling_limit_min_cu: number;
+    autoscaling_limit_max_cu: number;
+    region_id: string;
+    type: string;
+    current_state: string;
+    pooler_enabled: boolean;
+    pooler_mode: string;
+    disabled: boolean;
+    passwordless_access: boolean;
+    last_active?: string;
+    created_at: string;
+    updated_at: string;
+    suspend_timeout_seconds: number;
+  }[];
+  endpoint: {
+    host: string;
+    id: string;
+    project_id: string;
+    branch_id: string;
+    autoscaling_limit_min_cu: number;
+    autoscaling_limit_max_cu: number;
+    region_id: string;
+    type: string;
+    current_state: string;
+    pooler_enabled: boolean;
+    pooler_mode: string;
+    disabled: boolean;
+    passwordless_access: boolean;
+    last_active?: string;
+    created_at: string;
+    updated_at: string;
+    suspend_timeout_seconds: number;
+  };
+  database: {
+    id: number;
+    branch_id: string;
+    name: string;
+    owner_name: string;
+    created_at: string;
+    updated_at: string;
+  };
+  role: {
+    branch_id: string;
+    name: string;
+    created_at: string;
+    updated_at: string;
+    protected?: boolean;
+    password?: string;
+  };
+  password: string;
+  projects: {
+    id: string;
+    data_storage_bytes_hour: number;
+    data_storage_bytes_hour_updated_at?: string;
+    data_transfer_bytes: number;
+    data_transfer_bytes_updated_at?: string;
+    written_data_bytes: number;
+    written_data_bytes_updated_at?: string;
+    compute_time_seconds: number;
+    compute_time_seconds_updated_at?: string;
+    synthetic_storage_size: number;
+    synthetic_storage_size_updated_at?: string;
+  }[];
+  pagination: {
+    cursor: string;
+  };
+};
+
 export type DeleteConfigurableLogDrainVariables = {
+  body: DeleteConfigurableLogDrainRequestBody;
   pathParams: DeleteConfigurableLogDrainPathParams;
   queryParams?: DeleteConfigurableLogDrainQueryParams;
 } & FetcherExtraProps;
@@ -10101,7 +8529,7 @@ export const deleteConfigurableLogDrain = (variables: DeleteConfigurableLogDrain
   fetch<
     undefined,
     DeleteConfigurableLogDrainError,
-    undefined,
+    DeleteConfigurableLogDrainRequestBody,
     {},
     DeleteConfigurableLogDrainQueryParams,
     DeleteConfigurableLogDrainPathParams
@@ -10253,6 +8681,162 @@ export type CreateConfigurableLogDrainRequestBody = {
    * @maximum 1
    */
   samplingRate?: number;
+  project: {
+    id: string;
+    region_id: string;
+    name: string;
+    pg_version: number;
+    proxy_host: string;
+    /**
+     * The logical size limit for a branch in MiB.
+     */
+    branch_logical_size_limit: number;
+    /**
+     * The logical size limit for a branch in bytes.
+     */
+    branch_logical_size_limit_bytes: number;
+    /**
+     * The data storage size in bytes.
+     */
+    synthetic_storage_size?: number;
+    store_passwords: boolean;
+    created_at: string;
+    updated_at: string;
+    owner_id: string;
+    quota_reset_at?: string;
+    data_storage_bytes_hour?: number;
+    data_transfer_bytes?: number;
+    written_data_bytes?: number;
+    active_time_seconds?: number;
+    compute_time_seconds?: number;
+    settings?: {
+      quota?: {
+        /**
+         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
+         */
+        compute_time_seconds?: number;
+        /**
+         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
+         */
+        active_time_seconds?: number;
+        /**
+         * The total amount of data written to all project's branches.
+         */
+        written_data_bytes?: number;
+        /**
+         * The total amount of data transferred from all project's branches using proxy.
+         */
+        data_transfer_bytes?: number;
+        /**
+         * The logical size of every project's branch.
+         */
+        logical_size_bytes?: number;
+      };
+    };
+  };
+  connection_uris: {
+    /**
+     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
+     */
+    connection_uri: string;
+  }[];
+  roles: {
+    branch_id: string;
+    name: string;
+    created_at: string;
+    updated_at: string;
+    protected?: boolean;
+    password?: string;
+  }[];
+  databases: {
+    id: number;
+    branch_id: string;
+    name: string;
+    owner_name: string;
+    created_at: string;
+    updated_at: string;
+  }[];
+  branch: {
+    id: string;
+    project_id: string;
+    name: string;
+    current_state: 'init' | 'ready';
+    primary: boolean;
+    created_at: string;
+    updated_at: string;
+    parent_id?: string;
+  };
+  endpoints: {
+    host: string;
+    id: string;
+    project_id: string;
+    branch_id: string;
+    autoscaling_limit_min_cu: number;
+    autoscaling_limit_max_cu: number;
+    region_id: string;
+    type: string;
+    current_state: string;
+    pooler_enabled: boolean;
+    pooler_mode: string;
+    disabled: boolean;
+    passwordless_access: boolean;
+    last_active?: string;
+    created_at: string;
+    updated_at: string;
+    suspend_timeout_seconds: number;
+  }[];
+  endpoint: {
+    host: string;
+    id: string;
+    project_id: string;
+    branch_id: string;
+    autoscaling_limit_min_cu: number;
+    autoscaling_limit_max_cu: number;
+    region_id: string;
+    type: string;
+    current_state: string;
+    pooler_enabled: boolean;
+    pooler_mode: string;
+    disabled: boolean;
+    passwordless_access: boolean;
+    last_active?: string;
+    created_at: string;
+    updated_at: string;
+    suspend_timeout_seconds: number;
+  };
+  database: {
+    id: number;
+    branch_id: string;
+    name: string;
+    owner_name: string;
+    created_at: string;
+    updated_at: string;
+  };
+  role: {
+    branch_id: string;
+    name: string;
+    created_at: string;
+    updated_at: string;
+    protected?: boolean;
+    password?: string;
+  };
+  password: string;
+  projects: {
+    id: string;
+    data_storage_bytes_hour: number;
+    data_storage_bytes_hour_updated_at?: string;
+    data_transfer_bytes: number;
+    data_transfer_bytes_updated_at?: string;
+    written_data_bytes: number;
+    written_data_bytes_updated_at?: string;
+    compute_time_seconds: number;
+    compute_time_seconds_updated_at?: string;
+    synthetic_storage_size: number;
+    synthetic_storage_size_updated_at?: string;
+  }[];
+  pagination: {
+    cursor: string;
+  };
 };
 
 export type CreateConfigurableLogDrainVariables = {
@@ -17004,7 +15588,7 @@ export type PatchTeamRequestBody = {
      */
     enforced?: boolean;
     roles?: {
-      [key: string]: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
+      [key: string]: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
     };
   };
   /**
@@ -17048,166 +15632,10 @@ export type PatchTeamRequestBody = {
    * @example false
    */
   hideIpAddresses?: boolean;
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type PatchTeamVariables = {
-  body: PatchTeamRequestBody;
+  body?: PatchTeamRequestBody;
   pathParams: PatchTeamPathParams;
 } & FetcherExtraProps;
 
@@ -17786,162 +16214,6 @@ export type CreateTeamRequestBody = {
    * @maxLength 256
    */
   name?: string;
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type CreateTeamVariables = {
@@ -18006,166 +16278,10 @@ export type DeleteTeamRequestBody = {
      */
     description: string;
   }[];
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type DeleteTeamVariables = {
-  body: DeleteTeamRequestBody;
+  body?: DeleteTeamRequestBody;
   pathParams: DeleteTeamPathParams;
   queryParams?: DeleteTeamQueryParams;
 } & FetcherExtraProps;
@@ -18199,167 +16315,7 @@ export type DeleteTeamInviteCodeResponse = {
   id: string;
 };
 
-export type DeleteTeamInviteCodeRequestBody = {
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
-};
-
 export type DeleteTeamInviteCodeVariables = {
-  body: DeleteTeamInviteCodeRequestBody;
   pathParams: DeleteTeamInviteCodePathParams;
 } & FetcherExtraProps;
 
@@ -18367,14 +16323,12 @@ export type DeleteTeamInviteCodeVariables = {
  * Delete an active Team invite code.
  */
 export const deleteTeamInviteCode = (variables: DeleteTeamInviteCodeVariables, signal?: AbortSignal) =>
-  fetch<
-    DeleteTeamInviteCodeResponse,
-    DeleteTeamInviteCodeError,
-    DeleteTeamInviteCodeRequestBody,
-    {},
-    {},
-    DeleteTeamInviteCodePathParams
-  >({ url: '/v1/teams/{teamId}/invites/{inviteId}', method: 'delete', ...variables, signal });
+  fetch<DeleteTeamInviteCodeResponse, DeleteTeamInviteCodeError, undefined, {}, {}, DeleteTeamInviteCodePathParams>({
+    url: '/v1/teams/{teamId}/invites/{inviteId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type UploadFileQueryParams = {
   /**
@@ -18781,162 +16735,6 @@ export type CreateWebhookRequestBody = {
    * @maxItems 50
    */
   projectIds?: string[];
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type CreateWebhookVariables = {
@@ -19297,167 +17095,7 @@ export type DeleteWebhookQueryParams = {
 
 export type DeleteWebhookError = Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteWebhookRequestBody = {
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
-};
-
 export type DeleteWebhookVariables = {
-  body: DeleteWebhookRequestBody;
   pathParams: DeleteWebhookPathParams;
   queryParams?: DeleteWebhookQueryParams;
 } & FetcherExtraProps;
@@ -19466,9 +17104,12 @@ export type DeleteWebhookVariables = {
  * Deletes a webhook
  */
 export const deleteWebhook = (variables: DeleteWebhookVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteWebhookError, DeleteWebhookRequestBody, {}, DeleteWebhookQueryParams, DeleteWebhookPathParams>(
-    { url: '/v1/webhooks/{id}', method: 'delete', ...variables, signal }
-  );
+  fetch<undefined, DeleteWebhookError, undefined, {}, DeleteWebhookQueryParams, DeleteWebhookPathParams>({
+    url: '/v1/webhooks/{id}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type ListAliasesQueryParams = {
   /**
@@ -20221,166 +17862,10 @@ export type AssignAliasRequestBody = {
    * @example null
    */
   redirect?: string | null;
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type AssignAliasVariables = {
-  body: AssignAliasRequestBody;
+  body?: AssignAliasRequestBody;
   pathParams: AssignAliasPathParams;
   queryParams?: AssignAliasQueryParams;
 } & FetcherExtraProps;
@@ -20454,167 +17939,7 @@ export type RemoveCertQueryParams = {
 
 export type RemoveCertError = Fetcher.ErrorWrapper<undefined>;
 
-export type RemoveCertRequestBody = {
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
-};
-
 export type RemoveCertVariables = {
-  body: RemoveCertRequestBody;
   pathParams: RemoveCertPathParams;
   queryParams?: RemoveCertQueryParams;
 } & FetcherExtraProps;
@@ -20623,7 +17948,7 @@ export type RemoveCertVariables = {
  * Remove cert
  */
 export const removeCert = (variables: RemoveCertVariables, signal?: AbortSignal) =>
-  fetch<Record<string, any>, RemoveCertError, RemoveCertRequestBody, {}, RemoveCertQueryParams, RemoveCertPathParams>({
+  fetch<Record<string, any>, RemoveCertError, undefined, {}, RemoveCertQueryParams, RemoveCertPathParams>({
     url: '/v7/certs/{id}',
     method: 'delete',
     ...variables,
@@ -20652,166 +17977,10 @@ export type IssueCertRequestBody = {
    * The common names the cert should be issued for
    */
   cns?: string[];
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type IssueCertVariables = {
-  body: IssueCertRequestBody;
+  body?: IssueCertRequestBody;
   queryParams?: IssueCertQueryParams;
 } & FetcherExtraProps;
 
@@ -20860,162 +18029,6 @@ export type UploadCertRequestBody = {
    * Skip validation of the certificate
    */
   skipValidation?: boolean;
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type UploadCertVariables = {
