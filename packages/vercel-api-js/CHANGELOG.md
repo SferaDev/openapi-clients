@@ -1,5 +1,15 @@
 # vercel-api-js
 
+## 0.3.0
+
+### Minor Changes
+
+- be76b72: Add 'role' field to InviteUserToTeamRequestBody
+
+### Patch Changes
+
+- 18f26af: [BREAKING] Remove teamId field from JoinTeamRequestBody
+
 ## 0.2.0
 
 ### Minor Changes
