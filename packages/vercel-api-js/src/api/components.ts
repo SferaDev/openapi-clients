@@ -860,7 +860,7 @@ export type UpdateProjectDataCacheResponse = {
   accountId: string;
   analytics?: {
     id: string;
-    canceledAt: number | null;
+    canceledAt?: number | null;
     disabledAt: number;
     enabledAt: number;
     paidAt?: number;
@@ -931,7 +931,7 @@ export type UpdateProjectDataCacheResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
     id?: string;
     key: string;
     value: string;
@@ -992,6 +992,7 @@ export type UpdateProjectDataCacheResponse = {
           type: 'postgres-database';
           storeId: string;
         }
+      | Record<string, any>
       | null;
     /**
      * Whether `value` is decrypted.
@@ -1308,6 +1309,7 @@ export type UpdateProjectDataCacheResponse = {
     sharedEnvVarsProduction?: Schemas.ACLAction[];
     space?: Schemas.ACLAction[];
     spaceRun?: Schemas.ACLAction[];
+    storageIntegration?: Schemas.ACLAction[];
     passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
@@ -1317,6 +1319,7 @@ export type UpdateProjectDataCacheResponse = {
     redisStoreTokenSet?: Schemas.ACLAction[];
     blobStoreTokenSet?: Schemas.ACLAction[];
     postgresStoreTokenSet?: Schemas.ACLAction[];
+    integrationStoreTokenSet?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -1440,166 +1443,10 @@ export type UpdateProjectDataCacheRequestBody = {
    * @example true
    */
   disabled?: boolean;
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type UpdateProjectDataCacheVariables = {
-  body: UpdateProjectDataCacheRequestBody;
+  body?: UpdateProjectDataCacheRequestBody;
   pathParams: UpdateProjectDataCachePathParams;
   queryParams?: UpdateProjectDataCacheQueryParams;
 } & FetcherExtraProps;
@@ -3117,765 +2964,6 @@ export type CreateDeploymentResponse = {
 
 export type CreateDeploymentRequestBody = {
   /**
-   * Ignored. Can be set to get completions, validations and documentation in some editors.
-   *
-   * @example https://openapi.vercel.sh/vercel.json
-   */
-  $schema?: string;
-  /**
-   * Aliases that will get assigned when the deployment is `READY` and the target is `production`. The client needs to make a `GET` request to its API to ensure the assignment
-   *
-   * @example example.vercel.app
-   * @maxItems 50
-   * @maxLength 253
-   */
-  alias?: string[];
-  /**
-   * An object containing another object with information to be passed to the Build Process
-   *
-   * @deprecated true
-   */
-  build?: {
-    /**
-     * An object containing the deployment's environment variable names and values to be passed to Builds. Secrets can be referenced by prefixing the value with `@`
-     *
-     * @example {"A_SECRET":"@a-secret"}
-     * @deprecated true
-     * @maxProperties 100
-     * @minProperties 0
-     */
-    env?: {
-      [key: string]: string;
-    };
-  };
-  /**
-   * A list of build descriptions whose src references valid source files.
-   *
-   * @deprecated true
-   * @maxItems 128
-   * @minItems 0
-   */
-  builds?: {
-    /**
-     * Optionally, an object including arbitrary metadata to be passed to the Builder
-     */
-    config?: Record<string, any>;
-    /**
-     * A glob expression or pathname. If more than one file is resolved, one build will be created per matched file. It can include `*` and `**`
-     *
-     * @maxLength 4096
-     */
-    src?: string;
-    /**
-     * An npm module to be installed by the build process. It can include a semver compatible version (e.g.: `@org/proj@1`)
-     *
-     * @maxLength 256
-     */
-    use: string;
-  }[];
-  /**
-   * When set to `true`, all HTML files and Serverless Functions will have their extension removed. When visiting a path that ends with the extension, a 308 response will redirect the client to the extensionless path.
-   */
-  cleanUrls?: boolean;
-  /**
-   * An object containing the deployment's environment variable names and values. Secrets can be referenced by prefixing the value with `@`
-   *
-   * @example {"A_SECRET":"@a-secret"}
-   * @deprecated true
-   * @maxProperties 100
-   * @minProperties 0
-   */
-  env?: {
-    [key: string]: string;
-  };
-  /**
-   * An array of the passive regions the deployment's Serverless Functions should be deployed to that can be failed over to during a lambda outage
-   *
-   * @example iad1
-   * @example cle1
-   * @maxItems 4
-   * @minItems 1
-   */
-  passiveRegions?: string[];
-  /**
-   * Same as passiveRegions. An array of the passive regions the deployment's Serverless Functions should be deployed to so we can failover to these regions on lambda outages
-   *
-   * @example iad1
-   * @example cle1
-   * @maxItems 4
-   * @minItems 1
-   */
-  functionFailoverRegions?: string[];
-  /**
-   * An object describing custom options for your Serverless Functions. Each key must be glob pattern that matches the paths of the Serverless Functions you would like to customize (like `api/*.js` or `api/test.js`).
-   *
-   * @example {"src/pages/**":{"maxDuration":6,"memory":1024}}
-   * @maxProperties 50
-   * @minProperties 1
-   */
-  functions?: {
-    [key: string]: {
-      /**
-       * A glob pattern to match files that should be excluded from your Serverless Function. If you’re using a Community Runtime, the behavior might vary.
-       *
-       * @maxLength 256
-       */
-      excludeFiles?: string;
-      /**
-       * A glob pattern to match files that should be included in your Serverless Function. If you’re using a Community Runtime, the behavior might vary.
-       *
-       * @maxLength 256
-       */
-      includeFiles?: string;
-      /**
-       * An integer defining how long your Serverless Function should be allowed to run on every request in seconds (between 1 and the maximum limit of your plan).
-       *
-       * @maximum 900
-       * @minimum 1
-       */
-      maxDuration?: number;
-      /**
-       * An integer defining the memory your Serverless Function should be provided with (between 128 and 3008).
-       *
-       * @maximum 3008
-       * @minimum 128
-       */
-      memory?: number;
-      /**
-       * The npm package name of a Runtime, including its version
-       *
-       * @maxLength 256
-       */
-      runtime?: string;
-    };
-  };
-  git?: {
-    /**
-     * Specifies the branches that will not trigger an auto-deployment when committing to them. Any non specified branch is `true` by default.
-     *
-     * @example {"main":false}
-     */
-    deploymentEnabled?:
-      | boolean
-      | {
-          [key: string]: boolean;
-        };
-  };
-  /**
-   * A list of header definitions.
-   *
-   * @maxItems 1024
-   */
-  headers?: {
-    /**
-     * A pattern that matches each incoming pathname (excluding querystring)
-     *
-     * @maxLength 4096
-     */
-    source: string;
-    /**
-     * An array of key/value pairs representing each response header.
-     *
-     * @maxItems 1024
-     */
-    headers: {
-      /**
-       * @maxLength 4096
-       */
-      key: string;
-      /**
-       * @maxLength 4096
-       */
-      value: string;
-    }[];
-    /**
-     * An array of requirements that are needed to match
-     *
-     * @maxItems 16
-     */
-    has?: (
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'host';
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value: string;
-        }
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'header' | 'cookie' | 'query';
-          /**
-           * The name of the element contained in the particular type
-           *
-           * @maxLength 4096
-           */
-          key: string;
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value?: string;
-        }
-    )[];
-    /**
-     * An array of requirements that are needed to match
-     *
-     * @maxItems 16
-     */
-    missing?: (
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'host';
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value: string;
-        }
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'header' | 'cookie' | 'query';
-          /**
-           * The name of the element contained in the particular type
-           *
-           * @maxLength 4096
-           */
-          key: string;
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value?: string;
-        }
-    )[];
-  }[];
-  images?: {
-    contentDispositionType?: 'inline' | 'attachment';
-    /**
-     * @maxLength 256
-     */
-    contentSecurityPolicy?: string;
-    dangerouslyAllowSVG?: boolean;
-    /**
-     * @minItems 0
-     * @maxItems 50
-     */
-    domains?: string[];
-    /**
-     * @minItems 1
-     * @maxItems 4
-     */
-    formats?: ('image/avif' | 'image/webp' | 'image/jpeg' | 'image/png')[];
-    /**
-     * @minimum 1
-     * @maximum 315360000
-     */
-    minimumCacheTTL?: number;
-    /**
-     * @minItems 0
-     * @maxItems 50
-     */
-    remotePatterns?: {
-      protocol?: 'http' | 'https';
-      /**
-       * @maxLength 256
-       */
-      hostname: string;
-      /**
-       * @maxLength 5
-       */
-      port?: string;
-      /**
-       * @maxLength 256
-       */
-      pathname?: string;
-    }[];
-    /**
-     * @minItems 1
-     * @maxItems 50
-     */
-    sizes: number[];
-  };
-  /**
-   * A string with the project name used in the deployment URL
-   *
-   * @example my-instant-deployment
-   */
-  name: string;
-  /**
-   * Whether a deployment's source and logs are available publicly
-   */
-  public?: boolean;
-  /**
-   * A list of redirect definitions.
-   *
-   * @maxItems 1024
-   */
-  redirects?: {
-    /**
-     * A pattern that matches each incoming pathname (excluding querystring).
-     *
-     * @maxLength 4096
-     */
-    source: string;
-    /**
-     * A location destination defined as an absolute pathname or external URL.
-     *
-     * @maxLength 4096
-     */
-    destination: string;
-    /**
-     * A boolean to toggle between permanent and temporary redirect. When `true`, the status code is `308`. When `false` the status code is `307`.
-     */
-    permanent?: boolean;
-    /**
-     * An array of requirements that are needed to match
-     *
-     * @maxItems 16
-     */
-    has?: (
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'host';
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value: string;
-        }
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'header' | 'cookie' | 'query';
-          /**
-           * The name of the element contained in the particular type
-           *
-           * @maxLength 4096
-           */
-          key: string;
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value?: string;
-        }
-    )[];
-    /**
-     * An array of requirements that are needed to match
-     *
-     * @maxItems 16
-     */
-    missing?: (
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'host';
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value: string;
-        }
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'header' | 'cookie' | 'query';
-          /**
-           * The name of the element contained in the particular type
-           *
-           * @maxLength 4096
-           */
-          key: string;
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value?: string;
-        }
-    )[];
-  }[];
-  /**
-   * An array of the regions the deployment's Serverless Functions should be deployed to
-   *
-   * @example sfo
-   * @example bru
-   * @maxItems 1000
-   * @minItems 1
-   */
-  regions?: string[];
-  /**
-   * A list of rewrite definitions.
-   *
-   * @maxItems 1024
-   */
-  rewrites?: {
-    /**
-     * A pattern that matches each incoming pathname (excluding querystring).
-     *
-     * @maxLength 4096
-     */
-    source: string;
-    /**
-     * An absolute pathname to an existing resource or an external URL.
-     *
-     * @maxLength 4096
-     */
-    destination: string;
-    /**
-     * An array of requirements that are needed to match
-     *
-     * @maxItems 16
-     */
-    has?: (
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'host';
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value: string;
-        }
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'header' | 'cookie' | 'query';
-          /**
-           * The name of the element contained in the particular type
-           *
-           * @maxLength 4096
-           */
-          key: string;
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value?: string;
-        }
-    )[];
-    /**
-     * An array of requirements that are needed to match
-     *
-     * @maxItems 16
-     */
-    missing?: (
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'host';
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value: string;
-        }
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'header' | 'cookie' | 'query';
-          /**
-           * The name of the element contained in the particular type
-           *
-           * @maxLength 4096
-           */
-          key: string;
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value?: string;
-        }
-    )[];
-    /**
-     * An optional integer to override the status code of the response.
-     *
-     * @minimum 100
-     * @maximum 999
-     */
-    statusCode?: number;
-  }[];
-  /**
-   * A list of routes objects used to rewrite paths to point towards other internal or external paths
-   *
-   * @maxItems 1024
-   * @deprecated true
-   * @example {"dest":"https://docs.example.com","src":"/docs"}
-   */
-  routes?: (
-    | {
-        /**
-         * @maxLength 4096
-         */
-        src: string;
-        /**
-         * @maxLength 4096
-         */
-        dest?: string;
-        /**
-         * @minProperties 1
-         * @maxProperties 100
-         */
-        headers?: {
-          [key: string]: string;
-        };
-        /**
-         * @maxItems 10
-         */
-        methods?: string[];
-        caseSensitive?: boolean;
-        important?: boolean;
-        user?: boolean;
-        ['continue']?: boolean;
-        override?: boolean;
-        check?: boolean;
-        isInternal?: boolean;
-        /**
-         * @minimum 100
-         * @maximum 999
-         */
-        status?: number;
-        /**
-         * @minProperties 1
-         */
-        locale?: {
-          /**
-           * @minProperties 1
-           * @maxProperties 100
-           */
-          redirect?: {
-            [key: string]: string;
-          };
-          /**
-           * @maxLength 4096
-           */
-          value?: string;
-          /**
-           * @maxLength 4096
-           */
-          path?: string;
-          /**
-           * @maxLength 4096
-           */
-          cookie?: string;
-          /**
-           * @maxLength 4096
-           */
-          ['default']?: string;
-        };
-        middleware?: number;
-        middlewarePath?: string;
-        middlewareRawSrc?: string[];
-        /**
-         * An array of requirements that are needed to match
-         *
-         * @maxItems 16
-         */
-        has?: (
-          | {
-              /**
-               * The type of request element to check
-               */
-              type: 'host';
-              /**
-               * A regular expression used to match the value. Named groups can be used in the destination
-               *
-               * @maxLength 4096
-               */
-              value: string;
-            }
-          | {
-              /**
-               * The type of request element to check
-               */
-              type: 'header' | 'cookie' | 'query';
-              /**
-               * The name of the element contained in the particular type
-               *
-               * @maxLength 4096
-               */
-              key: string;
-              /**
-               * A regular expression used to match the value. Named groups can be used in the destination
-               *
-               * @maxLength 4096
-               */
-              value?: string;
-            }
-        )[];
-        /**
-         * An array of requirements that are needed to match
-         *
-         * @maxItems 16
-         */
-        missing?: (
-          | {
-              /**
-               * The type of request element to check
-               */
-              type: 'host';
-              /**
-               * A regular expression used to match the value. Named groups can be used in the destination
-               *
-               * @maxLength 4096
-               */
-              value: string;
-            }
-          | {
-              /**
-               * The type of request element to check
-               */
-              type: 'header' | 'cookie' | 'query';
-              /**
-               * The name of the element contained in the particular type
-               *
-               * @maxLength 4096
-               */
-              key: string;
-              /**
-               * A regular expression used to match the value. Named groups can be used in the destination
-               *
-               * @maxLength 4096
-               */
-              value?: string;
-            }
-        )[];
-      }
-    | {
-        /**
-         * @maxLength 32
-         */
-        handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
-      }
-  )[];
-  /**
-   * When `false`, visiting a path that ends with a forward slash will respond with a `308` status code and redirect to the path without the trailing slash.
-   */
-  trailingSlash?: boolean;
-  /**
-   * The build command for this project. When `null` is used this value will be automatically detected
-   *
-   * @maxLength 256
-   */
-  buildCommand?: string | null;
-  /**
-   * @maxLength 256
-   */
-  ignoreCommand?: string | null;
-  /**
-   * The dev command for this project. When `null` is used this value will be automatically detected
-   *
-   * @maxLength 256
-   */
-  devCommand?: string | null;
-  /**
-   * The framework that is being used for this project. When `null` is used no framework is selected
-   */
-  framework?:
-    | any
-    | 'blitzjs'
-    | 'nextjs'
-    | 'gatsby'
-    | 'remix'
-    | 'astro'
-    | 'hexo'
-    | 'eleventy'
-    | 'docusaurus-2'
-    | 'docusaurus'
-    | 'preact'
-    | 'solidstart'
-    | 'dojo'
-    | 'ember'
-    | 'vue'
-    | 'scully'
-    | 'ionic-angular'
-    | 'angular'
-    | 'polymer'
-    | 'svelte'
-    | 'sveltekit'
-    | 'sveltekit-1'
-    | 'ionic-react'
-    | 'create-react-app'
-    | 'gridsome'
-    | 'umijs'
-    | 'sapper'
-    | 'saber'
-    | 'stencil'
-    | 'nuxtjs'
-    | 'redwoodjs'
-    | 'hugo'
-    | 'jekyll'
-    | 'brunch'
-    | 'middleman'
-    | 'zola'
-    | 'hydrogen'
-    | 'vite'
-    | 'vitepress'
-    | 'vuepress'
-    | 'parcel'
-    | 'sanity'
-    | 'storybook'
-    | null;
-  /**
-   * The install command for this project. When `null` is used this value will be automatically detected
-   *
-   * @maxLength 256
-   */
-  installCommand?: string | null;
-  /**
-   * The output directory of the project. When `null` is used this value will be automatically detected
-   *
-   * @maxLength 256
-   */
-  outputDirectory?: string | null;
-  /**
-   * An array of cron jobs that should be created for production Deployments.
-   *
-   * @maxItems 20
-   */
-  crons?: {
-    /**
-     * @maxLength 256
-     */
-    schedule: string;
-    /**
-     * @maxLength 512
-     * @pattern ^/.*
-     */
-    path: string;
-  }[];
-  /**
    * An deployment id for an existing deployment to redeploy
    */
   deploymentId?: string;
@@ -4007,59 +3095,18 @@ export type CreateDeploymentRequestBody = {
    * The monorepo manager that is being used for this deployment. When `null` is used no monorepo manager is selected
    */
   monorepoManager?: string | null;
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
+  /**
+   * A string with the project name used in the deployment URL
+   *
+   * @example my-instant-deployment
+   */
+  name: string;
+  /**
+   * The target project identifier in which the deployment will be created. When defined, this parameter overrides name
+   *
+   * @example my-deployment-project
+   */
+  project?: string;
   /**
    * Project settings that will be applied to the deployment. It is required for the first deployment of a project and will be saved for any following deployments
    */
@@ -4171,109 +3218,6 @@ export type CreateDeploymentRequestBody = {
    * When `true` and `deploymentId` is passed in, the sha from the previous deployment's `gitSource` is removed forcing the latest commit to be used.
    */
   withLatestCommit?: boolean;
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type CreateDeploymentVariables = {
@@ -4931,7 +3875,7 @@ export const getRecords = (variables: GetRecordsVariables, signal?: AbortSignal)
           id: string;
           slug: string;
           name: string;
-          type: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
+          type: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'HTTPS' | 'MX' | 'SRV' | 'TXT' | 'NS';
           value: string;
           mxPriority?: number;
           priority?: number;
@@ -4947,7 +3891,7 @@ export const getRecords = (variables: GetRecordsVariables, signal?: AbortSignal)
           id: string;
           slug: string;
           name: string;
-          type: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
+          type: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'HTTPS' | 'MX' | 'SRV' | 'TXT' | 'NS';
           value: string;
           mxPriority?: number;
           priority?: number;
@@ -5289,6 +4233,42 @@ export type CreateRecordVariables = {
          * @maxLength 500
          */
         comment?: string;
+      }
+    | {
+        /**
+         * A subdomain name or an empty string for the root domain.
+         */
+        name: string;
+        /**
+         * Must be of type `HTTPS`.
+         */
+        type: 'HTTPS';
+        /**
+         * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
+         *
+         * @minimum 60
+         * @maximum 2147483647
+         * @example 60
+         */
+        ttl?: number;
+        https: {
+          priority: number | null;
+          /**
+           * @example host.example.com
+           */
+          target: string;
+          /**
+           * @example alpn=h2,h3
+           */
+          params?: string;
+        };
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       };
   pathParams: CreateRecordPathParams;
   queryParams?: CreateRecordQueryParams;
@@ -5615,6 +4595,42 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
          * @maxLength 500
          */
         comment?: string;
+      }
+    | {
+        /**
+         * A subdomain name or an empty string for the root domain.
+         */
+        name: string;
+        /**
+         * Must be of type `HTTPS`.
+         */
+        type: 'HTTPS';
+        /**
+         * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
+         *
+         * @minimum 60
+         * @maximum 2147483647
+         * @example 60
+         */
+        ttl?: number;
+        https: {
+          priority: number | null;
+          /**
+           * @example host.example.com
+           */
+          target: string;
+          /**
+           * @example alpn=h2,h3
+           */
+          params?: string;
+        };
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       },
     {},
     CreateRecordQueryParams,
@@ -5640,16 +4656,16 @@ export type UpdateRecordQueryParams = {
 export type UpdateRecordError = Fetcher.ErrorWrapper<undefined>;
 
 export type UpdateRecordResponse = {
-  comment?: string;
   createdAt?: number | null;
   creator: string;
   domain: string;
   id: string;
   name: string;
-  recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
+  recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'HTTPS' | 'MX' | 'SRV' | 'TXT' | 'NS';
   ttl?: number;
   type: 'record' | 'record-sys';
   value: string;
+  comment?: string;
 };
 
 export type UpdateRecordRequestBody = {
@@ -5672,7 +4688,7 @@ export type UpdateRecordRequestBody = {
    * @example A
    * @maxLength 255
    */
-  type?: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS' | null;
+  type?: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'HTTPS' | 'MX' | 'SRV' | 'TXT' | 'NS' | null;
   /**
    * The Time to live (TTL) value of the DNS record
    *
@@ -5694,6 +4710,15 @@ export type UpdateRecordRequestBody = {
     weight: number | null;
     port: number | null;
     priority: number | null;
+  } | null;
+  https?: {
+    priority: number | null;
+    /**
+     * @example example2.com.
+     * @maxLength 255
+     */
+    target: string | null;
+    params?: string | null;
   } | null;
   /**
    * A comment to add context on what this DNS record is for
@@ -5846,6 +4871,10 @@ export type GetDomainConfigPathParams = {
 };
 
 export type GetDomainConfigQueryParams = {
+  /**
+   * When true, the response will only include the nameservers assigned directly to the specified domain. When false and there are no nameservers assigned directly to the specified domain, the response will include the nameservers of the domain's parent zone.
+   */
+  strict?: 'true' | 'false';
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
@@ -6095,12 +5124,6 @@ export type GetDomainsResponse = {
       id: string;
     };
     /**
-     * Indicates whether the domain is set to automatically renew.
-     *
-     * @example true
-     */
-    renew?: boolean;
-    /**
      * If it was purchased through Vercel, the timestamp in milliseconds when it was purchased.
      *
      * @example 1613602938882
@@ -6136,6 +5159,12 @@ export type GetDomainsResponse = {
      * @example 1613602938882
      */
     orderedAt?: number;
+    /**
+     * Indicates whether the domain is set to automatically renew.
+     *
+     * @example true
+     */
+    renew?: boolean;
     /**
      * The type of service the domain is handled by. `external` if the DNS is externally handled, `zeit.world` if handled with Vercel, or `na` if the service is not available.
      *
@@ -6224,12 +5253,6 @@ export type CreateOrTransferDomainResponse = {
       id: string;
     };
     /**
-     * The unique identifier of the domain.
-     *
-     * @example EmTbe5CEJyTk2yVAHBUWy4A3sRusca3GCwRjTC1bpeVnt1
-     */
-    id: string;
-    /**
      * If it was purchased through Vercel, the timestamp in milliseconds when it was purchased.
      *
      * @example 1613602938882
@@ -6247,6 +5270,12 @@ export type CreateOrTransferDomainResponse = {
      * @example 1613602938882
      */
     expiresAt: number | null;
+    /**
+     * The unique identifier of the domain.
+     *
+     * @example EmTbe5CEJyTk2yVAHBUWy4A3sRusca3GCwRjTC1bpeVnt1
+     */
+    id: string;
     /**
      * The domain name.
      *
@@ -7284,6 +6313,7 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
               | 'read-write:edge-config'
               | 'read-write:otel-endpoint'
               | 'read:monitoring'
+              | 'read-write:storage'
             )[];
             upgraded: (
               | 'read:integration-configuration'
@@ -7303,6 +6333,7 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
               | 'read-write:edge-config'
               | 'read-write:otel-endpoint'
               | 'read:monitoring'
+              | 'read-write:storage'
             )[];
           };
           note: string;
@@ -7435,6 +6466,7 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
               | 'read-write:edge-config'
               | 'read-write:otel-endpoint'
               | 'read:monitoring'
+              | 'read-write:storage'
             )[];
             upgraded: (
               | 'read:integration-configuration'
@@ -7454,6 +6486,7 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
               | 'read-write:edge-config'
               | 'read-write:otel-endpoint'
               | 'read:monitoring'
+              | 'read-write:storage'
             )[];
           };
           note: string;
@@ -7613,6 +6646,7 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
               | 'read-write:edge-config'
               | 'read-write:otel-endpoint'
               | 'read:monitoring'
+              | 'read-write:storage'
             )[];
             upgraded: (
               | 'read:integration-configuration'
@@ -7632,6 +6666,7 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
               | 'read-write:edge-config'
               | 'read-write:otel-endpoint'
               | 'read:monitoring'
+              | 'read-write:storage'
             )[];
           };
           note: string;
@@ -7762,6 +6797,7 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
               | 'read-write:edge-config'
               | 'read-write:otel-endpoint'
               | 'read:monitoring'
+              | 'read-write:storage'
             )[];
             upgraded: (
               | 'read:integration-configuration'
@@ -7781,6 +6817,7 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
               | 'read-write:edge-config'
               | 'read-write:otel-endpoint'
               | 'read:monitoring'
+              | 'read-write:storage'
             )[];
           };
           note: string;
@@ -8357,167 +7394,7 @@ export type DeleteConfigurableLogDrainQueryParams = {
 
 export type DeleteConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteConfigurableLogDrainRequestBody = {
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
-};
-
 export type DeleteConfigurableLogDrainVariables = {
-  body: DeleteConfigurableLogDrainRequestBody;
   pathParams: DeleteConfigurableLogDrainPathParams;
   queryParams?: DeleteConfigurableLogDrainQueryParams;
 } & FetcherExtraProps;
@@ -8529,7 +7406,7 @@ export const deleteConfigurableLogDrain = (variables: DeleteConfigurableLogDrain
   fetch<
     undefined,
     DeleteConfigurableLogDrainError,
-    DeleteConfigurableLogDrainRequestBody,
+    undefined,
     {},
     DeleteConfigurableLogDrainQueryParams,
     DeleteConfigurableLogDrainPathParams
@@ -8681,162 +7558,6 @@ export type CreateConfigurableLogDrainRequestBody = {
    * @maximum 1
    */
   samplingRate?: number;
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type CreateConfigurableLogDrainVariables = {
@@ -8959,7 +7680,7 @@ export const getProjectMembers = (variables: GetProjectMembersVariables, signal?
            *
            * @example CONTRIBUTOR
            */
-          teamRole: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
+          teamRole: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
         }[];
         pagination: {
           hasNext: boolean;
@@ -9036,162 +7757,12 @@ export type AddProjectMemberVariables = {
          * @example entity@example.com
          */
         email?: string;
-        role?: {
-          branch_id: string;
-          name: string;
-          created_at: string;
-          updated_at: string;
-          protected?: boolean;
-          password?: string;
-        };
-        project?: {
-          id: string;
-          region_id: string;
-          name: string;
-          pg_version: number;
-          proxy_host: string;
-          /**
-           * The logical size limit for a branch in MiB.
-           */
-          branch_logical_size_limit: number;
-          /**
-           * The logical size limit for a branch in bytes.
-           */
-          branch_logical_size_limit_bytes: number;
-          /**
-           * The data storage size in bytes.
-           */
-          synthetic_storage_size?: number;
-          store_passwords: boolean;
-          created_at: string;
-          updated_at: string;
-          owner_id: string;
-          quota_reset_at?: string;
-          data_storage_bytes_hour?: number;
-          data_transfer_bytes?: number;
-          written_data_bytes?: number;
-          active_time_seconds?: number;
-          compute_time_seconds?: number;
-          settings?: {
-            quota?: {
-              /**
-               * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-               */
-              compute_time_seconds?: number;
-              /**
-               * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-               */
-              active_time_seconds?: number;
-              /**
-               * The total amount of data written to all project's branches.
-               */
-              written_data_bytes?: number;
-              /**
-               * The total amount of data transferred from all project's branches using proxy.
-               */
-              data_transfer_bytes?: number;
-              /**
-               * The logical size of every project's branch.
-               */
-              logical_size_bytes?: number;
-            };
-          };
-        };
-        connection_uris?: {
-          /**
-           * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-           */
-          connection_uri: string;
-        }[];
-        roles?: {
-          branch_id: string;
-          name: string;
-          created_at: string;
-          updated_at: string;
-          protected?: boolean;
-          password?: string;
-        }[];
-        databases?: {
-          id: number;
-          branch_id: string;
-          name: string;
-          owner_name: string;
-          created_at: string;
-          updated_at: string;
-        }[];
-        branch?: {
-          id: string;
-          project_id: string;
-          name: string;
-          current_state: 'init' | 'ready';
-          primary: boolean;
-          created_at: string;
-          updated_at: string;
-          parent_id?: string;
-        };
-        endpoints?: {
-          host: string;
-          id: string;
-          project_id: string;
-          branch_id: string;
-          autoscaling_limit_min_cu: number;
-          autoscaling_limit_max_cu: number;
-          region_id: string;
-          type: string;
-          current_state: string;
-          pooler_enabled: boolean;
-          pooler_mode: string;
-          disabled: boolean;
-          passwordless_access: boolean;
-          last_active?: string;
-          created_at: string;
-          updated_at: string;
-          suspend_timeout_seconds: number;
-        }[];
-        endpoint?: {
-          host: string;
-          id: string;
-          project_id: string;
-          branch_id: string;
-          autoscaling_limit_min_cu: number;
-          autoscaling_limit_max_cu: number;
-          region_id: string;
-          type: string;
-          current_state: string;
-          pooler_enabled: boolean;
-          pooler_mode: string;
-          disabled: boolean;
-          passwordless_access: boolean;
-          last_active?: string;
-          created_at: string;
-          updated_at: string;
-          suspend_timeout_seconds: number;
-        };
-        database?: {
-          id: number;
-          branch_id: string;
-          name: string;
-          owner_name: string;
-          created_at: string;
-          updated_at: string;
-        };
-        password?: string;
-        projects?: {
-          id: string;
-          data_storage_bytes_hour: number;
-          data_storage_bytes_hour_updated_at?: string;
-          data_transfer_bytes: number;
-          data_transfer_bytes_updated_at?: string;
-          written_data_bytes: number;
-          written_data_bytes_updated_at?: string;
-          compute_time_seconds: number;
-          compute_time_seconds_updated_at?: string;
-          synthetic_storage_size: number;
-          synthetic_storage_size_updated_at?: string;
-        }[];
-        pagination?: {
-          cursor: string;
-        };
+        /**
+         * The project role of the member that will be added.
+         *
+         * @example ADMIN
+         */
+        role?: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
       }
     | {
         /**
@@ -9215,162 +7786,12 @@ export type AddProjectMemberVariables = {
          * @example entity@example.com
          */
         email?: string;
-        role?: {
-          branch_id: string;
-          name: string;
-          created_at: string;
-          updated_at: string;
-          protected?: boolean;
-          password?: string;
-        };
-        project?: {
-          id: string;
-          region_id: string;
-          name: string;
-          pg_version: number;
-          proxy_host: string;
-          /**
-           * The logical size limit for a branch in MiB.
-           */
-          branch_logical_size_limit: number;
-          /**
-           * The logical size limit for a branch in bytes.
-           */
-          branch_logical_size_limit_bytes: number;
-          /**
-           * The data storage size in bytes.
-           */
-          synthetic_storage_size?: number;
-          store_passwords: boolean;
-          created_at: string;
-          updated_at: string;
-          owner_id: string;
-          quota_reset_at?: string;
-          data_storage_bytes_hour?: number;
-          data_transfer_bytes?: number;
-          written_data_bytes?: number;
-          active_time_seconds?: number;
-          compute_time_seconds?: number;
-          settings?: {
-            quota?: {
-              /**
-               * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-               */
-              compute_time_seconds?: number;
-              /**
-               * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-               */
-              active_time_seconds?: number;
-              /**
-               * The total amount of data written to all project's branches.
-               */
-              written_data_bytes?: number;
-              /**
-               * The total amount of data transferred from all project's branches using proxy.
-               */
-              data_transfer_bytes?: number;
-              /**
-               * The logical size of every project's branch.
-               */
-              logical_size_bytes?: number;
-            };
-          };
-        };
-        connection_uris?: {
-          /**
-           * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-           */
-          connection_uri: string;
-        }[];
-        roles?: {
-          branch_id: string;
-          name: string;
-          created_at: string;
-          updated_at: string;
-          protected?: boolean;
-          password?: string;
-        }[];
-        databases?: {
-          id: number;
-          branch_id: string;
-          name: string;
-          owner_name: string;
-          created_at: string;
-          updated_at: string;
-        }[];
-        branch?: {
-          id: string;
-          project_id: string;
-          name: string;
-          current_state: 'init' | 'ready';
-          primary: boolean;
-          created_at: string;
-          updated_at: string;
-          parent_id?: string;
-        };
-        endpoints?: {
-          host: string;
-          id: string;
-          project_id: string;
-          branch_id: string;
-          autoscaling_limit_min_cu: number;
-          autoscaling_limit_max_cu: number;
-          region_id: string;
-          type: string;
-          current_state: string;
-          pooler_enabled: boolean;
-          pooler_mode: string;
-          disabled: boolean;
-          passwordless_access: boolean;
-          last_active?: string;
-          created_at: string;
-          updated_at: string;
-          suspend_timeout_seconds: number;
-        }[];
-        endpoint?: {
-          host: string;
-          id: string;
-          project_id: string;
-          branch_id: string;
-          autoscaling_limit_min_cu: number;
-          autoscaling_limit_max_cu: number;
-          region_id: string;
-          type: string;
-          current_state: string;
-          pooler_enabled: boolean;
-          pooler_mode: string;
-          disabled: boolean;
-          passwordless_access: boolean;
-          last_active?: string;
-          created_at: string;
-          updated_at: string;
-          suspend_timeout_seconds: number;
-        };
-        database?: {
-          id: number;
-          branch_id: string;
-          name: string;
-          owner_name: string;
-          created_at: string;
-          updated_at: string;
-        };
-        password?: string;
-        projects?: {
-          id: string;
-          data_storage_bytes_hour: number;
-          data_storage_bytes_hour_updated_at?: string;
-          data_transfer_bytes: number;
-          data_transfer_bytes_updated_at?: string;
-          written_data_bytes: number;
-          written_data_bytes_updated_at?: string;
-          compute_time_seconds: number;
-          compute_time_seconds_updated_at?: string;
-          synthetic_storage_size: number;
-          synthetic_storage_size_updated_at?: string;
-        }[];
-        pagination?: {
-          cursor: string;
-        };
+        /**
+         * The project role of the member that will be added.
+         *
+         * @example ADMIN
+         */
+        role?: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
       }
     | {
         /**
@@ -9394,162 +7815,12 @@ export type AddProjectMemberVariables = {
          * @example entity@example.com
          */
         email: string;
-        role?: {
-          branch_id: string;
-          name: string;
-          created_at: string;
-          updated_at: string;
-          protected?: boolean;
-          password?: string;
-        };
-        project?: {
-          id: string;
-          region_id: string;
-          name: string;
-          pg_version: number;
-          proxy_host: string;
-          /**
-           * The logical size limit for a branch in MiB.
-           */
-          branch_logical_size_limit: number;
-          /**
-           * The logical size limit for a branch in bytes.
-           */
-          branch_logical_size_limit_bytes: number;
-          /**
-           * The data storage size in bytes.
-           */
-          synthetic_storage_size?: number;
-          store_passwords: boolean;
-          created_at: string;
-          updated_at: string;
-          owner_id: string;
-          quota_reset_at?: string;
-          data_storage_bytes_hour?: number;
-          data_transfer_bytes?: number;
-          written_data_bytes?: number;
-          active_time_seconds?: number;
-          compute_time_seconds?: number;
-          settings?: {
-            quota?: {
-              /**
-               * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-               */
-              compute_time_seconds?: number;
-              /**
-               * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-               */
-              active_time_seconds?: number;
-              /**
-               * The total amount of data written to all project's branches.
-               */
-              written_data_bytes?: number;
-              /**
-               * The total amount of data transferred from all project's branches using proxy.
-               */
-              data_transfer_bytes?: number;
-              /**
-               * The logical size of every project's branch.
-               */
-              logical_size_bytes?: number;
-            };
-          };
-        };
-        connection_uris?: {
-          /**
-           * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-           */
-          connection_uri: string;
-        }[];
-        roles?: {
-          branch_id: string;
-          name: string;
-          created_at: string;
-          updated_at: string;
-          protected?: boolean;
-          password?: string;
-        }[];
-        databases?: {
-          id: number;
-          branch_id: string;
-          name: string;
-          owner_name: string;
-          created_at: string;
-          updated_at: string;
-        }[];
-        branch?: {
-          id: string;
-          project_id: string;
-          name: string;
-          current_state: 'init' | 'ready';
-          primary: boolean;
-          created_at: string;
-          updated_at: string;
-          parent_id?: string;
-        };
-        endpoints?: {
-          host: string;
-          id: string;
-          project_id: string;
-          branch_id: string;
-          autoscaling_limit_min_cu: number;
-          autoscaling_limit_max_cu: number;
-          region_id: string;
-          type: string;
-          current_state: string;
-          pooler_enabled: boolean;
-          pooler_mode: string;
-          disabled: boolean;
-          passwordless_access: boolean;
-          last_active?: string;
-          created_at: string;
-          updated_at: string;
-          suspend_timeout_seconds: number;
-        }[];
-        endpoint?: {
-          host: string;
-          id: string;
-          project_id: string;
-          branch_id: string;
-          autoscaling_limit_min_cu: number;
-          autoscaling_limit_max_cu: number;
-          region_id: string;
-          type: string;
-          current_state: string;
-          pooler_enabled: boolean;
-          pooler_mode: string;
-          disabled: boolean;
-          passwordless_access: boolean;
-          last_active?: string;
-          created_at: string;
-          updated_at: string;
-          suspend_timeout_seconds: number;
-        };
-        database?: {
-          id: number;
-          branch_id: string;
-          name: string;
-          owner_name: string;
-          created_at: string;
-          updated_at: string;
-        };
-        password?: string;
-        projects?: {
-          id: string;
-          data_storage_bytes_hour: number;
-          data_storage_bytes_hour_updated_at?: string;
-          data_transfer_bytes: number;
-          data_transfer_bytes_updated_at?: string;
-          written_data_bytes: number;
-          written_data_bytes_updated_at?: string;
-          compute_time_seconds: number;
-          compute_time_seconds_updated_at?: string;
-          synthetic_storage_size: number;
-          synthetic_storage_size_updated_at?: string;
-        }[];
-        pagination?: {
-          cursor: string;
-        };
+        /**
+         * The project role of the member that will be added.
+         *
+         * @example ADMIN
+         */
+        role?: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
       };
   pathParams: AddProjectMemberPathParams;
   queryParams?: AddProjectMemberQueryParams;
@@ -9584,162 +7855,12 @@ export const addProjectMember = (variables: AddProjectMemberVariables, signal?: 
          * @example entity@example.com
          */
         email?: string;
-        role?: {
-          branch_id: string;
-          name: string;
-          created_at: string;
-          updated_at: string;
-          protected?: boolean;
-          password?: string;
-        };
-        project?: {
-          id: string;
-          region_id: string;
-          name: string;
-          pg_version: number;
-          proxy_host: string;
-          /**
-           * The logical size limit for a branch in MiB.
-           */
-          branch_logical_size_limit: number;
-          /**
-           * The logical size limit for a branch in bytes.
-           */
-          branch_logical_size_limit_bytes: number;
-          /**
-           * The data storage size in bytes.
-           */
-          synthetic_storage_size?: number;
-          store_passwords: boolean;
-          created_at: string;
-          updated_at: string;
-          owner_id: string;
-          quota_reset_at?: string;
-          data_storage_bytes_hour?: number;
-          data_transfer_bytes?: number;
-          written_data_bytes?: number;
-          active_time_seconds?: number;
-          compute_time_seconds?: number;
-          settings?: {
-            quota?: {
-              /**
-               * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-               */
-              compute_time_seconds?: number;
-              /**
-               * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-               */
-              active_time_seconds?: number;
-              /**
-               * The total amount of data written to all project's branches.
-               */
-              written_data_bytes?: number;
-              /**
-               * The total amount of data transferred from all project's branches using proxy.
-               */
-              data_transfer_bytes?: number;
-              /**
-               * The logical size of every project's branch.
-               */
-              logical_size_bytes?: number;
-            };
-          };
-        };
-        connection_uris?: {
-          /**
-           * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-           */
-          connection_uri: string;
-        }[];
-        roles?: {
-          branch_id: string;
-          name: string;
-          created_at: string;
-          updated_at: string;
-          protected?: boolean;
-          password?: string;
-        }[];
-        databases?: {
-          id: number;
-          branch_id: string;
-          name: string;
-          owner_name: string;
-          created_at: string;
-          updated_at: string;
-        }[];
-        branch?: {
-          id: string;
-          project_id: string;
-          name: string;
-          current_state: 'init' | 'ready';
-          primary: boolean;
-          created_at: string;
-          updated_at: string;
-          parent_id?: string;
-        };
-        endpoints?: {
-          host: string;
-          id: string;
-          project_id: string;
-          branch_id: string;
-          autoscaling_limit_min_cu: number;
-          autoscaling_limit_max_cu: number;
-          region_id: string;
-          type: string;
-          current_state: string;
-          pooler_enabled: boolean;
-          pooler_mode: string;
-          disabled: boolean;
-          passwordless_access: boolean;
-          last_active?: string;
-          created_at: string;
-          updated_at: string;
-          suspend_timeout_seconds: number;
-        }[];
-        endpoint?: {
-          host: string;
-          id: string;
-          project_id: string;
-          branch_id: string;
-          autoscaling_limit_min_cu: number;
-          autoscaling_limit_max_cu: number;
-          region_id: string;
-          type: string;
-          current_state: string;
-          pooler_enabled: boolean;
-          pooler_mode: string;
-          disabled: boolean;
-          passwordless_access: boolean;
-          last_active?: string;
-          created_at: string;
-          updated_at: string;
-          suspend_timeout_seconds: number;
-        };
-        database?: {
-          id: number;
-          branch_id: string;
-          name: string;
-          owner_name: string;
-          created_at: string;
-          updated_at: string;
-        };
-        password?: string;
-        projects?: {
-          id: string;
-          data_storage_bytes_hour: number;
-          data_storage_bytes_hour_updated_at?: string;
-          data_transfer_bytes: number;
-          data_transfer_bytes_updated_at?: string;
-          written_data_bytes: number;
-          written_data_bytes_updated_at?: string;
-          compute_time_seconds: number;
-          compute_time_seconds_updated_at?: string;
-          synthetic_storage_size: number;
-          synthetic_storage_size_updated_at?: string;
-        }[];
-        pagination?: {
-          cursor: string;
-        };
+        /**
+         * The project role of the member that will be added.
+         *
+         * @example ADMIN
+         */
+        role?: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
       }
     | {
         /**
@@ -9763,162 +7884,12 @@ export const addProjectMember = (variables: AddProjectMemberVariables, signal?: 
          * @example entity@example.com
          */
         email?: string;
-        role?: {
-          branch_id: string;
-          name: string;
-          created_at: string;
-          updated_at: string;
-          protected?: boolean;
-          password?: string;
-        };
-        project?: {
-          id: string;
-          region_id: string;
-          name: string;
-          pg_version: number;
-          proxy_host: string;
-          /**
-           * The logical size limit for a branch in MiB.
-           */
-          branch_logical_size_limit: number;
-          /**
-           * The logical size limit for a branch in bytes.
-           */
-          branch_logical_size_limit_bytes: number;
-          /**
-           * The data storage size in bytes.
-           */
-          synthetic_storage_size?: number;
-          store_passwords: boolean;
-          created_at: string;
-          updated_at: string;
-          owner_id: string;
-          quota_reset_at?: string;
-          data_storage_bytes_hour?: number;
-          data_transfer_bytes?: number;
-          written_data_bytes?: number;
-          active_time_seconds?: number;
-          compute_time_seconds?: number;
-          settings?: {
-            quota?: {
-              /**
-               * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-               */
-              compute_time_seconds?: number;
-              /**
-               * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-               */
-              active_time_seconds?: number;
-              /**
-               * The total amount of data written to all project's branches.
-               */
-              written_data_bytes?: number;
-              /**
-               * The total amount of data transferred from all project's branches using proxy.
-               */
-              data_transfer_bytes?: number;
-              /**
-               * The logical size of every project's branch.
-               */
-              logical_size_bytes?: number;
-            };
-          };
-        };
-        connection_uris?: {
-          /**
-           * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-           */
-          connection_uri: string;
-        }[];
-        roles?: {
-          branch_id: string;
-          name: string;
-          created_at: string;
-          updated_at: string;
-          protected?: boolean;
-          password?: string;
-        }[];
-        databases?: {
-          id: number;
-          branch_id: string;
-          name: string;
-          owner_name: string;
-          created_at: string;
-          updated_at: string;
-        }[];
-        branch?: {
-          id: string;
-          project_id: string;
-          name: string;
-          current_state: 'init' | 'ready';
-          primary: boolean;
-          created_at: string;
-          updated_at: string;
-          parent_id?: string;
-        };
-        endpoints?: {
-          host: string;
-          id: string;
-          project_id: string;
-          branch_id: string;
-          autoscaling_limit_min_cu: number;
-          autoscaling_limit_max_cu: number;
-          region_id: string;
-          type: string;
-          current_state: string;
-          pooler_enabled: boolean;
-          pooler_mode: string;
-          disabled: boolean;
-          passwordless_access: boolean;
-          last_active?: string;
-          created_at: string;
-          updated_at: string;
-          suspend_timeout_seconds: number;
-        }[];
-        endpoint?: {
-          host: string;
-          id: string;
-          project_id: string;
-          branch_id: string;
-          autoscaling_limit_min_cu: number;
-          autoscaling_limit_max_cu: number;
-          region_id: string;
-          type: string;
-          current_state: string;
-          pooler_enabled: boolean;
-          pooler_mode: string;
-          disabled: boolean;
-          passwordless_access: boolean;
-          last_active?: string;
-          created_at: string;
-          updated_at: string;
-          suspend_timeout_seconds: number;
-        };
-        database?: {
-          id: number;
-          branch_id: string;
-          name: string;
-          owner_name: string;
-          created_at: string;
-          updated_at: string;
-        };
-        password?: string;
-        projects?: {
-          id: string;
-          data_storage_bytes_hour: number;
-          data_storage_bytes_hour_updated_at?: string;
-          data_transfer_bytes: number;
-          data_transfer_bytes_updated_at?: string;
-          written_data_bytes: number;
-          written_data_bytes_updated_at?: string;
-          compute_time_seconds: number;
-          compute_time_seconds_updated_at?: string;
-          synthetic_storage_size: number;
-          synthetic_storage_size_updated_at?: string;
-        }[];
-        pagination?: {
-          cursor: string;
-        };
+        /**
+         * The project role of the member that will be added.
+         *
+         * @example ADMIN
+         */
+        role?: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
       }
     | {
         /**
@@ -9942,162 +7913,12 @@ export const addProjectMember = (variables: AddProjectMemberVariables, signal?: 
          * @example entity@example.com
          */
         email: string;
-        role?: {
-          branch_id: string;
-          name: string;
-          created_at: string;
-          updated_at: string;
-          protected?: boolean;
-          password?: string;
-        };
-        project?: {
-          id: string;
-          region_id: string;
-          name: string;
-          pg_version: number;
-          proxy_host: string;
-          /**
-           * The logical size limit for a branch in MiB.
-           */
-          branch_logical_size_limit: number;
-          /**
-           * The logical size limit for a branch in bytes.
-           */
-          branch_logical_size_limit_bytes: number;
-          /**
-           * The data storage size in bytes.
-           */
-          synthetic_storage_size?: number;
-          store_passwords: boolean;
-          created_at: string;
-          updated_at: string;
-          owner_id: string;
-          quota_reset_at?: string;
-          data_storage_bytes_hour?: number;
-          data_transfer_bytes?: number;
-          written_data_bytes?: number;
-          active_time_seconds?: number;
-          compute_time_seconds?: number;
-          settings?: {
-            quota?: {
-              /**
-               * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-               */
-              compute_time_seconds?: number;
-              /**
-               * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-               */
-              active_time_seconds?: number;
-              /**
-               * The total amount of data written to all project's branches.
-               */
-              written_data_bytes?: number;
-              /**
-               * The total amount of data transferred from all project's branches using proxy.
-               */
-              data_transfer_bytes?: number;
-              /**
-               * The logical size of every project's branch.
-               */
-              logical_size_bytes?: number;
-            };
-          };
-        };
-        connection_uris?: {
-          /**
-           * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-           */
-          connection_uri: string;
-        }[];
-        roles?: {
-          branch_id: string;
-          name: string;
-          created_at: string;
-          updated_at: string;
-          protected?: boolean;
-          password?: string;
-        }[];
-        databases?: {
-          id: number;
-          branch_id: string;
-          name: string;
-          owner_name: string;
-          created_at: string;
-          updated_at: string;
-        }[];
-        branch?: {
-          id: string;
-          project_id: string;
-          name: string;
-          current_state: 'init' | 'ready';
-          primary: boolean;
-          created_at: string;
-          updated_at: string;
-          parent_id?: string;
-        };
-        endpoints?: {
-          host: string;
-          id: string;
-          project_id: string;
-          branch_id: string;
-          autoscaling_limit_min_cu: number;
-          autoscaling_limit_max_cu: number;
-          region_id: string;
-          type: string;
-          current_state: string;
-          pooler_enabled: boolean;
-          pooler_mode: string;
-          disabled: boolean;
-          passwordless_access: boolean;
-          last_active?: string;
-          created_at: string;
-          updated_at: string;
-          suspend_timeout_seconds: number;
-        }[];
-        endpoint?: {
-          host: string;
-          id: string;
-          project_id: string;
-          branch_id: string;
-          autoscaling_limit_min_cu: number;
-          autoscaling_limit_max_cu: number;
-          region_id: string;
-          type: string;
-          current_state: string;
-          pooler_enabled: boolean;
-          pooler_mode: string;
-          disabled: boolean;
-          passwordless_access: boolean;
-          last_active?: string;
-          created_at: string;
-          updated_at: string;
-          suspend_timeout_seconds: number;
-        };
-        database?: {
-          id: number;
-          branch_id: string;
-          name: string;
-          owner_name: string;
-          created_at: string;
-          updated_at: string;
-        };
-        password?: string;
-        projects?: {
-          id: string;
-          data_storage_bytes_hour: number;
-          data_storage_bytes_hour_updated_at?: string;
-          data_transfer_bytes: number;
-          data_transfer_bytes_updated_at?: string;
-          written_data_bytes: number;
-          written_data_bytes_updated_at?: string;
-          compute_time_seconds: number;
-          compute_time_seconds_updated_at?: string;
-          synthetic_storage_size: number;
-          synthetic_storage_size_updated_at?: string;
-        }[];
-        pagination?: {
-          cursor: string;
-        };
+        /**
+         * The project role of the member that will be added.
+         *
+         * @example ADMIN
+         */
+        role?: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
       },
     {},
     AddProjectMemberQueryParams,
@@ -10132,167 +7953,7 @@ export type RemoveProjectMemberResponse = {
   id: string;
 };
 
-export type RemoveProjectMemberRequestBody = {
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
-};
-
 export type RemoveProjectMemberVariables = {
-  body: RemoveProjectMemberRequestBody;
   pathParams: RemoveProjectMemberPathParams;
   queryParams?: RemoveProjectMemberQueryParams;
 } & FetcherExtraProps;
@@ -10304,7 +7965,7 @@ export const removeProjectMember = (variables: RemoveProjectMemberVariables, sig
   fetch<
     RemoveProjectMemberResponse,
     RemoveProjectMemberError,
-    RemoveProjectMemberRequestBody,
+    undefined,
     {},
     RemoveProjectMemberQueryParams,
     RemoveProjectMemberPathParams
@@ -10369,7 +8030,7 @@ export type GetProjectsResponse = {
     accountId: string;
     analytics?: {
       id: string;
-      canceledAt: number | null;
+      canceledAt?: number | null;
       disabledAt: number;
       enabledAt: number;
       paidAt?: number;
@@ -10440,7 +8101,7 @@ export type GetProjectsResponse = {
       target?:
         | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
         | ('production' | 'preview' | 'development' | 'preview' | 'development');
-      type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+      type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
       id?: string;
       key: string;
       value: string;
@@ -10501,6 +8162,7 @@ export type GetProjectsResponse = {
             type: 'postgres-database';
             storeId: string;
           }
+        | Record<string, any>
         | null;
       /**
        * Whether `value` is decrypted.
@@ -10748,51 +8410,6 @@ export type GetProjectsResponse = {
     live?: boolean;
     enablePreviewFeedback?: boolean | null;
     permissions?: {
-      aliasProject?: Schemas.ACLAction[];
-      aliasProtectionBypass?: Schemas.ACLAction[];
-      productionAliasProtectionBypass?: Schemas.ACLAction[];
-      connectConfigurationLink?: Schemas.ACLAction[];
-      dataCacheNamespace?: Schemas.ACLAction[];
-      deployment?: Schemas.ACLAction[];
-      deploymentCheck?: Schemas.ACLAction[];
-      deploymentCheckPreview?: Schemas.ACLAction[];
-      deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
-      deploymentProductionGit?: Schemas.ACLAction[];
-      deploymentPreview?: Schemas.ACLAction[];
-      deploymentPrivate?: Schemas.ACLAction[];
-      deploymentPromote?: Schemas.ACLAction[];
-      deploymentRollback?: Schemas.ACLAction[];
-      logs?: Schemas.ACLAction[];
-      logsPreset?: Schemas.ACLAction[];
-      passwordProtection?: Schemas.ACLAction[];
-      job?: Schemas.ACLAction[];
-      project?: Schemas.ACLAction[];
-      projectAnalyticsSampling?: Schemas.ACLAction[];
-      projectDeploymentHook?: Schemas.ACLAction[];
-      projectDomain?: Schemas.ACLAction[];
-      projectDomainMove?: Schemas.ACLAction[];
-      projectDomainCheckConfig?: Schemas.ACLAction[];
-      projectEnvVars?: Schemas.ACLAction[];
-      projectEnvVarsProduction?: Schemas.ACLAction[];
-      projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
-      projectId?: Schemas.ACLAction[];
-      projectIntegrationConfiguration?: Schemas.ACLAction[];
-      projectLink?: Schemas.ACLAction[];
-      projectMember?: Schemas.ACLAction[];
-      projectMonitoring?: Schemas.ACLAction[];
-      projectPermissions?: Schemas.ACLAction[];
-      projectProductionBranch?: Schemas.ACLAction[];
-      projectTransfer?: Schemas.ACLAction[];
-      projectTransferOut?: Schemas.ACLAction[];
-      projectProtectionBypass?: Schemas.ACLAction[];
-      projectUsage?: Schemas.ACLAction[];
-      projectAnalyticsUsage?: Schemas.ACLAction[];
-      projectSupportCase?: Schemas.ACLAction[];
-      projectSupportCaseComment?: Schemas.ACLAction[];
-      analytics?: Schemas.ACLAction[];
-      trustedIps?: Schemas.ACLAction[];
-      webAnalytics?: Schemas.ACLAction[];
-      sharedEnvVarConnection?: Schemas.ACLAction[];
       accessGroup?: Schemas.ACLAction[];
       aliasGlobal?: Schemas.ACLAction[];
       analyticsSampling?: Schemas.ACLAction[];
@@ -10862,6 +8479,7 @@ export type GetProjectsResponse = {
       sharedEnvVarsProduction?: Schemas.ACLAction[];
       space?: Schemas.ACLAction[];
       spaceRun?: Schemas.ACLAction[];
+      storageIntegration?: Schemas.ACLAction[];
       passwordProtectionInvoiceItem?: Schemas.ACLAction[];
       rateLimit?: Schemas.ACLAction[];
       redis?: Schemas.ACLAction[];
@@ -10871,6 +8489,7 @@ export type GetProjectsResponse = {
       redisStoreTokenSet?: Schemas.ACLAction[];
       blobStoreTokenSet?: Schemas.ACLAction[];
       postgresStoreTokenSet?: Schemas.ACLAction[];
+      integrationStoreTokenSet?: Schemas.ACLAction[];
       supportCase?: Schemas.ACLAction[];
       supportCaseComment?: Schemas.ACLAction[];
       dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -10897,6 +8516,51 @@ export type GetProjectsResponse = {
       ['webhook-event']?: Schemas.ACLAction[];
       endpointVerification?: Schemas.ACLAction[];
       projectTransferIn?: Schemas.ACLAction[];
+      aliasProject?: Schemas.ACLAction[];
+      aliasProtectionBypass?: Schemas.ACLAction[];
+      productionAliasProtectionBypass?: Schemas.ACLAction[];
+      connectConfigurationLink?: Schemas.ACLAction[];
+      dataCacheNamespace?: Schemas.ACLAction[];
+      deployment?: Schemas.ACLAction[];
+      deploymentCheck?: Schemas.ACLAction[];
+      deploymentCheckPreview?: Schemas.ACLAction[];
+      deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
+      deploymentProductionGit?: Schemas.ACLAction[];
+      deploymentPreview?: Schemas.ACLAction[];
+      deploymentPrivate?: Schemas.ACLAction[];
+      deploymentPromote?: Schemas.ACLAction[];
+      deploymentRollback?: Schemas.ACLAction[];
+      logs?: Schemas.ACLAction[];
+      logsPreset?: Schemas.ACLAction[];
+      passwordProtection?: Schemas.ACLAction[];
+      job?: Schemas.ACLAction[];
+      project?: Schemas.ACLAction[];
+      projectAnalyticsSampling?: Schemas.ACLAction[];
+      projectDeploymentHook?: Schemas.ACLAction[];
+      projectDomain?: Schemas.ACLAction[];
+      projectDomainMove?: Schemas.ACLAction[];
+      projectDomainCheckConfig?: Schemas.ACLAction[];
+      projectEnvVars?: Schemas.ACLAction[];
+      projectEnvVarsProduction?: Schemas.ACLAction[];
+      projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+      projectId?: Schemas.ACLAction[];
+      projectIntegrationConfiguration?: Schemas.ACLAction[];
+      projectLink?: Schemas.ACLAction[];
+      projectMember?: Schemas.ACLAction[];
+      projectMonitoring?: Schemas.ACLAction[];
+      projectPermissions?: Schemas.ACLAction[];
+      projectProductionBranch?: Schemas.ACLAction[];
+      projectTransfer?: Schemas.ACLAction[];
+      projectTransferOut?: Schemas.ACLAction[];
+      projectProtectionBypass?: Schemas.ACLAction[];
+      projectUsage?: Schemas.ACLAction[];
+      projectAnalyticsUsage?: Schemas.ACLAction[];
+      projectSupportCase?: Schemas.ACLAction[];
+      projectSupportCaseComment?: Schemas.ACLAction[];
+      analytics?: Schemas.ACLAction[];
+      trustedIps?: Schemas.ACLAction[];
+      webAnalytics?: Schemas.ACLAction[];
+      sharedEnvVarConnection?: Schemas.ACLAction[];
     };
     lastRollbackTarget?: Record<string, any> | null;
     lastAliasRequest?: {
@@ -10972,7 +8636,7 @@ export type CreateProjectResponse = {
   accountId: string;
   analytics?: {
     id: string;
-    canceledAt: number | null;
+    canceledAt?: number | null;
     disabledAt: number;
     enabledAt: number;
     paidAt?: number;
@@ -11104,6 +8768,7 @@ export type CreateProjectResponse = {
           type: 'postgres-database';
           storeId: string;
         }
+      | Record<string, any>
       | null;
     /**
      * Whether `value` is decrypted.
@@ -11420,6 +9085,7 @@ export type CreateProjectResponse = {
     sharedEnvVarsProduction?: Schemas.ACLAction[];
     space?: Schemas.ACLAction[];
     spaceRun?: Schemas.ACLAction[];
+    storageIntegration?: Schemas.ACLAction[];
     passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
@@ -11429,6 +9095,7 @@ export type CreateProjectResponse = {
     redisStoreTokenSet?: Schemas.ACLAction[];
     blobStoreTokenSet?: Schemas.ACLAction[];
     postgresStoreTokenSet?: Schemas.ACLAction[];
+    integrationStoreTokenSet?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -11730,7 +9397,7 @@ export type GetProjectResponse = {
   accountId: string;
   analytics?: {
     id: string;
-    canceledAt: number | null;
+    canceledAt?: number | null;
     disabledAt: number;
     enabledAt: number;
     paidAt?: number;
@@ -11862,6 +9529,7 @@ export type GetProjectResponse = {
           type: 'postgres-database';
           storeId: string;
         }
+      | Record<string, any>
       | null;
     /**
      * Whether `value` is decrypted.
@@ -12178,6 +9846,7 @@ export type GetProjectResponse = {
     sharedEnvVarsProduction?: Schemas.ACLAction[];
     space?: Schemas.ACLAction[];
     spaceRun?: Schemas.ACLAction[];
+    storageIntegration?: Schemas.ACLAction[];
     passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
@@ -12187,6 +9856,7 @@ export type GetProjectResponse = {
     redisStoreTokenSet?: Schemas.ACLAction[];
     blobStoreTokenSet?: Schemas.ACLAction[];
     postgresStoreTokenSet?: Schemas.ACLAction[];
+    integrationStoreTokenSet?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -12341,7 +10011,7 @@ export type UpdateProjectResponse = {
   accountId: string;
   analytics?: {
     id: string;
-    canceledAt: number | null;
+    canceledAt?: number | null;
     disabledAt: number;
     enabledAt: number;
     paidAt?: number;
@@ -12412,7 +10082,7 @@ export type UpdateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
     id?: string;
     key: string;
     value: string;
@@ -12473,6 +10143,7 @@ export type UpdateProjectResponse = {
           type: 'postgres-database';
           storeId: string;
         }
+      | Record<string, any>
       | null;
     /**
      * Whether `value` is decrypted.
@@ -12789,6 +10460,7 @@ export type UpdateProjectResponse = {
     sharedEnvVarsProduction?: Schemas.ACLAction[];
     space?: Schemas.ACLAction[];
     spaceRun?: Schemas.ACLAction[];
+    storageIntegration?: Schemas.ACLAction[];
     passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
@@ -12798,6 +10470,7 @@ export type UpdateProjectResponse = {
     redisStoreTokenSet?: Schemas.ACLAction[];
     blobStoreTokenSet?: Schemas.ACLAction[];
     postgresStoreTokenSet?: Schemas.ACLAction[];
+    integrationStoreTokenSet?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -13721,6 +11394,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
               type: 'postgres-database';
               storeId: string;
             }
+          | Record<string, any>
           | null;
         /**
          * Whether `value` is decrypted.
@@ -13795,6 +11469,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
                 type: 'postgres-database';
                 storeId: string;
               }
+            | Record<string, any>
             | null;
           /**
            * Whether `value` is decrypted.
@@ -13871,6 +11546,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
                 type: 'postgres-database';
                 storeId: string;
               }
+            | Record<string, any>
             | null;
           /**
            * Whether `value` is decrypted.
@@ -13974,6 +11650,7 @@ export type GetProjectEnvResponse = {
         type: 'postgres-database';
         storeId: string;
       }
+    | Record<string, any>
     | null;
   /**
    * Whether `value` is decrypted.
@@ -14028,7 +11705,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         id?: string;
         key?: string;
         value?: string;
@@ -14089,6 +11766,7 @@ export type CreateProjectEnvResponse = {
               type: 'postgres-database';
               storeId: string;
             }
+          | Record<string, any>
           | null;
         /**
          * Whether `value` is decrypted.
@@ -14101,7 +11779,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         id?: string;
         key?: string;
         value?: string;
@@ -14162,6 +11840,7 @@ export type CreateProjectEnvResponse = {
               type: 'postgres-database';
               storeId: string;
             }
+          | Record<string, any>
           | null;
         /**
          * Whether `value` is decrypted.
@@ -14472,6 +12151,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
               type: 'postgres-database';
               storeId: string;
             }
+          | Record<string, any>
           | null;
         /**
          * Whether `value` is decrypted.
@@ -14545,6 +12225,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
               type: 'postgres-database';
               storeId: string;
             }
+          | Record<string, any>
           | null;
         /**
          * Whether `value` is decrypted.
@@ -14617,6 +12298,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
               type: 'postgres-database';
               storeId: string;
             }
+          | Record<string, any>
           | null;
         /**
          * Whether `value` is decrypted.
@@ -14720,6 +12402,7 @@ export type EditProjectEnvResponse = {
         type: 'postgres-database';
         storeId: string;
       }
+    | Record<string, any>
     | null;
   /**
    * Whether `value` is decrypted.
@@ -14936,7 +12619,7 @@ export type GetTeamMembersResponse = {
      *
      * @example OWNER
      */
-    role: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'VIEWER' | 'BILLING' | 'CONTRIBUTOR';
+    role: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
     /**
      * The ID of this user.
      *
@@ -15006,7 +12689,7 @@ export type GetTeamMembersResponse = {
   emailInviteCodes?: {
     id: string;
     email?: string;
-    role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'VIEWER' | 'BILLING' | 'CONTRIBUTOR';
+    role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
     isDSyncUser: boolean;
     createdAt?: number;
     expired?: boolean;
@@ -15482,7 +13165,6 @@ export type RemoveTeamMemberResponse = {
    * ID of the team.
    */
   id: string;
-  newDefaultTeamIdError: boolean;
 };
 
 export type RemoveTeamMemberVariables = {
@@ -15714,7 +13396,7 @@ export type CreateTeamResponse = {
       start: number;
       end: number;
     } | null;
-    plan: 'hobby' | 'pro' | 'enterprise';
+    plan: 'pro' | 'enterprise' | 'hobby';
     platform?: 'stripe' | 'stripeTestMode';
     orbCustomerId?: string;
     syncedAt?: number;
@@ -15742,24 +13424,6 @@ export type CreateTeamResponse = {
       /**
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
        */
-      monitoring?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
       pro?: {
         tier?: number;
         price: number;
@@ -15771,7 +13435,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -15789,7 +13453,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -15807,7 +13471,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -15825,7 +13489,25 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      monitoring?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        highestQuantity?: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -15843,7 +13525,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -15861,7 +13543,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -15879,7 +13561,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -15897,7 +13579,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -15915,7 +13597,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16652,6 +14334,8 @@ export type CreateWebhookResponse = {
     | 'integration-configuration-removed'
     | 'integration-configuration-scope-change-confirmed'
     | 'test-webhook'
+    | 'store.created'
+    | 'store.removed'
   )[];
   /**
    * The webhook id
@@ -16729,6 +14413,8 @@ export type CreateWebhookRequestBody = {
     | 'integration-configuration-removed'
     | 'integration-configuration-scope-change-confirmed'
     | 'test-webhook'
+    | 'store.created'
+    | 'store.removed'
   )[];
   /**
    * @minItems 1
@@ -16861,6 +14547,8 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'integration-configuration-removed'
           | 'integration-configuration-scope-change-confirmed'
           | 'test-webhook'
+          | 'store.created'
+          | 'store.removed'
         )[];
         /**
          * The webhook id
@@ -16934,6 +14622,8 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'integration-configuration-removed'
           | 'integration-configuration-scope-change-confirmed'
           | 'test-webhook'
+          | 'store.created'
+          | 'store.removed'
         )[];
         /**
          * The webhook id
@@ -17027,6 +14717,8 @@ export type GetWebhookResponse = {
     | 'integration-configuration-removed'
     | 'integration-configuration-scope-change-confirmed'
     | 'test-webhook'
+    | 'store.created'
+    | 'store.removed'
   )[];
   /**
    * The webhook id
@@ -17529,167 +15221,7 @@ export type DeleteAliasResponse = {
   status: 'SUCCESS';
 };
 
-export type DeleteAliasRequestBody = {
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
-};
-
 export type DeleteAliasVariables = {
-  body: DeleteAliasRequestBody;
   pathParams: DeleteAliasPathParams;
   queryParams?: DeleteAliasQueryParams;
 } & FetcherExtraProps;
@@ -17698,14 +15230,12 @@ export type DeleteAliasVariables = {
  * Delete an Alias with the specified ID.
  */
 export const deleteAlias = (variables: DeleteAliasVariables, signal?: AbortSignal) =>
-  fetch<
-    DeleteAliasResponse,
-    DeleteAliasError,
-    DeleteAliasRequestBody,
-    {},
-    DeleteAliasQueryParams,
-    DeleteAliasPathParams
-  >({ url: '/v2/aliases/{aliasId}', method: 'delete', ...variables, signal });
+  fetch<DeleteAliasResponse, DeleteAliasError, undefined, {}, DeleteAliasQueryParams, DeleteAliasPathParams>({
+    url: '/v2/aliases/{aliasId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type ListDeploymentAliasesPathParams = {
   /**
@@ -18557,162 +16087,6 @@ export type EmailLoginResponse = {
 };
 
 export type EmailLoginRequestBody = {
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
   /**
    * The user email.
    *
@@ -18779,167 +16153,7 @@ export type DeleteDeploymentResponse = {
   state: 'DELETED';
 };
 
-export type DeleteDeploymentRequestBody = {
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
-};
-
 export type DeleteDeploymentVariables = {
-  body: DeleteDeploymentRequestBody;
   pathParams: DeleteDeploymentPathParams;
   queryParams?: DeleteDeploymentQueryParams;
 } & FetcherExtraProps;
@@ -18951,7 +16165,7 @@ export const deleteDeployment = (variables: DeleteDeploymentVariables, signal?: 
   fetch<
     DeleteDeploymentResponse,
     DeleteDeploymentError,
-    DeleteDeploymentRequestBody,
+    undefined,
     {},
     DeleteDeploymentQueryParams,
     DeleteDeploymentPathParams
@@ -19146,162 +16360,6 @@ export type CreateSecretRequestBody = {
    * @deprecated true
    */
   projectId?: string;
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type CreateSecretVariables = {
@@ -19356,162 +16414,6 @@ export type RenameSecretRequestBody = {
    * @maximum 100
    */
   name: string;
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type RenameSecretVariables = {
@@ -19668,167 +16570,7 @@ export type DeleteSecretResponse = {
   created: number;
 };
 
-export type DeleteSecretRequestBody = {
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
-};
-
 export type DeleteSecretVariables = {
-  body: DeleteSecretRequestBody;
   pathParams: DeleteSecretPathParams;
   queryParams?: DeleteSecretQueryParams;
 } & FetcherExtraProps;
@@ -19837,14 +16579,12 @@ export type DeleteSecretVariables = {
  * This deletes the user or team’s secret defined in the URL.
  */
 export const deleteSecret = (variables: DeleteSecretVariables, signal?: AbortSignal) =>
-  fetch<
-    DeleteSecretResponse,
-    DeleteSecretError,
-    DeleteSecretRequestBody,
-    {},
-    DeleteSecretQueryParams,
-    DeleteSecretPathParams
-  >({ url: '/v2/secrets/{idOrName}', method: 'delete', ...variables, signal });
+  fetch<DeleteSecretResponse, DeleteSecretError, undefined, {}, DeleteSecretQueryParams, DeleteSecretPathParams>({
+    url: '/v2/secrets/{idOrName}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export const operationsByTag = {
   artifacts: { recordEvents, status, uploadArtifact, downloadArtifact, artifactQuery },

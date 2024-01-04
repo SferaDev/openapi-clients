@@ -954,6 +954,10 @@ export type AuthUser = {
     /**
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
+    integrationStores?: number;
+    /**
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+     */
     cronJobs?: number;
   };
   /**
@@ -965,7 +969,9 @@ export type AuthUser = {
    */
   activeDashboardViews?: {
     scopeId: string;
-    viewPreference: 'cards' | 'list';
+    viewPreference?: 'cards' | 'list';
+    favoritesViewPreference?: 'open' | 'closed';
+    recentsViewPreference?: 'open' | 'closed';
   }[];
   importFlowGitNamespace?: string | number | null;
   importFlowGitNamespaceId?: string | number | null;
