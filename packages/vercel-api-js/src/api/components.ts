@@ -14363,6 +14363,7 @@ export type CreateWebhookResponse = {
     | 'test-webhook'
     | 'store.created'
     | 'store.removed'
+    | 'store.updated'
   )[];
   /**
    * The webhook id
@@ -14442,6 +14443,7 @@ export type CreateWebhookRequestBody = {
     | 'test-webhook'
     | 'store.created'
     | 'store.removed'
+    | 'store.updated'
   )[];
   /**
    * @minItems 1
@@ -14576,6 +14578,7 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'test-webhook'
           | 'store.created'
           | 'store.removed'
+          | 'store.updated'
         )[];
         /**
          * The webhook id
@@ -14651,6 +14654,7 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'test-webhook'
           | 'store.created'
           | 'store.removed'
+          | 'store.updated'
         )[];
         /**
          * The webhook id
@@ -14746,6 +14750,7 @@ export type GetWebhookResponse = {
     | 'test-webhook'
     | 'store.created'
     | 'store.removed'
+    | 'store.updated'
   )[];
   /**
    * The webhook id
