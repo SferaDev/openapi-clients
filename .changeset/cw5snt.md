@@ -1,5 +1,5 @@
 ---
-"vercel-api-js": minor
+"vercel-api-js": patch
 ---
 
 Add crons field to deployment response
