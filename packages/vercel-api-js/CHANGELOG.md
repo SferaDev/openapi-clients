@@ -1,5 +1,15 @@
 # vercel-api-js
 
+## 0.4.0
+
+### Minor Changes
+
+- f75fb8d: [BREAKING] Add new fields to the project object in the API response
+
+### Patch Changes
+
+- f090e4a: [OpenAPI] Spec updates for vercel-api-js
+
 ## 0.3.0
 
 ### Minor Changes
