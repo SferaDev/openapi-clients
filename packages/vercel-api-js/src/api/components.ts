@@ -1828,6 +1828,15 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          */
         createdIn: string;
         /**
+         * The cron jobs associated with this deployment. Note that preview deployments are also allowed to have this property, but only production deployments create cron jobs. If a preview deployment is promoted to production, only then they'll take effect.
+         *
+         * @example {"schedule":"* * * * *","path":"/api/cron"}
+         */
+        crons?: {
+          schedule: string;
+          path: string;
+        }[];
+        /**
          * The keys of the environment variables that were assigned during runtime
          *
          * @example MY_SECRET
@@ -2542,6 +2551,15 @@ export type CreateDeploymentResponse = {
    * @example sfo1
    */
   createdIn: string;
+  /**
+   * The cron jobs associated with this deployment. Note that preview deployments are also allowed to have this property, but only production deployments create cron jobs. If a preview deployment is promoted to production, only then they'll take effect.
+   *
+   * @example {"schedule":"* * * * *","path":"/api/cron"}
+   */
+  crons?: {
+    schedule: string;
+    path: string;
+  }[];
   /**
    * The keys of the environment variables that were assigned during runtime
    *
@@ -3280,6 +3298,15 @@ export type CancelDeploymentResponse = {
    * @example sfo1
    */
   createdIn: string;
+  /**
+   * The cron jobs associated with this deployment. Note that preview deployments are also allowed to have this property, but only production deployments create cron jobs. If a preview deployment is promoted to production, only then they'll take effect.
+   *
+   * @example {"schedule":"* * * * *","path":"/api/cron"}
+   */
+  crons?: {
+    schedule: string;
+    path: string;
+  }[];
   /**
    * The keys of the environment variables that were assigned during runtime
    *
