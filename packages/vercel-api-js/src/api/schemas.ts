@@ -1032,6 +1032,18 @@ export type AuthUser = {
     };
   };
   /**
+   * Northstar migration specific data
+   */
+  northstar?: {
+    migration?: {
+      teamId?: string;
+      /**
+       * - `will-migrate`: Show dashboard toast saying "your account will be migrated soon" - `migrating`: Show dashboard toast saying "your account is currently migrating to `teamId`" - `completed`: Show dashboard toast saying "your account has been migrated to `teamId`" - `failed`: Show dashboard toast saying "your account migration has failed `teamId`"
+       */
+      status: 'will-migrate' | 'migrating' | 'completed' | 'failed';
+    };
+  };
+  /**
    * The User's unique identifier.
    *
    * @example AEIIDYVk59zbFF2Sxfyxxmua
