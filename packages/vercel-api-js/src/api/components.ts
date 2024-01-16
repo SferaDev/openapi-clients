@@ -16066,6 +16066,22 @@ export type VerifyTokenQueryParams = {
    * The plan for this user's team (pro or hobby).
    */
   teamPlan?: 'pro' | 'hobby';
+  /**
+   * Referrer to the session.
+   */
+  sessionReferrer?: string;
+  /**
+   * The page on which the user started their session.
+   */
+  landingPage?: string;
+  /**
+   * The page that sent the user to the signup page.
+   */
+  pageBeforeConversionPage?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  utmTerm?: string;
 };
 
 export type VerifyTokenError = Fetcher.ErrorWrapper<undefined>;
