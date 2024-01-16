@@ -13923,6 +13923,41 @@ export type CreateTeamRequestBody = {
    * @maxLength 256
    */
   name?: string;
+  /**
+   * Attribution information for the session or current page
+   */
+  attribution?: {
+    /**
+     * Session referrer
+     */
+    sessionReferrer?: string;
+    /**
+     * Session landing page
+     */
+    landingPage?: string;
+    /**
+     * Referrer to the signup page
+     */
+    pageBeforeConversionPage?: string;
+    utm?: {
+      /**
+       * UTM source
+       */
+      utmSource?: string;
+      /**
+       * UTM medium
+       */
+      utmMedium?: string;
+      /**
+       * UTM campaign
+       */
+      utmCampaign?: string;
+      /**
+       * UTM term
+       */
+      utmTerm?: string;
+    };
+  };
 };
 
 export type CreateTeamVariables = {
