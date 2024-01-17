@@ -12665,6 +12665,7 @@ export type GetTeamMembersQueryParams = {
    * Limit how many teams should be returned
    *
    * @example 20
+   * @minimum 1
    */
   limit?: number;
   /**
