@@ -5983,6 +5983,104 @@ export const patchEdgeConfigItems = (variables: PatchEdgeConfigItemsVariables, s
     PatchEdgeConfigItemsPathParams
   >({ url: '/v1/edge-config/{edgeConfigId}/items', method: 'patch', ...variables, signal });
 
+export type GetEdgeConfigSchemaPathParams = {
+  edgeConfigId: string;
+};
+
+export type GetEdgeConfigSchemaQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type GetEdgeConfigSchemaError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetEdgeConfigSchemaVariables = {
+  pathParams: GetEdgeConfigSchemaPathParams;
+  queryParams?: GetEdgeConfigSchemaQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Returns the schema of an Edge Config.
+ */
+export const getEdgeConfigSchema = (variables: GetEdgeConfigSchemaVariables, signal?: AbortSignal) =>
+  fetch<
+    Record<string, any> | null,
+    GetEdgeConfigSchemaError,
+    undefined,
+    {},
+    GetEdgeConfigSchemaQueryParams,
+    GetEdgeConfigSchemaPathParams
+  >({ url: '/v1/edge-config/{edgeConfigId}/schema', method: 'get', ...variables, signal });
+
+export type PatchEdgeConfigSchemaPathParams = {
+  edgeConfigId: string;
+};
+
+export type PatchEdgeConfigSchemaQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type PatchEdgeConfigSchemaError = Fetcher.ErrorWrapper<undefined>;
+
+export type PatchEdgeConfigSchemaRequestBody = {
+  definition: void;
+};
+
+export type PatchEdgeConfigSchemaVariables = {
+  body: PatchEdgeConfigSchemaRequestBody;
+  pathParams: PatchEdgeConfigSchemaPathParams;
+  queryParams?: PatchEdgeConfigSchemaQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Update an Edge Config's schema.
+ */
+export const patchEdgeConfigSchema = (variables: PatchEdgeConfigSchemaVariables, signal?: AbortSignal) =>
+  fetch<
+    Record<string, any> | null,
+    PatchEdgeConfigSchemaError,
+    PatchEdgeConfigSchemaRequestBody,
+    {},
+    PatchEdgeConfigSchemaQueryParams,
+    PatchEdgeConfigSchemaPathParams
+  >({ url: '/v1/edge-config/{edgeConfigId}/schema', method: 'post', ...variables, signal });
+
+export type DeleteEdgeConfigSchemaPathParams = {
+  edgeConfigId: string;
+};
+
+export type DeleteEdgeConfigSchemaQueryParams = {
+  /**
+   * The Team identifier or slug to perform the request on behalf of.
+   */
+  teamId?: string;
+};
+
+export type DeleteEdgeConfigSchemaError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteEdgeConfigSchemaVariables = {
+  pathParams: DeleteEdgeConfigSchemaPathParams;
+  queryParams?: DeleteEdgeConfigSchemaQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Deletes the schema of existing Edge Config.
+ */
+export const deleteEdgeConfigSchema = (variables: DeleteEdgeConfigSchemaVariables, signal?: AbortSignal) =>
+  fetch<
+    undefined,
+    DeleteEdgeConfigSchemaError,
+    undefined,
+    {},
+    DeleteEdgeConfigSchemaQueryParams,
+    DeleteEdgeConfigSchemaPathParams
+  >({ url: '/v1/edge-config/{edgeConfigId}/schema', method: 'delete', ...variables, signal });
+
 export type GetEdgeConfigItemPathParams = {
   /**
    * @pattern ^ecfg_
@@ -16730,6 +16828,9 @@ export const operationsByTag = {
     deleteEdgeConfig,
     getEdgeConfigItems,
     patchEdgeConfigItems,
+    getEdgeConfigSchema,
+    patchEdgeConfigSchema,
+    deleteEdgeConfigSchema,
     getEdgeConfigItem,
     getEdgeConfigTokens,
     deleteEdgeConfigTokens,
