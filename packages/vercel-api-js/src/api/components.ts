@@ -14495,10 +14495,6 @@ export type CreateWebhookResponse = {
     | 'integration-configuration-removed'
     | 'integration-configuration-scope-change-confirmed'
     | 'test-webhook'
-    | 'store.created'
-    | 'store.removed'
-    | 'store.updated'
-    | 'store.credentials-reset'
   )[];
   /**
    * The webhook id
@@ -14576,10 +14572,6 @@ export type CreateWebhookRequestBody = {
     | 'integration-configuration-removed'
     | 'integration-configuration-scope-change-confirmed'
     | 'test-webhook'
-    | 'store.created'
-    | 'store.removed'
-    | 'store.updated'
-    | 'store.credentials-reset'
   )[];
   /**
    * @minItems 1
@@ -14712,10 +14704,6 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'integration-configuration-removed'
           | 'integration-configuration-scope-change-confirmed'
           | 'test-webhook'
-          | 'store.created'
-          | 'store.removed'
-          | 'store.updated'
-          | 'store.credentials-reset'
         )[];
         /**
          * The webhook id
@@ -14789,10 +14777,6 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'integration-configuration-removed'
           | 'integration-configuration-scope-change-confirmed'
           | 'test-webhook'
-          | 'store.created'
-          | 'store.removed'
-          | 'store.updated'
-          | 'store.credentials-reset'
         )[];
         /**
          * The webhook id
@@ -14886,10 +14870,6 @@ export type GetWebhookResponse = {
     | 'integration-configuration-removed'
     | 'integration-configuration-scope-change-confirmed'
     | 'test-webhook'
-    | 'store.created'
-    | 'store.removed'
-    | 'store.updated'
-    | 'store.credentials-reset'
   )[];
   /**
    * The webhook id
