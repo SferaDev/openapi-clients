@@ -1,5 +1,15 @@
 # netlify-api
 
+## 0.3.0
+
+### Minor Changes
+
+- 201584c: Update site capabilities schema
+
+### Patch Changes
+
+- e3ad5fd: Update OpenAPI codegen version to 2.26.1
+
 ## 0.2.1
 
 ### Patch Changes

@@ -1,5 +1,23 @@
 # vercel-api-js
 
+## 0.5.0
+
+### Minor Changes
+
+- 787cf84: Add new endpoints to manage Edge Config schema
+- 4330f7c: Add migration status property to AuthUser schema for Northstar migration
+- d0479f5: Add attribution information for the session or current page to CreateTeamRequestBody
+
+### Patch Changes
+
+- ed57233: Add serverlessFunctionZeroConfigFailover field to project related API endpoints
+- 5aeca61: Add new properties to VerifyTokenQueryParams
+- 3359159: Add crons field to deployment response
+- 86aeaf6: Add new 'compression' field to log drain endpoints
+- c6d4fd4: Add 'store.credentials-reset' to webhook events
+- 9b75b8a: Add 'store.updated' to allowed webhook event types
+- 446c95d: Update minimum value for limit parameter in GetTeamMembersQueryParams
+
 ## 0.4.0
 
 ### Minor Changes
