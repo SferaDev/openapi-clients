@@ -7484,6 +7484,7 @@ export type GetConfigurableLogDrainResponse = {
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
+  compression?: 'gzip' | 'zstd' | 'none';
   secret: string;
   createdFrom?: 'self-served';
 };
@@ -7576,6 +7577,7 @@ export type GetAllLogDrainsResponse = {
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
+  compression?: 'gzip' | 'zstd' | 'none';
   secret: string;
   createdFrom?: 'self-served';
 }[];
@@ -7634,6 +7636,7 @@ export type CreateConfigurableLogDrainResponse = {
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
+  compression?: 'gzip' | 'zstd' | 'none';
   createdFrom?: 'self-served';
 };
 
