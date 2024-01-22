@@ -1170,6 +1170,7 @@ export type UpdateProjectDataCacheResponse = {
   publicSource?: boolean | null;
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
+  serverlessFunctionZeroConfigFailover?: boolean;
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
   ssoProtection?: {
@@ -8468,6 +8469,7 @@ export type GetProjectsResponse = {
     publicSource?: boolean | null;
     rootDirectory?: string | null;
     serverlessFunctionRegion?: string | null;
+    serverlessFunctionZeroConfigFailover?: boolean;
     skipGitConnectDuringLink?: boolean;
     sourceFilesOutsideRootDirectory?: boolean;
     ssoProtection?: {
@@ -9074,6 +9076,7 @@ export type CreateProjectResponse = {
   publicSource?: boolean | null;
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
+  serverlessFunctionZeroConfigFailover?: boolean;
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
   ssoProtection?: {
@@ -9487,6 +9490,10 @@ export type CreateProjectRequestBody = {
    * @maxLength 4
    */
   serverlessFunctionRegion?: string | null;
+  /**
+   * Specifies whether Zero Config Failover is enabled for this project.
+   */
+  serverlessFunctionZeroConfigFailover?: boolean;
 };
 
 export type CreateProjectVariables = {
@@ -9835,6 +9842,7 @@ export type GetProjectResponse = {
   publicSource?: boolean | null;
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
+  serverlessFunctionZeroConfigFailover?: boolean;
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
   ssoProtection?: {
@@ -10449,6 +10457,7 @@ export type UpdateProjectResponse = {
   publicSource?: boolean | null;
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
+  serverlessFunctionZeroConfigFailover?: boolean;
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
   ssoProtection?: {
@@ -10885,6 +10894,10 @@ export type UpdateProjectRequestBody = {
    * @maxLength 4
    */
   serverlessFunctionRegion?: string | null;
+  /**
+   * Specifies whether Zero Config Failover is enabled for this project.
+   */
+  serverlessFunctionZeroConfigFailover?: boolean;
   /**
    * Opts-out of the message prompting a CLI user to connect a Git repository in `vercel link`.
    *
