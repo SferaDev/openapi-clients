@@ -13,12 +13,12 @@
     "@openapi-codegen/typescript": "^8.0.0",
     "@rollup/plugin-typescript": "^11.1.6",
     "@types/isomorphic-fetch": "^0.0.39",
-    "@types/node": "^20.11.1",
+    "@types/node": "^20.11.5",
     "builtin-modules": "^3.3.0",
     "isomorphic-fetch": "^3.0.0",
-    "openai": "^4.24.7",
+    "openai": "^4.25.0",
     "rimraf": "^5.0.5",
-    "rollup": "^4.9.5",
+    "rollup": "^4.9.6",
     "rollup-plugin-dts": "^6.1.0",
     "rollup-plugin-dts-bundle": "^1.0.0",
     "rollup-plugin-virtual-fs": "^4.0.1-alpha.0",
@@ -28,6 +28,6 @@
     "tsx": "^4.7.0",
     "turbo": "^1.11.3",
     "typescript": "^5.3.3",
-    "vitest": "^1.2.0"
+    "vitest": "^1.2.1"
   }
 }
