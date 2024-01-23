@@ -4913,9 +4913,9 @@ export type GetDomainConfigError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetDomainConfigResponse = {
   /**
-   * How we see the domain's configuration. - `CNAME`: Domain has a CNAME pointing to Vercel. - `A`: Domain's A record is resolving to Vercel. - `http`: Domain is resolving to Vercel but may be behind a Proxy. - `null`: Domain is not resolving to Vercel.
+   * How we see the domain's configuration. - `CNAME`: Domain has a CNAME pointing to Vercel. - `A`: Domain's A record is resolving to Vercel. - `http`: Domain is resolving to Vercel but may be behind a Proxy. - `dns-01`: Domain is not resolving to Vercel but dns-01 challenge is enabled. - `null`: Domain is not resolving to Vercel.
    */
-  configuredBy?: 'CNAME' | 'A' | 'http' | null;
+  configuredBy?: 'CNAME' | 'A' | 'http' | 'dns-01' | null;
   /**
    * Which challenge types the domain can use for issuing certs.
    */
