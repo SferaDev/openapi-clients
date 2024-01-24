@@ -1435,6 +1435,13 @@ export type UpdateProjectDataCacheResponse = {
   };
   paused?: boolean;
   concurrencyBucketName?: string;
+  webAnalytics?: {
+    id: string;
+    disabledAt?: number;
+    canceledAt?: number;
+    enabledAt?: number;
+    hasData?: boolean;
+  };
 };
 
 export type UpdateProjectDataCacheRequestBody = {
@@ -8734,6 +8741,13 @@ export type GetProjectsResponse = {
     };
     paused?: boolean;
     concurrencyBucketName?: string;
+    webAnalytics?: {
+      id: string;
+      disabledAt?: number;
+      canceledAt?: number;
+      enabledAt?: number;
+      hasData?: boolean;
+    };
   }[];
   pagination: Schemas.Pagination;
 };
@@ -9341,6 +9355,13 @@ export type CreateProjectResponse = {
   };
   paused?: boolean;
   concurrencyBucketName?: string;
+  webAnalytics?: {
+    id: string;
+    disabledAt?: number;
+    canceledAt?: number;
+    enabledAt?: number;
+    hasData?: boolean;
+  };
 };
 
 export type CreateProjectRequestBody = {
@@ -10107,6 +10128,13 @@ export type GetProjectResponse = {
   };
   paused?: boolean;
   concurrencyBucketName?: string;
+  webAnalytics?: {
+    id: string;
+    disabledAt?: number;
+    canceledAt?: number;
+    enabledAt?: number;
+    hasData?: boolean;
+  };
 };
 
 export type GetProjectVariables = {
@@ -10722,6 +10750,13 @@ export type UpdateProjectResponse = {
   };
   paused?: boolean;
   concurrencyBucketName?: string;
+  webAnalytics?: {
+    id: string;
+    disabledAt?: number;
+    canceledAt?: number;
+    enabledAt?: number;
+    hasData?: boolean;
+  };
 };
 
 export type UpdateProjectRequestBody = {
