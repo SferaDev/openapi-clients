@@ -13434,12 +13434,6 @@ export type PatchTeamRequestBody = {
    */
   sensitiveEnvironmentVariablePolicy?: string;
   /**
-   * Runs a task that migrates all existing environment variables to sensitive environment variables.
-   *
-   * @example false
-   */
-  migrateExistingEnvVariablesToSensitive?: boolean;
-  /**
    * Whether or not remote caching is enabled for the team
    */
   remoteCaching?: {
