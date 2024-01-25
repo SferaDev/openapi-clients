@@ -9403,7 +9403,7 @@ export type CreateProjectRequestBody = {
     /**
      * Type of the ENV variable
      */
-    type?: 'system' | 'secret' | 'encrypted' | 'plain';
+    type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
     /**
      * Value for the ENV variable
      */
