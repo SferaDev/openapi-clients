@@ -1,5 +1,5 @@
 ---
-"vercel-api-js": major
+"vercel-api-js": minor
 ---
 
 [BREAKING] Change structure of GetProjectEnvResponse
