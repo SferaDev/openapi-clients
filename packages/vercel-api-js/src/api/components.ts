@@ -11761,80 +11761,6 @@ export type GetProjectEnvQueryParams = {
 
 export type GetProjectEnvError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetProjectEnvResponse = {
-  target?:
-    | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
-    | ('production' | 'preview' | 'development' | 'preview' | 'development');
-  type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
-  id?: string;
-  key: string;
-  value: string;
-  configurationId?: string | null;
-  createdAt?: number;
-  updatedAt?: number;
-  createdBy?: string | null;
-  updatedBy?: string | null;
-  gitBranch?: string;
-  edgeConfigId?: string | null;
-  edgeConfigTokenId?: string | null;
-  contentHint?:
-    | {
-        type: 'redis-url';
-        storeId: string;
-      }
-    | {
-        type: 'redis-rest-api-url';
-        storeId: string;
-      }
-    | {
-        type: 'redis-rest-api-token';
-        storeId: string;
-      }
-    | {
-        type: 'redis-rest-api-read-only-token';
-        storeId: string;
-      }
-    | {
-        type: 'blob-read-write-token';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-url';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-url-non-pooling';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-prisma-url';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-user';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-host';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-password';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-database';
-        storeId: string;
-      }
-    | Record<string, any>
-    | null;
-  /**
-   * Whether `value` is decrypted.
-   */
-  decrypted?: boolean;
-  comment?: string;
-};
-
 export type GetProjectEnvVariables = {
   pathParams: GetProjectEnvPathParams;
   queryParams?: GetProjectEnvQueryParams;
@@ -11844,12 +11770,155 @@ export type GetProjectEnvVariables = {
  * Retrieve the environment variable for a given project.
  */
 export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortSignal) =>
-  fetch<GetProjectEnvResponse, GetProjectEnvError, undefined, {}, GetProjectEnvQueryParams, GetProjectEnvPathParams>({
-    url: '/v1/projects/{idOrName}/env/{id}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+  fetch<
+    | {
+        decrypted: boolean;
+        target?:
+          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
+        type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+        id?: string;
+        key: string;
+        configurationId?: string | null;
+        createdAt?: number;
+        updatedAt?: number;
+        createdBy?: string | null;
+        updatedBy?: string | null;
+        gitBranch?: string;
+        edgeConfigId?: string | null;
+        edgeConfigTokenId?: string | null;
+        contentHint?:
+          | {
+              type: 'redis-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-token';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-read-only-token';
+              storeId: string;
+            }
+          | {
+              type: 'blob-read-write-token';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-non-pooling';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-prisma-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-user';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-host';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-password';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-database';
+              storeId: string;
+            }
+          | Record<string, any>
+          | null;
+        comment?: string;
+      }
+    | {
+        target?:
+          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
+        type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+        id?: string;
+        key: string;
+        value: string;
+        configurationId?: string | null;
+        createdAt?: number;
+        updatedAt?: number;
+        createdBy?: string | null;
+        updatedBy?: string | null;
+        gitBranch?: string;
+        edgeConfigId?: string | null;
+        edgeConfigTokenId?: string | null;
+        contentHint?:
+          | {
+              type: 'redis-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-token';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-read-only-token';
+              storeId: string;
+            }
+          | {
+              type: 'blob-read-write-token';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-non-pooling';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-prisma-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-user';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-host';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-password';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-database';
+              storeId: string;
+            }
+          | Record<string, any>
+          | null;
+        /**
+         * Whether `value` is decrypted.
+         */
+        decrypted?: boolean;
+        comment?: string;
+      },
+    GetProjectEnvError,
+    undefined,
+    {},
+    GetProjectEnvQueryParams,
+    GetProjectEnvPathParams
+  >({ url: '/v1/projects/{idOrName}/env/{id}', method: 'get', ...variables, signal });
 
 export type CreateProjectEnvPathParams = {
   /**
