@@ -1,5 +1,5 @@
 ---
-"vercel-api-js": minor
+"vercel-api-js": patch
 ---
 
 [BREAKING] Reduce maxLength of projectId in InviteUserToTeamRequestBody
