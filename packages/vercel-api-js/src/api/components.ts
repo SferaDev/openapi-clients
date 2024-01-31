@@ -12940,7 +12940,7 @@ export type InviteUserToTeamRequestBody = {
     /**
      * The ID of the project.
      *
-     * @maxLength 256
+     * @maxLength 64
      * @example prj_ndlgr43fadlPyCtREAqxxdyFK
      */
     projectId: string;
