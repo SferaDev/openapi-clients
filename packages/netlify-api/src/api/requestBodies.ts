@@ -3,6 +3,35 @@
  *
  * @version 2.27.0
  */
+export type CreateSiteDeployDeploy = {
+  files?: Record<string, any>;
+  draft?: boolean;
+  async?: boolean;
+  functions?: Record<string, any>;
+  function_schedules?: {
+    name?: string;
+    cron?: string;
+  }[];
+  functions_config?: {
+    [key: string]: {
+      display_name?: string;
+      generator?: string;
+      build_data?: Record<string, any>;
+      routes?: {
+        pattern?: string;
+        literal?: string;
+        expression?: string;
+        methods?: ('GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS')[];
+        prefer_static?: boolean;
+      }[];
+      priority?: number;
+    };
+  };
+  branch?: string;
+  framework?: string;
+  framework_version?: string;
+};
+
 export type UpdateSiteMetadataMetadata = Record<string, any>;
 
 export type CreateHookBySiteIdHook = {
@@ -39,34 +68,6 @@ export type CreateSiteSnippetSnippet = {
  * @format binary
  */
 export type UploadDeployFileFileBody = Blob;
-
-export type CreateSiteDeployDeploy = {
-  files?: Record<string, any>;
-  draft?: boolean;
-  async?: boolean;
-  functions?: Record<string, any>;
-  function_schedules?: {
-    name?: string;
-    cron?: string;
-  }[];
-  functions_config?: {
-    [key: string]: {
-      display_name?: string;
-      generator?: string;
-      build_data?: Record<string, any>;
-      routes?: {
-        pattern?: string;
-        literal?: string;
-        expression?: string;
-        methods?: ('GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS')[];
-        prefer_static?: boolean;
-      }[];
-    };
-  };
-  branch?: string;
-  framework?: string;
-  framework_version?: string;
-};
 
 export type CreateSiteBuildHookBuildhook = {
   title?: string;

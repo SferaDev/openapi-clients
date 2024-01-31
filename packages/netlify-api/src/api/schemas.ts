@@ -652,6 +652,7 @@ export type DeployFiles = {
         methods?: ('GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS')[];
         prefer_static?: boolean;
       }[];
+      priority?: number;
     };
   };
   branch?: string;
@@ -1213,6 +1214,7 @@ export type FunctionConfig = {
     methods?: ('GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS')[];
     prefer_static?: boolean;
   }[];
+  priority?: number;
 };
 
 export type FunctionRoute = {
