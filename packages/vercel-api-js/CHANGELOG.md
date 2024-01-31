@@ -1,5 +1,16 @@
 # vercel-api-js
 
+## 0.5.1
+
+### Patch Changes
+
+- 3d3fc73: [BREAKING] Remove migrateExistingEnvVariablesToSensitive field from PatchTeamRequestBody
+- 58c0459: [BREAKING] Add new 'sensitive' type for ENV variables
+- e7d1ddf: [BREAKING] Reduce maxLength of projectId in InviteUserToTeamRequestBody
+- 286adc8: Update domain configuration response to include 'dns-01' option
+- 580013f: Remove minimum limit requirement in GetTeamMembersQueryParams
+- 5718437: Add web analytics object to project data endpoints
+
 ## 0.5.0
 
 ### Minor Changes
