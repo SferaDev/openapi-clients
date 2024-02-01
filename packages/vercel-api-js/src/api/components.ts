@@ -12900,10 +12900,10 @@ export type GetTeamMembersResponse = {
      */
     joinedFrom?: {
       origin:
-        | 'mail'
-        | 'link'
-        | 'import'
         | 'teams'
+        | 'link'
+        | 'mail'
+        | 'import'
         | 'github'
         | 'gitlab'
         | 'bitbucket'
@@ -12926,22 +12926,36 @@ export type GetTeamMembersResponse = {
      * Array of project memberships
      */
     projects?: {
-      id?: string;
       name?: string;
+      id?: string;
       role?: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
     }[];
   }[];
-  emailInviteCodes?: {
-    id: string;
-    email?: string;
-    role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
-    isDSyncUser: boolean;
-    createdAt?: number;
-    expired?: boolean;
-    projects?: {
-      [key: string]: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
-    };
-  }[];
+  emailInviteCodes?: (
+    | {
+        id: string;
+        email?: string;
+        role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
+        isDSyncUser: boolean;
+        createdAt?: number;
+        expired?: boolean;
+        projects?: {
+          [key: string]: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+        };
+      }
+    | {
+        accessGroups?: string[];
+        id: string;
+        email?: string;
+        role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
+        isDSyncUser: boolean;
+        createdAt?: number;
+        expired?: boolean;
+        projects?: {
+          [key: string]: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+        };
+      }
+  )[];
   pagination: {
     hasNext: boolean;
     /**
