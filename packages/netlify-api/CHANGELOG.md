@@ -1,5 +1,11 @@
 # netlify-api
 
+## 0.3.1
+
+### Patch Changes
+
+- 1eaed14: Update OpenAPI codegen version to 2.28.0
+
 ## 0.3.0
 
 ### Minor Changes

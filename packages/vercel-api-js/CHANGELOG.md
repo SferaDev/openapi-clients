@@ -1,5 +1,15 @@
 # vercel-api-js
 
+## 0.6.0
+
+### Minor Changes
+
+- 46aa322: [BREAKING] Change structure of GetProjectEnvResponse
+
+### Patch Changes
+
+- 862b128: Change 'origin' values in GetTeamMembersResponse type
+
 ## 0.5.1
 
 ### Patch Changes
