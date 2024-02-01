@@ -2704,7 +2704,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
             src?: string;
             dest?: string;
             status?: number;
@@ -2726,7 +2726,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         org: string;
@@ -2738,7 +2738,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         owner: string;
@@ -2750,7 +2750,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | null;
   aliasAssignedAt?: number | boolean | null;
@@ -2758,7 +2758,7 @@ export type CreateDeploymentResponse = {
     id: string;
     createdAt?: number;
     entrypoint?: string | null;
-    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    readyState?: 'ERROR' | 'BUILDING' | 'INITIALIZING' | 'READY';
     readyStateAt?: number;
     output: {
       path: string;
@@ -2776,7 +2776,7 @@ export type CreateDeploymentResponse = {
    *
    * @example READY
    */
-  readyState: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
+  readyState: 'CANCELED' | 'ERROR' | 'BUILDING' | 'INITIALIZING' | 'QUEUED' | 'READY';
   /**
    * The substate of the deployment when the state is "READY"
    *
@@ -2794,7 +2794,7 @@ export type CreateDeploymentResponse = {
    *
    * @example cli
    */
-  source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo';
+  source?: 'cli' | 'git' | 'import' | 'import/repo' | 'clone/repo' | 'api-trigger-git-deploy';
   /**
    * If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned
    *
