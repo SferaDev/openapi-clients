@@ -992,6 +992,10 @@ export type UpdateProjectDataCacheResponse = {
           type: 'postgres-database';
           storeId: string;
         }
+      | {
+          type: 'postgres-url-no-ssl';
+          storeId: string;
+        }
       | Record<string, any>
       | null;
     /**
@@ -8298,6 +8302,10 @@ export type GetProjectsResponse = {
             type: 'postgres-database';
             storeId: string;
           }
+        | {
+            type: 'postgres-url-no-ssl';
+            storeId: string;
+          }
         | Record<string, any>
         | null;
       /**
@@ -8910,6 +8918,10 @@ export type CreateProjectResponse = {
         }
       | {
           type: 'postgres-database';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-url-no-ssl';
           storeId: string;
         }
       | Record<string, any>
@@ -9685,6 +9697,10 @@ export type GetProjectResponse = {
           type: 'postgres-database';
           storeId: string;
         }
+      | {
+          type: 'postgres-url-no-ssl';
+          storeId: string;
+        }
       | Record<string, any>
       | null;
     /**
@@ -10305,6 +10321,10 @@ export type UpdateProjectResponse = {
         }
       | {
           type: 'postgres-database';
+          storeId: string;
+        }
+      | {
+          type: 'postgres-url-no-ssl';
           storeId: string;
         }
       | Record<string, any>
@@ -11570,6 +11590,10 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
               type: 'postgres-database';
               storeId: string;
             }
+          | {
+              type: 'postgres-url-no-ssl';
+              storeId: string;
+            }
           | Record<string, any>
           | null;
         /**
@@ -11643,6 +11667,10 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
               }
             | {
                 type: 'postgres-database';
+                storeId: string;
+              }
+            | {
+                type: 'postgres-url-no-ssl';
                 storeId: string;
               }
             | Record<string, any>
@@ -11720,6 +11748,10 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
               }
             | {
                 type: 'postgres-database';
+                storeId: string;
+              }
+            | {
+                type: 'postgres-url-no-ssl';
                 storeId: string;
               }
             | Record<string, any>
@@ -11836,6 +11868,10 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
               type: 'postgres-database';
               storeId: string;
             }
+          | {
+              type: 'postgres-url-no-ssl';
+              storeId: string;
+            }
           | Record<string, any>
           | null;
         comment?: string;
@@ -11903,6 +11939,10 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
             }
           | {
               type: 'postgres-database';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-no-ssl';
               storeId: string;
             }
           | Record<string, any>
@@ -12011,6 +12051,10 @@ export type CreateProjectEnvResponse = {
               type: 'postgres-database';
               storeId: string;
             }
+          | {
+              type: 'postgres-url-no-ssl';
+              storeId: string;
+            }
           | Record<string, any>
           | null;
         /**
@@ -12083,6 +12127,10 @@ export type CreateProjectEnvResponse = {
             }
           | {
               type: 'postgres-database';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-no-ssl';
               storeId: string;
             }
           | Record<string, any>
@@ -12396,6 +12444,10 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
               type: 'postgres-database';
               storeId: string;
             }
+          | {
+              type: 'postgres-url-no-ssl';
+              storeId: string;
+            }
           | Record<string, any>
           | null;
         /**
@@ -12470,6 +12522,10 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
               type: 'postgres-database';
               storeId: string;
             }
+          | {
+              type: 'postgres-url-no-ssl';
+              storeId: string;
+            }
           | Record<string, any>
           | null;
         /**
@@ -12541,6 +12597,10 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
             }
           | {
               type: 'postgres-database';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-no-ssl';
               storeId: string;
             }
           | Record<string, any>
@@ -12645,6 +12705,10 @@ export type EditProjectEnvResponse = {
       }
     | {
         type: 'postgres-database';
+        storeId: string;
+      }
+    | {
+        type: 'postgres-url-no-ssl';
         storeId: string;
       }
     | Record<string, any>
