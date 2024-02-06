@@ -891,7 +891,7 @@ export type AuthUser = {
       analyticsSpendLimitInDollars?: number | null;
     } | null;
     purchaseOrder?: string | null;
-    status?: 'active' | 'trialing' | 'overdue' | 'expired' | 'canceled';
+    status?: 'active' | 'canceled' | 'trialing' | 'overdue' | 'expired';
     pricingExperiment?: 'august-2022';
     orbMigrationScheduledAt?: number | null;
   } | null;
