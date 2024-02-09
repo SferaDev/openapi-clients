@@ -1446,6 +1446,10 @@ export type UpdateProjectDataCacheResponse = {
     enabledAt?: number;
     hasData?: boolean;
   };
+  security?: {
+    attackModeEnabled?: boolean;
+    attackModeUpdatedAt?: number;
+  };
 };
 
 export type UpdateProjectDataCacheRequestBody = {
@@ -8756,6 +8760,10 @@ export type GetProjectsResponse = {
       enabledAt?: number;
       hasData?: boolean;
     };
+    security?: {
+      attackModeEnabled?: boolean;
+      attackModeUpdatedAt?: number;
+    };
   }[];
   pagination: Schemas.Pagination;
 };
@@ -9373,6 +9381,10 @@ export type CreateProjectResponse = {
     canceledAt?: number;
     enabledAt?: number;
     hasData?: boolean;
+  };
+  security?: {
+    attackModeEnabled?: boolean;
+    attackModeUpdatedAt?: number;
   };
 };
 
@@ -10151,6 +10163,10 @@ export type GetProjectResponse = {
     enabledAt?: number;
     hasData?: boolean;
   };
+  security?: {
+    attackModeEnabled?: boolean;
+    attackModeUpdatedAt?: number;
+  };
 };
 
 export type GetProjectVariables = {
@@ -10776,6 +10792,10 @@ export type UpdateProjectResponse = {
     canceledAt?: number;
     enabledAt?: number;
     hasData?: boolean;
+  };
+  security?: {
+    attackModeEnabled?: boolean;
+    attackModeUpdatedAt?: number;
   };
 };
 
