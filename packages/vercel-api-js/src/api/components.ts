@@ -1303,6 +1303,7 @@ export type UpdateProjectDataCacheResponse = {
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationCustomerBudget?: Schemas.ACLAction[];
+    notificationStatementOfReasons?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
@@ -8617,6 +8618,7 @@ export type GetProjectsResponse = {
       notificationPaymentFailed?: Schemas.ACLAction[];
       notificationUsageAlert?: Schemas.ACLAction[];
       notificationCustomerBudget?: Schemas.ACLAction[];
+      notificationStatementOfReasons?: Schemas.ACLAction[];
       openTelemetryEndpoint?: Schemas.ACLAction[];
       paymentMethod?: Schemas.ACLAction[];
       permissions?: Schemas.ACLAction[];
@@ -9239,6 +9241,7 @@ export type CreateProjectResponse = {
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationCustomerBudget?: Schemas.ACLAction[];
+    notificationStatementOfReasons?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
@@ -10020,6 +10023,7 @@ export type GetProjectResponse = {
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationCustomerBudget?: Schemas.ACLAction[];
+    notificationStatementOfReasons?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
@@ -10650,6 +10654,7 @@ export type UpdateProjectResponse = {
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationCustomerBudget?: Schemas.ACLAction[];
+    notificationStatementOfReasons?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
