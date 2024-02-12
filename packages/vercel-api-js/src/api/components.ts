@@ -1450,6 +1450,8 @@ export type UpdateProjectDataCacheResponse = {
   security?: {
     attackModeEnabled?: boolean;
     attackModeUpdatedAt?: number;
+    firewallEnabled?: boolean;
+    firewallUpdatedAt?: number;
   };
 };
 
@@ -8765,6 +8767,8 @@ export type GetProjectsResponse = {
     security?: {
       attackModeEnabled?: boolean;
       attackModeUpdatedAt?: number;
+      firewallEnabled?: boolean;
+      firewallUpdatedAt?: number;
     };
   }[];
   pagination: Schemas.Pagination;
@@ -9388,6 +9392,8 @@ export type CreateProjectResponse = {
   security?: {
     attackModeEnabled?: boolean;
     attackModeUpdatedAt?: number;
+    firewallEnabled?: boolean;
+    firewallUpdatedAt?: number;
   };
 };
 
@@ -10170,6 +10176,8 @@ export type GetProjectResponse = {
   security?: {
     attackModeEnabled?: boolean;
     attackModeUpdatedAt?: number;
+    firewallEnabled?: boolean;
+    firewallUpdatedAt?: number;
   };
 };
 
@@ -10801,6 +10809,8 @@ export type UpdateProjectResponse = {
   security?: {
     attackModeEnabled?: boolean;
     attackModeUpdatedAt?: number;
+    firewallEnabled?: boolean;
+    firewallUpdatedAt?: number;
   };
 };
 
