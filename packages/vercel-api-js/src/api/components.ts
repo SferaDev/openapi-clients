@@ -1315,7 +1315,6 @@ export type UpdateProjectDataCacheResponse = {
     sharedEnvVarsProduction?: Schemas.ACLAction[];
     space?: Schemas.ACLAction[];
     spaceRun?: Schemas.ACLAction[];
-    storageIntegration?: Schemas.ACLAction[];
     passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
@@ -1325,7 +1324,6 @@ export type UpdateProjectDataCacheResponse = {
     redisStoreTokenSet?: Schemas.ACLAction[];
     blobStoreTokenSet?: Schemas.ACLAction[];
     postgresStoreTokenSet?: Schemas.ACLAction[];
-    integrationStoreTokenSet?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -6457,7 +6455,6 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
               | 'read-write:edge-config'
               | 'read-write:otel-endpoint'
               | 'read:monitoring'
-              | 'read-write:storage'
             )[];
             upgraded: (
               | 'read:integration-configuration'
@@ -6477,7 +6474,6 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
               | 'read-write:edge-config'
               | 'read-write:otel-endpoint'
               | 'read:monitoring'
-              | 'read-write:storage'
             )[];
           };
           note: string;
@@ -6610,7 +6606,6 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
               | 'read-write:edge-config'
               | 'read-write:otel-endpoint'
               | 'read:monitoring'
-              | 'read-write:storage'
             )[];
             upgraded: (
               | 'read:integration-configuration'
@@ -6630,7 +6625,6 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
               | 'read-write:edge-config'
               | 'read-write:otel-endpoint'
               | 'read:monitoring'
-              | 'read-write:storage'
             )[];
           };
           note: string;
@@ -6790,7 +6784,6 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
               | 'read-write:edge-config'
               | 'read-write:otel-endpoint'
               | 'read:monitoring'
-              | 'read-write:storage'
             )[];
             upgraded: (
               | 'read:integration-configuration'
@@ -6810,7 +6803,6 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
               | 'read-write:edge-config'
               | 'read-write:otel-endpoint'
               | 'read:monitoring'
-              | 'read-write:storage'
             )[];
           };
           note: string;
@@ -6941,7 +6933,6 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
               | 'read-write:edge-config'
               | 'read-write:otel-endpoint'
               | 'read:monitoring'
-              | 'read-write:storage'
             )[];
             upgraded: (
               | 'read:integration-configuration'
@@ -6961,7 +6952,6 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
               | 'read-write:edge-config'
               | 'read-write:otel-endpoint'
               | 'read:monitoring'
-              | 'read-write:storage'
             )[];
           };
           note: string;
@@ -8632,7 +8622,6 @@ export type GetProjectsResponse = {
       sharedEnvVarsProduction?: Schemas.ACLAction[];
       space?: Schemas.ACLAction[];
       spaceRun?: Schemas.ACLAction[];
-      storageIntegration?: Schemas.ACLAction[];
       passwordProtectionInvoiceItem?: Schemas.ACLAction[];
       rateLimit?: Schemas.ACLAction[];
       redis?: Schemas.ACLAction[];
@@ -8642,7 +8631,6 @@ export type GetProjectsResponse = {
       redisStoreTokenSet?: Schemas.ACLAction[];
       blobStoreTokenSet?: Schemas.ACLAction[];
       postgresStoreTokenSet?: Schemas.ACLAction[];
-      integrationStoreTokenSet?: Schemas.ACLAction[];
       supportCase?: Schemas.ACLAction[];
       supportCaseComment?: Schemas.ACLAction[];
       dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -9257,7 +9245,6 @@ export type CreateProjectResponse = {
     sharedEnvVarsProduction?: Schemas.ACLAction[];
     space?: Schemas.ACLAction[];
     spaceRun?: Schemas.ACLAction[];
-    storageIntegration?: Schemas.ACLAction[];
     passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
@@ -9267,7 +9254,6 @@ export type CreateProjectResponse = {
     redisStoreTokenSet?: Schemas.ACLAction[];
     blobStoreTokenSet?: Schemas.ACLAction[];
     postgresStoreTokenSet?: Schemas.ACLAction[];
-    integrationStoreTokenSet?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -10041,7 +10027,6 @@ export type GetProjectResponse = {
     sharedEnvVarsProduction?: Schemas.ACLAction[];
     space?: Schemas.ACLAction[];
     spaceRun?: Schemas.ACLAction[];
-    storageIntegration?: Schemas.ACLAction[];
     passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
@@ -10051,7 +10036,6 @@ export type GetProjectResponse = {
     redisStoreTokenSet?: Schemas.ACLAction[];
     blobStoreTokenSet?: Schemas.ACLAction[];
     postgresStoreTokenSet?: Schemas.ACLAction[];
-    integrationStoreTokenSet?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -10674,7 +10658,6 @@ export type UpdateProjectResponse = {
     sharedEnvVarsProduction?: Schemas.ACLAction[];
     space?: Schemas.ACLAction[];
     spaceRun?: Schemas.ACLAction[];
-    storageIntegration?: Schemas.ACLAction[];
     passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
@@ -10684,7 +10667,6 @@ export type UpdateProjectResponse = {
     redisStoreTokenSet?: Schemas.ACLAction[];
     blobStoreTokenSet?: Schemas.ACLAction[];
     postgresStoreTokenSet?: Schemas.ACLAction[];
-    integrationStoreTokenSet?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
