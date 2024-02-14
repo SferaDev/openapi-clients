@@ -2051,6 +2051,14 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
           }[];
         }[];
         /**
+         * The public project information associated with the deployment.
+         */
+        project?: {
+          id: string;
+          name: string;
+          framework?: string | null;
+        };
+        /**
          * A boolean representing if the deployment is public or not. By default this is `false`
          *
          * @example false
@@ -2108,6 +2116,10 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
            * @example fsociety
            */
           slug: string;
+          /**
+           * The avatar of the team owner
+           */
+          avatar?: string;
         };
         type: 'LAMBDAS';
         /**
@@ -2191,6 +2203,10 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
            * @example john-doe
            */
           username?: string;
+          /**
+           * The avatar of the user that created the deployment
+           */
+          avatar?: string;
         };
         errorCode?: string;
         errorLink?: string;
@@ -2299,6 +2315,14 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
           [key: string]: string;
         };
         /**
+         * The public project information associated with the deployment.
+         */
+        project?: {
+          id: string;
+          name: string;
+          framework?: string | null;
+        };
+        /**
          * A boolean representing if the deployment is public or not. By default this is `false`
          *
          * @example false
@@ -2356,6 +2380,10 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
            * @example fsociety
            */
           slug: string;
+          /**
+           * The avatar of the team owner
+           */
+          avatar?: string;
         };
         type: 'LAMBDAS';
         /**
@@ -2439,6 +2467,10 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
            * @example john-doe
            */
           username?: string;
+          /**
+           * The avatar of the user that created the deployment
+           */
+          avatar?: string;
         };
         errorCode?: string;
         errorLink?: string;
@@ -2775,6 +2807,14 @@ export type CreateDeploymentResponse = {
     }[];
   }[];
   /**
+   * The public project information associated with the deployment.
+   */
+  project?: {
+    id: string;
+    name: string;
+    framework?: string | null;
+  };
+  /**
    * A boolean representing if the deployment is public or not. By default this is `false`
    *
    * @example false
@@ -2832,6 +2872,10 @@ export type CreateDeploymentResponse = {
      * @example fsociety
      */
     slug: string;
+    /**
+     * The avatar of the team owner
+     */
+    avatar?: string;
   };
   type: 'LAMBDAS';
   /**
@@ -2915,6 +2959,10 @@ export type CreateDeploymentResponse = {
      * @example john-doe
      */
     username?: string;
+    /**
+     * The avatar of the user that created the deployment
+     */
+    avatar?: string;
   };
   errorCode?: string;
   errorLink?: string;
@@ -3522,6 +3570,14 @@ export type CancelDeploymentResponse = {
     }[];
   }[];
   /**
+   * The public project information associated with the deployment.
+   */
+  project?: {
+    id: string;
+    name: string;
+    framework?: string | null;
+  };
+  /**
    * A boolean representing if the deployment is public or not. By default this is `false`
    *
    * @example false
@@ -3579,6 +3635,10 @@ export type CancelDeploymentResponse = {
      * @example fsociety
      */
     slug: string;
+    /**
+     * The avatar of the team owner
+     */
+    avatar?: string;
   };
   type: 'LAMBDAS';
   /**
@@ -3662,6 +3722,10 @@ export type CancelDeploymentResponse = {
      * @example john-doe
      */
     username?: string;
+    /**
+     * The avatar of the user that created the deployment
+     */
+    avatar?: string;
   };
   errorCode?: string;
   errorLink?: string;
