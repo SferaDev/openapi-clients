@@ -1067,12 +1067,12 @@ export type AccountUpdateSetup = {
 };
 
 export type AccountAddMemberSetup = {
-  role?: 'Owner' | 'Collaborator' | 'Controller';
+  role?: 'Owner' | 'Developer' | 'Billing Admin' | 'Reviewer';
   email?: string;
 };
 
 export type AccountUpdateMemberSetup = {
-  role?: 'Owner' | 'Collaborator' | 'Controller';
+  role?: 'Owner' | 'Developer' | 'Billing Admin' | 'Reviewer';
   site_access?: 'all' | 'none' | 'selected';
   site_ids?: string[];
 };

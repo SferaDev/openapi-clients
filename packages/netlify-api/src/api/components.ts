@@ -5307,7 +5307,7 @@ export type AddMemberToAccountResponse = {
 }[];
 
 export type AddMemberToAccountRequestBody = {
-  role?: 'Owner' | 'Collaborator' | 'Controller';
+  role?: 'Owner' | 'Developer' | 'Billing Admin' | 'Reviewer';
   email?: string;
 };
 
@@ -5387,7 +5387,7 @@ export type UpdateAccountMemberResponse = {
 };
 
 export type UpdateAccountMemberRequestBody = {
-  role?: 'Owner' | 'Collaborator' | 'Controller';
+  role?: 'Owner' | 'Developer' | 'Billing Admin' | 'Reviewer';
   site_access?: 'all' | 'none' | 'selected';
   site_ids?: string[];
 };
