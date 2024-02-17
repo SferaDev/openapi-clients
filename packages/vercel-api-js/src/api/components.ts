@@ -2825,7 +2825,7 @@ export type CreateDeploymentResponse = {
    *
    * @example READY
    */
-  readyState: 'CANCELED' | 'ERROR' | 'BUILDING' | 'INITIALIZING' | 'QUEUED' | 'READY';
+  readyState: 'CANCELED' | 'ERROR' | 'QUEUED' | 'BUILDING' | 'INITIALIZING' | 'READY';
   /**
    * The substate of the deployment when the state is "READY"
    *
