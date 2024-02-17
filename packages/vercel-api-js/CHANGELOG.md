@@ -1,5 +1,16 @@
 # vercel-api-js
 
+## 0.6.1
+
+### Patch Changes
+
+- f002c7a: Add security information to project endpoints
+- e59cf32: Add notificationStatementOfReasons to project-related API endpoints
+- 5f5bea1: Add firewall settings to security object in project-related API endpoints
+- cca589a: Add 'project' field to getDeployment and createDeployment response
+- a16c6d5: [BREAKING] Remove 'postgres-url-no-ssl' option from project environment
+- 7cce093: [BREAKING] Add new 'postgres-url-no-ssl' component type
+
 ## 0.6.0
 
 ### Minor Changes

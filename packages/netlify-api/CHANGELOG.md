@@ -1,5 +1,11 @@
 # netlify-api
 
+## 0.3.2
+
+### Patch Changes
+
+- 3584599: [BREAKING] Updated roles in AddMemberToAccount and UpdateAccountMember endpoints
+
 ## 0.3.1
 
 ### Patch Changes
