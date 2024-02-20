@@ -9477,10 +9477,9 @@ export type CreateProjectRequestBody = {
      */
     target: ('production' | 'preview' | 'development') | ('production' | 'preview' | 'development')[];
     /**
-     * The git branch of the environment variable
+     * If defined, the git branch of the environment variable (must have target=preview)
      *
      * @maxLength 250
-     * @example feature-1
      */
     gitBranch?: string;
     /**
@@ -11569,7 +11568,7 @@ export type FilterProjectEnvsPathParams = {
 
 export type FilterProjectEnvsQueryParams = {
   /**
-   * If defined, the git branch of the environment variable to filter the results
+   * If defined, the git branch of the environment variable to filter the results (must have target=preview)
    *
    * @maxLength 250
    * @example feature-1
@@ -12268,12 +12267,11 @@ export type CreateProjectEnvVariables = {
         /**
          * The target environment of the environment variable
          *
-         * @example production
          * @example preview
          */
         target: ('production' | 'preview' | 'development')[];
         /**
-         * The git branch of the environment variable
+         * If defined, the git branch of the environment variable (must have target=preview)
          *
          * @maxLength 250
          * @example feature-1
@@ -12309,12 +12307,11 @@ export type CreateProjectEnvVariables = {
         /**
          * The target environment of the environment variable
          *
-         * @example production
          * @example preview
          */
         target: ('production' | 'preview' | 'development')[];
         /**
-         * The git branch of the environment variable
+         * If defined, the git branch of the environment variable (must have target=preview)
          *
          * @maxLength 250
          * @example feature-1
@@ -12361,12 +12358,11 @@ export const createProjectEnv = (variables: CreateProjectEnvVariables, signal?: 
         /**
          * The target environment of the environment variable
          *
-         * @example production
          * @example preview
          */
         target: ('production' | 'preview' | 'development')[];
         /**
-         * The git branch of the environment variable
+         * If defined, the git branch of the environment variable (must have target=preview)
          *
          * @maxLength 250
          * @example feature-1
@@ -12402,12 +12398,11 @@ export const createProjectEnv = (variables: CreateProjectEnvVariables, signal?: 
         /**
          * The target environment of the environment variable
          *
-         * @example production
          * @example preview
          */
         target: ('production' | 'preview' | 'development')[];
         /**
-         * The git branch of the environment variable
+         * If defined, the git branch of the environment variable (must have target=preview)
          *
          * @maxLength 250
          * @example feature-1
@@ -12815,7 +12810,7 @@ export type EditProjectEnvRequestBody = {
    */
   target?: ('production' | 'preview' | 'development')[];
   /**
-   * The git branch of the environment variable
+   * If defined, the git branch of the environment variable (must have target=preview)
    *
    * @maxLength 250
    * @example feature-1
