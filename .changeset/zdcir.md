@@ -1,5 +1,5 @@
 ---
-"vercel-api-js": minor
+"vercel-api-js": patch
 ---
 
-[BREAKING] Modified CreateProjectEnvVariables to specify that git branch must have target=preview
+Modified CreateProjectEnvVariables to specify that git branch must have target=preview
