@@ -1369,6 +1369,7 @@ export type UpdateProjectDataCacheResponse = {
     passwordProtection?: Schemas.ACLAction[];
     job?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
+    projectAccessGroup?: Schemas.ACLAction[];
     projectAnalyticsSampling?: Schemas.ACLAction[];
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
@@ -8740,6 +8741,7 @@ export type GetProjectsResponse = {
       passwordProtection?: Schemas.ACLAction[];
       job?: Schemas.ACLAction[];
       project?: Schemas.ACLAction[];
+      projectAccessGroup?: Schemas.ACLAction[];
       projectAnalyticsSampling?: Schemas.ACLAction[];
       projectDeploymentHook?: Schemas.ACLAction[];
       projectDomain?: Schemas.ACLAction[];
@@ -9363,6 +9365,7 @@ export type CreateProjectResponse = {
     passwordProtection?: Schemas.ACLAction[];
     job?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
+    projectAccessGroup?: Schemas.ACLAction[];
     projectAnalyticsSampling?: Schemas.ACLAction[];
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
@@ -10144,6 +10147,7 @@ export type GetProjectResponse = {
     passwordProtection?: Schemas.ACLAction[];
     job?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
+    projectAccessGroup?: Schemas.ACLAction[];
     projectAnalyticsSampling?: Schemas.ACLAction[];
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
@@ -10775,6 +10779,7 @@ export type UpdateProjectResponse = {
     passwordProtection?: Schemas.ACLAction[];
     job?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
+    projectAccessGroup?: Schemas.ACLAction[];
     projectAnalyticsSampling?: Schemas.ACLAction[];
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
