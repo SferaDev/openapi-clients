@@ -1,5 +1,14 @@
 # vercel-api-js
 
+## 0.6.2
+
+### Patch Changes
+
+- 79d46c2: Add 'dryRun' option to PatchEdgeConfigItems and PatchEdgeConfigSchema query params
+- 364ba3e: Add projectAccessGroup field to project related responses
+- 92880b3: [BREAKING] Add integrationStores to AuthUser in schemas.ts
+- cda8a8e: Modified CreateProjectEnvVariables to specify that git branch must have target=preview
+
 ## 0.6.1
 
 ### Patch Changes
