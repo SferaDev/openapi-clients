@@ -1285,6 +1285,7 @@ export type UpdateProjectDataCacheResponse = {
     integrationConfigurationTransfer?: Schemas.ACLAction[];
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
+    integrationStore?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
@@ -1324,6 +1325,7 @@ export type UpdateProjectDataCacheResponse = {
     redisStoreTokenSet?: Schemas.ACLAction[];
     blobStoreTokenSet?: Schemas.ACLAction[];
     postgresStoreTokenSet?: Schemas.ACLAction[];
+    integrationStoreTokenSet?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -8659,6 +8661,7 @@ export type GetProjectsResponse = {
       integrationConfigurationTransfer?: Schemas.ACLAction[];
       integrationConfigurationProjects?: Schemas.ACLAction[];
       integrationVercelConfigurationOverride?: Schemas.ACLAction[];
+      integrationStore?: Schemas.ACLAction[];
       jobGlobal?: Schemas.ACLAction[];
       logDrain?: Schemas.ACLAction[];
       Monitoring?: Schemas.ACLAction[];
@@ -8698,6 +8701,7 @@ export type GetProjectsResponse = {
       redisStoreTokenSet?: Schemas.ACLAction[];
       blobStoreTokenSet?: Schemas.ACLAction[];
       postgresStoreTokenSet?: Schemas.ACLAction[];
+      integrationStoreTokenSet?: Schemas.ACLAction[];
       supportCase?: Schemas.ACLAction[];
       supportCaseComment?: Schemas.ACLAction[];
       dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -9283,6 +9287,7 @@ export type CreateProjectResponse = {
     integrationConfigurationTransfer?: Schemas.ACLAction[];
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
+    integrationStore?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
@@ -9322,6 +9327,7 @@ export type CreateProjectResponse = {
     redisStoreTokenSet?: Schemas.ACLAction[];
     blobStoreTokenSet?: Schemas.ACLAction[];
     postgresStoreTokenSet?: Schemas.ACLAction[];
+    integrationStoreTokenSet?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -10065,6 +10071,7 @@ export type GetProjectResponse = {
     integrationConfigurationTransfer?: Schemas.ACLAction[];
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
+    integrationStore?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
@@ -10104,6 +10111,7 @@ export type GetProjectResponse = {
     redisStoreTokenSet?: Schemas.ACLAction[];
     blobStoreTokenSet?: Schemas.ACLAction[];
     postgresStoreTokenSet?: Schemas.ACLAction[];
+    integrationStoreTokenSet?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -10697,6 +10705,7 @@ export type UpdateProjectResponse = {
     integrationConfigurationTransfer?: Schemas.ACLAction[];
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
+    integrationStore?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
@@ -10736,6 +10745,7 @@ export type UpdateProjectResponse = {
     redisStoreTokenSet?: Schemas.ACLAction[];
     blobStoreTokenSet?: Schemas.ACLAction[];
     postgresStoreTokenSet?: Schemas.ACLAction[];
+    integrationStoreTokenSet?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
