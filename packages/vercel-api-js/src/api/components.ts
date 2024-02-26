@@ -6016,6 +6016,7 @@ export type PatchEdgeConfigItemsPathParams = {
 
 export type PatchEdgeConfigItemsQueryParams = {
   edgeConfigId: string;
+  dryRun?: string;
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
@@ -6101,6 +6102,7 @@ export type PatchEdgeConfigSchemaPathParams = {
 };
 
 export type PatchEdgeConfigSchemaQueryParams = {
+  dryRun?: string;
   /**
    * The Team identifier or slug to perform the request on behalf of.
    */
@@ -12930,6 +12932,7 @@ export type GetTeamMembersQueryParams = {
    * Limit how many teams should be returned
    *
    * @example 20
+   * @minimum 1
    */
   limit?: number;
   /**
