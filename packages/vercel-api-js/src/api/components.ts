@@ -13808,6 +13808,7 @@ export type CreateTeamResponse = {
       end: number;
     } | null;
     plan: 'pro' | 'enterprise' | 'hobby';
+    planIteration?: string;
     platform?: 'stripe' | 'stripeTestMode';
     orbCustomerId?: string;
     syncedAt?: number;
