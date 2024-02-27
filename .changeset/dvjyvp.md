@@ -1,5 +1,5 @@
 ---
-"vercel-api-js": minor
+"vercel-api-js": patch
 ---
 
 Remove planIteration from CreateTeamResponse and AuthUser
