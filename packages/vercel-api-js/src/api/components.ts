@@ -1175,6 +1175,8 @@ export type UpdateProjectDataCacheResponse = {
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
   serverlessFunctionZeroConfigFailover?: boolean;
+  skewProtectionBoundaryAt?: number;
+  skewProtectionMaxAge?: number;
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
   ssoProtection?: {
@@ -1394,6 +1396,7 @@ export type UpdateProjectDataCacheResponse = {
     projectAnalyticsUsage?: Schemas.ACLAction[];
     projectSupportCase?: Schemas.ACLAction[];
     projectSupportCaseComment?: Schemas.ACLAction[];
+    skewProtection?: Schemas.ACLAction[];
     analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
@@ -8551,6 +8554,8 @@ export type GetProjectsResponse = {
     rootDirectory?: string | null;
     serverlessFunctionRegion?: string | null;
     serverlessFunctionZeroConfigFailover?: boolean;
+    skewProtectionBoundaryAt?: number;
+    skewProtectionMaxAge?: number;
     skipGitConnectDuringLink?: boolean;
     sourceFilesOutsideRootDirectory?: boolean;
     ssoProtection?: {
@@ -8770,6 +8775,7 @@ export type GetProjectsResponse = {
       projectAnalyticsUsage?: Schemas.ACLAction[];
       projectSupportCase?: Schemas.ACLAction[];
       projectSupportCaseComment?: Schemas.ACLAction[];
+      skewProtection?: Schemas.ACLAction[];
       analytics?: Schemas.ACLAction[];
       trustedIps?: Schemas.ACLAction[];
       webAnalytics?: Schemas.ACLAction[];
@@ -9177,6 +9183,8 @@ export type CreateProjectResponse = {
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
   serverlessFunctionZeroConfigFailover?: boolean;
+  skewProtectionBoundaryAt?: number;
+  skewProtectionMaxAge?: number;
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
   ssoProtection?: {
@@ -9396,6 +9404,7 @@ export type CreateProjectResponse = {
     projectAnalyticsUsage?: Schemas.ACLAction[];
     projectSupportCase?: Schemas.ACLAction[];
     projectSupportCaseComment?: Schemas.ACLAction[];
+    skewProtection?: Schemas.ACLAction[];
     analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
@@ -9961,6 +9970,8 @@ export type GetProjectResponse = {
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
   serverlessFunctionZeroConfigFailover?: boolean;
+  skewProtectionBoundaryAt?: number;
+  skewProtectionMaxAge?: number;
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
   ssoProtection?: {
@@ -10180,6 +10191,7 @@ export type GetProjectResponse = {
     projectAnalyticsUsage?: Schemas.ACLAction[];
     projectSupportCase?: Schemas.ACLAction[];
     projectSupportCaseComment?: Schemas.ACLAction[];
+    skewProtection?: Schemas.ACLAction[];
     analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
@@ -10595,6 +10607,8 @@ export type UpdateProjectResponse = {
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
   serverlessFunctionZeroConfigFailover?: boolean;
+  skewProtectionBoundaryAt?: number;
+  skewProtectionMaxAge?: number;
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
   ssoProtection?: {
@@ -10814,6 +10828,7 @@ export type UpdateProjectResponse = {
     projectAnalyticsUsage?: Schemas.ACLAction[];
     projectSupportCase?: Schemas.ACLAction[];
     projectSupportCaseComment?: Schemas.ACLAction[];
+    skewProtection?: Schemas.ACLAction[];
     analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
