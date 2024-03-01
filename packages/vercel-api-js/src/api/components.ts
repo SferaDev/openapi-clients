@@ -1354,6 +1354,7 @@ export type UpdateProjectDataCacheResponse = {
     ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
     projectTransferIn?: Schemas.ACLAction[];
+    oauth2Application?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
     productionAliasProtectionBypass?: Schemas.ACLAction[];
@@ -8734,6 +8735,7 @@ export type GetProjectsResponse = {
       ['webhook-event']?: Schemas.ACLAction[];
       endpointVerification?: Schemas.ACLAction[];
       projectTransferIn?: Schemas.ACLAction[];
+      oauth2Application?: Schemas.ACLAction[];
       aliasProject?: Schemas.ACLAction[];
       aliasProtectionBypass?: Schemas.ACLAction[];
       productionAliasProtectionBypass?: Schemas.ACLAction[];
@@ -9364,6 +9366,7 @@ export type CreateProjectResponse = {
     ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
     projectTransferIn?: Schemas.ACLAction[];
+    oauth2Application?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
     productionAliasProtectionBypass?: Schemas.ACLAction[];
@@ -10152,6 +10155,7 @@ export type GetProjectResponse = {
     ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
     projectTransferIn?: Schemas.ACLAction[];
+    oauth2Application?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
     productionAliasProtectionBypass?: Schemas.ACLAction[];
@@ -10790,6 +10794,7 @@ export type UpdateProjectResponse = {
     ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
     projectTransferIn?: Schemas.ACLAction[];
+    oauth2Application?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
     productionAliasProtectionBypass?: Schemas.ACLAction[];
