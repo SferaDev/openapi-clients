@@ -185,7 +185,7 @@ export const operationsByPath = {
   'POST /v1/projects/{idOrName}/members': addProjectMember,
   'DELETE /v1/projects/{idOrName}/members/{uid}': removeProjectMember,
   'GET /v9/projects': getProjects,
-  'POST /v9/projects': createProject,
+  'POST /v10/projects': createProject,
   'GET /v9/projects/{idOrName}': getProject,
   'PATCH /v9/projects/{idOrName}': updateProject,
   'DELETE /v9/projects/{idOrName}': deleteProject,

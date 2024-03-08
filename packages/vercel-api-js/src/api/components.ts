@@ -7164,7 +7164,7 @@ export type GetIntegrationLogDrainsResponse = {
    * @example build
    * @example edge
    */
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
+  sources?: ('build' | 'edge' | 'lambda' | 'static' | 'external')[];
   /**
    * Whether the log drain was created by an integration or by a user
    *
@@ -7290,7 +7290,7 @@ export type CreateLogDrainResponse = {
    * @example build
    * @example edge
    */
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
+  sources?: ('build' | 'edge' | 'lambda' | 'static' | 'external')[];
   /**
    * Whether the log drain was created by an integration or by a user
    *
@@ -7552,7 +7552,7 @@ export type GetConfigurableLogDrainResponse = {
   ownerId: string;
   projectIds?: string[];
   createdAt: number;
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
+  sources?: ('build' | 'edge' | 'lambda' | 'static' | 'external')[];
   headers?: {
     [key: string]: string;
   };
@@ -7645,7 +7645,7 @@ export type GetAllLogDrainsResponse = {
   ownerId: string;
   projectIds?: string[];
   createdAt: number;
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
+  sources?: ('build' | 'edge' | 'lambda' | 'static' | 'external')[];
   headers?: {
     [key: string]: string;
   };
@@ -7704,7 +7704,7 @@ export type CreateConfigurableLogDrainResponse = {
   ownerId: string;
   projectIds?: string[];
   createdAt: number;
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
+  sources?: ('build' | 'edge' | 'lambda' | 'static' | 'external')[];
   headers?: {
     [key: string]: string;
   };
@@ -9635,7 +9635,7 @@ export type CreateProjectVariables = {
  */
 export const createProject = (variables: CreateProjectVariables, signal?: AbortSignal) =>
   fetch<CreateProjectResponse, CreateProjectError, CreateProjectRequestBody, {}, CreateProjectQueryParams, {}>({
-    url: '/v9/projects',
+    url: '/v10/projects',
     method: 'post',
     ...variables,
     signal
