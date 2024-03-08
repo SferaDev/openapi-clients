@@ -1,5 +1,18 @@
 # vercel-api-js
 
+## 0.6.3
+
+### Patch Changes
+
+- 0b0194e: Add new field attackModeActiveUntil to project responses
+- cd00645: Add oauth2Application field to project related responses
+- 8920920: Remove planIteration from CreateTeamResponse and AuthUser
+- 06e6e64: Add new property 'cronJobsPerProject' to 'AuthUser' type
+- 44f20a3: Add skewProtectionBoundaryAt and skewProtectionMaxAge to project data cache and project response
+- 224ec97: Update API endpoint to create project from v9 to v10
+- 71615f0: Add new field 'planIteration' to AuthUser type
+- 5bfccd9: Add optional field 'planIteration' to AuthUser type
+
 ## 0.6.2
 
 ### Patch Changes
