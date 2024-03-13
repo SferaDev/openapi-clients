@@ -996,7 +996,10 @@ export type UpdateProjectDataCacheResponse = {
           type: 'postgres-url-no-ssl';
           storeId: string;
         }
-      | Record<string, any>
+      | {
+          type: 'integration-store-secret';
+          storeId: string;
+        }
       | null;
     /**
      * Whether `value` is decrypted.
@@ -8377,7 +8380,10 @@ export type GetProjectsResponse = {
             type: 'postgres-url-no-ssl';
             storeId: string;
           }
-        | Record<string, any>
+        | {
+            type: 'integration-store-secret';
+            storeId: string;
+          }
         | null;
       /**
        * Whether `value` is decrypted.
@@ -9008,7 +9014,10 @@ export type CreateProjectResponse = {
           type: 'postgres-url-no-ssl';
           storeId: string;
         }
-      | Record<string, any>
+      | {
+          type: 'integration-store-secret';
+          storeId: string;
+        }
       | null;
     /**
      * Whether `value` is decrypted.
@@ -9797,7 +9806,10 @@ export type GetProjectResponse = {
           type: 'postgres-url-no-ssl';
           storeId: string;
         }
-      | Record<string, any>
+      | {
+          type: 'integration-store-secret';
+          storeId: string;
+        }
       | null;
     /**
      * Whether `value` is decrypted.
@@ -10436,7 +10448,10 @@ export type UpdateProjectResponse = {
           type: 'postgres-url-no-ssl';
           storeId: string;
         }
-      | Record<string, any>
+      | {
+          type: 'integration-store-secret';
+          storeId: string;
+        }
       | null;
     /**
      * Whether `value` is decrypted.
@@ -11716,7 +11731,10 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
               type: 'postgres-url-no-ssl';
               storeId: string;
             }
-          | Record<string, any>
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+            }
           | null;
         /**
          * Whether `value` is decrypted.
@@ -11795,7 +11813,10 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
                 type: 'postgres-url-no-ssl';
                 storeId: string;
               }
-            | Record<string, any>
+            | {
+                type: 'integration-store-secret';
+                storeId: string;
+              }
             | null;
           /**
            * Whether `value` is decrypted.
@@ -11876,7 +11897,10 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
                 type: 'postgres-url-no-ssl';
                 storeId: string;
               }
-            | Record<string, any>
+            | {
+                type: 'integration-store-secret';
+                storeId: string;
+              }
             | null;
           /**
            * Whether `value` is decrypted.
@@ -11994,7 +12018,10 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
               type: 'postgres-url-no-ssl';
               storeId: string;
             }
-          | Record<string, any>
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+            }
           | null;
         comment?: string;
       }
@@ -12067,7 +12094,10 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
               type: 'postgres-url-no-ssl';
               storeId: string;
             }
-          | Record<string, any>
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+            }
           | null;
         /**
          * Whether `value` is decrypted.
@@ -12177,7 +12207,10 @@ export type CreateProjectEnvResponse = {
               type: 'postgres-url-no-ssl';
               storeId: string;
             }
-          | Record<string, any>
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+            }
           | null;
         /**
          * Whether `value` is decrypted.
@@ -12255,7 +12288,10 @@ export type CreateProjectEnvResponse = {
               type: 'postgres-url-no-ssl';
               storeId: string;
             }
-          | Record<string, any>
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+            }
           | null;
         /**
          * Whether `value` is decrypted.
@@ -12566,7 +12602,10 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
               type: 'postgres-url-no-ssl';
               storeId: string;
             }
-          | Record<string, any>
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+            }
           | null;
         /**
          * Whether `value` is decrypted.
@@ -12644,7 +12683,10 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
               type: 'postgres-url-no-ssl';
               storeId: string;
             }
-          | Record<string, any>
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+            }
           | null;
         /**
          * Whether `value` is decrypted.
@@ -12721,7 +12763,10 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
               type: 'postgres-url-no-ssl';
               storeId: string;
             }
-          | Record<string, any>
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+            }
           | null;
         /**
          * Whether `value` is decrypted.
@@ -12829,7 +12874,10 @@ export type EditProjectEnvResponse = {
         type: 'postgres-url-no-ssl';
         storeId: string;
       }
-    | Record<string, any>
+    | {
+        type: 'integration-store-secret';
+        storeId: string;
+      }
     | null;
   /**
    * Whether `value` is decrypted.
