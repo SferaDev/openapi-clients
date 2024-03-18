@@ -974,7 +974,7 @@ export type AuthUser = {
    */
   activeDashboardViews?: {
     scopeId: string;
-    viewPreference?: 'cards' | 'list';
+    viewPreference?: 'list' | 'cards';
     favoritesViewPreference?: 'open' | 'closed';
     recentsViewPreference?: 'open' | 'closed';
   }[];
