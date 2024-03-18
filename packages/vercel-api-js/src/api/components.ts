@@ -3276,6 +3276,10 @@ export type CreateDeploymentRequestBody = {
      */
     installCommand?: string | null;
     /**
+     * Override the Node.js version that should be used for this deployment
+     */
+    nodeVersion?: '20.x' | '18.x' | '16.x';
+    /**
      * The output directory of the project. When `null` is used this value will be automatically detected
      *
      * @maxLength 256
