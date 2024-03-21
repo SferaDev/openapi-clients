@@ -1310,6 +1310,7 @@ export type UpdateProjectDataCacheResponse = {
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationCustomerBudget?: Schemas.ACLAction[];
     notificationStatementOfReasons?: Schemas.ACLAction[];
+    oauth2Connection?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
@@ -8698,6 +8699,7 @@ export type GetProjectsResponse = {
       notificationUsageAlert?: Schemas.ACLAction[];
       notificationCustomerBudget?: Schemas.ACLAction[];
       notificationStatementOfReasons?: Schemas.ACLAction[];
+      oauth2Connection?: Schemas.ACLAction[];
       openTelemetryEndpoint?: Schemas.ACLAction[];
       paymentMethod?: Schemas.ACLAction[];
       permissions?: Schemas.ACLAction[];
@@ -9332,6 +9334,7 @@ export type CreateProjectResponse = {
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationCustomerBudget?: Schemas.ACLAction[];
     notificationStatementOfReasons?: Schemas.ACLAction[];
+    oauth2Connection?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
@@ -10124,6 +10127,7 @@ export type GetProjectResponse = {
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationCustomerBudget?: Schemas.ACLAction[];
     notificationStatementOfReasons?: Schemas.ACLAction[];
+    oauth2Connection?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
@@ -10766,6 +10770,7 @@ export type UpdateProjectResponse = {
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationCustomerBudget?: Schemas.ACLAction[];
     notificationStatementOfReasons?: Schemas.ACLAction[];
+    oauth2Connection?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
@@ -10965,6 +10970,8 @@ export type UpdateProjectRequestBody = {
       value: string;
       /**
        * An optional note explaining what the IP address or subnet is used for
+       *
+       * @maxLength 20
        */
       note?: string;
     }[];
