@@ -11102,6 +11102,18 @@ export type UpdateProjectRequestBody = {
    */
   serverlessFunctionZeroConfigFailover?: boolean;
   /**
+   * Deployments created before this absolute datetime have Skew Protection disabled. Value is in milliseconds since epoch to match \"createdAt\" fields.
+   *
+   * @minimum 0
+   */
+  skewProtectionBoundaryAt?: number;
+  /**
+   * Deployments created before this rolling window have Skew Protection disabled. Value is in seconds to match \"revalidate\" fields.
+   *
+   * @minimum 0
+   */
+  skewProtectionMaxAge?: number;
+  /**
    * Opts-out of the message prompting a CLI user to connect a Git repository in `vercel link`.
    *
    * @deprecated true
