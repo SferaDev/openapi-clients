@@ -1564,89 +1564,60 @@ export type GetDeploymentEventsError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetDeploymentEventsResponse = (
   | {
-      type: 'command';
       created: number;
-      payload: {
-        deploymentId: string;
-        text?: string;
-        id: string;
-        date: number;
-        serial: string;
+      date: number;
+      deploymentId: string;
+      id: string;
+      info: {
+        type: string;
+        name: string;
+        entrypoint?: string;
+        path?: string;
+        step?: string;
+        readyState?: string;
       };
-    }
-  | {
-      type: 'deployment-state';
-      created: number;
-      payload: {
-        deploymentId: string;
-        info: {
-          type: string;
-          name: string;
-          entrypoint?: string;
-          path?: string;
-          step?: string;
-        };
-        id: string;
-        date: number;
-        serial: string;
+      proxy?: {
+        timestamp: number;
+        method: string;
+        host: string;
+        path: string;
+        statusCode?: number;
+        userAgent: string[];
+        referer: string;
+        clientIp: string;
+        region: string;
+        scheme?: string;
+        responseByteSize?: number;
+        cacheId?: string;
+        pathType?: string;
+        vercelId?: string;
+        vercelCache?: 'MISS' | 'HIT' | 'STALE' | 'BYPASS' | 'PRERENDER' | 'REVALIDATED';
+        lambdaRegion?: string;
       };
-    }
-  | {
-      type: 'delimiter';
-      created: number;
-      payload: {
-        deploymentId: string;
-        info: {
-          type: string;
-          name: string;
-          entrypoint?: string;
-          path?: string;
-          step?: string;
-        };
-        id: string;
-        date: number;
-        serial: string;
-      };
-    }
-  | {
-      type: 'exit';
-      created: number;
-      payload: {
-        date: number;
-        text?: string;
-        id: string;
-        deploymentId: string;
-        created: number;
-        serial: string;
-      };
-    }
-  | {
-      type: 'middleware';
-      created: number;
-      payload: {
-        deploymentId: string;
-        info: {
-          type: string;
-          name: string;
-          entrypoint?: string;
-          path?: string;
-          step?: string;
-        };
-        text?: string;
-        id: string;
-        date: number;
-        serial: string;
-        requestId?: string;
-      };
-    }
-  | {
+      requestId?: string;
+      serial: string;
+      statusCode?: number;
+      text?: string;
       type:
-        | 'delimiter'
         | 'command'
         | 'stdout'
         | 'stderr'
         | 'exit'
         | 'deployment-state'
+        | 'delimiter'
+        | 'middleware'
+        | 'middleware-invocation'
+        | 'edge-function-invocation'
+        | 'fatal';
+    }
+  | {
+      type:
+        | 'command'
+        | 'stdout'
+        | 'stderr'
+        | 'exit'
+        | 'deployment-state'
+        | 'delimiter'
         | 'middleware'
         | 'middleware-invocation'
         | 'edge-function-invocation'
@@ -1654,130 +1625,41 @@ export type GetDeploymentEventsResponse = (
       created: number;
       payload: {
         deploymentId: string;
-        info: {
+        info?: {
           type: string;
           name: string;
           entrypoint?: string;
           path?: string;
           step?: string;
+          readyState?: string;
         };
         text?: string;
         id: string;
         date: number;
         serial: string;
+        created?: number;
         statusCode?: number;
         requestId?: string;
+        proxy?: {
+          timestamp: number;
+          method: string;
+          host: string;
+          path: string;
+          statusCode?: number;
+          userAgent: string[];
+          referer: string;
+          clientIp: string;
+          region: string;
+          scheme?: string;
+          responseByteSize?: number;
+          cacheId?: string;
+          pathType?: string;
+          vercelId?: string;
+          vercelCache?: 'MISS' | 'HIT' | 'STALE' | 'BYPASS' | 'PRERENDER' | 'REVALIDATED';
+          lambdaRegion?: string;
+        };
       };
     }
-  | (
-      | Record<string, any>
-      | {
-          type: 'command';
-          created: number;
-          payload: {
-            deploymentId: string;
-            text?: string;
-            id: string;
-            date: number;
-            serial: string;
-          };
-        }
-      | {
-          type: 'deployment-state';
-          created: number;
-          payload: {
-            deploymentId: string;
-            info: {
-              type: string;
-              name: string;
-              entrypoint?: string;
-              path?: string;
-              step?: string;
-            };
-            id: string;
-            date: number;
-            serial: string;
-          };
-        }
-      | {
-          type: 'delimiter';
-          created: number;
-          payload: {
-            deploymentId: string;
-            info: {
-              type: string;
-              name: string;
-              entrypoint?: string;
-              path?: string;
-              step?: string;
-            };
-            id: string;
-            date: number;
-            serial: string;
-          };
-        }
-      | {
-          type: 'exit';
-          created: number;
-          payload: {
-            date: number;
-            text?: string;
-            id: string;
-            deploymentId: string;
-            created: number;
-            serial: string;
-          };
-        }
-      | {
-          type: 'middleware';
-          created: number;
-          payload: {
-            deploymentId: string;
-            info: {
-              type: string;
-              name: string;
-              entrypoint?: string;
-              path?: string;
-              step?: string;
-            };
-            text?: string;
-            id: string;
-            date: number;
-            serial: string;
-            requestId?: string;
-          };
-        }
-      | {
-          type:
-            | 'delimiter'
-            | 'command'
-            | 'stdout'
-            | 'stderr'
-            | 'exit'
-            | 'deployment-state'
-            | 'middleware'
-            | 'middleware-invocation'
-            | 'edge-function-invocation'
-            | 'fatal';
-          created: number;
-          payload: {
-            deploymentId: string;
-            info: {
-              type: string;
-              name: string;
-              entrypoint?: string;
-              path?: string;
-              step?: string;
-            };
-            text?: string;
-            id: string;
-            date: number;
-            serial: string;
-            statusCode?: number;
-            requestId?: string;
-          };
-        }
-    )
 )[];
 
 export type GetDeploymentEventsVariables = {
@@ -1796,7 +1678,7 @@ export const getDeploymentEvents = (variables: GetDeploymentEventsVariables, sig
     {},
     GetDeploymentEventsQueryParams,
     GetDeploymentEventsPathParams
-  >({ url: '/v2/deployments/{idOrUrl}/events', method: 'get', ...variables, signal });
+  >({ url: '/v3/deployments/{idOrUrl}/events', method: 'get', ...variables, signal });
 
 export type GetDeploymentPathParams = {
   /**
