@@ -135,7 +135,7 @@ export const operationsByPath = {
   'PATCH /v1/deployments/{deploymentId}/checks/{checkId}': updateCheck,
   'POST /v1/deployments/{deploymentId}/checks/{checkId}/rerequest': rerequestCheck,
   'PATCH /v1/data-cache/projects/{projectId}': updateProjectDataCache,
-  'GET /v2/deployments/{idOrUrl}/events': getDeploymentEvents,
+  'GET /v3/deployments/{idOrUrl}/events': getDeploymentEvents,
   'GET /v13/deployments/{idOrUrl}': getDeployment,
   'POST /v13/deployments': createDeployment,
   'PATCH /v12/deployments/{id}/cancel': cancelDeployment,
