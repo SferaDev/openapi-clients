@@ -1,5 +1,15 @@
 # vercel-api-js
 
+## 0.6.4
+
+### Patch Changes
+
+- 1734501: Add new 'nodeVersion' field to CreateDeploymentRequestBody
+- 7253391: [BREAKING] Add new type 'integration-store-secret' to UpdateProjectDataCacheResponse, GetProjectsResponse, CreateProjectResponse, GetProjectResponse, UpdateProjectResponse, filterProjectEnvs, getProjectEnv, CreateProjectEnvResponse, removeProjectEnv, EditProjectEnvResponse
+- dc191cf: Add new fields skewProtectionBoundaryAt and skewProtectionMaxAge to UpdateProjectRequestBody
+- e096156: [BREAKING] Add new oauth2Connection field to multiple project-related API responses
+- 9d8632b: Change viewPreference order in activeDashboardViews type
+
 ## 0.6.3
 
 ### Patch Changes
