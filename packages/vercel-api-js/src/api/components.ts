@@ -1462,6 +1462,68 @@ export type UpdateProjectDataCacheResponse = {
     firewallEnabled?: boolean;
     firewallUpdatedAt?: number;
     attackModeActiveUntil?: number | null;
+    firewallConfigVersion?: number;
+    firewallRoutes?: {
+      src?:
+        | string
+        | {
+            re?: string;
+            eq?: string;
+            neq?: string;
+            inc?: string[];
+            ninc?: string[];
+            pre?: string;
+            suf?: string;
+            gt?: number;
+            gte?: number;
+            lt?: number;
+            lte?: number;
+          };
+      has?: {
+        type: 'host' | 'method' | 'header' | 'cookie' | 'query' | 'ip_address';
+        key?: string;
+        value:
+          | string
+          | {
+              re?: string;
+              eq?: string;
+              neq?: string;
+              inc?: string[];
+              ninc?: string[];
+              pre?: string;
+              suf?: string;
+              gt?: number;
+              gte?: number;
+              lt?: number;
+              lte?: number;
+            };
+      }[];
+      missing?: {
+        type: 'host' | 'method' | 'header' | 'cookie' | 'query' | 'ip_address';
+        key?: string;
+        value:
+          | string
+          | {
+              re?: string;
+              eq?: string;
+              neq?: string;
+              inc?: string[];
+              ninc?: string[];
+              pre?: string;
+              suf?: string;
+              gt?: number;
+              gte?: number;
+              lt?: number;
+              lte?: number;
+            };
+      }[];
+      dest?: string;
+      status?: number;
+      mitigate?: {
+        action: 'deny' | 'challenge' | 'log';
+        rule_id: string;
+      };
+    }[];
   };
 };
 
@@ -8733,6 +8795,68 @@ export type GetProjectsResponse = {
       firewallEnabled?: boolean;
       firewallUpdatedAt?: number;
       attackModeActiveUntil?: number | null;
+      firewallConfigVersion?: number;
+      firewallRoutes?: {
+        src?:
+          | string
+          | {
+              re?: string;
+              eq?: string;
+              neq?: string;
+              inc?: string[];
+              ninc?: string[];
+              pre?: string;
+              suf?: string;
+              gt?: number;
+              gte?: number;
+              lt?: number;
+              lte?: number;
+            };
+        has?: {
+          type: 'host' | 'method' | 'header' | 'cookie' | 'query' | 'ip_address';
+          key?: string;
+          value:
+            | string
+            | {
+                re?: string;
+                eq?: string;
+                neq?: string;
+                inc?: string[];
+                ninc?: string[];
+                pre?: string;
+                suf?: string;
+                gt?: number;
+                gte?: number;
+                lt?: number;
+                lte?: number;
+              };
+        }[];
+        missing?: {
+          type: 'host' | 'method' | 'header' | 'cookie' | 'query' | 'ip_address';
+          key?: string;
+          value:
+            | string
+            | {
+                re?: string;
+                eq?: string;
+                neq?: string;
+                inc?: string[];
+                ninc?: string[];
+                pre?: string;
+                suf?: string;
+                gt?: number;
+                gte?: number;
+                lt?: number;
+                lte?: number;
+              };
+        }[];
+        dest?: string;
+        status?: number;
+        mitigate?: {
+          action: 'deny' | 'challenge' | 'log';
+          rule_id: string;
+        };
+      }[];
     };
   }[];
   pagination: Schemas.Pagination;
@@ -9368,6 +9492,68 @@ export type CreateProjectResponse = {
     firewallEnabled?: boolean;
     firewallUpdatedAt?: number;
     attackModeActiveUntil?: number | null;
+    firewallConfigVersion?: number;
+    firewallRoutes?: {
+      src?:
+        | string
+        | {
+            re?: string;
+            eq?: string;
+            neq?: string;
+            inc?: string[];
+            ninc?: string[];
+            pre?: string;
+            suf?: string;
+            gt?: number;
+            gte?: number;
+            lt?: number;
+            lte?: number;
+          };
+      has?: {
+        type: 'host' | 'method' | 'header' | 'cookie' | 'query' | 'ip_address';
+        key?: string;
+        value:
+          | string
+          | {
+              re?: string;
+              eq?: string;
+              neq?: string;
+              inc?: string[];
+              ninc?: string[];
+              pre?: string;
+              suf?: string;
+              gt?: number;
+              gte?: number;
+              lt?: number;
+              lte?: number;
+            };
+      }[];
+      missing?: {
+        type: 'host' | 'method' | 'header' | 'cookie' | 'query' | 'ip_address';
+        key?: string;
+        value:
+          | string
+          | {
+              re?: string;
+              eq?: string;
+              neq?: string;
+              inc?: string[];
+              ninc?: string[];
+              pre?: string;
+              suf?: string;
+              gt?: number;
+              gte?: number;
+              lt?: number;
+              lte?: number;
+            };
+      }[];
+      dest?: string;
+      status?: number;
+      mitigate?: {
+        action: 'deny' | 'challenge' | 'log';
+        rule_id: string;
+      };
+    }[];
   };
 };
 
@@ -10161,6 +10347,68 @@ export type GetProjectResponse = {
     firewallEnabled?: boolean;
     firewallUpdatedAt?: number;
     attackModeActiveUntil?: number | null;
+    firewallConfigVersion?: number;
+    firewallRoutes?: {
+      src?:
+        | string
+        | {
+            re?: string;
+            eq?: string;
+            neq?: string;
+            inc?: string[];
+            ninc?: string[];
+            pre?: string;
+            suf?: string;
+            gt?: number;
+            gte?: number;
+            lt?: number;
+            lte?: number;
+          };
+      has?: {
+        type: 'host' | 'method' | 'header' | 'cookie' | 'query' | 'ip_address';
+        key?: string;
+        value:
+          | string
+          | {
+              re?: string;
+              eq?: string;
+              neq?: string;
+              inc?: string[];
+              ninc?: string[];
+              pre?: string;
+              suf?: string;
+              gt?: number;
+              gte?: number;
+              lt?: number;
+              lte?: number;
+            };
+      }[];
+      missing?: {
+        type: 'host' | 'method' | 'header' | 'cookie' | 'query' | 'ip_address';
+        key?: string;
+        value:
+          | string
+          | {
+              re?: string;
+              eq?: string;
+              neq?: string;
+              inc?: string[];
+              ninc?: string[];
+              pre?: string;
+              suf?: string;
+              gt?: number;
+              gte?: number;
+              lt?: number;
+              lte?: number;
+            };
+      }[];
+      dest?: string;
+      status?: number;
+      mitigate?: {
+        action: 'deny' | 'challenge' | 'log';
+        rule_id: string;
+      };
+    }[];
   };
 };
 
@@ -10804,6 +11052,68 @@ export type UpdateProjectResponse = {
     firewallEnabled?: boolean;
     firewallUpdatedAt?: number;
     attackModeActiveUntil?: number | null;
+    firewallConfigVersion?: number;
+    firewallRoutes?: {
+      src?:
+        | string
+        | {
+            re?: string;
+            eq?: string;
+            neq?: string;
+            inc?: string[];
+            ninc?: string[];
+            pre?: string;
+            suf?: string;
+            gt?: number;
+            gte?: number;
+            lt?: number;
+            lte?: number;
+          };
+      has?: {
+        type: 'host' | 'method' | 'header' | 'cookie' | 'query' | 'ip_address';
+        key?: string;
+        value:
+          | string
+          | {
+              re?: string;
+              eq?: string;
+              neq?: string;
+              inc?: string[];
+              ninc?: string[];
+              pre?: string;
+              suf?: string;
+              gt?: number;
+              gte?: number;
+              lt?: number;
+              lte?: number;
+            };
+      }[];
+      missing?: {
+        type: 'host' | 'method' | 'header' | 'cookie' | 'query' | 'ip_address';
+        key?: string;
+        value:
+          | string
+          | {
+              re?: string;
+              eq?: string;
+              neq?: string;
+              inc?: string[];
+              ninc?: string[];
+              pre?: string;
+              suf?: string;
+              gt?: number;
+              gte?: number;
+              lt?: number;
+              lte?: number;
+            };
+      }[];
+      dest?: string;
+      status?: number;
+      mitigate?: {
+        action: 'deny' | 'challenge' | 'log';
+        rule_id: string;
+      };
+    }[];
   };
 };
 
