@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.7.0
+
+### Minor Changes
+
+- 7d2d4b8: [BREAKING] Change endpoint URL for getting deployment events from v2 to v3
+
 ## 0.6.4
 
 ### Patch Changes
