@@ -6519,9 +6519,8 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          */
         deletedAt?: number | null;
         disabledReason?:
-          | 'log-drain-high-error-rate'
-          | 'log-drains-add-on-disabled-by-owner'
-          | 'account-plan-downgrade'
+          | 'disabled-by-owner'
+          | 'feature-not-available'
           | 'disabled-by-admin'
           | 'original-owner-left-the-team';
       }
@@ -6670,9 +6669,8 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          */
         deletedAt?: number | null;
         disabledReason?:
-          | 'log-drain-high-error-rate'
-          | 'log-drains-add-on-disabled-by-owner'
-          | 'account-plan-downgrade'
+          | 'disabled-by-owner'
+          | 'feature-not-available'
           | 'disabled-by-admin'
           | 'original-owner-left-the-team';
       }[],
@@ -6848,9 +6846,8 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          */
         deletedAt?: number | null;
         disabledReason?:
-          | 'log-drain-high-error-rate'
-          | 'log-drains-add-on-disabled-by-owner'
-          | 'account-plan-downgrade'
+          | 'disabled-by-owner'
+          | 'feature-not-available'
           | 'disabled-by-admin'
           | 'original-owner-left-the-team';
       }
@@ -6997,9 +6994,8 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          */
         deletedAt?: number | null;
         disabledReason?:
-          | 'log-drain-high-error-rate'
-          | 'log-drains-add-on-disabled-by-owner'
-          | 'account-plan-downgrade'
+          | 'disabled-by-owner'
+          | 'feature-not-available'
           | 'disabled-by-admin'
           | 'original-owner-left-the-team';
         canConfigureOpenTelemetry?: boolean;
@@ -7511,11 +7507,7 @@ export type GetConfigurableLogDrainResponse = {
   environments: ('production' | 'preview')[];
   status?: 'enabled' | 'disabled' | 'errored';
   disabledAt?: number;
-  disabledReason?:
-    | 'log-drain-high-error-rate'
-    | 'log-drains-add-on-disabled-by-owner'
-    | 'disabled-by-admin'
-    | 'account-plan-downgrade';
+  disabledReason?: 'disabled-by-owner' | 'feature-not-available' | 'disabled-by-admin';
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
@@ -7604,11 +7596,7 @@ export type GetAllLogDrainsResponse = {
   environments: ('production' | 'preview')[];
   status?: 'enabled' | 'disabled' | 'errored';
   disabledAt?: number;
-  disabledReason?:
-    | 'log-drain-high-error-rate'
-    | 'log-drains-add-on-disabled-by-owner'
-    | 'disabled-by-admin'
-    | 'account-plan-downgrade';
+  disabledReason?: 'disabled-by-owner' | 'feature-not-available' | 'disabled-by-admin';
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
@@ -7663,11 +7651,7 @@ export type CreateConfigurableLogDrainResponse = {
   environments: ('production' | 'preview')[];
   status?: 'enabled' | 'disabled' | 'errored';
   disabledAt?: number;
-  disabledReason?:
-    | 'log-drain-high-error-rate'
-    | 'log-drains-add-on-disabled-by-owner'
-    | 'disabled-by-admin'
-    | 'account-plan-downgrade';
+  disabledReason?: 'disabled-by-owner' | 'feature-not-available' | 'disabled-by-admin';
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
