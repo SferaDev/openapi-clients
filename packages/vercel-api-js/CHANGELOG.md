@@ -1,5 +1,12 @@
 # vercel-api-js
 
+## 0.7.1
+
+### Patch Changes
+
+- d90c29c: Refactor emailLogin function to support different response types
+- ea16d5f: [BREAKING] Update disabledReason enum values
+
 ## 0.7.0
 
 ### Minor Changes
