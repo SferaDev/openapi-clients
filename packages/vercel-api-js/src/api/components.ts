@@ -16796,21 +16796,6 @@ export const verifyToken = (variables: VerifyTokenVariables, signal?: AbortSigna
 
 export type EmailLoginError = Fetcher.ErrorWrapper<undefined>;
 
-export type EmailLoginResponse = {
-  /**
-   * The token used to verify the user accepted the login request
-   *
-   * @example T1dmvPu36nmyYisXAs7IRzcR
-   */
-  token: string;
-  /**
-   * The code the user is going to receive on the email. **Must** be displayed to the user so they can verify the request is the correct.
-   *
-   * @example Practical Saola
-   */
-  securityCode: string;
-};
-
 export type EmailLoginRequestBody = {
   /**
    * The user email.
@@ -16834,12 +16819,31 @@ export type EmailLoginVariables = {
  * Request a new login for a user to get a token. This will respond with a verification token and send an email to confirm the request. Once confirmed you can use the verification token to get an authentication token.
  */
 export const emailLogin = (variables: EmailLoginVariables, signal?: AbortSignal) =>
-  fetch<EmailLoginResponse, EmailLoginError, EmailLoginRequestBody, {}, {}, {}>({
-    url: '/registration',
-    method: 'post',
-    ...variables,
-    signal
-  });
+  fetch<
+    | {
+        token: string;
+        securityCode: string;
+      }
+    | {
+        /**
+         * The token used to verify the user accepted the login request
+         *
+         * @example T1dmvPu36nmyYisXAs7IRzcR
+         */
+        token: string;
+        /**
+         * The code the user is going to receive on the email. **Must** be displayed to the user so they can verify the request is the correct.
+         *
+         * @example Practical Saola
+         */
+        securityCode: string;
+      },
+    EmailLoginError,
+    EmailLoginRequestBody,
+    {},
+    {},
+    {}
+  >({ url: '/registration', method: 'post', ...variables, signal });
 
 export type DeleteDeploymentPathParams = {
   /**
