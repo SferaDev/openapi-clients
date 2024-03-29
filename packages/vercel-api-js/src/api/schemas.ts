@@ -380,6 +380,12 @@ export type AuthUser = {
       | 'edgeConfigWrite'
       | 'edgeFunctionExecutionUnits'
       | 'edgeMiddlewareInvocations'
+      | 'edgeRequest'
+      | 'edgeRequestAdditionalCpuDuration'
+      | 'fastDataTransfer'
+      | 'fastOriginTransfer'
+      | 'functionDuration'
+      | 'functionInvocation'
       | 'monitoringMetric'
       | 'postgresComputeTime'
       | 'postgresDatabase'
@@ -619,6 +625,13 @@ export type AuthUser = {
         maxQuantity?: number;
       };
       analyticsUsage?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -629,6 +642,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       artifacts?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -639,6 +659,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       bandwidth?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -649,6 +676,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       dataCacheRead?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -659,6 +693,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       dataCacheRevalidation?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -669,6 +710,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       dataCacheWrite?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -679,6 +727,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       edgeConfigRead?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -689,6 +744,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       edgeConfigWrite?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -699,6 +761,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       edgeFunctionExecutionUnits?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -709,6 +778,115 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       edgeMiddlewareInvocations?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      edgeRequest?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      edgeRequestAdditionalCpuDuration?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      fastDataTransfer?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      fastOriginTransfer?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      functionDuration?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      functionInvocation?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -719,6 +897,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       monitoringMetric?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -729,6 +914,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       postgresComputeTime?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -739,6 +931,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       postgresDatabase?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -749,6 +948,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       postgresDataStorage?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -759,6 +965,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       postgresDataTransfer?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -769,6 +982,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       postgresWrittenData?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -779,6 +999,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       serverlessFunctionExecution?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -789,6 +1016,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       sourceImages?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -799,6 +1033,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       storageRedisTotalBandwidthInBytes?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -809,6 +1050,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       storageRedisTotalCommands?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -819,6 +1067,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       storageRedisTotalDailyAvgStorageInBytes?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -829,6 +1084,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       storageRedisTotalDatabases?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
@@ -839,6 +1101,13 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       webAnalyticsEvent?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+          allocation: number;
+        };
         tier?: number;
         price: number;
         batch: number;
