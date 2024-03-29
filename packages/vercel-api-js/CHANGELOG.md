@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.7.2
+
+### Patch Changes
+
+- 3b348dc: Add new fields to AuthUser schema
+
 ## 0.7.1
 
 ### Patch Changes
