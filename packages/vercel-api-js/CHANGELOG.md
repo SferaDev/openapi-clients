@@ -1,8 +1,8 @@
 # vercel-api-js
 
-## 0.9.0
+## 0.8.1
 
-### Minor Changes
+### Patch Changes
 
 - 2819f3c: Add new endpoint to create an access group
 
