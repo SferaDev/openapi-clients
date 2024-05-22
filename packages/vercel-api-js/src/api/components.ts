@@ -7674,7 +7674,8 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
           | 'disabled-by-owner'
           | 'feature-not-available'
           | 'disabled-by-admin'
-          | 'original-owner-left-the-team';
+          | 'original-owner-left-the-team'
+          | 'account-plan-downgrade';
         /**
          * A timestamp that tells you when the configuration was migrated as part of the Northstar migration. In the future, if we allow integration configurations to be transferred between teams, this field should be cleared upon transfer.
          */
@@ -7834,7 +7835,8 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
           | 'disabled-by-owner'
           | 'feature-not-available'
           | 'disabled-by-admin'
-          | 'original-owner-left-the-team';
+          | 'original-owner-left-the-team'
+          | 'account-plan-downgrade';
         /**
          * A timestamp that tells you when the configuration was migrated as part of the Northstar migration. In the future, if we allow integration configurations to be transferred between teams, this field should be cleared upon transfer.
          */
@@ -8025,7 +8027,8 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
           | 'disabled-by-owner'
           | 'feature-not-available'
           | 'disabled-by-admin'
-          | 'original-owner-left-the-team';
+          | 'original-owner-left-the-team'
+          | 'account-plan-downgrade';
         /**
          * A timestamp that tells you when the configuration was migrated as part of the Northstar migration. In the future, if we allow integration configurations to be transferred between teams, this field should be cleared upon transfer.
          */
@@ -8183,7 +8186,8 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
           | 'disabled-by-owner'
           | 'feature-not-available'
           | 'disabled-by-admin'
-          | 'original-owner-left-the-team';
+          | 'original-owner-left-the-team'
+          | 'account-plan-downgrade';
         /**
          * A timestamp that tells you when the configuration was migrated as part of the Northstar migration. In the future, if we allow integration configurations to be transferred between teams, this field should be cleared upon transfer.
          */
@@ -8731,7 +8735,7 @@ export type GetConfigurableLogDrainResponse = {
   environments: ('production' | 'preview')[];
   status?: 'enabled' | 'disabled' | 'errored';
   disabledAt?: number;
-  disabledReason?: 'disabled-by-owner' | 'feature-not-available' | 'disabled-by-admin';
+  disabledReason?: 'disabled-by-owner' | 'feature-not-available' | 'account-plan-downgrade' | 'disabled-by-admin';
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
@@ -8830,7 +8834,7 @@ export type GetAllLogDrainsResponse = {
   environments: ('production' | 'preview')[];
   status?: 'enabled' | 'disabled' | 'errored';
   disabledAt?: number;
-  disabledReason?: 'disabled-by-owner' | 'feature-not-available' | 'disabled-by-admin';
+  disabledReason?: 'disabled-by-owner' | 'feature-not-available' | 'account-plan-downgrade' | 'disabled-by-admin';
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
@@ -8891,7 +8895,7 @@ export type CreateConfigurableLogDrainResponse = {
   environments: ('production' | 'preview')[];
   status?: 'enabled' | 'disabled' | 'errored';
   disabledAt?: number;
-  disabledReason?: 'disabled-by-owner' | 'feature-not-available' | 'disabled-by-admin';
+  disabledReason?: 'disabled-by-owner' | 'feature-not-available' | 'account-plan-downgrade' | 'disabled-by-admin';
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
