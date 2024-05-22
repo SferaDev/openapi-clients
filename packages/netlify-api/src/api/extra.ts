@@ -121,7 +121,16 @@ import {
   getDnsRecords,
   createDnsRecord,
   getIndividualDnsRecord,
-  deleteDnsRecord
+  deleteDnsRecord,
+  listSiteDevServers,
+  createSiteDevServer,
+  deleteSiteDevServers,
+  getSiteDevServer,
+  listSiteDevServerHooks,
+  createSiteDevServerHook,
+  getSiteDevServerHook,
+  updateSiteDevServerHook,
+  deleteSiteDevServerHook
 } from './components';
 
 export const operationsByPath = {
@@ -247,5 +256,14 @@ export const operationsByPath = {
   'GET /dns_zones/{zone_id}/dns_records': getDnsRecords,
   'POST /dns_zones/{zone_id}/dns_records': createDnsRecord,
   'GET /dns_zones/{zone_id}/dns_records/{dns_record_id}': getIndividualDnsRecord,
-  'DELETE /dns_zones/{zone_id}/dns_records/{dns_record_id}': deleteDnsRecord
+  'DELETE /dns_zones/{zone_id}/dns_records/{dns_record_id}': deleteDnsRecord,
+  'GET /sites/{site_id}/dev_servers': listSiteDevServers,
+  'POST /sites/{site_id}/dev_servers': createSiteDevServer,
+  'DELETE /sites/{site_id}/dev_servers': deleteSiteDevServers,
+  'GET /sites/{site_id}/dev_servers/{dev_server_id}': getSiteDevServer,
+  'GET /sites/{site_id}/dev_server_hooks': listSiteDevServerHooks,
+  'POST /sites/{site_id}/dev_server_hooks': createSiteDevServerHook,
+  'GET /sites/{site_id}/dev_server_hooks/{id}': getSiteDevServerHook,
+  'PUT /sites/{site_id}/dev_server_hooks/{id}': updateSiteDevServerHook,
+  'DELETE /sites/{site_id}/dev_server_hooks/{id}': deleteSiteDevServerHook
 };
