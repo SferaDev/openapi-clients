@@ -1,4 +1,11 @@
 import {
+  readAccessGroup,
+  updateAccessGroup,
+  deleteAccessGroup,
+  listAccessGroupMembers,
+  listAccessGroups,
+  createAccessGroup,
+  listAccessGroupProjects,
   recordEvents,
   status,
   uploadArtifact,
@@ -126,6 +133,13 @@ import {
 } from './components';
 
 export const operationsByPath = {
+  'GET /v1/access-groups/{idOrName}': readAccessGroup,
+  'POST /v1/access-groups/{idOrName}': updateAccessGroup,
+  'DELETE /v1/access-groups/{idOrName}': deleteAccessGroup,
+  'GET /v1/access-groups/{idOrName}/members': listAccessGroupMembers,
+  'GET /v1/access-groups': listAccessGroups,
+  'POST /v1/access-groups': createAccessGroup,
+  'GET /v1/access-groups/{idOrName}/projects': listAccessGroupProjects,
   'POST /v8/artifacts/events': recordEvents,
   'GET /v8/artifacts/status': status,
   'PUT /v8/artifacts/{hash}': uploadArtifact,
