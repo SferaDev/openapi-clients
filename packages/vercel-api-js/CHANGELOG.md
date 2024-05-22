@@ -1,5 +1,15 @@
 # vercel-api-js
 
+## 0.8.0
+
+### Minor Changes
+
+- e6e9dd3: Add new endpoints
+
+### Patch Changes
+
+- e6e9dd3: Update dependencies
+
 ## 0.7.2
 
 ### Patch Changes
