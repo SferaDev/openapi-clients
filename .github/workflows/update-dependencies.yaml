@@ -10,24 +10,24 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Read .nvmrc
         run: echo ::set-output name=NVMRC::$(cat .nvmrc)
         id: nvm
 
       - name: Install pnpm
-        uses: pnpm/action-setup@v2
+        uses: pnpm/action-setup@v4
         with:
           version: 8
 
       - name: Use Node.js ${{ steps.nvm.outputs.NVMRC }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ steps.nvm.outputs.NVMRC }}
           cache: 'pnpm'
 
       - name: Check for updates
-        uses: mathiasvr/command-output@v1
+        uses: mathiasvr/command-output@v2
         id: ncu
         with:
           run: npx -y npm-check-updates -u -t latest --deep --filterVersion "/^[^=]/"
@@ -38,7 +38,7 @@ jobs:
           git add .
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GIT_TOKEN }}
           commit-message: 'Update dependencies'
