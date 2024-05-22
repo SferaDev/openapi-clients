@@ -7,6 +7,780 @@ import type * as Fetcher from './fetcher';
 import { fetch, FetcherExtraProps } from './fetcher';
 import type * as Schemas from './schemas';
 
+export type ReadAccessGroupPathParams = {
+  idOrName: string;
+};
+
+export type ReadAccessGroupQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type ReadAccessGroupError = Fetcher.ErrorWrapper<undefined>;
+
+export type ReadAccessGroupResponse = {
+  isDsyncManaged: boolean;
+  /**
+   * The name of this access group.
+   *
+   * @example my-access-group
+   */
+  name: string;
+  /**
+   * Timestamp in milliseconds when the access group was created.
+   *
+   * @example 1588720733602
+   */
+  createdAt: string;
+  /**
+   * ID of the team that this access group belongs to.
+   *
+   * @example team_123a6c5209bc3778245d011443644c8d27dc2c50
+   */
+  teamId: string;
+  /**
+   * Timestamp in milliseconds when the access group was last updated.
+   *
+   * @example 1588720733602
+   */
+  updatedAt: string;
+  /**
+   * ID of the access group.
+   *
+   * @example ag_123a6c5209bc3778245d011443644c8d27dc2c50
+   */
+  accessGroupId: string;
+  /**
+   * Number of members in the access group.
+   *
+   * @example 5
+   */
+  membersCount: number;
+  /**
+   * Number of projects in the access group.
+   *
+   * @example 2
+   */
+  projectsCount: number;
+};
+
+export type ReadAccessGroupVariables = {
+  pathParams: ReadAccessGroupPathParams;
+  queryParams?: ReadAccessGroupQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Allows to read an access group
+ */
+export const readAccessGroup = (variables: ReadAccessGroupVariables, signal?: AbortSignal) =>
+  fetch<
+    ReadAccessGroupResponse,
+    ReadAccessGroupError,
+    undefined,
+    {},
+    ReadAccessGroupQueryParams,
+    ReadAccessGroupPathParams
+  >({ url: '/v1/access-groups/{idOrName}', method: 'get', ...variables, signal });
+
+export type UpdateAccessGroupPathParams = {
+  idOrName: string;
+};
+
+export type UpdateAccessGroupQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type UpdateAccessGroupError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateAccessGroupVariables = {
+  body?:
+    | {
+        /**
+         * The name of the access group
+         *
+         * @maxLength 50
+         * @pattern ^[A-z0-9_ -]+$
+         * @example My access group
+         */
+        name: string;
+        projects?: {
+          /**
+           * The ID of the project.
+           *
+           * @maxLength 256
+           * @example prj_ndlgr43fadlPyCtREAqxxdyFK
+           */
+          projectId: string;
+          /**
+           * The project role that will be added to this Access Group. \"null\" will remove this project level role.
+           *
+           * @example ADMIN
+           */
+          role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
+        }[];
+        /**
+         * List of members to add to the access group.
+         */
+        membersToAdd?: string[];
+        /**
+         * List of members to remove from the access group.
+         */
+        membersToRemove?: string[];
+      }
+    | {
+        /**
+         * The name of the access group
+         *
+         * @maxLength 50
+         * @pattern ^[A-z0-9_ -]+$
+         * @example My access group
+         */
+        name?: string;
+        projects: {
+          /**
+           * The ID of the project.
+           *
+           * @maxLength 256
+           * @example prj_ndlgr43fadlPyCtREAqxxdyFK
+           */
+          projectId: string;
+          /**
+           * The project role that will be added to this Access Group. \"null\" will remove this project level role.
+           *
+           * @example ADMIN
+           */
+          role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
+        }[];
+        /**
+         * List of members to add to the access group.
+         */
+        membersToAdd?: string[];
+        /**
+         * List of members to remove from the access group.
+         */
+        membersToRemove?: string[];
+      }
+    | {
+        /**
+         * The name of the access group
+         *
+         * @maxLength 50
+         * @pattern ^[A-z0-9_ -]+$
+         * @example My access group
+         */
+        name?: string;
+        projects?: {
+          /**
+           * The ID of the project.
+           *
+           * @maxLength 256
+           * @example prj_ndlgr43fadlPyCtREAqxxdyFK
+           */
+          projectId: string;
+          /**
+           * The project role that will be added to this Access Group. \"null\" will remove this project level role.
+           *
+           * @example ADMIN
+           */
+          role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
+        }[];
+        /**
+         * List of members to add to the access group.
+         */
+        membersToAdd: string[];
+        /**
+         * List of members to remove from the access group.
+         */
+        membersToRemove?: string[];
+      }
+    | {
+        /**
+         * The name of the access group
+         *
+         * @maxLength 50
+         * @pattern ^[A-z0-9_ -]+$
+         * @example My access group
+         */
+        name?: string;
+        projects?: {
+          /**
+           * The ID of the project.
+           *
+           * @maxLength 256
+           * @example prj_ndlgr43fadlPyCtREAqxxdyFK
+           */
+          projectId: string;
+          /**
+           * The project role that will be added to this Access Group. \"null\" will remove this project level role.
+           *
+           * @example ADMIN
+           */
+          role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
+        }[];
+        /**
+         * List of members to add to the access group.
+         */
+        membersToAdd?: string[];
+        /**
+         * List of members to remove from the access group.
+         */
+        membersToRemove: string[];
+      };
+  pathParams: UpdateAccessGroupPathParams;
+  queryParams?: UpdateAccessGroupQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Allows to update an access group metadata
+ */
+export const updateAccessGroup = (variables: UpdateAccessGroupVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.AccessGroup,
+    UpdateAccessGroupError,
+    | {
+        /**
+         * The name of the access group
+         *
+         * @maxLength 50
+         * @pattern ^[A-z0-9_ -]+$
+         * @example My access group
+         */
+        name: string;
+        projects?: {
+          /**
+           * The ID of the project.
+           *
+           * @maxLength 256
+           * @example prj_ndlgr43fadlPyCtREAqxxdyFK
+           */
+          projectId: string;
+          /**
+           * The project role that will be added to this Access Group. \"null\" will remove this project level role.
+           *
+           * @example ADMIN
+           */
+          role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
+        }[];
+        /**
+         * List of members to add to the access group.
+         */
+        membersToAdd?: string[];
+        /**
+         * List of members to remove from the access group.
+         */
+        membersToRemove?: string[];
+      }
+    | {
+        /**
+         * The name of the access group
+         *
+         * @maxLength 50
+         * @pattern ^[A-z0-9_ -]+$
+         * @example My access group
+         */
+        name?: string;
+        projects: {
+          /**
+           * The ID of the project.
+           *
+           * @maxLength 256
+           * @example prj_ndlgr43fadlPyCtREAqxxdyFK
+           */
+          projectId: string;
+          /**
+           * The project role that will be added to this Access Group. \"null\" will remove this project level role.
+           *
+           * @example ADMIN
+           */
+          role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
+        }[];
+        /**
+         * List of members to add to the access group.
+         */
+        membersToAdd?: string[];
+        /**
+         * List of members to remove from the access group.
+         */
+        membersToRemove?: string[];
+      }
+    | {
+        /**
+         * The name of the access group
+         *
+         * @maxLength 50
+         * @pattern ^[A-z0-9_ -]+$
+         * @example My access group
+         */
+        name?: string;
+        projects?: {
+          /**
+           * The ID of the project.
+           *
+           * @maxLength 256
+           * @example prj_ndlgr43fadlPyCtREAqxxdyFK
+           */
+          projectId: string;
+          /**
+           * The project role that will be added to this Access Group. \"null\" will remove this project level role.
+           *
+           * @example ADMIN
+           */
+          role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
+        }[];
+        /**
+         * List of members to add to the access group.
+         */
+        membersToAdd: string[];
+        /**
+         * List of members to remove from the access group.
+         */
+        membersToRemove?: string[];
+      }
+    | {
+        /**
+         * The name of the access group
+         *
+         * @maxLength 50
+         * @pattern ^[A-z0-9_ -]+$
+         * @example My access group
+         */
+        name?: string;
+        projects?: {
+          /**
+           * The ID of the project.
+           *
+           * @maxLength 256
+           * @example prj_ndlgr43fadlPyCtREAqxxdyFK
+           */
+          projectId: string;
+          /**
+           * The project role that will be added to this Access Group. \"null\" will remove this project level role.
+           *
+           * @example ADMIN
+           */
+          role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
+        }[];
+        /**
+         * List of members to add to the access group.
+         */
+        membersToAdd?: string[];
+        /**
+         * List of members to remove from the access group.
+         */
+        membersToRemove: string[];
+      },
+    {},
+    UpdateAccessGroupQueryParams,
+    UpdateAccessGroupPathParams
+  >({ url: '/v1/access-groups/{idOrName}', method: 'post', ...variables, signal });
+
+export type DeleteAccessGroupPathParams = {
+  idOrName: string;
+};
+
+export type DeleteAccessGroupQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type DeleteAccessGroupError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteAccessGroupVariables = {
+  pathParams: DeleteAccessGroupPathParams;
+  queryParams?: DeleteAccessGroupQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Allows to delete an access group
+ */
+export const deleteAccessGroup = (variables: DeleteAccessGroupVariables, signal?: AbortSignal) =>
+  fetch<undefined, DeleteAccessGroupError, undefined, {}, DeleteAccessGroupQueryParams, DeleteAccessGroupPathParams>({
+    url: '/v1/access-groups/{idOrName}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type ListAccessGroupMembersPathParams = {
+  /**
+   * The ID or name of the Access Group.
+   *
+   * @example ag_pavWOn1iLObbXLRiwVvzmPrTWyTf
+   */
+  idOrName: string;
+};
+
+export type ListAccessGroupMembersQueryParams = {
+  /**
+   * Limit how many access group members should be returned.
+   *
+   * @example 20
+   * @minimum 1
+   * @maximum 100
+   */
+  limit?: number;
+  /**
+   * Continuation cursor to retrieve the next page of results.
+   */
+  next?: string;
+  /**
+   * Search project members by their name, username, and email.
+   */
+  search?: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type ListAccessGroupMembersError = Fetcher.ErrorWrapper<undefined>;
+
+export type ListAccessGroupMembersResponse = {
+  members: {
+    avatar?: string;
+    email: string;
+    uid: string;
+    username: string;
+    name?: string;
+    createdAt?: string;
+    teamRole: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
+  }[];
+  pagination: {
+    count: number;
+    next: string | null;
+  };
+};
+
+export type ListAccessGroupMembersVariables = {
+  pathParams: ListAccessGroupMembersPathParams;
+  queryParams?: ListAccessGroupMembersQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * List members of an access group
+ */
+export const listAccessGroupMembers = (variables: ListAccessGroupMembersVariables, signal?: AbortSignal) =>
+  fetch<
+    ListAccessGroupMembersResponse,
+    ListAccessGroupMembersError,
+    undefined,
+    {},
+    ListAccessGroupMembersQueryParams,
+    ListAccessGroupMembersPathParams
+  >({ url: '/v1/access-groups/{idOrName}/members', method: 'get', ...variables, signal });
+
+export type ListAccessGroupsQueryParams = {
+  /**
+   * Filter access groups by project.
+   *
+   * @example prj_pavWOn1iLObbx3RowVvzmPrTWyTf
+   */
+  projectId?: string;
+  /**
+   * Search for access groups by name.
+   *
+   * @example example
+   */
+  search?: string;
+  /**
+   * Number of members to include in the response.
+   *
+   * @example 20
+   * @minimum 1
+   * @maximum 100
+   */
+  membersLimit?: number;
+  /**
+   * Number of projects to include in the response.
+   *
+   * @example 20
+   * @minimum 1
+   * @maximum 100
+   */
+  projectsLimit?: number;
+  /**
+   * Limit how many access group should be returned.
+   *
+   * @example 20
+   * @minimum 1
+   * @maximum 100
+   */
+  limit?: number;
+  /**
+   * Continuation cursor to retrieve the next page of results.
+   */
+  next?: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type ListAccessGroupsError = Fetcher.ErrorWrapper<undefined>;
+
+export type ListAccessGroupsVariables = {
+  queryParams?: ListAccessGroupsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * List access groups
+ */
+export const listAccessGroups = (variables: ListAccessGroupsVariables, signal?: AbortSignal) =>
+  fetch<
+    | Record<string, any>
+    | {
+        accessGroups: {
+          members?: string[];
+          projects?: string[];
+          isDsyncManaged: boolean;
+          /**
+           * The name of this access group.
+           *
+           * @example my-access-group
+           */
+          name: string;
+          /**
+           * Timestamp in milliseconds when the access group was created.
+           *
+           * @example 1588720733602
+           */
+          createdAt: string;
+          /**
+           * ID of the team that this access group belongs to.
+           *
+           * @example team_123a6c5209bc3778245d011443644c8d27dc2c50
+           */
+          teamId: string;
+          /**
+           * Timestamp in milliseconds when the access group was last updated.
+           *
+           * @example 1588720733602
+           */
+          updatedAt: string;
+          /**
+           * ID of the access group.
+           *
+           * @example ag_123a6c5209bc3778245d011443644c8d27dc2c50
+           */
+          accessGroupId: string;
+          /**
+           * Number of members in the access group.
+           *
+           * @example 5
+           */
+          membersCount: number;
+          /**
+           * Number of projects in the access group.
+           *
+           * @example 2
+           */
+          projectsCount: number;
+        }[];
+        pagination: {
+          count: number;
+          next: string | null;
+        };
+      },
+    ListAccessGroupsError,
+    undefined,
+    {},
+    ListAccessGroupsQueryParams,
+    {}
+  >({ url: '/v1/access-groups', method: 'get', ...variables, signal });
+
+export type CreateAccessGroupQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type CreateAccessGroupError = Fetcher.ErrorWrapper<undefined>;
+
+export type CreateAccessGroupResponse = {
+  membersCount: number;
+  projectsCount: number;
+  /**
+   * The name of this access group.
+   *
+   * @example my-access-group
+   */
+  name: string;
+  /**
+   * Timestamp in milliseconds when the access group was created.
+   *
+   * @example 1588720733602
+   */
+  createdAt: string;
+  /**
+   * ID of the team that this access group belongs to.
+   *
+   * @example team_123a6c5209bc3778245d011443644c8d27dc2c50
+   */
+  teamId: string;
+  /**
+   * Timestamp in milliseconds when the access group was last updated.
+   *
+   * @example 1588720733602
+   */
+  updatedAt: string;
+  /**
+   * ID of the access group.
+   *
+   * @example ag_123a6c5209bc3778245d011443644c8d27dc2c50
+   */
+  accessGroupId: string;
+};
+
+export type CreateAccessGroupRequestBody = {
+  /**
+   * The name of the access group
+   *
+   * @maxLength 50
+   * @pattern ^[A-z0-9_ -]+$
+   * @example My access group
+   */
+  name: string;
+  projects?: {
+    /**
+     * The ID of the project.
+     *
+     * @maxLength 256
+     * @example prj_ndlgr43fadlPyCtREAqxxdyFK
+     */
+    projectId: string;
+    /**
+     * The project role that will be added to this Access Group. \"null\" will remove this project level role.
+     *
+     * @example ADMIN
+     */
+    role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | null;
+  }[];
+  /**
+   * List of members to add to the access group.
+   */
+  membersToAdd?: string[];
+};
+
+export type CreateAccessGroupVariables = {
+  body: CreateAccessGroupRequestBody;
+  queryParams?: CreateAccessGroupQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Allows to create an access group
+ */
+export const createAccessGroup = (variables: CreateAccessGroupVariables, signal?: AbortSignal) =>
+  fetch<
+    CreateAccessGroupResponse,
+    CreateAccessGroupError,
+    CreateAccessGroupRequestBody,
+    {},
+    CreateAccessGroupQueryParams,
+    {}
+  >({ url: '/v1/access-groups', method: 'post', ...variables, signal });
+
+export type ListAccessGroupProjectsPathParams = {
+  /**
+   * The ID or name of the Access Group.
+   *
+   * @example ag_pavWOn1iLObbXLRiwVvzmPrTWyTf
+   */
+  idOrName: string;
+};
+
+export type ListAccessGroupProjectsQueryParams = {
+  /**
+   * Limit how many access group projects should be returned.
+   *
+   * @example 20
+   * @minimum 1
+   * @maximum 100
+   */
+  limit?: number;
+  /**
+   * Continuation cursor to retrieve the next page of results.
+   */
+  next?: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type ListAccessGroupProjectsError = Fetcher.ErrorWrapper<undefined>;
+
+export type ListAccessGroupProjectsResponse = {
+  projects: {
+    projectId: string;
+    role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+    createdAt: string;
+    updatedAt: string;
+    project: {
+      name?: string;
+      framework?: string | null;
+      latestDeploymentId?: string;
+    };
+  }[];
+  pagination: {
+    count: number;
+    next: string | null;
+  };
+};
+
+export type ListAccessGroupProjectsVariables = {
+  pathParams: ListAccessGroupProjectsPathParams;
+  queryParams?: ListAccessGroupProjectsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * List projects of an access group
+ */
+export const listAccessGroupProjects = (variables: ListAccessGroupProjectsVariables, signal?: AbortSignal) =>
+  fetch<
+    ListAccessGroupProjectsResponse,
+    ListAccessGroupProjectsError,
+    undefined,
+    {},
+    ListAccessGroupProjectsQueryParams,
+    ListAccessGroupProjectsPathParams
+  >({ url: '/v1/access-groups/{idOrName}/projects', method: 'get', ...variables, signal });
+
 export type RecordEventsQueryParams = {
   /**
    * The Team identifier to perform the request on behalf of.
@@ -18902,6 +19676,15 @@ export const deleteSecret = (variables: DeleteSecretVariables, signal?: AbortSig
   });
 
 export const operationsByTag = {
+  accessGroups: {
+    readAccessGroup,
+    updateAccessGroup,
+    deleteAccessGroup,
+    listAccessGroupMembers,
+    listAccessGroups,
+    createAccessGroup,
+    listAccessGroupProjects
+  },
   artifacts: { recordEvents, status, uploadArtifact, downloadArtifact, artifactQuery },
   checks: { createCheck, getAllChecks, getCheck, updateCheck, rerequestCheck },
   projects: {
