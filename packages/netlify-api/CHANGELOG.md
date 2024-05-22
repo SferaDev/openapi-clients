@@ -1,5 +1,11 @@
 # netlify-api
 
+## 0.4.0
+
+### Minor Changes
+
+- 213a4c0: Add new endpoint to list site dev servers
+
 ## 0.3.2
 
 ### Patch Changes
