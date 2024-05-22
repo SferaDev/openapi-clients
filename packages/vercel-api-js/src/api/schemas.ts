@@ -369,10 +369,15 @@ export type AuthUser = {
       | 'FAIR_USE_LIMITS_EXCEEDED'
       | 'BLOCKED_FOR_PLATFORM_ABUSE';
     blockedDueToOverageType?:
-      | 'blobStores'
       | 'analyticsUsage'
       | 'artifacts'
       | 'bandwidth'
+      | 'blobStores'
+      | 'blobTotalAdvancedRequests'
+      | 'blobTotalAvgSizeInBytes'
+      | 'blobTotalGetResponseObjectSizeInBytes'
+      | 'blobTotalSimpleRequests'
+      | 'buildMinute'
       | 'dataCacheRead'
       | 'dataCacheRevalidation'
       | 'dataCacheWrite'
@@ -386,11 +391,12 @@ export type AuthUser = {
       | 'fastOriginTransfer'
       | 'functionDuration'
       | 'functionInvocation'
+      | 'logDrainsVolume'
       | 'monitoringMetric'
       | 'postgresComputeTime'
-      | 'postgresDatabase'
       | 'postgresDataStorage'
       | 'postgresDataTransfer'
+      | 'postgresDatabase'
       | 'postgresWrittenData'
       | 'serverlessFunctionExecution'
       | 'sourceImages'
@@ -398,11 +404,9 @@ export type AuthUser = {
       | 'storageRedisTotalCommands'
       | 'storageRedisTotalDailyAvgStorageInBytes'
       | 'storageRedisTotalDatabases'
-      | 'webAnalyticsEvent'
-      | 'blobTotalSimpleRequests'
-      | 'blobTotalAdvancedRequests'
-      | 'blobTotalAvgSizeInBytes'
-      | 'blobTotalGetResponseObjectSizeInBytes';
+      | 'wafOwaspExcessBytes'
+      | 'wafOwaspRequests'
+      | 'webAnalyticsEvent';
   } | null;
   /**
    * An object containing billing infomation associated with the User account.
@@ -630,7 +634,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -647,7 +650,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -664,7 +666,102 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      blobStores?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      blobTotalAdvancedRequests?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      blobTotalAvgSizeInBytes?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      blobTotalGetResponseObjectSizeInBytes?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      blobTotalSimpleRequests?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      buildMinute?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
         };
         tier?: number;
         price: number;
@@ -681,7 +778,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -698,7 +794,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -715,7 +810,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -732,7 +826,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -749,7 +842,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -766,7 +858,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -783,7 +874,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -800,7 +890,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -817,7 +906,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -834,7 +922,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -851,7 +938,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -868,7 +954,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -885,7 +970,22 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      logDrainsVolume?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
         };
         tier?: number;
         price: number;
@@ -902,7 +1002,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -919,24 +1018,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      postgresDatabase?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -953,7 +1034,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -970,7 +1050,22 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      postgresDatabase?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
         };
         tier?: number;
         price: number;
@@ -987,7 +1082,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -1004,7 +1098,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -1021,7 +1114,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -1038,7 +1130,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -1055,7 +1146,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -1072,7 +1162,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -1089,7 +1178,38 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      wafOwaspExcessBytes?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      wafOwaspRequests?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
         };
         tier?: number;
         price: number;
@@ -1106,7 +1226,6 @@ export type AuthUser = {
           dimensionPrices: {
             [key: string]: string;
           };
-          allocation: number;
         };
         tier?: number;
         price: number;
@@ -1172,6 +1291,10 @@ export type AuthUser = {
     /**
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
+    blobStores?: number;
+    /**
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+     */
     nodeType?: string;
     /**
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
@@ -1217,10 +1340,6 @@ export type AuthUser = {
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
     postgresDatabases?: number;
-    /**
-     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
-     */
-    blobStores?: number;
     /**
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
@@ -1305,17 +1424,35 @@ export type AuthUser = {
       isCurrentlyBlocked: boolean;
     };
   };
-  /**
-   * Northstar migration specific data
-   */
-  northstar?: {
-    migration?: {
-      teamId?: string;
-      /**
-       * - `will-migrate`: Show dashboard toast saying "your account will be migrated soon" - `migrating`: Show dashboard toast saying "your account is currently migrating to `teamId`" - `completed`: Show dashboard toast saying "your account has been migrated to `teamId`" - `failed`: Show dashboard toast saying "your account migration has failed `teamId`"
-       */
-      status: 'migrating' | 'completed' | 'failed' | 'will-migrate';
-    };
+  northstarMigration?: {
+    /**
+     * The ID of the team we created for this user.
+     */
+    teamId: string;
+    /**
+     * The number of projects migrated for this user.
+     */
+    projects: number;
+    /**
+     * The number of stores migrated for this user.
+     */
+    stores: number;
+    /**
+     * The number of integration configurations migrated for this user.
+     */
+    integrationConfigurations: number;
+    /**
+     * The number of integration clients migrated for this user.
+     */
+    integrationClients: number;
+    /**
+     * The migration start time timestamp for this user.
+     */
+    startTime: number;
+    /**
+     * The migration end time timestamp for this user.
+     */
+    endTime: number;
   };
   /**
    * The User's unique identifier.
