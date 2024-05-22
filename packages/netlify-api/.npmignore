@@ -1,4 +1,4 @@
 /node_modules
-/rollup.config.js
+/tsup.config.ts
 /src
 /openapi-codegen.config.ts

@@ -22,46 +22,12 @@ export default defineConfig({
         update: (operation) => ({ ...operation, operationId: 'searchRepo' })
       });
 
-      // Rewrite invalid enum values
-      context.openAPIDocument = updateStrings({
+      // Rename invalid component name for listPromoteAliases
+      context.openAPIDocument = updateMethod({
         openAPIDocument: context.openAPIDocument,
-        updater: (_key, value) => {
-          if (value.endsWith('EnvTarget.Productio')) return 'production';
-          if (value.endsWith('EnvTarget.Previe')) return 'preview';
-          if (value.endsWith('EnvTarget.Developmen')) return 'development';
-          if (value.endsWith("WebhookName.DomainCreate'")) return 'domain.created';
-          if (value.endsWith("WebhookName.DeploymentCreate'")) return 'deployment.created';
-          if (value.endsWith("WebhookName.DeploymentErro'")) return 'deployment.error';
-          if (value.endsWith("WebhookName.DeploymentCancele'")) return 'deployment.canceled';
-          if (value.endsWith("WebhookName.DeploymentSucceede'")) return 'deployment.succeeded';
-          if (value.endsWith("WebhookName.DeploymentRead'")) return 'deployment.ready';
-          if (value.endsWith("WebhookName.DeploymentCheckRerequeste'")) return 'deployment.check-rerequested';
-          if (value.endsWith("WebhookName.IntegrationConfigurationPermissionUpgrade'"))
-            return 'integration-configuration.permission-upgraded';
-          if (value.endsWith("WebhookName.IntegrationConfigurationRemove'")) return 'integration-configuration.removed';
-          if (value.endsWith("WebhookName.IntegrationConfigurationScopeChangeConfirme'"))
-            return 'integration-configuration.scope-change-confirmed';
-          if (value.endsWith("WebhookName.ProjectCreate'")) return 'project.created';
-          if (value.endsWith("WebhookName.ProjectRemove'")) return 'project.removed';
-          if (value.endsWith("WebhookName.LegacyDeploymentChecksComplete'")) return 'deployment-checks-completed';
-          if (value.endsWith("WebhookName.LegacyDeploymentRead'")) return 'deployment-ready';
-          if (value.endsWith("WebhookName.LegacyDeploymentPrepare'")) return 'deployment-prepared';
-          if (value.endsWith("WebhookName.LegacyDeploymentErro'")) return 'deployment-error';
-          if (value.endsWith("WebhookName.LegacyDeploymentCheckRerequeste'")) return 'deployment-check-rerequested';
-          if (value.endsWith("WebhookName.LegacyDeploymentCancele'")) return 'deployment-canceled';
-          if (value.endsWith("WebhookName.LegacyProjectCreate'")) return 'project-created';
-          if (value.endsWith("WebhookName.LegacyProjectRemove'")) return 'project-removed';
-          if (value.endsWith("WebhookName.LegacyDomainCreate'")) return 'domain-created';
-          if (value.endsWith("WebhookName.LegacyDeploymen'")) return 'deployment';
-          if (value.endsWith("WebhookName.LegacyIntegrationConfigurationPermissionUpdate'"))
-            return 'integration-configuration-permission-updated';
-          if (value.endsWith("WebhookName.LegacyIntegrationConfigurationRemove'"))
-            return 'integration-configuration-removed';
-          if (value.endsWith("WebhookName.LegacyIntegrationConfigurationScopeChangeConfirme'"))
-            return 'integration-configuration-scope-change-confirmed';
-
-          return null;
-        }
+        path: '/v1/projects/{projectId}/promote/aliases',
+        method: 'get',
+        update: (operation) => ({ ...operation, operationId: 'listPromoteAliases' })
       });
 
       const { schemasFiles } = await generateSchemaTypes(context, { filenamePrefix });
