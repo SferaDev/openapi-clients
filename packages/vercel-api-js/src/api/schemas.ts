@@ -1331,6 +1331,7 @@ export type AuthUser = {
     status?: 'active' | 'trialing' | 'overdue' | 'expired' | 'canceled';
     pricingExperiment?: 'august-2022';
     orbMigrationScheduledAt?: number | null;
+    forceOrbMigration?: boolean | null;
   } | null;
   /**
    * An object containing infomation related to the amount of platform resources may be allocated to the User account.
