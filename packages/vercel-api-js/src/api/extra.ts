@@ -155,7 +155,7 @@ export const operationsByPath = {
   'GET /v13/deployments/{idOrUrl}': getDeployment,
   'POST /v13/deployments': createDeployment,
   'PATCH /v12/deployments/{id}/cancel': cancelDeployment,
-  'POST /v4/domains/buy': buyDomain,
+  'POST /v5/domains/buy': buyDomain,
   'GET /v4/domains/price': checkDomainPrice,
   'GET /v4/domains/{domain}/records': getRecords,
   'POST /v2/domains/{domain}/records': createRecord,
