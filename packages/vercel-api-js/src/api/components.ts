@@ -12723,9 +12723,15 @@ export type UpdateProjectRequestBody = {
    * Specify a list of paths that should not be protected by Deployment Protection to enable Cors preflight requests
    */
   optionsAllowlist?: {
+    /**
+     * @minItems 1
+     * @maxItems 5
+     */
     paths: {
       /**
        * The regex path that should not be protected by Deployment Protection
+       *
+       * @pattern ^/.*
        */
       value: string;
     }[];
