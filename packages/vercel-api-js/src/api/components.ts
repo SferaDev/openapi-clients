@@ -4848,6 +4848,66 @@ export type BuyDomainRequestBody = {
    * @example true
    */
   renew?: boolean;
+  /**
+   * The country of the domain registrant
+   *
+   * @example US
+   */
+  country: string;
+  /**
+   * The company name of the domain registrant
+   *
+   * @example Acme Inc.
+   */
+  orgName?: string;
+  /**
+   * The first name of the domain registrant
+   *
+   * @example Jane
+   */
+  firstName: string;
+  /**
+   * The last name of the domain registrant
+   *
+   * @example Doe
+   */
+  lastName: string;
+  /**
+   * The street address of the domain registrant
+   *
+   * @example 340 S Lemon Ave Suite 4133
+   */
+  address1: string;
+  /**
+   * The city of the domain registrant
+   *
+   * @example San Francisco
+   */
+  city: string;
+  /**
+   * The state of the domain registrant
+   *
+   * @example CA
+   */
+  state: string;
+  /**
+   * The postal code of the domain registrant
+   *
+   * @example 91789
+   */
+  postalCode: string;
+  /**
+   * The phone number of the domain registrant
+   *
+   * @example +1.4158551452
+   */
+  phone: string;
+  /**
+   * The email of the domain registrant
+   *
+   * @example jane.doe@someplace.com
+   */
+  email: string;
 };
 
 export type BuyDomainVariables = {
@@ -4860,7 +4920,7 @@ export type BuyDomainVariables = {
  */
 export const buyDomain = (variables: BuyDomainVariables, signal?: AbortSignal) =>
   fetch<BuyDomainResponse, BuyDomainError, BuyDomainRequestBody, {}, BuyDomainQueryParams, {}>({
-    url: '/v4/domains/buy',
+    url: '/v5/domains/buy',
     method: 'post',
     ...variables,
     signal
