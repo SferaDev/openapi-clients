@@ -2990,6 +2990,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         regions: string[];
         source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo';
         target?: 'staging' | 'production' | null;
+        undeletedAt?: number;
         url: string;
         oidcTokenClaims?: {
           [key: string]: string;
@@ -3424,6 +3425,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         regions: string[];
         source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo';
         target?: 'staging' | 'production' | null;
+        undeletedAt?: number;
         url: string;
         oidcTokenClaims?: {
           [key: string]: string;
@@ -3826,6 +3828,7 @@ export type CreateDeploymentResponse = {
    * Since June 2023 Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - PROMOTED: has seen production traffic
    */
   readySubstate?: 'STAGED' | 'PROMOTED';
+  undeletedAt?: number;
   url: string;
   oidcTokenClaims?: {
     [key: string]: string;
@@ -4644,6 +4647,7 @@ export type CancelDeploymentResponse = {
   source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo';
   target?: 'production' | 'staging' | null;
   type: 'LAMBDAS';
+  undeletedAt?: number;
   url: string;
   version: 2;
   oidcTokenClaims?: {
@@ -18871,6 +18875,12 @@ export type GetDeploymentsResponse = {
      * @example 1609492210000
      */
     deleted?: number;
+    /**
+     * Timestamp of when the deployment was undeleted.
+     *
+     * @example 1609492210000
+     */
+    undeleted?: number;
     /**
      * The source of the deployment.
      *
