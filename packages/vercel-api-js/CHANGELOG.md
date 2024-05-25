@@ -1,5 +1,15 @@
 # vercel-api-js
 
+## 0.8.2
+
+### Patch Changes
+
+- fe996c7: Add 'account-plan-downgrade' to disabledReason enum
+- 5124d55: [BREAKING] Update domain buy endpoint version from v4 to v5
+- b8e920d: Add undeletedAt field to deployment response
+- 7b2a03e: Add forceOrbMigration field to CreateTeamResponse and AuthUser types
+- ed056ad: Add validation for minimum and maximum items in optionsAllowlist paths
+
 ## 0.8.1
 
 ### Patch Changes
