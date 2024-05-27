@@ -105,140 +105,42 @@ export type UpdateAccessGroupQueryParams = {
 
 export type UpdateAccessGroupError = Fetcher.ErrorWrapper<undefined>;
 
+export type UpdateAccessGroupRequestBody = {
+  /**
+   * The name of the access group
+   *
+   * @maxLength 50
+   * @pattern ^[A-z0-9_ -]+$
+   * @example My access group
+   */
+  name?: string;
+  projects?: {
+    /**
+     * The ID of the project.
+     *
+     * @maxLength 256
+     * @example prj_ndlgr43fadlPyCtREAqxxdyFK
+     */
+    projectId: string;
+    /**
+     * The project role that will be added to this Access Group. \"null\" will remove this project level role.
+     *
+     * @example ADMIN
+     */
+    role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
+  }[];
+  /**
+   * List of members to add to the access group.
+   */
+  membersToAdd?: string[];
+  /**
+   * List of members to remove from the access group.
+   */
+  membersToRemove?: string[];
+};
+
 export type UpdateAccessGroupVariables = {
-  body?:
-    | {
-        /**
-         * The name of the access group
-         *
-         * @maxLength 50
-         * @pattern ^[A-z0-9_ -]+$
-         * @example My access group
-         */
-        name: string;
-        projects?: {
-          /**
-           * The ID of the project.
-           *
-           * @maxLength 256
-           * @example prj_ndlgr43fadlPyCtREAqxxdyFK
-           */
-          projectId: string;
-          /**
-           * The project role that will be added to this Access Group. \"null\" will remove this project level role.
-           *
-           * @example ADMIN
-           */
-          role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
-        }[];
-        /**
-         * List of members to add to the access group.
-         */
-        membersToAdd?: string[];
-        /**
-         * List of members to remove from the access group.
-         */
-        membersToRemove?: string[];
-      }
-    | {
-        /**
-         * The name of the access group
-         *
-         * @maxLength 50
-         * @pattern ^[A-z0-9_ -]+$
-         * @example My access group
-         */
-        name?: string;
-        projects: {
-          /**
-           * The ID of the project.
-           *
-           * @maxLength 256
-           * @example prj_ndlgr43fadlPyCtREAqxxdyFK
-           */
-          projectId: string;
-          /**
-           * The project role that will be added to this Access Group. \"null\" will remove this project level role.
-           *
-           * @example ADMIN
-           */
-          role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
-        }[];
-        /**
-         * List of members to add to the access group.
-         */
-        membersToAdd?: string[];
-        /**
-         * List of members to remove from the access group.
-         */
-        membersToRemove?: string[];
-      }
-    | {
-        /**
-         * The name of the access group
-         *
-         * @maxLength 50
-         * @pattern ^[A-z0-9_ -]+$
-         * @example My access group
-         */
-        name?: string;
-        projects?: {
-          /**
-           * The ID of the project.
-           *
-           * @maxLength 256
-           * @example prj_ndlgr43fadlPyCtREAqxxdyFK
-           */
-          projectId: string;
-          /**
-           * The project role that will be added to this Access Group. \"null\" will remove this project level role.
-           *
-           * @example ADMIN
-           */
-          role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
-        }[];
-        /**
-         * List of members to add to the access group.
-         */
-        membersToAdd: string[];
-        /**
-         * List of members to remove from the access group.
-         */
-        membersToRemove?: string[];
-      }
-    | {
-        /**
-         * The name of the access group
-         *
-         * @maxLength 50
-         * @pattern ^[A-z0-9_ -]+$
-         * @example My access group
-         */
-        name?: string;
-        projects?: {
-          /**
-           * The ID of the project.
-           *
-           * @maxLength 256
-           * @example prj_ndlgr43fadlPyCtREAqxxdyFK
-           */
-          projectId: string;
-          /**
-           * The project role that will be added to this Access Group. \"null\" will remove this project level role.
-           *
-           * @example ADMIN
-           */
-          role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
-        }[];
-        /**
-         * List of members to add to the access group.
-         */
-        membersToAdd?: string[];
-        /**
-         * List of members to remove from the access group.
-         */
-        membersToRemove: string[];
-      };
+  body?: UpdateAccessGroupRequestBody;
   pathParams: UpdateAccessGroupPathParams;
   queryParams?: UpdateAccessGroupQueryParams;
 } & FetcherExtraProps;
@@ -250,138 +152,7 @@ export const updateAccessGroup = (variables: UpdateAccessGroupVariables, signal?
   fetch<
     Schemas.AccessGroup,
     UpdateAccessGroupError,
-    | {
-        /**
-         * The name of the access group
-         *
-         * @maxLength 50
-         * @pattern ^[A-z0-9_ -]+$
-         * @example My access group
-         */
-        name: string;
-        projects?: {
-          /**
-           * The ID of the project.
-           *
-           * @maxLength 256
-           * @example prj_ndlgr43fadlPyCtREAqxxdyFK
-           */
-          projectId: string;
-          /**
-           * The project role that will be added to this Access Group. \"null\" will remove this project level role.
-           *
-           * @example ADMIN
-           */
-          role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
-        }[];
-        /**
-         * List of members to add to the access group.
-         */
-        membersToAdd?: string[];
-        /**
-         * List of members to remove from the access group.
-         */
-        membersToRemove?: string[];
-      }
-    | {
-        /**
-         * The name of the access group
-         *
-         * @maxLength 50
-         * @pattern ^[A-z0-9_ -]+$
-         * @example My access group
-         */
-        name?: string;
-        projects: {
-          /**
-           * The ID of the project.
-           *
-           * @maxLength 256
-           * @example prj_ndlgr43fadlPyCtREAqxxdyFK
-           */
-          projectId: string;
-          /**
-           * The project role that will be added to this Access Group. \"null\" will remove this project level role.
-           *
-           * @example ADMIN
-           */
-          role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
-        }[];
-        /**
-         * List of members to add to the access group.
-         */
-        membersToAdd?: string[];
-        /**
-         * List of members to remove from the access group.
-         */
-        membersToRemove?: string[];
-      }
-    | {
-        /**
-         * The name of the access group
-         *
-         * @maxLength 50
-         * @pattern ^[A-z0-9_ -]+$
-         * @example My access group
-         */
-        name?: string;
-        projects?: {
-          /**
-           * The ID of the project.
-           *
-           * @maxLength 256
-           * @example prj_ndlgr43fadlPyCtREAqxxdyFK
-           */
-          projectId: string;
-          /**
-           * The project role that will be added to this Access Group. \"null\" will remove this project level role.
-           *
-           * @example ADMIN
-           */
-          role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
-        }[];
-        /**
-         * List of members to add to the access group.
-         */
-        membersToAdd: string[];
-        /**
-         * List of members to remove from the access group.
-         */
-        membersToRemove?: string[];
-      }
-    | {
-        /**
-         * The name of the access group
-         *
-         * @maxLength 50
-         * @pattern ^[A-z0-9_ -]+$
-         * @example My access group
-         */
-        name?: string;
-        projects?: {
-          /**
-           * The ID of the project.
-           *
-           * @maxLength 256
-           * @example prj_ndlgr43fadlPyCtREAqxxdyFK
-           */
-          projectId: string;
-          /**
-           * The project role that will be added to this Access Group. \"null\" will remove this project level role.
-           *
-           * @example ADMIN
-           */
-          role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
-        }[];
-        /**
-         * List of members to add to the access group.
-         */
-        membersToAdd?: string[];
-        /**
-         * List of members to remove from the access group.
-         */
-        membersToRemove: string[];
-      },
+    UpdateAccessGroupRequestBody,
     {},
     UpdateAccessGroupQueryParams,
     UpdateAccessGroupPathParams
