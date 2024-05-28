@@ -503,6 +503,9 @@ export type AuthUser = {
         tier?: number;
         price: number;
         quantity: number;
+        /**
+         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
+         */
         highestQuantity?: number;
         name?: string;
         hidden: boolean;
@@ -521,6 +524,9 @@ export type AuthUser = {
         tier?: number;
         price: number;
         quantity: number;
+        /**
+         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
+         */
         highestQuantity?: number;
         name?: string;
         hidden: boolean;
@@ -539,6 +545,9 @@ export type AuthUser = {
         tier?: number;
         price: number;
         quantity: number;
+        /**
+         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
+         */
         highestQuantity?: number;
         name?: string;
         hidden: boolean;
@@ -557,6 +566,9 @@ export type AuthUser = {
         tier?: number;
         price: number;
         quantity: number;
+        /**
+         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
+         */
         highestQuantity?: number;
         name?: string;
         hidden: boolean;
@@ -575,6 +587,9 @@ export type AuthUser = {
         tier?: number;
         price: number;
         quantity: number;
+        /**
+         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
+         */
         highestQuantity?: number;
         name?: string;
         hidden: boolean;
@@ -593,6 +608,9 @@ export type AuthUser = {
         tier?: number;
         price: number;
         quantity: number;
+        /**
+         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
+         */
         highestQuantity?: number;
         name?: string;
         hidden: boolean;
@@ -611,6 +629,9 @@ export type AuthUser = {
         tier?: number;
         price: number;
         quantity: number;
+        /**
+         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
+         */
         highestQuantity?: number;
         name?: string;
         hidden: boolean;
@@ -629,6 +650,9 @@ export type AuthUser = {
         tier?: number;
         price: number;
         quantity: number;
+        /**
+         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
+         */
         highestQuantity?: number;
         name?: string;
         hidden: boolean;
@@ -647,6 +671,9 @@ export type AuthUser = {
         tier?: number;
         price: number;
         quantity: number;
+        /**
+         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
+         */
         highestQuantity?: number;
         name?: string;
         hidden: boolean;
@@ -665,6 +692,9 @@ export type AuthUser = {
         tier?: number;
         price: number;
         quantity: number;
+        /**
+         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
+         */
         highestQuantity?: number;
         name?: string;
         hidden: boolean;
