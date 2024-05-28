@@ -15008,31 +15008,18 @@ export type GetTeamMembersResponse = {
       role?: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
     }[];
   }[];
-  emailInviteCodes?: (
-    | {
-        id: string;
-        email?: string;
-        role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
-        isDSyncUser: boolean;
-        createdAt?: number;
-        expired?: boolean;
-        projects?: {
-          [key: string]: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
-        };
-      }
-    | {
-        accessGroups?: string[];
-        id: string;
-        email?: string;
-        role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
-        isDSyncUser: boolean;
-        createdAt?: number;
-        expired?: boolean;
-        projects?: {
-          [key: string]: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
-        };
-      }
-  )[];
+  emailInviteCodes?: {
+    accessGroups?: string[];
+    id: string;
+    email?: string;
+    role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
+    isDSyncUser: boolean;
+    createdAt?: number;
+    expired?: boolean;
+    projects?: {
+      [key: string]: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+    };
+  }[];
   pagination: {
     hasNext: boolean;
     /**
@@ -15615,8 +15602,18 @@ export type PatchTeamRequestBody = {
      * @example true
      */
     enforced?: boolean;
+    /**
+     * Directory groups to role or access group mappings.
+     */
     roles?: {
-      [key: string]: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
+      [key: string]:
+        | ('OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR')
+        | {
+            /**
+             * @pattern ^ag_[A-z0-9_ -]+$
+             */
+            accessGroupId: string;
+          };
     };
   };
   /**
