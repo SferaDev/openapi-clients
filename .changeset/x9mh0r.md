@@ -1,5 +1,5 @@
 ---
-"vercel-api-js": minor
+"vercel-api-js": patch
 ---
 
 [BREAKING] Change integrationStore to integrationResource in several endpoints
