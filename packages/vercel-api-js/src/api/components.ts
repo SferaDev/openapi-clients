@@ -1857,7 +1857,7 @@ export type UpdateProjectDataCacheResponse = {
     integrationConfigurationTransfer?: Schemas.ACLAction[];
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
-    integrationResource?: Schemas.ACLAction[];
+    integrationStore?: Schemas.ACLAction[];
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
@@ -9626,7 +9626,7 @@ export type GetProjectsResponse = {
       integrationConfigurationTransfer?: Schemas.ACLAction[];
       integrationConfigurationProjects?: Schemas.ACLAction[];
       integrationVercelConfigurationOverride?: Schemas.ACLAction[];
-      integrationResource?: Schemas.ACLAction[];
+      integrationStore?: Schemas.ACLAction[];
       integrationEvent?: Schemas.ACLAction[];
       integrationResourceSecrets?: Schemas.ACLAction[];
       marketplaceBillingData?: Schemas.ACLAction[];
@@ -10346,7 +10346,7 @@ export type CreateProjectResponse = {
     integrationConfigurationTransfer?: Schemas.ACLAction[];
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
-    integrationResource?: Schemas.ACLAction[];
+    integrationStore?: Schemas.ACLAction[];
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
@@ -11225,7 +11225,7 @@ export type GetProjectResponse = {
     integrationConfigurationTransfer?: Schemas.ACLAction[];
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
-    integrationResource?: Schemas.ACLAction[];
+    integrationStore?: Schemas.ACLAction[];
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
@@ -11953,7 +11953,7 @@ export type UpdateProjectResponse = {
     integrationConfigurationTransfer?: Schemas.ACLAction[];
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
-    integrationResource?: Schemas.ACLAction[];
+    integrationStore?: Schemas.ACLAction[];
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
