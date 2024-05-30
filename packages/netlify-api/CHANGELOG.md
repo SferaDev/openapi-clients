@@ -1,5 +1,11 @@
 # netlify-api
 
+## 0.4.2
+
+### Patch Changes
+
+- 14f1b45: Bump version to 2.31.0
+
 ## 0.4.1
 
 ### Patch Changes
