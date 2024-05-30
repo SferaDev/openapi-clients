@@ -1,5 +1,16 @@
 # vercel-api-js
 
+## 0.8.3
+
+### Patch Changes
+
+- 5ef8f47: Add highestQuantity field to CreateTeamResponse and AuthUser types
+- 0e0a7dc: [BREAKING] Change integrationResource to integrationStore in project endpoints
+- cbfda3a: Add new fields expirationDaysCanceled and expirationDaysErrored to deploymentExpiration in GetProjectsResponse, CreateProjectResponse, GetProjectResponse, and UpdateProjectResponse types
+- e5a70f3: [BREAKING] Modify emailInviteCodes type structure
+- 7c3e6f3: Add new type UpdateAccessGroupRequestBody for updating access group details
+- 1b099f6: [BREAKING] Change integrationStore to integrationResource in several endpoints
+
 ## 0.8.2
 
 ### Patch Changes
