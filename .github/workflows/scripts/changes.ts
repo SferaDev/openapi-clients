@@ -49,7 +49,7 @@ async function main() {
     You can create multiple changelog entries to match the number of changes in the API.
     Description must be a short sentence.
     If there's a breaking change, add "[BREAKING]" to the beginning of the description.
-    You also need to pick if it's a "patch" or "minor" change in a 0.x.x semver versioning scheme.
+    Only use "patch" or "minor" changes in a 0.x.x semver versioning scheme. Unless it's a really breaking change everything is a "patch".
     
     The output should be a JSON object with the following format:
     Array<{
