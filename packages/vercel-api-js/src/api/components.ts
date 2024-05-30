@@ -1516,6 +1516,8 @@ export type UpdateProjectDataCacheResponse = {
   deploymentExpiration?: {
     expirationDays: number;
     expirationDaysProduction: number;
+    expirationDaysCanceled: number;
+    expirationDaysErrored: number;
     deploymentsToKeep: number;
   } | null;
   devCommand?: string | null;
