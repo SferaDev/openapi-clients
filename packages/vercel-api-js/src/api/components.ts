@@ -9285,6 +9285,8 @@ export type GetProjectsResponse = {
     deploymentExpiration?: {
       expirationDays: number;
       expirationDaysProduction: number;
+      expirationDaysCanceled: number;
+      expirationDaysErrored: number;
       deploymentsToKeep: number;
     } | null;
     devCommand?: string | null;
@@ -10005,6 +10007,8 @@ export type CreateProjectResponse = {
   deploymentExpiration?: {
     expirationDays: number;
     expirationDaysProduction: number;
+    expirationDaysCanceled: number;
+    expirationDaysErrored: number;
     deploymentsToKeep: number;
   } | null;
   devCommand?: string | null;
@@ -10884,6 +10888,8 @@ export type GetProjectResponse = {
   deploymentExpiration?: {
     expirationDays: number;
     expirationDaysProduction: number;
+    expirationDaysCanceled: number;
+    expirationDaysErrored: number;
     deploymentsToKeep: number;
   } | null;
   devCommand?: string | null;
@@ -11612,6 +11618,8 @@ export type UpdateProjectResponse = {
   deploymentExpiration?: {
     expirationDays: number;
     expirationDaysProduction: number;
+    expirationDaysCanceled: number;
+    expirationDaysErrored: number;
     deploymentsToKeep: number;
   } | null;
   devCommand?: string | null;
@@ -18630,7 +18638,7 @@ export type GetDeploymentsResponse = {
      *
      * @example READY
      */
-    state?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+    state?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED' | 'DELETED';
     /**
      * In which state is the deployment.
      *
