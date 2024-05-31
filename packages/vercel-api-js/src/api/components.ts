@@ -9287,11 +9287,11 @@ export type GetProjectsResponse = {
       unlimited?: boolean;
     };
     deploymentExpiration?: {
-      expirationDays: number;
-      expirationDaysProduction: number;
-      expirationDaysCanceled: number;
-      expirationDaysErrored: number;
-      deploymentsToKeep: number;
+      expirationDays?: number;
+      expirationDaysProduction?: number;
+      expirationDaysCanceled?: number;
+      expirationDaysErrored?: number;
+      deploymentsToKeep?: number;
     } | null;
     devCommand?: string | null;
     directoryListing: boolean;
@@ -10011,11 +10011,11 @@ export type CreateProjectResponse = {
     unlimited?: boolean;
   };
   deploymentExpiration?: {
-    expirationDays: number;
-    expirationDaysProduction: number;
-    expirationDaysCanceled: number;
-    expirationDaysErrored: number;
-    deploymentsToKeep: number;
+    expirationDays?: number;
+    expirationDaysProduction?: number;
+    expirationDaysCanceled?: number;
+    expirationDaysErrored?: number;
+    deploymentsToKeep?: number;
   } | null;
   devCommand?: string | null;
   directoryListing: boolean;
@@ -10894,11 +10894,11 @@ export type GetProjectResponse = {
     unlimited?: boolean;
   };
   deploymentExpiration?: {
-    expirationDays: number;
-    expirationDaysProduction: number;
-    expirationDaysCanceled: number;
-    expirationDaysErrored: number;
-    deploymentsToKeep: number;
+    expirationDays?: number;
+    expirationDaysProduction?: number;
+    expirationDaysCanceled?: number;
+    expirationDaysErrored?: number;
+    deploymentsToKeep?: number;
   } | null;
   devCommand?: string | null;
   directoryListing: boolean;
@@ -11626,11 +11626,11 @@ export type UpdateProjectResponse = {
     unlimited?: boolean;
   };
   deploymentExpiration?: {
-    expirationDays: number;
-    expirationDaysProduction: number;
-    expirationDaysCanceled: number;
-    expirationDaysErrored: number;
-    deploymentsToKeep: number;
+    expirationDays?: number;
+    expirationDaysProduction?: number;
+    expirationDaysCanceled?: number;
+    expirationDaysErrored?: number;
+    deploymentsToKeep?: number;
   } | null;
   devCommand?: string | null;
   directoryListing: boolean;
@@ -18863,6 +18863,14 @@ export type GetDeploymentsResponse = {
      * The ID of Vercel Connect configuration used for this deployment's passive functions
      */
     passiveConnectConfigurationId?: string;
+    /**
+     * The expiration configured by the project retention policy
+     */
+    expiration?: number;
+    /**
+     * The expiration proposed to replace the existing expiration
+     */
+    proposedExpiration?: number;
   }[];
 };
 
