@@ -1911,6 +1911,7 @@ export type UpdateProjectDataCacheResponse = {
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
     teamFellowMembership?: Schemas.ACLAction[];
+    teamGitExclusivity?: Schemas.ACLAction[];
     teamInvite?: Schemas.ACLAction[];
     teamInviteCode?: Schemas.ACLAction[];
     teamJoin?: Schemas.ACLAction[];
@@ -9682,6 +9683,7 @@ export type GetProjectsResponse = {
       team?: Schemas.ACLAction[];
       teamAccessRequest?: Schemas.ACLAction[];
       teamFellowMembership?: Schemas.ACLAction[];
+      teamGitExclusivity?: Schemas.ACLAction[];
       teamInvite?: Schemas.ACLAction[];
       teamInviteCode?: Schemas.ACLAction[];
       teamJoin?: Schemas.ACLAction[];
@@ -10404,6 +10406,7 @@ export type CreateProjectResponse = {
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
     teamFellowMembership?: Schemas.ACLAction[];
+    teamGitExclusivity?: Schemas.ACLAction[];
     teamInvite?: Schemas.ACLAction[];
     teamInviteCode?: Schemas.ACLAction[];
     teamJoin?: Schemas.ACLAction[];
@@ -11285,6 +11288,7 @@ export type GetProjectResponse = {
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
     teamFellowMembership?: Schemas.ACLAction[];
+    teamGitExclusivity?: Schemas.ACLAction[];
     teamInvite?: Schemas.ACLAction[];
     teamInviteCode?: Schemas.ACLAction[];
     teamJoin?: Schemas.ACLAction[];
@@ -12015,6 +12019,7 @@ export type UpdateProjectResponse = {
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
     teamFellowMembership?: Schemas.ACLAction[];
+    teamGitExclusivity?: Schemas.ACLAction[];
     teamInvite?: Schemas.ACLAction[];
     teamInviteCode?: Schemas.ACLAction[];
     teamJoin?: Schemas.ACLAction[];
