@@ -1,5 +1,14 @@
 # vercel-api-js
 
+## 0.8.4
+
+### Patch Changes
+
+- 611e148: Make deploymentExpiration fields optional
+- cb67b7d: Add new fields to deployment expiration in UpdateProjectDataCacheResponse
+- f86aa27: Add teamGitExclusivity field to project endpoints
+- cd0ddde: Add integrationResource field to various API responses
+
 ## 0.8.3
 
 ### Patch Changes
