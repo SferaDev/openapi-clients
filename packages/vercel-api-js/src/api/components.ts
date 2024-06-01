@@ -1514,11 +1514,11 @@ export type UpdateProjectDataCacheResponse = {
     unlimited?: boolean;
   };
   deploymentExpiration?: {
-    expirationDays: number;
-    expirationDaysProduction: number;
-    expirationDaysCanceled: number;
-    expirationDaysErrored: number;
-    deploymentsToKeep: number;
+    expirationDays?: number;
+    expirationDaysProduction?: number;
+    expirationDaysCanceled?: number;
+    expirationDaysErrored?: number;
+    deploymentsToKeep?: number;
   } | null;
   devCommand?: string | null;
   directoryListing: boolean;
