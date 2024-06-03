@@ -1860,7 +1860,6 @@ export type UpdateProjectDataCacheResponse = {
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     integrationResource?: Schemas.ACLAction[];
-    integrationStore?: Schemas.ACLAction[];
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
@@ -9633,7 +9632,6 @@ export type GetProjectsResponse = {
       integrationConfigurationProjects?: Schemas.ACLAction[];
       integrationVercelConfigurationOverride?: Schemas.ACLAction[];
       integrationResource?: Schemas.ACLAction[];
-      integrationStore?: Schemas.ACLAction[];
       integrationEvent?: Schemas.ACLAction[];
       integrationResourceSecrets?: Schemas.ACLAction[];
       marketplaceBillingData?: Schemas.ACLAction[];
@@ -10357,7 +10355,6 @@ export type CreateProjectResponse = {
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     integrationResource?: Schemas.ACLAction[];
-    integrationStore?: Schemas.ACLAction[];
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
@@ -11240,7 +11237,6 @@ export type GetProjectResponse = {
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     integrationResource?: Schemas.ACLAction[];
-    integrationStore?: Schemas.ACLAction[];
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
@@ -11972,7 +11968,6 @@ export type UpdateProjectResponse = {
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     integrationResource?: Schemas.ACLAction[];
-    integrationStore?: Schemas.ACLAction[];
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
