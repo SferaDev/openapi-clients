@@ -2355,7 +2355,7 @@ export const getDeploymentEvents = (variables: GetDeploymentEventsVariables, sig
     {},
     GetDeploymentEventsQueryParams,
     GetDeploymentEventsPathParams
-  >({ url: '/v2/deployments/{idOrUrl}/events', method: 'get', ...variables, signal });
+  >({ url: '/v3/deployments/{idOrUrl}/events', method: 'get', ...variables, signal });
 
 export type GetDeploymentPathParams = {
   /**
@@ -14699,6 +14699,74 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
     EditProjectEnvPathParams
   >({ url: '/v9/projects/{idOrName}/env/{id}', method: 'patch', ...variables, signal });
 
+export type UpdateProjectProtectionBypassPathParams = {
+  /**
+   * The unique project identifier or the project name
+   */
+  idOrName: string;
+};
+
+export type UpdateProjectProtectionBypassQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type UpdateProjectProtectionBypassError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateProjectProtectionBypassResponse = {
+  protectionBypass?: {
+    [key: string]: {
+      createdAt: number;
+      createdBy: string;
+      scope: 'automation-bypass';
+    };
+  };
+};
+
+export type UpdateProjectProtectionBypassRequestBody = {
+  /**
+   * Optional instructions for revoking and regenerating a automation bypass
+   */
+  revoke?: {
+    /**
+     * Automation bypass to revoked
+     */
+    secret: string;
+    /**
+     * Whether or not a new automation bypass should be created after the provided secret is revoked
+     */
+    regenerate: boolean;
+  };
+};
+
+export type UpdateProjectProtectionBypassVariables = {
+  body?: UpdateProjectProtectionBypassRequestBody;
+  pathParams: UpdateProjectProtectionBypassPathParams;
+  queryParams?: UpdateProjectProtectionBypassQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Update the deployment protection automation bypass for a project
+ */
+export const updateProjectProtectionBypass = (
+  variables: UpdateProjectProtectionBypassVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    UpdateProjectProtectionBypassResponse,
+    UpdateProjectProtectionBypassError,
+    UpdateProjectProtectionBypassRequestBody,
+    {},
+    UpdateProjectProtectionBypassQueryParams,
+    UpdateProjectProtectionBypassPathParams
+  >({ url: '/v1/projects/{idOrName}/protection-bypass', method: 'patch', ...variables, signal });
+
 export type RequestPromotePathParams = {
   projectId: string;
   deploymentId: string;
@@ -19547,6 +19615,7 @@ export const operationsByTag = {
     createProjectEnv,
     removeProjectEnv,
     editProjectEnv,
+    updateProjectProtectionBypass,
     requestPromote,
     listPromoteAliases,
     pauseProject,
