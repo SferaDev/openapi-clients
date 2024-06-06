@@ -1,5 +1,13 @@
 # vercel-api-js
 
+## 0.8.5
+
+### Patch Changes
+
+- 5640e39: Add new marketplace invoice endpoints
+- 765c3c3: Update the deployment protection automation bypass for a project
+- e07b4b0: Removed integrationStore from several API responses
+
 ## 0.8.4
 
 ### Patch Changes
