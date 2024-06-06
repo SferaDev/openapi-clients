@@ -1863,6 +1863,7 @@ export type UpdateProjectDataCacheResponse = {
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
+    marketplaceInvoice?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
@@ -9635,6 +9636,7 @@ export type GetProjectsResponse = {
       integrationEvent?: Schemas.ACLAction[];
       integrationResourceSecrets?: Schemas.ACLAction[];
       marketplaceBillingData?: Schemas.ACLAction[];
+      marketplaceInvoice?: Schemas.ACLAction[];
       jobGlobal?: Schemas.ACLAction[];
       logDrain?: Schemas.ACLAction[];
       Monitoring?: Schemas.ACLAction[];
@@ -10358,6 +10360,7 @@ export type CreateProjectResponse = {
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
+    marketplaceInvoice?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
@@ -11240,6 +11243,7 @@ export type GetProjectResponse = {
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
+    marketplaceInvoice?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
@@ -11971,6 +11975,7 @@ export type UpdateProjectResponse = {
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
+    marketplaceInvoice?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
@@ -17215,6 +17220,9 @@ export type CreateWebhookResponse = {
     | 'integration-configuration-permission-updated'
     | 'integration-configuration-removed'
     | 'integration-configuration-scope-change-confirmed'
+    | 'marketplace.invoice.created'
+    | 'marketplace.invoice.paid'
+    | 'marketplace.invoice.notpaid'
     | 'test-webhook'
   )[];
   /**
@@ -17292,6 +17300,9 @@ export type CreateWebhookRequestBody = {
     | 'integration-configuration-permission-updated'
     | 'integration-configuration-removed'
     | 'integration-configuration-scope-change-confirmed'
+    | 'marketplace.invoice.created'
+    | 'marketplace.invoice.paid'
+    | 'marketplace.invoice.notpaid'
     | 'test-webhook'
   )[];
   /**
@@ -17429,6 +17440,9 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'integration-configuration-permission-updated'
           | 'integration-configuration-removed'
           | 'integration-configuration-scope-change-confirmed'
+          | 'marketplace.invoice.created'
+          | 'marketplace.invoice.paid'
+          | 'marketplace.invoice.notpaid'
           | 'test-webhook'
         )[];
         /**
@@ -17502,6 +17516,9 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'integration-configuration-permission-updated'
           | 'integration-configuration-removed'
           | 'integration-configuration-scope-change-confirmed'
+          | 'marketplace.invoice.created'
+          | 'marketplace.invoice.paid'
+          | 'marketplace.invoice.notpaid'
           | 'test-webhook'
         )[];
         /**
@@ -17599,6 +17616,9 @@ export type GetWebhookResponse = {
     | 'integration-configuration-permission-updated'
     | 'integration-configuration-removed'
     | 'integration-configuration-scope-change-confirmed'
+    | 'marketplace.invoice.created'
+    | 'marketplace.invoice.paid'
+    | 'marketplace.invoice.notpaid'
     | 'test-webhook'
   )[];
   /**
