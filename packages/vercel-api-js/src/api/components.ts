@@ -1612,11 +1612,12 @@ export type UpdateProjectDataCacheResponse = {
       encryptedValue: string;
     } | null;
     /**
-     * Whether `value` is decrypted.
+     * Whether `value` and `vsmValue` are decrypted.
      */
     decrypted?: boolean;
     comment?: string;
     customEnvironmentIds?: string[];
+    vsmValue?: string;
   }[];
   framework?:
     | 'blitzjs'
@@ -9385,11 +9386,12 @@ export type GetProjectsResponse = {
         encryptedValue: string;
       } | null;
       /**
-       * Whether `value` is decrypted.
+       * Whether `value` and `vsmValue` are decrypted.
        */
       decrypted?: boolean;
       comment?: string;
       customEnvironmentIds?: string[];
+      vsmValue?: string;
     }[];
     framework?:
       | 'blitzjs'
@@ -10109,11 +10111,12 @@ export type CreateProjectResponse = {
       encryptedValue: string;
     } | null;
     /**
-     * Whether `value` is decrypted.
+     * Whether `value` and `vsmValue` are decrypted.
      */
     decrypted?: boolean;
     comment?: string;
     customEnvironmentIds?: string[];
+    vsmValue?: string;
   }[];
   framework?:
     | 'blitzjs'
@@ -10992,11 +10995,12 @@ export type GetProjectResponse = {
       encryptedValue: string;
     } | null;
     /**
-     * Whether `value` is decrypted.
+     * Whether `value` and `vsmValue` are decrypted.
      */
     decrypted?: boolean;
     comment?: string;
     customEnvironmentIds?: string[];
+    vsmValue?: string;
   }[];
   framework?:
     | 'blitzjs'
@@ -11724,11 +11728,12 @@ export type UpdateProjectResponse = {
       encryptedValue: string;
     } | null;
     /**
-     * Whether `value` is decrypted.
+     * Whether `value` and `vsmValue` are decrypted.
      */
     decrypted?: boolean;
     comment?: string;
     customEnvironmentIds?: string[];
+    vsmValue?: string;
   }[];
   framework?:
     | 'blitzjs'
@@ -13159,11 +13164,12 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           encryptedValue: string;
         } | null;
         /**
-         * Whether `value` is decrypted.
+         * Whether `value` and `vsmValue` are decrypted.
          */
         decrypted?: boolean;
         comment?: string;
         customEnvironmentIds?: string[];
+        vsmValue?: string;
         system?: boolean;
       }
     | {
@@ -13256,11 +13262,12 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
             encryptedValue: string;
           } | null;
           /**
-           * Whether `value` is decrypted.
+           * Whether `value` and `vsmValue` are decrypted.
            */
           decrypted?: boolean;
           comment?: string;
           customEnvironmentIds?: string[];
+          vsmValue?: string;
           system?: boolean;
         }[];
         pagination: Schemas.Pagination;
@@ -13355,11 +13362,12 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
             encryptedValue: string;
           } | null;
           /**
-           * Whether `value` is decrypted.
+           * Whether `value` and `vsmValue` are decrypted.
            */
           decrypted?: boolean;
           comment?: string;
           customEnvironmentIds?: string[];
+          vsmValue?: string;
           system?: boolean;
         }[];
       },
@@ -13496,6 +13504,7 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
         } | null;
         comment?: string;
         customEnvironmentIds?: string[];
+        vsmValue?: string;
       }
     | {
         target?:
@@ -13586,11 +13595,12 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
           encryptedValue: string;
         } | null;
         /**
-         * Whether `value` is decrypted.
+         * Whether `value` and `vsmValue` are decrypted.
          */
         decrypted?: boolean;
         comment?: string;
         customEnvironmentIds?: string[];
+        vsmValue?: string;
       },
     GetProjectEnvError,
     undefined,
@@ -13718,11 +13728,12 @@ export type CreateProjectEnvResponse = {
           encryptedValue: string;
         } | null;
         /**
-         * Whether `value` is decrypted.
+         * Whether `value` and `vsmValue` are decrypted.
          */
         decrypted?: boolean;
         comment?: string;
         customEnvironmentIds?: string[];
+        vsmValue?: string;
         system?: boolean;
       }
     | {
@@ -13814,11 +13825,12 @@ export type CreateProjectEnvResponse = {
           encryptedValue: string;
         } | null;
         /**
-         * Whether `value` is decrypted.
+         * Whether `value` and `vsmValue` are decrypted.
          */
         decrypted?: boolean;
         comment?: string;
         customEnvironmentIds?: string[];
+        vsmValue?: string;
         system?: boolean;
       }[];
   failed: {
@@ -14315,11 +14327,12 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
           encryptedValue: string;
         } | null;
         /**
-         * Whether `value` is decrypted.
+         * Whether `value` and `vsmValue` are decrypted.
          */
         decrypted?: boolean;
         comment?: string;
         customEnvironmentIds?: string[];
+        vsmValue?: string;
       }[]
     | {
         system?: boolean;
@@ -14411,11 +14424,12 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
           encryptedValue: string;
         } | null;
         /**
-         * Whether `value` is decrypted.
+         * Whether `value` and `vsmValue` are decrypted.
          */
         decrypted?: boolean;
         comment?: string;
         customEnvironmentIds?: string[];
+        vsmValue?: string;
       }
     | {
         target?:
@@ -14506,11 +14520,12 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
           encryptedValue: string;
         } | null;
         /**
-         * Whether `value` is decrypted.
+         * Whether `value` and `vsmValue` are decrypted.
          */
         decrypted?: boolean;
         comment?: string;
         customEnvironmentIds?: string[];
+        vsmValue?: string;
       },
     RemoveProjectEnvError,
     undefined,
@@ -14636,11 +14651,12 @@ export type EditProjectEnvResponse = {
     encryptedValue: string;
   } | null;
   /**
-   * Whether `value` is decrypted.
+   * Whether `value` and `vsmValue` are decrypted.
    */
   decrypted?: boolean;
   comment?: string;
   customEnvironmentIds?: string[];
+  vsmValue?: string;
 };
 
 export type EditProjectEnvRequestBody = {
