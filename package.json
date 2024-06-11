@@ -22,8 +22,9 @@
     "tslib": "^2.6.3",
     "tsup": "^8.1.0",
     "tsx": "^4.15.2",
-    "turbo": "^1.13.3",
+    "turbo": "^2.0.3",
     "typescript": "^5.4.5",
     "vitest": "^1.6.0"
-  }
+  },
+  "packageManager": "pnpm@8.11.0"
 }
