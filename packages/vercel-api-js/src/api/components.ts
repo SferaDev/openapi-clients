@@ -2272,6 +2272,8 @@ export type GetDeploymentEventsResponse = (
         vercelId?: string;
         vercelCache?: 'MISS' | 'HIT' | 'STALE' | 'BYPASS' | 'PRERENDER' | 'REVALIDATED';
         lambdaRegion?: string;
+        wafAction?: 'log' | 'challenge' | 'deny' | 'bypass' | 'rate_limit';
+        wafRuleId?: string;
       };
       requestId?: string;
       serial: string;
@@ -2336,6 +2338,8 @@ export type GetDeploymentEventsResponse = (
           vercelId?: string;
           vercelCache?: 'MISS' | 'HIT' | 'STALE' | 'BYPASS' | 'PRERENDER' | 'REVALIDATED';
           lambdaRegion?: string;
+          wafAction?: 'log' | 'challenge' | 'deny' | 'bypass' | 'rate_limit';
+          wafRuleId?: string;
         };
       };
     }
@@ -8098,7 +8102,7 @@ export type GetIntegrationLogDrainsResponse = {
    * @example build
    * @example edge
    */
-  sources?: ('build' | 'edge' | 'lambda' | 'static' | 'external')[];
+  sources?: ('build' | 'edge' | 'lambda' | 'static' | 'external' | 'firewall')[];
   /**
    * Whether the log drain was created by an integration or by a user
    *
@@ -8228,7 +8232,7 @@ export type CreateLogDrainResponse = {
    * @example build
    * @example edge
    */
-  sources?: ('build' | 'edge' | 'lambda' | 'static' | 'external')[];
+  sources?: ('build' | 'edge' | 'lambda' | 'static' | 'external' | 'firewall')[];
   /**
    * Whether the log drain was created by an integration or by a user
    *
@@ -8508,7 +8512,7 @@ export type GetConfigurableLogDrainResponse = {
   createdAt: number;
   deletedAt: number | null;
   updatedAt: number;
-  sources?: ('build' | 'edge' | 'lambda' | 'static' | 'external')[];
+  sources?: ('build' | 'edge' | 'lambda' | 'static' | 'external' | 'firewall')[];
   headers?: {
     [key: string]: string;
   };
@@ -8607,7 +8611,7 @@ export type GetAllLogDrainsResponse = {
   createdAt: number;
   deletedAt: number | null;
   updatedAt: number;
-  sources?: ('build' | 'edge' | 'lambda' | 'static' | 'external')[];
+  sources?: ('build' | 'edge' | 'lambda' | 'static' | 'external' | 'firewall')[];
   headers?: {
     [key: string]: string;
   };
@@ -8668,7 +8672,7 @@ export type CreateConfigurableLogDrainResponse = {
   createdAt: number;
   deletedAt: number | null;
   updatedAt: number;
-  sources?: ('build' | 'edge' | 'lambda' | 'static' | 'external')[];
+  sources?: ('build' | 'edge' | 'lambda' | 'static' | 'external' | 'firewall')[];
   headers?: {
     [key: string]: string;
   };
