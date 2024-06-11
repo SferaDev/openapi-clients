@@ -1,20 +1,34 @@
 {
   "$schema": "https://turbo.build/schema.json",
-  "pipeline": {
+  "tasks": {
     "generate": {
-      "dependsOn": ["^generate"],
-      "inputs": ["openapi-codegen.config.ts"],
+      "dependsOn": [
+        "^generate"
+      ],
+      "inputs": [
+        "openapi-codegen.config.ts"
+      ],
       "outputs": []
     },
     "tsc": {
-      "dependsOn": ["^tsc"],
-      "inputs": ["src/**"],
+      "dependsOn": [
+        "^tsc"
+      ],
+      "inputs": [
+        "src/**"
+      ],
       "outputs": []
     },
     "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["src/**"],
-      "outputs": ["dist/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "src/**"
+      ],
+      "outputs": [
+        "dist/**"
+      ]
     }
   }
 }
