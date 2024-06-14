@@ -5888,6 +5888,8 @@ export type GetDomainResponse = {
       isDomainReseller?: boolean;
       id: string;
     };
+    teamId: string | null;
+    userId: string;
     /**
      * If it was purchased through Vercel, the timestamp in milliseconds when it was purchased.
      *
@@ -6099,6 +6101,8 @@ export type GetDomainsResponse = {
      * @example 1613602938882
      */
     transferStartedAt?: number;
+    userId: string;
+    teamId: string | null;
   }[];
   pagination: Schemas.Pagination;
 };
@@ -6232,6 +6236,8 @@ export type CreateOrTransferDomainResponse = {
      * @example 1613602938882
      */
     transferStartedAt?: number;
+    userId: string;
+    teamId: string | null;
   };
 };
 
