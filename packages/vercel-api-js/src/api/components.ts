@@ -16776,6 +16776,11 @@ export type CreateTeamResponse = {
     pricingExperiment?: 'august-2022';
     orbMigrationScheduledAt?: number | null;
     forceOrbMigration?: boolean | null;
+    awsMarketplace?: {
+      productCode: string;
+      offerId?: string;
+      customerId: string;
+    } | null;
   };
 };
 
