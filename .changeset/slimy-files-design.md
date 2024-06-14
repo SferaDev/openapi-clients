@@ -2,4 +2,4 @@
 "vercel-api-js": patch
 ---
 
-Fix `teamId` and `userId` properties
+Add `teamId` and `userId` properties to domains responses
