@@ -1404,6 +1404,11 @@ export type AuthUser = {
     pricingExperiment?: 'august-2022';
     orbMigrationScheduledAt?: number | null;
     forceOrbMigration?: boolean | null;
+    awsMarketplace?: {
+      productCode: string;
+      offerId?: string;
+      customerId: string;
+    } | null;
   } | null;
   /**
    * An object containing infomation related to the amount of platform resources may be allocated to the User account.
