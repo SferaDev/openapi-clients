@@ -9854,6 +9854,7 @@ export type GetProjectsResponse = {
             | 'ip_address'
             | 'protocol'
             | 'scheme'
+            | 'environment'
             | 'region';
           key?: string;
           value?:
@@ -9883,6 +9884,7 @@ export type GetProjectsResponse = {
             | 'ip_address'
             | 'protocol'
             | 'scheme'
+            | 'environment'
             | 'region';
           key?: string;
           value?:
@@ -10579,6 +10581,7 @@ export type CreateProjectResponse = {
           | 'ip_address'
           | 'protocol'
           | 'scheme'
+          | 'environment'
           | 'region';
         key?: string;
         value?:
@@ -10608,6 +10611,7 @@ export type CreateProjectResponse = {
           | 'ip_address'
           | 'protocol'
           | 'scheme'
+          | 'environment'
           | 'region';
         key?: string;
         value?:
@@ -11463,6 +11467,7 @@ export type GetProjectResponse = {
           | 'ip_address'
           | 'protocol'
           | 'scheme'
+          | 'environment'
           | 'region';
         key?: string;
         value?:
@@ -11492,6 +11497,7 @@ export type GetProjectResponse = {
           | 'ip_address'
           | 'protocol'
           | 'scheme'
+          | 'environment'
           | 'region';
         key?: string;
         value?:
@@ -12196,6 +12202,7 @@ export type UpdateProjectResponse = {
           | 'ip_address'
           | 'protocol'
           | 'scheme'
+          | 'environment'
           | 'region';
         key?: string;
         value?:
@@ -12225,6 +12232,7 @@ export type UpdateProjectResponse = {
           | 'ip_address'
           | 'protocol'
           | 'scheme'
+          | 'environment'
           | 'region';
         key?: string;
         value?:
