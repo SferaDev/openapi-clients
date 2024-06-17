@@ -2070,6 +2070,7 @@ export type UpdateProjectDataCacheResponse = {
           | 'ip_address'
           | 'protocol'
           | 'scheme'
+          | 'environment'
           | 'region';
         key?: string;
         value?:
@@ -2099,6 +2100,7 @@ export type UpdateProjectDataCacheResponse = {
           | 'ip_address'
           | 'protocol'
           | 'scheme'
+          | 'environment'
           | 'region';
         key?: string;
         value?:
