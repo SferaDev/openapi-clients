@@ -7915,7 +7915,7 @@ export type CreateLogDrainRequestBody = {
    * @uniqueItems true
    * @minItems 1
    */
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external')[];
+  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'firewall')[];
   /**
    * Headers to be sent together with the request
    */
@@ -8324,7 +8324,7 @@ export type CreateConfigurableLogDrainRequestBody = {
    * @uniqueItems true
    * @minItems 1
    */
-  sources: ('static' | 'lambda' | 'build' | 'edge' | 'external')[];
+  sources: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'firewall')[];
   /**
    * @uniqueItems true
    * @minItems 1
