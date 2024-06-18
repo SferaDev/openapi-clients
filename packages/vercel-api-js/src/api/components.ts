@@ -1808,7 +1808,65 @@ export type UpdateProjectDataCacheResponse = {
     deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
-    [key: string]: string | string[];
+    [key: string]: {
+      alias?: string[];
+      aliasAssigned?: number | boolean | null;
+      aliasError?: {
+        code: string;
+        message: string;
+      } | null;
+      aliasFinal?: string | null;
+      automaticAliases?: string[];
+      builds?: {
+        use: string;
+        src?: string;
+        dest?: string;
+      }[];
+      connectBuildsEnabled?: boolean;
+      connectConfigurationId?: string;
+      createdAt: number;
+      createdIn: string;
+      creator: {
+        email: string;
+        githubLogin?: string;
+        gitlabLogin?: string;
+        uid: string;
+        username: string;
+      } | null;
+      deletedAt?: number;
+      deploymentHostname: string;
+      name: string;
+      forced?: boolean;
+      id: string;
+      meta?: {
+        [key: string]: string;
+      };
+      monorepoManager?: string | null;
+      plan: 'pro' | 'enterprise' | 'hobby';
+      private: boolean;
+      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+      readySubstate?: 'STAGED' | 'PROMOTED';
+      requestedAt?: number;
+      target?: string | null;
+      teamId?: string | null;
+      type: 'LAMBDAS';
+      url: string;
+      userId: string;
+      withCache?: boolean;
+      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+      checksState?: 'registered' | 'running' | 'completed';
+      readyAt?: number;
+      buildingAt?: number;
+      /**
+       * Whether or not preview comments are enabled for the deployment
+       *
+       * @example false
+       */
+      previewCommentsEnabled?: boolean;
+      oidcTokenClaims?: {
+        [key: string]: string | string[];
+      };
+    } | null;
   };
   transferCompletedAt?: number;
   transferStartedAt?: number;
@@ -2494,71 +2552,11 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         initReadyAt?: number;
         isFirstBranchDeployment?: boolean;
         lambdas?: {
-          buildCommand?: string | null;
-          devCommand?: string | null;
-          framework?:
-            | 'blitzjs'
-            | 'nextjs'
-            | 'gatsby'
-            | 'remix'
-            | 'astro'
-            | 'hexo'
-            | 'eleventy'
-            | 'docusaurus-2'
-            | 'docusaurus'
-            | 'preact'
-            | 'solidstart-1'
-            | 'solidstart'
-            | 'dojo'
-            | 'ember'
-            | 'vue'
-            | 'scully'
-            | 'ionic-angular'
-            | 'angular'
-            | 'polymer'
-            | 'svelte'
-            | 'sveltekit'
-            | 'sveltekit-1'
-            | 'ionic-react'
-            | 'create-react-app'
-            | 'gridsome'
-            | 'umijs'
-            | 'sapper'
-            | 'saber'
-            | 'stencil'
-            | 'nuxtjs'
-            | 'redwoodjs'
-            | 'hugo'
-            | 'jekyll'
-            | 'brunch'
-            | 'middleman'
-            | 'zola'
-            | 'hydrogen'
-            | 'vite'
-            | 'vitepress'
-            | 'vuepress'
-            | 'parcel'
-            | 'sanity'
-            | 'storybook'
-            | null;
-          commandForIgnoringBuildStep?: string | null;
-          installCommand?: string | null;
-          outputDirectory?: string | null;
-          speedInsights?: {
-            id: string;
-            enabledAt?: number;
-            disabledAt?: number;
-            canceledAt?: number;
-            hasData?: boolean;
-            paidAt?: number;
-          };
-          webAnalytics?: {
-            id: string;
-            disabledAt?: number;
-            canceledAt?: number;
-            enabledAt?: number;
-            hasData?: boolean;
-          };
+          id?: string;
+          createdAt?: number;
+          entrypoint?: string | null;
+          readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+          readyStateAt?: number;
           output: {
             path: string;
             functionName: string;
@@ -2568,71 +2566,10 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         ready?: number;
         status: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
         team?: {
-          buildCommand?: string | null;
-          devCommand?: string | null;
-          framework?:
-            | 'blitzjs'
-            | 'nextjs'
-            | 'gatsby'
-            | 'remix'
-            | 'astro'
-            | 'hexo'
-            | 'eleventy'
-            | 'docusaurus-2'
-            | 'docusaurus'
-            | 'preact'
-            | 'solidstart-1'
-            | 'solidstart'
-            | 'dojo'
-            | 'ember'
-            | 'vue'
-            | 'scully'
-            | 'ionic-angular'
-            | 'angular'
-            | 'polymer'
-            | 'svelte'
-            | 'sveltekit'
-            | 'sveltekit-1'
-            | 'ionic-react'
-            | 'create-react-app'
-            | 'gridsome'
-            | 'umijs'
-            | 'sapper'
-            | 'saber'
-            | 'stencil'
-            | 'nuxtjs'
-            | 'redwoodjs'
-            | 'hugo'
-            | 'jekyll'
-            | 'brunch'
-            | 'middleman'
-            | 'zola'
-            | 'hydrogen'
-            | 'vite'
-            | 'vitepress'
-            | 'vuepress'
-            | 'parcel'
-            | 'sanity'
-            | 'storybook'
-            | null;
-          commandForIgnoringBuildStep?: string | null;
-          installCommand?: string | null;
-          outputDirectory?: string | null;
-          speedInsights?: {
-            id: string;
-            enabledAt?: number;
-            disabledAt?: number;
-            canceledAt?: number;
-            hasData?: boolean;
-            paidAt?: number;
-          };
-          webAnalytics?: {
-            id: string;
-            disabledAt?: number;
-            canceledAt?: number;
-            enabledAt?: number;
-            hasData?: boolean;
-          };
+          id: string;
+          avatar?: string;
+          name: string;
+          slug: string;
         };
         userAliases?: string[];
         previewCommentsEnabled?: boolean;
@@ -2775,7 +2712,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         undeletedAt?: number;
         url: string;
         oidcTokenClaims?: {
-          [key: string]: string;
+          [key: string]: string | string[];
         };
         plan: 'pro' | 'enterprise' | 'hobby';
         connectBuildsEnabled?: boolean;
@@ -2910,7 +2847,14 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         flags?:
           | {
               definitions: {
-                [key: string]: string;
+                [key: string]: {
+                  options?: {
+                    value: Schemas.FlagJSONValue;
+                    label?: string;
+                  }[];
+                  url?: string;
+                  description?: string;
+                };
               };
             }
           | Record<string, any>[];
@@ -2929,71 +2873,11 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         initReadyAt?: number;
         isFirstBranchDeployment?: boolean;
         lambdas?: {
-          buildCommand?: string | null;
-          devCommand?: string | null;
-          framework?:
-            | 'blitzjs'
-            | 'nextjs'
-            | 'gatsby'
-            | 'remix'
-            | 'astro'
-            | 'hexo'
-            | 'eleventy'
-            | 'docusaurus-2'
-            | 'docusaurus'
-            | 'preact'
-            | 'solidstart-1'
-            | 'solidstart'
-            | 'dojo'
-            | 'ember'
-            | 'vue'
-            | 'scully'
-            | 'ionic-angular'
-            | 'angular'
-            | 'polymer'
-            | 'svelte'
-            | 'sveltekit'
-            | 'sveltekit-1'
-            | 'ionic-react'
-            | 'create-react-app'
-            | 'gridsome'
-            | 'umijs'
-            | 'sapper'
-            | 'saber'
-            | 'stencil'
-            | 'nuxtjs'
-            | 'redwoodjs'
-            | 'hugo'
-            | 'jekyll'
-            | 'brunch'
-            | 'middleman'
-            | 'zola'
-            | 'hydrogen'
-            | 'vite'
-            | 'vitepress'
-            | 'vuepress'
-            | 'parcel'
-            | 'sanity'
-            | 'storybook'
-            | null;
-          commandForIgnoringBuildStep?: string | null;
-          installCommand?: string | null;
-          outputDirectory?: string | null;
-          speedInsights?: {
-            id: string;
-            enabledAt?: number;
-            disabledAt?: number;
-            canceledAt?: number;
-            hasData?: boolean;
-            paidAt?: number;
-          };
-          webAnalytics?: {
-            id: string;
-            disabledAt?: number;
-            canceledAt?: number;
-            enabledAt?: number;
-            hasData?: boolean;
-          };
+          id?: string;
+          createdAt?: number;
+          entrypoint?: string | null;
+          readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+          readyStateAt?: number;
           output: {
             path: string;
             functionName: string;
@@ -3003,71 +2887,10 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         ready?: number;
         status: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
         team?: {
-          buildCommand?: string | null;
-          devCommand?: string | null;
-          framework?:
-            | 'blitzjs'
-            | 'nextjs'
-            | 'gatsby'
-            | 'remix'
-            | 'astro'
-            | 'hexo'
-            | 'eleventy'
-            | 'docusaurus-2'
-            | 'docusaurus'
-            | 'preact'
-            | 'solidstart-1'
-            | 'solidstart'
-            | 'dojo'
-            | 'ember'
-            | 'vue'
-            | 'scully'
-            | 'ionic-angular'
-            | 'angular'
-            | 'polymer'
-            | 'svelte'
-            | 'sveltekit'
-            | 'sveltekit-1'
-            | 'ionic-react'
-            | 'create-react-app'
-            | 'gridsome'
-            | 'umijs'
-            | 'sapper'
-            | 'saber'
-            | 'stencil'
-            | 'nuxtjs'
-            | 'redwoodjs'
-            | 'hugo'
-            | 'jekyll'
-            | 'brunch'
-            | 'middleman'
-            | 'zola'
-            | 'hydrogen'
-            | 'vite'
-            | 'vitepress'
-            | 'vuepress'
-            | 'parcel'
-            | 'sanity'
-            | 'storybook'
-            | null;
-          commandForIgnoringBuildStep?: string | null;
-          installCommand?: string | null;
-          outputDirectory?: string | null;
-          speedInsights?: {
-            id: string;
-            enabledAt?: number;
-            disabledAt?: number;
-            canceledAt?: number;
-            hasData?: boolean;
-            paidAt?: number;
-          };
-          webAnalytics?: {
-            id: string;
-            disabledAt?: number;
-            canceledAt?: number;
-            enabledAt?: number;
-            hasData?: boolean;
-          };
+          id: string;
+          avatar?: string;
+          name: string;
+          slug: string;
         };
         userAliases?: string[];
         previewCommentsEnabled?: boolean;
@@ -3210,7 +3033,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         undeletedAt?: number;
         url: string;
         oidcTokenClaims?: {
-          [key: string]: string;
+          [key: string]: string | string[];
         };
       },
     GetDeploymentError,
@@ -3332,71 +3155,11 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    buildCommand?: string | null;
-    commandForIgnoringBuildStep?: string | null;
-    devCommand?: string | null;
-    framework?:
-      | 'blitzjs'
-      | 'nextjs'
-      | 'gatsby'
-      | 'remix'
-      | 'astro'
-      | 'hexo'
-      | 'eleventy'
-      | 'docusaurus-2'
-      | 'docusaurus'
-      | 'preact'
-      | 'solidstart-1'
-      | 'solidstart'
-      | 'dojo'
-      | 'ember'
-      | 'vue'
-      | 'scully'
-      | 'ionic-angular'
-      | 'angular'
-      | 'polymer'
-      | 'svelte'
-      | 'sveltekit'
-      | 'sveltekit-1'
-      | 'ionic-react'
-      | 'create-react-app'
-      | 'gridsome'
-      | 'umijs'
-      | 'sapper'
-      | 'saber'
-      | 'stencil'
-      | 'nuxtjs'
-      | 'redwoodjs'
-      | 'hugo'
-      | 'jekyll'
-      | 'brunch'
-      | 'middleman'
-      | 'zola'
-      | 'hydrogen'
-      | 'vite'
-      | 'vitepress'
-      | 'vuepress'
-      | 'parcel'
-      | 'sanity'
-      | 'storybook'
-      | null;
-    installCommand?: string | null;
-    outputDirectory?: string | null;
-    speedInsights?: {
-      id: string;
-      enabledAt?: number;
-      disabledAt?: number;
-      canceledAt?: number;
-      hasData?: boolean;
-      paidAt?: number;
-    };
-    webAnalytics?: {
-      id: string;
-      disabledAt?: number;
-      canceledAt?: number;
-      enabledAt?: number;
-      hasData?: boolean;
-    };
+    id?: string;
+    createdAt?: number;
+    entrypoint?: string | null;
+    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    readyStateAt?: number;
     output: {
       path: string;
       functionName: string;
@@ -3406,71 +3169,10 @@ export type CreateDeploymentResponse = {
   ready?: number;
   status: 'CANCELED' | 'ERROR' | 'QUEUED' | 'BUILDING' | 'INITIALIZING' | 'READY';
   team?: {
-    buildCommand?: string | null;
-    commandForIgnoringBuildStep?: string | null;
-    devCommand?: string | null;
-    framework?:
-      | 'blitzjs'
-      | 'nextjs'
-      | 'gatsby'
-      | 'remix'
-      | 'astro'
-      | 'hexo'
-      | 'eleventy'
-      | 'docusaurus-2'
-      | 'docusaurus'
-      | 'preact'
-      | 'solidstart-1'
-      | 'solidstart'
-      | 'dojo'
-      | 'ember'
-      | 'vue'
-      | 'scully'
-      | 'ionic-angular'
-      | 'angular'
-      | 'polymer'
-      | 'svelte'
-      | 'sveltekit'
-      | 'sveltekit-1'
-      | 'ionic-react'
-      | 'create-react-app'
-      | 'gridsome'
-      | 'umijs'
-      | 'sapper'
-      | 'saber'
-      | 'stencil'
-      | 'nuxtjs'
-      | 'redwoodjs'
-      | 'hugo'
-      | 'jekyll'
-      | 'brunch'
-      | 'middleman'
-      | 'zola'
-      | 'hydrogen'
-      | 'vite'
-      | 'vitepress'
-      | 'vuepress'
-      | 'parcel'
-      | 'sanity'
-      | 'storybook'
-      | null;
-    installCommand?: string | null;
-    outputDirectory?: string | null;
-    speedInsights?: {
-      id: string;
-      enabledAt?: number;
-      disabledAt?: number;
-      canceledAt?: number;
-      hasData?: boolean;
-      paidAt?: number;
-    };
-    webAnalytics?: {
-      id: string;
-      disabledAt?: number;
-      canceledAt?: number;
-      enabledAt?: number;
-      hasData?: boolean;
-    };
+    slug: string;
+    name: string;
+    id: string;
+    avatar?: string;
   };
   userAliases?: string[];
   previewCommentsEnabled?: boolean;
@@ -3483,7 +3185,7 @@ export type CreateDeploymentResponse = {
         type: 'production' | 'preview' | 'development';
         description?: string;
         branchMatcher?: {
-          type: 'endsWith' | 'startsWith' | 'equals';
+          type: 'startsWith' | 'equals' | 'endsWith';
           pattern: string;
         };
         createdAt: number;
@@ -3613,7 +3315,7 @@ export type CreateDeploymentResponse = {
   undeletedAt?: number;
   url: string;
   oidcTokenClaims?: {
-    [key: string]: string;
+    [key: string]: string | string[];
   };
   projectId: string;
   ownerId: string;
@@ -3684,7 +3386,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
             src?: string;
             dest?: string;
             status?: number;
@@ -3718,7 +3420,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         org: string;
@@ -3730,7 +3432,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         owner: string;
@@ -3742,13 +3444,20 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | null;
   flags?:
     | {
         definitions: {
-          [key: string]: string;
+          [key: string]: {
+            options?: {
+              value: Schemas.FlagJSONValue;
+              label?: string;
+            }[];
+            url?: string;
+            description?: string;
+          };
         };
       }
     | Record<string, any>[];
@@ -4152,71 +3861,11 @@ export type CancelDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    buildCommand?: string | null;
-    devCommand?: string | null;
-    framework?:
-      | 'blitzjs'
-      | 'nextjs'
-      | 'gatsby'
-      | 'remix'
-      | 'astro'
-      | 'hexo'
-      | 'eleventy'
-      | 'docusaurus-2'
-      | 'docusaurus'
-      | 'preact'
-      | 'solidstart-1'
-      | 'solidstart'
-      | 'dojo'
-      | 'ember'
-      | 'vue'
-      | 'scully'
-      | 'ionic-angular'
-      | 'angular'
-      | 'polymer'
-      | 'svelte'
-      | 'sveltekit'
-      | 'sveltekit-1'
-      | 'ionic-react'
-      | 'create-react-app'
-      | 'gridsome'
-      | 'umijs'
-      | 'sapper'
-      | 'saber'
-      | 'stencil'
-      | 'nuxtjs'
-      | 'redwoodjs'
-      | 'hugo'
-      | 'jekyll'
-      | 'brunch'
-      | 'middleman'
-      | 'zola'
-      | 'hydrogen'
-      | 'vite'
-      | 'vitepress'
-      | 'vuepress'
-      | 'parcel'
-      | 'sanity'
-      | 'storybook'
-      | null;
-    commandForIgnoringBuildStep?: string | null;
-    installCommand?: string | null;
-    outputDirectory?: string | null;
-    speedInsights?: {
-      id: string;
-      enabledAt?: number;
-      disabledAt?: number;
-      canceledAt?: number;
-      hasData?: boolean;
-      paidAt?: number;
-    };
-    webAnalytics?: {
-      id: string;
-      disabledAt?: number;
-      canceledAt?: number;
-      enabledAt?: number;
-      hasData?: boolean;
-    };
+    id?: string;
+    createdAt?: number;
+    entrypoint?: string | null;
+    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    readyStateAt?: number;
     output: {
       path: string;
       functionName: string;
@@ -4226,71 +3875,10 @@ export type CancelDeploymentResponse = {
   ready?: number;
   status: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
   team?: {
-    buildCommand?: string | null;
-    devCommand?: string | null;
-    framework?:
-      | 'blitzjs'
-      | 'nextjs'
-      | 'gatsby'
-      | 'remix'
-      | 'astro'
-      | 'hexo'
-      | 'eleventy'
-      | 'docusaurus-2'
-      | 'docusaurus'
-      | 'preact'
-      | 'solidstart-1'
-      | 'solidstart'
-      | 'dojo'
-      | 'ember'
-      | 'vue'
-      | 'scully'
-      | 'ionic-angular'
-      | 'angular'
-      | 'polymer'
-      | 'svelte'
-      | 'sveltekit'
-      | 'sveltekit-1'
-      | 'ionic-react'
-      | 'create-react-app'
-      | 'gridsome'
-      | 'umijs'
-      | 'sapper'
-      | 'saber'
-      | 'stencil'
-      | 'nuxtjs'
-      | 'redwoodjs'
-      | 'hugo'
-      | 'jekyll'
-      | 'brunch'
-      | 'middleman'
-      | 'zola'
-      | 'hydrogen'
-      | 'vite'
-      | 'vitepress'
-      | 'vuepress'
-      | 'parcel'
-      | 'sanity'
-      | 'storybook'
-      | null;
-    commandForIgnoringBuildStep?: string | null;
-    installCommand?: string | null;
-    outputDirectory?: string | null;
-    speedInsights?: {
-      id: string;
-      enabledAt?: number;
-      disabledAt?: number;
-      canceledAt?: number;
-      hasData?: boolean;
-      paidAt?: number;
-    };
-    webAnalytics?: {
-      id: string;
-      disabledAt?: number;
-      canceledAt?: number;
-      enabledAt?: number;
-      hasData?: boolean;
-    };
+    id: string;
+    name: string;
+    avatar?: string;
+    slug: string;
   };
   userAliases?: string[];
   previewCommentsEnabled?: boolean;
@@ -4427,13 +4015,13 @@ export type CancelDeploymentResponse = {
   readySubstate?: 'STAGED' | 'PROMOTED';
   regions: string[];
   source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo';
-  target?: 'production' | 'staging' | null;
+  target?: 'staging' | 'production' | null;
   type: 'LAMBDAS';
   undeletedAt?: number;
   url: string;
   version: 2;
   oidcTokenClaims?: {
-    [key: string]: string;
+    [key: string]: string | string[];
   };
   connectBuildsEnabled?: boolean;
   connectConfigurationId?: string;
@@ -4516,7 +4104,7 @@ export type CancelDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'error' | 'resource';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
             src?: string;
             dest?: string;
             status?: number;
@@ -4568,7 +4156,14 @@ export type CancelDeploymentResponse = {
   flags?:
     | {
         definitions: {
-          [key: string]: string;
+          [key: string]: {
+            options?: {
+              value: Schemas.FlagJSONValue;
+              label?: string;
+            }[];
+            url?: string;
+            description?: string;
+          };
         };
       }
     | Record<string, any>[];
@@ -6240,7 +5835,7 @@ export type CreateOrTransferDomainResponse = {
     transferStartedAt?: number;
     userId: string;
     teamId: string | null;
-  };
+  }[];
 };
 
 export type CreateOrTransferDomainVariables = {
@@ -6527,6 +6122,11 @@ export type DeleteDomainQueryParams = {
 export type DeleteDomainError = Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteDomainResponse = {
+  /**
+   * The id of the newly created DNS record
+   *
+   * @example rec_V0fra8eEgQwEpFhYG2vTzC3K
+   */
   uid: string;
 };
 
@@ -9594,7 +9194,65 @@ export type GetProjectsResponse = {
       deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
     } | null;
     targets?: {
-      [key: string]: string | string[];
+      [key: string]: {
+        alias?: string[];
+        aliasAssigned?: number | boolean | null;
+        aliasError?: {
+          code: string;
+          message: string;
+        } | null;
+        aliasFinal?: string | null;
+        automaticAliases?: string[];
+        builds?: {
+          use: string;
+          src?: string;
+          dest?: string;
+        }[];
+        connectBuildsEnabled?: boolean;
+        connectConfigurationId?: string;
+        createdAt: number;
+        createdIn: string;
+        creator: {
+          email: string;
+          githubLogin?: string;
+          gitlabLogin?: string;
+          uid: string;
+          username: string;
+        } | null;
+        deletedAt?: number;
+        deploymentHostname: string;
+        name: string;
+        forced?: boolean;
+        id: string;
+        meta?: {
+          [key: string]: string;
+        };
+        monorepoManager?: string | null;
+        plan: 'pro' | 'enterprise' | 'hobby';
+        private: boolean;
+        readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+        readySubstate?: 'STAGED' | 'PROMOTED';
+        requestedAt?: number;
+        target?: string | null;
+        teamId?: string | null;
+        type: 'LAMBDAS';
+        url: string;
+        userId: string;
+        withCache?: boolean;
+        checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+        checksState?: 'registered' | 'running' | 'completed';
+        readyAt?: number;
+        buildingAt?: number;
+        /**
+         * Whether or not preview comments are enabled for the deployment
+         *
+         * @example false
+         */
+        previewCommentsEnabled?: boolean;
+        oidcTokenClaims?: {
+          [key: string]: string | string[];
+        };
+      } | null;
     };
     transferCompletedAt?: number;
     transferStartedAt?: number;
@@ -10040,7 +9698,7 @@ export type CreateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -10321,7 +9979,65 @@ export type CreateProjectResponse = {
     deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
-    [key: string]: string | string[];
+    [key: string]: {
+      alias?: string[];
+      aliasAssigned?: number | boolean | null;
+      aliasError?: {
+        code: string;
+        message: string;
+      } | null;
+      aliasFinal?: string | null;
+      automaticAliases?: string[];
+      builds?: {
+        use: string;
+        src?: string;
+        dest?: string;
+      }[];
+      connectBuildsEnabled?: boolean;
+      connectConfigurationId?: string;
+      createdAt: number;
+      createdIn: string;
+      creator: {
+        email: string;
+        githubLogin?: string;
+        gitlabLogin?: string;
+        uid: string;
+        username: string;
+      } | null;
+      deletedAt?: number;
+      deploymentHostname: string;
+      name: string;
+      forced?: boolean;
+      id: string;
+      meta?: {
+        [key: string]: string;
+      };
+      monorepoManager?: string | null;
+      plan: 'pro' | 'enterprise' | 'hobby';
+      private: boolean;
+      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+      readySubstate?: 'STAGED' | 'PROMOTED';
+      requestedAt?: number;
+      target?: string | null;
+      teamId?: string | null;
+      type: 'LAMBDAS';
+      url: string;
+      userId: string;
+      withCache?: boolean;
+      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+      checksState?: 'registered' | 'running' | 'completed';
+      readyAt?: number;
+      buildingAt?: number;
+      /**
+       * Whether or not preview comments are enabled for the deployment
+       *
+       * @example false
+       */
+      previewCommentsEnabled?: boolean;
+      oidcTokenClaims?: {
+        [key: string]: string | string[];
+      };
+    } | null;
   };
   transferCompletedAt?: number;
   transferStartedAt?: number;
@@ -11207,7 +10923,65 @@ export type GetProjectResponse = {
     deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
-    [key: string]: string | string[];
+    [key: string]: {
+      alias?: string[];
+      aliasAssigned?: number | boolean | null;
+      aliasError?: {
+        code: string;
+        message: string;
+      } | null;
+      aliasFinal?: string | null;
+      automaticAliases?: string[];
+      builds?: {
+        use: string;
+        src?: string;
+        dest?: string;
+      }[];
+      connectBuildsEnabled?: boolean;
+      connectConfigurationId?: string;
+      createdAt: number;
+      createdIn: string;
+      creator: {
+        email: string;
+        githubLogin?: string;
+        gitlabLogin?: string;
+        uid: string;
+        username: string;
+      } | null;
+      deletedAt?: number;
+      deploymentHostname: string;
+      name: string;
+      forced?: boolean;
+      id: string;
+      meta?: {
+        [key: string]: string;
+      };
+      monorepoManager?: string | null;
+      plan: 'pro' | 'enterprise' | 'hobby';
+      private: boolean;
+      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+      readySubstate?: 'STAGED' | 'PROMOTED';
+      requestedAt?: number;
+      target?: string | null;
+      teamId?: string | null;
+      type: 'LAMBDAS';
+      url: string;
+      userId: string;
+      withCache?: boolean;
+      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+      checksState?: 'registered' | 'running' | 'completed';
+      readyAt?: number;
+      buildingAt?: number;
+      /**
+       * Whether or not preview comments are enabled for the deployment
+       *
+       * @example false
+       */
+      previewCommentsEnabled?: boolean;
+      oidcTokenClaims?: {
+        [key: string]: string | string[];
+      };
+    } | null;
   };
   transferCompletedAt?: number;
   transferStartedAt?: number;
@@ -11661,7 +11435,7 @@ export type UpdateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -11942,7 +11716,65 @@ export type UpdateProjectResponse = {
     deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
-    [key: string]: string | string[];
+    [key: string]: {
+      alias?: string[];
+      aliasAssigned?: number | boolean | null;
+      aliasError?: {
+        code: string;
+        message: string;
+      } | null;
+      aliasFinal?: string | null;
+      automaticAliases?: string[];
+      builds?: {
+        use: string;
+        src?: string;
+        dest?: string;
+      }[];
+      connectBuildsEnabled?: boolean;
+      connectConfigurationId?: string;
+      createdAt: number;
+      createdIn: string;
+      creator: {
+        email: string;
+        githubLogin?: string;
+        gitlabLogin?: string;
+        uid: string;
+        username: string;
+      } | null;
+      deletedAt?: number;
+      deploymentHostname: string;
+      name: string;
+      forced?: boolean;
+      id: string;
+      meta?: {
+        [key: string]: string;
+      };
+      monorepoManager?: string | null;
+      plan: 'pro' | 'enterprise' | 'hobby';
+      private: boolean;
+      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+      readySubstate?: 'STAGED' | 'PROMOTED';
+      requestedAt?: number;
+      target?: string | null;
+      teamId?: string | null;
+      type: 'LAMBDAS';
+      url: string;
+      userId: string;
+      withCache?: boolean;
+      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+      checksState?: 'registered' | 'running' | 'completed';
+      readyAt?: number;
+      buildingAt?: number;
+      /**
+       * Whether or not preview comments are enabled for the deployment
+       *
+       * @example false
+       */
+      previewCommentsEnabled?: boolean;
+      oidcTokenClaims?: {
+        [key: string]: string | string[];
+      };
+    } | null;
   };
   transferCompletedAt?: number;
   transferStartedAt?: number;
@@ -12145,7 +11977,7 @@ export type UpdateProjectResponse = {
           value: string;
           note?: string;
         }[];
-        protectionMode: 'exclusive' | 'additional';
+        protectionMode: 'additional' | 'exclusive';
       }
     | {
         deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
@@ -13437,9 +13269,9 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
     | {
         decrypted: boolean;
         target?:
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -13528,9 +13360,9 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
       }
     | {
         target?:
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -13661,8 +13493,8 @@ export type CreateProjectEnvResponse = {
   created:
     | {
         target?:
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
         type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
@@ -13758,8 +13590,8 @@ export type CreateProjectEnvResponse = {
       }
     | {
         target?:
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
         type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
@@ -13862,13 +13694,11 @@ export type CreateProjectEnvResponse = {
       envVarKey?: string;
       action?: string;
       link?: string;
-      value?:
-        | string
-        | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[];
+      value?: string | ('production' | 'preview' | 'development' | 'preview' | 'development')[];
       gitBranch?: string;
       target?:
-        | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
-        | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
+        | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+        | ('production' | 'preview' | 'development' | 'preview' | 'development');
       project?: string;
     };
   }[];
@@ -14260,8 +14090,8 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
   fetch<
     | {
         target?:
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
         type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
@@ -14357,8 +14187,8 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
     | {
         system?: boolean;
         target?:
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
         type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
@@ -14453,8 +14283,8 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
       }
     | {
         target?:
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
         type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
@@ -15887,6 +15717,27 @@ export type CreateTeamResponse = {
       /**
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
        */
+      concurrentBuilds?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        /**
+         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
+         */
+        highestQuantity?: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 6 | 2 | 3 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
       pro?: {
         tier?: number;
         price: number;
@@ -15901,7 +15752,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 1 | 6 | 2 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -15922,7 +15773,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 1 | 6 | 2 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -15943,28 +15794,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      concurrentBuilds?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 1 | 6 | 2 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -15985,7 +15815,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 1 | 6 | 2 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -16006,7 +15836,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 1 | 6 | 2 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -16027,7 +15857,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 1 | 6 | 2 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -16048,7 +15878,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 1 | 6 | 2 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -16069,7 +15899,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 1 | 6 | 2 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -16090,7 +15920,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 1 | 6 | 2 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -16111,7 +15941,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 1 | 6 | 2 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -16132,9 +15962,25 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 1 | 6 | 2 | 3 | 12;
         };
         maxQuantity?: number;
+      };
+      blobStores?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
       };
       analyticsUsage?: {
         matrix?: {
@@ -16169,22 +16015,6 @@ export type CreateTeamResponse = {
         enabledAt?: number | null;
       };
       bandwidth?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      blobStores?: {
         matrix?: {
           defaultUnitPrice: string;
           dimensionPrices: {
@@ -18177,7 +18007,7 @@ export type GetAliasResponse = {
           scope: 'email_invite';
         };
   };
-};
+}[];
 
 export type GetAliasVariables = {
   pathParams: GetAliasPathParams;
@@ -19145,6 +18975,11 @@ export const verifyToken = (variables: VerifyTokenVariables, signal?: AbortSigna
 
 export type EmailLoginError = Fetcher.ErrorWrapper<undefined>;
 
+export type EmailLoginResponse = {
+  token: string;
+  securityCode: string;
+};
+
 export type EmailLoginRequestBody = {
   /**
    * The user email.
@@ -19168,31 +19003,12 @@ export type EmailLoginVariables = {
  * Request a new login for a user to get a token. This will respond with a verification token and send an email to confirm the request. Once confirmed you can use the verification token to get an authentication token.
  */
 export const emailLogin = (variables: EmailLoginVariables, signal?: AbortSignal) =>
-  fetch<
-    | {
-        token: string;
-        securityCode: string;
-      }
-    | {
-        /**
-         * The token used to verify the user accepted the login request
-         *
-         * @example T1dmvPu36nmyYisXAs7IRzcR
-         */
-        token: string;
-        /**
-         * The code the user is going to receive on the email. **Must** be displayed to the user so they can verify the request is the correct.
-         *
-         * @example Practical Saola
-         */
-        securityCode: string;
-      },
-    EmailLoginError,
-    EmailLoginRequestBody,
-    {},
-    {},
-    {}
-  >({ url: '/registration', method: 'post', ...variables, signal });
+  fetch<EmailLoginResponse, EmailLoginError, EmailLoginRequestBody, {}, {}, {}>({
+    url: '/registration',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteDeploymentPathParams = {
   /**
