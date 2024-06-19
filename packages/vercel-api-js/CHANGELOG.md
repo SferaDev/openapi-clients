@@ -1,5 +1,22 @@
 # vercel-api-js
 
+## 0.9.0
+
+### Minor Changes
+
+- 19b3382: Add support for new targets object in getDeployment and createDeployment APIs
+
+### Patch Changes
+
+- 23fbbe2: [BREAKING] Add new 'firewall' source option to log drains
+- 1644eaf: Add ACLAction enum for resource actions
+- 062bcd1: Add 'environment' field to the project data cache response
+- 1f54229: Add 'firewall' as a source option for LogDrainRequestBody and ConfigurableLogDrainRequestBody
+- 65c3e00: [BREAKING] Add vsmValue to project environment variables
+- 63ac8ae: Add new AWS Marketplace field to AuthUser type
+- 95bf70e: Add `teamId` and `userId` properties to domains responses
+- 60d3771: Add 'environment' field to project response types
+
 ## 0.8.5
 
 ### Patch Changes
