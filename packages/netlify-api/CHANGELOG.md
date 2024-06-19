@@ -1,5 +1,12 @@
 # netlify-api
 
+## 0.5.0
+
+### Minor Changes
+
+- 2c6c5a4: Bump version to 2.32.0
+- 8580858: Bump API version to 2.33.0
+
 ## 0.4.2
 
 ### Patch Changes
