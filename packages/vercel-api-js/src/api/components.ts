@@ -7278,6 +7278,160 @@ export type GetConfigurationVariables = {
 export const getConfiguration = (variables: GetConfigurationVariables, signal?: AbortSignal) =>
   fetch<
     | {
+        billingTotal?: string;
+        /**
+         * A timestamp that tells you when the configuration was installed successfully
+         *
+         * @example 1558531915505
+         */
+        completedAt?: number;
+        /**
+         * A timestamp that tells you when the configuration was created
+         *
+         * @example 1558531915505
+         */
+        createdAt: number;
+        /**
+         * The unique identifier of the configuration
+         *
+         * @example icfg_3bwCLgxL8qt5kjRLcv2Dit7F
+         */
+        id: string;
+        /**
+         * The unique identifier of the app the configuration was created for
+         *
+         * @example oac_xzpVzcUOgcB1nrVlirtKhbWV
+         */
+        integrationId: string;
+        /**
+         * The user or team ID that owns the configuration
+         *
+         * @example kr1PsOIzqEL5Xg6M4VZcZosf
+         */
+        ownerId: string;
+        /**
+         * When a configuration is limited to access certain projects, this will contain each of the project ID it is allowed to access. If it is not defined, the configuration has full access.
+         *
+         * @example prj_xQxbutw1HpL6HLYPAzt5h75m8NjO
+         */
+        projects?: string[];
+        /**
+         * Source defines where the configuration was installed from. It is used to analyze user engagement for integration installations in product metrics.
+         *
+         * @example marketplace
+         */
+        source?: 'marketplace' | 'deploy-button' | 'external';
+        removedLogDrainsAt?: number;
+        removedProjectEnvsAt?: number;
+        removedTokensAt?: number;
+        removedWebhooksAt?: number;
+        /**
+         * The slug of the integration the configuration is created for.
+         *
+         * @example slack
+         */
+        slug: string;
+        /**
+         * When the configuration was created for a team, this will show the ID of the team.
+         *
+         * @example team_nLlpyC6RE1qxydlFKbrxDlud
+         */
+        teamId?: string | null;
+        type: 'integration-configuration';
+        /**
+         * A timestamp that tells you when the configuration was updated.
+         *
+         * @example 1558531915505
+         */
+        updatedAt: number;
+        /**
+         * The ID of the user that created the configuration.
+         *
+         * @example kr1PsOIzqEL5Xg6M4VZcZosf
+         */
+        userId: string;
+        /**
+         * The resources that are allowed to be accessed by the configuration.
+         *
+         * @example read:project
+         * @example read-write:log-drain
+         */
+        scopes: string[];
+        scopesQueue?: {
+          scopes: {
+            added: (
+              | 'read:integration-configuration'
+              | 'read-write:integration-configuration'
+              | 'read:deployment'
+              | 'read-write:deployment'
+              | 'read-write:deployment-check'
+              | 'read:project'
+              | 'read-write:project'
+              | 'read-write:project-env-vars'
+              | 'read-write:global-project-env-vars'
+              | 'read:team'
+              | 'read:user'
+              | 'read-write:log-drain'
+              | 'read:domain'
+              | 'read-write:domain'
+              | 'read-write:edge-config'
+              | 'read-write:otel-endpoint'
+              | 'read:monitoring'
+              | 'read-write:integration-resource'
+            )[];
+            upgraded: (
+              | 'read:integration-configuration'
+              | 'read-write:integration-configuration'
+              | 'read:deployment'
+              | 'read-write:deployment'
+              | 'read-write:deployment-check'
+              | 'read:project'
+              | 'read-write:project'
+              | 'read-write:project-env-vars'
+              | 'read-write:global-project-env-vars'
+              | 'read:team'
+              | 'read:user'
+              | 'read-write:log-drain'
+              | 'read:domain'
+              | 'read-write:domain'
+              | 'read-write:edge-config'
+              | 'read-write:otel-endpoint'
+              | 'read:monitoring'
+              | 'read-write:integration-resource'
+            )[];
+          };
+          note: string;
+          requestedAt: number;
+          confirmedAt?: number;
+        }[];
+        /**
+         * A timestamp that tells you when the configuration was disabled. Note: Configurations can be disabled when the associated user loses access to a team. They do not function during this time until the configuration is 'transferred', meaning the associated user is changed to one with access to the team.
+         *
+         * @example 1558531915505
+         */
+        disabledAt?: number;
+        /**
+         * A timestamp that tells you when the configuration was updated.
+         *
+         * @example 1558531915505
+         */
+        deletedAt?: number | null;
+        disabledReason?:
+          | 'disabled-by-owner'
+          | 'feature-not-available'
+          | 'disabled-by-admin'
+          | 'original-owner-left-the-team'
+          | 'account-plan-downgrade';
+        /**
+         * A timestamp that tells you when the configuration was migrated as part of the Northstar migration. In the future, if we allow integration configurations to be transferred between teams, this field should be cleared upon transfer.
+         */
+        northstarMigratedAt?: number;
+        /**
+         * Defines the installation type. - 'external' integrations are installed via the existing integrations flow - 'marketplace' integrations are natively installed: - when accepting the TOS of a partner during the store creation process - if undefined, assume 'external'
+         */
+        installationType?: 'marketplace' | 'external';
+      }
+    | {
         /**
          * A timestamp that tells you when the configuration was installed successfully
          *
