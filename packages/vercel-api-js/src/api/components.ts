@@ -16036,6 +16036,27 @@ export type CreateTeamResponse = {
       /**
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
        */
+      includedAllocationMiu?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        /**
+         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
+         */
+        highestQuantity?: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 1 | 6 | 2 | 3 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
       managedInfrastructureCommitment?: {
         tier?: number;
         price: number;
