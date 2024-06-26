@@ -1466,6 +1466,10 @@ export type AuthUser = {
     /**
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
+    imageOptimizationType?: string;
+    /**
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+     */
     edgeConfigs?: number;
     /**
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
