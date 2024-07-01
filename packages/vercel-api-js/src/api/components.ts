@@ -1804,6 +1804,7 @@ export type UpdateProjectDataCacheResponse = {
   skewProtectionMaxAge?: number;
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
+  enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
     deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
@@ -2198,6 +2199,7 @@ export type UpdateProjectDataCacheResponse = {
   oidcTokenConfig?: {
     enabled: boolean;
   };
+  tier?: 'standard' | 'advanced' | 'critical';
 };
 
 export type UpdateProjectDataCacheRequestBody = {
@@ -9404,6 +9406,7 @@ export type GetProjectsResponse = {
     skewProtectionMaxAge?: number;
     skipGitConnectDuringLink?: boolean;
     sourceFilesOutsideRootDirectory?: boolean;
+    enableAffectedProjectsDeployments?: boolean;
     ssoProtection?: {
       deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
     } | null;
@@ -9798,6 +9801,7 @@ export type GetProjectsResponse = {
     oidcTokenConfig?: {
       enabled: boolean;
     };
+    tier?: 'standard' | 'advanced' | 'critical';
   }[];
   pagination: Schemas.Pagination;
 };
@@ -10189,6 +10193,7 @@ export type CreateProjectResponse = {
   skewProtectionMaxAge?: number;
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
+  enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
     deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
@@ -10583,6 +10588,7 @@ export type CreateProjectResponse = {
   oidcTokenConfig?: {
     enabled: boolean;
   };
+  tier?: 'standard' | 'advanced' | 'critical';
 };
 
 export type CreateProjectRequestBody = {
@@ -11133,6 +11139,7 @@ export type GetProjectResponse = {
   skewProtectionMaxAge?: number;
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
+  enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
     deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
@@ -11527,6 +11534,7 @@ export type GetProjectResponse = {
   oidcTokenConfig?: {
     enabled: boolean;
   };
+  tier?: 'standard' | 'advanced' | 'critical';
 };
 
 export type GetProjectVariables = {
@@ -11926,6 +11934,7 @@ export type UpdateProjectResponse = {
   skewProtectionMaxAge?: number;
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
+  enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
     deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
@@ -12320,6 +12329,7 @@ export type UpdateProjectResponse = {
   oidcTokenConfig?: {
     enabled: boolean;
   };
+  tier?: 'standard' | 'advanced' | 'critical';
 };
 
 export type UpdateProjectRequestBody = {
@@ -12471,6 +12481,10 @@ export type UpdateProjectRequestBody = {
    * Opt-in to Preview comments on the project level
    */
   enablePreviewFeedback?: boolean | null;
+  /**
+   * Opt-in to skip deployments when there are no changes to the root directory and its dependencies
+   */
+  enableAffectedProjectsDeployments?: boolean;
   /**
    * Allows to protect project deployments with a password
    */
@@ -15931,27 +15945,6 @@ export type CreateTeamResponse = {
       /**
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
        */
-      concurrentBuilds?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
       pro?: {
         tier?: number;
         price: number;
@@ -15966,7 +15959,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -15987,7 +15980,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16008,7 +16001,28 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      concurrentBuilds?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        /**
+         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
+         */
+        highestQuantity?: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16029,7 +16043,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16050,7 +16064,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16071,7 +16085,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16092,7 +16106,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16113,7 +16127,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16134,7 +16148,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16155,7 +16169,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16176,7 +16190,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16197,25 +16211,9 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
-      };
-      blobStores?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
       };
       analyticsUsage?: {
         matrix?: {
@@ -16250,6 +16248,22 @@ export type CreateTeamResponse = {
         enabledAt?: number | null;
       };
       bandwidth?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      blobStores?: {
         matrix?: {
           defaultUnitPrice: string;
           dimensionPrices: {
@@ -17350,6 +17364,7 @@ export type CreateWebhookResponse = {
     | 'deployment.succeeded'
     | 'deployment.ready'
     | 'deployment.check-rerequested'
+    | 'deployment.promoted'
     | 'integration-configuration.permission-upgraded'
     | 'integration-configuration.removed'
     | 'integration-configuration.scope-change-confirmed'
@@ -17430,6 +17445,7 @@ export type CreateWebhookRequestBody = {
     | 'deployment.succeeded'
     | 'deployment.ready'
     | 'deployment.check-rerequested'
+    | 'deployment.promoted'
     | 'integration-configuration.permission-upgraded'
     | 'integration-configuration.removed'
     | 'integration-configuration.scope-change-confirmed'
@@ -17570,6 +17586,7 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'deployment.succeeded'
           | 'deployment.ready'
           | 'deployment.check-rerequested'
+          | 'deployment.promoted'
           | 'integration-configuration.permission-upgraded'
           | 'integration-configuration.removed'
           | 'integration-configuration.scope-change-confirmed'
@@ -17646,6 +17663,7 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'deployment.succeeded'
           | 'deployment.ready'
           | 'deployment.check-rerequested'
+          | 'deployment.promoted'
           | 'integration-configuration.permission-upgraded'
           | 'integration-configuration.removed'
           | 'integration-configuration.scope-change-confirmed'
@@ -17746,6 +17764,7 @@ export type GetWebhookResponse = {
     | 'deployment.succeeded'
     | 'deployment.ready'
     | 'deployment.check-rerequested'
+    | 'deployment.promoted'
     | 'integration-configuration.permission-upgraded'
     | 'integration-configuration.removed'
     | 'integration-configuration.scope-change-confirmed'
