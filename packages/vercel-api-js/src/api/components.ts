@@ -5897,7 +5897,7 @@ export type CreateOrTransferDomainResponse = {
     transferStartedAt?: number;
     userId: string;
     teamId: string | null;
-  }[];
+  };
 };
 
 export type CreateOrTransferDomainVariables = {
