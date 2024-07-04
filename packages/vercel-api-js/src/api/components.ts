@@ -1983,6 +1983,7 @@ export type UpdateProjectDataCacheResponse = {
     usageCycle?: Schemas.ACLAction[];
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
+    vpcPeeringConnection?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
     webAuthn?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
@@ -2045,6 +2046,7 @@ export type UpdateProjectDataCacheResponse = {
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
     sharedEnvVarConnection?: Schemas.ACLAction[];
+    sonar?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
@@ -2182,7 +2184,7 @@ export type UpdateProjectDataCacheResponse = {
       status?: number;
       handle?: 'init' | 'finalize';
       mitigate?: {
-        action: 'deny' | 'challenge' | 'log' | 'bypass' | 'rate_limit';
+        action: 'deny' | 'challenge' | 'log' | 'bypass' | 'rate_limit' | 'redirect';
         rule_id: string;
         erl?: {
           algo: 'fixed_window' | 'token_bucket';
@@ -5897,7 +5899,7 @@ export type CreateOrTransferDomainResponse = {
     transferStartedAt?: number;
     userId: string;
     teamId: string | null;
-  };
+  }[];
 };
 
 export type CreateOrTransferDomainVariables = {
@@ -9585,6 +9587,7 @@ export type GetProjectsResponse = {
       usageCycle?: Schemas.ACLAction[];
       user?: Schemas.ACLAction[];
       userConnection?: Schemas.ACLAction[];
+      vpcPeeringConnection?: Schemas.ACLAction[];
       webAnalyticsPlan?: Schemas.ACLAction[];
       webAuthn?: Schemas.ACLAction[];
       edgeConfig?: Schemas.ACLAction[];
@@ -9647,6 +9650,7 @@ export type GetProjectsResponse = {
       trustedIps?: Schemas.ACLAction[];
       webAnalytics?: Schemas.ACLAction[];
       sharedEnvVarConnection?: Schemas.ACLAction[];
+      sonar?: Schemas.ACLAction[];
     };
     lastRollbackTarget?: Record<string, any> | null;
     lastAliasRequest?: {
@@ -9784,7 +9788,7 @@ export type GetProjectsResponse = {
         status?: number;
         handle?: 'init' | 'finalize';
         mitigate?: {
-          action: 'deny' | 'challenge' | 'log' | 'bypass' | 'rate_limit';
+          action: 'deny' | 'challenge' | 'log' | 'bypass' | 'rate_limit' | 'redirect';
           rule_id: string;
           erl?: {
             algo: 'fixed_window' | 'token_bucket';
@@ -10372,6 +10376,7 @@ export type CreateProjectResponse = {
     usageCycle?: Schemas.ACLAction[];
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
+    vpcPeeringConnection?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
     webAuthn?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
@@ -10434,6 +10439,7 @@ export type CreateProjectResponse = {
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
     sharedEnvVarConnection?: Schemas.ACLAction[];
+    sonar?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
@@ -10571,7 +10577,7 @@ export type CreateProjectResponse = {
       status?: number;
       handle?: 'init' | 'finalize';
       mitigate?: {
-        action: 'deny' | 'challenge' | 'log' | 'bypass' | 'rate_limit';
+        action: 'deny' | 'challenge' | 'log' | 'bypass' | 'rate_limit' | 'redirect';
         rule_id: string;
         erl?: {
           algo: 'fixed_window' | 'token_bucket';
@@ -11318,6 +11324,7 @@ export type GetProjectResponse = {
     usageCycle?: Schemas.ACLAction[];
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
+    vpcPeeringConnection?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
     webAuthn?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
@@ -11380,6 +11387,7 @@ export type GetProjectResponse = {
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
     sharedEnvVarConnection?: Schemas.ACLAction[];
+    sonar?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
@@ -11517,7 +11525,7 @@ export type GetProjectResponse = {
       status?: number;
       handle?: 'init' | 'finalize';
       mitigate?: {
-        action: 'deny' | 'challenge' | 'log' | 'bypass' | 'rate_limit';
+        action: 'deny' | 'challenge' | 'log' | 'bypass' | 'rate_limit' | 'redirect';
         rule_id: string;
         erl?: {
           algo: 'fixed_window' | 'token_bucket';
@@ -12113,6 +12121,7 @@ export type UpdateProjectResponse = {
     usageCycle?: Schemas.ACLAction[];
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
+    vpcPeeringConnection?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
     webAuthn?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
@@ -12175,6 +12184,7 @@ export type UpdateProjectResponse = {
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
     sharedEnvVarConnection?: Schemas.ACLAction[];
+    sonar?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
@@ -12312,7 +12322,7 @@ export type UpdateProjectResponse = {
       status?: number;
       handle?: 'init' | 'finalize';
       mitigate?: {
-        action: 'deny' | 'challenge' | 'log' | 'bypass' | 'rate_limit';
+        action: 'deny' | 'challenge' | 'log' | 'bypass' | 'rate_limit' | 'redirect';
         rule_id: string;
         erl?: {
           algo: 'fixed_window' | 'token_bucket';
