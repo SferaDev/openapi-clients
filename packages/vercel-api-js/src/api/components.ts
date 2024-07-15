@@ -1599,6 +1599,9 @@ export type UpdateProjectDataCacheResponse = {
       | {
           type: 'integration-store-secret';
           storeId: string;
+          integrationId: string;
+          integrationProductId: string;
+          integrationConfigurationId: string;
         }
       | null;
     /**
@@ -2025,6 +2028,7 @@ export type UpdateProjectDataCacheResponse = {
     projectEnvVars?: Schemas.ACLAction[];
     projectEnvVarsProduction?: Schemas.ACLAction[];
     projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+    projectFlags?: Schemas.ACLAction[];
     projectId?: Schemas.ACLAction[];
     projectIntegrationConfiguration?: Schemas.ACLAction[];
     projectLink?: Schemas.ACLAction[];
@@ -2040,6 +2044,7 @@ export type UpdateProjectDataCacheResponse = {
     projectSupportCase?: Schemas.ACLAction[];
     projectSupportCaseComment?: Schemas.ACLAction[];
     projectDeploymentExpiration?: Schemas.ACLAction[];
+    projectTier?: Schemas.ACLAction[];
     seawallConfig?: Schemas.ACLAction[];
     skewProtection?: Schemas.ACLAction[];
     analytics?: Schemas.ACLAction[];
@@ -2186,6 +2191,7 @@ export type UpdateProjectDataCacheResponse = {
       mitigate?: {
         action: 'deny' | 'challenge' | 'log' | 'bypass' | 'rate_limit' | 'redirect';
         rule_id: string;
+        ttl?: number;
         erl?: {
           algo: 'fixed_window' | 'token_bucket';
           window: number;
@@ -2591,6 +2597,30 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               };
               createdAt: number;
               updatedAt: number;
+              domains?: {
+                name: string;
+                apexName: string;
+                projectId: string;
+                redirect?: string | null;
+                redirectStatusCode?: 307 | 301 | 302 | 308 | null;
+                gitBranch?: string | null;
+                customEnvironmentId?: string | null;
+                updatedAt?: number;
+                createdAt?: number;
+                /**
+                 * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+                 */
+                verified: boolean;
+                /**
+                 * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+                 */
+                verification?: {
+                  type: string;
+                  domain: string;
+                  value: string;
+                  reason: string;
+                }[];
+              }[];
             }
           | {
               id: string;
@@ -2711,7 +2741,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          */
         readySubstate?: 'STAGED' | 'PROMOTED';
         regions: string[];
-        source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo';
+        source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy';
         target?: 'staging' | 'production' | null;
         undeletedAt?: number;
         url: string;
@@ -2912,6 +2942,30 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               };
               createdAt: number;
               updatedAt: number;
+              domains?: {
+                name: string;
+                apexName: string;
+                projectId: string;
+                redirect?: string | null;
+                redirectStatusCode?: 307 | 301 | 302 | 308 | null;
+                gitBranch?: string | null;
+                customEnvironmentId?: string | null;
+                updatedAt?: number;
+                createdAt?: number;
+                /**
+                 * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+                 */
+                verified: boolean;
+                /**
+                 * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+                 */
+                verification?: {
+                  type: string;
+                  domain: string;
+                  value: string;
+                  reason: string;
+                }[];
+              }[];
             }
           | {
               id: string;
@@ -3032,7 +3086,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          */
         readySubstate?: 'STAGED' | 'PROMOTED';
         regions: string[];
-        source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo';
+        source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy';
         target?: 'staging' | 'production' | null;
         undeletedAt?: number;
         url: string;
@@ -3194,6 +3248,30 @@ export type CreateDeploymentResponse = {
         };
         createdAt: number;
         updatedAt: number;
+        domains?: {
+          name: string;
+          apexName: string;
+          projectId: string;
+          redirect?: string | null;
+          redirectStatusCode?: 307 | 301 | 302 | 308 | null;
+          gitBranch?: string | null;
+          customEnvironmentId?: string | null;
+          updatedAt?: number;
+          createdAt?: number;
+          /**
+           * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+           */
+          verified: boolean;
+          /**
+           * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+           */
+          verification?: {
+            type: string;
+            domain: string;
+            value: string;
+            reason: string;
+          }[];
+        }[];
       }
     | {
         id: string;
@@ -3285,7 +3363,7 @@ export type CreateDeploymentResponse = {
     framework?: string | null;
   };
   readyState: 'CANCELED' | 'ERROR' | 'QUEUED' | 'BUILDING' | 'INITIALIZING' | 'READY';
-  source?: 'cli' | 'git' | 'import' | 'import/repo' | 'clone/repo' | 'api-trigger-git-deploy';
+  source?: 'cli' | 'git' | 'import' | 'import/repo' | 'clone/repo' | 'api-trigger-git-deploy' | 'redeploy';
   target?: 'staging' | 'production' | null;
   /**
    * Since November 2023 this field defines a set of regions that we will deploy the lambda to passively Lambdas will be deployed to these regions but only invoked if all of the primary `regions` are marked as out of service
@@ -3900,6 +3978,30 @@ export type CancelDeploymentResponse = {
         };
         createdAt: number;
         updatedAt: number;
+        domains?: {
+          name: string;
+          apexName: string;
+          projectId: string;
+          redirect?: string | null;
+          redirectStatusCode?: 307 | 301 | 302 | 308 | null;
+          gitBranch?: string | null;
+          customEnvironmentId?: string | null;
+          updatedAt?: number;
+          createdAt?: number;
+          /**
+           * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+           */
+          verified: boolean;
+          /**
+           * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+           */
+          verification?: {
+            type: string;
+            domain: string;
+            value: string;
+            reason: string;
+          }[];
+        }[];
       }
     | {
         id: string;
@@ -4018,7 +4120,7 @@ export type CancelDeploymentResponse = {
    */
   readySubstate?: 'STAGED' | 'PROMOTED';
   regions: string[];
-  source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo';
+  source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy';
   target?: 'staging' | 'production' | null;
   type: 'LAMBDAS';
   undeletedAt?: number;
@@ -7131,7 +7233,8 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
           | 'feature-not-available'
           | 'disabled-by-admin'
           | 'original-owner-left-the-team'
-          | 'account-plan-downgrade';
+          | 'account-plan-downgrade'
+          | 'original-owner-role-downgraded';
         /**
          * A timestamp that tells you when the configuration was migrated as part of the Northstar migration. In the future, if we allow integration configurations to be transferred between teams, this field should be cleared upon transfer.
          */
@@ -7292,7 +7395,8 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
           | 'feature-not-available'
           | 'disabled-by-admin'
           | 'original-owner-left-the-team'
-          | 'account-plan-downgrade';
+          | 'account-plan-downgrade'
+          | 'original-owner-role-downgraded';
         /**
          * A timestamp that tells you when the configuration was migrated as part of the Northstar migration. In the future, if we allow integration configurations to be transferred between teams, this field should be cleared upon transfer.
          */
@@ -7343,6 +7447,8 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
   fetch<
     | {
         billingTotal?: string;
+        periodStart?: string;
+        periodEnd?: string;
         /**
          * A timestamp that tells you when the configuration was installed successfully
          *
@@ -7485,7 +7591,8 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
           | 'feature-not-available'
           | 'disabled-by-admin'
           | 'original-owner-left-the-team'
-          | 'account-plan-downgrade';
+          | 'account-plan-downgrade'
+          | 'original-owner-role-downgraded';
         /**
          * A timestamp that tells you when the configuration was migrated as part of the Northstar migration. In the future, if we allow integration configurations to be transferred between teams, this field should be cleared upon transfer.
          */
@@ -7638,7 +7745,8 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
           | 'feature-not-available'
           | 'disabled-by-admin'
           | 'original-owner-left-the-team'
-          | 'account-plan-downgrade';
+          | 'account-plan-downgrade'
+          | 'original-owner-role-downgraded';
         /**
          * A timestamp that tells you when the configuration was migrated as part of the Northstar migration. In the future, if we allow integration configurations to be transferred between teams, this field should be cleared upon transfer.
          */
@@ -7797,7 +7905,8 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
           | 'feature-not-available'
           | 'disabled-by-admin'
           | 'original-owner-left-the-team'
-          | 'account-plan-downgrade';
+          | 'account-plan-downgrade'
+          | 'original-owner-role-downgraded';
         /**
          * A timestamp that tells you when the configuration was migrated as part of the Northstar migration. In the future, if we allow integration configurations to be transferred between teams, this field should be cleared upon transfer.
          */
@@ -9203,6 +9312,9 @@ export type GetProjectsResponse = {
         | {
             type: 'integration-store-secret';
             storeId: string;
+            integrationId: string;
+            integrationProductId: string;
+            integrationConfigurationId: string;
           }
         | null;
       /**
@@ -9629,6 +9741,7 @@ export type GetProjectsResponse = {
       projectEnvVars?: Schemas.ACLAction[];
       projectEnvVarsProduction?: Schemas.ACLAction[];
       projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+      projectFlags?: Schemas.ACLAction[];
       projectId?: Schemas.ACLAction[];
       projectIntegrationConfiguration?: Schemas.ACLAction[];
       projectLink?: Schemas.ACLAction[];
@@ -9644,6 +9757,7 @@ export type GetProjectsResponse = {
       projectSupportCase?: Schemas.ACLAction[];
       projectSupportCaseComment?: Schemas.ACLAction[];
       projectDeploymentExpiration?: Schemas.ACLAction[];
+      projectTier?: Schemas.ACLAction[];
       seawallConfig?: Schemas.ACLAction[];
       skewProtection?: Schemas.ACLAction[];
       analytics?: Schemas.ACLAction[];
@@ -9790,6 +9904,7 @@ export type GetProjectsResponse = {
         mitigate?: {
           action: 'deny' | 'challenge' | 'log' | 'bypass' | 'rate_limit' | 'redirect';
           rule_id: string;
+          ttl?: number;
           erl?: {
             algo: 'fixed_window' | 'token_bucket';
             window: number;
@@ -9920,7 +10035,7 @@ export type CreateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -9992,6 +10107,9 @@ export type CreateProjectResponse = {
       | {
           type: 'integration-store-secret';
           storeId: string;
+          integrationId: string;
+          integrationProductId: string;
+          integrationConfigurationId: string;
         }
       | null;
     /**
@@ -10418,6 +10536,7 @@ export type CreateProjectResponse = {
     projectEnvVars?: Schemas.ACLAction[];
     projectEnvVarsProduction?: Schemas.ACLAction[];
     projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+    projectFlags?: Schemas.ACLAction[];
     projectId?: Schemas.ACLAction[];
     projectIntegrationConfiguration?: Schemas.ACLAction[];
     projectLink?: Schemas.ACLAction[];
@@ -10433,6 +10552,7 @@ export type CreateProjectResponse = {
     projectSupportCase?: Schemas.ACLAction[];
     projectSupportCaseComment?: Schemas.ACLAction[];
     projectDeploymentExpiration?: Schemas.ACLAction[];
+    projectTier?: Schemas.ACLAction[];
     seawallConfig?: Schemas.ACLAction[];
     skewProtection?: Schemas.ACLAction[];
     analytics?: Schemas.ACLAction[];
@@ -10579,6 +10699,7 @@ export type CreateProjectResponse = {
       mitigate?: {
         action: 'deny' | 'challenge' | 'log' | 'bypass' | 'rate_limit' | 'redirect';
         rule_id: string;
+        ttl?: number;
         erl?: {
           algo: 'fixed_window' | 'token_bucket';
           window: number;
@@ -10748,6 +10869,15 @@ export type CreateProjectRequestBody = {
    * Specifies whether Zero Config Failover is enabled for this project.
    */
   serverlessFunctionZeroConfigFailover?: boolean;
+  /**
+   * OpenID Connect JSON Web Token generation configuration.
+   */
+  oidcTokenConfig?: {
+    /**
+     * Whether or not to generate OpenID Connect JSON Web Tokens.
+     */
+    enabled: boolean;
+  };
 };
 
 export type CreateProjectVariables = {
@@ -10940,6 +11070,9 @@ export type GetProjectResponse = {
       | {
           type: 'integration-store-secret';
           storeId: string;
+          integrationId: string;
+          integrationProductId: string;
+          integrationConfigurationId: string;
         }
       | null;
     /**
@@ -11366,6 +11499,7 @@ export type GetProjectResponse = {
     projectEnvVars?: Schemas.ACLAction[];
     projectEnvVarsProduction?: Schemas.ACLAction[];
     projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+    projectFlags?: Schemas.ACLAction[];
     projectId?: Schemas.ACLAction[];
     projectIntegrationConfiguration?: Schemas.ACLAction[];
     projectLink?: Schemas.ACLAction[];
@@ -11381,6 +11515,7 @@ export type GetProjectResponse = {
     projectSupportCase?: Schemas.ACLAction[];
     projectSupportCaseComment?: Schemas.ACLAction[];
     projectDeploymentExpiration?: Schemas.ACLAction[];
+    projectTier?: Schemas.ACLAction[];
     seawallConfig?: Schemas.ACLAction[];
     skewProtection?: Schemas.ACLAction[];
     analytics?: Schemas.ACLAction[];
@@ -11527,6 +11662,7 @@ export type GetProjectResponse = {
       mitigate?: {
         action: 'deny' | 'challenge' | 'log' | 'bypass' | 'rate_limit' | 'redirect';
         rule_id: string;
+        ttl?: number;
         erl?: {
           algo: 'fixed_window' | 'token_bucket';
           window: number;
@@ -11737,6 +11873,9 @@ export type UpdateProjectResponse = {
       | {
           type: 'integration-store-secret';
           storeId: string;
+          integrationId: string;
+          integrationProductId: string;
+          integrationConfigurationId: string;
         }
       | null;
     /**
@@ -12163,6 +12302,7 @@ export type UpdateProjectResponse = {
     projectEnvVars?: Schemas.ACLAction[];
     projectEnvVarsProduction?: Schemas.ACLAction[];
     projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+    projectFlags?: Schemas.ACLAction[];
     projectId?: Schemas.ACLAction[];
     projectIntegrationConfiguration?: Schemas.ACLAction[];
     projectLink?: Schemas.ACLAction[];
@@ -12178,6 +12318,7 @@ export type UpdateProjectResponse = {
     projectSupportCase?: Schemas.ACLAction[];
     projectSupportCaseComment?: Schemas.ACLAction[];
     projectDeploymentExpiration?: Schemas.ACLAction[];
+    projectTier?: Schemas.ACLAction[];
     seawallConfig?: Schemas.ACLAction[];
     skewProtection?: Schemas.ACLAction[];
     analytics?: Schemas.ACLAction[];
@@ -12324,6 +12465,7 @@ export type UpdateProjectResponse = {
       mitigate?: {
         action: 'deny' | 'challenge' | 'log' | 'bypass' | 'rate_limit' | 'redirect';
         rule_id: string;
+        ttl?: number;
         erl?: {
           algo: 'fixed_window' | 'token_bucket';
           window: number;
@@ -12495,6 +12637,15 @@ export type UpdateProjectRequestBody = {
    * Opt-in to skip deployments when there are no changes to the root directory and its dependencies
    */
   enableAffectedProjectsDeployments?: boolean;
+  /**
+   * OpenID Connect JSON Web Token generation configuration.
+   */
+  oidcTokenConfig?: {
+    /**
+     * Whether or not to generate OpenID Connect JSON Web Tokens.
+     */
+    enabled: boolean;
+  };
   /**
    * Allows to protect project deployments with a password
    */
@@ -13169,7 +13320,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -13241,6 +13392,9 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           | {
               type: 'integration-store-secret';
               storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
             }
           | null;
         /**
@@ -13267,7 +13421,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -13339,6 +13493,9 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
             | {
                 type: 'integration-store-secret';
                 storeId: string;
+                integrationId: string;
+                integrationProductId: string;
+                integrationConfigurationId: string;
               }
             | null;
           /**
@@ -13367,7 +13524,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -13439,6 +13596,9 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
             | {
                 type: 'integration-store-secret';
                 storeId: string;
+                integrationId: string;
+                integrationProductId: string;
+                integrationConfigurationId: string;
               }
             | null;
           /**
@@ -13580,6 +13740,9 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
           | {
               type: 'integration-store-secret';
               storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
             }
           | null;
         /**
@@ -13672,6 +13835,9 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
           | {
               type: 'integration-store-secret';
               storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
             }
           | null;
         /**
@@ -13691,6 +13857,104 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
         comment?: string;
         customEnvironmentIds?: string[];
         vsmValue?: string;
+      }
+    | {
+        target?:
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        /**
+         * This is used to identiy variables that have been migrated from type secret to sensitive.
+         */
+        sunsetSecretId?: string;
+        id?: string;
+        key: string;
+        value: string;
+        configurationId?: string | null;
+        createdAt?: number;
+        updatedAt?: number;
+        createdBy?: string | null;
+        updatedBy?: string | null;
+        gitBranch?: string;
+        edgeConfigId?: string | null;
+        edgeConfigTokenId?: string | null;
+        contentHint?:
+          | {
+              type: 'redis-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-token';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-read-only-token';
+              storeId: string;
+            }
+          | {
+              type: 'blob-read-write-token';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-non-pooling';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-prisma-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-user';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-host';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-password';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-database';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-no-ssl';
+              storeId: string;
+            }
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
+            }
+          | null;
+        /**
+         * Similar to `contentHints`, but should not be exposed to the user.
+         */
+        internalContentHint?: {
+          type: 'flags-secret';
+          /**
+           * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+           */
+          encryptedValue: string;
+        } | null;
+        /**
+         * Whether `value` and `vsmValue` are decrypted.
+         */
+        decrypted?: boolean;
+        comment?: string;
+        customEnvironmentIds?: string[];
       },
     GetProjectEnvError,
     undefined,
@@ -13733,7 +13997,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -13805,6 +14069,9 @@ export type CreateProjectEnvResponse = {
           | {
               type: 'integration-store-secret';
               storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
             }
           | null;
         /**
@@ -13830,7 +14097,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -13902,6 +14169,9 @@ export type CreateProjectEnvResponse = {
           | {
               type: 'integration-store-secret';
               storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
             }
           | null;
         /**
@@ -14330,7 +14600,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14402,6 +14672,9 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
           | {
               type: 'integration-store-secret';
               storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
             }
           | null;
         /**
@@ -14427,7 +14700,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14499,6 +14772,9 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
           | {
               type: 'integration-store-secret';
               storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
             }
           | null;
         /**
@@ -14523,7 +14799,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14595,6 +14871,9 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
           | {
               type: 'integration-store-secret';
               storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
             }
           | null;
         /**
@@ -14650,103 +14929,6 @@ export type EditProjectEnvQueryParams = {
 
 export type EditProjectEnvError = Fetcher.ErrorWrapper<undefined>;
 
-export type EditProjectEnvResponse = {
-  target?:
-    | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
-    | ('production' | 'preview' | 'development' | 'preview' | 'development');
-  type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
-  /**
-   * This is used to identiy variables that have been migrated from type secret to sensitive.
-   */
-  sunsetSecretId?: string;
-  id?: string;
-  key: string;
-  value: string;
-  configurationId?: string | null;
-  createdAt?: number;
-  updatedAt?: number;
-  createdBy?: string | null;
-  updatedBy?: string | null;
-  gitBranch?: string;
-  edgeConfigId?: string | null;
-  edgeConfigTokenId?: string | null;
-  contentHint?:
-    | {
-        type: 'redis-url';
-        storeId: string;
-      }
-    | {
-        type: 'redis-rest-api-url';
-        storeId: string;
-      }
-    | {
-        type: 'redis-rest-api-token';
-        storeId: string;
-      }
-    | {
-        type: 'redis-rest-api-read-only-token';
-        storeId: string;
-      }
-    | {
-        type: 'blob-read-write-token';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-url';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-url-non-pooling';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-prisma-url';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-user';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-host';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-password';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-database';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-url-no-ssl';
-        storeId: string;
-      }
-    | {
-        type: 'integration-store-secret';
-        storeId: string;
-      }
-    | null;
-  /**
-   * Similar to `contentHints`, but should not be exposed to the user.
-   */
-  internalContentHint?: {
-    type: 'flags-secret';
-    /**
-     * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
-     */
-    encryptedValue: string;
-  } | null;
-  /**
-   * Whether `value` and `vsmValue` are decrypted.
-   */
-  decrypted?: boolean;
-  comment?: string;
-  customEnvironmentIds?: string[];
-  vsmValue?: string;
-};
-
 export type EditProjectEnvRequestBody = {
   /**
    * The name of the environment variable
@@ -14800,7 +14982,105 @@ export type EditProjectEnvVariables = {
  */
 export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: AbortSignal) =>
   fetch<
-    EditProjectEnvResponse,
+    | {
+        target?:
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        /**
+         * This is used to identiy variables that have been migrated from type secret to sensitive.
+         */
+        sunsetSecretId?: string;
+        id?: string;
+        key: string;
+        value: string;
+        configurationId?: string | null;
+        createdAt?: number;
+        updatedAt?: number;
+        createdBy?: string | null;
+        updatedBy?: string | null;
+        gitBranch?: string;
+        edgeConfigId?: string | null;
+        edgeConfigTokenId?: string | null;
+        contentHint?:
+          | {
+              type: 'redis-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-token';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-read-only-token';
+              storeId: string;
+            }
+          | {
+              type: 'blob-read-write-token';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-non-pooling';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-prisma-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-user';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-host';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-password';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-database';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-no-ssl';
+              storeId: string;
+            }
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
+            }
+          | null;
+        /**
+         * Similar to `contentHints`, but should not be exposed to the user.
+         */
+        internalContentHint?: {
+          type: 'flags-secret';
+          /**
+           * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+           */
+          encryptedValue: string;
+        } | null;
+        /**
+         * Whether `value` and `vsmValue` are decrypted.
+         */
+        decrypted?: boolean;
+        comment?: string;
+        customEnvironmentIds?: string[];
+      }
+    | Record<string, any>,
     EditProjectEnvError,
     EditProjectEnvRequestBody,
     {},
@@ -15955,27 +16235,6 @@ export type CreateTeamResponse = {
       /**
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
        */
-      concurrentBuilds?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
       pro?: {
         tier?: number;
         price: number;
@@ -15990,7 +16249,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16011,7 +16270,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16032,7 +16291,28 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      concurrentBuilds?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        /**
+         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
+         */
+        highestQuantity?: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16053,7 +16333,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16074,7 +16354,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16095,7 +16375,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16116,7 +16396,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16137,7 +16417,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16158,7 +16438,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16179,7 +16459,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16200,7 +16480,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16221,25 +16501,9 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
-      };
-      blobStores?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
       };
       analyticsUsage?: {
         matrix?: {
@@ -16274,6 +16538,22 @@ export type CreateTeamResponse = {
         enabledAt?: number | null;
       };
       bandwidth?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      blobStores?: {
         matrix?: {
           defaultUnitPrice: string;
           dimensionPrices: {
@@ -18802,7 +19082,7 @@ export type GetDeploymentsQueryParams = {
    */
   limit?: number;
   /**
-   * Filter deployments from the given `projectId`.
+   * Filter deployments from the given ID or name.
    *
    * @example QmXGTs7mvAMMC7WW5ebrM33qKG32QK3h4vmQMjmY
    */
@@ -18904,7 +19184,7 @@ export type GetDeploymentsResponse = {
      *
      * @example cli
      */
-    source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo';
+    source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy';
     /**
      * In which state is the deployment.
      *
@@ -19131,6 +19411,13 @@ export type GetDeploymentsResponse = {
      * The expiration proposed to replace the existing expiration
      */
     proposedExpiration?: number;
+    /**
+     * The custom environment used for this deployment, if any
+     */
+    customEnvironment?: {
+      id: string;
+      name?: string;
+    };
   }[];
 };
 
@@ -19239,11 +19526,6 @@ export const verifyToken = (variables: VerifyTokenVariables, signal?: AbortSigna
 
 export type EmailLoginError = Fetcher.ErrorWrapper<undefined>;
 
-export type EmailLoginResponse = {
-  token: string;
-  securityCode: string;
-};
-
 export type EmailLoginRequestBody = {
   /**
    * The user email.
@@ -19267,12 +19549,20 @@ export type EmailLoginVariables = {
  * Request a new login for a user to get a token. This will respond with a verification token and send an email to confirm the request. Once confirmed you can use the verification token to get an authentication token.
  */
 export const emailLogin = (variables: EmailLoginVariables, signal?: AbortSignal) =>
-  fetch<EmailLoginResponse, EmailLoginError, EmailLoginRequestBody, {}, {}, {}>({
-    url: '/registration',
-    method: 'post',
-    ...variables,
-    signal
-  });
+  fetch<
+    | {
+        token: string;
+        securityCode: string;
+      }
+    | {
+        token: string;
+      },
+    EmailLoginError,
+    EmailLoginRequestBody,
+    {},
+    {},
+    {}
+  >({ url: '/registration', method: 'post', ...variables, signal });
 
 export type DeleteDeploymentPathParams = {
   /**
