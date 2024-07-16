@@ -8669,6 +8669,10 @@ export type CreateConfigurableLogDrainRequestBody = {
    * @maximum 1
    */
   samplingRate?: number;
+  /**
+   * The custom name of this log drain.
+   */
+  name?: string;
 };
 
 export type CreateConfigurableLogDrainVariables = {
