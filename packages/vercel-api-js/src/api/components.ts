@@ -1969,6 +1969,7 @@ export type UpdateProjectDataCacheResponse = {
     blobStoreTokenSet?: Schemas.ACLAction[];
     postgresStoreTokenSet?: Schemas.ACLAction[];
     integrationStoreTokenSet?: Schemas.ACLAction[];
+    integrationResourceReplCommand?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -9682,6 +9683,7 @@ export type GetProjectsResponse = {
       blobStoreTokenSet?: Schemas.ACLAction[];
       postgresStoreTokenSet?: Schemas.ACLAction[];
       integrationStoreTokenSet?: Schemas.ACLAction[];
+      integrationResourceReplCommand?: Schemas.ACLAction[];
       supportCase?: Schemas.ACLAction[];
       supportCaseComment?: Schemas.ACLAction[];
       dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -10477,6 +10479,7 @@ export type CreateProjectResponse = {
     blobStoreTokenSet?: Schemas.ACLAction[];
     postgresStoreTokenSet?: Schemas.ACLAction[];
     integrationStoreTokenSet?: Schemas.ACLAction[];
+    integrationResourceReplCommand?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -11440,6 +11443,7 @@ export type GetProjectResponse = {
     blobStoreTokenSet?: Schemas.ACLAction[];
     postgresStoreTokenSet?: Schemas.ACLAction[];
     integrationStoreTokenSet?: Schemas.ACLAction[];
+    integrationResourceReplCommand?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -12243,6 +12247,7 @@ export type UpdateProjectResponse = {
     blobStoreTokenSet?: Schemas.ACLAction[];
     postgresStoreTokenSet?: Schemas.ACLAction[];
     integrationStoreTokenSet?: Schemas.ACLAction[];
+    integrationResourceReplCommand?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
