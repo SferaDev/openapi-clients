@@ -1,5 +1,21 @@
 # vercel-api-js
 
+## 0.9.1
+
+### Patch Changes
+
+- c45927e: Fix typo in CreateOrTransferDomainResponse type
+- a6f10e2: Add enableProductionFeedback to UpdateProjectDataCacheResponse and other related types
+- 719d78d: Add new 'name' field to CreateConfigurableLogDrainRequestBody
+- d60cedc: Add new integrationResourceReplCommand field to project response types
+- 04dfbc9: Add new field 'includedAllocationMiu' to 'components' and 'schemas'
+- f963898: [BREAKING] Add new fields to the response of getConfiguration endpoint
+- c842536: Add vpcPeeringConnection and sonar fields to responses
+- 79de957: [BREAKING] Rename 'pro' to 'concurrentBuilds' in CreateTeamResponse
+- 9d78c6b: Add new field 'imageOptimizationType' to AuthUser schema
+- 651ab8b: New buy domain endpoint
+- 9db31c8: Add new fields 'projectFlags', 'projectTier', and 'customEnvironment' to UpdateProjectDataCacheResponse
+
 ## 0.9.0
 
 ### Minor Changes

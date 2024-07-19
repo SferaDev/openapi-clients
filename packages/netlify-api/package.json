@@ -1,6 +1,6 @@
 {
   "name": "netlify-api",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Netlify API client for Node.js",
   "author": "SferaDev",
   "license": "ISC",
