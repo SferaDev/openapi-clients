@@ -1879,6 +1879,7 @@ export type UpdateProjectDataCacheResponse = {
   updatedAt?: number;
   live?: boolean;
   enablePreviewFeedback?: boolean | null;
+  enableProductionFeedback?: boolean | null;
   permissions?: {
     accessGroup?: Schemas.ACLAction[];
     aliasGlobal?: Schemas.ACLAction[];
@@ -3214,10 +3215,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    createdAt?: number;
     id?: string;
-    readyState?: 'ERROR' | 'BUILDING' | 'INITIALIZING' | 'READY';
+    createdAt?: number;
     entrypoint?: string | null;
+    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
     readyStateAt?: number;
     output: {
       path: string;
@@ -3244,7 +3245,7 @@ export type CreateDeploymentResponse = {
         type: 'production' | 'preview' | 'development';
         description?: string;
         branchMatcher?: {
-          type: 'endsWith' | 'startsWith' | 'equals';
+          type: 'startsWith' | 'equals' | 'endsWith';
           pattern: string;
         };
         createdAt: number;
@@ -3469,7 +3470,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
             src?: string;
             dest?: string;
             status?: number;
@@ -3503,7 +3504,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         org: string;
@@ -3515,7 +3516,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         owner: string;
@@ -3527,7 +3528,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | null;
   flags?:
@@ -9597,6 +9598,7 @@ export type GetProjectsResponse = {
     updatedAt?: number;
     live?: boolean;
     enablePreviewFeedback?: boolean | null;
+    enableProductionFeedback?: boolean | null;
     permissions?: {
       accessGroup?: Schemas.ACLAction[];
       aliasGlobal?: Schemas.ACLAction[];
@@ -10393,6 +10395,7 @@ export type CreateProjectResponse = {
   updatedAt?: number;
   live?: boolean;
   enablePreviewFeedback?: boolean | null;
+  enableProductionFeedback?: boolean | null;
   permissions?: {
     accessGroup?: Schemas.ACLAction[];
     aliasGlobal?: Schemas.ACLAction[];
@@ -11357,6 +11360,7 @@ export type GetProjectResponse = {
   updatedAt?: number;
   live?: boolean;
   enablePreviewFeedback?: boolean | null;
+  enableProductionFeedback?: boolean | null;
   permissions?: {
     accessGroup?: Schemas.ACLAction[];
     aliasGlobal?: Schemas.ACLAction[];
@@ -12161,6 +12165,7 @@ export type UpdateProjectResponse = {
   updatedAt?: number;
   live?: boolean;
   enablePreviewFeedback?: boolean | null;
+  enableProductionFeedback?: boolean | null;
   permissions?: {
     accessGroup?: Schemas.ACLAction[];
     aliasGlobal?: Schemas.ACLAction[];
@@ -12639,9 +12644,13 @@ export type UpdateProjectRequestBody = {
    */
   sourceFilesOutsideRootDirectory?: boolean;
   /**
-   * Opt-in to Preview comments on the project level
+   * Opt-in to preview toolbar on the project level
    */
   enablePreviewFeedback?: boolean | null;
+  /**
+   * Opt-in to production toolbar on the project level
+   */
+  enableProductionFeedback?: boolean | null;
   /**
    * Opt-in to skip deployments when there are no changes to the root directory and its dependencies
    */
@@ -16104,11 +16113,17 @@ export type PatchTeamRequestBody = {
    */
   slug?: string;
   /**
-   * Enable preview comments: one of on, off or default.
+   * Enable preview toolbar: one of on, off or default.
    *
    * @example on
    */
   enablePreviewFeedback?: string;
+  /**
+   * Enable production toolbar: one of on, off or default.
+   *
+   * @example on
+   */
+  enableProductionFeedback?: string;
   /**
    * Sensitive environment variable policy: one of on, off or default.
    *
@@ -19101,7 +19116,7 @@ export type GetDeploymentsQueryParams = {
    *
    * @example production
    */
-  target?: 'production' | 'preview';
+  target?: string;
   /**
    * Gets the deployment created before this Date timestamp. (default: current time)
    *
