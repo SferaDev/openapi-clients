@@ -2633,23 +2633,23 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
           link?: string;
           action?: string;
         } | null;
-        aliasError?: {
-          code: string;
-          message: string;
-        } | null;
-        aliasFinal?: string | null;
-        automaticAliases?: string[];
-        /**
-         * applies to custom domains only, defaults to `true`
-         */
-        autoAssignCustomDomains?: boolean;
-        type: 'LAMBDAS';
         id: string;
+        type: 'LAMBDAS';
         createdAt: number;
         deletedAt?: number | null;
         name: string;
         version: 2;
         readyState: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
+        aliasError?: {
+          code: string;
+          message: string;
+        } | null;
+        aliasFinal?: string | null;
+        /**
+         * applies to custom domains only, defaults to `true`
+         */
+        autoAssignCustomDomains?: boolean;
+        automaticAliases?: string[];
         buildErrorAt?: number;
         checksState?: 'registered' | 'running' | 'completed';
         checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
@@ -2750,6 +2750,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         oidcTokenClaims?: {
           [key: string]: string | string[];
         };
+        projectId: string;
         plan: 'pro' | 'enterprise' | 'hobby';
         connectBuildsEnabled?: boolean;
         connectConfigurationId?: string;
@@ -2773,7 +2774,6 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          * Since November 2023 this field defines a connect configuration that will only be used to deploy passive lambdas to (as in passiveRegions)
          */
         passiveConnectConfigurationId?: string;
-        projectId: string;
         routes:
           | (
               | {
@@ -2978,23 +2978,23 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
           link?: string;
           action?: string;
         } | null;
-        aliasError?: {
-          code: string;
-          message: string;
-        } | null;
-        aliasFinal?: string | null;
-        automaticAliases?: string[];
-        /**
-         * applies to custom domains only, defaults to `true`
-         */
-        autoAssignCustomDomains?: boolean;
-        type: 'LAMBDAS';
         id: string;
+        type: 'LAMBDAS';
         createdAt: number;
         deletedAt?: number | null;
         name: string;
         version: 2;
         readyState: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
+        aliasError?: {
+          code: string;
+          message: string;
+        } | null;
+        aliasFinal?: string | null;
+        /**
+         * applies to custom domains only, defaults to `true`
+         */
+        autoAssignCustomDomains?: boolean;
+        automaticAliases?: string[];
         buildErrorAt?: number;
         checksState?: 'registered' | 'running' | 'completed';
         checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
@@ -10888,6 +10888,10 @@ export type CreateProjectRequestBody = {
      */
     enabled: boolean;
   };
+  /**
+   * Opt-in to skip deployments when there are no changes to the root directory and its dependencies
+   */
+  enableAffectedProjectsDeployments?: boolean;
 };
 
 export type CreateProjectVariables = {
