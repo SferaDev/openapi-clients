@@ -1971,6 +1971,7 @@ export type UpdateProjectDataCacheResponse = {
     postgresStoreTokenSet?: Schemas.ACLAction[];
     integrationStoreTokenSet?: Schemas.ACLAction[];
     integrationResourceReplCommand?: Schemas.ACLAction[];
+    storeTransfer?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -9690,6 +9691,7 @@ export type GetProjectsResponse = {
       postgresStoreTokenSet?: Schemas.ACLAction[];
       integrationStoreTokenSet?: Schemas.ACLAction[];
       integrationResourceReplCommand?: Schemas.ACLAction[];
+      storeTransfer?: Schemas.ACLAction[];
       supportCase?: Schemas.ACLAction[];
       supportCaseComment?: Schemas.ACLAction[];
       dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -10487,6 +10489,7 @@ export type CreateProjectResponse = {
     postgresStoreTokenSet?: Schemas.ACLAction[];
     integrationStoreTokenSet?: Schemas.ACLAction[];
     integrationResourceReplCommand?: Schemas.ACLAction[];
+    storeTransfer?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -11456,6 +11459,7 @@ export type GetProjectResponse = {
     postgresStoreTokenSet?: Schemas.ACLAction[];
     integrationStoreTokenSet?: Schemas.ACLAction[];
     integrationResourceReplCommand?: Schemas.ACLAction[];
+    storeTransfer?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -12261,6 +12265,7 @@ export type UpdateProjectResponse = {
     postgresStoreTokenSet?: Schemas.ACLAction[];
     integrationStoreTokenSet?: Schemas.ACLAction[];
     integrationResourceReplCommand?: Schemas.ACLAction[];
+    storeTransfer?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
@@ -13691,7 +13696,7 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -13785,7 +13790,7 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -13884,7 +13889,7 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16263,27 +16268,6 @@ export type CreateTeamResponse = {
       /**
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
        */
-      concurrentBuilds?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
       pro?: {
         tier?: number;
         price: number;
@@ -16298,7 +16282,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16319,7 +16303,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16340,7 +16324,28 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      concurrentBuilds?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        /**
+         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
+         */
+        highestQuantity?: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16361,7 +16366,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16382,7 +16387,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16403,7 +16408,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16424,7 +16429,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16445,7 +16450,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16466,7 +16471,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16487,7 +16492,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16508,7 +16513,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16529,25 +16534,9 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
-      };
-      blobStores?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
       };
       analyticsUsage?: {
         matrix?: {
@@ -16582,6 +16571,22 @@ export type CreateTeamResponse = {
         enabledAt?: number | null;
       };
       bandwidth?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      blobStores?: {
         matrix?: {
           defaultUnitPrice: string;
           dimensionPrices: {
