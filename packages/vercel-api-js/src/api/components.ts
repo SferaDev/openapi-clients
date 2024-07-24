@@ -2744,6 +2744,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          */
         readySubstate?: 'STAGED' | 'PROMOTED';
         regions: string[];
+        softDeletedByRetention?: boolean;
         source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy';
         target?: 'staging' | 'production' | null;
         undeletedAt?: number;
@@ -3089,6 +3090,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
          */
         readySubstate?: 'STAGED' | 'PROMOTED';
         regions: string[];
+        softDeletedByRetention?: boolean;
         source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy';
         target?: 'staging' | 'production' | null;
         undeletedAt?: number;
@@ -3216,10 +3218,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    createdAt?: number;
     id?: string;
-    readyState?: 'ERROR' | 'BUILDING' | 'INITIALIZING' | 'READY';
+    createdAt?: number;
     entrypoint?: string | null;
+    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
     readyStateAt?: number;
     output: {
       path: string;
@@ -3246,7 +3248,7 @@ export type CreateDeploymentResponse = {
         type: 'production' | 'preview' | 'development';
         description?: string;
         branchMatcher?: {
-          type: 'endsWith' | 'startsWith' | 'equals';
+          type: 'startsWith' | 'equals' | 'endsWith';
           pattern: string;
         };
         createdAt: number;
@@ -3397,6 +3399,7 @@ export type CreateDeploymentResponse = {
    * Since June 2023 Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - PROMOTED: has seen production traffic
    */
   readySubstate?: 'STAGED' | 'PROMOTED';
+  softDeletedByRetention?: boolean;
   undeletedAt?: number;
   url: string;
   oidcTokenClaims?: {
@@ -3471,7 +3474,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
             src?: string;
             dest?: string;
             status?: number;
@@ -3505,7 +3508,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         org: string;
@@ -3517,7 +3520,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         owner: string;
@@ -3529,7 +3532,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | null;
   flags?:
@@ -4123,6 +4126,7 @@ export type CancelDeploymentResponse = {
    */
   readySubstate?: 'STAGED' | 'PROMOTED';
   regions: string[];
+  softDeletedByRetention?: boolean;
   source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy';
   target?: 'staging' | 'production' | null;
   type: 'LAMBDAS';
@@ -10045,7 +10049,7 @@ export type CreateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -19212,6 +19216,12 @@ export type GetDeploymentsResponse = {
      * @example 1609492210000
      */
     undeleted?: number;
+    /**
+     * Optional flag to indicate if the deployment was soft deleted by retention policy.
+     *
+     * @example true
+     */
+    softDeletedByRetention?: boolean;
     /**
      * The source of the deployment.
      *
