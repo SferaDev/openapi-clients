@@ -838,7 +838,7 @@ export type GetEnvVarsVariables = {
 } & FetcherExtraProps;
 
 /**
- * Returns all environment variables for an account or site. An account corresponds to a team in the Netlify UI. To use this endpoint, your site must no longer be using the <a href="https://docs.netlify.com/environment-variables/classic-experience/">classic environment variables experience</a>.  Migrate now with the Netlify UI.
+ * Returns all environment variables for an account or site. An account corresponds to a team in the Netlify UI.
  */
 export const getEnvVars = (variables: GetEnvVarsVariables, signal?: AbortSignal) =>
   fetch<GetEnvVarsResponse, GetEnvVarsError, undefined, {}, GetEnvVarsQueryParams, GetEnvVarsPathParams>({
@@ -994,7 +994,7 @@ export type CreateEnvVarsVariables = {
 } & FetcherExtraProps;
 
 /**
- * Creates new environment variables. Granular scopes are available on Pro plans and above.  To use this endpoint, your site must no longer be using the <a href="https://docs.netlify.com/environment-variables/classic-experience/">classic environment variables experience</a>.  Migrate now with the Netlify UI.
+ * Creates new environment variables. Granular scopes are available on Pro plans and above.
  */
 export const createEnvVars = (variables: CreateEnvVarsVariables, signal?: AbortSignal) =>
   fetch<
@@ -1242,7 +1242,7 @@ export type GetEnvVarVariables = {
 } & FetcherExtraProps;
 
 /**
- * Returns an individual environment variable. To use this endpoint, your site must no longer be using the <a href="https://docs.netlify.com/environment-variables/classic-experience/">classic environment variables experience</a>.  Migrate now with the Netlify UI.
+ * Returns an individual environment variable.
  */
 export const getEnvVar = (variables: GetEnvVarVariables, signal?: AbortSignal) =>
   fetch<GetEnvVarResponse, GetEnvVarError, undefined, {}, GetEnvVarQueryParams, GetEnvVarPathParams>({
@@ -1402,7 +1402,7 @@ export type UpdateEnvVarVariables = {
 } & FetcherExtraProps;
 
 /**
- * Updates an existing environment variable and all of its values. Existing values will be replaced by values provided. To use this endpoint, your site must no longer be using the <a href="https://docs.netlify.com/environment-variables/classic-experience/">classic environment variables experience</a>.  Migrate now with the Netlify UI.
+ * Updates an existing environment variable and all of its values. Existing values will be replaced by values provided.
  */
 export const updateEnvVar = (variables: UpdateEnvVarVariables, signal?: AbortSignal) =>
   fetch<
@@ -1542,7 +1542,7 @@ export type SetEnvVarValueVariables = {
 } & FetcherExtraProps;
 
 /**
- * Updates or creates a new value for an existing environment variable. To use this endpoint, your site must no longer be using the <a href="https://docs.netlify.com/environment-variables/classic-experience/">classic environment variables experience</a>.  Migrate now with the Netlify UI.
+ * Updates or creates a new value for an existing environment variable.
  */
 export const setEnvVarValue = (variables: SetEnvVarValueVariables, signal?: AbortSignal) =>
   fetch<
@@ -1589,7 +1589,7 @@ export type DeleteEnvVarVariables = {
 } & FetcherExtraProps;
 
 /**
- * Deletes an environment variable. To use this endpoint, your site must no longer be using the <a href="https://docs.netlify.com/environment-variables/classic-experience/">classic environment variables experience</a>.  Migrate now with the Netlify UI.
+ * Deletes an environment variable
  */
 export const deleteEnvVar = (variables: DeleteEnvVarVariables, signal?: AbortSignal) =>
   fetch<undefined, DeleteEnvVarError, undefined, {}, DeleteEnvVarQueryParams, DeleteEnvVarPathParams>({
@@ -1638,7 +1638,7 @@ export type DeleteEnvVarValueVariables = {
 } & FetcherExtraProps;
 
 /**
- * Deletes a specific environment variable value. To use this endpoint, your site must no longer be using the <a href="https://docs.netlify.com/environment-variables/classic-experience/">classic environment variables experience</a>.  Migrate now with the Netlify UI.
+ * Deletes a specific environment variable value.
  */
 export const deleteEnvVarValue = (variables: DeleteEnvVarValueVariables, signal?: AbortSignal) =>
   fetch<undefined, DeleteEnvVarValueError, undefined, {}, DeleteEnvVarValueQueryParams, DeleteEnvVarValuePathParams>({
