@@ -1664,6 +1664,7 @@ export type UpdateProjectDataCacheResponse = {
     | 'vitepress'
     | 'vuepress'
     | 'parcel'
+    | 'fasthtml'
     | 'sanity'
     | 'storybook'
     | null;
@@ -2529,6 +2530,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
             | 'vitepress'
             | 'vuepress'
             | 'parcel'
+            | 'fasthtml'
             | 'sanity'
             | 'storybook'
             | null;
@@ -3183,6 +3185,7 @@ export type CreateDeploymentResponse = {
       | 'vitepress'
       | 'vuepress'
       | 'parcel'
+      | 'fasthtml'
       | 'sanity'
       | 'storybook'
       | null;
@@ -3766,6 +3769,7 @@ export type CreateDeploymentRequestBody = {
       | 'vitepress'
       | 'vuepress'
       | 'parcel'
+      | 'fasthtml'
       | 'sanity'
       | 'storybook'
       | null;
@@ -3913,6 +3917,7 @@ export type CancelDeploymentResponse = {
       | 'vitepress'
       | 'vuepress'
       | 'parcel'
+      | 'fasthtml'
       | 'sanity'
       | 'storybook'
       | null;
@@ -17898,6 +17903,7 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
                 | 'vitepress'
                 | 'vuepress'
                 | 'parcel'
+                | 'fasthtml'
                 | 'sanity'
                 | 'storybook'
                 | null;
@@ -19393,6 +19399,7 @@ export type GetDeploymentsResponse = {
         | 'vitepress'
         | 'vuepress'
         | 'parcel'
+        | 'fasthtml'
         | 'sanity'
         | 'storybook'
         | null;
