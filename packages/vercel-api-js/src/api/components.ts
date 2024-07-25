@@ -9388,6 +9388,7 @@ export type GetProjectsResponse = {
       | 'vitepress'
       | 'vuepress'
       | 'parcel'
+      | 'fasthtml'
       | 'sanity'
       | 'storybook'
       | null;
@@ -10186,6 +10187,7 @@ export type CreateProjectResponse = {
     | 'vitepress'
     | 'vuepress'
     | 'parcel'
+    | 'fasthtml'
     | 'sanity'
     | 'storybook'
     | null;
@@ -10825,6 +10827,7 @@ export type CreateProjectRequestBody = {
     | 'vitepress'
     | 'vuepress'
     | 'parcel'
+    | 'fasthtml'
     | 'sanity'
     | 'storybook';
   /**
@@ -11156,6 +11159,7 @@ export type GetProjectResponse = {
     | 'vitepress'
     | 'vuepress'
     | 'parcel'
+    | 'fasthtml'
     | 'sanity'
     | 'storybook'
     | null;
@@ -11962,6 +11966,7 @@ export type UpdateProjectResponse = {
     | 'vitepress'
     | 'vuepress'
     | 'parcel'
+    | 'fasthtml'
     | 'sanity'
     | 'storybook'
     | null;
@@ -12582,6 +12587,7 @@ export type UpdateProjectRequestBody = {
     | 'vitepress'
     | 'vuepress'
     | 'parcel'
+    | 'fasthtml'
     | 'sanity'
     | 'storybook'
     | null;
