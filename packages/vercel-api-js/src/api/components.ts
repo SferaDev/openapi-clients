@@ -19492,6 +19492,43 @@ export const getDeployments = (variables: GetDeploymentsVariables, signal?: Abor
     signal
   });
 
+export type EmailLoginError = Fetcher.ErrorWrapper<undefined>;
+
+export type EmailLoginResponse = {
+  token: string;
+  securityCode: string;
+};
+
+export type EmailLoginRequestBody = {
+  /**
+   * The user email.
+   *
+   * @example user@mail.com
+   */
+  email: string;
+  /**
+   * The desired name for the token. It will be displayed on the user account details.
+   *
+   * @example Your Client App Name
+   */
+  tokenName?: string;
+};
+
+export type EmailLoginVariables = {
+  body: EmailLoginRequestBody;
+} & FetcherExtraProps;
+
+/**
+ * Request a new login for a user to get a token. This will respond with a verification token and send an email to confirm the request. Once confirmed you can use the verification token to get an authentication token.
+ */
+export const emailLogin = (variables: EmailLoginVariables, signal?: AbortSignal) =>
+  fetch<EmailLoginResponse, EmailLoginError, EmailLoginRequestBody, {}, {}, {}>({
+    url: '/registration',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
 export type VerifyTokenQueryParams = {
   /**
    * Email to verify the login.
@@ -19579,46 +19616,6 @@ export const verifyToken = (variables: VerifyTokenVariables, signal?: AbortSigna
     ...variables,
     signal
   });
-
-export type EmailLoginError = Fetcher.ErrorWrapper<undefined>;
-
-export type EmailLoginRequestBody = {
-  /**
-   * The user email.
-   *
-   * @example user@mail.com
-   */
-  email: string;
-  /**
-   * The desired name for the token. It will be displayed on the user account details.
-   *
-   * @example Your Client App Name
-   */
-  tokenName?: string;
-};
-
-export type EmailLoginVariables = {
-  body: EmailLoginRequestBody;
-} & FetcherExtraProps;
-
-/**
- * Request a new login for a user to get a token. This will respond with a verification token and send an email to confirm the request. Once confirmed you can use the verification token to get an authentication token.
- */
-export const emailLogin = (variables: EmailLoginVariables, signal?: AbortSignal) =>
-  fetch<
-    | {
-        token: string;
-        securityCode: string;
-      }
-    | {
-        token: string;
-      },
-    EmailLoginError,
-    EmailLoginRequestBody,
-    {},
-    {},
-    {}
-  >({ url: '/registration', method: 'post', ...variables, signal });
 
 export type DeleteDeploymentPathParams = {
   /**
@@ -20218,7 +20215,7 @@ export const operationsByTag = {
     deleteTeam,
     deleteTeamInviteCode
   },
-  authentication: { listAuthTokens, createAuthToken, getAuthToken, deleteAuthToken, verifyToken, emailLogin },
+  authentication: { listAuthTokens, createAuthToken, getAuthToken, deleteAuthToken, emailLogin, verifyToken },
   webhooks: { createWebhook, getWebhooks, getWebhook, deleteWebhook },
   aliases: { listAliases, getAlias, deleteAlias, listDeploymentAliases, assignAlias },
   certs: { getCertById, removeCert, issueCert, uploadCert },
