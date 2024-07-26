@@ -317,75 +317,43 @@ export type TeamLimited = {
    * @example 6eb07268bcfadd309905ffb1579354084c24655c
    */
   avatar: string | null;
-  membership:
-    | {
-        confirmed: boolean;
-        confirmedAt: number;
-        accessRequestedAt?: number;
-        role: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
-        teamId?: string;
-        uid: string;
-        createdAt: number;
-        created: number;
-        joinedFrom?: {
-          origin:
-            | 'link'
-            | 'saml'
-            | 'mail'
-            | 'import'
-            | 'teams'
-            | 'github'
-            | 'gitlab'
-            | 'bitbucket'
-            | 'dsync'
-            | 'feedback'
-            | 'organization-teams';
-          commitId?: string;
-          repoId?: string;
-          repoPath?: string;
-          gitUserId?: string | number;
-          gitUserLogin?: string;
-          ssoUserId?: string;
-          ssoConnectedAt?: number;
-          idpUserId?: string;
-          dsyncUserId?: string;
-          dsyncConnectedAt?: number;
-        };
-      }
-    | {
-        confirmed: boolean;
-        confirmedAt?: number;
-        accessRequestedAt: number;
-        role: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
-        teamId?: string;
-        uid: string;
-        createdAt: number;
-        created: number;
-        joinedFrom?: {
-          origin:
-            | 'link'
-            | 'saml'
-            | 'mail'
-            | 'import'
-            | 'teams'
-            | 'github'
-            | 'gitlab'
-            | 'bitbucket'
-            | 'dsync'
-            | 'feedback'
-            | 'organization-teams';
-          commitId?: string;
-          repoId?: string;
-          repoPath?: string;
-          gitUserId?: string | number;
-          gitUserLogin?: string;
-          ssoUserId?: string;
-          ssoConnectedAt?: number;
-          idpUserId?: string;
-          dsyncUserId?: string;
-          dsyncConnectedAt?: number;
-        };
-      };
+  /**
+   * The membership of the authenticated User in relation to the Team.
+   */
+  membership: {
+    confirmed?: boolean;
+    confirmedAt?: number;
+    accessRequestedAt?: number;
+    role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
+    teamId?: string;
+    createdAt?: number;
+    created?: number;
+    joinedFrom?: {
+      origin:
+        | 'link'
+        | 'saml'
+        | 'mail'
+        | 'import'
+        | 'teams'
+        | 'github'
+        | 'gitlab'
+        | 'bitbucket'
+        | 'dsync'
+        | 'feedback'
+        | 'organization-teams';
+      commitId?: string;
+      repoId?: string;
+      repoPath?: string;
+      gitUserId?: string | number;
+      gitUserLogin?: string;
+      ssoUserId?: string;
+      ssoConnectedAt?: number;
+      idpUserId?: string;
+      dsyncUserId?: string;
+      dsyncConnectedAt?: number;
+    };
+    uid?: string;
+  };
   /**
    * Will remain undocumented. Remove in v3 API.
    */
