@@ -1,5 +1,11 @@
 # netlify-api
 
+## 0.5.2
+
+### Patch Changes
+
+- c7990bb: Returns all environment variables for an account or site. An account corresponds to a team in the Netlify UI.
+
 ## 0.5.1
 
 ### Patch Changes
