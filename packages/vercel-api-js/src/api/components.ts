@@ -3221,10 +3221,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    id?: string;
     createdAt?: number;
+    id?: string;
+    readyState?: 'ERROR' | 'BUILDING' | 'INITIALIZING' | 'READY';
     entrypoint?: string | null;
-    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
     readyStateAt?: number;
     output: {
       path: string;
@@ -3235,9 +3235,9 @@ export type CreateDeploymentResponse = {
   ready?: number;
   status: 'CANCELED' | 'ERROR' | 'QUEUED' | 'BUILDING' | 'INITIALIZING' | 'READY';
   team?: {
-    slug: string;
     name: string;
     id: string;
+    slug: string;
     avatar?: string;
   };
   userAliases?: string[];
@@ -3251,7 +3251,7 @@ export type CreateDeploymentResponse = {
         type: 'production' | 'preview' | 'development';
         description?: string;
         branchMatcher?: {
-          type: 'startsWith' | 'equals' | 'endsWith';
+          type: 'endsWith' | 'startsWith' | 'equals';
           pattern: string;
         };
         createdAt: number;
@@ -3477,7 +3477,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
             src?: string;
             dest?: string;
             status?: number;
@@ -3511,7 +3511,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         org: string;
@@ -3523,7 +3523,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         owner: string;
@@ -3535,7 +3535,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | null;
   flags?:
@@ -10055,7 +10055,7 @@ export type CreateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -13362,7 +13362,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -13463,7 +13463,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -13566,7 +13566,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -14039,7 +14039,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14139,7 +14139,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14642,7 +14642,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14742,7 +14742,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14841,7 +14841,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15028,7 +15028,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16283,27 +16283,6 @@ export type CreateTeamResponse = {
       /**
        * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
        */
-      concurrentBuilds?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
       pro?: {
         tier?: number;
         price: number;
@@ -16318,7 +16297,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16339,7 +16318,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16360,7 +16339,28 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      concurrentBuilds?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        /**
+         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
+         */
+        highestQuantity?: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16381,7 +16381,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16402,7 +16402,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16423,7 +16423,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16444,7 +16444,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16465,7 +16465,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16486,7 +16486,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16507,7 +16507,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16528,7 +16528,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -16549,25 +16549,9 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 6 | 2 | 3 | 12;
+          intervalCount: 2 | 1 | 3 | 6 | 12;
         };
         maxQuantity?: number;
-      };
-      blobStores?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
       };
       analyticsUsage?: {
         matrix?: {
@@ -16602,6 +16586,22 @@ export type CreateTeamResponse = {
         enabledAt?: number | null;
       };
       bandwidth?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      blobStores?: {
         matrix?: {
           defaultUnitPrice: string;
           dimensionPrices: {
