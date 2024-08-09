@@ -1927,6 +1927,7 @@ export type UpdateProjectDataCacheResponse = {
     integrationResource?: Schemas.ACLAction[];
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
+    marketplaceInstallationMember?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
     marketplaceInvoice?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
@@ -2481,6 +2482,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         build: {
           env: string[];
         };
+        buildArtifactUrls?: string[];
         builds?: Record<string, any>[];
         env: string[];
         inspectorUrl: string | null;
@@ -2582,9 +2584,9 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         status: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
         team?: {
           id: string;
-          avatar?: string;
           name: string;
           slug: string;
+          avatar?: string;
         };
         userAliases?: string[];
         previewCommentsEnabled?: boolean;
@@ -2639,9 +2641,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         id: string;
         type: 'LAMBDAS';
         createdAt: number;
-        deletedAt?: number | null;
         name: string;
-        version: 2;
         readyState: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
         aliasError?: {
           code: string;
@@ -2656,6 +2656,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         buildErrorAt?: number;
         checksState?: 'registered' | 'running' | 'completed';
         checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+        deletedAt?: number | null;
         canceledAt?: number;
         errorCode?: string;
         errorLink?: string;
@@ -2751,6 +2752,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         target?: 'staging' | 'production' | null;
         undeletedAt?: number;
         url: string;
+        version: 2;
         oidcTokenClaims?: {
           [key: string]: string | string[];
         };
@@ -2928,9 +2930,9 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         status: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
         team?: {
           id: string;
-          avatar?: string;
           name: string;
           slug: string;
+          avatar?: string;
         };
         userAliases?: string[];
         previewCommentsEnabled?: boolean;
@@ -2985,9 +2987,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         id: string;
         type: 'LAMBDAS';
         createdAt: number;
-        deletedAt?: number | null;
         name: string;
-        version: 2;
         readyState: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
         aliasError?: {
           code: string;
@@ -3002,6 +3002,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         buildErrorAt?: number;
         checksState?: 'registered' | 'running' | 'completed';
         checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+        deletedAt?: number | null;
         canceledAt?: number;
         errorCode?: string;
         errorLink?: string;
@@ -3097,6 +3098,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         target?: 'staging' | 'production' | null;
         undeletedAt?: number;
         url: string;
+        version: 2;
         oidcTokenClaims?: {
           [key: string]: string | string[];
         };
@@ -3135,6 +3137,7 @@ export type CreateDeploymentResponse = {
   build: {
     env: string[];
   };
+  buildArtifactUrls?: string[];
   builds?: Record<string, any>[];
   env: string[];
   inspectorUrl: string | null;
@@ -3221,10 +3224,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    createdAt?: number;
     id?: string;
-    readyState?: 'ERROR' | 'BUILDING' | 'INITIALIZING' | 'READY';
+    createdAt?: number;
     entrypoint?: string | null;
+    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
     readyStateAt?: number;
     output: {
       path: string;
@@ -3251,7 +3254,7 @@ export type CreateDeploymentResponse = {
         type: 'production' | 'preview' | 'development';
         description?: string;
         branchMatcher?: {
-          type: 'endsWith' | 'startsWith' | 'equals';
+          type: 'startsWith' | 'equals' | 'endsWith';
           pattern: string;
         };
         createdAt: number;
@@ -3477,7 +3480,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
             src?: string;
             dest?: string;
             status?: number;
@@ -3511,7 +3514,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         org: string;
@@ -3523,7 +3526,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         owner: string;
@@ -3535,7 +3538,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | null;
   flags?:
@@ -3555,10 +3558,6 @@ export type CreateDeploymentResponse = {
 };
 
 export type CreateDeploymentRequestBody = {
-  /**
-   * Deploy to a custom environment, which will override the default environment
-   */
-  customEnvironmentSlugOrId?: string;
   /**
    * An deployment id for an existing deployment to redeploy
    */
@@ -3868,6 +3867,7 @@ export type CancelDeploymentResponse = {
   build: {
     env: string[];
   };
+  buildArtifactUrls?: string[];
   builds?: Record<string, any>[];
   env: string[];
   inspectorUrl: string | null;
@@ -7114,25 +7114,25 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          *
          * @example 1558531915505
          */
-        createdAt: number;
+        createdAt?: number;
         /**
          * The unique identifier of the configuration
          *
          * @example icfg_3bwCLgxL8qt5kjRLcv2Dit7F
          */
-        id: string;
+        id?: string;
         /**
          * The unique identifier of the app the configuration was created for
          *
          * @example oac_xzpVzcUOgcB1nrVlirtKhbWV
          */
-        integrationId: string;
+        integrationId?: string;
         /**
          * The user or team ID that owns the configuration
          *
          * @example kr1PsOIzqEL5Xg6M4VZcZosf
          */
-        ownerId: string;
+        ownerId?: string;
         /**
          * When a configuration is limited to access certain projects, this will contain each of the project ID it is allowed to access. If it is not defined, the configuration has full access.
          *
@@ -7154,33 +7154,33 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          *
          * @example slack
          */
-        slug: string;
+        slug?: string;
         /**
          * When the configuration was created for a team, this will show the ID of the team.
          *
          * @example team_nLlpyC6RE1qxydlFKbrxDlud
          */
         teamId?: string | null;
-        type: 'integration-configuration';
+        type?: 'integration-configuration';
         /**
          * A timestamp that tells you when the configuration was updated.
          *
          * @example 1558531915505
          */
-        updatedAt: number;
+        updatedAt?: number;
         /**
          * The ID of the user that created the configuration.
          *
          * @example kr1PsOIzqEL5Xg6M4VZcZosf
          */
-        userId: string;
+        userId?: string;
         /**
          * The resources that are allowed to be accessed by the configuration.
          *
          * @example read:project
          * @example read-write:log-drain
          */
-        scopes: string[];
+        scopes?: string[];
         scopesQueue?: {
           scopes: {
             added: (
@@ -7255,7 +7255,10 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          * Defines the installation type. - 'external' integrations are installed via the existing integrations flow - 'marketplace' integrations are natively installed: - when accepting the TOS of a partner during the store creation process - if undefined, assume 'external'
          */
         installationType?: 'marketplace' | 'external';
-      }
+        billingTotal?: string;
+        periodStart?: string;
+        periodEnd?: string;
+      }[]
     | {
         integration: {
           name: string;
@@ -7417,6 +7420,9 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          * Defines the installation type. - 'external' integrations are installed via the existing integrations flow - 'marketplace' integrations are natively installed: - when accepting the TOS of a partner during the store creation process - if undefined, assume 'external'
          */
         installationType?: 'marketplace' | 'external';
+        billingTotal?: string;
+        periodStart?: string;
+        periodEnd?: string;
       }[],
     GetConfigurationsError,
     undefined,
@@ -9656,6 +9662,7 @@ export type GetProjectsResponse = {
       integrationResource?: Schemas.ACLAction[];
       integrationEvent?: Schemas.ACLAction[];
       integrationResourceSecrets?: Schemas.ACLAction[];
+      marketplaceInstallationMember?: Schemas.ACLAction[];
       marketplaceBillingData?: Schemas.ACLAction[];
       marketplaceInvoice?: Schemas.ACLAction[];
       jobGlobal?: Schemas.ACLAction[];
@@ -10055,7 +10062,7 @@ export type CreateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -10455,6 +10462,7 @@ export type CreateProjectResponse = {
     integrationResource?: Schemas.ACLAction[];
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
+    marketplaceInstallationMember?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
     marketplaceInvoice?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
@@ -11427,6 +11435,7 @@ export type GetProjectResponse = {
     integrationResource?: Schemas.ACLAction[];
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
+    marketplaceInstallationMember?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
     marketplaceInvoice?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
@@ -12234,6 +12243,7 @@ export type UpdateProjectResponse = {
     integrationResource?: Schemas.ACLAction[];
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
+    marketplaceInstallationMember?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
     marketplaceInvoice?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
@@ -13063,10 +13073,6 @@ export type UpdateProjectDomainRequestBody = {
    */
   gitBranch?: string | null;
   /**
-   * The unique custom environment identifier within the project
-   */
-  customEnvironmentId?: string;
-  /**
    * Target destination domain for redirect
    *
    * @example foobar.com
@@ -13362,7 +13368,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -13463,7 +13469,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -13566,7 +13572,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -14039,7 +14045,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14139,7 +14145,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14642,7 +14648,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14742,7 +14748,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14841,7 +14847,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15028,7 +15034,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16243,6 +16249,9 @@ export type CreateTeamResponse = {
    */
   id: string;
   slug: string;
+  /**
+   * IMPORTANT: If extending Billing, particularly with optional fields, make sure you also update `sync-orb-subscription-to-owner.ts` to handle the items when the object is recreated.
+   */
   billing: {
     currency?: 'usd' | 'eur';
     cancelation?: number | null;
@@ -16297,7 +16306,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 6 | 2 | 1 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -16318,7 +16327,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 6 | 2 | 1 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -16339,7 +16348,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 6 | 2 | 1 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -16360,7 +16369,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 6 | 2 | 1 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -16381,7 +16390,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 6 | 2 | 1 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -16402,7 +16411,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 6 | 2 | 1 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -16423,7 +16432,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 6 | 2 | 1 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -16444,7 +16453,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 6 | 2 | 1 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -16465,7 +16474,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 6 | 2 | 1 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -16486,7 +16495,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 6 | 2 | 1 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -16507,7 +16516,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 6 | 2 | 1 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -16528,7 +16537,28 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 6 | 2 | 1 | 3 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      vercelMarketplace?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        /**
+         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
+         */
+        highestQuantity?: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 6 | 2 | 1 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -16549,7 +16579,7 @@ export type CreateTeamResponse = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 2 | 1 | 3 | 6 | 12;
+          intervalCount: 6 | 2 | 1 | 3 | 12;
         };
         maxQuantity?: number;
       };
@@ -17214,6 +17244,7 @@ export type CreateTeamResponse = {
       offerId?: string;
       customerId: string;
     } | null;
+    reseller?: string;
   };
 };
 
@@ -17703,6 +17734,9 @@ export type CreateWebhookResponse = {
     | 'deployment.ready'
     | 'deployment.check-rerequested'
     | 'deployment.promoted'
+    | 'edge-config.created'
+    | 'edge-config.deleted'
+    | 'edge-config.updated'
     | 'integration-configuration.permission-upgraded'
     | 'integration-configuration.removed'
     | 'integration-configuration.scope-change-confirmed'
@@ -17784,6 +17818,9 @@ export type CreateWebhookRequestBody = {
     | 'deployment.ready'
     | 'deployment.check-rerequested'
     | 'deployment.promoted'
+    | 'edge-config.created'
+    | 'edge-config.deleted'
+    | 'edge-config.updated'
     | 'integration-configuration.permission-upgraded'
     | 'integration-configuration.removed'
     | 'integration-configuration.scope-change-confirmed'
@@ -17926,6 +17963,9 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'deployment.ready'
           | 'deployment.check-rerequested'
           | 'deployment.promoted'
+          | 'edge-config.created'
+          | 'edge-config.deleted'
+          | 'edge-config.updated'
           | 'integration-configuration.permission-upgraded'
           | 'integration-configuration.removed'
           | 'integration-configuration.scope-change-confirmed'
@@ -18003,6 +18043,9 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'deployment.ready'
           | 'deployment.check-rerequested'
           | 'deployment.promoted'
+          | 'edge-config.created'
+          | 'edge-config.deleted'
+          | 'edge-config.updated'
           | 'integration-configuration.permission-upgraded'
           | 'integration-configuration.removed'
           | 'integration-configuration.scope-change-confirmed'
@@ -18104,6 +18147,9 @@ export type GetWebhookResponse = {
     | 'deployment.ready'
     | 'deployment.check-rerequested'
     | 'deployment.promoted'
+    | 'edge-config.created'
+    | 'edge-config.deleted'
+    | 'edge-config.updated'
     | 'integration-configuration.permission-upgraded'
     | 'integration-configuration.removed'
     | 'integration-configuration.scope-change-confirmed'

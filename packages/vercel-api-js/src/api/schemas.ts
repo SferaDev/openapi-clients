@@ -485,7 +485,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 3 | 2 | 1 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -506,7 +506,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 3 | 2 | 1 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -527,7 +527,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 3 | 2 | 1 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -548,7 +548,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 3 | 2 | 1 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -569,7 +569,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 3 | 2 | 1 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -590,7 +590,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 3 | 2 | 1 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -611,7 +611,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 3 | 2 | 1 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -632,7 +632,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 3 | 2 | 1 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -653,7 +653,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 3 | 2 | 1 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -674,7 +674,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 3 | 2 | 1 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -695,7 +695,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 3 | 2 | 1 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -716,7 +716,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 3 | 2 | 1 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -737,7 +737,28 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
+          intervalCount: 3 | 2 | 1 | 6 | 12;
+        };
+        maxQuantity?: number;
+      };
+      /**
+       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
+       */
+      vercelMarketplace?: {
+        tier?: number;
+        price: number;
+        quantity: number;
+        /**
+         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
+         */
+        highestQuantity?: number;
+        name?: string;
+        hidden: boolean;
+        createdAt?: number;
+        disabledAt?: number | null;
+        frequency?: {
+          interval: 'month';
+          intervalCount: 3 | 2 | 1 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -1402,6 +1423,7 @@ export type AuthUser = {
       offerId?: string;
       customerId: string;
     } | null;
+    reseller?: string;
   } | null;
   /**
    * An object containing infomation related to the amount of platform resources may be allocated to the User account.
