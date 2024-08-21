@@ -118,6 +118,7 @@ export type CreateSiteSite = {
       cron?: string;
     }[];
   };
+  account_id?: string;
   account_name?: string;
   account_slug?: string;
   git_provider?: string;
