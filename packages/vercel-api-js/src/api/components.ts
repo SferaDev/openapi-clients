@@ -1603,6 +1603,10 @@ export type UpdateProjectDataCacheResponse = {
           integrationProductId: string;
           integrationConfigurationId: string;
         }
+      | {
+          type: 'flags-connection-string';
+          projectId: string;
+        }
       | null;
     /**
      * Similar to `contentHints`, but should not be exposed to the user.
@@ -9278,6 +9282,10 @@ export type GetProjectsResponse = {
             integrationProductId: string;
             integrationConfigurationId: string;
           }
+        | {
+            type: 'flags-connection-string';
+            projectId: string;
+          }
         | null;
       /**
        * Similar to `contentHints`, but should not be exposed to the user.
@@ -10137,6 +10145,10 @@ export type CreateProjectResponse = {
           integrationId: string;
           integrationProductId: string;
           integrationConfigurationId: string;
+        }
+      | {
+          type: 'flags-connection-string';
+          projectId: string;
         }
       | null;
     /**
@@ -11172,6 +11184,10 @@ export type GetProjectResponse = {
           integrationProductId: string;
           integrationConfigurationId: string;
         }
+      | {
+          type: 'flags-connection-string';
+          projectId: string;
+        }
       | null;
     /**
      * Similar to `contentHints`, but should not be exposed to the user.
@@ -11964,7 +11980,7 @@ export type UpdateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -12039,6 +12055,10 @@ export type UpdateProjectResponse = {
           integrationId: string;
           integrationProductId: string;
           integrationConfigurationId: string;
+        }
+      | {
+          type: 'flags-connection-string';
+          projectId: string;
         }
       | null;
     /**
@@ -13554,7 +13574,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -13630,6 +13650,10 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
               integrationProductId: string;
               integrationConfigurationId: string;
             }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
+            }
           | null;
         /**
          * Similar to `contentHints`, but should not be exposed to the user.
@@ -13655,7 +13679,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -13730,6 +13754,10 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
                 integrationId: string;
                 integrationProductId: string;
                 integrationConfigurationId: string;
+              }
+            | {
+                type: 'flags-connection-string';
+                projectId: string;
               }
             | null;
           /**
@@ -13758,7 +13786,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -13833,6 +13861,10 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
                 integrationId: string;
                 integrationProductId: string;
                 integrationConfigurationId: string;
+              }
+            | {
+                type: 'flags-connection-string';
+                projectId: string;
               }
             | null;
           /**
@@ -13978,6 +14010,10 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
               integrationProductId: string;
               integrationConfigurationId: string;
             }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
+            }
           | null;
         /**
          * Similar to `contentHints`, but should not be exposed to the user.
@@ -14072,6 +14108,10 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
               integrationId: string;
               integrationProductId: string;
               integrationConfigurationId: string;
+            }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
             }
           | null;
         /**
@@ -14171,6 +14211,10 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
               integrationId: string;
               integrationProductId: string;
               integrationConfigurationId: string;
+            }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
             }
           | null;
         /**
@@ -14307,6 +14351,10 @@ export type CreateProjectEnvResponse = {
               integrationProductId: string;
               integrationConfigurationId: string;
             }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
+            }
           | null;
         /**
          * Similar to `contentHints`, but should not be exposed to the user.
@@ -14406,6 +14454,10 @@ export type CreateProjectEnvResponse = {
               integrationId: string;
               integrationProductId: string;
               integrationConfigurationId: string;
+            }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
             }
           | null;
         /**
@@ -14910,6 +14962,10 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
               integrationProductId: string;
               integrationConfigurationId: string;
             }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
+            }
           | null;
         /**
          * Similar to `contentHints`, but should not be exposed to the user.
@@ -15010,6 +15066,10 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
               integrationProductId: string;
               integrationConfigurationId: string;
             }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
+            }
           | null;
         /**
          * Similar to `contentHints`, but should not be exposed to the user.
@@ -15108,6 +15168,10 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
               integrationId: string;
               integrationProductId: string;
               integrationConfigurationId: string;
+            }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
             }
           | null;
         /**
@@ -15295,6 +15359,10 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
               integrationId: string;
               integrationProductId: string;
               integrationConfigurationId: string;
+            }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
             }
           | null;
         /**
