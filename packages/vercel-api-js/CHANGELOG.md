@@ -1,5 +1,22 @@
 # vercel-api-js
 
+## 0.10.0
+
+### Minor Changes
+
+- 4bc222f: Add new endpoint to request a new login for a user to get a token
+- a33712f: Add 'fasthtml' to supported project types
+
+### Patch Changes
+
+- f110dcf: [BREAKING] Change in CreateProjectRequestBody structure
+- 6ce1455: Reorder 'type' enum values for 'lambdas' in CreateDeploymentResponse
+- 7c541b7: Add 'fasthtml' to the list of available project types
+- 7eec3fc: Change 'purpose' type to object with 'type' and 'projectId'
+- 12b46d9: [BREAKING] Remove undocumented field 'membership' from 'TeamLimited'
+- f39e026: [BREAKING] Change type field enum options and comments in components.ts
+- ab2d48d: [BREAKING] Reorder 'type' enum values for consistency
+
 ## 0.9.1
 
 ### Patch Changes

@@ -1,5 +1,16 @@
 # netlify-api
 
+## 0.6.0
+
+### Minor Changes
+
+- 7478d2e: Bump API version to 2.34.0
+- a86c18e: Add account_id field to Site and SiteSetup schemas
+
+### Patch Changes
+
+- c7990bb: Returns all environment variables for an account or site. An account corresponds to a team in the Netlify UI.
+
 ## 0.5.1
 
 ### Patch Changes
