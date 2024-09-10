@@ -1783,6 +1783,10 @@ export type UpdateProjectDataCacheResponse = {
   link?:
     | {
         org?: string;
+        /**
+         * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes.
+         */
+        repoOwnerId?: number;
         repo?: string;
         repoId?: number;
         type?: 'github';
@@ -1804,6 +1808,10 @@ export type UpdateProjectDataCacheResponse = {
         projectName?: string;
         projectNameWithNamespace?: string;
         projectNamespace?: string;
+        /**
+         * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes. This is the id of the top level group that a namespace belongs to. Gitlab supports group nesting (up to 20 levels).
+         */
+        projectOwnerId?: number;
         projectUrl?: string;
         type?: 'gitlab';
         createdAt?: number;
@@ -2835,7 +2843,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               repo: string;
               repoId: number;
               type: 'github';
-              repoOwnerId: string;
+              repoOwnerId: number;
               path: string;
               defaultBranch: string;
               name: string;
@@ -3507,7 +3515,7 @@ export type CreateDeploymentResponse = {
         repo: string;
         repoId: number;
         type: 'github';
-        repoOwnerId: string;
+        repoOwnerId: number;
         path: string;
         defaultBranch: string;
         name: string;
@@ -4247,7 +4255,7 @@ export type CancelDeploymentResponse = {
         repo: string;
         repoId: number;
         type: 'github';
-        repoOwnerId: string;
+        repoOwnerId: number;
         path: string;
         defaultBranch: string;
         name: string;
@@ -9462,6 +9470,10 @@ export type GetProjectsResponse = {
     link?:
       | {
           org?: string;
+          /**
+           * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes.
+           */
+          repoOwnerId?: number;
           repo?: string;
           repoId?: number;
           type?: 'github';
@@ -9483,6 +9495,10 @@ export type GetProjectsResponse = {
           projectName?: string;
           projectNameWithNamespace?: string;
           projectNamespace?: string;
+          /**
+           * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes. This is the id of the top level group that a namespace belongs to. Gitlab supports group nesting (up to 20 levels).
+           */
+          projectOwnerId?: number;
           projectUrl?: string;
           type?: 'gitlab';
           createdAt?: number;
@@ -10070,7 +10086,7 @@ export type CreateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -10326,6 +10342,10 @@ export type CreateProjectResponse = {
   link?:
     | {
         org?: string;
+        /**
+         * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes.
+         */
+        repoOwnerId?: number;
         repo?: string;
         repoId?: number;
         type?: 'github';
@@ -10347,6 +10367,10 @@ export type CreateProjectResponse = {
         projectName?: string;
         projectNameWithNamespace?: string;
         projectNamespace?: string;
+        /**
+         * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes. This is the id of the top level group that a namespace belongs to. Gitlab supports group nesting (up to 20 levels).
+         */
+        projectOwnerId?: number;
         projectUrl?: string;
         type?: 'gitlab';
         createdAt?: number;
@@ -11364,6 +11388,10 @@ export type GetProjectResponse = {
   link?:
     | {
         org?: string;
+        /**
+         * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes.
+         */
+        repoOwnerId?: number;
         repo?: string;
         repoId?: number;
         type?: 'github';
@@ -11385,6 +11413,10 @@ export type GetProjectResponse = {
         projectName?: string;
         projectNameWithNamespace?: string;
         projectNamespace?: string;
+        /**
+         * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes. This is the id of the top level group that a namespace belongs to. Gitlab supports group nesting (up to 20 levels).
+         */
+        projectOwnerId?: number;
         projectUrl?: string;
         type?: 'gitlab';
         createdAt?: number;
@@ -11980,7 +12012,7 @@ export type UpdateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -12236,6 +12268,10 @@ export type UpdateProjectResponse = {
   link?:
     | {
         org?: string;
+        /**
+         * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes.
+         */
+        repoOwnerId?: number;
         repo?: string;
         repoId?: number;
         type?: 'github';
@@ -12257,6 +12293,10 @@ export type UpdateProjectResponse = {
         projectName?: string;
         projectNameWithNamespace?: string;
         projectNamespace?: string;
+        /**
+         * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes. This is the id of the top level group that a namespace belongs to. Gitlab supports group nesting (up to 20 levels).
+         */
+        projectOwnerId?: number;
         projectUrl?: string;
         type?: 'gitlab';
         createdAt?: number;
@@ -14275,7 +14315,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14379,7 +14419,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14886,7 +14926,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14990,7 +15030,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15093,7 +15133,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15284,7 +15324,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16656,7 +16696,7 @@ export type GetTeamMembersResponse = {
      *
      * @example OWNER
      */
-    role: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
+    role: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'VIEWER' | 'BILLING' | 'CONTRIBUTOR';
     /**
      * The ID of this user.
      *
@@ -16727,7 +16767,7 @@ export type GetTeamMembersResponse = {
     accessGroups?: string[];
     id: string;
     email?: string;
-    role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
+    role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'VIEWER' | 'BILLING' | 'CONTRIBUTOR';
     isDSyncUser: boolean;
     createdAt?: number;
     expired?: boolean;
