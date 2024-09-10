@@ -1715,6 +1715,7 @@ export type UpdateProjectDataCacheResponse = {
   gitLFS?: boolean;
   id: string;
   latestDeployments?: {
+    id: string;
     alias?: string[];
     aliasAssigned?: number | boolean | null;
     aliasError?: {
@@ -1723,11 +1724,14 @@ export type UpdateProjectDataCacheResponse = {
     } | null;
     aliasFinal?: string | null;
     automaticAliases?: string[];
+    buildingAt?: number;
     builds?: {
       use: string;
       src?: string;
       dest?: string;
     }[];
+    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+    checksState?: 'registered' | 'running' | 'completed';
     connectBuildsEnabled?: boolean;
     connectConfigurationId?: string;
     createdAt: number;
@@ -1741,34 +1745,12 @@ export type UpdateProjectDataCacheResponse = {
     } | null;
     deletedAt?: number;
     deploymentHostname: string;
-    name: string;
     forced?: boolean;
-    id: string;
+    name: string;
     meta?: {
       [key: string]: string;
     };
     monorepoManager?: string | null;
-    plan: 'pro' | 'enterprise' | 'hobby';
-    private: boolean;
-    readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-    readySubstate?: 'STAGED' | 'PROMOTED';
-    requestedAt?: number;
-    target?: string | null;
-    teamId?: string | null;
-    type: 'LAMBDAS';
-    url: string;
-    userId: string;
-    withCache?: boolean;
-    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-    checksState?: 'registered' | 'running' | 'completed';
-    readyAt?: number;
-    buildingAt?: number;
-    /**
-     * Whether or not preview comments are enabled for the deployment
-     *
-     * @example false
-     */
-    previewCommentsEnabled?: boolean;
     oidcTokenClaims?: {
       sub: string;
       scope: string;
@@ -1779,6 +1761,24 @@ export type UpdateProjectDataCacheResponse = {
       project_id: string;
       environment: string;
     };
+    plan: 'pro' | 'enterprise' | 'hobby';
+    /**
+     * Whether or not preview comments are enabled for the deployment
+     *
+     * @example false
+     */
+    previewCommentsEnabled?: boolean;
+    private: boolean;
+    readyAt?: number;
+    readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+    readySubstate?: 'STAGED' | 'PROMOTED';
+    requestedAt?: number;
+    target?: string | null;
+    teamId?: string | null;
+    type: 'LAMBDAS';
+    url: string;
+    userId: string;
+    withCache?: boolean;
   }[];
   link?:
     | {
@@ -1870,6 +1870,7 @@ export type UpdateProjectDataCacheResponse = {
   } | null;
   targets?: {
     [key: string]: {
+      id: string;
       alias?: string[];
       aliasAssigned?: number | boolean | null;
       aliasError?: {
@@ -1878,11 +1879,14 @@ export type UpdateProjectDataCacheResponse = {
       } | null;
       aliasFinal?: string | null;
       automaticAliases?: string[];
+      buildingAt?: number;
       builds?: {
         use: string;
         src?: string;
         dest?: string;
       }[];
+      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+      checksState?: 'registered' | 'running' | 'completed';
       connectBuildsEnabled?: boolean;
       connectConfigurationId?: string;
       createdAt: number;
@@ -1896,34 +1900,12 @@ export type UpdateProjectDataCacheResponse = {
       } | null;
       deletedAt?: number;
       deploymentHostname: string;
-      name: string;
       forced?: boolean;
-      id: string;
+      name: string;
       meta?: {
         [key: string]: string;
       };
       monorepoManager?: string | null;
-      plan: 'pro' | 'enterprise' | 'hobby';
-      private: boolean;
-      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-      readySubstate?: 'STAGED' | 'PROMOTED';
-      requestedAt?: number;
-      target?: string | null;
-      teamId?: string | null;
-      type: 'LAMBDAS';
-      url: string;
-      userId: string;
-      withCache?: boolean;
-      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-      checksState?: 'registered' | 'running' | 'completed';
-      readyAt?: number;
-      buildingAt?: number;
-      /**
-       * Whether or not preview comments are enabled for the deployment
-       *
-       * @example false
-       */
-      previewCommentsEnabled?: boolean;
       oidcTokenClaims?: {
         sub: string;
         scope: string;
@@ -1934,6 +1916,24 @@ export type UpdateProjectDataCacheResponse = {
         project_id: string;
         environment: string;
       };
+      plan: 'pro' | 'enterprise' | 'hobby';
+      /**
+       * Whether or not preview comments are enabled for the deployment
+       *
+       * @example false
+       */
+      previewCommentsEnabled?: boolean;
+      private: boolean;
+      readyAt?: number;
+      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+      readySubstate?: 'STAGED' | 'PROMOTED';
+      requestedAt?: number;
+      target?: string | null;
+      teamId?: string | null;
+      type: 'LAMBDAS';
+      url: string;
+      userId: string;
+      withCache?: boolean;
     } | null;
   };
   transferCompletedAt?: number;
@@ -3202,10 +3202,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    createdAt?: number;
     id?: string;
-    readyState?: 'ERROR' | 'BUILDING' | 'INITIALIZING' | 'READY';
+    createdAt?: number;
     entrypoint?: string | null;
+    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
     readyStateAt?: number;
     output: {
       path: string;
@@ -3232,7 +3232,7 @@ export type CreateDeploymentResponse = {
         type: 'production' | 'preview' | 'development';
         description?: string;
         branchMatcher?: {
-          type: 'endsWith' | 'startsWith' | 'equals';
+          type: 'startsWith' | 'equals' | 'endsWith';
           pattern: string;
         };
         createdAt: number;
@@ -3466,7 +3466,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
             src?: string;
             dest?: string;
             status?: number;
@@ -3500,7 +3500,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         org: string;
@@ -3512,7 +3512,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         owner: string;
@@ -3524,7 +3524,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | null;
   flags?:
@@ -9394,6 +9394,7 @@ export type GetProjectsResponse = {
     gitLFS?: boolean;
     id: string;
     latestDeployments?: {
+      id: string;
       alias?: string[];
       aliasAssigned?: number | boolean | null;
       aliasError?: {
@@ -9402,11 +9403,14 @@ export type GetProjectsResponse = {
       } | null;
       aliasFinal?: string | null;
       automaticAliases?: string[];
+      buildingAt?: number;
       builds?: {
         use: string;
         src?: string;
         dest?: string;
       }[];
+      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+      checksState?: 'registered' | 'running' | 'completed';
       connectBuildsEnabled?: boolean;
       connectConfigurationId?: string;
       createdAt: number;
@@ -9420,34 +9424,12 @@ export type GetProjectsResponse = {
       } | null;
       deletedAt?: number;
       deploymentHostname: string;
-      name: string;
       forced?: boolean;
-      id: string;
+      name: string;
       meta?: {
         [key: string]: string;
       };
       monorepoManager?: string | null;
-      plan: 'pro' | 'enterprise' | 'hobby';
-      private: boolean;
-      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-      readySubstate?: 'STAGED' | 'PROMOTED';
-      requestedAt?: number;
-      target?: string | null;
-      teamId?: string | null;
-      type: 'LAMBDAS';
-      url: string;
-      userId: string;
-      withCache?: boolean;
-      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-      checksState?: 'registered' | 'running' | 'completed';
-      readyAt?: number;
-      buildingAt?: number;
-      /**
-       * Whether or not preview comments are enabled for the deployment
-       *
-       * @example false
-       */
-      previewCommentsEnabled?: boolean;
       oidcTokenClaims?: {
         sub: string;
         scope: string;
@@ -9458,6 +9440,24 @@ export type GetProjectsResponse = {
         project_id: string;
         environment: string;
       };
+      plan: 'pro' | 'enterprise' | 'hobby';
+      /**
+       * Whether or not preview comments are enabled for the deployment
+       *
+       * @example false
+       */
+      previewCommentsEnabled?: boolean;
+      private: boolean;
+      readyAt?: number;
+      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+      readySubstate?: 'STAGED' | 'PROMOTED';
+      requestedAt?: number;
+      target?: string | null;
+      teamId?: string | null;
+      type: 'LAMBDAS';
+      url: string;
+      userId: string;
+      withCache?: boolean;
     }[];
     link?:
       | {
@@ -9549,6 +9549,7 @@ export type GetProjectsResponse = {
     } | null;
     targets?: {
       [key: string]: {
+        id: string;
         alias?: string[];
         aliasAssigned?: number | boolean | null;
         aliasError?: {
@@ -9557,11 +9558,14 @@ export type GetProjectsResponse = {
         } | null;
         aliasFinal?: string | null;
         automaticAliases?: string[];
+        buildingAt?: number;
         builds?: {
           use: string;
           src?: string;
           dest?: string;
         }[];
+        checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+        checksState?: 'registered' | 'running' | 'completed';
         connectBuildsEnabled?: boolean;
         connectConfigurationId?: string;
         createdAt: number;
@@ -9575,34 +9579,12 @@ export type GetProjectsResponse = {
         } | null;
         deletedAt?: number;
         deploymentHostname: string;
-        name: string;
         forced?: boolean;
-        id: string;
+        name: string;
         meta?: {
           [key: string]: string;
         };
         monorepoManager?: string | null;
-        plan: 'pro' | 'enterprise' | 'hobby';
-        private: boolean;
-        readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-        readySubstate?: 'STAGED' | 'PROMOTED';
-        requestedAt?: number;
-        target?: string | null;
-        teamId?: string | null;
-        type: 'LAMBDAS';
-        url: string;
-        userId: string;
-        withCache?: boolean;
-        checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-        checksState?: 'registered' | 'running' | 'completed';
-        readyAt?: number;
-        buildingAt?: number;
-        /**
-         * Whether or not preview comments are enabled for the deployment
-         *
-         * @example false
-         */
-        previewCommentsEnabled?: boolean;
         oidcTokenClaims?: {
           sub: string;
           scope: string;
@@ -9613,6 +9595,24 @@ export type GetProjectsResponse = {
           project_id: string;
           environment: string;
         };
+        plan: 'pro' | 'enterprise' | 'hobby';
+        /**
+         * Whether or not preview comments are enabled for the deployment
+         *
+         * @example false
+         */
+        previewCommentsEnabled?: boolean;
+        private: boolean;
+        readyAt?: number;
+        readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+        readySubstate?: 'STAGED' | 'PROMOTED';
+        requestedAt?: number;
+        target?: string | null;
+        teamId?: string | null;
+        type: 'LAMBDAS';
+        url: string;
+        userId: string;
+        withCache?: boolean;
       } | null;
     };
     transferCompletedAt?: number;
@@ -10258,6 +10258,7 @@ export type CreateProjectResponse = {
   gitLFS?: boolean;
   id: string;
   latestDeployments?: {
+    id: string;
     alias?: string[];
     aliasAssigned?: number | boolean | null;
     aliasError?: {
@@ -10266,11 +10267,14 @@ export type CreateProjectResponse = {
     } | null;
     aliasFinal?: string | null;
     automaticAliases?: string[];
+    buildingAt?: number;
     builds?: {
       use: string;
       src?: string;
       dest?: string;
     }[];
+    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+    checksState?: 'registered' | 'running' | 'completed';
     connectBuildsEnabled?: boolean;
     connectConfigurationId?: string;
     createdAt: number;
@@ -10284,34 +10288,12 @@ export type CreateProjectResponse = {
     } | null;
     deletedAt?: number;
     deploymentHostname: string;
-    name: string;
     forced?: boolean;
-    id: string;
+    name: string;
     meta?: {
       [key: string]: string;
     };
     monorepoManager?: string | null;
-    plan: 'pro' | 'enterprise' | 'hobby';
-    private: boolean;
-    readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-    readySubstate?: 'STAGED' | 'PROMOTED';
-    requestedAt?: number;
-    target?: string | null;
-    teamId?: string | null;
-    type: 'LAMBDAS';
-    url: string;
-    userId: string;
-    withCache?: boolean;
-    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-    checksState?: 'registered' | 'running' | 'completed';
-    readyAt?: number;
-    buildingAt?: number;
-    /**
-     * Whether or not preview comments are enabled for the deployment
-     *
-     * @example false
-     */
-    previewCommentsEnabled?: boolean;
     oidcTokenClaims?: {
       sub: string;
       scope: string;
@@ -10322,6 +10304,24 @@ export type CreateProjectResponse = {
       project_id: string;
       environment: string;
     };
+    plan: 'pro' | 'enterprise' | 'hobby';
+    /**
+     * Whether or not preview comments are enabled for the deployment
+     *
+     * @example false
+     */
+    previewCommentsEnabled?: boolean;
+    private: boolean;
+    readyAt?: number;
+    readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+    readySubstate?: 'STAGED' | 'PROMOTED';
+    requestedAt?: number;
+    target?: string | null;
+    teamId?: string | null;
+    type: 'LAMBDAS';
+    url: string;
+    userId: string;
+    withCache?: boolean;
   }[];
   link?:
     | {
@@ -10413,6 +10413,7 @@ export type CreateProjectResponse = {
   } | null;
   targets?: {
     [key: string]: {
+      id: string;
       alias?: string[];
       aliasAssigned?: number | boolean | null;
       aliasError?: {
@@ -10421,11 +10422,14 @@ export type CreateProjectResponse = {
       } | null;
       aliasFinal?: string | null;
       automaticAliases?: string[];
+      buildingAt?: number;
       builds?: {
         use: string;
         src?: string;
         dest?: string;
       }[];
+      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+      checksState?: 'registered' | 'running' | 'completed';
       connectBuildsEnabled?: boolean;
       connectConfigurationId?: string;
       createdAt: number;
@@ -10439,34 +10443,12 @@ export type CreateProjectResponse = {
       } | null;
       deletedAt?: number;
       deploymentHostname: string;
-      name: string;
       forced?: boolean;
-      id: string;
+      name: string;
       meta?: {
         [key: string]: string;
       };
       monorepoManager?: string | null;
-      plan: 'pro' | 'enterprise' | 'hobby';
-      private: boolean;
-      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-      readySubstate?: 'STAGED' | 'PROMOTED';
-      requestedAt?: number;
-      target?: string | null;
-      teamId?: string | null;
-      type: 'LAMBDAS';
-      url: string;
-      userId: string;
-      withCache?: boolean;
-      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-      checksState?: 'registered' | 'running' | 'completed';
-      readyAt?: number;
-      buildingAt?: number;
-      /**
-       * Whether or not preview comments are enabled for the deployment
-       *
-       * @example false
-       */
-      previewCommentsEnabled?: boolean;
       oidcTokenClaims?: {
         sub: string;
         scope: string;
@@ -10477,6 +10459,24 @@ export type CreateProjectResponse = {
         project_id: string;
         environment: string;
       };
+      plan: 'pro' | 'enterprise' | 'hobby';
+      /**
+       * Whether or not preview comments are enabled for the deployment
+       *
+       * @example false
+       */
+      previewCommentsEnabled?: boolean;
+      private: boolean;
+      readyAt?: number;
+      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+      readySubstate?: 'STAGED' | 'PROMOTED';
+      requestedAt?: number;
+      target?: string | null;
+      teamId?: string | null;
+      type: 'LAMBDAS';
+      url: string;
+      userId: string;
+      withCache?: boolean;
     } | null;
   };
   transferCompletedAt?: number;
@@ -11296,6 +11296,7 @@ export type GetProjectResponse = {
   gitLFS?: boolean;
   id: string;
   latestDeployments?: {
+    id: string;
     alias?: string[];
     aliasAssigned?: number | boolean | null;
     aliasError?: {
@@ -11304,11 +11305,14 @@ export type GetProjectResponse = {
     } | null;
     aliasFinal?: string | null;
     automaticAliases?: string[];
+    buildingAt?: number;
     builds?: {
       use: string;
       src?: string;
       dest?: string;
     }[];
+    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+    checksState?: 'registered' | 'running' | 'completed';
     connectBuildsEnabled?: boolean;
     connectConfigurationId?: string;
     createdAt: number;
@@ -11322,34 +11326,12 @@ export type GetProjectResponse = {
     } | null;
     deletedAt?: number;
     deploymentHostname: string;
-    name: string;
     forced?: boolean;
-    id: string;
+    name: string;
     meta?: {
       [key: string]: string;
     };
     monorepoManager?: string | null;
-    plan: 'pro' | 'enterprise' | 'hobby';
-    private: boolean;
-    readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-    readySubstate?: 'STAGED' | 'PROMOTED';
-    requestedAt?: number;
-    target?: string | null;
-    teamId?: string | null;
-    type: 'LAMBDAS';
-    url: string;
-    userId: string;
-    withCache?: boolean;
-    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-    checksState?: 'registered' | 'running' | 'completed';
-    readyAt?: number;
-    buildingAt?: number;
-    /**
-     * Whether or not preview comments are enabled for the deployment
-     *
-     * @example false
-     */
-    previewCommentsEnabled?: boolean;
     oidcTokenClaims?: {
       sub: string;
       scope: string;
@@ -11360,6 +11342,24 @@ export type GetProjectResponse = {
       project_id: string;
       environment: string;
     };
+    plan: 'pro' | 'enterprise' | 'hobby';
+    /**
+     * Whether or not preview comments are enabled for the deployment
+     *
+     * @example false
+     */
+    previewCommentsEnabled?: boolean;
+    private: boolean;
+    readyAt?: number;
+    readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+    readySubstate?: 'STAGED' | 'PROMOTED';
+    requestedAt?: number;
+    target?: string | null;
+    teamId?: string | null;
+    type: 'LAMBDAS';
+    url: string;
+    userId: string;
+    withCache?: boolean;
   }[];
   link?:
     | {
@@ -11451,6 +11451,7 @@ export type GetProjectResponse = {
   } | null;
   targets?: {
     [key: string]: {
+      id: string;
       alias?: string[];
       aliasAssigned?: number | boolean | null;
       aliasError?: {
@@ -11459,11 +11460,14 @@ export type GetProjectResponse = {
       } | null;
       aliasFinal?: string | null;
       automaticAliases?: string[];
+      buildingAt?: number;
       builds?: {
         use: string;
         src?: string;
         dest?: string;
       }[];
+      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+      checksState?: 'registered' | 'running' | 'completed';
       connectBuildsEnabled?: boolean;
       connectConfigurationId?: string;
       createdAt: number;
@@ -11477,34 +11481,12 @@ export type GetProjectResponse = {
       } | null;
       deletedAt?: number;
       deploymentHostname: string;
-      name: string;
       forced?: boolean;
-      id: string;
+      name: string;
       meta?: {
         [key: string]: string;
       };
       monorepoManager?: string | null;
-      plan: 'pro' | 'enterprise' | 'hobby';
-      private: boolean;
-      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-      readySubstate?: 'STAGED' | 'PROMOTED';
-      requestedAt?: number;
-      target?: string | null;
-      teamId?: string | null;
-      type: 'LAMBDAS';
-      url: string;
-      userId: string;
-      withCache?: boolean;
-      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-      checksState?: 'registered' | 'running' | 'completed';
-      readyAt?: number;
-      buildingAt?: number;
-      /**
-       * Whether or not preview comments are enabled for the deployment
-       *
-       * @example false
-       */
-      previewCommentsEnabled?: boolean;
       oidcTokenClaims?: {
         sub: string;
         scope: string;
@@ -11515,6 +11497,24 @@ export type GetProjectResponse = {
         project_id: string;
         environment: string;
       };
+      plan: 'pro' | 'enterprise' | 'hobby';
+      /**
+       * Whether or not preview comments are enabled for the deployment
+       *
+       * @example false
+       */
+      previewCommentsEnabled?: boolean;
+      private: boolean;
+      readyAt?: number;
+      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+      readySubstate?: 'STAGED' | 'PROMOTED';
+      requestedAt?: number;
+      target?: string | null;
+      teamId?: string | null;
+      type: 'LAMBDAS';
+      url: string;
+      userId: string;
+      withCache?: boolean;
     } | null;
   };
   transferCompletedAt?: number;
@@ -11980,7 +11980,7 @@ export type UpdateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -12168,6 +12168,7 @@ export type UpdateProjectResponse = {
   gitLFS?: boolean;
   id: string;
   latestDeployments?: {
+    id: string;
     alias?: string[];
     aliasAssigned?: number | boolean | null;
     aliasError?: {
@@ -12176,11 +12177,14 @@ export type UpdateProjectResponse = {
     } | null;
     aliasFinal?: string | null;
     automaticAliases?: string[];
+    buildingAt?: number;
     builds?: {
       use: string;
       src?: string;
       dest?: string;
     }[];
+    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+    checksState?: 'registered' | 'running' | 'completed';
     connectBuildsEnabled?: boolean;
     connectConfigurationId?: string;
     createdAt: number;
@@ -12194,34 +12198,12 @@ export type UpdateProjectResponse = {
     } | null;
     deletedAt?: number;
     deploymentHostname: string;
-    name: string;
     forced?: boolean;
-    id: string;
+    name: string;
     meta?: {
       [key: string]: string;
     };
     monorepoManager?: string | null;
-    plan: 'pro' | 'enterprise' | 'hobby';
-    private: boolean;
-    readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-    readySubstate?: 'STAGED' | 'PROMOTED';
-    requestedAt?: number;
-    target?: string | null;
-    teamId?: string | null;
-    type: 'LAMBDAS';
-    url: string;
-    userId: string;
-    withCache?: boolean;
-    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-    checksState?: 'registered' | 'running' | 'completed';
-    readyAt?: number;
-    buildingAt?: number;
-    /**
-     * Whether or not preview comments are enabled for the deployment
-     *
-     * @example false
-     */
-    previewCommentsEnabled?: boolean;
     oidcTokenClaims?: {
       sub: string;
       scope: string;
@@ -12232,6 +12214,24 @@ export type UpdateProjectResponse = {
       project_id: string;
       environment: string;
     };
+    plan: 'pro' | 'enterprise' | 'hobby';
+    /**
+     * Whether or not preview comments are enabled for the deployment
+     *
+     * @example false
+     */
+    previewCommentsEnabled?: boolean;
+    private: boolean;
+    readyAt?: number;
+    readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+    readySubstate?: 'STAGED' | 'PROMOTED';
+    requestedAt?: number;
+    target?: string | null;
+    teamId?: string | null;
+    type: 'LAMBDAS';
+    url: string;
+    userId: string;
+    withCache?: boolean;
   }[];
   link?:
     | {
@@ -12323,6 +12323,7 @@ export type UpdateProjectResponse = {
   } | null;
   targets?: {
     [key: string]: {
+      id: string;
       alias?: string[];
       aliasAssigned?: number | boolean | null;
       aliasError?: {
@@ -12331,11 +12332,14 @@ export type UpdateProjectResponse = {
       } | null;
       aliasFinal?: string | null;
       automaticAliases?: string[];
+      buildingAt?: number;
       builds?: {
         use: string;
         src?: string;
         dest?: string;
       }[];
+      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+      checksState?: 'registered' | 'running' | 'completed';
       connectBuildsEnabled?: boolean;
       connectConfigurationId?: string;
       createdAt: number;
@@ -12349,34 +12353,12 @@ export type UpdateProjectResponse = {
       } | null;
       deletedAt?: number;
       deploymentHostname: string;
-      name: string;
       forced?: boolean;
-      id: string;
+      name: string;
       meta?: {
         [key: string]: string;
       };
       monorepoManager?: string | null;
-      plan: 'pro' | 'enterprise' | 'hobby';
-      private: boolean;
-      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-      readySubstate?: 'STAGED' | 'PROMOTED';
-      requestedAt?: number;
-      target?: string | null;
-      teamId?: string | null;
-      type: 'LAMBDAS';
-      url: string;
-      userId: string;
-      withCache?: boolean;
-      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-      checksState?: 'registered' | 'running' | 'completed';
-      readyAt?: number;
-      buildingAt?: number;
-      /**
-       * Whether or not preview comments are enabled for the deployment
-       *
-       * @example false
-       */
-      previewCommentsEnabled?: boolean;
       oidcTokenClaims?: {
         sub: string;
         scope: string;
@@ -12387,6 +12369,24 @@ export type UpdateProjectResponse = {
         project_id: string;
         environment: string;
       };
+      plan: 'pro' | 'enterprise' | 'hobby';
+      /**
+       * Whether or not preview comments are enabled for the deployment
+       *
+       * @example false
+       */
+      previewCommentsEnabled?: boolean;
+      private: boolean;
+      readyAt?: number;
+      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+      readySubstate?: 'STAGED' | 'PROMOTED';
+      requestedAt?: number;
+      target?: string | null;
+      teamId?: string | null;
+      type: 'LAMBDAS';
+      url: string;
+      userId: string;
+      withCache?: boolean;
     } | null;
   };
   transferCompletedAt?: number;
@@ -13574,7 +13574,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -13679,7 +13679,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -13786,7 +13786,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
