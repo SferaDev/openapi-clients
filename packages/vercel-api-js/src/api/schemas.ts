@@ -488,7 +488,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 3 | 2 | 1 | 6 | 12;
+          intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -509,7 +509,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 3 | 2 | 1 | 6 | 12;
+          intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -530,7 +530,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 3 | 2 | 1 | 6 | 12;
+          intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -551,7 +551,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 3 | 2 | 1 | 6 | 12;
+          intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -572,7 +572,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 3 | 2 | 1 | 6 | 12;
+          intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -593,7 +593,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 3 | 2 | 1 | 6 | 12;
+          intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -614,7 +614,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 3 | 2 | 1 | 6 | 12;
+          intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -635,7 +635,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 3 | 2 | 1 | 6 | 12;
+          intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -656,7 +656,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 3 | 2 | 1 | 6 | 12;
+          intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -677,7 +677,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 3 | 2 | 1 | 6 | 12;
+          intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -698,7 +698,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 3 | 2 | 1 | 6 | 12;
+          intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -719,7 +719,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 3 | 2 | 1 | 6 | 12;
+          intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -740,7 +740,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 3 | 2 | 1 | 6 | 12;
+          intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -761,7 +761,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 3 | 2 | 1 | 6 | 12;
+          intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
       };
@@ -782,7 +782,7 @@ export type AuthUser = {
         disabledAt?: number | null;
         frequency?: {
           interval: 'month';
-          intervalCount: 3 | 2 | 1 | 6 | 12;
+          intervalCount: 1 | 3 | 2 | 6 | 12;
         };
         maxQuantity?: number;
       };
