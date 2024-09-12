@@ -429,6 +429,7 @@ export type AuthUser = {
       | 'storageRedisTotalDatabases'
       | 'wafOwaspExcessBytes'
       | 'wafOwaspRequests'
+      | 'wafRateLimitRequest'
       | 'webAnalyticsEvent';
   } | null;
   /**
@@ -1363,6 +1364,22 @@ export type AuthUser = {
         enabledAt?: number | null;
       };
       wafOwaspRequests?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      wafRateLimitRequest?: {
         matrix?: {
           defaultUnitPrice: string;
           dimensionPrices: {
