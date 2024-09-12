@@ -2204,9 +2204,9 @@ export type UpdateProjectDataCacheResponse = {
           };
       has?: {
         type:
+          | 'path'
           | 'host'
           | 'method'
-          | 'path'
           | 'header'
           | 'cookie'
           | 'query'
@@ -2234,9 +2234,9 @@ export type UpdateProjectDataCacheResponse = {
       }[];
       missing?: {
         type:
+          | 'path'
           | 'host'
           | 'method'
-          | 'path'
           | 'header'
           | 'cookie'
           | 'query'
@@ -9891,9 +9891,9 @@ export type GetProjectsResponse = {
             };
         has?: {
           type:
+            | 'path'
             | 'host'
             | 'method'
-            | 'path'
             | 'header'
             | 'cookie'
             | 'query'
@@ -9921,9 +9921,9 @@ export type GetProjectsResponse = {
         }[];
         missing?: {
           type:
+            | 'path'
             | 'host'
             | 'method'
-            | 'path'
             | 'header'
             | 'cookie'
             | 'query'
@@ -10763,9 +10763,9 @@ export type CreateProjectResponse = {
           };
       has?: {
         type:
+          | 'path'
           | 'host'
           | 'method'
-          | 'path'
           | 'header'
           | 'cookie'
           | 'query'
@@ -10793,9 +10793,9 @@ export type CreateProjectResponse = {
       }[];
       missing?: {
         type:
+          | 'path'
           | 'host'
           | 'method'
-          | 'path'
           | 'header'
           | 'cookie'
           | 'query'
@@ -11809,9 +11809,9 @@ export type GetProjectResponse = {
           };
       has?: {
         type:
+          | 'path'
           | 'host'
           | 'method'
-          | 'path'
           | 'header'
           | 'cookie'
           | 'query'
@@ -11839,9 +11839,9 @@ export type GetProjectResponse = {
       }[];
       missing?: {
         type:
+          | 'path'
           | 'host'
           | 'method'
-          | 'path'
           | 'header'
           | 'cookie'
           | 'query'
@@ -12689,9 +12689,9 @@ export type UpdateProjectResponse = {
           };
       has?: {
         type:
+          | 'path'
           | 'host'
           | 'method'
-          | 'path'
           | 'header'
           | 'cookie'
           | 'query'
@@ -12719,9 +12719,9 @@ export type UpdateProjectResponse = {
       }[];
       missing?: {
         type:
+          | 'path'
           | 'host'
           | 'method'
-          | 'path'
           | 'header'
           | 'cookie'
           | 'query'
@@ -18416,6 +18416,22 @@ export type CreateTeamResponse = {
         enabledAt?: number | null;
       };
       wafOwaspRequests?: {
+        matrix?: {
+          defaultUnitPrice: string;
+          dimensionPrices: {
+            [key: string]: string;
+          };
+        };
+        tier?: number;
+        price: number;
+        batch: number;
+        threshold: number;
+        name?: string;
+        hidden: boolean;
+        disabledAt?: number | null;
+        enabledAt?: number | null;
+      };
+      wafRateLimitRequest?: {
         matrix?: {
           defaultUnitPrice: string;
           dimensionPrices: {
