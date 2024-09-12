@@ -8349,29 +8349,6 @@ export type SearchRepoQueryParams = {
 
 export type SearchRepoError = Fetcher.ErrorWrapper<undefined>;
 
-export type SearchRepoResponse = {
-  gitAccount: {
-    provider: 'github' | 'github-custom-host' | 'gitlab' | 'bitbucket';
-    namespaceId: string | number | null;
-  };
-  repos: {
-    id: string | number;
-    provider: 'github' | 'github-custom-host' | 'gitlab' | 'bitbucket';
-    url: string;
-    name: string;
-    slug: string;
-    namespace: string;
-    owner: {
-      id: string | number;
-      name: string;
-    };
-    ownerType: 'user' | 'team';
-    private: boolean;
-    defaultBranch: string;
-    updatedAt: number;
-  }[];
-};
-
 export type SearchRepoVariables = {
   queryParams?: SearchRepoQueryParams;
 } & FetcherExtraProps;
@@ -8380,12 +8357,36 @@ export type SearchRepoVariables = {
  * Lists git repositories linked to a namespace `id` for a supported provider. A specific namespace `id` can be obtained via the `git-namespaces`  endpoint. Supported providers are `github`, `gitlab` and `bitbucket`. If the provider or namespace is not provided, it will try to obtain it from the user that authenticated the request.
  */
 export const searchRepo = (variables: SearchRepoVariables, signal?: AbortSignal) =>
-  fetch<SearchRepoResponse, SearchRepoError, undefined, {}, SearchRepoQueryParams, {}>({
-    url: '/v1/integrations/search-repo',
-    method: 'get',
-    ...variables,
-    signal
-  });
+  fetch<
+    | Record<string, any>
+    | {
+        gitAccount: {
+          provider: 'github' | 'github-custom-host' | 'gitlab' | 'bitbucket';
+          namespaceId: string | number | null;
+        };
+        repos: {
+          id: string | number;
+          provider: 'github' | 'github-custom-host' | 'gitlab' | 'bitbucket';
+          url: string;
+          name: string;
+          slug: string;
+          namespace: string;
+          owner: {
+            id: string | number;
+            name: string;
+          };
+          ownerType: 'user' | 'team';
+          private: boolean;
+          defaultBranch: string;
+          updatedAt: number;
+        }[];
+      },
+    SearchRepoError,
+    undefined,
+    {},
+    SearchRepoQueryParams,
+    {}
+  >({ url: '/v1/integrations/search-repo', method: 'get', ...variables, signal });
 
 export type GetConfigurableLogDrainPathParams = {
   id: string;
