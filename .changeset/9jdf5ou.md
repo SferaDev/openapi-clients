@@ -1,5 +1,5 @@
 ---
-"vercel-api-js": minor
+"vercel-api-js": patch
 ---
 
 [BREAKING] Add 'wafRateLimitRequest' to AuthUser schema
