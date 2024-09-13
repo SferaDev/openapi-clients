@@ -1860,9 +1860,7 @@ export type UpdateProjectDataCacheResponse = {
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   resourceConfig?: {
-    lambdaDefaultTimeout?: number;
     functionDefaultTimeout?: number;
-    lambdaDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
     functionDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
   };
   rootDirectory?: string | null;
@@ -9548,9 +9546,7 @@ export type GetProjectsResponse = {
     productionDeploymentsFastLane?: boolean;
     publicSource?: boolean | null;
     resourceConfig?: {
-      lambdaDefaultTimeout?: number;
       functionDefaultTimeout?: number;
-      lambdaDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
       functionDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
     };
     rootDirectory?: string | null;
@@ -10420,9 +10416,7 @@ export type CreateProjectResponse = {
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   resourceConfig?: {
-    lambdaDefaultTimeout?: number;
     functionDefaultTimeout?: number;
-    lambdaDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
     functionDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
   };
   rootDirectory?: string | null;
@@ -11466,9 +11460,7 @@ export type GetProjectResponse = {
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   resourceConfig?: {
-    lambdaDefaultTimeout?: number;
     functionDefaultTimeout?: number;
-    lambdaDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
     functionDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
   };
   rootDirectory?: string | null;
@@ -12346,9 +12338,7 @@ export type UpdateProjectResponse = {
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   resourceConfig?: {
-    lambdaDefaultTimeout?: number;
     functionDefaultTimeout?: number;
-    lambdaDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
     functionDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
   };
   rootDirectory?: string | null;
