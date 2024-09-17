@@ -3208,10 +3208,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    createdAt?: number;
     id?: string;
-    readyState?: 'ERROR' | 'BUILDING' | 'INITIALIZING' | 'READY';
+    createdAt?: number;
     entrypoint?: string | null;
+    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
     readyStateAt?: number;
     output: {
       path: string;
@@ -3238,7 +3238,7 @@ export type CreateDeploymentResponse = {
         type: 'production' | 'preview' | 'development';
         description?: string;
         branchMatcher?: {
-          type: 'endsWith' | 'startsWith' | 'equals';
+          type: 'startsWith' | 'equals' | 'endsWith';
           pattern: string;
         };
         createdAt: number;
@@ -3472,7 +3472,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
             src?: string;
             dest?: string;
             status?: number;
@@ -3506,7 +3506,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         org: string;
@@ -3518,7 +3518,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         owner: string;
@@ -3530,7 +3530,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | null;
   flags?:
@@ -5954,6 +5954,12 @@ export type CreateOrTransferDomainResponse = {
       id: string;
     };
     /**
+     * The domain name.
+     *
+     * @example example.com
+     */
+    name: string;
+    /**
      * If it was purchased through Vercel, the timestamp in milliseconds when it was purchased.
      *
      * @example 1613602938882
@@ -5977,12 +5983,6 @@ export type CreateOrTransferDomainResponse = {
      * @example EmTbe5CEJyTk2yVAHBUWy4A3sRusca3GCwRjTC1bpeVnt1
      */
     id: string;
-    /**
-     * The domain name.
-     *
-     * @example example.com
-     */
-    name: string;
     /**
      * Timestamp in milliseconds at which the domain was ordered.
      *
@@ -20790,141 +20790,6 @@ export const getDeployments = (variables: GetDeploymentsVariables, signal?: Abor
     signal
   });
 
-export type EmailLoginError = Fetcher.ErrorWrapper<undefined>;
-
-export type EmailLoginResponse = {
-  /**
-   * The token used to verify the user accepted the login request
-   *
-   * @example T1dmvPu36nmyYisXAs7IRzcR
-   */
-  token: string;
-  /**
-   * The code the user is going to receive on the email. **Must** be displayed to the user so they can verify the request is the correct.
-   *
-   * @example Practical Saola
-   */
-  securityCode: string;
-};
-
-export type EmailLoginRequestBody = {
-  /**
-   * The user email.
-   *
-   * @example user@mail.com
-   */
-  email: string;
-  /**
-   * The desired name for the token. It will be displayed on the user account details.
-   *
-   * @example Your Client App Name
-   */
-  tokenName?: string;
-};
-
-export type EmailLoginVariables = {
-  body: EmailLoginRequestBody;
-} & FetcherExtraProps;
-
-/**
- * Request a new login for a user to get a token. This will respond with a verification token and send an email to confirm the request. Once confirmed you can use the verification token to get an authentication token.
- */
-export const emailLogin = (variables: EmailLoginVariables, signal?: AbortSignal) =>
-  fetch<EmailLoginResponse, EmailLoginError, EmailLoginRequestBody, {}, {}, {}>({
-    url: '/registration',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
-export type VerifyTokenQueryParams = {
-  /**
-   * Email to verify the login.
-   */
-  email?: string;
-  /**
-   * The token returned when the login was requested.
-   */
-  token: string;
-  /**
-   * The desired name for the token. It will be displayed on the user account details.
-   *
-   * @example Your Client App Name
-   */
-  tokenName?: string;
-  /**
-   * The SAML Profile ID, when connecting a SAML Profile to a Team member for the first time.
-   */
-  ssoUserId?: string;
-  /**
-   * The name of this user's team.
-   */
-  teamName?: string;
-  /**
-   * The slug for this user's team.
-   */
-  teamSlug?: string;
-  /**
-   * The plan for this user's team (pro or hobby).
-   */
-  teamPlan?: 'pro' | 'hobby';
-  /**
-   * Referrer to the session.
-   */
-  sessionReferrer?: string;
-  /**
-   * The page on which the user started their session.
-   */
-  landingPage?: string;
-  /**
-   * The page that sent the user to the signup page.
-   */
-  pageBeforeConversionPage?: string;
-  utmSource?: string;
-  utmMedium?: string;
-  utmCampaign?: string;
-  utmTerm?: string;
-  oppId?: string;
-};
-
-export type VerifyTokenError = Fetcher.ErrorWrapper<undefined>;
-
-export type VerifyTokenResponse = {
-  /**
-   * The user authentication token that can be used to perform API requests.
-   *
-   * @example 1ioXyz9Ue4xdCYGROet1dlKd
-   */
-  token: string;
-  /**
-   * Email address of the authenticated user.
-   *
-   * @example amy@example.com
-   */
-  email: string;
-  /**
-   * When completing SAML Single Sign-On authentication, this will be the ID of the Team that was authenticated for.
-   *
-   * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
-   */
-  teamId?: string;
-};
-
-export type VerifyTokenVariables = {
-  queryParams: VerifyTokenQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Verify the user accepted the login request and get a authentication token. The user email address and the token received after requesting the login must be added to the URL as a query string with the names `email` and `token`.
- */
-export const verifyToken = (variables: VerifyTokenVariables, signal?: AbortSignal) =>
-  fetch<VerifyTokenResponse, VerifyTokenError, undefined, {}, VerifyTokenQueryParams, {}>({
-    url: '/registration/verify',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
 export type DeleteDeploymentPathParams = {
   /**
    * The ID of the deployment to be deleted
@@ -21524,7 +21389,7 @@ export const operationsByTag = {
     deleteTeam,
     deleteTeamInviteCode
   },
-  authentication: { listAuthTokens, createAuthToken, getAuthToken, deleteAuthToken, emailLogin, verifyToken },
+  authentication: { listAuthTokens, createAuthToken, getAuthToken, deleteAuthToken },
   webhooks: { createWebhook, getWebhooks, getWebhook, deleteWebhook },
   aliases: { listAliases, getAlias, deleteAlias, listDeploymentAliases, assignAlias },
   certs: { getCertById, removeCert, issueCert, uploadCert },
