@@ -7026,6 +7026,166 @@ export const createEdgeConfigToken = (variables: CreateEdgeConfigTokenVariables,
     CreateEdgeConfigTokenPathParams
   >({ url: '/v1/edge-config/{edgeConfigId}/token', method: 'post', ...variables, signal });
 
+export type GetEdgeConfigBackupPathParams = {
+  edgeConfigId: string;
+  edgeConfigBackupVersionId: string;
+};
+
+export type GetEdgeConfigBackupQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type GetEdgeConfigBackupError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetEdgeConfigBackupVariables = {
+  pathParams: GetEdgeConfigBackupPathParams;
+  queryParams?: GetEdgeConfigBackupQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves a specific version of an Edge Config from backup storage.
+ */
+export const getEdgeConfigBackup = (variables: GetEdgeConfigBackupVariables, signal?: AbortSignal) =>
+  fetch<
+    | {
+        id: string;
+        lastModified: number;
+        backup: {
+          digest: string;
+          items: {
+            [key: string]: {
+              updatedAt: number;
+              value: Schemas.EdgeConfigItemValue;
+              description?: string;
+              createdAt: number;
+            };
+          };
+          /**
+           * Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
+           */
+          slug: string;
+          updatedAt: number;
+        };
+        metadata: {
+          updatedAt?: string;
+          updatedBy?: string;
+          itemsCount?: number;
+          itemsBytes?: number;
+        };
+        user?: {
+          id: string;
+          username: string;
+          email: string;
+          name?: string;
+          avatar?: string;
+        };
+      }
+    | {
+        user: {
+          id: string;
+          username: string;
+          email: string;
+          name?: string;
+          avatar?: string;
+        };
+        id: string;
+        lastModified: number;
+        backup: {
+          digest: string;
+          items: {
+            [key: string]: {
+              updatedAt: number;
+              value: Schemas.EdgeConfigItemValue;
+              description?: string;
+              createdAt: number;
+            };
+          };
+          /**
+           * Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
+           */
+          slug: string;
+          updatedAt: number;
+        };
+        metadata: {
+          updatedAt?: string;
+          updatedBy?: string;
+          itemsCount?: number;
+          itemsBytes?: number;
+        };
+      },
+    GetEdgeConfigBackupError,
+    undefined,
+    {},
+    GetEdgeConfigBackupQueryParams,
+    GetEdgeConfigBackupPathParams
+  >({ url: '/v1/edge-config/{edgeConfigId}/backups/{edgeConfigBackupVersionId}', method: 'get', ...variables, signal });
+
+export type GetEdgeConfigBackupsPathParams = {
+  edgeConfigId: string;
+};
+
+export type GetEdgeConfigBackupsQueryParams = {
+  next?: string;
+  /**
+   * @minimum 0
+   * @maximum 50
+   */
+  limit?: number;
+  metadata?: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type GetEdgeConfigBackupsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetEdgeConfigBackupsResponse = {
+  backups: {
+    metadata?: {
+      updatedAt?: string;
+      updatedBy?: string;
+      itemsCount?: number;
+      itemsBytes?: number;
+    };
+    id: string;
+    lastModified: number;
+  }[];
+  pagination: {
+    hasNext: boolean;
+    next?: string;
+  };
+};
+
+export type GetEdgeConfigBackupsVariables = {
+  pathParams: GetEdgeConfigBackupsPathParams;
+  queryParams?: GetEdgeConfigBackupsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Returns backups of an Edge Config.
+ */
+export const getEdgeConfigBackups = (variables: GetEdgeConfigBackupsVariables, signal?: AbortSignal) =>
+  fetch<
+    GetEdgeConfigBackupsResponse,
+    GetEdgeConfigBackupsError,
+    undefined,
+    {},
+    GetEdgeConfigBackupsQueryParams,
+    GetEdgeConfigBackupsPathParams
+  >({ url: '/v1/edge-config/{edgeConfigId}/backups', method: 'get', ...variables, signal });
+
 export type ListUserEventsQueryParams = {
   /**
    * Maximum number of items which may be returned.
@@ -21359,7 +21519,9 @@ export const operationsByTag = {
     getEdgeConfigTokens,
     deleteEdgeConfigTokens,
     getEdgeConfigToken,
-    createEdgeConfigToken
+    createEdgeConfigToken,
+    getEdgeConfigBackup,
+    getEdgeConfigBackups
   },
   user: { listUserEvents, getAuthUser, requestDelete },
   integrations: { getConfigurations, getConfiguration, deleteConfiguration, gitNamespaces, searchRepo },
