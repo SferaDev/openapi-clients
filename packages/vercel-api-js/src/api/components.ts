@@ -1848,7 +1848,7 @@ export type UpdateProjectDataCacheResponse = {
         productionBranch?: string;
       };
   name: string;
-  nodeVersion: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
+  nodeVersion: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
   optionsAllowlist?: {
     paths: {
       value: string;
@@ -9694,7 +9694,7 @@ export type GetProjectsResponse = {
           productionBranch?: string;
         };
     name: string;
-    nodeVersion: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
+    nodeVersion: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
     optionsAllowlist?: {
       paths: {
         value: string;
@@ -10564,7 +10564,7 @@ export type CreateProjectResponse = {
         productionBranch?: string;
       };
   name: string;
-  nodeVersion: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
+  nodeVersion: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
   optionsAllowlist?: {
     paths: {
       value: string;
@@ -11608,7 +11608,7 @@ export type GetProjectResponse = {
         productionBranch?: string;
       };
   name: string;
-  nodeVersion: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
+  nodeVersion: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
   optionsAllowlist?: {
     paths: {
       value: string;
@@ -12486,7 +12486,7 @@ export type UpdateProjectResponse = {
         productionBranch?: string;
       };
   name: string;
-  nodeVersion: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
+  nodeVersion: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
   optionsAllowlist?: {
     paths: {
       value: string;
@@ -13021,7 +13021,7 @@ export type UpdateProjectRequestBody = {
    * @pattern ^(?!.*---)[a-z0-9-_.]+$
    */
   name?: string;
-  nodeVersion?: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
+  nodeVersion?: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
   /**
    * The output directory of the project. When `null` is used this value will be automatically detected
    *
@@ -20867,7 +20867,7 @@ export type GetDeploymentsResponse = {
       devCommand?: string | null;
       installCommand?: string | null;
       buildCommand?: string | null;
-      nodeVersion?: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
+      nodeVersion?: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
       outputDirectory?: string | null;
       publicSource?: boolean | null;
       rootDirectory?: string | null;
