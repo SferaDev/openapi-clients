@@ -2752,7 +2752,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         monorepoManager?: string | null;
         ownerId: string;
         /**
-         * Since November 2023 this field defines a connect configuration that will only be used to deploy passive lambdas to (as in passiveRegions)
+         * Since November 2023 this field defines a Secure Compute network that will only be used to deploy passive lambdas to (as in passiveRegions)
          */
         passiveConnectConfigurationId?: string;
         routes:
@@ -3493,7 +3493,7 @@ export type CreateDeploymentResponse = {
   connectConfigurationId?: string;
   createdIn: string;
   /**
-   * Since November 2023 this field defines a connect configuration that will only be used to deploy passive lambdas to (as in passiveRegions)
+   * Since November 2023 this field defines a Secure Compute network that will only be used to deploy passive lambdas to (as in passiveRegions)
    */
   passiveConnectConfigurationId?: string;
   gitRepo?:
@@ -4162,7 +4162,7 @@ export type CancelDeploymentResponse = {
   monorepoManager?: string | null;
   ownerId: string;
   /**
-   * Since November 2023 this field defines a connect configuration that will only be used to deploy passive lambdas to (as in passiveRegions)
+   * Since November 2023 this field defines a Secure Compute network that will only be used to deploy passive lambdas to (as in passiveRegions)
    */
   passiveConnectConfigurationId?: string;
   plan: 'pro' | 'enterprise' | 'hobby';
@@ -20906,15 +20906,15 @@ export type GetDeploymentsResponse = {
       };
     };
     /**
-     * The flag saying if Vercel Connect configuration is used for builds
+     * The flag saying if Secure Compute network is used for builds
      */
     connectBuildsEnabled?: boolean;
     /**
-     * The ID of Vercel Connect configuration used for this deployment
+     * The ID of Secure Compute network used for this deployment
      */
     connectConfigurationId?: string;
     /**
-     * The ID of Vercel Connect configuration used for this deployment's passive functions
+     * The ID of Secure Compute network used for this deployment's passive functions
      */
     passiveConnectConfigurationId?: string;
     /**
