@@ -1,5 +1,20 @@
 # vercel-api-js
 
+## 0.11.0
+
+### Minor Changes
+
+- 90dbe51: Add new fields 'id', 'buildingAt', 'checksConclusion', 'checksState', 'oidcTokenClaims', and 'previewCommentsEnabled' to latestDeployments in UpdateProjectDataCacheResponse
+
+### Patch Changes
+
+- 15a5c36: [BREAKING] Update supported node versions to include 22.x
+- c4f56ad: [BREAKING] Add 'wafRateLimitRequest' to AuthUser schema
+- 05ff026: [BREAKING] Add new 'flags-connection-string' type to project environment variables
+- c0aa464: Change response type of searchRepo endpoint
+- dd7b469: Add new 'previewDeploymentsDisabled' field to UpdateProjectRequestBody
+- f7231ed: Remove lambdaDefaultTimeout and lambdaDefaultMemoryType fields from resourceConfig in several endpoints
+
 ## 0.10.0
 
 ### Minor Changes
