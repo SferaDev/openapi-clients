@@ -3774,7 +3774,7 @@ export type CreateDeploymentRequestBody = {
     /**
      * Override the Node.js version that should be used for this deployment
      */
-    nodeVersion?: '20.x' | '18.x' | '16.x';
+    nodeVersion?: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
     /**
      * The output directory of the project. When `null` is used this value will be automatically detected
      *
@@ -13028,6 +13028,10 @@ export type UpdateProjectRequestBody = {
    * @maxLength 256
    */
   outputDirectory?: string | null;
+  /**
+   * Specifies whether preview deployments are disabled for this project.
+   */
+  previewDeploymentsDisabled?: boolean | null;
   /**
    * Specifies whether the source code and logs of the deployments for this project should be public or not
    */
