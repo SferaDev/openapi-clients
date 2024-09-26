@@ -1862,6 +1862,7 @@ export type UpdateProjectDataCacheResponse = {
   resourceConfig?: {
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
+    allowServerlessConcurrency?: boolean;
   };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -9708,6 +9709,7 @@ export type GetProjectsResponse = {
     resourceConfig?: {
       functionDefaultTimeout?: number;
       functionDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
+      allowServerlessConcurrency?: boolean;
     };
     rootDirectory?: string | null;
     serverlessFunctionRegion?: string | null;
@@ -10578,6 +10580,7 @@ export type CreateProjectResponse = {
   resourceConfig?: {
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
+    allowServerlessConcurrency?: boolean;
   };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -11622,6 +11625,7 @@ export type GetProjectResponse = {
   resourceConfig?: {
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
+    allowServerlessConcurrency?: boolean;
   };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -12500,6 +12504,7 @@ export type UpdateProjectResponse = {
   resourceConfig?: {
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
+    allowServerlessConcurrency?: boolean;
   };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
