@@ -7262,6 +7262,10 @@ export type GetConfigurationsQueryParams = {
   view: 'account' | 'project';
   installationType?: 'marketplace' | 'external';
   /**
+   * ID of the integration
+   */
+  integrationIdOrSlug?: string;
+  /**
    * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
