@@ -324,13 +324,17 @@ export type TeamLimited = {
    * The membership of the authenticated User in relation to the Team.
    */
   membership: {
-    confirmed?: boolean;
-    confirmedAt?: number;
+    uid?: string;
+    entitlements?: {
+      entitlement: string;
+    }[];
+    confirmed: boolean;
+    confirmedAt: number;
     accessRequestedAt?: number;
-    role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
+    role: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
     teamId?: string;
-    createdAt?: number;
-    created?: number;
+    createdAt: number;
+    created: number;
     joinedFrom?: {
       origin:
         | 'link'
@@ -355,7 +359,6 @@ export type TeamLimited = {
       dsyncUserId?: string;
       dsyncConnectedAt?: number;
     };
-    uid?: string;
   };
   /**
    * Will remain undocumented. Remove in v3 API.
