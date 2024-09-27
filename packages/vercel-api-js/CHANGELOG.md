@@ -1,5 +1,12 @@
 # vercel-api-js
 
+## 0.11.1
+
+### Patch Changes
+
+- 88045f8: Add installationType parameter to GetConfigurationsQueryParams
+- fc395d2: Add allowServerlessConcurrency field to resourceConfig
+
 ## 0.11.0
 
 ### Minor Changes
