@@ -1465,6 +1465,15 @@ export type AuthUser = {
       customerId: string;
     } | null;
     reseller?: string;
+    /**
+     * Modifies block thresholds for this entity. A `multiplier` of 1 leads to no change in behavior. A `multiplier` of 1.25 would increase the block threshold by 25%. Only applies until `timestamp`. Do _not_ delete this property, ever. It indicates a user has self-unblocked and cannot do so again. Only the most recent entry applies, regardless of the `startsAt` and `expiresAt` timestamps of prior entries. Prior entries are kept for historical purposes only. This is modeled as a stack, where the most recent is the first (0th) entry.
+     */
+    hobbyBlockThresholdModifier?: {
+      source: 'admin' | 'self-service';
+      startsAt: number;
+      expiresAt: number;
+      multiplier: number;
+    }[];
   } | null;
   /**
    * An object containing infomation related to the amount of platform resources may be allocated to the User account.
