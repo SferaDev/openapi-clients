@@ -7260,6 +7260,7 @@ export const listUserEvents = (variables: ListUserEventsVariables, signal?: Abor
 
 export type GetConfigurationsQueryParams = {
   view: 'account' | 'project';
+  installationType?: 'marketplace' | 'external';
   /**
    * The Team identifier to perform the request on behalf of.
    */
