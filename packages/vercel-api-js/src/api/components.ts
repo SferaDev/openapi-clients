@@ -10250,7 +10250,7 @@ export type CreateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -10856,7 +10856,7 @@ export type CreateProjectResponse = {
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'pending' | 'in-progress' | 'succeeded' | 'failed' | 'skipped';
+    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -12174,7 +12174,7 @@ export type UpdateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -12780,7 +12780,7 @@ export type UpdateProjectResponse = {
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+    jobStatus: 'pending' | 'in-progress' | 'succeeded' | 'failed' | 'skipped';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -15638,6 +15638,17 @@ export type UpdateProjectProtectionBypassRequestBody = {
      * Whether or not a new automation bypass should be created after the provided secret is revoked
      */
     regenerate: boolean;
+  };
+  /**
+   * Generate a new secret. If neither generate or revoke are provided, a new random secret will be generated.
+   */
+  generate?: {
+    /**
+     * Optional value of the secret to generate
+     *
+     * @pattern ^[a-zA-Z0-9]{32}$
+     */
+    secret: string;
   };
 };
 
