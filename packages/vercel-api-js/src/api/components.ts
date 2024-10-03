@@ -2524,6 +2524,13 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
           };
         };
         readyStateReason?: string;
+        integrations?: {
+          status: 'error' | 'skipped' | 'pending' | 'ready';
+          startedAt: number;
+          completedAt?: number;
+          skippedAt?: number;
+          skippedBy?: string;
+        };
         alias?: string[];
         aliasAssigned: boolean;
         bootedAt: number;
@@ -3196,6 +3203,13 @@ export type CreateDeploymentResponse = {
     };
   };
   readyStateReason?: string;
+  integrations?: {
+    status: 'error' | 'skipped' | 'pending' | 'ready';
+    startedAt: number;
+    completedAt?: number;
+    skippedAt?: number;
+    skippedBy?: string;
+  };
   alias?: string[];
   aliasAssigned: boolean;
   bootedAt: number;
@@ -3936,6 +3950,13 @@ export type CancelDeploymentResponse = {
     };
   };
   readyStateReason?: string;
+  integrations?: {
+    status: 'pending' | 'ready' | 'error' | 'skipped';
+    startedAt: number;
+    completedAt?: number;
+    skippedAt?: number;
+    skippedBy?: string;
+  };
   alias?: string[];
   aliasAssigned: boolean;
   bootedAt: number;
@@ -4032,7 +4053,7 @@ export type CancelDeploymentResponse = {
   automaticAliases?: string[];
   buildErrorAt?: number;
   checksState?: 'registered' | 'running' | 'completed';
-  checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+  checksConclusion?: 'skipped' | 'succeeded' | 'failed' | 'canceled';
   createdAt: number;
   deletedAt?: number | null;
   canceledAt?: number;
@@ -10250,7 +10271,7 @@ export type CreateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -10856,7 +10877,7 @@ export type CreateProjectResponse = {
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+    jobStatus: 'pending' | 'in-progress' | 'succeeded' | 'failed' | 'skipped';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -12174,7 +12195,7 @@ export type UpdateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -12780,7 +12801,7 @@ export type UpdateProjectResponse = {
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'pending' | 'in-progress' | 'succeeded' | 'failed' | 'skipped';
+    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -14480,7 +14501,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14584,7 +14605,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15091,7 +15112,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15195,7 +15216,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15298,7 +15319,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15489,7 +15510,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
