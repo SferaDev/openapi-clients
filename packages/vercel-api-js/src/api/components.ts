@@ -1714,6 +1714,10 @@ export type UpdateProjectDataCacheResponse = {
   gitForkProtection?: boolean;
   gitLFS?: boolean;
   id: string;
+  ipBuckets?: {
+    bucket: string;
+    supportUntil?: number;
+  }[];
   latestDeployments?: {
     id: string;
     alias?: string[];
@@ -9587,6 +9591,10 @@ export type GetProjectsResponse = {
     gitForkProtection?: boolean;
     gitLFS?: boolean;
     id: string;
+    ipBuckets?: {
+      bucket: string;
+      supportUntil?: number;
+    }[];
     latestDeployments?: {
       id: string;
       alias?: string[];
@@ -10458,6 +10466,10 @@ export type CreateProjectResponse = {
   gitForkProtection?: boolean;
   gitLFS?: boolean;
   id: string;
+  ipBuckets?: {
+    bucket: string;
+    supportUntil?: number;
+  }[];
   latestDeployments?: {
     id: string;
     alias?: string[];
@@ -11503,6 +11515,10 @@ export type GetProjectResponse = {
   gitForkProtection?: boolean;
   gitLFS?: boolean;
   id: string;
+  ipBuckets?: {
+    bucket: string;
+    supportUntil?: number;
+  }[];
   latestDeployments?: {
     id: string;
     alias?: string[];
@@ -12382,6 +12398,10 @@ export type UpdateProjectResponse = {
   gitForkProtection?: boolean;
   gitLFS?: boolean;
   id: string;
+  ipBuckets?: {
+    bucket: string;
+    supportUntil?: number;
+  }[];
   latestDeployments?: {
     id: string;
     alias?: string[];
