@@ -4,54 +4,6 @@
  * @version 0.0.1
  */
 /**
- * Represents an Access Group.
- */
-export type AccessGroup = {
-  /**
-   * The name of this access group.
-   *
-   * @example my-access-group
-   */
-  name: string;
-  /**
-   * Timestamp in milliseconds when the access group was created.
-   *
-   * @example 1588720733602
-   */
-  createdAt: string;
-  /**
-   * ID of the team that this access group belongs to.
-   *
-   * @example team_123a6c5209bc3778245d011443644c8d27dc2c50
-   */
-  teamId: string;
-  /**
-   * Timestamp in milliseconds when the access group was last updated.
-   *
-   * @example 1588720733602
-   */
-  updatedAt: string;
-  /**
-   * ID of the access group.
-   *
-   * @example ag_123a6c5209bc3778245d011443644c8d27dc2c50
-   */
-  accessGroupId: string;
-  /**
-   * Number of members in the access group.
-   *
-   * @example 5
-   */
-  membersCount: number;
-  /**
-   * Number of projects in the access group.
-   *
-   * @example 2
-   */
-  projectsCount: number;
-};
-
-/**
  * Enum containing the actions that can be performed against a resource. Group operations are included.
  */
 export type ACLAction = 'create' | 'delete' | 'read' | 'update' | 'list';
