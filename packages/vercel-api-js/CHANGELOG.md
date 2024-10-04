@@ -1,5 +1,18 @@
 # vercel-api-js
 
+## 0.12.0
+
+### Minor Changes
+
+- 39fa39b: Add new 'hobby' and 'v0TeamSeats' fields to the CreateTeamResponse interface
+- b7af1a2: Add entitlements field to UpdateAccessGroupResponse
+
+### Patch Changes
+
+- a5aaadb: Add support for IP buckets with expiration date in project responses
+- 5ad752c: Add integrations field to getDeployment, createDeployment, cancelDeployment, CreateProjectResponse, UpdateProjectResponse, CreateProjectEnvResponse, removeProjectEnv, and editProjectEnv types
+- 1f4b4fd: Add integrationIdOrSlug parameter to GetConfigurationsQueryParams
+
 ## 0.11.1
 
 ### Patch Changes
