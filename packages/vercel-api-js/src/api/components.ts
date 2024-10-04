@@ -25,6 +25,7 @@ export type ReadAccessGroupQueryParams = {
 export type ReadAccessGroupError = Fetcher.ErrorWrapper<undefined>;
 
 export type ReadAccessGroupResponse = {
+  entitlements?: 'v0'[];
   isDsyncManaged: boolean;
   /**
    * The name of this access group.
@@ -105,6 +106,52 @@ export type UpdateAccessGroupQueryParams = {
 
 export type UpdateAccessGroupError = Fetcher.ErrorWrapper<undefined>;
 
+export type UpdateAccessGroupResponse = {
+  entitlements?: 'v0'[];
+  /**
+   * The name of this access group.
+   *
+   * @example my-access-group
+   */
+  name: string;
+  /**
+   * Timestamp in milliseconds when the access group was created.
+   *
+   * @example 1588720733602
+   */
+  createdAt: string;
+  /**
+   * ID of the team that this access group belongs to.
+   *
+   * @example team_123a6c5209bc3778245d011443644c8d27dc2c50
+   */
+  teamId: string;
+  /**
+   * Timestamp in milliseconds when the access group was last updated.
+   *
+   * @example 1588720733602
+   */
+  updatedAt: string;
+  /**
+   * ID of the access group.
+   *
+   * @example ag_123a6c5209bc3778245d011443644c8d27dc2c50
+   */
+  accessGroupId: string;
+  /**
+   * Number of members in the access group.
+   *
+   * @example 5
+   */
+  membersCount: number;
+  /**
+   * Number of projects in the access group.
+   *
+   * @example 2
+   */
+  projectsCount: number;
+};
+
 export type UpdateAccessGroupRequestBody = {
   /**
    * The name of the access group
@@ -150,7 +197,7 @@ export type UpdateAccessGroupVariables = {
  */
 export const updateAccessGroup = (variables: UpdateAccessGroupVariables, signal?: AbortSignal) =>
   fetch<
-    Schemas.AccessGroup,
+    UpdateAccessGroupResponse,
     UpdateAccessGroupError,
     UpdateAccessGroupRequestBody,
     {},
@@ -330,6 +377,7 @@ export const listAccessGroups = (variables: ListAccessGroupsVariables, signal?: 
         accessGroups: {
           members?: string[];
           projects?: string[];
+          entitlements?: string[];
           isDsyncManaged: boolean;
           /**
            * The name of this access group.
@@ -10279,7 +10327,7 @@ export type CreateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -10889,7 +10937,7 @@ export type CreateProjectResponse = {
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'pending' | 'in-progress' | 'succeeded' | 'failed' | 'skipped';
+    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -12211,7 +12259,7 @@ export type UpdateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -12821,7 +12869,7 @@ export type UpdateProjectResponse = {
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+    jobStatus: 'pending' | 'in-progress' | 'succeeded' | 'failed' | 'skipped';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -14521,7 +14569,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14625,7 +14673,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15132,7 +15180,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15236,7 +15284,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15339,7 +15387,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15530,7 +15578,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16991,6 +17039,7 @@ export type GetTeamMembersResponse = {
     projects?: {
       [key: string]: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
     };
+    entitlements?: string[];
   }[];
   pagination: {
     hasNext: boolean;
