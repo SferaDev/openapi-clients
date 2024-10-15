@@ -2050,6 +2050,7 @@ export type UpdateProjectDataCacheResponse = {
     integrationResource?: Schemas.ACLAction[];
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
+    integrationDeploymentAction?: Schemas.ACLAction[];
     marketplaceInstallationMember?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
     marketplaceInvoice?: Schemas.ACLAction[];
@@ -7519,6 +7520,10 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          */
         installationType?: 'marketplace' | 'external';
         adminRoleAssignments?: string[];
+        /**
+         * Whether this configuration needs finalization. Set to true if any payable billing plan was used.
+         */
+        needsFinalization?: boolean;
         billingPlan?: {
           id: string;
           type: 'prepayment' | 'subscription';
@@ -7713,6 +7718,10 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          */
         installationType?: 'marketplace' | 'external';
         adminRoleAssignments?: string[];
+        /**
+         * Whether this configuration needs finalization. Set to true if any payable billing plan was used.
+         */
+        needsFinalization?: boolean;
         billingPlan?: {
           id: string;
           type: 'prepayment' | 'subscription';
@@ -7963,6 +7972,10 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          */
         installationType?: 'marketplace' | 'external';
         adminRoleAssignments?: string[];
+        /**
+         * Whether this configuration needs finalization. Set to true if any payable billing plan was used.
+         */
+        needsFinalization?: boolean;
       }
     | {
         /**
@@ -8130,6 +8143,10 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          */
         installationType?: 'marketplace' | 'external';
         adminRoleAssignments?: string[];
+        /**
+         * Whether this configuration needs finalization. Set to true if any payable billing plan was used.
+         */
+        needsFinalization?: boolean;
         canConfigureOpenTelemetry?: boolean;
       },
     GetConfigurationError,
@@ -8666,7 +8683,7 @@ export type GetConfigurableLogDrainResponse = {
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
-  compression?: 'gzip' | 'zstd' | 'none';
+  hideIpAddresses?: boolean;
   secret: string;
   createdFrom?: 'self-served';
 };
@@ -8765,7 +8782,7 @@ export type GetAllLogDrainsResponse = {
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
-  compression?: 'gzip' | 'zstd' | 'none';
+  hideIpAddresses?: boolean;
   secret: string;
   createdFrom?: 'self-served';
 }[];
@@ -8826,7 +8843,7 @@ export type CreateConfigurableLogDrainResponse = {
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
-  compression?: 'gzip' | 'zstd' | 'none';
+  hideIpAddresses?: boolean;
   createdFrom?: 'self-served';
 };
 
@@ -9927,6 +9944,7 @@ export type GetProjectsResponse = {
       integrationResource?: Schemas.ACLAction[];
       integrationEvent?: Schemas.ACLAction[];
       integrationResourceSecrets?: Schemas.ACLAction[];
+      integrationDeploymentAction?: Schemas.ACLAction[];
       marketplaceInstallationMember?: Schemas.ACLAction[];
       marketplaceBillingData?: Schemas.ACLAction[];
       marketplaceInvoice?: Schemas.ACLAction[];
@@ -10327,7 +10345,7 @@ export type CreateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -10802,6 +10820,7 @@ export type CreateProjectResponse = {
     integrationResource?: Schemas.ACLAction[];
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
+    integrationDeploymentAction?: Schemas.ACLAction[];
     marketplaceInstallationMember?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
     marketplaceInvoice?: Schemas.ACLAction[];
@@ -10937,7 +10956,7 @@ export type CreateProjectResponse = {
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+    jobStatus: 'pending' | 'in-progress' | 'succeeded' | 'failed' | 'skipped';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -11851,6 +11870,7 @@ export type GetProjectResponse = {
     integrationResource?: Schemas.ACLAction[];
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
+    integrationDeploymentAction?: Schemas.ACLAction[];
     marketplaceInstallationMember?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
     marketplaceInvoice?: Schemas.ACLAction[];
@@ -12259,7 +12279,7 @@ export type UpdateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -12734,6 +12754,7 @@ export type UpdateProjectResponse = {
     integrationResource?: Schemas.ACLAction[];
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
+    integrationDeploymentAction?: Schemas.ACLAction[];
     marketplaceInstallationMember?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
     marketplaceInvoice?: Schemas.ACLAction[];
@@ -12869,7 +12890,7 @@ export type UpdateProjectResponse = {
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'pending' | 'in-progress' | 'succeeded' | 'failed' | 'skipped';
+    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -14569,7 +14590,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14673,7 +14694,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15180,7 +15201,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15284,7 +15305,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15387,7 +15408,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15578,7 +15599,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17678,6 +17699,12 @@ export type PatchTeamRequestBody = {
    * @example false
    */
   hideIpAddresses?: boolean;
+  /**
+   * Display or hide IP addresses in Log Drains.
+   *
+   * @example false
+   */
+  hideIpAddressesInLogDrains?: boolean;
 };
 
 export type PatchTeamVariables = {
@@ -17753,1088 +17780,7 @@ export type CreateTeamResponse = {
   /**
    * IMPORTANT: If extending Billing, particularly with optional fields, make sure you also update `sync-orb-subscription-to-owner.ts` to handle the items when the object is recreated.
    */
-  billing: {
-    currency?: 'usd' | 'eur';
-    cancelation?: number | null;
-    period: {
-      start: number;
-      end: number;
-    } | null;
-    contract?: {
-      start: number;
-      end: number;
-    } | null;
-    plan: 'pro' | 'enterprise' | 'hobby';
-    planIteration?: string;
-    platform?: 'stripe' | 'stripeTestMode';
-    orbCustomerId?: string;
-    syncedAt?: number;
-    programType?: 'startup' | 'agency';
-    trial?: {
-      start: number;
-      end: number;
-    } | null;
-    email?: string | null;
-    tax?: {
-      type: string;
-      id: string;
-    } | null;
-    language?: string | null;
-    address?: {
-      line1?: string;
-      line2?: string;
-      postalCode?: string;
-      city?: string;
-      country?: string;
-      state?: string;
-    } | null;
-    name?: string | null;
-    invoiceItems?: {
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      pro?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 6 | 2 | 1 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      enterprise?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 6 | 2 | 1 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      hobby?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 6 | 2 | 1 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      analytics?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 6 | 2 | 1 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      concurrentBuilds?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 6 | 2 | 1 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      developerExperiencePlatform?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 6 | 2 | 1 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      enhancedConcurrentBuilds?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 6 | 2 | 1 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      includedAllocationMiu?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 6 | 2 | 1 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      managedInfrastructureCommitment?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 6 | 2 | 1 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      monitoring?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 6 | 2 | 1 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      passwordProtection?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 6 | 2 | 1 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      previewDeploymentSuffix?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 6 | 2 | 1 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      saml?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 6 | 2 | 1 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      teamSeats?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 6 | 2 | 1 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      v0TeamSeats?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 6 | 2 | 1 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      vercelMarketplace?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 6 | 2 | 1 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      webAnalytics?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        /**
-         * The highest quantity in the current period. Used to render the correct enable/disable UI for add-ons.
-         */
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 6 | 2 | 1 | 3 | 12;
-        };
-        maxQuantity?: number;
-      };
-      analyticsUsage?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      artifacts?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      bandwidth?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      blobStores?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      blobTotalAdvancedRequests?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      blobTotalAvgSizeInBytes?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      blobTotalGetResponseObjectSizeInBytes?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      blobTotalSimpleRequests?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      buildMinute?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      dataCacheRead?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      dataCacheRevalidation?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      dataCacheWrite?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      edgeConfigRead?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      edgeConfigWrite?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      edgeFunctionExecutionUnits?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      edgeMiddlewareInvocations?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      edgeRequest?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      edgeRequestAdditionalCpuDuration?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      fastDataTransfer?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      fastOriginTransfer?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      functionDuration?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      functionInvocation?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      logDrainsVolume?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      monitoringMetric?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      postgresComputeTime?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      postgresDataStorage?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      postgresDataTransfer?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      postgresDatabase?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      postgresWrittenData?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      serverlessFunctionExecution?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      sourceImages?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      storageRedisTotalBandwidthInBytes?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      storageRedisTotalCommands?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      storageRedisTotalDailyAvgStorageInBytes?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      storageRedisTotalDatabases?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      wafOwaspExcessBytes?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      wafOwaspRequests?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      wafRateLimitRequest?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      webAnalyticsEvent?: {
-        matrix?: {
-          defaultUnitPrice: string;
-          dimensionPrices: {
-            [key: string]: string;
-          };
-        };
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-    } | null;
-    invoiceSettings?: {
-      footer?: string;
-    };
-    subscriptions?:
-      | {
-          id: string;
-          trial: {
-            start: number;
-            end: number;
-          } | null;
-          period: {
-            start: number;
-            end: number;
-          };
-          frequency: {
-            interval: 'month' | 'day' | 'week' | 'year';
-            intervalCount: number;
-          };
-          discount: {
-            id: string;
-            coupon: {
-              id: string;
-              name: string | null;
-              amountOff: number | null;
-              percentageOff: number | null;
-              durationInMonths: number | null;
-              duration: 'forever' | 'repeating' | 'once';
-            };
-          } | null;
-          items: {
-            id: string;
-            priceId: string;
-            productId: string;
-            amount: number;
-            quantity: number;
-          }[];
-        }[]
-      | null;
-    controls?: {
-      analyticsSampleRateInPercent?: number | null;
-      analyticsSpendLimitInDollars?: number | null;
-    } | null;
-    purchaseOrder?: string | null;
-    status?: 'active' | 'trialing' | 'overdue' | 'expired' | 'canceled';
-    pricingExperiment?: 'august-2022';
-    orbMigrationScheduledAt?: number | null;
-    forceOrbMigration?: boolean | null;
-    awsMarketplace?: {
-      productCode: string;
-      offerId?: string;
-      customerId: string;
-    } | null;
-    reseller?: string;
-    /**
-     * Modifies block thresholds for this entity. A `multiplier` of 1 leads to no change in behavior. A `multiplier` of 1.25 would increase the block threshold by 25%. Only applies until `timestamp`. Do _not_ delete this property, ever. It indicates a user has self-unblocked and cannot do so again. Only the most recent entry applies, regardless of the `startsAt` and `expiresAt` timestamps of prior entries. Prior entries are kept for historical purposes only. This is modeled as a stack, where the most recent is the first (0th) entry.
-     */
-    hobbyBlockThresholdModifier?: {
-      source: 'admin' | 'self-service';
-      startsAt: number;
-      expiresAt: number;
-      multiplier: number;
-    }[];
-  };
+  billing: Record<string, any>;
 };
 
 export type CreateTeamRequestBody = {
@@ -19305,9 +18251,11 @@ export type CreateWebhookResponse = {
     | 'deployment.ready'
     | 'deployment.check-rerequested'
     | 'deployment.promoted'
+    | 'deployment.integration.action.start'
     | 'edge-config.created'
     | 'edge-config.deleted'
     | 'edge-config.items.updated'
+    | 'firewall.attack'
     | 'integration-configuration.permission-upgraded'
     | 'integration-configuration.removed'
     | 'integration-configuration.scope-change-confirmed'
@@ -19390,9 +18338,11 @@ export type CreateWebhookRequestBody = {
     | 'deployment.ready'
     | 'deployment.check-rerequested'
     | 'deployment.promoted'
+    | 'deployment.integration.action.start'
     | 'edge-config.created'
     | 'edge-config.deleted'
     | 'edge-config.items.updated'
+    | 'firewall.attack'
     | 'integration-configuration.permission-upgraded'
     | 'integration-configuration.removed'
     | 'integration-configuration.scope-change-confirmed'
@@ -19537,9 +18487,11 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'deployment.ready'
           | 'deployment.check-rerequested'
           | 'deployment.promoted'
+          | 'deployment.integration.action.start'
           | 'edge-config.created'
           | 'edge-config.deleted'
           | 'edge-config.items.updated'
+          | 'firewall.attack'
           | 'integration-configuration.permission-upgraded'
           | 'integration-configuration.removed'
           | 'integration-configuration.scope-change-confirmed'
@@ -19618,9 +18570,11 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'deployment.ready'
           | 'deployment.check-rerequested'
           | 'deployment.promoted'
+          | 'deployment.integration.action.start'
           | 'edge-config.created'
           | 'edge-config.deleted'
           | 'edge-config.items.updated'
+          | 'firewall.attack'
           | 'integration-configuration.permission-upgraded'
           | 'integration-configuration.removed'
           | 'integration-configuration.scope-change-confirmed'
@@ -19723,9 +18677,11 @@ export type GetWebhookResponse = {
     | 'deployment.ready'
     | 'deployment.check-rerequested'
     | 'deployment.promoted'
+    | 'deployment.integration.action.start'
     | 'edge-config.created'
     | 'edge-config.deleted'
     | 'edge-config.items.updated'
+    | 'firewall.attack'
     | 'integration-configuration.permission-upgraded'
     | 'integration-configuration.removed'
     | 'integration-configuration.scope-change-confirmed'
