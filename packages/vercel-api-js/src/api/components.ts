@@ -7419,10 +7419,6 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          * @example marketplace
          */
         source?: 'marketplace' | 'deploy-button' | 'external';
-        removedLogDrainsAt?: number;
-        removedProjectEnvsAt?: number;
-        removedTokensAt?: number;
-        removedWebhooksAt?: number;
         /**
          * The slug of the integration the configuration is created for.
          *
@@ -7455,53 +7451,6 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          * @example read-write:log-drain
          */
         scopes?: string[];
-        scopesQueue?: {
-          scopes: {
-            added: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-              | 'read-write:integration-resource'
-            )[];
-            upgraded: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-              | 'read-write:integration-resource'
-            )[];
-          };
-          note: string;
-          requestedAt: number;
-          confirmedAt?: number;
-        }[];
         /**
          * A timestamp that tells you when the configuration was disabled. Note: Configurations can be disabled when the associated user loses access to a team. They do not function during this time until the configuration is 'transferred', meaning the associated user is changed to one with access to the team.
          *
@@ -7528,18 +7477,9 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
           | 'account-plan-downgrade'
           | 'original-owner-role-downgraded';
         /**
-         * A timestamp that tells you when the configuration was migrated as part of the Northstar migration. In the future, if we allow integration configurations to be transferred between teams, this field should be cleared upon transfer.
-         */
-        northstarMigratedAt?: number;
-        /**
          * Defines the installation type. - 'external' integrations are installed via the existing integrations flow - 'marketplace' integrations are natively installed: - when accepting the TOS of a partner during the store creation process - if undefined, assume 'external'
          */
         installationType?: 'marketplace' | 'external';
-        adminRoleAssignments?: string[];
-        /**
-         * Whether this configuration needs finalization. Set to true if any payable billing plan was used.
-         */
-        needsFinalization?: boolean;
         billingPlan?: {
           id: string;
           type: 'prepayment' | 'subscription';
@@ -7617,10 +7557,6 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          * @example marketplace
          */
         source?: 'marketplace' | 'deploy-button' | 'external';
-        removedLogDrainsAt?: number;
-        removedProjectEnvsAt?: number;
-        removedTokensAt?: number;
-        removedWebhooksAt?: number;
         /**
          * The slug of the integration the configuration is created for.
          *
@@ -7653,53 +7589,6 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          * @example read-write:log-drain
          */
         scopes: string[];
-        scopesQueue?: {
-          scopes: {
-            added: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-              | 'read-write:integration-resource'
-            )[];
-            upgraded: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-              | 'read-write:integration-resource'
-            )[];
-          };
-          note: string;
-          requestedAt: number;
-          confirmedAt?: number;
-        }[];
         /**
          * A timestamp that tells you when the configuration was disabled. Note: Configurations can be disabled when the associated user loses access to a team. They do not function during this time until the configuration is 'transferred', meaning the associated user is changed to one with access to the team.
          *
@@ -7726,18 +7615,9 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
           | 'account-plan-downgrade'
           | 'original-owner-role-downgraded';
         /**
-         * A timestamp that tells you when the configuration was migrated as part of the Northstar migration. In the future, if we allow integration configurations to be transferred between teams, this field should be cleared upon transfer.
-         */
-        northstarMigratedAt?: number;
-        /**
          * Defines the installation type. - 'external' integrations are installed via the existing integrations flow - 'marketplace' integrations are natively installed: - when accepting the TOS of a partner during the store creation process - if undefined, assume 'external'
          */
         installationType?: 'marketplace' | 'external';
-        adminRoleAssignments?: string[];
-        /**
-         * Whether this configuration needs finalization. Set to true if any payable billing plan was used.
-         */
-        needsFinalization?: boolean;
         billingPlan?: {
           id: string;
           type: 'prepayment' | 'subscription';
@@ -7871,10 +7751,6 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          * @example marketplace
          */
         source?: 'marketplace' | 'deploy-button' | 'external';
-        removedLogDrainsAt?: number;
-        removedProjectEnvsAt?: number;
-        removedTokensAt?: number;
-        removedWebhooksAt?: number;
         /**
          * The slug of the integration the configuration is created for.
          *
@@ -7907,53 +7783,6 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          * @example read-write:log-drain
          */
         scopes: string[];
-        scopesQueue?: {
-          scopes: {
-            added: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-              | 'read-write:integration-resource'
-            )[];
-            upgraded: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-              | 'read-write:integration-resource'
-            )[];
-          };
-          note: string;
-          requestedAt: number;
-          confirmedAt?: number;
-        }[];
         /**
          * A timestamp that tells you when the configuration was disabled. Note: Configurations can be disabled when the associated user loses access to a team. They do not function during this time until the configuration is 'transferred', meaning the associated user is changed to one with access to the team.
          *
@@ -7980,18 +7809,9 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
           | 'account-plan-downgrade'
           | 'original-owner-role-downgraded';
         /**
-         * A timestamp that tells you when the configuration was migrated as part of the Northstar migration. In the future, if we allow integration configurations to be transferred between teams, this field should be cleared upon transfer.
-         */
-        northstarMigratedAt?: number;
-        /**
          * Defines the installation type. - 'external' integrations are installed via the existing integrations flow - 'marketplace' integrations are natively installed: - when accepting the TOS of a partner during the store creation process - if undefined, assume 'external'
          */
         installationType?: 'marketplace' | 'external';
-        adminRoleAssignments?: string[];
-        /**
-         * Whether this configuration needs finalization. Set to true if any payable billing plan was used.
-         */
-        needsFinalization?: boolean;
       }
     | {
         /**
@@ -8042,10 +7862,6 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          * @example marketplace
          */
         source?: 'marketplace' | 'deploy-button' | 'external';
-        removedLogDrainsAt?: number;
-        removedProjectEnvsAt?: number;
-        removedTokensAt?: number;
-        removedWebhooksAt?: number;
         /**
          * The slug of the integration the configuration is created for.
          *
@@ -8078,53 +7894,6 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          * @example read-write:log-drain
          */
         scopes: string[];
-        scopesQueue?: {
-          scopes: {
-            added: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-              | 'read-write:integration-resource'
-            )[];
-            upgraded: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-              | 'read-write:integration-resource'
-            )[];
-          };
-          note: string;
-          requestedAt: number;
-          confirmedAt?: number;
-        }[];
         /**
          * A timestamp that tells you when the configuration was disabled. Note: Configurations can be disabled when the associated user loses access to a team. They do not function during this time until the configuration is 'transferred', meaning the associated user is changed to one with access to the team.
          *
@@ -8151,18 +7920,9 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
           | 'account-plan-downgrade'
           | 'original-owner-role-downgraded';
         /**
-         * A timestamp that tells you when the configuration was migrated as part of the Northstar migration. In the future, if we allow integration configurations to be transferred between teams, this field should be cleared upon transfer.
-         */
-        northstarMigratedAt?: number;
-        /**
          * Defines the installation type. - 'external' integrations are installed via the existing integrations flow - 'marketplace' integrations are natively installed: - when accepting the TOS of a partner during the store creation process - if undefined, assume 'external'
          */
         installationType?: 'marketplace' | 'external';
-        adminRoleAssignments?: string[];
-        /**
-         * Whether this configuration needs finalization. Set to true if any payable billing plan was used.
-         */
-        needsFinalization?: boolean;
         canConfigureOpenTelemetry?: boolean;
       },
     GetConfigurationError,
