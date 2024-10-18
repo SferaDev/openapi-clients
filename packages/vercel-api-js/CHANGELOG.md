@@ -1,5 +1,12 @@
 # vercel-api-js
 
+## 0.12.1
+
+### Patch Changes
+
+- a6b9572: [BREAKING] Removed 'removedLogDrainsAt', 'removedProjectEnvsAt', 'removedTokensAt', and 'removedWebhooksAt' fields from getConfigurations and getConfiguration API endpoints
+- 1690c07: Add defaultRoute field to GetDeploymentResponse and other related types
+
 ## 0.12.0
 
 ### Minor Changes
