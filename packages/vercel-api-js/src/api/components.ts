@@ -2686,6 +2686,10 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         checksState?: 'registered' | 'running' | 'completed';
         checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
         deletedAt?: number | null;
+        /**
+         * Computed field that is only available for deployments with a micro-frontend configuration.
+         */
+        defaultRoute?: string;
         canceledAt?: number;
         errorCode?: string;
         errorLink?: string;
@@ -3040,6 +3044,10 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         checksState?: 'registered' | 'running' | 'completed';
         checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
         deletedAt?: number | null;
+        /**
+         * Computed field that is only available for deployments with a micro-frontend configuration.
+         */
+        defaultRoute?: string;
         canceledAt?: number;
         errorCode?: string;
         errorLink?: string;
@@ -3450,6 +3458,10 @@ export type CreateDeploymentResponse = {
   buildErrorAt?: number;
   checksState?: 'registered' | 'running' | 'completed';
   checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+  /**
+   * Computed field that is only available for deployments with a micro-frontend configuration.
+   */
+  defaultRoute?: string;
   canceledAt?: number;
   errorCode?: string;
   errorLink?: string;
@@ -4109,6 +4121,10 @@ export type CancelDeploymentResponse = {
   checksConclusion?: 'skipped' | 'succeeded' | 'failed' | 'canceled';
   createdAt: number;
   deletedAt?: number | null;
+  /**
+   * Computed field that is only available for deployments with a micro-frontend configuration.
+   */
+  defaultRoute?: string;
   canceledAt?: number;
   errorCode?: string;
   errorLink?: string;
