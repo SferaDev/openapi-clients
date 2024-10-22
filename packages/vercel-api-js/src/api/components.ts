@@ -1804,6 +1804,7 @@ export type UpdateProjectDataCacheResponse = {
     };
     monorepoManager?: string | null;
     oidcTokenClaims?: {
+      iss: string;
       sub: string;
       scope: string;
       aud: string;
@@ -1966,6 +1967,7 @@ export type UpdateProjectDataCacheResponse = {
       };
       monorepoManager?: string | null;
       oidcTokenClaims?: {
+        iss: string;
         sub: string;
         scope: string;
         aud: string;
@@ -2335,6 +2337,10 @@ export type UpdateProjectDataCacheResponse = {
   };
   oidcTokenConfig?: {
     enabled: boolean;
+    /**
+     * - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
+     */
+    issuerMode?: 'team' | 'global';
   };
   tier?: 'standard' | 'advanced' | 'critical';
 };
@@ -2787,6 +2793,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         url: string;
         version: 2;
         oidcTokenClaims?: {
+          iss: string;
           sub: string;
           scope: string;
           aud: string;
@@ -3145,6 +3152,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         url: string;
         version: 2;
         oidcTokenClaims?: {
+          iss: string;
           sub: string;
           scope: string;
           aud: string;
@@ -3474,6 +3482,7 @@ export type CreateDeploymentResponse = {
   undeletedAt?: number;
   url: string;
   oidcTokenClaims?: {
+    iss: string;
     sub: string;
     scope: string;
     aud: string;
@@ -4225,6 +4234,7 @@ export type CancelDeploymentResponse = {
   url: string;
   version: 2;
   oidcTokenClaims?: {
+    iss: string;
     sub: string;
     scope: string;
     aud: string;
@@ -9474,6 +9484,7 @@ export type GetProjectsResponse = {
       };
       monorepoManager?: string | null;
       oidcTokenClaims?: {
+        iss: string;
         sub: string;
         scope: string;
         aud: string;
@@ -9636,6 +9647,7 @@ export type GetProjectsResponse = {
         };
         monorepoManager?: string | null;
         oidcTokenClaims?: {
+          iss: string;
           sub: string;
           scope: string;
           aud: string;
@@ -10005,6 +10017,10 @@ export type GetProjectsResponse = {
     };
     oidcTokenConfig?: {
       enabled: boolean;
+      /**
+       * - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
+       */
+      issuerMode?: 'team' | 'global';
     };
     tier?: 'standard' | 'advanced' | 'critical';
   }[];
@@ -10350,6 +10366,7 @@ export type CreateProjectResponse = {
     };
     monorepoManager?: string | null;
     oidcTokenClaims?: {
+      iss: string;
       sub: string;
       scope: string;
       aud: string;
@@ -10512,6 +10529,7 @@ export type CreateProjectResponse = {
       };
       monorepoManager?: string | null;
       oidcTokenClaims?: {
+        iss: string;
         sub: string;
         scope: string;
         aud: string;
@@ -10881,6 +10899,10 @@ export type CreateProjectResponse = {
   };
   oidcTokenConfig?: {
     enabled: boolean;
+    /**
+     * - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
+     */
+    issuerMode?: 'team' | 'global';
   };
   tier?: 'standard' | 'advanced' | 'critical';
 };
@@ -11046,6 +11068,12 @@ export type CreateProjectRequestBody = {
      * Whether or not to generate OpenID Connect JSON Web Tokens.
      */
     enabled: boolean;
+    /**
+     * team: `https://oidc.vercel.com/[team_slug]` global: `https://oidc.vercel.com`
+     *
+     * @default global
+     */
+    issuerMode?: 'team' | 'global';
   };
   /**
    * Opt-in to skip deployments when there are no changes to the root directory and its dependencies
@@ -11400,6 +11428,7 @@ export type GetProjectResponse = {
     };
     monorepoManager?: string | null;
     oidcTokenClaims?: {
+      iss: string;
       sub: string;
       scope: string;
       aud: string;
@@ -11562,6 +11591,7 @@ export type GetProjectResponse = {
       };
       monorepoManager?: string | null;
       oidcTokenClaims?: {
+        iss: string;
         sub: string;
         scope: string;
         aud: string;
@@ -11931,6 +11961,10 @@ export type GetProjectResponse = {
   };
   oidcTokenConfig?: {
     enabled: boolean;
+    /**
+     * - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
+     */
+    issuerMode?: 'team' | 'global';
   };
   tier?: 'standard' | 'advanced' | 'critical';
 };
@@ -12284,6 +12318,7 @@ export type UpdateProjectResponse = {
     };
     monorepoManager?: string | null;
     oidcTokenClaims?: {
+      iss: string;
       sub: string;
       scope: string;
       aud: string;
@@ -12446,6 +12481,7 @@ export type UpdateProjectResponse = {
       };
       monorepoManager?: string | null;
       oidcTokenClaims?: {
+        iss: string;
         sub: string;
         scope: string;
         aud: string;
@@ -12815,6 +12851,10 @@ export type UpdateProjectResponse = {
   };
   oidcTokenConfig?: {
     enabled: boolean;
+    /**
+     * - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
+     */
+    issuerMode?: 'team' | 'global';
   };
   tier?: 'standard' | 'advanced' | 'critical';
 };
@@ -12990,6 +13030,12 @@ export type UpdateProjectRequestBody = {
      * Whether or not to generate OpenID Connect JSON Web Tokens.
      */
     enabled: boolean;
+    /**
+     * team: `https://oidc.vercel.com/[team_slug]` global: `https://oidc.vercel.com`
+     *
+     * @default global
+     */
+    issuerMode?: 'team' | 'global';
   };
   /**
    * Allows to protect project deployments with a password
