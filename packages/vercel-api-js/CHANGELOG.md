@@ -1,5 +1,19 @@
 # vercel-api-js
 
+## 0.13.0
+
+### Minor Changes
+
+- 31174d4: Add new deployment integration actions: cancel and cleanup
+
+### Patch Changes
+
+- d4bf41e: Adjust type enum to include 'secret'
+- a6b9572: [BREAKING] Removed 'removedLogDrainsAt', 'removedProjectEnvsAt', 'removedTokensAt', and 'removedWebhooksAt' fields from getConfigurations and getConfiguration API endpoints
+- 1690c07: Add defaultRoute field to GetDeploymentResponse and other related types
+- f556dbb: Add 'issuerMode' field to 'oidcTokenConfig' in 'UpdateProjectDataCacheResponse'
+- 0cf8bb2: [BREAKING] Change the order of 'type' enum values in CreateProjectResponse and UpdateProjectResponse
+
 ## 0.12.0
 
 ### Minor Changes
