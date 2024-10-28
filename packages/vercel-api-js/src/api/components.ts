@@ -2513,6 +2513,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         env: string[];
         inspectorUrl: string | null;
         isInConcurrentBuildsQueue: boolean;
+        isInSystemBuildsQueue: boolean;
         projectSettings: {
           buildCommand?: string | null;
           devCommand?: string | null;
@@ -3202,6 +3203,7 @@ export type CreateDeploymentResponse = {
   env: string[];
   inspectorUrl: string | null;
   isInConcurrentBuildsQueue: boolean;
+  isInSystemBuildsQueue: boolean;
   projectSettings: {
     buildCommand?: string | null;
     commandForIgnoringBuildStep?: string | null;
@@ -3954,6 +3956,7 @@ export type CancelDeploymentResponse = {
   env: string[];
   inspectorUrl: string | null;
   isInConcurrentBuildsQueue: boolean;
+  isInSystemBuildsQueue: boolean;
   projectSettings: {
     buildCommand?: string | null;
     devCommand?: string | null;
