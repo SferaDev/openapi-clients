@@ -2585,7 +2585,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         };
         readyStateReason?: string;
         integrations?: {
-          status: 'error' | 'skipped' | 'pending' | 'ready';
+          status: 'error' | 'skipped' | 'pending' | 'ready' | 'timeout';
           startedAt: number;
           completedAt?: number;
           skippedAt?: number;
@@ -3275,7 +3275,7 @@ export type CreateDeploymentResponse = {
   };
   readyStateReason?: string;
   integrations?: {
-    status: 'error' | 'skipped' | 'pending' | 'ready';
+    status: 'error' | 'skipped' | 'pending' | 'ready' | 'timeout';
     startedAt: number;
     completedAt?: number;
     skippedAt?: number;
@@ -4028,7 +4028,7 @@ export type CancelDeploymentResponse = {
   };
   readyStateReason?: string;
   integrations?: {
-    status: 'pending' | 'ready' | 'error' | 'skipped';
+    status: 'pending' | 'ready' | 'error' | 'skipped' | 'timeout';
     startedAt: number;
     completedAt?: number;
     skippedAt?: number;
@@ -7500,6 +7500,7 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
           scope?: 'installation' | 'resource';
           description: string;
           paymentMethodRequired?: boolean;
+          preauthorizationAmount?: number;
           cost?: string;
           details?: {
             label: string;
@@ -7638,6 +7639,7 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
           scope?: 'installation' | 'resource';
           description: string;
           paymentMethodRequired?: boolean;
+          preauthorizationAmount?: number;
           cost?: string;
           details?: {
             label: string;
@@ -7704,6 +7706,7 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
           scope?: 'installation' | 'resource';
           description: string;
           paymentMethodRequired?: boolean;
+          preauthorizationAmount?: number;
           cost?: string;
           details?: {
             label: string;
@@ -16712,7 +16715,7 @@ export type GetFirewallConfigVariables = {
 } & FetcherExtraProps;
 
 /**
- * Retreive the specified firewall configuration for a project. The deployed configVersion will be `active`
+ * Retrieve the specified firewall configuration for a project. The deployed configVersion will be `active`
  */
 export const getFirewallConfig = (variables: GetFirewallConfigVariables, signal?: AbortSignal) =>
   fetch<GetFirewallConfigResponse, GetFirewallConfigError, undefined, {}, GetFirewallConfigQueryParams, {}>({
