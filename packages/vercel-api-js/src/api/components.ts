@@ -1776,6 +1776,10 @@ export type UpdateProjectDataCacheResponse = {
     } | null;
     aliasFinal?: string | null;
     automaticAliases?: string[];
+    branchMatcher?: {
+      type: 'endsWith' | 'startsWith' | 'equals';
+      pattern: string;
+    };
     buildingAt?: number;
     builds?: {
       use: string;
@@ -1939,6 +1943,10 @@ export type UpdateProjectDataCacheResponse = {
       } | null;
       aliasFinal?: string | null;
       automaticAliases?: string[];
+      branchMatcher?: {
+        type: 'endsWith' | 'startsWith' | 'equals';
+        pattern: string;
+      };
       buildingAt?: number;
       builds?: {
         use: string;
@@ -9462,6 +9470,10 @@ export type GetProjectsResponse = {
       } | null;
       aliasFinal?: string | null;
       automaticAliases?: string[];
+      branchMatcher?: {
+        type: 'endsWith' | 'startsWith' | 'equals';
+        pattern: string;
+      };
       buildingAt?: number;
       builds?: {
         use: string;
@@ -9625,6 +9637,10 @@ export type GetProjectsResponse = {
         } | null;
         aliasFinal?: string | null;
         automaticAliases?: string[];
+        branchMatcher?: {
+          type: 'endsWith' | 'startsWith' | 'equals';
+          pattern: string;
+        };
         buildingAt?: number;
         builds?: {
           use: string;
@@ -10344,6 +10360,10 @@ export type CreateProjectResponse = {
     } | null;
     aliasFinal?: string | null;
     automaticAliases?: string[];
+    branchMatcher?: {
+      type: 'endsWith' | 'startsWith' | 'equals';
+      pattern: string;
+    };
     buildingAt?: number;
     builds?: {
       use: string;
@@ -10507,6 +10527,10 @@ export type CreateProjectResponse = {
       } | null;
       aliasFinal?: string | null;
       automaticAliases?: string[];
+      branchMatcher?: {
+        type: 'endsWith' | 'startsWith' | 'equals';
+        pattern: string;
+      };
       buildingAt?: number;
       builds?: {
         use: string;
@@ -11406,6 +11430,10 @@ export type GetProjectResponse = {
     } | null;
     aliasFinal?: string | null;
     automaticAliases?: string[];
+    branchMatcher?: {
+      type: 'endsWith' | 'startsWith' | 'equals';
+      pattern: string;
+    };
     buildingAt?: number;
     builds?: {
       use: string;
@@ -11569,6 +11597,10 @@ export type GetProjectResponse = {
       } | null;
       aliasFinal?: string | null;
       automaticAliases?: string[];
+      branchMatcher?: {
+        type: 'endsWith' | 'startsWith' | 'equals';
+        pattern: string;
+      };
       buildingAt?: number;
       builds?: {
         use: string;
@@ -12296,6 +12328,10 @@ export type UpdateProjectResponse = {
     } | null;
     aliasFinal?: string | null;
     automaticAliases?: string[];
+    branchMatcher?: {
+      type: 'endsWith' | 'startsWith' | 'equals';
+      pattern: string;
+    };
     buildingAt?: number;
     builds?: {
       use: string;
@@ -12459,6 +12495,10 @@ export type UpdateProjectResponse = {
       } | null;
       aliasFinal?: string | null;
       automaticAliases?: string[];
+      branchMatcher?: {
+        type: 'endsWith' | 'startsWith' | 'equals';
+        pattern: string;
+      };
       buildingAt?: number;
       builds?: {
         use: string;
