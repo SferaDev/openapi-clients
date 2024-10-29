@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.13.1
+
+### Patch Changes
+
+- badfb19: Add isInSystemBuildsQueue field to deployment response
+
 ## 0.13.0
 
 ### Minor Changes
