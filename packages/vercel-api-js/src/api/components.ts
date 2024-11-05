@@ -1674,44 +1674,7 @@ export type UpdateProjectDataCacheResponse = {
     customEnvironmentIds?: string[];
     vsmValue?: string;
   }[];
-  customEnvironments?: {
-    id: string;
-    name: string;
-    slug: string;
-    type: 'production' | 'preview' | 'development';
-    description?: string;
-    branchMatcher?: {
-      type: 'endsWith' | 'startsWith' | 'equals';
-      pattern: string;
-    };
-    createdAt: number;
-    updatedAt: number;
-    domains?: {
-      name: string;
-      apexName: string;
-      projectId: string;
-      redirect?: string | null;
-      redirectStatusCode?: 307 | 301 | 302 | 308 | null;
-      gitBranch?: string | null;
-      customEnvironmentId?: string | null;
-      updatedAt?: number;
-      createdAt?: number;
-      /**
-       * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
-       */
-      verified: boolean;
-      /**
-       * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
-       */
-      verification?: {
-        type: string;
-        domain: string;
-        value: string;
-        reason: string;
-      }[];
-    }[];
-    currentDeploymentAliases?: string[];
-  }[];
+  customEnvironments?: Record<string, any>[];
   framework?:
     | 'blitzjs'
     | 'nextjs'
@@ -1930,7 +1893,7 @@ export type UpdateProjectDataCacheResponse = {
   sourceFilesOutsideRootDirectory?: boolean;
   enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
-    deploymentType: 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
@@ -2211,7 +2174,7 @@ export type UpdateProjectDataCacheResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -2219,7 +2182,7 @@ export type UpdateProjectDataCacheResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
       }
     | null;
   gitComments?: {
@@ -2635,44 +2598,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         previewCommentsEnabled?: boolean;
         ttyBuildLogs?: boolean;
         customEnvironment?:
-          | {
-              id: string;
-              name: string;
-              slug: string;
-              type: 'production' | 'preview' | 'development';
-              description?: string;
-              branchMatcher?: {
-                type: 'startsWith' | 'equals' | 'endsWith';
-                pattern: string;
-              };
-              createdAt: number;
-              updatedAt: number;
-              domains?: {
-                name: string;
-                apexName: string;
-                projectId: string;
-                redirect?: string | null;
-                redirectStatusCode?: 307 | 301 | 302 | 308 | null;
-                gitBranch?: string | null;
-                customEnvironmentId?: string | null;
-                updatedAt?: number;
-                createdAt?: number;
-                /**
-                 * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
-                 */
-                verified: boolean;
-                /**
-                 * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
-                 */
-                verification?: {
-                  type: string;
-                  domain: string;
-                  value: string;
-                  reason: string;
-                }[];
-              }[];
-              currentDeploymentAliases?: string[];
-            }
+          | Record<string, any>
           | {
               id: string;
             };
@@ -2994,44 +2920,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         previewCommentsEnabled?: boolean;
         ttyBuildLogs?: boolean;
         customEnvironment?:
-          | {
-              id: string;
-              name: string;
-              slug: string;
-              type: 'production' | 'preview' | 'development';
-              description?: string;
-              branchMatcher?: {
-                type: 'startsWith' | 'equals' | 'endsWith';
-                pattern: string;
-              };
-              createdAt: number;
-              updatedAt: number;
-              domains?: {
-                name: string;
-                apexName: string;
-                projectId: string;
-                redirect?: string | null;
-                redirectStatusCode?: 307 | 301 | 302 | 308 | null;
-                gitBranch?: string | null;
-                customEnvironmentId?: string | null;
-                updatedAt?: number;
-                createdAt?: number;
-                /**
-                 * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
-                 */
-                verified: boolean;
-                /**
-                 * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
-                 */
-                verification?: {
-                  type: string;
-                  domain: string;
-                  value: string;
-                  reason: string;
-                }[];
-              }[];
-              currentDeploymentAliases?: string[];
-            }
+          | Record<string, any>
           | {
               id: string;
             };
@@ -3325,44 +3214,7 @@ export type CreateDeploymentResponse = {
   previewCommentsEnabled?: boolean;
   ttyBuildLogs?: boolean;
   customEnvironment?:
-    | {
-        id: string;
-        name: string;
-        slug: string;
-        type: 'production' | 'preview' | 'development';
-        description?: string;
-        branchMatcher?: {
-          type: 'startsWith' | 'equals' | 'endsWith';
-          pattern: string;
-        };
-        createdAt: number;
-        updatedAt: number;
-        domains?: {
-          name: string;
-          apexName: string;
-          projectId: string;
-          redirect?: string | null;
-          redirectStatusCode?: 307 | 301 | 302 | 308 | null;
-          gitBranch?: string | null;
-          customEnvironmentId?: string | null;
-          updatedAt?: number;
-          createdAt?: number;
-          /**
-           * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
-           */
-          verified: boolean;
-          /**
-           * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
-           */
-          verification?: {
-            type: string;
-            domain: string;
-            value: string;
-            reason: string;
-          }[];
-        }[];
-        currentDeploymentAliases?: string[];
-      }
+    | Record<string, any>
     | {
         id: string;
       };
@@ -4078,44 +3930,7 @@ export type CancelDeploymentResponse = {
   previewCommentsEnabled?: boolean;
   ttyBuildLogs?: boolean;
   customEnvironment?:
-    | {
-        id: string;
-        name: string;
-        slug: string;
-        type: 'production' | 'preview' | 'development';
-        description?: string;
-        branchMatcher?: {
-          type: 'startsWith' | 'equals' | 'endsWith';
-          pattern: string;
-        };
-        createdAt: number;
-        updatedAt: number;
-        domains?: {
-          name: string;
-          apexName: string;
-          projectId: string;
-          redirect?: string | null;
-          redirectStatusCode?: 307 | 301 | 302 | 308 | null;
-          gitBranch?: string | null;
-          customEnvironmentId?: string | null;
-          updatedAt?: number;
-          createdAt?: number;
-          /**
-           * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
-           */
-          verified: boolean;
-          /**
-           * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
-           */
-          verification?: {
-            type: string;
-            domain: string;
-            value: string;
-            reason: string;
-          }[];
-        }[];
-        currentDeploymentAliases?: string[];
-      }
+    | Record<string, any>
     | {
         id: string;
       };
@@ -9368,44 +9183,7 @@ export type GetProjectsResponse = {
       customEnvironmentIds?: string[];
       vsmValue?: string;
     }[];
-    customEnvironments?: {
-      id: string;
-      name: string;
-      slug: string;
-      type: 'production' | 'preview' | 'development';
-      description?: string;
-      branchMatcher?: {
-        type: 'endsWith' | 'startsWith' | 'equals';
-        pattern: string;
-      };
-      createdAt: number;
-      updatedAt: number;
-      domains?: {
-        name: string;
-        apexName: string;
-        projectId: string;
-        redirect?: string | null;
-        redirectStatusCode?: 307 | 301 | 302 | 308 | null;
-        gitBranch?: string | null;
-        customEnvironmentId?: string | null;
-        updatedAt?: number;
-        createdAt?: number;
-        /**
-         * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
-         */
-        verified: boolean;
-        /**
-         * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
-         */
-        verification?: {
-          type: string;
-          domain: string;
-          value: string;
-          reason: string;
-        }[];
-      }[];
-      currentDeploymentAliases?: string[];
-    }[];
+    customEnvironments?: Record<string, any>[];
     framework?:
       | 'blitzjs'
       | 'nextjs'
@@ -9624,7 +9402,7 @@ export type GetProjectsResponse = {
     sourceFilesOutsideRootDirectory?: boolean;
     enableAffectedProjectsDeployments?: boolean;
     ssoProtection?: {
-      deploymentType: 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+      deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
     } | null;
     targets?: {
       [key: string]: {
@@ -9905,7 +9683,7 @@ export type GetProjectsResponse = {
     hasActiveBranches?: boolean;
     trustedIps?:
       | {
-          deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+          deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
           addresses: {
             value: string;
             note?: string;
@@ -9913,7 +9691,7 @@ export type GetProjectsResponse = {
           protectionMode: 'additional' | 'exclusive';
         }
       | {
-          deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+          deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         }
       | null;
     gitComments?: {
@@ -10159,7 +9937,7 @@ export type CreateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -10258,44 +10036,7 @@ export type CreateProjectResponse = {
     customEnvironmentIds?: string[];
     vsmValue?: string;
   }[];
-  customEnvironments?: {
-    id: string;
-    name: string;
-    slug: string;
-    type: 'production' | 'preview' | 'development';
-    description?: string;
-    branchMatcher?: {
-      type: 'endsWith' | 'startsWith' | 'equals';
-      pattern: string;
-    };
-    createdAt: number;
-    updatedAt: number;
-    domains?: {
-      name: string;
-      apexName: string;
-      projectId: string;
-      redirect?: string | null;
-      redirectStatusCode?: 307 | 301 | 302 | 308 | null;
-      gitBranch?: string | null;
-      customEnvironmentId?: string | null;
-      updatedAt?: number;
-      createdAt?: number;
-      /**
-       * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
-       */
-      verified: boolean;
-      /**
-       * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
-       */
-      verification?: {
-        type: string;
-        domain: string;
-        value: string;
-        reason: string;
-      }[];
-    }[];
-    currentDeploymentAliases?: string[];
-  }[];
+  customEnvironments?: Record<string, any>[];
   framework?:
     | 'blitzjs'
     | 'nextjs'
@@ -10514,7 +10255,7 @@ export type CreateProjectResponse = {
   sourceFilesOutsideRootDirectory?: boolean;
   enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
-    deploymentType: 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
@@ -10780,7 +10521,7 @@ export type CreateProjectResponse = {
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'pending' | 'in-progress' | 'succeeded' | 'failed' | 'skipped';
+    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -10795,7 +10536,7 @@ export type CreateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -10803,7 +10544,7 @@ export type CreateProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
       }
     | null;
   gitComments?: {
@@ -11328,44 +11069,7 @@ export type GetProjectResponse = {
     customEnvironmentIds?: string[];
     vsmValue?: string;
   }[];
-  customEnvironments?: {
-    id: string;
-    name: string;
-    slug: string;
-    type: 'production' | 'preview' | 'development';
-    description?: string;
-    branchMatcher?: {
-      type: 'endsWith' | 'startsWith' | 'equals';
-      pattern: string;
-    };
-    createdAt: number;
-    updatedAt: number;
-    domains?: {
-      name: string;
-      apexName: string;
-      projectId: string;
-      redirect?: string | null;
-      redirectStatusCode?: 307 | 301 | 302 | 308 | null;
-      gitBranch?: string | null;
-      customEnvironmentId?: string | null;
-      updatedAt?: number;
-      createdAt?: number;
-      /**
-       * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
-       */
-      verified: boolean;
-      /**
-       * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
-       */
-      verification?: {
-        type: string;
-        domain: string;
-        value: string;
-        reason: string;
-      }[];
-    }[];
-    currentDeploymentAliases?: string[];
-  }[];
+  customEnvironments?: Record<string, any>[];
   framework?:
     | 'blitzjs'
     | 'nextjs'
@@ -11584,7 +11288,7 @@ export type GetProjectResponse = {
   sourceFilesOutsideRootDirectory?: boolean;
   enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
-    deploymentType: 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
@@ -11865,7 +11569,7 @@ export type GetProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -11873,7 +11577,7 @@ export type GetProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
       }
     | null;
   gitComments?: {
@@ -12127,7 +11831,7 @@ export type UpdateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -12226,44 +11930,7 @@ export type UpdateProjectResponse = {
     customEnvironmentIds?: string[];
     vsmValue?: string;
   }[];
-  customEnvironments?: {
-    id: string;
-    name: string;
-    slug: string;
-    type: 'production' | 'preview' | 'development';
-    description?: string;
-    branchMatcher?: {
-      type: 'endsWith' | 'startsWith' | 'equals';
-      pattern: string;
-    };
-    createdAt: number;
-    updatedAt: number;
-    domains?: {
-      name: string;
-      apexName: string;
-      projectId: string;
-      redirect?: string | null;
-      redirectStatusCode?: 307 | 301 | 302 | 308 | null;
-      gitBranch?: string | null;
-      customEnvironmentId?: string | null;
-      updatedAt?: number;
-      createdAt?: number;
-      /**
-       * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
-       */
-      verified: boolean;
-      /**
-       * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
-       */
-      verification?: {
-        type: string;
-        domain: string;
-        value: string;
-        reason: string;
-      }[];
-    }[];
-    currentDeploymentAliases?: string[];
-  }[];
+  customEnvironments?: Record<string, any>[];
   framework?:
     | 'blitzjs'
     | 'nextjs'
@@ -12482,7 +12149,7 @@ export type UpdateProjectResponse = {
   sourceFilesOutsideRootDirectory?: boolean;
   enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
-    deploymentType: 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
@@ -12748,7 +12415,7 @@ export type UpdateProjectResponse = {
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+    jobStatus: 'pending' | 'in-progress' | 'succeeded' | 'failed' | 'skipped';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -12763,7 +12430,7 @@ export type UpdateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -12771,7 +12438,7 @@ export type UpdateProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
       }
     | null;
   gitComments?: {
@@ -14458,7 +14125,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14562,7 +14229,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15069,7 +14736,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15173,7 +14840,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15276,7 +14943,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15467,7 +15134,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
