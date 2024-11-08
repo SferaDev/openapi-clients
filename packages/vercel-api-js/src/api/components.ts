@@ -1883,6 +1883,7 @@ export type UpdateProjectDataCacheResponse = {
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
     allowServerlessConcurrency?: boolean;
+    elasticConcurrencyEnabled?: boolean;
   };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -1893,7 +1894,7 @@ export type UpdateProjectDataCacheResponse = {
   sourceFilesOutsideRootDirectory?: boolean;
   enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
-    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
+    deploymentType: 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
@@ -2174,7 +2175,7 @@ export type UpdateProjectDataCacheResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         addresses: {
           value: string;
           note?: string;
@@ -2182,7 +2183,7 @@ export type UpdateProjectDataCacheResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
       }
     | null;
   gitComments?: {
@@ -4054,7 +4055,7 @@ export type CancelDeploymentResponse = {
   regions: string[];
   softDeletedByRetention?: boolean;
   source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy';
-  target?: 'staging' | 'production' | null;
+  target?: 'production' | 'staging' | null;
   type: 'LAMBDAS';
   undeletedAt?: number;
   url: string;
@@ -4379,21 +4380,6 @@ export type CheckDomainPriceQueryParams = {
 
 export type CheckDomainPriceError = Fetcher.ErrorWrapper<undefined>;
 
-export type CheckDomainPriceResponse = {
-  /**
-   * The domain price in USD.
-   *
-   * @example 20
-   */
-  price: number;
-  /**
-   * The number of years the domain could be held before paying again.
-   *
-   * @example 1
-   */
-  period: number;
-};
-
 export type CheckDomainPriceVariables = {
   queryParams: CheckDomainPriceQueryParams;
 } & FetcherExtraProps;
@@ -4402,7 +4388,7 @@ export type CheckDomainPriceVariables = {
  * Check the price to purchase a domain and how long a single purchase period is.
  */
 export const checkDomainPrice = (variables: CheckDomainPriceVariables, signal?: AbortSignal) =>
-  fetch<CheckDomainPriceResponse, CheckDomainPriceError, undefined, {}, CheckDomainPriceQueryParams, {}>({
+  fetch<Record<string, any>, CheckDomainPriceError, undefined, {}, CheckDomainPriceQueryParams, {}>({
     url: '/v4/domains/price',
     method: 'get',
     ...variables,
@@ -9392,6 +9378,7 @@ export type GetProjectsResponse = {
       functionDefaultTimeout?: number;
       functionDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
       allowServerlessConcurrency?: boolean;
+      elasticConcurrencyEnabled?: boolean;
     };
     rootDirectory?: string | null;
     serverlessFunctionRegion?: string | null;
@@ -9402,7 +9389,7 @@ export type GetProjectsResponse = {
     sourceFilesOutsideRootDirectory?: boolean;
     enableAffectedProjectsDeployments?: boolean;
     ssoProtection?: {
-      deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
+      deploymentType: 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
     } | null;
     targets?: {
       [key: string]: {
@@ -9683,7 +9670,7 @@ export type GetProjectsResponse = {
     hasActiveBranches?: boolean;
     trustedIps?:
       | {
-          deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+          deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
           addresses: {
             value: string;
             note?: string;
@@ -9691,7 +9678,7 @@ export type GetProjectsResponse = {
           protectionMode: 'additional' | 'exclusive';
         }
       | {
-          deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+          deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         }
       | null;
     gitComments?: {
@@ -10245,6 +10232,7 @@ export type CreateProjectResponse = {
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
     allowServerlessConcurrency?: boolean;
+    elasticConcurrencyEnabled?: boolean;
   };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -10255,7 +10243,7 @@ export type CreateProjectResponse = {
   sourceFilesOutsideRootDirectory?: boolean;
   enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
-    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
+    deploymentType: 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
@@ -10536,7 +10524,7 @@ export type CreateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         addresses: {
           value: string;
           note?: string;
@@ -10544,7 +10532,7 @@ export type CreateProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
       }
     | null;
   gitComments?: {
@@ -11278,6 +11266,7 @@ export type GetProjectResponse = {
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
     allowServerlessConcurrency?: boolean;
+    elasticConcurrencyEnabled?: boolean;
   };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -11288,7 +11277,7 @@ export type GetProjectResponse = {
   sourceFilesOutsideRootDirectory?: boolean;
   enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
-    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
+    deploymentType: 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
@@ -11569,7 +11558,7 @@ export type GetProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         addresses: {
           value: string;
           note?: string;
@@ -11577,7 +11566,7 @@ export type GetProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
       }
     | null;
   gitComments?: {
@@ -12139,6 +12128,7 @@ export type UpdateProjectResponse = {
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
     allowServerlessConcurrency?: boolean;
+    elasticConcurrencyEnabled?: boolean;
   };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -12149,7 +12139,7 @@ export type UpdateProjectResponse = {
   sourceFilesOutsideRootDirectory?: boolean;
   enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
-    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
+    deploymentType: 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
@@ -12430,7 +12420,7 @@ export type UpdateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         addresses: {
           value: string;
           note?: string;
@@ -12438,7 +12428,7 @@ export type UpdateProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
       }
     | null;
   gitComments?: {
@@ -14125,7 +14115,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14229,7 +14219,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14736,7 +14726,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14840,7 +14830,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14943,7 +14933,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15134,7 +15124,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
