@@ -685,14 +685,14 @@ export type AuthToken = {
   scopes?: (
     | {
         type: 'user';
-        origin: 'saml' | 'github' | 'gitlab' | 'bitbucket' | 'email' | 'manual' | 'passkey';
+        origin: 'saml' | 'github' | 'gitlab' | 'bitbucket' | 'email' | 'manual' | 'passkey' | 'otp' | 'sms';
         createdAt: number;
         expiresAt?: number;
       }
     | {
         type: 'team';
         teamId: string;
-        origin: 'saml' | 'github' | 'gitlab' | 'bitbucket' | 'email' | 'manual' | 'passkey';
+        origin: 'saml' | 'github' | 'gitlab' | 'bitbucket' | 'email' | 'manual' | 'passkey' | 'otp' | 'sms';
         createdAt: number;
         expiresAt?: number;
       }
