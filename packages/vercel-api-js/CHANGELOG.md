@@ -1,5 +1,17 @@
 # vercel-api-js
 
+## 0.14.0
+
+### Minor Changes
+
+- 699dd5d: [BREAKING] Add new endpoint to get user info
+
+### Patch Changes
+
+- f27daa1: [BREAKING] Update field 'type' in AuthToken schema with new options 'otp' and 'sms'
+- d4f12f9: Update customEnvironments type to use Record<string, any> instead of specific fields
+- b7a8a1f: Add branchMatcher field to project responses
+
 ## 0.13.1
 
 ### Patch Changes
