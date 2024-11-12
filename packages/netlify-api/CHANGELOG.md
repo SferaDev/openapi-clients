@@ -1,5 +1,11 @@
 # netlify-api
 
+## 0.6.1
+
+### Patch Changes
+
+- 8397d02: Remove mention of Enterprise plans from environment variable documentation
+
 ## 0.6.0
 
 ### Minor Changes
