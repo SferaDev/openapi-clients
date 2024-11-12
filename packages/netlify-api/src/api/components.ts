@@ -798,7 +798,7 @@ export type GetEnvVarsResponse = {
     context_parameter?: string;
   }[];
   /**
-   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret. (Enterprise plans only)
+   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
    */
   is_secret?: boolean;
   /**
@@ -916,7 +916,7 @@ export type CreateEnvVarsResponse = {
     context_parameter?: string;
   }[];
   /**
-   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret. (Enterprise plans only)
+   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
    */
   is_secret?: boolean;
   /**
@@ -986,7 +986,7 @@ export type CreateEnvVarsRequestBody = {
     context_parameter?: string;
   }[];
   /**
-   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret. (Enterprise plans only)
+   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
    */
   is_secret?: boolean;
 }[];
@@ -1078,7 +1078,7 @@ export type GetSiteEnvVarsResponse = {
     context_parameter?: string;
   }[];
   /**
-   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret. (Enterprise plans only)
+   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
    */
   is_secret?: boolean;
   /**
@@ -1202,7 +1202,7 @@ export type GetEnvVarResponse = {
     context_parameter?: string;
   }[];
   /**
-   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret. (Enterprise plans only)
+   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
    */
   is_secret?: boolean;
   /**
@@ -1324,7 +1324,7 @@ export type UpdateEnvVarResponse = {
     context_parameter?: string;
   }[];
   /**
-   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret. (Enterprise plans only)
+   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
    */
   is_secret?: boolean;
   /**
@@ -1394,7 +1394,7 @@ export type UpdateEnvVarRequestBody = {
     context_parameter?: string;
   }[];
   /**
-   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret. (Enterprise plans only)
+   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
    */
   is_secret?: boolean;
 };
@@ -1486,7 +1486,7 @@ export type SetEnvVarValueResponse = {
     context_parameter?: string;
   }[];
   /**
-   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret. (Enterprise plans only)
+   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
    */
   is_secret?: boolean;
   /**
