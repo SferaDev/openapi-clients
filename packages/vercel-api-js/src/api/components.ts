@@ -1867,6 +1867,37 @@ export type UpdateProjectDataCacheResponse = {
         sourceless?: boolean;
         productionBranch?: string;
       };
+  microfrontends?: {
+    /**
+     * Timestamp when the microfrontends settings were last updated.
+     */
+    updatedAt: number;
+    /**
+     * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+     */
+    group: {
+      /**
+       * A unique identifier for the group of microfrontends. All related microfrontend projects will share this group ID. Example: mfe_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
+       */
+      id: string;
+      /**
+       * A human readable name for the microfrontends group. This will be used to display the microfrontends group in the UI.
+       */
+      slug: string;
+    };
+    /**
+     * Whether microfrontends are enabled for this project.
+     */
+    enabled: boolean;
+    /**
+     * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+     */
+    isDefaultApp?: boolean;
+    /**
+     * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+     */
+    defaultRoute?: string;
+  };
   name: string;
   nodeVersion: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
   optionsAllowlist?: {
@@ -4367,7 +4398,7 @@ export type CheckDomainPriceQueryParams = {
    *
    * @example new
    */
-  type?: 'new' | 'renewal' | 'transfer';
+  type?: 'new' | 'renewal' | 'transfer' | 'redemption';
   /**
    * The Team identifier to perform the request on behalf of.
    */
@@ -9362,6 +9393,37 @@ export type GetProjectsResponse = {
           sourceless?: boolean;
           productionBranch?: string;
         };
+    microfrontends?: {
+      /**
+       * Timestamp when the microfrontends settings were last updated.
+       */
+      updatedAt: number;
+      /**
+       * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+       */
+      group: {
+        /**
+         * A unique identifier for the group of microfrontends. All related microfrontend projects will share this group ID. Example: mfe_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
+         */
+        id: string;
+        /**
+         * A human readable name for the microfrontends group. This will be used to display the microfrontends group in the UI.
+         */
+        slug: string;
+      };
+      /**
+       * Whether microfrontends are enabled for this project.
+       */
+      enabled: boolean;
+      /**
+       * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+       */
+      isDefaultApp?: boolean;
+      /**
+       * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+       */
+      defaultRoute?: string;
+    };
     name: string;
     nodeVersion: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
     optionsAllowlist?: {
@@ -9924,7 +9986,7 @@ export type CreateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -10216,6 +10278,37 @@ export type CreateProjectResponse = {
         sourceless?: boolean;
         productionBranch?: string;
       };
+  microfrontends?: {
+    /**
+     * Timestamp when the microfrontends settings were last updated.
+     */
+    updatedAt: number;
+    /**
+     * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+     */
+    group: {
+      /**
+       * A unique identifier for the group of microfrontends. All related microfrontend projects will share this group ID. Example: mfe_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
+       */
+      id: string;
+      /**
+       * A human readable name for the microfrontends group. This will be used to display the microfrontends group in the UI.
+       */
+      slug: string;
+    };
+    /**
+     * Whether microfrontends are enabled for this project.
+     */
+    enabled: boolean;
+    /**
+     * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+     */
+    isDefaultApp?: boolean;
+    /**
+     * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+     */
+    defaultRoute?: string;
+  };
   name: string;
   nodeVersion: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
   optionsAllowlist?: {
@@ -10509,7 +10602,7 @@ export type CreateProjectResponse = {
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'pending' | 'in-progress' | 'succeeded' | 'failed' | 'skipped';
+    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -11250,6 +11343,37 @@ export type GetProjectResponse = {
         sourceless?: boolean;
         productionBranch?: string;
       };
+  microfrontends?: {
+    /**
+     * Timestamp when the microfrontends settings were last updated.
+     */
+    updatedAt: number;
+    /**
+     * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+     */
+    group: {
+      /**
+       * A unique identifier for the group of microfrontends. All related microfrontend projects will share this group ID. Example: mfe_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
+       */
+      id: string;
+      /**
+       * A human readable name for the microfrontends group. This will be used to display the microfrontends group in the UI.
+       */
+      slug: string;
+    };
+    /**
+     * Whether microfrontends are enabled for this project.
+     */
+    enabled: boolean;
+    /**
+     * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+     */
+    isDefaultApp?: boolean;
+    /**
+     * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+     */
+    defaultRoute?: string;
+  };
   name: string;
   nodeVersion: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
   optionsAllowlist?: {
@@ -11820,7 +11944,7 @@ export type UpdateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -12112,6 +12236,37 @@ export type UpdateProjectResponse = {
         sourceless?: boolean;
         productionBranch?: string;
       };
+  microfrontends?: {
+    /**
+     * Timestamp when the microfrontends settings were last updated.
+     */
+    updatedAt: number;
+    /**
+     * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+     */
+    group: {
+      /**
+       * A unique identifier for the group of microfrontends. All related microfrontend projects will share this group ID. Example: mfe_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
+       */
+      id: string;
+      /**
+       * A human readable name for the microfrontends group. This will be used to display the microfrontends group in the UI.
+       */
+      slug: string;
+    };
+    /**
+     * Whether microfrontends are enabled for this project.
+     */
+    enabled: boolean;
+    /**
+     * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+     */
+    isDefaultApp?: boolean;
+    /**
+     * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+     */
+    defaultRoute?: string;
+  };
   name: string;
   nodeVersion: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
   optionsAllowlist?: {
@@ -12405,7 +12560,7 @@ export type UpdateProjectResponse = {
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+    jobStatus: 'pending' | 'in-progress' | 'succeeded' | 'failed' | 'skipped';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -14115,7 +14270,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14219,7 +14374,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14726,7 +14881,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14830,7 +14985,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14933,7 +15088,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15124,7 +15279,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17805,6 +17960,7 @@ export type CreateWebhookResponse = {
     | 'marketplace.invoice.paid'
     | 'marketplace.invoice.notpaid'
     | 'marketplace.invoice.refunded'
+    | 'observability.anomaly'
     | 'test-webhook'
   )[];
   /**
@@ -17894,6 +18050,7 @@ export type CreateWebhookRequestBody = {
     | 'marketplace.invoice.paid'
     | 'marketplace.invoice.notpaid'
     | 'marketplace.invoice.refunded'
+    | 'observability.anomaly'
     | 'test-webhook'
   )[];
   /**
@@ -18045,6 +18202,7 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'marketplace.invoice.paid'
           | 'marketplace.invoice.notpaid'
           | 'marketplace.invoice.refunded'
+          | 'observability.anomaly'
           | 'test-webhook'
         )[];
         /**
@@ -18130,6 +18288,7 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'marketplace.invoice.paid'
           | 'marketplace.invoice.notpaid'
           | 'marketplace.invoice.refunded'
+          | 'observability.anomaly'
           | 'test-webhook'
         )[];
         /**
@@ -18239,6 +18398,7 @@ export type GetWebhookResponse = {
     | 'marketplace.invoice.paid'
     | 'marketplace.invoice.notpaid'
     | 'marketplace.invoice.refunded'
+    | 'observability.anomaly'
     | 'test-webhook'
   )[];
   /**
