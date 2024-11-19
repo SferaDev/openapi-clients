@@ -600,6 +600,203 @@ export const listAccessGroupProjects = (variables: ListAccessGroupProjectsVariab
     ListAccessGroupProjectsPathParams
   >({ url: '/v1/access-groups/{idOrName}/projects', method: 'get', ...variables, signal });
 
+export type CreateAccessGroupProjectPathParams = {
+  accessGroupIdOrName: string;
+};
+
+export type CreateAccessGroupProjectQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type CreateAccessGroupProjectError = Fetcher.ErrorWrapper<undefined>;
+
+export type CreateAccessGroupProjectResponse = {
+  teamId: string;
+  accessGroupId: string;
+  projectId: string;
+  role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateAccessGroupProjectRequestBody = {
+  /**
+   * The ID of the project.
+   *
+   * @maxLength 256
+   * @example prj_ndlgr43fadlPyCtREAqxxdyFK
+   */
+  projectId: string;
+  /**
+   * The project role that will be added to this Access Group.
+   *
+   * @example ADMIN
+   */
+  role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER';
+};
+
+export type CreateAccessGroupProjectVariables = {
+  body: CreateAccessGroupProjectRequestBody;
+  pathParams: CreateAccessGroupProjectPathParams;
+  queryParams?: CreateAccessGroupProjectQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Allows creation of an access group project
+ */
+export const createAccessGroupProject = (variables: CreateAccessGroupProjectVariables, signal?: AbortSignal) =>
+  fetch<
+    CreateAccessGroupProjectResponse,
+    CreateAccessGroupProjectError,
+    CreateAccessGroupProjectRequestBody,
+    {},
+    CreateAccessGroupProjectQueryParams,
+    CreateAccessGroupProjectPathParams
+  >({ url: '/v1/access-groups/{accessGroupIdOrName}/projects', method: 'post', ...variables, signal });
+
+export type ReadAccessGroupProjectPathParams = {
+  accessGroupIdOrName: string;
+  projectId: string;
+};
+
+export type ReadAccessGroupProjectQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type ReadAccessGroupProjectError = Fetcher.ErrorWrapper<undefined>;
+
+export type ReadAccessGroupProjectResponse = {
+  teamId: string;
+  accessGroupId: string;
+  projectId: string;
+  role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ReadAccessGroupProjectVariables = {
+  pathParams: ReadAccessGroupProjectPathParams;
+  queryParams?: ReadAccessGroupProjectQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Allows reading an access group project
+ */
+export const readAccessGroupProject = (variables: ReadAccessGroupProjectVariables, signal?: AbortSignal) =>
+  fetch<
+    ReadAccessGroupProjectResponse,
+    ReadAccessGroupProjectError,
+    undefined,
+    {},
+    ReadAccessGroupProjectQueryParams,
+    ReadAccessGroupProjectPathParams
+  >({ url: '/v1/access-groups/{accessGroupIdOrName}/projects/{projectId}', method: 'get', ...variables, signal });
+
+export type UpdateAccessGroupProjectPathParams = {
+  accessGroupIdOrName: string;
+  projectId: string;
+};
+
+export type UpdateAccessGroupProjectQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type UpdateAccessGroupProjectError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateAccessGroupProjectResponse = {
+  teamId: string;
+  accessGroupId: string;
+  projectId: string;
+  role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateAccessGroupProjectRequestBody = {
+  /**
+   * The project role that will be added to this Access Group.
+   *
+   * @example ADMIN
+   */
+  role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER';
+};
+
+export type UpdateAccessGroupProjectVariables = {
+  body: UpdateAccessGroupProjectRequestBody;
+  pathParams: UpdateAccessGroupProjectPathParams;
+  queryParams?: UpdateAccessGroupProjectQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Allows update of an access group project
+ */
+export const updateAccessGroupProject = (variables: UpdateAccessGroupProjectVariables, signal?: AbortSignal) =>
+  fetch<
+    UpdateAccessGroupProjectResponse,
+    UpdateAccessGroupProjectError,
+    UpdateAccessGroupProjectRequestBody,
+    {},
+    UpdateAccessGroupProjectQueryParams,
+    UpdateAccessGroupProjectPathParams
+  >({ url: '/v1/access-groups/{accessGroupIdOrName}/projects/{projectId}', method: 'patch', ...variables, signal });
+
+export type DeleteAccessGroupProjectPathParams = {
+  accessGroupIdOrName: string;
+  projectId: string;
+};
+
+export type DeleteAccessGroupProjectQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type DeleteAccessGroupProjectError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteAccessGroupProjectVariables = {
+  pathParams: DeleteAccessGroupProjectPathParams;
+  queryParams?: DeleteAccessGroupProjectQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Allows deletion of an access group project
+ */
+export const deleteAccessGroupProject = (variables: DeleteAccessGroupProjectVariables, signal?: AbortSignal) =>
+  fetch<
+    undefined,
+    DeleteAccessGroupProjectError,
+    undefined,
+    {},
+    DeleteAccessGroupProjectQueryParams,
+    DeleteAccessGroupProjectPathParams
+  >({ url: '/v1/access-groups/{accessGroupIdOrName}/projects/{projectId}', method: 'delete', ...variables, signal });
+
 export type RecordEventsQueryParams = {
   /**
    * The Team identifier to perform the request on behalf of.
@@ -9972,7 +10169,7 @@ export type CreateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -10581,7 +10778,7 @@ export type CreateProjectResponse = {
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'pending' | 'in-progress' | 'succeeded' | 'failed' | 'skipped';
+    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -11916,7 +12113,7 @@ export type UpdateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -12525,7 +12722,7 @@ export type UpdateProjectResponse = {
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+    jobStatus: 'pending' | 'in-progress' | 'succeeded' | 'failed' | 'skipped';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -14235,7 +14432,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14339,7 +14536,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14846,7 +15043,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -14950,7 +15147,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15053,7 +15250,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15244,7 +15441,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -20234,7 +20431,11 @@ export const operationsByTag = {
     listAccessGroupMembers,
     listAccessGroups,
     createAccessGroup,
-    listAccessGroupProjects
+    listAccessGroupProjects,
+    createAccessGroupProject,
+    readAccessGroupProject,
+    updateAccessGroupProject,
+    deleteAccessGroupProject
   },
   artifacts: { recordEvents, status, uploadArtifact, downloadArtifact, artifactQuery },
   checks: { createCheck, getAllChecks, getCheck, updateCheck, rerequestCheck },
