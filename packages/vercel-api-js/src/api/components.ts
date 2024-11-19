@@ -1873,18 +1873,9 @@ export type UpdateProjectDataCacheResponse = {
      */
     updatedAt: number;
     /**
-     * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+     * The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
      */
-    group: {
-      /**
-       * A unique identifier for the group of microfrontends. All related microfrontend projects will share this group ID. Example: mfe_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-       */
-      id: string;
-      /**
-       * A human readable name for the microfrontends group. This will be used to display the microfrontends group in the UI.
-       */
-      slug: string;
-    };
+    groupIds: string[];
     /**
      * Whether microfrontends are enabled for this project.
      */
@@ -9401,18 +9392,9 @@ export type GetProjectsResponse = {
        */
       updatedAt: number;
       /**
-       * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+       * The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
        */
-      group: {
-        /**
-         * A unique identifier for the group of microfrontends. All related microfrontend projects will share this group ID. Example: mfe_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-         */
-        id: string;
-        /**
-         * A human readable name for the microfrontends group. This will be used to display the microfrontends group in the UI.
-         */
-        slug: string;
-      };
+      groupIds: string[];
       /**
        * Whether microfrontends are enabled for this project.
        */
@@ -10288,18 +10270,9 @@ export type CreateProjectResponse = {
      */
     updatedAt: number;
     /**
-     * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+     * The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
      */
-    group: {
-      /**
-       * A unique identifier for the group of microfrontends. All related microfrontend projects will share this group ID. Example: mfe_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-       */
-      id: string;
-      /**
-       * A human readable name for the microfrontends group. This will be used to display the microfrontends group in the UI.
-       */
-      slug: string;
-    };
+    groupIds: string[];
     /**
      * Whether microfrontends are enabled for this project.
      */
@@ -11355,18 +11328,9 @@ export type GetProjectResponse = {
      */
     updatedAt: number;
     /**
-     * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+     * The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
      */
-    group: {
-      /**
-       * A unique identifier for the group of microfrontends. All related microfrontend projects will share this group ID. Example: mfe_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-       */
-      id: string;
-      /**
-       * A human readable name for the microfrontends group. This will be used to display the microfrontends group in the UI.
-       */
-      slug: string;
-    };
+    groupIds: string[];
     /**
      * Whether microfrontends are enabled for this project.
      */
@@ -12250,18 +12214,9 @@ export type UpdateProjectResponse = {
      */
     updatedAt: number;
     /**
-     * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+     * The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
      */
-    group: {
-      /**
-       * A unique identifier for the group of microfrontends. All related microfrontend projects will share this group ID. Example: mfe_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-       */
-      id: string;
-      /**
-       * A human readable name for the microfrontends group. This will be used to display the microfrontends group in the UI.
-       */
-      slug: string;
-    };
+    groupIds: string[];
     /**
      * Whether microfrontends are enabled for this project.
      */
