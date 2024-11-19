@@ -3,6 +3,7 @@ import { Context } from '@openapi-codegen/cli/lib/types';
 import { generateFetchers, generateSchemaTypes } from '@openapi-codegen/typescript';
 import { Project, VariableDeclarationKind } from 'ts-morph';
 import ts from 'typescript';
+import { sortEnumValues } from './utils/sortEnumValues';
 
 export default defineConfig({
   netlify: {
@@ -14,8 +15,8 @@ export default defineConfig({
     to: async (context) => {
       const filenamePrefix = '';
 
-      const { schemasFiles } = await generateSchemaTypes(context, { filenamePrefix });
-      await generateFetchers(context, { filenamePrefix, schemasFiles });
+      const { schemasFiles } = await generateSchemaTypes(context, { filenamePrefix, sortEnumValues });
+      await generateFetchers(context, { filenamePrefix, schemasFiles, sortEnumValues });
       await context.writeFile('extra.ts', buildExtraFile(context));
     }
   }
