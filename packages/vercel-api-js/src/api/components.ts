@@ -174,7 +174,7 @@ export type UpdateAccessGroupRequestBody = {
      *
      * @example ADMIN
      */
-    role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
+    role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER' | any | null;
   }[];
   /**
    * List of members to add to the access group.
@@ -284,7 +284,7 @@ export type ListAccessGroupMembersResponse = {
     username: string;
     name?: string;
     createdAt?: string;
-    teamRole: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
+    teamRole: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'VIEWER';
   }[];
   pagination: {
     count: number;
@@ -504,7 +504,7 @@ export type CreateAccessGroupRequestBody = {
      *
      * @example ADMIN
      */
-    role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | null;
+    role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER' | null;
   }[];
   /**
    * List of members to add to the access group.
@@ -639,7 +639,7 @@ export type CreateAccessGroupProjectRequestBody = {
    *
    * @example ADMIN
    */
-  role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER';
+  role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
 };
 
 export type CreateAccessGroupProjectVariables = {
@@ -739,7 +739,7 @@ export type UpdateAccessGroupProjectRequestBody = {
    *
    * @example ADMIN
    */
-  role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER';
+  role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
 };
 
 export type UpdateAccessGroupProjectVariables = {
@@ -1126,8 +1126,8 @@ export type CreateCheckResponse = {
   id: string;
   name: string;
   path?: string;
-  status: 'registered' | 'running' | 'completed';
-  conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped' | 'stale';
+  status: 'completed' | 'registered' | 'running';
+  conclusion?: 'canceled' | 'failed' | 'neutral' | 'skipped' | 'stale' | 'succeeded';
   blocking: boolean;
   output?: {
     metrics?: {
@@ -1254,7 +1254,7 @@ export type GetAllChecksError = Fetcher.ErrorWrapper<undefined>;
 export type GetAllChecksResponse = {
   checks: {
     completedAt?: number;
-    conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped' | 'stale';
+    conclusion?: 'canceled' | 'failed' | 'neutral' | 'skipped' | 'stale' | 'succeeded';
     createdAt: number;
     detailsUrl?: string;
     id: string;
@@ -1292,7 +1292,7 @@ export type GetAllChecksResponse = {
     path?: string;
     rerequestable: boolean;
     startedAt?: number;
-    status: 'registered' | 'running' | 'completed';
+    status: 'completed' | 'registered' | 'running';
     updatedAt: number;
   }[];
 };
@@ -1345,8 +1345,8 @@ export type GetCheckResponse = {
   id: string;
   name: string;
   path?: string;
-  status: 'registered' | 'running' | 'completed';
-  conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped' | 'stale';
+  status: 'completed' | 'registered' | 'running';
+  conclusion?: 'canceled' | 'failed' | 'neutral' | 'skipped' | 'stale' | 'succeeded';
   blocking: boolean;
   output?: {
     metrics?: {
@@ -1436,8 +1436,8 @@ export type UpdateCheckResponse = {
   id: string;
   name: string;
   path?: string;
-  status: 'registered' | 'running' | 'completed';
-  conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped' | 'stale';
+  status: 'completed' | 'registered' | 'running';
+  conclusion?: 'canceled' | 'failed' | 'neutral' | 'skipped' | 'stale' | 'succeeded';
   blocking: boolean;
   output?: {
     metrics?: {
@@ -1497,11 +1497,11 @@ export type UpdateCheckRequestBody = {
   /**
    * The current status of the check
    */
-  status?: 'running' | 'completed';
+  status?: 'completed' | 'running';
   /**
    * The result of the check being run
    */
-  conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped';
+  conclusion?: 'canceled' | 'failed' | 'neutral' | 'skipped' | 'succeeded';
   /**
    * A URL a user may visit to see more information about the check
    *
@@ -1772,7 +1772,7 @@ export type UpdateProjectDataCacheResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+    type: 'encrypted' | 'plain' | 'secret' | 'sensitive' | 'system';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -1873,51 +1873,51 @@ export type UpdateProjectDataCacheResponse = {
   }[];
   customEnvironments?: Record<string, any>[];
   framework?:
-    | 'blitzjs'
-    | 'nextjs'
-    | 'gatsby'
-    | 'remix'
-    | 'astro'
-    | 'hexo'
-    | 'eleventy'
-    | 'docusaurus-2'
-    | 'docusaurus'
-    | 'preact'
-    | 'solidstart-1'
-    | 'solidstart'
-    | 'dojo'
-    | 'ember'
-    | 'vue'
-    | 'scully'
-    | 'ionic-angular'
     | 'angular'
+    | 'astro'
+    | 'blitzjs'
+    | 'brunch'
+    | 'create-react-app'
+    | 'docusaurus'
+    | 'docusaurus-2'
+    | 'dojo'
+    | 'eleventy'
+    | 'ember'
+    | 'fasthtml'
+    | 'gatsby'
+    | 'gridsome'
+    | 'hexo'
+    | 'hugo'
+    | 'hydrogen'
+    | 'ionic-angular'
+    | 'ionic-react'
+    | 'jekyll'
+    | 'middleman'
+    | 'nextjs'
+    | 'nuxtjs'
+    | 'parcel'
     | 'polymer'
+    | 'preact'
+    | 'redwoodjs'
+    | 'remix'
+    | 'saber'
+    | 'sanity'
+    | 'sanity-v3'
+    | 'sapper'
+    | 'scully'
+    | 'solidstart'
+    | 'solidstart-1'
+    | 'stencil'
+    | 'storybook'
     | 'svelte'
     | 'sveltekit'
     | 'sveltekit-1'
-    | 'ionic-react'
-    | 'create-react-app'
-    | 'gridsome'
     | 'umijs'
-    | 'sapper'
-    | 'saber'
-    | 'stencil'
-    | 'nuxtjs'
-    | 'redwoodjs'
-    | 'hugo'
-    | 'jekyll'
-    | 'brunch'
-    | 'middleman'
-    | 'zola'
-    | 'hydrogen'
     | 'vite'
     | 'vitepress'
+    | 'vue'
     | 'vuepress'
-    | 'parcel'
-    | 'fasthtml'
-    | 'sanity-v3'
-    | 'sanity'
-    | 'storybook'
+    | 'zola'
     | null;
   gitForkProtection?: boolean;
   gitLFS?: boolean;
@@ -1937,7 +1937,7 @@ export type UpdateProjectDataCacheResponse = {
     aliasFinal?: string | null;
     automaticAliases?: string[];
     branchMatcher?: {
-      type: 'endsWith' | 'startsWith' | 'equals';
+      type: 'endsWith' | 'equals' | 'startsWith';
       pattern: string;
     };
     buildingAt?: number;
@@ -1946,8 +1946,8 @@ export type UpdateProjectDataCacheResponse = {
       src?: string;
       dest?: string;
     }[];
-    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-    checksState?: 'registered' | 'running' | 'completed';
+    checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+    checksState?: 'completed' | 'registered' | 'running';
     connectBuildsEnabled?: boolean;
     connectConfigurationId?: string;
     createdAt: number;
@@ -1978,7 +1978,7 @@ export type UpdateProjectDataCacheResponse = {
       project_id: string;
       environment: string;
     };
-    plan: 'pro' | 'enterprise' | 'hobby';
+    plan: 'enterprise' | 'hobby' | 'pro';
     /**
      * Whether or not preview comments are enabled for the deployment
      *
@@ -1987,8 +1987,8 @@ export type UpdateProjectDataCacheResponse = {
     previewCommentsEnabled?: boolean;
     private: boolean;
     readyAt?: number;
-    readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-    readySubstate?: 'STAGED' | 'PROMOTED';
+    readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+    readySubstate?: 'PROMOTED' | 'STAGED';
     requestedAt?: number;
     target?: string | null;
     teamId?: string | null;
@@ -2087,7 +2087,7 @@ export type UpdateProjectDataCacheResponse = {
     defaultRoute?: string;
   };
   name: string;
-  nodeVersion: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
+  nodeVersion: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
   optionsAllowlist?: {
     paths: {
       value: string;
@@ -2100,7 +2100,7 @@ export type UpdateProjectDataCacheResponse = {
   publicSource?: boolean | null;
   resourceConfig?: {
     functionDefaultTimeout?: number;
-    functionDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
+    functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     allowServerlessConcurrency?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
@@ -2113,7 +2113,7 @@ export type UpdateProjectDataCacheResponse = {
   sourceFilesOutsideRootDirectory?: boolean;
   enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
-    deploymentType: 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
@@ -2127,7 +2127,7 @@ export type UpdateProjectDataCacheResponse = {
       aliasFinal?: string | null;
       automaticAliases?: string[];
       branchMatcher?: {
-        type: 'endsWith' | 'startsWith' | 'equals';
+        type: 'endsWith' | 'equals' | 'startsWith';
         pattern: string;
       };
       buildingAt?: number;
@@ -2136,8 +2136,8 @@ export type UpdateProjectDataCacheResponse = {
         src?: string;
         dest?: string;
       }[];
-      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-      checksState?: 'registered' | 'running' | 'completed';
+      checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+      checksState?: 'completed' | 'registered' | 'running';
       connectBuildsEnabled?: boolean;
       connectConfigurationId?: string;
       createdAt: number;
@@ -2168,7 +2168,7 @@ export type UpdateProjectDataCacheResponse = {
         project_id: string;
         environment: string;
       };
-      plan: 'pro' | 'enterprise' | 'hobby';
+      plan: 'enterprise' | 'hobby' | 'pro';
       /**
        * Whether or not preview comments are enabled for the deployment
        *
@@ -2177,8 +2177,8 @@ export type UpdateProjectDataCacheResponse = {
       previewCommentsEnabled?: boolean;
       private: boolean;
       readyAt?: number;
-      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-      readySubstate?: 'STAGED' | 'PROMOTED';
+      readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+      readySubstate?: 'PROMOTED' | 'STAGED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
@@ -2382,7 +2382,7 @@ export type UpdateProjectDataCacheResponse = {
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+    jobStatus: 'failed' | 'in-progress' | 'pending' | 'skipped' | 'succeeded';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -2452,17 +2452,17 @@ export type UpdateProjectDataCacheResponse = {
           };
       has?: {
         type:
-          | 'path'
-          | 'host'
-          | 'method'
-          | 'header'
           | 'cookie'
-          | 'query'
-          | 'ip_address'
-          | 'protocol'
-          | 'scheme'
           | 'environment'
-          | 'region';
+          | 'header'
+          | 'host'
+          | 'ip_address'
+          | 'method'
+          | 'path'
+          | 'protocol'
+          | 'query'
+          | 'region'
+          | 'scheme';
         key?: string;
         value?:
           | string
@@ -2482,17 +2482,17 @@ export type UpdateProjectDataCacheResponse = {
       }[];
       missing?: {
         type:
-          | 'path'
-          | 'host'
-          | 'method'
-          | 'header'
           | 'cookie'
-          | 'query'
-          | 'ip_address'
-          | 'protocol'
-          | 'scheme'
           | 'environment'
-          | 'region';
+          | 'header'
+          | 'host'
+          | 'ip_address'
+          | 'method'
+          | 'path'
+          | 'protocol'
+          | 'query'
+          | 'region'
+          | 'scheme';
         key?: string;
         value?:
           | string
@@ -2512,9 +2512,9 @@ export type UpdateProjectDataCacheResponse = {
       }[];
       dest?: string;
       status?: number;
-      handle?: 'init' | 'finalize';
+      handle?: 'finalize' | 'init';
       mitigate?: {
-        action: 'deny' | 'challenge' | 'log' | 'bypass' | 'rate_limit' | 'redirect';
+        action: 'bypass' | 'challenge' | 'deny' | 'log' | 'rate_limit' | 'redirect';
         rule_id: string;
         ttl?: number;
         erl?: {
@@ -2535,9 +2535,9 @@ export type UpdateProjectDataCacheResponse = {
     /**
      * - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
      */
-    issuerMode?: 'team' | 'global';
+    issuerMode?: 'global' | 'team';
   };
-  tier?: 'standard' | 'advanced' | 'critical';
+  tier?: 'advanced' | 'critical' | 'standard';
 };
 
 export type UpdateProjectDataCacheRequestBody = {
@@ -3330,51 +3330,51 @@ export type CreateDeploymentResponse = {
     commandForIgnoringBuildStep?: string | null;
     devCommand?: string | null;
     framework?:
-      | 'blitzjs'
-      | 'nextjs'
-      | 'gatsby'
-      | 'remix'
-      | 'astro'
-      | 'hexo'
-      | 'eleventy'
-      | 'docusaurus-2'
-      | 'docusaurus'
-      | 'preact'
-      | 'solidstart-1'
-      | 'solidstart'
-      | 'dojo'
-      | 'ember'
-      | 'vue'
-      | 'scully'
-      | 'ionic-angular'
       | 'angular'
+      | 'astro'
+      | 'blitzjs'
+      | 'brunch'
+      | 'create-react-app'
+      | 'docusaurus'
+      | 'docusaurus-2'
+      | 'dojo'
+      | 'eleventy'
+      | 'ember'
+      | 'fasthtml'
+      | 'gatsby'
+      | 'gridsome'
+      | 'hexo'
+      | 'hugo'
+      | 'hydrogen'
+      | 'ionic-angular'
+      | 'ionic-react'
+      | 'jekyll'
+      | 'middleman'
+      | 'nextjs'
+      | 'nuxtjs'
+      | 'parcel'
       | 'polymer'
+      | 'preact'
+      | 'redwoodjs'
+      | 'remix'
+      | 'saber'
+      | 'sanity'
+      | 'sanity-v3'
+      | 'sapper'
+      | 'scully'
+      | 'solidstart'
+      | 'solidstart-1'
+      | 'stencil'
+      | 'storybook'
       | 'svelte'
       | 'sveltekit'
       | 'sveltekit-1'
-      | 'ionic-react'
-      | 'create-react-app'
-      | 'gridsome'
       | 'umijs'
-      | 'sapper'
-      | 'saber'
-      | 'stencil'
-      | 'nuxtjs'
-      | 'redwoodjs'
-      | 'hugo'
-      | 'jekyll'
-      | 'brunch'
-      | 'middleman'
-      | 'zola'
-      | 'hydrogen'
       | 'vite'
       | 'vitepress'
+      | 'vue'
       | 'vuepress'
-      | 'parcel'
-      | 'fasthtml'
-      | 'sanity-v3'
-      | 'sanity'
-      | 'storybook'
+      | 'zola'
       | null;
     installCommand?: string | null;
     outputDirectory?: string | null;
@@ -3396,7 +3396,7 @@ export type CreateDeploymentResponse = {
   };
   readyStateReason?: string;
   integrations?: {
-    status: 'error' | 'skipped' | 'pending' | 'ready' | 'timeout';
+    status: 'error' | 'pending' | 'ready' | 'skipped' | 'timeout';
     startedAt: number;
     completedAt?: number;
     skippedAt?: number;
@@ -3427,7 +3427,7 @@ export type CreateDeploymentResponse = {
   }[];
   public: boolean;
   ready?: number;
-  status: 'CANCELED' | 'ERROR' | 'QUEUED' | 'BUILDING' | 'INITIALIZING' | 'READY';
+  status: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
   team?: {
     name: string;
     id: string;
@@ -3528,9 +3528,9 @@ export type CreateDeploymentResponse = {
     name: string;
     framework?: string | null;
   };
-  readyState: 'CANCELED' | 'ERROR' | 'QUEUED' | 'BUILDING' | 'INITIALIZING' | 'READY';
-  source?: 'cli' | 'git' | 'import' | 'import/repo' | 'clone/repo' | 'api-trigger-git-deploy' | 'redeploy';
-  target?: 'staging' | 'production' | null;
+  readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+  source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy';
+  target?: 'production' | 'staging' | null;
   /**
    * Since November 2023 this field defines a set of regions that we will deploy the lambda to passively Lambdas will be deployed to these regions but only invoked if all of the primary `regions` are marked as out of service
    */
@@ -3550,8 +3550,8 @@ export type CreateDeploymentResponse = {
   aliasFinal?: string | null;
   automaticAliases?: string[];
   buildErrorAt?: number;
-  checksState?: 'registered' | 'running' | 'completed';
-  checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+  checksState?: 'completed' | 'registered' | 'running';
+  checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
   /**
    * Computed field that is only available for deployments with a micro-frontend configuration.
    */
@@ -3563,7 +3563,7 @@ export type CreateDeploymentResponse = {
   /**
    * Since June 2023 Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - PROMOTED: has seen production traffic
    */
-  readySubstate?: 'STAGED' | 'PROMOTED';
+  readySubstate?: 'PROMOTED' | 'STAGED';
   softDeletedByRetention?: boolean;
   undeletedAt?: number;
   url: string;
@@ -3663,7 +3663,7 @@ export type CreateDeploymentResponse = {
     schedule: string;
     path: string;
   }[];
-  plan: 'pro' | 'enterprise' | 'hobby';
+  plan: 'enterprise' | 'hobby' | 'pro';
   connectBuildsEnabled?: boolean;
   connectConfigurationId?: string;
   createdIn: string;
@@ -3893,52 +3893,52 @@ export type CreateDeploymentRequestBody = {
      * The framework that is being used for this project. When `null` is used no framework is selected
      */
     framework?:
-      | any
-      | 'blitzjs'
-      | 'nextjs'
-      | 'gatsby'
-      | 'remix'
-      | 'astro'
-      | 'hexo'
-      | 'eleventy'
-      | 'docusaurus-2'
-      | 'docusaurus'
-      | 'preact'
-      | 'solidstart-1'
-      | 'solidstart'
-      | 'dojo'
-      | 'ember'
-      | 'vue'
-      | 'scully'
-      | 'ionic-angular'
       | 'angular'
+      | 'astro'
+      | 'blitzjs'
+      | 'brunch'
+      | 'create-react-app'
+      | 'docusaurus'
+      | 'docusaurus-2'
+      | 'dojo'
+      | 'eleventy'
+      | 'ember'
+      | 'fasthtml'
+      | 'gatsby'
+      | 'gridsome'
+      | 'hexo'
+      | 'hugo'
+      | 'hydrogen'
+      | 'ionic-angular'
+      | 'ionic-react'
+      | 'jekyll'
+      | 'middleman'
+      | 'nextjs'
+      | any
+      | 'nuxtjs'
+      | 'parcel'
       | 'polymer'
+      | 'preact'
+      | 'redwoodjs'
+      | 'remix'
+      | 'saber'
+      | 'sanity'
+      | 'sanity-v3'
+      | 'sapper'
+      | 'scully'
+      | 'solidstart'
+      | 'solidstart-1'
+      | 'stencil'
+      | 'storybook'
       | 'svelte'
       | 'sveltekit'
       | 'sveltekit-1'
-      | 'ionic-react'
-      | 'create-react-app'
-      | 'gridsome'
       | 'umijs'
-      | 'sapper'
-      | 'saber'
-      | 'stencil'
-      | 'nuxtjs'
-      | 'redwoodjs'
-      | 'hugo'
-      | 'jekyll'
-      | 'brunch'
-      | 'middleman'
-      | 'zola'
-      | 'hydrogen'
       | 'vite'
       | 'vitepress'
+      | 'vue'
       | 'vuepress'
-      | 'parcel'
-      | 'fasthtml'
-      | 'sanity-v3'
-      | 'sanity'
-      | 'storybook'
+      | 'zola'
       | null;
     /**
      * The install command for this project. When `null` is used this value will be automatically detected
@@ -3949,7 +3949,7 @@ export type CreateDeploymentRequestBody = {
     /**
      * Override the Node.js version that should be used for this deployment
      */
-    nodeVersion?: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
+    nodeVersion?: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
     /**
      * The output directory of the project. When `null` is used this value will be automatically detected
      *
@@ -3982,7 +3982,7 @@ export type CreateDeploymentRequestBody = {
   /**
    * Either not defined, `staging`, or `production`. If `staging`, a staging alias in the format `<project>-<team>.vercel.app` will be assigned. If `production`, any aliases defined in `alias` will be assigned. If omitted, the target will be `preview`
    */
-  target?: 'staging' | 'production';
+  target?: 'production' | 'staging';
   /**
    * When `true` and `deploymentId` is passed in, the sha from the previous deployment's `gitSource` is removed forcing the latest commit to be used.
    */
@@ -4045,51 +4045,51 @@ export type CancelDeploymentResponse = {
     buildCommand?: string | null;
     devCommand?: string | null;
     framework?:
-      | 'blitzjs'
-      | 'nextjs'
-      | 'gatsby'
-      | 'remix'
-      | 'astro'
-      | 'hexo'
-      | 'eleventy'
-      | 'docusaurus-2'
-      | 'docusaurus'
-      | 'preact'
-      | 'solidstart-1'
-      | 'solidstart'
-      | 'dojo'
-      | 'ember'
-      | 'vue'
-      | 'scully'
-      | 'ionic-angular'
       | 'angular'
+      | 'astro'
+      | 'blitzjs'
+      | 'brunch'
+      | 'create-react-app'
+      | 'docusaurus'
+      | 'docusaurus-2'
+      | 'dojo'
+      | 'eleventy'
+      | 'ember'
+      | 'fasthtml'
+      | 'gatsby'
+      | 'gridsome'
+      | 'hexo'
+      | 'hugo'
+      | 'hydrogen'
+      | 'ionic-angular'
+      | 'ionic-react'
+      | 'jekyll'
+      | 'middleman'
+      | 'nextjs'
+      | 'nuxtjs'
+      | 'parcel'
       | 'polymer'
+      | 'preact'
+      | 'redwoodjs'
+      | 'remix'
+      | 'saber'
+      | 'sanity'
+      | 'sanity-v3'
+      | 'sapper'
+      | 'scully'
+      | 'solidstart'
+      | 'solidstart-1'
+      | 'stencil'
+      | 'storybook'
       | 'svelte'
       | 'sveltekit'
       | 'sveltekit-1'
-      | 'ionic-react'
-      | 'create-react-app'
-      | 'gridsome'
       | 'umijs'
-      | 'sapper'
-      | 'saber'
-      | 'stencil'
-      | 'nuxtjs'
-      | 'redwoodjs'
-      | 'hugo'
-      | 'jekyll'
-      | 'brunch'
-      | 'middleman'
-      | 'zola'
-      | 'hydrogen'
       | 'vite'
       | 'vitepress'
+      | 'vue'
       | 'vuepress'
-      | 'parcel'
-      | 'fasthtml'
-      | 'sanity-v3'
-      | 'sanity'
-      | 'storybook'
+      | 'zola'
       | null;
     commandForIgnoringBuildStep?: string | null;
     installCommand?: string | null;
@@ -4112,7 +4112,7 @@ export type CancelDeploymentResponse = {
   };
   readyStateReason?: string;
   integrations?: {
-    status: 'pending' | 'ready' | 'error' | 'skipped' | 'timeout';
+    status: 'error' | 'pending' | 'ready' | 'skipped' | 'timeout';
     startedAt: number;
     completedAt?: number;
     skippedAt?: number;
@@ -4143,7 +4143,7 @@ export type CancelDeploymentResponse = {
   }[];
   public: boolean;
   ready?: number;
-  status: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+  status: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
   team?: {
     id: string;
     name: string;
@@ -4176,8 +4176,8 @@ export type CancelDeploymentResponse = {
   autoAssignCustomDomains?: boolean;
   automaticAliases?: string[];
   buildErrorAt?: number;
-  checksState?: 'registered' | 'running' | 'completed';
-  checksConclusion?: 'skipped' | 'succeeded' | 'failed' | 'canceled';
+  checksState?: 'completed' | 'registered' | 'running';
+  checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
   createdAt: number;
   deletedAt?: number | null;
   /**
@@ -4270,11 +4270,11 @@ export type CancelDeploymentResponse = {
     name: string;
     framework?: string | null;
   };
-  readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+  readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
   /**
    * Since June 2023 Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - PROMOTED: has seen production traffic
    */
-  readySubstate?: 'STAGED' | 'PROMOTED';
+  readySubstate?: 'PROMOTED' | 'STAGED';
   regions: string[];
   softDeletedByRetention?: boolean;
   source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy';
@@ -4316,7 +4316,7 @@ export type CancelDeploymentResponse = {
    * Since November 2023 this field defines a Secure Compute network that will only be used to deploy passive lambdas to (as in passiveRegions)
    */
   passiveConnectConfigurationId?: string;
-  plan: 'pro' | 'enterprise' | 'hobby';
+  plan: 'enterprise' | 'hobby' | 'pro';
   projectId: string;
   routes:
     | (
@@ -5466,7 +5466,7 @@ export type UpdateRecordResponse = {
   domain: string;
   id: string;
   name: string;
-  recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'HTTPS' | 'MX' | 'SRV' | 'TXT' | 'NS';
+  recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'HTTPS' | 'MX' | 'NS' | 'SRV' | 'TXT';
   ttl?: number;
   type: 'record' | 'record-sys';
   value: string;
@@ -5493,7 +5493,7 @@ export type UpdateRecordRequestBody = {
    * @example A
    * @maxLength 255
    */
-  type?: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'HTTPS' | 'MX' | 'SRV' | 'TXT' | 'NS' | null;
+  type?: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'HTTPS' | 'MX' | 'NS' | 'SRV' | 'TXT' | null;
   /**
    * The Time to live (TTL) value of the DNS record
    *
@@ -5652,7 +5652,7 @@ export type GetDomainTransferResponse = {
   /**
    * The domain's transfer policy (depends on TLD requirements). `charge-and-renew`: transfer will charge for renewal and will renew the existing domain's registration. `no-charge-no-change`: transfer will have no change to registration period and does not require charge. `no-change`: transfer charge is required, but no change in registration period. `new-term`: transfer charge is required and a new registry term is set based on the transfer date. `not-supported`: transfers are not supported for this domain or TLD. `null`: This TLD is not supported by Vercel's Registrar.
    */
-  transferPolicy: 'charge-and-renew' | 'no-charge-no-change' | 'no-change' | 'new-term' | 'not-supported' | null;
+  transferPolicy: 'charge-and-renew' | 'new-term' | 'no-change' | 'no-charge-no-change' | 'not-supported' | null;
   /**
    * Description associated with transferable state.
    */
@@ -5660,7 +5660,7 @@ export type GetDomainTransferResponse = {
   /**
    * The current state of an ongoing transfer. `pending_owner`: Awaiting approval by domain's admin contact (every transfer begins with this status). If approval is not given within five days, the transfer is cancelled. `pending_admin`: Waiting for approval by Vercel Registrar admin. `pending_registry`: Awaiting registry approval (the transfer completes after 7 days unless it is declined by the current registrar). `completed`: The transfer completed successfully. `cancelled`: The transfer was cancelled. `undef`: No transfer exists for this domain. `unknown`: This TLD is not supported by Vercel's Registrar.
    */
-  status: 'pending_owner' | 'pending_admin' | 'pending_registry' | 'completed' | 'cancelled' | 'undef' | 'unknown';
+  status: 'cancelled' | 'completed' | 'pending_admin' | 'pending_owner' | 'pending_registry' | 'undef' | 'unknown';
 };
 
 export type GetDomainTransferVariables = {
@@ -5708,7 +5708,7 @@ export type GetDomainConfigResponse = {
   /**
    * How we see the domain's configuration. - `CNAME`: Domain has a CNAME pointing to Vercel. - `A`: Domain's A record is resolving to Vercel. - `http`: Domain is resolving to Vercel but may be behind a Proxy. - `dns-01`: Domain is not resolving to Vercel but dns-01 challenge is enabled. - `null`: Domain is not resolving to Vercel.
    */
-  configuredBy?: 'CNAME' | 'A' | 'http' | 'dns-01' | null;
+  configuredBy?: 'A' | 'CNAME' | 'dns-01' | 'http' | null;
   /**
    * Which challenge types the domain can use for issuing certs.
    */
@@ -5850,7 +5850,7 @@ export type GetDomainResponse = {
      *
      * @example zeit.world
      */
-    serviceType: 'zeit.world' | 'external' | 'na';
+    serviceType: 'external' | 'na' | 'zeit.world';
     /**
      * Timestamp in milliseconds at which the domain was successfully transferred into Vercel. `null` if the transfer is still processing or was never transferred in.
      *
@@ -6002,7 +6002,7 @@ export type GetDomainsResponse = {
      *
      * @example zeit.world
      */
-    serviceType: 'zeit.world' | 'external' | 'na';
+    serviceType: 'external' | 'na' | 'zeit.world';
     /**
      * Timestamp in milliseconds at which the domain was successfully transferred into Vercel. `null` if the transfer is still processing or was never transferred in.
      *
@@ -6136,7 +6136,7 @@ export type CreateOrTransferDomainResponse = {
      *
      * @example zeit.world
      */
-    serviceType: 'zeit.world' | 'external' | 'na';
+    serviceType: 'external' | 'na' | 'zeit.world';
     /**
      * Timestamp in milliseconds at which the domain was successfully transferred into Vercel. `null` if the transfer is still processing or was never transferred in.
      *
@@ -8093,13 +8093,13 @@ export type GetIntegrationLogDrainsResponse = {
    * @example build
    * @example edge
    */
-  sources?: ('build' | 'edge' | 'lambda' | 'static' | 'external' | 'firewall')[];
+  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   /**
    * Whether the log drain was created by an integration or by a user
    *
    * @example integration
    */
-  createdFrom?: 'self-served' | 'integration';
+  createdFrom?: 'integration' | 'self-served';
   /**
    * The headers to send with the request
    *
@@ -8113,7 +8113,7 @@ export type GetIntegrationLogDrainsResponse = {
    *
    * @example production
    */
-  environments: ('production' | 'preview')[];
+  environments: ('preview' | 'production')[];
   /**
    * The branch regexp of log drain
    *
@@ -8223,13 +8223,13 @@ export type CreateLogDrainResponse = {
    * @example build
    * @example edge
    */
-  sources?: ('build' | 'edge' | 'lambda' | 'static' | 'external' | 'firewall')[];
+  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   /**
    * Whether the log drain was created by an integration or by a user
    *
    * @example integration
    */
-  createdFrom?: 'self-served' | 'integration';
+  createdFrom?: 'integration' | 'self-served';
   /**
    * The headers to send with the request
    *
@@ -8243,7 +8243,7 @@ export type CreateLogDrainResponse = {
    *
    * @example production
    */
-  environments: ('production' | 'preview')[];
+  environments: ('preview' | 'production')[];
   /**
    * The branch regexp of log drain
    *
@@ -8298,7 +8298,7 @@ export type CreateLogDrainRequestBody = {
    * @uniqueItems true
    * @minItems 1
    */
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'firewall')[];
+  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   /**
    * Headers to be sent together with the request
    */
@@ -8496,14 +8496,14 @@ export type GetConfigurableLogDrainResponse = {
   createdAt: number;
   deletedAt: number | null;
   updatedAt: number;
-  sources?: ('build' | 'edge' | 'lambda' | 'static' | 'external' | 'firewall')[];
+  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   headers?: {
     [key: string]: string;
   };
-  environments: ('production' | 'preview')[];
-  status?: 'enabled' | 'disabled' | 'errored';
+  environments: ('preview' | 'production')[];
+  status?: 'disabled' | 'enabled' | 'errored';
   disabledAt?: number;
-  disabledReason?: 'disabled-by-owner' | 'feature-not-available' | 'account-plan-downgrade' | 'disabled-by-admin';
+  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
@@ -8595,14 +8595,14 @@ export type GetAllLogDrainsResponse = {
   createdAt: number;
   deletedAt: number | null;
   updatedAt: number;
-  sources?: ('build' | 'edge' | 'lambda' | 'static' | 'external' | 'firewall')[];
+  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   headers?: {
     [key: string]: string;
   };
-  environments: ('production' | 'preview')[];
-  status?: 'enabled' | 'disabled' | 'errored';
+  environments: ('preview' | 'production')[];
+  status?: 'disabled' | 'enabled' | 'errored';
   disabledAt?: number;
-  disabledReason?: 'disabled-by-owner' | 'feature-not-available' | 'account-plan-downgrade' | 'disabled-by-admin';
+  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
@@ -8656,14 +8656,14 @@ export type CreateConfigurableLogDrainResponse = {
   createdAt: number;
   deletedAt: number | null;
   updatedAt: number;
-  sources?: ('build' | 'edge' | 'lambda' | 'static' | 'external' | 'firewall')[];
+  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   headers?: {
     [key: string]: string;
   };
-  environments: ('production' | 'preview')[];
-  status?: 'enabled' | 'disabled' | 'errored';
+  environments: ('preview' | 'production')[];
+  status?: 'disabled' | 'enabled' | 'errored';
   disabledAt?: number;
-  disabledReason?: 'disabled-by-owner' | 'feature-not-available' | 'account-plan-downgrade' | 'disabled-by-admin';
+  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
@@ -8700,7 +8700,7 @@ export type CreateConfigurableLogDrainRequestBody = {
    * @uniqueItems true
    * @minItems 1
    */
-  sources: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'firewall')[];
+  sources: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   /**
    * @uniqueItems true
    * @minItems 1
@@ -9293,7 +9293,7 @@ export type GetProjectsResponse = {
       target?:
         | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
         | ('production' | 'preview' | 'development' | 'preview' | 'development');
-      type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+      type: 'encrypted' | 'plain' | 'secret' | 'sensitive' | 'system';
       /**
        * This is used to identiy variables that have been migrated from type secret to sensitive.
        */
@@ -9394,51 +9394,51 @@ export type GetProjectsResponse = {
     }[];
     customEnvironments?: Record<string, any>[];
     framework?:
-      | 'blitzjs'
-      | 'nextjs'
-      | 'gatsby'
-      | 'remix'
-      | 'astro'
-      | 'hexo'
-      | 'eleventy'
-      | 'docusaurus-2'
-      | 'docusaurus'
-      | 'preact'
-      | 'solidstart-1'
-      | 'solidstart'
-      | 'dojo'
-      | 'ember'
-      | 'vue'
-      | 'scully'
-      | 'ionic-angular'
       | 'angular'
+      | 'astro'
+      | 'blitzjs'
+      | 'brunch'
+      | 'create-react-app'
+      | 'docusaurus'
+      | 'docusaurus-2'
+      | 'dojo'
+      | 'eleventy'
+      | 'ember'
+      | 'fasthtml'
+      | 'gatsby'
+      | 'gridsome'
+      | 'hexo'
+      | 'hugo'
+      | 'hydrogen'
+      | 'ionic-angular'
+      | 'ionic-react'
+      | 'jekyll'
+      | 'middleman'
+      | 'nextjs'
+      | 'nuxtjs'
+      | 'parcel'
       | 'polymer'
+      | 'preact'
+      | 'redwoodjs'
+      | 'remix'
+      | 'saber'
+      | 'sanity'
+      | 'sanity-v3'
+      | 'sapper'
+      | 'scully'
+      | 'solidstart'
+      | 'solidstart-1'
+      | 'stencil'
+      | 'storybook'
       | 'svelte'
       | 'sveltekit'
       | 'sveltekit-1'
-      | 'ionic-react'
-      | 'create-react-app'
-      | 'gridsome'
       | 'umijs'
-      | 'sapper'
-      | 'saber'
-      | 'stencil'
-      | 'nuxtjs'
-      | 'redwoodjs'
-      | 'hugo'
-      | 'jekyll'
-      | 'brunch'
-      | 'middleman'
-      | 'zola'
-      | 'hydrogen'
       | 'vite'
       | 'vitepress'
+      | 'vue'
       | 'vuepress'
-      | 'parcel'
-      | 'fasthtml'
-      | 'sanity-v3'
-      | 'sanity'
-      | 'storybook'
+      | 'zola'
       | null;
     gitForkProtection?: boolean;
     gitLFS?: boolean;
@@ -9458,7 +9458,7 @@ export type GetProjectsResponse = {
       aliasFinal?: string | null;
       automaticAliases?: string[];
       branchMatcher?: {
-        type: 'endsWith' | 'startsWith' | 'equals';
+        type: 'endsWith' | 'equals' | 'startsWith';
         pattern: string;
       };
       buildingAt?: number;
@@ -9467,8 +9467,8 @@ export type GetProjectsResponse = {
         src?: string;
         dest?: string;
       }[];
-      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-      checksState?: 'registered' | 'running' | 'completed';
+      checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+      checksState?: 'completed' | 'registered' | 'running';
       connectBuildsEnabled?: boolean;
       connectConfigurationId?: string;
       createdAt: number;
@@ -9499,7 +9499,7 @@ export type GetProjectsResponse = {
         project_id: string;
         environment: string;
       };
-      plan: 'pro' | 'enterprise' | 'hobby';
+      plan: 'enterprise' | 'hobby' | 'pro';
       /**
        * Whether or not preview comments are enabled for the deployment
        *
@@ -9508,8 +9508,8 @@ export type GetProjectsResponse = {
       previewCommentsEnabled?: boolean;
       private: boolean;
       readyAt?: number;
-      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-      readySubstate?: 'STAGED' | 'PROMOTED';
+      readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+      readySubstate?: 'PROMOTED' | 'STAGED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
@@ -9608,7 +9608,7 @@ export type GetProjectsResponse = {
       defaultRoute?: string;
     };
     name: string;
-    nodeVersion: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
+    nodeVersion: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
     optionsAllowlist?: {
       paths: {
         value: string;
@@ -9621,7 +9621,7 @@ export type GetProjectsResponse = {
     publicSource?: boolean | null;
     resourceConfig?: {
       functionDefaultTimeout?: number;
-      functionDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
+      functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
       allowServerlessConcurrency?: boolean;
       elasticConcurrencyEnabled?: boolean;
     };
@@ -9634,7 +9634,7 @@ export type GetProjectsResponse = {
     sourceFilesOutsideRootDirectory?: boolean;
     enableAffectedProjectsDeployments?: boolean;
     ssoProtection?: {
-      deploymentType: 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+      deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
     } | null;
     targets?: {
       [key: string]: {
@@ -9648,7 +9648,7 @@ export type GetProjectsResponse = {
         aliasFinal?: string | null;
         automaticAliases?: string[];
         branchMatcher?: {
-          type: 'endsWith' | 'startsWith' | 'equals';
+          type: 'endsWith' | 'equals' | 'startsWith';
           pattern: string;
         };
         buildingAt?: number;
@@ -9657,8 +9657,8 @@ export type GetProjectsResponse = {
           src?: string;
           dest?: string;
         }[];
-        checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-        checksState?: 'registered' | 'running' | 'completed';
+        checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+        checksState?: 'completed' | 'registered' | 'running';
         connectBuildsEnabled?: boolean;
         connectConfigurationId?: string;
         createdAt: number;
@@ -9689,7 +9689,7 @@ export type GetProjectsResponse = {
           project_id: string;
           environment: string;
         };
-        plan: 'pro' | 'enterprise' | 'hobby';
+        plan: 'enterprise' | 'hobby' | 'pro';
         /**
          * Whether or not preview comments are enabled for the deployment
          *
@@ -9698,8 +9698,8 @@ export type GetProjectsResponse = {
         previewCommentsEnabled?: boolean;
         private: boolean;
         readyAt?: number;
-        readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-        readySubstate?: 'STAGED' | 'PROMOTED';
+        readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+        readySubstate?: 'PROMOTED' | 'STAGED';
         requestedAt?: number;
         target?: string | null;
         teamId?: string | null;
@@ -9903,7 +9903,7 @@ export type GetProjectsResponse = {
     lastAliasRequest?: {
       fromDeploymentId: string;
       toDeploymentId: string;
-      jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+      jobStatus: 'failed' | 'in-progress' | 'pending' | 'skipped' | 'succeeded';
       requestedAt: number;
       type: 'promote' | 'rollback';
     } | null;
@@ -9973,17 +9973,17 @@ export type GetProjectsResponse = {
             };
         has?: {
           type:
-            | 'path'
-            | 'host'
-            | 'method'
-            | 'header'
             | 'cookie'
-            | 'query'
-            | 'ip_address'
-            | 'protocol'
-            | 'scheme'
             | 'environment'
-            | 'region';
+            | 'header'
+            | 'host'
+            | 'ip_address'
+            | 'method'
+            | 'path'
+            | 'protocol'
+            | 'query'
+            | 'region'
+            | 'scheme';
           key?: string;
           value?:
             | string
@@ -10003,17 +10003,17 @@ export type GetProjectsResponse = {
         }[];
         missing?: {
           type:
-            | 'path'
-            | 'host'
-            | 'method'
-            | 'header'
             | 'cookie'
-            | 'query'
-            | 'ip_address'
-            | 'protocol'
-            | 'scheme'
             | 'environment'
-            | 'region';
+            | 'header'
+            | 'host'
+            | 'ip_address'
+            | 'method'
+            | 'path'
+            | 'protocol'
+            | 'query'
+            | 'region'
+            | 'scheme';
           key?: string;
           value?:
             | string
@@ -10033,9 +10033,9 @@ export type GetProjectsResponse = {
         }[];
         dest?: string;
         status?: number;
-        handle?: 'init' | 'finalize';
+        handle?: 'finalize' | 'init';
         mitigate?: {
-          action: 'deny' | 'challenge' | 'log' | 'bypass' | 'rate_limit' | 'redirect';
+          action: 'bypass' | 'challenge' | 'deny' | 'log' | 'rate_limit' | 'redirect';
           rule_id: string;
           ttl?: number;
           erl?: {
@@ -10056,9 +10056,9 @@ export type GetProjectsResponse = {
       /**
        * - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
        */
-      issuerMode?: 'team' | 'global';
+      issuerMode?: 'global' | 'team';
     };
-    tier?: 'standard' | 'advanced' | 'critical';
+    tier?: 'advanced' | 'critical' | 'standard';
   }[];
   pagination: Schemas.Pagination;
 };
@@ -10173,7 +10173,7 @@ export type CreateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+    type: 'encrypted' | 'plain' | 'secret' | 'sensitive' | 'system';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -10274,51 +10274,51 @@ export type CreateProjectResponse = {
   }[];
   customEnvironments?: Record<string, any>[];
   framework?:
-    | 'blitzjs'
-    | 'nextjs'
-    | 'gatsby'
-    | 'remix'
-    | 'astro'
-    | 'hexo'
-    | 'eleventy'
-    | 'docusaurus-2'
-    | 'docusaurus'
-    | 'preact'
-    | 'solidstart-1'
-    | 'solidstart'
-    | 'dojo'
-    | 'ember'
-    | 'vue'
-    | 'scully'
-    | 'ionic-angular'
     | 'angular'
+    | 'astro'
+    | 'blitzjs'
+    | 'brunch'
+    | 'create-react-app'
+    | 'docusaurus'
+    | 'docusaurus-2'
+    | 'dojo'
+    | 'eleventy'
+    | 'ember'
+    | 'fasthtml'
+    | 'gatsby'
+    | 'gridsome'
+    | 'hexo'
+    | 'hugo'
+    | 'hydrogen'
+    | 'ionic-angular'
+    | 'ionic-react'
+    | 'jekyll'
+    | 'middleman'
+    | 'nextjs'
+    | 'nuxtjs'
+    | 'parcel'
     | 'polymer'
+    | 'preact'
+    | 'redwoodjs'
+    | 'remix'
+    | 'saber'
+    | 'sanity'
+    | 'sanity-v3'
+    | 'sapper'
+    | 'scully'
+    | 'solidstart'
+    | 'solidstart-1'
+    | 'stencil'
+    | 'storybook'
     | 'svelte'
     | 'sveltekit'
     | 'sveltekit-1'
-    | 'ionic-react'
-    | 'create-react-app'
-    | 'gridsome'
     | 'umijs'
-    | 'sapper'
-    | 'saber'
-    | 'stencil'
-    | 'nuxtjs'
-    | 'redwoodjs'
-    | 'hugo'
-    | 'jekyll'
-    | 'brunch'
-    | 'middleman'
-    | 'zola'
-    | 'hydrogen'
     | 'vite'
     | 'vitepress'
+    | 'vue'
     | 'vuepress'
-    | 'parcel'
-    | 'fasthtml'
-    | 'sanity-v3'
-    | 'sanity'
-    | 'storybook'
+    | 'zola'
     | null;
   gitForkProtection?: boolean;
   gitLFS?: boolean;
@@ -10338,7 +10338,7 @@ export type CreateProjectResponse = {
     aliasFinal?: string | null;
     automaticAliases?: string[];
     branchMatcher?: {
-      type: 'endsWith' | 'startsWith' | 'equals';
+      type: 'endsWith' | 'equals' | 'startsWith';
       pattern: string;
     };
     buildingAt?: number;
@@ -10347,8 +10347,8 @@ export type CreateProjectResponse = {
       src?: string;
       dest?: string;
     }[];
-    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-    checksState?: 'registered' | 'running' | 'completed';
+    checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+    checksState?: 'completed' | 'registered' | 'running';
     connectBuildsEnabled?: boolean;
     connectConfigurationId?: string;
     createdAt: number;
@@ -10379,7 +10379,7 @@ export type CreateProjectResponse = {
       project_id: string;
       environment: string;
     };
-    plan: 'pro' | 'enterprise' | 'hobby';
+    plan: 'enterprise' | 'hobby' | 'pro';
     /**
      * Whether or not preview comments are enabled for the deployment
      *
@@ -10388,8 +10388,8 @@ export type CreateProjectResponse = {
     previewCommentsEnabled?: boolean;
     private: boolean;
     readyAt?: number;
-    readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-    readySubstate?: 'STAGED' | 'PROMOTED';
+    readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+    readySubstate?: 'PROMOTED' | 'STAGED';
     requestedAt?: number;
     target?: string | null;
     teamId?: string | null;
@@ -10488,7 +10488,7 @@ export type CreateProjectResponse = {
     defaultRoute?: string;
   };
   name: string;
-  nodeVersion: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
+  nodeVersion: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
   optionsAllowlist?: {
     paths: {
       value: string;
@@ -10501,7 +10501,7 @@ export type CreateProjectResponse = {
   publicSource?: boolean | null;
   resourceConfig?: {
     functionDefaultTimeout?: number;
-    functionDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
+    functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     allowServerlessConcurrency?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
@@ -10514,7 +10514,7 @@ export type CreateProjectResponse = {
   sourceFilesOutsideRootDirectory?: boolean;
   enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
-    deploymentType: 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
@@ -10528,7 +10528,7 @@ export type CreateProjectResponse = {
       aliasFinal?: string | null;
       automaticAliases?: string[];
       branchMatcher?: {
-        type: 'endsWith' | 'startsWith' | 'equals';
+        type: 'endsWith' | 'equals' | 'startsWith';
         pattern: string;
       };
       buildingAt?: number;
@@ -10537,8 +10537,8 @@ export type CreateProjectResponse = {
         src?: string;
         dest?: string;
       }[];
-      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-      checksState?: 'registered' | 'running' | 'completed';
+      checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+      checksState?: 'completed' | 'registered' | 'running';
       connectBuildsEnabled?: boolean;
       connectConfigurationId?: string;
       createdAt: number;
@@ -10569,7 +10569,7 @@ export type CreateProjectResponse = {
         project_id: string;
         environment: string;
       };
-      plan: 'pro' | 'enterprise' | 'hobby';
+      plan: 'enterprise' | 'hobby' | 'pro';
       /**
        * Whether or not preview comments are enabled for the deployment
        *
@@ -10578,8 +10578,8 @@ export type CreateProjectResponse = {
       previewCommentsEnabled?: boolean;
       private: boolean;
       readyAt?: number;
-      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-      readySubstate?: 'STAGED' | 'PROMOTED';
+      readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+      readySubstate?: 'PROMOTED' | 'STAGED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
@@ -10783,7 +10783,7 @@ export type CreateProjectResponse = {
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'pending' | 'in-progress' | 'succeeded' | 'failed' | 'skipped';
+    jobStatus: 'failed' | 'in-progress' | 'pending' | 'skipped' | 'succeeded';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -10853,17 +10853,17 @@ export type CreateProjectResponse = {
           };
       has?: {
         type:
-          | 'path'
-          | 'host'
-          | 'method'
-          | 'header'
           | 'cookie'
-          | 'query'
-          | 'ip_address'
-          | 'protocol'
-          | 'scheme'
           | 'environment'
-          | 'region';
+          | 'header'
+          | 'host'
+          | 'ip_address'
+          | 'method'
+          | 'path'
+          | 'protocol'
+          | 'query'
+          | 'region'
+          | 'scheme';
         key?: string;
         value?:
           | string
@@ -10883,17 +10883,17 @@ export type CreateProjectResponse = {
       }[];
       missing?: {
         type:
-          | 'path'
-          | 'host'
-          | 'method'
-          | 'header'
           | 'cookie'
-          | 'query'
-          | 'ip_address'
-          | 'protocol'
-          | 'scheme'
           | 'environment'
-          | 'region';
+          | 'header'
+          | 'host'
+          | 'ip_address'
+          | 'method'
+          | 'path'
+          | 'protocol'
+          | 'query'
+          | 'region'
+          | 'scheme';
         key?: string;
         value?:
           | string
@@ -10913,9 +10913,9 @@ export type CreateProjectResponse = {
       }[];
       dest?: string;
       status?: number;
-      handle?: 'init' | 'finalize';
+      handle?: 'finalize' | 'init';
       mitigate?: {
-        action: 'deny' | 'challenge' | 'log' | 'bypass' | 'rate_limit' | 'redirect';
+        action: 'bypass' | 'challenge' | 'deny' | 'log' | 'rate_limit' | 'redirect';
         rule_id: string;
         ttl?: number;
         erl?: {
@@ -10936,9 +10936,9 @@ export type CreateProjectResponse = {
     /**
      * - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
      */
-    issuerMode?: 'team' | 'global';
+    issuerMode?: 'global' | 'team';
   };
-  tier?: 'standard' | 'advanced' | 'critical';
+  tier?: 'advanced' | 'critical' | 'standard';
 };
 
 export type CreateProjectRequestBody = {
@@ -10979,7 +10979,7 @@ export type CreateProjectRequestBody = {
     /**
      * Type of the ENV variable
      */
-    type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+    type?: 'encrypted' | 'plain' | 'secret' | 'sensitive' | 'system';
     /**
      * Value for the ENV variable
      */
@@ -10989,52 +10989,52 @@ export type CreateProjectRequestBody = {
    * The framework that is being used for this project. When `null` is used no framework is selected
    */
   framework?:
-    | any
-    | 'blitzjs'
-    | 'nextjs'
-    | 'gatsby'
-    | 'remix'
-    | 'astro'
-    | 'hexo'
-    | 'eleventy'
-    | 'docusaurus-2'
-    | 'docusaurus'
-    | 'preact'
-    | 'solidstart-1'
-    | 'solidstart'
-    | 'dojo'
-    | 'ember'
-    | 'vue'
-    | 'scully'
-    | 'ionic-angular'
     | 'angular'
+    | 'astro'
+    | 'blitzjs'
+    | 'brunch'
+    | 'create-react-app'
+    | 'docusaurus'
+    | 'docusaurus-2'
+    | 'dojo'
+    | 'eleventy'
+    | 'ember'
+    | 'fasthtml'
+    | 'gatsby'
+    | 'gridsome'
+    | 'hexo'
+    | 'hugo'
+    | 'hydrogen'
+    | 'ionic-angular'
+    | 'ionic-react'
+    | 'jekyll'
+    | 'middleman'
+    | 'nextjs'
+    | any
+    | 'nuxtjs'
+    | 'parcel'
     | 'polymer'
+    | 'preact'
+    | 'redwoodjs'
+    | 'remix'
+    | 'saber'
+    | 'sanity'
+    | 'sanity-v3'
+    | 'sapper'
+    | 'scully'
+    | 'solidstart'
+    | 'solidstart-1'
+    | 'stencil'
+    | 'storybook'
     | 'svelte'
     | 'sveltekit'
     | 'sveltekit-1'
-    | 'ionic-react'
-    | 'create-react-app'
-    | 'gridsome'
     | 'umijs'
-    | 'sapper'
-    | 'saber'
-    | 'stencil'
-    | 'nuxtjs'
-    | 'redwoodjs'
-    | 'hugo'
-    | 'jekyll'
-    | 'brunch'
-    | 'middleman'
-    | 'zola'
-    | 'hydrogen'
     | 'vite'
     | 'vitepress'
+    | 'vue'
     | 'vuepress'
-    | 'parcel'
-    | 'fasthtml'
-    | 'sanity-v3'
-    | 'sanity'
-    | 'storybook';
+    | 'zola';
   /**
    * The Git Repository that will be connected to the project. When this is defined, any pushes to the specified connected Git Repository will be automatically deployed
    */
@@ -11046,7 +11046,7 @@ export type CreateProjectRequestBody = {
     /**
      * The Git Provider of the repository
      */
-    type: 'github' | 'gitlab' | 'bitbucket';
+    type: 'bitbucket' | 'github' | 'gitlab';
   };
   /**
    * The install command for this project. When `null` is used this value will be automatically detected
@@ -11107,7 +11107,7 @@ export type CreateProjectRequestBody = {
      *
      * @default global
      */
-    issuerMode?: 'team' | 'global';
+    issuerMode?: 'global' | 'team';
   };
   /**
    * Opt-in to skip deployments when there are no changes to the root directory and its dependencies
@@ -11233,7 +11233,7 @@ export type GetProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+    type: 'encrypted' | 'plain' | 'secret' | 'sensitive' | 'system';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -11334,51 +11334,51 @@ export type GetProjectResponse = {
   }[];
   customEnvironments?: Record<string, any>[];
   framework?:
-    | 'blitzjs'
-    | 'nextjs'
-    | 'gatsby'
-    | 'remix'
-    | 'astro'
-    | 'hexo'
-    | 'eleventy'
-    | 'docusaurus-2'
-    | 'docusaurus'
-    | 'preact'
-    | 'solidstart-1'
-    | 'solidstart'
-    | 'dojo'
-    | 'ember'
-    | 'vue'
-    | 'scully'
-    | 'ionic-angular'
     | 'angular'
+    | 'astro'
+    | 'blitzjs'
+    | 'brunch'
+    | 'create-react-app'
+    | 'docusaurus'
+    | 'docusaurus-2'
+    | 'dojo'
+    | 'eleventy'
+    | 'ember'
+    | 'fasthtml'
+    | 'gatsby'
+    | 'gridsome'
+    | 'hexo'
+    | 'hugo'
+    | 'hydrogen'
+    | 'ionic-angular'
+    | 'ionic-react'
+    | 'jekyll'
+    | 'middleman'
+    | 'nextjs'
+    | 'nuxtjs'
+    | 'parcel'
     | 'polymer'
+    | 'preact'
+    | 'redwoodjs'
+    | 'remix'
+    | 'saber'
+    | 'sanity'
+    | 'sanity-v3'
+    | 'sapper'
+    | 'scully'
+    | 'solidstart'
+    | 'solidstart-1'
+    | 'stencil'
+    | 'storybook'
     | 'svelte'
     | 'sveltekit'
     | 'sveltekit-1'
-    | 'ionic-react'
-    | 'create-react-app'
-    | 'gridsome'
     | 'umijs'
-    | 'sapper'
-    | 'saber'
-    | 'stencil'
-    | 'nuxtjs'
-    | 'redwoodjs'
-    | 'hugo'
-    | 'jekyll'
-    | 'brunch'
-    | 'middleman'
-    | 'zola'
-    | 'hydrogen'
     | 'vite'
     | 'vitepress'
+    | 'vue'
     | 'vuepress'
-    | 'parcel'
-    | 'fasthtml'
-    | 'sanity-v3'
-    | 'sanity'
-    | 'storybook'
+    | 'zola'
     | null;
   gitForkProtection?: boolean;
   gitLFS?: boolean;
@@ -11398,7 +11398,7 @@ export type GetProjectResponse = {
     aliasFinal?: string | null;
     automaticAliases?: string[];
     branchMatcher?: {
-      type: 'endsWith' | 'startsWith' | 'equals';
+      type: 'endsWith' | 'equals' | 'startsWith';
       pattern: string;
     };
     buildingAt?: number;
@@ -11407,8 +11407,8 @@ export type GetProjectResponse = {
       src?: string;
       dest?: string;
     }[];
-    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-    checksState?: 'registered' | 'running' | 'completed';
+    checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+    checksState?: 'completed' | 'registered' | 'running';
     connectBuildsEnabled?: boolean;
     connectConfigurationId?: string;
     createdAt: number;
@@ -11439,7 +11439,7 @@ export type GetProjectResponse = {
       project_id: string;
       environment: string;
     };
-    plan: 'pro' | 'enterprise' | 'hobby';
+    plan: 'enterprise' | 'hobby' | 'pro';
     /**
      * Whether or not preview comments are enabled for the deployment
      *
@@ -11448,8 +11448,8 @@ export type GetProjectResponse = {
     previewCommentsEnabled?: boolean;
     private: boolean;
     readyAt?: number;
-    readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-    readySubstate?: 'STAGED' | 'PROMOTED';
+    readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+    readySubstate?: 'PROMOTED' | 'STAGED';
     requestedAt?: number;
     target?: string | null;
     teamId?: string | null;
@@ -11548,7 +11548,7 @@ export type GetProjectResponse = {
     defaultRoute?: string;
   };
   name: string;
-  nodeVersion: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
+  nodeVersion: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
   optionsAllowlist?: {
     paths: {
       value: string;
@@ -11561,7 +11561,7 @@ export type GetProjectResponse = {
   publicSource?: boolean | null;
   resourceConfig?: {
     functionDefaultTimeout?: number;
-    functionDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
+    functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     allowServerlessConcurrency?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
@@ -11574,7 +11574,7 @@ export type GetProjectResponse = {
   sourceFilesOutsideRootDirectory?: boolean;
   enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
-    deploymentType: 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
@@ -11588,7 +11588,7 @@ export type GetProjectResponse = {
       aliasFinal?: string | null;
       automaticAliases?: string[];
       branchMatcher?: {
-        type: 'endsWith' | 'startsWith' | 'equals';
+        type: 'endsWith' | 'equals' | 'startsWith';
         pattern: string;
       };
       buildingAt?: number;
@@ -11597,8 +11597,8 @@ export type GetProjectResponse = {
         src?: string;
         dest?: string;
       }[];
-      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-      checksState?: 'registered' | 'running' | 'completed';
+      checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+      checksState?: 'completed' | 'registered' | 'running';
       connectBuildsEnabled?: boolean;
       connectConfigurationId?: string;
       createdAt: number;
@@ -11629,7 +11629,7 @@ export type GetProjectResponse = {
         project_id: string;
         environment: string;
       };
-      plan: 'pro' | 'enterprise' | 'hobby';
+      plan: 'enterprise' | 'hobby' | 'pro';
       /**
        * Whether or not preview comments are enabled for the deployment
        *
@@ -11638,8 +11638,8 @@ export type GetProjectResponse = {
       previewCommentsEnabled?: boolean;
       private: boolean;
       readyAt?: number;
-      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-      readySubstate?: 'STAGED' | 'PROMOTED';
+      readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+      readySubstate?: 'PROMOTED' | 'STAGED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
@@ -11843,7 +11843,7 @@ export type GetProjectResponse = {
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+    jobStatus: 'failed' | 'in-progress' | 'pending' | 'skipped' | 'succeeded';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -11913,17 +11913,17 @@ export type GetProjectResponse = {
           };
       has?: {
         type:
-          | 'path'
-          | 'host'
-          | 'method'
-          | 'header'
           | 'cookie'
-          | 'query'
-          | 'ip_address'
-          | 'protocol'
-          | 'scheme'
           | 'environment'
-          | 'region';
+          | 'header'
+          | 'host'
+          | 'ip_address'
+          | 'method'
+          | 'path'
+          | 'protocol'
+          | 'query'
+          | 'region'
+          | 'scheme';
         key?: string;
         value?:
           | string
@@ -11943,17 +11943,17 @@ export type GetProjectResponse = {
       }[];
       missing?: {
         type:
-          | 'path'
-          | 'host'
-          | 'method'
-          | 'header'
           | 'cookie'
-          | 'query'
-          | 'ip_address'
-          | 'protocol'
-          | 'scheme'
           | 'environment'
-          | 'region';
+          | 'header'
+          | 'host'
+          | 'ip_address'
+          | 'method'
+          | 'path'
+          | 'protocol'
+          | 'query'
+          | 'region'
+          | 'scheme';
         key?: string;
         value?:
           | string
@@ -11973,9 +11973,9 @@ export type GetProjectResponse = {
       }[];
       dest?: string;
       status?: number;
-      handle?: 'init' | 'finalize';
+      handle?: 'finalize' | 'init';
       mitigate?: {
-        action: 'deny' | 'challenge' | 'log' | 'bypass' | 'rate_limit' | 'redirect';
+        action: 'bypass' | 'challenge' | 'deny' | 'log' | 'rate_limit' | 'redirect';
         rule_id: string;
         ttl?: number;
         erl?: {
@@ -11996,9 +11996,9 @@ export type GetProjectResponse = {
     /**
      * - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
      */
-    issuerMode?: 'team' | 'global';
+    issuerMode?: 'global' | 'team';
   };
-  tier?: 'standard' | 'advanced' | 'critical';
+  tier?: 'advanced' | 'critical' | 'standard';
 };
 
 export type GetProjectVariables = {
@@ -12121,7 +12121,7 @@ export type UpdateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+    type: 'encrypted' | 'plain' | 'secret' | 'sensitive' | 'system';
     /**
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
@@ -12222,51 +12222,51 @@ export type UpdateProjectResponse = {
   }[];
   customEnvironments?: Record<string, any>[];
   framework?:
-    | 'blitzjs'
-    | 'nextjs'
-    | 'gatsby'
-    | 'remix'
-    | 'astro'
-    | 'hexo'
-    | 'eleventy'
-    | 'docusaurus-2'
-    | 'docusaurus'
-    | 'preact'
-    | 'solidstart-1'
-    | 'solidstart'
-    | 'dojo'
-    | 'ember'
-    | 'vue'
-    | 'scully'
-    | 'ionic-angular'
     | 'angular'
+    | 'astro'
+    | 'blitzjs'
+    | 'brunch'
+    | 'create-react-app'
+    | 'docusaurus'
+    | 'docusaurus-2'
+    | 'dojo'
+    | 'eleventy'
+    | 'ember'
+    | 'fasthtml'
+    | 'gatsby'
+    | 'gridsome'
+    | 'hexo'
+    | 'hugo'
+    | 'hydrogen'
+    | 'ionic-angular'
+    | 'ionic-react'
+    | 'jekyll'
+    | 'middleman'
+    | 'nextjs'
+    | 'nuxtjs'
+    | 'parcel'
     | 'polymer'
+    | 'preact'
+    | 'redwoodjs'
+    | 'remix'
+    | 'saber'
+    | 'sanity'
+    | 'sanity-v3'
+    | 'sapper'
+    | 'scully'
+    | 'solidstart'
+    | 'solidstart-1'
+    | 'stencil'
+    | 'storybook'
     | 'svelte'
     | 'sveltekit'
     | 'sveltekit-1'
-    | 'ionic-react'
-    | 'create-react-app'
-    | 'gridsome'
     | 'umijs'
-    | 'sapper'
-    | 'saber'
-    | 'stencil'
-    | 'nuxtjs'
-    | 'redwoodjs'
-    | 'hugo'
-    | 'jekyll'
-    | 'brunch'
-    | 'middleman'
-    | 'zola'
-    | 'hydrogen'
     | 'vite'
     | 'vitepress'
+    | 'vue'
     | 'vuepress'
-    | 'parcel'
-    | 'fasthtml'
-    | 'sanity-v3'
-    | 'sanity'
-    | 'storybook'
+    | 'zola'
     | null;
   gitForkProtection?: boolean;
   gitLFS?: boolean;
@@ -12286,7 +12286,7 @@ export type UpdateProjectResponse = {
     aliasFinal?: string | null;
     automaticAliases?: string[];
     branchMatcher?: {
-      type: 'endsWith' | 'startsWith' | 'equals';
+      type: 'endsWith' | 'equals' | 'startsWith';
       pattern: string;
     };
     buildingAt?: number;
@@ -12295,8 +12295,8 @@ export type UpdateProjectResponse = {
       src?: string;
       dest?: string;
     }[];
-    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-    checksState?: 'registered' | 'running' | 'completed';
+    checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+    checksState?: 'completed' | 'registered' | 'running';
     connectBuildsEnabled?: boolean;
     connectConfigurationId?: string;
     createdAt: number;
@@ -12327,7 +12327,7 @@ export type UpdateProjectResponse = {
       project_id: string;
       environment: string;
     };
-    plan: 'pro' | 'enterprise' | 'hobby';
+    plan: 'enterprise' | 'hobby' | 'pro';
     /**
      * Whether or not preview comments are enabled for the deployment
      *
@@ -12336,8 +12336,8 @@ export type UpdateProjectResponse = {
     previewCommentsEnabled?: boolean;
     private: boolean;
     readyAt?: number;
-    readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-    readySubstate?: 'STAGED' | 'PROMOTED';
+    readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+    readySubstate?: 'PROMOTED' | 'STAGED';
     requestedAt?: number;
     target?: string | null;
     teamId?: string | null;
@@ -12436,7 +12436,7 @@ export type UpdateProjectResponse = {
     defaultRoute?: string;
   };
   name: string;
-  nodeVersion: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
+  nodeVersion: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
   optionsAllowlist?: {
     paths: {
       value: string;
@@ -12449,7 +12449,7 @@ export type UpdateProjectResponse = {
   publicSource?: boolean | null;
   resourceConfig?: {
     functionDefaultTimeout?: number;
-    functionDefaultMemoryType?: 'standard_legacy' | 'standard' | 'performance';
+    functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     allowServerlessConcurrency?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
@@ -12462,7 +12462,7 @@ export type UpdateProjectResponse = {
   sourceFilesOutsideRootDirectory?: boolean;
   enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
-    deploymentType: 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
@@ -12476,7 +12476,7 @@ export type UpdateProjectResponse = {
       aliasFinal?: string | null;
       automaticAliases?: string[];
       branchMatcher?: {
-        type: 'endsWith' | 'startsWith' | 'equals';
+        type: 'endsWith' | 'equals' | 'startsWith';
         pattern: string;
       };
       buildingAt?: number;
@@ -12485,8 +12485,8 @@ export type UpdateProjectResponse = {
         src?: string;
         dest?: string;
       }[];
-      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-      checksState?: 'registered' | 'running' | 'completed';
+      checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+      checksState?: 'completed' | 'registered' | 'running';
       connectBuildsEnabled?: boolean;
       connectConfigurationId?: string;
       createdAt: number;
@@ -12517,7 +12517,7 @@ export type UpdateProjectResponse = {
         project_id: string;
         environment: string;
       };
-      plan: 'pro' | 'enterprise' | 'hobby';
+      plan: 'enterprise' | 'hobby' | 'pro';
       /**
        * Whether or not preview comments are enabled for the deployment
        *
@@ -12526,8 +12526,8 @@ export type UpdateProjectResponse = {
       previewCommentsEnabled?: boolean;
       private: boolean;
       readyAt?: number;
-      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-      readySubstate?: 'STAGED' | 'PROMOTED';
+      readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+      readySubstate?: 'PROMOTED' | 'STAGED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
@@ -12731,7 +12731,7 @@ export type UpdateProjectResponse = {
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+    jobStatus: 'failed' | 'in-progress' | 'pending' | 'skipped' | 'succeeded';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -12801,17 +12801,17 @@ export type UpdateProjectResponse = {
           };
       has?: {
         type:
-          | 'path'
-          | 'host'
-          | 'method'
-          | 'header'
           | 'cookie'
-          | 'query'
-          | 'ip_address'
-          | 'protocol'
-          | 'scheme'
           | 'environment'
-          | 'region';
+          | 'header'
+          | 'host'
+          | 'ip_address'
+          | 'method'
+          | 'path'
+          | 'protocol'
+          | 'query'
+          | 'region'
+          | 'scheme';
         key?: string;
         value?:
           | string
@@ -12831,17 +12831,17 @@ export type UpdateProjectResponse = {
       }[];
       missing?: {
         type:
-          | 'path'
-          | 'host'
-          | 'method'
-          | 'header'
           | 'cookie'
-          | 'query'
-          | 'ip_address'
-          | 'protocol'
-          | 'scheme'
           | 'environment'
-          | 'region';
+          | 'header'
+          | 'host'
+          | 'ip_address'
+          | 'method'
+          | 'path'
+          | 'protocol'
+          | 'query'
+          | 'region'
+          | 'scheme';
         key?: string;
         value?:
           | string
@@ -12861,9 +12861,9 @@ export type UpdateProjectResponse = {
       }[];
       dest?: string;
       status?: number;
-      handle?: 'init' | 'finalize';
+      handle?: 'finalize' | 'init';
       mitigate?: {
-        action: 'deny' | 'challenge' | 'log' | 'bypass' | 'rate_limit' | 'redirect';
+        action: 'bypass' | 'challenge' | 'deny' | 'log' | 'rate_limit' | 'redirect';
         rule_id: string;
         ttl?: number;
         erl?: {
@@ -12884,9 +12884,9 @@ export type UpdateProjectResponse = {
     /**
      * - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
      */
-    issuerMode?: 'team' | 'global';
+    issuerMode?: 'global' | 'team';
   };
-  tier?: 'standard' | 'advanced' | 'critical';
+  tier?: 'advanced' | 'critical' | 'standard';
 };
 
 export type UpdateProjectRequestBody = {
@@ -12918,52 +12918,52 @@ export type UpdateProjectRequestBody = {
    * The framework that is being used for this project. When `null` is used no framework is selected
    */
   framework?:
-    | any
-    | 'blitzjs'
-    | 'nextjs'
-    | 'gatsby'
-    | 'remix'
-    | 'astro'
-    | 'hexo'
-    | 'eleventy'
-    | 'docusaurus-2'
-    | 'docusaurus'
-    | 'preact'
-    | 'solidstart-1'
-    | 'solidstart'
-    | 'dojo'
-    | 'ember'
-    | 'vue'
-    | 'scully'
-    | 'ionic-angular'
     | 'angular'
+    | 'astro'
+    | 'blitzjs'
+    | 'brunch'
+    | 'create-react-app'
+    | 'docusaurus'
+    | 'docusaurus-2'
+    | 'dojo'
+    | 'eleventy'
+    | 'ember'
+    | 'fasthtml'
+    | 'gatsby'
+    | 'gridsome'
+    | 'hexo'
+    | 'hugo'
+    | 'hydrogen'
+    | 'ionic-angular'
+    | 'ionic-react'
+    | 'jekyll'
+    | 'middleman'
+    | 'nextjs'
+    | any
+    | 'nuxtjs'
+    | 'parcel'
     | 'polymer'
+    | 'preact'
+    | 'redwoodjs'
+    | 'remix'
+    | 'saber'
+    | 'sanity'
+    | 'sanity-v3'
+    | 'sapper'
+    | 'scully'
+    | 'solidstart'
+    | 'solidstart-1'
+    | 'stencil'
+    | 'storybook'
     | 'svelte'
     | 'sveltekit'
     | 'sveltekit-1'
-    | 'ionic-react'
-    | 'create-react-app'
-    | 'gridsome'
     | 'umijs'
-    | 'sapper'
-    | 'saber'
-    | 'stencil'
-    | 'nuxtjs'
-    | 'redwoodjs'
-    | 'hugo'
-    | 'jekyll'
-    | 'brunch'
-    | 'middleman'
-    | 'zola'
-    | 'hydrogen'
     | 'vite'
     | 'vitepress'
+    | 'vue'
     | 'vuepress'
-    | 'parcel'
-    | 'fasthtml'
-    | 'sanity-v3'
-    | 'sanity'
-    | 'storybook'
+    | 'zola'
     | null;
   /**
    * Specifies whether PRs from Git forks should require a team member's authorization before it can be deployed
@@ -12987,7 +12987,7 @@ export type UpdateProjectRequestBody = {
    * @pattern ^(?!.*---)[a-z0-9-_.]+$
    */
   name?: string;
-  nodeVersion?: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
+  nodeVersion?: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x';
   /**
    * The output directory of the project. When `null` is used this value will be automatically detected
    *
@@ -13065,7 +13065,7 @@ export type UpdateProjectRequestBody = {
      *
      * @default global
      */
-    issuerMode?: 'team' | 'global';
+    issuerMode?: 'global' | 'team';
   };
   /**
    * Allows to protect project deployments with a password
@@ -13100,7 +13100,7 @@ export type UpdateProjectRequestBody = {
     /**
      * Specify if the Trusted IPs will apply to every Deployment Target or just Preview
      */
-    deploymentType: 'all' | 'preview' | 'production' | 'prod_deployment_urls_and_all_previews';
+    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
     /**
      * @minItems 1
      */
@@ -13119,7 +13119,7 @@ export type UpdateProjectRequestBody = {
     /**
      * exclusive: ip match is enough to bypass deployment protection (regardless of other settings). additional: ip must match + any other protection should be also provided (password, vercel auth, shareable link, automation bypass header, automation bypass query param)
      */
-    protectionMode: 'exclusive' | 'additional';
+    protectionMode: 'additional' | 'exclusive';
   } | null;
   /**
    * Specify a list of paths that should not be protected by Deployment Protection to enable Cors preflight requests
@@ -13277,7 +13277,7 @@ export type GetProjectDomainsResponse = {
     apexName: string;
     projectId: string;
     redirect?: string | null;
-    redirectStatusCode?: 307 | 301 | 302 | 308 | null;
+    redirectStatusCode?: 301 | 302 | 307 | 308 | null;
     gitBranch?: string | null;
     customEnvironmentId?: string | null;
     updatedAt?: number;
@@ -13348,7 +13348,7 @@ export type GetProjectDomainResponse = {
   apexName: string;
   projectId: string;
   redirect?: string | null;
-  redirectStatusCode?: 307 | 301 | 302 | 308 | null;
+  redirectStatusCode?: 301 | 302 | 307 | 308 | null;
   gitBranch?: string | null;
   customEnvironmentId?: string | null;
   updatedAt?: number;
@@ -13417,7 +13417,7 @@ export type UpdateProjectDomainResponse = {
   apexName: string;
   projectId: string;
   redirect?: string | null;
-  redirectStatusCode?: 307 | 301 | 302 | 308 | null;
+  redirectStatusCode?: 301 | 302 | 307 | 308 | null;
   gitBranch?: string | null;
   customEnvironmentId?: string | null;
   updatedAt?: number;
@@ -13456,7 +13456,7 @@ export type UpdateProjectDomainRequestBody = {
    *
    * @example 307
    */
-  redirectStatusCode?: any | 301 | 302 | 307 | 308 | null;
+  redirectStatusCode?: 301 | 302 | 307 | 308 | any | null;
 };
 
 export type UpdateProjectDomainVariables = {
@@ -13547,7 +13547,7 @@ export type AddProjectDomainResponse = {
   apexName: string;
   projectId: string;
   redirect?: string | null;
-  redirectStatusCode?: 307 | 301 | 302 | 308 | null;
+  redirectStatusCode?: 301 | 302 | 307 | 308 | null;
   gitBranch?: string | null;
   customEnvironmentId?: string | null;
   updatedAt?: number;
@@ -13592,7 +13592,7 @@ export type AddProjectDomainRequestBody = {
    *
    * @example 307
    */
-  redirectStatusCode?: any | 301 | 302 | 307 | 308 | null;
+  redirectStatusCode?: 301 | 302 | 307 | 308 | any | null;
 };
 
 export type AddProjectDomainVariables = {
@@ -13647,7 +13647,7 @@ export type VerifyProjectDomainResponse = {
   apexName: string;
   projectId: string;
   redirect?: string | null;
-  redirectStatusCode?: 307 | 301 | 302 | 308 | null;
+  redirectStatusCode?: 301 | 302 | 307 | 308 | null;
   gitBranch?: string | null;
   customEnvironmentId?: string | null;
   updatedAt?: number;
@@ -15406,7 +15406,7 @@ export type EditProjectEnvRequestBody = {
    *
    * @example preview
    */
-  target?: ('production' | 'preview' | 'development')[];
+  target?: ('development' | 'preview' | 'production')[];
   /**
    * If defined, the git branch of the environment variable (must have target=preview)
    *
@@ -15419,7 +15419,7 @@ export type EditProjectEnvRequestBody = {
    *
    * @example plain
    */
-  type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+  type?: 'encrypted' | 'plain' | 'secret' | 'sensitive' | 'system';
   /**
    * The value of the environment variable
    *
@@ -15926,28 +15926,28 @@ export type PutFirewallConfigResponse = {
       conditionGroup: {
         conditions: {
           type:
-            | 'host'
-            | 'path'
-            | 'method'
-            | 'header'
-            | 'query'
             | 'cookie'
-            | 'target_path'
-            | 'ip_address'
-            | 'protocol'
-            | 'region'
-            | 'scheme'
             | 'environment'
-            | 'user_agent'
+            | 'geo_as_number'
+            | 'geo_city'
             | 'geo_continent'
             | 'geo_country'
             | 'geo_country_region'
-            | 'geo_city'
-            | 'geo_as_number'
-            | 'ja4_digest'
+            | 'header'
+            | 'host'
+            | 'ip_address'
             | 'ja3_digest'
-            | 'rate_limit_api_id';
-          op: 're' | 'eq' | 'ex' | 'inc' | 'pre' | 'suf' | 'sub' | 'gt' | 'gte' | 'lt' | 'lte' | 'nex' | 'ninc' | 'neq';
+            | 'ja4_digest'
+            | 'method'
+            | 'path'
+            | 'protocol'
+            | 'query'
+            | 'rate_limit_api_id'
+            | 'region'
+            | 'scheme'
+            | 'target_path'
+            | 'user_agent';
+          op: 'eq' | 'ex' | 'gt' | 'gte' | 'inc' | 'lt' | 'lte' | 'neq' | 'nex' | 'ninc' | 'pre' | 're' | 'sub' | 'suf';
           neg?: boolean;
           key?: string;
           value?: string | number | string[];
@@ -15955,13 +15955,13 @@ export type PutFirewallConfigResponse = {
       }[];
       action: {
         mitigate?: {
-          action: 'deny' | 'log' | 'challenge' | 'bypass' | 'rate_limit' | 'redirect';
+          action: 'bypass' | 'challenge' | 'deny' | 'log' | 'rate_limit' | 'redirect';
           rateLimit?: {
             algo: 'fixed_window' | 'token_bucket';
             window: number;
             limit: number;
             keys: string[];
-            action?: 'deny' | 'log' | 'challenge' | 'rate_limit' | null;
+            action?: 'challenge' | 'deny' | 'log' | 'rate_limit' | null;
           } | null;
           redirect?: {
             location: string;
@@ -15976,7 +15976,7 @@ export type PutFirewallConfigResponse = {
       hostname: string;
       ip: string;
       notes?: string;
-      action: 'deny' | 'log' | 'challenge' | 'bypass';
+      action: 'bypass' | 'challenge' | 'deny' | 'log';
     }[];
     changes: Record<string, any>[];
     managedRules?: {
@@ -16063,28 +16063,28 @@ export type PutFirewallConfigRequestBody = {
     conditionGroup: {
       conditions: {
         type:
-          | 'host'
-          | 'path'
-          | 'method'
-          | 'header'
-          | 'query'
           | 'cookie'
-          | 'target_path'
-          | 'ip_address'
-          | 'region'
-          | 'protocol'
-          | 'scheme'
           | 'environment'
-          | 'user_agent'
+          | 'geo_as_number'
+          | 'geo_city'
           | 'geo_continent'
           | 'geo_country'
           | 'geo_country_region'
-          | 'geo_city'
-          | 'geo_as_number'
-          | 'ja4_digest'
+          | 'header'
+          | 'host'
+          | 'ip_address'
           | 'ja3_digest'
-          | 'rate_limit_api_id';
-        op: 're' | 'eq' | 'neq' | 'ex' | 'nex' | 'inc' | 'ninc' | 'pre' | 'suf' | 'sub' | 'gt' | 'gte' | 'lt' | 'lte';
+          | 'ja4_digest'
+          | 'method'
+          | 'path'
+          | 'protocol'
+          | 'query'
+          | 'rate_limit_api_id'
+          | 'region'
+          | 'scheme'
+          | 'target_path'
+          | 'user_agent';
+        op: 'eq' | 'ex' | 'gt' | 'gte' | 'inc' | 'lt' | 'lte' | 'neq' | 'nex' | 'ninc' | 'pre' | 're' | 'sub' | 'suf';
         neg?: boolean;
         key?: string;
         value?: string | string[] | number;
@@ -16092,7 +16092,7 @@ export type PutFirewallConfigRequestBody = {
     }[];
     action: {
       mitigate?: {
-        action: 'log' | 'challenge' | 'deny' | 'bypass' | 'rate_limit' | 'redirect';
+        action: 'bypass' | 'challenge' | 'deny' | 'log' | 'rate_limit' | 'redirect';
         rateLimit?: {
           algo: 'fixed_window' | 'token_bucket';
           window: number;
@@ -16113,7 +16113,7 @@ export type PutFirewallConfigRequestBody = {
     hostname: string;
     ip: string;
     notes?: string;
-    action: 'deny' | 'challenge' | 'log' | 'bypass';
+    action: 'bypass' | 'challenge' | 'deny' | 'log';
   }[];
 };
 
@@ -16665,28 +16665,28 @@ export type GetFirewallConfigResponse = {
     conditionGroup: {
       conditions: {
         type:
-          | 'host'
-          | 'path'
-          | 'method'
-          | 'header'
-          | 'query'
           | 'cookie'
-          | 'target_path'
-          | 'ip_address'
-          | 'protocol'
-          | 'region'
-          | 'scheme'
           | 'environment'
-          | 'user_agent'
+          | 'geo_as_number'
+          | 'geo_city'
           | 'geo_continent'
           | 'geo_country'
           | 'geo_country_region'
-          | 'geo_city'
-          | 'geo_as_number'
-          | 'ja4_digest'
+          | 'header'
+          | 'host'
+          | 'ip_address'
           | 'ja3_digest'
-          | 'rate_limit_api_id';
-        op: 're' | 'eq' | 'ex' | 'inc' | 'pre' | 'suf' | 'sub' | 'gt' | 'gte' | 'lt' | 'lte' | 'nex' | 'ninc' | 'neq';
+          | 'ja4_digest'
+          | 'method'
+          | 'path'
+          | 'protocol'
+          | 'query'
+          | 'rate_limit_api_id'
+          | 'region'
+          | 'scheme'
+          | 'target_path'
+          | 'user_agent';
+        op: 'eq' | 'ex' | 'gt' | 'gte' | 'inc' | 'lt' | 'lte' | 'neq' | 'nex' | 'ninc' | 'pre' | 're' | 'sub' | 'suf';
         neg?: boolean;
         key?: string;
         value?: string | number | string[];
@@ -16694,13 +16694,13 @@ export type GetFirewallConfigResponse = {
     }[];
     action: {
       mitigate?: {
-        action: 'deny' | 'log' | 'challenge' | 'bypass' | 'rate_limit' | 'redirect';
+        action: 'bypass' | 'challenge' | 'deny' | 'log' | 'rate_limit' | 'redirect';
         rateLimit?: {
           algo: 'fixed_window' | 'token_bucket';
           window: number;
           limit: number;
           keys: string[];
-          action?: 'deny' | 'log' | 'challenge' | 'rate_limit' | null;
+          action?: 'challenge' | 'deny' | 'log' | 'rate_limit' | null;
         } | null;
         redirect?: {
           location: string;
@@ -16715,7 +16715,7 @@ export type GetFirewallConfigResponse = {
     hostname: string;
     ip: string;
     notes?: string;
-    action: 'deny' | 'log' | 'challenge' | 'bypass';
+    action: 'bypass' | 'challenge' | 'deny' | 'log';
   }[];
   changes: Record<string, any>[];
   managedRules?: {
@@ -16834,7 +16834,7 @@ export type GetTeamMembersResponse = {
      *
      * @example OWNER
      */
-    role: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'VIEWER' | 'BILLING' | 'CONTRIBUTOR';
+    role: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'VIEWER';
     /**
      * The ID of this user.
      *
@@ -16870,17 +16870,17 @@ export type GetTeamMembersResponse = {
      */
     joinedFrom?: {
       origin:
-        | 'teams'
-        | 'link'
-        | 'mail'
-        | 'import'
-        | 'github'
-        | 'gitlab'
         | 'bitbucket'
-        | 'saml'
         | 'dsync'
         | 'feedback'
-        | 'organization-teams';
+        | 'github'
+        | 'gitlab'
+        | 'import'
+        | 'link'
+        | 'mail'
+        | 'organization-teams'
+        | 'saml'
+        | 'teams';
       commitId?: string;
       repoId?: string;
       repoPath?: string;
@@ -16905,7 +16905,7 @@ export type GetTeamMembersResponse = {
     accessGroups?: string[];
     id: string;
     email?: string;
-    role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'VIEWER' | 'BILLING' | 'CONTRIBUTOR';
+    role?: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'VIEWER';
     isDSyncUser: boolean;
     createdAt?: number;
     expired?: boolean;
@@ -16976,7 +16976,7 @@ export type InviteUserToTeamRequestBody = {
    * @example MEMBER
    * @example VIEWER
    */
-  role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
+  role?: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'VIEWER';
   projects?: {
     /**
      * The ID of the project.
@@ -16990,7 +16990,7 @@ export type InviteUserToTeamRequestBody = {
      *
      * @example ADMIN
      */
-    role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER';
+    role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
   }[];
 };
 
@@ -17049,17 +17049,17 @@ export type RequestAccessToTeamResponse = {
   confirmed?: boolean;
   joinedFrom?: {
     origin:
-      | 'import'
-      | 'teams'
+      | 'bitbucket'
+      | 'dsync'
+      | 'feedback'
       | 'github'
       | 'gitlab'
-      | 'bitbucket'
-      | 'feedback'
-      | 'organization-teams'
-      | 'mail'
+      | 'import'
       | 'link'
+      | 'mail'
+      | 'organization-teams'
       | 'saml'
-      | 'dsync';
+      | 'teams';
     commitId?: string;
     repoId?: string;
     repoPath?: string;
@@ -17090,7 +17090,7 @@ export type RequestAccessToTeamRequestBody = {
      *
      * @example github
      */
-    origin: 'import' | 'teams' | 'github' | 'gitlab' | 'bitbucket' | 'feedback' | 'organization-teams';
+    origin: 'bitbucket' | 'feedback' | 'github' | 'gitlab' | 'import' | 'organization-teams' | 'teams';
     /**
      * The commit sha if the origin is a git provider.
      *
@@ -17169,17 +17169,17 @@ export type GetTeamAccessRequestResponse = {
    */
   joinedFrom: {
     origin:
-      | 'mail'
-      | 'link'
-      | 'import'
-      | 'teams'
-      | 'github'
-      | 'gitlab'
       | 'bitbucket'
-      | 'saml'
       | 'dsync'
       | 'feedback'
-      | 'organization-teams';
+      | 'github'
+      | 'gitlab'
+      | 'import'
+      | 'link'
+      | 'mail'
+      | 'organization-teams'
+      | 'saml'
+      | 'teams';
     commitId?: string;
     repoId?: string;
     repoPath?: string;
@@ -17332,7 +17332,7 @@ export type UpdateTeamMemberRequestBody = {
      *
      * @example ADMIN
      */
-    role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
+    role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER' | any | null;
   }[];
   joinedFrom?: {
     ssoUserId?: null;
@@ -18095,44 +18095,44 @@ export type CreateWebhookResponse = {
   events: (
     | 'budget.reached'
     | 'budget.reset'
-    | 'domain.created'
+    | 'deployment'
+    | 'deployment-canceled'
+    | 'deployment-check-rerequested'
+    | 'deployment-checks-completed'
+    | 'deployment-error'
+    | 'deployment-prepared'
+    | 'deployment-ready'
+    | 'deployment.canceled'
+    | 'deployment.check-rerequested'
     | 'deployment.created'
     | 'deployment.error'
-    | 'deployment.canceled'
-    | 'deployment.succeeded'
-    | 'deployment.ready'
-    | 'deployment.check-rerequested'
-    | 'deployment.promoted'
-    | 'deployment.integration.action.start'
     | 'deployment.integration.action.cancel'
     | 'deployment.integration.action.cleanup'
+    | 'deployment.integration.action.start'
+    | 'deployment.promoted'
+    | 'deployment.ready'
+    | 'deployment.succeeded'
+    | 'domain-created'
+    | 'domain.created'
     | 'edge-config.created'
     | 'edge-config.deleted'
     | 'edge-config.items.updated'
     | 'firewall.attack'
-    | 'integration-configuration.permission-upgraded'
-    | 'integration-configuration.removed'
-    | 'integration-configuration.scope-change-confirmed'
-    | 'project.created'
-    | 'project.removed'
-    | 'deployment-checks-completed'
-    | 'deployment-ready'
-    | 'deployment-prepared'
-    | 'deployment-error'
-    | 'deployment-check-rerequested'
-    | 'deployment-canceled'
-    | 'project-created'
-    | 'project-removed'
-    | 'domain-created'
-    | 'deployment'
     | 'integration-configuration-permission-updated'
     | 'integration-configuration-removed'
     | 'integration-configuration-scope-change-confirmed'
+    | 'integration-configuration.permission-upgraded'
+    | 'integration-configuration.removed'
+    | 'integration-configuration.scope-change-confirmed'
     | 'marketplace.invoice.created'
-    | 'marketplace.invoice.paid'
     | 'marketplace.invoice.notpaid'
+    | 'marketplace.invoice.paid'
     | 'marketplace.invoice.refunded'
     | 'observability.anomaly'
+    | 'project-created'
+    | 'project-removed'
+    | 'project.created'
+    | 'project.removed'
     | 'test-webhook'
   )[];
   /**
@@ -18185,44 +18185,44 @@ export type CreateWebhookRequestBody = {
   events: (
     | 'budget.reached'
     | 'budget.reset'
-    | 'domain.created'
+    | 'deployment'
+    | 'deployment-canceled'
+    | 'deployment-check-rerequested'
+    | 'deployment-checks-completed'
+    | 'deployment-error'
+    | 'deployment-prepared'
+    | 'deployment-ready'
+    | 'deployment.canceled'
+    | 'deployment.check-rerequested'
     | 'deployment.created'
     | 'deployment.error'
-    | 'deployment.canceled'
-    | 'deployment.succeeded'
-    | 'deployment.ready'
-    | 'deployment.check-rerequested'
-    | 'deployment.promoted'
-    | 'deployment.integration.action.start'
     | 'deployment.integration.action.cancel'
     | 'deployment.integration.action.cleanup'
+    | 'deployment.integration.action.start'
+    | 'deployment.promoted'
+    | 'deployment.ready'
+    | 'deployment.succeeded'
+    | 'domain-created'
+    | 'domain.created'
     | 'edge-config.created'
     | 'edge-config.deleted'
     | 'edge-config.items.updated'
     | 'firewall.attack'
-    | 'integration-configuration.permission-upgraded'
-    | 'integration-configuration.removed'
-    | 'integration-configuration.scope-change-confirmed'
-    | 'project.created'
-    | 'project.removed'
-    | 'deployment-checks-completed'
-    | 'deployment-ready'
-    | 'deployment-prepared'
-    | 'deployment-error'
-    | 'deployment-check-rerequested'
-    | 'deployment-canceled'
-    | 'project-created'
-    | 'project-removed'
-    | 'domain-created'
-    | 'deployment'
     | 'integration-configuration-permission-updated'
     | 'integration-configuration-removed'
     | 'integration-configuration-scope-change-confirmed'
+    | 'integration-configuration.permission-upgraded'
+    | 'integration-configuration.removed'
+    | 'integration-configuration.scope-change-confirmed'
     | 'marketplace.invoice.created'
-    | 'marketplace.invoice.paid'
     | 'marketplace.invoice.notpaid'
+    | 'marketplace.invoice.paid'
     | 'marketplace.invoice.refunded'
     | 'observability.anomaly'
+    | 'project-created'
+    | 'project-removed'
+    | 'project.created'
+    | 'project.removed'
     | 'test-webhook'
   )[];
   /**
@@ -18533,44 +18533,44 @@ export type GetWebhookResponse = {
   events: (
     | 'budget.reached'
     | 'budget.reset'
-    | 'domain.created'
+    | 'deployment'
+    | 'deployment-canceled'
+    | 'deployment-check-rerequested'
+    | 'deployment-checks-completed'
+    | 'deployment-error'
+    | 'deployment-prepared'
+    | 'deployment-ready'
+    | 'deployment.canceled'
+    | 'deployment.check-rerequested'
     | 'deployment.created'
     | 'deployment.error'
-    | 'deployment.canceled'
-    | 'deployment.succeeded'
-    | 'deployment.ready'
-    | 'deployment.check-rerequested'
-    | 'deployment.promoted'
-    | 'deployment.integration.action.start'
     | 'deployment.integration.action.cancel'
     | 'deployment.integration.action.cleanup'
+    | 'deployment.integration.action.start'
+    | 'deployment.promoted'
+    | 'deployment.ready'
+    | 'deployment.succeeded'
+    | 'domain-created'
+    | 'domain.created'
     | 'edge-config.created'
     | 'edge-config.deleted'
     | 'edge-config.items.updated'
     | 'firewall.attack'
-    | 'integration-configuration.permission-upgraded'
-    | 'integration-configuration.removed'
-    | 'integration-configuration.scope-change-confirmed'
-    | 'project.created'
-    | 'project.removed'
-    | 'deployment-checks-completed'
-    | 'deployment-ready'
-    | 'deployment-prepared'
-    | 'deployment-error'
-    | 'deployment-check-rerequested'
-    | 'deployment-canceled'
-    | 'project-created'
-    | 'project-removed'
-    | 'domain-created'
-    | 'deployment'
     | 'integration-configuration-permission-updated'
     | 'integration-configuration-removed'
     | 'integration-configuration-scope-change-confirmed'
+    | 'integration-configuration.permission-upgraded'
+    | 'integration-configuration.removed'
+    | 'integration-configuration.scope-change-confirmed'
     | 'marketplace.invoice.created'
-    | 'marketplace.invoice.paid'
     | 'marketplace.invoice.notpaid'
+    | 'marketplace.invoice.paid'
     | 'marketplace.invoice.refunded'
     | 'observability.anomaly'
+    | 'project-created'
+    | 'project-removed'
+    | 'project.created'
+    | 'project.removed'
     | 'test-webhook'
   )[];
   /**
@@ -19691,13 +19691,13 @@ export type GetDeploymentsResponse = {
      *
      * @example READY
      */
-    state?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED' | 'DELETED';
+    state?: 'BUILDING' | 'CANCELED' | 'DELETED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
     /**
      * In which state is the deployment.
      *
      * @example READY
      */
-    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED' | 'DELETED';
+    readyState?: 'BUILDING' | 'CANCELED' | 'DELETED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
     /**
      * The type of the deployment.
      *
@@ -19780,15 +19780,15 @@ export type GetDeploymentsResponse = {
     /**
      * Since June 2023 Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - PROMOTED: has seen production traffic
      */
-    readySubstate?: 'STAGED' | 'PROMOTED';
+    readySubstate?: 'PROMOTED' | 'STAGED';
     /**
      * State of all registered checks
      */
-    checksState?: 'registered' | 'running' | 'completed';
+    checksState?: 'completed' | 'registered' | 'running';
     /**
      * Conclusion for checks
      */
-    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+    checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
     /**
      * Vercel URL to inspect the deployment.
      *
@@ -19804,51 +19804,51 @@ export type GetDeploymentsResponse = {
      */
     projectSettings?: {
       framework?:
-        | 'blitzjs'
-        | 'nextjs'
-        | 'gatsby'
-        | 'remix'
-        | 'astro'
-        | 'hexo'
-        | 'eleventy'
-        | 'docusaurus-2'
-        | 'docusaurus'
-        | 'preact'
-        | 'solidstart-1'
-        | 'solidstart'
-        | 'dojo'
-        | 'ember'
-        | 'vue'
-        | 'scully'
-        | 'ionic-angular'
         | 'angular'
+        | 'astro'
+        | 'blitzjs'
+        | 'brunch'
+        | 'create-react-app'
+        | 'docusaurus'
+        | 'docusaurus-2'
+        | 'dojo'
+        | 'eleventy'
+        | 'ember'
+        | 'fasthtml'
+        | 'gatsby'
+        | 'gridsome'
+        | 'hexo'
+        | 'hugo'
+        | 'hydrogen'
+        | 'ionic-angular'
+        | 'ionic-react'
+        | 'jekyll'
+        | 'middleman'
+        | 'nextjs'
+        | 'nuxtjs'
+        | 'parcel'
         | 'polymer'
+        | 'preact'
+        | 'redwoodjs'
+        | 'remix'
+        | 'saber'
+        | 'sanity'
+        | 'sanity-v3'
+        | 'sapper'
+        | 'scully'
+        | 'solidstart'
+        | 'solidstart-1'
+        | 'stencil'
+        | 'storybook'
         | 'svelte'
         | 'sveltekit'
         | 'sveltekit-1'
-        | 'ionic-react'
-        | 'create-react-app'
-        | 'gridsome'
         | 'umijs'
-        | 'sapper'
-        | 'saber'
-        | 'stencil'
-        | 'nuxtjs'
-        | 'redwoodjs'
-        | 'hugo'
-        | 'jekyll'
-        | 'brunch'
-        | 'middleman'
-        | 'zola'
-        | 'hydrogen'
         | 'vite'
         | 'vitepress'
+        | 'vue'
         | 'vuepress'
-        | 'parcel'
-        | 'fasthtml'
-        | 'sanity-v3'
-        | 'sanity'
-        | 'storybook'
+        | 'zola'
         | null;
       gitForkProtection?: boolean;
       customerSupportCodeVisibility?: boolean;
@@ -19856,7 +19856,7 @@ export type GetDeploymentsResponse = {
       devCommand?: string | null;
       installCommand?: string | null;
       buildCommand?: string | null;
-      nodeVersion?: '22.x' | '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
+      nodeVersion?: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
       outputDirectory?: string | null;
       publicSource?: boolean | null;
       rootDirectory?: string | null;

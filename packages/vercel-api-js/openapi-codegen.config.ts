@@ -31,7 +31,7 @@ export default defineConfig({
       });
 
       // Sort alphabetically enum values
-      context.openAPIDocument = sortEnumValues(context.openAPIDocument);
+      context.openAPIDocument = sortArrays(context.openAPIDocument);
 
       const { schemasFiles } = await generateSchemaTypes(context, { filenamePrefix });
       await generateFetchers(context, { filenamePrefix, schemasFiles });
@@ -61,21 +61,21 @@ function updateMethod({
   return openAPIDocument;
 }
 
-function sortEnumValues(openAPIDocument: Context['openAPIDocument']) {
-  const schemas = openAPIDocument.components?.schemas;
-  if (!schemas) return openAPIDocument;
-
-  for (const schema of Object.values(schemas)) {
-    if ("type" in schema && schema.type === 'object' && schema.properties) {
-      for (const property of Object.values(schema.properties)) {
-        if ("enum" in property && property.enum) {
-          property.enum = property.enum.sort();
-        }
-      }
+function sortArrays(openAPIDocument: Context['openAPIDocument']) {
+  // Recurse through the document and in any "enum" property that is a string array, sort the values alphabetically
+  function sortEnumValuesRecursively<T>(obj: T): T {
+    if (Array.isArray(obj)) {
+      return obj.sort() as T;
+    } else if (typeof obj === 'object' && !!obj) {
+      return Object.fromEntries(
+        Object.entries(obj as any).map(([key, value]) => [key, sortEnumValuesRecursively(value)])
+      ) as T;
+    } else {
+      return obj;
     }
   }
 
-  return openAPIDocument;
+  return sortEnumValuesRecursively(openAPIDocument);
 }
 
 function buildExtraFile(context: Context) {

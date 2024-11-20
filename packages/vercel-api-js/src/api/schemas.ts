@@ -6,7 +6,7 @@
 /**
  * Enum containing the actions that can be performed against a resource. Group operations are included.
  */
-export type ACLAction = 'create' | 'delete' | 'read' | 'update' | 'list';
+export type ACLAction = 'create' | 'delete' | 'list' | 'read' | 'update';
 
 export type FlagJSONValue =
   | string
@@ -204,23 +204,23 @@ export type TeamLimited = {
     confirmed: boolean;
     confirmedAt: number;
     accessRequestedAt?: number;
-    role: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
+    role: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'VIEWER';
     teamId?: string;
     createdAt: number;
     created: number;
     joinedFrom?: {
       origin:
-        | 'link'
-        | 'saml'
-        | 'mail'
-        | 'import'
-        | 'teams'
-        | 'github'
-        | 'gitlab'
         | 'bitbucket'
         | 'dsync'
         | 'feedback'
-        | 'organization-teams';
+        | 'github'
+        | 'gitlab'
+        | 'import'
+        | 'link'
+        | 'mail'
+        | 'organization-teams'
+        | 'saml'
+        | 'teams';
       commitId?: string;
       repoId?: string;
       repoPath?: string;
@@ -261,12 +261,12 @@ export type AuthUser = {
   softBlock: {
     blockedAt: number;
     reason:
-      | 'SUBSCRIPTION_CANCELED'
-      | 'SUBSCRIPTION_EXPIRED'
-      | 'UNPAID_INVOICE'
+      | 'BLOCKED_FOR_PLATFORM_ABUSE'
       | 'ENTERPRISE_TRIAL_ENDED'
       | 'FAIR_USE_LIMITS_EXCEEDED'
-      | 'BLOCKED_FOR_PLATFORM_ABUSE';
+      | 'SUBSCRIPTION_CANCELED'
+      | 'SUBSCRIPTION_EXPIRED'
+      | 'UNPAID_INVOICE';
     blockedDueToOverageType?:
       | 'analyticsUsage'
       | 'artifacts'
@@ -394,9 +394,9 @@ export type AuthUser = {
    */
   activeDashboardViews?: {
     scopeId: string;
-    viewPreference?: 'list' | 'cards';
-    favoritesViewPreference?: 'open' | 'closed';
-    recentsViewPreference?: 'open' | 'closed';
+    viewPreference?: 'cards' | 'list';
+    favoritesViewPreference?: 'closed' | 'open';
+    recentsViewPreference?: 'closed' | 'open';
   }[];
   importFlowGitNamespace?: string | number | null;
   importFlowGitNamespaceId?: string | number | null;
