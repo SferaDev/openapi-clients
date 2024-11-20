@@ -2301,6 +2301,7 @@ export type UpdateProjectDataCacheResponse = {
     teamInvite?: Schemas.ACLAction[];
     teamInviteCode?: Schemas.ACLAction[];
     teamJoin?: Schemas.ACLAction[];
+    teamMicrofrontends?: Schemas.ACLAction[];
     teamOwnMembership?: Schemas.ACLAction[];
     teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
     token?: Schemas.ACLAction[];
@@ -9821,6 +9822,7 @@ export type GetProjectsResponse = {
       teamInvite?: Schemas.ACLAction[];
       teamInviteCode?: Schemas.ACLAction[];
       teamJoin?: Schemas.ACLAction[];
+      teamMicrofrontends?: Schemas.ACLAction[];
       teamOwnMembership?: Schemas.ACLAction[];
       teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
       token?: Schemas.ACLAction[];
@@ -10700,6 +10702,7 @@ export type CreateProjectResponse = {
     teamInvite?: Schemas.ACLAction[];
     teamInviteCode?: Schemas.ACLAction[];
     teamJoin?: Schemas.ACLAction[];
+    teamMicrofrontends?: Schemas.ACLAction[];
     teamOwnMembership?: Schemas.ACLAction[];
     teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
     token?: Schemas.ACLAction[];
@@ -11759,6 +11762,7 @@ export type GetProjectResponse = {
     teamInvite?: Schemas.ACLAction[];
     teamInviteCode?: Schemas.ACLAction[];
     teamJoin?: Schemas.ACLAction[];
+    teamMicrofrontends?: Schemas.ACLAction[];
     teamOwnMembership?: Schemas.ACLAction[];
     teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
     token?: Schemas.ACLAction[];
@@ -12646,6 +12650,7 @@ export type UpdateProjectResponse = {
     teamInvite?: Schemas.ACLAction[];
     teamInviteCode?: Schemas.ACLAction[];
     teamJoin?: Schemas.ACLAction[];
+    teamMicrofrontends?: Schemas.ACLAction[];
     teamOwnMembership?: Schemas.ACLAction[];
     teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
     token?: Schemas.ACLAction[];
