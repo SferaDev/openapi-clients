@@ -3,7 +3,6 @@ import { Context } from '@openapi-codegen/cli/lib/types';
 import { generateFetchers, generateSchemaTypes } from '@openapi-codegen/typescript';
 import { Project, VariableDeclarationKind } from 'ts-morph';
 import ts from 'typescript';
-import { sortEnumValues } from './utils/sortEnumValues';
 
 export default defineConfig({
   vercel: {
@@ -31,8 +30,11 @@ export default defineConfig({
         update: (operation) => ({ ...operation, operationId: 'listPromoteAliases' })
       });
 
-      const { schemasFiles } = await generateSchemaTypes(context, { filenamePrefix, sortEnumValues });
-      await generateFetchers(context, { filenamePrefix, schemasFiles, sortEnumValues });
+      // Sort alphabetically enum values
+      context.openAPIDocument = sortEnumValues(context.openAPIDocument);
+
+      const { schemasFiles } = await generateSchemaTypes(context, { filenamePrefix });
+      await generateFetchers(context, { filenamePrefix, schemasFiles });
       await context.writeFile('extra.ts', buildExtraFile(context));
     }
   }
@@ -59,22 +61,21 @@ function updateMethod({
   return openAPIDocument;
 }
 
-function updateStrings({
-  openAPIDocument,
-  updater
-}: {
-  openAPIDocument: Context['openAPIDocument'];
-  updater: (key: string, value: string) => string | null;
-}) {
-  const updatedOpenAPIDocument = JSON.stringify(openAPIDocument, (key, value) => {
-    if (typeof value === 'string') {
-      return updater(key, value) ?? value;
+function sortEnumValues(openAPIDocument: Context['openAPIDocument']) {
+  const schemas = openAPIDocument.components?.schemas;
+  if (!schemas) return openAPIDocument;
+
+  for (const schema of Object.values(schemas)) {
+    if ("type" in schema && schema.type === 'object' && schema.properties) {
+      for (const property of Object.values(schema.properties)) {
+        if ("enum" in property && property.enum) {
+          property.enum = property.enum.sort();
+        }
+      }
     }
+  }
 
-    return value;
-  });
-
-  return JSON.parse(updatedOpenAPIDocument);
+  return openAPIDocument;
 }
 
 function buildExtraFile(context: Context) {
@@ -110,8 +111,8 @@ function buildExtraFile(context: Context) {
         name: 'operationsByPath',
         initializer: `{
             ${Object.entries(operationsByPath)
-              .map(([path, operation]) => `"${path}": ${operation}`)
-              .join(',\n')}
+            .map(([path, operation]) => `"${path}": ${operation}`)
+            .join(',\n')}
         }`
       }
     ]

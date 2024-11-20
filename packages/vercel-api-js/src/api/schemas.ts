@@ -400,7 +400,7 @@ export type AuthUser = {
   }[];
   importFlowGitNamespace?: string | number | null;
   importFlowGitNamespaceId?: string | number | null;
-  importFlowGitProvider?: 'github' | 'gitlab' | 'bitbucket';
+  importFlowGitProvider?: 'bitbucket' | 'github' | 'gitlab';
   preferredScopesAndGitNamespaces?: {
     scopeId: string;
     gitNamespaceId: string | number | null;
@@ -653,7 +653,7 @@ export type FileTree = {
    *
    * @example file
    */
-  type: 'directory' | 'file' | 'symlink' | 'lambda' | 'middleware' | 'invalid';
+  type: 'directory' | 'file' | 'invalid' | 'lambda' | 'middleware' | 'symlink';
   /**
    * The unique identifier of the file (only valid for the `file` type)
    *
