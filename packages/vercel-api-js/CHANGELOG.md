@@ -1,5 +1,16 @@
 # vercel-api-js
 
+## 0.15.0
+
+### Minor Changes
+
+- 6c01a57: Add firewallBypassIps field to project update and get responses
+
+### Patch Changes
+
+- 64d934c: [BREAKING] Change group to groupIds in project endpoints
+- d8ac4ad: Add teamMicrofrontends field to project-related API responses
+
 ## 0.14.0
 
 ### Minor Changes
