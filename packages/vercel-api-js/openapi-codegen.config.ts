@@ -30,6 +30,9 @@ export default defineConfig({
         update: (operation) => ({ ...operation, operationId: 'listPromoteAliases' })
       });
 
+      // Sort alphabetically enum values
+      context.openAPIDocument = sortArrays(context.openAPIDocument);
+
       const { schemasFiles } = await generateSchemaTypes(context, { filenamePrefix });
       await generateFetchers(context, { filenamePrefix, schemasFiles });
       await context.writeFile('extra.ts', buildExtraFile(context));
@@ -58,22 +61,21 @@ function updateMethod({
   return openAPIDocument;
 }
 
-function updateStrings({
-  openAPIDocument,
-  updater
-}: {
-  openAPIDocument: Context['openAPIDocument'];
-  updater: (key: string, value: string) => string | null;
-}) {
-  const updatedOpenAPIDocument = JSON.stringify(openAPIDocument, (key, value) => {
-    if (typeof value === 'string') {
-      return updater(key, value) ?? value;
+function sortArrays(openAPIDocument: Context['openAPIDocument']) {
+  // Recurse through the document and in any "enum" property that is a string array, sort the values alphabetically
+  function sortEnumValuesRecursively<T>(obj: T): T {
+    if (Array.isArray(obj)) {
+      return obj.sort() as T;
+    } else if (typeof obj === 'object' && !!obj) {
+      return Object.fromEntries(
+        Object.entries(obj as any).map(([key, value]) => [key, sortEnumValuesRecursively(value)])
+      ) as T;
+    } else {
+      return obj;
     }
+  }
 
-    return value;
-  });
-
-  return JSON.parse(updatedOpenAPIDocument);
+  return sortEnumValuesRecursively(openAPIDocument);
 }
 
 function buildExtraFile(context: Context) {
@@ -109,8 +111,8 @@ function buildExtraFile(context: Context) {
         name: 'operationsByPath',
         initializer: `{
             ${Object.entries(operationsByPath)
-              .map(([path, operation]) => `"${path}": ${operation}`)
-              .join(',\n')}
+            .map(([path, operation]) => `"${path}": ${operation}`)
+            .join(',\n')}
         }`
       }
     ]

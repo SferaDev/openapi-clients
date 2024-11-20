@@ -25,10 +25,10 @@ jobs:
           cache: 'pnpm'
 
       - name: Check for updates
-        uses: mathiasvr/command-output@v2
+        uses: mathiasvr/command-output@v1
         id: ncu
         with:
-          run: npx -y npm-check-updates -u -t latest --deep --filterVersion "/^[^=]/"
+          run: npx -y npm-check-updates -u -t latest --deep --filterVersion "/^[^=]/" --dep prod,dev,optional
 
       - name: Install new versions
         run: |
