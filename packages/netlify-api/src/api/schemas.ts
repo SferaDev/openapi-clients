@@ -422,7 +422,7 @@ export type EnvVar = {
     context_parameter?: string;
   }[];
   /**
-   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
+   * Secret values are only readable by code running on Netlify's systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
    */
   is_secret?: boolean;
   /**

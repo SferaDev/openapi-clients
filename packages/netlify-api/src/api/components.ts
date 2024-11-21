@@ -726,6 +726,48 @@ export const showSiteTLSCertificate = (variables: ShowSiteTLSCertificateVariable
     ShowSiteTLSCertificatePathParams
   >({ url: '/sites/{siteId}/ssl', method: 'get', ...variables, signal });
 
+export type GetAllCertificatesPathParams = {
+  siteId: string;
+};
+
+export type GetAllCertificatesQueryParams = {
+  domain: string;
+};
+
+export type GetAllCertificatesError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetAllCertificatesResponse = {
+  state?: string;
+  domains?: string[];
+  /**
+   * @format dateTime
+   */
+  created_at?: string;
+  /**
+   * @format dateTime
+   */
+  updated_at?: string;
+  /**
+   * @format dateTime
+   */
+  expires_at?: string;
+}[];
+
+export type GetAllCertificatesVariables = {
+  pathParams: GetAllCertificatesPathParams;
+  queryParams: GetAllCertificatesQueryParams;
+} & FetcherExtraProps;
+
+export const getAllCertificates = (variables: GetAllCertificatesVariables, signal?: AbortSignal) =>
+  fetch<
+    GetAllCertificatesResponse,
+    GetAllCertificatesError,
+    undefined,
+    {},
+    GetAllCertificatesQueryParams,
+    GetAllCertificatesPathParams
+  >({ url: '/sites/{siteId}/ssl/certificates', method: 'get', ...variables, signal });
+
 export type GetEnvVarsPathParams = {
   /**
    * Scope response to account_id
@@ -798,7 +840,7 @@ export type GetEnvVarsResponse = {
     context_parameter?: string;
   }[];
   /**
-   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
+   * Secret values are only readable by code running on Netlify's systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
    */
   is_secret?: boolean;
   /**
@@ -916,7 +958,7 @@ export type CreateEnvVarsResponse = {
     context_parameter?: string;
   }[];
   /**
-   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
+   * Secret values are only readable by code running on Netlify's systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
    */
   is_secret?: boolean;
   /**
@@ -986,7 +1028,7 @@ export type CreateEnvVarsRequestBody = {
     context_parameter?: string;
   }[];
   /**
-   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
+   * Secret values are only readable by code running on Netlify's systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
    */
   is_secret?: boolean;
 }[];
@@ -1078,7 +1120,7 @@ export type GetSiteEnvVarsResponse = {
     context_parameter?: string;
   }[];
   /**
-   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
+   * Secret values are only readable by code running on Netlify's systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
    */
   is_secret?: boolean;
   /**
@@ -1202,7 +1244,7 @@ export type GetEnvVarResponse = {
     context_parameter?: string;
   }[];
   /**
-   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
+   * Secret values are only readable by code running on Netlify's systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
    */
   is_secret?: boolean;
   /**
@@ -1324,7 +1366,7 @@ export type UpdateEnvVarResponse = {
     context_parameter?: string;
   }[];
   /**
-   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
+   * Secret values are only readable by code running on Netlify's systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
    */
   is_secret?: boolean;
   /**
@@ -1394,7 +1436,7 @@ export type UpdateEnvVarRequestBody = {
     context_parameter?: string;
   }[];
   /**
-   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
+   * Secret values are only readable by code running on Netlify's systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
    */
   is_secret?: boolean;
 };
@@ -1486,7 +1528,7 @@ export type SetEnvVarValueResponse = {
     context_parameter?: string;
   }[];
   /**
-   * Secret values are only readable by code running on Netlify’s systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
+   * Secret values are only readable by code running on Netlify's systems. With secrets, only the local development context values are readable from the UI, API, and CLI. By default, environment variable values are not secret.
    */
   is_secret?: boolean;
   /**
@@ -7557,7 +7599,7 @@ export const operationsByTag = {
     createSiteInTeam,
     listSitesForAccount
   },
-  sniCertificate: { provisionSiteTLSCertificate, showSiteTLSCertificate },
+  sniCertificate: { provisionSiteTLSCertificate, showSiteTLSCertificate, getAllCertificates },
   environmentVariables: {
     getEnvVars,
     createEnvVars,
