@@ -27,6 +27,7 @@
   "scripts": {
     "tsc": "tsc --noEmit",
     "build": "rimraf dist && tsup",
+    "pregenerate": "pnpm dlx postman-to-openapi ./specs/meeting.json > ./specs/meeting.yml",
     "generate": "openapi-codegen meeting"
   },
   "repository": {
@@ -34,9 +35,8 @@
     "url": "git+https://github.com/SferaDev/openapi-clients.git"
   },
   "devDependencies": {
-    "openapi3-ts": "^4.4.0"
-  },
-  "dependencies": {
-    "case": "^1.6.3"
+    "case": "^1.6.3",
+    "openapi3-ts": "^4.4.0",
+    "postman-to-openapi": "^3.0.1"
   }
 }

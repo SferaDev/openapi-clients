@@ -2016,7 +2016,7 @@ paths:
 
             The default value is `false`. If you set it to `true`, you can use
             the `trash_type` property to indicate the type of Cloud recording
-            that you need to retrieve.
+            that you need to retrieve. 
           example: 'false'
         - name: from
           in: query
@@ -2042,7 +2042,7 @@ paths:
           in: query
           schema:
             type: string
-          description: "The end date in 'yyyy-mm-dd' 'yyyy-mm-dd' UTC format. "
+          description: 'The end date in ''yyyy-mm-dd'' ''yyyy-mm-dd'' UTC format. '
           example: <date>
         - name: trash_type
           in: query
@@ -2052,7 +2052,7 @@ paths:
             The type of cloud recording to retrieve from the trash. 
              
              *   `meeting_recordings`: List all meeting recordings from the trash.  
-             *  `recording_file`: List all individual recording files from the trash.
+             *  `recording_file`: List all individual recording files from the trash. 
           example: meeting_recordings
         - name: meeting_id
           in: query
@@ -4176,7 +4176,7 @@ paths:
             If a UUID starts with &quot;/&quot; or contains &quot;//&quot;
             (example: &quot;/ajXp112QmuoKj4854875==&quot;), you must **[double
             encode](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis/#meeting-id-and-uuid)**
-            the UUID before making an API request.
+            the UUID before making an API request. 
           example: <string>
       responses:
         '200':
@@ -4286,7 +4286,7 @@ paths:
             If a UUID starts with &quot;/&quot; or contains &quot;//&quot;
             (example: &quot;/ajXp112QmuoKj4854875==&quot;), you must **[double
             encode](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis/#meeting-id-and-uuid)**
-            the UUID before making an API request.
+            the UUID before making an API request. 
           example: <string>
       responses:
         '200':
@@ -4375,7 +4375,7 @@ paths:
             If a UUID starts with &quot;/&quot; or contains &quot;//&quot;
             (example: &quot;/ajXp112QmuoKj4854875==&quot;), you must **[double
             encode](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis/#meeting-id-and-uuid)**
-            the UUID before making an API request.
+            the UUID before making an API request. 
           example: <string>
       responses:
         '200':
@@ -4488,7 +4488,7 @@ paths:
             If a UUID starts with &quot;/&quot; or contains &quot;//&quot;
             (example: &quot;/ajXp112QmuoKj4854875==&quot;), you must **[double
             encode](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis/#meeting-id-and-uuid)**
-            the UUID before making an API request.
+            the UUID before making an API request. 
           example: <string>
       responses:
         '204':
@@ -4857,7 +4857,7 @@ paths:
 
             If a UUID starts with &quot;/&quot; or contains &quot;//&quot;
             (example: &quot;/ajXp112QmuoKj4854875==&quot;), you must **double
-            encode** the UUID before making an API request.
+            encode** the UUID before making an API request. 
           example: <string>
       responses:
         '200':
@@ -4948,7 +4948,7 @@ paths:
 
             If a UUID starts with &quot;/&quot; or contains &quot;//&quot;
             (example: &quot;/ajXp112QmuoKj4854875==&quot;), you must **double
-            encode** the UUID before making an API request.
+            encode** the UUID before making an API request. 
           example: <string>
       responses:
         '204':
@@ -5017,7 +5017,7 @@ paths:
             If a UUID starts with &quot;/&quot; or contains &quot;//&quot;
             (example: &quot;/ajXp112QmuoKj4854875==&quot;), you must **[double
             encode](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis/#meeting-id-and-uuid)**
-            the UUID before making an API request.
+            the UUID before making an API request. 
           example: <string>
         - name: recordingId
           in: path
@@ -5102,7 +5102,7 @@ paths:
             If a UUID starts with &quot;/&quot; or contains &quot;//&quot;
             (example: &quot;/ajXp112QmuoKj4854875==&quot;), you must **[double
             encode](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis/#meeting-id-and-uuid)**
-            the UUID before making an API request.
+            the UUID before making an API request. 
           example: <string>
         - name: recordingId
           in: path
@@ -5203,7 +5203,7 @@ paths:
             If a UUID starts with `/` or contains `//` (example:
             `/ajXp112QmuoKj4854875==`), **[double
             encode](/docs/api-reference/using-zoom-apis/#meeting-id-and-uuid)
-            the UUID** before making an API request.
+            the UUID** before making an API request. 
           example: <string>
       responses:
         '200':
@@ -5345,7 +5345,7 @@ paths:
             If a UUID starts with &quot;/&quot; or contains &quot;//&quot;
             (example: &quot;/ajXp112QmuoKj4854875==&quot;), you must **[double
             encode](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis/#meeting-id-and-uuid)**
-            the UUID before making an API request.
+            the UUID before making an API request. 
           example: <string>
       responses:
         '200':
@@ -8294,7 +8294,7 @@ paths:
           description: >-
             Set this field's value to `true` to view meeting details of all
             previous occurrences of a [recurring
-            meeting](https://support.zoom.us/hc/en-us/articles/214973206-Scheduling-Recurring-Meetings).
+            meeting](https://support.zoom.us/hc/en-us/articles/214973206-Scheduling-Recurring-Meetings). 
           example: <boolean>
         - name: meetingId
           in: path
@@ -14797,7 +14797,7 @@ paths:
     get:
       tags:
         - webinars > {webinarId} > polls
-      summary: "List a webinar's polls "
+      summary: 'List a webinar''s polls '
       description: >-
         List all the
         [polls](https://support.zoom.us/hc/en-us/articles/203749865-Polling-for-Webinars)
@@ -17120,3 +17120,4 @@ paths:
               schema:
                 type: string
               example: ''
+
