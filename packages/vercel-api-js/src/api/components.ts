@@ -3106,6 +3106,48 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               };
             }
           | Record<string, any>[];
+        microfrontends?:
+          | {
+              /**
+               * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+               */
+              isDefaultApp?: boolean;
+              /**
+               * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+               */
+              defaultRoute?: string;
+              /**
+               * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+               */
+              groupIds: string[];
+            }
+          | {
+              /**
+               * A map of the other applications that are part of this group. Only defined on the default application. The field is set after deployments have been created, so can be undefined, but should be there for a successful deployment.
+               */
+              applications?: {
+                [key: string]: {
+                  /**
+                   * This is the production alias, it will always show the most up to date of each application.
+                   */
+                  productionHost: string;
+                  /**
+                   * Use the fixed deploymentAlias and deploymentHost so that the microfrontend preview stays in sync with the deployment. These are only present for mono-repos when a single commit creates multiple deployments. If they are not present, productionHost will be used.
+                   */
+                  deploymentAlias?: string;
+                  deploymentHost?: string;
+                };
+              };
+              isDefaultApp: boolean;
+              /**
+               * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+               */
+              defaultRoute?: string;
+              /**
+               * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+               */
+              groupIds: string[];
+            };
       }
     | {
         alias?: string[];
@@ -3580,6 +3622,48 @@ export type CreateDeploymentResponse = {
   };
   projectId: string;
   ownerId: string;
+  microfrontends?:
+    | {
+        /**
+         * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+         */
+        isDefaultApp?: boolean;
+        /**
+         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+         */
+        defaultRoute?: string;
+        /**
+         * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+         */
+        groupIds: string[];
+      }
+    | {
+        /**
+         * A map of the other applications that are part of this group. Only defined on the default application. The field is set after deployments have been created, so can be undefined, but should be there for a successful deployment.
+         */
+        applications?: {
+          [key: string]: {
+            /**
+             * This is the production alias, it will always show the most up to date of each application.
+             */
+            productionHost: string;
+            /**
+             * Use the fixed deploymentAlias and deploymentHost so that the microfrontend preview stays in sync with the deployment. These are only present for mono-repos when a single commit creates multiple deployments. If they are not present, productionHost will be used.
+             */
+            deploymentAlias?: string;
+            deploymentHost?: string;
+          };
+        };
+        isDefaultApp: boolean;
+        /**
+         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+         */
+        defaultRoute?: string;
+        /**
+         * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+         */
+        groupIds: string[];
+      };
   monorepoManager?: string | null;
   functions?: {
     [key: string]: {
@@ -4438,6 +4522,48 @@ export type CancelDeploymentResponse = {
         };
       }
     | Record<string, any>[];
+  microfrontends?:
+    | {
+        /**
+         * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+         */
+        isDefaultApp?: boolean;
+        /**
+         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+         */
+        defaultRoute?: string;
+        /**
+         * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+         */
+        groupIds: string[];
+      }
+    | {
+        /**
+         * A map of the other applications that are part of this group. Only defined on the default application. The field is set after deployments have been created, so can be undefined, but should be there for a successful deployment.
+         */
+        applications?: {
+          [key: string]: {
+            /**
+             * This is the production alias, it will always show the most up to date of each application.
+             */
+            productionHost: string;
+            /**
+             * Use the fixed deploymentAlias and deploymentHost so that the microfrontend preview stays in sync with the deployment. These are only present for mono-repos when a single commit creates multiple deployments. If they are not present, productionHost will be used.
+             */
+            deploymentAlias?: string;
+            deploymentHost?: string;
+          };
+        };
+        isDefaultApp: boolean;
+        /**
+         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+         */
+        defaultRoute?: string;
+        /**
+         * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+         */
+        groupIds: string[];
+      };
 };
 
 export type CancelDeploymentVariables = {
