@@ -1,0 +1,42 @@
+{
+  "name": "zoom-api-js",
+  "version": "0.0.1",
+  "description": "Zoom API client for Node.js",
+  "author": "SferaDev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SferaDev/openapi-clients/issues"
+  },
+  "homepage": "https://github.com/SferaDev/openapi-clients#readme",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "typings": "dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      }
+    }
+  },
+  "scripts": {
+    "tsc": "tsc --noEmit",
+    "build": "rimraf dist && tsup",
+    "pregenerate": "pnpm dlx postman-to-openapi ./specs/meeting.json > ./specs/meeting.yml",
+    "generate": "openapi-codegen meeting"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SferaDev/openapi-clients.git"
+  },
+  "devDependencies": {
+    "case": "^1.6.3",
+    "openapi3-ts": "^4.4.0",
+    "postman-to-openapi": "^3.0.1"
+  }
+}
