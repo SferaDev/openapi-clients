@@ -384,6 +384,14 @@ export type AuthUser = {
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
     cronJobsPerProject?: number;
+    /**
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+     */
+    microfrontendGroupsPerTeam?: number;
+    /**
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+     */
+    microfrontendProjectsPerGroup?: number;
   };
   /**
    * Prefix that will be used in the URL of "Preview" deployments created by the User account.

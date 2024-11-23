@@ -2946,7 +2946,15 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         readySubstate?: 'STAGED' | 'PROMOTED';
         regions: string[];
         softDeletedByRetention?: boolean;
-        source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy';
+        source?:
+          | 'api-trigger-git-deploy'
+          | 'cli'
+          | 'clone/repo'
+          | 'git'
+          | 'import'
+          | 'import/repo'
+          | 'redeploy'
+          | 'v0-web';
         target?: 'staging' | 'production' | null;
         undeletedAt?: number;
         url: string;
@@ -3310,7 +3318,15 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         readySubstate?: 'STAGED' | 'PROMOTED';
         regions: string[];
         softDeletedByRetention?: boolean;
-        source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy';
+        source?:
+          | 'api-trigger-git-deploy'
+          | 'cli'
+          | 'clone/repo'
+          | 'git'
+          | 'import'
+          | 'import/repo'
+          | 'redeploy'
+          | 'v0-web';
         target?: 'staging' | 'production' | null;
         undeletedAt?: number;
         url: string;
@@ -3571,7 +3587,7 @@ export type CreateDeploymentResponse = {
     framework?: string | null;
   };
   readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
-  source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy';
+  source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy' | 'v0-web';
   target?: 'production' | 'staging' | null;
   /**
    * Since November 2023 this field defines a set of regions that we will deploy the lambda to passively Lambdas will be deployed to these regions but only invoked if all of the primary `regions` are marked as out of service
@@ -4361,7 +4377,7 @@ export type CancelDeploymentResponse = {
   readySubstate?: 'PROMOTED' | 'STAGED';
   regions: string[];
   softDeletedByRetention?: boolean;
-  source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy';
+  source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy' | 'v0-web';
   target?: 'production' | 'staging' | null;
   type: 'LAMBDAS';
   undeletedAt?: number;
@@ -19811,7 +19827,7 @@ export type GetDeploymentsResponse = {
      *
      * @example cli
      */
-    source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy';
+    source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy' | 'v0-web';
     /**
      * In which state is the deployment.
      *
