@@ -292,6 +292,7 @@ export type AuthUser = {
       | 'functionInvocation'
       | 'logDrainsVolume'
       | 'monitoringMetric'
+      | 'observabilityEvent'
       | 'postgresComputeTime'
       | 'postgresDataStorage'
       | 'postgresDataTransfer'
