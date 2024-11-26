@@ -1,5 +1,16 @@
 # vercel-api-js
 
+## 0.16.0
+
+### Minor Changes
+
+- bfcf8aa: Add support for microfrontends in the 'getDeployment' and 'createDeployment' endpoints
+- 1e5d876: Add observabilityConfiguration and observabilityData to various project endpoints
+
+### Patch Changes
+
+- 445b9fc: Add new 'v0-web' option to source field in deployment API
+
 ## 0.15.0
 
 ### Minor Changes
