@@ -1,6 +1,6 @@
 {
   "name": "zoom-api-js",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Zoom API client for Node.js",
   "author": "SferaDev",
   "license": "ISC",

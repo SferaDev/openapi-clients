@@ -1,5 +1,11 @@
 # netlify-api
 
+## 0.7.0
+
+### Minor Changes
+
+- a64ae61: Add getAllCertificates endpoint to fetch SSL certificates for a site
+
 ## 0.6.1
 
 ### Patch Changes
