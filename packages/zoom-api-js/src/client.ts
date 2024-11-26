@@ -25,6 +25,31 @@ export class ZoomApi {
     if (!this.#fetch) throw new Error('Fetch is required');
   }
 
+  get auth() {
+    return {
+      refreshToken: async ({
+        refreshToken,
+        clientId,
+        clientSecret
+      }: RefreshTokenOptions): Promise<RefreshTokenResult> => {
+        const result: RefreshTokenResult = await zoomFetch({
+          url: "https://zoom.us/oauth/token",
+          method: "POST",
+          token: null,
+          fetchImpl: this.#fetch,
+          body: new URLSearchParams({
+            grant_type: "refresh_token",
+            refresh_token: refreshToken,
+            client_id: clientId,
+            client_secret: clientSecret,
+          }),
+        });
+
+        return result
+      }
+    };
+  }
+
   public async request<Endpoint extends keyof typeof meetingOperationsByPath>(
     endpoint: Endpoint,
     params: MeetingRequestEndpointParams<Endpoint>
@@ -35,4 +60,16 @@ export class ZoomApi {
     const result = await zoomFetch({ ...extraParams, method, url, token: this.#token, fetchImpl: this.#fetch });
     return result as MeetingRequestEndpointResult<Endpoint>;
   }
+}
+
+type RefreshTokenOptions = {
+  refreshToken: string;
+  clientId: string;
+  clientSecret: string;
+};
+
+type RefreshTokenResult = {
+  access_token: string;
+  expires_in: string;
+  refresh_token: string;
 }
