@@ -1,5 +1,11 @@
 # zoom-api-js
 
+## 0.1.3
+
+### Patch Changes
+
+- c62c402: Update spec
+
 ## 0.1.2
 
 ### Patch Changes
