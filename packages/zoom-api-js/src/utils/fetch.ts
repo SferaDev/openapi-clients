@@ -1,5 +1,5 @@
 export type RequestInit = {
-  body?: string | FormData | undefined;
+  body?: string | FormData | URLSearchParams | undefined;
   headers?: Record<string, string> | undefined;
   method?: string | undefined;
   signal?: any | undefined;
@@ -12,10 +12,10 @@ export type Response = {
   json(): Promise<any>;
   text(): Promise<string>;
   headers?:
-    | {
-        get(name: string): string | null;
-      }
-    | undefined;
+  | {
+    get(name: string): string | null;
+  }
+  | undefined;
 };
 
 // Typed only the subset of the spec we actually use (to be able to build a simple mock)
