@@ -9,15 +9,15 @@ import Case from "case";
 export default defineConfig({
   meeting: {
     from: {
-      source: 'file',
-      relativePath: "specs/meeting.yml"
+      source: 'url',
+      url: "https://developers.zoom.us/api-hub/meetings/methods/endpoints.json"
     },
     outputDir: 'src/meeting',
     to: async (context) => {
       const filenamePrefix = '';
 
-      // Add missing operation ids
-      context.openAPIDocument = addOperationIds({ openAPIDocument: context.openAPIDocument });
+      // Add missing operation ids and clean them
+      context.openAPIDocument = cleanOperationIds({ openAPIDocument: context.openAPIDocument });
 
       const { schemasFiles } = await generateSchemaTypes(context, { filenamePrefix });
       await generateFetchers(context, { filenamePrefix, schemasFiles });
@@ -26,7 +26,7 @@ export default defineConfig({
   }
 });
 
-function addOperationIds({
+function cleanOperationIds({
   openAPIDocument,
 }: {
   openAPIDocument: Context['openAPIDocument'];
@@ -34,9 +34,10 @@ function addOperationIds({
   for (const [key, path] of Object.entries(openAPIDocument.paths as Record<string, PathItemObject>)) {
     for (const method of ["get", "put", "post", "patch", "delete"] as const) {
       if (path[method]) {
+        const operationId = path[method].operationId ?? `${method} ${key}`;
         openAPIDocument.paths[key][method] = {
           ...openAPIDocument.paths[key][method],
-          operationId: Case.camel(`${method} ${key}`)
+          operationId: Case.camel(operationId)
         }
       }
     }
