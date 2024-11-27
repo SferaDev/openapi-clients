@@ -32,20 +32,27 @@ export class ZoomApi {
         clientId,
         clientSecret
       }: RefreshTokenOptions): Promise<RefreshTokenResult> => {
-        const result: RefreshTokenResult = await zoomFetch({
-          url: "https://zoom.us/oauth/token",
+        const response = await this.#fetch("https://zoom.us/oauth/token", {
           method: "POST",
-          token: null,
-          fetchImpl: this.#fetch,
           body: new URLSearchParams({
             grant_type: "refresh_token",
             refresh_token: refreshToken,
             client_id: clientId,
-            client_secret: clientSecret,
-          }),
+            client_secret: clientSecret
+          })
         });
 
-        return result
+        if (!response.ok) {
+          throw new Error("Failed to refresh Zoom token");
+        }
+
+        const result = await response.json();
+
+        return {
+          access_token: result.access_token,
+          expires_in: result.expires_in,
+          refresh_token: result.refresh_token
+        }
       }
     };
   }
@@ -70,6 +77,6 @@ type RefreshTokenOptions = {
 
 type RefreshTokenResult = {
   access_token: string;
-  expires_in: string;
+  expires_in: number;
   refresh_token: string;
 }
