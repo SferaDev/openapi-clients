@@ -27,7 +27,6 @@
   "scripts": {
     "tsc": "tsc --noEmit",
     "build": "rimraf dist && tsup",
-    "pregenerate": "pnpm dlx postman-to-openapi ./specs/meeting.json > ./specs/meeting.yml",
     "generate": "openapi-codegen meeting"
   },
   "repository": {
@@ -36,7 +35,6 @@
   },
   "devDependencies": {
     "case": "^1.6.3",
-    "openapi3-ts": "^4.4.0",
-    "postman-to-openapi": "^3.0.1"
+    "openapi3-ts": "^4.4.0"
   }
 }
