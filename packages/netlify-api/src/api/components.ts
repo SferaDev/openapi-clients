@@ -5559,6 +5559,10 @@ export const listAccountTypesForUser = (variables: ListAccountTypesForUserVariab
     signal
   });
 
+export type ListAccountsForUserQueryParams = {
+  minimal?: boolean;
+};
+
 export type ListAccountsForUserError = Fetcher.ErrorWrapper<{
   status: Exclude<ClientErrorStatus | ServerErrorStatus, 200>;
   payload: {
@@ -5604,10 +5608,12 @@ export type ListAccountsForUserResponse = {
   updated_at?: string;
 }[];
 
-export type ListAccountsForUserVariables = FetcherExtraProps;
+export type ListAccountsForUserVariables = {
+  queryParams?: ListAccountsForUserQueryParams;
+} & FetcherExtraProps;
 
 export const listAccountsForUser = (variables: ListAccountsForUserVariables, signal?: AbortSignal) =>
-  fetch<ListAccountsForUserResponse, ListAccountsForUserError, undefined, {}, {}, {}>({
+  fetch<ListAccountsForUserResponse, ListAccountsForUserError, undefined, {}, ListAccountsForUserQueryParams, {}>({
     url: '/accounts',
     method: 'get',
     ...variables,
