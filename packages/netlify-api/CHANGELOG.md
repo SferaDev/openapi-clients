@@ -1,5 +1,15 @@
 # netlify-api
 
+## 0.8.0
+
+### Minor Changes
+
+- f22345e: Bump version to 2.35.0
+
+### Patch Changes
+
+- 4e146a9: Add query parameters support to listAccountsForUser endpoint
+
 ## 0.7.0
 
 ### Minor Changes
