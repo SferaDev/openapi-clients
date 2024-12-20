@@ -3,6 +3,8 @@ import { Context } from '@openapi-codegen/cli/lib/types';
 import { generateFetchers, generateSchemaTypes } from '@openapi-codegen/typescript';
 import { Project, VariableDeclarationKind } from 'ts-morph';
 import ts from 'typescript';
+import { PathItemObject } from "openapi3-ts/oas30";
+import Case from "case";
 
 export default defineConfig({
   vercel: {
@@ -13,6 +15,9 @@ export default defineConfig({
     outputDir: 'src/api',
     to: async (context) => {
       const filenamePrefix = '';
+
+      // Add missing operation ids and clean them
+      context.openAPIDocument = cleanOperationIds({ openAPIDocument: context.openAPIDocument });
 
       // Rename invalid component name for searchRepo
       context.openAPIDocument = updateMethod({
@@ -119,4 +124,25 @@ function buildExtraFile(context: Context) {
   });
 
   return sourceFile.getFullText();
+}
+
+function cleanOperationIds({
+  openAPIDocument,
+}: {
+  openAPIDocument: Context['openAPIDocument'];
+}) {
+  for (const [key, path] of Object.entries(openAPIDocument.paths as Record<string, PathItemObject>)) {
+    for (const method of ["get", "put", "post", "patch", "delete"] as const) {
+      if (path[method]) {
+        const operationId = path[method].operationId ?? `${method} ${key}`;
+        openAPIDocument.paths[key][method] = {
+          ...openAPIDocument.paths[key][method],
+          operationId: Case.camel(operationId)
+        }
+      }
+    }
+
+  }
+
+  return openAPIDocument;
 }
