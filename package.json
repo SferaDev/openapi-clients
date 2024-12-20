@@ -8,14 +8,16 @@
     "tsc": "turbo run tsc"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.27.10",
+    "@changesets/cli": "^2.27.11",
     "@openapi-codegen/cli": "^2.0.2",
     "@openapi-codegen/typescript": "^8.0.2",
     "@types/isomorphic-fetch": "^0.0.39",
     "@types/node": "^22.10.2",
     "builtin-modules": "^4.0.0",
+    "case": "^1.6.3",
     "isomorphic-fetch": "^3.0.0",
-    "openai": "^4.76.3",
+    "openai": "^4.77.0",
+    "openapi3-ts": "^4.4.0",
     "rimraf": "^6.0.1",
     "ts-morph": "^24.0.0",
     "ts-node": "^10.9.2",
@@ -24,7 +26,8 @@
     "tsx": "^4.19.2",
     "turbo": "^2.3.3",
     "typescript": "^5.7.2",
+    "unbuild": "^3.0.1",
     "vitest": "^2.1.8"
   },
-  "packageManager": "pnpm@9.13.2"
+  "packageManager": "pnpm@9.15.1"
 }

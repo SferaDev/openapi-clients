@@ -1668,6 +1668,51 @@ export const rerequestCheck = (variables: RerequestCheckVariables, signal?: Abor
     signal
   });
 
+export type DeleteDataCachePurgeAllQueryParams = {
+  projectIdOrName: string;
+};
+
+export type DeleteDataCachePurgeAllError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteDataCachePurgeAllVariables = {
+  queryParams: DeleteDataCachePurgeAllQueryParams;
+} & FetcherExtraProps;
+
+export const deleteDataCachePurgeAll = (variables: DeleteDataCachePurgeAllVariables, signal?: AbortSignal) =>
+  fetch<undefined, DeleteDataCachePurgeAllError, undefined, {}, DeleteDataCachePurgeAllQueryParams, {}>({
+    url: '/data-cache/purge-all',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type PatchDataCacheBillingSettingsError = Fetcher.ErrorWrapper<undefined>;
+
+export type PatchDataCacheBillingSettingsResponse = {
+  excessBillingEnabled?: boolean;
+};
+
+export type PatchDataCacheBillingSettingsRequestBody = {
+  excessBillingEnabled?: boolean;
+};
+
+export type PatchDataCacheBillingSettingsVariables = {
+  body?: PatchDataCacheBillingSettingsRequestBody;
+} & FetcherExtraProps;
+
+export const patchDataCacheBillingSettings = (
+  variables: PatchDataCacheBillingSettingsVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    PatchDataCacheBillingSettingsResponse,
+    PatchDataCacheBillingSettingsError,
+    PatchDataCacheBillingSettingsRequestBody,
+    {},
+    {},
+    {}
+  >({ url: '/data-cache/billing-settings', method: 'patch', ...variables, signal });
+
 export type UpdateProjectDataCachePathParams = {
   /**
    * The unique project identifier
@@ -2458,6 +2503,7 @@ export type UpdateProjectDataCacheResponse = {
           | 'environment'
           | 'header'
           | 'host'
+          | 'initial_request_path'
           | 'ip_address'
           | 'method'
           | 'path'
@@ -2488,6 +2534,7 @@ export type UpdateProjectDataCacheResponse = {
           | 'environment'
           | 'header'
           | 'host'
+          | 'initial_request_path'
           | 'ip_address'
           | 'method'
           | 'path'
@@ -2788,6 +2835,47 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
           skippedAt?: number;
           skippedBy?: string;
         };
+        images?: {
+          sizes?: number[];
+          domains?: string[];
+          remotePatterns?: {
+            /**
+             * Must be `http` or `https`.
+             */
+            protocol?: 'http' | 'https';
+            /**
+             * Can be literal or wildcard. Single `*` matches a single subdomain. Double `**` matches any number of subdomains.
+             */
+            hostname: string;
+            /**
+             * Can be literal port such as `8080` or empty string meaning no port.
+             */
+            port?: string;
+            /**
+             * Can be literal or wildcard. Single `*` matches a single path segment. Double `**` matches any number of path segments.
+             */
+            pathname?: string;
+            /**
+             * Can be literal query string such as `?v=1` or empty string meaning no query string.
+             */
+            search?: string;
+          }[];
+          localPatterns?: {
+            /**
+             * Can be literal or wildcard. Single `*` matches a single path segment. Double `**` matches any number of path segments.
+             */
+            pathname?: string;
+            /**
+             * Can be literal query string such as `?v=1` or empty string meaning no query string.
+             */
+            search?: string;
+          }[];
+          minimumCacheTTL?: number;
+          formats?: ('image/avif' | 'image/webp')[];
+          dangerouslyAllowSVG?: boolean;
+          contentSecurityPolicy?: string;
+          contentDispositionType?: 'inline' | 'attachment';
+        };
         alias?: string[];
         aliasAssigned: boolean;
         bootedAt: number;
@@ -2854,7 +2942,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
         deletedAt?: number | null;
         /**
-         * Computed field that is only available for deployments with a micro-frontend configuration.
+         * Computed field that is only available for deployments with a microfrontend configuration.
          */
         defaultRoute?: string;
         canceledAt?: number;
@@ -2937,6 +3025,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         meta: {
           [key: string]: string;
         };
+        originCacheRegion?: string;
         project?: {
           id: string;
           name: string;
@@ -3226,7 +3315,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
         deletedAt?: number | null;
         /**
-         * Computed field that is only available for deployments with a micro-frontend configuration.
+         * Computed field that is only available for deployments with a microfrontend configuration.
          */
         defaultRoute?: string;
         canceledAt?: number;
@@ -3309,6 +3398,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         meta: {
           [key: string]: string;
         };
+        originCacheRegion?: string;
         project?: {
           id: string;
           name: string;
@@ -3462,6 +3552,47 @@ export type CreateDeploymentResponse = {
     skippedAt?: number;
     skippedBy?: string;
   };
+  images?: {
+    sizes?: number[];
+    domains?: string[];
+    remotePatterns?: {
+      /**
+       * Must be `http` or `https`.
+       */
+      protocol?: 'http' | 'https';
+      /**
+       * Can be literal or wildcard. Single `*` matches a single subdomain. Double `**` matches any number of subdomains.
+       */
+      hostname: string;
+      /**
+       * Can be literal port such as `8080` or empty string meaning no port.
+       */
+      port?: string;
+      /**
+       * Can be literal or wildcard. Single `*` matches a single path segment. Double `**` matches any number of path segments.
+       */
+      pathname?: string;
+      /**
+       * Can be literal query string such as `?v=1` or empty string meaning no query string.
+       */
+      search?: string;
+    }[];
+    localPatterns?: {
+      /**
+       * Can be literal or wildcard. Single `*` matches a single path segment. Double `**` matches any number of path segments.
+       */
+      pathname?: string;
+      /**
+       * Can be literal query string such as `?v=1` or empty string meaning no query string.
+       */
+      search?: string;
+    }[];
+    minimumCacheTTL?: number;
+    formats?: ('image/avif' | 'image/webp')[];
+    dangerouslyAllowSVG?: boolean;
+    contentSecurityPolicy?: string;
+    contentDispositionType?: 'attachment' | 'inline';
+  };
   alias?: string[];
   aliasAssigned: boolean;
   bootedAt: number;
@@ -3613,13 +3744,14 @@ export type CreateDeploymentResponse = {
   checksState?: 'completed' | 'registered' | 'running';
   checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
   /**
-   * Computed field that is only available for deployments with a micro-frontend configuration.
+   * Computed field that is only available for deployments with a microfrontend configuration.
    */
   defaultRoute?: string;
   canceledAt?: number;
   errorCode?: string;
   errorLink?: string;
   errorStep?: string;
+  originCacheRegion?: string;
   /**
    * Since June 2023 Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - PROMOTED: has seen production traffic
    */
@@ -4220,6 +4352,47 @@ export type CancelDeploymentResponse = {
     skippedAt?: number;
     skippedBy?: string;
   };
+  images?: {
+    sizes?: number[];
+    domains?: string[];
+    remotePatterns?: {
+      /**
+       * Must be `http` or `https`.
+       */
+      protocol?: 'http' | 'https';
+      /**
+       * Can be literal or wildcard. Single `*` matches a single subdomain. Double `**` matches any number of subdomains.
+       */
+      hostname: string;
+      /**
+       * Can be literal port such as `8080` or empty string meaning no port.
+       */
+      port?: string;
+      /**
+       * Can be literal or wildcard. Single `*` matches a single path segment. Double `**` matches any number of path segments.
+       */
+      pathname?: string;
+      /**
+       * Can be literal query string such as `?v=1` or empty string meaning no query string.
+       */
+      search?: string;
+    }[];
+    localPatterns?: {
+      /**
+       * Can be literal or wildcard. Single `*` matches a single path segment. Double `**` matches any number of path segments.
+       */
+      pathname?: string;
+      /**
+       * Can be literal query string such as `?v=1` or empty string meaning no query string.
+       */
+      search?: string;
+    }[];
+    minimumCacheTTL?: number;
+    formats?: ('image/avif' | 'image/webp')[];
+    dangerouslyAllowSVG?: boolean;
+    contentSecurityPolicy?: string;
+    contentDispositionType?: 'attachment' | 'inline';
+  };
   alias?: string[];
   aliasAssigned: boolean;
   bootedAt: number;
@@ -4283,7 +4456,7 @@ export type CancelDeploymentResponse = {
   createdAt: number;
   deletedAt?: number | null;
   /**
-   * Computed field that is only available for deployments with a micro-frontend configuration.
+   * Computed field that is only available for deployments with a microfrontend configuration.
    */
   defaultRoute?: string;
   canceledAt?: number;
@@ -4367,6 +4540,7 @@ export type CancelDeploymentResponse = {
   meta: {
     [key: string]: string;
   };
+  originCacheRegion?: string;
   project?: {
     id: string;
     name: string;
@@ -6703,7 +6877,7 @@ export type CreateEdgeConfigResponse = {
 
 export type CreateEdgeConfigRequestBody = {
   /**
-   * @maxLength 32
+   * @maxLength 64
    * @pattern ^[\\w-]+$
    */
   slug: string;
@@ -6838,7 +7012,7 @@ export type UpdateEdgeConfigResponse = {
 
 export type UpdateEdgeConfigRequestBody = {
   /**
-   * @maxLength 32
+   * @maxLength 64
    * @pattern ^[\\w-]+$
    */
   slug: string;
@@ -7537,6 +7711,587 @@ export const listUserEvents = (variables: ListUserEventsVariables, signal?: Abor
     signal
   });
 
+export type GetAccountInfoPathParams = {
+  integrationConfigurationId: string;
+};
+
+export type GetAccountInfoError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetAccountInfoResponse = {
+  name?: string;
+  url: string;
+  contact: {
+    email: string;
+    name?: string;
+  } | null;
+};
+
+export type GetAccountInfoVariables = {
+  pathParams: GetAccountInfoPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Fetches the best account or user’s contact info
+ */
+export const getAccountInfo = (variables: GetAccountInfoVariables, signal?: AbortSignal) =>
+  fetch<GetAccountInfoResponse, GetAccountInfoError, undefined, {}, {}, GetAccountInfoPathParams>({
+    url: '/v1/installations/{integrationConfigurationId}/account',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type GetMemberPathParams = {
+  integrationConfigurationId: string;
+  memberId: string;
+};
+
+export type GetMemberError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetMemberResponse = {
+  id: string;
+  role: 'ADMIN' | 'USER';
+};
+
+export type GetMemberVariables = {
+  pathParams: GetMemberPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Returns the member role and other information for a given member ID ("user_id" claim in the SSO OIDC token).
+ */
+export const getMember = (variables: GetMemberVariables, signal?: AbortSignal) =>
+  fetch<GetMemberResponse, GetMemberError, undefined, {}, {}, GetMemberPathParams>({
+    url: '/v1/installations/{integrationConfigurationId}/member/{memberId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type CreateEventPathParams = {
+  integrationConfigurationId: string;
+};
+
+export type CreateEventError = Fetcher.ErrorWrapper<undefined>;
+
+export type CreateEventRequestBody = {
+  event:
+    | {
+        type: 'installation.updated';
+        /**
+         * The installation-level billing plan ID
+         */
+        billingPlanId?: string;
+      }
+    | {
+        type: 'resource.updated';
+        /**
+         * Partner-provided product slug or id
+         */
+        productId: string;
+        /**
+         * Partner provided resource ID
+         */
+        resourceId: string;
+      };
+};
+
+export type CreateEventVariables = {
+  body: CreateEventRequestBody;
+  pathParams: CreateEventPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Partner notifies Vercel of any changes made to an Installation or a Resource. Vercel is expected to use `list-resources` and other read APIs to get the new state. <br/> <br/> `resource.updated` event should be dispatched when any state of a resource linked to Vercel is modified by the partner. <br/> <br/> Use cases: <br/> <br/> - The user renames a database in the partner’s application. The partner should dispatch a `resource.updated` event to notify Vercel to update the resource in Vercel’s datastores. <br/>
+ */
+export const createEvent = (variables: CreateEventVariables, signal?: AbortSignal) =>
+  fetch<undefined, CreateEventError, CreateEventRequestBody, {}, {}, CreateEventPathParams>({
+    url: '/v1/installations/{integrationConfigurationId}/events',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type SubmitBillingDataPathParams = {
+  integrationConfigurationId: string;
+};
+
+export type SubmitBillingDataError = Fetcher.ErrorWrapper<undefined>;
+
+export type SubmitBillingDataRequestBody = {
+  /**
+   * @format date-time
+   */
+  timestamp: string;
+  /**
+   * @format date-time
+   */
+  eod: string;
+  /**
+   * Period for the billing cycle.
+   */
+  period: {
+    /**
+     * @format date-time
+     */
+    start: string;
+    /**
+     * @format date-time
+     */
+    end: string;
+  };
+  /**
+   * Billing data (interim invoicing data).
+   */
+  billing:
+    | {
+        /**
+         * Partner's billing plan ID.
+         */
+        billingPlanId: string;
+        /**
+         * Partner's resource ID.
+         */
+        resourceId?: string;
+        /**
+         * Start and end are only needed if different from the period's start/end.
+         *
+         * @format date-time
+         */
+        start?: string;
+        /**
+         * Start and end are only needed if different from the period's start/end.
+         *
+         * @format date-time
+         */
+        end?: string;
+        /**
+         * Line item name.
+         */
+        name: string;
+        /**
+         * Line item details.
+         */
+        details?: string;
+        /**
+         * Price per unit.
+         *
+         * @pattern ^[0-9]+(\\.[0-9]+)?$
+         */
+        price: string;
+        /**
+         * Quantity of units.
+         */
+        quantity: number;
+        /**
+         * Units of the quantity.
+         */
+        units: string;
+        /**
+         * Total amount.
+         *
+         * @pattern ^[0-9]+(\\.[0-9]+)?$
+         */
+        total: string;
+      }[]
+    | {
+        items: {
+          /**
+           * Partner's billing plan ID.
+           */
+          billingPlanId: string;
+          /**
+           * Partner's resource ID.
+           */
+          resourceId?: string;
+          /**
+           * Start and end are only needed if different from the period's start/end.
+           *
+           * @format date-time
+           */
+          start?: string;
+          /**
+           * Start and end are only needed if different from the period's start/end.
+           *
+           * @format date-time
+           */
+          end?: string;
+          /**
+           * Line item name.
+           */
+          name: string;
+          /**
+           * Line item details.
+           */
+          details?: string;
+          /**
+           * Price per unit.
+           *
+           * @pattern ^[0-9]+(\\.[0-9]+)?$
+           */
+          price: string;
+          /**
+           * Quantity of units.
+           */
+          quantity: number;
+          /**
+           * Units of the quantity.
+           */
+          units: string;
+          /**
+           * Total amount.
+           *
+           * @pattern ^[0-9]+(\\.[0-9]+)?$
+           */
+          total: string;
+        }[];
+        discounts?: {
+          /**
+           * Partner's billing plan ID.
+           */
+          billingPlanId: string;
+          /**
+           * Partner's resource ID.
+           */
+          resourceId?: string;
+          /**
+           * Start and end are only needed if different from the period's start/end.
+           *
+           * @format date-time
+           */
+          start?: string;
+          /**
+           * Start and end are only needed if different from the period's start/end.
+           *
+           * @format date-time
+           */
+          end?: string;
+          /**
+           * Discount name.
+           */
+          name: string;
+          /**
+           * Discount details.
+           */
+          details?: string;
+          /**
+           * Discount amount.
+           *
+           * @pattern ^[0-9]+(\\.[0-9]+)?$
+           */
+          amount: string;
+        }[];
+      };
+  usage: {
+    /**
+     * Partner's resource ID.
+     */
+    resourceId: string;
+    /**
+     * Metric name.
+     */
+    name: string;
+    /**
+     * \n              Type of the metric.\n              - total: measured total value, such as Database size\n              - interval: usage during the period, such as i/o or number of queries.\n              - rate: rate of usage, such as queries per second.\n
+     */
+    type: 'interval' | 'rate' | 'total';
+    /**
+     * Metric units. Example: \"GB\"
+     */
+    units: string;
+    /**
+     * Metric value for the day. Could be a final or an interim value for the day.
+     */
+    dayValue: number;
+    /**
+     * Metric value for the billing period. Could be a final or an interim value for the period.
+     */
+    periodValue: number;
+    /**
+     * The limit value of the metric for a billing period, if a limit is defined by the plan.
+     */
+    planValue?: number;
+  }[];
+};
+
+export type SubmitBillingDataVariables = {
+  body: SubmitBillingDataRequestBody;
+  pathParams: SubmitBillingDataPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Sends the billing and usage data. The partner should do this at least once a day and ideally once per hour. <br/> Use the `credentials.access_token` we provided in the [Upsert Installation](#upsert-installation) body to authorize this request.
+ */
+export const submitBillingData = (variables: SubmitBillingDataVariables, signal?: AbortSignal) =>
+  fetch<undefined, SubmitBillingDataError, SubmitBillingDataRequestBody, {}, {}, SubmitBillingDataPathParams>({
+    url: '/v1/installations/{integrationConfigurationId}/billing',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type SubmitInvoicePathParams = {
+  integrationConfigurationId: string;
+};
+
+export type SubmitInvoiceError = Fetcher.ErrorWrapper<undefined>;
+
+export type SubmitInvoiceResponse = {
+  invoiceId?: string;
+  test?: boolean;
+  validationErrors?: string[];
+};
+
+export type SubmitInvoiceRequestBody = {
+  externalId?: string;
+  /**
+   * Invoice date. Must be within the period's start and end.
+   *
+   * @format date-time
+   */
+  invoiceDate: string;
+  /**
+   * Additional memo for the invoice.
+   */
+  memo?: string;
+  /**
+   * Subscription period for this billing cycle.
+   */
+  period: {
+    /**
+     * @format date-time
+     */
+    start: string;
+    /**
+     * @format date-time
+     */
+    end: string;
+  };
+  items: {
+    /**
+     * Partner's resource ID.
+     */
+    resourceId?: string;
+    /**
+     * Partner's billing plan ID.
+     */
+    billingPlanId: string;
+    /**
+     * Start and end are only needed if different from the period's start/end.
+     *
+     * @format date-time
+     */
+    start?: string;
+    /**
+     * Start and end are only needed if different from the period's start/end.
+     *
+     * @format date-time
+     */
+    end?: string;
+    name: string;
+    details?: string;
+    /**
+     * @pattern ^[0-9]+(\\.[0-9]+)?$
+     */
+    price: string;
+    quantity: number;
+    units: string;
+    /**
+     * @pattern ^[0-9]+(\\.[0-9]+)?$
+     */
+    total: string;
+  }[];
+  discounts?: {
+    /**
+     * Partner's resource ID.
+     */
+    resourceId?: string;
+    /**
+     * Partner's billing plan ID.
+     */
+    billingPlanId: string;
+    /**
+     * Start and end are only needed if different from the period's start/end.
+     *
+     * @format date-time
+     */
+    start?: string;
+    /**
+     * Start and end are only needed if different from the period's start/end.
+     *
+     * @format date-time
+     */
+    end?: string;
+    name: string;
+    details?: string;
+    /**
+     * @pattern ^[0-9]+(\\.[0-9]+)?$
+     */
+    amount: string;
+  }[];
+  /**
+   * Test mode
+   */
+  test?: {
+    validate?: boolean;
+    result?: 'notpaid' | 'paid';
+  };
+};
+
+export type SubmitInvoiceVariables = {
+  body: SubmitInvoiceRequestBody;
+  pathParams: SubmitInvoicePathParams;
+} & FetcherExtraProps;
+
+/**
+ * This endpoint allows the partner to submit an invoice to Vercel. The invoice is created in Vercel's billing system and sent to the customer. Depending on the type of billing plan, the invoice can be sent at a time of signup, at the start of the billing period, or at the end of the billing period.<br/> <br/> Use the `credentials.access_token` we provided in the [Upsert Installation](#upsert-installation) body to authorize this request. <br/> There are several limitations to the invoice submission:<br/> <br/> 1. A resource can only be billed once per the billing period and the billing plan.<br/> 2. The billing plan used to bill the resource must have been active for this resource during the billing period.<br/> 3. The billing plan used must be a subscription plan.<br/> 4. The interim usage data must be sent hourly for all types of subscriptions. See [Send subscription billing and usage data](#send-subscription-billing-and-usage-data) API on how to send interim billing and usage data.<br/>
+ */
+export const submitInvoice = (variables: SubmitInvoiceVariables, signal?: AbortSignal) =>
+  fetch<SubmitInvoiceResponse, SubmitInvoiceError, SubmitInvoiceRequestBody, {}, {}, SubmitInvoicePathParams>({
+    url: '/v1/installations/{integrationConfigurationId}/billing/invoices',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type GetInvoicePathParams = {
+  integrationConfigurationId: string;
+  invoiceId: string;
+};
+
+export type GetInvoiceError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetInvoiceResponse = {
+  invoiceId: string;
+  externalId?: string;
+  invoiceNumber?: string;
+  invoiceDate: string;
+  period: {
+    start: string;
+    end: string;
+  };
+  memo?: string;
+  items: {
+    billingPlanId: string;
+    resourceId?: string;
+    start?: string;
+    end?: string;
+    name: string;
+    details?: string;
+    price: string;
+    quantity: number;
+    units: string;
+    total: string;
+  }[];
+  discounts?: {
+    billingPlanId: string;
+    resourceId?: string;
+    start?: string;
+    end?: string;
+    name: string;
+    details?: string;
+    amount: string;
+  }[];
+  total: string;
+  created: string;
+  updated: string;
+  state: 'invoiced' | 'notpaid' | 'paid' | 'pending' | 'refund_requested' | 'refunded' | 'scheduled';
+  refundReason?: string;
+  refundTotal?: string;
+  test: boolean;
+};
+
+export type GetInvoiceVariables = {
+  pathParams: GetInvoicePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Get Invoice details and status for a given invoice ID.<br/> <br/> See Billing Events with Webhooks documentation on how to receive invoice events. This endpoint is used to retrieve the invoice details.
+ */
+export const getInvoice = (variables: GetInvoiceVariables, signal?: AbortSignal) =>
+  fetch<GetInvoiceResponse, GetInvoiceError, undefined, {}, {}, GetInvoicePathParams>({
+    url: '/v1/installations/{integrationConfigurationId}/billing/invoices/{invoiceId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type UpdateInvoicePathParams = {
+  integrationConfigurationId: string;
+  invoiceId: string;
+};
+
+export type UpdateInvoiceError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateInvoiceRequestBody = {
+  action: 'refund';
+  /**
+   * Refund reason.
+   */
+  reason: string;
+  /**
+   * The total amount to be refunded. Must be less than or equal to the total amount of the invoice.
+   *
+   * @pattern ^[0-9]+(\\.[0-9]+)?$
+   */
+  total: string;
+};
+
+export type UpdateInvoiceVariables = {
+  body: UpdateInvoiceRequestBody;
+  pathParams: UpdateInvoicePathParams;
+} & FetcherExtraProps;
+
+/**
+ * This endpoint allows the partner to request a refund for an invoice to Vercel. The invoice is created using the [Submit Invoice API](#submit-invoice-api).
+ */
+export const updateInvoice = (variables: UpdateInvoiceVariables, signal?: AbortSignal) =>
+  fetch<undefined, UpdateInvoiceError, UpdateInvoiceRequestBody, {}, {}, UpdateInvoicePathParams>({
+    url: '/v1/installations/{integrationConfigurationId}/billing/invoices/{invoiceId}/actions',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type UpdateResourceSecretsPathParams = {
+  integrationConfigurationId: string;
+  integrationProductIdOrSlug: string;
+  resourceId: string;
+};
+
+export type UpdateResourceSecretsError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateResourceSecretsRequestBody = {
+  secrets: {
+    name: string;
+    value: string;
+    prefix?: string;
+  }[];
+};
+
+export type UpdateResourceSecretsVariables = {
+  body: UpdateResourceSecretsRequestBody;
+  pathParams: UpdateResourceSecretsPathParams;
+} & FetcherExtraProps;
+
+/**
+ * This endpoint updates the secrets of a resource. If a resource has projects connected, the connected secrets are updated with the new secrets. The old secrets may still be used by existing connected projects because they are not automatically redeployed. Redeployment is a manual action and must be completed by the user. All new project connections will use the new secrets.<br/> <br/> Use cases for this endpoint:<br/> <br/> - Resetting the credentials of a database in the partner. If the user requests the credentials to be updated in the partner’s application, the partner post the new set of secrets to Vercel, the user should redeploy their application and the expire the old credentials.<br/>
+ */
+export const updateResourceSecrets = (variables: UpdateResourceSecretsVariables, signal?: AbortSignal) =>
+  fetch<
+    undefined,
+    UpdateResourceSecretsError,
+    UpdateResourceSecretsRequestBody,
+    {},
+    {},
+    UpdateResourceSecretsPathParams
+  >({
+    url: '/v1/installations/{integrationConfigurationId}/products/{integrationProductIdOrSlug}/resources/{resourceId}/secrets',
+    method: 'put',
+    ...variables,
+    signal
+  });
+
 export type GetConfigurationsQueryParams = {
   view: 'account' | 'project';
   installationType?: 'marketplace' | 'external';
@@ -8158,6 +8913,52 @@ export const deleteConfiguration = (variables: DeleteConfigurationVariables, sig
     DeleteConfigurationQueryParams,
     DeleteConfigurationPathParams
   >({ url: '/v1/integrations/configuration/{id}', method: 'delete', ...variables, signal });
+
+export type ExchangeSsoTokenError = Fetcher.ErrorWrapper<undefined>;
+
+export type ExchangeSsoTokenResponse = {
+  id_token: string;
+  access_token: void | null;
+  token_type: void | null;
+};
+
+export type ExchangeSsoTokenRequestBody = {
+  /**
+   * The sensitive code received from Vercel
+   */
+  code: string;
+  /**
+   * The state received from the initialization request
+   */
+  state?: string;
+  /**
+   * The integration client id
+   */
+  client_id: string;
+  /**
+   * The integration client secret
+   */
+  client_secret: string;
+  /**
+   * The integration redirect URI
+   */
+  redirect_uri?: string;
+};
+
+export type ExchangeSsoTokenVariables = {
+  body: ExchangeSsoTokenRequestBody;
+} & FetcherExtraProps;
+
+/**
+ * During the autorization process, Vercel sends the user to the provider [redirectLoginUrl](https://vercel.com/docs/integrations/create-integration/submit-integration#redirect-login-url), that includes the OAuth authorization `code` parameter. The provider then calls the SSO Token Exchange endpoint with the sent code and receives the OIDC token. They log the user in based on this token and redirects the user back to the Vercel account using deep-link parameters included the redirectLoginUrl. This is used to verify the identity of the user during the [**Open in Provider** flow](https://vercel.com/docs/integrations/marketplace-flows#open-in-provider-button-flow). Providers should not persist the returned `id_token` in a database since the token will expire.
+ */
+export const exchangeSsoToken = (variables: ExchangeSsoTokenVariables, signal?: AbortSignal) =>
+  fetch<ExchangeSsoTokenResponse, ExchangeSsoTokenError, ExchangeSsoTokenRequestBody, {}, {}, {}>({
+    url: '/v1/integrations/sso/token',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetIntegrationLogDrainsQueryParams = {
   /**
@@ -10123,6 +10924,7 @@ export type GetProjectsResponse = {
             | 'environment'
             | 'header'
             | 'host'
+            | 'initial_request_path'
             | 'ip_address'
             | 'method'
             | 'path'
@@ -10153,6 +10955,7 @@ export type GetProjectsResponse = {
             | 'environment'
             | 'header'
             | 'host'
+            | 'initial_request_path'
             | 'ip_address'
             | 'method'
             | 'path'
@@ -11005,6 +11808,7 @@ export type CreateProjectResponse = {
           | 'environment'
           | 'header'
           | 'host'
+          | 'initial_request_path'
           | 'ip_address'
           | 'method'
           | 'path'
@@ -11035,6 +11839,7 @@ export type CreateProjectResponse = {
           | 'environment'
           | 'header'
           | 'host'
+          | 'initial_request_path'
           | 'ip_address'
           | 'method'
           | 'path'
@@ -12067,6 +12872,7 @@ export type GetProjectResponse = {
           | 'environment'
           | 'header'
           | 'host'
+          | 'initial_request_path'
           | 'ip_address'
           | 'method'
           | 'path'
@@ -12097,6 +12903,7 @@ export type GetProjectResponse = {
           | 'environment'
           | 'header'
           | 'host'
+          | 'initial_request_path'
           | 'ip_address'
           | 'method'
           | 'path'
@@ -12957,6 +13764,7 @@ export type UpdateProjectResponse = {
           | 'environment'
           | 'header'
           | 'host'
+          | 'initial_request_path'
           | 'ip_address'
           | 'method'
           | 'path'
@@ -12987,6 +13795,7 @@ export type UpdateProjectResponse = {
           | 'environment'
           | 'header'
           | 'host'
+          | 'initial_request_path'
           | 'ip_address'
           | 'method'
           | 'path'
@@ -14988,7 +15797,7 @@ export type CreateProjectEnvVariables = {
 } & FetcherExtraProps;
 
 /**
- * Create one ore more environment variables for a project by passing its `key`, `value`, `type` and `target` and by specifying the project by either passing the project `id` or `name` in the URL.
+ * Create one or more environment variables for a project by passing its `key`, `value`, `type` and `target` and by specifying the project by either passing the project `id` or `name` in the URL. If you include `upsert=true` as a query parameter, a new environment variable will not be created if it already exists but, the existing variable's value will be updated.
  */
 export const createProjectEnv = (variables: CreateProjectEnvVariables, signal?: AbortSignal) =>
   fetch<
@@ -16095,6 +16904,7 @@ export type PutFirewallConfigResponse = {
             | 'protocol'
             | 'query'
             | 'rate_limit_api_id'
+            | 'raw_path'
             | 'region'
             | 'scheme'
             | 'target_path'
@@ -16232,6 +17042,7 @@ export type PutFirewallConfigRequestBody = {
           | 'protocol'
           | 'query'
           | 'rate_limit_api_id'
+          | 'raw_path'
           | 'region'
           | 'scheme'
           | 'target_path'
@@ -16331,6 +17142,7 @@ export type UpdateFirewallConfigVariables = {
                 | 'query'
                 | 'cookie'
                 | 'target_path'
+                | 'raw_path'
                 | 'ip_address'
                 | 'region'
                 | 'protocol'
@@ -16407,6 +17219,7 @@ export type UpdateFirewallConfigVariables = {
                 | 'query'
                 | 'cookie'
                 | 'target_path'
+                | 'raw_path'
                 | 'ip_address'
                 | 'region'
                 | 'protocol'
@@ -16553,6 +17366,7 @@ export const updateFirewallConfig = (variables: UpdateFirewallConfigVariables, s
                 | 'query'
                 | 'cookie'
                 | 'target_path'
+                | 'raw_path'
                 | 'ip_address'
                 | 'region'
                 | 'protocol'
@@ -16629,6 +17443,7 @@ export const updateFirewallConfig = (variables: UpdateFirewallConfigVariables, s
                 | 'query'
                 | 'cookie'
                 | 'target_path'
+                | 'raw_path'
                 | 'ip_address'
                 | 'region'
                 | 'protocol'
@@ -16834,6 +17649,7 @@ export type GetFirewallConfigResponse = {
           | 'protocol'
           | 'query'
           | 'rate_limit_api_id'
+          | 'raw_path'
           | 'region'
           | 'scheme'
           | 'target_path'
@@ -19442,6 +20258,29 @@ export const assignAlias = (variables: AssignAliasVariables, signal?: AbortSigna
     AssignAliasPathParams
   >({ url: '/v2/deployments/{id}/aliases', method: 'post', ...variables, signal });
 
+export type GetCertsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetCertsResponse = {
+  certs: {
+    cn: string;
+    uid: string;
+    /**
+     * @format date-time
+     */
+    created: string;
+    /**
+     * @format date-time
+     */
+    expiration: string;
+    autoRenew: boolean;
+  }[];
+};
+
+export type GetCertsVariables = FetcherExtraProps;
+
+export const getCerts = (variables: GetCertsVariables, signal?: AbortSignal) =>
+  fetch<GetCertsResponse, GetCertsError, undefined, {}, {}, {}>({ url: '/certs', method: 'get', ...variables, signal });
+
 export type GetCertByIdPathParams = {
   /**
    * The cert id
@@ -20071,7 +20910,7 @@ export type GetDeploymentsResponse = {
      */
     customEnvironment?: {
       id: string;
-      name?: string;
+      slug?: string;
     };
   }[];
 };
@@ -20669,7 +21508,19 @@ export const operationsByTag = {
     getEdgeConfigBackups
   },
   user: { listUserEvents, getAuthUser, requestDelete },
+  marketplace: {
+    getAccountInfo,
+    getMember,
+    createEvent,
+    submitBillingData,
+    submitInvoice,
+    getInvoice,
+    updateInvoice,
+    updateResourceSecrets,
+    exchangeSsoToken
+  },
   integrations: { getConfigurations, getConfiguration, deleteConfiguration, gitNamespaces, searchRepo },
+  authentication: { exchangeSsoToken, listAuthTokens, createAuthToken, getAuthToken, deleteAuthToken },
   logDrains: {
     getIntegrationLogDrains,
     createLogDrain,
@@ -20696,7 +21547,6 @@ export const operationsByTag = {
     deleteTeam,
     deleteTeamInviteCode
   },
-  authentication: { listAuthTokens, createAuthToken, getAuthToken, deleteAuthToken },
   webhooks: { createWebhook, getWebhooks, getWebhook, deleteWebhook },
   aliases: { listAliases, getAlias, deleteAlias, listDeploymentAliases, assignAlias },
   certs: { getCertById, removeCert, issueCert, uploadCert },

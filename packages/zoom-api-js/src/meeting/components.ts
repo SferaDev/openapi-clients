@@ -126,10 +126,11 @@ export type ListArchivedFilesResponse = {
        * * `CC` - A file containing the closed captions of the recording, in VTT file format.
        * *  `CHAT_MESSAGE` - A JSON file encoded in base64 format containing chat messages. The file also includes waiting room chats, deleted messages, meeting emojis and non-verbal feedback.
        * *  `TRANSCRIPT` - A JSON file include audio transcript wording.
+       * * `SUB_GROUP_MEMBER_LOG` - A json file containing records of members entering and leaving the subgroup.
        *
        * @example CHAT
        */
-      file_type: 'MP4' | 'M4A' | 'CHAT' | 'CC' | 'CHAT_MESSAGE' | 'TRANSCRIPT';
+      file_type: 'MP4' | 'M4A' | 'CHAT' | 'CC' | 'CHAT_MESSAGE' | 'TRANSCRIPT' | 'SUB_GROUP_MEMBER_LOG';
       /**
        * The archive file's unique ID.
        *
@@ -647,10 +648,11 @@ export type GetArchivedFilesResponse = {
      * * `CC` - A file containing the closed captions of the recording, in VTT file format.
      * * `CHAT_MESSAGE` - A JSON file encoded in base64 format containing chat messages. The file also includes waiting room chats, deleted messages, meeting emojis and non-verbal feedback.
      * *  `TRANSCRIPT` - A JSON file include audio transcript wording.
+     * * `SUB_GROUP_MEMBER_LOG` - A JSON file containing records of members entering and leaving the subgroup.
      *
      * @example CHAT
      */
-    file_type: 'MP4' | 'M4A' | 'CHAT' | 'CC' | 'CHAT_MESSAGE' | 'TRANSCRIPT';
+    file_type: 'MP4' | 'M4A' | 'CHAT' | 'CC' | 'CHAT_MESSAGE' | 'TRANSCRIPT' | 'SUB_GROUP_MEMBER_LOG';
     /**
      * The archive file's unique ID.
      *
@@ -3744,6 +3746,10 @@ export type UpgradeZpasAppVariables = {
 /**
  * Upgrade ZPA firmware or app by Zoom Device Manager (ZDM) group ID.
  *
+ * **Prerequisites:**
+ *
+ * * Account owner or admin permissions.
+ *
  * **Scopes:** `device:write:admin`
  *
  * **Granular Scopes:** `device:write:zpa_os_app:admin`,`device:write:zpa_os_app:master`
@@ -4636,18 +4642,27 @@ export type InMeetingControlError = Fetcher.ErrorWrapper<undefined>;
 
 export type InMeetingControlRequestBody = {
   /**
-   * The in-meeting method to control:
-   * * `recording.start` &mdash; Start the recording.
-   * * `recording.stop` &mdash; Stop the recording.
-   * * `recording.pause` &mdash; Pause the recording.
-   * * `recording.resume` &mdash; Resume a paused recording.
-   * * `participant.invite` &mdash; Invite a participant to the meeting.
-   * * `participant.invite.callout` &mdash; Invite a participant to the meeting through [call out (phone)](https://support.zoom.us/hc/en-us/articles/4404535651085-Inviting-others-by-phone-call-out).
-   * * `participant.invite.room_system_callout` &mdash; Invite a participant to the meeting through [call out (room system)].
+   * The method that you would like to control.
+   * * `recording.start` - Start the recording.
+   * * `recording.stop` - Stop the recording.
+   * * `recording.pause` - Pause the recording.
+   * * `recording.resume` - Resume a paused recording.
+   * * `participant.invite` - Invite a participant to the meeting.
+   * * `participant.invite.callout` - Invite a participant to the meeting through [call out (phone)](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0062038).
+   * * `participant.invite.room_system_callout` - Invite a participant to the meeting through [call out (room system)](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065721).
+   * * `waiting_room.update` - Update the waiting room with a custom message.
    *
    * @example recording.start
    */
-  method?: string;
+  method?:
+    | 'recording.start'
+    | 'recording.stop'
+    | 'recording.pause'
+    | 'recording.resume'
+    | 'participant.invite'
+    | 'participant.invite.callout'
+    | 'participant.invite.room_system_callout'
+    | 'waiting_room.update';
   /**
    * The in-meeting parameters.
    */
@@ -4784,6 +4799,18 @@ export type InMeetingControlRequestBody = {
         value?: string;
       }[];
     };
+    /**
+     * The title displayed in the waiting room. Use this field if you pass the `waiting_room.update` value for the `method` field.
+     *
+     * @example waiting room title
+     */
+    waiting_room_title?: string;
+    /**
+     * The description shown in the waiting room. Use this field if you pass the `waiting_room.update` value for the `method` field.
+     *
+     * @example waiting room description
+     */
+    waiting_room_description?: string;
   };
 };
 
@@ -4795,14 +4822,12 @@ export type InMeetingControlVariables = {
 /**
  * Control [in-meeting](https://support.zoom.us/hc/en-us/articles/360021921032-In-Meeting-Controls) features. In-meeting controls include starting and stopping a recording, pausing and resuming a recording, and inviting participants.
  *
- * **Note:** This API's recording control only works for cloud recordings. It does **not** work for local recordings.
+ * **Note:** This API's recording control only works for cloud recordings, **not** for local recordings.
  *
  * **Prerequisites:**
- * * The meeting **must** be a live meeting **except** inviting participants to the meeting through [call out (phone)/(room system)].
+ * * The meeting **must** be a live meeting **except** inviting participants to the meeting through [call out (phone)](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0062038)/[call out (room system)](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065721).
  * * Recording control: [Cloud recording](https://support.zoom.us/hc/en-us/articles/360060231472-Enabling-cloud-recording) must be enabled on the account.
  * * The user calling this API must be the host or an alternative meeting host.
- *
- *
  *
  * **Scopes:** `meeting:write`,`meeting:write:admin`,`meeting:master`
  *
@@ -5123,7 +5148,7 @@ export type MeetingResponse = {
      */
     start_time?: string;
     /**
-     * Occurrence status:
+     * Occurrence status.
      *  `available` - Available occurrence.
      *  `deleted` -  Deleted occurrence.
      *
@@ -5139,13 +5164,13 @@ export type MeetingResponse = {
    */
   password?: string;
   /**
-   * [Personal meeting ID (PMI)](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#understanding-personal-meeting-id-pmi). Only used for scheduled meetings and recurring meetings with no fixed time.
+   * [Personal meeting ID (PMI)](/docs/api/rest/using-zoom-apis/#understanding-personal-meeting-id-pmi). Only used for scheduled meetings and recurring meetings with no fixed time.
    *
    * @example 97891943927
    */
   pmi?: string;
   /**
-   * Whether the prescheduled meeting was created via the [GSuite app](https://support.zoom.us/hc/en-us/articles/360020187492-Zoom-for-GSuite-add-on). This **only** supports the meeting `type` value of `2` (scheduled meetings) and `3` (recurring meetings with no fixed time):
+   * Whether the prescheduled meeting was created via the [GSuite app](https://support.zoom.us/hc/en-us/articles/360020187492-Zoom-for-GSuite-add-on). This **only** supports the meeting `type` value of `2` (scheduled meetings) and `3` (recurring meetings with no fixed time).
    * * `true` - A GSuite prescheduled meeting.
    * * `false` - A regular meeting.
    *
@@ -5216,7 +5241,7 @@ export type MeetingResponse = {
      */
     repeat_interval?: number;
     /**
-     * Recurrence meeting types:
+     * Recurring meeting types.
      *  `1` - Daily.
      *  `2` - Weekly.
      *  `3` - Monthly.
@@ -5296,14 +5321,14 @@ export type MeetingResponse = {
        */
       approved_list?: string[];
       /**
-       * List of countries/regions from where participants can not join this meeting.
+       * List of countries or regions from where participants can not join this meeting.
        */
       denied_list?: string[];
       /**
-       * `true`: Setting enabled to either allow users or block users from specific regions to join your meetings.
+       * `true` - Setting enabled to either allow users or block users from specific regions to join your meetings.
        *
        *
-       * `false`: Setting disabled.
+       * `false` - Setting disabled.
        *
        * @example true
        */
@@ -5333,7 +5358,7 @@ export type MeetingResponse = {
      */
     audio?: 'both' | 'telephony' | 'voip' | 'thirdParty';
     /**
-     * Third party audio conference info.
+     * Third party audio conference information.
      *
      * @maxLength 2048
      * @example test
@@ -5350,14 +5375,14 @@ export type MeetingResponse = {
      */
     authentication_exception?: {
       /**
-       * Email address of the participant.
+       * The participant's email address.
        *
        * @format email
        * @example jchill@example.com
        */
       email?: string;
       /**
-       * Name of the participant.
+       * The participant's name.
        *
        * @example Jill Chill
        */
@@ -5376,13 +5401,13 @@ export type MeetingResponse = {
      */
     authentication_name?: string;
     /**
-     * Meeting authentication option id.
+     * Meeting authentication option ID.
      *
      * @example signIn_D8cJuqWVQ623CI4Q8yQK0Q
      */
     authentication_option?: string;
     /**
-     * Automatic recording:
+     * Automatic recording.
      *  `local` - Record on local.
      *  `cloud` -  Record on cloud.
      *  `none` - Disabled.
@@ -5402,7 +5427,7 @@ export type MeetingResponse = {
        */
       enable?: boolean;
       /**
-       * Create room(s).
+       * Create room or rooms.
        */
       rooms?: {
         /**
@@ -5428,7 +5453,7 @@ export type MeetingResponse = {
      */
     calendar_type?: 1 | 2;
     /**
-     * Close registration after event date
+     * Close registration after event date.
      *
      * @example false
      * @default false
@@ -5443,13 +5468,13 @@ export type MeetingResponse = {
      */
     cn_meeting?: boolean;
     /**
-     * Contact email for registration
+     * Contact email for registration.
      *
      * @example jchill@example.com
      */
     contact_email?: string;
     /**
-     * Contact name for registration
+     * Contact name for registration.
      *
      * @example Jill Chill
      */
@@ -5522,11 +5547,11 @@ export type MeetingResponse = {
      */
     focus_mode?: boolean;
     /**
-     * List of global dial-in countries
+     * List of global dial-in countries.
      */
     global_dial_in_countries?: string[];
     /**
-     * Global Dial-in Countries/Regions
+     * Global Dial-in Countries and Regions
      */
     global_dial_in_numbers?: {
       /**
@@ -5536,19 +5561,19 @@ export type MeetingResponse = {
        */
       city?: string;
       /**
-       * Country code. For example, BR.
+       * Country code, such as BR.
        *
        * @example US
        */
       country?: string;
       /**
-       * Full name of country. For example, Brazil.
+       * Full name of country, such as Brazil.
        *
        * @example US
        */
       country_name?: string;
       /**
-       * Phone number. For example, +1 2332357613.
+       * Phone number, such as +1 2332357613.
        *
        * @example +1 1000200200
        */
@@ -5592,6 +5617,61 @@ export type MeetingResponse = {
      * @default false
      */
     join_before_host?: boolean;
+    /**
+     * [Q&amp;A](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065237) for meeting.
+     */
+    question_and_answer?: {
+      /**
+       * * `true` - Enable [Q&amp;A](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065237) for the meeting.
+       *
+       * * `false` - Disable Q&amp;A for the meeting.
+       *
+       * @example true
+       */
+      enable?: boolean;
+      /**
+       * * `true` - Allow participants to submit questions.
+       *
+       * * `false` - Don't allow participants to submit questions.
+       *
+       * @example true
+       */
+      allow_submit_questions?: boolean;
+      /**
+       * * `true` - Allow participants to send questions without providing their name to the host, co-host, and panelists.
+       *
+       * * `false` - Don't allow anonymous questions. Not supported for simulive meetings.
+       *
+       * @example true
+       */
+      allow_anonymous_questions?: boolean;
+      /**
+       * Indicate whether you want attendees to be able to view only answered questions, or view all questions.
+       *
+       * * `answered` - Attendees can only view answered questions.
+       *
+       * * `all` - Attendees can view all questions submitted in the Q&amp;A.
+       *
+       * @example all
+       */
+      question_visibility?: 'answered' | 'all';
+      /**
+       * * `true` - Attendees can answer questions or leave a comment in the question thread.
+       *
+       * * `false` - Attendees can't answer questions or leave a comment in the question thread.
+       *
+       * @example true
+       */
+      attendees_can_comment?: boolean;
+      /**
+       * * `true` - Attendees can select the thumbs up button to bring popular questions to the top of the Q&amp;A window.
+       *
+       * * `false` - Attendees can't select the thumbs up button on questions.
+       *
+       * @example true
+       */
+      attendees_can_upvote?: boolean;
+    };
     /**
      * The meeting's [language interpretation settings](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars). Make sure to add the language in the web portal in order to use it in the API. See link for details.
      *
@@ -5955,6 +6035,15 @@ export type MeetingResponse = {
    * @example 123456
    */
   dynamic_host_key?: string;
+  /**
+   * The platform through which the meeting was created.
+   * * `other` - Created through another platform.
+   * * `open_api` - Created through Open API.
+   * * `web_portal` - Created through the web portal.
+   *
+   * @example open_api
+   */
+  creation_source?: 'other' | 'open_api' | 'web_portal';
 };
 
 export type MeetingVariables = {
@@ -6033,7 +6122,7 @@ export type MeetingDeleteVariables = {
  *
  *
  *
- * **Scopes:** `meeting:write`,`meeting:write:admin`
+ * **Scopes:** `meeting:write:admin`,`meeting:write`
  *
  * **Granular Scopes:** `meeting:delete:meeting`,`meeting:delete:meeting:admin`
  *
@@ -6085,11 +6174,12 @@ export type MeetingUpdateRequestBody = {
    */
   duration?: number;
   /**
-   * Meeting passcode. Passcodes may only contain these characters [a-z A-Z 0-9 @ - _ *] and can have a maximum of 10 characters.
+   * The passcode required to join the meeting. By default, a passcode can **only** have a maximum length of 10 characters and only contain alphanumeric characters and the `@`, `-`, `_`, and `*` characters.
    *
-   * **Note** If the account owner or the admin has configured [minimum passcode requirement settings](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604), the passcode value provided here must meet those requirements.
-   *
-   *  If the requirements are enabled, view those requirements by calling either the [**Get user settings**](/docs/api-reference/zoom-api/methods#operation/userSettings) API or the [**Get account settings**](/docs/api-reference/zoom-api/ma#operation/accountSettings) API.
+   * **Note:**
+   * * If the account owner or administrator has configured [minimum passcode requirement settings](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604), the passcode **must** meet those requirements.
+   * * If passcode requirements are enabled, use the [**Get user settings**](https://developers.zoom.us/docs/api/users/#tag/users/GET/users/{userId}/settings) API or the [**Get account settings**](https://developers.zoom.us/docs/api/accounts/#tag/accounts/GET/accounts/{accountId}/settings) API to get the requirements.
+   * * If the **Require a passcode when scheduling new meetings** account setting is enabled and locked, a passcode will be automatically generated if one is not provided.
    *
    * @maxLength 10
    * @example 123456
@@ -6550,6 +6640,61 @@ export type MeetingUpdateRequestBody = {
      */
     join_before_host?: boolean;
     /**
+     * [Q&amp;A](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065237) for meeting.
+     */
+    question_and_answer?: {
+      /**
+       * * `true` - Enable [Q&amp;A](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065237) for meeting.
+       *
+       * * `false` - Disable Q&amp;A for meeting.
+       *
+       * @example true
+       */
+      enable?: boolean;
+      /**
+       * * `true`: Allow participants to submit questions.
+       *
+       * * `false`: Do not allow submit questions.
+       *
+       * @example true
+       */
+      allow_submit_questions?: boolean;
+      /**
+       * * `true` - Allow participants to send questions without providing their name to the host, co-host, and panelists..
+       *
+       * * `false` - Do not allow anonymous questions.(Not supported for simulive meeting.)
+       *
+       * @example true
+       */
+      allow_anonymous_questions?: boolean;
+      /**
+       * Indicate whether you want attendees to be able to view answered questions only or view all questions.
+       *
+       * * `answered` - Attendees are able to view answered questions only.
+       *
+       * *  `all` - Attendees are able to view all questions submitted in the Q&amp;A.
+       *
+       * @example all
+       */
+      question_visibility?: 'answered' | 'all';
+      /**
+       * * `true` - Attendees can answer questions or leave a comment in the question thread.
+       *
+       * * `false` - Attendees can not answer questions or leave a comment in the question thread
+       *
+       * @example true
+       */
+      attendees_can_comment?: boolean;
+      /**
+       * * `true` - Attendees can click the thumbs up button to bring popular questions to the top of the Q&amp;A window.
+       *
+       * * `false` - Attendees can not click the thumbs up button on questions.
+       *
+       * @example true
+       */
+      attendees_can_upvote?: boolean;
+    };
+    /**
      * The meeting's [language interpretation settings](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars). Make sure to add the language in the web portal in order to use it in the API. See link for details.
      *
      * **Note:** This feature is only available for certain Meeting add-on, Education, and Business and higher plans. If this feature is not enabled on the host's account, this setting will **not** be applied to the meeting.
@@ -6871,15 +7016,12 @@ export type MeetingUpdateVariables = {
 } & FetcherExtraProps;
 
 /**
- * Updates meeting details.
+ * Update meeting details.
  *
- * **Note**
- * * The `start_time` value **must** be a future date. If the value is omitted or a date is in the past, the API ignores this value and does **not** update any recurring meetings.
- * * The `recurrence` object is **required**.
- * * This API has a rate limit of **100 requests per day**. You can update a meeting for a maximum of **100 times within a 24-hour period**.
- *
- *
- *
+ * **Prerequisites**
+ * * The `start_time` value must be a future date. If the value is omitted or a date is in the past, the API ignores this value and does not update any recurring meetings.
+ * * The `recurrence` object is required only when updating the entire series of a recurring meeting with `type=8`.
+ * * This API has a rate limit of **100 requests per day**. You can update a meeting for a maximum of 100 times within a 24-hour period.
  *
  * **Scopes:** `meeting:write`,`meeting:write:admin`
  *
@@ -7391,7 +7533,9 @@ export type AddBatchRegistrantsVariables = {
  *
  * **Scopes:** `meeting:write`,`meeting:write:admin`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
+ * **Granular Scopes:** `meeting:write:batch_registrants`,`meeting:write:batch_registrants:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
 export const addBatchRegistrants = (variables: AddBatchRegistrantsVariables, signal?: AbortSignal) =>
   fetch<
@@ -7464,6 +7608,8 @@ export type MeetingInvitationVariables = {
  * Retrieve the meeting invitation note for a specific meeting.
  *
  * **Scopes:** `meeting:read`,`meeting:read:admin`
+ *
+ * **Granular Scopes:** `meeting:read:invitation`,`meeting:read:invitation:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -7551,7 +7697,9 @@ export type MeetingInviteLinksCreateVariables = {
  *
  * **Scopes:** `meeting:write:admin`,`meeting:write`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+ * **Granular Scopes:** `meeting:write:invite_links`,`meeting:write:invite_links:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const meetingInviteLinksCreate = (variables: MeetingInviteLinksCreateVariables, signal?: AbortSignal) =>
   fetch<
@@ -7606,7 +7754,9 @@ export type MeetingLiveStreamingJoinTokenVariables = {
  *
  * **Scopes:** `meeting_token:read:admin:live_streaming`,`meeting_token:read:live_streaming`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+ * **Granular Scopes:** `meeting:read:live_streaming_token`,`meeting:read:live_streaming_token:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const meetingLiveStreamingJoinToken = (
   variables: MeetingLiveStreamingJoinTokenVariables,
@@ -7664,7 +7814,9 @@ export type MeetingLocalArchivingArchiveTokenVariables = {
  *
  * **Scopes:** `meeting_token:read:admin:local_archiving`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+ * **Granular Scopes:** `meeting:read:local_archiving_token:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const meetingLocalArchivingArchiveToken = (
   variables: MeetingLocalArchivingArchiveTokenVariables,
@@ -7729,7 +7881,7 @@ export type MeetingLocalRecordingJoinTokenVariables = {
  * **Prerequisites:**
  * * The **Local recording** user setting enabled in the Zoom web portal.
  *
- * **Scopes:** `meeting_token:read:local_recording`,`meeting_token:read:admin:local_recording`
+ * **Scopes:** `meeting_token:read:admin:local_recording`,`meeting_token:read:local_recording`
  *
  * **Granular Scopes:** `meeting:read:local_recording_token`,`meeting:read:local_recording_token:admin`
  *
@@ -7805,7 +7957,9 @@ export type GetMeetingLiveStreamDetailsVariables = {
  *
  * **Scopes:** `meeting:read:admin`,`meeting:read`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+ * **Granular Scopes:** `meeting:read:livestream`,`meeting:read:livestream:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const getMeetingLiveStreamDetails = (variables: GetMeetingLiveStreamDetailsVariables, signal?: AbortSignal) =>
   fetch<
@@ -7875,7 +8029,9 @@ export type MeetingLiveStreamUpdateVariables = {
  *
  * **Scopes:** `meeting:write:admin`,`meeting:write`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+ * **Granular Scopes:** `meeting:update:livestream`,`meeting:update:livestream:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const meetingLiveStreamUpdate = (variables: MeetingLiveStreamUpdateVariables, signal?: AbortSignal) =>
   fetch<
@@ -8012,13 +8168,13 @@ export type GetameetingsummaryResponse = {
    *
    * Each meeting instance generates its own meeting UUID. After a meeting ends, a new UUID is generated for the next instance of the meeting.
    *
-   *  Use the [**List past meeting instances**](/docs/api-reference/zoom-api/methods#operation/pastMeetings) API to retrieve a list of UUIDs from past meeting instances. [Double encode](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#meeting-id-and-uuid) your UUID when using it for API calls if the UUID begins with a `/` or contains `//` in it.
+   *  Use the [**List past meeting instances**](/docs/api-reference/zoom-api/methods#operation/pastMeetings) API to retrieve a list of UUIDs from past meeting instances. [Double encode](/docs/api/rest/using-zoom-apis/#meeting-id-and-uuid) your UUID when using it for API calls if the UUID begins with a `/` or contains `//` in it.
    *
    * @example aDYlohsHRtCd4ii1uC2+hA==
    */
   meeting_uuid?: string;
   /**
-   * [ The meeting ID](https://support.zoom.us/hc/en-us/articles/201362373-What-is-a-Meeting-ID-)
+   * [The meeting ID](https://support.zoom.us/hc/en-us/articles/201362373-What-is-a-Meeting-ID-)
    * The meeting's unique identifier in **long** format, represented as int64 data type in JSON. Also known as the meeting number.
    *
    * @format int64
@@ -8074,6 +8230,18 @@ export type GetameetingsummaryResponse = {
    */
   summary_last_modified_time?: string;
   /**
+   * The user ID of the user who last modified the meeting summary.
+   *
+   * @example Lfi0BlBQTM-bbktE9BRUvA
+   */
+  summary_last_modified_user_id?: string;
+  /**
+   * The user email of the user who last modified the meeting summary.
+   *
+   * @example user@example.com
+   */
+  summary_last_modified_user_email?: string;
+  /**
    * The summary title.
    *
    * @example Meeting summary for my meeting
@@ -8108,6 +8276,12 @@ export type GetameetingsummaryResponse = {
   next_steps?: string[];
   edited_summary?: {
     /**
+     * The user edited summary overview.
+     *
+     * @example Meeting overview
+     */
+    summary_overview?: string;
+    /**
      * The user edited summary details.
      *
      * @example Meeting overview
@@ -8125,11 +8299,11 @@ export type GetameetingsummaryVariables = {
 } & FetcherExtraProps;
 
 /**
- * Displays information about a meeting summary.
+ * Display information about a meeting summary.
  *
  * **Prerequisites**:
- * * Host user type must be Pro or higher plan.
- * * The Meeting Summary with AI Companion feature enabled in the host's account.
+ * * Host user type must have a Pro or higher plan.
+ * * Enable the Meeting Summary with AI Companion feature in the host's account.
  * * E2ee meetings do not have summary feature enabled.
  *
  * **Scopes:** `meeting_summary:read`,`meeting_summary:read:admin`
@@ -8276,17 +8450,17 @@ export type MeetingPollsResponse = {
      */
     id?: string;
     /**
-     * The status of poll:
-     *  `notstart` - Poll not started
-     *  `started` - Poll started
-     *  `ended` - Poll ended
-     *  `sharing` - Sharing poll results
+     * The poll's status.
+     *  `notstart` - Poll not started.
+     *  `started` - Poll started.
+     *  `ended` - Poll ended.
+     *  `sharing` - Sharing poll results.
      *
      * @example notstart
      */
     status?: 'notstart' | 'started' | 'ended' | 'sharing';
     /**
-     * Whether meeting participants answer poll questions anonymously.
+     * Whether meeting participants can answer poll questions anonymously.
      *
      * This value defaults to `false`.
      *
@@ -8295,10 +8469,10 @@ export type MeetingPollsResponse = {
      */
     anonymous?: boolean;
     /**
-     * The type of poll:
-     * * `1` &mdash; Poll.
-     * * `2` &mdash; Advanced Poll. This feature must be enabled in your Zoom account.
-     * * `3` &mdash; Quiz. This feature must be enabled in your Zoom account.
+     * The type of poll.
+     * * `1` - Poll.
+     * * `2` - Advanced Poll. This feature must be enabled in your Zoom account.
+     * * `3` - Quiz. This feature must be enabled in your Zoom account.
      *
      *  This value defaults to `1`.
      *
@@ -8306,7 +8480,7 @@ export type MeetingPollsResponse = {
      */
     poll_type?: 1 | 2 | 3;
     /**
-     * The information about the poll's questions.
+     * Information about the poll's questions.
      */
     questions?: {
       /**
@@ -8368,7 +8542,7 @@ export type MeetingPollsResponse = {
        */
       name?: string;
       /**
-       * The information about the prompt questions. This field only applies to `matching` and `rank_order` polls. You **must** provide a minimum of two prompts, up to a maximum of 10 prompts.
+       * Information about the prompt questions. This field only applies to `matching` and `rank_order` polls. You **must** provide a minimum of two prompts, up to a maximum of 10 prompts.
        */
       prompts?: {
         /**
@@ -8948,7 +9122,7 @@ export type MeetingPollGetPathParams = {
    */
   meetingId: number;
   /**
-   * The poll ID
+   * The poll ID.
    *
    * @example QalIoKWLTJehBJ8e1xRrbQ
    */
@@ -8959,13 +9133,13 @@ export type MeetingPollGetError = Fetcher.ErrorWrapper<undefined>;
 
 export type MeetingPollGetResponse = {
   /**
-   * The meeting poll ID
+   * The meeting poll ID.
    *
    * @example QalIoKWLTJehBJ8e1xRrbQ
    */
   id?: string;
   /**
-   * The status of the meeting poll:
+   * The meeting poll's status.
    *  `notstart` - Poll not started
    *  `started` - Poll started
    *  `ended` - Poll ended
@@ -8984,7 +9158,7 @@ export type MeetingPollGetResponse = {
    */
   anonymous?: boolean;
   /**
-   * The type of poll:
+   * The poll's type.
    * * `1` &mdash; Poll.
    * * `2` &mdash; Advanced Poll. This feature must be enabled in your Zoom account.
    * * `3` &mdash; Quiz. This feature must be enabled in your Zoom account.
@@ -8999,7 +9173,7 @@ export type MeetingPollGetResponse = {
    */
   questions?: {
     /**
-     * The allowed maximum number of characters. This field only applies to `short_answer` and `long_answer` polls:
+     * The allowed maximum number of characters. This field only applies to `short_answer` and `long_answer` polls.
      * * For `short_answer` polls, a maximum of 500 characters.
      * * For `long_answer` polls, a maximum of 2,000 characters.
      *
@@ -9014,9 +9188,9 @@ export type MeetingPollGetResponse = {
      */
     answer_min_character?: number;
     /**
-     * Whether participants must answer the question:
-     * * `true` &mdash; The participant must answer the question.
-     * * `false` &mdash; The participant does not need to answer the question.
+     * Whether participants must answer the question.
+     * * `true` - The participant must answer the question.
+     * * `false` - The participant does not need to answer the question.
      *
      * **Note:**
      * * When the poll's `type` value is `1` (Poll), this value defaults to `true`.
@@ -9127,7 +9301,7 @@ export type MeetingPollGetResponse = {
      */
     show_as_dropdown?: boolean;
     /**
-     * The poll's question and answer type:
+     * The poll's question and answer type.
      * * `single` &mdash; Single choice.
      * * `multiple` &mdash; Multiple choice.
      * * `matching` &mdash; Matching.
@@ -9163,7 +9337,7 @@ export type MeetingPollGetVariables = {
 } & FetcherExtraProps;
 
 /**
- * Polls allow the meeting host to survey attendees. It retrieves information about a specific meeting [poll](https://support.zoom.us/hc/en-us/articles/213756303-Polling-for-Meetings).
+ * Polls let the meeting host survey attendees. It retrieves information about a specific meeting [poll](https://support.zoom.us/hc/en-us/articles/213756303-Polling-for-Meetings).
  *
  *
  *
@@ -9445,7 +9619,7 @@ export type MeetingPollDeleteVariables = {
  * * Polling feature should be enabled in the host's account.
  * * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
  *
- * **Scopes:** `meeting:write`,`meeting:write:admin`
+ * **Scopes:** `meeting:write:admin`,`meeting:write`
  *
  * **Granular Scopes:** `meeting:delete:poll`,`meeting:delete:poll:admin`
  *
@@ -9750,7 +9924,9 @@ export type MeetingRegistrantsVariables = {
  *
  * **Scopes:** `meeting:read:admin`,`meeting:read`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+ * **Granular Scopes:** `meeting:read:list_registrants`,`meeting:read:list_registrants:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
 export const meetingRegistrants = (variables: MeetingRegistrantsVariables, signal?: AbortSignal) =>
   fetch<
@@ -10063,7 +10239,9 @@ export type MeetingRegistrantCreateVariables = {
  *
  * **Scopes:** `meeting:write:admin`,`meeting:write`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+ * **Granular Scopes:** `meeting:write:registrant`,`meeting:write:registrant:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const meetingRegistrantCreate = (variables: MeetingRegistrantCreateVariables, signal?: AbortSignal) =>
   fetch<
@@ -10162,7 +10340,9 @@ export type MeetingRegistrantsQuestionsGetVariables = {
  *
  * **Scopes:** `meeting:read`,`meeting:read:admin`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+ * **Granular Scopes:** `meeting:read:list_registration_questions`,`meeting:read:list_registration_questions:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const meetingRegistrantsQuestionsGet = (
   variables: MeetingRegistrantsQuestionsGetVariables,
@@ -10265,7 +10445,9 @@ export type MeetingRegistrantQuestionUpdateVariables = {
  *
  * **Scopes:** `meeting:write`,`meeting:write:admin`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+ * **Granular Scopes:** `meeting:update:registration_question`,`meeting:update:registration_question:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const meetingRegistrantQuestionUpdate = (
   variables: MeetingRegistrantQuestionUpdateVariables,
@@ -10344,7 +10526,9 @@ export type MeetingRegistrantStatusVariables = {
  *
  * **Scopes:** `meeting:write:admin`,`meeting:write`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+ * **Granular Scopes:** `meeting:update:registrant_status`,`meeting:update:registrant_status:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
 export const meetingRegistrantStatus = (variables: MeetingRegistrantStatusVariables, signal?: AbortSignal) =>
   fetch<
@@ -10571,7 +10755,9 @@ export type MeetingRegistrantGetVariables = {
  *
  * **Scopes:** `meeting:read:admin`,`meeting:read`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+ * **Granular Scopes:** `meeting:read:registrant`,`meeting:read:registrant:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const meetingRegistrantGet = (variables: MeetingRegistrantGetVariables, signal?: AbortSignal) =>
   fetch<MeetingRegistrantGetResponse, MeetingRegistrantGetError, undefined, {}, {}, MeetingRegistrantGetPathParams>({
@@ -10620,7 +10806,9 @@ export type MeetingregistrantdeleteVariables = {
  *
  * **Scopes:** `meeting:write:admin`,`meeting:write`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+ * **Granular Scopes:** `meeting:delete:registrant`,`meeting:delete:registrant:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const meetingregistrantdelete = (variables: MeetingregistrantdeleteVariables, signal?: AbortSignal) =>
   fetch<
@@ -10747,7 +10935,9 @@ export type MeetingStatusVariables = {
  *
  * **Scopes:** `meeting:write:admin`,`meeting:write`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+ * **Granular Scopes:** `meeting:update:status`,`meeting:update:status:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const meetingStatus = (variables: MeetingStatusVariables, signal?: AbortSignal) =>
   fetch<undefined, MeetingStatusError, MeetingStatusRequestBody, {}, {}, MeetingStatusPathParams>({
@@ -10983,6 +11173,8 @@ export type MeetingSurveyGetVariables = {
  *
  * **Scopes:** `meeting:read`,`meeting:read:admin`
  *
+ * **Granular Scopes:** `meeting:read:survey`,`meeting:read:survey:admin`
+ *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const meetingSurveyGet = (variables: MeetingSurveyGetVariables, signal?: AbortSignal) =>
@@ -11021,7 +11213,9 @@ export type MeetingSurveyDeleteVariables = {
  *
  * **Scopes:** `meeting:write`,`meeting:write:admin`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+ * **Granular Scopes:** `meeting:delete:survey`,`meeting:delete:survey:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const meetingSurveyDelete = (variables: MeetingSurveyDeleteVariables, signal?: AbortSignal) =>
   fetch<undefined, MeetingSurveyDeleteError, undefined, {}, {}, MeetingSurveyDeletePathParams>({
@@ -11256,7 +11450,9 @@ export type MeetingSurveyUpdateVariables = {
 /**
  * Update a [meeting survey](https://support.zoom.us/hc/en-us/articles/4404969060621-Post-meeting-survey-and-reporting).  **Prerequisites:** * The host must be a **Pro** user type. * The [**Meeting Survey**](https://support.zoom.us/hc/en-us/articles/4404939095053-Enabling-meeting-surveys) feature is enabled in the host's account. * The meeting must be a scheduled meeting. Instant meetings do not have survey features enabled.
  *
- * **Scopes:** `meeting:write:admin`,`meeting:write`
+ * **Scopes:** `meeting:write`,`meeting:write:admin`
+ *
+ * **Granular Scopes:** `meeting:update:survey`,`meeting:update:survey:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -11336,7 +11532,7 @@ export type PastMeetingDetailsPathParams = {
    * * If you provide a meeting ID, the API will return a response for the latest meeting instance.
    * * If you provide a meeting UUID that begins with a `/` character or contains the `//` characters, you **must** [double encode](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis/#meeting-id-and-uuid) the meeting UUID before making an API request.
    */
-  meetingId: number | string;
+  meetingId: string;
 };
 
 export type PastMeetingDetailsError = Fetcher.ErrorWrapper<undefined>;
@@ -11414,14 +11610,14 @@ export type PastMeetingDetailsResponse = {
    */
   total_minutes?: number;
   /**
-   * The meeting type:
-   * * `0` &mdash; A prescheduled meeting.
-   * * `1` &mdash; An instant meeting.
-   * * `2` &mdash; A scheduled meeting.
-   * * `3` &mdash; A recurring meeting with no fixed time.
-   * * `4` &mdash; A [personal meeting room](https://support.zoom.us/hc/en-us/articles/201362843).
-   * * `7` &mdash; A [PAC (Personal Audio Conference)](https://support.zoom.us/hc/en-us/articles/205172455-Hosting-a-Personal-Audio-Conference-PAC-meeting) meeting.
-   * * `8` &mdash; A recurring meeting with a fixed time.
+   * The meeting type.
+   * * `0` - A prescheduled meeting.
+   * * `1` - An instant meeting.
+   * * `2` - A scheduled meeting.
+   * * `3` - A recurring meeting with no fixed time.
+   * * `4` - A [personal meeting room](https://support.zoom.us/hc/en-us/articles/201362843).
+   * * `7` - A [PAC (personal audio conference)](https://support.zoom.us/hc/en-us/articles/205172455-Hosting-a-Personal-Audio-Conference-PAC-meeting) meeting.
+   * * `8` - A recurring meeting with a fixed time.
    *
    * @example 1
    */
@@ -11452,7 +11648,9 @@ export type PastMeetingDetailsVariables = {
  *
  * **Scopes:** `meeting:read:admin`,`meeting:read`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Light`
+ * **Granular Scopes:** `meeting:read:past_meeting`,`meeting:read:past_meeting:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const pastMeetingDetails = (variables: PastMeetingDetailsVariables, signal?: AbortSignal) =>
   fetch<PastMeetingDetailsResponse, PastMeetingDetailsError, undefined, {}, {}, PastMeetingDetailsPathParams>({
@@ -11506,7 +11704,9 @@ export type PastMeetingsVariables = {
  *
  * **Scopes:** `meeting:read:admin`,`meeting:read`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+ * **Granular Scopes:** `meeting:read:list_past_instances`,`meeting:read:list_past_instances:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
 export const pastMeetings = (variables: PastMeetingsVariables, signal?: AbortSignal) =>
   fetch<PastMeetingsResponse, PastMeetingsError, undefined, {}, {}, PastMeetingsPathParams>({
@@ -11776,7 +11976,9 @@ export type ListPastMeetingPollsVariables = {
  *
  * **Scopes:** `meeting:read:admin`,`meeting:read`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+ * **Granular Scopes:** `meeting:read:list_poll_results`,`meeting:read:list_poll_results:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
 export const listPastMeetingPolls = (variables: ListPastMeetingPollsVariables, signal?: AbortSignal) =>
   fetch<ListPastMeetingPollsResponse, ListPastMeetingPollsError, undefined, {}, {}, ListPastMeetingPollsPathParams>({
@@ -11930,7 +12132,9 @@ export type ListMeetingTemplatesVariables = {
  *
  * **Scopes:** `meeting:read`,`meeting:read:admin`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Medium`
+ * **Granular Scopes:** `meeting:read:list_templates`,`meeting:read:list_templates:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
 export const listMeetingTemplates = (variables: ListMeetingTemplatesVariables, signal?: AbortSignal) =>
   fetch<ListMeetingTemplatesResponse, ListMeetingTemplatesError, undefined, {}, {}, ListMeetingTemplatesPathParams>({
@@ -12295,7 +12499,7 @@ export type MeetingCreateResponse = {
    */
   encrypted_password?: string;
   /**
-   * Password for participants to join the meeting via [PSTN](https://support.zoom.us/hc/en-us/articles/204517069-Getting-Started-with-Personal-Audio-Conference).
+   * Passcode for participants to join the meeting via [PSTN](https://support.zoom.us/hc/en-us/articles/204517069-Getting-Started-with-Personal-Audio-Conference).
    *
    * @example 123456
    */
@@ -12329,7 +12533,7 @@ export type MeetingCreateResponse = {
      */
     duration?: number;
     /**
-     * Occurrence ID: Unique Identifier that identifies an occurrence of a recurring webinar. [Recurring webinars](https://support.zoom.us/hc/en-us/articles/216354763-How-to-Schedule-A-Recurring-Webinar) can have a maximum of 50 occurrences.
+     * Occurrence ID. The unique identifier for an occurrence of a recurring webinar. [Recurring webinars](https://support.zoom.us/hc/en-us/articles/216354763-How-to-Schedule-A-Recurring-Webinar) can have a maximum of 50 occurrences.
      *
      * @example 1648194360000
      */
@@ -12813,6 +13017,61 @@ export type MeetingCreateResponse = {
      */
     join_before_host?: boolean;
     /**
+     * [Q&amp;A](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065237) for meeting.
+     */
+    question_and_answer?: {
+      /**
+       * * `true` - Enable [Q&amp;A](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065237) for meeting.
+       *
+       * * `false` - Disable Q&amp;A for meeting.
+       *
+       * @example true
+       */
+      enable?: boolean;
+      /**
+       * * `true`: Allow participants to submit questions.
+       *
+       * * `false`: Do not allow submit questions.
+       *
+       * @example true
+       */
+      allow_submit_questions?: boolean;
+      /**
+       * * `true` - Allow participants to send questions without providing their name to the host, co-host, and panelists..
+       *
+       * * `false` - Do not allow anonymous questions.(Not supported for simulive meeting.)
+       *
+       * @example true
+       */
+      allow_anonymous_questions?: boolean;
+      /**
+       * Indicate whether you want attendees to be able to view answered questions only or view all questions.
+       *
+       * * `answered` - Attendees are able to view answered questions only.
+       *
+       * *  `all` - Attendees are able to view all questions submitted in the Q&amp;A.
+       *
+       * @example all
+       */
+      question_visibility?: 'answered' | 'all';
+      /**
+       * * `true` - Attendees can answer questions or leave a comment in the question thread.
+       *
+       * * `false` - Attendees can not answer questions or leave a comment in the question thread
+       *
+       * @example true
+       */
+      attendees_can_comment?: boolean;
+      /**
+       * * `true` - Attendees can click the thumbs up button to bring popular questions to the top of the Q&amp;A window.
+       *
+       * * `false` - Attendees can not click the thumbs up button on questions.
+       *
+       * @example true
+       */
+      attendees_can_upvote?: boolean;
+    };
+    /**
      * The meeting's [language interpretation settings](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars). Make sure to add the language in the web portal in order to use it in the API. See link for details.
      *
      * **Note:** This feature is only available for certain Meeting add-on, Education, and Business and higher plans. If this feature is not enabled on the host's account, this setting will **not** be applied to the meeting.
@@ -13191,8 +13450,11 @@ export type MeetingCreateRequestBody = {
   duration?: number;
   /**
    * The passcode required to join the meeting. By default, a passcode can **only** have a maximum length of 10 characters and only contain alphanumeric characters and the `@`, `-`, `_`, and `*` characters.
+   *
+   * **Note:**
    * * If the account owner or administrator has configured [minimum passcode requirement settings](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604), the passcode **must** meet those requirements.
-   * * If passcode requirements are enabled, use the [**Get user settings**](https://developers.zoom.us/docs/api-reference/zoom-api/methods#operation/userSettings) API or the [**Get account settings**](https://developers.zoom.us/docs/api-reference/zoom-api/ma#operation/accountSettings) API to get the requirements.
+   * * If passcode requirements are enabled, use the [**Get user settings**](https://developers.zoom.us/docs/api/users/#tag/users/GET/users/{userId}/settings) API or the [**Get account settings**](https://developers.zoom.us/docs/api/accounts/#tag/accounts/GET/accounts/{accountId}/settings) API to get the requirements.
+   * * If the **Require a passcode when scheduling new meetings** account setting is enabled and locked, a passcode will be automatically generated if one is not provided.
    *
    * @maxLength 10
    * @example 123456
@@ -13227,16 +13489,16 @@ export type MeetingCreateRequestBody = {
      */
     end_times?: number;
     /**
-     * Use this field **only if you're scheduling a recurring meeting of type** `3` to state the day in a month when the meeting should recur. The value range is from 1 to 31.
+     * Use this field **only** if you're scheduling a **recurring meeting of type `3`** to state the day in a month when the meeting should recur. The value range is from `1` to `31`.
      *
-     * For the meeting to recur on 23rd of each month, provide `23` as this field's value and `1` as the `repeat_interval` field's value. Instead, if you would like the meeting to recur every three months, on 23rd of the month, change the value of the `repeat_interval` field to `3`.
+     * For the meeting to recur on 23rd of each month, provide `23` as this field's value and `1` as the `repeat_interval` field's value. To have the meeting recur every three months on 23rd of the month, change the `repeat_interval` field value to `3`.
      *
      * @example 1
      * @default 1
      */
     monthly_day?: number;
     /**
-     * Use this field **only if you're scheduling a recurring meeting of type** `3` to state the week of the month when the meeting should recur. If you use this field, you must also use the `monthly_week_day` field to state the day of the week when the meeting should recur.
+     * Use this field **only if** you're scheduling a **recurring meeting of type `3`** to state the week of the month when the meeting should recur. If you use this field, you must also use the `monthly_week_day` field to state the day of the week when the meeting should recur.
      *  `-1` - Last week of the month.
      *  `1` - First week of the month.
      *  `2` - Second week of the month.
@@ -13247,7 +13509,7 @@ export type MeetingCreateRequestBody = {
      */
     monthly_week?: -1 | 1 | 2 | 3 | 4;
     /**
-     * Use this field **only if you're scheduling a recurring meeting of type** `3` to state a specific day in a week when the monthly meeting should recur. To use this field, you must also use the `monthly_week` field.
+     * Use this field **only if** you're scheduling a **recurring meeting of type `3`** to state a specific day in a week when the monthly meeting should recur. To use this field, you must also use the `monthly_week` field.
      *
      *
      *  `1` - Sunday.
@@ -13279,11 +13541,11 @@ export type MeetingCreateRequestBody = {
      */
     type: 1 | 2 | 3;
     /**
-     * This field is required if you're scheduling a recurring meeting of type `2` to state the days of the week when the meeting should repeat.
+     * **Required** if you're scheduling a recurring meeting of type `2` to state the days of the week when the meeting should repeat.
      *
-     *   The value for this field could be a number between `1` to `7` in string format. For instance, if the meeting should recur on Sunday, provide `1` as this field's value.
+     * This field's value could be a number between `1` to `7` in string format. For instance, if the meeting should recur on Sunday, provide `1` as this field's value.
      *
-     *   **Note:** To set the meeting to occur on multiple days of a week, provide comma separated values for this field. For instance, if the meeting should recur on Sundays and Tuesdays, provide `1,3` as this field's value.
+     * **Note:** To set the meeting to occur on multiple days of a week, provide comma separated values for this field. For instance, if the meeting should recur on Sundays and Tuesdays, provide `1,3` as this field's value.
      *
      *
      *  `1` - Sunday.
@@ -13387,7 +13649,7 @@ export type MeetingCreateRequestBody = {
      */
     audio?: 'both' | 'telephony' | 'voip' | 'thirdParty';
     /**
-     * Third party audio conference info.
+     * Third party audio conference information.
      *
      * @maxLength 2048
      * @example test
@@ -13400,7 +13662,7 @@ export type MeetingCreateRequestBody = {
      */
     authentication_domains?: string;
     /**
-     * A list of participants that can bypass meeting authentication. These participants will receive a unique meeting invite.
+     * A list of participants who can bypass meeting authentication. These participants will receive a unique meeting invite.
      */
     authentication_exception?: {
       /**
@@ -13559,6 +13821,61 @@ export type MeetingCreateRequestBody = {
      * @default false
      */
     join_before_host?: boolean;
+    /**
+     * [Q&amp;A](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065237) for meeting.
+     */
+    question_and_answer?: {
+      /**
+       * * `true` - Enable [Q&amp;A](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0065237) for meeting.
+       *
+       * * `false` - Disable Q&amp;A for meeting.
+       *
+       * @example true
+       */
+      enable?: boolean;
+      /**
+       * * `true` - Allow participants to submit questions.
+       *
+       * * `false` - Don't allow participants to submit questions.
+       *
+       * @example true
+       */
+      allow_submit_questions?: boolean;
+      /**
+       * * `true` - Allow participants to send questions without providing their name to the host, co-host, and panelists..
+       *
+       * * `false` - Do not allow anonymous questions.(Not supported for simulive meeting.)
+       *
+       * @example true
+       */
+      allow_anonymous_questions?: boolean;
+      /**
+       * Indicate whether you want to allow attendees to be able to view only answered questions or all questions.
+       *
+       * * `answered` - Attendees are able to view answered questions only.
+       *
+       * *  `all` - Attendees are able to view all questions submitted in the Q&amp;A.
+       *
+       * @example all
+       */
+      question_visibility?: 'answered' | 'all';
+      /**
+       * * `true` - Attendees can answer questions or leave a comment in the question thread.
+       *
+       * * `false` - Attendees can not answer questions or leave a comment in the question thread
+       *
+       * @example true
+       */
+      attendees_can_comment?: boolean;
+      /**
+       * * `true` - Attendees can select the thumbs up button to bring popular questions to the top of the Q&amp;A window.
+       *
+       * * `false` - Attendees can't select the thumbs up button on questions.
+       *
+       * @example true
+       */
+      attendees_can_upvote?: boolean;
+    };
     /**
      * The meeting's [language interpretation settings](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars). Make sure to add the language in the web portal in order to use it in the API. See link for details.
      *
@@ -13900,16 +14217,13 @@ export type MeetingCreateVariables = {
 } & FetcherExtraProps;
 
 /**
- * [Creates a meeting](https://support.zoom.us/hc/en-us/articles/201362413-Scheduling-meetings) for a user. For user-level apps, pass [the `me` value](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#the-me-keyword) instead of the `userId` parameter.
+ * [Create a meeting](https://support.zoom.us/hc/en-us/articles/201362413-Scheduling-meetings) for a user. For user-level apps, pass [the `me` value](/docs/api/rest/using-zoom-apis/#the-me-keyword) instead of the `userId` parameter.
  *
- * * A meeting's `start_url` value is the URL a host or an alternative host can use to start a meeting. The expiration time for the `start_url` value is **two hours** for all regular users.
- * * For `custCreate` meeting hosts (users created with the `custCreate` parameter via the [**Create users**](https://developers.zoom.us/docs/api/rest/reference/zoom-api/methods/#operation/userCreate) API), the expiration time of the `start_url` parameter is **90 days** from the generation of the `start_url`.
- *
- * **Note:**
- *
- * For security reasons, the recommended way to programmatically get the updated `start_url` value after expiry is to call the [**Get a meeting**](https://developers.zoom.us/docs/api/meetings/#tag/meetings/GET/meetings/%7BmeetingId%7D) API. Refer to the `start_url` value in the response.
- *
- *  **100 requests per day**. The rate limit is applied against the `userId` of the **meeting host** used to make the request.
+ * **Prerequisites:**
+ * * A meeting's `start_url` value is the URL a host or an alternative host can use to start a meeting. The `start_url` value's expiration time is **two hours** for all regular users.
+ * * For `custCreate` meeting hosts - users created with the `custCreate` parameter via the [**Create users**](/docs/api/users/#tag/users/POST/users) API - the expiration time of the `start_url` parameter is **90 days** from the generation of the `start_url`.
+ * * For security reasons, the recommended way to programmatically get the updated `start_url` value after expiry is to call the [**Get a meeting**](/docs/api/meetings/#tag/meetings/GET/meetings/{meetingId}) API. Refer to the `start_url` value in the response.
+ * * **100 requests per day**. The rate limit is applied against the `userId` of the **meeting host** used to make the request.
  *
  * **Scopes:** `meeting:write:admin`,`meeting:write`
  *
@@ -14782,7 +15096,7 @@ export type ReportMeetingactivitylogsVariables = {
 } & FetcherExtraProps;
 
 /**
- * Retrieve a list of a meeting activity logs.
+ * Retrieve a list of a meeting activity logs. Contact Zoom Support to enable the meeting audit trail log feature on your account.
  *
  * **Scopes:** `report:read:admin`
  *
