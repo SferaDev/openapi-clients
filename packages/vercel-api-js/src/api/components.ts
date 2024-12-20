@@ -7,11 +7,805 @@ import type * as Fetcher from './fetcher';
 import { fetch, FetcherExtraProps } from './fetcher';
 import type * as Schemas from './schemas';
 
-export type RecordEventsQueryParams = {
+export type ReadAccessGroupPathParams = {
+  idOrName: string;
+};
+
+export type ReadAccessGroupQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type ReadAccessGroupError = Fetcher.ErrorWrapper<undefined>;
+
+export type ReadAccessGroupResponse = {
+  entitlements?: 'v0'[];
+  isDsyncManaged: boolean;
+  /**
+   * The name of this access group.
+   *
+   * @example my-access-group
+   */
+  name: string;
+  /**
+   * Timestamp in milliseconds when the access group was created.
+   *
+   * @example 1588720733602
+   */
+  createdAt: string;
+  /**
+   * ID of the team that this access group belongs to.
+   *
+   * @example team_123a6c5209bc3778245d011443644c8d27dc2c50
+   */
+  teamId: string;
+  /**
+   * Timestamp in milliseconds when the access group was last updated.
+   *
+   * @example 1588720733602
+   */
+  updatedAt: string;
+  /**
+   * ID of the access group.
+   *
+   * @example ag_123a6c5209bc3778245d011443644c8d27dc2c50
+   */
+  accessGroupId: string;
+  /**
+   * Number of members in the access group.
+   *
+   * @example 5
+   */
+  membersCount: number;
+  /**
+   * Number of projects in the access group.
+   *
+   * @example 2
+   */
+  projectsCount: number;
+};
+
+export type ReadAccessGroupVariables = {
+  pathParams: ReadAccessGroupPathParams;
+  queryParams?: ReadAccessGroupQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Allows to read an access group
+ */
+export const readAccessGroup = (variables: ReadAccessGroupVariables, signal?: AbortSignal) =>
+  fetch<
+    ReadAccessGroupResponse,
+    ReadAccessGroupError,
+    undefined,
+    {},
+    ReadAccessGroupQueryParams,
+    ReadAccessGroupPathParams
+  >({ url: '/v1/access-groups/{idOrName}', method: 'get', ...variables, signal });
+
+export type UpdateAccessGroupPathParams = {
+  idOrName: string;
+};
+
+export type UpdateAccessGroupQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type UpdateAccessGroupError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateAccessGroupResponse = {
+  entitlements?: 'v0'[];
+  /**
+   * The name of this access group.
+   *
+   * @example my-access-group
+   */
+  name: string;
+  /**
+   * Timestamp in milliseconds when the access group was created.
+   *
+   * @example 1588720733602
+   */
+  createdAt: string;
+  /**
+   * ID of the team that this access group belongs to.
+   *
+   * @example team_123a6c5209bc3778245d011443644c8d27dc2c50
+   */
+  teamId: string;
+  /**
+   * Timestamp in milliseconds when the access group was last updated.
+   *
+   * @example 1588720733602
+   */
+  updatedAt: string;
+  /**
+   * ID of the access group.
+   *
+   * @example ag_123a6c5209bc3778245d011443644c8d27dc2c50
+   */
+  accessGroupId: string;
+  /**
+   * Number of members in the access group.
+   *
+   * @example 5
+   */
+  membersCount: number;
+  /**
+   * Number of projects in the access group.
+   *
+   * @example 2
+   */
+  projectsCount: number;
+};
+
+export type UpdateAccessGroupRequestBody = {
+  /**
+   * The name of the access group
+   *
+   * @maxLength 50
+   * @pattern ^[A-z0-9_ -]+$
+   * @example My access group
+   */
+  name?: string;
+  projects?: {
+    /**
+     * The ID of the project.
+     *
+     * @maxLength 256
+     * @example prj_ndlgr43fadlPyCtREAqxxdyFK
+     */
+    projectId: string;
+    /**
+     * The project role that will be added to this Access Group. \"null\" will remove this project level role.
+     *
+     * @example ADMIN
+     */
+    role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER' | any | null;
+  }[];
+  /**
+   * List of members to add to the access group.
+   */
+  membersToAdd?: string[];
+  /**
+   * List of members to remove from the access group.
+   */
+  membersToRemove?: string[];
+};
+
+export type UpdateAccessGroupVariables = {
+  body?: UpdateAccessGroupRequestBody;
+  pathParams: UpdateAccessGroupPathParams;
+  queryParams?: UpdateAccessGroupQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Allows to update an access group metadata
+ */
+export const updateAccessGroup = (variables: UpdateAccessGroupVariables, signal?: AbortSignal) =>
+  fetch<
+    UpdateAccessGroupResponse,
+    UpdateAccessGroupError,
+    UpdateAccessGroupRequestBody,
+    {},
+    UpdateAccessGroupQueryParams,
+    UpdateAccessGroupPathParams
+  >({ url: '/v1/access-groups/{idOrName}', method: 'post', ...variables, signal });
+
+export type DeleteAccessGroupPathParams = {
+  idOrName: string;
+};
+
+export type DeleteAccessGroupQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type DeleteAccessGroupError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteAccessGroupVariables = {
+  pathParams: DeleteAccessGroupPathParams;
+  queryParams?: DeleteAccessGroupQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Allows to delete an access group
+ */
+export const deleteAccessGroup = (variables: DeleteAccessGroupVariables, signal?: AbortSignal) =>
+  fetch<undefined, DeleteAccessGroupError, undefined, {}, DeleteAccessGroupQueryParams, DeleteAccessGroupPathParams>({
+    url: '/v1/access-groups/{idOrName}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type ListAccessGroupMembersPathParams = {
+  /**
+   * The ID or name of the Access Group.
+   *
+   * @example ag_pavWOn1iLObbXLRiwVvzmPrTWyTf
+   */
+  idOrName: string;
+};
+
+export type ListAccessGroupMembersQueryParams = {
+  /**
+   * Limit how many access group members should be returned.
+   *
+   * @example 20
+   * @minimum 1
+   * @maximum 100
+   */
+  limit?: number;
+  /**
+   * Continuation cursor to retrieve the next page of results.
+   */
+  next?: string;
+  /**
+   * Search project members by their name, username, and email.
+   */
+  search?: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type ListAccessGroupMembersError = Fetcher.ErrorWrapper<undefined>;
+
+export type ListAccessGroupMembersResponse = {
+  members: {
+    avatar?: string;
+    email: string;
+    uid: string;
+    username: string;
+    name?: string;
+    createdAt?: string;
+    teamRole: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'VIEWER';
+  }[];
+  pagination: {
+    count: number;
+    next: string | null;
+  };
+};
+
+export type ListAccessGroupMembersVariables = {
+  pathParams: ListAccessGroupMembersPathParams;
+  queryParams?: ListAccessGroupMembersQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * List members of an access group
+ */
+export const listAccessGroupMembers = (variables: ListAccessGroupMembersVariables, signal?: AbortSignal) =>
+  fetch<
+    ListAccessGroupMembersResponse,
+    ListAccessGroupMembersError,
+    undefined,
+    {},
+    ListAccessGroupMembersQueryParams,
+    ListAccessGroupMembersPathParams
+  >({ url: '/v1/access-groups/{idOrName}/members', method: 'get', ...variables, signal });
+
+export type ListAccessGroupsQueryParams = {
+  /**
+   * Filter access groups by project.
+   *
+   * @example prj_pavWOn1iLObbx3RowVvzmPrTWyTf
+   */
+  projectId?: string;
+  /**
+   * Search for access groups by name.
+   *
+   * @example example
+   */
+  search?: string;
+  /**
+   * Number of members to include in the response.
+   *
+   * @example 20
+   * @minimum 1
+   * @maximum 100
+   */
+  membersLimit?: number;
+  /**
+   * Number of projects to include in the response.
+   *
+   * @example 20
+   * @minimum 1
+   * @maximum 100
+   */
+  projectsLimit?: number;
+  /**
+   * Limit how many access group should be returned.
+   *
+   * @example 20
+   * @minimum 1
+   * @maximum 100
+   */
+  limit?: number;
+  /**
+   * Continuation cursor to retrieve the next page of results.
+   */
+  next?: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type ListAccessGroupsError = Fetcher.ErrorWrapper<undefined>;
+
+export type ListAccessGroupsVariables = {
+  queryParams?: ListAccessGroupsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * List access groups
+ */
+export const listAccessGroups = (variables: ListAccessGroupsVariables, signal?: AbortSignal) =>
+  fetch<
+    | Record<string, any>
+    | {
+        accessGroups: {
+          members?: string[];
+          projects?: string[];
+          entitlements?: string[];
+          isDsyncManaged: boolean;
+          /**
+           * The name of this access group.
+           *
+           * @example my-access-group
+           */
+          name: string;
+          /**
+           * Timestamp in milliseconds when the access group was created.
+           *
+           * @example 1588720733602
+           */
+          createdAt: string;
+          /**
+           * ID of the team that this access group belongs to.
+           *
+           * @example team_123a6c5209bc3778245d011443644c8d27dc2c50
+           */
+          teamId: string;
+          /**
+           * Timestamp in milliseconds when the access group was last updated.
+           *
+           * @example 1588720733602
+           */
+          updatedAt: string;
+          /**
+           * ID of the access group.
+           *
+           * @example ag_123a6c5209bc3778245d011443644c8d27dc2c50
+           */
+          accessGroupId: string;
+          /**
+           * Number of members in the access group.
+           *
+           * @example 5
+           */
+          membersCount: number;
+          /**
+           * Number of projects in the access group.
+           *
+           * @example 2
+           */
+          projectsCount: number;
+        }[];
+        pagination: {
+          count: number;
+          next: string | null;
+        };
+      },
+    ListAccessGroupsError,
+    undefined,
+    {},
+    ListAccessGroupsQueryParams,
+    {}
+  >({ url: '/v1/access-groups', method: 'get', ...variables, signal });
+
+export type CreateAccessGroupQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type CreateAccessGroupError = Fetcher.ErrorWrapper<undefined>;
+
+export type CreateAccessGroupResponse = {
+  membersCount: number;
+  projectsCount: number;
+  /**
+   * The name of this access group.
+   *
+   * @example my-access-group
+   */
+  name: string;
+  /**
+   * Timestamp in milliseconds when the access group was created.
+   *
+   * @example 1588720733602
+   */
+  createdAt: string;
+  /**
+   * ID of the team that this access group belongs to.
+   *
+   * @example team_123a6c5209bc3778245d011443644c8d27dc2c50
+   */
+  teamId: string;
+  /**
+   * Timestamp in milliseconds when the access group was last updated.
+   *
+   * @example 1588720733602
+   */
+  updatedAt: string;
+  /**
+   * ID of the access group.
+   *
+   * @example ag_123a6c5209bc3778245d011443644c8d27dc2c50
+   */
+  accessGroupId: string;
+};
+
+export type CreateAccessGroupRequestBody = {
+  /**
+   * The name of the access group
+   *
+   * @maxLength 50
+   * @pattern ^[A-z0-9_ -]+$
+   * @example My access group
+   */
+  name: string;
+  projects?: {
+    /**
+     * The ID of the project.
+     *
+     * @maxLength 256
+     * @example prj_ndlgr43fadlPyCtREAqxxdyFK
+     */
+    projectId: string;
+    /**
+     * The project role that will be added to this Access Group. \"null\" will remove this project level role.
+     *
+     * @example ADMIN
+     */
+    role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER' | null;
+  }[];
+  /**
+   * List of members to add to the access group.
+   */
+  membersToAdd?: string[];
+};
+
+export type CreateAccessGroupVariables = {
+  body: CreateAccessGroupRequestBody;
+  queryParams?: CreateAccessGroupQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Allows to create an access group
+ */
+export const createAccessGroup = (variables: CreateAccessGroupVariables, signal?: AbortSignal) =>
+  fetch<
+    CreateAccessGroupResponse,
+    CreateAccessGroupError,
+    CreateAccessGroupRequestBody,
+    {},
+    CreateAccessGroupQueryParams,
+    {}
+  >({ url: '/v1/access-groups', method: 'post', ...variables, signal });
+
+export type ListAccessGroupProjectsPathParams = {
+  /**
+   * The ID or name of the Access Group.
+   *
+   * @example ag_pavWOn1iLObbXLRiwVvzmPrTWyTf
+   */
+  idOrName: string;
+};
+
+export type ListAccessGroupProjectsQueryParams = {
+  /**
+   * Limit how many access group projects should be returned.
+   *
+   * @example 20
+   * @minimum 1
+   * @maximum 100
+   */
+  limit?: number;
+  /**
+   * Continuation cursor to retrieve the next page of results.
+   */
+  next?: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type ListAccessGroupProjectsError = Fetcher.ErrorWrapper<undefined>;
+
+export type ListAccessGroupProjectsResponse = {
+  projects: {
+    projectId: string;
+    role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+    createdAt: string;
+    updatedAt: string;
+    project: {
+      name?: string;
+      framework?: string | null;
+      latestDeploymentId?: string;
+    };
+  }[];
+  pagination: {
+    count: number;
+    next: string | null;
+  };
+};
+
+export type ListAccessGroupProjectsVariables = {
+  pathParams: ListAccessGroupProjectsPathParams;
+  queryParams?: ListAccessGroupProjectsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * List projects of an access group
+ */
+export const listAccessGroupProjects = (variables: ListAccessGroupProjectsVariables, signal?: AbortSignal) =>
+  fetch<
+    ListAccessGroupProjectsResponse,
+    ListAccessGroupProjectsError,
+    undefined,
+    {},
+    ListAccessGroupProjectsQueryParams,
+    ListAccessGroupProjectsPathParams
+  >({ url: '/v1/access-groups/{idOrName}/projects', method: 'get', ...variables, signal });
+
+export type CreateAccessGroupProjectPathParams = {
+  accessGroupIdOrName: string;
+};
+
+export type CreateAccessGroupProjectQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type CreateAccessGroupProjectError = Fetcher.ErrorWrapper<undefined>;
+
+export type CreateAccessGroupProjectResponse = {
+  teamId: string;
+  accessGroupId: string;
+  projectId: string;
+  role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type CreateAccessGroupProjectRequestBody = {
+  /**
+   * The ID of the project.
+   *
+   * @maxLength 256
+   * @example prj_ndlgr43fadlPyCtREAqxxdyFK
+   */
+  projectId: string;
+  /**
+   * The project role that will be added to this Access Group.
+   *
+   * @example ADMIN
+   */
+  role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+};
+
+export type CreateAccessGroupProjectVariables = {
+  body: CreateAccessGroupProjectRequestBody;
+  pathParams: CreateAccessGroupProjectPathParams;
+  queryParams?: CreateAccessGroupProjectQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Allows creation of an access group project
+ */
+export const createAccessGroupProject = (variables: CreateAccessGroupProjectVariables, signal?: AbortSignal) =>
+  fetch<
+    CreateAccessGroupProjectResponse,
+    CreateAccessGroupProjectError,
+    CreateAccessGroupProjectRequestBody,
+    {},
+    CreateAccessGroupProjectQueryParams,
+    CreateAccessGroupProjectPathParams
+  >({ url: '/v1/access-groups/{accessGroupIdOrName}/projects', method: 'post', ...variables, signal });
+
+export type ReadAccessGroupProjectPathParams = {
+  accessGroupIdOrName: string;
+  projectId: string;
+};
+
+export type ReadAccessGroupProjectQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type ReadAccessGroupProjectError = Fetcher.ErrorWrapper<undefined>;
+
+export type ReadAccessGroupProjectResponse = {
+  teamId: string;
+  accessGroupId: string;
+  projectId: string;
+  role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ReadAccessGroupProjectVariables = {
+  pathParams: ReadAccessGroupProjectPathParams;
+  queryParams?: ReadAccessGroupProjectQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Allows reading an access group project
+ */
+export const readAccessGroupProject = (variables: ReadAccessGroupProjectVariables, signal?: AbortSignal) =>
+  fetch<
+    ReadAccessGroupProjectResponse,
+    ReadAccessGroupProjectError,
+    undefined,
+    {},
+    ReadAccessGroupProjectQueryParams,
+    ReadAccessGroupProjectPathParams
+  >({ url: '/v1/access-groups/{accessGroupIdOrName}/projects/{projectId}', method: 'get', ...variables, signal });
+
+export type UpdateAccessGroupProjectPathParams = {
+  accessGroupIdOrName: string;
+  projectId: string;
+};
+
+export type UpdateAccessGroupProjectQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type UpdateAccessGroupProjectError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateAccessGroupProjectResponse = {
+  teamId: string;
+  accessGroupId: string;
+  projectId: string;
+  role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type UpdateAccessGroupProjectRequestBody = {
+  /**
+   * The project role that will be added to this Access Group.
+   *
+   * @example ADMIN
+   */
+  role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+};
+
+export type UpdateAccessGroupProjectVariables = {
+  body: UpdateAccessGroupProjectRequestBody;
+  pathParams: UpdateAccessGroupProjectPathParams;
+  queryParams?: UpdateAccessGroupProjectQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Allows update of an access group project
+ */
+export const updateAccessGroupProject = (variables: UpdateAccessGroupProjectVariables, signal?: AbortSignal) =>
+  fetch<
+    UpdateAccessGroupProjectResponse,
+    UpdateAccessGroupProjectError,
+    UpdateAccessGroupProjectRequestBody,
+    {},
+    UpdateAccessGroupProjectQueryParams,
+    UpdateAccessGroupProjectPathParams
+  >({ url: '/v1/access-groups/{accessGroupIdOrName}/projects/{projectId}', method: 'patch', ...variables, signal });
+
+export type DeleteAccessGroupProjectPathParams = {
+  accessGroupIdOrName: string;
+  projectId: string;
+};
+
+export type DeleteAccessGroupProjectQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type DeleteAccessGroupProjectError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteAccessGroupProjectVariables = {
+  pathParams: DeleteAccessGroupProjectPathParams;
+  queryParams?: DeleteAccessGroupProjectQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Allows deletion of an access group project
+ */
+export const deleteAccessGroupProject = (variables: DeleteAccessGroupProjectVariables, signal?: AbortSignal) =>
+  fetch<
+    undefined,
+    DeleteAccessGroupProjectError,
+    undefined,
+    {},
+    DeleteAccessGroupProjectQueryParams,
+    DeleteAccessGroupProjectPathParams
+  >({ url: '/v1/access-groups/{accessGroupIdOrName}/projects/{projectId}', method: 'delete', ...variables, signal });
+
+export type RecordEventsQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type RecordEventsHeaders = {
@@ -80,9 +874,13 @@ export const recordEvents = (variables: RecordEventsVariables, signal?: AbortSig
 
 export type StatusQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type StatusError = Fetcher.ErrorWrapper<undefined>;
@@ -117,9 +915,13 @@ export type UploadArtifactPathParams = {
 
 export type UploadArtifactQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type UploadArtifactHeaders = {
@@ -199,9 +1001,13 @@ export type DownloadArtifactPathParams = {
 
 export type DownloadArtifactQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type DownloadArtifactHeaders = {
@@ -245,9 +1051,13 @@ export const downloadArtifact = (variables: DownloadArtifactVariables, signal?: 
 
 export type ArtifactQueryQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type ArtifactQueryError = Fetcher.ErrorWrapper<undefined>;
@@ -301,9 +1111,13 @@ export type CreateCheckPathParams = {
 
 export type CreateCheckQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type CreateCheckError = Fetcher.ErrorWrapper<undefined>;
@@ -312,8 +1126,8 @@ export type CreateCheckResponse = {
   id: string;
   name: string;
   path?: string;
-  status: 'registered' | 'running' | 'completed';
-  conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped' | 'stale';
+  status: 'completed' | 'registered' | 'running';
+  conclusion?: 'canceled' | 'failed' | 'neutral' | 'skipped' | 'stale' | 'succeeded';
   blocking: boolean;
   output?: {
     metrics?: {
@@ -426,9 +1240,13 @@ export type GetAllChecksPathParams = {
 
 export type GetAllChecksQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetAllChecksError = Fetcher.ErrorWrapper<undefined>;
@@ -436,7 +1254,7 @@ export type GetAllChecksError = Fetcher.ErrorWrapper<undefined>;
 export type GetAllChecksResponse = {
   checks: {
     completedAt?: number;
-    conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped' | 'stale';
+    conclusion?: 'canceled' | 'failed' | 'neutral' | 'skipped' | 'stale' | 'succeeded';
     createdAt: number;
     detailsUrl?: string;
     id: string;
@@ -474,7 +1292,7 @@ export type GetAllChecksResponse = {
     path?: string;
     rerequestable: boolean;
     startedAt?: number;
-    status: 'registered' | 'running' | 'completed';
+    status: 'completed' | 'registered' | 'running';
     updatedAt: number;
   }[];
 };
@@ -512,9 +1330,13 @@ export type GetCheckPathParams = {
 
 export type GetCheckQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetCheckError = Fetcher.ErrorWrapper<undefined>;
@@ -523,8 +1345,8 @@ export type GetCheckResponse = {
   id: string;
   name: string;
   path?: string;
-  status: 'registered' | 'running' | 'completed';
-  conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped' | 'stale';
+  status: 'completed' | 'registered' | 'running';
+  conclusion?: 'canceled' | 'failed' | 'neutral' | 'skipped' | 'stale' | 'succeeded';
   blocking: boolean;
   output?: {
     metrics?: {
@@ -599,9 +1421,13 @@ export type UpdateCheckPathParams = {
 
 export type UpdateCheckQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type UpdateCheckError = Fetcher.ErrorWrapper<undefined>;
@@ -610,8 +1436,8 @@ export type UpdateCheckResponse = {
   id: string;
   name: string;
   path?: string;
-  status: 'registered' | 'running' | 'completed';
-  conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped' | 'stale';
+  status: 'completed' | 'registered' | 'running';
+  conclusion?: 'canceled' | 'failed' | 'neutral' | 'skipped' | 'stale' | 'succeeded';
   blocking: boolean;
   output?: {
     metrics?: {
@@ -671,11 +1497,11 @@ export type UpdateCheckRequestBody = {
   /**
    * The current status of the check
    */
-  status?: 'running' | 'completed';
+  status?: 'completed' | 'running';
   /**
    * The result of the check being run
    */
-  conclusion?: 'canceled' | 'failed' | 'neutral' | 'succeeded' | 'skipped';
+  conclusion?: 'canceled' | 'failed' | 'neutral' | 'skipped' | 'succeeded';
   /**
    * A URL a user may visit to see more information about the check
    *
@@ -815,9 +1641,13 @@ export type RerequestCheckPathParams = {
 
 export type RerequestCheckQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type RerequestCheckError = Fetcher.ErrorWrapper<undefined>;
@@ -838,6 +1668,51 @@ export const rerequestCheck = (variables: RerequestCheckVariables, signal?: Abor
     signal
   });
 
+export type DeleteDataCachePurgeAllQueryParams = {
+  projectIdOrName: string;
+};
+
+export type DeleteDataCachePurgeAllError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteDataCachePurgeAllVariables = {
+  queryParams: DeleteDataCachePurgeAllQueryParams;
+} & FetcherExtraProps;
+
+export const deleteDataCachePurgeAll = (variables: DeleteDataCachePurgeAllVariables, signal?: AbortSignal) =>
+  fetch<undefined, DeleteDataCachePurgeAllError, undefined, {}, DeleteDataCachePurgeAllQueryParams, {}>({
+    url: '/data-cache/purge-all',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type PatchDataCacheBillingSettingsError = Fetcher.ErrorWrapper<undefined>;
+
+export type PatchDataCacheBillingSettingsResponse = {
+  excessBillingEnabled?: boolean;
+};
+
+export type PatchDataCacheBillingSettingsRequestBody = {
+  excessBillingEnabled?: boolean;
+};
+
+export type PatchDataCacheBillingSettingsVariables = {
+  body?: PatchDataCacheBillingSettingsRequestBody;
+} & FetcherExtraProps;
+
+export const patchDataCacheBillingSettings = (
+  variables: PatchDataCacheBillingSettingsVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    PatchDataCacheBillingSettingsResponse,
+    PatchDataCacheBillingSettingsError,
+    PatchDataCacheBillingSettingsRequestBody,
+    {},
+    {},
+    {}
+  >({ url: '/data-cache/billing-settings', method: 'patch', ...variables, signal });
+
 export type UpdateProjectDataCachePathParams = {
   /**
    * The unique project identifier
@@ -849,9 +1724,13 @@ export type UpdateProjectDataCachePathParams = {
 
 export type UpdateProjectDataCacheQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type UpdateProjectDataCacheError = Fetcher.ErrorWrapper<undefined>;
@@ -860,7 +1739,7 @@ export type UpdateProjectDataCacheResponse = {
   accountId: string;
   analytics?: {
     id: string;
-    canceledAt: number | null;
+    canceledAt?: number | null;
     disabledAt: number;
     enabledAt: number;
     paidAt?: number;
@@ -924,6 +1803,13 @@ export type UpdateProjectDataCacheResponse = {
     storageSizeBytes?: number | null;
     unlimited?: boolean;
   };
+  deploymentExpiration?: {
+    expirationDays?: number;
+    expirationDaysProduction?: number;
+    expirationDaysCanceled?: number;
+    expirationDaysErrored?: number;
+    deploymentsToKeep?: number;
+  } | null;
   devCommand?: string | null;
   directoryListing: boolean;
   installCommand?: string | null;
@@ -931,7 +1817,11 @@ export type UpdateProjectDataCacheResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+    type: 'encrypted' | 'plain' | 'secret' | 'sensitive' | 'system';
+    /**
+     * This is used to identiy variables that have been migrated from type secret to sensitive.
+     */
+    sunsetSecretId?: string;
     id?: string;
     key: string;
     value: string;
@@ -992,61 +1882,97 @@ export type UpdateProjectDataCacheResponse = {
           type: 'postgres-database';
           storeId: string;
         }
+      | {
+          type: 'postgres-url-no-ssl';
+          storeId: string;
+        }
+      | {
+          type: 'integration-store-secret';
+          storeId: string;
+          integrationId: string;
+          integrationProductId: string;
+          integrationConfigurationId: string;
+        }
+      | {
+          type: 'flags-connection-string';
+          projectId: string;
+        }
       | null;
     /**
-     * Whether `value` is decrypted.
+     * Similar to `contentHints`, but should not be exposed to the user.
+     */
+    internalContentHint?: {
+      type: 'flags-secret';
+      /**
+       * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+       */
+      encryptedValue: string;
+    } | null;
+    /**
+     * Whether `value` and `vsmValue` are decrypted.
      */
     decrypted?: boolean;
     comment?: string;
+    customEnvironmentIds?: string[];
+    vsmValue?: string;
   }[];
+  customEnvironments?: Record<string, any>[];
   framework?:
-    | 'blitzjs'
-    | 'nextjs'
-    | 'gatsby'
-    | 'remix'
-    | 'astro'
-    | 'hexo'
-    | 'eleventy'
-    | 'docusaurus-2'
-    | 'docusaurus'
-    | 'preact'
-    | 'solidstart'
-    | 'dojo'
-    | 'ember'
-    | 'vue'
-    | 'scully'
-    | 'ionic-angular'
     | 'angular'
+    | 'astro'
+    | 'blitzjs'
+    | 'brunch'
+    | 'create-react-app'
+    | 'docusaurus'
+    | 'docusaurus-2'
+    | 'dojo'
+    | 'eleventy'
+    | 'ember'
+    | 'fasthtml'
+    | 'gatsby'
+    | 'gridsome'
+    | 'hexo'
+    | 'hugo'
+    | 'hydrogen'
+    | 'ionic-angular'
+    | 'ionic-react'
+    | 'jekyll'
+    | 'middleman'
+    | 'nextjs'
+    | 'nuxtjs'
+    | 'parcel'
     | 'polymer'
+    | 'preact'
+    | 'redwoodjs'
+    | 'remix'
+    | 'saber'
+    | 'sanity'
+    | 'sanity-v3'
+    | 'sapper'
+    | 'scully'
+    | 'solidstart'
+    | 'solidstart-1'
+    | 'stencil'
+    | 'storybook'
     | 'svelte'
     | 'sveltekit'
     | 'sveltekit-1'
-    | 'ionic-react'
-    | 'create-react-app'
-    | 'gridsome'
     | 'umijs'
-    | 'sapper'
-    | 'saber'
-    | 'stencil'
-    | 'nuxtjs'
-    | 'redwoodjs'
-    | 'hugo'
-    | 'jekyll'
-    | 'brunch'
-    | 'middleman'
-    | 'zola'
-    | 'hydrogen'
     | 'vite'
     | 'vitepress'
+    | 'vue'
     | 'vuepress'
-    | 'parcel'
-    | 'sanity'
-    | 'storybook'
+    | 'zola'
     | null;
   gitForkProtection?: boolean;
   gitLFS?: boolean;
   id: string;
+  ipBuckets?: {
+    bucket: string;
+    supportUntil?: number;
+  }[];
   latestDeployments?: {
+    id: string;
     alias?: string[];
     aliasAssigned?: number | boolean | null;
     aliasError?: {
@@ -1055,11 +1981,18 @@ export type UpdateProjectDataCacheResponse = {
     } | null;
     aliasFinal?: string | null;
     automaticAliases?: string[];
+    branchMatcher?: {
+      type: 'endsWith' | 'equals' | 'startsWith';
+      pattern: string;
+    };
+    buildingAt?: number;
     builds?: {
       use: string;
       src?: string;
       dest?: string;
     }[];
+    checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+    checksState?: 'completed' | 'registered' | 'running';
     connectBuildsEnabled?: boolean;
     connectConfigurationId?: string;
     createdAt: number;
@@ -1071,18 +2004,36 @@ export type UpdateProjectDataCacheResponse = {
       uid: string;
       username: string;
     } | null;
+    deletedAt?: number;
     deploymentHostname: string;
-    name: string;
     forced?: boolean;
-    id: string;
+    name: string;
     meta?: {
       [key: string]: string;
     };
     monorepoManager?: string | null;
-    plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
+    oidcTokenClaims?: {
+      iss: string;
+      sub: string;
+      scope: string;
+      aud: string;
+      owner: string;
+      owner_id: string;
+      project: string;
+      project_id: string;
+      environment: string;
+    };
+    plan: 'enterprise' | 'hobby' | 'pro';
+    /**
+     * Whether or not preview comments are enabled for the deployment
+     *
+     * @example false
+     */
+    previewCommentsEnabled?: boolean;
     private: boolean;
-    readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-    readySubstate?: 'STAGED' | 'PROMOTED';
+    readyAt?: number;
+    readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+    readySubstate?: 'PROMOTED' | 'STAGED';
     requestedAt?: number;
     target?: string | null;
     teamId?: string | null;
@@ -1090,20 +2041,14 @@ export type UpdateProjectDataCacheResponse = {
     url: string;
     userId: string;
     withCache?: boolean;
-    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-    checksState?: 'registered' | 'running' | 'completed';
-    readyAt?: number;
-    buildingAt?: number;
-    /**
-     * Whether or not preview comments are enabled for the deployment
-     *
-     * @example false
-     */
-    previewCommentsEnabled?: boolean;
   }[];
   link?:
     | {
         org?: string;
+        /**
+         * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes.
+         */
+        repoOwnerId?: number;
         repo?: string;
         repoId?: number;
         type?: 'github';
@@ -1125,6 +2070,10 @@ export type UpdateProjectDataCacheResponse = {
         projectName?: string;
         projectNameWithNamespace?: string;
         projectNamespace?: string;
+        /**
+         * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes. This is the id of the top level group that a namespace belongs to. Gitlab supports group nesting (up to 20 levels).
+         */
+        projectOwnerId?: number;
         projectUrl?: string;
         type?: 'gitlab';
         createdAt?: number;
@@ -1160,22 +2109,60 @@ export type UpdateProjectDataCacheResponse = {
         sourceless?: boolean;
         productionBranch?: string;
       };
+  microfrontends?: {
+    /**
+     * Timestamp when the microfrontends settings were last updated.
+     */
+    updatedAt: number;
+    /**
+     * The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+     */
+    groupIds: string[];
+    /**
+     * Whether microfrontends are enabled for this project.
+     */
+    enabled: boolean;
+    /**
+     * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+     */
+    isDefaultApp?: boolean;
+    /**
+     * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+     */
+    defaultRoute?: string;
+  };
   name: string;
-  nodeVersion: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
+  nodeVersion: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
+  optionsAllowlist?: {
+    paths: {
+      value: string;
+    }[];
+  } | null;
   outputDirectory?: string | null;
   passiveConnectConfigurationId?: string | null;
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
+  resourceConfig?: {
+    functionDefaultTimeout?: number;
+    functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
+    allowServerlessConcurrency?: boolean;
+    elasticConcurrencyEnabled?: boolean;
+  };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
+  serverlessFunctionZeroConfigFailover?: boolean;
+  skewProtectionBoundaryAt?: number;
+  skewProtectionMaxAge?: number;
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
+  enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
     deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
+      id: string;
       alias?: string[];
       aliasAssigned?: number | boolean | null;
       aliasError?: {
@@ -1184,11 +2171,18 @@ export type UpdateProjectDataCacheResponse = {
       } | null;
       aliasFinal?: string | null;
       automaticAliases?: string[];
+      branchMatcher?: {
+        type: 'endsWith' | 'equals' | 'startsWith';
+        pattern: string;
+      };
+      buildingAt?: number;
       builds?: {
         use: string;
         src?: string;
         dest?: string;
       }[];
+      checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+      checksState?: 'completed' | 'registered' | 'running';
       connectBuildsEnabled?: boolean;
       connectConfigurationId?: string;
       createdAt: number;
@@ -1200,18 +2194,36 @@ export type UpdateProjectDataCacheResponse = {
         uid: string;
         username: string;
       } | null;
+      deletedAt?: number;
       deploymentHostname: string;
-      name: string;
       forced?: boolean;
-      id: string;
+      name: string;
       meta?: {
         [key: string]: string;
       };
       monorepoManager?: string | null;
-      plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
+      oidcTokenClaims?: {
+        iss: string;
+        sub: string;
+        scope: string;
+        aud: string;
+        owner: string;
+        owner_id: string;
+        project: string;
+        project_id: string;
+        environment: string;
+      };
+      plan: 'enterprise' | 'hobby' | 'pro';
+      /**
+       * Whether or not preview comments are enabled for the deployment
+       *
+       * @example false
+       */
+      previewCommentsEnabled?: boolean;
       private: boolean;
-      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-      readySubstate?: 'STAGED' | 'PROMOTED';
+      readyAt?: number;
+      readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+      readySubstate?: 'PROMOTED' | 'STAGED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
@@ -1219,16 +2231,6 @@ export type UpdateProjectDataCacheResponse = {
       url: string;
       userId: string;
       withCache?: boolean;
-      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-      checksState?: 'registered' | 'running' | 'completed';
-      readyAt?: number;
-      buildingAt?: number;
-      /**
-       * Whether or not preview comments are enabled for the deployment
-       *
-       * @example false
-       */
-      previewCommentsEnabled?: boolean;
     } | null;
   };
   transferCompletedAt?: number;
@@ -1238,6 +2240,7 @@ export type UpdateProjectDataCacheResponse = {
   updatedAt?: number;
   live?: boolean;
   enablePreviewFeedback?: boolean | null;
+  enableProductionFeedback?: boolean | null;
   permissions?: {
     accessGroup?: Schemas.ACLAction[];
     aliasGlobal?: Schemas.ACLAction[];
@@ -1256,6 +2259,7 @@ export type UpdateProjectDataCacheResponse = {
     budget?: Schemas.ACLAction[];
     cacheArtifact?: Schemas.ACLAction[];
     cacheArtifactUsageEvent?: Schemas.ACLAction[];
+    codeChecks?: Schemas.ACLAction[];
     concurrentBuilds?: Schemas.ACLAction[];
     connect?: Schemas.ACLAction[];
     connectConfiguration?: Schemas.ACLAction[];
@@ -1275,13 +2279,23 @@ export type UpdateProjectDataCacheResponse = {
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
     integration?: Schemas.ACLAction[];
+    integrationAccount?: Schemas.ACLAction[];
     integrationConfiguration?: Schemas.ACLAction[];
     integrationConfigurationTransfer?: Schemas.ACLAction[];
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
+    integrationConfigurationRole?: Schemas.ACLAction[];
+    integrationResource?: Schemas.ACLAction[];
+    integrationEvent?: Schemas.ACLAction[];
+    integrationResourceSecrets?: Schemas.ACLAction[];
+    integrationDeploymentAction?: Schemas.ACLAction[];
+    marketplaceInstallationMember?: Schemas.ACLAction[];
+    marketplaceBillingData?: Schemas.ACLAction[];
+    marketplaceInvoice?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
+    monitoringSettings?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
     monitoringChart?: Schemas.ACLAction[];
     monitoringAlert?: Schemas.ACLAction[];
@@ -1297,13 +2311,15 @@ export type UpdateProjectDataCacheResponse = {
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationCustomerBudget?: Schemas.ACLAction[];
+    notificationStatementOfReasons?: Schemas.ACLAction[];
+    oauth2Connection?: Schemas.ACLAction[];
+    observabilityConfiguration?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
     postgres?: Schemas.ACLAction[];
     previewDeploymentSuffix?: Schemas.ACLAction[];
     proTrialOnboarding?: Schemas.ACLAction[];
-    seawallConfig?: Schemas.ACLAction[];
     sharedEnvVars?: Schemas.ACLAction[];
     sharedEnvVarsProduction?: Schemas.ACLAction[];
     space?: Schemas.ACLAction[];
@@ -1311,21 +2327,27 @@ export type UpdateProjectDataCacheResponse = {
     passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
+    repository?: Schemas.ACLAction[];
     remoteCaching?: Schemas.ACLAction[];
     samlConfig?: Schemas.ACLAction[];
     secret?: Schemas.ACLAction[];
     redisStoreTokenSet?: Schemas.ACLAction[];
     blobStoreTokenSet?: Schemas.ACLAction[];
     postgresStoreTokenSet?: Schemas.ACLAction[];
+    integrationStoreTokenSet?: Schemas.ACLAction[];
+    integrationResourceReplCommand?: Schemas.ACLAction[];
+    storeTransfer?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
     teamFellowMembership?: Schemas.ACLAction[];
+    teamGitExclusivity?: Schemas.ACLAction[];
     teamInvite?: Schemas.ACLAction[];
     teamInviteCode?: Schemas.ACLAction[];
     teamJoin?: Schemas.ACLAction[];
+    teamMicrofrontends?: Schemas.ACLAction[];
     teamOwnMembership?: Schemas.ACLAction[];
     teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
     token?: Schemas.ACLAction[];
@@ -1333,6 +2355,7 @@ export type UpdateProjectDataCacheResponse = {
     usageCycle?: Schemas.ACLAction[];
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
+    vpcPeeringConnection?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
     webAuthn?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
@@ -1343,6 +2366,7 @@ export type UpdateProjectDataCacheResponse = {
     ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
     projectTransferIn?: Schemas.ACLAction[];
+    oauth2Application?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
     productionAliasProtectionBypass?: Schemas.ACLAction[];
@@ -1353,15 +2377,21 @@ export type UpdateProjectDataCacheResponse = {
     deploymentCheckPreview?: Schemas.ACLAction[];
     deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
     deploymentProductionGit?: Schemas.ACLAction[];
+    deploymentV0?: Schemas.ACLAction[];
     deploymentPreview?: Schemas.ACLAction[];
     deploymentPrivate?: Schemas.ACLAction[];
     deploymentPromote?: Schemas.ACLAction[];
     deploymentRollback?: Schemas.ACLAction[];
+    environments?: Schemas.ACLAction[];
     logs?: Schemas.ACLAction[];
     logsPreset?: Schemas.ACLAction[];
     passwordProtection?: Schemas.ACLAction[];
+    optionsAllowlist?: Schemas.ACLAction[];
     job?: Schemas.ACLAction[];
+    observabilityData?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
+    projectFromV0?: Schemas.ACLAction[];
+    projectAccessGroup?: Schemas.ACLAction[];
     projectAnalyticsSampling?: Schemas.ACLAction[];
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
@@ -1370,6 +2400,7 @@ export type UpdateProjectDataCacheResponse = {
     projectEnvVars?: Schemas.ACLAction[];
     projectEnvVarsProduction?: Schemas.ACLAction[];
     projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+    projectFlags?: Schemas.ACLAction[];
     projectId?: Schemas.ACLAction[];
     projectIntegrationConfiguration?: Schemas.ACLAction[];
     projectLink?: Schemas.ACLAction[];
@@ -1384,16 +2415,21 @@ export type UpdateProjectDataCacheResponse = {
     projectAnalyticsUsage?: Schemas.ACLAction[];
     projectSupportCase?: Schemas.ACLAction[];
     projectSupportCaseComment?: Schemas.ACLAction[];
+    projectDeploymentExpiration?: Schemas.ACLAction[];
+    projectTier?: Schemas.ACLAction[];
+    seawallConfig?: Schemas.ACLAction[];
+    skewProtection?: Schemas.ACLAction[];
     analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
     sharedEnvVarConnection?: Schemas.ACLAction[];
+    sonar?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+    jobStatus: 'failed' | 'in-progress' | 'pending' | 'skipped' | 'succeeded';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -1408,7 +2444,7 @@ export type UpdateProjectDataCacheResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         addresses: {
           value: string;
           note?: string;
@@ -1416,7 +2452,7 @@ export type UpdateProjectDataCacheResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
       }
     | null;
   gitComments?: {
@@ -1430,6 +2466,127 @@ export type UpdateProjectDataCacheResponse = {
     onCommit: boolean;
   };
   paused?: boolean;
+  concurrencyBucketName?: string;
+  webAnalytics?: {
+    id: string;
+    disabledAt?: number;
+    canceledAt?: number;
+    enabledAt?: number;
+    hasData?: boolean;
+  };
+  security?: {
+    attackModeEnabled?: boolean;
+    attackModeUpdatedAt?: number;
+    firewallEnabled?: boolean;
+    firewallUpdatedAt?: number;
+    attackModeActiveUntil?: number | null;
+    firewallConfigVersion?: number;
+    firewallRoutes?: {
+      src?:
+        | string
+        | {
+            re?: string;
+            eq?: string;
+            neq?: string;
+            inc?: string[];
+            ninc?: string[];
+            pre?: string;
+            suf?: string;
+            gt?: number;
+            gte?: number;
+            lt?: number;
+            lte?: number;
+          };
+      has?: {
+        type:
+          | 'cookie'
+          | 'environment'
+          | 'header'
+          | 'host'
+          | 'initial_request_path'
+          | 'ip_address'
+          | 'method'
+          | 'path'
+          | 'protocol'
+          | 'query'
+          | 'region'
+          | 'scheme';
+        key?: string;
+        value?:
+          | string
+          | {
+              re?: string;
+              eq?: string;
+              neq?: string;
+              inc?: string[];
+              ninc?: string[];
+              pre?: string;
+              suf?: string;
+              gt?: number;
+              gte?: number;
+              lt?: number;
+              lte?: number;
+            };
+      }[];
+      missing?: {
+        type:
+          | 'cookie'
+          | 'environment'
+          | 'header'
+          | 'host'
+          | 'initial_request_path'
+          | 'ip_address'
+          | 'method'
+          | 'path'
+          | 'protocol'
+          | 'query'
+          | 'region'
+          | 'scheme';
+        key?: string;
+        value?:
+          | string
+          | {
+              re?: string;
+              eq?: string;
+              neq?: string;
+              inc?: string[];
+              ninc?: string[];
+              pre?: string;
+              suf?: string;
+              gt?: number;
+              gte?: number;
+              lt?: number;
+              lte?: number;
+            };
+      }[];
+      dest?: string;
+      status?: number;
+      handle?: 'finalize' | 'init';
+      mitigate?: {
+        action: 'bypass' | 'challenge' | 'deny' | 'log' | 'rate_limit' | 'redirect';
+        rule_id: string;
+        ttl?: number;
+        erl?: {
+          algo: 'fixed_window' | 'token_bucket';
+          window: number;
+          limit: number;
+          keys: string[];
+        };
+      };
+    }[];
+    firewallSeawallEnabled?: boolean;
+    ja3Enabled?: boolean;
+    ja4Enabled?: boolean;
+    firewallBypassIps?: string[];
+  };
+  oidcTokenConfig?: {
+    enabled: boolean;
+    /**
+     * - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
+     */
+    issuerMode?: 'global' | 'team';
+  };
+  tier?: 'advanced' | 'critical' | 'standard';
 };
 
 export type UpdateProjectDataCacheRequestBody = {
@@ -1522,230 +2679,16 @@ export type GetDeploymentEventsQueryParams = {
    */
   builds?: 0 | 1;
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetDeploymentEventsError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetDeploymentEventsResponse = (
-  | {
-      type: 'command';
-      created: number;
-      payload: {
-        deploymentId: string;
-        text?: string;
-        id: string;
-        date: number;
-        serial: string;
-      };
-    }
-  | {
-      type: 'deployment-state';
-      created: number;
-      payload: {
-        deploymentId: string;
-        info: {
-          type: string;
-          name: string;
-          entrypoint?: string;
-          path?: string;
-          step?: string;
-        };
-        id: string;
-        date: number;
-        serial: string;
-      };
-    }
-  | {
-      type: 'delimiter';
-      created: number;
-      payload: {
-        deploymentId: string;
-        info: {
-          type: string;
-          name: string;
-          entrypoint?: string;
-          path?: string;
-          step?: string;
-        };
-        id: string;
-        date: number;
-        serial: string;
-      };
-    }
-  | {
-      type: 'exit';
-      created: number;
-      payload: {
-        date: number;
-        text?: string;
-        id: string;
-        deploymentId: string;
-        created: number;
-        serial: string;
-      };
-    }
-  | {
-      type: 'middleware';
-      created: number;
-      payload: {
-        deploymentId: string;
-        info: {
-          type: string;
-          name: string;
-          entrypoint?: string;
-          path?: string;
-          step?: string;
-        };
-        text?: string;
-        id: string;
-        date: number;
-        serial: string;
-        requestId?: string;
-      };
-    }
-  | {
-      type:
-        | 'delimiter'
-        | 'command'
-        | 'stdout'
-        | 'stderr'
-        | 'exit'
-        | 'deployment-state'
-        | 'middleware'
-        | 'middleware-invocation'
-        | 'edge-function-invocation'
-        | 'fatal';
-      created: number;
-      payload: {
-        deploymentId: string;
-        info: {
-          type: string;
-          name: string;
-          entrypoint?: string;
-          path?: string;
-          step?: string;
-        };
-        text?: string;
-        id: string;
-        date: number;
-        serial: string;
-        statusCode?: number;
-        requestId?: string;
-      };
-    }
-  | (
-      | Record<string, any>
-      | {
-          type: 'command';
-          created: number;
-          payload: {
-            deploymentId: string;
-            text?: string;
-            id: string;
-            date: number;
-            serial: string;
-          };
-        }
-      | {
-          type: 'deployment-state';
-          created: number;
-          payload: {
-            deploymentId: string;
-            info: {
-              type: string;
-              name: string;
-              entrypoint?: string;
-              path?: string;
-              step?: string;
-            };
-            id: string;
-            date: number;
-            serial: string;
-          };
-        }
-      | {
-          type: 'delimiter';
-          created: number;
-          payload: {
-            deploymentId: string;
-            info: {
-              type: string;
-              name: string;
-              entrypoint?: string;
-              path?: string;
-              step?: string;
-            };
-            id: string;
-            date: number;
-            serial: string;
-          };
-        }
-      | {
-          type: 'exit';
-          created: number;
-          payload: {
-            date: number;
-            text?: string;
-            id: string;
-            deploymentId: string;
-            created: number;
-            serial: string;
-          };
-        }
-      | {
-          type: 'middleware';
-          created: number;
-          payload: {
-            deploymentId: string;
-            info: {
-              type: string;
-              name: string;
-              entrypoint?: string;
-              path?: string;
-              step?: string;
-            };
-            text?: string;
-            id: string;
-            date: number;
-            serial: string;
-            requestId?: string;
-          };
-        }
-      | {
-          type:
-            | 'delimiter'
-            | 'command'
-            | 'stdout'
-            | 'stderr'
-            | 'exit'
-            | 'deployment-state'
-            | 'middleware'
-            | 'middleware-invocation'
-            | 'edge-function-invocation'
-            | 'fatal';
-          created: number;
-          payload: {
-            deploymentId: string;
-            info: {
-              type: string;
-              name: string;
-              entrypoint?: string;
-              path?: string;
-              step?: string;
-            };
-            text?: string;
-            id: string;
-            date: number;
-            serial: string;
-            statusCode?: number;
-            requestId?: string;
-          };
-        }
-    )
-)[];
 
 export type GetDeploymentEventsVariables = {
   pathParams: GetDeploymentEventsPathParams;
@@ -1757,13 +2700,13 @@ export type GetDeploymentEventsVariables = {
  */
 export const getDeploymentEvents = (variables: GetDeploymentEventsVariables, signal?: AbortSignal) =>
   fetch<
-    GetDeploymentEventsResponse,
+    undefined,
     GetDeploymentEventsError,
     undefined,
     {},
     GetDeploymentEventsQueryParams,
     GetDeploymentEventsPathParams
-  >({ url: '/v2/deployments/{idOrUrl}/events', method: 'get', ...variables, signal });
+  >({ url: '/v3/deployments/{idOrUrl}/events', method: 'get', ...variables, signal });
 
 export type GetDeploymentPathParams = {
   /**
@@ -1782,9 +2725,13 @@ export type GetDeploymentQueryParams = {
    */
   withGitRepoInfo?: string;
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetDeploymentError = Fetcher.ErrorWrapper<undefined>;
@@ -1800,40 +2747,329 @@ export type GetDeploymentVariables = {
 export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortSignal) =>
   fetch<
     | {
+        aliasAssignedAt?: number | boolean | null;
+        alwaysRefuseToBuild?: boolean;
         build: {
-          /**
-           * The keys of the environment variables that were assigned during the build phase.
-           *
-           * @example MY_ENV_VAR
-           */
           env: string[];
         };
+        buildArtifactUrls?: string[];
         builds?: Record<string, any>[];
-        /**
-         * The flag saying if Vercel Connect configuration is used for builds
-         */
-        connectBuildsEnabled?: boolean;
-        /**
-         * The ID of Vercel Connect configuration used for this deployment
-         */
-        connectConfigurationId?: string;
-        /**
-         * The region where the deployment was first created
-         *
-         * @example sfo1
-         */
-        createdIn: string;
-        /**
-         * The keys of the environment variables that were assigned during runtime
-         *
-         * @example MY_SECRET
-         */
         env: string[];
+        inspectorUrl: string | null;
+        isInConcurrentBuildsQueue: boolean;
+        isInSystemBuildsQueue: boolean;
+        projectSettings: {
+          buildCommand?: string | null;
+          devCommand?: string | null;
+          framework?:
+            | 'blitzjs'
+            | 'nextjs'
+            | 'gatsby'
+            | 'remix'
+            | 'astro'
+            | 'hexo'
+            | 'eleventy'
+            | 'docusaurus-2'
+            | 'docusaurus'
+            | 'preact'
+            | 'solidstart-1'
+            | 'solidstart'
+            | 'dojo'
+            | 'ember'
+            | 'vue'
+            | 'scully'
+            | 'ionic-angular'
+            | 'angular'
+            | 'polymer'
+            | 'svelte'
+            | 'sveltekit'
+            | 'sveltekit-1'
+            | 'ionic-react'
+            | 'create-react-app'
+            | 'gridsome'
+            | 'umijs'
+            | 'sapper'
+            | 'saber'
+            | 'stencil'
+            | 'nuxtjs'
+            | 'redwoodjs'
+            | 'hugo'
+            | 'jekyll'
+            | 'brunch'
+            | 'middleman'
+            | 'zola'
+            | 'hydrogen'
+            | 'vite'
+            | 'vitepress'
+            | 'vuepress'
+            | 'parcel'
+            | 'fasthtml'
+            | 'sanity-v3'
+            | 'sanity'
+            | 'storybook'
+            | null;
+          commandForIgnoringBuildStep?: string | null;
+          installCommand?: string | null;
+          outputDirectory?: string | null;
+          speedInsights?: {
+            id: string;
+            enabledAt?: number;
+            disabledAt?: number;
+            canceledAt?: number;
+            hasData?: boolean;
+            paidAt?: number;
+          };
+          webAnalytics?: {
+            id: string;
+            disabledAt?: number;
+            canceledAt?: number;
+            enabledAt?: number;
+            hasData?: boolean;
+          };
+        };
+        readyStateReason?: string;
+        integrations?: {
+          status: 'error' | 'skipped' | 'pending' | 'ready' | 'timeout';
+          startedAt: number;
+          completedAt?: number;
+          skippedAt?: number;
+          skippedBy?: string;
+        };
+        images?: {
+          sizes?: number[];
+          domains?: string[];
+          remotePatterns?: {
+            /**
+             * Must be `http` or `https`.
+             */
+            protocol?: 'http' | 'https';
+            /**
+             * Can be literal or wildcard. Single `*` matches a single subdomain. Double `**` matches any number of subdomains.
+             */
+            hostname: string;
+            /**
+             * Can be literal port such as `8080` or empty string meaning no port.
+             */
+            port?: string;
+            /**
+             * Can be literal or wildcard. Single `*` matches a single path segment. Double `**` matches any number of path segments.
+             */
+            pathname?: string;
+            /**
+             * Can be literal query string such as `?v=1` or empty string meaning no query string.
+             */
+            search?: string;
+          }[];
+          localPatterns?: {
+            /**
+             * Can be literal or wildcard. Single `*` matches a single path segment. Double `**` matches any number of path segments.
+             */
+            pathname?: string;
+            /**
+             * Can be literal query string such as `?v=1` or empty string meaning no query string.
+             */
+            search?: string;
+          }[];
+          minimumCacheTTL?: number;
+          formats?: ('image/avif' | 'image/webp')[];
+          dangerouslyAllowSVG?: boolean;
+          contentSecurityPolicy?: string;
+          contentDispositionType?: 'inline' | 'attachment';
+        };
+        alias?: string[];
+        aliasAssigned: boolean;
+        bootedAt: number;
+        buildingAt: number;
+        buildSkipped: boolean;
+        creator: {
+          uid: string;
+          username?: string;
+          avatar?: string;
+        };
+        initReadyAt?: number;
+        isFirstBranchDeployment?: boolean;
+        lambdas?: {
+          id?: string;
+          createdAt?: number;
+          entrypoint?: string | null;
+          readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+          readyStateAt?: number;
+          output: {
+            path: string;
+            functionName: string;
+          }[];
+        }[];
+        public: boolean;
+        ready?: number;
+        status: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
+        team?: {
+          id: string;
+          name: string;
+          slug: string;
+          avatar?: string;
+        };
+        userAliases?: string[];
+        previewCommentsEnabled?: boolean;
+        ttyBuildLogs?: boolean;
+        customEnvironment?:
+          | Record<string, any>
+          | {
+              id: string;
+            };
+        aliasWarning?: {
+          code: string;
+          message: string;
+          link?: string;
+          action?: string;
+        } | null;
+        id: string;
+        type: 'LAMBDAS';
+        createdAt: number;
+        name: string;
+        readyState: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
+        aliasError?: {
+          code: string;
+          message: string;
+        } | null;
+        aliasFinal?: string | null;
         /**
-         * An object used to configure your Serverless Functions
-         *
-         * @example {"api/test.js":{"memory":3008}}
+         * applies to custom domains only, defaults to `true`
          */
+        autoAssignCustomDomains?: boolean;
+        automaticAliases?: string[];
+        buildErrorAt?: number;
+        checksState?: 'registered' | 'running' | 'completed';
+        checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+        deletedAt?: number | null;
+        /**
+         * Computed field that is only available for deployments with a microfrontend configuration.
+         */
+        defaultRoute?: string;
+        canceledAt?: number;
+        errorCode?: string;
+        errorLink?: string;
+        errorMessage?: string | null;
+        errorStep?: string;
+        /**
+         * Since November 2023 this field defines a set of regions that we will deploy the lambda to passively Lambdas will be deployed to these regions but only invoked if all of the primary `regions` are marked as out of service
+         */
+        passiveRegions?: string[];
+        gitSource?:
+          | {
+              type: 'github';
+              repoId: string | number;
+              ref?: string | null;
+              sha?: string;
+              prId?: number | null;
+            }
+          | {
+              type: 'github';
+              org: string;
+              repo: string;
+              ref?: string | null;
+              sha?: string;
+              prId?: number | null;
+            }
+          | {
+              type: 'gitlab';
+              projectId: string | number;
+              ref?: string | null;
+              sha?: string;
+              prId?: number | null;
+            }
+          | {
+              type: 'bitbucket';
+              workspaceUuid?: string;
+              repoUuid: string;
+              ref?: string | null;
+              sha?: string;
+              prId?: number | null;
+            }
+          | {
+              type: 'bitbucket';
+              owner: string;
+              slug: string;
+              ref?: string | null;
+              sha?: string;
+              prId?: number | null;
+            }
+          | {
+              type: 'custom';
+              ref: string;
+              sha: string;
+              gitUrl: string;
+            }
+          | {
+              type: 'github';
+              ref: string;
+              sha: string;
+              repoId: number;
+              org?: string;
+              repo?: string;
+            }
+          | {
+              type: 'gitlab';
+              ref: string;
+              sha: string;
+              projectId: number;
+            }
+          | {
+              type: 'bitbucket';
+              ref: string;
+              sha: string;
+              owner?: string;
+              slug?: string;
+              workspaceUuid: string;
+              repoUuid: string;
+            };
+        meta: {
+          [key: string]: string;
+        };
+        originCacheRegion?: string;
+        project?: {
+          id: string;
+          name: string;
+          framework?: string | null;
+        };
+        /**
+         * Since June 2023 Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - PROMOTED: has seen production traffic
+         */
+        readySubstate?: 'STAGED' | 'PROMOTED';
+        regions: string[];
+        softDeletedByRetention?: boolean;
+        source?:
+          | 'api-trigger-git-deploy'
+          | 'cli'
+          | 'clone/repo'
+          | 'git'
+          | 'import'
+          | 'import/repo'
+          | 'redeploy'
+          | 'v0-web';
+        target?: 'staging' | 'production' | null;
+        undeletedAt?: number;
+        url: string;
+        version: 2;
+        oidcTokenClaims?: {
+          iss: string;
+          sub: string;
+          scope: string;
+          aud: string;
+          owner: string;
+          owner_id: string;
+          project: string;
+          project_id: string;
+          environment: string;
+        };
+        projectId: string;
+        plan: 'pro' | 'enterprise' | 'hobby';
+        connectBuildsEnabled?: boolean;
+        connectConfigurationId?: string;
+        createdIn: string;
+        crons?: {
+          schedule: string;
+          path: string;
+        }[];
         functions?: {
           [key: string]: {
             memory?: number;
@@ -1843,65 +3079,12 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
             excludeFiles?: string;
           };
         } | null;
-        /**
-         * Vercel URL to inspect the deployment.
-         *
-         * @example https://vercel.com/acme/nextjs/J1hXN00qjUeoYfpEEf7dnDtpSiVq
-         */
-        inspectorUrl: string | null;
-        /**
-         * Is the deployment currently queued waiting for a Concurrent Build Slot to be available
-         *
-         * @example false
-         */
-        isInConcurrentBuildsQueue: boolean;
-        /**
-         * An object containing the deployment's metadata
-         *
-         * @example {"foo":"bar"}
-         */
-        meta: {
-          [key: string]: string;
-        };
-        /**
-         * An monorepo manager that was used for the deployment
-         *
-         * @example turbo
-         */
         monorepoManager?: string | null;
-        /**
-         * The name of the project associated with the deployment at the time that the deployment was created
-         *
-         * @example my-project
-         */
-        name: string;
-        /**
-         * The unique ID of the user or team the deployment belongs to
-         *
-         * @example ZspSRT4ljIEEmMHgoDwKWDei
-         */
         ownerId: string;
         /**
-         * The connect configuration ID used to deploy passive lambdas into for secure compute enabled deployments.
+         * Since November 2023 this field defines a Secure Compute network that will only be used to deploy passive lambdas to (as in passiveRegions)
          */
         passiveConnectConfigurationId?: string;
-        /**
-         * The pricing plan the deployment was made under
-         *
-         * @example pro
-         */
-        plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
-        /**
-         * The ID of the project the deployment is associated with
-         *
-         * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-         */
-        projectId: string;
-        /**
-         * A list of routes objects used to rewrite paths to point towards other internal or external paths
-         *
-         * @example {"src":"/docs","dest":"https://docs.example.com"}
-         */
         routes:
           | (
               | {
@@ -1988,7 +3171,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               repo: string;
               repoId: number;
               type: 'github';
-              repoOwnerId: string;
+              repoOwnerId: number;
               path: string;
               defaultBranch: string;
               name: string;
@@ -2008,9 +3191,78 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               ownerType: 'team' | 'user';
             }
           | null;
-        aliasAssignedAt?: number | boolean | null;
+        flags?:
+          | {
+              definitions: {
+                [key: string]: {
+                  options?: {
+                    value: Schemas.FlagJSONValue;
+                    label?: string;
+                  }[];
+                  url?: string;
+                  description?: string;
+                };
+              };
+            }
+          | Record<string, any>[];
+        microfrontends?:
+          | {
+              /**
+               * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+               */
+              isDefaultApp?: boolean;
+              /**
+               * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+               */
+              defaultRoute?: string;
+              /**
+               * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+               */
+              groupIds: string[];
+            }
+          | {
+              /**
+               * A map of the other applications that are part of this group. Only defined on the default application. The field is set after deployments have been created, so can be undefined, but should be there for a successful deployment.
+               */
+              applications?: {
+                [key: string]: {
+                  /**
+                   * This is the production alias, it will always show the most up to date of each application.
+                   */
+                  productionHost: string;
+                  /**
+                   * Use the fixed deploymentAlias and deploymentHost so that the microfrontend preview stays in sync with the deployment. These are only present for mono-repos when a single commit creates multiple deployments. If they are not present, productionHost will be used.
+                   */
+                  deploymentAlias?: string;
+                  deploymentHost?: string;
+                };
+              };
+              isDefaultApp: boolean;
+              /**
+               * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+               */
+              defaultRoute?: string;
+              /**
+               * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+               */
+              groupIds: string[];
+            };
+      }
+    | {
+        alias?: string[];
+        aliasAssigned: boolean;
+        bootedAt: number;
+        buildingAt: number;
+        buildSkipped: boolean;
+        creator: {
+          uid: string;
+          username?: string;
+          avatar?: string;
+        };
+        initReadyAt?: number;
+        isFirstBranchDeployment?: boolean;
         lambdas?: {
-          id: string;
+          id?: string;
           createdAt?: number;
           entrypoint?: string | null;
           readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
@@ -2020,152 +3272,60 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
             functionName: string;
           }[];
         }[];
-        /**
-         * A boolean representing if the deployment is public or not. By default this is `false`
-         *
-         * @example false
-         */
         public: boolean;
-        /**
-         * The state of the deployment depending on the process of deploying, or if it is ready or in an error state
-         *
-         * @example READY
-         */
-        readyState: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
-        /**
-         * The substate of the deployment when the state is "READY"
-         *
-         * @example STAGED
-         */
-        readySubstate?: 'STAGED' | 'PROMOTED';
-        /**
-         * The regions the deployment exists in
-         *
-         * @example sfo1
-         */
-        regions: string[];
-        /**
-         * Where was the deployment created from
-         *
-         * @example cli
-         */
-        source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo';
-        /**
-         * If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned
-         *
-         * @example null
-         */
-        target?: 'staging' | 'production' | null;
-        /**
-         * The team that owns the deployment if any
-         */
+        ready?: number;
+        status: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
         team?: {
-          /**
-           * The ID of the team owner
-           *
-           * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
-           */
           id: string;
-          /**
-           * The name of the team owner
-           *
-           * @example FSociety
-           */
           name: string;
-          /**
-           * The slug of the team owner
-           *
-           * @example fsociety
-           */
           slug: string;
+          avatar?: string;
         };
-        type: 'LAMBDAS';
-        /**
-         * A string with the unique URL of the deployment
-         *
-         * @example my-instant-deployment-3ij3cxz9qr.now.sh
-         */
-        url: string;
-        /**
-         * An array of domains that were provided by the user when creating the Deployment.
-         *
-         * @example sub1.example.com
-         * @example sub2.example.com
-         */
         userAliases?: string[];
-        /**
-         * The platform version that was used to create the deployment.
-         *
-         * @example 2
-         */
-        version: 2;
-        /**
-         * Whether or not preview comments are enabled for the deployment
-         *
-         * @example false
-         */
         previewCommentsEnabled?: boolean;
-        /**
-         * A list of all the aliases (default aliases, staging aliases and production aliases) that were assigned upon deployment creation
-         */
-        alias: string[];
-        /**
-         * A boolean that will be true when the aliases from the alias property were assigned successfully
-         *
-         * @example true
-         */
-        aliasAssigned: boolean;
-        /**
-         * An object that will contain a `code` and a `message` when the aliasing fails, otherwise the value will be `null`
-         *
-         * @example null
-         */
-        aliasError?: {
-          code: string;
-          message: string;
-        } | null;
-        aliasFinal?: string | null;
+        ttyBuildLogs?: boolean;
+        customEnvironment?:
+          | Record<string, any>
+          | {
+              id: string;
+            };
         aliasWarning?: {
           code: string;
           message: string;
           link?: string;
           action?: string;
         } | null;
+        id: string;
+        type: 'LAMBDAS';
+        createdAt: number;
+        name: string;
+        readyState: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
+        aliasError?: {
+          code: string;
+          message: string;
+        } | null;
+        aliasFinal?: string | null;
+        /**
+         * applies to custom domains only, defaults to `true`
+         */
         autoAssignCustomDomains?: boolean;
         automaticAliases?: string[];
-        bootedAt: number;
         buildErrorAt?: number;
-        buildingAt: number;
-        canceledAt?: number;
         checksState?: 'registered' | 'running' | 'completed';
         checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+        deletedAt?: number | null;
         /**
-         * A number containing the date when the deployment was created in milliseconds
-         *
-         * @example 1540257589405
+         * Computed field that is only available for deployments with a microfrontend configuration.
          */
-        createdAt: number;
-        /**
-         * Information about the deployment creator
-         */
-        creator: {
-          /**
-           * The ID of the user that created the deployment
-           *
-           * @example 96SnxkFiMyVKsK3pnoHfx3Hz
-           */
-          uid: string;
-          /**
-           * The username of the user that created the deployment
-           *
-           * @example john-doe
-           */
-          username?: string;
-        };
+        defaultRoute?: string;
+        canceledAt?: number;
         errorCode?: string;
         errorLink?: string;
         errorMessage?: string | null;
         errorStep?: string;
+        /**
+         * Since November 2023 this field defines a set of regions that we will deploy the lambda to passively Lambdas will be deployed to these regions but only invoked if all of the primary `regions` are marked as out of service
+         */
         passiveRegions?: string[];
         gitSource?:
           | {
@@ -2235,260 +3395,45 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               workspaceUuid: string;
               repoUuid: string;
             };
-        /**
-         * A string holding the unique ID of the deployment
-         *
-         * @example dpl_89qyp1cskzkLrVicDaZoDbjyHuDJ
-         */
-        id: string;
-      }
-    | {
-        lambdas?: {
-          id: string;
-          createdAt?: number;
-          entrypoint?: string | null;
-          readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
-          readyStateAt?: number;
-          output: {
-            path: string;
-            functionName: string;
-          }[];
-        }[];
-        /**
-         * The name of the project associated with the deployment at the time that the deployment was created
-         *
-         * @example my-project
-         */
-        name: string;
-        /**
-         * An object containing the deployment's metadata
-         *
-         * @example {"foo":"bar"}
-         */
         meta: {
           [key: string]: string;
         };
+        originCacheRegion?: string;
+        project?: {
+          id: string;
+          name: string;
+          framework?: string | null;
+        };
         /**
-         * A boolean representing if the deployment is public or not. By default this is `false`
-         *
-         * @example false
-         */
-        public: boolean;
-        /**
-         * The state of the deployment depending on the process of deploying, or if it is ready or in an error state
-         *
-         * @example READY
-         */
-        readyState: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
-        /**
-         * The substate of the deployment when the state is "READY"
-         *
-         * @example STAGED
+         * Since June 2023 Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - PROMOTED: has seen production traffic
          */
         readySubstate?: 'STAGED' | 'PROMOTED';
-        /**
-         * The regions the deployment exists in
-         *
-         * @example sfo1
-         */
         regions: string[];
-        /**
-         * Where was the deployment created from
-         *
-         * @example cli
-         */
-        source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo';
-        /**
-         * If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned
-         *
-         * @example null
-         */
+        softDeletedByRetention?: boolean;
+        source?:
+          | 'api-trigger-git-deploy'
+          | 'cli'
+          | 'clone/repo'
+          | 'git'
+          | 'import'
+          | 'import/repo'
+          | 'redeploy'
+          | 'v0-web';
         target?: 'staging' | 'production' | null;
-        /**
-         * The team that owns the deployment if any
-         */
-        team?: {
-          /**
-           * The ID of the team owner
-           *
-           * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
-           */
-          id: string;
-          /**
-           * The name of the team owner
-           *
-           * @example FSociety
-           */
-          name: string;
-          /**
-           * The slug of the team owner
-           *
-           * @example fsociety
-           */
-          slug: string;
-        };
-        type: 'LAMBDAS';
-        /**
-         * A string with the unique URL of the deployment
-         *
-         * @example my-instant-deployment-3ij3cxz9qr.now.sh
-         */
+        undeletedAt?: number;
         url: string;
-        /**
-         * An array of domains that were provided by the user when creating the Deployment.
-         *
-         * @example sub1.example.com
-         * @example sub2.example.com
-         */
-        userAliases?: string[];
-        /**
-         * The platform version that was used to create the deployment.
-         *
-         * @example 2
-         */
         version: 2;
-        /**
-         * Whether or not preview comments are enabled for the deployment
-         *
-         * @example false
-         */
-        previewCommentsEnabled?: boolean;
-        /**
-         * A list of all the aliases (default aliases, staging aliases and production aliases) that were assigned upon deployment creation
-         */
-        alias: string[];
-        /**
-         * A boolean that will be true when the aliases from the alias property were assigned successfully
-         *
-         * @example true
-         */
-        aliasAssigned: boolean;
-        /**
-         * An object that will contain a `code` and a `message` when the aliasing fails, otherwise the value will be `null`
-         *
-         * @example null
-         */
-        aliasError?: {
-          code: string;
-          message: string;
-        } | null;
-        aliasFinal?: string | null;
-        aliasWarning?: {
-          code: string;
-          message: string;
-          link?: string;
-          action?: string;
-        } | null;
-        autoAssignCustomDomains?: boolean;
-        automaticAliases?: string[];
-        bootedAt: number;
-        buildErrorAt?: number;
-        buildingAt: number;
-        canceledAt?: number;
-        checksState?: 'registered' | 'running' | 'completed';
-        checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-        /**
-         * A number containing the date when the deployment was created in milliseconds
-         *
-         * @example 1540257589405
-         */
-        createdAt: number;
-        /**
-         * Information about the deployment creator
-         */
-        creator: {
-          /**
-           * The ID of the user that created the deployment
-           *
-           * @example 96SnxkFiMyVKsK3pnoHfx3Hz
-           */
-          uid: string;
-          /**
-           * The username of the user that created the deployment
-           *
-           * @example john-doe
-           */
-          username?: string;
+        oidcTokenClaims?: {
+          iss: string;
+          sub: string;
+          scope: string;
+          aud: string;
+          owner: string;
+          owner_id: string;
+          project: string;
+          project_id: string;
+          environment: string;
         };
-        errorCode?: string;
-        errorLink?: string;
-        errorMessage?: string | null;
-        errorStep?: string;
-        passiveRegions?: string[];
-        gitSource?:
-          | {
-              type: 'github';
-              repoId: string | number;
-              ref?: string | null;
-              sha?: string;
-              prId?: number | null;
-            }
-          | {
-              type: 'github';
-              org: string;
-              repo: string;
-              ref?: string | null;
-              sha?: string;
-              prId?: number | null;
-            }
-          | {
-              type: 'gitlab';
-              projectId: string | number;
-              ref?: string | null;
-              sha?: string;
-              prId?: number | null;
-            }
-          | {
-              type: 'bitbucket';
-              workspaceUuid?: string;
-              repoUuid: string;
-              ref?: string | null;
-              sha?: string;
-              prId?: number | null;
-            }
-          | {
-              type: 'bitbucket';
-              owner: string;
-              slug: string;
-              ref?: string | null;
-              sha?: string;
-              prId?: number | null;
-            }
-          | {
-              type: 'custom';
-              ref: string;
-              sha: string;
-              gitUrl: string;
-            }
-          | {
-              type: 'github';
-              ref: string;
-              sha: string;
-              repoId: number;
-              org?: string;
-              repo?: string;
-            }
-          | {
-              type: 'gitlab';
-              ref: string;
-              sha: string;
-              projectId: number;
-            }
-          | {
-              type: 'bitbucket';
-              ref: string;
-              sha: string;
-              owner?: string;
-              slug?: string;
-              workspaceUuid: string;
-              repoUuid: string;
-            };
-        /**
-         * A string holding the unique ID of the deployment
-         *
-         * @example dpl_89qyp1cskzkLrVicDaZoDbjyHuDJ
-         */
-        id: string;
       },
     GetDeploymentError,
     undefined,
@@ -2507,48 +3452,369 @@ export type CreateDeploymentQueryParams = {
    */
   skipAutoDetectionConfirmation?: '0' | '1';
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type CreateDeploymentError = Fetcher.ErrorWrapper<undefined>;
 
 export type CreateDeploymentResponse = {
+  aliasAssignedAt?: number | boolean | null;
+  alwaysRefuseToBuild?: boolean;
   build: {
-    /**
-     * The keys of the environment variables that were assigned during the build phase.
-     *
-     * @example MY_ENV_VAR
-     */
     env: string[];
   };
+  buildArtifactUrls?: string[];
   builds?: Record<string, any>[];
-  /**
-   * The flag saying if Vercel Connect configuration is used for builds
-   */
-  connectBuildsEnabled?: boolean;
-  /**
-   * The ID of Vercel Connect configuration used for this deployment
-   */
-  connectConfigurationId?: string;
-  /**
-   * The region where the deployment was first created
-   *
-   * @example sfo1
-   */
-  createdIn: string;
-  /**
-   * The keys of the environment variables that were assigned during runtime
-   *
-   * @example MY_SECRET
-   */
   env: string[];
+  inspectorUrl: string | null;
+  isInConcurrentBuildsQueue: boolean;
+  isInSystemBuildsQueue: boolean;
+  projectSettings: {
+    buildCommand?: string | null;
+    commandForIgnoringBuildStep?: string | null;
+    devCommand?: string | null;
+    framework?:
+      | 'angular'
+      | 'astro'
+      | 'blitzjs'
+      | 'brunch'
+      | 'create-react-app'
+      | 'docusaurus'
+      | 'docusaurus-2'
+      | 'dojo'
+      | 'eleventy'
+      | 'ember'
+      | 'fasthtml'
+      | 'gatsby'
+      | 'gridsome'
+      | 'hexo'
+      | 'hugo'
+      | 'hydrogen'
+      | 'ionic-angular'
+      | 'ionic-react'
+      | 'jekyll'
+      | 'middleman'
+      | 'nextjs'
+      | 'nuxtjs'
+      | 'parcel'
+      | 'polymer'
+      | 'preact'
+      | 'redwoodjs'
+      | 'remix'
+      | 'saber'
+      | 'sanity'
+      | 'sanity-v3'
+      | 'sapper'
+      | 'scully'
+      | 'solidstart'
+      | 'solidstart-1'
+      | 'stencil'
+      | 'storybook'
+      | 'svelte'
+      | 'sveltekit'
+      | 'sveltekit-1'
+      | 'umijs'
+      | 'vite'
+      | 'vitepress'
+      | 'vue'
+      | 'vuepress'
+      | 'zola'
+      | null;
+    installCommand?: string | null;
+    outputDirectory?: string | null;
+    speedInsights?: {
+      id: string;
+      enabledAt?: number;
+      disabledAt?: number;
+      canceledAt?: number;
+      hasData?: boolean;
+      paidAt?: number;
+    };
+    webAnalytics?: {
+      id: string;
+      disabledAt?: number;
+      canceledAt?: number;
+      enabledAt?: number;
+      hasData?: boolean;
+    };
+  };
+  readyStateReason?: string;
+  integrations?: {
+    status: 'error' | 'pending' | 'ready' | 'skipped' | 'timeout';
+    startedAt: number;
+    completedAt?: number;
+    skippedAt?: number;
+    skippedBy?: string;
+  };
+  images?: {
+    sizes?: number[];
+    domains?: string[];
+    remotePatterns?: {
+      /**
+       * Must be `http` or `https`.
+       */
+      protocol?: 'http' | 'https';
+      /**
+       * Can be literal or wildcard. Single `*` matches a single subdomain. Double `**` matches any number of subdomains.
+       */
+      hostname: string;
+      /**
+       * Can be literal port such as `8080` or empty string meaning no port.
+       */
+      port?: string;
+      /**
+       * Can be literal or wildcard. Single `*` matches a single path segment. Double `**` matches any number of path segments.
+       */
+      pathname?: string;
+      /**
+       * Can be literal query string such as `?v=1` or empty string meaning no query string.
+       */
+      search?: string;
+    }[];
+    localPatterns?: {
+      /**
+       * Can be literal or wildcard. Single `*` matches a single path segment. Double `**` matches any number of path segments.
+       */
+      pathname?: string;
+      /**
+       * Can be literal query string such as `?v=1` or empty string meaning no query string.
+       */
+      search?: string;
+    }[];
+    minimumCacheTTL?: number;
+    formats?: ('image/avif' | 'image/webp')[];
+    dangerouslyAllowSVG?: boolean;
+    contentSecurityPolicy?: string;
+    contentDispositionType?: 'attachment' | 'inline';
+  };
+  alias?: string[];
+  aliasAssigned: boolean;
+  bootedAt: number;
+  buildingAt: number;
+  buildSkipped: boolean;
+  creator: {
+    uid: string;
+    username?: string;
+    avatar?: string;
+  };
+  initReadyAt?: number;
+  isFirstBranchDeployment?: boolean;
+  lambdas?: {
+    id?: string;
+    createdAt?: number;
+    entrypoint?: string | null;
+    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    readyStateAt?: number;
+    output: {
+      path: string;
+      functionName: string;
+    }[];
+  }[];
+  public: boolean;
+  ready?: number;
+  status: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+  team?: {
+    name: string;
+    id: string;
+    slug: string;
+    avatar?: string;
+  };
+  userAliases?: string[];
+  previewCommentsEnabled?: boolean;
+  ttyBuildLogs?: boolean;
+  customEnvironment?:
+    | Record<string, any>
+    | {
+        id: string;
+      };
+  type: 'LAMBDAS';
+  createdAt: number;
+  name: string;
+  deletedAt?: number | null;
+  id: string;
+  version: 2;
   /**
-   * An object used to configure your Serverless Functions
-   *
-   * @example {"api/test.js":{"memory":3008}}
+   * applies to custom domains only, defaults to `true`
    */
+  autoAssignCustomDomains?: boolean;
+  gitSource?:
+    | {
+        type: 'github';
+        repoId: string | number;
+        ref?: string | null;
+        sha?: string;
+        prId?: number | null;
+      }
+    | {
+        type: 'github';
+        org: string;
+        repo: string;
+        ref?: string | null;
+        sha?: string;
+        prId?: number | null;
+      }
+    | {
+        type: 'gitlab';
+        projectId: string | number;
+        ref?: string | null;
+        sha?: string;
+        prId?: number | null;
+      }
+    | {
+        type: 'bitbucket';
+        workspaceUuid?: string;
+        repoUuid: string;
+        ref?: string | null;
+        sha?: string;
+        prId?: number | null;
+      }
+    | {
+        type: 'bitbucket';
+        owner: string;
+        slug: string;
+        ref?: string | null;
+        sha?: string;
+        prId?: number | null;
+      }
+    | {
+        type: 'custom';
+        ref: string;
+        sha: string;
+        gitUrl: string;
+      }
+    | {
+        type: 'github';
+        ref: string;
+        sha: string;
+        repoId: number;
+        org?: string;
+        repo?: string;
+      }
+    | {
+        type: 'gitlab';
+        ref: string;
+        sha: string;
+        projectId: number;
+      }
+    | {
+        type: 'bitbucket';
+        ref: string;
+        sha: string;
+        owner?: string;
+        slug?: string;
+        workspaceUuid: string;
+        repoUuid: string;
+      };
+  meta: {
+    [key: string]: string;
+  };
+  project?: {
+    id: string;
+    name: string;
+    framework?: string | null;
+  };
+  readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+  source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy' | 'v0-web';
+  target?: 'production' | 'staging' | null;
+  /**
+   * Since November 2023 this field defines a set of regions that we will deploy the lambda to passively Lambdas will be deployed to these regions but only invoked if all of the primary `regions` are marked as out of service
+   */
+  passiveRegions?: string[];
+  regions: string[];
+  errorMessage?: string | null;
+  aliasWarning?: {
+    code: string;
+    message: string;
+    link?: string;
+    action?: string;
+  } | null;
+  aliasError?: {
+    code: string;
+    message: string;
+  } | null;
+  aliasFinal?: string | null;
+  automaticAliases?: string[];
+  buildErrorAt?: number;
+  checksState?: 'completed' | 'registered' | 'running';
+  checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+  /**
+   * Computed field that is only available for deployments with a microfrontend configuration.
+   */
+  defaultRoute?: string;
+  canceledAt?: number;
+  errorCode?: string;
+  errorLink?: string;
+  errorStep?: string;
+  originCacheRegion?: string;
+  /**
+   * Since June 2023 Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - PROMOTED: has seen production traffic
+   */
+  readySubstate?: 'PROMOTED' | 'STAGED';
+  softDeletedByRetention?: boolean;
+  undeletedAt?: number;
+  url: string;
+  oidcTokenClaims?: {
+    iss: string;
+    sub: string;
+    scope: string;
+    aud: string;
+    owner: string;
+    owner_id: string;
+    project: string;
+    project_id: string;
+    environment: string;
+  };
+  projectId: string;
+  ownerId: string;
+  microfrontends?:
+    | {
+        /**
+         * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+         */
+        isDefaultApp?: boolean;
+        /**
+         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+         */
+        defaultRoute?: string;
+        /**
+         * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+         */
+        groupIds: string[];
+      }
+    | {
+        /**
+         * A map of the other applications that are part of this group. Only defined on the default application. The field is set after deployments have been created, so can be undefined, but should be there for a successful deployment.
+         */
+        applications?: {
+          [key: string]: {
+            /**
+             * This is the production alias, it will always show the most up to date of each application.
+             */
+            productionHost: string;
+            /**
+             * Use the fixed deploymentAlias and deploymentHost so that the microfrontend preview stays in sync with the deployment. These are only present for mono-repos when a single commit creates multiple deployments. If they are not present, productionHost will be used.
+             */
+            deploymentAlias?: string;
+            deploymentHost?: string;
+          };
+        };
+        isDefaultApp: boolean;
+        /**
+         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+         */
+        defaultRoute?: string;
+        /**
+         * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+         */
+        groupIds: string[];
+      };
+  monorepoManager?: string | null;
   functions?: {
     [key: string]: {
       memory?: number;
@@ -2558,65 +3824,6 @@ export type CreateDeploymentResponse = {
       excludeFiles?: string;
     };
   } | null;
-  /**
-   * Vercel URL to inspect the deployment.
-   *
-   * @example https://vercel.com/acme/nextjs/J1hXN00qjUeoYfpEEf7dnDtpSiVq
-   */
-  inspectorUrl: string | null;
-  /**
-   * Is the deployment currently queued waiting for a Concurrent Build Slot to be available
-   *
-   * @example false
-   */
-  isInConcurrentBuildsQueue: boolean;
-  /**
-   * An object containing the deployment's metadata
-   *
-   * @example {"foo":"bar"}
-   */
-  meta: {
-    [key: string]: string;
-  };
-  /**
-   * An monorepo manager that was used for the deployment
-   *
-   * @example turbo
-   */
-  monorepoManager?: string | null;
-  /**
-   * The name of the project associated with the deployment at the time that the deployment was created
-   *
-   * @example my-project
-   */
-  name: string;
-  /**
-   * The unique ID of the user or team the deployment belongs to
-   *
-   * @example ZspSRT4ljIEEmMHgoDwKWDei
-   */
-  ownerId: string;
-  /**
-   * The connect configuration ID used to deploy passive lambdas into for secure compute enabled deployments.
-   */
-  passiveConnectConfigurationId?: string;
-  /**
-   * The pricing plan the deployment was made under
-   *
-   * @example pro
-   */
-  plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
-  /**
-   * The ID of the project the deployment is associated with
-   *
-   * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-   */
-  projectId: string;
-  /**
-   * A list of routes objects used to rewrite paths to point towards other internal or external paths
-   *
-   * @example {"src":"/docs","dest":"https://docs.example.com"}
-   */
   routes:
     | (
         | {
@@ -2686,6 +3893,18 @@ export type CreateDeploymentResponse = {
           }
       )[]
     | null;
+  crons?: {
+    schedule: string;
+    path: string;
+  }[];
+  plan: 'enterprise' | 'hobby' | 'pro';
+  connectBuildsEnabled?: boolean;
+  connectConfigurationId?: string;
+  createdIn: string;
+  /**
+   * Since November 2023 this field defines a Secure Compute network that will only be used to deploy passive lambdas to (as in passiveRegions)
+   */
+  passiveConnectConfigurationId?: string;
   gitRepo?:
     | {
         namespace: string;
@@ -2703,7 +3922,7 @@ export type CreateDeploymentResponse = {
         repo: string;
         repoId: number;
         type: 'github';
-        repoOwnerId: string;
+        repoOwnerId: number;
         path: string;
         defaultBranch: string;
         name: string;
@@ -2723,1001 +3942,23 @@ export type CreateDeploymentResponse = {
         ownerType: 'team' | 'user';
       }
     | null;
-  aliasAssignedAt?: number | boolean | null;
-  lambdas?: {
-    id: string;
-    createdAt?: number;
-    entrypoint?: string | null;
-    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
-    readyStateAt?: number;
-    output: {
-      path: string;
-      functionName: string;
-    }[];
-  }[];
-  /**
-   * A boolean representing if the deployment is public or not. By default this is `false`
-   *
-   * @example false
-   */
-  public: boolean;
-  /**
-   * The state of the deployment depending on the process of deploying, or if it is ready or in an error state
-   *
-   * @example READY
-   */
-  readyState: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
-  /**
-   * The substate of the deployment when the state is "READY"
-   *
-   * @example STAGED
-   */
-  readySubstate?: 'STAGED' | 'PROMOTED';
-  /**
-   * The regions the deployment exists in
-   *
-   * @example sfo1
-   */
-  regions: string[];
-  /**
-   * Where was the deployment created from
-   *
-   * @example cli
-   */
-  source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo';
-  /**
-   * If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned
-   *
-   * @example null
-   */
-  target?: 'staging' | 'production' | null;
-  /**
-   * The team that owns the deployment if any
-   */
-  team?: {
-    /**
-     * The ID of the team owner
-     *
-     * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
-     */
-    id: string;
-    /**
-     * The name of the team owner
-     *
-     * @example FSociety
-     */
-    name: string;
-    /**
-     * The slug of the team owner
-     *
-     * @example fsociety
-     */
-    slug: string;
-  };
-  type: 'LAMBDAS';
-  /**
-   * A string with the unique URL of the deployment
-   *
-   * @example my-instant-deployment-3ij3cxz9qr.now.sh
-   */
-  url: string;
-  /**
-   * An array of domains that were provided by the user when creating the Deployment.
-   *
-   * @example sub1.example.com
-   * @example sub2.example.com
-   */
-  userAliases?: string[];
-  /**
-   * The platform version that was used to create the deployment.
-   *
-   * @example 2
-   */
-  version: 2;
-  /**
-   * Whether or not preview comments are enabled for the deployment
-   *
-   * @example false
-   */
-  previewCommentsEnabled?: boolean;
-  /**
-   * A list of all the aliases (default aliases, staging aliases and production aliases) that were assigned upon deployment creation
-   */
-  alias: string[];
-  /**
-   * A boolean that will be true when the aliases from the alias property were assigned successfully
-   *
-   * @example true
-   */
-  aliasAssigned: boolean;
-  /**
-   * An object that will contain a `code` and a `message` when the aliasing fails, otherwise the value will be `null`
-   *
-   * @example null
-   */
-  aliasError?: {
-    code: string;
-    message: string;
-  } | null;
-  aliasFinal?: string | null;
-  aliasWarning?: {
-    code: string;
-    message: string;
-    link?: string;
-    action?: string;
-  } | null;
-  autoAssignCustomDomains?: boolean;
-  automaticAliases?: string[];
-  bootedAt: number;
-  buildErrorAt?: number;
-  buildingAt: number;
-  canceledAt?: number;
-  checksState?: 'registered' | 'running' | 'completed';
-  checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-  /**
-   * A number containing the date when the deployment was created in milliseconds
-   *
-   * @example 1540257589405
-   */
-  createdAt: number;
-  /**
-   * Information about the deployment creator
-   */
-  creator: {
-    /**
-     * The ID of the user that created the deployment
-     *
-     * @example 96SnxkFiMyVKsK3pnoHfx3Hz
-     */
-    uid: string;
-    /**
-     * The username of the user that created the deployment
-     *
-     * @example john-doe
-     */
-    username?: string;
-  };
-  errorCode?: string;
-  errorLink?: string;
-  errorMessage?: string | null;
-  errorStep?: string;
-  passiveRegions?: string[];
-  gitSource?:
+  flags?:
     | {
-        type: 'github';
-        repoId: string | number;
-        ref?: string | null;
-        sha?: string;
-        prId?: number | null;
+        definitions: {
+          [key: string]: {
+            options?: {
+              value: Schemas.FlagJSONValue;
+              label?: string;
+            }[];
+            url?: string;
+            description?: string;
+          };
+        };
       }
-    | {
-        type: 'github';
-        org: string;
-        repo: string;
-        ref?: string | null;
-        sha?: string;
-        prId?: number | null;
-      }
-    | {
-        type: 'gitlab';
-        projectId: string | number;
-        ref?: string | null;
-        sha?: string;
-        prId?: number | null;
-      }
-    | {
-        type: 'bitbucket';
-        workspaceUuid?: string;
-        repoUuid: string;
-        ref?: string | null;
-        sha?: string;
-        prId?: number | null;
-      }
-    | {
-        type: 'bitbucket';
-        owner: string;
-        slug: string;
-        ref?: string | null;
-        sha?: string;
-        prId?: number | null;
-      }
-    | {
-        type: 'custom';
-        ref: string;
-        sha: string;
-        gitUrl: string;
-      }
-    | {
-        type: 'github';
-        ref: string;
-        sha: string;
-        repoId: number;
-        org?: string;
-        repo?: string;
-      }
-    | {
-        type: 'gitlab';
-        ref: string;
-        sha: string;
-        projectId: number;
-      }
-    | {
-        type: 'bitbucket';
-        ref: string;
-        sha: string;
-        owner?: string;
-        slug?: string;
-        workspaceUuid: string;
-        repoUuid: string;
-      };
-  /**
-   * A string holding the unique ID of the deployment
-   *
-   * @example dpl_89qyp1cskzkLrVicDaZoDbjyHuDJ
-   */
-  id: string;
+    | Record<string, any>[];
 };
 
 export type CreateDeploymentRequestBody = {
-  /**
-   * Ignored. Can be set to get completions, validations and documentation in some editors.
-   *
-   * @example https://openapi.vercel.sh/vercel.json
-   */
-  $schema?: string;
-  /**
-   * Aliases that will get assigned when the deployment is `READY` and the target is `production`. The client needs to make a `GET` request to its API to ensure the assignment
-   *
-   * @example example.vercel.app
-   * @maxItems 50
-   * @maxLength 253
-   */
-  alias?: string[];
-  /**
-   * An object containing another object with information to be passed to the Build Process
-   *
-   * @deprecated true
-   */
-  build?: {
-    /**
-     * An object containing the deployment's environment variable names and values to be passed to Builds. Secrets can be referenced by prefixing the value with `@`
-     *
-     * @example {"A_SECRET":"@a-secret"}
-     * @deprecated true
-     * @maxProperties 100
-     * @minProperties 0
-     */
-    env?: {
-      [key: string]: string;
-    };
-  };
-  /**
-   * A list of build descriptions whose src references valid source files.
-   *
-   * @deprecated true
-   * @maxItems 128
-   * @minItems 0
-   */
-  builds?: {
-    /**
-     * Optionally, an object including arbitrary metadata to be passed to the Builder
-     */
-    config?: Record<string, any>;
-    /**
-     * A glob expression or pathname. If more than one file is resolved, one build will be created per matched file. It can include `*` and `**`
-     *
-     * @maxLength 4096
-     */
-    src?: string;
-    /**
-     * An npm module to be installed by the build process. It can include a semver compatible version (e.g.: `@org/proj@1`)
-     *
-     * @maxLength 256
-     */
-    use: string;
-  }[];
-  /**
-   * When set to `true`, all HTML files and Serverless Functions will have their extension removed. When visiting a path that ends with the extension, a 308 response will redirect the client to the extensionless path.
-   */
-  cleanUrls?: boolean;
-  /**
-   * An object containing the deployment's environment variable names and values. Secrets can be referenced by prefixing the value with `@`
-   *
-   * @example {"A_SECRET":"@a-secret"}
-   * @deprecated true
-   * @maxProperties 100
-   * @minProperties 0
-   */
-  env?: {
-    [key: string]: string;
-  };
-  /**
-   * An array of the passive regions the deployment's Serverless Functions should be deployed to that can be failed over to during a lambda outage
-   *
-   * @example iad1
-   * @example cle1
-   * @maxItems 4
-   * @minItems 1
-   */
-  passiveRegions?: string[];
-  /**
-   * Same as passiveRegions. An array of the passive regions the deployment's Serverless Functions should be deployed to so we can failover to these regions on lambda outages
-   *
-   * @example iad1
-   * @example cle1
-   * @maxItems 4
-   * @minItems 1
-   */
-  functionFailoverRegions?: string[];
-  /**
-   * An object describing custom options for your Serverless Functions. Each key must be glob pattern that matches the paths of the Serverless Functions you would like to customize (like `api/*.js` or `api/test.js`).
-   *
-   * @example {"src/pages/**":{"maxDuration":6,"memory":1024}}
-   * @maxProperties 50
-   * @minProperties 1
-   */
-  functions?: {
-    [key: string]: {
-      /**
-       * A glob pattern to match files that should be excluded from your Serverless Function. If you’re using a Community Runtime, the behavior might vary.
-       *
-       * @maxLength 256
-       */
-      excludeFiles?: string;
-      /**
-       * A glob pattern to match files that should be included in your Serverless Function. If you’re using a Community Runtime, the behavior might vary.
-       *
-       * @maxLength 256
-       */
-      includeFiles?: string;
-      /**
-       * An integer defining how long your Serverless Function should be allowed to run on every request in seconds (between 1 and the maximum limit of your plan).
-       *
-       * @maximum 900
-       * @minimum 1
-       */
-      maxDuration?: number;
-      /**
-       * An integer defining the memory your Serverless Function should be provided with (between 128 and 3008).
-       *
-       * @maximum 3008
-       * @minimum 128
-       */
-      memory?: number;
-      /**
-       * The npm package name of a Runtime, including its version
-       *
-       * @maxLength 256
-       */
-      runtime?: string;
-    };
-  };
-  git?: {
-    /**
-     * Specifies the branches that will not trigger an auto-deployment when committing to them. Any non specified branch is `true` by default.
-     *
-     * @example {"main":false}
-     */
-    deploymentEnabled?:
-      | boolean
-      | {
-          [key: string]: boolean;
-        };
-  };
-  /**
-   * A list of header definitions.
-   *
-   * @maxItems 1024
-   */
-  headers?: {
-    /**
-     * A pattern that matches each incoming pathname (excluding querystring)
-     *
-     * @maxLength 4096
-     */
-    source: string;
-    /**
-     * An array of key/value pairs representing each response header.
-     *
-     * @maxItems 1024
-     */
-    headers: {
-      /**
-       * @maxLength 4096
-       */
-      key: string;
-      /**
-       * @maxLength 4096
-       */
-      value: string;
-    }[];
-    /**
-     * An array of requirements that are needed to match
-     *
-     * @maxItems 16
-     */
-    has?: (
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'host';
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value: string;
-        }
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'header' | 'cookie' | 'query';
-          /**
-           * The name of the element contained in the particular type
-           *
-           * @maxLength 4096
-           */
-          key: string;
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value?: string;
-        }
-    )[];
-    /**
-     * An array of requirements that are needed to match
-     *
-     * @maxItems 16
-     */
-    missing?: (
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'host';
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value: string;
-        }
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'header' | 'cookie' | 'query';
-          /**
-           * The name of the element contained in the particular type
-           *
-           * @maxLength 4096
-           */
-          key: string;
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value?: string;
-        }
-    )[];
-  }[];
-  images?: {
-    contentDispositionType?: 'inline' | 'attachment';
-    /**
-     * @maxLength 256
-     */
-    contentSecurityPolicy?: string;
-    dangerouslyAllowSVG?: boolean;
-    /**
-     * @minItems 0
-     * @maxItems 50
-     */
-    domains?: string[];
-    /**
-     * @minItems 1
-     * @maxItems 4
-     */
-    formats?: ('image/avif' | 'image/webp' | 'image/jpeg' | 'image/png')[];
-    /**
-     * @minimum 1
-     * @maximum 315360000
-     */
-    minimumCacheTTL?: number;
-    /**
-     * @minItems 0
-     * @maxItems 50
-     */
-    remotePatterns?: {
-      protocol?: 'http' | 'https';
-      /**
-       * @maxLength 256
-       */
-      hostname: string;
-      /**
-       * @maxLength 5
-       */
-      port?: string;
-      /**
-       * @maxLength 256
-       */
-      pathname?: string;
-    }[];
-    /**
-     * @minItems 1
-     * @maxItems 50
-     */
-    sizes: number[];
-  };
-  /**
-   * A string with the project name used in the deployment URL
-   *
-   * @example my-instant-deployment
-   */
-  name: string;
-  /**
-   * Whether a deployment's source and logs are available publicly
-   */
-  public?: boolean;
-  /**
-   * A list of redirect definitions.
-   *
-   * @maxItems 1024
-   */
-  redirects?: {
-    /**
-     * A pattern that matches each incoming pathname (excluding querystring).
-     *
-     * @maxLength 4096
-     */
-    source: string;
-    /**
-     * A location destination defined as an absolute pathname or external URL.
-     *
-     * @maxLength 4096
-     */
-    destination: string;
-    /**
-     * A boolean to toggle between permanent and temporary redirect. When `true`, the status code is `308`. When `false` the status code is `307`.
-     */
-    permanent?: boolean;
-    /**
-     * An array of requirements that are needed to match
-     *
-     * @maxItems 16
-     */
-    has?: (
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'host';
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value: string;
-        }
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'header' | 'cookie' | 'query';
-          /**
-           * The name of the element contained in the particular type
-           *
-           * @maxLength 4096
-           */
-          key: string;
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value?: string;
-        }
-    )[];
-    /**
-     * An array of requirements that are needed to match
-     *
-     * @maxItems 16
-     */
-    missing?: (
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'host';
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value: string;
-        }
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'header' | 'cookie' | 'query';
-          /**
-           * The name of the element contained in the particular type
-           *
-           * @maxLength 4096
-           */
-          key: string;
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value?: string;
-        }
-    )[];
-  }[];
-  /**
-   * An array of the regions the deployment's Serverless Functions should be deployed to
-   *
-   * @example sfo
-   * @example bru
-   * @maxItems 1000
-   * @minItems 1
-   */
-  regions?: string[];
-  /**
-   * A list of rewrite definitions.
-   *
-   * @maxItems 1024
-   */
-  rewrites?: {
-    /**
-     * A pattern that matches each incoming pathname (excluding querystring).
-     *
-     * @maxLength 4096
-     */
-    source: string;
-    /**
-     * An absolute pathname to an existing resource or an external URL.
-     *
-     * @maxLength 4096
-     */
-    destination: string;
-    /**
-     * An array of requirements that are needed to match
-     *
-     * @maxItems 16
-     */
-    has?: (
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'host';
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value: string;
-        }
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'header' | 'cookie' | 'query';
-          /**
-           * The name of the element contained in the particular type
-           *
-           * @maxLength 4096
-           */
-          key: string;
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value?: string;
-        }
-    )[];
-    /**
-     * An array of requirements that are needed to match
-     *
-     * @maxItems 16
-     */
-    missing?: (
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'host';
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value: string;
-        }
-      | {
-          /**
-           * The type of request element to check
-           */
-          type: 'header' | 'cookie' | 'query';
-          /**
-           * The name of the element contained in the particular type
-           *
-           * @maxLength 4096
-           */
-          key: string;
-          /**
-           * A regular expression used to match the value. Named groups can be used in the destination
-           *
-           * @maxLength 4096
-           */
-          value?: string;
-        }
-    )[];
-    /**
-     * An optional integer to override the status code of the response.
-     *
-     * @minimum 100
-     * @maximum 999
-     */
-    statusCode?: number;
-  }[];
-  /**
-   * A list of routes objects used to rewrite paths to point towards other internal or external paths
-   *
-   * @maxItems 1024
-   * @deprecated true
-   * @example {"dest":"https://docs.example.com","src":"/docs"}
-   */
-  routes?: (
-    | {
-        /**
-         * @maxLength 4096
-         */
-        src: string;
-        /**
-         * @maxLength 4096
-         */
-        dest?: string;
-        /**
-         * @minProperties 1
-         * @maxProperties 100
-         */
-        headers?: {
-          [key: string]: string;
-        };
-        /**
-         * @maxItems 10
-         */
-        methods?: string[];
-        caseSensitive?: boolean;
-        important?: boolean;
-        user?: boolean;
-        ['continue']?: boolean;
-        override?: boolean;
-        check?: boolean;
-        isInternal?: boolean;
-        /**
-         * @minimum 100
-         * @maximum 999
-         */
-        status?: number;
-        /**
-         * @minProperties 1
-         */
-        locale?: {
-          /**
-           * @minProperties 1
-           * @maxProperties 100
-           */
-          redirect?: {
-            [key: string]: string;
-          };
-          /**
-           * @maxLength 4096
-           */
-          value?: string;
-          /**
-           * @maxLength 4096
-           */
-          path?: string;
-          /**
-           * @maxLength 4096
-           */
-          cookie?: string;
-          /**
-           * @maxLength 4096
-           */
-          ['default']?: string;
-        };
-        middleware?: number;
-        middlewarePath?: string;
-        middlewareRawSrc?: string[];
-        /**
-         * An array of requirements that are needed to match
-         *
-         * @maxItems 16
-         */
-        has?: (
-          | {
-              /**
-               * The type of request element to check
-               */
-              type: 'host';
-              /**
-               * A regular expression used to match the value. Named groups can be used in the destination
-               *
-               * @maxLength 4096
-               */
-              value: string;
-            }
-          | {
-              /**
-               * The type of request element to check
-               */
-              type: 'header' | 'cookie' | 'query';
-              /**
-               * The name of the element contained in the particular type
-               *
-               * @maxLength 4096
-               */
-              key: string;
-              /**
-               * A regular expression used to match the value. Named groups can be used in the destination
-               *
-               * @maxLength 4096
-               */
-              value?: string;
-            }
-        )[];
-        /**
-         * An array of requirements that are needed to match
-         *
-         * @maxItems 16
-         */
-        missing?: (
-          | {
-              /**
-               * The type of request element to check
-               */
-              type: 'host';
-              /**
-               * A regular expression used to match the value. Named groups can be used in the destination
-               *
-               * @maxLength 4096
-               */
-              value: string;
-            }
-          | {
-              /**
-               * The type of request element to check
-               */
-              type: 'header' | 'cookie' | 'query';
-              /**
-               * The name of the element contained in the particular type
-               *
-               * @maxLength 4096
-               */
-              key: string;
-              /**
-               * A regular expression used to match the value. Named groups can be used in the destination
-               *
-               * @maxLength 4096
-               */
-              value?: string;
-            }
-        )[];
-      }
-    | {
-        /**
-         * @maxLength 32
-         */
-        handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
-      }
-  )[];
-  /**
-   * When `false`, visiting a path that ends with a forward slash will respond with a `308` status code and redirect to the path without the trailing slash.
-   */
-  trailingSlash?: boolean;
-  /**
-   * The build command for this project. When `null` is used this value will be automatically detected
-   *
-   * @maxLength 256
-   */
-  buildCommand?: string | null;
-  /**
-   * @maxLength 256
-   */
-  ignoreCommand?: string | null;
-  /**
-   * The dev command for this project. When `null` is used this value will be automatically detected
-   *
-   * @maxLength 256
-   */
-  devCommand?: string | null;
-  /**
-   * The framework that is being used for this project. When `null` is used no framework is selected
-   */
-  framework?:
-    | any
-    | 'blitzjs'
-    | 'nextjs'
-    | 'gatsby'
-    | 'remix'
-    | 'astro'
-    | 'hexo'
-    | 'eleventy'
-    | 'docusaurus-2'
-    | 'docusaurus'
-    | 'preact'
-    | 'solidstart'
-    | 'dojo'
-    | 'ember'
-    | 'vue'
-    | 'scully'
-    | 'ionic-angular'
-    | 'angular'
-    | 'polymer'
-    | 'svelte'
-    | 'sveltekit'
-    | 'sveltekit-1'
-    | 'ionic-react'
-    | 'create-react-app'
-    | 'gridsome'
-    | 'umijs'
-    | 'sapper'
-    | 'saber'
-    | 'stencil'
-    | 'nuxtjs'
-    | 'redwoodjs'
-    | 'hugo'
-    | 'jekyll'
-    | 'brunch'
-    | 'middleman'
-    | 'zola'
-    | 'hydrogen'
-    | 'vite'
-    | 'vitepress'
-    | 'vuepress'
-    | 'parcel'
-    | 'sanity'
-    | 'storybook'
-    | null;
-  /**
-   * The install command for this project. When `null` is used this value will be automatically detected
-   *
-   * @maxLength 256
-   */
-  installCommand?: string | null;
-  /**
-   * The output directory of the project. When `null` is used this value will be automatically detected
-   *
-   * @maxLength 256
-   */
-  outputDirectory?: string | null;
-  /**
-   * An array of cron jobs that should be created for production Deployments.
-   *
-   * @maxItems 20
-   */
-  crons?: {
-    /**
-     * @maxLength 256
-     */
-    schedule: string;
-    /**
-     * @maxLength 512
-     * @pattern ^/.*
-     */
-    path: string;
-  }[];
   /**
    * An deployment id for an existing deployment to redeploy
    */
@@ -3850,59 +4091,18 @@ export type CreateDeploymentRequestBody = {
    * The monorepo manager that is being used for this deployment. When `null` is used no monorepo manager is selected
    */
   monorepoManager?: string | null;
-  project: {
-    id: string;
-    region_id: string;
-    name: string;
-    pg_version: number;
-    proxy_host: string;
-    /**
-     * The logical size limit for a branch in MiB.
-     */
-    branch_logical_size_limit: number;
-    /**
-     * The logical size limit for a branch in bytes.
-     */
-    branch_logical_size_limit_bytes: number;
-    /**
-     * The data storage size in bytes.
-     */
-    synthetic_storage_size?: number;
-    store_passwords: boolean;
-    created_at: string;
-    updated_at: string;
-    owner_id: string;
-    quota_reset_at?: string;
-    data_storage_bytes_hour?: number;
-    data_transfer_bytes?: number;
-    written_data_bytes?: number;
-    active_time_seconds?: number;
-    compute_time_seconds?: number;
-    settings?: {
-      quota?: {
-        /**
-         * The total amount of CPU seconds allowed to be spent by a project's compute endpoints.
-         */
-        compute_time_seconds?: number;
-        /**
-         * The total amount of wall-clock time allowed to be spent by a project's compute endpoints.
-         */
-        active_time_seconds?: number;
-        /**
-         * The total amount of data written to all project's branches.
-         */
-        written_data_bytes?: number;
-        /**
-         * The total amount of data transferred from all project's branches using proxy.
-         */
-        data_transfer_bytes?: number;
-        /**
-         * The logical size of every project's branch.
-         */
-        logical_size_bytes?: number;
-      };
-    };
-  };
+  /**
+   * A string with the project name used in the deployment URL
+   *
+   * @example my-instant-deployment
+   */
+  name: string;
+  /**
+   * The target project identifier in which the deployment will be created. When defined, this parameter overrides name
+   *
+   * @example my-deployment-project
+   */
+  project?: string;
   /**
    * Project settings that will be applied to the deployment. It is required for the first deployment of a project and will be saved for any following deployments
    */
@@ -3927,49 +4127,52 @@ export type CreateDeploymentRequestBody = {
      * The framework that is being used for this project. When `null` is used no framework is selected
      */
     framework?:
-      | any
-      | 'blitzjs'
-      | 'nextjs'
-      | 'gatsby'
-      | 'remix'
-      | 'astro'
-      | 'hexo'
-      | 'eleventy'
-      | 'docusaurus-2'
-      | 'docusaurus'
-      | 'preact'
-      | 'solidstart'
-      | 'dojo'
-      | 'ember'
-      | 'vue'
-      | 'scully'
-      | 'ionic-angular'
       | 'angular'
+      | 'astro'
+      | 'blitzjs'
+      | 'brunch'
+      | 'create-react-app'
+      | 'docusaurus'
+      | 'docusaurus-2'
+      | 'dojo'
+      | 'eleventy'
+      | 'ember'
+      | 'fasthtml'
+      | 'gatsby'
+      | 'gridsome'
+      | 'hexo'
+      | 'hugo'
+      | 'hydrogen'
+      | 'ionic-angular'
+      | 'ionic-react'
+      | 'jekyll'
+      | 'middleman'
+      | 'nextjs'
+      | any
+      | 'nuxtjs'
+      | 'parcel'
       | 'polymer'
+      | 'preact'
+      | 'redwoodjs'
+      | 'remix'
+      | 'saber'
+      | 'sanity'
+      | 'sanity-v3'
+      | 'sapper'
+      | 'scully'
+      | 'solidstart'
+      | 'solidstart-1'
+      | 'stencil'
+      | 'storybook'
       | 'svelte'
       | 'sveltekit'
       | 'sveltekit-1'
-      | 'ionic-react'
-      | 'create-react-app'
-      | 'gridsome'
       | 'umijs'
-      | 'sapper'
-      | 'saber'
-      | 'stencil'
-      | 'nuxtjs'
-      | 'redwoodjs'
-      | 'hugo'
-      | 'jekyll'
-      | 'brunch'
-      | 'middleman'
-      | 'zola'
-      | 'hydrogen'
       | 'vite'
       | 'vitepress'
+      | 'vue'
       | 'vuepress'
-      | 'parcel'
-      | 'sanity'
-      | 'storybook'
+      | 'zola'
       | null;
     /**
      * The install command for this project. When `null` is used this value will be automatically detected
@@ -3977,6 +4180,10 @@ export type CreateDeploymentRequestBody = {
      * @maxLength 256
      */
     installCommand?: string | null;
+    /**
+     * Override the Node.js version that should be used for this deployment
+     */
+    nodeVersion?: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
     /**
      * The output directory of the project. When `null` is used this value will be automatically detected
      *
@@ -4009,114 +4216,11 @@ export type CreateDeploymentRequestBody = {
   /**
    * Either not defined, `staging`, or `production`. If `staging`, a staging alias in the format `<project>-<team>.vercel.app` will be assigned. If `production`, any aliases defined in `alias` will be assigned. If omitted, the target will be `preview`
    */
-  target?: 'staging' | 'production';
+  target?: 'production' | 'staging';
   /**
    * When `true` and `deploymentId` is passed in, the sha from the previous deployment's `gitSource` is removed forcing the latest commit to be used.
    */
   withLatestCommit?: boolean;
-  connection_uris: {
-    /**
-     * @example postgres://user:pw@endpoint.us-east-2.aws.neon.tech/neondb
-     */
-    connection_uri: string;
-  }[];
-  roles: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  }[];
-  databases: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  }[];
-  branch: {
-    id: string;
-    project_id: string;
-    name: string;
-    current_state: 'init' | 'ready';
-    primary: boolean;
-    created_at: string;
-    updated_at: string;
-    parent_id?: string;
-  };
-  endpoints: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  }[];
-  endpoint: {
-    host: string;
-    id: string;
-    project_id: string;
-    branch_id: string;
-    autoscaling_limit_min_cu: number;
-    autoscaling_limit_max_cu: number;
-    region_id: string;
-    type: string;
-    current_state: string;
-    pooler_enabled: boolean;
-    pooler_mode: string;
-    disabled: boolean;
-    passwordless_access: boolean;
-    last_active?: string;
-    created_at: string;
-    updated_at: string;
-    suspend_timeout_seconds: number;
-  };
-  database: {
-    id: number;
-    branch_id: string;
-    name: string;
-    owner_name: string;
-    created_at: string;
-    updated_at: string;
-  };
-  role: {
-    branch_id: string;
-    name: string;
-    created_at: string;
-    updated_at: string;
-    protected?: boolean;
-    password?: string;
-  };
-  password: string;
-  projects: {
-    id: string;
-    data_storage_bytes_hour: number;
-    data_storage_bytes_hour_updated_at?: string;
-    data_transfer_bytes: number;
-    data_transfer_bytes_updated_at?: string;
-    written_data_bytes: number;
-    written_data_bytes_updated_at?: string;
-    compute_time_seconds: number;
-    compute_time_seconds_updated_at?: string;
-    synthetic_storage_size: number;
-    synthetic_storage_size_updated_at?: string;
-  }[];
-  pagination: {
-    cursor: string;
-  };
 };
 
 export type CreateDeploymentVariables = {
@@ -4148,48 +4252,331 @@ export type CancelDeploymentPathParams = {
 
 export type CancelDeploymentQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type CancelDeploymentError = Fetcher.ErrorWrapper<undefined>;
 
 export type CancelDeploymentResponse = {
+  aliasAssignedAt?: number | boolean | null;
+  alwaysRefuseToBuild?: boolean;
   build: {
-    /**
-     * The keys of the environment variables that were assigned during the build phase.
-     *
-     * @example MY_ENV_VAR
-     */
     env: string[];
   };
+  buildArtifactUrls?: string[];
   builds?: Record<string, any>[];
-  /**
-   * The flag saying if Vercel Connect configuration is used for builds
-   */
-  connectBuildsEnabled?: boolean;
-  /**
-   * The ID of Vercel Connect configuration used for this deployment
-   */
-  connectConfigurationId?: string;
-  /**
-   * The region where the deployment was first created
-   *
-   * @example sfo1
-   */
-  createdIn: string;
-  /**
-   * The keys of the environment variables that were assigned during runtime
-   *
-   * @example MY_SECRET
-   */
   env: string[];
+  inspectorUrl: string | null;
+  isInConcurrentBuildsQueue: boolean;
+  isInSystemBuildsQueue: boolean;
+  projectSettings: {
+    buildCommand?: string | null;
+    devCommand?: string | null;
+    framework?:
+      | 'angular'
+      | 'astro'
+      | 'blitzjs'
+      | 'brunch'
+      | 'create-react-app'
+      | 'docusaurus'
+      | 'docusaurus-2'
+      | 'dojo'
+      | 'eleventy'
+      | 'ember'
+      | 'fasthtml'
+      | 'gatsby'
+      | 'gridsome'
+      | 'hexo'
+      | 'hugo'
+      | 'hydrogen'
+      | 'ionic-angular'
+      | 'ionic-react'
+      | 'jekyll'
+      | 'middleman'
+      | 'nextjs'
+      | 'nuxtjs'
+      | 'parcel'
+      | 'polymer'
+      | 'preact'
+      | 'redwoodjs'
+      | 'remix'
+      | 'saber'
+      | 'sanity'
+      | 'sanity-v3'
+      | 'sapper'
+      | 'scully'
+      | 'solidstart'
+      | 'solidstart-1'
+      | 'stencil'
+      | 'storybook'
+      | 'svelte'
+      | 'sveltekit'
+      | 'sveltekit-1'
+      | 'umijs'
+      | 'vite'
+      | 'vitepress'
+      | 'vue'
+      | 'vuepress'
+      | 'zola'
+      | null;
+    commandForIgnoringBuildStep?: string | null;
+    installCommand?: string | null;
+    outputDirectory?: string | null;
+    speedInsights?: {
+      id: string;
+      enabledAt?: number;
+      disabledAt?: number;
+      canceledAt?: number;
+      hasData?: boolean;
+      paidAt?: number;
+    };
+    webAnalytics?: {
+      id: string;
+      disabledAt?: number;
+      canceledAt?: number;
+      enabledAt?: number;
+      hasData?: boolean;
+    };
+  };
+  readyStateReason?: string;
+  integrations?: {
+    status: 'error' | 'pending' | 'ready' | 'skipped' | 'timeout';
+    startedAt: number;
+    completedAt?: number;
+    skippedAt?: number;
+    skippedBy?: string;
+  };
+  images?: {
+    sizes?: number[];
+    domains?: string[];
+    remotePatterns?: {
+      /**
+       * Must be `http` or `https`.
+       */
+      protocol?: 'http' | 'https';
+      /**
+       * Can be literal or wildcard. Single `*` matches a single subdomain. Double `**` matches any number of subdomains.
+       */
+      hostname: string;
+      /**
+       * Can be literal port such as `8080` or empty string meaning no port.
+       */
+      port?: string;
+      /**
+       * Can be literal or wildcard. Single `*` matches a single path segment. Double `**` matches any number of path segments.
+       */
+      pathname?: string;
+      /**
+       * Can be literal query string such as `?v=1` or empty string meaning no query string.
+       */
+      search?: string;
+    }[];
+    localPatterns?: {
+      /**
+       * Can be literal or wildcard. Single `*` matches a single path segment. Double `**` matches any number of path segments.
+       */
+      pathname?: string;
+      /**
+       * Can be literal query string such as `?v=1` or empty string meaning no query string.
+       */
+      search?: string;
+    }[];
+    minimumCacheTTL?: number;
+    formats?: ('image/avif' | 'image/webp')[];
+    dangerouslyAllowSVG?: boolean;
+    contentSecurityPolicy?: string;
+    contentDispositionType?: 'attachment' | 'inline';
+  };
+  alias?: string[];
+  aliasAssigned: boolean;
+  bootedAt: number;
+  buildingAt: number;
+  buildSkipped: boolean;
+  creator: {
+    uid: string;
+    username?: string;
+    avatar?: string;
+  };
+  initReadyAt?: number;
+  isFirstBranchDeployment?: boolean;
+  lambdas?: {
+    id?: string;
+    createdAt?: number;
+    entrypoint?: string | null;
+    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    readyStateAt?: number;
+    output: {
+      path: string;
+      functionName: string;
+    }[];
+  }[];
+  public: boolean;
+  ready?: number;
+  status: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+  team?: {
+    id: string;
+    name: string;
+    avatar?: string;
+    slug: string;
+  };
+  userAliases?: string[];
+  previewCommentsEnabled?: boolean;
+  ttyBuildLogs?: boolean;
+  customEnvironment?:
+    | Record<string, any>
+    | {
+        id: string;
+      };
+  id: string;
+  aliasError?: {
+    code: string;
+    message: string;
+  } | null;
+  aliasFinal?: string | null;
+  aliasWarning?: {
+    code: string;
+    message: string;
+    link?: string;
+    action?: string;
+  } | null;
   /**
-   * An object used to configure your Serverless Functions
-   *
-   * @example {"api/test.js":{"memory":3008}}
+   * applies to custom domains only, defaults to `true`
    */
+  autoAssignCustomDomains?: boolean;
+  automaticAliases?: string[];
+  buildErrorAt?: number;
+  checksState?: 'completed' | 'registered' | 'running';
+  checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+  createdAt: number;
+  deletedAt?: number | null;
+  /**
+   * Computed field that is only available for deployments with a microfrontend configuration.
+   */
+  defaultRoute?: string;
+  canceledAt?: number;
+  errorCode?: string;
+  errorLink?: string;
+  errorMessage?: string | null;
+  errorStep?: string;
+  /**
+   * Since November 2023 this field defines a set of regions that we will deploy the lambda to passively Lambdas will be deployed to these regions but only invoked if all of the primary `regions` are marked as out of service
+   */
+  passiveRegions?: string[];
+  gitSource?:
+    | {
+        type: 'github';
+        repoId: string | number;
+        ref?: string | null;
+        sha?: string;
+        prId?: number | null;
+      }
+    | {
+        type: 'github';
+        org: string;
+        repo: string;
+        ref?: string | null;
+        sha?: string;
+        prId?: number | null;
+      }
+    | {
+        type: 'gitlab';
+        projectId: string | number;
+        ref?: string | null;
+        sha?: string;
+        prId?: number | null;
+      }
+    | {
+        type: 'bitbucket';
+        workspaceUuid?: string;
+        repoUuid: string;
+        ref?: string | null;
+        sha?: string;
+        prId?: number | null;
+      }
+    | {
+        type: 'bitbucket';
+        owner: string;
+        slug: string;
+        ref?: string | null;
+        sha?: string;
+        prId?: number | null;
+      }
+    | {
+        type: 'custom';
+        ref: string;
+        sha: string;
+        gitUrl: string;
+      }
+    | {
+        type: 'github';
+        ref: string;
+        sha: string;
+        repoId: number;
+        org?: string;
+        repo?: string;
+      }
+    | {
+        type: 'gitlab';
+        ref: string;
+        sha: string;
+        projectId: number;
+      }
+    | {
+        type: 'bitbucket';
+        ref: string;
+        sha: string;
+        owner?: string;
+        slug?: string;
+        workspaceUuid: string;
+        repoUuid: string;
+      };
+  name: string;
+  meta: {
+    [key: string]: string;
+  };
+  originCacheRegion?: string;
+  project?: {
+    id: string;
+    name: string;
+    framework?: string | null;
+  };
+  readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+  /**
+   * Since June 2023 Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - PROMOTED: has seen production traffic
+   */
+  readySubstate?: 'PROMOTED' | 'STAGED';
+  regions: string[];
+  softDeletedByRetention?: boolean;
+  source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy' | 'v0-web';
+  target?: 'production' | 'staging' | null;
+  type: 'LAMBDAS';
+  undeletedAt?: number;
+  url: string;
+  version: 2;
+  oidcTokenClaims?: {
+    iss: string;
+    sub: string;
+    scope: string;
+    aud: string;
+    owner: string;
+    owner_id: string;
+    project: string;
+    project_id: string;
+    environment: string;
+  };
+  connectBuildsEnabled?: boolean;
+  connectConfigurationId?: string;
+  createdIn: string;
+  crons?: {
+    schedule: string;
+    path: string;
+  }[];
   functions?: {
     [key: string]: {
       memory?: number;
@@ -4199,65 +4586,14 @@ export type CancelDeploymentResponse = {
       excludeFiles?: string;
     };
   } | null;
-  /**
-   * Vercel URL to inspect the deployment.
-   *
-   * @example https://vercel.com/acme/nextjs/J1hXN00qjUeoYfpEEf7dnDtpSiVq
-   */
-  inspectorUrl: string | null;
-  /**
-   * Is the deployment currently queued waiting for a Concurrent Build Slot to be available
-   *
-   * @example false
-   */
-  isInConcurrentBuildsQueue: boolean;
-  /**
-   * An object containing the deployment's metadata
-   *
-   * @example {"foo":"bar"}
-   */
-  meta: {
-    [key: string]: string;
-  };
-  /**
-   * An monorepo manager that was used for the deployment
-   *
-   * @example turbo
-   */
   monorepoManager?: string | null;
-  /**
-   * The name of the project associated with the deployment at the time that the deployment was created
-   *
-   * @example my-project
-   */
-  name: string;
-  /**
-   * The unique ID of the user or team the deployment belongs to
-   *
-   * @example ZspSRT4ljIEEmMHgoDwKWDei
-   */
   ownerId: string;
   /**
-   * The connect configuration ID used to deploy passive lambdas into for secure compute enabled deployments.
+   * Since November 2023 this field defines a Secure Compute network that will only be used to deploy passive lambdas to (as in passiveRegions)
    */
   passiveConnectConfigurationId?: string;
-  /**
-   * The pricing plan the deployment was made under
-   *
-   * @example pro
-   */
-  plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
-  /**
-   * The ID of the project the deployment is associated with
-   *
-   * @example prj_12HKQaOmR5t5Uy6vdcQsNIiZgHGB
-   */
+  plan: 'enterprise' | 'hobby' | 'pro';
   projectId: string;
-  /**
-   * A list of routes objects used to rewrite paths to point towards other internal or external paths
-   *
-   * @example {"src":"/docs","dest":"https://docs.example.com"}
-   */
   routes:
     | (
         | {
@@ -4337,19 +4673,19 @@ export type CancelDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         org: string;
         repo: string;
         repoId: number;
         type: 'github';
-        repoOwnerId: string;
+        repoOwnerId: number;
         path: string;
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         owner: string;
@@ -4361,242 +4697,65 @@ export type CancelDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | null;
-  aliasAssignedAt?: number | boolean | null;
-  lambdas?: {
-    id: string;
-    createdAt?: number;
-    entrypoint?: string | null;
-    readyState?: 'INITIALIZING' | 'BUILDING' | 'READY' | 'ERROR';
-    readyStateAt?: number;
-    output: {
-      path: string;
-      functionName: string;
-    }[];
-  }[];
-  /**
-   * A boolean representing if the deployment is public or not. By default this is `false`
-   *
-   * @example false
-   */
-  public: boolean;
-  /**
-   * The state of the deployment depending on the process of deploying, or if it is ready or in an error state
-   *
-   * @example READY
-   */
-  readyState: 'INITIALIZING' | 'BUILDING' | 'READY' | 'ERROR' | 'QUEUED' | 'CANCELED';
-  /**
-   * The substate of the deployment when the state is "READY"
-   *
-   * @example STAGED
-   */
-  readySubstate?: 'STAGED' | 'PROMOTED';
-  /**
-   * The regions the deployment exists in
-   *
-   * @example sfo1
-   */
-  regions: string[];
-  /**
-   * Where was the deployment created from
-   *
-   * @example cli
-   */
-  source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo';
-  /**
-   * If defined, either `staging` if a staging alias in the format `<project>.<team>.now.sh` was assigned upon creation, or `production` if the aliases from `alias` were assigned
-   *
-   * @example null
-   */
-  target?: 'staging' | 'production' | null;
-  /**
-   * The team that owns the deployment if any
-   */
-  team?: {
-    /**
-     * The ID of the team owner
-     *
-     * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
-     */
-    id: string;
-    /**
-     * The name of the team owner
-     *
-     * @example FSociety
-     */
-    name: string;
-    /**
-     * The slug of the team owner
-     *
-     * @example fsociety
-     */
-    slug: string;
-  };
-  type: 'LAMBDAS';
-  /**
-   * A string with the unique URL of the deployment
-   *
-   * @example my-instant-deployment-3ij3cxz9qr.now.sh
-   */
-  url: string;
-  /**
-   * An array of domains that were provided by the user when creating the Deployment.
-   *
-   * @example sub1.example.com
-   * @example sub2.example.com
-   */
-  userAliases?: string[];
-  /**
-   * The platform version that was used to create the deployment.
-   *
-   * @example 2
-   */
-  version: 2;
-  /**
-   * Whether or not preview comments are enabled for the deployment
-   *
-   * @example false
-   */
-  previewCommentsEnabled?: boolean;
-  /**
-   * A list of all the aliases (default aliases, staging aliases and production aliases) that were assigned upon deployment creation
-   */
-  alias: string[];
-  /**
-   * A boolean that will be true when the aliases from the alias property were assigned successfully
-   *
-   * @example true
-   */
-  aliasAssigned: boolean;
-  /**
-   * An object that will contain a `code` and a `message` when the aliasing fails, otherwise the value will be `null`
-   *
-   * @example null
-   */
-  aliasError?: {
-    code: string;
-    message: string;
-  } | null;
-  aliasFinal?: string | null;
-  aliasWarning?: {
-    code: string;
-    message: string;
-    link?: string;
-    action?: string;
-  } | null;
-  autoAssignCustomDomains?: boolean;
-  automaticAliases?: string[];
-  bootedAt: number;
-  buildErrorAt?: number;
-  buildingAt: number;
-  canceledAt?: number;
-  checksState?: 'registered' | 'running' | 'completed';
-  checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-  /**
-   * A number containing the date when the deployment was created in milliseconds
-   *
-   * @example 1540257589405
-   */
-  createdAt: number;
-  /**
-   * Information about the deployment creator
-   */
-  creator: {
-    /**
-     * The ID of the user that created the deployment
-     *
-     * @example 96SnxkFiMyVKsK3pnoHfx3Hz
-     */
-    uid: string;
-    /**
-     * The username of the user that created the deployment
-     *
-     * @example john-doe
-     */
-    username?: string;
-  };
-  errorCode?: string;
-  errorLink?: string;
-  errorMessage?: string | null;
-  errorStep?: string;
-  passiveRegions?: string[];
-  gitSource?:
+  flags?:
     | {
-        type: 'github';
-        repoId: string | number;
-        ref?: string | null;
-        sha?: string;
-        prId?: number | null;
+        definitions: {
+          [key: string]: {
+            options?: {
+              value: Schemas.FlagJSONValue;
+              label?: string;
+            }[];
+            url?: string;
+            description?: string;
+          };
+        };
+      }
+    | Record<string, any>[];
+  microfrontends?:
+    | {
+        /**
+         * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+         */
+        isDefaultApp?: boolean;
+        /**
+         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+         */
+        defaultRoute?: string;
+        /**
+         * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+         */
+        groupIds: string[];
       }
     | {
-        type: 'github';
-        org: string;
-        repo: string;
-        ref?: string | null;
-        sha?: string;
-        prId?: number | null;
-      }
-    | {
-        type: 'gitlab';
-        projectId: string | number;
-        ref?: string | null;
-        sha?: string;
-        prId?: number | null;
-      }
-    | {
-        type: 'bitbucket';
-        workspaceUuid?: string;
-        repoUuid: string;
-        ref?: string | null;
-        sha?: string;
-        prId?: number | null;
-      }
-    | {
-        type: 'bitbucket';
-        owner: string;
-        slug: string;
-        ref?: string | null;
-        sha?: string;
-        prId?: number | null;
-      }
-    | {
-        type: 'custom';
-        ref: string;
-        sha: string;
-        gitUrl: string;
-      }
-    | {
-        type: 'github';
-        ref: string;
-        sha: string;
-        repoId: number;
-        org?: string;
-        repo?: string;
-      }
-    | {
-        type: 'gitlab';
-        ref: string;
-        sha: string;
-        projectId: number;
-      }
-    | {
-        type: 'bitbucket';
-        ref: string;
-        sha: string;
-        owner?: string;
-        slug?: string;
-        workspaceUuid: string;
-        repoUuid: string;
+        /**
+         * A map of the other applications that are part of this group. Only defined on the default application. The field is set after deployments have been created, so can be undefined, but should be there for a successful deployment.
+         */
+        applications?: {
+          [key: string]: {
+            /**
+             * This is the production alias, it will always show the most up to date of each application.
+             */
+            productionHost: string;
+            /**
+             * Use the fixed deploymentAlias and deploymentHost so that the microfrontend preview stays in sync with the deployment. These are only present for mono-repos when a single commit creates multiple deployments. If they are not present, productionHost will be used.
+             */
+            deploymentAlias?: string;
+            deploymentHost?: string;
+          };
+        };
+        isDefaultApp: boolean;
+        /**
+         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+         */
+        defaultRoute?: string;
+        /**
+         * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+         */
+        groupIds: string[];
       };
-  /**
-   * A string holding the unique ID of the deployment
-   *
-   * @example dpl_89qyp1cskzkLrVicDaZoDbjyHuDJ
-   */
-  id: string;
 };
 
 export type CancelDeploymentVariables = {
@@ -4619,9 +4778,13 @@ export const cancelDeployment = (variables: CancelDeploymentVariables, signal?: 
 
 export type BuyDomainQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type BuyDomainError = Fetcher.ErrorWrapper<undefined>;
@@ -4655,6 +4818,66 @@ export type BuyDomainRequestBody = {
    * @example true
    */
   renew?: boolean;
+  /**
+   * The country of the domain registrant
+   *
+   * @example US
+   */
+  country: string;
+  /**
+   * The company name of the domain registrant
+   *
+   * @example Acme Inc.
+   */
+  orgName?: string;
+  /**
+   * The first name of the domain registrant
+   *
+   * @example Jane
+   */
+  firstName: string;
+  /**
+   * The last name of the domain registrant
+   *
+   * @example Doe
+   */
+  lastName: string;
+  /**
+   * The street address of the domain registrant
+   *
+   * @example 340 S Lemon Ave Suite 4133
+   */
+  address1: string;
+  /**
+   * The city of the domain registrant
+   *
+   * @example San Francisco
+   */
+  city: string;
+  /**
+   * The state of the domain registrant
+   *
+   * @example CA
+   */
+  state: string;
+  /**
+   * The postal code of the domain registrant
+   *
+   * @example 91789
+   */
+  postalCode: string;
+  /**
+   * The phone number of the domain registrant
+   *
+   * @example +1.4158551452
+   */
+  phone: string;
+  /**
+   * The email of the domain registrant
+   *
+   * @example jane.doe@someplace.com
+   */
+  email: string;
 };
 
 export type BuyDomainVariables = {
@@ -4667,7 +4890,7 @@ export type BuyDomainVariables = {
  */
 export const buyDomain = (variables: BuyDomainVariables, signal?: AbortSignal) =>
   fetch<BuyDomainResponse, BuyDomainError, BuyDomainRequestBody, {}, BuyDomainQueryParams, {}>({
-    url: '/v4/domains/buy',
+    url: '/v5/domains/buy',
     method: 'post',
     ...variables,
     signal
@@ -4685,29 +4908,18 @@ export type CheckDomainPriceQueryParams = {
    *
    * @example new
    */
-  type?: 'new' | 'renewal';
+  type?: 'new' | 'renewal' | 'transfer' | 'redemption';
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type CheckDomainPriceError = Fetcher.ErrorWrapper<undefined>;
-
-export type CheckDomainPriceResponse = {
-  /**
-   * The domain price in USD.
-   *
-   * @example 20
-   */
-  price: number;
-  /**
-   * The number of years the domain could be held before paying again.
-   *
-   * @example 1
-   */
-  period: number;
-};
 
 export type CheckDomainPriceVariables = {
   queryParams: CheckDomainPriceQueryParams;
@@ -4717,7 +4929,7 @@ export type CheckDomainPriceVariables = {
  * Check the price to purchase a domain and how long a single purchase period is.
  */
 export const checkDomainPrice = (variables: CheckDomainPriceVariables, signal?: AbortSignal) =>
-  fetch<CheckDomainPriceResponse, CheckDomainPriceError, undefined, {}, CheckDomainPriceQueryParams, {}>({
+  fetch<Record<string, any>, CheckDomainPriceError, undefined, {}, CheckDomainPriceQueryParams, {}>({
     url: '/v4/domains/price',
     method: 'get',
     ...variables,
@@ -4751,9 +4963,13 @@ export type GetRecordsQueryParams = {
    */
   until?: string;
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetRecordsError = Fetcher.ErrorWrapper<undefined>;
@@ -4774,7 +4990,7 @@ export const getRecords = (variables: GetRecordsVariables, signal?: AbortSignal)
           id: string;
           slug: string;
           name: string;
-          type: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
+          type: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'HTTPS' | 'MX' | 'SRV' | 'TXT' | 'NS';
           value: string;
           mxPriority?: number;
           priority?: number;
@@ -4790,7 +5006,7 @@ export const getRecords = (variables: GetRecordsVariables, signal?: AbortSignal)
           id: string;
           slug: string;
           name: string;
-          type: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
+          type: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'HTTPS' | 'MX' | 'SRV' | 'TXT' | 'NS';
           value: string;
           mxPriority?: number;
           priority?: number;
@@ -4820,9 +5036,13 @@ export type CreateRecordPathParams = {
 
 export type CreateRecordQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type CreateRecordError = Fetcher.ErrorWrapper<undefined>;
@@ -5059,7 +5279,7 @@ export type CreateRecordVariables = {
           /**
            * @example host.example.com
            */
-          target?: string;
+          target: string;
         };
         /**
          * A comment to add context on what this DNS record is for
@@ -5125,6 +5345,42 @@ export type CreateRecordVariables = {
          * @example ns1.example.com
          */
         value?: string;
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
+      }
+    | {
+        /**
+         * A subdomain name or an empty string for the root domain.
+         */
+        name: string;
+        /**
+         * Must be of type `HTTPS`.
+         */
+        type: 'HTTPS';
+        /**
+         * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
+         *
+         * @minimum 60
+         * @maximum 2147483647
+         * @example 60
+         */
+        ttl?: number;
+        https: {
+          priority: number | null;
+          /**
+           * @example host.example.com
+           */
+          target: string;
+          /**
+           * @example alpn=h2,h3
+           */
+          params?: string;
+        };
         /**
          * A comment to add context on what this DNS record is for
          *
@@ -5385,7 +5641,7 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
           /**
            * @example host.example.com
            */
-          target?: string;
+          target: string;
         };
         /**
          * A comment to add context on what this DNS record is for
@@ -5458,6 +5714,42 @@ export const createRecord = (variables: CreateRecordVariables, signal?: AbortSig
          * @maxLength 500
          */
         comment?: string;
+      }
+    | {
+        /**
+         * A subdomain name or an empty string for the root domain.
+         */
+        name: string;
+        /**
+         * Must be of type `HTTPS`.
+         */
+        type: 'HTTPS';
+        /**
+         * The TTL value. Must be a number between 60 and 2147483647. Default value is 60.
+         *
+         * @minimum 60
+         * @maximum 2147483647
+         * @example 60
+         */
+        ttl?: number;
+        https: {
+          priority: number | null;
+          /**
+           * @example host.example.com
+           */
+          target: string;
+          /**
+           * @example alpn=h2,h3
+           */
+          params?: string;
+        };
+        /**
+         * A comment to add context on what this DNS record is for
+         *
+         * @example used to verify ownership of domain
+         * @maxLength 500
+         */
+        comment?: string;
       },
     {},
     CreateRecordQueryParams,
@@ -5475,24 +5767,28 @@ export type UpdateRecordPathParams = {
 
 export type UpdateRecordQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type UpdateRecordError = Fetcher.ErrorWrapper<undefined>;
 
 export type UpdateRecordResponse = {
-  comment?: string;
   createdAt?: number | null;
   creator: string;
   domain: string;
   id: string;
   name: string;
-  recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS';
+  recordType: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'HTTPS' | 'MX' | 'NS' | 'SRV' | 'TXT';
   ttl?: number;
   type: 'record' | 'record-sys';
   value: string;
+  comment?: string;
 };
 
 export type UpdateRecordRequestBody = {
@@ -5515,7 +5811,7 @@ export type UpdateRecordRequestBody = {
    * @example A
    * @maxLength 255
    */
-  type?: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'MX' | 'SRV' | 'TXT' | 'NS' | null;
+  type?: 'A' | 'AAAA' | 'ALIAS' | 'CAA' | 'CNAME' | 'HTTPS' | 'MX' | 'NS' | 'SRV' | 'TXT' | null;
   /**
    * The Time to live (TTL) value of the DNS record
    *
@@ -5537,6 +5833,15 @@ export type UpdateRecordRequestBody = {
     weight: number | null;
     port: number | null;
     priority: number | null;
+  } | null;
+  https?: {
+    priority: number | null;
+    /**
+     * @example example2.com.
+     * @maxLength 255
+     */
+    target: string | null;
+    params?: string | null;
   } | null;
   /**
    * A comment to add context on what this DNS record is for
@@ -5579,9 +5884,13 @@ export type RemoveRecordPathParams = {
 
 export type RemoveRecordQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type RemoveRecordError = Fetcher.ErrorWrapper<undefined>;
@@ -5610,9 +5919,13 @@ export type CheckDomainStatusQueryParams = {
    */
   name: string;
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type CheckDomainStatusError = Fetcher.ErrorWrapper<undefined>;
@@ -5638,9 +5951,13 @@ export const checkDomainStatus = (variables: CheckDomainStatusVariables, signal?
 
 export type GetDomainTransferQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetDomainTransferError = Fetcher.ErrorWrapper<undefined>;
@@ -5653,7 +5970,7 @@ export type GetDomainTransferResponse = {
   /**
    * The domain's transfer policy (depends on TLD requirements). `charge-and-renew`: transfer will charge for renewal and will renew the existing domain's registration. `no-charge-no-change`: transfer will have no change to registration period and does not require charge. `no-change`: transfer charge is required, but no change in registration period. `new-term`: transfer charge is required and a new registry term is set based on the transfer date. `not-supported`: transfers are not supported for this domain or TLD. `null`: This TLD is not supported by Vercel's Registrar.
    */
-  transferPolicy: 'charge-and-renew' | 'no-charge-no-change' | 'no-change' | 'new-term' | 'not-supported' | null;
+  transferPolicy: 'charge-and-renew' | 'new-term' | 'no-change' | 'no-charge-no-change' | 'not-supported' | null;
   /**
    * Description associated with transferable state.
    */
@@ -5661,7 +5978,7 @@ export type GetDomainTransferResponse = {
   /**
    * The current state of an ongoing transfer. `pending_owner`: Awaiting approval by domain's admin contact (every transfer begins with this status). If approval is not given within five days, the transfer is cancelled. `pending_admin`: Waiting for approval by Vercel Registrar admin. `pending_registry`: Awaiting registry approval (the transfer completes after 7 days unless it is declined by the current registrar). `completed`: The transfer completed successfully. `cancelled`: The transfer was cancelled. `undef`: No transfer exists for this domain. `unknown`: This TLD is not supported by Vercel's Registrar.
    */
-  status: 'pending_owner' | 'pending_admin' | 'pending_registry' | 'completed' | 'cancelled' | 'undef' | 'unknown';
+  status: 'cancelled' | 'completed' | 'pending_admin' | 'pending_owner' | 'pending_registry' | 'undef' | 'unknown';
 };
 
 export type GetDomainTransferVariables = {
@@ -5690,18 +6007,26 @@ export type GetDomainConfigPathParams = {
 
 export type GetDomainConfigQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * When true, the response will only include the nameservers assigned directly to the specified domain. When false and there are no nameservers assigned directly to the specified domain, the response will include the nameservers of the domain's parent zone.
+   */
+  strict?: 'true' | 'false';
+  /**
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetDomainConfigError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetDomainConfigResponse = {
   /**
-   * How we see the domain's configuration. - `CNAME`: Domain has a CNAME pointing to Vercel. - `A`: Domain's A record is resolving to Vercel. - `http`: Domain is resolving to Vercel but may be behind a Proxy. - `null`: Domain is not resolving to Vercel.
+   * How we see the domain's configuration. - `CNAME`: Domain has a CNAME pointing to Vercel. - `A`: Domain's A record is resolving to Vercel. - `http`: Domain is resolving to Vercel but may be behind a Proxy. - `dns-01`: Domain is not resolving to Vercel but dns-01 challenge is enabled. - `null`: Domain is not resolving to Vercel.
    */
-  configuredBy?: 'CNAME' | 'A' | 'http' | null;
+  configuredBy?: 'A' | 'CNAME' | 'dns-01' | 'http' | null;
   /**
    * Which challenge types the domain can use for issuing certs.
    */
@@ -5741,9 +6066,13 @@ export type GetDomainPathParams = {
 
 export type GetDomainQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetDomainError = Fetcher.ErrorWrapper<undefined>;
@@ -5790,6 +6119,8 @@ export type GetDomainResponse = {
       isDomainReseller?: boolean;
       id: string;
     };
+    teamId: string | null;
+    userId: string;
     /**
      * If it was purchased through Vercel, the timestamp in milliseconds when it was purchased.
      *
@@ -5837,7 +6168,7 @@ export type GetDomainResponse = {
      *
      * @example zeit.world
      */
-    serviceType: 'zeit.world' | 'external' | 'na';
+    serviceType: 'external' | 'na' | 'zeit.world';
     /**
      * Timestamp in milliseconds at which the domain was successfully transferred into Vercel. `null` if the transfer is still processing or was never transferred in.
      *
@@ -5889,9 +6220,13 @@ export type GetDomainsQueryParams = {
    */
   until?: number;
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetDomainsError = Fetcher.ErrorWrapper<undefined>;
@@ -5937,24 +6272,19 @@ export type GetDomainsResponse = {
       isDomainReseller?: boolean;
       id: string;
     };
-    /**
-     * Indicates whether the domain is set to automatically renew.
-     *
-     * @example true
-     */
-    renew?: boolean;
-    /**
-     * If it was purchased through Vercel, the timestamp in milliseconds when it was purchased.
-     *
-     * @example 1613602938882
-     */
-    boughtAt: number | null;
+    teamId: string | null;
     /**
      * Timestamp in milliseconds when the domain was created in the registry.
      *
      * @example 1613602938882
      */
     createdAt: number;
+    /**
+     * If it was purchased through Vercel, the timestamp in milliseconds when it was purchased.
+     *
+     * @example 1613602938882
+     */
+    boughtAt: number | null;
     /**
      * Timestamp in milliseconds at which the domain is set to expire. `null` if not bought with Vercel.
      *
@@ -5980,11 +6310,17 @@ export type GetDomainsResponse = {
      */
     orderedAt?: number;
     /**
+     * Indicates whether the domain is set to automatically renew.
+     *
+     * @example true
+     */
+    renew?: boolean;
+    /**
      * The type of service the domain is handled by. `external` if the DNS is externally handled, `zeit.world` if handled with Vercel, or `na` if the service is not available.
      *
      * @example zeit.world
      */
-    serviceType: 'zeit.world' | 'external' | 'na';
+    serviceType: 'external' | 'na' | 'zeit.world';
     /**
      * Timestamp in milliseconds at which the domain was successfully transferred into Vercel. `null` if the transfer is still processing or was never transferred in.
      *
@@ -5997,6 +6333,7 @@ export type GetDomainsResponse = {
      * @example 1613602938882
      */
     transferStartedAt?: number;
+    userId: string;
   }[];
   pagination: Schemas.Pagination;
 };
@@ -6018,9 +6355,13 @@ export const getDomains = (variables: GetDomainsVariables, signal?: AbortSignal)
 
 export type CreateOrTransferDomainQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type CreateOrTransferDomainError = Fetcher.ErrorWrapper<undefined>;
@@ -6067,11 +6408,11 @@ export type CreateOrTransferDomainResponse = {
       id: string;
     };
     /**
-     * The unique identifier of the domain.
+     * The domain name.
      *
-     * @example EmTbe5CEJyTk2yVAHBUWy4A3sRusca3GCwRjTC1bpeVnt1
+     * @example example.com
      */
-    id: string;
+    name: string;
     /**
      * If it was purchased through Vercel, the timestamp in milliseconds when it was purchased.
      *
@@ -6091,11 +6432,11 @@ export type CreateOrTransferDomainResponse = {
      */
     expiresAt: number | null;
     /**
-     * The domain name.
+     * The unique identifier of the domain.
      *
-     * @example example.com
+     * @example EmTbe5CEJyTk2yVAHBUWy4A3sRusca3GCwRjTC1bpeVnt1
      */
-    name: string;
+    id: string;
     /**
      * Timestamp in milliseconds at which the domain was ordered.
      *
@@ -6113,7 +6454,7 @@ export type CreateOrTransferDomainResponse = {
      *
      * @example zeit.world
      */
-    serviceType: 'zeit.world' | 'external' | 'na';
+    serviceType: 'external' | 'na' | 'zeit.world';
     /**
      * Timestamp in milliseconds at which the domain was successfully transferred into Vercel. `null` if the transfer is still processing or was never transferred in.
      *
@@ -6126,6 +6467,8 @@ export type CreateOrTransferDomainResponse = {
      * @example 1613602938882
      */
     transferStartedAt?: number;
+    userId: string;
+    teamId: string | null;
   };
 };
 
@@ -6286,9 +6629,13 @@ export type PatchDomainPathParams = {
 
 export type PatchDomainQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type PatchDomainError = Fetcher.ErrorWrapper<undefined>;
@@ -6397,14 +6744,23 @@ export type DeleteDomainPathParams = {
 
 export type DeleteDomainQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type DeleteDomainError = Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteDomainResponse = {
+  /**
+   * The id of the newly created DNS record
+   *
+   * @example rec_V0fra8eEgQwEpFhYG2vTzC3K
+   */
   uid: string;
 };
 
@@ -6426,9 +6782,13 @@ export const deleteDomain = (variables: DeleteDomainVariables, signal?: AbortSig
 
 export type GetEdgeConfigsQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetEdgeConfigsError = Fetcher.ErrorWrapper<undefined>;
@@ -6452,6 +6812,10 @@ export type GetEdgeConfigsResponse = {
     doneAt: number | null;
   };
   schema?: Record<string, any>;
+  purpose?: {
+    type: 'flags';
+    projectId: string;
+  };
   sizeInBytes: number;
   itemCount: number;
 };
@@ -6473,9 +6837,13 @@ export const getEdgeConfigs = (variables: GetEdgeConfigsVariables, signal?: Abor
 
 export type CreateEdgeConfigQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type CreateEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
@@ -6499,13 +6867,17 @@ export type CreateEdgeConfigResponse = {
     doneAt: number | null;
   };
   schema?: Record<string, any>;
+  purpose?: {
+    type: 'flags';
+    projectId: string;
+  };
   sizeInBytes: number;
   itemCount: number;
 };
 
 export type CreateEdgeConfigRequestBody = {
   /**
-   * @maxLength 32
+   * @maxLength 64
    * @pattern ^[\\w-]+$
    */
   slug: string;
@@ -6540,9 +6912,13 @@ export type GetEdgeConfigPathParams = {
 
 export type GetEdgeConfigQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
@@ -6566,6 +6942,10 @@ export type GetEdgeConfigResponse = {
     doneAt: number | null;
   };
   schema?: Record<string, any>;
+  purpose?: {
+    type: 'flags';
+    projectId: string;
+  };
   sizeInBytes: number;
   itemCount: number;
 };
@@ -6592,9 +6972,13 @@ export type UpdateEdgeConfigPathParams = {
 
 export type UpdateEdgeConfigQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type UpdateEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
@@ -6618,13 +7002,17 @@ export type UpdateEdgeConfigResponse = {
     doneAt: number | null;
   };
   schema?: Record<string, any>;
+  purpose?: {
+    type: 'flags';
+    projectId: string;
+  };
   sizeInBytes: number;
   itemCount: number;
 };
 
 export type UpdateEdgeConfigRequestBody = {
   /**
-   * @maxLength 32
+   * @maxLength 64
    * @pattern ^[\\w-]+$
    */
   slug: string;
@@ -6655,9 +7043,13 @@ export type DeleteEdgeConfigPathParams = {
 
 export type DeleteEdgeConfigQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type DeleteEdgeConfigError = Fetcher.ErrorWrapper<undefined>;
@@ -6679,14 +7071,21 @@ export const deleteEdgeConfig = (variables: DeleteEdgeConfigVariables, signal?: 
   });
 
 export type GetEdgeConfigItemsPathParams = {
+  /**
+   * @pattern ^ecfg_
+   */
   edgeConfigId: string;
 };
 
 export type GetEdgeConfigItemsQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetEdgeConfigItemsError = Fetcher.ErrorWrapper<undefined>;
@@ -6710,15 +7109,23 @@ export const getEdgeConfigItems = (variables: GetEdgeConfigItemsVariables, signa
   >({ url: '/v1/edge-config/{edgeConfigId}/items', method: 'get', ...variables, signal });
 
 export type PatchEdgeConfigItemsPathParams = {
+  /**
+   * @pattern ^ecfg_
+   */
   edgeConfigId: string;
 };
 
 export type PatchEdgeConfigItemsQueryParams = {
   edgeConfigId: string;
+  dryRun?: string;
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type PatchEdgeConfigItemsError = Fetcher.ErrorWrapper<undefined>;
@@ -6764,16 +7171,134 @@ export const patchEdgeConfigItems = (variables: PatchEdgeConfigItemsVariables, s
     PatchEdgeConfigItemsPathParams
   >({ url: '/v1/edge-config/{edgeConfigId}/items', method: 'patch', ...variables, signal });
 
+export type GetEdgeConfigSchemaPathParams = {
+  edgeConfigId: string;
+};
+
+export type GetEdgeConfigSchemaQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type GetEdgeConfigSchemaError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetEdgeConfigSchemaVariables = {
+  pathParams: GetEdgeConfigSchemaPathParams;
+  queryParams?: GetEdgeConfigSchemaQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Returns the schema of an Edge Config.
+ */
+export const getEdgeConfigSchema = (variables: GetEdgeConfigSchemaVariables, signal?: AbortSignal) =>
+  fetch<
+    Record<string, any> | null,
+    GetEdgeConfigSchemaError,
+    undefined,
+    {},
+    GetEdgeConfigSchemaQueryParams,
+    GetEdgeConfigSchemaPathParams
+  >({ url: '/v1/edge-config/{edgeConfigId}/schema', method: 'get', ...variables, signal });
+
+export type PatchEdgeConfigSchemaPathParams = {
+  edgeConfigId: string;
+};
+
+export type PatchEdgeConfigSchemaQueryParams = {
+  dryRun?: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type PatchEdgeConfigSchemaError = Fetcher.ErrorWrapper<undefined>;
+
+export type PatchEdgeConfigSchemaRequestBody = {
+  definition: void;
+};
+
+export type PatchEdgeConfigSchemaVariables = {
+  body: PatchEdgeConfigSchemaRequestBody;
+  pathParams: PatchEdgeConfigSchemaPathParams;
+  queryParams?: PatchEdgeConfigSchemaQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Update an Edge Config's schema.
+ */
+export const patchEdgeConfigSchema = (variables: PatchEdgeConfigSchemaVariables, signal?: AbortSignal) =>
+  fetch<
+    Record<string, any> | null,
+    PatchEdgeConfigSchemaError,
+    PatchEdgeConfigSchemaRequestBody,
+    {},
+    PatchEdgeConfigSchemaQueryParams,
+    PatchEdgeConfigSchemaPathParams
+  >({ url: '/v1/edge-config/{edgeConfigId}/schema', method: 'post', ...variables, signal });
+
+export type DeleteEdgeConfigSchemaPathParams = {
+  edgeConfigId: string;
+};
+
+export type DeleteEdgeConfigSchemaQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type DeleteEdgeConfigSchemaError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteEdgeConfigSchemaVariables = {
+  pathParams: DeleteEdgeConfigSchemaPathParams;
+  queryParams?: DeleteEdgeConfigSchemaQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Deletes the schema of existing Edge Config.
+ */
+export const deleteEdgeConfigSchema = (variables: DeleteEdgeConfigSchemaVariables, signal?: AbortSignal) =>
+  fetch<
+    undefined,
+    DeleteEdgeConfigSchemaError,
+    undefined,
+    {},
+    DeleteEdgeConfigSchemaQueryParams,
+    DeleteEdgeConfigSchemaPathParams
+  >({ url: '/v1/edge-config/{edgeConfigId}/schema', method: 'delete', ...variables, signal });
+
 export type GetEdgeConfigItemPathParams = {
+  /**
+   * @pattern ^ecfg_
+   */
   edgeConfigId: string;
   edgeConfigItemKey: string;
 };
 
 export type GetEdgeConfigItemQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetEdgeConfigItemError = Fetcher.ErrorWrapper<undefined>;
@@ -6802,9 +7327,13 @@ export type GetEdgeConfigTokensPathParams = {
 
 export type GetEdgeConfigTokensQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetEdgeConfigTokensError = Fetcher.ErrorWrapper<undefined>;
@@ -6833,9 +7362,13 @@ export type DeleteEdgeConfigTokensPathParams = {
 
 export type DeleteEdgeConfigTokensQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type DeleteEdgeConfigTokensError = Fetcher.ErrorWrapper<undefined>;
@@ -6870,9 +7403,13 @@ export type GetEdgeConfigTokenPathParams = {
 
 export type GetEdgeConfigTokenQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetEdgeConfigTokenError = Fetcher.ErrorWrapper<undefined>;
@@ -6901,9 +7438,13 @@ export type CreateEdgeConfigTokenPathParams = {
 
 export type CreateEdgeConfigTokenQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type CreateEdgeConfigTokenError = Fetcher.ErrorWrapper<undefined>;
@@ -6939,6 +7480,166 @@ export const createEdgeConfigToken = (variables: CreateEdgeConfigTokenVariables,
     CreateEdgeConfigTokenPathParams
   >({ url: '/v1/edge-config/{edgeConfigId}/token', method: 'post', ...variables, signal });
 
+export type GetEdgeConfigBackupPathParams = {
+  edgeConfigId: string;
+  edgeConfigBackupVersionId: string;
+};
+
+export type GetEdgeConfigBackupQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type GetEdgeConfigBackupError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetEdgeConfigBackupVariables = {
+  pathParams: GetEdgeConfigBackupPathParams;
+  queryParams?: GetEdgeConfigBackupQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves a specific version of an Edge Config from backup storage.
+ */
+export const getEdgeConfigBackup = (variables: GetEdgeConfigBackupVariables, signal?: AbortSignal) =>
+  fetch<
+    | {
+        id: string;
+        lastModified: number;
+        backup: {
+          digest: string;
+          items: {
+            [key: string]: {
+              updatedAt: number;
+              value: Schemas.EdgeConfigItemValue;
+              description?: string;
+              createdAt: number;
+            };
+          };
+          /**
+           * Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
+           */
+          slug: string;
+          updatedAt: number;
+        };
+        metadata: {
+          updatedAt?: string;
+          updatedBy?: string;
+          itemsCount?: number;
+          itemsBytes?: number;
+        };
+        user?: {
+          id: string;
+          username: string;
+          email: string;
+          name?: string;
+          avatar?: string;
+        };
+      }
+    | {
+        user: {
+          id: string;
+          username: string;
+          email: string;
+          name?: string;
+          avatar?: string;
+        };
+        id: string;
+        lastModified: number;
+        backup: {
+          digest: string;
+          items: {
+            [key: string]: {
+              updatedAt: number;
+              value: Schemas.EdgeConfigItemValue;
+              description?: string;
+              createdAt: number;
+            };
+          };
+          /**
+           * Name for the Edge Config Names are not unique. Must start with an alphabetic character and can contain only alphanumeric characters and underscores).
+           */
+          slug: string;
+          updatedAt: number;
+        };
+        metadata: {
+          updatedAt?: string;
+          updatedBy?: string;
+          itemsCount?: number;
+          itemsBytes?: number;
+        };
+      },
+    GetEdgeConfigBackupError,
+    undefined,
+    {},
+    GetEdgeConfigBackupQueryParams,
+    GetEdgeConfigBackupPathParams
+  >({ url: '/v1/edge-config/{edgeConfigId}/backups/{edgeConfigBackupVersionId}', method: 'get', ...variables, signal });
+
+export type GetEdgeConfigBackupsPathParams = {
+  edgeConfigId: string;
+};
+
+export type GetEdgeConfigBackupsQueryParams = {
+  next?: string;
+  /**
+   * @minimum 0
+   * @maximum 50
+   */
+  limit?: number;
+  metadata?: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type GetEdgeConfigBackupsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetEdgeConfigBackupsResponse = {
+  backups: {
+    metadata?: {
+      updatedAt?: string;
+      updatedBy?: string;
+      itemsCount?: number;
+      itemsBytes?: number;
+    };
+    id: string;
+    lastModified: number;
+  }[];
+  pagination: {
+    hasNext: boolean;
+    next?: string;
+  };
+};
+
+export type GetEdgeConfigBackupsVariables = {
+  pathParams: GetEdgeConfigBackupsPathParams;
+  queryParams?: GetEdgeConfigBackupsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Returns backups of an Edge Config.
+ */
+export const getEdgeConfigBackups = (variables: GetEdgeConfigBackupsVariables, signal?: AbortSignal) =>
+  fetch<
+    GetEdgeConfigBackupsResponse,
+    GetEdgeConfigBackupsError,
+    undefined,
+    {},
+    GetEdgeConfigBackupsQueryParams,
+    GetEdgeConfigBackupsPathParams
+  >({ url: '/v1/edge-config/{edgeConfigId}/backups', method: 'get', ...variables, signal });
+
 export type ListUserEventsQueryParams = {
   /**
    * Maximum number of items which may be returned.
@@ -6971,9 +7672,19 @@ export type ListUserEventsQueryParams = {
    */
   userId?: string;
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * When set to `true`, the response will include the `payload` field for each event.
+   *
+   * @example true
+   */
+  withPayload?: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type ListUserEventsError = Fetcher.ErrorWrapper<undefined>;
@@ -7000,12 +7711,602 @@ export const listUserEvents = (variables: ListUserEventsVariables, signal?: Abor
     signal
   });
 
+export type GetAccountInfoPathParams = {
+  integrationConfigurationId: string;
+};
+
+export type GetAccountInfoError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetAccountInfoResponse = {
+  name?: string;
+  url: string;
+  contact: {
+    email: string;
+    name?: string;
+  } | null;
+};
+
+export type GetAccountInfoVariables = {
+  pathParams: GetAccountInfoPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Fetches the best account or user’s contact info
+ */
+export const getAccountInfo = (variables: GetAccountInfoVariables, signal?: AbortSignal) =>
+  fetch<GetAccountInfoResponse, GetAccountInfoError, undefined, {}, {}, GetAccountInfoPathParams>({
+    url: '/v1/installations/{integrationConfigurationId}/account',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type GetMemberPathParams = {
+  integrationConfigurationId: string;
+  memberId: string;
+};
+
+export type GetMemberError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetMemberResponse = {
+  id: string;
+  role: 'ADMIN' | 'USER';
+};
+
+export type GetMemberVariables = {
+  pathParams: GetMemberPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Returns the member role and other information for a given member ID ("user_id" claim in the SSO OIDC token).
+ */
+export const getMember = (variables: GetMemberVariables, signal?: AbortSignal) =>
+  fetch<GetMemberResponse, GetMemberError, undefined, {}, {}, GetMemberPathParams>({
+    url: '/v1/installations/{integrationConfigurationId}/member/{memberId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type CreateEventPathParams = {
+  integrationConfigurationId: string;
+};
+
+export type CreateEventError = Fetcher.ErrorWrapper<undefined>;
+
+export type CreateEventRequestBody = {
+  event:
+    | {
+        type: 'installation.updated';
+        /**
+         * The installation-level billing plan ID
+         */
+        billingPlanId?: string;
+      }
+    | {
+        type: 'resource.updated';
+        /**
+         * Partner-provided product slug or id
+         */
+        productId: string;
+        /**
+         * Partner provided resource ID
+         */
+        resourceId: string;
+      };
+};
+
+export type CreateEventVariables = {
+  body: CreateEventRequestBody;
+  pathParams: CreateEventPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Partner notifies Vercel of any changes made to an Installation or a Resource. Vercel is expected to use `list-resources` and other read APIs to get the new state. <br/> <br/> `resource.updated` event should be dispatched when any state of a resource linked to Vercel is modified by the partner. <br/> <br/> Use cases: <br/> <br/> - The user renames a database in the partner’s application. The partner should dispatch a `resource.updated` event to notify Vercel to update the resource in Vercel’s datastores. <br/>
+ */
+export const createEvent = (variables: CreateEventVariables, signal?: AbortSignal) =>
+  fetch<undefined, CreateEventError, CreateEventRequestBody, {}, {}, CreateEventPathParams>({
+    url: '/v1/installations/{integrationConfigurationId}/events',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type SubmitBillingDataPathParams = {
+  integrationConfigurationId: string;
+};
+
+export type SubmitBillingDataError = Fetcher.ErrorWrapper<undefined>;
+
+export type SubmitBillingDataRequestBody = {
+  /**
+   * @format date-time
+   */
+  timestamp: string;
+  /**
+   * @format date-time
+   */
+  eod: string;
+  /**
+   * Period for the billing cycle.
+   */
+  period: {
+    /**
+     * @format date-time
+     */
+    start: string;
+    /**
+     * @format date-time
+     */
+    end: string;
+  };
+  /**
+   * Billing data (interim invoicing data).
+   */
+  billing:
+    | {
+        /**
+         * Partner's billing plan ID.
+         */
+        billingPlanId: string;
+        /**
+         * Partner's resource ID.
+         */
+        resourceId?: string;
+        /**
+         * Start and end are only needed if different from the period's start/end.
+         *
+         * @format date-time
+         */
+        start?: string;
+        /**
+         * Start and end are only needed if different from the period's start/end.
+         *
+         * @format date-time
+         */
+        end?: string;
+        /**
+         * Line item name.
+         */
+        name: string;
+        /**
+         * Line item details.
+         */
+        details?: string;
+        /**
+         * Price per unit.
+         *
+         * @pattern ^[0-9]+(\\.[0-9]+)?$
+         */
+        price: string;
+        /**
+         * Quantity of units.
+         */
+        quantity: number;
+        /**
+         * Units of the quantity.
+         */
+        units: string;
+        /**
+         * Total amount.
+         *
+         * @pattern ^[0-9]+(\\.[0-9]+)?$
+         */
+        total: string;
+      }[]
+    | {
+        items: {
+          /**
+           * Partner's billing plan ID.
+           */
+          billingPlanId: string;
+          /**
+           * Partner's resource ID.
+           */
+          resourceId?: string;
+          /**
+           * Start and end are only needed if different from the period's start/end.
+           *
+           * @format date-time
+           */
+          start?: string;
+          /**
+           * Start and end are only needed if different from the period's start/end.
+           *
+           * @format date-time
+           */
+          end?: string;
+          /**
+           * Line item name.
+           */
+          name: string;
+          /**
+           * Line item details.
+           */
+          details?: string;
+          /**
+           * Price per unit.
+           *
+           * @pattern ^[0-9]+(\\.[0-9]+)?$
+           */
+          price: string;
+          /**
+           * Quantity of units.
+           */
+          quantity: number;
+          /**
+           * Units of the quantity.
+           */
+          units: string;
+          /**
+           * Total amount.
+           *
+           * @pattern ^[0-9]+(\\.[0-9]+)?$
+           */
+          total: string;
+        }[];
+        discounts?: {
+          /**
+           * Partner's billing plan ID.
+           */
+          billingPlanId: string;
+          /**
+           * Partner's resource ID.
+           */
+          resourceId?: string;
+          /**
+           * Start and end are only needed if different from the period's start/end.
+           *
+           * @format date-time
+           */
+          start?: string;
+          /**
+           * Start and end are only needed if different from the period's start/end.
+           *
+           * @format date-time
+           */
+          end?: string;
+          /**
+           * Discount name.
+           */
+          name: string;
+          /**
+           * Discount details.
+           */
+          details?: string;
+          /**
+           * Discount amount.
+           *
+           * @pattern ^[0-9]+(\\.[0-9]+)?$
+           */
+          amount: string;
+        }[];
+      };
+  usage: {
+    /**
+     * Partner's resource ID.
+     */
+    resourceId: string;
+    /**
+     * Metric name.
+     */
+    name: string;
+    /**
+     * \n              Type of the metric.\n              - total: measured total value, such as Database size\n              - interval: usage during the period, such as i/o or number of queries.\n              - rate: rate of usage, such as queries per second.\n
+     */
+    type: 'interval' | 'rate' | 'total';
+    /**
+     * Metric units. Example: \"GB\"
+     */
+    units: string;
+    /**
+     * Metric value for the day. Could be a final or an interim value for the day.
+     */
+    dayValue: number;
+    /**
+     * Metric value for the billing period. Could be a final or an interim value for the period.
+     */
+    periodValue: number;
+    /**
+     * The limit value of the metric for a billing period, if a limit is defined by the plan.
+     */
+    planValue?: number;
+  }[];
+};
+
+export type SubmitBillingDataVariables = {
+  body: SubmitBillingDataRequestBody;
+  pathParams: SubmitBillingDataPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Sends the billing and usage data. The partner should do this at least once a day and ideally once per hour. <br/> Use the `credentials.access_token` we provided in the [Upsert Installation](#upsert-installation) body to authorize this request.
+ */
+export const submitBillingData = (variables: SubmitBillingDataVariables, signal?: AbortSignal) =>
+  fetch<undefined, SubmitBillingDataError, SubmitBillingDataRequestBody, {}, {}, SubmitBillingDataPathParams>({
+    url: '/v1/installations/{integrationConfigurationId}/billing',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type SubmitInvoicePathParams = {
+  integrationConfigurationId: string;
+};
+
+export type SubmitInvoiceError = Fetcher.ErrorWrapper<undefined>;
+
+export type SubmitInvoiceResponse = {
+  invoiceId?: string;
+  test?: boolean;
+  validationErrors?: string[];
+};
+
+export type SubmitInvoiceRequestBody = {
+  externalId?: string;
+  /**
+   * Invoice date. Must be within the period's start and end.
+   *
+   * @format date-time
+   */
+  invoiceDate: string;
+  /**
+   * Additional memo for the invoice.
+   */
+  memo?: string;
+  /**
+   * Subscription period for this billing cycle.
+   */
+  period: {
+    /**
+     * @format date-time
+     */
+    start: string;
+    /**
+     * @format date-time
+     */
+    end: string;
+  };
+  items: {
+    /**
+     * Partner's resource ID.
+     */
+    resourceId?: string;
+    /**
+     * Partner's billing plan ID.
+     */
+    billingPlanId: string;
+    /**
+     * Start and end are only needed if different from the period's start/end.
+     *
+     * @format date-time
+     */
+    start?: string;
+    /**
+     * Start and end are only needed if different from the period's start/end.
+     *
+     * @format date-time
+     */
+    end?: string;
+    name: string;
+    details?: string;
+    /**
+     * @pattern ^[0-9]+(\\.[0-9]+)?$
+     */
+    price: string;
+    quantity: number;
+    units: string;
+    /**
+     * @pattern ^[0-9]+(\\.[0-9]+)?$
+     */
+    total: string;
+  }[];
+  discounts?: {
+    /**
+     * Partner's resource ID.
+     */
+    resourceId?: string;
+    /**
+     * Partner's billing plan ID.
+     */
+    billingPlanId: string;
+    /**
+     * Start and end are only needed if different from the period's start/end.
+     *
+     * @format date-time
+     */
+    start?: string;
+    /**
+     * Start and end are only needed if different from the period's start/end.
+     *
+     * @format date-time
+     */
+    end?: string;
+    name: string;
+    details?: string;
+    /**
+     * @pattern ^[0-9]+(\\.[0-9]+)?$
+     */
+    amount: string;
+  }[];
+  /**
+   * Test mode
+   */
+  test?: {
+    validate?: boolean;
+    result?: 'notpaid' | 'paid';
+  };
+};
+
+export type SubmitInvoiceVariables = {
+  body: SubmitInvoiceRequestBody;
+  pathParams: SubmitInvoicePathParams;
+} & FetcherExtraProps;
+
+/**
+ * This endpoint allows the partner to submit an invoice to Vercel. The invoice is created in Vercel's billing system and sent to the customer. Depending on the type of billing plan, the invoice can be sent at a time of signup, at the start of the billing period, or at the end of the billing period.<br/> <br/> Use the `credentials.access_token` we provided in the [Upsert Installation](#upsert-installation) body to authorize this request. <br/> There are several limitations to the invoice submission:<br/> <br/> 1. A resource can only be billed once per the billing period and the billing plan.<br/> 2. The billing plan used to bill the resource must have been active for this resource during the billing period.<br/> 3. The billing plan used must be a subscription plan.<br/> 4. The interim usage data must be sent hourly for all types of subscriptions. See [Send subscription billing and usage data](#send-subscription-billing-and-usage-data) API on how to send interim billing and usage data.<br/>
+ */
+export const submitInvoice = (variables: SubmitInvoiceVariables, signal?: AbortSignal) =>
+  fetch<SubmitInvoiceResponse, SubmitInvoiceError, SubmitInvoiceRequestBody, {}, {}, SubmitInvoicePathParams>({
+    url: '/v1/installations/{integrationConfigurationId}/billing/invoices',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type GetInvoicePathParams = {
+  integrationConfigurationId: string;
+  invoiceId: string;
+};
+
+export type GetInvoiceError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetInvoiceResponse = {
+  invoiceId: string;
+  externalId?: string;
+  invoiceNumber?: string;
+  invoiceDate: string;
+  period: {
+    start: string;
+    end: string;
+  };
+  memo?: string;
+  items: {
+    billingPlanId: string;
+    resourceId?: string;
+    start?: string;
+    end?: string;
+    name: string;
+    details?: string;
+    price: string;
+    quantity: number;
+    units: string;
+    total: string;
+  }[];
+  discounts?: {
+    billingPlanId: string;
+    resourceId?: string;
+    start?: string;
+    end?: string;
+    name: string;
+    details?: string;
+    amount: string;
+  }[];
+  total: string;
+  created: string;
+  updated: string;
+  state: 'invoiced' | 'notpaid' | 'paid' | 'pending' | 'refund_requested' | 'refunded' | 'scheduled';
+  refundReason?: string;
+  refundTotal?: string;
+  test: boolean;
+};
+
+export type GetInvoiceVariables = {
+  pathParams: GetInvoicePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Get Invoice details and status for a given invoice ID.<br/> <br/> See Billing Events with Webhooks documentation on how to receive invoice events. This endpoint is used to retrieve the invoice details.
+ */
+export const getInvoice = (variables: GetInvoiceVariables, signal?: AbortSignal) =>
+  fetch<GetInvoiceResponse, GetInvoiceError, undefined, {}, {}, GetInvoicePathParams>({
+    url: '/v1/installations/{integrationConfigurationId}/billing/invoices/{invoiceId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type UpdateInvoicePathParams = {
+  integrationConfigurationId: string;
+  invoiceId: string;
+};
+
+export type UpdateInvoiceError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateInvoiceRequestBody = {
+  action: 'refund';
+  /**
+   * Refund reason.
+   */
+  reason: string;
+  /**
+   * The total amount to be refunded. Must be less than or equal to the total amount of the invoice.
+   *
+   * @pattern ^[0-9]+(\\.[0-9]+)?$
+   */
+  total: string;
+};
+
+export type UpdateInvoiceVariables = {
+  body: UpdateInvoiceRequestBody;
+  pathParams: UpdateInvoicePathParams;
+} & FetcherExtraProps;
+
+/**
+ * This endpoint allows the partner to request a refund for an invoice to Vercel. The invoice is created using the [Submit Invoice API](#submit-invoice-api).
+ */
+export const updateInvoice = (variables: UpdateInvoiceVariables, signal?: AbortSignal) =>
+  fetch<undefined, UpdateInvoiceError, UpdateInvoiceRequestBody, {}, {}, UpdateInvoicePathParams>({
+    url: '/v1/installations/{integrationConfigurationId}/billing/invoices/{invoiceId}/actions',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type UpdateResourceSecretsPathParams = {
+  integrationConfigurationId: string;
+  integrationProductIdOrSlug: string;
+  resourceId: string;
+};
+
+export type UpdateResourceSecretsError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateResourceSecretsRequestBody = {
+  secrets: {
+    name: string;
+    value: string;
+    prefix?: string;
+  }[];
+};
+
+export type UpdateResourceSecretsVariables = {
+  body: UpdateResourceSecretsRequestBody;
+  pathParams: UpdateResourceSecretsPathParams;
+} & FetcherExtraProps;
+
+/**
+ * This endpoint updates the secrets of a resource. If a resource has projects connected, the connected secrets are updated with the new secrets. The old secrets may still be used by existing connected projects because they are not automatically redeployed. Redeployment is a manual action and must be completed by the user. All new project connections will use the new secrets.<br/> <br/> Use cases for this endpoint:<br/> <br/> - Resetting the credentials of a database in the partner. If the user requests the credentials to be updated in the partner’s application, the partner post the new set of secrets to Vercel, the user should redeploy their application and the expire the old credentials.<br/>
+ */
+export const updateResourceSecrets = (variables: UpdateResourceSecretsVariables, signal?: AbortSignal) =>
+  fetch<
+    undefined,
+    UpdateResourceSecretsError,
+    UpdateResourceSecretsRequestBody,
+    {},
+    {},
+    UpdateResourceSecretsPathParams
+  >({
+    url: '/v1/installations/{integrationConfigurationId}/products/{integrationProductIdOrSlug}/resources/{resourceId}/secrets',
+    method: 'put',
+    ...variables,
+    signal
+  });
+
 export type GetConfigurationsQueryParams = {
   view: 'account' | 'project';
+  installationType?: 'marketplace' | 'external';
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * ID of the integration
+   */
+  integrationIdOrSlug?: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetConfigurationsError = Fetcher.ErrorWrapper<undefined>;
@@ -7031,25 +8332,25 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          *
          * @example 1558531915505
          */
-        createdAt: number;
+        createdAt?: number;
         /**
          * The unique identifier of the configuration
          *
          * @example icfg_3bwCLgxL8qt5kjRLcv2Dit7F
          */
-        id: string;
+        id?: string;
         /**
          * The unique identifier of the app the configuration was created for
          *
          * @example oac_xzpVzcUOgcB1nrVlirtKhbWV
          */
-        integrationId: string;
+        integrationId?: string;
         /**
          * The user or team ID that owns the configuration
          *
          * @example kr1PsOIzqEL5Xg6M4VZcZosf
          */
-        ownerId: string;
+        ownerId?: string;
         /**
          * When a configuration is limited to access certain projects, this will contain each of the project ID it is allowed to access. If it is not defined, the configuration has full access.
          *
@@ -7062,87 +8363,38 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          * @example marketplace
          */
         source?: 'marketplace' | 'deploy-button' | 'external';
-        removedLogDrainsAt?: number;
-        removedProjectEnvsAt?: number;
-        removedTokensAt?: number;
-        removedWebhooksAt?: number;
         /**
          * The slug of the integration the configuration is created for.
          *
          * @example slack
          */
-        slug: string;
+        slug?: string;
         /**
          * When the configuration was created for a team, this will show the ID of the team.
          *
          * @example team_nLlpyC6RE1qxydlFKbrxDlud
          */
         teamId?: string | null;
-        type: 'integration-configuration';
+        type?: 'integration-configuration';
         /**
          * A timestamp that tells you when the configuration was updated.
          *
          * @example 1558531915505
          */
-        updatedAt: number;
+        updatedAt?: number;
         /**
          * The ID of the user that created the configuration.
          *
          * @example kr1PsOIzqEL5Xg6M4VZcZosf
          */
-        userId: string;
+        userId?: string;
         /**
          * The resources that are allowed to be accessed by the configuration.
          *
          * @example read:project
          * @example read-write:log-drain
          */
-        scopes: string[];
-        scopesQueue?: {
-          scopes: {
-            added: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-            )[];
-            upgraded: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-            )[];
-          };
-          note: string;
-          requestedAt: number;
-          confirmedAt?: number;
-        }[];
+        scopes?: string[];
         /**
          * A timestamp that tells you when the configuration was disabled. Note: Configurations can be disabled when the associated user loses access to a team. They do not function during this time until the configuration is 'transferred', meaning the associated user is changed to one with access to the team.
          *
@@ -7150,18 +8402,55 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          */
         disabledAt?: number;
         /**
-         * A timestamp that tells you when the configuration was updated.
+         * A timestamp that tells you when the configuration was deleted.
          *
          * @example 1558531915505
          */
         deletedAt?: number | null;
+        /**
+         * A timestamp that tells you when the configuration deletion has been started for cases when the deletion needs to be settled/approved by partners, such as when marketplace invoices have been paid.
+         *
+         * @example 1558531915505
+         */
+        deleteRequestedAt?: number | null;
         disabledReason?:
-          | 'log-drain-high-error-rate'
-          | 'log-drains-add-on-disabled-by-owner'
-          | 'account-plan-downgrade'
+          | 'disabled-by-owner'
+          | 'feature-not-available'
           | 'disabled-by-admin'
-          | 'original-owner-left-the-team';
-      }
+          | 'original-owner-left-the-team'
+          | 'account-plan-downgrade'
+          | 'original-owner-role-downgraded';
+        /**
+         * Defines the installation type. - 'external' integrations are installed via the existing integrations flow - 'marketplace' integrations are natively installed: - when accepting the TOS of a partner during the store creation process - if undefined, assume 'external'
+         */
+        installationType?: 'marketplace' | 'external';
+        billingPlan?: {
+          id: string;
+          type: 'prepayment' | 'subscription';
+          name: string;
+          scope?: 'installation' | 'resource';
+          description: string;
+          paymentMethodRequired?: boolean;
+          preauthorizationAmount?: number;
+          cost?: string;
+          details?: {
+            label: string;
+            value?: string;
+          }[];
+          heightlightedDetails?: {
+            label: string;
+            value?: string;
+          }[];
+          quote?: {
+            line: string;
+            amount: string;
+          }[];
+          effectiveDate?: string;
+        };
+        billingTotal?: string;
+        periodStart?: string;
+        periodEnd?: string;
+      }[]
     | {
         integration: {
           name: string;
@@ -7213,10 +8502,6 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          * @example marketplace
          */
         source?: 'marketplace' | 'deploy-button' | 'external';
-        removedLogDrainsAt?: number;
-        removedProjectEnvsAt?: number;
-        removedTokensAt?: number;
-        removedWebhooksAt?: number;
         /**
          * The slug of the integration the configuration is created for.
          *
@@ -7249,51 +8534,6 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          * @example read-write:log-drain
          */
         scopes: string[];
-        scopesQueue?: {
-          scopes: {
-            added: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-            )[];
-            upgraded: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-            )[];
-          };
-          note: string;
-          requestedAt: number;
-          confirmedAt?: number;
-        }[];
         /**
          * A timestamp that tells you when the configuration was disabled. Note: Configurations can be disabled when the associated user loses access to a team. They do not function during this time until the configuration is 'transferred', meaning the associated user is changed to one with access to the team.
          *
@@ -7301,17 +8541,54 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          */
         disabledAt?: number;
         /**
-         * A timestamp that tells you when the configuration was updated.
+         * A timestamp that tells you when the configuration was deleted.
          *
          * @example 1558531915505
          */
         deletedAt?: number | null;
+        /**
+         * A timestamp that tells you when the configuration deletion has been started for cases when the deletion needs to be settled/approved by partners, such as when marketplace invoices have been paid.
+         *
+         * @example 1558531915505
+         */
+        deleteRequestedAt?: number | null;
         disabledReason?:
-          | 'log-drain-high-error-rate'
-          | 'log-drains-add-on-disabled-by-owner'
-          | 'account-plan-downgrade'
+          | 'disabled-by-owner'
+          | 'feature-not-available'
           | 'disabled-by-admin'
-          | 'original-owner-left-the-team';
+          | 'original-owner-left-the-team'
+          | 'account-plan-downgrade'
+          | 'original-owner-role-downgraded';
+        /**
+         * Defines the installation type. - 'external' integrations are installed via the existing integrations flow - 'marketplace' integrations are natively installed: - when accepting the TOS of a partner during the store creation process - if undefined, assume 'external'
+         */
+        installationType?: 'marketplace' | 'external';
+        billingPlan?: {
+          id: string;
+          type: 'prepayment' | 'subscription';
+          name: string;
+          scope?: 'installation' | 'resource';
+          description: string;
+          paymentMethodRequired?: boolean;
+          preauthorizationAmount?: number;
+          cost?: string;
+          details?: {
+            label: string;
+            value?: string;
+          }[];
+          heightlightedDetails?: {
+            label: string;
+            value?: string;
+          }[];
+          quote?: {
+            line: string;
+            amount: string;
+          }[];
+          effectiveDate?: string;
+        };
+        billingTotal?: string;
+        periodStart?: string;
+        periodEnd?: string;
       }[],
     GetConfigurationsError,
     undefined,
@@ -7331,9 +8608,13 @@ export type GetConfigurationPathParams = {
 
 export type GetConfigurationQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetConfigurationError = Fetcher.ErrorWrapper<undefined>;
@@ -7349,6 +8630,32 @@ export type GetConfigurationVariables = {
 export const getConfiguration = (variables: GetConfigurationVariables, signal?: AbortSignal) =>
   fetch<
     | {
+        billingPlan?: {
+          id: string;
+          type: 'prepayment' | 'subscription';
+          name: string;
+          scope?: 'installation' | 'resource';
+          description: string;
+          paymentMethodRequired?: boolean;
+          preauthorizationAmount?: number;
+          cost?: string;
+          details?: {
+            label: string;
+            value?: string;
+          }[];
+          heightlightedDetails?: {
+            label: string;
+            value?: string;
+          }[];
+          quote?: {
+            line: string;
+            amount: string;
+          }[];
+          effectiveDate?: string;
+        };
+        billingTotal?: string;
+        periodStart?: string;
+        periodEnd?: string;
         /**
          * A timestamp that tells you when the configuration was installed successfully
          *
@@ -7391,10 +8698,6 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          * @example marketplace
          */
         source?: 'marketplace' | 'deploy-button' | 'external';
-        removedLogDrainsAt?: number;
-        removedProjectEnvsAt?: number;
-        removedTokensAt?: number;
-        removedWebhooksAt?: number;
         /**
          * The slug of the integration the configuration is created for.
          *
@@ -7427,51 +8730,6 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          * @example read-write:log-drain
          */
         scopes: string[];
-        scopesQueue?: {
-          scopes: {
-            added: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-            )[];
-            upgraded: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-            )[];
-          };
-          note: string;
-          requestedAt: number;
-          confirmedAt?: number;
-        }[];
         /**
          * A timestamp that tells you when the configuration was disabled. Note: Configurations can be disabled when the associated user loses access to a team. They do not function during this time until the configuration is 'transferred', meaning the associated user is changed to one with access to the team.
          *
@@ -7479,17 +8737,28 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          */
         disabledAt?: number;
         /**
-         * A timestamp that tells you when the configuration was updated.
+         * A timestamp that tells you when the configuration was deleted.
          *
          * @example 1558531915505
          */
         deletedAt?: number | null;
+        /**
+         * A timestamp that tells you when the configuration deletion has been started for cases when the deletion needs to be settled/approved by partners, such as when marketplace invoices have been paid.
+         *
+         * @example 1558531915505
+         */
+        deleteRequestedAt?: number | null;
         disabledReason?:
-          | 'log-drain-high-error-rate'
-          | 'log-drains-add-on-disabled-by-owner'
-          | 'account-plan-downgrade'
+          | 'disabled-by-owner'
+          | 'feature-not-available'
           | 'disabled-by-admin'
-          | 'original-owner-left-the-team';
+          | 'original-owner-left-the-team'
+          | 'account-plan-downgrade'
+          | 'original-owner-role-downgraded';
+        /**
+         * Defines the installation type. - 'external' integrations are installed via the existing integrations flow - 'marketplace' integrations are natively installed: - when accepting the TOS of a partner during the store creation process - if undefined, assume 'external'
+         */
+        installationType?: 'marketplace' | 'external';
       }
     | {
         /**
@@ -7540,10 +8809,6 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          * @example marketplace
          */
         source?: 'marketplace' | 'deploy-button' | 'external';
-        removedLogDrainsAt?: number;
-        removedProjectEnvsAt?: number;
-        removedTokensAt?: number;
-        removedWebhooksAt?: number;
         /**
          * The slug of the integration the configuration is created for.
          *
@@ -7576,51 +8841,6 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          * @example read-write:log-drain
          */
         scopes: string[];
-        scopesQueue?: {
-          scopes: {
-            added: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-            )[];
-            upgraded: (
-              | 'read:integration-configuration'
-              | 'read-write:integration-configuration'
-              | 'read:deployment'
-              | 'read-write:deployment'
-              | 'read-write:deployment-check'
-              | 'read:project'
-              | 'read-write:project'
-              | 'read-write:project-env-vars'
-              | 'read-write:global-project-env-vars'
-              | 'read:team'
-              | 'read:user'
-              | 'read-write:log-drain'
-              | 'read:domain'
-              | 'read-write:domain'
-              | 'read-write:edge-config'
-              | 'read-write:otel-endpoint'
-              | 'read:monitoring'
-            )[];
-          };
-          note: string;
-          requestedAt: number;
-          confirmedAt?: number;
-        }[];
         /**
          * A timestamp that tells you when the configuration was disabled. Note: Configurations can be disabled when the associated user loses access to a team. They do not function during this time until the configuration is 'transferred', meaning the associated user is changed to one with access to the team.
          *
@@ -7628,17 +8848,28 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          */
         disabledAt?: number;
         /**
-         * A timestamp that tells you when the configuration was updated.
+         * A timestamp that tells you when the configuration was deleted.
          *
          * @example 1558531915505
          */
         deletedAt?: number | null;
+        /**
+         * A timestamp that tells you when the configuration deletion has been started for cases when the deletion needs to be settled/approved by partners, such as when marketplace invoices have been paid.
+         *
+         * @example 1558531915505
+         */
+        deleteRequestedAt?: number | null;
         disabledReason?:
-          | 'log-drain-high-error-rate'
-          | 'log-drains-add-on-disabled-by-owner'
-          | 'account-plan-downgrade'
+          | 'disabled-by-owner'
+          | 'feature-not-available'
           | 'disabled-by-admin'
-          | 'original-owner-left-the-team';
+          | 'original-owner-left-the-team'
+          | 'account-plan-downgrade'
+          | 'original-owner-role-downgraded';
+        /**
+         * Defines the installation type. - 'external' integrations are installed via the existing integrations flow - 'marketplace' integrations are natively installed: - when accepting the TOS of a partner during the store creation process - if undefined, assume 'external'
+         */
+        installationType?: 'marketplace' | 'external';
         canConfigureOpenTelemetry?: boolean;
       },
     GetConfigurationError,
@@ -7654,9 +8885,13 @@ export type DeleteConfigurationPathParams = {
 
 export type DeleteConfigurationQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type DeleteConfigurationError = Fetcher.ErrorWrapper<undefined>;
@@ -7679,11 +8914,61 @@ export const deleteConfiguration = (variables: DeleteConfigurationVariables, sig
     DeleteConfigurationPathParams
   >({ url: '/v1/integrations/configuration/{id}', method: 'delete', ...variables, signal });
 
+export type ExchangeSsoTokenError = Fetcher.ErrorWrapper<undefined>;
+
+export type ExchangeSsoTokenResponse = {
+  id_token: string;
+  access_token: void | null;
+  token_type: void | null;
+};
+
+export type ExchangeSsoTokenRequestBody = {
+  /**
+   * The sensitive code received from Vercel
+   */
+  code: string;
+  /**
+   * The state received from the initialization request
+   */
+  state?: string;
+  /**
+   * The integration client id
+   */
+  client_id: string;
+  /**
+   * The integration client secret
+   */
+  client_secret: string;
+  /**
+   * The integration redirect URI
+   */
+  redirect_uri?: string;
+};
+
+export type ExchangeSsoTokenVariables = {
+  body: ExchangeSsoTokenRequestBody;
+} & FetcherExtraProps;
+
+/**
+ * During the autorization process, Vercel sends the user to the provider [redirectLoginUrl](https://vercel.com/docs/integrations/create-integration/submit-integration#redirect-login-url), that includes the OAuth authorization `code` parameter. The provider then calls the SSO Token Exchange endpoint with the sent code and receives the OIDC token. They log the user in based on this token and redirects the user back to the Vercel account using deep-link parameters included the redirectLoginUrl. This is used to verify the identity of the user during the [**Open in Provider** flow](https://vercel.com/docs/integrations/marketplace-flows#open-in-provider-button-flow). Providers should not persist the returned `id_token` in a database since the token will expire.
+ */
+export const exchangeSsoToken = (variables: ExchangeSsoTokenVariables, signal?: AbortSignal) =>
+  fetch<ExchangeSsoTokenResponse, ExchangeSsoTokenError, ExchangeSsoTokenRequestBody, {}, {}, {}>({
+    url: '/v1/integrations/sso/token',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
 export type GetIntegrationLogDrainsQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetIntegrationLogDrainsError = Fetcher.ErrorWrapper<undefined>;
@@ -7753,13 +9038,13 @@ export type GetIntegrationLogDrainsResponse = {
    * @example build
    * @example edge
    */
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
+  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   /**
    * Whether the log drain was created by an integration or by a user
    *
    * @example integration
    */
-  createdFrom?: 'self-served' | 'integration';
+  createdFrom?: 'integration' | 'self-served';
   /**
    * The headers to send with the request
    *
@@ -7773,7 +9058,7 @@ export type GetIntegrationLogDrainsResponse = {
    *
    * @example production
    */
-  environments: ('production' | 'preview')[];
+  environments: ('preview' | 'production')[];
   /**
    * The branch regexp of log drain
    *
@@ -7807,9 +9092,13 @@ export const getIntegrationLogDrains = (variables: GetIntegrationLogDrainsVariab
 
 export type CreateLogDrainQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type CreateLogDrainError = Fetcher.ErrorWrapper<undefined>;
@@ -7879,13 +9168,13 @@ export type CreateLogDrainResponse = {
    * @example build
    * @example edge
    */
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
+  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   /**
    * Whether the log drain was created by an integration or by a user
    *
    * @example integration
    */
-  createdFrom?: 'self-served' | 'integration';
+  createdFrom?: 'integration' | 'self-served';
   /**
    * The headers to send with the request
    *
@@ -7899,7 +9188,7 @@ export type CreateLogDrainResponse = {
    *
    * @example production
    */
-  environments: ('production' | 'preview')[];
+  environments: ('preview' | 'production')[];
   /**
    * The branch regexp of log drain
    *
@@ -7954,7 +9243,7 @@ export type CreateLogDrainRequestBody = {
    * @uniqueItems true
    * @minItems 1
    */
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external')[];
+  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   /**
    * Headers to be sent together with the request
    */
@@ -7966,12 +9255,6 @@ export type CreateLogDrainRequestBody = {
    * @minItems 1
    */
   environments?: ('preview' | 'production')[];
-  /**
-   * The id of the log drain that was previously created and deleted
-   *
-   * @example ld_1
-   */
-  previousLogDrainId?: string;
 };
 
 export type CreateLogDrainVariables = {
@@ -7999,13 +9282,13 @@ export type DeleteIntegrationLogDrainPathParams = {
 
 export type DeleteIntegrationLogDrainQueryParams = {
   /**
-   * If this API is being called as part of an update flow, this should be set to true
-   */
-  updateFlow?: boolean;
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type DeleteIntegrationLogDrainError = Fetcher.ErrorWrapper<undefined>;
@@ -8036,10 +9319,6 @@ export type GitNamespacesQueryParams = {
    */
   host?: string;
   provider?: 'github' | 'github-custom-host' | 'gitlab' | 'bitbucket';
-  /**
-   * The Team identifier or slug to perform the request on behalf of.
-   */
-  teamId?: string;
 };
 
 export type GitNamespacesError = Fetcher.ErrorWrapper<undefined>;
@@ -8082,35 +9361,16 @@ export type SearchRepoQueryParams = {
    */
   host?: string;
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type SearchRepoError = Fetcher.ErrorWrapper<undefined>;
-
-export type SearchRepoResponse = {
-  gitAccount: {
-    provider: 'github' | 'github-custom-host' | 'gitlab' | 'bitbucket';
-    namespaceId: string | number | null;
-  };
-  repos: {
-    id: string | number;
-    provider: 'github' | 'github-custom-host' | 'gitlab' | 'bitbucket';
-    url: string;
-    name: string;
-    slug: string;
-    namespace: string;
-    owner: {
-      id: string | number;
-      name: string;
-    };
-    ownerType: 'user' | 'team';
-    private: boolean;
-    defaultBranch: string;
-    updatedAt: number;
-  }[];
-};
 
 export type SearchRepoVariables = {
   queryParams?: SearchRepoQueryParams;
@@ -8120,12 +9380,36 @@ export type SearchRepoVariables = {
  * Lists git repositories linked to a namespace `id` for a supported provider. A specific namespace `id` can be obtained via the `git-namespaces`  endpoint. Supported providers are `github`, `gitlab` and `bitbucket`. If the provider or namespace is not provided, it will try to obtain it from the user that authenticated the request.
  */
 export const searchRepo = (variables: SearchRepoVariables, signal?: AbortSignal) =>
-  fetch<SearchRepoResponse, SearchRepoError, undefined, {}, SearchRepoQueryParams, {}>({
-    url: '/v1/integrations/search-repo',
-    method: 'get',
-    ...variables,
-    signal
-  });
+  fetch<
+    | Record<string, any>
+    | {
+        gitAccount: {
+          provider: 'github' | 'github-custom-host' | 'gitlab' | 'bitbucket';
+          namespaceId: string | number | null;
+        };
+        repos: {
+          id: string | number;
+          provider: 'github' | 'github-custom-host' | 'gitlab' | 'bitbucket';
+          url: string;
+          name: string;
+          slug: string;
+          namespace: string;
+          owner: {
+            id: string | number;
+            name: string;
+          };
+          ownerType: 'user' | 'team';
+          private: boolean;
+          defaultBranch: string;
+          updatedAt: number;
+        }[];
+      },
+    SearchRepoError,
+    undefined,
+    {},
+    SearchRepoQueryParams,
+    {}
+  >({ url: '/v1/integrations/search-repo', method: 'get', ...variables, signal });
 
 export type GetConfigurableLogDrainPathParams = {
   id: string;
@@ -8133,9 +9417,13 @@ export type GetConfigurableLogDrainPathParams = {
 
 export type GetConfigurableLogDrainQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
@@ -8151,21 +9439,20 @@ export type GetConfigurableLogDrainResponse = {
   ownerId: string;
   projectIds?: string[];
   createdAt: number;
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
+  deletedAt: number | null;
+  updatedAt: number;
+  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   headers?: {
     [key: string]: string;
   };
-  environments: ('production' | 'preview')[];
-  status?: 'enabled' | 'disabled' | 'errored';
+  environments: ('preview' | 'production')[];
+  status?: 'disabled' | 'enabled' | 'errored';
   disabledAt?: number;
-  disabledReason?:
-    | 'log-drain-high-error-rate'
-    | 'log-drains-add-on-disabled-by-owner'
-    | 'disabled-by-admin'
-    | 'account-plan-downgrade';
+  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
+  hideIpAddresses?: boolean;
   secret: string;
   createdFrom?: 'self-served';
 };
@@ -8194,9 +9481,13 @@ export type DeleteConfigurableLogDrainPathParams = {
 
 export type DeleteConfigurableLogDrainQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type DeleteConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
@@ -8225,9 +9516,13 @@ export type GetAllLogDrainsQueryParams = {
    */
   projectId?: string;
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetAllLogDrainsError = Fetcher.ErrorWrapper<undefined>;
@@ -8243,21 +9538,20 @@ export type GetAllLogDrainsResponse = {
   ownerId: string;
   projectIds?: string[];
   createdAt: number;
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
+  deletedAt: number | null;
+  updatedAt: number;
+  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   headers?: {
     [key: string]: string;
   };
-  environments: ('production' | 'preview')[];
-  status?: 'enabled' | 'disabled' | 'errored';
+  environments: ('preview' | 'production')[];
+  status?: 'disabled' | 'enabled' | 'errored';
   disabledAt?: number;
-  disabledReason?:
-    | 'log-drain-high-error-rate'
-    | 'log-drains-add-on-disabled-by-owner'
-    | 'disabled-by-admin'
-    | 'account-plan-downgrade';
+  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
+  hideIpAddresses?: boolean;
   secret: string;
   createdFrom?: 'self-served';
 }[];
@@ -8279,9 +9573,13 @@ export const getAllLogDrains = (variables: GetAllLogDrainsVariables, signal?: Ab
 
 export type CreateConfigurableLogDrainQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type CreateConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
@@ -8301,21 +9599,20 @@ export type CreateConfigurableLogDrainResponse = {
   ownerId: string;
   projectIds?: string[];
   createdAt: number;
-  sources?: ('static' | 'lambda' | 'build' | 'edge' | 'external' | 'deployment')[];
+  deletedAt: number | null;
+  updatedAt: number;
+  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   headers?: {
     [key: string]: string;
   };
-  environments: ('production' | 'preview')[];
-  status?: 'enabled' | 'disabled' | 'errored';
+  environments: ('preview' | 'production')[];
+  status?: 'disabled' | 'enabled' | 'errored';
   disabledAt?: number;
-  disabledReason?:
-    | 'log-drain-high-error-rate'
-    | 'log-drains-add-on-disabled-by-owner'
-    | 'disabled-by-admin'
-    | 'account-plan-downgrade';
+  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
+  hideIpAddresses?: boolean;
   createdFrom?: 'self-served';
 };
 
@@ -8348,7 +9645,7 @@ export type CreateConfigurableLogDrainRequestBody = {
    * @uniqueItems true
    * @minItems 1
    */
-  sources: ('static' | 'lambda' | 'build' | 'edge' | 'external')[];
+  sources: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   /**
    * @uniqueItems true
    * @minItems 1
@@ -8358,6 +9655,17 @@ export type CreateConfigurableLogDrainRequestBody = {
    * Custom secret of log drain
    */
   secret?: string;
+  /**
+   * The sampling rate for this log drain. It should be a percentage rate between 0 and 100. With max 2 decimal points
+   *
+   * @minimum 0.01
+   * @maximum 1
+   */
+  samplingRate?: number;
+  /**
+   * The custom name of this log drain.
+   */
+  name?: string;
 };
 
 export type CreateConfigurableLogDrainVariables = {
@@ -8413,9 +9721,13 @@ export type GetProjectMembersQueryParams = {
    */
   search?: string;
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetProjectMembersError = Fetcher.ErrorWrapper<undefined>;
@@ -8452,6 +9764,12 @@ export const getProjectMembers = (variables: GetProjectMembersVariables, signal?
            */
           role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
           /**
+           * Role of this user in the project.
+           *
+           * @example ADMIN
+           */
+          computedProjectRole: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
+          /**
            * The ID of this user.
            *
            * @example zTuNVUXEAvvnNN3IaqinkyMw
@@ -8480,7 +9798,7 @@ export const getProjectMembers = (variables: GetProjectMembersVariables, signal?
            *
            * @example CONTRIBUTOR
            */
-          teamRole: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
+          teamRole: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
         }[];
         pagination: {
           hasNext: boolean;
@@ -8522,9 +9840,13 @@ export type AddProjectMemberPathParams = {
 
 export type AddProjectMemberQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type AddProjectMemberError = Fetcher.ErrorWrapper<undefined>;
@@ -8742,9 +10064,13 @@ export type RemoveProjectMemberPathParams = {
 
 export type RemoveProjectMemberQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type RemoveProjectMemberError = Fetcher.ErrorWrapper<undefined>;
@@ -8816,10 +10142,15 @@ export type GetProjectsQueryParams = {
    * Filter results by connected Edge Config Token ID
    */
   edgeConfigTokenId?: string;
+  deprecated?: boolean;
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetProjectsError = Fetcher.ErrorWrapper<undefined>;
@@ -8829,7 +10160,7 @@ export type GetProjectsResponse = {
     accountId: string;
     analytics?: {
       id: string;
-      canceledAt: number | null;
+      canceledAt?: number | null;
       disabledAt: number;
       enabledAt: number;
       paidAt?: number;
@@ -8893,6 +10224,13 @@ export type GetProjectsResponse = {
       storageSizeBytes?: number | null;
       unlimited?: boolean;
     };
+    deploymentExpiration?: {
+      expirationDays?: number;
+      expirationDaysProduction?: number;
+      expirationDaysCanceled?: number;
+      expirationDaysErrored?: number;
+      deploymentsToKeep?: number;
+    } | null;
     devCommand?: string | null;
     directoryListing: boolean;
     installCommand?: string | null;
@@ -8900,7 +10238,11 @@ export type GetProjectsResponse = {
       target?:
         | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
         | ('production' | 'preview' | 'development' | 'preview' | 'development');
-      type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+      type: 'encrypted' | 'plain' | 'secret' | 'sensitive' | 'system';
+      /**
+       * This is used to identiy variables that have been migrated from type secret to sensitive.
+       */
+      sunsetSecretId?: string;
       id?: string;
       key: string;
       value: string;
@@ -8961,61 +10303,97 @@ export type GetProjectsResponse = {
             type: 'postgres-database';
             storeId: string;
           }
+        | {
+            type: 'postgres-url-no-ssl';
+            storeId: string;
+          }
+        | {
+            type: 'integration-store-secret';
+            storeId: string;
+            integrationId: string;
+            integrationProductId: string;
+            integrationConfigurationId: string;
+          }
+        | {
+            type: 'flags-connection-string';
+            projectId: string;
+          }
         | null;
       /**
-       * Whether `value` is decrypted.
+       * Similar to `contentHints`, but should not be exposed to the user.
+       */
+      internalContentHint?: {
+        type: 'flags-secret';
+        /**
+         * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+         */
+        encryptedValue: string;
+      } | null;
+      /**
+       * Whether `value` and `vsmValue` are decrypted.
        */
       decrypted?: boolean;
       comment?: string;
+      customEnvironmentIds?: string[];
+      vsmValue?: string;
     }[];
+    customEnvironments?: Record<string, any>[];
     framework?:
-      | 'blitzjs'
-      | 'nextjs'
-      | 'gatsby'
-      | 'remix'
-      | 'astro'
-      | 'hexo'
-      | 'eleventy'
-      | 'docusaurus-2'
-      | 'docusaurus'
-      | 'preact'
-      | 'solidstart'
-      | 'dojo'
-      | 'ember'
-      | 'vue'
-      | 'scully'
-      | 'ionic-angular'
       | 'angular'
+      | 'astro'
+      | 'blitzjs'
+      | 'brunch'
+      | 'create-react-app'
+      | 'docusaurus'
+      | 'docusaurus-2'
+      | 'dojo'
+      | 'eleventy'
+      | 'ember'
+      | 'fasthtml'
+      | 'gatsby'
+      | 'gridsome'
+      | 'hexo'
+      | 'hugo'
+      | 'hydrogen'
+      | 'ionic-angular'
+      | 'ionic-react'
+      | 'jekyll'
+      | 'middleman'
+      | 'nextjs'
+      | 'nuxtjs'
+      | 'parcel'
       | 'polymer'
+      | 'preact'
+      | 'redwoodjs'
+      | 'remix'
+      | 'saber'
+      | 'sanity'
+      | 'sanity-v3'
+      | 'sapper'
+      | 'scully'
+      | 'solidstart'
+      | 'solidstart-1'
+      | 'stencil'
+      | 'storybook'
       | 'svelte'
       | 'sveltekit'
       | 'sveltekit-1'
-      | 'ionic-react'
-      | 'create-react-app'
-      | 'gridsome'
       | 'umijs'
-      | 'sapper'
-      | 'saber'
-      | 'stencil'
-      | 'nuxtjs'
-      | 'redwoodjs'
-      | 'hugo'
-      | 'jekyll'
-      | 'brunch'
-      | 'middleman'
-      | 'zola'
-      | 'hydrogen'
       | 'vite'
       | 'vitepress'
+      | 'vue'
       | 'vuepress'
-      | 'parcel'
-      | 'sanity'
-      | 'storybook'
+      | 'zola'
       | null;
     gitForkProtection?: boolean;
     gitLFS?: boolean;
     id: string;
+    ipBuckets?: {
+      bucket: string;
+      supportUntil?: number;
+    }[];
     latestDeployments?: {
+      id: string;
       alias?: string[];
       aliasAssigned?: number | boolean | null;
       aliasError?: {
@@ -9024,11 +10402,18 @@ export type GetProjectsResponse = {
       } | null;
       aliasFinal?: string | null;
       automaticAliases?: string[];
+      branchMatcher?: {
+        type: 'endsWith' | 'equals' | 'startsWith';
+        pattern: string;
+      };
+      buildingAt?: number;
       builds?: {
         use: string;
         src?: string;
         dest?: string;
       }[];
+      checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+      checksState?: 'completed' | 'registered' | 'running';
       connectBuildsEnabled?: boolean;
       connectConfigurationId?: string;
       createdAt: number;
@@ -9040,18 +10425,36 @@ export type GetProjectsResponse = {
         uid: string;
         username: string;
       } | null;
+      deletedAt?: number;
       deploymentHostname: string;
-      name: string;
       forced?: boolean;
-      id: string;
+      name: string;
       meta?: {
         [key: string]: string;
       };
       monorepoManager?: string | null;
-      plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
+      oidcTokenClaims?: {
+        iss: string;
+        sub: string;
+        scope: string;
+        aud: string;
+        owner: string;
+        owner_id: string;
+        project: string;
+        project_id: string;
+        environment: string;
+      };
+      plan: 'enterprise' | 'hobby' | 'pro';
+      /**
+       * Whether or not preview comments are enabled for the deployment
+       *
+       * @example false
+       */
+      previewCommentsEnabled?: boolean;
       private: boolean;
-      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-      readySubstate?: 'STAGED' | 'PROMOTED';
+      readyAt?: number;
+      readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+      readySubstate?: 'PROMOTED' | 'STAGED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
@@ -9059,20 +10462,14 @@ export type GetProjectsResponse = {
       url: string;
       userId: string;
       withCache?: boolean;
-      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-      checksState?: 'registered' | 'running' | 'completed';
-      readyAt?: number;
-      buildingAt?: number;
-      /**
-       * Whether or not preview comments are enabled for the deployment
-       *
-       * @example false
-       */
-      previewCommentsEnabled?: boolean;
     }[];
     link?:
       | {
           org?: string;
+          /**
+           * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes.
+           */
+          repoOwnerId?: number;
           repo?: string;
           repoId?: number;
           type?: 'github';
@@ -9094,6 +10491,10 @@ export type GetProjectsResponse = {
           projectName?: string;
           projectNameWithNamespace?: string;
           projectNamespace?: string;
+          /**
+           * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes. This is the id of the top level group that a namespace belongs to. Gitlab supports group nesting (up to 20 levels).
+           */
+          projectOwnerId?: number;
           projectUrl?: string;
           type?: 'gitlab';
           createdAt?: number;
@@ -9129,22 +10530,60 @@ export type GetProjectsResponse = {
           sourceless?: boolean;
           productionBranch?: string;
         };
+    microfrontends?: {
+      /**
+       * Timestamp when the microfrontends settings were last updated.
+       */
+      updatedAt: number;
+      /**
+       * The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+       */
+      groupIds: string[];
+      /**
+       * Whether microfrontends are enabled for this project.
+       */
+      enabled: boolean;
+      /**
+       * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+       */
+      isDefaultApp?: boolean;
+      /**
+       * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+       */
+      defaultRoute?: string;
+    };
     name: string;
-    nodeVersion: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
+    nodeVersion: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
+    optionsAllowlist?: {
+      paths: {
+        value: string;
+      }[];
+    } | null;
     outputDirectory?: string | null;
     passiveConnectConfigurationId?: string | null;
     passwordProtection?: Record<string, any> | null;
     productionDeploymentsFastLane?: boolean;
     publicSource?: boolean | null;
+    resourceConfig?: {
+      functionDefaultTimeout?: number;
+      functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
+      allowServerlessConcurrency?: boolean;
+      elasticConcurrencyEnabled?: boolean;
+    };
     rootDirectory?: string | null;
     serverlessFunctionRegion?: string | null;
+    serverlessFunctionZeroConfigFailover?: boolean;
+    skewProtectionBoundaryAt?: number;
+    skewProtectionMaxAge?: number;
     skipGitConnectDuringLink?: boolean;
     sourceFilesOutsideRootDirectory?: boolean;
+    enableAffectedProjectsDeployments?: boolean;
     ssoProtection?: {
       deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
     } | null;
     targets?: {
       [key: string]: {
+        id: string;
         alias?: string[];
         aliasAssigned?: number | boolean | null;
         aliasError?: {
@@ -9153,11 +10592,18 @@ export type GetProjectsResponse = {
         } | null;
         aliasFinal?: string | null;
         automaticAliases?: string[];
+        branchMatcher?: {
+          type: 'endsWith' | 'equals' | 'startsWith';
+          pattern: string;
+        };
+        buildingAt?: number;
         builds?: {
           use: string;
           src?: string;
           dest?: string;
         }[];
+        checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+        checksState?: 'completed' | 'registered' | 'running';
         connectBuildsEnabled?: boolean;
         connectConfigurationId?: string;
         createdAt: number;
@@ -9169,18 +10615,36 @@ export type GetProjectsResponse = {
           uid: string;
           username: string;
         } | null;
+        deletedAt?: number;
         deploymentHostname: string;
-        name: string;
         forced?: boolean;
-        id: string;
+        name: string;
         meta?: {
           [key: string]: string;
         };
         monorepoManager?: string | null;
-        plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
+        oidcTokenClaims?: {
+          iss: string;
+          sub: string;
+          scope: string;
+          aud: string;
+          owner: string;
+          owner_id: string;
+          project: string;
+          project_id: string;
+          environment: string;
+        };
+        plan: 'enterprise' | 'hobby' | 'pro';
+        /**
+         * Whether or not preview comments are enabled for the deployment
+         *
+         * @example false
+         */
+        previewCommentsEnabled?: boolean;
         private: boolean;
-        readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-        readySubstate?: 'STAGED' | 'PROMOTED';
+        readyAt?: number;
+        readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+        readySubstate?: 'PROMOTED' | 'STAGED';
         requestedAt?: number;
         target?: string | null;
         teamId?: string | null;
@@ -9188,16 +10652,6 @@ export type GetProjectsResponse = {
         url: string;
         userId: string;
         withCache?: boolean;
-        checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-        checksState?: 'registered' | 'running' | 'completed';
-        readyAt?: number;
-        buildingAt?: number;
-        /**
-         * Whether or not preview comments are enabled for the deployment
-         *
-         * @example false
-         */
-        previewCommentsEnabled?: boolean;
       } | null;
     };
     transferCompletedAt?: number;
@@ -9207,52 +10661,8 @@ export type GetProjectsResponse = {
     updatedAt?: number;
     live?: boolean;
     enablePreviewFeedback?: boolean | null;
+    enableProductionFeedback?: boolean | null;
     permissions?: {
-      aliasProject?: Schemas.ACLAction[];
-      aliasProtectionBypass?: Schemas.ACLAction[];
-      productionAliasProtectionBypass?: Schemas.ACLAction[];
-      connectConfigurationLink?: Schemas.ACLAction[];
-      dataCacheNamespace?: Schemas.ACLAction[];
-      deployment?: Schemas.ACLAction[];
-      deploymentCheck?: Schemas.ACLAction[];
-      deploymentCheckPreview?: Schemas.ACLAction[];
-      deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
-      deploymentProductionGit?: Schemas.ACLAction[];
-      deploymentPreview?: Schemas.ACLAction[];
-      deploymentPrivate?: Schemas.ACLAction[];
-      deploymentPromote?: Schemas.ACLAction[];
-      deploymentRollback?: Schemas.ACLAction[];
-      logs?: Schemas.ACLAction[];
-      logsPreset?: Schemas.ACLAction[];
-      passwordProtection?: Schemas.ACLAction[];
-      job?: Schemas.ACLAction[];
-      project?: Schemas.ACLAction[];
-      projectAnalyticsSampling?: Schemas.ACLAction[];
-      projectDeploymentHook?: Schemas.ACLAction[];
-      projectDomain?: Schemas.ACLAction[];
-      projectDomainMove?: Schemas.ACLAction[];
-      projectDomainCheckConfig?: Schemas.ACLAction[];
-      projectEnvVars?: Schemas.ACLAction[];
-      projectEnvVarsProduction?: Schemas.ACLAction[];
-      projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
-      projectId?: Schemas.ACLAction[];
-      projectIntegrationConfiguration?: Schemas.ACLAction[];
-      projectLink?: Schemas.ACLAction[];
-      projectMember?: Schemas.ACLAction[];
-      projectMonitoring?: Schemas.ACLAction[];
-      projectPermissions?: Schemas.ACLAction[];
-      projectProductionBranch?: Schemas.ACLAction[];
-      projectTransfer?: Schemas.ACLAction[];
-      projectTransferOut?: Schemas.ACLAction[];
-      projectProtectionBypass?: Schemas.ACLAction[];
-      projectUsage?: Schemas.ACLAction[];
-      projectAnalyticsUsage?: Schemas.ACLAction[];
-      projectSupportCase?: Schemas.ACLAction[];
-      projectSupportCaseComment?: Schemas.ACLAction[];
-      analytics?: Schemas.ACLAction[];
-      trustedIps?: Schemas.ACLAction[];
-      webAnalytics?: Schemas.ACLAction[];
-      sharedEnvVarConnection?: Schemas.ACLAction[];
       accessGroup?: Schemas.ACLAction[];
       aliasGlobal?: Schemas.ACLAction[];
       analyticsSampling?: Schemas.ACLAction[];
@@ -9270,6 +10680,7 @@ export type GetProjectsResponse = {
       budget?: Schemas.ACLAction[];
       cacheArtifact?: Schemas.ACLAction[];
       cacheArtifactUsageEvent?: Schemas.ACLAction[];
+      codeChecks?: Schemas.ACLAction[];
       concurrentBuilds?: Schemas.ACLAction[];
       connect?: Schemas.ACLAction[];
       connectConfiguration?: Schemas.ACLAction[];
@@ -9289,13 +10700,23 @@ export type GetProjectsResponse = {
       gitRepository?: Schemas.ACLAction[];
       ipBlocking?: Schemas.ACLAction[];
       integration?: Schemas.ACLAction[];
+      integrationAccount?: Schemas.ACLAction[];
       integrationConfiguration?: Schemas.ACLAction[];
       integrationConfigurationTransfer?: Schemas.ACLAction[];
       integrationConfigurationProjects?: Schemas.ACLAction[];
       integrationVercelConfigurationOverride?: Schemas.ACLAction[];
+      integrationConfigurationRole?: Schemas.ACLAction[];
+      integrationResource?: Schemas.ACLAction[];
+      integrationEvent?: Schemas.ACLAction[];
+      integrationResourceSecrets?: Schemas.ACLAction[];
+      integrationDeploymentAction?: Schemas.ACLAction[];
+      marketplaceInstallationMember?: Schemas.ACLAction[];
+      marketplaceBillingData?: Schemas.ACLAction[];
+      marketplaceInvoice?: Schemas.ACLAction[];
       jobGlobal?: Schemas.ACLAction[];
       logDrain?: Schemas.ACLAction[];
       Monitoring?: Schemas.ACLAction[];
+      monitoringSettings?: Schemas.ACLAction[];
       monitoringQuery?: Schemas.ACLAction[];
       monitoringChart?: Schemas.ACLAction[];
       monitoringAlert?: Schemas.ACLAction[];
@@ -9311,13 +10732,15 @@ export type GetProjectsResponse = {
       notificationPaymentFailed?: Schemas.ACLAction[];
       notificationUsageAlert?: Schemas.ACLAction[];
       notificationCustomerBudget?: Schemas.ACLAction[];
+      notificationStatementOfReasons?: Schemas.ACLAction[];
+      oauth2Connection?: Schemas.ACLAction[];
+      observabilityConfiguration?: Schemas.ACLAction[];
       openTelemetryEndpoint?: Schemas.ACLAction[];
       paymentMethod?: Schemas.ACLAction[];
       permissions?: Schemas.ACLAction[];
       postgres?: Schemas.ACLAction[];
       previewDeploymentSuffix?: Schemas.ACLAction[];
       proTrialOnboarding?: Schemas.ACLAction[];
-      seawallConfig?: Schemas.ACLAction[];
       sharedEnvVars?: Schemas.ACLAction[];
       sharedEnvVarsProduction?: Schemas.ACLAction[];
       space?: Schemas.ACLAction[];
@@ -9325,21 +10748,27 @@ export type GetProjectsResponse = {
       passwordProtectionInvoiceItem?: Schemas.ACLAction[];
       rateLimit?: Schemas.ACLAction[];
       redis?: Schemas.ACLAction[];
+      repository?: Schemas.ACLAction[];
       remoteCaching?: Schemas.ACLAction[];
       samlConfig?: Schemas.ACLAction[];
       secret?: Schemas.ACLAction[];
       redisStoreTokenSet?: Schemas.ACLAction[];
       blobStoreTokenSet?: Schemas.ACLAction[];
       postgresStoreTokenSet?: Schemas.ACLAction[];
+      integrationStoreTokenSet?: Schemas.ACLAction[];
+      integrationResourceReplCommand?: Schemas.ACLAction[];
+      storeTransfer?: Schemas.ACLAction[];
       supportCase?: Schemas.ACLAction[];
       supportCaseComment?: Schemas.ACLAction[];
       dataCacheBillingSettings?: Schemas.ACLAction[];
       team?: Schemas.ACLAction[];
       teamAccessRequest?: Schemas.ACLAction[];
       teamFellowMembership?: Schemas.ACLAction[];
+      teamGitExclusivity?: Schemas.ACLAction[];
       teamInvite?: Schemas.ACLAction[];
       teamInviteCode?: Schemas.ACLAction[];
       teamJoin?: Schemas.ACLAction[];
+      teamMicrofrontends?: Schemas.ACLAction[];
       teamOwnMembership?: Schemas.ACLAction[];
       teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
       token?: Schemas.ACLAction[];
@@ -9347,6 +10776,7 @@ export type GetProjectsResponse = {
       usageCycle?: Schemas.ACLAction[];
       user?: Schemas.ACLAction[];
       userConnection?: Schemas.ACLAction[];
+      vpcPeeringConnection?: Schemas.ACLAction[];
       webAnalyticsPlan?: Schemas.ACLAction[];
       webAuthn?: Schemas.ACLAction[];
       edgeConfig?: Schemas.ACLAction[];
@@ -9357,12 +10787,70 @@ export type GetProjectsResponse = {
       ['webhook-event']?: Schemas.ACLAction[];
       endpointVerification?: Schemas.ACLAction[];
       projectTransferIn?: Schemas.ACLAction[];
+      oauth2Application?: Schemas.ACLAction[];
+      aliasProject?: Schemas.ACLAction[];
+      aliasProtectionBypass?: Schemas.ACLAction[];
+      productionAliasProtectionBypass?: Schemas.ACLAction[];
+      connectConfigurationLink?: Schemas.ACLAction[];
+      dataCacheNamespace?: Schemas.ACLAction[];
+      deployment?: Schemas.ACLAction[];
+      deploymentCheck?: Schemas.ACLAction[];
+      deploymentCheckPreview?: Schemas.ACLAction[];
+      deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
+      deploymentProductionGit?: Schemas.ACLAction[];
+      deploymentV0?: Schemas.ACLAction[];
+      deploymentPreview?: Schemas.ACLAction[];
+      deploymentPrivate?: Schemas.ACLAction[];
+      deploymentPromote?: Schemas.ACLAction[];
+      deploymentRollback?: Schemas.ACLAction[];
+      environments?: Schemas.ACLAction[];
+      logs?: Schemas.ACLAction[];
+      logsPreset?: Schemas.ACLAction[];
+      passwordProtection?: Schemas.ACLAction[];
+      optionsAllowlist?: Schemas.ACLAction[];
+      job?: Schemas.ACLAction[];
+      observabilityData?: Schemas.ACLAction[];
+      project?: Schemas.ACLAction[];
+      projectFromV0?: Schemas.ACLAction[];
+      projectAccessGroup?: Schemas.ACLAction[];
+      projectAnalyticsSampling?: Schemas.ACLAction[];
+      projectDeploymentHook?: Schemas.ACLAction[];
+      projectDomain?: Schemas.ACLAction[];
+      projectDomainMove?: Schemas.ACLAction[];
+      projectDomainCheckConfig?: Schemas.ACLAction[];
+      projectEnvVars?: Schemas.ACLAction[];
+      projectEnvVarsProduction?: Schemas.ACLAction[];
+      projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+      projectFlags?: Schemas.ACLAction[];
+      projectId?: Schemas.ACLAction[];
+      projectIntegrationConfiguration?: Schemas.ACLAction[];
+      projectLink?: Schemas.ACLAction[];
+      projectMember?: Schemas.ACLAction[];
+      projectMonitoring?: Schemas.ACLAction[];
+      projectPermissions?: Schemas.ACLAction[];
+      projectProductionBranch?: Schemas.ACLAction[];
+      projectTransfer?: Schemas.ACLAction[];
+      projectTransferOut?: Schemas.ACLAction[];
+      projectProtectionBypass?: Schemas.ACLAction[];
+      projectUsage?: Schemas.ACLAction[];
+      projectAnalyticsUsage?: Schemas.ACLAction[];
+      projectSupportCase?: Schemas.ACLAction[];
+      projectSupportCaseComment?: Schemas.ACLAction[];
+      projectDeploymentExpiration?: Schemas.ACLAction[];
+      projectTier?: Schemas.ACLAction[];
+      seawallConfig?: Schemas.ACLAction[];
+      skewProtection?: Schemas.ACLAction[];
+      analytics?: Schemas.ACLAction[];
+      trustedIps?: Schemas.ACLAction[];
+      webAnalytics?: Schemas.ACLAction[];
+      sharedEnvVarConnection?: Schemas.ACLAction[];
+      sonar?: Schemas.ACLAction[];
     };
     lastRollbackTarget?: Record<string, any> | null;
     lastAliasRequest?: {
       fromDeploymentId: string;
       toDeploymentId: string;
-      jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+      jobStatus: 'failed' | 'in-progress' | 'pending' | 'skipped' | 'succeeded';
       requestedAt: number;
       type: 'promote' | 'rollback';
     } | null;
@@ -9377,7 +10865,7 @@ export type GetProjectsResponse = {
     hasActiveBranches?: boolean;
     trustedIps?:
       | {
-          deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+          deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
           addresses: {
             value: string;
             note?: string;
@@ -9385,7 +10873,7 @@ export type GetProjectsResponse = {
           protectionMode: 'additional' | 'exclusive';
         }
       | {
-          deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+          deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         }
       | null;
     gitComments?: {
@@ -9399,6 +10887,127 @@ export type GetProjectsResponse = {
       onCommit: boolean;
     };
     paused?: boolean;
+    concurrencyBucketName?: string;
+    webAnalytics?: {
+      id: string;
+      disabledAt?: number;
+      canceledAt?: number;
+      enabledAt?: number;
+      hasData?: boolean;
+    };
+    security?: {
+      attackModeEnabled?: boolean;
+      attackModeUpdatedAt?: number;
+      firewallEnabled?: boolean;
+      firewallUpdatedAt?: number;
+      attackModeActiveUntil?: number | null;
+      firewallConfigVersion?: number;
+      firewallRoutes?: {
+        src?:
+          | string
+          | {
+              re?: string;
+              eq?: string;
+              neq?: string;
+              inc?: string[];
+              ninc?: string[];
+              pre?: string;
+              suf?: string;
+              gt?: number;
+              gte?: number;
+              lt?: number;
+              lte?: number;
+            };
+        has?: {
+          type:
+            | 'cookie'
+            | 'environment'
+            | 'header'
+            | 'host'
+            | 'initial_request_path'
+            | 'ip_address'
+            | 'method'
+            | 'path'
+            | 'protocol'
+            | 'query'
+            | 'region'
+            | 'scheme';
+          key?: string;
+          value?:
+            | string
+            | {
+                re?: string;
+                eq?: string;
+                neq?: string;
+                inc?: string[];
+                ninc?: string[];
+                pre?: string;
+                suf?: string;
+                gt?: number;
+                gte?: number;
+                lt?: number;
+                lte?: number;
+              };
+        }[];
+        missing?: {
+          type:
+            | 'cookie'
+            | 'environment'
+            | 'header'
+            | 'host'
+            | 'initial_request_path'
+            | 'ip_address'
+            | 'method'
+            | 'path'
+            | 'protocol'
+            | 'query'
+            | 'region'
+            | 'scheme';
+          key?: string;
+          value?:
+            | string
+            | {
+                re?: string;
+                eq?: string;
+                neq?: string;
+                inc?: string[];
+                ninc?: string[];
+                pre?: string;
+                suf?: string;
+                gt?: number;
+                gte?: number;
+                lt?: number;
+                lte?: number;
+              };
+        }[];
+        dest?: string;
+        status?: number;
+        handle?: 'finalize' | 'init';
+        mitigate?: {
+          action: 'bypass' | 'challenge' | 'deny' | 'log' | 'rate_limit' | 'redirect';
+          rule_id: string;
+          ttl?: number;
+          erl?: {
+            algo: 'fixed_window' | 'token_bucket';
+            window: number;
+            limit: number;
+            keys: string[];
+          };
+        };
+      }[];
+      firewallSeawallEnabled?: boolean;
+      ja3Enabled?: boolean;
+      ja4Enabled?: boolean;
+      firewallBypassIps?: string[];
+    };
+    oidcTokenConfig?: {
+      enabled: boolean;
+      /**
+       * - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
+       */
+      issuerMode?: 'global' | 'team';
+    };
+    tier?: 'advanced' | 'critical' | 'standard';
   }[];
   pagination: Schemas.Pagination;
 };
@@ -9420,9 +11029,13 @@ export const getProjects = (variables: GetProjectsVariables, signal?: AbortSigna
 
 export type CreateProjectQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type CreateProjectError = Fetcher.ErrorWrapper<undefined>;
@@ -9431,7 +11044,7 @@ export type CreateProjectResponse = {
   accountId: string;
   analytics?: {
     id: string;
-    canceledAt: number | null;
+    canceledAt?: number | null;
     disabledAt: number;
     enabledAt: number;
     paidAt?: number;
@@ -9495,6 +11108,13 @@ export type CreateProjectResponse = {
     storageSizeBytes?: number | null;
     unlimited?: boolean;
   };
+  deploymentExpiration?: {
+    expirationDays?: number;
+    expirationDaysProduction?: number;
+    expirationDaysCanceled?: number;
+    expirationDaysErrored?: number;
+    deploymentsToKeep?: number;
+  } | null;
   devCommand?: string | null;
   directoryListing: boolean;
   installCommand?: string | null;
@@ -9502,7 +11122,11 @@ export type CreateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+    type: 'encrypted' | 'plain' | 'secret' | 'sensitive' | 'system';
+    /**
+     * This is used to identiy variables that have been migrated from type secret to sensitive.
+     */
+    sunsetSecretId?: string;
     id?: string;
     key: string;
     value: string;
@@ -9563,61 +11187,97 @@ export type CreateProjectResponse = {
           type: 'postgres-database';
           storeId: string;
         }
+      | {
+          type: 'postgres-url-no-ssl';
+          storeId: string;
+        }
+      | {
+          type: 'integration-store-secret';
+          storeId: string;
+          integrationId: string;
+          integrationProductId: string;
+          integrationConfigurationId: string;
+        }
+      | {
+          type: 'flags-connection-string';
+          projectId: string;
+        }
       | null;
     /**
-     * Whether `value` is decrypted.
+     * Similar to `contentHints`, but should not be exposed to the user.
+     */
+    internalContentHint?: {
+      type: 'flags-secret';
+      /**
+       * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+       */
+      encryptedValue: string;
+    } | null;
+    /**
+     * Whether `value` and `vsmValue` are decrypted.
      */
     decrypted?: boolean;
     comment?: string;
+    customEnvironmentIds?: string[];
+    vsmValue?: string;
   }[];
+  customEnvironments?: Record<string, any>[];
   framework?:
-    | 'blitzjs'
-    | 'nextjs'
-    | 'gatsby'
-    | 'remix'
-    | 'astro'
-    | 'hexo'
-    | 'eleventy'
-    | 'docusaurus-2'
-    | 'docusaurus'
-    | 'preact'
-    | 'solidstart'
-    | 'dojo'
-    | 'ember'
-    | 'vue'
-    | 'scully'
-    | 'ionic-angular'
     | 'angular'
+    | 'astro'
+    | 'blitzjs'
+    | 'brunch'
+    | 'create-react-app'
+    | 'docusaurus'
+    | 'docusaurus-2'
+    | 'dojo'
+    | 'eleventy'
+    | 'ember'
+    | 'fasthtml'
+    | 'gatsby'
+    | 'gridsome'
+    | 'hexo'
+    | 'hugo'
+    | 'hydrogen'
+    | 'ionic-angular'
+    | 'ionic-react'
+    | 'jekyll'
+    | 'middleman'
+    | 'nextjs'
+    | 'nuxtjs'
+    | 'parcel'
     | 'polymer'
+    | 'preact'
+    | 'redwoodjs'
+    | 'remix'
+    | 'saber'
+    | 'sanity'
+    | 'sanity-v3'
+    | 'sapper'
+    | 'scully'
+    | 'solidstart'
+    | 'solidstart-1'
+    | 'stencil'
+    | 'storybook'
     | 'svelte'
     | 'sveltekit'
     | 'sveltekit-1'
-    | 'ionic-react'
-    | 'create-react-app'
-    | 'gridsome'
     | 'umijs'
-    | 'sapper'
-    | 'saber'
-    | 'stencil'
-    | 'nuxtjs'
-    | 'redwoodjs'
-    | 'hugo'
-    | 'jekyll'
-    | 'brunch'
-    | 'middleman'
-    | 'zola'
-    | 'hydrogen'
     | 'vite'
     | 'vitepress'
+    | 'vue'
     | 'vuepress'
-    | 'parcel'
-    | 'sanity'
-    | 'storybook'
+    | 'zola'
     | null;
   gitForkProtection?: boolean;
   gitLFS?: boolean;
   id: string;
+  ipBuckets?: {
+    bucket: string;
+    supportUntil?: number;
+  }[];
   latestDeployments?: {
+    id: string;
     alias?: string[];
     aliasAssigned?: number | boolean | null;
     aliasError?: {
@@ -9626,11 +11286,18 @@ export type CreateProjectResponse = {
     } | null;
     aliasFinal?: string | null;
     automaticAliases?: string[];
+    branchMatcher?: {
+      type: 'endsWith' | 'equals' | 'startsWith';
+      pattern: string;
+    };
+    buildingAt?: number;
     builds?: {
       use: string;
       src?: string;
       dest?: string;
     }[];
+    checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+    checksState?: 'completed' | 'registered' | 'running';
     connectBuildsEnabled?: boolean;
     connectConfigurationId?: string;
     createdAt: number;
@@ -9642,18 +11309,36 @@ export type CreateProjectResponse = {
       uid: string;
       username: string;
     } | null;
+    deletedAt?: number;
     deploymentHostname: string;
-    name: string;
     forced?: boolean;
-    id: string;
+    name: string;
     meta?: {
       [key: string]: string;
     };
     monorepoManager?: string | null;
-    plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
+    oidcTokenClaims?: {
+      iss: string;
+      sub: string;
+      scope: string;
+      aud: string;
+      owner: string;
+      owner_id: string;
+      project: string;
+      project_id: string;
+      environment: string;
+    };
+    plan: 'enterprise' | 'hobby' | 'pro';
+    /**
+     * Whether or not preview comments are enabled for the deployment
+     *
+     * @example false
+     */
+    previewCommentsEnabled?: boolean;
     private: boolean;
-    readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-    readySubstate?: 'STAGED' | 'PROMOTED';
+    readyAt?: number;
+    readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+    readySubstate?: 'PROMOTED' | 'STAGED';
     requestedAt?: number;
     target?: string | null;
     teamId?: string | null;
@@ -9661,20 +11346,14 @@ export type CreateProjectResponse = {
     url: string;
     userId: string;
     withCache?: boolean;
-    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-    checksState?: 'registered' | 'running' | 'completed';
-    readyAt?: number;
-    buildingAt?: number;
-    /**
-     * Whether or not preview comments are enabled for the deployment
-     *
-     * @example false
-     */
-    previewCommentsEnabled?: boolean;
   }[];
   link?:
     | {
         org?: string;
+        /**
+         * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes.
+         */
+        repoOwnerId?: number;
         repo?: string;
         repoId?: number;
         type?: 'github';
@@ -9696,6 +11375,10 @@ export type CreateProjectResponse = {
         projectName?: string;
         projectNameWithNamespace?: string;
         projectNamespace?: string;
+        /**
+         * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes. This is the id of the top level group that a namespace belongs to. Gitlab supports group nesting (up to 20 levels).
+         */
+        projectOwnerId?: number;
         projectUrl?: string;
         type?: 'gitlab';
         createdAt?: number;
@@ -9731,22 +11414,60 @@ export type CreateProjectResponse = {
         sourceless?: boolean;
         productionBranch?: string;
       };
+  microfrontends?: {
+    /**
+     * Timestamp when the microfrontends settings were last updated.
+     */
+    updatedAt: number;
+    /**
+     * The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+     */
+    groupIds: string[];
+    /**
+     * Whether microfrontends are enabled for this project.
+     */
+    enabled: boolean;
+    /**
+     * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+     */
+    isDefaultApp?: boolean;
+    /**
+     * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+     */
+    defaultRoute?: string;
+  };
   name: string;
-  nodeVersion: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
+  nodeVersion: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
+  optionsAllowlist?: {
+    paths: {
+      value: string;
+    }[];
+  } | null;
   outputDirectory?: string | null;
   passiveConnectConfigurationId?: string | null;
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
+  resourceConfig?: {
+    functionDefaultTimeout?: number;
+    functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
+    allowServerlessConcurrency?: boolean;
+    elasticConcurrencyEnabled?: boolean;
+  };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
+  serverlessFunctionZeroConfigFailover?: boolean;
+  skewProtectionBoundaryAt?: number;
+  skewProtectionMaxAge?: number;
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
+  enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
     deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
+      id: string;
       alias?: string[];
       aliasAssigned?: number | boolean | null;
       aliasError?: {
@@ -9755,11 +11476,18 @@ export type CreateProjectResponse = {
       } | null;
       aliasFinal?: string | null;
       automaticAliases?: string[];
+      branchMatcher?: {
+        type: 'endsWith' | 'equals' | 'startsWith';
+        pattern: string;
+      };
+      buildingAt?: number;
       builds?: {
         use: string;
         src?: string;
         dest?: string;
       }[];
+      checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+      checksState?: 'completed' | 'registered' | 'running';
       connectBuildsEnabled?: boolean;
       connectConfigurationId?: string;
       createdAt: number;
@@ -9771,18 +11499,36 @@ export type CreateProjectResponse = {
         uid: string;
         username: string;
       } | null;
+      deletedAt?: number;
       deploymentHostname: string;
-      name: string;
       forced?: boolean;
-      id: string;
+      name: string;
       meta?: {
         [key: string]: string;
       };
       monorepoManager?: string | null;
-      plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
+      oidcTokenClaims?: {
+        iss: string;
+        sub: string;
+        scope: string;
+        aud: string;
+        owner: string;
+        owner_id: string;
+        project: string;
+        project_id: string;
+        environment: string;
+      };
+      plan: 'enterprise' | 'hobby' | 'pro';
+      /**
+       * Whether or not preview comments are enabled for the deployment
+       *
+       * @example false
+       */
+      previewCommentsEnabled?: boolean;
       private: boolean;
-      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-      readySubstate?: 'STAGED' | 'PROMOTED';
+      readyAt?: number;
+      readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+      readySubstate?: 'PROMOTED' | 'STAGED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
@@ -9790,16 +11536,6 @@ export type CreateProjectResponse = {
       url: string;
       userId: string;
       withCache?: boolean;
-      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-      checksState?: 'registered' | 'running' | 'completed';
-      readyAt?: number;
-      buildingAt?: number;
-      /**
-       * Whether or not preview comments are enabled for the deployment
-       *
-       * @example false
-       */
-      previewCommentsEnabled?: boolean;
     } | null;
   };
   transferCompletedAt?: number;
@@ -9809,6 +11545,7 @@ export type CreateProjectResponse = {
   updatedAt?: number;
   live?: boolean;
   enablePreviewFeedback?: boolean | null;
+  enableProductionFeedback?: boolean | null;
   permissions?: {
     accessGroup?: Schemas.ACLAction[];
     aliasGlobal?: Schemas.ACLAction[];
@@ -9827,6 +11564,7 @@ export type CreateProjectResponse = {
     budget?: Schemas.ACLAction[];
     cacheArtifact?: Schemas.ACLAction[];
     cacheArtifactUsageEvent?: Schemas.ACLAction[];
+    codeChecks?: Schemas.ACLAction[];
     concurrentBuilds?: Schemas.ACLAction[];
     connect?: Schemas.ACLAction[];
     connectConfiguration?: Schemas.ACLAction[];
@@ -9846,13 +11584,23 @@ export type CreateProjectResponse = {
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
     integration?: Schemas.ACLAction[];
+    integrationAccount?: Schemas.ACLAction[];
     integrationConfiguration?: Schemas.ACLAction[];
     integrationConfigurationTransfer?: Schemas.ACLAction[];
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
+    integrationConfigurationRole?: Schemas.ACLAction[];
+    integrationResource?: Schemas.ACLAction[];
+    integrationEvent?: Schemas.ACLAction[];
+    integrationResourceSecrets?: Schemas.ACLAction[];
+    integrationDeploymentAction?: Schemas.ACLAction[];
+    marketplaceInstallationMember?: Schemas.ACLAction[];
+    marketplaceBillingData?: Schemas.ACLAction[];
+    marketplaceInvoice?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
+    monitoringSettings?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
     monitoringChart?: Schemas.ACLAction[];
     monitoringAlert?: Schemas.ACLAction[];
@@ -9868,13 +11616,15 @@ export type CreateProjectResponse = {
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationCustomerBudget?: Schemas.ACLAction[];
+    notificationStatementOfReasons?: Schemas.ACLAction[];
+    oauth2Connection?: Schemas.ACLAction[];
+    observabilityConfiguration?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
     postgres?: Schemas.ACLAction[];
     previewDeploymentSuffix?: Schemas.ACLAction[];
     proTrialOnboarding?: Schemas.ACLAction[];
-    seawallConfig?: Schemas.ACLAction[];
     sharedEnvVars?: Schemas.ACLAction[];
     sharedEnvVarsProduction?: Schemas.ACLAction[];
     space?: Schemas.ACLAction[];
@@ -9882,21 +11632,27 @@ export type CreateProjectResponse = {
     passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
+    repository?: Schemas.ACLAction[];
     remoteCaching?: Schemas.ACLAction[];
     samlConfig?: Schemas.ACLAction[];
     secret?: Schemas.ACLAction[];
     redisStoreTokenSet?: Schemas.ACLAction[];
     blobStoreTokenSet?: Schemas.ACLAction[];
     postgresStoreTokenSet?: Schemas.ACLAction[];
+    integrationStoreTokenSet?: Schemas.ACLAction[];
+    integrationResourceReplCommand?: Schemas.ACLAction[];
+    storeTransfer?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
     teamFellowMembership?: Schemas.ACLAction[];
+    teamGitExclusivity?: Schemas.ACLAction[];
     teamInvite?: Schemas.ACLAction[];
     teamInviteCode?: Schemas.ACLAction[];
     teamJoin?: Schemas.ACLAction[];
+    teamMicrofrontends?: Schemas.ACLAction[];
     teamOwnMembership?: Schemas.ACLAction[];
     teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
     token?: Schemas.ACLAction[];
@@ -9904,6 +11660,7 @@ export type CreateProjectResponse = {
     usageCycle?: Schemas.ACLAction[];
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
+    vpcPeeringConnection?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
     webAuthn?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
@@ -9914,6 +11671,7 @@ export type CreateProjectResponse = {
     ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
     projectTransferIn?: Schemas.ACLAction[];
+    oauth2Application?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
     productionAliasProtectionBypass?: Schemas.ACLAction[];
@@ -9924,15 +11682,21 @@ export type CreateProjectResponse = {
     deploymentCheckPreview?: Schemas.ACLAction[];
     deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
     deploymentProductionGit?: Schemas.ACLAction[];
+    deploymentV0?: Schemas.ACLAction[];
     deploymentPreview?: Schemas.ACLAction[];
     deploymentPrivate?: Schemas.ACLAction[];
     deploymentPromote?: Schemas.ACLAction[];
     deploymentRollback?: Schemas.ACLAction[];
+    environments?: Schemas.ACLAction[];
     logs?: Schemas.ACLAction[];
     logsPreset?: Schemas.ACLAction[];
     passwordProtection?: Schemas.ACLAction[];
+    optionsAllowlist?: Schemas.ACLAction[];
     job?: Schemas.ACLAction[];
+    observabilityData?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
+    projectFromV0?: Schemas.ACLAction[];
+    projectAccessGroup?: Schemas.ACLAction[];
     projectAnalyticsSampling?: Schemas.ACLAction[];
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
@@ -9941,6 +11705,7 @@ export type CreateProjectResponse = {
     projectEnvVars?: Schemas.ACLAction[];
     projectEnvVarsProduction?: Schemas.ACLAction[];
     projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+    projectFlags?: Schemas.ACLAction[];
     projectId?: Schemas.ACLAction[];
     projectIntegrationConfiguration?: Schemas.ACLAction[];
     projectLink?: Schemas.ACLAction[];
@@ -9955,16 +11720,21 @@ export type CreateProjectResponse = {
     projectAnalyticsUsage?: Schemas.ACLAction[];
     projectSupportCase?: Schemas.ACLAction[];
     projectSupportCaseComment?: Schemas.ACLAction[];
+    projectDeploymentExpiration?: Schemas.ACLAction[];
+    projectTier?: Schemas.ACLAction[];
+    seawallConfig?: Schemas.ACLAction[];
+    skewProtection?: Schemas.ACLAction[];
     analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
     sharedEnvVarConnection?: Schemas.ACLAction[];
+    sonar?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+    jobStatus: 'failed' | 'in-progress' | 'pending' | 'skipped' | 'succeeded';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -9979,7 +11749,7 @@ export type CreateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         addresses: {
           value: string;
           note?: string;
@@ -9987,7 +11757,7 @@ export type CreateProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
       }
     | null;
   gitComments?: {
@@ -10001,6 +11771,127 @@ export type CreateProjectResponse = {
     onCommit: boolean;
   };
   paused?: boolean;
+  concurrencyBucketName?: string;
+  webAnalytics?: {
+    id: string;
+    disabledAt?: number;
+    canceledAt?: number;
+    enabledAt?: number;
+    hasData?: boolean;
+  };
+  security?: {
+    attackModeEnabled?: boolean;
+    attackModeUpdatedAt?: number;
+    firewallEnabled?: boolean;
+    firewallUpdatedAt?: number;
+    attackModeActiveUntil?: number | null;
+    firewallConfigVersion?: number;
+    firewallRoutes?: {
+      src?:
+        | string
+        | {
+            re?: string;
+            eq?: string;
+            neq?: string;
+            inc?: string[];
+            ninc?: string[];
+            pre?: string;
+            suf?: string;
+            gt?: number;
+            gte?: number;
+            lt?: number;
+            lte?: number;
+          };
+      has?: {
+        type:
+          | 'cookie'
+          | 'environment'
+          | 'header'
+          | 'host'
+          | 'initial_request_path'
+          | 'ip_address'
+          | 'method'
+          | 'path'
+          | 'protocol'
+          | 'query'
+          | 'region'
+          | 'scheme';
+        key?: string;
+        value?:
+          | string
+          | {
+              re?: string;
+              eq?: string;
+              neq?: string;
+              inc?: string[];
+              ninc?: string[];
+              pre?: string;
+              suf?: string;
+              gt?: number;
+              gte?: number;
+              lt?: number;
+              lte?: number;
+            };
+      }[];
+      missing?: {
+        type:
+          | 'cookie'
+          | 'environment'
+          | 'header'
+          | 'host'
+          | 'initial_request_path'
+          | 'ip_address'
+          | 'method'
+          | 'path'
+          | 'protocol'
+          | 'query'
+          | 'region'
+          | 'scheme';
+        key?: string;
+        value?:
+          | string
+          | {
+              re?: string;
+              eq?: string;
+              neq?: string;
+              inc?: string[];
+              ninc?: string[];
+              pre?: string;
+              suf?: string;
+              gt?: number;
+              gte?: number;
+              lt?: number;
+              lte?: number;
+            };
+      }[];
+      dest?: string;
+      status?: number;
+      handle?: 'finalize' | 'init';
+      mitigate?: {
+        action: 'bypass' | 'challenge' | 'deny' | 'log' | 'rate_limit' | 'redirect';
+        rule_id: string;
+        ttl?: number;
+        erl?: {
+          algo: 'fixed_window' | 'token_bucket';
+          window: number;
+          limit: number;
+          keys: string[];
+        };
+      };
+    }[];
+    firewallSeawallEnabled?: boolean;
+    ja3Enabled?: boolean;
+    ja4Enabled?: boolean;
+    firewallBypassIps?: string[];
+  };
+  oidcTokenConfig?: {
+    enabled: boolean;
+    /**
+     * - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
+     */
+    issuerMode?: 'global' | 'team';
+  };
+  tier?: 'advanced' | 'critical' | 'standard';
 };
 
 export type CreateProjectRequestBody = {
@@ -10033,16 +11924,15 @@ export type CreateProjectRequestBody = {
      */
     target: ('production' | 'preview' | 'development') | ('production' | 'preview' | 'development')[];
     /**
-     * The git branch of the environment variable
+     * If defined, the git branch of the environment variable (must have target=preview)
      *
      * @maxLength 250
-     * @example feature-1
      */
     gitBranch?: string;
     /**
      * Type of the ENV variable
      */
-    type?: 'system' | 'secret' | 'encrypted' | 'plain';
+    type?: 'encrypted' | 'plain' | 'secret' | 'sensitive' | 'system';
     /**
      * Value for the ENV variable
      */
@@ -10052,49 +11942,52 @@ export type CreateProjectRequestBody = {
    * The framework that is being used for this project. When `null` is used no framework is selected
    */
   framework?:
-    | any
-    | 'blitzjs'
-    | 'nextjs'
-    | 'gatsby'
-    | 'remix'
-    | 'astro'
-    | 'hexo'
-    | 'eleventy'
-    | 'docusaurus-2'
-    | 'docusaurus'
-    | 'preact'
-    | 'solidstart'
-    | 'dojo'
-    | 'ember'
-    | 'vue'
-    | 'scully'
-    | 'ionic-angular'
     | 'angular'
+    | 'astro'
+    | 'blitzjs'
+    | 'brunch'
+    | 'create-react-app'
+    | 'docusaurus'
+    | 'docusaurus-2'
+    | 'dojo'
+    | 'eleventy'
+    | 'ember'
+    | 'fasthtml'
+    | 'gatsby'
+    | 'gridsome'
+    | 'hexo'
+    | 'hugo'
+    | 'hydrogen'
+    | 'ionic-angular'
+    | 'ionic-react'
+    | 'jekyll'
+    | 'middleman'
+    | 'nextjs'
+    | any
+    | 'nuxtjs'
+    | 'parcel'
     | 'polymer'
+    | 'preact'
+    | 'redwoodjs'
+    | 'remix'
+    | 'saber'
+    | 'sanity'
+    | 'sanity-v3'
+    | 'sapper'
+    | 'scully'
+    | 'solidstart'
+    | 'solidstart-1'
+    | 'stencil'
+    | 'storybook'
     | 'svelte'
     | 'sveltekit'
     | 'sveltekit-1'
-    | 'ionic-react'
-    | 'create-react-app'
-    | 'gridsome'
     | 'umijs'
-    | 'sapper'
-    | 'saber'
-    | 'stencil'
-    | 'nuxtjs'
-    | 'redwoodjs'
-    | 'hugo'
-    | 'jekyll'
-    | 'brunch'
-    | 'middleman'
-    | 'zola'
-    | 'hydrogen'
     | 'vite'
     | 'vitepress'
+    | 'vue'
     | 'vuepress'
-    | 'parcel'
-    | 'sanity'
-    | 'storybook';
+    | 'zola';
   /**
    * The Git Repository that will be connected to the project. When this is defined, any pushes to the specified connected Git Repository will be automatically deployed
    */
@@ -10106,7 +11999,7 @@ export type CreateProjectRequestBody = {
     /**
      * The Git Provider of the repository
      */
-    type: 'github' | 'gitlab' | 'bitbucket';
+    type: 'bitbucket' | 'github' | 'gitlab';
   };
   /**
    * The install command for this project. When `null` is used this value will be automatically detected
@@ -10119,7 +12012,7 @@ export type CreateProjectRequestBody = {
    *
    * @example a-project-name
    * @maxLength 100
-   * @pattern ^[a-z0-9]([a-z0-9]|-[a-z0-9])*$
+   * @pattern ^(?!.*---)[a-z0-9-_.]+$
    */
   name: string;
   /**
@@ -10150,6 +12043,29 @@ export type CreateProjectRequestBody = {
    * @maxLength 4
    */
   serverlessFunctionRegion?: string | null;
+  /**
+   * Specifies whether Zero Config Failover is enabled for this project.
+   */
+  serverlessFunctionZeroConfigFailover?: boolean;
+  /**
+   * OpenID Connect JSON Web Token generation configuration.
+   */
+  oidcTokenConfig?: {
+    /**
+     * Whether or not to generate OpenID Connect JSON Web Tokens.
+     */
+    enabled: boolean;
+    /**
+     * team: `https://oidc.vercel.com/[team_slug]` global: `https://oidc.vercel.com`
+     *
+     * @default global
+     */
+    issuerMode?: 'global' | 'team';
+  };
+  /**
+   * Opt-in to skip deployments when there are no changes to the root directory and its dependencies
+   */
+  enableAffectedProjectsDeployments?: boolean;
 };
 
 export type CreateProjectVariables = {
@@ -10162,7 +12078,7 @@ export type CreateProjectVariables = {
  */
 export const createProject = (variables: CreateProjectVariables, signal?: AbortSignal) =>
   fetch<CreateProjectResponse, CreateProjectError, CreateProjectRequestBody, {}, CreateProjectQueryParams, {}>({
-    url: '/v9/projects',
+    url: '/v10/projects',
     method: 'post',
     ...variables,
     signal
@@ -10177,9 +12093,13 @@ export type GetProjectPathParams = {
 
 export type GetProjectQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetProjectError = Fetcher.ErrorWrapper<undefined>;
@@ -10188,7 +12108,7 @@ export type GetProjectResponse = {
   accountId: string;
   analytics?: {
     id: string;
-    canceledAt: number | null;
+    canceledAt?: number | null;
     disabledAt: number;
     enabledAt: number;
     paidAt?: number;
@@ -10252,6 +12172,13 @@ export type GetProjectResponse = {
     storageSizeBytes?: number | null;
     unlimited?: boolean;
   };
+  deploymentExpiration?: {
+    expirationDays?: number;
+    expirationDaysProduction?: number;
+    expirationDaysCanceled?: number;
+    expirationDaysErrored?: number;
+    deploymentsToKeep?: number;
+  } | null;
   devCommand?: string | null;
   directoryListing: boolean;
   installCommand?: string | null;
@@ -10259,7 +12186,11 @@ export type GetProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+    type: 'encrypted' | 'plain' | 'secret' | 'sensitive' | 'system';
+    /**
+     * This is used to identiy variables that have been migrated from type secret to sensitive.
+     */
+    sunsetSecretId?: string;
     id?: string;
     key: string;
     value: string;
@@ -10320,61 +12251,97 @@ export type GetProjectResponse = {
           type: 'postgres-database';
           storeId: string;
         }
+      | {
+          type: 'postgres-url-no-ssl';
+          storeId: string;
+        }
+      | {
+          type: 'integration-store-secret';
+          storeId: string;
+          integrationId: string;
+          integrationProductId: string;
+          integrationConfigurationId: string;
+        }
+      | {
+          type: 'flags-connection-string';
+          projectId: string;
+        }
       | null;
     /**
-     * Whether `value` is decrypted.
+     * Similar to `contentHints`, but should not be exposed to the user.
+     */
+    internalContentHint?: {
+      type: 'flags-secret';
+      /**
+       * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+       */
+      encryptedValue: string;
+    } | null;
+    /**
+     * Whether `value` and `vsmValue` are decrypted.
      */
     decrypted?: boolean;
     comment?: string;
+    customEnvironmentIds?: string[];
+    vsmValue?: string;
   }[];
+  customEnvironments?: Record<string, any>[];
   framework?:
-    | 'blitzjs'
-    | 'nextjs'
-    | 'gatsby'
-    | 'remix'
-    | 'astro'
-    | 'hexo'
-    | 'eleventy'
-    | 'docusaurus-2'
-    | 'docusaurus'
-    | 'preact'
-    | 'solidstart'
-    | 'dojo'
-    | 'ember'
-    | 'vue'
-    | 'scully'
-    | 'ionic-angular'
     | 'angular'
+    | 'astro'
+    | 'blitzjs'
+    | 'brunch'
+    | 'create-react-app'
+    | 'docusaurus'
+    | 'docusaurus-2'
+    | 'dojo'
+    | 'eleventy'
+    | 'ember'
+    | 'fasthtml'
+    | 'gatsby'
+    | 'gridsome'
+    | 'hexo'
+    | 'hugo'
+    | 'hydrogen'
+    | 'ionic-angular'
+    | 'ionic-react'
+    | 'jekyll'
+    | 'middleman'
+    | 'nextjs'
+    | 'nuxtjs'
+    | 'parcel'
     | 'polymer'
+    | 'preact'
+    | 'redwoodjs'
+    | 'remix'
+    | 'saber'
+    | 'sanity'
+    | 'sanity-v3'
+    | 'sapper'
+    | 'scully'
+    | 'solidstart'
+    | 'solidstart-1'
+    | 'stencil'
+    | 'storybook'
     | 'svelte'
     | 'sveltekit'
     | 'sveltekit-1'
-    | 'ionic-react'
-    | 'create-react-app'
-    | 'gridsome'
     | 'umijs'
-    | 'sapper'
-    | 'saber'
-    | 'stencil'
-    | 'nuxtjs'
-    | 'redwoodjs'
-    | 'hugo'
-    | 'jekyll'
-    | 'brunch'
-    | 'middleman'
-    | 'zola'
-    | 'hydrogen'
     | 'vite'
     | 'vitepress'
+    | 'vue'
     | 'vuepress'
-    | 'parcel'
-    | 'sanity'
-    | 'storybook'
+    | 'zola'
     | null;
   gitForkProtection?: boolean;
   gitLFS?: boolean;
   id: string;
+  ipBuckets?: {
+    bucket: string;
+    supportUntil?: number;
+  }[];
   latestDeployments?: {
+    id: string;
     alias?: string[];
     aliasAssigned?: number | boolean | null;
     aliasError?: {
@@ -10383,11 +12350,18 @@ export type GetProjectResponse = {
     } | null;
     aliasFinal?: string | null;
     automaticAliases?: string[];
+    branchMatcher?: {
+      type: 'endsWith' | 'equals' | 'startsWith';
+      pattern: string;
+    };
+    buildingAt?: number;
     builds?: {
       use: string;
       src?: string;
       dest?: string;
     }[];
+    checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+    checksState?: 'completed' | 'registered' | 'running';
     connectBuildsEnabled?: boolean;
     connectConfigurationId?: string;
     createdAt: number;
@@ -10399,18 +12373,36 @@ export type GetProjectResponse = {
       uid: string;
       username: string;
     } | null;
+    deletedAt?: number;
     deploymentHostname: string;
-    name: string;
     forced?: boolean;
-    id: string;
+    name: string;
     meta?: {
       [key: string]: string;
     };
     monorepoManager?: string | null;
-    plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
+    oidcTokenClaims?: {
+      iss: string;
+      sub: string;
+      scope: string;
+      aud: string;
+      owner: string;
+      owner_id: string;
+      project: string;
+      project_id: string;
+      environment: string;
+    };
+    plan: 'enterprise' | 'hobby' | 'pro';
+    /**
+     * Whether or not preview comments are enabled for the deployment
+     *
+     * @example false
+     */
+    previewCommentsEnabled?: boolean;
     private: boolean;
-    readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-    readySubstate?: 'STAGED' | 'PROMOTED';
+    readyAt?: number;
+    readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+    readySubstate?: 'PROMOTED' | 'STAGED';
     requestedAt?: number;
     target?: string | null;
     teamId?: string | null;
@@ -10418,20 +12410,14 @@ export type GetProjectResponse = {
     url: string;
     userId: string;
     withCache?: boolean;
-    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-    checksState?: 'registered' | 'running' | 'completed';
-    readyAt?: number;
-    buildingAt?: number;
-    /**
-     * Whether or not preview comments are enabled for the deployment
-     *
-     * @example false
-     */
-    previewCommentsEnabled?: boolean;
   }[];
   link?:
     | {
         org?: string;
+        /**
+         * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes.
+         */
+        repoOwnerId?: number;
         repo?: string;
         repoId?: number;
         type?: 'github';
@@ -10453,6 +12439,10 @@ export type GetProjectResponse = {
         projectName?: string;
         projectNameWithNamespace?: string;
         projectNamespace?: string;
+        /**
+         * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes. This is the id of the top level group that a namespace belongs to. Gitlab supports group nesting (up to 20 levels).
+         */
+        projectOwnerId?: number;
         projectUrl?: string;
         type?: 'gitlab';
         createdAt?: number;
@@ -10488,22 +12478,60 @@ export type GetProjectResponse = {
         sourceless?: boolean;
         productionBranch?: string;
       };
+  microfrontends?: {
+    /**
+     * Timestamp when the microfrontends settings were last updated.
+     */
+    updatedAt: number;
+    /**
+     * The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+     */
+    groupIds: string[];
+    /**
+     * Whether microfrontends are enabled for this project.
+     */
+    enabled: boolean;
+    /**
+     * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+     */
+    isDefaultApp?: boolean;
+    /**
+     * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+     */
+    defaultRoute?: string;
+  };
   name: string;
-  nodeVersion: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
+  nodeVersion: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
+  optionsAllowlist?: {
+    paths: {
+      value: string;
+    }[];
+  } | null;
   outputDirectory?: string | null;
   passiveConnectConfigurationId?: string | null;
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
+  resourceConfig?: {
+    functionDefaultTimeout?: number;
+    functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
+    allowServerlessConcurrency?: boolean;
+    elasticConcurrencyEnabled?: boolean;
+  };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
+  serverlessFunctionZeroConfigFailover?: boolean;
+  skewProtectionBoundaryAt?: number;
+  skewProtectionMaxAge?: number;
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
+  enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
     deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
+      id: string;
       alias?: string[];
       aliasAssigned?: number | boolean | null;
       aliasError?: {
@@ -10512,11 +12540,18 @@ export type GetProjectResponse = {
       } | null;
       aliasFinal?: string | null;
       automaticAliases?: string[];
+      branchMatcher?: {
+        type: 'endsWith' | 'equals' | 'startsWith';
+        pattern: string;
+      };
+      buildingAt?: number;
       builds?: {
         use: string;
         src?: string;
         dest?: string;
       }[];
+      checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+      checksState?: 'completed' | 'registered' | 'running';
       connectBuildsEnabled?: boolean;
       connectConfigurationId?: string;
       createdAt: number;
@@ -10528,18 +12563,36 @@ export type GetProjectResponse = {
         uid: string;
         username: string;
       } | null;
+      deletedAt?: number;
       deploymentHostname: string;
-      name: string;
       forced?: boolean;
-      id: string;
+      name: string;
       meta?: {
         [key: string]: string;
       };
       monorepoManager?: string | null;
-      plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
+      oidcTokenClaims?: {
+        iss: string;
+        sub: string;
+        scope: string;
+        aud: string;
+        owner: string;
+        owner_id: string;
+        project: string;
+        project_id: string;
+        environment: string;
+      };
+      plan: 'enterprise' | 'hobby' | 'pro';
+      /**
+       * Whether or not preview comments are enabled for the deployment
+       *
+       * @example false
+       */
+      previewCommentsEnabled?: boolean;
       private: boolean;
-      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-      readySubstate?: 'STAGED' | 'PROMOTED';
+      readyAt?: number;
+      readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+      readySubstate?: 'PROMOTED' | 'STAGED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
@@ -10547,16 +12600,6 @@ export type GetProjectResponse = {
       url: string;
       userId: string;
       withCache?: boolean;
-      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-      checksState?: 'registered' | 'running' | 'completed';
-      readyAt?: number;
-      buildingAt?: number;
-      /**
-       * Whether or not preview comments are enabled for the deployment
-       *
-       * @example false
-       */
-      previewCommentsEnabled?: boolean;
     } | null;
   };
   transferCompletedAt?: number;
@@ -10566,6 +12609,7 @@ export type GetProjectResponse = {
   updatedAt?: number;
   live?: boolean;
   enablePreviewFeedback?: boolean | null;
+  enableProductionFeedback?: boolean | null;
   permissions?: {
     accessGroup?: Schemas.ACLAction[];
     aliasGlobal?: Schemas.ACLAction[];
@@ -10584,6 +12628,7 @@ export type GetProjectResponse = {
     budget?: Schemas.ACLAction[];
     cacheArtifact?: Schemas.ACLAction[];
     cacheArtifactUsageEvent?: Schemas.ACLAction[];
+    codeChecks?: Schemas.ACLAction[];
     concurrentBuilds?: Schemas.ACLAction[];
     connect?: Schemas.ACLAction[];
     connectConfiguration?: Schemas.ACLAction[];
@@ -10603,13 +12648,23 @@ export type GetProjectResponse = {
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
     integration?: Schemas.ACLAction[];
+    integrationAccount?: Schemas.ACLAction[];
     integrationConfiguration?: Schemas.ACLAction[];
     integrationConfigurationTransfer?: Schemas.ACLAction[];
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
+    integrationConfigurationRole?: Schemas.ACLAction[];
+    integrationResource?: Schemas.ACLAction[];
+    integrationEvent?: Schemas.ACLAction[];
+    integrationResourceSecrets?: Schemas.ACLAction[];
+    integrationDeploymentAction?: Schemas.ACLAction[];
+    marketplaceInstallationMember?: Schemas.ACLAction[];
+    marketplaceBillingData?: Schemas.ACLAction[];
+    marketplaceInvoice?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
+    monitoringSettings?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
     monitoringChart?: Schemas.ACLAction[];
     monitoringAlert?: Schemas.ACLAction[];
@@ -10625,13 +12680,15 @@ export type GetProjectResponse = {
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationCustomerBudget?: Schemas.ACLAction[];
+    notificationStatementOfReasons?: Schemas.ACLAction[];
+    oauth2Connection?: Schemas.ACLAction[];
+    observabilityConfiguration?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
     postgres?: Schemas.ACLAction[];
     previewDeploymentSuffix?: Schemas.ACLAction[];
     proTrialOnboarding?: Schemas.ACLAction[];
-    seawallConfig?: Schemas.ACLAction[];
     sharedEnvVars?: Schemas.ACLAction[];
     sharedEnvVarsProduction?: Schemas.ACLAction[];
     space?: Schemas.ACLAction[];
@@ -10639,21 +12696,27 @@ export type GetProjectResponse = {
     passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
+    repository?: Schemas.ACLAction[];
     remoteCaching?: Schemas.ACLAction[];
     samlConfig?: Schemas.ACLAction[];
     secret?: Schemas.ACLAction[];
     redisStoreTokenSet?: Schemas.ACLAction[];
     blobStoreTokenSet?: Schemas.ACLAction[];
     postgresStoreTokenSet?: Schemas.ACLAction[];
+    integrationStoreTokenSet?: Schemas.ACLAction[];
+    integrationResourceReplCommand?: Schemas.ACLAction[];
+    storeTransfer?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
     teamFellowMembership?: Schemas.ACLAction[];
+    teamGitExclusivity?: Schemas.ACLAction[];
     teamInvite?: Schemas.ACLAction[];
     teamInviteCode?: Schemas.ACLAction[];
     teamJoin?: Schemas.ACLAction[];
+    teamMicrofrontends?: Schemas.ACLAction[];
     teamOwnMembership?: Schemas.ACLAction[];
     teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
     token?: Schemas.ACLAction[];
@@ -10661,6 +12724,7 @@ export type GetProjectResponse = {
     usageCycle?: Schemas.ACLAction[];
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
+    vpcPeeringConnection?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
     webAuthn?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
@@ -10671,6 +12735,7 @@ export type GetProjectResponse = {
     ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
     projectTransferIn?: Schemas.ACLAction[];
+    oauth2Application?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
     productionAliasProtectionBypass?: Schemas.ACLAction[];
@@ -10681,15 +12746,21 @@ export type GetProjectResponse = {
     deploymentCheckPreview?: Schemas.ACLAction[];
     deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
     deploymentProductionGit?: Schemas.ACLAction[];
+    deploymentV0?: Schemas.ACLAction[];
     deploymentPreview?: Schemas.ACLAction[];
     deploymentPrivate?: Schemas.ACLAction[];
     deploymentPromote?: Schemas.ACLAction[];
     deploymentRollback?: Schemas.ACLAction[];
+    environments?: Schemas.ACLAction[];
     logs?: Schemas.ACLAction[];
     logsPreset?: Schemas.ACLAction[];
     passwordProtection?: Schemas.ACLAction[];
+    optionsAllowlist?: Schemas.ACLAction[];
     job?: Schemas.ACLAction[];
+    observabilityData?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
+    projectFromV0?: Schemas.ACLAction[];
+    projectAccessGroup?: Schemas.ACLAction[];
     projectAnalyticsSampling?: Schemas.ACLAction[];
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
@@ -10698,6 +12769,7 @@ export type GetProjectResponse = {
     projectEnvVars?: Schemas.ACLAction[];
     projectEnvVarsProduction?: Schemas.ACLAction[];
     projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+    projectFlags?: Schemas.ACLAction[];
     projectId?: Schemas.ACLAction[];
     projectIntegrationConfiguration?: Schemas.ACLAction[];
     projectLink?: Schemas.ACLAction[];
@@ -10712,16 +12784,21 @@ export type GetProjectResponse = {
     projectAnalyticsUsage?: Schemas.ACLAction[];
     projectSupportCase?: Schemas.ACLAction[];
     projectSupportCaseComment?: Schemas.ACLAction[];
+    projectDeploymentExpiration?: Schemas.ACLAction[];
+    projectTier?: Schemas.ACLAction[];
+    seawallConfig?: Schemas.ACLAction[];
+    skewProtection?: Schemas.ACLAction[];
     analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
     sharedEnvVarConnection?: Schemas.ACLAction[];
+    sonar?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+    jobStatus: 'failed' | 'in-progress' | 'pending' | 'skipped' | 'succeeded';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -10736,7 +12813,7 @@ export type GetProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         addresses: {
           value: string;
           note?: string;
@@ -10744,7 +12821,7 @@ export type GetProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
       }
     | null;
   gitComments?: {
@@ -10758,6 +12835,127 @@ export type GetProjectResponse = {
     onCommit: boolean;
   };
   paused?: boolean;
+  concurrencyBucketName?: string;
+  webAnalytics?: {
+    id: string;
+    disabledAt?: number;
+    canceledAt?: number;
+    enabledAt?: number;
+    hasData?: boolean;
+  };
+  security?: {
+    attackModeEnabled?: boolean;
+    attackModeUpdatedAt?: number;
+    firewallEnabled?: boolean;
+    firewallUpdatedAt?: number;
+    attackModeActiveUntil?: number | null;
+    firewallConfigVersion?: number;
+    firewallRoutes?: {
+      src?:
+        | string
+        | {
+            re?: string;
+            eq?: string;
+            neq?: string;
+            inc?: string[];
+            ninc?: string[];
+            pre?: string;
+            suf?: string;
+            gt?: number;
+            gte?: number;
+            lt?: number;
+            lte?: number;
+          };
+      has?: {
+        type:
+          | 'cookie'
+          | 'environment'
+          | 'header'
+          | 'host'
+          | 'initial_request_path'
+          | 'ip_address'
+          | 'method'
+          | 'path'
+          | 'protocol'
+          | 'query'
+          | 'region'
+          | 'scheme';
+        key?: string;
+        value?:
+          | string
+          | {
+              re?: string;
+              eq?: string;
+              neq?: string;
+              inc?: string[];
+              ninc?: string[];
+              pre?: string;
+              suf?: string;
+              gt?: number;
+              gte?: number;
+              lt?: number;
+              lte?: number;
+            };
+      }[];
+      missing?: {
+        type:
+          | 'cookie'
+          | 'environment'
+          | 'header'
+          | 'host'
+          | 'initial_request_path'
+          | 'ip_address'
+          | 'method'
+          | 'path'
+          | 'protocol'
+          | 'query'
+          | 'region'
+          | 'scheme';
+        key?: string;
+        value?:
+          | string
+          | {
+              re?: string;
+              eq?: string;
+              neq?: string;
+              inc?: string[];
+              ninc?: string[];
+              pre?: string;
+              suf?: string;
+              gt?: number;
+              gte?: number;
+              lt?: number;
+              lte?: number;
+            };
+      }[];
+      dest?: string;
+      status?: number;
+      handle?: 'finalize' | 'init';
+      mitigate?: {
+        action: 'bypass' | 'challenge' | 'deny' | 'log' | 'rate_limit' | 'redirect';
+        rule_id: string;
+        ttl?: number;
+        erl?: {
+          algo: 'fixed_window' | 'token_bucket';
+          window: number;
+          limit: number;
+          keys: string[];
+        };
+      };
+    }[];
+    firewallSeawallEnabled?: boolean;
+    ja3Enabled?: boolean;
+    ja4Enabled?: boolean;
+    firewallBypassIps?: string[];
+  };
+  oidcTokenConfig?: {
+    enabled: boolean;
+    /**
+     * - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
+     */
+    issuerMode?: 'global' | 'team';
+  };
+  tier?: 'advanced' | 'critical' | 'standard';
 };
 
 export type GetProjectVariables = {
@@ -10787,9 +12985,13 @@ export type UpdateProjectPathParams = {
 
 export type UpdateProjectQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type UpdateProjectError = Fetcher.ErrorWrapper<undefined>;
@@ -10798,7 +13000,7 @@ export type UpdateProjectResponse = {
   accountId: string;
   analytics?: {
     id: string;
-    canceledAt: number | null;
+    canceledAt?: number | null;
     disabledAt: number;
     enabledAt: number;
     paidAt?: number;
@@ -10862,6 +13064,13 @@ export type UpdateProjectResponse = {
     storageSizeBytes?: number | null;
     unlimited?: boolean;
   };
+  deploymentExpiration?: {
+    expirationDays?: number;
+    expirationDaysProduction?: number;
+    expirationDaysCanceled?: number;
+    expirationDaysErrored?: number;
+    deploymentsToKeep?: number;
+  } | null;
   devCommand?: string | null;
   directoryListing: boolean;
   installCommand?: string | null;
@@ -10869,7 +13078,11 @@ export type UpdateProjectResponse = {
     target?:
       | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
       | ('production' | 'preview' | 'development' | 'preview' | 'development');
-    type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+    type: 'encrypted' | 'plain' | 'secret' | 'sensitive' | 'system';
+    /**
+     * This is used to identiy variables that have been migrated from type secret to sensitive.
+     */
+    sunsetSecretId?: string;
     id?: string;
     key: string;
     value: string;
@@ -10930,61 +13143,97 @@ export type UpdateProjectResponse = {
           type: 'postgres-database';
           storeId: string;
         }
+      | {
+          type: 'postgres-url-no-ssl';
+          storeId: string;
+        }
+      | {
+          type: 'integration-store-secret';
+          storeId: string;
+          integrationId: string;
+          integrationProductId: string;
+          integrationConfigurationId: string;
+        }
+      | {
+          type: 'flags-connection-string';
+          projectId: string;
+        }
       | null;
     /**
-     * Whether `value` is decrypted.
+     * Similar to `contentHints`, but should not be exposed to the user.
+     */
+    internalContentHint?: {
+      type: 'flags-secret';
+      /**
+       * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+       */
+      encryptedValue: string;
+    } | null;
+    /**
+     * Whether `value` and `vsmValue` are decrypted.
      */
     decrypted?: boolean;
     comment?: string;
+    customEnvironmentIds?: string[];
+    vsmValue?: string;
   }[];
+  customEnvironments?: Record<string, any>[];
   framework?:
-    | 'blitzjs'
-    | 'nextjs'
-    | 'gatsby'
-    | 'remix'
-    | 'astro'
-    | 'hexo'
-    | 'eleventy'
-    | 'docusaurus-2'
-    | 'docusaurus'
-    | 'preact'
-    | 'solidstart'
-    | 'dojo'
-    | 'ember'
-    | 'vue'
-    | 'scully'
-    | 'ionic-angular'
     | 'angular'
+    | 'astro'
+    | 'blitzjs'
+    | 'brunch'
+    | 'create-react-app'
+    | 'docusaurus'
+    | 'docusaurus-2'
+    | 'dojo'
+    | 'eleventy'
+    | 'ember'
+    | 'fasthtml'
+    | 'gatsby'
+    | 'gridsome'
+    | 'hexo'
+    | 'hugo'
+    | 'hydrogen'
+    | 'ionic-angular'
+    | 'ionic-react'
+    | 'jekyll'
+    | 'middleman'
+    | 'nextjs'
+    | 'nuxtjs'
+    | 'parcel'
     | 'polymer'
+    | 'preact'
+    | 'redwoodjs'
+    | 'remix'
+    | 'saber'
+    | 'sanity'
+    | 'sanity-v3'
+    | 'sapper'
+    | 'scully'
+    | 'solidstart'
+    | 'solidstart-1'
+    | 'stencil'
+    | 'storybook'
     | 'svelte'
     | 'sveltekit'
     | 'sveltekit-1'
-    | 'ionic-react'
-    | 'create-react-app'
-    | 'gridsome'
     | 'umijs'
-    | 'sapper'
-    | 'saber'
-    | 'stencil'
-    | 'nuxtjs'
-    | 'redwoodjs'
-    | 'hugo'
-    | 'jekyll'
-    | 'brunch'
-    | 'middleman'
-    | 'zola'
-    | 'hydrogen'
     | 'vite'
     | 'vitepress'
+    | 'vue'
     | 'vuepress'
-    | 'parcel'
-    | 'sanity'
-    | 'storybook'
+    | 'zola'
     | null;
   gitForkProtection?: boolean;
   gitLFS?: boolean;
   id: string;
+  ipBuckets?: {
+    bucket: string;
+    supportUntil?: number;
+  }[];
   latestDeployments?: {
+    id: string;
     alias?: string[];
     aliasAssigned?: number | boolean | null;
     aliasError?: {
@@ -10993,11 +13242,18 @@ export type UpdateProjectResponse = {
     } | null;
     aliasFinal?: string | null;
     automaticAliases?: string[];
+    branchMatcher?: {
+      type: 'endsWith' | 'equals' | 'startsWith';
+      pattern: string;
+    };
+    buildingAt?: number;
     builds?: {
       use: string;
       src?: string;
       dest?: string;
     }[];
+    checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+    checksState?: 'completed' | 'registered' | 'running';
     connectBuildsEnabled?: boolean;
     connectConfigurationId?: string;
     createdAt: number;
@@ -11009,18 +13265,36 @@ export type UpdateProjectResponse = {
       uid: string;
       username: string;
     } | null;
+    deletedAt?: number;
     deploymentHostname: string;
-    name: string;
     forced?: boolean;
-    id: string;
+    name: string;
     meta?: {
       [key: string]: string;
     };
     monorepoManager?: string | null;
-    plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
+    oidcTokenClaims?: {
+      iss: string;
+      sub: string;
+      scope: string;
+      aud: string;
+      owner: string;
+      owner_id: string;
+      project: string;
+      project_id: string;
+      environment: string;
+    };
+    plan: 'enterprise' | 'hobby' | 'pro';
+    /**
+     * Whether or not preview comments are enabled for the deployment
+     *
+     * @example false
+     */
+    previewCommentsEnabled?: boolean;
     private: boolean;
-    readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-    readySubstate?: 'STAGED' | 'PROMOTED';
+    readyAt?: number;
+    readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+    readySubstate?: 'PROMOTED' | 'STAGED';
     requestedAt?: number;
     target?: string | null;
     teamId?: string | null;
@@ -11028,20 +13302,14 @@ export type UpdateProjectResponse = {
     url: string;
     userId: string;
     withCache?: boolean;
-    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-    checksState?: 'registered' | 'running' | 'completed';
-    readyAt?: number;
-    buildingAt?: number;
-    /**
-     * Whether or not preview comments are enabled for the deployment
-     *
-     * @example false
-     */
-    previewCommentsEnabled?: boolean;
   }[];
   link?:
     | {
         org?: string;
+        /**
+         * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes.
+         */
+        repoOwnerId?: number;
         repo?: string;
         repoId?: number;
         type?: 'github';
@@ -11063,6 +13331,10 @@ export type UpdateProjectResponse = {
         projectName?: string;
         projectNameWithNamespace?: string;
         projectNamespace?: string;
+        /**
+         * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes. This is the id of the top level group that a namespace belongs to. Gitlab supports group nesting (up to 20 levels).
+         */
+        projectOwnerId?: number;
         projectUrl?: string;
         type?: 'gitlab';
         createdAt?: number;
@@ -11098,22 +13370,60 @@ export type UpdateProjectResponse = {
         sourceless?: boolean;
         productionBranch?: string;
       };
+  microfrontends?: {
+    /**
+     * Timestamp when the microfrontends settings were last updated.
+     */
+    updatedAt: number;
+    /**
+     * The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+     */
+    groupIds: string[];
+    /**
+     * Whether microfrontends are enabled for this project.
+     */
+    enabled: boolean;
+    /**
+     * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+     */
+    isDefaultApp?: boolean;
+    /**
+     * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+     */
+    defaultRoute?: string;
+  };
   name: string;
-  nodeVersion: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
+  nodeVersion: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
+  optionsAllowlist?: {
+    paths: {
+      value: string;
+    }[];
+  } | null;
   outputDirectory?: string | null;
   passiveConnectConfigurationId?: string | null;
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
+  resourceConfig?: {
+    functionDefaultTimeout?: number;
+    functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
+    allowServerlessConcurrency?: boolean;
+    elasticConcurrencyEnabled?: boolean;
+  };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
+  serverlessFunctionZeroConfigFailover?: boolean;
+  skewProtectionBoundaryAt?: number;
+  skewProtectionMaxAge?: number;
   skipGitConnectDuringLink?: boolean;
   sourceFilesOutsideRootDirectory?: boolean;
+  enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
     deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
+      id: string;
       alias?: string[];
       aliasAssigned?: number | boolean | null;
       aliasError?: {
@@ -11122,11 +13432,18 @@ export type UpdateProjectResponse = {
       } | null;
       aliasFinal?: string | null;
       automaticAliases?: string[];
+      branchMatcher?: {
+        type: 'endsWith' | 'equals' | 'startsWith';
+        pattern: string;
+      };
+      buildingAt?: number;
       builds?: {
         use: string;
         src?: string;
         dest?: string;
       }[];
+      checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
+      checksState?: 'completed' | 'registered' | 'running';
       connectBuildsEnabled?: boolean;
       connectConfigurationId?: string;
       createdAt: number;
@@ -11138,18 +13455,36 @@ export type UpdateProjectResponse = {
         uid: string;
         username: string;
       } | null;
+      deletedAt?: number;
       deploymentHostname: string;
-      name: string;
       forced?: boolean;
-      id: string;
+      name: string;
       meta?: {
         [key: string]: string;
       };
       monorepoManager?: string | null;
-      plan: 'pro' | 'enterprise' | 'hobby' | 'oss';
+      oidcTokenClaims?: {
+        iss: string;
+        sub: string;
+        scope: string;
+        aud: string;
+        owner: string;
+        owner_id: string;
+        project: string;
+        project_id: string;
+        environment: string;
+      };
+      plan: 'enterprise' | 'hobby' | 'pro';
+      /**
+       * Whether or not preview comments are enabled for the deployment
+       *
+       * @example false
+       */
+      previewCommentsEnabled?: boolean;
       private: boolean;
-      readyState: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
-      readySubstate?: 'STAGED' | 'PROMOTED';
+      readyAt?: number;
+      readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+      readySubstate?: 'PROMOTED' | 'STAGED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
@@ -11157,16 +13492,6 @@ export type UpdateProjectResponse = {
       url: string;
       userId: string;
       withCache?: boolean;
-      checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
-      checksState?: 'registered' | 'running' | 'completed';
-      readyAt?: number;
-      buildingAt?: number;
-      /**
-       * Whether or not preview comments are enabled for the deployment
-       *
-       * @example false
-       */
-      previewCommentsEnabled?: boolean;
     } | null;
   };
   transferCompletedAt?: number;
@@ -11176,6 +13501,7 @@ export type UpdateProjectResponse = {
   updatedAt?: number;
   live?: boolean;
   enablePreviewFeedback?: boolean | null;
+  enableProductionFeedback?: boolean | null;
   permissions?: {
     accessGroup?: Schemas.ACLAction[];
     aliasGlobal?: Schemas.ACLAction[];
@@ -11194,6 +13520,7 @@ export type UpdateProjectResponse = {
     budget?: Schemas.ACLAction[];
     cacheArtifact?: Schemas.ACLAction[];
     cacheArtifactUsageEvent?: Schemas.ACLAction[];
+    codeChecks?: Schemas.ACLAction[];
     concurrentBuilds?: Schemas.ACLAction[];
     connect?: Schemas.ACLAction[];
     connectConfiguration?: Schemas.ACLAction[];
@@ -11213,13 +13540,23 @@ export type UpdateProjectResponse = {
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
     integration?: Schemas.ACLAction[];
+    integrationAccount?: Schemas.ACLAction[];
     integrationConfiguration?: Schemas.ACLAction[];
     integrationConfigurationTransfer?: Schemas.ACLAction[];
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
+    integrationConfigurationRole?: Schemas.ACLAction[];
+    integrationResource?: Schemas.ACLAction[];
+    integrationEvent?: Schemas.ACLAction[];
+    integrationResourceSecrets?: Schemas.ACLAction[];
+    integrationDeploymentAction?: Schemas.ACLAction[];
+    marketplaceInstallationMember?: Schemas.ACLAction[];
+    marketplaceBillingData?: Schemas.ACLAction[];
+    marketplaceInvoice?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
+    monitoringSettings?: Schemas.ACLAction[];
     monitoringQuery?: Schemas.ACLAction[];
     monitoringChart?: Schemas.ACLAction[];
     monitoringAlert?: Schemas.ACLAction[];
@@ -11235,13 +13572,15 @@ export type UpdateProjectResponse = {
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationCustomerBudget?: Schemas.ACLAction[];
+    notificationStatementOfReasons?: Schemas.ACLAction[];
+    oauth2Connection?: Schemas.ACLAction[];
+    observabilityConfiguration?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
     postgres?: Schemas.ACLAction[];
     previewDeploymentSuffix?: Schemas.ACLAction[];
     proTrialOnboarding?: Schemas.ACLAction[];
-    seawallConfig?: Schemas.ACLAction[];
     sharedEnvVars?: Schemas.ACLAction[];
     sharedEnvVarsProduction?: Schemas.ACLAction[];
     space?: Schemas.ACLAction[];
@@ -11249,21 +13588,27 @@ export type UpdateProjectResponse = {
     passwordProtectionInvoiceItem?: Schemas.ACLAction[];
     rateLimit?: Schemas.ACLAction[];
     redis?: Schemas.ACLAction[];
+    repository?: Schemas.ACLAction[];
     remoteCaching?: Schemas.ACLAction[];
     samlConfig?: Schemas.ACLAction[];
     secret?: Schemas.ACLAction[];
     redisStoreTokenSet?: Schemas.ACLAction[];
     blobStoreTokenSet?: Schemas.ACLAction[];
     postgresStoreTokenSet?: Schemas.ACLAction[];
+    integrationStoreTokenSet?: Schemas.ACLAction[];
+    integrationResourceReplCommand?: Schemas.ACLAction[];
+    storeTransfer?: Schemas.ACLAction[];
     supportCase?: Schemas.ACLAction[];
     supportCaseComment?: Schemas.ACLAction[];
     dataCacheBillingSettings?: Schemas.ACLAction[];
     team?: Schemas.ACLAction[];
     teamAccessRequest?: Schemas.ACLAction[];
     teamFellowMembership?: Schemas.ACLAction[];
+    teamGitExclusivity?: Schemas.ACLAction[];
     teamInvite?: Schemas.ACLAction[];
     teamInviteCode?: Schemas.ACLAction[];
     teamJoin?: Schemas.ACLAction[];
+    teamMicrofrontends?: Schemas.ACLAction[];
     teamOwnMembership?: Schemas.ACLAction[];
     teamOwnMembershipDisconnectSAML?: Schemas.ACLAction[];
     token?: Schemas.ACLAction[];
@@ -11271,6 +13616,7 @@ export type UpdateProjectResponse = {
     usageCycle?: Schemas.ACLAction[];
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
+    vpcPeeringConnection?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
     webAuthn?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
@@ -11281,6 +13627,7 @@ export type UpdateProjectResponse = {
     ['webhook-event']?: Schemas.ACLAction[];
     endpointVerification?: Schemas.ACLAction[];
     projectTransferIn?: Schemas.ACLAction[];
+    oauth2Application?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
     productionAliasProtectionBypass?: Schemas.ACLAction[];
@@ -11291,15 +13638,21 @@ export type UpdateProjectResponse = {
     deploymentCheckPreview?: Schemas.ACLAction[];
     deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
     deploymentProductionGit?: Schemas.ACLAction[];
+    deploymentV0?: Schemas.ACLAction[];
     deploymentPreview?: Schemas.ACLAction[];
     deploymentPrivate?: Schemas.ACLAction[];
     deploymentPromote?: Schemas.ACLAction[];
     deploymentRollback?: Schemas.ACLAction[];
+    environments?: Schemas.ACLAction[];
     logs?: Schemas.ACLAction[];
     logsPreset?: Schemas.ACLAction[];
     passwordProtection?: Schemas.ACLAction[];
+    optionsAllowlist?: Schemas.ACLAction[];
     job?: Schemas.ACLAction[];
+    observabilityData?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
+    projectFromV0?: Schemas.ACLAction[];
+    projectAccessGroup?: Schemas.ACLAction[];
     projectAnalyticsSampling?: Schemas.ACLAction[];
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
@@ -11308,6 +13661,7 @@ export type UpdateProjectResponse = {
     projectEnvVars?: Schemas.ACLAction[];
     projectEnvVarsProduction?: Schemas.ACLAction[];
     projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+    projectFlags?: Schemas.ACLAction[];
     projectId?: Schemas.ACLAction[];
     projectIntegrationConfiguration?: Schemas.ACLAction[];
     projectLink?: Schemas.ACLAction[];
@@ -11322,16 +13676,21 @@ export type UpdateProjectResponse = {
     projectAnalyticsUsage?: Schemas.ACLAction[];
     projectSupportCase?: Schemas.ACLAction[];
     projectSupportCaseComment?: Schemas.ACLAction[];
+    projectDeploymentExpiration?: Schemas.ACLAction[];
+    projectTier?: Schemas.ACLAction[];
+    seawallConfig?: Schemas.ACLAction[];
+    skewProtection?: Schemas.ACLAction[];
     analytics?: Schemas.ACLAction[];
     trustedIps?: Schemas.ACLAction[];
     webAnalytics?: Schemas.ACLAction[];
     sharedEnvVarConnection?: Schemas.ACLAction[];
+    sonar?: Schemas.ACLAction[];
   };
   lastRollbackTarget?: Record<string, any> | null;
   lastAliasRequest?: {
     fromDeploymentId: string;
     toDeploymentId: string;
-    jobStatus: 'succeeded' | 'failed' | 'skipped' | 'pending' | 'in-progress';
+    jobStatus: 'failed' | 'in-progress' | 'pending' | 'skipped' | 'succeeded';
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
@@ -11346,15 +13705,15 @@ export type UpdateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         addresses: {
           value: string;
           note?: string;
         }[];
-        protectionMode: 'exclusive' | 'additional';
+        protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
       }
     | null;
   gitComments?: {
@@ -11368,9 +13727,307 @@ export type UpdateProjectResponse = {
     onCommit: boolean;
   };
   paused?: boolean;
+  concurrencyBucketName?: string;
+  webAnalytics?: {
+    id: string;
+    disabledAt?: number;
+    canceledAt?: number;
+    enabledAt?: number;
+    hasData?: boolean;
+  };
+  security?: {
+    attackModeEnabled?: boolean;
+    attackModeUpdatedAt?: number;
+    firewallEnabled?: boolean;
+    firewallUpdatedAt?: number;
+    attackModeActiveUntil?: number | null;
+    firewallConfigVersion?: number;
+    firewallRoutes?: {
+      src?:
+        | string
+        | {
+            re?: string;
+            eq?: string;
+            neq?: string;
+            inc?: string[];
+            ninc?: string[];
+            pre?: string;
+            suf?: string;
+            gt?: number;
+            gte?: number;
+            lt?: number;
+            lte?: number;
+          };
+      has?: {
+        type:
+          | 'cookie'
+          | 'environment'
+          | 'header'
+          | 'host'
+          | 'initial_request_path'
+          | 'ip_address'
+          | 'method'
+          | 'path'
+          | 'protocol'
+          | 'query'
+          | 'region'
+          | 'scheme';
+        key?: string;
+        value?:
+          | string
+          | {
+              re?: string;
+              eq?: string;
+              neq?: string;
+              inc?: string[];
+              ninc?: string[];
+              pre?: string;
+              suf?: string;
+              gt?: number;
+              gte?: number;
+              lt?: number;
+              lte?: number;
+            };
+      }[];
+      missing?: {
+        type:
+          | 'cookie'
+          | 'environment'
+          | 'header'
+          | 'host'
+          | 'initial_request_path'
+          | 'ip_address'
+          | 'method'
+          | 'path'
+          | 'protocol'
+          | 'query'
+          | 'region'
+          | 'scheme';
+        key?: string;
+        value?:
+          | string
+          | {
+              re?: string;
+              eq?: string;
+              neq?: string;
+              inc?: string[];
+              ninc?: string[];
+              pre?: string;
+              suf?: string;
+              gt?: number;
+              gte?: number;
+              lt?: number;
+              lte?: number;
+            };
+      }[];
+      dest?: string;
+      status?: number;
+      handle?: 'finalize' | 'init';
+      mitigate?: {
+        action: 'bypass' | 'challenge' | 'deny' | 'log' | 'rate_limit' | 'redirect';
+        rule_id: string;
+        ttl?: number;
+        erl?: {
+          algo: 'fixed_window' | 'token_bucket';
+          window: number;
+          limit: number;
+          keys: string[];
+        };
+      };
+    }[];
+    firewallSeawallEnabled?: boolean;
+    ja3Enabled?: boolean;
+    ja4Enabled?: boolean;
+    firewallBypassIps?: string[];
+  };
+  oidcTokenConfig?: {
+    enabled: boolean;
+    /**
+     * - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
+     */
+    issuerMode?: 'global' | 'team';
+  };
+  tier?: 'advanced' | 'critical' | 'standard';
 };
 
 export type UpdateProjectRequestBody = {
+  autoExposeSystemEnvs?: boolean;
+  autoAssignCustomDomains?: boolean;
+  autoAssignCustomDomainsUpdatedBy?: string;
+  /**
+   * The build command for this project. When `null` is used this value will be automatically detected
+   *
+   * @maxLength 256
+   */
+  buildCommand?: string | null;
+  /**
+   * @maxLength 256
+   */
+  commandForIgnoringBuildStep?: string | null;
+  /**
+   * Specifies whether customer support can see git source for a deployment
+   */
+  customerSupportCodeVisibility?: boolean;
+  /**
+   * The dev command for this project. When `null` is used this value will be automatically detected
+   *
+   * @maxLength 256
+   */
+  devCommand?: string | null;
+  directoryListing?: boolean;
+  /**
+   * The framework that is being used for this project. When `null` is used no framework is selected
+   */
+  framework?:
+    | 'angular'
+    | 'astro'
+    | 'blitzjs'
+    | 'brunch'
+    | 'create-react-app'
+    | 'docusaurus'
+    | 'docusaurus-2'
+    | 'dojo'
+    | 'eleventy'
+    | 'ember'
+    | 'fasthtml'
+    | 'gatsby'
+    | 'gridsome'
+    | 'hexo'
+    | 'hugo'
+    | 'hydrogen'
+    | 'ionic-angular'
+    | 'ionic-react'
+    | 'jekyll'
+    | 'middleman'
+    | 'nextjs'
+    | any
+    | 'nuxtjs'
+    | 'parcel'
+    | 'polymer'
+    | 'preact'
+    | 'redwoodjs'
+    | 'remix'
+    | 'saber'
+    | 'sanity'
+    | 'sanity-v3'
+    | 'sapper'
+    | 'scully'
+    | 'solidstart'
+    | 'solidstart-1'
+    | 'stencil'
+    | 'storybook'
+    | 'svelte'
+    | 'sveltekit'
+    | 'sveltekit-1'
+    | 'umijs'
+    | 'vite'
+    | 'vitepress'
+    | 'vue'
+    | 'vuepress'
+    | 'zola'
+    | null;
+  /**
+   * Specifies whether PRs from Git forks should require a team member's authorization before it can be deployed
+   */
+  gitForkProtection?: boolean;
+  /**
+   * Specifies whether Git LFS is enabled for this project.
+   */
+  gitLFS?: boolean;
+  /**
+   * The install command for this project. When `null` is used this value will be automatically detected
+   *
+   * @maxLength 256
+   */
+  installCommand?: string | null;
+  /**
+   * The desired name for the project
+   *
+   * @example a-project-name
+   * @maxLength 100
+   * @pattern ^(?!.*---)[a-z0-9-_.]+$
+   */
+  name?: string;
+  nodeVersion?: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x';
+  /**
+   * The output directory of the project. When `null` is used this value will be automatically detected
+   *
+   * @maxLength 256
+   */
+  outputDirectory?: string | null;
+  /**
+   * Specifies whether preview deployments are disabled for this project.
+   */
+  previewDeploymentsDisabled?: boolean | null;
+  /**
+   * Specifies whether the source code and logs of the deployments for this project should be public or not
+   */
+  publicSource?: boolean | null;
+  /**
+   * The name of a directory or relative path to the source code of your project. When `null` is used it will default to the project root
+   *
+   * @maxLength 256
+   */
+  rootDirectory?: string | null;
+  /**
+   * The region to deploy Serverless Functions in this project
+   *
+   * @maxLength 4
+   */
+  serverlessFunctionRegion?: string | null;
+  /**
+   * Specifies whether Zero Config Failover is enabled for this project.
+   */
+  serverlessFunctionZeroConfigFailover?: boolean;
+  /**
+   * Deployments created before this absolute datetime have Skew Protection disabled. Value is in milliseconds since epoch to match \"createdAt\" fields.
+   *
+   * @minimum 0
+   */
+  skewProtectionBoundaryAt?: number;
+  /**
+   * Deployments created before this rolling window have Skew Protection disabled. Value is in seconds to match \"revalidate\" fields.
+   *
+   * @minimum 0
+   */
+  skewProtectionMaxAge?: number;
+  /**
+   * Opts-out of the message prompting a CLI user to connect a Git repository in `vercel link`.
+   *
+   * @deprecated true
+   */
+  skipGitConnectDuringLink?: boolean;
+  /**
+   * Indicates if there are source files outside of the root directory
+   */
+  sourceFilesOutsideRootDirectory?: boolean;
+  /**
+   * Opt-in to preview toolbar on the project level
+   */
+  enablePreviewFeedback?: boolean | null;
+  /**
+   * Opt-in to production toolbar on the project level
+   */
+  enableProductionFeedback?: boolean | null;
+  /**
+   * Opt-in to skip deployments when there are no changes to the root directory and its dependencies
+   */
+  enableAffectedProjectsDeployments?: boolean;
+  /**
+   * OpenID Connect JSON Web Token generation configuration.
+   */
+  oidcTokenConfig?: {
+    /**
+     * Whether or not to generate OpenID Connect JSON Web Tokens.
+     */
+    enabled: boolean;
+    /**
+     * team: `https://oidc.vercel.com/[team_slug]` global: `https://oidc.vercel.com`
+     *
+     * @default global
+     */
+    issuerMode?: 'global' | 'team';
+  };
   /**
    * Allows to protect project deployments with a password
    */
@@ -11404,7 +14061,7 @@ export type UpdateProjectRequestBody = {
     /**
      * Specify if the Trusted IPs will apply to every Deployment Target or just Preview
      */
-    deploymentType: 'all' | 'preview' | 'production' | 'prod_deployment_urls_and_all_previews';
+    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
     /**
      * @minItems 1
      */
@@ -11415,145 +14072,33 @@ export type UpdateProjectRequestBody = {
       value: string;
       /**
        * An optional note explaining what the IP address or subnet is used for
+       *
+       * @maxLength 20
        */
       note?: string;
     }[];
     /**
      * exclusive: ip match is enough to bypass deployment protection (regardless of other settings). additional: ip must match + any other protection should be also provided (password, vercel auth, shareable link, automation bypass header, automation bypass query param)
      */
-    protectionMode: 'exclusive' | 'additional';
+    protectionMode: 'additional' | 'exclusive';
   } | null;
-  autoExposeSystemEnvs?: boolean;
-  autoAssignCustomDomains?: boolean;
-  autoAssignCustomDomainsUpdatedBy?: string;
   /**
-   * The build command for this project. When `null` is used this value will be automatically detected
-   *
-   * @maxLength 256
+   * Specify a list of paths that should not be protected by Deployment Protection to enable Cors preflight requests
    */
-  buildCommand?: string | null;
-  /**
-   * @maxLength 256
-   */
-  commandForIgnoringBuildStep?: string | null;
-  /**
-   * Specifies whether customer support can see git source for a deployment
-   */
-  customerSupportCodeVisibility?: boolean;
-  /**
-   * The dev command for this project. When `null` is used this value will be automatically detected
-   *
-   * @maxLength 256
-   */
-  devCommand?: string | null;
-  directoryListing?: boolean;
-  /**
-   * The framework that is being used for this project. When `null` is used no framework is selected
-   */
-  framework?:
-    | any
-    | 'blitzjs'
-    | 'nextjs'
-    | 'gatsby'
-    | 'remix'
-    | 'astro'
-    | 'hexo'
-    | 'eleventy'
-    | 'docusaurus-2'
-    | 'docusaurus'
-    | 'preact'
-    | 'solidstart'
-    | 'dojo'
-    | 'ember'
-    | 'vue'
-    | 'scully'
-    | 'ionic-angular'
-    | 'angular'
-    | 'polymer'
-    | 'svelte'
-    | 'sveltekit'
-    | 'sveltekit-1'
-    | 'ionic-react'
-    | 'create-react-app'
-    | 'gridsome'
-    | 'umijs'
-    | 'sapper'
-    | 'saber'
-    | 'stencil'
-    | 'nuxtjs'
-    | 'redwoodjs'
-    | 'hugo'
-    | 'jekyll'
-    | 'brunch'
-    | 'middleman'
-    | 'zola'
-    | 'hydrogen'
-    | 'vite'
-    | 'vitepress'
-    | 'vuepress'
-    | 'parcel'
-    | 'sanity'
-    | 'storybook'
-    | null;
-  /**
-   * Specifies whether PRs from Git forks should require a team member's authorization before it can be deployed
-   */
-  gitForkProtection?: boolean;
-  /**
-   * Specifies whether Git LFS is enabled for this project.
-   */
-  gitLFS?: boolean;
-  /**
-   * The install command for this project. When `null` is used this value will be automatically detected
-   *
-   * @maxLength 256
-   */
-  installCommand?: string | null;
-  /**
-   * The desired name for the project
-   *
-   * @example a-project-name
-   * @maxLength 100
-   * @pattern ^[a-z0-9]([a-z0-9]|-[a-z0-9])*$
-   */
-  name?: string;
-  nodeVersion?: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x';
-  /**
-   * The output directory of the project. When `null` is used this value will be automatically detected
-   *
-   * @maxLength 256
-   */
-  outputDirectory?: string | null;
-  /**
-   * Specifies whether the source code and logs of the deployments for this project should be public or not
-   */
-  publicSource?: boolean | null;
-  /**
-   * The name of a directory or relative path to the source code of your project. When `null` is used it will default to the project root
-   *
-   * @maxLength 256
-   */
-  rootDirectory?: string | null;
-  /**
-   * The region to deploy Serverless Functions in this project
-   *
-   * @maxLength 4
-   */
-  serverlessFunctionRegion?: string | null;
-  /**
-   * Opts-out of the message prompting a CLI user to connect a Git repository in `vercel link`.
-   *
-   * @deprecated true
-   */
-  skipGitConnectDuringLink?: boolean;
-  /**
-   * Indicates if there are source files outside of the root directory
-   */
-  sourceFilesOutsideRootDirectory?: boolean;
-  /**
-   * Opt-in to Preview comments on the project level
-   */
-  enablePreviewFeedback?: boolean | null;
+  optionsAllowlist?: {
+    /**
+     * @minItems 1
+     * @maxItems 5
+     */
+    paths: {
+      /**
+       * The regex path that should not be protected by Deployment Protection
+       *
+       * @pattern ^/.*
+       */
+      value: string;
+    }[];
+  } | null;
 };
 
 export type UpdateProjectVariables = {
@@ -11586,9 +14131,13 @@ export type DeleteProjectPathParams = {
 
 export type DeleteProjectQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type DeleteProjectError = Fetcher.ErrorWrapper<undefined>;
@@ -11623,6 +14172,10 @@ export type GetProjectDomainsQueryParams = {
    * @default false
    */
   production?: 'true' | 'false';
+  /**
+   * Filters on the target of the domain. Can be either \"production\", \"preview\"
+   */
+  target?: 'production' | 'preview';
   /**
    * Filters domains based on specific branch.
    */
@@ -11668,9 +14221,13 @@ export type GetProjectDomainsQueryParams = {
    */
   order?: 'ASC' | 'DESC';
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetProjectDomainsError = Fetcher.ErrorWrapper<undefined>;
@@ -11681,8 +14238,9 @@ export type GetProjectDomainsResponse = {
     apexName: string;
     projectId: string;
     redirect?: string | null;
-    redirectStatusCode?: 307 | 301 | 302 | 308 | null;
+    redirectStatusCode?: 301 | 302 | 307 | 308 | null;
     gitBranch?: string | null;
+    customEnvironmentId?: string | null;
     updatedAt?: number;
     createdAt?: number;
     /**
@@ -11735,9 +14293,13 @@ export type GetProjectDomainPathParams = {
 
 export type GetProjectDomainQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetProjectDomainError = Fetcher.ErrorWrapper<undefined>;
@@ -11747,8 +14309,9 @@ export type GetProjectDomainResponse = {
   apexName: string;
   projectId: string;
   redirect?: string | null;
-  redirectStatusCode?: 307 | 301 | 302 | 308 | null;
+  redirectStatusCode?: 301 | 302 | 307 | 308 | null;
   gitBranch?: string | null;
+  customEnvironmentId?: string | null;
   updatedAt?: number;
   createdAt?: number;
   /**
@@ -11799,9 +14362,13 @@ export type UpdateProjectDomainPathParams = {
 
 export type UpdateProjectDomainQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type UpdateProjectDomainError = Fetcher.ErrorWrapper<undefined>;
@@ -11811,8 +14378,9 @@ export type UpdateProjectDomainResponse = {
   apexName: string;
   projectId: string;
   redirect?: string | null;
-  redirectStatusCode?: 307 | 301 | 302 | 308 | null;
+  redirectStatusCode?: 301 | 302 | 307 | 308 | null;
   gitBranch?: string | null;
+  customEnvironmentId?: string | null;
   updatedAt?: number;
   createdAt?: number;
   /**
@@ -11849,7 +14417,7 @@ export type UpdateProjectDomainRequestBody = {
    *
    * @example 307
    */
-  redirectStatusCode?: any | 301 | 302 | 307 | 308 | null;
+  redirectStatusCode?: 301 | 302 | 307 | 308 | any | null;
 };
 
 export type UpdateProjectDomainVariables = {
@@ -11886,9 +14454,13 @@ export type RemoveProjectDomainPathParams = {
 
 export type RemoveProjectDomainQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type RemoveProjectDomainError = Fetcher.ErrorWrapper<undefined>;
@@ -11920,9 +14492,13 @@ export type AddProjectDomainPathParams = {
 
 export type AddProjectDomainQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type AddProjectDomainError = Fetcher.ErrorWrapper<undefined>;
@@ -11932,8 +14508,9 @@ export type AddProjectDomainResponse = {
   apexName: string;
   projectId: string;
   redirect?: string | null;
-  redirectStatusCode?: 307 | 301 | 302 | 308 | null;
+  redirectStatusCode?: 301 | 302 | 307 | 308 | null;
   gitBranch?: string | null;
+  customEnvironmentId?: string | null;
   updatedAt?: number;
   createdAt?: number;
   /**
@@ -11976,7 +14553,7 @@ export type AddProjectDomainRequestBody = {
    *
    * @example 307
    */
-  redirectStatusCode?: any | 301 | 302 | 307 | 308 | null;
+  redirectStatusCode?: 301 | 302 | 307 | 308 | any | null;
 };
 
 export type AddProjectDomainVariables = {
@@ -12015,9 +14592,13 @@ export type VerifyProjectDomainPathParams = {
 
 export type VerifyProjectDomainQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type VerifyProjectDomainError = Fetcher.ErrorWrapper<undefined>;
@@ -12027,8 +14608,9 @@ export type VerifyProjectDomainResponse = {
   apexName: string;
   projectId: string;
   redirect?: string | null;
-  redirectStatusCode?: 307 | 301 | 302 | 308 | null;
+  redirectStatusCode?: 301 | 302 | 307 | 308 | null;
   gitBranch?: string | null;
+  customEnvironmentId?: string | null;
   updatedAt?: number;
   createdAt?: number;
   /**
@@ -12075,7 +14657,7 @@ export type FilterProjectEnvsPathParams = {
 
 export type FilterProjectEnvsQueryParams = {
   /**
-   * If defined, the git branch of the environment variable to filter the results
+   * If defined, the git branch of the environment variable to filter the results (must have target=preview)
    *
    * @maxLength 250
    * @example feature-1
@@ -12095,9 +14677,13 @@ export type FilterProjectEnvsQueryParams = {
    */
   source?: string;
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type FilterProjectEnvsError = Fetcher.ErrorWrapper<undefined>;
@@ -12116,7 +14702,11 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        /**
+         * This is used to identiy variables that have been migrated from type secret to sensitive.
+         */
+        sunsetSecretId?: string;
         id?: string;
         key?: string;
         value?: string;
@@ -12177,12 +14767,39 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
               type: 'postgres-database';
               storeId: string;
             }
+          | {
+              type: 'postgres-url-no-ssl';
+              storeId: string;
+            }
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
+            }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
+            }
           | null;
         /**
-         * Whether `value` is decrypted.
+         * Similar to `contentHints`, but should not be exposed to the user.
+         */
+        internalContentHint?: {
+          type: 'flags-secret';
+          /**
+           * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+           */
+          encryptedValue: string;
+        } | null;
+        /**
+         * Whether `value` and `vsmValue` are decrypted.
          */
         decrypted?: boolean;
         comment?: string;
+        customEnvironmentIds?: string[];
+        vsmValue?: string;
         system?: boolean;
       }
     | {
@@ -12190,7 +14807,11 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+          /**
+           * This is used to identiy variables that have been migrated from type secret to sensitive.
+           */
+          sunsetSecretId?: string;
           id?: string;
           key?: string;
           value?: string;
@@ -12251,12 +14872,39 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
                 type: 'postgres-database';
                 storeId: string;
               }
+            | {
+                type: 'postgres-url-no-ssl';
+                storeId: string;
+              }
+            | {
+                type: 'integration-store-secret';
+                storeId: string;
+                integrationId: string;
+                integrationProductId: string;
+                integrationConfigurationId: string;
+              }
+            | {
+                type: 'flags-connection-string';
+                projectId: string;
+              }
             | null;
           /**
-           * Whether `value` is decrypted.
+           * Similar to `contentHints`, but should not be exposed to the user.
+           */
+          internalContentHint?: {
+            type: 'flags-secret';
+            /**
+             * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+             */
+            encryptedValue: string;
+          } | null;
+          /**
+           * Whether `value` and `vsmValue` are decrypted.
            */
           decrypted?: boolean;
           comment?: string;
+          customEnvironmentIds?: string[];
+          vsmValue?: string;
           system?: boolean;
         }[];
         pagination: Schemas.Pagination;
@@ -12266,7 +14914,11 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
+          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+          /**
+           * This is used to identiy variables that have been migrated from type secret to sensitive.
+           */
+          sunsetSecretId?: string;
           id?: string;
           key?: string;
           value?: string;
@@ -12327,12 +14979,39 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
                 type: 'postgres-database';
                 storeId: string;
               }
+            | {
+                type: 'postgres-url-no-ssl';
+                storeId: string;
+              }
+            | {
+                type: 'integration-store-secret';
+                storeId: string;
+                integrationId: string;
+                integrationProductId: string;
+                integrationConfigurationId: string;
+              }
+            | {
+                type: 'flags-connection-string';
+                projectId: string;
+              }
             | null;
           /**
-           * Whether `value` is decrypted.
+           * Similar to `contentHints`, but should not be exposed to the user.
+           */
+          internalContentHint?: {
+            type: 'flags-secret';
+            /**
+             * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+             */
+            encryptedValue: string;
+          } | null;
+          /**
+           * Whether `value` and `vsmValue` are decrypted.
            */
           decrypted?: boolean;
           comment?: string;
+          customEnvironmentIds?: string[];
+          vsmValue?: string;
           system?: boolean;
         }[];
       },
@@ -12358,85 +15037,16 @@ export type GetProjectEnvPathParams = {
 
 export type GetProjectEnvQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetProjectEnvError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetProjectEnvResponse = {
-  target?:
-    | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
-    | ('production' | 'preview' | 'development' | 'preview' | 'development');
-  type: 'secret' | 'system' | 'encrypted' | 'plain' | 'sensitive';
-  id?: string;
-  key: string;
-  value: string;
-  configurationId?: string | null;
-  createdAt?: number;
-  updatedAt?: number;
-  createdBy?: string | null;
-  updatedBy?: string | null;
-  gitBranch?: string;
-  edgeConfigId?: string | null;
-  edgeConfigTokenId?: string | null;
-  contentHint?:
-    | {
-        type: 'redis-url';
-        storeId: string;
-      }
-    | {
-        type: 'redis-rest-api-url';
-        storeId: string;
-      }
-    | {
-        type: 'redis-rest-api-token';
-        storeId: string;
-      }
-    | {
-        type: 'redis-rest-api-read-only-token';
-        storeId: string;
-      }
-    | {
-        type: 'blob-read-write-token';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-url';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-url-non-pooling';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-prisma-url';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-user';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-host';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-password';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-database';
-        storeId: string;
-      }
-    | null;
-  /**
-   * Whether `value` is decrypted.
-   */
-  decrypted?: boolean;
-  comment?: string;
-};
 
 export type GetProjectEnvVariables = {
   pathParams: GetProjectEnvPathParams;
@@ -12447,12 +15057,317 @@ export type GetProjectEnvVariables = {
  * Retrieve the environment variable for a given project.
  */
 export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortSignal) =>
-  fetch<GetProjectEnvResponse, GetProjectEnvError, undefined, {}, GetProjectEnvQueryParams, GetProjectEnvPathParams>({
-    url: '/v1/projects/{idOrName}/env/{id}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+  fetch<
+    | {
+        decrypted: boolean;
+        target?:
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        /**
+         * This is used to identiy variables that have been migrated from type secret to sensitive.
+         */
+        sunsetSecretId?: string;
+        id?: string;
+        key: string;
+        configurationId?: string | null;
+        createdAt?: number;
+        updatedAt?: number;
+        createdBy?: string | null;
+        updatedBy?: string | null;
+        gitBranch?: string;
+        edgeConfigId?: string | null;
+        edgeConfigTokenId?: string | null;
+        contentHint?:
+          | {
+              type: 'redis-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-token';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-read-only-token';
+              storeId: string;
+            }
+          | {
+              type: 'blob-read-write-token';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-non-pooling';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-prisma-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-user';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-host';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-password';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-database';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-no-ssl';
+              storeId: string;
+            }
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
+            }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
+            }
+          | null;
+        /**
+         * Similar to `contentHints`, but should not be exposed to the user.
+         */
+        internalContentHint?: {
+          type: 'flags-secret';
+          /**
+           * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+           */
+          encryptedValue: string;
+        } | null;
+        comment?: string;
+        customEnvironmentIds?: string[];
+        vsmValue?: string;
+      }
+    | {
+        target?:
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        /**
+         * This is used to identiy variables that have been migrated from type secret to sensitive.
+         */
+        sunsetSecretId?: string;
+        id?: string;
+        key: string;
+        value: string;
+        configurationId?: string | null;
+        createdAt?: number;
+        updatedAt?: number;
+        createdBy?: string | null;
+        updatedBy?: string | null;
+        gitBranch?: string;
+        edgeConfigId?: string | null;
+        edgeConfigTokenId?: string | null;
+        contentHint?:
+          | {
+              type: 'redis-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-token';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-read-only-token';
+              storeId: string;
+            }
+          | {
+              type: 'blob-read-write-token';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-non-pooling';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-prisma-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-user';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-host';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-password';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-database';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-no-ssl';
+              storeId: string;
+            }
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
+            }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
+            }
+          | null;
+        /**
+         * Similar to `contentHints`, but should not be exposed to the user.
+         */
+        internalContentHint?: {
+          type: 'flags-secret';
+          /**
+           * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+           */
+          encryptedValue: string;
+        } | null;
+        /**
+         * Whether `value` and `vsmValue` are decrypted.
+         */
+        decrypted?: boolean;
+        comment?: string;
+        customEnvironmentIds?: string[];
+        vsmValue?: string;
+      }
+    | {
+        target?:
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        /**
+         * This is used to identiy variables that have been migrated from type secret to sensitive.
+         */
+        sunsetSecretId?: string;
+        id?: string;
+        key: string;
+        value: string;
+        configurationId?: string | null;
+        createdAt?: number;
+        updatedAt?: number;
+        createdBy?: string | null;
+        updatedBy?: string | null;
+        gitBranch?: string;
+        edgeConfigId?: string | null;
+        edgeConfigTokenId?: string | null;
+        contentHint?:
+          | {
+              type: 'redis-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-token';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-read-only-token';
+              storeId: string;
+            }
+          | {
+              type: 'blob-read-write-token';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-non-pooling';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-prisma-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-user';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-host';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-password';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-database';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-no-ssl';
+              storeId: string;
+            }
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
+            }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
+            }
+          | null;
+        /**
+         * Similar to `contentHints`, but should not be exposed to the user.
+         */
+        internalContentHint?: {
+          type: 'flags-secret';
+          /**
+           * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+           */
+          encryptedValue: string;
+        } | null;
+        /**
+         * Whether `value` and `vsmValue` are decrypted.
+         */
+        decrypted?: boolean;
+        comment?: string;
+        customEnvironmentIds?: string[];
+      },
+    GetProjectEnvError,
+    undefined,
+    {},
+    GetProjectEnvQueryParams,
+    GetProjectEnvPathParams
+  >({ url: '/v1/projects/{idOrName}/env/{id}', method: 'get', ...variables, signal });
 
 export type CreateProjectEnvPathParams = {
   /**
@@ -12471,9 +15386,13 @@ export type CreateProjectEnvQueryParams = {
    */
   upsert?: string;
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type CreateProjectEnvError = Fetcher.ErrorWrapper<undefined>;
@@ -12482,9 +15401,13 @@ export type CreateProjectEnvResponse = {
   created:
     | {
         target?:
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        /**
+         * This is used to identiy variables that have been migrated from type secret to sensitive.
+         */
+        sunsetSecretId?: string;
         id?: string;
         key?: string;
         value?: string;
@@ -12545,19 +15468,50 @@ export type CreateProjectEnvResponse = {
               type: 'postgres-database';
               storeId: string;
             }
+          | {
+              type: 'postgres-url-no-ssl';
+              storeId: string;
+            }
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
+            }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
+            }
           | null;
         /**
-         * Whether `value` is decrypted.
+         * Similar to `contentHints`, but should not be exposed to the user.
+         */
+        internalContentHint?: {
+          type: 'flags-secret';
+          /**
+           * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+           */
+          encryptedValue: string;
+        } | null;
+        /**
+         * Whether `value` and `vsmValue` are decrypted.
          */
         decrypted?: boolean;
         comment?: string;
+        customEnvironmentIds?: string[];
+        vsmValue?: string;
         system?: boolean;
       }
     | {
         target?:
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        /**
+         * This is used to identiy variables that have been migrated from type secret to sensitive.
+         */
+        sunsetSecretId?: string;
         id?: string;
         key?: string;
         value?: string;
@@ -12618,12 +15572,39 @@ export type CreateProjectEnvResponse = {
               type: 'postgres-database';
               storeId: string;
             }
+          | {
+              type: 'postgres-url-no-ssl';
+              storeId: string;
+            }
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
+            }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
+            }
           | null;
         /**
-         * Whether `value` is decrypted.
+         * Similar to `contentHints`, but should not be exposed to the user.
+         */
+        internalContentHint?: {
+          type: 'flags-secret';
+          /**
+           * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+           */
+          encryptedValue: string;
+        } | null;
+        /**
+         * Whether `value` and `vsmValue` are decrypted.
          */
         decrypted?: boolean;
         comment?: string;
+        customEnvironmentIds?: string[];
+        vsmValue?: string;
         system?: boolean;
       }[];
   failed: {
@@ -12635,13 +15616,11 @@ export type CreateProjectEnvResponse = {
       envVarKey?: string;
       action?: string;
       link?: string;
-      value?:
-        | string
-        | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[];
+      value?: string | ('production' | 'preview' | 'development' | 'preview' | 'development')[];
       gitBranch?: string;
       target?:
-        | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
-        | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
+        | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+        | ('production' | 'preview' | 'development' | 'preview' | 'development');
       project?: string;
     };
   }[];
@@ -12649,181 +15628,345 @@ export type CreateProjectEnvResponse = {
 
 export type CreateProjectEnvVariables = {
   body?:
-    | {
-        /**
-         * The name of the environment variable
-         *
-         * @example API_URL
-         */
-        key: string;
-        /**
-         * The value of the environment variable
-         *
-         * @example https://api.vercel.com
-         */
-        value: string;
-        /**
-         * The type of environment variable
-         *
-         * @example plain
-         */
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
-        /**
-         * The target environment of the environment variable
-         *
-         * @example production
-         * @example preview
-         */
-        target: ('production' | 'preview' | 'development')[];
-        /**
-         * The git branch of the environment variable
-         *
-         * @maxLength 250
-         * @example feature-1
-         */
-        gitBranch?: string | null;
-        /**
-         * A comment to add context on what this environment variable is for
-         *
-         * @example database connection string for production
-         * @maxLength 500
-         */
-        comment?: string;
-      }
-    | {
-        /**
-         * The name of the environment variable
-         *
-         * @example API_URL
-         */
-        key: string;
-        /**
-         * The value of the environment variable
-         *
-         * @example https://api.vercel.com
-         */
-        value: string;
-        /**
-         * The type of environment variable
-         *
-         * @example plain
-         */
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
-        /**
-         * The target environment of the environment variable
-         *
-         * @example production
-         * @example preview
-         */
-        target: ('production' | 'preview' | 'development')[];
-        /**
-         * The git branch of the environment variable
-         *
-         * @maxLength 250
-         * @example feature-1
-         */
-        gitBranch?: string | null;
-        /**
-         * A comment to add context on what this environment variable is for
-         *
-         * @example database connection string for production
-         * @maxLength 500
-         */
-        comment?: string;
-      }[];
+    | (
+        | {
+            /**
+             * The name of the environment variable
+             *
+             * @example API_URL
+             */
+            key?: string;
+            /**
+             * The value of the environment variable
+             *
+             * @example https://api.vercel.com
+             */
+            value?: string;
+            /**
+             * The type of environment variable
+             *
+             * @example plain
+             */
+            type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+            /**
+             * The target environment of the environment variable
+             *
+             * @example preview
+             */
+            target: ('production' | 'preview' | 'development')[];
+            /**
+             * If defined, the git branch of the environment variable (must have target=preview)
+             *
+             * @maxLength 250
+             * @example feature-1
+             */
+            gitBranch?: string | null;
+            /**
+             * A comment to add context on what this environment variable is for
+             *
+             * @example database connection string for production
+             * @maxLength 500
+             */
+            comment?: string;
+          }
+        | {
+            /**
+             * The name of the environment variable
+             *
+             * @example API_URL
+             */
+            key?: string;
+            /**
+             * The value of the environment variable
+             *
+             * @example https://api.vercel.com
+             */
+            value?: string;
+            /**
+             * The type of environment variable
+             *
+             * @example plain
+             */
+            type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+            /**
+             * The target environment of the environment variable
+             *
+             * @example preview
+             */
+            target?: ('production' | 'preview' | 'development')[];
+            /**
+             * If defined, the git branch of the environment variable (must have target=preview)
+             *
+             * @maxLength 250
+             * @example feature-1
+             */
+            gitBranch?: string | null;
+            /**
+             * A comment to add context on what this environment variable is for
+             *
+             * @example database connection string for production
+             * @maxLength 500
+             */
+            comment?: string;
+          }
+      )
+    | (
+        | {
+            /**
+             * The name of the environment variable
+             *
+             * @example API_URL
+             */
+            key?: string;
+            /**
+             * The value of the environment variable
+             *
+             * @example https://api.vercel.com
+             */
+            value?: string;
+            /**
+             * The type of environment variable
+             *
+             * @example plain
+             */
+            type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+            /**
+             * The target environment of the environment variable
+             *
+             * @example preview
+             */
+            target: ('production' | 'preview' | 'development')[];
+            /**
+             * If defined, the git branch of the environment variable (must have target=preview)
+             *
+             * @maxLength 250
+             * @example feature-1
+             */
+            gitBranch?: string | null;
+            /**
+             * A comment to add context on what this environment variable is for
+             *
+             * @example database connection string for production
+             * @maxLength 500
+             */
+            comment?: string;
+          }
+        | {
+            /**
+             * The name of the environment variable
+             *
+             * @example API_URL
+             */
+            key?: string;
+            /**
+             * The value of the environment variable
+             *
+             * @example https://api.vercel.com
+             */
+            value?: string;
+            /**
+             * The type of environment variable
+             *
+             * @example plain
+             */
+            type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+            /**
+             * The target environment of the environment variable
+             *
+             * @example preview
+             */
+            target?: ('production' | 'preview' | 'development')[];
+            /**
+             * If defined, the git branch of the environment variable (must have target=preview)
+             *
+             * @maxLength 250
+             * @example feature-1
+             */
+            gitBranch?: string | null;
+            /**
+             * A comment to add context on what this environment variable is for
+             *
+             * @example database connection string for production
+             * @maxLength 500
+             */
+            comment?: string;
+          }
+      )[];
   pathParams: CreateProjectEnvPathParams;
   queryParams?: CreateProjectEnvQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Create one ore more environment variables for a project by passing its `key`, `value`, `type` and `target` and by specifying the project by either passing the project `id` or `name` in the URL.
+ * Create one or more environment variables for a project by passing its `key`, `value`, `type` and `target` and by specifying the project by either passing the project `id` or `name` in the URL. If you include `upsert=true` as a query parameter, a new environment variable will not be created if it already exists but, the existing variable's value will be updated.
  */
 export const createProjectEnv = (variables: CreateProjectEnvVariables, signal?: AbortSignal) =>
   fetch<
     CreateProjectEnvResponse,
     CreateProjectEnvError,
-    | {
-        /**
-         * The name of the environment variable
-         *
-         * @example API_URL
-         */
-        key: string;
-        /**
-         * The value of the environment variable
-         *
-         * @example https://api.vercel.com
-         */
-        value: string;
-        /**
-         * The type of environment variable
-         *
-         * @example plain
-         */
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
-        /**
-         * The target environment of the environment variable
-         *
-         * @example production
-         * @example preview
-         */
-        target: ('production' | 'preview' | 'development')[];
-        /**
-         * The git branch of the environment variable
-         *
-         * @maxLength 250
-         * @example feature-1
-         */
-        gitBranch?: string | null;
-        /**
-         * A comment to add context on what this environment variable is for
-         *
-         * @example database connection string for production
-         * @maxLength 500
-         */
-        comment?: string;
-      }
-    | {
-        /**
-         * The name of the environment variable
-         *
-         * @example API_URL
-         */
-        key: string;
-        /**
-         * The value of the environment variable
-         *
-         * @example https://api.vercel.com
-         */
-        value: string;
-        /**
-         * The type of environment variable
-         *
-         * @example plain
-         */
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
-        /**
-         * The target environment of the environment variable
-         *
-         * @example production
-         * @example preview
-         */
-        target: ('production' | 'preview' | 'development')[];
-        /**
-         * The git branch of the environment variable
-         *
-         * @maxLength 250
-         * @example feature-1
-         */
-        gitBranch?: string | null;
-        /**
-         * A comment to add context on what this environment variable is for
-         *
-         * @example database connection string for production
-         * @maxLength 500
-         */
-        comment?: string;
-      }[],
+    | (
+        | {
+            /**
+             * The name of the environment variable
+             *
+             * @example API_URL
+             */
+            key?: string;
+            /**
+             * The value of the environment variable
+             *
+             * @example https://api.vercel.com
+             */
+            value?: string;
+            /**
+             * The type of environment variable
+             *
+             * @example plain
+             */
+            type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+            /**
+             * The target environment of the environment variable
+             *
+             * @example preview
+             */
+            target: ('production' | 'preview' | 'development')[];
+            /**
+             * If defined, the git branch of the environment variable (must have target=preview)
+             *
+             * @maxLength 250
+             * @example feature-1
+             */
+            gitBranch?: string | null;
+            /**
+             * A comment to add context on what this environment variable is for
+             *
+             * @example database connection string for production
+             * @maxLength 500
+             */
+            comment?: string;
+          }
+        | {
+            /**
+             * The name of the environment variable
+             *
+             * @example API_URL
+             */
+            key?: string;
+            /**
+             * The value of the environment variable
+             *
+             * @example https://api.vercel.com
+             */
+            value?: string;
+            /**
+             * The type of environment variable
+             *
+             * @example plain
+             */
+            type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+            /**
+             * The target environment of the environment variable
+             *
+             * @example preview
+             */
+            target?: ('production' | 'preview' | 'development')[];
+            /**
+             * If defined, the git branch of the environment variable (must have target=preview)
+             *
+             * @maxLength 250
+             * @example feature-1
+             */
+            gitBranch?: string | null;
+            /**
+             * A comment to add context on what this environment variable is for
+             *
+             * @example database connection string for production
+             * @maxLength 500
+             */
+            comment?: string;
+          }
+      )
+    | (
+        | {
+            /**
+             * The name of the environment variable
+             *
+             * @example API_URL
+             */
+            key?: string;
+            /**
+             * The value of the environment variable
+             *
+             * @example https://api.vercel.com
+             */
+            value?: string;
+            /**
+             * The type of environment variable
+             *
+             * @example plain
+             */
+            type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+            /**
+             * The target environment of the environment variable
+             *
+             * @example preview
+             */
+            target: ('production' | 'preview' | 'development')[];
+            /**
+             * If defined, the git branch of the environment variable (must have target=preview)
+             *
+             * @maxLength 250
+             * @example feature-1
+             */
+            gitBranch?: string | null;
+            /**
+             * A comment to add context on what this environment variable is for
+             *
+             * @example database connection string for production
+             * @maxLength 500
+             */
+            comment?: string;
+          }
+        | {
+            /**
+             * The name of the environment variable
+             *
+             * @example API_URL
+             */
+            key?: string;
+            /**
+             * The value of the environment variable
+             *
+             * @example https://api.vercel.com
+             */
+            value?: string;
+            /**
+             * The type of environment variable
+             *
+             * @example plain
+             */
+            type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+            /**
+             * The target environment of the environment variable
+             *
+             * @example preview
+             */
+            target?: ('production' | 'preview' | 'development')[];
+            /**
+             * If defined, the git branch of the environment variable (must have target=preview)
+             *
+             * @maxLength 250
+             * @example feature-1
+             */
+            gitBranch?: string | null;
+            /**
+             * A comment to add context on what this environment variable is for
+             *
+             * @example database connection string for production
+             * @maxLength 500
+             */
+            comment?: string;
+          }
+      )[],
     {},
     CreateProjectEnvQueryParams,
     CreateProjectEnvPathParams
@@ -12846,9 +15989,13 @@ export type RemoveProjectEnvPathParams = {
 
 export type RemoveProjectEnvQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type RemoveProjectEnvError = Fetcher.ErrorWrapper<undefined>;
@@ -12865,9 +16012,13 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
   fetch<
     | {
         target?:
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
         type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        /**
+         * This is used to identiy variables that have been migrated from type secret to sensitive.
+         */
+        sunsetSecretId?: string;
         id?: string;
         key: string;
         value: string;
@@ -12928,19 +16079,50 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
               type: 'postgres-database';
               storeId: string;
             }
+          | {
+              type: 'postgres-url-no-ssl';
+              storeId: string;
+            }
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
+            }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
+            }
           | null;
         /**
-         * Whether `value` is decrypted.
+         * Similar to `contentHints`, but should not be exposed to the user.
+         */
+        internalContentHint?: {
+          type: 'flags-secret';
+          /**
+           * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+           */
+          encryptedValue: string;
+        } | null;
+        /**
+         * Whether `value` and `vsmValue` are decrypted.
          */
         decrypted?: boolean;
         comment?: string;
+        customEnvironmentIds?: string[];
+        vsmValue?: string;
       }[]
     | {
         system?: boolean;
         target?:
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
         type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        /**
+         * This is used to identiy variables that have been migrated from type secret to sensitive.
+         */
+        sunsetSecretId?: string;
         id?: string;
         key: string;
         value: string;
@@ -13001,18 +16183,49 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
               type: 'postgres-database';
               storeId: string;
             }
+          | {
+              type: 'postgres-url-no-ssl';
+              storeId: string;
+            }
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
+            }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
+            }
           | null;
         /**
-         * Whether `value` is decrypted.
+         * Similar to `contentHints`, but should not be exposed to the user.
+         */
+        internalContentHint?: {
+          type: 'flags-secret';
+          /**
+           * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+           */
+          encryptedValue: string;
+        } | null;
+        /**
+         * Whether `value` and `vsmValue` are decrypted.
          */
         decrypted?: boolean;
         comment?: string;
+        customEnvironmentIds?: string[];
+        vsmValue?: string;
       }
     | {
         target?:
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development')[]
-          | ('production' | 'preview' | 'development' | 'preview' | 'development' | 'preview' | 'development');
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
         type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        /**
+         * This is used to identiy variables that have been migrated from type secret to sensitive.
+         */
+        sunsetSecretId?: string;
         id?: string;
         key: string;
         value: string;
@@ -13073,12 +16286,39 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
               type: 'postgres-database';
               storeId: string;
             }
+          | {
+              type: 'postgres-url-no-ssl';
+              storeId: string;
+            }
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
+            }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
+            }
           | null;
         /**
-         * Whether `value` is decrypted.
+         * Similar to `contentHints`, but should not be exposed to the user.
+         */
+        internalContentHint?: {
+          type: 'flags-secret';
+          /**
+           * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+           */
+          encryptedValue: string;
+        } | null;
+        /**
+         * Whether `value` and `vsmValue` are decrypted.
          */
         decrypted?: boolean;
         comment?: string;
+        customEnvironmentIds?: string[];
+        vsmValue?: string;
       },
     RemoveProjectEnvError,
     undefined,
@@ -13104,85 +16344,16 @@ export type EditProjectEnvPathParams = {
 
 export type EditProjectEnvQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type EditProjectEnvError = Fetcher.ErrorWrapper<undefined>;
-
-export type EditProjectEnvResponse = {
-  target?:
-    | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
-    | ('production' | 'preview' | 'development' | 'preview' | 'development');
-  type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
-  id?: string;
-  key: string;
-  value: string;
-  configurationId?: string | null;
-  createdAt?: number;
-  updatedAt?: number;
-  createdBy?: string | null;
-  updatedBy?: string | null;
-  gitBranch?: string;
-  edgeConfigId?: string | null;
-  edgeConfigTokenId?: string | null;
-  contentHint?:
-    | {
-        type: 'redis-url';
-        storeId: string;
-      }
-    | {
-        type: 'redis-rest-api-url';
-        storeId: string;
-      }
-    | {
-        type: 'redis-rest-api-token';
-        storeId: string;
-      }
-    | {
-        type: 'redis-rest-api-read-only-token';
-        storeId: string;
-      }
-    | {
-        type: 'blob-read-write-token';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-url';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-url-non-pooling';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-prisma-url';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-user';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-host';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-password';
-        storeId: string;
-      }
-    | {
-        type: 'postgres-database';
-        storeId: string;
-      }
-    | null;
-  /**
-   * Whether `value` is decrypted.
-   */
-  decrypted?: boolean;
-  comment?: string;
-};
 
 export type EditProjectEnvRequestBody = {
   /**
@@ -13196,9 +16367,9 @@ export type EditProjectEnvRequestBody = {
    *
    * @example preview
    */
-  target?: ('production' | 'preview' | 'development')[];
+  target?: ('development' | 'preview' | 'production')[];
   /**
-   * The git branch of the environment variable
+   * If defined, the git branch of the environment variable (must have target=preview)
    *
    * @maxLength 250
    * @example feature-1
@@ -13209,13 +16380,14 @@ export type EditProjectEnvRequestBody = {
    *
    * @example plain
    */
-  type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+  type?: 'encrypted' | 'plain' | 'secret' | 'sensitive' | 'system';
   /**
    * The value of the environment variable
    *
    * @example bkWIjbnxcvo78
    */
   value?: string;
+  customEnvironmentIds?: string[];
   /**
    * A comment to add context on what this env var is for
    *
@@ -13236,13 +16408,294 @@ export type EditProjectEnvVariables = {
  */
 export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: AbortSignal) =>
   fetch<
-    EditProjectEnvResponse,
+    | {
+        target?:
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        /**
+         * This is used to identiy variables that have been migrated from type secret to sensitive.
+         */
+        sunsetSecretId?: string;
+        id?: string;
+        key: string;
+        value: string;
+        configurationId?: string | null;
+        createdAt?: number;
+        updatedAt?: number;
+        createdBy?: string | null;
+        updatedBy?: string | null;
+        gitBranch?: string;
+        edgeConfigId?: string | null;
+        edgeConfigTokenId?: string | null;
+        contentHint?:
+          | {
+              type: 'redis-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-token';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-read-only-token';
+              storeId: string;
+            }
+          | {
+              type: 'blob-read-write-token';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-non-pooling';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-prisma-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-user';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-host';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-password';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-database';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-no-ssl';
+              storeId: string;
+            }
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
+            }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
+            }
+          | null;
+        /**
+         * Similar to `contentHints`, but should not be exposed to the user.
+         */
+        internalContentHint?: {
+          type: 'flags-secret';
+          /**
+           * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+           */
+          encryptedValue: string;
+        } | null;
+        /**
+         * Whether `value` and `vsmValue` are decrypted.
+         */
+        decrypted?: boolean;
+        comment?: string;
+        customEnvironmentIds?: string[];
+      }
+    | Record<string, any>,
     EditProjectEnvError,
     EditProjectEnvRequestBody,
     {},
     EditProjectEnvQueryParams,
     EditProjectEnvPathParams
   >({ url: '/v9/projects/{idOrName}/env/{id}', method: 'patch', ...variables, signal });
+
+export type UpdateProjectProtectionBypassPathParams = {
+  /**
+   * The unique project identifier or the project name
+   */
+  idOrName: string;
+};
+
+export type UpdateProjectProtectionBypassQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type UpdateProjectProtectionBypassError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateProjectProtectionBypassResponse = {
+  protectionBypass?: {
+    [key: string]: {
+      createdAt: number;
+      createdBy: string;
+      scope: 'automation-bypass';
+    };
+  };
+};
+
+export type UpdateProjectProtectionBypassRequestBody = {
+  /**
+   * Optional instructions for revoking and regenerating a automation bypass
+   */
+  revoke?: {
+    /**
+     * Automation bypass to revoked
+     */
+    secret: string;
+    /**
+     * Whether or not a new automation bypass should be created after the provided secret is revoked
+     */
+    regenerate: boolean;
+  };
+  /**
+   * Generate a new secret. If neither generate or revoke are provided, a new random secret will be generated.
+   */
+  generate?: {
+    /**
+     * Optional value of the secret to generate
+     *
+     * @pattern ^[a-zA-Z0-9]{32}$
+     */
+    secret?: string;
+  };
+};
+
+export type UpdateProjectProtectionBypassVariables = {
+  body?: UpdateProjectProtectionBypassRequestBody;
+  pathParams: UpdateProjectProtectionBypassPathParams;
+  queryParams?: UpdateProjectProtectionBypassQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Update the deployment protection automation bypass for a project
+ */
+export const updateProjectProtectionBypass = (
+  variables: UpdateProjectProtectionBypassVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    UpdateProjectProtectionBypassResponse,
+    UpdateProjectProtectionBypassError,
+    UpdateProjectProtectionBypassRequestBody,
+    {},
+    UpdateProjectProtectionBypassQueryParams,
+    UpdateProjectProtectionBypassPathParams
+  >({ url: '/v1/projects/{idOrName}/protection-bypass', method: 'patch', ...variables, signal });
+
+export type RequestPromotePathParams = {
+  projectId: string;
+  deploymentId: string;
+};
+
+export type RequestPromoteQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type RequestPromoteError = Fetcher.ErrorWrapper<undefined>;
+
+export type RequestPromoteVariables = {
+  pathParams: RequestPromotePathParams;
+  queryParams?: RequestPromoteQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Allows users to promote a deployment to production. Note: This does NOT rebuild the deployment. If you need that, then call create-deployments endpoint.
+ */
+export const requestPromote = (variables: RequestPromoteVariables, signal?: AbortSignal) =>
+  fetch<undefined, RequestPromoteError, undefined, {}, RequestPromoteQueryParams, RequestPromotePathParams>({
+    url: '/v10/projects/{projectId}/promote/{deploymentId}',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type ListPromoteAliasesPathParams = {
+  projectId: string;
+};
+
+export type ListPromoteAliasesQueryParams = {
+  /**
+   * Maximum number of aliases to list from a request (max 100).
+   *
+   * @example 20
+   * @maximum 100
+   */
+  limit?: number;
+  /**
+   * Get aliases created after this epoch timestamp.
+   *
+   * @example 1609499532000
+   */
+  since?: number;
+  /**
+   * Get aliases created before this epoch timestamp.
+   *
+   * @example 1612264332000
+   */
+  until?: number;
+  /**
+   * Filter results down to aliases that failed to map to the requested deployment
+   */
+  failedOnly?: boolean;
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type ListPromoteAliasesError = Fetcher.ErrorWrapper<undefined>;
+
+export type ListPromoteAliasesVariables = {
+  pathParams: ListPromoteAliasesPathParams;
+  queryParams?: ListPromoteAliasesQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Get a list of aliases related to the last promote request with their mapping status
+ */
+export const listPromoteAliases = (variables: ListPromoteAliasesVariables, signal?: AbortSignal) =>
+  fetch<
+    | Record<string, any>
+    | {
+        aliases: {
+          status: string;
+          alias: string;
+          id: string;
+        }[];
+        pagination: Schemas.Pagination;
+      },
+    ListPromoteAliasesError,
+    undefined,
+    {},
+    ListPromoteAliasesQueryParams,
+    ListPromoteAliasesPathParams
+  >({ url: '/v1/projects/{projectId}/promote/aliases', method: 'get', ...variables, signal });
 
 export type PauseProjectPathParams = {
   /**
@@ -13253,9 +16706,13 @@ export type PauseProjectPathParams = {
 
 export type PauseProjectQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type PauseProjectError = Fetcher.ErrorWrapper<undefined>;
@@ -13285,9 +16742,13 @@ export type UnpauseProjectPathParams = {
 
 export type UnpauseProjectQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type UnpauseProjectError = Fetcher.ErrorWrapper<undefined>;
@@ -13308,11 +16769,960 @@ export const unpauseProject = (variables: UnpauseProjectVariables, signal?: Abor
     signal
   });
 
+export type UpdateAttackChallengeModeQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type UpdateAttackChallengeModeError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateAttackChallengeModeResponse = {
+  attackModeEnabled: boolean;
+  attackModeUpdatedAt: number;
+};
+
+export type UpdateAttackChallengeModeRequestBody = {
+  projectId: string;
+  attackModeEnabled: boolean;
+  attackModeActiveUntil?: number | null;
+};
+
+export type UpdateAttackChallengeModeVariables = {
+  body: UpdateAttackChallengeModeRequestBody;
+  queryParams?: UpdateAttackChallengeModeQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Update the setting for determining if the project has Attack Challenge mode enabled.
+ */
+export const updateAttackChallengeMode = (variables: UpdateAttackChallengeModeVariables, signal?: AbortSignal) =>
+  fetch<
+    UpdateAttackChallengeModeResponse,
+    UpdateAttackChallengeModeError,
+    UpdateAttackChallengeModeRequestBody,
+    {},
+    UpdateAttackChallengeModeQueryParams,
+    {}
+  >({ url: '/v1/security/attack-mode', method: 'post', ...variables, signal });
+
+export type PutFirewallConfigQueryParams = {
+  projectId: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type PutFirewallConfigError = Fetcher.ErrorWrapper<undefined>;
+
+export type PutFirewallConfigResponse = {
+  active: {
+    ownerId: string;
+    projectKey: string;
+    id: string;
+    version: number;
+    updatedAt: string;
+    firewallEnabled: boolean;
+    crs: {
+      sd: {
+        active: boolean;
+        action: 'deny' | 'log';
+      };
+      ma: {
+        active: boolean;
+        action: 'deny' | 'log';
+      };
+      lfi: {
+        active: boolean;
+        action: 'deny' | 'log';
+      };
+      rfi: {
+        active: boolean;
+        action: 'deny' | 'log';
+      };
+      rce: {
+        active: boolean;
+        action: 'deny' | 'log';
+      };
+      php: {
+        active: boolean;
+        action: 'deny' | 'log';
+      };
+      gen: {
+        active: boolean;
+        action: 'deny' | 'log';
+      };
+      xss: {
+        active: boolean;
+        action: 'deny' | 'log';
+      };
+      sqli: {
+        active: boolean;
+        action: 'deny' | 'log';
+      };
+      sf: {
+        active: boolean;
+        action: 'deny' | 'log';
+      };
+      java: {
+        active: boolean;
+        action: 'deny' | 'log';
+      };
+    };
+    rules: {
+      id: string;
+      name: string;
+      description?: string;
+      active: boolean;
+      conditionGroup: {
+        conditions: {
+          type:
+            | 'cookie'
+            | 'environment'
+            | 'geo_as_number'
+            | 'geo_city'
+            | 'geo_continent'
+            | 'geo_country'
+            | 'geo_country_region'
+            | 'header'
+            | 'host'
+            | 'ip_address'
+            | 'ja3_digest'
+            | 'ja4_digest'
+            | 'method'
+            | 'path'
+            | 'protocol'
+            | 'query'
+            | 'rate_limit_api_id'
+            | 'raw_path'
+            | 'region'
+            | 'scheme'
+            | 'target_path'
+            | 'user_agent';
+          op: 'eq' | 'ex' | 'gt' | 'gte' | 'inc' | 'lt' | 'lte' | 'neq' | 'nex' | 'ninc' | 'pre' | 're' | 'sub' | 'suf';
+          neg?: boolean;
+          key?: string;
+          value?: string | number | string[];
+        }[];
+      }[];
+      action: {
+        mitigate?: {
+          action: 'bypass' | 'challenge' | 'deny' | 'log' | 'rate_limit' | 'redirect';
+          rateLimit?: {
+            algo: 'fixed_window' | 'token_bucket';
+            window: number;
+            limit: number;
+            keys: string[];
+            action?: 'challenge' | 'deny' | 'log' | 'rate_limit' | null;
+          } | null;
+          redirect?: {
+            location: string;
+            permanent: boolean;
+          } | null;
+          actionDuration?: string | null;
+        };
+      };
+    }[];
+    ips: {
+      id: string;
+      hostname: string;
+      ip: string;
+      notes?: string;
+      action: 'bypass' | 'challenge' | 'deny' | 'log';
+    }[];
+    changes: Record<string, any>[];
+    managedRules?: {
+      owasp?: {
+        active: boolean;
+        updatedAt?: string;
+        userId?: string;
+        username?: string;
+      };
+      verifiedBotsBypass?: {
+        active: boolean;
+        updatedAt?: string;
+        userId?: string;
+        username?: string;
+      };
+    };
+  };
+};
+
+export type PutFirewallConfigRequestBody = {
+  firewallEnabled: boolean;
+  managedRules?: {
+    owasp: {
+      active: boolean;
+    };
+  };
+  crs?: {
+    sd?: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+    ma?: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+    lfi?: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+    rfi?: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+    rce?: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+    php?: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+    gen?: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+    xss?: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+    sqli?: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+    sf?: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+    java?: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+  };
+  rules?: {
+    id?: string;
+    /**
+     * @maxLength 160
+     */
+    name: string;
+    /**
+     * @maxLength 256
+     */
+    description?: string;
+    active: boolean;
+    conditionGroup: {
+      conditions: {
+        type:
+          | 'cookie'
+          | 'environment'
+          | 'geo_as_number'
+          | 'geo_city'
+          | 'geo_continent'
+          | 'geo_country'
+          | 'geo_country_region'
+          | 'header'
+          | 'host'
+          | 'ip_address'
+          | 'ja3_digest'
+          | 'ja4_digest'
+          | 'method'
+          | 'path'
+          | 'protocol'
+          | 'query'
+          | 'rate_limit_api_id'
+          | 'raw_path'
+          | 'region'
+          | 'scheme'
+          | 'target_path'
+          | 'user_agent';
+        op: 'eq' | 'ex' | 'gt' | 'gte' | 'inc' | 'lt' | 'lte' | 'neq' | 'nex' | 'ninc' | 'pre' | 're' | 'sub' | 'suf';
+        neg?: boolean;
+        key?: string;
+        value?: string | string[] | number;
+      }[];
+    }[];
+    action: {
+      mitigate?: {
+        action: 'bypass' | 'challenge' | 'deny' | 'log' | 'rate_limit' | 'redirect';
+        rateLimit?: {
+          algo: 'fixed_window' | 'token_bucket';
+          window: number;
+          limit: number;
+          keys: string[];
+          action?: ('log' | 'challenge' | 'deny' | 'rate_limit') | null;
+        } | null;
+        redirect?: {
+          location: string;
+          permanent: boolean;
+        } | null;
+        actionDuration?: string | null;
+      };
+    };
+  }[];
+  ips?: {
+    id?: string;
+    hostname: string;
+    ip: string;
+    notes?: string;
+    action: 'bypass' | 'challenge' | 'deny' | 'log';
+  }[];
+};
+
+export type PutFirewallConfigVariables = {
+  body: PutFirewallConfigRequestBody;
+  queryParams: PutFirewallConfigQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Set the firewall configuration to provided rules and settings. Creates or overwrite the existing firewall configuration.
+ */
+export const putFirewallConfig = (variables: PutFirewallConfigVariables, signal?: AbortSignal) =>
+  fetch<
+    PutFirewallConfigResponse,
+    PutFirewallConfigError,
+    PutFirewallConfigRequestBody,
+    {},
+    PutFirewallConfigQueryParams,
+    {}
+  >({ url: '/v1/security/firewall/config', method: 'put', ...variables, signal });
+
+export type UpdateFirewallConfigQueryParams = {
+  projectId: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type UpdateFirewallConfigError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateFirewallConfigVariables = {
+  body?:
+    | {
+        action: string;
+        id?: null;
+        value: boolean;
+      }
+    | {
+        action: string;
+        id?: null;
+        value: {
+          /**
+           * @maxLength 160
+           */
+          name: string;
+          /**
+           * @maxLength 256
+           */
+          description?: string;
+          active: boolean;
+          conditionGroup: {
+            conditions: {
+              type:
+                | 'host'
+                | 'path'
+                | 'method'
+                | 'header'
+                | 'query'
+                | 'cookie'
+                | 'target_path'
+                | 'raw_path'
+                | 'ip_address'
+                | 'region'
+                | 'protocol'
+                | 'scheme'
+                | 'environment'
+                | 'user_agent'
+                | 'geo_continent'
+                | 'geo_country'
+                | 'geo_country_region'
+                | 'geo_city'
+                | 'geo_as_number'
+                | 'ja4_digest'
+                | 'ja3_digest'
+                | 'rate_limit_api_id';
+              op:
+                | 're'
+                | 'eq'
+                | 'neq'
+                | 'ex'
+                | 'nex'
+                | 'inc'
+                | 'ninc'
+                | 'pre'
+                | 'suf'
+                | 'sub'
+                | 'gt'
+                | 'gte'
+                | 'lt'
+                | 'lte';
+              neg?: boolean;
+              key?: string;
+              value?: string | string[] | number;
+            }[];
+          }[];
+          action: {
+            mitigate?: {
+              action: 'log' | 'challenge' | 'deny' | 'bypass' | 'rate_limit' | 'redirect';
+              rateLimit?: {
+                algo: 'fixed_window' | 'token_bucket';
+                window: number;
+                limit: number;
+                keys: string[];
+                action?: ('log' | 'challenge' | 'deny' | 'rate_limit') | null;
+              } | null;
+              redirect?: {
+                location: string;
+                permanent: boolean;
+              } | null;
+              actionDuration?: string | null;
+            };
+          };
+        };
+      }
+    | {
+        action: string;
+        id: string;
+        value: {
+          /**
+           * @maxLength 160
+           */
+          name: string;
+          /**
+           * @maxLength 256
+           */
+          description?: string;
+          active: boolean;
+          conditionGroup: {
+            conditions: {
+              type:
+                | 'host'
+                | 'path'
+                | 'method'
+                | 'header'
+                | 'query'
+                | 'cookie'
+                | 'target_path'
+                | 'raw_path'
+                | 'ip_address'
+                | 'region'
+                | 'protocol'
+                | 'scheme'
+                | 'environment'
+                | 'user_agent'
+                | 'geo_continent'
+                | 'geo_country'
+                | 'geo_country_region'
+                | 'geo_city'
+                | 'geo_as_number'
+                | 'ja4_digest'
+                | 'ja3_digest'
+                | 'rate_limit_api_id';
+              op:
+                | 're'
+                | 'eq'
+                | 'neq'
+                | 'ex'
+                | 'nex'
+                | 'inc'
+                | 'ninc'
+                | 'pre'
+                | 'suf'
+                | 'sub'
+                | 'gt'
+                | 'gte'
+                | 'lt'
+                | 'lte';
+              neg?: boolean;
+              key?: string;
+              value?: string | string[] | number;
+            }[];
+          }[];
+          action: {
+            mitigate?: {
+              action: 'log' | 'challenge' | 'deny' | 'bypass' | 'rate_limit' | 'redirect';
+              rateLimit?: {
+                algo: 'fixed_window' | 'token_bucket';
+                window: number;
+                limit: number;
+                keys: string[];
+                action?: ('log' | 'challenge' | 'deny' | 'rate_limit') | null;
+              } | null;
+              redirect?: {
+                location: string;
+                permanent: boolean;
+              } | null;
+              actionDuration?: string | null;
+            };
+          };
+        };
+      }
+    | {
+        action: string;
+        id: string;
+        value?: null;
+      }
+    | {
+        action: string;
+        id: string;
+        value: number;
+      }
+    | {
+        action: string;
+        id: 'sd' | 'ma' | 'lfi' | 'rfi' | 'rce' | 'php' | 'gen' | 'xss' | 'sqli' | 'sf' | 'java';
+        value: {
+          active: boolean;
+          action: 'deny' | 'log';
+        };
+      }
+    | {
+        action: string;
+        id?: null;
+        value?: null;
+      }
+    | {
+        action: string;
+        id?: null;
+        value: {
+          hostname: string;
+          ip: string;
+          notes?: string;
+          action: 'deny' | 'challenge' | 'log' | 'bypass';
+        };
+      }
+    | {
+        action: string;
+        id: string;
+        value: {
+          hostname: string;
+          ip: string;
+          notes?: string;
+          action: 'deny' | 'challenge' | 'log' | 'bypass';
+        };
+      }
+    | {
+        action: string;
+        id: string;
+        value?: null;
+      }
+    | {
+        action: string;
+        id: 'owasp';
+        value: {
+          active: boolean;
+        };
+      };
+  queryParams: UpdateFirewallConfigQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Process updates to modify the existing firewall config for a project
+ */
+export const updateFirewallConfig = (variables: UpdateFirewallConfigVariables, signal?: AbortSignal) =>
+  fetch<
+    Record<string, any>,
+    UpdateFirewallConfigError,
+    | {
+        action: string;
+        id?: null;
+        value: boolean;
+      }
+    | {
+        action: string;
+        id?: null;
+        value: {
+          /**
+           * @maxLength 160
+           */
+          name: string;
+          /**
+           * @maxLength 256
+           */
+          description?: string;
+          active: boolean;
+          conditionGroup: {
+            conditions: {
+              type:
+                | 'host'
+                | 'path'
+                | 'method'
+                | 'header'
+                | 'query'
+                | 'cookie'
+                | 'target_path'
+                | 'raw_path'
+                | 'ip_address'
+                | 'region'
+                | 'protocol'
+                | 'scheme'
+                | 'environment'
+                | 'user_agent'
+                | 'geo_continent'
+                | 'geo_country'
+                | 'geo_country_region'
+                | 'geo_city'
+                | 'geo_as_number'
+                | 'ja4_digest'
+                | 'ja3_digest'
+                | 'rate_limit_api_id';
+              op:
+                | 're'
+                | 'eq'
+                | 'neq'
+                | 'ex'
+                | 'nex'
+                | 'inc'
+                | 'ninc'
+                | 'pre'
+                | 'suf'
+                | 'sub'
+                | 'gt'
+                | 'gte'
+                | 'lt'
+                | 'lte';
+              neg?: boolean;
+              key?: string;
+              value?: string | string[] | number;
+            }[];
+          }[];
+          action: {
+            mitigate?: {
+              action: 'log' | 'challenge' | 'deny' | 'bypass' | 'rate_limit' | 'redirect';
+              rateLimit?: {
+                algo: 'fixed_window' | 'token_bucket';
+                window: number;
+                limit: number;
+                keys: string[];
+                action?: ('log' | 'challenge' | 'deny' | 'rate_limit') | null;
+              } | null;
+              redirect?: {
+                location: string;
+                permanent: boolean;
+              } | null;
+              actionDuration?: string | null;
+            };
+          };
+        };
+      }
+    | {
+        action: string;
+        id: string;
+        value: {
+          /**
+           * @maxLength 160
+           */
+          name: string;
+          /**
+           * @maxLength 256
+           */
+          description?: string;
+          active: boolean;
+          conditionGroup: {
+            conditions: {
+              type:
+                | 'host'
+                | 'path'
+                | 'method'
+                | 'header'
+                | 'query'
+                | 'cookie'
+                | 'target_path'
+                | 'raw_path'
+                | 'ip_address'
+                | 'region'
+                | 'protocol'
+                | 'scheme'
+                | 'environment'
+                | 'user_agent'
+                | 'geo_continent'
+                | 'geo_country'
+                | 'geo_country_region'
+                | 'geo_city'
+                | 'geo_as_number'
+                | 'ja4_digest'
+                | 'ja3_digest'
+                | 'rate_limit_api_id';
+              op:
+                | 're'
+                | 'eq'
+                | 'neq'
+                | 'ex'
+                | 'nex'
+                | 'inc'
+                | 'ninc'
+                | 'pre'
+                | 'suf'
+                | 'sub'
+                | 'gt'
+                | 'gte'
+                | 'lt'
+                | 'lte';
+              neg?: boolean;
+              key?: string;
+              value?: string | string[] | number;
+            }[];
+          }[];
+          action: {
+            mitigate?: {
+              action: 'log' | 'challenge' | 'deny' | 'bypass' | 'rate_limit' | 'redirect';
+              rateLimit?: {
+                algo: 'fixed_window' | 'token_bucket';
+                window: number;
+                limit: number;
+                keys: string[];
+                action?: ('log' | 'challenge' | 'deny' | 'rate_limit') | null;
+              } | null;
+              redirect?: {
+                location: string;
+                permanent: boolean;
+              } | null;
+              actionDuration?: string | null;
+            };
+          };
+        };
+      }
+    | {
+        action: string;
+        id: string;
+        value?: null;
+      }
+    | {
+        action: string;
+        id: string;
+        value: number;
+      }
+    | {
+        action: string;
+        id: 'sd' | 'ma' | 'lfi' | 'rfi' | 'rce' | 'php' | 'gen' | 'xss' | 'sqli' | 'sf' | 'java';
+        value: {
+          active: boolean;
+          action: 'deny' | 'log';
+        };
+      }
+    | {
+        action: string;
+        id?: null;
+        value?: null;
+      }
+    | {
+        action: string;
+        id?: null;
+        value: {
+          hostname: string;
+          ip: string;
+          notes?: string;
+          action: 'deny' | 'challenge' | 'log' | 'bypass';
+        };
+      }
+    | {
+        action: string;
+        id: string;
+        value: {
+          hostname: string;
+          ip: string;
+          notes?: string;
+          action: 'deny' | 'challenge' | 'log' | 'bypass';
+        };
+      }
+    | {
+        action: string;
+        id: string;
+        value?: null;
+      }
+    | {
+        action: string;
+        id: 'owasp';
+        value: {
+          active: boolean;
+        };
+      },
+    {},
+    UpdateFirewallConfigQueryParams,
+    {}
+  >({ url: '/v1/security/firewall/config', method: 'patch', ...variables, signal });
+
+export type GetFirewallConfigQueryParams = {
+  projectId: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type GetFirewallConfigError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetFirewallConfigResponse = {
+  ownerId: string;
+  projectKey: string;
+  id: string;
+  version: number;
+  updatedAt: string;
+  firewallEnabled: boolean;
+  crs: {
+    sd: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+    ma: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+    lfi: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+    rfi: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+    rce: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+    php: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+    gen: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+    xss: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+    sqli: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+    sf: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+    java: {
+      active: boolean;
+      action: 'deny' | 'log';
+    };
+  };
+  rules: {
+    id: string;
+    name: string;
+    description?: string;
+    active: boolean;
+    conditionGroup: {
+      conditions: {
+        type:
+          | 'cookie'
+          | 'environment'
+          | 'geo_as_number'
+          | 'geo_city'
+          | 'geo_continent'
+          | 'geo_country'
+          | 'geo_country_region'
+          | 'header'
+          | 'host'
+          | 'ip_address'
+          | 'ja3_digest'
+          | 'ja4_digest'
+          | 'method'
+          | 'path'
+          | 'protocol'
+          | 'query'
+          | 'rate_limit_api_id'
+          | 'raw_path'
+          | 'region'
+          | 'scheme'
+          | 'target_path'
+          | 'user_agent';
+        op: 'eq' | 'ex' | 'gt' | 'gte' | 'inc' | 'lt' | 'lte' | 'neq' | 'nex' | 'ninc' | 'pre' | 're' | 'sub' | 'suf';
+        neg?: boolean;
+        key?: string;
+        value?: string | number | string[];
+      }[];
+    }[];
+    action: {
+      mitigate?: {
+        action: 'bypass' | 'challenge' | 'deny' | 'log' | 'rate_limit' | 'redirect';
+        rateLimit?: {
+          algo: 'fixed_window' | 'token_bucket';
+          window: number;
+          limit: number;
+          keys: string[];
+          action?: 'challenge' | 'deny' | 'log' | 'rate_limit' | null;
+        } | null;
+        redirect?: {
+          location: string;
+          permanent: boolean;
+        } | null;
+        actionDuration?: string | null;
+      };
+    };
+  }[];
+  ips: {
+    id: string;
+    hostname: string;
+    ip: string;
+    notes?: string;
+    action: 'bypass' | 'challenge' | 'deny' | 'log';
+  }[];
+  changes: Record<string, any>[];
+  managedRules?: {
+    owasp?: {
+      active: boolean;
+      updatedAt?: string;
+      userId?: string;
+      username?: string;
+    };
+    verifiedBotsBypass?: {
+      active: boolean;
+      updatedAt?: string;
+      userId?: string;
+      username?: string;
+    };
+  };
+};
+
+export type GetFirewallConfigVariables = {
+  queryParams: GetFirewallConfigQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieve the specified firewall configuration for a project. The deployed configVersion will be `active`
+ */
+export const getFirewallConfig = (variables: GetFirewallConfigVariables, signal?: AbortSignal) =>
+  fetch<GetFirewallConfigResponse, GetFirewallConfigError, undefined, {}, GetFirewallConfigQueryParams, {}>({
+    url: '/v1/security/firewall/config/{configVersion}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
 export type GetTeamMembersQueryParams = {
   /**
    * Limit how many teams should be returned
    *
    * @example 20
+   * @minimum 1
    */
   limit?: number;
   /**
@@ -13392,7 +17802,7 @@ export type GetTeamMembersResponse = {
      *
      * @example OWNER
      */
-    role: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'VIEWER' | 'BILLING' | 'CONTRIBUTOR';
+    role: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'VIEWER';
     /**
      * The ID of this user.
      *
@@ -13428,17 +17838,17 @@ export type GetTeamMembersResponse = {
      */
     joinedFrom?: {
       origin:
-        | 'mail'
-        | 'link'
-        | 'import'
-        | 'teams'
-        | 'github'
-        | 'gitlab'
         | 'bitbucket'
-        | 'saml'
         | 'dsync'
         | 'feedback'
-        | 'organization-teams';
+        | 'github'
+        | 'gitlab'
+        | 'import'
+        | 'link'
+        | 'mail'
+        | 'organization-teams'
+        | 'saml'
+        | 'teams';
       commitId?: string;
       repoId?: string;
       repoPath?: string;
@@ -13454,21 +17864,23 @@ export type GetTeamMembersResponse = {
      * Array of project memberships
      */
     projects?: {
-      id?: string;
       name?: string;
+      id?: string;
       role?: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
     }[];
   }[];
   emailInviteCodes?: {
+    accessGroups?: string[];
     id: string;
     email?: string;
-    role?: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'VIEWER' | 'BILLING' | 'CONTRIBUTOR';
+    role?: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'VIEWER';
     isDSyncUser: boolean;
     createdAt?: number;
     expired?: boolean;
     projects?: {
       [key: string]: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
     };
+    entitlements?: string[];
   }[];
   pagination: {
     hasNext: boolean;
@@ -13532,12 +17944,12 @@ export type InviteUserToTeamRequestBody = {
    * @example MEMBER
    * @example VIEWER
    */
-  role?: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
+  role?: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'VIEWER';
   projects?: {
     /**
      * The ID of the project.
      *
-     * @maxLength 256
+     * @maxLength 64
      * @example prj_ndlgr43fadlPyCtREAqxxdyFK
      */
     projectId: string;
@@ -13546,7 +17958,7 @@ export type InviteUserToTeamRequestBody = {
      *
      * @example ADMIN
      */
-    role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER';
+    role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
   }[];
 };
 
@@ -13577,18 +17989,18 @@ export const inviteUserToTeam = (variables: InviteUserToTeamVariables, signal?: 
          *
          * @example john@user.co
          */
-        email: string;
+        email?: string;
         /**
          * The role used for the invitation
          *
          * @example MEMBER
          */
-        role: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
+        role: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
       }
     | {
         uid: string;
         username: string;
-        role: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
+        role: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
       },
     InviteUserToTeamError,
     InviteUserToTeamRequestBody,
@@ -13605,17 +18017,17 @@ export type RequestAccessToTeamResponse = {
   confirmed?: boolean;
   joinedFrom?: {
     origin:
-      | 'import'
-      | 'teams'
+      | 'bitbucket'
+      | 'dsync'
+      | 'feedback'
       | 'github'
       | 'gitlab'
-      | 'bitbucket'
-      | 'feedback'
-      | 'organization-teams'
-      | 'mail'
+      | 'import'
       | 'link'
+      | 'mail'
+      | 'organization-teams'
       | 'saml'
-      | 'dsync';
+      | 'teams';
     commitId?: string;
     repoId?: string;
     repoPath?: string;
@@ -13646,7 +18058,7 @@ export type RequestAccessToTeamRequestBody = {
      *
      * @example github
      */
-    origin: 'import' | 'teams' | 'github' | 'gitlab' | 'bitbucket' | 'feedback' | 'organization-teams';
+    origin: 'bitbucket' | 'feedback' | 'github' | 'gitlab' | 'import' | 'organization-teams' | 'teams';
     /**
      * The commit sha if the origin is a git provider.
      *
@@ -13725,17 +18137,17 @@ export type GetTeamAccessRequestResponse = {
    */
   joinedFrom: {
     origin:
-      | 'mail'
-      | 'link'
-      | 'import'
-      | 'teams'
-      | 'github'
-      | 'gitlab'
       | 'bitbucket'
-      | 'saml'
       | 'dsync'
       | 'feedback'
-      | 'organization-teams';
+      | 'github'
+      | 'gitlab'
+      | 'import'
+      | 'link'
+      | 'mail'
+      | 'organization-teams'
+      | 'saml'
+      | 'teams';
     commitId?: string;
     repoId?: string;
     repoPath?: string;
@@ -13824,12 +18236,6 @@ export type JoinTeamRequestBody = {
    * @example fisdh38aejkeivn34nslfore9vjtn4ls
    */
   inviteCode?: string;
-  /**
-   * The team ID.
-   *
-   * @example team_3oNwMKqLHqEBh02CTPsrbNbe
-   */
-  teamId?: string;
 };
 
 export type JoinTeamVariables = {
@@ -13894,7 +18300,7 @@ export type UpdateTeamMemberRequestBody = {
      *
      * @example ADMIN
      */
-    role: 'ADMIN' | 'PROJECT_VIEWER' | 'PROJECT_DEVELOPER' | any | null;
+    role: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER' | any | null;
   }[];
   joinedFrom?: {
     ssoUserId?: null;
@@ -13944,7 +18350,6 @@ export type RemoveTeamMemberResponse = {
    * ID of the team.
    */
   id: string;
-  newDefaultTeamIdError: boolean;
 };
 
 export type RemoveTeamMemberVariables = {
@@ -13967,12 +18372,15 @@ export const removeTeamMember = (variables: RemoveTeamMemberVariables, signal?: 
 
 export type GetTeamPathParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
 };
 
 export type GetTeamQueryParams = {
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
   slug?: string;
 };
 
@@ -13996,9 +18404,16 @@ export const getTeam = (variables: GetTeamVariables, signal?: AbortSignal) =>
 
 export type PatchTeamPathParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId: string;
+};
+
+export type PatchTeamQueryParams = {
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type PatchTeamError = Fetcher.ErrorWrapper<undefined>;
@@ -14049,8 +18464,18 @@ export type PatchTeamRequestBody = {
      * @example true
      */
     enforced?: boolean;
+    /**
+     * Directory groups to role or access group mappings.
+     */
     roles?: {
-      [key: string]: 'OWNER' | 'MEMBER' | 'VIEWER' | 'DEVELOPER' | 'BILLING' | 'CONTRIBUTOR';
+      [key: string]:
+        | ('OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR')
+        | {
+            /**
+             * @pattern ^ag_[A-z0-9_ -]+$
+             */
+            accessGroupId: string;
+          };
     };
   };
   /**
@@ -14060,23 +18485,23 @@ export type PatchTeamRequestBody = {
    */
   slug?: string;
   /**
-   * Enable preview comments: one of on, off or default.
+   * Enable preview toolbar: one of on, off or default.
    *
    * @example on
    */
   enablePreviewFeedback?: string;
+  /**
+   * Enable production toolbar: one of on, off or default.
+   *
+   * @example on
+   */
+  enableProductionFeedback?: string;
   /**
    * Sensitive environment variable policy: one of on, off or default.
    *
    * @example on
    */
   sensitiveEnvironmentVariablePolicy?: string;
-  /**
-   * Runs a task that migrates all existing environment variables to sensitive environment variables.
-   *
-   * @example false
-   */
-  migrateExistingEnvVariablesToSensitive?: boolean;
   /**
    * Whether or not remote caching is enabled for the team
    */
@@ -14094,18 +18519,25 @@ export type PatchTeamRequestBody = {
    * @example false
    */
   hideIpAddresses?: boolean;
+  /**
+   * Display or hide IP addresses in Log Drains.
+   *
+   * @example false
+   */
+  hideIpAddressesInLogDrains?: boolean;
 };
 
 export type PatchTeamVariables = {
   body?: PatchTeamRequestBody;
   pathParams: PatchTeamPathParams;
+  queryParams?: PatchTeamQueryParams;
 } & FetcherExtraProps;
 
 /**
  * Update the information of a Team specified by the `teamId` parameter. The request body should contain the information that will be updated on the Team.
  */
 export const patchTeam = (variables: PatchTeamVariables, signal?: AbortSignal) =>
-  fetch<Schemas.Team, PatchTeamError, PatchTeamRequestBody, {}, {}, PatchTeamPathParams>({
+  fetch<Schemas.Team, PatchTeamError, PatchTeamRequestBody, {}, PatchTeamQueryParams, PatchTeamPathParams>({
     url: '/v2/teams/{teamId}',
     method: 'patch',
     ...variables,
@@ -14165,500 +18597,10 @@ export type CreateTeamResponse = {
    */
   id: string;
   slug: string;
-  billing: {
-    currency?: 'usd' | 'eur';
-    cancelation?: number | null;
-    period: {
-      start: number;
-      end: number;
-    } | null;
-    contract?: {
-      start: number;
-      end: number;
-    } | null;
-    plan: 'hobby' | 'pro' | 'enterprise';
-    platform?: 'stripe' | 'stripeTestMode';
-    orbCustomerId?: string;
-    syncedAt?: number;
-    programType?: 'startup' | 'agency';
-    trial?: {
-      start: number;
-      end: number;
-    } | null;
-    email?: string | null;
-    tax?: {
-      type: string;
-      id: string;
-    } | null;
-    language?: string | null;
-    address?: {
-      line1?: string;
-      line2?: string;
-      postalCode?: string;
-      city?: string;
-      country?: string;
-      state?: string;
-    } | null;
-    name?: string | null;
-    invoiceItems?: {
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      monitoring?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      pro?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      enterprise?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      analytics?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      concurrentBuilds?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      passwordProtection?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      previewDeploymentSuffix?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      saml?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      teamSeats?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      /**
-       * Will be used to create an invoice item. The price must be in cents: 2000 for $20.
-       */
-      webAnalytics?: {
-        tier?: number;
-        price: number;
-        quantity: number;
-        highestQuantity?: number;
-        name?: string;
-        hidden: boolean;
-        createdAt?: number;
-        disabledAt?: number | null;
-        frequency?: {
-          interval: 'month';
-          intervalCount: 1 | 2 | 3 | 6 | 12;
-        };
-        maxQuantity?: number;
-      };
-      analyticsUsage?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      artifacts?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      bandwidth?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      dataCacheRead?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      dataCacheRevalidation?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      dataCacheWrite?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      edgeConfigRead?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      edgeConfigWrite?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      edgeFunctionExecutionUnits?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      edgeMiddlewareInvocations?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      monitoringMetric?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      postgresComputeTime?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      postgresDatabase?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      postgresDataStorage?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      postgresDataTransfer?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      postgresWrittenData?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      serverlessFunctionExecution?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      sourceImages?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      storageRedisTotalBandwidthInBytes?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      storageRedisTotalCommands?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      storageRedisTotalDailyAvgStorageInBytes?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      storageRedisTotalDatabases?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-      webAnalyticsEvent?: {
-        tier?: number;
-        price: number;
-        batch: number;
-        threshold: number;
-        name?: string;
-        hidden: boolean;
-        disabledAt?: number | null;
-        enabledAt?: number | null;
-      };
-    } | null;
-    invoiceSettings?: {
-      footer?: string;
-    };
-    subscriptions?:
-      | {
-          id: string;
-          trial: {
-            start: number;
-            end: number;
-          } | null;
-          period: {
-            start: number;
-            end: number;
-          };
-          frequency: {
-            interval: 'month' | 'day' | 'week' | 'year';
-            intervalCount: number;
-          };
-          discount: {
-            id: string;
-            coupon: {
-              id: string;
-              name: string | null;
-              amountOff: number | null;
-              percentageOff: number | null;
-              durationInMonths: number | null;
-              duration: 'forever' | 'repeating' | 'once';
-            };
-          } | null;
-          items: {
-            id: string;
-            priceId: string;
-            productId: string;
-            amount: number;
-            quantity: number;
-          }[];
-        }[]
-      | null;
-    controls?: {
-      analyticsSampleRateInPercent?: number | null;
-      analyticsSpendLimitInDollars?: number | null;
-    } | null;
-    purchaseOrder?: string | null;
-    status?: 'active' | 'trialing' | 'overdue' | 'expired' | 'canceled';
-    pricingExperiment?: 'august-2022';
-    orbMigrationScheduledAt?: number | null;
-  };
+  /**
+   * IMPORTANT: If extending Billing, particularly with optional fields, make sure you also update `sync-orb-subscription-to-owner.ts` to handle the items when the object is recreated.
+   */
+  billing: Record<string, any>;
 };
 
 export type CreateTeamRequestBody = {
@@ -14676,6 +18618,41 @@ export type CreateTeamRequestBody = {
    * @maxLength 256
    */
   name?: string;
+  /**
+   * Attribution information for the session or current page
+   */
+  attribution?: {
+    /**
+     * Session referrer
+     */
+    sessionReferrer?: string;
+    /**
+     * Session landing page
+     */
+    landingPage?: string;
+    /**
+     * Referrer to the signup page
+     */
+    pageBeforeConversionPage?: string;
+    utm?: {
+      /**
+       * UTM source
+       */
+      utmSource?: string;
+      /**
+       * UTM medium
+       */
+      utmMedium?: string;
+      /**
+       * UTM campaign
+       */
+      utmCampaign?: string;
+      /**
+       * UTM term
+       */
+      utmTerm?: string;
+    };
+  };
 };
 
 export type CreateTeamVariables = {
@@ -14695,7 +18672,7 @@ export const createTeam = (variables: CreateTeamVariables, signal?: AbortSignal)
 
 export type DeleteTeamPathParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId: string;
 };
@@ -14707,6 +18684,10 @@ export type DeleteTeamQueryParams = {
    * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
    */
   newDefaultTeamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type DeleteTeamError = Fetcher.ErrorWrapper<undefined>;
@@ -14794,9 +18775,13 @@ export const deleteTeamInviteCode = (variables: DeleteTeamInviteCodeVariables, s
 
 export type UploadFileQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type UploadFileHeaders = {
@@ -14945,9 +18930,13 @@ export const listAuthTokens = (variables: ListAuthTokensVariables, signal?: Abor
 
 export type CreateAuthTokenQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type CreateAuthTokenError = Fetcher.ErrorWrapper<undefined>;
@@ -14962,19 +18951,13 @@ export type CreateAuthTokenResponse = {
   bearerToken: string;
 };
 
+export type CreateAuthTokenRequestBody = {
+  name: string;
+  expiresAt?: number;
+};
+
 export type CreateAuthTokenVariables = {
-  body?:
-    | {
-        name: string;
-        expiresAt?: number;
-      }
-    | {
-        type: 'oauth2-token';
-        name: string;
-        clientId?: string;
-        installationId?: string;
-        expiresAt?: number;
-      };
+  body: CreateAuthTokenRequestBody;
   queryParams?: CreateAuthTokenQueryParams;
 } & FetcherExtraProps;
 
@@ -14982,24 +18965,12 @@ export type CreateAuthTokenVariables = {
  * Creates and returns a new authentication token for the currently authenticated User. The `bearerToken` property is only provided once, in the response body, so be sure to save it on the client for use with API requests.
  */
 export const createAuthToken = (variables: CreateAuthTokenVariables, signal?: AbortSignal) =>
-  fetch<
-    CreateAuthTokenResponse,
-    CreateAuthTokenError,
-    | {
-        name: string;
-        expiresAt?: number;
-      }
-    | {
-        type: 'oauth2-token';
-        name: string;
-        clientId?: string;
-        installationId?: string;
-        expiresAt?: number;
-      },
-    {},
-    CreateAuthTokenQueryParams,
-    {}
-  >({ url: '/v3/user/tokens', method: 'post', ...variables, signal });
+  fetch<CreateAuthTokenResponse, CreateAuthTokenError, CreateAuthTokenRequestBody, {}, CreateAuthTokenQueryParams, {}>({
+    url: '/v3/user/tokens',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAuthTokenPathParams = {
   /**
@@ -15068,9 +19039,13 @@ export const deleteAuthToken = (variables: DeleteAuthTokenVariables, signal?: Ab
 
 export type CreateWebhookQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type CreateWebhookError = Fetcher.ErrorWrapper<undefined>;
@@ -15088,31 +19063,44 @@ export type CreateWebhookResponse = {
   events: (
     | 'budget.reached'
     | 'budget.reset'
-    | 'domain.created'
+    | 'deployment'
+    | 'deployment-canceled'
+    | 'deployment-check-rerequested'
+    | 'deployment-checks-completed'
+    | 'deployment-error'
+    | 'deployment-prepared'
+    | 'deployment-ready'
+    | 'deployment.canceled'
+    | 'deployment.check-rerequested'
     | 'deployment.created'
     | 'deployment.error'
-    | 'deployment.canceled'
-    | 'deployment.succeeded'
+    | 'deployment.integration.action.cancel'
+    | 'deployment.integration.action.cleanup'
+    | 'deployment.integration.action.start'
+    | 'deployment.promoted'
     | 'deployment.ready'
-    | 'deployment.check-rerequested'
-    | 'integration-configuration.permission-upgraded'
-    | 'integration-configuration.removed'
-    | 'integration-configuration.scope-change-confirmed'
-    | 'project.created'
-    | 'project.removed'
-    | 'deployment-checks-completed'
-    | 'deployment-ready'
-    | 'deployment-prepared'
-    | 'deployment-error'
-    | 'deployment-check-rerequested'
-    | 'deployment-canceled'
-    | 'project-created'
-    | 'project-removed'
+    | 'deployment.succeeded'
     | 'domain-created'
-    | 'deployment'
+    | 'domain.created'
+    | 'edge-config.created'
+    | 'edge-config.deleted'
+    | 'edge-config.items.updated'
+    | 'firewall.attack'
     | 'integration-configuration-permission-updated'
     | 'integration-configuration-removed'
     | 'integration-configuration-scope-change-confirmed'
+    | 'integration-configuration.permission-upgraded'
+    | 'integration-configuration.removed'
+    | 'integration-configuration.scope-change-confirmed'
+    | 'marketplace.invoice.created'
+    | 'marketplace.invoice.notpaid'
+    | 'marketplace.invoice.paid'
+    | 'marketplace.invoice.refunded'
+    | 'observability.anomaly'
+    | 'project-created'
+    | 'project-removed'
+    | 'project.created'
+    | 'project.removed'
     | 'test-webhook'
   )[];
   /**
@@ -15165,31 +19153,44 @@ export type CreateWebhookRequestBody = {
   events: (
     | 'budget.reached'
     | 'budget.reset'
-    | 'domain.created'
+    | 'deployment'
+    | 'deployment-canceled'
+    | 'deployment-check-rerequested'
+    | 'deployment-checks-completed'
+    | 'deployment-error'
+    | 'deployment-prepared'
+    | 'deployment-ready'
+    | 'deployment.canceled'
+    | 'deployment.check-rerequested'
     | 'deployment.created'
     | 'deployment.error'
-    | 'deployment.canceled'
-    | 'deployment.succeeded'
+    | 'deployment.integration.action.cancel'
+    | 'deployment.integration.action.cleanup'
+    | 'deployment.integration.action.start'
+    | 'deployment.promoted'
     | 'deployment.ready'
-    | 'deployment.check-rerequested'
-    | 'integration-configuration.permission-upgraded'
-    | 'integration-configuration.removed'
-    | 'integration-configuration.scope-change-confirmed'
-    | 'project.created'
-    | 'project.removed'
-    | 'deployment-checks-completed'
-    | 'deployment-ready'
-    | 'deployment-prepared'
-    | 'deployment-error'
-    | 'deployment-check-rerequested'
-    | 'deployment-canceled'
-    | 'project-created'
-    | 'project-removed'
+    | 'deployment.succeeded'
     | 'domain-created'
-    | 'deployment'
+    | 'domain.created'
+    | 'edge-config.created'
+    | 'edge-config.deleted'
+    | 'edge-config.items.updated'
+    | 'firewall.attack'
     | 'integration-configuration-permission-updated'
     | 'integration-configuration-removed'
     | 'integration-configuration-scope-change-confirmed'
+    | 'integration-configuration.permission-upgraded'
+    | 'integration-configuration.removed'
+    | 'integration-configuration.scope-change-confirmed'
+    | 'marketplace.invoice.created'
+    | 'marketplace.invoice.notpaid'
+    | 'marketplace.invoice.paid'
+    | 'marketplace.invoice.refunded'
+    | 'observability.anomaly'
+    | 'project-created'
+    | 'project-removed'
+    | 'project.created'
+    | 'project.removed'
     | 'test-webhook'
   )[];
   /**
@@ -15221,9 +19222,13 @@ export type GetWebhooksQueryParams = {
    */
   projectId?: string;
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetWebhooksError = Fetcher.ErrorWrapper<undefined>;
@@ -15253,6 +19258,7 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
                 | 'docusaurus-2'
                 | 'docusaurus'
                 | 'preact'
+                | 'solidstart-1'
                 | 'solidstart'
                 | 'dojo'
                 | 'ember'
@@ -15283,6 +19289,8 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
                 | 'vitepress'
                 | 'vuepress'
                 | 'parcel'
+                | 'fasthtml'
+                | 'sanity-v3'
                 | 'sanity'
                 | 'storybook'
                 | null;
@@ -15304,6 +19312,14 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'deployment.succeeded'
           | 'deployment.ready'
           | 'deployment.check-rerequested'
+          | 'deployment.promoted'
+          | 'deployment.integration.action.start'
+          | 'deployment.integration.action.cancel'
+          | 'deployment.integration.action.cleanup'
+          | 'edge-config.created'
+          | 'edge-config.deleted'
+          | 'edge-config.items.updated'
+          | 'firewall.attack'
           | 'integration-configuration.permission-upgraded'
           | 'integration-configuration.removed'
           | 'integration-configuration.scope-change-confirmed'
@@ -15322,6 +19338,11 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'integration-configuration-permission-updated'
           | 'integration-configuration-removed'
           | 'integration-configuration-scope-change-confirmed'
+          | 'marketplace.invoice.created'
+          | 'marketplace.invoice.paid'
+          | 'marketplace.invoice.notpaid'
+          | 'marketplace.invoice.refunded'
+          | 'observability.anomaly'
           | 'test-webhook'
         )[];
         /**
@@ -15377,6 +19398,14 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'deployment.succeeded'
           | 'deployment.ready'
           | 'deployment.check-rerequested'
+          | 'deployment.promoted'
+          | 'deployment.integration.action.start'
+          | 'deployment.integration.action.cancel'
+          | 'deployment.integration.action.cleanup'
+          | 'edge-config.created'
+          | 'edge-config.deleted'
+          | 'edge-config.items.updated'
+          | 'firewall.attack'
           | 'integration-configuration.permission-upgraded'
           | 'integration-configuration.removed'
           | 'integration-configuration.scope-change-confirmed'
@@ -15395,6 +19424,11 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'integration-configuration-permission-updated'
           | 'integration-configuration-removed'
           | 'integration-configuration-scope-change-confirmed'
+          | 'marketplace.invoice.created'
+          | 'marketplace.invoice.paid'
+          | 'marketplace.invoice.notpaid'
+          | 'marketplace.invoice.refunded'
+          | 'observability.anomaly'
           | 'test-webhook'
         )[];
         /**
@@ -15447,9 +19481,13 @@ export type GetWebhookPathParams = {
 
 export type GetWebhookQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetWebhookError = Fetcher.ErrorWrapper<undefined>;
@@ -15463,31 +19501,44 @@ export type GetWebhookResponse = {
   events: (
     | 'budget.reached'
     | 'budget.reset'
-    | 'domain.created'
+    | 'deployment'
+    | 'deployment-canceled'
+    | 'deployment-check-rerequested'
+    | 'deployment-checks-completed'
+    | 'deployment-error'
+    | 'deployment-prepared'
+    | 'deployment-ready'
+    | 'deployment.canceled'
+    | 'deployment.check-rerequested'
     | 'deployment.created'
     | 'deployment.error'
-    | 'deployment.canceled'
-    | 'deployment.succeeded'
+    | 'deployment.integration.action.cancel'
+    | 'deployment.integration.action.cleanup'
+    | 'deployment.integration.action.start'
+    | 'deployment.promoted'
     | 'deployment.ready'
-    | 'deployment.check-rerequested'
-    | 'integration-configuration.permission-upgraded'
-    | 'integration-configuration.removed'
-    | 'integration-configuration.scope-change-confirmed'
-    | 'project.created'
-    | 'project.removed'
-    | 'deployment-checks-completed'
-    | 'deployment-ready'
-    | 'deployment-prepared'
-    | 'deployment-error'
-    | 'deployment-check-rerequested'
-    | 'deployment-canceled'
-    | 'project-created'
-    | 'project-removed'
+    | 'deployment.succeeded'
     | 'domain-created'
-    | 'deployment'
+    | 'domain.created'
+    | 'edge-config.created'
+    | 'edge-config.deleted'
+    | 'edge-config.items.updated'
+    | 'firewall.attack'
     | 'integration-configuration-permission-updated'
     | 'integration-configuration-removed'
     | 'integration-configuration-scope-change-confirmed'
+    | 'integration-configuration.permission-upgraded'
+    | 'integration-configuration.removed'
+    | 'integration-configuration.scope-change-confirmed'
+    | 'marketplace.invoice.created'
+    | 'marketplace.invoice.notpaid'
+    | 'marketplace.invoice.paid'
+    | 'marketplace.invoice.refunded'
+    | 'observability.anomaly'
+    | 'project-created'
+    | 'project-removed'
+    | 'project.created'
+    | 'project.removed'
     | 'test-webhook'
   )[];
   /**
@@ -15550,9 +19601,13 @@ export type DeleteWebhookPathParams = {
 
 export type DeleteWebhookQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type DeleteWebhookError = Fetcher.ErrorWrapper<undefined>;
@@ -15619,9 +19674,13 @@ export type ListAliasesQueryParams = {
    */
   rollbackDeploymentId?: string;
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type ListAliasesError = Fetcher.ErrorWrapper<undefined>;
@@ -15813,9 +19872,13 @@ export type GetAliasQueryParams = {
    */
   until?: number;
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetAliasError = Fetcher.ErrorWrapper<undefined>;
@@ -15951,7 +20014,7 @@ export type GetAliasResponse = {
           scope: 'email_invite';
         };
   };
-};
+}[];
 
 export type GetAliasVariables = {
   pathParams: GetAliasPathParams;
@@ -15980,9 +20043,13 @@ export type DeleteAliasPathParams = {
 
 export type DeleteAliasQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type DeleteAliasError = Fetcher.ErrorWrapper<undefined>;
@@ -16018,9 +20085,13 @@ export type ListDeploymentAliasesPathParams = {
 
 export type ListDeploymentAliasesQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type ListDeploymentAliasesError = Fetcher.ErrorWrapper<undefined>;
@@ -16114,9 +20185,13 @@ export type AssignAliasPathParams = {
 
 export type AssignAliasQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type AssignAliasError = Fetcher.ErrorWrapper<undefined>;
@@ -16183,6 +20258,29 @@ export const assignAlias = (variables: AssignAliasVariables, signal?: AbortSigna
     AssignAliasPathParams
   >({ url: '/v2/deployments/{id}/aliases', method: 'post', ...variables, signal });
 
+export type GetCertsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetCertsResponse = {
+  certs: {
+    cn: string;
+    uid: string;
+    /**
+     * @format date-time
+     */
+    created: string;
+    /**
+     * @format date-time
+     */
+    expiration: string;
+    autoRenew: boolean;
+  }[];
+};
+
+export type GetCertsVariables = FetcherExtraProps;
+
+export const getCerts = (variables: GetCertsVariables, signal?: AbortSignal) =>
+  fetch<GetCertsResponse, GetCertsError, undefined, {}, {}, {}>({ url: '/certs', method: 'get', ...variables, signal });
+
 export type GetCertByIdPathParams = {
   /**
    * The cert id
@@ -16192,9 +20290,13 @@ export type GetCertByIdPathParams = {
 
 export type GetCertByIdQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetCertByIdError = Fetcher.ErrorWrapper<undefined>;
@@ -16232,9 +20334,13 @@ export type RemoveCertPathParams = {
 
 export type RemoveCertQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type RemoveCertError = Fetcher.ErrorWrapper<undefined>;
@@ -16257,9 +20363,13 @@ export const removeCert = (variables: RemoveCertVariables, signal?: AbortSignal)
 
 export type IssueCertQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type IssueCertError = Fetcher.ErrorWrapper<undefined>;
@@ -16297,9 +20407,13 @@ export const issueCert = (variables: IssueCertVariables, signal?: AbortSignal) =
 
 export type UploadCertQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type UploadCertError = Fetcher.ErrorWrapper<undefined>;
@@ -16356,9 +20470,13 @@ export type ListDeploymentFilesPathParams = {
 
 export type ListDeploymentFilesQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type ListDeploymentFilesError = Fetcher.ErrorWrapper<undefined>;
@@ -16400,9 +20518,13 @@ export type GetDeploymentFileContentsQueryParams = {
    */
   path?: string;
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetDeploymentFileContentsError = Fetcher.ErrorWrapper<undefined>;
@@ -16413,7 +20535,7 @@ export type GetDeploymentFileContentsVariables = {
 } & FetcherExtraProps;
 
 /**
- * Allows to retrieve the content of a file by supplying the file identifier and the deployment unique identifier. The response body will contain the raw content of the file.
+ * Allows to retrieve the content of a file by supplying the file identifier and the deployment unique identifier. The response body will contain a JSON response containing the contents of the file encoded as base64.
  */
 export const getDeploymentFileContents = (variables: GetDeploymentFileContentsVariables, signal?: AbortSignal) =>
   fetch<
@@ -16423,7 +20545,7 @@ export const getDeploymentFileContents = (variables: GetDeploymentFileContentsVa
     {},
     GetDeploymentFileContentsQueryParams,
     GetDeploymentFileContentsPathParams
-  >({ url: '/v6/deployments/{id}/files/{fileId}', method: 'get', ...variables, signal });
+  >({ url: '/v7/deployments/{id}/files/{fileId}', method: 'get', ...variables, signal });
 
 export type GetDeploymentsQueryParams = {
   /**
@@ -16446,7 +20568,7 @@ export type GetDeploymentsQueryParams = {
    */
   limit?: number;
   /**
-   * Filter deployments from the given `projectId`.
+   * Filter deployments from the given ID or name.
    *
    * @example QmXGTs7mvAMMC7WW5ebrM33qKG32QK3h4vmQMjmY
    */
@@ -16456,7 +20578,7 @@ export type GetDeploymentsQueryParams = {
    *
    * @example production
    */
-  target?: 'production' | 'preview';
+  target?: string;
   /**
    * Gets the deployment created before this Date timestamp. (default: current time)
    *
@@ -16493,9 +20615,13 @@ export type GetDeploymentsQueryParams = {
    */
   rollbackCandidate?: boolean;
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetDeploymentsError = Fetcher.ErrorWrapper<undefined>;
@@ -16528,23 +20654,41 @@ export type GetDeploymentsResponse = {
      */
     created: number;
     /**
+     * Timestamp of when the deployment got deleted.
+     *
+     * @example 1609492210000
+     */
+    deleted?: number;
+    /**
+     * Timestamp of when the deployment was undeleted.
+     *
+     * @example 1609492210000
+     */
+    undeleted?: number;
+    /**
+     * Optional flag to indicate if the deployment was soft deleted by retention policy.
+     *
+     * @example true
+     */
+    softDeletedByRetention?: boolean;
+    /**
      * The source of the deployment.
      *
      * @example cli
      */
-    source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo';
+    source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy' | 'v0-web';
     /**
      * In which state is the deployment.
      *
      * @example READY
      */
-    state?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+    state?: 'BUILDING' | 'CANCELED' | 'DELETED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
     /**
      * In which state is the deployment.
      *
      * @example READY
      */
-    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY' | 'CANCELED';
+    readyState?: 'BUILDING' | 'CANCELED' | 'DELETED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
     /**
      * The type of the deployment.
      *
@@ -16627,15 +20771,15 @@ export type GetDeploymentsResponse = {
     /**
      * Since June 2023 Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - PROMOTED: has seen production traffic
      */
-    readySubstate?: 'STAGED' | 'PROMOTED';
+    readySubstate?: 'PROMOTED' | 'STAGED';
     /**
      * State of all registered checks
      */
-    checksState?: 'registered' | 'running' | 'completed';
+    checksState?: 'completed' | 'registered' | 'running';
     /**
      * Conclusion for checks
      */
-    checksConclusion?: 'succeeded' | 'failed' | 'skipped' | 'canceled';
+    checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
     /**
      * Vercel URL to inspect the deployment.
      *
@@ -16651,48 +20795,51 @@ export type GetDeploymentsResponse = {
      */
     projectSettings?: {
       framework?:
-        | 'blitzjs'
-        | 'nextjs'
-        | 'gatsby'
-        | 'remix'
-        | 'astro'
-        | 'hexo'
-        | 'eleventy'
-        | 'docusaurus-2'
-        | 'docusaurus'
-        | 'preact'
-        | 'solidstart'
-        | 'dojo'
-        | 'ember'
-        | 'vue'
-        | 'scully'
-        | 'ionic-angular'
         | 'angular'
+        | 'astro'
+        | 'blitzjs'
+        | 'brunch'
+        | 'create-react-app'
+        | 'docusaurus'
+        | 'docusaurus-2'
+        | 'dojo'
+        | 'eleventy'
+        | 'ember'
+        | 'fasthtml'
+        | 'gatsby'
+        | 'gridsome'
+        | 'hexo'
+        | 'hugo'
+        | 'hydrogen'
+        | 'ionic-angular'
+        | 'ionic-react'
+        | 'jekyll'
+        | 'middleman'
+        | 'nextjs'
+        | 'nuxtjs'
+        | 'parcel'
         | 'polymer'
+        | 'preact'
+        | 'redwoodjs'
+        | 'remix'
+        | 'saber'
+        | 'sanity'
+        | 'sanity-v3'
+        | 'sapper'
+        | 'scully'
+        | 'solidstart'
+        | 'solidstart-1'
+        | 'stencil'
+        | 'storybook'
         | 'svelte'
         | 'sveltekit'
         | 'sveltekit-1'
-        | 'ionic-react'
-        | 'create-react-app'
-        | 'gridsome'
         | 'umijs'
-        | 'sapper'
-        | 'saber'
-        | 'stencil'
-        | 'nuxtjs'
-        | 'redwoodjs'
-        | 'hugo'
-        | 'jekyll'
-        | 'brunch'
-        | 'middleman'
-        | 'zola'
-        | 'hydrogen'
         | 'vite'
         | 'vitepress'
+        | 'vue'
         | 'vuepress'
-        | 'parcel'
-        | 'sanity'
-        | 'storybook'
+        | 'zola'
         | null;
       gitForkProtection?: boolean;
       customerSupportCodeVisibility?: boolean;
@@ -16700,7 +20847,7 @@ export type GetDeploymentsResponse = {
       devCommand?: string | null;
       installCommand?: string | null;
       buildCommand?: string | null;
-      nodeVersion?: '20.x' | '18.x' | '16.x' | '14.x' | '12.x' | '10.x' | '8.10.x';
+      nodeVersion?: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
       outputDirectory?: string | null;
       publicSource?: boolean | null;
       rootDirectory?: string | null;
@@ -16739,17 +20886,32 @@ export type GetDeploymentsResponse = {
       };
     };
     /**
-     * The flag saying if Vercel Connect configuration is used for builds
+     * The flag saying if Secure Compute network is used for builds
      */
     connectBuildsEnabled?: boolean;
     /**
-     * The ID of Vercel Connect configuration used for this deployment
+     * The ID of Secure Compute network used for this deployment
      */
     connectConfigurationId?: string;
     /**
-     * The ID of Vercel Connect configuration used for this deployment's passive functions
+     * The ID of Secure Compute network used for this deployment's passive functions
      */
     passiveConnectConfigurationId?: string;
+    /**
+     * The expiration configured by the project retention policy
+     */
+    expiration?: number;
+    /**
+     * The expiration proposed to replace the existing expiration
+     */
+    proposedExpiration?: number;
+    /**
+     * The custom environment used for this deployment, if any
+     */
+    customEnvironment?: {
+      id: string;
+      slug?: string;
+    };
   }[];
 };
 
@@ -16764,124 +20926,6 @@ export const getDeployments = (variables: GetDeploymentsVariables, signal?: Abor
   fetch<GetDeploymentsResponse, GetDeploymentsError, undefined, {}, GetDeploymentsQueryParams, {}>({
     url: '/v6/deployments',
     method: 'get',
-    ...variables,
-    signal
-  });
-
-export type VerifyTokenQueryParams = {
-  /**
-   * Email to verify the login.
-   */
-  email?: string;
-  /**
-   * The token returned when the login was requested.
-   */
-  token: string;
-  /**
-   * The desired name for the token. It will be displayed on the user account details.
-   *
-   * @example Your Client App Name
-   */
-  tokenName?: string;
-  /**
-   * The SAML Profile ID, when connecting a SAML Profile to a Team member for the first time.
-   */
-  ssoUserId?: string;
-  /**
-   * The name of this user's team.
-   */
-  teamName?: string;
-  /**
-   * The slug for this user's team.
-   */
-  teamSlug?: string;
-  /**
-   * The plan for this user's team (pro or hobby).
-   */
-  teamPlan?: 'pro' | 'hobby';
-};
-
-export type VerifyTokenError = Fetcher.ErrorWrapper<undefined>;
-
-export type VerifyTokenResponse = {
-  /**
-   * The user authentication token that can be used to perform API requests.
-   *
-   * @example 1ioXyz9Ue4xdCYGROet1dlKd
-   */
-  token: string;
-  /**
-   * Email address of the authenticated user.
-   *
-   * @example amy@example.com
-   */
-  email: string;
-  /**
-   * When completing SAML Single Sign-On authentication, this will be the ID of the Team that was authenticated for.
-   *
-   * @example team_LLHUOMOoDlqOp8wPE4kFo9pE
-   */
-  teamId?: string;
-};
-
-export type VerifyTokenVariables = {
-  queryParams: VerifyTokenQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Verify the user accepted the login request and get a authentication token. The user email address and the token received after requesting the login must be added to the URL as a query string with the names `email` and `token`.
- */
-export const verifyToken = (variables: VerifyTokenVariables, signal?: AbortSignal) =>
-  fetch<VerifyTokenResponse, VerifyTokenError, undefined, {}, VerifyTokenQueryParams, {}>({
-    url: '/registration/verify',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type EmailLoginError = Fetcher.ErrorWrapper<undefined>;
-
-export type EmailLoginResponse = {
-  /**
-   * The token used to verify the user accepted the login request
-   *
-   * @example T1dmvPu36nmyYisXAs7IRzcR
-   */
-  token: string;
-  /**
-   * The code the user is going to receive on the email. **Must** be displayed to the user so they can verify the request is the correct.
-   *
-   * @example Practical Saola
-   */
-  securityCode: string;
-};
-
-export type EmailLoginRequestBody = {
-  /**
-   * The user email.
-   *
-   * @example user@mail.com
-   */
-  email: string;
-  /**
-   * The desired name for the token. It will be displayed on the user account details.
-   *
-   * @example Your Client App Name
-   */
-  tokenName?: string;
-};
-
-export type EmailLoginVariables = {
-  body: EmailLoginRequestBody;
-} & FetcherExtraProps;
-
-/**
- * Request a new login for a user to get a token. This will respond with a verification token and send an email to confirm the request. Once confirmed you can use the verification token to get an authentication token.
- */
-export const emailLogin = (variables: EmailLoginVariables, signal?: AbortSignal) =>
-  fetch<EmailLoginResponse, EmailLoginError, EmailLoginRequestBody, {}, {}, {}>({
-    url: '/registration',
-    method: 'post',
     ...variables,
     signal
   });
@@ -16903,9 +20947,13 @@ export type DeleteDeploymentQueryParams = {
    */
   url?: string;
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type DeleteDeploymentError = Fetcher.ErrorWrapper<undefined>;
@@ -16957,9 +21005,13 @@ export type GetSecretsQueryParams = {
    */
   projectId?: string;
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetSecretsError = Fetcher.ErrorWrapper<undefined>;
@@ -17040,9 +21092,13 @@ export const getSecrets = (variables: GetSecretsVariables, signal?: AbortSignal)
 
 export type CreateSecretQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type CreateSecretError = Fetcher.ErrorWrapper<undefined>;
@@ -17159,9 +21215,13 @@ export type RenameSecretPathParams = {
 
 export type RenameSecretQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type RenameSecretError = Fetcher.ErrorWrapper<undefined>;
@@ -17222,9 +21282,13 @@ export type GetSecretQueryParams = {
    */
   decrypt?: 'true' | 'false';
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type GetSecretError = Fetcher.ErrorWrapper<undefined>;
@@ -17312,9 +21376,13 @@ export type DeleteSecretPathParams = {
 
 export type DeleteSecretQueryParams = {
   /**
-   * The Team identifier or slug to perform the request on behalf of.
+   * The Team identifier to perform the request on behalf of.
    */
   teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
 };
 
 export type DeleteSecretError = Fetcher.ErrorWrapper<undefined>;
@@ -17357,6 +21425,19 @@ export const deleteSecret = (variables: DeleteSecretVariables, signal?: AbortSig
   });
 
 export const operationsByTag = {
+  accessGroups: {
+    readAccessGroup,
+    updateAccessGroup,
+    deleteAccessGroup,
+    listAccessGroupMembers,
+    listAccessGroups,
+    createAccessGroup,
+    listAccessGroupProjects,
+    createAccessGroupProject,
+    readAccessGroupProject,
+    updateAccessGroupProject,
+    deleteAccessGroupProject
+  },
   artifacts: { recordEvents, status, uploadArtifact, downloadArtifact, artifactQuery },
   checks: { createCheck, getAllChecks, getCheck, updateCheck, rerequestCheck },
   projects: {
@@ -17377,6 +21458,9 @@ export const operationsByTag = {
     createProjectEnv,
     removeProjectEnv,
     editProjectEnv,
+    updateProjectProtectionBypass,
+    requestPromote,
+    listPromoteAliases,
     pauseProject,
     unpauseProject
   },
@@ -17412,14 +21496,31 @@ export const operationsByTag = {
     deleteEdgeConfig,
     getEdgeConfigItems,
     patchEdgeConfigItems,
+    getEdgeConfigSchema,
+    patchEdgeConfigSchema,
+    deleteEdgeConfigSchema,
     getEdgeConfigItem,
     getEdgeConfigTokens,
     deleteEdgeConfigTokens,
     getEdgeConfigToken,
-    createEdgeConfigToken
+    createEdgeConfigToken,
+    getEdgeConfigBackup,
+    getEdgeConfigBackups
   },
   user: { listUserEvents, getAuthUser, requestDelete },
+  marketplace: {
+    getAccountInfo,
+    getMember,
+    createEvent,
+    submitBillingData,
+    submitInvoice,
+    getInvoice,
+    updateInvoice,
+    updateResourceSecrets,
+    exchangeSsoToken
+  },
   integrations: { getConfigurations, getConfiguration, deleteConfiguration, gitNamespaces, searchRepo },
+  authentication: { exchangeSsoToken, listAuthTokens, createAuthToken, getAuthToken, deleteAuthToken },
   logDrains: {
     getIntegrationLogDrains,
     createLogDrain,
@@ -17430,6 +21531,7 @@ export const operationsByTag = {
     createConfigurableLogDrain
   },
   projectMembers: { getProjectMembers, addProjectMember, removeProjectMember },
+  security: { updateAttackChallengeMode, putFirewallConfig, updateFirewallConfig, getFirewallConfig },
   teams: {
     getTeamMembers,
     inviteUserToTeam,
@@ -17445,7 +21547,6 @@ export const operationsByTag = {
     deleteTeam,
     deleteTeamInviteCode
   },
-  authentication: { listAuthTokens, createAuthToken, getAuthToken, deleteAuthToken, verifyToken, emailLogin },
   webhooks: { createWebhook, getWebhooks, getWebhook, deleteWebhook },
   aliases: { listAliases, getAlias, deleteAlias, listDeploymentAliases, assignAlias },
   certs: { getCertById, removeCert, issueCert, uploadCert },

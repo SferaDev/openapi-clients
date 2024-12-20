@@ -50,8 +50,8 @@ function buildExtraFile(context: Context) {
         name: 'operationsByPath',
         initializer: `{
             ${Object.entries(operationsByPath)
-              .map(([path, operation]) => `"${path}": ${operation}`)
-              .join(',\n')}
+            .map(([path, operation]) => `"${path}": ${operation}`)
+            .join(',\n')}
         }`
       }
     ]

@@ -1,5 +1,17 @@
 # dhis2-openapi
 
+## 0.1.0
+
+### Minor Changes
+
+- bd2938f: [BREAKING] Change type of trackedEntityInstance from boolean to string
+
+## 0.0.6
+
+### Patch Changes
+
+- 70b43f5: [OpenAPI] Spec updates for dhis2-openapi
+
 ## 0.0.5
 
 ### Patch Changes

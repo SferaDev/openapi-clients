@@ -1,5 +1,91 @@
 # netlify-api
 
+## 0.8.0
+
+### Minor Changes
+
+- f22345e: Bump version to 2.35.0
+
+### Patch Changes
+
+- 4e146a9: Add query parameters support to listAccountsForUser endpoint
+
+## 0.7.0
+
+### Minor Changes
+
+- a64ae61: Add getAllCertificates endpoint to fetch SSL certificates for a site
+
+## 0.6.1
+
+### Patch Changes
+
+- 8397d02: Remove mention of Enterprise plans from environment variable documentation
+
+## 0.6.0
+
+### Minor Changes
+
+- 7478d2e: Bump API version to 2.34.0
+- a86c18e: Add account_id field to Site and SiteSetup schemas
+
+### Patch Changes
+
+- c7990bb: Returns all environment variables for an account or site. An account corresponds to a team in the Netlify UI.
+
+## 0.5.1
+
+### Patch Changes
+
+- 09038be: Update OpenAPI codegen to version 2.33.1
+
+## 0.5.0
+
+### Minor Changes
+
+- 2c6c5a4: Bump version to 2.32.0
+- 8580858: Bump API version to 2.33.0
+
+## 0.4.2
+
+### Patch Changes
+
+- 14f1b45: Bump version to 2.31.0
+
+## 0.4.1
+
+### Patch Changes
+
+- e6e9dd3: Update dependencies
+
+## 0.4.0
+
+### Minor Changes
+
+- 213a4c0: Add new endpoint to list site dev servers
+
+## 0.3.2
+
+### Patch Changes
+
+- 3584599: [BREAKING] Updated roles in AddMemberToAccount and UpdateAccountMember endpoints
+
+## 0.3.1
+
+### Patch Changes
+
+- 1eaed14: Update OpenAPI codegen version to 2.28.0
+
+## 0.3.0
+
+### Minor Changes
+
+- 201584c: Update site capabilities schema
+
+### Patch Changes
+
+- e3ad5fd: Update OpenAPI codegen version to 2.26.1
+
 ## 0.2.1
 
 ### Patch Changes

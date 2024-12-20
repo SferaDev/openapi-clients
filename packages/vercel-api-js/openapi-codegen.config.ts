@@ -3,6 +3,8 @@ import { Context } from '@openapi-codegen/cli/lib/types';
 import { generateFetchers, generateSchemaTypes } from '@openapi-codegen/typescript';
 import { Project, VariableDeclarationKind } from 'ts-morph';
 import ts from 'typescript';
+import { PathItemObject } from "openapi3-ts/oas30";
+import Case from "case";
 
 export default defineConfig({
   vercel: {
@@ -14,6 +16,9 @@ export default defineConfig({
     to: async (context) => {
       const filenamePrefix = '';
 
+      // Add missing operation ids and clean them
+      context.openAPIDocument = cleanOperationIds({ openAPIDocument: context.openAPIDocument });
+
       // Rename invalid component name for searchRepo
       context.openAPIDocument = updateMethod({
         openAPIDocument: context.openAPIDocument,
@@ -22,47 +27,16 @@ export default defineConfig({
         update: (operation) => ({ ...operation, operationId: 'searchRepo' })
       });
 
-      // Rewrite invalid enum values
-      context.openAPIDocument = updateStrings({
+      // Rename invalid component name for listPromoteAliases
+      context.openAPIDocument = updateMethod({
         openAPIDocument: context.openAPIDocument,
-        updater: (_key, value) => {
-          if (value.endsWith('EnvTarget.Productio')) return 'production';
-          if (value.endsWith('EnvTarget.Previe')) return 'preview';
-          if (value.endsWith('EnvTarget.Developmen')) return 'development';
-          if (value.endsWith("WebhookName.DomainCreate'")) return 'domain.created';
-          if (value.endsWith("WebhookName.DeploymentCreate'")) return 'deployment.created';
-          if (value.endsWith("WebhookName.DeploymentErro'")) return 'deployment.error';
-          if (value.endsWith("WebhookName.DeploymentCancele'")) return 'deployment.canceled';
-          if (value.endsWith("WebhookName.DeploymentSucceede'")) return 'deployment.succeeded';
-          if (value.endsWith("WebhookName.DeploymentRead'")) return 'deployment.ready';
-          if (value.endsWith("WebhookName.DeploymentCheckRerequeste'")) return 'deployment.check-rerequested';
-          if (value.endsWith("WebhookName.IntegrationConfigurationPermissionUpgrade'"))
-            return 'integration-configuration.permission-upgraded';
-          if (value.endsWith("WebhookName.IntegrationConfigurationRemove'")) return 'integration-configuration.removed';
-          if (value.endsWith("WebhookName.IntegrationConfigurationScopeChangeConfirme'"))
-            return 'integration-configuration.scope-change-confirmed';
-          if (value.endsWith("WebhookName.ProjectCreate'")) return 'project.created';
-          if (value.endsWith("WebhookName.ProjectRemove'")) return 'project.removed';
-          if (value.endsWith("WebhookName.LegacyDeploymentChecksComplete'")) return 'deployment-checks-completed';
-          if (value.endsWith("WebhookName.LegacyDeploymentRead'")) return 'deployment-ready';
-          if (value.endsWith("WebhookName.LegacyDeploymentPrepare'")) return 'deployment-prepared';
-          if (value.endsWith("WebhookName.LegacyDeploymentErro'")) return 'deployment-error';
-          if (value.endsWith("WebhookName.LegacyDeploymentCheckRerequeste'")) return 'deployment-check-rerequested';
-          if (value.endsWith("WebhookName.LegacyDeploymentCancele'")) return 'deployment-canceled';
-          if (value.endsWith("WebhookName.LegacyProjectCreate'")) return 'project-created';
-          if (value.endsWith("WebhookName.LegacyProjectRemove'")) return 'project-removed';
-          if (value.endsWith("WebhookName.LegacyDomainCreate'")) return 'domain-created';
-          if (value.endsWith("WebhookName.LegacyDeploymen'")) return 'deployment';
-          if (value.endsWith("WebhookName.LegacyIntegrationConfigurationPermissionUpdate'"))
-            return 'integration-configuration-permission-updated';
-          if (value.endsWith("WebhookName.LegacyIntegrationConfigurationRemove'"))
-            return 'integration-configuration-removed';
-          if (value.endsWith("WebhookName.LegacyIntegrationConfigurationScopeChangeConfirme'"))
-            return 'integration-configuration-scope-change-confirmed';
-
-          return null;
-        }
+        path: '/v1/projects/{projectId}/promote/aliases',
+        method: 'get',
+        update: (operation) => ({ ...operation, operationId: 'listPromoteAliases' })
       });
+
+      // Sort alphabetically enum values
+      context.openAPIDocument = sortArrays(context.openAPIDocument);
 
       const { schemasFiles } = await generateSchemaTypes(context, { filenamePrefix });
       await generateFetchers(context, { filenamePrefix, schemasFiles });
@@ -92,22 +66,21 @@ function updateMethod({
   return openAPIDocument;
 }
 
-function updateStrings({
-  openAPIDocument,
-  updater
-}: {
-  openAPIDocument: Context['openAPIDocument'];
-  updater: (key: string, value: string) => string | null;
-}) {
-  const updatedOpenAPIDocument = JSON.stringify(openAPIDocument, (key, value) => {
-    if (typeof value === 'string') {
-      return updater(key, value) ?? value;
+function sortArrays(openAPIDocument: Context['openAPIDocument']) {
+  // Recurse through the document and in any "enum" property that is a string array, sort the values alphabetically
+  function sortEnumValuesRecursively<T>(obj: T): T {
+    if (Array.isArray(obj)) {
+      return obj.sort() as T;
+    } else if (typeof obj === 'object' && !!obj) {
+      return Object.fromEntries(
+        Object.entries(obj as any).map(([key, value]) => [key, sortEnumValuesRecursively(value)])
+      ) as T;
+    } else {
+      return obj;
     }
+  }
 
-    return value;
-  });
-
-  return JSON.parse(updatedOpenAPIDocument);
+  return sortEnumValuesRecursively(openAPIDocument);
 }
 
 function buildExtraFile(context: Context) {
@@ -143,12 +116,33 @@ function buildExtraFile(context: Context) {
         name: 'operationsByPath',
         initializer: `{
             ${Object.entries(operationsByPath)
-              .map(([path, operation]) => `"${path}": ${operation}`)
-              .join(',\n')}
+            .map(([path, operation]) => `"${path}": ${operation}`)
+            .join(',\n')}
         }`
       }
     ]
   });
 
   return sourceFile.getFullText();
+}
+
+function cleanOperationIds({
+  openAPIDocument,
+}: {
+  openAPIDocument: Context['openAPIDocument'];
+}) {
+  for (const [key, path] of Object.entries(openAPIDocument.paths as Record<string, PathItemObject>)) {
+    for (const method of ["get", "put", "post", "patch", "delete"] as const) {
+      if (path[method]) {
+        const operationId = path[method].operationId ?? `${method} ${key}`;
+        openAPIDocument.paths[key][method] = {
+          ...openAPIDocument.paths[key][method],
+          operationId: Case.camel(operationId)
+        }
+      }
+    }
+
+  }
+
+  return openAPIDocument;
 }

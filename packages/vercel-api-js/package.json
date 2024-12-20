@@ -1,6 +1,6 @@
 {
   "name": "vercel-api-js",
-  "version": "0.1.25",
+  "version": "0.16.1",
   "description": "Vercel API client for Node.js",
   "author": "SferaDev",
   "license": "ISC",
@@ -12,13 +12,22 @@
   "module": "dist/index.mjs",
   "typings": "dist/index.d.ts",
   "exports": {
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.cjs",
-    "types": "./dist/index.d.ts"
+    "./package.json": "./package.json",
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
   },
   "scripts": {
     "tsc": "tsc --noEmit",
-    "build": "rimraf dist && rollup -c",
+    "build": "unbuild",
+    "prepack": "unbuild",
     "generate": "openapi-codegen vercel"
   },
   "repository": {

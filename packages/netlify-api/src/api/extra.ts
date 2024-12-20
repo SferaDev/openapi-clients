@@ -6,6 +6,7 @@ import {
   deleteSite,
   provisionSiteTLSCertificate,
   showSiteTLSCertificate,
+  getAllCertificates,
   getEnvVars,
   createEnvVars,
   getSiteEnvVars,
@@ -121,7 +122,17 @@ import {
   getDnsRecords,
   createDnsRecord,
   getIndividualDnsRecord,
-  deleteDnsRecord
+  deleteDnsRecord,
+  listSiteDevServers,
+  createSiteDevServer,
+  deleteSiteDevServers,
+  getSiteDevServer,
+  markDevServerActivity,
+  listSiteDevServerHooks,
+  createSiteDevServerHook,
+  getSiteDevServerHook,
+  updateSiteDevServerHook,
+  deleteSiteDevServerHook
 } from './components';
 
 export const operationsByPath = {
@@ -132,6 +143,7 @@ export const operationsByPath = {
   'DELETE /sites/{site_id}': deleteSite,
   'POST /sites/{site_id}/ssl': provisionSiteTLSCertificate,
   'GET /sites/{site_id}/ssl': showSiteTLSCertificate,
+  'GET /sites/{site_id}/ssl/certificates': getAllCertificates,
   'GET /accounts/{account_id}/env': getEnvVars,
   'POST /accounts/{account_id}/env': createEnvVars,
   'GET /api/v1/sites/{site_id}/env': getSiteEnvVars,
@@ -247,5 +259,15 @@ export const operationsByPath = {
   'GET /dns_zones/{zone_id}/dns_records': getDnsRecords,
   'POST /dns_zones/{zone_id}/dns_records': createDnsRecord,
   'GET /dns_zones/{zone_id}/dns_records/{dns_record_id}': getIndividualDnsRecord,
-  'DELETE /dns_zones/{zone_id}/dns_records/{dns_record_id}': deleteDnsRecord
+  'DELETE /dns_zones/{zone_id}/dns_records/{dns_record_id}': deleteDnsRecord,
+  'GET /sites/{site_id}/dev_servers': listSiteDevServers,
+  'POST /sites/{site_id}/dev_servers': createSiteDevServer,
+  'DELETE /sites/{site_id}/dev_servers': deleteSiteDevServers,
+  'GET /sites/{site_id}/dev_servers/{dev_server_id}': getSiteDevServer,
+  'POST /sites/{site_id}/dev_servers/{dev_server_id}/activity': markDevServerActivity,
+  'GET /sites/{site_id}/dev_server_hooks': listSiteDevServerHooks,
+  'POST /sites/{site_id}/dev_server_hooks': createSiteDevServerHook,
+  'GET /sites/{site_id}/dev_server_hooks/{id}': getSiteDevServerHook,
+  'PUT /sites/{site_id}/dev_server_hooks/{id}': updateSiteDevServerHook,
+  'DELETE /sites/{site_id}/dev_server_hooks/{id}': deleteSiteDevServerHook
 };
