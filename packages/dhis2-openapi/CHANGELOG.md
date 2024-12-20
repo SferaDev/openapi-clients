@@ -1,5 +1,11 @@
 # dhis2-openapi
 
+## 0.2.0
+
+### Minor Changes
+
+- 35374e2: Update bundle mechanism
+
 ## 0.1.0
 
 ### Minor Changes
