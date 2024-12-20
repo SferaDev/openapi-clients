@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.17.0
+
+### Minor Changes
+
+- 35374e2: Update bundle mechanism
+
 ## 0.16.1
 
 ### Patch Changes

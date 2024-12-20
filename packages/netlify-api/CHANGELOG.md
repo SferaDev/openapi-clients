@@ -1,5 +1,11 @@
 # netlify-api
 
+## 0.9.0
+
+### Minor Changes
+
+- 35374e2: Update bundle mechanism
+
 ## 0.8.0
 
 ### Minor Changes
