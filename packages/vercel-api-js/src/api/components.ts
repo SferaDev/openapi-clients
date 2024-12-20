@@ -2837,6 +2837,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         };
         images?: {
           sizes?: number[];
+          qualities?: number[];
           domains?: string[];
           remotePatterns?: {
             /**
@@ -3554,6 +3555,7 @@ export type CreateDeploymentResponse = {
   };
   images?: {
     sizes?: number[];
+    qualities?: number[];
     domains?: string[];
     remotePatterns?: {
       /**
@@ -4354,6 +4356,7 @@ export type CancelDeploymentResponse = {
   };
   images?: {
     sizes?: number[];
+    qualities?: number[];
     domains?: string[];
     remotePatterns?: {
       /**
