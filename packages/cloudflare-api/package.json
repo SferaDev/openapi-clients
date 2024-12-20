@@ -12,12 +12,22 @@
   "module": "dist/index.mjs",
   "typings": "dist/index.d.ts",
   "exports": {
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.cjs"
+    "./package.json": "./package.json",
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
   },
   "scripts": {
     "tsc": "tsc --noEmit",
-    "build": "rimraf dist && rollup -c",
+    "build": "unbuild",
+    "prepack": "unbuild",
     "generate": "openapi-codegen cloudflare"
   },
   "repository": {

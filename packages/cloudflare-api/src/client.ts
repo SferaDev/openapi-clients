@@ -7,7 +7,6 @@ import { RequiredKeys } from './utils/types';
 export interface CloudflareApiOptions {
   token: string;
   fetch?: FetchImpl;
-  basePath?: string;
 }
 
 type ApiProxy = {
@@ -15,12 +14,12 @@ type ApiProxy = {
     [Method in keyof (typeof operationsByTag)[Tag]]: (typeof operationsByTag)[Tag][Method] extends infer Operation extends (
       ...args: any
     ) => any
-      ? Omit<Parameters<Operation>[0], keyof FetcherExtraProps> extends infer Params
-        ? RequiredKeys<Params> extends never
-          ? (params?: Params) => ReturnType<Operation>
-          : (params: Params) => ReturnType<Operation>
-        : never
-      : never;
+    ? Omit<Parameters<Operation>[0], keyof FetcherExtraProps> extends infer Params
+    ? RequiredKeys<Params> extends never
+    ? (params?: Params) => ReturnType<Operation>
+    : (params: Params) => ReturnType<Operation>
+    : never
+    : never;
   };
 };
 
@@ -34,7 +33,6 @@ type RequestEndpointResult<T extends keyof typeof operationsByPath> = ReturnType
 export class CloudflareApi {
   #token: string;
   #fetch: FetchImpl;
-  #basePath: string;
 
   constructor(options: CloudflareApiOptions) {
     this.#token = options.token;
@@ -42,14 +40,11 @@ export class CloudflareApi {
 
     this.#fetch = options.fetch || (fetch as FetchImpl);
     if (!this.#fetch) throw new Error('Fetch is required');
-
-    this.#basePath = options.basePath || '/api/v1';
   }
 
   get api() {
     const token = this.#token;
     const fetchImpl = this.#fetch;
-    const basePath = this.#basePath;
 
     return new Proxy(
       {},
@@ -70,7 +65,7 @@ export class CloudflareApi {
                 const method = operationsByTag[namespace][operation] as any;
 
                 return async (params: Record<string, unknown>) => {
-                  return await method({ ...params, token, fetchImpl, basePath });
+                  return await method({ ...params, token, fetchImpl });
                 };
               }
             }
@@ -110,7 +105,6 @@ export class CloudflareApi {
       url,
       token: this.#token,
       fetchImpl: this.#fetch,
-      basePath: this.#basePath
     });
 
     return result as RequestEndpointResult<Endpoint>;

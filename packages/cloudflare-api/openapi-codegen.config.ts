@@ -1,6 +1,8 @@
 import { defineConfig } from '@openapi-codegen/cli';
 import { Context } from '@openapi-codegen/cli/lib/types';
-import { generateFetchers, generateSchemaTypes, renameComponent } from '@openapi-codegen/typescript';
+import { generateFetchers, generateSchemaTypes } from '@openapi-codegen/typescript';
+import Case from "case";
+import { OperationObject, PathItemObject } from 'openapi3-ts/oas30';
 import { Project, VariableDeclarationKind } from 'ts-morph';
 import ts from 'typescript';
 
@@ -14,17 +16,46 @@ export default defineConfig({
     to: async (context) => {
       const filenamePrefix = '';
 
-      context.openAPIDocument = renameComponent({
-        openAPIDocument: context.openAPIDocument,
-        from: '#/components/schemas/0rtt',
-        to: '#/components/schemas/zerortt'
-      });
+      // Add missing operation ids and clean them
+      context.openAPIDocument = cleanOperationIds({ openAPIDocument: context.openAPIDocument });
 
-      context.openAPIDocument = renameComponent({
-        openAPIDocument: context.openAPIDocument,
-        from: '#/components/schemas/0rtt_value',
-        to: '#/components/schemas/zerortt_value'
-      });
+      // Remove duplicated schemas
+      const schemaCount: Record<string, number> = {}
+      const rewrites = new Map<string, string>();
+      for (const path of Object.keys(context.openAPIDocument.components?.schemas ?? {})) {
+        const schemaName = Case.pascal(path);
+        if (schemaCount[schemaName] === undefined) {
+          schemaCount[schemaName] = 0;
+        }
+
+        schemaCount[schemaName] += 1;
+        if (schemaCount[schemaName] > 1 && context.openAPIDocument.components?.schemas?.[path]) {
+          rewrites.set(path, `${path}-${schemaCount[schemaName]}`);
+          context.openAPIDocument.components.schemas[`${path}-${schemaCount[schemaName]}`] = context.openAPIDocument.components.schemas[path];
+          delete context.openAPIDocument.components.schemas[path];
+        }
+      }
+
+      // Rewrite all $ref in components with new schema names
+      for (const [ref, newRef] of rewrites) {
+        context.openAPIDocument = JSON.parse(JSON.stringify(context.openAPIDocument).replace(new RegExp(`"#/components/schemas/${ref}"`, 'g'), `"#/components/schemas/${newRef}"`));
+      }
+
+      // Rewrite status code in components response with XX suffix to avoid invalid identifier (4XX -> 400, 5XX -> 500)
+      for (const [_, definition] of Object.entries(context.openAPIDocument.paths ?? {})) {
+        for (const [_, operation] of Object.entries(definition as PathItemObject)) {
+          const responses = (operation as OperationObject).responses;
+          if (responses) {
+            for (const [statusCode, response] of Object.entries(responses)) {
+              if (statusCode.endsWith('XX')) {
+                const newStatusCode = statusCode.slice(0, 1) + '00';
+                responses[newStatusCode] = response;
+                delete responses[statusCode];
+              }
+            }
+          }
+        }
+      }
 
       const { schemasFiles } = await generateSchemaTypes(context, { filenamePrefix });
       await generateFetchers(context, { filenamePrefix, schemasFiles });
@@ -62,12 +93,33 @@ function buildExtraFile(context: Context) {
         name: 'operationsByPath',
         initializer: `{
             ${Object.entries(operationsByPath)
-              .map(([path, operation]) => `"${path}": ${operation}`)
-              .join(',\n')}
+            .map(([path, operation]) => `"${path}": ${operation}`)
+            .join(',\n')}
         }`
       }
     ]
   });
 
   return sourceFile.getFullText();
+}
+
+function cleanOperationIds({
+  openAPIDocument,
+}: {
+  openAPIDocument: Context['openAPIDocument'];
+}) {
+  for (const [key, path] of Object.entries(openAPIDocument.paths as Record<string, PathItemObject>)) {
+    for (const method of ["get", "put", "post", "patch", "delete"] as const) {
+      if (path[method]) {
+        const operationId = path[method].operationId ?? `${method} ${key}`;
+        openAPIDocument.paths[key][method] = {
+          ...openAPIDocument.paths[key][method],
+          operationId: Case.camel(operationId)
+        }
+      }
+    }
+
+  }
+
+  return openAPIDocument;
 }
