@@ -24,12 +24,11 @@ export interface Dhis2ApiOptions<Version extends DHIS2Version> {
   fetch?: FetchImpl;
 }
 
-const operationsByTagDict = {
-  v40: v40Operations,
-  v41: v41Operations
-} as const;
-
-type OperationsByTag<Version extends DHIS2Version> = (typeof operationsByTagDict)[Version];
+type OperationsByTag<Version extends DHIS2Version> = Version extends 'v40'
+  ? typeof v40Operations
+  : Version extends 'v41'
+  ? typeof v41Operations
+  : never;
 
 type ApiProxy<Version extends DHIS2Version> = {
   [Tag in keyof OperationsByTag<Version>]: {
@@ -71,7 +70,7 @@ export class Dhis2Api<Version extends DHIS2Version> {
     const fetchImpl = this.#fetch;
     const baseUrl = this.#baseUrl;
     const credentials = this.#credentials;
-    const operationsByTag: Record<string, Record<string, unknown>> = operationsByTagDict[this.#version];
+    const operationsByTag: Record<string, Record<string, unknown>> = this.#version === 'v40' ? v40Operations : v41Operations;
 
     return new Proxy(
       {},
