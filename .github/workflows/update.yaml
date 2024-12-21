@@ -12,7 +12,7 @@ jobs:
 
     strategy:
       matrix:
-        package: [[vercel-api-js], [netlify-api], [zoom-api-js], [keycloak-api], [dhis2-openapi], [cloudflare-api-js]]
+        package: [[vercel-api-js], [netlify-api], [zoom-api-js], [keycloak-api], [cloudflare-api-js]]
 
     steps:
       - name: Checkout repo
