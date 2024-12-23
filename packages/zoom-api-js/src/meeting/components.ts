@@ -4130,6 +4130,48 @@ export const updateDevice = (variables: UpdateDeviceVariables, signal?: AbortSig
     signal
   });
 
+export type AssginGroupPathParams = {
+  /**
+   * The device ID.
+   *
+   * @example 12as-asdas-sas-12asd-as01
+   */
+  deviceId: string;
+};
+
+export type AssginGroupQueryParams = {
+  /**
+   * The group's ID.
+   *
+   * @example 12as-asdas-sas-12asd-as01
+   */
+  group_id: string;
+};
+
+export type AssginGroupError = Fetcher.ErrorWrapper<undefined>;
+
+export type AssginGroupVariables = {
+  pathParams: AssginGroupPathParams;
+  queryParams: AssginGroupQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Assign a device to a new group.
+ *
+ * **Scopes:** `device:write:admin`
+ *
+ * **Granular Scopes:** `device:write:group:admin`,`device:write:group:master`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const assginGroup = (variables: AssginGroupVariables, signal?: AbortSignal) =>
+  fetch<undefined, AssginGroupError, undefined, {}, AssginGroupQueryParams, AssginGroupPathParams>({
+    url: '/devices/{deviceId}/assign_group',
+    method: 'patch',
+    ...variables,
+    signal
+  });
+
 export type ChangeDeviceAssociationPathParams = {
   /**
    * The device's unique identifier.
@@ -14279,7 +14321,7 @@ export type ListUpcomingMeetingResponse = {
      * `1` - Instant meeting.
      * `2` - Scheduled meeting.
      * `3` - Recurring meeting with no fixed time.
-     * `8` - Recurring meeting with fixed time.
+     * `8` - Recurring meeting with a fixed time.
      *
      * @example 2
      */
@@ -14316,6 +14358,18 @@ export type ListUpcomingMeetingResponse = {
      * @example https://example.com/j/11111
      */
     join_url?: string;
+    /**
+     * The meeting passcode. This passcode may only contain these characters: `[a-z A-Z 0-9 @ - _ * !]`.
+     *
+     * @example 123456
+     */
+    passcode?: string;
+    /**
+     * Use a [personal meeting ID (PMI)](/docs/api/rest/using-zoom-apis/#understanding-personal-meeting-id-pmi). Only used for scheduled meetings and recurring meetings with no fixed time.
+     *
+     * @example false
+     */
+    use_pmi?: boolean;
   }[];
 };
 
@@ -14324,7 +14378,7 @@ export type ListUpcomingMeetingVariables = {
 } & FetcherExtraProps;
 
 /**
- * List a Zoom user's upcoming meetings. For user-level apps, pass [the `me` value](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#the-me-keyword) instead of the `userId` parameter.
+ * List a Zoom user's upcoming meetings. For user-level apps, pass [the `me` value](/docs/api/rest/using-zoom-apis/#the-me-keyword) instead of the `userId` parameter.
  *
  * **Note**
  * * This API includes the meetings that Zoom users schedule and the meetings they are invited to join.
@@ -28422,6 +28476,7 @@ export const operationsByTag = {
     getDevice,
     deleteDevice,
     updateDevice,
+    assginGroup,
     changeDeviceAssociation
   },
   h323Devices: { deviceList, deviceCreate, deviceDelete, deviceUpdate },
