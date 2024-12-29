@@ -74,3238 +74,6 @@ export const accountCreation = (variables: AccountCreationVariables, signal?: Ab
     signal
   });
 
-export type UrlscannerGetResponseTextPathParams = {
-  /**
-   * Response hash.
-   */
-  responseId: string;
-  /**
-   * Account Id.
-   */
-  accountId: string;
-};
-
-export type UrlscannerGetResponseTextError = Fetcher.ErrorWrapper<
-  | {
-      status: 400;
-      payload: {
-        errors: {
-          /**
-           * @example Scan ID is not a valid uuid.
-           */
-          message: string;
-        }[];
-        messages: {
-          message: string;
-        }[];
-        /**
-         * Whether request was successful or not
-         */
-        success: boolean;
-      };
-    }
-  | {
-      status: 404;
-      payload: {
-        errors: {
-          /**
-           * @example Scan not found.
-           */
-          message: string;
-        }[];
-        messages: {
-          message: string;
-        }[];
-        /**
-         * Whether request was successful or not
-         */
-        success: boolean;
-      };
-    }
->;
-
-export type UrlscannerGetResponseTextVariables = {
-  pathParams: UrlscannerGetResponseTextPathParams;
-} & FetcherExtraProps;
-
-/**
- * Returns the plain response of the network request.
- */
-export const urlscannerGetResponseText = (variables: UrlscannerGetResponseTextVariables, signal?: AbortSignal) =>
-  fetch<undefined, UrlscannerGetResponseTextError, undefined, {}, {}, UrlscannerGetResponseTextPathParams>({
-    url: '/accounts/{accountId}/urlscanner/response/{responseId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type UrlscannerSearchScansPathParams = {
-  /**
-   * Account Id.
-   */
-  accountId: string;
-};
-
-export type UrlscannerSearchScansQueryParams = {
-  /**
-   * Scan uuid
-   *
-   * @format uuid
-   */
-  scanId?: string;
-  /**
-   * Limit the number of objects in the response.
-   *
-   * @example 100
-   */
-  limit?: number;
-  /**
-   * Pagination cursor to get the next set of results.
-   */
-  next_cursor?: string;
-  /**
-   * Filter scans requested after date (inclusive).
-   *
-   * @format date-time
-   */
-  date_start?: string;
-  /**
-   * Filter scans requested before date (inclusive).
-   *
-   * @format date-time
-   */
-  date_end?: string;
-  /**
-   * Filter scans by URL of _any_ request made by the webpage
-   *
-   * @example https://example.com/?hello
-   */
-  url?: string;
-  /**
-   * Filter scans by hostname of _any_ request made by the webpage.
-   *
-   * @example example.com
-   */
-  hostname?: string;
-  /**
-   * Filter scans by url path of _any_ request made by the webpage.
-   *
-   * @example /samples/subresource-integrity/
-   */
-  path?: string;
-  /**
-   * Filter scans by IP address (IPv4 or IPv6) of _any_ request made by the webpage.
-   *
-   * @example 1.1.1.1
-   */
-  ip?: string;
-  /**
-   * Filter scans by Autonomous System Number (ASN) of _any_ request made by the webpage.
-   *
-   * @example 13335
-   */
-  asn?: string;
-  /**
-   * Filter scans by hash of any html/js/css request made by the webpage.
-   */
-  hash?: string;
-  /**
-   * Filter scans by submitted or scanned URL
-   */
-  page_url?: string;
-  /**
-   * Filter scans by main page hostname (domain of effective URL).
-   */
-  page_hostname?: string;
-  /**
-   * Filter scans by exact match of effective URL path (also supports suffix search).
-   */
-  page_path?: string;
-  /**
-   * Filter scans by main page Autonomous System Number (ASN).
-   */
-  page_asn?: string;
-  /**
-   * Filter scans by  main page IP address (IPv4 or IPv6).
-   */
-  page_ip?: string;
-  /**
-   * Return only scans created by account.
-   */
-  account_scans?: boolean;
-  /**
-   * Filter scans by malicious verdict.
-   */
-  is_malicious?: boolean;
-};
-
-export type UrlscannerSearchScansError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example Scan ID is not a valid uuid.
-       */
-      message: string;
-    }[];
-    messages: {
-      message: string;
-    }[];
-    /**
-     * Whether request was successful or not
-     */
-    success: boolean;
-  };
-}>;
-
-export type UrlscannerSearchScansResponse = {
-  errors: {
-    /**
-     * @example Error
-     */
-    message: string;
-  }[];
-  messages: {
-    /**
-     * @example OK
-     */
-    message: string;
-  }[];
-  result: {
-    tasks: {
-      /**
-       * Alpha-2 country code
-       */
-      country: string;
-      /**
-       * Whether scan was successful or not
-       */
-      success: boolean;
-      /**
-       * When scan was submitted (UTC)
-       *
-       * @format date-time
-       */
-      time: string;
-      /**
-       * Scan url (after redirects)
-       *
-       * @example https://www.example.com/
-       */
-      url: string;
-      /**
-       * Scan id
-       *
-       * @format uuid
-       */
-      uuid: string;
-      /**
-       * Visibility status.
-       *
-       * @example public
-       */
-      visibility: string;
-    }[];
-  };
-  /**
-   * Whether search request was successful or not
-   */
-  success: boolean;
-};
-
-export type UrlscannerSearchScansVariables = {
-  pathParams: UrlscannerSearchScansPathParams;
-  queryParams?: UrlscannerSearchScansQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Search scans by date and webpages' requests, including full URL (after redirects), hostname, and path. <br/> A successful scan will appear in search results a few minutes after finishing but may take much longer if the system in under load. By default, only successfully completed scans will appear in search results, unless searching by `scanId`. Please take into account that older scans may be removed from the search index at an unspecified time.
- */
-export const urlscannerSearchScans = (variables: UrlscannerSearchScansVariables, signal?: AbortSignal) =>
-  fetch<
-    UrlscannerSearchScansResponse,
-    UrlscannerSearchScansError,
-    undefined,
-    {},
-    UrlscannerSearchScansQueryParams,
-    UrlscannerSearchScansPathParams
-  >({ url: '/accounts/{accountId}/urlscanner/scan', method: 'get', ...variables, signal });
-
-export type UrlscannerCreateScanPathParams = {
-  /**
-   * Account Id.
-   */
-  accountId: string;
-};
-
-export type UrlscannerCreateScanError = Fetcher.ErrorWrapper<
-  | {
-      status: 400;
-      payload: {
-        errors: {
-          /**
-           * @example Scan ID is not a valid uuid.
-           */
-          message: string;
-        }[];
-        messages: {
-          message: string;
-        }[];
-        /**
-         * Whether request was successful or not
-         */
-        success: boolean;
-      };
-    }
-  | {
-      status: 409;
-      payload: {
-        errors: {
-          /**
-           * @example Submission unsuccessful
-           */
-          message: string;
-        }[];
-        messages: {
-          message: string;
-        }[];
-        result: {
-          tasks: {
-            /**
-             * Submitter location
-             *
-             * @example PT
-             */
-            clientLocation: string;
-            clientType: 'Site' | 'Automatic' | 'Api';
-            /**
-             * URL of the primary request, after all HTTP redirects
-             *
-             * @example http://example.com/
-             */
-            effectiveUrl: string;
-            errors: {
-              message: string;
-            }[];
-            scannedFrom: {
-              /**
-               * IATA code of Cloudflare datacenter
-               *
-               * @example MAD
-               */
-              colo: string;
-            };
-            status: 'Queued' | 'InProgress' | 'InPostProcessing' | 'Finished';
-            /**
-             * @example true
-             */
-            success: boolean;
-            /**
-             * @example 2023-05-03T17:05:04.843Z
-             */
-            time: string;
-            /**
-             * @example 2023-05-03T17:05:19.374Z
-             */
-            timeEnd: string;
-            /**
-             * Submitted URL
-             *
-             * @example http://example.com
-             */
-            url: string;
-            /**
-             * Scan ID
-             *
-             * @example 2ee568d0-bf70-4827-b922-b7088c0f056f
-             */
-            uuid: string;
-            visibility: 'Public' | 'Unlisted';
-          }[];
-        };
-        /**
-         * @example true
-         */
-        success: boolean;
-      };
-    }
-  | {
-      status: 429;
-      payload: {
-        errors: {
-          /**
-           * @example Submission unsuccessful
-           */
-          message: string;
-        }[];
-        messages: {
-          message: string;
-        }[];
-        /**
-         * @example true
-         */
-        success: boolean;
-      };
-    }
->;
-
-export type UrlscannerCreateScanResponse = {
-  errors: {
-    /**
-     * @example Submission unsuccessful
-     */
-    message: string;
-  }[];
-  messages: {
-    /**
-     * @example Submission successful
-     */
-    message: string;
-  }[];
-  result: {
-    /**
-     * Time when url was submitted for scanning.
-     *
-     * @format date-time
-     */
-    time: string;
-    /**
-     * Canonical form of submitted URL. Use this if you want to later search by URL.
-     */
-    url: string;
-    /**
-     * Scan ID.
-     *
-     * @format uuid
-     */
-    uuid: string;
-    /**
-     * Submitted visibility status.
-     *
-     * @example Public
-     */
-    visibility: string;
-  };
-  success: boolean;
-};
-
-export type UrlscannerCreateScanRequestBody = {
-  /**
-   * Set custom headers.
-   */
-  customHeaders?: {
-    [key: string]: string;
-  };
-  /**
-   * Take multiple screenshots targeting different device types.
-   *
-   * @default desktop
-   */
-  screenshotsResolutions?: ('desktop' | 'mobile' | 'tablet')[];
-  /**
-   * @example https://www.example.com
-   */
-  url: string;
-  /**
-   * The option `Public` means it will be included in listings like recent scans and search results. `Unlisted` means it will not be included in the aforementioned listings, users will need to have the scan's ID to access it. A a scan will be automatically marked as unlisted if it fails, if it contains potential PII or other sensitive material.
-   *
-   * @default Public
-   */
-  visibility?: 'Public' | 'Unlisted';
-};
-
-export type UrlscannerCreateScanVariables = {
-  body: UrlscannerCreateScanRequestBody;
-  pathParams: UrlscannerCreateScanPathParams;
-} & FetcherExtraProps;
-
-/**
- * Submit a URL to scan. You can also set some options, like the visibility level and custom headers. Check limits at https://developers.cloudflare.com/security-center/investigate/scan-limits/.
- */
-export const urlscannerCreateScan = (variables: UrlscannerCreateScanVariables, signal?: AbortSignal) =>
-  fetch<
-    UrlscannerCreateScanResponse,
-    UrlscannerCreateScanError,
-    UrlscannerCreateScanRequestBody,
-    {},
-    {},
-    UrlscannerCreateScanPathParams
-  >({ url: '/accounts/{accountId}/urlscanner/scan', method: 'post', ...variables, signal });
-
-export type UrlscannerGetScanPathParams = {
-  /**
-   * Scan uuid.
-   *
-   * @format uuid
-   */
-  scanId: string;
-  /**
-   * Account Id.
-   */
-  accountId: string;
-};
-
-export type UrlscannerGetScanQueryParams = {
-  /**
-   * Whether to return full report (scan summary and network log).
-   */
-  full?: boolean;
-};
-
-export type UrlscannerGetScanError = Fetcher.ErrorWrapper<
-  | {
-      status: 400;
-      payload: {
-        errors: {
-          /**
-           * @example Scan ID is not a valid uuid.
-           */
-          message: string;
-        }[];
-        messages: {
-          message: string;
-        }[];
-        /**
-         * Whether request was successful or not
-         */
-        success: boolean;
-      };
-    }
-  | {
-      status: 404;
-      payload: {
-        errors: {
-          /**
-           * @example Scan not found.
-           */
-          message: string;
-        }[];
-        messages: {
-          message: string;
-        }[];
-        /**
-         * Whether request was successful or not
-         */
-        success: boolean;
-      };
-    }
->;
-
-export type UrlscannerGetScanVariables = {
-  pathParams: UrlscannerGetScanPathParams;
-  queryParams?: UrlscannerGetScanQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Get URL scan by uuid
- */
-export const urlscannerGetScan = (variables: UrlscannerGetScanVariables, signal?: AbortSignal) =>
-  fetch<
-    | {
-        errors: {
-          /**
-           * @example Error
-           */
-          message: string;
-        }[];
-        messages: {
-          /**
-           * @example OK
-           */
-          message: string;
-        }[];
-        result: {
-          scan: {
-            /**
-             * Dictionary of Autonomous System Numbers where ASN's are the keys
-             */
-            asns?: {
-              /**
-               * ASN's contacted
-               */
-              asn?: {
-                /**
-                 * @example 15133
-                 */
-                asn: string;
-                /**
-                 * @example EDGECAST
-                 */
-                description: string;
-                /**
-                 * @example US
-                 */
-                location_alpha2: string;
-                /**
-                 * @example EDGECAST
-                 */
-                name: string;
-                /**
-                 * @example Edgecast Inc.
-                 */
-                org_name: string;
-              };
-            };
-            certificates: {
-              issuer: string;
-              /**
-               * @example rkmod.somee.com
-               */
-              subjectName: string;
-              /**
-               * @example 1682684400
-               */
-              validFrom: number;
-              /**
-               * @example 1696698000
-               */
-              validTo: number;
-            }[];
-            domains?: {
-              ['example.com']?: {
-                categories: {
-                  content?: {
-                    id: number;
-                    /**
-                     * @example Technology
-                     */
-                    name: string;
-                    super_category_id?: number;
-                  }[];
-                  inherited: {
-                    content?: {
-                      id: number;
-                      /**
-                       * @example Technology
-                       */
-                      name: string;
-                      super_category_id?: number;
-                    }[];
-                    /**
-                     * @example example.com
-                     */
-                    from?: string;
-                    risks?: {
-                      id: number;
-                      /**
-                       * @example Technology
-                       */
-                      name: string;
-                      super_category_id?: number;
-                    }[];
-                  };
-                  risks?: {
-                    id: number;
-                    /**
-                     * @example Technology
-                     */
-                    name: string;
-                    super_category_id?: number;
-                  }[];
-                };
-                dns: {
-                  /**
-                   * @example 93.184.216.34
-                   */
-                  address: string;
-                  dnssec_valid: boolean;
-                  /**
-                   * @example example.com
-                   */
-                  name: string;
-                  /**
-                   * @example A
-                   */
-                  type: string;
-                }[];
-                /**
-                 * @example example.com
-                 */
-                name: string;
-                rank: {
-                  /**
-                   * @example 500
-                   */
-                  bucket: string;
-                  /**
-                   * @example example.com
-                   */
-                  name: string;
-                  /**
-                   * Rank in the Global Radar Rank, if set. See more at https://blog.cloudflare.com/radar-domain-rankings/
-                   */
-                  rank?: number;
-                };
-                /**
-                 * @example Apex domain
-                 */
-                type: string;
-              };
-            };
-            geo: {
-              /**
-               * GeoIP continent location
-               */
-              continents: string[];
-              /**
-               * GeoIP country location
-               */
-              locations: string[];
-            };
-            ips?: {
-              ip?: {
-                /**
-                 * @example 15133
-                 */
-                asn: string;
-                /**
-                 * @example EDGECAST
-                 */
-                asnDescription: string;
-                /**
-                 * @example US
-                 */
-                asnLocationAlpha2: string;
-                /**
-                 * @example EDGECAST
-                 */
-                asnName: string;
-                /**
-                 * @example Edgecast Inc.
-                 */
-                asnOrgName: string;
-                /**
-                 * @example North America
-                 */
-                continent: string;
-                /**
-                 * @example 6252001
-                 */
-                geonameId: string;
-                /**
-                 * @example 2606:2800:220:1:248:1893:25c8:1946
-                 */
-                ip: string;
-                /**
-                 * @example IPv6
-                 */
-                ipVersion: string;
-                /**
-                 * @example 39.76
-                 */
-                latitude: string;
-                /**
-                 * @example US
-                 */
-                locationAlpha2: string;
-                /**
-                 * @example United States
-                 */
-                locationName: string;
-                /**
-                 * @example -98.5
-                 */
-                longitude: string;
-                subdivision1Name: string;
-                subdivision2Name: string;
-              };
-            };
-            links?: {
-              link?: {
-                /**
-                 * Outgoing link detected in the DOM
-                 *
-                 * @example https://www.iana.org/domains/example
-                 */
-                href: string;
-                /**
-                 * @example More information...
-                 */
-                text: string;
-              };
-            };
-            meta: {
-              processors: {
-                categories: {
-                  content: {
-                    /**
-                     * @example 155
-                     */
-                    id: number;
-                    /**
-                     * @example Technology
-                     */
-                    name: string;
-                    super_category_id?: number;
-                  }[];
-                  risks: {
-                    /**
-                     * @example 17
-                     */
-                    id: number;
-                    /**
-                     * @example Newly Seen Domains
-                     */
-                    name: string;
-                    /**
-                     * @example 32
-                     */
-                    super_category_id: number;
-                  }[];
-                };
-                phishing: string[];
-                rank: {
-                  /**
-                   * @example 500
-                   */
-                  bucket: string;
-                  /**
-                   * @example example.com
-                   */
-                  name: string;
-                  /**
-                   * Rank in the Global Radar Rank, if set. See more at https://blog.cloudflare.com/radar-domain-rankings/
-                   */
-                  rank?: number;
-                };
-                tech: {
-                  categories: {
-                    groups: number[];
-                    /**
-                     * @example 63
-                     */
-                    id: number;
-                    /**
-                     * @example IAAS
-                     */
-                    name: string;
-                    /**
-                     * @example 8
-                     */
-                    priority: number;
-                    /**
-                     * @example iaas
-                     */
-                    slug: string;
-                  }[];
-                  /**
-                   * @example 100
-                   */
-                  confidence: number;
-                  description?: string;
-                  evidence: {
-                    impliedBy: string[];
-                    patterns: {
-                      /**
-                       * @example 100
-                       */
-                      confidence: number;
-                      excludes: string[];
-                      implies: string[];
-                      /**
-                       * @example ECS
-                       */
-                      match: string;
-                      /**
-                       * Header or Cookie name when set
-                       *
-                       * @example server
-                       */
-                      name: string;
-                      /**
-                       * @example ^ECS
-                       */
-                      regex: string;
-                      /**
-                       * @example headers
-                       */
-                      type: string;
-                      /**
-                       * @example ECS (dcb/7EEE)
-                       */
-                      value: string;
-                      version: string;
-                    }[];
-                  };
-                  /**
-                   * @example Amazon ECS.svg
-                   */
-                  icon: string;
-                  /**
-                   * @example Amazon ECS
-                   */
-                  name: string;
-                  /**
-                   * @example amazon-ecs
-                   */
-                  slug: string;
-                  /**
-                   * @example https://aws.amazon.com/ecs/
-                   */
-                  website: string;
-                }[];
-              };
-            };
-            page: {
-              /**
-               * @example 15133
-               */
-              asn: string;
-              /**
-               * @example US
-               */
-              asnLocationAlpha2: string;
-              /**
-               * @example EDGECAST
-               */
-              asnname: string;
-              console: {
-                /**
-                 * @example network
-                 */
-                category: string;
-                /**
-                 * @example Failed to load resource: the server responded with a status of 404 (Not Found)
-                 */
-                text: string;
-                /**
-                 * @example error
-                 */
-                type: string;
-                /**
-                 * @example http://example.com/favicon.ico
-                 */
-                url?: string;
-              }[];
-              cookies: {
-                /**
-                 * @example rkmod.somee.com
-                 */
-                domain: string;
-                /**
-                 * @example -1
-                 */
-                expires: number;
-                httpOnly: boolean;
-                /**
-                 * @example b
-                 */
-                name: string;
-                /**
-                 * @example /
-                 */
-                path: string;
-                /**
-                 * @example Medium
-                 */
-                priority?: string;
-                sameParty: boolean;
-                secure: boolean;
-                /**
-                 * @example true
-                 */
-                session: boolean;
-                /**
-                 * @example 2
-                 */
-                size: number;
-                /**
-                 * @example 443
-                 */
-                sourcePort: number;
-                /**
-                 * @example Secure
-                 */
-                sourceScheme: string;
-                /**
-                 * @example b
-                 */
-                value: string;
-              }[];
-              /**
-               * @example United States
-               */
-              country: string;
-              /**
-               * @example US
-               */
-              countryLocationAlpha2: string;
-              /**
-               * @example example.com
-               */
-              domain: string;
-              headers: {
-                /**
-                 * @example Content-Length
-                 */
-                name: string;
-                /**
-                 * @example 648
-                 */
-                value: string;
-              }[];
-              /**
-               * @example 2606:2800:220:1:248:1893:25c8:1946
-               */
-              ip: string;
-              js: {
-                variables: {
-                  /**
-                   * @example checkFrame
-                   */
-                  name: string;
-                  /**
-                   * @example string
-                   */
-                  type: string;
-                }[];
-              };
-              securityViolations: {
-                /**
-                 * @example csp
-                 */
-                category: string;
-                /**
-                 * @example [Report Only] Refused to load the stylesheet 'https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css' because it violates the following Content Security Policy directive: ...
-                 */
-                text: string;
-                /**
-                 * @example http://example.com/
-                 */
-                url: string;
-              }[];
-              /**
-               * @example 200
-               */
-              status: number;
-              subdivision1Name: string;
-              subdivision2name: string;
-              /**
-               * @example http://example.com/
-               */
-              url: string;
-            };
-            performance: {
-              /**
-               * @example 82.59999999403954
-               */
-              connectEnd: number;
-              /**
-               * @example 72.79999999701977
-               */
-              connectStart: number;
-              /**
-               * @example 1256
-               */
-              decodedBodySize: number;
-              /**
-               * @example 306
-               */
-              domComplete: number;
-              /**
-               * @example 305.8999999910593
-               */
-              domContentLoadedEventEnd: number;
-              /**
-               * @example 305.8999999910593
-               */
-              domContentLoadedEventStart: number;
-              /**
-               * @example 305.8999999910593
-               */
-              domInteractive: number;
-              /**
-               * @example 72.79999999701977
-               */
-              domainLookupEnd: number;
-              /**
-               * @example 2.199999988079071
-               */
-              domainLookupStart: number;
-              /**
-               * @example 306
-               */
-              duration: number;
-              /**
-               * @example 648
-               */
-              encodedBodySize: number;
-              /**
-               * @example navigation
-               */
-              entryType: string;
-              /**
-               * @example 0.8999999910593033
-               */
-              fetchStart: number;
-              /**
-               * @example navigation
-               */
-              initiatorType: string;
-              /**
-               * @example 306
-               */
-              loadEventEnd: number;
-              /**
-               * @example 306
-               */
-              loadEventStart: number;
-              /**
-               * @example http://example.com/
-               */
-              name: string;
-              /**
-               * @example http/1.1
-               */
-              nextHopProtocol: string;
-              redirectCount: number;
-              redirectEnd: number;
-              redirectStart: number;
-              /**
-               * @example 82.69999998807907
-               */
-              requestStart: number;
-              /**
-               * @example 270.8999999910593
-               */
-              responseEnd: number;
-              /**
-               * @example 265.69999998807907
-               */
-              responseStart: number;
-              secureConnectionStart: number;
-              startTime: number;
-              /**
-               * @example 948
-               */
-              transferSize: number;
-              /**
-               * @example navigate
-               */
-              type: string;
-              unloadEventEnd: number;
-              unloadEventStart: number;
-              workerStart: number;
-            }[];
-            task: {
-              /**
-               * Submitter location
-               *
-               * @example PT
-               */
-              clientLocation: string;
-              clientType: 'Site' | 'Automatic' | 'Api';
-              /**
-               * URL of the primary request, after all HTTP redirects
-               *
-               * @example http://example.com/
-               */
-              effectiveUrl: string;
-              errors: {
-                message: string;
-              }[];
-              scannedFrom: {
-                /**
-                 * IATA code of Cloudflare datacenter
-                 *
-                 * @example MAD
-                 */
-                colo: string;
-              };
-              status: 'Queued' | 'InProgress' | 'InPostProcessing' | 'Finished';
-              /**
-               * @example true
-               */
-              success: boolean;
-              /**
-               * @example 2023-05-03T17:05:04.843Z
-               */
-              time: string;
-              /**
-               * @example 2023-05-03T17:05:19.374Z
-               */
-              timeEnd: string;
-              /**
-               * Submitted URL
-               *
-               * @example http://example.com
-               */
-              url: string;
-              /**
-               * Scan ID
-               *
-               * @example 2ee568d0-bf70-4827-b922-b7088c0f056f
-               */
-              uuid: string;
-              visibility: 'Public' | 'Unlisted';
-            };
-            verdicts: {
-              overall: {
-                categories: {
-                  /**
-                   * @example 117
-                   */
-                  id: number;
-                  /**
-                   * @example Malware
-                   */
-                  name: string;
-                  /**
-                   * @example 32
-                   */
-                  super_category_id: number;
-                }[];
-                /**
-                 * At least one of our subsystems marked the site as potentially malicious at the time of the scan.
-                 *
-                 * @example true
-                 */
-                malicious: boolean;
-                phishing: string[];
-              };
-            };
-          };
-        };
-        /**
-         * Whether request was successful or not
-         */
-        success: boolean;
-      }
-    | {
-        errors: {
-          message: string;
-        }[];
-        messages: {
-          /**
-           * @example In Progress
-           */
-          message: string;
-        }[];
-        result: {
-          scan: {
-            task: {
-              /**
-               * @example http://example.com/
-               */
-              effectiveUrl: string;
-              errors: {
-                message: string;
-              }[];
-              /**
-               * @example PT
-               */
-              location: string;
-              /**
-               * @example enam
-               */
-              region: string;
-              /**
-               * @example InProgress
-               */
-              status: string;
-              /**
-               * @example true
-               */
-              success: boolean;
-              /**
-               * @example 2023-05-03T17:05:04.843Z
-               */
-              time: string;
-              /**
-               * @example http://example.com
-               */
-              url: string;
-              /**
-               * @example 2ee568d0-bf70-4827-b922-b7088c0f056f
-               */
-              uuid: string;
-              /**
-               * @example Public
-               */
-              visibility: string;
-            };
-          };
-        };
-        /**
-         * Whether request was successful or not
-         */
-        success: boolean;
-      },
-    UrlscannerGetScanError,
-    undefined,
-    {},
-    UrlscannerGetScanQueryParams,
-    UrlscannerGetScanPathParams
-  >({ url: '/accounts/{accountId}/urlscanner/scan/{scanId}', method: 'get', ...variables, signal });
-
-export type UrlscannerGetScanHarPathParams = {
-  /**
-   * Scan uuid.
-   *
-   * @format uuid
-   */
-  scanId: string;
-  /**
-   * Account Id.
-   */
-  accountId: string;
-};
-
-export type UrlscannerGetScanHarError = Fetcher.ErrorWrapper<
-  | {
-      status: 400;
-      payload: {
-        errors: {
-          /**
-           * @example Scan ID is not a valid uuid.
-           */
-          message: string;
-        }[];
-        messages: {
-          message: string;
-        }[];
-        /**
-         * Whether request was successful or not
-         */
-        success: boolean;
-      };
-    }
-  | {
-      status: 404;
-      payload: {
-        errors: {
-          /**
-           * @example Scan not found.
-           */
-          message: string;
-        }[];
-        messages: {
-          message: string;
-        }[];
-        /**
-         * Whether request was successful or not
-         */
-        success: boolean;
-      };
-    }
->;
-
-export type UrlscannerGetScanHarVariables = {
-  pathParams: UrlscannerGetScanHarPathParams;
-} & FetcherExtraProps;
-
-/**
- * Get a URL scan's HAR file. See HAR spec at http://www.softwareishard.com/blog/har-12-spec/.
- */
-export const urlscannerGetScanHar = (variables: UrlscannerGetScanHarVariables, signal?: AbortSignal) =>
-  fetch<
-    | {
-        errors: {
-          /**
-           * @example Error
-           */
-          message: string;
-        }[];
-        messages: {
-          /**
-           * @example OK
-           */
-          message: string;
-        }[];
-        result: {
-          har: {
-            log: {
-              creator: {
-                /**
-                 * @example https://github.com/sitespeedio/chrome-har
-                 */
-                comment: string;
-                /**
-                 * @example chrome-har
-                 */
-                name: string;
-                /**
-                 * @example 0.13.1
-                 */
-                version: string;
-              };
-              entries: {
-                /**
-                 * @example VeryHigh
-                 */
-                _initialPriority: string;
-                /**
-                 * @example other
-                 */
-                _initiator_type: string;
-                /**
-                 * @example VeryHigh
-                 */
-                _priority: string;
-                /**
-                 * @example DDC779F0CB3746BAF283EC1A51B0F2F8
-                 */
-                _requestId: string;
-                /**
-                 * @example 114135.331081
-                 */
-                _requestTime: number;
-                /**
-                 * @example document
-                 */
-                _resourceType: string;
-                cache: Record<string, any>;
-                /**
-                 * @example 33
-                 */
-                connection: string;
-                /**
-                 * @example page_1
-                 */
-                pageref: string;
-                request: {
-                  bodySize: number;
-                  headers: {
-                    /**
-                     * @example Upgrade-Insecure-Requests
-                     */
-                    name: string;
-                    /**
-                     * @example 1
-                     */
-                    value: string;
-                  }[];
-                  /**
-                   * @example 197
-                   */
-                  headersSize: number;
-                  /**
-                   * @example http/1.1
-                   */
-                  httpVersion: string;
-                  /**
-                   * @example GET
-                   */
-                  method: string;
-                  /**
-                   * @example http://example.com/
-                   */
-                  url: string;
-                };
-                response: {
-                  /**
-                   * @example 1071
-                   */
-                  _transferSize: number;
-                  /**
-                   * @example 648
-                   */
-                  bodySize: number;
-                  content: {
-                    /**
-                     * @example 608
-                     */
-                    compression?: number;
-                    /**
-                     * @example text/html
-                     */
-                    mimeType: string;
-                    /**
-                     * @example 1256
-                     */
-                    size: number;
-                  };
-                  headers: {
-                    /**
-                     * @example Content-Encoding
-                     */
-                    name: string;
-                    /**
-                     * @example gzip
-                     */
-                    value: string;
-                  }[];
-                  /**
-                   * @example 423
-                   */
-                  headersSize: number;
-                  /**
-                   * @example http/1.1
-                   */
-                  httpVersion: string;
-                  redirectURL: string;
-                  /**
-                   * @example 200
-                   */
-                  status: number;
-                  /**
-                   * @example OK
-                   */
-                  statusText: string;
-                };
-                /**
-                 * @example 2606:2800:220:1:248:1893:25c8:1946
-                 */
-                serverIPAddress: string;
-                /**
-                 * @example 2023-05-03T17:05:13.196Z
-                 */
-                startedDateTime: string;
-                /**
-                 * @example 268.64
-                 */
-                time: number;
-              }[];
-              pages: {
-                /**
-                 * @example page_1
-                 */
-                id: string;
-                pageTimings: {
-                  /**
-                   * @example 305.408
-                   */
-                  onContentLoad: number;
-                  /**
-                   * @example 305.169
-                   */
-                  onLoad: number;
-                };
-                /**
-                 * @example 2023-05-03T17:05:13.195Z
-                 */
-                startedDateTime: string;
-                /**
-                 * @example http://example.com/
-                 */
-                title: string;
-              }[];
-              /**
-               * @example 1.2
-               */
-              version: string;
-            };
-          };
-        };
-        /**
-         * Whether search request was successful or not
-         */
-        success: boolean;
-      }
-    | {
-        errors: {
-          message: string;
-        }[];
-        messages: {
-          /**
-           * @example In Progress
-           */
-          message: string;
-        }[];
-        result: {
-          scan: {
-            task: {
-              /**
-               * @example http://example.com/
-               */
-              effectiveUrl: string;
-              errors: {
-                message: string;
-              }[];
-              /**
-               * @example PT
-               */
-              location: string;
-              /**
-               * @example enam
-               */
-              region: string;
-              /**
-               * @example InProgress
-               */
-              status: string;
-              /**
-               * @example true
-               */
-              success: boolean;
-              /**
-               * @example 2023-05-03T17:05:04.843Z
-               */
-              time: string;
-              /**
-               * @example http://example.com
-               */
-              url: string;
-              /**
-               * @example 2ee568d0-bf70-4827-b922-b7088c0f056f
-               */
-              uuid: string;
-              /**
-               * @example Public
-               */
-              visibility: string;
-            };
-          };
-        };
-        /**
-         * Whether request was successful or not
-         */
-        success: boolean;
-      },
-    UrlscannerGetScanHarError,
-    undefined,
-    {},
-    {},
-    UrlscannerGetScanHarPathParams
-  >({ url: '/accounts/{accountId}/urlscanner/scan/{scanId}/har', method: 'get', ...variables, signal });
-
-export type UrlscannerGetScanScreenshotPathParams = {
-  /**
-   * Scan uuid.
-   *
-   * @format uuid
-   */
-  scanId: string;
-  /**
-   * Account Id.
-   */
-  accountId: string;
-};
-
-export type UrlscannerGetScanScreenshotQueryParams = {
-  /**
-   * Target device type.
-   *
-   * @default desktop
-   */
-  resolution?: 'desktop' | 'mobile' | 'tablet';
-};
-
-export type UrlscannerGetScanScreenshotError = Fetcher.ErrorWrapper<
-  | {
-      status: 400;
-      payload: {
-        errors: {
-          /**
-           * @example Scan ID is not a valid uuid.
-           */
-          message: string;
-        }[];
-        messages: {
-          message: string;
-        }[];
-        /**
-         * Whether request was successful or not
-         */
-        success: boolean;
-      };
-    }
-  | {
-      status: 404;
-      payload: {
-        errors: {
-          /**
-           * @example Scan not found.
-           */
-          message: string;
-        }[];
-        messages: {
-          message: string;
-        }[];
-        /**
-         * Whether request was successful or not
-         */
-        success: boolean;
-      };
-    }
->;
-
-export type UrlscannerGetScanScreenshotResponse = {
-  errors: {
-    message: string;
-  }[];
-  messages: {
-    /**
-     * @example In Progress
-     */
-    message: string;
-  }[];
-  result: {
-    scan: {
-      task: {
-        /**
-         * @example http://example.com/
-         */
-        effectiveUrl: string;
-        errors: {
-          message: string;
-        }[];
-        /**
-         * @example PT
-         */
-        location: string;
-        /**
-         * @example enam
-         */
-        region: string;
-        /**
-         * @example InProgress
-         */
-        status: string;
-        /**
-         * @example true
-         */
-        success: boolean;
-        /**
-         * @example 2023-05-03T17:05:04.843Z
-         */
-        time: string;
-        /**
-         * @example http://example.com
-         */
-        url: string;
-        /**
-         * @example 2ee568d0-bf70-4827-b922-b7088c0f056f
-         */
-        uuid: string;
-        /**
-         * @example Public
-         */
-        visibility: string;
-      };
-    };
-  };
-  /**
-   * Whether request was successful or not
-   */
-  success: boolean;
-};
-
-export type UrlscannerGetScanScreenshotVariables = {
-  pathParams: UrlscannerGetScanScreenshotPathParams;
-  queryParams?: UrlscannerGetScanScreenshotQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Get scan's screenshot by resolution (desktop/mobile/tablet).
- */
-export const urlscannerGetScanScreenshot = (variables: UrlscannerGetScanScreenshotVariables, signal?: AbortSignal) =>
-  fetch<
-    UrlscannerGetScanScreenshotResponse,
-    UrlscannerGetScanScreenshotError,
-    undefined,
-    {},
-    UrlscannerGetScanScreenshotQueryParams,
-    UrlscannerGetScanScreenshotPathParams
-  >({ url: '/accounts/{accountId}/urlscanner/scan/{scanId}/screenshot', method: 'get', ...variables, signal });
-
-export type UrlscannerCreateScanBulkV2PathParams = {
-  /**
-   * Account Id.
-   */
-  accountId: string;
-};
-
-export type UrlscannerCreateScanBulkV2Error = Fetcher.ErrorWrapper<
-  | {
-      status: 400;
-      payload: {
-        errors: {
-          detail: string;
-          /**
-           * Status code.
-           *
-           * @example 400
-           */
-          status: number;
-          /**
-           * @example Invalid url
-           */
-          title: string;
-        }[];
-        message: string;
-        /**
-         * Status code.
-         *
-         * @example 400
-         */
-        status: number;
-      };
-    }
-  | {
-      status: 429;
-      payload: {
-        description?: string;
-        errors: {
-          /**
-           * @example DNS Error - Could not resolve domain.
-           */
-          detail: string;
-          status: Record<string, any>;
-          /**
-           * @example DNS Error - Could not resolve domain.
-           */
-          title: string;
-        }[];
-        message: string;
-        status: Record<string, any>;
-      };
-    }
->;
-
-export type UrlscannerCreateScanBulkV2Response = {
-  /**
-   * URL to api report.
-   */
-  api: string;
-  options?: {
-    useragent?: string;
-  };
-  /**
-   * URL to report.
-   */
-  result: string;
-  /**
-   * Submitted URL
-   */
-  url: string;
-  /**
-   * Scan ID.
-   *
-   * @format uuid
-   */
-  uuid: string;
-  /**
-   * Submitted visibility status.
-   *
-   * @example Public
-   */
-  visibility: string;
-}[];
-
-export type UrlscannerCreateScanBulkV2RequestBody = {
-  /**
-   * Set custom headers.
-   */
-  customHeaders?: {
-    [key: string]: string;
-  };
-  /**
-   * @maxLength 4096
-   */
-  customagent?: string;
-  /**
-   * @maxLength 4096
-   */
-  referer?: string;
-  /**
-   * Take multiple screenshots targeting different device types.
-   *
-   * @default desktop
-   */
-  screenshotsResolutions?: ('desktop' | 'mobile' | 'tablet')[];
-  /**
-   * @example https://www.example.com
-   */
-  url: string;
-  /**
-   * The option `Public` means it will be included in listings like recent scans and search results. `Unlisted` means it will not be included in the aforementioned listings, users will need to have the scan's ID to access it. A a scan will be automatically marked as unlisted if it fails, if it contains potential PII or other sensitive material.
-   *
-   * @default Public
-   */
-  visibility?: 'Public' | 'Unlisted';
-}[];
-
-export type UrlscannerCreateScanBulkV2Variables = {
-  body?: UrlscannerCreateScanBulkV2RequestBody;
-  pathParams: UrlscannerCreateScanBulkV2PathParams;
-} & FetcherExtraProps;
-
-/**
- * Submit URLs to scan. Check limits at https://developers.cloudflare.com/security-center/investigate/scan-limits/ and take into account scans submitted in bulk have lower priority and may take longer to finish.
- */
-export const urlscannerCreateScanBulkV2 = (variables: UrlscannerCreateScanBulkV2Variables, signal?: AbortSignal) =>
-  fetch<
-    UrlscannerCreateScanBulkV2Response,
-    UrlscannerCreateScanBulkV2Error,
-    UrlscannerCreateScanBulkV2RequestBody,
-    {},
-    {},
-    UrlscannerCreateScanBulkV2PathParams
-  >({ url: '/accounts/{accountId}/urlscanner/v2/bulk', method: 'post', ...variables, signal });
-
-export type UrlscannerGetScanDomV2PathParams = {
-  /**
-   * Scan uuid.
-   *
-   * @format uuid
-   */
-  scanId: string;
-  /**
-   * Account Id.
-   */
-  accountId: string;
-};
-
-export type UrlscannerGetScanDomV2Error = Fetcher.ErrorWrapper<
-  | {
-      status: 400;
-      payload: {
-        errors: {
-          detail: string;
-          /**
-           * Status code.
-           *
-           * @example 400
-           */
-          status: number;
-          /**
-           * @example Invalid url
-           */
-          title: string;
-        }[];
-        message: string;
-        /**
-         * Status code.
-         *
-         * @example 400
-         */
-        status: number;
-      };
-    }
-  | {
-      status: 404;
-      payload: {
-        errors: {
-          /**
-           * @example Queued
-           */
-          detail: string;
-          /**
-           * Status code.
-           *
-           * @example 404
-           */
-          status: number;
-          /**
-           * @example Scan is not finished yet.
-           */
-          title: string;
-        }[];
-        /**
-         * Scan not found or in progress.
-         *
-         * @example Scan is not finished yet.
-         */
-        message: string;
-        /**
-         * Status code.
-         *
-         * @example 404
-         */
-        status: number;
-        task: {
-          /**
-           * @example Queued
-           */
-          status: string;
-          time: string;
-          url: string;
-          uuid: string;
-          /**
-           * @example public
-           */
-          visibility: string;
-        };
-      };
-    }
->;
-
-export type UrlscannerGetScanDomV2Variables = {
-  pathParams: UrlscannerGetScanDomV2PathParams;
-} & FetcherExtraProps;
-
-/**
- * Returns a plain text response, with the scan's DOM content as rendered by Chrome.
- */
-export const urlscannerGetScanDomV2 = (variables: UrlscannerGetScanDomV2Variables, signal?: AbortSignal) =>
-  fetch<undefined, UrlscannerGetScanDomV2Error, undefined, {}, {}, UrlscannerGetScanDomV2PathParams>({
-    url: '/accounts/{accountId}/urlscanner/v2/dom/{scanId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type UrlscannerGetScanHarV2PathParams = {
-  /**
-   * Scan uuid.
-   *
-   * @format uuid
-   */
-  scanId: string;
-  /**
-   * Account Id.
-   */
-  accountId: string;
-};
-
-export type UrlscannerGetScanHarV2Error = Fetcher.ErrorWrapper<
-  | {
-      status: 400;
-      payload: {
-        errors: {
-          detail: string;
-          /**
-           * Status code.
-           *
-           * @example 400
-           */
-          status: number;
-          /**
-           * @example Invalid url
-           */
-          title: string;
-        }[];
-        message: string;
-        /**
-         * Status code.
-         *
-         * @example 400
-         */
-        status: number;
-      };
-    }
-  | {
-      status: 404;
-      payload: {
-        errors: {
-          /**
-           * @example Queued
-           */
-          detail: string;
-          /**
-           * Status code.
-           *
-           * @example 404
-           */
-          status: number;
-          /**
-           * @example Scan is not finished yet.
-           */
-          title: string;
-        }[];
-        /**
-         * Scan not found or in progress.
-         *
-         * @example Scan is not finished yet.
-         */
-        message: string;
-        /**
-         * Status code.
-         *
-         * @example 404
-         */
-        status: number;
-        task: {
-          /**
-           * @example Queued
-           */
-          status: string;
-          time: string;
-          url: string;
-          uuid: string;
-          /**
-           * @example public
-           */
-          visibility: string;
-        };
-      };
-    }
->;
-
-export type UrlscannerGetScanHarV2Response = {
-  log: {
-    creator: {
-      /**
-       * @example https://github.com/sitespeedio/chrome-har
-       */
-      comment: string;
-      /**
-       * @example chrome-har
-       */
-      name: string;
-      /**
-       * @example 0.13.1
-       */
-      version: string;
-    };
-    entries: {
-      /**
-       * @example VeryHigh
-       */
-      _initialPriority: string;
-      /**
-       * @example other
-       */
-      _initiator_type: string;
-      /**
-       * @example VeryHigh
-       */
-      _priority: string;
-      /**
-       * @example DDC779F0CB3746BAF283EC1A51B0F2F8
-       */
-      _requestId: string;
-      /**
-       * @example 114135.331081
-       */
-      _requestTime: number;
-      /**
-       * @example document
-       */
-      _resourceType: string;
-      cache: Record<string, any>;
-      /**
-       * @example 33
-       */
-      connection: string;
-      /**
-       * @example page_1
-       */
-      pageref: string;
-      request: {
-        bodySize: number;
-        headers: {
-          /**
-           * @example Upgrade-Insecure-Requests
-           */
-          name: string;
-          /**
-           * @example 1
-           */
-          value: string;
-        }[];
-        /**
-         * @example 197
-         */
-        headersSize: number;
-        /**
-         * @example http/1.1
-         */
-        httpVersion: string;
-        /**
-         * @example GET
-         */
-        method: string;
-        /**
-         * @example http://example.com/
-         */
-        url: string;
-      };
-      response: {
-        /**
-         * @example 1071
-         */
-        _transferSize: number;
-        /**
-         * @example 648
-         */
-        bodySize: number;
-        content: {
-          /**
-           * @example 608
-           */
-          compression?: number;
-          /**
-           * @example text/html
-           */
-          mimeType: string;
-          /**
-           * @example 1256
-           */
-          size: number;
-        };
-        headers: {
-          /**
-           * @example Content-Encoding
-           */
-          name: string;
-          /**
-           * @example gzip
-           */
-          value: string;
-        }[];
-        /**
-         * @example 423
-         */
-        headersSize: number;
-        /**
-         * @example http/1.1
-         */
-        httpVersion: string;
-        redirectURL: string;
-        /**
-         * @example 200
-         */
-        status: number;
-        /**
-         * @example OK
-         */
-        statusText: string;
-      };
-      /**
-       * @example 2606:2800:220:1:248:1893:25c8:1946
-       */
-      serverIPAddress: string;
-      /**
-       * @example 2023-05-03T17:05:13.196Z
-       */
-      startedDateTime: string;
-      /**
-       * @example 268.64
-       */
-      time: number;
-    }[];
-    pages: {
-      /**
-       * @example page_1
-       */
-      id: string;
-      pageTimings: {
-        /**
-         * @example 305.408
-         */
-        onContentLoad: number;
-        /**
-         * @example 305.169
-         */
-        onLoad: number;
-      };
-      /**
-       * @example 2023-05-03T17:05:13.195Z
-       */
-      startedDateTime: string;
-      /**
-       * @example http://example.com/
-       */
-      title: string;
-    }[];
-    /**
-     * @example 1.2
-     */
-    version: string;
-  };
-};
-
-export type UrlscannerGetScanHarV2Variables = {
-  pathParams: UrlscannerGetScanHarV2PathParams;
-} & FetcherExtraProps;
-
-/**
- * Get a URL scan's HAR file. See HAR spec at http://www.softwareishard.com/blog/har-12-spec/.
- */
-export const urlscannerGetScanHarV2 = (variables: UrlscannerGetScanHarV2Variables, signal?: AbortSignal) =>
-  fetch<
-    UrlscannerGetScanHarV2Response,
-    UrlscannerGetScanHarV2Error,
-    undefined,
-    {},
-    {},
-    UrlscannerGetScanHarV2PathParams
-  >({ url: '/accounts/{accountId}/urlscanner/v2/har/{scanId}', method: 'get', ...variables, signal });
-
-export type UrlscannerGetResponseV2PathParams = {
-  /**
-   * Response hash.
-   */
-  responseId: string;
-  /**
-   * Account Id.
-   */
-  accountId: string;
-};
-
-export type UrlscannerGetResponseV2Error = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      detail: string;
-      /**
-       * Status code.
-       *
-       * @example 400
-       */
-      status: number;
-      /**
-       * @example Invalid url
-       */
-      title: string;
-    }[];
-    message: string;
-    /**
-     * Status code.
-     *
-     * @example 400
-     */
-    status: number;
-  };
-}>;
-
-export type UrlscannerGetResponseV2Variables = {
-  pathParams: UrlscannerGetResponseV2PathParams;
-} & FetcherExtraProps;
-
-/**
- * Returns the raw response of the network request. If HTML, a plain text response will be returned.
- */
-export const urlscannerGetResponseV2 = (variables: UrlscannerGetResponseV2Variables, signal?: AbortSignal) =>
-  fetch<undefined, UrlscannerGetResponseV2Error, undefined, {}, {}, UrlscannerGetResponseV2PathParams>({
-    url: '/accounts/{accountId}/urlscanner/v2/responses/{responseId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type UrlscannerGetScanV2PathParams = {
-  /**
-   * Scan uuid.
-   *
-   * @format uuid
-   */
-  scanId: string;
-  /**
-   * Account Id.
-   */
-  accountId: string;
-};
-
-export type UrlscannerGetScanV2Error = Fetcher.ErrorWrapper<
-  | {
-      status: 400;
-      payload: {
-        errors: {
-          detail: string;
-          /**
-           * Status code.
-           *
-           * @example 400
-           */
-          status: number;
-          /**
-           * @example Invalid url
-           */
-          title: string;
-        }[];
-        message: string;
-        /**
-         * Status code.
-         *
-         * @example 400
-         */
-        status: number;
-      };
-    }
-  | {
-      status: 404;
-      payload: {
-        errors: {
-          /**
-           * @example Queued
-           */
-          detail: string;
-          /**
-           * Status code.
-           *
-           * @example 404
-           */
-          status: number;
-          /**
-           * @example Scan is not finished yet.
-           */
-          title: string;
-        }[];
-        /**
-         * Scan not found or in progress.
-         *
-         * @example Scan is not finished yet.
-         */
-        message: string;
-        /**
-         * Status code.
-         *
-         * @example 404
-         */
-        status: number;
-        task: {
-          /**
-           * @example Queued
-           */
-          status: string;
-          time: string;
-          url: string;
-          uuid: string;
-          /**
-           * @example public
-           */
-          visibility: string;
-        };
-      };
-    }
->;
-
-export type UrlscannerGetScanV2Response = {
-  data: {
-    console: {
-      message: {
-        level: string;
-        source: string;
-        text: string;
-        url: string;
-      };
-    }[];
-    cookies: {
-      domain: string;
-      expires: number;
-      httpOnly: boolean;
-      name: string;
-      path: string;
-      priority: string;
-      sameParty: boolean;
-      secure: boolean;
-      session: boolean;
-      size: number;
-      sourcePort: number;
-      sourceScheme: string;
-      value: string;
-    }[];
-    globals: {
-      prop: string;
-      type: string;
-    }[];
-    links: {
-      href: string;
-      text: string;
-    }[];
-    performance: {
-      duration: number;
-      entryType: string;
-      name: string;
-      startTime: number;
-    }[];
-    requests: {
-      request: {
-        documentURL: string;
-        frameId?: string;
-        hasUserGesture: boolean;
-        initiator: {
-          host: string;
-          type: string;
-          url: string;
-        };
-        loaderId?: string;
-        primaryRequest?: boolean;
-        redirectHasExtraInfo: boolean;
-        redirectResponse?: {
-          charset: string;
-          headers?: Record<string, any>;
-          mimeType: string;
-          protocol: string;
-          remoteIPAddress: string;
-          remotePort: number;
-          securityHeaders: {
-            name: string;
-            value: string;
-          }[];
-          securityState: string;
-          status: number;
-          statusText: string;
-          url: string;
-        };
-        request: {
-          headers?: Record<string, any>;
-          initialPriority: string;
-          isSameSite: boolean;
-          method: string;
-          mixedContentType: string;
-          referrerPolicy: string;
-          url: string;
-        };
-        requestId: string;
-        type: string;
-        wallTime: number;
-      };
-      requests?: {
-        documentURL: string;
-        frameId: string;
-        hasUserGesture: boolean;
-        initiator: {
-          type: string;
-        };
-        loaderId: string;
-        redirectHasExtraInfo: boolean;
-        request: {
-          headers: {
-            name: string;
-          };
-          initialPriority: string;
-          isSameSite: boolean;
-          method: string;
-          mixedContentType: string;
-          referrerPolicy: string;
-          url: string;
-        };
-        requestId: string;
-        type: string;
-        wallTime: number;
-      }[];
-      response: {
-        asn: {
-          asn: string;
-          country: string;
-          description: string;
-          ip: string;
-          name: string;
-          org: string;
-        };
-        contentAvailable?: boolean;
-        dataLength: number;
-        encodedDataLength: number;
-        geoip: {
-          city: string;
-          country: string;
-          country_name: string;
-          geonameId: string;
-          ll: Record<string, any>[];
-          region: string;
-        };
-        hasExtraInfo: boolean;
-        hash?: string;
-        requestId: string;
-        response: {
-          charset: string;
-          headers?: Record<string, any>;
-          mimeType: string;
-          protocol: string;
-          remoteIPAddress: string;
-          remotePort: number;
-          securityDetails: {
-            certificateId: number;
-            certificateTransparencyCompliance: string;
-            cipher: string;
-            encryptedClientHello: boolean;
-            issuer: string;
-            keyExchange: string;
-            keyExchangeGroup: string;
-            protocol: string;
-            sanList: string[];
-            serverSignatureAlgorithm: number;
-            subjectName: string;
-            validFrom: number;
-            validTo: number;
-          };
-          securityHeaders: {
-            name: string;
-            value: string;
-          }[];
-          securityState: string;
-          status: number;
-          statusText: string;
-          url: string;
-        };
-        size: number;
-        type: string;
-      };
-    }[];
-  };
-  lists: {
-    asns: string[];
-    certificates: {
-      issuer: string;
-      subjectName: string;
-      validFrom: number;
-      validTo: number;
-    }[];
-    continents: string[];
-    countries: string[];
-    domains: string[];
-    hashes: string[];
-    ips: string[];
-    linkDomains: string[];
-    servers: string[];
-    urls: string[];
-  };
-  meta: {
-    processors: {
-      asn: {
-        data: {
-          asn: string;
-          country: string;
-          description: string;
-          ip: string;
-          name: string;
-        }[];
-      };
-      dns: {
-        data: {
-          address: string;
-          dnssec_valid: boolean;
-          name: string;
-          type: string;
-        }[];
-      };
-      domainCategories: {
-        data: {
-          inherited: Record<string, any>;
-          isPrimary: boolean;
-          name: string;
-        }[];
-      };
-      geoip: {
-        data: {
-          geoip: {
-            city: string;
-            country: string;
-            country_name: string;
-            ll: number[];
-            region: string;
-          };
-          ip: string;
-        }[];
-      };
-      phishing: {
-        data: string[];
-      };
-      radarRank: {
-        data: {
-          bucket: string;
-          hostname: string;
-          rank?: number;
-        }[];
-      };
-      urlCategories?: {
-        data: {
-          content: {
-            id: number;
-            name: string;
-            super_category_id: number;
-          }[];
-          inherited: {
-            content: {
-              id: number;
-              name: string;
-              super_category_id: number;
-            }[];
-            from: string;
-            risks: {
-              id: number;
-              name: string;
-              super_category_id: number;
-            }[];
-          };
-          name: string;
-          risks: {
-            id: number;
-            name: string;
-            super_category_id: number;
-          }[];
-        }[];
-      };
-      wappa: {
-        data: {
-          app: string;
-          categories: {
-            name: string;
-            priority: number;
-          }[];
-          confidence: {
-            confidence: number;
-            name: string;
-            pattern: string;
-            patternType: string;
-          }[];
-          confidenceTotal: number;
-          icon: string;
-          website: string;
-        }[];
-      };
-    };
-  };
-  page: {
-    apexDomain: string;
-    asn: string;
-    asnname: string;
-    city: string;
-    country: string;
-    domain: string;
-    ip: string;
-    mimeType: string;
-    screenshot?: {
-      dhash: string;
-      mm3Hash: number;
-      name: string;
-      phash: string;
-    };
-    server: string;
-    /**
-     * @example 200
-     */
-    status: string;
-    title: string;
-    tlsAgeDays: number;
-    tlsIssuer: string;
-    tlsValidDays: number;
-    tlsValidFrom: string;
-    url: string;
-  };
-  scanner: {
-    colo: string;
-    country: string;
-  };
-  stats: {
-    IPv6Percentage: number;
-    domainStats: {
-      count: number;
-      countries: string[];
-      domain: string;
-      encodedSize: number;
-      index: number;
-      initiators: string[];
-      ips: string[];
-      redirects: number;
-      size: number;
-    }[];
-    ipStats: {
-      asn: {
-        asn: string;
-        country: string;
-        description: string;
-        ip: string;
-        name: string;
-        org: string;
-      };
-      count?: number;
-      countries: string[];
-      domains: string[];
-      encodedSize: number;
-      geoip: {
-        city: string;
-        country: string;
-        country_name: string;
-        ll: number[];
-        region: string;
-      };
-      index: number;
-      ip: string;
-      ipv6: boolean;
-      redirects: number;
-      requests: number;
-      size: number;
-    }[];
-    malicious: number;
-    protocolStats: {
-      count: number;
-      countries: string[];
-      encodedSize: number;
-      ips: string[];
-      protocol: string;
-      size: number;
-    }[];
-    resourceStats: {
-      compression: number;
-      count: number;
-      countries: string[];
-      encodedSize: number;
-      ips: string[];
-      percentage: number;
-      size: number;
-      type: string;
-    }[];
-    securePercentage: number;
-    secureRequests: number;
-    serverStats: {
-      count: number;
-      countries: string[];
-      encodedSize: number;
-      ips: string[];
-      server: string;
-      size: number;
-    }[];
-    tlsStats: {
-      count: number;
-      countries: string[];
-      encodedSize: number;
-      ips: string[];
-      protocols: {
-        ['TLS 1.3 / AES_128_GCM']: number;
-      };
-      securityState: string;
-      size: number;
-    }[];
-    totalLinks: number;
-    uniqASNs: number;
-    uniqCountries: number;
-  };
-  task: {
-    apexDomain: string;
-    domURL: string;
-    domain: string;
-    method: string;
-    options: {
-      /**
-       * Custom headers set.
-       */
-      customHeaders?: Record<string, any>;
-      screenshotsResolutions?: string[];
-    };
-    reportURL: string;
-    screenshotURL: string;
-    source: string;
-    success: boolean;
-    time: string;
-    url: string;
-    uuid: string;
-    visibility: string;
-  };
-  verdicts: {
-    overall: {
-      categories: string[];
-      hasVerdicts: boolean;
-      malicious: boolean;
-      tags: string[];
-    };
-  };
-};
-
-export type UrlscannerGetScanV2Variables = {
-  pathParams: UrlscannerGetScanV2PathParams;
-} & FetcherExtraProps;
-
-/**
- * Get URL scan by uuid
- */
-export const urlscannerGetScanV2 = (variables: UrlscannerGetScanV2Variables, signal?: AbortSignal) =>
-  fetch<UrlscannerGetScanV2Response, UrlscannerGetScanV2Error, undefined, {}, {}, UrlscannerGetScanV2PathParams>({
-    url: '/accounts/{accountId}/urlscanner/v2/result/{scanId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type UrlscannerCreateScanV2PathParams = {
-  /**
-   * Account Id.
-   */
-  accountId: string;
-};
-
-export type UrlscannerCreateScanV2Error = Fetcher.ErrorWrapper<
-  | {
-      status: 400;
-      payload: {
-        errors: {
-          detail: string;
-          /**
-           * Status code.
-           *
-           * @example 400
-           */
-          status: number;
-          /**
-           * @example Invalid url
-           */
-          title: string;
-        }[];
-        message: string;
-        /**
-         * Status code.
-         *
-         * @example 400
-         */
-        status: number;
-      };
-    }
-  | {
-      status: 409;
-      payload: {
-        /**
-         * @example Scan request denied: hostname was recently scanned
-         */
-        description?: string;
-        errors: {
-          /**
-           * @example DNS Error - Could not resolve domain.
-           */
-          detail: string;
-          status: Record<string, any>;
-          /**
-           * @example DNS Error - Could not resolve domain.
-           */
-          title: string;
-        }[];
-        /**
-         * @example Scan prevented ...
-         */
-        message: string;
-        status: Record<string, any>;
-      };
-    }
-  | {
-      status: 429;
-      payload: {
-        description?: string;
-        errors: {
-          /**
-           * @example DNS Error - Could not resolve domain.
-           */
-          detail: string;
-          status: Record<string, any>;
-          /**
-           * @example DNS Error - Could not resolve domain.
-           */
-          title: string;
-        }[];
-        message: string;
-        status: Record<string, any>;
-      };
-    }
->;
-
-export type UrlscannerCreateScanV2Response = {
-  /**
-   * URL to api report.
-   */
-  api: string;
-  /**
-   * @example Submission successful
-   */
-  message: string;
-  options?: {
-    useragent?: string;
-  };
-  /**
-   * URL to report.
-   */
-  result: string;
-  /**
-   * Canonical form of submitted URL. Use this if you want to later search by URL.
-   */
-  url: string;
-  /**
-   * Scan ID.
-   *
-   * @format uuid
-   */
-  uuid: string;
-  /**
-   * Submitted visibility status.
-   *
-   * @example Public
-   */
-  visibility: string;
-};
-
-export type UrlscannerCreateScanV2RequestBody = {
-  /**
-   * Set custom headers.
-   */
-  customHeaders?: {
-    [key: string]: string;
-  };
-  /**
-   * @maxLength 4096
-   */
-  customagent?: string;
-  /**
-   * @maxLength 4096
-   */
-  referer?: string;
-  /**
-   * Take multiple screenshots targeting different device types.
-   *
-   * @default desktop
-   */
-  screenshotsResolutions?: ('desktop' | 'mobile' | 'tablet')[];
-  /**
-   * @example https://www.example.com
-   */
-  url: string;
-  /**
-   * The option `Public` means it will be included in listings like recent scans and search results. `Unlisted` means it will not be included in the aforementioned listings, users will need to have the scan's ID to access it. A a scan will be automatically marked as unlisted if it fails, if it contains potential PII or other sensitive material.
-   *
-   * @default Public
-   */
-  visibility?: 'Public' | 'Unlisted';
-};
-
-export type UrlscannerCreateScanV2Variables = {
-  body: UrlscannerCreateScanV2RequestBody;
-  pathParams: UrlscannerCreateScanV2PathParams;
-} & FetcherExtraProps;
-
-/**
- * Submit a URL to scan. Check limits at https://developers.cloudflare.com/security-center/investigate/scan-limits/.
- */
-export const urlscannerCreateScanV2 = (variables: UrlscannerCreateScanV2Variables, signal?: AbortSignal) =>
-  fetch<
-    UrlscannerCreateScanV2Response,
-    UrlscannerCreateScanV2Error,
-    UrlscannerCreateScanV2RequestBody,
-    {},
-    {},
-    UrlscannerCreateScanV2PathParams
-  >({ url: '/accounts/{accountId}/urlscanner/v2/scan', method: 'post', ...variables, signal });
-
-export type UrlscannerGetScanScreenshotV2PathParams = {
-  /**
-   * Scan uuid.
-   *
-   * @format uuid
-   */
-  scanId: string;
-  /**
-   * Account Id.
-   */
-  accountId: string;
-};
-
-export type UrlscannerGetScanScreenshotV2QueryParams = {
-  /**
-   * Target device type.
-   *
-   * @default desktop
-   */
-  resolution?: 'desktop' | 'mobile' | 'tablet';
-};
-
-export type UrlscannerGetScanScreenshotV2Error = Fetcher.ErrorWrapper<
-  | {
-      status: 400;
-      payload: {
-        errors: {
-          detail: string;
-          /**
-           * Status code.
-           *
-           * @example 400
-           */
-          status: number;
-          /**
-           * @example Invalid url
-           */
-          title: string;
-        }[];
-        message: string;
-        /**
-         * Status code.
-         *
-         * @example 400
-         */
-        status: number;
-      };
-    }
-  | {
-      status: 404;
-      payload: {
-        errors: {
-          /**
-           * @example Queued
-           */
-          detail: string;
-          /**
-           * Status code.
-           *
-           * @example 404
-           */
-          status: number;
-          /**
-           * @example Scan is not finished yet.
-           */
-          title: string;
-        }[];
-        /**
-         * Scan not found or in progress.
-         *
-         * @example Scan is not finished yet.
-         */
-        message: string;
-        /**
-         * Status code.
-         *
-         * @example 404
-         */
-        status: number;
-        task: {
-          /**
-           * @example Queued
-           */
-          status: string;
-          time: string;
-          url: string;
-          uuid: string;
-          /**
-           * @example public
-           */
-          visibility: string;
-        };
-      };
-    }
->;
-
-export type UrlscannerGetScanScreenshotV2Variables = {
-  pathParams: UrlscannerGetScanScreenshotV2PathParams;
-  queryParams?: UrlscannerGetScanScreenshotV2QueryParams;
-} & FetcherExtraProps;
-
-/**
- * Get scan's screenshot by resolution (desktop/mobile/tablet).
- */
-export const urlscannerGetScanScreenshotV2 = (
-  variables: UrlscannerGetScanScreenshotV2Variables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    UrlscannerGetScanScreenshotV2Error,
-    undefined,
-    {},
-    UrlscannerGetScanScreenshotV2QueryParams,
-    UrlscannerGetScanScreenshotV2PathParams
-  >({ url: '/accounts/{accountId}/urlscanner/v2/screenshots/{scanId}.png', method: 'get', ...variables, signal });
-
-export type UrlscannerSearchScansV2PathParams = {
-  /**
-   * Account Id.
-   */
-  accountId: string;
-};
-
-export type UrlscannerSearchScansV2QueryParams = {
-  /**
-   * Limit the number of objects in the response.
-   *
-   * @example 100
-   */
-  size?: number;
-  /**
-   * Filter scans
-   */
-  q?: string;
-};
-
-export type UrlscannerSearchScansV2Error = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      detail: string;
-      /**
-       * Status code.
-       *
-       * @example 400
-       */
-      status: number;
-      /**
-       * @example Invalid url
-       */
-      title: string;
-    }[];
-    message: string;
-    /**
-     * Status code.
-     *
-     * @example 400
-     */
-    status: number;
-  };
-}>;
-
-export type UrlscannerSearchScansV2Response = {
-  results: {
-    /**
-     * @example 9626f773-9ffb-4cfb-89d3-30b120fc8011
-     */
-    _id: string;
-    page: {
-      /**
-       * @example AS15133
-       */
-      asn: string;
-      /**
-       * @example US
-       */
-      country: string;
-      /**
-       * @example 93.184.215.14
-       */
-      ip: string;
-      /**
-       * @example https://example.com
-       */
-      url: string;
-    };
-    /**
-     * @example https://radar.clouflare.com/scan/9626f773-9ffb-4cfb-89d3-30b120fc8011
-     */
-    result: string;
-    stats: {
-      /**
-       * @example 2512
-       */
-      dataLength: number;
-      /**
-       * @example 2
-       */
-      requests: number;
-      /**
-       * @example 1
-       */
-      uniqCountries: number;
-      /**
-       * @example 1
-       */
-      uniqIPs: number;
-    };
-    task: {
-      /**
-       * @example 2024-09-30T23:54:02.881000+00:00
-       */
-      time: string;
-      /**
-       * @example https://example.com
-       */
-      url: string;
-      /**
-       * @example 9626f773-9ffb-4cfb-89d3-30b120fc8011
-       */
-      uuid: string;
-      /**
-       * @example public
-       */
-      visibility: string;
-    };
-    verdicts: {
-      malicious: boolean;
-    };
-  }[];
-};
-
-export type UrlscannerSearchScansV2Variables = {
-  pathParams: UrlscannerSearchScansV2PathParams;
-  queryParams?: UrlscannerSearchScansV2QueryParams;
-} & FetcherExtraProps;
-
-/**
- * Use a subset of ElasticSearch Query syntax to filter scans. Some example queries:<br/> <br/>- 'page.domain:microsoft AND verdicts.malicious:true AND NOT page.domain:microsoft.com': malicious scans whose hostname starts with "microsoft".<br/>- 'apikey:me AND date:[2024-01 TO 2024-10]': my scans from 2024 January to 2024 October.<br/>- 'page.domain:(blogspot OR www.blogspot)': Searches for scans whose main domain starts with "blogspot" or with "www.blogspot"<br/>- 'date:>now-7d AND path:okta-sign-in.min.js: scans from the last 7 days with any request path that ends with "okta-sign-in.min.js"<br/>- 'page.asn:AS24940 AND hash:xxx': Websites hosted in AS24940 where a resource with the given hash was downloaded.
- */
-export const urlscannerSearchScansV2 = (variables: UrlscannerSearchScansV2Variables, signal?: AbortSignal) =>
-  fetch<
-    UrlscannerSearchScansV2Response,
-    UrlscannerSearchScansV2Error,
-    undefined,
-    {},
-    UrlscannerSearchScansV2QueryParams,
-    UrlscannerSearchScansV2PathParams
-  >({ url: '/accounts/{accountId}/urlscanner/v2/search', method: 'get', ...variables, signal });
-
 export type CloudforceOneRequestListPathParams = {
   accountIdentifier: Schemas.CloudforceOneRequestsIdentifier;
 };
@@ -64269,6 +61037,3238 @@ export const cloudflareTunnelListAllTunnels = (
     CloudflareTunnelListAllTunnelsPathParams
   >({ url: '/accounts/{accountId}/tunnels', method: 'get', ...variables, signal });
 
+export type UrlscannerGetResponseTextPathParams = {
+  /**
+   * Response hash.
+   */
+  responseId: string;
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type UrlscannerGetResponseTextError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors: {
+          /**
+           * @example Scan ID is not a valid UUID.
+           */
+          message: string;
+        }[];
+        messages: {
+          message: string;
+        }[];
+        /**
+         * Whether request was successful or not
+         */
+        success: boolean;
+      };
+    }
+  | {
+      status: 404;
+      payload: {
+        errors: {
+          /**
+           * @example Scan not found.
+           */
+          message: string;
+        }[];
+        messages: {
+          message: string;
+        }[];
+        /**
+         * Whether request was successful or not
+         */
+        success: boolean;
+      };
+    }
+>;
+
+export type UrlscannerGetResponseTextVariables = {
+  pathParams: UrlscannerGetResponseTextPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Returns the plain response of the network request.
+ */
+export const urlscannerGetResponseText = (variables: UrlscannerGetResponseTextVariables, signal?: AbortSignal) =>
+  fetch<undefined, UrlscannerGetResponseTextError, undefined, {}, {}, UrlscannerGetResponseTextPathParams>({
+    url: '/accounts/{accountId}/urlscanner/response/{responseId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type UrlscannerSearchScansPathParams = {
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type UrlscannerSearchScansQueryParams = {
+  /**
+   * Scan UUID.
+   *
+   * @format uuid
+   */
+  scan_id?: string;
+  /**
+   * Limit the number of objects in the response.
+   *
+   * @example 100
+   */
+  limit?: number;
+  /**
+   * Pagination cursor to get the next set of results.
+   */
+  next_cursor?: string;
+  /**
+   * Filter scans requested after date (inclusive).
+   *
+   * @format date-time
+   */
+  date_start?: string;
+  /**
+   * Filter scans requested before date (inclusive).
+   *
+   * @format date-time
+   */
+  date_end?: string;
+  /**
+   * Filter scans by URL of _any_ request made by the webpage
+   *
+   * @example https://example.com/?hello
+   */
+  url?: string;
+  /**
+   * Filter scans by hostname of _any_ request made by the webpage.
+   *
+   * @example example.com
+   */
+  hostname?: string;
+  /**
+   * Filter scans by url path of _any_ request made by the webpage.
+   *
+   * @example /samples/subresource-integrity/
+   */
+  path?: string;
+  /**
+   * Filter scans by IP address (IPv4 or IPv6) of _any_ request made by the webpage.
+   *
+   * @example 1.1.1.1
+   */
+  ip?: string;
+  /**
+   * Filter scans by Autonomous System Number (ASN) of _any_ request made by the webpage.
+   *
+   * @example 13335
+   */
+  asn?: string;
+  /**
+   * Filter scans by hash of any html/js/css request made by the webpage.
+   */
+  hash?: string;
+  /**
+   * Filter scans by submitted or scanned URL
+   */
+  page_url?: string;
+  /**
+   * Filter scans by main page hostname (domain of effective URL).
+   */
+  page_hostname?: string;
+  /**
+   * Filter scans by exact match of effective URL path (also supports suffix search).
+   */
+  page_path?: string;
+  /**
+   * Filter scans by main page Autonomous System Number (ASN).
+   */
+  page_asn?: string;
+  /**
+   * Filter scans by  main page IP address (IPv4 or IPv6).
+   */
+  page_ip?: string;
+  /**
+   * Return only scans created by account.
+   */
+  account_scans?: boolean;
+  /**
+   * Filter scans by malicious verdict.
+   */
+  is_malicious?: boolean;
+};
+
+export type UrlscannerSearchScansError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example Scan ID is not a valid UUID.
+       */
+      message: string;
+    }[];
+    messages: {
+      message: string;
+    }[];
+    /**
+     * Whether request was successful or not
+     */
+    success: boolean;
+  };
+}>;
+
+export type UrlscannerSearchScansResponse = {
+  errors: {
+    /**
+     * @example Error
+     */
+    message: string;
+  }[];
+  messages: {
+    /**
+     * @example OK
+     */
+    message: string;
+  }[];
+  result: {
+    tasks: {
+      /**
+       * Alpha-2 country code
+       */
+      country: string;
+      /**
+       * Whether scan was successful or not
+       */
+      success: boolean;
+      /**
+       * When scan was submitted (UTC)
+       *
+       * @format date-time
+       */
+      time: string;
+      /**
+       * Scan url (after redirects)
+       *
+       * @example https://www.example.com/
+       */
+      url: string;
+      /**
+       * Scan id
+       *
+       * @format uuid
+       */
+      uuid: string;
+      /**
+       * Visibility status.
+       *
+       * @example public
+       */
+      visibility: string;
+    }[];
+  };
+  /**
+   * Whether search request was successful or not
+   */
+  success: boolean;
+};
+
+export type UrlscannerSearchScansVariables = {
+  pathParams: UrlscannerSearchScansPathParams;
+  queryParams?: UrlscannerSearchScansQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Search scans by date and webpages' requests, including full URL (after redirects), hostname, and path. <br/> A successful scan will appear in search results a few minutes after finishing but may take much longer if the system in under load. By default, only successfully completed scans will appear in search results, unless searching by `scanId`. Please take into account that older scans may be removed from the search index at an unspecified time.
+ */
+export const urlscannerSearchScans = (variables: UrlscannerSearchScansVariables, signal?: AbortSignal) =>
+  fetch<
+    UrlscannerSearchScansResponse,
+    UrlscannerSearchScansError,
+    undefined,
+    {},
+    UrlscannerSearchScansQueryParams,
+    UrlscannerSearchScansPathParams
+  >({ url: '/accounts/{accountId}/urlscanner/scan', method: 'get', ...variables, signal });
+
+export type UrlscannerCreateScanPathParams = {
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type UrlscannerCreateScanError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors: {
+          /**
+           * @example Scan ID is not a valid UUID.
+           */
+          message: string;
+        }[];
+        messages: {
+          message: string;
+        }[];
+        /**
+         * Whether request was successful or not
+         */
+        success: boolean;
+      };
+    }
+  | {
+      status: 409;
+      payload: {
+        errors: {
+          /**
+           * @example Submission unsuccessful
+           */
+          message: string;
+        }[];
+        messages: {
+          message: string;
+        }[];
+        result: {
+          tasks: {
+            /**
+             * Submitter location
+             *
+             * @example PT
+             */
+            clientLocation: string;
+            clientType: 'Site' | 'Automatic' | 'Api';
+            /**
+             * URL of the primary request, after all HTTP redirects
+             *
+             * @example http://example.com/
+             */
+            effectiveUrl: string;
+            errors: {
+              message: string;
+            }[];
+            scannedFrom: {
+              /**
+               * IATA code of Cloudflare datacenter
+               *
+               * @example MAD
+               */
+              colo: string;
+            };
+            status: 'Queued' | 'InProgress' | 'InPostProcessing' | 'Finished';
+            /**
+             * @example true
+             */
+            success: boolean;
+            /**
+             * @example 2023-05-03T17:05:04.843Z
+             */
+            time: string;
+            /**
+             * @example 2023-05-03T17:05:19.374Z
+             */
+            timeEnd: string;
+            /**
+             * Submitted URL
+             *
+             * @example http://example.com
+             */
+            url: string;
+            /**
+             * Scan ID
+             *
+             * @example 2ee568d0-bf70-4827-b922-b7088c0f056f
+             */
+            uuid: string;
+            visibility: 'Public' | 'Unlisted';
+          }[];
+        };
+        /**
+         * @example true
+         */
+        success: boolean;
+      };
+    }
+  | {
+      status: 429;
+      payload: {
+        errors: {
+          /**
+           * @example Submission unsuccessful
+           */
+          message: string;
+        }[];
+        messages: {
+          message: string;
+        }[];
+        /**
+         * @example true
+         */
+        success: boolean;
+      };
+    }
+>;
+
+export type UrlscannerCreateScanResponse = {
+  errors: {
+    /**
+     * @example Submission unsuccessful
+     */
+    message: string;
+  }[];
+  messages: {
+    /**
+     * @example Submission successful
+     */
+    message: string;
+  }[];
+  result: {
+    /**
+     * Time when url was submitted for scanning.
+     *
+     * @format date-time
+     */
+    time: string;
+    /**
+     * Canonical form of submitted URL. Use this if you want to later search by URL.
+     */
+    url: string;
+    /**
+     * Scan ID.
+     *
+     * @format uuid
+     */
+    uuid: string;
+    /**
+     * Submitted visibility status.
+     *
+     * @example Public
+     */
+    visibility: string;
+  };
+  success: boolean;
+};
+
+export type UrlscannerCreateScanRequestBody = {
+  /**
+   * Set custom headers.
+   */
+  customHeaders?: {
+    [key: string]: string;
+  };
+  /**
+   * Take multiple screenshots targeting different device types.
+   *
+   * @default desktop
+   */
+  screenshotsResolutions?: ('desktop' | 'mobile' | 'tablet')[];
+  /**
+   * @example https://www.example.com
+   */
+  url: string;
+  /**
+   * The option `Public` means it will be included in listings like recent scans and search results. `Unlisted` means it will not be included in the aforementioned listings, users will need to have the scan's ID to access it. A a scan will be automatically marked as unlisted if it fails, if it contains potential PII or other sensitive material.
+   *
+   * @default Public
+   */
+  visibility?: 'Public' | 'Unlisted';
+};
+
+export type UrlscannerCreateScanVariables = {
+  body: UrlscannerCreateScanRequestBody;
+  pathParams: UrlscannerCreateScanPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Submit a URL to scan. You can also set some options, like the visibility level and custom headers. Check limits at https://developers.cloudflare.com/security-center/investigate/scan-limits/.
+ */
+export const urlscannerCreateScan = (variables: UrlscannerCreateScanVariables, signal?: AbortSignal) =>
+  fetch<
+    UrlscannerCreateScanResponse,
+    UrlscannerCreateScanError,
+    UrlscannerCreateScanRequestBody,
+    {},
+    {},
+    UrlscannerCreateScanPathParams
+  >({ url: '/accounts/{accountId}/urlscanner/scan', method: 'post', ...variables, signal });
+
+export type UrlscannerGetScanPathParams = {
+  /**
+   * Scan UUID.
+   *
+   * @format uuid
+   */
+  scanId: string;
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type UrlscannerGetScanQueryParams = {
+  /**
+   * Whether to return full report (scan summary and network log).
+   */
+  full?: boolean;
+};
+
+export type UrlscannerGetScanError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors: {
+          /**
+           * @example Scan ID is not a valid UUID.
+           */
+          message: string;
+        }[];
+        messages: {
+          message: string;
+        }[];
+        /**
+         * Whether request was successful or not
+         */
+        success: boolean;
+      };
+    }
+  | {
+      status: 404;
+      payload: {
+        errors: {
+          /**
+           * @example Scan not found.
+           */
+          message: string;
+        }[];
+        messages: {
+          message: string;
+        }[];
+        /**
+         * Whether request was successful or not
+         */
+        success: boolean;
+      };
+    }
+>;
+
+export type UrlscannerGetScanVariables = {
+  pathParams: UrlscannerGetScanPathParams;
+  queryParams?: UrlscannerGetScanQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Get URL scan by uuid
+ */
+export const urlscannerGetScan = (variables: UrlscannerGetScanVariables, signal?: AbortSignal) =>
+  fetch<
+    | {
+        errors: {
+          /**
+           * @example Error
+           */
+          message: string;
+        }[];
+        messages: {
+          /**
+           * @example OK
+           */
+          message: string;
+        }[];
+        result: {
+          scan: {
+            /**
+             * Dictionary of Autonomous System Numbers where ASN's are the keys
+             */
+            asns?: {
+              /**
+               * ASN's contacted
+               */
+              asn?: {
+                /**
+                 * @example 15133
+                 */
+                asn: string;
+                /**
+                 * @example EDGECAST
+                 */
+                description: string;
+                /**
+                 * @example US
+                 */
+                location_alpha2: string;
+                /**
+                 * @example EDGECAST
+                 */
+                name: string;
+                /**
+                 * @example Edgecast Inc.
+                 */
+                org_name: string;
+              };
+            };
+            certificates: {
+              issuer: string;
+              /**
+               * @example rkmod.somee.com
+               */
+              subjectName: string;
+              /**
+               * @example 1682684400
+               */
+              validFrom: number;
+              /**
+               * @example 1696698000
+               */
+              validTo: number;
+            }[];
+            domains?: {
+              ['example.com']?: {
+                categories: {
+                  content?: {
+                    id: number;
+                    /**
+                     * @example Technology
+                     */
+                    name: string;
+                    super_category_id?: number;
+                  }[];
+                  inherited: {
+                    content?: {
+                      id: number;
+                      /**
+                       * @example Technology
+                       */
+                      name: string;
+                      super_category_id?: number;
+                    }[];
+                    /**
+                     * @example example.com
+                     */
+                    from?: string;
+                    risks?: {
+                      id: number;
+                      /**
+                       * @example Technology
+                       */
+                      name: string;
+                      super_category_id?: number;
+                    }[];
+                  };
+                  risks?: {
+                    id: number;
+                    /**
+                     * @example Technology
+                     */
+                    name: string;
+                    super_category_id?: number;
+                  }[];
+                };
+                dns: {
+                  /**
+                   * @example 93.184.216.34
+                   */
+                  address: string;
+                  dnssec_valid: boolean;
+                  /**
+                   * @example example.com
+                   */
+                  name: string;
+                  /**
+                   * @example A
+                   */
+                  type: string;
+                }[];
+                /**
+                 * @example example.com
+                 */
+                name: string;
+                rank: {
+                  /**
+                   * @example 500
+                   */
+                  bucket: string;
+                  /**
+                   * @example example.com
+                   */
+                  name: string;
+                  /**
+                   * Rank in the Global Radar Rank, if set. See more at https://blog.cloudflare.com/radar-domain-rankings/
+                   */
+                  rank?: number;
+                };
+                /**
+                 * @example Apex domain
+                 */
+                type: string;
+              };
+            };
+            geo: {
+              /**
+               * GeoIP continent location
+               */
+              continents: string[];
+              /**
+               * GeoIP country location
+               */
+              locations: string[];
+            };
+            ips?: {
+              ip?: {
+                /**
+                 * @example 15133
+                 */
+                asn: string;
+                /**
+                 * @example EDGECAST
+                 */
+                asnDescription: string;
+                /**
+                 * @example US
+                 */
+                asnLocationAlpha2: string;
+                /**
+                 * @example EDGECAST
+                 */
+                asnName: string;
+                /**
+                 * @example Edgecast Inc.
+                 */
+                asnOrgName: string;
+                /**
+                 * @example North America
+                 */
+                continent: string;
+                /**
+                 * @example 6252001
+                 */
+                geonameId: string;
+                /**
+                 * @example 2606:2800:220:1:248:1893:25c8:1946
+                 */
+                ip: string;
+                /**
+                 * @example IPv6
+                 */
+                ipVersion: string;
+                /**
+                 * @example 39.76
+                 */
+                latitude: string;
+                /**
+                 * @example US
+                 */
+                locationAlpha2: string;
+                /**
+                 * @example United States
+                 */
+                locationName: string;
+                /**
+                 * @example -98.5
+                 */
+                longitude: string;
+                subdivision1Name: string;
+                subdivision2Name: string;
+              };
+            };
+            links?: {
+              link?: {
+                /**
+                 * Outgoing link detected in the DOM
+                 *
+                 * @example https://www.iana.org/domains/example
+                 */
+                href: string;
+                /**
+                 * @example More information...
+                 */
+                text: string;
+              };
+            };
+            meta: {
+              processors: {
+                categories: {
+                  content: {
+                    /**
+                     * @example 155
+                     */
+                    id: number;
+                    /**
+                     * @example Technology
+                     */
+                    name: string;
+                    super_category_id?: number;
+                  }[];
+                  risks: {
+                    /**
+                     * @example 17
+                     */
+                    id: number;
+                    /**
+                     * @example Newly Seen Domains
+                     */
+                    name: string;
+                    /**
+                     * @example 32
+                     */
+                    super_category_id: number;
+                  }[];
+                };
+                phishing: string[];
+                rank: {
+                  /**
+                   * @example 500
+                   */
+                  bucket: string;
+                  /**
+                   * @example example.com
+                   */
+                  name: string;
+                  /**
+                   * Rank in the Global Radar Rank, if set. See more at https://blog.cloudflare.com/radar-domain-rankings/
+                   */
+                  rank?: number;
+                };
+                tech: {
+                  categories: {
+                    groups: number[];
+                    /**
+                     * @example 63
+                     */
+                    id: number;
+                    /**
+                     * @example IAAS
+                     */
+                    name: string;
+                    /**
+                     * @example 8
+                     */
+                    priority: number;
+                    /**
+                     * @example iaas
+                     */
+                    slug: string;
+                  }[];
+                  /**
+                   * @example 100
+                   */
+                  confidence: number;
+                  description?: string;
+                  evidence: {
+                    impliedBy: string[];
+                    patterns: {
+                      /**
+                       * @example 100
+                       */
+                      confidence: number;
+                      excludes: string[];
+                      implies: string[];
+                      /**
+                       * @example ECS
+                       */
+                      match: string;
+                      /**
+                       * Header or Cookie name when set
+                       *
+                       * @example server
+                       */
+                      name: string;
+                      /**
+                       * @example ^ECS
+                       */
+                      regex: string;
+                      /**
+                       * @example headers
+                       */
+                      type: string;
+                      /**
+                       * @example ECS (dcb/7EEE)
+                       */
+                      value: string;
+                      version: string;
+                    }[];
+                  };
+                  /**
+                   * @example Amazon ECS.svg
+                   */
+                  icon: string;
+                  /**
+                   * @example Amazon ECS
+                   */
+                  name: string;
+                  /**
+                   * @example amazon-ecs
+                   */
+                  slug: string;
+                  /**
+                   * @example https://aws.amazon.com/ecs/
+                   */
+                  website: string;
+                }[];
+              };
+            };
+            page: {
+              /**
+               * @example 15133
+               */
+              asn: string;
+              /**
+               * @example US
+               */
+              asnLocationAlpha2: string;
+              /**
+               * @example EDGECAST
+               */
+              asnname: string;
+              console: {
+                /**
+                 * @example network
+                 */
+                category: string;
+                /**
+                 * @example Failed to load resource: the server responded with a status of 404 (Not Found)
+                 */
+                text: string;
+                /**
+                 * @example error
+                 */
+                type: string;
+                /**
+                 * @example http://example.com/favicon.ico
+                 */
+                url?: string;
+              }[];
+              cookies: {
+                /**
+                 * @example rkmod.somee.com
+                 */
+                domain: string;
+                /**
+                 * @example -1
+                 */
+                expires: number;
+                httpOnly: boolean;
+                /**
+                 * @example b
+                 */
+                name: string;
+                /**
+                 * @example /
+                 */
+                path: string;
+                /**
+                 * @example Medium
+                 */
+                priority?: string;
+                sameParty: boolean;
+                secure: boolean;
+                /**
+                 * @example true
+                 */
+                session: boolean;
+                /**
+                 * @example 2
+                 */
+                size: number;
+                /**
+                 * @example 443
+                 */
+                sourcePort: number;
+                /**
+                 * @example Secure
+                 */
+                sourceScheme: string;
+                /**
+                 * @example b
+                 */
+                value: string;
+              }[];
+              /**
+               * @example United States
+               */
+              country: string;
+              /**
+               * @example US
+               */
+              countryLocationAlpha2: string;
+              /**
+               * @example example.com
+               */
+              domain: string;
+              headers: {
+                /**
+                 * @example Content-Length
+                 */
+                name: string;
+                /**
+                 * @example 648
+                 */
+                value: string;
+              }[];
+              /**
+               * @example 2606:2800:220:1:248:1893:25c8:1946
+               */
+              ip: string;
+              js: {
+                variables: {
+                  /**
+                   * @example checkFrame
+                   */
+                  name: string;
+                  /**
+                   * @example string
+                   */
+                  type: string;
+                }[];
+              };
+              securityViolations: {
+                /**
+                 * @example csp
+                 */
+                category: string;
+                /**
+                 * @example [Report Only] Refused to load the stylesheet 'https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css' because it violates the following Content Security Policy directive: ...
+                 */
+                text: string;
+                /**
+                 * @example http://example.com/
+                 */
+                url: string;
+              }[];
+              /**
+               * @example 200
+               */
+              status: number;
+              subdivision1Name: string;
+              subdivision2name: string;
+              /**
+               * @example http://example.com/
+               */
+              url: string;
+            };
+            performance: {
+              /**
+               * @example 82.59999999403954
+               */
+              connectEnd: number;
+              /**
+               * @example 72.79999999701977
+               */
+              connectStart: number;
+              /**
+               * @example 1256
+               */
+              decodedBodySize: number;
+              /**
+               * @example 306
+               */
+              domComplete: number;
+              /**
+               * @example 305.8999999910593
+               */
+              domContentLoadedEventEnd: number;
+              /**
+               * @example 305.8999999910593
+               */
+              domContentLoadedEventStart: number;
+              /**
+               * @example 305.8999999910593
+               */
+              domInteractive: number;
+              /**
+               * @example 72.79999999701977
+               */
+              domainLookupEnd: number;
+              /**
+               * @example 2.199999988079071
+               */
+              domainLookupStart: number;
+              /**
+               * @example 306
+               */
+              duration: number;
+              /**
+               * @example 648
+               */
+              encodedBodySize: number;
+              /**
+               * @example navigation
+               */
+              entryType: string;
+              /**
+               * @example 0.8999999910593033
+               */
+              fetchStart: number;
+              /**
+               * @example navigation
+               */
+              initiatorType: string;
+              /**
+               * @example 306
+               */
+              loadEventEnd: number;
+              /**
+               * @example 306
+               */
+              loadEventStart: number;
+              /**
+               * @example http://example.com/
+               */
+              name: string;
+              /**
+               * @example http/1.1
+               */
+              nextHopProtocol: string;
+              redirectCount: number;
+              redirectEnd: number;
+              redirectStart: number;
+              /**
+               * @example 82.69999998807907
+               */
+              requestStart: number;
+              /**
+               * @example 270.8999999910593
+               */
+              responseEnd: number;
+              /**
+               * @example 265.69999998807907
+               */
+              responseStart: number;
+              secureConnectionStart: number;
+              startTime: number;
+              /**
+               * @example 948
+               */
+              transferSize: number;
+              /**
+               * @example navigate
+               */
+              type: string;
+              unloadEventEnd: number;
+              unloadEventStart: number;
+              workerStart: number;
+            }[];
+            task: {
+              /**
+               * Submitter location
+               *
+               * @example PT
+               */
+              clientLocation: string;
+              clientType: 'Site' | 'Automatic' | 'Api';
+              /**
+               * URL of the primary request, after all HTTP redirects
+               *
+               * @example http://example.com/
+               */
+              effectiveUrl: string;
+              errors: {
+                message: string;
+              }[];
+              scannedFrom: {
+                /**
+                 * IATA code of Cloudflare datacenter
+                 *
+                 * @example MAD
+                 */
+                colo: string;
+              };
+              status: 'Queued' | 'InProgress' | 'InPostProcessing' | 'Finished';
+              /**
+               * @example true
+               */
+              success: boolean;
+              /**
+               * @example 2023-05-03T17:05:04.843Z
+               */
+              time: string;
+              /**
+               * @example 2023-05-03T17:05:19.374Z
+               */
+              timeEnd: string;
+              /**
+               * Submitted URL
+               *
+               * @example http://example.com
+               */
+              url: string;
+              /**
+               * Scan ID
+               *
+               * @example 2ee568d0-bf70-4827-b922-b7088c0f056f
+               */
+              uuid: string;
+              visibility: 'Public' | 'Unlisted';
+            };
+            verdicts: {
+              overall: {
+                categories: {
+                  /**
+                   * @example 117
+                   */
+                  id: number;
+                  /**
+                   * @example Malware
+                   */
+                  name: string;
+                  /**
+                   * @example 32
+                   */
+                  super_category_id: number;
+                }[];
+                /**
+                 * At least one of our subsystems marked the site as potentially malicious at the time of the scan.
+                 *
+                 * @example true
+                 */
+                malicious: boolean;
+                phishing: string[];
+              };
+            };
+          };
+        };
+        /**
+         * Whether request was successful or not
+         */
+        success: boolean;
+      }
+    | {
+        errors: {
+          message: string;
+        }[];
+        messages: {
+          /**
+           * @example In Progress
+           */
+          message: string;
+        }[];
+        result: {
+          scan: {
+            task: {
+              /**
+               * @example http://example.com/
+               */
+              effectiveUrl: string;
+              errors: {
+                message: string;
+              }[];
+              /**
+               * @example PT
+               */
+              location: string;
+              /**
+               * @example enam
+               */
+              region: string;
+              /**
+               * @example InProgress
+               */
+              status: string;
+              /**
+               * @example true
+               */
+              success: boolean;
+              /**
+               * @example 2023-05-03T17:05:04.843Z
+               */
+              time: string;
+              /**
+               * @example http://example.com
+               */
+              url: string;
+              /**
+               * @example 2ee568d0-bf70-4827-b922-b7088c0f056f
+               */
+              uuid: string;
+              /**
+               * @example Public
+               */
+              visibility: string;
+            };
+          };
+        };
+        /**
+         * Whether request was successful or not
+         */
+        success: boolean;
+      },
+    UrlscannerGetScanError,
+    undefined,
+    {},
+    UrlscannerGetScanQueryParams,
+    UrlscannerGetScanPathParams
+  >({ url: '/accounts/{accountId}/urlscanner/scan/{scanId}', method: 'get', ...variables, signal });
+
+export type UrlscannerGetScanHarPathParams = {
+  /**
+   * Scan UUID.
+   *
+   * @format uuid
+   */
+  scanId: string;
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type UrlscannerGetScanHarError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors: {
+          /**
+           * @example Scan ID is not a valid UUID.
+           */
+          message: string;
+        }[];
+        messages: {
+          message: string;
+        }[];
+        /**
+         * Whether request was successful or not
+         */
+        success: boolean;
+      };
+    }
+  | {
+      status: 404;
+      payload: {
+        errors: {
+          /**
+           * @example Scan not found.
+           */
+          message: string;
+        }[];
+        messages: {
+          message: string;
+        }[];
+        /**
+         * Whether request was successful or not
+         */
+        success: boolean;
+      };
+    }
+>;
+
+export type UrlscannerGetScanHarVariables = {
+  pathParams: UrlscannerGetScanHarPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Get a URL scan's HAR file. See HAR spec at http://www.softwareishard.com/blog/har-12-spec/.
+ */
+export const urlscannerGetScanHar = (variables: UrlscannerGetScanHarVariables, signal?: AbortSignal) =>
+  fetch<
+    | {
+        errors: {
+          /**
+           * @example Error
+           */
+          message: string;
+        }[];
+        messages: {
+          /**
+           * @example OK
+           */
+          message: string;
+        }[];
+        result: {
+          har: {
+            log: {
+              creator: {
+                /**
+                 * @example https://github.com/sitespeedio/chrome-har
+                 */
+                comment: string;
+                /**
+                 * @example chrome-har
+                 */
+                name: string;
+                /**
+                 * @example 0.13.1
+                 */
+                version: string;
+              };
+              entries: {
+                /**
+                 * @example VeryHigh
+                 */
+                _initialPriority: string;
+                /**
+                 * @example other
+                 */
+                _initiator_type: string;
+                /**
+                 * @example VeryHigh
+                 */
+                _priority: string;
+                /**
+                 * @example DDC779F0CB3746BAF283EC1A51B0F2F8
+                 */
+                _requestId: string;
+                /**
+                 * @example 114135.331081
+                 */
+                _requestTime: number;
+                /**
+                 * @example document
+                 */
+                _resourceType: string;
+                cache: Record<string, any>;
+                /**
+                 * @example 33
+                 */
+                connection: string;
+                /**
+                 * @example page_1
+                 */
+                pageref: string;
+                request: {
+                  bodySize: number;
+                  headers: {
+                    /**
+                     * @example Upgrade-Insecure-Requests
+                     */
+                    name: string;
+                    /**
+                     * @example 1
+                     */
+                    value: string;
+                  }[];
+                  /**
+                   * @example 197
+                   */
+                  headersSize: number;
+                  /**
+                   * @example http/1.1
+                   */
+                  httpVersion: string;
+                  /**
+                   * @example GET
+                   */
+                  method: string;
+                  /**
+                   * @example http://example.com/
+                   */
+                  url: string;
+                };
+                response: {
+                  /**
+                   * @example 1071
+                   */
+                  _transferSize: number;
+                  /**
+                   * @example 648
+                   */
+                  bodySize: number;
+                  content: {
+                    /**
+                     * @example 608
+                     */
+                    compression?: number;
+                    /**
+                     * @example text/html
+                     */
+                    mimeType: string;
+                    /**
+                     * @example 1256
+                     */
+                    size: number;
+                  };
+                  headers: {
+                    /**
+                     * @example Content-Encoding
+                     */
+                    name: string;
+                    /**
+                     * @example gzip
+                     */
+                    value: string;
+                  }[];
+                  /**
+                   * @example 423
+                   */
+                  headersSize: number;
+                  /**
+                   * @example http/1.1
+                   */
+                  httpVersion: string;
+                  redirectURL: string;
+                  /**
+                   * @example 200
+                   */
+                  status: number;
+                  /**
+                   * @example OK
+                   */
+                  statusText: string;
+                };
+                /**
+                 * @example 2606:2800:220:1:248:1893:25c8:1946
+                 */
+                serverIPAddress: string;
+                /**
+                 * @example 2023-05-03T17:05:13.196Z
+                 */
+                startedDateTime: string;
+                /**
+                 * @example 268.64
+                 */
+                time: number;
+              }[];
+              pages: {
+                /**
+                 * @example page_1
+                 */
+                id: string;
+                pageTimings: {
+                  /**
+                   * @example 305.408
+                   */
+                  onContentLoad: number;
+                  /**
+                   * @example 305.169
+                   */
+                  onLoad: number;
+                };
+                /**
+                 * @example 2023-05-03T17:05:13.195Z
+                 */
+                startedDateTime: string;
+                /**
+                 * @example http://example.com/
+                 */
+                title: string;
+              }[];
+              /**
+               * @example 1.2
+               */
+              version: string;
+            };
+          };
+        };
+        /**
+         * Whether search request was successful or not
+         */
+        success: boolean;
+      }
+    | {
+        errors: {
+          message: string;
+        }[];
+        messages: {
+          /**
+           * @example In Progress
+           */
+          message: string;
+        }[];
+        result: {
+          scan: {
+            task: {
+              /**
+               * @example http://example.com/
+               */
+              effectiveUrl: string;
+              errors: {
+                message: string;
+              }[];
+              /**
+               * @example PT
+               */
+              location: string;
+              /**
+               * @example enam
+               */
+              region: string;
+              /**
+               * @example InProgress
+               */
+              status: string;
+              /**
+               * @example true
+               */
+              success: boolean;
+              /**
+               * @example 2023-05-03T17:05:04.843Z
+               */
+              time: string;
+              /**
+               * @example http://example.com
+               */
+              url: string;
+              /**
+               * @example 2ee568d0-bf70-4827-b922-b7088c0f056f
+               */
+              uuid: string;
+              /**
+               * @example Public
+               */
+              visibility: string;
+            };
+          };
+        };
+        /**
+         * Whether request was successful or not
+         */
+        success: boolean;
+      },
+    UrlscannerGetScanHarError,
+    undefined,
+    {},
+    {},
+    UrlscannerGetScanHarPathParams
+  >({ url: '/accounts/{accountId}/urlscanner/scan/{scanId}/har', method: 'get', ...variables, signal });
+
+export type UrlscannerGetScanScreenshotPathParams = {
+  /**
+   * Scan UUID.
+   *
+   * @format uuid
+   */
+  scanId: string;
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type UrlscannerGetScanScreenshotQueryParams = {
+  /**
+   * Target device type.
+   *
+   * @default desktop
+   */
+  resolution?: 'desktop' | 'mobile' | 'tablet';
+};
+
+export type UrlscannerGetScanScreenshotError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors: {
+          /**
+           * @example Scan ID is not a valid UUID.
+           */
+          message: string;
+        }[];
+        messages: {
+          message: string;
+        }[];
+        /**
+         * Whether request was successful or not
+         */
+        success: boolean;
+      };
+    }
+  | {
+      status: 404;
+      payload: {
+        errors: {
+          /**
+           * @example Scan not found.
+           */
+          message: string;
+        }[];
+        messages: {
+          message: string;
+        }[];
+        /**
+         * Whether request was successful or not
+         */
+        success: boolean;
+      };
+    }
+>;
+
+export type UrlscannerGetScanScreenshotResponse = {
+  errors: {
+    message: string;
+  }[];
+  messages: {
+    /**
+     * @example In Progress
+     */
+    message: string;
+  }[];
+  result: {
+    scan: {
+      task: {
+        /**
+         * @example http://example.com/
+         */
+        effectiveUrl: string;
+        errors: {
+          message: string;
+        }[];
+        /**
+         * @example PT
+         */
+        location: string;
+        /**
+         * @example enam
+         */
+        region: string;
+        /**
+         * @example InProgress
+         */
+        status: string;
+        /**
+         * @example true
+         */
+        success: boolean;
+        /**
+         * @example 2023-05-03T17:05:04.843Z
+         */
+        time: string;
+        /**
+         * @example http://example.com
+         */
+        url: string;
+        /**
+         * @example 2ee568d0-bf70-4827-b922-b7088c0f056f
+         */
+        uuid: string;
+        /**
+         * @example Public
+         */
+        visibility: string;
+      };
+    };
+  };
+  /**
+   * Whether request was successful or not
+   */
+  success: boolean;
+};
+
+export type UrlscannerGetScanScreenshotVariables = {
+  pathParams: UrlscannerGetScanScreenshotPathParams;
+  queryParams?: UrlscannerGetScanScreenshotQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Get scan's screenshot by resolution (desktop/mobile/tablet).
+ */
+export const urlscannerGetScanScreenshot = (variables: UrlscannerGetScanScreenshotVariables, signal?: AbortSignal) =>
+  fetch<
+    UrlscannerGetScanScreenshotResponse,
+    UrlscannerGetScanScreenshotError,
+    undefined,
+    {},
+    UrlscannerGetScanScreenshotQueryParams,
+    UrlscannerGetScanScreenshotPathParams
+  >({ url: '/accounts/{accountId}/urlscanner/scan/{scanId}/screenshot', method: 'get', ...variables, signal });
+
+export type UrlscannerCreateScanBulkV2PathParams = {
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type UrlscannerCreateScanBulkV2Error = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors: {
+          detail: string;
+          /**
+           * Status code.
+           *
+           * @example 400
+           */
+          status: number;
+          /**
+           * @example Invalid url
+           */
+          title: string;
+        }[];
+        message: string;
+        /**
+         * Status code.
+         *
+         * @example 400
+         */
+        status: number;
+      };
+    }
+  | {
+      status: 429;
+      payload: {
+        description?: string;
+        errors: {
+          /**
+           * @example DNS Error - Could not resolve domain.
+           */
+          detail: string;
+          status: Record<string, any>;
+          /**
+           * @example DNS Error - Could not resolve domain.
+           */
+          title: string;
+        }[];
+        message: string;
+        status: Record<string, any>;
+      };
+    }
+>;
+
+export type UrlscannerCreateScanBulkV2Response = {
+  /**
+   * URL to api report.
+   */
+  api: string;
+  options?: {
+    useragent?: string;
+  };
+  /**
+   * URL to report.
+   */
+  result: string;
+  /**
+   * Submitted URL
+   */
+  url: string;
+  /**
+   * Scan ID.
+   *
+   * @format uuid
+   */
+  uuid: string;
+  /**
+   * Submitted visibility status.
+   *
+   * @example Public
+   */
+  visibility: string;
+}[];
+
+export type UrlscannerCreateScanBulkV2RequestBody = {
+  /**
+   * Set custom headers.
+   */
+  customHeaders?: {
+    [key: string]: string;
+  };
+  /**
+   * @maxLength 4096
+   */
+  customagent?: string;
+  /**
+   * @maxLength 4096
+   */
+  referer?: string;
+  /**
+   * Take multiple screenshots targeting different device types.
+   *
+   * @default desktop
+   */
+  screenshotsResolutions?: ('desktop' | 'mobile' | 'tablet')[];
+  /**
+   * @example https://www.example.com
+   */
+  url: string;
+  /**
+   * The option `Public` means it will be included in listings like recent scans and search results. `Unlisted` means it will not be included in the aforementioned listings, users will need to have the scan's ID to access it. A a scan will be automatically marked as unlisted if it fails, if it contains potential PII or other sensitive material.
+   *
+   * @default Public
+   */
+  visibility?: 'Public' | 'Unlisted';
+}[];
+
+export type UrlscannerCreateScanBulkV2Variables = {
+  body?: UrlscannerCreateScanBulkV2RequestBody;
+  pathParams: UrlscannerCreateScanBulkV2PathParams;
+} & FetcherExtraProps;
+
+/**
+ * Submit URLs to scan. Check limits at https://developers.cloudflare.com/security-center/investigate/scan-limits/ and take into account scans submitted in bulk have lower priority and may take longer to finish.
+ */
+export const urlscannerCreateScanBulkV2 = (variables: UrlscannerCreateScanBulkV2Variables, signal?: AbortSignal) =>
+  fetch<
+    UrlscannerCreateScanBulkV2Response,
+    UrlscannerCreateScanBulkV2Error,
+    UrlscannerCreateScanBulkV2RequestBody,
+    {},
+    {},
+    UrlscannerCreateScanBulkV2PathParams
+  >({ url: '/accounts/{accountId}/urlscanner/v2/bulk', method: 'post', ...variables, signal });
+
+export type UrlscannerGetScanDomV2PathParams = {
+  /**
+   * Scan UUID.
+   *
+   * @format uuid
+   */
+  scanId: string;
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type UrlscannerGetScanDomV2Error = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors: {
+          detail: string;
+          /**
+           * Status code.
+           *
+           * @example 400
+           */
+          status: number;
+          /**
+           * @example Invalid url
+           */
+          title: string;
+        }[];
+        message: string;
+        /**
+         * Status code.
+         *
+         * @example 400
+         */
+        status: number;
+      };
+    }
+  | {
+      status: 404;
+      payload: {
+        errors: {
+          /**
+           * @example Queued
+           */
+          detail: string;
+          /**
+           * Status code.
+           *
+           * @example 404
+           */
+          status: number;
+          /**
+           * @example Scan is not finished yet.
+           */
+          title: string;
+        }[];
+        /**
+         * Scan not found or in progress.
+         *
+         * @example Scan is not finished yet.
+         */
+        message: string;
+        /**
+         * Status code.
+         *
+         * @example 404
+         */
+        status: number;
+        task: {
+          /**
+           * @example Queued
+           */
+          status: string;
+          time: string;
+          url: string;
+          uuid: string;
+          /**
+           * @example public
+           */
+          visibility: string;
+        };
+      };
+    }
+>;
+
+export type UrlscannerGetScanDomV2Variables = {
+  pathParams: UrlscannerGetScanDomV2PathParams;
+} & FetcherExtraProps;
+
+/**
+ * Returns a plain text response, with the scan's DOM content as rendered by Chrome.
+ */
+export const urlscannerGetScanDomV2 = (variables: UrlscannerGetScanDomV2Variables, signal?: AbortSignal) =>
+  fetch<undefined, UrlscannerGetScanDomV2Error, undefined, {}, {}, UrlscannerGetScanDomV2PathParams>({
+    url: '/accounts/{accountId}/urlscanner/v2/dom/{scanId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type UrlscannerGetScanHarV2PathParams = {
+  /**
+   * Scan UUID.
+   *
+   * @format uuid
+   */
+  scanId: string;
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type UrlscannerGetScanHarV2Error = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors: {
+          detail: string;
+          /**
+           * Status code.
+           *
+           * @example 400
+           */
+          status: number;
+          /**
+           * @example Invalid url
+           */
+          title: string;
+        }[];
+        message: string;
+        /**
+         * Status code.
+         *
+         * @example 400
+         */
+        status: number;
+      };
+    }
+  | {
+      status: 404;
+      payload: {
+        errors: {
+          /**
+           * @example Queued
+           */
+          detail: string;
+          /**
+           * Status code.
+           *
+           * @example 404
+           */
+          status: number;
+          /**
+           * @example Scan is not finished yet.
+           */
+          title: string;
+        }[];
+        /**
+         * Scan not found or in progress.
+         *
+         * @example Scan is not finished yet.
+         */
+        message: string;
+        /**
+         * Status code.
+         *
+         * @example 404
+         */
+        status: number;
+        task: {
+          /**
+           * @example Queued
+           */
+          status: string;
+          time: string;
+          url: string;
+          uuid: string;
+          /**
+           * @example public
+           */
+          visibility: string;
+        };
+      };
+    }
+>;
+
+export type UrlscannerGetScanHarV2Response = {
+  log: {
+    creator: {
+      /**
+       * @example https://github.com/sitespeedio/chrome-har
+       */
+      comment: string;
+      /**
+       * @example chrome-har
+       */
+      name: string;
+      /**
+       * @example 0.13.1
+       */
+      version: string;
+    };
+    entries: {
+      /**
+       * @example VeryHigh
+       */
+      _initialPriority: string;
+      /**
+       * @example other
+       */
+      _initiator_type: string;
+      /**
+       * @example VeryHigh
+       */
+      _priority: string;
+      /**
+       * @example DDC779F0CB3746BAF283EC1A51B0F2F8
+       */
+      _requestId: string;
+      /**
+       * @example 114135.331081
+       */
+      _requestTime: number;
+      /**
+       * @example document
+       */
+      _resourceType: string;
+      cache: Record<string, any>;
+      /**
+       * @example 33
+       */
+      connection: string;
+      /**
+       * @example page_1
+       */
+      pageref: string;
+      request: {
+        bodySize: number;
+        headers: {
+          /**
+           * @example Upgrade-Insecure-Requests
+           */
+          name: string;
+          /**
+           * @example 1
+           */
+          value: string;
+        }[];
+        /**
+         * @example 197
+         */
+        headersSize: number;
+        /**
+         * @example http/1.1
+         */
+        httpVersion: string;
+        /**
+         * @example GET
+         */
+        method: string;
+        /**
+         * @example http://example.com/
+         */
+        url: string;
+      };
+      response: {
+        /**
+         * @example 1071
+         */
+        _transferSize: number;
+        /**
+         * @example 648
+         */
+        bodySize: number;
+        content: {
+          /**
+           * @example 608
+           */
+          compression?: number;
+          /**
+           * @example text/html
+           */
+          mimeType: string;
+          /**
+           * @example 1256
+           */
+          size: number;
+        };
+        headers: {
+          /**
+           * @example Content-Encoding
+           */
+          name: string;
+          /**
+           * @example gzip
+           */
+          value: string;
+        }[];
+        /**
+         * @example 423
+         */
+        headersSize: number;
+        /**
+         * @example http/1.1
+         */
+        httpVersion: string;
+        redirectURL: string;
+        /**
+         * @example 200
+         */
+        status: number;
+        /**
+         * @example OK
+         */
+        statusText: string;
+      };
+      /**
+       * @example 2606:2800:220:1:248:1893:25c8:1946
+       */
+      serverIPAddress: string;
+      /**
+       * @example 2023-05-03T17:05:13.196Z
+       */
+      startedDateTime: string;
+      /**
+       * @example 268.64
+       */
+      time: number;
+    }[];
+    pages: {
+      /**
+       * @example page_1
+       */
+      id: string;
+      pageTimings: {
+        /**
+         * @example 305.408
+         */
+        onContentLoad: number;
+        /**
+         * @example 305.169
+         */
+        onLoad: number;
+      };
+      /**
+       * @example 2023-05-03T17:05:13.195Z
+       */
+      startedDateTime: string;
+      /**
+       * @example http://example.com/
+       */
+      title: string;
+    }[];
+    /**
+     * @example 1.2
+     */
+    version: string;
+  };
+};
+
+export type UrlscannerGetScanHarV2Variables = {
+  pathParams: UrlscannerGetScanHarV2PathParams;
+} & FetcherExtraProps;
+
+/**
+ * Get a URL scan's HAR file. See HAR spec at http://www.softwareishard.com/blog/har-12-spec/.
+ */
+export const urlscannerGetScanHarV2 = (variables: UrlscannerGetScanHarV2Variables, signal?: AbortSignal) =>
+  fetch<
+    UrlscannerGetScanHarV2Response,
+    UrlscannerGetScanHarV2Error,
+    undefined,
+    {},
+    {},
+    UrlscannerGetScanHarV2PathParams
+  >({ url: '/accounts/{accountId}/urlscanner/v2/har/{scanId}', method: 'get', ...variables, signal });
+
+export type UrlscannerGetResponseV2PathParams = {
+  /**
+   * Response hash.
+   */
+  responseId: string;
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type UrlscannerGetResponseV2Error = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      detail: string;
+      /**
+       * Status code.
+       *
+       * @example 400
+       */
+      status: number;
+      /**
+       * @example Invalid url
+       */
+      title: string;
+    }[];
+    message: string;
+    /**
+     * Status code.
+     *
+     * @example 400
+     */
+    status: number;
+  };
+}>;
+
+export type UrlscannerGetResponseV2Variables = {
+  pathParams: UrlscannerGetResponseV2PathParams;
+} & FetcherExtraProps;
+
+/**
+ * Returns the raw response of the network request. If HTML, a plain text response will be returned.
+ */
+export const urlscannerGetResponseV2 = (variables: UrlscannerGetResponseV2Variables, signal?: AbortSignal) =>
+  fetch<undefined, UrlscannerGetResponseV2Error, undefined, {}, {}, UrlscannerGetResponseV2PathParams>({
+    url: '/accounts/{accountId}/urlscanner/v2/responses/{responseId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type UrlscannerGetScanV2PathParams = {
+  /**
+   * Scan UUID.
+   *
+   * @format uuid
+   */
+  scanId: string;
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type UrlscannerGetScanV2Error = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors: {
+          detail: string;
+          /**
+           * Status code.
+           *
+           * @example 400
+           */
+          status: number;
+          /**
+           * @example Invalid url
+           */
+          title: string;
+        }[];
+        message: string;
+        /**
+         * Status code.
+         *
+         * @example 400
+         */
+        status: number;
+      };
+    }
+  | {
+      status: 404;
+      payload: {
+        errors: {
+          /**
+           * @example Queued
+           */
+          detail: string;
+          /**
+           * Status code.
+           *
+           * @example 404
+           */
+          status: number;
+          /**
+           * @example Scan is not finished yet.
+           */
+          title: string;
+        }[];
+        /**
+         * Scan not found or in progress.
+         *
+         * @example Scan is not finished yet.
+         */
+        message: string;
+        /**
+         * Status code.
+         *
+         * @example 404
+         */
+        status: number;
+        task: {
+          /**
+           * @example Queued
+           */
+          status: string;
+          time: string;
+          url: string;
+          uuid: string;
+          /**
+           * @example public
+           */
+          visibility: string;
+        };
+      };
+    }
+>;
+
+export type UrlscannerGetScanV2Response = {
+  data: {
+    console: {
+      message: {
+        level: string;
+        source: string;
+        text: string;
+        url: string;
+      };
+    }[];
+    cookies: {
+      domain: string;
+      expires: number;
+      httpOnly: boolean;
+      name: string;
+      path: string;
+      priority: string;
+      sameParty: boolean;
+      secure: boolean;
+      session: boolean;
+      size: number;
+      sourcePort: number;
+      sourceScheme: string;
+      value: string;
+    }[];
+    globals: {
+      prop: string;
+      type: string;
+    }[];
+    links: {
+      href: string;
+      text: string;
+    }[];
+    performance: {
+      duration: number;
+      entryType: string;
+      name: string;
+      startTime: number;
+    }[];
+    requests: {
+      request: {
+        documentURL: string;
+        frameId?: string;
+        hasUserGesture: boolean;
+        initiator: {
+          host: string;
+          type: string;
+          url: string;
+        };
+        loaderId?: string;
+        primaryRequest?: boolean;
+        redirectHasExtraInfo: boolean;
+        redirectResponse?: {
+          charset: string;
+          headers?: Record<string, any>;
+          mimeType: string;
+          protocol: string;
+          remoteIPAddress: string;
+          remotePort: number;
+          securityHeaders: {
+            name: string;
+            value: string;
+          }[];
+          securityState: string;
+          status: number;
+          statusText: string;
+          url: string;
+        };
+        request: {
+          headers?: Record<string, any>;
+          initialPriority: string;
+          isSameSite: boolean;
+          method: string;
+          mixedContentType: string;
+          referrerPolicy: string;
+          url: string;
+        };
+        requestId: string;
+        type: string;
+        wallTime: number;
+      };
+      requests?: {
+        documentURL: string;
+        frameId: string;
+        hasUserGesture: boolean;
+        initiator: {
+          type: string;
+        };
+        loaderId: string;
+        redirectHasExtraInfo: boolean;
+        request: {
+          headers: {
+            name: string;
+          };
+          initialPriority: string;
+          isSameSite: boolean;
+          method: string;
+          mixedContentType: string;
+          referrerPolicy: string;
+          url: string;
+        };
+        requestId: string;
+        type: string;
+        wallTime: number;
+      }[];
+      response: {
+        asn: {
+          asn: string;
+          country: string;
+          description: string;
+          ip: string;
+          name: string;
+          org: string;
+        };
+        contentAvailable?: boolean;
+        dataLength: number;
+        encodedDataLength: number;
+        geoip: {
+          city: string;
+          country: string;
+          country_name: string;
+          geonameId: string;
+          ll: Record<string, any>[];
+          region: string;
+        };
+        hasExtraInfo: boolean;
+        hash?: string;
+        requestId: string;
+        response: {
+          charset: string;
+          headers?: Record<string, any>;
+          mimeType: string;
+          protocol: string;
+          remoteIPAddress: string;
+          remotePort: number;
+          securityDetails: {
+            certificateId: number;
+            certificateTransparencyCompliance: string;
+            cipher: string;
+            encryptedClientHello: boolean;
+            issuer: string;
+            keyExchange: string;
+            keyExchangeGroup: string;
+            protocol: string;
+            sanList: string[];
+            serverSignatureAlgorithm: number;
+            subjectName: string;
+            validFrom: number;
+            validTo: number;
+          };
+          securityHeaders: {
+            name: string;
+            value: string;
+          }[];
+          securityState: string;
+          status: number;
+          statusText: string;
+          url: string;
+        };
+        size: number;
+        type: string;
+      };
+    }[];
+  };
+  lists: {
+    asns: string[];
+    certificates: {
+      issuer: string;
+      subjectName: string;
+      validFrom: number;
+      validTo: number;
+    }[];
+    continents: string[];
+    countries: string[];
+    domains: string[];
+    hashes: string[];
+    ips: string[];
+    linkDomains: string[];
+    servers: string[];
+    urls: string[];
+  };
+  meta: {
+    processors: {
+      asn: {
+        data: {
+          asn: string;
+          country: string;
+          description: string;
+          ip: string;
+          name: string;
+        }[];
+      };
+      dns: {
+        data: {
+          address: string;
+          dnssec_valid: boolean;
+          name: string;
+          type: string;
+        }[];
+      };
+      domainCategories: {
+        data: {
+          inherited: Record<string, any>;
+          isPrimary: boolean;
+          name: string;
+        }[];
+      };
+      geoip: {
+        data: {
+          geoip: {
+            city: string;
+            country: string;
+            country_name: string;
+            ll: number[];
+            region: string;
+          };
+          ip: string;
+        }[];
+      };
+      phishing: {
+        data: string[];
+      };
+      radarRank: {
+        data: {
+          bucket: string;
+          hostname: string;
+          rank?: number;
+        }[];
+      };
+      urlCategories?: {
+        data: {
+          content: {
+            id: number;
+            name: string;
+            super_category_id: number;
+          }[];
+          inherited: {
+            content: {
+              id: number;
+              name: string;
+              super_category_id: number;
+            }[];
+            from: string;
+            risks: {
+              id: number;
+              name: string;
+              super_category_id: number;
+            }[];
+          };
+          name: string;
+          risks: {
+            id: number;
+            name: string;
+            super_category_id: number;
+          }[];
+        }[];
+      };
+      wappa: {
+        data: {
+          app: string;
+          categories: {
+            name: string;
+            priority: number;
+          }[];
+          confidence: {
+            confidence: number;
+            name: string;
+            pattern: string;
+            patternType: string;
+          }[];
+          confidenceTotal: number;
+          icon: string;
+          website: string;
+        }[];
+      };
+    };
+  };
+  page: {
+    apexDomain: string;
+    asn: string;
+    asnname: string;
+    city: string;
+    country: string;
+    domain: string;
+    ip: string;
+    mimeType: string;
+    screenshot?: {
+      dhash: string;
+      mm3Hash: number;
+      name: string;
+      phash: string;
+    };
+    server: string;
+    /**
+     * @example 200
+     */
+    status: string;
+    title: string;
+    tlsAgeDays: number;
+    tlsIssuer: string;
+    tlsValidDays: number;
+    tlsValidFrom: string;
+    url: string;
+  };
+  scanner: {
+    colo: string;
+    country: string;
+  };
+  stats: {
+    IPv6Percentage: number;
+    domainStats: {
+      count: number;
+      countries: string[];
+      domain: string;
+      encodedSize: number;
+      index: number;
+      initiators: string[];
+      ips: string[];
+      redirects: number;
+      size: number;
+    }[];
+    ipStats: {
+      asn: {
+        asn: string;
+        country: string;
+        description: string;
+        ip: string;
+        name: string;
+        org: string;
+      };
+      count?: number;
+      countries: string[];
+      domains: string[];
+      encodedSize: number;
+      geoip: {
+        city: string;
+        country: string;
+        country_name: string;
+        ll: number[];
+        region: string;
+      };
+      index: number;
+      ip: string;
+      ipv6: boolean;
+      redirects: number;
+      requests: number;
+      size: number;
+    }[];
+    malicious: number;
+    protocolStats: {
+      count: number;
+      countries: string[];
+      encodedSize: number;
+      ips: string[];
+      protocol: string;
+      size: number;
+    }[];
+    resourceStats: {
+      compression: number;
+      count: number;
+      countries: string[];
+      encodedSize: number;
+      ips: string[];
+      percentage: number;
+      size: number;
+      type: string;
+    }[];
+    securePercentage: number;
+    secureRequests: number;
+    serverStats: {
+      count: number;
+      countries: string[];
+      encodedSize: number;
+      ips: string[];
+      server: string;
+      size: number;
+    }[];
+    tlsStats: {
+      count: number;
+      countries: string[];
+      encodedSize: number;
+      ips: string[];
+      protocols: {
+        ['TLS 1.3 / AES_128_GCM']: number;
+      };
+      securityState: string;
+      size: number;
+    }[];
+    totalLinks: number;
+    uniqASNs: number;
+    uniqCountries: number;
+  };
+  task: {
+    apexDomain: string;
+    domURL: string;
+    domain: string;
+    method: string;
+    options: {
+      /**
+       * Custom headers set.
+       */
+      customHeaders?: Record<string, any>;
+      screenshotsResolutions?: string[];
+    };
+    reportURL: string;
+    screenshotURL: string;
+    source: string;
+    success: boolean;
+    time: string;
+    url: string;
+    uuid: string;
+    visibility: string;
+  };
+  verdicts: {
+    overall: {
+      categories: string[];
+      hasVerdicts: boolean;
+      malicious: boolean;
+      tags: string[];
+    };
+  };
+};
+
+export type UrlscannerGetScanV2Variables = {
+  pathParams: UrlscannerGetScanV2PathParams;
+} & FetcherExtraProps;
+
+/**
+ * Get URL scan by uuid
+ */
+export const urlscannerGetScanV2 = (variables: UrlscannerGetScanV2Variables, signal?: AbortSignal) =>
+  fetch<UrlscannerGetScanV2Response, UrlscannerGetScanV2Error, undefined, {}, {}, UrlscannerGetScanV2PathParams>({
+    url: '/accounts/{accountId}/urlscanner/v2/result/{scanId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type UrlscannerCreateScanV2PathParams = {
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type UrlscannerCreateScanV2Error = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors: {
+          detail: string;
+          /**
+           * Status code.
+           *
+           * @example 400
+           */
+          status: number;
+          /**
+           * @example Invalid url
+           */
+          title: string;
+        }[];
+        message: string;
+        /**
+         * Status code.
+         *
+         * @example 400
+         */
+        status: number;
+      };
+    }
+  | {
+      status: 409;
+      payload: {
+        /**
+         * @example Scan request denied: hostname was recently scanned
+         */
+        description?: string;
+        errors: {
+          /**
+           * @example DNS Error - Could not resolve domain.
+           */
+          detail: string;
+          status: Record<string, any>;
+          /**
+           * @example DNS Error - Could not resolve domain.
+           */
+          title: string;
+        }[];
+        /**
+         * @example Scan prevented ...
+         */
+        message: string;
+        status: Record<string, any>;
+      };
+    }
+  | {
+      status: 429;
+      payload: {
+        description?: string;
+        errors: {
+          /**
+           * @example DNS Error - Could not resolve domain.
+           */
+          detail: string;
+          status: Record<string, any>;
+          /**
+           * @example DNS Error - Could not resolve domain.
+           */
+          title: string;
+        }[];
+        message: string;
+        status: Record<string, any>;
+      };
+    }
+>;
+
+export type UrlscannerCreateScanV2Response = {
+  /**
+   * URL to api report.
+   */
+  api: string;
+  /**
+   * @example Submission successful
+   */
+  message: string;
+  options?: {
+    useragent?: string;
+  };
+  /**
+   * URL to report.
+   */
+  result: string;
+  /**
+   * Canonical form of submitted URL. Use this if you want to later search by URL.
+   */
+  url: string;
+  /**
+   * Scan ID.
+   *
+   * @format uuid
+   */
+  uuid: string;
+  /**
+   * Submitted visibility status.
+   *
+   * @example Public
+   */
+  visibility: string;
+};
+
+export type UrlscannerCreateScanV2RequestBody = {
+  /**
+   * Set custom headers.
+   */
+  customHeaders?: {
+    [key: string]: string;
+  };
+  /**
+   * @maxLength 4096
+   */
+  customagent?: string;
+  /**
+   * @maxLength 4096
+   */
+  referer?: string;
+  /**
+   * Take multiple screenshots targeting different device types.
+   *
+   * @default desktop
+   */
+  screenshotsResolutions?: ('desktop' | 'mobile' | 'tablet')[];
+  /**
+   * @example https://www.example.com
+   */
+  url: string;
+  /**
+   * The option `Public` means it will be included in listings like recent scans and search results. `Unlisted` means it will not be included in the aforementioned listings, users will need to have the scan's ID to access it. A a scan will be automatically marked as unlisted if it fails, if it contains potential PII or other sensitive material.
+   *
+   * @default Public
+   */
+  visibility?: 'Public' | 'Unlisted';
+};
+
+export type UrlscannerCreateScanV2Variables = {
+  body: UrlscannerCreateScanV2RequestBody;
+  pathParams: UrlscannerCreateScanV2PathParams;
+} & FetcherExtraProps;
+
+/**
+ * Submit a URL to scan. Check limits at https://developers.cloudflare.com/security-center/investigate/scan-limits/.
+ */
+export const urlscannerCreateScanV2 = (variables: UrlscannerCreateScanV2Variables, signal?: AbortSignal) =>
+  fetch<
+    UrlscannerCreateScanV2Response,
+    UrlscannerCreateScanV2Error,
+    UrlscannerCreateScanV2RequestBody,
+    {},
+    {},
+    UrlscannerCreateScanV2PathParams
+  >({ url: '/accounts/{accountId}/urlscanner/v2/scan', method: 'post', ...variables, signal });
+
+export type UrlscannerGetScanScreenshotV2PathParams = {
+  /**
+   * Scan UUID.
+   *
+   * @format uuid
+   */
+  scanId: string;
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type UrlscannerGetScanScreenshotV2QueryParams = {
+  /**
+   * Target device type.
+   *
+   * @default desktop
+   */
+  resolution?: 'desktop' | 'mobile' | 'tablet';
+};
+
+export type UrlscannerGetScanScreenshotV2Error = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors: {
+          detail: string;
+          /**
+           * Status code.
+           *
+           * @example 400
+           */
+          status: number;
+          /**
+           * @example Invalid url
+           */
+          title: string;
+        }[];
+        message: string;
+        /**
+         * Status code.
+         *
+         * @example 400
+         */
+        status: number;
+      };
+    }
+  | {
+      status: 404;
+      payload: {
+        errors: {
+          /**
+           * @example Queued
+           */
+          detail: string;
+          /**
+           * Status code.
+           *
+           * @example 404
+           */
+          status: number;
+          /**
+           * @example Scan is not finished yet.
+           */
+          title: string;
+        }[];
+        /**
+         * Scan not found or in progress.
+         *
+         * @example Scan is not finished yet.
+         */
+        message: string;
+        /**
+         * Status code.
+         *
+         * @example 404
+         */
+        status: number;
+        task: {
+          /**
+           * @example Queued
+           */
+          status: string;
+          time: string;
+          url: string;
+          uuid: string;
+          /**
+           * @example public
+           */
+          visibility: string;
+        };
+      };
+    }
+>;
+
+export type UrlscannerGetScanScreenshotV2Variables = {
+  pathParams: UrlscannerGetScanScreenshotV2PathParams;
+  queryParams?: UrlscannerGetScanScreenshotV2QueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Get scan's screenshot by resolution (desktop/mobile/tablet).
+ */
+export const urlscannerGetScanScreenshotV2 = (
+  variables: UrlscannerGetScanScreenshotV2Variables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    undefined,
+    UrlscannerGetScanScreenshotV2Error,
+    undefined,
+    {},
+    UrlscannerGetScanScreenshotV2QueryParams,
+    UrlscannerGetScanScreenshotV2PathParams
+  >({ url: '/accounts/{accountId}/urlscanner/v2/screenshots/{scanId}.png', method: 'get', ...variables, signal });
+
+export type UrlscannerSearchScansV2PathParams = {
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type UrlscannerSearchScansV2QueryParams = {
+  /**
+   * Limit the number of objects in the response.
+   *
+   * @example 100
+   */
+  size?: number;
+  /**
+   * Filter scans
+   */
+  q?: string;
+};
+
+export type UrlscannerSearchScansV2Error = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      detail: string;
+      /**
+       * Status code.
+       *
+       * @example 400
+       */
+      status: number;
+      /**
+       * @example Invalid url
+       */
+      title: string;
+    }[];
+    message: string;
+    /**
+     * Status code.
+     *
+     * @example 400
+     */
+    status: number;
+  };
+}>;
+
+export type UrlscannerSearchScansV2Response = {
+  results: {
+    /**
+     * @example 9626f773-9ffb-4cfb-89d3-30b120fc8011
+     */
+    _id: string;
+    page: {
+      /**
+       * @example AS15133
+       */
+      asn: string;
+      /**
+       * @example US
+       */
+      country: string;
+      /**
+       * @example 93.184.215.14
+       */
+      ip: string;
+      /**
+       * @example https://example.com
+       */
+      url: string;
+    };
+    /**
+     * @example https://radar.clouflare.com/scan/9626f773-9ffb-4cfb-89d3-30b120fc8011
+     */
+    result: string;
+    stats: {
+      /**
+       * @example 2512
+       */
+      dataLength: number;
+      /**
+       * @example 2
+       */
+      requests: number;
+      /**
+       * @example 1
+       */
+      uniqCountries: number;
+      /**
+       * @example 1
+       */
+      uniqIPs: number;
+    };
+    task: {
+      /**
+       * @example 2024-09-30T23:54:02.881000+00:00
+       */
+      time: string;
+      /**
+       * @example https://example.com
+       */
+      url: string;
+      /**
+       * @example 9626f773-9ffb-4cfb-89d3-30b120fc8011
+       */
+      uuid: string;
+      /**
+       * @example public
+       */
+      visibility: string;
+    };
+    verdicts: {
+      malicious: boolean;
+    };
+  }[];
+};
+
+export type UrlscannerSearchScansV2Variables = {
+  pathParams: UrlscannerSearchScansV2PathParams;
+  queryParams?: UrlscannerSearchScansV2QueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Use a subset of ElasticSearch Query syntax to filter scans. Some example queries:<br/> <br/>- 'page.domain:microsoft AND verdicts.malicious:true AND NOT page.domain:microsoft.com': malicious scans whose hostname starts with "microsoft".<br/>- 'apikey:me AND date:[2024-01 TO 2024-10]': my scans from 2024 January to 2024 October.<br/>- 'page.domain:(blogspot OR www.blogspot)': Searches for scans whose main domain starts with "blogspot" or with "www.blogspot"<br/>- 'date:>now-7d AND path:okta-sign-in.min.js: scans from the last 7 days with any request path that ends with "okta-sign-in.min.js"<br/>- 'page.asn:AS24940 AND hash:xxx': Websites hosted in AS24940 where a resource with the given hash was downloaded.
+ */
+export const urlscannerSearchScansV2 = (variables: UrlscannerSearchScansV2Variables, signal?: AbortSignal) =>
+  fetch<
+    UrlscannerSearchScansV2Response,
+    UrlscannerSearchScansV2Error,
+    undefined,
+    {},
+    UrlscannerSearchScansV2QueryParams,
+    UrlscannerSearchScansV2PathParams
+  >({ url: '/accounts/{accountId}/urlscanner/v2/search', method: 'get', ...variables, signal });
+
 export type SubmitAbuseReportPathParams = {
   /**
    * The account ID of the submitter.
@@ -115629,24 +115629,6 @@ export const sslDetectorAutomaticModePatchEnrollment = (
 
 export const operationsByTag = {
   accounts: { accountsListAccounts, accountCreation, accountDeletion, accountsAccountDetails, accountsUpdateAccount },
-  uRLScanner: {
-    urlscannerGetResponseText,
-    urlscannerSearchScans,
-    urlscannerCreateScan,
-    urlscannerGetScan,
-    urlscannerGetScanHar,
-    urlscannerGetScanScreenshot
-  },
-  uRLScannerBeta: {
-    urlscannerCreateScanBulkV2,
-    urlscannerGetScanDomV2,
-    urlscannerGetScanHarV2,
-    urlscannerGetResponseV2,
-    urlscannerGetScanV2,
-    urlscannerCreateScanV2,
-    urlscannerGetScanScreenshotV2,
-    urlscannerSearchScansV2
-  },
   requestForInformationRFI: {
     cloudforceOneRequestList,
     cloudforceOneRequestConstants,
@@ -116775,6 +116757,24 @@ export const operationsByTag = {
     accountApiTokensTokenDetails,
     accountApiTokensUpdateToken,
     accountApiTokensRollToken
+  },
+  uRLScanner: {
+    urlscannerGetResponseText,
+    urlscannerSearchScans,
+    urlscannerCreateScan,
+    urlscannerGetScan,
+    urlscannerGetScanHar,
+    urlscannerGetScanScreenshot
+  },
+  uRLScannerBeta: {
+    urlscannerCreateScanBulkV2,
+    urlscannerGetScanDomV2,
+    urlscannerGetScanHarV2,
+    urlscannerGetResponseV2,
+    urlscannerGetScanV2,
+    urlscannerCreateScanV2,
+    urlscannerGetScanScreenshotV2,
+    urlscannerSearchScansV2
   },
   tsengAbuseComplaintProcessorOther: { submitAbuseReport },
   vectorizeBetaDeprecated: {
