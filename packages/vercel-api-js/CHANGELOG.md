@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.18.0
+
+### Minor Changes
+
+- 06f9c69: Add new qualities field to images in getDeployment, CreateDeploymentResponse, and CancelDeploymentResponse
+
 ## 0.17.0
 
 ### Minor Changes
