@@ -1,7 +1,7 @@
 {
   "name": "nuki-api-js",
   "version": "0.0.0",
-  "description": "Nuki API client for Node.js",
+  "description": "Nuki auto-generated type-safe API client",
   "author": "SferaDev",
   "license": "ISC",
   "bugs": {
