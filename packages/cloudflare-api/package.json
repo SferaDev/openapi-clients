@@ -1,7 +1,7 @@
 {
   "name": "cloudflare-api-js",
   "version": "0.1.0",
-  "description": "Cloudflare API client for Node.js",
+  "description": "Cloudflare auto-generated type-safe API client",
   "author": "SferaDev",
   "license": "ISC",
   "bugs": {

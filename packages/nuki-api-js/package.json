@@ -1,7 +1,7 @@
 {
-  "name": "vercel-api-js",
-  "version": "0.17.0",
-  "description": "Vercel auto-generated type-safe API client",
+  "name": "nuki-api-js",
+  "version": "0.0.0",
+  "description": "Nuki auto-generated type-safe API client",
   "author": "SferaDev",
   "license": "ISC",
   "bugs": {
@@ -28,7 +28,7 @@
     "tsc": "tsc --noEmit",
     "build": "unbuild",
     "prepack": "unbuild",
-    "generate": "openapi-codegen vercel"
+    "generate": "openapi-codegen api"
   },
   "repository": {
     "type": "git",
