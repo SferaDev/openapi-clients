@@ -1,5 +1,11 @@
 # zoom-api-js
 
+## 0.3.0
+
+### Minor Changes
+
+- 4ce9f11: Add new endpoint to assign a device to a new group
+
 ## 0.2.0
 
 ### Minor Changes
