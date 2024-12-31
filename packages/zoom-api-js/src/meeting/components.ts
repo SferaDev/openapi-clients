@@ -19218,7 +19218,10 @@ export type TrackingfieldListResponse = {
 export type TrackingfieldListVariables = FetcherExtraProps;
 
 /**
- * List all the [tracking fields](https://support.zoom.us/hc/en-us/articles/115000293426-Scheduling-Tracking-Fields) on your Zoom account. Tracking fields let you analyze usage by various fields within an organization. **Prerequisites:** * A Business, Education, API or higher plan.
+ * List all the [tracking fields](https://support.zoom.us/hc/en-us/articles/115000293426-Scheduling-Tracking-Fields) on your Zoom account. Tracking fields let you analyze usage by various fields within an organization.
+ *
+ * **Prerequisites:**
+ * * A Business, Education, API or higher plan.
  *
  * **Scopes:** `tracking_fields:read:admin`
  *
