@@ -14620,15 +14620,6 @@ export type VerifyProjectDomainResponse = {
    * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
    */
   verified: boolean;
-  /**
-   * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
-   */
-  verification?: {
-    type: string;
-    domain: string;
-    value: string;
-    reason: string;
-  }[];
 };
 
 export type VerifyProjectDomainVariables = {
