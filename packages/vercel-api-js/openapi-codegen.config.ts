@@ -73,7 +73,12 @@ function sortArrays(openAPIDocument: Context['openAPIDocument']) {
       return obj.sort() as T;
     } else if (typeof obj === 'object' && !!obj) {
       return Object.fromEntries(
-        Object.entries(obj as any).map(([key, value]) => [key, sortEnumValuesRecursively(value)])
+        Object.entries(obj as any).map(([key, value]) => {
+          if (key === 'enum' && Array.isArray(value)) {
+            return [key, value.sort()];
+          }
+          return [key, sortEnumValuesRecursively(value)];
+        })
       ) as T;
     } else {
       return obj;
