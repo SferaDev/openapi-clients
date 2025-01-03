@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.18.1
+
+### Patch Changes
+
+- 3c79610: Remove verification challenges from VerifyProjectDomainResponse
+
 ## 0.18.0
 
 ### Minor Changes
