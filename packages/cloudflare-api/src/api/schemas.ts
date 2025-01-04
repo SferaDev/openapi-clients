@@ -9524,6 +9524,44 @@ export type CachePurgeMessages = {
  */
 export type CachePurgeSchemasIdentifier = string;
 
+/**
+ * Aegis provides dedicated egress IPs (from Cloudflare to your origin) for your layer 7 WAF and CDN services. The egress IPs are reserved exclusively for your account so that you can increase your origin security by only allowing traffic from a small list of IP addresses.
+ */
+export type CacheRulesAegis = {
+  /**
+   * ID of the zone setting.
+   *
+   * @example aegis
+   */
+  id: 'aegis';
+  /**
+   * last time this setting was modified.
+   *
+   * @example 2014-01-01T05:20:00.12345Z
+   * @format date-time
+   */
+  modified_on: string | null;
+};
+
+export type CacheRulesAegisResponseValue = {
+  /**
+   * Aegis provides dedicated egress IPs (from Cloudflare to your origin) for your layer 7 WAF and CDN services. The egress IPs are reserved exclusively for your account so that you can increase your origin security by only allowing traffic from a small list of IP addresses.
+   */
+  result?: CacheRulesAegis & {
+    value: CacheRulesAegisValue;
+  };
+};
+
+/**
+ * Value of the zone setting.
+ */
+export type CacheRulesAegisValue = {
+  /**
+   * Egress pool id which refers to a grouping of dedicated egress IPs through which Cloudflare will connect to origin.
+   */
+  pool_id?: string;
+};
+
 export type CacheRulesApiResponseCommon = {
   errors: CacheRulesMessages;
   messages: CacheRulesMessages;
@@ -44462,35 +44500,353 @@ export type WorkersApiResponseCommonFailure = {
 
 export type WorkersApiResponseSingle = WorkersApiResponseCommon;
 
-export type WorkersApiResponseSingleId = WorkersApiResponseCommon & {
-  result?: {
-    id: WorkersIdentifier;
-  } | null;
-};
-
-export type WorkersAssetsBinding = {
-  name: WorkersBindingName;
-  /**
-   * The class of resource that the binding provides.
-   *
-   * @example assets
-   */
-  type: 'assets';
-};
-
 /**
  * A binding to allow the Worker to communicate with resources
  */
-export type WorkersBinding =
-  | WorkersKvNamespaceBinding
-  | WorkersServiceBinding
-  | WorkersDoBinding
-  | WorkersR2Binding
-  | WorkersQueueBinding
-  | WorkersD1Binding
-  | WorkersDispatchNamespaceBinding
-  | WorkersMtlsCertBinding
-  | WorkersAssetsBinding;
+export type WorkersBindingItem =
+  | WorkersBindingKindAny
+  | WorkersBindingKindAi
+  | WorkersBindingKindAnalyticsEngine
+  | WorkersBindingKindAssets
+  | WorkersBindingKindBrowserRendering
+  | WorkersBindingKindD1
+  | WorkersBindingKindDispatchNamespace
+  | WorkersBindingKindDo
+  | WorkersBindingKindHyperdrive
+  | WorkersBindingKindJson
+  | WorkersBindingKindKvNamespace
+  | WorkersBindingKindMtlsCert
+  | WorkersBindingKindPlainText
+  | WorkersBindingKindQueue
+  | WorkersBindingKindR2
+  | WorkersBindingKindSecret
+  | WorkersBindingKindService
+  | WorkersBindingKindTailConsumer
+  | WorkersBindingKindVectorize
+  | WorkersBindingKindVersionMetadata;
+
+export type WorkersBindingKindAi = {
+  name: WorkersBindingName;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example ai
+   */
+  type: WorkersBindingType & 'ai';
+};
+
+export type WorkersBindingKindAnalyticsEngine = {
+  /**
+   * The dataset name to bind to.
+   *
+   * @example some_dataset
+   */
+  dataset: string;
+  name: WorkersBindingName;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example analytics_engine
+   */
+  type: WorkersBindingType & 'analytics_engine';
+};
+
+export type WorkersBindingKindAny = {
+  name: WorkersBindingName;
+  type: WorkersBindingType;
+} & {
+  [key: string]: void;
+};
+
+export type WorkersBindingKindAssets = {
+  name: WorkersBindingName;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example assets
+   */
+  type: WorkersBindingType & 'assets';
+};
+
+export type WorkersBindingKindBrowserRendering = {
+  name: WorkersBindingName;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example browser_rendering
+   */
+  type: WorkersBindingType & 'browser_rendering';
+};
+
+export type WorkersBindingKindD1 = {
+  /**
+   * Identifier of the D1 database to bind to.
+   *
+   * @example xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+   */
+  id: string;
+  name: WorkersBindingName;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example d1
+   */
+  type: WorkersBindingType & 'd1';
+};
+
+export type WorkersBindingKindDispatchNamespace = {
+  name: WorkersBindingName;
+  /**
+   * Namespace to bind to.
+   *
+   * @example xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+   */
+  namespace: string;
+  /**
+   * Outbound worker.
+   */
+  outbound?: {
+    /**
+     * Pass information from the Dispatch Worker to the Outbound Worker through the parameters.
+     */
+    params?: string[];
+    /**
+     * Outbound worker.
+     */
+    worker?: {
+      /**
+       * Environment of the outbound worker.
+       */
+      environment?: string;
+      /**
+       * Name of the outbound worker.
+       */
+      service?: string;
+    };
+  };
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example dispatch_namespace
+   */
+  type: WorkersBindingType & 'dispatch_namespace';
+};
+
+export type WorkersBindingKindDo = {
+  /**
+   * The exported class name of the Durable Object.
+   *
+   * @example MyDurableObject
+   */
+  class_name: string;
+  /**
+   * The environment of the script_name to bind to.
+   *
+   * @example production
+   */
+  environment?: string;
+  name: WorkersBindingName;
+  namespace_id?: WorkersNamespaceIdentifier;
+  /**
+   * The script where the Durable Object is defined, if it is external to this Worker.
+   *
+   * @example my-other-worker
+   */
+  script_name?: string;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example durable_object_namespace
+   */
+  type: WorkersBindingType & 'durable_object_namespace';
+};
+
+export type WorkersBindingKindHyperdrive = {
+  /**
+   * Identifier of the Hyperdrive connection to bind to.
+   *
+   * @example 57b7076f58be42419276f058a8968187
+   */
+  id: string;
+  name: WorkersBindingName;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example hyperdrive
+   */
+  type: WorkersBindingType & 'hyperdrive';
+};
+
+export type WorkersBindingKindJson = {
+  /**
+   * JSON data to use.
+   *
+   * @example { "message": "Hello, world!" }
+   */
+  json: void;
+  name: WorkersBindingName;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example json
+   */
+  type: WorkersBindingType & 'json';
+};
+
+export type WorkersBindingKindKvNamespace = {
+  name: WorkersBindingName;
+  namespace_id: WorkersNamespaceIdentifier;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example kv_namespace
+   */
+  type: WorkersBindingType & 'kv_namespace';
+};
+
+export type WorkersBindingKindMtlsCert = {
+  /**
+   * Identifier of the certificate to bind to.
+   *
+   * @example efwu2n6s-q69d-2kr9-184j-4913e8h391k6
+   */
+  certificate_id: string;
+  name: WorkersBindingName;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example mtls_certificate
+   */
+  type: WorkersBindingType & 'mtls_certificate';
+};
+
+export type WorkersBindingKindPlainText = {
+  name: WorkersBindingName;
+  /**
+   * The text value to use.
+   *
+   * @example Hello, world!
+   */
+  text: string;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example plain_text
+   */
+  type: WorkersBindingType & 'plain_text';
+};
+
+export type WorkersBindingKindQueue = {
+  name: WorkersBindingName;
+  /**
+   * Name of the Queue to bind to.
+   *
+   * @example my-queue
+   */
+  queue_name: string;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example queue
+   */
+  type: WorkersBindingType & 'queue';
+};
+
+export type WorkersBindingKindR2 = {
+  /**
+   * R2 bucket to bind to.
+   *
+   * @example my-r2-bucket
+   */
+  bucket_name: string;
+  name: WorkersBindingName;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example r2_bucket
+   */
+  type: WorkersBindingType & 'r2_bucket';
+};
+
+export type WorkersBindingKindSecret = {
+  name: WorkersBindingName;
+  /**
+   * The secret value to use.
+   *
+   * @example My secret.
+   */
+  text: string;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example secret_text
+   */
+  type: WorkersBindingType & 'secret_text';
+};
+
+export type WorkersBindingKindService = {
+  /**
+   * Optional environment if the Worker utilizes one.
+   *
+   * @example production
+   */
+  environment: string;
+  name: WorkersBindingName;
+  /**
+   * Name of Worker to bind to.
+   *
+   * @example my-worker
+   */
+  service: string;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example service
+   */
+  type: WorkersBindingType & 'service';
+};
+
+export type WorkersBindingKindTailConsumer = {
+  name: WorkersBindingName;
+  /**
+   * Name of Tail Worker to bind to.
+   *
+   * @example my-worker
+   */
+  service: string;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example tail_consumer
+   */
+  type: WorkersBindingType & 'tail_consumer';
+};
+
+export type WorkersBindingKindVectorize = {
+  /**
+   * Name of the Vectorize index to bind to.
+   *
+   * @example my-index-name
+   */
+  index_name: string;
+  name: WorkersBindingName;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example vectorize
+   */
+  type: WorkersBindingType & 'vectorize';
+};
+
+export type WorkersBindingKindVersionMetadata = {
+  name: WorkersBindingName;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example version_metadata
+   */
+  type: WorkersBindingType & 'version_metadata';
+};
 
 /**
  * A JavaScript variable name for the binding.
@@ -44500,9 +44856,16 @@ export type WorkersBinding =
 export type WorkersBindingName = string;
 
 /**
- * List of bindings attached to this Worker
+ * The kind of resource that the binding provides.
  */
-export type WorkersBindings = WorkersBinding[];
+export type WorkersBindingType = string;
+
+/**
+ * List of bindings attached to a Worker. You can find more about bindings on our docs: https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
+ *
+ * @example {"name":"MY_ENV_VAR","text":"my_data","type":"plain_text"}
+ */
+export type WorkersBindings = WorkersBindingItem[];
 
 /**
  * Date indicating targeted support in the Workers runtime. Backwards incompatible fixes to the runtime following this date will not affect this Worker.
@@ -44586,30 +44949,8 @@ export type WorkersCronTriggerResponseCollection = WorkersApiResponseCommon & {
  */
 export type WorkersCursor = string;
 
-export type WorkersD1Binding = {
-  binding: WorkersBindingName;
-  /**
-   * ID of the D1 database to bind to
-   *
-   * @example xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-   */
-  id: string;
-  /**
-   * The name of the D1 database associated with the 'id' provided.
-   *
-   * @example prod-database-auth
-   */
-  name: string;
-  /**
-   * The class of resource that the binding provides.
-   *
-   * @example d1
-   */
-  type: 'd1';
-};
-
 /**
- * @example bcf48806-b317-4351-9ee7-36e7d557d4de
+ * @example dc78f0bc-05c5-46b7-bb4e-137f55930378
  * @maxLength 36
  */
 export type WorkersDeploymentIdentifier = string;
@@ -44636,7 +44977,7 @@ export type WorkersDeploymentsBase = {
    * @example dc78f0bc-05c5-46b7-bb4e-137f55930378
    * @maxLength 36
    */
-  id?: WorkersSchemasDeploymentIdentifier;
+  id?: WorkersDeploymentIdentifier;
   /**
    * @example api
    */
@@ -44648,37 +44989,12 @@ export type WorkersDeploymentsCreateBody = WorkersDeploymentsBase & WorkersDeplo
 
 export type WorkersDeploymentsListResponse = WorkersApiResponseCommon & {
   result?: {
-    /**
-     * @example {"id":"bcf48806-b317-4351-9ee7-36e7d557d4de","metadata":{"author_email":"user@example.com","author_id":"408cbcdfd4dda4617efef40b04d168a1","created_on":"2022-11-15T18:25:44.442097Z","modified_on":"2022-11-15T18:25:44.442097Z","source":"api"},"number":2}
-     * @example {"id":"18f97339-c287-4872-9bdd-e2135c07ec12","metadata":{"author_email":"user@example.com","author_id":"408cbcdfd4dda4617efef40b04d168a1","created_on":"2022-11-08T17:30:56.968096Z","modified_on":"2022-11-08T17:30:56.968096Z","source":"api"},"number":1}
-     */
-    items?: WorkersVersionItemShort[];
-    /**
-     * @example {"id":"bcf48806-b317-4351-9ee7-36e7d557d4de","metadata":{"author_email":"user@example.com","author_id":"408cbcdfd4dda4617efef40b04d168a1","created_on":"2022-11-15T18:25:44.442097Z","modified_on":"2022-11-15T18:25:44.442097Z","source":"api"},"number":2,"resources":{"bindings":[{"json":"example_binding","name":"JSON_VAR","type":"json"}],"script":{"etag":"13a3240e8fb414561b0366813b0b8f42b3e6cfa0d9e70e99835dae83d0d8a794","handlers":["fetch"],"last_deployed_from":"api"},"script_runtime":{"usage_model":"bundled"}}}
-     */
-    latest?: Record<string, any>;
+    deployments?: (WorkersDeploymentsBase & WorkersDeploymentsStrategyPercentage)[];
   };
 };
 
 export type WorkersDeploymentsSingleResponse = WorkersApiResponseCommon & {
-  result?: {
-    /**
-     * @example 18f97339-c287-4872-9bdd-e2135c07ec12
-     */
-    id?: string;
-    /**
-     * @example {"author_email":"user@example.com","author_id":"408cbcdfd4dda4617efef40b04d168a1","created_on":"2022-11-08T17:19:29.176266Z","modified_on":"2022-11-08T17:19:29.176266Z","source":"api"}
-     */
-    metadata?: Record<string, any>;
-    /**
-     * @example 1
-     */
-    number?: number;
-    /**
-     * @example {"bindings":[{"json":"example_binding","name":"JSON_VAR","type":"json"}],"script":{"etag":"13a3240e8fb414561b0366813b0b8f42b3e6cfa0d9e70e99835dae83d0d8a794","handlers":["fetch"],"last_deployed_from":"api"},"script_runtime":{"usage_model":"bundled"}}
-     */
-    resources?: Record<string, any>;
-  };
+  result?: WorkersDeploymentsBase & WorkersDeploymentsStrategyPercentage;
 };
 
 export type WorkersDeploymentsStrategyPercentage = {
@@ -44694,44 +45010,6 @@ export type WorkersDeploymentsStrategyPercentage = {
   }[];
 };
 
-export type WorkersDispatchNamespaceBinding = {
-  name: WorkersBindingName;
-  /**
-   * Namespace to bind to
-   *
-   * @example my-namespace
-   */
-  namespace: string;
-  /**
-   * Outbound worker
-   */
-  outbound?: {
-    /**
-     * Pass information from the Dispatch Worker to the Outbound Worker through the parameters
-     */
-    params?: string[];
-    /**
-     * Outbound worker
-     */
-    worker?: {
-      /**
-       * Environment of the outbound worker
-       */
-      environment?: string;
-      /**
-       * Name of the outbound worker
-       */
-      service?: string;
-    };
-  };
-  /**
-   * The class of resource that the binding provides.
-   *
-   * @example dispatch_namespace
-   */
-  type: 'dispatch_namespace';
-};
-
 /**
  * Name of the Workers for Platforms dispatch namespace.
  *
@@ -44739,35 +45017,6 @@ export type WorkersDispatchNamespaceBinding = {
  * @pattern ^.+$
  */
 export type WorkersDispatchNamespaceName = string;
-
-export type WorkersDoBinding = {
-  /**
-   * The exported class name of the Durable Object
-   *
-   * @example MyDurableObject
-   */
-  class_name: string;
-  /**
-   * The environment of the script_name to bind to
-   *
-   * @example production
-   */
-  environment?: string;
-  name: WorkersBindingName;
-  namespace_id?: WorkersNamespaceIdentifier;
-  /**
-   * The script where the Durable Object is defined, if it is external to this Worker
-   *
-   * @example my-other-worker
-   */
-  script_name?: string;
-  /**
-   * The class of resource that the binding provides.
-   *
-   * @example durable_object_namespace
-   */
-  type: 'durable_object_namespace';
-};
 
 export type WorkersDomain = {
   environment?: WorkersSchemasEnvironment;
@@ -44794,11 +45043,6 @@ export type WorkersDomainResponseSingle = WorkersApiResponseCommon & {
 export type WorkersDomainIdentifier = string;
 
 /**
- * @example true
- */
-export type WorkersEnabled = boolean;
-
-/**
  * Optional environment if the Worker utilizes one.
  *
  * @example production
@@ -44811,25 +45055,6 @@ export type WorkersEnvironment = string;
  * @example ea95132c15732412d22c1476fa83f27a
  */
 export type WorkersEtag = string;
-
-export type WorkersFilterNoId = {
-  enabled: WorkersEnabled;
-  pattern: WorkersSchemasPattern;
-};
-
-export type WorkersFilterResponseCollection = WorkersApiResponseCommon & {
-  result?: WorkersFilters[];
-};
-
-export type WorkersFilterResponseSingle = WorkersApiResponseSingle & {
-  result?: WorkersFilters;
-};
-
-export type WorkersFilters = {
-  enabled: WorkersEnabled;
-  id: WorkersIdentifier;
-  pattern: WorkersSchemasPattern;
-};
 
 /**
  * Whether a Worker contains assets.
@@ -44866,17 +45091,6 @@ export type WorkersId = string;
  * @maxLength 32
  */
 export type WorkersIdentifier = string;
-
-export type WorkersKvNamespaceBinding = {
-  name: WorkersBindingName;
-  namespace_id: WorkersNamespaceIdentifier;
-  /**
-   * The class of resource that the binding provides.
-   *
-   * @example kv_namespace
-   */
-  type: 'kv_namespace';
-};
 
 /**
  * Limits to apply for this Worker.
@@ -44969,20 +45183,88 @@ export type WorkersMigrationTagConditions = {
  */
 export type WorkersModifiedOn = string;
 
-export type WorkersMtlsCertBinding = {
+/**
+ * @example {"metadata":{"compatibility_date":"2021-01-01","compatibility_flags":["nodejs_compat"],"main_module":"worker.js"},"worker.js":["export default {\n  async fetch(request, env, ctx) {\n    return new Response(\"Hello, world!\");\n  }\n};"]}
+ */
+export type WorkersMultipartScript = {
   /**
-   * ID of the certificate to bind to
-   *
-   * @example efwu2n6s-q69d-2kr9-184j-4913e8h391k6
+   * JSON encoded metadata about the uploaded parts and Worker configuration.
    */
-  certificate_id: string;
-  name: WorkersBindingName;
-  /**
-   * The class of resource that the binding provides.
-   *
-   * @example mtls_certificate
-   */
-  type: 'mtls_certificate';
+  metadata: {
+    /**
+     * Configuration for assets within a Worker
+     */
+    assets?: {
+      /**
+       * Configuration for assets within a Worker.
+       */
+      config?: {
+        /**
+         * Determines the redirects and rewrites of requests for HTML content.
+         *
+         * @example auto-trailing-slash
+         */
+        html_handling?: 'auto-trailing-slash' | 'force-trailing-slash' | 'drop-trailing-slash' | 'none';
+        /**
+         * Determines the response when a request does not match a static asset, and there is no Worker script.
+         *
+         * @example 404-page
+         */
+        not_found_handling?: 'none' | '404-page' | 'single-page-application';
+        /**
+         * When true and the incoming request matches an asset, that will be served instead of invoking the Worker script. When false, requests will always invoke the Worker script.
+         *
+         * @default true
+         * @example true
+         */
+        serve_directly?: boolean;
+      };
+      /**
+       * Token provided upon successful upload of all files from a registered manifest.
+       */
+      jwt?: string;
+    };
+    bindings?: WorkersBindings;
+    /**
+     * Name of the part in the multipart request that contains the script (e.g. the file adding a listener to the `fetch` event). Indicates a `service worker syntax` Worker.
+     *
+     * @example worker.js
+     */
+    body_part?: string;
+    compatibility_date?: WorkersCompatibilityDate;
+    compatibility_flags?: WorkersCompatibilityFlags;
+    /**
+     * Retain assets which exist for a previously uploaded Worker version; used in lieu of providing a completion token.
+     *
+     * @example false
+     */
+    keep_assets?: boolean;
+    /**
+     * List of binding types to keep from previous_upload.
+     */
+    keep_bindings?: string[];
+    logpush?: WorkersLogpush;
+    /**
+     * Name of the part in the multipart request that contains the main module (e.g. the file exporting a `fetch` handler). Indicates a `module syntax` Worker.
+     *
+     * @example worker.js
+     */
+    main_module?: string;
+    /**
+     * Migrations to apply for Durable Objects associated with this Worker.
+     */
+    migrations?: WorkersSingleStepMigrations | WorkersMultipleStepMigrations;
+    observability?: WorkersObservability;
+    placement?: WorkersPlacementInfo;
+    /**
+     * List of strings to use as tags for this Worker.
+     */
+    tags?: string[];
+    tail_consumers?: WorkersTailConsumers;
+    usage_model?: WorkersUsageModel;
+  };
+} & {
+  [key: string]: Blob[];
 };
 
 export type WorkersMultipleStepMigrations = WorkersMigrationTagConditions & {
@@ -45082,51 +45364,36 @@ export type WorkersObservability = {
  */
 export type WorkersPattern = string;
 
-export type WorkersPlacementConfig = {
-  /**
-   * Enables [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement). Only `"smart"` is currently supported
-   */
-  mode?: 'smart';
+/**
+ * Configuration for [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+ */
+export type WorkersPlacementInfo = {
+  mode?: WorkersPlacementMode;
+  status?: WorkersPlacementStatus;
 };
 
 /**
- * Specifies the placement mode for the Worker (e.g. 'smart').
- *
- * @example smart
+ * Configuration for [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
  */
-export type WorkersPlacementMode = string;
-
-export type WorkersQueueBinding = {
-  name: WorkersBindingName;
-  /**
-   * Name of the Queue to bind to
-   *
-   * @example my-queue
-   */
-  queue_name: string;
-  /**
-   * The class of resource that the binding provides.
-   *
-   * @example queue
-   */
-  type: 'queue';
+export type WorkersPlacementInfoNoStatus = {
+  mode?: WorkersPlacementMode;
 };
 
-export type WorkersR2Binding = {
-  /**
-   * R2 bucket to bind to
-   *
-   * @example my-r2-bucket
-   */
-  bucket_name: string;
-  name: WorkersBindingName;
-  /**
-   * The class of resource that the binding provides.
-   *
-   * @example r2_bucket
-   */
-  type: 'r2_bucket';
-};
+/**
+ * Enables [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+ */
+export type WorkersPlacementMode = 'smart';
+
+/**
+ * Status of [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+ */
+export type WorkersPlacementStatus =
+  | 'SUCCESS'
+  | 'NO_VALID_HOSTS'
+  | 'NO_VALID_BINDINGS'
+  | 'UNSUPPORTED_APPLICATION'
+  | 'INSUFFICIENT_INVOCATIONS'
+  | 'INSUFFICIENT_SUBREQUESTS';
 
 export type WorkersResultInfo = {
   /**
@@ -45174,24 +45441,6 @@ export type WorkersRoutes = {
   script: WorkersScriptName;
 };
 
-export type WorkersSchemasBinding = WorkersKvNamespaceBinding | WorkersWasmModuleBinding;
-
-/**
- * @example dc78f0bc-05c5-46b7-bb4e-137f55930378
- * @maxLength 36
- */
-export type WorkersSchemasDeploymentIdentifier = string;
-
-export type WorkersSchemasDeploymentsListResponse = WorkersApiResponseCommon & {
-  result?: {
-    deployments?: (WorkersDeploymentsBase & WorkersDeploymentsStrategyPercentage)[];
-  };
-};
-
-export type WorkersSchemasDeploymentsSingleResponse = WorkersApiResponseCommon & {
-  result?: WorkersDeploymentsBase & WorkersDeploymentsStrategyPercentage;
-};
-
 /**
  * Worker environment associated with the zone and hostname.
  *
@@ -45205,15 +45454,6 @@ export type WorkersSchemasEnvironment = string;
  * @example 5fd1cafff895419c8bcc647fc64ab8f0
  */
 export type WorkersSchemasId = string;
-
-/**
- * @example example.net/*
- */
-export type WorkersSchemasPattern = string;
-
-export type WorkersSchemasScriptResponseSingle = WorkersApiResponseSingle & {
-  result?: Record<string, any>;
-};
 
 /**
  * Name of the script.
@@ -45247,7 +45487,7 @@ export type WorkersScriptAndVersionSettingsItem = {
    */
   migrations?: WorkersSingleStepMigrations | WorkersMultipleStepMigrations;
   observability?: WorkersObservability;
-  placement?: WorkersPlacementConfig;
+  placement?: WorkersPlacementInfoNoStatus;
   tags?: WorkersTags;
   tail_consumers?: WorkersTailConsumers;
   usage_model?: WorkersUsageModel;
@@ -45270,7 +45510,19 @@ export type WorkersScriptResponse = {
   id?: string;
   logpush?: WorkersLogpush;
   modified_on?: WorkersModifiedOn;
-  placement_mode?: WorkersPlacementMode;
+  placement?: WorkersPlacementInfo;
+  /**
+   * Enables [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   *
+   * @deprecated true
+   */
+  placement_mode?: WorkersPlacementMode & void;
+  /**
+   * Status of [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   *
+   * @deprecated true
+   */
+  placement_status?: WorkersPlacementStatus & void;
   tail_consumers?: WorkersTailConsumers;
   usage_model?: WorkersUsageModel;
 };
@@ -45310,12 +45562,6 @@ export type WorkersScriptSettingsResponse = WorkersApiResponseCommon & {
  * @example 800
  */
 export type WorkersScriptCount = number;
-
-/**
- * @example 8ee82b3a2c0f42928b8f14dae4a97121
- * @maxLength 32
- */
-export type WorkersScriptIdentifier = string;
 
 /**
  * Name of the script, used in URLs and route configuration.
@@ -45374,28 +45620,6 @@ export type WorkersSecretName = string;
  * @example my-worker
  */
 export type WorkersService = string;
-
-export type WorkersServiceBinding = {
-  /**
-   * Optional environment if the Worker utilizes one.
-   *
-   * @example production
-   */
-  environment: string;
-  name: WorkersBindingName;
-  /**
-   * Name of Worker to bind to
-   *
-   * @example my-worker
-   */
-  service: string;
-  /**
-   * The class of resource that the binding provides.
-   *
-   * @example service
-   */
-  type: 'service';
-};
 
 /**
  * A single set of migrations to apply.
@@ -45480,9 +45704,9 @@ export type WorkersUsageModelResponse = WorkersApiResponseCommon & {
 /**
  * Usage model for the Worker invocations.
  *
- * @example unbound
+ * @example standard
  */
-export type WorkersUsageModel = 'bundled' | 'unbound';
+export type WorkersUsageModel = 'standard';
 
 /**
  * API Resource UUID tag.
@@ -45494,7 +45718,7 @@ export type WorkersUuid = string;
 
 export type WorkersVersionItemFull = WorkersVersionItemShort & {
   /**
-   * @example {"bindings":[{"json":"example_binding","name":"JSON_VAR","type":"json"}],"script":{"etag":"13a3240e8fb414561b0366813b0b8f42b3e6cfa0d9e70e99835dae83d0d8a794","handlers":["fetch"],"last_deployed_from":"api"},"script_runtime":{"usage_model":"bundled"}}
+   * @example {"bindings":[{"json":"example_binding","name":"JSON_VAR","type":"json"}],"script":{"etag":"13a3240e8fb414561b0366813b0b8f42b3e6cfa0d9e70e99835dae83d0d8a794","handlers":["fetch"],"last_deployed_from":"api"},"script_runtime":{"usage_model":"standard"}}
    */
   resources: Record<string, any>;
 };
@@ -45539,16 +45763,6 @@ export type WorkersVersionsSingleResponse = WorkersApiResponseCommon & {
 
 export type WorkersVersionsUploadResponse = WorkersApiResponseCommon & {
   result?: WorkersVersionItemUploaded;
-};
-
-export type WorkersWasmModuleBinding = {
-  name: WorkersBindingName;
-  /**
-   * The class of resource that the binding provides.
-   *
-   * @example wasm_module
-   */
-  type: 'wasm_module';
 };
 
 /**

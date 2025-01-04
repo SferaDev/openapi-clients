@@ -65493,7 +65493,7 @@ export type WorkerAssetsUploadVariables = {
 } & FetcherExtraProps;
 
 /**
- * Upload assets ahead of creating a Worker version.
+ * Upload assets ahead of creating a Worker version.  To learn more about the direct uploads of assets, see https://developers.cloudflare.com/workers/static-assets/direct-upload/
  */
 export const workerAssetsUpload = (variables: WorkerAssetsUploadVariables, signal?: AbortSignal) =>
   fetch<
@@ -65504,66 +65504,6 @@ export const workerAssetsUpload = (variables: WorkerAssetsUploadVariables, signa
     WorkerAssetsUploadQueryParams,
     WorkerAssetsUploadPathParams
   >({ url: '/accounts/{accountId}/workers/assets/upload', method: 'post', ...variables, signal });
-
-export type WorkerDeploymentsDeprecatedListDeploymentsPathParams = {
-  scriptId: Schemas.WorkersScriptIdentifier;
-  accountId: Schemas.WorkersIdentifier;
-};
-
-export type WorkerDeploymentsDeprecatedListDeploymentsError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: Schemas.WorkersDeploymentsListResponse & Schemas.WorkersApiResponseCommonFailure;
-}>;
-
-export type WorkerDeploymentsDeprecatedListDeploymentsVariables = {
-  pathParams: WorkerDeploymentsDeprecatedListDeploymentsPathParams;
-} & FetcherExtraProps;
-
-export const workerDeploymentsDeprecatedListDeployments = (
-  variables: WorkerDeploymentsDeprecatedListDeploymentsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.WorkersDeploymentsListResponse,
-    WorkerDeploymentsDeprecatedListDeploymentsError,
-    undefined,
-    {},
-    {},
-    WorkerDeploymentsDeprecatedListDeploymentsPathParams
-  >({ url: '/accounts/{accountId}/workers/deployments/by-script/{scriptId}', method: 'get', ...variables, signal });
-
-export type WorkerDeploymentsDeprecatedGetDeploymentDetailPathParams = {
-  deploymentId: Schemas.WorkersDeploymentIdentifier;
-  scriptId: Schemas.WorkersScriptIdentifier;
-  accountId: Schemas.WorkersIdentifier;
-};
-
-export type WorkerDeploymentsDeprecatedGetDeploymentDetailError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: Schemas.WorkersDeploymentsSingleResponse & Schemas.WorkersApiResponseCommonFailure;
-}>;
-
-export type WorkerDeploymentsDeprecatedGetDeploymentDetailVariables = {
-  pathParams: WorkerDeploymentsDeprecatedGetDeploymentDetailPathParams;
-} & FetcherExtraProps;
-
-export const workerDeploymentsDeprecatedGetDeploymentDetail = (
-  variables: WorkerDeploymentsDeprecatedGetDeploymentDetailVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.WorkersDeploymentsSingleResponse,
-    WorkerDeploymentsDeprecatedGetDeploymentDetailError,
-    undefined,
-    {},
-    {},
-    WorkerDeploymentsDeprecatedGetDeploymentDetailPathParams
-  >({
-    url: '/accounts/{accountId}/workers/deployments/by-script/{scriptId}/detail/{deploymentId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
 
 export type NamespaceWorkerListPathParams = {
   accountId: Schemas.WorkersIdentifier;
@@ -65783,7 +65723,7 @@ export type NamespaceWorkerScriptUploadWorkerModuleError = Fetcher.ErrorWrapper<
 }>;
 
 export type NamespaceWorkerScriptUploadWorkerModuleVariables = {
-  body?: RequestBodies.WorkersScriptUpload;
+  body: RequestBodies.WorkersScriptUpload;
   pathParams: NamespaceWorkerScriptUploadWorkerModulePathParams;
 } & FetcherExtraProps;
 
@@ -65825,7 +65765,7 @@ export type NamespaceWorkerScriptUpdateCreateAssetsUploadSessionVariables = {
 } & FetcherExtraProps;
 
 /**
- * Start uploading a collection of assets for use in a Worker version.
+ * Start uploading a collection of assets for use in a Worker version. To learn more about the direct uploads of assets, see https://developers.cloudflare.com/workers/static-assets/direct-upload/
  */
 export const namespaceWorkerScriptUpdateCreateAssetsUploadSession = (
   variables: NamespaceWorkerScriptUpdateCreateAssetsUploadSessionVariables,
@@ -66429,8 +66369,8 @@ export const workerDomainAttachToDomain = (variables: WorkerDomainAttachToDomain
   >({ url: '/accounts/{accountId}/workers/domains', method: 'put', ...variables, signal });
 
 export type WorkerDomainDetachFromDomainPathParams = {
-  domainId: Schemas.WorkersDomainIdentifier;
   accountId: Schemas.WorkersAccountIdentifier;
+  domainId: Schemas.WorkersDomainIdentifier;
 };
 
 export type WorkerDomainDetachFromDomainError = Fetcher.ErrorWrapper<undefined>;
@@ -66451,8 +66391,8 @@ export const workerDomainDetachFromDomain = (variables: WorkerDomainDetachFromDo
   });
 
 export type WorkerDomainGetADomainPathParams = {
-  domainId: Schemas.WorkersDomainIdentifier;
   accountId: Schemas.WorkersAccountIdentifier;
+  domainId: Schemas.WorkersDomainIdentifier;
 };
 
 export type WorkerDomainGetADomainError = Fetcher.ErrorWrapper<{
@@ -66514,8 +66454,8 @@ export const durableObjectsNamespaceListNamespaces = (
   >({ url: '/accounts/{accountId}/workers/durable_objects/namespaces', method: 'get', ...variables, signal });
 
 export type DurableObjectsNamespaceListObjectsPathParams = {
-  id: Schemas.WorkersSchemasId;
   accountId: Schemas.WorkersIdentifier;
+  id: Schemas.WorkersSchemasId;
 };
 
 export type DurableObjectsNamespaceListObjectsQueryParams = {
@@ -66614,8 +66554,8 @@ export const workerScriptListWorkers = (variables: WorkerScriptListWorkersVariab
   >({ url: '/accounts/{accountId}/workers/scripts', method: 'get', ...variables, signal });
 
 export type WorkerScriptDeleteWorkerPathParams = {
-  scriptName: Schemas.WorkersScriptName;
   accountId: Schemas.WorkersIdentifier;
+  scriptName: Schemas.WorkersScriptName;
 };
 
 export type WorkerScriptDeleteWorkerQueryParams = {
@@ -66646,11 +66586,14 @@ export const workerScriptDeleteWorker = (variables: WorkerScriptDeleteWorkerVari
   >({ url: '/accounts/{accountId}/workers/scripts/{scriptName}', method: 'delete', ...variables, signal });
 
 export type WorkerScriptDownloadWorkerPathParams = {
-  scriptName: Schemas.WorkersScriptName;
   accountId: Schemas.WorkersIdentifier;
+  scriptName: Schemas.WorkersScriptName;
 };
 
-export type WorkerScriptDownloadWorkerError = Fetcher.ErrorWrapper<undefined>;
+export type WorkerScriptDownloadWorkerError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.WorkersApiResponseCommonFailure;
+}>;
 
 export type WorkerScriptDownloadWorkerVariables = {
   pathParams: WorkerScriptDownloadWorkerPathParams;
@@ -66660,23 +66603,18 @@ export type WorkerScriptDownloadWorkerVariables = {
  * Fetch raw script content for your worker. Note this is the original script content, not JSON encoded.
  */
 export const workerScriptDownloadWorker = (variables: WorkerScriptDownloadWorkerVariables, signal?: AbortSignal) =>
-  fetch<undefined, WorkerScriptDownloadWorkerError, undefined, {}, {}, WorkerScriptDownloadWorkerPathParams>({
-    url: '/accounts/{accountId}/workers/scripts/{scriptName}',
-    method: 'get',
-    ...variables,
-    signal
-  });
+  fetch<
+    Schemas.WorkersMultipartScript,
+    WorkerScriptDownloadWorkerError,
+    undefined,
+    {},
+    {},
+    WorkerScriptDownloadWorkerPathParams
+  >({ url: '/accounts/{accountId}/workers/scripts/{scriptName}', method: 'get', ...variables, signal });
 
 export type WorkerScriptUploadWorkerModulePathParams = {
-  scriptName: Schemas.WorkersScriptName;
   accountId: Schemas.WorkersIdentifier;
-};
-
-export type WorkerScriptUploadWorkerModuleQueryParams = {
-  /**
-   * Rollback to provided deployment based on deployment ID. Request body will only parse a "message" part. You can learn more about deployments [here](https://developers.cloudflare.com/workers/platform/deployments/).
-   */
-  rollback_to?: Schemas.WorkersUuid;
+  scriptName: Schemas.WorkersScriptName;
 };
 
 export type WorkerScriptUploadWorkerModuleError = Fetcher.ErrorWrapper<{
@@ -66687,9 +66625,8 @@ export type WorkerScriptUploadWorkerModuleError = Fetcher.ErrorWrapper<{
 export type WorkerScriptUploadWorkerModuleResponse = Schemas.WorkersScriptResponseUploadSingle & void;
 
 export type WorkerScriptUploadWorkerModuleVariables = {
-  body?: RequestBodies.WorkersScriptUpload;
+  body: RequestBodies.WorkersScriptUpload;
   pathParams: WorkerScriptUploadWorkerModulePathParams;
-  queryParams?: WorkerScriptUploadWorkerModuleQueryParams;
 } & FetcherExtraProps;
 
 /**
@@ -66704,7 +66641,7 @@ export const workerScriptUploadWorkerModule = (
     WorkerScriptUploadWorkerModuleError,
     RequestBodies.WorkersScriptUpload,
     {},
-    WorkerScriptUploadWorkerModuleQueryParams,
+    {},
     WorkerScriptUploadWorkerModulePathParams
   >({ url: '/accounts/{accountId}/workers/scripts/{scriptName}', method: 'put', ...variables, signal });
 
@@ -66724,7 +66661,7 @@ export type WorkerScriptUpdateCreateAssetsUploadSessionVariables = {
 } & FetcherExtraProps;
 
 /**
- * Start uploading a collection of assets for use in a Worker version.
+ * Start uploading a collection of assets for use in a Worker version. To learn more about the direct uploads of assets, see https://developers.cloudflare.com/workers/static-assets/direct-upload/
  */
 export const workerScriptUpdateCreateAssetsUploadSession = (
   variables: WorkerScriptUpdateCreateAssetsUploadSessionVariables,
@@ -66832,13 +66769,13 @@ export const workerScriptGetContent = (variables: WorkerScriptGetContentVariable
   });
 
 export type WorkerDeploymentsListDeploymentsPathParams = {
-  scriptName: Schemas.WorkersSchemasScriptName;
   accountId: Schemas.WorkersIdentifier;
+  scriptName: Schemas.WorkersSchemasScriptName;
 };
 
 export type WorkerDeploymentsListDeploymentsError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.WorkersSchemasDeploymentsListResponse & Schemas.WorkersApiResponseCommonFailure;
+  payload: Schemas.WorkersDeploymentsListResponse & Schemas.WorkersApiResponseCommonFailure;
 }>;
 
 export type WorkerDeploymentsListDeploymentsVariables = {
@@ -66853,7 +66790,7 @@ export const workerDeploymentsListDeployments = (
   signal?: AbortSignal
 ) =>
   fetch<
-    Schemas.WorkersSchemasDeploymentsListResponse,
+    Schemas.WorkersDeploymentsListResponse,
     WorkerDeploymentsListDeploymentsError,
     undefined,
     {},
@@ -66862,8 +66799,8 @@ export const workerDeploymentsListDeployments = (
   >({ url: '/accounts/{accountId}/workers/scripts/{scriptName}/deployments', method: 'get', ...variables, signal });
 
 export type WorkerDeploymentsCreateDeploymentPathParams = {
-  scriptName: Schemas.WorkersSchemasScriptName;
   accountId: Schemas.WorkersIdentifier;
+  scriptName: Schemas.WorkersSchemasScriptName;
 };
 
 export type WorkerDeploymentsCreateDeploymentQueryParams = {
@@ -66875,7 +66812,7 @@ export type WorkerDeploymentsCreateDeploymentQueryParams = {
 
 export type WorkerDeploymentsCreateDeploymentError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.WorkersSchemasDeploymentsSingleResponse & Schemas.WorkersApiResponseCommonFailure;
+  payload: Schemas.WorkersDeploymentsSingleResponse & Schemas.WorkersApiResponseCommonFailure;
 }>;
 
 export type WorkerDeploymentsCreateDeploymentVariables = {
@@ -66892,7 +66829,7 @@ export const workerDeploymentsCreateDeployment = (
   signal?: AbortSignal
 ) =>
   fetch<
-    Schemas.WorkersSchemasDeploymentsSingleResponse,
+    Schemas.WorkersDeploymentsSingleResponse,
     WorkerDeploymentsCreateDeploymentError,
     Schemas.WorkersDeploymentsCreateBody,
     {},
@@ -66901,8 +66838,8 @@ export const workerDeploymentsCreateDeployment = (
   >({ url: '/accounts/{accountId}/workers/scripts/{scriptName}/deployments', method: 'post', ...variables, signal });
 
 export type WorkerCronTriggerGetCronTriggersPathParams = {
-  scriptName: Schemas.WorkersScriptName;
   accountId: Schemas.WorkersIdentifier;
+  scriptName: Schemas.WorkersScriptName;
 };
 
 export type WorkerCronTriggerGetCronTriggersError = Fetcher.ErrorWrapper<{
@@ -66931,8 +66868,8 @@ export const workerCronTriggerGetCronTriggers = (
   >({ url: '/accounts/{accountId}/workers/scripts/{scriptName}/schedules', method: 'get', ...variables, signal });
 
 export type WorkerCronTriggerUpdateCronTriggersPathParams = {
-  scriptName: Schemas.WorkersScriptName;
   accountId: Schemas.WorkersIdentifier;
+  scriptName: Schemas.WorkersScriptName;
 };
 
 export type WorkerCronTriggerUpdateCronTriggersError = Fetcher.ErrorWrapper<{
@@ -67188,36 +67125,39 @@ export const workerScriptPostSubdomain = (variables: WorkerScriptPostSubdomainVa
     WorkerScriptPostSubdomainPathParams
   >({ url: '/accounts/{accountId}/workers/scripts/{scriptName}/subdomain', method: 'post', ...variables, signal });
 
-export type WorkerTailLogsListTailsPathParams = {
-  scriptName: Schemas.WorkersScriptName;
+export type GetAccountsAccountIdWorkersScriptsScriptNameTailsPathParams = {
   accountId: Schemas.WorkersIdentifier;
+  scriptName: Schemas.WorkersScriptName;
 };
 
-export type WorkerTailLogsListTailsError = Fetcher.ErrorWrapper<{
+export type GetAccountsAccountIdWorkersScriptsScriptNameTailsError = Fetcher.ErrorWrapper<{
   status: 400;
   payload: Schemas.WorkersTailResponse & Schemas.WorkersApiResponseCommonFailure;
 }>;
 
-export type WorkerTailLogsListTailsVariables = {
-  pathParams: WorkerTailLogsListTailsPathParams;
+export type GetAccountsAccountIdWorkersScriptsScriptNameTailsVariables = {
+  pathParams: GetAccountsAccountIdWorkersScriptsScriptNameTailsPathParams;
 } & FetcherExtraProps;
 
 /**
  * Get list of tails currently deployed on a Worker.
  */
-export const workerTailLogsListTails = (variables: WorkerTailLogsListTailsVariables, signal?: AbortSignal) =>
+export const getAccountsAccountIdWorkersScriptsScriptNameTails = (
+  variables: GetAccountsAccountIdWorkersScriptsScriptNameTailsVariables,
+  signal?: AbortSignal
+) =>
   fetch<
     Schemas.WorkersTailResponse,
-    WorkerTailLogsListTailsError,
+    GetAccountsAccountIdWorkersScriptsScriptNameTailsError,
     undefined,
     {},
     {},
-    WorkerTailLogsListTailsPathParams
+    GetAccountsAccountIdWorkersScriptsScriptNameTailsPathParams
   >({ url: '/accounts/{accountId}/workers/scripts/{scriptName}/tails', method: 'get', ...variables, signal });
 
 export type WorkerTailLogsStartTailPathParams = {
-  scriptName: Schemas.WorkersScriptName;
   accountId: Schemas.WorkersIdentifier;
+  scriptName: Schemas.WorkersScriptName;
 };
 
 export type WorkerTailLogsStartTailError = Fetcher.ErrorWrapper<{
@@ -67243,9 +67183,9 @@ export const workerTailLogsStartTail = (variables: WorkerTailLogsStartTailVariab
   >({ url: '/accounts/{accountId}/workers/scripts/{scriptName}/tails', method: 'post', ...variables, signal });
 
 export type WorkerTailLogsDeleteTailPathParams = {
-  id: Schemas.WorkersId;
-  scriptName: Schemas.WorkersScriptName;
   accountId: Schemas.WorkersIdentifier;
+  scriptName: Schemas.WorkersScriptName;
+  id: Schemas.WorkersId;
 };
 
 export type WorkerTailLogsDeleteTailError = Fetcher.ErrorWrapper<{
@@ -67285,8 +67225,8 @@ export const workerTailLogsDeleteTail = (variables: WorkerTailLogsDeleteTailVari
   >({ url: '/accounts/{accountId}/workers/scripts/{scriptName}/tails/{id}', method: 'delete', ...variables, signal });
 
 export type WorkerScriptFetchUsageModelPathParams = {
-  scriptName: Schemas.WorkersScriptName;
   accountId: Schemas.WorkersIdentifier;
+  scriptName: Schemas.WorkersScriptName;
 };
 
 export type WorkerScriptFetchUsageModelError = Fetcher.ErrorWrapper<{
@@ -67312,8 +67252,8 @@ export const workerScriptFetchUsageModel = (variables: WorkerScriptFetchUsageMod
   >({ url: '/accounts/{accountId}/workers/scripts/{scriptName}/usage-model', method: 'get', ...variables, signal });
 
 export type WorkerScriptUpdateUsageModelPathParams = {
-  scriptName: Schemas.WorkersScriptName;
   accountId: Schemas.WorkersIdentifier;
+  scriptName: Schemas.WorkersScriptName;
 };
 
 export type WorkerScriptUpdateUsageModelError = Fetcher.ErrorWrapper<{
@@ -67340,8 +67280,8 @@ export const workerScriptUpdateUsageModel = (variables: WorkerScriptUpdateUsageM
   >({ url: '/accounts/{accountId}/workers/scripts/{scriptName}/usage-model', method: 'put', ...variables, signal });
 
 export type WorkerVersionsListVersionsPathParams = {
-  scriptName: Schemas.WorkersSchemasScriptName;
   accountId: Schemas.WorkersIdentifier;
+  scriptName: Schemas.WorkersSchemasScriptName;
 };
 
 export type WorkerVersionsListVersionsQueryParams = {
@@ -67387,8 +67327,8 @@ export const workerVersionsListVersions = (variables: WorkerVersionsListVersions
   >({ url: '/accounts/{accountId}/workers/scripts/{scriptName}/versions', method: 'get', ...variables, signal });
 
 export type WorkerVersionsUploadVersionPathParams = {
-  scriptName: Schemas.WorkersSchemasScriptName;
   accountId: Schemas.WorkersIdentifier;
+  scriptName: Schemas.WorkersSchemasScriptName;
 };
 
 export type WorkerVersionsUploadVersionError = Fetcher.ErrorWrapper<{
@@ -67415,9 +67355,9 @@ export const workerVersionsUploadVersion = (variables: WorkerVersionsUploadVersi
   >({ url: '/accounts/{accountId}/workers/scripts/{scriptName}/versions', method: 'post', ...variables, signal });
 
 export type WorkerVersionsGetVersionDetailPathParams = {
-  versionId: Schemas.WorkersVersionIdentifier;
-  scriptName: Schemas.WorkersSchemasScriptName;
   accountId: Schemas.WorkersIdentifier;
+  scriptName: Schemas.WorkersSchemasScriptName;
+  versionId: Schemas.WorkersVersionIdentifier;
 };
 
 export type WorkerVersionsGetVersionDetailError = Fetcher.ErrorWrapper<{
@@ -112059,6 +111999,113 @@ export const zoneSettingsEditZoneSettingsInfo = (
     ZoneSettingsEditZoneSettingsInfoPathParams
   >({ url: '/zones/{zoneId}/settings', method: 'patch', ...variables, signal });
 
+export type ZoneCacheSettingsDeleteAegisSettingPathParams = {
+  zoneId: Schemas.CacheRulesIdentifier;
+};
+
+export type ZoneCacheSettingsDeleteAegisSettingError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: (Schemas.CacheRulesZoneCacheSettingsResponseSingle & {
+    result?: Schemas.CacheRulesAegis;
+  }) &
+    Schemas.CacheRulesApiResponseCommonFailure;
+}>;
+
+export type ZoneCacheSettingsDeleteAegisSettingResponse = Schemas.CacheRulesZoneCacheSettingsResponseSingle & {
+  result?: Schemas.CacheRulesAegis;
+};
+
+export type ZoneCacheSettingsDeleteAegisSettingVariables = {
+  pathParams: ZoneCacheSettingsDeleteAegisSettingPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Aegis provides dedicated egress IPs (from Cloudflare to your origin) for your layer 7 WAF and CDN services. The egress IPs are reserved exclusively for your account so that you can increase your origin security by only allowing traffic from a small list of IP addresses.
+ */
+export const zoneCacheSettingsDeleteAegisSetting = (
+  variables: ZoneCacheSettingsDeleteAegisSettingVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    ZoneCacheSettingsDeleteAegisSettingResponse,
+    ZoneCacheSettingsDeleteAegisSettingError,
+    undefined,
+    {},
+    {},
+    ZoneCacheSettingsDeleteAegisSettingPathParams
+  >({ url: '/zones/{zoneId}/settings/aegis', method: 'delete', ...variables, signal });
+
+export type ZoneCacheSettingsGetAegisSettingPathParams = {
+  zoneId: Schemas.CacheRulesIdentifier;
+};
+
+export type ZoneCacheSettingsGetAegisSettingError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: (Schemas.CacheRulesZoneCacheSettingsResponseSingle & Schemas.CacheRulesAegisResponseValue) &
+    Schemas.CacheRulesApiResponseCommonFailure;
+}>;
+
+export type ZoneCacheSettingsGetAegisSettingResponse = Schemas.CacheRulesZoneCacheSettingsResponseSingle &
+  Schemas.CacheRulesAegisResponseValue;
+
+export type ZoneCacheSettingsGetAegisSettingVariables = {
+  pathParams: ZoneCacheSettingsGetAegisSettingPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Aegis provides dedicated egress IPs (from Cloudflare to your origin) for your layer 7 WAF and CDN services. The egress IPs are reserved exclusively for your account so that you can increase your origin security by only allowing traffic from a small list of IP addresses.
+ */
+export const zoneCacheSettingsGetAegisSetting = (
+  variables: ZoneCacheSettingsGetAegisSettingVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    ZoneCacheSettingsGetAegisSettingResponse,
+    ZoneCacheSettingsGetAegisSettingError,
+    undefined,
+    {},
+    {},
+    ZoneCacheSettingsGetAegisSettingPathParams
+  >({ url: '/zones/{zoneId}/settings/aegis', method: 'get', ...variables, signal });
+
+export type ZoneCacheSettingsChangeAegisSettingPathParams = {
+  zoneId: Schemas.CacheRulesIdentifier;
+};
+
+export type ZoneCacheSettingsChangeAegisSettingError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: (Schemas.CacheRulesZoneCacheSettingsResponseSingle & Schemas.CacheRulesAegisResponseValue) &
+    Schemas.CacheRulesApiResponseCommonFailure;
+}>;
+
+export type ZoneCacheSettingsChangeAegisSettingResponse = Schemas.CacheRulesZoneCacheSettingsResponseSingle &
+  Schemas.CacheRulesAegisResponseValue;
+
+export type ZoneCacheSettingsChangeAegisSettingRequestBody = {
+  value: Schemas.CacheRulesAegisValue;
+};
+
+export type ZoneCacheSettingsChangeAegisSettingVariables = {
+  body: ZoneCacheSettingsChangeAegisSettingRequestBody;
+  pathParams: ZoneCacheSettingsChangeAegisSettingPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Aegis provides dedicated egress IPs (from Cloudflare to your origin) for your layer 7 WAF and CDN services. The egress IPs are reserved exclusively for your account so that you can increase your origin security by only allowing traffic from a small list of IP addresses.
+ */
+export const zoneCacheSettingsChangeAegisSetting = (
+  variables: ZoneCacheSettingsChangeAegisSettingVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    ZoneCacheSettingsChangeAegisSettingResponse,
+    ZoneCacheSettingsChangeAegisSettingError,
+    ZoneCacheSettingsChangeAegisSettingRequestBody,
+    {},
+    {},
+    ZoneCacheSettingsChangeAegisSettingPathParams
+  >({ url: '/zones/{zoneId}/settings/aegis', method: 'patch', ...variables, signal });
+
 export type ZoneSettingsGetFontsSettingPathParams = {
   zoneId: Schemas.SpeedIdentifier;
 };
@@ -115208,114 +115255,6 @@ export const web3HostnameEditIpfsUniversalPathGatewayContentListEntry = (
     signal
   });
 
-export type WorkerFiltersDeprecatedListFiltersPathParams = {
-  zoneId: Schemas.WorkersIdentifier;
-};
-
-export type WorkerFiltersDeprecatedListFiltersError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: Schemas.WorkersFilterResponseCollection & Schemas.WorkersApiResponseCommonFailure;
-}>;
-
-export type WorkerFiltersDeprecatedListFiltersVariables = {
-  pathParams: WorkerFiltersDeprecatedListFiltersPathParams;
-} & FetcherExtraProps;
-
-export const workerFiltersDeprecatedListFilters = (
-  variables: WorkerFiltersDeprecatedListFiltersVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.WorkersFilterResponseCollection,
-    WorkerFiltersDeprecatedListFiltersError,
-    undefined,
-    {},
-    {},
-    WorkerFiltersDeprecatedListFiltersPathParams
-  >({ url: '/zones/{zoneId}/workers/filters', method: 'get', ...variables, signal });
-
-export type WorkerFiltersDeprecatedCreateFilterPathParams = {
-  zoneId: Schemas.WorkersIdentifier;
-};
-
-export type WorkerFiltersDeprecatedCreateFilterError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: Schemas.WorkersApiResponseSingleId & Schemas.WorkersApiResponseCommonFailure;
-}>;
-
-export type WorkerFiltersDeprecatedCreateFilterVariables = {
-  body: Schemas.WorkersFilterNoId;
-  pathParams: WorkerFiltersDeprecatedCreateFilterPathParams;
-} & FetcherExtraProps;
-
-export const workerFiltersDeprecatedCreateFilter = (
-  variables: WorkerFiltersDeprecatedCreateFilterVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.WorkersApiResponseSingleId,
-    WorkerFiltersDeprecatedCreateFilterError,
-    Schemas.WorkersFilterNoId,
-    {},
-    {},
-    WorkerFiltersDeprecatedCreateFilterPathParams
-  >({ url: '/zones/{zoneId}/workers/filters', method: 'post', ...variables, signal });
-
-export type WorkerFiltersDeprecatedDeleteFilterPathParams = {
-  filterId: Schemas.WorkersIdentifier;
-  zoneId: Schemas.WorkersIdentifier;
-};
-
-export type WorkerFiltersDeprecatedDeleteFilterError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: Schemas.WorkersApiResponseSingleId & Schemas.WorkersApiResponseCommonFailure;
-}>;
-
-export type WorkerFiltersDeprecatedDeleteFilterVariables = {
-  pathParams: WorkerFiltersDeprecatedDeleteFilterPathParams;
-} & FetcherExtraProps;
-
-export const workerFiltersDeprecatedDeleteFilter = (
-  variables: WorkerFiltersDeprecatedDeleteFilterVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.WorkersApiResponseSingleId,
-    WorkerFiltersDeprecatedDeleteFilterError,
-    undefined,
-    {},
-    {},
-    WorkerFiltersDeprecatedDeleteFilterPathParams
-  >({ url: '/zones/{zoneId}/workers/filters/{filterId}', method: 'delete', ...variables, signal });
-
-export type WorkerFiltersDeprecatedUpdateFilterPathParams = {
-  filterId: Schemas.WorkersIdentifier;
-  zoneId: Schemas.WorkersIdentifier;
-};
-
-export type WorkerFiltersDeprecatedUpdateFilterError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: Schemas.WorkersFilterResponseSingle & Schemas.WorkersApiResponseCommonFailure;
-}>;
-
-export type WorkerFiltersDeprecatedUpdateFilterVariables = {
-  body: Schemas.WorkersFilterNoId;
-  pathParams: WorkerFiltersDeprecatedUpdateFilterPathParams;
-} & FetcherExtraProps;
-
-export const workerFiltersDeprecatedUpdateFilter = (
-  variables: WorkerFiltersDeprecatedUpdateFilterVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.WorkersFilterResponseSingle,
-    WorkerFiltersDeprecatedUpdateFilterError,
-    Schemas.WorkersFilterNoId,
-    {},
-    {},
-    WorkerFiltersDeprecatedUpdateFilterPathParams
-  >({ url: '/zones/{zoneId}/workers/filters/{filterId}', method: 'put', ...variables, signal });
-
 export type WorkerRoutesListRoutesPathParams = {
   zoneId: Schemas.WorkersIdentifier;
 };
@@ -115450,123 +115389,6 @@ export const workerRoutesUpdateRoute = (variables: WorkerRoutesUpdateRouteVariab
     {},
     WorkerRoutesUpdateRoutePathParams
   >({ url: '/zones/{zoneId}/workers/routes/{routeId}', method: 'put', ...variables, signal });
-
-export type WorkerScriptDeprecatedDeleteWorkerPathParams = {
-  zoneId: Schemas.WorkersIdentifier;
-};
-
-export type WorkerScriptDeprecatedDeleteWorkerError = Fetcher.ErrorWrapper<undefined>;
-
-export type WorkerScriptDeprecatedDeleteWorkerVariables = {
-  pathParams: WorkerScriptDeprecatedDeleteWorkerPathParams;
-} & FetcherExtraProps;
-
-/**
- * Delete your Worker. This call has no response body on a successful delete.
- */
-export const workerScriptDeprecatedDeleteWorker = (
-  variables: WorkerScriptDeprecatedDeleteWorkerVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    WorkerScriptDeprecatedDeleteWorkerError,
-    undefined,
-    {},
-    {},
-    WorkerScriptDeprecatedDeleteWorkerPathParams
-  >({ url: '/zones/{zoneId}/workers/script', method: 'delete', ...variables, signal });
-
-export type WorkerScriptDeprecatedDownloadWorkerPathParams = {
-  zoneId: Schemas.WorkersIdentifier;
-};
-
-export type WorkerScriptDeprecatedDownloadWorkerError = Fetcher.ErrorWrapper<undefined>;
-
-export type WorkerScriptDeprecatedDownloadWorkerVariables = {
-  pathParams: WorkerScriptDeprecatedDownloadWorkerPathParams;
-} & FetcherExtraProps;
-
-/**
- * Fetch raw script content for your worker. Note this is the original script content, not JSON encoded.
- */
-export const workerScriptDeprecatedDownloadWorker = (
-  variables: WorkerScriptDeprecatedDownloadWorkerVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    WorkerScriptDeprecatedDownloadWorkerError,
-    undefined,
-    {},
-    {},
-    WorkerScriptDeprecatedDownloadWorkerPathParams
-  >({ url: '/zones/{zoneId}/workers/script', method: 'get', ...variables, signal });
-
-export type WorkerScriptDeprecatedUploadWorkerPathParams = {
-  zoneId: Schemas.WorkersIdentifier;
-};
-
-export type WorkerScriptDeprecatedUploadWorkerError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: Schemas.WorkersSchemasScriptResponseSingle & Schemas.WorkersApiResponseCommonFailure;
-}>;
-
-export type WorkerScriptDeprecatedUploadWorkerVariables = {
-  pathParams: WorkerScriptDeprecatedUploadWorkerPathParams;
-} & FetcherExtraProps;
-
-/**
- * Upload a worker, or a new version of a worker.
- */
-export const workerScriptDeprecatedUploadWorker = (
-  variables: WorkerScriptDeprecatedUploadWorkerVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.WorkersSchemasScriptResponseSingle,
-    WorkerScriptDeprecatedUploadWorkerError,
-    undefined,
-    {},
-    {},
-    WorkerScriptDeprecatedUploadWorkerPathParams
-  >({ url: '/zones/{zoneId}/workers/script', method: 'put', ...variables, signal });
-
-export type WorkerBindingDeprecatedListBindingsPathParams = {
-  zoneId: Schemas.WorkersIdentifier;
-};
-
-export type WorkerBindingDeprecatedListBindingsError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: (Schemas.WorkersApiResponseCommon & {
-    result?: Schemas.WorkersSchemasBinding[];
-  }) &
-    Schemas.WorkersApiResponseCommonFailure;
-}>;
-
-export type WorkerBindingDeprecatedListBindingsResponse = Schemas.WorkersApiResponseCommon & {
-  result?: Schemas.WorkersSchemasBinding[];
-};
-
-export type WorkerBindingDeprecatedListBindingsVariables = {
-  pathParams: WorkerBindingDeprecatedListBindingsPathParams;
-} & FetcherExtraProps;
-
-/**
- * List the bindings for a Workers script.
- */
-export const workerBindingDeprecatedListBindings = (
-  variables: WorkerBindingDeprecatedListBindingsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    WorkerBindingDeprecatedListBindingsResponse,
-    WorkerBindingDeprecatedListBindingsError,
-    undefined,
-    {},
-    {},
-    WorkerBindingDeprecatedListBindingsPathParams
-  >({ url: '/zones/{zoneId}/workers/script/bindings', method: 'get', ...variables, signal });
 
 export type SslDetectorAutomaticModeGetEnrollmentPathParams = {
   zoneTag: Schemas.CacheZoneIdentifier;
@@ -116826,10 +116648,6 @@ export const operationsByTag = {
     workerScriptFetchUsageModel,
     workerScriptUpdateUsageModel
   },
-  workerDeploymentsDeprecated: {
-    workerDeploymentsDeprecatedListDeployments,
-    workerDeploymentsDeprecatedGetDeploymentDetail
-  },
   workersForPlatforms: {
     namespaceWorkerList,
     namespaceWorkerCreate,
@@ -116861,7 +116679,11 @@ export const operationsByTag = {
   durableObjectsNamespace: { durableObjectsNamespaceListNamespaces, durableObjectsNamespaceListObjects },
   workerDeployments: { workerDeploymentsListDeployments, workerDeploymentsCreateDeployment },
   workerCronTrigger: { workerCronTriggerGetCronTriggers, workerCronTriggerUpdateCronTriggers },
-  workerTailLogs: { workerTailLogsListTails, workerTailLogsStartTail, workerTailLogsDeleteTail },
+  workerTailLogs: {
+    getAccountsAccountIdWorkersScriptsScriptNameTails,
+    workerTailLogsStartTail,
+    workerTailLogsDeleteTail
+  },
   workerVersions: { workerVersionsListVersions, workerVersionsUploadVersion, workerVersionsGetVersionDetail },
   workerEnvironment: {
     workerEnvironmentGetScriptContent,
@@ -117274,6 +117096,9 @@ export const operationsByTag = {
     zoneCacheSettingsDeleteVariantsSetting,
     zoneCacheSettingsGetVariantsSetting,
     zoneCacheSettingsChangeVariantsSetting,
+    zoneCacheSettingsDeleteAegisSetting,
+    zoneCacheSettingsGetAegisSetting,
+    zoneCacheSettingsChangeAegisSetting,
     zoneCacheSettingsGetOriginMaxHttpVersionSetting,
     zoneCacheSettingsChangeOriginMaxHttpVersionSetting
   },
@@ -117665,12 +117490,6 @@ export const operationsByTag = {
     web3HostnameIpfsUniversalPathGatewayContentListEntryDetails,
     web3HostnameEditIpfsUniversalPathGatewayContentListEntry
   },
-  workerFiltersDeprecated: {
-    workerFiltersDeprecatedListFilters,
-    workerFiltersDeprecatedCreateFilter,
-    workerFiltersDeprecatedDeleteFilter,
-    workerFiltersDeprecatedUpdateFilter
-  },
   workerRoutes: {
     workerRoutesListRoutes,
     workerRoutesCreateRoute,
@@ -117678,11 +117497,5 @@ export const operationsByTag = {
     workerRoutesGetRoute,
     workerRoutesUpdateRoute
   },
-  workerScriptDeprecated: {
-    workerScriptDeprecatedDeleteWorker,
-    workerScriptDeprecatedDownloadWorker,
-    workerScriptDeprecatedUploadWorker
-  },
-  workerBindingDeprecated: { workerBindingDeprecatedListBindings },
   automaticSSLTLS: { sslDetectorAutomaticModeGetEnrollment, sslDetectorAutomaticModePatchEnrollment }
 };
