@@ -1,5 +1,15 @@
 # cloudflare-api-js
 
+## 0.2.0
+
+### Minor Changes
+
+- a547faf: Add limitPerGroup property to several query parameters
+
+### Patch Changes
+
+- 9fd8237: Update EmailSecurityCreateDisplayNameResponse result structure
+
 ## 0.1.0
 
 ### Minor Changes
