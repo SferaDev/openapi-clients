@@ -43544,6 +43544,8 @@ export type WaitingroomQueryWaitingroom = {
   session_duration?: WaitingroomSessionDuration;
   suspended?: WaitingroomSuspended;
   total_active_users: WaitingroomTotalActiveUsers;
+  turnstile_action?: WaitingroomTurnstileAction;
+  turnstile_mode?: WaitingroomTurnstileMode;
 };
 
 /**
@@ -43765,6 +43767,28 @@ export type WaitingroomTimestamp = string;
  */
 export type WaitingroomTotalActiveUsers = number;
 
+/**
+ * Which action to take when a bot is detected using Turnstile. `log` will
+ * have no impact on queueing behavior, simply keeping track of how many
+ * bots are detected in Waiting Room Analytics. `infinite_queue` will send
+ * bots to a false queueing state, where they will never reach your
+ * origin. `infinite_queue` requires Advanced Waiting Room.
+ *
+ * @default log
+ */
+export type WaitingroomTurnstileAction = 'log' | 'infinite_queue';
+
+/**
+ * Which Turnstile widget type to use for detecting bot traffic. See
+ * [the Turnstile documentation](https://developers.cloudflare.com/turnstile/concepts/widget/#widget-types)
+ * for the definitions of these widget types. Set to `off` to disable the
+ * Turnstile integration entirely. Setting this to anything other than
+ * `off` or `invisible` requires Advanced Waiting Room.
+ *
+ * @default invisible
+ */
+export type WaitingroomTurnstileMode = 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed';
+
 export type WaitingroomUpdateRules = WaitingroomCreateRule[];
 
 /**
@@ -43803,6 +43827,8 @@ export type WaitingroomWaitingroom = {
   session_duration?: WaitingroomSessionDuration;
   suspended?: WaitingroomSuspended;
   total_active_users?: WaitingroomTotalActiveUsers;
+  turnstile_action?: WaitingroomTurnstileAction;
+  turnstile_mode?: WaitingroomTurnstileMode;
 };
 
 export type WaitingroomZoneSettings = {
