@@ -3684,6 +3684,118 @@ export const assigndevicetoauserCommonarea = (
     signal
   });
 
+export type GetZpaDeviceListProfileSettingOfaUserQueryParams = {
+  /**
+   * The user's ID or email address. For user-level apps, pass `me` as the value for `user_id`.
+   *
+   * @example DYHrdpjrS3uaOf7dPkkg8w
+   */
+  user_id?: string;
+};
+
+export type GetZpaDeviceListProfileSettingOfaUserError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetZpaDeviceListProfileSettingOfaUserResponse = {
+  /**
+   * The user's language.
+   *
+   * @example English
+   */
+  language?: string;
+  /**
+   * The user's timezone.
+   *
+   * @example  (GMT+6:00) Astana, Dhaka
+   */
+  timezone?: string;
+  /**
+   * The ZPA information.
+   *
+   * @maxItems 50
+   * @minItems 0
+   */
+  device_infos?: {
+    /**
+     * The device ID.
+     *
+     * @example yealink-249AD8E00476
+     */
+    device_id?: string;
+    /**
+     * The device type.
+     *
+     * @example Zoom Phone Appliance
+     */
+    device_type?: string;
+    /**
+     * The device's manufacturer.
+     *
+     * @example Yealink
+     */
+    vendor?: string;
+    /**
+     * The device's model name.
+     *
+     * @example MP56
+     */
+    model?: string;
+    /**
+     * The device's status, either `online` or `offline`.
+     */
+    status?: 'online' | 'offline';
+    /**
+     * The device policy.
+     */
+    policy?: {
+      hot_desking?: {
+        /**
+         * The device's status, either `online` or `offline`.
+         *
+         * @example online
+         */
+        status?: 'online' | 'offline';
+      };
+      call_control?: {
+        /**
+         * This field lets the call control feature to the current device. Configure the desk phone devices to enable call control, which lets users perform desk phone's call control actions from the Zoom desktop client, including making and accepting calls.
+         * * `unsupported`
+         * * `on`
+         * * `off`
+         *
+         * @example off
+         */
+        status?: 'unsupported' | 'on' | 'off';
+      };
+    };
+  }[];
+};
+
+export type GetZpaDeviceListProfileSettingOfaUserVariables = {
+  queryParams?: GetZpaDeviceListProfileSettingOfaUserQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Get a user's Zoom Phone Appliance (ZPA) device profile settings. For user-level apps, pass the `me` value instead of the `userId` parameter.
+ *
+ * **Scopes:** `device:read:admin`
+ *
+ * **Granular Scopes:** `device:read:user_setting:admin`,`device:read:user_setting:master`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
+ */
+export const getZpaDeviceListProfileSettingOfaUser = (
+  variables: GetZpaDeviceListProfileSettingOfaUserVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    GetZpaDeviceListProfileSettingOfaUserResponse,
+    GetZpaDeviceListProfileSettingOfaUserError,
+    undefined,
+    {},
+    GetZpaDeviceListProfileSettingOfaUserQueryParams,
+    {}
+  >({ url: '/devices/zpa/settings', method: 'get', ...variables, signal });
+
 export type UpgradeZpasAppError = Fetcher.ErrorWrapper<undefined>;
 
 export type UpgradeZpasAppRequestBody = {
@@ -5991,6 +6103,13 @@ export type MeetingResponse = {
      * @default false
      */
     device_testing?: boolean;
+    /**
+     * Whether to allow the host and co-hosts to fully control the mute state of participants.
+     *
+     * @example false
+     * @default false
+     */
+    allow_host_control_participant_mute_state?: boolean;
   };
   /**
    * Meeting start time in GMT or UTC. Start time will not be returned if the meeting is an **instant** meeting.
@@ -6989,6 +7108,13 @@ export type MeetingUpdateRequestBody = {
      * @default false
      */
     device_testing?: boolean;
+    /**
+     * Whether to allow the host and co-hosts to fully control the mute state of participants.
+     *
+     * @example false
+     * @default false
+     */
+    allow_host_control_participant_mute_state?: boolean;
   };
   /**
    * Meeting start time. When using a format like `yyyy-MM-dd'T'HH:mm:ss'Z'`, always use GMT time. When using a format like `yyyy-MM-dd'T'HH:mm:ss`, use local time and specify the time zone. Only used for scheduled meetings and recurring meetings with a fixed time.
@@ -7680,6 +7806,9 @@ export type MeetingInviteLinksCreateError = Fetcher.ErrorWrapper<undefined>;
 export type MeetingInviteLinksCreateResponse = {
   /**
    * The attendee list.
+   *
+   * @maxItems 500
+   * @minItems 1
    */
   attendees?: {
     /**
@@ -7712,6 +7841,20 @@ export type MeetingInviteLinksCreateRequestBody = {
      * @example Jill Chill
      */
     name: string;
+    /**
+     * Whether to disable participant video when joining the meeting. If not provided or set to `false`, the participant video will follow the meeting's default settings.
+     *
+     * @example false
+     * @default false
+     */
+    disable_video?: boolean;
+    /**
+     * Whether to disable participant audio when joining the meeting. If not provided or set to `false`, the participant audio will follow the meeting's default settings.
+     *
+     * @example false
+     * @default false
+     */
+    disable_audio?: boolean;
   }[];
   /**
    * The invite link's expiration time, in seconds.
@@ -13383,6 +13526,13 @@ export type MeetingCreateResponse = {
      * @default false
      */
     device_testing?: boolean;
+    /**
+     * Whether to allow the host and co-hosts to fully control the mute state of participants.
+     *
+     * @example false
+     * @default false
+     */
+    allow_host_control_participant_mute_state?: boolean;
   };
   /**
    * Meeting start date-time in UTC/GMT, such as `2020-03-31T12:02:00Z`.
@@ -14188,6 +14338,13 @@ export type MeetingCreateRequestBody = {
      * @default false
      */
     device_testing?: boolean;
+    /**
+     * Whether to allow the host and co-hosts to fully control the mute state of participants.
+     *
+     * @example false
+     * @default false
+     */
+    allow_host_control_participant_mute_state?: boolean;
   };
   /**
    * The meeting's start time. This field is only used for scheduled or recurring meetings with a fixed time. This supports local time and GMT formats.
@@ -18251,7 +18408,7 @@ export type CreateSIPPhoneRequestBody = {
    * @maxLength 255
    * @example 4000
    */
-  voice_mail: string;
+  voice_mail?: string;
 };
 
 export type CreateSIPPhoneVariables = {
@@ -21261,6 +21418,13 @@ export type WebinarCreateResponse = {
      * @example true
      */
     enable_session_branding?: boolean;
+    /**
+     * Whether to allow host and co-hosts to fully control the mute state of participants.
+     *
+     * @example false
+     * @default false
+     */
+    allow_host_control_participant_mute_state?: boolean;
   };
   /**
    * Webinar start time in GMT/UTC.
@@ -21312,7 +21476,7 @@ export type WebinarCreateResponse = {
     value?: string;
   }[];
   /**
-   * Webinar Types:
+   * Webinar types.
    *  `5` - Webinar.
    *  `6` - Recurring webinar with no fixed time.
    *  `9` - Recurring webinar with a fixed time.
@@ -21935,6 +22099,13 @@ export type WebinarCreateRequestBody = {
      * @example true
      */
     enable_session_branding?: boolean;
+    /**
+     * Whether to allow the host and co-hosts to fully control the mute state of participants.
+     *
+     * @example false
+     * @default false
+     */
+    allow_host_control_participant_mute_state?: boolean;
   };
   /**
    * Webinar start time. We support two formats for `start_time` - local time and GMT.
@@ -22743,6 +22914,13 @@ export type WebinarResponse = {
      * @example true
      */
     enable_session_branding?: boolean;
+    /**
+     * Whether to allow the host and co-hosts to fully control the mute state of participants.
+     *
+     * @example false
+     * @default false
+     */
+    allow_host_control_participant_mute_state?: boolean;
   };
   /**
    * Webinar start time in GMT/UTC.
@@ -23536,6 +23714,13 @@ export type WebinarUpdateRequestBody = {
      * @example true
      */
     enable_session_branding?: boolean;
+    /**
+     * Whether to allow host and co-hosts to fully control the mute state of participants.
+     *
+     * @example false
+     * @default false
+     */
+    allow_host_control_participant_mute_state?: boolean;
   };
   /**
    * Webinar start time, in the format `yyyy-MM-dd'T'HH:mm:ss'Z'`. Should be in GMT time. In the format `yyyy-MM-dd'T'HH:mm:ss`. This should be in local time and the timezone should be specified. Only used for scheduled webinars and recurring webinars with a fixed time.
@@ -28473,6 +28658,7 @@ export const operationsByTag = {
     addDevice,
     getzdmgroupinfo,
     assigndevicetoauserCommonarea,
+    getZpaDeviceListProfileSettingOfaUser,
     upgradeZpasApp,
     deleteZpaDeviceByVendorAndMacAddress,
     getZpaVersioninfo,
