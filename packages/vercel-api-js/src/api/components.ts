@@ -4924,6 +4924,21 @@ export type CheckDomainPriceQueryParams = {
 
 export type CheckDomainPriceError = Fetcher.ErrorWrapper<undefined>;
 
+export type CheckDomainPriceResponse = {
+  /**
+   * The domain price in USD.
+   *
+   * @example 20
+   */
+  price: number;
+  /**
+   * The number of years the domain could be held before paying again.
+   *
+   * @example 1
+   */
+  period: number;
+};
+
 export type CheckDomainPriceVariables = {
   queryParams: CheckDomainPriceQueryParams;
 } & FetcherExtraProps;
@@ -4932,7 +4947,7 @@ export type CheckDomainPriceVariables = {
  * Check the price to purchase a domain and how long a single purchase period is.
  */
 export const checkDomainPrice = (variables: CheckDomainPriceVariables, signal?: AbortSignal) =>
-  fetch<Record<string, any>, CheckDomainPriceError, undefined, {}, CheckDomainPriceQueryParams, {}>({
+  fetch<CheckDomainPriceResponse, CheckDomainPriceError, undefined, {}, CheckDomainPriceQueryParams, {}>({
     url: '/v4/domains/price',
     method: 'get',
     ...variables,
@@ -6123,7 +6138,6 @@ export type GetDomainResponse = {
       id: string;
     };
     teamId: string | null;
-    userId: string;
     /**
      * If it was purchased through Vercel, the timestamp in milliseconds when it was purchased.
      *
@@ -6184,6 +6198,7 @@ export type GetDomainResponse = {
      * @example 1613602938882
      */
     transferStartedAt?: number;
+    userId: string;
   };
 };
 
@@ -20004,7 +20019,7 @@ export type GetAliasResponse = {
           scope: 'email_invite';
         };
   };
-}[];
+};
 
 export type GetAliasVariables = {
   pathParams: GetAliasPathParams;
@@ -20643,6 +20658,12 @@ export type GetDeploymentsResponse = {
      * @example 1609492210000
      */
     created: number;
+    /**
+     * The default route that should be used for screenshots and links if configured with microfrontends.
+     *
+     * @example /docs
+     */
+    defaultRoute?: string;
     /**
      * Timestamp of when the deployment got deleted.
      *
