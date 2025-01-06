@@ -69593,6 +69593,12 @@ export type RadarGetAiBotsSummaryByUserAgentQueryParams = {
    */
   continent?: string[];
   /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
+  /**
    * Format results are returned in.
    *
    * @example json
@@ -69676,7 +69682,7 @@ export type RadarGetAiBotsSummaryByUserAgentResponse = {
      * @example {"Amazonbot":"10.274394","Bytespider":"8.381743","facebookexternalhit":"63.40249"}
      */
     summary_0: {
-      [key: string]: string[];
+      [key: string]: string;
     };
   };
   /**
@@ -69757,7 +69763,7 @@ export type RadarGetAiBotsTimeseriesGroupByUserAgentQueryParams = {
   /**
    * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
    *
-   * @example 4
+   * @example 10
    */
   limitPerGroup?: number;
   /**
@@ -70931,6 +70937,12 @@ export type RadarGetDnsAs112TimeseriesByQueryTypeQueryParams = {
    */
   continent?: string[];
   /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
+  /**
    * Format results are returned in.
    *
    * @example json
@@ -71010,27 +71022,11 @@ export type RadarGetDnsAs112TimeseriesByQueryTypeResponse = {
        */
       normalization: string;
     };
+    /**
+     * @example {"A":"19","AAAA":"1","PTR":"74","SOA":"5","SRV":"1"}
+     */
     summary_0: {
-      /**
-       * @example 19
-       */
-      A: string;
-      /**
-       * @example 1
-       */
-      AAAA: string;
-      /**
-       * @example 74
-       */
-      PTR: string;
-      /**
-       * @example 5
-       */
-      SOA: string;
-      /**
-       * @example 1
-       */
-      SRV: string;
+      [key: string]: string;
     };
   };
   /**
@@ -71102,6 +71098,12 @@ export type RadarGetDnsAs112TimeseriesByResponseCodesQueryParams = {
    * @example EU,NA
    */
   continent?: string[];
+  /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
   /**
    * Format results are returned in.
    *
@@ -71182,15 +71184,11 @@ export type RadarGetDnsAs112TimeseriesByResponseCodesResponse = {
        */
       normalization: string;
     };
+    /**
+     * @example {"NOERROR":"70","NOTIMP":"5","NXDOMAIN":"10","REFUSED":"5","SERVFAIL":"5"}
+     */
     summary_0: {
-      /**
-       * @example 6
-       */
-      NOERROR: string;
-      /**
-       * @example 94
-       */
-      NXDOMAIN: string;
+      [key: string]: string;
     };
   };
   /**
@@ -71846,6 +71844,12 @@ export type RadarGetDnsAs112TimeseriesGroupByQueryTypeQueryParams = {
    */
   continent?: string[];
   /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
+  /**
    * Format results are returned in.
    *
    * @example json
@@ -71953,6 +71957,12 @@ export type RadarGetDnsAs112TimeseriesGroupByResponseCodesQueryParams = {
    * @example EU,NA
    */
   continent?: string[];
+  /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
   /**
    * Format results are returned in.
    *
@@ -73601,6 +73611,12 @@ export type RadarGetAttacksLayer3SummaryByVectorQueryParams = {
    */
   direction?: 'ORIGIN' | 'TARGET';
   /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
+  /**
    * Format results are returned in.
    *
    * @example json
@@ -73681,10 +73697,10 @@ export type RadarGetAttacksLayer3SummaryByVectorResponse = {
       normalization: string;
     };
     /**
-     * @example {"ACK Flood":["65.662148"],"SYN Flood":["16.86401"]}
+     * @example {"ACK Flood":"65.662148","SYN Flood":"16.86401"}
      */
     summary_0: {
-      [key: string]: string[];
+      [key: string]: string;
     };
   };
   /**
@@ -74331,7 +74347,7 @@ export type RadarGetAttacksLayer3TimeseriesGroupByIndustryQueryParams = {
   /**
    * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
    *
-   * @example 4
+   * @example 10
    */
   limitPerGroup?: number;
   /**
@@ -74701,7 +74717,7 @@ export type RadarGetAttacksLayer3TimeseriesGroupByVectorQueryParams = {
   /**
    * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
    *
-   * @example 4
+   * @example 10
    */
   limitPerGroup?: number;
   /**
@@ -74833,7 +74849,7 @@ export type RadarGetAttacksLayer3TimeseriesGroupByVerticalQueryParams = {
   /**
    * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
    *
-   * @example 4
+   * @example 10
    */
   limitPerGroup?: number;
   /**
@@ -75983,6 +75999,12 @@ export type RadarGetAttacksLayer7SummaryByHttpMethodQueryParams = {
     | 'DATA_LOSS_PREVENTION'
   )[];
   /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
+  /**
    * Format results are returned in.
    *
    * @example json
@@ -76062,15 +76084,11 @@ export type RadarGetAttacksLayer7SummaryByHttpMethodResponse = {
        */
       normalization: string;
     };
+    /**
+     * @example {"GET":"99.100257","POST":"0.899743"}
+     */
     summary_0: {
-      /**
-       * @example 99.100257
-       */
-      GET: string;
-      /**
-       * @example 0.899743
-       */
-      POST: string;
+      [key: string]: string;
     };
   };
   /**
@@ -76293,18 +76311,12 @@ export type RadarGetAttacksLayer7SummaryByHttpVersionResponse = {
        */
       normalization: string;
     };
+    /**
+     * @example {"HTTP/1.x":"21.722365","HTTP/2":"77.056555","HTTP/3":"1.22108"}
+     */
     summary_0: {
-      /**
-       * @example 21.722365
-       */
       ['HTTP/1.x']: string;
-      /**
-       * @example 77.056555
-       */
       ['HTTP/2']: string;
-      /**
-       * @example 1.22108
-       */
       ['HTTP/3']: string;
     };
   };
@@ -76528,14 +76540,11 @@ export type RadarGetAttacksLayer7SummaryByIpVersionResponse = {
        */
       normalization: string;
     };
+    /**
+     * @example {"IPv4":"99.935733","IPv6":"0.064267"}
+     */
     summary_0: {
-      /**
-       * @example 99.935733
-       */
       IPv4: string;
-      /**
-       * @example 0.064267
-       */
       IPv6: string;
     };
   };
@@ -76686,6 +76695,12 @@ export type RadarGetAttacksLayer7SummaryByManagedRulesQueryParams = {
     | 'DATA_LOSS_PREVENTION'
   )[];
   /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
+  /**
    * Format results are returned in.
    *
    * @example json
@@ -76766,10 +76781,10 @@ export type RadarGetAttacksLayer7SummaryByManagedRulesResponse = {
       normalization: string;
     };
     /**
-     * @example {"Bot":"14.285714","HTTP Anomaly":"85.714286"}
+     * @example {"HTTP Anomaly":"85.714286","XSS":"10.274394"}
      */
     summary_0: {
-      [key: string]: string[];
+      [key: string]: string;
     };
   };
   /**
@@ -76907,6 +76922,12 @@ export type RadarGetAttacksLayer7SummaryByMitigationProductQueryParams = {
     | 'TRACK'
   )[];
   /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
+  /**
    * Format results are returned in.
    *
    * @example json
@@ -76986,15 +77007,11 @@ export type RadarGetAttacksLayer7SummaryByMitigationProductResponse = {
        */
       normalization: string;
     };
+    /**
+     * @example {"DDOS":"24.421594","WAF":"53.213368"}
+     */
     summary_0: {
-      /**
-       * @example 24.421594
-       */
-      DDOS: string;
-      /**
-       * @example 53.213368
-       */
-      WAF: string;
+      [key: string]: string;
     };
   };
   /**
@@ -77527,6 +77544,12 @@ export type RadarGetAttacksLayer7TimeseriesGroupByHttpMethodQueryParams = {
    */
   normalization?: 'PERCENTAGE' | 'MIN0_MAX';
   /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
+  /**
    * Format results are returned in.
    *
    * @example json
@@ -77551,9 +77574,13 @@ export type RadarGetAttacksLayer7TimeseriesGroupByHttpMethodError = Fetcher.Erro
 export type RadarGetAttacksLayer7TimeseriesGroupByHttpMethodResponse = {
   result: {
     meta: Record<string, any>;
+    /**
+     * @example {"GET":["70.970199"],"timestamps":["2023-10-01T00:00:00Z"]}
+     */
     serie_0: {
-      GET: string[];
       timestamps: string[];
+    } & {
+      [key: string]: string[];
     };
   };
   /**
@@ -77734,8 +77761,13 @@ export type RadarGetAttacksLayer7TimeseriesGroupByHttpVersionError = Fetcher.Err
 export type RadarGetAttacksLayer7TimeseriesGroupByHttpVersionResponse = {
   result: {
     meta: Record<string, any>;
+    /**
+     * @example {"HTTP/1.x":["50.338734"],"HTTP/2":["48.661266"],"HTTP/3":["1.22108"],"timestamps":["2023-10-01T00:00:00Z"]}
+     */
     serie_0: {
       ['HTTP/1.x']: string[];
+      ['HTTP/2']: string[];
+      ['HTTP/3']: string[];
       timestamps: string[];
     };
   };
@@ -77901,7 +77933,7 @@ export type RadarGetAttacksLayer7TimeseriesGroupByIndustryQueryParams = {
   /**
    * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
    *
-   * @example 4
+   * @example 10
    */
   limitPerGroup?: number;
   /**
@@ -78116,6 +78148,9 @@ export type RadarGetAttacksLayer7TimeseriesGroupByIpVersionError = Fetcher.Error
 export type RadarGetAttacksLayer7TimeseriesGroupByIpVersionResponse = {
   result: {
     meta: Record<string, any>;
+    /**
+     * @example {"IPv4":["99.935733"],"IPv6":["0.064267"],"timestamps":["2023-10-01T00:00:00Z"]}
+     */
     serie_0: {
       IPv4: string[];
       IPv6: string[];
@@ -78282,6 +78317,12 @@ export type RadarGetAttacksLayer7TimeseriesGroupByManagedRulesQueryParams = {
    */
   normalization?: 'PERCENTAGE' | 'MIN0_MAX';
   /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
+  /**
    * Format results are returned in.
    *
    * @example json
@@ -78307,7 +78348,7 @@ export type RadarGetAttacksLayer7TimeseriesGroupByManagedRulesResponse = {
   result: {
     meta: Record<string, any>;
     /**
-     * @example {"Bot":["0.324198"],"timestamps":["2023-10-01T00:00:00Z"]}
+     * @example {"XSS":["0.324198"],"timestamps":["2023-10-01T00:00:00Z"]}
      */
     serie_0: {
       timestamps: string[];
@@ -78463,6 +78504,12 @@ export type RadarGetAttacksLayer7TimeseriesGroupByMitigationProductQueryParams =
    */
   normalization?: 'PERCENTAGE' | 'MIN0_MAX';
   /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
+  /**
    * Format results are returned in.
    *
    * @example json
@@ -78487,9 +78534,13 @@ export type RadarGetAttacksLayer7TimeseriesGroupByMitigationProductError = Fetch
 export type RadarGetAttacksLayer7TimeseriesGroupByMitigationProductResponse = {
   result: {
     meta: Record<string, any>;
+    /**
+     * @example {"DDOS":["48.926354"],"timestamps":["2023-10-01T00:00:00Z"]}
+     */
     serie_0: {
-      DDOS: string[];
       timestamps: string[];
+    } & {
+      [key: string]: string[];
     };
   };
   /**
@@ -78654,7 +78705,7 @@ export type RadarGetAttacksLayer7TimeseriesGroupByVerticalQueryParams = {
   /**
    * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
    *
-   * @example 4
+   * @example 10
    */
   limitPerGroup?: number;
   /**
@@ -89716,7 +89767,7 @@ export type RadarGetHttpTimeseriesGroupByBrowsersQueryParams = {
   /**
    * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
    *
-   * @example 4
+   * @example 10
    */
   limitPerGroup?: number;
   /**
@@ -89870,6 +89921,12 @@ export type RadarGetHttpTimeseriesGroupByBrowserFamiliesQueryParams = {
    * @example TLSv1_2
    */
   tlsVersion?: ('TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC')[];
+  /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
   /**
    * Format results are returned in.
    *
@@ -96655,6 +96712,10 @@ export type RadarGetRankingDomainDetailsQueryParams = {
    */
   name?: string[];
   /**
+   * Include top locations in the response.
+   */
+  includeTopLocations?: boolean;
+  /**
    * Array of dates to filter the ranking.
    *
    * @example 2022-09-19
@@ -97385,25 +97446,10 @@ export type RadarGetTcpResetsTimeoutsTimeseriesGroupResponse = {
       lastUpdated: string;
     };
     serie_0: {
-      /**
-       * Connection resets within the first 10 packets from the client, but after the server has received multiple data packets.
-       */
       later_in_flow: string[];
-      /**
-       * All other connections.
-       */
       no_match: string[];
-      /**
-       * Connection resets or timeouts after the server received both a SYN packet and an ACK packet, meaning the connection was successfully established.
-       */
       post_ack: string[];
-      /**
-       * Connection resets or timeouts after the server received a packet with PSH flag set, following connection establishment.
-       */
       post_psh: string[];
-      /**
-       * Connection resets or timeouts after the server received only a single SYN packet.
-       */
       post_syn: string[];
       timestamps: string[];
     };
