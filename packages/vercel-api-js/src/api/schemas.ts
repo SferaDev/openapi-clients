@@ -286,6 +286,7 @@ export type AuthUser = {
       | 'edgeMiddlewareInvocations'
       | 'edgeRequest'
       | 'edgeRequestAdditionalCpuDuration'
+      | 'elasticConcurrencyBuildSlots'
       | 'fastDataTransfer'
       | 'fastOriginTransfer'
       | 'functionDuration'
