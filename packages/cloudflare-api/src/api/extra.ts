@@ -1622,7 +1622,6 @@ import {
   updateSecurityTxt,
   zoneSettingsGetAllZoneSettings,
   zoneSettingsEditZoneSettingsInfo,
-  zoneCacheSettingsDeleteAegisSetting,
   zoneCacheSettingsGetAegisSetting,
   zoneCacheSettingsChangeAegisSetting,
   zoneSettingsGetFontsSetting,
@@ -3285,7 +3284,7 @@ export const operationsByPath = {
   'GET /zones/{zone_id}/cache/cache_reserve_clear': zoneCacheSettingsGetCacheReserveClear,
   'POST /zones/{zone_id}/cache/cache_reserve_clear': zoneCacheSettingsStartCacheReserveClear,
   'GET /zones/{zone_id}/cache/origin_post_quantum_encryption': zoneCacheSettingsGetOriginPostQuantumEncryptionSetting,
-  'PUT /zones/{zone_id}/cache/origin_post_quantum_encryption':
+  'PATCH /zones/{zone_id}/cache/origin_post_quantum_encryption':
     zoneCacheSettingsChangeOriginPostQuantumEncryptionSetting,
   'GET /zones/{zone_id}/cache/regional_tiered_cache': zoneCacheSettingsGetRegionalTieredCacheSetting,
   'PATCH /zones/{zone_id}/cache/regional_tiered_cache': zoneCacheSettingsChangeRegionalTieredCacheSetting,
@@ -3552,7 +3551,6 @@ export const operationsByPath = {
   'PUT /zones/{zone_id}/security-center/securitytxt': updateSecurityTxt,
   'GET /zones/{zone_id}/settings': zoneSettingsGetAllZoneSettings,
   'PATCH /zones/{zone_id}/settings': zoneSettingsEditZoneSettingsInfo,
-  'DELETE /zones/{zone_id}/settings/aegis': zoneCacheSettingsDeleteAegisSetting,
   'GET /zones/{zone_id}/settings/aegis': zoneCacheSettingsGetAegisSetting,
   'PATCH /zones/{zone_id}/settings/aegis': zoneCacheSettingsChangeAegisSetting,
   'GET /zones/{zone_id}/settings/fonts': zoneSettingsGetFontsSetting,
