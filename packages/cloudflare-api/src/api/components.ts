@@ -44878,11 +44878,45 @@ export type EmailSecurityCreateDisplayNameError = Fetcher.ErrorWrapper<{
 }>;
 
 export type EmailSecurityCreateDisplayNameResponse = Schemas.EmailSecurityApiResponseCommon & {
-  result: Schemas.EmailSecurityDisplayName | Schemas.EmailSecurityDisplayName[];
+  result: {
+    email?: string;
+    is_email_regex?: boolean;
+    /**
+     * @maxLength 1024
+     */
+    name?: string;
+    comments?: string | null;
+    /**
+     * @format date-time
+     */
+    created_at: string;
+    /**
+     * @format int64
+     */
+    directory_id?: number | null;
+    /**
+     * @format int32
+     */
+    directory_node_id?: number | null;
+    /**
+     * @deprecated true
+     */
+    external_directory_node_id?: string | null;
+    /**
+     * @example 2403
+     * @format int32
+     */
+    id: number;
+    /**
+     * @format date-time
+     */
+    last_modified: string;
+    provenance?: string | null;
+  };
 };
 
 export type EmailSecurityCreateDisplayNameVariables = {
-  body?: Schemas.EmailSecurityCreateDisplayName | Schemas.EmailSecurityCreateDisplayName[];
+  body: Schemas.EmailSecurityCreateDisplayName;
   pathParams: EmailSecurityCreateDisplayNamePathParams;
 } & FetcherExtraProps;
 
@@ -44893,7 +44927,7 @@ export const emailSecurityCreateDisplayName = (
   fetch<
     EmailSecurityCreateDisplayNameResponse,
     EmailSecurityCreateDisplayNameError,
-    Schemas.EmailSecurityCreateDisplayName | Schemas.EmailSecurityCreateDisplayName[],
+    Schemas.EmailSecurityCreateDisplayName,
     {},
     {},
     EmailSecurityCreateDisplayNamePathParams
@@ -44966,6 +45000,12 @@ export type EmailSecurityGetDisplayNameError = Fetcher.ErrorWrapper<{
 
 export type EmailSecurityGetDisplayNameResponse = Schemas.EmailSecurityApiResponseCommon & {
   result: {
+    email?: string;
+    is_email_regex?: boolean;
+    /**
+     * @maxLength 1024
+     */
+    name?: string;
     comments?: string | null;
     /**
      * @format date-time
@@ -44979,7 +45019,6 @@ export type EmailSecurityGetDisplayNameResponse = Schemas.EmailSecurityApiRespon
      * @format int32
      */
     directory_node_id?: number | null;
-    email?: string | null;
     /**
      * @deprecated true
      */
@@ -44989,12 +45028,10 @@ export type EmailSecurityGetDisplayNameResponse = Schemas.EmailSecurityApiRespon
      * @format int32
      */
     id: number;
-    is_email_regex: boolean;
     /**
      * @format date-time
      */
     last_modified: string;
-    name: string;
     provenance?: string | null;
   };
 };
@@ -45034,6 +45071,12 @@ export type EmailSecurityUpdateDisplayNameError = Fetcher.ErrorWrapper<{
 
 export type EmailSecurityUpdateDisplayNameResponse = Schemas.EmailSecurityApiResponseCommon & {
   result: {
+    email?: string;
+    is_email_regex?: boolean;
+    /**
+     * @maxLength 1024
+     */
+    name?: string;
     comments?: string | null;
     /**
      * @format date-time
@@ -45047,7 +45090,6 @@ export type EmailSecurityUpdateDisplayNameResponse = Schemas.EmailSecurityApiRes
      * @format int32
      */
     directory_node_id?: number | null;
-    email?: string | null;
     /**
      * @deprecated true
      */
@@ -45057,12 +45099,10 @@ export type EmailSecurityUpdateDisplayNameResponse = Schemas.EmailSecurityApiRes
      * @format int32
      */
     id: number;
-    is_email_regex: boolean;
     /**
      * @format date-time
      */
     last_modified: string;
-    name: string;
     provenance?: string | null;
   };
 };
@@ -45070,6 +45110,9 @@ export type EmailSecurityUpdateDisplayNameResponse = Schemas.EmailSecurityApiRes
 export type EmailSecurityUpdateDisplayNameRequestBody = {
   email?: string | null;
   is_email_regex?: boolean | null;
+  /**
+   * @maxLength 1024
+   */
   name?: string | null;
 };
 
@@ -102892,19 +102935,25 @@ export type TieredCachingGetTieredCachingSettingPathParams = {
 
 export type TieredCachingGetTieredCachingSettingError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.CacheRulesResponseSingle & Schemas.CacheRulesApiResponseCommonFailure;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
 }>;
+
+export type TieredCachingGetTieredCachingSettingResponse = Schemas.CacheRulesZoneCacheSettingsResponseSingle &
+  Schemas.CacheRulesTieredCacheResponseValue;
 
 export type TieredCachingGetTieredCachingSettingVariables = {
   pathParams: TieredCachingGetTieredCachingSettingPathParams;
 } & FetcherExtraProps;
 
+/**
+ * Tiered Cache works by dividing Cloudflare's data centers into a hierarchy of lower-tiers and upper-tiers. If content is not cached in lower-tier data centers (generally the ones closest to a visitor), the lower-tier must ask an upper-tier to see if it has the content. If the upper-tier does not have the content, only the upper-tier can ask the origin for content. This practice improves bandwidth efficiency by limiting the number of data centers that can ask the origin for content, which reduces origin load and makes websites more cost-effective to operate. Additionally, Tiered Cache concentrates connections to origin servers so they come from a small number of data centers rather than the full set of network locations. This results in fewer open connections using server resources.
+ */
 export const tieredCachingGetTieredCachingSetting = (
   variables: TieredCachingGetTieredCachingSettingVariables,
   signal?: AbortSignal
 ) =>
   fetch<
-    Schemas.CacheRulesResponseSingle,
+    TieredCachingGetTieredCachingSettingResponse,
     TieredCachingGetTieredCachingSettingError,
     undefined,
     {},
@@ -102918,8 +102967,11 @@ export type TieredCachingPatchTieredCachingSettingPathParams = {
 
 export type TieredCachingPatchTieredCachingSettingError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.CacheRulesResponseSingle & Schemas.CacheRulesApiResponseCommonFailure;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
 }>;
+
+export type TieredCachingPatchTieredCachingSettingResponse = Schemas.CacheRulesZoneCacheSettingsResponseSingle &
+  Schemas.CacheRulesTieredCacheResponseValue;
 
 export type TieredCachingPatchTieredCachingSettingVariables = {
   body: Schemas.CacheRulesPatch;
@@ -102927,14 +102979,14 @@ export type TieredCachingPatchTieredCachingSettingVariables = {
 } & FetcherExtraProps;
 
 /**
- * Updates enablement of Tiered Caching
+ * Tiered Cache works by dividing Cloudflare's data centers into a hierarchy of lower-tiers and upper-tiers. If content is not cached in lower-tier data centers (generally the ones closest to a visitor), the lower-tier must ask an upper-tier to see if it has the content. If the upper-tier does not have the content, only the upper-tier can ask the origin for content. This practice improves bandwidth efficiency by limiting the number of data centers that can ask the origin for content, which reduces origin load and makes websites more cost-effective to operate. Additionally, Tiered Cache concentrates connections to origin servers so they come from a small number of data centers rather than the full set of network locations. This results in fewer open connections using server resources.
  */
 export const tieredCachingPatchTieredCachingSetting = (
   variables: TieredCachingPatchTieredCachingSettingVariables,
   signal?: AbortSignal
 ) =>
   fetch<
-    Schemas.CacheRulesResponseSingle,
+    TieredCachingPatchTieredCachingSettingResponse,
     TieredCachingPatchTieredCachingSettingError,
     Schemas.CacheRulesPatch,
     {},
@@ -103155,8 +103207,7 @@ export type ZoneCacheSettingsGetCacheReserveSettingPathParams = {
 
 export type ZoneCacheSettingsGetCacheReserveSettingError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: (Schemas.CacheRulesZoneCacheSettingsResponseSingle & Schemas.CacheRulesCacheReserveResponseValue) &
-    Schemas.CacheRulesApiResponseCommonFailure;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
 }>;
 
 export type ZoneCacheSettingsGetCacheReserveSettingResponse = Schemas.CacheRulesZoneCacheSettingsResponseSingle &
@@ -103188,8 +103239,7 @@ export type ZoneCacheSettingsChangeCacheReserveSettingPathParams = {
 
 export type ZoneCacheSettingsChangeCacheReserveSettingError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: (Schemas.CacheRulesZoneCacheSettingsResponseSingle & Schemas.CacheRulesCacheReserveResponseValue) &
-    Schemas.CacheRulesApiResponseCommonFailure;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
 }>;
 
 export type ZoneCacheSettingsChangeCacheReserveSettingResponse = Schemas.CacheRulesZoneCacheSettingsResponseSingle &
@@ -103226,11 +103276,10 @@ export type ZoneCacheSettingsGetCacheReserveClearPathParams = {
 
 export type ZoneCacheSettingsGetCacheReserveClearError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: (Schemas.CacheRulesZoneCacheSettingsResponseSingle & Schemas.CacheRulesCacheReserveClearResponseValue) &
-    Schemas.CacheRulesApiResponseCommonFailure;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
 }>;
 
-export type ZoneCacheSettingsGetCacheReserveClearResponse = Schemas.CacheRulesZoneCacheSettingsResponseSingle &
+export type ZoneCacheSettingsGetCacheReserveClearResponse = Schemas.CacheRulesApiResponseCommon &
   Schemas.CacheRulesCacheReserveClearResponseValue;
 
 export type ZoneCacheSettingsGetCacheReserveClearVariables = {
@@ -103259,11 +103308,10 @@ export type ZoneCacheSettingsStartCacheReserveClearPathParams = {
 
 export type ZoneCacheSettingsStartCacheReserveClearError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: (Schemas.CacheRulesZoneCacheSettingsResponseSingle & Schemas.CacheRulesCacheReserveClearResponseValue) &
-    Schemas.CacheRulesApiResponseCommonFailure;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
 }>;
 
-export type ZoneCacheSettingsStartCacheReserveClearResponse = Schemas.CacheRulesZoneCacheSettingsResponseSingle &
+export type ZoneCacheSettingsStartCacheReserveClearResponse = Schemas.CacheRulesApiResponseCommon &
   Schemas.CacheRulesCacheReserveClearResponseValue;
 
 export type ZoneCacheSettingsStartCacheReserveClearVariables = {
@@ -103292,11 +103340,11 @@ export type ZoneCacheSettingsGetOriginPostQuantumEncryptionSettingPathParams = {
 
 export type ZoneCacheSettingsGetOriginPostQuantumEncryptionSettingError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.CacheRulesOriginPostQuantumEncryptionValue & Schemas.CacheRulesApiResponseCommonFailure;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
 }>;
 
 export type ZoneCacheSettingsGetOriginPostQuantumEncryptionSettingResponse =
-  Schemas.CacheRulesZoneCacheSettingsResponseSingle & Schemas.CacheRulesOriginPostQuantumEncryptionValue;
+  Schemas.CacheRulesZoneCacheSettingsResponseSingle & Schemas.CacheRulesOriginPostQuantumEncryptionResponseValue;
 
 export type ZoneCacheSettingsGetOriginPostQuantumEncryptionSettingVariables = {
   pathParams: ZoneCacheSettingsGetOriginPostQuantumEncryptionSettingPathParams;
@@ -103324,11 +103372,11 @@ export type ZoneCacheSettingsChangeOriginPostQuantumEncryptionSettingPathParams 
 
 export type ZoneCacheSettingsChangeOriginPostQuantumEncryptionSettingError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.CacheRulesOriginPostQuantumEncryptionValue & Schemas.CacheRulesApiResponseCommonFailure;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
 }>;
 
 export type ZoneCacheSettingsChangeOriginPostQuantumEncryptionSettingResponse =
-  Schemas.CacheRulesZoneCacheSettingsResponseSingle & Schemas.CacheRulesOriginPostQuantumEncryptionValue;
+  Schemas.CacheRulesZoneCacheSettingsResponseSingle & Schemas.CacheRulesOriginPostQuantumEncryptionResponseValue;
 
 export type ZoneCacheSettingsChangeOriginPostQuantumEncryptionSettingRequestBody = {
   value: Schemas.CacheRulesOriginPostQuantumEncryptionValue;
@@ -103353,7 +103401,7 @@ export const zoneCacheSettingsChangeOriginPostQuantumEncryptionSetting = (
     {},
     {},
     ZoneCacheSettingsChangeOriginPostQuantumEncryptionSettingPathParams
-  >({ url: '/zones/{zoneId}/cache/origin_post_quantum_encryption', method: 'put', ...variables, signal });
+  >({ url: '/zones/{zoneId}/cache/origin_post_quantum_encryption', method: 'patch', ...variables, signal });
 
 export type ZoneCacheSettingsGetRegionalTieredCacheSettingPathParams = {
   zoneId: Schemas.CacheRulesIdentifier;
@@ -103361,8 +103409,7 @@ export type ZoneCacheSettingsGetRegionalTieredCacheSettingPathParams = {
 
 export type ZoneCacheSettingsGetRegionalTieredCacheSettingError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: (Schemas.CacheRulesZoneCacheSettingsResponseSingle & Schemas.CacheRulesRegionalTieredCacheResponseValue) &
-    Schemas.CacheRulesApiResponseCommonFailure;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
 }>;
 
 export type ZoneCacheSettingsGetRegionalTieredCacheSettingResponse = Schemas.CacheRulesZoneCacheSettingsResponseSingle &
@@ -103394,8 +103441,7 @@ export type ZoneCacheSettingsChangeRegionalTieredCacheSettingPathParams = {
 
 export type ZoneCacheSettingsChangeRegionalTieredCacheSettingError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: (Schemas.CacheRulesZoneCacheSettingsResponseSingle & Schemas.CacheRulesRegionalTieredCacheResponseValue) &
-    Schemas.CacheRulesApiResponseCommonFailure;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
 }>;
 
 export type ZoneCacheSettingsChangeRegionalTieredCacheSettingResponse =
@@ -103432,22 +103478,27 @@ export type SmartTieredCacheDeleteSmartTieredCacheSettingPathParams = {
 
 export type SmartTieredCacheDeleteSmartTieredCacheSettingError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.CacheRulesResponseSingle & Schemas.CacheRulesApiResponseCommonFailure;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
 }>;
+
+export type SmartTieredCacheDeleteSmartTieredCacheSettingResponse =
+  Schemas.CacheRulesZoneCacheSettingsDeleteResponseSingle & {
+    result?: Schemas.CacheRulesSmartTieredCache;
+  };
 
 export type SmartTieredCacheDeleteSmartTieredCacheSettingVariables = {
   pathParams: SmartTieredCacheDeleteSmartTieredCacheSettingPathParams;
 } & FetcherExtraProps;
 
 /**
- * Remvoves enablement of Smart Tiered Cache
+ * Smart Tiered Cache dynamically selects the single closest upper tier for each of your website’s origins with no configuration required, using our in-house performance and routing data. Cloudflare collects latency data for each request to an origin, and uses the latency data to determine how well any upper-tier data center is connected with an origin. As a result, Cloudflare can select the data center with the lowest latency to be the upper-tier for an origin.
  */
 export const smartTieredCacheDeleteSmartTieredCacheSetting = (
   variables: SmartTieredCacheDeleteSmartTieredCacheSettingVariables,
   signal?: AbortSignal
 ) =>
   fetch<
-    Schemas.CacheRulesResponseSingle,
+    SmartTieredCacheDeleteSmartTieredCacheSettingResponse,
     SmartTieredCacheDeleteSmartTieredCacheSettingError,
     undefined,
     {},
@@ -103461,19 +103512,25 @@ export type SmartTieredCacheGetSmartTieredCacheSettingPathParams = {
 
 export type SmartTieredCacheGetSmartTieredCacheSettingError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.CacheRulesResponseSingle & Schemas.CacheRulesApiResponseCommonFailure;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
 }>;
+
+export type SmartTieredCacheGetSmartTieredCacheSettingResponse = Schemas.CacheRulesZoneCacheSettingsResponseSingle &
+  Schemas.CacheRulesSmartTieredCacheResponseValue;
 
 export type SmartTieredCacheGetSmartTieredCacheSettingVariables = {
   pathParams: SmartTieredCacheGetSmartTieredCacheSettingPathParams;
 } & FetcherExtraProps;
 
+/**
+ * Smart Tiered Cache dynamically selects the single closest upper tier for each of your website’s origins with no configuration required, using our in-house performance and routing data. Cloudflare collects latency data for each request to an origin, and uses the latency data to determine how well any upper-tier data center is connected with an origin. As a result, Cloudflare can select the data center with the lowest latency to be the upper-tier for an origin.
+ */
 export const smartTieredCacheGetSmartTieredCacheSetting = (
   variables: SmartTieredCacheGetSmartTieredCacheSettingVariables,
   signal?: AbortSignal
 ) =>
   fetch<
-    Schemas.CacheRulesResponseSingle,
+    SmartTieredCacheGetSmartTieredCacheSettingResponse,
     SmartTieredCacheGetSmartTieredCacheSettingError,
     undefined,
     {},
@@ -103487,8 +103544,11 @@ export type SmartTieredCachePatchSmartTieredCacheSettingPathParams = {
 
 export type SmartTieredCachePatchSmartTieredCacheSettingError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.CacheRulesResponseSingle & Schemas.CacheRulesApiResponseCommonFailure;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
 }>;
+
+export type SmartTieredCachePatchSmartTieredCacheSettingResponse = Schemas.CacheRulesZoneCacheSettingsResponseSingle &
+  Schemas.CacheRulesSmartTieredCacheResponseValue;
 
 export type SmartTieredCachePatchSmartTieredCacheSettingVariables = {
   body: Schemas.CacheRulesSmartTieredCachePatch;
@@ -103496,14 +103556,14 @@ export type SmartTieredCachePatchSmartTieredCacheSettingVariables = {
 } & FetcherExtraProps;
 
 /**
- * Updates enablement of Tiered Cache
+ * Smart Tiered Cache dynamically selects the single closest upper tier for each of your website’s origins with no configuration required, using our in-house performance and routing data. Cloudflare collects latency data for each request to an origin, and uses the latency data to determine how well any upper-tier data center is connected with an origin. As a result, Cloudflare can select the data center with the lowest latency to be the upper-tier for an origin.
  */
 export const smartTieredCachePatchSmartTieredCacheSetting = (
   variables: SmartTieredCachePatchSmartTieredCacheSettingVariables,
   signal?: AbortSignal
 ) =>
   fetch<
-    Schemas.CacheRulesResponseSingle,
+    SmartTieredCachePatchSmartTieredCacheSettingResponse,
     SmartTieredCachePatchSmartTieredCacheSettingError,
     Schemas.CacheRulesSmartTieredCachePatch,
     {},
@@ -103517,13 +103577,10 @@ export type ZoneCacheSettingsDeleteVariantsSettingPathParams = {
 
 export type ZoneCacheSettingsDeleteVariantsSettingError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: (Schemas.CacheRulesZoneCacheSettingsResponseSingle & {
-    result?: Schemas.CacheRulesVariants;
-  }) &
-    Schemas.CacheRulesApiResponseCommonFailure;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
 }>;
 
-export type ZoneCacheSettingsDeleteVariantsSettingResponse = Schemas.CacheRulesZoneCacheSettingsResponseSingle & {
+export type ZoneCacheSettingsDeleteVariantsSettingResponse = Schemas.CacheRulesZoneCacheSettingsDeleteResponseSingle & {
   result?: Schemas.CacheRulesVariants;
 };
 
@@ -103553,8 +103610,7 @@ export type ZoneCacheSettingsGetVariantsSettingPathParams = {
 
 export type ZoneCacheSettingsGetVariantsSettingError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: (Schemas.CacheRulesZoneCacheSettingsResponseSingle & Schemas.CacheRulesVariantsResponseValue) &
-    Schemas.CacheRulesApiResponseCommonFailure;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
 }>;
 
 export type ZoneCacheSettingsGetVariantsSettingResponse = Schemas.CacheRulesZoneCacheSettingsResponseSingle &
@@ -103586,8 +103642,7 @@ export type ZoneCacheSettingsChangeVariantsSettingPathParams = {
 
 export type ZoneCacheSettingsChangeVariantsSettingError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: (Schemas.CacheRulesZoneCacheSettingsResponseSingle & Schemas.CacheRulesVariantsResponseValue) &
-    Schemas.CacheRulesApiResponseCommonFailure;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
 }>;
 
 export type ZoneCacheSettingsChangeVariantsSettingResponse = Schemas.CacheRulesZoneCacheSettingsResponseSingle &
@@ -112045,53 +112100,16 @@ export const zoneSettingsEditZoneSettingsInfo = (
     ZoneSettingsEditZoneSettingsInfoPathParams
   >({ url: '/zones/{zoneId}/settings', method: 'patch', ...variables, signal });
 
-export type ZoneCacheSettingsDeleteAegisSettingPathParams = {
-  zoneId: Schemas.CacheRulesIdentifier;
-};
-
-export type ZoneCacheSettingsDeleteAegisSettingError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: (Schemas.CacheRulesZoneCacheSettingsResponseSingle & {
-    result?: Schemas.CacheRulesAegis;
-  }) &
-    Schemas.CacheRulesApiResponseCommonFailure;
-}>;
-
-export type ZoneCacheSettingsDeleteAegisSettingResponse = Schemas.CacheRulesZoneCacheSettingsResponseSingle & {
-  result?: Schemas.CacheRulesAegis;
-};
-
-export type ZoneCacheSettingsDeleteAegisSettingVariables = {
-  pathParams: ZoneCacheSettingsDeleteAegisSettingPathParams;
-} & FetcherExtraProps;
-
-/**
- * Aegis provides dedicated egress IPs (from Cloudflare to your origin) for your layer 7 WAF and CDN services. The egress IPs are reserved exclusively for your account so that you can increase your origin security by only allowing traffic from a small list of IP addresses.
- */
-export const zoneCacheSettingsDeleteAegisSetting = (
-  variables: ZoneCacheSettingsDeleteAegisSettingVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    ZoneCacheSettingsDeleteAegisSettingResponse,
-    ZoneCacheSettingsDeleteAegisSettingError,
-    undefined,
-    {},
-    {},
-    ZoneCacheSettingsDeleteAegisSettingPathParams
-  >({ url: '/zones/{zoneId}/settings/aegis', method: 'delete', ...variables, signal });
-
 export type ZoneCacheSettingsGetAegisSettingPathParams = {
   zoneId: Schemas.CacheRulesIdentifier;
 };
 
 export type ZoneCacheSettingsGetAegisSettingError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: (Schemas.CacheRulesZoneCacheSettingsResponseSingle & Schemas.CacheRulesAegisResponseValue) &
-    Schemas.CacheRulesApiResponseCommonFailure;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
 }>;
 
-export type ZoneCacheSettingsGetAegisSettingResponse = Schemas.CacheRulesZoneCacheSettingsResponseSingle &
+export type ZoneCacheSettingsGetAegisSettingResponse = Schemas.CacheRulesZoneComplexCacheSettingsResponseSingle &
   Schemas.CacheRulesAegisResponseValue;
 
 export type ZoneCacheSettingsGetAegisSettingVariables = {
@@ -112120,11 +112138,10 @@ export type ZoneCacheSettingsChangeAegisSettingPathParams = {
 
 export type ZoneCacheSettingsChangeAegisSettingError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: (Schemas.CacheRulesZoneCacheSettingsResponseSingle & Schemas.CacheRulesAegisResponseValue) &
-    Schemas.CacheRulesApiResponseCommonFailure;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
 }>;
 
-export type ZoneCacheSettingsChangeAegisSettingResponse = Schemas.CacheRulesZoneCacheSettingsResponseSingle &
+export type ZoneCacheSettingsChangeAegisSettingResponse = Schemas.CacheRulesZoneComplexCacheSettingsResponseSingle &
   Schemas.CacheRulesAegisResponseValue;
 
 export type ZoneCacheSettingsChangeAegisSettingRequestBody = {
@@ -112228,8 +112245,7 @@ export type ZoneCacheSettingsGetOriginMaxHttpVersionSettingPathParams = {
 
 export type ZoneCacheSettingsGetOriginMaxHttpVersionSettingError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: (Schemas.CacheRulesZoneCacheSettingsResponseSingle & Schemas.CacheRulesOriginMaxHttpVersionResponseValue) &
-    Schemas.CacheRulesApiResponseCommonFailure;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
 }>;
 
 export type ZoneCacheSettingsGetOriginMaxHttpVersionSettingResponse =
@@ -112261,8 +112277,7 @@ export type ZoneCacheSettingsChangeOriginMaxHttpVersionSettingPathParams = {
 
 export type ZoneCacheSettingsChangeOriginMaxHttpVersionSettingError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: (Schemas.CacheRulesZoneCacheSettingsResponseSingle & Schemas.CacheRulesOriginMaxHttpVersionResponseValue) &
-    Schemas.CacheRulesApiResponseCommonFailure;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
 }>;
 
 export type ZoneCacheSettingsChangeOriginMaxHttpVersionSettingResponse =
@@ -117142,11 +117157,8 @@ export const operationsByTag = {
     zoneCacheSettingsDeleteVariantsSetting,
     zoneCacheSettingsGetVariantsSetting,
     zoneCacheSettingsChangeVariantsSetting,
-    zoneCacheSettingsDeleteAegisSetting,
     zoneCacheSettingsGetAegisSetting,
-    zoneCacheSettingsChangeAegisSetting,
-    zoneCacheSettingsGetOriginMaxHttpVersionSetting,
-    zoneCacheSettingsChangeOriginMaxHttpVersionSetting
+    zoneCacheSettingsGetOriginMaxHttpVersionSetting
   },
   originPostQuantum: {
     zoneCacheSettingsGetOriginPostQuantumEncryptionSetting,
@@ -117429,8 +117441,10 @@ export const operationsByTag = {
   zoneSettings: {
     zoneSettingsGetAllZoneSettings,
     zoneSettingsEditZoneSettingsInfo,
+    zoneCacheSettingsChangeAegisSetting,
     zoneSettingsGetFontsSetting,
     zoneSettingsChangeFontsSetting,
+    zoneCacheSettingsChangeOriginMaxHttpVersionSetting,
     zoneSettingsGetSpeedBrainSetting,
     zoneSettingsChangeSpeedBrainSetting,
     zoneSettingsGetSingleSetting,

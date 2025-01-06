@@ -9535,21 +9535,17 @@ export type CacheRulesAegis = {
    */
   id: 'aegis';
   /**
-   * last time this setting was modified.
+   * Last time this setting was modified.
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
    */
-  modified_on: string | null;
+  modified_on?: string | null;
+  value?: CacheRulesAegisValue;
 };
 
 export type CacheRulesAegisResponseValue = {
-  /**
-   * Aegis provides dedicated egress IPs (from Cloudflare to your origin) for your layer 7 WAF and CDN services. The egress IPs are reserved exclusively for your account so that you can increase your origin security by only allowing traffic from a small list of IP addresses.
-   */
-  result?: CacheRulesAegis & {
-    value: CacheRulesAegisValue;
-  };
+  result?: CacheRulesAegis;
 };
 
 /**
@@ -9557,7 +9553,13 @@ export type CacheRulesAegisResponseValue = {
  */
 export type CacheRulesAegisValue = {
   /**
+   * Whether the feature is enabled or not.
+   */
+  enabled?: boolean;
+  /**
    * Egress pool id which refers to a grouping of dedicated egress IPs through which Cloudflare will connect to origin.
+   *
+   * @example pool-id
    */
   pool_id?: string;
 };
@@ -9565,7 +9567,6 @@ export type CacheRulesAegisValue = {
 export type CacheRulesApiResponseCommon = {
   errors: CacheRulesMessages;
   messages: CacheRulesMessages;
-  result: Record<string, any> | any[] | string;
   /**
    * Whether the API call was successful
    *
@@ -9590,30 +9591,18 @@ export type CacheRulesApiResponseCommonFailure = {
   success: false;
 };
 
-export type CacheRulesApiResponseSingle = {
-  errors: CacheRulesMessages;
-  messages: CacheRulesMessages;
-  result: (Record<string, any> | null) | (string | null) | string;
-  /**
-   * Whether the API call was successful
-   *
-   * @example true
-   */
-  success: true;
-};
-
 export type CacheRulesBase = {
   /**
    * Identifier of the zone setting.
    */
   id: string;
   /**
-   * last time this setting was modified.
+   * Last time this setting was modified.
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
    */
-  modified_on: string | null;
+  modified_on?: string | null;
 };
 
 /**
@@ -9627,12 +9616,12 @@ export type CacheRulesCacheReserve = {
    */
   id: 'cache_reserve';
   /**
-   * last time this setting was modified.
+   * Last time this setting was modified.
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
    */
-  modified_on: string | null;
+  modified_on?: string | null;
 };
 
 /**
@@ -9646,12 +9635,12 @@ export type CacheRulesCacheReserveClear = {
    */
   id: 'cache_reserve_clear';
   /**
-   * last time this setting was modified.
+   * Last time this setting was modified.
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
    */
-  modified_on: string | null;
+  modified_on?: string | null;
 };
 
 /**
@@ -9661,13 +9650,6 @@ export type CacheRulesCacheReserveClear = {
  * @format date-time
  */
 export type CacheRulesCacheReserveClearEndTs = string;
-
-/**
- * The POST request body does not carry any information.
- *
- * @example {}
- */
-export type CacheRulesCacheReserveClearPostRequestBody = string;
 
 export type CacheRulesCacheReserveClearResponseValue = {
   /**
@@ -9738,21 +9720,17 @@ export type CacheRulesOriginMaxHttpVersion = {
    */
   id: 'origin_max_http_version';
   /**
-   * last time this setting was modified.
+   * Last time this setting was modified.
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
    */
-  modified_on: string | null;
+  modified_on?: string | null;
+  value?: CacheRulesOriginMaxHttpVersionValue;
 };
 
 export type CacheRulesOriginMaxHttpVersionResponseValue = {
-  /**
-   * Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will attempt to use with your origin. This setting allows Cloudflare to make HTTP/2 requests to your origin. (Refer to [Enable HTTP/2 to Origin](https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/), for more information.). The default value is "2" for all plan types except ENT where it is "1"
-   */
-  result?: CacheRulesOriginMaxHttpVersion & {
-    value: CacheRulesOriginMaxHttpVersionValue;
-  };
+  result?: CacheRulesOriginMaxHttpVersion;
 };
 
 /**
@@ -9771,12 +9749,12 @@ export type CacheRulesOriginPostQuantumEncryption = {
    */
   id: 'origin_pqe';
   /**
-   * last time this setting was modified.
+   * Last time this setting was modified.
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
    */
-  modified_on: string | null;
+  modified_on?: string | null;
 };
 
 export type CacheRulesOriginPostQuantumEncryptionResponseValue = {
@@ -9784,7 +9762,7 @@ export type CacheRulesOriginPostQuantumEncryptionResponseValue = {
    * Instructs Cloudflare to use Post-Quantum (PQ) key agreement algorithms when connecting to your origin. Preferred instructs Cloudflare to opportunistically send a Post-Quantum keyshare in the first message to the origin (for fastest connections when the origin supports and prefers PQ), supported means that PQ algorithms are advertised but only used when requested by the origin, and off means that PQ algorithms are not advertised
    */
   result?: CacheRulesOriginPostQuantumEncryption & {
-    value: CacheRulesOriginPostQuantumEncryption;
+    value: CacheRulesOriginPostQuantumEncryptionValue;
   };
 };
 
@@ -9813,12 +9791,12 @@ export type CacheRulesRegionalTieredCache = {
    */
   id: 'tc_regional';
   /**
-   * last time this setting was modified.
+   * Last time this setting was modified.
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
    */
-  modified_on: string | null;
+  modified_on?: string | null;
 };
 
 export type CacheRulesRegionalTieredCacheResponseValue = {
@@ -9826,7 +9804,7 @@ export type CacheRulesRegionalTieredCacheResponseValue = {
    * Instructs Cloudflare to check a regional hub data center on the way to your upper tier. This can help improve performance for smart and custom tiered cache topologies.
    */
   result?: CacheRulesRegionalTieredCache & {
-    value: CacheRulesRegionalTieredCache;
+    value: CacheRulesRegionalTieredCacheValue;
   };
 };
 
@@ -9836,10 +9814,6 @@ export type CacheRulesRegionalTieredCacheResponseValue = {
  * @default off
  */
 export type CacheRulesRegionalTieredCacheValue = 'on' | 'off';
-
-export type CacheRulesResponseSingle = CacheRulesApiResponseSingle & {
-  result?: CacheRulesResultObject;
-};
 
 export type CacheRulesResultObject = {
   /**
@@ -9855,11 +9829,65 @@ export type CacheRulesResultObject = {
    *
    * @format date-time
    */
-  modified_on: string;
+  modified_on?: string;
   /**
-   * The status of the feature being on / off
+   * The value of the feature
    */
-  value: 'on' | 'off';
+  value: string;
+};
+
+export type CacheRulesResultObjectComplex = {
+  /**
+   * Whether the setting is editable
+   */
+  editable: boolean;
+  /**
+   * The identifier of the caching setting
+   */
+  id: string;
+  /**
+   * The time when the setting was last modified
+   *
+   * @format date-time
+   */
+  modified_on?: string;
+  /**
+   * The value of the feature
+   */
+  value: Record<string, any>;
+};
+
+export type CacheRulesResultObjectDelete = {
+  /**
+   * Whether the setting is editable
+   */
+  editable: boolean;
+  /**
+   * The identifier of the caching setting
+   */
+  id: string;
+  /**
+   * The time when the setting was last modified
+   *
+   * @format date-time
+   */
+  modified_on?: string;
+};
+
+export type CacheRulesSmartTieredCache = {
+  /**
+   * ID of the zone setting.
+   *
+   * @example tiered_cache_smart_topology_enable
+   */
+  id: 'tiered_cache_smart_topology_enable';
+  /**
+   * Last time this setting was modified.
+   *
+   * @example 2014-01-01T05:20:00.12345Z
+   * @format date-time
+   */
+  modified_on?: string | null;
 };
 
 /**
@@ -9873,6 +9901,48 @@ export type CacheRulesSmartTieredCachePatch = {
    */
   value: 'on' | 'off';
 };
+
+export type CacheRulesSmartTieredCacheResponseValue = {
+  result?: CacheRulesSmartTieredCache & {
+    value: CacheRulesSmartTieredCacheValue;
+  };
+};
+
+/**
+ * Value of the Smart Tiered Cache zone setting.
+ *
+ * @default off
+ */
+export type CacheRulesSmartTieredCacheValue = 'on' | 'off';
+
+export type CacheRulesTieredCache = {
+  /**
+   * ID of the zone setting.
+   *
+   * @example tiered_caching
+   */
+  id: 'tiered_caching';
+  /**
+   * Last time this setting was modified.
+   *
+   * @example 2014-01-01T05:20:00.12345Z
+   * @format date-time
+   */
+  modified_on?: string | null;
+};
+
+export type CacheRulesTieredCacheResponseValue = {
+  result?: CacheRulesTieredCache & {
+    value: CacheRulesTieredCacheValue;
+  };
+};
+
+/**
+ * Value of the Tiered Cache zone setting.
+ *
+ * @default off
+ */
+export type CacheRulesTieredCacheValue = 'on' | 'off';
 
 /**
  * Enables Tiered Caching.
@@ -9892,12 +9962,12 @@ export type CacheRulesVariants = {
    */
   id: 'variants';
   /**
-   * last time this setting was modified.
+   * Last time this setting was modified.
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
    */
-  modified_on: string | null;
+  modified_on?: string | null;
 };
 
 export type CacheRulesVariantsResponseValue = {
@@ -10003,8 +10073,16 @@ export type CacheRulesVariantsValue = {
   webp?: string[];
 };
 
-export type CacheRulesZoneCacheSettingsResponseSingle = CacheRulesApiResponseSingle & {
-  result?: Record<string, any>;
+export type CacheRulesZoneCacheSettingsDeleteResponseSingle = CacheRulesApiResponseCommon & {
+  result?: CacheRulesResultObjectDelete;
+};
+
+export type CacheRulesZoneCacheSettingsResponseSingle = CacheRulesApiResponseCommon & {
+  result?: CacheRulesResultObject;
+};
+
+export type CacheRulesZoneComplexCacheSettingsResponseSingle = CacheRulesApiResponseCommon & {
+  result?: CacheRulesResultObjectComplex;
 };
 
 export type CacheApiResponseCommon = {
@@ -16082,6 +16160,9 @@ export type EmailSecurityCreateBlockedSender = {
 export type EmailSecurityCreateDisplayName = {
   email: string;
   is_email_regex: boolean;
+  /**
+   * @maxLength 1024
+   */
   name: string;
 };
 
@@ -16115,6 +16196,12 @@ export type EmailSecurityCreateTrustedDomain = {
 export type EmailSecurityDeliveryMode = 'DIRECT' | 'BCC' | 'JOURNAL' | 'API' | 'RETRO_SCAN';
 
 export type EmailSecurityDisplayName = {
+  email?: string;
+  is_email_regex?: boolean;
+  /**
+   * @maxLength 1024
+   */
+  name?: string;
   comments?: string | null;
   /**
    * @format date-time
@@ -16128,7 +16215,6 @@ export type EmailSecurityDisplayName = {
    * @format int32
    */
   directory_node_id?: number | null;
-  email?: string | null;
   /**
    * @deprecated true
    */
@@ -16138,12 +16224,10 @@ export type EmailSecurityDisplayName = {
    * @format int32
    */
   id: number;
-  is_email_regex: boolean;
   /**
    * @format date-time
    */
   last_modified: string;
-  name: string;
   provenance?: string | null;
 };
 
