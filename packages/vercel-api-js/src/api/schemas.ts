@@ -527,13 +527,13 @@ export type AuthUser = {
    */
   avatar: string | null;
   /**
-   * The user's default team. Only applies if the user's `version` is `'northstar'`.
+   * The user's default team.
    */
   defaultTeamId: string | null;
   /**
-   * The user's version. Will either be unset or `northstar`.
+   * The user's version. Will always be `northstar`.
    */
-  version: 'northstar' | null;
+  version: 'northstar';
 };
 
 /**
@@ -575,13 +575,13 @@ export type AuthUserLimited = {
    */
   avatar: string | null;
   /**
-   * The user's default team. Only applies if the user's `version` is `'northstar'`.
+   * The user's default team.
    */
   defaultTeamId: string | null;
   /**
-   * The user's version. Will either be unset or `northstar`.
+   * The user's version. Will always be `northstar`.
    */
-  version: 'northstar' | null;
+  version: 'northstar';
 };
 
 /**
