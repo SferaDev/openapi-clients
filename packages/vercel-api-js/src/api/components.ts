@@ -17725,6 +17725,279 @@ export const getFirewallConfig = (variables: GetFirewallConfigVariables, signal?
     signal
   });
 
+export type GetBypassIpQueryParams = {
+  projectId: string;
+  /**
+   * @example 10
+   * @maximum 128
+   */
+  limit?: number;
+  /**
+   * Filter by source IP
+   *
+   * @maxLength 49
+   */
+  sourceIp?: string;
+  /**
+   * Filter by domain
+   *
+   * @pattern ([a-z]+[a-z.]+)$
+   * @maxLength 2544
+   */
+  domain?: string;
+  /**
+   * Filter by project scoped rules
+   */
+  projectScope?: boolean;
+  /**
+   * Used for pagination. Retrieves results after the provided id
+   *
+   * @maxLength 2560
+   */
+  offset?: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type GetBypassIpError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetBypassIpVariables = {
+  queryParams: GetBypassIpQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieve the system bypass rules configured for the specified project
+ */
+export const getBypassIp = (variables: GetBypassIpVariables, signal?: AbortSignal) =>
+  fetch<
+    | {
+        result: {
+          OwnerId: string;
+          Id: string;
+          Domain: string;
+          Ip: string;
+          Project: string;
+          IsProjectRule: boolean;
+        }[];
+        pagination: void | null;
+      }
+    | {
+        result?: {
+          OwnerId: string;
+          Id: string;
+          Domain: string;
+          Ip: string;
+          Action?: 'block' | 'bypass';
+          ProjectId?: string;
+          IsProjectRule?: boolean;
+          Note?: string;
+          CreatedAt: string;
+          ActorId?: string;
+          UpdatedAt: string;
+          UpdatedAtHour: string;
+          DeletedAt?: string;
+          ExpiresAt?: number;
+        }[];
+        pagination?: {
+          OwnerId: string;
+          Id: string;
+        };
+      },
+    GetBypassIpError,
+    undefined,
+    {},
+    GetBypassIpQueryParams,
+    {}
+  >({ url: '/v1/security/firewall/bypass', method: 'get', ...variables, signal });
+
+export type AddBypassIpQueryParams = {
+  projectId: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type AddBypassIpError = Fetcher.ErrorWrapper<undefined>;
+
+export type AddBypassIpResponse = {
+  ok: boolean;
+};
+
+export type AddBypassIpVariables = {
+  body?:
+    | {
+        /**
+         * @pattern ([a-z]+[a-z.]+)$
+         * @maxLength 2544
+         */
+        domain: string;
+        projectScope?: boolean;
+        sourceIp?: string;
+        allSources?: boolean;
+        /**
+         * @maxLength 500
+         */
+        note?: string;
+      }
+    | {
+        /**
+         * @pattern ([a-z]+[a-z.]+)$
+         * @maxLength 2544
+         */
+        domain?: string;
+        projectScope: boolean;
+        sourceIp?: string;
+        allSources?: boolean;
+        /**
+         * @maxLength 500
+         */
+        note?: string;
+      };
+  queryParams: AddBypassIpQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Create new system bypass rules
+ */
+export const addBypassIp = (variables: AddBypassIpVariables, signal?: AbortSignal) =>
+  fetch<
+    AddBypassIpResponse,
+    AddBypassIpError,
+    | {
+        /**
+         * @pattern ([a-z]+[a-z.]+)$
+         * @maxLength 2544
+         */
+        domain: string;
+        projectScope?: boolean;
+        sourceIp?: string;
+        allSources?: boolean;
+        /**
+         * @maxLength 500
+         */
+        note?: string;
+      }
+    | {
+        /**
+         * @pattern ([a-z]+[a-z.]+)$
+         * @maxLength 2544
+         */
+        domain?: string;
+        projectScope: boolean;
+        sourceIp?: string;
+        allSources?: boolean;
+        /**
+         * @maxLength 500
+         */
+        note?: string;
+      },
+    {},
+    AddBypassIpQueryParams,
+    {}
+  >({ url: '/v1/security/firewall/bypass', method: 'post', ...variables, signal });
+
+export type RemoveBypassIpQueryParams = {
+  projectId: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type RemoveBypassIpError = Fetcher.ErrorWrapper<undefined>;
+
+export type RemoveBypassIpResponse = {
+  ok: boolean;
+};
+
+export type RemoveBypassIpVariables = {
+  body?:
+    | {
+        /**
+         * @pattern ([a-z]+[a-z.]+)$
+         * @maxLength 2544
+         */
+        domain: string;
+        projectScope?: boolean;
+        sourceIp?: string;
+        allSources?: boolean;
+        /**
+         * @maxLength 500
+         */
+        note?: string;
+      }
+    | {
+        /**
+         * @pattern ([a-z]+[a-z.]+)$
+         * @maxLength 2544
+         */
+        domain?: string;
+        projectScope: boolean;
+        sourceIp?: string;
+        allSources?: boolean;
+        /**
+         * @maxLength 500
+         */
+        note?: string;
+      };
+  queryParams: RemoveBypassIpQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Remove system bypass rules
+ */
+export const removeBypassIp = (variables: RemoveBypassIpVariables, signal?: AbortSignal) =>
+  fetch<
+    RemoveBypassIpResponse,
+    RemoveBypassIpError,
+    | {
+        /**
+         * @pattern ([a-z]+[a-z.]+)$
+         * @maxLength 2544
+         */
+        domain: string;
+        projectScope?: boolean;
+        sourceIp?: string;
+        allSources?: boolean;
+        /**
+         * @maxLength 500
+         */
+        note?: string;
+      }
+    | {
+        /**
+         * @pattern ([a-z]+[a-z.]+)$
+         * @maxLength 2544
+         */
+        domain?: string;
+        projectScope: boolean;
+        sourceIp?: string;
+        allSources?: boolean;
+        /**
+         * @maxLength 500
+         */
+        note?: string;
+      },
+    {},
+    RemoveBypassIpQueryParams,
+    {}
+  >({ url: '/v1/security/firewall/bypass', method: 'delete', ...variables, signal });
+
 export type GetTeamMembersQueryParams = {
   /**
    * Limit how many teams should be returned
@@ -21542,7 +21815,15 @@ export const operationsByTag = {
     createConfigurableLogDrain
   },
   projectMembers: { getProjectMembers, addProjectMember, removeProjectMember },
-  security: { updateAttackChallengeMode, putFirewallConfig, updateFirewallConfig, getFirewallConfig },
+  security: {
+    updateAttackChallengeMode,
+    putFirewallConfig,
+    updateFirewallConfig,
+    getFirewallConfig,
+    getBypassIp,
+    addBypassIp,
+    removeBypassIp
+  },
   teams: {
     getTeamMembers,
     inviteUserToTeam,
