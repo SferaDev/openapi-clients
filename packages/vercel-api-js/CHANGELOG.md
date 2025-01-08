@@ -1,5 +1,12 @@
 # vercel-api-js
 
+## 0.18.3
+
+### Patch Changes
+
+- e267193: The user's default team field description updated
+- fe9112f: Add bypass IP firewall endpoints
+
 ## 0.18.2
 
 ### Patch Changes
