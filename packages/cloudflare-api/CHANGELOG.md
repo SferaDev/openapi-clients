@@ -1,5 +1,11 @@
 # cloudflare-api-js
 
+## 0.2.1
+
+### Patch Changes
+
+- 86867c1: [OpenAPI] Spec updates for cloudflare-api-js
+
 ## 0.2.0
 
 ### Minor Changes
