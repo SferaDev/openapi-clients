@@ -18085,6 +18085,12 @@ export type GetTeamMembersResponse = {
      */
     role: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'VIEWER';
     /**
+     * Permissions that this user has in addition to their role.
+     *
+     * @example ['createProjects']
+     */
+    additionalPermissions?: string[];
+    /**
      * The ID of this user.
      *
      * @example zTuNVUXEAvvnNN3IaqinkyMw
