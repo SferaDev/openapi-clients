@@ -10182,7 +10182,7 @@ export type CacheResponseBase = {
    */
   editable: boolean;
   /**
-   * @example ssl_tls_configuration_mode
+   * @example ssl_automatic_mode
    */
   id: string;
   /**
@@ -11804,6 +11804,37 @@ export type DigitalExperienceMonitoringColosResponse = Record<string, any>[];
  * @example 5758fefe-ae7e-4538-a39b-1fef6abcb909
  */
 export type DigitalExperienceMonitoringCommandId = string;
+
+export type DigitalExperienceMonitoringCommandsDevicesResponse = {
+  /**
+   * List of eligible devices
+   */
+  devices?: {
+    /**
+     * Device identifier (UUID v4)
+     */
+    deviceId?: string;
+    /**
+     * Device identifier (human readable)
+     */
+    deviceName?: string;
+    /**
+     * User contact email address
+     */
+    personEmail?: string;
+    platform?: DigitalExperienceMonitoringPlatform;
+    status?: DigitalExperienceMonitoringStatus;
+    timestamp?: DigitalExperienceMonitoringTimestamp;
+    version?: DigitalExperienceMonitoringVersion;
+  }[];
+};
+
+export type DigitalExperienceMonitoringCommandsUsersResponse = {
+  /**
+   * List of user emails
+   */
+  userEmails?: string[];
+};
 
 export type DigitalExperienceMonitoringCpuPctByApp = {
   /**
