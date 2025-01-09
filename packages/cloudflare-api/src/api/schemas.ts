@@ -7181,6 +7181,14 @@ export type AccessYandex = {
     | 'yandex';
 };
 
+/**
+ * Identifier of a Cloudflare account.
+ *
+ * @example 258def64c72dae45f3e4c8516e2111f2
+ * @maxLength 32
+ */
+export type AddressingAccountIdentifier = string;
+
 export type AddressingAddressMaps = {
   can_delete?: AddressingCanDelete;
   can_modify_ips?: AddressingCanModifyIps;
@@ -7188,7 +7196,7 @@ export type AddressingAddressMaps = {
   default_sni?: AddressingDefaultSni;
   description?: AddressingSchemasDescription;
   enabled?: AddressingEnabled;
-  id?: AddressingIdentifier;
+  id?: AddressingAddressMapIdentifier;
   modified_at?: AddressingTimestamp;
 };
 
@@ -7200,9 +7208,17 @@ export type AddressingAddressMapsIp = {
 export type AddressingAddressMapsMembership = {
   can_delete?: AddressingSchemasCanDelete;
   created_at?: AddressingTimestamp;
-  identifier?: AddressingSchemasIdentifier;
+  identifier?: AddressingIdentifier;
   kind?: AddressingKind;
 };
+
+/**
+ * Identifier of an Address Map.
+ *
+ * @example 055817b111884e0227e1be16a0be6ee0
+ * @maxLength 32
+ */
+export type AddressingAddressMapIdentifier = string;
 
 /**
  * Prefix advertisement status to the Internet. This field is only not 'null' if on demand is enabled.
@@ -7275,6 +7291,14 @@ export type AddressingBgpOnDemand = {
 export type AddressingBgpPrefixCreate = {
   cidr?: AddressingCidr;
 };
+
+/**
+ * Identifier of BGP Prefix.
+ *
+ * @example 7009ba364c7a5760798ceb430e603b74
+ * @maxLength 32
+ */
+export type AddressingBgpPrefixIdentifier = string;
 
 export type AddressingBgpPrefixUpdateAdvertisement = {
   on_demand?: {
@@ -7352,7 +7376,7 @@ export type AddressingDefaultSni = string | null;
 export type AddressingDelegatedAccountIdentifier = string;
 
 /**
- * Delegation identifier tag.
+ * Identifier of a Delegation.
  *
  * @example d933b1530bc56c9953cf8ce166da8004
  * @maxLength 32
@@ -7403,7 +7427,7 @@ export type AddressingIdResponse = AddressingApiResponseSingle & {
 };
 
 /**
- * Identifier
+ * The identifier for the membership (eg. a zone or account tag).
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -7429,7 +7453,7 @@ export type AddressingIpamBgpPrefixes = {
   bgp_signal_opts?: AddressingBgpSignalOpts;
   cidr?: AddressingCidr;
   created_at?: AddressingTimestamp;
-  id?: AddressingIdentifier;
+  id?: AddressingBgpPrefixIdentifier;
   modified_at?: AddressingTimestamp;
   on_demand?: AddressingBgpOnDemand;
 };
@@ -7440,11 +7464,11 @@ export type AddressingIpamDelegations = {
   delegated_account_id?: AddressingDelegatedAccountIdentifier;
   id?: AddressingDelegationIdentifier;
   modified_at?: AddressingTimestamp;
-  parent_prefix_id?: AddressingIdentifier;
+  parent_prefix_id?: AddressingPrefixIdentifier;
 };
 
 export type AddressingIpamPrefixes = {
-  account_id?: AddressingIdentifier;
+  account_id?: AddressingAccountIdentifier;
   advertised?: AddressingAdvertised;
   advertised_modified_at?: AddressingModifiedAtNullable;
   approved?: AddressingApproved;
@@ -7452,7 +7476,7 @@ export type AddressingIpamPrefixes = {
   cidr?: AddressingCidr;
   created_at?: AddressingTimestamp;
   description?: AddressingDescription;
-  id?: AddressingIdentifier;
+  id?: AddressingPrefixIdentifier;
   loa_document_id?: AddressingLoaDocumentIdentifier;
   modified_at?: AddressingTimestamp;
   on_demand_enabled?: AddressingOnDemandEnabled;
@@ -7504,7 +7528,7 @@ export type AddressingLoaDocumentIdentifier = string | null;
 
 export type AddressingLoaUploadResponse = AddressingApiResponseSingle & {
   result?: {
-    account_id?: AddressingIdentifier;
+    account_id?: AddressingAccountIdentifier;
     created?: AddressingTimestamp;
     filename?: AddressingFilename;
     id?: AddressingLoaDocumentIdentifier;
@@ -7548,6 +7572,14 @@ export type AddressingOnDemandEnabled = boolean;
  * @example false
  */
 export type AddressingOnDemandLocked = boolean;
+
+/**
+ * Identifier of an IP Prefix.
+ *
+ * @example 2af39739cc4e3b5910c918468bb89828
+ * @maxLength 32
+ */
+export type AddressingPrefixIdentifier = string;
 
 /**
  * Status of a Service Binding's deployment to the Cloudflare network
@@ -7597,7 +7629,8 @@ export type AddressingResultInfo = {
 };
 
 /**
- * Enablement of prefix advertisement to the Internet.
+ * Advertisement status of the prefix. If `true`, the BGP route for the prefix is advertised to the Internet. If
+ * `false`, the BGP route is withdrawn.
  *
  * @example true
  */
@@ -7618,14 +7651,6 @@ export type AddressingSchemasCanDelete = boolean;
 export type AddressingSchemasDescription = string | null;
 
 /**
- * The identifier for the membership (eg. a zone or account tag).
- *
- * @example 023e105f4ecef8ad9ca31a8372d0c353
- * @maxLength 32
- */
-export type AddressingSchemasIdentifier = string;
-
-/**
  * The set of IPs on the Address Map.
  */
 export type AddressingSchemasIps = AddressingAddressMapsIp[];
@@ -7640,14 +7665,23 @@ export type AddressingSchemasSingleResponse = AddressingApiResponseSingle & {
 
 export type AddressingServiceBinding = {
   cidr?: AddressingCidr;
-  id?: AddressingIdentifier;
+  id?: AddressingServiceBindingIdentifier;
   provisioning?: AddressingProvisioning;
   service_id?: AddressingServiceIdentifier;
   service_name?: AddressingServiceName;
 };
 
 /**
- * Identifier
+ * Identifier of a Service Binding.
+ *
+ * @example 0429b49b6a5155297b78e75a44b09e14
+ * @maxLength 32
+ */
+export type AddressingServiceBindingIdentifier = string;
+
+/**
+ * Identifier of a Service on the Cloudflare network. Available services and their IDs may be found in the
+ * **List Services** endpoint.
  *
  * @example 2db684ee7ca04e159946fd05b99e1bcd
  * @maxLength 32
@@ -7695,6 +7729,14 @@ export type AddressingVerified = boolean;
  * @format date-time
  */
 export type AddressingVerifiedAt = string | null;
+
+/**
+ * Identifier of a zone.
+ *
+ * @example 8ac8489932db6327334c9b6d58544cfe
+ * @maxLength 32
+ */
+export type AddressingZoneIdentifier = string;
 
 export type ApiShieldApiResponseCollection = ApiShieldApiResponseCommon & {
   result_info?: ApiShieldResultInfo;
@@ -7919,9 +7961,7 @@ export type ApiShieldMultipleOperationResponse = ApiShieldApiResponseCommon & {
 };
 
 export type ApiShieldMultipleOperationResponsePaginated = ApiShieldApiResponseCollection & {
-  result: (ApiShieldOperation & {
-    features?: void;
-  })[];
+  result: ApiShieldOperation[];
 };
 
 export type ApiShieldObjectWithOperationId = {
@@ -7945,9 +7985,13 @@ export type ApiShieldOpenapi = Record<string, any>;
  */
 export type ApiShieldOpenapiWithThresholds = Record<string, any>;
 
-export type ApiShieldOperation = ApiShieldStandardOperation & {
-  features?: ApiShieldOperationFeatures;
-};
+/**
+ * @default {}
+ */
+export type ApiShieldOperation = ApiShieldStandardOperation &
+  ({
+    features?: ApiShieldOperationFeatures;
+  } | null);
 
 /**
  * @example {"api_routing":{"last_updated":"2014-01-01T05:20:00.12345Z","route":"https://api.example.com/api/service"}}
@@ -8314,9 +8358,7 @@ export type ApiShieldSchemasTimestamp = ApiShieldTimestamp & string;
 export type ApiShieldSchemasUuid = string & ApiShieldUuid;
 
 export type ApiShieldSingleOperationResponse = ApiShieldApiResponseCommon & {
-  result: ApiShieldOperation & {
-    features?: void;
-  };
+  result: ApiShieldOperation;
 };
 
 export type ApiShieldStandardOperation = ApiShieldBasicOperation & {
@@ -45497,13 +45539,7 @@ export type WorkersPlacementMode = 'smart';
 /**
  * Status of [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
  */
-export type WorkersPlacementStatus =
-  | 'SUCCESS'
-  | 'NO_VALID_HOSTS'
-  | 'NO_VALID_BINDINGS'
-  | 'UNSUPPORTED_APPLICATION'
-  | 'INSUFFICIENT_INVOCATIONS'
-  | 'INSUFFICIENT_SUBREQUESTS';
+export type WorkersPlacementStatus = 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
 
 export type WorkersResultInfo = {
   /**
