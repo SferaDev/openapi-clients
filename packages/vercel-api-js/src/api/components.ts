@@ -4954,6 +4954,44 @@ export const checkDomainPrice = (variables: CheckDomainPriceVariables, signal?: 
     signal
   });
 
+export type CheckDomainStatusQueryParams = {
+  /**
+   * The name of the domain for which we would like to check the status.
+   *
+   * @example example.com
+   */
+  name: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type CheckDomainStatusError = Fetcher.ErrorWrapper<undefined>;
+
+export type CheckDomainStatusResponse = {
+  available: boolean;
+};
+
+export type CheckDomainStatusVariables = {
+  queryParams: CheckDomainStatusQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Check if a domain name is available for purchase.
+ */
+export const checkDomainStatus = (variables: CheckDomainStatusVariables, signal?: AbortSignal) =>
+  fetch<CheckDomainStatusResponse, CheckDomainStatusError, undefined, {}, CheckDomainStatusQueryParams, {}>({
+    url: '/v4/domains/status',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
 export type GetRecordsPathParams = {
   /**
    * @example example.com
@@ -5925,44 +5963,6 @@ export const removeRecord = (variables: RemoveRecordVariables, signal?: AbortSig
   fetch<Record<string, any>, RemoveRecordError, undefined, {}, RemoveRecordQueryParams, RemoveRecordPathParams>({
     url: '/v2/domains/{domain}/records/{recordId}',
     method: 'delete',
-    ...variables,
-    signal
-  });
-
-export type CheckDomainStatusQueryParams = {
-  /**
-   * The name of the domain for which we would like to check the status.
-   *
-   * @example example.com
-   */
-  name: string;
-  /**
-   * The Team identifier to perform the request on behalf of.
-   */
-  teamId?: string;
-  /**
-   * The Team slug to perform the request on behalf of.
-   */
-  slug?: string;
-};
-
-export type CheckDomainStatusError = Fetcher.ErrorWrapper<undefined>;
-
-export type CheckDomainStatusResponse = {
-  available: boolean;
-};
-
-export type CheckDomainStatusVariables = {
-  queryParams: CheckDomainStatusQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Check if a domain name is available for purchase.
- */
-export const checkDomainStatus = (variables: CheckDomainStatusVariables, signal?: AbortSignal) =>
-  fetch<CheckDomainStatusResponse, CheckDomainStatusError, undefined, {}, CheckDomainStatusQueryParams, {}>({
-    url: '/v4/domains/status',
-    method: 'get',
     ...variables,
     signal
   });
