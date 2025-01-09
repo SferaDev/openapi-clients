@@ -32,6 +32,7 @@ import {
   accountDeletion,
   accountsAccountDetails,
   accountsUpdateAccount,
+  submitAbuseReport,
   accessApplicationsListAccessApplications,
   accessApplicationsAddAnApplication,
   accessShortLivedCertificateCAsListShortLivedCertificateCAs,
@@ -923,7 +924,6 @@ import {
   urlscannerCreateScanV2,
   urlscannerGetScanScreenshotV2,
   urlscannerSearchScansV2,
-  submitAbuseReport,
   vectorizeDeprecatedListVectorizeIndexes,
   vectorizeDeprecatedCreateVectorizeIndex,
   vectorizeDeprecatedDeleteVectorizeIndex,
@@ -1347,6 +1347,7 @@ import {
   apiShieldEndpointManagementDeleteMultipleOperations,
   apiShieldEndpointManagementRetrieveInformationAboutAllOperationsOnAZone,
   apiShieldEndpointManagementAddOperationsToAZone,
+  apiShieldEndpointManagementAddOperationToAZone,
   apiShieldSchemaValidationUpdateMultipleOperationLevelSettings,
   apiShieldEndpointManagementDeleteAnOperation,
   apiShieldEndpointManagementRetrieveInformationAboutAnOperation,
@@ -1773,6 +1774,7 @@ export const operationsByPath = {
   'DELETE /accounts/{account_id}': accountDeletion,
   'GET /accounts/{account_id}': accountsAccountDetails,
   'PUT /accounts/{account_id}': accountsUpdateAccount,
+  'POST /accounts/{account_id}/abuse-reports/{report_type}': submitAbuseReport,
   'GET /accounts/{account_id}/access/apps': accessApplicationsListAccessApplications,
   'POST /accounts/{account_id}/access/apps': accessApplicationsAddAnApplication,
   'GET /accounts/{account_id}/access/apps/ca': accessShortLivedCertificateCAsListShortLivedCertificateCAs,
@@ -2791,7 +2793,6 @@ export const operationsByPath = {
   'POST /accounts/{account_id}/urlscanner/v2/scan': urlscannerCreateScanV2,
   'GET /accounts/{account_id}/urlscanner/v2/screenshots/{scan_id}.png': urlscannerGetScanScreenshotV2,
   'GET /accounts/{account_id}/urlscanner/v2/search': urlscannerSearchScansV2,
-  'POST /accounts/{account_id}/v1/abuse-reports/{report_type}': submitAbuseReport,
   'GET /accounts/{account_id}/vectorize/indexes': vectorizeDeprecatedListVectorizeIndexes,
   'POST /accounts/{account_id}/vectorize/indexes': vectorizeDeprecatedCreateVectorizeIndex,
   'DELETE /accounts/{account_id}/vectorize/indexes/{index_name}': vectorizeDeprecatedDeleteVectorizeIndex,
@@ -3248,6 +3249,7 @@ export const operationsByPath = {
   'GET /zones/{zone_id}/api_gateway/operations':
     apiShieldEndpointManagementRetrieveInformationAboutAllOperationsOnAZone,
   'POST /zones/{zone_id}/api_gateway/operations': apiShieldEndpointManagementAddOperationsToAZone,
+  'POST /zones/{zone_id}/api_gateway/operations/item': apiShieldEndpointManagementAddOperationToAZone,
   'PATCH /zones/{zone_id}/api_gateway/operations/schema_validation':
     apiShieldSchemaValidationUpdateMultipleOperationLevelSettings,
   'DELETE /zones/{zone_id}/api_gateway/operations/{operation_id}': apiShieldEndpointManagementDeleteAnOperation,
@@ -3284,7 +3286,7 @@ export const operationsByPath = {
   'GET /zones/{zone_id}/cache/cache_reserve_clear': zoneCacheSettingsGetCacheReserveClear,
   'POST /zones/{zone_id}/cache/cache_reserve_clear': zoneCacheSettingsStartCacheReserveClear,
   'GET /zones/{zone_id}/cache/origin_post_quantum_encryption': zoneCacheSettingsGetOriginPostQuantumEncryptionSetting,
-  'PATCH /zones/{zone_id}/cache/origin_post_quantum_encryption':
+  'PUT /zones/{zone_id}/cache/origin_post_quantum_encryption':
     zoneCacheSettingsChangeOriginPostQuantumEncryptionSetting,
   'GET /zones/{zone_id}/cache/regional_tiered_cache': zoneCacheSettingsGetRegionalTieredCacheSetting,
   'PATCH /zones/{zone_id}/cache/regional_tiered_cache': zoneCacheSettingsChangeRegionalTieredCacheSetting,

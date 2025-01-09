@@ -1058,6 +1058,46 @@ export const accountsUpdateAccount = (variables: AccountsUpdateAccountVariables,
     AccountsUpdateAccountPathParams
   >({ url: '/accounts/{accountId}', method: 'put', ...variables, signal });
 
+export type SubmitAbuseReportPathParams = {
+  /**
+   * The account ID of the submitter.
+   *
+   * @example 023e105f4ecef8ad9ca31a8372d0c353
+   * @maxLength 32
+   */
+  accountId: string;
+  /**
+   * The report type to be submitted
+   */
+  reportType: Schemas.AbuseReportsReportType;
+};
+
+export type SubmitAbuseReportError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.AbuseReportsSubmitErrorResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.AbuseReportsSubmitErrorResponse;
+    }
+>;
+
+export type SubmitAbuseReportVariables = {
+  body: Schemas.AbuseReportsSubmitReportRequest;
+  pathParams: SubmitAbuseReportPathParams;
+} & FetcherExtraProps;
+
+export const submitAbuseReport = (variables: SubmitAbuseReportVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.AbuseReportsSubmitReportResponse,
+    SubmitAbuseReportError,
+    Schemas.AbuseReportsSubmitReportRequest,
+    {},
+    {},
+    SubmitAbuseReportPathParams
+  >({ url: '/accounts/{accountId}/abuse-reports/{reportType}', method: 'post', ...variables, signal });
+
 export type AccessApplicationsListAccessApplicationsPathParams = {
   accountId: Schemas.AccessIdentifier;
 };
@@ -2815,7 +2855,7 @@ export type ZeroTrustOrganizationGetYourZeroTrustOrganizationDohSettingsResponse
        *
        * @example 800h
        */
-      jwt_duration?: string;
+      doh_jwt_duration?: string;
     };
   };
 
@@ -2851,12 +2891,12 @@ export type ZeroTrustOrganizationUpdateYourZeroTrustOrganizationDohSettingsError
 export type ZeroTrustOrganizationUpdateYourZeroTrustOrganizationDohSettingsResponse =
   Schemas.AccessSchemasSingleResponse & {
     result?: {
-      jwt_duration?: Schemas.AccessDohJwtDuration;
+      doh_jwt_duration?: Schemas.AccessDohJwtDuration;
     };
   };
 
 export type ZeroTrustOrganizationUpdateYourZeroTrustOrganizationDohSettingsRequestBody = {
-  jwt_duration?: Schemas.AccessDohJwtDuration;
+  doh_jwt_duration?: Schemas.AccessDohJwtDuration;
   /**
    * The uuid of the service token you want to use for DoH authentication
    *
@@ -3748,7 +3788,7 @@ export const zeroTrustUsersGetLastSeenIdentity = (
   >({ url: '/accounts/{accountId}/access/users/{userId}/last_seen_identity', method: 'get', ...variables, signal });
 
 export type IpAddressManagementAddressMapsListAddressMapsPathParams = {
-  accountId: Schemas.AddressingIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementAddressMapsListAddressMapsError = Fetcher.ErrorWrapper<{
@@ -3777,7 +3817,7 @@ export const ipAddressManagementAddressMapsListAddressMaps = (
   >({ url: '/accounts/{accountId}/addressing/address_maps', method: 'get', ...variables, signal });
 
 export type IpAddressManagementAddressMapsCreateAddressMapPathParams = {
-  accountId: Schemas.AddressingIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementAddressMapsCreateAddressMapError = Fetcher.ErrorWrapper<{
@@ -3814,8 +3854,8 @@ export const ipAddressManagementAddressMapsCreateAddressMap = (
   >({ url: '/accounts/{accountId}/addressing/address_maps', method: 'post', ...variables, signal });
 
 export type IpAddressManagementAddressMapsDeleteAddressMapPathParams = {
-  addressMapId: Schemas.AddressingIdentifier;
-  accountId: Schemas.AddressingIdentifier;
+  addressMapId: Schemas.AddressingAddressMapIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementAddressMapsDeleteAddressMapError = Fetcher.ErrorWrapper<{
@@ -3844,8 +3884,8 @@ export const ipAddressManagementAddressMapsDeleteAddressMap = (
   >({ url: '/accounts/{accountId}/addressing/address_maps/{addressMapId}', method: 'delete', ...variables, signal });
 
 export type IpAddressManagementAddressMapsAddressMapDetailsPathParams = {
-  addressMapId: Schemas.AddressingIdentifier;
-  accountId: Schemas.AddressingIdentifier;
+  addressMapId: Schemas.AddressingAddressMapIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementAddressMapsAddressMapDetailsError = Fetcher.ErrorWrapper<{
@@ -3874,8 +3914,8 @@ export const ipAddressManagementAddressMapsAddressMapDetails = (
   >({ url: '/accounts/{accountId}/addressing/address_maps/{addressMapId}', method: 'get', ...variables, signal });
 
 export type IpAddressManagementAddressMapsUpdateAddressMapPathParams = {
-  addressMapId: Schemas.AddressingIdentifier;
-  accountId: Schemas.AddressingIdentifier;
+  addressMapId: Schemas.AddressingAddressMapIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementAddressMapsUpdateAddressMapError = Fetcher.ErrorWrapper<{
@@ -3911,8 +3951,8 @@ export const ipAddressManagementAddressMapsUpdateAddressMap = (
   >({ url: '/accounts/{accountId}/addressing/address_maps/{addressMapId}', method: 'patch', ...variables, signal });
 
 export type IpAddressManagementAddressMapsRemoveAnAccountMembershipFromAnAddressMapPathParams = {
-  accountId: Schemas.AddressingIdentifier;
-  addressMapId: Schemas.AddressingIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
+  addressMapId: Schemas.AddressingAddressMapIdentifier;
 };
 
 export type IpAddressManagementAddressMapsRemoveAnAccountMembershipFromAnAddressMapError = Fetcher.ErrorWrapper<{
@@ -3946,8 +3986,8 @@ export const ipAddressManagementAddressMapsRemoveAnAccountMembershipFromAnAddres
   });
 
 export type IpAddressManagementAddressMapsAddAnAccountMembershipToAnAddressMapPathParams = {
-  accountId: Schemas.AddressingIdentifier;
-  addressMapId: Schemas.AddressingIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
+  addressMapId: Schemas.AddressingAddressMapIdentifier;
 };
 
 export type IpAddressManagementAddressMapsAddAnAccountMembershipToAnAddressMapError = Fetcher.ErrorWrapper<{
@@ -3982,8 +4022,8 @@ export const ipAddressManagementAddressMapsAddAnAccountMembershipToAnAddressMap 
 
 export type IpAddressManagementAddressMapsRemoveAnIpFromAnAddressMapPathParams = {
   ipAddress: Schemas.AddressingIpAddress;
-  addressMapId: Schemas.AddressingIdentifier;
-  accountId: Schemas.AddressingIdentifier;
+  addressMapId: Schemas.AddressingAddressMapIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementAddressMapsRemoveAnIpFromAnAddressMapError = Fetcher.ErrorWrapper<{
@@ -4018,8 +4058,8 @@ export const ipAddressManagementAddressMapsRemoveAnIpFromAnAddressMap = (
 
 export type IpAddressManagementAddressMapsAddAnIpToAnAddressMapPathParams = {
   ipAddress: Schemas.AddressingIpAddress;
-  addressMapId: Schemas.AddressingIdentifier;
-  accountId: Schemas.AddressingIdentifier;
+  addressMapId: Schemas.AddressingAddressMapIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementAddressMapsAddAnIpToAnAddressMapError = Fetcher.ErrorWrapper<{
@@ -4053,9 +4093,9 @@ export const ipAddressManagementAddressMapsAddAnIpToAnAddressMap = (
   });
 
 export type IpAddressManagementAddressMapsRemoveAZoneMembershipFromAnAddressMapPathParams = {
-  zoneId: Schemas.AddressingIdentifier;
-  addressMapId: Schemas.AddressingIdentifier;
-  accountId: Schemas.AddressingIdentifier;
+  zoneId: Schemas.AddressingZoneIdentifier;
+  addressMapId: Schemas.AddressingAddressMapIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementAddressMapsRemoveAZoneMembershipFromAnAddressMapError = Fetcher.ErrorWrapper<{
@@ -4089,9 +4129,9 @@ export const ipAddressManagementAddressMapsRemoveAZoneMembershipFromAnAddressMap
   });
 
 export type IpAddressManagementAddressMapsAddAZoneMembershipToAnAddressMapPathParams = {
-  zoneId: Schemas.AddressingIdentifier;
-  addressMapId: Schemas.AddressingIdentifier;
-  accountId: Schemas.AddressingIdentifier;
+  zoneId: Schemas.AddressingZoneIdentifier;
+  addressMapId: Schemas.AddressingAddressMapIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementAddressMapsAddAZoneMembershipToAnAddressMapError = Fetcher.ErrorWrapper<{
@@ -4125,7 +4165,7 @@ export const ipAddressManagementAddressMapsAddAZoneMembershipToAnAddressMap = (
   });
 
 export type IpAddressManagementPrefixesUploadLoaDocumentPathParams = {
-  accountId: Schemas.AddressingIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementPrefixesUploadLoaDocumentError = Fetcher.ErrorWrapper<{
@@ -4165,7 +4205,7 @@ export const ipAddressManagementPrefixesUploadLoaDocument = (
 
 export type IpAddressManagementPrefixesDownloadLoaDocumentPathParams = {
   loaDocumentId: Schemas.AddressingLoaDocumentIdentifier;
-  accountId: Schemas.AddressingIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementPrefixesDownloadLoaDocumentError = Fetcher.ErrorWrapper<{
@@ -4199,7 +4239,7 @@ export const ipAddressManagementPrefixesDownloadLoaDocument = (
   });
 
 export type IpAddressManagementPrefixesListPrefixesPathParams = {
-  accountId: Schemas.AddressingIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementPrefixesListPrefixesError = Fetcher.ErrorWrapper<{
@@ -4228,7 +4268,7 @@ export const ipAddressManagementPrefixesListPrefixes = (
   >({ url: '/accounts/{accountId}/addressing/prefixes', method: 'get', ...variables, signal });
 
 export type IpAddressManagementPrefixesAddPrefixPathParams = {
-  accountId: Schemas.AddressingIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementPrefixesAddPrefixError = Fetcher.ErrorWrapper<{
@@ -4264,8 +4304,8 @@ export const ipAddressManagementPrefixesAddPrefix = (
   >({ url: '/accounts/{accountId}/addressing/prefixes', method: 'post', ...variables, signal });
 
 export type IpAddressManagementPrefixesDeletePrefixPathParams = {
-  prefixId: Schemas.AddressingIdentifier;
-  accountId: Schemas.AddressingIdentifier;
+  prefixId: Schemas.AddressingPrefixIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementPrefixesDeletePrefixError = Fetcher.ErrorWrapper<{
@@ -4294,8 +4334,8 @@ export const ipAddressManagementPrefixesDeletePrefix = (
   >({ url: '/accounts/{accountId}/addressing/prefixes/{prefixId}', method: 'delete', ...variables, signal });
 
 export type IpAddressManagementPrefixesPrefixDetailsPathParams = {
-  prefixId: Schemas.AddressingIdentifier;
-  accountId: Schemas.AddressingIdentifier;
+  prefixId: Schemas.AddressingPrefixIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementPrefixesPrefixDetailsError = Fetcher.ErrorWrapper<{
@@ -4324,8 +4364,8 @@ export const ipAddressManagementPrefixesPrefixDetails = (
   >({ url: '/accounts/{accountId}/addressing/prefixes/{prefixId}', method: 'get', ...variables, signal });
 
 export type IpAddressManagementPrefixesUpdatePrefixDescriptionPathParams = {
-  prefixId: Schemas.AddressingIdentifier;
-  accountId: Schemas.AddressingIdentifier;
+  prefixId: Schemas.AddressingPrefixIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementPrefixesUpdatePrefixDescriptionError = Fetcher.ErrorWrapper<{
@@ -4359,8 +4399,8 @@ export const ipAddressManagementPrefixesUpdatePrefixDescription = (
   >({ url: '/accounts/{accountId}/addressing/prefixes/{prefixId}', method: 'patch', ...variables, signal });
 
 export type IpAddressManagementPrefixesListBgpPrefixesPathParams = {
-  accountId: Schemas.AddressingIdentifier;
-  prefixId: Schemas.AddressingIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
+  prefixId: Schemas.AddressingPrefixIdentifier;
 };
 
 export type IpAddressManagementPrefixesListBgpPrefixesError = Fetcher.ErrorWrapper<{
@@ -4389,8 +4429,8 @@ export const ipAddressManagementPrefixesListBgpPrefixes = (
   >({ url: '/accounts/{accountId}/addressing/prefixes/{prefixId}/bgp/prefixes', method: 'get', ...variables, signal });
 
 export type IpAddressManagementPrefixesCreateBgpPrefixPathParams = {
-  accountId: Schemas.AddressingIdentifier;
-  prefixId: Schemas.AddressingIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
+  prefixId: Schemas.AddressingPrefixIdentifier;
 };
 
 export type IpAddressManagementPrefixesCreateBgpPrefixError = Fetcher.ErrorWrapper<{
@@ -4420,9 +4460,9 @@ export const ipAddressManagementPrefixesCreateBgpPrefix = (
   >({ url: '/accounts/{accountId}/addressing/prefixes/{prefixId}/bgp/prefixes', method: 'post', ...variables, signal });
 
 export type IpAddressManagementPrefixesFetchBgpPrefixPathParams = {
-  accountId: Schemas.AddressingIdentifier;
-  prefixId: Schemas.AddressingIdentifier;
-  bgpPrefixId: Schemas.AddressingIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
+  prefixId: Schemas.AddressingPrefixIdentifier;
+  bgpPrefixId: Schemas.AddressingBgpPrefixIdentifier;
 };
 
 export type IpAddressManagementPrefixesFetchBgpPrefixError = Fetcher.ErrorWrapper<{
@@ -4456,9 +4496,9 @@ export const ipAddressManagementPrefixesFetchBgpPrefix = (
   });
 
 export type IpAddressManagementPrefixesUpdateBgpPrefixPathParams = {
-  accountId: Schemas.AddressingIdentifier;
-  prefixId: Schemas.AddressingIdentifier;
-  bgpPrefixId: Schemas.AddressingIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
+  prefixId: Schemas.AddressingPrefixIdentifier;
+  bgpPrefixId: Schemas.AddressingBgpPrefixIdentifier;
 };
 
 export type IpAddressManagementPrefixesUpdateBgpPrefixError = Fetcher.ErrorWrapper<{
@@ -4493,8 +4533,8 @@ export const ipAddressManagementPrefixesUpdateBgpPrefix = (
   });
 
 export type IpAddressManagementDynamicAdvertisementGetAdvertisementStatusPathParams = {
-  prefixId: Schemas.AddressingIdentifier;
-  accountId: Schemas.AddressingIdentifier;
+  prefixId: Schemas.AddressingPrefixIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementDynamicAdvertisementGetAdvertisementStatusError = Fetcher.ErrorWrapper<{
@@ -4507,7 +4547,10 @@ export type IpAddressManagementDynamicAdvertisementGetAdvertisementStatusVariabl
 } & FetcherExtraProps;
 
 /**
- * List the current advertisement state for a prefix.
+ * View the current advertisement state for a prefix.
+ *
+ * **Deprecated:** Prefer the BGP Prefixes endpoints, which additionally allow for advertising and withdrawing
+ * subnets of an IP prefix.
  */
 export const ipAddressManagementDynamicAdvertisementGetAdvertisementStatus = (
   variables: IpAddressManagementDynamicAdvertisementGetAdvertisementStatusVariables,
@@ -4523,8 +4566,8 @@ export const ipAddressManagementDynamicAdvertisementGetAdvertisementStatus = (
   >({ url: '/accounts/{accountId}/addressing/prefixes/{prefixId}/bgp/status', method: 'get', ...variables, signal });
 
 export type IpAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatusPathParams = {
-  prefixId: Schemas.AddressingIdentifier;
-  accountId: Schemas.AddressingIdentifier;
+  prefixId: Schemas.AddressingPrefixIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatusError = Fetcher.ErrorWrapper<{
@@ -4542,7 +4585,10 @@ export type IpAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisem
 } & FetcherExtraProps;
 
 /**
- * Advertise or withdraw BGP route for a prefix.
+ * Advertise or withdraw the BGP route for a prefix.
+ *
+ * **Deprecated:** Prefer the BGP Prefixes endpoints, which additionally allow for advertising and withdrawing
+ * subnets of an IP prefix.
  */
 export const ipAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatus = (
   variables: IpAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertisementStatusVariables,
@@ -4558,8 +4604,8 @@ export const ipAddressManagementDynamicAdvertisementUpdatePrefixDynamicAdvertise
   >({ url: '/accounts/{accountId}/addressing/prefixes/{prefixId}/bgp/status', method: 'patch', ...variables, signal });
 
 export type IpAddressManagementServiceBindingsListServiceBindingsPathParams = {
-  accountId: Schemas.AddressingIdentifier;
-  prefixId: Schemas.AddressingIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
+  prefixId: Schemas.AddressingPrefixIdentifier;
 };
 
 export type IpAddressManagementServiceBindingsListServiceBindingsError = Fetcher.ErrorWrapper<{
@@ -4593,8 +4639,8 @@ export const ipAddressManagementServiceBindingsListServiceBindings = (
   >({ url: '/accounts/{accountId}/addressing/prefixes/{prefixId}/bindings', method: 'get', ...variables, signal });
 
 export type IpAddressManagementServiceBindingsCreateServiceBindingPathParams = {
-  accountId: Schemas.AddressingIdentifier;
-  prefixId: Schemas.AddressingIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
+  prefixId: Schemas.AddressingPrefixIdentifier;
 };
 
 export type IpAddressManagementServiceBindingsCreateServiceBindingError = Fetcher.ErrorWrapper<{
@@ -4629,9 +4675,9 @@ export const ipAddressManagementServiceBindingsCreateServiceBinding = (
   >({ url: '/accounts/{accountId}/addressing/prefixes/{prefixId}/bindings', method: 'post', ...variables, signal });
 
 export type IpAddressManagementServiceBindingsDeleteServiceBindingPathParams = {
-  accountId: Schemas.AddressingIdentifier;
-  prefixId: Schemas.AddressingIdentifier;
-  bindingId: Schemas.AddressingIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
+  prefixId: Schemas.AddressingPrefixIdentifier;
+  bindingId: Schemas.AddressingServiceBindingIdentifier;
 };
 
 export type IpAddressManagementServiceBindingsDeleteServiceBindingError = Fetcher.ErrorWrapper<{
@@ -4665,9 +4711,9 @@ export const ipAddressManagementServiceBindingsDeleteServiceBinding = (
   });
 
 export type IpAddressManagementServiceBindingsGetServiceBindingPathParams = {
-  accountId: Schemas.AddressingIdentifier;
-  prefixId: Schemas.AddressingIdentifier;
-  bindingId: Schemas.AddressingIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
+  prefixId: Schemas.AddressingPrefixIdentifier;
+  bindingId: Schemas.AddressingServiceBindingIdentifier;
 };
 
 export type IpAddressManagementServiceBindingsGetServiceBindingError = Fetcher.ErrorWrapper<{
@@ -4705,8 +4751,8 @@ export const ipAddressManagementServiceBindingsGetServiceBinding = (
   });
 
 export type IpAddressManagementPrefixDelegationListPrefixDelegationsPathParams = {
-  prefixId: Schemas.AddressingIdentifier;
-  accountId: Schemas.AddressingIdentifier;
+  prefixId: Schemas.AddressingPrefixIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementPrefixDelegationListPrefixDelegationsError = Fetcher.ErrorWrapper<{
@@ -4735,8 +4781,8 @@ export const ipAddressManagementPrefixDelegationListPrefixDelegations = (
   >({ url: '/accounts/{accountId}/addressing/prefixes/{prefixId}/delegations', method: 'get', ...variables, signal });
 
 export type IpAddressManagementPrefixDelegationCreatePrefixDelegationPathParams = {
-  prefixId: Schemas.AddressingIdentifier;
-  accountId: Schemas.AddressingIdentifier;
+  prefixId: Schemas.AddressingPrefixIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementPrefixDelegationCreatePrefixDelegationError = Fetcher.ErrorWrapper<{
@@ -4772,8 +4818,8 @@ export const ipAddressManagementPrefixDelegationCreatePrefixDelegation = (
 
 export type IpAddressManagementPrefixDelegationDeletePrefixDelegationPathParams = {
   delegationId: Schemas.AddressingDelegationIdentifier;
-  prefixId: Schemas.AddressingIdentifier;
-  accountId: Schemas.AddressingIdentifier;
+  prefixId: Schemas.AddressingPrefixIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementPrefixDelegationDeletePrefixDelegationError = Fetcher.ErrorWrapper<{
@@ -4848,7 +4894,7 @@ export const dlsAccountRegionalHostnamesAccountListRegions = (
   >({ url: '/accounts/{accountId}/addressing/regional_hostnames/regions', method: 'get', ...variables, signal });
 
 export type IpAddressManagementServiceBindingsListServicesPathParams = {
-  accountId: Schemas.AddressingIdentifier;
+  accountId: Schemas.AddressingAccountIdentifier;
 };
 
 export type IpAddressManagementServiceBindingsListServicesError = Fetcher.ErrorWrapper<{
@@ -64312,46 +64358,6 @@ export const urlscannerSearchScansV2 = (variables: UrlscannerSearchScansV2Variab
     UrlscannerSearchScansV2PathParams
   >({ url: '/accounts/{accountId}/urlscanner/v2/search', method: 'get', ...variables, signal });
 
-export type SubmitAbuseReportPathParams = {
-  /**
-   * The account ID of the submitter.
-   *
-   * @example 023e105f4ecef8ad9ca31a8372d0c353
-   * @maxLength 32
-   */
-  accountId: string;
-  /**
-   * The report type to be submitted
-   */
-  reportType: Schemas.AbuseReportsReportType;
-};
-
-export type SubmitAbuseReportError = Fetcher.ErrorWrapper<
-  | {
-      status: 400;
-      payload: Schemas.AbuseReportsSubmitErrorResponse;
-    }
-  | {
-      status: 500;
-      payload: Schemas.AbuseReportsSubmitErrorResponse;
-    }
->;
-
-export type SubmitAbuseReportVariables = {
-  body: Schemas.AbuseReportsSubmitReportRequest;
-  pathParams: SubmitAbuseReportPathParams;
-} & FetcherExtraProps;
-
-export const submitAbuseReport = (variables: SubmitAbuseReportVariables, signal?: AbortSignal) =>
-  fetch<
-    Schemas.AbuseReportsSubmitReportResponse,
-    SubmitAbuseReportError,
-    Schemas.AbuseReportsSubmitReportRequest,
-    {},
-    {},
-    SubmitAbuseReportPathParams
-  >({ url: '/accounts/{accountId}/v1/abuse-reports/{reportType}', method: 'post', ...variables, signal });
-
 export type VectorizeDeprecatedListVectorizeIndexesPathParams = {
   accountId: Schemas.VectorizeIdentifier;
 };
@@ -102196,6 +102202,36 @@ export const apiShieldEndpointManagementAddOperationsToAZone = (
     ApiShieldEndpointManagementAddOperationsToAZonePathParams
   >({ url: '/zones/{zoneId}/api_gateway/operations', method: 'post', ...variables, signal });
 
+export type ApiShieldEndpointManagementAddOperationToAZonePathParams = {
+  zoneId: Schemas.ApiShieldSchemasIdentifier;
+};
+
+export type ApiShieldEndpointManagementAddOperationToAZoneError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.ApiShieldApiResponseCommonFailure;
+}>;
+
+export type ApiShieldEndpointManagementAddOperationToAZoneVariables = {
+  body: Schemas.ApiShieldBasicOperation;
+  pathParams: ApiShieldEndpointManagementAddOperationToAZonePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Add one operation to a zone. Endpoints can contain path variables. Host, method, endpoint will be normalized to a canoncial form when creating an operation and must be unique on the zone. Inserting an operation that matches an existing one will return the record of the already existing operation and update its last_updated date.
+ */
+export const apiShieldEndpointManagementAddOperationToAZone = (
+  variables: ApiShieldEndpointManagementAddOperationToAZoneVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.ApiShieldSingleOperationResponse,
+    ApiShieldEndpointManagementAddOperationToAZoneError,
+    Schemas.ApiShieldBasicOperation,
+    {},
+    {},
+    ApiShieldEndpointManagementAddOperationToAZonePathParams
+  >({ url: '/zones/{zoneId}/api_gateway/operations/item', method: 'post', ...variables, signal });
+
 export type ApiShieldSchemaValidationUpdateMultipleOperationLevelSettingsPathParams = {
   zoneId: Schemas.ApiShieldSchemasIdentifier;
 };
@@ -103401,7 +103437,7 @@ export const zoneCacheSettingsChangeOriginPostQuantumEncryptionSetting = (
     {},
     {},
     ZoneCacheSettingsChangeOriginPostQuantumEncryptionSettingPathParams
-  >({ url: '/zones/{zoneId}/cache/origin_post_quantum_encryption', method: 'patch', ...variables, signal });
+  >({ url: '/zones/{zoneId}/cache/origin_post_quantum_encryption', method: 'put', ...variables, signal });
 
 export type ZoneCacheSettingsGetRegionalTieredCacheSettingPathParams = {
   zoneId: Schemas.CacheRulesIdentifier;
@@ -115557,6 +115593,7 @@ export const operationsByTag = {
     listsCreateListItems,
     listsUpdateAllListItems
   },
+  tsengAbuseComplaintProcessorOther: { submitAbuseReport },
   accessApplications: {
     accessApplicationsListAccessApplications,
     accessApplicationsAddAnApplication,
@@ -116659,7 +116696,6 @@ export const operationsByTag = {
     urlscannerGetScanScreenshotV2,
     urlscannerSearchScansV2
   },
-  tsengAbuseComplaintProcessorOther: { submitAbuseReport },
   vectorizeBetaDeprecated: {
     vectorizeDeprecatedListVectorizeIndexes,
     vectorizeDeprecatedCreateVectorizeIndex,
@@ -117120,6 +117156,7 @@ export const operationsByTag = {
     apiShieldEndpointManagementDeleteMultipleOperations,
     apiShieldEndpointManagementRetrieveInformationAboutAllOperationsOnAZone,
     apiShieldEndpointManagementAddOperationsToAZone,
+    apiShieldEndpointManagementAddOperationToAZone,
     apiShieldEndpointManagementDeleteAnOperation,
     apiShieldEndpointManagementRetrieveInformationAboutAnOperation,
     apiShieldEndpointManagementRetrieveOperationsAndFeaturesAsOpenApiSchemas
