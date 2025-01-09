@@ -5032,16 +5032,6 @@ export type AigConfigListGatewayQueryParams = {
    * @minimum 1
    */
   per_page?: number;
-  /**
-   * Order By Column Name
-   */
-  order_by?: string;
-  /**
-   * Order By Direction
-   *
-   * @default asc
-   */
-  order_by_direction?: 'asc' | 'desc';
   search?: string;
 };
 
@@ -5061,6 +5051,8 @@ export type AigConfigListGatewayError = Fetcher.ErrorWrapper<{
 
 export type AigConfigListGatewayResponse = {
   result: {
+    account_id: string;
+    account_tag: string;
     cache_invalidate_on_update: boolean;
     /**
      * @minimum 0
@@ -5080,6 +5072,10 @@ export type AigConfigListGatewayResponse = {
      * @pattern ^[a-z0-9_]+(?:-[a-z0-9_]+)*$
      */
     id: string;
+    /**
+     * @format uuid
+     */
+    internal_id: string;
     logpush?: boolean;
     /**
      * @maxLength 1024
@@ -5145,6 +5141,8 @@ export type AigConfigCreateGatewayError = Fetcher.ErrorWrapper<{
 
 export type AigConfigCreateGatewayResponse = {
   result: {
+    account_id: string;
+    account_tag: string;
     cache_invalidate_on_update: boolean;
     /**
      * @minimum 0
@@ -5164,6 +5162,10 @@ export type AigConfigCreateGatewayResponse = {
      * @pattern ^[a-z0-9_]+(?:-[a-z0-9_]+)*$
      */
     id: string;
+    /**
+     * @format uuid
+     */
+    internal_id: string;
     logpush?: boolean;
     /**
      * @maxLength 1024
@@ -5261,16 +5263,6 @@ export type AigConfigListDatasetQueryParams = {
    * @minimum 1
    */
   per_page?: number;
-  /**
-   * Order By Column Name
-   */
-  order_by?: string;
-  /**
-   * Order By Direction
-   *
-   * @default asc
-   */
-  order_by_direction?: 'asc' | 'desc';
   name?: string;
   enable?: boolean;
   search?: string;
@@ -5292,6 +5284,8 @@ export type AigConfigListDatasetError = Fetcher.ErrorWrapper<{
 
 export type AigConfigListDatasetResponse = {
   result: {
+    account_id: string;
+    account_tag: string;
     /**
      * @format date-time
      */
@@ -5383,6 +5377,8 @@ export type AigConfigCreateDatasetError = Fetcher.ErrorWrapper<{
 
 export type AigConfigCreateDatasetResponse = {
   result: {
+    account_id: string;
+    account_tag: string;
     /**
      * @format date-time
      */
@@ -5497,6 +5493,8 @@ export type AigConfigDeleteDatasetError = Fetcher.ErrorWrapper<{
 
 export type AigConfigDeleteDatasetResponse = {
   result: {
+    account_id: string;
+    account_tag: string;
     /**
      * @format date-time
      */
@@ -5592,6 +5590,8 @@ export type AigConfigFetchDatasetError = Fetcher.ErrorWrapper<{
 
 export type AigConfigFetchDatasetResponse = {
   result: {
+    account_id: string;
+    account_tag: string;
     /**
      * @format date-time
      */
@@ -5699,6 +5699,8 @@ export type AigConfigUpdateDatasetError = Fetcher.ErrorWrapper<
 
 export type AigConfigUpdateDatasetResponse = {
   result: {
+    account_id: string;
+    account_tag: string;
     /**
      * @format date-time
      */
@@ -5810,16 +5812,6 @@ export type AigConfigListEvaluationsQueryParams = {
    * @minimum 1
    */
   per_page?: number;
-  /**
-   * Order By Column Name
-   */
-  order_by?: string;
-  /**
-   * Order By Direction
-   *
-   * @default asc
-   */
-  order_by_direction?: 'asc' | 'desc';
   name?: string;
   processed?: boolean;
   search?: string;
@@ -5841,11 +5833,15 @@ export type AigConfigListEvaluationsError = Fetcher.ErrorWrapper<{
 
 export type AigConfigListEvaluationsResponse = {
   result: {
+    account_id: string;
+    account_tag: string;
     /**
      * @format date-time
      */
     created_at: string;
     datasets: {
+      account_id: string;
+      account_tag: string;
       /**
        * @format date-time
        */
@@ -5972,11 +5968,15 @@ export type AigConfigCreateEvaluationsError = Fetcher.ErrorWrapper<{
 
 export type AigConfigCreateEvaluationsResponse = {
   result: {
+    account_id: string;
+    account_tag: string;
     /**
      * @format date-time
      */
     created_at: string;
     datasets: {
+      account_id: string;
+      account_tag: string;
       /**
        * @format date-time
        */
@@ -6113,11 +6113,15 @@ export type AigConfigDeleteEvaluationsError = Fetcher.ErrorWrapper<{
 
 export type AigConfigDeleteEvaluationsResponse = {
   result: {
+    account_id: string;
+    account_tag: string;
     /**
      * @format date-time
      */
     created_at: string;
     datasets: {
+      account_id: string;
+      account_tag: string;
       /**
        * @format date-time
        */
@@ -6248,11 +6252,15 @@ export type AigConfigFetchEvaluationsError = Fetcher.ErrorWrapper<{
 
 export type AigConfigFetchEvaluationsResponse = {
   result: {
+    account_id: string;
+    account_tag: string;
     /**
      * @format date-time
      */
     created_at: string;
     datasets: {
+      account_id: string;
+      account_tag: string;
       /**
        * @format date-time
        */
@@ -6958,6 +6966,8 @@ export type AigConfigDeleteGatewayError = Fetcher.ErrorWrapper<{
 
 export type AigConfigDeleteGatewayResponse = {
   result: {
+    account_id: string;
+    account_tag: string;
     cache_invalidate_on_update: boolean;
     /**
      * @minimum 0
@@ -6977,6 +6987,10 @@ export type AigConfigDeleteGatewayResponse = {
      * @pattern ^[a-z0-9_]+(?:-[a-z0-9_]+)*$
      */
     id: string;
+    /**
+     * @format uuid
+     */
+    internal_id: string;
     logpush?: boolean;
     /**
      * @maxLength 1024
@@ -7047,6 +7061,8 @@ export type AigConfigFetchGatewayError = Fetcher.ErrorWrapper<{
 
 export type AigConfigFetchGatewayResponse = {
   result: {
+    account_id: string;
+    account_tag: string;
     cache_invalidate_on_update: boolean;
     /**
      * @minimum 0
@@ -7066,6 +7082,10 @@ export type AigConfigFetchGatewayResponse = {
      * @pattern ^[a-z0-9_]+(?:-[a-z0-9_]+)*$
      */
     id: string;
+    /**
+     * @format uuid
+     */
+    internal_id: string;
     logpush?: boolean;
     /**
      * @maxLength 1024
@@ -7153,6 +7173,8 @@ export type AigConfigUpdateGatewayError = Fetcher.ErrorWrapper<
 
 export type AigConfigUpdateGatewayResponse = {
   result: {
+    account_id: string;
+    account_tag: string;
     cache_invalidate_on_update: boolean;
     /**
      * @minimum 0
@@ -7172,6 +7194,10 @@ export type AigConfigUpdateGatewayResponse = {
      * @pattern ^[a-z0-9_]+(?:-[a-z0-9_]+)*$
      */
     id: string;
+    /**
+     * @format uuid
+     */
+    internal_id: string;
     logpush?: boolean;
     /**
      * @maxLength 1024
