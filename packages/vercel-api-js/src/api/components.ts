@@ -8292,7 +8292,7 @@ export type UpdateResourceSecretsVariables = {
 } & FetcherExtraProps;
 
 /**
- * This endpoint updates the secrets of a resource. If a resource has projects connected, the connected secrets are updated with the new secrets. The old secrets may still be used by existing connected projects because they are not automatically redeployed. Redeployment is a manual action and must be completed by the user. All new project connections will use the new secrets.<br/> <br/> Use cases for this endpoint:<br/> <br/> - Resetting the credentials of a database in the partner. If the user requests the credentials to be updated in the partner’s application, the partner post the new set of secrets to Vercel, the user should redeploy their application and the expire the old credentials.<br/>
+ * This endpoint is deprecated and replaced with the endpoint [Update Resource Secrets](#update-resource-secrets). <br/> This endpoint updates the secrets of a resource. If a resource has projects connected, the connected secrets are updated with the new secrets. The old secrets may still be used by existing connected projects because they are not automatically redeployed. Redeployment is a manual action and must be completed by the user. All new project connections will use the new secrets.<br/> <br/> Use cases for this endpoint:<br/> <br/> - Resetting the credentials of a database in the partner. If the user requests the credentials to be updated in the partner’s application, the partner post the new set of secrets to Vercel, the user should redeploy their application and the expire the old credentials.<br/>
  */
 export const updateResourceSecrets = (variables: UpdateResourceSecretsVariables, signal?: AbortSignal) =>
   fetch<
@@ -8304,6 +8304,44 @@ export const updateResourceSecrets = (variables: UpdateResourceSecretsVariables,
     UpdateResourceSecretsPathParams
   >({
     url: '/v1/installations/{integrationConfigurationId}/products/{integrationProductIdOrSlug}/resources/{resourceId}/secrets',
+    method: 'put',
+    ...variables,
+    signal
+  });
+
+export type UpdateResourceSecretsByIdPathParams = {
+  integrationConfigurationId: string;
+  resourceId: string;
+};
+
+export type UpdateResourceSecretsByIdError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateResourceSecretsByIdRequestBody = {
+  secrets: {
+    name: string;
+    value: string;
+    prefix?: string;
+  }[];
+};
+
+export type UpdateResourceSecretsByIdVariables = {
+  body: UpdateResourceSecretsByIdRequestBody;
+  pathParams: UpdateResourceSecretsByIdPathParams;
+} & FetcherExtraProps;
+
+/**
+ * This endpoint updates the secrets of a resource. If a resource has projects connected, the connected secrets are updated with the new secrets. The old secrets may still be used by existing connected projects because they are not automatically redeployed. Redeployment is a manual action and must be completed by the user. All new project connections will use the new secrets.<br/> <br/> Use cases for this endpoint:<br/> <br/> - Resetting the credentials of a database in the partner. If the user requests the credentials to be updated in the partner’s application, the partner post the new set of secrets to Vercel, the user should redeploy their application and the expire the old credentials.<br/>
+ */
+export const updateResourceSecretsById = (variables: UpdateResourceSecretsByIdVariables, signal?: AbortSignal) =>
+  fetch<
+    undefined,
+    UpdateResourceSecretsByIdError,
+    UpdateResourceSecretsByIdRequestBody,
+    {},
+    {},
+    UpdateResourceSecretsByIdPathParams
+  >({
+    url: '/v1/installations/{integrationConfigurationId}/resources/{resourceId}/secrets',
     method: 'put',
     ...variables,
     signal
@@ -19376,6 +19414,8 @@ export type CreateWebhookResponse = {
     | 'integration-configuration.permission-upgraded'
     | 'integration-configuration.removed'
     | 'integration-configuration.scope-change-confirmed'
+    | 'integration-resource.project-connected'
+    | 'integration-resource.project-disconnected'
     | 'marketplace.invoice.created'
     | 'marketplace.invoice.notpaid'
     | 'marketplace.invoice.paid'
@@ -19466,6 +19506,8 @@ export type CreateWebhookRequestBody = {
     | 'integration-configuration.permission-upgraded'
     | 'integration-configuration.removed'
     | 'integration-configuration.scope-change-confirmed'
+    | 'integration-resource.project-connected'
+    | 'integration-resource.project-disconnected'
     | 'marketplace.invoice.created'
     | 'marketplace.invoice.notpaid'
     | 'marketplace.invoice.paid'
@@ -19607,6 +19649,8 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'integration-configuration.permission-upgraded'
           | 'integration-configuration.removed'
           | 'integration-configuration.scope-change-confirmed'
+          | 'integration-resource.project-connected'
+          | 'integration-resource.project-disconnected'
           | 'project.created'
           | 'project.removed'
           | 'deployment-checks-completed'
@@ -19693,6 +19737,8 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'integration-configuration.permission-upgraded'
           | 'integration-configuration.removed'
           | 'integration-configuration.scope-change-confirmed'
+          | 'integration-resource.project-connected'
+          | 'integration-resource.project-disconnected'
           | 'project.created'
           | 'project.removed'
           | 'deployment-checks-completed'
@@ -19814,6 +19860,8 @@ export type GetWebhookResponse = {
     | 'integration-configuration.permission-upgraded'
     | 'integration-configuration.removed'
     | 'integration-configuration.scope-change-confirmed'
+    | 'integration-resource.project-connected'
+    | 'integration-resource.project-disconnected'
     | 'marketplace.invoice.created'
     | 'marketplace.invoice.notpaid'
     | 'marketplace.invoice.paid'
@@ -21807,6 +21855,7 @@ export const operationsByTag = {
     getInvoice,
     updateInvoice,
     updateResourceSecrets,
+    updateResourceSecretsById,
     exchangeSsoToken
   },
   integrations: { getConfigurations, getConfiguration, deleteConfiguration, gitNamespaces, searchRepo },

@@ -67,6 +67,7 @@ import {
   getInvoice,
   updateInvoice,
   updateResourceSecrets,
+  updateResourceSecretsById,
   getConfigurations,
   getConfiguration,
   deleteConfiguration,
@@ -226,6 +227,7 @@ export const operationsByPath = {
   'POST /v1/installations/{integrationConfigurationId}/billing/invoices/{invoiceId}/actions': updateInvoice,
   'PUT /v1/installations/{integrationConfigurationId}/products/{integrationProductIdOrSlug}/resources/{resourceId}/secrets':
     updateResourceSecrets,
+  'PUT /v1/installations/{integrationConfigurationId}/resources/{resourceId}/secrets': updateResourceSecretsById,
   'GET /v1/integrations/configurations': getConfigurations,
   'GET /v1/integrations/configuration/{id}': getConfiguration,
   'DELETE /v1/integrations/configuration/{id}': deleteConfiguration,
