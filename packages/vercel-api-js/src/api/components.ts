@@ -18148,7 +18148,7 @@ export type GetTeamMembersResponse = {
      *
      * @example ['createProjects']
      */
-    additionalPermissions?: string[];
+    additionalRoles?: string[];
     /**
      * The ID of this user.
      *
