@@ -8514,6 +8514,27 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
           isLegacy: boolean;
           flags?: string[];
           assignedBetaLabelAt?: number;
+          tagIds?: (
+            | 'tag_ai'
+            | 'tag_analytics'
+            | 'tag_authentication'
+            | 'tag_cms'
+            | 'tag_code_repository'
+            | 'tag_commerce'
+            | 'tag_databases'
+            | 'tag_dev_tools'
+            | 'tag_experiments'
+            | 'tag_logging'
+            | 'tag_messaging'
+            | 'tag_monitoring'
+            | 'tag_observability'
+            | 'tag_performance'
+            | 'tag_productivity'
+            | 'tag_searching'
+            | 'tag_security'
+            | 'tag_testing'
+            | 'tag_video'
+          )[];
         };
         /**
          * A timestamp that tells you when the configuration was installed successfully
