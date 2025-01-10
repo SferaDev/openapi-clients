@@ -1,5 +1,16 @@
 # cloudflare-api-js
 
+## 0.3.0
+
+### Minor Changes
+
+- 3889330: [BREAKING] Add new endpoints getCommandsEligibleDevices and getCommandsEligibleUsers
+
+### Patch Changes
+
+- 81c233b: [OpenAPI] Spec updates for cloudflare-api-js
+- 62e0e1d: Remove order_by and order_by_direction from AigConfigListGatewayQueryParams
+
 ## 0.2.1
 
 ### Patch Changes

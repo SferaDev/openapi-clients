@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.19.0
+
+### Minor Changes
+
+- 52eee8a: Add 'additionalPermissions' field to GetTeamMembersResponse and TeamLimited types
+
 ## 0.18.3
 
 ### Patch Changes
