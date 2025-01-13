@@ -6411,7 +6411,9 @@ export type AigConfigDeleteGatewayLogsQueryParams = {
       | 'event_id'
       | 'request_type'
       | 'metadata.key'
-      | 'metadata.value';
+      | 'metadata.value'
+      | 'prompts.prompt_id'
+      | 'prompts.version_id';
     operator: 'eq' | 'neq' | 'contains' | 'lt' | 'gt';
     value: ((string | null) | number | boolean)[];
   }[];
@@ -6511,7 +6513,9 @@ export type AigConfigListGatewayLogsQueryParams = {
       | 'event_id'
       | 'request_type'
       | 'metadata.key'
-      | 'metadata.value';
+      | 'metadata.value'
+      | 'prompts.prompt_id'
+      | 'prompts.version_id';
     operator: 'eq' | 'neq' | 'contains' | 'lt' | 'gt';
     value: ((string | null) | number | boolean)[];
   }[];
