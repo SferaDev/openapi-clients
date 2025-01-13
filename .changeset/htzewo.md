@@ -1,5 +1,5 @@
 ---
-"cloudflare-api-js": minor
+"cloudflare-api-js": patch
 ---
 
 [BREAKING] Add new configuration for resolving DNS internally
