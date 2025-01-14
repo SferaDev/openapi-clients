@@ -405,13 +405,13 @@ export type AuthUser = {
    */
   activeDashboardViews?: {
     scopeId: string;
-    viewPreference?: 'cards' | 'list';
-    favoritesViewPreference?: 'closed' | 'open';
-    recentsViewPreference?: 'closed' | 'open';
+    viewPreference?: 'cards' | 'list' | null;
+    favoritesViewPreference?: 'closed' | 'open' | null;
+    recentsViewPreference?: 'closed' | 'open' | null;
   }[];
   importFlowGitNamespace?: string | number | null;
   importFlowGitNamespaceId?: string | number | null;
-  importFlowGitProvider?: 'bitbucket' | 'github' | 'gitlab';
+  importFlowGitProvider?: 'bitbucket' | 'github' | 'gitlab' | null;
   preferredScopesAndGitNamespaces?: {
     scopeId: string;
     gitNamespaceId: string | number | null;
