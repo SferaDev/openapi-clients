@@ -25529,6 +25529,7 @@ export type MagicAcl = {
    */
   name?: string;
   protocols?: ('tcp' | 'udp' | 'icmp')[];
+  unidirectional?: MagicUnidirectional;
 };
 
 export type MagicAclSubnet = MagicIpAddress | MagicCidr;
@@ -25562,6 +25563,7 @@ export type MagicAclUpdateRequest = {
    */
   name?: string;
   protocols?: ('tcp' | 'udp' | 'icmp')[];
+  unidirectional?: MagicUnidirectional;
 };
 
 /**
@@ -25584,6 +25586,7 @@ export type MagicAclsAddSingleRequest = {
    */
   name: string;
   protocols?: ('tcp' | 'udp' | 'icmp')[];
+  unidirectional?: MagicUnidirectional;
 };
 
 export type MagicAclsCollectionResponse = MagicApiResponseSingle & {
@@ -26673,6 +26676,11 @@ export type MagicTunnelsCollectionResponse = MagicApiResponseSingle & {
     gre_tunnels?: MagicGreTunnel[];
   };
 };
+
+/**
+ * The desired traffic direction for this ACL policy. If set to "false", the policy will allow bidirectional traffic. If set to "true", the policy will only allow traffic in one direction. If not included in request, will default to false.
+ */
+export type MagicUnidirectional = boolean;
 
 /**
  * VLAN port number.
