@@ -33549,37 +33549,43 @@ export type RulesetsSetCacheSettingsRule = {
            */
           resolved?: boolean;
         };
-        /**
-         * Use the presence or absence of parameters in the query string to build the cache key.
-         */
-        query_string?: {
-          /**
-           * build the cache key using all query string parameters EXCECPT these excluded parameters
-           */
-          exclude?: {
-            /**
-             * Exclude all query string parameters from use in building the cache key.
-             */
-            all?: boolean;
-            /**
-             * A list of query string parameters NOT used to build the cache key. All parameters present in the request but missing in this list will be used to build the cache key.
-             */
-            list?: string[];
-          };
-          /**
-           * build the cache key using a list of query string parameters that ARE in the request.
-           */
-          include?: {
-            /**
-             * Use all query string parameters in the cache key.
-             */
-            all?: boolean;
-            /**
-             * A list of query string parameters used to build the cache key.
-             */
-            list?: string[];
-          };
-        };
+        query_string?:
+          | {
+              include?:
+                | {
+                    /**
+                     * @example foo
+                     * @example bar
+                     */
+                    list?: string[];
+                  }
+                | {
+                    /**
+                     * Determines whether to include all query string parameters in the cache key.
+                     *
+                     * @example true
+                     */
+                    all?: boolean;
+                  };
+            }
+          | {
+              exclude?:
+                | {
+                    /**
+                     * @example foo
+                     * @example bar
+                     */
+                    list?: string[];
+                  }
+                | {
+                    /**
+                     * Determines whether to exclude all query string parameters from the cache key.
+                     *
+                     * @example true
+                     */
+                    all?: boolean;
+                  };
+            };
         /**
          * Characteristics of the request user agent used in building the cache key.
          */
@@ -33604,7 +33610,7 @@ export type RulesetsSetCacheSettingsRule = {
       ignore_query_strings_order?: boolean;
     };
     /**
-     * Mark whether the request's response from origin is eligible for  Cache Reserve (requires a Cache Reserve add-on plan).
+     * Mark whether the request's response from origin is eligible for Cache Reserve (requires a Cache Reserve add-on plan).
      */
     cache_reserve?: {
       /**
