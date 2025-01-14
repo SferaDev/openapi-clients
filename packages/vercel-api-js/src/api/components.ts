@@ -3608,10 +3608,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    createdAt?: number;
     id?: string;
-    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    createdAt?: number;
     entrypoint?: string | null;
+    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
     readyStateAt?: number;
     output: {
       path: string;
@@ -3883,7 +3883,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
             src?: string;
             dest?: string;
             status?: number;
@@ -3917,7 +3917,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         org: string;
@@ -3929,7 +3929,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         owner: string;
@@ -3941,7 +3941,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | null;
   flags?:
@@ -17841,7 +17841,7 @@ export const getBypassIp = (variables: GetBypassIpVariables, signal?: AbortSigna
           Id: string;
           Domain: string;
           Ip: string;
-          Project: string;
+          ProjectId: string;
           IsProjectRule: boolean;
         }[];
         pagination: void | null;
@@ -17889,10 +17889,6 @@ export type AddBypassIpQueryParams = {
 
 export type AddBypassIpError = Fetcher.ErrorWrapper<undefined>;
 
-export type AddBypassIpResponse = {
-  ok: boolean;
-};
-
 export type AddBypassIpVariables = {
   body?:
     | {
@@ -17931,7 +17927,37 @@ export type AddBypassIpVariables = {
  */
 export const addBypassIp = (variables: AddBypassIpVariables, signal?: AbortSignal) =>
   fetch<
-    AddBypassIpResponse,
+    | {
+        ok: boolean;
+        result: {
+          OwnerId: string;
+          Id: string;
+          Domain: string;
+          Ip?: string;
+          ProjectId: string;
+          IsProjectRule: boolean;
+        }[];
+        pagination: void | null;
+      }
+    | {
+        ok: boolean;
+        result?: {
+          OwnerId: string;
+          Id: string;
+          Domain: string;
+          Ip: string;
+          Action?: 'block' | 'bypass';
+          ProjectId?: string;
+          IsProjectRule?: boolean;
+          Note?: string;
+          CreatedAt: string;
+          ActorId?: string;
+          UpdatedAt: string;
+          UpdatedAtHour: string;
+          DeletedAt?: string;
+          ExpiresAt?: number;
+        }[];
+      },
     AddBypassIpError,
     | {
         /**

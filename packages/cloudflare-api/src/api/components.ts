@@ -1562,6 +1562,48 @@ export const accessPoliciesUpdateAnAccessPolicy = (
     AccessPoliciesUpdateAnAccessPolicyPathParams
   >({ url: '/accounts/{accountId}/access/apps/{appId}/policies/{policyId}', method: 'put', ...variables, signal });
 
+export type AccessPoliciesConvertReusablePathParams = {
+  /**
+   * The application ID.
+   */
+  appId: Schemas.AccessUuid;
+  /**
+   * The policy ID.
+   */
+  policyId: Schemas.AccessUuid;
+  accountId: Schemas.AccessIdentifier;
+};
+
+export type AccessPoliciesConvertReusableError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.AccessApiResponseCommonFailure;
+}>;
+
+export type AccessPoliciesConvertReusableVariables = {
+  pathParams: AccessPoliciesConvertReusablePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Converts an application-scoped policy to a reusable policy. The policy will no longer be exclusively scoped to the application. Further updates to the policy should go through the /accounts/{account_id}/policies/{uid} endpoint.
+ */
+export const accessPoliciesConvertReusable = (
+  variables: AccessPoliciesConvertReusableVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.AccessAppPoliciesComponentsSchemasResponseCollection,
+    AccessPoliciesConvertReusableError,
+    undefined,
+    {},
+    {},
+    AccessPoliciesConvertReusablePathParams
+  >({
+    url: '/accounts/{accountId}/access/apps/{appId}/policies/{policyId}/make_reusable',
+    method: 'put',
+    ...variables,
+    signal
+  });
+
 export type AccessApplicationsRevokeServiceTokensPathParams = {
   appId: Schemas.AccessAppId;
   accountId: Schemas.AccessIdentifier;
@@ -6411,7 +6453,9 @@ export type AigConfigDeleteGatewayLogsQueryParams = {
       | 'event_id'
       | 'request_type'
       | 'metadata.key'
-      | 'metadata.value';
+      | 'metadata.value'
+      | 'prompts.prompt_id'
+      | 'prompts.version_id';
     operator: 'eq' | 'neq' | 'contains' | 'lt' | 'gt';
     value: ((string | null) | number | boolean)[];
   }[];
@@ -6511,7 +6555,9 @@ export type AigConfigListGatewayLogsQueryParams = {
       | 'event_id'
       | 'request_type'
       | 'metadata.key'
-      | 'metadata.value';
+      | 'metadata.value'
+      | 'prompts.prompt_id'
+      | 'prompts.version_id';
     operator: 'eq' | 'neq' | 'contains' | 'lt' | 'gt';
     value: ((string | null) | number | boolean)[];
   }[];
@@ -115735,7 +115781,8 @@ export const operationsByTag = {
     accessPoliciesCreateAnAccessPolicy,
     accessPoliciesDeleteAnAccessPolicy,
     accessPoliciesGetAnAccessPolicy,
-    accessPoliciesUpdateAnAccessPolicy
+    accessPoliciesUpdateAnAccessPolicy,
+    accessPoliciesConvertReusable
   },
   accessBookmarkApplicationsDeprecated: {
     accessBookmarkApplicationsDeprecatedListBookmarkApplications,

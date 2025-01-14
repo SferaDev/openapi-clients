@@ -1994,11 +1994,15 @@ export type AccessAzureAD = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -2219,11 +2223,15 @@ export type AccessCentrify = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -2565,17 +2573,42 @@ export type AccessDecision = 'allow' | 'deny' | 'non_identity' | 'bypass';
  *
  * @example {"type":"public","uri":"test.example.com/admin"}
  * @example {"type":"public","uri":"test.anotherexample.com/staff"}
- * @example {"type":"private","uri":"10.5.0.2"}
- * @example {"type":"private","uri":"10.5.0.3/32:1234-4321"}
+ * @example {"cidr":"10.5.0.0/24","port_range":"80-90","type":"private"}
+ * @example {"cidr":"10.5.0.3/32","port_range":"80","type":"private"}
  * @example {"type":"private","uri":"private-sni.example.com"}
  */
-export type AccessDestinations = {
-  type?: 'public' | 'private';
-  /**
-   * The URI of the destination. Public destinations can include a domain and path with [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/). Private destinations are an early access feature and gated behind a feature flag. Private destinations support private IPv4, IPv6, and Server Name Indications (SNI) with optional port ranges.
-   */
-  uri?: string;
-}[];
+export type AccessDestinations = (
+  | {
+      type?: 'public';
+      /**
+       * The URI of the destination. Public destinations' URIs can include a domain and path with [wildcards](https://developers.cloudflare.com/cloudflare-one/policies/access/app-paths/).
+       */
+      uri?: string;
+    }
+  | {
+      /**
+       * The CIDR range of the destination. Single IPs will be computed as /32.
+       */
+      cidr?: string;
+      /**
+       * The hostname of the destination. Matches a valid SNI served by an HTTPS origin.
+       */
+      hostname?: string;
+      /**
+       * The L4 protocol of the destination. When omitted, both UDP and TCP traffic will match.
+       */
+      l4_protocol?: 'tcp' | 'udp';
+      /**
+       * The port range of the destination. Can be a single port or a range of ports. When omitted, all ports will match.
+       */
+      port_range?: string;
+      type?: 'private';
+      /**
+       * The VNET ID to match the destination. When omitted, all VNETs will match.
+       */
+      vnet_id?: string;
+    }
+)[];
 
 export type AccessDevicePostureCheck = {
   exists?: boolean;
@@ -2752,11 +2785,15 @@ export type AccessFacebook = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -2895,11 +2932,15 @@ export type AccessGithub = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -2976,11 +3017,15 @@ export type AccessGoogle = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -3038,11 +3083,15 @@ export type AccessGoogleApps = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -3251,11 +3300,15 @@ export type AccessIdentityProvider = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -3496,11 +3549,15 @@ export type AccessLinkedin = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -3664,11 +3721,15 @@ export type AccessOidc = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -3860,11 +3921,15 @@ export type AccessOkta = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -3943,11 +4008,15 @@ export type AccessOnelogin = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -3999,11 +4068,15 @@ export type AccessOnetimepin = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -4129,11 +4202,15 @@ export type AccessPingone = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -4561,11 +4638,15 @@ export type AccessSaml = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -4880,11 +4961,15 @@ export type AccessSchemasAzureAD = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -4997,11 +5082,15 @@ export type AccessSchemasCentrify = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -5130,11 +5219,15 @@ export type AccessSchemasFacebook = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -5200,11 +5293,15 @@ export type AccessSchemasGithub = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -5254,11 +5351,15 @@ export type AccessSchemasGoogle = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -5315,11 +5416,15 @@ export type AccessSchemasGoogleApps = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -5393,11 +5498,15 @@ export type AccessSchemasIdentityProvider = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -5470,11 +5579,15 @@ export type AccessSchemasLinkedin = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -5565,11 +5678,15 @@ export type AccessSchemasOidc = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -5754,11 +5871,15 @@ export type AccessSchemasOkta = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -5815,11 +5936,15 @@ export type AccessSchemasOnelogin = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -5871,11 +5996,15 @@ export type AccessSchemasOnetimepin = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -5943,11 +6072,15 @@ export type AccessSchemasPingone = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -6141,11 +6274,15 @@ export type AccessSchemasSaml = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -6456,11 +6593,15 @@ export type AccessSchemasYandex = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -7147,11 +7288,15 @@ export type AccessYandex = {
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
+     * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     */
+    scim_base_url?: string;
+    /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      */
     seat_deprovision?: boolean;
     /**
-     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it token at /access/identity_providers/:idpID/refresh_scim_secret.
+     * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
      */
     secret?: string;
     /**
@@ -33404,37 +33549,43 @@ export type RulesetsSetCacheSettingsRule = {
            */
           resolved?: boolean;
         };
-        /**
-         * Use the presence or absence of parameters in the query string to build the cache key.
-         */
-        query_string?: {
-          /**
-           * build the cache key using all query string parameters EXCECPT these excluded parameters
-           */
-          exclude?: {
-            /**
-             * Exclude all query string parameters from use in building the cache key.
-             */
-            all?: boolean;
-            /**
-             * A list of query string parameters NOT used to build the cache key. All parameters present in the request but missing in this list will be used to build the cache key.
-             */
-            list?: string[];
-          };
-          /**
-           * build the cache key using a list of query string parameters that ARE in the request.
-           */
-          include?: {
-            /**
-             * Use all query string parameters in the cache key.
-             */
-            all?: boolean;
-            /**
-             * A list of query string parameters used to build the cache key.
-             */
-            list?: string[];
-          };
-        };
+        query_string?:
+          | {
+              include?:
+                | {
+                    /**
+                     * @example foo
+                     * @example bar
+                     */
+                    list?: string[];
+                  }
+                | {
+                    /**
+                     * Determines whether to include all query string parameters in the cache key.
+                     *
+                     * @example true
+                     */
+                    all?: boolean;
+                  };
+            }
+          | {
+              exclude?:
+                | {
+                    /**
+                     * @example foo
+                     * @example bar
+                     */
+                    list?: string[];
+                  }
+                | {
+                    /**
+                     * Determines whether to exclude all query string parameters from the cache key.
+                     *
+                     * @example true
+                     */
+                    all?: boolean;
+                  };
+            };
         /**
          * Characteristics of the request user agent used in building the cache key.
          */
@@ -33459,7 +33610,7 @@ export type RulesetsSetCacheSettingsRule = {
       ignore_query_strings_order?: boolean;
     };
     /**
-     * Mark whether the request's response from origin is eligible for  Cache Reserve (requires a Cache Reserve add-on plan).
+     * Mark whether the request's response from origin is eligible for Cache Reserve (requires a Cache Reserve add-on plan).
      */
     cache_reserve?: {
       /**
@@ -47632,7 +47783,7 @@ export type ZeroTrustGatewayRuleSettings = {
     enforce?: boolean;
   };
   /**
-   * Add your own custom resolvers to route queries that match the resolver policy. Cannot be used when resolve_dns_through_cloudflare is set. DNS queries will route to the address closest to their origin. Only valid when a rule's action is set to 'resolve'.
+   * Add your own custom resolvers to route queries that match the resolver policy. Cannot be used when 'resolve_dns_through_cloudflare' or 'resolve_dns_internally' are set. DNS queries will route to the address closest to their origin. Only valid when a rule's action is set to 'resolve'.
    */
   dns_resolvers?: {
     ipv4?: ZeroTrustGatewayDnsResolverSettingsV4[];
@@ -47765,7 +47916,20 @@ export type ZeroTrustGatewayRuleSettings = {
     )[];
   };
   /**
-   * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS resolver. Cannot be set when dns_resolvers are specified. Only valid when a rule's action is set to 'resolve'.
+   * Configure to forward the query to the internal DNS service, passing the specified 'view_id' as input. Cannot be set when 'dns_resolvers' are specified or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is set to 'resolve'.
+   */
+  resolve_dns_internally?: {
+    /**
+     * The fallback behavior to apply when the internal DNS response code is different from 'NOERROR' or when the response data only contains CNAME records for 'A' or 'AAAA' queries.
+     */
+    fallback?: 'none' | 'public_dns';
+    /**
+     * The internal DNS view identifier that's passed to the internal DNS service.
+     */
+    view_id?: string;
+  };
+  /**
+   * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS resolver. Cannot be set when 'dns_resolvers' are specified or 'resolve_dns_internally' is set. Only valid when a rule's action is set to 'resolve'.
    *
    * @example true
    */
