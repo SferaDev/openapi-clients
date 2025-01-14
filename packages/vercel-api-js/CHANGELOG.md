@@ -1,5 +1,13 @@
 # vercel-api-js
 
+## 0.19.1
+
+### Patch Changes
+
+- c50aad5: Add tagIds field to getConfigurations endpoint
+- 1986a5d: [BREAKING] Change field name from 'Project' to 'ProjectId' in getBypassIp response
+- c0119ba: Change additionalPermissions to additionalRoles in GetTeamMembersResponse
+
 ## 0.19.0
 
 ### Minor Changes

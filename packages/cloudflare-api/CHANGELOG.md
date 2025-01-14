@@ -1,5 +1,17 @@
 # cloudflare-api-js
 
+## 0.4.0
+
+### Minor Changes
+
+- b2f3d1f: Refactor query_string structure to support both include and exclude options
+
+### Patch Changes
+
+- 71cc81b: [BREAKING] Add new configuration for resolving DNS internally
+- 45e8197: [OpenAPI] Spec updates for cloudflare-api-js
+- efbdc12: [BREAKING] Add new parameters 'prompts.prompt_id' and 'prompts.version_id' to AigConfigDeleteGatewayLogsQueryParams and AigConfigListGatewayLogsQueryParams
+
 ## 0.3.0
 
 ### Minor Changes
