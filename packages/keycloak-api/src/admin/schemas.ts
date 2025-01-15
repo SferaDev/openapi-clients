@@ -23,6 +23,7 @@ export type AbstractPolicyRepresentation = {
   logic?: Logic;
   decisionStrategy?: DecisionStrategy;
   owner?: string;
+  resourceType?: string;
   /**
    * @uniqueItems true
    */
@@ -319,6 +320,12 @@ export type AuthenticatorConfigRepresentation = {
 
 export type Authorization = {
   permissions?: Permission[];
+};
+
+export type AuthorizationSchema = {
+  resourceTypes?: {
+    [key: string]: ResourceType;
+  };
 };
 
 export type BruteForceStrategy = 'LINEAR' | 'MULTIPLE';
@@ -1190,6 +1197,7 @@ export type PolicyRepresentation = {
   logic?: Logic;
   decisionStrategy?: DecisionStrategy;
   owner?: string;
+  resourceType?: string;
   /**
    * @uniqueItems true
    */
@@ -1436,6 +1444,7 @@ export type RealmRepresentation = {
    */
   defaultRoles?: string[];
   defaultRole?: RoleRepresentation;
+  adminPermissionsClient?: ClientRepresentation;
   defaultGroups?: string[];
   /**
    * @uniqueItems true
@@ -1556,6 +1565,8 @@ export type RealmRepresentation = {
   userManagedAccessAllowed?: boolean;
   organizationsEnabled?: boolean;
   organizations?: OrganizationRepresentation[];
+  verifiableCredentialsEnabled?: boolean;
+  adminPermissionsEnabled?: boolean;
   /**
    * @deprecated true
    */
@@ -1667,6 +1678,15 @@ export type ResourceServerRepresentation = {
   policies?: PolicyRepresentation[];
   scopes?: ScopeRepresentation[];
   decisionStrategy?: DecisionStrategy;
+  authorizationSchema?: AuthorizationSchema;
+};
+
+export type ResourceType = {
+  type?: string;
+  /**
+   * @uniqueItems true
+   */
+  scopes?: string[];
 };
 
 export type RoleRepresentation = {
