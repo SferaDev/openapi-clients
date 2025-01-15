@@ -280,22 +280,22 @@ import {
   postAdminRealmsRealmLogoutAll,
   getAdminRealmsRealmOrganizations,
   postAdminRealmsRealmOrganizations,
-  getAdminRealmsRealmOrganizationsMembersIdOrganizations,
-  getAdminRealmsRealmOrganizationsId,
-  putAdminRealmsRealmOrganizationsId,
-  deleteAdminRealmsRealmOrganizationsId,
-  getAdminRealmsRealmOrganizationsIdIdentityProviders,
-  postAdminRealmsRealmOrganizationsIdIdentityProviders,
-  getAdminRealmsRealmOrganizationsIdIdentityProvidersAlias,
-  deleteAdminRealmsRealmOrganizationsIdIdentityProvidersAlias,
-  getAdminRealmsRealmOrganizationsIdMembers,
-  postAdminRealmsRealmOrganizationsIdMembers,
-  getAdminRealmsRealmOrganizationsIdMembersCount,
-  postAdminRealmsRealmOrganizationsIdMembersInviteExistingUser,
-  postAdminRealmsRealmOrganizationsIdMembersInviteUser,
-  getAdminRealmsRealmOrganizationsIdMembersId,
-  deleteAdminRealmsRealmOrganizationsIdMembersId,
-  getAdminRealmsRealmOrganizationsIdMembersIdOrganizations,
+  getAdminRealmsRealmOrganizationsMembersMemberIdOrganizations,
+  getAdminRealmsRealmOrganizationsOrgId,
+  putAdminRealmsRealmOrganizationsOrgId,
+  deleteAdminRealmsRealmOrganizationsOrgId,
+  getAdminRealmsRealmOrganizationsOrgIdIdentityProviders,
+  postAdminRealmsRealmOrganizationsOrgIdIdentityProviders,
+  getAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAlias,
+  deleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAlias,
+  getAdminRealmsRealmOrganizationsOrgIdMembers,
+  postAdminRealmsRealmOrganizationsOrgIdMembers,
+  getAdminRealmsRealmOrganizationsOrgIdMembersCount,
+  postAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUser,
+  postAdminRealmsRealmOrganizationsOrgIdMembersInviteUser,
+  getAdminRealmsRealmOrganizationsOrgIdMembersMemberId,
+  deleteAdminRealmsRealmOrganizationsOrgIdMembersMemberId,
+  getAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizations,
   postAdminRealmsRealmPartialExport,
   postAdminRealmsRealmPartialImport,
   postAdminRealmsRealmPushRevocation,
@@ -839,30 +839,32 @@ export const operationsByPath = {
   'POST /admin/realms/{realm}/logout-all': postAdminRealmsRealmLogoutAll,
   'GET /admin/realms/{realm}/organizations': getAdminRealmsRealmOrganizations,
   'POST /admin/realms/{realm}/organizations': postAdminRealmsRealmOrganizations,
-  'GET /admin/realms/{realm}/organizations/members/{id}/organizations':
-    getAdminRealmsRealmOrganizationsMembersIdOrganizations,
-  'GET /admin/realms/{realm}/organizations/{id}': getAdminRealmsRealmOrganizationsId,
-  'PUT /admin/realms/{realm}/organizations/{id}': putAdminRealmsRealmOrganizationsId,
-  'DELETE /admin/realms/{realm}/organizations/{id}': deleteAdminRealmsRealmOrganizationsId,
-  'GET /admin/realms/{realm}/organizations/{id}/identity-providers':
-    getAdminRealmsRealmOrganizationsIdIdentityProviders,
-  'POST /admin/realms/{realm}/organizations/{id}/identity-providers':
-    postAdminRealmsRealmOrganizationsIdIdentityProviders,
-  'GET /admin/realms/{realm}/organizations/{id}/identity-providers/{alias}':
-    getAdminRealmsRealmOrganizationsIdIdentityProvidersAlias,
-  'DELETE /admin/realms/{realm}/organizations/{id}/identity-providers/{alias}':
-    deleteAdminRealmsRealmOrganizationsIdIdentityProvidersAlias,
-  'GET /admin/realms/{realm}/organizations/{id}/members': getAdminRealmsRealmOrganizationsIdMembers,
-  'POST /admin/realms/{realm}/organizations/{id}/members': postAdminRealmsRealmOrganizationsIdMembers,
-  'GET /admin/realms/{realm}/organizations/{id}/members/count': getAdminRealmsRealmOrganizationsIdMembersCount,
-  'POST /admin/realms/{realm}/organizations/{id}/members/invite-existing-user':
-    postAdminRealmsRealmOrganizationsIdMembersInviteExistingUser,
-  'POST /admin/realms/{realm}/organizations/{id}/members/invite-user':
-    postAdminRealmsRealmOrganizationsIdMembersInviteUser,
-  'GET /admin/realms/{realm}/organizations/{id}/members/{id}': getAdminRealmsRealmOrganizationsIdMembersId,
-  'DELETE /admin/realms/{realm}/organizations/{id}/members/{id}': deleteAdminRealmsRealmOrganizationsIdMembersId,
-  'GET /admin/realms/{realm}/organizations/{id}/members/{id}/organizations':
-    getAdminRealmsRealmOrganizationsIdMembersIdOrganizations,
+  'GET /admin/realms/{realm}/organizations/members/{member-id}/organizations':
+    getAdminRealmsRealmOrganizationsMembersMemberIdOrganizations,
+  'GET /admin/realms/{realm}/organizations/{org-id}': getAdminRealmsRealmOrganizationsOrgId,
+  'PUT /admin/realms/{realm}/organizations/{org-id}': putAdminRealmsRealmOrganizationsOrgId,
+  'DELETE /admin/realms/{realm}/organizations/{org-id}': deleteAdminRealmsRealmOrganizationsOrgId,
+  'GET /admin/realms/{realm}/organizations/{org-id}/identity-providers':
+    getAdminRealmsRealmOrganizationsOrgIdIdentityProviders,
+  'POST /admin/realms/{realm}/organizations/{org-id}/identity-providers':
+    postAdminRealmsRealmOrganizationsOrgIdIdentityProviders,
+  'GET /admin/realms/{realm}/organizations/{org-id}/identity-providers/{alias}':
+    getAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAlias,
+  'DELETE /admin/realms/{realm}/organizations/{org-id}/identity-providers/{alias}':
+    deleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAlias,
+  'GET /admin/realms/{realm}/organizations/{org-id}/members': getAdminRealmsRealmOrganizationsOrgIdMembers,
+  'POST /admin/realms/{realm}/organizations/{org-id}/members': postAdminRealmsRealmOrganizationsOrgIdMembers,
+  'GET /admin/realms/{realm}/organizations/{org-id}/members/count': getAdminRealmsRealmOrganizationsOrgIdMembersCount,
+  'POST /admin/realms/{realm}/organizations/{org-id}/members/invite-existing-user':
+    postAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUser,
+  'POST /admin/realms/{realm}/organizations/{org-id}/members/invite-user':
+    postAdminRealmsRealmOrganizationsOrgIdMembersInviteUser,
+  'GET /admin/realms/{realm}/organizations/{org-id}/members/{member-id}':
+    getAdminRealmsRealmOrganizationsOrgIdMembersMemberId,
+  'DELETE /admin/realms/{realm}/organizations/{org-id}/members/{member-id}':
+    deleteAdminRealmsRealmOrganizationsOrgIdMembersMemberId,
+  'GET /admin/realms/{realm}/organizations/{org-id}/members/{member-id}/organizations':
+    getAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizations,
   'POST /admin/realms/{realm}/partial-export': postAdminRealmsRealmPartialExport,
   'POST /admin/realms/{realm}/partialImport': postAdminRealmsRealmPartialImport,
   'POST /admin/realms/{realm}/push-revocation': postAdminRealmsRealmPushRevocation,

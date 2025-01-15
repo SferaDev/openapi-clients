@@ -9966,258 +9966,263 @@ export const postAdminRealmsRealmOrganizations = (
     PostAdminRealmsRealmOrganizationsPathParams
   >({ url: '/admin/realms/{realm}/organizations', method: 'post', ...variables, signal });
 
-export type GetAdminRealmsRealmOrganizationsMembersIdOrganizationsPathParams = {
+export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsPathParams = {
   /**
    * realm name (not id!)
    */
   realm: string;
-  id: string;
+  memberId: string;
 };
 
-export type GetAdminRealmsRealmOrganizationsMembersIdOrganizationsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmOrganizationsMembersIdOrganizationsResponse = Schemas.OrganizationRepresentation[];
+export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsResponse = Schemas.OrganizationRepresentation[];
 
-export type GetAdminRealmsRealmOrganizationsMembersIdOrganizationsVariables = {
-  pathParams: GetAdminRealmsRealmOrganizationsMembersIdOrganizationsPathParams;
+export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsVariables = {
+  pathParams: GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsPathParams;
 } & FetcherExtraProps;
 
-export const getAdminRealmsRealmOrganizationsMembersIdOrganizations = (
-  variables: GetAdminRealmsRealmOrganizationsMembersIdOrganizationsVariables,
+export const getAdminRealmsRealmOrganizationsMembersMemberIdOrganizations = (
+  variables: GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsVariables,
   signal?: AbortSignal
 ) =>
   fetch<
-    GetAdminRealmsRealmOrganizationsMembersIdOrganizationsResponse,
-    GetAdminRealmsRealmOrganizationsMembersIdOrganizationsError,
+    GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsResponse,
+    GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsError,
     undefined,
     {},
     {},
-    GetAdminRealmsRealmOrganizationsMembersIdOrganizationsPathParams
-  >({ url: '/admin/realms/{realm}/organizations/members/{id}/organizations', method: 'get', ...variables, signal });
-
-export type GetAdminRealmsRealmOrganizationsIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  id: string;
-};
-
-export type GetAdminRealmsRealmOrganizationsIdError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetAdminRealmsRealmOrganizationsIdVariables = {
-  pathParams: GetAdminRealmsRealmOrganizationsIdPathParams;
-} & FetcherExtraProps;
-
-export const getAdminRealmsRealmOrganizationsId = (
-  variables: GetAdminRealmsRealmOrganizationsIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.OrganizationRepresentation,
-    GetAdminRealmsRealmOrganizationsIdError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmOrganizationsIdPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{id}', method: 'get', ...variables, signal });
-
-export type PutAdminRealmsRealmOrganizationsIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  id: string;
-};
-
-export type PutAdminRealmsRealmOrganizationsIdError = Fetcher.ErrorWrapper<undefined>;
-
-export type PutAdminRealmsRealmOrganizationsIdVariables = {
-  body?: Schemas.OrganizationRepresentation;
-  pathParams: PutAdminRealmsRealmOrganizationsIdPathParams;
-} & FetcherExtraProps;
-
-export const putAdminRealmsRealmOrganizationsId = (
-  variables: PutAdminRealmsRealmOrganizationsIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PutAdminRealmsRealmOrganizationsIdError,
-    Schemas.OrganizationRepresentation,
-    {},
-    {},
-    PutAdminRealmsRealmOrganizationsIdPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{id}', method: 'put', ...variables, signal });
-
-export type DeleteAdminRealmsRealmOrganizationsIdPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  id: string;
-};
-
-export type DeleteAdminRealmsRealmOrganizationsIdError = Fetcher.ErrorWrapper<undefined>;
-
-export type DeleteAdminRealmsRealmOrganizationsIdVariables = {
-  pathParams: DeleteAdminRealmsRealmOrganizationsIdPathParams;
-} & FetcherExtraProps;
-
-export const deleteAdminRealmsRealmOrganizationsId = (
-  variables: DeleteAdminRealmsRealmOrganizationsIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    DeleteAdminRealmsRealmOrganizationsIdError,
-    undefined,
-    {},
-    {},
-    DeleteAdminRealmsRealmOrganizationsIdPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{id}', method: 'delete', ...variables, signal });
-
-export type GetAdminRealmsRealmOrganizationsIdIdentityProvidersPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  id: string;
-};
-
-export type GetAdminRealmsRealmOrganizationsIdIdentityProvidersError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetAdminRealmsRealmOrganizationsIdIdentityProvidersResponse = Schemas.IdentityProviderRepresentation[];
-
-export type GetAdminRealmsRealmOrganizationsIdIdentityProvidersVariables = {
-  pathParams: GetAdminRealmsRealmOrganizationsIdIdentityProvidersPathParams;
-} & FetcherExtraProps;
-
-export const getAdminRealmsRealmOrganizationsIdIdentityProviders = (
-  variables: GetAdminRealmsRealmOrganizationsIdIdentityProvidersVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetAdminRealmsRealmOrganizationsIdIdentityProvidersResponse,
-    GetAdminRealmsRealmOrganizationsIdIdentityProvidersError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmOrganizationsIdIdentityProvidersPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{id}/identity-providers', method: 'get', ...variables, signal });
-
-export type PostAdminRealmsRealmOrganizationsIdIdentityProvidersPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  id: string;
-};
-
-export type PostAdminRealmsRealmOrganizationsIdIdentityProvidersError = Fetcher.ErrorWrapper<undefined>;
-
-export type PostAdminRealmsRealmOrganizationsIdIdentityProvidersVariables = {
-  body?: string;
-  pathParams: PostAdminRealmsRealmOrganizationsIdIdentityProvidersPathParams;
-} & FetcherExtraProps;
-
-/**
- * Adds, or associates, an existing identity provider with the organization. If no identity provider is found, or if it is already associated with the organization, an error response is returned
- */
-export const postAdminRealmsRealmOrganizationsIdIdentityProviders = (
-  variables: PostAdminRealmsRealmOrganizationsIdIdentityProvidersVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    PostAdminRealmsRealmOrganizationsIdIdentityProvidersError,
-    string,
-    {},
-    {},
-    PostAdminRealmsRealmOrganizationsIdIdentityProvidersPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{id}/identity-providers', method: 'post', ...variables, signal });
-
-export type GetAdminRealmsRealmOrganizationsIdIdentityProvidersAliasPathParams = {
-  /**
-   * realm name (not id!)
-   */
-  realm: string;
-  id: string;
-  alias: string;
-};
-
-export type GetAdminRealmsRealmOrganizationsIdIdentityProvidersAliasError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetAdminRealmsRealmOrganizationsIdIdentityProvidersAliasVariables = {
-  pathParams: GetAdminRealmsRealmOrganizationsIdIdentityProvidersAliasPathParams;
-} & FetcherExtraProps;
-
-/**
- * Searches for an identity provider with the given alias. If one is found and is associated with the organization, it is returned. Otherwise, an error response with status NOT_FOUND is returned
- */
-export const getAdminRealmsRealmOrganizationsIdIdentityProvidersAlias = (
-  variables: GetAdminRealmsRealmOrganizationsIdIdentityProvidersAliasVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.IdentityProviderRepresentation,
-    GetAdminRealmsRealmOrganizationsIdIdentityProvidersAliasError,
-    undefined,
-    {},
-    {},
-    GetAdminRealmsRealmOrganizationsIdIdentityProvidersAliasPathParams
+    GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsPathParams
   >({
-    url: '/admin/realms/{realm}/organizations/{id}/identity-providers/{alias}',
+    url: '/admin/realms/{realm}/organizations/members/{memberId}/organizations',
     method: 'get',
     ...variables,
     signal
   });
 
-export type DeleteAdminRealmsRealmOrganizationsIdIdentityProvidersAliasPathParams = {
+export type GetAdminRealmsRealmOrganizationsOrgIdPathParams = {
   /**
    * realm name (not id!)
    */
   realm: string;
-  id: string;
+  orgId: string;
+};
+
+export type GetAdminRealmsRealmOrganizationsOrgIdError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetAdminRealmsRealmOrganizationsOrgIdVariables = {
+  pathParams: GetAdminRealmsRealmOrganizationsOrgIdPathParams;
+} & FetcherExtraProps;
+
+export const getAdminRealmsRealmOrganizationsOrgId = (
+  variables: GetAdminRealmsRealmOrganizationsOrgIdVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.OrganizationRepresentation,
+    GetAdminRealmsRealmOrganizationsOrgIdError,
+    undefined,
+    {},
+    {},
+    GetAdminRealmsRealmOrganizationsOrgIdPathParams
+  >({ url: '/admin/realms/{realm}/organizations/{orgId}', method: 'get', ...variables, signal });
+
+export type PutAdminRealmsRealmOrganizationsOrgIdPathParams = {
+  /**
+   * realm name (not id!)
+   */
+  realm: string;
+  orgId: string;
+};
+
+export type PutAdminRealmsRealmOrganizationsOrgIdError = Fetcher.ErrorWrapper<undefined>;
+
+export type PutAdminRealmsRealmOrganizationsOrgIdVariables = {
+  body?: Schemas.OrganizationRepresentation;
+  pathParams: PutAdminRealmsRealmOrganizationsOrgIdPathParams;
+} & FetcherExtraProps;
+
+export const putAdminRealmsRealmOrganizationsOrgId = (
+  variables: PutAdminRealmsRealmOrganizationsOrgIdVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    undefined,
+    PutAdminRealmsRealmOrganizationsOrgIdError,
+    Schemas.OrganizationRepresentation,
+    {},
+    {},
+    PutAdminRealmsRealmOrganizationsOrgIdPathParams
+  >({ url: '/admin/realms/{realm}/organizations/{orgId}', method: 'put', ...variables, signal });
+
+export type DeleteAdminRealmsRealmOrganizationsOrgIdPathParams = {
+  /**
+   * realm name (not id!)
+   */
+  realm: string;
+  orgId: string;
+};
+
+export type DeleteAdminRealmsRealmOrganizationsOrgIdError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteAdminRealmsRealmOrganizationsOrgIdVariables = {
+  pathParams: DeleteAdminRealmsRealmOrganizationsOrgIdPathParams;
+} & FetcherExtraProps;
+
+export const deleteAdminRealmsRealmOrganizationsOrgId = (
+  variables: DeleteAdminRealmsRealmOrganizationsOrgIdVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    undefined,
+    DeleteAdminRealmsRealmOrganizationsOrgIdError,
+    undefined,
+    {},
+    {},
+    DeleteAdminRealmsRealmOrganizationsOrgIdPathParams
+  >({ url: '/admin/realms/{realm}/organizations/{orgId}', method: 'delete', ...variables, signal });
+
+export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersPathParams = {
+  /**
+   * realm name (not id!)
+   */
+  realm: string;
+  orgId: string;
+};
+
+export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersResponse = Schemas.IdentityProviderRepresentation[];
+
+export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersVariables = {
+  pathParams: GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersPathParams;
+} & FetcherExtraProps;
+
+export const getAdminRealmsRealmOrganizationsOrgIdIdentityProviders = (
+  variables: GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersResponse,
+    GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersError,
+    undefined,
+    {},
+    {},
+    GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersPathParams
+  >({ url: '/admin/realms/{realm}/organizations/{orgId}/identity-providers', method: 'get', ...variables, signal });
+
+export type PostAdminRealmsRealmOrganizationsOrgIdIdentityProvidersPathParams = {
+  /**
+   * realm name (not id!)
+   */
+  realm: string;
+  orgId: string;
+};
+
+export type PostAdminRealmsRealmOrganizationsOrgIdIdentityProvidersError = Fetcher.ErrorWrapper<undefined>;
+
+export type PostAdminRealmsRealmOrganizationsOrgIdIdentityProvidersVariables = {
+  body?: string;
+  pathParams: PostAdminRealmsRealmOrganizationsOrgIdIdentityProvidersPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Adds, or associates, an existing identity provider with the organization. If no identity provider is found, or if it is already associated with the organization, an error response is returned
+ */
+export const postAdminRealmsRealmOrganizationsOrgIdIdentityProviders = (
+  variables: PostAdminRealmsRealmOrganizationsOrgIdIdentityProvidersVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    undefined,
+    PostAdminRealmsRealmOrganizationsOrgIdIdentityProvidersError,
+    string,
+    {},
+    {},
+    PostAdminRealmsRealmOrganizationsOrgIdIdentityProvidersPathParams
+  >({ url: '/admin/realms/{realm}/organizations/{orgId}/identity-providers', method: 'post', ...variables, signal });
+
+export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasPathParams = {
+  /**
+   * realm name (not id!)
+   */
+  realm: string;
+  orgId: string;
   alias: string;
 };
 
-export type DeleteAdminRealmsRealmOrganizationsIdIdentityProvidersAliasError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasError = Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmOrganizationsIdIdentityProvidersAliasVariables = {
-  pathParams: DeleteAdminRealmsRealmOrganizationsIdIdentityProvidersAliasPathParams;
+export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasVariables = {
+  pathParams: GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Searches for an identity provider with the given alias. If one is found and is associated with the organization, it is returned. Otherwise, an error response with status NOT_FOUND is returned
+ */
+export const getAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAlias = (
+  variables: GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.IdentityProviderRepresentation,
+    GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasError,
+    undefined,
+    {},
+    {},
+    GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasPathParams
+  >({
+    url: '/admin/realms/{realm}/organizations/{orgId}/identity-providers/{alias}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type DeleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasPathParams = {
+  /**
+   * realm name (not id!)
+   */
+  realm: string;
+  orgId: string;
+  alias: string;
+};
+
+export type DeleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasVariables = {
+  pathParams: DeleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasPathParams;
 } & FetcherExtraProps;
 
 /**
  * Breaks the association between the identity provider and the organization. The provider itself is not deleted. If no provider is found, or if it is not currently associated with the org, an error response is returned
  */
-export const deleteAdminRealmsRealmOrganizationsIdIdentityProvidersAlias = (
-  variables: DeleteAdminRealmsRealmOrganizationsIdIdentityProvidersAliasVariables,
+export const deleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAlias = (
+  variables: DeleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasVariables,
   signal?: AbortSignal
 ) =>
   fetch<
     undefined,
-    DeleteAdminRealmsRealmOrganizationsIdIdentityProvidersAliasError,
+    DeleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasError,
     undefined,
     {},
     {},
-    DeleteAdminRealmsRealmOrganizationsIdIdentityProvidersAliasPathParams
+    DeleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasPathParams
   >({
-    url: '/admin/realms/{realm}/organizations/{id}/identity-providers/{alias}',
+    url: '/admin/realms/{realm}/organizations/{orgId}/identity-providers/{alias}',
     method: 'delete',
     ...variables,
     signal
   });
 
-export type GetAdminRealmsRealmOrganizationsIdMembersPathParams = {
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersPathParams = {
   /**
    * realm name (not id!)
    */
   realm: string;
-  id: string;
+  orgId: string;
 };
 
-export type GetAdminRealmsRealmOrganizationsIdMembersQueryParams = {
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersQueryParams = {
   /**
    * Boolean which defines whether the param 'search' must match exactly or not
    */
@@ -10246,237 +10251,241 @@ export type GetAdminRealmsRealmOrganizationsIdMembersQueryParams = {
   search?: string;
 };
 
-export type GetAdminRealmsRealmOrganizationsIdMembersError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmOrganizationsIdMembersResponse = Schemas.MemberRepresentation[];
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersResponse = Schemas.MemberRepresentation[];
 
-export type GetAdminRealmsRealmOrganizationsIdMembersVariables = {
-  pathParams: GetAdminRealmsRealmOrganizationsIdMembersPathParams;
-  queryParams?: GetAdminRealmsRealmOrganizationsIdMembersQueryParams;
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersVariables = {
+  pathParams: GetAdminRealmsRealmOrganizationsOrgIdMembersPathParams;
+  queryParams?: GetAdminRealmsRealmOrganizationsOrgIdMembersQueryParams;
 } & FetcherExtraProps;
 
-export const getAdminRealmsRealmOrganizationsIdMembers = (
-  variables: GetAdminRealmsRealmOrganizationsIdMembersVariables,
+export const getAdminRealmsRealmOrganizationsOrgIdMembers = (
+  variables: GetAdminRealmsRealmOrganizationsOrgIdMembersVariables,
   signal?: AbortSignal
 ) =>
   fetch<
-    GetAdminRealmsRealmOrganizationsIdMembersResponse,
-    GetAdminRealmsRealmOrganizationsIdMembersError,
+    GetAdminRealmsRealmOrganizationsOrgIdMembersResponse,
+    GetAdminRealmsRealmOrganizationsOrgIdMembersError,
     undefined,
     {},
-    GetAdminRealmsRealmOrganizationsIdMembersQueryParams,
-    GetAdminRealmsRealmOrganizationsIdMembersPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{id}/members', method: 'get', ...variables, signal });
+    GetAdminRealmsRealmOrganizationsOrgIdMembersQueryParams,
+    GetAdminRealmsRealmOrganizationsOrgIdMembersPathParams
+  >({ url: '/admin/realms/{realm}/organizations/{orgId}/members', method: 'get', ...variables, signal });
 
-export type PostAdminRealmsRealmOrganizationsIdMembersPathParams = {
+export type PostAdminRealmsRealmOrganizationsOrgIdMembersPathParams = {
   /**
    * realm name (not id!)
    */
   realm: string;
-  id: string;
+  orgId: string;
 };
 
-export type PostAdminRealmsRealmOrganizationsIdMembersError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmOrganizationsOrgIdMembersError = Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmOrganizationsIdMembersVariables = {
+export type PostAdminRealmsRealmOrganizationsOrgIdMembersVariables = {
   body?: string;
-  pathParams: PostAdminRealmsRealmOrganizationsIdMembersPathParams;
+  pathParams: PostAdminRealmsRealmOrganizationsOrgIdMembersPathParams;
 } & FetcherExtraProps;
 
 /**
  * Adds, or associates, an existing user with the organization. If no user is found, or if it is already associated with the organization, an error response is returned
  */
-export const postAdminRealmsRealmOrganizationsIdMembers = (
-  variables: PostAdminRealmsRealmOrganizationsIdMembersVariables,
+export const postAdminRealmsRealmOrganizationsOrgIdMembers = (
+  variables: PostAdminRealmsRealmOrganizationsOrgIdMembersVariables,
   signal?: AbortSignal
 ) =>
   fetch<
     undefined,
-    PostAdminRealmsRealmOrganizationsIdMembersError,
+    PostAdminRealmsRealmOrganizationsOrgIdMembersError,
     string,
     {},
     {},
-    PostAdminRealmsRealmOrganizationsIdMembersPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{id}/members', method: 'post', ...variables, signal });
+    PostAdminRealmsRealmOrganizationsOrgIdMembersPathParams
+  >({ url: '/admin/realms/{realm}/organizations/{orgId}/members', method: 'post', ...variables, signal });
 
-export type GetAdminRealmsRealmOrganizationsIdMembersCountPathParams = {
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersCountPathParams = {
   /**
    * realm name (not id!)
    */
   realm: string;
-  id: string;
+  orgId: string;
 };
 
-export type GetAdminRealmsRealmOrganizationsIdMembersCountError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersCountError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmOrganizationsIdMembersCountVariables = {
-  pathParams: GetAdminRealmsRealmOrganizationsIdMembersCountPathParams;
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersCountVariables = {
+  pathParams: GetAdminRealmsRealmOrganizationsOrgIdMembersCountPathParams;
 } & FetcherExtraProps;
 
-export const getAdminRealmsRealmOrganizationsIdMembersCount = (
-  variables: GetAdminRealmsRealmOrganizationsIdMembersCountVariables,
+export const getAdminRealmsRealmOrganizationsOrgIdMembersCount = (
+  variables: GetAdminRealmsRealmOrganizationsOrgIdMembersCountVariables,
   signal?: AbortSignal
 ) =>
   fetch<
     number,
-    GetAdminRealmsRealmOrganizationsIdMembersCountError,
+    GetAdminRealmsRealmOrganizationsOrgIdMembersCountError,
     undefined,
     {},
     {},
-    GetAdminRealmsRealmOrganizationsIdMembersCountPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{id}/members/count', method: 'get', ...variables, signal });
+    GetAdminRealmsRealmOrganizationsOrgIdMembersCountPathParams
+  >({ url: '/admin/realms/{realm}/organizations/{orgId}/members/count', method: 'get', ...variables, signal });
 
-export type PostAdminRealmsRealmOrganizationsIdMembersInviteExistingUserPathParams = {
+export type PostAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUserPathParams = {
   /**
    * realm name (not id!)
    */
   realm: string;
-  id: string;
+  orgId: string;
 };
 
-export type PostAdminRealmsRealmOrganizationsIdMembersInviteExistingUserError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUserError = Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmOrganizationsIdMembersInviteExistingUserVariables = {
-  pathParams: PostAdminRealmsRealmOrganizationsIdMembersInviteExistingUserPathParams;
+export type PostAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUserVariables = {
+  pathParams: PostAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUserPathParams;
 } & FetcherExtraProps;
 
-export const postAdminRealmsRealmOrganizationsIdMembersInviteExistingUser = (
-  variables: PostAdminRealmsRealmOrganizationsIdMembersInviteExistingUserVariables,
+export const postAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUser = (
+  variables: PostAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUserVariables,
   signal?: AbortSignal
 ) =>
   fetch<
     undefined,
-    PostAdminRealmsRealmOrganizationsIdMembersInviteExistingUserError,
+    PostAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUserError,
     undefined,
     {},
     {},
-    PostAdminRealmsRealmOrganizationsIdMembersInviteExistingUserPathParams
+    PostAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUserPathParams
   >({
-    url: '/admin/realms/{realm}/organizations/{id}/members/invite-existing-user',
+    url: '/admin/realms/{realm}/organizations/{orgId}/members/invite-existing-user',
     method: 'post',
     ...variables,
     signal
   });
 
-export type PostAdminRealmsRealmOrganizationsIdMembersInviteUserPathParams = {
+export type PostAdminRealmsRealmOrganizationsOrgIdMembersInviteUserPathParams = {
   /**
    * realm name (not id!)
    */
   realm: string;
-  id: string;
+  orgId: string;
 };
 
-export type PostAdminRealmsRealmOrganizationsIdMembersInviteUserError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmOrganizationsOrgIdMembersInviteUserError = Fetcher.ErrorWrapper<undefined>;
 
-export type PostAdminRealmsRealmOrganizationsIdMembersInviteUserVariables = {
-  pathParams: PostAdminRealmsRealmOrganizationsIdMembersInviteUserPathParams;
+export type PostAdminRealmsRealmOrganizationsOrgIdMembersInviteUserVariables = {
+  pathParams: PostAdminRealmsRealmOrganizationsOrgIdMembersInviteUserPathParams;
 } & FetcherExtraProps;
 
 /**
  * If the user with the given e-mail address exists, it sends an invitation link, otherwise it sends a registration link.
  */
-export const postAdminRealmsRealmOrganizationsIdMembersInviteUser = (
-  variables: PostAdminRealmsRealmOrganizationsIdMembersInviteUserVariables,
+export const postAdminRealmsRealmOrganizationsOrgIdMembersInviteUser = (
+  variables: PostAdminRealmsRealmOrganizationsOrgIdMembersInviteUserVariables,
   signal?: AbortSignal
 ) =>
   fetch<
     undefined,
-    PostAdminRealmsRealmOrganizationsIdMembersInviteUserError,
+    PostAdminRealmsRealmOrganizationsOrgIdMembersInviteUserError,
     undefined,
     {},
     {},
-    PostAdminRealmsRealmOrganizationsIdMembersInviteUserPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{id}/members/invite-user', method: 'post', ...variables, signal });
+    PostAdminRealmsRealmOrganizationsOrgIdMembersInviteUserPathParams
+  >({ url: '/admin/realms/{realm}/organizations/{orgId}/members/invite-user', method: 'post', ...variables, signal });
 
-export type GetAdminRealmsRealmOrganizationsIdMembersIdPathParams = {
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdPathParams = {
   /**
    * realm name (not id!)
    */
   realm: string;
-  id: string;
+  orgId: string;
+  memberId: string;
 };
 
-export type GetAdminRealmsRealmOrganizationsIdMembersIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmOrganizationsIdMembersIdVariables = {
-  pathParams: GetAdminRealmsRealmOrganizationsIdMembersIdPathParams;
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdVariables = {
+  pathParams: GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdPathParams;
 } & FetcherExtraProps;
 
 /**
  * Searches for auser with the given id. If one is found, and is currently a member of the organization, returns it. Otherwise,an error response with status NOT_FOUND is returned
  */
-export const getAdminRealmsRealmOrganizationsIdMembersId = (
-  variables: GetAdminRealmsRealmOrganizationsIdMembersIdVariables,
+export const getAdminRealmsRealmOrganizationsOrgIdMembersMemberId = (
+  variables: GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdVariables,
   signal?: AbortSignal
 ) =>
   fetch<
     Schemas.MemberRepresentation,
-    GetAdminRealmsRealmOrganizationsIdMembersIdError,
+    GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdError,
     undefined,
     {},
     {},
-    GetAdminRealmsRealmOrganizationsIdMembersIdPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{id}/members/{id}', method: 'get', ...variables, signal });
+    GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdPathParams
+  >({ url: '/admin/realms/{realm}/organizations/{orgId}/members/{memberId}', method: 'get', ...variables, signal });
 
-export type DeleteAdminRealmsRealmOrganizationsIdMembersIdPathParams = {
+export type DeleteAdminRealmsRealmOrganizationsOrgIdMembersMemberIdPathParams = {
   /**
    * realm name (not id!)
    */
   realm: string;
-  id: string;
+  orgId: string;
+  memberId: string;
 };
 
-export type DeleteAdminRealmsRealmOrganizationsIdMembersIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteAdminRealmsRealmOrganizationsOrgIdMembersMemberIdError = Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteAdminRealmsRealmOrganizationsIdMembersIdVariables = {
-  pathParams: DeleteAdminRealmsRealmOrganizationsIdMembersIdPathParams;
+export type DeleteAdminRealmsRealmOrganizationsOrgIdMembersMemberIdVariables = {
+  pathParams: DeleteAdminRealmsRealmOrganizationsOrgIdMembersMemberIdPathParams;
 } & FetcherExtraProps;
 
 /**
  * Breaks the association between the user and organization. The user itself is deleted in case the membership is managed, otherwise the user is not deleted. If no user is found, or if they are not a member of the organization, an error response is returned
  */
-export const deleteAdminRealmsRealmOrganizationsIdMembersId = (
-  variables: DeleteAdminRealmsRealmOrganizationsIdMembersIdVariables,
+export const deleteAdminRealmsRealmOrganizationsOrgIdMembersMemberId = (
+  variables: DeleteAdminRealmsRealmOrganizationsOrgIdMembersMemberIdVariables,
   signal?: AbortSignal
 ) =>
   fetch<
     undefined,
-    DeleteAdminRealmsRealmOrganizationsIdMembersIdError,
+    DeleteAdminRealmsRealmOrganizationsOrgIdMembersMemberIdError,
     undefined,
     {},
     {},
-    DeleteAdminRealmsRealmOrganizationsIdMembersIdPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{id}/members/{id}', method: 'delete', ...variables, signal });
+    DeleteAdminRealmsRealmOrganizationsOrgIdMembersMemberIdPathParams
+  >({ url: '/admin/realms/{realm}/organizations/{orgId}/members/{memberId}', method: 'delete', ...variables, signal });
 
-export type GetAdminRealmsRealmOrganizationsIdMembersIdOrganizationsPathParams = {
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsPathParams = {
   /**
    * realm name (not id!)
    */
   realm: string;
-  id: string;
+  orgId: string;
+  memberId: string;
 };
 
-export type GetAdminRealmsRealmOrganizationsIdMembersIdOrganizationsError = Fetcher.ErrorWrapper<undefined>;
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmOrganizationsIdMembersIdOrganizationsResponse = Schemas.OrganizationRepresentation[];
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsResponse =
+  Schemas.OrganizationRepresentation[];
 
-export type GetAdminRealmsRealmOrganizationsIdMembersIdOrganizationsVariables = {
-  pathParams: GetAdminRealmsRealmOrganizationsIdMembersIdOrganizationsPathParams;
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsVariables = {
+  pathParams: GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsPathParams;
 } & FetcherExtraProps;
 
-export const getAdminRealmsRealmOrganizationsIdMembersIdOrganizations = (
-  variables: GetAdminRealmsRealmOrganizationsIdMembersIdOrganizationsVariables,
+export const getAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizations = (
+  variables: GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsVariables,
   signal?: AbortSignal
 ) =>
   fetch<
-    GetAdminRealmsRealmOrganizationsIdMembersIdOrganizationsResponse,
-    GetAdminRealmsRealmOrganizationsIdMembersIdOrganizationsError,
+    GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsResponse,
+    GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsError,
     undefined,
     {},
     {},
-    GetAdminRealmsRealmOrganizationsIdMembersIdOrganizationsPathParams
+    GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsPathParams
   >({
-    url: '/admin/realms/{realm}/organizations/{id}/members/{id}/organizations',
+    url: '/admin/realms/{realm}/organizations/{orgId}/members/{memberId}/organizations',
     method: 'get',
     ...variables,
     signal
@@ -13393,22 +13402,22 @@ export const operationsByTag = {
   organizations: {
     getAdminRealmsRealmOrganizations,
     postAdminRealmsRealmOrganizations,
-    getAdminRealmsRealmOrganizationsMembersIdOrganizations,
-    getAdminRealmsRealmOrganizationsId,
-    putAdminRealmsRealmOrganizationsId,
-    deleteAdminRealmsRealmOrganizationsId,
-    getAdminRealmsRealmOrganizationsIdIdentityProviders,
-    postAdminRealmsRealmOrganizationsIdIdentityProviders,
-    getAdminRealmsRealmOrganizationsIdIdentityProvidersAlias,
-    deleteAdminRealmsRealmOrganizationsIdIdentityProvidersAlias,
-    getAdminRealmsRealmOrganizationsIdMembers,
-    postAdminRealmsRealmOrganizationsIdMembers,
-    getAdminRealmsRealmOrganizationsIdMembersCount,
-    postAdminRealmsRealmOrganizationsIdMembersInviteExistingUser,
-    postAdminRealmsRealmOrganizationsIdMembersInviteUser,
-    getAdminRealmsRealmOrganizationsIdMembersId,
-    deleteAdminRealmsRealmOrganizationsIdMembersId,
-    getAdminRealmsRealmOrganizationsIdMembersIdOrganizations
+    getAdminRealmsRealmOrganizationsMembersMemberIdOrganizations,
+    getAdminRealmsRealmOrganizationsOrgId,
+    putAdminRealmsRealmOrganizationsOrgId,
+    deleteAdminRealmsRealmOrganizationsOrgId,
+    getAdminRealmsRealmOrganizationsOrgIdIdentityProviders,
+    postAdminRealmsRealmOrganizationsOrgIdIdentityProviders,
+    getAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAlias,
+    deleteAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAlias,
+    getAdminRealmsRealmOrganizationsOrgIdMembers,
+    postAdminRealmsRealmOrganizationsOrgIdMembers,
+    getAdminRealmsRealmOrganizationsOrgIdMembersCount,
+    postAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUser,
+    postAdminRealmsRealmOrganizationsOrgIdMembersInviteUser,
+    getAdminRealmsRealmOrganizationsOrgIdMembersMemberId,
+    deleteAdminRealmsRealmOrganizationsOrgIdMembersMemberId,
+    getAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizations
   },
   rolesByID: {
     getAdminRealmsRealmRolesByIdRoleId,
