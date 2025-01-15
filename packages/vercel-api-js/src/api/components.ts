@@ -3962,6 +3962,10 @@ export type CreateDeploymentResponse = {
 
 export type CreateDeploymentRequestBody = {
   /**
+   * Deploy to a custom environment, which will override the default environment
+   */
+  customEnvironmentSlugOrId?: string;
+  /**
    * An deployment id for an existing deployment to redeploy
    */
   deploymentId?: string;
@@ -14234,6 +14238,315 @@ export const deleteProject = (variables: DeleteProjectVariables, signal?: AbortS
     signal
   });
 
+export type PostV1ProjectsIdOrNameCustomEnvironmentsPathParams = {
+  /**
+   * The unique project identifier or the project name
+   */
+  idOrName: string;
+};
+
+export type PostV1ProjectsIdOrNameCustomEnvironmentsQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type PostV1ProjectsIdOrNameCustomEnvironmentsError = Fetcher.ErrorWrapper<undefined>;
+
+export type PostV1ProjectsIdOrNameCustomEnvironmentsRequestBody = {
+  /**
+   * The slug of the custom environment to create.
+   *
+   * @maxLength 32
+   */
+  slug?: string;
+  /**
+   * Description of the custom environment. This is optional.
+   *
+   * @maxLength 256
+   */
+  description?: string;
+  /**
+   * How we want to determine a matching branch. This is optional.
+   */
+  branchMatcher?: {
+    /**
+     * Type of matcher. One of \"equals\", \"startsWith\", or \"endsWith\".
+     */
+    type: 'endsWith' | 'equals' | 'startsWith';
+    /**
+     * Git branch name or portion thereof.
+     *
+     * @maxLength 100
+     */
+    pattern: string;
+  };
+  /**
+   * Where to copy environment variables from. This is optional.
+   */
+  copyEnvVarsFrom?: string;
+};
+
+export type PostV1ProjectsIdOrNameCustomEnvironmentsVariables = {
+  body?: PostV1ProjectsIdOrNameCustomEnvironmentsRequestBody;
+  pathParams: PostV1ProjectsIdOrNameCustomEnvironmentsPathParams;
+  queryParams?: PostV1ProjectsIdOrNameCustomEnvironmentsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Creates a custom environment for the current project. Cannot be named 'Production' or 'Preview'.
+ */
+export const postV1ProjectsIdOrNameCustomEnvironments = (
+  variables: PostV1ProjectsIdOrNameCustomEnvironmentsVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Record<string, any>,
+    PostV1ProjectsIdOrNameCustomEnvironmentsError,
+    PostV1ProjectsIdOrNameCustomEnvironmentsRequestBody,
+    {},
+    PostV1ProjectsIdOrNameCustomEnvironmentsQueryParams,
+    PostV1ProjectsIdOrNameCustomEnvironmentsPathParams
+  >({ url: '/v1/projects/{idOrName}/custom-environments', method: 'post', ...variables, signal });
+
+export type GetV1ProjectsIdOrNameCustomEnvironmentsPathParams = {
+  /**
+   * The unique project identifier or the project name
+   */
+  idOrName: string;
+};
+
+export type GetV1ProjectsIdOrNameCustomEnvironmentsQueryParams = {
+  /**
+   * Fetch custom environments for a specific git branch
+   */
+  gitBranch?: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type GetV1ProjectsIdOrNameCustomEnvironmentsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetV1ProjectsIdOrNameCustomEnvironmentsResponse = {
+  environments: Record<string, any>[];
+};
+
+export type GetV1ProjectsIdOrNameCustomEnvironmentsVariables = {
+  pathParams: GetV1ProjectsIdOrNameCustomEnvironmentsPathParams;
+  queryParams?: GetV1ProjectsIdOrNameCustomEnvironmentsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves a custom environment for the current project. Cannot be named 'Production' or 'Preview'.
+ */
+export const getV1ProjectsIdOrNameCustomEnvironments = (
+  variables: GetV1ProjectsIdOrNameCustomEnvironmentsVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    GetV1ProjectsIdOrNameCustomEnvironmentsResponse,
+    GetV1ProjectsIdOrNameCustomEnvironmentsError,
+    undefined,
+    {},
+    GetV1ProjectsIdOrNameCustomEnvironmentsQueryParams,
+    GetV1ProjectsIdOrNameCustomEnvironmentsPathParams
+  >({ url: '/v1/projects/{idOrName}/custom-environments', method: 'get', ...variables, signal });
+
+export type GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams = {
+  /**
+   * The unique project identifier or the project name
+   */
+  idOrName: string;
+  /**
+   * The unique custom environment identifier within the project
+   */
+  environmentSlugOrId: string;
+};
+
+export type GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables = {
+  pathParams: GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams;
+  queryParams?: GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves a custom environment for the current project. Cannot be named 'Production' or 'Preview'.
+ */
+export const getV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId = (
+  variables: GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Record<string, any>,
+    GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError,
+    undefined,
+    {},
+    GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams,
+    GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams
+  >({ url: '/v1/projects/{idOrName}/custom-environments/{environmentSlugOrId}', method: 'get', ...variables, signal });
+
+export type PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams = {
+  /**
+   * The unique project identifier or the project name
+   */
+  idOrName: string;
+  /**
+   * The unique custom environment identifier within the project
+   */
+  environmentSlugOrId: string;
+};
+
+export type PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError = Fetcher.ErrorWrapper<undefined>;
+
+export type PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody = {
+  /**
+   * The slug of the custom environment.
+   *
+   * @maxLength 32
+   */
+  slug?: string;
+  /**
+   * Description of the custom environment. This is optional.
+   *
+   * @maxLength 256
+   */
+  description?: string;
+  /**
+   * How we want to determine a matching branch. This is optional.
+   */
+  branchMatcher?: {
+    /**
+     * Type of matcher. One of \"equals\", \"startsWith\", or \"endsWith\".
+     */
+    type: 'endsWith' | 'equals' | 'startsWith';
+    /**
+     * Git branch name or portion thereof.
+     *
+     * @maxLength 100
+     */
+    pattern: string;
+  } | null;
+};
+
+export type PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables = {
+  body?: PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody;
+  pathParams: PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams;
+  queryParams?: PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Updates a custom environment for the current project. Cannot be named 'Production' or 'Preview'.
+ */
+export const patchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId = (
+  variables: PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Record<string, any>,
+    PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError,
+    PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody,
+    {},
+    PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams,
+    PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams
+  >({
+    url: '/v1/projects/{idOrName}/custom-environments/{environmentSlugOrId}',
+    method: 'patch',
+    ...variables,
+    signal
+  });
+
+export type DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams = {
+  /**
+   * The unique project identifier or the project name
+   */
+  idOrName: string;
+  /**
+   * The unique custom environment identifier within the project
+   */
+  environmentSlugOrId: string;
+};
+
+export type DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody = {
+  /**
+   * Delete Environment Variables that are not assigned to any environments.
+   */
+  deleteUnassignedEnvironmentVariables?: boolean;
+};
+
+export type DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables = {
+  body: DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody;
+  pathParams: DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams;
+  queryParams?: DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Removes a custom environment for the current project. Cannot be named 'Production' or 'Preview'.
+ */
+export const deleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId = (
+  variables: DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Record<string, any>,
+    DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError,
+    DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody,
+    {},
+    DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams,
+    DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams
+  >({
+    url: '/v1/projects/{idOrName}/custom-environments/{environmentSlugOrId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
 export type GetProjectDomainsPathParams = {
   /**
    * The unique project identifier or the project name
@@ -14252,6 +14565,12 @@ export type GetProjectDomainsQueryParams = {
    * Filters on the target of the domain. Can be either \"production\", \"preview\"
    */
   target?: 'production' | 'preview';
+  /**
+   * The unique custom environment identifier within the project
+   *
+   * @example env_123abc4567
+   */
+  customEnvironmentId?: string;
   /**
    * Filters domains based on specific branch.
    */
@@ -14743,6 +15062,18 @@ export type FilterProjectEnvsQueryParams = {
    * @example vercel-cli:pull
    */
   source?: string;
+  /**
+   * The unique custom environment identifier within the project
+   *
+   * @example env_123abc4567
+   */
+  customEnvironmentId?: string;
+  /**
+   * The custom environment slug (name) within the project
+   *
+   * @example my-custom-env
+   */
+  customEnvironmentSlug?: string;
   /**
    * The Team identifier to perform the request on behalf of.
    */
@@ -16055,6 +16386,12 @@ export type RemoveProjectEnvPathParams = {
 };
 
 export type RemoveProjectEnvQueryParams = {
+  /**
+   * The unique custom environment identifier within the project
+   *
+   * @example env_123abc4567
+   */
+  customEnvironmentId?: string;
   /**
    * The Team identifier to perform the request on behalf of.
    */
@@ -21917,6 +22254,13 @@ export const operationsByTag = {
     createConfigurableLogDrain
   },
   projectMembers: { getProjectMembers, addProjectMember, removeProjectMember },
+  environment: {
+    postV1ProjectsIdOrNameCustomEnvironments,
+    getV1ProjectsIdOrNameCustomEnvironments,
+    getV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId,
+    patchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId,
+    deleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId
+  },
   security: {
     updateAttackChallengeMode,
     putFirewallConfig,
