@@ -40871,47 +40871,6 @@ export const getCommandsQuota = (variables: GetCommandsQuotaVariables, signal?: 
     signal
   });
 
-export type GetCommandsEligibleUsersPathParams = {
-  /**
-   * unique identifier linked to an account in the API request path
-   */
-  accountId: Schemas.DigitalExperienceMonitoringAccountIdentifier;
-};
-
-export type GetCommandsEligibleUsersQueryParams = {
-  /**
-   * filter user emails by search
-   */
-  search?: string;
-};
-
-export type GetCommandsEligibleUsersError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: Schemas.DigitalExperienceMonitoringApiResponseCommonFailure;
-}>;
-
-export type GetCommandsEligibleUsersResponse = Schemas.DigitalExperienceMonitoringApiResponseCollection & {
-  result?: Schemas.DigitalExperienceMonitoringCommandsUsersResponse;
-};
-
-export type GetCommandsEligibleUsersVariables = {
-  pathParams: GetCommandsEligibleUsersPathParams;
-  queryParams?: GetCommandsEligibleUsersQueryParams;
-} & FetcherExtraProps;
-
-/**
- * List users emails associated with devices with WARP client support for remote captures which have been connected in the last 1 hour.
- */
-export const getCommandsEligibleUsers = (variables: GetCommandsEligibleUsersVariables, signal?: AbortSignal) =>
-  fetch<
-    GetCommandsEligibleUsersResponse,
-    GetCommandsEligibleUsersError,
-    undefined,
-    {},
-    GetCommandsEligibleUsersQueryParams,
-    GetCommandsEligibleUsersPathParams
-  >({ url: '/accounts/{accountId}/dex/commands/users', method: 'get', ...variables, signal });
-
 export type GetCommandsCommandIdDownloadsFilenamePathParams = {
   /**
    * unique identifier linked to an account in the API request path
@@ -116222,7 +116181,6 @@ export const operationsByTag = {
     postCommands,
     getCommandsEligibleDevices,
     getCommandsQuota,
-    getCommandsEligibleUsers,
     getCommandsCommandIdDownloadsFilename
   },
   diagnostics: { diagnosticsTraceroute },
