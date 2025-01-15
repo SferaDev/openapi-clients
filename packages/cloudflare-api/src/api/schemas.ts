@@ -19548,7 +19548,22 @@ export type HyperdriveHyperdriveConfigPatch = {
   origin?: HyperdriveHyperdriveDatabase | (HyperdriveHyperdriveInternetOrigin | HyperdriveHyperdriveOverAccessOrigin);
 };
 
-export type HyperdriveHyperdriveConfigResponse = HyperdriveHyperdriveConfig;
+export type HyperdriveHyperdriveConfigResponse = HyperdriveHyperdriveConfig & {
+  /**
+   * When the Hyperdrive configuration was created.
+   *
+   * @example 2017-01-01T00:00:00Z
+   * @format date-time
+   */
+  created_on?: string;
+  /**
+   * When the Hyperdrive configuration was last modified.
+   *
+   * @example 2017-01-01T00:00:00Z
+   * @format date-time
+   */
+  modified_on?: string;
+};
 
 export type HyperdriveHyperdriveDatabase = {
   /**
@@ -19597,7 +19612,7 @@ export type HyperdriveHyperdriveOrigin = HyperdriveHyperdriveDatabase &
 
 export type HyperdriveHyperdriveOverAccessOrigin = {
   /**
-   * The Client ID of the Access token to use when connecting to the origin database
+   * The Client ID of the Access token to use when connecting to the origin database.
    *
    * @example 0123456789abcdef0123456789abcdef.access
    */
@@ -47733,35 +47748,77 @@ export type ZeroTrustGatewayRuleSettings = {
    */
   biso_admin_controls?: {
     /**
-     * Set to false to enable copy-pasting.
+     * Configure whether copy is enabled or not. When set with "remote_only", copying isolated content from the remote browser to the user's local clipboard is disabled. When absent, copy is enabled. Only applies when `version == "v2"`.
+     *
+     * @example remote_only
+     */
+    copy?: 'enabled' | 'disabled' | 'remote_only';
+    /**
+     * Set to false to enable copy-pasting. Only applies when `version == "v1"`.
      *
      * @example false
      */
     dcp?: boolean;
     /**
-     * Set to false to enable downloading.
+     * Set to false to enable downloading. Only applies when `version == "v1"`.
      *
      * @example false
      */
     dd?: boolean;
     /**
-     * Set to false to enable keyboard usage.
+     * Set to false to enable keyboard usage. Only applies when `version == "v1"`.
      *
      * @example false
      */
     dk?: boolean;
     /**
-     * Set to false to enable printing.
+     * Configure whether downloading enabled or not. When absent, downloading is enabled. Only applies when `version == "v2"`.
+     *
+     * @example enabled
+     */
+    download?: 'enabled' | 'disabled';
+    /**
+     * Set to false to enable printing. Only applies when `version == "v1"`.
      *
      * @example false
      */
     dp?: boolean;
     /**
-     * Set to false to enable uploading.
+     * Set to false to enable uploading. Only applies when `version == "v1"`.
      *
      * @example false
      */
     du?: boolean;
+    /**
+     * Configure whether keyboard usage is enabled or not. When absent, keyboard usage is enabled. Only applies when `version == "v2"`.
+     *
+     * @example enabled
+     */
+    keyboard?: 'enabled' | 'disabled';
+    /**
+     * Configure whether pasting is enabled or not. When set with "remote_only", pasting content from the user's local clipboard into isolated pages is disabled. When absent, paste is enabled. Only applies when `version == "v2"`.
+     *
+     * @example enabled
+     */
+    paste?: 'enabled' | 'disabled' | 'remote_only';
+    /**
+     * Configure whether printing is enabled or not. When absent, printing is enabled. Only applies when `version == "v2"`.
+     *
+     * @example enabled
+     */
+    printing?: 'enabled' | 'disabled';
+    /**
+     * Configure whether uploading is enabled or not. When absent, uploading is enabled. Only applies when `version == "v2"`.
+     *
+     * @example enabled
+     */
+    upload?: 'enabled' | 'disabled';
+    /**
+     * Indicates which version of the browser isolation controls should apply.
+     *
+     * @default v1
+     */
+    version?: 'v1' | 'v2';
   };
   /**
    * Enable the custom block page.
