@@ -14314,14 +14314,14 @@ export const postV1ProjectsIdOrNameCustomEnvironments = (
     PostV1ProjectsIdOrNameCustomEnvironmentsPathParams
   >({ url: '/v1/projects/{idOrName}/custom-environments', method: 'post', ...variables, signal });
 
-export type GetV1ProjectsIdOrNameCustomEnvironmentsPathParams = {
+export type GetV9ProjectsIdOrNameCustomEnvironmentsPathParams = {
   /**
    * The unique project identifier or the project name
    */
   idOrName: string;
 };
 
-export type GetV1ProjectsIdOrNameCustomEnvironmentsQueryParams = {
+export type GetV9ProjectsIdOrNameCustomEnvironmentsQueryParams = {
   /**
    * Fetch custom environments for a specific git branch
    */
@@ -14336,34 +14336,34 @@ export type GetV1ProjectsIdOrNameCustomEnvironmentsQueryParams = {
   slug?: string;
 };
 
-export type GetV1ProjectsIdOrNameCustomEnvironmentsError = Fetcher.ErrorWrapper<undefined>;
+export type GetV9ProjectsIdOrNameCustomEnvironmentsError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetV1ProjectsIdOrNameCustomEnvironmentsResponse = {
+export type GetV9ProjectsIdOrNameCustomEnvironmentsResponse = {
   environments: Record<string, any>[];
 };
 
-export type GetV1ProjectsIdOrNameCustomEnvironmentsVariables = {
-  pathParams: GetV1ProjectsIdOrNameCustomEnvironmentsPathParams;
-  queryParams?: GetV1ProjectsIdOrNameCustomEnvironmentsQueryParams;
+export type GetV9ProjectsIdOrNameCustomEnvironmentsVariables = {
+  pathParams: GetV9ProjectsIdOrNameCustomEnvironmentsPathParams;
+  queryParams?: GetV9ProjectsIdOrNameCustomEnvironmentsQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Retrieves a custom environment for the current project. Cannot be named 'Production' or 'Preview'.
+ * Retrieve custom environments
  */
-export const getV1ProjectsIdOrNameCustomEnvironments = (
-  variables: GetV1ProjectsIdOrNameCustomEnvironmentsVariables,
+export const getV9ProjectsIdOrNameCustomEnvironments = (
+  variables: GetV9ProjectsIdOrNameCustomEnvironmentsVariables,
   signal?: AbortSignal
 ) =>
   fetch<
-    GetV1ProjectsIdOrNameCustomEnvironmentsResponse,
-    GetV1ProjectsIdOrNameCustomEnvironmentsError,
+    GetV9ProjectsIdOrNameCustomEnvironmentsResponse,
+    GetV9ProjectsIdOrNameCustomEnvironmentsError,
     undefined,
     {},
-    GetV1ProjectsIdOrNameCustomEnvironmentsQueryParams,
-    GetV1ProjectsIdOrNameCustomEnvironmentsPathParams
-  >({ url: '/v1/projects/{idOrName}/custom-environments', method: 'get', ...variables, signal });
+    GetV9ProjectsIdOrNameCustomEnvironmentsQueryParams,
+    GetV9ProjectsIdOrNameCustomEnvironmentsPathParams
+  >({ url: '/v9/projects/{idOrName}/custom-environments', method: 'get', ...variables, signal });
 
-export type GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams = {
+export type GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams = {
   /**
    * The unique project identifier or the project name
    */
@@ -14374,7 +14374,7 @@ export type GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams
   environmentSlugOrId: string;
 };
 
-export type GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams = {
+export type GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams = {
   /**
    * The Team identifier to perform the request on behalf of.
    */
@@ -14385,30 +14385,30 @@ export type GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParam
   slug?: string;
 };
 
-export type GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables = {
-  pathParams: GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams;
-  queryParams?: GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams;
+export type GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables = {
+  pathParams: GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams;
+  queryParams?: GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Retrieves a custom environment for the current project. Cannot be named 'Production' or 'Preview'.
+ * Retrieve a custom environment
  */
-export const getV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId = (
-  variables: GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables,
+export const getV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId = (
+  variables: GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables,
   signal?: AbortSignal
 ) =>
   fetch<
     Record<string, any>,
-    GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError,
+    GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError,
     undefined,
     {},
-    GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams,
-    GetV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams
-  >({ url: '/v1/projects/{idOrName}/custom-environments/{environmentSlugOrId}', method: 'get', ...variables, signal });
+    GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams,
+    GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams
+  >({ url: '/v9/projects/{idOrName}/custom-environments/{environmentSlugOrId}', method: 'get', ...variables, signal });
 
-export type PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams = {
+export type PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams = {
   /**
    * The unique project identifier or the project name
    */
@@ -14419,7 +14419,7 @@ export type PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathPara
   environmentSlugOrId: string;
 };
 
-export type PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams = {
+export type PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams = {
   /**
    * The Team identifier to perform the request on behalf of.
    */
@@ -14430,9 +14430,9 @@ export type PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryPar
   slug?: string;
 };
 
-export type PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError = Fetcher.ErrorWrapper<undefined>;
+export type PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError = Fetcher.ErrorWrapper<undefined>;
 
-export type PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody = {
+export type PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody = {
   /**
    * The slug of the custom environment.
    *
@@ -14462,34 +14462,34 @@ export type PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestB
   } | null;
 };
 
-export type PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables = {
-  body?: PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody;
-  pathParams: PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams;
-  queryParams?: PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams;
+export type PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables = {
+  body?: PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody;
+  pathParams: PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams;
+  queryParams?: PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Updates a custom environment for the current project. Cannot be named 'Production' or 'Preview'.
+ * Update a custom environment
  */
-export const patchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId = (
-  variables: PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables,
+export const patchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId = (
+  variables: PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables,
   signal?: AbortSignal
 ) =>
   fetch<
     Record<string, any>,
-    PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError,
-    PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody,
+    PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError,
+    PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody,
     {},
-    PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams,
-    PatchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams
+    PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams,
+    PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams
   >({
-    url: '/v1/projects/{idOrName}/custom-environments/{environmentSlugOrId}',
+    url: '/v9/projects/{idOrName}/custom-environments/{environmentSlugOrId}',
     method: 'patch',
     ...variables,
     signal
   });
 
-export type DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams = {
+export type DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams = {
   /**
    * The unique project identifier or the project name
    */
@@ -14500,7 +14500,7 @@ export type DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathPar
   environmentSlugOrId: string;
 };
 
-export type DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams = {
+export type DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams = {
   /**
    * The Team identifier to perform the request on behalf of.
    */
@@ -14511,37 +14511,37 @@ export type DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryPa
   slug?: string;
 };
 
-export type DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError = Fetcher.ErrorWrapper<undefined>;
+export type DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError = Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody = {
+export type DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody = {
   /**
    * Delete Environment Variables that are not assigned to any environments.
    */
   deleteUnassignedEnvironmentVariables?: boolean;
 };
 
-export type DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables = {
-  body: DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody;
-  pathParams: DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams;
-  queryParams?: DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams;
+export type DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables = {
+  body: DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody;
+  pathParams: DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams;
+  queryParams?: DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Removes a custom environment for the current project. Cannot be named 'Production' or 'Preview'.
+ * Remove a custom environment
  */
-export const deleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId = (
-  variables: DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables,
+export const deleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId = (
+  variables: DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables,
   signal?: AbortSignal
 ) =>
   fetch<
     Record<string, any>,
-    DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError,
-    DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody,
+    DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError,
+    DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody,
     {},
-    DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams,
-    DeleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams
+    DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams,
+    DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams
   >({
-    url: '/v1/projects/{idOrName}/custom-environments/{environmentSlugOrId}',
+    url: '/v9/projects/{idOrName}/custom-environments/{environmentSlugOrId}',
     method: 'delete',
     ...variables,
     signal
@@ -22256,10 +22256,10 @@ export const operationsByTag = {
   projectMembers: { getProjectMembers, addProjectMember, removeProjectMember },
   environment: {
     postV1ProjectsIdOrNameCustomEnvironments,
-    getV1ProjectsIdOrNameCustomEnvironments,
-    getV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId,
-    patchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId,
-    deleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId
+    getV9ProjectsIdOrNameCustomEnvironments,
+    getV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId,
+    patchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId,
+    deleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId
   },
   security: {
     updateAttackChallengeMode,
