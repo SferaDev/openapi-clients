@@ -1,5 +1,12 @@
 # cloudflare-api-js
 
+## 0.4.1
+
+### Patch Changes
+
+- d299717: Add unidirectional option to MagicAcl, MagicAclUpdateRequest, and MagicAclsAddSingleRequest
+- 707dd62: Lists and sorts an account’s targets. Filters are optional and are ANDed together.
+
 ## 0.4.0
 
 ### Minor Changes
