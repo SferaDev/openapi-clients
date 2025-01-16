@@ -48634,9 +48634,8 @@ export type InfraTargetsListVariables = {
 } & FetcherExtraProps;
 
 /**
- * Lists and sorts an account’s targets. Filters are optional and are ORed
- * together. However, when a timestamp is specified with both its before and
- * after counterparts, the timestamp filters are ANDed.
+ * Lists and sorts an account’s targets. Filters are optional and are ANDed
+ * together.
  */
 export const infraTargetsList = (variables: InfraTargetsListVariables, signal?: AbortSignal) =>
   fetch<
@@ -56542,6 +56541,11 @@ export type ListAccountRulesetsPathParams = {
   accountId: Schemas.RulesetsAccountId;
 };
 
+export type ListAccountRulesetsQueryParams = {
+  cursor?: Schemas.RulesetsCursor;
+  per_page?: Schemas.RulesetsPerPage;
+};
+
 export type ListAccountRulesetsError = Fetcher.ErrorWrapper<{
   status: 400;
   payload: Responses.RulesetsFailure;
@@ -56549,18 +56553,21 @@ export type ListAccountRulesetsError = Fetcher.ErrorWrapper<{
 
 export type ListAccountRulesetsVariables = {
   pathParams: ListAccountRulesetsPathParams;
+  queryParams?: ListAccountRulesetsQueryParams;
 } & FetcherExtraProps;
 
 /**
  * Fetches all rulesets at the account level.
  */
 export const listAccountRulesets = (variables: ListAccountRulesetsVariables, signal?: AbortSignal) =>
-  fetch<Responses.RulesetsRulesets, ListAccountRulesetsError, undefined, {}, {}, ListAccountRulesetsPathParams>({
-    url: '/accounts/{accountId}/rulesets',
-    method: 'get',
-    ...variables,
-    signal
-  });
+  fetch<
+    Responses.RulesetsRulesets,
+    ListAccountRulesetsError,
+    undefined,
+    {},
+    ListAccountRulesetsQueryParams,
+    ListAccountRulesetsPathParams
+  >({ url: '/accounts/{accountId}/rulesets', method: 'get', ...variables, signal });
 
 export type CreateAccountRulesetPathParams = {
   accountId: Schemas.RulesetsAccountId;
@@ -111308,6 +111315,11 @@ export type ListZoneRulesetsPathParams = {
   zoneId: Schemas.RulesetsZoneId;
 };
 
+export type ListZoneRulesetsQueryParams = {
+  cursor?: Schemas.RulesetsCursor;
+  per_page?: Schemas.RulesetsPerPage;
+};
+
 export type ListZoneRulesetsError = Fetcher.ErrorWrapper<{
   status: 400;
   payload: Responses.RulesetsFailure;
@@ -111315,18 +111327,21 @@ export type ListZoneRulesetsError = Fetcher.ErrorWrapper<{
 
 export type ListZoneRulesetsVariables = {
   pathParams: ListZoneRulesetsPathParams;
+  queryParams?: ListZoneRulesetsQueryParams;
 } & FetcherExtraProps;
 
 /**
  * Fetches all rulesets at the zone level.
  */
 export const listZoneRulesets = (variables: ListZoneRulesetsVariables, signal?: AbortSignal) =>
-  fetch<Responses.RulesetsRulesets, ListZoneRulesetsError, undefined, {}, {}, ListZoneRulesetsPathParams>({
-    url: '/zones/{zoneId}/rulesets',
-    method: 'get',
-    ...variables,
-    signal
-  });
+  fetch<
+    Responses.RulesetsRulesets,
+    ListZoneRulesetsError,
+    undefined,
+    {},
+    ListZoneRulesetsQueryParams,
+    ListZoneRulesetsPathParams
+  >({ url: '/zones/{zoneId}/rulesets', method: 'get', ...variables, signal });
 
 export type CreateZoneRulesetPathParams = {
   zoneId: Schemas.RulesetsZoneId;

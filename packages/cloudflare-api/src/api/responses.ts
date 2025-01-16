@@ -89,6 +89,7 @@ export type RulesetsRulesets = {
    * Whether the API call was successful.
    */
   success: true;
+  result_info?: Schemas.RulesetsResultInfo;
 };
 
 /**
