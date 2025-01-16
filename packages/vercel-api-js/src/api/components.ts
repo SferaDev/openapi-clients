@@ -2144,8 +2144,10 @@ export type UpdateProjectDataCacheResponse = {
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   resourceConfig?: {
+    functionDefaultRegion?: string;
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
+    functionZeroConfigFailover?: boolean;
     allowServerlessConcurrency?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
@@ -3608,10 +3610,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    id?: string;
     createdAt?: number;
-    entrypoint?: string | null;
+    id?: string;
     readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    entrypoint?: string | null;
     readyStateAt?: number;
     output: {
       path: string;
@@ -3883,7 +3885,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
             src?: string;
             dest?: string;
             status?: number;
@@ -3917,7 +3919,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         org: string;
@@ -3929,7 +3931,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         owner: string;
@@ -3941,7 +3943,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | null;
   flags?:
@@ -10645,8 +10647,10 @@ export type GetProjectsResponse = {
     productionDeploymentsFastLane?: boolean;
     publicSource?: boolean | null;
     resourceConfig?: {
+      functionDefaultRegion?: string;
       functionDefaultTimeout?: number;
       functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
+      functionZeroConfigFailover?: boolean;
       allowServerlessConcurrency?: boolean;
       elasticConcurrencyEnabled?: boolean;
     };
@@ -11529,8 +11533,10 @@ export type CreateProjectResponse = {
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   resourceConfig?: {
+    functionDefaultRegion?: string;
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
+    functionZeroConfigFailover?: boolean;
     allowServerlessConcurrency?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
@@ -12593,8 +12599,10 @@ export type GetProjectResponse = {
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   resourceConfig?: {
+    functionDefaultRegion?: string;
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
+    functionZeroConfigFailover?: boolean;
     allowServerlessConcurrency?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
@@ -13485,8 +13493,10 @@ export type UpdateProjectResponse = {
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   resourceConfig?: {
+    functionDefaultRegion?: string;
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
+    functionZeroConfigFailover?: boolean;
     allowServerlessConcurrency?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
