@@ -30941,6 +30941,14 @@ export type RulesetsCompressResponseRule = {
   version: string;
 };
 
+/**
+ * Cursor to use for the next page.
+ *
+ * @example dGhpc2lzYW5leGFtcGxlCg
+ * @minLength 1
+ */
+export type RulesetsCursor = string;
+
 export type RulesetsDDoSDynamicRule = {
   action?: RulesetsRuleAction;
   /**
@@ -32224,6 +32232,15 @@ export type RulesetsMessage = {
  */
 export type RulesetsMessages = RulesetsMessage[];
 
+/**
+ * Number of rulesets to return per page.
+ *
+ * @example 3
+ * @maximum 50
+ * @minimum 1
+ */
+export type RulesetsPerPage = number;
+
 export type RulesetsRedirectRule = {
   action?: RulesetsRuleAction;
   /**
@@ -32505,6 +32522,18 @@ export type RulesetsResponseRule = RulesetsRequestRule & void;
  * The list of rules in the ruleset.
  */
 export type RulesetsResponseRules = RulesetsResponseRule[];
+
+/**
+ * Cursors information to navigate the results.
+ */
+export type RulesetsResultInfo = {
+  /**
+   * Set of cursors.
+   */
+  cursors?: {
+    after?: RulesetsCursor;
+  };
+};
 
 export type RulesetsRewriteRule = {
   action?: RulesetsRuleAction;
