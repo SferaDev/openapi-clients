@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.19.2
+
+### Patch Changes
+
+- ae316fc: [BREAKING] Rename all custom environment API endpoints from V1 to V9
+
 ## 0.19.1
 
 ### Patch Changes
