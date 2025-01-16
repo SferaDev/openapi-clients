@@ -90,10 +90,10 @@ import {
   updateProject,
   deleteProject,
   postV1ProjectsIdOrNameCustomEnvironments,
-  getV1ProjectsIdOrNameCustomEnvironments,
-  getV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId,
-  patchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId,
-  deleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId,
+  getV9ProjectsIdOrNameCustomEnvironments,
+  getV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId,
+  patchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId,
+  deleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId,
   getProjectDomains,
   getProjectDomain,
   updateProjectDomain,
@@ -255,13 +255,13 @@ export const operationsByPath = {
   'PATCH /v9/projects/{idOrName}': updateProject,
   'DELETE /v9/projects/{idOrName}': deleteProject,
   'POST /v1/projects/{idOrName}/custom-environments': postV1ProjectsIdOrNameCustomEnvironments,
-  'GET /v1/projects/{idOrName}/custom-environments': getV1ProjectsIdOrNameCustomEnvironments,
-  'GET /v1/projects/{idOrName}/custom-environments/{environmentSlugOrId}':
-    getV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId,
-  'PATCH /v1/projects/{idOrName}/custom-environments/{environmentSlugOrId}':
-    patchV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId,
-  'DELETE /v1/projects/{idOrName}/custom-environments/{environmentSlugOrId}':
-    deleteV1ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId,
+  'GET /v9/projects/{idOrName}/custom-environments': getV9ProjectsIdOrNameCustomEnvironments,
+  'GET /v9/projects/{idOrName}/custom-environments/{environmentSlugOrId}':
+    getV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId,
+  'PATCH /v9/projects/{idOrName}/custom-environments/{environmentSlugOrId}':
+    patchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId,
+  'DELETE /v9/projects/{idOrName}/custom-environments/{environmentSlugOrId}':
+    deleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId,
   'GET /v9/projects/{idOrName}/domains': getProjectDomains,
   'GET /v9/projects/{idOrName}/domains/{domain}': getProjectDomain,
   'PATCH /v9/projects/{idOrName}/domains/{domain}': updateProjectDomain,
