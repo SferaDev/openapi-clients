@@ -28,7 +28,7 @@
     "tsc": "tsc --noEmit",
     "build": "unbuild",
     "prepack": "unbuild",
-    "generate": "openapi-codegen admin"
+    "generate": "openapi-codegen admin && openapi-codegen account"
   },
   "repository": {
     "type": "git",

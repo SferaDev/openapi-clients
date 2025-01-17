@@ -1,0 +1,43 @@
+import {
+  getAccount,
+  updateAccount,
+  getApplications,
+  getConsent,
+  createConsent,
+  updateConsent,
+  deleteConsent,
+  getCredentials,
+  deleteCredential,
+  updateCredentialLabel,
+  getSessions,
+  deleteCurrentSession,
+  getDevices,
+  deleteSession,
+  getLinkedAccounts,
+  buildLinkingUri,
+  deleteLinkedProvider,
+  getGroups,
+  getOrganizations
+} from './components';
+
+export const operationsByPath = {
+  'GET /{realm}/account/': getAccount,
+  'POST /{realm}/account/': updateAccount,
+  'GET /{realm}/account/applications': getApplications,
+  'GET /{realm}/account/applications/{clientId}/consent': getConsent,
+  'POST /{realm}/account/applications/{clientId}/consent': createConsent,
+  'PUT /{realm}/account/applications/{clientId}/consent': updateConsent,
+  'DELETE /{realm}/account/applications/{clientId}/consent': deleteConsent,
+  'GET /{realm}/account/credentials': getCredentials,
+  'DELETE /{realm}/account/credentials/{credentialId}': deleteCredential,
+  'PUT /{realm}/account/credentials/{credentialId}/label': updateCredentialLabel,
+  'GET /{realm}/account/sessions': getSessions,
+  'DELETE /{realm}/account/sessions': deleteCurrentSession,
+  'GET /{realm}/account/sessions/devices': getDevices,
+  'DELETE /{realm}/account/sessions/{sessionId}': deleteSession,
+  'GET /{realm}/account/linked-accounts': getLinkedAccounts,
+  'GET /{realm}/account/linked-accounts/{providerId}': buildLinkingUri,
+  'DELETE /{realm}/account/linked-accounts/{providerId}': deleteLinkedProvider,
+  'GET /{realm}/account/groups': getGroups,
+  'GET /{realm}/account/organizations': getOrganizations
+};
