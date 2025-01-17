@@ -3,8 +3,15 @@ import { operationsByPath as accountOperations } from './account/extra';
 import { FetcherExtraProps, fetch as fetchRequest } from './common/fetcher';
 import { FetchImpl } from './utils/fetch';
 
-export interface KeycloakApiOptions {
+export interface KeycloakAdminApiOptions {
   baseUrl: string;
+  token: string | null;
+  fetch?: FetchImpl;
+}
+
+export interface KeycloakAccountApiOptions {
+  baseUrl: string;
+  realm: string;
   token: string | null;
   fetch?: FetchImpl;
 }
@@ -28,7 +35,7 @@ export class KeycloakAdminApi {
   #token: string | null;
   #fetch: FetchImpl;
 
-  constructor(options: KeycloakApiOptions) {
+  constructor(options: KeycloakAdminApiOptions) {
     this.#baseUrl = options.baseUrl;
     this.#token = options.token;
 
@@ -50,11 +57,13 @@ export class KeycloakAdminApi {
 
 export class KeycloakAccountApi {
   #baseUrl: string;
+  #realm: string;
   #token: string | null;
   #fetch: FetchImpl;
 
-  constructor(options: KeycloakApiOptions) {
+  constructor(options: KeycloakAccountApiOptions) {
     this.#baseUrl = options.baseUrl;
+    this.#realm = options.realm;
     this.#token = options.token;
 
     this.#fetch = options.fetch || (fetch as FetchImpl);
@@ -65,10 +74,11 @@ export class KeycloakAccountApi {
     endpoint: Endpoint,
     params: AccountRequestEndpointParams<Endpoint>
   ) {
+    const baseUrl = `${this.#baseUrl}/realms/${this.#realm}`;
     const [method = '', url = ''] = endpoint.split(' ');
     const extraParams = (params || {}) as Record<string, unknown>;
 
-    const result = await fetchRequest({ ...extraParams, method, url, baseUrl: this.#baseUrl, token: this.#token, fetchImpl: this.#fetch });
+    const result = await fetchRequest({ ...extraParams, method, url, baseUrl, token: this.#token, fetchImpl: this.#fetch });
     return result as AccountRequestEndpointResult<Endpoint>;
   }
 }

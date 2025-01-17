@@ -7,13 +7,6 @@ import type * as Fetcher from './fetcher';
 import { fetch, FetcherExtraProps } from './fetcher';
 import type * as Schemas from './schemas';
 
-export type GetAccountPathParams = {
-  /**
-   * realm name
-   */
-  realm: string;
-};
-
 export type GetAccountQueryParams = {
   userProfileMetadata?: boolean;
 };
@@ -21,7 +14,6 @@ export type GetAccountQueryParams = {
 export type GetAccountError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetAccountVariables = {
-  pathParams: GetAccountPathParams;
   queryParams?: GetAccountQueryParams;
 } & FetcherExtraProps;
 
@@ -29,41 +21,26 @@ export type GetAccountVariables = {
  * Get user details for currently logged in user
  */
 export const getAccount = (variables: GetAccountVariables, signal?: AbortSignal) =>
-  fetch<Schemas.AccountRepresentation, GetAccountError, undefined, {}, GetAccountQueryParams, GetAccountPathParams>({
-    url: '/{realm}/account/',
+  fetch<Schemas.AccountRepresentation, GetAccountError, undefined, {}, GetAccountQueryParams, {}>({
+    url: '/account/',
     method: 'get',
     ...variables,
     signal
   });
 
-export type UpdateAccountPathParams = {
-  /**
-   * realm name
-   */
-  realm: string;
-};
-
 export type UpdateAccountError = Fetcher.ErrorWrapper<undefined>;
 
 export type UpdateAccountVariables = {
   body?: Schemas.AccountRepresentation;
-  pathParams: UpdateAccountPathParams;
 } & FetcherExtraProps;
 
 export const updateAccount = (variables: UpdateAccountVariables, signal?: AbortSignal) =>
-  fetch<undefined, UpdateAccountError, Schemas.AccountRepresentation, {}, {}, UpdateAccountPathParams>({
-    url: '/{realm}/account/',
+  fetch<undefined, UpdateAccountError, Schemas.AccountRepresentation, {}, {}, {}>({
+    url: '/account/',
     method: 'post',
     ...variables,
     signal
   });
-
-export type GetApplicationsPathParams = {
-  /**
-   * realm name
-   */
-  realm: string;
-};
 
 export type GetApplicationsQueryParams = {
   name?: string;
@@ -74,25 +51,18 @@ export type GetApplicationsError = Fetcher.ErrorWrapper<undefined>;
 export type GetApplicationsResponse = Schemas.ClientRepresentation[];
 
 export type GetApplicationsVariables = {
-  pathParams: GetApplicationsPathParams;
   queryParams?: GetApplicationsQueryParams;
 } & FetcherExtraProps;
 
 export const getApplications = (variables: GetApplicationsVariables, signal?: AbortSignal) =>
-  fetch<
-    GetApplicationsResponse,
-    GetApplicationsError,
-    undefined,
-    {},
-    GetApplicationsQueryParams,
-    GetApplicationsPathParams
-  >({ url: '/{realm}/account/applications', method: 'get', ...variables, signal });
+  fetch<GetApplicationsResponse, GetApplicationsError, undefined, {}, GetApplicationsQueryParams, {}>({
+    url: '/account/applications',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetConsentPathParams = {
-  /**
-   * realm name
-   */
-  realm: string;
   /**
    * client id
    */
@@ -107,17 +77,13 @@ export type GetConsentVariables = {
 
 export const getConsent = (variables: GetConsentVariables, signal?: AbortSignal) =>
   fetch<Schemas.ConsentRepresentation, GetConsentError, undefined, {}, {}, GetConsentPathParams>({
-    url: '/{realm}/account/applications/{clientId}/consent',
+    url: '/account/applications/{clientId}/consent',
     method: 'get',
     ...variables,
     signal
   });
 
 export type CreateConsentPathParams = {
-  /**
-   * realm name
-   */
-  realm: string;
   /**
    * client id
    */
@@ -132,17 +98,13 @@ export type CreateConsentVariables = {
 
 export const createConsent = (variables: CreateConsentVariables, signal?: AbortSignal) =>
   fetch<Schemas.ConsentRepresentation, CreateConsentError, undefined, {}, {}, CreateConsentPathParams>({
-    url: '/{realm}/account/applications/{clientId}/consent',
+    url: '/account/applications/{clientId}/consent',
     method: 'post',
     ...variables,
     signal
   });
 
 export type UpdateConsentPathParams = {
-  /**
-   * realm name
-   */
-  realm: string;
   /**
    * client id
    */
@@ -157,17 +119,13 @@ export type UpdateConsentVariables = {
 
 export const updateConsent = (variables: UpdateConsentVariables, signal?: AbortSignal) =>
   fetch<Schemas.ConsentRepresentation, UpdateConsentError, undefined, {}, {}, UpdateConsentPathParams>({
-    url: '/{realm}/account/applications/{clientId}/consent',
+    url: '/account/applications/{clientId}/consent',
     method: 'put',
     ...variables,
     signal
   });
 
 export type DeleteConsentPathParams = {
-  /**
-   * realm name
-   */
-  realm: string;
   /**
    * client id
    */
@@ -182,18 +140,11 @@ export type DeleteConsentVariables = {
 
 export const deleteConsent = (variables: DeleteConsentVariables, signal?: AbortSignal) =>
   fetch<undefined, DeleteConsentError, undefined, {}, {}, DeleteConsentPathParams>({
-    url: '/{realm}/account/applications/{clientId}/consent',
+    url: '/account/applications/{clientId}/consent',
     method: 'delete',
     ...variables,
     signal
   });
-
-export type GetCredentialsPathParams = {
-  /**
-   * realm name
-   */
-  realm: string;
-};
 
 export type GetCredentialsQueryParams = {
   type?: string;
@@ -205,7 +156,6 @@ export type GetCredentialsError = Fetcher.ErrorWrapper<undefined>;
 export type GetCredentialsResponse = Schemas.CredentialRepresentation[];
 
 export type GetCredentialsVariables = {
-  pathParams: GetCredentialsPathParams;
   queryParams?: GetCredentialsQueryParams;
 } & FetcherExtraProps;
 
@@ -213,20 +163,14 @@ export type GetCredentialsVariables = {
  * Get credentials for currently logged in user
  */
 export const getCredentials = (variables: GetCredentialsVariables, signal?: AbortSignal) =>
-  fetch<
-    GetCredentialsResponse,
-    GetCredentialsError,
-    undefined,
-    {},
-    GetCredentialsQueryParams,
-    GetCredentialsPathParams
-  >({ url: '/{realm}/account/credentials', method: 'get', ...variables, signal });
+  fetch<GetCredentialsResponse, GetCredentialsError, undefined, {}, GetCredentialsQueryParams, {}>({
+    url: '/account/credentials',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type DeleteCredentialPathParams = {
-  /**
-   * realm name
-   */
-  realm: string;
   /**
    * Credential ID
    */
@@ -241,17 +185,13 @@ export type DeleteCredentialVariables = {
 
 export const deleteCredential = (variables: DeleteCredentialVariables, signal?: AbortSignal) =>
   fetch<undefined, DeleteCredentialError, undefined, {}, {}, DeleteCredentialPathParams>({
-    url: '/{realm}/account/credentials/{credentialId}',
+    url: '/account/credentials/{credentialId}',
     method: 'delete',
     ...variables,
     signal
   });
 
 export type UpdateCredentialLabelPathParams = {
-  /**
-   * realm name
-   */
-  realm: string;
   /**
    * Credential ID
    */
@@ -267,90 +207,59 @@ export type UpdateCredentialLabelVariables = {
 
 export const updateCredentialLabel = (variables: UpdateCredentialLabelVariables, signal?: AbortSignal) =>
   fetch<undefined, UpdateCredentialLabelError, string, {}, {}, UpdateCredentialLabelPathParams>({
-    url: '/{realm}/account/credentials/{credentialId}/label',
+    url: '/account/credentials/{credentialId}/label',
     method: 'put',
     ...variables,
     signal
   });
 
-export type GetSessionsPathParams = {
-  /**
-   * realm name
-   */
-  realm: string;
-};
-
 export type GetSessionsError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetSessionsResponse = Schemas.SessionRepresentation[];
 
-export type GetSessionsVariables = {
-  pathParams: GetSessionsPathParams;
-} & FetcherExtraProps;
+export type GetSessionsVariables = FetcherExtraProps;
 
 /**
  * Get sessions for currently logged in user
  */
 export const getSessions = (variables: GetSessionsVariables, signal?: AbortSignal) =>
-  fetch<GetSessionsResponse, GetSessionsError, undefined, {}, {}, GetSessionsPathParams>({
-    url: '/{realm}/account/sessions',
+  fetch<GetSessionsResponse, GetSessionsError, undefined, {}, {}, {}>({
+    url: '/account/sessions',
     method: 'get',
     ...variables,
     signal
   });
 
-export type DeleteCurrentSessionPathParams = {
-  /**
-   * realm name
-   */
-  realm: string;
-};
-
 export type DeleteCurrentSessionError = Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteCurrentSessionVariables = {
-  pathParams: DeleteCurrentSessionPathParams;
-} & FetcherExtraProps;
+export type DeleteCurrentSessionVariables = FetcherExtraProps;
 
 export const deleteCurrentSession = (variables: DeleteCurrentSessionVariables, signal?: AbortSignal) =>
-  fetch<undefined, DeleteCurrentSessionError, undefined, {}, {}, DeleteCurrentSessionPathParams>({
-    url: '/{realm}/account/sessions',
+  fetch<undefined, DeleteCurrentSessionError, undefined, {}, {}, {}>({
+    url: '/account/sessions',
     method: 'delete',
     ...variables,
     signal
   });
 
-export type GetDevicesPathParams = {
-  /**
-   * realm name
-   */
-  realm: string;
-};
-
 export type GetDevicesError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetDevicesResponse = Schemas.DeviceRepresentation[];
 
-export type GetDevicesVariables = {
-  pathParams: GetDevicesPathParams;
-} & FetcherExtraProps;
+export type GetDevicesVariables = FetcherExtraProps;
 
 /**
  * Get devices for currently logged in user
  */
 export const getDevices = (variables: GetDevicesVariables, signal?: AbortSignal) =>
-  fetch<GetDevicesResponse, GetDevicesError, undefined, {}, {}, GetDevicesPathParams>({
-    url: '/{realm}/account/sessions/devices',
+  fetch<GetDevicesResponse, GetDevicesError, undefined, {}, {}, {}>({
+    url: '/account/sessions/devices',
     method: 'get',
     ...variables,
     signal
   });
 
 export type DeleteSessionPathParams = {
-  /**
-   * realm name
-   */
-  realm: string;
   /**
    * Session ID
    */
@@ -365,43 +274,30 @@ export type DeleteSessionVariables = {
 
 export const deleteSession = (variables: DeleteSessionVariables, signal?: AbortSignal) =>
   fetch<undefined, DeleteSessionError, undefined, {}, {}, DeleteSessionPathParams>({
-    url: '/{realm}/account/sessions/{sessionId}',
+    url: '/account/sessions/{sessionId}',
     method: 'delete',
     ...variables,
     signal
   });
 
-export type GetLinkedAccountsPathParams = {
-  /**
-   * realm name
-   */
-  realm: string;
-};
-
 export type GetLinkedAccountsError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetLinkedAccountsResponse = Schemas.LinkedAccountRepresentation[];
 
-export type GetLinkedAccountsVariables = {
-  pathParams: GetLinkedAccountsPathParams;
-} & FetcherExtraProps;
+export type GetLinkedAccountsVariables = FetcherExtraProps;
 
 /**
  * Get linked accounts for currently logged in user
  */
 export const getLinkedAccounts = (variables: GetLinkedAccountsVariables, signal?: AbortSignal) =>
-  fetch<GetLinkedAccountsResponse, GetLinkedAccountsError, undefined, {}, {}, GetLinkedAccountsPathParams>({
-    url: '/{realm}/account/linked-accounts',
+  fetch<GetLinkedAccountsResponse, GetLinkedAccountsError, undefined, {}, {}, {}>({
+    url: '/account/linked-accounts',
     method: 'get',
     ...variables,
     signal
   });
 
 export type BuildLinkingUriPathParams = {
-  /**
-   * realm name
-   */
-  realm: string;
   /**
    * Provider ID
    */
@@ -433,13 +329,9 @@ export const buildLinkingUri = (variables: BuildLinkingUriVariables, signal?: Ab
     {},
     BuildLinkingUriQueryParams,
     BuildLinkingUriPathParams
-  >({ url: '/{realm}/account/linked-accounts/{providerId}', method: 'get', ...variables, signal });
+  >({ url: '/account/linked-accounts/{providerId}', method: 'get', ...variables, signal });
 
 export type DeleteLinkedProviderPathParams = {
-  /**
-   * realm name
-   */
-  realm: string;
   /**
    * Provider ID
    */
@@ -454,18 +346,11 @@ export type DeleteLinkedProviderVariables = {
 
 export const deleteLinkedProvider = (variables: DeleteLinkedProviderVariables, signal?: AbortSignal) =>
   fetch<undefined, DeleteLinkedProviderError, undefined, {}, {}, DeleteLinkedProviderPathParams>({
-    url: '/{realm}/account/linked-accounts/{providerId}',
+    url: '/account/linked-accounts/{providerId}',
     method: 'delete',
     ...variables,
     signal
   });
-
-export type GetGroupsPathParams = {
-  /**
-   * realm name
-   */
-  realm: string;
-};
 
 export type GetGroupsQueryParams = {
   /**
@@ -479,39 +364,29 @@ export type GetGroupsError = Fetcher.ErrorWrapper<undefined>;
 export type GetGroupsResponse = Schemas.GroupRepresentation[];
 
 export type GetGroupsVariables = {
-  pathParams: GetGroupsPathParams;
   queryParams?: GetGroupsQueryParams;
 } & FetcherExtraProps;
 
 export const getGroups = (variables: GetGroupsVariables, signal?: AbortSignal) =>
-  fetch<GetGroupsResponse, GetGroupsError, undefined, {}, GetGroupsQueryParams, GetGroupsPathParams>({
-    url: '/{realm}/account/groups',
+  fetch<GetGroupsResponse, GetGroupsError, undefined, {}, GetGroupsQueryParams, {}>({
+    url: '/account/groups',
     method: 'get',
     ...variables,
     signal
   });
 
-export type GetOrganizationsPathParams = {
-  /**
-   * realm name
-   */
-  realm: string;
-};
-
 export type GetOrganizationsError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetOrganizationsResponse = Schemas.OrganizationRepresentation[];
 
-export type GetOrganizationsVariables = {
-  pathParams: GetOrganizationsPathParams;
-} & FetcherExtraProps;
+export type GetOrganizationsVariables = FetcherExtraProps;
 
 /**
  * Get organizations for currently logged in user
  */
 export const getOrganizations = (variables: GetOrganizationsVariables, signal?: AbortSignal) =>
-  fetch<GetOrganizationsResponse, GetOrganizationsError, undefined, {}, {}, GetOrganizationsPathParams>({
-    url: '/{realm}/account/organizations',
+  fetch<GetOrganizationsResponse, GetOrganizationsError, undefined, {}, {}, {}>({
+    url: '/account/organizations',
     method: 'get',
     ...variables,
     signal
