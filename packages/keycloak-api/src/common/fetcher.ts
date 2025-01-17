@@ -42,6 +42,7 @@ export async function fetch<
         const requestHeaders: HeadersInit = compactObject({
             'Content-Type': 'application/json',
             Authorization: token ? `Bearer ${token}` : undefined,
+            Accept: 'application/json',
             ...headers
         });
 
