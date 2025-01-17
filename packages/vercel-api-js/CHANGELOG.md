@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.19.3
+
+### Patch Changes
+
+- 1d85bc3: [BREAKING] Add 'functionZeroConfigFailover' to resourceConfig
+
 ## 0.19.2
 
 ### Patch Changes
