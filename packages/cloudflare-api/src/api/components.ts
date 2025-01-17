@@ -112416,6 +112416,75 @@ export const zoneSettingsChangeFontsSetting = (
     ZoneSettingsChangeFontsSettingPathParams
   >({ url: '/zones/{zoneId}/settings/fonts', method: 'patch', ...variables, signal });
 
+export type ZoneCacheSettingsGetOriginH2MaxStreamsSettingPathParams = {
+  zoneId: Schemas.CacheRulesIdentifier;
+};
+
+export type ZoneCacheSettingsGetOriginH2MaxStreamsSettingError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
+}>;
+
+export type ZoneCacheSettingsGetOriginH2MaxStreamsSettingResponse = Schemas.CacheRulesZoneCacheSettingsResponseSingle &
+  Schemas.CacheRulesOriginH2MaxStreamsResponseValue;
+
+export type ZoneCacheSettingsGetOriginH2MaxStreamsSettingVariables = {
+  pathParams: ZoneCacheSettingsGetOriginH2MaxStreamsSettingPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Origin H2 Max Streams configures the max number of concurrent requests that Cloudflare will send within the same connection when communicating with the origin server, if the origin supports it. Note that if your origin does not support H2 multiplexing, 5xx errors may be observed, particularly 520s. Also note that the default value is `100` for all plan types except Enterprise where it is `1`. `1` means that H2 multiplexing is disabled.
+ */
+export const zoneCacheSettingsGetOriginH2MaxStreamsSetting = (
+  variables: ZoneCacheSettingsGetOriginH2MaxStreamsSettingVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    ZoneCacheSettingsGetOriginH2MaxStreamsSettingResponse,
+    ZoneCacheSettingsGetOriginH2MaxStreamsSettingError,
+    undefined,
+    {},
+    {},
+    ZoneCacheSettingsGetOriginH2MaxStreamsSettingPathParams
+  >({ url: '/zones/{zoneId}/settings/origin_h2_max_streams', method: 'get', ...variables, signal });
+
+export type ZoneCacheSettingsChangeOriginH2MaxStreamsSettingPathParams = {
+  zoneId: Schemas.CacheRulesIdentifier;
+};
+
+export type ZoneCacheSettingsChangeOriginH2MaxStreamsSettingError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.CacheRulesApiResponseCommonFailure;
+}>;
+
+export type ZoneCacheSettingsChangeOriginH2MaxStreamsSettingResponse =
+  Schemas.CacheRulesZoneCacheSettingsResponseSingle & Schemas.CacheRulesOriginH2MaxStreamsResponseValue;
+
+export type ZoneCacheSettingsChangeOriginH2MaxStreamsSettingRequestBody = {
+  value: Schemas.CacheRulesOriginH2MaxStreamsValue;
+};
+
+export type ZoneCacheSettingsChangeOriginH2MaxStreamsSettingVariables = {
+  body: ZoneCacheSettingsChangeOriginH2MaxStreamsSettingRequestBody;
+  pathParams: ZoneCacheSettingsChangeOriginH2MaxStreamsSettingPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Origin H2 Max Streams configures the max number of concurrent requests that Cloudflare will send within the same connection when communicating with the origin server, if the origin supports it. Note that if your origin does not support H2 multiplexing, 5xx errors may be observed, particularly 520s. Also note that the default value is `100` for all plan types except Enterprise where it is `1`. `1` means that H2 multiplexing is disabled.
+ */
+export const zoneCacheSettingsChangeOriginH2MaxStreamsSetting = (
+  variables: ZoneCacheSettingsChangeOriginH2MaxStreamsSettingVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    ZoneCacheSettingsChangeOriginH2MaxStreamsSettingResponse,
+    ZoneCacheSettingsChangeOriginH2MaxStreamsSettingError,
+    ZoneCacheSettingsChangeOriginH2MaxStreamsSettingRequestBody,
+    {},
+    {},
+    ZoneCacheSettingsChangeOriginH2MaxStreamsSettingPathParams
+  >({ url: '/zones/{zoneId}/settings/origin_h2_max_streams', method: 'patch', ...variables, signal });
+
 export type ZoneCacheSettingsGetOriginMaxHttpVersionSettingPathParams = {
   zoneId: Schemas.CacheRulesIdentifier;
 };
@@ -112433,7 +112502,7 @@ export type ZoneCacheSettingsGetOriginMaxHttpVersionSettingVariables = {
 } & FetcherExtraProps;
 
 /**
- * Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will attempt to use with your origin. This setting allows Cloudflare to make HTTP/2 requests to your origin. (Refer to [Enable HTTP/2 to Origin](https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/), for more information.). The default value is "2" for all plan types except ENT where it is "1"
+ * Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will attempt to use with your origin. This setting allows Cloudflare to make HTTP/2 requests to your origin. (Refer to [Enable HTTP/2 to Origin](https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/), for more information.). The default value is "2" for all plan types except Enterprise where it is "1"
  */
 export const zoneCacheSettingsGetOriginMaxHttpVersionSetting = (
   variables: ZoneCacheSettingsGetOriginMaxHttpVersionSettingVariables,
@@ -112470,7 +112539,7 @@ export type ZoneCacheSettingsChangeOriginMaxHttpVersionSettingVariables = {
 } & FetcherExtraProps;
 
 /**
- * Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will attempt to use with your origin. This setting allows Cloudflare to make HTTP/2 requests to your origin. (Refer to [Enable HTTP/2 to Origin](https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/), for more information.). The default value is "2" for all plan types except ENT where it is "1"
+ * Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will attempt to use with your origin. This setting allows Cloudflare to make HTTP/2 requests to your origin. (Refer to [Enable HTTP/2 to Origin](https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/), for more information.). The default value is "2" for all plan types except Enterprise where it is "1"
  */
 export const zoneCacheSettingsChangeOriginMaxHttpVersionSetting = (
   variables: ZoneCacheSettingsChangeOriginMaxHttpVersionSettingVariables,
@@ -117341,9 +117410,7 @@ export const operationsByTag = {
     zoneCacheSettingsChangeRegionalTieredCacheSetting,
     zoneCacheSettingsDeleteVariantsSetting,
     zoneCacheSettingsGetVariantsSetting,
-    zoneCacheSettingsChangeVariantsSetting,
-    zoneCacheSettingsGetAegisSetting,
-    zoneCacheSettingsGetOriginMaxHttpVersionSetting
+    zoneCacheSettingsChangeVariantsSetting
   },
   originPostQuantum: {
     zoneCacheSettingsGetOriginPostQuantumEncryptionSetting,
@@ -117626,9 +117693,13 @@ export const operationsByTag = {
   zoneSettings: {
     zoneSettingsGetAllZoneSettings,
     zoneSettingsEditZoneSettingsInfo,
+    zoneCacheSettingsGetAegisSetting,
     zoneCacheSettingsChangeAegisSetting,
     zoneSettingsGetFontsSetting,
     zoneSettingsChangeFontsSetting,
+    zoneCacheSettingsGetOriginH2MaxStreamsSetting,
+    zoneCacheSettingsChangeOriginH2MaxStreamsSetting,
+    zoneCacheSettingsGetOriginMaxHttpVersionSetting,
     zoneCacheSettingsChangeOriginMaxHttpVersionSetting,
     zoneSettingsGetSpeedBrainSetting,
     zoneSettingsChangeSpeedBrainSetting,
