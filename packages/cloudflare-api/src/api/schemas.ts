@@ -49221,6 +49221,110 @@ export type ZonesBypassCacheOnCookie = {
   value?: string;
 };
 
+/**
+ * Aegis provides dedicated egress IPs (from Cloudflare to your origin) for your layer 7 WAF and CDN services. The egress IPs are reserved exclusively for your account so that you can increase your origin security by only allowing traffic from a small list of IP addresses.
+ */
+export type ZonesCacheRulesAegis = {
+  /**
+   * ID of the zone setting.
+   *
+   * @example aegis
+   */
+  id: 'aegis';
+  /**
+   * Last time this setting was modified.
+   *
+   * @example 2014-01-01T05:20:00.12345Z
+   * @format date-time
+   */
+  modified_on?: string | null;
+  value?: ZonesCacheRulesAegisValue;
+};
+
+/**
+ * Value of the zone setting.
+ */
+export type ZonesCacheRulesAegisValue = {
+  /**
+   * Whether the feature is enabled or not.
+   */
+  enabled?: boolean;
+  /**
+   * Egress pool id which refers to a grouping of dedicated egress IPs through which Cloudflare will connect to origin.
+   *
+   * @example pool-id
+   */
+  pool_id?: string;
+};
+
+export type ZonesCacheRulesBase = {
+  /**
+   * Identifier of the zone setting.
+   */
+  id: string;
+  /**
+   * Last time this setting was modified.
+   *
+   * @example 2014-01-01T05:20:00.12345Z
+   * @format date-time
+   */
+  modified_on?: string | null;
+};
+
+/**
+ * Origin H2 Max Streams configures the max number of concurrent requests that Cloudflare will send within the same connection when communicating with the origin server, if the origin supports it. Note that if your origin does not support H2 multiplexing, 5xx errors may be observed, particularly 520s. Also note that the default value is `100` for all plan types except Enterprise where it is `1`. `1` means that H2 multiplexing is disabled.
+ */
+export type ZonesCacheRulesOriginH2MaxStreams = {
+  /**
+   * Value of the zone setting.
+   *
+   * @example origin_h2_max_streams
+   */
+  id: 'origin_h2_max_streams';
+  /**
+   * Last time this setting was modified.
+   *
+   * @example 2014-01-01T05:20:00.12345Z
+   * @format date-time
+   */
+  modified_on?: string | null;
+  value?: ZonesCacheRulesOriginH2MaxStreamsValue;
+};
+
+/**
+ * Value of the Origin H2 Max Streams Setting.
+ *
+ * @example 50
+ * @maximum 200
+ * @minimum 1
+ */
+export type ZonesCacheRulesOriginH2MaxStreamsValue = number;
+
+/**
+ * Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will attempt to use with your origin. This setting allows Cloudflare to make HTTP/2 requests to your origin. (Refer to [Enable HTTP/2 to Origin](https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/), for more information.). The default value is "2" for all plan types except Enterprise where it is "1"
+ */
+export type ZonesCacheRulesOriginMaxHttpVersion = {
+  /**
+   * Value of the zone setting.
+   *
+   * @example origin_max_http_version
+   */
+  id: 'origin_max_http_version';
+  /**
+   * Last time this setting was modified.
+   *
+   * @example 2014-01-01T05:20:00.12345Z
+   * @format date-time
+   */
+  modified_on?: string | null;
+  value?: ZonesCacheRulesOriginMaxHttpVersionValue;
+};
+
+/**
+ * Value of the Origin Max HTTP Version Setting.
+ */
+export type ZonesCacheRulesOriginMaxHttpVersionValue = '2' | '1';
+
 export type ZonesCacheByDeviceType = {
   /**
    * Separate cached content based on the visitor's device type.
@@ -50203,6 +50307,7 @@ export type ZonesModifiedOn = string;
 export type ZonesMultipleSettings = (
   | Zones0rtt
   | ZonesAdvancedDdos
+  | ZonesCacheRulesAegis
   | ZonesAlwaysOnline
   | ZonesSchemasAlwaysUseHttps
   | ZonesSchemasAutomaticHttpsRewrites
@@ -50231,6 +50336,8 @@ export type ZonesMultipleSettings = (
   | ZonesOpportunisticOnion
   | ZonesOrangeToOrange
   | ZonesSchemasOriginErrorPagePassThru
+  | ZonesCacheRulesOriginH2MaxStreams
+  | ZonesCacheRulesOriginMaxHttpVersion
   | ZonesSchemasPolish
   | ZonesPrefetchPreload
   | ZonesProxyReadTimeout
@@ -51550,6 +51657,7 @@ export type ZonesServerSideExcludeValue = 'on' | 'off';
 export type ZonesSetting =
   | Zones0rtt
   | ZonesAdvancedDdos
+  | ZonesCacheRulesAegis
   | ZonesAlwaysOnline
   | ZonesSchemasAlwaysUseHttps
   | ZonesSchemasAutomaticHttpsRewrites
@@ -51579,6 +51687,8 @@ export type ZonesSetting =
   | ZonesOpportunisticOnion
   | ZonesOrangeToOrange
   | ZonesSchemasOriginErrorPagePassThru
+  | ZonesCacheRulesOriginH2MaxStreams
+  | ZonesCacheRulesOriginMaxHttpVersion
   | ZonesSchemasPolish
   | ZonesPrefetchPreload
   | ZonesProxyReadTimeout
@@ -52229,6 +52339,7 @@ export type ZonesZoneSettingsResponseCollection = ZonesApiResponseCommon & {
   result?: (
     | Zones0rtt
     | ZonesAdvancedDdos
+    | ZonesCacheRulesAegis
     | ZonesAlwaysOnline
     | ZonesSchemasAlwaysUseHttps
     | ZonesSchemasAutomaticHttpsRewrites
@@ -52258,6 +52369,8 @@ export type ZonesZoneSettingsResponseCollection = ZonesApiResponseCommon & {
     | ZonesOpportunisticOnion
     | ZonesOrangeToOrange
     | ZonesSchemasOriginErrorPagePassThru
+    | ZonesCacheRulesOriginH2MaxStreams
+    | ZonesCacheRulesOriginMaxHttpVersion
     | ZonesSchemasPolish
     | ZonesPrefetchPreload
     | ZonesProxyReadTimeout
