@@ -18131,6 +18131,66 @@ export const getFirewallConfig = (variables: GetFirewallConfigVariables, signal?
     signal
   });
 
+export type GetActiveAttackStatusQueryParams = {
+  projectId: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type GetActiveAttackStatusError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetActiveAttackStatusVariables = {
+  queryParams: GetActiveAttackStatusQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieve active attack data within the last 24h window
+ */
+export const getActiveAttackStatus = (variables: GetActiveAttackStatusVariables, signal?: AbortSignal) =>
+  fetch<
+    | Record<string, any>
+    | {
+        anomalies: {
+          ownerId: string;
+          projectId: string;
+          startTime: number;
+          endTime: number | null;
+          atMinute: number;
+          state?: string;
+          affectedHostMap: {
+            [key: string]: {
+              anomalyAlerts?: {
+                [key: string]: {
+                  at_minute: string;
+                  zscore: number;
+                  total_requests_minute: number;
+                  avg_requests: number;
+                  stddev_requests: number;
+                };
+              };
+              ddosAlerts?: {
+                [key: string]: {
+                  atMinute: string;
+                  totalReqs: number;
+                };
+              };
+            };
+          };
+        }[];
+      },
+    GetActiveAttackStatusError,
+    undefined,
+    {},
+    GetActiveAttackStatusQueryParams,
+    {}
+  >({ url: '/v1/security/firewall/attack-status', method: 'get', ...variables, signal });
+
 export type GetBypassIpQueryParams = {
   projectId: string;
   /**
@@ -22276,6 +22336,7 @@ export const operationsByTag = {
     putFirewallConfig,
     updateFirewallConfig,
     getFirewallConfig,
+    getActiveAttackStatus,
     getBypassIp,
     addBypassIp,
     removeBypassIp
