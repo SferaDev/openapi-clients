@@ -1,5 +1,11 @@
 # keycloak-api
 
+## 0.2.2
+
+### Patch Changes
+
+- 44ab118: Add accept header
+
 ## 0.2.1
 
 ### Patch Changes

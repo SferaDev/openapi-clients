@@ -1,6 +1,6 @@
 {
   "name": "keycloak-api",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "keycloak auto-generated type-safe API client",
   "author": "SferaDev",
   "license": "ISC",
