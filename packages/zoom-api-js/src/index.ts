@@ -1,5 +1,5 @@
 export * from "./client";
 
-import type * as Schemas from "./api/schemas";
-import type * as Components from "./api/components";
+import type * as Schemas from "./meeting/schemas";
+import type * as Components from "./meeting/components";
 export { Schemas, Components };

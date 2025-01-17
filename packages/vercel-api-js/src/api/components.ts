@@ -3610,10 +3610,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    createdAt?: number;
     id?: string;
-    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    createdAt?: number;
     entrypoint?: string | null;
+    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
     readyStateAt?: number;
     output: {
       path: string;
@@ -3885,7 +3885,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
             src?: string;
             dest?: string;
             status?: number;
@@ -3919,7 +3919,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         org: string;
@@ -3931,7 +3931,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         owner: string;
@@ -3943,7 +3943,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | null;
   flags?:
@@ -14358,7 +14358,7 @@ export type GetV9ProjectsIdOrNameCustomEnvironmentsVariables = {
 } & FetcherExtraProps;
 
 /**
- * Retrieve custom environments
+ * Retrieve custom environments for the project. Must not be named 'Production' or 'Preview'.
  */
 export const getV9ProjectsIdOrNameCustomEnvironments = (
   variables: GetV9ProjectsIdOrNameCustomEnvironmentsVariables,
@@ -14403,7 +14403,7 @@ export type GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables 
 } & FetcherExtraProps;
 
 /**
- * Retrieve a custom environment
+ * Retrieve a custom environment for the project. Must not be named 'Production' or 'Preview'.
  */
 export const getV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId = (
   variables: GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables,
@@ -14479,7 +14479,7 @@ export type PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariable
 } & FetcherExtraProps;
 
 /**
- * Update a custom environment
+ * Update a custom environment for the project. Must not be named 'Production' or 'Preview'.
  */
 export const patchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId = (
   variables: PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables,
@@ -14537,7 +14537,7 @@ export type DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariabl
 } & FetcherExtraProps;
 
 /**
- * Remove a custom environment
+ * Remove a custom environment for the project. Must not be named 'Production' or 'Preview'.
  */
 export const deleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId = (
   variables: DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables,
