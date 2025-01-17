@@ -9,7 +9,7 @@ import type * as Schemas from './schemas';
 
 export type GetAccountPathParams = {
   /**
-   * realm name (not id!)
+   * realm name
    */
   realm: string;
 };
@@ -38,7 +38,7 @@ export const getAccount = (variables: GetAccountVariables, signal?: AbortSignal)
 
 export type UpdateAccountPathParams = {
   /**
-   * realm name (not id!)
+   * realm name
    */
   realm: string;
 };
@@ -60,7 +60,7 @@ export const updateAccount = (variables: UpdateAccountVariables, signal?: AbortS
 
 export type GetApplicationsPathParams = {
   /**
-   * realm name (not id!)
+   * realm name
    */
   realm: string;
 };
@@ -90,7 +90,7 @@ export const getApplications = (variables: GetApplicationsVariables, signal?: Ab
 
 export type GetConsentPathParams = {
   /**
-   * realm name (not id!)
+   * realm name
    */
   realm: string;
   /**
@@ -115,7 +115,7 @@ export const getConsent = (variables: GetConsentVariables, signal?: AbortSignal)
 
 export type CreateConsentPathParams = {
   /**
-   * realm name (not id!)
+   * realm name
    */
   realm: string;
   /**
@@ -140,7 +140,7 @@ export const createConsent = (variables: CreateConsentVariables, signal?: AbortS
 
 export type UpdateConsentPathParams = {
   /**
-   * realm name (not id!)
+   * realm name
    */
   realm: string;
   /**
@@ -165,7 +165,7 @@ export const updateConsent = (variables: UpdateConsentVariables, signal?: AbortS
 
 export type DeleteConsentPathParams = {
   /**
-   * realm name (not id!)
+   * realm name
    */
   realm: string;
   /**
@@ -190,7 +190,7 @@ export const deleteConsent = (variables: DeleteConsentVariables, signal?: AbortS
 
 export type GetCredentialsPathParams = {
   /**
-   * realm name (not id!)
+   * realm name
    */
   realm: string;
 };
@@ -224,7 +224,7 @@ export const getCredentials = (variables: GetCredentialsVariables, signal?: Abor
 
 export type DeleteCredentialPathParams = {
   /**
-   * realm name (not id!)
+   * realm name
    */
   realm: string;
   /**
@@ -249,7 +249,7 @@ export const deleteCredential = (variables: DeleteCredentialVariables, signal?: 
 
 export type UpdateCredentialLabelPathParams = {
   /**
-   * realm name (not id!)
+   * realm name
    */
   realm: string;
   /**
@@ -275,7 +275,7 @@ export const updateCredentialLabel = (variables: UpdateCredentialLabelVariables,
 
 export type GetSessionsPathParams = {
   /**
-   * realm name (not id!)
+   * realm name
    */
   realm: string;
 };
@@ -301,7 +301,7 @@ export const getSessions = (variables: GetSessionsVariables, signal?: AbortSigna
 
 export type DeleteCurrentSessionPathParams = {
   /**
-   * realm name (not id!)
+   * realm name
    */
   realm: string;
 };
@@ -322,7 +322,7 @@ export const deleteCurrentSession = (variables: DeleteCurrentSessionVariables, s
 
 export type GetDevicesPathParams = {
   /**
-   * realm name (not id!)
+   * realm name
    */
   realm: string;
 };
@@ -348,7 +348,7 @@ export const getDevices = (variables: GetDevicesVariables, signal?: AbortSignal)
 
 export type DeleteSessionPathParams = {
   /**
-   * realm name (not id!)
+   * realm name
    */
   realm: string;
   /**
@@ -373,7 +373,7 @@ export const deleteSession = (variables: DeleteSessionVariables, signal?: AbortS
 
 export type GetLinkedAccountsPathParams = {
   /**
-   * realm name (not id!)
+   * realm name
    */
   realm: string;
 };
@@ -399,7 +399,7 @@ export const getLinkedAccounts = (variables: GetLinkedAccountsVariables, signal?
 
 export type BuildLinkingUriPathParams = {
   /**
-   * realm name (not id!)
+   * realm name
    */
   realm: string;
   /**
@@ -437,7 +437,7 @@ export const buildLinkingUri = (variables: BuildLinkingUriVariables, signal?: Ab
 
 export type DeleteLinkedProviderPathParams = {
   /**
-   * realm name (not id!)
+   * realm name
    */
   realm: string;
   /**
@@ -462,7 +462,7 @@ export const deleteLinkedProvider = (variables: DeleteLinkedProviderVariables, s
 
 export type GetGroupsPathParams = {
   /**
-   * realm name (not id!)
+   * realm name
    */
   realm: string;
 };
@@ -493,7 +493,7 @@ export const getGroups = (variables: GetGroupsVariables, signal?: AbortSignal) =
 
 export type GetOrganizationsPathParams = {
   /**
-   * realm name (not id!)
+   * realm name
    */
   realm: string;
 };
