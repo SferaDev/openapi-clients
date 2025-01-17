@@ -1,5 +1,11 @@
 # keycloak-api
 
+## 0.2.3
+
+### Patch Changes
+
+- e9199f6: Remove realm from account pathParams
+
 ## 0.2.2
 
 ### Patch Changes
