@@ -6879,6 +6879,7 @@ export type AccessServiceTokens = {
    * @maxLength 36
    */
   id?: void & AccessUuid;
+  last_seen_at?: AccessTimestamp;
   name?: AccessSchemasName;
   updated_at?: AccessTimestamp;
 };
