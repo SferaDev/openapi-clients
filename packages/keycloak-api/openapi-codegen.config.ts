@@ -29,7 +29,30 @@ export default defineConfig({
       await generateFetchers(context, { filenamePrefix, schemasFiles });
       await context.writeFile('extra.ts', buildExtraFile(context));
     }
-  }
+  },
+  account: {
+    from: {
+      source: "file",
+      relativePath: "specs/account.yaml"
+    },
+    outputDir: 'src/account',
+    to: async (context) => {
+      const filenamePrefix = '';
+
+      // Add missing operation ids and clean them
+      context.openAPIDocument = cleanOperationIds({ openAPIDocument: context.openAPIDocument });
+
+      // Sort alphabetically enum values
+      context.openAPIDocument = sortArrays(context.openAPIDocument);
+
+      // Warn for duplicated pathParameters with same name
+      warnForDuplicatedPathParameters(context.openAPIDocument);
+
+      const { schemasFiles } = await generateSchemaTypes(context, { filenamePrefix });
+      await generateFetchers(context, { filenamePrefix, schemasFiles });
+      await context.writeFile('extra.ts', buildExtraFile(context));
+    }
+  },
 });
 
 function sortArrays(openAPIDocument: Context['openAPIDocument']) {
