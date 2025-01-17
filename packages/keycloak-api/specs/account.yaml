@@ -259,15 +259,7 @@ components:
 security:
   - access_token: []
 paths:
-  /{realm}/account/:
-    parameters:
-      - in: path
-        name: realm
-        description: realm name
-        required: true
-        schema:
-          type: string
-        style: simple
+  /account/:
     get:
       tags:
         - Account
@@ -300,15 +292,7 @@ paths:
       responses:
         204:
           description: success
-  /{realm}/account/applications:
-    parameters:
-      - in: path
-        name: realm
-        description: realm name
-        required: true
-        schema:
-          type: string
-        style: simple
+  /account/applications:
     get:
       parameters:
         - name: name
@@ -328,15 +312,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/ClientRepresentation'
-  /{realm}/account/applications/{clientId}/consent:
+  /account/applications/{clientId}/consent:
     parameters:
-      - in: path
-        name: realm
-        description: realm name
-        required: true
-        schema:
-          type: string
-        style: simple
       - in: path
         name: clientId
         description: client id
@@ -388,15 +365,7 @@ paths:
       responses:
         204:
           description: Deleted
-  /{realm}/account/credentials:
-    parameters:
-      - in: path
-        name: realm
-        description: realm name
-        required: true
-        schema:
-          type: string
-        style: simple
+  /account/credentials:
     get:
       tags:
         - Account
@@ -421,15 +390,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/CredentialRepresentation'
-  /{realm}/account/credentials/{credentialId}:
+  /account/credentials/{credentialId}:
     parameters:
-      - in: path
-        name: realm
-        description: realm name
-        required: true
-        schema:
-          type: string
-        style: simple
       - in: path
         name: credentialId
         description: Credential ID
@@ -445,15 +407,8 @@ paths:
       responses:
         204:
           description: success
-  /{realm}/account/credentials/{credentialId}/label:
+  /account/credentials/{credentialId}/label:
     parameters:
-      - in: path
-        name: realm
-        description: realm name
-        required: true
-        schema:
-          type: string
-        style: simple
       - in: path
         name: credentialId
         description: Credential ID
@@ -474,15 +429,7 @@ paths:
       responses:
         204:
           description: No Content
-  /{realm}/account/sessions:
-    parameters:
-      - in: path
-        name: realm
-        description: realm name
-        required: true
-        schema:
-          type: string
-        style: simple
+  /account/sessions:
     get:
       tags:
         - Account
@@ -506,15 +453,7 @@ paths:
       responses:
         204:
           description: success
-  /{realm}/account/sessions/devices:
-    parameters:
-      - in: path
-        name: realm
-        description: realm name
-        required: true
-        schema:
-          type: string
-        style: simple
+  /account/sessions/devices:
     get:
       tags:
         - Account
@@ -530,15 +469,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/DeviceRepresentation'
-  /{realm}/account/sessions/{sessionId}:
+  /account/sessions/{sessionId}:
     parameters:
-      - in: path
-        name: realm
-        description: realm name
-        required: true
-        schema:
-          type: string
-        style: simple
       - in: path
         name: sessionId
         description: Session ID
@@ -554,15 +486,7 @@ paths:
       responses:
         204:
           description: success
-  /{realm}/account/linked-accounts:
-    parameters:
-      - in: path
-        name: realm
-        description: realm name
-        required: true
-        schema:
-          type: string
-        style: simple
+  /account/linked-accounts:
     get:
       tags:
         - Account
@@ -578,15 +502,8 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/LinkedAccountRepresentation'
-  /{realm}/account/linked-accounts/{providerId}:
+  /account/linked-accounts/{providerId}:
     parameters:
-      - in: path
-        name: realm
-        description: realm name
-        required: true
-        schema:
-          type: string
-        style: simple
       - in: path
         name: providerId
         description: Provider ID
@@ -622,15 +539,7 @@ paths:
       responses:
         204:
           description: success
-  /{realm}/account/groups:
-    parameters:
-      - in: path
-        name: realm
-        description: realm name
-        required: true
-        schema:
-          type: string
-        style: simple
+  /account/groups:
     get:
       parameters:
         - name: briefRepresentation
@@ -651,15 +560,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/GroupRepresentation'
-  /{realm}/account/organizations:
-    parameters:
-      - in: path
-        name: realm
-        description: realm name
-        required: true
-        schema:
-          type: string
-        style: simple
+  /account/organizations:
     get:
       tags:
         - Account
