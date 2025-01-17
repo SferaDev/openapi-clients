@@ -9897,7 +9897,40 @@ export type CacheRulesMessages = {
 }[];
 
 /**
- * Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will attempt to use with your origin. This setting allows Cloudflare to make HTTP/2 requests to your origin. (Refer to [Enable HTTP/2 to Origin](https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/), for more information.). The default value is "2" for all plan types except ENT where it is "1"
+ * Origin H2 Max Streams configures the max number of concurrent requests that Cloudflare will send within the same connection when communicating with the origin server, if the origin supports it. Note that if your origin does not support H2 multiplexing, 5xx errors may be observed, particularly 520s. Also note that the default value is `100` for all plan types except Enterprise where it is `1`. `1` means that H2 multiplexing is disabled.
+ */
+export type CacheRulesOriginH2MaxStreams = {
+  /**
+   * Value of the zone setting.
+   *
+   * @example origin_h2_max_streams
+   */
+  id: 'origin_h2_max_streams';
+  /**
+   * Last time this setting was modified.
+   *
+   * @example 2014-01-01T05:20:00.12345Z
+   * @format date-time
+   */
+  modified_on?: string | null;
+  value?: CacheRulesOriginH2MaxStreamsValue;
+};
+
+export type CacheRulesOriginH2MaxStreamsResponseValue = {
+  result?: CacheRulesOriginH2MaxStreams;
+};
+
+/**
+ * Value of the Origin H2 Max Streams Setting.
+ *
+ * @example 50
+ * @maximum 200
+ * @minimum 1
+ */
+export type CacheRulesOriginH2MaxStreamsValue = number;
+
+/**
+ * Origin Max HTTP Setting Version sets the highest HTTP version Cloudflare will attempt to use with your origin. This setting allows Cloudflare to make HTTP/2 requests to your origin. (Refer to [Enable HTTP/2 to Origin](https://developers.cloudflare.com/cache/how-to/enable-http2-to-origin/), for more information.). The default value is "2" for all plan types except Enterprise where it is "1"
  */
 export type CacheRulesOriginMaxHttpVersion = {
   /**
@@ -37394,7 +37427,7 @@ export type TeamsDevicesApplicationInputRequest = {
 };
 
 /**
- * The amount of time in minutes to reconnect after having been disabled.
+ * The amount of time in seconds to reconnect after having been disabled.
  *
  * @example 0
  */
