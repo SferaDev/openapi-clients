@@ -1,0 +1,680 @@
+openapi: 3.0.2
+info:
+  title: Keycloak Account API
+  version: 1.0.0
+components:
+  securitySchemes:
+    access_token:
+      type: http
+      scheme: bearer
+      bearerFormat: ''
+  schemas:
+    OrganizationRepresentation:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        alias:
+          type: string
+        description:
+          type: string
+        enabled:
+          type: boolean
+        domains:
+          type: array
+          items:
+            type: string
+    GroupRepresentation:
+      type: object
+      properties:
+        access:
+          type: object
+          additionalProperties: true
+        attributes:
+          type: object
+          additionalProperties: true
+        clientRoles:
+          type: object
+          additionalProperties: true
+        id:
+          type: string
+        name:
+          type: string
+        path:
+          type: string
+        realmRoles:
+          type: array
+          items:
+            type: string
+        subGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupRepresentation'
+    ClientRepresentation:
+      type: object
+      properties:
+        clientId:
+          type: string
+        clientName:
+          type: string
+        description:
+          type: string
+        userConsentRequired:
+          type: boolean
+        inUse:
+          type: boolean
+        offlineAccess:
+          type: boolean
+        rootUrl:
+          type: string
+        baseUrl:
+          type: string
+        effectiveUrl:
+          type: string
+        logoUri:
+          type: string
+        policyUri:
+          type: string
+        tosUri:
+          type: string
+        consent:
+          $ref: '#/components/schemas/ConsentRepresentation'
+    ConsentRepresentation:
+      type: object
+      properties:
+        createdDate:
+          type: number
+        lastUpdatedDate:
+          type: number
+        grantedScopes:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConsentScopeRepresentation'
+    ConsentScopeRepresentation:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        displayText:
+          type: string
+    LinkedAccountRepresentation:
+      type: object
+      properties:
+        connected:
+          type: boolean
+        social:
+          type: boolean
+        providerAlias:
+          type: string
+        providerName:
+          type: string
+        displayName:
+          type: string
+        linkedUsername:
+          type: string
+    AccountLinkUriRepresentation:
+      type: object
+      properties:
+        accountLinkUri:
+          type: string
+        nonce:
+          type: string
+        hash:
+          type: string
+    AccountRepresentation:
+      type: object
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        email:
+          type: string
+        emailVerified:
+          type: boolean
+        userProfileMetadata:
+          $ref: '#/components/schemas/UserProfileMetadataRepresentation'
+        attributes:
+          $ref: '#/components/schemas/UserProfileAttributesRepresentation'
+    UserProfileMetadataRepresentation:
+      type: object
+      properties:
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserProfileMetadataAttributeRepresentation'
+    UserProfileAttributesRepresentation:
+      type: object
+      properties:
+        locale:
+          type: array
+          items:
+            type: string
+    UserProfileMetadataAttributeRepresentation:
+      type: object
+      properties:
+        name:
+          type: string
+        displayName:
+          type: string
+        required:
+          type: boolean
+        readOnly:
+          type: boolean
+        validators:
+          type: object
+    CredentialRepresentation:
+      type: object
+      properties:
+        type:
+          type: string
+        category:
+          type: string
+        displayName:
+          type: string
+        helpText:
+          type: string
+        iconCssClass:
+          type: string
+        updateAction:
+          type: string
+        removeable:
+          type: boolean
+        userCredentialMetadatas:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserCredentialMetadataRepresentation'
+    UserCredentialMetadataRepresentation:
+      type: object
+      properties:
+        credential:
+          $ref: '#/components/schemas/CredentialMetadataRepresentation'
+    CredentialMetadataRepresentation:
+      type: object
+      properties:
+        id:
+          type: string
+        type:
+          type: string
+        userLabel:
+          type: string
+        createdDate:
+          type: string
+        credentialData:
+          type: object
+    SessionRepresentation:
+      type: object
+      properties:
+        id:
+          type: string
+        ipAddress:
+          type: string
+        started:
+          type: number
+        lastAccess:
+          type: number
+        expires:
+          type: number
+        browser:
+          type: string
+        current:
+          type: boolean
+        clients:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClientRepresentation'
+    DeviceRepresentation:
+      type: object
+      properties:
+        id:
+          type: string
+        ipAddress:
+          type: string
+        os:
+          type: string
+        osVersion:
+          type: string
+        browser:
+          type: string
+        device:
+          type: string
+        lastAccess:
+          type: number
+        current:
+          type: boolean
+        mobile:
+          type: boolean
+        sessions:
+          type: array
+          items:
+            $ref: '#/components/schemas/SessionRepresentation'
+security:
+  - access_token: []
+externalDocs:
+  description: Public documentation
+  url: https://phasetwo.io/docs
+paths:
+  /{realm}/account/:
+    parameters:
+      - in: path
+        name: realm
+        description: realm name (not id!)
+        required: true
+        schema:
+          type: string
+        style: simple
+    get:
+      tags:
+        - Account
+      summary: Get account
+      description: Get user details for currently logged in user
+      operationId: getAccount
+      parameters:
+        - name: userProfileMetadata
+          in: query
+          schema:
+            type: boolean
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountRepresentation'
+    post:
+      tags:
+        - Account
+      summary: Update account
+      operationId: updateAccount
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AccountRepresentation'
+        required: true
+      responses:
+        204:
+          description: success
+  /{realm}/account/applications:
+    parameters:
+      - in: path
+        name: realm
+        description: realm name (not id!)
+        required: true
+        schema:
+          type: string
+        style: simple
+    get:
+      parameters:
+        - name: name
+          in: query
+          schema:
+            type: string
+      tags:
+        - Account
+      summary: Get applications
+      operationId: getApplications
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ClientRepresentation'
+  /{realm}/account/applications/{clientId}/consent:
+    parameters:
+      - in: path
+        name: realm
+        description: realm name (not id!)
+        required: true
+        schema:
+          type: string
+        style: simple
+      - in: path
+        name: clientId
+        description: client id
+        required: true
+        schema:
+          type: string
+        style: simple
+    get:
+      tags:
+        - Account
+      summary: Get consent
+      operationId: getConsent
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsentRepresentation'
+    post:
+      tags:
+        - Account
+      summary: Create consent
+      operationId: createConsent
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsentRepresentation'
+    put:
+      tags:
+        - Account
+      summary: Update consent
+      operationId: updateConsent
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsentRepresentation'
+    delete:
+      tags:
+        - Account
+      summary: Delete consent
+      operationId: deleteConsent
+      responses:
+        204:
+          description: Deleted
+  /{realm}/account/credentials:
+    parameters:
+      - in: path
+        name: realm
+        description: realm name (not id!)
+        required: true
+        schema:
+          type: string
+        style: simple
+    get:
+      tags:
+        - Account
+      summary: Get credentials
+      description: Get credentials for currently logged in user
+      operationId: getCredentials
+      parameters:
+        - name: type
+          in: query
+          schema:
+            type: string
+        - name: user-credentials
+          in: query
+          schema:
+            type: boolean
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CredentialRepresentation'
+  /{realm}/account/credentials/{credentialId}:
+    parameters:
+      - in: path
+        name: realm
+        description: realm name (not id!)
+        required: true
+        schema:
+          type: string
+        style: simple
+      - in: path
+        name: credentialId
+        description: Credential ID
+        required: true
+        schema:
+          type: string
+        style: simple
+    delete:
+      tags:
+        - Account
+      summary: Delete the credential
+      operationId: deleteCredential
+      responses:
+        204:
+          description: success
+  /{realm}/account/credentials/{credentialId}/label:
+    parameters:
+      - in: path
+        name: realm
+        description: realm name (not id!)
+        required: true
+        schema:
+          type: string
+        style: simple
+      - in: path
+        name: credentialId
+        description: Credential ID
+        required: true
+        schema:
+          type: string
+        style: simple
+    put:
+      tags:
+        - Account
+      summary: Update a user label of specified credential of current user
+      operationId: updateCredentialLabel
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: string
+      responses:
+        204:
+          description: No Content
+  /{realm}/account/sessions:
+    parameters:
+      - in: path
+        name: realm
+        description: realm name (not id!)
+        required: true
+        schema:
+          type: string
+        style: simple
+    get:
+      tags:
+        - Account
+      summary: Get sessions
+      description: Get sessions for currently logged in user
+      operationId: getSessions
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SessionRepresentation'
+    delete:
+      tags:
+        - Account
+      summary: Delete current session
+      operationId: deleteCurrentSession
+      responses:
+        204:
+          description: success
+  /{realm}/account/sessions/devices:
+    parameters:
+      - in: path
+        name: realm
+        description: realm name (not id!)
+        required: true
+        schema:
+          type: string
+        style: simple
+    get:
+      tags:
+        - Account
+      summary: Get devices
+      description: Get devices for currently logged in user
+      operationId: getDevices
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DeviceRepresentation'
+  /{realm}/account/sessions/{sessionId}:
+    parameters:
+      - in: path
+        name: realm
+        description: realm name (not id!)
+        required: true
+        schema:
+          type: string
+        style: simple
+      - in: path
+        name: sessionId
+        description: Session ID
+        required: true
+        schema:
+          type: string
+        style: simple
+    delete:
+      tags:
+        - Account
+      summary: Delete the session
+      operationId: deleteSession
+      responses:
+        204:
+          description: success
+  /{realm}/account/linked-accounts:
+    parameters:
+      - in: path
+        name: realm
+        description: realm name (not id!)
+        required: true
+        schema:
+          type: string
+        style: simple
+    get:
+      tags:
+        - Account
+      summary: Get linked accounts
+      description: Get linked accounts for currently logged in user
+      operationId: getLinkedAccounts
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LinkedAccountRepresentation'
+  /{realm}/account/linked-accounts/{providerId}:
+    parameters:
+      - in: path
+        name: realm
+        description: realm name (not id!)
+        required: true
+        schema:
+          type: string
+        style: simple
+      - in: path
+        name: providerId
+        description: Provider ID
+        required: true
+        schema:
+          type: string
+        style: simple
+    get:
+      tags:
+        - Account
+      summary: Build account linking URI
+      description: Build account linking URI
+      operationId: buildLinkingUri
+      parameters:
+        - in: query
+          name: redirectUri
+          description: Redirect URI to return to after account linking
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountLinkUriRepresentation'
+    delete:
+      tags:
+        - Account
+      summary: Delete the linked provider
+      operationId: deleteLinkedProvider
+      responses:
+        204:
+          description: success
+  /{realm}/account/groups:
+    parameters:
+      - in: path
+        name: realm
+        description: realm name (not id!)
+        required: true
+        schema:
+          type: string
+        style: simple
+    get:
+      parameters:
+        - name: briefRepresentation
+          in: query
+          schema:
+            default: true
+            type: boolean
+      tags:
+        - Account
+      summary: Get groups that this user is a member of
+      operationId: getGroups
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/GroupRepresentation'
+  /{realm}/account/organizations:
+    parameters:
+      - in: path
+        name: realm
+        description: realm name (not id!)
+        required: true
+        schema:
+          type: string
+        style: simple
+    get:
+      tags:
+        - Account
+      summary: Get organizations
+      description: Get organizations for currently logged in user
+      operationId: getOrganizations
+      responses:
+        200:
+          description: success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrganizationRepresentation'
