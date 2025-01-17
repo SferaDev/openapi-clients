@@ -1,5 +1,11 @@
 # cloudflare-api-js
 
+## 0.5.0
+
+### Minor Changes
+
+- 9678a0a: Add new endpoint to get Origin H2 Max Streams Setting
+
 ## 0.4.1
 
 ### Patch Changes
