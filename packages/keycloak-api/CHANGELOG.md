@@ -1,5 +1,11 @@
 # keycloak-api
 
+## 0.2.1
+
+### Patch Changes
+
+- ae275d0: Export extra
+
 ## 0.2.0
 
 ### Minor Changes
