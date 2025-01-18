@@ -14948,6 +14948,10 @@ export type AddProjectDomainRequestBody = {
    */
   gitBranch?: string | null;
   /**
+   * The unique custom environment identifier within the project
+   */
+  customEnvironmentId?: string;
+  /**
    * Target destination domain for redirect
    *
    * @example foobar.com
