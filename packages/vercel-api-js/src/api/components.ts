@@ -2145,7 +2145,7 @@ export type UpdateProjectDataCacheResponse = {
   publicSource?: boolean | null;
   resourceConfig?: {
     fluid?: boolean;
-    functionDefaultRegion?: string;
+    functionDefaultRegion?: string | null;
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
@@ -10649,7 +10649,7 @@ export type GetProjectsResponse = {
     publicSource?: boolean | null;
     resourceConfig?: {
       fluid?: boolean;
-      functionDefaultRegion?: string;
+      functionDefaultRegion?: string | null;
       functionDefaultTimeout?: number;
       functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
       functionZeroConfigFailover?: boolean;
@@ -11536,7 +11536,7 @@ export type CreateProjectResponse = {
   publicSource?: boolean | null;
   resourceConfig?: {
     fluid?: boolean;
-    functionDefaultRegion?: string;
+    functionDefaultRegion?: string | null;
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
@@ -12603,7 +12603,7 @@ export type GetProjectResponse = {
   publicSource?: boolean | null;
   resourceConfig?: {
     fluid?: boolean;
-    functionDefaultRegion?: string;
+    functionDefaultRegion?: string | null;
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
@@ -13498,7 +13498,7 @@ export type UpdateProjectResponse = {
   publicSource?: boolean | null;
   resourceConfig?: {
     fluid?: boolean;
-    functionDefaultRegion?: string;
+    functionDefaultRegion?: string | null;
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
