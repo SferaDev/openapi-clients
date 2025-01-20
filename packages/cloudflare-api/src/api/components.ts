@@ -38169,7 +38169,7 @@ export type AccountsTurnstileWidgetCreateRequestBody = {
   clearance_level?: Schemas.TurnstileClearanceLevel;
   domains: Schemas.TurnstileDomains;
   ephemeral_id?: Schemas.TurnstileEphemeralId;
-  mode: Schemas.TurnstileMode;
+  mode: Schemas.TurnstileWidgetMode;
   name: Schemas.TurnstileName;
   offlabel?: Schemas.TurnstileOfflabel;
   region?: Schemas.TurnstileRegion;
@@ -38281,7 +38281,7 @@ export type AccountsTurnstileWidgetUpdateRequestBody = {
   clearance_level?: Schemas.TurnstileClearanceLevel;
   domains: Schemas.TurnstileDomains;
   ephemeral_id?: Schemas.TurnstileEphemeralId;
-  mode: Schemas.TurnstileMode;
+  mode: Schemas.TurnstileWidgetMode;
   name: Schemas.TurnstileName;
   offlabel?: Schemas.TurnstileOfflabel;
 };
