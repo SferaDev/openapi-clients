@@ -1,5 +1,11 @@
 # netlify-api
 
+## 0.9.1
+
+### Patch Changes
+
+- b53c98c: Update API version to 2.35.1
+
 ## 0.9.0
 
 ### Minor Changes

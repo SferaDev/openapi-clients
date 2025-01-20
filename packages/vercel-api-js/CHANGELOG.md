@@ -1,5 +1,14 @@
 # vercel-api-js
 
+## 0.19.4
+
+### Patch Changes
+
+- e1ca271: Add fluid property to resourceConfig in multiple endpoints
+- 2ace464: Add new image optimization metrics to AuthUser schema
+- b32db47: Add new endpoint to retrieve active attack status within the last 24h window
+- 6ba6722: Add new field customEnvironmentId to AddProjectDomainRequestBody type
+
 ## 0.19.3
 
 ### Patch Changes

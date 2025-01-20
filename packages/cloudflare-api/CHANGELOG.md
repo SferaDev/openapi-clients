@@ -1,5 +1,13 @@
 # cloudflare-api-js
 
+## 0.5.1
+
+### Patch Changes
+
+- 9bf32a4: Add 'last_seen_at' field to AccessServiceTokens schema
+- 81691fb: [BREAKING] Rename 'TurnstileMode' to 'TurnstileWidgetMode'
+- 5b848a1: Add ZonesCacheRulesAegis to zone settings
+
 ## 0.5.0
 
 ### Minor Changes
