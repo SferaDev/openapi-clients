@@ -42196,13 +42196,6 @@ export type TurnstileMessages = {
 }[];
 
 /**
- * Widget Mode
- *
- * @example invisible
- */
-export type TurnstileMode = 'non-interactive' | 'invisible' | 'managed';
-
-/**
  * When the widget was modified.
  *
  * @example 2014-01-01T05:20:00.123123Z
@@ -42286,7 +42279,7 @@ export type TurnstileWidgetDetail = {
   created_on: TurnstileCreatedOn;
   domains: TurnstileDomains;
   ephemeral_id: TurnstileEphemeralId;
-  mode: TurnstileMode;
+  mode: TurnstileWidgetMode;
   modified_on: TurnstileModifiedOn;
   name: TurnstileName;
   offlabel: TurnstileOfflabel;
@@ -42304,13 +42297,20 @@ export type TurnstileWidgetList = {
   created_on: TurnstileCreatedOn;
   domains: TurnstileDomains;
   ephemeral_id: TurnstileEphemeralId;
-  mode: TurnstileMode;
+  mode: TurnstileWidgetMode;
   modified_on: TurnstileModifiedOn;
   name: TurnstileName;
   offlabel: TurnstileOfflabel;
   region: TurnstileRegion;
   sitekey: TurnstileSitekey;
 };
+
+/**
+ * Widget Mode
+ *
+ * @example invisible
+ */
+export type TurnstileWidgetMode = 'non-interactive' | 'invisible' | 'managed';
 
 export type VectorizeApiResponseCollection = {
   errors: VectorizeMessages;
