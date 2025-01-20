@@ -16941,6 +16941,99 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
     EditProjectEnvPathParams
   >({ url: '/v9/projects/{idOrName}/env/{id}', method: 'patch', ...variables, signal });
 
+export type CreateProjectTransferRequestPathParams = {
+  /**
+   * The ID or name of the project to transfer.
+   */
+  idOrName: string;
+};
+
+export type CreateProjectTransferRequestQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type CreateProjectTransferRequestError = Fetcher.ErrorWrapper<undefined>;
+
+export type CreateProjectTransferRequestVariables = {
+  pathParams: CreateProjectTransferRequestPathParams;
+  queryParams?: CreateProjectTransferRequestQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Initiates a project transfer request from one team to another. <br/> Returns a `code` that remains valid for 24 hours and can be used to accept the transfer request by another team using the `PUT /projects/transfer-request/:code` endpoint. <br/> Users can also accept the project transfer request using the claim URL: `https://vercel.com/claim-deployment?code=<code>&returnUrl=<returnUrl>`. <br/> The `code` parameter specifies the project transfer request code generated using this endpoint. <br/> The `returnUrl` parameter redirects users to a specific page of the application if the claim URL is invalid or expired.
+ */
+export const createProjectTransferRequest = (variables: CreateProjectTransferRequestVariables, signal?: AbortSignal) =>
+  fetch<
+    Record<string, any>,
+    CreateProjectTransferRequestError,
+    undefined,
+    {},
+    CreateProjectTransferRequestQueryParams,
+    CreateProjectTransferRequestPathParams
+  >({ url: '/projects/{idOrName}/transfer-request', method: 'post', ...variables, signal });
+
+export type AcceptProjectTransferRequestPathParams = {
+  /**
+   * The code of the project transfer request.
+   */
+  code: string;
+};
+
+export type AcceptProjectTransferRequestQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type AcceptProjectTransferRequestError = Fetcher.ErrorWrapper<undefined>;
+
+export type AcceptProjectTransferRequestRequestBody = {
+  /**
+   * The desired name for the project
+   *
+   * @example a-project-name
+   * @maxLength 100
+   * @pattern ^(?!.*---)[a-z0-9-_.]+$
+   */
+  newProjectName?: string;
+  paidFeatures?: {
+    concurrentBuilds?: number | null;
+    passwordProtection?: boolean | null;
+    previewDeploymentSuffix?: boolean | null;
+  };
+};
+
+export type AcceptProjectTransferRequestVariables = {
+  body?: AcceptProjectTransferRequestRequestBody;
+  pathParams: AcceptProjectTransferRequestPathParams;
+  queryParams?: AcceptProjectTransferRequestQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Accept a project transfer request initated by another team. <br/> The `code` is generated using the `POST /projects/:idOrName/transfer-request` endpoint.
+ */
+export const acceptProjectTransferRequest = (variables: AcceptProjectTransferRequestVariables, signal?: AbortSignal) =>
+  fetch<
+    Record<string, any>,
+    AcceptProjectTransferRequestError,
+    AcceptProjectTransferRequestRequestBody,
+    {},
+    AcceptProjectTransferRequestQueryParams,
+    AcceptProjectTransferRequestPathParams
+  >({ url: '/projects/transfer-request/{code}', method: 'put', ...variables, signal });
+
 export type UpdateProjectProtectionBypassPathParams = {
   /**
    * The unique project identifier or the project name
@@ -22259,6 +22352,8 @@ export const operationsByTag = {
     createProjectEnv,
     removeProjectEnv,
     editProjectEnv,
+    createProjectTransferRequest,
+    acceptProjectTransferRequest,
     updateProjectProtectionBypass,
     requestPromote,
     listPromoteAliases,
