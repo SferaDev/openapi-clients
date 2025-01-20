@@ -2144,6 +2144,7 @@ export type UpdateProjectDataCacheResponse = {
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   resourceConfig?: {
+    fluid?: boolean;
     functionDefaultRegion?: string;
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
@@ -10647,6 +10648,7 @@ export type GetProjectsResponse = {
     productionDeploymentsFastLane?: boolean;
     publicSource?: boolean | null;
     resourceConfig?: {
+      fluid?: boolean;
       functionDefaultRegion?: string;
       functionDefaultTimeout?: number;
       functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
@@ -11533,6 +11535,7 @@ export type CreateProjectResponse = {
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   resourceConfig?: {
+    fluid?: boolean;
     functionDefaultRegion?: string;
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
@@ -12599,6 +12602,7 @@ export type GetProjectResponse = {
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   resourceConfig?: {
+    fluid?: boolean;
     functionDefaultRegion?: string;
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
@@ -13493,6 +13497,7 @@ export type UpdateProjectResponse = {
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   resourceConfig?: {
+    fluid?: boolean;
     functionDefaultRegion?: string;
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
