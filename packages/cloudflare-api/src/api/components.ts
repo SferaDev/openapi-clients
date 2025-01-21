@@ -8021,6 +8021,29 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekMath7bInstructResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -8588,6 +8611,29 @@ export type WorkersAiPostRunCfDefogSqlcoder7b2Response = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -9273,6 +9319,29 @@ export type WorkersAiPostRunCfFblgitUnaCybertron7bV2Bf16Response = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -9835,6 +9904,29 @@ export type WorkersAiPostRunCfGoogleGemma2bItLoraResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -10397,6 +10489,29 @@ export type WorkersAiPostRunCfGoogleGemma7bItLoraResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -11109,6 +11224,29 @@ export type WorkersAiPostRunCfMetaLlamaLlama27bChatHfLoraResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -11676,6 +11814,29 @@ export type WorkersAiPostRunCfMetaLlama27bChatFp16Response = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -12238,6 +12399,29 @@ export type WorkersAiPostRunCfMetaLlama27bChatInt8Response = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -12800,6 +12984,29 @@ export type WorkersAiPostRunCfMetaLlama38bInstructResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -13362,6 +13569,29 @@ export type WorkersAiPostRunCfMetaLlama38bInstructAwqResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -13924,6 +14154,29 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -14486,6 +14739,29 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructPreviewResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -15053,6 +15329,29 @@ export type WorkersAiPostRunCfMetaLlama3170bPreviewResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -15615,6 +15914,29 @@ export type WorkersAiPostRunCfMetaLlama318bInstructResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -16177,6 +16499,29 @@ export type WorkersAiPostRunCfMetaLlama318bInstructAwqResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -16739,6 +17084,29 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFastResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -17301,6 +17669,29 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFp8Response = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -17863,6 +18254,29 @@ export type WorkersAiPostRunCfMetaLlama318bPreviewResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -18996,6 +19410,29 @@ export type WorkersAiPostRunCfMetaLlama321bInstructResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -19558,6 +19995,29 @@ export type WorkersAiPostRunCfMetaLlama323bInstructResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -20120,6 +20580,29 @@ export type WorkersAiPostRunCfMetaLlama3370bInstructFp8FastResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -20746,6 +21229,29 @@ export type WorkersAiPostRunCfMicrosoftPhi2Response = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -21352,6 +21858,29 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV01Response = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -21914,6 +22443,29 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV02LoraResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -22730,6 +23282,29 @@ export type WorkersAiPostRunCfOpenchatOpenchat350106Response = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -23292,6 +23867,29 @@ export type WorkersAiPostRunCfQwenQwen1505bChatResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -23854,6 +24452,29 @@ export type WorkersAiPostRunCfQwenQwen1518bChatResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -24416,6 +25037,29 @@ export type WorkersAiPostRunCfQwenQwen1514bChatAwqResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -24978,6 +25622,29 @@ export type WorkersAiPostRunCfQwenQwen157bChatAwqResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -25822,6 +26489,29 @@ export type WorkersAiPostRunCfTheblokeDiscolmGerman7bV1AwqResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -26389,6 +27079,29 @@ export type WorkersAiPostRunCfTiiuaeFalcon7bInstructResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -26951,6 +27664,29 @@ export type WorkersAiPostRunCfTinyllamaTinyllama11bChatV10Response = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -27518,6 +28254,29 @@ export type WorkersAiPostRunHfGoogleGemma7bItResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -28080,6 +28839,29 @@ export type WorkersAiPostRunHfMetaLlamaMetaLlama38bInstructResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -28647,6 +29429,29 @@ export type WorkersAiPostRunHfMistralMistral7bInstructV02Response = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -29209,6 +30014,29 @@ export type WorkersAiPostRunHfMistralaiMistral7bInstructV02Response = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -29776,6 +30604,29 @@ export type WorkersAiPostRunHfNexusflowStarlingLm7bBetaResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -30338,6 +31189,29 @@ export type WorkersAiPostRunHfNousresearchHermes2ProMistral7bResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -30905,6 +31779,29 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bBaseAwqResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -31472,6 +32369,29 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bInstructAwqResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -32039,6 +32959,29 @@ export type WorkersAiPostRunHfTheblokeLlama213bChatAwqResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -32601,6 +33544,29 @@ export type WorkersAiPostRunHfTheblokeLlamaguard7bAwqResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -33163,6 +34129,29 @@ export type WorkersAiPostRunHfTheblokeMistral7bInstructV01AwqResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -33730,6 +34719,29 @@ export type WorkersAiPostRunHfTheblokeNeuralChat7bV31AwqResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -34292,6 +35304,29 @@ export type WorkersAiPostRunHfTheblokeOpenhermes25Mistral7bAwqResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -34859,6 +35894,29 @@ export type WorkersAiPostRunHfTheblokeZephyr7bBetaAwqResponse = {
            */
           name?: string;
         }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
       }
     | Blob;
   /**
@@ -35522,6 +36580,29 @@ export type WorkersAiPostRunModelResponse = {
                */
               name?: string;
             }[];
+            /**
+             * Usage statistics for the inference request
+             */
+            usage?: {
+              /**
+               * Total number of tokens in output
+               *
+               * @default 0
+               */
+              completion_tokens?: number;
+              /**
+               * Total number of tokens in input
+               *
+               * @default 0
+               */
+              prompt_tokens?: number;
+              /**
+               * Total number of input and output tokens
+               *
+               * @default 0
+               */
+              total_tokens?: number;
+            };
           }
         | Blob
       )
