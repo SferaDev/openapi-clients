@@ -16961,6 +16961,15 @@ export type CreateProjectTransferRequestQueryParams = {
 
 export type CreateProjectTransferRequestError = Fetcher.ErrorWrapper<undefined>;
 
+export type CreateProjectTransferRequestResponse = {
+  /**
+   * Code that can be used to accept the project transfer request.
+   *
+   * @example f99cc49a-602e-4786-a748-762dfb205880
+   */
+  code: string;
+};
+
 export type CreateProjectTransferRequestVariables = {
   pathParams: CreateProjectTransferRequestPathParams;
   queryParams?: CreateProjectTransferRequestQueryParams;
@@ -16971,7 +16980,7 @@ export type CreateProjectTransferRequestVariables = {
  */
 export const createProjectTransferRequest = (variables: CreateProjectTransferRequestVariables, signal?: AbortSignal) =>
   fetch<
-    Record<string, any>,
+    CreateProjectTransferRequestResponse,
     CreateProjectTransferRequestError,
     undefined,
     {},
