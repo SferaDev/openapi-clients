@@ -9925,7 +9925,7 @@ export type CacheRulesOriginH2MaxStreamsResponseValue = {
  * Value of the Origin H2 Max Streams Setting.
  *
  * @example 50
- * @maximum 200
+ * @maximum 1000
  * @minimum 1
  */
 export type CacheRulesOriginH2MaxStreamsValue = number;
