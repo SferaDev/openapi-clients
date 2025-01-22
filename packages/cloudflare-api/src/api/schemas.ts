@@ -44047,7 +44047,7 @@ export type WaitingroomSingleResponse = WaitingroomApiResponseSingle & {
 /**
  * @example queueing
  */
-export type WaitingroomStatus = 'event_prequeueing' | 'not_queueing' | 'queueing';
+export type WaitingroomStatus = 'event_prequeueing' | 'not_queueing' | 'queueing' | 'suspended';
 
 /**
  * @example 25756b2dfe6e378a06b033b670413757
