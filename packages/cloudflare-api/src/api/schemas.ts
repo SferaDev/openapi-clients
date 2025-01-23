@@ -46483,6 +46483,7 @@ export type ZarazApiResponseCommon = {
    * Whether the API call was successful
    *
    * @example true
+   * @x-auditable true
    */
   success: boolean;
 };
@@ -46511,6 +46512,8 @@ export type ZarazBaseMc = ZarazBaseTool & {
     [key: string]: {
       /**
        * Tool event type
+       *
+       * @x-auditable true
        */
       actionType: string;
       /**
@@ -46531,6 +46534,8 @@ export type ZarazBaseMc = ZarazBaseTool & {
   };
   /**
    * Tool's internal name
+   *
+   * @x-auditable true
    */
   component: string;
   /**
@@ -46539,6 +46544,8 @@ export type ZarazBaseMc = ZarazBaseTool & {
   neoEvents?: {
     /**
      * Tool event type
+     *
+     * @x-auditable true
      */
     actionType: string;
     /**
@@ -46581,34 +46588,57 @@ export type ZarazBaseTool = {
   };
   /**
    * Default consent purpose ID
+   *
+   * @x-auditable true
    */
   defaultPurpose?: string;
   /**
    * Whether tool is enabled
+   *
+   * @x-auditable true
    */
   enabled: boolean;
   /**
    * Tool's name defined by the user
+   *
+   * @x-auditable true
    */
   name: string;
   /**
    * Vendor name for TCF compliant consent modal, required for Custom Managed Components and Custom HTML tool with a defaultPurpose assigned
+   *
+   * @x-auditable true
    */
   vendorName?: string;
   /**
    * Vendor's Privacy Policy URL for TCF compliant consent modal, required for Custom Managed Components and Custom HTML tool with a defaultPurpose assigned
+   *
+   * @x-auditable true
    */
   vendorPolicyUrl?: string;
 };
 
 export type ZarazClickListenerRule = {
+  /**
+   * @x-auditable true
+   */
   action: 'clickListener';
+  /**
+   * @x-auditable true
+   */
   id: string;
   settings: {
+    /**
+     * @x-auditable true
+     */
     selector: string;
+    /**
+     * @x-auditable true
+     */
     type: 'xpath' | 'css';
     /**
      * @minimum 0
+     * @x-auditable true
      */
     waitForTags: number;
   };
@@ -46620,24 +46650,51 @@ export type ZarazCustomManagedComponent = ZarazBaseMc & {
    * Cloudflare worker that acts as a managed component
    */
   worker: {
+    /**
+     * @x-auditable true
+     */
     escapedWorkerName: string;
+    /**
+     * @x-auditable true
+     */
     workerTag: string;
   };
 };
 
 export type ZarazElementVisibilityRule = {
+  /**
+   * @x-auditable true
+   */
   action: 'elementVisibility';
+  /**
+   * @x-auditable true
+   */
   id: string;
   settings: {
+    /**
+     * @x-auditable true
+     */
     selector: string;
   };
 };
 
 export type ZarazFormSubmissionRule = {
+  /**
+   * @x-auditable true
+   */
   action: 'formSubmission';
+  /**
+   * @x-auditable true
+   */
   id: string;
   settings: {
+    /**
+     * @x-auditable true
+     */
     selector: string;
+    /**
+     * @x-auditable true
+     */
     validate: boolean;
   };
 };
@@ -46651,8 +46708,17 @@ export type ZarazFormSubmissionRule = {
 export type ZarazIdentifier = string;
 
 export type ZarazLoadRule = {
+  /**
+   * @x-auditable true
+   */
   id: string;
+  /**
+   * @x-auditable true
+   */
   match: string;
+  /**
+   * @x-auditable true
+   */
   op:
     | 'CONTAINS'
     | 'EQUALS'
@@ -46664,6 +46730,9 @@ export type ZarazLoadRule = {
     | 'GREATER_THAN_OR_EQUAL'
     | 'LESS_THAN'
     | 'LESS_THAN_OR_EQUAL';
+  /**
+   * @x-auditable true
+   */
   value: string;
 };
 
@@ -46680,33 +46749,62 @@ export type ZarazMessages = {
 }[];
 
 export type ZarazScrollDepthRule = {
+  /**
+   * @x-auditable true
+   */
   action: 'scrollDepth';
+  /**
+   * @x-auditable true
+   */
   id: string;
   settings: {
+    /**
+     * @x-auditable true
+     */
     positions: string;
   };
 };
 
 export type ZarazTimerRule = {
+  /**
+   * @x-auditable true
+   */
   action: 'timer';
+  /**
+   * @x-auditable true
+   */
   id: string;
   settings: {
     /**
      * @minimum 50
+     * @x-auditable true
      */
     interval: number;
     /**
      * @minimum 0
+     * @x-auditable true
      */
     limit: number;
   };
 };
 
 export type ZarazVariableMatchRule = {
+  /**
+   * @x-auditable true
+   */
   action: 'variableMatch';
+  /**
+   * @x-auditable true
+   */
   id: string;
   settings: {
+    /**
+     * @x-auditable true
+     */
     match: string;
+    /**
+     * @x-auditable true
+     */
     variable: string;
   };
 };
@@ -46723,10 +46821,14 @@ export type ZarazZarazConfigBase = {
   analytics?: {
     /**
      * Consent purpose assigned to Monitoring.
+     *
+     * @x-auditable true
      */
     defaultPurpose?: string;
     /**
      * Whether Advanced Monitoring reports are enabled.
+     *
+     * @x-auditable true
      */
     enabled?: boolean;
     /**
@@ -46734,6 +46836,7 @@ export type ZarazZarazConfigBase = {
      *
      * @maximum 86400
      * @minimum 60
+     * @x-auditable true
      */
     sessionExpTime?: number;
   };
@@ -46761,9 +46864,21 @@ export type ZarazZarazConfigBase = {
         [key: string]: string;
       };
     };
+    /**
+     * @x-auditable true
+     */
     companyEmail?: string;
+    /**
+     * @x-auditable true
+     */
     companyName?: string;
+    /**
+     * @x-auditable true
+     */
     companyStreetAddress?: string;
+    /**
+     * @x-auditable true
+     */
     consentModalIntroHTML?: string;
     /**
      * Object where keys are language codes
@@ -46771,18 +46886,39 @@ export type ZarazZarazConfigBase = {
     consentModalIntroHTMLWithTranslations?: {
       [key: string]: string;
     };
+    /**
+     * @x-auditable true
+     */
     cookieName?: string;
+    /**
+     * @x-auditable true
+     */
     customCSS?: string;
+    /**
+     * @x-auditable true
+     */
     customIntroDisclaimerDismissed?: boolean;
+    /**
+     * @x-auditable true
+     */
     defaultLanguage?: string;
     enabled: boolean;
+    /**
+     * @x-auditable true
+     */
     hideModal?: boolean;
     /**
      * Object where keys are purpose alpha-numeric IDs
      */
     purposes?: {
       [key: string]: {
+        /**
+         * @x-auditable true
+         */
         description: string;
+        /**
+         * @x-auditable true
+         */
         name: string;
       };
     };
@@ -46803,6 +46939,9 @@ export type ZarazZarazConfigBase = {
         name: {
           [key: string]: string;
         };
+        /**
+         * @x-auditable true
+         */
         order: number;
       };
     };
@@ -46810,14 +46949,20 @@ export type ZarazZarazConfigBase = {
   };
   /**
    * Data layer compatibility mode enabled.
+   *
+   * @x-auditable true
    */
   dataLayer: boolean;
   /**
    * The key for Zaraz debug mode.
+   *
+   * @x-auditable true
    */
   debugKey: string;
   /**
    * Single Page Application support enabled.
+   *
+   * @x-auditable true
    */
   historyChange?: boolean;
   /**
@@ -46826,37 +46971,57 @@ export type ZarazZarazConfigBase = {
   settings: {
     /**
      * Automatic injection of Zaraz scripts enabled.
+     *
+     * @x-auditable true
      */
     autoInjectScript: boolean;
     /**
      * Details of the worker that receives and edits Zaraz Context object.
      */
     contextEnricher?: {
+      /**
+       * @x-auditable true
+       */
       escapedWorkerName: string;
+      /**
+       * @x-auditable true
+       */
       workerTag: string;
     };
     /**
      * The domain Zaraz will use for writing and reading its cookies.
+     *
+     * @x-auditable true
      */
     cookieDomain?: string;
     /**
      * Ecommerce API enabled.
+     *
+     * @x-auditable true
      */
     ecommerce?: boolean;
     /**
      * Custom endpoint for server-side track events.
+     *
+     * @x-auditable true
      */
     eventsApiPath?: string;
     /**
      * Hiding external referrer URL enabled.
+     *
+     * @x-auditable true
      */
     hideExternalReferer?: boolean;
     /**
      * Trimming IP address enabled.
+     *
+     * @x-auditable true
      */
     hideIPAddress?: boolean;
     /**
      * Removing URL query params enabled.
+     *
+     * @x-auditable true
      */
     hideQueryParams?: boolean;
     /**
@@ -46865,22 +47030,32 @@ export type ZarazZarazConfigBase = {
     hideUserAgent?: boolean;
     /**
      * Custom endpoint for Zaraz init script.
+     *
+     * @x-auditable true
      */
     initPath?: string;
     /**
      * Injection of Zaraz scripts into iframes enabled.
+     *
+     * @x-auditable true
      */
     injectIframes?: boolean;
     /**
      * Custom path for Managed Components server functionalities.
+     *
+     * @x-auditable true
      */
     mcRootPath?: string;
     /**
      * Custom endpoint for Zaraz main script.
+     *
+     * @x-auditable true
      */
     scriptPath?: string;
     /**
      * Custom endpoint for Zaraz tracking requests.
+     *
+     * @x-auditable true
      */
     trackPath?: string;
   };
@@ -46891,6 +47066,8 @@ export type ZarazZarazConfigBase = {
     [key: string]: {
       /**
        * Trigger description.
+       *
+       * @x-auditable true
        */
       description?: string;
       /**
@@ -46919,8 +47096,13 @@ export type ZarazZarazConfigBase = {
       )[];
       /**
        * Trigger name.
+       *
+       * @x-auditable true
        */
       name: string;
+      /**
+       * @x-auditable true
+       */
       system?: 'pageload';
     };
   };
@@ -46930,21 +47112,44 @@ export type ZarazZarazConfigBase = {
   variables: {
     [key: string]:
       | {
+          /**
+           * @x-auditable true
+           */
           name: string;
+          /**
+           * @x-auditable true
+           */
           type: 'string' | 'secret';
+          /**
+           * @x-auditable true
+           */
           value: string;
         }
       | {
+          /**
+           * @x-auditable true
+           */
           name: string;
+          /**
+           * @x-auditable true
+           */
           type: 'worker';
           value: {
+            /**
+             * @x-auditable true
+             */
             escapedWorkerName: string;
+            /**
+             * @x-auditable true
+             */
             workerTag: string;
           };
         };
   };
   /**
    * Zaraz internal version of the config.
+   *
+   * @x-auditable true
    */
   zarazVersion: number;
 };
@@ -47000,20 +47205,26 @@ export type ZarazZarazConfigRowBase = {
    * Date and time the configuration was created
    *
    * @format date-time
+   * @x-auditable true
    */
   createdAt: string;
   /**
    * ID of the configuration
+   *
+   * @x-auditable true
    */
   id: number;
   /**
    * Date and time the configuration was last updated
    *
    * @format date-time
+   * @x-auditable true
    */
   updatedAt: string;
   /**
    * Alpha-numeric ID of the account user who published the configuration
+   *
+   * @x-auditable true
    */
   userId: string;
 };
@@ -47029,6 +47240,8 @@ export type ZarazZarazHistoryResponse = ZarazApiResponseCommon & {
 
 /**
  * Zaraz workflow
+ *
+ * @x-auditable true
  */
 export type ZarazZarazWorkflow = 'realtime' | 'preview';
 
