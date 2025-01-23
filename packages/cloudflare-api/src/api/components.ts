@@ -39430,6 +39430,392 @@ export const accountsTurnstileWidgetRotateSecret = (
     AccountsTurnstileWidgetRotateSecretPathParams
   >({ url: '/accounts/{accountId}/challenges/widgets/{sitekey}/rotate_secret', method: 'post', ...variables, signal });
 
+export type ListCnisPathParams = {
+  accountId: Schemas.NscAccountTag;
+};
+
+export type ListCnisQueryParams = {
+  /**
+   * If specified, only show CNIs associated with the specified slot
+   */
+  slot?: string | null;
+  /**
+   * @format int32
+   */
+  cursor?: number | null;
+  /**
+   * @minimum 0
+   */
+  limit?: number | null;
+};
+
+export type ListCnisError = Fetcher.ErrorWrapper<undefined>;
+
+export type ListCnisVariables = {
+  pathParams: ListCnisPathParams;
+  queryParams?: ListCnisQueryParams;
+} & FetcherExtraProps;
+
+export const listCnis = (variables: ListCnisVariables, signal?: AbortSignal) =>
+  fetch<Schemas.NscCniList, ListCnisError, undefined, {}, ListCnisQueryParams, ListCnisPathParams>({
+    url: '/accounts/{accountId}/cni/cnis',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type CreateCniPathParams = {
+  accountId: Schemas.NscAccountTag;
+};
+
+export type CreateCniError = Fetcher.ErrorWrapper<undefined>;
+
+export type CreateCniVariables = {
+  body: Schemas.NscCniCreate;
+  pathParams: CreateCniPathParams;
+} & FetcherExtraProps;
+
+export const createCni = (variables: CreateCniVariables, signal?: AbortSignal) =>
+  fetch<Schemas.NscCni, CreateCniError, Schemas.NscCniCreate, {}, {}, CreateCniPathParams>({
+    url: '/accounts/{accountId}/cni/cnis',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type DeleteCniPathParams = {
+  /**
+   * CNI ID to retrieve information about
+   *
+   * @format uuid
+   */
+  cni: string;
+  accountId: Schemas.NscAccountTag;
+};
+
+export type DeleteCniError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteCniVariables = {
+  pathParams: DeleteCniPathParams;
+} & FetcherExtraProps;
+
+export const deleteCni = (variables: DeleteCniVariables, signal?: AbortSignal) =>
+  fetch<undefined, DeleteCniError, undefined, {}, {}, DeleteCniPathParams>({
+    url: '/accounts/{accountId}/cni/cnis/{cni}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type GetCniPathParams = {
+  /**
+   * CNI ID to retrieve information about
+   *
+   * @format uuid
+   */
+  cni: string;
+  accountId: Schemas.NscAccountTag;
+};
+
+export type GetCniError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetCniVariables = {
+  pathParams: GetCniPathParams;
+} & FetcherExtraProps;
+
+export const getCni = (variables: GetCniVariables, signal?: AbortSignal) =>
+  fetch<Schemas.NscCni, GetCniError, undefined, {}, {}, GetCniPathParams>({
+    url: '/accounts/{accountId}/cni/cnis/{cni}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type UpdateCniPathParams = {
+  /**
+   * CNI ID to retrieve information about
+   *
+   * @format uuid
+   */
+  cni: string;
+  accountId: Schemas.NscAccountTag;
+};
+
+export type UpdateCniError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateCniVariables = {
+  body: Schemas.NscCni;
+  pathParams: UpdateCniPathParams;
+} & FetcherExtraProps;
+
+export const updateCni = (variables: UpdateCniVariables, signal?: AbortSignal) =>
+  fetch<Schemas.NscCni, UpdateCniError, Schemas.NscCni, {}, {}, UpdateCniPathParams>({
+    url: '/accounts/{accountId}/cni/cnis/{cni}',
+    method: 'put',
+    ...variables,
+    signal
+  });
+
+export type ListInterconnectsPathParams = {
+  accountId: Schemas.NscAccountTag;
+};
+
+export type ListInterconnectsQueryParams = {
+  /**
+   * If specified, only show interconnects located at the given site
+   */
+  site?: string | null;
+  /**
+   * If specified, only show interconnects of the given type
+   */
+  type?: string | null;
+  /**
+   * @format int32
+   */
+  cursor?: number | null;
+  /**
+   * @minimum 0
+   */
+  limit?: number | null;
+};
+
+export type ListInterconnectsError = Fetcher.ErrorWrapper<undefined>;
+
+export type ListInterconnectsVariables = {
+  pathParams: ListInterconnectsPathParams;
+  queryParams?: ListInterconnectsQueryParams;
+} & FetcherExtraProps;
+
+export const listInterconnects = (variables: ListInterconnectsVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.NscInterconnectList,
+    ListInterconnectsError,
+    undefined,
+    {},
+    ListInterconnectsQueryParams,
+    ListInterconnectsPathParams
+  >({ url: '/accounts/{accountId}/cni/interconnects', method: 'get', ...variables, signal });
+
+export type CreateInterconnectPathParams = {
+  accountId: Schemas.NscAccountTag;
+};
+
+export type CreateInterconnectError = Fetcher.ErrorWrapper<undefined>;
+
+export type CreateInterconnectVariables = {
+  body?: Schemas.NscInterconnectCreate;
+  pathParams: CreateInterconnectPathParams;
+} & FetcherExtraProps;
+
+export const createInterconnect = (variables: CreateInterconnectVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.NscInterconnect,
+    CreateInterconnectError,
+    Schemas.NscInterconnectCreate,
+    {},
+    {},
+    CreateInterconnectPathParams
+  >({ url: '/accounts/{accountId}/cni/interconnects', method: 'post', ...variables, signal });
+
+export type DeleteInterconnectPathParams = {
+  /**
+   * Interconnect name to retrieve information about
+   */
+  icon: string;
+  accountId: Schemas.NscAccountTag;
+};
+
+export type DeleteInterconnectError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteInterconnectVariables = {
+  pathParams: DeleteInterconnectPathParams;
+} & FetcherExtraProps;
+
+export const deleteInterconnect = (variables: DeleteInterconnectVariables, signal?: AbortSignal) =>
+  fetch<undefined, DeleteInterconnectError, undefined, {}, {}, DeleteInterconnectPathParams>({
+    url: '/accounts/{accountId}/cni/interconnects/{icon}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type GetInterconnectPathParams = {
+  /**
+   * Interconnect name to retrieve information about
+   */
+  icon: string;
+  accountId: Schemas.NscAccountTag;
+};
+
+export type GetInterconnectError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetInterconnectVariables = {
+  pathParams: GetInterconnectPathParams;
+} & FetcherExtraProps;
+
+export const getInterconnect = (variables: GetInterconnectVariables, signal?: AbortSignal) =>
+  fetch<Schemas.NscInterconnect, GetInterconnectError, undefined, {}, {}, GetInterconnectPathParams>({
+    url: '/accounts/{accountId}/cni/interconnects/{icon}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type GetInterconnectLoaPathParams = {
+  /**
+   * Interconnect name to retrieve information about
+   */
+  icon: string;
+  accountId: Schemas.NscAccountTag;
+};
+
+export type GetInterconnectLoaError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetInterconnectLoaVariables = {
+  pathParams: GetInterconnectLoaPathParams;
+} & FetcherExtraProps;
+
+export const getInterconnectLoa = (variables: GetInterconnectLoaVariables, signal?: AbortSignal) =>
+  fetch<undefined, GetInterconnectLoaError, undefined, {}, {}, GetInterconnectLoaPathParams>({
+    url: '/accounts/{accountId}/cni/interconnects/{icon}/loa',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type GetInterconnectStatusPathParams = {
+  /**
+   * Interconnect name to retrieve information about
+   */
+  icon: string;
+  accountId: Schemas.NscAccountTag;
+};
+
+export type GetInterconnectStatusError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetInterconnectStatusVariables = {
+  pathParams: GetInterconnectStatusPathParams;
+} & FetcherExtraProps;
+
+export const getInterconnectStatus = (variables: GetInterconnectStatusVariables, signal?: AbortSignal) =>
+  fetch<Schemas.NscStatusInfo, GetInterconnectStatusError, undefined, {}, {}, GetInterconnectStatusPathParams>({
+    url: '/accounts/{accountId}/cni/interconnects/{icon}/status',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type GetSettingsPathParams = {
+  /**
+   * Account tag to retrieve settings for
+   */
+  accountId: string;
+};
+
+export type GetSettingsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetSettingsVariables = {
+  pathParams: GetSettingsPathParams;
+} & FetcherExtraProps;
+
+export const getSettings = (variables: GetSettingsVariables, signal?: AbortSignal) =>
+  fetch<Schemas.NscSettings, GetSettingsError, undefined, {}, {}, GetSettingsPathParams>({
+    url: '/accounts/{accountId}/cni/settings',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type UpdateSettingsPathParams = {
+  /**
+   * Account tag to update settings for
+   */
+  accountId: string;
+};
+
+export type UpdateSettingsError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateSettingsVariables = {
+  body?: Schemas.NscSettings;
+  pathParams: UpdateSettingsPathParams;
+} & FetcherExtraProps;
+
+export const updateSettings = (variables: UpdateSettingsVariables, signal?: AbortSignal) =>
+  fetch<Schemas.NscSettings, UpdateSettingsError, Schemas.NscSettings, {}, {}, UpdateSettingsPathParams>({
+    url: '/accounts/{accountId}/cni/settings',
+    method: 'put',
+    ...variables,
+    signal
+  });
+
+export type ListSlotsPathParams = {
+  accountId: Schemas.NscAccountTag;
+};
+
+export type ListSlotsQueryParams = {
+  /**
+   * If specified, only show slots with the given text in their address field
+   */
+  address_contains?: string | null;
+  /**
+   * If specified, only show slots located at the given site
+   */
+  site?: string | null;
+  /**
+   * If specified, only show slots that support the given speed
+   */
+  speed?: string | null;
+  /**
+   * If specified, only show slots with a specific occupied/unoccupied state
+   */
+  occupied?: boolean | null;
+  /**
+   * @format int32
+   */
+  cursor?: number | null;
+  /**
+   * @minimum 0
+   */
+  limit?: number | null;
+};
+
+export type ListSlotsError = Fetcher.ErrorWrapper<undefined>;
+
+export type ListSlotsVariables = {
+  pathParams: ListSlotsPathParams;
+  queryParams?: ListSlotsQueryParams;
+} & FetcherExtraProps;
+
+export const listSlots = (variables: ListSlotsVariables, signal?: AbortSignal) =>
+  fetch<Schemas.NscSlotList, ListSlotsError, undefined, {}, ListSlotsQueryParams, ListSlotsPathParams>({
+    url: '/accounts/{accountId}/cni/slots',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type GetSlotPathParams = {
+  /**
+   * @format uuid
+   */
+  slot: string;
+  accountId: Schemas.NscAccountTag;
+};
+
+export type GetSlotError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetSlotVariables = {
+  pathParams: GetSlotPathParams;
+} & FetcherExtraProps;
+
+export const getSlot = (variables: GetSlotVariables, signal?: AbortSignal) =>
+  fetch<Schemas.NscSlotInfo, GetSlotError, undefined, {}, {}, GetSlotPathParams>({
+    url: '/accounts/{accountId}/cni/slots/{slot}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
 export type AccountLevelCustomNameserversListAccountCustomNameserversPathParams = {
   accountId: Schemas.DnsCustomNameserversIdentifier;
 };
@@ -42933,7 +43319,7 @@ export type DlpDatasetsUploadVersionResponse = Schemas.DlpApiResponseSingle & {
 };
 
 export type DlpDatasetsUploadVersionVariables = {
-  body?: string;
+  body?: Blob;
   pathParams: DlpDatasetsUploadVersionPathParams;
 } & FetcherExtraProps;
 
@@ -42947,7 +43333,7 @@ export const dlpDatasetsUploadVersion = (variables: DlpDatasetsUploadVersionVari
   fetch<
     DlpDatasetsUploadVersionResponse,
     DlpDatasetsUploadVersionError,
-    string,
+    Blob,
     {},
     {},
     DlpDatasetsUploadVersionPathParams
@@ -43022,7 +43408,7 @@ export type DlpDatasetsUploadDatasetColumnResponse = Schemas.DlpApiResponseSingl
 };
 
 export type DlpDatasetsUploadDatasetColumnVariables = {
-  body?: string;
+  body?: Blob;
   pathParams: DlpDatasetsUploadDatasetColumnPathParams;
 } & FetcherExtraProps;
 
@@ -43037,7 +43423,7 @@ export const dlpDatasetsUploadDatasetColumn = (
   fetch<
     DlpDatasetsUploadDatasetColumnResponse,
     DlpDatasetsUploadDatasetColumnError,
-    string,
+    Blob,
     {},
     {},
     DlpDatasetsUploadDatasetColumnPathParams
@@ -65560,7 +65946,7 @@ export type UrlscannerSearchScansV2Variables = {
 } & FetcherExtraProps;
 
 /**
- * Use a subset of ElasticSearch Query syntax to filter scans. Some example queries:<br/> <br/>- 'page.domain:microsoft AND verdicts.malicious:true AND NOT page.domain:microsoft.com': malicious scans whose hostname starts with "microsoft".<br/>- 'apikey:me AND date:[2024-01 TO 2024-10]': my scans from 2024 January to 2024 October.<br/>- 'page.domain:(blogspot OR www.blogspot)': Searches for scans whose main domain starts with "blogspot" or with "www.blogspot"<br/>- 'date:>now-7d AND path:okta-sign-in.min.js: scans from the last 7 days with any request path that ends with "okta-sign-in.min.js"<br/>- 'page.asn:AS24940 AND hash:xxx': Websites hosted in AS24940 where a resource with the given hash was downloaded.
+ * Use a subset of ElasticSearch Query syntax to filter scans. Some example queries:<br/> <br/>- 'page.domain:microsoft AND verdicts.malicious:true AND NOT page.domain:microsoft.com': malicious scans whose hostname starts with "microsoft".<br/>- 'apikey:me AND date:[2024-01 TO 2024-10]': my scans from 2024 January to 2024 October.<br/>- 'page.domain:(blogspot OR www.blogspot)': Searches for scans whose main domain starts with "blogspot" or with "www.blogspot"<br/>- 'page.asn:AS24940 AND hash:xxx': Websites hosted in AS24940 where a resource with the given hash was downloaded.
  */
 export const urlscannerSearchScansV2 = (variables: UrlscannerSearchScansV2Variables, signal?: AbortSignal) =>
   fetch<
@@ -117241,6 +117627,17 @@ export const operationsByTag = {
     accountsTurnstileWidgetUpdate,
     accountsTurnstileWidgetRotateSecret
   },
+  cNIs: { listCnis, createCni, deleteCni, getCni, updateCni },
+  interconnects: {
+    listInterconnects,
+    createInterconnect,
+    deleteInterconnect,
+    getInterconnect,
+    getInterconnectLoa,
+    getInterconnectStatus
+  },
+  settings: { getSettings, updateSettings },
+  slots: { listSlots, getSlot },
   accountLevelCustomNameservers: {
     accountLevelCustomNameserversListAccountCustomNameservers,
     accountLevelCustomNameserversAddAccountCustomNameserver,
