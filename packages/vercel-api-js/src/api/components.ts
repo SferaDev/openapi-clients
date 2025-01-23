@@ -3611,10 +3611,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    id?: string;
     createdAt?: number;
-    entrypoint?: string | null;
+    id?: string;
     readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    entrypoint?: string | null;
     readyStateAt?: number;
     output: {
       path: string;
@@ -3886,7 +3886,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
             src?: string;
             dest?: string;
             status?: number;
@@ -3920,7 +3920,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         org: string;
@@ -3932,7 +3932,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         owner: string;
@@ -3944,7 +3944,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | null;
   flags?:
@@ -7844,15 +7844,19 @@ export type SubmitBillingDataError = Fetcher.ErrorWrapper<undefined>;
 
 export type SubmitBillingDataRequestBody = {
   /**
+   * Server time of your integration, used to determine the most recent data for race conditions & updates. Only the latest usage data for a given day, week, and month will be kept.
+   *
    * @format date-time
    */
   timestamp: string;
   /**
+   * End of Day, the UTC datetime for when the end of the billing/usage day is in UTC time. This tells us which day the usage data is for, and also allows for your \"end of day\" to be different from UTC 00:00:00. eod must be within the period dates, and cannot be older than 24h earlier from our server's current time.
+   *
    * @format date-time
    */
   eod: string;
   /**
-   * Period for the billing cycle.
+   * Period for the billing cycle. The period end date cannot be older than 24 hours earlier than our current server's time.
    */
   period: {
     /**
@@ -15119,7 +15123,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15224,7 +15228,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -15331,7 +15335,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -15820,7 +15824,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15924,7 +15928,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16437,7 +16441,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16541,7 +16545,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16644,7 +16648,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16835,7 +16839,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
