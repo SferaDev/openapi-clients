@@ -1,5 +1,19 @@
 # cloudflare-api-js
 
+## 0.6.0
+
+### Minor Changes
+
+- 5afee48: Add usage statistics for the inference request in multiple endpoints
+
+### Patch Changes
+
+- b386d6c: [BREAKING] Change maximum value for CacheRulesOriginH2MaxStreamsValue from 200 to 1000
+- 64a94ef: Add active_delivery_mode filter to EmailSecurityListDomainsQueryParams
+- 726d3e1: Add 'suspended' status to WaitingroomStatus type
+- 77b0376: [BREAKING] Deprecated serve_directly option in WorkersMultipartScript
+- 625d213: Add x-auditable annotation to various schema types
+
 ## 0.5.1
 
 ### Patch Changes
