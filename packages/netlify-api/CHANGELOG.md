@@ -1,5 +1,11 @@
 # netlify-api
 
+## 0.9.2
+
+### Patch Changes
+
+- fc8b392: Bump version to 2.36.0
+
 ## 0.9.1
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # vercel-api-js
 
+## 0.19.5
+
+### Patch Changes
+
+- 1b2a9f5: Add response type for creating project transfer request
+- 108a247: Change functionDefaultRegion type to accept null
+- 75e9f57: Update descriptions
+
 ## 0.19.4
 
 ### Patch Changes
