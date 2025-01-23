@@ -6280,8 +6280,8 @@ export type MeetingDeleteVariables = {
 /**
  * Delete a meeting.
  *
- *
- *
+ * **Prerequisites**:
+ * * For recurring meetings, the `occurrence_id` is required to delete a specific occurrence. If not provided, the entire recurring series will be deleted.
  *
  * **Scopes:** `meeting:write:admin`,`meeting:write`
  *
@@ -7719,7 +7719,7 @@ export type MeetingInvitationPathParams = {
   /**
    * The meeting's ID.
    *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *  When storing this value in your database, you must store it as a long format integer, not a simple integer. Meeting IDs can exceed 10 digits.
    *
    * @format int64
    * @example 85746065
@@ -7774,6 +7774,9 @@ export type MeetingInvitationVariables = {
 
 /**
  * Retrieve the meeting invitation note for a specific meeting.
+ *
+ * **Prerequisites**:
+ * * Host user must have a Zoom Meetings Basic license or higher.
  *
  * **Scopes:** `meeting:read`,`meeting:read:admin`
  *
@@ -7878,7 +7881,8 @@ export type MeetingInviteLinksCreateVariables = {
 /**
  * Create a batch of invitation links for a meeting.
  *
- *
+ * **Prerequisites**:
+ * * The `ttl` value, in seconds, defines the invite link's expiration time. It must be between `0` or no expiration and `7776000` or 90 days, and has a default value of `7200` or 2 hours.
  *
  * **Scopes:** `meeting:write:admin`,`meeting:write`
  *
@@ -8549,6 +8553,10 @@ export type MeetingAppAddVariables = {
 /**
  * Add an auto-open app in a meeting. This endpoint lets a developer auto-open an app in a specific meeting. This is only for configuring an app to automatically open before a given session. This can't open the app while a meeting or webinar is in session.
  *
+ * **Prerequisites**:
+ * * The meeting must not be a live meeting.
+ * * The **Zoom Apps Quick Launch Button** setting enabled in the Zoom web portal.
+ *
  * **Scopes:** `meeting:write`,`meeting:write:admin`
  *
  * **Granular Scopes:** `meeting:write:open_app`,`meeting:write:open_app:admin`
@@ -8583,6 +8591,10 @@ export type MeetingAppDeleteVariables = {
 
 /**
  * Delete a meeting auto-open app.
+ *
+ * **Prerequisites**:
+ * * The meeting must not be a live meeting.
+ * * The **Zoom Apps Quick Launch Button** setting enabled in the Zoom web portal.
  *
  * **Scopes:** `meeting:write`,`meeting:write:admin`
  *
@@ -9300,7 +9312,7 @@ export type MeetingPollGetPathParams = {
   /**
    * The meeting's ID.
    *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *  When storing this value in your database, store it as a `long` format integer, not a simple integer. Meeting IDs can exceed 10 digits.
    *
    * @format int64
    * @example 85746065
@@ -9344,9 +9356,9 @@ export type MeetingPollGetResponse = {
   anonymous?: boolean;
   /**
    * The poll's type.
-   * * `1` &mdash; Poll.
-   * * `2` &mdash; Advanced Poll. This feature must be enabled in your Zoom account.
-   * * `3` &mdash; Quiz. This feature must be enabled in your Zoom account.
+   * * `1` - Poll.
+   * * `2` - Advanced poll. This feature must be enabled in your Zoom account.
+   * * `3` - Quiz. This feature must be enabled in your Zoom account.
    *
    *  This value defaults to `1`.
    *
@@ -9366,7 +9378,7 @@ export type MeetingPollGetResponse = {
      */
     answer_max_character?: number;
     /**
-     * The allowed minimum number of characters. This field only applies to `short_answer` and `long_answer` polls. You must provide at least a **one** character minimum value.
+     * The allowed minimum number of characters. This field only applies to `short_answer` and `long_answer` polls. You must provide at least a one-character minimum value.
      *
      * @minimum 1
      * @example 1
@@ -9467,7 +9479,7 @@ export type MeetingPollGetResponse = {
      */
     rating_min_value?: number;
     /**
-     * The poll question's correct answer(s). This field is **required** if the poll's `type` value is `3` (Quiz).
+     * The poll question's correct answer(s). This field is required if the poll's `type` value is `3` (Quiz).
      *
      *  For `single` and `matching` polls, this field only accepts one answer.
      *
@@ -9475,9 +9487,9 @@ export type MeetingPollGetResponse = {
      */
     right_answers?: string[];
     /**
-     * Whether to display the radio selection as a drop-down box:
-     * * `true` &mdash; Show as a drop-down box.
-     * * `false` &mdash; Do not show as a drop-down box.
+     * Whether to display the radio selection as a drop-down box.
+     * * `true` - Show as a drop-down box.
+     * * `false` - Do not show as a drop-down box.
      *
      * This value defaults to `false`.
      *
@@ -9487,14 +9499,14 @@ export type MeetingPollGetResponse = {
     show_as_dropdown?: boolean;
     /**
      * The poll's question and answer type.
-     * * `single` &mdash; Single choice.
-     * * `multiple` &mdash; Multiple choice.
-     * * `matching` &mdash; Matching.
-     * * `rank_order` &mdash; Rank order.
-     * * `short_answer` &mdash; Short answer.
-     * * `long_answer` &mdash; Long answer.
-     * * `fill_in_the_blank` &mdash; Fill in the blank.
-     * * `rating_scale` &mdash; Rating scale.
+     * * `single` - Single choice.
+     * * `multiple` - Multiple choice.
+     * * `matching` - Matching.
+     * * `rank_order` - Rank order.
+     * * `short_answer` - Short answer.
+     * * `long_answer` - Long answer.
+     * * `fill_in_the_blank` - Fill in the blank.
+     * * `rating_scale` - Rating scale.
      *
      * @example single
      */
@@ -9522,10 +9534,11 @@ export type MeetingPollGetVariables = {
 } & FetcherExtraProps;
 
 /**
- * Polls let the meeting host survey attendees. It retrieves information about a specific meeting [poll](https://support.zoom.us/hc/en-us/articles/213756303-Polling-for-Meetings).
+ * Retrieves information about a specific meeting [poll](https://support.zoom.us/hc/en-us/articles/213756303-Polling-for-Meetings).
  *
- *
- *
+ * **Prerequisites**:
+ * * Host must have Pro or higher plan.
+ * * Enable the **Meeting Polls/Quizzes** setting in the Zoom web portal.
  *
  * **Scopes:** `meeting:read:admin`,`meeting:read`
  *
@@ -9552,7 +9565,7 @@ export type MeetingPollUpdatePathParams = {
    */
   meetingId: number;
   /**
-   * The poll ID
+   * The poll ID.
    *
    * @example QalIoKWLTJehBJ8e1xRrbQ
    */
@@ -9572,10 +9585,10 @@ export type MeetingPollUpdateRequestBody = {
    */
   anonymous?: boolean;
   /**
-   * The type of poll:
-   * * `1` &mdash; Poll.
-   * * `2` &mdash; Advanced Poll. This feature must be enabled in your Zoom account.
-   * * `3` &mdash; Quiz. This feature must be enabled in your Zoom account.
+   * The type of poll.
+   * * `1` - Poll.
+   * * `2` - Advanced Poll. This feature must be enabled in your Zoom account.
+   * * `3` - Quiz. This feature must be enabled in your Zoom account.
    *
    *  This value defaults to `1`.
    *
@@ -9587,7 +9600,7 @@ export type MeetingPollUpdateRequestBody = {
    */
   questions?: {
     /**
-     * The allowed maximum number of characters. This field only applies to `short_answer` and `long_answer` polls:
+     * The allowed maximum number of characters. This field only applies to `short_answer` and `long_answer` polls.
      * * For `short_answer` polls, a maximum of 500 characters.
      * * For `long_answer` polls, a maximum of 2,000 characters.
      *
@@ -9595,16 +9608,16 @@ export type MeetingPollUpdateRequestBody = {
      */
     answer_max_character?: number;
     /**
-     * The allowed minimum number of characters. This field only applies to `short_answer` and `long_answer` polls. You must provide at least a **one** character minimum value.
+     * The allowed minimum number of characters. This field only applies to `short_answer` and `long_answer` polls. You must provide at least a one character minimum value.
      *
      * @minimum 1
      * @example 1
      */
     answer_min_character?: number;
     /**
-     * Whether participants must answer the question:
-     * * `true` &mdash; The participant must answer the question.
-     * * `false` &mdash; The participant does not need to answer the question.
+     * Whether participants must answer the question.
+     * * `true` - The participant must answer the question.
+     * * `false` - The participant does not need to answer the question.
      *
      * **Note:**
      * * When the poll's `type` value is `1` (Poll), this value defaults to `true`.
@@ -9626,8 +9639,8 @@ export type MeetingPollUpdateRequestBody = {
     answers?: string[];
     /**
      * Whether the correct answer is case sensitive. This field only applies to `fill_in_the_blank` polls:
-     * * `true` &mdash; The answer is case-sensitive.
-     * * `false` &mdash; The answer is not case-sensitive.
+     * * `true` - The answer is case-sensitive.
+     * * `false` - The answer is not case-sensitive.
      *
      * This value defaults to `false`.
      *
@@ -9645,7 +9658,7 @@ export type MeetingPollUpdateRequestBody = {
      */
     name?: string;
     /**
-     * The information about the prompt questions. This field only applies to `matching` and `rank_order` polls. You **must** provide a minimum of two prompts, up to a maximum of 10 prompts.
+     * The information about the prompt questions. This field only applies to `matching` and `rank_order` polls. You must provide a minimum of two prompts, up to a maximum of 10 prompts.
      */
     prompts?: {
       /**
@@ -9704,9 +9717,9 @@ export type MeetingPollUpdateRequestBody = {
      */
     right_answers?: string[];
     /**
-     * Whether to display the radio selection as a drop-down box:
-     * * `true` &mdash; Show as a drop-down box.
-     * * `false` &mdash; Do not show as a drop-down box.
+     * Whether to display the radio selection as a drop-down box.
+     * * `true` - Show as a drop-down box.
+     * * `false` - Do not show as a drop-down box.
      *
      * This value defaults to `false`.
      *
@@ -9715,15 +9728,15 @@ export type MeetingPollUpdateRequestBody = {
      */
     show_as_dropdown?: boolean;
     /**
-     * The poll's question and answer type:
-     * * `single` &mdash; Single choice.
-     * * `multiple` &mdash; Multiple choice.
-     * * `matching` &mdash; Matching.
-     * * `rank_order` &mdash; Rank order.
-     * * `short_answer` &mdash; Short answer.
-     * * `long_answer` &mdash; Long answer.
-     * * `fill_in_the_blank` &mdash; Fill in the blank.
-     * * `rating_scale` &mdash; Rating scale.
+     * The poll's question and answer type.
+     * * `single` - Single choice.
+     * * `multiple` - Multiple choice.
+     * * `matching` - Matching.
+     * * `rank_order` - Rank order.
+     * * `short_answer` - Short answer.
+     * * `long_answer` - Long answer.
+     * * `fill_in_the_blank` - Fill in the blank.
+     * * `rating_scale` - Rating scale.
      *
      * @example single
      */
@@ -9754,8 +9767,10 @@ export type MeetingPollUpdateVariables = {
 /**
  * Polls allow the meeting host to survey attendees. Update information of a specific meeting [poll](https://support.zoom.us/hc/en-us/articles/213756303-Polling-for-Meetings).
  *
- *
- *
+ * **Prerequisites**:
+ * * Host user type must be **Pro** or higher plan.
+ * * The **Meeting Polls/Quizzes** setting enabled in the Zoom web portal.
+ * * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
  *
  * **Scopes:** `meeting:write:admin`,`meeting:write`
  *
@@ -9822,7 +9837,7 @@ export type MeetingRegistrantsPathParams = {
   /**
    * The meeting's ID.
    *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *  When storing this value in your database, store it as a long format integer, not an integer. Meeting IDs can exceed 10 digits.
    *
    * @format int64
    * @example 85746065
@@ -9874,7 +9889,7 @@ export type MeetingRegistrantsError = Fetcher.ErrorWrapper<undefined>;
 
 export type MeetingRegistrantsResponse = {
   /**
-   * The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+   * Use the next page token to paginate through large result sets. A next page token is returned whenever the set of available results exceeds the current page size. This token's expiration period is 15 minutes.
    *
    * @example w7587w4eiyfsudgf
    */
@@ -9930,7 +9945,7 @@ export type MeetingRegistrantsResponse = {
      */
     comments?: string;
     /**
-     * The registrant's two-letter [country code](https://developers.zoom.us/docs/api/rest/other-references/abbreviation-lists/#countries).
+     * The registrant's two-letter [country code](/docs/api/rest/other-references/abbreviation-lists/#countries).
      *
      * @example US
      */
@@ -10053,9 +10068,9 @@ export type MeetingRegistrantsResponse = {
     state?: string;
     /**
      * The status of the registrant's registration.
-     *   `approved`: User has been successfully approved for the webinar.
-     *   `pending`:  The registration is still pending.
-     *   `denied`: User has been denied from joining the webinar.
+     *   `approved` - User has been successfully approved for the webinar.
+     *   `pending` - The registration is still pending.
+     *   `denied` - User has been denied from joining the webinar.
      *
      * @example approved
      */
@@ -10073,14 +10088,14 @@ export type MeetingRegistrantsResponse = {
      */
     id?: string;
     /**
-     * The time at which the registrant registered.
+     * The time when the registrant registered.
      *
      * @format date-time
      * @example 2022-03-22T05:59:09Z
      */
     create_time?: string;
     /**
-     * The URL using which an approved registrant can join the meeting or webinar.
+     * The URL that an approved registrant can use to join the meeting or webinar.
      *
      * @format string
      * @example https://example.com/j/11111
@@ -10102,10 +10117,11 @@ export type MeetingRegistrantsVariables = {
 } & FetcherExtraProps;
 
 /**
- * A host or a user with admin permission can require [registration for a Zoom meeting](https://support.zoom.us/hc/en-us/articles/211579443-Registration-for-Meetings). List users that have registered for a meeting.
+ * List users that have registered for a meeting. A host or a user with admin permission can require [registration for a Zoom meeting](https://support.zoom.us/hc/en-us/articles/211579443-Registration-for-Meetings).
  *
- *
- *
+ * **Prerequisites**:
+ * * Host user type must be **Pro** or higher plan.
+ * * Registration must be enabled for the meeting.
  *
  * **Scopes:** `meeting:read:admin`,`meeting:read`
  *
@@ -10442,7 +10458,7 @@ export type MeetingRegistrantsQuestionsGetPathParams = {
   /**
    * The meeting's ID.
    *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *  When storing this value in your database, store it as a long format integer, not a simple integer. Meeting IDs can exceed 10 digits.
    *
    * @format int64
    * @example 85746065
@@ -10454,7 +10470,7 @@ export type MeetingRegistrantsQuestionsGetError = Fetcher.ErrorWrapper<undefined
 
 export type MeetingRegistrantsQuestionsGetResponse = {
   /**
-   * Array of Registrant Custom Questions
+   * Array of custom questions for registrants.
    */
   custom_questions?: {
     /**
@@ -10462,7 +10478,7 @@ export type MeetingRegistrantsQuestionsGetResponse = {
      */
     answers?: string[];
     /**
-     * Indicates whether or not the custom question is required to be answered by participants or not.
+     * Whether or not the custom question is required to be answered by participants or not.
      *
      * @example true
      */
@@ -10481,7 +10497,7 @@ export type MeetingRegistrantsQuestionsGetResponse = {
     type?: 'short' | 'single';
   }[];
   /**
-   * Array of Registrant Questions
+   * Array of registrant questions.
    */
   questions?: {
     /**
@@ -10505,7 +10521,7 @@ export type MeetingRegistrantsQuestionsGetResponse = {
       | 'no_of_employees'
       | 'comments';
     /**
-     * Indicates whether or not the displayed fields are required to be filled out by registrants.
+     * Whether or not the displayed fields are required to be filled out by registrants.
      *
      * @example true
      */
@@ -10520,8 +10536,9 @@ export type MeetingRegistrantsQuestionsGetVariables = {
 /**
  * List registration questions that will be displayed to users while [registering for a meeting](https://support.zoom.us/hc/en-us/articles/211579443-Registration-for-Meetings).
  *
- *
- *
+ * **Prerequisites**:
+ * * Host user type must be **Pro** or higher plan.
+ * * Registration must be enabled for the meeting.
  *
  * **Scopes:** `meeting:read`,`meeting:read:admin`
  *
@@ -10578,18 +10595,18 @@ export type MeetingRegistrantQuestionUpdateRequestBody = {
      */
     title?: string;
     /**
-     * Type of the question being asked.
+     * The type of question being asked.
      *
      * @example short
      */
     type?: 'short' | 'single';
   }[];
   /**
-   * Array of Registrant Questions
+   * Array of registrant questions.
    */
   questions?: {
     /**
-     * Field name of the question.
+     * The question's field name.
      *
      * @example last_name
      */
@@ -10625,8 +10642,9 @@ export type MeetingRegistrantQuestionUpdateVariables = {
 /**
  * Update registration questions that will be displayed to users while [registering for a meeting](https://support.zoom.us/hc/en-us/articles/211579443-Registration-for-Meetings).
  *
- *
- *
+ * **Prerequisites**:
+ * * Host user type must be **Pro** or higher plan.
+ * * Registration must be enabled for the meeting.
  *
  * **Scopes:** `meeting:write`,`meeting:write:admin`
  *
@@ -10651,7 +10669,7 @@ export type MeetingRegistrantStatusPathParams = {
   /**
    * The meeting's ID.
    *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *  When storing this value in your database, store it as a `long` format integer, not as a simple integer. Meeting IDs can exceed 10 digits.
    *
    * @format int64
    * @example 85746065
@@ -10672,7 +10690,7 @@ export type MeetingRegistrantStatusError = Fetcher.ErrorWrapper<undefined>;
 
 export type MeetingRegistrantStatusRequestBody = {
   /**
-   * Registrant Status:
+   * Registrant status.
    *  `approve` - Approve registrant.
    *  `cancel` - Cancel previously approved registrant's registration.
    *  `deny` - Deny registrant.
@@ -10706,8 +10724,9 @@ export type MeetingRegistrantStatusVariables = {
 /**
  * Update a meeting registrant's status by either approving, cancelling or denying a registrant from joining the meeting.
  *
- *
- *
+ * **Prerequisites**:
+ * * Host user type must be **Pro** or higher plan.
+ * * Registration must be enabled for the meeting.
  *
  * **Scopes:** `meeting:write:admin`,`meeting:write`
  *
@@ -10986,8 +11005,12 @@ export type MeetingregistrantdeleteVariables = {
 /**
  * Delete a meeting registrant.
  *
- *
- *
+ * **Prerequisites**:
+ * * Host user type must be Pro or higher plan.
+ * * Registration must be enabled for the meeting.
+ * * For recurring meetings:
+ *   * The `registration_type` must be 2 or 3 to require the `occurrence_id` field.
+ *   * If the `registration_type` is 1, the `occurrence_id` is not needed, as registrants can attend any occurrence.
  *
  * **Scopes:** `meeting:write:admin`,`meeting:write`
  *
@@ -11064,7 +11087,8 @@ export type GetSipDialingWithPasscodeVariables = {
 /**
  * Get a meeting's SIP URI. The URI consists of the meeting ID, and may include the user-supplied passcode and participant identifier code. The API return data also includes additional fields to indicate whether the API caller has a valid Cloud Room Connector subscription, the participant identifier code from the URI, and the SIP URI validity period in seconds.
  *
- *
+ * **Prerequisites**:
+ * * The SIP URI is valid for 2 hours, or 7200 seconds, by default. After this period, the URI will expire and the API must be called again to retrieve a new one.
  *
  * **Scopes:** `meeting:write:sip_dialing`,`meeting:write:admin:sip_dialing`
  *
@@ -11086,7 +11110,7 @@ export type MeetingStatusPathParams = {
   /**
    * The meeting's ID.
    *
-   *  When storing this value in your database, you must store it as a long format integer and **not** an integer. Meeting IDs can exceed 10 digits.
+   *  When storing this value in your database, you must store it as a `long` format integer and not an integer. Meeting IDs can exceed 10 digits.
    *
    * @format int64
    * @example 85746065
@@ -11115,8 +11139,8 @@ export type MeetingStatusVariables = {
 /**
  * Update the status of a meeting.
  *
- *
- *
+ * **Prerequisites**:
+ * * Host user must have a Zoom Meetings Basic license or higher.
  *
  * **Scopes:** `meeting:write:admin`,`meeting:write`
  *
@@ -11731,7 +11755,7 @@ export type PastMeetingDetailsResponse = {
    */
   id?: number;
   /**
-   * The meeting's UUID. You **must** [double encode](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis/#meeting-id-and-uuid) this value if the meeting UUID begins with a `/` character or contains the `//` character.
+   * The meeting's UUID. You must [double encode](https://marketplace.zoom.us/docs/api-reference/using-zoom-apis/#meeting-id-and-uuid) this value if the meeting UUID begins with a `/` character or contains the `//` character.
    *
    * @example 4444AAAiAAAAAiAiAiiAii==
    */
@@ -11829,7 +11853,9 @@ export type PastMeetingDetailsVariables = {
 /**
  * Get information about a past meeting.
  *
- *
+ * **Prerequisites**:
+ * * The meeting must have ended before you can retrieve the data.
+ * * You cannot access a meeting that occurred more than one year ago.
  *
  * **Scopes:** `meeting:read:admin`,`meeting:read`
  *
@@ -11885,7 +11911,9 @@ export type PastMeetingsVariables = {
 /**
  * Return a list of past meeting instances.
  *
- *
+ * **Prerequisites**
+ * * The meeting must have already occurred at least once. This endpoint only returns instances of meetings that have ended.
+ * * You cannot retrieve instances for meetings that occurred more than 15 months ago.
  *
  * **Scopes:** `meeting:read:admin`,`meeting:read`
  *
@@ -12240,13 +12268,14 @@ export type ListPastMeetingQAVariables = {
 } & FetcherExtraProps;
 
 /**
- * The question &amp; answer (Q&amp;A) feature for Zoom Meetings lets attendees ask questions during a meeting and lets the other attendees answer those questions.
- *
  * List Q&amp;A of a specific meeting.
  *
- * **Prerequisites:**
+ * The question &amp; answer (Q&amp;A) feature for Zoom Meetings lets attendees ask questions during a meeting and lets the other attendees answer those questions.
  *
- * *
+ * **Prerequisites**:
+ * * Q&A must be enabled for the meeting.
+ * * The meeting must have ended before you can retrieve the data.
+ * * You cannot retrieve Q&A data for meetings that occurred more than 15 months ago.
  *
  * **Scopes:** `meeting:read:admin`,`meeting:read`
  *
@@ -12311,9 +12340,10 @@ export type ListMeetingTemplatesVariables = {
 } & FetcherExtraProps;
 
 /**
- * List available [meeting templates](https://support.zoom.us/hc/en-us/articles/360036559151-Meeting-templates) for a user. For user-level apps, pass [the `me` value](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#the-me-keyword) instead of the `userId` parameter.
+ * List available [meeting templates](https://support.zoom.us/hc/en-us/articles/360036559151-Meeting-templates) for a user. For user-level apps, pass [the `me` value](/docs/api/rest/using-zoom-apis/#the-me-keyword) instead of the `userId` parameter.
  *
- *
+ * **Prerequisites**:
+ * * Host user must have a Zoom Meetings Basic license or higher.
  *
  * **Scopes:** `meeting:read`,`meeting:read:admin`
  *
@@ -12393,7 +12423,9 @@ export type MeetingTemplateCreateVariables = {
 /**
  * Create a meeting template from an existing meeting.
  *
- *
+ * **Prerequisites**:
+ * * Host user must have a Zoom Meetings Basic license or higher.
+ * * You can only create up to 40 meeting templates.
  *
  * **Scopes:** `meeting:write:admin`,`meeting:write`
  *
@@ -14440,7 +14472,7 @@ export const meetingCreate = (variables: MeetingCreateVariables, signal?: AbortS
 
 export type ListUpcomingMeetingPathParams = {
   /**
-   * The user's user ID or email address. For user-level apps, pass [the `me` value](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#the-me-keyword).
+   * The user's user ID or email address. For user-level apps, pass [the `me` value](/docs/api/rest/using-zoom-apis/#the-me-keyword).
    *
    * @example 30R7kT7bTIKSNUFEuH_Qlg
    */
@@ -14516,7 +14548,7 @@ export type ListUpcomingMeetingResponse = {
      */
     join_url?: string;
     /**
-     * The meeting passcode. This passcode may only contain these characters: `[a-z A-Z 0-9 @ - _ * !]`.
+     * The meeting passcode. This passcode may only contain characters `[a-z A-Z 0-9 @ - _ * !]`.
      *
      * @example 123456
      */
@@ -14537,9 +14569,12 @@ export type ListUpcomingMeetingVariables = {
 /**
  * List a Zoom user's upcoming meetings. For user-level apps, pass [the `me` value](/docs/api/rest/using-zoom-apis/#the-me-keyword) instead of the `userId` parameter.
  *
- * **Note**
+ * **Notes**:
  * * This API includes the meetings that Zoom users schedule and the meetings they are invited to join.
- * * This API **only** includes upcoming meetings within the next 24 hours.
+ * * This API only includes upcoming meetings within the next 24 hours.
+ *
+ * **Prerequisites**:
+ * * To retrieve data for Zoom meetings that the user has been invited to from a third-party calendar (Google, Exchange, Office 365, Apple iCloud), the [**Calendar and Contacts Integration**](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0069503) must be enabled in the Zoom Web Portal.
  *
  * **Scopes:** `meeting:read`,`meeting:read:admin`
  *
@@ -14874,7 +14909,7 @@ export const getBillingReport = (variables: GetBillingReportVariables, signal?: 
 
 export type GetBillingInvoicesReportsQueryParams = {
   /**
-   * Unique Identifier of the Billing Report. Retrieve this ID from the response of **Get Billing Reports** API request.
+   * The billing report's unique identifier. Retrieve this ID from the response of **Get Billing Reports** API request.
    *
    * @example indfhgfhfho
    */
@@ -14943,7 +14978,7 @@ export type GetBillingInvoicesReportsVariables = {
 } & FetcherExtraProps;
 
 /**
- * Get department billing invoices reports for a specific billing period. Provide the `billing_id` of the billing period for which you would like to retrieve the invoices for. This ID can be retrieved from **Get Billing Reports** API.
+ * Get department billing invoices reports for a specific billing period. Provide the `billing_id` of the billing period for which you would like to retrieve the invoices. Retrieve this ID from the **Get Billing Reports** API.
  *
  * **Prerequisites:**
  *
@@ -14955,7 +14990,7 @@ export type GetBillingInvoicesReportsVariables = {
  *
  * **Granular Scopes:** `report:read:billing_invoice:admin`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
 export const getBillingInvoicesReports = (variables: GetBillingInvoicesReportsVariables, signal?: AbortSignal) =>
   fetch<
