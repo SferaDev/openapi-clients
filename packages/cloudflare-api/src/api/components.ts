@@ -46186,6 +46186,10 @@ export type EmailSecurityListDomainsQueryParams = {
    * Filters results by the provided domains, allowing for multiple occurrences.
    */
   domain?: string[];
+  /**
+   * Filters response to domains with the currently active delivery mode.
+   */
+  active_delivery_mode?: Schemas.EmailSecurityDeliveryMode;
 };
 
 export type EmailSecurityListDomainsError = Fetcher.ErrorWrapper<{
@@ -46277,16 +46281,40 @@ export type EmailSecurityGetDomainError = Fetcher.ErrorWrapper<{
 
 export type EmailSecurityGetDomainResponse = Schemas.EmailSecurityApiResponseCommon & {
   /**
-   * @example {"allowed_delivery_modes":["API"],"created_at":"2023-11-14T22:13:20Z","domain":"example.com","drop_dispositions":["MALICIOUS","SPAM"],"folder":"Inbox","id":2400,"inbox_provider":"Microsoft","integration_id":"a5dbb180-60ea-4578-84bb-d01a5d4e50c3","ip_restrictions":[],"last_modified":"2023-11-14T22:13:20Z","lookback_hops":2,"o365_tenant_id":"c3c3239d-8858-47df-9618-0e2d9bdf6aa8","require_tls_inbound":false,"require_tls_outbound":true,"transport":"example.com"}
+   * @example {"allowed_delivery_modes":["API"],"authorization":null,"created_at":"2023-11-14T22:13:20Z","domain":"example.com","drop_dispositions":["MALICIOUS","SPAM"],"emails_processed":null,"folder":"Inbox","id":2400,"inbox_provider":"Microsoft","integration_id":"a5dbb180-60ea-4578-84bb-d01a5d4e50c3","ip_restrictions":[],"last_modified":"2023-11-14T22:13:20Z","lookback_hops":2,"o365_tenant_id":"c3c3239d-8858-47df-9618-0e2d9bdf6aa8","require_tls_inbound":false,"require_tls_outbound":true,"transport":"example.com"}
    */
   result: {
     allowed_delivery_modes: Schemas.EmailSecurityDeliveryMode[];
+    authorization?: {
+      authorized: boolean;
+      status_message?: string | null;
+      /**
+       * @format date-time
+       */
+      timestamp: string;
+    } | null;
     /**
      * @format date-time
      */
     created_at: string;
     domain: string;
     drop_dispositions: Schemas.EmailSecurityDispositionLabel[];
+    emails_processed?: {
+      /**
+       * @format date-time
+       */
+      timestamp: string;
+      /**
+       * @format int32
+       * @minimum 0
+       */
+      total_emails_processed: number;
+      /**
+       * @format int32
+       * @minimum 0
+       */
+      total_emails_processed_previous: number;
+    } | null;
     folder?: Schemas.EmailSecurityScannableFolder & (string | null);
     /**
      * The unique identifier for the domain.
@@ -46350,16 +46378,40 @@ export type EmailSecurityUpdateDomainError = Fetcher.ErrorWrapper<{
 
 export type EmailSecurityUpdateDomainResponse = Schemas.EmailSecurityApiResponseCommon & {
   /**
-   * @example {"allowed_delivery_modes":["API"],"created_at":"2023-11-14T22:13:20Z","domain":"example.com","drop_dispositions":["MALICIOUS","SPAM"],"folder":"Inbox","id":2400,"inbox_provider":"Microsoft","integration_id":"a5dbb180-60ea-4578-84bb-d01a5d4e50c3","ip_restrictions":[],"last_modified":"2023-11-14T22:13:20Z","lookback_hops":2,"o365_tenant_id":"c3c3239d-8858-47df-9618-0e2d9bdf6aa8","require_tls_inbound":false,"require_tls_outbound":true,"transport":"example.com"}
+   * @example {"allowed_delivery_modes":["API"],"authorization":null,"created_at":"2023-11-14T22:13:20Z","domain":"example.com","drop_dispositions":["MALICIOUS","SPAM"],"emails_processed":null,"folder":"Inbox","id":2400,"inbox_provider":"Microsoft","integration_id":"a5dbb180-60ea-4578-84bb-d01a5d4e50c3","ip_restrictions":[],"last_modified":"2023-11-14T22:13:20Z","lookback_hops":2,"o365_tenant_id":"c3c3239d-8858-47df-9618-0e2d9bdf6aa8","require_tls_inbound":false,"require_tls_outbound":true,"transport":"example.com"}
    */
   result: {
     allowed_delivery_modes: Schemas.EmailSecurityDeliveryMode[];
+    authorization?: {
+      authorized: boolean;
+      status_message?: string | null;
+      /**
+       * @format date-time
+       */
+      timestamp: string;
+    } | null;
     /**
      * @format date-time
      */
     created_at: string;
     domain: string;
     drop_dispositions: Schemas.EmailSecurityDispositionLabel[];
+    emails_processed?: {
+      /**
+       * @format date-time
+       */
+      timestamp: string;
+      /**
+       * @format int32
+       * @minimum 0
+       */
+      total_emails_processed: number;
+      /**
+       * @format int32
+       * @minimum 0
+       */
+      total_emails_processed_previous: number;
+    } | null;
     folder?: Schemas.EmailSecurityScannableFolder & (string | null);
     /**
      * The unique identifier for the domain.
@@ -47147,6 +47199,7 @@ export type EmailSecuritySubmissionsError = Fetcher.ErrorWrapper<{
 
 export type EmailSecuritySubmissionsResponse = Schemas.EmailSecurityApiResponseCommon & {
   result: Schemas.EmailSecuritySubmission[];
+  result_info: Schemas.EmailSecurityResultInfo;
 };
 
 export type EmailSecuritySubmissionsVariables = {
