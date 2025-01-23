@@ -45937,9 +45937,17 @@ export type WorkersMultipartScript = {
          */
         not_found_handling?: 'none' | '404-page' | 'single-page-application';
         /**
+         * When true, requests will always invoke the Worker script. Otherwise, attempt to serve an asset matching the request, falling back to the Worker script.
+         *
+         * @default false
+         * @example false
+         */
+        run_worker_first?: boolean;
+        /**
          * When true and the incoming request matches an asset, that will be served instead of invoking the Worker script. When false, requests will always invoke the Worker script.
          *
          * @default true
+         * @deprecated true
          * @example true
          */
         serve_directly?: boolean;
