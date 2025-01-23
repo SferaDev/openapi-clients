@@ -12804,11 +12804,6 @@ export type DigitalExperienceMonitoringUuid = string;
  */
 export type DigitalExperienceMonitoringVersion = string;
 
-export type DlpAction = {
-  action: 'Block';
-  message?: string | null;
-};
-
 export type DlpAddinAccountMapping = {
   /**
    * @format uuid
@@ -12839,12 +12834,6 @@ export type DlpBehaviors = {
   };
 };
 
-export type DlpCondition = {
-  operator: DlpOperator;
-  selector: DlpSelector;
-  value: void;
-};
-
 export type DlpConfidence = 'low' | 'medium' | 'high' | 'very_high';
 
 /**
@@ -12859,11 +12848,11 @@ export type DlpContextAwareness = {
 };
 
 export type DlpCreateEmailRule = {
-  action: DlpAction;
+  action: DlpEmailRuleAction;
   /**
    * Rule is triggered if all conditions match
    */
-  conditions: DlpCondition[];
+  conditions: DlpEmailRuleCondition[];
   description?: string | null;
   enabled: boolean;
   name: string;
@@ -13106,11 +13095,11 @@ export type DlpDatasetUpload = {
 export type DlpDatasetUploadStatus = 'empty' | 'uploading' | 'processing' | 'failed' | 'complete';
 
 export type DlpEmailRule = {
-  action: DlpAction;
+  action: DlpEmailRuleAction;
   /**
    * Rule is triggered if all conditions match
    */
-  conditions: DlpCondition[];
+  conditions: DlpEmailRuleCondition[];
   /**
    * @format date-time
    */
@@ -13133,7 +13122,24 @@ export type DlpEmailRule = {
   updated_at: string;
 };
 
+export type DlpEmailRuleAction = {
+  action: 'Block';
+  message?: string | null;
+};
+
 export type DlpEmailRuleArray = DlpEmailRule[];
+
+export type DlpEmailRuleCondition = {
+  operator: DlpEmailRuleOperator;
+  selector: DlpEmailRuleSelector;
+  value: DlpEmailRuleValue;
+};
+
+export type DlpEmailRuleOperator = 'InList' | 'NotInList' | 'MatchRegex' | 'NotMatchRegex';
+
+export type DlpEmailRuleSelector = 'Recipients' | 'Sender' | 'DLPProfiles';
+
+export type DlpEmailRuleValue = string[] | string;
 
 export type DlpEmpty = Record<string, any> | null;
 
@@ -13383,8 +13389,6 @@ export type DlpNewWordListEntry = {
   words: string[];
 };
 
-export type DlpOperator = 'InList' | 'NotInList' | 'MatchRegex' | 'NotMatchRegex';
-
 export type DlpPattern = {
   regex: string;
   validation?: DlpValidation;
@@ -13571,8 +13575,6 @@ export type DlpRiskSummary = {
   users: DlpUserRiskInfo[];
 };
 
-export type DlpSelector = 'Recipients' | 'Sender' | 'DLPProfiles';
-
 export type DlpSharedEntryUpdate =
   | {
       enabled: boolean;
@@ -13671,8 +13673,6 @@ export type DlpUserRiskInfo = {
 };
 
 export type DlpValidation = 'luhn';
-
-export type DlpValue = string[] | string;
 
 export type DlpWordListEntry = {
   /**
@@ -27444,6 +27444,249 @@ export type MqWorkerProducer = {
   script?: string;
   type?: 'worker';
 };
+
+/**
+ * Customer account tag
+ */
+export type NscAccountTag = string;
+
+/**
+ * Bandwidth structure as visible through the customer-facing API.
+ */
+export type NscApiBandwidth =
+  | '50M'
+  | '100M'
+  | '200M'
+  | '300M'
+  | '400M'
+  | '500M'
+  | '1G'
+  | '2G'
+  | '5G'
+  | '10G'
+  | '20G'
+  | '50G';
+
+export type NscBgpControl = {
+  /**
+   * ASN used on the customer end of the BGP session
+   *
+   * @format int32
+   * @minimum 0
+   */
+  customer_asn: number;
+  /**
+   * Extra set of static prefixes to advertise to the customer's end of the session
+   *
+   * @example 192.168.3.4/31
+   */
+  extra_prefixes: string[];
+  /**
+   * MD5 key to use for session authentication.
+   *
+   * Note that *this is not a security measure*. MD5 is not a valid security mechanism, and the
+   * key is not treated as a secret value. This is *only* supported for preventing
+   * misconfiguration, not for defending against malicious attacks.
+   *
+   * The MD5 key, if set, must be of non-zero length and consist only of the following types of
+   * character:
+   *
+   * * ASCII alphanumerics: `[a-zA-Z0-9]`
+   * * Special characters in the set `'!@#$%^&*()+[]{}<>/.,;:_-~`= \|`
+   *
+   * In other words, MD5 keys may contain any printable ASCII character aside from newline (0x0A),
+   * quotation mark (`"`), vertical tab (0x0B), carriage return (0x0D), tab (0x09), form feed
+   * (0x0C), and the question mark (`?`). Requests specifying an MD5 key with one or more of
+   * these disallowed characters will be rejected.
+   */
+  md5_key?: string | null;
+};
+
+/**
+ * A Cloudflare site name.
+ */
+export type NscCloudflareSite = string;
+
+export type NscCni = {
+  account: NscAccountTag;
+  bgp?: NscBgpControl;
+  /**
+   * Customer end of the point-to-point link
+   *
+   * This should always be inside the same prefix as `p2p_ip`.
+   *
+   * @example 192.168.3.4/31
+   * @format A.B.C.D/N
+   */
+  cust_ip: string;
+  /**
+   * @format uuid
+   */
+  id: string;
+  /**
+   * Interconnect identifier hosting this CNI
+   */
+  interconnect: string;
+  magic: NscMagicSettings;
+  /**
+   * Cloudflare end of the point-to-point link
+   *
+   * @example 192.168.3.4/31
+   * @format A.B.C.D/N
+   */
+  p2p_ip: string;
+};
+
+export type NscCniCreate = {
+  account: NscAccountTag;
+  bgp?: NscBgpControl;
+  interconnect: string;
+  magic: NscMagicSettings;
+};
+
+export type NscCniList = {
+  items: NscCni[];
+  /**
+   * @format int32
+   */
+  next?: number | null;
+};
+
+export type NscFacilityInfo = {
+  address: string[];
+  name: string;
+};
+
+export type NscInterconnect =
+  | (Omit<NscInterconnectPhysicalBody, 'type'> & {
+      type: 'direct';
+    })
+  | (Omit<NscInterconnectGcpPartnerBody, 'type'> & {
+      type: 'gcp_partner';
+    });
+
+export type NscInterconnectCreate =
+  | (Omit<NscInterconnectCreatePhysicalBody, 'type'> & {
+      type: 'direct';
+    })
+  | (Omit<NscInterconnectCreateGcpPartnerBody, 'type'> & {
+      type: 'gcp_partner';
+    });
+
+export type NscInterconnectCreateGcpPartnerBody = {
+  account?: string;
+  type?: string;
+  bandwidth: NscApiBandwidth;
+  /**
+   * Pairing key provided by GCP
+   */
+  pairing_key: string;
+};
+
+export type NscInterconnectCreatePhysicalBody = {
+  account: string;
+  type?: string;
+  /**
+   * @format uuid
+   */
+  slot_id: string;
+  speed?: string | null;
+};
+
+export type NscInterconnectList = {
+  items: NscInterconnect[];
+  /**
+   * @format int32
+   */
+  next?: number | null;
+};
+
+export type NscInterconnectGcpPartnerBody = {
+  account: string;
+  name: string;
+  owner?: string;
+  type?: string;
+  region: string;
+};
+
+export type NscInterconnectPhysicalBody = {
+  account?: string;
+  name?: string;
+  owner?: string;
+  type?: string;
+  facility: NscFacilityInfo;
+  site: NscCloudflareSite;
+  /**
+   * @format uuid
+   */
+  slot_id: string;
+  speed: string;
+};
+
+export type NscMagicSettings = {
+  conduit_name: string;
+  description: string;
+  /**
+   * @format int32
+   * @minimum 0
+   */
+  mtu: number;
+};
+
+export type NscSettings = {
+  /**
+   * @format int32
+   * @minimum 0
+   */
+  default_asn?: number | null;
+};
+
+export type NscSlotInfo = {
+  account?: NscAccountTag;
+  facility: NscFacilityInfo;
+  /**
+   * Slot ID
+   *
+   * @format uuid
+   */
+  id: string;
+  /**
+   * Whether the slot is occupied or not
+   */
+  occupied: boolean;
+  site: string;
+  speed: string;
+};
+
+export type NscSlotList = {
+  items: NscSlotInfo[];
+  /**
+   * @format int32
+   */
+  next?: number | null;
+};
+
+export type NscStatusInfo =
+  | {
+      state: 'Pending';
+    }
+  | {
+      /**
+       * Diagnostic information, if available
+       */
+      reason?: string | null;
+      state: 'Down';
+    }
+  | {
+      /**
+       * Diagnostic information, if available
+       */
+      reason?: string | null;
+      state: 'Unhealthy';
+    }
+  | {
+      state: 'Healthy';
+    };
 
 export type ObservatoryApiResponseCollection = ObservatoryApiResponseCommon;
 
