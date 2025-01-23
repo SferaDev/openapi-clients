@@ -8,6 +8,7 @@
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type AaaAccountId = string;
 
@@ -29,6 +30,7 @@ export type AaaAlertBody = string;
  * Optional specification of how often to re-alert from the same incident, not support on all alert types.
  *
  * @example 30m
+ * @x-auditable true
  */
 export type AaaAlertInterval = string;
 
@@ -36,6 +38,7 @@ export type AaaAlertInterval = string;
  * Refers to which event will trigger a Notification dispatch. You can use the endpoint to get available alert types which then will give you a list of possible values.
  *
  * @example universal_ssl_event_type
+ * @x-auditable true
  */
 export type AaaAlertType =
   | 'access_custom_certificate_expiration_type'
@@ -462,6 +465,7 @@ export type AaaComponentsSchemasDescription = string;
  * The name of the webhook destination. This will be included in the request body when you receive a webhook notification.
  *
  * @example Slack Webhook
+ * @x-auditable true
  */
 export type AaaComponentsSchemasName = string;
 
@@ -473,6 +477,7 @@ export type AaaComponentsSchemasResponseCollection = AaaApiResponseCollection & 
  * Type of webhook endpoint.
  *
  * @example slack
+ * @x-auditable true
  */
 export type AaaComponentsSchemasType = 'slack' | 'generic' | 'gchat';
 
@@ -481,6 +486,7 @@ export type AaaComponentsSchemasType = 'slack' | 'generic' | 'gchat';
  *
  * @example 2020-10-26T18:25:04.532316Z
  * @format date-time
+ * @x-auditable true
  */
 export type AaaCreatedAt = string;
 
@@ -488,6 +494,7 @@ export type AaaCreatedAt = string;
  * Describes the alert type.
  *
  * @example High levels of 5xx HTTP errors at your origin
+ * @x-auditable true
  */
 export type AaaDescription = string;
 
@@ -495,6 +502,7 @@ export type AaaDescription = string;
  * Alert type name.
  *
  * @example Origin Error Rate Alert
+ * @x-auditable true
  */
 export type AaaDisplayName = string;
 
@@ -508,6 +516,7 @@ export type AaaEligibility = {
  * Determines whether or not the account is eligible for the delivery mechanism.
  *
  * @example true
+ * @x-auditable true
  */
 export type AaaEligible = boolean;
 
@@ -516,6 +525,7 @@ export type AaaEligible = boolean;
  *
  * @default true
  * @example true
+ * @x-auditable true
  */
 export type AaaEnabled = boolean;
 
@@ -756,6 +766,7 @@ export type AaaIntegrationToken = string;
  *
  * @example 2020-10-26T18:25:04.532316Z
  * @format date-time
+ * @x-auditable true
  */
 export type AaaLastFailure = string;
 
@@ -764,6 +775,7 @@ export type AaaLastFailure = string;
  *
  * @example 2020-10-26T18:25:04.532316Z
  * @format date-time
+ * @x-auditable true
  */
 export type AaaLastSuccess = string;
 
@@ -771,6 +783,7 @@ export type AaaLastSuccess = string;
  * The mechanism to which the notification has been dispatched.
  *
  * @example test@example.com
+ * @x-auditable true
  */
 export type AaaMechanism = string;
 
@@ -804,6 +817,7 @@ export type AaaMessages = {
  * The name of the pagerduty service.
  *
  * @example My PagerDuty Service
+ * @x-auditable true
  */
 export type AaaName = string;
 
@@ -843,6 +857,7 @@ export type AaaPoliciesComponentsSchemasResponseCollection = AaaApiResponseColle
  *
  * @example 0da2b59e-f118-439d-8097-bdfb215203c9
  * @maxLength 36
+ * @x-auditable true
  */
 export type AaaPolicyId = string;
 
@@ -850,6 +865,7 @@ export type AaaPolicyId = string;
  * Beta flag. Users can create a policy with a mechanism that is not ready, but we cannot guarantee successful delivery of notifications.
  *
  * @example true
+ * @x-auditable true
  */
 export type AaaReady = boolean;
 
@@ -914,6 +930,7 @@ export type AaaSchemasApiResponseCommonFailure = {
  * Optional description for the Notification policy.
  *
  * @example Something describing the policy.
+ * @x-auditable true
  */
 export type AaaSchemasDescription = string;
 
@@ -933,6 +950,7 @@ export type AaaSchemasMessages = {
  * Name of the policy.
  *
  * @example SSL Notification Event Policy
+ * @x-auditable true
  */
 export type AaaSchemasName = string;
 
@@ -980,6 +998,7 @@ export type AaaSchemasSingleResponse = AaaApiResponseSingle & {
  * Determines type of delivery mechanism.
  *
  * @example email
+ * @x-auditable true
  */
 export type AaaSchemasType = 'email' | 'pagerduty' | 'webhook';
 
@@ -1009,6 +1028,7 @@ export type AaaSingleResponse = AaaApiResponseSingle & {
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type AaaTimestamp = string;
 
@@ -1024,6 +1044,7 @@ export type AaaToken = string;
  * Use this value when creating and updating a notification policy.
  *
  * @example http_alert_origin_error
+ * @x-auditable true
  */
 export type AaaType = string;
 
@@ -1048,6 +1069,7 @@ export type AaaUuid = string;
  *
  * @example b115d5ec-15c6-41ee-8b76-92c449b5227b
  * @maxLength 36
+ * @x-auditable true
  */
 export type AaaWebhookId = string;
 
