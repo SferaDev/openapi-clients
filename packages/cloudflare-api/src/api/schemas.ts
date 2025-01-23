@@ -16504,16 +16504,40 @@ export type EmailSecurityDispositionLabel =
   | 'NONE';
 
 /**
- * @example {"allowed_delivery_modes":["API"],"created_at":"2023-11-14T22:13:20Z","domain":"example.com","drop_dispositions":["MALICIOUS","SPAM"],"folder":"Inbox","id":2400,"inbox_provider":"Microsoft","integration_id":"a5dbb180-60ea-4578-84bb-d01a5d4e50c3","ip_restrictions":[],"last_modified":"2023-11-14T22:13:20Z","lookback_hops":2,"o365_tenant_id":"c3c3239d-8858-47df-9618-0e2d9bdf6aa8","require_tls_inbound":false,"require_tls_outbound":true,"transport":"example.com"}
+ * @example {"allowed_delivery_modes":["API"],"authorization":null,"created_at":"2023-11-14T22:13:20Z","domain":"example.com","drop_dispositions":["MALICIOUS","SPAM"],"emails_processed":null,"folder":"Inbox","id":2400,"inbox_provider":"Microsoft","integration_id":"a5dbb180-60ea-4578-84bb-d01a5d4e50c3","ip_restrictions":[],"last_modified":"2023-11-14T22:13:20Z","lookback_hops":2,"o365_tenant_id":"c3c3239d-8858-47df-9618-0e2d9bdf6aa8","require_tls_inbound":false,"require_tls_outbound":true,"transport":"example.com"}
  */
 export type EmailSecurityDomain = {
   allowed_delivery_modes: EmailSecurityDeliveryMode[];
+  authorization?: {
+    authorized: boolean;
+    status_message?: string | null;
+    /**
+     * @format date-time
+     */
+    timestamp: string;
+  } | null;
   /**
    * @format date-time
    */
   created_at: string;
   domain: string;
   drop_dispositions: EmailSecurityDispositionLabel[];
+  emails_processed?: {
+    /**
+     * @format date-time
+     */
+    timestamp: string;
+    /**
+     * @format int32
+     * @minimum 0
+     */
+    total_emails_processed: number;
+    /**
+     * @format int32
+     * @minimum 0
+     */
+    total_emails_processed_previous: number;
+  } | null;
   folder?: EmailSecurityScannableFolder & (string | null);
   /**
    * The unique identifier for the domain.
@@ -24583,6 +24607,7 @@ export type LogshareApiResponseCommonFailure = {
  * When `?count=` is provided, the response will contain up to `count` results. Since results are not sorted, you are likely to get different data for repeated requests. `count` must be an integer > 0.
  *
  * @minimum 1
+ * @x-auditable true
  */
 export type LogshareCount = number;
 
@@ -24590,6 +24615,7 @@ export type LogshareCount = number;
  * Sets the (exclusive) end of the requested time frame. This can be a unix timestamp (in seconds or nanoseconds), or an absolute timestamp that conforms to RFC 3339. `end` must be at least five minutes earlier than now and must be later than `start`. Difference between `start` and `end` must be not greater than one hour.
  *
  * @example 2018-05-20T10:01:00Z
+ * @x-auditable true
  */
 export type LogshareEnd = string | number;
 
@@ -24597,12 +24623,14 @@ export type LogshareEnd = string | number;
  * The `/received` route by default returns a limited set of fields, and allows customers to override the default field set by specifying individual fields. The reasons for this are: 1. Most customers require only a small subset of fields, but that subset varies from customer to customer; 2. Flat schema is much easier to work with downstream (importing into BigTable etc); 3. Performance (time to process, file size). If `?fields=` is not specified, default field set is returned. This default field set may change at any time. When `?fields=` is provided, each record is returned with the specified fields. `fields` must be specified as a comma separated list without any whitespaces, and all fields must exist. The order in which fields are specified does not matter, and the order of fields in the response is not specified.
  *
  * @example ClientIP,RayID,EdgeStartTimestamp
+ * @x-auditable true
  */
 export type LogshareFields = string;
 
 export type LogshareFieldsResponse = {
   /**
    * @example value
+   * @x-auditable true
    */
   key?: string;
 };
@@ -24635,6 +24663,7 @@ export type LogshareMessages = {
  *
  * @example 41ddf1740f67442d
  * @maxLength 16
+ * @x-auditable true
  */
 export type LogshareRayIdentifier = string;
 
@@ -24644,6 +24673,7 @@ export type LogshareRayIdentifier = string;
  * @example 0.1
  * @maximum 1
  * @minimum 0
+ * @x-auditable true
  */
 export type LogshareSample = number;
 
@@ -24651,6 +24681,7 @@ export type LogshareSample = number;
  * Sets the (inclusive) beginning of the requested time frame. This can be a unix timestamp (in seconds or nanoseconds), or an absolute timestamp that conforms to RFC 3339. At this point in time, it cannot exceed a time in the past greater than seven days.
  *
  * @example 2018-05-20T10:00:00Z
+ * @x-auditable true
  */
 export type LogshareStart = string | number;
 
@@ -24659,6 +24690,7 @@ export type LogshareStart = string | number;
  *
  * @default unixnano
  * @example unixnano
+ * @x-auditable true
  */
 export type LogshareTimestamps = 'unix' | 'unixnano' | 'rfc3339';
 
