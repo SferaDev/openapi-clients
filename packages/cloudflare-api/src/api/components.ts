@@ -114921,28 +114921,17 @@ export type ZoneSnippetsSnippetContentError = Fetcher.ErrorWrapper<
     }
 >;
 
-export type ZoneSnippetsSnippetContentResponse = {
-  /**
-   * Content files of uploaded snippet
-   *
-   * @example export { async function fetch(request, env) {return new Response('some_response') } }
-   */
-  files?: string;
-};
-
 export type ZoneSnippetsSnippetContentVariables = {
   pathParams: ZoneSnippetsSnippetContentPathParams;
 } & FetcherExtraProps;
 
 export const zoneSnippetsSnippetContent = (variables: ZoneSnippetsSnippetContentVariables, signal?: AbortSignal) =>
-  fetch<
-    ZoneSnippetsSnippetContentResponse,
-    ZoneSnippetsSnippetContentError,
-    undefined,
-    {},
-    {},
-    ZoneSnippetsSnippetContentPathParams
-  >({ url: '/zones/{zoneId}/snippets/{snippetName}/content', method: 'get', ...variables, signal });
+  fetch<string, ZoneSnippetsSnippetContentError, undefined, {}, {}, ZoneSnippetsSnippetContentPathParams>({
+    url: '/zones/{zoneId}/snippets/{snippetName}/content',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type SpectrumAggregateAnalyticsGetCurrentAggregatedAnalyticsPathParams = {
   zoneId: Schemas.SpectrumAnalyticsIdentifier;
