@@ -25643,6 +25643,13 @@ export type MagicAcl = {
   unidirectional?: MagicUnidirectional;
 };
 
+/**
+ * A valid port range value.
+ *
+ * @example 8080-9000
+ */
+export type MagicAclPortRange = string;
+
 export type MagicAclSubnet = MagicIpAddress | MagicCidr;
 
 export type MagicAclDeletedResponse = MagicApiResponseSingle & {
@@ -26267,7 +26274,11 @@ export type MagicLanAclConfiguration = {
    */
   lan_name?: string;
   /**
-   * Array of ports on the provided LAN that will be included in the ACL. If no ports are provided, communication on any port on this LAN is allowed.
+   * Array of port ranges on the provided LAN that will be included in the ACL. If no ports or port rangess are provided, communication on any port on this LAN is allowed.
+   */
+  port_ranges?: MagicAclPortRange[];
+  /**
+   * Array of ports on the provided LAN that will be included in the ACL. If no ports or port ranges are provided, communication on any port on this LAN is allowed.
    */
   ports?: MagicPort[];
   /**

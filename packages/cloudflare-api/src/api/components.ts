@@ -37037,6 +37037,10 @@ export type WorkersAiPostRunModelVariables = {
     | (
         | Blob
         | {
+            /**
+             * Decreases the likelihood of the model repeating the same lines verbatim.
+             */
+            frequency_penalty?: number;
             image: number[] | Blob;
             /**
              * The maximum number of tokens to generate in the response.
@@ -37044,6 +37048,10 @@ export type WorkersAiPostRunModelVariables = {
              * @default 512
              */
             max_tokens?: number;
+            /**
+             * Increases the likelihood of the model introducing new topics.
+             */
+            presence_penalty?: number;
             /**
              * The input text prompt for the model to generate a response.
              */
@@ -37055,9 +37063,25 @@ export type WorkersAiPostRunModelVariables = {
              */
             raw?: boolean;
             /**
+             * Penalty for repeated tokens; higher values discourage repetition.
+             */
+            repetition_penalty?: number;
+            /**
+             * Random seed for reproducibility of the generation.
+             */
+            seed?: number;
+            /**
              * Controls the randomness of the output; higher values produce more random results.
              */
             temperature?: number;
+            /**
+             * Limits the AI to choose from the top 'k' most probable words. Lower values make responses more focused; higher values introduce more variety and potential surprises.
+             */
+            top_k?: number;
+            /**
+             * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+             */
+            top_p?: number;
           }
       );
   pathParams: WorkersAiPostRunModelPathParams;
@@ -37487,6 +37511,10 @@ export const workersAiPostRunModel = (variables: WorkersAiPostRunModelVariables,
     | (
         | Blob
         | {
+            /**
+             * Decreases the likelihood of the model repeating the same lines verbatim.
+             */
+            frequency_penalty?: number;
             image: number[] | Blob;
             /**
              * The maximum number of tokens to generate in the response.
@@ -37494,6 +37522,10 @@ export const workersAiPostRunModel = (variables: WorkersAiPostRunModelVariables,
              * @default 512
              */
             max_tokens?: number;
+            /**
+             * Increases the likelihood of the model introducing new topics.
+             */
+            presence_penalty?: number;
             /**
              * The input text prompt for the model to generate a response.
              */
@@ -37505,9 +37537,25 @@ export const workersAiPostRunModel = (variables: WorkersAiPostRunModelVariables,
              */
             raw?: boolean;
             /**
+             * Penalty for repeated tokens; higher values discourage repetition.
+             */
+            repetition_penalty?: number;
+            /**
+             * Random seed for reproducibility of the generation.
+             */
+            seed?: number;
+            /**
              * Controls the randomness of the output; higher values produce more random results.
              */
             temperature?: number;
+            /**
+             * Limits the AI to choose from the top 'k' most probable words. Lower values make responses more focused; higher values introduce more variety and potential surprises.
+             */
+            top_k?: number;
+            /**
+             * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+             */
+            top_p?: number;
           }
       ),
     {},
