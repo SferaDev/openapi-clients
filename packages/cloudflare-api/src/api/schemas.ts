@@ -800,8 +800,19 @@ export type AaaMechanismType = 'email' | 'pagerduty' | 'webhook';
  * @example {"email":[{"id":"test@example.com"}],"pagerduty":[{"id":"e8133a15-00a4-4d69-aec1-32f70c51f6e5"}],"webhooks":[{"id":"14cc1190-5d2b-4b98-a696-c424cb2ad05f"}]}
  */
 export type AaaMechanisms = {
-  [key: string]: {
-    id?: AaaUuid | string;
+  email?: {
+    /**
+     * The email address
+     *
+     * @x-auditable true
+     */
+    id?: string;
+  }[];
+  pagerduty?: {
+    id?: AaaUuid;
+  }[];
+  webhooks?: {
+    id?: AaaUuid;
   }[];
 };
 
