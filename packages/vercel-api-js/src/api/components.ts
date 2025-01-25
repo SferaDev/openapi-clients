@@ -2130,6 +2130,10 @@ export type UpdateProjectDataCacheResponse = {
      * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
      */
     defaultRoute?: string;
+    /**
+     * Whether observability data should be routed to the default app in this microfrontend's group, or it should go to this microfrontend.
+     */
+    routeObservabilityToDefaultApp?: boolean;
   };
   name: string;
   nodeVersion: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
@@ -3611,10 +3615,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    createdAt?: number;
     id?: string;
-    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    createdAt?: number;
     entrypoint?: string | null;
+    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
     readyStateAt?: number;
     output: {
       path: string;
@@ -3886,7 +3890,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
             src?: string;
             dest?: string;
             status?: number;
@@ -3920,7 +3924,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         org: string;
@@ -3932,7 +3936,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         owner: string;
@@ -3944,7 +3948,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | null;
   flags?:
@@ -7826,7 +7830,7 @@ export type CreateEventVariables = {
 } & FetcherExtraProps;
 
 /**
- * Partner notifies Vercel of any changes made to an Installation or a Resource. Vercel is expected to use `list-resources` and other read APIs to get the new state. <br/> <br/> `resource.updated` event should be dispatched when any state of a resource linked to Vercel is modified by the partner. <br/> <br/> Use cases: <br/> <br/> - The user renames a database in the partner’s application. The partner should dispatch a `resource.updated` event to notify Vercel to update the resource in Vercel’s datastores. <br/>
+ * Partner notifies Vercel of any changes made to an Installation or a Resource. Vercel is expected to use `list-resources` and other read APIs to get the new state.<br/> <br/> `resource.updated` event should be dispatched when any state of a resource linked to Vercel is modified by the partner.<br/> `installation.updated` event should be dispatched when an installation's billing plan is changed via the provider instead of Vercel.<br/> <br/> Resource update use cases: <br/> <br/> - The user renames a database in the partner’s application. The partner should dispatch a `resource.updated` event to notify Vercel to update the resource in Vercel’s datastores.<br/> - A resource has been suspended due to a lack of use. The partner should dispatch a `resource.updated` event to notify Vercel to update the resource's status in Vercel's datastores.<br/>
  */
 export const createEvent = (variables: CreateEventVariables, signal?: AbortSignal) =>
   fetch<undefined, CreateEventError, CreateEventRequestBody, {}, {}, CreateEventPathParams>({
@@ -10638,6 +10642,10 @@ export type GetProjectsResponse = {
        * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
        */
       defaultRoute?: string;
+      /**
+       * Whether observability data should be routed to the default app in this microfrontend's group, or it should go to this microfrontend.
+       */
+      routeObservabilityToDefaultApp?: boolean;
     };
     name: string;
     nodeVersion: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
@@ -11525,6 +11533,10 @@ export type CreateProjectResponse = {
      * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
      */
     defaultRoute?: string;
+    /**
+     * Whether observability data should be routed to the default app in this microfrontend's group, or it should go to this microfrontend.
+     */
+    routeObservabilityToDefaultApp?: boolean;
   };
   name: string;
   nodeVersion: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
@@ -12592,6 +12604,10 @@ export type GetProjectResponse = {
      * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
      */
     defaultRoute?: string;
+    /**
+     * Whether observability data should be routed to the default app in this microfrontend's group, or it should go to this microfrontend.
+     */
+    routeObservabilityToDefaultApp?: boolean;
   };
   name: string;
   nodeVersion: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
@@ -13487,6 +13503,10 @@ export type UpdateProjectResponse = {
      * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
      */
     defaultRoute?: string;
+    /**
+     * Whether observability data should be routed to the default app in this microfrontend's group, or it should go to this microfrontend.
+     */
+    routeObservabilityToDefaultApp?: boolean;
   };
   name: string;
   nodeVersion: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
@@ -15123,7 +15143,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15228,7 +15248,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -15335,7 +15355,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -15824,7 +15844,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15928,7 +15948,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16441,7 +16461,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16545,7 +16565,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16648,7 +16668,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16839,7 +16859,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17459,6 +17479,7 @@ export type PutFirewallConfigResponse = {
             permanent: boolean;
           } | null;
           actionDuration?: string | null;
+          bypassSystem?: boolean | null;
         };
       };
     }[];
@@ -17597,6 +17618,7 @@ export type PutFirewallConfigRequestBody = {
           permanent: boolean;
         } | null;
         actionDuration?: string | null;
+        bypassSystem?: boolean | null;
       };
     };
   }[];
@@ -17721,6 +17743,7 @@ export type UpdateFirewallConfigVariables = {
                 permanent: boolean;
               } | null;
               actionDuration?: string | null;
+              bypassSystem?: boolean | null;
             };
           };
         };
@@ -17945,6 +17968,7 @@ export const updateFirewallConfig = (variables: UpdateFirewallConfigVariables, s
                 permanent: boolean;
               } | null;
               actionDuration?: string | null;
+              bypassSystem?: boolean | null;
             };
           };
         };
@@ -18204,6 +18228,7 @@ export type GetFirewallConfigResponse = {
           permanent: boolean;
         } | null;
         actionDuration?: string | null;
+        bypassSystem?: boolean | null;
       };
     };
   }[];
