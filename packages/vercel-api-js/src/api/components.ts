@@ -17821,6 +17821,7 @@ export type UpdateFirewallConfigVariables = {
                 permanent: boolean;
               } | null;
               actionDuration?: string | null;
+              bypassSystem?: boolean | null;
             };
           };
         };
@@ -18046,6 +18047,7 @@ export const updateFirewallConfig = (variables: UpdateFirewallConfigVariables, s
                 permanent: boolean;
               } | null;
               actionDuration?: string | null;
+              bypassSystem?: boolean | null;
             };
           };
         };
