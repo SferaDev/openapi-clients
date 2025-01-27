@@ -1,5 +1,16 @@
 # vercel-api-js
 
+## 0.20.0
+
+### Minor Changes
+
+- f051ebf: Add new property 'routeObservabilityToDefaultApp' to UpdateProjectDataCacheResponse type
+
+### Patch Changes
+
+- 2353d03: [MINOR] Add new 'bypassSystem' field to firewall configuration variables
+- 207b8ec: Add skipBillingData to GetConfigurationsQueryParams
+
 ## 0.19.5
 
 ### Patch Changes

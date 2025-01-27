@@ -1,5 +1,14 @@
 # cloudflare-api-js
 
+## 0.6.1
+
+### Patch Changes
+
+- bc404b2: [BREAKING] Change return type of zoneSnippetsSnippetContent to string
+- 519029f: [BREAKING] Modify AaaAlertType and AaaFilters to include new alert types and filter options
+- d409b04: Add internal_dns field to DnsSettingsDnsSettings
+- 2caab64: Restructure AaaMechanisms schema for better organization
+
 ## 0.6.0
 
 ### Minor Changes
