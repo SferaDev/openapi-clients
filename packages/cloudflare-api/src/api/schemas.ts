@@ -15748,6 +15748,7 @@ export type DnsSettingsDirection = 'asc' | 'desc';
 export type DnsSettingsDnsSettings = {
   flatten_all_cnames?: DnsSettingsFlattenAllCnames;
   foundation_dns?: DnsSettingsFoundationDns;
+  internal_dns?: DnsSettingsInternalDns;
   multi_provider?: DnsSettingsMultiProvider;
   ns_ttl?: DnsSettingsNsTtl;
   secondary_overrides?: DnsSettingsSecondaryOverrides;
@@ -15839,6 +15840,18 @@ export type DnsSettingsFoundationDns = boolean;
  * @maxLength 32
  */
 export type DnsSettingsIdentifier = string;
+
+/**
+ * Settings for this internal zone.
+ */
+export type DnsSettingsInternalDns = {
+  /**
+   * The ID of the zone to fallback to.
+   *
+   * @example {"description":"Identifier","example":"023e105f4ecef8ad9ca31a8372d0c353","maxLength":32,"type":"string"}
+   */
+  reference_zone_id?: string;
+};
 
 /**
  * Whether to match all search requirements or at least one (any). If set to `all`, acts like a logical AND between filters. If set to `any`, acts like a logical OR instead.
