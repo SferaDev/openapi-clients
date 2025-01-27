@@ -8369,6 +8369,7 @@ export type GetConfigurationsQueryParams = {
    * ID of the integration
    */
   integrationIdOrSlug?: string;
+  skipBillingData?: string;
   /**
    * The Team identifier to perform the request on behalf of.
    */
@@ -16109,6 +16110,10 @@ export type CreateProjectEnvVariables = {
              * @maxLength 500
              */
             comment?: string;
+            /**
+             * The custom environment IDs associated with the environment variable
+             */
+            customEnvironmentIds?: string[];
           }
         | {
             /**
@@ -16149,6 +16154,10 @@ export type CreateProjectEnvVariables = {
              * @maxLength 500
              */
             comment?: string;
+            /**
+             * The custom environment IDs associated with the environment variable
+             */
+            customEnvironmentIds: string[];
           }
       )
     | (
@@ -16191,6 +16200,10 @@ export type CreateProjectEnvVariables = {
              * @maxLength 500
              */
             comment?: string;
+            /**
+             * The custom environment IDs associated with the environment variable
+             */
+            customEnvironmentIds?: string[];
           }
         | {
             /**
@@ -16231,6 +16244,10 @@ export type CreateProjectEnvVariables = {
              * @maxLength 500
              */
             comment?: string;
+            /**
+             * The custom environment IDs associated with the environment variable
+             */
+            customEnvironmentIds: string[];
           }
       )[];
   pathParams: CreateProjectEnvPathParams;
@@ -16284,6 +16301,10 @@ export const createProjectEnv = (variables: CreateProjectEnvVariables, signal?: 
              * @maxLength 500
              */
             comment?: string;
+            /**
+             * The custom environment IDs associated with the environment variable
+             */
+            customEnvironmentIds?: string[];
           }
         | {
             /**
@@ -16324,6 +16345,10 @@ export const createProjectEnv = (variables: CreateProjectEnvVariables, signal?: 
              * @maxLength 500
              */
             comment?: string;
+            /**
+             * The custom environment IDs associated with the environment variable
+             */
+            customEnvironmentIds: string[];
           }
       )
     | (
@@ -16366,6 +16391,10 @@ export const createProjectEnv = (variables: CreateProjectEnvVariables, signal?: 
              * @maxLength 500
              */
             comment?: string;
+            /**
+             * The custom environment IDs associated with the environment variable
+             */
+            customEnvironmentIds?: string[];
           }
         | {
             /**
@@ -16406,6 +16435,10 @@ export const createProjectEnv = (variables: CreateProjectEnvVariables, signal?: 
              * @maxLength 500
              */
             comment?: string;
+            /**
+             * The custom environment IDs associated with the environment variable
+             */
+            customEnvironmentIds: string[];
           }
       )[],
     {},
