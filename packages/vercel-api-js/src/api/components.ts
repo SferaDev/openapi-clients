@@ -2292,6 +2292,7 @@ export type UpdateProjectDataCacheResponse = {
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     integrationConfigurationRole?: Schemas.ACLAction[];
+    integrationSSOSession?: Schemas.ACLAction[];
     integrationResource?: Schemas.ACLAction[];
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
@@ -10805,6 +10806,7 @@ export type GetProjectsResponse = {
       integrationConfigurationProjects?: Schemas.ACLAction[];
       integrationVercelConfigurationOverride?: Schemas.ACLAction[];
       integrationConfigurationRole?: Schemas.ACLAction[];
+      integrationSSOSession?: Schemas.ACLAction[];
       integrationResource?: Schemas.ACLAction[];
       integrationEvent?: Schemas.ACLAction[];
       integrationResourceSecrets?: Schemas.ACLAction[];
@@ -11696,6 +11698,7 @@ export type CreateProjectResponse = {
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     integrationConfigurationRole?: Schemas.ACLAction[];
+    integrationSSOSession?: Schemas.ACLAction[];
     integrationResource?: Schemas.ACLAction[];
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
@@ -12767,6 +12770,7 @@ export type GetProjectResponse = {
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     integrationConfigurationRole?: Schemas.ACLAction[];
+    integrationSSOSession?: Schemas.ACLAction[];
     integrationResource?: Schemas.ACLAction[];
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
@@ -13666,6 +13670,7 @@ export type UpdateProjectResponse = {
     integrationConfigurationProjects?: Schemas.ACLAction[];
     integrationVercelConfigurationOverride?: Schemas.ACLAction[];
     integrationConfigurationRole?: Schemas.ACLAction[];
+    integrationSSOSession?: Schemas.ACLAction[];
     integrationResource?: Schemas.ACLAction[];
     integrationEvent?: Schemas.ACLAction[];
     integrationResourceSecrets?: Schemas.ACLAction[];
