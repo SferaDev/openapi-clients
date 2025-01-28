@@ -2301,6 +2301,8 @@ export type UpdateProjectDataCacheResponse = {
     marketplaceInstallationMember?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
     marketplaceInvoice?: Schemas.ACLAction[];
+    marketplaceExperimentationItem?: Schemas.ACLAction[];
+    marketplaceExperimentationEdgeConfigData?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
@@ -10816,6 +10818,8 @@ export type GetProjectsResponse = {
       marketplaceInstallationMember?: Schemas.ACLAction[];
       marketplaceBillingData?: Schemas.ACLAction[];
       marketplaceInvoice?: Schemas.ACLAction[];
+      marketplaceExperimentationItem?: Schemas.ACLAction[];
+      marketplaceExperimentationEdgeConfigData?: Schemas.ACLAction[];
       jobGlobal?: Schemas.ACLAction[];
       logDrain?: Schemas.ACLAction[];
       Monitoring?: Schemas.ACLAction[];
@@ -11709,6 +11713,8 @@ export type CreateProjectResponse = {
     marketplaceInstallationMember?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
     marketplaceInvoice?: Schemas.ACLAction[];
+    marketplaceExperimentationItem?: Schemas.ACLAction[];
+    marketplaceExperimentationEdgeConfigData?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
@@ -12782,6 +12788,8 @@ export type GetProjectResponse = {
     marketplaceInstallationMember?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
     marketplaceInvoice?: Schemas.ACLAction[];
+    marketplaceExperimentationItem?: Schemas.ACLAction[];
+    marketplaceExperimentationEdgeConfigData?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
@@ -13683,6 +13691,8 @@ export type UpdateProjectResponse = {
     marketplaceInstallationMember?: Schemas.ACLAction[];
     marketplaceBillingData?: Schemas.ACLAction[];
     marketplaceInvoice?: Schemas.ACLAction[];
+    marketplaceExperimentationItem?: Schemas.ACLAction[];
+    marketplaceExperimentationEdgeConfigData?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
