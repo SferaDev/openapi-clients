@@ -2285,6 +2285,7 @@ export type UpdateProjectDataCacheResponse = {
     fileUpload?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
+    imageOptimizationNewPrice?: Schemas.ACLAction[];
     integration?: Schemas.ACLAction[];
     integrationAccount?: Schemas.ACLAction[];
     integrationConfiguration?: Schemas.ACLAction[];
@@ -10799,6 +10800,7 @@ export type GetProjectsResponse = {
       fileUpload?: Schemas.ACLAction[];
       gitRepository?: Schemas.ACLAction[];
       ipBlocking?: Schemas.ACLAction[];
+      imageOptimizationNewPrice?: Schemas.ACLAction[];
       integration?: Schemas.ACLAction[];
       integrationAccount?: Schemas.ACLAction[];
       integrationConfiguration?: Schemas.ACLAction[];
@@ -11691,6 +11693,7 @@ export type CreateProjectResponse = {
     fileUpload?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
+    imageOptimizationNewPrice?: Schemas.ACLAction[];
     integration?: Schemas.ACLAction[];
     integrationAccount?: Schemas.ACLAction[];
     integrationConfiguration?: Schemas.ACLAction[];
@@ -12763,6 +12766,7 @@ export type GetProjectResponse = {
     fileUpload?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
+    imageOptimizationNewPrice?: Schemas.ACLAction[];
     integration?: Schemas.ACLAction[];
     integrationAccount?: Schemas.ACLAction[];
     integrationConfiguration?: Schemas.ACLAction[];
@@ -13663,6 +13667,7 @@ export type UpdateProjectResponse = {
     fileUpload?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
+    imageOptimizationNewPrice?: Schemas.ACLAction[];
     integration?: Schemas.ACLAction[];
     integrationAccount?: Schemas.ACLAction[];
     integrationConfiguration?: Schemas.ACLAction[];
