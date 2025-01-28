@@ -2444,7 +2444,6 @@ export type UpdateProjectDataCacheResponse = {
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
-  hasFloatingAliases?: boolean;
   protectionBypass?: {
     [key: string]: {
       createdAt: number;
@@ -7750,8 +7749,17 @@ export type GetAccountInfoPathParams = {
 export type GetAccountInfoError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetAccountInfoResponse = {
+  /**
+   * The name of the team the installation is tied to.
+   */
   name?: string;
+  /**
+   * A URL linking to the installation in the Vercel Dashboard.
+   */
   url: string;
+  /**
+   * The best contact for the integration, which can change as team members and their roles change.
+   */
   contact: {
     email: string;
     name?: string;
@@ -10961,7 +10969,6 @@ export type GetProjectsResponse = {
       requestedAt: number;
       type: 'promote' | 'rollback';
     } | null;
-    hasFloatingAliases?: boolean;
     protectionBypass?: {
       [key: string]: {
         createdAt: number;
@@ -11856,7 +11863,6 @@ export type CreateProjectResponse = {
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
-  hasFloatingAliases?: boolean;
   protectionBypass?: {
     [key: string]: {
       createdAt: number;
@@ -12931,7 +12937,6 @@ export type GetProjectResponse = {
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
-  hasFloatingAliases?: boolean;
   protectionBypass?: {
     [key: string]: {
       createdAt: number;
@@ -13834,7 +13839,6 @@ export type UpdateProjectResponse = {
     requestedAt: number;
     type: 'promote' | 'rollback';
   } | null;
-  hasFloatingAliases?: boolean;
   protectionBypass?: {
     [key: string]: {
       createdAt: number;
