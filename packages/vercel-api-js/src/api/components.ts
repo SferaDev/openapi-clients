@@ -2249,6 +2249,10 @@ export type UpdateProjectDataCacheResponse = {
   enablePreviewFeedback?: boolean | null;
   enableProductionFeedback?: boolean | null;
   permissions?: {
+    user?: Schemas.ACLAction[];
+    userConnection?: Schemas.ACLAction[];
+    webAuthn?: Schemas.ACLAction[];
+    oauth2Connection?: Schemas.ACLAction[];
     accessGroup?: Schemas.ACLAction[];
     aliasGlobal?: Schemas.ACLAction[];
     analyticsSampling?: Schemas.ACLAction[];
@@ -2323,7 +2327,6 @@ export type UpdateProjectDataCacheResponse = {
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationCustomerBudget?: Schemas.ACLAction[];
     notificationStatementOfReasons?: Schemas.ACLAction[];
-    oauth2Connection?: Schemas.ACLAction[];
     observabilityConfiguration?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
@@ -2364,11 +2367,8 @@ export type UpdateProjectDataCacheResponse = {
     token?: Schemas.ACLAction[];
     usage?: Schemas.ACLAction[];
     usageCycle?: Schemas.ACLAction[];
-    user?: Schemas.ACLAction[];
-    userConnection?: Schemas.ACLAction[];
     vpcPeeringConnection?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
-    webAuthn?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
     edgeConfigItem?: Schemas.ACLAction[];
     edgeConfigSchema?: Schemas.ACLAction[];
@@ -10774,6 +10774,10 @@ export type GetProjectsResponse = {
     enablePreviewFeedback?: boolean | null;
     enableProductionFeedback?: boolean | null;
     permissions?: {
+      user?: Schemas.ACLAction[];
+      userConnection?: Schemas.ACLAction[];
+      webAuthn?: Schemas.ACLAction[];
+      oauth2Connection?: Schemas.ACLAction[];
       accessGroup?: Schemas.ACLAction[];
       aliasGlobal?: Schemas.ACLAction[];
       analyticsSampling?: Schemas.ACLAction[];
@@ -10848,7 +10852,6 @@ export type GetProjectsResponse = {
       notificationUsageAlert?: Schemas.ACLAction[];
       notificationCustomerBudget?: Schemas.ACLAction[];
       notificationStatementOfReasons?: Schemas.ACLAction[];
-      oauth2Connection?: Schemas.ACLAction[];
       observabilityConfiguration?: Schemas.ACLAction[];
       openTelemetryEndpoint?: Schemas.ACLAction[];
       paymentMethod?: Schemas.ACLAction[];
@@ -10889,11 +10892,8 @@ export type GetProjectsResponse = {
       token?: Schemas.ACLAction[];
       usage?: Schemas.ACLAction[];
       usageCycle?: Schemas.ACLAction[];
-      user?: Schemas.ACLAction[];
-      userConnection?: Schemas.ACLAction[];
       vpcPeeringConnection?: Schemas.ACLAction[];
       webAnalyticsPlan?: Schemas.ACLAction[];
-      webAuthn?: Schemas.ACLAction[];
       edgeConfig?: Schemas.ACLAction[];
       edgeConfigItem?: Schemas.ACLAction[];
       edgeConfigSchema?: Schemas.ACLAction[];
@@ -11668,6 +11668,10 @@ export type CreateProjectResponse = {
   enablePreviewFeedback?: boolean | null;
   enableProductionFeedback?: boolean | null;
   permissions?: {
+    user?: Schemas.ACLAction[];
+    userConnection?: Schemas.ACLAction[];
+    webAuthn?: Schemas.ACLAction[];
+    oauth2Connection?: Schemas.ACLAction[];
     accessGroup?: Schemas.ACLAction[];
     aliasGlobal?: Schemas.ACLAction[];
     analyticsSampling?: Schemas.ACLAction[];
@@ -11742,7 +11746,6 @@ export type CreateProjectResponse = {
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationCustomerBudget?: Schemas.ACLAction[];
     notificationStatementOfReasons?: Schemas.ACLAction[];
-    oauth2Connection?: Schemas.ACLAction[];
     observabilityConfiguration?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
@@ -11783,11 +11786,8 @@ export type CreateProjectResponse = {
     token?: Schemas.ACLAction[];
     usage?: Schemas.ACLAction[];
     usageCycle?: Schemas.ACLAction[];
-    user?: Schemas.ACLAction[];
-    userConnection?: Schemas.ACLAction[];
     vpcPeeringConnection?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
-    webAuthn?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
     edgeConfigItem?: Schemas.ACLAction[];
     edgeConfigSchema?: Schemas.ACLAction[];
@@ -12742,6 +12742,10 @@ export type GetProjectResponse = {
   enablePreviewFeedback?: boolean | null;
   enableProductionFeedback?: boolean | null;
   permissions?: {
+    user?: Schemas.ACLAction[];
+    userConnection?: Schemas.ACLAction[];
+    webAuthn?: Schemas.ACLAction[];
+    oauth2Connection?: Schemas.ACLAction[];
     accessGroup?: Schemas.ACLAction[];
     aliasGlobal?: Schemas.ACLAction[];
     analyticsSampling?: Schemas.ACLAction[];
@@ -12816,7 +12820,6 @@ export type GetProjectResponse = {
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationCustomerBudget?: Schemas.ACLAction[];
     notificationStatementOfReasons?: Schemas.ACLAction[];
-    oauth2Connection?: Schemas.ACLAction[];
     observabilityConfiguration?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
@@ -12857,11 +12860,8 @@ export type GetProjectResponse = {
     token?: Schemas.ACLAction[];
     usage?: Schemas.ACLAction[];
     usageCycle?: Schemas.ACLAction[];
-    user?: Schemas.ACLAction[];
-    userConnection?: Schemas.ACLAction[];
     vpcPeeringConnection?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
-    webAuthn?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
     edgeConfigItem?: Schemas.ACLAction[];
     edgeConfigSchema?: Schemas.ACLAction[];
@@ -13644,6 +13644,10 @@ export type UpdateProjectResponse = {
   enablePreviewFeedback?: boolean | null;
   enableProductionFeedback?: boolean | null;
   permissions?: {
+    user?: Schemas.ACLAction[];
+    userConnection?: Schemas.ACLAction[];
+    webAuthn?: Schemas.ACLAction[];
+    oauth2Connection?: Schemas.ACLAction[];
     accessGroup?: Schemas.ACLAction[];
     aliasGlobal?: Schemas.ACLAction[];
     analyticsSampling?: Schemas.ACLAction[];
@@ -13718,7 +13722,6 @@ export type UpdateProjectResponse = {
     notificationUsageAlert?: Schemas.ACLAction[];
     notificationCustomerBudget?: Schemas.ACLAction[];
     notificationStatementOfReasons?: Schemas.ACLAction[];
-    oauth2Connection?: Schemas.ACLAction[];
     observabilityConfiguration?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
@@ -13759,11 +13762,8 @@ export type UpdateProjectResponse = {
     token?: Schemas.ACLAction[];
     usage?: Schemas.ACLAction[];
     usageCycle?: Schemas.ACLAction[];
-    user?: Schemas.ACLAction[];
-    userConnection?: Schemas.ACLAction[];
     vpcPeeringConnection?: Schemas.ACLAction[];
     webAnalyticsPlan?: Schemas.ACLAction[];
-    webAuthn?: Schemas.ACLAction[];
     edgeConfig?: Schemas.ACLAction[];
     edgeConfigItem?: Schemas.ACLAction[];
     edgeConfigSchema?: Schemas.ACLAction[];
@@ -18775,12 +18775,6 @@ export type GetTeamMembersResponse = {
      * @example OWNER
      */
     role: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'VIEWER';
-    /**
-     * Permissions that this user has in addition to their role.
-     *
-     * @example ['createProjects']
-     */
-    additionalRoles?: string[];
     /**
      * The ID of this user.
      *
