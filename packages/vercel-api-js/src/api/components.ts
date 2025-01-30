@@ -2156,6 +2156,15 @@ export type UpdateProjectDataCacheResponse = {
     allowServerlessConcurrency?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
+  defaultResourceConfig?: {
+    fluid?: boolean;
+    functionDefaultRegion?: string | null;
+    functionDefaultTimeout?: number;
+    functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
+    functionZeroConfigFailover?: boolean;
+    allowServerlessConcurrency?: boolean;
+    elasticConcurrencyEnabled?: boolean;
+  };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
   serverlessFunctionZeroConfigFailover?: boolean;
@@ -10681,6 +10690,15 @@ export type GetProjectsResponse = {
       allowServerlessConcurrency?: boolean;
       elasticConcurrencyEnabled?: boolean;
     };
+    defaultResourceConfig?: {
+      fluid?: boolean;
+      functionDefaultRegion?: string | null;
+      functionDefaultTimeout?: number;
+      functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
+      functionZeroConfigFailover?: boolean;
+      allowServerlessConcurrency?: boolean;
+      elasticConcurrencyEnabled?: boolean;
+    };
     rootDirectory?: string | null;
     serverlessFunctionRegion?: string | null;
     serverlessFunctionZeroConfigFailover?: boolean;
@@ -11567,6 +11585,15 @@ export type CreateProjectResponse = {
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   resourceConfig?: {
+    fluid?: boolean;
+    functionDefaultRegion?: string | null;
+    functionDefaultTimeout?: number;
+    functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
+    functionZeroConfigFailover?: boolean;
+    allowServerlessConcurrency?: boolean;
+    elasticConcurrencyEnabled?: boolean;
+  };
+  defaultResourceConfig?: {
     fluid?: boolean;
     functionDefaultRegion?: string | null;
     functionDefaultTimeout?: number;
@@ -12649,6 +12676,15 @@ export type GetProjectResponse = {
     allowServerlessConcurrency?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
+  defaultResourceConfig?: {
+    fluid?: boolean;
+    functionDefaultRegion?: string | null;
+    functionDefaultTimeout?: number;
+    functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
+    functionZeroConfigFailover?: boolean;
+    allowServerlessConcurrency?: boolean;
+    elasticConcurrencyEnabled?: boolean;
+  };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
   serverlessFunctionZeroConfigFailover?: boolean;
@@ -13543,6 +13579,15 @@ export type UpdateProjectResponse = {
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   resourceConfig?: {
+    fluid?: boolean;
+    functionDefaultRegion?: string | null;
+    functionDefaultTimeout?: number;
+    functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
+    functionZeroConfigFailover?: boolean;
+    allowServerlessConcurrency?: boolean;
+    elasticConcurrencyEnabled?: boolean;
+  };
+  defaultResourceConfig?: {
     fluid?: boolean;
     functionDefaultRegion?: string | null;
     functionDefaultTimeout?: number;
