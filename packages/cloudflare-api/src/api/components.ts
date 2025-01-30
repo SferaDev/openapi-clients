@@ -2613,6 +2613,92 @@ export const accessIdentityProvidersUpdateAnAccessIdentityProvider = (
     signal
   });
 
+export type AccessIdentityProvidersListScimGroupResourcesPathParams = {
+  identityProviderId: Schemas.AccessUuid;
+  accountId: Schemas.AccessIdentifier;
+};
+
+export type AccessIdentityProvidersListScimGroupResourcesQueryParams = {
+  cf_resource_id?: Schemas.AccessCfResourceId;
+  idp_resource_id?: Schemas.AccessIdpResourceId;
+  name?: Schemas.AccessGroupsName;
+};
+
+export type AccessIdentityProvidersListScimGroupResourcesError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.AccessApiResponseCommonFailure;
+}>;
+
+export type AccessIdentityProvidersListScimGroupResourcesVariables = {
+  pathParams: AccessIdentityProvidersListScimGroupResourcesPathParams;
+  queryParams?: AccessIdentityProvidersListScimGroupResourcesQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Lists SCIM Group resources synced to Cloudflare via the System for Cross-domain Identity Management (SCIM).
+ */
+export const accessIdentityProvidersListScimGroupResources = (
+  variables: AccessIdentityProvidersListScimGroupResourcesVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.AccessScimGroupsResponse,
+    AccessIdentityProvidersListScimGroupResourcesError,
+    undefined,
+    {},
+    AccessIdentityProvidersListScimGroupResourcesQueryParams,
+    AccessIdentityProvidersListScimGroupResourcesPathParams
+  >({
+    url: '/accounts/{accountId}/access/identity_providers/{identityProviderId}/scim/groups',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type AccessIdentityProvidersListScimUserResourcesPathParams = {
+  identityProviderId: Schemas.AccessUuid;
+  accountId: Schemas.AccessIdentifier;
+};
+
+export type AccessIdentityProvidersListScimUserResourcesQueryParams = {
+  cf_resource_id?: Schemas.AccessUsersCfResourceId;
+  idp_resource_id?: Schemas.AccessUsersIdpResourceId;
+  username?: Schemas.AccessUsername;
+  email?: Schemas.AccessEmail;
+  name?: Schemas.AccessUsersName;
+};
+
+export type AccessIdentityProvidersListScimUserResourcesError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.AccessApiResponseCommonFailure;
+}>;
+
+export type AccessIdentityProvidersListScimUserResourcesVariables = {
+  pathParams: AccessIdentityProvidersListScimUserResourcesPathParams;
+  queryParams?: AccessIdentityProvidersListScimUserResourcesQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Lists SCIM User resources synced to Cloudflare via the System for Cross-domain Identity Management (SCIM).
+ */
+export const accessIdentityProvidersListScimUserResources = (
+  variables: AccessIdentityProvidersListScimUserResourcesVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.AccessScimUsersResponse,
+    AccessIdentityProvidersListScimUserResourcesError,
+    undefined,
+    {},
+    AccessIdentityProvidersListScimUserResourcesQueryParams,
+    AccessIdentityProvidersListScimUserResourcesPathParams
+  >({
+    url: '/accounts/{accountId}/access/identity_providers/{identityProviderId}/scim/users',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
 export type AccessKeyConfigurationGetTheAccessKeyConfigurationPathParams = {
   accountId: Schemas.AccessIdentifier;
 };
@@ -2763,6 +2849,51 @@ export const accessAuthenticationLogsGetAccessAuthenticationLogs = (
     AccessAuthenticationLogsGetAccessAuthenticationLogsQueryParams,
     AccessAuthenticationLogsGetAccessAuthenticationLogsPathParams
   >({ url: '/accounts/{accountId}/access/logs/access_requests', method: 'get', ...variables, signal });
+
+export type AccessScimUpdateLogsListAccessScimUpdateLogsPathParams = {
+  accountId: Schemas.AccessIdentifier;
+};
+
+export type AccessScimUpdateLogsListAccessScimUpdateLogsQueryParams = {
+  limit?: Schemas.AccessLimit;
+  direction?: Schemas.AccessDirection;
+  since?: Schemas.AccessSince;
+  until?: Schemas.AccessUntil;
+  idp_id: Schemas.AccessIdpId;
+  status?: Schemas.AccessRequestsStatus;
+  resource_type?: Schemas.AccessResourceType;
+  request_method?: Schemas.AccessRequestMethod;
+  resource_user_email?: Schemas.AccessResourceUserEmail;
+  resource_group_name?: Schemas.AccessResourceGroupName;
+  cf_resource_id?: Schemas.AccessRequestsCfResourceId;
+  idp_resource_id?: Schemas.AccessRequestsIdpResourceId;
+};
+
+export type AccessScimUpdateLogsListAccessScimUpdateLogsError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.AccessApiResponseCommonFailure;
+}>;
+
+export type AccessScimUpdateLogsListAccessScimUpdateLogsVariables = {
+  pathParams: AccessScimUpdateLogsListAccessScimUpdateLogsPathParams;
+  queryParams: AccessScimUpdateLogsListAccessScimUpdateLogsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Lists Access SCIM update logs that maintain a record of updates made to User and Group resources synced to Cloudflare via the System for Cross-domain Identity Management (SCIM).
+ */
+export const accessScimUpdateLogsListAccessScimUpdateLogs = (
+  variables: AccessScimUpdateLogsListAccessScimUpdateLogsVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.AccessScimUpdateLogsResponse,
+    AccessScimUpdateLogsListAccessScimUpdateLogsError,
+    undefined,
+    {},
+    AccessScimUpdateLogsListAccessScimUpdateLogsQueryParams,
+    AccessScimUpdateLogsListAccessScimUpdateLogsPathParams
+  >({ url: '/accounts/{accountId}/access/logs/scim/updates', method: 'get', ...variables, signal });
 
 export type ZeroTrustOrganizationGetYourZeroTrustOrganizationPathParams = {
   accountId: Schemas.AccessIdentifier;
@@ -3193,7 +3324,7 @@ export type AccessPolicyTestsError = Fetcher.ErrorWrapper<{
 }>;
 
 export type AccessPolicyTestsVariables = {
-  body?: Schemas.AccessPolicyResp;
+  body?: Schemas.AccessPolicyInitReq;
   pathParams: AccessPolicyTestsPathParams;
 } & FetcherExtraProps;
 
@@ -3204,7 +3335,7 @@ export const accessPolicyTests = (variables: AccessPolicyTestsVariables, signal?
   fetch<
     Schemas.AccessPolicyInitResp,
     AccessPolicyTestsError,
-    Schemas.AccessPolicyResp,
+    Schemas.AccessPolicyInitReq,
     {},
     {},
     AccessPolicyTestsPathParams
@@ -3215,6 +3346,13 @@ export type AccessPolicyTestsGetAnUpdatePathParams = {
   policyTestId: Schemas.AccessPolicyTestId;
 };
 
+export type AccessPolicyTestsGetAnUpdateQueryParams = {
+  /**
+   * @default 1
+   */
+  page?: number;
+};
+
 export type AccessPolicyTestsGetAnUpdateError = Fetcher.ErrorWrapper<{
   status: 400;
   payload: Schemas.AccessApiResponseCommonFailure;
@@ -3222,6 +3360,7 @@ export type AccessPolicyTestsGetAnUpdateError = Fetcher.ErrorWrapper<{
 
 export type AccessPolicyTestsGetAnUpdateVariables = {
   pathParams: AccessPolicyTestsGetAnUpdatePathParams;
+  queryParams?: AccessPolicyTestsGetAnUpdateQueryParams;
 } & FetcherExtraProps;
 
 /**
@@ -3233,7 +3372,7 @@ export const accessPolicyTestsGetAnUpdate = (variables: AccessPolicyTestsGetAnUp
     AccessPolicyTestsGetAnUpdateError,
     undefined,
     {},
-    {},
+    AccessPolicyTestsGetAnUpdateQueryParams,
     AccessPolicyTestsGetAnUpdatePathParams
   >({ url: '/accounts/{accountId}/access/policy-tests/{policyTestId}', method: 'get', ...variables, signal });
 
@@ -8577,6 +8716,596 @@ export const workersAiPostRunCfDeepseekAiDeepseekMath7bInstruct = (
     WorkersAiPostRunCfDeepseekAiDeepseekMath7bInstructPathParams
   >({
     url: '/accounts/{accountId}/ai/run/@cf/deepseek-ai/deepseek-math-7b-instruct',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bPathParams = {
+  /**
+   * @example 023e105f4ecef8ad9ca31a8372d0c353
+   */
+  accountId: string;
+};
+
+export type WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bError = Fetcher.ErrorWrapper<undefined>;
+
+export type WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bResponse = {
+  result?:
+    | {
+        /**
+         * The generated text response from the model
+         */
+        response?: string;
+        /**
+         * An array of tool calls requests made during the response generation
+         */
+        tool_calls?: {
+          /**
+           * The arguments passed to be passed to the tool call request
+           */
+          arguments?: Record<string, any>;
+          /**
+           * The name of the tool to be called
+           */
+          name?: string;
+        }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
+      }
+    | Blob;
+  /**
+   * @default true
+   */
+  success?: boolean;
+};
+
+export type WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bVariables = {
+  body?:
+    | {
+        /**
+         * Decreases the likelihood of the model repeating the same lines verbatim.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        frequency_penalty?: number;
+        /**
+         * Name of the LoRA (Low-Rank Adaptation) model to fine-tune the base model.
+         */
+        lora?: string;
+        /**
+         * The maximum number of tokens to generate in the response.
+         *
+         * @default 256
+         */
+        max_tokens?: number;
+        /**
+         * Increases the likelihood of the model introducing new topics.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        presence_penalty?: number;
+        /**
+         * The input text prompt for the model to generate a response.
+         *
+         * @maxLength 131072
+         * @minLength 1
+         */
+        prompt: string;
+        /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
+         * Penalty for repeated tokens; higher values discourage repetition.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        repetition_penalty?: number;
+        /**
+         * Random seed for reproducibility of the generation.
+         *
+         * @maximum 9999999999
+         * @minimum 1
+         */
+        seed?: number;
+        /**
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
+         *
+         * @default false
+         */
+        stream?: boolean;
+        /**
+         * Controls the randomness of the output; higher values produce more random results.
+         *
+         * @default 0.6
+         * @maximum 5
+         * @minimum 0
+         */
+        temperature?: number;
+        /**
+         * Limits the AI to choose from the top 'k' most probable words. Lower values make responses more focused; higher values introduce more variety and potential surprises.
+         *
+         * @maximum 50
+         * @minimum 1
+         */
+        top_k?: number;
+        /**
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        top_p?: number;
+      }
+    | {
+        /**
+         * Decreases the likelihood of the model repeating the same lines verbatim.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        frequency_penalty?: number;
+        functions?: {
+          code: string;
+          name: string;
+        }[];
+        /**
+         * The maximum number of tokens to generate in the response.
+         *
+         * @default 256
+         */
+        max_tokens?: number;
+        /**
+         * An array of message objects representing the conversation history.
+         */
+        messages: {
+          /**
+           * The content of the message as a string.
+           *
+           * @maxLength 131072
+           */
+          content: string;
+          /**
+           * The role of the message sender (e.g., 'user', 'assistant', 'system', 'tool').
+           */
+          role: string;
+        }[];
+        /**
+         * Increases the likelihood of the model introducing new topics.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        presence_penalty?: number;
+        /**
+         * Penalty for repeated tokens; higher values discourage repetition.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        repetition_penalty?: number;
+        /**
+         * Random seed for reproducibility of the generation.
+         *
+         * @maximum 9999999999
+         * @minimum 1
+         */
+        seed?: number;
+        /**
+         * If true, the response will be streamed back incrementally.
+         *
+         * @default false
+         */
+        stream?: boolean;
+        /**
+         * Controls the randomness of the output; higher values produce more random results.
+         *
+         * @default 0.6
+         * @maximum 5
+         * @minimum 0
+         */
+        temperature?: number;
+        /**
+         * A list of tools available for the assistant to use.
+         */
+        tools?: (
+          | {
+              /**
+               * A brief description of what the tool does.
+               */
+              description: string;
+              /**
+               * The name of the tool. More descriptive the better.
+               */
+              name: string;
+              /**
+               * Schema defining the parameters accepted by the tool.
+               */
+              parameters: {
+                /**
+                 * Definitions of each parameter.
+                 */
+                properties: {
+                  [key: string]: {
+                    /**
+                     * A description of the expected parameter.
+                     */
+                    description: string;
+                    /**
+                     * The data type of the parameter.
+                     */
+                    type: string;
+                  };
+                };
+                /**
+                 * List of required parameter names.
+                 */
+                required?: string[];
+                /**
+                 * The type of the parameters object (usually 'object').
+                 */
+                type: string;
+              };
+            }
+          | {
+              /**
+               * Details of the function tool.
+               */
+              ['function']: {
+                /**
+                 * A brief description of what the function does.
+                 */
+                description: string;
+                /**
+                 * The name of the function.
+                 */
+                name: string;
+                /**
+                 * Schema defining the parameters accepted by the function.
+                 */
+                parameters: {
+                  /**
+                   * Definitions of each parameter.
+                   */
+                  properties: {
+                    [key: string]: {
+                      /**
+                       * A description of the expected parameter.
+                       */
+                      description: string;
+                      /**
+                       * The data type of the parameter.
+                       */
+                      type: string;
+                    };
+                  };
+                  /**
+                   * List of required parameter names.
+                   */
+                  required?: string[];
+                  /**
+                   * The type of the parameters object (usually 'object').
+                   */
+                  type: string;
+                };
+              };
+              /**
+               * Specifies the type of tool (e.g., 'function').
+               */
+              type: string;
+            }
+        )[];
+        /**
+         * Limits the AI to choose from the top 'k' most probable words. Lower values make responses more focused; higher values introduce more variety and potential surprises.
+         *
+         * @maximum 50
+         * @minimum 1
+         */
+        top_k?: number;
+        /**
+         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        top_p?: number;
+      };
+  pathParams: WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bPathParams;
+} & FetcherExtraProps;
+
+export const workersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32b = (
+  variables: WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bResponse,
+    WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bError,
+    | {
+        /**
+         * Decreases the likelihood of the model repeating the same lines verbatim.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        frequency_penalty?: number;
+        /**
+         * Name of the LoRA (Low-Rank Adaptation) model to fine-tune the base model.
+         */
+        lora?: string;
+        /**
+         * The maximum number of tokens to generate in the response.
+         *
+         * @default 256
+         */
+        max_tokens?: number;
+        /**
+         * Increases the likelihood of the model introducing new topics.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        presence_penalty?: number;
+        /**
+         * The input text prompt for the model to generate a response.
+         *
+         * @maxLength 131072
+         * @minLength 1
+         */
+        prompt: string;
+        /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
+         * Penalty for repeated tokens; higher values discourage repetition.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        repetition_penalty?: number;
+        /**
+         * Random seed for reproducibility of the generation.
+         *
+         * @maximum 9999999999
+         * @minimum 1
+         */
+        seed?: number;
+        /**
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
+         *
+         * @default false
+         */
+        stream?: boolean;
+        /**
+         * Controls the randomness of the output; higher values produce more random results.
+         *
+         * @default 0.6
+         * @maximum 5
+         * @minimum 0
+         */
+        temperature?: number;
+        /**
+         * Limits the AI to choose from the top 'k' most probable words. Lower values make responses more focused; higher values introduce more variety and potential surprises.
+         *
+         * @maximum 50
+         * @minimum 1
+         */
+        top_k?: number;
+        /**
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        top_p?: number;
+      }
+    | {
+        /**
+         * Decreases the likelihood of the model repeating the same lines verbatim.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        frequency_penalty?: number;
+        functions?: {
+          code: string;
+          name: string;
+        }[];
+        /**
+         * The maximum number of tokens to generate in the response.
+         *
+         * @default 256
+         */
+        max_tokens?: number;
+        /**
+         * An array of message objects representing the conversation history.
+         */
+        messages: {
+          /**
+           * The content of the message as a string.
+           *
+           * @maxLength 131072
+           */
+          content: string;
+          /**
+           * The role of the message sender (e.g., 'user', 'assistant', 'system', 'tool').
+           */
+          role: string;
+        }[];
+        /**
+         * Increases the likelihood of the model introducing new topics.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        presence_penalty?: number;
+        /**
+         * Penalty for repeated tokens; higher values discourage repetition.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        repetition_penalty?: number;
+        /**
+         * Random seed for reproducibility of the generation.
+         *
+         * @maximum 9999999999
+         * @minimum 1
+         */
+        seed?: number;
+        /**
+         * If true, the response will be streamed back incrementally.
+         *
+         * @default false
+         */
+        stream?: boolean;
+        /**
+         * Controls the randomness of the output; higher values produce more random results.
+         *
+         * @default 0.6
+         * @maximum 5
+         * @minimum 0
+         */
+        temperature?: number;
+        /**
+         * A list of tools available for the assistant to use.
+         */
+        tools?: (
+          | {
+              /**
+               * A brief description of what the tool does.
+               */
+              description: string;
+              /**
+               * The name of the tool. More descriptive the better.
+               */
+              name: string;
+              /**
+               * Schema defining the parameters accepted by the tool.
+               */
+              parameters: {
+                /**
+                 * Definitions of each parameter.
+                 */
+                properties: {
+                  [key: string]: {
+                    /**
+                     * A description of the expected parameter.
+                     */
+                    description: string;
+                    /**
+                     * The data type of the parameter.
+                     */
+                    type: string;
+                  };
+                };
+                /**
+                 * List of required parameter names.
+                 */
+                required?: string[];
+                /**
+                 * The type of the parameters object (usually 'object').
+                 */
+                type: string;
+              };
+            }
+          | {
+              /**
+               * Details of the function tool.
+               */
+              ['function']: {
+                /**
+                 * A brief description of what the function does.
+                 */
+                description: string;
+                /**
+                 * The name of the function.
+                 */
+                name: string;
+                /**
+                 * Schema defining the parameters accepted by the function.
+                 */
+                parameters: {
+                  /**
+                   * Definitions of each parameter.
+                   */
+                  properties: {
+                    [key: string]: {
+                      /**
+                       * A description of the expected parameter.
+                       */
+                      description: string;
+                      /**
+                       * The data type of the parameter.
+                       */
+                      type: string;
+                    };
+                  };
+                  /**
+                   * List of required parameter names.
+                   */
+                  required?: string[];
+                  /**
+                   * The type of the parameters object (usually 'object').
+                   */
+                  type: string;
+                };
+              };
+              /**
+               * Specifies the type of tool (e.g., 'function').
+               */
+              type: string;
+            }
+        )[];
+        /**
+         * Limits the AI to choose from the top 'k' most probable words. Lower values make responses more focused; higher values introduce more variety and potential surprises.
+         *
+         * @maximum 50
+         * @minimum 1
+         */
+        top_k?: number;
+        /**
+         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        top_p?: number;
+      },
+    {},
+    {},
+    WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bPathParams
+  >({
+    url: '/accounts/{accountId}/ai/run/@cf/deepseek-ai/deepseek-r1-distill-qwen-32b',
     method: 'post',
     ...variables,
     signal
@@ -50161,6 +50890,37 @@ export type InfraTargetsListQueryParams = {
    */
   ips?: string[];
   /**
+   * Filters for targets that have any of the following UUIDs. Specify
+   * `target_ids` multiple times in query parameter to build list of
+   * candidates.
+   */
+  target_ids?: string[];
+  /**
+   * Filters for targets whose IP addresses look like the specified string.
+   * Supports `*` as a wildcard character
+   */
+  ip_like?: string | null;
+  /**
+   * Defines an IPv4 filter range's starting value (inclusive). Requires
+   * `ipv4_end` to be specified as well.
+   */
+  ipv4_start?: string | null;
+  /**
+   * Defines an IPv4 filter range's ending value (inclusive). Requires
+   * `ipv4_start` to be specified as well.
+   */
+  ipv4_end?: string | null;
+  /**
+   * Defines an IPv6 filter range's starting value (inclusive). Requires
+   * `ipv6_end` to be specified as well.
+   */
+  ipv6_start?: string | null;
+  /**
+   * Defines an IPv6 filter range's ending value (inclusive). Requires
+   * `ipv6_start` to be specified as well.
+   */
+  ipv6_end?: string | null;
+  /**
    * Current page in the response
    *
    * @default 1
@@ -50711,38 +51471,41 @@ export const getSecurityCenterIssueCountsByType = (
     GetSecurityCenterIssueCountsByTypePathParams
   >({ url: '/accounts/{accountId}/intel/attack-surface-report/issues/type', method: 'get', ...variables, signal });
 
-export type ArchiveSecurityCenterInsightPathParams = {
+export type ArchiveSecurityCenterInsightDeprecatedPathParams = {
   accountId: Schemas.SecurityCenterIdentifier;
   issueId: string;
 };
 
-export type ArchiveSecurityCenterInsightError = Fetcher.ErrorWrapper<{
+export type ArchiveSecurityCenterInsightDeprecatedError = Fetcher.ErrorWrapper<{
   status: 400;
   payload: Schemas.SecurityCenterApiResponseCommonFailure;
 }>;
 
-export type ArchiveSecurityCenterInsightResponse = Schemas.SecurityCenterApiResponseSingle;
+export type ArchiveSecurityCenterInsightDeprecatedResponse = Schemas.SecurityCenterApiResponseSingle;
 
-export type ArchiveSecurityCenterInsightRequestBody = {
+export type ArchiveSecurityCenterInsightDeprecatedRequestBody = {
   /**
    * @default true
    */
   dismiss?: boolean;
 };
 
-export type ArchiveSecurityCenterInsightVariables = {
-  body?: ArchiveSecurityCenterInsightRequestBody;
-  pathParams: ArchiveSecurityCenterInsightPathParams;
+export type ArchiveSecurityCenterInsightDeprecatedVariables = {
+  body?: ArchiveSecurityCenterInsightDeprecatedRequestBody;
+  pathParams: ArchiveSecurityCenterInsightDeprecatedPathParams;
 } & FetcherExtraProps;
 
-export const archiveSecurityCenterInsight = (variables: ArchiveSecurityCenterInsightVariables, signal?: AbortSignal) =>
+export const archiveSecurityCenterInsightDeprecated = (
+  variables: ArchiveSecurityCenterInsightDeprecatedVariables,
+  signal?: AbortSignal
+) =>
   fetch<
-    ArchiveSecurityCenterInsightResponse,
-    ArchiveSecurityCenterInsightError,
-    ArchiveSecurityCenterInsightRequestBody,
+    ArchiveSecurityCenterInsightDeprecatedResponse,
+    ArchiveSecurityCenterInsightDeprecatedError,
+    ArchiveSecurityCenterInsightDeprecatedRequestBody,
     {},
     {},
-    ArchiveSecurityCenterInsightPathParams
+    ArchiveSecurityCenterInsightDeprecatedPathParams
   >({
     url: '/accounts/{accountId}/intel/attack-surface-report/{issueId}/dismiss',
     method: 'put',
@@ -53832,7 +54595,7 @@ export type MagicSitesListSitesPathParams = {
 };
 
 export type MagicSitesListSitesQueryParams = {
-  connector_identifier?: Schemas.MagicIdentifier;
+  connectorid?: Schemas.MagicIdentifier;
 };
 
 export type MagicSitesListSitesError = Fetcher.ErrorWrapper<{
@@ -53846,7 +54609,7 @@ export type MagicSitesListSitesVariables = {
 } & FetcherExtraProps;
 
 /**
- * Lists Sites associated with an account. Use connector_identifier query param to return sites where connector_identifier matches either site.ConnectorID or site.SecondaryConnectorID.
+ * Lists Sites associated with an account. Use connectorid query param to return sites where connectorid matches either site.ConnectorID or site.SecondaryConnectorID.
  */
 export const magicSitesListSites = (variables: MagicSitesListSitesVariables, signal?: AbortSignal) =>
   fetch<
@@ -57373,6 +58136,93 @@ export const r2PutBucketLifecycleConfiguration = (
     R2PutBucketLifecycleConfigurationPathParams
   >({ url: '/accounts/{accountId}/r2/buckets/{bucketName}/lifecycle', method: 'put', ...variables, signal });
 
+export type R2GetBucketLockConfigurationPathParams = {
+  bucketName: Schemas.R2BucketName;
+  accountId: Schemas.R2AccountIdentifier;
+};
+
+export type R2GetBucketLockConfigurationHeaders = {
+  /**
+   * @default default
+   */
+  ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
+};
+
+export type R2GetBucketLockConfigurationError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.R2V4ResponseFailure;
+}>;
+
+export type R2GetBucketLockConfigurationResponse = {
+  errors: Schemas.R2Errors;
+  messages: Schemas.R2Messages;
+  result: Schemas.R2BucketLockRuleConfig;
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+};
+
+export type R2GetBucketLockConfigurationVariables = {
+  headers?: R2GetBucketLockConfigurationHeaders;
+  pathParams: R2GetBucketLockConfigurationPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Get lock rules for a bucket
+ */
+export const r2GetBucketLockConfiguration = (variables: R2GetBucketLockConfigurationVariables, signal?: AbortSignal) =>
+  fetch<
+    R2GetBucketLockConfigurationResponse,
+    R2GetBucketLockConfigurationError,
+    undefined,
+    R2GetBucketLockConfigurationHeaders,
+    {},
+    R2GetBucketLockConfigurationPathParams
+  >({ url: '/accounts/{accountId}/r2/buckets/{bucketName}/lock', method: 'get', ...variables, signal });
+
+export type R2PutBucketLockConfigurationPathParams = {
+  bucketName: Schemas.R2BucketName;
+  accountId: Schemas.R2AccountIdentifier;
+};
+
+export type R2PutBucketLockConfigurationHeaders = {
+  /**
+   * @default default
+   */
+  ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
+};
+
+export type R2PutBucketLockConfigurationError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.R2V4ResponseFailure;
+}>;
+
+export type R2PutBucketLockConfigurationResponse = Schemas.R2V4Response & Record<string, any>;
+
+export type R2PutBucketLockConfigurationRequestBody = {
+  rules?: Schemas.R2BucketLockRule[];
+};
+
+export type R2PutBucketLockConfigurationVariables = {
+  body?: R2PutBucketLockConfigurationRequestBody;
+  headers?: R2PutBucketLockConfigurationHeaders;
+  pathParams: R2PutBucketLockConfigurationPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Set lock rules for a bucket
+ */
+export const r2PutBucketLockConfiguration = (variables: R2PutBucketLockConfigurationVariables, signal?: AbortSignal) =>
+  fetch<
+    R2PutBucketLockConfigurationResponse,
+    R2PutBucketLockConfigurationError,
+    R2PutBucketLockConfigurationRequestBody,
+    R2PutBucketLockConfigurationHeaders,
+    {},
+    R2PutBucketLockConfigurationPathParams
+  >({ url: '/accounts/{accountId}/r2/buckets/{bucketName}/lock', method: 'put', ...variables, signal });
+
 export type R2DeleteBucketSippyConfigPathParams = {
   bucketName: Schemas.R2BucketName;
   accountId: Schemas.R2AccountIdentifier;
@@ -57510,6 +58360,42 @@ export const r2PutBucketSippyConfig = (variables: R2PutBucketSippyConfigVariable
     {},
     R2PutBucketSippyConfigPathParams
   >({ url: '/accounts/{accountId}/r2/buckets/{bucketName}/sippy', method: 'put', ...variables, signal });
+
+export type R2GetAccountLevelMetricsPathParams = {
+  accountId: Schemas.R2AccountIdentifier;
+};
+
+export type R2GetAccountLevelMetricsError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.R2V4ResponseFailure;
+}>;
+
+export type R2GetAccountLevelMetricsResponse = {
+  errors: Schemas.R2Errors;
+  messages: Schemas.R2Messages;
+  result: Schemas.R2AccountLevelMetrics;
+  /**
+   * Whether the API call was successful
+   */
+  success: true;
+};
+
+export type R2GetAccountLevelMetricsVariables = {
+  pathParams: R2GetAccountLevelMetricsPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Get Storage/Object Count Metrics across all buckets in your account. Note that Account-Level Metrics may not immediately reflect the latest data.
+ */
+export const r2GetAccountLevelMetrics = (variables: R2GetAccountLevelMetricsVariables, signal?: AbortSignal) =>
+  fetch<
+    R2GetAccountLevelMetricsResponse,
+    R2GetAccountLevelMetricsError,
+    undefined,
+    {},
+    {},
+    R2GetAccountLevelMetricsPathParams
+  >({ url: '/accounts/{accountId}/r2/metrics', method: 'get', ...variables, signal });
 
 export type R2CreateTempAccessCredentialsPathParams = {
   accountId: Schemas.R2AccountIdentifier;
@@ -59279,6 +60165,226 @@ export const secondaryDnsTsigUpdateTsig = (variables: SecondaryDnsTsigUpdateTsig
     {},
     SecondaryDnsTsigUpdateTsigPathParams
   >({ url: '/accounts/{accountId}/secondary_dns/tsigs/{tsigId}', method: 'put', ...variables, signal });
+
+export type GetSecurityCenterInsightsPathParams = {
+  accountId: Schemas.SecurityCenterIdentifier;
+};
+
+export type GetSecurityCenterInsightsQueryParams = {
+  dismissed?: Schemas.SecurityCenterDismissed;
+  issue_class?: Schemas.SecurityCenterIssueClasses;
+  issue_type?: Schemas.SecurityCenterIssueTypes;
+  product?: Schemas.SecurityCenterProducts;
+  severity?: Schemas.SecurityCenterSeverityQueryParam;
+  subject?: Schemas.SecurityCenterSubjects;
+  ['issue_class~neq']?: Schemas.SecurityCenterIssueClasses;
+  ['issue_type~neq']?: Schemas.SecurityCenterIssueTypes;
+  ['product~neq']?: Schemas.SecurityCenterProducts;
+  ['severity~neq']?: Schemas.SecurityCenterSeverityQueryParam;
+  ['subject~neq']?: Schemas.SecurityCenterSubjects;
+  /**
+   * Current page within paginated list of results
+   *
+   * @default 1
+   * @example 1
+   */
+  page?: Schemas.SecurityCenterPage;
+  /**
+   * Number of results per page of results
+   *
+   * @default 25
+   * @example 25
+   * @maximum 1000
+   * @minimum 1
+   */
+  per_page?: Schemas.SecurityCenterPerPage;
+};
+
+export type GetSecurityCenterInsightsError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecurityCenterApiResponseCommonFailure;
+}>;
+
+export type GetSecurityCenterInsightsResponse = Schemas.SecurityCenterApiResponseCommon & {
+  result?: {
+    count?: Schemas.SecurityCenterCount;
+    issues?: Schemas.SecurityCenterIssue[];
+    page?: Schemas.SecurityCenterPage;
+    per_page?: Schemas.SecurityCenterPerPage;
+  };
+};
+
+export type GetSecurityCenterInsightsVariables = {
+  pathParams: GetSecurityCenterInsightsPathParams;
+  queryParams?: GetSecurityCenterInsightsQueryParams;
+} & FetcherExtraProps;
+
+export const getSecurityCenterInsights = (variables: GetSecurityCenterInsightsVariables, signal?: AbortSignal) =>
+  fetch<
+    GetSecurityCenterInsightsResponse,
+    GetSecurityCenterInsightsError,
+    undefined,
+    {},
+    GetSecurityCenterInsightsQueryParams,
+    GetSecurityCenterInsightsPathParams
+  >({ url: '/accounts/{accountId}/security-center/insights', method: 'get', ...variables, signal });
+
+export type GetSecurityCenterInsightCountsByClassPathParams = {
+  accountId: Schemas.SecurityCenterIdentifier;
+};
+
+export type GetSecurityCenterInsightCountsByClassQueryParams = {
+  dismissed?: Schemas.SecurityCenterDismissed;
+  issue_class?: Schemas.SecurityCenterIssueClasses;
+  issue_type?: Schemas.SecurityCenterIssueTypes;
+  product?: Schemas.SecurityCenterProducts;
+  severity?: Schemas.SecurityCenterSeverityQueryParam;
+  subject?: Schemas.SecurityCenterSubjects;
+  ['issue_class~neq']?: Schemas.SecurityCenterIssueClasses;
+  ['issue_type~neq']?: Schemas.SecurityCenterIssueTypes;
+  ['product~neq']?: Schemas.SecurityCenterProducts;
+  ['severity~neq']?: Schemas.SecurityCenterSeverityQueryParam;
+  ['subject~neq']?: Schemas.SecurityCenterSubjects;
+};
+
+export type GetSecurityCenterInsightCountsByClassError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecurityCenterApiResponseCommonFailure;
+}>;
+
+export type GetSecurityCenterInsightCountsByClassVariables = {
+  pathParams: GetSecurityCenterInsightCountsByClassPathParams;
+  queryParams?: GetSecurityCenterInsightCountsByClassQueryParams;
+} & FetcherExtraProps;
+
+export const getSecurityCenterInsightCountsByClass = (
+  variables: GetSecurityCenterInsightCountsByClassVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.SecurityCenterValueCountsResponse,
+    GetSecurityCenterInsightCountsByClassError,
+    undefined,
+    {},
+    GetSecurityCenterInsightCountsByClassQueryParams,
+    GetSecurityCenterInsightCountsByClassPathParams
+  >({ url: '/accounts/{accountId}/security-center/insights/class', method: 'get', ...variables, signal });
+
+export type GetSecurityCenterInsightCountsBySeverityPathParams = {
+  accountId: Schemas.SecurityCenterIdentifier;
+};
+
+export type GetSecurityCenterInsightCountsBySeverityQueryParams = {
+  dismissed?: Schemas.SecurityCenterDismissed;
+  issue_class?: Schemas.SecurityCenterIssueClasses;
+  issue_type?: Schemas.SecurityCenterIssueTypes;
+  product?: Schemas.SecurityCenterProducts;
+  severity?: Schemas.SecurityCenterSeverityQueryParam;
+  subject?: Schemas.SecurityCenterSubjects;
+  ['issue_class~neq']?: Schemas.SecurityCenterIssueClasses;
+  ['issue_type~neq']?: Schemas.SecurityCenterIssueTypes;
+  ['product~neq']?: Schemas.SecurityCenterProducts;
+  ['severity~neq']?: Schemas.SecurityCenterSeverityQueryParam;
+  ['subject~neq']?: Schemas.SecurityCenterSubjects;
+};
+
+export type GetSecurityCenterInsightCountsBySeverityError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecurityCenterApiResponseCommonFailure;
+}>;
+
+export type GetSecurityCenterInsightCountsBySeverityVariables = {
+  pathParams: GetSecurityCenterInsightCountsBySeverityPathParams;
+  queryParams?: GetSecurityCenterInsightCountsBySeverityQueryParams;
+} & FetcherExtraProps;
+
+export const getSecurityCenterInsightCountsBySeverity = (
+  variables: GetSecurityCenterInsightCountsBySeverityVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.SecurityCenterValueCountsResponse,
+    GetSecurityCenterInsightCountsBySeverityError,
+    undefined,
+    {},
+    GetSecurityCenterInsightCountsBySeverityQueryParams,
+    GetSecurityCenterInsightCountsBySeverityPathParams
+  >({ url: '/accounts/{accountId}/security-center/insights/severity', method: 'get', ...variables, signal });
+
+export type GetSecurityCenterInsightCountsByTypePathParams = {
+  accountId: Schemas.SecurityCenterIdentifier;
+};
+
+export type GetSecurityCenterInsightCountsByTypeQueryParams = {
+  dismissed?: Schemas.SecurityCenterDismissed;
+  issue_class?: Schemas.SecurityCenterIssueClasses;
+  issue_type?: Schemas.SecurityCenterIssueTypes;
+  product?: Schemas.SecurityCenterProducts;
+  severity?: Schemas.SecurityCenterSeverityQueryParam;
+  subject?: Schemas.SecurityCenterSubjects;
+  ['issue_class~neq']?: Schemas.SecurityCenterIssueClasses;
+  ['issue_type~neq']?: Schemas.SecurityCenterIssueTypes;
+  ['product~neq']?: Schemas.SecurityCenterProducts;
+  ['severity~neq']?: Schemas.SecurityCenterSeverityQueryParam;
+  ['subject~neq']?: Schemas.SecurityCenterSubjects;
+};
+
+export type GetSecurityCenterInsightCountsByTypeError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecurityCenterApiResponseCommonFailure;
+}>;
+
+export type GetSecurityCenterInsightCountsByTypeVariables = {
+  pathParams: GetSecurityCenterInsightCountsByTypePathParams;
+  queryParams?: GetSecurityCenterInsightCountsByTypeQueryParams;
+} & FetcherExtraProps;
+
+export const getSecurityCenterInsightCountsByType = (
+  variables: GetSecurityCenterInsightCountsByTypeVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.SecurityCenterValueCountsResponse,
+    GetSecurityCenterInsightCountsByTypeError,
+    undefined,
+    {},
+    GetSecurityCenterInsightCountsByTypeQueryParams,
+    GetSecurityCenterInsightCountsByTypePathParams
+  >({ url: '/accounts/{accountId}/security-center/insights/type', method: 'get', ...variables, signal });
+
+export type ArchiveSecurityCenterInsightPathParams = {
+  accountId: Schemas.SecurityCenterIdentifier;
+  issueId: string;
+};
+
+export type ArchiveSecurityCenterInsightError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecurityCenterApiResponseCommonFailure;
+}>;
+
+export type ArchiveSecurityCenterInsightResponse = Schemas.SecurityCenterApiResponseSingle;
+
+export type ArchiveSecurityCenterInsightRequestBody = {
+  /**
+   * @default true
+   */
+  dismiss?: boolean;
+};
+
+export type ArchiveSecurityCenterInsightVariables = {
+  body?: ArchiveSecurityCenterInsightRequestBody;
+  pathParams: ArchiveSecurityCenterInsightPathParams;
+} & FetcherExtraProps;
+
+export const archiveSecurityCenterInsight = (variables: ArchiveSecurityCenterInsightVariables, signal?: AbortSignal) =>
+  fetch<
+    ArchiveSecurityCenterInsightResponse,
+    ArchiveSecurityCenterInsightError,
+    ArchiveSecurityCenterInsightRequestBody,
+    {},
+    {},
+    ArchiveSecurityCenterInsightPathParams
+  >({ url: '/accounts/{accountId}/security-center/insights/{issueId}/dismiss', method: 'put', ...variables, signal });
 
 export type SharesListPathParams = {
   accountId: Schemas.ResourceSharingAccountId;
@@ -71576,6 +72682,488 @@ export const radarGetAiBotsTimeseriesGroupByUserAgent = (
     {}
   >({ url: '/radar/ai/bots/timeseries_groups/user_agent', method: 'get', ...variables, signal });
 
+export type RadarGetAiInferenceSummaryByModelQueryParams = {
+  /**
+   * Array of names that will be used to name the series in responses.
+   *
+   * @example main_series
+   */
+  name?: string[];
+  /**
+   * For example, use `7d` and `7dControl` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   *
+   * @example 7d
+   */
+  dateRange?: string[];
+  /**
+   * Array of datetimes to filter the start of a series.
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateStart?: string[];
+  /**
+   * End of the date range (inclusive).
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateEnd?: string[];
+  /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
+  /**
+   * Format results are returned in.
+   *
+   * @example json
+   */
+  format?: 'JSON' | 'CSV';
+};
+
+export type RadarGetAiInferenceSummaryByModelError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      message: string;
+    }[];
+    result: Record<string, any>;
+    /**
+     * @example false
+     */
+    success: boolean;
+  };
+}>;
+
+export type RadarGetAiInferenceSummaryByModelResponse = {
+  result: {
+    meta: {
+      confidenceInfo?: {
+        annotations?: {
+          /**
+           * @example ALL
+           */
+          dataSource: string;
+          /**
+           * @example Cable cut in Tonga
+           */
+          description: string;
+          /**
+           * @format date-time
+           */
+          endTime?: string;
+          /**
+           * @example OUTAGE
+           */
+          eventType: string;
+          /**
+           * @example true
+           */
+          isInstantaneous: boolean;
+          linkedUrl?: string;
+          /**
+           * @format date-time
+           */
+          startTime?: string;
+        }[];
+        level?: number;
+      };
+      dateRange: {
+        /**
+         * Adjusted end of date range.
+         *
+         * @example 2022-09-17T10:22:57.555Z
+         * @format date-time
+         */
+        endTime: string;
+        /**
+         * Adjusted start of date range.
+         *
+         * @example 2022-09-16T10:22:57.555Z
+         * @format date-time
+         */
+        startTime: string;
+      }[];
+      /**
+       * @example 2023-07-26T08:59:57Z
+       */
+      lastUpdated: string;
+      /**
+       * @example PERCENTAGE
+       */
+      normalization: string;
+    };
+    /**
+     * @example {"@cf/meta/llama-3-8b-instruct":"8.381743","@cf/meta/m2m100-1.2b":"22.904","@cf/stabilityai/stable-diffusion-xl-base-1.0":"10.274394"}
+     */
+    summary_0: {
+      [key: string]: string;
+    };
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RadarGetAiInferenceSummaryByModelVariables = {
+  queryParams?: RadarGetAiInferenceSummaryByModelQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Percentage distribution of unique accounts by model.
+ */
+export const radarGetAiInferenceSummaryByModel = (
+  variables: RadarGetAiInferenceSummaryByModelVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    RadarGetAiInferenceSummaryByModelResponse,
+    RadarGetAiInferenceSummaryByModelError,
+    undefined,
+    {},
+    RadarGetAiInferenceSummaryByModelQueryParams,
+    {}
+  >({ url: '/radar/ai/inference/summary/model', method: 'get', ...variables, signal });
+
+export type RadarGetAiInferenceSummaryByTaskQueryParams = {
+  /**
+   * Array of names that will be used to name the series in responses.
+   *
+   * @example main_series
+   */
+  name?: string[];
+  /**
+   * For example, use `7d` and `7dControl` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   *
+   * @example 7d
+   */
+  dateRange?: string[];
+  /**
+   * Array of datetimes to filter the start of a series.
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateStart?: string[];
+  /**
+   * End of the date range (inclusive).
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateEnd?: string[];
+  /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
+  /**
+   * Format results are returned in.
+   *
+   * @example json
+   */
+  format?: 'JSON' | 'CSV';
+};
+
+export type RadarGetAiInferenceSummaryByTaskError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      message: string;
+    }[];
+    result: Record<string, any>;
+    /**
+     * @example false
+     */
+    success: boolean;
+  };
+}>;
+
+export type RadarGetAiInferenceSummaryByTaskResponse = {
+  result: {
+    meta: {
+      confidenceInfo?: {
+        annotations?: {
+          /**
+           * @example ALL
+           */
+          dataSource: string;
+          /**
+           * @example Cable cut in Tonga
+           */
+          description: string;
+          /**
+           * @format date-time
+           */
+          endTime?: string;
+          /**
+           * @example OUTAGE
+           */
+          eventType: string;
+          /**
+           * @example true
+           */
+          isInstantaneous: boolean;
+          linkedUrl?: string;
+          /**
+           * @format date-time
+           */
+          startTime?: string;
+        }[];
+        level?: number;
+      };
+      dateRange: {
+        /**
+         * Adjusted end of date range.
+         *
+         * @example 2022-09-17T10:22:57.555Z
+         * @format date-time
+         */
+        endTime: string;
+        /**
+         * Adjusted start of date range.
+         *
+         * @example 2022-09-16T10:22:57.555Z
+         * @format date-time
+         */
+        startTime: string;
+      }[];
+      /**
+       * @example 2023-07-26T08:59:57Z
+       */
+      lastUpdated: string;
+      /**
+       * @example PERCENTAGE
+       */
+      normalization: string;
+    };
+    /**
+     * @example {"text generation":"10.274394","text-to-image":"22.904"}
+     */
+    summary_0: {
+      [key: string]: string;
+    };
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RadarGetAiInferenceSummaryByTaskVariables = {
+  queryParams?: RadarGetAiInferenceSummaryByTaskQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Percentage distribution of unique accounts by task.
+ */
+export const radarGetAiInferenceSummaryByTask = (
+  variables: RadarGetAiInferenceSummaryByTaskVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    RadarGetAiInferenceSummaryByTaskResponse,
+    RadarGetAiInferenceSummaryByTaskError,
+    undefined,
+    {},
+    RadarGetAiInferenceSummaryByTaskQueryParams,
+    {}
+  >({ url: '/radar/ai/inference/summary/task', method: 'get', ...variables, signal });
+
+export type RadarGetAiInferenceTimeseriesGroupByModelQueryParams = {
+  /**
+   * Aggregation interval results should be returned in (for example, in 15 minutes or 1 hour intervals). Refer to [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
+   *
+   * @example 1h
+   */
+  aggInterval?: '15m' | '1h' | '1d' | '1w';
+  /**
+   * Array of names that will be used to name the series in responses.
+   *
+   * @example main_series
+   */
+  name?: string[];
+  /**
+   * For example, use `7d` and `7dControl` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   *
+   * @example 7d
+   */
+  dateRange?: string[];
+  /**
+   * Array of datetimes to filter the start of a series.
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateStart?: string[];
+  /**
+   * End of the date range (inclusive).
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateEnd?: string[];
+  /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
+  /**
+   * Format results are returned in.
+   *
+   * @example json
+   */
+  format?: 'JSON' | 'CSV';
+};
+
+export type RadarGetAiInferenceTimeseriesGroupByModelError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      message: string;
+    }[];
+    result: Record<string, any>;
+    /**
+     * @example false
+     */
+    success: boolean;
+  };
+}>;
+
+export type RadarGetAiInferenceTimeseriesGroupByModelResponse = {
+  result: {
+    meta: Record<string, any>;
+    /**
+     * @example {"@cf/meta/m2m100-1.2b":["67.701863"],"timestamps":["2024-07-30T03:00:00Z"]}
+     */
+    serie_0: {
+      timestamps: string[];
+    } & {
+      [key: string]: string[];
+    };
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RadarGetAiInferenceTimeseriesGroupByModelVariables = {
+  queryParams?: RadarGetAiInferenceTimeseriesGroupByModelQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Percentage distribution of unique accounts by model over time.
+ */
+export const radarGetAiInferenceTimeseriesGroupByModel = (
+  variables: RadarGetAiInferenceTimeseriesGroupByModelVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    RadarGetAiInferenceTimeseriesGroupByModelResponse,
+    RadarGetAiInferenceTimeseriesGroupByModelError,
+    undefined,
+    {},
+    RadarGetAiInferenceTimeseriesGroupByModelQueryParams,
+    {}
+  >({ url: '/radar/ai/inference/timeseries_groups/model', method: 'get', ...variables, signal });
+
+export type RadarGetAiInferenceTimeseriesGroupByTaskQueryParams = {
+  /**
+   * Aggregation interval results should be returned in (for example, in 15 minutes or 1 hour intervals). Refer to [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
+   *
+   * @example 1h
+   */
+  aggInterval?: '15m' | '1h' | '1d' | '1w';
+  /**
+   * Array of names that will be used to name the series in responses.
+   *
+   * @example main_series
+   */
+  name?: string[];
+  /**
+   * For example, use `7d` and `7dControl` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   *
+   * @example 7d
+   */
+  dateRange?: string[];
+  /**
+   * Array of datetimes to filter the start of a series.
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateStart?: string[];
+  /**
+   * End of the date range (inclusive).
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateEnd?: string[];
+  /**
+   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
+  /**
+   * Format results are returned in.
+   *
+   * @example json
+   */
+  format?: 'JSON' | 'CSV';
+};
+
+export type RadarGetAiInferenceTimeseriesGroupByTaskError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      message: string;
+    }[];
+    result: Record<string, any>;
+    /**
+     * @example false
+     */
+    success: boolean;
+  };
+}>;
+
+export type RadarGetAiInferenceTimeseriesGroupByTaskResponse = {
+  result: {
+    meta: Record<string, any>;
+    /**
+     * @example {"text-to-image":["67.701863"],"timestamps":["2024-07-30T03:00:00Z"]}
+     */
+    serie_0: {
+      timestamps: string[];
+    } & {
+      [key: string]: string[];
+    };
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RadarGetAiInferenceTimeseriesGroupByTaskVariables = {
+  queryParams?: RadarGetAiInferenceTimeseriesGroupByTaskQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Percentage distribution of unique accounts by task over time.
+ */
+export const radarGetAiInferenceTimeseriesGroupByTask = (
+  variables: RadarGetAiInferenceTimeseriesGroupByTaskVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    RadarGetAiInferenceTimeseriesGroupByTaskResponse,
+    RadarGetAiInferenceTimeseriesGroupByTaskError,
+    undefined,
+    {},
+    RadarGetAiInferenceTimeseriesGroupByTaskQueryParams,
+    {}
+  >({ url: '/radar/ai/inference/timeseries_groups/task', method: 'get', ...variables, signal });
+
 export type RadarGetAnnotationsQueryParams = {
   /**
    * Limit the number of objects in the response.
@@ -74444,163 +76032,6 @@ export const radarGetDnsAs112TopLocationsByIpVersion = (
     RadarGetDnsAs112TopLocationsByIpVersionPathParams
   >({ url: '/radar/as112/top/locations/ip_version/{ipVersion}', method: 'get', ...variables, signal });
 
-export type RadarGetAttacksLayer3SummaryQueryParams = {
-  /**
-   * Array of names that will be used to name the series in responses.
-   *
-   * @example main_series
-   */
-  name?: string[];
-  /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).
-   *
-   * @example 7d
-   */
-  dateRange?: string[];
-  /**
-   * Array of datetimes to filter the start of a series.
-   *
-   * @example 2023-09-01T11:41:33.782Z
-   */
-  dateStart?: string[];
-  /**
-   * End of the date range (inclusive).
-   *
-   * @example 2023-09-01T11:41:33.782Z
-   */
-  dateEnd?: string[];
-  /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
-  /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with `-` to exclude from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
-   *
-   * @example US,CA
-   */
-  location?: string[];
-  /**
-   * Array of comma separated list of continents (alpha-2 continent codes). Start with `-` to exclude from results. For example, `-EU,NA` excludes results from Europe, but includes results from North America.
-   *
-   * @example EU,NA
-   */
-  continent?: string[];
-  /**
-   * Format results are returned in.
-   *
-   * @example json
-   */
-  format?: 'JSON' | 'CSV';
-};
-
-export type RadarGetAttacksLayer3SummaryError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      message: string;
-    }[];
-    result: Record<string, any>;
-    /**
-     * @example false
-     */
-    success: boolean;
-  };
-}>;
-
-export type RadarGetAttacksLayer3SummaryResponse = {
-  result: {
-    meta: {
-      confidenceInfo?: {
-        annotations?: {
-          /**
-           * @example ALL
-           */
-          dataSource: string;
-          /**
-           * @example Cable cut in Tonga
-           */
-          description: string;
-          /**
-           * @format date-time
-           */
-          endTime?: string;
-          /**
-           * @example OUTAGE
-           */
-          eventType: string;
-          /**
-           * @example true
-           */
-          isInstantaneous: boolean;
-          linkedUrl?: string;
-          /**
-           * @format date-time
-           */
-          startTime?: string;
-        }[];
-        level?: number;
-      };
-      dateRange: {
-        /**
-         * Adjusted end of date range.
-         *
-         * @example 2022-09-17T10:22:57.555Z
-         * @format date-time
-         */
-        endTime: string;
-        /**
-         * Adjusted start of date range.
-         *
-         * @example 2022-09-16T10:22:57.555Z
-         * @format date-time
-         */
-        startTime: string;
-      }[];
-    };
-    summary_0: {
-      /**
-       * @example 0.9
-       */
-      gre: string;
-      /**
-       * @example 0.1
-       */
-      icmp: string;
-      /**
-       * @example 60
-       */
-      tcp: string;
-      /**
-       * @example 39
-       */
-      udp: string;
-    };
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type RadarGetAttacksLayer3SummaryVariables = {
-  queryParams?: RadarGetAttacksLayer3SummaryQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Percentage distribution of network protocols in Layer 3/4 attacks over a given time period.
- */
-export const radarGetAttacksLayer3Summary = (variables: RadarGetAttacksLayer3SummaryVariables, signal?: AbortSignal) =>
-  fetch<
-    RadarGetAttacksLayer3SummaryResponse,
-    RadarGetAttacksLayer3SummaryError,
-    undefined,
-    {},
-    RadarGetAttacksLayer3SummaryQueryParams,
-    {}
-  >({ url: '/radar/attacks/layer3/summary', method: 'get', ...variables, signal });
-
 export type RadarGetAttacksLayer3SummaryByBitrateQueryParams = {
   /**
    * Array of names that will be used to name the series in responses.
@@ -75611,169 +77042,6 @@ export const radarGetAttacksLayer3TimeseriesByBytes = (
     RadarGetAttacksLayer3TimeseriesByBytesQueryParams,
     {}
   >({ url: '/radar/attacks/layer3/timeseries', method: 'get', ...variables, signal });
-
-export type RadarGetAttacksLayer3TimeseriesGroupsQueryParams = {
-  /**
-   * Aggregation interval results should be returned in (for example, in 15 minutes or 1 hour intervals). Refer to [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
-   *
-   * @example 1h
-   */
-  aggInterval?: '15m' | '1h' | '1d' | '1w';
-  /**
-   * Array of names that will be used to name the series in responses.
-   *
-   * @example main_series
-   */
-  name?: string[];
-  /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).
-   *
-   * @example 7d
-   */
-  dateRange?: string[];
-  /**
-   * Array of datetimes to filter the start of a series.
-   *
-   * @example 2023-09-01T11:41:33.782Z
-   */
-  dateStart?: string[];
-  /**
-   * End of the date range (inclusive).
-   *
-   * @example 2023-09-01T11:41:33.782Z
-   */
-  dateEnd?: string[];
-  /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
-  /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with `-` to exclude from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
-   *
-   * @example US,CA
-   */
-  location?: string[];
-  /**
-   * Array of comma separated list of continents (alpha-2 continent codes). Start with `-` to exclude from results. For example, `-EU,NA` excludes results from Europe, but includes results from North America.
-   *
-   * @example EU,NA
-   */
-  continent?: string[];
-  /**
-   * Format results are returned in.
-   *
-   * @example json
-   */
-  format?: 'JSON' | 'CSV';
-};
-
-export type RadarGetAttacksLayer3TimeseriesGroupsError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      message: string;
-    }[];
-    result: Record<string, any>;
-    /**
-     * @example false
-     */
-    success: boolean;
-  };
-}>;
-
-export type RadarGetAttacksLayer3TimeseriesGroupsResponse = {
-  result: {
-    meta: {
-      /**
-       * @example 1h
-       */
-      aggInterval: string;
-      confidenceInfo?: {
-        annotations?: {
-          /**
-           * @example ALL
-           */
-          dataSource: string;
-          /**
-           * @example Cable cut in Tonga
-           */
-          description: string;
-          /**
-           * @format date-time
-           */
-          endTime?: string;
-          /**
-           * @example OUTAGE
-           */
-          eventType: string;
-          /**
-           * @example true
-           */
-          isInstantaneous: boolean;
-          linkedUrl?: string;
-          /**
-           * @format date-time
-           */
-          startTime?: string;
-        }[];
-        level?: number;
-      };
-      dateRange: {
-        /**
-         * Adjusted end of date range.
-         *
-         * @example 2022-09-17T10:22:57.555Z
-         * @format date-time
-         */
-        endTime: string;
-        /**
-         * Adjusted start of date range.
-         *
-         * @example 2022-09-16T10:22:57.555Z
-         * @format date-time
-         */
-        startTime: string;
-      }[];
-      /**
-       * @format date-time
-       */
-      lastUpdated: string;
-    };
-    serie_0: {
-      gre: string[];
-      icmp: string[];
-      tcp: string[];
-      timestamps: string[];
-      udp: string[];
-    };
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type RadarGetAttacksLayer3TimeseriesGroupsVariables = {
-  queryParams?: RadarGetAttacksLayer3TimeseriesGroupsQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Get a time series of the percentage distribution of network protocols in Layer 3/4 attacks.
- */
-export const radarGetAttacksLayer3TimeseriesGroups = (
-  variables: RadarGetAttacksLayer3TimeseriesGroupsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    RadarGetAttacksLayer3TimeseriesGroupsResponse,
-    RadarGetAttacksLayer3TimeseriesGroupsError,
-    undefined,
-    {},
-    RadarGetAttacksLayer3TimeseriesGroupsQueryParams,
-    {}
-  >({ url: '/radar/attacks/layer3/timeseries_groups', method: 'get', ...variables, signal });
 
 export type RadarGetAttacksLayer3TimeseriesGroupByBitrateQueryParams = {
   /**
@@ -77512,175 +78780,6 @@ export const radarGetAttacksLayer3TopVerticals = (
     {}
   >({ url: '/radar/attacks/layer3/top/vertical', method: 'get', ...variables, signal });
 
-export type RadarGetAttacksLayer7SummaryQueryParams = {
-  /**
-   * Array of names that will be used to name the series in responses.
-   *
-   * @example main_series
-   */
-  name?: string[];
-  /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).
-   *
-   * @example 7d
-   */
-  dateRange?: string[];
-  /**
-   * Array of datetimes to filter the start of a series.
-   *
-   * @example 2023-09-01T11:41:33.782Z
-   */
-  dateStart?: string[];
-  /**
-   * End of the date range (inclusive).
-   *
-   * @example 2023-09-01T11:41:33.782Z
-   */
-  dateEnd?: string[];
-  /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
-  /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with `-` to exclude from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
-   *
-   * @example US,CA
-   */
-  location?: string[];
-  /**
-   * Array of comma separated list of continents (alpha-2 continent codes). Start with `-` to exclude from results. For example, `-EU,NA` excludes results from Europe, but includes results from North America.
-   *
-   * @example EU,NA
-   */
-  continent?: string[];
-  /**
-   * Format results are returned in.
-   *
-   * @example json
-   */
-  format?: 'JSON' | 'CSV';
-};
-
-export type RadarGetAttacksLayer7SummaryError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      message: string;
-    }[];
-    result: Record<string, any>;
-    /**
-     * @example false
-     */
-    success: boolean;
-  };
-}>;
-
-export type RadarGetAttacksLayer7SummaryResponse = {
-  result: {
-    meta: {
-      confidenceInfo?: {
-        annotations?: {
-          /**
-           * @example ALL
-           */
-          dataSource: string;
-          /**
-           * @example Cable cut in Tonga
-           */
-          description: string;
-          /**
-           * @format date-time
-           */
-          endTime?: string;
-          /**
-           * @example OUTAGE
-           */
-          eventType: string;
-          /**
-           * @example true
-           */
-          isInstantaneous: boolean;
-          linkedUrl?: string;
-          /**
-           * @format date-time
-           */
-          startTime?: string;
-        }[];
-        level?: number;
-      };
-      dateRange: {
-        /**
-         * Adjusted end of date range.
-         *
-         * @example 2022-09-17T10:22:57.555Z
-         * @format date-time
-         */
-        endTime: string;
-        /**
-         * Adjusted start of date range.
-         *
-         * @example 2022-09-16T10:22:57.555Z
-         * @format date-time
-         */
-        startTime: string;
-      }[];
-    };
-    summary_0: {
-      /**
-       * @example 0.9
-       */
-      ACCESS_RULES: string;
-      /**
-       * @example 0.9
-       */
-      API_SHIELD: string;
-      /**
-       * @example 0.9
-       */
-      BOT_MANAGEMENT: string;
-      /**
-       * @example 0.9
-       */
-      DATA_LOSS_PREVENTION: string;
-      /**
-       * @example 34
-       */
-      DDOS: string;
-      /**
-       * @example 0.1
-       */
-      IP_REPUTATION: string;
-      /**
-       * @example 65
-       */
-      WAF: string;
-    };
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type RadarGetAttacksLayer7SummaryVariables = {
-  queryParams?: RadarGetAttacksLayer7SummaryQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Percentage distribution of mitigation techniques in Layer 7 attacks.
- */
-export const radarGetAttacksLayer7Summary = (variables: RadarGetAttacksLayer7SummaryVariables, signal?: AbortSignal) =>
-  fetch<
-    RadarGetAttacksLayer7SummaryResponse,
-    RadarGetAttacksLayer7SummaryError,
-    undefined,
-    {},
-    RadarGetAttacksLayer7SummaryQueryParams,
-    {}
-  >({ url: '/radar/attacks/layer7/summary', method: 'get', ...variables, signal });
-
 export type RadarGetAttacksLayer7SummaryByHttpMethodQueryParams = {
   /**
    * Array of names that will be used to name the series in responses.
@@ -79046,172 +80145,6 @@ export const radarGetAttacksLayer7Timeseries = (
     RadarGetAttacksLayer7TimeseriesQueryParams,
     {}
   >({ url: '/radar/attacks/layer7/timeseries', method: 'get', ...variables, signal });
-
-export type RadarGetAttacksLayer7TimeseriesGroupQueryParams = {
-  /**
-   * Aggregation interval results should be returned in (for example, in 15 minutes or 1 hour intervals). Refer to [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
-   *
-   * @example 1h
-   */
-  aggInterval?: '15m' | '1h' | '1d' | '1w';
-  /**
-   * Array of names that will be used to name the series in responses.
-   *
-   * @example main_series
-   */
-  name?: string[];
-  /**
-   * For example, use `7d` and `7dControl` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).
-   *
-   * @example 7d
-   */
-  dateRange?: string[];
-  /**
-   * Array of datetimes to filter the start of a series.
-   *
-   * @example 2023-09-01T11:41:33.782Z
-   */
-  dateStart?: string[];
-  /**
-   * End of the date range (inclusive).
-   *
-   * @example 2023-09-01T11:41:33.782Z
-   */
-  dateEnd?: string[];
-  /**
-   * Array of comma separated list of ASNs, start with `-` to exclude from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
-  /**
-   * Array of comma separated list of locations (alpha-2 country codes). Start with `-` to exclude from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
-   *
-   * @example US,CA
-   */
-  location?: string[];
-  /**
-   * Array of comma separated list of continents (alpha-2 continent codes). Start with `-` to exclude from results. For example, `-EU,NA` excludes results from Europe, but includes results from North America.
-   *
-   * @example EU,NA
-   */
-  continent?: string[];
-  /**
-   * Format results are returned in.
-   *
-   * @example json
-   */
-  format?: 'JSON' | 'CSV';
-};
-
-export type RadarGetAttacksLayer7TimeseriesGroupError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      message: string;
-    }[];
-    result: Record<string, any>;
-    /**
-     * @example false
-     */
-    success: boolean;
-  };
-}>;
-
-export type RadarGetAttacksLayer7TimeseriesGroupResponse = {
-  result: {
-    meta: {
-      /**
-       * @example 1h
-       */
-      aggInterval: string;
-      confidenceInfo?: {
-        annotations?: {
-          /**
-           * @example ALL
-           */
-          dataSource: string;
-          /**
-           * @example Cable cut in Tonga
-           */
-          description: string;
-          /**
-           * @format date-time
-           */
-          endTime?: string;
-          /**
-           * @example OUTAGE
-           */
-          eventType: string;
-          /**
-           * @example true
-           */
-          isInstantaneous: boolean;
-          linkedUrl?: string;
-          /**
-           * @format date-time
-           */
-          startTime?: string;
-        }[];
-        level?: number;
-      };
-      dateRange: {
-        /**
-         * Adjusted end of date range.
-         *
-         * @example 2022-09-17T10:22:57.555Z
-         * @format date-time
-         */
-        endTime: string;
-        /**
-         * Adjusted start of date range.
-         *
-         * @example 2022-09-16T10:22:57.555Z
-         * @format date-time
-         */
-        startTime: string;
-      }[];
-      /**
-       * @format date-time
-       */
-      lastUpdated: string;
-    };
-    serie_0: {
-      ACCESS_RULES: string[];
-      API_SHIELD: string[];
-      BOT_MANAGEMENT: string[];
-      DATA_LOSS_PREVENTION: string[];
-      DDOS: string[];
-      IP_REPUTATION: string[];
-      WAF: string[];
-      timestamps: string[];
-    };
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type RadarGetAttacksLayer7TimeseriesGroupVariables = {
-  queryParams?: RadarGetAttacksLayer7TimeseriesGroupQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Get a time series of the distribution of mitigation techniques over time.
- */
-export const radarGetAttacksLayer7TimeseriesGroup = (
-  variables: RadarGetAttacksLayer7TimeseriesGroupVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    RadarGetAttacksLayer7TimeseriesGroupResponse,
-    RadarGetAttacksLayer7TimeseriesGroupError,
-    undefined,
-    {},
-    RadarGetAttacksLayer7TimeseriesGroupQueryParams,
-    {}
-  >({ url: '/radar/attacks/layer7/timeseries_groups', method: 'get', ...variables, signal });
 
 export type RadarGetAttacksLayer7TimeseriesGroupByHttpMethodQueryParams = {
   /**
@@ -83345,7 +84278,7 @@ export type RadarPostReportsDatasetDownloadUrlVariables = {
 } & FetcherExtraProps;
 
 /**
- * Get a url to download a single dataset.
+ * Get a URL to download a single dataset.
  */
 export const radarPostReportsDatasetDownloadUrl = (
   variables: RadarPostReportsDatasetDownloadUrlVariables,
@@ -83419,7 +84352,7 @@ export type RadarGetDnsTopAsesQueryParams = {
    *
    * @example google.com
    */
-  domain: string[];
+  domain?: string[];
   /**
    * For example, use `7d` and `7dControl` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).
    *
@@ -83546,7 +84479,7 @@ export type RadarGetDnsTopAsesResponse = {
 };
 
 export type RadarGetDnsTopAsesVariables = {
-  queryParams: RadarGetDnsTopAsesQueryParams;
+  queryParams?: RadarGetDnsTopAsesQueryParams;
 } & FetcherExtraProps;
 
 /**
@@ -83578,7 +84511,7 @@ export type RadarGetDnsTopLocationsQueryParams = {
    *
    * @example google.com
    */
-  domain: string[];
+  domain?: string[];
   /**
    * For example, use `7d` and `7dControl` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).
    *
@@ -83705,7 +84638,7 @@ export type RadarGetDnsTopLocationsResponse = {
 };
 
 export type RadarGetDnsTopLocationsVariables = {
-  queryParams: RadarGetDnsTopLocationsQueryParams;
+  queryParams?: RadarGetDnsTopLocationsQueryParams;
 } & FetcherExtraProps;
 
 /**
@@ -94943,12 +95876,6 @@ export type RadarGetHttpTopBrowserFamiliesQueryParams = {
    */
   tlsVersion?: ('TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC')[];
   /**
-   * Filter for browser family.
-   *
-   * @example CHROME
-   */
-  browserFamily?: ('CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI')[];
-  /**
    * Format results are returned in.
    *
    * @example json
@@ -98562,6 +99489,218 @@ export const radarGetRankingDomainDetails = (variables: RadarGetRankingDomainDet
     RadarGetRankingDomainDetailsPathParams
   >({ url: '/radar/ranking/domain/{domain}', method: 'get', ...variables, signal });
 
+export type RadarGetRankingInternetServicesTimeseriesQueryParams = {
+  /**
+   * Filter for services category.
+   *
+   * @example Generative AI
+   */
+  serviceCategory?: string[];
+  /**
+   * Limit the number of objects in the response.
+   *
+   * @example 5
+   */
+  limit?: number;
+  /**
+   * Array of names that will be used to name the series in responses.
+   *
+   * @example main_series
+   */
+  name?: string[];
+  /**
+   * For example, use `7d` and `7dControl` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   *
+   * @example 7d
+   */
+  dateRange?: string[];
+  /**
+   * Array of datetimes to filter the start of a series.
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateStart?: string[];
+  /**
+   * End of the date range (inclusive).
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateEnd?: string[];
+  /**
+   * Format results are returned in.
+   *
+   * @example json
+   */
+  format?: 'JSON' | 'CSV';
+};
+
+export type RadarGetRankingInternetServicesTimeseriesError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      message: string;
+    }[];
+    result: Record<string, any>;
+    /**
+     * @example false
+     */
+    success: boolean;
+  };
+}>;
+
+export type RadarGetRankingInternetServicesTimeseriesResponse = {
+  result: {
+    meta: {
+      dateRange: {
+        /**
+         * Adjusted end of date range.
+         *
+         * @example 2022-09-17T10:22:57.555Z
+         * @format date-time
+         */
+        endTime: string;
+        /**
+         * Adjusted start of date range.
+         *
+         * @example 2022-09-16T10:22:57.555Z
+         * @format date-time
+         */
+        startTime: string;
+      }[];
+    };
+    /**
+     * @example {"Google":[2],"timestamps":["2022-09-02"]}
+     */
+    serie_0: {
+      timestamps: string[];
+    } & {
+      [key: string]: (string | number)[];
+    };
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RadarGetRankingInternetServicesTimeseriesVariables = {
+  queryParams?: RadarGetRankingInternetServicesTimeseriesQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Gets Internet Services rank update changes over time. Raw values are returned.
+ */
+export const radarGetRankingInternetServicesTimeseries = (
+  variables: RadarGetRankingInternetServicesTimeseriesVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    RadarGetRankingInternetServicesTimeseriesResponse,
+    RadarGetRankingInternetServicesTimeseriesError,
+    undefined,
+    {},
+    RadarGetRankingInternetServicesTimeseriesQueryParams,
+    {}
+  >({ url: '/radar/ranking/internet_services/timeseries_groups', method: 'get', ...variables, signal });
+
+export type RadarGetRankingTopInternetServicesQueryParams = {
+  /**
+   * Filter for services category.
+   *
+   * @example Generative AI
+   */
+  serviceCategory?: string[];
+  /**
+   * Limit the number of objects in the response.
+   *
+   * @example 5
+   */
+  limit?: number;
+  /**
+   * Array of names that will be used to name the series in responses.
+   *
+   * @example main_series
+   */
+  name?: string[];
+  /**
+   * Array of dates to filter the ranking.
+   *
+   * @example 2022-09-19
+   */
+  date?: string[];
+  /**
+   * Format results are returned in.
+   *
+   * @example json
+   */
+  format?: 'JSON' | 'CSV';
+};
+
+export type RadarGetRankingTopInternetServicesError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      message: string;
+    }[];
+    result: Record<string, any>;
+    /**
+     * @example false
+     */
+    success: boolean;
+  };
+}>;
+
+export type RadarGetRankingTopInternetServicesResponse = {
+  result: {
+    meta: {
+      top_0: {
+        /**
+         * @example 2022-09-19
+         */
+        date: string;
+        /**
+         * @example Overall
+         */
+        serviceCategory: string;
+      };
+    };
+    top_0: {
+      /**
+       * @example 1
+       */
+      rank: number;
+      /**
+       * @example Google
+       */
+      service: string;
+    }[];
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RadarGetRankingTopInternetServicesVariables = {
+  queryParams?: RadarGetRankingTopInternetServicesQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Get top Internet services based on their rank.
+ */
+export const radarGetRankingTopInternetServices = (
+  variables: RadarGetRankingTopInternetServicesVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    RadarGetRankingTopInternetServicesResponse,
+    RadarGetRankingTopInternetServicesError,
+    undefined,
+    {},
+    RadarGetRankingTopInternetServicesQueryParams,
+    {}
+  >({ url: '/radar/ranking/internet_services/top', method: 'get', ...variables, signal });
+
 export type RadarGetRankingDomainTimeseriesQueryParams = {
   /**
    * Limit the number of objects in the response.
@@ -98806,6 +99945,322 @@ export const radarGetRankingTopDomains = (variables: RadarGetRankingTopDomainsVa
     RadarGetRankingTopDomainsQueryParams,
     {}
   >({ url: '/radar/ranking/top', method: 'get', ...variables, signal });
+
+export type RadarGetRobotsTxtTopDomainCategoriesByFilesParsedQueryParams = {
+  /**
+   * Limit the number of objects in the response.
+   *
+   * @example 5
+   */
+  limit?: number;
+  /**
+   * Array of names that will be used to name the series in responses.
+   *
+   * @example main_series
+   */
+  name?: string[];
+  /**
+   * Filter by user agent category.
+   *
+   * @default AI
+   * @example AI
+   */
+  userAgentCategory?: 'AI';
+  /**
+   * Array of dates to filter the ranking.
+   *
+   * @example 2022-09-19
+   */
+  date?: string[];
+  /**
+   * Format results are returned in.
+   *
+   * @example json
+   */
+  format?: 'JSON' | 'CSV';
+};
+
+export type RadarGetRobotsTxtTopDomainCategoriesByFilesParsedError = Fetcher.ErrorWrapper<{
+  status: 404;
+  payload: {
+    /**
+     * @example Not Found
+     */
+    error: string;
+  };
+}>;
+
+export type RadarGetRobotsTxtTopDomainCategoriesByFilesParsedResponse = {
+  result: {
+    meta: {
+      confidenceInfo?: {
+        annotations?: {
+          /**
+           * @example ALL
+           */
+          dataSource: string;
+          /**
+           * @example Cable cut in Tonga
+           */
+          description: string;
+          /**
+           * @format date-time
+           */
+          endTime?: string;
+          /**
+           * @example OUTAGE
+           */
+          eventType: string;
+          /**
+           * @example true
+           */
+          isInstantaneous: boolean;
+          linkedUrl?: string;
+          /**
+           * @format date-time
+           */
+          startTime?: string;
+        }[];
+        level?: number;
+      };
+      dateRange: {
+        /**
+         * Adjusted end of date range.
+         *
+         * @example 2022-09-17T10:22:57.555Z
+         * @format date-time
+         */
+        endTime: string;
+        /**
+         * Adjusted start of date range.
+         *
+         * @example 2022-09-16T10:22:57.555Z
+         * @format date-time
+         */
+        startTime: string;
+      }[];
+      /**
+       * @example 2023-07-26T08:59:57Z
+       */
+      lastUpdated: string;
+      /**
+       * @example RAW
+       */
+      normalization: string;
+      units?: {
+        /**
+         * @example *
+         */
+        name: string;
+        /**
+         * @example requests
+         */
+        value: string;
+      }[];
+    };
+    top_0: {
+      /**
+       * @example News & Media
+       */
+      name: string;
+      /**
+       * @example 273
+       */
+      value: number;
+    }[];
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RadarGetRobotsTxtTopDomainCategoriesByFilesParsedVariables = {
+  queryParams?: RadarGetRobotsTxtTopDomainCategoriesByFilesParsedQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Get the top domain categories by the number of robots.txt files parsed.
+ */
+export const radarGetRobotsTxtTopDomainCategoriesByFilesParsed = (
+  variables: RadarGetRobotsTxtTopDomainCategoriesByFilesParsedVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    RadarGetRobotsTxtTopDomainCategoriesByFilesParsedResponse,
+    RadarGetRobotsTxtTopDomainCategoriesByFilesParsedError,
+    undefined,
+    {},
+    RadarGetRobotsTxtTopDomainCategoriesByFilesParsedQueryParams,
+    {}
+  >({ url: '/radar/robots_txt/top/domain_categories', method: 'get', ...variables, signal });
+
+export type RadarGetRobotsTxtTopUserAgentsByDirectiveQueryParams = {
+  /**
+   * Limit the number of objects in the response.
+   *
+   * @example 5
+   */
+  limit?: number;
+  /**
+   * Array of names that will be used to name the series in responses.
+   *
+   * @example main_series
+   */
+  name?: string[];
+  /**
+   * Filter by user agent category.
+   *
+   * @default AI
+   * @example AI
+   */
+  userAgentCategory?: 'AI';
+  /**
+   * Array of dates to filter the ranking.
+   *
+   * @example 2022-09-19
+   */
+  date?: string[];
+  /**
+   * Filter by domain category.
+   *
+   * @example News & Media
+   */
+  domainCategory?: string[];
+  /**
+   * Filter by directive.
+   */
+  directive?: 'ALLOW' | 'DISALLOW';
+  /**
+   * Format results are returned in.
+   *
+   * @example json
+   */
+  format?: 'JSON' | 'CSV';
+};
+
+export type RadarGetRobotsTxtTopUserAgentsByDirectiveError = Fetcher.ErrorWrapper<{
+  status: 404;
+  payload: {
+    /**
+     * @example Not Found
+     */
+    error: string;
+  };
+}>;
+
+export type RadarGetRobotsTxtTopUserAgentsByDirectiveResponse = {
+  result: {
+    meta: {
+      confidenceInfo?: {
+        annotations?: {
+          /**
+           * @example ALL
+           */
+          dataSource: string;
+          /**
+           * @example Cable cut in Tonga
+           */
+          description: string;
+          /**
+           * @format date-time
+           */
+          endTime?: string;
+          /**
+           * @example OUTAGE
+           */
+          eventType: string;
+          /**
+           * @example true
+           */
+          isInstantaneous: boolean;
+          linkedUrl?: string;
+          /**
+           * @format date-time
+           */
+          startTime?: string;
+        }[];
+        level?: number;
+      };
+      dateRange: {
+        /**
+         * Adjusted end of date range.
+         *
+         * @example 2022-09-17T10:22:57.555Z
+         * @format date-time
+         */
+        endTime: string;
+        /**
+         * Adjusted start of date range.
+         *
+         * @example 2022-09-16T10:22:57.555Z
+         * @format date-time
+         */
+        startTime: string;
+      }[];
+      /**
+       * @example 2023-07-26T08:59:57Z
+       */
+      lastUpdated: string;
+      /**
+       * @example RAW
+       */
+      normalization: string;
+      units?: {
+        /**
+         * @example *
+         */
+        name: string;
+        /**
+         * @example requests
+         */
+        value: string;
+      }[];
+    };
+    top_0: {
+      /**
+       * @example 235
+       */
+      fully?: number;
+      /**
+       * @example GPTBot
+       */
+      name: string;
+      /**
+       * @example 38
+       */
+      partially?: number;
+      /**
+       * @example 273
+       */
+      value: number;
+    }[];
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RadarGetRobotsTxtTopUserAgentsByDirectiveVariables = {
+  queryParams?: RadarGetRobotsTxtTopUserAgentsByDirectiveQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Get the top user agents on robots.txt files by directive.
+ */
+export const radarGetRobotsTxtTopUserAgentsByDirective = (
+  variables: RadarGetRobotsTxtTopUserAgentsByDirectiveVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    RadarGetRobotsTxtTopUserAgentsByDirectiveResponse,
+    RadarGetRobotsTxtTopUserAgentsByDirectiveError,
+    undefined,
+    {},
+    RadarGetRobotsTxtTopUserAgentsByDirectiveQueryParams,
+    {}
+  >({ url: '/radar/robots_txt/top/user_agents/directive', method: 'get', ...variables, signal });
 
 export type RadarGetSearchGlobalQueryParams = {
   /**
@@ -106229,7 +107684,7 @@ export type CustomHostnameForAZoneCreateCustomHostnameVariables = {
 } & FetcherExtraProps;
 
 /**
- * Add a new custom hostname and request that an SSL certificate be issued for it. One of three validation methods—http, txt, email—should be used, with 'http' recommended if the CNAME is already in place (or will be soon). Specifying 'email' will send an email to the WHOIS contacts on file for the base domain plus hostmaster, postmaster, webmaster, admin, administrator. If http is used and the domain is not already pointing to the Managed CNAME host, the PATCH method must be used once it is (to complete validation).
+ * Add a new custom hostname and request that an SSL certificate be issued for it. One of three validation methods—http, txt, email—should be used, with 'http' recommended if the CNAME is already in place (or will be soon). Specifying 'email' will send an email to the WHOIS contacts on file for the base domain plus hostmaster, postmaster, webmaster, admin, administrator. If http is used and the domain is not already pointing to the Managed CNAME host, the PATCH method must be used once it is (to complete validation).  Enable bundling of certificates using the custom_cert_bundle field. The bundling process requires the following condition One certificate in the bundle must use an RSA, and the other must use an ECDSA.
  */
 export const customHostnameForAZoneCreateCustomHostname = (
   variables: CustomHostnameForAZoneCreateCustomHostnameVariables,
@@ -106415,7 +107870,7 @@ export type CustomHostnameForAZoneEditCustomHostnameVariables = {
 } & FetcherExtraProps;
 
 /**
- * Modify SSL configuration for a custom hostname. When sent with SSL config that matches existing config, used to indicate that hostname should pass domain control validation (DCV). Can also be used to change validation type, e.g., from 'http' to 'email'.
+ * Modify SSL configuration for a custom hostname. When sent with SSL config that matches existing config, used to indicate that hostname should pass domain control validation (DCV). Can also be used to change validation type, e.g., from 'http' to 'email'. Bundle an existing certificate with another certificate by using the "custom_cert_bundle" field. The bundling process supports combining certificates as long as the following condition is met. One certificate must use the RSA algorithm, and the other must use the ECDSA algorithm.
  */
 export const customHostnameForAZoneEditCustomHostname = (
   variables: CustomHostnameForAZoneEditCustomHostnameVariables,
@@ -106429,6 +107884,88 @@ export const customHostnameForAZoneEditCustomHostname = (
     {},
     CustomHostnameForAZoneEditCustomHostnamePathParams
   >({ url: '/zones/{zoneId}/custom_hostnames/{customHostnameId}', method: 'patch', ...variables, signal });
+
+export type CustomHostnameForAZoneDeleteSingleCertificateAndKeyInACustomHostnamePathParams = {
+  customHostnameId: Schemas.TlsCertificatesAndHostnamesIdentifier;
+  certificatePackId: Schemas.TlsCertificatesAndHostnamesIdentifier;
+  certificateId: Schemas.TlsCertificatesAndHostnamesIdentifier;
+  zoneId: Schemas.TlsCertificatesAndHostnamesIdentifier;
+};
+
+export type CustomHostnameForAZoneDeleteSingleCertificateAndKeyInACustomHostnameError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    id?: Schemas.TlsCertificatesAndHostnamesIdentifier;
+  } & Schemas.TlsCertificatesAndHostnamesApiResponseCommonFailure;
+}>;
+
+export type CustomHostnameForAZoneDeleteSingleCertificateAndKeyInACustomHostnameResponse = {
+  id?: Schemas.TlsCertificatesAndHostnamesIdentifier;
+};
+
+export type CustomHostnameForAZoneDeleteSingleCertificateAndKeyInACustomHostnameVariables = {
+  pathParams: CustomHostnameForAZoneDeleteSingleCertificateAndKeyInACustomHostnamePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Delete a single custom certificate from a certificate pack that contains two bundled certificates. Deletion is subject to the following constraints. You cannot delete a certificate if it is the only remaining certificate in the pack. At least one certificate must remain in the pack.
+ */
+export const customHostnameForAZoneDeleteSingleCertificateAndKeyInACustomHostname = (
+  variables: CustomHostnameForAZoneDeleteSingleCertificateAndKeyInACustomHostnameVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    CustomHostnameForAZoneDeleteSingleCertificateAndKeyInACustomHostnameResponse,
+    CustomHostnameForAZoneDeleteSingleCertificateAndKeyInACustomHostnameError,
+    undefined,
+    {},
+    {},
+    CustomHostnameForAZoneDeleteSingleCertificateAndKeyInACustomHostnamePathParams
+  >({
+    url: '/zones/{zoneId}/custom_hostnames/{customHostnameId}/certificate_pack/{certificatePackId}/certificates/{certificateId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type CustomHostnameForAZoneEditCustomCertificateCustomHostnamePathParams = {
+  customHostnameId: Schemas.TlsCertificatesAndHostnamesIdentifier;
+  certificatePackId: Schemas.TlsCertificatesAndHostnamesIdentifier;
+  certificateId: Schemas.TlsCertificatesAndHostnamesIdentifier;
+  zoneId: Schemas.TlsCertificatesAndHostnamesIdentifier;
+};
+
+export type CustomHostnameForAZoneEditCustomCertificateCustomHostnameError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.TlsCertificatesAndHostnamesCustomHostnameResponseSingle &
+    Schemas.TlsCertificatesAndHostnamesApiResponseCommonFailure;
+}>;
+
+export type CustomHostnameForAZoneEditCustomCertificateCustomHostnameVariables = {
+  body: Schemas.TlsCertificatesAndHostnamesCustomCertAndKey;
+  pathParams: CustomHostnameForAZoneEditCustomCertificateCustomHostnamePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Replace a single custom certificate within a certificate pack that contains two bundled certificates. The replacement must adhere to the following constraints. You can only replace an RSA certificate with another RSA certificate or an ECDSA certificate with another ECDSA certificate.
+ */
+export const customHostnameForAZoneEditCustomCertificateCustomHostname = (
+  variables: CustomHostnameForAZoneEditCustomCertificateCustomHostnameVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.TlsCertificatesAndHostnamesCustomHostnameResponseSingle,
+    CustomHostnameForAZoneEditCustomCertificateCustomHostnameError,
+    Schemas.TlsCertificatesAndHostnamesCustomCertAndKey,
+    {},
+    {},
+    CustomHostnameForAZoneEditCustomCertificateCustomHostnamePathParams
+  >({
+    url: '/zones/{zoneId}/custom_hostnames/{customHostnameId}/certificate_pack/{certificatePackId}/certificates/{certificateId}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type AccountLevelCustomNameserversUsageForAZoneGetAccountCustomNameserverRelatedZoneMetadataPathParams = {
   zoneId: Schemas.DnsCustomNameserversSchemasIdentifier;
@@ -113712,6 +115249,232 @@ export const secondaryDnsPrimaryZoneGetOutgoingZoneTransferStatus = (
     SecondaryDnsPrimaryZoneGetOutgoingZoneTransferStatusPathParams
   >({ url: '/zones/{zoneId}/secondary_dns/outgoing/status', method: 'get', ...variables, signal });
 
+export type GetZoneSecurityCenterInsightsPathParams = {
+  zoneId: Schemas.SecurityCenterIdentifier;
+};
+
+export type GetZoneSecurityCenterInsightsQueryParams = {
+  dismissed?: Schemas.SecurityCenterDismissed;
+  issue_class?: Schemas.SecurityCenterIssueClasses;
+  issue_type?: Schemas.SecurityCenterIssueTypes;
+  product?: Schemas.SecurityCenterProducts;
+  severity?: Schemas.SecurityCenterSeverityQueryParam;
+  subject?: Schemas.SecurityCenterSubjects;
+  ['issue_class~neq']?: Schemas.SecurityCenterIssueClasses;
+  ['issue_type~neq']?: Schemas.SecurityCenterIssueTypes;
+  ['product~neq']?: Schemas.SecurityCenterProducts;
+  ['severity~neq']?: Schemas.SecurityCenterSeverityQueryParam;
+  ['subject~neq']?: Schemas.SecurityCenterSubjects;
+  /**
+   * Current page within paginated list of results
+   *
+   * @default 1
+   * @example 1
+   */
+  page?: Schemas.SecurityCenterPage;
+  /**
+   * Number of results per page of results
+   *
+   * @default 25
+   * @example 25
+   * @maximum 1000
+   * @minimum 1
+   */
+  per_page?: Schemas.SecurityCenterPerPage;
+};
+
+export type GetZoneSecurityCenterInsightsError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecurityCenterApiResponseCommonFailure;
+}>;
+
+export type GetZoneSecurityCenterInsightsResponse = Schemas.SecurityCenterApiResponseCommon & {
+  result?: {
+    count?: Schemas.SecurityCenterCount;
+    issues?: Schemas.SecurityCenterIssue[];
+    page?: Schemas.SecurityCenterPage;
+    per_page?: Schemas.SecurityCenterPerPage;
+  };
+};
+
+export type GetZoneSecurityCenterInsightsVariables = {
+  pathParams: GetZoneSecurityCenterInsightsPathParams;
+  queryParams?: GetZoneSecurityCenterInsightsQueryParams;
+} & FetcherExtraProps;
+
+export const getZoneSecurityCenterInsights = (
+  variables: GetZoneSecurityCenterInsightsVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    GetZoneSecurityCenterInsightsResponse,
+    GetZoneSecurityCenterInsightsError,
+    undefined,
+    {},
+    GetZoneSecurityCenterInsightsQueryParams,
+    GetZoneSecurityCenterInsightsPathParams
+  >({ url: '/zones/{zoneId}/security-center/insights', method: 'get', ...variables, signal });
+
+export type GetZoneSecurityCenterInsightCountsByClassPathParams = {
+  zoneId: Schemas.SecurityCenterIdentifier;
+};
+
+export type GetZoneSecurityCenterInsightCountsByClassQueryParams = {
+  dismissed?: Schemas.SecurityCenterDismissed;
+  issue_class?: Schemas.SecurityCenterIssueClasses;
+  issue_type?: Schemas.SecurityCenterIssueTypes;
+  product?: Schemas.SecurityCenterProducts;
+  severity?: Schemas.SecurityCenterSeverityQueryParam;
+  subject?: Schemas.SecurityCenterSubjects;
+  ['issue_class~neq']?: Schemas.SecurityCenterIssueClasses;
+  ['issue_type~neq']?: Schemas.SecurityCenterIssueTypes;
+  ['product~neq']?: Schemas.SecurityCenterProducts;
+  ['severity~neq']?: Schemas.SecurityCenterSeverityQueryParam;
+  ['subject~neq']?: Schemas.SecurityCenterSubjects;
+};
+
+export type GetZoneSecurityCenterInsightCountsByClassError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecurityCenterApiResponseCommonFailure;
+}>;
+
+export type GetZoneSecurityCenterInsightCountsByClassVariables = {
+  pathParams: GetZoneSecurityCenterInsightCountsByClassPathParams;
+  queryParams?: GetZoneSecurityCenterInsightCountsByClassQueryParams;
+} & FetcherExtraProps;
+
+export const getZoneSecurityCenterInsightCountsByClass = (
+  variables: GetZoneSecurityCenterInsightCountsByClassVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.SecurityCenterValueCountsResponse,
+    GetZoneSecurityCenterInsightCountsByClassError,
+    undefined,
+    {},
+    GetZoneSecurityCenterInsightCountsByClassQueryParams,
+    GetZoneSecurityCenterInsightCountsByClassPathParams
+  >({ url: '/zones/{zoneId}/security-center/insights/class', method: 'get', ...variables, signal });
+
+export type GetZoneSecurityCenterInsightCountsBySeverityPathParams = {
+  zoneId: Schemas.SecurityCenterIdentifier;
+};
+
+export type GetZoneSecurityCenterInsightCountsBySeverityQueryParams = {
+  dismissed?: Schemas.SecurityCenterDismissed;
+  issue_class?: Schemas.SecurityCenterIssueClasses;
+  issue_type?: Schemas.SecurityCenterIssueTypes;
+  product?: Schemas.SecurityCenterProducts;
+  severity?: Schemas.SecurityCenterSeverityQueryParam;
+  subject?: Schemas.SecurityCenterSubjects;
+  ['issue_class~neq']?: Schemas.SecurityCenterIssueClasses;
+  ['issue_type~neq']?: Schemas.SecurityCenterIssueTypes;
+  ['product~neq']?: Schemas.SecurityCenterProducts;
+  ['severity~neq']?: Schemas.SecurityCenterSeverityQueryParam;
+  ['subject~neq']?: Schemas.SecurityCenterSubjects;
+};
+
+export type GetZoneSecurityCenterInsightCountsBySeverityError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecurityCenterApiResponseCommonFailure;
+}>;
+
+export type GetZoneSecurityCenterInsightCountsBySeverityVariables = {
+  pathParams: GetZoneSecurityCenterInsightCountsBySeverityPathParams;
+  queryParams?: GetZoneSecurityCenterInsightCountsBySeverityQueryParams;
+} & FetcherExtraProps;
+
+export const getZoneSecurityCenterInsightCountsBySeverity = (
+  variables: GetZoneSecurityCenterInsightCountsBySeverityVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.SecurityCenterValueCountsResponse,
+    GetZoneSecurityCenterInsightCountsBySeverityError,
+    undefined,
+    {},
+    GetZoneSecurityCenterInsightCountsBySeverityQueryParams,
+    GetZoneSecurityCenterInsightCountsBySeverityPathParams
+  >({ url: '/zones/{zoneId}/security-center/insights/severity', method: 'get', ...variables, signal });
+
+export type GetZoneSecurityCenterInsightCountsByTypePathParams = {
+  zoneId: Schemas.SecurityCenterIdentifier;
+};
+
+export type GetZoneSecurityCenterInsightCountsByTypeQueryParams = {
+  dismissed?: Schemas.SecurityCenterDismissed;
+  issue_class?: Schemas.SecurityCenterIssueClasses;
+  issue_type?: Schemas.SecurityCenterIssueTypes;
+  product?: Schemas.SecurityCenterProducts;
+  severity?: Schemas.SecurityCenterSeverityQueryParam;
+  subject?: Schemas.SecurityCenterSubjects;
+  ['issue_class~neq']?: Schemas.SecurityCenterIssueClasses;
+  ['issue_type~neq']?: Schemas.SecurityCenterIssueTypes;
+  ['product~neq']?: Schemas.SecurityCenterProducts;
+  ['severity~neq']?: Schemas.SecurityCenterSeverityQueryParam;
+  ['subject~neq']?: Schemas.SecurityCenterSubjects;
+};
+
+export type GetZoneSecurityCenterInsightCountsByTypeError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecurityCenterApiResponseCommonFailure;
+}>;
+
+export type GetZoneSecurityCenterInsightCountsByTypeVariables = {
+  pathParams: GetZoneSecurityCenterInsightCountsByTypePathParams;
+  queryParams?: GetZoneSecurityCenterInsightCountsByTypeQueryParams;
+} & FetcherExtraProps;
+
+export const getZoneSecurityCenterInsightCountsByType = (
+  variables: GetZoneSecurityCenterInsightCountsByTypeVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.SecurityCenterValueCountsResponse,
+    GetZoneSecurityCenterInsightCountsByTypeError,
+    undefined,
+    {},
+    GetZoneSecurityCenterInsightCountsByTypeQueryParams,
+    GetZoneSecurityCenterInsightCountsByTypePathParams
+  >({ url: '/zones/{zoneId}/security-center/insights/type', method: 'get', ...variables, signal });
+
+export type ArchiveZoneSecurityCenterInsightPathParams = {
+  zoneId: Schemas.SecurityCenterIdentifier;
+  issueId: string;
+};
+
+export type ArchiveZoneSecurityCenterInsightError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecurityCenterApiResponseCommonFailure;
+}>;
+
+export type ArchiveZoneSecurityCenterInsightResponse = Schemas.SecurityCenterApiResponseSingle;
+
+export type ArchiveZoneSecurityCenterInsightRequestBody = {
+  /**
+   * @default true
+   */
+  dismiss?: boolean;
+};
+
+export type ArchiveZoneSecurityCenterInsightVariables = {
+  body?: ArchiveZoneSecurityCenterInsightRequestBody;
+  pathParams: ArchiveZoneSecurityCenterInsightPathParams;
+} & FetcherExtraProps;
+
+export const archiveZoneSecurityCenterInsight = (
+  variables: ArchiveZoneSecurityCenterInsightVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    ArchiveZoneSecurityCenterInsightResponse,
+    ArchiveZoneSecurityCenterInsightError,
+    ArchiveZoneSecurityCenterInsightRequestBody,
+    {},
+    {},
+    ArchiveZoneSecurityCenterInsightPathParams
+  >({ url: '/zones/{zoneId}/security-center/insights/{issueId}/dismiss', method: 'put', ...variables, signal });
+
 export type DeleteSecurityTxtPathParams = {
   zoneId: Schemas.SecurityCenterIdentifier;
 };
@@ -117420,7 +119183,9 @@ export const operationsByTag = {
     accessIdentityProvidersAddAnAccessIdentityProvider,
     accessIdentityProvidersDeleteAnAccessIdentityProvider,
     accessIdentityProvidersGetAnAccessIdentityProvider,
-    accessIdentityProvidersUpdateAnAccessIdentityProvider
+    accessIdentityProvidersUpdateAnAccessIdentityProvider,
+    accessIdentityProvidersListScimGroupResources,
+    accessIdentityProvidersListScimUserResources
   },
   accessKeyConfiguration: {
     accessKeyConfigurationGetTheAccessKeyConfiguration,
@@ -117428,6 +119193,7 @@ export const operationsByTag = {
     accessKeyConfigurationRotateAccessKeys
   },
   accessAuthenticationLogs: { accessAuthenticationLogsGetAccessAuthenticationLogs },
+  accessSCIMUpdateLogs: { accessScimUpdateLogsListAccessScimUpdateLogs },
   zeroTrustOrganization: {
     zeroTrustOrganizationGetYourZeroTrustOrganization,
     zeroTrustOrganizationCreateYourZeroTrustOrganization,
@@ -117577,6 +119343,7 @@ export const operationsByTag = {
   },
   workersAITextGeneration: {
     workersAiPostRunCfDeepseekAiDeepseekMath7bInstruct,
+    workersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32b,
     workersAiPostRunCfDefogSqlcoder7b2,
     workersAiPostRunCfFblgitUnaCybertron7bV2Bf16,
     workersAiPostRunCfGoogleGemma2bItLora,
@@ -117960,6 +119727,8 @@ export const operationsByTag = {
     r2PutBucketPublicPolicy,
     r2GetBucketLifecycleConfiguration,
     r2PutBucketLifecycleConfiguration,
+    r2GetBucketLockConfiguration,
+    r2PutBucketLockConfiguration,
     r2DeleteBucketSippyConfig,
     r2GetBucketSippyConfig,
     r2PutBucketSippyConfig,
@@ -118068,7 +119837,17 @@ export const operationsByTag = {
     getSecurityCenterIssueCountsByClass,
     getSecurityCenterIssueCountsBySeverity,
     getSecurityCenterIssueCountsByType,
-    archiveSecurityCenterInsight
+    archiveSecurityCenterInsightDeprecated,
+    getSecurityCenterInsights,
+    getSecurityCenterInsightCountsByClass,
+    getSecurityCenterInsightCountsBySeverity,
+    getSecurityCenterInsightCountsByType,
+    archiveSecurityCenterInsight,
+    getZoneSecurityCenterInsights,
+    getZoneSecurityCenterInsightCountsByClass,
+    getZoneSecurityCenterInsightCountsBySeverity,
+    getZoneSecurityCenterInsightCountsByType,
+    archiveZoneSecurityCenterInsight
   },
   passiveDNSByIP: { passiveDnsByIpGetPassiveDnsByIp },
   domainIntelligence: { domainIntelligenceGetDomainDetails, domainIntelligenceGetMultipleDomainDetails },
@@ -118289,6 +120068,7 @@ export const operationsByTag = {
     queuesAckMessages,
     queuesPullMessages
   },
+  r2Account: { r2GetAccountLevelMetrics },
   registrarDomains: { registrarDomainsListDomains, registrarDomainsGetDomain, registrarDomainsUpdateDomain },
   accountRequestTracer: { accountRequestTracerRequestTrace },
   accountRoles: { accountRolesListRoles, accountRolesRoleDetails },
@@ -118613,6 +120393,12 @@ export const operationsByTag = {
     userSAccountMembershipsUpdateMembership
   },
   radarAIBots: { radarGetAiBotsSummaryByUserAgent, radarGetAiBotsTimeseriesGroupByUserAgent },
+  radarAIInference: {
+    radarGetAiInferenceSummaryByModel,
+    radarGetAiInferenceSummaryByTask,
+    radarGetAiInferenceTimeseriesGroupByModel,
+    radarGetAiInferenceTimeseriesGroupByTask
+  },
   radarAnnotations: { radarGetAnnotations, radarGetAnnotationsOutages, radarGetAnnotationsOutagesTop },
   radarAS112: {
     radarGetDnsAs112TimeseriesByDnssec,
@@ -118634,14 +120420,12 @@ export const operationsByTag = {
     radarGetDnsAs112TopLocationsByIpVersion
   },
   radarAttacks: {
-    radarGetAttacksLayer3Summary,
     radarGetAttacksLayer3SummaryByBitrate,
     radarGetAttacksLayer3SummaryByDuration,
     radarGetAttacksLayer3SummaryByIpVersion,
     radarGetAttacksLayer3SummaryByProtocol,
     radarGetAttacksLayer3SummaryByVector,
     radarGetAttacksLayer3TimeseriesByBytes,
-    radarGetAttacksLayer3TimeseriesGroups,
     radarGetAttacksLayer3TimeseriesGroupByBitrate,
     radarGetAttacksLayer3TimeseriesGroupByDuration,
     radarGetAttacksLayer3TimeseriesGroupByIndustry,
@@ -118654,14 +120438,12 @@ export const operationsByTag = {
     radarGetAttacksLayer3TopOriginLocations,
     radarGetAttacksLayer3TopTargetLocations,
     radarGetAttacksLayer3TopVerticals,
-    radarGetAttacksLayer7Summary,
     radarGetAttacksLayer7SummaryByHttpMethod,
     radarGetAttacksLayer7SummaryByHttpVersion,
     radarGetAttacksLayer7SummaryByIpVersion,
     radarGetAttacksLayer7SummaryByManagedRules,
     radarGetAttacksLayer7SummaryByMitigationProduct,
     radarGetAttacksLayer7Timeseries,
-    radarGetAttacksLayer7TimeseriesGroup,
     radarGetAttacksLayer7TimeseriesGroupByHttpMethod,
     radarGetAttacksLayer7TimeseriesGroupByHttpVersion,
     radarGetAttacksLayer7TimeseriesGroupByIndustry,
@@ -118738,7 +120520,7 @@ export const operationsByTag = {
     radarGetEntitiesLocations,
     radarGetEntitiesLocationByAlpha2
   },
-  radarHttp: {
+  radarHTTP: {
     radarGetHttpSummaryByBotClass,
     radarGetHttpSummaryByDeviceType,
     radarGetHttpSummaryByHttpProtocol,
@@ -118779,7 +120561,7 @@ export const operationsByTag = {
     radarGetHttpTopLocationsByOperatingSystem,
     radarGetHttpTopLocationsByTlsVersion
   },
-  radarNetflows: {
+  radarNetFlows: {
     radarGetNetflowsSummary,
     radarGetNetflowsTimeseries,
     radarGetNetflowsTopAses,
@@ -118793,9 +120575,16 @@ export const operationsByTag = {
     radarGetQualitySpeedTopAses,
     radarGetQualitySpeedTopLocations
   },
-  radarRanking: { radarGetRankingDomainDetails, radarGetRankingDomainTimeseries, radarGetRankingTopDomains },
+  radarRanking: {
+    radarGetRankingDomainDetails,
+    radarGetRankingInternetServicesTimeseries,
+    radarGetRankingTopInternetServices,
+    radarGetRankingDomainTimeseries,
+    radarGetRankingTopDomains
+  },
+  radarRobotsTxt: { radarGetRobotsTxtTopDomainCategoriesByFilesParsed, radarGetRobotsTxtTopUserAgentsByDirective },
   radarSearch: { radarGetSearchGlobal },
-  radarTCPResetsTimeouts: { radarGetTcpResetsTimeoutsSummary, radarGetTcpResetsTimeoutsTimeseriesGroup },
+  radarTCPResetsAndTimeouts: { radarGetTcpResetsTimeoutsSummary, radarGetTcpResetsTimeoutsTimeseriesGroup },
   radarTrafficAnomalies: { radarGetTrafficAnomalies, radarGetTrafficAnomaliesTop },
   radarVerifiedBots: { radarGetVerifiedBotsTopByHttpRequests, radarGetVerifiedBotsTopCategoriesByHttpRequests },
   user: { userUserDetails, userEditUser },
@@ -119021,7 +120810,9 @@ export const operationsByTag = {
     customHostnameForAZoneCreateCustomHostname,
     customHostnameForAZoneDeleteCustomHostnameAndAnyIssuedSslCertificates,
     customHostnameForAZoneCustomHostnameDetails,
-    customHostnameForAZoneEditCustomHostname
+    customHostnameForAZoneEditCustomHostname,
+    customHostnameForAZoneDeleteSingleCertificateAndKeyInACustomHostname,
+    customHostnameForAZoneEditCustomCertificateCustomHostname
   },
   customHostnameFallbackOriginForAZone: {
     customHostnameFallbackOriginForAZoneDeleteFallbackOriginForCustomHostnames,
