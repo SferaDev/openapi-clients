@@ -1,5 +1,15 @@
 # vercel-api-js
 
+## 0.20.1
+
+### Patch Changes
+
+- 671ea25: Add integrationSSOSession field to project-related responses
+- 5423343: Add new field 'imageOptimizationNewPrice' to project-related API responses
+- 40d709b: Add new marketplace experimentation data to project responses
+- 30188f2: Add defaultResourceConfig field to multiple API endpoints
+- 05ee70e: Add new permissions for user, userConnection, webAuthn, and oauth2Connection
+
 ## 0.20.0
 
 ### Minor Changes
