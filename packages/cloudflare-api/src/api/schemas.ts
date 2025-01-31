@@ -1298,25 +1298,25 @@ export type AbuseReportsSubmitErrorResponse = {
 export type AbuseReportsSubmitReportRequest = {
   act: AbuseReportsReportType;
   /**
-   * Text not exceeding 100 characters
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 100
    * @minLength 1
    */
   address1?: string;
   /**
-   * The name of the copyright holder. Text not exceeding 60 characters.
+   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 60
    * @minLength 1
    */
   agent_name?: string;
   /**
-   * Can be 0 or 1
+   * Can be `0` for false or `1` for true
    */
-  agree?: 0 | 1;
+  agree: 0 | 1;
   /**
-   * Text not exceeding 255 characters
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 255
    * @minLength 1
@@ -1330,14 +1330,14 @@ export type AbuseReportsSubmitReportRequest = {
    */
   comments?: string;
   /**
-   * Text not exceeding 100 characters
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 100
    * @minLength 1
    */
   company?: string;
   /**
-   * Text not exceeding 255 characters
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 255
    * @minLength 1
@@ -1349,7 +1349,7 @@ export type AbuseReportsSubmitReportRequest = {
    */
   destination_ips?: string;
   /**
-   * A valid email of the abuse reporter
+   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
   email: string;
   /**
@@ -1365,7 +1365,7 @@ export type AbuseReportsSubmitReportRequest = {
    */
   justification?: string;
   /**
-   * Text not exceeding 255 characters
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 255
    * @minLength 1
@@ -1377,7 +1377,7 @@ export type AbuseReportsSubmitReportRequest = {
    */
   ncsei_subject_representation?: boolean;
   /**
-   * Text not exceeding 255 characters
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 255
    * @minLength 1
@@ -1398,14 +1398,14 @@ export type AbuseReportsSubmitReportRequest = {
    */
   source_ips?: string;
   /**
-   * Text not exceeding 255 characters
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 255
    * @minLength 1
    */
   state?: string;
   /**
-   * Text not exceeding 20 characters
+   * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 20
    * @minLength 1
@@ -1441,7 +1441,7 @@ export type AbuseReportsSubmitReportRequest = {
   trademark_symbol?: string;
   /**
    * A list of valid URLs separated by ‘
-   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique
+   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
   urls: string;
 };
@@ -1489,7 +1489,7 @@ export type AccessAccessRequests = {
   created_at?: AccessTimestamp;
   ip_address?: AccessIp;
   ray_id?: AccessRayId;
-  user_email?: AccessSchemasEmail;
+  user_email?: AccessComponentsSchemasEmail;
 };
 
 export type AccessAccessRequestsComponentsSchemasResponseCollection = AccessApiResponseCommon & {
@@ -2215,7 +2215,7 @@ export type AccessButtonTextColor = string;
 
 export type AccessCa = {
   aud?: AccessAud;
-  id?: AccessId;
+  id?: AccessSchemasId;
   public_key?: AccessPublicKey;
 };
 
@@ -2349,6 +2349,13 @@ export type AccessCertificatesComponentsSchemasSingleResponse2 = AccessApiRespon
 };
 
 /**
+ * The unique Cloudflare-generated Id of the SCIM Group resource; also known as the "Id".
+ *
+ * @example a2abeb50-59c9-4c01-8c5c-963d3bf5700f
+ */
+export type AccessCfResourceId = string;
+
+/**
  * The Client ID for the service token. Access will check for this value in the `CF-Access-Client-ID` request header.
  *
  * @example 88bf3b6d86161464f6509f7219099e57.access.example.com
@@ -2395,6 +2402,24 @@ export type AccessComponentsSchemasCertificates = {
  * @example test.example.com/admin
  */
 export type AccessComponentsSchemasDomain = string;
+
+/**
+ * The email address of the authenticating user.
+ *
+ * @example user@example.com
+ * @format email
+ */
+export type AccessComponentsSchemasEmail = string;
+
+export type AccessComponentsSchemasGroups = {
+  created_at?: AccessTimestamp;
+  exclude?: AccessExclude;
+  id?: AccessUuid;
+  include?: AccessInclude;
+  name?: AccessGroupsComponentsSchemasName;
+  require?: AccessRequire;
+  updated_at?: AccessTimestamp;
+};
 
 export type AccessComponentsSchemasIdResponse = AccessApiResponseCommon & {
   result?: {
@@ -2675,6 +2700,14 @@ export type AccessDeviceSession = {
 };
 
 /**
+ * The chronological order used to sort the logs.
+ *
+ * @default desc
+ * @example desc
+ */
+export type AccessDirection = 'desc' | 'asc';
+
+/**
  * The duration the DoH JWT is valid for. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.  Note that the maximum duration for this setting is the same as the key rotation period on the account. Default expiration is 24h
  *
  * @example 800h
@@ -2711,10 +2744,9 @@ export type AccessDomainRule = {
 export type AccessDuration = string;
 
 /**
- * The email of the user.
+ * The email address of the SCIM User resource.
  *
- * @example jdoe@example.com
- * @format email
+ * @example john.smith@example.com
  */
 export type AccessEmail = string;
 
@@ -2782,6 +2814,13 @@ export type AccessEveryoneRule = {
  * Rules evaluated with a NOT logical operator. To match a policy, a user cannot meet any of the Exclude rules.
  */
 export type AccessExclude = AccessRule[];
+
+/**
+ * The IdP-generated Id of the SCIM resource.
+ *
+ * @example all_employees
+ */
+export type AccessExternalId = string;
 
 /**
  * Create Allow or Block policies which evaluate the user based on custom criteria.
@@ -3160,15 +3199,29 @@ export type AccessGoogleApps = {
 };
 
 export type AccessGroups = {
-  created_at?: AccessTimestamp;
-  exclude?: AccessExclude;
-  id?: AccessUuid;
-  include?: AccessInclude;
-  is_default?: AccessRequire;
-  name?: AccessGroupsComponentsSchemasName;
-  require?: AccessRequire;
-  updated_at?: AccessTimestamp;
+  /**
+   * The display name of the SCIM Group resource.
+   *
+   * @example ALL EMPLOYEES
+   */
+  displayName?: string;
+  externalId?: AccessExternalId;
+  id?: AccessId;
+  meta?: AccessMeta;
+  /**
+   * The list of URIs which indicate the attributes contained within a SCIM resource.
+   *
+   * @example urn:ietf:params:scim:schemas:core:2.0:Group
+   */
+  schemas?: string[];
 };
+
+/**
+ * The display name of the SCIM Group resource.
+ *
+ * @example ALL_EMPLOYEES
+ */
+export type AccessGroupsName = string;
 
 /**
  * The name of the Access group.
@@ -3178,15 +3231,15 @@ export type AccessGroups = {
 export type AccessGroupsComponentsSchemasName = string;
 
 export type AccessGroupsComponentsSchemasResponseCollection = AccessApiResponseCollection & {
-  result?: AccessSchemasGroups[];
+  result?: AccessComponentsSchemasGroups[];
 };
 
 export type AccessGroupsComponentsSchemasSingleResponse = AccessApiResponseSingle & {
-  result?: AccessGroups;
+  result?: AccessSchemasGroups;
 };
 
 export type AccessGroupsComponentsSchemasSingleResponse2 = AccessApiResponseSingle & {
-  result?: AccessSchemasGroups;
+  result?: AccessComponentsSchemasGroups;
 };
 
 /**
@@ -3226,10 +3279,9 @@ export type AccessHeaderBgColor = string;
 export type AccessHttpOnlyCookieAttribute = boolean;
 
 /**
- * The ID of the CA.
+ * The unique Cloudflare-generated Id of the SCIM resource.
  *
- * @example 7eddae4619b50ab1361ba8ae9bd72269a432fea041529ed9
- * @maxLength 48
+ * @example bd97ef8d-7986-43e3-9ee0-c25dda33e4b0
  */
 export type AccessId = string;
 
@@ -3416,6 +3468,21 @@ export type AccessIdentityProvidersComponentsSchemasSingleResponse = AccessApiRe
 };
 
 /**
+ * The unique Id of the IdP that has SCIM enabled.
+ *
+ * @example df7e2w5f-02b7-4d9d-af26-8d1988fca630
+ * @example 0194ae2c-efcf-7cfb-8884-055f1a161fa5
+ */
+export type AccessIdpId = string[];
+
+/**
+ * The IdP-generated Id of the SCIM Group resource; also known as the "external Id".
+ *
+ * @example all_employees
+ */
+export type AccessIdpResourceId = string;
+
+/**
  * The URL of the image shown on the landing page.
  *
  * @example https://www.cloudflare.com/img/logo-web-badges/cf-logo-on-white-bg.svg
@@ -3567,6 +3634,14 @@ export type AccessLastSeenIdentityResponse = AccessApiResponseSingle & {
  */
 export type AccessLastSuccessfulLogin = string;
 
+/**
+ * The maximum number of update logs to retrieve.
+ *
+ * @default 20
+ * @example 10
+ */
+export type AccessLimit = number;
+
 export type AccessLinkedin = {
   /**
    * The configuration parameters for the identity provider. To view the required parameters for a specific provider, refer to our [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
@@ -3688,6 +3763,26 @@ export type AccessMessages = {
   code: number;
   message: string;
 }[];
+
+/**
+ * The metadata of the SCIM resource.
+ */
+export type AccessMeta = {
+  /**
+   * The timestamp of when the SCIM resource was created.
+   *
+   * @example 2025-01-01T00:00:00Z
+   * @format date-time
+   */
+  created?: string;
+  /**
+   * The timestamp of when the SCIM resource was last modified.
+   *
+   * @example 2025-01-02T00:00:00Z
+   * @format date-time
+   */
+  lastModified?: string;
+};
 
 /**
  * The name of your Zero Trust organization.
@@ -4384,9 +4479,15 @@ export type AccessPolicyCheckResponse = AccessApiResponseSingle & {
  */
 export type AccessPolicyComponentsSchemasName = string;
 
-export type AccessPolicyInitResp = {
-  id?: AccessPolicyTestId;
-  status?: AccessStatus;
+export type AccessPolicyInitReq = {
+  policies?: AccessPolicyReq[];
+};
+
+export type AccessPolicyInitResp = AccessApiResponseSingle & {
+  result?: {
+    id?: AccessPolicyTestId;
+    status?: AccessStatus;
+  };
 };
 
 export type AccessPolicyReq = AccessBasePolicyReq & {
@@ -4415,29 +4516,33 @@ export type AccessPolicyResp = AccessBasePolicyResp & {
  */
 export type AccessPolicyTestId = string;
 
-export type AccessPolicyUpdateResp = {
-  id?: AccessPolicyTestId;
-  pages_processed?: AccessPagesProcessed;
-  percent_approved?: AccessPercentApproved;
-  percent_blocked?: AccessPercentBlocked;
-  percent_users_processed?: AccessPercentUsersProcessed;
-  status?: AccessUpdateStatus;
-  total_users?: AccessTotalUsers;
-  users_approved?: AccessUsersApproved;
-  users_blocked?: AccessUsersBlocked;
+export type AccessPolicyUpdateResp = AccessApiResponseSingle & {
+  result?: {
+    id?: AccessPolicyTestId;
+    pages_processed?: AccessPagesProcessed;
+    percent_approved?: AccessPercentApproved;
+    percent_blocked?: AccessPercentBlocked;
+    percent_users_processed?: AccessPercentUsersProcessed;
+    status?: AccessUpdateStatus;
+    total_users?: AccessTotalUsers;
+    users_approved?: AccessUsersApproved;
+    users_blocked?: AccessUsersBlocked;
+  };
 };
 
 export type AccessPolicyUsers = {
-  email?: AccessEmail;
+  email?: AccessSchemasEmail;
   id?: AccessUuid;
   name?: AccessUsersComponentsSchemasName;
   status?: AccessUserResult;
 };
 
-/**
- * Page of processed users.
- */
-export type AccessPolicyUsersResp = AccessPolicyUsers[];
+export type AccessPolicyUsersResp = AccessApiResponseSingle & {
+  /**
+   * Page of processed users.
+   */
+  result?: AccessPolicyUsers[];
+};
 
 /**
  * The port that the targets use for the chosen communication protocol. A port cannot be assigned to multiple protocols.
@@ -4489,9 +4594,60 @@ export type AccessPurposeJustificationRequired = boolean;
 export type AccessRayId = string;
 
 /**
+ * The request method of the SCIM request.
+ *
+ * @example DELETE
+ * @example PATCH
+ */
+export type AccessRequestMethod = ('DELETE' | 'PATCH' | 'POST' | 'PUT')[];
+
+/**
+ * The unique Cloudflare-generated Id of the SCIM resource.
+ *
+ * @example bd97ef8d-7986-43e3-9ee0-c25dda33e4b0
+ */
+export type AccessRequestsCfResourceId = string;
+
+/**
+ * The IdP-generated Id of the SCIM resource.
+ */
+export type AccessRequestsIdpResourceId = string;
+
+/**
+ * The status of the SCIM request.
+ *
+ * @example FAILURE
+ * @example SUCCESS
+ */
+export type AccessRequestsStatus = ('FAILURE' | 'SUCCESS')[];
+
+/**
  * Rules evaluated with an AND logical operator. To match a policy, a user must meet all of the Require rules.
  */
 export type AccessRequire = AccessRule[];
+
+/**
+ * The display name of the SCIM Group resource.
+ *
+ * @example ALL_EMPLOYEES
+ */
+export type AccessResourceGroupName = string;
+
+/**
+ * The resource type of the SCIM request.
+ *
+ * @example USER
+ * @example GROUP
+ */
+export type AccessResourceType = ('USER' | 'GROUP')[];
+
+/**
+ * The email address of the SCIM User resource.
+ *
+ * @example john.smith@example.com
+ * @format email
+ */
+export type AccessResourceUserEmail = string;
 
 export type AccessResponseCollection = AccessApiResponseCollection & {
   result?: (
@@ -4513,6 +4669,71 @@ export type AccessResponseCollection = AccessApiResponseCollection & {
 
 export type AccessResponseCollectionHostnames = AccessApiResponseCollection & {
   result?: AccessSettings[];
+};
+
+export type AccessResponses = {
+  /**
+   * The unique Cloudflare-generated Id of the SCIM resource.
+   *
+   * @example bd97ef8d-7986-43e3-9ee0-c25dda33e4b0
+   */
+  cf_resource_id?: string;
+  /**
+   * The error message which is generated when the status of the SCIM request is 'FAILURE'.
+   *
+   * @example Invalid JSON body
+   */
+  error_description?: string;
+  /**
+   * The unique Id of the IdP that has SCIM enabled.
+   *
+   * @example df7e2w5f-02b7-4d9d-af26-8d1988fca630
+   */
+  idp_id?: string;
+  /**
+   * The IdP-generated Id of the SCIM resource.
+   *
+   * @example all_employees
+   */
+  idp_resource_id?: string;
+  logged_at?: AccessTimestamp;
+  /**
+   * The JSON-encoded string body of the SCIM request.
+   *
+   * @example {}}
+   */
+  request_body?: string;
+  /**
+   * The request method of the SCIM request.
+   *
+   * @example DELETE
+   */
+  request_method?: string;
+  /**
+   * The display name of the SCIM Group resource if it exists.
+   *
+   * @example ALL_EMPLOYEES
+   */
+  resource_group_name?: string;
+  /**
+   * The resource type of the SCIM request.
+   *
+   * @example GROUP
+   */
+  resource_type?: string;
+  /**
+   * The email address of the SCIM User resource if it exists.
+   *
+   * @example john.smith@example.com
+   * @format email
+   */
+  resource_user_email?: string;
+  /**
+   * The status of the SCIM request.
+   *
+   * @example FAILURE
+   */
+  status?: string;
 };
 
 export type AccessResultInfo = {
@@ -5217,9 +5438,9 @@ export type AccessSchemasDevicePostureRule = {
 export type AccessSchemasDomain = string;
 
 /**
- * The email address of the authenticating user.
+ * The email of the user.
  *
- * @example user@example.com
+ * @example jdoe@example.com
  * @format email
  */
 export type AccessSchemasEmail = string;
@@ -5497,14 +5718,23 @@ export type AccessSchemasGroups = {
   exclude?: AccessExclude;
   id?: AccessUuid;
   include?: AccessInclude;
+  is_default?: AccessRequire;
   name?: AccessGroupsComponentsSchemasName;
   require?: AccessRequire;
   updated_at?: AccessTimestamp;
 };
 
+/**
+ * The ID of the CA.
+ *
+ * @example 7eddae4619b50ab1361ba8ae9bd72269a432fea041529ed9
+ * @maxLength 48
+ */
+export type AccessSchemasId = string;
+
 export type AccessSchemasIdResponse = AccessApiResponseSingle & {
   result?: {
-    id?: AccessId;
+    id?: AccessSchemasId;
   };
 };
 
@@ -6226,7 +6456,7 @@ export type AccessSchemasPrecedence = number;
 export type AccessSchemasRequire = AccessRule[];
 
 export type AccessSchemasResponseCollection = AccessApiResponseCollection & {
-  result?: AccessGroups[];
+  result?: AccessSchemasGroups[];
 };
 
 export type AccessSchemasSaasProps = {
@@ -6557,6 +6787,20 @@ export type AccessSchemasType = 'identity_denied' | 'forbidden';
  */
 export type AccessSchemasUserSeatExpirationInactiveTime = string;
 
+export type AccessSchemasUsers = {
+  access_seat?: AccessSchemasAccessSeat;
+  active_device_count?: AccessActiveDeviceCount;
+  created_at?: AccessTimestamp;
+  email?: AccessSchemasEmail;
+  gateway_seat?: AccessSchemasGatewaySeat;
+  id?: AccessUuid;
+  last_successful_login?: AccessLastSuccessfulLogin;
+  name?: AccessUsersComponentsSchemasName;
+  seat_uid?: AccessSchemasSeatUid;
+  uid?: AccessUid;
+  updated_at?: AccessTimestamp;
+};
+
 /**
  * The UUID of the policy
  *
@@ -6836,6 +7080,18 @@ export type AccessScimConfigSingleAuthentication =
   | AccessScimConfigAuthenticationOauth2
   | AccessScimConfigAuthenticationAccessServiceToken;
 
+export type AccessScimGroupsResponse = AccessApiResponseCollection & {
+  result?: AccessGroups[];
+};
+
+export type AccessScimUpdateLogsResponse = AccessApiResponseCollection & {
+  result?: AccessResponses[];
+};
+
+export type AccessScimUsersResponse = AccessApiResponseCollection & {
+  result?: AccessUsers[];
+};
+
 export type AccessSeat = {
   access_seat: AccessAccessSeat;
   gateway_seat: AccessGatewaySeat;
@@ -6970,6 +7226,14 @@ export type AccessSettings = {
    */
   hostname: string;
 };
+
+/**
+ * the timestamp of the earliest update log.
+ *
+ * @example 2025-01-01T00:00:00Z
+ * @format date-time
+ */
+export type AccessSince = string;
 
 export type AccessSingleResponse = AccessApiResponseSingle & {
   result?: AccessOrganizations;
@@ -7147,6 +7411,14 @@ export type AccessUiReadOnlyToggleReason = string;
 export type AccessUid = string;
 
 /**
+ * the timestamp of the most-recent update log.
+ *
+ * @example 2025-01-02T00:00:00Z
+ * @format date-time
+ */
+export type AccessUntil = string;
+
+/**
  * The status of the policy test.
  *
  * @example complete
@@ -7168,6 +7440,13 @@ export type AccessUserResult = 'approved' | 'blocked';
 export type AccessUserSeatExpirationInactiveTime = string;
 
 /**
+ * The username of the SCIM User resource.
+ *
+ * @example John Smith
+ */
+export type AccessUsername = string;
+
+/**
  * Contains the Unix usernames that may be used when connecting over SSH.
  *
  * @example root
@@ -7176,18 +7455,75 @@ export type AccessUserSeatExpirationInactiveTime = string;
 export type AccessUsernames = string[];
 
 export type AccessUsers = {
-  access_seat?: AccessSchemasAccessSeat;
-  active_device_count?: AccessActiveDeviceCount;
-  created_at?: AccessTimestamp;
-  email?: AccessEmail;
-  gateway_seat?: AccessSchemasGatewaySeat;
-  id?: AccessUuid;
-  last_successful_login?: AccessLastSuccessfulLogin;
-  name?: AccessUsersComponentsSchemasName;
-  seat_uid?: AccessSchemasSeatUid;
-  uid?: AccessUid;
-  updated_at?: AccessTimestamp;
+  /**
+   * Determines the status of the SCIM User resource.
+   *
+   * @example true
+   */
+  active?: boolean;
+  /**
+   * The name of the SCIM User resource.
+   *
+   * @example John Smith
+   */
+  displayName?: string;
+  emails?: {
+    /**
+     * Indicates if the email address is the primary email belonging to the SCIM User resource.
+     *
+     * @example true
+     */
+    primary?: boolean;
+    /**
+     * Indicates the type of the email address.
+     *
+     * @example work
+     */
+    type?: string;
+    /**
+     * The email address of the SCIM User resource.
+     *
+     * @example john.smith@example.com
+     * @format email
+     */
+    value?: string;
+  }[];
+  /**
+   * The IdP-generated Id of the SCIM resource.
+   *
+   * @example john_smith
+   */
+  externalId?: string;
+  id?: AccessId;
+  meta?: AccessMeta;
+  /**
+   * The list of URIs which indicate the attributes contained within a SCIM resource.
+   *
+   * @example urn:ietf:params:scim:schemas:core:2.0:User
+   */
+  schemas?: string[];
 };
+
+/**
+ * The unique Cloudflare-generated Id of the SCIM User resource; also known as the "Id".
+ *
+ * @example bd97ef8d-7986-43e3-9ee0-c25dda33e4b0
+ */
+export type AccessUsersCfResourceId = string;
+
+/**
+ * The IdP-generated Id of the SCIM User resource; also known as the "external Id".
+ *
+ * @example john_smith_01
+ */
+export type AccessUsersIdpResourceId = string;
+
+/**
+ * The name of the SCIM User resource.
+ *
+ * @example John Smith
+ */
+export type AccessUsersName = string;
 
 /**
  * The number of (processed) users approved based on policy evaluation results.
@@ -7230,7 +7566,7 @@ export type AccessUsersComponentsSchemasResponseCollection = AccessApiResponseCo
     total_count?: void;
   };
 } & {
-  result?: AccessUsers[];
+  result?: AccessSchemasUsers[];
 };
 
 /**
@@ -26331,6 +26667,7 @@ export type MagicLanDhcpServer = {
   dhcp_pool_end?: MagicIpAddress;
   dhcp_pool_start?: MagicIpAddress;
   dns_server?: MagicIpAddress;
+  dns_servers?: MagicIpAddress[];
   /**
    * Mapping of MAC addresses to IP addresses
    *
@@ -29368,6 +29705,14 @@ export type PagesStage = {
 export type R2AccountIdentifier = string;
 
 /**
+ * Metrics based on the class they belong to
+ */
+export type R2AccountLevelMetrics = {
+  infrequentAccess?: R2ClassBasedMetrics;
+  standard?: R2ClassBasedMetrics;
+};
+
+/**
  * @example {"domain":"prefix.example-domain.com","enabled":true,"zoneId":"36ca64a6d92827b8a6b90be344bb1bfd"}
  */
 export type R2AddCustomDomainRequest = {
@@ -29431,6 +29776,28 @@ export type R2BucketConfig = {
   queues?: R2QueuesConfig[];
 };
 
+export type R2BucketLockRule = {
+  condition: R2LockRuleAgeCondition | R2LockRuleDateCondition | R2LockRuleIndefiniteCondition;
+  /**
+   * Whether or not this rule is in effect
+   */
+  enabled: boolean;
+  /**
+   * Unique identifier for this rule
+   *
+   * @example Lock all objects for 24 hours
+   */
+  id: string;
+  /**
+   * Rule will only apply to objects/uploads in the bucket that start with the given prefix, an empty prefix can be provided to scope rule to all objects/uploads
+   */
+  prefix?: string;
+};
+
+export type R2BucketLockRuleConfig = {
+  rules?: R2BucketLockRule[];
+};
+
 /**
  * Location of the bucket
  */
@@ -29445,6 +29812,14 @@ export type R2BucketLocation = 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam';
  * @pattern ^[a-z0-9][a-z0-9-]*[a-z0-9]
  */
 export type R2BucketName = string;
+
+/**
+ * Metrics based on what state they are in(uploaded or published)
+ */
+export type R2ClassBasedMetrics = {
+  published?: R2ObjectSizeMetrics;
+  uploaded?: R2ObjectSizeMetrics;
+};
 
 export type R2CorsRule = {
   /**
@@ -29777,6 +30152,35 @@ export type R2ListCustomDomainsResponse = {
 };
 
 /**
+ * Condition to apply a lock rule to an object for how long in seconds
+ */
+export type R2LockRuleAgeCondition = {
+  /**
+   * @example 100
+   */
+  maxAgeSeconds: number;
+  type: 'Age';
+};
+
+/**
+ * Condition to apply a lock rule to an object until a specific date
+ */
+export type R2LockRuleDateCondition = {
+  /**
+   * @format date
+   */
+  date: string;
+  type: 'Date';
+};
+
+/**
+ * Condition to apply a lock rule indefinitely
+ */
+export type R2LockRuleIndefiniteCondition = {
+  type: 'Indefinite';
+};
+
+/**
  * @example {"bucketId":"0113a9e4549cf9b1ff1bf56e04da0cef","domain":"pub-0113a9e4549cf9b1ff1bf56e04da0cef.r2.dev","enabled":true}
  */
 export type R2ManagedDomainResponse = {
@@ -29797,6 +30201,24 @@ export type R2ManagedDomainResponse = {
 };
 
 export type R2Messages = string[];
+
+/**
+ * Metrics on number of objects/amount of storage used
+ */
+export type R2ObjectSizeMetrics = {
+  /**
+   * Amount of
+   */
+  metadataSize?: number;
+  /**
+   * Number of objects stored
+   */
+  objects?: number;
+  /**
+   * Amount of storage used by object data
+   */
+  payloadSize?: number;
+};
 
 /**
  * Queue ID
@@ -40111,6 +40533,33 @@ export type TlsCertificatesAndHostnamesCustomHostnameFallbackOriginComponentsSch
   | 'deployment_timed_out'
   | 'deletion_timed_out';
 
+export type TlsCertificatesAndHostnamesCustomCertAndKey = {
+  /**
+     * If a custom uploaded certificate is used.
+     *
+     * @example -----BEGIN CERTIFICATE-----
+    MIIDdjCCAl6gAwIBAgIJAPnMg0Fs+/B0MA0GCSqGSIb3DQEBCwUAMFsx...
+    -----END CERTIFICATE-----
+     */
+  custom_certificate: string;
+  /**
+     * The key for a custom uploaded certificate.
+     *
+     * @example -----BEGIN PRIVATE KEY-----
+    MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC/SCB5...
+    -----END PRIVATE KEY-----
+     */
+  custom_key: string;
+};
+
+/**
+ * Array of custom certificate and key pairs (1 or 2 pairs allowed)
+ *
+ * @maxItems 2
+ * @minItems 1
+ */
+export type TlsCertificatesAndHostnamesCustomCertBundle = TlsCertificatesAndHostnamesCustomCertAndKey[];
+
 export type TlsCertificatesAndHostnamesCustomHostnameResponseCollection =
   TlsCertificatesAndHostnamesApiResponseCollection & {
     result?: TlsCertificatesAndHostnamesCustomHostname[];
@@ -41269,6 +41718,7 @@ export type TlsCertificatesAndHostnamesSslpost = {
    * @example false
    */
   cloudflare_branding?: boolean;
+  custom_cert_bundle?: TlsCertificatesAndHostnamesCustomCertBundle;
   /**
    * If a custom uploaded certificate is used.
    *
@@ -49853,7 +50303,7 @@ export type ZonesCacheRulesOriginH2MaxStreams = {
  * Value of the Origin H2 Max Streams Setting.
  *
  * @example 50
- * @maximum 200
+ * @maximum 1000
  * @minimum 1
  */
 export type ZonesCacheRulesOriginH2MaxStreamsValue = number;
