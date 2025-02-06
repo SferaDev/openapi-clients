@@ -16286,7 +16286,7 @@ export type ReportTelephoneQueryParams = {
    *
    * `3` - SIP Connected Audio
    *
-   * @example 33
+   * @example 3
    * @default 1
    */
   type?: '1' | '2' | '3';
@@ -16335,7 +16335,7 @@ export type ReportTelephoneQueryParams = {
    */
   page_number?: number;
   /**
-   * The next page token is used to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. The expiration period for this token is 15 minutes.
+   * Use the next page token to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. This token's expiration period is 15 minutes.
    *
    * @example b43YBRLJFg3V4vsSpxvGdKIGtNbxn9h9If2
    */
@@ -16385,6 +16385,8 @@ export type ReportTelephoneResponse = {
   total_records?: number;
   /**
    * Array of telephony objects.
+   *
+   * @maxItems 300
    */
   telephony_usage?: {
     /**
@@ -16518,7 +16520,7 @@ export type ReportTelephoneVariables = {
  *
  * **Granular Scopes:** `report:read:telephone:admin`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
 export const reportTelephone = (variables: ReportTelephoneVariables, signal?: AbortSignal) =>
   fetch<ReportTelephoneResponse, ReportTelephoneError, undefined, {}, ReportTelephoneQueryParams, {}>({
