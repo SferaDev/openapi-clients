@@ -1,5 +1,15 @@
 # zoom-api-js
 
+## 0.4.0
+
+### Minor Changes
+
+- 547d18b: Add new endpoint to list SIP phones on an account
+
+### Patch Changes
+
+- fb17c28: Fix a typo in the example for telephony report
+
 ## 0.3.2
 
 ### Patch Changes
