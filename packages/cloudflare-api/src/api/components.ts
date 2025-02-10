@@ -5234,6 +5234,7 @@ export type AigConfigListGatewayResponse = {
   result: {
     account_id: string;
     account_tag: string;
+    authentication?: boolean;
     cache_invalidate_on_update: boolean;
     /**
      * @minimum 0
@@ -5257,6 +5258,11 @@ export type AigConfigListGatewayResponse = {
      * @format uuid
      */
     internal_id: string;
+    /**
+     * @maximum 10000000
+     * @minimum 10000
+     */
+    log_management?: number | null;
     logpush?: boolean;
     /**
      * @maxLength 1024
@@ -5324,6 +5330,7 @@ export type AigConfigCreateGatewayResponse = {
   result: {
     account_id: string;
     account_tag: string;
+    authentication?: boolean;
     cache_invalidate_on_update: boolean;
     /**
      * @minimum 0
@@ -5347,6 +5354,11 @@ export type AigConfigCreateGatewayResponse = {
      * @format uuid
      */
     internal_id: string;
+    /**
+     * @maximum 10000000
+     * @minimum 10000
+     */
+    log_management?: number | null;
     logpush?: boolean;
     /**
      * @maxLength 1024
@@ -5371,6 +5383,7 @@ export type AigConfigCreateGatewayResponse = {
 };
 
 export type AigConfigCreateGatewayRequestBody = {
+  authentication?: boolean;
   cache_invalidate_on_update: boolean;
   /**
    * @minimum 0
@@ -5386,6 +5399,11 @@ export type AigConfigCreateGatewayRequestBody = {
    * @pattern ^[a-z0-9_]+(?:-[a-z0-9_]+)*$
    */
   id: string;
+  /**
+   * @maximum 10000000
+   * @minimum 10000
+   */
+  log_management?: number | null;
   logpush?: boolean;
   /**
    * @maxLength 1024
@@ -7153,6 +7171,7 @@ export type AigConfigDeleteGatewayResponse = {
   result: {
     account_id: string;
     account_tag: string;
+    authentication?: boolean;
     cache_invalidate_on_update: boolean;
     /**
      * @minimum 0
@@ -7176,6 +7195,11 @@ export type AigConfigDeleteGatewayResponse = {
      * @format uuid
      */
     internal_id: string;
+    /**
+     * @maximum 10000000
+     * @minimum 10000
+     */
+    log_management?: number | null;
     logpush?: boolean;
     /**
      * @maxLength 1024
@@ -7248,6 +7272,7 @@ export type AigConfigFetchGatewayResponse = {
   result: {
     account_id: string;
     account_tag: string;
+    authentication?: boolean;
     cache_invalidate_on_update: boolean;
     /**
      * @minimum 0
@@ -7271,6 +7296,11 @@ export type AigConfigFetchGatewayResponse = {
      * @format uuid
      */
     internal_id: string;
+    /**
+     * @maximum 10000000
+     * @minimum 10000
+     */
+    log_management?: number | null;
     logpush?: boolean;
     /**
      * @maxLength 1024
@@ -7360,6 +7390,7 @@ export type AigConfigUpdateGatewayResponse = {
   result: {
     account_id: string;
     account_tag: string;
+    authentication?: boolean;
     cache_invalidate_on_update: boolean;
     /**
      * @minimum 0
@@ -7383,6 +7414,11 @@ export type AigConfigUpdateGatewayResponse = {
      * @format uuid
      */
     internal_id: string;
+    /**
+     * @maximum 10000000
+     * @minimum 10000
+     */
+    log_management?: number | null;
     logpush?: boolean;
     /**
      * @maxLength 1024
@@ -7407,12 +7443,18 @@ export type AigConfigUpdateGatewayResponse = {
 };
 
 export type AigConfigUpdateGatewayRequestBody = {
+  authentication?: boolean;
   cache_invalidate_on_update: boolean;
   /**
    * @minimum 0
    */
   cache_ttl: number | null;
   collect_logs: boolean;
+  /**
+   * @maximum 10000000
+   * @minimum 10000
+   */
+  log_management?: number | null;
   logpush?: boolean;
   /**
    * @maxLength 1024
@@ -40867,7 +40909,7 @@ export const cloudflareD1DeleteDatabase = (variables: CloudflareD1DeleteDatabase
 
 export type CloudflareD1GetDatabasePathParams = {
   accountId: Schemas.D1AccountIdentifier;
-  databaseId: Schemas.D1DatabaseIdentifier;
+  databaseId: Schemas.D1DatabaseIdentifier | Schemas.D1DatabaseName;
 };
 
 export type CloudflareD1GetDatabaseError = Fetcher.ErrorWrapper<{
@@ -64059,12 +64101,6 @@ export type UrlscannerSearchScansQueryParams = {
    */
   ip?: string;
   /**
-   * Filter scans by Autonomous System Number (ASN) of _any_ request made by the webpage.
-   *
-   * @example 13335
-   */
-  asn?: string;
-  /**
    * Filter scans by hash of any html/js/css request made by the webpage.
    */
   hash?: string;
@@ -66215,7 +66251,7 @@ export type UrlscannerGetResponseV2Variables = {
 } & FetcherExtraProps;
 
 /**
- * Returns the raw response of the network request. If HTML, a plain text response will be returned.
+ * Returns the raw response of the network request. Find the `response_id` in the `data.requests.response.hash`.
  */
 export const urlscannerGetResponseV2 = (variables: UrlscannerGetResponseV2Variables, signal?: AbortSignal) =>
   fetch<undefined, UrlscannerGetResponseV2Error, undefined, {}, {}, UrlscannerGetResponseV2PathParams>({
@@ -67153,7 +67189,7 @@ export type UrlscannerSearchScansV2Variables = {
 } & FetcherExtraProps;
 
 /**
- * Use a subset of ElasticSearch Query syntax to filter scans. Some example queries:<br/> <br/>- 'page.domain:microsoft AND verdicts.malicious:true AND NOT page.domain:microsoft.com': malicious scans whose hostname starts with "microsoft".<br/>- 'apikey:me AND date:[2024-01 TO 2024-10]': my scans from 2024 January to 2024 October.<br/>- 'page.domain:(blogspot OR www.blogspot)': Searches for scans whose main domain starts with "blogspot" or with "www.blogspot"<br/>- 'page.asn:AS24940 AND hash:xxx': Websites hosted in AS24940 where a resource with the given hash was downloaded.
+ * Use a subset of ElasticSearch Query syntax to filter scans. Some example queries:<br/> <br/>- 'path:"/bundles/jquery.js"': Searches for scans who requested resources with the given path.<br/>- 'page.asn:AS24940 AND hash:xxx': Websites hosted in AS24940 where a resource with the given hash was downloaded.<br/>- 'page.domain:microsoft* AND verdicts.malicious:true AND NOT page.domain:microsoft.com': malicious scans whose hostname starts with "microsoft".<br/>- 'apikey:me AND date:[2025-01 TO 2025-02]': my scans from 2025 January to 2025 February.
  */
 export const urlscannerSearchScansV2 = (variables: UrlscannerSearchScansV2Variables, signal?: AbortSignal) =>
   fetch<
@@ -71014,7 +71050,8 @@ export type WorCreateNewWorkflowInstanceResponse = {
 
 export type WorCreateNewWorkflowInstanceRequestBody = {
   /**
-   * @maxLength 64
+   * @maximum 64
+   * @minimum 1
    * @pattern ^[a-zA-Z0-9_][a-zA-Z0-9-_]*$
    */
   instance_id?: string;
@@ -103088,50 +103125,6 @@ export const customPagesForAZoneUpdateACustomPage = (
     CustomPagesForAZoneUpdateACustomPagePathParams
   >({ url: '/zones/{zoneIdentifier}/custom_pages/{identifier}', method: 'put', ...variables, signal });
 
-export type SslTlsModeRecommendationSslTlsRecommendationPathParams = {
-  zoneIdentifier: Schemas.LegacyJhsIdentifier;
-};
-
-export type SslTlsModeRecommendationSslTlsRecommendationError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: (Schemas.LegacyJhsApiResponseSingle & {
-    result?: {
-      id?: Schemas.LegacyJhsId;
-      modified_on?: Schemas.LegacyJhsTimestamp;
-      value?: Schemas.LegacyJhsValue;
-    };
-  }) &
-    Schemas.LegacyJhsApiResponseCommonFailure;
-}>;
-
-export type SslTlsModeRecommendationSslTlsRecommendationResponse = Schemas.LegacyJhsApiResponseSingle & {
-  result?: {
-    id?: Schemas.LegacyJhsId;
-    modified_on?: Schemas.LegacyJhsTimestamp;
-    value?: Schemas.LegacyJhsValue;
-  };
-};
-
-export type SslTlsModeRecommendationSslTlsRecommendationVariables = {
-  pathParams: SslTlsModeRecommendationSslTlsRecommendationPathParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieve the SSL/TLS Recommender's recommendation for a zone.
- */
-export const sslTlsModeRecommendationSslTlsRecommendation = (
-  variables: SslTlsModeRecommendationSslTlsRecommendationVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    SslTlsModeRecommendationSslTlsRecommendationResponse,
-    SslTlsModeRecommendationSslTlsRecommendationError,
-    undefined,
-    {},
-    {},
-    SslTlsModeRecommendationSslTlsRecommendationPathParams
-  >({ url: '/zones/{zoneIdentifier}/ssl/recommendation', method: 'get', ...variables, signal });
-
 export type Zones0DeletePathParams = {
   zoneId: Schemas.ZonesIdentifier;
 };
@@ -117594,6 +117587,50 @@ export const certificatePacksRestartValidationForAdvancedCertificateManagerCerti
     CertificatePacksRestartValidationForAdvancedCertificateManagerCertificatePackPathParams
   >({ url: '/zones/{zoneId}/ssl/certificate_packs/{certificatePackId}', method: 'patch', ...variables, signal });
 
+export type SslTlsModeRecommendationSslTlsRecommendationPathParams = {
+  zoneId: Schemas.CacheIdentifier;
+};
+
+export type SslTlsModeRecommendationSslTlsRecommendationError = Fetcher.ErrorWrapper<{
+  status: ClientErrorStatus;
+  payload: (Schemas.CacheApiResponseSingle & {
+    result?: {
+      id?: Schemas.CacheRecommendationId;
+      modified_on?: Schemas.CacheTimestamp;
+      value?: Schemas.CacheRecommendationValue;
+    };
+  }) &
+    Schemas.CacheApiResponseCommonFailure;
+}>;
+
+export type SslTlsModeRecommendationSslTlsRecommendationResponse = Schemas.CacheApiResponseSingle & {
+  result?: {
+    id?: Schemas.CacheRecommendationId;
+    modified_on?: Schemas.CacheTimestamp;
+    value?: Schemas.CacheRecommendationValue;
+  };
+};
+
+export type SslTlsModeRecommendationSslTlsRecommendationVariables = {
+  pathParams: SslTlsModeRecommendationSslTlsRecommendationPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieve the SSL/TLS Recommender's recommendation for a zone.
+ */
+export const sslTlsModeRecommendationSslTlsRecommendation = (
+  variables: SslTlsModeRecommendationSslTlsRecommendationVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    SslTlsModeRecommendationSslTlsRecommendationResponse,
+    SslTlsModeRecommendationSslTlsRecommendationError,
+    undefined,
+    {},
+    {},
+    SslTlsModeRecommendationSslTlsRecommendationPathParams
+  >({ url: '/zones/{zoneId}/ssl/recommendation', method: 'get', ...variables, signal });
+
 export type UniversalSslSettingsForAZoneUniversalSslSettingsDetailsPathParams = {
   zoneId: Schemas.TlsCertificatesAndHostnamesIdentifier;
 };
@@ -118502,6 +118539,7 @@ export type WaitingRoomGetWaitingRoomStatusVariables = {
  * 	- **not_queueing** indicates that the configured thresholds have not been met and all users are going through to the origin.
  * 	- **queueing** indicates that the thresholds have been met and some users are held in the waiting room.
  * 	- **event_prequeueing** indicates that an event is active and is currently prequeueing users before it starts.
+ * 	- **suspended** indicates that the room is suspended.
  * 2. `event_id`: String of the current event's `id` if an event is active, otherwise an empty string.
  * 3. `estimated_queued_users`: Integer of the estimated number of users currently waiting in the queue.
  * 4. `estimated_total_active_users`: Integer of the estimated number of users currently active on the origin.
@@ -120653,7 +120691,6 @@ export const operationsByTag = {
     customPagesForAZoneGetACustomPage,
     customPagesForAZoneUpdateACustomPage
   },
-  sSLTLSModeRecommendation: { sslTlsModeRecommendationSslTlsRecommendation },
   zoneLevelAccessApplications: {
     zoneLevelAccessApplicationsListAccessApplications,
     zoneLevelAccessApplicationsAddABookmarkApplication,
@@ -121120,6 +121157,7 @@ export const operationsByTag = {
     certificatePacksGetCertificatePack,
     certificatePacksRestartValidationForAdvancedCertificateManagerCertificatePack
   },
+  sSLTLSModeRecommendation: { sslTlsModeRecommendationSslTlsRecommendation },
   universalSSLSettingsForAZone: {
     universalSslSettingsForAZoneUniversalSslSettingsDetails,
     universalSslSettingsForAZoneEditUniversalSslSettings
