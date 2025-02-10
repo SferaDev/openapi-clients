@@ -18477,6 +18477,686 @@ export const createSIPPhone = (variables: CreateSIPPhoneVariables, signal?: Abor
     signal
   });
 
+export type ListSIPPhonePhonesQueryParams = {
+  /**
+   * A user's user name or email address. If this parameter is provided, only the SIP phone system integration enabled for that specific user will be returned. Otherwise, all SIP phones on an account will be returned.
+   *
+   * @example jchill@example.com
+   */
+  search_key?: string;
+  /**
+   * The number of records returned within a single API call.
+   *
+   * @maximum 300
+   * @example 30
+   * @default 30
+   */
+  page_size?: number;
+  /**
+   * Use the next page token to paginate through large result sets. A next page token will be returned whenever the set of available results exceeds the current page size. This tokan's expiration period is 15 minutes.
+   *
+   * @example Tva2CuIdTgsv8wAnhyAdU3m06Y2HuLQtlh3
+   */
+  next_page_token?: string;
+};
+
+export type ListSIPPhonePhonesError = Fetcher.ErrorWrapper<undefined>;
+
+export type ListSIPPhonePhonesResponse = {
+  /**
+   * @example Tva2CuIdTgsv8wAnhyAdU3m06Y2HuLQtlh3
+   */
+  next_page_token?: string;
+  /**
+   * The number of records returned within a single API call.
+   *
+   * @maximum 300
+   * @example 30
+   * @default 30
+   */
+  page_size?: number;
+  /**
+   * SIP phones object.
+   *
+   * @maxItems 300
+   */
+  phones?: {
+    /**
+     * The authorization name of the user that is registered for SIP phone.
+     *
+     * @example testname
+     */
+    authorization_name?: string;
+    /**
+     * The name or IP address of your provider's SIP domain.
+     *
+     * @example example.com
+     */
+    domain?: string;
+    /**
+     * The SIP phone ID.
+     *
+     * @example 123456
+     */
+    phone_id?: string;
+    /**
+     * The password generated for the user in the SIP account.
+     *
+     * @example apassword1
+     */
+    password?: string;
+    /**
+     * The number of minutes after which the SIP registration of the Zoom client user will expire, and the client will auto register to the SIP server.
+     *
+     * @example 60
+     */
+    registration_expire_time?: number;
+    /**
+     * The email address of the user to associate with the SIP Phone. Can add `.pc`, `.mobile`, `.pad` at the end of the email (for example, `user@example.com.pc`) to add accounts for different platforms for the same user.
+     *
+     * @format email
+     * @example jchill@example.com
+     */
+    user_email?: string;
+    /**
+     * The phone number associated with the user in the SIP account.
+     *
+     * @example Jill Chill
+     */
+    user_name?: string;
+    /**
+     * The number to dial for checking voicemail.
+     *
+     * @example 4000
+     */
+    voice_mail?: string;
+    /**
+     * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
+     */
+    server?: {
+      /**
+       * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
+       *
+       * @example 192.0.2.2
+       */
+      proxy_server?: string;
+      /**
+       * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
+       *
+       * @example 192.0.2.2
+       */
+      register_server?: string;
+      /**
+       * Protocols supported by the SIP provider.
+       *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
+       *
+       * @example UDP
+       */
+      transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+    };
+    /**
+     * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
+     */
+    server_2?: {
+      /**
+       * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
+       *
+       * @example 192.0.2.2
+       */
+      proxy_server?: string;
+      /**
+       * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
+       *
+       * @example 192.0.2.2
+       */
+      register_server?: string;
+      /**
+       * Protocols supported by the SIP provider.
+       *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
+       *
+       * @example UDP
+       */
+      transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+    };
+    /**
+     * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
+     */
+    server_3?: {
+      /**
+       * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
+       *
+       * @example 192.0.2.2
+       */
+      proxy_server?: string;
+      /**
+       * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
+       *
+       * @example 192.0.2.2
+       */
+      register_server?: string;
+      /**
+       * Protocols supported by the SIP provider.
+       *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
+       *
+       * @example UDP
+       */
+      transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+    };
+  }[];
+};
+
+export type ListSIPPhonePhonesVariables = {
+  queryParams?: ListSIPPhonePhonesQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * List SIP phones on an account.
+ *
+ * Zoom's Phone System Integration (PSI), also referred as SIP phones, enables an organization to leverage the Zoom client to complete a Softphone registration to supported premise based PBX system. End users will have the ability to have Softphone functionality within a single client while maintaining a comparable interface to Zoom Phone.
+ *
+ * **Prerequisites**:
+ * * Currently only supported on Cisco and Avaya PBX systems.
+ * * User must enable SIP Phone Integration by contacting the [Sales](https://zoom.us/contactsales) team.
+ *
+ *
+ * **Scopes:** `sip_phone:read:admin`
+ *
+ * **Granular Scopes:** `sip_phone:read:list_sip_phones:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
+ */
+export const listSIPPhonePhones = (variables: ListSIPPhonePhonesVariables, signal?: AbortSignal) =>
+  fetch<ListSIPPhonePhonesResponse, ListSIPPhonePhonesError, undefined, {}, ListSIPPhonePhonesQueryParams, {}>({
+    url: '/sip_phones/phones',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type EnableSIPPhonePhonesError = Fetcher.ErrorWrapper<undefined>;
+
+export type EnableSIPPhonePhonesResponse = {
+  /**
+   * The SIP phone ID.
+   *
+   * @example 123456
+   */
+  phone_id?: string;
+  /**
+   * The authorization name of the user that is registered for SIP phone.
+   *
+   * @maxLength 64
+   * @example testname
+   */
+  authorization_name?: string;
+  /**
+   * The name or IP address of your provider's SIP domain (example: CDC.WEB).
+   *
+   * @maxLength 64
+   * @example example.com
+   */
+  domain?: string;
+  /**
+   * The password generated for the user in the SIP account.
+   *
+   * @example 123456
+   */
+  password?: string;
+  /**
+   * The number of minutes after which the SIP registration of the Zoom client user will expire, and the client will auto register to the SIP server.
+   *
+   * @maximum 127
+   * @minimum 1
+   * @example 60
+   * @default 60
+   */
+  registration_expire_time?: number;
+  /**
+   * The email address of the user to associate with the SIP Phone. Can add `.pc`, `.mobile`, `.pad` at the end of the email (for example, `user@example.com.mac`) to add accounts for different platforms for the same user.
+   *
+   * @maxLength 64
+   * @format email
+   * @example jchill@example.com
+   */
+  user_email?: string;
+  /**
+   * The phone number associated with the user in the SIP account.
+   *
+   * @maxLength 64
+   * @example Jill Chill
+   */
+  user_name?: string;
+  /**
+   * The number to dial for checking voicemail.
+   *
+   * @maxLength 255
+   * @example 4000
+   */
+  voice_mail?: string;
+  /**
+   * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
+   */
+  server?: {
+    /**
+     * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
+     *
+     * @example 192.0.2.2
+     */
+    proxy_server?: string;
+    /**
+     * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
+     *
+     * @example 192.0.2.2
+     */
+    register_server?: string;
+    /**
+     * Protocols supported by the SIP provider.
+     *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
+     *
+     * @example UDP
+     */
+    transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+  };
+  /**
+   * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
+   */
+  server_2?: {
+    /**
+     * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
+     *
+     * @example 192.0.2.2
+     */
+    proxy_server?: string;
+    /**
+     * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
+     *
+     * @example 192.0.2.2
+     */
+    register_server?: string;
+    /**
+     * Protocols supported by the SIP provider.
+     *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
+     *
+     * @example UDP
+     */
+    transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+  };
+  /**
+   * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
+   */
+  server_3?: {
+    /**
+     * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
+     *
+     * @example 192.0.2.2
+     */
+    proxy_server?: string;
+    /**
+     * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
+     *
+     * @example 192.0.2.2
+     */
+    register_server?: string;
+    /**
+     * Protocols supported by the SIP provider.
+     *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
+     *
+     * @example UDP
+     */
+    transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+  };
+};
+
+export type EnableSIPPhonePhonesRequestBody = {
+  /**
+   * The authorization name of the user that is registered for SIP phone.
+   *
+   * @maxLength 64
+   * @example testname
+   */
+  authorization_name: string;
+  /**
+   * The name or IP address of your provider's SIP domain, such as example.com.
+   *
+   * @maxLength 64
+   * @example example.com
+   */
+  domain: string;
+  /**
+   * The password generated for the user in the SIP account.
+   *
+   * @example 123456
+   */
+  password: string;
+  /**
+   * The number of minutes after which the SIP registration of the Zoom client user expires, and the client will auto register to the SIP server.
+   *
+   * @maximum 127
+   * @minimum 1
+   * @example 60
+   * @default 60
+   */
+  registration_expire_time?: number;
+  /**
+   * The email address of the user to associate with the SIP Phone. Can add `.pc`, `.mobile`, `.pad` at the end of the email, such as `user@example.com.pc`, to add accounts for different platforms for the same user.
+   *
+   * @maxLength 64
+   * @format email
+   * @example jchill@example.com
+   */
+  user_email: string;
+  /**
+   * The phone number associated with the user in the SIP account.
+   *
+   * @maxLength 64
+   * @example Jill Chill
+   */
+  user_name: string;
+  /**
+   * The number to dial for checking voicemail.
+   *
+   * @maxLength 255
+   * @example 4000
+   */
+  voice_mail?: string;
+  /**
+   * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
+   */
+  server: {
+    /**
+     * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
+     *
+     * @example 192.0.2.2
+     */
+    proxy_server?: string;
+    /**
+     * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
+     *
+     * @example 192.0.2.2
+     */
+    register_server?: string;
+    /**
+     * Protocols supported by the SIP provider.
+     *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
+     *
+     * @example UDP
+     */
+    transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+  };
+  /**
+   * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
+   */
+  server_2?: {
+    /**
+     * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
+     *
+     * @example 192.0.2.2
+     */
+    proxy_server?: string;
+    /**
+     * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
+     *
+     * @example 192.0.2.2
+     */
+    register_server?: string;
+    /**
+     * Protocols supported by the SIP provider.
+     *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
+     *
+     * @example UDP
+     */
+    transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+  };
+  /**
+   * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
+   */
+  server_3?: {
+    /**
+     * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
+     *
+     * @example 192.0.2.2
+     */
+    proxy_server?: string;
+    /**
+     * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
+     *
+     * @example 192.0.2.2
+     */
+    register_server?: string;
+    /**
+     * Protocols supported by the SIP provider.
+     *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
+     *
+     * @example UDP
+     */
+    transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+  };
+};
+
+export type EnableSIPPhonePhonesVariables = {
+  body: EnableSIPPhonePhonesRequestBody;
+} & FetcherExtraProps;
+
+/**
+ * Enable a user to use a SIP phone.
+ *
+ * Zoom's Phone System Integration (PSI), also referred as SIP phones, enables an organization to leverage the Zoom client to complete a softphone registration to supported premise based PBX system. End users will have the ability to have softphone functionality within a single client while maintaining a comparable interface to Zoom Phone.
+ *
+ *
+ * **Prerequisites**:
+ * * Currently only supported on Cisco and Avaya PBX systems.
+ * * The account owner or account admin must first enable SIP Phone Integration by contacting the [Sales](https://zoom.us/contactsales) team.
+ *
+ *
+ * **Scopes:** `sip_phone:write:admin`
+ *
+ * **Granular Scopes:** `sip_phone:write:sip_phone:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const enableSIPPhonePhones = (variables: EnableSIPPhonePhonesVariables, signal?: AbortSignal) =>
+  fetch<EnableSIPPhonePhonesResponse, EnableSIPPhonePhonesError, EnableSIPPhonePhonesRequestBody, {}, {}, {}>({
+    url: '/sip_phones/phones',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type DeleteSIPPhonePhonesPathParams = {
+  /**
+   * The SIP phone ID. It can be retrieved from the **List SIP phones** API.
+   *
+   * @example 123456
+   */
+  phoneId: string;
+};
+
+export type DeleteSIPPhonePhonesError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteSIPPhonePhonesVariables = {
+  pathParams: DeleteSIPPhonePhonesPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Delete a Zoom account's SIP phone.
+ *
+ *  **Prerequisites**:
+ * * Currently only supported on Cisco and Avaya PBX systems.
+ * * The user must enable **SIP Phone Integration** by contacting the [Zoom Sales](https://zoom.us/contactsales) team.
+ *
+ * **Scopes:** `sip_phone:write:admin`
+ *
+ * **Granular Scopes:** `sip_phone:delete:sip_phone:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const deleteSIPPhonePhones = (variables: DeleteSIPPhonePhonesVariables, signal?: AbortSignal) =>
+  fetch<undefined, DeleteSIPPhonePhonesError, undefined, {}, {}, DeleteSIPPhonePhonesPathParams>({
+    url: '/sip_phones/phones/{phoneId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type UpdateSIPPhonePhonesPathParams = {
+  /**
+   * The SIP phone ID. Retrieve this with the **List SIP phones** API.
+   *
+   * @example 123456
+   */
+  phoneId: string;
+};
+
+export type UpdateSIPPhonePhonesError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateSIPPhonePhonesRequestBody = {
+  /**
+   * The authorization name of the user that is registered for SIP phone.
+   *
+   * @maxLength 64
+   * @example testname
+   */
+  authorization_name?: string;
+  /**
+   * The name or IP address of your provider's SIP domain, such as example.com.
+   *
+   * @maxLength 64
+   * @example example.com
+   */
+  domain?: string;
+  /**
+   * The password generated for the user in the SIP account.
+   *
+   * @example 123456
+   */
+  password?: string;
+  /**
+   * The number of minutes after which the SIP registration of the Zoom client user will expire, and the client will auto register to the SIP server.
+   *
+   * @maximum 127
+   * @minimum 1
+   * @example 60
+   * @default 60
+   */
+  registration_expire_time?: number;
+  /**
+   * The phone number associated with the user in the SIP account.
+   *
+   * @maxLength 64
+   * @example Jill Chill
+   */
+  user_name?: string;
+  /**
+   * The number to dial for checking voicemail.
+   *
+   * @maxLength 255
+   * @example 4000
+   */
+  voice_mail?: string;
+  /**
+   * Defined a set of basic components of SIP network architecture, including `proxy_server`, `register_server`, and `transport_protocol`.
+   */
+  server?: {
+    /**
+     * The IP address of the proxy server for SIP requests. If you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
+     *
+     * @example 192.0.2.2
+     */
+    proxy_server?: string;
+    /**
+     * The IP address of the server that accepts REGISTER requests. If you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
+     *
+     * @example 192.0.2.2
+     */
+    register_server?: string;
+    /**
+     * Protocols supported by the SIP provider.
+     *  The value must be either `UDP`, `TCP`, `TLS`, or `AUTO`.
+     *
+     * @example UDP
+     */
+    transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+  };
+  /**
+   * Defined a set of basic components of SIP network architecture, including `proxy_server`, `register_server`, and `transport_protocol`.
+   */
+  server_2?: {
+    /**
+     * The IP address of the proxy server for SIP requests. If you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
+     *
+     * @example 192.0.2.2
+     */
+    proxy_server?: string;
+    /**
+     * The IP address of the server that accepts REGISTER requests. If you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
+     *
+     * @example 192.0.2.2
+     */
+    register_server?: string;
+    /**
+     * Protocols supported by the SIP provider.
+     *  The value must be either `UDP`, `TCP`, `TLS`, or `AUTO`.
+     *
+     * @example UDP
+     */
+    transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+  };
+  /**
+   * Defined a set of basic components of SIP network architecture, including `proxy_server`, `register_server`, and `transport_protocol`.
+   */
+  server_3?: {
+    /**
+     * The IP address of the proxy server for SIP requests. If you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
+     *
+     * @example 192.0.2.2
+     */
+    proxy_server?: string;
+    /**
+     * The IP address of the server that accepts REGISTER requests. If you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
+     *
+     * @example 192.0.2.2
+     */
+    register_server?: string;
+    /**
+     * Protocols supported by the SIP provider.
+     *  The value must be either `UDP`, `TCP`, `TLS`, or `AUTO`.
+     *
+     * @example UDP
+     */
+    transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
+  };
+};
+
+export type UpdateSIPPhonePhonesVariables = {
+  body?: UpdateSIPPhonePhonesRequestBody;
+  pathParams: UpdateSIPPhonePhonesPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Update the information of a specific SIP phone on a Zoom account.
+ *
+ * Zoom's Phone System Integration (PSI), also referred as SIP phones, lets an organization leverage the Zoom client to complete a softphone registration to supported premise based PBX system. End users can have softphone functionality within a single client while maintaining a comparable interface to a Zoom Phone.
+ *
+ *
+ * **Prerequisites**:
+ * * Currently only supported on Cisco and Avaya PBX systems.
+ * * The account owner or account admin must first enable SIP Phone Integration by contacting the [Sales](https://zoom.us/contactsales) team.
+ *
+ *
+ * **Scopes:** `sip_phone:write:admin`
+ *
+ * **Granular Scopes:** `sip_phone:update:sip_phone:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const updateSIPPhonePhones = (variables: UpdateSIPPhonePhonesVariables, signal?: AbortSignal) =>
+  fetch<undefined, UpdateSIPPhonePhonesError, UpdateSIPPhonePhonesRequestBody, {}, {}, UpdateSIPPhonePhonesPathParams>({
+    url: '/sip_phones/phones/{phoneId}',
+    method: 'patch',
+    ...variables,
+    signal
+  });
+
 export type DeleteSIPPhonePathParams = {
   /**
    * The SIP phone ID. It can be retrieved from the List SIP phones API.
@@ -28780,7 +29460,16 @@ export const operationsByTag = {
     reportWebinarQA,
     reportWebinarSurvey
   },
-  sIPPhone: { listSipPhones, createSIPPhone, deleteSIPPhone, updateSIPPhone },
+  sIPPhone: {
+    listSipPhones,
+    createSIPPhone,
+    listSIPPhonePhones,
+    enableSIPPhonePhones,
+    deleteSIPPhonePhones,
+    updateSIPPhonePhones,
+    deleteSIPPhone,
+    updateSIPPhone
+  },
   tsp: { tsp, tspUpdate, userTSPs, userTSPCreate, tspUrlUpdate, userTSP, userTSPDelete, userTSPUpdate },
   trackingField: { trackingfieldList, trackingfieldCreate, trackingfieldGet, trackingfieldDelete, trackingfieldUpdate },
   webinars: {
