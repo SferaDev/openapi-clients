@@ -7706,6 +7706,7 @@ export type AccessYandex = {
  *
  * @example 258def64c72dae45f3e4c8516e2111f2
  * @maxLength 32
+ * @x-auditable true
  */
 export type AddressingAccountIdentifier = string;
 
@@ -7737,6 +7738,7 @@ export type AddressingAddressMapsMembership = {
  *
  * @example 055817b111884e0227e1be16a0be6ee0
  * @maxLength 32
+ * @x-auditable true
  */
 export type AddressingAddressMapIdentifier = string;
 
@@ -7744,6 +7746,7 @@ export type AddressingAddressMapIdentifier = string;
  * Prefix advertisement status to the Internet. This field is only not 'null' if on demand is enabled.
  *
  * @example true
+ * @x-auditable true
  */
 export type AddressingAdvertised = boolean | null;
 
@@ -7791,6 +7794,7 @@ export type AddressingApiResponseSingle = AddressingApiResponseCommon;
  * Approval state of the prefix (P = pending, V = active).
  *
  * @example P
+ * @x-auditable true
  */
 export type AddressingApproved = string;
 
@@ -7798,6 +7802,7 @@ export type AddressingApproved = string;
  * Autonomous System Number (ASN) the prefix will be advertised under.
  *
  * @example 209242
+ * @x-auditable true
  */
 export type AddressingAsn = number | null;
 
@@ -7817,6 +7822,7 @@ export type AddressingBgpPrefixCreate = {
  *
  * @example 7009ba364c7a5760798ceb430e603b74
  * @maxLength 32
+ * @x-auditable true
  */
 export type AddressingBgpPrefixIdentifier = string;
 
@@ -7835,6 +7841,7 @@ export type AddressingBgpSignalOpts = {
  * Whether control of advertisement of the prefix to the Internet is enabled to be performed via BGP signal
  *
  * @example false
+ * @x-auditable true
  */
 export type AddressingBgpSignalingEnabled = boolean;
 
@@ -7843,6 +7850,7 @@ export type AddressingBgpSignalingEnabled = boolean;
  *
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type AddressingBgpSignalingModifiedAt = string | null;
 
@@ -7850,6 +7858,7 @@ export type AddressingBgpSignalingModifiedAt = string | null;
  * If set to false, then the Address Map cannot be deleted via API. This is true for Cloudflare-managed maps.
  *
  * @example true
+ * @x-auditable true
  */
 export type AddressingCanDelete = boolean;
 
@@ -7857,6 +7866,7 @@ export type AddressingCanDelete = boolean;
  * If set to false, then the IPs on the Address Map cannot be modified via the API. This is true for Cloudflare-managed maps.
  *
  * @example true
+ * @x-auditable true
  */
 export type AddressingCanModifyIps = boolean;
 
@@ -7864,6 +7874,7 @@ export type AddressingCanModifyIps = boolean;
  * IP Prefix in Classless Inter-Domain Routing format.
  *
  * @example 192.0.2.0/24
+ * @x-auditable true
  */
 export type AddressingCidr = string;
 
@@ -7884,6 +7895,7 @@ export type AddressingCreateBindingRequest = {
  * If you have legacy TLS clients which do not send the TLS server name indicator, then you can specify one default SNI on the map. If Cloudflare receives a TLS handshake from a client without an SNI, it will respond with the default SNI on those IPs. The default SNI can be any valid zone or subdomain owned by the account.
  *
  * @example *.example.com
+ * @x-auditable true
  */
 export type AddressingDefaultSni = string | null;
 
@@ -7892,6 +7904,7 @@ export type AddressingDefaultSni = string | null;
  *
  * @example b1946ac92492d2347c6235b4d2611184
  * @maxLength 32
+ * @x-auditable true
  */
 export type AddressingDelegatedAccountIdentifier = string;
 
@@ -7900,6 +7913,7 @@ export type AddressingDelegatedAccountIdentifier = string;
  *
  * @example d933b1530bc56c9953cf8ce166da8004
  * @maxLength 32
+ * @x-auditable true
  */
 export type AddressingDelegationIdentifier = string;
 
@@ -7908,6 +7922,7 @@ export type AddressingDelegationIdentifier = string;
  *
  * @example Internal test prefix
  * @maxLength 1000
+ * @x-auditable true
  */
 export type AddressingDescription = string;
 
@@ -7916,6 +7931,7 @@ export type AddressingDescription = string;
  *
  * @default false
  * @example true
+ * @x-auditable true
  */
 export type AddressingEnabled = boolean | null;
 
@@ -7930,6 +7946,7 @@ export type AddressingEtag = string;
  * Name of LOA document. Max file size 10MB, and supported filetype is pdf.
  *
  * @example site_loa_doc.pdf
+ * @x-auditable true
  */
 export type AddressingFilename = string;
 
@@ -7951,6 +7968,7 @@ export type AddressingIdResponse = AddressingApiResponseSingle & {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type AddressingIdentifier = string;
 
@@ -7958,6 +7976,7 @@ export type AddressingIdentifier = string;
  * An IPv4 or IPv6 address.
  *
  * @example 192.0.2.1
+ * @x-auditable true
  */
 export type AddressingIp = string;
 
@@ -7965,6 +7984,7 @@ export type AddressingIp = string;
  * An IPv4 or IPv6 address.
  *
  * @example 192.0.2.1
+ * @x-auditable true
  */
 export type AddressingIpAddress = string;
 
@@ -8035,6 +8055,7 @@ export type AddressingJdcloudCidrs = string[];
  * The type of the membership.
  *
  * @example zone
+ * @x-auditable true
  */
 export type AddressingKind = 'zone' | 'account';
 
@@ -8043,6 +8064,7 @@ export type AddressingKind = 'zone' | 'account';
  *
  * @example d933b1530bc56c9953cf8ce166da8004
  * @maxLength 32
+ * @x-auditable true
  */
 export type AddressingLoaDocumentIdentifier = string | null;
 
@@ -8076,6 +8098,7 @@ export type AddressingMessages = {
  *
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type AddressingModifiedAtNullable = string | null;
 
@@ -8083,6 +8106,7 @@ export type AddressingModifiedAtNullable = string | null;
  * Whether advertisement of the prefix to the Internet may be dynamically enabled or disabled.
  *
  * @example true
+ * @x-auditable true
  */
 export type AddressingOnDemandEnabled = boolean;
 
@@ -8090,6 +8114,7 @@ export type AddressingOnDemandEnabled = boolean;
  * Whether advertisement status of the prefix is locked, meaning it cannot be changed.
  *
  * @example false
+ * @x-auditable true
  */
 export type AddressingOnDemandLocked = boolean;
 
@@ -8098,6 +8123,7 @@ export type AddressingOnDemandLocked = boolean;
  *
  * @example 2af39739cc4e3b5910c918468bb89828
  * @maxLength 32
+ * @x-auditable true
  */
 export type AddressingPrefixIdentifier = string;
 
@@ -8109,6 +8135,7 @@ export type AddressingProvisioning = {
    * When a binding has been deployed to a majority of Cloudflare datacenters, the binding will become active and can be used with its associated service.
    *
    * @example provisioning
+   * @x-auditable true
    */
   state?: 'provisioning' | 'active';
 };
@@ -8153,6 +8180,7 @@ export type AddressingResultInfo = {
  * `false`, the BGP route is withdrawn.
  *
  * @example true
+ * @x-auditable true
  */
 export type AddressingSchemasAdvertised = boolean;
 
@@ -8160,6 +8188,7 @@ export type AddressingSchemasAdvertised = boolean;
  * Controls whether the membership can be deleted via the API or not.
  *
  * @example true
+ * @x-auditable true
  */
 export type AddressingSchemasCanDelete = boolean;
 
@@ -8167,6 +8196,7 @@ export type AddressingSchemasCanDelete = boolean;
  * An optional description field which may be used to describe the types of IPs or zones on the map.
  *
  * @example My Ecommerce zones
+ * @x-auditable true
  */
 export type AddressingSchemasDescription = string | null;
 
@@ -8196,6 +8226,7 @@ export type AddressingServiceBinding = {
  *
  * @example 0429b49b6a5155297b78e75a44b09e14
  * @maxLength 32
+ * @x-auditable true
  */
 export type AddressingServiceBindingIdentifier = string;
 
@@ -8205,6 +8236,7 @@ export type AddressingServiceBindingIdentifier = string;
  *
  * @example 2db684ee7ca04e159946fd05b99e1bcd
  * @maxLength 32
+ * @x-auditable true
  */
 export type AddressingServiceIdentifier = string;
 
@@ -8212,6 +8244,7 @@ export type AddressingServiceIdentifier = string;
  * Name of a service running on the Cloudflare network
  *
  * @example Magic Transit
+ * @x-auditable true
  */
 export type AddressingServiceName = string;
 
@@ -8227,6 +8260,7 @@ export type AddressingSingleResponseBgp = AddressingApiResponseSingle & {
  * File size of the uploaded LOA document.
  *
  * @example 444
+ * @x-auditable true
  */
 export type AddressingSizeBytes = number;
 
@@ -8240,6 +8274,7 @@ export type AddressingTimestamp = string;
  * Whether the LOA has been verified by Cloudflare staff.
  *
  * @example true
+ * @x-auditable true
  */
 export type AddressingVerified = boolean;
 
@@ -8247,6 +8282,7 @@ export type AddressingVerified = boolean;
  * Timestamp of the moment the LOA was marked as validated.
  *
  * @format date-time
+ * @x-auditable true
  */
 export type AddressingVerifiedAt = string | null;
 
@@ -8255,6 +8291,7 @@ export type AddressingVerifiedAt = string | null;
  *
  * @example 8ac8489932db6327334c9b6d58544cfe
  * @maxLength 32
+ * @x-auditable true
  */
 export type AddressingZoneIdentifier = string;
 
@@ -10729,6 +10766,18 @@ export type CacheMessages = {
   message: string;
 }[];
 
+/**
+ * Identifier of a recommendation result.
+ *
+ * @example ssl_recommendation
+ */
+export type CacheRecommendationId = string;
+
+/**
+ * @example strict
+ */
+export type CacheRecommendationValue = 'flexible' | 'full' | 'strict';
+
 export type CacheResponseBase = {
   /**
    * Whether this setting can be updated or not.
@@ -10773,6 +10822,12 @@ export type CacheSchemasPatch = {
  * @example auto
  */
 export type CacheSchemasValue = 'auto' | 'custom';
+
+/**
+ * @example 2014-01-01T05:20:00.12345Z
+ * @format date-time
+ */
+export type CacheTimestamp = string;
 
 /**
  * Identifier
@@ -12193,11 +12248,15 @@ export type D1DatabaseDetailsResponse = {
 };
 
 /**
+ * D1 database identifier (UUID).
+ *
  * @example xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
  */
 export type D1DatabaseIdentifier = string;
 
 /**
+ * D1 database name.
+ *
  * @example my-database
  * @pattern ^[a-z0-9][a-z0-9-_]*$
  */
@@ -22603,366 +22662,6 @@ export type IntelWhois = {
   updated_date?: string;
 };
 
-export type LegacyJhsApiResponseCollection = {
-  errors: LegacyJhsMessages;
-  messages: LegacyJhsMessages;
-  result: Record<string, any> | any[] | string | null;
-  /**
-   * Whether the API call was successful
-   *
-   * @example true
-   */
-  success: true;
-  result_info?: LegacyJhsResultInfo;
-};
-
-export type LegacyJhsApiResponseCommon = {
-  errors: LegacyJhsMessages;
-  messages: LegacyJhsMessages;
-  result: Record<string, any> | any[] | string;
-  /**
-   * Whether the API call was successful
-   *
-   * @example true
-   */
-  success: true;
-};
-
-export type LegacyJhsApiResponseCommonFailure = {
-  /**
-   * @example {"code":7003,"message":"No route for the URI"}
-   * @minLength 1
-   */
-  errors: LegacyJhsMessages;
-  messages: LegacyJhsMessages;
-  result: any | null;
-  /**
-   * Whether the API call was successful
-   *
-   * @example false
-   */
-  success: false;
-};
-
-export type LegacyJhsApiResponseSingle = {
-  errors: LegacyJhsMessages;
-  messages: LegacyJhsMessages;
-  result: Record<string, any> | string | string | null;
-  /**
-   * Whether the API call was successful
-   *
-   * @example true
-   */
-  success: true;
-};
-
-/**
- * Application identifier.
- *
- * @example ea95132c15732412d22c1476fa83f27a
- * @maxLength 32
- */
-export type LegacyJhsAppId = string;
-
-/**
- * Comma-delimited list of Spectrum Application Id(s). If provided, the response will be limited to Spectrum Application Id(s) that match.
- *
- * @example ea95132c15732412d22c1476fa83f27a,d122c5f4bb71e25cc9e86ab43b142e2f
- */
-export type LegacyJhsAppIdParam = string;
-
-/**
- * Enables Argo Smart Routing for this application.
- * Notes: Only available for TCP applications with traffic_type set to "direct".
- *
- * @default false
- * @example true
- */
-export type LegacyJhsArgoSmartRouting = boolean;
-
-/**
- * When the Application was created.
- *
- * @example 2014-01-02T02:20:00Z
- * @format date-time
- */
-export type LegacyJhsCreated = string;
-
-/**
- * Can be used to break down the data by given attributes. Options are:
- *
- * Dimension                 | Name                            | Example
- * --------------------------|---------------------------------|--------------------------
- * event                     | Connection Event                | connect, progress, disconnect, originError, clientFiltered
- * appID                     | Application ID                  | 40d67c87c6cd4b889a4fd57805225e85
- * coloName                  | Colo Name                       | SFO
- * ipVersion                 | IP version used by the client   | 4, 6.
- *
- * @example event
- * @example appID
- */
-export type LegacyJhsDimensions = ('event' | 'appID' | 'coloName' | 'ipVersion')[];
-
-/**
- * The name and type of DNS record for the Spectrum application.
- */
-export type LegacyJhsDns = {
-  name?: LegacyJhsDnsName;
-  type?: LegacyJhsDnsType;
-};
-
-/**
- * The name of the DNS record associated with the application.
- *
- * @example ssh.example.com
- * @format hostname
- */
-export type LegacyJhsDnsName = string;
-
-/**
- * The TTL of our resolution of your DNS record in seconds.
- *
- * @minimum 600
- */
-export type LegacyJhsDnsTtl = number;
-
-/**
- * The type of DNS record associated with the application.
- *
- * @example CNAME
- */
-export type LegacyJhsDnsType = 'CNAME' | 'ADDRESS';
-
-/**
- * The anycast edge IP configuration for the hostname of this application.
- *
- * @default {"connectivity":"all","type":"dynamic"}
- */
-export type LegacyJhsEdgeIps =
-  | {
-      /**
-       * The IP versions supported for inbound connections on Spectrum anycast IPs.
-       *
-       * @example all
-       */
-      connectivity?: 'all' | 'ipv4' | 'ipv6';
-      /**
-       * The type of edge IP configuration specified. Dynamically allocated edge IPs use Spectrum anycast IPs in accordance with the connectivity you specify. Only valid with CNAME DNS names.
-       *
-       * @example dynamic
-       */
-      type?: 'dynamic';
-    }
-  | {
-      /**
-       * The array of customer owned IPs we broadcast via anycast for this hostname and application.
-       *
-       * @example 192.0.2.1
-       */
-      ips?: string[];
-      /**
-       * The type of edge IP configuration specified. Statically allocated edge IPs use customer IPs in accordance with the ips array you specify. Only valid with ADDRESS DNS names.
-       *
-       * @example static
-       */
-      type?: 'static';
-    };
-
-/**
- * Identifier of a recommedation result.
- *
- * @example ssl_recommendation
- */
-export type LegacyJhsId = string;
-
-/**
- * Identifier
- *
- * @example 023e105f4ecef8ad9ca31a8372d0c353
- * @maxLength 32
- */
-export type LegacyJhsIdentifier = string;
-
-/**
- * Enables IP Access Rules for this application.
- * Notes: Only available for TCP applications.
- *
- * @example true
- */
-export type LegacyJhsIpFirewall = boolean;
-
-export type LegacyJhsMessages = {
-  /**
-   * @minimum 1000
-   */
-  code: number;
-  message: string;
-}[];
-
-/**
- * When the Application was last modified.
- *
- * @example 2014-01-02T02:20:00Z
- * @format date-time
- */
-export type LegacyJhsModified = string;
-
-/**
- * The name and type of DNS record for the Spectrum application.
- */
-export type LegacyJhsOriginDns = {
-  name?: LegacyJhsOriginDnsName;
-  ttl?: LegacyJhsDnsTtl;
-  type?: LegacyJhsOriginDnsType;
-};
-
-/**
- * The name of the DNS record associated with the origin.
- *
- * @example origin.example.com
- * @format hostname
- */
-export type LegacyJhsOriginDnsName = string;
-
-/**
- * The type of DNS record associated with the origin. "" is used to specify a combination of A/AAAA records.
- *
- * @example
- */
-export type LegacyJhsOriginDnsType = '' | 'A' | 'AAAA' | 'SRV';
-
-/**
- * The destination port at the origin. Only specified in conjunction with origin_dns. May use an integer to specify a single origin port, for example `1000`, or a string to specify a range of origin ports, for example `"1000-2000"`.
- * Notes: If specifying a port range, the number of ports in the range must match the number of ports specified in the "protocol" field.
- *
- * @example 22
- * @maximum 65535
- * @minimum 1
- */
-export type LegacyJhsOriginPort = number | string;
-
-/**
- * The port configuration at Cloudflare’s edge. May specify a single port, for example `"tcp/1000"`, or a range of ports, for example `"tcp/1000-2000"`.
- *
- * @example tcp/22
- */
-export type LegacyJhsProtocol = string;
-
-/**
- * Enables Proxy Protocol to the origin. Refer to [Enable Proxy protocol](https://developers.cloudflare.com/spectrum/getting-started/proxy-protocol/) for implementation details on PROXY Protocol V1, PROXY Protocol V2, and Simple Proxy Protocol.
- *
- * @default off
- * @example off
- */
-export type LegacyJhsProxyProtocol = 'off' | 'v1' | 'v2' | 'simple';
-
-export type LegacyJhsResponseCollection = LegacyJhsApiResponseCollection & {
-  result?: Record<string, any>[];
-};
-
-export type LegacyJhsResponseSingle = LegacyJhsApiResponseSingle & {
-  result?: Record<string, any>;
-};
-
-export type LegacyJhsResponseSingleOriginDns = LegacyJhsApiResponseSingle & {
-  result?: {
-    argo_smart_routing?: LegacyJhsArgoSmartRouting;
-    created_on?: LegacyJhsCreated;
-    dns?: LegacyJhsDns;
-    edge_ips?: LegacyJhsEdgeIps;
-    id?: LegacyJhsAppId;
-    ip_firewall?: LegacyJhsIpFirewall;
-    modified_on?: LegacyJhsModified;
-    origin_dns?: LegacyJhsOriginDns;
-    origin_port?: LegacyJhsOriginPort;
-    protocol?: LegacyJhsProtocol;
-    proxy_protocol?: LegacyJhsProxyProtocol;
-    tls?: LegacyJhsTls;
-    traffic_type?: LegacyJhsTrafficType;
-  };
-};
-
-export type LegacyJhsResultInfo = {
-  /**
-   * Total number of results for the requested service
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
-
-export type LegacyJhsSchemasResponseCollection = {
-  errors: LegacyJhsMessages;
-  messages: LegacyJhsMessages;
-  result: Record<string, any> | any[] | string;
-  /**
-   * Whether the API call was successful
-   *
-   * @example true
-   */
-  success: true;
-};
-
-/**
- * The sort order for the result set; sort fields must be included in `metrics` or `dimensions`.
- *
- * @example +count
- * @example -bytesIngress
- */
-export type LegacyJhsSort = any[];
-
-/**
- * @example 2014-01-01T05:20:00.12345Z
- * @format date-time
- */
-export type LegacyJhsTimestamp = string;
-
-/**
- * The type of TLS termination associated with the application.
- *
- * @example full
- */
-export type LegacyJhsTls = 'off' | 'flexible' | 'full' | 'strict';
-
-/**
- * Determines how data travels from the edge to your origin. When set to "direct", Spectrum will send traffic directly to your origin, and the application's type is derived from the `protocol`. When set to "http" or "https", Spectrum will apply Cloudflare's HTTP/HTTPS features as it sends traffic to your origin, and the application type matches this property exactly.
- *
- * @default direct
- * @example direct
- */
-export type LegacyJhsTrafficType = 'direct' | 'http' | 'https';
-
-/**
- * End of time interval to query, defaults to current time. Timestamp must be in RFC3339 format and uses UTC unless otherwise specified.
- *
- * @example 2014-01-02T03:20:00Z
- * @format date-time
- */
-export type LegacyJhsUntil = string;
-
-/**
- * @example strict
- */
-export type LegacyJhsValue = 'flexible' | 'full' | 'strict';
-
 export type ListsApiResponseCollection = {
   errors: ListsMessages;
   messages: ListsMessages;
@@ -28694,6 +28393,7 @@ export type PageShieldDataflowScore = number | null;
  * When true, indicates that Page Shield is enabled.
  *
  * @example true
+ * @x-auditable true
  */
 export type PageShieldEnabled = boolean;
 
@@ -28743,6 +28443,7 @@ export type PageShieldHash = string | null;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type PageShieldId = string;
 
@@ -28814,6 +28515,7 @@ export type PageShieldPolicy = {
  * The action to take if the expression matches
  *
  * @example allow
+ * @x-auditable true
  */
 export type PageShieldPolicyAction = 'allow' | 'log';
 
@@ -28821,6 +28523,7 @@ export type PageShieldPolicyAction = 'allow' | 'log';
  * A description for the policy
  *
  * @example Checkout page CSP policy
+ * @x-auditable true
  */
 export type PageShieldPolicyDescription = string;
 
@@ -28828,6 +28531,7 @@ export type PageShieldPolicyDescription = string;
  * Whether the policy is enabled
  *
  * @example true
+ * @x-auditable true
  */
 export type PageShieldPolicyEnabled = boolean;
 
@@ -28835,6 +28539,7 @@ export type PageShieldPolicyEnabled = boolean;
  * The expression which must match for the policy to be applied, using the Cloudflare Firewall rule expression syntax
  *
  * @example ends_with(http.request.uri.path, "/checkout")
+ * @x-auditable true
  */
 export type PageShieldPolicyExpression = string;
 
@@ -28842,6 +28547,7 @@ export type PageShieldPolicyExpression = string;
  * The policy which will be applied
  *
  * @example script-src 'none';
+ * @x-auditable true
  */
 export type PageShieldPolicyValue = string;
 
@@ -28957,6 +28663,7 @@ export type PageShieldUpdateZoneSettingsResponse = {
  * The timestamp of when Page Shield was last updated.
  *
  * @example 2022-10-12T17:56:52.083582+01:00
+ * @x-auditable true
  */
 export type PageShieldUpdatedAt = string;
 
@@ -28964,6 +28671,7 @@ export type PageShieldUpdatedAt = string;
  * When true, CSP reports will be sent to https://csp-reporting.cloudflare.com/cdn-cgi/script_monitor/report
  *
  * @example true
+ * @x-auditable true
  */
 export type PageShieldUseCloudflareReportingEndpoint = boolean;
 
@@ -28971,6 +28679,7 @@ export type PageShieldUseCloudflareReportingEndpoint = boolean;
  * When true, the paths associated with connections URLs will also be analyzed.
  *
  * @example true
+ * @x-auditable true
  */
 export type PageShieldUseConnectionUrlPath = boolean;
 
@@ -36676,6 +36385,7 @@ export type SpeedApiResponseCommon = {
    * Whether the API call was successful
    *
    * @example true
+   * @x-auditable true
    */
   success: boolean;
 };
@@ -36692,6 +36402,7 @@ export type SpeedApiResponseCommonFailure = {
    * Whether the API call was successful
    *
    * @example false
+   * @x-auditable true
    */
   success: boolean;
 };
@@ -36707,12 +36418,14 @@ export type SpeedBase = {
    * Whether or not this setting can be modified for this zone (based on your Cloudflare plan level).
    *
    * @default true
+   * @x-auditable true
    */
   editable?: true | false;
   /**
    * Identifier of the zone setting.
    *
    * @example development_mode
+   * @x-auditable true
    */
   id?: string;
   /**
@@ -36720,12 +36433,14 @@ export type SpeedBase = {
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string | null;
   /**
    * Current value of the zone setting.
    *
    * @example on
+   * @x-auditable true
    */
   value?: 'on' | 'off';
 };
@@ -36739,12 +36454,14 @@ export type SpeedCloudflareFonts = {
    * Whether or not this setting can be modified for this zone (based on your Cloudflare plan level).
    *
    * @default true
+   * @x-auditable true
    */
   editable?: true | false;
   /**
    * ID of the zone setting.
    *
    * @example fonts
+   * @x-auditable true
    */
   id?: 'fonts';
   /**
@@ -36752,12 +36469,14 @@ export type SpeedCloudflareFonts = {
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string | null;
   /**
    * Current value of the zone setting.
    *
    * @example on
+   * @x-auditable true
    */
   value?: SpeedCloudflareFontsValue;
 };
@@ -36766,6 +36485,7 @@ export type SpeedCloudflareFonts = {
  * Whether the feature is enabled or disabled.
  *
  * @default off
+ * @x-auditable true
  */
 export type SpeedCloudflareFontsValue = 'on' | 'off';
 
@@ -36774,12 +36494,14 @@ export type SpeedCloudflareSpeedBrainResponse = {
    * Whether or not this setting can be modified for this zone (based on your Cloudflare plan level).
    *
    * @default true
+   * @x-auditable true
    */
   editable?: true | false;
   /**
    * Identifier of the zone setting.
    *
    * @example development_mode
+   * @x-auditable true
    */
   id?: string;
   /**
@@ -36787,6 +36509,7 @@ export type SpeedCloudflareSpeedBrainResponse = {
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string | null;
   /**
@@ -36794,6 +36517,7 @@ export type SpeedCloudflareSpeedBrainResponse = {
    * Defaults to "on" for Free plans, otherwise defaults to "off".
    *
    * @example on
+   * @x-auditable true
    */
   value?: 'on' | 'off';
 };
@@ -36803,14 +36527,19 @@ export type SpeedCloudflareSpeedBrainResponse = {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type SpeedIdentifier = string;
 
 export type SpeedMessages = {
   /**
    * @minimum 1000
+   * @x-auditable true
    */
   code: number;
+  /**
+   * @x-auditable true
+   */
   message: string;
 }[];
 
@@ -42767,10 +42496,7 @@ export type TunnelTunnelName = string;
 export type TunnelTunnelResponseToken = {
   errors: TunnelMessages;
   messages: TunnelMessages;
-  /**
-   * @example eyJhIjoiNWFiNGU5Z...
-   */
-  result: Record<string, any> | any[] | string;
+  result: TunnelTunnelToken;
   /**
    * Whether the API call was successful
    *
@@ -42785,6 +42511,13 @@ export type TunnelTunnelResponseToken = {
  * @example AQIDBAUGBwgBAgMEBQYHCAECAwQFBgcIAQIDBAUGBwg=
  */
 export type TunnelTunnelSecret = string;
+
+/**
+ * The Tunnel Token is used as a mechanism to authenticate the operation of a tunnel.
+ *
+ * @example eyJhIjoiNWFiNGU5Z...
+ */
+export type TunnelTunnelToken = string;
 
 /**
  * The type of tunnel.
@@ -46502,6 +46235,7 @@ export type WorkersNamespace = {
   id?: string;
   name?: string;
   script?: string;
+  use_containers?: boolean;
   use_sqlite?: boolean;
 };
 
@@ -49065,6 +48799,8 @@ export type ZeroTrustGatewayRuleSettings = {
   resolve_dns_internally?: {
     /**
      * The fallback behavior to apply when the internal DNS response code is different from 'NOERROR' or when the response data only contains CNAME records for 'A' or 'AAAA' queries.
+     *
+     * @default none
      */
     fallback?: 'none' | 'public_dns';
     /**
@@ -53341,6 +53077,12 @@ export type ZonesZone = {
    * @example ns2.example.com
    */
   vanity_name_servers?: string[];
+  /**
+   * Verification key for partial zone setup.
+   *
+   * @example 284344499-1084221259
+   */
+  verification_key?: string;
 };
 
 export type ZonesZoneSettingsResponseCollection = ZonesApiResponseCommon & {
