@@ -5170,7 +5170,7 @@ export type MeetingPathParams = {
   /**
    * The meeting's ID.
    *
-   *  When storing this value in your database, store it as a long format integer and **not** an integer. Meeting IDs can be more than 10 digits.
+   *  When storing this value in your database, store it as a long format integer, not an integer. Meeting IDs can be more than 10 digits.
    *
    * @format int64
    * @example 85746065
@@ -5289,7 +5289,7 @@ export type MeetingResponse = {
      */
     duration?: number;
     /**
-     * Occurrence ID: Unique Identifier that identifies an occurrence of a recurring meeting. [Recurring meetings](https://support.zoom.us/hc/en-us/articles/214973206-Scheduling-Recurring-Meetings) can have a maximum of 50 occurrences.
+     * Occurrence ID. The unique identifier for an occurrence of a recurring meeting. [Recurring meetings](https://support.zoom.us/hc/en-us/articles/214973206-Scheduling-Recurring-Meetings) can have a maximum of 50 occurrences.
      *
      * @example 1648194360000
      */
@@ -6090,12 +6090,33 @@ export type MeetingResponse = {
      */
     auto_start_meeting_summary?: boolean;
     /**
+     * Defines who will receive a summary after this meeting. This field is applicable only when `auto_start_meeting_summary` is set to `true`.
+     * * `1` - Only meeting host.
+     * * `2` - Only meeting host, co-hosts, and alternative hosts.
+     * * `3` - Only meeting host and meeting invitees in our organization.
+     * * `4` - All meeting invitees including those outside of our organization.
+     *
+     * @example 1
+     */
+    who_will_receive_summary?: 1 | 2 | 3 | 4;
+    /**
      * Whether to automatically start AI Companion questions.
      *
      * @example false
      * @default false
      */
     auto_start_ai_companion_questions?: boolean;
+    /**
+     * Defines who can ask questions about this meeting's transcript. This field is applicable only when `auto_start_ai_companion_questions` is set to `true`.
+     * * `1` - All participants and invitees.
+     * * `2` - All participants only from when they join.
+     * * `3` - Only meeting host.
+     * * `4` - Participants and invitees in our organization.
+     * * `5` - Participants in our organization only from when they join.
+     *
+     * @example 1
+     */
+    who_can_ask_questions?: 1 | 2 | 3 | 4 | 5;
     /**
      * Enable the device testing.
      *
@@ -6110,9 +6131,16 @@ export type MeetingResponse = {
      * @default false
      */
     allow_host_control_participant_mute_state?: boolean;
+    /**
+     * Whether to disable the participant video during meeting. To enable this feature for your account, please [contact Zoom Support](https://support.zoom.us/hc/en-us).
+     *
+     * @example false
+     * @default false
+     */
+    disable_participant_video?: boolean;
   };
   /**
-   * Meeting start time in GMT or UTC. Start time will not be returned if the meeting is an **instant** meeting.
+   * Meeting start time in GMT or UTC. Start time will not be returned if the meeting is an instant meeting.
    *
    * @format date-time
    * @example 2022-03-25T07:29:29Z
@@ -6215,8 +6243,8 @@ export type MeetingVariables = {
 /**
  * Retrieve the given meeting's details.
  *
- *
- *
+ * **Prerequisites**:
+ * * Host user must have a Zoom Meetings Basic license or higher.
  *
  * **Scopes:** `meeting:read`,`meeting:read:admin`
  *
@@ -7095,12 +7123,33 @@ export type MeetingUpdateRequestBody = {
      */
     auto_start_meeting_summary?: boolean;
     /**
+     * Defines who will receive a summary after this meeting. This field is applicable only when `auto_start_meeting_summary` is set to `true`.
+     * * `1` - Only meeting host.
+     * * `2` - Only meeting host, co-hosts, and alternative hosts.
+     * * `3` - Only meeting host and meeting invitees in our organization.
+     * * `4` - All meeting invitees including those outside of our organization.
+     *
+     * @example 1
+     */
+    who_will_receive_summary?: 1 | 2 | 3 | 4;
+    /**
      * Whether to automatically start AI Companion questions.
      *
      * @example false
      * @default false
      */
     auto_start_ai_companion_questions?: boolean;
+    /**
+     * Defines who can ask questions about this meeting's transcript. This field is applicable only when `auto_start_ai_companion_questions` is set to `true`.
+     * * `1` - All participants and invitees.
+     * * `2` - All participants only from when they join.
+     * * `3` - Only meeting host.
+     * * `4` - Participants and invitees in our organization.
+     * * `5` - Participants in our organization only from when they join.
+     *
+     * @example 1
+     */
+    who_can_ask_questions?: 1 | 2 | 3 | 4 | 5;
     /**
      * Enable the device testing.
      *
@@ -7115,6 +7164,13 @@ export type MeetingUpdateRequestBody = {
      * @default false
      */
     allow_host_control_participant_mute_state?: boolean;
+    /**
+     * Whether to disable the participant video during a meeting. To enable this feature for your account, [contact Zoom Support](https://support.zoom.us/hc/en-us).
+     *
+     * @example false
+     * @default false
+     */
+    disable_participant_video?: boolean;
   };
   /**
    * Meeting start time. When using a format like `yyyy-MM-dd'T'HH:mm:ss'Z'`, always use GMT time. When using a format like `yyyy-MM-dd'T'HH:mm:ss`, use local time and specify the time zone. Only used for scheduled meetings and recurring meetings with a fixed time.
@@ -13545,12 +13601,33 @@ export type MeetingCreateResponse = {
      */
     auto_start_meeting_summary?: boolean;
     /**
+     * Defines who will receive a summary after this meeting. This field is applicable only when `auto_start_meeting_summary` is set to `true`.
+     * * `1` - Only meeting host.
+     * * `2` - Only meeting host, co-hosts, and alternative hosts.
+     * * `3` - Only meeting host and meeting invitees in our organization.
+     * * `4` - All meeting invitees including those outside of our organization.
+     *
+     * @example 1
+     */
+    who_will_receive_summary?: 1 | 2 | 3 | 4;
+    /**
      * Whether to automatically start AI Companion questions.
      *
      * @example false
      * @default false
      */
     auto_start_ai_companion_questions?: boolean;
+    /**
+     * Defines who can ask questions about this meeting's transcript. This field is applicable only when `auto_start_ai_companion_questions` is set to `true`.
+     * * `1` - All participants and invitees.
+     * * `2` - All participants only from when they join.
+     * * `3` - Only meeting host.
+     * * `4` - Participants and invitees in our organization.
+     * * `5` - Participants in our organization only from when they join.
+     *
+     * @example 1
+     */
+    who_can_ask_questions?: 1 | 2 | 3 | 4 | 5;
     /**
      * Enable the device testing.
      *
@@ -13565,6 +13642,13 @@ export type MeetingCreateResponse = {
      * @default false
      */
     allow_host_control_participant_mute_state?: boolean;
+    /**
+     * Whether to disable the participant video during meeting. To enable this feature for your account, please [contact Zoom Support](https://support.zoom.us/hc/en-us).
+     *
+     * @example false
+     * @default false
+     */
+    disable_participant_video?: boolean;
   };
   /**
    * Meeting start date-time in UTC/GMT, such as `2020-03-31T12:02:00Z`.
@@ -13574,7 +13658,7 @@ export type MeetingCreateResponse = {
    */
   start_time?: string;
   /**
-   * URL to start the meeting. This URL should only be used by the host of the meeting and **should not be shared with anyone other than the host** of the meeting, since anyone with this URL will be able to log in to the Zoom Client as the host of the meeting.
+   * URL to start the meeting. This URL should only be used by the host of the meeting and should not be shared with anyone other than the host of the meeting, since anyone with this URL will be able to log in to the Zoom client as the host of the meeting.
    *
    * @example https://example.com/s/11111
    */
@@ -14357,12 +14441,33 @@ export type MeetingCreateRequestBody = {
      */
     auto_start_meeting_summary?: boolean;
     /**
+     * Defines who will receive a summary after this meeting. This field is applicable only when `auto_start_meeting_summary` is set to `true`.
+     * * `1` - Only meeting host.
+     * * `2` - Only meeting host, co-hosts, and alternative hosts.
+     * * `3` - Only meeting host and meeting invitees in our organization.
+     * * `4` - All meeting invitees including those outside of our organization.
+     *
+     * @example 1
+     */
+    who_will_receive_summary?: 1 | 2 | 3 | 4;
+    /**
      * Whether to automatically start AI Companion questions.
      *
      * @example false
      * @default false
      */
     auto_start_ai_companion_questions?: boolean;
+    /**
+     * Defines who can ask questions about this meeting's transcript. This field is applicable only when `auto_start_ai_companion_questions` is set to `true`.
+     * * `1` - All participants and invitees.
+     * * `2` - All participants only from when they join.
+     * * `3` - Only meeting host.
+     * * `4` - Participants and invitees in our organization.
+     * * `5` - Participants in our organization only from when they join.
+     *
+     * @example 1
+     */
+    who_can_ask_questions?: 1 | 2 | 3 | 4 | 5;
     /**
      * Enable the device testing.
      *
@@ -14377,6 +14482,13 @@ export type MeetingCreateRequestBody = {
      * @default false
      */
     allow_host_control_participant_mute_state?: boolean;
+    /**
+     * Whether to disable the participant video during meeting. To enable this feature for your account, please [contact Zoom Support](https://support.zoom.us/hc/en-us).
+     *
+     * @example false
+     * @default false
+     */
+    disable_participant_video?: boolean;
   };
   /**
    * The meeting's start time. This field is only used for scheduled or recurring meetings with a fixed time. This supports local time and GMT formats.
@@ -25334,6 +25446,9 @@ export type WebinarInviteLinksCreateError = Fetcher.ErrorWrapper<undefined>;
 export type WebinarInviteLinksCreateResponse = {
   /**
    * The attendee list.
+   *
+   * @maxItems 500
+   * @minItems 1
    */
   attendees?: {
     /**
@@ -25366,6 +25481,20 @@ export type WebinarInviteLinksCreateRequestBody = {
      * @example Jill Chill
      */
     name: string;
+    /**
+     * Whether to disable participant video when joining the meeting. If not provided or set to `false`, the participant video will follow the meeting's default settings.
+     *
+     * @example false
+     * @default false
+     */
+    disable_video?: boolean;
+    /**
+     * Whether to disable participant audio when joining the meeting. If not provided or set to `false`, the participant audio will follow the meeting's default settings.
+     *
+     * @example false
+     * @default false
+     */
+    disable_audio?: boolean;
   }[];
   /**
    * The invite link's expiration time, in seconds.
