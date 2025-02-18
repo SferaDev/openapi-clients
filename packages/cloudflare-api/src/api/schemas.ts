@@ -25537,6 +25537,14 @@ export type MagicVisibilityPcapsPcapsFilterV1 = {
 export type MagicVisibilityPcapsPcapsId = string;
 
 /**
+ * The RFC 3339 offset timestamp from which to query backwards for packets. Must be within the last 24h. When this field is empty, defaults to time of request.
+ *
+ * @example 2020-01-01T08:00:00Z
+ * @format date-time
+ */
+export type MagicVisibilityPcapsPcapsOffsetTime = string;
+
+/**
  * The ownership challenge filename stored in the bucket.
  *
  * @example ownership-challenge-9883874ecac311ec8475433579a6bf5f.txt
@@ -25625,6 +25633,7 @@ export type MagicVisibilityPcapsPcapsRequestPcap =
 
 export type MagicVisibilityPcapsPcapsRequestSimple = {
   filter_v1?: MagicVisibilityPcapsPcapsFilterV1;
+  offset_time?: MagicVisibilityPcapsPcapsOffsetTime;
   packet_limit: MagicVisibilityPcapsPcapsPacketLimit;
   system: MagicVisibilityPcapsPcapsSystem;
   time_limit: MagicVisibilityPcapsPcapsTimeLimit;
@@ -25648,6 +25657,7 @@ export type MagicVisibilityPcapsPcapsResponseFull = {
 export type MagicVisibilityPcapsPcapsResponseSimple = {
   filter_v1?: MagicVisibilityPcapsPcapsFilterV1;
   id?: MagicVisibilityPcapsPcapsId;
+  offset_time?: MagicVisibilityPcapsPcapsOffsetTime;
   status?: MagicVisibilityPcapsPcapsStatus;
   submitted?: MagicVisibilityPcapsPcapsSubmitted;
   system?: MagicVisibilityPcapsPcapsSystem;
@@ -39390,6 +39400,7 @@ export type TeamsDevicesDefaultDeviceSettingsPolicy = {
    */
   ['default']?: boolean;
   disable_auto_fallback?: TeamsDevicesDisableAutoFallback;
+  doh_in_tunnel?: TeamsDevicesDohInTunnel;
   /**
    * Whether the policy will be applied to matching devices.
    *
@@ -39401,6 +39412,7 @@ export type TeamsDevicesDefaultDeviceSettingsPolicy = {
   fallback_domains?: TeamsDevicesFallbackDomains;
   gateway_unique_id?: TeamsDevicesGatewayUniqueId;
   include?: TeamsDevicesInclude;
+  register_interface_ip_with_dns?: TeamsDevicesRegisterInterfaceIpWithDns;
   service_mode_v2?: TeamsDevicesServiceModeV2;
   support_url?: TeamsDevicesSupportUrl;
   switch_locked?: TeamsDevicesSwitchLocked;
@@ -39570,6 +39582,7 @@ export type TeamsDevicesDeviceSettingsPolicy = {
   ['default']?: TeamsDevicesDefault;
   description?: TeamsDevicesSchemasDescription;
   disable_auto_fallback?: TeamsDevicesDisableAutoFallback;
+  doh_in_tunnel?: TeamsDevicesDohInTunnel;
   /**
    * Whether the policy will be applied to matching devices.
    *
@@ -39593,6 +39606,7 @@ export type TeamsDevicesDeviceSettingsPolicy = {
   name?: string;
   policy_id?: TeamsDevicesSchemasUuid;
   precedence?: TeamsDevicesPrecedence;
+  register_interface_ip_with_dns?: TeamsDevicesRegisterInterfaceIpWithDns;
   service_mode_v2?: TeamsDevicesServiceModeV2;
   support_url?: TeamsDevicesSupportUrl;
   switch_locked?: TeamsDevicesSwitchLocked;
@@ -39735,6 +39749,13 @@ export type TeamsDevicesDiskEncryptionInputRequest = {
   checkDisks?: TeamsDevicesCheckDisks;
   requireAll?: TeamsDevicesRequireAll;
 };
+
+/**
+ * Determines how the WARP client sends DNS requests to Cloudflare Gateway. When `true`, DNS traffic is sent over DoH inside the WARP tunnel. When `false`, the DoH connection operates outside of the WARP tunnel.
+ *
+ * @example true
+ */
+export type TeamsDevicesDohInTunnel = boolean;
 
 export type TeamsDevicesDomainJoinedInputRequest = {
   /**
@@ -40159,6 +40180,13 @@ export type TeamsDevicesPlatform = 'windows' | 'mac' | 'linux' | 'android' | 'io
  * @example 100
  */
 export type TeamsDevicesPrecedence = number;
+
+/**
+ * Determines if the operating system will register WARP's local interface IP with your on-premises DNS server.
+ *
+ * @example true
+ */
+export type TeamsDevicesRegisterInterfaceIpWithDns = boolean;
 
 /**
  * Whether to check all disks for encryption.
