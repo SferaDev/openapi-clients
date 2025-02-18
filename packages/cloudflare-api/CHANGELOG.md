@@ -1,5 +1,13 @@
 # cloudflare-api-js
 
+## 0.6.2
+
+### Patch Changes
+
+- d285a4c: Add register_interface_ip_with_dns field to TeamsDevicesDeviceSettingsPolicy and related request bodies
+- 8fe0d4b: Add log_management_strategy field to AigConfig types
+- fbf7deb: [OpenAPI] Spec updates for cloudflare-api-js
+
 ## 0.6.1
 
 ### Patch Changes
