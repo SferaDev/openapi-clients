@@ -5263,6 +5263,7 @@ export type AigConfigListGatewayResponse = {
      * @minimum 10000
      */
     log_management?: number | null;
+    log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
     logpush?: boolean;
     /**
      * @maxLength 1024
@@ -5359,6 +5360,7 @@ export type AigConfigCreateGatewayResponse = {
      * @minimum 10000
      */
     log_management?: number | null;
+    log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
     logpush?: boolean;
     /**
      * @maxLength 1024
@@ -5404,6 +5406,7 @@ export type AigConfigCreateGatewayRequestBody = {
    * @minimum 10000
    */
   log_management?: number | null;
+  log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
   logpush?: boolean;
   /**
    * @maxLength 1024
@@ -7200,6 +7203,7 @@ export type AigConfigDeleteGatewayResponse = {
      * @minimum 10000
      */
     log_management?: number | null;
+    log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
     logpush?: boolean;
     /**
      * @maxLength 1024
@@ -7301,6 +7305,7 @@ export type AigConfigFetchGatewayResponse = {
      * @minimum 10000
      */
     log_management?: number | null;
+    log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
     logpush?: boolean;
     /**
      * @maxLength 1024
@@ -7419,6 +7424,7 @@ export type AigConfigUpdateGatewayResponse = {
      * @minimum 10000
      */
     log_management?: number | null;
+    log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
     logpush?: boolean;
     /**
      * @maxLength 1024
@@ -7455,6 +7461,7 @@ export type AigConfigUpdateGatewayRequestBody = {
    * @minimum 10000
    */
   log_management?: number | null;
+  log_management_strategy?: 'STOP_INSERTING' | 'DELETE_OLDEST' | null;
   logpush?: boolean;
   /**
    * @maxLength 1024
