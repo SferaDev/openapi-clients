@@ -5234,6 +5234,7 @@ export type AigConfigListGatewayResponse = {
   result: {
     account_id: string;
     account_tag: string;
+    authentication?: boolean;
     cache_invalidate_on_update: boolean;
     /**
      * @minimum 0
@@ -5257,6 +5258,11 @@ export type AigConfigListGatewayResponse = {
      * @format uuid
      */
     internal_id: string;
+    /**
+     * @maximum 10000000
+     * @minimum 10000
+     */
+    log_management?: number | null;
     logpush?: boolean;
     /**
      * @maxLength 1024
@@ -5324,6 +5330,7 @@ export type AigConfigCreateGatewayResponse = {
   result: {
     account_id: string;
     account_tag: string;
+    authentication?: boolean;
     cache_invalidate_on_update: boolean;
     /**
      * @minimum 0
@@ -5347,6 +5354,11 @@ export type AigConfigCreateGatewayResponse = {
      * @format uuid
      */
     internal_id: string;
+    /**
+     * @maximum 10000000
+     * @minimum 10000
+     */
+    log_management?: number | null;
     logpush?: boolean;
     /**
      * @maxLength 1024
@@ -5371,6 +5383,7 @@ export type AigConfigCreateGatewayResponse = {
 };
 
 export type AigConfigCreateGatewayRequestBody = {
+  authentication?: boolean;
   cache_invalidate_on_update: boolean;
   /**
    * @minimum 0
@@ -5386,6 +5399,11 @@ export type AigConfigCreateGatewayRequestBody = {
    * @pattern ^[a-z0-9_]+(?:-[a-z0-9_]+)*$
    */
   id: string;
+  /**
+   * @maximum 10000000
+   * @minimum 10000
+   */
+  log_management?: number | null;
   logpush?: boolean;
   /**
    * @maxLength 1024
@@ -7153,6 +7171,7 @@ export type AigConfigDeleteGatewayResponse = {
   result: {
     account_id: string;
     account_tag: string;
+    authentication?: boolean;
     cache_invalidate_on_update: boolean;
     /**
      * @minimum 0
@@ -7176,6 +7195,11 @@ export type AigConfigDeleteGatewayResponse = {
      * @format uuid
      */
     internal_id: string;
+    /**
+     * @maximum 10000000
+     * @minimum 10000
+     */
+    log_management?: number | null;
     logpush?: boolean;
     /**
      * @maxLength 1024
@@ -7248,6 +7272,7 @@ export type AigConfigFetchGatewayResponse = {
   result: {
     account_id: string;
     account_tag: string;
+    authentication?: boolean;
     cache_invalidate_on_update: boolean;
     /**
      * @minimum 0
@@ -7271,6 +7296,11 @@ export type AigConfigFetchGatewayResponse = {
      * @format uuid
      */
     internal_id: string;
+    /**
+     * @maximum 10000000
+     * @minimum 10000
+     */
+    log_management?: number | null;
     logpush?: boolean;
     /**
      * @maxLength 1024
@@ -7360,6 +7390,7 @@ export type AigConfigUpdateGatewayResponse = {
   result: {
     account_id: string;
     account_tag: string;
+    authentication?: boolean;
     cache_invalidate_on_update: boolean;
     /**
      * @minimum 0
@@ -7383,6 +7414,11 @@ export type AigConfigUpdateGatewayResponse = {
      * @format uuid
      */
     internal_id: string;
+    /**
+     * @maximum 10000000
+     * @minimum 10000
+     */
+    log_management?: number | null;
     logpush?: boolean;
     /**
      * @maxLength 1024
@@ -7407,12 +7443,18 @@ export type AigConfigUpdateGatewayResponse = {
 };
 
 export type AigConfigUpdateGatewayRequestBody = {
+  authentication?: boolean;
   cache_invalidate_on_update: boolean;
   /**
    * @minimum 0
    */
   cache_ttl: number | null;
   collect_logs: boolean;
+  /**
+   * @maximum 10000000
+   * @minimum 10000
+   */
+  log_management?: number | null;
   logpush?: boolean;
   /**
    * @maxLength 1024
@@ -39532,11 +39574,7 @@ export type CloudflareTunnelListCloudflareTunnelsQueryParams = {
   exclude_prefix?: string;
   status?: Schemas.TunnelStatus;
   per_page?: Schemas.TunnelPerPage;
-  /**
-   * @default 1
-   * @minimum 1
-   */
-  page?: number;
+  page?: Schemas.TunnelPageNumber;
 };
 
 export type CloudflareTunnelListCloudflareTunnelsError = Fetcher.ErrorWrapper<{
@@ -40867,7 +40905,7 @@ export const cloudflareD1DeleteDatabase = (variables: CloudflareD1DeleteDatabase
 
 export type CloudflareD1GetDatabasePathParams = {
   accountId: Schemas.D1AccountIdentifier;
-  databaseId: Schemas.D1DatabaseIdentifier;
+  databaseId: Schemas.D1DatabaseIdentifier | Schemas.D1DatabaseName;
 };
 
 export type CloudflareD1GetDatabaseError = Fetcher.ErrorWrapper<{
@@ -53898,6 +53936,233 @@ export const mconnConnectorReplace = (variables: MconnConnectorReplaceVariables,
     MconnConnectorReplacePathParams
   >({ url: '/accounts/{accountId}/magic/connectors/{connectorId}', method: 'put', ...variables, signal });
 
+export type MconnConnectorTelemetryEventsListPathParams = {
+  accountId: number;
+  connectorId: string;
+};
+
+export type MconnConnectorTelemetryEventsListQueryParams = {
+  from: number;
+  to: number;
+  limit?: number;
+  cursor?: string;
+};
+
+export type MconnConnectorTelemetryEventsListError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.MconnEnvelope;
+    }
+  | {
+      status: 401;
+      payload: Schemas.MconnEnvelope;
+    }
+  | {
+      status: 403;
+      payload: Schemas.MconnEnvelope;
+    }
+  | {
+      status: 429;
+      payload: Schemas.MconnEnvelope;
+    }
+  | {
+      status: 500;
+      payload: Schemas.MconnEnvelope;
+    }
+>;
+
+export type MconnConnectorTelemetryEventsListVariables = {
+  pathParams: MconnConnectorTelemetryEventsListPathParams;
+  queryParams: MconnConnectorTelemetryEventsListQueryParams;
+} & FetcherExtraProps;
+
+export const mconnConnectorTelemetryEventsList = (
+  variables: MconnConnectorTelemetryEventsListVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.MconnCustomerEventsGetSuccess,
+    MconnConnectorTelemetryEventsListError,
+    undefined,
+    {},
+    MconnConnectorTelemetryEventsListQueryParams,
+    MconnConnectorTelemetryEventsListPathParams
+  >({
+    url: '/accounts/{accountId}/magic/connectors/{connectorId}/telemetry/events',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type MconnConnectorTelemetryEventsGetPathParams = {
+  accountId: number;
+  connectorId: string;
+  eventT: number;
+  eventN: number;
+};
+
+export type MconnConnectorTelemetryEventsGetError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.MconnEnvelope;
+    }
+  | {
+      status: 401;
+      payload: Schemas.MconnEnvelope;
+    }
+  | {
+      status: 403;
+      payload: Schemas.MconnEnvelope;
+    }
+  | {
+      status: 404;
+      payload: Schemas.MconnEnvelope;
+    }
+  | {
+      status: 429;
+      payload: Schemas.MconnEnvelope;
+    }
+  | {
+      status: 500;
+      payload: Schemas.MconnEnvelope;
+    }
+>;
+
+export type MconnConnectorTelemetryEventsGetVariables = {
+  pathParams: MconnConnectorTelemetryEventsGetPathParams;
+} & FetcherExtraProps;
+
+export const mconnConnectorTelemetryEventsGet = (
+  variables: MconnConnectorTelemetryEventsGetVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.MconnCustomerEventGetSuccess,
+    MconnConnectorTelemetryEventsGetError,
+    undefined,
+    {},
+    {},
+    MconnConnectorTelemetryEventsGetPathParams
+  >({
+    url: '/accounts/{accountId}/magic/connectors/{connectorId}/telemetry/events/{eventT}.{eventN}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type MconnConnectorTelemetrySnapshotsListPathParams = {
+  accountId: number;
+  connectorId: string;
+};
+
+export type MconnConnectorTelemetrySnapshotsListQueryParams = {
+  from: number;
+  to: number;
+  limit?: number;
+  cursor?: string;
+};
+
+export type MconnConnectorTelemetrySnapshotsListError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.MconnEnvelope;
+    }
+  | {
+      status: 401;
+      payload: Schemas.MconnEnvelope;
+    }
+  | {
+      status: 403;
+      payload: Schemas.MconnEnvelope;
+    }
+  | {
+      status: 429;
+      payload: Schemas.MconnEnvelope;
+    }
+  | {
+      status: 500;
+      payload: Schemas.MconnEnvelope;
+    }
+>;
+
+export type MconnConnectorTelemetrySnapshotsListVariables = {
+  pathParams: MconnConnectorTelemetrySnapshotsListPathParams;
+  queryParams: MconnConnectorTelemetrySnapshotsListQueryParams;
+} & FetcherExtraProps;
+
+export const mconnConnectorTelemetrySnapshotsList = (
+  variables: MconnConnectorTelemetrySnapshotsListVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.MconnCustomerSnapshotsGetSuccess,
+    MconnConnectorTelemetrySnapshotsListError,
+    undefined,
+    {},
+    MconnConnectorTelemetrySnapshotsListQueryParams,
+    MconnConnectorTelemetrySnapshotsListPathParams
+  >({
+    url: '/accounts/{accountId}/magic/connectors/{connectorId}/telemetry/snapshots',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type MconnConnectorTelemetrySnapshotsGetPathParams = {
+  accountId: number;
+  connectorId: string;
+  snapshotT: number;
+};
+
+export type MconnConnectorTelemetrySnapshotsGetError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.MconnEnvelope;
+    }
+  | {
+      status: 401;
+      payload: Schemas.MconnEnvelope;
+    }
+  | {
+      status: 403;
+      payload: Schemas.MconnEnvelope;
+    }
+  | {
+      status: 404;
+      payload: Schemas.MconnEnvelope;
+    }
+  | {
+      status: 429;
+      payload: Schemas.MconnEnvelope;
+    }
+  | {
+      status: 500;
+      payload: Schemas.MconnEnvelope;
+    }
+>;
+
+export type MconnConnectorTelemetrySnapshotsGetVariables = {
+  pathParams: MconnConnectorTelemetrySnapshotsGetPathParams;
+} & FetcherExtraProps;
+
+export const mconnConnectorTelemetrySnapshotsGet = (
+  variables: MconnConnectorTelemetrySnapshotsGetVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.MconnCustomerSnapshotGetSuccess,
+    MconnConnectorTelemetrySnapshotsGetError,
+    undefined,
+    {},
+    {},
+    MconnConnectorTelemetrySnapshotsGetPathParams
+  >({
+    url: '/accounts/{accountId}/magic/connectors/{connectorId}/telemetry/snapshots/{snapshotT}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
 export type MagicGreTunnelsListGreTunnelsPathParams = {
   accountId: Schemas.MagicIdentifier;
 };
@@ -58658,6 +58923,20 @@ export type AccountRolesListRolesPathParams = {
   accountId: Schemas.IamAccountIdentifier;
 };
 
+export type AccountRolesListRolesQueryParams = {
+  /**
+   * @default 1
+   * @minimum 1
+   */
+  page?: number;
+  /**
+   * @default 20
+   * @maximum 50
+   * @minimum 5
+   */
+  per_page?: number;
+};
+
 export type AccountRolesListRolesError = Fetcher.ErrorWrapper<{
   status: 400;
   payload: Schemas.IamApiResponseCommonFailure;
@@ -58665,6 +58944,7 @@ export type AccountRolesListRolesError = Fetcher.ErrorWrapper<{
 
 export type AccountRolesListRolesVariables = {
   pathParams: AccountRolesListRolesPathParams;
+  queryParams?: AccountRolesListRolesQueryParams;
 } & FetcherExtraProps;
 
 /**
@@ -58676,7 +58956,7 @@ export const accountRolesListRoles = (variables: AccountRolesListRolesVariables,
     AccountRolesListRolesError,
     undefined,
     {},
-    {},
+    AccountRolesListRolesQueryParams,
     AccountRolesListRolesPathParams
   >({ url: '/accounts/{accountId}/roles', method: 'get', ...variables, signal });
 
@@ -63148,11 +63428,7 @@ export type TunnelRouteListTunnelRoutesQueryParams = {
   tun_types?: Schemas.TunnelTunnelTypes;
   virtual_network_id?: Schemas.TunnelVirtualNetworkId;
   per_page?: Schemas.TunnelPerPage;
-  /**
-   * @default 1
-   * @minimum 1
-   */
-  page?: number;
+  page?: Schemas.TunnelPageNumber;
 };
 
 export type TunnelRouteListTunnelRoutesError = Fetcher.ErrorWrapper<{
@@ -63720,7 +63996,7 @@ export const accountApiTokensListPermissionGroups = (
   signal?: AbortSignal
 ) =>
   fetch<
-    Schemas.IamSchemasResponseCollection,
+    Schemas.IamPermissionsGroupResponseCollection,
     AccountApiTokensListPermissionGroupsError,
     undefined,
     {},
@@ -63900,11 +64176,7 @@ export type CloudflareTunnelListAllTunnelsQueryParams = {
   tun_types?: Schemas.TunnelTunnelTypes;
   status?: Schemas.TunnelStatus;
   per_page?: Schemas.TunnelPerPage;
-  /**
-   * @default 1
-   * @minimum 1
-   */
-  page?: number;
+  page?: Schemas.TunnelPageNumber;
 };
 
 export type CloudflareTunnelListAllTunnelsError = Fetcher.ErrorWrapper<{
@@ -64058,12 +64330,6 @@ export type UrlscannerSearchScansQueryParams = {
    * @example 1.1.1.1
    */
   ip?: string;
-  /**
-   * Filter scans by Autonomous System Number (ASN) of _any_ request made by the webpage.
-   *
-   * @example 13335
-   */
-  asn?: string;
   /**
    * Filter scans by hash of any html/js/css request made by the webpage.
    */
@@ -66215,7 +66481,7 @@ export type UrlscannerGetResponseV2Variables = {
 } & FetcherExtraProps;
 
 /**
- * Returns the raw response of the network request. If HTML, a plain text response will be returned.
+ * Returns the raw response of the network request. Find the `response_id` in the `data.requests.response.hash`.
  */
 export const urlscannerGetResponseV2 = (variables: UrlscannerGetResponseV2Variables, signal?: AbortSignal) =>
   fetch<undefined, UrlscannerGetResponseV2Error, undefined, {}, {}, UrlscannerGetResponseV2PathParams>({
@@ -67153,7 +67419,7 @@ export type UrlscannerSearchScansV2Variables = {
 } & FetcherExtraProps;
 
 /**
- * Use a subset of ElasticSearch Query syntax to filter scans. Some example queries:<br/> <br/>- 'page.domain:microsoft AND verdicts.malicious:true AND NOT page.domain:microsoft.com': malicious scans whose hostname starts with "microsoft".<br/>- 'apikey:me AND date:[2024-01 TO 2024-10]': my scans from 2024 January to 2024 October.<br/>- 'page.domain:(blogspot OR www.blogspot)': Searches for scans whose main domain starts with "blogspot" or with "www.blogspot"<br/>- 'page.asn:AS24940 AND hash:xxx': Websites hosted in AS24940 where a resource with the given hash was downloaded.
+ * Use a subset of ElasticSearch Query syntax to filter scans. Some example queries:<br/> <br/>- 'path:"/bundles/jquery.js"': Searches for scans who requested resources with the given path.<br/>- 'page.asn:AS24940 AND hash:xxx': Websites hosted in AS24940 where a resource with the given hash was downloaded.<br/>- 'page.domain:microsoft* AND verdicts.malicious:true AND NOT page.domain:microsoft.com': malicious scans whose hostname starts with "microsoft".<br/>- 'apikey:me AND date:[2025-01 TO 2025-02]': my scans from 2025 January to 2025 February.
  */
 export const urlscannerSearchScansV2 = (variables: UrlscannerSearchScansV2Variables, signal?: AbortSignal) =>
   fetch<
@@ -68072,11 +68338,7 @@ export type CloudflareTunnelListWarpConnectorTunnelsQueryParams = {
   exclude_prefix?: string;
   status?: Schemas.TunnelStatus;
   per_page?: Schemas.TunnelPerPage;
-  /**
-   * @default 1
-   * @minimum 1
-   */
-  page?: number;
+  page?: Schemas.TunnelPageNumber;
 };
 
 export type CloudflareTunnelListWarpConnectorTunnelsError = Fetcher.ErrorWrapper<{
@@ -71014,7 +71276,8 @@ export type WorCreateNewWorkflowInstanceResponse = {
 
 export type WorCreateNewWorkflowInstanceRequestBody = {
   /**
-   * @maxLength 64
+   * @maximum 64
+   * @minimum 1
    * @pattern ^[a-zA-Z0-9_][a-zA-Z0-9-_]*$
    */
   instance_id?: string;
@@ -71586,6 +71849,103 @@ export const zeroTrustAccountsPatchConnectivitySettings = (
     {},
     ZeroTrustAccountsPatchConnectivitySettingsPathParams
   >({ url: '/accounts/{accountId}/zerotrust/connectivity_settings', method: 'patch', ...variables, signal });
+
+export type ZeroTrustNetworksSubnetsListPathParams = {
+  accountId: Schemas.TunnelAccountId;
+};
+
+export type ZeroTrustNetworksSubnetsListQueryParams = {
+  /**
+   * If set, only list subnets with the given name
+   */
+  name?: Schemas.TunnelSubnetQueryName;
+  comment?: Schemas.TunnelSubnetQueryComment;
+  /**
+   * IP/CIDR range in URL-encoded format
+   *
+   * @example 172.16.0.0%2F16
+   */
+  network?: Schemas.TunnelIpNetworkEncoded;
+  existed_at?: Schemas.TunnelExistedAt;
+  /**
+   * If set, only include subnets in the given address family - `v4` or `v6`
+   */
+  address_family?: Schemas.TunnelAddressFamily;
+  is_default_network?: boolean;
+  is_deleted?: boolean;
+  sort_order?: 'asc' | 'desc';
+  /**
+   * @example cloudflare_source
+   */
+  subnet_types?: 'cloudflare_source';
+  per_page?: Schemas.TunnelPerPage;
+  page?: Schemas.TunnelPageNumber;
+};
+
+export type ZeroTrustNetworksSubnetsListError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.TunnelSubnetResponseCollection & Schemas.TunnelApiResponseCommonFailure;
+}>;
+
+export type ZeroTrustNetworksSubnetsListVariables = {
+  pathParams: ZeroTrustNetworksSubnetsListPathParams;
+  queryParams?: ZeroTrustNetworksSubnetsListQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Lists and filters subnets in an account.
+ */
+export const zeroTrustNetworksSubnetsList = (variables: ZeroTrustNetworksSubnetsListVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.TunnelSubnetResponseCollection,
+    ZeroTrustNetworksSubnetsListError,
+    undefined,
+    {},
+    ZeroTrustNetworksSubnetsListQueryParams,
+    ZeroTrustNetworksSubnetsListPathParams
+  >({ url: '/accounts/{accountId}/zerotrust/subnets', method: 'get', ...variables, signal });
+
+export type ZeroTrustNetworksSubnetUpdateCloudflareSourcePathParams = {
+  accountId: Schemas.TunnelAccountId;
+  addressFamily: Schemas.TunnelAddressFamily;
+};
+
+export type ZeroTrustNetworksSubnetUpdateCloudflareSourceError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.TunnelSubnetResponseSingle & Schemas.TunnelApiResponseCommonFailure;
+}>;
+
+export type ZeroTrustNetworksSubnetUpdateCloudflareSourceRequestBody = {
+  comment?: Schemas.TunnelSubnetComment;
+  name?: Schemas.TunnelSubnetName;
+  network?: Schemas.TunnelSubnetIpNetwork;
+};
+
+export type ZeroTrustNetworksSubnetUpdateCloudflareSourceVariables = {
+  body?: ZeroTrustNetworksSubnetUpdateCloudflareSourceRequestBody;
+  pathParams: ZeroTrustNetworksSubnetUpdateCloudflareSourcePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Updates the Cloudflare Source subnet of the given address family
+ */
+export const zeroTrustNetworksSubnetUpdateCloudflareSource = (
+  variables: ZeroTrustNetworksSubnetUpdateCloudflareSourceVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.TunnelSubnetResponseSingle,
+    ZeroTrustNetworksSubnetUpdateCloudflareSourceError,
+    ZeroTrustNetworksSubnetUpdateCloudflareSourceRequestBody,
+    {},
+    {},
+    ZeroTrustNetworksSubnetUpdateCloudflareSourcePathParams
+  >({
+    url: '/accounts/{accountId}/zerotrust/subnets/cloudflare_source/{addressFamily}',
+    method: 'patch',
+    ...variables,
+    signal
+  });
 
 export type DlpRiskScoreBehaviorsGetPathParams = {
   accountId: string;
@@ -102595,12 +102955,14 @@ export const permissionGroupsListPermissionGroups = (
   variables: PermissionGroupsListPermissionGroupsVariables,
   signal?: AbortSignal
 ) =>
-  fetch<Schemas.IamSchemasResponseCollection, PermissionGroupsListPermissionGroupsError, undefined, {}, {}, {}>({
-    url: '/user/tokens/permission_groups',
-    method: 'get',
-    ...variables,
-    signal
-  });
+  fetch<
+    Schemas.IamPermissionsGroupResponseCollection,
+    PermissionGroupsListPermissionGroupsError,
+    undefined,
+    {},
+    {},
+    {}
+  >({ url: '/user/tokens/permission_groups', method: 'get', ...variables, signal });
 
 export type UserApiTokensVerifyTokenError = Fetcher.ErrorWrapper<{
   status: 400;
@@ -103088,50 +103450,6 @@ export const customPagesForAZoneUpdateACustomPage = (
     CustomPagesForAZoneUpdateACustomPagePathParams
   >({ url: '/zones/{zoneIdentifier}/custom_pages/{identifier}', method: 'put', ...variables, signal });
 
-export type SslTlsModeRecommendationSslTlsRecommendationPathParams = {
-  zoneIdentifier: Schemas.LegacyJhsIdentifier;
-};
-
-export type SslTlsModeRecommendationSslTlsRecommendationError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: (Schemas.LegacyJhsApiResponseSingle & {
-    result?: {
-      id?: Schemas.LegacyJhsId;
-      modified_on?: Schemas.LegacyJhsTimestamp;
-      value?: Schemas.LegacyJhsValue;
-    };
-  }) &
-    Schemas.LegacyJhsApiResponseCommonFailure;
-}>;
-
-export type SslTlsModeRecommendationSslTlsRecommendationResponse = Schemas.LegacyJhsApiResponseSingle & {
-  result?: {
-    id?: Schemas.LegacyJhsId;
-    modified_on?: Schemas.LegacyJhsTimestamp;
-    value?: Schemas.LegacyJhsValue;
-  };
-};
-
-export type SslTlsModeRecommendationSslTlsRecommendationVariables = {
-  pathParams: SslTlsModeRecommendationSslTlsRecommendationPathParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieve the SSL/TLS Recommender's recommendation for a zone.
- */
-export const sslTlsModeRecommendationSslTlsRecommendation = (
-  variables: SslTlsModeRecommendationSslTlsRecommendationVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    SslTlsModeRecommendationSslTlsRecommendationResponse,
-    SslTlsModeRecommendationSslTlsRecommendationError,
-    undefined,
-    {},
-    {},
-    SslTlsModeRecommendationSslTlsRecommendationPathParams
-  >({ url: '/zones/{zoneIdentifier}/ssl/recommendation', method: 'get', ...variables, signal });
-
 export type Zones0DeletePathParams = {
   zoneId: Schemas.ZonesIdentifier;
 };
@@ -103213,7 +103531,7 @@ export type Zones0PatchRequestBody = {
    *
    * @example full
    */
-  type?: 'full' | 'partial' | 'secondary';
+  type?: 'full' | 'partial' | 'secondary' | 'internal';
   vanity_name_servers?: Schemas.ZonesVanityNameServers;
 };
 
@@ -117594,6 +117912,50 @@ export const certificatePacksRestartValidationForAdvancedCertificateManagerCerti
     CertificatePacksRestartValidationForAdvancedCertificateManagerCertificatePackPathParams
   >({ url: '/zones/{zoneId}/ssl/certificate_packs/{certificatePackId}', method: 'patch', ...variables, signal });
 
+export type SslTlsModeRecommendationSslTlsRecommendationPathParams = {
+  zoneId: Schemas.CacheIdentifier;
+};
+
+export type SslTlsModeRecommendationSslTlsRecommendationError = Fetcher.ErrorWrapper<{
+  status: ClientErrorStatus;
+  payload: (Schemas.CacheApiResponseSingle & {
+    result?: {
+      id?: Schemas.CacheRecommendationId;
+      modified_on?: Schemas.CacheTimestamp;
+      value?: Schemas.CacheRecommendationValue;
+    };
+  }) &
+    Schemas.CacheApiResponseCommonFailure;
+}>;
+
+export type SslTlsModeRecommendationSslTlsRecommendationResponse = Schemas.CacheApiResponseSingle & {
+  result?: {
+    id?: Schemas.CacheRecommendationId;
+    modified_on?: Schemas.CacheTimestamp;
+    value?: Schemas.CacheRecommendationValue;
+  };
+};
+
+export type SslTlsModeRecommendationSslTlsRecommendationVariables = {
+  pathParams: SslTlsModeRecommendationSslTlsRecommendationPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieve the SSL/TLS Recommender's recommendation for a zone.
+ */
+export const sslTlsModeRecommendationSslTlsRecommendation = (
+  variables: SslTlsModeRecommendationSslTlsRecommendationVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    SslTlsModeRecommendationSslTlsRecommendationResponse,
+    SslTlsModeRecommendationSslTlsRecommendationError,
+    undefined,
+    {},
+    {},
+    SslTlsModeRecommendationSslTlsRecommendationPathParams
+  >({ url: '/zones/{zoneId}/ssl/recommendation', method: 'get', ...variables, signal });
+
 export type UniversalSslSettingsForAZoneUniversalSslSettingsDetailsPathParams = {
   zoneId: Schemas.TlsCertificatesAndHostnamesIdentifier;
 };
@@ -118502,6 +118864,7 @@ export type WaitingRoomGetWaitingRoomStatusVariables = {
  * 	- **not_queueing** indicates that the configured thresholds have not been met and all users are going through to the origin.
  * 	- **queueing** indicates that the thresholds have been met and some users are held in the waiting room.
  * 	- **event_prequeueing** indicates that an event is active and is currently prequeueing users before it starts.
+ * 	- **suspended** indicates that the room is suspended.
  * 2. `event_id`: String of the current event's `id` if an event is active, otherwise an empty string.
  * 3. `estimated_queued_users`: Integer of the estimated number of users currently waiting in the queue.
  * 4. `estimated_total_active_users`: Integer of the estimated number of users currently active on the origin.
@@ -119925,7 +120288,16 @@ export const operationsByTag = {
     magicInterconnectsListInterconnectDetails,
     magicInterconnectsUpdateInterconnect
   },
-  magicConnectors: { mconnConnectorList, mconnConnectorFetch, mconnConnectorUpdate, mconnConnectorReplace },
+  magicConnectors: {
+    mconnConnectorList,
+    mconnConnectorFetch,
+    mconnConnectorUpdate,
+    mconnConnectorReplace,
+    mconnConnectorTelemetryEventsList,
+    mconnConnectorTelemetryEventsGet,
+    mconnConnectorTelemetrySnapshotsList,
+    mconnConnectorTelemetrySnapshotsGet
+  },
   magicGRETunnels: {
     magicGreTunnelsListGreTunnels,
     magicGreTunnelsCreateGreTunnels,
@@ -120369,6 +120741,7 @@ export const operationsByTag = {
     zeroTrustAccountsGetConnectivitySettings,
     zeroTrustAccountsPatchConnectivitySettings
   },
+  zeroTrustSubnets: { zeroTrustNetworksSubnetsList, zeroTrustNetworksSubnetUpdateCloudflareSource },
   zeroTrustRiskScoring: {
     dlpRiskScoreBehaviorsGet,
     dlpRiskScoreBehaviorsPut,
@@ -120653,7 +121026,6 @@ export const operationsByTag = {
     customPagesForAZoneGetACustomPage,
     customPagesForAZoneUpdateACustomPage
   },
-  sSLTLSModeRecommendation: { sslTlsModeRecommendationSslTlsRecommendation },
   zoneLevelAccessApplications: {
     zoneLevelAccessApplicationsListAccessApplications,
     zoneLevelAccessApplicationsAddABookmarkApplication,
@@ -121120,6 +121492,7 @@ export const operationsByTag = {
     certificatePacksGetCertificatePack,
     certificatePacksRestartValidationForAdvancedCertificateManagerCertificatePack
   },
+  sSLTLSModeRecommendation: { sslTlsModeRecommendationSslTlsRecommendation },
   universalSSLSettingsForAZone: {
     universalSslSettingsForAZoneUniversalSslSettingsDetails,
     universalSslSettingsForAZoneEditUniversalSslSettings
