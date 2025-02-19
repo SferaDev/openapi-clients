@@ -3381,6 +3381,13 @@ export type AccessPolicyTestsGetAUserPagePathParams = {
   policyTestId: Schemas.AccessPolicyTestId;
 };
 
+export type AccessPolicyTestsGetAUserPageQueryParams = {
+  /**
+   * Filter users by their policy evaluation status.
+   */
+  status?: 'success' | 'fail';
+};
+
 export type AccessPolicyTestsGetAUserPageError = Fetcher.ErrorWrapper<{
   status: 400;
   payload: Schemas.AccessApiResponseCommonFailure;
@@ -3388,6 +3395,7 @@ export type AccessPolicyTestsGetAUserPageError = Fetcher.ErrorWrapper<{
 
 export type AccessPolicyTestsGetAUserPageVariables = {
   pathParams: AccessPolicyTestsGetAUserPagePathParams;
+  queryParams?: AccessPolicyTestsGetAUserPageQueryParams;
 } & FetcherExtraProps;
 
 /**
@@ -3402,7 +3410,7 @@ export const accessPolicyTestsGetAUserPage = (
     AccessPolicyTestsGetAUserPageError,
     undefined,
     {},
-    {},
+    AccessPolicyTestsGetAUserPageQueryParams,
     AccessPolicyTestsGetAUserPagePathParams
   >({ url: '/accounts/{accountId}/access/policy-tests/{policyTestId}/users', method: 'get', ...variables, signal });
 
