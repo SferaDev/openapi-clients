@@ -1,5 +1,5 @@
 ---
-"cloudflare-api-js": minor
+"cloudflare-api-js": patch
 ---
 
 Add LoadBalancingComponentsSchemasZoneName type for zone name
