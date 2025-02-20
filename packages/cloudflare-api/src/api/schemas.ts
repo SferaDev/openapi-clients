@@ -23208,6 +23208,11 @@ export type LoadBalancingComponentsSchemasSingleResponse = LoadBalancingApiRespo
 };
 
 /**
+ * @example example.com
+ */
+export type LoadBalancingComponentsSchemasZoneName = string;
+
+/**
  * To be marked unhealthy the monitored origin must fail this healthcheck N consecutive times.
  *
  * @default 0
@@ -23387,6 +23392,7 @@ export type LoadBalancingLoadBalancer = {
   session_affinity_ttl?: LoadBalancingSessionAffinityTtl;
   steering_policy?: LoadBalancingSteeringPolicy;
   ttl?: LoadBalancingTtl;
+  zone_name?: LoadBalancingComponentsSchemasZoneName;
 };
 
 /**
