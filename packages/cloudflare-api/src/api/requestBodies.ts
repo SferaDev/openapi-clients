@@ -11,7 +11,7 @@ import type * as Schemas from './schemas';
 export type RulesetsCreateRuleset = Schemas.RulesetsRuleset & {
   kind: Schemas.RulesetsRulesetKind;
   phase: Schemas.RulesetsRulesetPhase;
-  rules: Schemas.RulesetsRequestRules;
+  rules?: Schemas.RulesetsRequestRules;
 };
 
 export type RulesetsManagedTransforms = Schemas.RulesetsManagedTransforms;
@@ -51,7 +51,7 @@ export type RulesetsRule = Schemas.RulesetsRequestRule & {
  * A ruleset object.
  */
 export type RulesetsUpdateEntrypointRuleset = Schemas.RulesetsRuleset & {
-  rules: Schemas.RulesetsRequestRules;
+  rules?: Schemas.RulesetsRequestRules;
 };
 
 /**
@@ -60,7 +60,7 @@ export type RulesetsUpdateEntrypointRuleset = Schemas.RulesetsRuleset & {
 export type RulesetsUpdateRuleset = Schemas.RulesetsRuleset & {
   kind?: Schemas.RulesetsRulesetKind;
   phase?: Schemas.RulesetsRulesetPhase;
-  rules: Schemas.RulesetsRequestRules;
+  rules?: Schemas.RulesetsRequestRules;
 };
 
 export type RulesetsUrlNormalization = Schemas.RulesetsUrlNormalization;
