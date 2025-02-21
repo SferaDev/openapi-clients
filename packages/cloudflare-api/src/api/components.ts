@@ -72830,7 +72830,7 @@ export type RadarGetAiBotsSummaryByUserAgentQueryParams = {
    */
   continent?: string[];
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -72998,7 +72998,7 @@ export type RadarGetAiBotsTimeseriesGroupByUserAgentQueryParams = {
    */
   continent?: string[];
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -73089,7 +73089,7 @@ export type RadarGetAiInferenceSummaryByModelQueryParams = {
    */
   dateEnd?: string[];
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -73233,7 +73233,7 @@ export type RadarGetAiInferenceSummaryByTaskQueryParams = {
    */
   dateEnd?: string[];
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -73383,7 +73383,7 @@ export type RadarGetAiInferenceTimeseriesGroupByModelQueryParams = {
    */
   dateEnd?: string[];
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -73480,7 +73480,7 @@ export type RadarGetAiInferenceTimeseriesGroupByTaskQueryParams = {
    */
   dateEnd?: string[];
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -74656,7 +74656,7 @@ export type RadarGetDnsAs112TimeseriesByQueryTypeQueryParams = {
    */
   continent?: string[];
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -74818,7 +74818,7 @@ export type RadarGetDnsAs112TimeseriesByResponseCodesQueryParams = {
    */
   continent?: string[];
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -75563,7 +75563,7 @@ export type RadarGetDnsAs112TimeseriesGroupByQueryTypeQueryParams = {
    */
   continent?: string[];
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -75677,7 +75677,7 @@ export type RadarGetDnsAs112TimeseriesGroupByResponseCodesQueryParams = {
    */
   continent?: string[];
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -77173,7 +77173,7 @@ export type RadarGetAttacksLayer3SummaryByVectorQueryParams = {
    */
   direction?: 'ORIGIN' | 'TARGET';
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -77744,7 +77744,7 @@ export type RadarGetAttacksLayer3TimeseriesGroupByIndustryQueryParams = {
    */
   direction?: 'ORIGIN' | 'TARGET';
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -78114,7 +78114,7 @@ export type RadarGetAttacksLayer3TimeseriesGroupByVectorQueryParams = {
    */
   direction?: 'ORIGIN' | 'TARGET';
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -78246,7 +78246,7 @@ export type RadarGetAttacksLayer3TimeseriesGroupByVerticalQueryParams = {
    */
   direction?: 'ORIGIN' | 'TARGET';
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -79229,7 +79229,7 @@ export type RadarGetAttacksLayer7SummaryByHttpMethodQueryParams = {
     | 'DATA_LOSS_PREVENTION'
   )[];
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -79925,7 +79925,7 @@ export type RadarGetAttacksLayer7SummaryByManagedRulesQueryParams = {
     | 'DATA_LOSS_PREVENTION'
   )[];
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -80152,7 +80152,7 @@ export type RadarGetAttacksLayer7SummaryByMitigationProductQueryParams = {
     | 'TRACK'
   )[];
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -80608,7 +80608,7 @@ export type RadarGetAttacksLayer7TimeseriesGroupByHttpMethodQueryParams = {
    */
   normalization?: 'PERCENTAGE' | 'MIN0_MAX';
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -80995,7 +80995,7 @@ export type RadarGetAttacksLayer7TimeseriesGroupByIndustryQueryParams = {
    */
   normalization?: 'PERCENTAGE' | 'MIN0_MAX';
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -81381,7 +81381,7 @@ export type RadarGetAttacksLayer7TimeseriesGroupByManagedRulesQueryParams = {
    */
   normalization?: 'PERCENTAGE' | 'MIN0_MAX';
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -81568,7 +81568,7 @@ export type RadarGetAttacksLayer7TimeseriesGroupByMitigationProductQueryParams =
    */
   normalization?: 'PERCENTAGE' | 'MIN0_MAX';
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -81767,7 +81767,7 @@ export type RadarGetAttacksLayer7TimeseriesGroupByVerticalQueryParams = {
    */
   normalization?: 'PERCENTAGE' | 'MIN0_MAX';
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -92829,7 +92829,7 @@ export type RadarGetHttpTimeseriesGroupByBrowsersQueryParams = {
    */
   tlsVersion?: ('TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC')[];
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -92986,7 +92986,7 @@ export type RadarGetHttpTimeseriesGroupByBrowserFamiliesQueryParams = {
    */
   tlsVersion?: ('TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC')[];
   /**
-   * Limit the number of objects (eg browsers, verticals, etc) to the top items over the time range.
+   * Limit the number of objects (e.g., browsers, verticals, etc.) to the top items within the specified time range. If the limitPerGroup is set, the response will include that number of items, with the remaining items grouped together under an "other" category.
    *
    * @example 10
    */
@@ -99828,7 +99828,7 @@ export type RadarGetRankingDomainDetailsResponse = {
        * @example 3
        */
       rank?: number;
-      top_locations: {
+      top_locations?: {
         /**
          * @example US
          */
@@ -99869,6 +99869,82 @@ export const radarGetRankingDomainDetails = (variables: RadarGetRankingDomainDet
     RadarGetRankingDomainDetailsQueryParams,
     RadarGetRankingDomainDetailsPathParams
   >({ url: '/radar/ranking/domain/{domain}', method: 'get', ...variables, signal });
+
+export type RadarGetRankingInternetServicesCategoriesQueryParams = {
+  /**
+   * Limit the number of objects in the response.
+   *
+   * @example 5
+   */
+  limit?: number;
+  /**
+   * Array of names that will be used to name the series in responses.
+   *
+   * @example main_series
+   */
+  name?: string[];
+  /**
+   * Array of dates to filter the ranking.
+   *
+   * @example 2022-09-19
+   */
+  date?: string[];
+  /**
+   * Format results are returned in.
+   *
+   * @example json
+   */
+  format?: 'JSON' | 'CSV';
+};
+
+export type RadarGetRankingInternetServicesCategoriesError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      message: string;
+    }[];
+    result: Record<string, any>;
+    /**
+     * @example false
+     */
+    success: boolean;
+  };
+}>;
+
+export type RadarGetRankingInternetServicesCategoriesResponse = {
+  result: {
+    categories_0: {
+      /**
+       * @example Generative AI
+       */
+      name: string;
+    }[];
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RadarGetRankingInternetServicesCategoriesVariables = {
+  queryParams?: RadarGetRankingInternetServicesCategoriesQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Get the list of Internet services categories.
+ */
+export const radarGetRankingInternetServicesCategories = (
+  variables: RadarGetRankingInternetServicesCategoriesVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    RadarGetRankingInternetServicesCategoriesResponse,
+    RadarGetRankingInternetServicesCategoriesError,
+    undefined,
+    {},
+    RadarGetRankingInternetServicesCategoriesQueryParams,
+    {}
+  >({ url: '/radar/ranking/internet_services/categories', method: 'get', ...variables, signal });
 
 export type RadarGetRankingInternetServicesTimeseriesQueryParams = {
   /**
@@ -100115,6 +100191,12 @@ export type RadarGetRankingDomainTimeseriesQueryParams = {
    */
   domains?: string[];
   /**
+   * Filter by domain category.
+   *
+   * @example News & Media
+   */
+  domainCategory?: string[];
+  /**
    * For example, use `7d` and `7dControl` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).
    *
    * @example 7d
@@ -100228,6 +100310,12 @@ export type RadarGetRankingTopDomainsQueryParams = {
    * @example US
    */
   location?: string[];
+  /**
+   * Filter by domain category.
+   *
+   * @example News & Media
+   */
+  domainCategory?: string[];
   /**
    * Array of dates to filter the ranking.
    *
@@ -120971,6 +121059,7 @@ export const operationsByTag = {
   },
   radarRanking: {
     radarGetRankingDomainDetails,
+    radarGetRankingInternetServicesCategories,
     radarGetRankingInternetServicesTimeseries,
     radarGetRankingTopInternetServices,
     radarGetRankingDomainTimeseries,
