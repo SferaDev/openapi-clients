@@ -8278,7 +8278,6 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekMath7bInstructVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -8295,6 +8294,10 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekMath7bInstructVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -8355,8 +8358,6 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekMath7bInstructVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -8378,6 +8379,10 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekMath7bInstructVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -8542,7 +8547,6 @@ export const workersAiPostRunCfDeepseekAiDeepseekMath7bInstruct = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -8559,6 +8563,10 @@ export const workersAiPostRunCfDeepseekAiDeepseekMath7bInstruct = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -8619,8 +8627,6 @@ export const workersAiPostRunCfDeepseekAiDeepseekMath7bInstruct = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -8642,6 +8648,10 @@ export const workersAiPostRunCfDeepseekAiDeepseekMath7bInstruct = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -8868,7 +8878,6 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -8885,6 +8894,10 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -8945,8 +8958,6 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -8968,6 +8979,10 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -9132,7 +9147,6 @@ export const workersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32b = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -9149,6 +9163,10 @@ export const workersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32b = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -9209,8 +9227,6 @@ export const workersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32b = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -9232,6 +9248,10 @@ export const workersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32b = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -9458,7 +9478,6 @@ export type WorkersAiPostRunCfDefogSqlcoder7b2Variables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -9475,6 +9494,10 @@ export type WorkersAiPostRunCfDefogSqlcoder7b2Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -9535,8 +9558,6 @@ export type WorkersAiPostRunCfDefogSqlcoder7b2Variables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -9558,6 +9579,10 @@ export type WorkersAiPostRunCfDefogSqlcoder7b2Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -9722,7 +9747,6 @@ export const workersAiPostRunCfDefogSqlcoder7b2 = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -9739,6 +9763,10 @@ export const workersAiPostRunCfDefogSqlcoder7b2 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -9799,8 +9827,6 @@ export const workersAiPostRunCfDefogSqlcoder7b2 = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -9822,6 +9848,10 @@ export const workersAiPostRunCfDefogSqlcoder7b2 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -10166,7 +10196,6 @@ export type WorkersAiPostRunCfFblgitUnaCybertron7bV2Bf16Variables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -10183,6 +10212,10 @@ export type WorkersAiPostRunCfFblgitUnaCybertron7bV2Bf16Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -10243,8 +10276,6 @@ export type WorkersAiPostRunCfFblgitUnaCybertron7bV2Bf16Variables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -10266,6 +10297,10 @@ export type WorkersAiPostRunCfFblgitUnaCybertron7bV2Bf16Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -10430,7 +10465,6 @@ export const workersAiPostRunCfFblgitUnaCybertron7bV2Bf16 = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -10447,6 +10481,10 @@ export const workersAiPostRunCfFblgitUnaCybertron7bV2Bf16 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -10507,8 +10545,6 @@ export const workersAiPostRunCfFblgitUnaCybertron7bV2Bf16 = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -10530,6 +10566,10 @@ export const workersAiPostRunCfFblgitUnaCybertron7bV2Bf16 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -10751,7 +10791,6 @@ export type WorkersAiPostRunCfGoogleGemma2bItLoraVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -10768,6 +10807,10 @@ export type WorkersAiPostRunCfGoogleGemma2bItLoraVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -10828,8 +10871,6 @@ export type WorkersAiPostRunCfGoogleGemma2bItLoraVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -10851,6 +10892,10 @@ export type WorkersAiPostRunCfGoogleGemma2bItLoraVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -11015,7 +11060,6 @@ export const workersAiPostRunCfGoogleGemma2bItLora = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -11032,6 +11076,10 @@ export const workersAiPostRunCfGoogleGemma2bItLora = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -11092,8 +11140,6 @@ export const workersAiPostRunCfGoogleGemma2bItLora = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -11115,6 +11161,10 @@ export const workersAiPostRunCfGoogleGemma2bItLora = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -11336,7 +11386,6 @@ export type WorkersAiPostRunCfGoogleGemma7bItLoraVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -11353,6 +11402,10 @@ export type WorkersAiPostRunCfGoogleGemma7bItLoraVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -11413,8 +11466,6 @@ export type WorkersAiPostRunCfGoogleGemma7bItLoraVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -11436,6 +11487,10 @@ export type WorkersAiPostRunCfGoogleGemma7bItLoraVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -11600,7 +11655,6 @@ export const workersAiPostRunCfGoogleGemma7bItLora = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -11617,6 +11671,10 @@ export const workersAiPostRunCfGoogleGemma7bItLora = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -11677,8 +11735,6 @@ export const workersAiPostRunCfGoogleGemma7bItLora = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -11700,6 +11756,10 @@ export const workersAiPostRunCfGoogleGemma7bItLora = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -12071,7 +12131,6 @@ export type WorkersAiPostRunCfMetaLlamaLlama27bChatHfLoraVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -12088,6 +12147,10 @@ export type WorkersAiPostRunCfMetaLlamaLlama27bChatHfLoraVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -12148,8 +12211,6 @@ export type WorkersAiPostRunCfMetaLlamaLlama27bChatHfLoraVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -12171,6 +12232,10 @@ export type WorkersAiPostRunCfMetaLlamaLlama27bChatHfLoraVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -12335,7 +12400,6 @@ export const workersAiPostRunCfMetaLlamaLlama27bChatHfLora = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -12352,6 +12416,10 @@ export const workersAiPostRunCfMetaLlamaLlama27bChatHfLora = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -12412,8 +12480,6 @@ export const workersAiPostRunCfMetaLlamaLlama27bChatHfLora = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -12435,6 +12501,10 @@ export const workersAiPostRunCfMetaLlamaLlama27bChatHfLora = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -12661,7 +12731,6 @@ export type WorkersAiPostRunCfMetaLlama27bChatFp16Variables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -12678,6 +12747,10 @@ export type WorkersAiPostRunCfMetaLlama27bChatFp16Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -12738,8 +12811,6 @@ export type WorkersAiPostRunCfMetaLlama27bChatFp16Variables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -12761,6 +12832,10 @@ export type WorkersAiPostRunCfMetaLlama27bChatFp16Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -12925,7 +13000,6 @@ export const workersAiPostRunCfMetaLlama27bChatFp16 = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -12942,6 +13016,10 @@ export const workersAiPostRunCfMetaLlama27bChatFp16 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -13002,8 +13080,6 @@ export const workersAiPostRunCfMetaLlama27bChatFp16 = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -13025,6 +13101,10 @@ export const workersAiPostRunCfMetaLlama27bChatFp16 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -13246,7 +13326,6 @@ export type WorkersAiPostRunCfMetaLlama27bChatInt8Variables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -13263,6 +13342,10 @@ export type WorkersAiPostRunCfMetaLlama27bChatInt8Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -13323,8 +13406,6 @@ export type WorkersAiPostRunCfMetaLlama27bChatInt8Variables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -13346,6 +13427,10 @@ export type WorkersAiPostRunCfMetaLlama27bChatInt8Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -13510,7 +13595,6 @@ export const workersAiPostRunCfMetaLlama27bChatInt8 = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -13527,6 +13611,10 @@ export const workersAiPostRunCfMetaLlama27bChatInt8 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -13587,8 +13675,6 @@ export const workersAiPostRunCfMetaLlama27bChatInt8 = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -13610,6 +13696,10 @@ export const workersAiPostRunCfMetaLlama27bChatInt8 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -13831,7 +13921,6 @@ export type WorkersAiPostRunCfMetaLlama38bInstructVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -13848,6 +13937,10 @@ export type WorkersAiPostRunCfMetaLlama38bInstructVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -13908,8 +14001,6 @@ export type WorkersAiPostRunCfMetaLlama38bInstructVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -13931,6 +14022,10 @@ export type WorkersAiPostRunCfMetaLlama38bInstructVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -14095,7 +14190,6 @@ export const workersAiPostRunCfMetaLlama38bInstruct = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -14112,6 +14206,10 @@ export const workersAiPostRunCfMetaLlama38bInstruct = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -14172,8 +14270,6 @@ export const workersAiPostRunCfMetaLlama38bInstruct = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -14195,6 +14291,10 @@ export const workersAiPostRunCfMetaLlama38bInstruct = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -14416,7 +14516,6 @@ export type WorkersAiPostRunCfMetaLlama38bInstructAwqVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -14433,6 +14532,10 @@ export type WorkersAiPostRunCfMetaLlama38bInstructAwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -14493,8 +14596,6 @@ export type WorkersAiPostRunCfMetaLlama38bInstructAwqVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -14516,6 +14617,10 @@ export type WorkersAiPostRunCfMetaLlama38bInstructAwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -14680,7 +14785,6 @@ export const workersAiPostRunCfMetaLlama38bInstructAwq = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -14697,6 +14801,10 @@ export const workersAiPostRunCfMetaLlama38bInstructAwq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -14757,8 +14865,6 @@ export const workersAiPostRunCfMetaLlama38bInstructAwq = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -14780,6 +14886,10 @@ export const workersAiPostRunCfMetaLlama38bInstructAwq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -15001,7 +15111,6 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -15018,6 +15127,10 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -15078,8 +15191,6 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -15101,6 +15212,10 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -15265,7 +15380,6 @@ export const workersAiPostRunCfMetaLlama3170bInstruct = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -15282,6 +15396,10 @@ export const workersAiPostRunCfMetaLlama3170bInstruct = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -15342,8 +15460,6 @@ export const workersAiPostRunCfMetaLlama3170bInstruct = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -15365,6 +15481,10 @@ export const workersAiPostRunCfMetaLlama3170bInstruct = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -15586,7 +15706,6 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructPreviewVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -15603,6 +15722,10 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructPreviewVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -15663,8 +15786,6 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructPreviewVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -15686,6 +15807,10 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructPreviewVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -15850,7 +15975,6 @@ export const workersAiPostRunCfMetaLlama3170bInstructPreview = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -15867,6 +15991,10 @@ export const workersAiPostRunCfMetaLlama3170bInstructPreview = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -15927,8 +16055,6 @@ export const workersAiPostRunCfMetaLlama3170bInstructPreview = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -15950,6 +16076,10 @@ export const workersAiPostRunCfMetaLlama3170bInstructPreview = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -16176,7 +16306,6 @@ export type WorkersAiPostRunCfMetaLlama3170bPreviewVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -16193,6 +16322,10 @@ export type WorkersAiPostRunCfMetaLlama3170bPreviewVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -16253,8 +16386,6 @@ export type WorkersAiPostRunCfMetaLlama3170bPreviewVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -16276,6 +16407,10 @@ export type WorkersAiPostRunCfMetaLlama3170bPreviewVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -16440,7 +16575,6 @@ export const workersAiPostRunCfMetaLlama3170bPreview = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -16457,6 +16591,10 @@ export const workersAiPostRunCfMetaLlama3170bPreview = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -16517,8 +16655,6 @@ export const workersAiPostRunCfMetaLlama3170bPreview = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -16540,6 +16676,10 @@ export const workersAiPostRunCfMetaLlama3170bPreview = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -16761,7 +16901,6 @@ export type WorkersAiPostRunCfMetaLlama318bInstructVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -16778,6 +16917,10 @@ export type WorkersAiPostRunCfMetaLlama318bInstructVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -16838,8 +16981,6 @@ export type WorkersAiPostRunCfMetaLlama318bInstructVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -16861,6 +17002,10 @@ export type WorkersAiPostRunCfMetaLlama318bInstructVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -17025,7 +17170,6 @@ export const workersAiPostRunCfMetaLlama318bInstruct = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -17042,6 +17186,10 @@ export const workersAiPostRunCfMetaLlama318bInstruct = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -17102,8 +17250,6 @@ export const workersAiPostRunCfMetaLlama318bInstruct = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -17125,6 +17271,10 @@ export const workersAiPostRunCfMetaLlama318bInstruct = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -17346,7 +17496,6 @@ export type WorkersAiPostRunCfMetaLlama318bInstructAwqVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -17363,6 +17512,10 @@ export type WorkersAiPostRunCfMetaLlama318bInstructAwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -17423,8 +17576,6 @@ export type WorkersAiPostRunCfMetaLlama318bInstructAwqVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -17446,6 +17597,10 @@ export type WorkersAiPostRunCfMetaLlama318bInstructAwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -17610,7 +17765,6 @@ export const workersAiPostRunCfMetaLlama318bInstructAwq = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -17627,6 +17781,10 @@ export const workersAiPostRunCfMetaLlama318bInstructAwq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -17687,8 +17845,6 @@ export const workersAiPostRunCfMetaLlama318bInstructAwq = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -17710,6 +17866,10 @@ export const workersAiPostRunCfMetaLlama318bInstructAwq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -17931,7 +18091,6 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFastVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -17948,6 +18107,10 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFastVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -18008,8 +18171,6 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFastVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -18031,6 +18192,10 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFastVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -18195,7 +18360,6 @@ export const workersAiPostRunCfMetaLlama318bInstructFast = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -18212,6 +18376,10 @@ export const workersAiPostRunCfMetaLlama318bInstructFast = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -18272,8 +18440,6 @@ export const workersAiPostRunCfMetaLlama318bInstructFast = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -18295,6 +18461,10 @@ export const workersAiPostRunCfMetaLlama318bInstructFast = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -18516,7 +18686,6 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFp8Variables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -18533,6 +18702,10 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFp8Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -18593,8 +18766,6 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFp8Variables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -18616,6 +18787,10 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFp8Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -18780,7 +18955,6 @@ export const workersAiPostRunCfMetaLlama318bInstructFp8 = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -18797,6 +18971,10 @@ export const workersAiPostRunCfMetaLlama318bInstructFp8 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -18857,8 +19035,6 @@ export const workersAiPostRunCfMetaLlama318bInstructFp8 = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -18880,6 +19056,10 @@ export const workersAiPostRunCfMetaLlama318bInstructFp8 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -19101,7 +19281,6 @@ export type WorkersAiPostRunCfMetaLlama318bPreviewVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -19118,6 +19297,10 @@ export type WorkersAiPostRunCfMetaLlama318bPreviewVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -19178,8 +19361,6 @@ export type WorkersAiPostRunCfMetaLlama318bPreviewVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -19201,6 +19382,10 @@ export type WorkersAiPostRunCfMetaLlama318bPreviewVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -19365,7 +19550,6 @@ export const workersAiPostRunCfMetaLlama318bPreview = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -19382,6 +19566,10 @@ export const workersAiPostRunCfMetaLlama318bPreview = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -19442,8 +19630,6 @@ export const workersAiPostRunCfMetaLlama318bPreview = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -19465,6 +19651,10 @@ export const workersAiPostRunCfMetaLlama318bPreview = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -20257,7 +20447,6 @@ export type WorkersAiPostRunCfMetaLlama321bInstructVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -20274,6 +20463,10 @@ export type WorkersAiPostRunCfMetaLlama321bInstructVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -20334,8 +20527,6 @@ export type WorkersAiPostRunCfMetaLlama321bInstructVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -20357,6 +20548,10 @@ export type WorkersAiPostRunCfMetaLlama321bInstructVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -20521,7 +20716,6 @@ export const workersAiPostRunCfMetaLlama321bInstruct = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -20538,6 +20732,10 @@ export const workersAiPostRunCfMetaLlama321bInstruct = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -20598,8 +20796,6 @@ export const workersAiPostRunCfMetaLlama321bInstruct = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -20621,6 +20817,10 @@ export const workersAiPostRunCfMetaLlama321bInstruct = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -20842,7 +21042,6 @@ export type WorkersAiPostRunCfMetaLlama323bInstructVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -20859,6 +21058,10 @@ export type WorkersAiPostRunCfMetaLlama323bInstructVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -20919,8 +21122,6 @@ export type WorkersAiPostRunCfMetaLlama323bInstructVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -20942,6 +21143,10 @@ export type WorkersAiPostRunCfMetaLlama323bInstructVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -21106,7 +21311,6 @@ export const workersAiPostRunCfMetaLlama323bInstruct = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -21123,6 +21327,10 @@ export const workersAiPostRunCfMetaLlama323bInstruct = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -21183,8 +21391,6 @@ export const workersAiPostRunCfMetaLlama323bInstruct = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -21206,6 +21412,10 @@ export const workersAiPostRunCfMetaLlama323bInstruct = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -21427,7 +21637,6 @@ export type WorkersAiPostRunCfMetaLlama3370bInstructFp8FastVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -21444,6 +21653,10 @@ export type WorkersAiPostRunCfMetaLlama3370bInstructFp8FastVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -21504,8 +21717,6 @@ export type WorkersAiPostRunCfMetaLlama3370bInstructFp8FastVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -21527,6 +21738,10 @@ export type WorkersAiPostRunCfMetaLlama3370bInstructFp8FastVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -21691,7 +21906,6 @@ export const workersAiPostRunCfMetaLlama3370bInstructFp8Fast = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -21708,6 +21922,10 @@ export const workersAiPostRunCfMetaLlama3370bInstructFp8Fast = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -21768,8 +21986,6 @@ export const workersAiPostRunCfMetaLlama3370bInstructFp8Fast = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -21791,6 +22007,10 @@ export const workersAiPostRunCfMetaLlama3370bInstructFp8Fast = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -22076,7 +22296,6 @@ export type WorkersAiPostRunCfMicrosoftPhi2Variables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -22093,6 +22312,10 @@ export type WorkersAiPostRunCfMicrosoftPhi2Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -22153,8 +22376,6 @@ export type WorkersAiPostRunCfMicrosoftPhi2Variables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -22176,6 +22397,10 @@ export type WorkersAiPostRunCfMicrosoftPhi2Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -22340,7 +22565,6 @@ export const workersAiPostRunCfMicrosoftPhi2 = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -22357,6 +22581,10 @@ export const workersAiPostRunCfMicrosoftPhi2 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -22417,8 +22645,6 @@ export const workersAiPostRunCfMicrosoftPhi2 = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -22440,6 +22666,10 @@ export const workersAiPostRunCfMicrosoftPhi2 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -22705,7 +22935,6 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV01Variables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -22722,6 +22951,10 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV01Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -22782,8 +23015,6 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV01Variables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -22805,6 +23036,10 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV01Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -22969,7 +23204,6 @@ export const workersAiPostRunCfMistralMistral7bInstructV01 = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -22986,6 +23220,10 @@ export const workersAiPostRunCfMistralMistral7bInstructV01 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -23046,8 +23284,6 @@ export const workersAiPostRunCfMistralMistral7bInstructV01 = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -23069,6 +23305,10 @@ export const workersAiPostRunCfMistralMistral7bInstructV01 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -23290,7 +23530,6 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV02LoraVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -23307,6 +23546,10 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV02LoraVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -23367,8 +23610,6 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV02LoraVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -23390,6 +23631,10 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV02LoraVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -23554,7 +23799,6 @@ export const workersAiPostRunCfMistralMistral7bInstructV02Lora = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -23571,6 +23815,10 @@ export const workersAiPostRunCfMistralMistral7bInstructV02Lora = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -23631,8 +23879,6 @@ export const workersAiPostRunCfMistralMistral7bInstructV02Lora = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -23654,6 +23900,10 @@ export const workersAiPostRunCfMistralMistral7bInstructV02Lora = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -24129,7 +24379,6 @@ export type WorkersAiPostRunCfOpenchatOpenchat350106Variables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -24146,6 +24395,10 @@ export type WorkersAiPostRunCfOpenchatOpenchat350106Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -24206,8 +24459,6 @@ export type WorkersAiPostRunCfOpenchatOpenchat350106Variables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -24229,6 +24480,10 @@ export type WorkersAiPostRunCfOpenchatOpenchat350106Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -24393,7 +24648,6 @@ export const workersAiPostRunCfOpenchatOpenchat350106 = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -24410,6 +24664,10 @@ export const workersAiPostRunCfOpenchatOpenchat350106 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -24470,8 +24728,6 @@ export const workersAiPostRunCfOpenchatOpenchat350106 = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -24493,6 +24749,10 @@ export const workersAiPostRunCfOpenchatOpenchat350106 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -24714,7 +24974,6 @@ export type WorkersAiPostRunCfQwenQwen1505bChatVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -24731,6 +24990,10 @@ export type WorkersAiPostRunCfQwenQwen1505bChatVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -24791,8 +25054,6 @@ export type WorkersAiPostRunCfQwenQwen1505bChatVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -24814,6 +25075,10 @@ export type WorkersAiPostRunCfQwenQwen1505bChatVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -24978,7 +25243,6 @@ export const workersAiPostRunCfQwenQwen1505bChat = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -24995,6 +25259,10 @@ export const workersAiPostRunCfQwenQwen1505bChat = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -25055,8 +25323,6 @@ export const workersAiPostRunCfQwenQwen1505bChat = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -25078,6 +25344,10 @@ export const workersAiPostRunCfQwenQwen1505bChat = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -25299,7 +25569,6 @@ export type WorkersAiPostRunCfQwenQwen1518bChatVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -25316,6 +25585,10 @@ export type WorkersAiPostRunCfQwenQwen1518bChatVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -25376,8 +25649,6 @@ export type WorkersAiPostRunCfQwenQwen1518bChatVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -25399,6 +25670,10 @@ export type WorkersAiPostRunCfQwenQwen1518bChatVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -25563,7 +25838,6 @@ export const workersAiPostRunCfQwenQwen1518bChat = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -25580,6 +25854,10 @@ export const workersAiPostRunCfQwenQwen1518bChat = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -25640,8 +25918,6 @@ export const workersAiPostRunCfQwenQwen1518bChat = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -25663,6 +25939,10 @@ export const workersAiPostRunCfQwenQwen1518bChat = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -25884,7 +26164,6 @@ export type WorkersAiPostRunCfQwenQwen1514bChatAwqVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -25901,6 +26180,10 @@ export type WorkersAiPostRunCfQwenQwen1514bChatAwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -25961,8 +26244,6 @@ export type WorkersAiPostRunCfQwenQwen1514bChatAwqVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -25984,6 +26265,10 @@ export type WorkersAiPostRunCfQwenQwen1514bChatAwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -26148,7 +26433,6 @@ export const workersAiPostRunCfQwenQwen1514bChatAwq = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -26165,6 +26449,10 @@ export const workersAiPostRunCfQwenQwen1514bChatAwq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -26225,8 +26513,6 @@ export const workersAiPostRunCfQwenQwen1514bChatAwq = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -26248,6 +26534,10 @@ export const workersAiPostRunCfQwenQwen1514bChatAwq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -26469,7 +26759,6 @@ export type WorkersAiPostRunCfQwenQwen157bChatAwqVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -26486,6 +26775,10 @@ export type WorkersAiPostRunCfQwenQwen157bChatAwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -26546,8 +26839,6 @@ export type WorkersAiPostRunCfQwenQwen157bChatAwqVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -26569,6 +26860,10 @@ export type WorkersAiPostRunCfQwenQwen157bChatAwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -26733,7 +27028,6 @@ export const workersAiPostRunCfQwenQwen157bChatAwq = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -26750,6 +27044,10 @@ export const workersAiPostRunCfQwenQwen157bChatAwq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -26810,8 +27108,6 @@ export const workersAiPostRunCfQwenQwen157bChatAwq = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -26833,6 +27129,10 @@ export const workersAiPostRunCfQwenQwen157bChatAwq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -27336,7 +27636,6 @@ export type WorkersAiPostRunCfTheblokeDiscolmGerman7bV1AwqVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -27353,6 +27652,10 @@ export type WorkersAiPostRunCfTheblokeDiscolmGerman7bV1AwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -27413,8 +27716,6 @@ export type WorkersAiPostRunCfTheblokeDiscolmGerman7bV1AwqVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -27436,6 +27737,10 @@ export type WorkersAiPostRunCfTheblokeDiscolmGerman7bV1AwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -27600,7 +27905,6 @@ export const workersAiPostRunCfTheblokeDiscolmGerman7bV1Awq = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -27617,6 +27921,10 @@ export const workersAiPostRunCfTheblokeDiscolmGerman7bV1Awq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -27677,8 +27985,6 @@ export const workersAiPostRunCfTheblokeDiscolmGerman7bV1Awq = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -27700,6 +28006,10 @@ export const workersAiPostRunCfTheblokeDiscolmGerman7bV1Awq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -27926,7 +28236,6 @@ export type WorkersAiPostRunCfTiiuaeFalcon7bInstructVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -27943,6 +28252,10 @@ export type WorkersAiPostRunCfTiiuaeFalcon7bInstructVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -28003,8 +28316,6 @@ export type WorkersAiPostRunCfTiiuaeFalcon7bInstructVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -28026,6 +28337,10 @@ export type WorkersAiPostRunCfTiiuaeFalcon7bInstructVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -28190,7 +28505,6 @@ export const workersAiPostRunCfTiiuaeFalcon7bInstruct = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -28207,6 +28521,10 @@ export const workersAiPostRunCfTiiuaeFalcon7bInstruct = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -28267,8 +28585,6 @@ export const workersAiPostRunCfTiiuaeFalcon7bInstruct = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -28290,6 +28606,10 @@ export const workersAiPostRunCfTiiuaeFalcon7bInstruct = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -28511,7 +28831,6 @@ export type WorkersAiPostRunCfTinyllamaTinyllama11bChatV10Variables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -28528,6 +28847,10 @@ export type WorkersAiPostRunCfTinyllamaTinyllama11bChatV10Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -28588,8 +28911,6 @@ export type WorkersAiPostRunCfTinyllamaTinyllama11bChatV10Variables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -28611,6 +28932,10 @@ export type WorkersAiPostRunCfTinyllamaTinyllama11bChatV10Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -28775,7 +29100,6 @@ export const workersAiPostRunCfTinyllamaTinyllama11bChatV10 = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -28792,6 +29116,10 @@ export const workersAiPostRunCfTinyllamaTinyllama11bChatV10 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -28852,8 +29180,6 @@ export const workersAiPostRunCfTinyllamaTinyllama11bChatV10 = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -28875,6 +29201,10 @@ export const workersAiPostRunCfTinyllamaTinyllama11bChatV10 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -29101,7 +29431,6 @@ export type WorkersAiPostRunHfGoogleGemma7bItVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -29118,6 +29447,10 @@ export type WorkersAiPostRunHfGoogleGemma7bItVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -29178,8 +29511,6 @@ export type WorkersAiPostRunHfGoogleGemma7bItVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -29201,6 +29532,10 @@ export type WorkersAiPostRunHfGoogleGemma7bItVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -29365,7 +29700,6 @@ export const workersAiPostRunHfGoogleGemma7bIt = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -29382,6 +29716,10 @@ export const workersAiPostRunHfGoogleGemma7bIt = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -29442,8 +29780,6 @@ export const workersAiPostRunHfGoogleGemma7bIt = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -29465,6 +29801,10 @@ export const workersAiPostRunHfGoogleGemma7bIt = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -29686,7 +30026,6 @@ export type WorkersAiPostRunHfMetaLlamaMetaLlama38bInstructVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -29703,6 +30042,10 @@ export type WorkersAiPostRunHfMetaLlamaMetaLlama38bInstructVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -29763,8 +30106,6 @@ export type WorkersAiPostRunHfMetaLlamaMetaLlama38bInstructVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -29786,6 +30127,10 @@ export type WorkersAiPostRunHfMetaLlamaMetaLlama38bInstructVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -29950,7 +30295,6 @@ export const workersAiPostRunHfMetaLlamaMetaLlama38bInstruct = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -29967,6 +30311,10 @@ export const workersAiPostRunHfMetaLlamaMetaLlama38bInstruct = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -30027,8 +30375,6 @@ export const workersAiPostRunHfMetaLlamaMetaLlama38bInstruct = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -30050,6 +30396,10 @@ export const workersAiPostRunHfMetaLlamaMetaLlama38bInstruct = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -30276,7 +30626,6 @@ export type WorkersAiPostRunHfMistralMistral7bInstructV02Variables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -30293,6 +30642,10 @@ export type WorkersAiPostRunHfMistralMistral7bInstructV02Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -30353,8 +30706,6 @@ export type WorkersAiPostRunHfMistralMistral7bInstructV02Variables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -30376,6 +30727,10 @@ export type WorkersAiPostRunHfMistralMistral7bInstructV02Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -30540,7 +30895,6 @@ export const workersAiPostRunHfMistralMistral7bInstructV02 = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -30557,6 +30911,10 @@ export const workersAiPostRunHfMistralMistral7bInstructV02 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -30617,8 +30975,6 @@ export const workersAiPostRunHfMistralMistral7bInstructV02 = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -30640,6 +30996,10 @@ export const workersAiPostRunHfMistralMistral7bInstructV02 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -30861,7 +31221,6 @@ export type WorkersAiPostRunHfMistralaiMistral7bInstructV02Variables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -30878,6 +31237,10 @@ export type WorkersAiPostRunHfMistralaiMistral7bInstructV02Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -30938,8 +31301,6 @@ export type WorkersAiPostRunHfMistralaiMistral7bInstructV02Variables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -30961,6 +31322,10 @@ export type WorkersAiPostRunHfMistralaiMistral7bInstructV02Variables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -31125,7 +31490,6 @@ export const workersAiPostRunHfMistralaiMistral7bInstructV02 = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -31142,6 +31506,10 @@ export const workersAiPostRunHfMistralaiMistral7bInstructV02 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -31202,8 +31570,6 @@ export const workersAiPostRunHfMistralaiMistral7bInstructV02 = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -31225,6 +31591,10 @@ export const workersAiPostRunHfMistralaiMistral7bInstructV02 = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -31451,7 +31821,6 @@ export type WorkersAiPostRunHfNexusflowStarlingLm7bBetaVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -31468,6 +31837,10 @@ export type WorkersAiPostRunHfNexusflowStarlingLm7bBetaVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -31528,8 +31901,6 @@ export type WorkersAiPostRunHfNexusflowStarlingLm7bBetaVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -31551,6 +31922,10 @@ export type WorkersAiPostRunHfNexusflowStarlingLm7bBetaVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -31715,7 +32090,6 @@ export const workersAiPostRunHfNexusflowStarlingLm7bBeta = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -31732,6 +32106,10 @@ export const workersAiPostRunHfNexusflowStarlingLm7bBeta = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -31792,8 +32170,6 @@ export const workersAiPostRunHfNexusflowStarlingLm7bBeta = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -31815,6 +32191,10 @@ export const workersAiPostRunHfNexusflowStarlingLm7bBeta = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -32036,7 +32416,6 @@ export type WorkersAiPostRunHfNousresearchHermes2ProMistral7bVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -32053,6 +32432,10 @@ export type WorkersAiPostRunHfNousresearchHermes2ProMistral7bVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -32113,8 +32496,6 @@ export type WorkersAiPostRunHfNousresearchHermes2ProMistral7bVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -32136,6 +32517,10 @@ export type WorkersAiPostRunHfNousresearchHermes2ProMistral7bVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -32300,7 +32685,6 @@ export const workersAiPostRunHfNousresearchHermes2ProMistral7b = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -32317,6 +32701,10 @@ export const workersAiPostRunHfNousresearchHermes2ProMistral7b = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -32377,8 +32765,6 @@ export const workersAiPostRunHfNousresearchHermes2ProMistral7b = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -32400,6 +32786,10 @@ export const workersAiPostRunHfNousresearchHermes2ProMistral7b = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -32626,7 +33016,6 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bBaseAwqVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -32643,6 +33032,10 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bBaseAwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -32703,8 +33096,6 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bBaseAwqVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -32726,6 +33117,10 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bBaseAwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -32890,7 +33285,6 @@ export const workersAiPostRunHfTheblokeDeepseekCoder67bBaseAwq = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -32907,6 +33301,10 @@ export const workersAiPostRunHfTheblokeDeepseekCoder67bBaseAwq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -32967,8 +33365,6 @@ export const workersAiPostRunHfTheblokeDeepseekCoder67bBaseAwq = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -32990,6 +33386,10 @@ export const workersAiPostRunHfTheblokeDeepseekCoder67bBaseAwq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -33216,7 +33616,6 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bInstructAwqVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -33233,6 +33632,10 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bInstructAwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -33293,8 +33696,6 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bInstructAwqVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -33316,6 +33717,10 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bInstructAwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -33480,7 +33885,6 @@ export const workersAiPostRunHfTheblokeDeepseekCoder67bInstructAwq = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -33497,6 +33901,10 @@ export const workersAiPostRunHfTheblokeDeepseekCoder67bInstructAwq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -33557,8 +33965,6 @@ export const workersAiPostRunHfTheblokeDeepseekCoder67bInstructAwq = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -33580,6 +33986,10 @@ export const workersAiPostRunHfTheblokeDeepseekCoder67bInstructAwq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -33806,7 +34216,6 @@ export type WorkersAiPostRunHfTheblokeLlama213bChatAwqVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -33823,6 +34232,10 @@ export type WorkersAiPostRunHfTheblokeLlama213bChatAwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -33883,8 +34296,6 @@ export type WorkersAiPostRunHfTheblokeLlama213bChatAwqVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -33906,6 +34317,10 @@ export type WorkersAiPostRunHfTheblokeLlama213bChatAwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -34070,7 +34485,6 @@ export const workersAiPostRunHfTheblokeLlama213bChatAwq = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -34087,6 +34501,10 @@ export const workersAiPostRunHfTheblokeLlama213bChatAwq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -34147,8 +34565,6 @@ export const workersAiPostRunHfTheblokeLlama213bChatAwq = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -34170,6 +34586,10 @@ export const workersAiPostRunHfTheblokeLlama213bChatAwq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -34391,7 +34811,6 @@ export type WorkersAiPostRunHfTheblokeLlamaguard7bAwqVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -34408,6 +34827,10 @@ export type WorkersAiPostRunHfTheblokeLlamaguard7bAwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -34468,8 +34891,6 @@ export type WorkersAiPostRunHfTheblokeLlamaguard7bAwqVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -34491,6 +34912,10 @@ export type WorkersAiPostRunHfTheblokeLlamaguard7bAwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -34655,7 +35080,6 @@ export const workersAiPostRunHfTheblokeLlamaguard7bAwq = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -34672,6 +35096,10 @@ export const workersAiPostRunHfTheblokeLlamaguard7bAwq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -34732,8 +35160,6 @@ export const workersAiPostRunHfTheblokeLlamaguard7bAwq = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -34755,6 +35181,10 @@ export const workersAiPostRunHfTheblokeLlamaguard7bAwq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -34976,7 +35406,6 @@ export type WorkersAiPostRunHfTheblokeMistral7bInstructV01AwqVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -34993,6 +35422,10 @@ export type WorkersAiPostRunHfTheblokeMistral7bInstructV01AwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -35053,8 +35486,6 @@ export type WorkersAiPostRunHfTheblokeMistral7bInstructV01AwqVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -35076,6 +35507,10 @@ export type WorkersAiPostRunHfTheblokeMistral7bInstructV01AwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -35240,7 +35675,6 @@ export const workersAiPostRunHfTheblokeMistral7bInstructV01Awq = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -35257,6 +35691,10 @@ export const workersAiPostRunHfTheblokeMistral7bInstructV01Awq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -35317,8 +35755,6 @@ export const workersAiPostRunHfTheblokeMistral7bInstructV01Awq = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -35340,6 +35776,10 @@ export const workersAiPostRunHfTheblokeMistral7bInstructV01Awq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -35566,7 +36006,6 @@ export type WorkersAiPostRunHfTheblokeNeuralChat7bV31AwqVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -35583,6 +36022,10 @@ export type WorkersAiPostRunHfTheblokeNeuralChat7bV31AwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -35643,8 +36086,6 @@ export type WorkersAiPostRunHfTheblokeNeuralChat7bV31AwqVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -35666,6 +36107,10 @@ export type WorkersAiPostRunHfTheblokeNeuralChat7bV31AwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -35830,7 +36275,6 @@ export const workersAiPostRunHfTheblokeNeuralChat7bV31Awq = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -35847,6 +36291,10 @@ export const workersAiPostRunHfTheblokeNeuralChat7bV31Awq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -35907,8 +36355,6 @@ export const workersAiPostRunHfTheblokeNeuralChat7bV31Awq = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -35930,6 +36376,10 @@ export const workersAiPostRunHfTheblokeNeuralChat7bV31Awq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -36151,7 +36601,6 @@ export type WorkersAiPostRunHfTheblokeOpenhermes25Mistral7bAwqVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -36168,6 +36617,10 @@ export type WorkersAiPostRunHfTheblokeOpenhermes25Mistral7bAwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -36228,8 +36681,6 @@ export type WorkersAiPostRunHfTheblokeOpenhermes25Mistral7bAwqVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -36251,6 +36702,10 @@ export type WorkersAiPostRunHfTheblokeOpenhermes25Mistral7bAwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -36415,7 +36870,6 @@ export const workersAiPostRunHfTheblokeOpenhermes25Mistral7bAwq = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -36432,6 +36886,10 @@ export const workersAiPostRunHfTheblokeOpenhermes25Mistral7bAwq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -36492,8 +36950,6 @@ export const workersAiPostRunHfTheblokeOpenhermes25Mistral7bAwq = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -36515,6 +36971,10 @@ export const workersAiPostRunHfTheblokeOpenhermes25Mistral7bAwq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -36741,7 +37201,6 @@ export type WorkersAiPostRunHfTheblokeZephyr7bBetaAwqVariables = {
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -36758,6 +37217,10 @@ export type WorkersAiPostRunHfTheblokeZephyr7bBetaAwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -36818,8 +37281,6 @@ export type WorkersAiPostRunHfTheblokeZephyr7bBetaAwqVariables = {
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -36841,6 +37302,10 @@ export type WorkersAiPostRunHfTheblokeZephyr7bBetaAwqVariables = {
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -37005,7 +37470,6 @@ export const workersAiPostRunHfTheblokeZephyr7bBetaAwq = (
         /**
          * The input text prompt for the model to generate a response.
          *
-         * @maxLength 131072
          * @minLength 1
          */
         prompt: string;
@@ -37022,6 +37486,10 @@ export const workersAiPostRunHfTheblokeZephyr7bBetaAwq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -37082,8 +37550,6 @@ export const workersAiPostRunHfTheblokeZephyr7bBetaAwq = (
         messages: {
           /**
            * The content of the message as a string.
-           *
-           * @maxLength 131072
            */
           content: string;
           /**
@@ -37105,6 +37571,10 @@ export const workersAiPostRunHfTheblokeZephyr7bBetaAwq = (
          * @minimum 0
          */
         repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
         /**
          * Random seed for reproducibility of the generation.
          *
@@ -37561,7 +38031,6 @@ export type WorkersAiPostRunModelVariables = {
             /**
              * The input text prompt for the model to generate a response.
              *
-             * @maxLength 131072
              * @minLength 1
              */
             prompt: string;
@@ -37578,6 +38047,10 @@ export type WorkersAiPostRunModelVariables = {
              * @minimum 0
              */
             repetition_penalty?: number;
+            response_format?: {
+              json_schema?: void;
+              type?: 'json_object' | 'json_schema';
+            };
             /**
              * Random seed for reproducibility of the generation.
              *
@@ -37638,8 +38111,6 @@ export type WorkersAiPostRunModelVariables = {
             messages: {
               /**
                * The content of the message as a string.
-               *
-               * @maxLength 131072
                */
               content: string;
               /**
@@ -37661,6 +38132,10 @@ export type WorkersAiPostRunModelVariables = {
              * @minimum 0
              */
             repetition_penalty?: number;
+            response_format?: {
+              json_schema?: void;
+              type?: 'json_object' | 'json_schema';
+            };
             /**
              * Random seed for reproducibility of the generation.
              *
@@ -38035,7 +38510,6 @@ export const workersAiPostRunModel = (variables: WorkersAiPostRunModelVariables,
             /**
              * The input text prompt for the model to generate a response.
              *
-             * @maxLength 131072
              * @minLength 1
              */
             prompt: string;
@@ -38052,6 +38526,10 @@ export const workersAiPostRunModel = (variables: WorkersAiPostRunModelVariables,
              * @minimum 0
              */
             repetition_penalty?: number;
+            response_format?: {
+              json_schema?: void;
+              type?: 'json_object' | 'json_schema';
+            };
             /**
              * Random seed for reproducibility of the generation.
              *
@@ -38112,8 +38590,6 @@ export const workersAiPostRunModel = (variables: WorkersAiPostRunModelVariables,
             messages: {
               /**
                * The content of the message as a string.
-               *
-               * @maxLength 131072
                */
               content: string;
               /**
@@ -38135,6 +38611,10 @@ export const workersAiPostRunModel = (variables: WorkersAiPostRunModelVariables,
              * @minimum 0
              */
             repetition_penalty?: number;
+            response_format?: {
+              json_schema?: void;
+              type?: 'json_object' | 'json_schema';
+            };
             /**
              * Random seed for reproducibility of the generation.
              *

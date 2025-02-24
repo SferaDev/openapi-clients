@@ -33331,7 +33331,6 @@ export type RulesetsLogCustomFieldRule = {
     /**
      * The cookie fields to log.
      *
-     * @example {"name":"cookie_name_1"}
      * @minItems 1
      */
     cookie_fields?: {
@@ -33344,9 +33343,29 @@ export type RulesetsLogCustomFieldRule = {
       name: string;
     }[];
     /**
-     * The request fields to log.
+     * The raw response fields to log.
      *
-     * @example {"name":"http_request_header_name_1_in_lower_case"}
+     * @minItems 1
+     */
+    raw_response_fields?: {
+      /**
+       * The name of the field.
+       *
+       * @example http_response_header_name_1_in_lower_case
+       * @minLength 1
+       */
+      name: string;
+      /**
+       * Whether to log duplicate values of the same header.
+       *
+       * @default false
+       * @example true
+       */
+      preserve_duplicates?: boolean;
+    }[];
+    /**
+     * The raw request fields to log.
+     *
      * @minItems 1
      */
     request_fields?: {
@@ -33359,9 +33378,8 @@ export type RulesetsLogCustomFieldRule = {
       name: string;
     }[];
     /**
-     * The response fields to log.
+     * The transformed response fields to log.
      *
-     * @example {"name":"http_response_header_name_1_in_lower_case"}
      * @minItems 1
      */
     response_fields?: {
@@ -33369,6 +33387,27 @@ export type RulesetsLogCustomFieldRule = {
        * The name of the field.
        *
        * @example http_response_header_name_1_in_lower_case
+       * @minLength 1
+       */
+      name: string;
+      /**
+       * Whether to log duplicate values of the same header.
+       *
+       * @default false
+       * @example true
+       */
+      preserve_duplicates?: boolean;
+    }[];
+    /**
+     * The transformed request fields to log.
+     *
+     * @minItems 1
+     */
+    transformed_request_fields?: {
+      /**
+       * The name of the field.
+       *
+       * @example http_request_header_name_1_in_lower_case
        * @minLength 1
        */
       name: string;
