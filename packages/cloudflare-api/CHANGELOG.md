@@ -1,5 +1,17 @@
 # cloudflare-api-js
 
+## 0.7.0
+
+### Minor Changes
+
+- 3d1f1a7: Add new query parameter 'status' to AccessPolicyTestsGetAUserPageQueryParams type
+
+### Patch Changes
+
+- 87a7226: Add LoadBalancingComponentsSchemasZoneName type for zone name
+- 634a913: [BREAKING] Change rules property to optional in RulesetsCreateRuleset, RulesetsUpdateEntrypointRuleset, and RulesetsUpdateRuleset
+- 802c4c6: Add new endpoint to get Internet services categories
+
 ## 0.6.2
 
 ### Patch Changes
