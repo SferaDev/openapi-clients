@@ -73107,88 +73107,6 @@ export const userSAccountMembershipsUpdateMembership = (
     UserSAccountMembershipsUpdateMembershipPathParams
   >({ url: '/memberships/{membershipId}', method: 'put', ...variables, signal });
 
-export type AuditLogsGetOrganizationAuditLogsPathParams = {
-  organizationId: Schemas.AaaIdentifier;
-};
-
-export type AuditLogsGetOrganizationAuditLogsQueryParams = {
-  /**
-   * @example f174be97-19b1-40d6-954d-70cd5fbd52db
-   */
-  id?: string;
-  /**
-   * @example true
-   */
-  ['export']?: boolean;
-  /**
-   * @example add
-   */
-  ['action.type']?: string;
-  /**
-   * @example 17.168.228.63
-   */
-  ['actor.ip']?: string;
-  /**
-   * @example alice@example.com
-   * @format email
-   */
-  ['actor.email']?: string;
-  since?: string | string;
-  before?: string | string;
-  /**
-   * @example example.com
-   */
-  ['zone.name']?: string;
-  /**
-   * @default desc
-   * @example desc
-   */
-  direction?: 'desc' | 'asc';
-  /**
-   * @default 100
-   * @example 25
-   * @maximum 1000
-   * @minimum 1
-   */
-  per_page?: number;
-  /**
-   * @default 1
-   * @example 50
-   * @minimum 1
-   */
-  page?: number;
-  /**
-   * @default false
-   */
-  hide_user_logs?: boolean;
-};
-
-export type AuditLogsGetOrganizationAuditLogsError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: Schemas.AaaAuditLogsResponseCollection & Schemas.AaaApiResponseCommonFailure;
-}>;
-
-export type AuditLogsGetOrganizationAuditLogsVariables = {
-  pathParams: AuditLogsGetOrganizationAuditLogsPathParams;
-  queryParams?: AuditLogsGetOrganizationAuditLogsQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Gets a list of audit logs for an organization. Can be filtered by who made the change, on which zone, and the timeframe of the change.
- */
-export const auditLogsGetOrganizationAuditLogs = (
-  variables: AuditLogsGetOrganizationAuditLogsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.AaaAuditLogsResponseCollection,
-    AuditLogsGetOrganizationAuditLogsError,
-    undefined,
-    {},
-    AuditLogsGetOrganizationAuditLogsQueryParams,
-    AuditLogsGetOrganizationAuditLogsPathParams
-  >({ url: '/organizations/{organizationId}/audit_logs', method: 'get', ...variables, signal });
-
 export type OrganizationSharesListPathParams = {
   organizationId: Schemas.ResourceSharingOrganizationId;
 };
@@ -120376,12 +120294,7 @@ export const operationsByTag = {
     notificationPoliciesGetANotificationPolicy,
     notificationPoliciesUpdateANotificationPolicy
   },
-  auditLogs: {
-    auditLogsGetAccountAuditLogs,
-    auditLogsV2GetAccountAuditLogs,
-    auditLogsGetOrganizationAuditLogs,
-    auditLogsGetUserAuditLogs
-  },
+  auditLogs: { auditLogsGetAccountAuditLogs, auditLogsV2GetAccountAuditLogs, auditLogsGetUserAuditLogs },
   accountBillingProfile: { accountBillingProfileDeprecatedBillingProfileDetails },
   botnetThreatFeed: {
     botnetThreatFeedGetDayReport,
