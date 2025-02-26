@@ -1,5 +1,15 @@
 # cloudflare-api-js
 
+## 0.8.0
+
+### Minor Changes
+
+- 03f4813: [BREAKING] Remove `auditLogsGetOrganizationAuditLogs` endpoint
+
+### Patch Changes
+
+- 49a966e: Add x-auditable true to various record types
+
 ## 0.7.0
 
 ### Minor Changes
