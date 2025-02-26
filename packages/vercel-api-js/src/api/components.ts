@@ -284,7 +284,7 @@ export type ListAccessGroupMembersResponse = {
     username: string;
     name?: string;
     createdAt?: string;
-    teamRole: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'VIEWER';
+    teamRole: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'SECURITY' | 'VIEWER';
   }[];
   pagination: {
     count: number;
@@ -1943,6 +1943,7 @@ export type UpdateProjectDataCacheResponse = {
     | 'parcel'
     | 'polymer'
     | 'preact'
+    | 'react-router'
     | 'redwoodjs'
     | 'remix'
     | 'saber'
@@ -2109,32 +2110,45 @@ export type UpdateProjectDataCacheResponse = {
         sourceless?: boolean;
         productionBranch?: string;
       };
-  microfrontends?: {
-    /**
-     * Timestamp when the microfrontends settings were last updated.
-     */
-    updatedAt: number;
-    /**
-     * The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
-     */
-    groupIds: string[];
-    /**
-     * Whether microfrontends are enabled for this project.
-     */
-    enabled: boolean;
-    /**
-     * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
-     */
-    isDefaultApp?: boolean;
-    /**
-     * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
-     */
-    defaultRoute?: string;
-    /**
-     * Whether observability data should be routed to the default app in this microfrontend's group, or it should go to this microfrontend.
-     */
-    routeObservabilityToDefaultApp?: boolean;
-  };
+  microfrontends?:
+    | {
+        /**
+         * Timestamp when the microfrontends settings were last updated.
+         */
+        updatedAt: number;
+        /**
+         * The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+         *
+         * @maxItems 2
+         * @minItems 2
+         */
+        groupIds: (string | string)[];
+        /**
+         * Whether microfrontends are enabled for this project.
+         */
+        enabled: boolean;
+        /**
+         * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+         */
+        isDefaultApp?: boolean;
+        /**
+         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+         */
+        defaultRoute?: string;
+        /**
+         * Whether observability data should be routed to this microfrontend project or a root project.
+         */
+        routeObservabilityToThisProject?: boolean;
+      }
+    | {
+        updatedAt: number;
+        /**
+         * @maxItems 2
+         * @minItems 2
+         */
+        groupIds: (string | string)[];
+        enabled: boolean;
+      };
   name: string;
   nodeVersion: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
   optionsAllowlist?: {
@@ -2147,22 +2161,20 @@ export type UpdateProjectDataCacheResponse = {
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
-  resourceConfig?: {
+  resourceConfig: {
     fluid?: boolean;
-    functionDefaultRegion?: string | null;
+    functionDefaultRegions: string[];
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
-    allowServerlessConcurrency?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
-  defaultResourceConfig?: {
+  defaultResourceConfig: {
     fluid?: boolean;
-    functionDefaultRegion?: string | null;
+    functionDefaultRegions: string[];
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
-    allowServerlessConcurrency?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
   rootDirectory?: string | null;
@@ -2260,6 +2272,7 @@ export type UpdateProjectDataCacheResponse = {
   permissions?: {
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
+    userSudo?: Schemas.ACLAction[];
     webAuthn?: Schemas.ACLAction[];
     oauth2Connection?: Schemas.ACLAction[];
     accessGroup?: Schemas.ACLAction[];
@@ -2727,6 +2740,53 @@ export const getDeploymentEvents = (variables: GetDeploymentEventsVariables, sig
     GetDeploymentEventsPathParams
   >({ url: '/v3/deployments/{idOrUrl}/events', method: 'get', ...variables, signal });
 
+export type UpdateIntegrationDeploymentActionPathParams = {
+  deploymentId: string;
+  integrationConfigurationId: string;
+  resourceId: string;
+  action: string;
+};
+
+export type UpdateIntegrationDeploymentActionError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateIntegrationDeploymentActionRequestBody = {
+  status?: 'failed' | 'running' | 'succeeded';
+  statusText?: string;
+  outcomes?: {
+    kind: string;
+    secrets: {
+      name: string;
+      value: string;
+    }[];
+  }[];
+};
+
+export type UpdateIntegrationDeploymentActionVariables = {
+  body: UpdateIntegrationDeploymentActionRequestBody;
+  pathParams: UpdateIntegrationDeploymentActionPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Updates the deployment integration action for the specified integration installation
+ */
+export const updateIntegrationDeploymentAction = (
+  variables: UpdateIntegrationDeploymentActionVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    undefined,
+    UpdateIntegrationDeploymentActionError,
+    UpdateIntegrationDeploymentActionRequestBody,
+    {},
+    {},
+    UpdateIntegrationDeploymentActionPathParams
+  >({
+    url: '/v1/deployments/{deploymentId}/integrations/{integrationConfigurationId}/resources/{resourceId}/actions/{action}',
+    method: 'patch',
+    ...variables,
+    signal
+  });
+
 export type GetDeploymentPathParams = {
   /**
    * The unique identifier or hostname of the deployment.
@@ -2785,6 +2845,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
             | 'nextjs'
             | 'gatsby'
             | 'remix'
+            | 'react-router'
             | 'astro'
             | 'hexo'
             | 'eleventy'
@@ -3237,8 +3298,11 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               defaultRoute?: string;
               /**
                * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+               *
+               * @maxItems 2
+               * @minItems 2
                */
-              groupIds: string[];
+              groupIds: (string | string)[];
             }
           | {
               /**
@@ -3264,9 +3328,23 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               defaultRoute?: string;
               /**
                * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+               *
+               * @maxItems 2
+               * @minItems 2
                */
-              groupIds: string[];
+              groupIds: (string | string)[];
             };
+        /**
+         * Since February 2025 the configuration must include snapshot data at the time of deployment creation to capture properties for the /deployments/:id/config endpoint utilized for displaying Deployment Configuration on the frontend This is optional because older deployments may not have this data captured
+         */
+        config?: {
+          version?: number;
+          functionType: 'fluid' | 'standard';
+          functionMemoryType: 'standard' | 'standard_legacy' | 'performance';
+          functionTimeout: number | null;
+          secureComputePrimaryRegion: string | null;
+          secureComputeFallbackRegion: string | null;
+        };
       }
     | {
         alias?: string[];
@@ -3525,6 +3603,7 @@ export type CreateDeploymentResponse = {
       | 'parcel'
       | 'polymer'
       | 'preact'
+      | 'react-router'
       | 'redwoodjs'
       | 'remix'
       | 'saber'
@@ -3805,8 +3884,11 @@ export type CreateDeploymentResponse = {
         defaultRoute?: string;
         /**
          * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+         *
+         * @maxItems 2
+         * @minItems 2
          */
-        groupIds: string[];
+        groupIds: (string | string)[];
       }
     | {
         /**
@@ -3832,10 +3914,24 @@ export type CreateDeploymentResponse = {
         defaultRoute?: string;
         /**
          * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+         *
+         * @maxItems 2
+         * @minItems 2
          */
-        groupIds: string[];
+        groupIds: (string | string)[];
       };
   monorepoManager?: string | null;
+  /**
+   * Since February 2025 the configuration must include snapshot data at the time of deployment creation to capture properties for the /deployments/:id/config endpoint utilized for displaying Deployment Configuration on the frontend This is optional because older deployments may not have this data captured
+   */
+  config?: {
+    version?: number;
+    functionType: 'fluid' | 'standard';
+    functionMemoryType: 'performance' | 'standard' | 'standard_legacy';
+    functionTimeout: number | null;
+    secureComputePrimaryRegion: string | null;
+    secureComputeFallbackRegion: string | null;
+  };
   functions?: {
     [key: string]: {
       memory?: number;
@@ -4178,6 +4274,7 @@ export type CreateDeploymentRequestBody = {
       | 'parcel'
       | 'polymer'
       | 'preact'
+      | 'react-router'
       | 'redwoodjs'
       | 'remix'
       | 'saber'
@@ -4239,9 +4336,11 @@ export type CreateDeploymentRequestBody = {
     sourceFilesOutsideRootDirectory?: boolean;
   };
   /**
-   * Either not defined, `staging`, or `production`. If `staging`, a staging alias in the format `<project>-<team>.vercel.app` will be assigned. If `production`, any aliases defined in `alias` will be assigned. If omitted, the target will be `preview`
+   * Either not defined, `staging`, `production`, or a custom environment identifier. If `staging`, a staging alias in the format `<project>-<team>.vercel.app` will be assigned. If `production`, any aliases defined in `alias` will be assigned. If omitted, the target will be `preview`.
+   *
+   * @example production
    */
-  target?: 'production' | 'staging';
+  target?: string;
   /**
    * When `true` and `deploymentId` is passed in, the sha from the previous deployment's `gitSource` is removed forcing the latest commit to be used.
    */
@@ -4329,6 +4428,7 @@ export type CancelDeploymentResponse = {
       | 'parcel'
       | 'polymer'
       | 'preact'
+      | 'react-router'
       | 'redwoodjs'
       | 'remix'
       | 'saber'
@@ -4752,8 +4852,11 @@ export type CancelDeploymentResponse = {
         defaultRoute?: string;
         /**
          * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+         *
+         * @maxItems 2
+         * @minItems 2
          */
-        groupIds: string[];
+        groupIds: (string | string)[];
       }
     | {
         /**
@@ -4779,9 +4882,23 @@ export type CancelDeploymentResponse = {
         defaultRoute?: string;
         /**
          * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+         *
+         * @maxItems 2
+         * @minItems 2
          */
-        groupIds: string[];
+        groupIds: (string | string)[];
       };
+  /**
+   * Since February 2025 the configuration must include snapshot data at the time of deployment creation to capture properties for the /deployments/:id/config endpoint utilized for displaying Deployment Configuration on the frontend This is optional because older deployments may not have this data captured
+   */
+  config?: {
+    version?: number;
+    functionType: 'fluid' | 'standard';
+    functionMemoryType: 'performance' | 'standard' | 'standard_legacy';
+    functionTimeout: number | null;
+    secureComputePrimaryRegion: string | null;
+    secureComputeFallbackRegion: string | null;
+  };
 };
 
 export type CancelDeploymentVariables = {
@@ -6797,11 +6914,6 @@ export type DeleteDomainQueryParams = {
 export type DeleteDomainError = Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteDomainResponse = {
-  /**
-   * The id of the newly created DNS record
-   *
-   * @example rec_V0fra8eEgQwEpFhYG2vTzC3K
-   */
   uid: string;
 };
 
@@ -6820,6 +6932,282 @@ export const deleteDomain = (variables: DeleteDomainVariables, signal?: AbortSig
     ...variables,
     signal
   });
+
+export type GetConfigurableLogDrainPathParams = {
+  id: string;
+};
+
+export type GetConfigurableLogDrainQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type GetConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetConfigurableLogDrainResponse = {
+  clientId?: string;
+  configurationId?: string;
+  deliveryFormat: 'json' | 'ndjson' | 'syslog';
+  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
+  environments: ('preview' | 'production')[];
+  status?: 'disabled' | 'enabled' | 'errored';
+  disabledAt?: number;
+  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
+  disabledBy?: string;
+  firstErrorTimestamp?: number;
+  samplingRate?: number;
+  hideIpAddresses?: boolean;
+  id: string;
+  createdAt: number;
+  deletedAt: number | null;
+  updatedAt: number;
+  url: string;
+  headers?: {
+    [key: string]: string;
+  };
+  projectIds?: string[];
+  name: string;
+  teamId?: string | null;
+  ownerId: string;
+  createdFrom?: 'integration' | 'self-served';
+  secret: string;
+};
+
+export type GetConfigurableLogDrainVariables = {
+  pathParams: GetConfigurableLogDrainPathParams;
+  queryParams?: GetConfigurableLogDrainQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves a Configurable Log Drain. This endpoint must be called with a team AccessToken (integration OAuth2 clients are not allowed). Only log drains owned by the authenticated team can be accessed.
+ */
+export const getConfigurableLogDrain = (variables: GetConfigurableLogDrainVariables, signal?: AbortSignal) =>
+  fetch<
+    GetConfigurableLogDrainResponse,
+    GetConfigurableLogDrainError,
+    undefined,
+    {},
+    GetConfigurableLogDrainQueryParams,
+    GetConfigurableLogDrainPathParams
+  >({ url: '/v1/log-drains/{id}', method: 'get', ...variables, signal });
+
+export type DeleteConfigurableLogDrainPathParams = {
+  id: string;
+};
+
+export type DeleteConfigurableLogDrainQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type DeleteConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteConfigurableLogDrainVariables = {
+  pathParams: DeleteConfigurableLogDrainPathParams;
+  queryParams?: DeleteConfigurableLogDrainQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Deletes a Configurable Log Drain. This endpoint must be called with a team AccessToken (integration OAuth2 clients are not allowed). Only log drains owned by the authenticated team can be deleted.
+ */
+export const deleteConfigurableLogDrain = (variables: DeleteConfigurableLogDrainVariables, signal?: AbortSignal) =>
+  fetch<
+    undefined,
+    DeleteConfigurableLogDrainError,
+    undefined,
+    {},
+    DeleteConfigurableLogDrainQueryParams,
+    DeleteConfigurableLogDrainPathParams
+  >({ url: '/v1/log-drains/{id}', method: 'delete', ...variables, signal });
+
+export type GetAllLogDrainsQueryParams = {
+  /**
+   * @pattern ^[a-zA-z0-9_]+$
+   */
+  projectId?: string;
+  projectIdOrName?: string;
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type GetAllLogDrainsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetAllLogDrainsResponse = {
+  clientId?: string;
+  configurationId?: string;
+  deliveryFormat: 'json' | 'ndjson' | 'syslog';
+  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
+  environments: ('preview' | 'production')[];
+  status?: 'disabled' | 'enabled' | 'errored';
+  disabledAt?: number;
+  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
+  disabledBy?: string;
+  firstErrorTimestamp?: number;
+  samplingRate?: number;
+  hideIpAddresses?: boolean;
+  id: string;
+  createdAt: number;
+  deletedAt: number | null;
+  updatedAt: number;
+  url: string;
+  headers?: {
+    [key: string]: string;
+  };
+  projectIds?: string[];
+  name: string;
+  teamId?: string | null;
+  ownerId: string;
+  createdFrom?: 'integration' | 'self-served';
+  secret: string;
+}[];
+
+export type GetAllLogDrainsVariables = {
+  queryParams?: GetAllLogDrainsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves a list of all the Log Drains owned by the account. This endpoint must be called with an account AccessToken (integration OAuth2 clients are not allowed). Only log drains owned by the authenticated account can be accessed.
+ */
+export const getAllLogDrains = (variables: GetAllLogDrainsVariables, signal?: AbortSignal) =>
+  fetch<GetAllLogDrainsResponse, GetAllLogDrainsError, undefined, {}, GetAllLogDrainsQueryParams, {}>({
+    url: '/v1/log-drains',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type CreateConfigurableLogDrainQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type CreateConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
+
+export type CreateConfigurableLogDrainResponse = {
+  /**
+   * The secret to validate the log-drain payload
+   */
+  secret?: string;
+  clientId?: string;
+  configurationId?: string;
+  deliveryFormat: 'json' | 'ndjson' | 'syslog';
+  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
+  environments: ('preview' | 'production')[];
+  status?: 'disabled' | 'enabled' | 'errored';
+  disabledAt?: number;
+  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
+  disabledBy?: string;
+  firstErrorTimestamp?: number;
+  samplingRate?: number;
+  hideIpAddresses?: boolean;
+  id: string;
+  createdAt: number;
+  deletedAt: number | null;
+  updatedAt: number;
+  url: string;
+  headers?: {
+    [key: string]: string;
+  };
+  projectIds?: string[];
+  name: string;
+  teamId?: string | null;
+  ownerId: string;
+  createdFrom?: 'integration' | 'self-served';
+};
+
+export type CreateConfigurableLogDrainRequestBody = {
+  /**
+   * The delivery log format
+   *
+   * @example json
+   */
+  deliveryFormat: 'json' | 'ndjson';
+  /**
+   * The log drain url
+   *
+   * @format uri
+   * @pattern ^(http|https)?://
+   */
+  url: string;
+  /**
+   * Headers to be sent together with the request
+   */
+  headers?: {
+    [key: string]: string;
+  };
+  /**
+   * @minItems 1
+   * @maxItems 50
+   */
+  projectIds?: string[];
+  /**
+   * @uniqueItems true
+   * @minItems 1
+   */
+  sources: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
+  /**
+   * @uniqueItems true
+   * @minItems 1
+   */
+  environments?: ('preview' | 'production')[];
+  /**
+   * Custom secret of log drain
+   */
+  secret?: string;
+  /**
+   * The sampling rate for this log drain. It should be a percentage rate between 0 and 100. With max 2 decimal points
+   *
+   * @minimum 0.01
+   * @maximum 1
+   */
+  samplingRate?: number;
+  /**
+   * The custom name of this log drain.
+   */
+  name?: string;
+};
+
+export type CreateConfigurableLogDrainVariables = {
+  body: CreateConfigurableLogDrainRequestBody;
+  queryParams?: CreateConfigurableLogDrainQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Creates a configurable log drain. This endpoint must be called with a team AccessToken (integration OAuth2 clients are not allowed)
+ */
+export const createConfigurableLogDrain = (variables: CreateConfigurableLogDrainVariables, signal?: AbortSignal) =>
+  fetch<
+    CreateConfigurableLogDrainResponse,
+    CreateConfigurableLogDrainError,
+    CreateConfigurableLogDrainRequestBody,
+    {},
+    CreateConfigurableLogDrainQueryParams,
+    {}
+  >({ url: '/v1/log-drains', method: 'post', ...variables, signal });
 
 export type GetEdgeConfigsQueryParams = {
   /**
@@ -6853,10 +7241,15 @@ export type GetEdgeConfigsResponse = {
     doneAt: number | null;
   };
   schema?: Record<string, any>;
-  purpose?: {
-    type: 'flags';
-    projectId: string;
-  };
+  purpose?:
+    | {
+        type: 'flags';
+        projectId: string;
+      }
+    | {
+        type: 'experimentation';
+        resourceId: string;
+      };
   sizeInBytes: number;
   itemCount: number;
 };
@@ -6908,10 +7301,15 @@ export type CreateEdgeConfigResponse = {
     doneAt: number | null;
   };
   schema?: Record<string, any>;
-  purpose?: {
-    type: 'flags';
-    projectId: string;
-  };
+  purpose?:
+    | {
+        type: 'flags';
+        projectId: string;
+      }
+    | {
+        type: 'experimentation';
+        resourceId: string;
+      };
   sizeInBytes: number;
   itemCount: number;
 };
@@ -6983,10 +7381,15 @@ export type GetEdgeConfigResponse = {
     doneAt: number | null;
   };
   schema?: Record<string, any>;
-  purpose?: {
-    type: 'flags';
-    projectId: string;
-  };
+  purpose?:
+    | {
+        type: 'flags';
+        projectId: string;
+      }
+    | {
+        type: 'experimentation';
+        resourceId: string;
+      };
   sizeInBytes: number;
   itemCount: number;
 };
@@ -7043,10 +7446,15 @@ export type UpdateEdgeConfigResponse = {
     doneAt: number | null;
   };
   schema?: Record<string, any>;
-  purpose?: {
-    type: 'flags';
-    projectId: string;
-  };
+  purpose?:
+    | {
+        type: 'flags';
+        projectId: string;
+      }
+    | {
+        type: 'experimentation';
+        resourceId: string;
+      };
   sizeInBytes: number;
   itemCount: number;
 };
@@ -7177,7 +7585,7 @@ export type PatchEdgeConfigItemsResponse = {
 export type PatchEdgeConfigItemsRequestBody = {
   items: (
     | {
-        operation: void;
+        operation: 'create';
       }
     | {
         operation: 'update' | 'upsert';
@@ -7186,7 +7594,7 @@ export type PatchEdgeConfigItemsRequestBody = {
         operation: 'update' | 'upsert';
       }
     | {
-        operation: void;
+        operation: 'delete';
       }
   )[];
   definition: void;
@@ -8306,6 +8714,57 @@ export const updateInvoice = (variables: UpdateInvoiceVariables, signal?: AbortS
     signal
   });
 
+export type SubmitPrepaymentBalancesPathParams = {
+  integrationConfigurationId: string;
+};
+
+export type SubmitPrepaymentBalancesError = Fetcher.ErrorWrapper<undefined>;
+
+export type SubmitPrepaymentBalancesRequestBody = {
+  /**
+   * Server time of your integration, used to determine the most recent data for race conditions & updates. Only the latest usage data for a given day, week, and month will be kept.
+   *
+   * @format date-time
+   */
+  timestamp: string;
+  balances: {
+    /**
+     * Partner's resource ID, exclude if credits are tied to the installation and not an individual resource.
+     */
+    resourceId?: string;
+    /**
+     * A human-readable description of the credits the user currently has, e.g. \"2,000 Tokens\"
+     */
+    credit?: string;
+    /**
+     * The name of the credits, for display purposes, e.g. \"Tokens\"
+     */
+    nameLabel?: string;
+    /**
+     * The dollar value of the credit balance, in USD and provided in cents, which is used to trigger automatic purchase thresholds.
+     */
+    currencyValueInCents: number;
+  }[];
+};
+
+export type SubmitPrepaymentBalancesVariables = {
+  body: SubmitPrepaymentBalancesRequestBody;
+  pathParams: SubmitPrepaymentBalancesPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Sends the prepayment balances. The partner should do this at least once a day and ideally once per hour. <br/> Use the `credentials.access_token` we provided in the [Upsert Installation](#upsert-installation) body to authorize this request.
+ */
+export const submitPrepaymentBalances = (variables: SubmitPrepaymentBalancesVariables, signal?: AbortSignal) =>
+  fetch<
+    undefined,
+    SubmitPrepaymentBalancesError,
+    SubmitPrepaymentBalancesRequestBody,
+    {},
+    {},
+    SubmitPrepaymentBalancesPathParams
+  >({ url: '/v1/installations/{integrationConfigurationId}/billing/balance', method: 'post', ...variables, signal });
+
 export type UpdateResourceSecretsPathParams = {
   integrationConfigurationId: string;
   integrationProductIdOrSlug: string;
@@ -8383,6 +8842,64 @@ export const updateResourceSecretsById = (variables: UpdateResourceSecretsByIdVa
     signal
   });
 
+export type ImportResourcePathParams = {
+  integrationConfigurationId: string;
+  resourceId: string;
+};
+
+export type ImportResourceError = Fetcher.ErrorWrapper<undefined>;
+
+export type ImportResourceResponse = {
+  name: string;
+};
+
+export type ImportResourceRequestBody = {
+  productId: string;
+  name: string;
+  status: 'error' | 'pending' | 'ready' | 'resumed' | 'suspended' | 'uninstalled';
+  metadata?: {
+    [key: string]: any;
+  };
+  billingPlan?: {
+    id: string;
+    type: 'prepayment' | 'subscription';
+    name: string;
+    paymentMethodRequired?: boolean;
+  } & {
+    [key: string]: any;
+  };
+  notification?: {
+    level: 'error' | 'info' | 'warn';
+    title: string;
+    message?: string;
+    /**
+     * @format uri
+     */
+    href?: string;
+  };
+  secrets?: {
+    name: string;
+    value: string;
+    prefix?: string;
+  }[];
+};
+
+export type ImportResourceVariables = {
+  body: ImportResourceRequestBody;
+  pathParams: ImportResourcePathParams;
+} & FetcherExtraProps;
+
+/**
+ * This endpoint imports (upserts) a resource to Vercel's installation. This may be needed if resources can be independently created on the partner's side and need to be synchronized to Vercel.
+ */
+export const importResource = (variables: ImportResourceVariables, signal?: AbortSignal) =>
+  fetch<ImportResourceResponse, ImportResourceError, ImportResourceRequestBody, {}, {}, ImportResourcePathParams>({
+    url: '/v1/installations/{integrationConfigurationId}/resources/{resourceId}',
+    method: 'put',
+    ...variables,
+    signal
+  });
+
 export type GetConfigurationsQueryParams = {
   view: 'account' | 'project';
   installationType?: 'marketplace' | 'external';
@@ -8390,7 +8907,6 @@ export type GetConfigurationsQueryParams = {
    * ID of the integration
    */
   integrationIdOrSlug?: string;
-  skipBillingData?: string;
   /**
    * The Team identifier to perform the request on behalf of.
    */
@@ -8516,38 +9032,11 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          * Defines the installation type. - 'external' integrations are installed via the existing integrations flow - 'marketplace' integrations are natively installed: - when accepting the TOS of a partner during the store creation process - if undefined, assume 'external'
          */
         installationType?: 'marketplace' | 'external';
-        billingPlan?: {
-          id: string;
-          type: 'prepayment' | 'subscription';
-          name: string;
-          scope?: 'installation' | 'resource';
-          description: string;
-          paymentMethodRequired?: boolean;
-          preauthorizationAmount?: number;
-          cost?: string;
-          details?: {
-            label: string;
-            value?: string;
-          }[];
-          heightlightedDetails?: {
-            label: string;
-            value?: string;
-          }[];
-          quote?: {
-            line: string;
-            amount: string;
-          }[];
-          effectiveDate?: string;
-        };
-        billingTotal?: string;
-        periodStart?: string;
-        periodEnd?: string;
       }[]
     | {
         integration: {
           name: string;
           icon: string;
-          category: string;
           isLegacy: boolean;
           flags?: string[];
           assignedBetaLabelAt?: number;
@@ -8560,7 +9049,7 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
             | 'tag_commerce'
             | 'tag_databases'
             | 'tag_dev_tools'
-            | 'tag_experiments'
+            | 'tag_experimentation'
             | 'tag_logging'
             | 'tag_messaging'
             | 'tag_monitoring'
@@ -8676,32 +9165,6 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
          * Defines the installation type. - 'external' integrations are installed via the existing integrations flow - 'marketplace' integrations are natively installed: - when accepting the TOS of a partner during the store creation process - if undefined, assume 'external'
          */
         installationType?: 'marketplace' | 'external';
-        billingPlan?: {
-          id: string;
-          type: 'prepayment' | 'subscription';
-          name: string;
-          scope?: 'installation' | 'resource';
-          description: string;
-          paymentMethodRequired?: boolean;
-          preauthorizationAmount?: number;
-          cost?: string;
-          details?: {
-            label: string;
-            value?: string;
-          }[];
-          heightlightedDetails?: {
-            label: string;
-            value?: string;
-          }[];
-          quote?: {
-            line: string;
-            amount: string;
-          }[];
-          effectiveDate?: string;
-        };
-        billingTotal?: string;
-        periodStart?: string;
-        periodEnd?: string;
       }[],
     GetConfigurationsError,
     undefined,
@@ -8743,32 +9206,6 @@ export type GetConfigurationVariables = {
 export const getConfiguration = (variables: GetConfigurationVariables, signal?: AbortSignal) =>
   fetch<
     | {
-        billingPlan?: {
-          id: string;
-          type: 'prepayment' | 'subscription';
-          name: string;
-          scope?: 'installation' | 'resource';
-          description: string;
-          paymentMethodRequired?: boolean;
-          preauthorizationAmount?: number;
-          cost?: string;
-          details?: {
-            label: string;
-            value?: string;
-          }[];
-          heightlightedDetails?: {
-            label: string;
-            value?: string;
-          }[];
-          quote?: {
-            line: string;
-            amount: string;
-          }[];
-          effectiveDate?: string;
-        };
-        billingTotal?: string;
-        periodStart?: string;
-        periodEnd?: string;
         /**
          * A timestamp that tells you when the configuration was installed successfully
          *
@@ -9524,280 +9961,268 @@ export const searchRepo = (variables: SearchRepoVariables, signal?: AbortSignal)
     {}
   >({ url: '/v1/integrations/search-repo', method: 'get', ...variables, signal });
 
-export type GetConfigurableLogDrainPathParams = {
-  id: string;
+export type GetV1ExperimentationItemsQueryParams = {
+  resourceId?: string;
 };
 
-export type GetConfigurableLogDrainQueryParams = {
-  /**
-   * The Team identifier to perform the request on behalf of.
-   */
-  teamId?: string;
-  /**
-   * The Team slug to perform the request on behalf of.
-   */
-  slug?: string;
+export type GetV1ExperimentationItemsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetV1ExperimentationItemsResponse = {
+  items: {
+    /**
+     * The Vercel generated ID for this item Integrations should not receive this in API responses
+     */
+    id: string;
+    slug: string;
+    origin: string;
+    /**
+     * The ID the partner has for this item. Integrations should receive this as `id` in API responses
+     */
+    externalId: string;
+    /**
+     * The id of the integration installation on a team
+     */
+    integrationConfigurationId: string;
+    /**
+     * The flags collection ID
+     */
+    resourceId: string;
+    /**
+     * An optional functional category for the item. Categorization semantics are: - flag (can resolve variants, can freely update variant resolution, usually does not perform analysis) - experiment (has variants, constrains changes to variant allocations, performs analysis) Using statsig as an example: - FeatureGate -> flag - Experiment -> experiment - Autotune -> experiment Forwards compatibility for other primitives can be considered, ex. `DynamicConfig`, `Holdouts`, `Layers`
+     */
+    category?: 'experiment' | 'flag';
+    name?: string;
+    description?: string;
+    isArchived?: boolean;
+    createdAt?: number;
+    updatedAt?: number;
+  }[];
 };
 
-export type GetConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetConfigurableLogDrainResponse = {
-  id: string;
-  deliveryFormat: 'json' | 'ndjson' | 'syslog';
-  url: string;
-  name: string;
-  clientId?: string;
-  configurationId?: string;
-  teamId?: string | null;
-  ownerId: string;
-  projectIds?: string[];
-  createdAt: number;
-  deletedAt: number | null;
-  updatedAt: number;
-  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
-  headers?: {
-    [key: string]: string;
-  };
-  environments: ('preview' | 'production')[];
-  status?: 'disabled' | 'enabled' | 'errored';
-  disabledAt?: number;
-  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
-  disabledBy?: string;
-  firstErrorTimestamp?: number;
-  samplingRate?: number;
-  hideIpAddresses?: boolean;
-  secret: string;
-  createdFrom?: 'self-served';
-};
-
-export type GetConfigurableLogDrainVariables = {
-  pathParams: GetConfigurableLogDrainPathParams;
-  queryParams?: GetConfigurableLogDrainQueryParams;
+export type GetV1ExperimentationItemsVariables = {
+  queryParams?: GetV1ExperimentationItemsQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Retrieves a Configurable Log Drain. This endpoint must be called with a team AccessToken (integration OAuth2 clients are not allowed). Only log drains owned by the authenticated team can be accessed.
+ * Query experimentation items
  */
-export const getConfigurableLogDrain = (variables: GetConfigurableLogDrainVariables, signal?: AbortSignal) =>
+export const getV1ExperimentationItems = (variables: GetV1ExperimentationItemsVariables, signal?: AbortSignal) =>
   fetch<
-    GetConfigurableLogDrainResponse,
-    GetConfigurableLogDrainError,
+    GetV1ExperimentationItemsResponse,
+    GetV1ExperimentationItemsError,
     undefined,
     {},
-    GetConfigurableLogDrainQueryParams,
-    GetConfigurableLogDrainPathParams
-  >({ url: '/v1/log-drains/{id}', method: 'get', ...variables, signal });
+    GetV1ExperimentationItemsQueryParams,
+    {}
+  >({ url: '/v1/experimentation/items', method: 'get', ...variables, signal });
 
-export type DeleteConfigurableLogDrainPathParams = {
-  id: string;
+export type PostV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsPathParams = {
+  integrationConfigurationId: string;
+  resourceId: string;
 };
 
-export type DeleteConfigurableLogDrainQueryParams = {
+export type PostV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type PostV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsRequestBody = {
   /**
-   * The Team identifier to perform the request on behalf of.
+   * @maxItems 50
    */
-  teamId?: string;
-  /**
-   * The Team slug to perform the request on behalf of.
-   */
-  slug?: string;
+  items: {
+    /**
+     * @maxLength 1024
+     */
+    id: string;
+    /**
+     * @maxLength 1024
+     */
+    slug: string;
+    /**
+     * @maxLength 2048
+     */
+    origin: string;
+    category?: 'experiment' | 'flag';
+    /**
+     * @maxLength 1024
+     */
+    name?: string;
+    /**
+     * @maxLength 1024
+     */
+    description?: string;
+    isArchived?: boolean;
+    createdAt?: number;
+    updatedAt?: number;
+  }[];
 };
 
-export type DeleteConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
-
-export type DeleteConfigurableLogDrainVariables = {
-  pathParams: DeleteConfigurableLogDrainPathParams;
-  queryParams?: DeleteConfigurableLogDrainQueryParams;
+export type PostV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsVariables = {
+  body: PostV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsRequestBody;
+  pathParams: PostV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsPathParams;
 } & FetcherExtraProps;
 
 /**
- * Deletes a Configurable Log Drain. This endpoint must be called with a team AccessToken (integration OAuth2 clients are not allowed). Only log drains owned by the authenticated team can be deleted.
+ * Create one or multiple experimentation items
  */
-export const deleteConfigurableLogDrain = (variables: DeleteConfigurableLogDrainVariables, signal?: AbortSignal) =>
+export const postV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItems = (
+  variables: PostV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsVariables,
+  signal?: AbortSignal
+) =>
   fetch<
     undefined,
-    DeleteConfigurableLogDrainError,
-    undefined,
+    PostV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsError,
+    PostV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsRequestBody,
     {},
-    DeleteConfigurableLogDrainQueryParams,
-    DeleteConfigurableLogDrainPathParams
-  >({ url: '/v1/log-drains/{id}', method: 'delete', ...variables, signal });
-
-export type GetAllLogDrainsQueryParams = {
-  /**
-   * @pattern ^[a-zA-z0-9_]+$
-   */
-  projectId?: string;
-  /**
-   * The Team identifier to perform the request on behalf of.
-   */
-  teamId?: string;
-  /**
-   * The Team slug to perform the request on behalf of.
-   */
-  slug?: string;
-};
-
-export type GetAllLogDrainsError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetAllLogDrainsResponse = {
-  id: string;
-  deliveryFormat: 'json' | 'ndjson' | 'syslog';
-  url: string;
-  name: string;
-  clientId?: string;
-  configurationId?: string;
-  teamId?: string | null;
-  ownerId: string;
-  projectIds?: string[];
-  createdAt: number;
-  deletedAt: number | null;
-  updatedAt: number;
-  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
-  headers?: {
-    [key: string]: string;
-  };
-  environments: ('preview' | 'production')[];
-  status?: 'disabled' | 'enabled' | 'errored';
-  disabledAt?: number;
-  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
-  disabledBy?: string;
-  firstErrorTimestamp?: number;
-  samplingRate?: number;
-  hideIpAddresses?: boolean;
-  secret: string;
-  createdFrom?: 'self-served';
-}[];
-
-export type GetAllLogDrainsVariables = {
-  queryParams?: GetAllLogDrainsQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieves a list of all the Log Drains owned by the account. This endpoint must be called with an account AccessToken (integration OAuth2 clients are not allowed). Only log drains owned by the authenticated account can be accessed.
- */
-export const getAllLogDrains = (variables: GetAllLogDrainsVariables, signal?: AbortSignal) =>
-  fetch<GetAllLogDrainsResponse, GetAllLogDrainsError, undefined, {}, GetAllLogDrainsQueryParams, {}>({
-    url: '/v1/log-drains',
-    method: 'get',
+    {},
+    PostV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsPathParams
+  >({
+    url: '/v1/installations/{integrationConfigurationId}/resources/{resourceId}/experimentation/items',
+    method: 'post',
     ...variables,
     signal
   });
 
-export type CreateConfigurableLogDrainQueryParams = {
-  /**
-   * The Team identifier to perform the request on behalf of.
-   */
-  teamId?: string;
-  /**
-   * The Team slug to perform the request on behalf of.
-   */
-  slug?: string;
+export type PatchV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemIdPathParams = {
+  integrationConfigurationId: string;
+  resourceId: string;
+  itemId: string;
 };
 
-export type CreateConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
+export type PatchV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemIdError =
+  Fetcher.ErrorWrapper<undefined>;
 
-export type CreateConfigurableLogDrainResponse = {
+export type PatchV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemIdRequestBody = {
   /**
-   * The secret to validate the log-drain payload
+   * @maxLength 1024
    */
-  secret?: string;
-  id: string;
-  deliveryFormat: 'json' | 'ndjson' | 'syslog';
-  url: string;
-  name: string;
-  clientId?: string;
-  configurationId?: string;
-  teamId?: string | null;
-  ownerId: string;
-  projectIds?: string[];
-  createdAt: number;
-  deletedAt: number | null;
-  updatedAt: number;
-  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
-  headers?: {
-    [key: string]: string;
-  };
-  environments: ('preview' | 'production')[];
-  status?: 'disabled' | 'enabled' | 'errored';
-  disabledAt?: number;
-  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
-  disabledBy?: string;
-  firstErrorTimestamp?: number;
-  samplingRate?: number;
-  hideIpAddresses?: boolean;
-  createdFrom?: 'self-served';
-};
-
-export type CreateConfigurableLogDrainRequestBody = {
+  slug: string;
   /**
-   * The delivery log format
-   *
-   * @example json
+   * @maxLength 2048
    */
-  deliveryFormat: 'json' | 'ndjson';
+  origin: string;
   /**
-   * The log drain url
-   *
-   * @format uri
-   * @pattern ^(http|https)?://
-   */
-  url: string;
-  /**
-   * Headers to be sent together with the request
-   */
-  headers?: {
-    [key: string]: string;
-  };
-  /**
-   * @minItems 1
-   * @maxItems 50
-   */
-  projectIds?: string[];
-  /**
-   * @uniqueItems true
-   * @minItems 1
-   */
-  sources: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
-  /**
-   * @uniqueItems true
-   * @minItems 1
-   */
-  environments?: ('preview' | 'production')[];
-  /**
-   * Custom secret of log drain
-   */
-  secret?: string;
-  /**
-   * The sampling rate for this log drain. It should be a percentage rate between 0 and 100. With max 2 decimal points
-   *
-   * @minimum 0.01
-   * @maximum 1
-   */
-  samplingRate?: number;
-  /**
-   * The custom name of this log drain.
+   * @maxLength 1024
    */
   name?: string;
+  category?: 'experiment' | 'flag';
+  /**
+   * @maxLength 1024
+   */
+  description?: string;
+  isArchived?: boolean;
+  createdAt?: number;
+  updatedAt?: number;
 };
 
-export type CreateConfigurableLogDrainVariables = {
-  body: CreateConfigurableLogDrainRequestBody;
-  queryParams?: CreateConfigurableLogDrainQueryParams;
+export type PatchV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemIdVariables = {
+  body: PatchV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemIdRequestBody;
+  pathParams: PatchV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemIdPathParams;
 } & FetcherExtraProps;
 
 /**
- * Creates a configurable log drain. This endpoint must be called with a team AccessToken (integration OAuth2 clients are not allowed)
+ * Patch an existing experimentation item
  */
-export const createConfigurableLogDrain = (variables: CreateConfigurableLogDrainVariables, signal?: AbortSignal) =>
+export const patchV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemId = (
+  variables: PatchV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemIdVariables,
+  signal?: AbortSignal
+) =>
   fetch<
-    CreateConfigurableLogDrainResponse,
-    CreateConfigurableLogDrainError,
-    CreateConfigurableLogDrainRequestBody,
+    undefined,
+    PatchV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemIdError,
+    PatchV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemIdRequestBody,
     {},
-    CreateConfigurableLogDrainQueryParams,
-    {}
-  >({ url: '/v1/log-drains', method: 'post', ...variables, signal });
+    {},
+    PatchV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemIdPathParams
+  >({
+    url: '/v1/installations/{integrationConfigurationId}/resources/{resourceId}/experimentation/items/{itemId}',
+    method: 'patch',
+    ...variables,
+    signal
+  });
+
+export type DeleteV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemIdPathParams = {
+  integrationConfigurationId: string;
+  resourceId: string;
+  itemId: string;
+};
+
+export type DeleteV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemIdError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemIdVariables = {
+  pathParams: DeleteV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemIdPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Delete an existing experimentation item
+ */
+export const deleteV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemId = (
+  variables: DeleteV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemIdVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    undefined,
+    DeleteV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemIdError,
+    undefined,
+    {},
+    {},
+    DeleteV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemIdPathParams
+  >({
+    url: '/v1/installations/{integrationConfigurationId}/resources/{resourceId}/experimentation/items/{itemId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type PutV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationEdgeConfigPathParams = {
+  integrationConfigurationId: string;
+  resourceId: string;
+};
+
+export type PutV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationEdgeConfigError =
+  Fetcher.ErrorWrapper<undefined>;
+
+export type PutV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationEdgeConfigResponse = {
+  items: {
+    [key: string]: Schemas.EdgeConfigItemValue;
+  };
+  updatedAt: number;
+  digest: string;
+};
+
+export type PutV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationEdgeConfigRequestBody = {
+  data: {
+    [key: string]:
+      | (string | number | boolean | null | Record<string, any>)
+      | (string | number | boolean | null | Record<string, any>)[];
+  };
+};
+
+export type PutV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationEdgeConfigVariables = {
+  body: PutV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationEdgeConfigRequestBody;
+  pathParams: PutV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationEdgeConfigPathParams;
+} & FetcherExtraProps;
+
+/**
+ * When the user enabled Edge Config syncing, then this endpoint can be used by the partner to push their configuration data into the relevant Edge Config.
+ */
+export const putV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationEdgeConfig = (
+  variables: PutV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationEdgeConfigVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    PutV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationEdgeConfigResponse,
+    PutV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationEdgeConfigError,
+    PutV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationEdgeConfigRequestBody,
+    {},
+    {},
+    PutV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationEdgeConfigPathParams
+  >({
+    url: '/v1/installations/{integrationConfigurationId}/resources/{resourceId}/experimentation/edge-config',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type GetProjectMembersPathParams = {
   /**
@@ -9911,7 +10336,7 @@ export const getProjectMembers = (variables: GetProjectMembersVariables, signal?
            *
            * @example CONTRIBUTOR
            */
-          teamRole: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
+          teamRole: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'SECURITY' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
         }[];
         pagination: {
           hasNext: boolean;
@@ -10477,6 +10902,7 @@ export type GetProjectsResponse = {
       | 'parcel'
       | 'polymer'
       | 'preact'
+      | 'react-router'
       | 'redwoodjs'
       | 'remix'
       | 'saber'
@@ -10643,32 +11069,45 @@ export type GetProjectsResponse = {
           sourceless?: boolean;
           productionBranch?: string;
         };
-    microfrontends?: {
-      /**
-       * Timestamp when the microfrontends settings were last updated.
-       */
-      updatedAt: number;
-      /**
-       * The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
-       */
-      groupIds: string[];
-      /**
-       * Whether microfrontends are enabled for this project.
-       */
-      enabled: boolean;
-      /**
-       * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
-       */
-      isDefaultApp?: boolean;
-      /**
-       * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
-       */
-      defaultRoute?: string;
-      /**
-       * Whether observability data should be routed to the default app in this microfrontend's group, or it should go to this microfrontend.
-       */
-      routeObservabilityToDefaultApp?: boolean;
-    };
+    microfrontends?:
+      | {
+          /**
+           * Timestamp when the microfrontends settings were last updated.
+           */
+          updatedAt: number;
+          /**
+           * The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+           *
+           * @maxItems 2
+           * @minItems 2
+           */
+          groupIds: (string | string)[];
+          /**
+           * Whether microfrontends are enabled for this project.
+           */
+          enabled: boolean;
+          /**
+           * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+           */
+          isDefaultApp?: boolean;
+          /**
+           * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+           */
+          defaultRoute?: string;
+          /**
+           * Whether observability data should be routed to this microfrontend project or a root project.
+           */
+          routeObservabilityToThisProject?: boolean;
+        }
+      | {
+          updatedAt: number;
+          /**
+           * @maxItems 2
+           * @minItems 2
+           */
+          groupIds: (string | string)[];
+          enabled: boolean;
+        };
     name: string;
     nodeVersion: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
     optionsAllowlist?: {
@@ -10681,22 +11120,20 @@ export type GetProjectsResponse = {
     passwordProtection?: Record<string, any> | null;
     productionDeploymentsFastLane?: boolean;
     publicSource?: boolean | null;
-    resourceConfig?: {
+    resourceConfig: {
       fluid?: boolean;
-      functionDefaultRegion?: string | null;
+      functionDefaultRegions: string[];
       functionDefaultTimeout?: number;
       functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
       functionZeroConfigFailover?: boolean;
-      allowServerlessConcurrency?: boolean;
       elasticConcurrencyEnabled?: boolean;
     };
-    defaultResourceConfig?: {
+    defaultResourceConfig: {
       fluid?: boolean;
-      functionDefaultRegion?: string | null;
+      functionDefaultRegions: string[];
       functionDefaultTimeout?: number;
       functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
       functionZeroConfigFailover?: boolean;
-      allowServerlessConcurrency?: boolean;
       elasticConcurrencyEnabled?: boolean;
     };
     rootDirectory?: string | null;
@@ -10794,6 +11231,7 @@ export type GetProjectsResponse = {
     permissions?: {
       user?: Schemas.ACLAction[];
       userConnection?: Schemas.ACLAction[];
+      userSudo?: Schemas.ACLAction[];
       webAuthn?: Schemas.ACLAction[];
       oauth2Connection?: Schemas.ACLAction[];
       accessGroup?: Schemas.ACLAction[];
@@ -11153,7 +11591,7 @@ export type GetProjectsVariables = {
  */
 export const getProjects = (variables: GetProjectsVariables, signal?: AbortSignal) =>
   fetch<GetProjectsResponse, GetProjectsError, undefined, {}, GetProjectsQueryParams, {}>({
-    url: '/v9/projects',
+    url: '/v10/projects',
     method: 'get',
     ...variables,
     signal
@@ -11380,6 +11818,7 @@ export type CreateProjectResponse = {
     | 'parcel'
     | 'polymer'
     | 'preact'
+    | 'react-router'
     | 'redwoodjs'
     | 'remix'
     | 'saber'
@@ -11546,32 +11985,45 @@ export type CreateProjectResponse = {
         sourceless?: boolean;
         productionBranch?: string;
       };
-  microfrontends?: {
-    /**
-     * Timestamp when the microfrontends settings were last updated.
-     */
-    updatedAt: number;
-    /**
-     * The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
-     */
-    groupIds: string[];
-    /**
-     * Whether microfrontends are enabled for this project.
-     */
-    enabled: boolean;
-    /**
-     * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
-     */
-    isDefaultApp?: boolean;
-    /**
-     * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
-     */
-    defaultRoute?: string;
-    /**
-     * Whether observability data should be routed to the default app in this microfrontend's group, or it should go to this microfrontend.
-     */
-    routeObservabilityToDefaultApp?: boolean;
-  };
+  microfrontends?:
+    | {
+        /**
+         * Timestamp when the microfrontends settings were last updated.
+         */
+        updatedAt: number;
+        /**
+         * The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+         *
+         * @maxItems 2
+         * @minItems 2
+         */
+        groupIds: (string | string)[];
+        /**
+         * Whether microfrontends are enabled for this project.
+         */
+        enabled: boolean;
+        /**
+         * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+         */
+        isDefaultApp?: boolean;
+        /**
+         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+         */
+        defaultRoute?: string;
+        /**
+         * Whether observability data should be routed to this microfrontend project or a root project.
+         */
+        routeObservabilityToThisProject?: boolean;
+      }
+    | {
+        updatedAt: number;
+        /**
+         * @maxItems 2
+         * @minItems 2
+         */
+        groupIds: (string | string)[];
+        enabled: boolean;
+      };
   name: string;
   nodeVersion: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
   optionsAllowlist?: {
@@ -11584,22 +12036,20 @@ export type CreateProjectResponse = {
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
-  resourceConfig?: {
+  resourceConfig: {
     fluid?: boolean;
-    functionDefaultRegion?: string | null;
+    functionDefaultRegions: string[];
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
-    allowServerlessConcurrency?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
-  defaultResourceConfig?: {
+  defaultResourceConfig: {
     fluid?: boolean;
-    functionDefaultRegion?: string | null;
+    functionDefaultRegions: string[];
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
-    allowServerlessConcurrency?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
   rootDirectory?: string | null;
@@ -11697,6 +12147,7 @@ export type CreateProjectResponse = {
   permissions?: {
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
+    userSudo?: Schemas.ACLAction[];
     webAuthn?: Schemas.ACLAction[];
     oauth2Connection?: Schemas.ACLAction[];
     accessGroup?: Schemas.ACLAction[];
@@ -12119,6 +12570,7 @@ export type CreateProjectRequestBody = {
     | 'parcel'
     | 'polymer'
     | 'preact'
+    | 'react-router'
     | 'redwoodjs'
     | 'remix'
     | 'saber'
@@ -12463,6 +12915,7 @@ export type GetProjectResponse = {
     | 'parcel'
     | 'polymer'
     | 'preact'
+    | 'react-router'
     | 'redwoodjs'
     | 'remix'
     | 'saber'
@@ -12629,32 +13082,45 @@ export type GetProjectResponse = {
         sourceless?: boolean;
         productionBranch?: string;
       };
-  microfrontends?: {
-    /**
-     * Timestamp when the microfrontends settings were last updated.
-     */
-    updatedAt: number;
-    /**
-     * The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
-     */
-    groupIds: string[];
-    /**
-     * Whether microfrontends are enabled for this project.
-     */
-    enabled: boolean;
-    /**
-     * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
-     */
-    isDefaultApp?: boolean;
-    /**
-     * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
-     */
-    defaultRoute?: string;
-    /**
-     * Whether observability data should be routed to the default app in this microfrontend's group, or it should go to this microfrontend.
-     */
-    routeObservabilityToDefaultApp?: boolean;
-  };
+  microfrontends?:
+    | {
+        /**
+         * Timestamp when the microfrontends settings were last updated.
+         */
+        updatedAt: number;
+        /**
+         * The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+         *
+         * @maxItems 2
+         * @minItems 2
+         */
+        groupIds: (string | string)[];
+        /**
+         * Whether microfrontends are enabled for this project.
+         */
+        enabled: boolean;
+        /**
+         * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+         */
+        isDefaultApp?: boolean;
+        /**
+         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+         */
+        defaultRoute?: string;
+        /**
+         * Whether observability data should be routed to this microfrontend project or a root project.
+         */
+        routeObservabilityToThisProject?: boolean;
+      }
+    | {
+        updatedAt: number;
+        /**
+         * @maxItems 2
+         * @minItems 2
+         */
+        groupIds: (string | string)[];
+        enabled: boolean;
+      };
   name: string;
   nodeVersion: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
   optionsAllowlist?: {
@@ -12667,22 +13133,20 @@ export type GetProjectResponse = {
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
-  resourceConfig?: {
+  resourceConfig: {
     fluid?: boolean;
-    functionDefaultRegion?: string | null;
+    functionDefaultRegions: string[];
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
-    allowServerlessConcurrency?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
-  defaultResourceConfig?: {
+  defaultResourceConfig: {
     fluid?: boolean;
-    functionDefaultRegion?: string | null;
+    functionDefaultRegions: string[];
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
-    allowServerlessConcurrency?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
   rootDirectory?: string | null;
@@ -12780,6 +13244,7 @@ export type GetProjectResponse = {
   permissions?: {
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
+    userSudo?: Schemas.ACLAction[];
     webAuthn?: Schemas.ACLAction[];
     oauth2Connection?: Schemas.ACLAction[];
     accessGroup?: Schemas.ACLAction[];
@@ -13374,6 +13839,7 @@ export type UpdateProjectResponse = {
     | 'parcel'
     | 'polymer'
     | 'preact'
+    | 'react-router'
     | 'redwoodjs'
     | 'remix'
     | 'saber'
@@ -13540,32 +14006,45 @@ export type UpdateProjectResponse = {
         sourceless?: boolean;
         productionBranch?: string;
       };
-  microfrontends?: {
-    /**
-     * Timestamp when the microfrontends settings were last updated.
-     */
-    updatedAt: number;
-    /**
-     * The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
-     */
-    groupIds: string[];
-    /**
-     * Whether microfrontends are enabled for this project.
-     */
-    enabled: boolean;
-    /**
-     * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
-     */
-    isDefaultApp?: boolean;
-    /**
-     * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
-     */
-    defaultRoute?: string;
-    /**
-     * Whether observability data should be routed to the default app in this microfrontend's group, or it should go to this microfrontend.
-     */
-    routeObservabilityToDefaultApp?: boolean;
-  };
+  microfrontends?:
+    | {
+        /**
+         * Timestamp when the microfrontends settings were last updated.
+         */
+        updatedAt: number;
+        /**
+         * The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+         *
+         * @maxItems 2
+         * @minItems 2
+         */
+        groupIds: (string | string)[];
+        /**
+         * Whether microfrontends are enabled for this project.
+         */
+        enabled: boolean;
+        /**
+         * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+         */
+        isDefaultApp?: boolean;
+        /**
+         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+         */
+        defaultRoute?: string;
+        /**
+         * Whether observability data should be routed to this microfrontend project or a root project.
+         */
+        routeObservabilityToThisProject?: boolean;
+      }
+    | {
+        updatedAt: number;
+        /**
+         * @maxItems 2
+         * @minItems 2
+         */
+        groupIds: (string | string)[];
+        enabled: boolean;
+      };
   name: string;
   nodeVersion: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x' | '8.10.x';
   optionsAllowlist?: {
@@ -13578,22 +14057,20 @@ export type UpdateProjectResponse = {
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
-  resourceConfig?: {
+  resourceConfig: {
     fluid?: boolean;
-    functionDefaultRegion?: string | null;
+    functionDefaultRegions: string[];
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
-    allowServerlessConcurrency?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
-  defaultResourceConfig?: {
+  defaultResourceConfig: {
     fluid?: boolean;
-    functionDefaultRegion?: string | null;
+    functionDefaultRegions: string[];
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
-    allowServerlessConcurrency?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
   rootDirectory?: string | null;
@@ -13691,6 +14168,7 @@ export type UpdateProjectResponse = {
   permissions?: {
     user?: Schemas.ACLAction[];
     userConnection?: Schemas.ACLAction[];
+    userSudo?: Schemas.ACLAction[];
     webAuthn?: Schemas.ACLAction[];
     oauth2Connection?: Schemas.ACLAction[];
     accessGroup?: Schemas.ACLAction[];
@@ -14094,6 +14572,7 @@ export type UpdateProjectRequestBody = {
     | 'parcel'
     | 'polymer'
     | 'preact'
+    | 'react-router'
     | 'redwoodjs'
     | 'remix'
     | 'saber'
@@ -14347,14 +14826,14 @@ export const deleteProject = (variables: DeleteProjectVariables, signal?: AbortS
     signal
   });
 
-export type PostV1ProjectsIdOrNameCustomEnvironmentsPathParams = {
+export type CreateCustomEnvironmentPathParams = {
   /**
    * The unique project identifier or the project name
    */
   idOrName: string;
 };
 
-export type PostV1ProjectsIdOrNameCustomEnvironmentsQueryParams = {
+export type CreateCustomEnvironmentQueryParams = {
   /**
    * The Team identifier to perform the request on behalf of.
    */
@@ -14365,9 +14844,9 @@ export type PostV1ProjectsIdOrNameCustomEnvironmentsQueryParams = {
   slug?: string;
 };
 
-export type PostV1ProjectsIdOrNameCustomEnvironmentsError = Fetcher.ErrorWrapper<undefined>;
+export type CreateCustomEnvironmentError = Fetcher.ErrorWrapper<undefined>;
 
-export type PostV1ProjectsIdOrNameCustomEnvironmentsRequestBody = {
+export type CreateCustomEnvironmentRequestBody = {
   /**
    * The slug of the custom environment to create.
    *
@@ -14401,27 +14880,24 @@ export type PostV1ProjectsIdOrNameCustomEnvironmentsRequestBody = {
   copyEnvVarsFrom?: string;
 };
 
-export type PostV1ProjectsIdOrNameCustomEnvironmentsVariables = {
-  body?: PostV1ProjectsIdOrNameCustomEnvironmentsRequestBody;
-  pathParams: PostV1ProjectsIdOrNameCustomEnvironmentsPathParams;
-  queryParams?: PostV1ProjectsIdOrNameCustomEnvironmentsQueryParams;
+export type CreateCustomEnvironmentVariables = {
+  body?: CreateCustomEnvironmentRequestBody;
+  pathParams: CreateCustomEnvironmentPathParams;
+  queryParams?: CreateCustomEnvironmentQueryParams;
 } & FetcherExtraProps;
 
 /**
  * Creates a custom environment for the current project. Cannot be named 'Production' or 'Preview'.
  */
-export const postV1ProjectsIdOrNameCustomEnvironments = (
-  variables: PostV1ProjectsIdOrNameCustomEnvironmentsVariables,
-  signal?: AbortSignal
-) =>
+export const createCustomEnvironment = (variables: CreateCustomEnvironmentVariables, signal?: AbortSignal) =>
   fetch<
     Record<string, any>,
-    PostV1ProjectsIdOrNameCustomEnvironmentsError,
-    PostV1ProjectsIdOrNameCustomEnvironmentsRequestBody,
+    CreateCustomEnvironmentError,
+    CreateCustomEnvironmentRequestBody,
     {},
-    PostV1ProjectsIdOrNameCustomEnvironmentsQueryParams,
-    PostV1ProjectsIdOrNameCustomEnvironmentsPathParams
-  >({ url: '/v1/projects/{idOrName}/custom-environments', method: 'post', ...variables, signal });
+    CreateCustomEnvironmentQueryParams,
+    CreateCustomEnvironmentPathParams
+  >({ url: '/v9/projects/{idOrName}/custom-environments', method: 'post', ...variables, signal });
 
 export type GetV9ProjectsIdOrNameCustomEnvironmentsPathParams = {
   /**
@@ -14472,7 +14948,7 @@ export const getV9ProjectsIdOrNameCustomEnvironments = (
     GetV9ProjectsIdOrNameCustomEnvironmentsPathParams
   >({ url: '/v9/projects/{idOrName}/custom-environments', method: 'get', ...variables, signal });
 
-export type GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams = {
+export type GetCustomEnvironmentPathParams = {
   /**
    * The unique project identifier or the project name
    */
@@ -14483,7 +14959,7 @@ export type GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams
   environmentSlugOrId: string;
 };
 
-export type GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams = {
+export type GetCustomEnvironmentQueryParams = {
   /**
    * The Team identifier to perform the request on behalf of.
    */
@@ -14494,30 +14970,27 @@ export type GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParam
   slug?: string;
 };
 
-export type GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError = Fetcher.ErrorWrapper<undefined>;
+export type GetCustomEnvironmentError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables = {
-  pathParams: GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams;
-  queryParams?: GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams;
+export type GetCustomEnvironmentVariables = {
+  pathParams: GetCustomEnvironmentPathParams;
+  queryParams?: GetCustomEnvironmentQueryParams;
 } & FetcherExtraProps;
 
 /**
  * Retrieve a custom environment for the project. Must not be named 'Production' or 'Preview'.
  */
-export const getV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId = (
-  variables: GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables,
-  signal?: AbortSignal
-) =>
+export const getCustomEnvironment = (variables: GetCustomEnvironmentVariables, signal?: AbortSignal) =>
   fetch<
     Record<string, any>,
-    GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError,
+    GetCustomEnvironmentError,
     undefined,
     {},
-    GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams,
-    GetV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams
+    GetCustomEnvironmentQueryParams,
+    GetCustomEnvironmentPathParams
   >({ url: '/v9/projects/{idOrName}/custom-environments/{environmentSlugOrId}', method: 'get', ...variables, signal });
 
-export type PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams = {
+export type UpdateCustomEnvironmentPathParams = {
   /**
    * The unique project identifier or the project name
    */
@@ -14528,7 +15001,7 @@ export type PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathPara
   environmentSlugOrId: string;
 };
 
-export type PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams = {
+export type UpdateCustomEnvironmentQueryParams = {
   /**
    * The Team identifier to perform the request on behalf of.
    */
@@ -14539,9 +15012,9 @@ export type PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryPar
   slug?: string;
 };
 
-export type PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError = Fetcher.ErrorWrapper<undefined>;
+export type UpdateCustomEnvironmentError = Fetcher.ErrorWrapper<undefined>;
 
-export type PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody = {
+export type UpdateCustomEnvironmentRequestBody = {
   /**
    * The slug of the custom environment.
    *
@@ -14571,26 +15044,23 @@ export type PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestB
   } | null;
 };
 
-export type PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables = {
-  body?: PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody;
-  pathParams: PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams;
-  queryParams?: PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams;
+export type UpdateCustomEnvironmentVariables = {
+  body?: UpdateCustomEnvironmentRequestBody;
+  pathParams: UpdateCustomEnvironmentPathParams;
+  queryParams?: UpdateCustomEnvironmentQueryParams;
 } & FetcherExtraProps;
 
 /**
  * Update a custom environment for the project. Must not be named 'Production' or 'Preview'.
  */
-export const patchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId = (
-  variables: PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables,
-  signal?: AbortSignal
-) =>
+export const updateCustomEnvironment = (variables: UpdateCustomEnvironmentVariables, signal?: AbortSignal) =>
   fetch<
     Record<string, any>,
-    PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError,
-    PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody,
+    UpdateCustomEnvironmentError,
+    UpdateCustomEnvironmentRequestBody,
     {},
-    PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams,
-    PatchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams
+    UpdateCustomEnvironmentQueryParams,
+    UpdateCustomEnvironmentPathParams
   >({
     url: '/v9/projects/{idOrName}/custom-environments/{environmentSlugOrId}',
     method: 'patch',
@@ -14598,7 +15068,7 @@ export const patchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId = (
     signal
   });
 
-export type DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams = {
+export type RemoveCustomEnvironmentPathParams = {
   /**
    * The unique project identifier or the project name
    */
@@ -14609,7 +15079,7 @@ export type DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathPar
   environmentSlugOrId: string;
 };
 
-export type DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams = {
+export type RemoveCustomEnvironmentQueryParams = {
   /**
    * The Team identifier to perform the request on behalf of.
    */
@@ -14620,35 +15090,32 @@ export type DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryPa
   slug?: string;
 };
 
-export type DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError = Fetcher.ErrorWrapper<undefined>;
+export type RemoveCustomEnvironmentError = Fetcher.ErrorWrapper<undefined>;
 
-export type DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody = {
+export type RemoveCustomEnvironmentRequestBody = {
   /**
    * Delete Environment Variables that are not assigned to any environments.
    */
   deleteUnassignedEnvironmentVariables?: boolean;
 };
 
-export type DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables = {
-  body: DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody;
-  pathParams: DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams;
-  queryParams?: DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams;
+export type RemoveCustomEnvironmentVariables = {
+  body: RemoveCustomEnvironmentRequestBody;
+  pathParams: RemoveCustomEnvironmentPathParams;
+  queryParams?: RemoveCustomEnvironmentQueryParams;
 } & FetcherExtraProps;
 
 /**
  * Remove a custom environment for the project. Must not be named 'Production' or 'Preview'.
  */
-export const deleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId = (
-  variables: DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdVariables,
-  signal?: AbortSignal
-) =>
+export const removeCustomEnvironment = (variables: RemoveCustomEnvironmentVariables, signal?: AbortSignal) =>
   fetch<
     Record<string, any>,
-    DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdError,
-    DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdRequestBody,
+    RemoveCustomEnvironmentError,
+    RemoveCustomEnvironmentRequestBody,
     {},
-    DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdQueryParams,
-    DeleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrIdPathParams
+    RemoveCustomEnvironmentQueryParams,
+    RemoveCustomEnvironmentPathParams
   >({
     url: '/v9/projects/{idOrName}/custom-environments/{environmentSlugOrId}',
     method: 'delete',
@@ -16936,6 +17403,9 @@ export type EditProjectEnvRequestBody = {
    * @example bkWIjbnxcvo78
    */
   value?: string;
+  /**
+   * The custom environments that the environment variable should be synced to
+   */
   customEnvironmentIds?: string[];
   /**
    * A comment to add context on what this env var is for
@@ -18548,9 +19018,16 @@ export type AddBypassIpVariables = {
          * @maxLength 2544
          */
         domain: string;
+        /**
+         * If the specified bypass will apply to all domains for a project.
+         */
         projectScope?: boolean;
         sourceIp?: string;
         allSources?: boolean;
+        /**
+         * Time to live in milliseconds
+         */
+        ttl?: number;
         /**
          * @maxLength 500
          */
@@ -18562,9 +19039,16 @@ export type AddBypassIpVariables = {
          * @maxLength 2544
          */
         domain?: string;
+        /**
+         * If the specified bypass will apply to all domains for a project.
+         */
         projectScope: boolean;
         sourceIp?: string;
         allSources?: boolean;
+        /**
+         * Time to live in milliseconds
+         */
+        ttl?: number;
         /**
          * @maxLength 500
          */
@@ -18616,9 +19100,16 @@ export const addBypassIp = (variables: AddBypassIpVariables, signal?: AbortSigna
          * @maxLength 2544
          */
         domain: string;
+        /**
+         * If the specified bypass will apply to all domains for a project.
+         */
         projectScope?: boolean;
         sourceIp?: string;
         allSources?: boolean;
+        /**
+         * Time to live in milliseconds
+         */
+        ttl?: number;
         /**
          * @maxLength 500
          */
@@ -18630,9 +19121,16 @@ export const addBypassIp = (variables: AddBypassIpVariables, signal?: AbortSigna
          * @maxLength 2544
          */
         domain?: string;
+        /**
+         * If the specified bypass will apply to all domains for a project.
+         */
         projectScope: boolean;
         sourceIp?: string;
         allSources?: boolean;
+        /**
+         * Time to live in milliseconds
+         */
+        ttl?: number;
         /**
          * @maxLength 500
          */
@@ -18819,7 +19317,7 @@ export type GetTeamMembersResponse = {
      *
      * @example OWNER
      */
-    role: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'VIEWER';
+    role: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'SECURITY' | 'VIEWER';
     /**
      * The ID of this user.
      *
@@ -18890,7 +19388,7 @@ export type GetTeamMembersResponse = {
     accessGroups?: string[];
     id: string;
     email?: string;
-    role?: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'VIEWER';
+    role?: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'SECURITY' | 'VIEWER';
     isDSyncUser: boolean;
     createdAt?: number;
     expired?: boolean;
@@ -18956,12 +19454,22 @@ export type InviteUserToTeamRequestBody = {
   /**
    * The role of the user to invite
    *
+   * @default BILLING
+   * @default CONTRIBUTOR
+   * @default DEVELOPER
    * @default MEMBER
+   * @default OWNER
+   * @default SECURITY
    * @default VIEWER
+   * @example BILLING
+   * @example CONTRIBUTOR
+   * @example DEVELOPER
    * @example MEMBER
+   * @example OWNER
+   * @example SECURITY
    * @example VIEWER
    */
-  role?: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'VIEWER';
+  role?: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'SECURITY' | 'VIEWER';
   projects?: {
     /**
      * The ID of the project.
@@ -19012,12 +19520,26 @@ export const inviteUserToTeam = (variables: InviteUserToTeamVariables, signal?: 
          *
          * @example MEMBER
          */
-        role: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
+        role: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'SECURITY' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
+        /**
+         * The team roles of the user
+         *
+         * @example MEMBER
+         */
+        teamRoles?: ('OWNER' | 'MEMBER' | 'DEVELOPER' | 'SECURITY' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR')[];
+        /**
+         * The team permissions of the user
+         *
+         * @example CreateProject
+         */
+        teamPermissions?: ('CreateProject' | 'FullProductionDeployment')[];
       }
     | {
         uid: string;
         username: string;
-        role: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
+        role: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'SECURITY' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
+        teamRoles?: ('OWNER' | 'MEMBER' | 'DEVELOPER' | 'SECURITY' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR')[];
+        teamPermissions?: ('CreateProject' | 'FullProductionDeployment')[];
       },
     InviteUserToTeamError,
     InviteUserToTeamRequestBody,
@@ -19483,7 +20005,7 @@ export type PatchTeamRequestBody = {
      */
     roles?: {
       [key: string]:
-        | ('OWNER' | 'MEMBER' | 'DEVELOPER' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR')
+        | ('OWNER' | 'MEMBER' | 'DEVELOPER' | 'SECURITY' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR')
         | {
             /**
              * @pattern ^ag_[A-z0-9_ -]+$
@@ -19852,75 +20374,6 @@ export const uploadFile = (variables: UploadFileVariables, signal?: AbortSignal)
     {}
   >({ url: '/v2/files', method: 'post', ...variables, signal });
 
-export type GetAuthUserError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetAuthUserResponse = {
-  user: Schemas.AuthUser | Schemas.AuthUserLimited;
-};
-
-export type GetAuthUserVariables = FetcherExtraProps;
-
-/**
- * Retrieves information related to the currently authenticated User.
- */
-export const getAuthUser = (variables: GetAuthUserVariables, signal?: AbortSignal) =>
-  fetch<GetAuthUserResponse, GetAuthUserError, undefined, {}, {}, {}>({
-    url: '/v2/user',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type RequestDeleteError = Fetcher.ErrorWrapper<undefined>;
-
-export type RequestDeleteResponse = {
-  /**
-   * Unique identifier of the User who has initiated deletion.
-   */
-  id: string;
-  /**
-   * Email address of the User who has initiated deletion.
-   */
-  email: string;
-  /**
-   * User deletion progress status.
-   *
-   * @example Verification email sent
-   */
-  message: string;
-};
-
-export type RequestDeleteRequestBody = {
-  /**
-   * Optional array of objects that describe the reason why the User account is being deleted.
-   */
-  reasons?: {
-    /**
-     * Idenitifier slug of the reason why the User account is being deleted.
-     */
-    slug: string;
-    /**
-     * Description of the reason why the User account is being deleted.
-     */
-    description: string;
-  }[];
-};
-
-export type RequestDeleteVariables = {
-  body?: RequestDeleteRequestBody;
-} & FetcherExtraProps;
-
-/**
- * Initiates the deletion process for the currently authenticated User, by sending a deletion confirmation email. The email contains a link that the user needs to visit in order to proceed with the deletion process.
- */
-export const requestDelete = (variables: RequestDeleteVariables, signal?: AbortSignal) =>
-  fetch<RequestDeleteResponse, RequestDeleteError, RequestDeleteRequestBody, {}, {}, {}>({
-    url: '/v1/user',
-    method: 'delete',
-    ...variables,
-    signal
-  });
-
 export type ListAuthTokensError = Fetcher.ErrorWrapper<undefined>;
 
 export type ListAuthTokensResponse = {
@@ -20046,6 +20499,75 @@ export type DeleteAuthTokenVariables = {
 export const deleteAuthToken = (variables: DeleteAuthTokenVariables, signal?: AbortSignal) =>
   fetch<DeleteAuthTokenResponse, DeleteAuthTokenError, undefined, {}, {}, DeleteAuthTokenPathParams>({
     url: '/v3/user/tokens/{tokenId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type GetAuthUserError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetAuthUserResponse = {
+  user: Schemas.AuthUser | Schemas.AuthUserLimited;
+};
+
+export type GetAuthUserVariables = FetcherExtraProps;
+
+/**
+ * Retrieves information related to the currently authenticated User.
+ */
+export const getAuthUser = (variables: GetAuthUserVariables, signal?: AbortSignal) =>
+  fetch<GetAuthUserResponse, GetAuthUserError, undefined, {}, {}, {}>({
+    url: '/v2/user',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type RequestDeleteError = Fetcher.ErrorWrapper<undefined>;
+
+export type RequestDeleteResponse = {
+  /**
+   * Unique identifier of the User who has initiated deletion.
+   */
+  id: string;
+  /**
+   * Email address of the User who has initiated deletion.
+   */
+  email: string;
+  /**
+   * User deletion progress status.
+   *
+   * @example Verification email sent
+   */
+  message: string;
+};
+
+export type RequestDeleteRequestBody = {
+  /**
+   * Optional array of objects that describe the reason why the User account is being deleted.
+   */
+  reasons?: {
+    /**
+     * Idenitifier slug of the reason why the User account is being deleted.
+     */
+    slug: string;
+    /**
+     * Description of the reason why the User account is being deleted.
+     */
+    description: string;
+  }[];
+};
+
+export type RequestDeleteVariables = {
+  body?: RequestDeleteRequestBody;
+} & FetcherExtraProps;
+
+/**
+ * Initiates the deletion process for the currently authenticated User, by sending a deletion confirmation email. The email contains a link that the user needs to visit in order to proceed with the deletion process.
+ */
+export const requestDelete = (variables: RequestDeleteVariables, signal?: AbortSignal) =>
+  fetch<RequestDeleteResponse, RequestDeleteError, RequestDeleteRequestBody, {}, {}, {}>({
+    url: '/v1/user',
     method: 'delete',
     ...variables,
     signal
@@ -20270,6 +20792,7 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
                 | 'nextjs'
                 | 'gatsby'
                 | 'remix'
+                | 'react-router'
                 | 'astro'
                 | 'hexo'
                 | 'eleventy'
@@ -20651,6 +21174,190 @@ export const deleteWebhook = (variables: DeleteWebhookVariables, signal?: AbortS
     ...variables,
     signal
   });
+
+export type ListDeploymentAliasesPathParams = {
+  /**
+   * The ID of the deployment the aliases should be listed for
+   *
+   * @example dpl_FjvFJncQHQcZMznrUm9EoB8sFuPa
+   */
+  id: string;
+};
+
+export type ListDeploymentAliasesQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type ListDeploymentAliasesError = Fetcher.ErrorWrapper<undefined>;
+
+export type ListDeploymentAliasesResponse = {
+  /**
+   * A list of the aliases assigned to the deployment
+   */
+  aliases: {
+    /**
+     * The unique identifier of the alias
+     *
+     * @example 2WjyKQmM8ZnGcJsPWMrHRHrE
+     */
+    uid: string;
+    /**
+     * The alias name, it could be a `.vercel.app` subdomain or a custom domain
+     *
+     * @example my-alias.vercel.app
+     */
+    alias: string;
+    /**
+     * The date when the alias was created
+     *
+     * @format date-time
+     * @example 2017-04-26T23:00:34.232Z
+     */
+    created: string;
+    /**
+     * Target destination domain for redirect when the alias is a redirect
+     */
+    redirect?: string | null;
+    /**
+     * The protection bypass for the alias
+     */
+    protectionBypass?: {
+      [key: string]:
+        | {
+            createdAt: number;
+            createdBy: string;
+            scope: 'shareable-link';
+          }
+        | {
+            createdAt: number;
+            lastUpdatedAt: number;
+            lastUpdatedBy: string;
+            access: 'requested' | 'granted';
+            scope: 'user';
+          }
+        | {
+            createdAt: number;
+            createdBy: string;
+            scope: 'alias-protection-override';
+          }
+        | {
+            createdAt: number;
+            lastUpdatedAt: number;
+            lastUpdatedBy: string;
+            scope: 'email_invite';
+          };
+    };
+  }[];
+};
+
+export type ListDeploymentAliasesVariables = {
+  pathParams: ListDeploymentAliasesPathParams;
+  queryParams?: ListDeploymentAliasesQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves all Aliases for the Deployment with the given ID. The authenticated user or team must own the deployment.
+ */
+export const listDeploymentAliases = (variables: ListDeploymentAliasesVariables, signal?: AbortSignal) =>
+  fetch<
+    ListDeploymentAliasesResponse,
+    ListDeploymentAliasesError,
+    undefined,
+    {},
+    ListDeploymentAliasesQueryParams,
+    ListDeploymentAliasesPathParams
+  >({ url: '/v2/deployments/{id}/aliases', method: 'get', ...variables, signal });
+
+export type AssignAliasPathParams = {
+  /**
+   * The ID of the deployment the aliases should be listed for
+   *
+   * @example dpl_FjvFJncQHQcZMznrUm9EoB8sFuPa
+   */
+  id: string;
+};
+
+export type AssignAliasQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type AssignAliasError = Fetcher.ErrorWrapper<undefined>;
+
+export type AssignAliasResponse = {
+  /**
+   * The unique identifier of the alias
+   *
+   * @example 2WjyKQmM8ZnGcJsPWMrHRHrE
+   */
+  uid: string;
+  /**
+   * The assigned alias name
+   *
+   * @example my-alias.vercel.app
+   */
+  alias: string;
+  /**
+   * The date when the alias was created
+   *
+   * @format date-time
+   * @example 2017-04-26T23:00:34.232Z
+   */
+  created: string;
+  /**
+   * The unique identifier of the previously aliased deployment, only received when the alias was used before
+   *
+   * @example dpl_FjvFJncQHQcZMznrUm9EoB8sFuPa
+   */
+  oldDeploymentId?: string | null;
+};
+
+export type AssignAliasRequestBody = {
+  /**
+   * The alias we want to assign to the deployment defined in the URL
+   *
+   * @example my-alias.vercel.app
+   */
+  alias?: string;
+  /**
+   * The redirect property will take precedence over the deployment id from the URL and consists of a hostname (like test.com) to which the alias should redirect using status code 307
+   *
+   * @example null
+   */
+  redirect?: string | null;
+};
+
+export type AssignAliasVariables = {
+  body?: AssignAliasRequestBody;
+  pathParams: AssignAliasPathParams;
+  queryParams?: AssignAliasQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Creates a new alias for the deployment with the given deployment ID. The authenticated user or team must own this deployment. If the desired alias is already assigned to another deployment, then it will be removed from the old deployment and assigned to the new one.
+ */
+export const assignAlias = (variables: AssignAliasVariables, signal?: AbortSignal) =>
+  fetch<
+    AssignAliasResponse,
+    AssignAliasError,
+    AssignAliasRequestBody,
+    {},
+    AssignAliasQueryParams,
+    AssignAliasPathParams
+  >({ url: '/v2/deployments/{id}/aliases', method: 'post', ...variables, signal });
 
 export type ListAliasesQueryParams = {
   /**
@@ -21098,190 +21805,6 @@ export const deleteAlias = (variables: DeleteAliasVariables, signal?: AbortSigna
     signal
   });
 
-export type ListDeploymentAliasesPathParams = {
-  /**
-   * The ID of the deployment the aliases should be listed for
-   *
-   * @example dpl_FjvFJncQHQcZMznrUm9EoB8sFuPa
-   */
-  id: string;
-};
-
-export type ListDeploymentAliasesQueryParams = {
-  /**
-   * The Team identifier to perform the request on behalf of.
-   */
-  teamId?: string;
-  /**
-   * The Team slug to perform the request on behalf of.
-   */
-  slug?: string;
-};
-
-export type ListDeploymentAliasesError = Fetcher.ErrorWrapper<undefined>;
-
-export type ListDeploymentAliasesResponse = {
-  /**
-   * A list of the aliases assigned to the deployment
-   */
-  aliases: {
-    /**
-     * The unique identifier of the alias
-     *
-     * @example 2WjyKQmM8ZnGcJsPWMrHRHrE
-     */
-    uid: string;
-    /**
-     * The alias name, it could be a `.vercel.app` subdomain or a custom domain
-     *
-     * @example my-alias.vercel.app
-     */
-    alias: string;
-    /**
-     * The date when the alias was created
-     *
-     * @format date-time
-     * @example 2017-04-26T23:00:34.232Z
-     */
-    created: string;
-    /**
-     * Target destination domain for redirect when the alias is a redirect
-     */
-    redirect?: string | null;
-    /**
-     * The protection bypass for the alias
-     */
-    protectionBypass?: {
-      [key: string]:
-        | {
-            createdAt: number;
-            createdBy: string;
-            scope: 'shareable-link';
-          }
-        | {
-            createdAt: number;
-            lastUpdatedAt: number;
-            lastUpdatedBy: string;
-            access: 'requested' | 'granted';
-            scope: 'user';
-          }
-        | {
-            createdAt: number;
-            createdBy: string;
-            scope: 'alias-protection-override';
-          }
-        | {
-            createdAt: number;
-            lastUpdatedAt: number;
-            lastUpdatedBy: string;
-            scope: 'email_invite';
-          };
-    };
-  }[];
-};
-
-export type ListDeploymentAliasesVariables = {
-  pathParams: ListDeploymentAliasesPathParams;
-  queryParams?: ListDeploymentAliasesQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieves all Aliases for the Deployment with the given ID. The authenticated user or team must own the deployment.
- */
-export const listDeploymentAliases = (variables: ListDeploymentAliasesVariables, signal?: AbortSignal) =>
-  fetch<
-    ListDeploymentAliasesResponse,
-    ListDeploymentAliasesError,
-    undefined,
-    {},
-    ListDeploymentAliasesQueryParams,
-    ListDeploymentAliasesPathParams
-  >({ url: '/v2/deployments/{id}/aliases', method: 'get', ...variables, signal });
-
-export type AssignAliasPathParams = {
-  /**
-   * The ID of the deployment the aliases should be listed for
-   *
-   * @example dpl_FjvFJncQHQcZMznrUm9EoB8sFuPa
-   */
-  id: string;
-};
-
-export type AssignAliasQueryParams = {
-  /**
-   * The Team identifier to perform the request on behalf of.
-   */
-  teamId?: string;
-  /**
-   * The Team slug to perform the request on behalf of.
-   */
-  slug?: string;
-};
-
-export type AssignAliasError = Fetcher.ErrorWrapper<undefined>;
-
-export type AssignAliasResponse = {
-  /**
-   * The unique identifier of the alias
-   *
-   * @example 2WjyKQmM8ZnGcJsPWMrHRHrE
-   */
-  uid: string;
-  /**
-   * The assigned alias name
-   *
-   * @example my-alias.vercel.app
-   */
-  alias: string;
-  /**
-   * The date when the alias was created
-   *
-   * @format date-time
-   * @example 2017-04-26T23:00:34.232Z
-   */
-  created: string;
-  /**
-   * The unique identifier of the previously aliased deployment, only received when the alias was used before
-   *
-   * @example dpl_FjvFJncQHQcZMznrUm9EoB8sFuPa
-   */
-  oldDeploymentId?: string | null;
-};
-
-export type AssignAliasRequestBody = {
-  /**
-   * The alias we want to assign to the deployment defined in the URL
-   *
-   * @example my-alias.vercel.app
-   */
-  alias?: string;
-  /**
-   * The redirect property will take precedence over the deployment id from the URL and consists of a hostname (like test.com) to which the alias should redirect using status code 307
-   *
-   * @example null
-   */
-  redirect?: string | null;
-};
-
-export type AssignAliasVariables = {
-  body?: AssignAliasRequestBody;
-  pathParams: AssignAliasPathParams;
-  queryParams?: AssignAliasQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Creates a new alias for the deployment with the given deployment ID. The authenticated user or team must own this deployment. If the desired alias is already assigned to another deployment, then it will be removed from the old deployment and assigned to the new one.
- */
-export const assignAlias = (variables: AssignAliasVariables, signal?: AbortSignal) =>
-  fetch<
-    AssignAliasResponse,
-    AssignAliasError,
-    AssignAliasRequestBody,
-    {},
-    AssignAliasQueryParams,
-    AssignAliasPathParams
-  >({ url: '/v2/deployments/{id}/aliases', method: 'post', ...variables, signal });
-
 export type GetCertsError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetCertsResponse = {
@@ -21513,7 +22036,7 @@ export type ListDeploymentFilesVariables = {
 } & FetcherExtraProps;
 
 /**
- * Allows to retrieve the file structure of a deployment by supplying the deployment unique identifier.
+ * Allows to retrieve the file structure of the source code of a deployment by supplying the deployment unique identifier. If the deployment was created with the Vercel CLI or the API directly with the `files` key, it will have a file tree that can be retrievable.
  */
 export const listDeploymentFiles = (variables: ListDeploymentFilesVariables, signal?: AbortSignal) =>
   fetch<
@@ -21850,6 +22373,7 @@ export type GetDeploymentsResponse = {
         | 'parcel'
         | 'polymer'
         | 'preact'
+        | 'react-router'
         | 'redwoodjs'
         | 'remix'
         | 'saber'
@@ -22498,6 +23022,7 @@ export const operationsByTag = {
   },
   deployments: {
     getDeploymentEvents,
+    updateIntegrationDeploymentAction,
     getDeployment,
     createDeployment,
     cancelDeployment,
@@ -22506,6 +23031,14 @@ export const operationsByTag = {
     getDeploymentFileContents,
     getDeployments,
     deleteDeployment
+  },
+  integrations: {
+    updateIntegrationDeploymentAction,
+    getConfigurations,
+    getConfiguration,
+    deleteConfiguration,
+    gitNamespaces,
+    searchRepo
   },
   domains: {
     buyDomain,
@@ -22520,6 +23053,15 @@ export const operationsByTag = {
     deleteDomain
   },
   dns: { getRecords, createRecord, updateRecord, removeRecord },
+  logDrains: {
+    getConfigurableLogDrain,
+    deleteConfigurableLogDrain,
+    getAllLogDrains,
+    createConfigurableLogDrain,
+    getIntegrationLogDrains,
+    createLogDrain,
+    deleteIntegrationLogDrain
+  },
   edgeConfig: {
     getEdgeConfigs,
     createEdgeConfig,
@@ -22548,28 +23090,25 @@ export const operationsByTag = {
     submitInvoice,
     getInvoice,
     updateInvoice,
+    submitPrepaymentBalances,
     updateResourceSecrets,
     updateResourceSecretsById,
-    exchangeSsoToken
+    importResource,
+    exchangeSsoToken,
+    postV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItems,
+    patchV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemId,
+    deleteV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemId,
+    putV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationEdgeConfig
   },
-  integrations: { getConfigurations, getConfiguration, deleteConfiguration, gitNamespaces, searchRepo },
   authentication: { exchangeSsoToken, listAuthTokens, createAuthToken, getAuthToken, deleteAuthToken },
-  logDrains: {
-    getIntegrationLogDrains,
-    createLogDrain,
-    deleteIntegrationLogDrain,
-    getConfigurableLogDrain,
-    deleteConfigurableLogDrain,
-    getAllLogDrains,
-    createConfigurableLogDrain
-  },
+  apiExperimentation: { getV1ExperimentationItems },
   projectMembers: { getProjectMembers, addProjectMember, removeProjectMember },
   environment: {
-    postV1ProjectsIdOrNameCustomEnvironments,
+    createCustomEnvironment,
     getV9ProjectsIdOrNameCustomEnvironments,
-    getV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId,
-    patchV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId,
-    deleteV9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId
+    getCustomEnvironment,
+    updateCustomEnvironment,
+    removeCustomEnvironment
   },
   security: {
     updateAttackChallengeMode,
@@ -22597,7 +23136,7 @@ export const operationsByTag = {
     deleteTeamInviteCode
   },
   webhooks: { createWebhook, getWebhooks, getWebhook, deleteWebhook },
-  aliases: { listAliases, getAlias, deleteAlias, listDeploymentAliases, assignAlias },
+  aliases: { listDeploymentAliases, assignAlias, listAliases, getAlias, deleteAlias },
   certs: { getCertById, removeCert, issueCert, uploadCert },
   secrets: { getSecrets, createSecret, renameSecret, getSecret, deleteSecret }
 };
