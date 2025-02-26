@@ -38,12 +38,44 @@ export default defineConfig({
       // Sort alphabetically enum values
       context.openAPIDocument = sortArrays(context.openAPIDocument);
 
+      // Fix empty arrays
+      context.openAPIDocument = fixWrongGroupIds(context.openAPIDocument);
+
       const { schemasFiles } = await generateSchemaTypes(context, { filenamePrefix });
       await generateFetchers(context, { filenamePrefix, schemasFiles });
       await context.writeFile('extra.ts', buildExtraFile(context));
     }
   }
 });
+
+function fixWrongGroupIds(
+  openAPIDocument: Context['openAPIDocument']
+) {
+  return JSON.parse(
+    JSON.stringify(openAPIDocument),
+    (key, value) => {
+      if (key === "groupIds" && value.maxItems === 0 && value.minItems === 0) {
+        return {
+          "items": {
+            "oneOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "string"
+              }
+            ]
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array",
+        }
+      }
+
+      return value;
+    }
+  );
+}
 
 function updateMethod({
   openAPIDocument,

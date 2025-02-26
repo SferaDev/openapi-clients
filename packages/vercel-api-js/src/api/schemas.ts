@@ -204,17 +204,9 @@ export type TeamLimited = {
     confirmed: boolean;
     confirmedAt: number;
     accessRequestedAt?: number;
-    role: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'VIEWER';
-    teamRoles?: (
-      | 'BILLING'
-      | 'CONTRIBUTOR'
-      | 'CreateProject'
-      | 'DEVELOPER'
-      | 'FullProductionDeployment'
-      | 'MEMBER'
-      | 'OWNER'
-      | 'VIEWER'
-    )[];
+    role: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'SECURITY' | 'VIEWER';
+    teamRoles?: ('BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'SECURITY' | 'VIEWER')[];
+    teamPermissions?: ('CreateProject' | 'FullProductionDeployment')[];
     teamId?: string;
     createdAt: number;
     created: number;
@@ -256,6 +248,77 @@ export type TeamLimited = {
 };
 
 /**
+ * Authentication token metadata.
+ */
+export type AuthToken = {
+  /**
+   * The unique identifier of the token.
+   *
+   * @example 5d9f2ebd38ddca62e5d51e9c1704c72530bdc8bfdd41e782a6687c48399e8391
+   */
+  id: string;
+  /**
+   * The human-readable name of the token.
+   */
+  name: string;
+  /**
+   * The type of the token.
+   *
+   * @example oauth2-token
+   */
+  type: string;
+  /**
+   * The origin of how the token was created.
+   *
+   * @example github
+   */
+  origin?: string;
+  /**
+   * The access scopes granted to the token.
+   */
+  scopes?: (
+    | {
+        type: 'user';
+        sudo?: {
+          /**
+           * Possible multi-factor origins
+           */
+          origin: 'totp' | 'webauthn' | 'recovery-code';
+          expiresAt: number;
+        };
+        origin: 'saml' | 'github' | 'gitlab' | 'bitbucket' | 'email' | 'manual' | 'passkey' | 'otp' | 'sms' | 'invite';
+        createdAt: number;
+        expiresAt?: number;
+      }
+    | {
+        type: 'team';
+        teamId: string;
+        origin: 'saml' | 'github' | 'gitlab' | 'bitbucket' | 'email' | 'manual' | 'passkey' | 'otp' | 'sms' | 'invite';
+        createdAt: number;
+        expiresAt?: number;
+      }
+  )[];
+  /**
+   * Timestamp (in milliseconds) of when the token expires.
+   *
+   * @example 1632816536002
+   */
+  expiresAt?: number;
+  /**
+   * Timestamp (in milliseconds) of when the token was most recently used.
+   *
+   * @example 1632816536002
+   */
+  activeAt: number;
+  /**
+   * Timestamp (in milliseconds) of when the token was created.
+   *
+   * @example 1632816536002
+   */
+  createdAt: number;
+};
+
+/**
  * Data for the currently authenticated User.
  */
 export type AuthUser = {
@@ -278,6 +341,7 @@ export type AuthUser = {
       | 'SUBSCRIPTION_EXPIRED'
       | 'UNPAID_INVOICE';
     blockedDueToOverageType?:
+      | 'aiCredits'
       | 'analyticsUsage'
       | 'artifacts'
       | 'bandwidth'
@@ -306,6 +370,7 @@ export type AuthUser = {
       | 'imageOptimizationTransformation'
       | 'logDrainsVolume'
       | 'monitoringMetric'
+      | 'objectDataTransfer'
       | 'observabilityEvent'
       | 'postgresComputeTime'
       | 'postgresDataStorage'
@@ -446,11 +511,13 @@ export type AuthUser = {
         projectId: string;
         scopeSlug: string;
         scopeId: string;
+        teamId?: string;
       }
     | {
         spaceId: string;
         scopeSlug: string;
         scopeId: string;
+        teamId?: string;
       }
   )[];
   /**
@@ -595,70 +662,6 @@ export type AuthUserLimited = {
    * The user's version. Will always be `northstar`.
    */
   version: 'northstar';
-};
-
-/**
- * Authentication token metadata.
- */
-export type AuthToken = {
-  /**
-   * The unique identifier of the token.
-   *
-   * @example 5d9f2ebd38ddca62e5d51e9c1704c72530bdc8bfdd41e782a6687c48399e8391
-   */
-  id: string;
-  /**
-   * The human-readable name of the token.
-   */
-  name: string;
-  /**
-   * The type of the token.
-   *
-   * @example oauth2-token
-   */
-  type: string;
-  /**
-   * The origin of how the token was created.
-   *
-   * @example github
-   */
-  origin?: string;
-  /**
-   * The access scopes granted to the token.
-   */
-  scopes?: (
-    | {
-        type: 'user';
-        origin: 'saml' | 'github' | 'gitlab' | 'bitbucket' | 'email' | 'manual' | 'passkey' | 'otp' | 'sms' | 'invite';
-        createdAt: number;
-        expiresAt?: number;
-      }
-    | {
-        type: 'team';
-        teamId: string;
-        origin: 'saml' | 'github' | 'gitlab' | 'bitbucket' | 'email' | 'manual' | 'passkey' | 'otp' | 'sms' | 'invite';
-        createdAt: number;
-        expiresAt?: number;
-      }
-  )[];
-  /**
-   * Timestamp (in milliseconds) of when the token expires.
-   *
-   * @example 1632816536002
-   */
-  expiresAt?: number;
-  /**
-   * Timestamp (in milliseconds) of when the token was most recently used.
-   *
-   * @example 1632816536002
-   */
-  activeAt: number;
-  /**
-   * Timestamp (in milliseconds) of when the token was created.
-   *
-   * @example 1632816536002
-   */
-  createdAt: number;
 };
 
 /**
