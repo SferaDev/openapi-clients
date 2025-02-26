@@ -15031,12 +15031,14 @@ export type DnsRecordsAAAARecord = DnsRecordsDnsRecordSharedFields & {
    *
    * @example 2400:cb00:2049::1
    * @format ipv6
+   * @x-auditable true
    */
   content?: string;
   /**
    * Record type.
    *
    * @example AAAA
+   * @x-auditable true
    */
   type?: 'AAAA';
 };
@@ -15047,12 +15049,14 @@ export type DnsRecordsARecord = DnsRecordsDnsRecordSharedFields & {
    *
    * @example 198.51.100.4
    * @format ipv4
+   * @x-auditable true
    */
   content?: string;
   /**
    * Record type.
    *
    * @example A
+   * @x-auditable true
    */
   type?: 'A';
 };
@@ -15060,6 +15064,8 @@ export type DnsRecordsARecord = DnsRecordsDnsRecordSharedFields & {
 export type DnsRecordsCAARecord = DnsRecordsDnsRecordSharedFields & {
   /**
    * Formatted CAA content. See 'data' to set CAA properties.
+   *
+   * @x-auditable true
    */
   content?: string;
   /**
@@ -15072,16 +15078,20 @@ export type DnsRecordsCAARecord = DnsRecordsDnsRecordSharedFields & {
      * @example 1
      * @maximum 255
      * @minimum 0
+     * @x-auditable true
      */
     flags?: number;
     /**
      * Name of the property controlled by this record (e.g.: issue, issuewild, iodef).
      *
      * @example issue
+     * @x-auditable true
      */
     tag?: string;
     /**
      * Value of the record. This field's semantics depend on the chosen tag.
+     *
+     * @x-auditable true
      */
     value?: string;
   };
@@ -15089,6 +15099,7 @@ export type DnsRecordsCAARecord = DnsRecordsDnsRecordSharedFields & {
    * Record type.
    *
    * @example CAA
+   * @x-auditable true
    */
   type?: 'CAA';
 };
@@ -15135,6 +15146,7 @@ export type DnsRecordsCERTRecord = DnsRecordsDnsRecordSharedFields & {
    * Record type.
    *
    * @example CERT
+   * @x-auditable true
    */
   type?: 'CERT';
 };
@@ -15148,12 +15160,15 @@ export type DnsRecordsCNAMERecord = {
   ttl?: DnsRecordsTtl;
   /**
    * A valid hostname. Must not match the record's name.
+   *
+   * @x-auditable true
    */
   content?: string;
   /**
    * Record type.
    *
    * @example CNAME
+   * @x-auditable true
    */
   type?: 'CNAME';
 };
@@ -15200,6 +15215,7 @@ export type DnsRecordsDNSKEYRecord = DnsRecordsDnsRecordSharedFields & {
    * Record type.
    *
    * @example DNSKEY
+   * @x-auditable true
    */
   type?: 'DNSKEY';
 };
@@ -15246,6 +15262,7 @@ export type DnsRecordsDSRecord = DnsRecordsDnsRecordSharedFields & {
    * Record type.
    *
    * @example DS
+   * @x-auditable true
    */
   type?: 'DS';
 };
@@ -15284,6 +15301,7 @@ export type DnsRecordsHTTPSRecord = DnsRecordsDnsRecordSharedFields & {
    * Record type.
    *
    * @example HTTPS
+   * @x-auditable true
    */
   type?: 'HTTPS';
 };
@@ -15403,6 +15421,7 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
    * Record type.
    *
    * @example LOC
+   * @x-auditable true
    */
   type?: 'LOC';
 };
@@ -15413,6 +15432,7 @@ export type DnsRecordsMXRecord = DnsRecordsDnsRecordSharedFields & {
    *
    * @example mx.example.com
    * @format hostname
+   * @x-auditable true
    */
   content?: string;
   priority?: DnsRecordsPriority;
@@ -15420,6 +15440,7 @@ export type DnsRecordsMXRecord = DnsRecordsDnsRecordSharedFields & {
    * Record type.
    *
    * @example MX
+   * @x-auditable true
    */
   type?: 'MX';
 };
@@ -15470,6 +15491,7 @@ export type DnsRecordsNAPTRRecord = DnsRecordsDnsRecordSharedFields & {
    * Record type.
    *
    * @example NAPTR
+   * @x-auditable true
    */
   type?: 'NAPTR';
 };
@@ -15479,12 +15501,14 @@ export type DnsRecordsNSRecord = DnsRecordsDnsRecordSharedFields & {
    * A valid name server host name.
    *
    * @example ns1.example.com
+   * @x-auditable true
    */
   content?: string;
   /**
    * Record type.
    *
    * @example NS
+   * @x-auditable true
    */
   type?: 'NS';
 };
@@ -15498,6 +15522,7 @@ export type DnsRecordsOPENPGPKEYRecord = DnsRecordsDnsRecordSharedFields & {
    * Record type.
    *
    * @example OPENPGPKEY
+   * @x-auditable true
    */
   type?: 'OPENPGPKEY';
 };
@@ -15507,12 +15532,14 @@ export type DnsRecordsPTRRecord = DnsRecordsDnsRecordSharedFields & {
    * Domain name pointing to the address.
    *
    * @example example.com
+   * @x-auditable true
    */
   content?: string;
   /**
    * Record type.
    *
    * @example PTR
+   * @x-auditable true
    */
   type?: 'PTR';
 };
@@ -15559,6 +15586,7 @@ export type DnsRecordsSMIMEARecord = DnsRecordsDnsRecordSharedFields & {
    * Record type.
    *
    * @example SMIMEA
+   * @x-auditable true
    */
   type?: 'SMIMEA';
 };
@@ -15603,6 +15631,7 @@ export type DnsRecordsSRVRecord = DnsRecordsDnsRecordSharedFields & {
    * Record type.
    *
    * @example SRV
+   * @x-auditable true
    */
   type?: 'SRV';
 };
@@ -15641,6 +15670,7 @@ export type DnsRecordsSSHFPRecord = DnsRecordsDnsRecordSharedFields & {
    * Record type.
    *
    * @example SSHFP
+   * @x-auditable true
    */
   type?: 'SSHFP';
 };
@@ -15679,6 +15709,7 @@ export type DnsRecordsSVCBRecord = DnsRecordsDnsRecordSharedFields & {
    * Record type.
    *
    * @example SVCB
+   * @x-auditable true
    */
   type?: 'SVCB';
 };
@@ -15725,6 +15756,7 @@ export type DnsRecordsTLSARecord = DnsRecordsDnsRecordSharedFields & {
    * Record type.
    *
    * @example TLSA
+   * @x-auditable true
    */
   type?: 'TLSA';
 };
@@ -15742,6 +15774,7 @@ export type DnsRecordsTXTRecord = DnsRecordsDnsRecordSharedFields & {
    * Record type.
    *
    * @example TXT
+   * @x-auditable true
    */
   type?: 'TXT';
 };
@@ -15775,6 +15808,7 @@ export type DnsRecordsURIRecord = DnsRecordsDnsRecordSharedFields & {
    * Record type.
    *
    * @example URI
+   * @x-auditable true
    */
   type?: 'URI';
 };
@@ -15816,6 +15850,7 @@ export type DnsRecordsApiResponseSingle = DnsRecordsApiResponseCommon;
  * Comments or notes about the DNS record. This field has no effect on DNS responses.
  *
  * @example Domain verification record
+ * @x-auditable true
  */
 export type DnsRecordsComment = string;
 
@@ -16025,6 +16060,7 @@ export type DnsRecordsPerPage = number;
  * @example 10
  * @maximum 65535
  * @minimum 0
+ * @x-auditable true
  */
 export type DnsRecordsPriority = number;
 
@@ -16079,6 +16115,7 @@ export type DnsRecordsSettings = {
    *
    * @default false
    * @example true
+   * @x-auditable true
    */
   ipv4_only?: boolean;
   /**
@@ -16086,6 +16123,7 @@ export type DnsRecordsSettings = {
    *
    * @default false
    * @example true
+   * @x-auditable true
    */
   ipv6_only?: boolean;
 };
@@ -25292,11 +25330,15 @@ export type MagicVisibilityMnmMnmConfigWarpDevices = MagicVisibilityMnmMnmConfig
 export type MagicVisibilityMnmMnmRule = {
   automatic_advertisement: MagicVisibilityMnmMnmRuleAutomaticAdvertisement;
   bandwidth_threshold?: MagicVisibilityMnmMnmRuleBandwidthThreshold;
-  duration: MagicVisibilityMnmMnmRuleDuration;
+  duration?: MagicVisibilityMnmMnmRuleDuration;
   id?: MagicVisibilityMnmRuleIdentifier;
   name: MagicVisibilityMnmMnmRuleName;
   packet_threshold?: MagicVisibilityMnmMnmRulePacketThreshold;
+  prefix_match?: MagicVisibilityMnmMnmRulePrefixMatch;
   prefixes: MagicVisibilityMnmMnmRuleIpPrefixes;
+  type: MagicVisibilityMnmMnmRuleType;
+  zscore_sensitivity?: MagicVisibilityMnmMnmRuleZscoreSensitivity;
+  zscore_target?: MagicVisibilityMnmMnmRuleZscoreTarget;
 } | null;
 
 export type MagicVisibilityMnmMnmRuleAdvertisableResponse = {
@@ -25323,12 +25365,12 @@ export type MagicVisibilityMnmMnmRuleAutomaticAdvertisement = boolean | null;
 export type MagicVisibilityMnmMnmRuleBandwidthThreshold = number;
 
 /**
- * The amount of time that the rule threshold must be exceeded to send an alert notification. The final value must be equivalent to one of the following 8 values ["1m","5m","10m","15m","20m","30m","45m","60m"]. The format is AhBmCsDmsEusFns where A, B, C, D, E and F durations are optional; however at least one unit must be provided.
+ * The amount of time that the rule threshold must be exceeded to send an alert notification. The final value must be equivalent to one of the following 8 values ["1m","5m","10m","15m","20m","30m","45m","60m"].
  *
  * @default 1m
  * @example 300s
  */
-export type MagicVisibilityMnmMnmRuleDuration = string;
+export type MagicVisibilityMnmMnmRuleDuration = '1m' | '5m' | '10m' | '15m' | '20m' | '30m' | '45m' | '60m';
 
 /**
  * The IP prefixes that are monitored for this rule. Must be a CIDR range like 203.0.113.0/24. Max 5000 different CIDR ranges.
@@ -25353,6 +25395,34 @@ export type MagicVisibilityMnmMnmRuleName = string;
  * @minimum 1
  */
 export type MagicVisibilityMnmMnmRulePacketThreshold = number;
+
+/**
+ * Prefix match type to be applied for a prefix auto advertisement when using an advanced_ddos rule.
+ *
+ * @example exact
+ */
+export type MagicVisibilityMnmMnmRulePrefixMatch = 'exact' | 'subnet' | 'supernet' | null;
+
+/**
+ * MNM rule type.
+ *
+ * @example zscore
+ */
+export type MagicVisibilityMnmMnmRuleType = 'threshold' | 'zscore' | 'advanced_ddos';
+
+/**
+ * Level of sensitivity set for zscore rules.
+ *
+ * @example high
+ */
+export type MagicVisibilityMnmMnmRuleZscoreSensitivity = 'low' | 'medium' | 'high' | null;
+
+/**
+ * Target of the zscore rule analysis.
+ *
+ * @example bits
+ */
+export type MagicVisibilityMnmMnmRuleZscoreTarget = 'bits' | 'packets' | null;
 
 export type MagicVisibilityMnmMnmRulesCollectionResponse = MagicVisibilityMnmApiResponseCollection & {
   result?: MagicVisibilityMnmMnmRule[] | null;
@@ -26109,6 +26179,7 @@ export type MagicCidr = string;
  * The IP address assigned to the Cloudflare side of the GRE tunnel.
  *
  * @example 203.0.113.1
+ * @x-auditable true
  */
 export type MagicCloudflareGreEndpoint = string;
 
@@ -26123,6 +26194,7 @@ export type MagicCloudflareIpsecEndpoint = string;
  * Scope colo name.
  *
  * @example den01
+ * @x-auditable true
  */
 export type MagicColoName = string;
 
@@ -26135,11 +26207,14 @@ export type MagicColoNames = MagicColoName[];
  * Scope colo region.
  *
  * @example APAC
+ * @x-auditable true
  */
 export type MagicColoRegion = string;
 
 /**
  * List of colo regions for the ECMP scope.
+ *
+ * @x-auditable true
  */
 export type MagicColoRegions = MagicColoRegion[];
 
@@ -26193,6 +26268,7 @@ export type MagicComponentsSchemasTunnelsCollectionResponse = MagicApiResponseSi
  * Magic Connector identifier tag.
  *
  * @example ac60d3d0435248289d446cedd870bcf4
+ * @x-auditable true
  */
 export type MagicConnectorId = string;
 
@@ -26201,6 +26277,7 @@ export type MagicConnectorId = string;
  *
  * @example 2017-06-14T00:00:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type MagicCreatedOn = string;
 
@@ -26208,6 +26285,7 @@ export type MagicCreatedOn = string;
  * The IP address assigned to the customer side of the GRE tunnel.
  *
  * @example 203.0.113.1
+ * @x-auditable true
  */
 export type MagicCustomerGreEndpoint = string;
 
@@ -26222,6 +26300,7 @@ export type MagicCustomerIpsecEndpoint = string;
  * An optional human provided description of the static route.
  *
  * @example New route for new prefix 203.0.113.1
+ * @x-auditable true
  */
 export type MagicDescription = string;
 
@@ -26275,6 +26354,7 @@ export type MagicHealthCheckBase = {
    *
    * @default true
    * @example true
+   * @x-auditable true
    */
   enabled?: boolean;
   /**
@@ -26282,6 +26362,7 @@ export type MagicHealthCheckBase = {
    *
    * @default mid
    * @example low
+   * @x-auditable true
    */
   rate?: 'low' | 'mid' | 'high';
   /**
@@ -26293,6 +26374,7 @@ export type MagicHealthCheckBase = {
    *
    * @default reply
    * @example request
+   * @x-auditable true
    */
   type?: 'reply' | 'request';
 };
@@ -26305,12 +26387,14 @@ export type MagicHealthCheckTarget = {
    * The effective health check target. If 'saved' is empty, then this field will be populated with the calculated default value on GET requests. Ignored in POST, PUT, and PATCH requests.
    *
    * @example 203.0.113.1
+   * @x-auditable true
    */
   effective?: string;
   /**
    * The saved health check target. Setting the value to the empty string indicates that the calculated default value will be used.
    *
    * @example 203.0.113.1
+   * @x-auditable true
    */
   saved?: string;
 };
@@ -26357,6 +26441,7 @@ export type MagicInterconnectTunnelUpdateRequest = {
  * A 31-bit prefix (/31 in CIDR notation) supporting two hosts, one for each side of the tunnel. Select the subnet from the following private IP space: 10.0.0.0–10.255.255.255, 172.16.0.0–172.31.255.255, 192.168.0.0–192.168.255.255.
  *
  * @example 192.0.2.0/31
+ * @x-auditable true
  */
 export type MagicInterfaceAddress = string;
 
@@ -26537,6 +26622,7 @@ export type MagicMessages = {
  *
  * @example 2017-06-14T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type MagicModifiedOn = string;
 
@@ -26554,6 +26640,7 @@ export type MagicModifiedTunnelsCollectionResponse = MagicApiResponseSingle & {
  * Maximum Transmission Unit (MTU) in bytes for the GRE tunnel. The minimum value is 576.
  *
  * @default 1476
+ * @x-auditable true
  */
 export type MagicMtu = number;
 
@@ -26581,6 +26668,7 @@ export type MagicMultipleRouteModifiedResponse = MagicApiResponseSingle & {
  * The name of the tunnel. The name cannot contain spaces or special characters, must be 15 characters or less, and cannot share a name with another GRE tunnel.
  *
  * @example GRE_1
+ * @x-auditable true
  */
 export type MagicName = string;
 
@@ -26592,6 +26680,7 @@ export type MagicNat = {
  * The next-hop IP Address for the static route.
  *
  * @example 203.0.113.1
+ * @x-auditable true
  */
 export type MagicNexthop = string;
 
@@ -26604,11 +26693,14 @@ export type MagicPort = number;
  * IP Prefix in Classless Inter-Domain Routing format.
  *
  * @example 192.0.2.0/24
+ * @x-auditable true
  */
 export type MagicPrefix = string;
 
 /**
  * Priority of the static route.
+ *
+ * @x-auditable true
  */
 export type MagicPriority = number;
 
@@ -26724,6 +26816,7 @@ export type MagicRoutesCollectionResponse = MagicApiResponseSingle & {
  *
  * @example 2017-06-14T00:00:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type MagicSchemasCreatedOn = string;
 
@@ -26731,6 +26824,7 @@ export type MagicSchemasCreatedOn = string;
  * An optional description of the GRE tunnel.
  *
  * @example Tunnel for ISP X
+ * @x-auditable true
  */
 export type MagicSchemasDescription = string;
 
@@ -26739,6 +26833,7 @@ export type MagicSchemasDescription = string;
  *
  * @example c4a7362d577a6c3019a474fd6f485821
  * @maxLength 32
+ * @x-auditable true
  */
 export type MagicSchemasIdentifier = string;
 
@@ -26747,6 +26842,7 @@ export type MagicSchemasIdentifier = string;
  *
  * @example 2017-06-14T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type MagicSchemasModifiedOn = string;
 
@@ -26818,6 +26914,7 @@ export type MagicScope = {
  * Magic Connector identifier tag. Used when high availability mode is on.
  *
  * @example 8d67040d3835dbcf46ce29da440dc482
+ * @x-auditable true
  */
 export type MagicSecondaryConnectorId = string;
 
@@ -26844,12 +26941,14 @@ export type MagicSiteLocation = {
    * Latitude
    *
    * @example 37.6192
+   * @x-auditable true
    */
   lat?: string;
   /**
    * Longitude
    *
    * @example 122.3816
+   * @x-auditable true
    */
   lon?: string;
 };
@@ -26858,6 +26957,7 @@ export type MagicSiteLocation = {
  * The name of the site.
  *
  * @example site_1
+ * @x-auditable true
  */
 export type MagicSiteName = string;
 
@@ -26903,6 +27003,7 @@ export type MagicSitesCollectionResponse = MagicApiResponseSingle & {
  * Time To Live (TTL) in number of hops of the GRE tunnel.
  *
  * @default 64
+ * @x-auditable true
  */
 export type MagicTtl = number;
 
@@ -26957,6 +27058,7 @@ export type MagicUnidirectional = boolean;
  * VLAN port number.
  *
  * @example 0
+ * @x-auditable true
  */
 export type MagicVlanTag = number;
 
@@ -27023,6 +27125,8 @@ export type MagicWansCollectionResponse = MagicApiResponseSingle & {
 
 /**
  * Optional weight of the ECMP scope - if provided.
+ *
+ * @x-auditable true
  */
 export type MagicWeight = number;
 
@@ -46790,78 +46894,88 @@ export type WorkersApiResponseSingle = WorkersApiResponseCommon;
  * A binding to allow the Worker to communicate with resources
  */
 export type WorkersBindingItem =
-  | WorkersBindingKindAny
-  | WorkersBindingKindAi
-  | WorkersBindingKindAnalyticsEngine
-  | WorkersBindingKindAssets
-  | WorkersBindingKindBrowserRendering
-  | WorkersBindingKindD1
-  | WorkersBindingKindDispatchNamespace
-  | WorkersBindingKindDo
-  | WorkersBindingKindHyperdrive
-  | WorkersBindingKindJson
-  | WorkersBindingKindKvNamespace
-  | WorkersBindingKindMtlsCert
-  | WorkersBindingKindPlainText
-  | WorkersBindingKindQueue
-  | WorkersBindingKindR2
-  | WorkersBindingKindSecret
-  | WorkersBindingKindService
-  | WorkersBindingKindTailConsumer
-  | WorkersBindingKindVectorize
-  | WorkersBindingKindVersionMetadata;
+  | (Omit<WorkersBindingKindAi, 'type'> & {
+      type: 'ai';
+    })
+  | (Omit<WorkersBindingKindAnalyticsEngine, 'type'> & {
+      type: 'analytics_engine';
+    })
+  | (Omit<WorkersBindingKindAssets, 'type'> & {
+      type: 'assets';
+    })
+  | (Omit<WorkersBindingKindBrowserRendering, 'type'> & {
+      type: 'browser_rendering';
+    })
+  | (Omit<WorkersBindingKindD1, 'type'> & {
+      type: 'd1';
+    })
+  | (Omit<WorkersBindingKindDispatchNamespace, 'type'> & {
+      type: 'dispatch_namespace';
+    })
+  | (Omit<WorkersBindingKindDurableObjectNamespace, 'type'> & {
+      type: 'durable_object_namespace';
+    })
+  | (Omit<WorkersBindingKindHyperdrive, 'type'> & {
+      type: 'hyperdrive';
+    })
+  | (Omit<WorkersBindingKindJson, 'type'> & {
+      type: 'json';
+    })
+  | (Omit<WorkersBindingKindKvNamespace, 'type'> & {
+      type: 'kv_namespace';
+    })
+  | (Omit<WorkersBindingKindMtlsCertificate, 'type'> & {
+      type: 'mtls_certificate';
+    })
+  | (Omit<WorkersBindingKindPlainText, 'type'> & {
+      type: 'plain_text';
+    })
+  | (Omit<WorkersBindingKindQueue, 'type'> & {
+      type: 'queue';
+    })
+  | (Omit<WorkersBindingKindR2Bucket, 'type'> & {
+      type: 'r2_bucket';
+    })
+  | (Omit<WorkersBindingKindSecretText, 'type'> & {
+      type: 'secret_text';
+    })
+  | (Omit<WorkersBindingKindService, 'type'> & {
+      type: 'service';
+    })
+  | (Omit<WorkersBindingKindTailConsumer, 'type'> & {
+      type: 'tail_consumer';
+    })
+  | (Omit<WorkersBindingKindVectorize, 'type'> & {
+      type: 'vectorize';
+    })
+  | (Omit<WorkersBindingKindVersionMetadata, 'type'> & {
+      type: 'version_metadata';
+    });
 
 export type WorkersBindingKindAi = {
   name: WorkersBindingName;
-  /**
-   * The kind of resource that the binding provides.
-   *
-   * @example ai
-   */
-  type: WorkersBindingType & 'ai';
+  type: WorkersBindingType;
 };
 
 export type WorkersBindingKindAnalyticsEngine = {
   /**
-   * The dataset name to bind to.
+   * The name of the dataset to bind to.
    *
    * @example some_dataset
    */
   dataset: string;
   name: WorkersBindingName;
-  /**
-   * The kind of resource that the binding provides.
-   *
-   * @example analytics_engine
-   */
-  type: WorkersBindingType & 'analytics_engine';
-};
-
-export type WorkersBindingKindAny = {
-  name: WorkersBindingName;
   type: WorkersBindingType;
-} & {
-  [key: string]: void;
 };
 
 export type WorkersBindingKindAssets = {
   name: WorkersBindingName;
-  /**
-   * The kind of resource that the binding provides.
-   *
-   * @example assets
-   */
-  type: WorkersBindingType & 'assets';
+  type: WorkersBindingType;
 };
 
 export type WorkersBindingKindBrowserRendering = {
   name: WorkersBindingName;
-  /**
-   * The kind of resource that the binding provides.
-   *
-   * @example browser_rendering
-   */
-  type: WorkersBindingType & 'browser_rendering';
+  type: WorkersBindingType;
 };
 
 export type WorkersBindingKindD1 = {
@@ -46872,12 +46986,7 @@ export type WorkersBindingKindD1 = {
    */
   id: string;
   name: WorkersBindingName;
-  /**
-   * The kind of resource that the binding provides.
-   *
-   * @example d1
-   */
-  type: WorkersBindingType & 'd1';
+  type: WorkersBindingType;
 };
 
 export type WorkersBindingKindDispatchNamespace = {
@@ -46910,15 +47019,10 @@ export type WorkersBindingKindDispatchNamespace = {
       service?: string;
     };
   };
-  /**
-   * The kind of resource that the binding provides.
-   *
-   * @example dispatch_namespace
-   */
-  type: WorkersBindingType & 'dispatch_namespace';
+  type: WorkersBindingType;
 };
 
-export type WorkersBindingKindDo = {
+export type WorkersBindingKindDurableObjectNamespace = {
   /**
    * The exported class name of the Durable Object.
    *
@@ -46939,12 +47043,7 @@ export type WorkersBindingKindDo = {
    * @example my-other-worker
    */
   script_name?: string;
-  /**
-   * The kind of resource that the binding provides.
-   *
-   * @example durable_object_namespace
-   */
-  type: WorkersBindingType & 'durable_object_namespace';
+  type: WorkersBindingType;
 };
 
 export type WorkersBindingKindHyperdrive = {
@@ -46955,12 +47054,7 @@ export type WorkersBindingKindHyperdrive = {
    */
   id: string;
   name: WorkersBindingName;
-  /**
-   * The kind of resource that the binding provides.
-   *
-   * @example hyperdrive
-   */
-  type: WorkersBindingType & 'hyperdrive';
+  type: WorkersBindingType;
 };
 
 export type WorkersBindingKindJson = {
@@ -46971,26 +47065,16 @@ export type WorkersBindingKindJson = {
    */
   json: void;
   name: WorkersBindingName;
-  /**
-   * The kind of resource that the binding provides.
-   *
-   * @example json
-   */
-  type: WorkersBindingType & 'json';
+  type: WorkersBindingType;
 };
 
 export type WorkersBindingKindKvNamespace = {
   name: WorkersBindingName;
   namespace_id: WorkersNamespaceIdentifier;
-  /**
-   * The kind of resource that the binding provides.
-   *
-   * @example kv_namespace
-   */
-  type: WorkersBindingType & 'kv_namespace';
+  type: WorkersBindingType;
 };
 
-export type WorkersBindingKindMtlsCert = {
+export type WorkersBindingKindMtlsCertificate = {
   /**
    * Identifier of the certificate to bind to.
    *
@@ -46998,12 +47082,7 @@ export type WorkersBindingKindMtlsCert = {
    */
   certificate_id: string;
   name: WorkersBindingName;
-  /**
-   * The kind of resource that the binding provides.
-   *
-   * @example mtls_certificate
-   */
-  type: WorkersBindingType & 'mtls_certificate';
+  type: WorkersBindingType;
 };
 
 export type WorkersBindingKindPlainText = {
@@ -47014,12 +47093,7 @@ export type WorkersBindingKindPlainText = {
    * @example Hello, world!
    */
   text: string;
-  /**
-   * The kind of resource that the binding provides.
-   *
-   * @example plain_text
-   */
-  type: WorkersBindingType & 'plain_text';
+  type: WorkersBindingType;
 };
 
 export type WorkersBindingKindQueue = {
@@ -47030,15 +47104,10 @@ export type WorkersBindingKindQueue = {
    * @example my-queue
    */
   queue_name: string;
-  /**
-   * The kind of resource that the binding provides.
-   *
-   * @example queue
-   */
-  type: WorkersBindingType & 'queue';
+  type: WorkersBindingType;
 };
 
-export type WorkersBindingKindR2 = {
+export type WorkersBindingKindR2Bucket = {
   /**
    * R2 bucket to bind to.
    *
@@ -47046,15 +47115,10 @@ export type WorkersBindingKindR2 = {
    */
   bucket_name: string;
   name: WorkersBindingName;
-  /**
-   * The kind of resource that the binding provides.
-   *
-   * @example r2_bucket
-   */
-  type: WorkersBindingType & 'r2_bucket';
+  type: WorkersBindingType;
 };
 
-export type WorkersBindingKindSecret = {
+export type WorkersBindingKindSecretText = {
   name: WorkersBindingName;
   /**
    * The secret value to use.
@@ -47062,12 +47126,7 @@ export type WorkersBindingKindSecret = {
    * @example My secret.
    */
   text: string;
-  /**
-   * The kind of resource that the binding provides.
-   *
-   * @example secret_text
-   */
-  type: WorkersBindingType & 'secret_text';
+  type: WorkersBindingType;
 };
 
 export type WorkersBindingKindService = {
@@ -47084,12 +47143,7 @@ export type WorkersBindingKindService = {
    * @example my-worker
    */
   service: string;
-  /**
-   * The kind of resource that the binding provides.
-   *
-   * @example service
-   */
-  type: WorkersBindingType & 'service';
+  type: WorkersBindingType;
 };
 
 export type WorkersBindingKindTailConsumer = {
@@ -47100,12 +47154,7 @@ export type WorkersBindingKindTailConsumer = {
    * @example my-worker
    */
   service: string;
-  /**
-   * The kind of resource that the binding provides.
-   *
-   * @example tail_consumer
-   */
-  type: WorkersBindingType & 'tail_consumer';
+  type: WorkersBindingType;
 };
 
 export type WorkersBindingKindVectorize = {
@@ -47116,22 +47165,12 @@ export type WorkersBindingKindVectorize = {
    */
   index_name: string;
   name: WorkersBindingName;
-  /**
-   * The kind of resource that the binding provides.
-   *
-   * @example vectorize
-   */
-  type: WorkersBindingType & 'vectorize';
+  type: WorkersBindingType;
 };
 
 export type WorkersBindingKindVersionMetadata = {
   name: WorkersBindingName;
-  /**
-   * The kind of resource that the binding provides.
-   *
-   * @example version_metadata
-   */
-  type: WorkersBindingType & 'version_metadata';
+  type: WorkersBindingType;
 };
 
 /**
