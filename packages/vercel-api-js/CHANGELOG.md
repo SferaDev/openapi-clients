@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.21.0
+
+### Minor Changes
+
+- e80705b: Update spec
+
 ## 0.20.1
 
 ### Patch Changes
