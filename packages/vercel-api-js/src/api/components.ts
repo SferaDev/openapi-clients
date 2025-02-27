@@ -9050,6 +9050,7 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
             | 'tag_databases'
             | 'tag_dev_tools'
             | 'tag_experimentation'
+            | 'tag_flags'
             | 'tag_logging'
             | 'tag_messaging'
             | 'tag_monitoring'
