@@ -12681,7 +12681,7 @@ export type CreateProjectVariables = {
  */
 export const createProject = (variables: CreateProjectVariables, signal?: AbortSignal) =>
   fetch<CreateProjectResponse, CreateProjectError, CreateProjectRequestBody, {}, CreateProjectQueryParams, {}>({
-    url: '/v10/projects',
+    url: '/v11/projects',
     method: 'post',
     ...variables,
     signal
