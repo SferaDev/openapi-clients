@@ -2449,6 +2449,7 @@ export type UpdateProjectDataCacheResponse = {
     projectSupportCase?: Schemas.ACLAction[];
     projectSupportCaseComment?: Schemas.ACLAction[];
     projectDeploymentExpiration?: Schemas.ACLAction[];
+    projectRollingRelease?: Schemas.ACLAction[];
     projectTier?: Schemas.ACLAction[];
     seawallConfig?: Schemas.ACLAction[];
     skewProtection?: Schemas.ACLAction[];
@@ -11409,6 +11410,7 @@ export type GetProjectsResponse = {
       projectSupportCase?: Schemas.ACLAction[];
       projectSupportCaseComment?: Schemas.ACLAction[];
       projectDeploymentExpiration?: Schemas.ACLAction[];
+      projectRollingRelease?: Schemas.ACLAction[];
       projectTier?: Schemas.ACLAction[];
       seawallConfig?: Schemas.ACLAction[];
       skewProtection?: Schemas.ACLAction[];
@@ -12325,6 +12327,7 @@ export type CreateProjectResponse = {
     projectSupportCase?: Schemas.ACLAction[];
     projectSupportCaseComment?: Schemas.ACLAction[];
     projectDeploymentExpiration?: Schemas.ACLAction[];
+    projectRollingRelease?: Schemas.ACLAction[];
     projectTier?: Schemas.ACLAction[];
     seawallConfig?: Schemas.ACLAction[];
     skewProtection?: Schemas.ACLAction[];
@@ -13422,6 +13425,7 @@ export type GetProjectResponse = {
     projectSupportCase?: Schemas.ACLAction[];
     projectSupportCaseComment?: Schemas.ACLAction[];
     projectDeploymentExpiration?: Schemas.ACLAction[];
+    projectRollingRelease?: Schemas.ACLAction[];
     projectTier?: Schemas.ACLAction[];
     seawallConfig?: Schemas.ACLAction[];
     skewProtection?: Schemas.ACLAction[];
@@ -14346,6 +14350,7 @@ export type UpdateProjectResponse = {
     projectSupportCase?: Schemas.ACLAction[];
     projectSupportCaseComment?: Schemas.ACLAction[];
     projectDeploymentExpiration?: Schemas.ACLAction[];
+    projectRollingRelease?: Schemas.ACLAction[];
     projectTier?: Schemas.ACLAction[];
     seawallConfig?: Schemas.ACLAction[];
     skewProtection?: Schemas.ACLAction[];
