@@ -60376,7 +60376,7 @@ export type WebAnalyticsUpdateSiteError = Fetcher.ErrorWrapper<{
 }>;
 
 export type WebAnalyticsUpdateSiteVariables = {
-  body?: Schemas.RumCreateSiteRequest;
+  body?: Schemas.RumUpdateSiteRequest;
   pathParams: WebAnalyticsUpdateSitePathParams;
 } & FetcherExtraProps;
 
@@ -60387,7 +60387,7 @@ export const webAnalyticsUpdateSite = (variables: WebAnalyticsUpdateSiteVariable
   fetch<
     Schemas.RumSiteResponseSingle,
     WebAnalyticsUpdateSiteError,
-    Schemas.RumCreateSiteRequest,
+    Schemas.RumUpdateSiteRequest,
     {},
     {},
     WebAnalyticsUpdateSitePathParams

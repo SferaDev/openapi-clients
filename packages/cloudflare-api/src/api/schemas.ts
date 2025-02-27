@@ -36234,12 +36234,7 @@ export type RumCreateRuleRequest = {
 
 export type RumCreateSiteRequest = {
   auto_install?: RumAutoInstall;
-  /**
-   * The hostname to use for gray-clouded sites.
-   *
-   * @example example.com
-   */
-  host?: string;
+  host?: RumHost;
   zone_tag?: RumZoneTag;
 };
 
@@ -36249,6 +36244,20 @@ export type RumCreated = RumTimestamp;
  * @example true
  */
 export type RumEditable = boolean;
+
+/**
+ * Enables or disables RUM. This option can be used only when auto_install is set to true.
+ *
+ * @example true
+ */
+export type RumEnabled = boolean;
+
+/**
+ * The hostname to use for gray-clouded sites.
+ *
+ * @example example.com
+ */
+export type RumHost = string;
 
 /**
  * @example rum
@@ -36269,6 +36278,11 @@ export type RumIdentifier = string;
  * @example false
  */
 export type RumIsHostRegex = boolean;
+
+/**
+ * If enabled, the JavaScript snippet will not be injected for visitors from the EU.
+ */
+export type RumLite = boolean;
 
 export type RumMessages = {
   /**
@@ -36514,6 +36528,14 @@ export type RumToggleRumRequest = {
    * @example on
    */
   value?: string;
+};
+
+export type RumUpdateSiteRequest = {
+  auto_install?: RumAutoInstall;
+  enabled?: RumEnabled;
+  host?: RumHost;
+  lite?: RumLite;
+  zone_tag?: RumZoneTag;
 };
 
 /**
@@ -51072,6 +51094,8 @@ export type ZonesAlwaysUseHttps = {
   /**
    * If enabled, any `http://`` URL is converted to `https://` through a
    * 301 redirect.
+   *
+   * @x-auditable true
    */
   id?: 'always_use_https';
 };
@@ -51121,12 +51145,15 @@ export type ZonesApiResponseSingleId = ZonesApiResponseCommon & {
 export type ZonesAutomaticHttpsRewrites = {
   /**
    * Turn on or off Automatic HTTPS Rewrites.
+   *
+   * @x-auditable true
    */
   id?: 'automatic_https_rewrites';
   /**
    * The status of Automatic HTTPS Rewrites.
    *
    * @example on
+   * @x-auditable true
    */
   value?: 'on' | 'off';
 };
@@ -51253,6 +51280,8 @@ export type ZonesBrotliValue = 'off' | 'on';
 export type ZonesBrowserCacheTtl = {
   /**
    * Control how long resources cached by client browsers remain valid.
+   *
+   * @x-auditable true
    */
   id?: 'browser_cache_ttl';
   /**
@@ -51262,6 +51291,7 @@ export type ZonesBrowserCacheTtl = {
    * @example 30
    * @maximum 31536000
    * @minimum 0
+   * @x-auditable true
    */
   value?: number;
 };
@@ -51306,12 +51336,15 @@ export type ZonesBrowserCheck = {
   /**
    * Inspect the visitor's browser for headers commonly associated with
    * spammers and certain bots.
+   *
+   * @x-auditable true
    */
   id?: 'browser_check';
   /**
    * The status of Browser Integrity Check.
    *
    * @example on
+   * @x-auditable true
    */
   value?: 'on' | 'off';
 };
@@ -51327,6 +51360,8 @@ export type ZonesBypassCacheOnCookie = {
   /**
    * Bypass cache and fetch resources from the origin server if a regular
    * expression matches against a cookie name present in the request.
+   *
+   * @x-auditable true
    */
   id?: 'bypass_cache_on_cookie';
   /**
@@ -51338,6 +51373,7 @@ export type ZonesBypassCacheOnCookie = {
    * @example bypass=.*|PHPSESSID=.*
    * @maxLength 150
    * @minLength 1
+   * @x-auditable true
    */
   value?: string;
 };
@@ -51449,12 +51485,15 @@ export type ZonesCacheRulesOriginMaxHttpVersionValue = '2' | '1';
 export type ZonesCacheByDeviceType = {
   /**
    * Separate cached content based on the visitor's device type.
+   *
+   * @x-auditable true
    */
   id?: 'cache_by_device_type';
   /**
    * The status of Cache By Device Type.
    *
    * @example on
+   * @x-auditable true
    */
   value?: 'on' | 'off';
 };
@@ -51464,12 +51503,15 @@ export type ZonesCacheDeceptionArmor = {
    * Protect from web cache deception attacks while still allowing static
    * assets to be cached. This setting verifies that the URL's extension
    * matches the returned `Content-Type`.
+   *
+   * @x-auditable true
    */
   id?: 'cache_deception_armor';
   /**
    * The status of Cache Deception Armor.
    *
    * @example on
+   * @x-auditable true
    */
   value?: 'on' | 'off';
 };
@@ -51584,6 +51626,8 @@ export type ZonesCacheKeyFields = {
 export type ZonesCacheLevel = {
   /**
    * Apply custom caching based on the option selected.
+   *
+   * @x-auditable true
    */
   id?: 'cache_level';
   /**
@@ -51598,6 +51642,7 @@ export type ZonesCacheLevel = {
    *   content](https://developers.cloudflare.com/cache/concepts/default-cache-behavior/#default-cached-file-extensions).
    *
    * @example bypass
+   * @x-auditable true
    */
   value?: 'bypass' | 'basic' | 'simplified' | 'aggressive' | 'cache_everything';
 };
@@ -51613,6 +51658,8 @@ export type ZonesCacheOnCookie = {
   /**
    * Apply the Cache Everything option (Cache Level setting) based on a
    * regular expression match against a cookie name.
+   *
+   * @x-auditable true
    */
   id?: 'cache_on_cookie';
   /**
@@ -51622,6 +51669,7 @@ export type ZonesCacheOnCookie = {
    * @example bypass=.*|PHPSESSID=.*
    * @maxLength 150
    * @minLength 1
+   * @x-auditable true
    */
   value?: string;
 };
@@ -51639,6 +51687,8 @@ export type ZonesCacheTtlByStatus = {
    * Everything using a Page Rule. Setting no-store Cache-Control or a
    * low TTL (using `max-age`/`s-maxage`) increases requests to origin
    * web servers and decreases performance.
+   *
+   * @x-auditable true
    */
   id?: 'cache_ttl_by_status';
   /**
@@ -51809,6 +51859,7 @@ export type ZonesComponentsSchemasApiResponseCommon = {
  *
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type ZonesCreatedOn = string;
 
@@ -51861,6 +51912,8 @@ export type ZonesDisableApps = {
   /**
    * Turn off all active [Cloudflare Apps](https://developers.cloudflare.com/support/more-dashboard-apps/cloudflare-apps/)
    * (deprecated).
+   *
+   * @x-auditable true
    */
   id?: 'disable_apps';
 };
@@ -51871,6 +51924,8 @@ export type ZonesDisablePerformance = {
    * [Rocket Loader](https://developers.cloudflare.com/speed/optimization/content/rocket-loader/),
    * [Mirage](https://developers.cloudflare.com/speed/optimization/images/mirage/), and
    * [Polish](https://developers.cloudflare.com/images/polish/).
+   *
+   * @x-auditable true
    */
   id?: 'disable_performance';
 };
@@ -51883,6 +51938,8 @@ export type ZonesDisableSecurity = {
    * [Scrape Shield](https://developers.cloudflare.com/waf/tools/scrape-shield/),
    * [URL (Zone) Lockdown](https://developers.cloudflare.com/waf/tools/zone-lockdown/), and
    * [WAF managed rules (previous version, deprecated)](https://developers.cloudflare.com/waf/reference/legacy/old-waf-managed-rules/).
+   *
+   * @x-auditable true
    */
   id?: 'disable_security';
 };
@@ -51890,6 +51947,8 @@ export type ZonesDisableSecurity = {
 export type ZonesDisableZaraz = {
   /**
    * Turn off [Zaraz](https://developers.cloudflare.com/zaraz/).
+   *
+   * @x-auditable true
    */
   id?: 'disable_zaraz';
 };
@@ -51936,11 +51995,14 @@ export type ZonesEdgeCacheTtl = {
   /**
    * Specify how long to cache a resource in the Cloudflare global
    * network. *Edge Cache TTL* is not visible in response headers.
+   *
+   * @x-auditable true
    */
   id?: 'edge_cache_ttl';
   /**
    * @maximum 31536000
    * @minimum 1
+   * @x-auditable true
    */
   value?: number;
 };
@@ -51977,12 +52039,15 @@ export type ZonesEdgeCacheTtlValue =
 export type ZonesEmailObfuscation = {
   /**
    * Turn on or off **Email Obfuscation**.
+   *
+   * @x-auditable true
    */
   id?: 'email_obfuscation';
   /**
    * The status of Email Obfuscation.
    *
    * @example on
+   * @x-auditable true
    */
   value?: 'on' | 'off';
 };
@@ -51998,12 +52063,15 @@ export type ZonesExplicitCacheControl = {
   /**
    * Origin Cache Control is enabled by default for Free, Pro, and
    * Business domains and disabled by default for Enterprise domains.
+   *
+   * @x-auditable true
    */
   id?: 'explicit_cache_control';
   /**
    * The status of Origin Cache Control.
    *
    * @example on
+   * @x-auditable true
    */
   value?: 'on' | 'off';
 };
@@ -52014,6 +52082,7 @@ export type ZonesForwardingUrl = {
    * to [Wildcard matching and referencing](https://developers.cloudflare.com/rules/page-rules/reference/wildcard-matching/).
    *
    * @example forwarding_url
+   * @x-auditable true
    */
   id?: 'forwarding_url';
   value?: {
@@ -52022,6 +52091,7 @@ export type ZonesForwardingUrl = {
      * redirect. 302 is a temporary redirect.
      *
      * @example temporary
+     * @x-auditable true
      */
     status_code?: 301 | 302;
     /**
@@ -52030,6 +52100,7 @@ export type ZonesForwardingUrl = {
      *
      * @example http://www.example.com/somewhere/$1/astring/$2/anotherstring/$3
      * @maxLength 1500
+     * @x-auditable true
      */
     url?: string;
   };
@@ -52076,6 +52147,8 @@ export type ZonesH2PrioritizationValue = 'on' | 'off' | 'custom';
 export type ZonesHostHeaderOverride = {
   /**
    * Apply a specific host header.
+   *
+   * @x-auditable true
    */
   id?: 'host_header_override';
   /**
@@ -52083,6 +52156,7 @@ export type ZonesHostHeaderOverride = {
    *
    * @example example.com
    * @minLength 1
+   * @x-auditable true
    */
   value?: string;
 };
@@ -52252,12 +52326,14 @@ export type ZonesIpGeolocation = {
    * Cloudflare adds a CF-IPCountry HTTP header containing the country code that corresponds to the visitor.
    *
    * @example ip_geolocation
+   * @x-auditable true
    */
   id?: 'ip_geolocation';
   /**
    * The status of adding the IP Geolocation Header.
    *
    * @example on
+   * @x-auditable true
    */
   value?: 'on' | 'off';
 };
@@ -52400,12 +52476,14 @@ export type ZonesMirage = {
    * It can accelerate loading of image-heavy websites on very slow mobile connections and HTTP/1.
    *
    * @example mirage
+   * @x-auditable true
    */
   id?: 'mirage';
   /**
    * The status of Mirage.
    *
    * @example on
+   * @x-auditable true
    */
   value?: 'on' | 'off';
 };
@@ -52422,6 +52500,7 @@ export type ZonesMirageValue = 'on' | 'off';
  *
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type ZonesModifiedOn = string;
 
@@ -52543,12 +52622,14 @@ export type ZonesOpportunisticEncryption = {
    * It's not a substitute for HTTPS, but provides additional security for otherwise vulnerable requests.
    *
    * @example opportunistic_encryption
+   * @x-auditable true
    */
   id?: 'opportunistic_encryption';
   /**
    * The status of Opportunistic Encryption.
    *
    * @example on
+   * @x-auditable true
    */
   value?: 'on' | 'off';
 };
@@ -52645,12 +52726,14 @@ export type ZonesOriginErrorPagePassThru = {
    * Turn on or off Cloudflare error pages generated from issues sent from the origin server. If enabled, this setting triggers error pages issued by the origin.
    *
    * @example origin_error_page_pass_thru
+   * @x-auditable true
    */
   id?: 'origin_error_page_pass_thru';
   /**
    * The status of Origin Error Page Passthru.
    *
    * @example on
+   * @x-auditable true
    */
   value?: 'on' | 'off';
 };
@@ -52686,12 +52769,14 @@ export type ZonesPolish = {
    * Apply options from the Polish feature of the Cloudflare Speed app.
    *
    * @example polish
+   * @x-auditable true
    */
   id?: 'polish';
   /**
    * The level of Polish you want applied to your origin.
    *
    * @example lossless
+   * @x-auditable true
    */
   value?: 'off' | 'lossless' | 'lossy';
 };
@@ -52751,6 +52836,7 @@ export type ZonesPrefetchPreloadValue = 'on' | 'off';
  * specify a higher priority for rule B so it overrides rule A.
  *
  * @default 1
+ * @x-auditable true
  */
 export type ZonesPriority = number;
 
@@ -52919,12 +53005,14 @@ export type ZonesResolveOverride = {
    * Change the origin address to the value specified in this setting.
    *
    * @example resolve_override
+   * @x-auditable true
    */
   id?: 'resolve_override';
   /**
    * The origin address you want to override with.
    *
    * @example example.com
+   * @x-auditable true
    */
   value?: string;
 };
@@ -52933,12 +53021,15 @@ export type ZonesRespectStrongEtag = {
   /**
    * Turn on or off byte-for-byte equivalency checks between the
    * Cloudflare cache and the origin server.
+   *
+   * @x-auditable true
    */
   id?: 'respect_strong_etag';
   /**
    * The status of Respect Strong ETags
    *
    * @example on
+   * @x-auditable true
    */
   value?: 'on' | 'off';
 };
@@ -52949,12 +53040,15 @@ export type ZonesResponseBuffering = {
    * from the origin server before forwarding it to the site visitor. By
    * default, Cloudflare sends packets to the client as they arrive from
    * the origin server.
+   *
+   * @x-auditable true
    */
   id?: 'response_buffering';
   /**
    * The status of Response Buffering
    *
    * @example on
+   * @x-auditable true
    */
   value?: 'on' | 'off';
 };
@@ -52996,12 +53090,15 @@ export type ZonesResultInfo = {
 export type ZonesRocketLoader = {
   /**
    * Turn on or off Rocket Loader in the Cloudflare Speed app.
+   *
+   * @x-auditable true
    */
   id?: 'rocket_loader';
   /**
    * The status of Rocket Loader
    *
    * @example on
+   * @x-auditable true
    */
   value?: 'on' | 'off';
 };
@@ -53767,10 +53864,13 @@ export type ZonesSecurityHeaderValue = {
 export type ZonesSecurityLevel = {
   /**
    * Control options for the **Security Level** feature from the **Security** app.
+   *
+   * @x-auditable true
    */
   id?: 'security_level';
   /**
    * @example under_attack
+   * @x-auditable true
    */
   value?: 'off' | 'essentially_off' | 'low' | 'medium' | 'high' | 'under_attack';
 };
@@ -53963,12 +54063,14 @@ export type ZonesSortQueryStringForCache = {
    * Turn on or off the reordering of query strings. When query strings have the same structure, caching improves.
    *
    * @example sort_query_string_for_cache
+   * @x-auditable true
    */
   id?: 'sort_query_string_for_cache';
   /**
    * The status of Query String Sort
    *
    * @example on
+   * @x-auditable true
    */
   value?: 'on' | 'off';
 };
@@ -53983,12 +54085,15 @@ export type ZonesSortQueryStringForCacheValue = 'on' | 'off';
 export type ZonesSsl = {
   /**
    * Control options for the SSL feature of the Edge Certificates tab in the Cloudflare SSL/TLS app.
+   *
+   * @x-auditable true
    */
   id?: 'ssl';
   /**
    * The encryption mode that Cloudflare uses to connect to your origin server.
    *
    * @example full
+   * @x-auditable true
    */
   value?: 'off' | 'flexible' | 'full' | 'strict' | 'origin_pull';
 };
@@ -54026,6 +54131,7 @@ export type ZonesSslValue = 'off' | 'flexible' | 'full' | 'strict';
  *
  * @default disabled
  * @example active
+ * @x-auditable true
  */
 export type ZonesStatus = 'active' | 'disabled';
 
@@ -54037,10 +54143,13 @@ export type ZonesStringConstraint = {
    * The matches operator can use asterisks and pipes as wildcard and 'or' operators.
    *
    * @default contains
+   * @x-auditable true
    */
   operator: 'matches' | 'contains' | 'equals' | 'not_equal' | 'not_contain';
   /**
    * The value to apply the operator to.
+   *
+   * @x-auditable true
    */
   value: string;
 };
@@ -54179,12 +54288,14 @@ export type ZonesTrueClientIpHeader = {
    * Turn on or off the True-Client-IP Header feature of the Cloudflare Network app.
    *
    * @example true_client_ip_header
+   * @x-auditable true
    */
   id?: 'true_client_ip_header';
   /**
    * The status of True Client IP Header.
    *
    * @example on
+   * @x-auditable true
    */
   value?: 'on' | 'off';
 };
@@ -54217,11 +54328,13 @@ export type ZonesUrlTarget = {
      * The matches operator can use asterisks and pipes as wildcard and 'or' operators.
      *
      * @default contains
+     * @x-auditable true
      */
     operator: 'matches' | 'contains' | 'equals' | 'not_equal' | 'not_contain';
     /**
      * The URL pattern to match against the current request. The pattern may contain up to four asterisks ('*') as placeholders.
      *
+     * @x-auditable true
      * @example *example.com/images/*
      * @pattern ^(https?://)?(([-a-zA-Z0-9*]*\.)+[-a-zA-Z0-9]{2,20})(:(8080|8443|443|80))?(/[\S]+)?$
      */
@@ -54231,6 +54344,7 @@ export type ZonesUrlTarget = {
    * A target based on the URL of the request.
    *
    * @example url
+   * @x-auditable true
    */
   target?: 'url';
 };
@@ -54250,12 +54364,14 @@ export type ZonesWaf = {
    * You cannot enable or disable individual WAF managed rules via Page Rules.
    *
    * @example waf
+   * @x-auditable true
    */
   id?: 'waf';
   /**
    * The status of WAF managed rules (previous version).
    *
    * @example on
+   * @x-auditable true
    */
   value?: 'on' | 'off';
 };
