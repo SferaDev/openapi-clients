@@ -18070,13 +18070,7 @@ export type PutFirewallConfigResponse = {
     }[];
     changes: Record<string, any>[];
     managedRules?: {
-      owasp?: {
-        active: boolean;
-        updatedAt?: string;
-        userId?: string;
-        username?: string;
-      };
-      verifiedBotsBypass?: {
+      [key: string]: {
         active: boolean;
         updatedAt?: string;
         userId?: string;
@@ -18821,13 +18815,7 @@ export type GetFirewallConfigResponse = {
   }[];
   changes: Record<string, any>[];
   managedRules?: {
-    owasp?: {
-      active: boolean;
-      updatedAt?: string;
-      userId?: string;
-      username?: string;
-    };
-    verifiedBotsBypass?: {
+    [key: string]: {
       active: boolean;
       updatedAt?: string;
       userId?: string;
