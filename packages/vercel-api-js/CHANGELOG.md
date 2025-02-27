@@ -1,5 +1,12 @@
 # vercel-api-js
 
+## 0.21.1
+
+### Patch Changes
+
+- 610c7dc: Add new tag 'tag_flags'
+- fd37558: Move createProject endpoint from v10 to v11
+
 ## 0.21.0
 
 ### Minor Changes

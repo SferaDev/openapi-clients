@@ -1,5 +1,11 @@
 # cloudflare-api-js
 
+## 0.8.1
+
+### Patch Changes
+
+- 779ddfb: Change type of body in webAnalyticsUpdateSiteVariables from RumCreateSiteRequest to RumUpdateSiteRequest
+
 ## 0.8.0
 
 ### Minor Changes
