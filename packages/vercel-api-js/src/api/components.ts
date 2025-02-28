@@ -69,6 +69,19 @@ export type ReadAccessGroupResponse = {
    * @example 2
    */
   projectsCount: number;
+  /**
+   * Roles that the team has in the access group.
+   *
+   * @example BILLING
+   * @example DEVELOPER
+   */
+  teamRoles?: string[];
+  /**
+   * Permissions that the team has in the access group.
+   *
+   * @example CreateProject
+   */
+  teamPermissions?: string[];
 };
 
 export type ReadAccessGroupVariables = {
@@ -150,6 +163,19 @@ export type UpdateAccessGroupResponse = {
    * @example 2
    */
   projectsCount: number;
+  /**
+   * Roles that the team has in the access group.
+   *
+   * @example BILLING
+   * @example DEVELOPER
+   */
+  teamRoles?: string[];
+  /**
+   * Permissions that the team has in the access group.
+   *
+   * @example CreateProject
+   */
+  teamPermissions?: string[];
 };
 
 export type UpdateAccessGroupRequestBody = {
@@ -421,6 +447,19 @@ export const listAccessGroups = (variables: ListAccessGroupsVariables, signal?: 
            * @example 2
            */
           projectsCount: number;
+          /**
+           * Roles that the team has in the access group.
+           *
+           * @example DEVELOPER
+           * @example BILLING
+           */
+          teamRoles?: string[];
+          /**
+           * Permissions that the team has in the access group.
+           *
+           * @example CreateProject
+           */
+          teamPermissions?: string[];
         }[];
         pagination: {
           count: number;
@@ -480,6 +519,19 @@ export type CreateAccessGroupResponse = {
    * @example ag_123a6c5209bc3778245d011443644c8d27dc2c50
    */
   accessGroupId: string;
+  /**
+   * Roles that the team has in the access group.
+   *
+   * @example BILLING
+   * @example DEVELOPER
+   */
+  teamRoles?: string[];
+  /**
+   * Permissions that the team has in the access group.
+   *
+   * @example CreateProject
+   */
+  teamPermissions?: string[];
 };
 
 export type CreateAccessGroupRequestBody = {
@@ -3707,10 +3759,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    id?: string;
     createdAt?: number;
-    entrypoint?: string | null;
+    id?: string;
     readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    entrypoint?: string | null;
     readyStateAt?: number;
     output: {
       path: string;
@@ -3999,7 +4051,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
             src?: string;
             dest?: string;
             status?: number;
@@ -4033,7 +4085,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         org: string;
@@ -4045,7 +4097,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         owner: string;
@@ -4057,7 +4109,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | null;
   flags?:
@@ -4535,9 +4587,9 @@ export type CancelDeploymentResponse = {
   lambdas?: {
     id?: string;
     createdAt?: number;
-    entrypoint?: string | null;
     readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
     readyStateAt?: number;
+    entrypoint?: string | null;
     output: {
       path: string;
       functionName: string;
@@ -4549,8 +4601,8 @@ export type CancelDeploymentResponse = {
   team?: {
     id: string;
     name: string;
-    avatar?: string;
     slug: string;
+    avatar?: string;
   };
   userAliases?: string[];
   previewCommentsEnabled?: boolean;
@@ -7322,9 +7374,7 @@ export type CreateEdgeConfigRequestBody = {
    */
   slug: string;
   items?: {
-    [key: string]:
-      | (string | number | boolean | null | Record<string, any>)
-      | (string | number | boolean | null | Record<string, any>)[];
+    [key: string]: any;
   };
 };
 
@@ -10194,9 +10244,7 @@ export type PutV1InstallationsIntegrationConfigurationIdResourcesResourceIdExper
 
 export type PutV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationEdgeConfigRequestBody = {
   data: {
-    [key: string]:
-      | (string | number | boolean | null | Record<string, any>)
-      | (string | number | boolean | null | Record<string, any>)[];
+    [key: string]: any;
   };
 };
 
