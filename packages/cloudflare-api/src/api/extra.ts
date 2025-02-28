@@ -1,6 +1,11 @@
 import {
   accountsListAccounts,
   accountCreation,
+  brapiPostContent,
+  brapiPostPdf,
+  brapiPostScrape,
+  brapiPostScreenshot,
+  brapiPostSnapshot,
   cloudforceOneRequestList,
   cloudforceOneRequestConstants,
   cloudforceOneRequestNew,
@@ -718,6 +723,7 @@ import {
   magicNetworkMonitoringRulesGetRule,
   magicNetworkMonitoringRulesUpdateRule,
   magicNetworkMonitoringRulesUpdateAdvertisementForRule,
+  magicNetworkMonitoringVpcFlowsGenerateAuthenticationToken,
   mTlsCertificateManagementListMTlsCertificates,
   mTlsCertificateManagementUploadMTlsCertificate,
   mTlsCertificateManagementDeleteMTlsCertificate,
@@ -1801,6 +1807,11 @@ import {
 export const operationsByPath = {
   'GET /accounts': accountsListAccounts,
   'POST /accounts': accountCreation,
+  'POST /accounts/{accountId}/browser-rendering/content': brapiPostContent,
+  'POST /accounts/{accountId}/browser-rendering/pdf': brapiPostPdf,
+  'POST /accounts/{accountId}/browser-rendering/scrape': brapiPostScrape,
+  'POST /accounts/{accountId}/browser-rendering/screenshot': brapiPostScreenshot,
+  'POST /accounts/{accountId}/browser-rendering/snapshot': brapiPostSnapshot,
   'POST /accounts/{account_identifier}/cloudforce-one/requests': cloudforceOneRequestList,
   'GET /accounts/{account_identifier}/cloudforce-one/requests/constants': cloudforceOneRequestConstants,
   'POST /accounts/{account_identifier}/cloudforce-one/requests/new': cloudforceOneRequestNew,
@@ -2637,6 +2648,7 @@ export const operationsByPath = {
   'PATCH /accounts/{account_id}/mnm/rules/{rule_id}': magicNetworkMonitoringRulesUpdateRule,
   'PATCH /accounts/{account_id}/mnm/rules/{rule_id}/advertisement':
     magicNetworkMonitoringRulesUpdateAdvertisementForRule,
+  'POST /accounts/{account_id}/mnm/vpc-flows/token': magicNetworkMonitoringVpcFlowsGenerateAuthenticationToken,
   'GET /accounts/{account_id}/mtls_certificates': mTlsCertificateManagementListMTlsCertificates,
   'POST /accounts/{account_id}/mtls_certificates': mTlsCertificateManagementUploadMTlsCertificate,
   'DELETE /accounts/{account_id}/mtls_certificates/{mtls_certificate_id}':

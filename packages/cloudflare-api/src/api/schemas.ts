@@ -2041,6 +2041,8 @@ export type AccessAzureAD = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -2270,6 +2272,8 @@ export type AccessCentrify = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -2366,6 +2370,7 @@ export type AccessClientId = string;
  * The Client Secret for the service token. Access will check for this value in the `CF-Access-Client-Secret` request header.
  *
  * @example bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5
+ * @x-sensitive true
  */
 export type AccessClientSecret = string;
 
@@ -2871,6 +2876,8 @@ export type AccessFacebook = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -3018,6 +3025,8 @@ export type AccessGithub = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -3103,6 +3112,8 @@ export type AccessGoogle = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -3169,6 +3180,8 @@ export type AccessGoogleApps = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -3399,6 +3412,8 @@ export type AccessIdentityProvider = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -3671,6 +3686,8 @@ export type AccessLinkedin = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -3877,6 +3894,8 @@ export type AccessOidc = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -3941,6 +3960,7 @@ export type AccessOidcSaasApp = {
    * The application client secret, only returned on POST request.
    *
    * @example oidc client secret
+   * @x-sensitive true
    */
   client_secret?: string;
   created_at?: AccessTimestamp;
@@ -4077,6 +4097,8 @@ export type AccessOkta = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -4164,6 +4186,8 @@ export type AccessOnelogin = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -4224,6 +4248,8 @@ export type AccessOnetimepin = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -4358,6 +4384,8 @@ export type AccessPingone = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -4921,6 +4949,8 @@ export type AccessSaml = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -5253,6 +5283,8 @@ export type AccessSchemasAzureAD = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -5374,6 +5406,8 @@ export type AccessSchemasCentrify = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -5511,6 +5545,8 @@ export type AccessSchemasFacebook = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -5585,6 +5621,8 @@ export type AccessSchemasGithub = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -5643,6 +5681,8 @@ export type AccessSchemasGoogle = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -5708,6 +5748,8 @@ export type AccessSchemasGoogleApps = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -5799,6 +5841,8 @@ export type AccessSchemasIdentityProvider = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -5880,6 +5924,8 @@ export type AccessSchemasLinkedin = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -5979,6 +6025,8 @@ export type AccessSchemasOidc = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -6043,6 +6091,7 @@ export type AccessSchemasOidcSaasApp = {
    * The application client secret, only returned on POST request.
    *
    * @example oidc client secret
+   * @x-sensitive true
    */
   client_secret?: string;
   created_at?: AccessTimestamp;
@@ -6181,6 +6230,8 @@ export type AccessSchemasOkta = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -6246,6 +6297,8 @@ export type AccessSchemasOnelogin = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -6306,6 +6359,8 @@ export type AccessSchemasOnetimepin = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -6382,6 +6437,8 @@ export type AccessSchemasPingone = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -6584,6 +6641,8 @@ export type AccessSchemasSaml = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -6917,6 +6976,8 @@ export type AccessSchemasYandex = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests. If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -7705,6 +7766,8 @@ export type AccessYandex = {
     seat_deprovision?: boolean;
     /**
      * A read-only token generated when the SCIM integration is enabled for the first time.  It is redacted on subsequent requests.  If you lose this you will need to refresh it at /access/identity_providers/:idpID/refresh_scim_secret.
+     *
+     * @x-sensitive true
      */
     secret?: string;
     /**
@@ -9209,6 +9272,7 @@ export type ArgoConfigResponseSingle = ArgoConfigApiResponseSingle & {
  * Enables Argo Smart Routing.
  *
  * @example on
+ * @x-auditable true
  */
 export type ArgoConfigValue = 'on' | 'off';
 
@@ -20128,20 +20192,6 @@ export type HyperdriveHyperdriveCachingEnabled = HyperdriveHyperdriveCachingComm
 
 export type HyperdriveHyperdriveConfig = {
   caching?: HyperdriveHyperdriveCaching;
-  id: HyperdriveIdentifier;
-  name: HyperdriveHyperdriveName;
-  origin:
-    | (HyperdriveHyperdriveDatabaseFull & HyperdriveHyperdriveInternetOrigin)
-    | (HyperdriveHyperdriveDatabaseFull & HyperdriveHyperdriveOverAccessOrigin);
-};
-
-export type HyperdriveHyperdriveConfigPatch = {
-  caching?: HyperdriveHyperdriveCaching;
-  name?: HyperdriveHyperdriveName;
-  origin?: HyperdriveHyperdriveDatabase | (HyperdriveHyperdriveInternetOrigin | HyperdriveHyperdriveOverAccessOrigin);
-};
-
-export type HyperdriveHyperdriveConfigResponse = HyperdriveHyperdriveConfig & {
   /**
    * When the Hyperdrive configuration was created.
    *
@@ -20149,6 +20199,7 @@ export type HyperdriveHyperdriveConfigResponse = HyperdriveHyperdriveConfig & {
    * @format date-time
    */
   created_on?: string;
+  id: HyperdriveIdentifier;
   /**
    * When the Hyperdrive configuration was last modified.
    *
@@ -20156,7 +20207,19 @@ export type HyperdriveHyperdriveConfigResponse = HyperdriveHyperdriveConfig & {
    * @format date-time
    */
   modified_on?: string;
+  name: HyperdriveHyperdriveName;
+  origin:
+    | (HyperdriveHyperdriveDatabaseFull & HyperdriveInternetOrigin)
+    | (HyperdriveHyperdriveDatabaseFull & HyperdriveOverAccessOrigin);
 };
+
+export type HyperdriveHyperdriveConfigPatch = {
+  caching?: HyperdriveHyperdriveCaching;
+  name?: HyperdriveHyperdriveName;
+  origin?: HyperdriveHyperdriveDatabase | (HyperdriveInternetOrigin | HyperdriveOverAccessOrigin);
+};
+
+export type HyperdriveHyperdriveConfigResponse = HyperdriveHyperdriveConfig;
 
 export type HyperdriveHyperdriveDatabase = {
   /**
@@ -20167,6 +20230,8 @@ export type HyperdriveHyperdriveDatabase = {
   database?: string;
   /**
    * The password required to access your origin database. This value is write-only and never returned by the API.
+   *
+   * @x-sensitive true
    */
   password?: string;
   scheme?: HyperdriveHyperdriveScheme;
@@ -20180,7 +20245,28 @@ export type HyperdriveHyperdriveDatabase = {
 
 export type HyperdriveHyperdriveDatabaseFull = HyperdriveHyperdriveDatabase;
 
-export type HyperdriveHyperdriveInternetOrigin = {
+/**
+ * @example example-hyperdrive
+ */
+export type HyperdriveHyperdriveName = string;
+
+export type HyperdriveHyperdriveOrigin = HyperdriveHyperdriveDatabase &
+  (HyperdriveInternetOrigin | HyperdriveOverAccessOrigin);
+
+/**
+ * Specifies the URL scheme used to connect to your origin database.
+ */
+export type HyperdriveHyperdriveScheme = 'postgres' | 'postgresql';
+
+/**
+ * Identifier
+ *
+ * @example 023e105f4ecef8ad9ca31a8372d0c353
+ * @maxLength 32
+ */
+export type HyperdriveIdentifier = string;
+
+export type HyperdriveInternetOrigin = {
   /**
    * The host (hostname or IP) of your origin database.
    *
@@ -20195,15 +20281,15 @@ export type HyperdriveHyperdriveInternetOrigin = {
   port: number;
 };
 
-/**
- * @example example-hyperdrive
- */
-export type HyperdriveHyperdriveName = string;
+export type HyperdriveMessages = {
+  /**
+   * @minimum 1000
+   */
+  code: number;
+  message: string;
+}[];
 
-export type HyperdriveHyperdriveOrigin = HyperdriveHyperdriveDatabase &
-  (HyperdriveHyperdriveInternetOrigin | HyperdriveHyperdriveOverAccessOrigin);
-
-export type HyperdriveHyperdriveOverAccessOrigin = {
+export type HyperdriveOverAccessOrigin = {
   /**
    * The Client ID of the Access token to use when connecting to the origin database.
    *
@@ -20223,27 +20309,6 @@ export type HyperdriveHyperdriveOverAccessOrigin = {
    */
   host: string;
 };
-
-/**
- * Specifies the URL scheme used to connect to your origin database.
- */
-export type HyperdriveHyperdriveScheme = 'postgres' | 'postgresql';
-
-/**
- * Identifier
- *
- * @example 023e105f4ecef8ad9ca31a8372d0c353
- * @maxLength 32
- */
-export type HyperdriveIdentifier = string;
-
-export type HyperdriveMessages = {
-  /**
-   * @minimum 1000
-   */
-  code: number;
-  message: string;
-}[];
 
 export type HyperdriveResultInfo = {
   /**
@@ -25431,6 +25496,17 @@ export type MagicVisibilityMnmMnmRulesCollectionResponse = MagicVisibilityMnmApi
 export type MagicVisibilityMnmMnmRulesSingleResponse = MagicVisibilityMnmApiResponseSingle & {
   result?: MagicVisibilityMnmMnmRule;
 };
+
+export type MagicVisibilityMnmMnmVpcFlowsSingleResponse = MagicVisibilityMnmApiResponseSingle & {
+  result?: MagicVisibilityMnmMnmVpcFlowsToken;
+};
+
+/**
+ * Authentication token to be used for VPC Flows export authentication.
+ *
+ * @example JWE/JWT auth token
+ */
+export type MagicVisibilityMnmMnmVpcFlowsToken = string;
 
 export type MagicVisibilityMnmResultInfo = {
   /**
@@ -43988,14 +44064,14 @@ export type TunnelTunnelToken = string;
  *
  * @example cfd_tunnel
  */
-export type TunnelTunnelType = 'cfd_tunnel' | 'warp_connector' | 'ip_sec' | 'gre' | 'cni';
+export type TunnelTunnelType = 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
 
 /**
- * The types of tunnels to filter separated by a comma.
+ * The types of tunnels to filter by, separated by commas.
  *
  * @example cfd_tunnel,warp_connector
  */
-export type TunnelTunnelTypes = string;
+export type TunnelTunnelTypes = TunnelTunnelType[];
 
 /**
  * The cloudflared version used to establish this connection.
