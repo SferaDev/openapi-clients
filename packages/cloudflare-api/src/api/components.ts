@@ -74,6 +74,1454 @@ export const accountCreation = (variables: AccountCreationVariables, signal?: Ab
     signal
   });
 
+export type BrapiPostContentPathParams = {
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type BrapiPostContentQueryParams = {
+  /**
+   * Cache TTL default is 5s. Set to 0 to disable.
+   *
+   * @default 5
+   * @maximum 86400
+   */
+  cacheTTL?: number;
+};
+
+export type BrapiPostContentError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+  | {
+      status: 500;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+>;
+
+export type BrapiPostContentResponse = {
+  errors?: {
+    /**
+     * Error code
+     */
+    code: number;
+    /**
+     * Error Message
+     */
+    message: string;
+  }[];
+  /**
+   * HTML content
+   */
+  result?: string;
+  /**
+   * Response status
+   */
+  status: boolean;
+};
+
+export type BrapiPostContentRequestBody = {
+  /**
+   * Adds a `<script>` tag into the page with the desired URL or content.
+   */
+  addScriptTag?: {
+    content?: string;
+    id?: string;
+    type?: string;
+    url?: string;
+  }[];
+  /**
+   * Adds a `<link rel="stylesheet">` tag into the page with the desired URL or a `<style type="text/css">` tag with the content.
+   */
+  addStyleTag?: {
+    content?: string;
+    url?: string;
+  }[];
+  /**
+   * Only allow requests that match the provided regex patterns, eg. '/^.*\.(css)'.
+   */
+  allowRequestPattern?: string[];
+  /**
+   * Only allow requests that match the provided resource types, eg. 'image' or 'script'.
+   */
+  allowResourceTypes?: (
+    | 'document'
+    | 'stylesheet'
+    | 'image'
+    | 'media'
+    | 'font'
+    | 'script'
+    | 'texttrack'
+    | 'xhr'
+    | 'fetch'
+    | 'prefetch'
+    | 'eventsource'
+    | 'websocket'
+    | 'manifest'
+    | 'signedexchange'
+    | 'ping'
+    | 'cspviolationreport'
+    | 'preflight'
+    | 'other'
+  )[];
+  /**
+   * Provide credentials for HTTP authentication.
+   */
+  authenticate?: {
+    /**
+     * @minLength 1
+     */
+    password: string;
+    /**
+     * @minLength 1
+     */
+    username: string;
+  };
+  /**
+   * Attempt to proceed when 'awaited' events fail or timeout.
+   */
+  bestAttempt?: boolean;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.page.setcookie).
+   */
+  cookies?: {
+    domain?: string;
+    expires?: number;
+    httpOnly?: boolean;
+    name: string;
+    partitionKey?: string;
+    path?: string;
+    priority?: 'Low' | 'Medium' | 'High';
+    sameParty?: boolean;
+    sameSite?: 'Strict' | 'Lax' | 'None';
+    secure?: boolean;
+    sourcePort?: number;
+    sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
+    url?: string;
+    value: string;
+  }[];
+  emulateMediaType?: string;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.gotooptions).
+   *
+   * @default {"timeout":30000,"waitUntil":"domcontentloaded"}
+   */
+  gotoOptions?: {
+    referer?: string;
+    referrerPolicy?: string;
+    /**
+     * @default 30000
+     * @maximum 60000
+     */
+    timeout?: number;
+    /**
+     * @default domcontentloaded
+     */
+    waitUntil?:
+      | 'load'
+      | 'domcontentloaded'
+      | 'networkidle0'
+      | 'networkidle2'
+      | ('load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2')[];
+  };
+  /**
+   * Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either `html` or `url` must be set.
+   *
+   * @minLength 1
+   */
+  html?: string;
+  /**
+   * Block undesired requests that match the provided regex patterns, eg. '/^.*\.(css)'.
+   */
+  rejectRequestPattern?: string[];
+  /**
+   * Block undesired requests that match the provided resource types, eg. 'image' or 'script'.
+   */
+  rejectResourceTypes?: (
+    | 'document'
+    | 'stylesheet'
+    | 'image'
+    | 'media'
+    | 'font'
+    | 'script'
+    | 'texttrack'
+    | 'xhr'
+    | 'fetch'
+    | 'prefetch'
+    | 'eventsource'
+    | 'websocket'
+    | 'manifest'
+    | 'signedexchange'
+    | 'ping'
+    | 'cspviolationreport'
+    | 'preflight'
+    | 'other'
+  )[];
+  setExtraHTTPHeaders?: {
+    [key: string]: string;
+  };
+  setJavaScriptEnabled?: boolean;
+  /**
+   * URL to navigate to, eg. `https://example.com`.
+   *
+   * @format uri
+   */
+  url?: string;
+  /**
+   * @default 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
+   */
+  userAgent?: string;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
+   */
+  viewport?: {
+    deviceScaleFactor?: number;
+    hasTouch?: boolean;
+    height: number;
+    isLandscape?: boolean;
+    isMobile?: boolean;
+    width: number;
+  };
+  /**
+   * Wait for the selector to appear in page. Check [options](https://pptr.dev/api/puppeteer.page.waitforselector).
+   */
+  waitForSelector?: {
+    hidden?: true;
+    selector: string;
+    /**
+     * @maximum 60000
+     */
+    timeout?: number;
+    visible?: true;
+  };
+  /**
+   * Waits for a specified timeout before continuing.
+   *
+   * @maximum 60000
+   */
+  waitForTimeout?: number;
+};
+
+export type BrapiPostContentVariables = {
+  body?: BrapiPostContentRequestBody;
+  pathParams: BrapiPostContentPathParams;
+  queryParams?: BrapiPostContentQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Fetches rendered HTML content from provided URL or HTML. Check available options like `goToOptions` and `waitFor*` to control page load behaviour.
+ */
+export const brapiPostContent = (variables: BrapiPostContentVariables, signal?: AbortSignal) =>
+  fetch<
+    BrapiPostContentResponse,
+    BrapiPostContentError,
+    BrapiPostContentRequestBody,
+    {},
+    BrapiPostContentQueryParams,
+    BrapiPostContentPathParams
+  >({ url: '/accounts/{accountId}/browser-rendering/content', method: 'post', ...variables, signal });
+
+export type BrapiPostPdfPathParams = {
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type BrapiPostPdfQueryParams = {
+  /**
+   * Cache TTL default is 5s. Set to 0 to disable.
+   *
+   * @default 5
+   * @maximum 86400
+   */
+  cacheTTL?: number;
+};
+
+export type BrapiPostPdfError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+  | {
+      status: 500;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+>;
+
+export type BrapiPostPdfRequestBody = {
+  /**
+   * Adds a `<script>` tag into the page with the desired URL or content.
+   */
+  addScriptTag?: {
+    content?: string;
+    id?: string;
+    type?: string;
+    url?: string;
+  }[];
+  /**
+   * Adds a `<link rel="stylesheet">` tag into the page with the desired URL or a `<style type="text/css">` tag with the content.
+   */
+  addStyleTag?: {
+    content?: string;
+    url?: string;
+  }[];
+  /**
+   * Only allow requests that match the provided regex patterns, eg. '/^.*\.(css)'.
+   */
+  allowRequestPattern?: string[];
+  /**
+   * Only allow requests that match the provided resource types, eg. 'image' or 'script'.
+   */
+  allowResourceTypes?: (
+    | 'document'
+    | 'stylesheet'
+    | 'image'
+    | 'media'
+    | 'font'
+    | 'script'
+    | 'texttrack'
+    | 'xhr'
+    | 'fetch'
+    | 'prefetch'
+    | 'eventsource'
+    | 'websocket'
+    | 'manifest'
+    | 'signedexchange'
+    | 'ping'
+    | 'cspviolationreport'
+    | 'preflight'
+    | 'other'
+  )[];
+  /**
+   * Provide credentials for HTTP authentication.
+   */
+  authenticate?: {
+    /**
+     * @minLength 1
+     */
+    password: string;
+    /**
+     * @minLength 1
+     */
+    username: string;
+  };
+  /**
+   * Attempt to proceed when 'awaited' events fail or timeout.
+   */
+  bestAttempt?: boolean;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.page.setcookie).
+   */
+  cookies?: {
+    domain?: string;
+    expires?: number;
+    httpOnly?: boolean;
+    name: string;
+    partitionKey?: string;
+    path?: string;
+    priority?: 'Low' | 'Medium' | 'High';
+    sameParty?: boolean;
+    sameSite?: 'Strict' | 'Lax' | 'None';
+    secure?: boolean;
+    sourcePort?: number;
+    sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
+    url?: string;
+    value: string;
+  }[];
+  emulateMediaType?: string;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.gotooptions).
+   *
+   * @default {"timeout":30000,"waitUntil":"domcontentloaded"}
+   */
+  gotoOptions?: {
+    referer?: string;
+    referrerPolicy?: string;
+    /**
+     * @default 30000
+     * @maximum 60000
+     */
+    timeout?: number;
+    /**
+     * @default domcontentloaded
+     */
+    waitUntil?:
+      | 'load'
+      | 'domcontentloaded'
+      | 'networkidle0'
+      | 'networkidle2'
+      | ('load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2')[];
+  };
+  /**
+   * Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either `html` or `url` must be set.
+   *
+   * @minLength 1
+   */
+  html?: string;
+  /**
+   * Block undesired requests that match the provided regex patterns, eg. '/^.*\.(css)'.
+   */
+  rejectRequestPattern?: string[];
+  /**
+   * Block undesired requests that match the provided resource types, eg. 'image' or 'script'.
+   */
+  rejectResourceTypes?: (
+    | 'document'
+    | 'stylesheet'
+    | 'image'
+    | 'media'
+    | 'font'
+    | 'script'
+    | 'texttrack'
+    | 'xhr'
+    | 'fetch'
+    | 'prefetch'
+    | 'eventsource'
+    | 'websocket'
+    | 'manifest'
+    | 'signedexchange'
+    | 'ping'
+    | 'cspviolationreport'
+    | 'preflight'
+    | 'other'
+  )[];
+  setExtraHTTPHeaders?: {
+    [key: string]: string;
+  };
+  setJavaScriptEnabled?: boolean;
+  /**
+   * URL to navigate to, eg. `https://example.com`.
+   *
+   * @format uri
+   */
+  url?: string;
+  /**
+   * @default 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
+   */
+  userAgent?: string;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
+   */
+  viewport?: {
+    deviceScaleFactor?: number;
+    hasTouch?: boolean;
+    height: number;
+    isLandscape?: boolean;
+    isMobile?: boolean;
+    width: number;
+  };
+  /**
+   * Wait for the selector to appear in page. Check [options](https://pptr.dev/api/puppeteer.page.waitforselector).
+   */
+  waitForSelector?: {
+    hidden?: true;
+    selector: string;
+    /**
+     * @maximum 60000
+     */
+    timeout?: number;
+    visible?: true;
+  };
+  /**
+   * Waits for a specified timeout before continuing.
+   *
+   * @maximum 60000
+   */
+  waitForTimeout?: number;
+};
+
+export type BrapiPostPdfVariables = {
+  body?: BrapiPostPdfRequestBody;
+  pathParams: BrapiPostPdfPathParams;
+  queryParams?: BrapiPostPdfQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Fetches rendered PDF from provided URL or HTML. Check available options like `goToOptions` and `waitFor*` to control page load behaviour.
+ */
+export const brapiPostPdf = (variables: BrapiPostPdfVariables, signal?: AbortSignal) =>
+  fetch<undefined, BrapiPostPdfError, BrapiPostPdfRequestBody, {}, BrapiPostPdfQueryParams, BrapiPostPdfPathParams>({
+    url: '/accounts/{accountId}/browser-rendering/pdf',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type BrapiPostScrapePathParams = {
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type BrapiPostScrapeQueryParams = {
+  /**
+   * Cache TTL default is 5s. Set to 0 to disable.
+   *
+   * @default 5
+   * @maximum 86400
+   */
+  cacheTTL?: number;
+};
+
+export type BrapiPostScrapeError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+  | {
+      status: 500;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+>;
+
+export type BrapiPostScrapeResponse = {
+  errors?: {
+    /**
+     * Error code
+     */
+    code: number;
+    /**
+     * Error Message
+     */
+    message: string;
+  }[];
+  result: {
+    result: {
+      attributes: {
+        /**
+         * Attribute name
+         */
+        name: string;
+        /**
+         * Attribute value
+         */
+        value: string;
+      }[];
+      /**
+       * Element height
+       */
+      height: number;
+      /**
+       * Html content
+       */
+      html: string;
+      /**
+       * Element left
+       */
+      left: number;
+      /**
+       * Text content
+       */
+      text: string;
+      /**
+       * Element top
+       */
+      top: number;
+      /**
+       * Element width
+       */
+      width: number;
+    };
+    /**
+     * Selector
+     */
+    selector: string;
+  }[];
+  /**
+   * Response status
+   */
+  status: boolean;
+};
+
+export type BrapiPostScrapeRequestBody = {
+  /**
+   * Adds a `<script>` tag into the page with the desired URL or content.
+   */
+  addScriptTag?: {
+    content?: string;
+    id?: string;
+    type?: string;
+    url?: string;
+  }[];
+  /**
+   * Adds a `<link rel="stylesheet">` tag into the page with the desired URL or a `<style type="text/css">` tag with the content.
+   */
+  addStyleTag?: {
+    content?: string;
+    url?: string;
+  }[];
+  /**
+   * Only allow requests that match the provided regex patterns, eg. '/^.*\.(css)'.
+   */
+  allowRequestPattern?: string[];
+  /**
+   * Only allow requests that match the provided resource types, eg. 'image' or 'script'.
+   */
+  allowResourceTypes?: (
+    | 'document'
+    | 'stylesheet'
+    | 'image'
+    | 'media'
+    | 'font'
+    | 'script'
+    | 'texttrack'
+    | 'xhr'
+    | 'fetch'
+    | 'prefetch'
+    | 'eventsource'
+    | 'websocket'
+    | 'manifest'
+    | 'signedexchange'
+    | 'ping'
+    | 'cspviolationreport'
+    | 'preflight'
+    | 'other'
+  )[];
+  /**
+   * Provide credentials for HTTP authentication.
+   */
+  authenticate?: {
+    /**
+     * @minLength 1
+     */
+    password: string;
+    /**
+     * @minLength 1
+     */
+    username: string;
+  };
+  /**
+   * Attempt to proceed when 'awaited' events fail or timeout.
+   */
+  bestAttempt?: boolean;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.page.setcookie).
+   */
+  cookies?: {
+    domain?: string;
+    expires?: number;
+    httpOnly?: boolean;
+    name: string;
+    partitionKey?: string;
+    path?: string;
+    priority?: 'Low' | 'Medium' | 'High';
+    sameParty?: boolean;
+    sameSite?: 'Strict' | 'Lax' | 'None';
+    secure?: boolean;
+    sourcePort?: number;
+    sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
+    url?: string;
+    value: string;
+  }[];
+  elements: {
+    selector: string;
+  }[];
+  emulateMediaType?: string;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.gotooptions).
+   *
+   * @default {"timeout":30000,"waitUntil":"domcontentloaded"}
+   */
+  gotoOptions?: {
+    referer?: string;
+    referrerPolicy?: string;
+    /**
+     * @default 30000
+     * @maximum 60000
+     */
+    timeout?: number;
+    /**
+     * @default domcontentloaded
+     */
+    waitUntil?:
+      | 'load'
+      | 'domcontentloaded'
+      | 'networkidle0'
+      | 'networkidle2'
+      | ('load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2')[];
+  };
+  /**
+   * Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either `html` or `url` must be set.
+   *
+   * @minLength 1
+   */
+  html?: string;
+  /**
+   * Block undesired requests that match the provided regex patterns, eg. '/^.*\.(css)'.
+   */
+  rejectRequestPattern?: string[];
+  /**
+   * Block undesired requests that match the provided resource types, eg. 'image' or 'script'.
+   */
+  rejectResourceTypes?: (
+    | 'document'
+    | 'stylesheet'
+    | 'image'
+    | 'media'
+    | 'font'
+    | 'script'
+    | 'texttrack'
+    | 'xhr'
+    | 'fetch'
+    | 'prefetch'
+    | 'eventsource'
+    | 'websocket'
+    | 'manifest'
+    | 'signedexchange'
+    | 'ping'
+    | 'cspviolationreport'
+    | 'preflight'
+    | 'other'
+  )[];
+  setExtraHTTPHeaders?: {
+    [key: string]: string;
+  };
+  setJavaScriptEnabled?: boolean;
+  /**
+   * URL to navigate to, eg. `https://example.com`.
+   *
+   * @format uri
+   */
+  url?: string;
+  /**
+   * @default 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
+   */
+  userAgent?: string;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
+   */
+  viewport?: {
+    deviceScaleFactor?: number;
+    hasTouch?: boolean;
+    height: number;
+    isLandscape?: boolean;
+    isMobile?: boolean;
+    width: number;
+  };
+  /**
+   * Wait for the selector to appear in page. Check [options](https://pptr.dev/api/puppeteer.page.waitforselector).
+   */
+  waitForSelector?: {
+    hidden?: true;
+    selector: string;
+    /**
+     * @maximum 60000
+     */
+    timeout?: number;
+    visible?: true;
+  };
+  /**
+   * Waits for a specified timeout before continuing.
+   *
+   * @maximum 60000
+   */
+  waitForTimeout?: number;
+};
+
+export type BrapiPostScrapeVariables = {
+  body: BrapiPostScrapeRequestBody;
+  pathParams: BrapiPostScrapePathParams;
+  queryParams?: BrapiPostScrapeQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Get meta attributes like height, width, text and others of selected elements.
+ */
+export const brapiPostScrape = (variables: BrapiPostScrapeVariables, signal?: AbortSignal) =>
+  fetch<
+    BrapiPostScrapeResponse,
+    BrapiPostScrapeError,
+    BrapiPostScrapeRequestBody,
+    {},
+    BrapiPostScrapeQueryParams,
+    BrapiPostScrapePathParams
+  >({ url: '/accounts/{accountId}/browser-rendering/scrape', method: 'post', ...variables, signal });
+
+export type BrapiPostScreenshotPathParams = {
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type BrapiPostScreenshotQueryParams = {
+  /**
+   * Cache TTL default is 5s. Set to 0 to disable.
+   *
+   * @default 5
+   * @maximum 86400
+   */
+  cacheTTL?: number;
+};
+
+export type BrapiPostScreenshotError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+  | {
+      status: 500;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+>;
+
+export type BrapiPostScreenshotResponse = {
+  errors?: {
+    /**
+     * Error code
+     */
+    code: number;
+    /**
+     * Error Message
+     */
+    message: string;
+  }[];
+  /**
+   * Response status
+   */
+  status: boolean;
+};
+
+export type BrapiPostScreenshotRequestBody = {
+  /**
+   * Adds a `<script>` tag into the page with the desired URL or content.
+   */
+  addScriptTag?: {
+    content?: string;
+    id?: string;
+    type?: string;
+    url?: string;
+  }[];
+  /**
+   * Adds a `<link rel="stylesheet">` tag into the page with the desired URL or a `<style type="text/css">` tag with the content.
+   */
+  addStyleTag?: {
+    content?: string;
+    url?: string;
+  }[];
+  /**
+   * Only allow requests that match the provided regex patterns, eg. '/^.*\.(css)'.
+   */
+  allowRequestPattern?: string[];
+  /**
+   * Only allow requests that match the provided resource types, eg. 'image' or 'script'.
+   */
+  allowResourceTypes?: (
+    | 'document'
+    | 'stylesheet'
+    | 'image'
+    | 'media'
+    | 'font'
+    | 'script'
+    | 'texttrack'
+    | 'xhr'
+    | 'fetch'
+    | 'prefetch'
+    | 'eventsource'
+    | 'websocket'
+    | 'manifest'
+    | 'signedexchange'
+    | 'ping'
+    | 'cspviolationreport'
+    | 'preflight'
+    | 'other'
+  )[];
+  /**
+   * Provide credentials for HTTP authentication.
+   */
+  authenticate?: {
+    /**
+     * @minLength 1
+     */
+    password: string;
+    /**
+     * @minLength 1
+     */
+    username: string;
+  };
+  /**
+   * Attempt to proceed when 'awaited' events fail or timeout.
+   */
+  bestAttempt?: boolean;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.page.setcookie).
+   */
+  cookies?: {
+    domain?: string;
+    expires?: number;
+    httpOnly?: boolean;
+    name: string;
+    partitionKey?: string;
+    path?: string;
+    priority?: 'Low' | 'Medium' | 'High';
+    sameParty?: boolean;
+    sameSite?: 'Strict' | 'Lax' | 'None';
+    secure?: boolean;
+    sourcePort?: number;
+    sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
+    url?: string;
+    value: string;
+  }[];
+  emulateMediaType?: string;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.gotooptions).
+   *
+   * @default {"timeout":30000,"waitUntil":"domcontentloaded"}
+   */
+  gotoOptions?: {
+    referer?: string;
+    referrerPolicy?: string;
+    /**
+     * @default 30000
+     * @maximum 60000
+     */
+    timeout?: number;
+    /**
+     * @default domcontentloaded
+     */
+    waitUntil?:
+      | 'load'
+      | 'domcontentloaded'
+      | 'networkidle0'
+      | 'networkidle2'
+      | ('load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2')[];
+  };
+  /**
+   * Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either `html` or `url` must be set.
+   *
+   * @minLength 1
+   */
+  html?: string;
+  /**
+   * Block undesired requests that match the provided regex patterns, eg. '/^.*\.(css)'.
+   */
+  rejectRequestPattern?: string[];
+  /**
+   * Block undesired requests that match the provided resource types, eg. 'image' or 'script'.
+   */
+  rejectResourceTypes?: (
+    | 'document'
+    | 'stylesheet'
+    | 'image'
+    | 'media'
+    | 'font'
+    | 'script'
+    | 'texttrack'
+    | 'xhr'
+    | 'fetch'
+    | 'prefetch'
+    | 'eventsource'
+    | 'websocket'
+    | 'manifest'
+    | 'signedexchange'
+    | 'ping'
+    | 'cspviolationreport'
+    | 'preflight'
+    | 'other'
+  )[];
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.screenshotoptions).
+   */
+  screenshotOptions?: {
+    captureBeyondViewport?: boolean;
+    clip?: {
+      height: number;
+      scale?: number;
+      width: number;
+      x: number;
+      y: number;
+    };
+    /**
+     * @default binary
+     */
+    encoding?: 'binary' | 'base64';
+    fromSurface?: boolean;
+    fullPage?: boolean;
+    omitBackground?: boolean;
+    optimizeForSpeed?: boolean;
+    quality?: number;
+    /**
+     * @default png
+     */
+    type?: 'png' | 'jpeg' | 'webp';
+  };
+  scrollPage?: boolean;
+  selector?: string;
+  setExtraHTTPHeaders?: {
+    [key: string]: string;
+  };
+  setJavaScriptEnabled?: boolean;
+  /**
+   * URL to navigate to, eg. `https://example.com`.
+   *
+   * @format uri
+   */
+  url?: string;
+  /**
+   * @default 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
+   */
+  userAgent?: string;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
+   */
+  viewport?: {
+    deviceScaleFactor?: number;
+    hasTouch?: boolean;
+    height: number;
+    isLandscape?: boolean;
+    isMobile?: boolean;
+    width: number;
+  };
+  /**
+   * Wait for the selector to appear in page. Check [options](https://pptr.dev/api/puppeteer.page.waitforselector).
+   */
+  waitForSelector?: {
+    hidden?: true;
+    selector: string;
+    /**
+     * @maximum 60000
+     */
+    timeout?: number;
+    visible?: true;
+  };
+  /**
+   * Waits for a specified timeout before continuing.
+   *
+   * @maximum 60000
+   */
+  waitForTimeout?: number;
+};
+
+export type BrapiPostScreenshotVariables = {
+  body?: BrapiPostScreenshotRequestBody;
+  pathParams: BrapiPostScreenshotPathParams;
+  queryParams?: BrapiPostScreenshotQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Takes a screenshot of a webpage from provided URL or HTML. Control page loading with `goToOptions` and `waitFor*` options. Customize screenshots with `viewport`, `fullPage`, `clip` and others.
+ */
+export const brapiPostScreenshot = (variables: BrapiPostScreenshotVariables, signal?: AbortSignal) =>
+  fetch<
+    BrapiPostScreenshotResponse,
+    BrapiPostScreenshotError,
+    BrapiPostScreenshotRequestBody,
+    {},
+    BrapiPostScreenshotQueryParams,
+    BrapiPostScreenshotPathParams
+  >({ url: '/accounts/{accountId}/browser-rendering/screenshot', method: 'post', ...variables, signal });
+
+export type BrapiPostSnapshotPathParams = {
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type BrapiPostSnapshotQueryParams = {
+  /**
+   * Cache TTL default is 5s. Set to 0 to disable.
+   *
+   * @default 5
+   * @maximum 86400
+   */
+  cacheTTL?: number;
+};
+
+export type BrapiPostSnapshotError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+  | {
+      status: 500;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+>;
+
+export type BrapiPostSnapshotResponse = {
+  errors?: {
+    /**
+     * Error code
+     */
+    code: number;
+    /**
+     * Error Message
+     */
+    message: string;
+  }[];
+  result?: {
+    /**
+     * HTML content
+     */
+    content: string;
+    /**
+     * Base64 encoded image
+     */
+    screenshot: string;
+  };
+  /**
+   * Response status
+   */
+  status: boolean;
+};
+
+export type BrapiPostSnapshotRequestBody = {
+  /**
+   * Adds a `<script>` tag into the page with the desired URL or content.
+   */
+  addScriptTag?: {
+    content?: string;
+    id?: string;
+    type?: string;
+    url?: string;
+  }[];
+  /**
+   * Adds a `<link rel="stylesheet">` tag into the page with the desired URL or a `<style type="text/css">` tag with the content.
+   */
+  addStyleTag?: {
+    content?: string;
+    url?: string;
+  }[];
+  /**
+   * Only allow requests that match the provided regex patterns, eg. '/^.*\.(css)'.
+   */
+  allowRequestPattern?: string[];
+  /**
+   * Only allow requests that match the provided resource types, eg. 'image' or 'script'.
+   */
+  allowResourceTypes?: (
+    | 'document'
+    | 'stylesheet'
+    | 'image'
+    | 'media'
+    | 'font'
+    | 'script'
+    | 'texttrack'
+    | 'xhr'
+    | 'fetch'
+    | 'prefetch'
+    | 'eventsource'
+    | 'websocket'
+    | 'manifest'
+    | 'signedexchange'
+    | 'ping'
+    | 'cspviolationreport'
+    | 'preflight'
+    | 'other'
+  )[];
+  /**
+   * Provide credentials for HTTP authentication.
+   */
+  authenticate?: {
+    /**
+     * @minLength 1
+     */
+    password: string;
+    /**
+     * @minLength 1
+     */
+    username: string;
+  };
+  /**
+   * Attempt to proceed when 'awaited' events fail or timeout.
+   */
+  bestAttempt?: boolean;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.page.setcookie).
+   */
+  cookies?: {
+    domain?: string;
+    expires?: number;
+    httpOnly?: boolean;
+    name: string;
+    partitionKey?: string;
+    path?: string;
+    priority?: 'Low' | 'Medium' | 'High';
+    sameParty?: boolean;
+    sameSite?: 'Strict' | 'Lax' | 'None';
+    secure?: boolean;
+    sourcePort?: number;
+    sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
+    url?: string;
+    value: string;
+  }[];
+  emulateMediaType?: string;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.gotooptions).
+   *
+   * @default {"timeout":30000,"waitUntil":"domcontentloaded"}
+   */
+  gotoOptions?: {
+    referer?: string;
+    referrerPolicy?: string;
+    /**
+     * @default 30000
+     * @maximum 60000
+     */
+    timeout?: number;
+    /**
+     * @default domcontentloaded
+     */
+    waitUntil?:
+      | 'load'
+      | 'domcontentloaded'
+      | 'networkidle0'
+      | 'networkidle2'
+      | ('load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2')[];
+  };
+  /**
+   * Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either `html` or `url` must be set.
+   *
+   * @minLength 1
+   */
+  html?: string;
+  /**
+   * Block undesired requests that match the provided regex patterns, eg. '/^.*\.(css)'.
+   */
+  rejectRequestPattern?: string[];
+  /**
+   * Block undesired requests that match the provided resource types, eg. 'image' or 'script'.
+   */
+  rejectResourceTypes?: (
+    | 'document'
+    | 'stylesheet'
+    | 'image'
+    | 'media'
+    | 'font'
+    | 'script'
+    | 'texttrack'
+    | 'xhr'
+    | 'fetch'
+    | 'prefetch'
+    | 'eventsource'
+    | 'websocket'
+    | 'manifest'
+    | 'signedexchange'
+    | 'ping'
+    | 'cspviolationreport'
+    | 'preflight'
+    | 'other'
+  )[];
+  setExtraHTTPHeaders?: {
+    [key: string]: string;
+  };
+  setJavaScriptEnabled?: boolean;
+  /**
+   * URL to navigate to, eg. `https://example.com`.
+   *
+   * @format uri
+   */
+  url?: string;
+  /**
+   * @default 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
+   */
+  userAgent?: string;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
+   */
+  viewport?: {
+    deviceScaleFactor?: number;
+    hasTouch?: boolean;
+    height: number;
+    isLandscape?: boolean;
+    isMobile?: boolean;
+    width: number;
+  };
+  /**
+   * Wait for the selector to appear in page. Check [options](https://pptr.dev/api/puppeteer.page.waitforselector).
+   */
+  waitForSelector?: {
+    hidden?: true;
+    selector: string;
+    /**
+     * @maximum 60000
+     */
+    timeout?: number;
+    visible?: true;
+  };
+  /**
+   * Waits for a specified timeout before continuing.
+   *
+   * @maximum 60000
+   */
+  waitForTimeout?: number;
+};
+
+export type BrapiPostSnapshotVariables = {
+  body?: BrapiPostSnapshotRequestBody;
+  pathParams: BrapiPostSnapshotPathParams;
+  queryParams?: BrapiPostSnapshotQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Returns the page's HTML content and screenshot. Control page loading with `goToOptions` and `waitFor*` options. Customize screenshots with `viewport`, `fullPage`, `clip` and others.
+ */
+export const brapiPostSnapshot = (variables: BrapiPostSnapshotVariables, signal?: AbortSignal) =>
+  fetch<
+    BrapiPostSnapshotResponse,
+    BrapiPostSnapshotError,
+    BrapiPostSnapshotRequestBody,
+    {},
+    BrapiPostSnapshotQueryParams,
+    BrapiPostSnapshotPathParams
+  >({ url: '/accounts/{accountId}/browser-rendering/snapshot', method: 'post', ...variables, signal });
+
 export type CloudforceOneRequestListPathParams = {
   accountIdentifier: Schemas.CloudforceOneRequestsIdentifier;
 };
@@ -56766,6 +58214,35 @@ export const magicNetworkMonitoringRulesUpdateAdvertisementForRule = (
     {},
     MagicNetworkMonitoringRulesUpdateAdvertisementForRulePathParams
   >({ url: '/accounts/{accountId}/mnm/rules/{ruleId}/advertisement', method: 'patch', ...variables, signal });
+
+export type MagicNetworkMonitoringVpcFlowsGenerateAuthenticationTokenPathParams = {
+  accountId: Schemas.MagicVisibilityMnmAccountIdentifier;
+};
+
+export type MagicNetworkMonitoringVpcFlowsGenerateAuthenticationTokenError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.MagicVisibilityMnmMnmVpcFlowsSingleResponse & Schemas.MagicVisibilityMnmApiResponseCommonFailure;
+}>;
+
+export type MagicNetworkMonitoringVpcFlowsGenerateAuthenticationTokenVariables = {
+  pathParams: MagicNetworkMonitoringVpcFlowsGenerateAuthenticationTokenPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Generate authentication token for VPC flow logs export.
+ */
+export const magicNetworkMonitoringVpcFlowsGenerateAuthenticationToken = (
+  variables: MagicNetworkMonitoringVpcFlowsGenerateAuthenticationTokenVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.MagicVisibilityMnmMnmVpcFlowsSingleResponse,
+    MagicNetworkMonitoringVpcFlowsGenerateAuthenticationTokenError,
+    undefined,
+    {},
+    {},
+    MagicNetworkMonitoringVpcFlowsGenerateAuthenticationTokenPathParams
+  >({ url: '/accounts/{accountId}/mnm/vpc-flows/token', method: 'post', ...variables, signal });
 
 export type MTlsCertificateManagementListMTlsCertificatesPathParams = {
   accountId: Schemas.TlsCertificatesAndHostnamesIdentifier;
@@ -124952,6 +126429,7 @@ export const sslDetectorAutomaticModePatchEnrollment = (
 
 export const operationsByTag = {
   accounts: { accountsListAccounts, accountCreation, accountDeletion, accountsAccountDetails, accountsUpdateAccount },
+  brapi: { brapiPostContent, brapiPostPdf, brapiPostScrape, brapiPostScreenshot, brapiPostSnapshot },
   requestForInformationRFI: {
     cloudforceOneRequestList,
     cloudforceOneRequestConstants,
@@ -125892,6 +127370,7 @@ export const operationsByTag = {
     magicNetworkMonitoringRulesUpdateRule,
     magicNetworkMonitoringRulesUpdateAdvertisementForRule
   },
+  magicNetworkMonitoringVPCFlowLogs: { magicNetworkMonitoringVpcFlowsGenerateAuthenticationToken },
   mTLSCertificateManagement: {
     mTlsCertificateManagementListMTlsCertificates,
     mTlsCertificateManagementUploadMTlsCertificate,
