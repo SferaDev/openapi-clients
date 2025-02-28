@@ -21462,6 +21462,7 @@ export type IamZipcode = string | null;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type ImagesAccountIdentifier = string;
 
@@ -21478,6 +21479,7 @@ export type ImagesApiResponseCollectionV2 = {
    * Whether the API call was successful
    *
    * @example true
+   * @x-auditable true
    */
   success: true;
 };
@@ -21490,6 +21492,7 @@ export type ImagesApiResponseCommon = {
    * Whether the API call was successful
    *
    * @example true
+   * @x-auditable true
    */
   success: true;
 };
@@ -21506,6 +21509,7 @@ export type ImagesApiResponseCommonFailure = {
    * Whether the API call was successful
    *
    * @example false
+   * @x-auditable true
    */
   success: false;
 };
@@ -21518,6 +21522,7 @@ export type ImagesApiResponseSingle = {
    * Whether the API call was successful
    *
    * @example true
+   * @x-auditable true
    */
   success: true;
 };
@@ -21543,6 +21548,7 @@ export type ImagesImageBasicUpload = {
    * An image binary data. Only needed when type is uploading a file.
    *
    * @format binary
+   * @x-auditable true
    */
   file?: void;
   /**
@@ -21554,12 +21560,14 @@ export type ImagesImageBasicUpload = {
    *
    * @default false
    * @example true
+   * @x-auditable true
    */
   requireSignedURLs?: boolean;
   /**
    * A URL to fetch an image from origin. Only needed when type is uploading from a URL.
    *
    * @example https://example.com/path/to/logo.png
+   * @x-auditable true
    */
   url?: string;
 };
@@ -21571,6 +21579,7 @@ export type ImagesImageDirectUploadRequestV2 = {
    * @default Now + 30 minutes
    * @example 2021-01-02T02:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   expiry?: string;
   /**
@@ -21578,6 +21587,7 @@ export type ImagesImageDirectUploadRequestV2 = {
    *
    * @example this/is/my-customid
    * @maxLength 1024
+   * @x-auditable true
    */
   id?: string;
   /**
@@ -21589,6 +21599,7 @@ export type ImagesImageDirectUploadRequestV2 = {
    *
    * @default false
    * @example true
+   * @x-auditable true
    */
   requireSignedURLs?: boolean;
 };
@@ -21600,12 +21611,14 @@ export type ImagesImageDirectUploadResponseV2 = ImagesApiResponseSingle & {
      *
      * @example e22e9e6b-c02b-42fd-c405-6c32af5fe600
      * @maxLength 32
+     * @x-auditable true
      */
     id?: string;
     /**
      * The URL the unauthenticated upload can be performed to using a single HTTP POST (multipart/form-data) request.
      *
      * @example https://upload.imagedelivery.net/FxUufywByo0m2v3xhKSiU8/e22e9e6b-c02b-42fd-c405-6c32af5fe600
+     * @x-auditable true
      */
     uploadURL?: string;
   };
@@ -21616,6 +21629,7 @@ export type ImagesImageDirectUploadResponseV2 = ImagesApiResponseSingle & {
  *
  * @example logo.png
  * @maxLength 255
+ * @x-auditable true
  */
 export type ImagesImageFilename = string;
 
@@ -21624,6 +21638,7 @@ export type ImagesImageFilename = string;
  *
  * @example https://imagedelivery.net/MTt4OTd0b0w5aj/107b9558-dd06-4bbd-5fef-9c2c16bb7900/hero
  * @format uri
+ * @x-auditable true
  */
 export type ImagesImageHeroUrl = string;
 
@@ -21632,6 +21647,7 @@ export type ImagesImageHeroUrl = string;
  *
  * @example 107b9558-dd06-4bbd-5fef-9c2c16bb7900
  * @maxLength 32
+ * @x-auditable true
  */
 export type ImagesImageIdentifier = string;
 
@@ -21639,6 +21655,7 @@ export type ImagesImageIdentifier = string;
  * Key name.
  *
  * @example default
+ * @x-auditable true
  */
 export type ImagesImageKeyName = string;
 
@@ -21650,6 +21667,7 @@ export type ImagesImageKeyResponseCollection = {
    * Whether the API call was successful
    *
    * @example true
+   * @x-auditable true
    */
   success: true;
 };
@@ -21658,6 +21676,7 @@ export type ImagesImageKeyResponseCollection = {
  * Key value.
  *
  * @example Oix0bbNaT8Rge9PuyxUBrjI6zrgnsyJ5=
+ * @x-auditable true
  */
 export type ImagesImageKeyValue = string;
 
@@ -21682,6 +21701,7 @@ export type ImagesImageMetadata = Record<string, any>;
  *
  * @example https://imagedelivery.net/MTt4OTd0b0w5aj/107b9558-dd06-4bbd-5fef-9c2c16bb7900/original
  * @format uri
+ * @x-auditable true
  */
 export type ImagesImageOriginalUrl = string;
 
@@ -21694,6 +21714,7 @@ export type ImagesImagePatchRequest = {
    * Indicates whether the image can be accessed using only its UID. If set to `true`, a signed token needs to be generated with a signing key to view the image. Returns a new UID on a change. No change if not specified.
    *
    * @example true
+   * @x-auditable true
    */
   requireSignedURLs?: boolean;
 };
@@ -21703,6 +21724,7 @@ export type ImagesImagePatchRequest = {
  *
  * @default false
  * @example true
+ * @x-auditable true
  */
 export type ImagesImageRequireSignedURLs = boolean;
 
@@ -21720,6 +21742,7 @@ export type ImagesImageResponseSingle = ImagesApiResponseSingle & {
  *
  * @example https://imagedelivery.net/MTt4OTd0b0w5aj/107b9558-dd06-4bbd-5fef-9c2c16bb7900/thumbnail
  * @format uri
+ * @x-auditable true
  */
 export type ImagesImageThumbnailUrl = string;
 
@@ -21728,6 +21751,7 @@ export type ImagesImageThumbnailUrl = string;
  *
  * @example 2014-01-02T02:20:00.123Z
  * @format date-time
+ * @x-auditable true
  */
 export type ImagesImageUploaded = string;
 
@@ -21741,6 +21765,7 @@ export type ImagesImageVariantDefinition = {
  * The fit property describes how the width and height dimensions should be interpreted.
  *
  * @example scale-down
+ * @x-auditable true
  */
 export type ImagesImageVariantFit = 'scale-down' | 'contain' | 'cover' | 'crop' | 'pad';
 
@@ -21749,6 +21774,7 @@ export type ImagesImageVariantFit = 'scale-down' | 'contain' | 'cover' | 'crop' 
  *
  * @example 768
  * @minimum 1
+ * @x-auditable true
  */
 export type ImagesImageVariantHeight = number;
 
@@ -21756,6 +21782,7 @@ export type ImagesImageVariantHeight = number;
  * @example hero
  * @maxLength 99
  * @pattern ^[a-zA-Z0-9]$
+ * @x-auditable true
  */
 export type ImagesImageVariantIdentifier = string;
 
@@ -21767,6 +21794,7 @@ export type ImagesImageVariantListResponse = {
    * Whether the API call was successful
    *
    * @example true
+   * @x-auditable true
    */
   success: true;
 };
@@ -21776,6 +21804,7 @@ export type ImagesImageVariantListResponse = {
  *
  * @default false
  * @example true
+ * @x-auditable true
  */
 export type ImagesImageVariantNeverRequireSignedURLs = boolean;
 
@@ -21810,6 +21839,7 @@ export type ImagesImageVariantResponse = {
  * What EXIF data should be preserved in the output image.
  *
  * @example none
+ * @x-auditable true
  */
 export type ImagesImageVariantSchemasMetadata = 'keep' | 'copyright' | 'none';
 
@@ -21822,6 +21852,7 @@ export type ImagesImageVariantSimpleResponse = ImagesApiResponseSingle & {
  *
  * @example 1366
  * @minimum 1
+ * @x-auditable true
  */
 export type ImagesImageVariantWidth = number;
 
@@ -21843,6 +21874,7 @@ export type ImagesImageVariantsResponse = {
  *
  * @example iD0bxlWFSVUWsDHbzIqvDkgBW4otifAAuGXLz1n8BQA
  * @maxLength 32
+ * @x-auditable true
  */
 export type ImagesImagesListContinuationToken = string | null;
 
@@ -21859,6 +21891,7 @@ export type ImagesImagesListResponse = {
    * Whether the API call was successful
    *
    * @example true
+   * @x-auditable true
    */
   success: true;
 };
@@ -21877,6 +21910,7 @@ export type ImagesImagesStats = {
  * Cloudflare Images allowed usage.
  *
  * @example 100000
+ * @x-auditable true
  */
 export type ImagesImagesStatsAllowed = number;
 
@@ -21889,6 +21923,7 @@ export type ImagesImagesStatsCount = {
  * Cloudflare Images current usage.
  *
  * @example 1000
+ * @x-auditable true
  */
 export type ImagesImagesStatsCurrent = number;
 
@@ -21899,8 +21934,12 @@ export type ImagesImagesStatsResponse = ImagesApiResponseSingle & {
 export type ImagesMessages = {
   /**
    * @minimum 1000
+   * @x-auditable true
    */
   code: number;
+  /**
+   * @x-auditable true
+   */
   message: string;
 }[];
 
@@ -21908,6 +21947,7 @@ export type ImagesMessages = {
  * @example someKey
  * @maxLength 20
  * @pattern ^[a-zA-Z0-9]$
+ * @x-auditable true
  */
 export type ImagesSigningKeyIdentifier = string;
 
