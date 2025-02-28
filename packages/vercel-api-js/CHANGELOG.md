@@ -1,5 +1,13 @@
 # vercel-api-js
 
+## 0.21.2
+
+### Patch Changes
+
+- 1aa4dec: Refactor managedRules structure in GetFirewallConfigResponse and PutFirewallConfigResponse
+- f0f0865: Add projectRollingRelease field to various project endpoints
+- 5169182: Add 'action' field to managedRules in PutFirewallConfigRequestBody
+
 ## 0.21.1
 
 ### Patch Changes
