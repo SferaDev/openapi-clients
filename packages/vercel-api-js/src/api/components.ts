@@ -18072,6 +18072,7 @@ export type PutFirewallConfigResponse = {
     managedRules?: {
       [key: string]: {
         active: boolean;
+        action?: 'challenge' | 'deny' | 'log';
         updatedAt?: string;
         userId?: string;
         username?: string;
@@ -18083,8 +18084,15 @@ export type PutFirewallConfigResponse = {
 export type PutFirewallConfigRequestBody = {
   firewallEnabled: boolean;
   managedRules?: {
-    owasp: {
+    [key: string]: void | {
       active: boolean;
+      action?: 'log' | 'challenge' | 'deny';
+      ruleGroups?: {
+        [key: string]: {
+          active?: boolean;
+          action?: 'log' | 'challenge' | 'deny';
+        };
+      };
     };
   };
   crs?: {
@@ -18144,7 +18152,13 @@ export type PutFirewallConfigRequestBody = {
      */
     description?: string;
     active: boolean;
+    /**
+     * @maxItems 25
+     */
     conditionGroup: {
+      /**
+       * @maxItems 65
+       */
       conditions: {
         type:
           | 'cookie'
@@ -18255,7 +18269,13 @@ export type UpdateFirewallConfigVariables = {
            */
           description?: string;
           active: boolean;
+          /**
+           * @maxItems 25
+           */
           conditionGroup: {
+            /**
+             * @maxItems 65
+             */
             conditions: {
               type:
                 | 'host'
@@ -18333,7 +18353,13 @@ export type UpdateFirewallConfigVariables = {
            */
           description?: string;
           active: boolean;
+          /**
+           * @maxItems 25
+           */
           conditionGroup: {
+            /**
+             * @maxItems 65
+             */
             conditions: {
               type:
                 | 'host'
@@ -18448,9 +18474,20 @@ export type UpdateFirewallConfigVariables = {
       }
     | {
         action: string;
-        id: 'owasp';
+        id: string;
         value: {
+          action?: 'log' | 'challenge' | 'deny';
           active: boolean;
+        };
+      }
+    | {
+        action: string;
+        id: string;
+        value: {
+          [key: string]: {
+            active: boolean;
+            action?: 'log' | 'challenge' | 'deny';
+          };
         };
       };
   queryParams: UpdateFirewallConfigQueryParams;
@@ -18481,7 +18518,13 @@ export const updateFirewallConfig = (variables: UpdateFirewallConfigVariables, s
            */
           description?: string;
           active: boolean;
+          /**
+           * @maxItems 25
+           */
           conditionGroup: {
+            /**
+             * @maxItems 65
+             */
             conditions: {
               type:
                 | 'host'
@@ -18559,7 +18602,13 @@ export const updateFirewallConfig = (variables: UpdateFirewallConfigVariables, s
            */
           description?: string;
           active: boolean;
+          /**
+           * @maxItems 25
+           */
           conditionGroup: {
+            /**
+             * @maxItems 65
+             */
             conditions: {
               type:
                 | 'host'
@@ -18674,9 +18723,20 @@ export const updateFirewallConfig = (variables: UpdateFirewallConfigVariables, s
       }
     | {
         action: string;
-        id: 'owasp';
+        id: string;
         value: {
+          action?: 'log' | 'challenge' | 'deny';
           active: boolean;
+        };
+      }
+    | {
+        action: string;
+        id: string;
+        value: {
+          [key: string]: {
+            active: boolean;
+            action?: 'log' | 'challenge' | 'deny';
+          };
         };
       },
     {},
@@ -18817,6 +18877,7 @@ export type GetFirewallConfigResponse = {
   managedRules?: {
     [key: string]: {
       active: boolean;
+      action?: 'challenge' | 'deny' | 'log';
       updatedAt?: string;
       userId?: string;
       username?: string;
@@ -18956,8 +19017,16 @@ export const getBypassIp = (variables: GetBypassIpVariables, signal?: AbortSigna
           Id: string;
           Domain: string;
           Ip: string;
-          ProjectId: string;
-          IsProjectRule: boolean;
+          Action?: 'block' | 'bypass';
+          ProjectId?: string;
+          IsProjectRule?: boolean;
+          Note?: string;
+          CreatedAt: string;
+          ActorId?: string;
+          UpdatedAt: string;
+          UpdatedAtHour: string;
+          DeletedAt?: string;
+          ExpiresAt?: number;
         }[];
         pagination: void | null;
       }
