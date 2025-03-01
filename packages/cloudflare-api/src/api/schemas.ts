@@ -47092,7 +47092,12 @@ export type WorkersBindingItem =
 
 export type WorkersBindingKindAi = {
   name: WorkersBindingName;
-  type: WorkersBindingType;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example ai
+   */
+  type: WorkersBindingType & 'ai';
 };
 
 export type WorkersBindingKindAnalyticsEngine = {
@@ -47103,17 +47108,32 @@ export type WorkersBindingKindAnalyticsEngine = {
    */
   dataset: string;
   name: WorkersBindingName;
-  type: WorkersBindingType;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example analytics_engine
+   */
+  type: WorkersBindingType & 'analytics_engine';
 };
 
 export type WorkersBindingKindAssets = {
   name: WorkersBindingName;
-  type: WorkersBindingType;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example assets
+   */
+  type: WorkersBindingType & 'assets';
 };
 
 export type WorkersBindingKindBrowserRendering = {
   name: WorkersBindingName;
-  type: WorkersBindingType;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example browser_rendering
+   */
+  type: WorkersBindingType & 'browser_rendering';
 };
 
 export type WorkersBindingKindD1 = {
@@ -47124,7 +47144,12 @@ export type WorkersBindingKindD1 = {
    */
   id: string;
   name: WorkersBindingName;
-  type: WorkersBindingType;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example d1
+   */
+  type: WorkersBindingType & 'd1';
 };
 
 export type WorkersBindingKindDispatchNamespace = {
@@ -47157,7 +47182,12 @@ export type WorkersBindingKindDispatchNamespace = {
       service?: string;
     };
   };
-  type: WorkersBindingType;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example dispatch_namespace
+   */
+  type: WorkersBindingType & 'dispatch_namespace';
 };
 
 export type WorkersBindingKindDurableObjectNamespace = {
@@ -47181,7 +47211,12 @@ export type WorkersBindingKindDurableObjectNamespace = {
    * @example my-other-worker
    */
   script_name?: string;
-  type: WorkersBindingType;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example durable_object_namespace
+   */
+  type: WorkersBindingType & 'durable_object_namespace';
 };
 
 export type WorkersBindingKindHyperdrive = {
@@ -47192,7 +47227,12 @@ export type WorkersBindingKindHyperdrive = {
    */
   id: string;
   name: WorkersBindingName;
-  type: WorkersBindingType;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example hyperdrive
+   */
+  type: WorkersBindingType & 'hyperdrive';
 };
 
 export type WorkersBindingKindJson = {
@@ -47203,13 +47243,23 @@ export type WorkersBindingKindJson = {
    */
   json: void;
   name: WorkersBindingName;
-  type: WorkersBindingType;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example json
+   */
+  type: WorkersBindingType & 'json';
 };
 
 export type WorkersBindingKindKvNamespace = {
   name: WorkersBindingName;
   namespace_id: WorkersNamespaceIdentifier;
-  type: WorkersBindingType;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example kv_namespace
+   */
+  type: WorkersBindingType & 'kv_namespace';
 };
 
 export type WorkersBindingKindMtlsCertificate = {
@@ -47220,7 +47270,12 @@ export type WorkersBindingKindMtlsCertificate = {
    */
   certificate_id: string;
   name: WorkersBindingName;
-  type: WorkersBindingType;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example mtls_certificate
+   */
+  type: WorkersBindingType & 'mtls_certificate';
 };
 
 export type WorkersBindingKindPlainText = {
@@ -47231,7 +47286,12 @@ export type WorkersBindingKindPlainText = {
    * @example Hello, world!
    */
   text: string;
-  type: WorkersBindingType;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example plain_text
+   */
+  type: WorkersBindingType & 'plain_text';
 };
 
 export type WorkersBindingKindQueue = {
@@ -47242,7 +47302,12 @@ export type WorkersBindingKindQueue = {
    * @example my-queue
    */
   queue_name: string;
-  type: WorkersBindingType;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example queue
+   */
+  type: WorkersBindingType & 'queue';
 };
 
 export type WorkersBindingKindR2Bucket = {
@@ -47253,7 +47318,12 @@ export type WorkersBindingKindR2Bucket = {
    */
   bucket_name: string;
   name: WorkersBindingName;
-  type: WorkersBindingType;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example r2_bucket
+   */
+  type: WorkersBindingType & 'r2_bucket';
 };
 
 export type WorkersBindingKindSecretText = {
@@ -47264,7 +47334,12 @@ export type WorkersBindingKindSecretText = {
    * @example My secret.
    */
   text: string;
-  type: WorkersBindingType;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example secret_text
+   */
+  type: WorkersBindingType & 'secret_text';
 };
 
 export type WorkersBindingKindService = {
@@ -47281,7 +47356,12 @@ export type WorkersBindingKindService = {
    * @example my-worker
    */
   service: string;
-  type: WorkersBindingType;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example service
+   */
+  type: WorkersBindingType & 'service';
 };
 
 export type WorkersBindingKindTailConsumer = {
@@ -47292,7 +47372,12 @@ export type WorkersBindingKindTailConsumer = {
    * @example my-worker
    */
   service: string;
-  type: WorkersBindingType;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example tail_consumer
+   */
+  type: WorkersBindingType & 'tail_consumer';
 };
 
 export type WorkersBindingKindVectorize = {
@@ -47303,12 +47388,22 @@ export type WorkersBindingKindVectorize = {
    */
   index_name: string;
   name: WorkersBindingName;
-  type: WorkersBindingType;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example vectorize
+   */
+  type: WorkersBindingType & 'vectorize';
 };
 
 export type WorkersBindingKindVersionMetadata = {
   name: WorkersBindingName;
-  type: WorkersBindingType;
+  /**
+   * The kind of resource that the binding provides.
+   *
+   * @example version_metadata
+   */
+  type: WorkersBindingType & 'version_metadata';
 };
 
 /**
@@ -47321,7 +47416,26 @@ export type WorkersBindingName = string;
 /**
  * The kind of resource that the binding provides.
  */
-export type WorkersBindingType = string;
+export type WorkersBindingType =
+  | 'ai'
+  | 'analytics_engine'
+  | 'assets'
+  | 'browser_rendering'
+  | 'd1'
+  | 'dispatch_namespace'
+  | 'durable_object_namespace'
+  | 'hyperdrive'
+  | 'json'
+  | 'kv_namespace'
+  | 'mtls_certificate'
+  | 'plain_text'
+  | 'queue'
+  | 'r2_bucket'
+  | 'secret_text'
+  | 'service'
+  | 'tail_consumer'
+  | 'vectorize'
+  | 'version_metadata';
 
 /**
  * List of bindings attached to a Worker. You can find more about bindings on our docs: https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.

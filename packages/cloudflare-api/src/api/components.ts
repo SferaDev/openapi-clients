@@ -23595,6 +23595,116 @@ export const workersAiPostRunCfMetaLlama3370bInstructFp8Fast = (
     signal
   });
 
+export type WorkersAiPostRunCfMetaLlamaGuard38bPathParams = {
+  /**
+   * @example 023e105f4ecef8ad9ca31a8372d0c353
+   */
+  accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaLlamaGuard38bError = Fetcher.ErrorWrapper<undefined>;
+
+export type WorkersAiPostRunCfMetaLlamaGuard38bResponse = {
+  result?: {
+    response?:
+      | string
+      | {
+          /**
+           * A list of what hazard categories predicted for the conversation, if the conversation is deemed unsafe.
+           */
+          categories?: string[];
+          /**
+           * Whether the conversation is safe or not.
+           */
+          safe?: boolean;
+        };
+    /**
+     * Usage statistics for the inference request
+     */
+    usage?: {
+      /**
+       * Total number of tokens in output
+       *
+       * @default 0
+       */
+      completion_tokens?: number;
+      /**
+       * Total number of tokens in input
+       *
+       * @default 0
+       */
+      prompt_tokens?: number;
+      /**
+       * Total number of input and output tokens
+       *
+       * @default 0
+       */
+      total_tokens?: number;
+    };
+  };
+  /**
+   * @default true
+   */
+  success?: boolean;
+};
+
+export type WorkersAiPostRunCfMetaLlamaGuard38bRequestBody = {
+  /**
+   * The maximum number of tokens to generate in the response.
+   *
+   * @default 256
+   */
+  max_tokens?: number;
+  /**
+   * An array of message objects representing the conversation history.
+   */
+  messages: {
+    /**
+     * The content of the message as a string.
+     */
+    content: string;
+    /**
+     * The role of the message sender must alternate between 'user' and 'assistant'.
+     */
+    role: 'user' | 'assistant';
+  }[];
+  /**
+   * Dictate the output format of the generated response.
+   */
+  response_format?: {
+    /**
+     * Set to json_object to process and output generated text as JSON.
+     */
+    type?: string;
+  };
+  /**
+   * Controls the randomness of the output; higher values produce more random results.
+   *
+   * @default 0.6
+   * @maximum 5
+   * @minimum 0
+   */
+  temperature?: number;
+};
+
+export type WorkersAiPostRunCfMetaLlamaGuard38bVariables = {
+  body: WorkersAiPostRunCfMetaLlamaGuard38bRequestBody;
+  pathParams: WorkersAiPostRunCfMetaLlamaGuard38bPathParams;
+} & FetcherExtraProps;
+
+export const workersAiPostRunCfMetaLlamaGuard38b = (
+  variables: WorkersAiPostRunCfMetaLlamaGuard38bVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    WorkersAiPostRunCfMetaLlamaGuard38bResponse,
+    WorkersAiPostRunCfMetaLlamaGuard38bError,
+    WorkersAiPostRunCfMetaLlamaGuard38bRequestBody,
+    {},
+    {},
+    WorkersAiPostRunCfMetaLlamaGuard38bPathParams
+  >({ url: '/accounts/{accountId}/ai/run/@cf/meta/llama-guard-3-8b', method: 'post', ...variables, signal });
+
 export type WorkersAiPostRunCfMetaM2m10012bPathParams = {
   /**
    * @example 023e105f4ecef8ad9ca31a8372d0c353
@@ -126717,6 +126827,7 @@ export const operationsByTag = {
     workersAiPostRunCfMetaLlama321bInstruct,
     workersAiPostRunCfMetaLlama323bInstruct,
     workersAiPostRunCfMetaLlama3370bInstructFp8Fast,
+    workersAiPostRunCfMetaLlamaGuard38b,
     workersAiPostRunCfMicrosoftPhi2,
     workersAiPostRunCfMistralMistral7bInstructV01,
     workersAiPostRunCfMistralMistral7bInstructV02Lora,

@@ -217,6 +217,7 @@ import {
   workersAiPostRunCfMetaLlama321bInstruct,
   workersAiPostRunCfMetaLlama323bInstruct,
   workersAiPostRunCfMetaLlama3370bInstructFp8Fast,
+  workersAiPostRunCfMetaLlamaGuard38b,
   workersAiPostRunCfMetaM2m10012b,
   workersAiPostRunCfMicrosoftPhi2,
   workersAiPostRunCfMicrosoftResnet50,
@@ -2078,6 +2079,7 @@ export const operationsByPath = {
   'POST /accounts/{account_id}/ai/run/@cf/meta/llama-3.2-3b-instruct': workersAiPostRunCfMetaLlama323bInstruct,
   'POST /accounts/{account_id}/ai/run/@cf/meta/llama-3.3-70b-instruct-fp8-fast':
     workersAiPostRunCfMetaLlama3370bInstructFp8Fast,
+  'POST /accounts/{account_id}/ai/run/@cf/meta/llama-guard-3-8b': workersAiPostRunCfMetaLlamaGuard38b,
   'POST /accounts/{account_id}/ai/run/@cf/meta/m2m100-1.2b': workersAiPostRunCfMetaM2m10012b,
   'POST /accounts/{account_id}/ai/run/@cf/microsoft/phi-2': workersAiPostRunCfMicrosoftPhi2,
   'POST /accounts/{account_id}/ai/run/@cf/microsoft/resnet-50': workersAiPostRunCfMicrosoftResnet50,
