@@ -1,5 +1,12 @@
 # vercel-api-js
 
+## 0.21.3
+
+### Patch Changes
+
+- 5f3f515: Add new field 'gitProviderOptions' to UpdateProjectDataCacheResponse
+- 3d4776c: Add teamRoles and teamPermissions fields to ReadAccessGroupResponse, UpdateAccessGroupResponse, and CreateAccessGroupResponse types
+
 ## 0.21.2
 
 ### Patch Changes
