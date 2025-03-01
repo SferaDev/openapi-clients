@@ -2550,6 +2550,12 @@ export type UpdateProjectDataCacheResponse = {
      */
     onCommit: boolean;
   };
+  gitProviderOptions?: {
+    /**
+     * Whether the Vercel bot should automatically create GitHub deployments https://docs.github.com/en/rest/deployments/deployments#about-deployments NOTE: repository-dispatch events should be used instead
+     */
+    createDeployments: 'disabled' | 'enabled';
+  };
   paused?: boolean;
   concurrencyBucketName?: string;
   webAnalytics?: {
@@ -3759,10 +3765,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    createdAt?: number;
     id?: string;
-    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    createdAt?: number;
     entrypoint?: string | null;
+    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
     readyStateAt?: number;
     output: {
       path: string;
@@ -4051,7 +4057,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
             src?: string;
             dest?: string;
             status?: number;
@@ -4085,7 +4091,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         org: string;
@@ -4097,7 +4103,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         owner: string;
@@ -4109,7 +4115,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | null;
   flags?:
@@ -4587,9 +4593,9 @@ export type CancelDeploymentResponse = {
   lambdas?: {
     id?: string;
     createdAt?: number;
+    entrypoint?: string | null;
     readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
     readyStateAt?: number;
-    entrypoint?: string | null;
     output: {
       path: string;
       functionName: string;
@@ -4601,8 +4607,8 @@ export type CancelDeploymentResponse = {
   team?: {
     id: string;
     name: string;
-    slug: string;
     avatar?: string;
+    slug: string;
   };
   userAliases?: string[];
   previewCommentsEnabled?: boolean;
@@ -11507,6 +11513,12 @@ export type GetProjectsResponse = {
        */
       onCommit: boolean;
     };
+    gitProviderOptions?: {
+      /**
+       * Whether the Vercel bot should automatically create GitHub deployments https://docs.github.com/en/rest/deployments/deployments#about-deployments NOTE: repository-dispatch events should be used instead
+       */
+      createDeployments: 'disabled' | 'enabled';
+    };
     paused?: boolean;
     concurrencyBucketName?: string;
     webAnalytics?: {
@@ -12423,6 +12435,12 @@ export type CreateProjectResponse = {
      * Whether the Vercel bot should comment on commits
      */
     onCommit: boolean;
+  };
+  gitProviderOptions?: {
+    /**
+     * Whether the Vercel bot should automatically create GitHub deployments https://docs.github.com/en/rest/deployments/deployments#about-deployments NOTE: repository-dispatch events should be used instead
+     */
+    createDeployments: 'disabled' | 'enabled';
   };
   paused?: boolean;
   concurrencyBucketName?: string;
@@ -13522,6 +13540,12 @@ export type GetProjectResponse = {
      */
     onCommit: boolean;
   };
+  gitProviderOptions?: {
+    /**
+     * Whether the Vercel bot should automatically create GitHub deployments https://docs.github.com/en/rest/deployments/deployments#about-deployments NOTE: repository-dispatch events should be used instead
+     */
+    createDeployments: 'disabled' | 'enabled';
+  };
   paused?: boolean;
   concurrencyBucketName?: string;
   webAnalytics?: {
@@ -14446,6 +14470,12 @@ export type UpdateProjectResponse = {
      * Whether the Vercel bot should comment on commits
      */
     onCommit: boolean;
+  };
+  gitProviderOptions?: {
+    /**
+     * Whether the Vercel bot should automatically create GitHub deployments https://docs.github.com/en/rest/deployments/deployments#about-deployments NOTE: repository-dispatch events should be used instead
+     */
+    createDeployments: 'disabled' | 'enabled';
   };
   paused?: boolean;
   concurrencyBucketName?: string;
@@ -16052,354 +16082,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
     {},
     FilterProjectEnvsQueryParams,
     FilterProjectEnvsPathParams
-  >({ url: '/v9/projects/{idOrName}/env', method: 'get', ...variables, signal });
-
-export type GetProjectEnvPathParams = {
-  /**
-   * The unique project identifier or the project name
-   *
-   * @example prj_XLKmu1DyR1eY7zq8UgeRKbA7yVLA
-   */
-  idOrName: string;
-  /**
-   * The unique ID for the environment variable to get the decrypted value.
-   */
-  id: string;
-};
-
-export type GetProjectEnvQueryParams = {
-  /**
-   * The Team identifier to perform the request on behalf of.
-   */
-  teamId?: string;
-  /**
-   * The Team slug to perform the request on behalf of.
-   */
-  slug?: string;
-};
-
-export type GetProjectEnvError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetProjectEnvVariables = {
-  pathParams: GetProjectEnvPathParams;
-  queryParams?: GetProjectEnvQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieve the environment variable for a given project.
- */
-export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortSignal) =>
-  fetch<
-    | {
-        decrypted: boolean;
-        target?:
-          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
-          | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
-        /**
-         * This is used to identiy variables that have been migrated from type secret to sensitive.
-         */
-        sunsetSecretId?: string;
-        id?: string;
-        key: string;
-        configurationId?: string | null;
-        createdAt?: number;
-        updatedAt?: number;
-        createdBy?: string | null;
-        updatedBy?: string | null;
-        gitBranch?: string;
-        edgeConfigId?: string | null;
-        edgeConfigTokenId?: string | null;
-        contentHint?:
-          | {
-              type: 'redis-url';
-              storeId: string;
-            }
-          | {
-              type: 'redis-rest-api-url';
-              storeId: string;
-            }
-          | {
-              type: 'redis-rest-api-token';
-              storeId: string;
-            }
-          | {
-              type: 'redis-rest-api-read-only-token';
-              storeId: string;
-            }
-          | {
-              type: 'blob-read-write-token';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-url';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-url-non-pooling';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-prisma-url';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-user';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-host';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-password';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-database';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-url-no-ssl';
-              storeId: string;
-            }
-          | {
-              type: 'integration-store-secret';
-              storeId: string;
-              integrationId: string;
-              integrationProductId: string;
-              integrationConfigurationId: string;
-            }
-          | {
-              type: 'flags-connection-string';
-              projectId: string;
-            }
-          | null;
-        /**
-         * Similar to `contentHints`, but should not be exposed to the user.
-         */
-        internalContentHint?: {
-          type: 'flags-secret';
-          /**
-           * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
-           */
-          encryptedValue: string;
-        } | null;
-        comment?: string;
-        customEnvironmentIds?: string[];
-        vsmValue?: string;
-      }
-    | {
-        target?:
-          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
-          | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
-        /**
-         * This is used to identiy variables that have been migrated from type secret to sensitive.
-         */
-        sunsetSecretId?: string;
-        id?: string;
-        key: string;
-        value: string;
-        configurationId?: string | null;
-        createdAt?: number;
-        updatedAt?: number;
-        createdBy?: string | null;
-        updatedBy?: string | null;
-        gitBranch?: string;
-        edgeConfigId?: string | null;
-        edgeConfigTokenId?: string | null;
-        contentHint?:
-          | {
-              type: 'redis-url';
-              storeId: string;
-            }
-          | {
-              type: 'redis-rest-api-url';
-              storeId: string;
-            }
-          | {
-              type: 'redis-rest-api-token';
-              storeId: string;
-            }
-          | {
-              type: 'redis-rest-api-read-only-token';
-              storeId: string;
-            }
-          | {
-              type: 'blob-read-write-token';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-url';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-url-non-pooling';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-prisma-url';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-user';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-host';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-password';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-database';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-url-no-ssl';
-              storeId: string;
-            }
-          | {
-              type: 'integration-store-secret';
-              storeId: string;
-              integrationId: string;
-              integrationProductId: string;
-              integrationConfigurationId: string;
-            }
-          | {
-              type: 'flags-connection-string';
-              projectId: string;
-            }
-          | null;
-        /**
-         * Similar to `contentHints`, but should not be exposed to the user.
-         */
-        internalContentHint?: {
-          type: 'flags-secret';
-          /**
-           * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
-           */
-          encryptedValue: string;
-        } | null;
-        /**
-         * Whether `value` and `vsmValue` are decrypted.
-         */
-        decrypted?: boolean;
-        comment?: string;
-        customEnvironmentIds?: string[];
-        vsmValue?: string;
-      }
-    | {
-        target?:
-          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
-          | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
-        /**
-         * This is used to identiy variables that have been migrated from type secret to sensitive.
-         */
-        sunsetSecretId?: string;
-        id?: string;
-        key: string;
-        value: string;
-        configurationId?: string | null;
-        createdAt?: number;
-        updatedAt?: number;
-        createdBy?: string | null;
-        updatedBy?: string | null;
-        gitBranch?: string;
-        edgeConfigId?: string | null;
-        edgeConfigTokenId?: string | null;
-        contentHint?:
-          | {
-              type: 'redis-url';
-              storeId: string;
-            }
-          | {
-              type: 'redis-rest-api-url';
-              storeId: string;
-            }
-          | {
-              type: 'redis-rest-api-token';
-              storeId: string;
-            }
-          | {
-              type: 'redis-rest-api-read-only-token';
-              storeId: string;
-            }
-          | {
-              type: 'blob-read-write-token';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-url';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-url-non-pooling';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-prisma-url';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-user';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-host';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-password';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-database';
-              storeId: string;
-            }
-          | {
-              type: 'postgres-url-no-ssl';
-              storeId: string;
-            }
-          | {
-              type: 'integration-store-secret';
-              storeId: string;
-              integrationId: string;
-              integrationProductId: string;
-              integrationConfigurationId: string;
-            }
-          | {
-              type: 'flags-connection-string';
-              projectId: string;
-            }
-          | null;
-        /**
-         * Similar to `contentHints`, but should not be exposed to the user.
-         */
-        internalContentHint?: {
-          type: 'flags-secret';
-          /**
-           * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
-           */
-          encryptedValue: string;
-        } | null;
-        /**
-         * Whether `value` and `vsmValue` are decrypted.
-         */
-        decrypted?: boolean;
-        comment?: string;
-        customEnvironmentIds?: string[];
-      },
-    GetProjectEnvError,
-    undefined,
-    {},
-    GetProjectEnvQueryParams,
-    GetProjectEnvPathParams
-  >({ url: '/v1/projects/{idOrName}/env/{id}', method: 'get', ...variables, signal });
+  >({ url: '/v10/projects/{idOrName}/env', method: 'get', ...variables, signal });
 
 export type CreateProjectEnvPathParams = {
   /**
@@ -17035,6 +16718,353 @@ export const createProjectEnv = (variables: CreateProjectEnvVariables, signal?: 
     CreateProjectEnvQueryParams,
     CreateProjectEnvPathParams
   >({ url: '/v10/projects/{idOrName}/env', method: 'post', ...variables, signal });
+
+export type GetProjectEnvPathParams = {
+  /**
+   * The unique project identifier or the project name
+   *
+   * @example prj_XLKmu1DyR1eY7zq8UgeRKbA7yVLA
+   */
+  idOrName: string;
+  /**
+   * The unique ID for the environment variable to get the decrypted value.
+   */
+  id: string;
+};
+
+export type GetProjectEnvQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type GetProjectEnvError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetProjectEnvVariables = {
+  pathParams: GetProjectEnvPathParams;
+  queryParams?: GetProjectEnvQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieve the environment variable for a given project.
+ */
+export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortSignal) =>
+  fetch<
+    | {
+        decrypted: boolean;
+        target?:
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        /**
+         * This is used to identiy variables that have been migrated from type secret to sensitive.
+         */
+        sunsetSecretId?: string;
+        id?: string;
+        key: string;
+        configurationId?: string | null;
+        createdAt?: number;
+        updatedAt?: number;
+        createdBy?: string | null;
+        updatedBy?: string | null;
+        gitBranch?: string;
+        edgeConfigId?: string | null;
+        edgeConfigTokenId?: string | null;
+        contentHint?:
+          | {
+              type: 'redis-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-token';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-read-only-token';
+              storeId: string;
+            }
+          | {
+              type: 'blob-read-write-token';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-non-pooling';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-prisma-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-user';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-host';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-password';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-database';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-no-ssl';
+              storeId: string;
+            }
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
+            }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
+            }
+          | null;
+        /**
+         * Similar to `contentHints`, but should not be exposed to the user.
+         */
+        internalContentHint?: {
+          type: 'flags-secret';
+          /**
+           * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+           */
+          encryptedValue: string;
+        } | null;
+        comment?: string;
+        customEnvironmentIds?: string[];
+        vsmValue?: string;
+      }
+    | {
+        target?:
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        /**
+         * This is used to identiy variables that have been migrated from type secret to sensitive.
+         */
+        sunsetSecretId?: string;
+        id?: string;
+        key: string;
+        value: string;
+        configurationId?: string | null;
+        createdAt?: number;
+        updatedAt?: number;
+        createdBy?: string | null;
+        updatedBy?: string | null;
+        gitBranch?: string;
+        edgeConfigId?: string | null;
+        edgeConfigTokenId?: string | null;
+        contentHint?:
+          | {
+              type: 'redis-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-token';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-read-only-token';
+              storeId: string;
+            }
+          | {
+              type: 'blob-read-write-token';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-non-pooling';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-prisma-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-user';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-host';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-password';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-database';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-no-ssl';
+              storeId: string;
+            }
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
+            }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
+            }
+          | null;
+        /**
+         * Similar to `contentHints`, but should not be exposed to the user.
+         */
+        internalContentHint?: {
+          type: 'flags-secret';
+          /**
+           * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+           */
+          encryptedValue: string;
+        } | null;
+        /**
+         * Whether `value` and `vsmValue` are decrypted.
+         */
+        decrypted?: boolean;
+        comment?: string;
+        customEnvironmentIds?: string[];
+        vsmValue?: string;
+      }
+    | {
+        target?:
+          | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
+          | ('production' | 'preview' | 'development' | 'preview' | 'development');
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        /**
+         * This is used to identiy variables that have been migrated from type secret to sensitive.
+         */
+        sunsetSecretId?: string;
+        id?: string;
+        key: string;
+        value: string;
+        configurationId?: string | null;
+        createdAt?: number;
+        updatedAt?: number;
+        createdBy?: string | null;
+        updatedBy?: string | null;
+        gitBranch?: string;
+        edgeConfigId?: string | null;
+        edgeConfigTokenId?: string | null;
+        contentHint?:
+          | {
+              type: 'redis-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-url';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-token';
+              storeId: string;
+            }
+          | {
+              type: 'redis-rest-api-read-only-token';
+              storeId: string;
+            }
+          | {
+              type: 'blob-read-write-token';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-non-pooling';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-prisma-url';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-user';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-host';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-password';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-database';
+              storeId: string;
+            }
+          | {
+              type: 'postgres-url-no-ssl';
+              storeId: string;
+            }
+          | {
+              type: 'integration-store-secret';
+              storeId: string;
+              integrationId: string;
+              integrationProductId: string;
+              integrationConfigurationId: string;
+            }
+          | {
+              type: 'flags-connection-string';
+              projectId: string;
+            }
+          | null;
+        /**
+         * Similar to `contentHints`, but should not be exposed to the user.
+         */
+        internalContentHint?: {
+          type: 'flags-secret';
+          /**
+           * Contains the `value` of the env variable, encrypted with a special key to make decryption possible in the subscriber Lambda.
+           */
+          encryptedValue: string;
+        } | null;
+        /**
+         * Whether `value` and `vsmValue` are decrypted.
+         */
+        decrypted?: boolean;
+        comment?: string;
+        customEnvironmentIds?: string[];
+      },
+    GetProjectEnvError,
+    undefined,
+    {},
+    GetProjectEnvQueryParams,
+    GetProjectEnvPathParams
+  >({ url: '/v1/projects/{idOrName}/env/{id}', method: 'get', ...variables, signal });
 
 export type RemoveProjectEnvPathParams = {
   /**
@@ -23119,8 +23149,8 @@ export const operationsByTag = {
     addProjectDomain,
     verifyProjectDomain,
     filterProjectEnvs,
-    getProjectEnv,
     createProjectEnv,
+    getProjectEnv,
     removeProjectEnv,
     editProjectEnv,
     createProjectTransferRequest,
