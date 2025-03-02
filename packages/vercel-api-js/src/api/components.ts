@@ -2361,6 +2361,7 @@ export type UpdateProjectDataCacheResponse = {
     ownEvent?: Schemas.ACLAction[];
     sensitiveEnvironmentVariablePolicy?: Schemas.ACLAction[];
     fileUpload?: Schemas.ACLAction[];
+    flagsExplorerSubscription?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
     imageOptimizationNewPrice?: Schemas.ACLAction[];
@@ -11324,6 +11325,7 @@ export type GetProjectsResponse = {
       ownEvent?: Schemas.ACLAction[];
       sensitiveEnvironmentVariablePolicy?: Schemas.ACLAction[];
       fileUpload?: Schemas.ACLAction[];
+      flagsExplorerSubscription?: Schemas.ACLAction[];
       gitRepository?: Schemas.ACLAction[];
       ipBlocking?: Schemas.ACLAction[];
       imageOptimizationNewPrice?: Schemas.ACLAction[];
@@ -12247,6 +12249,7 @@ export type CreateProjectResponse = {
     ownEvent?: Schemas.ACLAction[];
     sensitiveEnvironmentVariablePolicy?: Schemas.ACLAction[];
     fileUpload?: Schemas.ACLAction[];
+    flagsExplorerSubscription?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
     imageOptimizationNewPrice?: Schemas.ACLAction[];
@@ -13351,6 +13354,7 @@ export type GetProjectResponse = {
     ownEvent?: Schemas.ACLAction[];
     sensitiveEnvironmentVariablePolicy?: Schemas.ACLAction[];
     fileUpload?: Schemas.ACLAction[];
+    flagsExplorerSubscription?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
     imageOptimizationNewPrice?: Schemas.ACLAction[];
@@ -14282,6 +14286,7 @@ export type UpdateProjectResponse = {
     ownEvent?: Schemas.ACLAction[];
     sensitiveEnvironmentVariablePolicy?: Schemas.ACLAction[];
     fileUpload?: Schemas.ACLAction[];
+    flagsExplorerSubscription?: Schemas.ACLAction[];
     gitRepository?: Schemas.ACLAction[];
     ipBlocking?: Schemas.ACLAction[];
     imageOptimizationNewPrice?: Schemas.ACLAction[];
