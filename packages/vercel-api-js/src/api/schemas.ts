@@ -206,7 +206,7 @@ export type TeamLimited = {
     accessRequestedAt?: number;
     role: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'SECURITY' | 'VIEWER';
     teamRoles?: ('BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'SECURITY' | 'VIEWER')[];
-    teamPermissions?: ('CreateProject' | 'FullProductionDeployment')[];
+    teamPermissions?: ('CreateProject' | 'FullProductionDeployment' | 'UsageViewer')[];
     teamId?: string;
     createdAt: number;
     created: number;
