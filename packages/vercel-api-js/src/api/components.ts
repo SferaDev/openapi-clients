@@ -2383,6 +2383,7 @@ export type UpdateProjectDataCacheResponse = {
     marketplaceExperimentationItem?: Schemas.ACLAction[];
     marketplaceExperimentationEdgeConfigData?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
+    drain?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringSettings?: Schemas.ACLAction[];
@@ -11347,6 +11348,7 @@ export type GetProjectsResponse = {
       marketplaceExperimentationItem?: Schemas.ACLAction[];
       marketplaceExperimentationEdgeConfigData?: Schemas.ACLAction[];
       jobGlobal?: Schemas.ACLAction[];
+      drain?: Schemas.ACLAction[];
       logDrain?: Schemas.ACLAction[];
       Monitoring?: Schemas.ACLAction[];
       monitoringSettings?: Schemas.ACLAction[];
@@ -12271,6 +12273,7 @@ export type CreateProjectResponse = {
     marketplaceExperimentationItem?: Schemas.ACLAction[];
     marketplaceExperimentationEdgeConfigData?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
+    drain?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringSettings?: Schemas.ACLAction[];
@@ -13376,6 +13379,7 @@ export type GetProjectResponse = {
     marketplaceExperimentationItem?: Schemas.ACLAction[];
     marketplaceExperimentationEdgeConfigData?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
+    drain?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringSettings?: Schemas.ACLAction[];
@@ -14308,6 +14312,7 @@ export type UpdateProjectResponse = {
     marketplaceExperimentationItem?: Schemas.ACLAction[];
     marketplaceExperimentationEdgeConfigData?: Schemas.ACLAction[];
     jobGlobal?: Schemas.ACLAction[];
+    drain?: Schemas.ACLAction[];
     logDrain?: Schemas.ACLAction[];
     Monitoring?: Schemas.ACLAction[];
     monitoringSettings?: Schemas.ACLAction[];
