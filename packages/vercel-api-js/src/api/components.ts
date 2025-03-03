@@ -19683,14 +19683,14 @@ export const inviteUserToTeam = (variables: InviteUserToTeamVariables, signal?: 
          *
          * @example CreateProject
          */
-        teamPermissions?: ('CreateProject' | 'FullProductionDeployment')[];
+        teamPermissions?: ('CreateProject' | 'FullProductionDeployment' | 'UsageViewer')[];
       }
     | {
         uid: string;
         username: string;
         role: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'SECURITY' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
         teamRoles?: ('OWNER' | 'MEMBER' | 'DEVELOPER' | 'SECURITY' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR')[];
-        teamPermissions?: ('CreateProject' | 'FullProductionDeployment')[];
+        teamPermissions?: ('CreateProject' | 'FullProductionDeployment' | 'UsageViewer')[];
       },
     InviteUserToTeamError,
     InviteUserToTeamRequestBody,
