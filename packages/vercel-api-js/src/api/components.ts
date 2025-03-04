@@ -2671,6 +2671,12 @@ export type UpdateProjectDataCacheResponse = {
     ja3Enabled?: boolean;
     ja4Enabled?: boolean;
     firewallBypassIps?: string[];
+    managedRules?: {
+      [key: string]: {
+        active: boolean;
+        action?: 'challenge' | 'deny' | 'log';
+      };
+    } | null;
   };
   oidcTokenConfig?: {
     enabled: boolean;
@@ -3065,9 +3071,9 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
           action?: string;
         } | null;
         id: string;
+        name: string;
         type: 'LAMBDAS';
         createdAt: number;
-        name: string;
         readyState: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
         aliasError?: {
           code: string;
@@ -3455,9 +3461,9 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
           action?: string;
         } | null;
         id: string;
+        name: string;
         type: 'LAMBDAS';
         createdAt: number;
-        name: string;
         readyState: 'QUEUED' | 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY' | 'CANCELED';
         aliasError?: {
           code: string;
@@ -3795,8 +3801,8 @@ export type CreateDeploymentResponse = {
         id: string;
       };
   type: 'LAMBDAS';
-  createdAt: number;
   name: string;
+  createdAt: number;
   deletedAt?: number | null;
   id: string;
   version: 2;
@@ -3931,6 +3937,7 @@ export type CreateDeploymentResponse = {
     project_id: string;
     environment: string;
   };
+  plan: 'enterprise' | 'hobby' | 'pro';
   projectId: string;
   ownerId: string;
   microfrontends?:
@@ -4075,7 +4082,6 @@ export type CreateDeploymentResponse = {
     schedule: string;
     path: string;
   }[];
-  plan: 'enterprise' | 'hobby' | 'pro';
   connectBuildsEnabled?: boolean;
   connectConfigurationId?: string;
   createdIn: string;
@@ -11636,6 +11642,12 @@ export type GetProjectsResponse = {
       ja3Enabled?: boolean;
       ja4Enabled?: boolean;
       firewallBypassIps?: string[];
+      managedRules?: {
+        [key: string]: {
+          active: boolean;
+          action?: 'challenge' | 'deny' | 'log';
+        };
+      } | null;
     };
     oidcTokenConfig?: {
       enabled: boolean;
@@ -12561,6 +12573,12 @@ export type CreateProjectResponse = {
     ja3Enabled?: boolean;
     ja4Enabled?: boolean;
     firewallBypassIps?: string[];
+    managedRules?: {
+      [key: string]: {
+        active: boolean;
+        action?: 'challenge' | 'deny' | 'log';
+      };
+    } | null;
   };
   oidcTokenConfig?: {
     enabled: boolean;
@@ -13667,6 +13685,12 @@ export type GetProjectResponse = {
     ja3Enabled?: boolean;
     ja4Enabled?: boolean;
     firewallBypassIps?: string[];
+    managedRules?: {
+      [key: string]: {
+        active: boolean;
+        action?: 'challenge' | 'deny' | 'log';
+      };
+    } | null;
   };
   oidcTokenConfig?: {
     enabled: boolean;
@@ -14600,6 +14624,12 @@ export type UpdateProjectResponse = {
     ja3Enabled?: boolean;
     ja4Enabled?: boolean;
     firewallBypassIps?: string[];
+    managedRules?: {
+      [key: string]: {
+        active: boolean;
+        action?: 'challenge' | 'deny' | 'log';
+      };
+    } | null;
   };
   oidcTokenConfig?: {
     enabled: boolean;
@@ -19114,7 +19144,7 @@ export const getBypassIp = (variables: GetBypassIpVariables, signal?: AbortSigna
           UpdatedAt: string;
           UpdatedAtHour: string;
           DeletedAt?: string;
-          ExpiresAt?: number;
+          ExpiresAt?: number | null;
         }[];
         pagination: void | null;
       }
@@ -19133,7 +19163,7 @@ export const getBypassIp = (variables: GetBypassIpVariables, signal?: AbortSigna
           UpdatedAt: string;
           UpdatedAtHour: string;
           DeletedAt?: string;
-          ExpiresAt?: number;
+          ExpiresAt?: number | null;
         }[];
         pagination?: {
           OwnerId: string;
@@ -19241,7 +19271,7 @@ export const addBypassIp = (variables: AddBypassIpVariables, signal?: AbortSigna
           UpdatedAt: string;
           UpdatedAtHour: string;
           DeletedAt?: string;
-          ExpiresAt?: number;
+          ExpiresAt?: number | null;
         }[];
       },
     AddBypassIpError,
