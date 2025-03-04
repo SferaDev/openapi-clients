@@ -1,5 +1,19 @@
 # vercel-api-js
 
+## 0.22.0
+
+### Minor Changes
+
+- 8ce2794: Add support for managedRules in components
+
+### Patch Changes
+
+- 5f3f515: Add new field 'gitProviderOptions' to UpdateProjectDataCacheResponse
+- c1f5210: Add new 'drain' property to various project-related API response types
+- 2ccc455: Add 'UsageViewer' permission to teamPermissions
+- 1550896: Add flagsExplorerSubscription field to project-related responses
+- 3d4776c: Add teamRoles and teamPermissions fields to ReadAccessGroupResponse, UpdateAccessGroupResponse, and CreateAccessGroupResponse types
+
 ## 0.21.2
 
 ### Patch Changes

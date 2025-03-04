@@ -1,5 +1,13 @@
 # cloudflare-api-js
 
+## 0.8.2
+
+### Patch Changes
+
+- 265d09c: Add x-auditable true to ImagesApiResponseCollectionV2 success field
+- 1c8df70: Add new endpoint to run AI with llama guard 3-8b
+- 01c8316: [BREAKING] Remove doh_in_tunnel field from TeamsDevicesDefaultDeviceSettingsPolicy and TeamsDevicesDeviceSettingsPolicy
+
 ## 0.8.1
 
 ### Patch Changes
