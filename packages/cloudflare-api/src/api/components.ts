@@ -43776,7 +43776,6 @@ export type DevicesUpdateDefaultDeviceSettingsPolicyRequestBody = {
   auto_connect?: Schemas.TeamsDevicesAutoConnect;
   captive_portal?: Schemas.TeamsDevicesCaptivePortal;
   disable_auto_fallback?: Schemas.TeamsDevicesDisableAutoFallback;
-  doh_in_tunnel?: Schemas.TeamsDevicesDohInTunnel;
   exclude_office_ips?: Schemas.TeamsDevicesExcludeOfficeIps;
   register_interface_ip_with_dns?: Schemas.TeamsDevicesRegisterInterfaceIpWithDns;
   service_mode_v2?: Schemas.TeamsDevicesServiceModeV2;
@@ -43823,7 +43822,6 @@ export type DevicesCreateDeviceSettingsPolicyRequestBody = {
   captive_portal?: Schemas.TeamsDevicesCaptivePortal;
   description?: Schemas.TeamsDevicesSchemasDescription;
   disable_auto_fallback?: Schemas.TeamsDevicesDisableAutoFallback;
-  doh_in_tunnel?: Schemas.TeamsDevicesDohInTunnel;
   /**
    * Whether the policy will be applied to matching devices.
    *
@@ -44131,7 +44129,6 @@ export type DevicesUpdateDeviceSettingsPolicyRequestBody = {
   captive_portal?: Schemas.TeamsDevicesCaptivePortal;
   description?: Schemas.TeamsDevicesSchemasDescription;
   disable_auto_fallback?: Schemas.TeamsDevicesDisableAutoFallback;
-  doh_in_tunnel?: Schemas.TeamsDevicesDohInTunnel;
   /**
    * Whether the policy will be applied to matching devices.
    *
