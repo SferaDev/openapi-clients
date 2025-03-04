@@ -345,14 +345,11 @@ export type AuthUser = {
       | 'analyticsUsage'
       | 'artifacts'
       | 'bandwidth'
-      | 'blobStores'
       | 'blobTotalAdvancedRequests'
       | 'blobTotalAvgSizeInBytes'
       | 'blobTotalGetResponseObjectSizeInBytes'
       | 'blobTotalSimpleRequests'
-      | 'buildMinute'
       | 'dataCacheRead'
-      | 'dataCacheRevalidation'
       | 'dataCacheWrite'
       | 'edgeConfigRead'
       | 'edgeConfigWrite'
@@ -396,10 +393,6 @@ export type AuthUser = {
    * An object containing infomation related to the amount of platform resources may be allocated to the User account.
    */
   resourceConfig: {
-    /**
-     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
-     */
-    blobStores?: number;
     /**
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
@@ -452,6 +445,10 @@ export type AuthUser = {
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
     postgresDatabases?: number;
+    /**
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+     */
+    blobStores?: number;
     /**
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
