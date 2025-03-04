@@ -43907,8 +43907,6 @@ export type TunnelSubnetIpNetwork = string;
 
 /**
  * If `true`, this is the default subnet for the account. There can only be one default subnet per account.
- *
- * @default true
  */
 export type TunnelSubnetIsDefaultNetwork = boolean;
 

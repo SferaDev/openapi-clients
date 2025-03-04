@@ -73960,9 +73960,9 @@ export type ZeroTrustNetworksSubnetsListQueryParams = {
   is_deleted?: boolean;
   sort_order?: 'asc' | 'desc';
   /**
-   * @example cloudflare_source
+   * @example cloudflare_source,warp
    */
-  subnet_types?: 'cloudflare_source';
+  subnet_types?: 'cloudflare_source' | 'warp';
   per_page?: Schemas.TunnelPerPage;
   page?: Schemas.TunnelPageNumber;
 };
