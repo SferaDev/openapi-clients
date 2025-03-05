@@ -74496,6 +74496,55 @@ export const originCaGetCertificate = (variables: OriginCaGetCertificateVariable
     OriginCaGetCertificatePathParams
   >({ url: '/certificates/{certificateId}', method: 'get', ...variables, signal });
 
+export type GetConfigListQueryParams = {
+  /**
+   * Account ID
+   */
+  account_id?: string;
+  /**
+   * Page number
+   */
+  page?: number;
+  /**
+   * Page Size
+   */
+  pageSize?: number;
+};
+
+export type GetConfigListError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetConfigListResponse = {
+  result: {
+    /**
+     * @example 0
+     */
+    account_id: string;
+    frequency: number;
+    id: number;
+    ips: string[];
+    /**
+     * @example my config
+     */
+    name: string;
+  }[];
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type GetConfigListVariables = {
+  queryParams?: GetConfigListQueryParams;
+} & FetcherExtraProps;
+
+export const getConfigList = (variables: GetConfigListVariables, signal?: AbortSignal) =>
+  fetch<GetConfigListResponse, GetConfigListError, undefined, {}, GetConfigListQueryParams, {}>({
+    url: '/configs',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
 export type CloudflareIPsCloudflareIpDetailsQueryParams = {
   /**
    * Specified as `jdcloud` to list IPs used by JD Cloud data centers.
@@ -74690,6 +74739,85 @@ export const userSAccountMembershipsUpdateMembership = (
     {},
     UserSAccountMembershipsUpdateMembershipPathParams
   >({ url: '/memberships/{membershipId}', method: 'put', ...variables, signal });
+
+export type PostNotificationPublishError = Fetcher.ErrorWrapper<undefined>;
+
+export type PostNotificationPublishResponse = {
+  defaultAlert: {
+    /**
+     * @example alerting.AlertEventV2
+     */
+    $typeName: string;
+    accountId: number;
+    /**
+     * @example abcd
+     */
+    accountTag: string;
+    alertContext: {
+      /**
+       * @example openPortScanAlert
+       */
+      ['case']: string;
+      value: {
+        /**
+         * @example cloudforce_one.PortScanAlert
+         */
+        $typeName: string;
+        /**
+         * @example abcd
+         */
+        accountTag: string;
+        ports: {
+          /**
+           * @example cloudforce_one.PortScanAlert.PortInfo
+           */
+          $typeName: string;
+          /**
+           * @example 127.0.0.1
+           */
+          ip: string;
+          /**
+           * @example 8080
+           */
+          number: number;
+          /**
+           * @example 2
+           */
+          status: number;
+        }[];
+      };
+    };
+    /**
+     * @example 78
+     */
+    alertType: number;
+    policyId: string;
+    /**
+     * @example 4
+     */
+    severity: number;
+    /**
+     * @example ans-producer-worker
+     */
+    source: string;
+    zoneId: number;
+    zoneTag: string;
+  };
+  /**
+   * @example successfully dispatched alert
+   */
+  message: string;
+};
+
+export type PostNotificationPublishVariables = FetcherExtraProps;
+
+export const postNotificationPublish = (variables: PostNotificationPublishVariables, signal?: AbortSignal) =>
+  fetch<PostNotificationPublishResponse, PostNotificationPublishError, undefined, {}, {}, {}>({
+    url: '/notification',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type OrganizationSharesListPathParams = {
   organizationId: Schemas.ResourceSharingOrganizationId;
@@ -108705,6 +108833,65 @@ export const radarGetVerifiedBotsTopCategoriesByHttpRequests = (
     {}
   >({ url: '/radar/verified_bots/top/categories', method: 'get', ...variables, signal });
 
+export type GetGetScansQueryParams = {
+  /**
+   * Toggle IP Authorization
+   */
+  verifyIPs?: boolean;
+};
+
+export type GetGetScansError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetGetScansResponse = {
+  errors: string[];
+  messages: string[];
+  result: {
+    /**
+     * @example abcd1234abcd1234abcd1234abcd1234
+     */
+    account_id: string;
+    ips: string[];
+  };
+  success: boolean;
+};
+
+export type GetGetScansVariables = {
+  queryParams?: GetGetScansQueryParams;
+} & FetcherExtraProps;
+
+export const getGetScans = (variables: GetGetScansVariables, signal?: AbortSignal) =>
+  fetch<GetGetScansResponse, GetGetScansError, undefined, {}, GetGetScansQueryParams, {}>({
+    url: '/scans',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PostRetryScansError = Fetcher.ErrorWrapper<undefined>;
+
+export type PostRetryScansResponse = {
+  errors: string[];
+  messages: string[];
+  result: Record<string, any>;
+  success: boolean;
+};
+
+export type PostRetryScansRequestBody = {
+  account_id: string;
+};
+
+export type PostRetryScansVariables = {
+  body: PostRetryScansRequestBody;
+} & FetcherExtraProps;
+
+export const postRetryScans = (variables: PostRetryScansVariables, signal?: AbortSignal) =>
+  fetch<PostRetryScansResponse, PostRetryScansError, PostRetryScansRequestBody, {}, {}, {}>({
+    url: '/scans',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
 export type UserUserDetailsError = Fetcher.ErrorWrapper<{
   status: 400;
   payload: Schemas.IamApiResponseCommonFailure;
@@ -126534,6 +126721,164 @@ export const sslDetectorAutomaticModePatchEnrollment = (
     SslDetectorAutomaticModePatchEnrollmentPathParams
   >({ url: '/zones/{zoneTag}/settings/ssl_automatic_mode', method: 'patch', ...variables, signal });
 
+export type DeleteDeleteScansPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: string;
+};
+
+export type DeleteDeleteScansError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteDeleteScansResponse = {
+  errors: string[];
+  messages: string[];
+  result: Record<string, any>;
+  success: boolean;
+};
+
+export type DeleteDeleteScansVariables = {
+  pathParams: DeleteDeleteScansPathParams;
+} & FetcherExtraProps;
+
+export const deleteDeleteScans = (variables: DeleteDeleteScansVariables, signal?: AbortSignal) =>
+  fetch<DeleteDeleteScansResponse, DeleteDeleteScansError, undefined, {}, {}, DeleteDeleteScansPathParams>({
+    url: '/{accountId}/scans/config',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type GetConfigFetchPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: string;
+};
+
+export type GetConfigFetchError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetConfigFetchResponse = {
+  errors: string[];
+  messages: string[];
+  result: {
+    /**
+     * @example abcd1234abcd1234abcd1234abcd1234
+     */
+    account_id: string;
+    /**
+     * @example 1
+     */
+    frequency: number;
+    ips: string[];
+  };
+  success: boolean;
+};
+
+export type GetConfigFetchVariables = {
+  pathParams: GetConfigFetchPathParams;
+} & FetcherExtraProps;
+
+export const getConfigFetch = (variables: GetConfigFetchVariables, signal?: AbortSignal) =>
+  fetch<GetConfigFetchResponse, GetConfigFetchError, undefined, {}, {}, GetConfigFetchPathParams>({
+    url: '/{accountId}/scans/config',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PostConfigCreatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: string;
+};
+
+export type PostConfigCreateError = Fetcher.ErrorWrapper<undefined>;
+
+export type PostConfigCreateResponse = {
+  errors: string[];
+  messages: string[];
+  result: {
+    /**
+     * @example abcd1234abcd1234abcd1234abcd1234
+     */
+    account_id: string;
+    /**
+     * @example 1
+     */
+    frequency: number;
+    ips: string[];
+  };
+  success: boolean;
+};
+
+export type PostConfigCreateRequestBody = {
+  /**
+   * @example 1
+   */
+  frequency: number;
+  ips: string[];
+};
+
+export type PostConfigCreateVariables = {
+  body: PostConfigCreateRequestBody;
+  pathParams: PostConfigCreatePathParams;
+} & FetcherExtraProps;
+
+export const postConfigCreate = (variables: PostConfigCreateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostConfigCreateResponse,
+    PostConfigCreateError,
+    PostConfigCreateRequestBody,
+    {},
+    {},
+    PostConfigCreatePathParams
+  >({ url: '/{accountId}/scans/config', method: 'post', ...variables, signal });
+
+export type GetGetOpenPortsPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: string;
+};
+
+export type GetGetOpenPortsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetGetOpenPortsResponse = {
+  errors: string[];
+  messages: string[];
+  result: {
+    ['1.1.1.1']: {
+      /**
+       * @example 8080
+       */
+      number: number;
+      /**
+       * @example tcp
+       */
+      proto: string;
+      /**
+       * @example open
+       */
+      status: string;
+    }[];
+  };
+  success: boolean;
+};
+
+export type GetGetOpenPortsVariables = {
+  pathParams: GetGetOpenPortsPathParams;
+} & FetcherExtraProps;
+
+export const getGetOpenPorts = (variables: GetGetOpenPortsVariables, signal?: AbortSignal) =>
+  fetch<GetGetOpenPortsResponse, GetGetOpenPortsError, undefined, {}, {}, GetGetOpenPortsPathParams>({
+    url: '/{accountId}/scans/results',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
 export const operationsByTag = {
   accounts: { accountsListAccounts, accountCreation, accountDeletion, accountsAccountDetails, accountsUpdateAccount },
   brapi: { brapiPostContent, brapiPostPdf, brapiPostScrape, brapiPostScreenshot, brapiPostSnapshot },
@@ -127851,6 +128196,7 @@ export const operationsByTag = {
     dlpZtRiskScoreIntegrationUpdate
   },
   originCA: { originCaListCertificates, originCaCreateCertificate, originCaRevokeCertificate, originCaGetCertificate },
+  configs: { getConfigList },
   cloudflareIPs: { cloudflareIPsCloudflareIpDetails },
   usersAccountMemberships: {
     userSAccountMembershipsListMemberships,
@@ -127858,6 +128204,7 @@ export const operationsByTag = {
     userSAccountMembershipsMembershipDetails,
     userSAccountMembershipsUpdateMembership
   },
+  notifications: { postNotificationPublish },
   radarAIBots: { radarGetAiBotsSummaryByUserAgent, radarGetAiBotsTimeseriesGroupByUserAgent },
   radarAIInference: {
     radarGetAiInferenceSummaryByModel,
@@ -128078,6 +128425,7 @@ export const operationsByTag = {
   radarTCPResetsAndTimeouts: { radarGetTcpResetsTimeoutsSummary, radarGetTcpResetsTimeoutsTimeseriesGroup },
   radarTrafficAnomalies: { radarGetTrafficAnomalies, radarGetTrafficAnomaliesTop },
   radarVerifiedBots: { radarGetVerifiedBotsTopByHttpRequests, radarGetVerifiedBotsTopCategoriesByHttpRequests },
+  scans: { getGetScans, postRetryScans, deleteDeleteScans, getConfigFetch, postConfigCreate, getGetOpenPorts },
   user: { userUserDetails, userEditUser },
   userBillingHistory: { userBillingHistoryDeprecatedBillingHistoryDetails },
   userBillingProfile: { userBillingProfileDeprecatedBillingProfileDetails },

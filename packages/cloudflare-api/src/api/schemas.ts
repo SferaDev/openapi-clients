@@ -49748,7 +49748,7 @@ export type ZeroTrustGatewayFailClosed = boolean;
  *
  * @example http
  */
-export type ZeroTrustGatewayFilters = ('http' | 'dns' | 'l4' | 'egress')[];
+export type ZeroTrustGatewayFilters = ('http' | 'dns' | 'l4' | 'egress' | 'dns_resolver')[];
 
 /**
  * FIPS settings.

@@ -1081,11 +1081,13 @@ import {
   originCaCreateCertificate,
   originCaRevokeCertificate,
   originCaGetCertificate,
+  getConfigList,
   cloudflareIPsCloudflareIpDetails,
   userSAccountMembershipsListMemberships,
   userSAccountMembershipsDeleteMembership,
   userSAccountMembershipsMembershipDetails,
   userSAccountMembershipsUpdateMembership,
+  postNotificationPublish,
   organizationSharesList,
   radarGetAiBotsSummaryByUserAgent,
   radarGetAiBotsTimeseriesGroupByUserAgent,
@@ -1292,6 +1294,8 @@ import {
   radarGetTrafficAnomaliesTop,
   radarGetVerifiedBotsTopByHttpRequests,
   radarGetVerifiedBotsTopCategoriesByHttpRequests,
+  getGetScans,
+  postRetryScans,
   userUserDetails,
   userEditUser,
   auditLogsGetUserAuditLogs,
@@ -1802,7 +1806,11 @@ import {
   workerRoutesGetRoute,
   workerRoutesUpdateRoute,
   sslDetectorAutomaticModeGetEnrollment,
-  sslDetectorAutomaticModePatchEnrollment
+  sslDetectorAutomaticModePatchEnrollment,
+  deleteDeleteScans,
+  getConfigFetch,
+  postConfigCreate,
+  getGetOpenPorts
 } from './components';
 
 export const operationsByPath = {
@@ -3056,11 +3064,13 @@ export const operationsByPath = {
   'POST /certificates': originCaCreateCertificate,
   'DELETE /certificates/{certificate_id}': originCaRevokeCertificate,
   'GET /certificates/{certificate_id}': originCaGetCertificate,
+  'GET /configs': getConfigList,
   'GET /ips': cloudflareIPsCloudflareIpDetails,
   'GET /memberships': userSAccountMembershipsListMemberships,
   'DELETE /memberships/{membership_id}': userSAccountMembershipsDeleteMembership,
   'GET /memberships/{membership_id}': userSAccountMembershipsMembershipDetails,
   'PUT /memberships/{membership_id}': userSAccountMembershipsUpdateMembership,
+  'POST /notification': postNotificationPublish,
   'GET /organizations/{organization_id}/shares': organizationSharesList,
   'GET /radar/ai/bots/summary/user_agent': radarGetAiBotsSummaryByUserAgent,
   'GET /radar/ai/bots/timeseries_groups/user_agent': radarGetAiBotsTimeseriesGroupByUserAgent,
@@ -3268,6 +3278,8 @@ export const operationsByPath = {
   'GET /radar/traffic_anomalies/locations': radarGetTrafficAnomaliesTop,
   'GET /radar/verified_bots/top/bots': radarGetVerifiedBotsTopByHttpRequests,
   'GET /radar/verified_bots/top/categories': radarGetVerifiedBotsTopCategoriesByHttpRequests,
+  'GET /scans': getGetScans,
+  'POST /scans': postRetryScans,
   'GET /user': userUserDetails,
   'PATCH /user': userEditUser,
   'GET /user/audit_logs': auditLogsGetUserAuditLogs,
@@ -3829,5 +3841,9 @@ export const operationsByPath = {
   'GET /zones/{zone_id}/workers/routes/{route_id}': workerRoutesGetRoute,
   'PUT /zones/{zone_id}/workers/routes/{route_id}': workerRoutesUpdateRoute,
   'GET /zones/{zone_tag}/settings/ssl_automatic_mode': sslDetectorAutomaticModeGetEnrollment,
-  'PATCH /zones/{zone_tag}/settings/ssl_automatic_mode': sslDetectorAutomaticModePatchEnrollment
+  'PATCH /zones/{zone_tag}/settings/ssl_automatic_mode': sslDetectorAutomaticModePatchEnrollment,
+  'DELETE /{account_id}/scans/config': deleteDeleteScans,
+  'GET /{account_id}/scans/config': getConfigFetch,
+  'POST /{account_id}/scans/config': postConfigCreate,
+  'GET /{account_id}/scans/results': getGetOpenPorts
 };
