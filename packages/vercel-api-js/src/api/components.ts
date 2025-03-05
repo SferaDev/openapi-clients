@@ -2531,7 +2531,7 @@ export type UpdateProjectDataCacheResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -2539,7 +2539,7 @@ export type UpdateProjectDataCacheResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
       }
     | null;
   gitComments?: {
@@ -3773,10 +3773,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    id?: string;
     createdAt?: number;
-    entrypoint?: string | null;
+    id?: string;
     readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    entrypoint?: string | null;
     readyStateAt?: number;
     output: {
       path: string;
@@ -4066,7 +4066,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
             src?: string;
             dest?: string;
             status?: number;
@@ -4099,7 +4099,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         org: string;
@@ -4111,7 +4111,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         owner: string;
@@ -4123,7 +4123,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | null;
   flags?:
@@ -8844,6 +8844,10 @@ export type UpdateResourceSecretsRequestBody = {
     value: string;
     prefix?: string;
   }[];
+  /**
+   * If true, will only update the provided secrets
+   */
+  partial?: boolean;
 };
 
 export type UpdateResourceSecretsVariables = {
@@ -8882,6 +8886,10 @@ export type UpdateResourceSecretsByIdRequestBody = {
     value: string;
     prefix?: string;
   }[];
+  /**
+   * If true, will only update the provided secrets
+   */
+  partial?: boolean;
 };
 
 export type UpdateResourceSecretsByIdVariables = {
@@ -11502,7 +11510,7 @@ export type GetProjectsResponse = {
     hasActiveBranches?: boolean;
     trustedIps?:
       | {
-          deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+          deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
           addresses: {
             value: string;
             note?: string;
@@ -11510,7 +11518,7 @@ export type GetProjectsResponse = {
           protectionMode: 'additional' | 'exclusive';
         }
       | {
-          deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+          deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         }
       | null;
     gitComments?: {
@@ -12433,7 +12441,7 @@ export type CreateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -12441,7 +12449,7 @@ export type CreateProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
       }
     | null;
   gitComments?: {
@@ -13545,7 +13553,7 @@ export type GetProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -13553,7 +13561,7 @@ export type GetProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
       }
     | null;
   gitComments?: {
@@ -14484,7 +14492,7 @@ export type UpdateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -14492,7 +14500,7 @@ export type UpdateProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
       }
     | null;
   gitComments?: {
@@ -15096,6 +15104,8 @@ export type GetCustomEnvironmentQueryParams = {
 
 export type GetCustomEnvironmentError = Fetcher.ErrorWrapper<undefined>;
 
+export type GetCustomEnvironmentResponse = Record<string, any>[];
+
 export type GetCustomEnvironmentVariables = {
   pathParams: GetCustomEnvironmentPathParams;
   queryParams?: GetCustomEnvironmentQueryParams;
@@ -15106,7 +15116,7 @@ export type GetCustomEnvironmentVariables = {
  */
 export const getCustomEnvironment = (variables: GetCustomEnvironmentVariables, signal?: AbortSignal) =>
   fetch<
-    Record<string, any>,
+    GetCustomEnvironmentResponse,
     GetCustomEnvironmentError,
     undefined,
     {},
