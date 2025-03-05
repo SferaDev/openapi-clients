@@ -25705,7 +25705,7 @@ export type WorkersAiPostRunCfOpenaiWhisperLargeV3TurboResponse = {
          */
         word?: string;
       }[];
-    };
+    }[];
     /**
      * The complete transcription of the audio.
      */
