@@ -42325,6 +42325,164 @@ export const accountsTurnstileWidgetRotateSecret = (
     AccountsTurnstileWidgetRotateSecretPathParams
   >({ url: '/accounts/{accountId}/challenges/widgets/{sitekey}/rotate_secret', method: 'post', ...variables, signal });
 
+export type DeleteDeleteScansPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: string;
+};
+
+export type DeleteDeleteScansError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteDeleteScansResponse = {
+  errors: string[];
+  messages: string[];
+  result: Record<string, any>;
+  success: boolean;
+};
+
+export type DeleteDeleteScansVariables = {
+  pathParams: DeleteDeleteScansPathParams;
+} & FetcherExtraProps;
+
+export const deleteDeleteScans = (variables: DeleteDeleteScansVariables, signal?: AbortSignal) =>
+  fetch<DeleteDeleteScansResponse, DeleteDeleteScansError, undefined, {}, {}, DeleteDeleteScansPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/scans/config',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type GetConfigFetchPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: string;
+};
+
+export type GetConfigFetchError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetConfigFetchResponse = {
+  errors: string[];
+  messages: string[];
+  result: {
+    /**
+     * @example abcd1234abcd1234abcd1234abcd1234
+     */
+    account_id: string;
+    /**
+     * @example 1
+     */
+    frequency: number;
+    ips: string[];
+  };
+  success: boolean;
+};
+
+export type GetConfigFetchVariables = {
+  pathParams: GetConfigFetchPathParams;
+} & FetcherExtraProps;
+
+export const getConfigFetch = (variables: GetConfigFetchVariables, signal?: AbortSignal) =>
+  fetch<GetConfigFetchResponse, GetConfigFetchError, undefined, {}, {}, GetConfigFetchPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/scans/config',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PostConfigCreatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: string;
+};
+
+export type PostConfigCreateError = Fetcher.ErrorWrapper<undefined>;
+
+export type PostConfigCreateResponse = {
+  errors: string[];
+  messages: string[];
+  result: {
+    /**
+     * @example abcd1234abcd1234abcd1234abcd1234
+     */
+    account_id: string;
+    /**
+     * @example 1
+     */
+    frequency: number;
+    ips: string[];
+  };
+  success: boolean;
+};
+
+export type PostConfigCreateRequestBody = {
+  /**
+   * @example 1
+   */
+  frequency: number;
+  ips: string[];
+};
+
+export type PostConfigCreateVariables = {
+  body: PostConfigCreateRequestBody;
+  pathParams: PostConfigCreatePathParams;
+} & FetcherExtraProps;
+
+export const postConfigCreate = (variables: PostConfigCreateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostConfigCreateResponse,
+    PostConfigCreateError,
+    PostConfigCreateRequestBody,
+    {},
+    {},
+    PostConfigCreatePathParams
+  >({ url: '/accounts/{accountId}/cloudforce-one/scans/config', method: 'post', ...variables, signal });
+
+export type GetGetOpenPortsPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: string;
+};
+
+export type GetGetOpenPortsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetGetOpenPortsResponse = {
+  errors: string[];
+  messages: string[];
+  result: {
+    ['1.1.1.1']: {
+      /**
+       * @example 8080
+       */
+      number: number;
+      /**
+       * @example tcp
+       */
+      proto: string;
+      /**
+       * @example open
+       */
+      status: string;
+    }[];
+  };
+  success: boolean;
+};
+
+export type GetGetOpenPortsVariables = {
+  pathParams: GetGetOpenPortsPathParams;
+} & FetcherExtraProps;
+
+export const getGetOpenPorts = (variables: GetGetOpenPortsVariables, signal?: AbortSignal) =>
+  fetch<GetGetOpenPortsResponse, GetGetOpenPortsError, undefined, {}, {}, GetGetOpenPortsPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/scans/results',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
 export type ListCnisPathParams = {
   accountId: Schemas.NscAccountTag;
 };
@@ -126748,164 +126906,6 @@ export const sslDetectorAutomaticModePatchEnrollment = (
     SslDetectorAutomaticModePatchEnrollmentPathParams
   >({ url: '/zones/{zoneTag}/settings/ssl_automatic_mode', method: 'patch', ...variables, signal });
 
-export type DeleteDeleteScansPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: string;
-};
-
-export type DeleteDeleteScansError = Fetcher.ErrorWrapper<undefined>;
-
-export type DeleteDeleteScansResponse = {
-  errors: string[];
-  messages: string[];
-  result: Record<string, any>;
-  success: boolean;
-};
-
-export type DeleteDeleteScansVariables = {
-  pathParams: DeleteDeleteScansPathParams;
-} & FetcherExtraProps;
-
-export const deleteDeleteScans = (variables: DeleteDeleteScansVariables, signal?: AbortSignal) =>
-  fetch<DeleteDeleteScansResponse, DeleteDeleteScansError, undefined, {}, {}, DeleteDeleteScansPathParams>({
-    url: '/{accountId}/scans/config',
-    method: 'delete',
-    ...variables,
-    signal
-  });
-
-export type GetConfigFetchPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: string;
-};
-
-export type GetConfigFetchError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetConfigFetchResponse = {
-  errors: string[];
-  messages: string[];
-  result: {
-    /**
-     * @example abcd1234abcd1234abcd1234abcd1234
-     */
-    account_id: string;
-    /**
-     * @example 1
-     */
-    frequency: number;
-    ips: string[];
-  };
-  success: boolean;
-};
-
-export type GetConfigFetchVariables = {
-  pathParams: GetConfigFetchPathParams;
-} & FetcherExtraProps;
-
-export const getConfigFetch = (variables: GetConfigFetchVariables, signal?: AbortSignal) =>
-  fetch<GetConfigFetchResponse, GetConfigFetchError, undefined, {}, {}, GetConfigFetchPathParams>({
-    url: '/{accountId}/scans/config',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type PostConfigCreatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: string;
-};
-
-export type PostConfigCreateError = Fetcher.ErrorWrapper<undefined>;
-
-export type PostConfigCreateResponse = {
-  errors: string[];
-  messages: string[];
-  result: {
-    /**
-     * @example abcd1234abcd1234abcd1234abcd1234
-     */
-    account_id: string;
-    /**
-     * @example 1
-     */
-    frequency: number;
-    ips: string[];
-  };
-  success: boolean;
-};
-
-export type PostConfigCreateRequestBody = {
-  /**
-   * @example 1
-   */
-  frequency: number;
-  ips: string[];
-};
-
-export type PostConfigCreateVariables = {
-  body: PostConfigCreateRequestBody;
-  pathParams: PostConfigCreatePathParams;
-} & FetcherExtraProps;
-
-export const postConfigCreate = (variables: PostConfigCreateVariables, signal?: AbortSignal) =>
-  fetch<
-    PostConfigCreateResponse,
-    PostConfigCreateError,
-    PostConfigCreateRequestBody,
-    {},
-    {},
-    PostConfigCreatePathParams
-  >({ url: '/{accountId}/scans/config', method: 'post', ...variables, signal });
-
-export type GetGetOpenPortsPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: string;
-};
-
-export type GetGetOpenPortsError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetGetOpenPortsResponse = {
-  errors: string[];
-  messages: string[];
-  result: {
-    ['1.1.1.1']: {
-      /**
-       * @example 8080
-       */
-      number: number;
-      /**
-       * @example tcp
-       */
-      proto: string;
-      /**
-       * @example open
-       */
-      status: string;
-    }[];
-  };
-  success: boolean;
-};
-
-export type GetGetOpenPortsVariables = {
-  pathParams: GetGetOpenPortsPathParams;
-} & FetcherExtraProps;
-
-export const getGetOpenPorts = (variables: GetGetOpenPortsVariables, signal?: AbortSignal) =>
-  fetch<GetGetOpenPortsResponse, GetGetOpenPortsError, undefined, {}, {}, GetGetOpenPortsPathParams>({
-    url: '/{accountId}/scans/results',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
 export const operationsByTag = {
   accounts: { accountsListAccounts, accountCreation, accountDeletion, accountsAccountDetails, accountsUpdateAccount },
   requestForInformationRFI: {
@@ -127311,6 +127311,7 @@ export const operationsByTag = {
     accountsTurnstileWidgetUpdate,
     accountsTurnstileWidgetRotateSecret
   },
+  scans: { deleteDeleteScans, getConfigFetch, postConfigCreate, getGetOpenPorts, getGetScans, postRetryScans },
   cNIs: { listCnis, createCni, deleteCni, getCni, updateCni },
   interconnects: {
     listInterconnects,
@@ -128452,7 +128453,6 @@ export const operationsByTag = {
   radarTCPResetsAndTimeouts: { radarGetTcpResetsTimeoutsSummary, radarGetTcpResetsTimeoutsTimeseriesGroup },
   radarTrafficAnomalies: { radarGetTrafficAnomalies, radarGetTrafficAnomaliesTop },
   radarVerifiedBots: { radarGetVerifiedBotsTopByHttpRequests, radarGetVerifiedBotsTopCategoriesByHttpRequests },
-  scans: { getGetScans, postRetryScans, deleteDeleteScans, getConfigFetch, postConfigCreate, getGetOpenPorts },
   user: { userUserDetails, userEditUser },
   userBillingHistory: { userBillingHistoryDeprecatedBillingHistoryDetails },
   userBillingProfile: { userBillingProfileDeprecatedBillingProfileDetails },

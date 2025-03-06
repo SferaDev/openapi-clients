@@ -306,6 +306,10 @@ import {
   accountsTurnstileWidgetGet,
   accountsTurnstileWidgetUpdate,
   accountsTurnstileWidgetRotateSecret,
+  deleteDeleteScans,
+  getConfigFetch,
+  postConfigCreate,
+  getGetOpenPorts,
   listCnis,
   createCni,
   deleteCni,
@@ -1806,11 +1810,7 @@ import {
   workerRoutesGetRoute,
   workerRoutesUpdateRoute,
   sslDetectorAutomaticModeGetEnrollment,
-  sslDetectorAutomaticModePatchEnrollment,
-  deleteDeleteScans,
-  getConfigFetch,
-  postConfigCreate,
-  getGetOpenPorts
+  sslDetectorAutomaticModePatchEnrollment
 } from './components';
 
 export const operationsByPath = {
@@ -2199,6 +2199,10 @@ export const operationsByPath = {
   'GET /accounts/{account_id}/challenges/widgets/{sitekey}': accountsTurnstileWidgetGet,
   'PUT /accounts/{account_id}/challenges/widgets/{sitekey}': accountsTurnstileWidgetUpdate,
   'POST /accounts/{account_id}/challenges/widgets/{sitekey}/rotate_secret': accountsTurnstileWidgetRotateSecret,
+  'DELETE /accounts/{account_id}/cloudforce-one/scans/config': deleteDeleteScans,
+  'GET /accounts/{account_id}/cloudforce-one/scans/config': getConfigFetch,
+  'POST /accounts/{account_id}/cloudforce-one/scans/config': postConfigCreate,
+  'GET /accounts/{account_id}/cloudforce-one/scans/results': getGetOpenPorts,
   'GET /accounts/{account_id}/cni/cnis': listCnis,
   'POST /accounts/{account_id}/cni/cnis': createCni,
   'DELETE /accounts/{account_id}/cni/cnis/{cni}': deleteCni,
@@ -3841,9 +3845,5 @@ export const operationsByPath = {
   'GET /zones/{zone_id}/workers/routes/{route_id}': workerRoutesGetRoute,
   'PUT /zones/{zone_id}/workers/routes/{route_id}': workerRoutesUpdateRoute,
   'GET /zones/{zone_tag}/settings/ssl_automatic_mode': sslDetectorAutomaticModeGetEnrollment,
-  'PATCH /zones/{zone_tag}/settings/ssl_automatic_mode': sslDetectorAutomaticModePatchEnrollment,
-  'DELETE /{account_id}/scans/config': deleteDeleteScans,
-  'GET /{account_id}/scans/config': getConfigFetch,
-  'POST /{account_id}/scans/config': postConfigCreate,
-  'GET /{account_id}/scans/results': getGetOpenPorts
+  'PATCH /zones/{zone_tag}/settings/ssl_automatic_mode': sslDetectorAutomaticModePatchEnrollment
 };
