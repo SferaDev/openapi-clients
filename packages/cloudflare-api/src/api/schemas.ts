@@ -30389,6 +30389,14 @@ export type NscSettings = {
    * @format int32
    * @minimum 0
    */
+  default_asn: number;
+};
+
+export type NscSettingsRequest = {
+  /**
+   * @format int32
+   * @minimum 0
+   */
   default_asn?: number | null;
 };
 
