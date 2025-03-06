@@ -41818,7 +41818,7 @@ export const cloudflareTunnelUpdateACloudflareTunnel = (
 
 export type CloudflareTunnelConfigurationGetConfigurationPathParams = {
   accountId: Schemas.TunnelIdentifier;
-  tunnelId: Schemas.TunnelTunnelId;
+  tunnelId: Schemas.TunnelSchemasTunnelId;
 };
 
 export type CloudflareTunnelConfigurationGetConfigurationError = Fetcher.ErrorWrapper<{
@@ -41848,7 +41848,7 @@ export const cloudflareTunnelConfigurationGetConfiguration = (
 
 export type CloudflareTunnelConfigurationPutConfigurationPathParams = {
   accountId: Schemas.TunnelIdentifier;
-  tunnelId: Schemas.TunnelTunnelId;
+  tunnelId: Schemas.TunnelSchemasTunnelId;
 };
 
 export type CloudflareTunnelConfigurationPutConfigurationError = Fetcher.ErrorWrapper<{
@@ -65683,18 +65683,20 @@ export type TunnelRouteListTunnelRoutesPathParams = {
 };
 
 export type TunnelRouteListTunnelRoutesQueryParams = {
-  comment?: Schemas.TunnelComment;
+  comment?: Schemas.TunnelRouteComment;
   is_deleted?: boolean;
   /**
    * The private IPv4 or IPv6 range connected by the route, in CIDR notation.
    *
    * @example 172.16.0.0/16
+   * @x-auditable true
    */
   network_subset?: Schemas.TunnelIpNetwork;
   /**
    * The private IPv4 or IPv6 range connected by the route, in CIDR notation.
    *
    * @example 172.16.0.0/16
+   * @x-auditable true
    */
   network_superset?: Schemas.TunnelIpNetwork;
   existed_at?: Schemas.TunnelExistedAt;
@@ -65739,7 +65741,7 @@ export type TunnelRouteCreateATunnelRouteError = Fetcher.ErrorWrapper<{
 }>;
 
 export type TunnelRouteCreateATunnelRouteRequestBody = {
-  comment?: Schemas.TunnelComment;
+  comment?: Schemas.TunnelRouteComment;
   network: Schemas.TunnelIpNetwork;
   tunnel_id: Schemas.TunnelTunnelId;
   virtual_network_id?: Schemas.TunnelVirtualNetworkId;
@@ -65773,6 +65775,12 @@ export type TunnelRouteGetTunnelRouteByIpPathParams = {
 
 export type TunnelRouteGetTunnelRouteByIpQueryParams = {
   virtual_network_id?: Schemas.TunnelVirtualNetworkId;
+  /**
+   * When the virtual_network_id parameter is not provided the request filter will default search routes that are in the default virtual network for the account. If this parameter is set to false, the search will include routes that do not have a virtual network.
+   *
+   * @default true
+   */
+  default_virtual_network_fallback?: boolean;
 };
 
 export type TunnelRouteGetTunnelRouteByIpError = Fetcher.ErrorWrapper<{
@@ -65879,7 +65887,7 @@ export type TunnelRouteCreateATunnelRouteWithCidrError = Fetcher.ErrorWrapper<{
 }>;
 
 export type TunnelRouteCreateATunnelRouteWithCidrRequestBody = {
-  comment?: Schemas.TunnelComment;
+  comment?: Schemas.TunnelRouteComment;
   tunnel_id: Schemas.TunnelTunnelId;
   virtual_network_id?: Schemas.TunnelVirtualNetworkId;
 };
@@ -65973,7 +65981,7 @@ export type TunnelRouteUpdateATunnelRouteError = Fetcher.ErrorWrapper<{
 }>;
 
 export type TunnelRouteUpdateATunnelRouteRequestBody = {
-  comment?: Schemas.TunnelComment;
+  comment?: Schemas.TunnelRouteComment;
   network?: Schemas.TunnelIpNetwork;
   tunnel_id?: Schemas.TunnelTunnelId;
   virtual_network_id?: Schemas.TunnelVirtualNetworkId;
