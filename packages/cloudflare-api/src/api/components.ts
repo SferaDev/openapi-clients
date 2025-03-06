@@ -2532,7 +2532,7 @@ export type SubmitAbuseReportError = Fetcher.ErrorWrapper<
 >;
 
 export type SubmitAbuseReportVariables = {
-  body: Schemas.AbuseReportsSubmitReportRequest;
+  body?: Schemas.AbuseReportsSubmitReportRequest;
   pathParams: SubmitAbuseReportPathParams;
 } & FetcherExtraProps;
 

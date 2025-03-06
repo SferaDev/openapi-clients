@@ -1169,10 +1169,463 @@ export type AbuseReportsBadStateError = string;
  */
 export type AbuseReportsBadUrlsError = string;
 
+export type AbuseReportsBaseReportFields = {
+  act: AbuseReportsReportType;
+  /**
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 100
+   * @minLength 1
+   */
+  address1?: string;
+  /**
+   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 60
+   * @minLength 1
+   */
+  agent_name?: string;
+  /**
+   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
+   */
+  agree?: 0 | 1;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  city?: string;
+  /**
+   * Any additional comments about the infringement not exceeding 2000 characters
+   *
+   * @maxLength 2000
+   * @minLength 1
+   */
+  comments?: string;
+  /**
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 100
+   * @minLength 1
+   */
+  company?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  country?: string;
+  /**
+   * A list of IP addresses separated by ‘
+   * ’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
+   */
+  destination_ips?: string;
+  /**
+   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  email: string;
+  /**
+   * Should match the value provided in `email`
+   */
+  email2: string;
+  host_notification?: AbuseReportsNotification;
+  /**
+   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
+   *
+   * @maxLength 5000
+   * @minLength 1
+   */
+  justification?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  name: string;
+  ncmec_notification?: AbuseReportsNotification;
+  /**
+   * If the submitter is the target of NCSEI in the URLs of the abuse report.
+   */
+  ncsei_subject_representation?: boolean;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  original_work?: string;
+  owner_notification?: AbuseReportsNotification;
+  /**
+   * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
+   */
+  ports_protocols?: string;
+  /**
+   * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
+   */
+  signature?: string;
+  /**
+   * A list of IP addresses separated by ‘
+   * ’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
+   */
+  source_ips?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  state?: string;
+  /**
+   * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 20
+   * @minLength 1
+   */
+  tele?: string;
+  /**
+   * Text not exceeding 255 characters
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  title?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_number?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_office?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_symbol?: string;
+  /**
+   * A list of valid URLs separated by ‘
+   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  urls: string;
+};
+
+export type AbuseReportsChildrenAbuseReport = {
+  act?: AbuseReportsReportType;
+  /**
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 100
+   * @minLength 1
+   */
+  address1?: string;
+  /**
+   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 60
+   * @minLength 1
+   */
+  agent_name?: string;
+  /**
+   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
+   */
+  agree?: 0 | 1;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  city?: string;
+  /**
+   * Any additional comments about the infringement not exceeding 2000 characters
+   *
+   * @maxLength 2000
+   * @minLength 1
+   */
+  comments?: string;
+  /**
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 100
+   * @minLength 1
+   */
+  company?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  country?: string;
+  /**
+   * A list of IP addresses separated by ‘
+   * ’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
+   */
+  destination_ips?: string;
+  /**
+   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  email?: string;
+  /**
+   * Should match the value provided in `email`
+   */
+  email2?: string;
+  host_notification: AbuseReportsNotification;
+  /**
+   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
+   *
+   * @maxLength 5000
+   * @minLength 1
+   */
+  justification: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  name: string;
+  ncmec_notification: AbuseReportsNotification;
+  /**
+   * If the submitter is the target of NCSEI in the URLs of the abuse report.
+   */
+  ncsei_subject_representation?: boolean;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  original_work?: string;
+  owner_notification: AbuseReportsNotification;
+  /**
+   * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
+   */
+  ports_protocols?: string;
+  /**
+   * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
+   */
+  signature?: string;
+  /**
+   * A list of IP addresses separated by ‘
+   * ’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
+   */
+  source_ips?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  state?: string;
+  /**
+   * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 20
+   * @minLength 1
+   */
+  tele?: string;
+  /**
+   * Text not exceeding 255 characters
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  title?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_number?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_office?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_symbol?: string;
+  /**
+   * A list of valid URLs separated by ‘
+   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  urls?: string;
+};
+
 /**
  * Failed while reading from database Failed while writing to the database This service error will trigger an alert for Cloudflare engineers to investigate the cause resolve it.
  */
 export type AbuseReportsDBError = string;
+
+export type AbuseReportsDMCAReport = {
+  act?: AbuseReportsReportType;
+  /**
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 100
+   * @minLength 1
+   */
+  address1: string;
+  /**
+   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 60
+   * @minLength 1
+   */
+  agent_name: string;
+  /**
+   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
+   */
+  agree: 1 | 1;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  city: string;
+  /**
+   * Any additional comments about the infringement not exceeding 2000 characters
+   *
+   * @maxLength 2000
+   * @minLength 1
+   */
+  comments?: string;
+  /**
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 100
+   * @minLength 1
+   */
+  company?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  country: string;
+  /**
+   * A list of IP addresses separated by ‘
+   * ’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
+   */
+  destination_ips?: string;
+  /**
+   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  email?: string;
+  /**
+   * Should match the value provided in `email`
+   */
+  email2?: string;
+  host_notification: AbuseReportsNotification;
+  /**
+   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
+   *
+   * @maxLength 5000
+   * @minLength 1
+   */
+  justification?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  name?: string;
+  ncmec_notification?: AbuseReportsNotification;
+  /**
+   * If the submitter is the target of NCSEI in the URLs of the abuse report.
+   */
+  ncsei_subject_representation?: boolean;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  original_work: string;
+  owner_notification: AbuseReportsNotification;
+  /**
+   * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
+   */
+  ports_protocols?: string;
+  /**
+   * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
+   */
+  signature: string;
+  /**
+   * A list of IP addresses separated by ‘
+   * ’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
+   */
+  source_ips?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  state: string;
+  /**
+   * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 20
+   * @minLength 1
+   */
+  tele?: string;
+  /**
+   * Text not exceeding 255 characters
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  title?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_number?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_office?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_symbol?: string;
+  /**
+   * A list of valid URLs separated by ‘
+   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  urls?: string;
+};
 
 /**
  * You have already submitted this URL in the last 7 days
@@ -1220,83 +1673,8 @@ export type AbuseReportsErrorCode =
   | AbuseReportsUrlNotOrangeError
   | AbuseReportsUrlNotvalidError;
 
-/**
- * Failed to translate email
- */
-export type AbuseReportsInternalError = string;
-
-/**
- * Invalid value for notification preference
- */
-export type AbuseReportsInvalidNotifyError = string;
-
-/**
- * Provided value has invalid size
- */
-export type AbuseReportsMaxIPsError = string;
-
-/**
- * Please pick one party to notify about this report
- */
-export type AbuseReportsMustNotifyError = string;
-
-/**
- * Must acknowledge that you are bound by 512(f), that you have a good faith belief about the material, and that you have the authority to act
- */
-export type AbuseReportsNoAgreeError = string;
-
-/**
- * Original Work section must be between 1 and 2000 characters
- */
-export type AbuseReportsNoOriginalWorkError = string;
-
-/**
- * Signature must match your name
- */
-export type AbuseReportsNoSigError = string;
-
-/**
- * Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.
- */
-export type AbuseReportsNotification = 'send' | 'send-anon' | 'none';
-
-/**
- * Provided value has invalid size
- */
-export type AbuseReportsPortsProtocolError = string;
-
-/**
- * The abuse report type
- *
- * @example abuse_general
- */
-export type AbuseReportsReportType =
-  | 'abuse_dmca'
-  | 'abuse_trademark'
-  | 'abuse_general'
-  | 'abuse_phishing'
-  | 'abuse_children'
-  | 'abuse_threat'
-  | 'abuse_registrar_whois'
-  | 'abuse_ncsei';
-
-export type AbuseReportsSubmitErrorResponse = {
-  error_code: AbuseReportsErrorCode;
-  /**
-   * The error message for the error
-   */
-  msg: string;
-  request: {
-    act: AbuseReportsReportType;
-  };
-  /**
-   * The result should be 'error' for successful response
-   */
-  result: string;
-};
-
-export type AbuseReportsSubmitReportRequest = {
-  act: AbuseReportsReportType;
+export type AbuseReportsGeneralReport = {
+  act?: AbuseReportsReportType;
   /**
    * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -1312,9 +1690,9 @@ export type AbuseReportsSubmitReportRequest = {
    */
   agent_name?: string;
   /**
-   * Can be `0` for false or `1` for true
+   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
    */
-  agree: 0 | 1;
+  agree?: 0 | 1;
   /**
    * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -1351,11 +1729,11 @@ export type AbuseReportsSubmitReportRequest = {
   /**
    * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
-  email: string;
+  email?: string;
   /**
    * Should match the value provided in `email`
    */
-  email2: string;
+  email2?: string;
   host_notification: AbuseReportsNotification;
   /**
    * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
@@ -1363,17 +1741,17 @@ export type AbuseReportsSubmitReportRequest = {
    * @maxLength 5000
    * @minLength 1
    */
-  justification?: string;
+  justification: string;
   /**
    * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 255
    * @minLength 1
    */
-  name?: string;
-  ncmec_notification: AbuseReportsNotification;
+  name: string;
+  ncmec_notification?: AbuseReportsNotification;
   /**
-   * If the submitter is the target of NCSEI in the URLs of the abuse report
+   * If the submitter is the target of NCSEI in the URLs of the abuse report.
    */
   ncsei_subject_representation?: boolean;
   /**
@@ -1446,6 +1824,544 @@ export type AbuseReportsSubmitReportRequest = {
   urls: string;
 };
 
+/**
+ * Failed to translate email
+ */
+export type AbuseReportsInternalError = string;
+
+/**
+ * Invalid value for notification preference
+ */
+export type AbuseReportsInvalidNotifyError = string;
+
+/**
+ * Provided value has invalid size
+ */
+export type AbuseReportsMaxIPsError = string;
+
+/**
+ * Please pick one party to notify about this report
+ */
+export type AbuseReportsMustNotifyError = string;
+
+export type AbuseReportsNCSEIReport = {
+  act?: AbuseReportsReportType;
+  /**
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 100
+   * @minLength 1
+   */
+  address1?: string;
+  /**
+   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 60
+   * @minLength 1
+   */
+  agent_name?: string;
+  /**
+   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
+   */
+  agree?: 0 | 1;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  city?: string;
+  /**
+   * Any additional comments about the infringement not exceeding 2000 characters
+   *
+   * @maxLength 2000
+   * @minLength 1
+   */
+  comments?: string;
+  /**
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 100
+   * @minLength 1
+   */
+  company?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  country?: string;
+  /**
+   * A list of IP addresses separated by ‘
+   * ’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
+   */
+  destination_ips?: string;
+  /**
+   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  email?: string;
+  /**
+   * Should match the value provided in `email`
+   */
+  email2?: string;
+  host_notification: AbuseReportsNotification;
+  /**
+   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
+   *
+   * @maxLength 5000
+   * @minLength 1
+   */
+  justification?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  name: string;
+  ncmec_notification?: AbuseReportsNotification;
+  /**
+   * If the submitter is the target of NCSEI in the URLs of the abuse report.
+   */
+  ncsei_subject_representation: boolean;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  original_work?: string;
+  owner_notification: AbuseReportsNotification;
+  /**
+   * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
+   */
+  ports_protocols?: string;
+  /**
+   * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
+   */
+  signature?: string;
+  /**
+   * A list of IP addresses separated by ‘
+   * ’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
+   */
+  source_ips?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  state?: string;
+  /**
+   * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 20
+   * @minLength 1
+   */
+  tele?: string;
+  /**
+   * Text not exceeding 255 characters
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  title?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_number?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_office?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_symbol?: string;
+  /**
+   * A list of valid URLs separated by ‘
+   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  urls: string;
+};
+
+/**
+ * Must acknowledge that you are bound by 512(f), that you have a good faith belief about the material, and that you have the authority to act
+ */
+export type AbuseReportsNoAgreeError = string;
+
+/**
+ * Original Work section must be between 1 and 2000 characters
+ */
+export type AbuseReportsNoOriginalWorkError = string;
+
+/**
+ * Signature must match your name
+ */
+export type AbuseReportsNoSigError = string;
+
+/**
+ * Notification type based on the abuse type. NOTE: Copyright (DMCA) and Trademark reports cannot be anonymous.
+ */
+export type AbuseReportsNotification = 'send' | 'send-anon' | 'none';
+
+export type AbuseReportsPhishingReport = {
+  act?: AbuseReportsReportType;
+  /**
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 100
+   * @minLength 1
+   */
+  address1?: string;
+  /**
+   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 60
+   * @minLength 1
+   */
+  agent_name?: string;
+  /**
+   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
+   */
+  agree?: 0 | 1;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  city?: string;
+  /**
+   * Any additional comments about the infringement not exceeding 2000 characters
+   *
+   * @maxLength 2000
+   * @minLength 1
+   */
+  comments?: string;
+  /**
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 100
+   * @minLength 1
+   */
+  company?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  country?: string;
+  /**
+   * A list of IP addresses separated by ‘
+   * ’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
+   */
+  destination_ips?: string;
+  /**
+   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  email?: string;
+  /**
+   * Should match the value provided in `email`
+   */
+  email2?: string;
+  host_notification: AbuseReportsNotification;
+  /**
+   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
+   *
+   * @maxLength 5000
+   * @minLength 1
+   */
+  justification: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  name: string;
+  ncmec_notification?: AbuseReportsNotification;
+  /**
+   * If the submitter is the target of NCSEI in the URLs of the abuse report.
+   */
+  ncsei_subject_representation?: boolean;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  original_work?: string;
+  owner_notification: AbuseReportsNotification;
+  /**
+   * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
+   */
+  ports_protocols?: string;
+  /**
+   * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
+   */
+  signature?: string;
+  /**
+   * A list of IP addresses separated by ‘
+   * ’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
+   */
+  source_ips?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  state?: string;
+  /**
+   * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 20
+   * @minLength 1
+   */
+  tele?: string;
+  /**
+   * Text not exceeding 255 characters
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  title?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_number?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_office?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_symbol?: string;
+  /**
+   * A list of valid URLs separated by ‘
+   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  urls: string;
+};
+
+/**
+ * Provided value has invalid size
+ */
+export type AbuseReportsPortsProtocolError = string;
+
+export type AbuseReportsRegistrarWhoisReport = {
+  act?: AbuseReportsReportType;
+  /**
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 100
+   * @minLength 1
+   */
+  address1?: string;
+  /**
+   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 60
+   * @minLength 1
+   */
+  agent_name?: string;
+  /**
+   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
+   */
+  agree?: 0 | 1;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  city?: string;
+  /**
+   * Any additional comments about the infringement not exceeding 2000 characters
+   *
+   * @maxLength 2000
+   * @minLength 1
+   */
+  comments?: string;
+  /**
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 100
+   * @minLength 1
+   */
+  company?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  country?: string;
+  /**
+   * A list of IP addresses separated by ‘
+   * ’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
+   */
+  destination_ips?: string;
+  /**
+   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  email: string;
+  /**
+   * Should match the value provided in `email`
+   */
+  email2: string;
+  host_notification?: AbuseReportsNotification;
+  /**
+   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
+   *
+   * @maxLength 5000
+   * @minLength 1
+   */
+  justification?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  name: string;
+  ncmec_notification?: AbuseReportsNotification;
+  /**
+   * If the submitter is the target of NCSEI in the URLs of the abuse report.
+   */
+  ncsei_subject_representation?: boolean;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  original_work?: string;
+  owner_notification: AbuseReportsNotification;
+  /**
+   * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
+   */
+  ports_protocols?: string;
+  /**
+   * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
+   */
+  signature?: string;
+  /**
+   * A list of IP addresses separated by ‘
+   * ’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
+   */
+  source_ips?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  state?: string;
+  /**
+   * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 20
+   * @minLength 1
+   */
+  tele?: string;
+  /**
+   * Text not exceeding 255 characters
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  title?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_number?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_office?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_symbol?: string;
+  /**
+   * A list of valid URLs separated by ‘
+   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  urls: string;
+};
+
+/**
+ * The abuse report type
+ *
+ * @example abuse_general
+ */
+export type AbuseReportsReportType =
+  | 'abuse_dmca'
+  | 'abuse_trademark'
+  | 'abuse_general'
+  | 'abuse_phishing'
+  | 'abuse_children'
+  | 'abuse_threat'
+  | 'abuse_registrar_whois'
+  | 'abuse_ncsei';
+
+export type AbuseReportsSubmitErrorResponse = {
+  error_code: AbuseReportsErrorCode;
+  /**
+   * The error message for the error
+   */
+  msg: string;
+  request: {
+    act: AbuseReportsReportType;
+  };
+  /**
+   * The result should be 'error' for successful response
+   */
+  result: string;
+};
+
+export type AbuseReportsSubmitReportRequest =
+  | AbuseReportsDMCAReport
+  | AbuseReportsTrademarkReport
+  | AbuseReportsGeneralReport
+  | AbuseReportsPhishingReport
+  | AbuseReportsChildrenAbuseReport
+  | AbuseReportsThreatReport
+  | AbuseReportsRegistrarWhoisReport
+  | AbuseReportsNCSEIReport;
+
 export type AbuseReportsSubmitReportResponse = {
   /**
    * The identifier for the submitted abuse report.
@@ -1458,6 +2374,308 @@ export type AbuseReportsSubmitReportResponse = {
    * The result should be 'success' for successful response
    */
   result: string;
+};
+
+export type AbuseReportsThreatReport = {
+  act?: AbuseReportsReportType;
+  /**
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 100
+   * @minLength 1
+   */
+  address1?: string;
+  /**
+   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 60
+   * @minLength 1
+   */
+  agent_name?: string;
+  /**
+   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
+   */
+  agree?: 0 | 1;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  city?: string;
+  /**
+   * Any additional comments about the infringement not exceeding 2000 characters
+   *
+   * @maxLength 2000
+   * @minLength 1
+   */
+  comments?: string;
+  /**
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 100
+   * @minLength 1
+   */
+  company?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  country?: string;
+  /**
+   * A list of IP addresses separated by ‘
+   * ’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
+   */
+  destination_ips?: string;
+  /**
+   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  email?: string;
+  /**
+   * Should match the value provided in `email`
+   */
+  email2?: string;
+  host_notification: AbuseReportsNotification;
+  /**
+   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
+   *
+   * @maxLength 5000
+   * @minLength 1
+   */
+  justification: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  name: string;
+  ncmec_notification?: AbuseReportsNotification;
+  /**
+   * If the submitter is the target of NCSEI in the URLs of the abuse report.
+   */
+  ncsei_subject_representation?: boolean;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  original_work?: string;
+  owner_notification: AbuseReportsNotification;
+  /**
+   * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
+   */
+  ports_protocols?: string;
+  /**
+   * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
+   */
+  signature?: string;
+  /**
+   * A list of IP addresses separated by ‘
+   * ’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
+   */
+  source_ips?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  state?: string;
+  /**
+   * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 20
+   * @minLength 1
+   */
+  tele?: string;
+  /**
+   * Text not exceeding 255 characters
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  title?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_number?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_office?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_symbol?: string;
+  /**
+   * A list of valid URLs separated by ‘
+   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  urls: string;
+};
+
+export type AbuseReportsTrademarkReport = {
+  act?: AbuseReportsReportType;
+  /**
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 100
+   * @minLength 1
+   */
+  address1?: string;
+  /**
+   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 60
+   * @minLength 1
+   */
+  agent_name?: string;
+  /**
+   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
+   */
+  agree?: 0 | 1;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  city?: string;
+  /**
+   * Any additional comments about the infringement not exceeding 2000 characters
+   *
+   * @maxLength 2000
+   * @minLength 1
+   */
+  comments?: string;
+  /**
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 100
+   * @minLength 1
+   */
+  company?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  country?: string;
+  /**
+   * A list of IP addresses separated by ‘
+   * ’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
+   */
+  destination_ips?: string;
+  /**
+   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  email?: string;
+  /**
+   * Should match the value provided in `email`
+   */
+  email2?: string;
+  host_notification: AbuseReportsNotification;
+  /**
+   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
+   *
+   * @maxLength 5000
+   * @minLength 1
+   */
+  justification: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  name?: string;
+  ncmec_notification?: AbuseReportsNotification;
+  /**
+   * If the submitter is the target of NCSEI in the URLs of the abuse report.
+   */
+  ncsei_subject_representation?: boolean;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  original_work?: string;
+  owner_notification: AbuseReportsNotification;
+  /**
+   * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
+   */
+  ports_protocols?: string;
+  /**
+   * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
+   */
+  signature?: string;
+  /**
+   * A list of IP addresses separated by ‘
+   * ’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
+   */
+  source_ips?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  state?: string;
+  /**
+   * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 20
+   * @minLength 1
+   */
+  tele?: string;
+  /**
+   * Text not exceeding 255 characters
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  title?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_number: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_office: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_symbol: string;
+  /**
+   * A list of valid URLs separated by ‘
+   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  urls?: string;
 };
 
 /**
