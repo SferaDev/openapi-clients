@@ -21518,6 +21518,7 @@ export type HyperdriveOverAccessOrigin = {
    * The Client Secret of the Access token to use when connecting to the origin database. This value is write-only and never returned by the API.
    *
    * @example 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+   * @x-sensitive true
    */
   access_client_secret: string;
   /**
@@ -39478,6 +39479,14 @@ export type StreamDirectUploadResponse = StreamApiResponseSingle & {
     watermark?: StreamWatermarks;
   };
 };
+
+/**
+ * Provisions a URL to let your end users upload videos directly to Cloudflare Stream without exposing your API token to clients.
+ *
+ * @default false
+ * @example true
+ */
+export type StreamDirectUser = boolean;
 
 /**
  * The source URL for a downloaded image. If the watermark profile was created via direct upload, this field is null.

@@ -64261,6 +64261,10 @@ export type StreamVideosInitiateVideoUploadsUsingTusPathParams = {
   accountId: Schemas.StreamAccountIdentifier;
 };
 
+export type StreamVideosInitiateVideoUploadsUsingTusQueryParams = {
+  direct_user?: Schemas.StreamDirectUser;
+};
+
 export type StreamVideosInitiateVideoUploadsUsingTusHeaders = {
   ['Tus-Resumable']: Schemas.StreamTusResumable;
   ['Upload-Creator']?: Schemas.StreamCreator;
@@ -64273,6 +64277,7 @@ export type StreamVideosInitiateVideoUploadsUsingTusError = Fetcher.ErrorWrapper
 export type StreamVideosInitiateVideoUploadsUsingTusVariables = {
   headers: StreamVideosInitiateVideoUploadsUsingTusHeaders;
   pathParams: StreamVideosInitiateVideoUploadsUsingTusPathParams;
+  queryParams?: StreamVideosInitiateVideoUploadsUsingTusQueryParams;
 } & FetcherExtraProps;
 
 /**
@@ -64287,7 +64292,7 @@ export const streamVideosInitiateVideoUploadsUsingTus = (
     StreamVideosInitiateVideoUploadsUsingTusError,
     undefined,
     StreamVideosInitiateVideoUploadsUsingTusHeaders,
-    {},
+    StreamVideosInitiateVideoUploadsUsingTusQueryParams,
     StreamVideosInitiateVideoUploadsUsingTusPathParams
   >({ url: '/accounts/{accountId}/stream', method: 'post', ...variables, signal });
 
