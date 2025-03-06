@@ -2221,6 +2221,27 @@ export type UpdateProjectDataCacheResponse = {
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
+  rollingRelease?: {
+    /**
+     * The environment that the release targets, currently only supports production. Adding in case we want to configure with alias groups or custom environments.
+     */
+    target: string;
+    /**
+     * minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth 0-100 stage. So once we have fetched the document with the start time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving. There is no approval required, and for the case of Vercel, it would just slowly shift traffic 0 to 100%.
+     */
+    minutesToRelease?: number;
+    /**
+     * An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.
+     */
+    stages?:
+      | {
+          /**
+           * The percentage of traffic to serve to the new deployment
+           */
+          targetPercentage: number;
+        }[]
+      | null;
+  } | null;
   defaultResourceConfig: {
     fluid?: boolean;
     functionDefaultRegions: string[];
@@ -3773,10 +3794,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    createdAt?: number;
     id?: string;
-    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    createdAt?: number;
     entrypoint?: string | null;
+    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
     readyStateAt?: number;
     output: {
       path: string;
@@ -4066,7 +4087,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
             src?: string;
             dest?: string;
             status?: number;
@@ -4099,7 +4120,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         org: string;
@@ -4111,7 +4132,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         owner: string;
@@ -4123,7 +4144,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | null;
   flags?:
@@ -11200,6 +11221,27 @@ export type GetProjectsResponse = {
       functionZeroConfigFailover?: boolean;
       elasticConcurrencyEnabled?: boolean;
     };
+    rollingRelease?: {
+      /**
+       * The environment that the release targets, currently only supports production. Adding in case we want to configure with alias groups or custom environments.
+       */
+      target: string;
+      /**
+       * minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth 0-100 stage. So once we have fetched the document with the start time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving. There is no approval required, and for the case of Vercel, it would just slowly shift traffic 0 to 100%.
+       */
+      minutesToRelease?: number;
+      /**
+       * An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.
+       */
+      stages?:
+        | {
+            /**
+             * The percentage of traffic to serve to the new deployment
+             */
+            targetPercentage: number;
+          }[]
+        | null;
+    } | null;
     defaultResourceConfig: {
       fluid?: boolean;
       functionDefaultRegions: string[];
@@ -12131,6 +12173,27 @@ export type CreateProjectResponse = {
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
+  rollingRelease?: {
+    /**
+     * The environment that the release targets, currently only supports production. Adding in case we want to configure with alias groups or custom environments.
+     */
+    target: string;
+    /**
+     * minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth 0-100 stage. So once we have fetched the document with the start time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving. There is no approval required, and for the case of Vercel, it would just slowly shift traffic 0 to 100%.
+     */
+    minutesToRelease?: number;
+    /**
+     * An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.
+     */
+    stages?:
+      | {
+          /**
+           * The percentage of traffic to serve to the new deployment
+           */
+          targetPercentage: number;
+        }[]
+      | null;
+  } | null;
   defaultResourceConfig: {
     fluid?: boolean;
     functionDefaultRegions: string[];
@@ -13243,6 +13306,27 @@ export type GetProjectResponse = {
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
+  rollingRelease?: {
+    /**
+     * The environment that the release targets, currently only supports production. Adding in case we want to configure with alias groups or custom environments.
+     */
+    target: string;
+    /**
+     * minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth 0-100 stage. So once we have fetched the document with the start time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving. There is no approval required, and for the case of Vercel, it would just slowly shift traffic 0 to 100%.
+     */
+    minutesToRelease?: number;
+    /**
+     * An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.
+     */
+    stages?:
+      | {
+          /**
+           * The percentage of traffic to serve to the new deployment
+           */
+          targetPercentage: number;
+        }[]
+      | null;
+  } | null;
   defaultResourceConfig: {
     fluid?: boolean;
     functionDefaultRegions: string[];
@@ -14182,6 +14266,27 @@ export type UpdateProjectResponse = {
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
   };
+  rollingRelease?: {
+    /**
+     * The environment that the release targets, currently only supports production. Adding in case we want to configure with alias groups or custom environments.
+     */
+    target: string;
+    /**
+     * minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth 0-100 stage. So once we have fetched the document with the start time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving. There is no approval required, and for the case of Vercel, it would just slowly shift traffic 0 to 100%.
+     */
+    minutesToRelease?: number;
+    /**
+     * An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.
+     */
+    stages?:
+      | {
+          /**
+           * The percentage of traffic to serve to the new deployment
+           */
+          targetPercentage: number;
+        }[]
+      | null;
+  } | null;
   defaultResourceConfig: {
     fluid?: boolean;
     functionDefaultRegions: string[];
@@ -15814,7 +15919,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -15919,7 +16024,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -16026,7 +16131,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -16168,7 +16273,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16272,7 +16377,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16810,7 +16915,7 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16908,7 +17013,7 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17011,7 +17116,7 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17164,7 +17269,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17268,7 +17373,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17371,7 +17476,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17565,7 +17670,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
