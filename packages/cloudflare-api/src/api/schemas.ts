@@ -44507,6 +44507,7 @@ export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSche
  *
  * @example 699d98642c564d2e855e9661899b7252
  * @maxLength 32
+ * @x-auditable true
  */
 export type TunnelAccountId = string;
 
@@ -44602,6 +44603,7 @@ export type TunnelCfdTunnel = {
  * @example 1bedc50d-42b3-473c-b108-ff3d10c0d925
  * @format uuid
  * @maxLength 36
+ * @x-auditable true
  */
 export type TunnelClientId = string;
 
@@ -44611,14 +44613,6 @@ export type TunnelClientId = string;
  * @example DFW
  */
 export type TunnelColoName = string;
-
-/**
- * Optional remark describing the route.
- *
- * @example Example comment for this route.
- * @maxLength 100
- */
-export type TunnelComment = string;
 
 /**
  * The tunnel configuration and ingress rules.
@@ -44663,7 +44657,7 @@ export type TunnelConfiguration = {
   config?: TunnelConfig;
   created_at?: TunnelTimestamp;
   source?: TunnelSchemasConfigSrc;
-  tunnel_id?: TunnelTunnelId;
+  tunnel_id?: TunnelSchemasTunnelId;
   version?: TunnelSchemasConfigVersion;
 };
 
@@ -44683,6 +44677,7 @@ export type TunnelConnection = {
  * @example 1bedc50d-42b3-473c-b108-ff3d10c0d925
  * @format uuid
  * @maxLength 36
+ * @x-auditable true
  */
 export type TunnelConnectionId = string;
 
@@ -44752,6 +44747,7 @@ export type TunnelFeatures = string[];
  * A flag to enable the ICMP proxy for the account network.
  *
  * @example true
+ * @x-auditable true
  */
 export type TunnelIcmpProxyEnabled = boolean;
 
@@ -44798,6 +44794,7 @@ export type TunnelIp = string;
  * The private IPv4 or IPv6 range connected by the route, in CIDR notation.
  *
  * @example 172.16.0.0/16
+ * @x-auditable true
  */
 export type TunnelIpNetwork = string;
 
@@ -44812,6 +44809,7 @@ export type TunnelIpNetworkEncoded = string;
  * If `true`, this virtual network is the default for the account.
  *
  * @example true
+ * @x-auditable true
  */
 export type TunnelIsDefaultNetwork = boolean;
 
@@ -44864,6 +44862,7 @@ export type TunnelMetadata = Record<string, any>;
  * A flag to enable WARP to WARP traffic.
  *
  * @example true
+ * @x-auditable true
  */
 export type TunnelOfframpWarpEnabled = boolean;
 
@@ -44984,6 +44983,7 @@ export type TunnelPerPage = number;
  * If `true`, the tunnel can be configured remotely from the Zero Trust dashboard. If `false`, the tunnel must be configured locally on the origin machine.
  *
  * @example true
+ * @x-auditable true
  */
 export type TunnelRemoteConfig = boolean;
 
@@ -45015,7 +45015,7 @@ export type TunnelResultInfo = {
 };
 
 export type TunnelRoute = {
-  comment?: TunnelComment;
+  comment?: TunnelRouteComment;
   created_at?: TunnelCreatedAt;
   deleted_at?: TunnelDeletedAt;
   id?: TunnelRouteId;
@@ -45023,6 +45023,15 @@ export type TunnelRoute = {
   tunnel_id?: TunnelTunnelId;
   virtual_network_id?: TunnelVirtualNetworkId;
 };
+
+/**
+ * Optional remark describing the route.
+ *
+ * @example Example comment for this route.
+ * @maxLength 100
+ * @x-auditable true
+ */
+export type TunnelRouteComment = string;
 
 /**
  * UUID of the route.
@@ -45101,6 +45110,15 @@ export type TunnelSchemasConnection = {
 };
 
 /**
+ * UUID of the tunnel.
+ *
+ * @example f70ff985-a4ef-4643-bbbc-4a0ed4fc8415
+ * @format uuid
+ * @maxLength 36
+ */
+export type TunnelSchemasTunnelId = string;
+
+/**
  * The status of the tunnel. Valid values are `inactive` (tunnel has never been run), `degraded` (tunnel is active and able to serve traffic but in an unhealthy state), `healthy` (tunnel is active and able to serve traffic), or `down` (tunnel can not serve traffic as it has no connections to the Cloudflare Edge).
  *
  * @example healthy
@@ -45122,6 +45140,7 @@ export type TunnelSubnet = {
  * An optional description of the subnet.
  *
  * @example example comment
+ * @x-auditable true
  */
 export type TunnelSubnetComment = string;
 
@@ -45130,6 +45149,7 @@ export type TunnelSubnetComment = string;
  *
  * @example f70ff985-a4ef-4643-bbbc-4a0ed4fc8415
  * @format uuid
+ * @x-auditable true
  */
 export type TunnelSubnetId = string;
 
@@ -45137,11 +45157,14 @@ export type TunnelSubnetId = string;
  * The private IPv4 or IPv6 range defining the subnet, in CIDR notation.
  *
  * @example 100.64.0.0/12
+ * @x-auditable true
  */
 export type TunnelSubnetIpNetwork = string;
 
 /**
  * If `true`, this is the default subnet for the account. There can only be one default subnet per account.
+ *
+ * @x-auditable true
  */
 export type TunnelSubnetIsDefaultNetwork = boolean;
 
@@ -45149,6 +45172,7 @@ export type TunnelSubnetIsDefaultNetwork = boolean;
  * A user-friendly name for the subnet.
  *
  * @example IPv4 Cloudflare Source IPs
+ * @x-auditable true
  */
 export type TunnelSubnetName = string;
 
@@ -45186,11 +45210,12 @@ export type TunnelSubnetResponseSingle = {
  * The type of subnet.
  *
  * @example cloudflare_source
+ * @x-auditable true
  */
 export type TunnelSubnetType = 'cloudflare_source';
 
 export type TunnelTeamnet = {
-  comment?: TunnelComment;
+  comment?: TunnelRouteComment;
   created_at?: TunnelCreatedAt;
   deleted_at?: TunnelDeletedAt;
   id?: TunnelRouteId;
@@ -45275,6 +45300,7 @@ export type TunnelTunnelConnectionsResponse = TunnelApiResponseCollection & {
  * @example f70ff985-a4ef-4643-bbbc-4a0ed4fc8415
  * @format uuid
  * @maxLength 36
+ * @x-auditable true
  */
 export type TunnelTunnelId = string;
 
@@ -45327,6 +45353,7 @@ export type TunnelTunnelToken = string;
  * The type of tunnel.
  *
  * @example cfd_tunnel
+ * @x-auditable true
  */
 export type TunnelTunnelType = 'cfd_tunnel' | 'warp_connector' | 'warp' | 'magic' | 'ip_sec' | 'gre' | 'cni';
 
@@ -45358,6 +45385,7 @@ export type TunnelVirtualNetwork = {
  *
  * @example Staging VPC for data science
  * @maxLength 256
+ * @x-auditable true
  */
 export type TunnelVirtualNetworkComment = string;
 
@@ -45366,6 +45394,7 @@ export type TunnelVirtualNetworkComment = string;
  *
  * @example f70ff985-a4ef-4643-bbbc-4a0ed4fc8415
  * @format uuid
+ * @x-auditable true
  */
 export type TunnelVirtualNetworkId = string;
 
@@ -45374,6 +45403,7 @@ export type TunnelVirtualNetworkId = string;
  *
  * @example us-east-1-vpc
  * @maxLength 256
+ * @x-auditable true
  */
 export type TunnelVirtualNetworkName = string;
 
