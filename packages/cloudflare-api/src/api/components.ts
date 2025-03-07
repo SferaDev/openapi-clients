@@ -1275,6 +1275,52 @@ export const postDatasetUpdate = (variables: PostDatasetUpdateVariables, signal?
     PostDatasetUpdatePathParams
   >({ url: '/accounts/{accountId}/cloudforce-one/events/dataset/{datasetId}', method: 'post', ...variables, signal });
 
+export type GetIndicatorTypesListPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type GetIndicatorTypesListError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetIndicatorTypesListResponse = {
+  items: {
+    /**
+     * @example string
+     */
+    type: string;
+  };
+  /**
+   * @example array
+   */
+  type: string;
+};
+
+export type GetIndicatorTypesListVariables = {
+  pathParams: GetIndicatorTypesListPathParams;
+} & FetcherExtraProps;
+
+export const getIndicatorTypesList = (variables: GetIndicatorTypesListVariables, signal?: AbortSignal) =>
+  fetch<GetIndicatorTypesListResponse, GetIndicatorTypesListError, undefined, {}, {}, GetIndicatorTypesListPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/indicatorTypes',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
 export type GetEventRawReadDSPathParams = {
   /**
    * Account ID
@@ -129268,6 +129314,7 @@ export const operationsByTag = {
   country: { getCountryRead },
   cron: { getCronUpdateRead, postCronUpdate },
   dataset: { getDatasetList, postDatasetCreate, getDatasetRead, postDatasetUpdate },
+  indicatorTypes: { getIndicatorTypesList },
   tag: { postTagCreate },
   targetIndustry: { getTargetIndustryList },
   requestForInformationRFI: {
