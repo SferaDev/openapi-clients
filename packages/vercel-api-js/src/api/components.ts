@@ -2552,7 +2552,7 @@ export type UpdateProjectDataCacheResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         addresses: {
           value: string;
           note?: string;
@@ -2560,7 +2560,7 @@ export type UpdateProjectDataCacheResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
       }
     | null;
   gitComments?: {
@@ -11552,7 +11552,7 @@ export type GetProjectsResponse = {
     hasActiveBranches?: boolean;
     trustedIps?:
       | {
-          deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+          deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
           addresses: {
             value: string;
             note?: string;
@@ -11560,7 +11560,7 @@ export type GetProjectsResponse = {
           protectionMode: 'additional' | 'exclusive';
         }
       | {
-          deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+          deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         }
       | null;
     gitComments?: {
@@ -12504,7 +12504,7 @@ export type CreateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         addresses: {
           value: string;
           note?: string;
@@ -12512,7 +12512,7 @@ export type CreateProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
       }
     | null;
   gitComments?: {
@@ -13637,7 +13637,7 @@ export type GetProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         addresses: {
           value: string;
           note?: string;
@@ -13645,7 +13645,7 @@ export type GetProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
       }
     | null;
   gitComments?: {
@@ -14597,7 +14597,7 @@ export type UpdateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         addresses: {
           value: string;
           note?: string;
@@ -14605,7 +14605,7 @@ export type UpdateProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
       }
     | null;
   gitComments?: {
@@ -15209,8 +15209,6 @@ export type GetCustomEnvironmentQueryParams = {
 
 export type GetCustomEnvironmentError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetCustomEnvironmentResponse = Record<string, any>[];
-
 export type GetCustomEnvironmentVariables = {
   pathParams: GetCustomEnvironmentPathParams;
   queryParams?: GetCustomEnvironmentQueryParams;
@@ -15221,7 +15219,7 @@ export type GetCustomEnvironmentVariables = {
  */
 export const getCustomEnvironment = (variables: GetCustomEnvironmentVariables, signal?: AbortSignal) =>
   fetch<
-    GetCustomEnvironmentResponse,
+    Record<string, any>,
     GetCustomEnvironmentError,
     undefined,
     {},
