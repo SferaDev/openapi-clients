@@ -1020,6 +1020,8 @@ export type AaaSchemasType = 'email' | 'pagerduty' | 'webhook';
 
 /**
  * Optional secret that will be passed in the `cf-webhook-auth` header when dispatching generic webhook notifications or formatted for supported destinations. Secrets are not returned in any API response body.
+ *
+ * @x-sensitive true
  */
 export type AaaSecret = string;
 
@@ -1053,6 +1055,7 @@ export type AaaTimestamp = string;
  *
  * @example a313ba7d-3e46-4c0e-a408-08fafbc3816a
  * @maxLength 36
+ * @x-sensitive true
  */
 export type AaaToken = string;
 
@@ -32148,7 +32151,7 @@ export type R2BucketLockRuleConfig = {
 /**
  * Location of the bucket
  */
-export type R2BucketLocation = 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam';
+export type R2BucketLocation = 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam' | 'oc';
 
 /**
  * Name of the bucket
@@ -32275,6 +32278,8 @@ export type R2EnableSippyAws = {
      *
      * Sippy will use this token when writing objects to R2, so it is
      * best to scope this token to the bucket you're enabling Sippy for.
+     *
+     * @x-sensitive true
      */
     secretAccessKey?: string;
   };
@@ -32297,6 +32302,8 @@ export type R2EnableSippyAws = {
     region?: string;
     /**
      * Secret Access Key of an IAM credential (ideally scoped to a single S3 bucket)
+     *
+     * @x-sensitive true
      */
     secretAccessKey?: string;
   };
@@ -32324,6 +32331,8 @@ export type R2EnableSippyGcs = {
      *
      * Sippy will use this token when writing objects to R2, so it is
      * best to scope this token to the bucket you're enabling Sippy for.
+     *
+     * @x-sensitive true
      */
     secretAccessKey?: string;
   };
@@ -32341,6 +32350,8 @@ export type R2EnableSippyGcs = {
     clientEmail?: string;
     /**
      * Private Key of an IAM credential (ideally scoped to a single GCS bucket)
+     *
+     * @x-sensitive true
      */
     privateKey?: string;
     provider?: 'gcs';
@@ -32773,10 +32784,14 @@ export type R2TempAccessCredsResponse = {
   accessKeyId?: string;
   /**
    * Secret access key
+   *
+   * @x-sensitive true
    */
   secretAccessKey?: string;
   /**
    * Security token
+   *
+   * @x-sensitive true
    */
   sessionToken?: string;
 };
@@ -48595,6 +48610,7 @@ export type WorkersBindingKindSecretText = {
    * The secret value to use.
    *
    * @example My secret.
+   * @x-sensitive true
    */
   text: string;
   /**
@@ -48732,6 +48748,8 @@ export type WorkersCompletedUploadAssetsResponse = WorkersApiResponseCommon & {
   result?: {
     /**
      * A "completion" JWT which can be redeemed when creating a Worker version.
+     *
+     * @x-sensitive true
      */
     jwt?: string;
   };
@@ -48754,6 +48772,8 @@ export type WorkersCreateAssetsUploadSessionResponse = WorkersApiResponseCommon 
     buckets?: string[][];
     /**
      * A JWT to use as authentication for uploading assets.
+     *
+     * @x-sensitive true
      */
     jwt?: string;
   };
@@ -49069,6 +49089,8 @@ export type WorkersMultipartScript = {
       };
       /**
        * Token provided upon successful upload of all files from a registered manifest.
+       *
+       * @x-sensitive true
        */
       jwt?: string;
     };
@@ -49425,6 +49447,7 @@ export type WorkersSecret = {
    * The value of the secret.
    *
    * @example eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+   * @x-sensitive true
    */
   text?: string;
   /**

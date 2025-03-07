@@ -74,6 +74,2307 @@ export const accountCreation = (variables: AccountCreationVariables, signal?: Ab
     signal
   });
 
+export type PostEventListPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type PostEventListError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostEventListResponse = {
+  /**
+   * @example 1234
+   */
+  accountId: number;
+  /**
+   * @example Flying Yeti
+   */
+  attacker: string;
+  /**
+   * @example CN
+   */
+  attackerCountry: string;
+  /**
+   * @example Domain Resolution
+   */
+  category: string;
+  /**
+   * @example 1
+   */
+  categoryId: number;
+  /**
+   * @example 2022-04-01T00:00:00Z
+   */
+  date: string;
+  /**
+   * @example An attacker registered the domain domain.com
+   */
+  event: string;
+  /**
+   * @example 1223
+   */
+  id: number;
+  /**
+   * @example domain
+   */
+  indicator: string;
+  /**
+   * @example domain
+   */
+  indicatorType: string;
+  /**
+   * @example 5
+   */
+  indicatorTypeId: number;
+  insight?: string;
+  killChain: number;
+  mitreAttack: string[];
+  numReferenced: number;
+  numReferences: number;
+  /**
+   * @example 453gw34w3
+   */
+  rawId: string;
+  referenced: string[];
+  referencedIds: number[];
+  references: string[];
+  referencesIds: number[];
+  releasabilityId?: string;
+  tags: string[];
+  /**
+   * @example US
+   */
+  targetCountry: string;
+  /**
+   * @example Agriculture
+   */
+  targetIndustry: string;
+  /**
+   * @example amber
+   */
+  tlp: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+}[];
+
+export type PostEventListRequestBody = {
+  datasetId?: string[];
+  order?: 'asc' | 'desc';
+  /**
+   * @example created
+   */
+  orderBy?: string;
+  /**
+   * @example 1
+   */
+  page?: number;
+  /**
+   * @example 100
+   */
+  pageSize?: number;
+  search?: {
+    /**
+     * @example attackerCountry
+     */
+    field?: string;
+    /**
+     * @example equals
+     */
+    op?: string;
+    value?: string | number | (string | number)[];
+  }[];
+};
+
+export type PostEventListVariables = {
+  body?: PostEventListRequestBody;
+  pathParams: PostEventListPathParams;
+} & FetcherExtraProps;
+
+export const postEventList = (variables: PostEventListVariables, signal?: AbortSignal) =>
+  fetch<PostEventListResponse, PostEventListError, PostEventListRequestBody, {}, {}, PostEventListPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type GetAttackerListPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type GetAttackerListError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetAttackerListResponse = {
+  items: {
+    /**
+     * @example string
+     */
+    type: string;
+  };
+  /**
+   * @example array
+   */
+  type: string;
+};
+
+export type GetAttackerListVariables = {
+  pathParams: GetAttackerListPathParams;
+} & FetcherExtraProps;
+
+export const getAttackerList = (variables: GetAttackerListVariables, signal?: AbortSignal) =>
+  fetch<GetAttackerListResponse, GetAttackerListError, undefined, {}, {}, GetAttackerListPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/attackers',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type GetCategoryListPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type GetCategoryListError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetCategoryListResponse = {
+  killChain: number;
+  mitreAttack?: string[];
+  /**
+   * @example name
+   */
+  name: string;
+  /**
+   * @example shortname
+   */
+  shortname?: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+}[];
+
+export type GetCategoryListVariables = {
+  pathParams: GetCategoryListPathParams;
+} & FetcherExtraProps;
+
+export const getCategoryList = (variables: GetCategoryListVariables, signal?: AbortSignal) =>
+  fetch<GetCategoryListResponse, GetCategoryListError, undefined, {}, {}, GetCategoryListPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/categories',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PostCategoryCreatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type PostCategoryCreateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostCategoryCreateResponse = {
+  killChain: number;
+  mitreAttack?: string[];
+  /**
+   * @example name
+   */
+  name: string;
+  /**
+   * @example shortname
+   */
+  shortname?: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type PostCategoryCreateRequestBody = {
+  killChain: number;
+  mitreAttack?: string[];
+  /**
+   * @example name
+   */
+  name: string;
+  /**
+   * @example shortname
+   */
+  shortname?: string;
+};
+
+export type PostCategoryCreateVariables = {
+  body: PostCategoryCreateRequestBody;
+  pathParams: PostCategoryCreatePathParams;
+} & FetcherExtraProps;
+
+export const postCategoryCreate = (variables: PostCategoryCreateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostCategoryCreateResponse,
+    PostCategoryCreateError,
+    PostCategoryCreateRequestBody,
+    {},
+    {},
+    PostCategoryCreatePathParams
+  >({ url: '/accounts/{accountId}/cloudforce-one/events/categories/create', method: 'post', ...variables, signal });
+
+export type DeleteCategoryDeletePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Category UUID
+   */
+  categoryId: string;
+};
+
+export type DeleteCategoryDeleteError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type DeleteCategoryDeleteResponse = {
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type DeleteCategoryDeleteVariables = {
+  pathParams: DeleteCategoryDeletePathParams;
+} & FetcherExtraProps;
+
+export const deleteCategoryDelete = (variables: DeleteCategoryDeleteVariables, signal?: AbortSignal) =>
+  fetch<DeleteCategoryDeleteResponse, DeleteCategoryDeleteError, undefined, {}, {}, DeleteCategoryDeletePathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/categories/{categoryId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type GetCategoryReadPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Category UUID
+   */
+  categoryId: string;
+};
+
+export type GetCategoryReadError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetCategoryReadResponse = {
+  killChain: number;
+  mitreAttack?: string[];
+  /**
+   * @example name
+   */
+  name: string;
+  /**
+   * @example shortname
+   */
+  shortname?: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type GetCategoryReadVariables = {
+  pathParams: GetCategoryReadPathParams;
+} & FetcherExtraProps;
+
+export const getCategoryRead = (variables: GetCategoryReadVariables, signal?: AbortSignal) =>
+  fetch<GetCategoryReadResponse, GetCategoryReadError, undefined, {}, {}, GetCategoryReadPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/categories/{categoryId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PostCategoryUpdatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Category UUID
+   */
+  categoryId: string;
+};
+
+export type PostCategoryUpdateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostCategoryUpdateResponse = {
+  killChain: number;
+  mitreAttack?: string[];
+  /**
+   * @example name
+   */
+  name: string;
+  /**
+   * @example shortname
+   */
+  shortname?: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type PostCategoryUpdateRequestBody = {
+  killChain?: number;
+  mitreAttack?: string[];
+  /**
+   * @example name
+   */
+  name?: string;
+  /**
+   * @example shortname
+   */
+  shortname?: string;
+};
+
+export type PostCategoryUpdateVariables = {
+  body?: PostCategoryUpdateRequestBody;
+  pathParams: PostCategoryUpdatePathParams;
+} & FetcherExtraProps;
+
+export const postCategoryUpdate = (variables: PostCategoryUpdateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostCategoryUpdateResponse,
+    PostCategoryUpdateError,
+    PostCategoryUpdateRequestBody,
+    {},
+    {},
+    PostCategoryUpdatePathParams
+  >({
+    url: '/accounts/{accountId}/cloudforce-one/events/categories/{categoryId}',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type GetCountryReadPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type GetCountryReadError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetCountryReadResponse = {
+  result: {
+    /**
+     * @example AF
+     */
+    alpha3: string;
+    /**
+     * @example Afghanistan
+     */
+    name: string;
+  }[];
+  /**
+   * @example true
+   */
+  success: string;
+}[];
+
+export type GetCountryReadVariables = {
+  pathParams: GetCountryReadPathParams;
+} & FetcherExtraProps;
+
+export const getCountryRead = (variables: GetCountryReadVariables, signal?: AbortSignal) =>
+  fetch<GetCountryReadResponse, GetCountryReadError, undefined, {}, {}, GetCountryReadPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/countries',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PostEventCreatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type PostEventCreateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostEventCreateResponse = {
+  /**
+   * @example 1234
+   */
+  accountId: number;
+  /**
+   * @example Flying Yeti
+   */
+  attacker: string;
+  /**
+   * @example CN
+   */
+  attackerCountry: string;
+  /**
+   * @example Domain Resolution
+   */
+  category: string;
+  /**
+   * @example 1
+   */
+  categoryId: number;
+  /**
+   * @example 2022-04-01T00:00:00Z
+   */
+  date: string;
+  /**
+   * @example An attacker registered the domain domain.com
+   */
+  event: string;
+  /**
+   * @example 1223
+   */
+  id: number;
+  /**
+   * @example domain
+   */
+  indicator: string;
+  /**
+   * @example domain
+   */
+  indicatorType: string;
+  /**
+   * @example 5
+   */
+  indicatorTypeId: number;
+  insight?: string;
+  killChain: number;
+  mitreAttack: string[];
+  numReferenced: number;
+  numReferences: number;
+  /**
+   * @example 453gw34w3
+   */
+  rawId: string;
+  referenced: string[];
+  referencedIds: number[];
+  references: string[];
+  referencesIds: number[];
+  releasabilityId?: string;
+  tags: string[];
+  /**
+   * @example US
+   */
+  targetCountry: string;
+  /**
+   * @example Agriculture
+   */
+  targetIndustry: string;
+  /**
+   * @example amber
+   */
+  tlp: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type PostEventCreateRequestBody = {
+  /**
+   * @example 123456
+   */
+  accountId?: number;
+  /**
+   * @example Flying Yeti
+   */
+  attacker: string;
+  /**
+   * @example CN
+   */
+  attackerCountry: string;
+  /**
+   * @example Domain Resolution
+   */
+  category: string;
+  /**
+   * @example durableObjectName
+   */
+  datasetId?: string;
+  /**
+   * @example 2022-04-01T00:00:00Z
+   * @format date-time
+   */
+  date: string;
+  /**
+   * @example An attacker registered the domain domain.com
+   */
+  event: string;
+  /**
+   * @example domain.com
+   */
+  indicator?: string;
+  /**
+   * @example domain
+   */
+  indicatorType: string;
+  raw: {
+    data?: void;
+    /**
+     * @example example.com
+     */
+    source?: string;
+    /**
+     * @example amber
+     */
+    tlp?: string;
+  };
+  tags?: string[];
+  /**
+   * @example US
+   */
+  targetCountry?: string;
+  /**
+   * @example Agriculture
+   */
+  targetIndustry?: string;
+  /**
+   * @example amber
+   */
+  tlp: string;
+};
+
+export type PostEventCreateVariables = {
+  body: PostEventCreateRequestBody;
+  pathParams: PostEventCreatePathParams;
+} & FetcherExtraProps;
+
+export const postEventCreate = (variables: PostEventCreateVariables, signal?: AbortSignal) =>
+  fetch<PostEventCreateResponse, PostEventCreateError, PostEventCreateRequestBody, {}, {}, PostEventCreatePathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/create',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type PostEventCreateBulkPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type PostEventCreateBulkError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostEventCreateBulkResponse = {
+  /**
+   * @example 1234
+   */
+  accountId: number;
+  /**
+   * @example Flying Yeti
+   */
+  attacker: string;
+  /**
+   * @example CN
+   */
+  attackerCountry: string;
+  /**
+   * @example Domain Resolution
+   */
+  category: string;
+  /**
+   * @example 1
+   */
+  categoryId: number;
+  /**
+   * @example 2022-04-01T00:00:00Z
+   */
+  date: string;
+  /**
+   * @example An attacker registered the domain domain.com
+   */
+  event: string;
+  /**
+   * @example 1223
+   */
+  id: number;
+  /**
+   * @example domain
+   */
+  indicator: string;
+  /**
+   * @example domain
+   */
+  indicatorType: string;
+  /**
+   * @example 5
+   */
+  indicatorTypeId: number;
+  insight?: string;
+  killChain: number;
+  mitreAttack: string[];
+  numReferenced: number;
+  numReferences: number;
+  /**
+   * @example 453gw34w3
+   */
+  rawId: string;
+  referenced: string[];
+  referencedIds: number[];
+  references: string[];
+  referencesIds: number[];
+  releasabilityId?: string;
+  tags: string[];
+  /**
+   * @example US
+   */
+  targetCountry: string;
+  /**
+   * @example Agriculture
+   */
+  targetIndustry: string;
+  /**
+   * @example amber
+   */
+  tlp: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+}[];
+
+export type PostEventCreateBulkRequestBody = {
+  data: {
+    /**
+     * @example 123456
+     */
+    accountId?: number;
+    /**
+     * @example Flying Yeti
+     */
+    attacker: string;
+    /**
+     * @example CN
+     */
+    attackerCountry: string;
+    /**
+     * @example Domain Resolution
+     */
+    category: string;
+    /**
+     * @example durableObjectName
+     */
+    datasetId?: string;
+    /**
+     * @example 2022-04-01T00:00:00Z
+     * @format date-time
+     */
+    date: string;
+    /**
+     * @example An attacker registered the domain domain.com
+     */
+    event: string;
+    /**
+     * @example domain.com
+     */
+    indicator?: string;
+    /**
+     * @example domain
+     */
+    indicatorType: string;
+    raw: {
+      data?: void;
+      /**
+       * @example example.com
+       */
+      source?: string;
+      /**
+       * @example amber
+       */
+      tlp?: string;
+    };
+    tags?: string[];
+    /**
+     * @example US
+     */
+    targetCountry?: string;
+    /**
+     * @example Agriculture
+     */
+    targetIndustry?: string;
+    /**
+     * @example amber
+     */
+    tlp: string;
+  }[];
+  /**
+   * @example durableObjectName
+   */
+  datasetId: string;
+};
+
+export type PostEventCreateBulkVariables = {
+  body: PostEventCreateBulkRequestBody;
+  pathParams: PostEventCreateBulkPathParams;
+} & FetcherExtraProps;
+
+export const postEventCreateBulk = (variables: PostEventCreateBulkVariables, signal?: AbortSignal) =>
+  fetch<
+    PostEventCreateBulkResponse,
+    PostEventCreateBulkError,
+    PostEventCreateBulkRequestBody,
+    {},
+    {},
+    PostEventCreateBulkPathParams
+  >({ url: '/accounts/{accountId}/cloudforce-one/events/create/bulk', method: 'post', ...variables, signal });
+
+export type GetCronUpdateReadPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type GetCronUpdateReadError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetCronUpdateReadResponse = {
+  /**
+   * @example 2025-03-05T12:35:00.000Z
+   */
+  update: string;
+};
+
+export type GetCronUpdateReadVariables = {
+  pathParams: GetCronUpdateReadPathParams;
+} & FetcherExtraProps;
+
+export const getCronUpdateRead = (variables: GetCronUpdateReadVariables, signal?: AbortSignal) =>
+  fetch<GetCronUpdateReadResponse, GetCronUpdateReadError, undefined, {}, {}, GetCronUpdateReadPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/cron',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PostCronUpdatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type PostCronUpdateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostCronUpdateResponse = {
+  /**
+   * @example 3
+   */
+  id: number;
+  /**
+   * @example 2025-03-05T12:35:00.000Z
+   */
+  update: string;
+};
+
+export type PostCronUpdateVariables = {
+  pathParams: PostCronUpdatePathParams;
+} & FetcherExtraProps;
+
+export const postCronUpdate = (variables: PostCronUpdateVariables, signal?: AbortSignal) =>
+  fetch<PostCronUpdateResponse, PostCronUpdateError, undefined, {}, {}, PostCronUpdatePathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/cron',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type GetDatasetListPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type GetDatasetListError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetDatasetListResponse = {
+  /**
+   * @example true
+   */
+  isPublic: boolean;
+  /**
+   * @example friendly dataset name
+   */
+  name: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+}[];
+
+export type GetDatasetListVariables = {
+  pathParams: GetDatasetListPathParams;
+} & FetcherExtraProps;
+
+export const getDatasetList = (variables: GetDatasetListVariables, signal?: AbortSignal) =>
+  fetch<GetDatasetListResponse, GetDatasetListError, undefined, {}, {}, GetDatasetListPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/dataset',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PostDatasetCreatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type PostDatasetCreateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostDatasetCreateResponse = {
+  /**
+   * @example true
+   */
+  isPublic: boolean;
+  /**
+   * @example friendly dataset name
+   */
+  name: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type PostDatasetCreateRequestBody = {
+  /**
+   * If true, then anyone can search the dataset. If false, then its limited to the account.
+   */
+  isPublic: boolean;
+  /**
+   * Used to describe the dataset within the account context
+   *
+   * @minLength 1
+   */
+  name: string;
+};
+
+export type PostDatasetCreateVariables = {
+  body: PostDatasetCreateRequestBody;
+  pathParams: PostDatasetCreatePathParams;
+} & FetcherExtraProps;
+
+export const postDatasetCreate = (variables: PostDatasetCreateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostDatasetCreateResponse,
+    PostDatasetCreateError,
+    PostDatasetCreateRequestBody,
+    {},
+    {},
+    PostDatasetCreatePathParams
+  >({ url: '/accounts/{accountId}/cloudforce-one/events/dataset/create', method: 'post', ...variables, signal });
+
+export type GetDatasetReadPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Dataset name
+   */
+  datasetId: string;
+};
+
+export type GetDatasetReadError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetDatasetReadResponse = {
+  /**
+   * @example true
+   */
+  isPublic: boolean;
+  /**
+   * @example friendly dataset name
+   */
+  name: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type GetDatasetReadVariables = {
+  pathParams: GetDatasetReadPathParams;
+} & FetcherExtraProps;
+
+export const getDatasetRead = (variables: GetDatasetReadVariables, signal?: AbortSignal) =>
+  fetch<GetDatasetReadResponse, GetDatasetReadError, undefined, {}, {}, GetDatasetReadPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/dataset/{datasetId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PostDatasetUpdatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Dataset name
+   */
+  datasetId: string;
+};
+
+export type PostDatasetUpdateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostDatasetUpdateResponse = {
+  /**
+   * @example true
+   */
+  isPublic: boolean;
+  /**
+   * @example friendly dataset name
+   */
+  name: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type PostDatasetUpdateRequestBody = {
+  /**
+   * If true, then anyone can search the dataset. If false, then its limited to the account.
+   */
+  isPublic: boolean;
+  /**
+   * Used to describe the dataset within the account context
+   *
+   * @minLength 1
+   */
+  name: string;
+};
+
+export type PostDatasetUpdateVariables = {
+  body: PostDatasetUpdateRequestBody;
+  pathParams: PostDatasetUpdatePathParams;
+} & FetcherExtraProps;
+
+export const postDatasetUpdate = (variables: PostDatasetUpdateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostDatasetUpdateResponse,
+    PostDatasetUpdateError,
+    PostDatasetUpdateRequestBody,
+    {},
+    {},
+    PostDatasetUpdatePathParams
+  >({ url: '/accounts/{accountId}/cloudforce-one/events/dataset/{datasetId}', method: 'post', ...variables, signal });
+
+export type GetEventRawReadDSPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event ID
+   */
+  eventId: string;
+  /**
+   * Dataset name
+   */
+  datasetId: string;
+};
+
+export type GetEventRawReadDSError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetEventRawReadDSResponse = {
+  /**
+   * @example 1234
+   */
+  accountId: number;
+  /**
+   * @example 1970-01-01
+   */
+  created: string;
+  data: Record<string, any>;
+  /**
+   * @example 1234
+   */
+  id: string;
+  /**
+   * @example https://example.com
+   */
+  source: string;
+  /**
+   * @example amber
+   */
+  tlp: string;
+};
+
+export type GetEventRawReadDSVariables = {
+  pathParams: GetEventRawReadDSPathParams;
+} & FetcherExtraProps;
+
+export const getEventRawReadDS = (variables: GetEventRawReadDSVariables, signal?: AbortSignal) =>
+  fetch<GetEventRawReadDSResponse, GetEventRawReadDSError, undefined, {}, {}, GetEventRawReadDSPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/raw/{datasetId}/{eventId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type DeleteEventReferenceDeletePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+};
+
+export type DeleteEventReferenceDeleteError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type DeleteEventReferenceDeleteResponse = {
+  result: {
+    /**
+     * @example true
+     */
+    success: boolean;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type DeleteEventReferenceDeleteRequestBody = {
+  events: string[];
+};
+
+export type DeleteEventReferenceDeleteVariables = {
+  body: DeleteEventReferenceDeleteRequestBody;
+  pathParams: DeleteEventReferenceDeletePathParams;
+} & FetcherExtraProps;
+
+export const deleteEventReferenceDelete = (variables: DeleteEventReferenceDeleteVariables, signal?: AbortSignal) =>
+  fetch<
+    DeleteEventReferenceDeleteResponse,
+    DeleteEventReferenceDeleteError,
+    DeleteEventReferenceDeleteRequestBody,
+    {},
+    {},
+    DeleteEventReferenceDeletePathParams
+  >({ url: '/accounts/{accountId}/cloudforce-one/events/relate/{eventId}', method: 'delete', ...variables, signal });
+
+export type PostEventReferenceCreatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+};
+
+export type PostEventReferenceCreateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostEventReferenceCreateResponse = {
+  result: {
+    /**
+     * @example true
+     */
+    success: boolean;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type PostEventReferenceCreateRequestBody = {
+  events: string[];
+};
+
+export type PostEventReferenceCreateVariables = {
+  body: PostEventReferenceCreateRequestBody;
+  pathParams: PostEventReferenceCreatePathParams;
+} & FetcherExtraProps;
+
+export const postEventReferenceCreate = (variables: PostEventReferenceCreateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostEventReferenceCreateResponse,
+    PostEventReferenceCreateError,
+    PostEventReferenceCreateRequestBody,
+    {},
+    {},
+    PostEventReferenceCreatePathParams
+  >({ url: '/accounts/{accountId}/cloudforce-one/events/relate/{eventId}', method: 'post', ...variables, signal });
+
+export type DeleteEventTagDeletePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+};
+
+export type DeleteEventTagDeleteError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type DeleteEventTagDeleteResponse = {
+  result: {
+    /**
+     * @example true
+     */
+    success: boolean;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type DeleteEventTagDeleteRequestBody = {
+  tags: string[];
+};
+
+export type DeleteEventTagDeleteVariables = {
+  body: DeleteEventTagDeleteRequestBody;
+  pathParams: DeleteEventTagDeletePathParams;
+} & FetcherExtraProps;
+
+export const deleteEventTagDelete = (variables: DeleteEventTagDeleteVariables, signal?: AbortSignal) =>
+  fetch<
+    DeleteEventTagDeleteResponse,
+    DeleteEventTagDeleteError,
+    DeleteEventTagDeleteRequestBody,
+    {},
+    {},
+    DeleteEventTagDeletePathParams
+  >({ url: '/accounts/{accountId}/cloudforce-one/events/tag/{eventId}', method: 'delete', ...variables, signal });
+
+export type PostEventTagCreatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+};
+
+export type PostEventTagCreateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostEventTagCreateResponse = {
+  result: {
+    /**
+     * @example true
+     */
+    success: boolean;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type PostEventTagCreateRequestBody = {
+  tags: string[];
+};
+
+export type PostEventTagCreateVariables = {
+  body: PostEventTagCreateRequestBody;
+  pathParams: PostEventTagCreatePathParams;
+} & FetcherExtraProps;
+
+export const postEventTagCreate = (variables: PostEventTagCreateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostEventTagCreateResponse,
+    PostEventTagCreateError,
+    PostEventTagCreateRequestBody,
+    {},
+    {},
+    PostEventTagCreatePathParams
+  >({ url: '/accounts/{accountId}/cloudforce-one/events/tag/{eventId}', method: 'post', ...variables, signal });
+
+export type PostTagCreatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type PostTagCreateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostTagCreateResponse = {
+  /**
+   * @example name
+   */
+  name: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type PostTagCreateRequestBody = {
+  /**
+   * @example name
+   */
+  name: string;
+};
+
+export type PostTagCreateVariables = {
+  body: PostTagCreateRequestBody;
+  pathParams: PostTagCreatePathParams;
+} & FetcherExtraProps;
+
+export const postTagCreate = (variables: PostTagCreateVariables, signal?: AbortSignal) =>
+  fetch<PostTagCreateResponse, PostTagCreateError, PostTagCreateRequestBody, {}, {}, PostTagCreatePathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/tags/create',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type GetTargetIndustryListPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type GetTargetIndustryListError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetTargetIndustryListResponse = {
+  items: {
+    /**
+     * @example string
+     */
+    type: string;
+  };
+  /**
+   * @example array
+   */
+  type: string;
+};
+
+export type GetTargetIndustryListVariables = {
+  pathParams: GetTargetIndustryListPathParams;
+} & FetcherExtraProps;
+
+export const getTargetIndustryList = (variables: GetTargetIndustryListVariables, signal?: AbortSignal) =>
+  fetch<GetTargetIndustryListResponse, GetTargetIndustryListError, undefined, {}, {}, GetTargetIndustryListPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/targetIndustries',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type DeleteEventDeletePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+};
+
+export type DeleteEventDeleteError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type DeleteEventDeleteResponse = {
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type DeleteEventDeleteVariables = {
+  pathParams: DeleteEventDeletePathParams;
+} & FetcherExtraProps;
+
+export const deleteEventDelete = (variables: DeleteEventDeleteVariables, signal?: AbortSignal) =>
+  fetch<DeleteEventDeleteResponse, DeleteEventDeleteError, undefined, {}, {}, DeleteEventDeletePathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type GetEventReadPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+};
+
+export type GetEventReadError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetEventReadResponse = {
+  /**
+   * @example 1234
+   */
+  accountId: number;
+  /**
+   * @example Flying Yeti
+   */
+  attacker: string;
+  /**
+   * @example CN
+   */
+  attackerCountry: string;
+  /**
+   * @example Domain Resolution
+   */
+  category: string;
+  /**
+   * @example 1
+   */
+  categoryId: number;
+  /**
+   * @example 2022-04-01T00:00:00Z
+   */
+  date: string;
+  /**
+   * @example An attacker registered the domain domain.com
+   */
+  event: string;
+  /**
+   * @example 1223
+   */
+  id: number;
+  /**
+   * @example domain
+   */
+  indicator: string;
+  /**
+   * @example domain
+   */
+  indicatorType: string;
+  /**
+   * @example 5
+   */
+  indicatorTypeId: number;
+  insight?: string;
+  killChain: number;
+  mitreAttack: string[];
+  numReferenced: number;
+  numReferences: number;
+  /**
+   * @example 453gw34w3
+   */
+  rawId: string;
+  referenced: string[];
+  referencedIds: number[];
+  references: string[];
+  referencesIds: number[];
+  releasabilityId?: string;
+  tags: string[];
+  /**
+   * @example US
+   */
+  targetCountry: string;
+  /**
+   * @example Agriculture
+   */
+  targetIndustry: string;
+  /**
+   * @example amber
+   */
+  tlp: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type GetEventReadVariables = {
+  pathParams: GetEventReadPathParams;
+} & FetcherExtraProps;
+
+export const getEventRead = (variables: GetEventReadVariables, signal?: AbortSignal) =>
+  fetch<GetEventReadResponse, GetEventReadError, undefined, {}, {}, GetEventReadPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PostEventUpdatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+};
+
+export type PostEventUpdateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostEventUpdateResponse = {
+  /**
+   * @example 1234
+   */
+  accountId: number;
+  /**
+   * @example Flying Yeti
+   */
+  attacker: string;
+  /**
+   * @example CN
+   */
+  attackerCountry: string;
+  /**
+   * @example Domain Resolution
+   */
+  category: string;
+  /**
+   * @example 1
+   */
+  categoryId: number;
+  /**
+   * @example 2022-04-01T00:00:00Z
+   */
+  date: string;
+  /**
+   * @example An attacker registered the domain domain.com
+   */
+  event: string;
+  /**
+   * @example 1223
+   */
+  id: number;
+  /**
+   * @example domain
+   */
+  indicator: string;
+  /**
+   * @example domain
+   */
+  indicatorType: string;
+  /**
+   * @example 5
+   */
+  indicatorTypeId: number;
+  insight?: string;
+  killChain: number;
+  mitreAttack: string[];
+  numReferenced: number;
+  numReferences: number;
+  /**
+   * @example 453gw34w3
+   */
+  rawId: string;
+  referenced: string[];
+  referencedIds: number[];
+  references: string[];
+  referencesIds: number[];
+  releasabilityId?: string;
+  tags: string[];
+  /**
+   * @example US
+   */
+  targetCountry: string;
+  /**
+   * @example Agriculture
+   */
+  targetIndustry: string;
+  /**
+   * @example amber
+   */
+  tlp: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type PostEventUpdateRequestBody = {
+  /**
+   * @example Flying Yeti
+   */
+  attacker?: string;
+  /**
+   * @example CN
+   */
+  attackerCountry?: string;
+  /**
+   * @example Domain Resolution
+   */
+  category?: string;
+  /**
+   * @example 2022-04-01T00:00:00Z
+   * @format date-time
+   */
+  date?: string;
+  /**
+   * @example An attacker registered the domain domain.com
+   */
+  event?: string;
+  /**
+   * @example domain2.com
+   */
+  indicator?: string;
+  /**
+   * @example sha256
+   */
+  indicatorType?: string;
+  /**
+   * @example US
+   */
+  targetCountry?: string;
+  /**
+   * @example Insurance
+   */
+  targetIndustry?: string;
+  /**
+   * @example amber
+   */
+  tlp?: string;
+};
+
+export type PostEventUpdateVariables = {
+  body?: PostEventUpdateRequestBody;
+  pathParams: PostEventUpdatePathParams;
+} & FetcherExtraProps;
+
+export const postEventUpdate = (variables: PostEventUpdateVariables, signal?: AbortSignal) =>
+  fetch<PostEventUpdateResponse, PostEventUpdateError, PostEventUpdateRequestBody, {}, {}, PostEventUpdatePathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type PostEventInsightCreatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+};
+
+export type PostEventInsightCreateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostEventInsightCreateResponse = {
+  result: {
+    /**
+     * @example Here is some context _in markdown_
+     */
+    content: string;
+    /**
+     * @example sdfsd56af-43469-3c23-646345dsffd2
+     */
+    uuid: string;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type PostEventInsightCreateRequestBody = {
+  /**
+   * @example Here is some additional context _in markdown_
+   */
+  content: string;
+};
+
+export type PostEventInsightCreateVariables = {
+  body: PostEventInsightCreateRequestBody;
+  pathParams: PostEventInsightCreatePathParams;
+} & FetcherExtraProps;
+
+export const postEventInsightCreate = (variables: PostEventInsightCreateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostEventInsightCreateResponse,
+    PostEventInsightCreateError,
+    PostEventInsightCreateRequestBody,
+    {},
+    {},
+    PostEventInsightCreatePathParams
+  >({
+    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}/insight/create',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type DeleteEventInsightDeletePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+  /**
+   * Insight UUID
+   */
+  insightId: string;
+};
+
+export type DeleteEventInsightDeleteError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type DeleteEventInsightDeleteResponse = {
+  result: {
+    /**
+     * @example true
+     */
+    success: boolean;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type DeleteEventInsightDeleteVariables = {
+  pathParams: DeleteEventInsightDeletePathParams;
+} & FetcherExtraProps;
+
+export const deleteEventInsightDelete = (variables: DeleteEventInsightDeleteVariables, signal?: AbortSignal) =>
+  fetch<
+    DeleteEventInsightDeleteResponse,
+    DeleteEventInsightDeleteError,
+    undefined,
+    {},
+    {},
+    DeleteEventInsightDeletePathParams
+  >({
+    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}/insight/{insightId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type GetEventInsightReadPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+  /**
+   * Insight UUID
+   */
+  insightId: string;
+};
+
+export type GetEventInsightReadError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetEventInsightReadResponse = {
+  result: {
+    /**
+     * @example Here is some context _in markdown_
+     */
+    content: string;
+    /**
+     * @example sdfsd56af-43469-3c23-646345dsffd2
+     */
+    uuid: string;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type GetEventInsightReadVariables = {
+  pathParams: GetEventInsightReadPathParams;
+} & FetcherExtraProps;
+
+export const getEventInsightRead = (variables: GetEventInsightReadVariables, signal?: AbortSignal) =>
+  fetch<GetEventInsightReadResponse, GetEventInsightReadError, undefined, {}, {}, GetEventInsightReadPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}/insight/{insightId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PostEventInsightUpdatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+  /**
+   * Insight UUID
+   */
+  insightId: string;
+};
+
+export type PostEventInsightUpdateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostEventInsightUpdateResponse = {
+  result: {
+    /**
+     * @example Updated: Here is some additional context _in markdown_
+     */
+    content: string;
+    /**
+     * @example sdfsd56af-43469-3c23-646345dsffd2
+     */
+    uuid: string;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type PostEventInsightUpdateRequestBody = {
+  /**
+   * @example Updated: Here is some additional context _in markdown_
+   */
+  content: string;
+};
+
+export type PostEventInsightUpdateVariables = {
+  body: PostEventInsightUpdateRequestBody;
+  pathParams: PostEventInsightUpdatePathParams;
+} & FetcherExtraProps;
+
+export const postEventInsightUpdate = (variables: PostEventInsightUpdateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostEventInsightUpdateResponse,
+    PostEventInsightUpdateError,
+    PostEventInsightUpdateRequestBody,
+    {},
+    {},
+    PostEventInsightUpdatePathParams
+  >({
+    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}/insight/{insightId}',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type GetEventRawReadPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+  /**
+   * Raw Event UUID
+   */
+  rawId: string;
+};
+
+export type GetEventRawReadError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetEventRawReadResponse = {
+  /**
+   * @example 1234
+   */
+  accountId: number;
+  /**
+   * @example 1970-01-01
+   */
+  created: string;
+  data: Record<string, any>;
+  /**
+   * @example 1234
+   */
+  id: string;
+  /**
+   * @example https://example.com
+   */
+  source: string;
+  /**
+   * @example amber
+   */
+  tlp: string;
+};
+
+export type GetEventRawReadVariables = {
+  pathParams: GetEventRawReadPathParams;
+} & FetcherExtraProps;
+
+export const getEventRawRead = (variables: GetEventRawReadVariables, signal?: AbortSignal) =>
+  fetch<GetEventRawReadResponse, GetEventRawReadError, undefined, {}, {}, GetEventRawReadPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}/raw/{rawId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PostEventRawUpdatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+  /**
+   * Raw Event UUID
+   */
+  rawId: string;
+};
+
+export type PostEventRawUpdateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostEventRawUpdateResponse = {
+  data: Record<string, any>;
+  /**
+   * @example 1234
+   */
+  id: string;
+};
+
+export type PostEventRawUpdateRequestBody = {
+  data?: Record<string, any>;
+  /**
+   * @example example.com
+   */
+  source?: string;
+  /**
+   * @example amber
+   */
+  tlp?: string;
+};
+
+export type PostEventRawUpdateVariables = {
+  body?: PostEventRawUpdateRequestBody;
+  pathParams: PostEventRawUpdatePathParams;
+} & FetcherExtraProps;
+
+export const postEventRawUpdate = (variables: PostEventRawUpdateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostEventRawUpdateResponse,
+    PostEventRawUpdateError,
+    PostEventRawUpdateRequestBody,
+    {},
+    {},
+    PostEventRawUpdatePathParams
+  >({ url: '/accounts/{accountId}/cloudforce-one/events/{eventId}/raw/{rawId}', method: 'post', ...variables, signal });
+
 export type CloudforceOneRequestListPathParams = {
   accountIdentifier: Schemas.CloudforceOneRequestsIdentifier;
 };
@@ -50426,6 +52727,7 @@ export type R2GetEventNotificationConfigsPathParams = {
 export type R2GetEventNotificationConfigsHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -50486,6 +52788,7 @@ export type R2EventNotificationDeleteConfigPathParams = {
 export type R2EventNotificationDeleteConfigHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -50540,6 +52843,7 @@ export type R2PutEventNotificationConfigPathParams = {
 export type R2PutEventNotificationConfigHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -59949,6 +62253,7 @@ export type R2ListBucketsQueryParams = {
 export type R2ListBucketsHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -59990,6 +62295,7 @@ export type R2CreateBucketPathParams = {
 export type R2CreateBucketHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -60042,6 +62348,7 @@ export type R2DeleteBucketPathParams = {
 export type R2DeleteBucketHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -60075,6 +62382,7 @@ export type R2GetBucketPathParams = {
 export type R2GetBucketHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -60118,6 +62426,7 @@ export type R2DeleteBucketCorsPolicyPathParams = {
 export type R2DeleteBucketCorsPolicyHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -60155,6 +62464,7 @@ export type R2GetBucketCorsPolicyPathParams = {
 export type R2GetBucketCorsPolicyHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -60202,6 +62512,7 @@ export type R2PutBucketCorsPolicyPathParams = {
 export type R2PutBucketCorsPolicyHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -60244,6 +62555,7 @@ export type R2ListCustomDomainsPathParams = {
 export type R2ListCustomDomainsHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -60289,6 +62601,7 @@ export type R2AddCustomDomainPathParams = {
 export type R2AddCustomDomainHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -60330,12 +62643,13 @@ export const r2AddCustomDomain = (variables: R2AddCustomDomainVariables, signal?
 export type R2DeleteCustomDomainPathParams = {
   bucketName: Schemas.R2BucketName;
   accountId: Schemas.R2AccountIdentifier;
-  domainName: Schemas.R2DomainName;
+  domain: Schemas.R2DomainName;
 };
 
 export type R2DeleteCustomDomainHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -60372,7 +62686,7 @@ export const r2DeleteCustomDomain = (variables: R2DeleteCustomDomainVariables, s
     {},
     R2DeleteCustomDomainPathParams
   >({
-    url: '/accounts/{accountId}/r2/buckets/{bucketName}/domains/custom/{domainName}',
+    url: '/accounts/{accountId}/r2/buckets/{bucketName}/domains/custom/{domain}',
     method: 'delete',
     ...variables,
     signal
@@ -60381,12 +62695,13 @@ export const r2DeleteCustomDomain = (variables: R2DeleteCustomDomainVariables, s
 export type R2GetCustomDomainSettingsPathParams = {
   accountId: Schemas.R2AccountIdentifier;
   bucketName: Schemas.R2BucketName;
-  domainName: Schemas.R2DomainName;
+  domain: Schemas.R2DomainName;
 };
 
 export type R2GetCustomDomainSettingsHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -60426,7 +62741,7 @@ export const r2GetCustomDomainSettings = (variables: R2GetCustomDomainSettingsVa
     {},
     R2GetCustomDomainSettingsPathParams
   >({
-    url: '/accounts/{accountId}/r2/buckets/{bucketName}/domains/custom/{domainName}',
+    url: '/accounts/{accountId}/r2/buckets/{bucketName}/domains/custom/{domain}',
     method: 'get',
     ...variables,
     signal
@@ -60435,12 +62750,13 @@ export const r2GetCustomDomainSettings = (variables: R2GetCustomDomainSettingsVa
 export type R2EditCustomDomainSettingsPathParams = {
   accountId: Schemas.R2AccountIdentifier;
   bucketName: Schemas.R2BucketName;
-  domainName: Schemas.R2DomainName;
+  domain: Schemas.R2DomainName;
 };
 
 export type R2EditCustomDomainSettingsHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -60481,7 +62797,7 @@ export const r2EditCustomDomainSettings = (variables: R2EditCustomDomainSettings
     {},
     R2EditCustomDomainSettingsPathParams
   >({
-    url: '/accounts/{accountId}/r2/buckets/{bucketName}/domains/custom/{domainName}',
+    url: '/accounts/{accountId}/r2/buckets/{bucketName}/domains/custom/{domain}',
     method: 'put',
     ...variables,
     signal
@@ -60495,6 +62811,7 @@ export type R2GetBucketPublicPolicyPathParams = {
 export type R2GetBucketPublicPolicyHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -60540,6 +62857,7 @@ export type R2PutBucketPublicPolicyPathParams = {
 export type R2PutBucketPublicPolicyHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -60586,6 +62904,7 @@ export type R2GetBucketLifecycleConfigurationPathParams = {
 export type R2GetBucketLifecycleConfigurationHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -60634,6 +62953,7 @@ export type R2PutBucketLifecycleConfigurationPathParams = {
 export type R2PutBucketLifecycleConfigurationHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -60766,6 +63086,7 @@ export type R2DeleteBucketSippyConfigPathParams = {
 export type R2DeleteBucketSippyConfigHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -60813,6 +63134,7 @@ export type R2GetBucketSippyConfigPathParams = {
 export type R2GetBucketSippyConfigHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -60858,6 +63180,7 @@ export type R2PutBucketSippyConfigPathParams = {
 export type R2PutBucketSippyConfigHeaders = {
   /**
    * @default default
+   * @x-stainless-param jurisdiction
    */
   ['cf-r2-jurisdiction']?: 'default' | 'eu' | 'fedramp';
 };
@@ -126919,2317 +129242,34 @@ export const sslDetectorAutomaticModePatchEnrollment = (
     SslDetectorAutomaticModePatchEnrollmentPathParams
   >({ url: '/zones/{zoneTag}/settings/ssl_automatic_mode', method: 'patch', ...variables, signal });
 
-export type PostEventListPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type PostEventListError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostEventListResponse = {
-  /**
-   * @example 1234
-   */
-  accountId: number;
-  /**
-   * @example Flying Yeti
-   */
-  attacker: string;
-  /**
-   * @example CN
-   */
-  attackerCountry: string;
-  /**
-   * @example Domain Resolution
-   */
-  category: string;
-  /**
-   * @example 1
-   */
-  categoryId: number;
-  /**
-   * @example 2022-04-01T00:00:00Z
-   */
-  date: string;
-  /**
-   * @example An attacker registered the domain domain.com
-   */
-  event: string;
-  /**
-   * @example 1223
-   */
-  id: number;
-  /**
-   * @example domain
-   */
-  indicator: string;
-  /**
-   * @example domain
-   */
-  indicatorType: string;
-  /**
-   * @example 5
-   */
-  indicatorTypeId: number;
-  insight?: string;
-  killChain: number;
-  mitreAttack: string[];
-  numReferenced: number;
-  numReferences: number;
-  /**
-   * @example 453gw34w3
-   */
-  rawId: string;
-  referenced: string[];
-  referencedIds: number[];
-  references: string[];
-  referencesIds: number[];
-  releasabilityId?: string;
-  tags: string[];
-  /**
-   * @example US
-   */
-  targetCountry: string;
-  /**
-   * @example Agriculture
-   */
-  targetIndustry: string;
-  /**
-   * @example amber
-   */
-  tlp: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-}[];
-
-export type PostEventListRequestBody = {
-  datasetId?: string[];
-  order?: 'asc' | 'desc';
-  /**
-   * @example created
-   */
-  orderBy?: string;
-  /**
-   * @example 1
-   */
-  page?: number;
-  /**
-   * @example 100
-   */
-  pageSize?: number;
-  search?: {
-    /**
-     * @example attackerCountry
-     */
-    field?: string;
-    /**
-     * @example equals
-     */
-    op?: string;
-    value?: string | number;
-  }[];
-};
-
-export type PostEventListVariables = {
-  body?: PostEventListRequestBody;
-  pathParams: PostEventListPathParams;
-} & FetcherExtraProps;
-
-export const postEventList = (variables: PostEventListVariables, signal?: AbortSignal) =>
-  fetch<PostEventListResponse, PostEventListError, PostEventListRequestBody, {}, {}, PostEventListPathParams>({
-    url: '/{accountId}/events',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
-export type GetAttackerListPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type GetAttackerListError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetAttackerListResponse = {
-  items: {
-    /**
-     * @example string
-     */
-    type: string;
-  };
-  /**
-   * @example array
-   */
-  type: string;
-};
-
-export type GetAttackerListVariables = {
-  pathParams: GetAttackerListPathParams;
-} & FetcherExtraProps;
-
-export const getAttackerList = (variables: GetAttackerListVariables, signal?: AbortSignal) =>
-  fetch<GetAttackerListResponse, GetAttackerListError, undefined, {}, {}, GetAttackerListPathParams>({
-    url: '/{accountId}/events/attackers',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type GetCategoryListPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type GetCategoryListError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetCategoryListResponse = {
-  killChain: number;
-  mitreAttack?: string[];
-  /**
-   * @example name
-   */
-  name: string;
-  /**
-   * @example shortname
-   */
-  shortname?: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-}[];
-
-export type GetCategoryListVariables = {
-  pathParams: GetCategoryListPathParams;
-} & FetcherExtraProps;
-
-export const getCategoryList = (variables: GetCategoryListVariables, signal?: AbortSignal) =>
-  fetch<GetCategoryListResponse, GetCategoryListError, undefined, {}, {}, GetCategoryListPathParams>({
-    url: '/{accountId}/events/categories',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type PostCategoryCreatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type PostCategoryCreateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostCategoryCreateResponse = {
-  killChain: number;
-  mitreAttack?: string[];
-  /**
-   * @example name
-   */
-  name: string;
-  /**
-   * @example shortname
-   */
-  shortname?: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type PostCategoryCreateRequestBody = {
-  killChain: number;
-  mitreAttack?: string[];
-  /**
-   * @example name
-   */
-  name: string;
-  /**
-   * @example shortname
-   */
-  shortname?: string;
-};
-
-export type PostCategoryCreateVariables = {
-  body: PostCategoryCreateRequestBody;
-  pathParams: PostCategoryCreatePathParams;
-} & FetcherExtraProps;
-
-export const postCategoryCreate = (variables: PostCategoryCreateVariables, signal?: AbortSignal) =>
-  fetch<
-    PostCategoryCreateResponse,
-    PostCategoryCreateError,
-    PostCategoryCreateRequestBody,
-    {},
-    {},
-    PostCategoryCreatePathParams
-  >({ url: '/{accountId}/events/categories/create', method: 'post', ...variables, signal });
-
-export type DeleteCategoryDeletePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Category UUID
-   */
-  categoryId: string;
-};
-
-export type DeleteCategoryDeleteError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type DeleteCategoryDeleteResponse = {
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type DeleteCategoryDeleteVariables = {
-  pathParams: DeleteCategoryDeletePathParams;
-} & FetcherExtraProps;
-
-export const deleteCategoryDelete = (variables: DeleteCategoryDeleteVariables, signal?: AbortSignal) =>
-  fetch<DeleteCategoryDeleteResponse, DeleteCategoryDeleteError, undefined, {}, {}, DeleteCategoryDeletePathParams>({
-    url: '/{accountId}/events/categories/{categoryId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
-
-export type GetCategoryReadPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Category UUID
-   */
-  categoryId: string;
-};
-
-export type GetCategoryReadError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetCategoryReadResponse = {
-  killChain: number;
-  mitreAttack?: string[];
-  /**
-   * @example name
-   */
-  name: string;
-  /**
-   * @example shortname
-   */
-  shortname?: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type GetCategoryReadVariables = {
-  pathParams: GetCategoryReadPathParams;
-} & FetcherExtraProps;
-
-export const getCategoryRead = (variables: GetCategoryReadVariables, signal?: AbortSignal) =>
-  fetch<GetCategoryReadResponse, GetCategoryReadError, undefined, {}, {}, GetCategoryReadPathParams>({
-    url: '/{accountId}/events/categories/{categoryId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type PostCategoryUpdatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Category UUID
-   */
-  categoryId: string;
-};
-
-export type PostCategoryUpdateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostCategoryUpdateResponse = {
-  killChain: number;
-  mitreAttack?: string[];
-  /**
-   * @example name
-   */
-  name: string;
-  /**
-   * @example shortname
-   */
-  shortname?: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type PostCategoryUpdateRequestBody = {
-  killChain?: number;
-  mitreAttack?: string[];
-  /**
-   * @example name
-   */
-  name?: string;
-  /**
-   * @example shortname
-   */
-  shortname?: string;
-};
-
-export type PostCategoryUpdateVariables = {
-  body?: PostCategoryUpdateRequestBody;
-  pathParams: PostCategoryUpdatePathParams;
-} & FetcherExtraProps;
-
-export const postCategoryUpdate = (variables: PostCategoryUpdateVariables, signal?: AbortSignal) =>
-  fetch<
-    PostCategoryUpdateResponse,
-    PostCategoryUpdateError,
-    PostCategoryUpdateRequestBody,
-    {},
-    {},
-    PostCategoryUpdatePathParams
-  >({ url: '/{accountId}/events/categories/{categoryId}', method: 'post', ...variables, signal });
-
-export type GetCountryReadPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type GetCountryReadError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetCountryReadResponse = {
-  result: {
-    /**
-     * @example AF
-     */
-    alpha3: string;
-    /**
-     * @example Afghanistan
-     */
-    name: string;
-  }[];
-  /**
-   * @example true
-   */
-  success: string;
-}[];
-
-export type GetCountryReadVariables = {
-  pathParams: GetCountryReadPathParams;
-} & FetcherExtraProps;
-
-export const getCountryRead = (variables: GetCountryReadVariables, signal?: AbortSignal) =>
-  fetch<GetCountryReadResponse, GetCountryReadError, undefined, {}, {}, GetCountryReadPathParams>({
-    url: '/{accountId}/events/countries',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type PostEventCreatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type PostEventCreateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostEventCreateResponse = {
-  /**
-   * @example 1234
-   */
-  accountId: number;
-  /**
-   * @example Flying Yeti
-   */
-  attacker: string;
-  /**
-   * @example CN
-   */
-  attackerCountry: string;
-  /**
-   * @example Domain Resolution
-   */
-  category: string;
-  /**
-   * @example 1
-   */
-  categoryId: number;
-  /**
-   * @example 2022-04-01T00:00:00Z
-   */
-  date: string;
-  /**
-   * @example An attacker registered the domain domain.com
-   */
-  event: string;
-  /**
-   * @example 1223
-   */
-  id: number;
-  /**
-   * @example domain
-   */
-  indicator: string;
-  /**
-   * @example domain
-   */
-  indicatorType: string;
-  /**
-   * @example 5
-   */
-  indicatorTypeId: number;
-  insight?: string;
-  killChain: number;
-  mitreAttack: string[];
-  numReferenced: number;
-  numReferences: number;
-  /**
-   * @example 453gw34w3
-   */
-  rawId: string;
-  referenced: string[];
-  referencedIds: number[];
-  references: string[];
-  referencesIds: number[];
-  releasabilityId?: string;
-  tags: string[];
-  /**
-   * @example US
-   */
-  targetCountry: string;
-  /**
-   * @example Agriculture
-   */
-  targetIndustry: string;
-  /**
-   * @example amber
-   */
-  tlp: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type PostEventCreateRequestBody = {
-  /**
-   * @example 123456
-   */
-  accountId?: number;
-  /**
-   * @example Flying Yeti
-   */
-  attacker: string;
-  /**
-   * @example CN
-   */
-  attackerCountry: string;
-  /**
-   * @example Domain Resolution
-   */
-  category: string;
-  /**
-   * @example durableObjectName
-   */
-  datasetId?: string;
-  /**
-   * @example 2022-04-01T00:00:00Z
-   * @format date-time
-   */
-  date: string;
-  /**
-   * @example An attacker registered the domain domain.com
-   */
-  event: string;
-  /**
-   * @example domain.com
-   */
-  indicator?: string;
-  /**
-   * @example domain
-   */
-  indicatorType: string;
-  raw: {
-    data?: void;
-    /**
-     * @example example.com
-     */
-    source?: string;
-    /**
-     * @example amber
-     */
-    tlp?: string;
-  };
-  tags?: string[];
-  /**
-   * @example US
-   */
-  targetCountry?: string;
-  /**
-   * @example Agriculture
-   */
-  targetIndustry?: string;
-  /**
-   * @example amber
-   */
-  tlp: string;
-};
-
-export type PostEventCreateVariables = {
-  body: PostEventCreateRequestBody;
-  pathParams: PostEventCreatePathParams;
-} & FetcherExtraProps;
-
-export const postEventCreate = (variables: PostEventCreateVariables, signal?: AbortSignal) =>
-  fetch<PostEventCreateResponse, PostEventCreateError, PostEventCreateRequestBody, {}, {}, PostEventCreatePathParams>({
-    url: '/{accountId}/events/create',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
-export type PostEventCreateBulkPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type PostEventCreateBulkError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostEventCreateBulkResponse = {
-  /**
-   * @example 1234
-   */
-  accountId: number;
-  /**
-   * @example Flying Yeti
-   */
-  attacker: string;
-  /**
-   * @example CN
-   */
-  attackerCountry: string;
-  /**
-   * @example Domain Resolution
-   */
-  category: string;
-  /**
-   * @example 1
-   */
-  categoryId: number;
-  /**
-   * @example 2022-04-01T00:00:00Z
-   */
-  date: string;
-  /**
-   * @example An attacker registered the domain domain.com
-   */
-  event: string;
-  /**
-   * @example 1223
-   */
-  id: number;
-  /**
-   * @example domain
-   */
-  indicator: string;
-  /**
-   * @example domain
-   */
-  indicatorType: string;
-  /**
-   * @example 5
-   */
-  indicatorTypeId: number;
-  insight?: string;
-  killChain: number;
-  mitreAttack: string[];
-  numReferenced: number;
-  numReferences: number;
-  /**
-   * @example 453gw34w3
-   */
-  rawId: string;
-  referenced: string[];
-  referencedIds: number[];
-  references: string[];
-  referencesIds: number[];
-  releasabilityId?: string;
-  tags: string[];
-  /**
-   * @example US
-   */
-  targetCountry: string;
-  /**
-   * @example Agriculture
-   */
-  targetIndustry: string;
-  /**
-   * @example amber
-   */
-  tlp: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-}[];
-
-export type PostEventCreateBulkRequestBody = {
-  data: {
-    /**
-     * @example 123456
-     */
-    accountId?: number;
-    /**
-     * @example Flying Yeti
-     */
-    attacker: string;
-    /**
-     * @example CN
-     */
-    attackerCountry: string;
-    /**
-     * @example Domain Resolution
-     */
-    category: string;
-    /**
-     * @example durableObjectName
-     */
-    datasetId?: string;
-    /**
-     * @example 2022-04-01T00:00:00Z
-     * @format date-time
-     */
-    date: string;
-    /**
-     * @example An attacker registered the domain domain.com
-     */
-    event: string;
-    /**
-     * @example domain.com
-     */
-    indicator?: string;
-    /**
-     * @example domain
-     */
-    indicatorType: string;
-    raw: {
-      data?: void;
-      /**
-       * @example example.com
-       */
-      source?: string;
-      /**
-       * @example amber
-       */
-      tlp?: string;
-    };
-    tags?: string[];
-    /**
-     * @example US
-     */
-    targetCountry?: string;
-    /**
-     * @example Agriculture
-     */
-    targetIndustry?: string;
-    /**
-     * @example amber
-     */
-    tlp: string;
-  }[];
-  /**
-   * @example durableObjectName
-   */
-  datasetId: string;
-};
-
-export type PostEventCreateBulkVariables = {
-  body: PostEventCreateBulkRequestBody;
-  pathParams: PostEventCreateBulkPathParams;
-} & FetcherExtraProps;
-
-export const postEventCreateBulk = (variables: PostEventCreateBulkVariables, signal?: AbortSignal) =>
-  fetch<
-    PostEventCreateBulkResponse,
-    PostEventCreateBulkError,
-    PostEventCreateBulkRequestBody,
-    {},
-    {},
-    PostEventCreateBulkPathParams
-  >({ url: '/{accountId}/events/create/bulk', method: 'post', ...variables, signal });
-
-export type GetCronUpdateReadPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type GetCronUpdateReadError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetCronUpdateReadResponse = {
-  /**
-   * @example 2025-03-05T12:35:00.000Z
-   */
-  update: string;
-};
-
-export type GetCronUpdateReadVariables = {
-  pathParams: GetCronUpdateReadPathParams;
-} & FetcherExtraProps;
-
-export const getCronUpdateRead = (variables: GetCronUpdateReadVariables, signal?: AbortSignal) =>
-  fetch<GetCronUpdateReadResponse, GetCronUpdateReadError, undefined, {}, {}, GetCronUpdateReadPathParams>({
-    url: '/{accountId}/events/cron',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type PostCronUpdatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type PostCronUpdateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostCronUpdateResponse = {
-  /**
-   * @example 3
-   */
-  id: number;
-  /**
-   * @example 2025-03-05T12:35:00.000Z
-   */
-  update: string;
-};
-
-export type PostCronUpdateVariables = {
-  pathParams: PostCronUpdatePathParams;
-} & FetcherExtraProps;
-
-export const postCronUpdate = (variables: PostCronUpdateVariables, signal?: AbortSignal) =>
-  fetch<PostCronUpdateResponse, PostCronUpdateError, undefined, {}, {}, PostCronUpdatePathParams>({
-    url: '/{accountId}/events/cron',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
-export type GetDatasetListPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type GetDatasetListError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetDatasetListResponse = {
-  /**
-   * @example true
-   */
-  isPublic: boolean;
-  /**
-   * @example friendly dataset name
-   */
-  name: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-}[];
-
-export type GetDatasetListVariables = {
-  pathParams: GetDatasetListPathParams;
-} & FetcherExtraProps;
-
-export const getDatasetList = (variables: GetDatasetListVariables, signal?: AbortSignal) =>
-  fetch<GetDatasetListResponse, GetDatasetListError, undefined, {}, {}, GetDatasetListPathParams>({
-    url: '/{accountId}/events/dataset',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type PostDatasetCreatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type PostDatasetCreateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostDatasetCreateResponse = {
-  /**
-   * @example true
-   */
-  isPublic: boolean;
-  /**
-   * @example friendly dataset name
-   */
-  name: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type PostDatasetCreateRequestBody = {
-  /**
-   * If true, then anyone can search the dataset. If false, then its limited to the account.
-   */
-  isPublic: boolean;
-  /**
-   * Used to describe the dataset within the account context
-   *
-   * @minLength 1
-   */
-  name: string;
-};
-
-export type PostDatasetCreateVariables = {
-  body: PostDatasetCreateRequestBody;
-  pathParams: PostDatasetCreatePathParams;
-} & FetcherExtraProps;
-
-export const postDatasetCreate = (variables: PostDatasetCreateVariables, signal?: AbortSignal) =>
-  fetch<
-    PostDatasetCreateResponse,
-    PostDatasetCreateError,
-    PostDatasetCreateRequestBody,
-    {},
-    {},
-    PostDatasetCreatePathParams
-  >({ url: '/{accountId}/events/dataset/create', method: 'post', ...variables, signal });
-
-export type GetDatasetReadPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Dataset name
-   */
-  datasetId: string;
-};
-
-export type GetDatasetReadError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetDatasetReadResponse = {
-  /**
-   * @example true
-   */
-  isPublic: boolean;
-  /**
-   * @example friendly dataset name
-   */
-  name: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type GetDatasetReadVariables = {
-  pathParams: GetDatasetReadPathParams;
-} & FetcherExtraProps;
-
-export const getDatasetRead = (variables: GetDatasetReadVariables, signal?: AbortSignal) =>
-  fetch<GetDatasetReadResponse, GetDatasetReadError, undefined, {}, {}, GetDatasetReadPathParams>({
-    url: '/{accountId}/events/dataset/{datasetId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type PostDatasetUpdatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Dataset name
-   */
-  datasetId: string;
-};
-
-export type PostDatasetUpdateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostDatasetUpdateResponse = {
-  /**
-   * @example true
-   */
-  isPublic: boolean;
-  /**
-   * @example friendly dataset name
-   */
-  name: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type PostDatasetUpdateRequestBody = {
-  /**
-   * If true, then anyone can search the dataset. If false, then its limited to the account.
-   */
-  isPublic: boolean;
-  /**
-   * Used to describe the dataset within the account context
-   *
-   * @minLength 1
-   */
-  name: string;
-};
-
-export type PostDatasetUpdateVariables = {
-  body: PostDatasetUpdateRequestBody;
-  pathParams: PostDatasetUpdatePathParams;
-} & FetcherExtraProps;
-
-export const postDatasetUpdate = (variables: PostDatasetUpdateVariables, signal?: AbortSignal) =>
-  fetch<
-    PostDatasetUpdateResponse,
-    PostDatasetUpdateError,
-    PostDatasetUpdateRequestBody,
-    {},
-    {},
-    PostDatasetUpdatePathParams
-  >({ url: '/{accountId}/events/dataset/{datasetId}', method: 'post', ...variables, signal });
-
-export type GetEventRawReadDSPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event ID
-   */
-  eventId: string;
-  /**
-   * Dataset name
-   */
-  datasetId: string;
-};
-
-export type GetEventRawReadDSError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetEventRawReadDSResponse = {
-  /**
-   * @example 1234
-   */
-  accountId: number;
-  /**
-   * @example 1970-01-01
-   */
-  created: string;
-  data: Record<string, any>;
-  /**
-   * @example 1234
-   */
-  id: string;
-  /**
-   * @example https://example.com
-   */
-  source: string;
-  /**
-   * @example amber
-   */
-  tlp: string;
-};
-
-export type GetEventRawReadDSVariables = {
-  pathParams: GetEventRawReadDSPathParams;
-} & FetcherExtraProps;
-
-export const getEventRawReadDS = (variables: GetEventRawReadDSVariables, signal?: AbortSignal) =>
-  fetch<GetEventRawReadDSResponse, GetEventRawReadDSError, undefined, {}, {}, GetEventRawReadDSPathParams>({
-    url: '/{accountId}/events/raw/{datasetId}/{eventId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type DeleteEventReferenceDeletePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-};
-
-export type DeleteEventReferenceDeleteError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type DeleteEventReferenceDeleteResponse = {
-  result: {
-    /**
-     * @example true
-     */
-    success: boolean;
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type DeleteEventReferenceDeleteRequestBody = {
-  events: string[];
-};
-
-export type DeleteEventReferenceDeleteVariables = {
-  body: DeleteEventReferenceDeleteRequestBody;
-  pathParams: DeleteEventReferenceDeletePathParams;
-} & FetcherExtraProps;
-
-export const deleteEventReferenceDelete = (variables: DeleteEventReferenceDeleteVariables, signal?: AbortSignal) =>
-  fetch<
-    DeleteEventReferenceDeleteResponse,
-    DeleteEventReferenceDeleteError,
-    DeleteEventReferenceDeleteRequestBody,
-    {},
-    {},
-    DeleteEventReferenceDeletePathParams
-  >({ url: '/{accountId}/events/relate/{eventId}', method: 'delete', ...variables, signal });
-
-export type PostEventReferenceCreatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-};
-
-export type PostEventReferenceCreateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostEventReferenceCreateResponse = {
-  result: {
-    /**
-     * @example true
-     */
-    success: boolean;
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type PostEventReferenceCreateRequestBody = {
-  events: string[];
-};
-
-export type PostEventReferenceCreateVariables = {
-  body: PostEventReferenceCreateRequestBody;
-  pathParams: PostEventReferenceCreatePathParams;
-} & FetcherExtraProps;
-
-export const postEventReferenceCreate = (variables: PostEventReferenceCreateVariables, signal?: AbortSignal) =>
-  fetch<
-    PostEventReferenceCreateResponse,
-    PostEventReferenceCreateError,
-    PostEventReferenceCreateRequestBody,
-    {},
-    {},
-    PostEventReferenceCreatePathParams
-  >({ url: '/{accountId}/events/relate/{eventId}', method: 'post', ...variables, signal });
-
-export type DeleteEventTagDeletePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-};
-
-export type DeleteEventTagDeleteError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type DeleteEventTagDeleteResponse = {
-  result: {
-    /**
-     * @example true
-     */
-    success: boolean;
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type DeleteEventTagDeleteRequestBody = {
-  tags: string[];
-};
-
-export type DeleteEventTagDeleteVariables = {
-  body: DeleteEventTagDeleteRequestBody;
-  pathParams: DeleteEventTagDeletePathParams;
-} & FetcherExtraProps;
-
-export const deleteEventTagDelete = (variables: DeleteEventTagDeleteVariables, signal?: AbortSignal) =>
-  fetch<
-    DeleteEventTagDeleteResponse,
-    DeleteEventTagDeleteError,
-    DeleteEventTagDeleteRequestBody,
-    {},
-    {},
-    DeleteEventTagDeletePathParams
-  >({ url: '/{accountId}/events/tag/{eventId}', method: 'delete', ...variables, signal });
-
-export type PostEventTagCreatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-};
-
-export type PostEventTagCreateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostEventTagCreateResponse = {
-  result: {
-    /**
-     * @example true
-     */
-    success: boolean;
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type PostEventTagCreateRequestBody = {
-  tags: string[];
-};
-
-export type PostEventTagCreateVariables = {
-  body: PostEventTagCreateRequestBody;
-  pathParams: PostEventTagCreatePathParams;
-} & FetcherExtraProps;
-
-export const postEventTagCreate = (variables: PostEventTagCreateVariables, signal?: AbortSignal) =>
-  fetch<
-    PostEventTagCreateResponse,
-    PostEventTagCreateError,
-    PostEventTagCreateRequestBody,
-    {},
-    {},
-    PostEventTagCreatePathParams
-  >({ url: '/{accountId}/events/tag/{eventId}', method: 'post', ...variables, signal });
-
-export type PostTagCreatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type PostTagCreateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostTagCreateResponse = {
-  /**
-   * @example name
-   */
-  name: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type PostTagCreateRequestBody = {
-  /**
-   * @example name
-   */
-  name: string;
-};
-
-export type PostTagCreateVariables = {
-  body: PostTagCreateRequestBody;
-  pathParams: PostTagCreatePathParams;
-} & FetcherExtraProps;
-
-export const postTagCreate = (variables: PostTagCreateVariables, signal?: AbortSignal) =>
-  fetch<PostTagCreateResponse, PostTagCreateError, PostTagCreateRequestBody, {}, {}, PostTagCreatePathParams>({
-    url: '/{accountId}/events/tags/create',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
-export type GetTargetIndustryListPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type GetTargetIndustryListError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetTargetIndustryListResponse = {
-  items: {
-    /**
-     * @example string
-     */
-    type: string;
-  };
-  /**
-   * @example array
-   */
-  type: string;
-};
-
-export type GetTargetIndustryListVariables = {
-  pathParams: GetTargetIndustryListPathParams;
-} & FetcherExtraProps;
-
-export const getTargetIndustryList = (variables: GetTargetIndustryListVariables, signal?: AbortSignal) =>
-  fetch<GetTargetIndustryListResponse, GetTargetIndustryListError, undefined, {}, {}, GetTargetIndustryListPathParams>({
-    url: '/{accountId}/events/targetIndustries',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type DeleteEventDeletePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-};
-
-export type DeleteEventDeleteError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type DeleteEventDeleteResponse = {
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type DeleteEventDeleteVariables = {
-  pathParams: DeleteEventDeletePathParams;
-} & FetcherExtraProps;
-
-export const deleteEventDelete = (variables: DeleteEventDeleteVariables, signal?: AbortSignal) =>
-  fetch<DeleteEventDeleteResponse, DeleteEventDeleteError, undefined, {}, {}, DeleteEventDeletePathParams>({
-    url: '/{accountId}/events/{eventId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
-
-export type GetEventReadPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-};
-
-export type GetEventReadError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetEventReadResponse = {
-  /**
-   * @example 1234
-   */
-  accountId: number;
-  /**
-   * @example Flying Yeti
-   */
-  attacker: string;
-  /**
-   * @example CN
-   */
-  attackerCountry: string;
-  /**
-   * @example Domain Resolution
-   */
-  category: string;
-  /**
-   * @example 1
-   */
-  categoryId: number;
-  /**
-   * @example 2022-04-01T00:00:00Z
-   */
-  date: string;
-  /**
-   * @example An attacker registered the domain domain.com
-   */
-  event: string;
-  /**
-   * @example 1223
-   */
-  id: number;
-  /**
-   * @example domain
-   */
-  indicator: string;
-  /**
-   * @example domain
-   */
-  indicatorType: string;
-  /**
-   * @example 5
-   */
-  indicatorTypeId: number;
-  insight?: string;
-  killChain: number;
-  mitreAttack: string[];
-  numReferenced: number;
-  numReferences: number;
-  /**
-   * @example 453gw34w3
-   */
-  rawId: string;
-  referenced: string[];
-  referencedIds: number[];
-  references: string[];
-  referencesIds: number[];
-  releasabilityId?: string;
-  tags: string[];
-  /**
-   * @example US
-   */
-  targetCountry: string;
-  /**
-   * @example Agriculture
-   */
-  targetIndustry: string;
-  /**
-   * @example amber
-   */
-  tlp: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type GetEventReadVariables = {
-  pathParams: GetEventReadPathParams;
-} & FetcherExtraProps;
-
-export const getEventRead = (variables: GetEventReadVariables, signal?: AbortSignal) =>
-  fetch<GetEventReadResponse, GetEventReadError, undefined, {}, {}, GetEventReadPathParams>({
-    url: '/{accountId}/events/{eventId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type PostEventUpdatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-};
-
-export type PostEventUpdateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostEventUpdateResponse = {
-  /**
-   * @example 1234
-   */
-  accountId: number;
-  /**
-   * @example Flying Yeti
-   */
-  attacker: string;
-  /**
-   * @example CN
-   */
-  attackerCountry: string;
-  /**
-   * @example Domain Resolution
-   */
-  category: string;
-  /**
-   * @example 1
-   */
-  categoryId: number;
-  /**
-   * @example 2022-04-01T00:00:00Z
-   */
-  date: string;
-  /**
-   * @example An attacker registered the domain domain.com
-   */
-  event: string;
-  /**
-   * @example 1223
-   */
-  id: number;
-  /**
-   * @example domain
-   */
-  indicator: string;
-  /**
-   * @example domain
-   */
-  indicatorType: string;
-  /**
-   * @example 5
-   */
-  indicatorTypeId: number;
-  insight?: string;
-  killChain: number;
-  mitreAttack: string[];
-  numReferenced: number;
-  numReferences: number;
-  /**
-   * @example 453gw34w3
-   */
-  rawId: string;
-  referenced: string[];
-  referencedIds: number[];
-  references: string[];
-  referencesIds: number[];
-  releasabilityId?: string;
-  tags: string[];
-  /**
-   * @example US
-   */
-  targetCountry: string;
-  /**
-   * @example Agriculture
-   */
-  targetIndustry: string;
-  /**
-   * @example amber
-   */
-  tlp: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type PostEventUpdateRequestBody = {
-  /**
-   * @example Flying Yeti
-   */
-  attacker?: string;
-  /**
-   * @example CN
-   */
-  attackerCountry?: string;
-  /**
-   * @example Domain Resolution
-   */
-  category?: string;
-  /**
-   * @example 2022-04-01T00:00:00Z
-   * @format date-time
-   */
-  date?: string;
-  /**
-   * @example An attacker registered the domain domain.com
-   */
-  event?: string;
-  /**
-   * @example domain2.com
-   */
-  indicator?: string;
-  /**
-   * @example sha256
-   */
-  indicatorType?: string;
-  /**
-   * @example US
-   */
-  targetCountry?: string;
-  /**
-   * @example Insurance
-   */
-  targetIndustry?: string;
-  /**
-   * @example amber
-   */
-  tlp?: string;
-};
-
-export type PostEventUpdateVariables = {
-  body?: PostEventUpdateRequestBody;
-  pathParams: PostEventUpdatePathParams;
-} & FetcherExtraProps;
-
-export const postEventUpdate = (variables: PostEventUpdateVariables, signal?: AbortSignal) =>
-  fetch<PostEventUpdateResponse, PostEventUpdateError, PostEventUpdateRequestBody, {}, {}, PostEventUpdatePathParams>({
-    url: '/{accountId}/events/{eventId}',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
-export type PostEventInsightCreatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-};
-
-export type PostEventInsightCreateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostEventInsightCreateResponse = {
-  result: {
-    /**
-     * @example Here is some context _in markdown_
-     */
-    content: string;
-    /**
-     * @example sdfsd56af-43469-3c23-646345dsffd2
-     */
-    uuid: string;
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type PostEventInsightCreateRequestBody = {
-  /**
-   * @example Here is some additional context _in markdown_
-   */
-  content: string;
-};
-
-export type PostEventInsightCreateVariables = {
-  body: PostEventInsightCreateRequestBody;
-  pathParams: PostEventInsightCreatePathParams;
-} & FetcherExtraProps;
-
-export const postEventInsightCreate = (variables: PostEventInsightCreateVariables, signal?: AbortSignal) =>
-  fetch<
-    PostEventInsightCreateResponse,
-    PostEventInsightCreateError,
-    PostEventInsightCreateRequestBody,
-    {},
-    {},
-    PostEventInsightCreatePathParams
-  >({ url: '/{accountId}/events/{eventId}/insight/create', method: 'post', ...variables, signal });
-
-export type DeleteEventInsightDeletePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-  /**
-   * Insight UUID
-   */
-  insightId: string;
-};
-
-export type DeleteEventInsightDeleteError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type DeleteEventInsightDeleteResponse = {
-  result: {
-    /**
-     * @example true
-     */
-    success: boolean;
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type DeleteEventInsightDeleteVariables = {
-  pathParams: DeleteEventInsightDeletePathParams;
-} & FetcherExtraProps;
-
-export const deleteEventInsightDelete = (variables: DeleteEventInsightDeleteVariables, signal?: AbortSignal) =>
-  fetch<
-    DeleteEventInsightDeleteResponse,
-    DeleteEventInsightDeleteError,
-    undefined,
-    {},
-    {},
-    DeleteEventInsightDeletePathParams
-  >({ url: '/{accountId}/events/{eventId}/insight/{insightId}', method: 'delete', ...variables, signal });
-
-export type GetEventInsightReadPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-  /**
-   * Insight UUID
-   */
-  insightId: string;
-};
-
-export type GetEventInsightReadError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetEventInsightReadResponse = {
-  result: {
-    /**
-     * @example Here is some context _in markdown_
-     */
-    content: string;
-    /**
-     * @example sdfsd56af-43469-3c23-646345dsffd2
-     */
-    uuid: string;
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type GetEventInsightReadVariables = {
-  pathParams: GetEventInsightReadPathParams;
-} & FetcherExtraProps;
-
-export const getEventInsightRead = (variables: GetEventInsightReadVariables, signal?: AbortSignal) =>
-  fetch<GetEventInsightReadResponse, GetEventInsightReadError, undefined, {}, {}, GetEventInsightReadPathParams>({
-    url: '/{accountId}/events/{eventId}/insight/{insightId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type PostEventInsightUpdatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-  /**
-   * Insight UUID
-   */
-  insightId: string;
-};
-
-export type PostEventInsightUpdateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostEventInsightUpdateResponse = {
-  result: {
-    /**
-     * @example Updated: Here is some additional context _in markdown_
-     */
-    content: string;
-    /**
-     * @example sdfsd56af-43469-3c23-646345dsffd2
-     */
-    uuid: string;
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type PostEventInsightUpdateRequestBody = {
-  /**
-   * @example Updated: Here is some additional context _in markdown_
-   */
-  content: string;
-};
-
-export type PostEventInsightUpdateVariables = {
-  body: PostEventInsightUpdateRequestBody;
-  pathParams: PostEventInsightUpdatePathParams;
-} & FetcherExtraProps;
-
-export const postEventInsightUpdate = (variables: PostEventInsightUpdateVariables, signal?: AbortSignal) =>
-  fetch<
-    PostEventInsightUpdateResponse,
-    PostEventInsightUpdateError,
-    PostEventInsightUpdateRequestBody,
-    {},
-    {},
-    PostEventInsightUpdatePathParams
-  >({ url: '/{accountId}/events/{eventId}/insight/{insightId}', method: 'post', ...variables, signal });
-
-export type GetEventRawReadPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-  /**
-   * Raw Event UUID
-   */
-  rawId: string;
-};
-
-export type GetEventRawReadError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetEventRawReadResponse = {
-  /**
-   * @example 1234
-   */
-  accountId: number;
-  /**
-   * @example 1970-01-01
-   */
-  created: string;
-  data: Record<string, any>;
-  /**
-   * @example 1234
-   */
-  id: string;
-  /**
-   * @example https://example.com
-   */
-  source: string;
-  /**
-   * @example amber
-   */
-  tlp: string;
-};
-
-export type GetEventRawReadVariables = {
-  pathParams: GetEventRawReadPathParams;
-} & FetcherExtraProps;
-
-export const getEventRawRead = (variables: GetEventRawReadVariables, signal?: AbortSignal) =>
-  fetch<GetEventRawReadResponse, GetEventRawReadError, undefined, {}, {}, GetEventRawReadPathParams>({
-    url: '/{accountId}/events/{eventId}/raw/{rawId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type PostEventRawUpdatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-  /**
-   * Raw Event UUID
-   */
-  rawId: string;
-};
-
-export type PostEventRawUpdateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostEventRawUpdateResponse = {
-  data: Record<string, any>;
-  /**
-   * @example 1234
-   */
-  id: string;
-};
-
-export type PostEventRawUpdateRequestBody = {
-  data?: Record<string, any>;
-  /**
-   * @example example.com
-   */
-  source?: string;
-  /**
-   * @example amber
-   */
-  tlp?: string;
-};
-
-export type PostEventRawUpdateVariables = {
-  body?: PostEventRawUpdateRequestBody;
-  pathParams: PostEventRawUpdatePathParams;
-} & FetcherExtraProps;
-
-export const postEventRawUpdate = (variables: PostEventRawUpdateVariables, signal?: AbortSignal) =>
-  fetch<
-    PostEventRawUpdateResponse,
-    PostEventRawUpdateError,
-    PostEventRawUpdateRequestBody,
-    {},
-    {},
-    PostEventRawUpdatePathParams
-  >({ url: '/{accountId}/events/{eventId}/raw/{rawId}', method: 'post', ...variables, signal });
-
-export type GetVersionPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type GetVersionError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetVersionResponse = {
-  /**
-   * @example 1.2.0
-   */
-  version: string;
-};
-
-export type GetVersionVariables = {
-  pathParams: GetVersionPathParams;
-} & FetcherExtraProps;
-
-export const getVersion = (variables: GetVersionVariables, signal?: AbortSignal) =>
-  fetch<GetVersionResponse, GetVersionError, undefined, {}, {}, GetVersionPathParams>({
-    url: '/{accountId}/version',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
 export const operationsByTag = {
   accounts: { accountsListAccounts, accountCreation, accountDeletion, accountsAccountDetails, accountsUpdateAccount },
+  event: {
+    postEventList,
+    postEventCreate,
+    postEventCreateBulk,
+    getEventRawReadDS,
+    deleteEventReferenceDelete,
+    postEventReferenceCreate,
+    deleteEventTagDelete,
+    postEventTagCreate,
+    deleteEventDelete,
+    getEventRead,
+    postEventUpdate,
+    postEventInsightCreate,
+    deleteEventInsightDelete,
+    getEventInsightRead,
+    postEventInsightUpdate,
+    getEventRawRead,
+    postEventRawUpdate
+  },
+  attacker: { getAttackerList },
+  category: { getCategoryList, postCategoryCreate, deleteCategoryDelete, getCategoryRead, postCategoryUpdate },
+  country: { getCountryRead },
+  cron: { getCronUpdateRead, postCronUpdate },
+  dataset: { getDatasetList, postDatasetCreate, getDatasetRead, postDatasetUpdate },
+  tag: { postTagCreate },
+  targetIndustry: { getTargetIndustryList },
   requestForInformationRFI: {
     cloudforceOneRequestList,
     cloudforceOneRequestConstants,
@@ -131360,32 +131400,5 @@ export const operationsByTag = {
     workerRoutesGetRoute,
     workerRoutesUpdateRoute
   },
-  automaticSSLTLS: { sslDetectorAutomaticModeGetEnrollment, sslDetectorAutomaticModePatchEnrollment },
-  event: {
-    postEventList,
-    postEventCreate,
-    postEventCreateBulk,
-    getEventRawReadDS,
-    deleteEventReferenceDelete,
-    postEventReferenceCreate,
-    deleteEventTagDelete,
-    postEventTagCreate,
-    deleteEventDelete,
-    getEventRead,
-    postEventUpdate,
-    postEventInsightCreate,
-    deleteEventInsightDelete,
-    getEventInsightRead,
-    postEventInsightUpdate,
-    getEventRawRead,
-    postEventRawUpdate,
-    getVersion
-  },
-  attacker: { getAttackerList },
-  category: { getCategoryList, postCategoryCreate, deleteCategoryDelete, getCategoryRead, postCategoryUpdate },
-  country: { getCountryRead },
-  cron: { getCronUpdateRead, postCronUpdate },
-  dataset: { getDatasetList, postDatasetCreate, getDatasetRead, postDatasetUpdate },
-  tag: { postTagCreate },
-  targetIndustry: { getTargetIndustryList }
+  automaticSSLTLS: { sslDetectorAutomaticModeGetEnrollment, sslDetectorAutomaticModePatchEnrollment }
 };
