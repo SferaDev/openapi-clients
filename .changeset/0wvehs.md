@@ -2,4 +2,4 @@
 "vercel-api-js": patch
 ---
 
-[BREAKING] Change deploymentType values order
+Update type for get custom deployment 
