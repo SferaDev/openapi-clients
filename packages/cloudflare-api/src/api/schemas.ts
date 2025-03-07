@@ -26061,6 +26061,7 @@ export type LogpushOutputOptions = {
  * @example 00000000000000000000
  * @maxLength 4096
  * @pattern ^[a-zA-Z0-9/\+\.\-_]*$
+ * @x-sensitive true
  */
 export type LogpushOwnershipChallenge = string;
 
