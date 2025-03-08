@@ -1,5 +1,24 @@
 # cloudflare-api-js
 
+## 0.9.0
+
+### Minor Changes
+
+- 173c962: Add new endpoint to post event list
+- 755540e: Add new properties for high availability state in MconnSnapshot
+- 8daa84e: Add new endpoint to get indicator types list
+
+### Patch Changes
+
+- 57cb3fd: Add new endpoint to delete scans for a cloudforce-one account
+- 3bb0299: [BREAKING] Change type of tunnelId in CloudflareTunnelConfigurationGetConfigurationPathParams
+- e9274c9: Add new endpoint to get list of configurations
+- 4bb88ae: Add x-sensitive property to LogpushOwnershipChallenge type
+- c88bde2: Add new query parameter 'direct_user' to initiate video uploads using Tus
+- 81f32ae: Change response type for WorkersAiPostRunCfOpenaiWhisperLargeV3Turbo endpoint
+- 5a57464: Add 'warp' as a valid value for subnet_types in ZeroTrustNetworksSubnetsListQueryParams
+- e438f6b: Replace individual response fields with shared common response schema for GetConfig and PostConfigCreate endpoints
+
 ## 0.8.2
 
 ### Patch Changes

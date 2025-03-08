@@ -1,5 +1,14 @@
 # vercel-api-js
 
+## 0.22.1
+
+### Patch Changes
+
+- 5f0ac90: Update type for get custom deployment
+- 15c6623: [BREAKING] Change type order in filterProjectEnvs and related functions
+- e120dde: [BREAKING] Remove 'blobStores' field from resourceConfig in AuthUser schema
+- c808605: Add 'partial' field to UpdateResourceSecretsRequestBody and UpdateResourceSecretsByIdRequestBody
+
 ## 0.22.0
 
 ### Minor Changes
