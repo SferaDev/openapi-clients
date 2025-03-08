@@ -12415,6 +12415,52 @@ export type CloudConnectorRules = {
 
 export type CloudConnectorZoneIdentifier = CloudConnectorIdentifier;
 
+export type CloudforceOnePortScanApiApiResponseCommon = {
+  errors: CloudforceOnePortScanApiMessages;
+  messages: CloudforceOnePortScanApiMessages;
+  /**
+   * Whether the API call was successful
+   *
+   * @example true
+   */
+  success: true;
+};
+
+export type CloudforceOnePortScanApiMessages = {
+  /**
+   * @minimum 1000
+   */
+  code: number;
+  message: string;
+}[];
+
+export type CloudforceOnePortScanApiPort = {
+  /**
+   * @example 8080
+   */
+  number?: number;
+  /**
+   * @example tcp
+   */
+  proto?: string;
+  /**
+   * @example open
+   */
+  status?: string;
+};
+
+export type CloudforceOnePortScanApiScanConfig = {
+  /**
+   * @example abcd1234abcd1234abcd1234abcd1234
+   */
+  account_id: string;
+  /**
+   * @example 1
+   */
+  frequency: number;
+  ips: string[];
+};
+
 export type CloudforceOneRequestsApiResponseCommon = {
   errors: CloudforceOneRequestsMessages;
   messages: CloudforceOneRequestsMessages;

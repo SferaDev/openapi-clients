@@ -44709,21 +44709,8 @@ export type GetConfigFetchPathParams = {
 
 export type GetConfigFetchError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetConfigFetchResponse = {
-  errors: string[];
-  messages: string[];
-  result: {
-    /**
-     * @example abcd1234abcd1234abcd1234abcd1234
-     */
-    account_id: string;
-    /**
-     * @example 1
-     */
-    frequency: number;
-    ips: string[];
-  };
-  success: boolean;
+export type GetConfigFetchResponse = Schemas.CloudforceOnePortScanApiApiResponseCommon & {
+  result?: Schemas.CloudforceOnePortScanApiScanConfig;
 };
 
 export type GetConfigFetchVariables = {
@@ -44747,28 +44734,20 @@ export type PostConfigCreatePathParams = {
 
 export type PostConfigCreateError = Fetcher.ErrorWrapper<undefined>;
 
-export type PostConfigCreateResponse = {
-  errors: string[];
-  messages: string[];
-  result: {
-    /**
-     * @example abcd1234abcd1234abcd1234abcd1234
-     */
-    account_id: string;
-    /**
-     * @example 1
-     */
-    frequency: number;
-    ips: string[];
-  };
-  success: boolean;
+export type PostConfigCreateResponse = Schemas.CloudforceOnePortScanApiApiResponseCommon & {
+  result?: Schemas.CloudforceOnePortScanApiScanConfig;
 };
 
 export type PostConfigCreateRequestBody = {
   /**
-   * @example 1
+   * The number of days between each scan (0 = no recurring scans)
+   *
+   * @example 7
    */
   frequency: number;
+  /**
+   * A list of IP addresses or CIDR blocks to scan. The maximum number of total IP addresses allowed is 5000.
+   */
   ips: string[];
 };
 
@@ -44800,20 +44779,7 @@ export type GetGetOpenPortsResponse = {
   errors: string[];
   messages: string[];
   result: {
-    ['1.1.1.1']: {
-      /**
-       * @example 8080
-       */
-      number: number;
-      /**
-       * @example tcp
-       */
-      proto: string;
-      /**
-       * @example open
-       */
-      status: string;
-    }[];
+    ['1.1.1.1']: Schemas.CloudforceOnePortScanApiPort[];
   };
   success: boolean;
 };
