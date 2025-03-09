@@ -7041,7 +7041,6 @@ export type GetConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
 export type GetConfigurableLogDrainResponse = {
   clientId?: string;
   configurationId?: string;
-  deliveryFormat: 'json' | 'ndjson' | 'syslog';
   sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   environments: ('preview' | 'production')[];
   status?: 'disabled' | 'enabled' | 'errored';
@@ -7064,6 +7063,7 @@ export type GetConfigurableLogDrainResponse = {
   teamId?: string | null;
   ownerId: string;
   createdFrom?: 'integration' | 'self-served';
+  deliveryFormat: 'json' | 'ndjson' | 'syslog';
   secret: string;
 };
 
@@ -7141,7 +7141,6 @@ export type GetAllLogDrainsError = Fetcher.ErrorWrapper<undefined>;
 export type GetAllLogDrainsResponse = {
   clientId?: string;
   configurationId?: string;
-  deliveryFormat: 'json' | 'ndjson' | 'syslog';
   sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   environments: ('preview' | 'production')[];
   status?: 'disabled' | 'enabled' | 'errored';
@@ -7164,6 +7163,7 @@ export type GetAllLogDrainsResponse = {
   teamId?: string | null;
   ownerId: string;
   createdFrom?: 'integration' | 'self-served';
+  deliveryFormat: 'json' | 'ndjson' | 'syslog';
   secret: string;
 }[];
 
@@ -7202,7 +7202,6 @@ export type CreateConfigurableLogDrainResponse = {
   secret?: string;
   clientId?: string;
   configurationId?: string;
-  deliveryFormat: 'json' | 'ndjson' | 'syslog';
   sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   environments: ('preview' | 'production')[];
   status?: 'disabled' | 'enabled' | 'errored';
@@ -7225,6 +7224,7 @@ export type CreateConfigurableLogDrainResponse = {
   teamId?: string | null;
   ownerId: string;
   createdFrom?: 'integration' | 'self-served';
+  deliveryFormat: 'json' | 'ndjson' | 'syslog';
 };
 
 export type CreateConfigurableLogDrainRequestBody = {
