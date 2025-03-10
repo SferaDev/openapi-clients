@@ -12,11 +12,11 @@
     "@openapi-codegen/cli": "^3.1.0",
     "@openapi-codegen/typescript": "^11.0.1",
     "@types/isomorphic-fetch": "^0.0.39",
-    "@types/node": "^22.13.8",
+    "@types/node": "^22.13.10",
     "builtin-modules": "^5.0.0",
     "case": "^1.6.3",
     "isomorphic-fetch": "^3.0.0",
-    "openai": "^4.86.1",
+    "openai": "^4.86.2",
     "openapi3-ts": "^4.4.0",
     "rimraf": "^6.0.1",
     "ts-morph": "^25.0.1",
@@ -27,7 +27,7 @@
     "turbo": "^2.4.4",
     "typescript": "^5.8.2",
     "unbuild": "^3.5.0",
-    "vitest": "^3.0.7"
+    "vitest": "^3.0.8"
   },
   "packageManager": "pnpm@9.15.1"
 }
