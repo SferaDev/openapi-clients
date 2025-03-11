@@ -26063,7 +26063,7 @@ export type LogpushOutputOptions = {
    *
    * @default false
    */
-  ['CVE-2021-4428']?: boolean | null;
+  ['CVE-2021-44228']?: boolean | null;
   /**
    * String to be prepended before each batch.
    *
