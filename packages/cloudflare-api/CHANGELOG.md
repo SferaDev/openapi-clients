@@ -1,5 +1,14 @@
 # cloudflare-api-js
 
+## 0.9.1
+
+### Patch Changes
+
+- b0b6a88: Add new attribute for configuring OAuth Bearer Token authentication scheme for SCIM provisioning to an application
+- cd026ab: [BREAKING] Mark 'CallsSecret', 'CallsTurnKey', 'StreamInputRtmpsStreamKey', 'StreamInputSrtStreamPassphrase', 'StreamJwk', 'StreamPem', 'StreamPlaybackRtmpsStreamKey', 'StreamPlaybackSrtStreamPassphrase', 'StreamSignedTokenRequest.pem', 'StreamSignedTokenResponse.token' as sensitive data
+- a4ed428: Remove deprecated 'attack' field in RadarGetAttacksLayer7TimeseriesQueryParams
+- 225a36a: Add new endpoint to list waiting rooms for an account
+
 ## 0.9.0
 
 ### Minor Changes
