@@ -72921,6 +72921,54 @@ export const vectorizeUpsertVector = (variables: VectorizeUpsertVectorVariables,
     VectorizeUpsertVectorPathParams
   >({ url: '/accounts/{accountId}/vectorize/v2/indexes/{indexName}/upsert', method: 'post', ...variables, signal });
 
+export type WaitingRoomListWaitingRoomsAccountPathParams = {
+  accountId: Schemas.WaitingroomIdentifier;
+};
+
+export type WaitingRoomListWaitingRoomsAccountQueryParams = {
+  /**
+   * Page number of paginated results.
+   *
+   * @default 1
+   * @minimum 1
+   */
+  page?: number;
+  /**
+   * Maximum number of results per page. Must be a multiple of 5.
+   *
+   * @default 25
+   * @maximum 1000
+   * @minimum 5
+   */
+  per_page?: number;
+};
+
+export type WaitingRoomListWaitingRoomsAccountError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.WaitingroomResponseCollection & Schemas.WaitingroomApiResponseCommonFailure;
+}>;
+
+export type WaitingRoomListWaitingRoomsAccountVariables = {
+  pathParams: WaitingRoomListWaitingRoomsAccountPathParams;
+  queryParams?: WaitingRoomListWaitingRoomsAccountQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Lists waiting rooms for account.
+ */
+export const waitingRoomListWaitingRoomsAccount = (
+  variables: WaitingRoomListWaitingRoomsAccountVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.WaitingroomResponseCollection,
+    WaitingRoomListWaitingRoomsAccountError,
+    undefined,
+    {},
+    WaitingRoomListWaitingRoomsAccountQueryParams,
+    WaitingRoomListWaitingRoomsAccountPathParams
+  >({ url: '/accounts/{accountId}/waiting_rooms', method: 'get', ...variables, signal });
+
 export type CloudflareTunnelListWarpConnectorTunnelsPathParams = {
   accountId: Schemas.TunnelAccountId;
 };
@@ -127978,7 +128026,7 @@ export type WaitingRoomListWaitingRoomsVariables = {
 } & FetcherExtraProps;
 
 /**
- * Lists waiting rooms.
+ * Lists waiting rooms for zone.
  */
 export const waitingRoomListWaitingRooms = (variables: WaitingRoomListWaitingRoomsVariables, signal?: AbortSignal) =>
   fetch<
@@ -130472,6 +130520,32 @@ export const operationsByTag = {
     vectorizeQueryVector,
     vectorizeUpsertVector
   },
+  waitingRoom: {
+    waitingRoomListWaitingRoomsAccount,
+    waitingRoomListWaitingRooms,
+    waitingRoomCreateWaitingRoom,
+    waitingRoomCreateACustomWaitingRoomPagePreview,
+    waitingRoomGetZoneSettings,
+    waitingRoomPatchZoneSettings,
+    waitingRoomUpdateZoneSettings,
+    waitingRoomDeleteWaitingRoom,
+    waitingRoomWaitingRoomDetails,
+    waitingRoomPatchWaitingRoom,
+    waitingRoomUpdateWaitingRoom,
+    waitingRoomListEvents,
+    waitingRoomCreateEvent,
+    waitingRoomDeleteEvent,
+    waitingRoomEventDetails,
+    waitingRoomPatchEvent,
+    waitingRoomUpdateEvent,
+    waitingRoomPreviewActiveEventDetails,
+    waitingRoomListWaitingRoomRules,
+    waitingRoomCreateWaitingRoomRule,
+    waitingRoomReplaceWaitingRoomRules,
+    waitingRoomDeleteWaitingRoomRule,
+    waitingRoomPatchWaitingRoomRule,
+    waitingRoomGetWaitingRoomStatus
+  },
   workerAccountSettings: {
     workerAccountSettingsFetchWorkerAccountSettings,
     workerAccountSettingsCreateWorkerAccountSettings
@@ -131338,31 +131412,6 @@ export const operationsByTag = {
   },
   sSLVerification: { sslVerificationSslVerificationDetails, sslVerificationEditSslCertificatePackValidationMethod },
   uRLNormalization: { deleteUrlNormalization, getUrlNormalization, updateUrlNormalization },
-  waitingRoom: {
-    waitingRoomListWaitingRooms,
-    waitingRoomCreateWaitingRoom,
-    waitingRoomCreateACustomWaitingRoomPagePreview,
-    waitingRoomGetZoneSettings,
-    waitingRoomPatchZoneSettings,
-    waitingRoomUpdateZoneSettings,
-    waitingRoomDeleteWaitingRoom,
-    waitingRoomWaitingRoomDetails,
-    waitingRoomPatchWaitingRoom,
-    waitingRoomUpdateWaitingRoom,
-    waitingRoomListEvents,
-    waitingRoomCreateEvent,
-    waitingRoomDeleteEvent,
-    waitingRoomEventDetails,
-    waitingRoomPatchEvent,
-    waitingRoomUpdateEvent,
-    waitingRoomPreviewActiveEventDetails,
-    waitingRoomListWaitingRoomRules,
-    waitingRoomCreateWaitingRoomRule,
-    waitingRoomReplaceWaitingRoomRules,
-    waitingRoomDeleteWaitingRoomRule,
-    waitingRoomPatchWaitingRoomRule,
-    waitingRoomGetWaitingRoomStatus
-  },
   web3Hostname: {
     web3HostnameListWeb3Hostnames,
     web3HostnameCreateWeb3Hostname,
