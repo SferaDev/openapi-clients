@@ -4206,6 +4206,7 @@ export type AccessGenericOauthConfig = {
    * Your OAuth Client Secret
    *
    * @example <your client secret>
+   * @x-sensitive true
    */
   client_secret?: string;
 };
@@ -7998,7 +7999,7 @@ export type AccessSchemasSamlSaasApp = {
  * Configuration for provisioning to this application via SCIM. This is currently in closed beta.
  */
 export type AccessSchemasScimConfig = {
-  authentication?: AccessScimConfigSingleAuthentication | AccessScimConfigMultiAuthentication;
+  authentication?: AccessSchemasScimConfigSingleAuthentication | AccessSchemasScimConfigMultiAuthentication;
   /**
    * If false, we propagate DELETE requests to the target application for SCIM resources. If true, we only set `active` to false on the SCIM resource. This is useful because some targets do not support DELETE operations.
    */
@@ -8020,6 +8021,31 @@ export type AccessSchemasScimConfig = {
    */
   remote_uri: string;
 };
+
+/**
+ * Attributes for configuring OAuth Bearer Token authentication scheme for SCIM provisioning to an application.
+ */
+export type AccessSchemasScimConfigAuthenticationOauthBearerToken = {
+  /**
+   * The authentication scheme to use when making SCIM requests to this application.
+   */
+  scheme: 'oauthbearertoken';
+  /**
+   * Token used to authenticate with the remote SCIM service.
+   */
+  token: string;
+};
+
+/**
+ * Multiple authentication schemes
+ */
+export type AccessSchemasScimConfigMultiAuthentication = AccessSchemasScimConfigSingleAuthentication[];
+
+export type AccessSchemasScimConfigSingleAuthentication =
+  | AccessScimConfigAuthenticationHttpBasic
+  | AccessSchemasScimConfigAuthenticationOauthBearerToken
+  | AccessScimConfigAuthenticationOauth2
+  | AccessScimConfigAuthenticationAccessServiceToken;
 
 /**
  * The unique API identifier for the Zero Trust seat.
@@ -8265,6 +8291,8 @@ export type AccessScimConfigAuthenticationAccessServiceToken = {
   client_id: string;
   /**
    * Client secret of the Access service token used to authenticate with the remote service.
+   *
+   * @x-sensitive true
    */
   client_secret: string;
   /**
@@ -8305,6 +8333,8 @@ export type AccessScimConfigAuthenticationOauth2 = {
   client_id: string;
   /**
    * Secret used to authenticate when generating a token for authenticating with the remove SCIM service.
+   *
+   * @x-sensitive true
    */
   client_secret: string;
   /**
@@ -8331,6 +8361,8 @@ export type AccessScimConfigAuthenticationOauthBearerToken = {
   scheme: 'oauthbearertoken';
   /**
    * Token used to authenticate with the remote SCIM service.
+   *
+   * @x-sensitive true
    */
   token: string;
 };
