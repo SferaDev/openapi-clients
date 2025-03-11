@@ -84855,20 +84855,6 @@ export type RadarGetAttacksLayer7TimeseriesQueryParams = {
    */
   dateEnd?: string[];
   /**
-   * This field is deprecated, please use the new `mitigationProduct`.
-   *
-   * @deprecated true
-   */
-  attack?: (
-    | 'DDOS'
-    | 'WAF'
-    | 'BOT_MANAGEMENT'
-    | 'ACCESS_RULES'
-    | 'IP_REPUTATION'
-    | 'API_SHIELD'
-    | 'DATA_LOSS_PREVENTION'
-  )[];
-  /**
    * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
    *
    * @example 15169
@@ -86654,71 +86640,6 @@ export type RadarGetAttacksLayer7TopAttacksQueryParams = {
    */
   continent?: string[];
   /**
-   * Filters results by IP version (Ipv4 vs. IPv6).
-   *
-   * @example IPv4
-   */
-  ipVersion?: ('IPv4' | 'IPv6')[];
-  /**
-   * Filters results by HTTP version.
-   *
-   * @example HTTPv1
-   */
-  httpVersion?: ('HTTPv1' | 'HTTPv2' | 'HTTPv3')[];
-  /**
-   * Filters results by HTTP method.
-   *
-   * @example GET
-   */
-  httpMethod?: (
-    | 'GET'
-    | 'POST'
-    | 'DELETE'
-    | 'PUT'
-    | 'HEAD'
-    | 'PURGE'
-    | 'OPTIONS'
-    | 'PROPFIND'
-    | 'MKCOL'
-    | 'PATCH'
-    | 'ACL'
-    | 'BCOPY'
-    | 'BDELETE'
-    | 'BMOVE'
-    | 'BPROPFIND'
-    | 'BPROPPATCH'
-    | 'CHECKIN'
-    | 'CHECKOUT'
-    | 'CONNECT'
-    | 'COPY'
-    | 'LABEL'
-    | 'LOCK'
-    | 'MERGE'
-    | 'MKACTIVITY'
-    | 'MKWORKSPACE'
-    | 'MOVE'
-    | 'NOTIFY'
-    | 'ORDERPATCH'
-    | 'POLL'
-    | 'PROPPATCH'
-    | 'REPORT'
-    | 'SEARCH'
-    | 'SUBSCRIBE'
-    | 'TRACE'
-    | 'UNCHECKOUT'
-    | 'UNLOCK'
-    | 'UNSUBSCRIBE'
-    | 'UPDATE'
-    | 'VERSIONCONTROL'
-    | 'BASELINECONTROL'
-    | 'XMSENUMATTS'
-    | 'RPC_OUT_DATA'
-    | 'RPC_IN_DATA'
-    | 'JSON'
-    | 'COOK'
-    | 'TRACK'
-  )[];
-  /**
    * Array of L7 mitigation products.
    */
   mitigationProduct?: (
@@ -86744,7 +86665,7 @@ export type RadarGetAttacksLayer7TopAttacksQueryParams = {
    */
   limitPerLocation?: number;
   /**
-   * Attack magnitude can be defined by total requests mitigated or by total zones attacked.
+   * This parameter is deprecated. In the future, we will only support attack magnitude defined by the total number of mitigated requests (MITIGATED_REQUESTS).
    *
    * @example MITIGATED_REQUESTS
    */
@@ -87380,71 +87301,6 @@ export type RadarGetAttacksLayer7TopTargetLocationQueryParams = {
    * @example EU,NA
    */
   continent?: string[];
-  /**
-   * Filters results by IP version (Ipv4 vs. IPv6).
-   *
-   * @example IPv4
-   */
-  ipVersion?: ('IPv4' | 'IPv6')[];
-  /**
-   * Filters results by HTTP version.
-   *
-   * @example HTTPv1
-   */
-  httpVersion?: ('HTTPv1' | 'HTTPv2' | 'HTTPv3')[];
-  /**
-   * Filters results by HTTP method.
-   *
-   * @example GET
-   */
-  httpMethod?: (
-    | 'GET'
-    | 'POST'
-    | 'DELETE'
-    | 'PUT'
-    | 'HEAD'
-    | 'PURGE'
-    | 'OPTIONS'
-    | 'PROPFIND'
-    | 'MKCOL'
-    | 'PATCH'
-    | 'ACL'
-    | 'BCOPY'
-    | 'BDELETE'
-    | 'BMOVE'
-    | 'BPROPFIND'
-    | 'BPROPPATCH'
-    | 'CHECKIN'
-    | 'CHECKOUT'
-    | 'CONNECT'
-    | 'COPY'
-    | 'LABEL'
-    | 'LOCK'
-    | 'MERGE'
-    | 'MKACTIVITY'
-    | 'MKWORKSPACE'
-    | 'MOVE'
-    | 'NOTIFY'
-    | 'ORDERPATCH'
-    | 'POLL'
-    | 'PROPPATCH'
-    | 'REPORT'
-    | 'SEARCH'
-    | 'SUBSCRIBE'
-    | 'TRACE'
-    | 'UNCHECKOUT'
-    | 'UNLOCK'
-    | 'UNSUBSCRIBE'
-    | 'UPDATE'
-    | 'VERSIONCONTROL'
-    | 'BASELINECONTROL'
-    | 'XMSENUMATTS'
-    | 'RPC_OUT_DATA'
-    | 'RPC_IN_DATA'
-    | 'JSON'
-    | 'COOK'
-    | 'TRACK'
-  )[];
   /**
    * Array of L7 mitigation products.
    */
@@ -89060,6 +88916,13 @@ export type RadarGetReportsDatasetsQueryParams = {
    * @example RANKING_BUCKET
    */
   datasetType?: 'RANKING_BUCKET' | 'REPORT';
+  /**
+   * Filters results by the specified date.
+   *
+   * @example 2024-09-19
+   * @format date
+   */
+  date?: string;
   /**
    * Format in which results will be returned.
    *
@@ -100629,6 +100492,12 @@ export type RadarGetHttpSummaryByBotClassQueryParams = {
    */
   tlsVersion?: ('TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC')[];
   /**
+   * Filters results by browser family.
+   *
+   * @example CHROME
+   */
+  browserFamily?: ('CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI')[];
+  /**
    * Format in which results will be returned.
    *
    * @example json
@@ -100822,6 +100691,12 @@ export type RadarGetHttpSummaryByDeviceTypeQueryParams = {
    * @example TLSv1_2
    */
   tlsVersion?: ('TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC')[];
+  /**
+   * Filters results by browser family.
+   *
+   * @example CHROME
+   */
+  browserFamily?: ('CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI')[];
   /**
    * Format in which results will be returned.
    *
@@ -101021,6 +100896,12 @@ export type RadarGetHttpSummaryByHttpProtocolQueryParams = {
    */
   tlsVersion?: ('TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC')[];
   /**
+   * Filters results by browser family.
+   *
+   * @example CHROME
+   */
+  browserFamily?: ('CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI')[];
+  /**
    * Format in which results will be returned.
    *
    * @example json
@@ -101214,6 +101095,12 @@ export type RadarGetHttpSummaryByHttpVersionQueryParams = {
    * @example TLSv1_2
    */
   tlsVersion?: ('TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC')[];
+  /**
+   * Filters results by browser family.
+   *
+   * @example CHROME
+   */
+  browserFamily?: ('CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI')[];
   /**
    * Format in which results will be returned.
    *
@@ -101413,6 +101300,12 @@ export type RadarGetHttpSummaryByIpVersionQueryParams = {
    */
   tlsVersion?: ('TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC')[];
   /**
+   * Filters results by browser family.
+   *
+   * @example CHROME
+   */
+  browserFamily?: ('CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI')[];
+  /**
    * Format in which results will be returned.
    *
    * @example json
@@ -101606,6 +101499,12 @@ export type RadarGetHttpSummaryByOperatingSystemQueryParams = {
    * @example TLSv1_2
    */
   tlsVersion?: ('TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC')[];
+  /**
+   * Filters results by browser family.
+   *
+   * @example CHROME
+   */
+  browserFamily?: ('CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI')[];
   /**
    * Format in which results will be returned.
    *
@@ -101807,6 +101706,12 @@ export type RadarGetHttpSummaryByPostQuantumQueryParams = {
    */
   tlsVersion?: ('TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC')[];
   /**
+   * Filters results by browser family.
+   *
+   * @example CHROME
+   */
+  browserFamily?: ('CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI')[];
+  /**
    * Format in which results will be returned.
    *
    * @example json
@@ -102000,6 +101905,12 @@ export type RadarGetHttpSummaryByTlsVersionQueryParams = {
    * @example WINDOWS
    */
   os?: ('WINDOWS' | 'MACOSX' | 'IOS' | 'ANDROID' | 'CHROMEOS' | 'LINUX' | 'SMART_TV')[];
+  /**
+   * Filters results by browser family.
+   *
+   * @example CHROME
+   */
+  browserFamily?: ('CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI')[];
   /**
    * Format in which results will be returned.
    *
@@ -102225,6 +102136,12 @@ export type RadarGetHttpTimeseriesQueryParams = {
    */
   tlsVersion?: ('TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC')[];
   /**
+   * Filters results by browser family.
+   *
+   * @example CHROME
+   */
+  browserFamily?: ('CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI')[];
+  /**
    * Format in which results will be returned.
    *
    * @example json
@@ -102416,6 +102333,12 @@ export type RadarGetHttpTimeseriesGroupByBotClassQueryParams = {
    */
   tlsVersion?: ('TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC')[];
   /**
+   * Filters results by browser family.
+   *
+   * @example CHROME
+   */
+  browserFamily?: ('CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI')[];
+  /**
    * Format in which results will be returned.
    *
    * @example json
@@ -102561,6 +102484,12 @@ export type RadarGetHttpTimeseriesGroupByBrowsersQueryParams = {
    * @example TLSv1_2
    */
   tlsVersion?: ('TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC')[];
+  /**
+   * Filters results by browser family.
+   *
+   * @example CHROME
+   */
+  browserFamily?: ('CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI')[];
   /**
    * Limits the number of objects per group to the top items within the specified time range. If there are more items than the limit, the response will include the count of items, with any remaining items grouped together under an "other" category.
    *
@@ -102866,6 +102795,12 @@ export type RadarGetHttpTimeseriesGroupByDeviceTypeQueryParams = {
    */
   tlsVersion?: ('TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC')[];
   /**
+   * Filters results by browser family.
+   *
+   * @example CHROME
+   */
+  browserFamily?: ('CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI')[];
+  /**
    * Format in which results will be returned.
    *
    * @example json
@@ -103007,6 +102942,12 @@ export type RadarGetHttpTimeseriesGroupByHttpProtocolQueryParams = {
    */
   tlsVersion?: ('TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC')[];
   /**
+   * Filters results by browser family.
+   *
+   * @example CHROME
+   */
+  browserFamily?: ('CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI')[];
+  /**
    * Format in which results will be returned.
    *
    * @example json
@@ -103146,6 +103087,12 @@ export type RadarGetHttpTimeseriesGroupByHttpVersionQueryParams = {
    * @example TLSv1_2
    */
   tlsVersion?: ('TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC')[];
+  /**
+   * Filters results by browser family.
+   *
+   * @example CHROME
+   */
+  browserFamily?: ('CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI')[];
   /**
    * Format in which results will be returned.
    *
@@ -103288,6 +103235,12 @@ export type RadarGetHttpTimeseriesGroupByIpVersionQueryParams = {
    */
   tlsVersion?: ('TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC')[];
   /**
+   * Filters results by browser family.
+   *
+   * @example CHROME
+   */
+  browserFamily?: ('CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI')[];
+  /**
    * Format in which results will be returned.
    *
    * @example json
@@ -103427,6 +103380,12 @@ export type RadarGetHttpTimeseriesGroupByOperatingSystemQueryParams = {
    * @example TLSv1_2
    */
   tlsVersion?: ('TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC')[];
+  /**
+   * Filters results by browser family.
+   *
+   * @example CHROME
+   */
+  browserFamily?: ('CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI')[];
   /**
    * Format in which results will be returned.
    *
@@ -103577,6 +103536,12 @@ export type RadarGetHttpTimeseriesGroupByPostQuantumQueryParams = {
    */
   tlsVersion?: ('TLSv1_0' | 'TLSv1_1' | 'TLSv1_2' | 'TLSv1_3' | 'TLSvQUIC')[];
   /**
+   * Filters results by browser family.
+   *
+   * @example CHROME
+   */
+  browserFamily?: ('CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI')[];
+  /**
    * Format in which results will be returned.
    *
    * @example json
@@ -103716,6 +103681,12 @@ export type RadarGetHttpTimeseriesGroupByTlsVersionQueryParams = {
    * @example WINDOWS
    */
   os?: ('WINDOWS' | 'MACOSX' | 'IOS' | 'ANDROID' | 'CHROMEOS' | 'LINUX' | 'SMART_TV')[];
+  /**
+   * Filters results by browser family.
+   *
+   * @example CHROME
+   */
+  browserFamily?: ('CHROME' | 'EDGE' | 'FIREFOX' | 'SAFARI')[];
   /**
    * Format in which results will be returned.
    *
@@ -109431,7 +109402,7 @@ export type RadarGetRankingDomainDetailsQueryParams = {
    */
   includeTopLocations?: boolean;
   /**
-   * Array of dates to filter the ranking.
+   * Array of dates to filter the results.
    *
    * @example 2022-09-19
    */
@@ -109555,7 +109526,7 @@ export type RadarGetRankingInternetServicesCategoriesQueryParams = {
    */
   name?: string[];
   /**
-   * Array of dates to filter the ranking.
+   * Array of dates to filter the results.
    *
    * @example 2022-09-19
    */
@@ -109747,7 +109718,7 @@ export type RadarGetRankingTopInternetServicesQueryParams = {
    */
   name?: string[];
   /**
-   * Array of dates to filter the ranking.
+   * Array of dates to filter the results.
    *
    * @example 2022-09-19
    */
@@ -109980,7 +109951,7 @@ export type RadarGetRankingTopDomainsQueryParams = {
    */
   domainCategory?: string[];
   /**
-   * Array of dates to filter the ranking.
+   * Array of dates to filter the results.
    *
    * @example 2022-09-19
    */
@@ -110097,7 +110068,7 @@ export type RadarGetRobotsTxtTopDomainCategoriesByFilesParsedQueryParams = {
    */
   userAgentCategory?: 'AI';
   /**
-   * Array of dates to filter the ranking.
+   * Array of dates to filter the results.
    *
    * @example 2022-09-19
    */
@@ -110244,7 +110215,7 @@ export type RadarGetRobotsTxtTopUserAgentsByDirectiveQueryParams = {
    */
   userAgentCategory?: 'AI';
   /**
-   * Array of dates to filter the ranking.
+   * Array of dates to filter the results.
    *
    * @example 2022-09-19
    */
