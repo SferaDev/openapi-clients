@@ -74,2353 +74,6 @@ export const accountCreation = (variables: AccountCreationVariables, signal?: Ab
     signal
   });
 
-export type PostEventListPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type PostEventListError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostEventListResponse = {
-  /**
-   * @example 1234
-   */
-  accountId: number;
-  /**
-   * @example Flying Yeti
-   */
-  attacker: string;
-  /**
-   * @example CN
-   */
-  attackerCountry: string;
-  /**
-   * @example Domain Resolution
-   */
-  category: string;
-  /**
-   * @example 1
-   */
-  categoryId: number;
-  /**
-   * @example 2022-04-01T00:00:00Z
-   */
-  date: string;
-  /**
-   * @example An attacker registered the domain domain.com
-   */
-  event: string;
-  /**
-   * @example 1223
-   */
-  id: number;
-  /**
-   * @example domain
-   */
-  indicator: string;
-  /**
-   * @example domain
-   */
-  indicatorType: string;
-  /**
-   * @example 5
-   */
-  indicatorTypeId: number;
-  insight?: string;
-  killChain: number;
-  mitreAttack: string[];
-  numReferenced: number;
-  numReferences: number;
-  /**
-   * @example 453gw34w3
-   */
-  rawId: string;
-  referenced: string[];
-  referencedIds: number[];
-  references: string[];
-  referencesIds: number[];
-  releasabilityId?: string;
-  tags: string[];
-  /**
-   * @example US
-   */
-  targetCountry: string;
-  /**
-   * @example Agriculture
-   */
-  targetIndustry: string;
-  /**
-   * @example amber
-   */
-  tlp: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-}[];
-
-export type PostEventListRequestBody = {
-  datasetId?: string[];
-  order?: 'asc' | 'desc';
-  /**
-   * @example created
-   */
-  orderBy?: string;
-  /**
-   * @example 1
-   */
-  page?: number;
-  /**
-   * @example 100
-   */
-  pageSize?: number;
-  search?: {
-    /**
-     * @example attackerCountry
-     */
-    field?: string;
-    /**
-     * @example equals
-     */
-    op?: string;
-    value?: string | number | (string | number)[];
-  }[];
-};
-
-export type PostEventListVariables = {
-  body?: PostEventListRequestBody;
-  pathParams: PostEventListPathParams;
-} & FetcherExtraProps;
-
-export const postEventList = (variables: PostEventListVariables, signal?: AbortSignal) =>
-  fetch<PostEventListResponse, PostEventListError, PostEventListRequestBody, {}, {}, PostEventListPathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/events',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
-export type GetAttackerListPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type GetAttackerListError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetAttackerListResponse = {
-  items: {
-    /**
-     * @example string
-     */
-    type: string;
-  };
-  /**
-   * @example array
-   */
-  type: string;
-};
-
-export type GetAttackerListVariables = {
-  pathParams: GetAttackerListPathParams;
-} & FetcherExtraProps;
-
-export const getAttackerList = (variables: GetAttackerListVariables, signal?: AbortSignal) =>
-  fetch<GetAttackerListResponse, GetAttackerListError, undefined, {}, {}, GetAttackerListPathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/events/attackers',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type GetCategoryListPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type GetCategoryListError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetCategoryListResponse = {
-  killChain: number;
-  mitreAttack?: string[];
-  /**
-   * @example name
-   */
-  name: string;
-  /**
-   * @example shortname
-   */
-  shortname?: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-}[];
-
-export type GetCategoryListVariables = {
-  pathParams: GetCategoryListPathParams;
-} & FetcherExtraProps;
-
-export const getCategoryList = (variables: GetCategoryListVariables, signal?: AbortSignal) =>
-  fetch<GetCategoryListResponse, GetCategoryListError, undefined, {}, {}, GetCategoryListPathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/events/categories',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type PostCategoryCreatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type PostCategoryCreateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostCategoryCreateResponse = {
-  killChain: number;
-  mitreAttack?: string[];
-  /**
-   * @example name
-   */
-  name: string;
-  /**
-   * @example shortname
-   */
-  shortname?: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type PostCategoryCreateRequestBody = {
-  killChain: number;
-  mitreAttack?: string[];
-  /**
-   * @example name
-   */
-  name: string;
-  /**
-   * @example shortname
-   */
-  shortname?: string;
-};
-
-export type PostCategoryCreateVariables = {
-  body: PostCategoryCreateRequestBody;
-  pathParams: PostCategoryCreatePathParams;
-} & FetcherExtraProps;
-
-export const postCategoryCreate = (variables: PostCategoryCreateVariables, signal?: AbortSignal) =>
-  fetch<
-    PostCategoryCreateResponse,
-    PostCategoryCreateError,
-    PostCategoryCreateRequestBody,
-    {},
-    {},
-    PostCategoryCreatePathParams
-  >({ url: '/accounts/{accountId}/cloudforce-one/events/categories/create', method: 'post', ...variables, signal });
-
-export type DeleteCategoryDeletePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Category UUID
-   */
-  categoryId: string;
-};
-
-export type DeleteCategoryDeleteError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type DeleteCategoryDeleteResponse = {
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type DeleteCategoryDeleteVariables = {
-  pathParams: DeleteCategoryDeletePathParams;
-} & FetcherExtraProps;
-
-export const deleteCategoryDelete = (variables: DeleteCategoryDeleteVariables, signal?: AbortSignal) =>
-  fetch<DeleteCategoryDeleteResponse, DeleteCategoryDeleteError, undefined, {}, {}, DeleteCategoryDeletePathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/events/categories/{categoryId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
-
-export type GetCategoryReadPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Category UUID
-   */
-  categoryId: string;
-};
-
-export type GetCategoryReadError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetCategoryReadResponse = {
-  killChain: number;
-  mitreAttack?: string[];
-  /**
-   * @example name
-   */
-  name: string;
-  /**
-   * @example shortname
-   */
-  shortname?: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type GetCategoryReadVariables = {
-  pathParams: GetCategoryReadPathParams;
-} & FetcherExtraProps;
-
-export const getCategoryRead = (variables: GetCategoryReadVariables, signal?: AbortSignal) =>
-  fetch<GetCategoryReadResponse, GetCategoryReadError, undefined, {}, {}, GetCategoryReadPathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/events/categories/{categoryId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type PostCategoryUpdatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Category UUID
-   */
-  categoryId: string;
-};
-
-export type PostCategoryUpdateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostCategoryUpdateResponse = {
-  killChain: number;
-  mitreAttack?: string[];
-  /**
-   * @example name
-   */
-  name: string;
-  /**
-   * @example shortname
-   */
-  shortname?: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type PostCategoryUpdateRequestBody = {
-  killChain?: number;
-  mitreAttack?: string[];
-  /**
-   * @example name
-   */
-  name?: string;
-  /**
-   * @example shortname
-   */
-  shortname?: string;
-};
-
-export type PostCategoryUpdateVariables = {
-  body?: PostCategoryUpdateRequestBody;
-  pathParams: PostCategoryUpdatePathParams;
-} & FetcherExtraProps;
-
-export const postCategoryUpdate = (variables: PostCategoryUpdateVariables, signal?: AbortSignal) =>
-  fetch<
-    PostCategoryUpdateResponse,
-    PostCategoryUpdateError,
-    PostCategoryUpdateRequestBody,
-    {},
-    {},
-    PostCategoryUpdatePathParams
-  >({
-    url: '/accounts/{accountId}/cloudforce-one/events/categories/{categoryId}',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
-export type GetCountryReadPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type GetCountryReadError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetCountryReadResponse = {
-  result: {
-    /**
-     * @example AF
-     */
-    alpha3: string;
-    /**
-     * @example Afghanistan
-     */
-    name: string;
-  }[];
-  /**
-   * @example true
-   */
-  success: string;
-}[];
-
-export type GetCountryReadVariables = {
-  pathParams: GetCountryReadPathParams;
-} & FetcherExtraProps;
-
-export const getCountryRead = (variables: GetCountryReadVariables, signal?: AbortSignal) =>
-  fetch<GetCountryReadResponse, GetCountryReadError, undefined, {}, {}, GetCountryReadPathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/events/countries',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type PostEventCreatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type PostEventCreateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostEventCreateResponse = {
-  /**
-   * @example 1234
-   */
-  accountId: number;
-  /**
-   * @example Flying Yeti
-   */
-  attacker: string;
-  /**
-   * @example CN
-   */
-  attackerCountry: string;
-  /**
-   * @example Domain Resolution
-   */
-  category: string;
-  /**
-   * @example 1
-   */
-  categoryId: number;
-  /**
-   * @example 2022-04-01T00:00:00Z
-   */
-  date: string;
-  /**
-   * @example An attacker registered the domain domain.com
-   */
-  event: string;
-  /**
-   * @example 1223
-   */
-  id: number;
-  /**
-   * @example domain
-   */
-  indicator: string;
-  /**
-   * @example domain
-   */
-  indicatorType: string;
-  /**
-   * @example 5
-   */
-  indicatorTypeId: number;
-  insight?: string;
-  killChain: number;
-  mitreAttack: string[];
-  numReferenced: number;
-  numReferences: number;
-  /**
-   * @example 453gw34w3
-   */
-  rawId: string;
-  referenced: string[];
-  referencedIds: number[];
-  references: string[];
-  referencesIds: number[];
-  releasabilityId?: string;
-  tags: string[];
-  /**
-   * @example US
-   */
-  targetCountry: string;
-  /**
-   * @example Agriculture
-   */
-  targetIndustry: string;
-  /**
-   * @example amber
-   */
-  tlp: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type PostEventCreateRequestBody = {
-  /**
-   * @example 123456
-   */
-  accountId?: number;
-  /**
-   * @example Flying Yeti
-   */
-  attacker: string;
-  /**
-   * @example CN
-   */
-  attackerCountry: string;
-  /**
-   * @example Domain Resolution
-   */
-  category: string;
-  /**
-   * @example durableObjectName
-   */
-  datasetId?: string;
-  /**
-   * @example 2022-04-01T00:00:00Z
-   * @format date-time
-   */
-  date: string;
-  /**
-   * @example An attacker registered the domain domain.com
-   */
-  event: string;
-  /**
-   * @example domain.com
-   */
-  indicator?: string;
-  /**
-   * @example domain
-   */
-  indicatorType: string;
-  raw: {
-    data?: void;
-    /**
-     * @example example.com
-     */
-    source?: string;
-    /**
-     * @example amber
-     */
-    tlp?: string;
-  };
-  tags?: string[];
-  /**
-   * @example US
-   */
-  targetCountry?: string;
-  /**
-   * @example Agriculture
-   */
-  targetIndustry?: string;
-  /**
-   * @example amber
-   */
-  tlp: string;
-};
-
-export type PostEventCreateVariables = {
-  body: PostEventCreateRequestBody;
-  pathParams: PostEventCreatePathParams;
-} & FetcherExtraProps;
-
-export const postEventCreate = (variables: PostEventCreateVariables, signal?: AbortSignal) =>
-  fetch<PostEventCreateResponse, PostEventCreateError, PostEventCreateRequestBody, {}, {}, PostEventCreatePathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/events/create',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
-export type PostEventCreateBulkPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type PostEventCreateBulkError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostEventCreateBulkResponse = {
-  /**
-   * @example 1234
-   */
-  accountId: number;
-  /**
-   * @example Flying Yeti
-   */
-  attacker: string;
-  /**
-   * @example CN
-   */
-  attackerCountry: string;
-  /**
-   * @example Domain Resolution
-   */
-  category: string;
-  /**
-   * @example 1
-   */
-  categoryId: number;
-  /**
-   * @example 2022-04-01T00:00:00Z
-   */
-  date: string;
-  /**
-   * @example An attacker registered the domain domain.com
-   */
-  event: string;
-  /**
-   * @example 1223
-   */
-  id: number;
-  /**
-   * @example domain
-   */
-  indicator: string;
-  /**
-   * @example domain
-   */
-  indicatorType: string;
-  /**
-   * @example 5
-   */
-  indicatorTypeId: number;
-  insight?: string;
-  killChain: number;
-  mitreAttack: string[];
-  numReferenced: number;
-  numReferences: number;
-  /**
-   * @example 453gw34w3
-   */
-  rawId: string;
-  referenced: string[];
-  referencedIds: number[];
-  references: string[];
-  referencesIds: number[];
-  releasabilityId?: string;
-  tags: string[];
-  /**
-   * @example US
-   */
-  targetCountry: string;
-  /**
-   * @example Agriculture
-   */
-  targetIndustry: string;
-  /**
-   * @example amber
-   */
-  tlp: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-}[];
-
-export type PostEventCreateBulkRequestBody = {
-  data: {
-    /**
-     * @example 123456
-     */
-    accountId?: number;
-    /**
-     * @example Flying Yeti
-     */
-    attacker: string;
-    /**
-     * @example CN
-     */
-    attackerCountry: string;
-    /**
-     * @example Domain Resolution
-     */
-    category: string;
-    /**
-     * @example durableObjectName
-     */
-    datasetId?: string;
-    /**
-     * @example 2022-04-01T00:00:00Z
-     * @format date-time
-     */
-    date: string;
-    /**
-     * @example An attacker registered the domain domain.com
-     */
-    event: string;
-    /**
-     * @example domain.com
-     */
-    indicator?: string;
-    /**
-     * @example domain
-     */
-    indicatorType: string;
-    raw: {
-      data?: void;
-      /**
-       * @example example.com
-       */
-      source?: string;
-      /**
-       * @example amber
-       */
-      tlp?: string;
-    };
-    tags?: string[];
-    /**
-     * @example US
-     */
-    targetCountry?: string;
-    /**
-     * @example Agriculture
-     */
-    targetIndustry?: string;
-    /**
-     * @example amber
-     */
-    tlp: string;
-  }[];
-  /**
-   * @example durableObjectName
-   */
-  datasetId: string;
-};
-
-export type PostEventCreateBulkVariables = {
-  body: PostEventCreateBulkRequestBody;
-  pathParams: PostEventCreateBulkPathParams;
-} & FetcherExtraProps;
-
-export const postEventCreateBulk = (variables: PostEventCreateBulkVariables, signal?: AbortSignal) =>
-  fetch<
-    PostEventCreateBulkResponse,
-    PostEventCreateBulkError,
-    PostEventCreateBulkRequestBody,
-    {},
-    {},
-    PostEventCreateBulkPathParams
-  >({ url: '/accounts/{accountId}/cloudforce-one/events/create/bulk', method: 'post', ...variables, signal });
-
-export type GetCronUpdateReadPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type GetCronUpdateReadError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetCronUpdateReadResponse = {
-  /**
-   * @example 2025-03-05T12:35:00.000Z
-   */
-  update: string;
-};
-
-export type GetCronUpdateReadVariables = {
-  pathParams: GetCronUpdateReadPathParams;
-} & FetcherExtraProps;
-
-export const getCronUpdateRead = (variables: GetCronUpdateReadVariables, signal?: AbortSignal) =>
-  fetch<GetCronUpdateReadResponse, GetCronUpdateReadError, undefined, {}, {}, GetCronUpdateReadPathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/events/cron',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type PostCronUpdatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type PostCronUpdateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostCronUpdateResponse = {
-  /**
-   * @example 3
-   */
-  id: number;
-  /**
-   * @example 2025-03-05T12:35:00.000Z
-   */
-  update: string;
-};
-
-export type PostCronUpdateVariables = {
-  pathParams: PostCronUpdatePathParams;
-} & FetcherExtraProps;
-
-export const postCronUpdate = (variables: PostCronUpdateVariables, signal?: AbortSignal) =>
-  fetch<PostCronUpdateResponse, PostCronUpdateError, undefined, {}, {}, PostCronUpdatePathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/events/cron',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
-export type GetDatasetListPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type GetDatasetListError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetDatasetListResponse = {
-  /**
-   * @example true
-   */
-  isPublic: boolean;
-  /**
-   * @example friendly dataset name
-   */
-  name: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-}[];
-
-export type GetDatasetListVariables = {
-  pathParams: GetDatasetListPathParams;
-} & FetcherExtraProps;
-
-export const getDatasetList = (variables: GetDatasetListVariables, signal?: AbortSignal) =>
-  fetch<GetDatasetListResponse, GetDatasetListError, undefined, {}, {}, GetDatasetListPathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/events/dataset',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type PostDatasetCreatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type PostDatasetCreateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostDatasetCreateResponse = {
-  /**
-   * @example true
-   */
-  isPublic: boolean;
-  /**
-   * @example friendly dataset name
-   */
-  name: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type PostDatasetCreateRequestBody = {
-  /**
-   * If true, then anyone can search the dataset. If false, then its limited to the account.
-   */
-  isPublic: boolean;
-  /**
-   * Used to describe the dataset within the account context
-   *
-   * @minLength 1
-   */
-  name: string;
-};
-
-export type PostDatasetCreateVariables = {
-  body: PostDatasetCreateRequestBody;
-  pathParams: PostDatasetCreatePathParams;
-} & FetcherExtraProps;
-
-export const postDatasetCreate = (variables: PostDatasetCreateVariables, signal?: AbortSignal) =>
-  fetch<
-    PostDatasetCreateResponse,
-    PostDatasetCreateError,
-    PostDatasetCreateRequestBody,
-    {},
-    {},
-    PostDatasetCreatePathParams
-  >({ url: '/accounts/{accountId}/cloudforce-one/events/dataset/create', method: 'post', ...variables, signal });
-
-export type GetDatasetReadPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Dataset name
-   */
-  datasetId: string;
-};
-
-export type GetDatasetReadError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetDatasetReadResponse = {
-  /**
-   * @example true
-   */
-  isPublic: boolean;
-  /**
-   * @example friendly dataset name
-   */
-  name: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type GetDatasetReadVariables = {
-  pathParams: GetDatasetReadPathParams;
-} & FetcherExtraProps;
-
-export const getDatasetRead = (variables: GetDatasetReadVariables, signal?: AbortSignal) =>
-  fetch<GetDatasetReadResponse, GetDatasetReadError, undefined, {}, {}, GetDatasetReadPathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/events/dataset/{datasetId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type PostDatasetUpdatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Dataset name
-   */
-  datasetId: string;
-};
-
-export type PostDatasetUpdateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostDatasetUpdateResponse = {
-  /**
-   * @example true
-   */
-  isPublic: boolean;
-  /**
-   * @example friendly dataset name
-   */
-  name: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type PostDatasetUpdateRequestBody = {
-  /**
-   * If true, then anyone can search the dataset. If false, then its limited to the account.
-   */
-  isPublic: boolean;
-  /**
-   * Used to describe the dataset within the account context
-   *
-   * @minLength 1
-   */
-  name: string;
-};
-
-export type PostDatasetUpdateVariables = {
-  body: PostDatasetUpdateRequestBody;
-  pathParams: PostDatasetUpdatePathParams;
-} & FetcherExtraProps;
-
-export const postDatasetUpdate = (variables: PostDatasetUpdateVariables, signal?: AbortSignal) =>
-  fetch<
-    PostDatasetUpdateResponse,
-    PostDatasetUpdateError,
-    PostDatasetUpdateRequestBody,
-    {},
-    {},
-    PostDatasetUpdatePathParams
-  >({ url: '/accounts/{accountId}/cloudforce-one/events/dataset/{datasetId}', method: 'post', ...variables, signal });
-
-export type GetIndicatorTypesListPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type GetIndicatorTypesListError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetIndicatorTypesListResponse = {
-  items: {
-    /**
-     * @example string
-     */
-    type: string;
-  };
-  /**
-   * @example array
-   */
-  type: string;
-};
-
-export type GetIndicatorTypesListVariables = {
-  pathParams: GetIndicatorTypesListPathParams;
-} & FetcherExtraProps;
-
-export const getIndicatorTypesList = (variables: GetIndicatorTypesListVariables, signal?: AbortSignal) =>
-  fetch<GetIndicatorTypesListResponse, GetIndicatorTypesListError, undefined, {}, {}, GetIndicatorTypesListPathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/events/indicatorTypes',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type GetEventRawReadDSPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event ID
-   */
-  eventId: string;
-  /**
-   * Dataset name
-   */
-  datasetId: string;
-};
-
-export type GetEventRawReadDSError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetEventRawReadDSResponse = {
-  /**
-   * @example 1234
-   */
-  accountId: number;
-  /**
-   * @example 1970-01-01
-   */
-  created: string;
-  data: Record<string, any>;
-  /**
-   * @example 1234
-   */
-  id: string;
-  /**
-   * @example https://example.com
-   */
-  source: string;
-  /**
-   * @example amber
-   */
-  tlp: string;
-};
-
-export type GetEventRawReadDSVariables = {
-  pathParams: GetEventRawReadDSPathParams;
-} & FetcherExtraProps;
-
-export const getEventRawReadDS = (variables: GetEventRawReadDSVariables, signal?: AbortSignal) =>
-  fetch<GetEventRawReadDSResponse, GetEventRawReadDSError, undefined, {}, {}, GetEventRawReadDSPathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/events/raw/{datasetId}/{eventId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type DeleteEventReferenceDeletePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-};
-
-export type DeleteEventReferenceDeleteError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type DeleteEventReferenceDeleteResponse = {
-  result: {
-    /**
-     * @example true
-     */
-    success: boolean;
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type DeleteEventReferenceDeleteRequestBody = {
-  events: string[];
-};
-
-export type DeleteEventReferenceDeleteVariables = {
-  body: DeleteEventReferenceDeleteRequestBody;
-  pathParams: DeleteEventReferenceDeletePathParams;
-} & FetcherExtraProps;
-
-export const deleteEventReferenceDelete = (variables: DeleteEventReferenceDeleteVariables, signal?: AbortSignal) =>
-  fetch<
-    DeleteEventReferenceDeleteResponse,
-    DeleteEventReferenceDeleteError,
-    DeleteEventReferenceDeleteRequestBody,
-    {},
-    {},
-    DeleteEventReferenceDeletePathParams
-  >({ url: '/accounts/{accountId}/cloudforce-one/events/relate/{eventId}', method: 'delete', ...variables, signal });
-
-export type PostEventReferenceCreatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-};
-
-export type PostEventReferenceCreateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostEventReferenceCreateResponse = {
-  result: {
-    /**
-     * @example true
-     */
-    success: boolean;
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type PostEventReferenceCreateRequestBody = {
-  events: string[];
-};
-
-export type PostEventReferenceCreateVariables = {
-  body: PostEventReferenceCreateRequestBody;
-  pathParams: PostEventReferenceCreatePathParams;
-} & FetcherExtraProps;
-
-export const postEventReferenceCreate = (variables: PostEventReferenceCreateVariables, signal?: AbortSignal) =>
-  fetch<
-    PostEventReferenceCreateResponse,
-    PostEventReferenceCreateError,
-    PostEventReferenceCreateRequestBody,
-    {},
-    {},
-    PostEventReferenceCreatePathParams
-  >({ url: '/accounts/{accountId}/cloudforce-one/events/relate/{eventId}', method: 'post', ...variables, signal });
-
-export type DeleteEventTagDeletePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-};
-
-export type DeleteEventTagDeleteError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type DeleteEventTagDeleteResponse = {
-  result: {
-    /**
-     * @example true
-     */
-    success: boolean;
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type DeleteEventTagDeleteRequestBody = {
-  tags: string[];
-};
-
-export type DeleteEventTagDeleteVariables = {
-  body: DeleteEventTagDeleteRequestBody;
-  pathParams: DeleteEventTagDeletePathParams;
-} & FetcherExtraProps;
-
-export const deleteEventTagDelete = (variables: DeleteEventTagDeleteVariables, signal?: AbortSignal) =>
-  fetch<
-    DeleteEventTagDeleteResponse,
-    DeleteEventTagDeleteError,
-    DeleteEventTagDeleteRequestBody,
-    {},
-    {},
-    DeleteEventTagDeletePathParams
-  >({ url: '/accounts/{accountId}/cloudforce-one/events/tag/{eventId}', method: 'delete', ...variables, signal });
-
-export type PostEventTagCreatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-};
-
-export type PostEventTagCreateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostEventTagCreateResponse = {
-  result: {
-    /**
-     * @example true
-     */
-    success: boolean;
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type PostEventTagCreateRequestBody = {
-  tags: string[];
-};
-
-export type PostEventTagCreateVariables = {
-  body: PostEventTagCreateRequestBody;
-  pathParams: PostEventTagCreatePathParams;
-} & FetcherExtraProps;
-
-export const postEventTagCreate = (variables: PostEventTagCreateVariables, signal?: AbortSignal) =>
-  fetch<
-    PostEventTagCreateResponse,
-    PostEventTagCreateError,
-    PostEventTagCreateRequestBody,
-    {},
-    {},
-    PostEventTagCreatePathParams
-  >({ url: '/accounts/{accountId}/cloudforce-one/events/tag/{eventId}', method: 'post', ...variables, signal });
-
-export type PostTagCreatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type PostTagCreateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostTagCreateResponse = {
-  /**
-   * @example name
-   */
-  name: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type PostTagCreateRequestBody = {
-  /**
-   * @example name
-   */
-  name: string;
-};
-
-export type PostTagCreateVariables = {
-  body: PostTagCreateRequestBody;
-  pathParams: PostTagCreatePathParams;
-} & FetcherExtraProps;
-
-export const postTagCreate = (variables: PostTagCreateVariables, signal?: AbortSignal) =>
-  fetch<PostTagCreateResponse, PostTagCreateError, PostTagCreateRequestBody, {}, {}, PostTagCreatePathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/events/tags/create',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
-export type GetTargetIndustryListPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-};
-
-export type GetTargetIndustryListError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetTargetIndustryListResponse = {
-  items: {
-    /**
-     * @example string
-     */
-    type: string;
-  };
-  /**
-   * @example array
-   */
-  type: string;
-};
-
-export type GetTargetIndustryListVariables = {
-  pathParams: GetTargetIndustryListPathParams;
-} & FetcherExtraProps;
-
-export const getTargetIndustryList = (variables: GetTargetIndustryListVariables, signal?: AbortSignal) =>
-  fetch<GetTargetIndustryListResponse, GetTargetIndustryListError, undefined, {}, {}, GetTargetIndustryListPathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/events/targetIndustries',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type DeleteEventDeletePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-};
-
-export type DeleteEventDeleteError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type DeleteEventDeleteResponse = {
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type DeleteEventDeleteVariables = {
-  pathParams: DeleteEventDeletePathParams;
-} & FetcherExtraProps;
-
-export const deleteEventDelete = (variables: DeleteEventDeleteVariables, signal?: AbortSignal) =>
-  fetch<DeleteEventDeleteResponse, DeleteEventDeleteError, undefined, {}, {}, DeleteEventDeletePathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
-
-export type GetEventReadPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-};
-
-export type GetEventReadError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetEventReadResponse = {
-  /**
-   * @example 1234
-   */
-  accountId: number;
-  /**
-   * @example Flying Yeti
-   */
-  attacker: string;
-  /**
-   * @example CN
-   */
-  attackerCountry: string;
-  /**
-   * @example Domain Resolution
-   */
-  category: string;
-  /**
-   * @example 1
-   */
-  categoryId: number;
-  /**
-   * @example 2022-04-01T00:00:00Z
-   */
-  date: string;
-  /**
-   * @example An attacker registered the domain domain.com
-   */
-  event: string;
-  /**
-   * @example 1223
-   */
-  id: number;
-  /**
-   * @example domain
-   */
-  indicator: string;
-  /**
-   * @example domain
-   */
-  indicatorType: string;
-  /**
-   * @example 5
-   */
-  indicatorTypeId: number;
-  insight?: string;
-  killChain: number;
-  mitreAttack: string[];
-  numReferenced: number;
-  numReferences: number;
-  /**
-   * @example 453gw34w3
-   */
-  rawId: string;
-  referenced: string[];
-  referencedIds: number[];
-  references: string[];
-  referencesIds: number[];
-  releasabilityId?: string;
-  tags: string[];
-  /**
-   * @example US
-   */
-  targetCountry: string;
-  /**
-   * @example Agriculture
-   */
-  targetIndustry: string;
-  /**
-   * @example amber
-   */
-  tlp: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type GetEventReadVariables = {
-  pathParams: GetEventReadPathParams;
-} & FetcherExtraProps;
-
-export const getEventRead = (variables: GetEventReadVariables, signal?: AbortSignal) =>
-  fetch<GetEventReadResponse, GetEventReadError, undefined, {}, {}, GetEventReadPathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type PostEventUpdatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-};
-
-export type PostEventUpdateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostEventUpdateResponse = {
-  /**
-   * @example 1234
-   */
-  accountId: number;
-  /**
-   * @example Flying Yeti
-   */
-  attacker: string;
-  /**
-   * @example CN
-   */
-  attackerCountry: string;
-  /**
-   * @example Domain Resolution
-   */
-  category: string;
-  /**
-   * @example 1
-   */
-  categoryId: number;
-  /**
-   * @example 2022-04-01T00:00:00Z
-   */
-  date: string;
-  /**
-   * @example An attacker registered the domain domain.com
-   */
-  event: string;
-  /**
-   * @example 1223
-   */
-  id: number;
-  /**
-   * @example domain
-   */
-  indicator: string;
-  /**
-   * @example domain
-   */
-  indicatorType: string;
-  /**
-   * @example 5
-   */
-  indicatorTypeId: number;
-  insight?: string;
-  killChain: number;
-  mitreAttack: string[];
-  numReferenced: number;
-  numReferences: number;
-  /**
-   * @example 453gw34w3
-   */
-  rawId: string;
-  referenced: string[];
-  referencedIds: number[];
-  references: string[];
-  referencesIds: number[];
-  releasabilityId?: string;
-  tags: string[];
-  /**
-   * @example US
-   */
-  targetCountry: string;
-  /**
-   * @example Agriculture
-   */
-  targetIndustry: string;
-  /**
-   * @example amber
-   */
-  tlp: string;
-  /**
-   * @example 12345678-1234-1234-1234-1234567890ab
-   */
-  uuid: string;
-};
-
-export type PostEventUpdateRequestBody = {
-  /**
-   * @example Flying Yeti
-   */
-  attacker?: string;
-  /**
-   * @example CN
-   */
-  attackerCountry?: string;
-  /**
-   * @example Domain Resolution
-   */
-  category?: string;
-  /**
-   * @example 2022-04-01T00:00:00Z
-   * @format date-time
-   */
-  date?: string;
-  /**
-   * @example An attacker registered the domain domain.com
-   */
-  event?: string;
-  /**
-   * @example domain2.com
-   */
-  indicator?: string;
-  /**
-   * @example sha256
-   */
-  indicatorType?: string;
-  /**
-   * @example US
-   */
-  targetCountry?: string;
-  /**
-   * @example Insurance
-   */
-  targetIndustry?: string;
-  /**
-   * @example amber
-   */
-  tlp?: string;
-};
-
-export type PostEventUpdateVariables = {
-  body?: PostEventUpdateRequestBody;
-  pathParams: PostEventUpdatePathParams;
-} & FetcherExtraProps;
-
-export const postEventUpdate = (variables: PostEventUpdateVariables, signal?: AbortSignal) =>
-  fetch<PostEventUpdateResponse, PostEventUpdateError, PostEventUpdateRequestBody, {}, {}, PostEventUpdatePathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
-export type PostEventInsightCreatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-};
-
-export type PostEventInsightCreateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostEventInsightCreateResponse = {
-  result: {
-    /**
-     * @example Here is some context _in markdown_
-     */
-    content: string;
-    /**
-     * @example sdfsd56af-43469-3c23-646345dsffd2
-     */
-    uuid: string;
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type PostEventInsightCreateRequestBody = {
-  /**
-   * @example Here is some additional context _in markdown_
-   */
-  content: string;
-};
-
-export type PostEventInsightCreateVariables = {
-  body: PostEventInsightCreateRequestBody;
-  pathParams: PostEventInsightCreatePathParams;
-} & FetcherExtraProps;
-
-export const postEventInsightCreate = (variables: PostEventInsightCreateVariables, signal?: AbortSignal) =>
-  fetch<
-    PostEventInsightCreateResponse,
-    PostEventInsightCreateError,
-    PostEventInsightCreateRequestBody,
-    {},
-    {},
-    PostEventInsightCreatePathParams
-  >({
-    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}/insight/create',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
-export type DeleteEventInsightDeletePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-  /**
-   * Insight UUID
-   */
-  insightId: string;
-};
-
-export type DeleteEventInsightDeleteError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type DeleteEventInsightDeleteResponse = {
-  result: {
-    /**
-     * @example true
-     */
-    success: boolean;
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type DeleteEventInsightDeleteVariables = {
-  pathParams: DeleteEventInsightDeletePathParams;
-} & FetcherExtraProps;
-
-export const deleteEventInsightDelete = (variables: DeleteEventInsightDeleteVariables, signal?: AbortSignal) =>
-  fetch<
-    DeleteEventInsightDeleteResponse,
-    DeleteEventInsightDeleteError,
-    undefined,
-    {},
-    {},
-    DeleteEventInsightDeletePathParams
-  >({
-    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}/insight/{insightId}',
-    method: 'delete',
-    ...variables,
-    signal
-  });
-
-export type GetEventInsightReadPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-  /**
-   * Insight UUID
-   */
-  insightId: string;
-};
-
-export type GetEventInsightReadError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetEventInsightReadResponse = {
-  result: {
-    /**
-     * @example Here is some context _in markdown_
-     */
-    content: string;
-    /**
-     * @example sdfsd56af-43469-3c23-646345dsffd2
-     */
-    uuid: string;
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type GetEventInsightReadVariables = {
-  pathParams: GetEventInsightReadPathParams;
-} & FetcherExtraProps;
-
-export const getEventInsightRead = (variables: GetEventInsightReadVariables, signal?: AbortSignal) =>
-  fetch<GetEventInsightReadResponse, GetEventInsightReadError, undefined, {}, {}, GetEventInsightReadPathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}/insight/{insightId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type PostEventInsightUpdatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-  /**
-   * Insight UUID
-   */
-  insightId: string;
-};
-
-export type PostEventInsightUpdateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostEventInsightUpdateResponse = {
-  result: {
-    /**
-     * @example Updated: Here is some additional context _in markdown_
-     */
-    content: string;
-    /**
-     * @example sdfsd56af-43469-3c23-646345dsffd2
-     */
-    uuid: string;
-  };
-  /**
-   * @example true
-   */
-  success: boolean;
-};
-
-export type PostEventInsightUpdateRequestBody = {
-  /**
-   * @example Updated: Here is some additional context _in markdown_
-   */
-  content: string;
-};
-
-export type PostEventInsightUpdateVariables = {
-  body: PostEventInsightUpdateRequestBody;
-  pathParams: PostEventInsightUpdatePathParams;
-} & FetcherExtraProps;
-
-export const postEventInsightUpdate = (variables: PostEventInsightUpdateVariables, signal?: AbortSignal) =>
-  fetch<
-    PostEventInsightUpdateResponse,
-    PostEventInsightUpdateError,
-    PostEventInsightUpdateRequestBody,
-    {},
-    {},
-    PostEventInsightUpdatePathParams
-  >({
-    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}/insight/{insightId}',
-    method: 'post',
-    ...variables,
-    signal
-  });
-
-export type GetEventRawReadPathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-  /**
-   * Raw Event UUID
-   */
-  rawId: string;
-};
-
-export type GetEventRawReadError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type GetEventRawReadResponse = {
-  /**
-   * @example 1234
-   */
-  accountId: number;
-  /**
-   * @example 1970-01-01
-   */
-  created: string;
-  data: Record<string, any>;
-  /**
-   * @example 1234
-   */
-  id: string;
-  /**
-   * @example https://example.com
-   */
-  source: string;
-  /**
-   * @example amber
-   */
-  tlp: string;
-};
-
-export type GetEventRawReadVariables = {
-  pathParams: GetEventRawReadPathParams;
-} & FetcherExtraProps;
-
-export const getEventRawRead = (variables: GetEventRawReadVariables, signal?: AbortSignal) =>
-  fetch<GetEventRawReadResponse, GetEventRawReadError, undefined, {}, {}, GetEventRawReadPathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}/raw/{rawId}',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type PostEventRawUpdatePathParams = {
-  /**
-   * Account ID
-   */
-  accountId: number;
-  /**
-   * Event UUID
-   */
-  eventId: string;
-  /**
-   * Raw Event UUID
-   */
-  rawId: string;
-};
-
-export type PostEventRawUpdateError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: {
-    errors: {
-      /**
-       * @example An error occurred
-       */
-      message: string;
-    }[];
-    result: Record<string, any>;
-    success: boolean;
-  };
-}>;
-
-export type PostEventRawUpdateResponse = {
-  data: Record<string, any>;
-  /**
-   * @example 1234
-   */
-  id: string;
-};
-
-export type PostEventRawUpdateRequestBody = {
-  data?: Record<string, any>;
-  /**
-   * @example example.com
-   */
-  source?: string;
-  /**
-   * @example amber
-   */
-  tlp?: string;
-};
-
-export type PostEventRawUpdateVariables = {
-  body?: PostEventRawUpdateRequestBody;
-  pathParams: PostEventRawUpdatePathParams;
-} & FetcherExtraProps;
-
-export const postEventRawUpdate = (variables: PostEventRawUpdateVariables, signal?: AbortSignal) =>
-  fetch<
-    PostEventRawUpdateResponse,
-    PostEventRawUpdateError,
-    PostEventRawUpdateRequestBody,
-    {},
-    {},
-    PostEventRawUpdatePathParams
-  >({ url: '/accounts/{accountId}/cloudforce-one/events/{eventId}/raw/{rawId}', method: 'post', ...variables, signal });
-
 export type CloudforceOneRequestListPathParams = {
   accountIdentifier: Schemas.CloudforceOneRequestsIdentifier;
 };
@@ -9494,6 +7147,62 @@ export const aigConfigGetGatewayLogResponse = (
     signal
   });
 
+export type AigConfigGetGatewayUrlPathParams = {
+  /**
+   * @example my-gateway
+   * @maxLength 64
+   * @minLength 1
+   * @pattern ^[a-z0-9_]+(?:-[a-z0-9_]+)*$
+   */
+  gatewayId: string;
+  /**
+   * @example 0d37909e38d3e99c29fa2cd343ac421a
+   */
+  accountId: string;
+  /**
+   * @example workers-ai
+   */
+  provider: string;
+};
+
+export type AigConfigGetGatewayUrlError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      message: string;
+    }[];
+    result: Record<string, any>;
+    /**
+     * @example false
+     */
+    success: boolean;
+  };
+}>;
+
+export type AigConfigGetGatewayUrlResponse = {
+  result: string;
+  success: boolean;
+};
+
+export type AigConfigGetGatewayUrlVariables = {
+  pathParams: AigConfigGetGatewayUrlPathParams;
+} & FetcherExtraProps;
+
+export const aigConfigGetGatewayUrl = (variables: AigConfigGetGatewayUrlVariables, signal?: AbortSignal) =>
+  fetch<
+    AigConfigGetGatewayUrlResponse,
+    AigConfigGetGatewayUrlError,
+    undefined,
+    {},
+    {},
+    AigConfigGetGatewayUrlPathParams
+  >({
+    url: '/accounts/{accountId}/ai-gateway/gateways/{gatewayId}/url/{provider}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
 export type AigConfigDeleteGatewayPathParams = {
   /**
    * @example 3ebbcb006d4d46d7bb6a8c7f14676cb0
@@ -9857,16 +7566,22 @@ export type WorkersAiSearchAuthorPathParams = {
 };
 
 export type WorkersAiSearchAuthorError = Fetcher.ErrorWrapper<{
-  status: 404;
+  status: 400;
   payload: {
-    error: string;
+    errors: {
+      message: string;
+    }[];
+    result: Record<string, any>;
+    /**
+     * @example false
+     */
     success: boolean;
   };
 }>;
 
 export type WorkersAiSearchAuthorResponse = {
   errors: Record<string, any>[];
-  messages: Record<string, any>[];
+  messages: string[];
   result: Record<string, any>[];
   success: boolean;
 };
@@ -9949,7 +7664,7 @@ export type WorkersAiCreateFinetunePathParams = {
 export type WorkersAiCreateFinetuneError = Fetcher.ErrorWrapper<{
   status: 400;
   payload: {
-    errors: string;
+    errors: Record<string, any>[];
     success: boolean;
   };
 }>;
@@ -9980,6 +7695,9 @@ export type WorkersAiCreateFinetuneRequestBody = {
   description?: string;
   model: string;
   name: string;
+  /**
+   * @default false
+   */
   public?: boolean;
 };
 
@@ -10085,7 +7803,7 @@ export type WorkersAiUploadFinetuneAssetPathParams = {
 export type WorkersAiUploadFinetuneAssetError = Fetcher.ErrorWrapper<{
   status: 400;
   payload: {
-    errors: string;
+    errors: Record<string, any>[];
     success: boolean;
   };
 }>;
@@ -10222,14 +7940,14 @@ export type WorkersAiSearchModelQueryParams = {
 export type WorkersAiSearchModelError = Fetcher.ErrorWrapper<{
   status: 404;
   payload: {
-    error: string;
+    errors: Record<string, any>[];
     success: boolean;
   };
 }>;
 
 export type WorkersAiSearchModelResponse = {
   errors: Record<string, any>[];
-  messages: Record<string, any>[];
+  messages: string[];
   result: Record<string, any>[];
   success: boolean;
 };
@@ -41296,14 +39014,14 @@ export type WorkersAiSearchTaskPathParams = {
 export type WorkersAiSearchTaskError = Fetcher.ErrorWrapper<{
   status: 404;
   payload: {
-    error: string;
+    errors: Record<string, any>[];
     success: boolean;
   };
 }>;
 
 export type WorkersAiSearchTaskResponse = {
   errors: Record<string, any>[];
-  messages: Record<string, any>[];
+  messages: string[];
   result: Record<string, any>[];
   success: boolean;
 };
@@ -44672,33 +42390,2853 @@ export const accountsTurnstileWidgetRotateSecret = (
     AccountsTurnstileWidgetRotateSecretPathParams
   >({ url: '/accounts/{accountId}/challenges/widgets/{sitekey}/rotate_secret', method: 'post', ...variables, signal });
 
-export type DeleteDeleteScansPathParams = {
+export type PostEventListPathParams = {
   /**
    * Account ID
    */
-  accountId: string;
+  accountId: number;
 };
 
-export type DeleteDeleteScansError = Fetcher.ErrorWrapper<undefined>;
+export type PostEventListError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
 
-export type DeleteDeleteScansResponse = {
-  errors: string[];
-  messages: string[];
-  result: Record<string, any>;
-  success: boolean;
+export type PostEventListResponse = {
+  /**
+   * @example 1234
+   */
+  accountId: number;
+  /**
+   * @example Flying Yeti
+   */
+  attacker: string;
+  /**
+   * @example CN
+   */
+  attackerCountry: string;
+  /**
+   * @example Domain Resolution
+   */
+  category: string;
+  /**
+   * @example 1
+   */
+  categoryId: number;
+  /**
+   * @example 2022-04-01T00:00:00Z
+   */
+  date: string;
+  /**
+   * @example An attacker registered the domain domain.com
+   */
+  event: string;
+  /**
+   * @example 1223
+   */
+  id: number;
+  /**
+   * @example domain
+   */
+  indicator: string;
+  /**
+   * @example domain
+   */
+  indicatorType: string;
+  /**
+   * @example 5
+   */
+  indicatorTypeId: number;
+  insight?: string;
+  killChain: number;
+  mitreAttack: string[];
+  numReferenced: number;
+  numReferences: number;
+  /**
+   * @example 453gw34w3
+   */
+  rawId: string;
+  referenced: string[];
+  referencedIds: number[];
+  references: string[];
+  referencesIds: number[];
+  releasabilityId?: string;
+  tags: string[];
+  /**
+   * @example US
+   */
+  targetCountry: string;
+  /**
+   * @example Agriculture
+   */
+  targetIndustry: string;
+  /**
+   * @example amber
+   */
+  tlp: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+}[];
+
+export type PostEventListRequestBody = {
+  datasetId?: string[];
+  order?: 'asc' | 'desc';
+  /**
+   * @example created
+   */
+  orderBy?: string;
+  /**
+   * @example 1
+   */
+  page?: number;
+  /**
+   * @example 100
+   */
+  pageSize?: number;
+  search?: {
+    /**
+     * @example attackerCountry
+     */
+    field?: string;
+    /**
+     * @example equals
+     */
+    op?: string;
+    value?: string | number | (string | number)[];
+  }[];
 };
 
-export type DeleteDeleteScansVariables = {
-  pathParams: DeleteDeleteScansPathParams;
+export type PostEventListVariables = {
+  body?: PostEventListRequestBody;
+  pathParams: PostEventListPathParams;
 } & FetcherExtraProps;
 
-export const deleteDeleteScans = (variables: DeleteDeleteScansVariables, signal?: AbortSignal) =>
-  fetch<DeleteDeleteScansResponse, DeleteDeleteScansError, undefined, {}, {}, DeleteDeleteScansPathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/scans/config',
+export const postEventList = (variables: PostEventListVariables, signal?: AbortSignal) =>
+  fetch<PostEventListResponse, PostEventListError, PostEventListRequestBody, {}, {}, PostEventListPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type GetAttackerListPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type GetAttackerListError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetAttackerListResponse = {
+  items: {
+    /**
+     * @example string
+     */
+    type: string;
+  };
+  /**
+   * @example array
+   */
+  type: string;
+};
+
+export type GetAttackerListVariables = {
+  pathParams: GetAttackerListPathParams;
+} & FetcherExtraProps;
+
+export const getAttackerList = (variables: GetAttackerListVariables, signal?: AbortSignal) =>
+  fetch<GetAttackerListResponse, GetAttackerListError, undefined, {}, {}, GetAttackerListPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/attackers',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type GetCategoryListPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type GetCategoryListError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetCategoryListResponse = {
+  killChain: number;
+  mitreAttack?: string[];
+  /**
+   * @example name
+   */
+  name: string;
+  /**
+   * @example shortname
+   */
+  shortname?: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+}[];
+
+export type GetCategoryListVariables = {
+  pathParams: GetCategoryListPathParams;
+} & FetcherExtraProps;
+
+export const getCategoryList = (variables: GetCategoryListVariables, signal?: AbortSignal) =>
+  fetch<GetCategoryListResponse, GetCategoryListError, undefined, {}, {}, GetCategoryListPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/categories',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PostCategoryCreatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type PostCategoryCreateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostCategoryCreateResponse = {
+  killChain: number;
+  mitreAttack?: string[];
+  /**
+   * @example name
+   */
+  name: string;
+  /**
+   * @example shortname
+   */
+  shortname?: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type PostCategoryCreateRequestBody = {
+  killChain: number;
+  mitreAttack?: string[];
+  /**
+   * @example name
+   */
+  name: string;
+  /**
+   * @example shortname
+   */
+  shortname?: string;
+};
+
+export type PostCategoryCreateVariables = {
+  body: PostCategoryCreateRequestBody;
+  pathParams: PostCategoryCreatePathParams;
+} & FetcherExtraProps;
+
+export const postCategoryCreate = (variables: PostCategoryCreateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostCategoryCreateResponse,
+    PostCategoryCreateError,
+    PostCategoryCreateRequestBody,
+    {},
+    {},
+    PostCategoryCreatePathParams
+  >({ url: '/accounts/{accountId}/cloudforce-one/events/categories/create', method: 'post', ...variables, signal });
+
+export type DeleteCategoryDeletePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Category UUID
+   */
+  categoryId: string;
+};
+
+export type DeleteCategoryDeleteError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type DeleteCategoryDeleteResponse = {
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type DeleteCategoryDeleteVariables = {
+  pathParams: DeleteCategoryDeletePathParams;
+} & FetcherExtraProps;
+
+export const deleteCategoryDelete = (variables: DeleteCategoryDeleteVariables, signal?: AbortSignal) =>
+  fetch<DeleteCategoryDeleteResponse, DeleteCategoryDeleteError, undefined, {}, {}, DeleteCategoryDeletePathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/categories/{categoryId}',
     method: 'delete',
     ...variables,
     signal
   });
+
+export type GetCategoryReadPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Category UUID
+   */
+  categoryId: string;
+};
+
+export type GetCategoryReadError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetCategoryReadResponse = {
+  killChain: number;
+  mitreAttack?: string[];
+  /**
+   * @example name
+   */
+  name: string;
+  /**
+   * @example shortname
+   */
+  shortname?: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type GetCategoryReadVariables = {
+  pathParams: GetCategoryReadPathParams;
+} & FetcherExtraProps;
+
+export const getCategoryRead = (variables: GetCategoryReadVariables, signal?: AbortSignal) =>
+  fetch<GetCategoryReadResponse, GetCategoryReadError, undefined, {}, {}, GetCategoryReadPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/categories/{categoryId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PatchCategoryUpdatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Category UUID
+   */
+  categoryId: string;
+};
+
+export type PatchCategoryUpdateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PatchCategoryUpdateResponse = {
+  killChain: number;
+  mitreAttack?: string[];
+  /**
+   * @example name
+   */
+  name: string;
+  /**
+   * @example shortname
+   */
+  shortname?: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type PatchCategoryUpdateRequestBody = {
+  killChain?: number;
+  mitreAttack?: string[];
+  /**
+   * @example name
+   */
+  name?: string;
+  /**
+   * @example shortname
+   */
+  shortname?: string;
+};
+
+export type PatchCategoryUpdateVariables = {
+  body?: PatchCategoryUpdateRequestBody;
+  pathParams: PatchCategoryUpdatePathParams;
+} & FetcherExtraProps;
+
+export const patchCategoryUpdate = (variables: PatchCategoryUpdateVariables, signal?: AbortSignal) =>
+  fetch<
+    PatchCategoryUpdateResponse,
+    PatchCategoryUpdateError,
+    PatchCategoryUpdateRequestBody,
+    {},
+    {},
+    PatchCategoryUpdatePathParams
+  >({
+    url: '/accounts/{accountId}/cloudforce-one/events/categories/{categoryId}',
+    method: 'patch',
+    ...variables,
+    signal
+  });
+
+export type PostCategoryUpdatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Category UUID
+   */
+  categoryId: string;
+};
+
+export type PostCategoryUpdateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostCategoryUpdateResponse = {
+  killChain: number;
+  mitreAttack?: string[];
+  /**
+   * @example name
+   */
+  name: string;
+  /**
+   * @example shortname
+   */
+  shortname?: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type PostCategoryUpdateRequestBody = {
+  killChain?: number;
+  mitreAttack?: string[];
+  /**
+   * @example name
+   */
+  name?: string;
+  /**
+   * @example shortname
+   */
+  shortname?: string;
+};
+
+export type PostCategoryUpdateVariables = {
+  body?: PostCategoryUpdateRequestBody;
+  pathParams: PostCategoryUpdatePathParams;
+} & FetcherExtraProps;
+
+export const postCategoryUpdate = (variables: PostCategoryUpdateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostCategoryUpdateResponse,
+    PostCategoryUpdateError,
+    PostCategoryUpdateRequestBody,
+    {},
+    {},
+    PostCategoryUpdatePathParams
+  >({
+    url: '/accounts/{accountId}/cloudforce-one/events/categories/{categoryId}',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type GetCountryReadPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type GetCountryReadError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetCountryReadResponse = {
+  result: {
+    /**
+     * @example AF
+     */
+    alpha3: string;
+    /**
+     * @example Afghanistan
+     */
+    name: string;
+  }[];
+  /**
+   * @example true
+   */
+  success: string;
+}[];
+
+export type GetCountryReadVariables = {
+  pathParams: GetCountryReadPathParams;
+} & FetcherExtraProps;
+
+export const getCountryRead = (variables: GetCountryReadVariables, signal?: AbortSignal) =>
+  fetch<GetCountryReadResponse, GetCountryReadError, undefined, {}, {}, GetCountryReadPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/countries',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PostEventCreatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type PostEventCreateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostEventCreateResponse = {
+  /**
+   * @example 1234
+   */
+  accountId: number;
+  /**
+   * @example Flying Yeti
+   */
+  attacker: string;
+  /**
+   * @example CN
+   */
+  attackerCountry: string;
+  /**
+   * @example Domain Resolution
+   */
+  category: string;
+  /**
+   * @example 1
+   */
+  categoryId: number;
+  /**
+   * @example 2022-04-01T00:00:00Z
+   */
+  date: string;
+  /**
+   * @example An attacker registered the domain domain.com
+   */
+  event: string;
+  /**
+   * @example 1223
+   */
+  id: number;
+  /**
+   * @example domain
+   */
+  indicator: string;
+  /**
+   * @example domain
+   */
+  indicatorType: string;
+  /**
+   * @example 5
+   */
+  indicatorTypeId: number;
+  insight?: string;
+  killChain: number;
+  mitreAttack: string[];
+  numReferenced: number;
+  numReferences: number;
+  /**
+   * @example 453gw34w3
+   */
+  rawId: string;
+  referenced: string[];
+  referencedIds: number[];
+  references: string[];
+  referencesIds: number[];
+  releasabilityId?: string;
+  tags: string[];
+  /**
+   * @example US
+   */
+  targetCountry: string;
+  /**
+   * @example Agriculture
+   */
+  targetIndustry: string;
+  /**
+   * @example amber
+   */
+  tlp: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type PostEventCreateRequestBody = {
+  /**
+   * @example 123456
+   */
+  accountId?: number;
+  /**
+   * @example Flying Yeti
+   */
+  attacker: string;
+  /**
+   * @example CN
+   */
+  attackerCountry: string;
+  /**
+   * @example Domain Resolution
+   */
+  category: string;
+  /**
+   * @example durableObjectName
+   */
+  datasetId?: string;
+  /**
+   * @example 2022-04-01T00:00:00Z
+   * @format date-time
+   */
+  date: string;
+  /**
+   * @example An attacker registered the domain domain.com
+   */
+  event: string;
+  /**
+   * @example domain.com
+   */
+  indicator?: string;
+  /**
+   * @example domain
+   */
+  indicatorType: string;
+  raw: {
+    data?: void;
+    /**
+     * @example example.com
+     */
+    source?: string;
+    /**
+     * @example amber
+     */
+    tlp?: string;
+  };
+  tags?: string[];
+  /**
+   * @example US
+   */
+  targetCountry?: string;
+  /**
+   * @example Agriculture
+   */
+  targetIndustry?: string;
+  /**
+   * @example amber
+   */
+  tlp: string;
+};
+
+export type PostEventCreateVariables = {
+  body: PostEventCreateRequestBody;
+  pathParams: PostEventCreatePathParams;
+} & FetcherExtraProps;
+
+export const postEventCreate = (variables: PostEventCreateVariables, signal?: AbortSignal) =>
+  fetch<PostEventCreateResponse, PostEventCreateError, PostEventCreateRequestBody, {}, {}, PostEventCreatePathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/create',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type PostEventCreateBulkPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type PostEventCreateBulkError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostEventCreateBulkResponse = {
+  /**
+   * @example 1234
+   */
+  accountId: number;
+  /**
+   * @example Flying Yeti
+   */
+  attacker: string;
+  /**
+   * @example CN
+   */
+  attackerCountry: string;
+  /**
+   * @example Domain Resolution
+   */
+  category: string;
+  /**
+   * @example 1
+   */
+  categoryId: number;
+  /**
+   * @example 2022-04-01T00:00:00Z
+   */
+  date: string;
+  /**
+   * @example An attacker registered the domain domain.com
+   */
+  event: string;
+  /**
+   * @example 1223
+   */
+  id: number;
+  /**
+   * @example domain
+   */
+  indicator: string;
+  /**
+   * @example domain
+   */
+  indicatorType: string;
+  /**
+   * @example 5
+   */
+  indicatorTypeId: number;
+  insight?: string;
+  killChain: number;
+  mitreAttack: string[];
+  numReferenced: number;
+  numReferences: number;
+  /**
+   * @example 453gw34w3
+   */
+  rawId: string;
+  referenced: string[];
+  referencedIds: number[];
+  references: string[];
+  referencesIds: number[];
+  releasabilityId?: string;
+  tags: string[];
+  /**
+   * @example US
+   */
+  targetCountry: string;
+  /**
+   * @example Agriculture
+   */
+  targetIndustry: string;
+  /**
+   * @example amber
+   */
+  tlp: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+}[];
+
+export type PostEventCreateBulkRequestBody = {
+  data: {
+    /**
+     * @example 123456
+     */
+    accountId?: number;
+    /**
+     * @example Flying Yeti
+     */
+    attacker: string;
+    /**
+     * @example CN
+     */
+    attackerCountry: string;
+    /**
+     * @example Domain Resolution
+     */
+    category: string;
+    /**
+     * @example durableObjectName
+     */
+    datasetId?: string;
+    /**
+     * @example 2022-04-01T00:00:00Z
+     * @format date-time
+     */
+    date: string;
+    /**
+     * @example An attacker registered the domain domain.com
+     */
+    event: string;
+    /**
+     * @example domain.com
+     */
+    indicator?: string;
+    /**
+     * @example domain
+     */
+    indicatorType: string;
+    raw: {
+      data?: void;
+      /**
+       * @example example.com
+       */
+      source?: string;
+      /**
+       * @example amber
+       */
+      tlp?: string;
+    };
+    tags?: string[];
+    /**
+     * @example US
+     */
+    targetCountry?: string;
+    /**
+     * @example Agriculture
+     */
+    targetIndustry?: string;
+    /**
+     * @example amber
+     */
+    tlp: string;
+  }[];
+  /**
+   * @example durableObjectName
+   */
+  datasetId: string;
+};
+
+export type PostEventCreateBulkVariables = {
+  body: PostEventCreateBulkRequestBody;
+  pathParams: PostEventCreateBulkPathParams;
+} & FetcherExtraProps;
+
+export const postEventCreateBulk = (variables: PostEventCreateBulkVariables, signal?: AbortSignal) =>
+  fetch<
+    PostEventCreateBulkResponse,
+    PostEventCreateBulkError,
+    PostEventCreateBulkRequestBody,
+    {},
+    {},
+    PostEventCreateBulkPathParams
+  >({ url: '/accounts/{accountId}/cloudforce-one/events/create/bulk', method: 'post', ...variables, signal });
+
+export type GetCronUpdateReadPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type GetCronUpdateReadError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetCronUpdateReadResponse = {
+  /**
+   * @example 2025-03-05T12:35:00.000Z
+   */
+  update: string;
+};
+
+export type GetCronUpdateReadVariables = {
+  pathParams: GetCronUpdateReadPathParams;
+} & FetcherExtraProps;
+
+export const getCronUpdateRead = (variables: GetCronUpdateReadVariables, signal?: AbortSignal) =>
+  fetch<GetCronUpdateReadResponse, GetCronUpdateReadError, undefined, {}, {}, GetCronUpdateReadPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/cron',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PatchCronUpdatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type PatchCronUpdateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PatchCronUpdateResponse = {
+  /**
+   * @example 3
+   */
+  id: number;
+  /**
+   * @example 2025-03-05T12:35:00.000Z
+   */
+  update: string;
+};
+
+export type PatchCronUpdateVariables = {
+  pathParams: PatchCronUpdatePathParams;
+} & FetcherExtraProps;
+
+export const patchCronUpdate = (variables: PatchCronUpdateVariables, signal?: AbortSignal) =>
+  fetch<PatchCronUpdateResponse, PatchCronUpdateError, undefined, {}, {}, PatchCronUpdatePathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/cron',
+    method: 'patch',
+    ...variables,
+    signal
+  });
+
+export type PostCronUpdatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type PostCronUpdateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostCronUpdateResponse = {
+  /**
+   * @example 3
+   */
+  id: number;
+  /**
+   * @example 2025-03-05T12:35:00.000Z
+   */
+  update: string;
+};
+
+export type PostCronUpdateVariables = {
+  pathParams: PostCronUpdatePathParams;
+} & FetcherExtraProps;
+
+export const postCronUpdate = (variables: PostCronUpdateVariables, signal?: AbortSignal) =>
+  fetch<PostCronUpdateResponse, PostCronUpdateError, undefined, {}, {}, PostCronUpdatePathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/cron',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type GetDatasetListPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type GetDatasetListError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetDatasetListResponse = {
+  /**
+   * @example true
+   */
+  isPublic: boolean;
+  /**
+   * @example friendly dataset name
+   */
+  name: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+}[];
+
+export type GetDatasetListVariables = {
+  pathParams: GetDatasetListPathParams;
+} & FetcherExtraProps;
+
+export const getDatasetList = (variables: GetDatasetListVariables, signal?: AbortSignal) =>
+  fetch<GetDatasetListResponse, GetDatasetListError, undefined, {}, {}, GetDatasetListPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/dataset',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PostDatasetCreatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type PostDatasetCreateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostDatasetCreateResponse = {
+  /**
+   * @example true
+   */
+  isPublic: boolean;
+  /**
+   * @example friendly dataset name
+   */
+  name: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type PostDatasetCreateRequestBody = {
+  /**
+   * If true, then anyone can search the dataset. If false, then its limited to the account.
+   */
+  isPublic: boolean;
+  /**
+   * Used to describe the dataset within the account context
+   *
+   * @minLength 1
+   */
+  name: string;
+};
+
+export type PostDatasetCreateVariables = {
+  body: PostDatasetCreateRequestBody;
+  pathParams: PostDatasetCreatePathParams;
+} & FetcherExtraProps;
+
+export const postDatasetCreate = (variables: PostDatasetCreateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostDatasetCreateResponse,
+    PostDatasetCreateError,
+    PostDatasetCreateRequestBody,
+    {},
+    {},
+    PostDatasetCreatePathParams
+  >({ url: '/accounts/{accountId}/cloudforce-one/events/dataset/create', method: 'post', ...variables, signal });
+
+export type GetDatasetReadPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Dataset ID
+   */
+  datasetId: string;
+};
+
+export type GetDatasetReadError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetDatasetReadResponse = {
+  /**
+   * @example true
+   */
+  isPublic: boolean;
+  /**
+   * @example friendly dataset name
+   */
+  name: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type GetDatasetReadVariables = {
+  pathParams: GetDatasetReadPathParams;
+} & FetcherExtraProps;
+
+export const getDatasetRead = (variables: GetDatasetReadVariables, signal?: AbortSignal) =>
+  fetch<GetDatasetReadResponse, GetDatasetReadError, undefined, {}, {}, GetDatasetReadPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/dataset/{datasetId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PatchDatasetUpdatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Dataset ID
+   */
+  datasetId: string;
+};
+
+export type PatchDatasetUpdateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PatchDatasetUpdateResponse = {
+  /**
+   * @example true
+   */
+  isPublic: boolean;
+  /**
+   * @example friendly dataset name
+   */
+  name: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type PatchDatasetUpdateRequestBody = {
+  /**
+   * If true, then anyone can search the dataset. If false, then its limited to the account.
+   */
+  isPublic: boolean;
+  /**
+   * Used to describe the dataset within the account context
+   *
+   * @minLength 1
+   */
+  name: string;
+};
+
+export type PatchDatasetUpdateVariables = {
+  body: PatchDatasetUpdateRequestBody;
+  pathParams: PatchDatasetUpdatePathParams;
+} & FetcherExtraProps;
+
+export const patchDatasetUpdate = (variables: PatchDatasetUpdateVariables, signal?: AbortSignal) =>
+  fetch<
+    PatchDatasetUpdateResponse,
+    PatchDatasetUpdateError,
+    PatchDatasetUpdateRequestBody,
+    {},
+    {},
+    PatchDatasetUpdatePathParams
+  >({ url: '/accounts/{accountId}/cloudforce-one/events/dataset/{datasetId}', method: 'patch', ...variables, signal });
+
+export type PostDatasetUpdatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Dataset ID
+   */
+  datasetId: string;
+};
+
+export type PostDatasetUpdateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostDatasetUpdateResponse = {
+  /**
+   * @example true
+   */
+  isPublic: boolean;
+  /**
+   * @example friendly dataset name
+   */
+  name: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type PostDatasetUpdateRequestBody = {
+  /**
+   * If true, then anyone can search the dataset. If false, then its limited to the account.
+   */
+  isPublic: boolean;
+  /**
+   * Used to describe the dataset within the account context
+   *
+   * @minLength 1
+   */
+  name: string;
+};
+
+export type PostDatasetUpdateVariables = {
+  body: PostDatasetUpdateRequestBody;
+  pathParams: PostDatasetUpdatePathParams;
+} & FetcherExtraProps;
+
+export const postDatasetUpdate = (variables: PostDatasetUpdateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostDatasetUpdateResponse,
+    PostDatasetUpdateError,
+    PostDatasetUpdateRequestBody,
+    {},
+    {},
+    PostDatasetUpdatePathParams
+  >({ url: '/accounts/{accountId}/cloudforce-one/events/dataset/{datasetId}', method: 'post', ...variables, signal });
+
+export type DeleteEventTagDeletePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+};
+
+export type DeleteEventTagDeleteError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type DeleteEventTagDeleteResponse = {
+  result: {
+    /**
+     * @example true
+     */
+    success: boolean;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type DeleteEventTagDeleteRequestBody = {
+  tags: string[];
+};
+
+export type DeleteEventTagDeleteVariables = {
+  body: DeleteEventTagDeleteRequestBody;
+  pathParams: DeleteEventTagDeletePathParams;
+} & FetcherExtraProps;
+
+export const deleteEventTagDelete = (variables: DeleteEventTagDeleteVariables, signal?: AbortSignal) =>
+  fetch<
+    DeleteEventTagDeleteResponse,
+    DeleteEventTagDeleteError,
+    DeleteEventTagDeleteRequestBody,
+    {},
+    {},
+    DeleteEventTagDeletePathParams
+  >({ url: '/accounts/{accountId}/cloudforce-one/events/event_tag/{eventId}', method: 'delete', ...variables, signal });
+
+export type PostEventTagCreatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+};
+
+export type PostEventTagCreateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostEventTagCreateResponse = {
+  result: {
+    /**
+     * @example true
+     */
+    success: boolean;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type PostEventTagCreateRequestBody = {
+  tags: string[];
+};
+
+export type PostEventTagCreateVariables = {
+  body: PostEventTagCreateRequestBody;
+  pathParams: PostEventTagCreatePathParams;
+} & FetcherExtraProps;
+
+export const postEventTagCreate = (variables: PostEventTagCreateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostEventTagCreateResponse,
+    PostEventTagCreateError,
+    PostEventTagCreateRequestBody,
+    {},
+    {},
+    PostEventTagCreatePathParams
+  >({
+    url: '/accounts/{accountId}/cloudforce-one/events/event_tag/{eventId}/create',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type GetIndicatorTypesListPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type GetIndicatorTypesListError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetIndicatorTypesListResponse = {
+  items: {
+    /**
+     * @example string
+     */
+    type: string;
+  };
+  /**
+   * @example array
+   */
+  type: string;
+};
+
+export type GetIndicatorTypesListVariables = {
+  pathParams: GetIndicatorTypesListPathParams;
+} & FetcherExtraProps;
+
+export const getIndicatorTypesList = (variables: GetIndicatorTypesListVariables, signal?: AbortSignal) =>
+  fetch<GetIndicatorTypesListResponse, GetIndicatorTypesListError, undefined, {}, {}, GetIndicatorTypesListPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/indicatorTypes',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type GetEventRawReadDSPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event ID
+   */
+  eventId: string;
+  /**
+   * Dataset ID
+   */
+  datasetId: string;
+};
+
+export type GetEventRawReadDSError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetEventRawReadDSResponse = {
+  /**
+   * @example 1234
+   */
+  accountId: number;
+  /**
+   * @example 1970-01-01
+   */
+  created: string;
+  data: Record<string, any>;
+  /**
+   * @example 1234
+   */
+  id: string;
+  /**
+   * @example https://example.com
+   */
+  source: string;
+  /**
+   * @example amber
+   */
+  tlp: string;
+};
+
+export type GetEventRawReadDSVariables = {
+  pathParams: GetEventRawReadDSPathParams;
+} & FetcherExtraProps;
+
+export const getEventRawReadDS = (variables: GetEventRawReadDSVariables, signal?: AbortSignal) =>
+  fetch<GetEventRawReadDSResponse, GetEventRawReadDSError, undefined, {}, {}, GetEventRawReadDSPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/raw/{datasetId}/{eventId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type DeleteEventReferenceDeletePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+};
+
+export type DeleteEventReferenceDeleteError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type DeleteEventReferenceDeleteResponse = {
+  result: {
+    /**
+     * @example true
+     */
+    success: boolean;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type DeleteEventReferenceDeleteRequestBody = {
+  events: string[];
+};
+
+export type DeleteEventReferenceDeleteVariables = {
+  body: DeleteEventReferenceDeleteRequestBody;
+  pathParams: DeleteEventReferenceDeletePathParams;
+} & FetcherExtraProps;
+
+export const deleteEventReferenceDelete = (variables: DeleteEventReferenceDeleteVariables, signal?: AbortSignal) =>
+  fetch<
+    DeleteEventReferenceDeleteResponse,
+    DeleteEventReferenceDeleteError,
+    DeleteEventReferenceDeleteRequestBody,
+    {},
+    {},
+    DeleteEventReferenceDeletePathParams
+  >({ url: '/accounts/{accountId}/cloudforce-one/events/relate/{eventId}', method: 'delete', ...variables, signal });
+
+export type PostEventReferenceCreatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+};
+
+export type PostEventReferenceCreateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostEventReferenceCreateResponse = {
+  result: {
+    /**
+     * @example true
+     */
+    success: boolean;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type PostEventReferenceCreateRequestBody = {
+  events: string[];
+};
+
+export type PostEventReferenceCreateVariables = {
+  body: PostEventReferenceCreateRequestBody;
+  pathParams: PostEventReferenceCreatePathParams;
+} & FetcherExtraProps;
+
+export const postEventReferenceCreate = (variables: PostEventReferenceCreateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostEventReferenceCreateResponse,
+    PostEventReferenceCreateError,
+    PostEventReferenceCreateRequestBody,
+    {},
+    {},
+    PostEventReferenceCreatePathParams
+  >({
+    url: '/accounts/{accountId}/cloudforce-one/events/relate/{eventId}/create',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type PostTagCreatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type PostTagCreateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostTagCreateResponse = {
+  /**
+   * @example name
+   */
+  name: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type PostTagCreateRequestBody = {
+  /**
+   * @example name
+   */
+  name: string;
+};
+
+export type PostTagCreateVariables = {
+  body: PostTagCreateRequestBody;
+  pathParams: PostTagCreatePathParams;
+} & FetcherExtraProps;
+
+export const postTagCreate = (variables: PostTagCreateVariables, signal?: AbortSignal) =>
+  fetch<PostTagCreateResponse, PostTagCreateError, PostTagCreateRequestBody, {}, {}, PostTagCreatePathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/tags/create',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type GetTargetIndustryListPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+};
+
+export type GetTargetIndustryListError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetTargetIndustryListResponse = {
+  items: {
+    /**
+     * @example string
+     */
+    type: string;
+  };
+  /**
+   * @example array
+   */
+  type: string;
+};
+
+export type GetTargetIndustryListVariables = {
+  pathParams: GetTargetIndustryListPathParams;
+} & FetcherExtraProps;
+
+export const getTargetIndustryList = (variables: GetTargetIndustryListVariables, signal?: AbortSignal) =>
+  fetch<GetTargetIndustryListResponse, GetTargetIndustryListError, undefined, {}, {}, GetTargetIndustryListPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/targetIndustries',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type DeleteEventDeletePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+};
+
+export type DeleteEventDeleteError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type DeleteEventDeleteResponse = {
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type DeleteEventDeleteVariables = {
+  pathParams: DeleteEventDeletePathParams;
+} & FetcherExtraProps;
+
+export const deleteEventDelete = (variables: DeleteEventDeleteVariables, signal?: AbortSignal) =>
+  fetch<DeleteEventDeleteResponse, DeleteEventDeleteError, undefined, {}, {}, DeleteEventDeletePathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type GetEventReadPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+};
+
+export type GetEventReadError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetEventReadResponse = {
+  /**
+   * @example 1234
+   */
+  accountId: number;
+  /**
+   * @example Flying Yeti
+   */
+  attacker: string;
+  /**
+   * @example CN
+   */
+  attackerCountry: string;
+  /**
+   * @example Domain Resolution
+   */
+  category: string;
+  /**
+   * @example 1
+   */
+  categoryId: number;
+  /**
+   * @example 2022-04-01T00:00:00Z
+   */
+  date: string;
+  /**
+   * @example An attacker registered the domain domain.com
+   */
+  event: string;
+  /**
+   * @example 1223
+   */
+  id: number;
+  /**
+   * @example domain
+   */
+  indicator: string;
+  /**
+   * @example domain
+   */
+  indicatorType: string;
+  /**
+   * @example 5
+   */
+  indicatorTypeId: number;
+  insight?: string;
+  killChain: number;
+  mitreAttack: string[];
+  numReferenced: number;
+  numReferences: number;
+  /**
+   * @example 453gw34w3
+   */
+  rawId: string;
+  referenced: string[];
+  referencedIds: number[];
+  references: string[];
+  referencesIds: number[];
+  releasabilityId?: string;
+  tags: string[];
+  /**
+   * @example US
+   */
+  targetCountry: string;
+  /**
+   * @example Agriculture
+   */
+  targetIndustry: string;
+  /**
+   * @example amber
+   */
+  tlp: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type GetEventReadVariables = {
+  pathParams: GetEventReadPathParams;
+} & FetcherExtraProps;
+
+export const getEventRead = (variables: GetEventReadVariables, signal?: AbortSignal) =>
+  fetch<GetEventReadResponse, GetEventReadError, undefined, {}, {}, GetEventReadPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PatchEventUpdatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+};
+
+export type PatchEventUpdateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PatchEventUpdateResponse = {
+  /**
+   * @example 1234
+   */
+  accountId: number;
+  /**
+   * @example Flying Yeti
+   */
+  attacker: string;
+  /**
+   * @example CN
+   */
+  attackerCountry: string;
+  /**
+   * @example Domain Resolution
+   */
+  category: string;
+  /**
+   * @example 1
+   */
+  categoryId: number;
+  /**
+   * @example 2022-04-01T00:00:00Z
+   */
+  date: string;
+  /**
+   * @example An attacker registered the domain domain.com
+   */
+  event: string;
+  /**
+   * @example 1223
+   */
+  id: number;
+  /**
+   * @example domain
+   */
+  indicator: string;
+  /**
+   * @example domain
+   */
+  indicatorType: string;
+  /**
+   * @example 5
+   */
+  indicatorTypeId: number;
+  insight?: string;
+  killChain: number;
+  mitreAttack: string[];
+  numReferenced: number;
+  numReferences: number;
+  /**
+   * @example 453gw34w3
+   */
+  rawId: string;
+  referenced: string[];
+  referencedIds: number[];
+  references: string[];
+  referencesIds: number[];
+  releasabilityId?: string;
+  tags: string[];
+  /**
+   * @example US
+   */
+  targetCountry: string;
+  /**
+   * @example Agriculture
+   */
+  targetIndustry: string;
+  /**
+   * @example amber
+   */
+  tlp: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type PatchEventUpdateRequestBody = {
+  /**
+   * @example Flying Yeti
+   */
+  attacker?: string;
+  /**
+   * @example CN
+   */
+  attackerCountry?: string;
+  /**
+   * @example Domain Resolution
+   */
+  category?: string;
+  /**
+   * @example 2022-04-01T00:00:00Z
+   * @format date-time
+   */
+  date?: string;
+  /**
+   * @example An attacker registered the domain domain.com
+   */
+  event?: string;
+  /**
+   * @example domain2.com
+   */
+  indicator?: string;
+  /**
+   * @example sha256
+   */
+  indicatorType?: string;
+  /**
+   * @example US
+   */
+  targetCountry?: string;
+  /**
+   * @example Insurance
+   */
+  targetIndustry?: string;
+  /**
+   * @example amber
+   */
+  tlp?: string;
+};
+
+export type PatchEventUpdateVariables = {
+  body?: PatchEventUpdateRequestBody;
+  pathParams: PatchEventUpdatePathParams;
+} & FetcherExtraProps;
+
+export const patchEventUpdate = (variables: PatchEventUpdateVariables, signal?: AbortSignal) =>
+  fetch<
+    PatchEventUpdateResponse,
+    PatchEventUpdateError,
+    PatchEventUpdateRequestBody,
+    {},
+    {},
+    PatchEventUpdatePathParams
+  >({ url: '/accounts/{accountId}/cloudforce-one/events/{eventId}', method: 'patch', ...variables, signal });
+
+export type PostEventUpdatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+};
+
+export type PostEventUpdateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostEventUpdateResponse = {
+  /**
+   * @example 1234
+   */
+  accountId: number;
+  /**
+   * @example Flying Yeti
+   */
+  attacker: string;
+  /**
+   * @example CN
+   */
+  attackerCountry: string;
+  /**
+   * @example Domain Resolution
+   */
+  category: string;
+  /**
+   * @example 1
+   */
+  categoryId: number;
+  /**
+   * @example 2022-04-01T00:00:00Z
+   */
+  date: string;
+  /**
+   * @example An attacker registered the domain domain.com
+   */
+  event: string;
+  /**
+   * @example 1223
+   */
+  id: number;
+  /**
+   * @example domain
+   */
+  indicator: string;
+  /**
+   * @example domain
+   */
+  indicatorType: string;
+  /**
+   * @example 5
+   */
+  indicatorTypeId: number;
+  insight?: string;
+  killChain: number;
+  mitreAttack: string[];
+  numReferenced: number;
+  numReferences: number;
+  /**
+   * @example 453gw34w3
+   */
+  rawId: string;
+  referenced: string[];
+  referencedIds: number[];
+  references: string[];
+  referencesIds: number[];
+  releasabilityId?: string;
+  tags: string[];
+  /**
+   * @example US
+   */
+  targetCountry: string;
+  /**
+   * @example Agriculture
+   */
+  targetIndustry: string;
+  /**
+   * @example amber
+   */
+  tlp: string;
+  /**
+   * @example 12345678-1234-1234-1234-1234567890ab
+   */
+  uuid: string;
+};
+
+export type PostEventUpdateRequestBody = {
+  /**
+   * @example Flying Yeti
+   */
+  attacker?: string;
+  /**
+   * @example CN
+   */
+  attackerCountry?: string;
+  /**
+   * @example Domain Resolution
+   */
+  category?: string;
+  /**
+   * @example 2022-04-01T00:00:00Z
+   * @format date-time
+   */
+  date?: string;
+  /**
+   * @example An attacker registered the domain domain.com
+   */
+  event?: string;
+  /**
+   * @example domain2.com
+   */
+  indicator?: string;
+  /**
+   * @example sha256
+   */
+  indicatorType?: string;
+  /**
+   * @example US
+   */
+  targetCountry?: string;
+  /**
+   * @example Insurance
+   */
+  targetIndustry?: string;
+  /**
+   * @example amber
+   */
+  tlp?: string;
+};
+
+export type PostEventUpdateVariables = {
+  body?: PostEventUpdateRequestBody;
+  pathParams: PostEventUpdatePathParams;
+} & FetcherExtraProps;
+
+export const postEventUpdate = (variables: PostEventUpdateVariables, signal?: AbortSignal) =>
+  fetch<PostEventUpdateResponse, PostEventUpdateError, PostEventUpdateRequestBody, {}, {}, PostEventUpdatePathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type PostEventInsightCreatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+};
+
+export type PostEventInsightCreateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostEventInsightCreateResponse = {
+  result: {
+    /**
+     * @example Here is some context _in markdown_
+     */
+    content: string;
+    /**
+     * @example sdfsd56af-43469-3c23-646345dsffd2
+     */
+    uuid: string;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type PostEventInsightCreateRequestBody = {
+  /**
+   * @example Here is some additional context _in markdown_
+   */
+  content: string;
+};
+
+export type PostEventInsightCreateVariables = {
+  body: PostEventInsightCreateRequestBody;
+  pathParams: PostEventInsightCreatePathParams;
+} & FetcherExtraProps;
+
+export const postEventInsightCreate = (variables: PostEventInsightCreateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostEventInsightCreateResponse,
+    PostEventInsightCreateError,
+    PostEventInsightCreateRequestBody,
+    {},
+    {},
+    PostEventInsightCreatePathParams
+  >({
+    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}/insight/create',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type DeleteEventInsightDeletePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+  /**
+   * Insight UUID
+   */
+  insightId: string;
+};
+
+export type DeleteEventInsightDeleteError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type DeleteEventInsightDeleteResponse = {
+  result: {
+    /**
+     * @example true
+     */
+    success: boolean;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type DeleteEventInsightDeleteVariables = {
+  pathParams: DeleteEventInsightDeletePathParams;
+} & FetcherExtraProps;
+
+export const deleteEventInsightDelete = (variables: DeleteEventInsightDeleteVariables, signal?: AbortSignal) =>
+  fetch<
+    DeleteEventInsightDeleteResponse,
+    DeleteEventInsightDeleteError,
+    undefined,
+    {},
+    {},
+    DeleteEventInsightDeletePathParams
+  >({
+    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}/insight/{insightId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type GetEventInsightReadPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+  /**
+   * Insight UUID
+   */
+  insightId: string;
+};
+
+export type GetEventInsightReadError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetEventInsightReadResponse = {
+  result: {
+    /**
+     * @example Here is some context _in markdown_
+     */
+    content: string;
+    /**
+     * @example sdfsd56af-43469-3c23-646345dsffd2
+     */
+    uuid: string;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type GetEventInsightReadVariables = {
+  pathParams: GetEventInsightReadPathParams;
+} & FetcherExtraProps;
+
+export const getEventInsightRead = (variables: GetEventInsightReadVariables, signal?: AbortSignal) =>
+  fetch<GetEventInsightReadResponse, GetEventInsightReadError, undefined, {}, {}, GetEventInsightReadPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}/insight/{insightId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PatchEventInsightUpdatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+  /**
+   * Insight UUID
+   */
+  insightId: string;
+};
+
+export type PatchEventInsightUpdateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PatchEventInsightUpdateResponse = {
+  result: {
+    /**
+     * @example Updated: Here is some additional context _in markdown_
+     */
+    content: string;
+    /**
+     * @example sdfsd56af-43469-3c23-646345dsffd2
+     */
+    uuid: string;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type PatchEventInsightUpdateRequestBody = {
+  /**
+   * @example Updated: Here is some additional context _in markdown_
+   */
+  content: string;
+};
+
+export type PatchEventInsightUpdateVariables = {
+  body: PatchEventInsightUpdateRequestBody;
+  pathParams: PatchEventInsightUpdatePathParams;
+} & FetcherExtraProps;
+
+export const patchEventInsightUpdate = (variables: PatchEventInsightUpdateVariables, signal?: AbortSignal) =>
+  fetch<
+    PatchEventInsightUpdateResponse,
+    PatchEventInsightUpdateError,
+    PatchEventInsightUpdateRequestBody,
+    {},
+    {},
+    PatchEventInsightUpdatePathParams
+  >({
+    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}/insight/{insightId}',
+    method: 'patch',
+    ...variables,
+    signal
+  });
+
+export type PostEventInsightUpdatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+  /**
+   * Insight UUID
+   */
+  insightId: string;
+};
+
+export type PostEventInsightUpdateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostEventInsightUpdateResponse = {
+  result: {
+    /**
+     * @example Updated: Here is some additional context _in markdown_
+     */
+    content: string;
+    /**
+     * @example sdfsd56af-43469-3c23-646345dsffd2
+     */
+    uuid: string;
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type PostEventInsightUpdateRequestBody = {
+  /**
+   * @example Updated: Here is some additional context _in markdown_
+   */
+  content: string;
+};
+
+export type PostEventInsightUpdateVariables = {
+  body: PostEventInsightUpdateRequestBody;
+  pathParams: PostEventInsightUpdatePathParams;
+} & FetcherExtraProps;
+
+export const postEventInsightUpdate = (variables: PostEventInsightUpdateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostEventInsightUpdateResponse,
+    PostEventInsightUpdateError,
+    PostEventInsightUpdateRequestBody,
+    {},
+    {},
+    PostEventInsightUpdatePathParams
+  >({
+    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}/insight/{insightId}',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type GetEventRawReadPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+  /**
+   * Raw Event UUID
+   */
+  rawId: string;
+};
+
+export type GetEventRawReadError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type GetEventRawReadResponse = {
+  /**
+   * @example 1234
+   */
+  accountId: number;
+  /**
+   * @example 1970-01-01
+   */
+  created: string;
+  data: Record<string, any>;
+  /**
+   * @example 1234
+   */
+  id: string;
+  /**
+   * @example https://example.com
+   */
+  source: string;
+  /**
+   * @example amber
+   */
+  tlp: string;
+};
+
+export type GetEventRawReadVariables = {
+  pathParams: GetEventRawReadPathParams;
+} & FetcherExtraProps;
+
+export const getEventRawRead = (variables: GetEventRawReadVariables, signal?: AbortSignal) =>
+  fetch<GetEventRawReadResponse, GetEventRawReadError, undefined, {}, {}, GetEventRawReadPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}/raw/{rawId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type PatchEventRawUpdatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+  /**
+   * Raw Event UUID
+   */
+  rawId: string;
+};
+
+export type PatchEventRawUpdateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PatchEventRawUpdateResponse = {
+  data: Record<string, any>;
+  /**
+   * @example 1234
+   */
+  id: string;
+};
+
+export type PatchEventRawUpdateRequestBody = {
+  data?: Record<string, any>;
+  /**
+   * @example example.com
+   */
+  source?: string;
+  /**
+   * @example amber
+   */
+  tlp?: string;
+};
+
+export type PatchEventRawUpdateVariables = {
+  body?: PatchEventRawUpdateRequestBody;
+  pathParams: PatchEventRawUpdatePathParams;
+} & FetcherExtraProps;
+
+export const patchEventRawUpdate = (variables: PatchEventRawUpdateVariables, signal?: AbortSignal) =>
+  fetch<
+    PatchEventRawUpdateResponse,
+    PatchEventRawUpdateError,
+    PatchEventRawUpdateRequestBody,
+    {},
+    {},
+    PatchEventRawUpdatePathParams
+  >({
+    url: '/accounts/{accountId}/cloudforce-one/events/{eventId}/raw/{rawId}',
+    method: 'patch',
+    ...variables,
+    signal
+  });
+
+export type PostEventRawUpdatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: number;
+  /**
+   * Event UUID
+   */
+  eventId: string;
+  /**
+   * Raw Event UUID
+   */
+  rawId: string;
+};
+
+export type PostEventRawUpdateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      /**
+       * @example An error occurred
+       */
+      message: string;
+    }[];
+    result: Record<string, any>;
+    success: boolean;
+  };
+}>;
+
+export type PostEventRawUpdateResponse = {
+  data: Record<string, any>;
+  /**
+   * @example 1234
+   */
+  id: string;
+};
+
+export type PostEventRawUpdateRequestBody = {
+  data?: Record<string, any>;
+  /**
+   * @example example.com
+   */
+  source?: string;
+  /**
+   * @example amber
+   */
+  tlp?: string;
+};
+
+export type PostEventRawUpdateVariables = {
+  body?: PostEventRawUpdateRequestBody;
+  pathParams: PostEventRawUpdatePathParams;
+} & FetcherExtraProps;
+
+export const postEventRawUpdate = (variables: PostEventRawUpdateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostEventRawUpdateResponse,
+    PostEventRawUpdateError,
+    PostEventRawUpdateRequestBody,
+    {},
+    {},
+    PostEventRawUpdatePathParams
+  >({ url: '/accounts/{accountId}/cloudforce-one/events/{eventId}/raw/{rawId}', method: 'post', ...variables, signal });
 
 export type GetConfigFetchPathParams = {
   /**
@@ -44710,7 +45248,7 @@ export type GetConfigFetchPathParams = {
 export type GetConfigFetchError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetConfigFetchResponse = Schemas.CloudforceOnePortScanApiApiResponseCommon & {
-  result?: Schemas.CloudforceOnePortScanApiScanConfig;
+  result?: Schemas.CloudforceOnePortScanApiScanConfig[];
 };
 
 export type GetConfigFetchVariables = {
@@ -44739,16 +45277,9 @@ export type PostConfigCreateResponse = Schemas.CloudforceOnePortScanApiApiRespon
 };
 
 export type PostConfigCreateRequestBody = {
-  /**
-   * The number of days between each scan (0 = no recurring scans)
-   *
-   * @example 7
-   */
-  frequency: number;
-  /**
-   * A list of IP addresses or CIDR blocks to scan. The maximum number of total IP addresses allowed is 5000.
-   */
-  ips: string[];
+  frequency?: Schemas.CloudforceOnePortScanApiFrequency;
+  ips: Schemas.CloudforceOnePortScanApiIps;
+  ports?: Schemas.CloudforceOnePortScanApiPorts;
 };
 
 export type PostConfigCreateVariables = {
@@ -44766,11 +45297,85 @@ export const postConfigCreate = (variables: PostConfigCreateVariables, signal?: 
     PostConfigCreatePathParams
   >({ url: '/accounts/{accountId}/cloudforce-one/scans/config', method: 'post', ...variables, signal });
 
+export type DeleteDeleteScansPathParams = {
+  /**
+   * Account ID
+   */
+  accountId: string;
+  /**
+   * Config ID
+   */
+  configId: string;
+};
+
+export type DeleteDeleteScansError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteDeleteScansResponse = {
+  errors: string[];
+  messages: string[];
+  result: Record<string, any>;
+  success: boolean;
+};
+
+export type DeleteDeleteScansVariables = {
+  pathParams: DeleteDeleteScansPathParams;
+} & FetcherExtraProps;
+
+export const deleteDeleteScans = (variables: DeleteDeleteScansVariables, signal?: AbortSignal) =>
+  fetch<DeleteDeleteScansResponse, DeleteDeleteScansError, undefined, {}, {}, DeleteDeleteScansPathParams>({
+    url: '/accounts/{accountId}/cloudforce-one/scans/config/{configId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type PostConfigUpdatePathParams = {
+  /**
+   * Account ID
+   */
+  accountId: string;
+  /**
+   * Config ID
+   */
+  configId: string;
+};
+
+export type PostConfigUpdateError = Fetcher.ErrorWrapper<undefined>;
+
+export type PostConfigUpdateResponse = Schemas.CloudforceOnePortScanApiApiResponseCommon & {
+  result?: Schemas.CloudforceOnePortScanApiScanConfig;
+};
+
+export type PostConfigUpdateRequestBody = {
+  frequency?: Schemas.CloudforceOnePortScanApiFrequency;
+  ips?: Schemas.CloudforceOnePortScanApiIps;
+  ports?: Schemas.CloudforceOnePortScanApiPorts;
+};
+
+export type PostConfigUpdateVariables = {
+  body?: PostConfigUpdateRequestBody;
+  pathParams: PostConfigUpdatePathParams;
+} & FetcherExtraProps;
+
+export const postConfigUpdate = (variables: PostConfigUpdateVariables, signal?: AbortSignal) =>
+  fetch<
+    PostConfigUpdateResponse,
+    PostConfigUpdateError,
+    PostConfigUpdateRequestBody,
+    {},
+    {},
+    PostConfigUpdatePathParams
+  >({ url: '/accounts/{accountId}/cloudforce-one/scans/config/{configId}', method: 'patch', ...variables, signal });
+
 export type GetGetOpenPortsPathParams = {
   /**
    * Account ID
    */
   accountId: string;
+  /**
+   * Config ID
+   */
+  configId: string;
 };
 
 export type GetGetOpenPortsError = Fetcher.ErrorWrapper<undefined>;
@@ -44790,7 +45395,7 @@ export type GetGetOpenPortsVariables = {
 
 export const getGetOpenPorts = (variables: GetGetOpenPortsVariables, signal?: AbortSignal) =>
   fetch<GetGetOpenPortsResponse, GetGetOpenPortsError, undefined, {}, {}, GetGetOpenPortsPathParams>({
-    url: '/accounts/{accountId}/cloudforce-one/scans/results',
+    url: '/accounts/{accountId}/cloudforce-one/scans/results/{configId}',
     method: 'get',
     ...variables,
     signal
@@ -46274,7 +46879,9 @@ export type DevicesUpdateDefaultDeviceSettingsPolicyRequestBody = {
   auto_connect?: Schemas.TeamsDevicesAutoConnect;
   captive_portal?: Schemas.TeamsDevicesCaptivePortal;
   disable_auto_fallback?: Schemas.TeamsDevicesDisableAutoFallback;
+  exclude?: Schemas.TeamsDevicesExcludeRequest;
   exclude_office_ips?: Schemas.TeamsDevicesExcludeOfficeIps;
+  include?: Schemas.TeamsDevicesIncludeRequest;
   register_interface_ip_with_dns?: Schemas.TeamsDevicesRegisterInterfaceIpWithDns;
   service_mode_v2?: Schemas.TeamsDevicesServiceModeV2;
   support_url?: Schemas.TeamsDevicesSupportUrl;
@@ -46326,7 +46933,9 @@ export type DevicesCreateDeviceSettingsPolicyRequestBody = {
    * @example true
    */
   enabled?: boolean;
+  exclude?: Schemas.TeamsDevicesExcludeRequest;
   exclude_office_ips?: Schemas.TeamsDevicesExcludeOfficeIps;
+  include?: Schemas.TeamsDevicesIncludeRequest;
   lan_allow_minutes?: Schemas.TeamsDevicesLanAllowMinutes;
   lan_allow_subnet_size?: Schemas.TeamsDevicesLanAllowSubnetSize;
   match: Schemas.TeamsDevicesSchemasMatch;
@@ -46633,7 +47242,9 @@ export type DevicesUpdateDeviceSettingsPolicyRequestBody = {
    * @example true
    */
   enabled?: boolean;
+  exclude?: Schemas.TeamsDevicesExcludeRequest;
   exclude_office_ips?: Schemas.TeamsDevicesExcludeOfficeIps;
+  include?: Schemas.TeamsDevicesIncludeRequest;
   match?: Schemas.TeamsDevicesSchemasMatch;
   /**
    * The name of the device settings profile.
@@ -50280,7 +50891,7 @@ export type EmailSecurityInvestigateQueryParams = {
   /**
    * The dispositions the search filters by.
    */
-  final_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK';
+  final_disposition?: 'MALICIOUS' | 'SUSPICIOUS' | 'SPOOF' | 'SPAM' | 'BULK' | 'NONE';
   metric?: string;
   /**
    * The message actions the search filters by.
@@ -58339,6 +58950,1697 @@ export const magicInterconnectsUpdateInterconnect = (
     {},
     MagicInterconnectsUpdateInterconnectPathParams
   >({ url: '/accounts/{accountId}/magic/cf_interconnects/{cfInterconnectId}', method: 'put', ...variables, signal });
+
+export type CatalogSyncsListPathParams = {
+  accountId: Schemas.McnAccountId;
+};
+
+export type CatalogSyncsListError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type CatalogSyncsListVariables = {
+  pathParams: CatalogSyncsListPathParams;
+} & FetcherExtraProps;
+
+/**
+ * List Catalog Syncs (Closed Beta)
+ */
+export const catalogSyncsList = (variables: CatalogSyncsListVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnReadAccountCatalogSyncsResponse,
+    CatalogSyncsListError,
+    undefined,
+    {},
+    {},
+    CatalogSyncsListPathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/catalog-syncs', method: 'get', ...variables, signal });
+
+export type CatalogSyncsCreatePathParams = {
+  accountId: Schemas.McnAccountId;
+};
+
+export type CatalogSyncsCreateHeaders = {
+  forwarded?: string;
+};
+
+export type CatalogSyncsCreateError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 409;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 422;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type CatalogSyncsCreateVariables = {
+  body: Schemas.McnCreateCatalogSyncRequest;
+  headers?: CatalogSyncsCreateHeaders;
+  pathParams: CatalogSyncsCreatePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Create a new Catalog Sync (Closed Beta)
+ */
+export const catalogSyncsCreate = (variables: CatalogSyncsCreateVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnCreateCatalogSyncResponse,
+    CatalogSyncsCreateError,
+    Schemas.McnCreateCatalogSyncRequest,
+    CatalogSyncsCreateHeaders,
+    {},
+    CatalogSyncsCreatePathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/catalog-syncs', method: 'post', ...variables, signal });
+
+export type CatalogSyncsPrebuiltPoliciesListPathParams = {
+  accountId: Schemas.McnAccountId;
+};
+
+export type CatalogSyncsPrebuiltPoliciesListQueryParams = {
+  /**
+   * specify type of destination, omit to return all
+   */
+  destination_type?: Schemas.McnCatalogSyncDestinationType;
+};
+
+export type CatalogSyncsPrebuiltPoliciesListError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type CatalogSyncsPrebuiltPoliciesListVariables = {
+  pathParams: CatalogSyncsPrebuiltPoliciesListPathParams;
+  queryParams?: CatalogSyncsPrebuiltPoliciesListQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * List prebuilt catalog sync policies (Closed Beta)
+ */
+export const catalogSyncsPrebuiltPoliciesList = (
+  variables: CatalogSyncsPrebuiltPoliciesListVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.McnCatalogSyncsPrebuiltPoliciesResponse,
+    CatalogSyncsPrebuiltPoliciesListError,
+    undefined,
+    {},
+    CatalogSyncsPrebuiltPoliciesListQueryParams,
+    CatalogSyncsPrebuiltPoliciesListPathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/catalog-syncs/prebuilt-policies', method: 'get', ...variables, signal });
+
+export type CatalogSyncsDeletePathParams = {
+  accountId: Schemas.McnAccountId;
+  syncId: Schemas.McnCatalogSyncId;
+};
+
+export type CatalogSyncsDeleteQueryParams = {
+  delete_destination?: boolean;
+};
+
+export type CatalogSyncsDeleteError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 409;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type CatalogSyncsDeleteVariables = {
+  pathParams: CatalogSyncsDeletePathParams;
+  queryParams?: CatalogSyncsDeleteQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Delete a Catalog Sync (Closed Beta)
+ */
+export const catalogSyncsDelete = (variables: CatalogSyncsDeleteVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnDeleteCatalogSyncResponse,
+    CatalogSyncsDeleteError,
+    undefined,
+    {},
+    CatalogSyncsDeleteQueryParams,
+    CatalogSyncsDeletePathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/catalog-syncs/{syncId}', method: 'delete', ...variables, signal });
+
+export type CatalogSyncsReadPathParams = {
+  accountId: Schemas.McnAccountId;
+  syncId: Schemas.McnCatalogSyncId;
+};
+
+export type CatalogSyncsReadError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type CatalogSyncsReadVariables = {
+  pathParams: CatalogSyncsReadPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Read a Catalog Sync (Closed Beta)
+ */
+export const catalogSyncsRead = (variables: CatalogSyncsReadVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnReadAccountCatalogSyncResponse,
+    CatalogSyncsReadError,
+    undefined,
+    {},
+    {},
+    CatalogSyncsReadPathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/catalog-syncs/{syncId}', method: 'get', ...variables, signal });
+
+export type CatalogSyncsPatchPathParams = {
+  accountId: Schemas.McnAccountId;
+  syncId: Schemas.McnCatalogSyncId;
+};
+
+export type CatalogSyncsPatchError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 409;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 422;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type CatalogSyncsPatchVariables = {
+  body?: Schemas.McnUpdateCatalogSyncRequest;
+  pathParams: CatalogSyncsPatchPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Update a Catalog Sync (Closed Beta)
+ */
+export const catalogSyncsPatch = (variables: CatalogSyncsPatchVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnUpdateCatalogSyncResponse,
+    CatalogSyncsPatchError,
+    Schemas.McnUpdateCatalogSyncRequest,
+    {},
+    {},
+    CatalogSyncsPatchPathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/catalog-syncs/{syncId}', method: 'patch', ...variables, signal });
+
+export type CatalogSyncsUpdatePathParams = {
+  accountId: Schemas.McnAccountId;
+  syncId: Schemas.McnCatalogSyncId;
+};
+
+export type CatalogSyncsUpdateError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 409;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 422;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type CatalogSyncsUpdateVariables = {
+  body?: Schemas.McnUpdateCatalogSyncRequest;
+  pathParams: CatalogSyncsUpdatePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Update a Catalog Sync (Closed Beta)
+ */
+export const catalogSyncsUpdate = (variables: CatalogSyncsUpdateVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnUpdateCatalogSyncResponse,
+    CatalogSyncsUpdateError,
+    Schemas.McnUpdateCatalogSyncRequest,
+    {},
+    {},
+    CatalogSyncsUpdatePathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/catalog-syncs/{syncId}', method: 'put', ...variables, signal });
+
+export type CatalogSyncsRefreshPathParams = {
+  accountId: Schemas.McnAccountId;
+  syncId: Schemas.McnCatalogSyncId;
+};
+
+export type CatalogSyncsRefreshError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 409;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 422;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type CatalogSyncsRefreshVariables = {
+  pathParams: CatalogSyncsRefreshPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Refresh a Catalog Sync's destination by running the sync policy against latest resource catalog (Closed Beta)
+ */
+export const catalogSyncsRefresh = (variables: CatalogSyncsRefreshVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnRefreshCatalogSyncResponse,
+    CatalogSyncsRefreshError,
+    undefined,
+    {},
+    {},
+    CatalogSyncsRefreshPathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/catalog-syncs/{syncId}/refresh', method: 'post', ...variables, signal });
+
+export type OnrampsListPathParams = {
+  accountId: Schemas.McnAccountId;
+};
+
+export type OnrampsListQueryParams = {
+  /**
+   * one of ["updated_at", "id", "cloud_type", "name"]
+   */
+  order_by?: string;
+  desc?: boolean;
+  status?: boolean;
+  vpcs?: boolean;
+};
+
+export type OnrampsListError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type OnrampsListVariables = {
+  pathParams: OnrampsListPathParams;
+  queryParams?: OnrampsListQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * List On-ramps (Closed Beta)
+ */
+export const onrampsList = (variables: OnrampsListVariables, signal?: AbortSignal) =>
+  fetch<Schemas.McnListOnrampsResponse, OnrampsListError, undefined, {}, OnrampsListQueryParams, OnrampsListPathParams>(
+    { url: '/accounts/{accountId}/magic/cloud/onramps', method: 'get', ...variables, signal }
+  );
+
+export type OnrampsCreatePathParams = {
+  accountId: Schemas.McnAccountId;
+};
+
+export type OnrampsCreateHeaders = {
+  forwarded?: string;
+};
+
+export type OnrampsCreateError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 409;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 422;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type OnrampsCreateVariables = {
+  body: Schemas.McnCreateOnrampRequest;
+  headers?: OnrampsCreateHeaders;
+  pathParams: OnrampsCreatePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Create a new On-ramp (Closed Beta)
+ */
+export const onrampsCreate = (variables: OnrampsCreateVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnCreateOnrampResponse,
+    OnrampsCreateError,
+    Schemas.McnCreateOnrampRequest,
+    OnrampsCreateHeaders,
+    {},
+    OnrampsCreatePathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/onramps', method: 'post', ...variables, signal });
+
+export type OnrampsMwanAddrSpaceReadPathParams = {
+  accountId: Schemas.McnAccountId;
+};
+
+export type OnrampsMwanAddrSpaceReadError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type OnrampsMwanAddrSpaceReadVariables = {
+  pathParams: OnrampsMwanAddrSpaceReadPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Read the Magic WAN Address Space (Closed Beta)
+ */
+export const onrampsMwanAddrSpaceRead = (variables: OnrampsMwanAddrSpaceReadVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnGetMagicWanAddressSpaceResponse,
+    OnrampsMwanAddrSpaceReadError,
+    undefined,
+    {},
+    {},
+    OnrampsMwanAddrSpaceReadPathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/onramps/magic_wan_address_space', method: 'get', ...variables, signal });
+
+export type OnrampsMwanAddrSpacePatchPathParams = {
+  accountId: Schemas.McnAccountId;
+};
+
+export type OnrampsMwanAddrSpacePatchError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 422;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type OnrampsMwanAddrSpacePatchVariables = {
+  body: Schemas.McnUpdateMagicWanAddressSpaceRequest;
+  pathParams: OnrampsMwanAddrSpacePatchPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Update the Magic WAN Address Space (Closed Beta)
+ */
+export const onrampsMwanAddrSpacePatch = (variables: OnrampsMwanAddrSpacePatchVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnUpdateMagicWanAddressSpaceResponse,
+    OnrampsMwanAddrSpacePatchError,
+    Schemas.McnUpdateMagicWanAddressSpaceRequest,
+    {},
+    {},
+    OnrampsMwanAddrSpacePatchPathParams
+  >({
+    url: '/accounts/{accountId}/magic/cloud/onramps/magic_wan_address_space',
+    method: 'patch',
+    ...variables,
+    signal
+  });
+
+export type OnrampsMwanAddrSpaceUpdatePathParams = {
+  accountId: Schemas.McnAccountId;
+};
+
+export type OnrampsMwanAddrSpaceUpdateError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 422;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type OnrampsMwanAddrSpaceUpdateVariables = {
+  body: Schemas.McnUpdateMagicWanAddressSpaceRequest;
+  pathParams: OnrampsMwanAddrSpaceUpdatePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Update the Magic WAN Address Space (Closed Beta)
+ */
+export const onrampsMwanAddrSpaceUpdate = (variables: OnrampsMwanAddrSpaceUpdateVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnUpdateMagicWanAddressSpaceResponse,
+    OnrampsMwanAddrSpaceUpdateError,
+    Schemas.McnUpdateMagicWanAddressSpaceRequest,
+    {},
+    {},
+    OnrampsMwanAddrSpaceUpdatePathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/onramps/magic_wan_address_space', method: 'put', ...variables, signal });
+
+export type OnrampsDeletePathParams = {
+  accountId: Schemas.McnAccountId;
+  onrampId: Schemas.McnOnrampId;
+};
+
+export type OnrampsDeleteQueryParams = {
+  destroy?: boolean;
+  force?: boolean;
+};
+
+export type OnrampsDeleteError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 409;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type OnrampsDeleteVariables = {
+  pathParams: OnrampsDeletePathParams;
+  queryParams?: OnrampsDeleteQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Delete an On-ramp (Closed Beta)
+ */
+export const onrampsDelete = (variables: OnrampsDeleteVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnDeleteOnrampResponse,
+    OnrampsDeleteError,
+    undefined,
+    {},
+    OnrampsDeleteQueryParams,
+    OnrampsDeletePathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/onramps/{onrampId}', method: 'delete', ...variables, signal });
+
+export type OnrampsReadPathParams = {
+  accountId: Schemas.McnAccountId;
+  onrampId: Schemas.McnOnrampId;
+};
+
+export type OnrampsReadQueryParams = {
+  status?: boolean;
+  vpcs?: boolean;
+  post_apply_resources?: boolean;
+  planned_resources?: boolean;
+};
+
+export type OnrampsReadError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type OnrampsReadVariables = {
+  pathParams: OnrampsReadPathParams;
+  queryParams?: OnrampsReadQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Read an On-ramp (Closed Beta)
+ */
+export const onrampsRead = (variables: OnrampsReadVariables, signal?: AbortSignal) =>
+  fetch<Schemas.McnGetOnrampResponse, OnrampsReadError, undefined, {}, OnrampsReadQueryParams, OnrampsReadPathParams>({
+    url: '/accounts/{accountId}/magic/cloud/onramps/{onrampId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type OnrampsPatchPathParams = {
+  accountId: Schemas.McnAccountId;
+  onrampId: Schemas.McnOnrampId;
+};
+
+export type OnrampsPatchError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 409;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 422;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type OnrampsPatchVariables = {
+  body?: Schemas.McnUpdateOnrampRequest;
+  pathParams: OnrampsPatchPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Update an On-ramp (Closed Beta)
+ */
+export const onrampsPatch = (variables: OnrampsPatchVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnUpdateOnrampResponse,
+    OnrampsPatchError,
+    Schemas.McnUpdateOnrampRequest,
+    {},
+    {},
+    OnrampsPatchPathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/onramps/{onrampId}', method: 'patch', ...variables, signal });
+
+export type OnrampsUpdatePathParams = {
+  accountId: Schemas.McnAccountId;
+  onrampId: Schemas.McnOnrampId;
+};
+
+export type OnrampsUpdateError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 409;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 422;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type OnrampsUpdateVariables = {
+  body?: Schemas.McnUpdateOnrampRequest;
+  pathParams: OnrampsUpdatePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Update an On-ramp (Closed Beta)
+ */
+export const onrampsUpdate = (variables: OnrampsUpdateVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnUpdateOnrampResponse,
+    OnrampsUpdateError,
+    Schemas.McnUpdateOnrampRequest,
+    {},
+    {},
+    OnrampsUpdatePathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/onramps/{onrampId}', method: 'put', ...variables, signal });
+
+export type OnrampsApplyPathParams = {
+  accountId: Schemas.McnAccountId;
+  onrampId: Schemas.McnOnrampId;
+};
+
+export type OnrampsApplyError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 409;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type OnrampsApplyVariables = {
+  pathParams: OnrampsApplyPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Apply an On-ramp (Closed Beta)
+ */
+export const onrampsApply = (variables: OnrampsApplyVariables, signal?: AbortSignal) =>
+  fetch<Schemas.McnGoodResponse, OnrampsApplyError, undefined, {}, {}, OnrampsApplyPathParams>({
+    url: '/accounts/{accountId}/magic/cloud/onramps/{onrampId}/apply',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type OnrampsExportPathParams = {
+  accountId: Schemas.McnAccountId;
+  onrampId: Schemas.McnOnrampId;
+};
+
+export type OnrampsExportError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 409;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type OnrampsExportVariables = {
+  pathParams: OnrampsExportPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Export an On-ramp to terraform ready file(s) (Closed Beta)
+ */
+export const onrampsExport = (variables: OnrampsExportVariables, signal?: AbortSignal) =>
+  fetch<undefined, OnrampsExportError, undefined, {}, {}, OnrampsExportPathParams>({
+    url: '/accounts/{accountId}/magic/cloud/onramps/{onrampId}/export',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type OnrampsPlanPathParams = {
+  accountId: Schemas.McnAccountId;
+  onrampId: Schemas.McnOnrampId;
+};
+
+export type OnrampsPlanError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 409;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type OnrampsPlanVariables = {
+  pathParams: OnrampsPlanPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Plan an On-ramp (Closed Beta)
+ */
+export const onrampsPlan = (variables: OnrampsPlanVariables, signal?: AbortSignal) =>
+  fetch<Schemas.McnGoodResponse, OnrampsPlanError, undefined, {}, {}, OnrampsPlanPathParams>({
+    url: '/accounts/{accountId}/magic/cloud/onramps/{onrampId}/plan',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type ProvidersListPathParams = {
+  accountId: Schemas.McnAccountId;
+};
+
+export type ProvidersListQueryParams = {
+  status?: boolean;
+  /**
+   * one of ["updated_at", "id", "cloud_type", "name"]
+   */
+  order_by?: string;
+  desc?: boolean;
+  cloudflare?: boolean;
+};
+
+export type ProvidersListError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type ProvidersListVariables = {
+  pathParams: ProvidersListPathParams;
+  queryParams?: ProvidersListQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * List Cloud Integrations (Closed Beta)
+ */
+export const providersList = (variables: ProvidersListVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnReadAccountProvidersResponse,
+    ProvidersListError,
+    undefined,
+    {},
+    ProvidersListQueryParams,
+    ProvidersListPathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/providers', method: 'get', ...variables, signal });
+
+export type ProvidersCreatePathParams = {
+  accountId: Schemas.McnAccountId;
+};
+
+export type ProvidersCreateHeaders = {
+  forwarded?: string;
+};
+
+export type ProvidersCreateError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 409;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 422;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type ProvidersCreateVariables = {
+  body: Schemas.McnCreateProviderRequest;
+  headers?: ProvidersCreateHeaders;
+  pathParams: ProvidersCreatePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Create a new Cloud Integration (Closed Beta)
+ */
+export const providersCreate = (variables: ProvidersCreateVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnCreateProviderResponse,
+    ProvidersCreateError,
+    Schemas.McnCreateProviderRequest,
+    ProvidersCreateHeaders,
+    {},
+    ProvidersCreatePathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/providers', method: 'post', ...variables, signal });
+
+export type ProvidersDiscoverAllPathParams = {
+  accountId: Schemas.McnAccountId;
+};
+
+export type ProvidersDiscoverAllError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 409;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type ProvidersDiscoverAllVariables = {
+  pathParams: ProvidersDiscoverAllPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Run discovery for all Cloud Integrations in an account (Closed Beta)
+ */
+export const providersDiscoverAll = (variables: ProvidersDiscoverAllVariables, signal?: AbortSignal) =>
+  fetch<Schemas.McnGoodResponse, ProvidersDiscoverAllError, undefined, {}, {}, ProvidersDiscoverAllPathParams>({
+    url: '/accounts/{accountId}/magic/cloud/providers/discover',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type ProvidersDeletePathParams = {
+  accountId: Schemas.McnAccountId;
+  providerId: Schemas.McnProviderId;
+};
+
+export type ProvidersDeleteError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type ProvidersDeleteVariables = {
+  pathParams: ProvidersDeletePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Delete a Cloud Integration (Closed Beta)
+ */
+export const providersDelete = (variables: ProvidersDeleteVariables, signal?: AbortSignal) =>
+  fetch<Schemas.McnDeleteProviderResponse, ProvidersDeleteError, undefined, {}, {}, ProvidersDeletePathParams>({
+    url: '/accounts/{accountId}/magic/cloud/providers/{providerId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type ProvidersReadPathParams = {
+  accountId: Schemas.McnAccountId;
+  providerId: Schemas.McnProviderId;
+};
+
+export type ProvidersReadQueryParams = {
+  status?: boolean;
+};
+
+export type ProvidersReadError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type ProvidersReadVariables = {
+  pathParams: ProvidersReadPathParams;
+  queryParams?: ProvidersReadQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Read a Cloud Integration (Closed Beta)
+ */
+export const providersRead = (variables: ProvidersReadVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnReadAccountProviderResponse,
+    ProvidersReadError,
+    undefined,
+    {},
+    ProvidersReadQueryParams,
+    ProvidersReadPathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/providers/{providerId}', method: 'get', ...variables, signal });
+
+export type ProvidersPatchPathParams = {
+  accountId: Schemas.McnAccountId;
+  providerId: Schemas.McnProviderId;
+};
+
+export type ProvidersPatchError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 409;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 422;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type ProvidersPatchVariables = {
+  body?: Schemas.McnUpdateProviderRequest;
+  pathParams: ProvidersPatchPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Update a Cloud Integration (Closed Beta)
+ */
+export const providersPatch = (variables: ProvidersPatchVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnUpdateProviderResponse,
+    ProvidersPatchError,
+    Schemas.McnUpdateProviderRequest,
+    {},
+    {},
+    ProvidersPatchPathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/providers/{providerId}', method: 'patch', ...variables, signal });
+
+export type ProvidersUpdatePathParams = {
+  accountId: Schemas.McnAccountId;
+  providerId: Schemas.McnProviderId;
+};
+
+export type ProvidersUpdateError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 409;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 422;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type ProvidersUpdateVariables = {
+  body?: Schemas.McnUpdateProviderRequest;
+  pathParams: ProvidersUpdatePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Update a Cloud Integration (Closed Beta)
+ */
+export const providersUpdate = (variables: ProvidersUpdateVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnUpdateProviderResponse,
+    ProvidersUpdateError,
+    Schemas.McnUpdateProviderRequest,
+    {},
+    {},
+    ProvidersUpdatePathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/providers/{providerId}', method: 'put', ...variables, signal });
+
+export type ProvidersDiscoverPathParams = {
+  accountId: Schemas.McnAccountId;
+  providerId: Schemas.McnProviderId;
+};
+
+export type ProvidersDiscoverQueryParams = {
+  v2?: boolean;
+};
+
+export type ProvidersDiscoverError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 409;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type ProvidersDiscoverVariables = {
+  pathParams: ProvidersDiscoverPathParams;
+  queryParams?: ProvidersDiscoverQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Run discovery for a Cloud Integration (Closed Beta)
+ */
+export const providersDiscover = (variables: ProvidersDiscoverVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnGoodResponse,
+    ProvidersDiscoverError,
+    undefined,
+    {},
+    ProvidersDiscoverQueryParams,
+    ProvidersDiscoverPathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/providers/{providerId}/discover', method: 'post', ...variables, signal });
+
+export type ProvidersInitialSetupPathParams = {
+  accountId: Schemas.McnAccountId;
+  providerId: Schemas.McnProviderId;
+};
+
+export type ProvidersInitialSetupError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type ProvidersInitialSetupVariables = {
+  pathParams: ProvidersInitialSetupPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Get initial configuration to complete Cloud Integration setup (Closed Beta)
+ */
+export const providersInitialSetup = (variables: ProvidersInitialSetupVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnProviderInitialSetupResponse,
+    ProvidersInitialSetupError,
+    undefined,
+    {},
+    {},
+    ProvidersInitialSetupPathParams
+  >({
+    url: '/accounts/{accountId}/magic/cloud/providers/{providerId}/initial_setup',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type ResourcesCatalogListPathParams = {
+  accountId: Schemas.McnAccountId;
+};
+
+export type ResourcesCatalogListQueryParams = {
+  provider_id?: string;
+  resource_type?: Schemas.McnResourceType[];
+  resource_id?: Schemas.McnResourceId[];
+  region?: string;
+  resource_group?: string;
+  managed?: boolean;
+  search?: string[];
+  /**
+   * one of ["id", "resource_type", "region"]
+   */
+  order_by?: string;
+  desc?: boolean;
+  /**
+   * @minimum 1
+   */
+  per_page?: number;
+  /**
+   * @minimum 1
+   */
+  page?: number;
+  cloudflare?: boolean;
+  v2?: boolean;
+};
+
+export type ResourcesCatalogListError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type ResourcesCatalogListVariables = {
+  pathParams: ResourcesCatalogListPathParams;
+  queryParams?: ResourcesCatalogListQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * List resources in the Resource Catalog (Closed Beta)
+ */
+export const resourcesCatalogList = (variables: ResourcesCatalogListVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnReadAccountResourcesResponse,
+    ResourcesCatalogListError,
+    undefined,
+    {},
+    ResourcesCatalogListQueryParams,
+    ResourcesCatalogListPathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/resources', method: 'get', ...variables, signal });
+
+export type ResourcesCatalogExportPathParams = {
+  accountId: Schemas.McnAccountId;
+};
+
+export type ResourcesCatalogExportQueryParams = {
+  provider_id?: string;
+  resource_type?: Schemas.McnResourceType[];
+  resource_id?: Schemas.McnResourceId[];
+  region?: string;
+  resource_group?: string;
+  search?: string[];
+  /**
+   * one of ["id", "resource_type", "region"]
+   */
+  order_by?: string;
+  desc?: boolean;
+  v2?: boolean;
+};
+
+export type ResourcesCatalogExportError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type ResourcesCatalogExportVariables = {
+  pathParams: ResourcesCatalogExportPathParams;
+  queryParams?: ResourcesCatalogExportQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Export resources in the Resource Catalog as a JSON file (Closed Beta)
+ */
+export const resourcesCatalogExport = (variables: ResourcesCatalogExportVariables, signal?: AbortSignal) =>
+  fetch<
+    Blob,
+    ResourcesCatalogExportError,
+    undefined,
+    {},
+    ResourcesCatalogExportQueryParams,
+    ResourcesCatalogExportPathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/resources/export', method: 'get', ...variables, signal });
+
+export type ResourcesCatalogPolicyPreviewPathParams = {
+  accountId: Schemas.McnAccountId;
+};
+
+export type ResourcesCatalogPolicyPreviewError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 422;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type ResourcesCatalogPolicyPreviewVariables = {
+  body: Schemas.McnResourcesCatalogPolicyPreviewRequest;
+  pathParams: ResourcesCatalogPolicyPreviewPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Preview Rego query result against the latest resource catalog (Closed Beta)
+ */
+export const resourcesCatalogPolicyPreview = (
+  variables: ResourcesCatalogPolicyPreviewVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.McnResourcesCatalogPolicyPreviewResponse,
+    ResourcesCatalogPolicyPreviewError,
+    Schemas.McnResourcesCatalogPolicyPreviewRequest,
+    {},
+    {},
+    ResourcesCatalogPolicyPreviewPathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/resources/policy-preview', method: 'post', ...variables, signal });
+
+export type ResourcesCatalogReadPathParams = {
+  accountId: Schemas.McnAccountId;
+  resourceId: Schemas.McnResourceId;
+};
+
+export type ResourcesCatalogReadQueryParams = {
+  v2?: boolean;
+};
+
+export type ResourcesCatalogReadError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 401;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 403;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 404;
+      payload: Schemas.McnBadResponse;
+    }
+  | {
+      status: 500;
+      payload: Schemas.McnBadResponse;
+    }
+>;
+
+export type ResourcesCatalogReadVariables = {
+  pathParams: ResourcesCatalogReadPathParams;
+  queryParams?: ResourcesCatalogReadQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Read an resource from the Resource Catalog (Closed Beta)
+ */
+export const resourcesCatalogRead = (variables: ResourcesCatalogReadVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.McnReadAccountResourceResponse,
+    ResourcesCatalogReadError,
+    undefined,
+    {},
+    ResourcesCatalogReadQueryParams,
+    ResourcesCatalogReadPathParams
+  >({ url: '/accounts/{accountId}/magic/cloud/resources/{resourceId}', method: 'get', ...variables, signal });
 
 export type MconnConnectorListPathParams = {
   accountId: Schemas.MconnAccountId;
@@ -73373,7 +75675,7 @@ export const namespaceWorkerDeleteNamespace = (
   signal?: AbortSignal
 ) =>
   fetch<
-    Schemas.WorkersNamespaceDeleteResponse,
+    Schemas.WorkersApiResponseNullResult,
     NamespaceWorkerDeleteNamespaceError,
     undefined,
     {},
@@ -73717,7 +76019,7 @@ export type NamespaceWorkerListScriptSecretsPathParams = {
 
 export type NamespaceWorkerListScriptSecretsError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.WorkersApiResponseCommon;
+  payload: Schemas.WorkersApiResponseCommonFailure;
 }>;
 
 export type NamespaceWorkerListScriptSecretsResponse = Schemas.WorkersApiResponseCommon & {
@@ -73729,7 +76031,7 @@ export type NamespaceWorkerListScriptSecretsVariables = {
 } & FetcherExtraProps;
 
 /**
- * List secrets from a script uploaded to a Workers for Platforms namespace.
+ * List secrets bound to a script uploaded to a Workers for Platforms namespace.
  */
 export const namespaceWorkerListScriptSecrets = (
   variables: NamespaceWorkerListScriptSecretsVariables,
@@ -73757,7 +76059,7 @@ export type NamespaceWorkerPutScriptSecretsPathParams = {
 
 export type NamespaceWorkerPutScriptSecretsError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.WorkersApiResponseCommon;
+  payload: Schemas.WorkersApiResponseCommonFailure;
 }>;
 
 export type NamespaceWorkerPutScriptSecretsResponse = Schemas.WorkersApiResponseCommon & {
@@ -73770,7 +76072,7 @@ export type NamespaceWorkerPutScriptSecretsVariables = {
 } & FetcherExtraProps;
 
 /**
- * Put secrets to a script uploaded to a Workers for Platforms namespace.
+ * Add a secret to a script uploaded to a Workers for Platforms namespace.
  */
 export const namespaceWorkerPutScriptSecrets = (
   variables: NamespaceWorkerPutScriptSecretsVariables,
@@ -73790,6 +76092,43 @@ export const namespaceWorkerPutScriptSecrets = (
     signal
   });
 
+export type NamespaceWorkerDeleteScriptSecretPathParams = {
+  accountId: Schemas.WorkersIdentifier;
+  dispatchNamespace: Schemas.WorkersDispatchNamespaceName;
+  scriptName: Schemas.WorkersScriptName;
+  secretName: Schemas.WorkersSecretName;
+};
+
+export type NamespaceWorkerDeleteScriptSecretError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.WorkersApiResponseCommonFailure;
+}>;
+
+export type NamespaceWorkerDeleteScriptSecretVariables = {
+  pathParams: NamespaceWorkerDeleteScriptSecretPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Remove a secret from a script uploaded to a Workers for Platforms namespace.
+ */
+export const namespaceWorkerDeleteScriptSecret = (
+  variables: NamespaceWorkerDeleteScriptSecretVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.WorkersApiResponseNullResult,
+    NamespaceWorkerDeleteScriptSecretError,
+    undefined,
+    {},
+    {},
+    NamespaceWorkerDeleteScriptSecretPathParams
+  >({
+    url: '/accounts/{accountId}/workers/dispatch/namespaces/{dispatchNamespace}/scripts/{scriptName}/secrets/{secretName}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
 export type NamespaceWorkerGetScriptSecretsPathParams = {
   accountId: Schemas.WorkersIdentifier;
   dispatchNamespace: Schemas.WorkersDispatchNamespaceName;
@@ -73799,7 +76138,7 @@ export type NamespaceWorkerGetScriptSecretsPathParams = {
 
 export type NamespaceWorkerGetScriptSecretsError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.WorkersApiResponseCommon;
+  payload: Schemas.WorkersApiResponseCommonFailure;
 }>;
 
 export type NamespaceWorkerGetScriptSecretsResponse = Schemas.WorkersApiResponseCommon & {
@@ -73811,7 +76150,7 @@ export type NamespaceWorkerGetScriptSecretsVariables = {
 } & FetcherExtraProps;
 
 /**
- * Get secret from a script uploaded to a Workers for Platforms namespace.
+ * Get a given secret binding (value omitted) on a script uploaded to a Workers for Platforms namespace.
  */
 export const namespaceWorkerGetScriptSecrets = (
   variables: NamespaceWorkerGetScriptSecretsVariables,
@@ -74010,10 +76349,6 @@ export type NamespaceWorkerDeleteScriptTagError = Fetcher.ErrorWrapper<{
   payload: Schemas.WorkersApiResponseCommon;
 }>;
 
-export type NamespaceWorkerDeleteScriptTagResponse = Schemas.WorkersApiResponseCommon & {
-  result?: any | null;
-};
-
 export type NamespaceWorkerDeleteScriptTagVariables = {
   pathParams: NamespaceWorkerDeleteScriptTagPathParams;
 } & FetcherExtraProps;
@@ -74026,7 +76361,7 @@ export const namespaceWorkerDeleteScriptTag = (
   signal?: AbortSignal
 ) =>
   fetch<
-    NamespaceWorkerDeleteScriptTagResponse,
+    Schemas.WorkersApiResponseNullResult,
     NamespaceWorkerDeleteScriptTagError,
     undefined,
     {},
@@ -74051,10 +76386,6 @@ export type NamespaceWorkerPutScriptTagError = Fetcher.ErrorWrapper<{
   payload: Schemas.WorkersApiResponseCommon;
 }>;
 
-export type NamespaceWorkerPutScriptTagResponse = Schemas.WorkersApiResponseCommon & {
-  result?: any | null;
-};
-
 export type NamespaceWorkerPutScriptTagVariables = {
   pathParams: NamespaceWorkerPutScriptTagPathParams;
 } & FetcherExtraProps;
@@ -74064,7 +76395,7 @@ export type NamespaceWorkerPutScriptTagVariables = {
  */
 export const namespaceWorkerPutScriptTag = (variables: NamespaceWorkerPutScriptTagVariables, signal?: AbortSignal) =>
   fetch<
-    NamespaceWorkerPutScriptTagResponse,
+    Schemas.WorkersApiResponseNullResult,
     NamespaceWorkerPutScriptTagError,
     undefined,
     {},
@@ -74746,6 +77077,132 @@ export const workerScriptSettingsPatchSettings = (
   >({
     url: '/accounts/{accountId}/workers/scripts/{scriptName}/script-settings',
     method: 'patch',
+    ...variables,
+    signal
+  });
+
+export type WorkerListScriptSecretsPathParams = {
+  accountId: Schemas.WorkersIdentifier;
+  scriptName: Schemas.WorkersScriptName;
+};
+
+export type WorkerListScriptSecretsError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.WorkersApiResponseCommonFailure;
+}>;
+
+export type WorkerListScriptSecretsResponse = Schemas.WorkersApiResponseCommon & {
+  result?: Schemas.WorkersSecretResponse[];
+};
+
+export type WorkerListScriptSecretsVariables = {
+  pathParams: WorkerListScriptSecretsPathParams;
+} & FetcherExtraProps;
+
+/**
+ * List secrets bound to a script.
+ */
+export const workerListScriptSecrets = (variables: WorkerListScriptSecretsVariables, signal?: AbortSignal) =>
+  fetch<
+    WorkerListScriptSecretsResponse,
+    WorkerListScriptSecretsError,
+    undefined,
+    {},
+    {},
+    WorkerListScriptSecretsPathParams
+  >({ url: '/accounts/{accountId}/workers/scripts/{scriptName}/secrets', method: 'get', ...variables, signal });
+
+export type WorkerPutScriptSecretPathParams = {
+  accountId: Schemas.WorkersIdentifier;
+  scriptName: Schemas.WorkersScriptName;
+};
+
+export type WorkerPutScriptSecretError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.WorkersApiResponseCommonFailure;
+}>;
+
+export type WorkerPutScriptSecretResponse = Schemas.WorkersApiResponseCommon & {
+  result?: Schemas.WorkersSecretResponse;
+};
+
+export type WorkerPutScriptSecretVariables = {
+  body?: Schemas.WorkersSecret;
+  pathParams: WorkerPutScriptSecretPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Add a secret to a script.
+ */
+export const workerPutScriptSecret = (variables: WorkerPutScriptSecretVariables, signal?: AbortSignal) =>
+  fetch<
+    WorkerPutScriptSecretResponse,
+    WorkerPutScriptSecretError,
+    Schemas.WorkersSecret,
+    {},
+    {},
+    WorkerPutScriptSecretPathParams
+  >({ url: '/accounts/{accountId}/workers/scripts/{scriptName}/secrets', method: 'put', ...variables, signal });
+
+export type WorkerDeleteScriptSecretPathParams = {
+  accountId: Schemas.WorkersIdentifier;
+  scriptName: Schemas.WorkersScriptName;
+  secretName: Schemas.WorkersSecretName;
+};
+
+export type WorkerDeleteScriptSecretError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.WorkersApiResponseCommonFailure;
+}>;
+
+export type WorkerDeleteScriptSecretVariables = {
+  pathParams: WorkerDeleteScriptSecretPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Remove a secret from a script.
+ */
+export const workerDeleteScriptSecret = (variables: WorkerDeleteScriptSecretVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.WorkersApiResponseNullResult,
+    WorkerDeleteScriptSecretError,
+    undefined,
+    {},
+    {},
+    WorkerDeleteScriptSecretPathParams
+  >({
+    url: '/accounts/{accountId}/workers/scripts/{scriptName}/secrets/{secretName}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type WorkerGetScriptSecretPathParams = {
+  accountId: Schemas.WorkersIdentifier;
+  scriptName: Schemas.WorkersScriptName;
+  secretName: Schemas.WorkersSecretName;
+};
+
+export type WorkerGetScriptSecretError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.WorkersApiResponseCommonFailure;
+}>;
+
+export type WorkerGetScriptSecretResponse = Schemas.WorkersApiResponseCommon & {
+  result?: Schemas.WorkersSecretResponse;
+};
+
+export type WorkerGetScriptSecretVariables = {
+  pathParams: WorkerGetScriptSecretPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Get a given secret binding (value omitted) on a script.
+ */
+export const workerGetScriptSecret = (variables: WorkerGetScriptSecretVariables, signal?: AbortSignal) =>
+  fetch<WorkerGetScriptSecretResponse, WorkerGetScriptSecretError, undefined, {}, {}, WorkerGetScriptSecretPathParams>({
+    url: '/accounts/{accountId}/workers/scripts/{scriptName}/secrets/{secretName}',
+    method: 'get',
     ...variables,
     signal
   });
@@ -75965,6 +78422,115 @@ export const worCreateNewWorkflowInstance = (variables: WorCreateNewWorkflowInst
     WorCreateNewWorkflowInstancePathParams
   >({ url: '/accounts/{accountId}/workflows/{workflowName}/instances', method: 'post', ...variables, signal });
 
+export type WorBatchCreateWorkflowInstancePathParams = {
+  /**
+   * @maxLength 64
+   * @minLength 1
+   * @pattern ^[a-zA-Z0-9_][a-zA-Z0-9-_]*$
+   */
+  workflowName: string;
+  accountId: string;
+};
+
+export type WorBatchCreateWorkflowInstanceError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors: {
+          code: number;
+          message: string;
+        }[];
+        messages: string[];
+        result: any | null;
+        success: false;
+      };
+    }
+  | {
+      status: 404;
+      payload: {
+        errors: {
+          code: number;
+          message: string;
+        }[];
+        messages: string[];
+        result: any | null;
+        success: false;
+      };
+    }
+>;
+
+export type WorBatchCreateWorkflowInstanceResponse = {
+  errors: {
+    code: number;
+    message: string;
+  }[];
+  messages: {
+    code: number;
+    message: string;
+  }[];
+  result: {
+    /**
+     * @maxLength 64
+     * @minLength 1
+     * @pattern ^[a-zA-Z0-9_][a-zA-Z0-9-_]*$
+     */
+    id: string;
+    status:
+      | 'queued'
+      | 'running'
+      | 'paused'
+      | 'errored'
+      | 'terminated'
+      | 'complete'
+      | 'waitingForPause'
+      | 'waiting'
+      | 'unknown';
+    /**
+     * @format uuid
+     */
+    version_id: string;
+    /**
+     * @format uuid
+     */
+    workflow_id: string;
+  }[];
+  result_info?: {
+    count: number;
+    page: number;
+    per_page: number;
+    total_count: number;
+  };
+  success: true;
+};
+
+export type WorBatchCreateWorkflowInstanceRequestBody = {
+  /**
+   * @maximum 64
+   * @minimum 1
+   * @pattern ^[a-zA-Z0-9_][a-zA-Z0-9-_]*$
+   */
+  instance_id?: string;
+  params?: Record<string, any>;
+}[];
+
+export type WorBatchCreateWorkflowInstanceVariables = {
+  body?: WorBatchCreateWorkflowInstanceRequestBody;
+  pathParams: WorBatchCreateWorkflowInstancePathParams;
+} & FetcherExtraProps;
+
+export const worBatchCreateWorkflowInstance = (
+  variables: WorBatchCreateWorkflowInstanceVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    WorBatchCreateWorkflowInstanceResponse,
+    WorBatchCreateWorkflowInstanceError,
+    WorBatchCreateWorkflowInstanceRequestBody,
+    {},
+    {},
+    WorBatchCreateWorkflowInstancePathParams
+  >({ url: '/accounts/{accountId}/workflows/{workflowName}/instances/batch', method: 'post', ...variables, signal });
+
 export type WorDescribeWorkflowInstancePathParams = {
   /**
    * @maxLength 64
@@ -76967,7 +79533,7 @@ export const dlpRiskScoreResetPost = (variables: DlpRiskScoreResetPostVariables,
   });
 
 export type OriginCaListCertificatesQueryParams = {
-  zone_id?: Schemas.TlsCertificatesAndHostnamesIdentifier;
+  zone_id: Schemas.TlsCertificatesAndHostnamesIdentifier;
 };
 
 export type OriginCaListCertificatesError = Fetcher.ErrorWrapper<{
@@ -76977,7 +79543,7 @@ export type OriginCaListCertificatesError = Fetcher.ErrorWrapper<{
 }>;
 
 export type OriginCaListCertificatesVariables = {
-  queryParams?: OriginCaListCertificatesQueryParams;
+  queryParams: OriginCaListCertificatesQueryParams;
 } & FetcherExtraProps;
 
 /**
@@ -78693,6 +81259,126 @@ export type RadarGetDnsAs112TimeseriesByDnssecQueryParams = {
    */
   continent?: string[];
   /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
+  /**
    * Format in which results will be returned.
    *
    * @example json
@@ -78850,6 +81536,126 @@ export type RadarGetDnsAs112TimeseriesByEdnsQueryParams = {
    * @example EU,NA
    */
   continent?: string[];
+  /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
   /**
    * Format in which results will be returned.
    *
@@ -79009,6 +81815,126 @@ export type RadarGetDnsAs112TimeseriesByIpVersionQueryParams = {
    */
   continent?: string[];
   /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
+  /**
    * Format in which results will be returned.
    *
    * @example json
@@ -79167,6 +82093,122 @@ export type RadarGetDnsAs112TimeseriesByProtocolQueryParams = {
    */
   continent?: string[];
   /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
+  /**
    * Format in which results will be returned.
    *
    * @example json
@@ -79248,13 +82290,21 @@ export type RadarGetDnsAs112TimeseriesByProtocolResponse = {
     };
     summary_0: {
       /**
-       * @example 1
+       * @example 10
        */
-      tcp: string;
+      HTTPS: string;
       /**
-       * @example 99
+       * @example 10
        */
-      udp: string;
+      TCP: string;
+      /**
+       * @example 10
+       */
+      TLS: string;
+      /**
+       * @example 70
+       */
+      UDP: string;
     };
   };
   /**
@@ -79324,6 +82374,33 @@ export type RadarGetDnsAs112TimeseriesByQueryTypeQueryParams = {
    * @example EU,NA
    */
   continent?: string[];
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
   /**
    * Limits the number of objects per group to the top items within the specified time range. If there are more items than the limit, the response will include the count of items, with any remaining items grouped together under an "other" category.
    *
@@ -79484,6 +82561,103 @@ export type RadarGetDnsAs112TimeseriesByResponseCodesQueryParams = {
    * @example EU,NA
    */
   continent?: string[];
+  /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
   /**
    * Limits the number of objects per group to the top items within the specified time range. If there are more items than the limit, the response will include the count of items, with any remaining items grouped together under an "other" category.
    *
@@ -79651,6 +82825,126 @@ export type RadarGetDnsAs112TimeseriesQueryParams = {
    */
   continent?: string[];
   /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
+  /**
    * Format in which results will be returned.
    *
    * @example json
@@ -79806,6 +83100,126 @@ export type RadarGetDnsAs112TimeseriesGroupByDnssecQueryParams = {
    */
   continent?: string[];
   /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
+  /**
    * Format in which results will be returned.
    *
    * @example json
@@ -79908,6 +83322,126 @@ export type RadarGetDnsAs112TimeseriesGroupByEdnsQueryParams = {
    * @example EU,NA
    */
   continent?: string[];
+  /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
   /**
    * Format in which results will be returned.
    *
@@ -80012,6 +83546,126 @@ export type RadarGetDnsAs112TimeseriesGroupByIpVersionQueryParams = {
    */
   continent?: string[];
   /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
+  /**
    * Format in which results will be returned.
    *
    * @example json
@@ -80115,6 +83769,122 @@ export type RadarGetDnsAs112TimeseriesGroupByProtocolQueryParams = {
    */
   continent?: string[];
   /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
+  /**
    * Format in which results will be returned.
    *
    * @example json
@@ -80140,8 +83910,10 @@ export type RadarGetDnsAs112TimeseriesGroupByProtocolResponse = {
   result: {
     meta: Record<string, any>;
     serie_0: {
-      tcp: string[];
-      udp: string[];
+      HTTPS: string[];
+      TCP: string[];
+      TLS: string[];
+      UDP: string[];
     };
   };
   /**
@@ -80218,6 +83990,33 @@ export type RadarGetDnsAs112TimeseriesGroupByQueryTypeQueryParams = {
    */
   continent?: string[];
   /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  /**
+   * Filters results by DNS response code.
+   */
+  responseCode?:
+    | 'NOERROR'
+    | 'FORMERR'
+    | 'SERVFAIL'
+    | 'NXDOMAIN'
+    | 'NOTIMP'
+    | 'REFUSED'
+    | 'YXDOMAIN'
+    | 'YXRRSET'
+    | 'NXRRSET'
+    | 'NOTAUTH'
+    | 'NOTZONE'
+    | 'BADSIG'
+    | 'BADKEY'
+    | 'BADTIME'
+    | 'BADMODE'
+    | 'BADNAME'
+    | 'BADALG'
+    | 'BADTRUNC'
+    | 'BADCOOKIE';
+  /**
    * Limits the number of objects per group to the top items within the specified time range. If there are more items than the limit, the response will include the count of items, with any remaining items grouped together under an "other" category.
    *
    * @example 10
@@ -80248,12 +84047,13 @@ export type RadarGetDnsAs112TimeseriesGroupByQueryTypeError = Fetcher.ErrorWrapp
 export type RadarGetDnsAs112TimeseriesGroupByQueryTypeResponse = {
   result: {
     meta: Record<string, any>;
+    /**
+     * @example {"A":["20"],"AAAA":["20"],"HTTPS":["20"],"NS":["20"],"PTR":["20"],"timestamps":["2023-08-08T10:15:00Z"]}
+     */
     serie_0: {
-      A: string[];
-      AAAA: string[];
-      PTR: string[];
-      SOA: string[];
-      SRV: string[];
+      timestamps: string[];
+    } & {
+      [key: string]: string[];
     };
   };
   /**
@@ -80330,6 +84130,103 @@ export type RadarGetDnsAs112TimeseriesGroupByResponseCodesQueryParams = {
    */
   continent?: string[];
   /**
+   * Filters results by DNS query type.
+   */
+  queryType?:
+    | 'A'
+    | 'AAAA'
+    | 'A6'
+    | 'AFSDB'
+    | 'ANY'
+    | 'APL'
+    | 'ATMA'
+    | 'AXFR'
+    | 'CAA'
+    | 'CDNSKEY'
+    | 'CDS'
+    | 'CERT'
+    | 'CNAME'
+    | 'CSYNC'
+    | 'DHCID'
+    | 'DLV'
+    | 'DNAME'
+    | 'DNSKEY'
+    | 'DOA'
+    | 'DS'
+    | 'EID'
+    | 'EUI48'
+    | 'EUI64'
+    | 'GPOS'
+    | 'GID'
+    | 'HINFO'
+    | 'HIP'
+    | 'HTTPS'
+    | 'IPSECKEY'
+    | 'ISDN'
+    | 'IXFR'
+    | 'KEY'
+    | 'KX'
+    | 'L32'
+    | 'L64'
+    | 'LOC'
+    | 'LP'
+    | 'MAILA'
+    | 'MAILB'
+    | 'MB'
+    | 'MD'
+    | 'MF'
+    | 'MG'
+    | 'MINFO'
+    | 'MR'
+    | 'MX'
+    | 'NAPTR'
+    | 'NB'
+    | 'NBSTAT'
+    | 'NID'
+    | 'NIMLOC'
+    | 'NINFO'
+    | 'NS'
+    | 'NSAP'
+    | 'NSEC'
+    | 'NSEC3'
+    | 'NSEC3PARAM'
+    | 'NULL'
+    | 'NXT'
+    | 'OPENPGPKEY'
+    | 'OPT'
+    | 'PTR'
+    | 'PX'
+    | 'RKEY'
+    | 'RP'
+    | 'RRSIG'
+    | 'RT'
+    | 'SIG'
+    | 'SINK'
+    | 'SMIMEA'
+    | 'SOA'
+    | 'SPF'
+    | 'SRV'
+    | 'SSHFP'
+    | 'SVCB'
+    | 'TA'
+    | 'TALINK'
+    | 'TKEY'
+    | 'TLSA'
+    | 'TSIG'
+    | 'TXT'
+    | 'UINFO'
+    | 'UID'
+    | 'UNSPEC'
+    | 'URI'
+    | 'WKS'
+    | 'X25'
+    | 'ZONEMD'
+    | null;
+  /**
+   * Filters results by DNS transport protocol.
+   */
+  protocol?: 'UDP' | 'TCP' | 'HTTPS' | 'TLS';
+  /**
    * Limits the number of objects per group to the top items within the specified time range. If there are more items than the limit, the response will include the count of items, with any remaining items grouped together under an "other" category.
    *
    * @example 10
@@ -80360,9 +84257,13 @@ export type RadarGetDnsAs112TimeseriesGroupByResponseCodesError = Fetcher.ErrorW
 export type RadarGetDnsAs112TimeseriesGroupByResponseCodesResponse = {
   result: {
     meta: Record<string, any>;
+    /**
+     * @example {"NOERROR":["70"],"NOTIMP":["5"],"NXDOMAIN":["10"],"REFUSED":["5"],"SERVFAIL":["5"],"timestamps":["2023-08-08T10:15:00Z"]}
+     */
     serie_0: {
-      NOERROR: string[];
-      NXDOMAIN: string[];
+      timestamps: string[];
+    } & {
+      [key: string]: string[];
     };
   };
   /**
@@ -93962,12 +97863,13 @@ export type RadarGetDnsTimeseriesGroupByQueryTypeError = Fetcher.ErrorWrapper<{
 export type RadarGetDnsTimeseriesGroupByQueryTypeResponse = {
   result: {
     meta: Record<string, any>;
+    /**
+     * @example {"A":["20"],"AAAA":["20"],"HTTPS":["20"],"NS":["20"],"PTR":["20"],"timestamps":["2023-08-08T10:15:00Z"]}
+     */
     serie_0: {
-      A: string[];
-      AAAA: string[];
-      HTTPS: string[];
-      NS: string[];
-      PTR: string[];
+      timestamps: string[];
+    } & {
+      [key: string]: string[];
     };
   };
   /**
@@ -94181,12 +98083,13 @@ export type RadarGetDnsTimeseriesGroupByResponseCodeError = Fetcher.ErrorWrapper
 export type RadarGetDnsTimeseriesGroupByResponseCodeResponse = {
   result: {
     meta: Record<string, any>;
+    /**
+     * @example {"NOERROR":["70"],"NOTIMP":["5"],"NXDOMAIN":["10"],"REFUSED":["5"],"SERVFAIL":["5"],"timestamps":["2023-08-08T10:15:00Z"]}
+     */
     serie_0: {
-      NOERROR: string[];
-      NOTIMP: string[];
-      NXDOMAIN: string[];
-      REFUSED: string[];
-      SERVFAIL: string[];
+      timestamps: string[];
+    } & {
+      [key: string]: string[];
     };
   };
   /**
@@ -107963,6 +111866,482 @@ export const radarGetHttpTopLocationsByTlsVersion = (
     RadarGetHttpTopLocationsByTlsVersionQueryParams,
     RadarGetHttpTopLocationsByTlsVersionPathParams
   >({ url: '/radar/http/top/locations/tls_version/{tlsVersion}', method: 'get', ...variables, signal });
+
+export type RadarGetLeakedCredentialChecksSummaryByBotClassQueryParams = {
+  /**
+   * Array of names used to label the series in the response.
+   */
+  name?: string[];
+  /**
+   * Filters results by the specified date range. For example, use `7d` and `7dcontrol` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   *
+   * @example 7d
+   */
+  dateRange?: string[];
+  /**
+   * Start of the date range.
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateStart?: string[];
+  /**
+   * End of the date range (inclusive).
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateEnd?: string[];
+  /**
+   * Filters results by compromised credential status (clean vs. compromised).
+   *
+   * @example COMPROMISED
+   */
+  compromised?: ('CLEAN' | 'COMPROMISED')[];
+  /**
+   * Format in which results will be returned.
+   *
+   * @example json
+   */
+  format?: 'JSON' | 'CSV';
+};
+
+export type RadarGetLeakedCredentialChecksSummaryByBotClassError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      message: string;
+    }[];
+    result: Record<string, any>;
+    /**
+     * @example false
+     */
+    success: boolean;
+  };
+}>;
+
+export type RadarGetLeakedCredentialChecksSummaryByBotClassResponse = {
+  result: {
+    meta: {
+      confidenceInfo?: {
+        annotations?: {
+          /**
+           * @example ALL
+           */
+          dataSource: string;
+          /**
+           * @example Cable cut in Tonga
+           */
+          description: string;
+          /**
+           * @format date-time
+           */
+          endTime?: string;
+          /**
+           * @example OUTAGE
+           */
+          eventType: string;
+          /**
+           * @example true
+           */
+          isInstantaneous: boolean;
+          linkedUrl?: string;
+          /**
+           * @format date-time
+           */
+          startTime?: string;
+        }[];
+        level?: number;
+      };
+      dateRange: {
+        /**
+         * Adjusted end of date range.
+         *
+         * @example 2022-09-17T10:22:57.555Z
+         * @format date-time
+         */
+        endTime: string;
+        /**
+         * Adjusted start of date range.
+         *
+         * @example 2022-09-16T10:22:57.555Z
+         * @format date-time
+         */
+        startTime: string;
+      }[];
+      /**
+       * @example 2023-07-26T08:59:57Z
+       */
+      lastUpdated: string;
+      /**
+       * @example PERCENTAGE
+       */
+      normalization: string;
+    };
+    summary_0: {
+      /**
+       * @example 20
+       */
+      bot: string;
+      /**
+       * @example 80
+       */
+      human: string;
+    };
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RadarGetLeakedCredentialChecksSummaryByBotClassVariables = {
+  queryParams?: RadarGetLeakedCredentialChecksSummaryByBotClassQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves the distribution of HTTP authentication requests by bot class.
+ */
+export const radarGetLeakedCredentialChecksSummaryByBotClass = (
+  variables: RadarGetLeakedCredentialChecksSummaryByBotClassVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    RadarGetLeakedCredentialChecksSummaryByBotClassResponse,
+    RadarGetLeakedCredentialChecksSummaryByBotClassError,
+    undefined,
+    {},
+    RadarGetLeakedCredentialChecksSummaryByBotClassQueryParams,
+    {}
+  >({ url: '/radar/leaked_credential_checks/summary/bot_class', method: 'get', ...variables, signal });
+
+export type RadarGetLeakedCredentialChecksSummaryByCompromisedQueryParams = {
+  /**
+   * Array of names used to label the series in the response.
+   */
+  name?: string[];
+  /**
+   * Filters results by the specified date range. For example, use `7d` and `7dcontrol` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   *
+   * @example 7d
+   */
+  dateRange?: string[];
+  /**
+   * Start of the date range.
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateStart?: string[];
+  /**
+   * End of the date range (inclusive).
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateEnd?: string[];
+  /**
+   * Filters results by bot class. Refer to [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
+   *
+   * @example LIKELY_AUTOMATED
+   */
+  botClass?: ('LIKELY_AUTOMATED' | 'LIKELY_HUMAN')[];
+  /**
+   * Format in which results will be returned.
+   *
+   * @example json
+   */
+  format?: 'JSON' | 'CSV';
+};
+
+export type RadarGetLeakedCredentialChecksSummaryByCompromisedError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      message: string;
+    }[];
+    result: Record<string, any>;
+    /**
+     * @example false
+     */
+    success: boolean;
+  };
+}>;
+
+export type RadarGetLeakedCredentialChecksSummaryByCompromisedResponse = {
+  result: {
+    meta: {
+      confidenceInfo?: {
+        annotations?: {
+          /**
+           * @example ALL
+           */
+          dataSource: string;
+          /**
+           * @example Cable cut in Tonga
+           */
+          description: string;
+          /**
+           * @format date-time
+           */
+          endTime?: string;
+          /**
+           * @example OUTAGE
+           */
+          eventType: string;
+          /**
+           * @example true
+           */
+          isInstantaneous: boolean;
+          linkedUrl?: string;
+          /**
+           * @format date-time
+           */
+          startTime?: string;
+        }[];
+        level?: number;
+      };
+      dateRange: {
+        /**
+         * Adjusted end of date range.
+         *
+         * @example 2022-09-17T10:22:57.555Z
+         * @format date-time
+         */
+        endTime: string;
+        /**
+         * Adjusted start of date range.
+         *
+         * @example 2022-09-16T10:22:57.555Z
+         * @format date-time
+         */
+        startTime: string;
+      }[];
+      /**
+       * @example 2023-07-26T08:59:57Z
+       */
+      lastUpdated: string;
+      /**
+       * @example PERCENTAGE
+       */
+      normalization: string;
+    };
+    summary_0: {
+      /**
+       * @example 20
+       */
+      CLEAN: string;
+      /**
+       * @example 80
+       */
+      COMPROMISED: string;
+    };
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RadarGetLeakedCredentialChecksSummaryByCompromisedVariables = {
+  queryParams?: RadarGetLeakedCredentialChecksSummaryByCompromisedQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves the distribution of HTTP authentication requests by compromised credential status.
+ */
+export const radarGetLeakedCredentialChecksSummaryByCompromised = (
+  variables: RadarGetLeakedCredentialChecksSummaryByCompromisedVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    RadarGetLeakedCredentialChecksSummaryByCompromisedResponse,
+    RadarGetLeakedCredentialChecksSummaryByCompromisedError,
+    undefined,
+    {},
+    RadarGetLeakedCredentialChecksSummaryByCompromisedQueryParams,
+    {}
+  >({ url: '/radar/leaked_credential_checks/summary/compromised', method: 'get', ...variables, signal });
+
+export type RadarGetLeakedCredentialChecksTimeseriesGroupByBotClassQueryParams = {
+  /**
+   * Aggregation interval results should be returned in (for example, in 15 minutes or 1 hour intervals). Refer to [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
+   *
+   * @example 1h
+   */
+  aggInterval?: '15m' | '1h' | '1d' | '1w';
+  /**
+   * Array of names used to label the series in the response.
+   */
+  name?: string[];
+  /**
+   * Filters results by the specified date range. For example, use `7d` and `7dcontrol` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   *
+   * @example 7d
+   */
+  dateRange?: string[];
+  /**
+   * Start of the date range.
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateStart?: string[];
+  /**
+   * End of the date range (inclusive).
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateEnd?: string[];
+  /**
+   * Filters results by compromised credential status (clean vs. compromised).
+   *
+   * @example COMPROMISED
+   */
+  compromised?: ('CLEAN' | 'COMPROMISED')[];
+  /**
+   * Format in which results will be returned.
+   *
+   * @example json
+   */
+  format?: 'JSON' | 'CSV';
+};
+
+export type RadarGetLeakedCredentialChecksTimeseriesGroupByBotClassError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      message: string;
+    }[];
+    result: Record<string, any>;
+    /**
+     * @example false
+     */
+    success: boolean;
+  };
+}>;
+
+export type RadarGetLeakedCredentialChecksTimeseriesGroupByBotClassResponse = {
+  result: {
+    meta: Record<string, any>;
+    serie_0: {
+      bot: string[];
+      human: string[];
+      timestamps: string[];
+    };
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RadarGetLeakedCredentialChecksTimeseriesGroupByBotClassVariables = {
+  queryParams?: RadarGetLeakedCredentialChecksTimeseriesGroupByBotClassQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves the distribution of HTTP authentication requests by bot class over time.
+ */
+export const radarGetLeakedCredentialChecksTimeseriesGroupByBotClass = (
+  variables: RadarGetLeakedCredentialChecksTimeseriesGroupByBotClassVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    RadarGetLeakedCredentialChecksTimeseriesGroupByBotClassResponse,
+    RadarGetLeakedCredentialChecksTimeseriesGroupByBotClassError,
+    undefined,
+    {},
+    RadarGetLeakedCredentialChecksTimeseriesGroupByBotClassQueryParams,
+    {}
+  >({ url: '/radar/leaked_credential_checks/timeseries_groups/bot_class', method: 'get', ...variables, signal });
+
+export type RadarGetLeakedCredentialChecksTimeseriesGroupByCompromisedQueryParams = {
+  /**
+   * Aggregation interval results should be returned in (for example, in 15 minutes or 1 hour intervals). Refer to [Aggregation intervals](https://developers.cloudflare.com/radar/concepts/aggregation-intervals/).
+   *
+   * @example 1h
+   */
+  aggInterval?: '15m' | '1h' | '1d' | '1w';
+  /**
+   * Array of names used to label the series in the response.
+   */
+  name?: string[];
+  /**
+   * Filters results by the specified date range. For example, use `7d` and `7dcontrol` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   *
+   * @example 7d
+   */
+  dateRange?: string[];
+  /**
+   * Start of the date range.
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateStart?: string[];
+  /**
+   * End of the date range (inclusive).
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateEnd?: string[];
+  /**
+   * Filters results by bot class. Refer to [Bot classes](https://developers.cloudflare.com/radar/concepts/bot-classes/).
+   *
+   * @example LIKELY_AUTOMATED
+   */
+  botClass?: ('LIKELY_AUTOMATED' | 'LIKELY_HUMAN')[];
+  /**
+   * Format in which results will be returned.
+   *
+   * @example json
+   */
+  format?: 'JSON' | 'CSV';
+};
+
+export type RadarGetLeakedCredentialChecksTimeseriesGroupByCompromisedError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      message: string;
+    }[];
+    result: Record<string, any>;
+    /**
+     * @example false
+     */
+    success: boolean;
+  };
+}>;
+
+export type RadarGetLeakedCredentialChecksTimeseriesGroupByCompromisedResponse = {
+  result: {
+    meta: Record<string, any>;
+    serie_0: {
+      CLEAN: string[];
+      COMPROMISED: string[];
+      timestamps: string[];
+    };
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RadarGetLeakedCredentialChecksTimeseriesGroupByCompromisedVariables = {
+  queryParams?: RadarGetLeakedCredentialChecksTimeseriesGroupByCompromisedQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves the distribution of HTTP authentication requests by compromised credential status over time.
+ */
+export const radarGetLeakedCredentialChecksTimeseriesGroupByCompromised = (
+  variables: RadarGetLeakedCredentialChecksTimeseriesGroupByCompromisedVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    RadarGetLeakedCredentialChecksTimeseriesGroupByCompromisedResponse,
+    RadarGetLeakedCredentialChecksTimeseriesGroupByCompromisedError,
+    undefined,
+    {},
+    RadarGetLeakedCredentialChecksTimeseriesGroupByCompromisedQueryParams,
+    {}
+  >({ url: '/radar/leaked_credential_checks/timeseries_groups/compromised', method: 'get', ...variables, signal });
 
 export type RadarGetNetflowsSummaryQueryParams = {
   /**
@@ -129275,33 +133654,6 @@ export const sslDetectorAutomaticModePatchEnrollment = (
 
 export const operationsByTag = {
   accounts: { accountsListAccounts, accountCreation, accountDeletion, accountsAccountDetails, accountsUpdateAccount },
-  event: {
-    postEventList,
-    postEventCreate,
-    postEventCreateBulk,
-    getEventRawReadDS,
-    deleteEventReferenceDelete,
-    postEventReferenceCreate,
-    deleteEventTagDelete,
-    postEventTagCreate,
-    deleteEventDelete,
-    getEventRead,
-    postEventUpdate,
-    postEventInsightCreate,
-    deleteEventInsightDelete,
-    getEventInsightRead,
-    postEventInsightUpdate,
-    getEventRawRead,
-    postEventRawUpdate
-  },
-  attacker: { getAttackerList },
-  category: { getCategoryList, postCategoryCreate, deleteCategoryDelete, getCategoryRead, postCategoryUpdate },
-  country: { getCountryRead },
-  cron: { getCronUpdateRead, postCronUpdate },
-  dataset: { getDatasetList, postDatasetCreate, getDatasetRead, postDatasetUpdate },
-  indicatorTypes: { getIndicatorTypesList },
-  tag: { postTagCreate },
-  targetIndustry: { getTargetIndustryList },
   requestForInformationRFI: {
     cloudforceOneRequestList,
     cloudforceOneRequestConstants,
@@ -129520,6 +133872,7 @@ export const operationsByTag = {
   aIGatewayGateways: {
     aigConfigListGateway,
     aigConfigCreateGateway,
+    aigConfigGetGatewayUrl,
     aigConfigDeleteGateway,
     aigConfigFetchGateway,
     aigConfigUpdateGateway
@@ -129705,7 +134058,52 @@ export const operationsByTag = {
     accountsTurnstileWidgetUpdate,
     accountsTurnstileWidgetRotateSecret
   },
-  scans: { deleteDeleteScans, getConfigFetch, postConfigCreate, getGetOpenPorts, getGetScans, postRetryScans },
+  event: {
+    postEventList,
+    postEventCreate,
+    postEventCreateBulk,
+    deleteEventTagDelete,
+    postEventTagCreate,
+    getEventRawReadDS,
+    deleteEventReferenceDelete,
+    postEventReferenceCreate,
+    deleteEventDelete,
+    getEventRead,
+    patchEventUpdate,
+    postEventUpdate,
+    postEventInsightCreate,
+    deleteEventInsightDelete,
+    getEventInsightRead,
+    patchEventInsightUpdate,
+    postEventInsightUpdate,
+    getEventRawRead,
+    patchEventRawUpdate,
+    postEventRawUpdate
+  },
+  attacker: { getAttackerList },
+  category: {
+    getCategoryList,
+    postCategoryCreate,
+    deleteCategoryDelete,
+    getCategoryRead,
+    patchCategoryUpdate,
+    postCategoryUpdate
+  },
+  country: { getCountryRead },
+  cron: { getCronUpdateRead, patchCronUpdate, postCronUpdate },
+  dataset: { getDatasetList, postDatasetCreate, getDatasetRead, patchDatasetUpdate, postDatasetUpdate },
+  indicatorTypes: { getIndicatorTypesList },
+  tag: { postTagCreate },
+  targetIndustry: { getTargetIndustryList },
+  scans: {
+    getConfigFetch,
+    postConfigCreate,
+    deleteDeleteScans,
+    postConfigUpdate,
+    getGetOpenPorts,
+    getGetScans,
+    postRetryScans
+  },
   cNIs: { listCnis, createCni, deleteCni, getCni, updateCni },
   interconnects: {
     listInterconnects,
@@ -130147,6 +134545,42 @@ export const operationsByTag = {
     magicInterconnectsListInterconnectDetails,
     magicInterconnectsUpdateInterconnect
   },
+  catalogSync: {
+    catalogSyncsList,
+    catalogSyncsCreate,
+    catalogSyncsPrebuiltPoliciesList,
+    catalogSyncsDelete,
+    catalogSyncsRead,
+    catalogSyncsPatch,
+    catalogSyncsUpdate,
+    catalogSyncsRefresh
+  },
+  onRamps: {
+    onrampsList,
+    onrampsCreate,
+    onrampsMwanAddrSpaceRead,
+    onrampsMwanAddrSpacePatch,
+    onrampsMwanAddrSpaceUpdate,
+    onrampsDelete,
+    onrampsRead,
+    onrampsPatch,
+    onrampsUpdate,
+    onrampsApply,
+    onrampsExport,
+    onrampsPlan
+  },
+  cloudIntegrations: {
+    providersList,
+    providersCreate,
+    providersDiscoverAll,
+    providersDelete,
+    providersRead,
+    providersPatch,
+    providersUpdate,
+    providersDiscover,
+    providersInitialSetup
+  },
+  resources: { resourcesCatalogList, resourcesCatalogExport, resourcesCatalogPolicyPreview, resourcesCatalogRead },
   magicConnectors: {
     mconnConnectorList,
     mconnConnectorFetch,
@@ -130561,6 +134995,10 @@ export const operationsByTag = {
     workerScriptGetContent,
     workerScriptSettingsGetSettings,
     workerScriptSettingsPatchSettings,
+    workerListScriptSecrets,
+    workerPutScriptSecret,
+    workerDeleteScriptSecret,
+    workerGetScriptSecret,
     workerScriptGetSettings,
     workerScriptPatchSettings,
     workerScriptGetSubdomain,
@@ -130582,6 +135020,7 @@ export const operationsByTag = {
     namespaceWorkerPutScriptContent,
     namespaceWorkerListScriptSecrets,
     namespaceWorkerPutScriptSecrets,
+    namespaceWorkerDeleteScriptSecret,
     namespaceWorkerGetScriptSecrets,
     namespaceWorkerGetScriptSettings,
     namespaceWorkerPatchScriptSettings,
@@ -130618,6 +135057,7 @@ export const operationsByTag = {
     worCreateOrModifyWorkflow,
     worListWorkflowInstances,
     worCreateNewWorkflowInstance,
+    worBatchCreateWorkflowInstance,
     worDescribeWorkflowInstance,
     worChangeStatusWorkflowInstance,
     worListWorkflowVersions,
@@ -130847,6 +135287,12 @@ export const operationsByTag = {
     radarGetHttpTopLocationsByIpVersion,
     radarGetHttpTopLocationsByOperatingSystem,
     radarGetHttpTopLocationsByTlsVersion
+  },
+  radarLeakedCredentialChecks: {
+    radarGetLeakedCredentialChecksSummaryByBotClass,
+    radarGetLeakedCredentialChecksSummaryByCompromised,
+    radarGetLeakedCredentialChecksTimeseriesGroupByBotClass,
+    radarGetLeakedCredentialChecksTimeseriesGroupByCompromised
   },
   radarNetFlows: {
     radarGetNetflowsSummary,

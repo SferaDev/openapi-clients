@@ -3038,7 +3038,8 @@ export type AccessAppRequest =
   | (AccessWarpProps & AccessAppReqEmbeddedPolicies & AccessAppReqEmbeddedScimConfig)
   | (AccessBisoProps & AccessAppReqEmbeddedPolicies & AccessAppReqEmbeddedScimConfig)
   | (AccessBookmarkProps & AccessAppReqEmbeddedScimConfig)
-  | (AccessInfraProps & AccessInfraAppReqEmbeddedPolicies);
+  | (AccessInfraProps & AccessInfraAppReqEmbeddedPolicies)
+  | (AccessRdpProps & AccessAppReqEmbeddedPolicies & AccessAppReqEmbeddedScimConfig);
 
 /**
  * The policies that Access applies to the application.
@@ -3063,7 +3064,8 @@ export type AccessAppResponse =
   | (AccessBasicAppResponseProps & AccessWarpProps & AccessAppRespEmbeddedPolicies)
   | (AccessBasicAppResponseProps & AccessBisoProps & AccessAppRespEmbeddedPolicies)
   | (AccessBasicAppResponseProps & AccessBookmarkProps)
-  | (AccessBasicAppResponseProps & AccessInfraProps & AccessInfraAppRespEmbeddedPolicies);
+  | (AccessBasicAppResponseProps & AccessInfraProps & AccessInfraAppRespEmbeddedPolicies)
+  | (AccessBasicAppResponseProps & AccessRdpProps & AccessAppRespEmbeddedPolicies);
 
 /**
  * The unique identifier for the Access application.
@@ -5856,6 +5858,42 @@ export type AccessPurposeJustificationRequired = boolean;
  * @maxLength 16
  */
 export type AccessRayId = string;
+
+/**
+ * Contains the targets secured by the application.
+ */
+export type AccessRdpProps = {
+  target_criteria?: AccessTargetCriteria[];
+  allow_authenticate_via_warp?: AccessSchemasAllowAuthenticateViaWarp;
+  allowed_idps?: AccessAllowedIdps;
+  app_launcher_visible?: AccessAppLauncherVisible;
+  auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
+  cors_headers?: AccessCorsHeaders;
+  custom_deny_message?: AccessCustomDenyMessage;
+  custom_deny_url?: AccessCustomDenyUrl;
+  custom_non_identity_deny_url?: AccessCustomNonIdentityDenyUrl;
+  custom_pages?: AccessSchemasCustomPages;
+  destinations?: AccessDestinations;
+  domain: AccessDomain;
+  enable_binding_cookie?: AccessEnableBindingCookie;
+  http_only_cookie_attribute?: AccessHttpOnlyCookieAttribute;
+  logo_url?: AccessLogoUrl;
+  name?: AccessAppsComponentsSchemasName;
+  options_preflight_bypass?: AccessOptionsPreflightBypass;
+  path_cookie_attribute?: AccessPathCookieAttribute;
+  same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
+  self_hosted_domains?: AccessSelfHostedDomains;
+  service_auth_401_redirect?: AccessServiceAuth401Redirect;
+  session_duration?: AccessSchemasSessionDuration;
+  skip_interstitial?: AccessSkipInterstitial;
+  tags?: AccessTags;
+  /**
+   * The application type.
+   *
+   * @example rdp
+   */
+  type: string;
+};
 
 /**
  * The request method of the SCIM request.
@@ -8743,7 +8781,8 @@ export type AccessType =
   | 'biso'
   | 'bookmark'
   | 'dash_sso'
-  | 'infrastructure';
+  | 'infrastructure'
+  | 'rdp';
 
 /**
  * A description of the reason why the UI read only field is being toggled.
@@ -12460,6 +12499,21 @@ export type CloudforceOnePortScanApiApiResponseCommon = {
   success: true;
 };
 
+/**
+ * The number of days between each scan (0 = no recurring scans).
+ *
+ * @example 7
+ */
+export type CloudforceOnePortScanApiFrequency = number;
+
+/**
+ * A list of IP addresses or CIDR blocks to scan. The maximum number of total IP addresses allowed is 5000.
+ *
+ * @example 1.1.1.1
+ * @example 2606:4700:4700::1111
+ */
+export type CloudforceOnePortScanApiIps = string[];
+
 export type CloudforceOnePortScanApiMessages = {
   /**
    * @minimum 1000
@@ -12483,16 +12537,27 @@ export type CloudforceOnePortScanApiPort = {
   status?: string;
 };
 
+/**
+ * A list of ports to scan. Allowed values:"default", "all", or a comma-separated list of ports or range of ports (e.g. ["1-80", "443"]). Default will scan the 100 most commonly open ports.
+ *
+ * @example default
+ */
+export type CloudforceOnePortScanApiPorts = string[];
+
 export type CloudforceOnePortScanApiScanConfig = {
   /**
    * @example abcd1234abcd1234abcd1234abcd1234
    */
   account_id: string;
+  frequency: CloudforceOnePortScanApiFrequency;
   /**
-   * @example 1
+   * Config ID
+   *
+   * @example uuid
    */
-  frequency: number;
-  ips: string[];
+  id: string;
+  ips: CloudforceOnePortScanApiIps;
+  ports: CloudforceOnePortScanApiPorts;
 };
 
 export type CloudforceOneRequestsApiResponseCommon = {
@@ -18603,6 +18668,7 @@ export type EmailSecuritySortingDirection = 'asc' | 'desc';
 
 export type EmailSecuritySubmission = {
   original_disposition?: EmailSecurityDispositionLabel & (string | null);
+  original_edf_hash?: string | null;
   outcome?: string | null;
   outcome_disposition?: EmailSecurityDispositionLabel & (string | null);
   requested_by?: string | null;
@@ -28549,9 +28615,853 @@ export type MagicWansCollectionResponse = MagicApiResponseSingle & {
  */
 export type MagicWeight = number;
 
+export type McnAccountId = string;
+
+export type McnApplyProgress = {
+  done: number;
+  total: number;
+};
+
+export type McnAwsTrustPolicy = {
+  aws_trust_policy: string;
+  item_type: string;
+};
+
+export type McnAzureSetup = {
+  azure_consent_url: string;
+  integration_identity_tag: string;
+  item_type: string;
+  tag_cli_command: string;
+};
+
+export type McnBadResponse = McnResponse & {
+  /**
+   * @minLength 1
+   */
+  errors?: McnError[];
+  result?: any | null;
+};
+
+export type McnCatalogSync = {
+  description: string;
+  destination_id: McnCatalogSyncDestinationId;
+  destination_type: McnCatalogSyncDestinationType;
+  errors?: {
+    [key: string]: McnError;
+  };
+  id: McnCatalogSyncId;
+  includes_discoveries_until?: string;
+  last_attempted_update_at?: string;
+  last_successful_update_at?: string;
+  last_user_update_at: string;
+  name: string;
+  policy: string;
+  update_mode: McnCatalogSyncUpdateMode;
+};
+
 /**
- * Account identifier
+ * @format uuid
+ */
+export type McnCatalogSyncDestinationId = string;
+
+export type McnCatalogSyncDestinationType = 'NONE' | 'ZERO_TRUST_LIST';
+
+/**
+ * @format uuid
+ */
+export type McnCatalogSyncId = string;
+
+export type McnCatalogSyncUpdateMode = 'AUTO' | 'MANUAL';
+
+export type McnCatalogSyncsPrebuiltPoliciesResponse = McnGoodResponse & {
+  result?: McnCatalogSyncsPrebuiltPolicy[];
+};
+
+export type McnCatalogSyncsPrebuiltPolicy = {
+  applicable_destinations: McnCatalogSyncDestinationType[];
+  policy_description: string;
+  policy_name: string;
+  policy_string: string;
+};
+
+/**
+ * IP prefix in CIDR format.
  *
+ * @example 192.168.0.0/16
+ */
+export type McnCidrPrefix = string;
+
+export type McnCloudPlatformClient = {
+  client_type: 'MAGIC_WAN_CLOUD_ONRAMP';
+  id: McnPlatformClientId;
+  name: string;
+};
+
+export type McnCloudType = 'AWS' | 'AZURE' | 'GOOGLE' | 'CLOUDFLARE';
+
+/**
+ * @format uuid
+ */
+export type McnConduitRouteId = string;
+
+/**
+ * @format uuid
+ */
+export type McnConduitTunnelId = string;
+
+export type McnCost = {
+  currency: string;
+  /**
+   * @format double
+   */
+  monthly_cost: number;
+};
+
+export type McnCostDiff = {
+  currency: string;
+  /**
+   * @format double
+   */
+  current_monthly_cost: number;
+  /**
+   * @format double
+   */
+  diff: number;
+  /**
+   * @format double
+   */
+  proposed_monthly_cost: number;
+};
+
+export type McnCreateCatalogSyncRequest = {
+  description?: string;
+  destination_type: McnCatalogSyncDestinationType;
+  name: string;
+  policy?: string;
+  update_mode: McnCatalogSyncUpdateMode;
+};
+
+export type McnCreateCatalogSyncResponse = McnGoodResponse & {
+  result?: McnCatalogSync;
+};
+
+export type McnCreateOnrampRequest = {
+  adopted_hub_id?: McnResourceId;
+  attached_hubs?: McnResourceId[];
+  attached_vpcs?: McnResourceId[];
+  cloud_type: McnOnrampCloudType;
+  description?: string;
+  hub_provider_id?: McnProviderId;
+  install_routes_in_cloud: boolean;
+  install_routes_in_magic_wan: boolean;
+  manage_hub_to_hub_attachments?: boolean;
+  manage_vpc_to_hub_attachments?: boolean;
+  name: string;
+  region?: string;
+  type: McnOnrampType;
+  vpc?: McnResourceId;
+};
+
+export type McnCreateOnrampResponse = McnGoodResponse & {
+  result?: McnOnramp;
+};
+
+export type McnCreateProviderRequest = {
+  cloud_type: McnCloudType;
+  description?: string;
+  friendly_name: string;
+};
+
+export type McnCreateProviderResponse = McnGoodResponse & {
+  result?: McnProvider;
+};
+
+export type McnDeleteCatalogSyncResponse = McnGoodResponse & {
+  result?: McnDeletedCatalogSync;
+};
+
+export type McnDeleteOnrampResponse = McnGoodResponse & {
+  result?: McnDeletedOnramp;
+};
+
+export type McnDeleteProviderResponse = McnGoodResponse & {
+  result?: McnDeletedProvider;
+};
+
+export type McnDeleteResourceResponse = McnGoodResponse & {
+  result?: McnDeletedResource;
+};
+
+export type McnDeletedCatalogSync = {
+  id: McnCatalogSyncId;
+};
+
+export type McnDeletedOnramp = {
+  id: McnOnrampId;
+};
+
+export type McnDeletedProvider = {
+  id: McnProviderId;
+};
+
+export type McnDeletedResource = {
+  id: McnResourceId;
+};
+
+export type McnError = {
+  code:
+    | 1001
+    | 1002
+    | 1003
+    | 1004
+    | 1005
+    | 1006
+    | 1007
+    | 1008
+    | 1009
+    | 1010
+    | 1011
+    | 1012
+    | 1013
+    | 1014
+    | 1015
+    | 1016
+    | 1017
+    | 2001
+    | 2002
+    | 2003
+    | 2004
+    | 2005
+    | 2006
+    | 2007
+    | 2008
+    | 2009
+    | 2010
+    | 2011
+    | 2012
+    | 2013
+    | 2014
+    | 2015
+    | 2016
+    | 2017
+    | 2018
+    | 2019
+    | 2020
+    | 2021
+    | 2022
+    | 3001
+    | 3002
+    | 3003
+    | 3004
+    | 3005
+    | 3006
+    | 3007
+    | 4001
+    | 4002
+    | 4003
+    | 4004
+    | 4005
+    | 4006
+    | 4007
+    | 4008
+    | 4009
+    | 4010
+    | 4011
+    | 4012
+    | 4013
+    | 4014
+    | 4015
+    | 4016
+    | 4017
+    | 4018
+    | 4019
+    | 4020
+    | 4021
+    | 4022
+    | 4023
+    | 5001
+    | 5002
+    | 5003
+    | 5004
+    | 102000
+    | 102001
+    | 102002
+    | 102003
+    | 102004
+    | 102005
+    | 102006
+    | 102007
+    | 102008
+    | 102009
+    | 102010
+    | 102011
+    | 102012
+    | 102013
+    | 102014
+    | 102015
+    | 102016
+    | 102017
+    | 102018
+    | 102019
+    | 102020
+    | 102021
+    | 102022
+    | 102023
+    | 102024
+    | 102025
+    | 102026
+    | 102027
+    | 102028
+    | 102029
+    | 102030
+    | 102031
+    | 102032
+    | 102033
+    | 102034
+    | 102035
+    | 102036
+    | 102037
+    | 102038
+    | 102039
+    | 102040
+    | 102041
+    | 102042
+    | 102043
+    | 102044
+    | 102045
+    | 102046
+    | 102047
+    | 102048
+    | 102049
+    | 102050
+    | 102051
+    | 102052
+    | 102053
+    | 102054
+    | 102055
+    | 102056
+    | 102057
+    | 102058
+    | 102059
+    | 102060
+    | 102061
+    | 102062
+    | 102063
+    | 102064
+    | 102065
+    | 102066
+    | 103001
+    | 103002
+    | 103003
+    | 103004
+    | 103005
+    | 103006
+    | 103007
+    | 103008;
+  documentation_url?: string;
+  message: string;
+  meta?: McnErrorMeta;
+  source?: McnErrorSource;
+};
+
+export type McnErrorMeta = {
+  l10n_key?: string;
+  loggable_error?: string;
+  template_data?: Record<string, any>;
+  trace_id?: string;
+};
+
+export type McnErrorSource = {
+  parameter?: string;
+  parameter_value_index?: number;
+  pointer?: string;
+};
+
+export type McnGcpSetup = {
+  integration_identity_tag: string;
+  item_type: string;
+  tag_cli_command: string;
+};
+
+export type McnGetMagicWanAddressSpaceResponse = McnGoodResponse & {
+  result?: McnMagicWanAddressSpace;
+};
+
+export type McnGetOnrampResponse = McnGoodResponse & {
+  result?: McnOnramp;
+};
+
+export type McnGoodResponse = McnResponse & {
+  /**
+   * @maxLength 0
+   */
+  errors?: McnError[];
+};
+
+export type McnGoodResponseCollection = McnResponseCollection & {
+  /**
+   * @maxLength 0
+   */
+  errors?: McnError[];
+};
+
+export type McnListItem = {
+  item_type: string;
+  list: (McnStringItem | McnResourcePreviewItem)[];
+};
+
+export type McnListOnrampsResponse = McnGoodResponse & {
+  result?: McnOnramp[];
+};
+
+export type McnMagicWanAddressSpace = {
+  prefixes: McnCidrPrefix[];
+};
+
+export type McnObservation = {
+  first_observed_at: string;
+  last_observed_at: string;
+  provider_id: McnProviderId;
+  resource_id: McnResourceId;
+};
+
+export type McnOnramp = {
+  attached_hubs?: McnResourceId[];
+  attached_vpcs?: McnResourceId[];
+  cloud_type: McnOnrampCloudType;
+  description?: string;
+  hub?: McnResourceId;
+  id: McnOnrampId;
+  install_routes_in_cloud: boolean;
+  install_routes_in_magic_wan: boolean;
+  last_applied_at?: string;
+  last_exported_at?: string;
+  last_planned_at?: string;
+  manage_hub_to_hub_attachments?: boolean;
+  manage_vpc_to_hub_attachments?: boolean;
+  name: string;
+  planned_monthly_cost_estimate?: McnCostDiff;
+  planned_resources?: McnResourceDiff[];
+  planned_resources_unavailable?: boolean;
+  post_apply_monthly_cost_estimate?: McnCost;
+  post_apply_resources?: {
+    [key: string]: McnResourceDetails;
+  };
+  post_apply_resources_unavailable?: boolean;
+  region?: string;
+  status?: McnOnrampStatus;
+  type: McnOnrampType;
+  updated_at: string;
+  vpc?: McnResourceId;
+  vpcs_by_id?: {
+    [key: string]: McnResourceDetails;
+  };
+  /**
+   * The list of vpc IDs for which resource details could not be generated.
+   */
+  vpcs_by_id_unavailable?: McnResourceId[];
+};
+
+export type McnOnrampCloudType = 'AWS' | 'AZURE' | 'GOOGLE';
+
+/**
+ * @format uuid
+ */
+export type McnOnrampId = string;
+
+export type McnOnrampLifecycleState =
+  | 'OnrampNeedsApply'
+  | 'OnrampPendingPlan'
+  | 'OnrampPlanning'
+  | 'OnrampPlanFailed'
+  | 'OnrampPendingApproval'
+  | 'OnrampPendingApply'
+  | 'OnrampApplying'
+  | 'OnrampApplyFailed'
+  | 'OnrampActive'
+  | 'OnrampPendingDestroy'
+  | 'OnrampDestroying'
+  | 'OnrampDestroyFailed';
+
+export type McnOnrampStatus = {
+  apply_progress: McnApplyProgress;
+  lifecycle_errors?: {
+    [key: string]: McnError;
+  };
+  lifecycle_state: McnOnrampLifecycleState;
+  plan_progress: McnPlanProgress;
+  routes: McnConduitRouteId[];
+  tunnels: McnConduitTunnelId[];
+};
+
+export type McnOnrampType = 'OnrampTypeSingle' | 'OnrampTypeHub';
+
+export type McnOnrampWithAccount = McnOnramp & {
+  account_id: McnAccountId;
+};
+
+export type McnPlanProgress = {
+  done: number;
+  total: number;
+};
+
+export type McnPlannedAction = 'no_op' | 'create' | 'update' | 'replace' | 'destroy';
+
+/**
+ * @format uuid
+ */
+export type McnPlatformClientId = string;
+
+export type McnPolicyResult = string;
+
+export type McnProvider = {
+  aws_arn?: string;
+  azure_subscription_id?: string;
+  azure_tenant_id?: string;
+  cloud_type: McnCloudType;
+  description?: string;
+  friendly_name: string;
+  gcp_project_id?: string;
+  gcp_service_account_email?: string;
+  id: McnProviderId;
+  last_updated: string;
+  lifecycle_state: McnProviderLifecycleState;
+  state: McnProviderDiscoveryStatus;
+  state_v2: McnProviderDiscoveryStatus;
+  status?: McnProviderStatus;
+};
+
+export type McnProviderDiscoveryProgress = {
+  done: number;
+  total: number;
+  unit: string;
+};
+
+export type McnProviderDiscoveryStatus = 'UNSPECIFIED' | 'PENDING' | 'DISCOVERING' | 'FAILED' | 'SUCCEEDED';
+
+/**
+ * @format uuid
+ */
+export type McnProviderId = string;
+
+export type McnProviderInitialSetupResponse = McnGoodResponse & {
+  result?: McnAwsTrustPolicy | McnAzureSetup | McnGcpSetup;
+};
+
+export type McnProviderLifecycleState = 'ACTIVE' | 'PENDING_SETUP' | 'RETIRED';
+
+export type McnProviderStatus = {
+  credentials_good_since?: string;
+  credentials_missing_since?: string;
+  credentials_rejected_since?: string;
+  discovery_message?: string;
+  discovery_message_v2?: string;
+  discovery_progress: McnProviderDiscoveryProgress;
+  discovery_progress_v2: McnProviderDiscoveryProgress;
+  in_use_by?: McnCloudPlatformClient[];
+  last_discovery_completed_at?: string;
+  last_discovery_completed_at_v2?: string;
+  last_discovery_started_at?: string;
+  last_discovery_started_at_v2?: string;
+  last_discovery_status: McnProviderDiscoveryStatus;
+  last_discovery_status_v2: McnProviderDiscoveryStatus;
+  last_updated?: string;
+  regions: string[];
+};
+
+export type McnProviderWithAccount = McnProvider & {
+  account_id: McnAccountId;
+};
+
+export type McnReadAccountCatalogSyncResponse = McnGoodResponse & {
+  result?: McnCatalogSync;
+};
+
+export type McnReadAccountCatalogSyncsResponse = McnGoodResponse & {
+  result?: McnCatalogSync[];
+};
+
+export type McnReadAccountProviderResponse = McnGoodResponse & {
+  result?: McnProvider;
+};
+
+export type McnReadAccountProvidersResponse = McnGoodResponse & {
+  result?: McnProvider[];
+};
+
+export type McnReadAccountResourceResponse = McnGoodResponse & {
+  result?: McnResourceDetails;
+};
+
+export type McnReadAccountResourcesResponse = McnGoodResponseCollection & {
+  result?: McnResourceDetails[];
+  result_info?: McnResultInfo;
+};
+
+export type McnRefreshCatalogSyncResponse = McnGoodResponse & {
+  result?: McnPolicyResult;
+};
+
+export type McnResourceDetails = {
+  account_id: McnAccountId;
+  cloud_type: McnCloudType;
+  config: {
+    [key: string]: any;
+  };
+  deployment_provider: McnProviderId;
+  id: McnResourceId;
+  managed: boolean;
+  managed_by?: McnCloudPlatformClient[];
+  monthly_cost_estimate: McnCost;
+  name: string;
+  native_id: string;
+  observations: {
+    [key: string]: McnObservation;
+  };
+  provider_ids: McnProviderId[];
+  provider_names_by_id: {
+    [key: string]: string;
+  };
+  region: string;
+  resource_group: string;
+  resource_type: McnResourceType;
+  sections: McnResourceDetailsSection[];
+  state: {
+    [key: string]: any;
+  };
+  tags: {
+    [key: string]: string;
+  };
+  updated_at: string;
+  url: string;
+};
+
+export type McnResourceDetailsSection = {
+  help_text?: string;
+  hidden_items: McnResourceDetailsSectionItem[];
+  name: string;
+  visible_items: McnResourceDetailsSectionItem[];
+};
+
+export type McnResourceDetailsSectionItem = {
+  helpText?: string;
+  name?: string;
+  value?: McnStringItem | McnYamlItem | McnYamlDiffItem | McnResourcePreviewItem | McnListItem;
+};
+
+export type McnResourceDiff = {
+  diff: McnYamlDiff;
+  keys_require_replace: string[];
+  monthly_cost_estimate_diff: McnCostDiff;
+  planned_action: McnPlannedAction;
+  resource: McnResourcePreview;
+};
+
+/**
+ * @format uuid
+ */
+export type McnResourceId = string;
+
+export type McnResourcePreview = {
+  cloud_type: McnCloudType;
+  detail: string;
+  id: McnResourceId;
+  name: string;
+  resource_type: McnResourceType;
+  title: string;
+};
+
+export type McnResourcePreviewItem = {
+  item_type: string;
+  resource_preview: McnResourcePreview;
+};
+
+export type McnResourceType =
+  | 'aws_customer_gateway'
+  | 'aws_egress_only_internet_gateway'
+  | 'aws_internet_gateway'
+  | 'aws_instance'
+  | 'aws_network_interface'
+  | 'aws_route'
+  | 'aws_route_table'
+  | 'aws_route_table_association'
+  | 'aws_subnet'
+  | 'aws_vpc'
+  | 'aws_vpc_ipv4_cidr_block_association'
+  | 'aws_vpn_connection'
+  | 'aws_vpn_connection_route'
+  | 'aws_vpn_gateway'
+  | 'aws_security_group'
+  | 'aws_vpc_security_group_ingress_rule'
+  | 'aws_vpc_security_group_egress_rule'
+  | 'aws_ec2_managed_prefix_list'
+  | 'aws_ec2_transit_gateway'
+  | 'aws_ec2_transit_gateway_prefix_list_reference'
+  | 'aws_ec2_transit_gateway_vpc_attachment'
+  | 'azurerm_application_security_group'
+  | 'azurerm_lb'
+  | 'azurerm_lb_backend_address_pool'
+  | 'azurerm_lb_nat_pool'
+  | 'azurerm_lb_nat_rule'
+  | 'azurerm_lb_rule'
+  | 'azurerm_local_network_gateway'
+  | 'azurerm_network_interface'
+  | 'azurerm_network_interface_application_security_group_association'
+  | 'azurerm_network_interface_backend_address_pool_association'
+  | 'azurerm_network_interface_security_group_association'
+  | 'azurerm_network_security_group'
+  | 'azurerm_public_ip'
+  | 'azurerm_route'
+  | 'azurerm_route_table'
+  | 'azurerm_subnet'
+  | 'azurerm_subnet_route_table_association'
+  | 'azurerm_virtual_machine'
+  | 'azurerm_virtual_network_gateway_connection'
+  | 'azurerm_virtual_network'
+  | 'azurerm_virtual_network_gateway'
+  | 'google_compute_network'
+  | 'google_compute_subnetwork'
+  | 'google_compute_vpn_gateway'
+  | 'google_compute_vpn_tunnel'
+  | 'google_compute_route'
+  | 'google_compute_address'
+  | 'google_compute_global_address'
+  | 'google_compute_router'
+  | 'google_compute_interconnect_attachment'
+  | 'google_compute_ha_vpn_gateway'
+  | 'google_compute_forwarding_rule'
+  | 'google_compute_network_firewall_policy'
+  | 'google_compute_network_firewall_policy_rule'
+  | 'cloudflare_static_route'
+  | 'cloudflare_ipsec_tunnel';
+
+export type McnResourcesCatalogPolicyPreview = string;
+
+export type McnResourcesCatalogPolicyPreviewRequest = {
+  policy: string;
+};
+
+export type McnResourcesCatalogPolicyPreviewResponse = McnGoodResponse & {
+  result?: McnResourcesCatalogPolicyPreview;
+};
+
+export type McnResponse = {
+  messages: McnError[];
+  success: boolean;
+};
+
+export type McnResponseCollection = {
+  messages: McnError[];
+  result_info?: McnResultInfo;
+  success: boolean;
+};
+
+export type McnResultInfo = {
+  /**
+   * The number of items in the current result set.
+   *
+   * @example 1
+   */
+  count: number;
+  /**
+   * The current page (starts from zero).
+   *
+   * @example 1
+   */
+  page: number;
+  /**
+   * Max items per page.
+   *
+   * @example 20
+   */
+  per_page: number;
+  /**
+   * The total number of items in the entire result set.
+   *
+   * @example 2000
+   */
+  total_count: number;
+  /**
+   * The number of total pages in the entire result set.
+   *
+   * @example 200
+   */
+  total_pages?: number;
+};
+
+export type McnStringItem = {
+  item_type: string;
+  string: string;
+};
+
+export type McnUpdateCatalogSyncRequest = {
+  description?: string;
+  name?: string;
+  policy?: string;
+  update_mode?: McnCatalogSyncUpdateMode;
+};
+
+export type McnUpdateCatalogSyncResponse = McnGoodResponse & {
+  result?: McnCatalogSync;
+};
+
+export type McnUpdateMagicWanAddressSpaceRequest = {
+  prefixes: McnCidrPrefix[];
+};
+
+export type McnUpdateMagicWanAddressSpaceResponse = McnGoodResponse & {
+  result?: McnMagicWanAddressSpace;
+};
+
+export type McnUpdateOnrampRequest = {
+  attached_hubs?: McnResourceId[];
+  attached_vpcs?: McnResourceId[];
+  description?: string;
+  install_routes_in_cloud?: boolean;
+  install_routes_in_magic_wan?: boolean;
+  manage_hub_to_hub_attachments?: boolean;
+  manage_vpc_to_hub_attachments?: boolean;
+  name?: string;
+  vpc?: McnResourceId;
+};
+
+export type McnUpdateOnrampResponse = McnGoodResponse & {
+  result?: McnOnramp;
+};
+
+export type McnUpdateProviderRequest = {
+  aws_arn?: string;
+  azure_subscription_id?: string;
+  azure_tenant_id?: string;
+  description?: string;
+  friendly_name?: string;
+  gcp_project_id?: string;
+  gcp_service_account_email?: string;
+};
+
+export type McnUpdateProviderResponse = McnGoodResponse & {
+  result?: McnProvider;
+};
+
+export type McnYamlDiff = {
+  diff: string;
+  left_description: string;
+  left_yaml: string;
+  right_description: string;
+  right_yaml: string;
+};
+
+export type McnYamlDiffItem = {
+  item_type: string;
+  yaml_diff: McnYamlDiff;
+};
+
+export type McnYamlItem = {
+  item_type: string;
+  yaml: string;
+};
+
+/**
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
  */
@@ -28625,6 +29535,9 @@ export type MconnAdminConnectorUpdateResponse = MconnGoodResponse & {
 };
 
 export type MconnAdminDevice = {
+  /**
+   * @x-sensitive true
+   */
   crypt_key: string;
   crypt_key_rotation_finished_at?: string;
   crypt_key_rotation_output?: string;
@@ -28633,6 +29546,9 @@ export type MconnAdminDevice = {
   ek_cert?: string;
   id: MconnUuid;
   imaged_at?: string;
+  /**
+   * @x-sensitive true
+   */
   last_crypt_key?: string;
   last_updated: string;
   license_key_sha256?: string;
@@ -28655,6 +29571,9 @@ export type MconnAdminDeviceFetchResponse = MconnGoodResponse & {
 };
 
 export type MconnAdminDeviceFields = {
+  /**
+   * @x-sensitive true
+   */
   crypt_key?: string;
   crypt_key_rotation_finished_at?: string;
   crypt_key_rotation_output?: string;
@@ -28662,6 +29581,9 @@ export type MconnAdminDeviceFields = {
   crypt_key_rotation_status_code?: number;
   ek_cert?: string;
   imaged_at?: string;
+  /**
+   * @x-sensitive true
+   */
   last_crypt_key?: string;
   last_updated?: string;
   license_key_sha256?: string;
@@ -28850,9 +29772,15 @@ export type MconnControllerConnectorIdentity = {
 };
 
 export type MconnControllerDevice = {
+  /**
+   * @x-sensitive true
+   */
   crypt_key: string;
   id: MconnUuid;
   imaged_at?: string;
+  /**
+   * @x-sensitive true
+   */
   last_crypt_key?: string;
   license_key_sha256?: string;
   serial_number?: string;
@@ -28874,6 +29802,9 @@ export type MconnControllerFetchCloudflaredTokenResponse = MconnGoodResponse & {
   result?: MconnControllerFetchCloudflaredTokenResult;
 };
 
+/**
+ * @x-sensitive true
+ */
 export type MconnControllerFetchCloudflaredTokenResult = string;
 
 export type MconnControllerFetchConnectorResponse = MconnGoodResponse & {
@@ -29138,8 +30069,6 @@ export type MconnGoodResponse = MconnResponse & {
   errors?: MconnCodedMessage[];
 };
 
-export type MconnHeartbeatResponse = MconnGoodResponse;
-
 export type MconnNone = Record<string, any> | null;
 
 export type MconnPartnerDevice = {
@@ -29151,6 +30080,9 @@ export type MconnPartnerDeviceRegisterResponse = MconnGoodResponse & {
 };
 
 export type MconnReadControllerConnectorTokenResponse = MconnGoodResponse & {
+  /**
+   * @x-sensitive true
+   */
   result?: string;
 };
 
@@ -31526,6 +32458,7 @@ export type PagesBuildConfig = {
    * The auth token for analytics.
    *
    * @example 021e1057c18547eca7b79f2516f06o7x
+   * @x-sensitive true
    */
   web_analytics_token?: string | null;
 };
@@ -31640,35 +32573,21 @@ export type PagesDeploymentConfigsValues = {
     } | null;
   } | null;
   /**
-   * Durabble Object namespaces used for Pages Functions.
+   * Durable Object namespaces used for Pages Functions.
    *
    * @example {"DO_BINDING":{"namespace_id":"5eb63bbbe01eeed093cb22bb8f5acdc3"}}
    */
   durable_object_namespaces?: {
     [key: string]: {
       /**
-       * ID of the Durabble Object namespace.
+       * ID of the Durable Object namespace.
        *
        * @example 5eb63bbbe01eeed093cb22bb8f5acdc3
        */
       namespace_id?: string;
     } | null;
   } | null;
-  /**
-   * Environment variables for build configs.
-   */
-  env_vars?: {
-    [key: string]: {
-      /**
-       * The type of environment variable.
-       */
-      type?: 'plain_text' | 'secret_text';
-      /**
-       * Environment variable value.
-       */
-      value: string;
-    } | null;
-  } | null;
+  env_vars?: PagesEnvVars;
   /**
    * Hyperdrive bindings used for Pages Functions.
    *
@@ -31799,9 +32718,8 @@ export type PagesDeploymentConfigsValues = {
  * Deployment stage name.
  *
  * @example deploy
- * @pattern queued|initialize|clone_repo|build|deploy
  */
-export type PagesDeploymentStageName = string;
+export type PagesDeploymentStageName = 'queued' | 'initialize' | 'clone_repo' | 'build' | 'deploy';
 
 export type PagesDeployments = {
   /**
@@ -31849,34 +32767,16 @@ export type PagesDeployments = {
      * What caused the deployment.
      *
      * @example ad_hoc
-     * @pattern push|ad_hoc
      */
-    type?: string;
+    type?: 'push' | 'ad_hoc';
   };
-  /**
-   * A dict of env variables to build this deploy.
-   *
-   * @example {"BUILD_VERSION":{"value":"3.3"},"ENV":{"value":"STAGING"}}
-   */
-  env_vars?: {
-    [key: string]: {
-      /**
-       * The type of environment variable.
-       */
-      type?: string;
-      /**
-       * Environment variable value.
-       */
-      value: string;
-    } | null;
-  };
+  env_vars?: PagesEnvVars;
   /**
    * Type of deploy.
    *
    * @example preview
-   * @pattern preview|production
    */
-  environment?: string;
+  environment?: 'preview' | 'production';
   /**
    * Id of the deployment.
    *
@@ -31986,6 +32886,13 @@ export type PagesDomainsPost = {
 };
 
 /**
+ * Environment variables used for builds and Pages Functions.
+ */
+export type PagesEnvVars = {
+  [key: string]: PagesPlainTextEnvVar | PagesSecretTextEnvVar;
+};
+
+/**
  * Identifier
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
@@ -32000,6 +32907,19 @@ export type PagesMessages = {
   code: number;
   message: string;
 }[];
+
+/**
+ * A plaintext environment variable.
+ *
+ * @example {"type":"plain_text","value":"hello world"}
+ */
+export type PagesPlainTextEnvVar = {
+  type: 'plain_text';
+  /**
+   * Environment variable value.
+   */
+  value: string;
+} | null;
 
 export type PagesProjectObject = {
   build_config?: PagesBuildConfig;
@@ -32075,6 +32995,21 @@ export type PagesProjectsResponse = PagesApiResponseCommon &
     result?: PagesDeployments[];
   };
 
+/**
+ * An encrypted environment variable.
+ *
+ * @example {"type":"secret_text","value":""}
+ */
+export type PagesSecretTextEnvVar = {
+  type: 'secret_text';
+  /**
+   * Secret value.
+   *
+   * @x-sensitive true
+   */
+  value: string;
+} | null;
+
 export type PagesSource = {
   config?: {
     deployments_enabled?: boolean;
@@ -32107,9 +33042,8 @@ export type PagesStage = {
    * The current build stage.
    *
    * @example deploy
-   * @pattern queued|initialize|clone_repo|build|deploy
    */
-  name?: string;
+  name?: 'queued' | 'initialize' | 'clone_repo' | 'build' | 'deploy';
   /**
    * When the stage started.
    *
@@ -32121,9 +33055,8 @@ export type PagesStage = {
    * State of the current stage.
    *
    * @example success
-   * @pattern success|idle|active|failure|canceled
    */
-  status?: string;
+  status?: 'success' | 'idle' | 'active' | 'failure' | 'canceled';
 };
 
 /**
@@ -40907,6 +41840,7 @@ export type TeamsDevicesCrowdstrikeConfigRequest = {
    * The Crowdstrike client secret.
    *
    * @example example client secret
+   * @x-sensitive true
    */
   client_secret: string;
   /**
@@ -40985,6 +41919,7 @@ export type TeamsDevicesCustomS2sConfigRequest = {
    * This secret will be passed in the `CF-Access-Client-Secret` header when hitting the `api_url`
    *
    * @example bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5
+   * @x-sensitive true
    */
   access_client_secret: string;
   /**
@@ -41407,6 +42342,9 @@ export type TeamsDevicesDomainJoinedInputRequest = {
  */
 export type TeamsDevicesEmail = string;
 
+/**
+ * List of routes excluded in the WARP client's tunnel.
+ */
 export type TeamsDevicesExclude = TeamsDevicesSplitTunnel[];
 
 /**
@@ -41415,6 +42353,11 @@ export type TeamsDevicesExclude = TeamsDevicesSplitTunnel[];
  * @example true
  */
 export type TeamsDevicesExcludeOfficeIps = boolean;
+
+/**
+ * List of routes excluded in the WARP client's tunnel. Both 'exclude' and 'include' cannot be set in the same request.
+ */
+export type TeamsDevicesExcludeRequest = TeamsDevicesSplitTunnel[];
 
 /**
  * Sets the expiration time for a posture check result. If empty, the result remains valid until it is overwritten by new data from the WARP client.
@@ -41521,7 +42464,15 @@ export type TeamsDevicesIdResponse = TeamsDevicesApiResponseSingle & {
  */
 export type TeamsDevicesIdentifier = void;
 
+/**
+ * List of routes included in the WARP client's tunnel.
+ */
 export type TeamsDevicesInclude = TeamsDevicesSplitTunnelInclude[];
+
+/**
+ * List of routes included in the WARP client's tunnel. Both 'exclude' and 'include' cannot be set in the same request.
+ */
+export type TeamsDevicesIncludeRequest = TeamsDevicesSplitTunnel[];
 
 /**
  * The value to be checked against.
@@ -41566,6 +42517,7 @@ export type TeamsDevicesIntuneConfigRequest = {
    * The Intune client secret.
    *
    * @example example client secret
+   * @x-sensitive true
    */
   client_secret: string;
   /**
@@ -41623,6 +42575,7 @@ export type TeamsDevicesKolideConfigRequest = {
    * The Kolide client secret.
    *
    * @example example client secret
+   * @x-sensitive true
    */
   client_secret: string;
 };
@@ -41993,6 +42946,7 @@ export type TeamsDevicesSentineloneS2sConfigRequest = {
    * The SentinelOne S2S client secret.
    *
    * @example example client secret
+   * @x-sensitive true
    */
   client_secret: string;
 };
@@ -42150,6 +43104,7 @@ export type TeamsDevicesTaniumConfigRequest = {
    * If present, this secret will be passed in the `CF-Access-Client-Secret` header when hitting the `api_url`
    *
    * @example bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5
+   * @x-sensitive true
    */
   access_client_secret?: string;
   /**
@@ -42162,6 +43117,7 @@ export type TeamsDevicesTaniumConfigRequest = {
    * The Tanium client secret.
    *
    * @example example client secret
+   * @x-sensitive true
    */
   client_secret: string;
 };
@@ -42348,6 +43304,7 @@ export type TeamsDevicesUptycsConfigRequest = {
    * The Uptycs client secret.
    *
    * @example example client secret
+   * @x-sensitive true
    */
   client_secret: string;
   /**
@@ -42407,6 +43364,7 @@ export type TeamsDevicesWorkspaceOneConfigRequest = {
    * The Workspace One client secret provided in the Workspace One Admin Dashboard.
    *
    * @example example client secret
+   * @x-sensitive true
    */
   client_secret: string;
 };
@@ -42937,6 +43895,7 @@ export type TlsCertificatesAndHostnamesComponentsSchemasHostname = string;
  * @example -----BEGIN PRIVATE KEY-----
 MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDEXDkcICRU3XBv9hiiPnBWIjgTQyowmVFxDr11mONgZB/cMYjE/OvQjvnpwNcOaSK16MOpAjNbELKRx2lZiVJaLRDCccqCxXwP/CrdRChcqGzo7mbNksMlcidrErb0LlEBKLFC2QjRmRKqB+YOs4TD8WsZu2S667A2fZmjRlaqOxFi1h62ee0P+TLU628UC/nl41JifSt5Evt7hMDHakemdwZblNYr2p6T3NQjdhjYXTtP4UmOGJBhJ7i7Kicg3d3CIgdTMbggSeGWqjndr4ldVnD96FN3cVT5uDFsn2CJXTFgdeBWoUnMS4VnUZzPWGf4vSBXC8qV7Ls+w46yT7T1AgMBAAECggEAQZnp/oqCeNPOR6l5S2L+1tfx0gWjZ78hJVteUpZ0iHSK7F6kKeOxyOird7vUXV0kmo+cJq+0hp0Ke4eam640FCpwKfYoSQ4/R3vgujGWJnaihCN5tv5sMet0XeJPuz5qE7ALoKCvwI6aXLHs20aAeZIDTQJ9QbGSGnJVzOWn+JDTidIgZpN57RpXfSAwnJPTQK/PN8i5z108hsaDOdEgGmxYZ7kYqMqzX20KXmth58LDfPixs5JGtS60iiKC/wOcGzkB2/AdTSojR76oEU77cANP/3zO25NG//whUdYlW0t0d7PgXxIeJe+xgYnamDQJx3qonVyt4H77ha0ObRAj9QKBgQDicZr+VTwFMnELP3a+FXGnjehRiuS1i7MXGKxNweCD+dFlML0FplSQS8Ro2n+d8lu8BBXGx0qm6VXu8Rhn7TAUL6q+PCgfarzxfIhacb/TZCqfieIHsMlVBfhV5HCXnk+kis0tuC/PRArcWTwDHJUJXkBhvkUsNswvQzavDPI7KwKBgQDd/WgLkj7A3X5fgIHZH/GbDSBiXwzKb+rF4ZCT2XFgG/OAW7vapfcX/w+v+5lBLyrocmOAS3PGGAhM5T3HLnUCQfnK4qgps1Lqibkc9Tmnsn60LanUjuUMsYv/zSw70tozbzhJ0pioEpWfRxRZBztO2Rr8Ntm7h6Fk701EXGNAXwKBgQCD1xsjy2J3sCerIdcz0u5qXLAPkeuZW+34m4/ucdwTWwc0gEz9lhsULFj9p4G351zLuiEnq+7mAWLcDJlmIO3mQt6JhiLiL9Y0T4pgBmxmWqKKYtAsJB0EmMY+1BNN44mBRqMxZFTJu1cLdhT/xstrOeoIPqytknYNanfTMZlzIwKBgHrLXe5oq0XMP8dcMneEcAUwsaU4pr6kQd3L9EmUkl5zl7J9C+DaxWAEuwzBw/iGutlxzRB+rD/7szu14wJ29EqXbDGKRzMp+se5/yfBjm7xEZ1hVPw7PwBShfqt57X/4Ktq7lwHnmH6RcGhc+P7WBc5iO/S94YAdIp8xOT3pf9JAoGAE0QkqJUY+5Mgr+fBO0VNV72ZoPveGpW+De59uhKAOnu1zljQCUtk59m6+DXfm0tNYKtawa5n8iN71Zh+s62xXSt3pYi1Y5CCCmv8Y4BhwIcPwXKk3zEvLgSHVTpC0bayA9aSO4bbZgVXa5w+Z0w/vvfp9DWo1IS3EnQRrz6WMYA=
 -----END PRIVATE KEY-----
+ * @x-sensitive true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasPrivateKey = string;
 
@@ -43096,6 +44055,7 @@ export type TlsCertificatesAndHostnamesCustomCertAndKey = {
      * @example -----BEGIN PRIVATE KEY-----
     MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC/SCB5...
     -----END PRIVATE KEY-----
+     * @x-sensitive true
      */
   custom_key: string;
 };
@@ -43748,6 +44708,7 @@ fhRqaQKBgAcWPokmJ7EbYQGeMbS7HC8eWO/RyamlnSffdCdSc7ue3zdVJxpAkQ8W
 qu80pEIF6raIQfAf8MXiiZ7auFOSnHQTXUbhCpvDLKi0Mwq3G8Pl07l+2s6dQG6T
 lv6XTQaMyf6n1yjzL+fzDrH3qXMxHMO/b13EePXpDMpY7HQpoLDi
 -----END RSA PRIVATE KEY-----
+ * @x-sensitive true
  */
 export type TlsCertificatesAndHostnamesPrivateKey = string;
 
@@ -43968,6 +44929,7 @@ fhRqaQKBgAcWPokmJ7EbYQGeMbS7HC8eWO/RyamlnSffdCdSc7ue3zdVJxpAkQ8W
 qu80pEIF6raIQfAf8MXiiZ7auFOSnHQTXUbhCpvDLKi0Mwq3G8Pl07l+2s6dQG6T
 lv6XTQaMyf6n1yjzL+fzDrH3qXMxHMO/b13EePXpDMpY7HQpoLDi
 -----END RSA PRIVATE KEY-----
+ * @x-sensitive true
  */
 export type TlsCertificatesAndHostnamesSchemasPrivateKey = string;
 
@@ -44123,6 +45085,7 @@ export type TlsCertificatesAndHostnamesSsl = {
     qu80pEIF6raIQfAf8MXiiZ7auFOSnHQTXUbhCpvDLKi0Mwq3G8Pl07l+2s6dQG6T
     lv6XTQaMyf6n1yjzL+fzDrH3qXMxHMO/b13EePXpDMpY7HQpoLDi
     -----END RSA PRIVATE KEY-----
+     * @x-sensitive true
      */
   custom_key?: string;
   /**
@@ -44303,6 +45266,7 @@ export type TlsCertificatesAndHostnamesSslpost = {
     qu80pEIF6raIQfAf8MXiiZ7auFOSnHQTXUbhCpvDLKi0Mwq3G8Pl07l+2s6dQG6T
     lv6XTQaMyf6n1yjzL+fzDrH3qXMxHMO/b13EePXpDMpY7HQpoLDi
     -----END RSA PRIVATE KEY-----
+     * @x-sensitive true
      */
   custom_key?: string;
   /**
@@ -45451,6 +46415,7 @@ export type TunnelTunnelResponseToken = {
  * Sets the password required to run a locally-managed tunnel. Must be at least 32 bytes and encoded as a base64 string.
  *
  * @example AQIDBAUGBwgBAgMEBQYHCAECAwQFBgcIAQIDBAUGBwg=
+ * @x-sensitive true
  */
 export type TunnelTunnelSecret = string;
 
@@ -45458,6 +46423,7 @@ export type TunnelTunnelSecret = string;
  * The Tunnel Token is used as a mechanism to authenticate the operation of a tunnel.
  *
  * @example eyJhIjoiNWFiNGU5Z...
+ * @x-sensitive true
  */
 export type TunnelTunnelToken = string;
 
@@ -48392,6 +49358,10 @@ export type WorkersApiResponseCommonFailure = {
   success: false;
 };
 
+export type WorkersApiResponseNullResult = WorkersApiResponseCommon & {
+  result?: any | null;
+};
+
 export type WorkersApiResponseSingle = WorkersApiResponseCommon;
 
 /**
@@ -49237,12 +50207,7 @@ export type WorkersNamespace = {
   id?: string;
   name?: string;
   script?: string;
-  use_containers?: boolean;
   use_sqlite?: boolean;
-};
-
-export type WorkersNamespaceDeleteResponse = WorkersApiResponseCommon & {
-  result?: any | null;
 };
 
 export type WorkersNamespaceListResponse = WorkersApiResponseCommon & {
@@ -50022,6 +50987,37 @@ export type ZarazScrollDepthRule = {
   };
 };
 
+export type ZarazSecretVariable = {
+  /**
+   * @x-auditable true
+   */
+  name: string;
+  /**
+   * @x-auditable true
+   */
+  type: 'secret';
+  /**
+   * @x-auditable true
+   * @x-sensitive true
+   */
+  value: string;
+};
+
+export type ZarazStringVariable = {
+  /**
+   * @x-auditable true
+   */
+  name: string;
+  /**
+   * @x-auditable true
+   */
+  type: 'string';
+  /**
+   * @x-auditable true
+   */
+  value: string;
+};
+
 export type ZarazTimerRule = {
   /**
    * @x-auditable true
@@ -50063,6 +51059,27 @@ export type ZarazVariableMatchRule = {
      * @x-auditable true
      */
     variable: string;
+  };
+};
+
+export type ZarazWorkerVariable = {
+  /**
+   * @x-auditable true
+   */
+  name: string;
+  /**
+   * @x-auditable true
+   */
+  type: 'worker';
+  value: {
+    /**
+     * @x-auditable true
+     */
+    escapedWorkerName: string;
+    /**
+     * @x-auditable true
+     */
+    workerTag: string;
   };
 };
 
@@ -50367,41 +51384,7 @@ export type ZarazZarazConfigBase = {
    * Variables set up under Zaraz configuration, where key is the variable alpha-numeric ID and value is the variable configuration. Values of variables of type secret are not included.
    */
   variables: {
-    [key: string]:
-      | {
-          /**
-           * @x-auditable true
-           */
-          name: string;
-          /**
-           * @x-auditable true
-           */
-          type: 'string' | 'secret';
-          /**
-           * @x-auditable true
-           */
-          value: string;
-        }
-      | {
-          /**
-           * @x-auditable true
-           */
-          name: string;
-          /**
-           * @x-auditable true
-           */
-          type: 'worker';
-          value: {
-            /**
-             * @x-auditable true
-             */
-            escapedWorkerName: string;
-            /**
-             * @x-auditable true
-             */
-            workerTag: string;
-          };
-        };
+    [key: string]: ZarazStringVariable | ZarazSecretVariable | ZarazWorkerVariable;
   };
   /**
    * Zaraz internal version of the config.
