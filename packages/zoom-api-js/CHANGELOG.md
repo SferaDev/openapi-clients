@@ -1,5 +1,11 @@
 # zoom-api-js
 
+## 0.4.1
+
+### Patch Changes
+
+- d4c62b3: [OpenAPI] Spec updates for zoom-api-js
+
 ## 0.4.0
 
 ### Minor Changes
