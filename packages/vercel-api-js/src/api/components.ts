@@ -2920,7 +2920,13 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
           env: string[];
         };
         buildArtifactUrls?: string[];
-        builds?: Record<string, any>[];
+        builds?: {
+          use: string;
+          src?: string;
+          config?: {
+            [key: string]: any;
+          };
+        }[];
         env: string[];
         inspectorUrl: string | null;
         isInConcurrentBuildsQueue: boolean;
@@ -3656,7 +3662,13 @@ export type CreateDeploymentResponse = {
     env: string[];
   };
   buildArtifactUrls?: string[];
-  builds?: Record<string, any>[];
+  builds?: {
+    use: string;
+    src?: string;
+    config?: {
+      [key: string]: any;
+    };
+  }[];
   env: string[];
   inspectorUrl: string | null;
   isInConcurrentBuildsQueue: boolean;
@@ -4482,7 +4494,13 @@ export type CancelDeploymentResponse = {
     env: string[];
   };
   buildArtifactUrls?: string[];
-  builds?: Record<string, any>[];
+  builds?: {
+    use: string;
+    src?: string;
+    config?: {
+      [key: string]: any;
+    };
+  }[];
   env: string[];
   inspectorUrl: string | null;
   isInConcurrentBuildsQueue: boolean;
@@ -6373,6 +6391,12 @@ export type GetDomainResponse = {
      */
     boughtAt: number | null;
     /**
+     * The domain name.
+     *
+     * @example example.com
+     */
+    name: string;
+    /**
      * Timestamp in milliseconds when the domain was created in the registry.
      *
      * @example 1613602938882
@@ -6390,12 +6414,6 @@ export type GetDomainResponse = {
      * @example EmTbe5CEJyTk2yVAHBUWy4A3sRusca3GCwRjTC1bpeVnt1
      */
     id: string;
-    /**
-     * The domain name.
-     *
-     * @example example.com
-     */
-    name: string;
     /**
      * Timestamp in milliseconds at which the domain was ordered.
      *
@@ -7041,7 +7059,6 @@ export type GetConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
 export type GetConfigurableLogDrainResponse = {
   clientId?: string;
   configurationId?: string;
-  deliveryFormat: 'json' | 'ndjson' | 'syslog';
   sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   environments: ('preview' | 'production')[];
   status?: 'disabled' | 'enabled' | 'errored';
@@ -7064,6 +7081,7 @@ export type GetConfigurableLogDrainResponse = {
   teamId?: string | null;
   ownerId: string;
   createdFrom?: 'integration' | 'self-served';
+  deliveryFormat: 'json' | 'ndjson' | 'syslog';
   secret: string;
 };
 
@@ -7141,7 +7159,6 @@ export type GetAllLogDrainsError = Fetcher.ErrorWrapper<undefined>;
 export type GetAllLogDrainsResponse = {
   clientId?: string;
   configurationId?: string;
-  deliveryFormat: 'json' | 'ndjson' | 'syslog';
   sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   environments: ('preview' | 'production')[];
   status?: 'disabled' | 'enabled' | 'errored';
@@ -7164,6 +7181,7 @@ export type GetAllLogDrainsResponse = {
   teamId?: string | null;
   ownerId: string;
   createdFrom?: 'integration' | 'self-served';
+  deliveryFormat: 'json' | 'ndjson' | 'syslog';
   secret: string;
 }[];
 
@@ -7202,7 +7220,6 @@ export type CreateConfigurableLogDrainResponse = {
   secret?: string;
   clientId?: string;
   configurationId?: string;
-  deliveryFormat: 'json' | 'ndjson' | 'syslog';
   sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   environments: ('preview' | 'production')[];
   status?: 'disabled' | 'enabled' | 'errored';
@@ -7225,6 +7242,7 @@ export type CreateConfigurableLogDrainResponse = {
   teamId?: string | null;
   ownerId: string;
   createdFrom?: 'integration' | 'self-served';
+  deliveryFormat: 'json' | 'ndjson' | 'syslog';
 };
 
 export type CreateConfigurableLogDrainRequestBody = {
@@ -8638,12 +8656,16 @@ export type SubmitInvoiceRequestBody = {
     name: string;
     details?: string;
     /**
+     * Currency amount as a decimal string.
+     *
      * @pattern ^[0-9]+(\\.[0-9]+)?$
      */
     price: string;
     quantity: number;
     units: string;
     /**
+     * Currency amount as a decimal string.
+     *
      * @pattern ^[0-9]+(\\.[0-9]+)?$
      */
     total: string;
@@ -8672,6 +8694,8 @@ export type SubmitInvoiceRequestBody = {
     name: string;
     details?: string;
     /**
+     * Currency amount as a decimal string.
+     *
      * @pattern ^[0-9]+(\\.[0-9]+)?$
      */
     amount: string;
@@ -8709,43 +8733,139 @@ export type GetInvoicePathParams = {
 export type GetInvoiceError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetInvoiceResponse = {
+  /**
+   * Whether the invoice is in the testmode (no real transaction created).
+   */
+  test?: boolean;
+  /**
+   * Vercel Marketplace Invoice ID.
+   */
   invoiceId: string;
+  /**
+   * Partner-supplied Invoice ID, if applicable.
+   */
   externalId?: string;
+  /**
+   * Invoice state.
+   */
+  state: 'invoiced' | 'notpaid' | 'paid' | 'pending' | 'refund_requested' | 'refunded' | 'scheduled';
+  /**
+   * User-readable invoice number.
+   */
   invoiceNumber?: string;
+  /**
+   * Invoice date. ISO 8601 timestamp.
+   */
   invoiceDate: string;
+  /**
+   * Subscription period for this billing cycle. ISO 8601 timestamps.
+   */
   period: {
     start: string;
     end: string;
   };
+  /**
+   * Additional memo for the invoice.
+   */
   memo?: string;
+  /**
+   * Invoice items.
+   */
   items: {
+    /**
+     * Partner's billing plan ID.
+     */
     billingPlanId: string;
+    /**
+     * Partner's resource ID. If not specified, indicates installation-wide item.
+     */
     resourceId?: string;
+    /**
+     * Start and end are only needed if different from the period's start/end. ISO 8601 timestamp.
+     */
     start?: string;
+    /**
+     * Start and end are only needed if different from the period's start/end. ISO 8601 timestamp.
+     */
     end?: string;
+    /**
+     * Invoice item name.
+     */
     name: string;
+    /**
+     * Additional item details.
+     */
     details?: string;
+    /**
+     * Item price. A dollar-based decimal string.
+     */
     price: string;
+    /**
+     * Item quantity.
+     */
     quantity: number;
+    /**
+     * Units for item's quantity.
+     */
     units: string;
+    /**
+     * Item total. A dollar-based decimal string.
+     */
     total: string;
   }[];
+  /**
+   * Invoice discounts.
+   */
   discounts?: {
+    /**
+     * Partner's billing plan ID.
+     */
     billingPlanId: string;
+    /**
+     * Partner's resource ID. If not specified, indicates installation-wide discount.
+     */
     resourceId?: string;
+    /**
+     * Start and end are only needed if different from the period's start/end. ISO 8601 timestamp.
+     */
     start?: string;
+    /**
+     * Start and end are only needed if different from the period's start/end. ISO 8601 timestamp.
+     */
     end?: string;
+    /**
+     * Discount name.
+     */
     name: string;
+    /**
+     * Additional discount details.
+     */
     details?: string;
+    /**
+     * Discount amount. A dollar-based decimal string.
+     */
     amount: string;
   }[];
+  /**
+   * Invoice total amount. A dollar-based decimal string.
+   */
   total: string;
-  created: string;
-  updated: string;
-  state: 'invoiced' | 'notpaid' | 'paid' | 'pending' | 'refund_requested' | 'refunded' | 'scheduled';
+  /**
+   * The reason for refund. Only applicable for states "refunded" or "refund_request".
+   */
   refundReason?: string;
+  /**
+   * Refund amount. Only applicable for states "refunded" or "refund_request". A dollar-based decimal string.
+   */
   refundTotal?: string;
-  test: boolean;
+  /**
+   * System creation date. ISO 8601 timestamp.
+   */
+  created: string;
+  /**
+   * System update date. ISO 8601 timestamp.
+   */
+  updated: string;
 };
 
 export type GetInvoiceVariables = {
@@ -15917,7 +16037,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16022,7 +16142,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -16129,7 +16249,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -16271,7 +16391,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16375,7 +16495,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16913,7 +17033,7 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17005,13 +17125,12 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
         } | null;
         comment?: string;
         customEnvironmentIds?: string[];
-        vsmValue?: string;
       }
     | {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17114,7 +17233,7 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17267,7 +17386,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17371,7 +17490,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17474,7 +17593,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17668,7 +17787,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -19364,6 +19483,7 @@ export const addBypassIp = (variables: AddBypassIpVariables, signal?: AbortSigna
           Domain: string;
           Ip?: string;
           ProjectId: string;
+          Note: string;
           IsProjectRule: boolean;
         }[];
         pagination: void | null;
@@ -19826,14 +19946,26 @@ export const inviteUserToTeam = (variables: InviteUserToTeamVariables, signal?: 
          *
          * @example CreateProject
          */
-        teamPermissions?: ('CreateProject' | 'FullProductionDeployment' | 'UsageViewer')[];
+        teamPermissions?: (
+          | 'CreateProject'
+          | 'FullProductionDeployment'
+          | 'UsageViewer'
+          | 'EnvVariableManager'
+          | 'EnvironmentManager'
+        )[];
       }
     | {
         uid: string;
         username: string;
         role: 'OWNER' | 'MEMBER' | 'DEVELOPER' | 'SECURITY' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR';
         teamRoles?: ('OWNER' | 'MEMBER' | 'DEVELOPER' | 'SECURITY' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR')[];
-        teamPermissions?: ('CreateProject' | 'FullProductionDeployment' | 'UsageViewer')[];
+        teamPermissions?: (
+          | 'CreateProject'
+          | 'FullProductionDeployment'
+          | 'UsageViewer'
+          | 'EnvVariableManager'
+          | 'EnvironmentManager'
+        )[];
       },
     InviteUserToTeamError,
     InviteUserToTeamRequestBody,
