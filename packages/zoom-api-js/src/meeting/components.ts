@@ -5170,7 +5170,7 @@ export type MeetingPathParams = {
   /**
    * The meeting's ID.
    *
-   *  When storing this value in your database, store it as a long format integer, not an integer. Meeting IDs can be more than 10 digits.
+   *  When storing this value in your database, store it as a long format integer and **not** an integer. Meeting IDs can be more than 10 digits.
    *
    * @format int64
    * @example 85746065
@@ -5223,7 +5223,7 @@ export type MeetingResponse = {
    */
   id?: number;
   /**
-   * Unique meeting ID. Each meeting instance generates its own meeting UUID - after a meeting ends, a new UUID is generated for the next instance of the meeting. Retrieve a list of UUIDs from past meeting instances using the [**List past meeting instances**](https://developers.zoom.us/docs/api/rest/reference/zoom-api/methods#operation/pastMeetings) API. [Double encode](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#meeting-id-and-uuid) your UUID when using it for API calls if the UUID begins with a `/` or contains `//` in it.
+   * Unique meeting ID. Each meeting instance generates its own meeting UUID - after a meeting ends, a new UUID is generated for the next instance of the meeting. Retrieve a list of UUIDs from past meeting instances using the [**List past meeting instances**](/docs/api/rest/reference/zoom-api/methods#operation/pastMeetings) API. [Double encode](/docs/api/rest/using-zoom-apis/#meeting-id-and-uuid) your UUID when using it for API calls if the UUID begins with a `/` or contains `//` in it.
    *
    * @example aDYlohsHRtCd4ii1uC2+hA==
    */
@@ -5827,13 +5827,13 @@ export type MeetingResponse = {
       attendees_can_upvote?: boolean;
     };
     /**
-     * The meeting's [language interpretation settings](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars). Make sure to add the language in the web portal in order to use it in the API. See link for details.
+     * The meeting's [language interpretation settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064768). Make sure to add the language in the web portal in order to use it in the API. See link for details.
      *
      * **Note:** This feature is only available for certain Meeting add-on, Education, and Business and higher plans. If this feature is not enabled on the host's account, this setting will **not** be applied to the meeting.
      */
     language_interpretation?: {
       /**
-       * Whether to enable [language interpretation](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars) for the meeting.
+       * Whether to enable [language interpretation](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064768) for the meeting.
        *
        * @example true
        */
@@ -5850,13 +5850,30 @@ export type MeetingResponse = {
          */
         email?: string;
         /**
-         * A comma-separated list of the interpreter's languages. The string must contain two [country IDs](https://developers.zoom.us/docs/api/rest/other-references/abbreviation-lists/#countries).
+         * A comma-separated list of the interpreter's languages. The string must contain exactly two country IDs.
          *
-         * For example, if the interpreter will translate from English to Chinese, then this value will be `US,CN`.
+         * Only system-supported languages are allowed: `US` (English), `CN` (Chinese), `JP` (Japanese), `DE` (German), `FR` (French), `RU` (Russian), `PT` (Portuguese), `ES` (Spanish), and `KR` (Korean).
+         *
+         * For example, to set an interpreter translating from English to Chinese, use `US,CN`.
          *
          * @example US,FR
+         * @deprecated true
          */
         languages?: string;
+        /**
+         * A comma-separated list of the interpreter's languages. The string must contain exactly two languages.
+         *
+         * To get this value, use the `language_interpretation` object's `languages` and `custom_languages` values in the [**Get user settings**](/docs/api/users/#tag/users/GET/users/{userId}/settings) API response.
+         *
+         * **languages**: System-supported languages include `English`, `Chinese`, `Japanese`, `German`, `French`, `Russian`, `Portuguese`, `Spanish`, and `Korean`.
+         *
+         * **custom_languages**: User-defined languages added by the user.
+         *
+         * For example, an interpreter translating between English and French should use `English,French`.
+         *
+         * @example English,French
+         */
+        interpreter_languages?: string;
       }[];
     };
     /**
@@ -5887,7 +5904,7 @@ export type MeetingResponse = {
         /**
          * The interpreter's sign language.
          *
-         *  To get this value, use the `sign_language_interpretation` object's `languages` and `custom_languages` values in the [**Get user settings**](https://developers.zoom.us/docs/api/rest/reference/zoom-api/methods#operation/userSettings) API response.
+         *  To get this value, use the `sign_language_interpretation` object's `languages` and `custom_languages` values in the [**Get user settings**](/docs/api/rest/reference/zoom-api/methods#operation/userSettings) API response.
          *
          * @example American
          */
@@ -5956,7 +5973,7 @@ export type MeetingResponse = {
      */
     show_share_button?: boolean;
     /**
-     * Use a [personal meeting ID (PMI)](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#understanding-personal-meeting-id-pmi). Only used for scheduled meetings and recurring meetings with no fixed time.
+     * Use a [personal meeting ID (PMI)](/docs/api/rest/using-zoom-apis/#understanding-personal-meeting-id-pmi). Only used for scheduled meetings and recurring meetings with no fixed time.
      *
      * @example false
      * @default false
@@ -6022,14 +6039,25 @@ export type MeetingResponse = {
        * Whether to enable the **Automatically add invited external users** setting.
        *
        * @example true
+       * @deprecated true
        */
       auto_add_invited_external_users?: boolean;
       /**
        * Whether to enable the **Automatically add meeting participants** setting.
        *
        * @example true
+       * @deprecated true
        */
       auto_add_meeting_participants?: boolean;
+      /**
+       * Who is added to the continuous meeting chat. Invitees are users added during scheduling. Participants are users who join the meeting.
+       * * `all_users` - For all users, including external invitees and meeting participants.
+       * * `org_invitees_and_participants` - Only for meeting invitees and participants in your organization.
+       * * `org_invitees` - Only for meeting invitees in your organization.
+       *
+       * @example all_users
+       */
+      who_is_added?: 'all_users' | 'org_invitees_and_participants' | 'org_invitees';
       /**
        * The channel's ID.
        *
@@ -6140,7 +6168,7 @@ export type MeetingResponse = {
     disable_participant_video?: boolean;
   };
   /**
-   * Meeting start time in GMT or UTC. Start time will not be returned if the meeting is an instant meeting.
+   * Meeting start time in GMT or UTC. Start time will not be returned if the meeting is an **instant** meeting.
    *
    * @format date-time
    * @example 2022-03-25T07:29:29Z
@@ -6149,11 +6177,11 @@ export type MeetingResponse = {
   /**
    * The `start_url` of a meeting is a URL that a host or an alternative host can start the meeting.
    *
-   * The expiration time for the `start_url` field listed in the response of the [**Create a meeting**](https://developers.zoom.us/docs/api/rest/reference/zoom-api/methods#operation/meetingCreate) API is two hours for all regular users.
+   * The expiration time for the `start_url` field listed in the response of the [**Create a meeting**](/docs/api/rest/reference/zoom-api/methods#operation/meetingCreate) API is two hours for all regular users.
    *
-   * For users created using the `custCreate` option via the [**Create users**](https://developers.zoom.us/docs/api/rest/reference/zoom-api/methods#operation/userCreate) API, the expiration time of the `start_url` field is 90 days.
+   * For users created using the `custCreate` option via the [**Create users**](/docs/api/rest/reference/zoom-api/methods#operation/userCreate) API, the expiration time of the `start_url` field is 90 days.
    *
-   * For security reasons, to retrieve the updated value for the `start_url` field programmatically after the expiry time, you must call the [**Get a meeting](https://developers.zoom.us/docs/api/rest/reference/zoom-api/methods#operation/meeting) API and refer to the value of the `start_url` field in the response.
+   * For security reasons, to retrieve the updated value for the `start_url` field programmatically after the expiry time, you must call the [**Get a meeting](/docs/api/rest/reference/zoom-api/methods#operation/meeting) API and refer to the value of the `start_url` field in the response.
    *  This URL should only be used by the host of the meeting and **should not be shared with anyone other than the host** of the meeting as anyone with this URL will be able to login to the Zoom Client as the host of the meeting.
    *
    * @example https://example.com/s/11111
@@ -6225,7 +6253,7 @@ export type MeetingResponse = {
    */
   dynamic_host_key?: string;
   /**
-   * The platform through which the meeting was created.
+   * The platform used when creating the meeting.
    * * `other` - Created through another platform.
    * * `open_api` - Created through Open API.
    * * `web_portal` - Created through the web portal.
@@ -6367,7 +6395,7 @@ export type MeetingUpdateRequestBody = {
    *
    * **Note:**
    * * If the account owner or administrator has configured [minimum passcode requirement settings](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604), the passcode **must** meet those requirements.
-   * * If passcode requirements are enabled, use the [**Get user settings**](https://developers.zoom.us/docs/api/users/#tag/users/GET/users/{userId}/settings) API or the [**Get account settings**](https://developers.zoom.us/docs/api/accounts/#tag/accounts/GET/accounts/{accountId}/settings) API to get the requirements.
+   * * If passcode requirements are enabled, use the [**Get user settings**](/docs/api/users/#tag/users/GET/users/{userId}/settings) API or the [**Get account settings**](/docs/api/accounts/#tag/accounts/GET/accounts/{accountId}/settings) API to get the requirements.
    * * If the **Require a passcode when scheduling new meetings** account setting is enabled and locked, a passcode will be automatically generated if one is not provided.
    *
    * @maxLength 10
@@ -6884,13 +6912,13 @@ export type MeetingUpdateRequestBody = {
       attendees_can_upvote?: boolean;
     };
     /**
-     * The meeting's [language interpretation settings](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars). Make sure to add the language in the web portal in order to use it in the API. See link for details.
+     * The meeting's [language interpretation settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064768). Make sure to add the language in the web portal in order to use it in the API. See link for details.
      *
      * **Note:** This feature is only available for certain Meeting add-on, Education, and Business and higher plans. If this feature is not enabled on the host's account, this setting will **not** be applied to the meeting.
      */
     language_interpretation?: {
       /**
-       * Whether to enable [language interpretation](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars) for the meeting.
+       * Whether to enable [language interpretation](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064768) for the meeting.
        *
        * @example true
        */
@@ -6907,13 +6935,30 @@ export type MeetingUpdateRequestBody = {
          */
         email?: string;
         /**
-         * A comma-separated list of the interpreter's languages. The string must contain two [country IDs](https://developers.zoom.us/docs/api/rest/other-references/abbreviation-lists/#countries).
+         * A comma-separated list of the interpreter's languages. The string must contain exactly two country IDs.
          *
-         * For example, if the interpreter will translate from English to Chinese, then this value will be `US,CN`.
+         * Only system-supported languages are allowed: `US` (English), `CN` (Chinese), `JP` (Japanese), `DE` (German), `FR` (French), `RU` (Russian), `PT` (Portuguese), `ES` (Spanish), and `KR` (Korean).
+         *
+         * For example, to set an interpreter translating from English to Chinese, use `US,CN`.
          *
          * @example US,FR
+         * @deprecated true
          */
         languages?: string;
+        /**
+         * A comma-separated list of the interpreter's languages. The string must contain exactly two languages.
+         *
+         * To get this value, use the `language_interpretation` object's `languages` and `custom_languages` values in the [**Get user settings**](/docs/api/users/#tag/users/GET/users/{userId}/settings) API response.
+         *
+         * **languages**: System-supported languages include `English`, `Chinese`, `Japanese`, `German`, `French`, `Russian`, `Portuguese`, `Spanish`, and `Korean`.
+         *
+         * **custom_languages**: User-defined languages added by the user.
+         *
+         * For example, an interpreter translating between English and French should use `English,French`.
+         *
+         * @example English,French
+         */
+        interpreter_languages?: string;
       }[];
     };
     /**
@@ -7025,7 +7070,7 @@ export type MeetingUpdateRequestBody = {
      */
     show_share_button?: boolean;
     /**
-     * Use a [personal meeting ID (PMI)](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#understanding-personal-meeting-id-pmi). Only used for scheduled meetings and recurring meetings with no fixed time.
+     * Use a [personal meeting ID (PMI)](/docs/api/rest/using-zoom-apis/#understanding-personal-meeting-id-pmi). Only used for scheduled meetings and recurring meetings with no fixed time.
      *
      * @example false
      * @default false
@@ -7072,14 +7117,25 @@ export type MeetingUpdateRequestBody = {
        * Whether to enable the **Automatically add invited external users** setting.
        *
        * @example true
+       * @deprecated true
        */
       auto_add_invited_external_users?: boolean;
       /**
        * Whether to enable the **Automatically add meeting participants** setting.
        *
        * @example true
+       * @deprecated true
        */
       auto_add_meeting_participants?: boolean;
+      /**
+       * Who is added to the continuous meeting chat. Invitees are users added during scheduling. Participants are users who join the meeting.
+       * * `all_users` - For all users, including external invitees and meeting participants.
+       * * `org_invitees_and_participants` - Only for meeting invitees and participants in your organization.
+       * * `org_invitees` - Only for meeting invitees in your organization.
+       *
+       * @example all_users
+       */
+      who_is_added?: 'all_users' | 'org_invitees_and_participants' | 'org_invitees';
     };
     /**
      * Whether to set the meeting as a participant focused meeting.
@@ -7182,15 +7238,15 @@ export type MeetingUpdateRequestBody = {
   /**
    * Unique identifier of the meeting template.
    *
-   * [Schedule the meeting from a meeting template](https://support.zoom.us/hc/en-us/articles/360036559151-Meeting-templates#h_86f06cff-0852-4998-81c5-c83663c176fb). Retrieve this field's value by calling the [List meeting templates](https://developers.zoom.us/docs/api/rest/reference/zoom-api/methods/#operation/listMeetingTemplates) API.
+   * [Schedule the meeting from a meeting template](https://support.zoom.us/hc/en-us/articles/360036559151-Meeting-templates#h_86f06cff-0852-4998-81c5-c83663c176fb). Retrieve this field's value by calling the [List meeting templates](/docs/api/rest/reference/zoom-api/methods/#operation/listMeetingTemplates) API.
    *
    * @example 5Cj3ceXoStO6TGOVvIOVPA==
    */
   template_id?: string;
   /**
-   * The timezone to assign to the `start_time` value. Only use this field ifor scheduled or recurring meetings with a fixed time.
+   * The timezone to assign to the `start_time` value. Only use this field for scheduled or recurring meetings with a fixed time.
    *
-   * For a list of supported timezones and their formats, see our [timezone list](https://developers.zoom.us/docs/api/rest/other-references/abbreviation-lists/#timezones).
+   * For a list of supported timezones and their formats, see our [timezone list](/docs/api/references/abbreviations/#timezones).
    *
    * @example America/Los_Angeles
    */
@@ -8703,15 +8759,16 @@ export type MeetingPollsResponse = {
      */
     id?: string;
     /**
-     * The poll's status.
-     *  `notstart` - Poll not started.
-     *  `started` - Poll started.
-     *  `ended` - Poll ended.
-     *  `sharing` - Sharing poll results.
+     * The meeting poll's status.
+     * `notstart` - Poll not started
+     * `started` - Poll started
+     * `ended` - Poll ended
+     * `sharing` - Sharing poll results
+     * `deactivated` - Poll deactivated
      *
      * @example notstart
      */
-    status?: 'notstart' | 'started' | 'ended' | 'sharing';
+    status?: 'notstart' | 'started' | 'ended' | 'sharing' | 'deactivated';
     /**
      * Whether meeting participants can answer poll questions anonymously.
      *
@@ -9393,14 +9450,15 @@ export type MeetingPollGetResponse = {
   id?: string;
   /**
    * The meeting poll's status.
-   *  `notstart` - Poll not started
-   *  `started` - Poll started
-   *  `ended` - Poll ended
-   *  `sharing` - Sharing poll results
+   * `notstart` - Poll not started
+   * `started` - Poll started
+   * `ended` - Poll ended
+   * `sharing` - Sharing poll results
+   * `deactivated` - Poll deactivated
    *
    * @example notstart
    */
-  status?: 'notstart' | 'started' | 'ended' | 'sharing';
+  status?: 'notstart' | 'started' | 'ended' | 'sharing' | 'deactivated';
   /**
    * Whether meeting participants answer poll questions anonymously.
    *
@@ -12828,7 +12886,7 @@ export type MeetingCreateResponse = {
     status?: 'available' | 'deleted';
   }[];
   /**
-   * The meeting passcode. This passcode may only contain these characters: `[a-z A-Z 0-9 @ - _ * !]`
+   * The meeting passcode. This passcode may only contain these characters `[a-z A-Z 0-9 @ - _ * !]`.
    *
    * If **Require a passcode when scheduling new meetings** setting has been enabled and [locked](https://support.zoom.us/hc/en-us/articles/115005269866-Using-Tiered-Settings#locked) for the user, the passcode field will be autogenerated in the response even if it is not provided in the API request.
    *
@@ -12836,7 +12894,7 @@ export type MeetingCreateResponse = {
    */
   password?: string;
   /**
-   * [Personal meeting ID (PMI)](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#understanding-personal-meeting-id-pmi). Only used for scheduled meetings and recurring meetings with no fixed time.
+   * [Personal meeting ID (PMI)](/docs/api/using-zoom-apis/#understanding-personal-meeting-id-pmi). Only used for scheduled meetings and recurring meetings with no fixed time.
    *
    * @example 97891943927
    */
@@ -13345,13 +13403,13 @@ export type MeetingCreateResponse = {
       attendees_can_upvote?: boolean;
     };
     /**
-     * The meeting's [language interpretation settings](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars). Make sure to add the language in the web portal in order to use it in the API. See link for details.
+     * The meeting's [language interpretation settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064768). Make sure to add the language in the web portal in order to use it in the API. See link for details.
      *
      * **Note:** This feature is only available for certain Meeting add-on, Education, and Business and higher plans. If this feature is not enabled on the host's account, this setting will **not** be applied to the meeting.
      */
     language_interpretation?: {
       /**
-       * Whether to enable [language interpretation](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars) for the meeting.
+       * Whether to enable [language interpretation](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064768) for the meeting.
        *
        * @example true
        */
@@ -13368,13 +13426,30 @@ export type MeetingCreateResponse = {
          */
         email?: string;
         /**
-         * A comma-separated list of the interpreter's languages. The string must contain two [country IDs](https://developers.zoom.us/docs/api/rest/other-references/abbreviation-lists/#countries).
+         * A comma-separated list of the interpreter's languages. The string must contain exactly two country IDs.
          *
-         * For example, if the interpreter will translate from English to Chinese, then this value will be `US,CN`.
+         * Only system-supported languages are allowed: `US` (English), `CN` (Chinese), `JP` (Japanese), `DE` (German), `FR` (French), `RU` (Russian), `PT` (Portuguese), `ES` (Spanish), and `KR` (Korean).
+         *
+         * For example, to set an interpreter translating from English to Chinese, use `US,CN`.
          *
          * @example US,FR
+         * @deprecated true
          */
         languages?: string;
+        /**
+         * A comma-separated list of the interpreter's languages. The string must contain exactly two languages.
+         *
+         * To get this value, use the `language_interpretation` object's `languages` and `custom_languages` values in the [**Get user settings**](/docs/api/users/#tag/users/GET/users/{userId}/settings) API response.
+         *
+         * **languages**: System-supported languages include `English`, `Chinese`, `Japanese`, `German`, `French`, `Russian`, `Portuguese`, `Spanish`, and `Korean`.
+         *
+         * **custom_languages**: User-defined languages added by the user.
+         *
+         * For example, an interpreter translating between English and French should use `English,French`.
+         *
+         * @example English,French
+         */
+        interpreter_languages?: string;
       }[];
     };
     /**
@@ -13474,7 +13549,7 @@ export type MeetingCreateResponse = {
      */
     show_share_button?: boolean;
     /**
-     * Use a [personal meeting ID (PMI)](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#understanding-personal-meeting-id-pmi). Only used for scheduled meetings and recurring meetings with no fixed time.
+     * Use a [personal meeting ID (PMI)](/docs/api/using-zoom-apis/#understanding-personal-meeting-id-pmi). Only used for scheduled meetings and recurring meetings with no fixed time.
      *
      * @example false
      * @default false
@@ -13533,14 +13608,25 @@ export type MeetingCreateResponse = {
        * Whether to enable the **Automatically add invited external users** setting.
        *
        * @example true
+       * @deprecated true
        */
       auto_add_invited_external_users?: boolean;
       /**
        * Whether to enable the **Automatically add meeting participants** setting.
        *
        * @example true
+       * @deprecated true
        */
       auto_add_meeting_participants?: boolean;
+      /**
+       * Who is added to the continuous meeting chat. Invitees are users added during scheduling. Participants are users who join the meeting.
+       * * `all_users` - For all users, including external invitees and meeting participants.
+       * * `org_invitees_and_participants` - Only for meeting invitees and participants in your organization.
+       * * `org_invitees` - Only for meeting invitees in your organization.
+       *
+       * @example all_users
+       */
+      who_is_added?: 'all_users' | 'org_invitees_and_participants' | 'org_invitees';
       /**
        * The channel's ID.
        *
@@ -13658,7 +13744,7 @@ export type MeetingCreateResponse = {
    */
   start_time?: string;
   /**
-   * URL to start the meeting. This URL should only be used by the host of the meeting and should not be shared with anyone other than the host of the meeting, since anyone with this URL will be able to log in to the Zoom client as the host of the meeting.
+   * URL to start the meeting. This URL should only be used by the host of the meeting and **should not be shared with anyone other than the host** of the meeting, since anyone with this URL will be able to log in to the Zoom Client as the host of the meeting.
    *
    * @example https://example.com/s/11111
    */
@@ -13761,7 +13847,7 @@ export type MeetingCreateRequestBody = {
    *
    * **Note:**
    * * If the account owner or administrator has configured [minimum passcode requirement settings](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604), the passcode **must** meet those requirements.
-   * * If passcode requirements are enabled, use the [**Get user settings**](https://developers.zoom.us/docs/api/users/#tag/users/GET/users/{userId}/settings) API or the [**Get account settings**](https://developers.zoom.us/docs/api/accounts/#tag/accounts/GET/accounts/{accountId}/settings) API to get the requirements.
+   * * If passcode requirements are enabled, use the [**Get user settings**](/docs/api/users/#tag/users/GET/users/{userId}/settings) API or the [**Get account settings**](/docs/api/accounts/#tag/accounts/GET/accounts/{accountId}/settings) API to get the requirements.
    * * If the **Require a passcode when scheduling new meetings** account setting is enabled and locked, a passcode will be automatically generated if one is not provided.
    *
    * @maxLength 10
@@ -13880,7 +13966,7 @@ export type MeetingCreateRequestBody = {
    */
   settings?: {
     /**
-     * Add additional meeting [data center regions](https://support.zoom.us/hc/en-us/articles/360042411451-Selecting-data-center-regions-for-hosted-meetings-and-webinars). Provide this value as an array of [country codes](https://developers.zoom.us/docs/api/rest/other-references/abbreviation-lists/#countries) for the countries available as data center regions in the [**Account Profile**](https://zoom.us/account/setting) interface but have been opted out of in the [user settings](https://zoom.us/profile).
+     * Add additional meeting [data center regions](https://support.zoom.us/hc/en-us/articles/360042411451-Selecting-data-center-regions-for-hosted-meetings-and-webinars). Provide this value as an array of [country codes](/docs/api/references/abbreviations/#countries) for the countries available as data center regions in the [**Account Profile**](https://zoom.us/account/setting) interface but have been opted out of in the [user settings](https://zoom.us/profile).
      *
      * For example, the data center regions selected in your [**Account Profile**](https://zoom.us/account) are `Europe`, `Hong Kong SAR`, `Australia`, `India`, `Japan`, `China`, `United States`, and `Canada`. However, in the [**My Profile**](https://zoom.us/profile) settings, you did **not** select `India` and `Japan` for meeting and webinar traffic routing.
      *
@@ -13990,7 +14076,7 @@ export type MeetingCreateRequestBody = {
     /**
      * If the `meeting_authentication` value is `true`, the type of authentication required for users to join a meeting.
      *
-     * To get this value, use the `authentication_options` array's `id` value in the [**Get user settings**](https://developers.zoom.us/docs/api-reference/zoom-api/methods#operation/userSettings) API response.
+     * To get this value, use the `authentication_options` array's `id` value in the [**Get user settings**](/docs/api-reference/zoom-api/methods#operation/userSettings) API response.
      *
      * @example signIn_D8cJuqWVQ623CI4Q8yQK0Q
      */
@@ -14185,13 +14271,13 @@ export type MeetingCreateRequestBody = {
       attendees_can_upvote?: boolean;
     };
     /**
-     * The meeting's [language interpretation settings](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars). Make sure to add the language in the web portal in order to use it in the API. See link for details.
+     * The meeting's [language interpretation settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064768). Make sure to add the language in the web portal in order to use it in the API. See link for details.
      *
      * **Note:** This feature is only available for certain Meeting add-on, Education, and Business and higher plans. If this feature is not enabled on the host's account, this setting will **not** be applied to the meeting.
      */
     language_interpretation?: {
       /**
-       * Whether to enable [language interpretation](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars) for the meeting.
+       * Whether to enable [language interpretation](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064768) for the meeting.
        *
        * @example true
        */
@@ -14208,13 +14294,30 @@ export type MeetingCreateRequestBody = {
          */
         email?: string;
         /**
-         * A comma-separated list of the interpreter's languages. The string must contain two [country IDs](https://developers.zoom.us/docs/api/rest/other-references/abbreviation-lists/#countries).
+         * A comma-separated list of the interpreter's languages. The string must contain exactly two country IDs.
          *
-         * For example, if the interpreter will translate from English to Chinese, then this value will be `US,CN`.
+         * Only system-supported languages are allowed: `US` (English), `CN` (Chinese), `JP` (Japanese), `DE` (German), `FR` (French), `RU` (Russian), `PT` (Portuguese), `ES` (Spanish), and `KR` (Korean).
+         *
+         * For example, to set an interpreter translating from English to Chinese, use `US,CN`.
          *
          * @example US,FR
+         * @deprecated true
          */
         languages?: string;
+        /**
+         * A comma-separated list of the interpreter's languages. The string must contain exactly two languages.
+         *
+         * To get this value, use the `language_interpretation` object's `languages` and `custom_languages` values in the [**Get user settings**](/docs/api/users/#tag/users/GET/users/{userId}/settings) API response.
+         *
+         * **languages**: System-supported languages include `English`, `Chinese`, `Japanese`, `German`, `French`, `Russian`, `Portuguese`, `Spanish`, and `Korean`.
+         *
+         * **custom_languages**: User-defined languages added by the user.
+         *
+         * For example, an interpreter translating between English and French should use `English,French`.
+         *
+         * @example English,French
+         */
+        interpreter_languages?: string;
       }[];
     };
     /**
@@ -14327,7 +14430,7 @@ export type MeetingCreateRequestBody = {
      */
     show_share_button?: boolean;
     /**
-     * Whether to use a [Personal Meeting ID (PMI)](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#understanding-personal-meeting-id-pmi) instead of a generated meeting ID. This field is only used for scheduled meetings (`2`), instant meetings (`1`), or recurring meetings with no fixed time (`3`). This value defaults to `false`.
+     * Whether to use a [Personal Meeting ID (PMI)](/docs/api/rest/using-zoom-apis/#understanding-personal-meeting-id-pmi) instead of a generated meeting ID. This field is only used for scheduled meetings (`2`), instant meetings (`1`), or recurring meetings with no fixed time (`3`). This value defaults to `false`.
      *
      * @example false
      * @default false
@@ -14379,14 +14482,25 @@ export type MeetingCreateRequestBody = {
        * Whether to enable the **Automatically add invited external users** setting.
        *
        * @example true
+       * @deprecated true
        */
       auto_add_invited_external_users?: boolean;
       /**
        * Whether to enable the **Automatically add meeting participants** setting.
        *
        * @example true
+       * @deprecated true
        */
       auto_add_meeting_participants?: boolean;
+      /**
+       * Who is added to the continuous meeting chat. Invitees are users added during scheduling. Participants are users who join the meeting.
+       * * `all_users` - For all users, including external invitees and meeting participants.
+       * * `org_invitees_and_participants` - Only for meeting invitees and participants in your organization.
+       * * `org_invitees` - Only for meeting invitees in your organization.
+       *
+       * @example all_users
+       */
+      who_is_added?: 'all_users' | 'org_invitees_and_participants' | 'org_invitees';
     };
     /**
      * Whether to set the meeting as a participant focused meeting.
@@ -14493,7 +14607,7 @@ export type MeetingCreateRequestBody = {
   /**
    * The meeting's start time. This field is only used for scheduled or recurring meetings with a fixed time. This supports local time and GMT formats.
    * * To set a meeting's start time in GMT, use the `yyyy-MM-ddTHH:mm:ssZ` date-time format. For example, `2020-03-31T12:02:00Z`.
-   * * To set a meeting's start time using a specific timezone, use the `yyyy-MM-ddTHH:mm:ss` date-time format and specify the [timezone ID](https://developers.zoom.us/docs/api/rest/other-references/abbreviation-lists/#timezones) in the `timezone` field. If you do not specify a timezone, the `timezone` value defaults to your Zoom account's timezone. You can also use `UTC` for the `timezone` value.
+   * * To set a meeting's start time using a specific timezone, use the `yyyy-MM-ddTHH:mm:ss` date-time format and specify the [timezone ID](/docs/api/references/abbreviations/#timezones) in the `timezone` field. If you do not specify a timezone, the `timezone` value defaults to your Zoom account's timezone. You can also use `UTC` for the `timezone` value.
    * **Note:** If no `start_time` is set for a scheduled meeting, the `start_time` is set at the current time and the meeting type changes to an instant meeting, which expires after 30 days.
    *
    * @format date-time
@@ -14501,7 +14615,7 @@ export type MeetingCreateRequestBody = {
    */
   start_time?: string;
   /**
-   * The account admin meeting template ID used to schedule a meeting using a [meeting template](https://support.zoom.us/hc/en-us/articles/360036559151-Meeting-templates). For a list of account admin-provided meeting templates, use the [**List meeting templates**](https://developers.zoom.us/docs/api-reference/zoom-api/methods#operation/listMeetingTemplates) API.
+   * The account admin meeting template ID used to schedule a meeting using a [meeting template](https://support.zoom.us/hc/en-us/articles/360036559151-Meeting-templates). For a list of account admin-provided meeting templates, use the [**List meeting templates**](/docs/api-reference/zoom-api/methods#operation/listMeetingTemplates) API.
    * * At this time, this field **only** accepts account admin meeting template IDs.
    * * To enable the account admin meeting templates feature, [contact Zoom support](https://support.zoom.us/hc/en-us).
    *
@@ -14511,7 +14625,7 @@ export type MeetingCreateRequestBody = {
   /**
    * The timezone to assign to the `start_time` value. This field is only used for scheduled or recurring meetings with a fixed time.
    *
-   * For a list of supported timezones and their formats, see our [timezone list](https://developers.zoom.us/docs/api/rest/other-references/abbreviation-lists/#timezones).
+   * For a list of supported timezones and their formats, see our [timezone list](/docs/api/references/abbreviations/#timezones).
    *
    * @example America/Los_Angeles
    */
@@ -15313,6 +15427,451 @@ export const reportDaily = (variables: ReportDailyVariables, signal?: AbortSigna
     ...variables,
     signal
   });
+
+export type GethistorymeetingandwebinarlistQueryParams = {
+  /**
+   * The start date in `yyyy-mm-dd` format. The date range defined by the `from` and `to` parameters should only be one month, as the report includes only one month worth of data at once.
+   *
+   * @example 2024-12-23
+   */
+  from: string;
+  /**
+   * The end date `yyyy-MM-dd` format.
+   *
+   * @example 2024-12-24
+   */
+  to: string;
+  /**
+   * The type of date to query.
+   * * `start_time` - Query by meeting's start time.
+   * * `end_time` - Query by meeting's end time.
+   *
+   * This value defaults to `start_time`.
+   *
+   * @example end_time
+   */
+  date_type?: 'start_time' | 'end_time';
+  /**
+   * The meeting type to query.
+   * - `all` - rerturn meetings and webinars
+   * - `meeting` - only return meetings
+   * - `webinar` - only return webinars
+   *
+   * @example meeting
+   */
+  meeting_type?: 'meeting' | 'webinar' | 'all';
+  /**
+   * Query meetings that have this type of report.
+   * - `all` - all meetings
+   * - `poll` - meetings with poll data
+   * - `survey` - meetings with survey data
+   * - `qa` - meetings with Q&A data
+   * - `resource` - meetings with resource link data
+   * - `reaction` - meetings with reaction data
+   *
+   * @example poll
+   */
+  report_type?: 'all' | 'poll' | 'survey' | 'qa' | 'resource' | 'reaction';
+  /**
+   * The keywords of meeting topic or meeting ID.
+   *
+   * @example my meeting
+   */
+  search_key?: string;
+  /**
+   * The number of records to be returned within a single API call.
+   *
+   * @example 30
+   */
+  page_size?: number;
+  /**
+   * Use the next page token to paginate through large result sets. A next page token is returned whenever the set of available results exceeds the current page size. This token's expiration period is 15 minutes.
+   *
+   * @example IAfJX3jsOLW7w3dokmFl84zOa0MAVGyMEB2
+   */
+  next_page_token?: string;
+  /**
+   * The group ID. To get a group ID, use the [**List groups**](/docs/api/rest/reference/user/methods/#operation/groups) API.
+   *
+   *  **Note:** The API response will only contain users who are members of the queried group ID.
+   *
+   * @example TaVA8QKik_1233
+   */
+  group_id?: string;
+};
+
+export type GethistorymeetingandwebinarlistError = Fetcher.ErrorWrapper<undefined>;
+
+export type GethistorymeetingandwebinarlistResponse = {
+  /**
+   * Use the next page token to paginate through large result sets. A next page token is returned whenever the set of available results exceeds the current page size. This token's expiration period is 15 minutes.
+   *
+   * @example b43YBRLJFg3V4vsSpxvGdKIGtNbxn9h9If2
+   */
+  next_page_token?: string;
+  /**
+   * The number of records returned with a single API call.
+   *
+   * @example 30
+   */
+  page_size?: number;
+  /**
+   * Array of history meetings.
+   *
+   * @maxItems 300
+   */
+  history_meetings?: {
+    /**
+     * The meeting unique universal identifier (UUID). Double encode your UUID when using it for API calls if the UUID begins with a '/'or contains '//' in it.
+     *
+     * @example gm8s9L+PTEC+FG3sFbd1Cw==
+     */
+    meeting_uuid?: string;
+    /**
+     * The [meeting ID](https://support.zoom.us/hc/en-us/articles/201362373-What-is-a-Meeting-ID-): Unique identifier of the meeting in &quot;**long**&quot; format(represented as int64 data type in JSON), also known as the meeting number.
+     *
+     * @format int64
+     * @example 93201235621
+     */
+    meeting_id?: number;
+    /**
+     * The meeting type, either Meeting or Webinar.
+     *
+     * @example Meeting
+     */
+    type?: 'Meeting' | 'Webinar';
+    /**
+     * The host's display name.
+     *
+     * @example Jill Chill
+     */
+    host_display_name?: string;
+    /**
+     * The host's email address.
+     *
+     * @example jchill@example.com
+     */
+    host_email?: string;
+    /**
+     * The meeting's start date and time.
+     *
+     * @example 2024-12-23T07:09:03Z
+     */
+    start_time?: string;
+    /**
+     * The meeting's end date and time.
+     *
+     * @example 2024-12-23T08:09:03Z
+     */
+    end_time?: string;
+    /**
+     * The meeting's topic.
+     *
+     * @example My Meeting
+     */
+    topic?: string;
+    /**
+     * The number of meeting participants.
+     *
+     * @example 5
+     */
+    participants?: number;
+    /**
+     * The meeting's duration, in minutes.
+     *
+     * @example 60
+     */
+    duration?: number;
+    /**
+     * The total duration of all participants, in minutes.
+     *
+     * @example 83
+     */
+    total_participant_minutes?: number;
+    /**
+     * The host's department.
+     *
+     * @example Developers
+     */
+    department?: string;
+    /**
+     * The host's groups
+     *
+     * @maxItems 200
+     * @example group_01
+     */
+    group?: string[];
+    /**
+     * Whether the meeting was created directly through Zoom or via an API request:
+     * * If the meeting was created via an OAuth app, this field returns the OAuth app's name.
+     * * If the meeting was created via JWT or the Zoom Web Portal, this returns the `Zoom` value.
+     *
+     * @example Zoom
+     */
+    source?: string;
+    /**
+     * This value shows how many people viewed the webinar on their computer. It does not include panelists or attendees who only listened by phone. Viewers who joined the meeting multiple times or from multiple devices are counted only once.
+     *
+     * @example 4
+     */
+    unique_viewers?: number;
+    /**
+     * The maximum number of online viewers at the same time during the webinar, excluding panelists.
+     *
+     * @example 3
+     */
+    max_concurrent_views?: number;
+    /**
+     * The meeting's create date and time.
+     *
+     * @example 2024-12-23T06:09:03Z
+     */
+    create_time?: string;
+    /**
+     * The custom attributes that the host is assigned
+     *
+     * @maxItems 5
+     */
+    custom_fields?: {
+      /**
+       * The custom attribute's name.
+       *
+       * @example attribute 1
+       */
+      key?: string;
+      /**
+       * The custom attribute's value.
+       *
+       * @example test
+       */
+      value?: string;
+    }[];
+    /**
+     * The tracking fields and values assigned to the meeting.
+     *
+     * @maxItems 10
+     */
+    tracking_fields?: {
+      /**
+       * The label of the tracking field.
+       *
+       * @example Meeting purpose.
+       */
+      field?: string;
+      /**
+       * The value of the tracking field.
+       *
+       * @example Support
+       */
+      value?: string;
+    }[];
+    /**
+     * VFfeatures used in the meeting.
+     */
+    feature_used?: {
+      /**
+       * Whether the screen was shared in the meeting.
+       *
+       * @example true
+       */
+      screen_sharing?: boolean;
+      /**
+       * Whether the video was on in the meeting.
+       *
+       * @example true
+       */
+      video_on?: boolean;
+      /**
+       * Whether to use remote control in the meeting.
+       *
+       * @example true
+       */
+      remote_control?: boolean;
+      /**
+       * Whether closed caption was enabled in the meeting.
+       *
+       * @example false
+       */
+      closed_caption?: boolean;
+      /**
+       * Whether breakout room was enabled in the meeting.
+       *
+       * @example false
+       */
+      breakout_room?: boolean;
+      /**
+       * Whether language translation was used in the meeting.
+       *
+       * @example false
+       */
+      language_interpretation?: boolean;
+      /**
+       * Whether anyone has joined the meeting by telephone.
+       *
+       * @example true
+       */
+      telephone_usage?: boolean;
+      /**
+       * Whether anyone in the meeting has sent a message in the meeting chat.
+       *
+       * @example false
+       */
+      in_meeting_chat?: boolean;
+      /**
+       * Whether the meeting has poll data.
+       *
+       * @example true
+       */
+      poll?: boolean;
+      /**
+       * Whether anyone has joined the meeting by Zoom Room.
+       *
+       * @example false
+       */
+      join_by_room?: boolean;
+      /**
+       * Whether to open the waiting room for the meeting.
+       *
+       * @example false
+       */
+      waiting_room?: boolean;
+      /**
+       * Whether live transcription was turned on.
+       *
+       * @example false
+       */
+      live_transcription?: boolean;
+      /**
+       * Whether anyone sent an emoticon.
+       *
+       * @example true
+       */
+      reaction?: boolean;
+      /**
+       * Whether the Zoom app was used in the meeting.
+       *
+       * @example false
+       */
+      zoom_apps?: boolean;
+      /**
+       * Whether annotation was used in the meeting.
+       *
+       * @example false
+       */
+      annotation?: boolean;
+      /**
+       * Whether anyone has raised hand in the meeting.
+       *
+       * @example true
+       */
+      raise_hand?: boolean;
+      /**
+       * Whether anyone used a virtual background in the meeting.
+       *
+       * @example true
+       */
+      virtual_background?: boolean;
+      /**
+       * Whether a whiteboard was used in the meeting.
+       *
+       * @example true
+       */
+      whiteboard?: boolean;
+      /**
+       * Whether immersive scene was enabled in then meeting.
+       *
+       * @example false
+       */
+      immersive_scene?: boolean;
+      /**
+       * Whether anyone used an avatar in the meeting.
+       *
+       * @example true
+       */
+      avatar?: boolean;
+      /**
+       * Whether anyone switched the meeting to their mobile phone.
+       *
+       * @example false
+       */
+      switch_to_mobile?: boolean;
+      /**
+       * Whether anyone sent files in the meeting chat.
+       *
+       * @example true
+       */
+      file_sharing?: boolean;
+      /**
+       * Whether the meeting summary was enabled.
+       *
+       * @example false
+       */
+      meeting_summary?: boolean;
+      /**
+       * Whether the meeting questions was enabled.
+       *
+       * @example false
+       */
+      meeting_questions?: boolean;
+      /**
+       * Whether to record the meeting to the local computer.
+       *
+       * @example true
+       */
+      record_to_computer?: boolean;
+      /**
+       * Whether to record the meeting to the cloud.
+       *
+       * @example true
+       */
+      record_to_cloud?: boolean;
+      /**
+       * Whether live translation was used in the meeting.
+       *
+       * @example false
+       */
+      live_translation?: boolean;
+      /**
+       * Whether registration was enabled for the meeting.
+       *
+       * @example false
+       */
+      registration?: boolean;
+      /**
+       * Whether smart recording was enabled for the meeting.
+       *
+       * @example true
+       */
+      smart_recording?: boolean;
+    };
+  }[];
+};
+
+export type GethistorymeetingandwebinarlistVariables = {
+  queryParams: GethistorymeetingandwebinarlistQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieve a list of history meetings and webinars.
+ *
+ * **Scopes:** `report:read:admin`
+ *
+ * **Granular Scopes:** `report:read:list_history_meetings:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
+ */
+export const gethistorymeetingandwebinarlist = (
+  variables: GethistorymeetingandwebinarlistVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    GethistorymeetingandwebinarlistResponse,
+    GethistorymeetingandwebinarlistError,
+    undefined,
+    {},
+    GethistorymeetingandwebinarlistQueryParams,
+    {}
+  >({ url: '/report/history_meetings', method: 'get', ...variables, signal });
 
 export type ReportMeetingactivitylogsQueryParams = {
   /**
@@ -21886,7 +22445,7 @@ export type WebinarCreateResponse = {
      */
     contact_name?: string;
     /**
-     * Set the email language to one of the following:
+     * Set the email language.
      * `en-US`,`de-DE`,`es-ES`,`fr-FR`,`jp-JP`,`pt-PT`,`ru-RU`,`zh-CN`, `zh-TW`, `ko-KO`, `it-IT`, `vi-VN`.
      *
      * @example en-US
@@ -21919,9 +22478,9 @@ export type WebinarCreateResponse = {
      */
     follow_up_absentees_email_notification?: {
       /**
-       * * `true`: Send follow-up email to absentees.
+       * * `true` - Send follow-up email to absentees.
        *
-       * * `false`: Do not send follow-up email to absentees.
+       * * `false` - Do not send follow-up email to absentees.
        *
        * @example true
        */
@@ -21945,9 +22504,9 @@ export type WebinarCreateResponse = {
      */
     follow_up_attendees_email_notification?: {
       /**
-       * * `true`: Send follow-up email to attendees.
+       * * `true` - Send follow-up email to attendees.
        *
-       * * `false`: Do not send follow-up email to attendees.
+       * * `false` - Do not send follow-up email to attendees.
        *
        * @example true
        */
@@ -21991,13 +22550,13 @@ export type WebinarCreateResponse = {
      */
     host_video?: boolean;
     /**
-     * The webinar's [language interpretation settings](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars). Make sure to add the language in the web portal in order to use it in the API. See link for details.
+     * The webinar's [language interpretation settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064768). Make sure to add the language in the web portal in order to use it in the API. See link for details.
      *
-     * **Note:** This feature is only available for certain Webinar add-on, Education, and Business and higher plans. If this feature is not enabled on the host's account, this setting will **not** be applied to the webinar.
+     * **Note:** This feature is only available for certain Webinar add-on, Education, and Business and higher plans. If this feature is not enabled on the host's account, this setting will **not** be applied to the webinar. This is not supported for simulive webinars.
      */
     language_interpretation?: {
       /**
-       * Enable [language interpretation](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars) for the webinar.
+       * Whether to enable [language interpretation](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064768) for the webinar.
        *
        * @example true
        */
@@ -22014,13 +22573,30 @@ export type WebinarCreateResponse = {
          */
         email?: string;
         /**
-         * A comma-separated list of the interpreter's languages. The string must contain two [country IDs](https://developers.zoom.us/docs/api/rest/other-references/abbreviation-lists/#countries).
+         * A comma-separated list of the interpreter's languages. The string must contain exactly two country IDs.
          *
-         * For example, if the interpreter will translate from English to Chinese, then this value will be `US,CN`.
+         * Only system-supported languages are allowed: `US` (English), `CN` (Chinese), `JP` (Japanese), `DE` (German), `FR` (French), `RU` (Russian), `PT` (Portuguese), `ES` (Spanish), and `KR` (Korean).
          *
-         * @example US,CN
+         * For example, to set an interpreter translating from English to Chinese, use `US,CN`.
+         *
+         * @example US,FR
+         * @deprecated true
          */
         languages?: string;
+        /**
+         * A comma-separated list of the interpreter's languages. The string must contain exactly two languages.
+         *
+         * To get this value, use the `language_interpretation` object's `languages` and `custom_languages` values in the [**Get user settings**](/docs/api/users/#tag/users/GET/users/{userId}/settings) API response.
+         *
+         * **languages**: System-supported languages include `English`, `Chinese`, `Japanese`, `German`, `French`, `Russian`, `Portuguese`, `Spanish`, and `Korean`.
+         *
+         * **custom_languages**: User-defined languages added by the user.
+         *
+         * For example, an interpreter translating between English and French should use `English,French`.
+         *
+         * @example English,French
+         */
+        interpreter_languages?: string;
       }[];
     };
     /**
@@ -22125,43 +22701,43 @@ export type WebinarCreateResponse = {
      */
     question_and_answer?: {
       /**
-       * * `true`: Allow participants to submit questions.
+       * * `true` - Allow participants to submit questions.
        *
-       * * `false`: Do not allow submit questions.
+       * * `false` - Do not allow submit questions.
        *
        * @example true
        */
       allow_submit_questions?: boolean;
       /**
-       * * `true`: Allow participants to send questions without providing their name to the host, co-host, and panelists..
+       * * `true` - Allow participants to send questions without providing their name to the host, co-host, and panelists.
        *
-       * * `false`: Do not allow anonymous questions.
+       * * `false` - Do not allow anonymous questions.
        *
        * @example true
        */
       allow_anonymous_questions?: boolean;
       /**
-       * Indicate whether you want attendees to be able to view answered questions only or view all questions.
+       * Indicate whether you want attendees to be able to view only answered questions, or view all questions.
        *
-       * * `only`: Attendees are able to view answered questions only.
+       * * `only` - Attendees are able to view answered questions only.
        *
-       * *  `all`: Attendees are able to view all questions submitted in the Q&amp;A.
+       * * `all` - Attendees are able to view all questions submitted in the Q&amp;A.
        *
        * @example all
        */
       answer_questions?: 'only' | 'all';
       /**
-       * * `true`: Attendees can answer questions or leave a comment in the question thread.
+       * * `true` - Attendees can answer questions or leave a comment in the question thread.
        *
-       * * `false`: Attendees can not answer questions or leave a comment in the question thread
+       * * `false` - Attendees can not answer questions or leave a comment in the question thread
        *
        * @example true
        */
       attendees_can_comment?: boolean;
       /**
-       * * `true`: Attendees can click the thumbs up button to bring popular questions to the top of the Q&amp;A window.
+       * * `true` - Attendees can click the thumbs up button to bring popular questions to the top of the Q&amp;A window.
        *
-       * * `false`: Attendees can not click the thumbs up button on questions.
+       * * `false` - Attendees can not click the thumbs up button on questions.
        *
        * @example true
        */
@@ -22169,9 +22745,9 @@ export type WebinarCreateResponse = {
       /**
        * If simulive webinar,
        *
-       * * `true`: allow auto-reply to attendees.
+       * * `true` - allow auto-reply to attendees.
        *
-       * * `false`: don't allow auto-reply to the attendees.
+       * * `false` - don't allow auto-reply to the attendees.
        *
        * @example true
        */
@@ -22275,7 +22851,7 @@ export type WebinarCreateResponse = {
    */
   start_url?: string;
   /**
-   * Time zone to format start_time.
+   * Time zone to format `start_time`.
    *
    * @example America/Los_Angeles
    */
@@ -22684,13 +23260,13 @@ export type WebinarCreateRequestBody = {
      */
     host_video?: boolean;
     /**
-     * The webinar's [language interpretation settings](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars). Make sure to add the language in the web portal in order to use it in the API. See link for details.
+     * The webinar's [language interpretation settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064768). Make sure to add the language in the web portal in order to use it in the API. See link for details.
      *
      * **Note:** This feature is only available for certain Webinar add-on, Education, and Business and higher plans. If this feature is not enabled on the host's account, this setting will **not** be applied to the webinar. This is not supported for simulive webinars.
      */
     language_interpretation?: {
       /**
-       * Enable [language interpretation](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars) for the webinar.
+       * Whether to enable [language interpretation](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064768) for the webinar.
        *
        * @example true
        */
@@ -22707,13 +23283,30 @@ export type WebinarCreateRequestBody = {
          */
         email?: string;
         /**
-         * A comma-separated list of the interpreter's languages. The string must contain two [country IDs](https://developers.zoom.us/docs/api/rest/other-references/abbreviation-lists/#countries).
+         * A comma-separated list of the interpreter's languages. The string must contain exactly two country IDs.
          *
-         * For example, if the interpreter will translate from English to Chinese, then this value will be `US,CN`.
+         * Only system-supported languages are allowed: `US` (English), `CN` (Chinese), `JP` (Japanese), `DE` (German), `FR` (French), `RU` (Russian), `PT` (Portuguese), `ES` (Spanish), and `KR` (Korean).
          *
-         * @example US,CN
+         * For example, to set an interpreter translating from English to Chinese, use `US,CN`.
+         *
+         * @example US,FR
+         * @deprecated true
          */
         languages?: string;
+        /**
+         * A comma-separated list of the interpreter's languages. The string must contain exactly two languages.
+         *
+         * To get this value, use the `language_interpretation` object's `languages` and `custom_languages` values in the [**Get user settings**](https://developers.zoom.us/docs/api/users/#tag/users/GET/users/{userId}/settings) API response.
+         *
+         * **languages**: System-supported languages include `English`, `Chinese`, `Japanese`, `German`, `French`, `Russian`, `Portuguese`, `Spanish`, and `Korean`.
+         *
+         * **custom_languages**: User-defined languages added by the user.
+         *
+         * For example, an interpreter translating between English and French should use `English,French`.
+         *
+         * @example English,French
+         */
+        interpreter_languages?: string;
       }[];
     };
     /**
@@ -22812,9 +23405,9 @@ export type WebinarCreateRequestBody = {
      */
     question_and_answer?: {
       /**
-       * * `true`: Allow participants to submit questions.
+       * * `true` - Allow participants to submit questions.
        *
-       * * `false`: Do not allow submit questions.
+       * * `false` - Do not allow submit questions.
        *
        * @example true
        */
@@ -23487,13 +24080,13 @@ export type WebinarResponse = {
      */
     host_video?: boolean;
     /**
-     * The webinar's [language interpretation settings](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars). Make sure to add the language in the web portal in order to use it in the API. See link for details.
+     * The webinar's [language interpretation settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064768). Make sure to add the language in the web portal in order to use it in the API. See link for details.
      *
-     * **Note:** This feature is only available for certain Webinar add-on, Education, and Business and higher plans. If this feature is not enabled on the host's account, this setting will **not** be applied to the webinar.
+     * **Note:** This feature is only available for certain Webinar add-on, Education, and Business and higher plans. If this feature is not enabled on the host's account, this setting will **not** be applied to the webinar. This is not supported for simulive webinars.
      */
     language_interpretation?: {
       /**
-       * Enable [language interpretation](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars) for the webinar.
+       * Whether to enable [language interpretation](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064768) for the webinar.
        *
        * @example true
        */
@@ -23510,13 +24103,30 @@ export type WebinarResponse = {
          */
         email?: string;
         /**
-         * A comma-separated list of the interpreter's languages. The string must contain two [country IDs](https://developers.zoom.us/docs/api/rest/other-references/abbreviation-lists/#countries).
+         * A comma-separated list of the interpreter's languages. The string must contain exactly two country IDs.
          *
-         * For example, if the interpreter will translate from English to Chinese, then this value will be `US,CN`.
+         * Only system-supported languages are allowed: `US` (English), `CN` (Chinese), `JP` (Japanese), `DE` (German), `FR` (French), `RU` (Russian), `PT` (Portuguese), `ES` (Spanish), and `KR` (Korean).
          *
-         * @example US,CN
+         * For example, to set an interpreter translating from English to Chinese, use `US,CN`.
+         *
+         * @example US,FR
+         * @deprecated true
          */
         languages?: string;
+        /**
+         * A comma-separated list of the interpreter's languages. The string must contain exactly two languages.
+         *
+         * To get this value, use the `language_interpretation` object's `languages` and `custom_languages` values in the [**Get user settings**](/docs/api/users/#tag/users/GET/users/{userId}/settings) API response.
+         *
+         * **languages**: System-supported languages include `English`, `Chinese`, `Japanese`, `German`, `French`, `Russian`, `Portuguese`, `Spanish`, and `Korean`.
+         *
+         * **custom_languages**: User-defined languages added by the user.
+         *
+         * For example, an interpreter translating between English and French should use `English,French`.
+         *
+         * @example English,French
+         */
+        interpreter_languages?: string;
       }[];
     };
     /**
@@ -23679,9 +24289,9 @@ export type WebinarResponse = {
        */
       auto_reply_text?: string;
       /**
-       * * `true`: Enable [Q&amp;A](https://support.zoom.us/hc/en-us/articles/203686015-Using-Q-A-as-the-webinar-host#:~:text=Overview,and%20upvote%20each%20other's%20questions.) for webinar.
+       * * `true` - Enable [Q&amp;A](https://support.zoom.us/hc/en-us/articles/203686015-Using-Q-A-as-the-webinar-host#:~:text=Overview,and%20upvote%20each%20other's%20questions.) for webinar.
        *
-       * * `false`: Disable Q&amp;A for webinar.
+       * * `false` - Disable Q&amp;A for webinar.
        *
        * @example true
        */
@@ -23823,7 +24433,7 @@ export type WebinarResponse = {
    */
   record_file_id?: string;
   /**
-   * The platform through which the meeting was created.
+   * The platform used when creating the meeting.
    * * `other` - Created through another platform.
    * * `open_api` - Created through Open API.
    * * `web_portal` - Created through the web portal.
@@ -24287,13 +24897,13 @@ export type WebinarUpdateRequestBody = {
      */
     host_video?: boolean;
     /**
-     * The webinar's [language interpretation settings](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars). Make sure to add the language in the web portal in order to use it in the API. See link for details.
+     * The webinar's [language interpretation settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064768). Make sure to add the language in the web portal in order to use it in the API. See link for details.
      *
-     * **Note** This feature is only available for certain webinar add-ons, and for Education, and Business, and higher plans. If this feature is not enabled on the host's account, this setting will **not** be applied to the webinar.
+     * **Note:** This feature is only available for certain Webinar add-on, Education, and Business and higher plans. If this feature is not enabled on the host's account, this setting will **not** be applied to the webinar. This is not supported for simulive webinars.
      */
     language_interpretation?: {
       /**
-       * Enable [language interpretation](https://support.zoom.us/hc/en-us/articles/360034919791-Language-interpretation-in-meetings-and-webinars) for the webinar.
+       * Whether to enable [language interpretation](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064768) for the webinar.
        *
        * @example true
        */
@@ -24310,13 +24920,30 @@ export type WebinarUpdateRequestBody = {
          */
         email?: string;
         /**
-         * A comma-separated list of the interpreter's languages. The string must contain two letter [country codes](https://developers.zoom.us/docs/api/rest/other-references/abbreviation-lists/#countries).
+         * A comma-separated list of the interpreter's languages. The string must contain exactly two country IDs.
          *
-         * If the interpreter will translate from English to Chinese, then this value will be `US,CN`.
+         * Only system-supported languages are allowed: `US` (English), `CN` (Chinese), `JP` (Japanese), `DE` (German), `FR` (French), `RU` (Russian), `PT` (Portuguese), `ES` (Spanish), and `KR` (Korean).
          *
-         * @example US,CN
+         * For example, to set an interpreter translating from English to Chinese, use `US,CN`.
+         *
+         * @example US,FR
+         * @deprecated true
          */
         languages?: string;
+        /**
+         * A comma-separated list of the interpreter's languages. The string must contain exactly two languages.
+         *
+         * To get this value, use the `language_interpretation` object's `languages` and `custom_languages` values in the [**Get user settings**](https://developers.zoom.us/docs/api/users/#tag/users/GET/users/{userId}/settings) API response.
+         *
+         * **languages**: System-supported languages include `English`, `Chinese`, `Japanese`, `German`, `French`, `Russian`, `Portuguese`, `Spanish`, and `Korean`.
+         *
+         * **custom_languages**: User-defined languages added by the user.
+         *
+         * For example, an interpreter translating between English and French should use `English,French`.
+         *
+         * @example English,French
+         */
+        interpreter_languages?: string;
       }[];
     };
     /**
@@ -26287,15 +26914,16 @@ export type WebinarPollsResponse = {
      */
     id?: string;
     /**
-     * The status of the poll:
-     *  `notstart` - Poll not started
-     *  `started` - Poll started
-     *  `ended` - Poll ended
-     *  `sharing` - Sharing poll results
+     * The status of the webinar poll:
+     * `notstart` - Poll not started
+     * `started` - Poll started
+     * `ended` - Poll ended
+     * `sharing` - Sharing poll results
+     * `deactivated` - Poll deactivated
      *
      * @example notstart
      */
-    status?: 'notstart' | 'started' | 'ended' | 'sharing';
+    status?: 'notstart' | 'started' | 'ended' | 'sharing' | 'deactivated';
     /**
      * Whether meeting participants answer poll questions anonymously.
      *
@@ -26964,14 +27592,15 @@ export type WebinarPollGetResponse = {
   id?: string;
   /**
    * The status of the webinar poll:
-   *  `notstart` - Poll not started
-   *  `started` - Poll started
-   *  `ended` - Poll ended
-   *  `sharing` - Sharing poll results
+   * `notstart` - Poll not started
+   * `started` - Poll started
+   * `ended` - Poll ended
+   * `sharing` - Sharing poll results
+   * `deactivated` - Poll deactivated
    *
    * @example notstart
    */
-  status?: 'notstart' | 'started' | 'ended' | 'sharing';
+  status?: 'notstart' | 'started' | 'ended' | 'sharing' | 'deactivated';
   /**
    * Whether meeting participants answer poll questions anonymously.
    *
@@ -29572,6 +30201,7 @@ export const operationsByTag = {
     getBillingInvoicesReports,
     reportCloudRecording,
     reportDaily,
+    gethistorymeetingandwebinarlist,
     reportMeetingactivitylogs,
     reportMeetingDetails,
     reportMeetingParticipants,
