@@ -33,8 +33,8 @@ importers:
         specifier: ^3.0.0
         version: 3.0.0
       openai:
-        specifier: ^4.86.2
-        version: 4.86.2
+        specifier: ^4.87.3
+        version: 4.87.3
       openapi3-ts:
         specifier: ^4.4.0
         version: 4.4.0
@@ -1796,8 +1796,8 @@ packages:
     resolution: {integrity: sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==}
     engines: {node: '>=0.10.0'}
 
-  openai@4.86.2:
-    resolution: {integrity: sha512-nvYeFjmjdSu6/msld+22JoUlCICNk/lUFpSMmc6KNhpeNLpqL70TqbD/8Vura/tFmYqHKW0trcjgPwUpKSPwaA==}
+  openai@4.87.3:
+    resolution: {integrity: sha512-d2D54fzMuBYTxMW8wcNmhT1rYKcTfMJ8t+4KjH2KtvYenygITiGBgHoIrzHwnDQWW+C5oCA+ikIR2jgPCFqcKQ==}
     hasBin: true
     peerDependencies:
       ws: ^8.18.0
@@ -4276,7 +4276,7 @@ snapshots:
 
   object-assign@4.1.1: {}
 
-  openai@4.86.2:
+  openai@4.87.3:
     dependencies:
       '@types/node': 18.19.68
       '@types/node-fetch': 2.6.12
