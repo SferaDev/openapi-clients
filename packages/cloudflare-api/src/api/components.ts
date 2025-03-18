@@ -8057,6 +8057,145 @@ export const workersAiPostRunCfBaaiBgeLargeEnV15 = (
     WorkersAiPostRunCfBaaiBgeLargeEnV15PathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/baai/bge-large-en-v1.5', method: 'post', ...variables, signal });
 
+export type WorkersAiPostRunCfBaaiBgeM3PathParams = {
+  /**
+   * @example 023e105f4ecef8ad9ca31a8372d0c353
+   */
+  accountId: string;
+};
+
+export type WorkersAiPostRunCfBaaiBgeM3Error = Fetcher.ErrorWrapper<undefined>;
+
+export type WorkersAiPostRunCfBaaiBgeM3Response = {
+  result?:
+    | {
+        response?: {
+          /**
+           * Index of the context in the request
+           */
+          id?: number;
+          /**
+           * Score of the context under the index.
+           */
+          score?: number;
+        }[];
+      }
+    | {
+        response?: number[][];
+      };
+  /**
+   * @default true
+   */
+  success?: boolean;
+};
+
+export type WorkersAiPostRunCfBaaiBgeM3RequestBody = {
+  /**
+   * List of provided contexts. Note that the index in this array is important, as the response will refer to it.
+   */
+  contexts: {
+    /**
+     * One of the provided context content
+     *
+     * @minLength 1
+     */
+    text?: string;
+  }[];
+  /**
+   * A query you wish to perform against the provided contexts. If no query is provided the model with respond with embeddings for contexts
+   *
+   * @minLength 1
+   */
+  query?: string;
+};
+
+export type WorkersAiPostRunCfBaaiBgeM3Variables = {
+  body: WorkersAiPostRunCfBaaiBgeM3RequestBody;
+  pathParams: WorkersAiPostRunCfBaaiBgeM3PathParams;
+} & FetcherExtraProps;
+
+export const workersAiPostRunCfBaaiBgeM3 = (variables: WorkersAiPostRunCfBaaiBgeM3Variables, signal?: AbortSignal) =>
+  fetch<
+    WorkersAiPostRunCfBaaiBgeM3Response,
+    WorkersAiPostRunCfBaaiBgeM3Error,
+    WorkersAiPostRunCfBaaiBgeM3RequestBody,
+    {},
+    {},
+    WorkersAiPostRunCfBaaiBgeM3PathParams
+  >({ url: '/accounts/{accountId}/ai/run/@cf/baai/bge-m3', method: 'post', ...variables, signal });
+
+export type WorkersAiPostRunCfBaaiBgeRerankerBasePathParams = {
+  /**
+   * @example 023e105f4ecef8ad9ca31a8372d0c353
+   */
+  accountId: string;
+};
+
+export type WorkersAiPostRunCfBaaiBgeRerankerBaseError = Fetcher.ErrorWrapper<undefined>;
+
+export type WorkersAiPostRunCfBaaiBgeRerankerBaseResponse = {
+  result?: {
+    response?: {
+      /**
+       * Index of the context in the request
+       */
+      id?: number;
+      /**
+       * Score of the context under the index.
+       */
+      score?: number;
+    }[];
+  };
+  /**
+   * @default true
+   */
+  success?: boolean;
+};
+
+export type WorkersAiPostRunCfBaaiBgeRerankerBaseRequestBody = {
+  /**
+   * List of provided contexts. Note that the index in this array is important, as the response will refer to it.
+   */
+  contexts: {
+    /**
+     * One of the provided context content
+     *
+     * @minLength 1
+     */
+    text?: string;
+  }[];
+  /**
+   * A query you wish to perform against the provided contexts.
+   *
+   * @minLength 1
+   */
+  query: string;
+  /**
+   * Number of returned results starting with the best score.
+   *
+   * @minimum 1
+   */
+  top_k?: number;
+};
+
+export type WorkersAiPostRunCfBaaiBgeRerankerBaseVariables = {
+  body: WorkersAiPostRunCfBaaiBgeRerankerBaseRequestBody;
+  pathParams: WorkersAiPostRunCfBaaiBgeRerankerBasePathParams;
+} & FetcherExtraProps;
+
+export const workersAiPostRunCfBaaiBgeRerankerBase = (
+  variables: WorkersAiPostRunCfBaaiBgeRerankerBaseVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    WorkersAiPostRunCfBaaiBgeRerankerBaseResponse,
+    WorkersAiPostRunCfBaaiBgeRerankerBaseError,
+    WorkersAiPostRunCfBaaiBgeRerankerBaseRequestBody,
+    {},
+    {},
+    WorkersAiPostRunCfBaaiBgeRerankerBasePathParams
+  >({ url: '/accounts/{accountId}/ai/run/@cf/baai/bge-reranker-base', method: 'post', ...variables, signal });
+
 export type WorkersAiPostRunCfBaaiBgeSmallEnV15PathParams = {
   /**
    * @example 023e105f4ecef8ad9ca31a8372d0c353
@@ -8268,7 +8407,7 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekMath7bInstructResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -8438,6 +8577,12 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekMath7bInstructVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -8456,7 +8601,7 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekMath7bInstructVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -8567,7 +8712,7 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekMath7bInstructVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -8707,6 +8852,12 @@ export const workersAiPostRunCfDeepseekAiDeepseekMath7bInstruct = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -8725,7 +8876,7 @@ export const workersAiPostRunCfDeepseekAiDeepseekMath7bInstruct = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -8836,7 +8987,7 @@ export const workersAiPostRunCfDeepseekAiDeepseekMath7bInstruct = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -8868,7 +9019,7 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -9038,6 +9189,12 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -9056,7 +9213,7 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -9167,7 +9324,7 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -9307,6 +9464,12 @@ export const workersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32b = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -9325,7 +9488,7 @@ export const workersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32b = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -9436,7 +9599,7 @@ export const workersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32b = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -9468,7 +9631,7 @@ export type WorkersAiPostRunCfDefogSqlcoder7b2Response = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -9638,6 +9801,12 @@ export type WorkersAiPostRunCfDefogSqlcoder7b2Variables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -9656,7 +9825,7 @@ export type WorkersAiPostRunCfDefogSqlcoder7b2Variables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -9767,7 +9936,7 @@ export type WorkersAiPostRunCfDefogSqlcoder7b2Variables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -9907,6 +10076,12 @@ export const workersAiPostRunCfDefogSqlcoder7b2 = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -9925,7 +10100,7 @@ export const workersAiPostRunCfDefogSqlcoder7b2 = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -10036,7 +10211,7 @@ export const workersAiPostRunCfDefogSqlcoder7b2 = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -10186,7 +10361,7 @@ export type WorkersAiPostRunCfFblgitUnaCybertron7bV2Bf16Response = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -10356,6 +10531,12 @@ export type WorkersAiPostRunCfFblgitUnaCybertron7bV2Bf16Variables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -10374,7 +10555,7 @@ export type WorkersAiPostRunCfFblgitUnaCybertron7bV2Bf16Variables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -10485,7 +10666,7 @@ export type WorkersAiPostRunCfFblgitUnaCybertron7bV2Bf16Variables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -10625,6 +10806,12 @@ export const workersAiPostRunCfFblgitUnaCybertron7bV2Bf16 = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -10643,7 +10830,7 @@ export const workersAiPostRunCfFblgitUnaCybertron7bV2Bf16 = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -10754,7 +10941,7 @@ export const workersAiPostRunCfFblgitUnaCybertron7bV2Bf16 = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -10781,7 +10968,7 @@ export type WorkersAiPostRunCfGoogleGemma2bItLoraResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -10951,6 +11138,12 @@ export type WorkersAiPostRunCfGoogleGemma2bItLoraVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -10969,7 +11162,7 @@ export type WorkersAiPostRunCfGoogleGemma2bItLoraVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -11080,7 +11273,7 @@ export type WorkersAiPostRunCfGoogleGemma2bItLoraVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -11220,6 +11413,12 @@ export const workersAiPostRunCfGoogleGemma2bItLora = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -11238,7 +11437,7 @@ export const workersAiPostRunCfGoogleGemma2bItLora = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -11349,7 +11548,7 @@ export const workersAiPostRunCfGoogleGemma2bItLora = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -11376,7 +11575,7 @@ export type WorkersAiPostRunCfGoogleGemma7bItLoraResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -11546,6 +11745,12 @@ export type WorkersAiPostRunCfGoogleGemma7bItLoraVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -11564,7 +11769,7 @@ export type WorkersAiPostRunCfGoogleGemma7bItLoraVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -11675,7 +11880,7 @@ export type WorkersAiPostRunCfGoogleGemma7bItLoraVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -11815,6 +12020,12 @@ export const workersAiPostRunCfGoogleGemma7bItLora = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -11833,7 +12044,7 @@ export const workersAiPostRunCfGoogleGemma7bItLora = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -11944,7 +12155,7 @@ export const workersAiPostRunCfGoogleGemma7bItLora = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -12121,7 +12332,7 @@ export type WorkersAiPostRunCfMetaLlamaLlama27bChatHfLoraResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -12291,6 +12502,12 @@ export type WorkersAiPostRunCfMetaLlamaLlama27bChatHfLoraVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -12309,7 +12526,7 @@ export type WorkersAiPostRunCfMetaLlamaLlama27bChatHfLoraVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -12420,7 +12637,7 @@ export type WorkersAiPostRunCfMetaLlamaLlama27bChatHfLoraVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -12560,6 +12777,12 @@ export const workersAiPostRunCfMetaLlamaLlama27bChatHfLora = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -12578,7 +12801,7 @@ export const workersAiPostRunCfMetaLlamaLlama27bChatHfLora = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -12689,7 +12912,7 @@ export const workersAiPostRunCfMetaLlamaLlama27bChatHfLora = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -12721,7 +12944,7 @@ export type WorkersAiPostRunCfMetaLlama27bChatFp16Response = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -12891,6 +13114,12 @@ export type WorkersAiPostRunCfMetaLlama27bChatFp16Variables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -12909,7 +13138,7 @@ export type WorkersAiPostRunCfMetaLlama27bChatFp16Variables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -13020,7 +13249,7 @@ export type WorkersAiPostRunCfMetaLlama27bChatFp16Variables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -13160,6 +13389,12 @@ export const workersAiPostRunCfMetaLlama27bChatFp16 = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -13178,7 +13413,7 @@ export const workersAiPostRunCfMetaLlama27bChatFp16 = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -13289,7 +13524,7 @@ export const workersAiPostRunCfMetaLlama27bChatFp16 = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -13316,7 +13551,7 @@ export type WorkersAiPostRunCfMetaLlama27bChatInt8Response = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -13486,6 +13721,12 @@ export type WorkersAiPostRunCfMetaLlama27bChatInt8Variables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -13504,7 +13745,7 @@ export type WorkersAiPostRunCfMetaLlama27bChatInt8Variables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -13615,7 +13856,7 @@ export type WorkersAiPostRunCfMetaLlama27bChatInt8Variables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -13755,6 +13996,12 @@ export const workersAiPostRunCfMetaLlama27bChatInt8 = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -13773,7 +14020,7 @@ export const workersAiPostRunCfMetaLlama27bChatInt8 = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -13884,7 +14131,7 @@ export const workersAiPostRunCfMetaLlama27bChatInt8 = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -13911,7 +14158,7 @@ export type WorkersAiPostRunCfMetaLlama38bInstructResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -14081,6 +14328,12 @@ export type WorkersAiPostRunCfMetaLlama38bInstructVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -14099,7 +14352,7 @@ export type WorkersAiPostRunCfMetaLlama38bInstructVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -14210,7 +14463,7 @@ export type WorkersAiPostRunCfMetaLlama38bInstructVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -14350,6 +14603,12 @@ export const workersAiPostRunCfMetaLlama38bInstruct = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -14368,7 +14627,7 @@ export const workersAiPostRunCfMetaLlama38bInstruct = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -14479,7 +14738,7 @@ export const workersAiPostRunCfMetaLlama38bInstruct = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -14506,7 +14765,7 @@ export type WorkersAiPostRunCfMetaLlama38bInstructAwqResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -14676,6 +14935,12 @@ export type WorkersAiPostRunCfMetaLlama38bInstructAwqVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -14694,7 +14959,7 @@ export type WorkersAiPostRunCfMetaLlama38bInstructAwqVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -14805,7 +15070,7 @@ export type WorkersAiPostRunCfMetaLlama38bInstructAwqVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -14945,6 +15210,12 @@ export const workersAiPostRunCfMetaLlama38bInstructAwq = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -14963,7 +15234,7 @@ export const workersAiPostRunCfMetaLlama38bInstructAwq = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -15074,7 +15345,7 @@ export const workersAiPostRunCfMetaLlama38bInstructAwq = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -15101,7 +15372,7 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -15271,6 +15542,12 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -15289,7 +15566,7 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -15400,7 +15677,7 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -15540,6 +15817,12 @@ export const workersAiPostRunCfMetaLlama3170bInstruct = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -15558,7 +15841,7 @@ export const workersAiPostRunCfMetaLlama3170bInstruct = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -15669,7 +15952,7 @@ export const workersAiPostRunCfMetaLlama3170bInstruct = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -15696,7 +15979,7 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructPreviewResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -15866,6 +16149,12 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructPreviewVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -15884,7 +16173,7 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructPreviewVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -15995,7 +16284,7 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructPreviewVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -16135,6 +16424,12 @@ export const workersAiPostRunCfMetaLlama3170bInstructPreview = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -16153,7 +16448,7 @@ export const workersAiPostRunCfMetaLlama3170bInstructPreview = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -16264,7 +16559,7 @@ export const workersAiPostRunCfMetaLlama3170bInstructPreview = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -16296,7 +16591,7 @@ export type WorkersAiPostRunCfMetaLlama3170bPreviewResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -16466,6 +16761,12 @@ export type WorkersAiPostRunCfMetaLlama3170bPreviewVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -16484,7 +16785,7 @@ export type WorkersAiPostRunCfMetaLlama3170bPreviewVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -16595,7 +16896,7 @@ export type WorkersAiPostRunCfMetaLlama3170bPreviewVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -16735,6 +17036,12 @@ export const workersAiPostRunCfMetaLlama3170bPreview = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -16753,7 +17060,7 @@ export const workersAiPostRunCfMetaLlama3170bPreview = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -16864,7 +17171,7 @@ export const workersAiPostRunCfMetaLlama3170bPreview = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -16891,7 +17198,7 @@ export type WorkersAiPostRunCfMetaLlama318bInstructResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -17061,6 +17368,12 @@ export type WorkersAiPostRunCfMetaLlama318bInstructVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -17079,7 +17392,7 @@ export type WorkersAiPostRunCfMetaLlama318bInstructVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -17190,7 +17503,7 @@ export type WorkersAiPostRunCfMetaLlama318bInstructVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -17330,6 +17643,12 @@ export const workersAiPostRunCfMetaLlama318bInstruct = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -17348,7 +17667,7 @@ export const workersAiPostRunCfMetaLlama318bInstruct = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -17459,7 +17778,7 @@ export const workersAiPostRunCfMetaLlama318bInstruct = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -17486,7 +17805,7 @@ export type WorkersAiPostRunCfMetaLlama318bInstructAwqResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -17656,6 +17975,12 @@ export type WorkersAiPostRunCfMetaLlama318bInstructAwqVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -17674,7 +17999,7 @@ export type WorkersAiPostRunCfMetaLlama318bInstructAwqVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -17785,7 +18110,7 @@ export type WorkersAiPostRunCfMetaLlama318bInstructAwqVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -17925,6 +18250,12 @@ export const workersAiPostRunCfMetaLlama318bInstructAwq = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -17943,7 +18274,7 @@ export const workersAiPostRunCfMetaLlama318bInstructAwq = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -18054,7 +18385,7 @@ export const workersAiPostRunCfMetaLlama318bInstructAwq = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -18081,7 +18412,7 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFastResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -18251,6 +18582,12 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFastVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -18269,7 +18606,7 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFastVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -18380,7 +18717,7 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFastVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -18520,6 +18857,12 @@ export const workersAiPostRunCfMetaLlama318bInstructFast = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -18538,7 +18881,7 @@ export const workersAiPostRunCfMetaLlama318bInstructFast = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -18649,7 +18992,7 @@ export const workersAiPostRunCfMetaLlama318bInstructFast = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -18676,7 +19019,7 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFp8Response = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -18846,6 +19189,12 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFp8Variables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -18864,7 +19213,7 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFp8Variables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -18975,7 +19324,7 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFp8Variables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -19115,6 +19464,12 @@ export const workersAiPostRunCfMetaLlama318bInstructFp8 = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -19133,7 +19488,7 @@ export const workersAiPostRunCfMetaLlama318bInstructFp8 = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -19244,7 +19599,7 @@ export const workersAiPostRunCfMetaLlama318bInstructFp8 = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -19271,7 +19626,7 @@ export type WorkersAiPostRunCfMetaLlama318bPreviewResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -19441,6 +19796,12 @@ export type WorkersAiPostRunCfMetaLlama318bPreviewVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -19459,7 +19820,7 @@ export type WorkersAiPostRunCfMetaLlama318bPreviewVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -19570,7 +19931,7 @@ export type WorkersAiPostRunCfMetaLlama318bPreviewVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -19710,6 +20071,12 @@ export const workersAiPostRunCfMetaLlama318bPreview = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -19728,7 +20095,7 @@ export const workersAiPostRunCfMetaLlama318bPreview = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -19839,7 +20206,7 @@ export const workersAiPostRunCfMetaLlama318bPreview = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -20437,7 +20804,7 @@ export type WorkersAiPostRunCfMetaLlama321bInstructResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -20607,6 +20974,12 @@ export type WorkersAiPostRunCfMetaLlama321bInstructVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -20625,7 +20998,7 @@ export type WorkersAiPostRunCfMetaLlama321bInstructVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -20736,7 +21109,7 @@ export type WorkersAiPostRunCfMetaLlama321bInstructVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -20876,6 +21249,12 @@ export const workersAiPostRunCfMetaLlama321bInstruct = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -20894,7 +21273,7 @@ export const workersAiPostRunCfMetaLlama321bInstruct = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -21005,7 +21384,7 @@ export const workersAiPostRunCfMetaLlama321bInstruct = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -21032,7 +21411,7 @@ export type WorkersAiPostRunCfMetaLlama323bInstructResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -21202,6 +21581,12 @@ export type WorkersAiPostRunCfMetaLlama323bInstructVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -21220,7 +21605,7 @@ export type WorkersAiPostRunCfMetaLlama323bInstructVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -21331,7 +21716,7 @@ export type WorkersAiPostRunCfMetaLlama323bInstructVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -21471,6 +21856,12 @@ export const workersAiPostRunCfMetaLlama323bInstruct = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -21489,7 +21880,7 @@ export const workersAiPostRunCfMetaLlama323bInstruct = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -21600,7 +21991,7 @@ export const workersAiPostRunCfMetaLlama323bInstruct = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -21627,7 +22018,7 @@ export type WorkersAiPostRunCfMetaLlama3370bInstructFp8FastResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -21797,6 +22188,12 @@ export type WorkersAiPostRunCfMetaLlama3370bInstructFp8FastVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -21815,7 +22212,7 @@ export type WorkersAiPostRunCfMetaLlama3370bInstructFp8FastVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -21926,7 +22323,7 @@ export type WorkersAiPostRunCfMetaLlama3370bInstructFp8FastVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -22066,6 +22463,12 @@ export const workersAiPostRunCfMetaLlama3370bInstructFp8Fast = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -22084,7 +22487,7 @@ export const workersAiPostRunCfMetaLlama3370bInstructFp8Fast = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -22195,7 +22598,7 @@ export const workersAiPostRunCfMetaLlama3370bInstructFp8Fast = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -22396,7 +22799,7 @@ export type WorkersAiPostRunCfMicrosoftPhi2Response = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -22566,6 +22969,12 @@ export type WorkersAiPostRunCfMicrosoftPhi2Variables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -22584,7 +22993,7 @@ export type WorkersAiPostRunCfMicrosoftPhi2Variables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -22695,7 +23104,7 @@ export type WorkersAiPostRunCfMicrosoftPhi2Variables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -22835,6 +23244,12 @@ export const workersAiPostRunCfMicrosoftPhi2 = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -22853,7 +23268,7 @@ export const workersAiPostRunCfMicrosoftPhi2 = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -22964,7 +23379,7 @@ export const workersAiPostRunCfMicrosoftPhi2 = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -23035,7 +23450,7 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV01Response = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -23205,6 +23620,12 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV01Variables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -23223,7 +23644,7 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV01Variables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -23334,7 +23755,7 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV01Variables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -23474,6 +23895,12 @@ export const workersAiPostRunCfMistralMistral7bInstructV01 = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -23492,7 +23919,7 @@ export const workersAiPostRunCfMistralMistral7bInstructV01 = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -23603,7 +24030,7 @@ export const workersAiPostRunCfMistralMistral7bInstructV01 = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -23630,7 +24057,7 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV02LoraResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -23800,6 +24227,12 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV02LoraVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -23818,7 +24251,7 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV02LoraVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -23929,7 +24362,7 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV02LoraVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -24069,6 +24502,12 @@ export const workersAiPostRunCfMistralMistral7bInstructV02Lora = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -24087,7 +24526,7 @@ export const workersAiPostRunCfMistralMistral7bInstructV02Lora = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -24198,7 +24637,7 @@ export const workersAiPostRunCfMistralMistral7bInstructV02Lora = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -24214,6 +24653,63 @@ export const workersAiPostRunCfMistralMistral7bInstructV02Lora = (
     ...variables,
     signal
   });
+
+export type WorkersAiPostRunCfMyshellAiMelottsPathParams = {
+  /**
+   * @example 023e105f4ecef8ad9ca31a8372d0c353
+   */
+  accountId: string;
+};
+
+export type WorkersAiPostRunCfMyshellAiMelottsError = Fetcher.ErrorWrapper<undefined>;
+
+export type WorkersAiPostRunCfMyshellAiMelottsResponse = {
+  result?:
+    | {
+        /**
+         * The generated audio in MP3 format, base64-encoded
+         */
+        audio?: string;
+      }
+    | Blob;
+  /**
+   * @default true
+   */
+  success?: boolean;
+};
+
+export type WorkersAiPostRunCfMyshellAiMelottsRequestBody = {
+  /**
+   * The speech language (e.g., 'en' for English, 'fr' for French). Defaults to 'en' if not specified
+   *
+   * @default en
+   */
+  lang?: string;
+  /**
+   * A text description of the audio you want to generate
+   *
+   * @minLength 1
+   */
+  prompt: string;
+};
+
+export type WorkersAiPostRunCfMyshellAiMelottsVariables = {
+  body: WorkersAiPostRunCfMyshellAiMelottsRequestBody;
+  pathParams: WorkersAiPostRunCfMyshellAiMelottsPathParams;
+} & FetcherExtraProps;
+
+export const workersAiPostRunCfMyshellAiMelotts = (
+  variables: WorkersAiPostRunCfMyshellAiMelottsVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    WorkersAiPostRunCfMyshellAiMelottsResponse,
+    WorkersAiPostRunCfMyshellAiMelottsError,
+    WorkersAiPostRunCfMyshellAiMelottsRequestBody,
+    {},
+    {},
+    WorkersAiPostRunCfMyshellAiMelottsPathParams
+  >({ url: '/accounts/{accountId}/ai/run/@cf/myshell-ai/melotts', method: 'post', ...variables, signal });
 
 export type WorkersAiPostRunCfOpenaiWhisperPathParams = {
   /**
@@ -24479,7 +24975,7 @@ export type WorkersAiPostRunCfOpenchatOpenchat350106Response = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -24649,6 +25145,12 @@ export type WorkersAiPostRunCfOpenchatOpenchat350106Variables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -24667,7 +25169,7 @@ export type WorkersAiPostRunCfOpenchatOpenchat350106Variables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -24778,7 +25280,7 @@ export type WorkersAiPostRunCfOpenchatOpenchat350106Variables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -24918,6 +25420,12 @@ export const workersAiPostRunCfOpenchatOpenchat350106 = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -24936,7 +25444,7 @@ export const workersAiPostRunCfOpenchatOpenchat350106 = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -25047,7 +25555,7 @@ export const workersAiPostRunCfOpenchatOpenchat350106 = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -25074,7 +25582,7 @@ export type WorkersAiPostRunCfQwenQwen1505bChatResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -25244,6 +25752,12 @@ export type WorkersAiPostRunCfQwenQwen1505bChatVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -25262,7 +25776,7 @@ export type WorkersAiPostRunCfQwenQwen1505bChatVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -25373,7 +25887,7 @@ export type WorkersAiPostRunCfQwenQwen1505bChatVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -25513,6 +26027,12 @@ export const workersAiPostRunCfQwenQwen1505bChat = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -25531,7 +26051,7 @@ export const workersAiPostRunCfQwenQwen1505bChat = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -25642,7 +26162,7 @@ export const workersAiPostRunCfQwenQwen1505bChat = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -25669,7 +26189,7 @@ export type WorkersAiPostRunCfQwenQwen1518bChatResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -25839,6 +26359,12 @@ export type WorkersAiPostRunCfQwenQwen1518bChatVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -25857,7 +26383,7 @@ export type WorkersAiPostRunCfQwenQwen1518bChatVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -25968,7 +26494,7 @@ export type WorkersAiPostRunCfQwenQwen1518bChatVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -26108,6 +26634,12 @@ export const workersAiPostRunCfQwenQwen1518bChat = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -26126,7 +26658,7 @@ export const workersAiPostRunCfQwenQwen1518bChat = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -26237,7 +26769,7 @@ export const workersAiPostRunCfQwenQwen1518bChat = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -26264,7 +26796,7 @@ export type WorkersAiPostRunCfQwenQwen1514bChatAwqResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -26434,6 +26966,12 @@ export type WorkersAiPostRunCfQwenQwen1514bChatAwqVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -26452,7 +26990,7 @@ export type WorkersAiPostRunCfQwenQwen1514bChatAwqVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -26563,7 +27101,7 @@ export type WorkersAiPostRunCfQwenQwen1514bChatAwqVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -26703,6 +27241,12 @@ export const workersAiPostRunCfQwenQwen1514bChatAwq = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -26721,7 +27265,7 @@ export const workersAiPostRunCfQwenQwen1514bChatAwq = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -26832,7 +27376,7 @@ export const workersAiPostRunCfQwenQwen1514bChatAwq = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -26859,7 +27403,7 @@ export type WorkersAiPostRunCfQwenQwen157bChatAwqResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -27029,6 +27573,12 @@ export type WorkersAiPostRunCfQwenQwen157bChatAwqVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -27047,7 +27597,7 @@ export type WorkersAiPostRunCfQwenQwen157bChatAwqVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -27158,7 +27708,7 @@ export type WorkersAiPostRunCfQwenQwen157bChatAwqVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -27298,6 +27848,12 @@ export const workersAiPostRunCfQwenQwen157bChatAwq = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -27316,7 +27872,7 @@ export const workersAiPostRunCfQwenQwen157bChatAwq = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -27427,7 +27983,7 @@ export const workersAiPostRunCfQwenQwen157bChatAwq = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -27736,7 +28292,7 @@ export type WorkersAiPostRunCfTheblokeDiscolmGerman7bV1AwqResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -27906,6 +28462,12 @@ export type WorkersAiPostRunCfTheblokeDiscolmGerman7bV1AwqVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -27924,7 +28486,7 @@ export type WorkersAiPostRunCfTheblokeDiscolmGerman7bV1AwqVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -28035,7 +28597,7 @@ export type WorkersAiPostRunCfTheblokeDiscolmGerman7bV1AwqVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -28175,6 +28737,12 @@ export const workersAiPostRunCfTheblokeDiscolmGerman7bV1Awq = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -28193,7 +28761,7 @@ export const workersAiPostRunCfTheblokeDiscolmGerman7bV1Awq = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -28304,7 +28872,7 @@ export const workersAiPostRunCfTheblokeDiscolmGerman7bV1Awq = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -28336,7 +28904,7 @@ export type WorkersAiPostRunCfTiiuaeFalcon7bInstructResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -28506,6 +29074,12 @@ export type WorkersAiPostRunCfTiiuaeFalcon7bInstructVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -28524,7 +29098,7 @@ export type WorkersAiPostRunCfTiiuaeFalcon7bInstructVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -28635,7 +29209,7 @@ export type WorkersAiPostRunCfTiiuaeFalcon7bInstructVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -28775,6 +29349,12 @@ export const workersAiPostRunCfTiiuaeFalcon7bInstruct = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -28793,7 +29373,7 @@ export const workersAiPostRunCfTiiuaeFalcon7bInstruct = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -28904,7 +29484,7 @@ export const workersAiPostRunCfTiiuaeFalcon7bInstruct = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -28931,7 +29511,7 @@ export type WorkersAiPostRunCfTinyllamaTinyllama11bChatV10Response = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -29101,6 +29681,12 @@ export type WorkersAiPostRunCfTinyllamaTinyllama11bChatV10Variables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -29119,7 +29705,7 @@ export type WorkersAiPostRunCfTinyllamaTinyllama11bChatV10Variables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -29230,7 +29816,7 @@ export type WorkersAiPostRunCfTinyllamaTinyllama11bChatV10Variables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -29370,6 +29956,12 @@ export const workersAiPostRunCfTinyllamaTinyllama11bChatV10 = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -29388,7 +29980,7 @@ export const workersAiPostRunCfTinyllamaTinyllama11bChatV10 = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -29499,7 +30091,7 @@ export const workersAiPostRunCfTinyllamaTinyllama11bChatV10 = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -29531,7 +30123,7 @@ export type WorkersAiPostRunHfGoogleGemma7bItResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -29701,6 +30293,12 @@ export type WorkersAiPostRunHfGoogleGemma7bItVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -29719,7 +30317,7 @@ export type WorkersAiPostRunHfGoogleGemma7bItVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -29830,7 +30428,7 @@ export type WorkersAiPostRunHfGoogleGemma7bItVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -29970,6 +30568,12 @@ export const workersAiPostRunHfGoogleGemma7bIt = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -29988,7 +30592,7 @@ export const workersAiPostRunHfGoogleGemma7bIt = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -30099,7 +30703,7 @@ export const workersAiPostRunHfGoogleGemma7bIt = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -30126,7 +30730,7 @@ export type WorkersAiPostRunHfMetaLlamaMetaLlama38bInstructResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -30296,6 +30900,12 @@ export type WorkersAiPostRunHfMetaLlamaMetaLlama38bInstructVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -30314,7 +30924,7 @@ export type WorkersAiPostRunHfMetaLlamaMetaLlama38bInstructVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -30425,7 +31035,7 @@ export type WorkersAiPostRunHfMetaLlamaMetaLlama38bInstructVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -30565,6 +31175,12 @@ export const workersAiPostRunHfMetaLlamaMetaLlama38bInstruct = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -30583,7 +31199,7 @@ export const workersAiPostRunHfMetaLlamaMetaLlama38bInstruct = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -30694,7 +31310,7 @@ export const workersAiPostRunHfMetaLlamaMetaLlama38bInstruct = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -30726,7 +31342,7 @@ export type WorkersAiPostRunHfMistralMistral7bInstructV02Response = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -30896,6 +31512,12 @@ export type WorkersAiPostRunHfMistralMistral7bInstructV02Variables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -30914,7 +31536,7 @@ export type WorkersAiPostRunHfMistralMistral7bInstructV02Variables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -31025,7 +31647,7 @@ export type WorkersAiPostRunHfMistralMistral7bInstructV02Variables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -31165,6 +31787,12 @@ export const workersAiPostRunHfMistralMistral7bInstructV02 = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -31183,7 +31811,7 @@ export const workersAiPostRunHfMistralMistral7bInstructV02 = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -31294,7 +31922,7 @@ export const workersAiPostRunHfMistralMistral7bInstructV02 = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -31321,7 +31949,7 @@ export type WorkersAiPostRunHfMistralaiMistral7bInstructV02Response = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -31491,6 +32119,12 @@ export type WorkersAiPostRunHfMistralaiMistral7bInstructV02Variables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -31509,7 +32143,7 @@ export type WorkersAiPostRunHfMistralaiMistral7bInstructV02Variables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -31620,7 +32254,7 @@ export type WorkersAiPostRunHfMistralaiMistral7bInstructV02Variables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -31760,6 +32394,12 @@ export const workersAiPostRunHfMistralaiMistral7bInstructV02 = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -31778,7 +32418,7 @@ export const workersAiPostRunHfMistralaiMistral7bInstructV02 = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -31889,7 +32529,7 @@ export const workersAiPostRunHfMistralaiMistral7bInstructV02 = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -31921,7 +32561,7 @@ export type WorkersAiPostRunHfNexusflowStarlingLm7bBetaResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -32091,6 +32731,12 @@ export type WorkersAiPostRunHfNexusflowStarlingLm7bBetaVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -32109,7 +32755,7 @@ export type WorkersAiPostRunHfNexusflowStarlingLm7bBetaVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -32220,7 +32866,7 @@ export type WorkersAiPostRunHfNexusflowStarlingLm7bBetaVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -32360,6 +33006,12 @@ export const workersAiPostRunHfNexusflowStarlingLm7bBeta = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -32378,7 +33030,7 @@ export const workersAiPostRunHfNexusflowStarlingLm7bBeta = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -32489,7 +33141,7 @@ export const workersAiPostRunHfNexusflowStarlingLm7bBeta = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -32516,7 +33168,7 @@ export type WorkersAiPostRunHfNousresearchHermes2ProMistral7bResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -32686,6 +33338,12 @@ export type WorkersAiPostRunHfNousresearchHermes2ProMistral7bVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -32704,7 +33362,7 @@ export type WorkersAiPostRunHfNousresearchHermes2ProMistral7bVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -32815,7 +33473,7 @@ export type WorkersAiPostRunHfNousresearchHermes2ProMistral7bVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -32955,6 +33613,12 @@ export const workersAiPostRunHfNousresearchHermes2ProMistral7b = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -32973,7 +33637,7 @@ export const workersAiPostRunHfNousresearchHermes2ProMistral7b = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -33084,7 +33748,7 @@ export const workersAiPostRunHfNousresearchHermes2ProMistral7b = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -33116,7 +33780,7 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bBaseAwqResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -33286,6 +33950,12 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bBaseAwqVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -33304,7 +33974,7 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bBaseAwqVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -33415,7 +34085,7 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bBaseAwqVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -33555,6 +34225,12 @@ export const workersAiPostRunHfTheblokeDeepseekCoder67bBaseAwq = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -33573,7 +34249,7 @@ export const workersAiPostRunHfTheblokeDeepseekCoder67bBaseAwq = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -33684,7 +34360,7 @@ export const workersAiPostRunHfTheblokeDeepseekCoder67bBaseAwq = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -33716,7 +34392,7 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bInstructAwqResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -33886,6 +34562,12 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bInstructAwqVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -33904,7 +34586,7 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bInstructAwqVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -34015,7 +34697,7 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bInstructAwqVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -34155,6 +34837,12 @@ export const workersAiPostRunHfTheblokeDeepseekCoder67bInstructAwq = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -34173,7 +34861,7 @@ export const workersAiPostRunHfTheblokeDeepseekCoder67bInstructAwq = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -34284,7 +34972,7 @@ export const workersAiPostRunHfTheblokeDeepseekCoder67bInstructAwq = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -34316,7 +35004,7 @@ export type WorkersAiPostRunHfTheblokeLlama213bChatAwqResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -34486,6 +35174,12 @@ export type WorkersAiPostRunHfTheblokeLlama213bChatAwqVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -34504,7 +35198,7 @@ export type WorkersAiPostRunHfTheblokeLlama213bChatAwqVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -34615,7 +35309,7 @@ export type WorkersAiPostRunHfTheblokeLlama213bChatAwqVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -34755,6 +35449,12 @@ export const workersAiPostRunHfTheblokeLlama213bChatAwq = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -34773,7 +35473,7 @@ export const workersAiPostRunHfTheblokeLlama213bChatAwq = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -34884,7 +35584,7 @@ export const workersAiPostRunHfTheblokeLlama213bChatAwq = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -34911,7 +35611,7 @@ export type WorkersAiPostRunHfTheblokeLlamaguard7bAwqResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -35081,6 +35781,12 @@ export type WorkersAiPostRunHfTheblokeLlamaguard7bAwqVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -35099,7 +35805,7 @@ export type WorkersAiPostRunHfTheblokeLlamaguard7bAwqVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -35210,7 +35916,7 @@ export type WorkersAiPostRunHfTheblokeLlamaguard7bAwqVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -35350,6 +36056,12 @@ export const workersAiPostRunHfTheblokeLlamaguard7bAwq = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -35368,7 +36080,7 @@ export const workersAiPostRunHfTheblokeLlamaguard7bAwq = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -35479,7 +36191,7 @@ export const workersAiPostRunHfTheblokeLlamaguard7bAwq = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -35506,7 +36218,7 @@ export type WorkersAiPostRunHfTheblokeMistral7bInstructV01AwqResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -35676,6 +36388,12 @@ export type WorkersAiPostRunHfTheblokeMistral7bInstructV01AwqVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -35694,7 +36412,7 @@ export type WorkersAiPostRunHfTheblokeMistral7bInstructV01AwqVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -35805,7 +36523,7 @@ export type WorkersAiPostRunHfTheblokeMistral7bInstructV01AwqVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -35945,6 +36663,12 @@ export const workersAiPostRunHfTheblokeMistral7bInstructV01Awq = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -35963,7 +36687,7 @@ export const workersAiPostRunHfTheblokeMistral7bInstructV01Awq = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -36074,7 +36798,7 @@ export const workersAiPostRunHfTheblokeMistral7bInstructV01Awq = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -36106,7 +36830,7 @@ export type WorkersAiPostRunHfTheblokeNeuralChat7bV31AwqResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -36276,6 +37000,12 @@ export type WorkersAiPostRunHfTheblokeNeuralChat7bV31AwqVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -36294,7 +37024,7 @@ export type WorkersAiPostRunHfTheblokeNeuralChat7bV31AwqVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -36405,7 +37135,7 @@ export type WorkersAiPostRunHfTheblokeNeuralChat7bV31AwqVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -36545,6 +37275,12 @@ export const workersAiPostRunHfTheblokeNeuralChat7bV31Awq = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -36563,7 +37299,7 @@ export const workersAiPostRunHfTheblokeNeuralChat7bV31Awq = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -36674,7 +37410,7 @@ export const workersAiPostRunHfTheblokeNeuralChat7bV31Awq = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -36701,7 +37437,7 @@ export type WorkersAiPostRunHfTheblokeOpenhermes25Mistral7bAwqResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -36871,6 +37607,12 @@ export type WorkersAiPostRunHfTheblokeOpenhermes25Mistral7bAwqVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -36889,7 +37631,7 @@ export type WorkersAiPostRunHfTheblokeOpenhermes25Mistral7bAwqVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -37000,7 +37742,7 @@ export type WorkersAiPostRunHfTheblokeOpenhermes25Mistral7bAwqVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -37140,6 +37882,12 @@ export const workersAiPostRunHfTheblokeOpenhermes25Mistral7bAwq = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -37158,7 +37906,7 @@ export const workersAiPostRunHfTheblokeOpenhermes25Mistral7bAwq = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -37269,7 +38017,7 @@ export const workersAiPostRunHfTheblokeOpenhermes25Mistral7bAwq = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -37301,7 +38049,7 @@ export type WorkersAiPostRunHfTheblokeZephyr7bBetaAwqResponse = {
         /**
          * The generated text response from the model
          */
-        response?: string;
+        response: string;
         /**
          * An array of tool calls requests made during the response generation
          */
@@ -37471,6 +38219,12 @@ export type WorkersAiPostRunHfTheblokeZephyr7bBetaAwqVariables = {
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -37489,7 +38243,7 @@ export type WorkersAiPostRunHfTheblokeZephyr7bBetaAwqVariables = {
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -37600,7 +38354,7 @@ export type WorkersAiPostRunHfTheblokeZephyr7bBetaAwqVariables = {
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -37740,6 +38494,12 @@ export const workersAiPostRunHfTheblokeZephyr7bBetaAwq = (
          */
         presence_penalty?: number;
         /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
          * Penalty for repeated tokens; higher values discourage repetition.
          *
          * @maximum 2
@@ -37758,7 +38518,7 @@ export const workersAiPostRunHfTheblokeZephyr7bBetaAwq = (
          */
         seed?: number;
         /**
-         * If true, the response will be streamed back incrementally.
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
          *
          * @default false
          */
@@ -37869,7 +38629,7 @@ export const workersAiPostRunHfTheblokeZephyr7bBetaAwq = (
          */
         top_k?: number;
         /**
-         * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
          *
          * @maximum 2
          * @minimum 0
@@ -37997,7 +38757,7 @@ export type WorkersAiPostRunModelResponse = {
             /**
              * The generated text response from the model
              */
-            response?: string;
+            response: string;
             /**
              * An array of tool calls requests made during the response generation
              */
@@ -38048,6 +38808,9 @@ export type WorkersAiPostRunModelResponse = {
          * The summarized version of the input text
          */
         summary?: string;
+      }
+    | {
+        description?: string;
       }
     | {
         description?: string;
@@ -38133,7 +38896,7 @@ export type WorkersAiPostRunModelVariables = {
          */
         lang?: string;
         /**
-         * A text description of the image you want to generate
+         * A text description of the audio you want to generate
          *
          * @minLength 1
          */
@@ -38301,6 +39064,12 @@ export type WorkersAiPostRunModelVariables = {
              */
             presence_penalty?: number;
             /**
+             * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+             *
+             * @default false
+             */
+            raw?: boolean;
+            /**
              * Penalty for repeated tokens; higher values discourage repetition.
              *
              * @maximum 2
@@ -38319,7 +39088,7 @@ export type WorkersAiPostRunModelVariables = {
              */
             seed?: number;
             /**
-             * If true, the response will be streamed back incrementally.
+             * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
              *
              * @default false
              */
@@ -38430,7 +39199,7 @@ export type WorkersAiPostRunModelVariables = {
              */
             top_k?: number;
             /**
-             * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+             * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
              *
              * @maximum 2
              * @minimum 0
@@ -38498,6 +39267,115 @@ export type WorkersAiPostRunModelVariables = {
              * @default false
              */
             raw?: boolean;
+            /**
+             * Penalty for repeated tokens; higher values discourage repetition.
+             */
+            repetition_penalty?: number;
+            /**
+             * Random seed for reproducibility of the generation.
+             */
+            seed?: number;
+            /**
+             * Controls the randomness of the output; higher values produce more random results.
+             */
+            temperature?: number;
+            /**
+             * Limits the AI to choose from the top 'k' most probable words. Lower values make responses more focused; higher values introduce more variety and potential surprises.
+             */
+            top_k?: number;
+            /**
+             * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+             */
+            top_p?: number;
+          }
+      )
+    | (
+        | {
+            /**
+             * Decreases the likelihood of the model repeating the same lines verbatim.
+             */
+            frequency_penalty?: number;
+            /**
+             * Whether to ignore the EOS token and continue generating tokens after the EOS token is generated.
+             */
+            ignore_eos?: boolean;
+            /**
+             * Image in base64 encoded format.
+             */
+            image: string;
+            /**
+             * The maximum number of tokens to generate in the response.
+             *
+             * @default 512
+             */
+            max_tokens?: number;
+            /**
+             * Increases the likelihood of the model introducing new topics.
+             */
+            presence_penalty?: number;
+            /**
+             * The input text prompt for the model to generate a response.
+             *
+             * @minLength 1
+             */
+            prompt: string;
+            /**
+             * Penalty for repeated tokens; higher values discourage repetition.
+             */
+            repetition_penalty?: number;
+            /**
+             * Random seed for reproducibility of the generation.
+             */
+            seed?: number;
+            /**
+             * Controls the randomness of the output; higher values produce more random results.
+             */
+            temperature?: number;
+            /**
+             * Limits the AI to choose from the top 'k' most probable words. Lower values make responses more focused; higher values introduce more variety and potential surprises.
+             */
+            top_k?: number;
+            /**
+             * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+             */
+            top_p?: number;
+          }
+        | {
+            /**
+             * Decreases the likelihood of the model repeating the same lines verbatim.
+             */
+            frequency_penalty?: number;
+            /**
+             * Whether to ignore the EOS token and continue generating tokens after the EOS token is generated.
+             */
+            ignore_eos?: boolean;
+            /**
+             * Image in base64 encoded format.
+             */
+            image: string;
+            /**
+             * The maximum number of tokens to generate in the response.
+             *
+             * @default 512
+             */
+            max_tokens?: number;
+            /**
+             * An array of message objects representing the conversation history.
+             */
+            messages: {
+              /**
+               * The content of the message as a string.
+               */
+              content: string;
+              /**
+               * The role of the message sender (e.g., 'user', 'assistant', 'system', 'tool').
+               */
+              role: string;
+            }[];
+            /**
+             * Increases the likelihood of the model introducing new topics.
+             */
+            presence_penalty?: number;
             /**
              * Penalty for repeated tokens; higher values discourage repetition.
              */
@@ -38612,7 +39490,7 @@ export const workersAiPostRunModel = (variables: WorkersAiPostRunModelVariables,
          */
         lang?: string;
         /**
-         * A text description of the image you want to generate
+         * A text description of the audio you want to generate
          *
          * @minLength 1
          */
@@ -38780,6 +39658,12 @@ export const workersAiPostRunModel = (variables: WorkersAiPostRunModelVariables,
              */
             presence_penalty?: number;
             /**
+             * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+             *
+             * @default false
+             */
+            raw?: boolean;
+            /**
              * Penalty for repeated tokens; higher values discourage repetition.
              *
              * @maximum 2
@@ -38798,7 +39682,7 @@ export const workersAiPostRunModel = (variables: WorkersAiPostRunModelVariables,
              */
             seed?: number;
             /**
-             * If true, the response will be streamed back incrementally.
+             * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
              *
              * @default false
              */
@@ -38909,7 +39793,7 @@ export const workersAiPostRunModel = (variables: WorkersAiPostRunModelVariables,
              */
             top_k?: number;
             /**
-             * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+             * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
              *
              * @maximum 2
              * @minimum 0
@@ -38977,6 +39861,115 @@ export const workersAiPostRunModel = (variables: WorkersAiPostRunModelVariables,
              * @default false
              */
             raw?: boolean;
+            /**
+             * Penalty for repeated tokens; higher values discourage repetition.
+             */
+            repetition_penalty?: number;
+            /**
+             * Random seed for reproducibility of the generation.
+             */
+            seed?: number;
+            /**
+             * Controls the randomness of the output; higher values produce more random results.
+             */
+            temperature?: number;
+            /**
+             * Limits the AI to choose from the top 'k' most probable words. Lower values make responses more focused; higher values introduce more variety and potential surprises.
+             */
+            top_k?: number;
+            /**
+             * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+             */
+            top_p?: number;
+          }
+      )
+    | (
+        | {
+            /**
+             * Decreases the likelihood of the model repeating the same lines verbatim.
+             */
+            frequency_penalty?: number;
+            /**
+             * Whether to ignore the EOS token and continue generating tokens after the EOS token is generated.
+             */
+            ignore_eos?: boolean;
+            /**
+             * Image in base64 encoded format.
+             */
+            image: string;
+            /**
+             * The maximum number of tokens to generate in the response.
+             *
+             * @default 512
+             */
+            max_tokens?: number;
+            /**
+             * Increases the likelihood of the model introducing new topics.
+             */
+            presence_penalty?: number;
+            /**
+             * The input text prompt for the model to generate a response.
+             *
+             * @minLength 1
+             */
+            prompt: string;
+            /**
+             * Penalty for repeated tokens; higher values discourage repetition.
+             */
+            repetition_penalty?: number;
+            /**
+             * Random seed for reproducibility of the generation.
+             */
+            seed?: number;
+            /**
+             * Controls the randomness of the output; higher values produce more random results.
+             */
+            temperature?: number;
+            /**
+             * Limits the AI to choose from the top 'k' most probable words. Lower values make responses more focused; higher values introduce more variety and potential surprises.
+             */
+            top_k?: number;
+            /**
+             * Controls the creativity of the AI's responses by adjusting how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+             */
+            top_p?: number;
+          }
+        | {
+            /**
+             * Decreases the likelihood of the model repeating the same lines verbatim.
+             */
+            frequency_penalty?: number;
+            /**
+             * Whether to ignore the EOS token and continue generating tokens after the EOS token is generated.
+             */
+            ignore_eos?: boolean;
+            /**
+             * Image in base64 encoded format.
+             */
+            image: string;
+            /**
+             * The maximum number of tokens to generate in the response.
+             *
+             * @default 512
+             */
+            max_tokens?: number;
+            /**
+             * An array of message objects representing the conversation history.
+             */
+            messages: {
+              /**
+               * The content of the message as a string.
+               */
+              content: string;
+              /**
+               * The role of the message sender (e.g., 'user', 'assistant', 'system', 'tool').
+               */
+              role: string;
+            }[];
+            /**
+             * Increases the likelihood of the model introducing new topics.
+             */
+            presence_penalty?: number;
             /**
              * Penalty for repeated tokens; higher values discourage repetition.
              */
@@ -42523,7 +43516,7 @@ export type PostEventListVariables = {
 } & FetcherExtraProps;
 
 /**
- * The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list) endpoint.
+ * The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/) endpoint.
  */
 export const postEventList = (variables: PostEventListVariables, signal?: AbortSignal) =>
   fetch<PostEventListResponse, PostEventListError, PostEventListRequestBody, {}, {}, PostEventListPathParams>({
@@ -43347,7 +44340,7 @@ export type PostEventCreateBulkVariables = {
 } & FetcherExtraProps;
 
 /**
- * The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list) endpoint.
+ * The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/) endpoint.
  */
 export const postEventCreateBulk = (variables: PostEventCreateBulkVariables, signal?: AbortSignal) =>
   fetch<
@@ -44271,7 +45264,7 @@ export type DeleteEventDeleteVariables = {
 } & FetcherExtraProps;
 
 /**
- * The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list) endpoint.
+ * The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list/) endpoint.
  */
 export const deleteEventDelete = (variables: DeleteEventDeleteVariables, signal?: AbortSignal) =>
   fetch<DeleteEventDeleteResponse, DeleteEventDeleteError, undefined, {}, {}, DeleteEventDeletePathParams>({
@@ -133920,7 +134913,12 @@ export const operationsByTag = {
   workersAITextEmbeddings: {
     workersAiPostRunCfBaaiBgeBaseEnV15,
     workersAiPostRunCfBaaiBgeLargeEnV15,
+    workersAiPostRunCfBaaiBgeM3,
     workersAiPostRunCfBaaiBgeSmallEnV15
+  },
+  workersAITextClassification: {
+    workersAiPostRunCfBaaiBgeRerankerBase,
+    workersAiPostRunCfHuggingfaceDistilbertSst2Int8
   },
   workersAITextToImage: {
     workersAiPostRunCfBlackForestLabsFlux1Schnell,
@@ -133983,9 +134981,9 @@ export const operationsByTag = {
   },
   workersAISummarization: { workersAiPostRunCfFacebookBartLargeCnn },
   workersAIObjectDetection: { workersAiPostRunCfFacebookDetrResnet50 },
-  workersAITextClassification: { workersAiPostRunCfHuggingfaceDistilbertSst2Int8 },
   workersAITranslation: { workersAiPostRunCfMetaM2m10012b },
   workersAIImageClassification: { workersAiPostRunCfMicrosoftResnet50 },
+  workersAITextToSpeech: { workersAiPostRunCfMyshellAiMelotts },
   workersAIAutomaticSpeechRecognition: {
     workersAiPostRunCfOpenaiWhisper,
     workersAiPostRunCfOpenaiWhisperLargeV3Turbo,
