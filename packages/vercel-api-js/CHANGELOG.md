@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.23.0
+
+### Minor Changes
+
+- ecf56ca: Add recommended IPs and CNAME for the domain in GetDomainConfigResponse
+
 ## 0.22.1
 
 ### Patch Changes
