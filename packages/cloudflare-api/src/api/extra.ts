@@ -183,6 +183,8 @@ import {
   workersAiSearchModel,
   workersAiPostRunCfBaaiBgeBaseEnV15,
   workersAiPostRunCfBaaiBgeLargeEnV15,
+  workersAiPostRunCfBaaiBgeM3,
+  workersAiPostRunCfBaaiBgeRerankerBase,
   workersAiPostRunCfBaaiBgeSmallEnV15,
   workersAiPostRunCfBlackForestLabsFlux1Schnell,
   workersAiPostRunCfBytedanceStableDiffusionXlLightning,
@@ -219,6 +221,7 @@ import {
   workersAiPostRunCfMicrosoftResnet50,
   workersAiPostRunCfMistralMistral7bInstructV01,
   workersAiPostRunCfMistralMistral7bInstructV02Lora,
+  workersAiPostRunCfMyshellAiMelotts,
   workersAiPostRunCfOpenaiWhisper,
   workersAiPostRunCfOpenaiWhisperLargeV3Turbo,
   workersAiPostRunCfOpenaiWhisperTinyEn,
@@ -2128,6 +2131,8 @@ export const operationsByPath = {
   'GET /accounts/{account_id}/ai/models/search': workersAiSearchModel,
   'POST /accounts/{account_id}/ai/run/@cf/baai/bge-base-en-v1.5': workersAiPostRunCfBaaiBgeBaseEnV15,
   'POST /accounts/{account_id}/ai/run/@cf/baai/bge-large-en-v1.5': workersAiPostRunCfBaaiBgeLargeEnV15,
+  'POST /accounts/{account_id}/ai/run/@cf/baai/bge-m3': workersAiPostRunCfBaaiBgeM3,
+  'POST /accounts/{account_id}/ai/run/@cf/baai/bge-reranker-base': workersAiPostRunCfBaaiBgeRerankerBase,
   'POST /accounts/{account_id}/ai/run/@cf/baai/bge-small-en-v1.5': workersAiPostRunCfBaaiBgeSmallEnV15,
   'POST /accounts/{account_id}/ai/run/@cf/black-forest-labs/flux-1-schnell':
     workersAiPostRunCfBlackForestLabsFlux1Schnell,
@@ -2176,6 +2181,7 @@ export const operationsByPath = {
     workersAiPostRunCfMistralMistral7bInstructV01,
   'POST /accounts/{account_id}/ai/run/@cf/mistral/mistral-7b-instruct-v0.2-lora':
     workersAiPostRunCfMistralMistral7bInstructV02Lora,
+  'POST /accounts/{account_id}/ai/run/@cf/myshell-ai/melotts': workersAiPostRunCfMyshellAiMelotts,
   'POST /accounts/{account_id}/ai/run/@cf/openai/whisper': workersAiPostRunCfOpenaiWhisper,
   'POST /accounts/{account_id}/ai/run/@cf/openai/whisper-large-v3-turbo': workersAiPostRunCfOpenaiWhisperLargeV3Turbo,
   'POST /accounts/{account_id}/ai/run/@cf/openai/whisper-tiny-en': workersAiPostRunCfOpenaiWhisperTinyEn,

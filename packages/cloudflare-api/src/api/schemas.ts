@@ -21536,6 +21536,8 @@ export type HyperdriveHyperdriveCaching = HyperdriveHyperdriveCachingDisabled | 
 export type HyperdriveHyperdriveCachingCommon = {
   /**
    * When set to true, disables the caching of SQL responses. (Default: false)
+   *
+   * @x-auditable true
    */
   disabled?: boolean;
 };
@@ -21547,12 +21549,14 @@ export type HyperdriveHyperdriveCachingEnabled = HyperdriveHyperdriveCachingComm
    * When present, specifies max duration for which items should persist in the cache. Not returned if set to default. (Default: 60)
    *
    * @example 60
+   * @x-auditable true
    */
   max_age?: number;
   /**
    * When present, indicates the number of seconds cache may serve the response after it becomes stale. Not returned if set to default. (Default: 15)
    *
    * @example 15
+   * @x-auditable true
    */
   stale_while_revalidate?: number;
 };
@@ -21564,6 +21568,7 @@ export type HyperdriveHyperdriveConfig = {
    *
    * @example 2017-01-01T00:00:00Z
    * @format date-time
+   * @x-auditable true
    */
   created_on?: string;
   id: HyperdriveIdentifier;
@@ -21572,6 +21577,7 @@ export type HyperdriveHyperdriveConfig = {
    *
    * @example 2017-01-01T00:00:00Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string;
   name: HyperdriveHyperdriveName;
@@ -21593,6 +21599,7 @@ export type HyperdriveHyperdriveDatabase = {
    * The name of your origin database.
    *
    * @example postgres
+   * @x-auditable true
    */
   database?: string;
   /**
@@ -21606,6 +21613,7 @@ export type HyperdriveHyperdriveDatabase = {
    * The user of your origin database.
    *
    * @example postgres
+   * @x-auditable true
    */
   user?: string;
 };
@@ -21614,6 +21622,7 @@ export type HyperdriveHyperdriveDatabaseFull = HyperdriveHyperdriveDatabase;
 
 /**
  * @example example-hyperdrive
+ * @x-auditable true
  */
 export type HyperdriveHyperdriveName = string;
 
@@ -21622,6 +21631,8 @@ export type HyperdriveHyperdriveOrigin = HyperdriveHyperdriveDatabase &
 
 /**
  * Specifies the URL scheme used to connect to your origin database.
+ *
+ * @x-auditable true
  */
 export type HyperdriveHyperdriveScheme = 'postgres' | 'postgresql';
 
@@ -21630,6 +21641,7 @@ export type HyperdriveHyperdriveScheme = 'postgres' | 'postgresql';
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type HyperdriveIdentifier = string;
 
@@ -21638,12 +21650,14 @@ export type HyperdriveInternetOrigin = {
    * The host (hostname or IP) of your origin database.
    *
    * @example database.example.com
+   * @x-auditable true
    */
   host: string;
   /**
    * The port (default: 5432 for Postgres) of your origin database.
    *
    * @example 5432
+   * @x-auditable true
    */
   port: number;
 };
@@ -21661,6 +21675,7 @@ export type HyperdriveOverAccessOrigin = {
    * The Client ID of the Access token to use when connecting to the origin database.
    *
    * @example 0123456789abcdef0123456789abcdef.access
+   * @x-auditable true
    */
   access_client_id: string;
   /**
@@ -21674,6 +21689,7 @@ export type HyperdriveOverAccessOrigin = {
    * The host (hostname or IP) of your origin database.
    *
    * @example database.example.com
+   * @x-auditable true
    */
   host: string;
 };
