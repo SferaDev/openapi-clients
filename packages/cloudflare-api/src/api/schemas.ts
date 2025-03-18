@@ -31020,8 +31020,12 @@ export type MconnUuid = string;
 export type MqApiV4Error = {
   /**
    * @minimum 1000
+   * @x-auditable true
    */
   code: number;
+  /**
+   * @x-auditable true
+   */
   message: string;
 }[];
 
@@ -31032,6 +31036,7 @@ export type MqApiV4Failure = {
    * Indicates if the API call was successful or not.
    *
    * @example false
+   * @x-auditable true
    */
   success?: false;
 };
@@ -31043,6 +31048,8 @@ export type MqApiV4Success = {
   messages?: MqApiV4Message;
   /**
    * Indicates if the API call was successful or not.
+   *
+   * @x-auditable true
    */
   success?: true;
 };
@@ -31051,6 +31058,7 @@ export type MqApiV4Success = {
  * The maximum number of messages to include in a batch.
  *
  * @example 50
+ * @x-auditable true
  */
 export type MqBatchSize = number;
 
@@ -31058,6 +31066,9 @@ export type MqConsumer = MqWorkerConsumer | MqHttpConsumer;
 
 export type MqHttpConsumer = {
   consumer_id?: MqIdentifier;
+  /**
+   * @x-auditable true
+   */
   created_on?: string;
   queue_id?: MqIdentifier;
   settings?: {
@@ -31066,6 +31077,9 @@ export type MqHttpConsumer = {
     retry_delay?: MqRetryDelay;
     visibility_timeout_ms?: MqVisibilityTimeout;
   };
+  /**
+   * @x-auditable true
+   */
   type?: 'http_pull';
 };
 
@@ -31074,6 +31088,7 @@ export type MqHttpConsumer = {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type MqIdentifier = string;
 
@@ -31081,6 +31096,7 @@ export type MqIdentifier = string;
  * An ID that represents an "in-flight" message that has been pulled from a Queue. You must hold on to this ID and use it to acknowledge this message.
  *
  * @example eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2Q0JDLUhTNTEyIn0..Q8p21d7dceR6vUfwftONdQ.JVqZgAS-Zk7MqmqccYtTHeeMElNHaOMigeWdb8LyMOg.T2_HV99CYzGaQuhTyW8RsgbnpTRZHRM6N7UoSaAKeK0
+ * @x-auditable true
  */
 export type MqLeaseId = string;
 
@@ -31088,6 +31104,7 @@ export type MqLeaseId = string;
  * Maximum number of concurrent consumers that may consume from this Queue. Set to `null` to automatically opt in to the platform's maximum (recommended).
  *
  * @example 10
+ * @x-auditable true
  */
 export type MqMaxConcurrency = number;
 
@@ -31095,6 +31112,7 @@ export type MqMaxConcurrency = number;
  * The maximum number of retries
  *
  * @example 3
+ * @x-auditable true
  */
 export type MqMaxRetries = number;
 
@@ -31102,6 +31120,7 @@ export type MqMaxRetries = number;
  * The number of milliseconds to wait for a batch to fill up before attempting to deliver it
  *
  * @example 5000
+ * @x-auditable true
  */
 export type MqMaxWaitTime = number;
 
@@ -31110,10 +31129,22 @@ export type MqProducer = MqWorkerProducer | MqR2Producer;
 export type MqQueue = {
   consumers?: MqConsumer[];
   consumers_total_count?: number;
+  /**
+   * @x-auditable true
+   */
   created_on?: string;
+  /**
+   * @x-auditable true
+   */
   modified_on?: string;
   producers?: MqProducer[];
+  /**
+   * @x-auditable true
+   */
   producers_total_count?: number;
+  /**
+   * @x-auditable true
+   */
   queue_id?: string;
   queue_name?: MqQueueName;
   settings?: MqQueueSettings;
@@ -31122,6 +31153,7 @@ export type MqQueue = {
 export type MqQueueBatch = {
   /**
    * @example 1
+   * @x-auditable true
    */
   attempts?: number;
   /**
@@ -31130,6 +31162,7 @@ export type MqQueueBatch = {
   body?: string;
   /**
    * @example b01b5594f784d0165c2985833f5660dd
+   * @x-auditable true
    */
   id?: string;
   lease_id?: MqLeaseId;
@@ -31139,12 +31172,14 @@ export type MqQueueBatch = {
   metadata?: Record<string, any>;
   /**
    * @example 1710950954154
+   * @x-auditable true
    */
   timestamp_ms?: number;
 }[];
 
 /**
  * @example example-queue
+ * @x-auditable true
  */
 export type MqQueueName = string;
 
@@ -31153,18 +31188,26 @@ export type MqQueueSettings = {
    * Number of seconds to delay delivery of all messages to consumers.
    *
    * @example 5
+   * @x-auditable true
    */
   delivery_delay?: number;
   /**
    * Number of seconds after which an unconsumed message will be delayed.
    *
    * @example 345600
+   * @x-auditable true
    */
   message_retention_period?: number;
 };
 
 export type MqR2Producer = {
+  /**
+   * @x-auditable true
+   */
   bucket_name?: string;
+  /**
+   * @x-auditable true
+   */
   type?: 'r2_bucket';
 };
 
@@ -31172,6 +31215,7 @@ export type MqR2Producer = {
  * The number of seconds to delay before making the message available for another attempt.
  *
  * @example 10
+ * @x-auditable true
  */
 export type MqRetryDelay = number;
 
@@ -31179,6 +31223,7 @@ export type MqRetryDelay = number;
  * Name of a Worker
  *
  * @example my-consumer-worker
+ * @x-auditable true
  */
 export type MqScriptName = string;
 
@@ -31186,22 +31231,28 @@ export type MqScriptName = string;
  * The number of milliseconds that a message is exclusively leased. After the timeout, the message becomes available for another attempt.
  *
  * @example 6000
+ * @x-auditable true
  */
 export type MqVisibilityTimeout = number;
 
 export type MqWorkerConsumer = {
   consumer_id?: MqIdentifier;
+  /**
+   * @x-auditable true
+   */
   created_on?: string;
   queue_id?: MqIdentifier;
   /**
    * Name of a Worker
    *
    * @example my-consumer-worker
+   * @x-auditable true
    */
   script?: MqScriptName & string;
   /**
    * Name of a Worker
    *
+   * @x-auditable true
    * @example my-consumer-worker
    */
   script_name?: MqScriptName & string;
@@ -31212,11 +31263,20 @@ export type MqWorkerConsumer = {
     max_wait_time_ms?: MqMaxWaitTime;
     retry_delay?: MqRetryDelay;
   };
+  /**
+   * @x-auditable true
+   */
   type?: 'worker';
 };
 
 export type MqWorkerProducer = {
+  /**
+   * @x-auditable true
+   */
   script?: string;
+  /**
+   * @x-auditable true
+   */
   type?: 'worker';
 };
 
