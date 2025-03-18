@@ -6299,6 +6299,11 @@ export type GetDomainConfigResponse = {
    * Whether or not the domain is configured AND we can automatically generate a TLS certificate.
    */
   misconfigured: boolean;
+  /**
+   * Recommended IPs and CNAME for the domain.
+   */
+  recommendedIps?: string[];
+  recommendedCname?: string;
 };
 
 export type GetDomainConfigVariables = {
@@ -16037,7 +16042,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16142,7 +16147,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -16249,7 +16254,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -17033,7 +17038,7 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17130,7 +17135,7 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17233,7 +17238,7 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
