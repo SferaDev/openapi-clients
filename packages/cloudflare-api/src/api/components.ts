@@ -42522,6 +42522,9 @@ export type PostEventListVariables = {
   pathParams: PostEventListPathParams;
 } & FetcherExtraProps;
 
+/**
+ * The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list) endpoint.
+ */
 export const postEventList = (variables: PostEventListVariables, signal?: AbortSignal) =>
   fetch<PostEventListResponse, PostEventListError, PostEventListRequestBody, {}, {}, PostEventListPathParams>({
     url: '/accounts/{accountId}/cloudforce-one/events',
@@ -43158,6 +43161,9 @@ export type PostEventCreateVariables = {
   pathParams: PostEventCreatePathParams;
 } & FetcherExtraProps;
 
+/**
+ * Events must be created in a client-specific dataset, which means the `datasetId` parameter must be defined. To create a dataset, see the [`Create Dataset`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/create/) endpoint.
+ */
 export const postEventCreate = (variables: PostEventCreateVariables, signal?: AbortSignal) =>
   fetch<PostEventCreateResponse, PostEventCreateError, PostEventCreateRequestBody, {}, {}, PostEventCreatePathParams>({
     url: '/accounts/{accountId}/cloudforce-one/events/create',
@@ -43340,6 +43346,9 @@ export type PostEventCreateBulkVariables = {
   pathParams: PostEventCreateBulkPathParams;
 } & FetcherExtraProps;
 
+/**
+ * The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list) endpoint.
+ */
 export const postEventCreateBulk = (variables: PostEventCreateBulkVariables, signal?: AbortSignal) =>
   fetch<
     PostEventCreateBulkResponse,
@@ -44261,6 +44270,9 @@ export type DeleteEventDeleteVariables = {
   pathParams: DeleteEventDeletePathParams;
 } & FetcherExtraProps;
 
+/**
+ * The `datasetId` parameter must be defined. To list existing datasets (and their IDs) in your account, use the [`List Datasets`](https://developers.cloudflare.com/api/resources/cloudforce_one/subresources/threat_events/subresources/datasets/methods/list) endpoint.
+ */
 export const deleteEventDelete = (variables: DeleteEventDeleteVariables, signal?: AbortSignal) =>
   fetch<DeleteEventDeleteResponse, DeleteEventDeleteError, undefined, {}, {}, DeleteEventDeletePathParams>({
     url: '/accounts/{accountId}/cloudforce-one/events/{eventId}',
