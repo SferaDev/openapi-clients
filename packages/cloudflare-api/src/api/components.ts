@@ -40031,6 +40031,40 @@ export const workersAiSearchTask = (variables: WorkersAiSearchTaskVariables, sig
     signal
   });
 
+export type WorkersAiPostToMarkdownPathParams = {
+  /**
+   * @example 023e105f4ecef8ad9ca31a8372d0c353
+   */
+  accountId: string;
+};
+
+export type WorkersAiPostToMarkdownError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      message: string;
+    }[];
+    result: Record<string, any>;
+    /**
+     * @example false
+     */
+    success: boolean;
+  };
+}>;
+
+export type WorkersAiPostToMarkdownVariables = {
+  body?: Blob;
+  pathParams: WorkersAiPostToMarkdownPathParams;
+} & FetcherExtraProps;
+
+export const workersAiPostToMarkdown = (variables: WorkersAiPostToMarkdownVariables, signal?: AbortSignal) =>
+  fetch<undefined, WorkersAiPostToMarkdownError, Blob, {}, {}, WorkersAiPostToMarkdownPathParams>({
+    url: '/accounts/{accountId}/ai/tomarkdown',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
 export type NotificationAlertTypesGetAlertTypesPathParams = {
   accountId: Schemas.AaaAccountId;
 };
@@ -134902,7 +134936,8 @@ export const operationsByTag = {
     workersAiGetModelSchema,
     workersAiSearchModel,
     workersAiPostRunModel,
-    workersAiSearchTask
+    workersAiSearchTask,
+    workersAiPostToMarkdown
   },
   workersAIFinetune: {
     workersAiListFinetunes,
