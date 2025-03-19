@@ -252,6 +252,7 @@ import {
   workersAiPostRunHfTheblokeZephyr7bBetaAwq,
   workersAiPostRunModel,
   workersAiSearchTask,
+  workersAiPostToMarkdown,
   notificationAlertTypesGetAlertTypes,
   notificationMechanismEligibilityGetDeliveryMechanismEligibility,
   notificationDestinationsWithPagerDutyDeletePagerDutyServices,
@@ -2226,6 +2227,7 @@ export const operationsByPath = {
   'POST /accounts/{account_id}/ai/run/@hf/thebloke/zephyr-7b-beta-awq': workersAiPostRunHfTheblokeZephyr7bBetaAwq,
   'POST /accounts/{account_id}/ai/run/{model_name}': workersAiPostRunModel,
   'GET /accounts/{account_id}/ai/tasks/search': workersAiSearchTask,
+  'POST /accounts/{account_id}/ai/tomarkdown': workersAiPostToMarkdown,
   'GET /accounts/{account_id}/alerting/v3/available_alerts': notificationAlertTypesGetAlertTypes,
   'GET /accounts/{account_id}/alerting/v3/destinations/eligible':
     notificationMechanismEligibilityGetDeliveryMechanismEligibility,
