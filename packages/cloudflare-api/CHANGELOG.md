@@ -1,5 +1,13 @@
 # cloudflare-api-js
 
+## 0.9.2
+
+### Patch Changes
+
+- 025e4fd: [BREAKING] Add @x-auditable metadata to various types for auditing purposes
+- fbfb377: Add new endpoint to convert to markdown
+- d90845e: Add documentation for required parameter `datasetId` in postEventList, postEventCreate, postEventCreateBulk, and deleteEventDelete endpoints
+
 ## 0.9.1
 
 ### Patch Changes
