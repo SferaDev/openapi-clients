@@ -9717,9 +9717,9 @@ export type ApiShieldApiResponseCommonFailure = {
 export type ApiShieldApiResponseSingle = ApiShieldApiResponseCommon;
 
 /**
- * * `ML` - Discovered operation was sourced using ML API Discovery * `SessionIdentifier` - Discovered operation was sourced using Session Identifier API Discovery
+ * * `ML` - Discovered operation was sourced using ML API Discovery * `SessionIdentifier` - Discovered operation was sourced using Session Identifier API Discovery * `LabelDiscovery` - Discovered operation was identified to have a specific label
  */
-export type ApiShieldApiDiscoveryOrigin = 'ML' | 'SessionIdentifier';
+export type ApiShieldApiDiscoveryOrigin = 'ML' | 'SessionIdentifier' | 'LabelDiscovery';
 
 /**
  * @example {"3818d821-5901-4147-a474-f5f5aec1d54e":{"state":"ignored"},"b17c8043-99a0-4202-b7d9-8f7cdbee02cd":{"state":"review"}}
