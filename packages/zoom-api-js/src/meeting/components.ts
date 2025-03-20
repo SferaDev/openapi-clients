@@ -2406,9 +2406,9 @@ export type RecordingSettingUpdateError = Fetcher.ErrorWrapper<undefined>;
 
 export type RecordingSettingUpdateResponse = {
   /**
-   * The approval type for the registration.
+   * The registration approval type.
    *
-   * `0`- Automatically approve the registration when a user registers.
+   * `0` - Automatically approve the registration when a user registers.
    *
    * `1` - Manually approve or deny the registration of a user.
    *
@@ -2420,15 +2420,21 @@ export type RecordingSettingUpdateResponse = {
   /**
    * The domains for authentication.
    *
-   * @example test.com
+   * @example example.com
    */
   authentication_domains?: string;
   /**
-   * The options for authentication .
+   * The options for authentication.
    *
    * @example auth_option
    */
   authentication_option?: string;
+  /**
+   * The name for authentication.
+   *
+   * @example auth display name
+   */
+  authentication_name?: string;
   /**
    * This field determines whether registration is required to view the recording.
    *
@@ -2449,37 +2455,37 @@ export type RecordingSettingUpdateResponse = {
    */
   password?: string;
   /**
-   * THis field only authenticated users can view.
+   * Only allow authenticated users to view.
    *
    * @example true
    */
   recording_authentication?: boolean;
   /**
-   * This field enables you to send an email to the host when someone registers to view the recording. This applies for On-demand recordings only.
+   * Enable sending an email to the host when someone registers to view the recording. This applies for On-demand recordings only.
    *
    * @example false
    */
   send_email_to_host?: boolean;
   /**
-   * This field determines how the meeting recording is shared.
+   * Determine how the meeting recording is shared.
    *
    * @example publicly
    */
   share_recording?: 'publicly' | 'internally' | 'none';
   /**
-   * This field shows social share buttons on registration page. This applies for On-demand recordings only.
+   * Show social share buttons on the registration page. This applies for On-demand recordings only.
    *
    * @example true
    */
   show_social_share_buttons?: boolean;
   /**
-   * The name of the recording.
+   * The recording's name.
    *
    * @example My Personal Meeting Room
    */
   topic?: string;
   /**
-   * This field determines whether a viewer can download the recording file or not.
+   * Determine whether a viewer can download the recording file or not.
    *
    * @example true
    */
@@ -2493,7 +2499,7 @@ export type RecordingSettingUpdateResponse = {
    */
   auto_delete?: boolean;
   /**
-   * The date on which the recording will be auto-deleted when auto_delete is true. Otherwise, no date will be returned.
+   * The date when the recording will be auto-deleted when `auto_delete` is `true`. Otherwise, no date is returned.
    *
    * @example 2028-07-12
    */
