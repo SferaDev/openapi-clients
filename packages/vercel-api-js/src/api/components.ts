@@ -2086,7 +2086,7 @@ export type UpdateProjectDataCacheResponse = {
     private: boolean;
     readyAt?: number;
     readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
-    readySubstate?: 'PROMOTED' | 'STAGED';
+    readySubstate?: 'PROMOTED' | 'ROLLING' | 'STAGED';
     requestedAt?: number;
     target?: string | null;
     teamId?: string | null;
@@ -2324,7 +2324,7 @@ export type UpdateProjectDataCacheResponse = {
       private: boolean;
       readyAt?: number;
       readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
-      readySubstate?: 'PROMOTED' | 'STAGED';
+      readySubstate?: 'PROMOTED' | 'ROLLING' | 'STAGED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
@@ -3207,9 +3207,9 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
           framework?: string | null;
         };
         /**
-         * Since June 2023 Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - PROMOTED: has seen production traffic
+         * Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - ROLLING: in the process of having production traffic gradually transitioned. - PROMOTED: has seen production traffic
          */
-        readySubstate?: 'STAGED' | 'PROMOTED';
+        readySubstate?: 'STAGED' | 'ROLLING' | 'PROMOTED';
         regions: string[];
         softDeletedByRetention?: boolean;
         source?:
@@ -3597,9 +3597,9 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
           framework?: string | null;
         };
         /**
-         * Since June 2023 Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - PROMOTED: has seen production traffic
+         * Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - ROLLING: in the process of having production traffic gradually transitioned. - PROMOTED: has seen production traffic
          */
-        readySubstate?: 'STAGED' | 'PROMOTED';
+        readySubstate?: 'STAGED' | 'ROLLING' | 'PROMOTED';
         regions: string[];
         softDeletedByRetention?: boolean;
         source?:
@@ -3953,9 +3953,9 @@ export type CreateDeploymentResponse = {
   errorStep?: string;
   originCacheRegion?: string;
   /**
-   * Since June 2023 Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - PROMOTED: has seen production traffic
+   * Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - ROLLING: in the process of having production traffic gradually transitioned. - PROMOTED: has seen production traffic
    */
-  readySubstate?: 'PROMOTED' | 'STAGED';
+  readySubstate?: 'PROMOTED' | 'ROLLING' | 'STAGED';
   softDeletedByRetention?: boolean;
   undeletedAt?: number;
   url: string;
@@ -4780,9 +4780,9 @@ export type CancelDeploymentResponse = {
   };
   readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
   /**
-   * Since June 2023 Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - PROMOTED: has seen production traffic
+   * Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - ROLLING: in the process of having production traffic gradually transitioned. - PROMOTED: has seen production traffic
    */
-  readySubstate?: 'PROMOTED' | 'STAGED';
+  readySubstate?: 'PROMOTED' | 'ROLLING' | 'STAGED';
   regions: string[];
   softDeletedByRetention?: boolean;
   source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy' | 'v0-web';
@@ -11211,7 +11211,7 @@ export type GetProjectsResponse = {
       private: boolean;
       readyAt?: number;
       readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
-      readySubstate?: 'PROMOTED' | 'STAGED';
+      readySubstate?: 'PROMOTED' | 'ROLLING' | 'STAGED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
@@ -11449,7 +11449,7 @@ export type GetProjectsResponse = {
         private: boolean;
         readyAt?: number;
         readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
-        readySubstate?: 'PROMOTED' | 'STAGED';
+        readySubstate?: 'PROMOTED' | 'ROLLING' | 'STAGED';
         requestedAt?: number;
         target?: string | null;
         teamId?: string | null;
@@ -12163,7 +12163,7 @@ export type CreateProjectResponse = {
     private: boolean;
     readyAt?: number;
     readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
-    readySubstate?: 'PROMOTED' | 'STAGED';
+    readySubstate?: 'PROMOTED' | 'ROLLING' | 'STAGED';
     requestedAt?: number;
     target?: string | null;
     teamId?: string | null;
@@ -12401,7 +12401,7 @@ export type CreateProjectResponse = {
       private: boolean;
       readyAt?: number;
       readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
-      readySubstate?: 'PROMOTED' | 'STAGED';
+      readySubstate?: 'PROMOTED' | 'ROLLING' | 'STAGED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
@@ -13296,7 +13296,7 @@ export type GetProjectResponse = {
     private: boolean;
     readyAt?: number;
     readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
-    readySubstate?: 'PROMOTED' | 'STAGED';
+    readySubstate?: 'PROMOTED' | 'ROLLING' | 'STAGED';
     requestedAt?: number;
     target?: string | null;
     teamId?: string | null;
@@ -13534,7 +13534,7 @@ export type GetProjectResponse = {
       private: boolean;
       readyAt?: number;
       readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
-      readySubstate?: 'PROMOTED' | 'STAGED';
+      readySubstate?: 'PROMOTED' | 'ROLLING' | 'STAGED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
@@ -14256,7 +14256,7 @@ export type UpdateProjectResponse = {
     private: boolean;
     readyAt?: number;
     readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
-    readySubstate?: 'PROMOTED' | 'STAGED';
+    readySubstate?: 'PROMOTED' | 'ROLLING' | 'STAGED';
     requestedAt?: number;
     target?: string | null;
     teamId?: string | null;
@@ -14494,7 +14494,7 @@ export type UpdateProjectResponse = {
       private: boolean;
       readyAt?: number;
       readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
-      readySubstate?: 'PROMOTED' | 'STAGED';
+      readySubstate?: 'PROMOTED' | 'ROLLING' | 'STAGED';
       requestedAt?: number;
       target?: string | null;
       teamId?: string | null;
@@ -16396,7 +16396,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16500,7 +16500,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17391,7 +17391,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17495,7 +17495,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17598,7 +17598,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17792,7 +17792,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -22753,9 +22753,9 @@ export type GetDeploymentsResponse = {
      */
     ready?: number;
     /**
-     * Since June 2023 Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - PROMOTED: has seen production traffic
+     * Substate of deployment when readyState is 'READY' Tracks whether or not deployment has seen production traffic: - STAGED: never seen production traffic - ROLLING: in the process of gradually transitioning production traffic - PROMOTED: has seen production traffic
      */
-    readySubstate?: 'PROMOTED' | 'STAGED';
+    readySubstate?: 'PROMOTED' | 'ROLLING' | 'STAGED';
     /**
      * State of all registered checks
      */
