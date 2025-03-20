@@ -86360,6 +86360,176 @@ export const radarGetAttacksLayer3SummaryByDuration = (
     {}
   >({ url: '/radar/attacks/layer3/summary/duration', method: 'get', ...variables, signal });
 
+export type RadarGetAttacksLayer3SummaryByIndustryQueryParams = {
+  /**
+   * Array of names used to label the series in the response.
+   */
+  name?: string[];
+  /**
+   * Filters results by the specified date range. For example, use `7d` and `7dcontrol` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   *
+   * @example 7d
+   */
+  dateRange?: string[];
+  /**
+   * Start of the date range.
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateStart?: string[];
+  /**
+   * End of the date range (inclusive).
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateEnd?: string[];
+  /**
+   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
+   *
+   * @example US,CA
+   */
+  location?: string[];
+  /**
+   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to exclude continents from results. For example, `-EU,NA` excludes results from EU, but includes results from NA.
+   *
+   * @example EU,NA
+   */
+  continent?: string[];
+  /**
+   * Filters results by IP version (Ipv4 vs. IPv6).
+   *
+   * @example IPv4
+   */
+  ipVersion?: ('IPv4' | 'IPv6')[];
+  /**
+   * Array of L3/4 attack types.
+   */
+  protocol?: ('UDP' | 'TCP' | 'ICMP' | 'GRE')[];
+  /**
+   * Together with the `location` parameter, will apply the filter to origin or target location.
+   *
+   * @default ORIGIN
+   */
+  direction?: 'ORIGIN' | 'TARGET';
+  /**
+   * Limits the number of objects per group to the top items within the specified time range. If there are more items than the limit, the response will include the count of items, with any remaining items grouped together under an "other" category.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
+  /**
+   * Format in which results will be returned.
+   *
+   * @example json
+   */
+  format?: 'JSON' | 'CSV';
+};
+
+export type RadarGetAttacksLayer3SummaryByIndustryError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      message: string;
+    }[];
+    result: Record<string, any>;
+    /**
+     * @example false
+     */
+    success: boolean;
+  };
+}>;
+
+export type RadarGetAttacksLayer3SummaryByIndustryResponse = {
+  result: {
+    meta: {
+      confidenceInfo?: {
+        annotations?: {
+          /**
+           * @example ALL
+           */
+          dataSource: string;
+          /**
+           * @example Cable cut in Tonga
+           */
+          description: string;
+          /**
+           * @format date-time
+           */
+          endTime?: string;
+          /**
+           * @example OUTAGE
+           */
+          eventType: string;
+          /**
+           * @example true
+           */
+          isInstantaneous: boolean;
+          linkedUrl?: string;
+          /**
+           * @format date-time
+           */
+          startTime?: string;
+        }[];
+        level?: number;
+      };
+      dateRange: {
+        /**
+         * Adjusted end of date range.
+         *
+         * @example 2022-09-17T10:22:57.555Z
+         * @format date-time
+         */
+        endTime: string;
+        /**
+         * Adjusted start of date range.
+         *
+         * @example 2022-09-16T10:22:57.555Z
+         * @format date-time
+         */
+        startTime: string;
+      }[];
+      /**
+       * @example 2023-07-26T08:59:57Z
+       */
+      lastUpdated: string;
+      /**
+       * @example PERCENTAGE
+       */
+      normalization: string;
+    };
+    /**
+     * @example {"Computer Software":"65"}
+     */
+    summary_0: {
+      [key: string]: string;
+    };
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RadarGetAttacksLayer3SummaryByIndustryVariables = {
+  queryParams?: RadarGetAttacksLayer3SummaryByIndustryQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves the distribution of layer 3 attacks by targeted industry.
+ */
+export const radarGetAttacksLayer3SummaryByIndustry = (
+  variables: RadarGetAttacksLayer3SummaryByIndustryVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    RadarGetAttacksLayer3SummaryByIndustryResponse,
+    RadarGetAttacksLayer3SummaryByIndustryError,
+    undefined,
+    {},
+    RadarGetAttacksLayer3SummaryByIndustryQueryParams,
+    {}
+  >({ url: '/radar/attacks/layer3/summary/industry', method: 'get', ...variables, signal });
+
 export type RadarGetAttacksLayer3SummaryByIpVersionQueryParams = {
   /**
    * Array of names used to label the series in the response.
@@ -86863,6 +87033,176 @@ export const radarGetAttacksLayer3SummaryByVector = (
     RadarGetAttacksLayer3SummaryByVectorQueryParams,
     {}
   >({ url: '/radar/attacks/layer3/summary/vector', method: 'get', ...variables, signal });
+
+export type RadarGetAttacksLayer3SummaryByVerticalQueryParams = {
+  /**
+   * Array of names used to label the series in the response.
+   */
+  name?: string[];
+  /**
+   * Filters results by the specified date range. For example, use `7d` and `7dcontrol` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   *
+   * @example 7d
+   */
+  dateRange?: string[];
+  /**
+   * Start of the date range.
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateStart?: string[];
+  /**
+   * End of the date range (inclusive).
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateEnd?: string[];
+  /**
+   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
+   *
+   * @example US,CA
+   */
+  location?: string[];
+  /**
+   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to exclude continents from results. For example, `-EU,NA` excludes results from EU, but includes results from NA.
+   *
+   * @example EU,NA
+   */
+  continent?: string[];
+  /**
+   * Filters results by IP version (Ipv4 vs. IPv6).
+   *
+   * @example IPv4
+   */
+  ipVersion?: ('IPv4' | 'IPv6')[];
+  /**
+   * Array of L3/4 attack types.
+   */
+  protocol?: ('UDP' | 'TCP' | 'ICMP' | 'GRE')[];
+  /**
+   * Together with the `location` parameter, will apply the filter to origin or target location.
+   *
+   * @default ORIGIN
+   */
+  direction?: 'ORIGIN' | 'TARGET';
+  /**
+   * Limits the number of objects per group to the top items within the specified time range. If there are more items than the limit, the response will include the count of items, with any remaining items grouped together under an "other" category.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
+  /**
+   * Format in which results will be returned.
+   *
+   * @example json
+   */
+  format?: 'JSON' | 'CSV';
+};
+
+export type RadarGetAttacksLayer3SummaryByVerticalError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      message: string;
+    }[];
+    result: Record<string, any>;
+    /**
+     * @example false
+     */
+    success: boolean;
+  };
+}>;
+
+export type RadarGetAttacksLayer3SummaryByVerticalResponse = {
+  result: {
+    meta: {
+      confidenceInfo?: {
+        annotations?: {
+          /**
+           * @example ALL
+           */
+          dataSource: string;
+          /**
+           * @example Cable cut in Tonga
+           */
+          description: string;
+          /**
+           * @format date-time
+           */
+          endTime?: string;
+          /**
+           * @example OUTAGE
+           */
+          eventType: string;
+          /**
+           * @example true
+           */
+          isInstantaneous: boolean;
+          linkedUrl?: string;
+          /**
+           * @format date-time
+           */
+          startTime?: string;
+        }[];
+        level?: number;
+      };
+      dateRange: {
+        /**
+         * Adjusted end of date range.
+         *
+         * @example 2022-09-17T10:22:57.555Z
+         * @format date-time
+         */
+        endTime: string;
+        /**
+         * Adjusted start of date range.
+         *
+         * @example 2022-09-16T10:22:57.555Z
+         * @format date-time
+         */
+        startTime: string;
+      }[];
+      /**
+       * @example 2023-07-26T08:59:57Z
+       */
+      lastUpdated: string;
+      /**
+       * @example PERCENTAGE
+       */
+      normalization: string;
+    };
+    /**
+     * @example {"Internet and Telecom":"5.519081"}
+     */
+    summary_0: {
+      [key: string]: string;
+    };
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RadarGetAttacksLayer3SummaryByVerticalVariables = {
+  queryParams?: RadarGetAttacksLayer3SummaryByVerticalQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves the distribution of layer 3 attacks by targeted vertical.
+ */
+export const radarGetAttacksLayer3SummaryByVertical = (
+  variables: RadarGetAttacksLayer3SummaryByVerticalVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    RadarGetAttacksLayer3SummaryByVerticalResponse,
+    RadarGetAttacksLayer3SummaryByVerticalError,
+    undefined,
+    {},
+    RadarGetAttacksLayer3SummaryByVerticalQueryParams,
+    {}
+  >({ url: '/radar/attacks/layer3/summary/vertical', method: 'get', ...variables, signal });
 
 export type RadarGetAttacksLayer3TimeseriesByBytesQueryParams = {
   /**
@@ -88203,7 +88543,7 @@ export type RadarGetAttacksLayer3TopIndustriesVariables = {
 } & FetcherExtraProps;
 
 /**
- * Retrieves the top industries targeted by layer 3 attacks.
+ * This endpoint is deprecated. To continue getting this data, switch to the summary by industry endpoint.
  */
 export const radarGetAttacksLayer3TopIndustries = (
   variables: RadarGetAttacksLayer3TopIndustriesVariables,
@@ -88699,7 +89039,7 @@ export type RadarGetAttacksLayer3TopVerticalsVariables = {
 } & FetcherExtraProps;
 
 /**
- * Retrieves the top verticals targeted by layer 3 attacks.
+ * This endpoint is deprecated. To continue getting this data, switch to the summary by vertical endpoint.
  */
 export const radarGetAttacksLayer3TopVerticals = (
   variables: RadarGetAttacksLayer3TopVerticalsVariables,
@@ -89124,6 +89464,243 @@ export const radarGetAttacksLayer7SummaryByHttpVersion = (
     RadarGetAttacksLayer7SummaryByHttpVersionQueryParams,
     {}
   >({ url: '/radar/attacks/layer7/summary/http_version', method: 'get', ...variables, signal });
+
+export type RadarGetAttacksLayer7SummaryByIndustryQueryParams = {
+  /**
+   * Array of names used to label the series in the response.
+   */
+  name?: string[];
+  /**
+   * Filters results by the specified date range. For example, use `7d` and `7dcontrol` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   *
+   * @example 7d
+   */
+  dateRange?: string[];
+  /**
+   * Start of the date range.
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateStart?: string[];
+  /**
+   * End of the date range (inclusive).
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateEnd?: string[];
+  /**
+   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
+   *
+   * @example 15169
+   */
+  asn?: string[];
+  /**
+   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
+   *
+   * @example US,CA
+   */
+  location?: string[];
+  /**
+   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to exclude continents from results. For example, `-EU,NA` excludes results from EU, but includes results from NA.
+   *
+   * @example EU,NA
+   */
+  continent?: string[];
+  /**
+   * Filters results by IP version (Ipv4 vs. IPv6).
+   *
+   * @example IPv4
+   */
+  ipVersion?: ('IPv4' | 'IPv6')[];
+  /**
+   * Filters results by HTTP version.
+   *
+   * @example HTTPv1
+   */
+  httpVersion?: ('HTTPv1' | 'HTTPv2' | 'HTTPv3')[];
+  /**
+   * Filters results by HTTP method.
+   *
+   * @example GET
+   */
+  httpMethod?: (
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  )[];
+  /**
+   * Array of L7 mitigation products.
+   */
+  mitigationProduct?: (
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  )[];
+  /**
+   * Limits the number of objects per group to the top items within the specified time range. If there are more items than the limit, the response will include the count of items, with any remaining items grouped together under an "other" category.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
+  /**
+   * Format in which results will be returned.
+   *
+   * @example json
+   */
+  format?: 'JSON' | 'CSV';
+};
+
+export type RadarGetAttacksLayer7SummaryByIndustryError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      message: string;
+    }[];
+    result: Record<string, any>;
+    /**
+     * @example false
+     */
+    success: boolean;
+  };
+}>;
+
+export type RadarGetAttacksLayer7SummaryByIndustryResponse = {
+  result: {
+    meta: {
+      confidenceInfo?: {
+        annotations?: {
+          /**
+           * @example ALL
+           */
+          dataSource: string;
+          /**
+           * @example Cable cut in Tonga
+           */
+          description: string;
+          /**
+           * @format date-time
+           */
+          endTime?: string;
+          /**
+           * @example OUTAGE
+           */
+          eventType: string;
+          /**
+           * @example true
+           */
+          isInstantaneous: boolean;
+          linkedUrl?: string;
+          /**
+           * @format date-time
+           */
+          startTime?: string;
+        }[];
+        level?: number;
+      };
+      dateRange: {
+        /**
+         * Adjusted end of date range.
+         *
+         * @example 2022-09-17T10:22:57.555Z
+         * @format date-time
+         */
+        endTime: string;
+        /**
+         * Adjusted start of date range.
+         *
+         * @example 2022-09-16T10:22:57.555Z
+         * @format date-time
+         */
+        startTime: string;
+      }[];
+      /**
+       * @example 2023-07-26T08:59:57Z
+       */
+      lastUpdated: string;
+      /**
+       * @example PERCENTAGE
+       */
+      normalization: string;
+    };
+    /**
+     * @example {"Computer Software":"65"}
+     */
+    summary_0: {
+      [key: string]: string;
+    };
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RadarGetAttacksLayer7SummaryByIndustryVariables = {
+  queryParams?: RadarGetAttacksLayer7SummaryByIndustryQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves the distribution of layer 7 attacks by targeted industry.
+ */
+export const radarGetAttacksLayer7SummaryByIndustry = (
+  variables: RadarGetAttacksLayer7SummaryByIndustryVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    RadarGetAttacksLayer7SummaryByIndustryResponse,
+    RadarGetAttacksLayer7SummaryByIndustryError,
+    undefined,
+    {},
+    RadarGetAttacksLayer7SummaryByIndustryQueryParams,
+    {}
+  >({ url: '/radar/attacks/layer7/summary/industry', method: 'get', ...variables, signal });
 
 export type RadarGetAttacksLayer7SummaryByIpVersionQueryParams = {
   /**
@@ -89812,6 +90389,243 @@ export const radarGetAttacksLayer7SummaryByMitigationProduct = (
     RadarGetAttacksLayer7SummaryByMitigationProductQueryParams,
     {}
   >({ url: '/radar/attacks/layer7/summary/mitigation_product', method: 'get', ...variables, signal });
+
+export type RadarGetAttacksLayer7SummaryByVerticalQueryParams = {
+  /**
+   * Array of names used to label the series in the response.
+   */
+  name?: string[];
+  /**
+   * Filters results by the specified date range. For example, use `7d` and `7dcontrol` to compare this week with the previous week. Use this parameter or set specific start and end dates (`dateStart` and `dateEnd` parameters).
+   *
+   * @example 7d
+   */
+  dateRange?: string[];
+  /**
+   * Start of the date range.
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateStart?: string[];
+  /**
+   * End of the date range (inclusive).
+   *
+   * @example 2023-09-01T11:41:33.782Z
+   */
+  dateEnd?: string[];
+  /**
+   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
+   *
+   * @example 15169
+   */
+  asn?: string[];
+  /**
+   * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
+   *
+   * @example US,CA
+   */
+  location?: string[];
+  /**
+   * Comma-separated list of continents (alpha-2 continent codes). Prefix with `-` to exclude continents from results. For example, `-EU,NA` excludes results from EU, but includes results from NA.
+   *
+   * @example EU,NA
+   */
+  continent?: string[];
+  /**
+   * Filters results by IP version (Ipv4 vs. IPv6).
+   *
+   * @example IPv4
+   */
+  ipVersion?: ('IPv4' | 'IPv6')[];
+  /**
+   * Filters results by HTTP version.
+   *
+   * @example HTTPv1
+   */
+  httpVersion?: ('HTTPv1' | 'HTTPv2' | 'HTTPv3')[];
+  /**
+   * Filters results by HTTP method.
+   *
+   * @example GET
+   */
+  httpMethod?: (
+    | 'GET'
+    | 'POST'
+    | 'DELETE'
+    | 'PUT'
+    | 'HEAD'
+    | 'PURGE'
+    | 'OPTIONS'
+    | 'PROPFIND'
+    | 'MKCOL'
+    | 'PATCH'
+    | 'ACL'
+    | 'BCOPY'
+    | 'BDELETE'
+    | 'BMOVE'
+    | 'BPROPFIND'
+    | 'BPROPPATCH'
+    | 'CHECKIN'
+    | 'CHECKOUT'
+    | 'CONNECT'
+    | 'COPY'
+    | 'LABEL'
+    | 'LOCK'
+    | 'MERGE'
+    | 'MKACTIVITY'
+    | 'MKWORKSPACE'
+    | 'MOVE'
+    | 'NOTIFY'
+    | 'ORDERPATCH'
+    | 'POLL'
+    | 'PROPPATCH'
+    | 'REPORT'
+    | 'SEARCH'
+    | 'SUBSCRIBE'
+    | 'TRACE'
+    | 'UNCHECKOUT'
+    | 'UNLOCK'
+    | 'UNSUBSCRIBE'
+    | 'UPDATE'
+    | 'VERSIONCONTROL'
+    | 'BASELINECONTROL'
+    | 'XMSENUMATTS'
+    | 'RPC_OUT_DATA'
+    | 'RPC_IN_DATA'
+    | 'JSON'
+    | 'COOK'
+    | 'TRACK'
+  )[];
+  /**
+   * Array of L7 mitigation products.
+   */
+  mitigationProduct?: (
+    | 'DDOS'
+    | 'WAF'
+    | 'BOT_MANAGEMENT'
+    | 'ACCESS_RULES'
+    | 'IP_REPUTATION'
+    | 'API_SHIELD'
+    | 'DATA_LOSS_PREVENTION'
+  )[];
+  /**
+   * Limits the number of objects per group to the top items within the specified time range. If there are more items than the limit, the response will include the count of items, with any remaining items grouped together under an "other" category.
+   *
+   * @example 10
+   */
+  limitPerGroup?: number;
+  /**
+   * Format in which results will be returned.
+   *
+   * @example json
+   */
+  format?: 'JSON' | 'CSV';
+};
+
+export type RadarGetAttacksLayer7SummaryByVerticalError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      message: string;
+    }[];
+    result: Record<string, any>;
+    /**
+     * @example false
+     */
+    success: boolean;
+  };
+}>;
+
+export type RadarGetAttacksLayer7SummaryByVerticalResponse = {
+  result: {
+    meta: {
+      confidenceInfo?: {
+        annotations?: {
+          /**
+           * @example ALL
+           */
+          dataSource: string;
+          /**
+           * @example Cable cut in Tonga
+           */
+          description: string;
+          /**
+           * @format date-time
+           */
+          endTime?: string;
+          /**
+           * @example OUTAGE
+           */
+          eventType: string;
+          /**
+           * @example true
+           */
+          isInstantaneous: boolean;
+          linkedUrl?: string;
+          /**
+           * @format date-time
+           */
+          startTime?: string;
+        }[];
+        level?: number;
+      };
+      dateRange: {
+        /**
+         * Adjusted end of date range.
+         *
+         * @example 2022-09-17T10:22:57.555Z
+         * @format date-time
+         */
+        endTime: string;
+        /**
+         * Adjusted start of date range.
+         *
+         * @example 2022-09-16T10:22:57.555Z
+         * @format date-time
+         */
+        startTime: string;
+      }[];
+      /**
+       * @example 2023-07-26T08:59:57Z
+       */
+      lastUpdated: string;
+      /**
+       * @example PERCENTAGE
+       */
+      normalization: string;
+    };
+    /**
+     * @example {"Internet and Telecom":"5.519081"}
+     */
+    summary_0: {
+      [key: string]: string;
+    };
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RadarGetAttacksLayer7SummaryByVerticalVariables = {
+  queryParams?: RadarGetAttacksLayer7SummaryByVerticalQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves the distribution of layer 7 attacks by targeted vertical.
+ */
+export const radarGetAttacksLayer7SummaryByVertical = (
+  variables: RadarGetAttacksLayer7SummaryByVerticalVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    RadarGetAttacksLayer7SummaryByVerticalResponse,
+    RadarGetAttacksLayer7SummaryByVerticalError,
+    undefined,
+    {},
+    RadarGetAttacksLayer7SummaryByVerticalQueryParams,
+    {}
+  >({ url: '/radar/attacks/layer7/summary/vertical', method: 'get', ...variables, signal });
 
 export type RadarGetAttacksLayer7TimeseriesQueryParams = {
   /**
@@ -92004,7 +92818,7 @@ export type RadarGetAttacksLayer7TopIndustriesVariables = {
 } & FetcherExtraProps;
 
 /**
- * Retrieves the industries targeted by layer 7 attacks.
+ * This endpoint is deprecated. To continue getting this data, switch to the summary by industry endpoint.
  */
 export const radarGetAttacksLayer7TopIndustries = (
   variables: RadarGetAttacksLayer7TopIndustriesVariables,
@@ -92636,7 +93450,7 @@ export type RadarGetAttacksLayer7TopVerticalsVariables = {
 } & FetcherExtraProps;
 
 /**
- * Retrieves the verticals targeted by layer 7 attacks.
+ * This endpoint is deprecated. To continue getting this data, switch to the summary by vertical endpoint.
  */
 export const radarGetAttacksLayer7TopVerticals = (
   variables: RadarGetAttacksLayer7TopVerticalsVariables,
@@ -93337,6 +94151,103 @@ export const radarGetBgpPfx2as = (variables: RadarGetBgpPfx2asVariables, signal?
     ...variables,
     signal
   });
+
+export type RadarGetBgpRoutesRealtimeQueryParams = {
+  /**
+   * Network prefix, IPv4 or IPv6.
+   *
+   * @example 1.1.1.0/24
+   */
+  prefix?: string;
+  /**
+   * Format in which results will be returned.
+   *
+   * @example json
+   */
+  format?: 'JSON' | 'CSV';
+};
+
+export type RadarGetBgpRoutesRealtimeError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      message: string;
+    }[];
+    result: Record<string, any>;
+    /**
+     * @example false
+     */
+    success: boolean;
+  };
+}>;
+
+export type RadarGetBgpRoutesRealtimeResponse = {
+  result: {
+    meta: {
+      collectors: {
+        /**
+         * public route collector ID
+         */
+        collector: string;
+        /**
+         * latest realtime stream timestamp for this collector
+         */
+        latest_realtime_ts: string;
+        /**
+         * latest RIB dump MRT file timestamp for this collector
+         */
+        latest_rib_ts: string;
+        /**
+         * latest BGP updates MRT file timestamp for this collector
+         */
+        latest_updates_ts: string;
+      }[];
+    };
+    routes: {
+      /**
+       * AS-level path for this route, from collector to origin
+       */
+      as_path: number[];
+      /**
+       * public collector ID for this route
+       */
+      collector: string;
+      /**
+       * BGP community values
+       */
+      communities: string[];
+      /**
+       * IP prefix of this query
+       */
+      prefix: string;
+      /**
+       * latest timestamp of change for this route
+       */
+      timestamp: string;
+    }[];
+  };
+  /**
+   * @example true
+   */
+  success: boolean;
+};
+
+export type RadarGetBgpRoutesRealtimeVariables = {
+  queryParams?: RadarGetBgpRoutesRealtimeQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Retrieves realtime routes for prefixes using public realtime data collectors (RouteViews and RIPE RIS).
+ */
+export const radarGetBgpRoutesRealtime = (variables: RadarGetBgpRoutesRealtimeVariables, signal?: AbortSignal) =>
+  fetch<
+    RadarGetBgpRoutesRealtimeResponse,
+    RadarGetBgpRoutesRealtimeError,
+    undefined,
+    {},
+    RadarGetBgpRoutesRealtimeQueryParams,
+    {}
+  >({ url: '/radar/bgp/routes/realtime', method: 'get', ...variables, signal });
 
 export type RadarGetBgpRoutesStatsQueryParams = {
   /**
@@ -136168,9 +137079,11 @@ export const operationsByTag = {
   radarLayer3Attacks: {
     radarGetAttacksLayer3SummaryByBitrate,
     radarGetAttacksLayer3SummaryByDuration,
+    radarGetAttacksLayer3SummaryByIndustry,
     radarGetAttacksLayer3SummaryByIpVersion,
     radarGetAttacksLayer3SummaryByProtocol,
     radarGetAttacksLayer3SummaryByVector,
+    radarGetAttacksLayer3SummaryByVertical,
     radarGetAttacksLayer3TimeseriesByBytes,
     radarGetAttacksLayer3TimeseriesGroupByBitrate,
     radarGetAttacksLayer3TimeseriesGroupByDuration,
@@ -136188,9 +137101,11 @@ export const operationsByTag = {
   radarLayer7Attacks: {
     radarGetAttacksLayer7SummaryByHttpMethod,
     radarGetAttacksLayer7SummaryByHttpVersion,
+    radarGetAttacksLayer7SummaryByIndustry,
     radarGetAttacksLayer7SummaryByIpVersion,
     radarGetAttacksLayer7SummaryByManagedRules,
     radarGetAttacksLayer7SummaryByMitigationProduct,
+    radarGetAttacksLayer7SummaryByVertical,
     radarGetAttacksLayer7Timeseries,
     radarGetAttacksLayer7TimeseriesGroupByHttpMethod,
     radarGetAttacksLayer7TimeseriesGroupByHttpVersion,
@@ -136213,6 +137128,7 @@ export const operationsByTag = {
     radarGetBgpRoutesAsns,
     radarGetBgpPfx2asMoas,
     radarGetBgpPfx2as,
+    radarGetBgpRoutesRealtime,
     radarGetBgpRoutesStats,
     radarGetBgpTimeseries,
     radarGetBgpTopAses,
