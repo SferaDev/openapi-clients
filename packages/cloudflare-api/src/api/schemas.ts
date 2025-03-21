@@ -11199,6 +11199,7 @@ export type BotManagementAutoUpdateModel = boolean;
 
 export type BotManagementBaseConfig = {
   ai_bots_protection?: BotManagementAiBotsProtection;
+  crawler_protection?: BotManagementCrawlerProtection;
   enable_js?: BotManagementEnableJs;
   using_latest_model?: BotManagementUsingLatestModel;
 };
@@ -11247,6 +11248,13 @@ export type BotManagementConfigSingle =
   | BotManagementSbfmDefinitelyConfig
   | BotManagementSbfmLikelyConfig
   | BotManagementBmSubscriptionConfig;
+
+/**
+ * Enable rule to punish AI Scrapers and Crawlers via a link maze.
+ *
+ * @example enabled
+ */
+export type BotManagementCrawlerProtection = 'enabled' | 'disabled';
 
 /**
  * Use lightweight, invisible JavaScript detections to improve Bot Management. [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
