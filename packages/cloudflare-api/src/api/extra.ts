@@ -372,7 +372,6 @@ import {
   getSlot,
   accountLevelCustomNameserversListAccountCustomNameservers,
   accountLevelCustomNameserversAddAccountCustomNameserver,
-  accountLevelCustomNameserversGetEligibleZonesForAccountCustomNameservers,
   accountLevelCustomNameserversDeleteAccountCustomNameserver,
   cloudflareD1ListDatabases,
   cloudflareD1CreateDatabase,
@@ -2359,8 +2358,6 @@ export const operationsByPath = {
   'GET /accounts/{account_id}/cni/slots/{slot}': getSlot,
   'GET /accounts/{account_id}/custom_ns': accountLevelCustomNameserversListAccountCustomNameservers,
   'POST /accounts/{account_id}/custom_ns': accountLevelCustomNameserversAddAccountCustomNameserver,
-  'GET /accounts/{account_id}/custom_ns/availability':
-    accountLevelCustomNameserversGetEligibleZonesForAccountCustomNameservers,
   'DELETE /accounts/{account_id}/custom_ns/{custom_ns_id}': accountLevelCustomNameserversDeleteAccountCustomNameserver,
   'GET /accounts/{account_id}/d1/database': cloudflareD1ListDatabases,
   'POST /accounts/{account_id}/d1/database': cloudflareD1CreateDatabase,

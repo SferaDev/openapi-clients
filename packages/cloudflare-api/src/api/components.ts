@@ -4848,7 +4848,7 @@ export type IpAddressManagementServiceBindingsCreateServiceBindingVariables = {
 
 /**
  * Creates a new Service Binding, routing traffic to IPs within the given CIDR to a service running on Cloudflare's network.
- * **Note:** This API may only be used on prefixes currently configured with a Magic Transit service binding, and only allows creating service bindings for the Cloudflare CDN or Cloudflare Spectrum.
+ * **Note:** This API may only be used on prefixes currently configured with a Magic Transit/Cloudflare CDN/Cloudflare Spectrum service binding, and only allows creating upgrade service bindings for the Cloudflare CDN or Cloudflare Spectrum.
  */
 export const ipAddressManagementServiceBindingsCreateServiceBinding = (
   variables: IpAddressManagementServiceBindingsCreateServiceBindingVariables,
@@ -46881,32 +46881,6 @@ export const accountLevelCustomNameserversAddAccountCustomNameserver = (
     {},
     AccountLevelCustomNameserversAddAccountCustomNameserverPathParams
   >({ url: '/accounts/{accountId}/custom_ns', method: 'post', ...variables, signal });
-
-export type AccountLevelCustomNameserversGetEligibleZonesForAccountCustomNameserversPathParams = {
-  accountId: Schemas.DnsCustomNameserversIdentifier;
-};
-
-export type AccountLevelCustomNameserversGetEligibleZonesForAccountCustomNameserversError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: Schemas.DnsCustomNameserversAvailabilityResponse & Schemas.DnsCustomNameserversApiResponseCommonFailure;
-}>;
-
-export type AccountLevelCustomNameserversGetEligibleZonesForAccountCustomNameserversVariables = {
-  pathParams: AccountLevelCustomNameserversGetEligibleZonesForAccountCustomNameserversPathParams;
-} & FetcherExtraProps;
-
-export const accountLevelCustomNameserversGetEligibleZonesForAccountCustomNameservers = (
-  variables: AccountLevelCustomNameserversGetEligibleZonesForAccountCustomNameserversVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.DnsCustomNameserversAvailabilityResponse,
-    AccountLevelCustomNameserversGetEligibleZonesForAccountCustomNameserversError,
-    undefined,
-    {},
-    {},
-    AccountLevelCustomNameserversGetEligibleZonesForAccountCustomNameserversPathParams
-  >({ url: '/accounts/{accountId}/custom_ns/availability', method: 'get', ...variables, signal });
 
 export type AccountLevelCustomNameserversDeleteAccountCustomNameserverPathParams = {
   customNsId: Schemas.DnsCustomNameserversNsName;
@@ -136074,7 +136048,6 @@ export const operationsByTag = {
   accountLevelCustomNameservers: {
     accountLevelCustomNameserversListAccountCustomNameservers,
     accountLevelCustomNameserversAddAccountCustomNameserver,
-    accountLevelCustomNameserversGetEligibleZonesForAccountCustomNameservers,
     accountLevelCustomNameserversDeleteAccountCustomNameserver
   },
   d1: {
