@@ -16054,12 +16054,14 @@ export type DnsCustomNameserversCustomNS = {
      * DNS record type.
      *
      * @example A
+     * @x-auditable true
      */
     type?: 'A' | 'AAAA';
     /**
      * DNS record contents (an IPv4 or IPv6 address).
      *
      * @example 1.1.1.1
+     * @x-auditable true
      */
     value?: string;
   }[];
@@ -16070,6 +16072,7 @@ export type DnsCustomNameserversCustomNS = {
    *
    * @deprecated true
    * @example verified
+   * @x-auditable true
    */
   status: 'moved' | 'pending' | 'verified';
   zone_tag: DnsCustomNameserversSchemasIdentifier;
@@ -16121,10 +16124,6 @@ export type DnsCustomNameserversApiResponseCommonFailure = {
 
 export type DnsCustomNameserversApiResponseSingle = DnsCustomNameserversApiResponseCommon;
 
-export type DnsCustomNameserversAvailabilityResponse = DnsCustomNameserversApiResponseCollection & {
-  result?: string[];
-};
-
 export type DnsCustomNameserversEmptyResponse = DnsCustomNameserversApiResponseCollection & {
   /**
    * @maxItems 0
@@ -16140,6 +16139,7 @@ export type DnsCustomNameserversGetResponse = DnsCustomNameserversApiResponseCol
  *
  * @example 372e67954025e0ba6aaa6d586b9e0b59
  * @maxLength 32
+ * @x-auditable true
  */
 export type DnsCustomNameserversIdentifier = string;
 
@@ -16156,6 +16156,7 @@ export type DnsCustomNameserversMessages = {
  *
  * @example ns1.example.com
  * @format hostname
+ * @x-auditable true
  */
 export type DnsCustomNameserversNsName = string;
 
@@ -16166,6 +16167,7 @@ export type DnsCustomNameserversNsName = string;
  * @example 1
  * @maximum 5
  * @minimum 1
+ * @x-auditable true
  */
 export type DnsCustomNameserversNsSet = number;
 
@@ -16216,6 +16218,7 @@ export type DnsCustomNameserversZoneMetadata = {
    * Whether zone uses account-level custom nameservers.
    *
    * @example true
+   * @x-auditable true
    */
   enabled?: boolean;
   /**
@@ -16225,6 +16228,7 @@ export type DnsCustomNameserversZoneMetadata = {
    * @example 1
    * @maximum 5
    * @minimum 1
+   * @x-auditable true
    */
   ns_set?: number;
 };
@@ -50202,6 +50206,23 @@ export type WorkersMultipartScript = {
        */
       config?: {
         /**
+                 * The contents of a _headers file (used to attach custom headers on asset responses)
+                 *
+                 * @example /dashboard/*
+                X-Frame-Options: DENY
+                
+                /static/*
+                Access-Control-Allow-Origin: *
+                 */
+        _headers?: string;
+        /**
+                 * The contents of a _redirects file (used to apply redirects or proxy paths ahead of asset serving)
+                 *
+                 * @example /foo /bar 301
+                /news/* /blog/:splat
+                 */
+        _redirects?: string;
+        /**
          * Determines the redirects and rewrites of requests for HTML content.
          *
          * @example auto-trailing-slash
@@ -51595,7 +51616,8 @@ export type ZeroTrustGatewayAction =
   | 'l4_override'
   | 'egress'
   | 'resolve'
-  | 'quarantine';
+  | 'quarantine'
+  | 'redirect';
 
 /**
  * Activity log settings.
@@ -51723,7 +51745,7 @@ export type ZeroTrustGatewayBindingStatus = 'pending_deployment' | 'available' |
  */
 export type ZeroTrustGatewayBlockPageSettings = {
   /**
-   * Block page background color in #rrggbb format.
+   * If mode is customized_block_page: block page background color in #rrggbb format.
    */
   background_color?: string;
   /**
@@ -51733,47 +51755,63 @@ export type ZeroTrustGatewayBlockPageSettings = {
    */
   enabled?: boolean;
   /**
-   * Block page footer text.
+   * If mode is customized_block_page: block page footer text.
    *
    * @example --footer--
    */
   footer_text?: string;
   /**
-   * Block page header text.
+   * If mode is customized_block_page: block page header text.
    *
    * @example --header--
    */
   header_text?: string;
   /**
-   * Full URL to the logo file.
+   * If mode is redirect_uri: when enabled, context will be appended to target_uri as query parameters.
+   */
+  include_context?: boolean;
+  /**
+   * If mode is customized_block_page: full URL to the logo file.
    *
    * @example https://logos.com/a.png
    */
   logo_path?: string;
   /**
-   * Admin email for users to contact.
+   * If mode is customized_block_page: admin email for users to contact.
    *
    * @example admin@example.com
    */
   mailto_address?: string;
   /**
-   * Subject line for emails created from block page.
+   * If mode is customized_block_page: subject line for emails created from block page.
    *
    * @example Blocked User Inquiry
    */
   mailto_subject?: string;
   /**
-   * Block page title.
+   * Controls whether the user is redirected to a Cloudflare-hosted block page or to a customer-provided URI.
+   *
+   * @default customized_block_page
+   */
+  mode?: 'customized_block_page' | 'redirect_uri';
+  /**
+   * If mode is customized_block_page: block page title.
    *
    * @example Cloudflare
    */
   name?: string;
   /**
-   * Suppress detailed info at the bottom of the block page.
+   * If mode is customized_block_page: suppress detailed info at the bottom of the block page.
    *
    * @example false
    */
   suppress_footer?: boolean;
+  /**
+   * If mode is redirect_uri: URI to which the user should be redirected.
+   *
+   * @format uri
+   */
+  target_uri?: string;
 };
 
 /**
@@ -52862,6 +52900,21 @@ export type ZeroTrustGatewayRuleSettings = {
       | 'zip'
       | 'rar'
     )[];
+  };
+  /**
+   * Settings that apply to redirect rules
+   */
+  redirect?: {
+    /**
+     * If true, the path and query parameters from the original request will be appended to target_uri
+     */
+    preserve_path_and_query?: boolean;
+    /**
+     * URI to which the user will be redirected
+     *
+     * @format uri
+     */
+    target_uri: string;
   };
   /**
    * Configure to forward the query to the internal DNS service, passing the specified 'view_id' as input. Cannot be set when 'dns_resolvers' are specified or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is set to 'resolve'.
