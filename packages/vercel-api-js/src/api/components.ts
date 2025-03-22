@@ -3806,10 +3806,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    id?: string;
     createdAt?: number;
-    entrypoint?: string | null;
+    id?: string;
     readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    entrypoint?: string | null;
     readyStateAt?: number;
     output: {
       path: string;
@@ -4099,7 +4099,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
             src?: string;
             dest?: string;
             status?: number;
@@ -4132,7 +4132,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         org: string;
@@ -4144,7 +4144,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         owner: string;
@@ -4156,7 +4156,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | null;
   flags?:
@@ -7086,7 +7086,7 @@ export type GetConfigurableLogDrainResponse = {
   teamId?: string | null;
   ownerId: string;
   createdFrom?: 'integration' | 'self-served';
-  deliveryFormat: 'json' | 'ndjson' | 'syslog';
+  deliveryFormat: 'json' | 'ndjson' | 'protobuf' | 'syslog';
   secret: string;
 };
 
@@ -7186,7 +7186,7 @@ export type GetAllLogDrainsResponse = {
   teamId?: string | null;
   ownerId: string;
   createdFrom?: 'integration' | 'self-served';
-  deliveryFormat: 'json' | 'ndjson' | 'syslog';
+  deliveryFormat: 'json' | 'ndjson' | 'protobuf' | 'syslog';
   secret: string;
 }[];
 
@@ -7247,7 +7247,7 @@ export type CreateConfigurableLogDrainResponse = {
   teamId?: string | null;
   ownerId: string;
   createdFrom?: 'integration' | 'self-served';
-  deliveryFormat: 'json' | 'ndjson' | 'syslog';
+  deliveryFormat: 'json' | 'ndjson' | 'protobuf' | 'syslog';
 };
 
 export type CreateConfigurableLogDrainRequestBody = {
@@ -9773,7 +9773,7 @@ export type GetIntegrationLogDrainsResponse = {
    *
    * @example json
    */
-  deliveryFormat?: 'json' | 'ndjson' | 'syslog';
+  deliveryFormat?: 'json' | 'ndjson' | 'protobuf' | 'syslog';
   /**
    * The name of the log drain
    *
@@ -9903,7 +9903,7 @@ export type CreateLogDrainResponse = {
    *
    * @example json
    */
-  deliveryFormat?: 'json' | 'ndjson' | 'syslog';
+  deliveryFormat?: 'json' | 'ndjson' | 'protobuf' | 'syslog';
   /**
    * The name of the log drain
    *
@@ -12905,7 +12905,6 @@ export type CreateProjectRequestBody = {
    *
    * @example a-project-name
    * @maxLength 100
-   * @pattern ^(?!.*---)[a-z0-9-_.]+$
    */
   name: string;
   /**
@@ -14975,7 +14974,6 @@ export type UpdateProjectRequestBody = {
    *
    * @example a-project-name
    * @maxLength 100
-   * @pattern ^(?!.*---)[a-z0-9-_.]+$
    */
   name?: string;
   nodeVersion?: '10.x' | '12.x' | '14.x' | '16.x' | '18.x' | '20.x' | '22.x';
@@ -16042,7 +16040,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16147,7 +16145,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -16254,7 +16252,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -17971,7 +17969,6 @@ export type AcceptProjectTransferRequestRequestBody = {
    *
    * @example a-project-name
    * @maxLength 100
-   * @pattern ^(?!.*---)[a-z0-9-_.]+$
    */
   newProjectName?: string;
   paidFeatures?: {
