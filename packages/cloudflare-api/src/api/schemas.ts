@@ -42402,6 +42402,13 @@ export type TeamsDevicesDisableForTime = {
   ['24']?: void;
 };
 
+/**
+ * Disconnects all devices on the account using Global WARP override.
+ *
+ * @example false
+ */
+export type TeamsDevicesDisconnect = boolean;
+
 export type TeamsDevicesDiskEncryptionInputRequest = {
   checkDisks?: TeamsDevicesCheckDisks;
   requireAll?: TeamsDevicesRequireAll;
@@ -42541,6 +42548,20 @@ export type TeamsDevicesGatewayDeviceId = string;
  */
 export type TeamsDevicesGatewayUniqueId = string;
 
+export type TeamsDevicesGlobalWarpOverride = {
+  disconnect?: TeamsDevicesDisconnect;
+  timestamp?: TeamsDevicesTimestamp;
+};
+
+export type TeamsDevicesGlobalWarpOverrideRequest = {
+  disconnect: TeamsDevicesDisconnect;
+  justification?: TeamsDevicesJustification;
+};
+
+export type TeamsDevicesGlobalWarpOverrideResponse = TeamsDevicesApiResponseSingle & {
+  result?: TeamsDevicesGlobalWarpOverride;
+};
+
 export type TeamsDevicesIdResponse = TeamsDevicesApiResponseSingle & {
   result?: {
     id?: TeamsDevicesUuid;
@@ -42637,6 +42658,13 @@ export type TeamsDevicesIntuneInputRequest = {
  * @example 1.1.1.1
  */
 export type TeamsDevicesIp = string;
+
+/**
+ * Reasoning for setting the Global WARP override state. This will be surfaced in the audit log.
+ *
+ * @example Turning off WARP for testing purposes.
+ */
+export type TeamsDevicesJustification = string;
 
 /**
  * The device's public key.
@@ -43259,6 +43287,14 @@ export type TeamsDevicesTargetDexTest = {
    */
   name?: string;
 };
+
+/**
+ * When the Global WARP override state was updated.
+ *
+ * @example 1970-01-01T00:00:00.000Z
+ * @format date-time
+ */
+export type TeamsDevicesTimestamp = string;
 
 export type TeamsDevicesTlsConfigRequest = {
   /**

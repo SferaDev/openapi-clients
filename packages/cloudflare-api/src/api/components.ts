@@ -48829,6 +48829,65 @@ export const devicePostureRulesUpdateDevicePostureRule = (
     DevicePostureRulesUpdateDevicePostureRulePathParams
   >({ url: '/accounts/{accountId}/devices/posture/{ruleId}', method: 'put', ...variables, signal });
 
+export type DevicesResilienceRetrieveGlobalWarpOverridePathParams = {
+  accountId: Schemas.TeamsDevicesIdentifier;
+};
+
+export type DevicesResilienceRetrieveGlobalWarpOverrideError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.TeamsDevicesApiResponseCommonFailure;
+}>;
+
+export type DevicesResilienceRetrieveGlobalWarpOverrideVariables = {
+  pathParams: DevicesResilienceRetrieveGlobalWarpOverridePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Fetch the Global WARP override state
+ */
+export const devicesResilienceRetrieveGlobalWarpOverride = (
+  variables: DevicesResilienceRetrieveGlobalWarpOverrideVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.TeamsDevicesGlobalWarpOverrideResponse,
+    DevicesResilienceRetrieveGlobalWarpOverrideError,
+    undefined,
+    {},
+    {},
+    DevicesResilienceRetrieveGlobalWarpOverridePathParams
+  >({ url: '/accounts/{accountId}/devices/resilience/disconnect', method: 'get', ...variables, signal });
+
+export type DevicesResilienceSetGlobalWarpOverridePathParams = {
+  accountId: Schemas.TeamsDevicesIdentifier;
+};
+
+export type DevicesResilienceSetGlobalWarpOverrideError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.TeamsDevicesApiResponseCommonFailure;
+}>;
+
+export type DevicesResilienceSetGlobalWarpOverrideVariables = {
+  body: Schemas.TeamsDevicesGlobalWarpOverrideRequest;
+  pathParams: DevicesResilienceSetGlobalWarpOverridePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Sets the Global WARP override state.
+ */
+export const devicesResilienceSetGlobalWarpOverride = (
+  variables: DevicesResilienceSetGlobalWarpOverrideVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.TeamsDevicesGlobalWarpOverrideResponse,
+    DevicesResilienceSetGlobalWarpOverrideError,
+    Schemas.TeamsDevicesGlobalWarpOverrideRequest,
+    {},
+    {},
+    DevicesResilienceSetGlobalWarpOverridePathParams
+  >({ url: '/accounts/{accountId}/devices/resilience/disconnect', method: 'post', ...variables, signal });
+
 export type DevicesRevokeDevicesPathParams = {
   accountId: Schemas.TeamsDevicesIdentifier;
 };
@@ -136116,6 +136175,7 @@ export const operationsByTag = {
     devicePostureIntegrationsDevicePostureIntegrationDetails,
     devicePostureIntegrationsUpdateDevicePostureIntegration
   },
+  devicesResilience: { devicesResilienceRetrieveGlobalWarpOverride, devicesResilienceSetGlobalWarpOverride },
   zeroTrustAccounts: {
     zeroTrustAccountsGetDeviceSettingsForZeroTrustAccount,
     zeroTrustAccountsPatchDeviceSettingsForTheZeroTrustAccount,
