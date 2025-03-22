@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.23.1
+
+### Patch Changes
+
+- 4efc49f: Change readySubstate values and added a new 'ROLLING' state
+
 ## 0.23.0
 
 ### Minor Changes
