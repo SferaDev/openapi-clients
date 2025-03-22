@@ -1,5 +1,11 @@
 # zoom-api-js
 
+## 0.4.2
+
+### Patch Changes
+
+- ab0a9f5: Change 'approval type' to 'registration approval type'
+
 ## 0.4.1
 
 ### Patch Changes

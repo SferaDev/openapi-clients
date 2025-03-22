@@ -1,5 +1,14 @@
 # cloudflare-api-js
 
+## 0.9.3
+
+### Patch Changes
+
+- 7fb3398: Add 'LabelDiscovery' to ApiShieldApiDiscoveryOrigin enum
+- 2fadebb: Add new 'crawler_protection' attribute to BotManagementBaseConfig
+- 1091d4b: Add new endpoint to retrieve Global WARP override state
+- fc542f8: [BREAKING] Remove 'accountLevelCustomNameserversGetEligibleZonesForAccountCustomNameservers' API endpoint
+
 ## 0.9.2
 
 ### Patch Changes
