@@ -69197,219 +69197,6 @@ export const shareResourceUpdate = (variables: ShareResourceUpdateVariables, sig
     ShareResourceUpdatePathParams
   >({ url: '/accounts/{accountId}/shares/{shareId}/resources/{resourceId}', method: 'put', ...variables, signal });
 
-export type WorkersKvRequestAnalyticsQueryRequestAnalyticsPathParams = {
-  accountId: Schemas.WorkersKvIdentifier;
-};
-
-export type WorkersKvRequestAnalyticsQueryRequestAnalyticsQueryParams = {
-  /**
-   * For specifying result metrics.
-   */
-  query?: {
-    /**
-     * Can be used to break down the data by given attributes.
-     *
-     * @default []
-     * @example accountId
-     * @example responseCode
-     */
-    dimensions?: ('accountId' | 'responseCode' | 'requestType')[];
-    /**
-     * Used to filter rows by one or more dimensions. Filters can be combined using OR and AND boolean logic. AND takes precedence over OR in all the expressions. The OR operator is defined using a comma (,) or OR keyword surrounded by whitespace. The AND operator is defined using a semicolon (;) or AND keyword surrounded by whitespace. Note that the semicolon is a reserved character in URLs (rfc1738) and needs to be percent-encoded as %3B. Comparison options are:
-     *
-     * Operator                  | Name                            | URL Encoded
-     * --------------------------|---------------------------------|--------------------------
-     * ==                        | Equals                          | %3D%3D
-     * !=                        | Does not equals                 | !%3D
-     * >                        | Greater Than                    | %3E
-     * <                         | Less Than                       | %3C
-     * >=                       | Greater than or equal to        | %3E%3D
-     * <=                        | Less than or equal to           | %3C%3D     .
-     *
-     * @default ""
-     * @example requestType==read AND responseCode!=200
-     */
-    filters?: string;
-    /**
-     * Limit number of returned metrics.
-     *
-     * @default 10000
-     */
-    limit?: number;
-    /**
-     * One or more metrics to compute.
-     *
-     * @default ["requests"]
-     * @example requests
-     * @example readKiB
-     */
-    metrics?: ('requests' | 'writeKiB' | 'readKiB')[];
-    /**
-     * Start of time interval to query, defaults to 6 hours before request received.
-     *
-     * @default <6 hours ago>
-     * @example 2019-01-02T02:20:00Z
-     * @format date-time
-     */
-    since?: string;
-    /**
-     * Array of dimensions or metrics to sort by, each dimension/metric may be prefixed by - (descending) or + (ascending).
-     *
-     * @default []
-     * @example +requests
-     * @example -responseCode
-     */
-    sort?: string[];
-    /**
-     * End of time interval to query, defaults to current time.
-     *
-     * @default <now>
-     * @example 2019-01-02T03:20:00Z
-     * @format date-time
-     */
-    until?: string;
-  };
-};
-
-export type WorkersKvRequestAnalyticsQueryRequestAnalyticsError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: (Schemas.WorkersKvApiResponseCommon & {
-    result?: Schemas.WorkersKvResult;
-  }) &
-    Schemas.WorkersKvApiResponseCommonFailure;
-}>;
-
-export type WorkersKvRequestAnalyticsQueryRequestAnalyticsResponse = Schemas.WorkersKvApiResponseCommon & {
-  result?: Schemas.WorkersKvSchemasResult;
-};
-
-export type WorkersKvRequestAnalyticsQueryRequestAnalyticsVariables = {
-  pathParams: WorkersKvRequestAnalyticsQueryRequestAnalyticsPathParams;
-  queryParams?: WorkersKvRequestAnalyticsQueryRequestAnalyticsQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieves Workers KV request metrics for the given account.
- */
-export const workersKvRequestAnalyticsQueryRequestAnalytics = (
-  variables: WorkersKvRequestAnalyticsQueryRequestAnalyticsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    WorkersKvRequestAnalyticsQueryRequestAnalyticsResponse,
-    WorkersKvRequestAnalyticsQueryRequestAnalyticsError,
-    undefined,
-    {},
-    WorkersKvRequestAnalyticsQueryRequestAnalyticsQueryParams,
-    WorkersKvRequestAnalyticsQueryRequestAnalyticsPathParams
-  >({ url: '/accounts/{accountId}/storage/analytics', method: 'get', ...variables, signal });
-
-export type WorkersKvStoredDataAnalyticsQueryStoredDataAnalyticsPathParams = {
-  accountId: Schemas.WorkersKvIdentifier;
-};
-
-export type WorkersKvStoredDataAnalyticsQueryStoredDataAnalyticsQueryParams = {
-  /**
-   * For specifying result metrics.
-   */
-  query?: {
-    /**
-     * Can be used to break down the data by given attributes.
-     *
-     * @default []
-     * @example namespaceId
-     */
-    dimensions?: 'namespaceId'[];
-    /**
-     * Used to filter rows by one or more dimensions. Filters can be combined using OR and AND boolean logic. AND takes precedence over OR in all the expressions. The OR operator is defined using a comma (,) or OR keyword surrounded by whitespace. The AND operator is defined using a semicolon (;) or AND keyword surrounded by whitespace. Note that the semicolon is a reserved character in URLs (rfc1738) and needs to be percent-encoded as %3B. Comparison options are:
-     *
-     * Operator                  | Name                            | URL Encoded
-     * --------------------------|---------------------------------|--------------------------
-     * ==                        | Equals                          | %3D%3D
-     * !=                        | Does not equals                 | !%3D
-     * >                        | Greater Than                    | %3E
-     * <                         | Less Than                       | %3C
-     * >=                       | Greater than or equal to        | %3E%3D
-     * <=                        | Less than or equal to           | %3C%3D     .
-     *
-     * @default ""
-     * @example namespaceId==a4e8cbb7-1b58-4990-925e-e026d40c4c64
-     */
-    filters?: string;
-    /**
-     * Limit number of returned metrics.
-     *
-     * @default 10000
-     */
-    limit?: number;
-    /**
-     * One or more metrics to compute.
-     *
-     * @default ["storedBytes"]
-     * @example storedBytes
-     * @example storedKeys
-     */
-    metrics?: ('storedBytes' | 'storedKeys')[];
-    /**
-     * Start of time interval to query, defaults to 6 hours before request received.
-     *
-     * @default <6 hours ago>
-     * @example 2019-01-02T02:20:00Z
-     * @format date-time
-     */
-    since?: string;
-    /**
-     * Array of dimensions or metrics to sort by, each dimension/metric may be prefixed by - (descending) or + (ascending).
-     *
-     * @default []
-     * @example +storedBytes
-     * @example -namespaceId
-     */
-    sort?: string[];
-    /**
-     * End of time interval to query, defaults to current time.
-     *
-     * @default <now>
-     * @example 2019-01-02T03:20:00Z
-     * @format date-time
-     */
-    until?: string;
-  };
-};
-
-export type WorkersKvStoredDataAnalyticsQueryStoredDataAnalyticsError = Fetcher.ErrorWrapper<{
-  status: 400;
-  payload: (Schemas.WorkersKvApiResponseCommon & {
-    result?: Schemas.WorkersKvResult;
-  }) &
-    Schemas.WorkersKvApiResponseCommonFailure;
-}>;
-
-export type WorkersKvStoredDataAnalyticsQueryStoredDataAnalyticsResponse = Schemas.WorkersKvApiResponseCommon & {
-  result?: Schemas.WorkersKvComponentsSchemasResult;
-};
-
-export type WorkersKvStoredDataAnalyticsQueryStoredDataAnalyticsVariables = {
-  pathParams: WorkersKvStoredDataAnalyticsQueryStoredDataAnalyticsPathParams;
-  queryParams?: WorkersKvStoredDataAnalyticsQueryStoredDataAnalyticsQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieves Workers KV stored data metrics for the given account.
- */
-export const workersKvStoredDataAnalyticsQueryStoredDataAnalytics = (
-  variables: WorkersKvStoredDataAnalyticsQueryStoredDataAnalyticsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    WorkersKvStoredDataAnalyticsQueryStoredDataAnalyticsResponse,
-    WorkersKvStoredDataAnalyticsQueryStoredDataAnalyticsError,
-    undefined,
-    {},
-    WorkersKvStoredDataAnalyticsQueryStoredDataAnalyticsQueryParams,
-    WorkersKvStoredDataAnalyticsQueryStoredDataAnalyticsPathParams
-  >({ url: '/accounts/{accountId}/storage/analytics/stored', method: 'get', ...variables, signal });
-
 export type WorkersKvNamespaceListNamespacesPathParams = {
   accountId: Schemas.WorkersKvIdentifier;
 };
@@ -69707,6 +69494,65 @@ export const workersKvNamespaceDeleteMultipleKeyValuePairs = (
     WorkersKvNamespaceDeleteMultipleKeyValuePairsPathParams
   >({
     url: '/accounts/{accountId}/storage/kv/namespaces/{namespaceId}/bulk/delete',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type WorkersKvNamespaceGetMultipleKeyValuePairsPathParams = {
+  namespaceId: Schemas.WorkersKvNamespaceIdentifier;
+  accountId: Schemas.WorkersKvIdentifier;
+};
+
+export type WorkersKvNamespaceGetMultipleKeyValuePairsError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.WorkersKvApiResponseCommonFailure;
+}>;
+
+export type WorkersKvNamespaceGetMultipleKeyValuePairsResponse = Schemas.WorkersKvApiResponseCommonNoResult & {
+  result?: Schemas.WorkersKvBulkGetResult | Schemas.WorkersKvBulkGetResultWithMetadata;
+};
+
+export type WorkersKvNamespaceGetMultipleKeyValuePairsRequestBody = {
+  /**
+   * Array of keys to retrieve (maximum 100)
+   */
+  keys: Schemas.WorkersKvKeyNameBulk[];
+  /**
+   * Whether to parse JSON values in the response
+   *
+   * @default text
+   */
+  type?: 'text' | 'json';
+  /**
+   * Whether to include metadata in the response
+   *
+   * @default false
+   */
+  withMetadata?: boolean;
+};
+
+export type WorkersKvNamespaceGetMultipleKeyValuePairsVariables = {
+  body: WorkersKvNamespaceGetMultipleKeyValuePairsRequestBody;
+  pathParams: WorkersKvNamespaceGetMultipleKeyValuePairsPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Get multiple KV pairs from the namespace. Body should contain keys to retrieve at most 100. Keys must contain text-based values. If value is json, it can be requested to return in JSON, instead of string. Metadata can be return if withMetadata is true.
+ */
+export const workersKvNamespaceGetMultipleKeyValuePairs = (
+  variables: WorkersKvNamespaceGetMultipleKeyValuePairsVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    WorkersKvNamespaceGetMultipleKeyValuePairsResponse,
+    WorkersKvNamespaceGetMultipleKeyValuePairsError,
+    WorkersKvNamespaceGetMultipleKeyValuePairsRequestBody,
+    {},
+    {},
+    WorkersKvNamespaceGetMultipleKeyValuePairsPathParams
+  >({
+    url: '/accounts/{accountId}/storage/kv/namespaces/{namespaceId}/bulk/get',
     method: 'post',
     ...variables,
     signal
@@ -136797,8 +136643,6 @@ export const operationsByTag = {
     shareResourceUpdate,
     organizationSharesList
   },
-  workersKVRequestAnalyticsDeprecated: { workersKvRequestAnalyticsQueryRequestAnalytics },
-  workersKVStoredDataAnalyticsDeprecated: { workersKvStoredDataAnalyticsQueryStoredDataAnalytics },
   workersKVNamespace: {
     workersKvNamespaceListNamespaces,
     workersKvNamespaceCreateANamespace,
@@ -136808,6 +136652,7 @@ export const operationsByTag = {
     workersKvNamespaceDeleteMultipleKeyValuePairsDeprecated,
     workersKvNamespaceWriteMultipleKeyValuePairs,
     workersKvNamespaceDeleteMultipleKeyValuePairs,
+    workersKvNamespaceGetMultipleKeyValuePairs,
     workersKvNamespaceListANamespaceSKeys,
     workersKvNamespaceReadTheMetadataForAKey,
     workersKvNamespaceDeleteKeyValuePair,

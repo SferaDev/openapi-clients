@@ -948,8 +948,6 @@ import {
   shareResourceDelete,
   shareResourcesGetById,
   shareResourceUpdate,
-  workersKvRequestAnalyticsQueryRequestAnalytics,
-  workersKvStoredDataAnalyticsQueryStoredDataAnalytics,
   workersKvNamespaceListNamespaces,
   workersKvNamespaceCreateANamespace,
   workersKvNamespaceRemoveANamespace,
@@ -958,6 +956,7 @@ import {
   workersKvNamespaceDeleteMultipleKeyValuePairsDeprecated,
   workersKvNamespaceWriteMultipleKeyValuePairs,
   workersKvNamespaceDeleteMultipleKeyValuePairs,
+  workersKvNamespaceGetMultipleKeyValuePairs,
   workersKvNamespaceListANamespaceSKeys,
   workersKvNamespaceReadTheMetadataForAKey,
   workersKvNamespaceDeleteKeyValuePair,
@@ -2986,8 +2985,6 @@ export const operationsByPath = {
   'DELETE /accounts/{account_id}/shares/{share_id}/resources/{resource_id}': shareResourceDelete,
   'GET /accounts/{account_id}/shares/{share_id}/resources/{resource_id}': shareResourcesGetById,
   'PUT /accounts/{account_id}/shares/{share_id}/resources/{resource_id}': shareResourceUpdate,
-  'GET /accounts/{account_id}/storage/analytics': workersKvRequestAnalyticsQueryRequestAnalytics,
-  'GET /accounts/{account_id}/storage/analytics/stored': workersKvStoredDataAnalyticsQueryStoredDataAnalytics,
   'GET /accounts/{account_id}/storage/kv/namespaces': workersKvNamespaceListNamespaces,
   'POST /accounts/{account_id}/storage/kv/namespaces': workersKvNamespaceCreateANamespace,
   'DELETE /accounts/{account_id}/storage/kv/namespaces/{namespace_id}': workersKvNamespaceRemoveANamespace,
@@ -2998,6 +2995,8 @@ export const operationsByPath = {
   'PUT /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/bulk': workersKvNamespaceWriteMultipleKeyValuePairs,
   'POST /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/bulk/delete':
     workersKvNamespaceDeleteMultipleKeyValuePairs,
+  'POST /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/bulk/get':
+    workersKvNamespaceGetMultipleKeyValuePairs,
   'GET /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/keys': workersKvNamespaceListANamespaceSKeys,
   'GET /accounts/{account_id}/storage/kv/namespaces/{namespace_id}/metadata/{key_name}':
     workersKvNamespaceReadTheMetadataForAKey,
