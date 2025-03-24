@@ -49020,6 +49020,45 @@ export type WorkersKvApiResponseCommonNoResult = WorkersKvApiResponseCommon & {
   result?: Record<string, any> | null;
 };
 
+/**
+ * Requested keys are paired with their values in an object
+ *
+ * @example {"key1":"value1","key2":"value2"}
+ */
+export type WorkersKvBulkGetResult = {
+  [key: string]:
+    | string
+    | number
+    | boolean
+    | {
+        [key: string]: any;
+      };
+};
+
+/**
+ * Requested keys are paired with their values and metadata in an object
+ *
+ * @example {"key1":{"expiration":1577836800,"metadata":{"someMetadataKey":"someMetadataValue"},"value":"value1"},"key2":{"metadata":{"anotherKey":"anotherValue"},"value":"value2"}}
+ */
+export type WorkersKvBulkGetResultWithMetadata = {
+  [key: string]: {
+    /**
+     * The metadata associated with the key
+     */
+    metadata?: string;
+    /**
+     * The value associated with the key
+     */
+    value?:
+      | string
+      | number
+      | boolean
+      | {
+          [key: string]: any;
+        };
+  };
+};
+
 export type WorkersKvBulkResult = {
   /**
    * Number of keys successfully updated
@@ -49054,67 +49093,6 @@ export type WorkersKvBulkWrite = {
    */
   value?: string;
 }[];
-
-/**
- * Metrics on Workers KV requests.
- */
-export type WorkersKvComponentsSchemasResult = {
-  /**
-   * @example {"metrics":[[2,4],[16,32]]}
-   */
-  data:
-    | {
-        dimensions?: string[];
-        /**
-         * List of metrics returned by the query.
-         */
-        metrics: number[][];
-      }[]
-    | null;
-  /**
-   * Number of seconds between current time and last processed event, i.e. how many seconds of data could be missing.
-   *
-   * @example 0
-   * @minimum 0
-   */
-  data_lag: number;
-  /**
-   * Maximum results for each metric.
-   *
-   * @example {"storedBytes":32,"storedKeys":4}
-   */
-  max: {
-    [key: string]: number;
-  };
-  /**
-   * Minimum results for each metric.
-   *
-   * @example {"storedBytes":16,"storedKeys":2}
-   */
-  min: {
-    [key: string]: number;
-  };
-  query: WorkersKvQuery;
-  /**
-   * Total number of rows in the result.
-   *
-   * @example 2
-   * @minimum 0
-   */
-  rows: number;
-  /**
-   * Time interval buckets by beginning and ending
-   */
-  time_intervals?: string[][];
-  /**
-   * Total results for metrics across all data.
-   *
-   * @example {"storedBytes":48,"storedKeys":6}
-   */
-  totals: {
-    [key: string]: number;
-  };
-};
 
 export type WorkersKvCreateRenameNamespaceBody = {
   title: WorkersKvNamespaceTitle;
@@ -49235,117 +49213,6 @@ export type WorkersKvNamespaceIdentifier = string;
  */
 export type WorkersKvNamespaceTitle = string;
 
-/**
- * For specifying result metrics.
- */
-export type WorkersKvQuery = {
-  /**
-   * Can be used to break down the data by given attributes.
-   *
-   * @default []
-   */
-  dimensions?: string[];
-  /**
-   * Used to filter rows by one or more dimensions. Filters can be combined using OR and AND boolean logic. AND takes precedence over OR in all the expressions. The OR operator is defined using a comma (,) or OR keyword surrounded by whitespace. The AND operator is defined using a semicolon (;) or AND keyword surrounded by whitespace. Note that the semicolon is a reserved character in URLs (rfc1738) and needs to be percent-encoded as %3B. Comparison options are:
-   *
-   * Operator                  | Name                            | URL Encoded
-   * --------------------------|---------------------------------|--------------------------
-   * ==                        | Equals                          | %3D%3D
-   * !=                        | Does not equals                 | !%3D
-   * >                        | Greater Than                    | %3E
-   * <                         | Less Than                       | %3C
-   * >=                       | Greater than or equal to        | %3E%3D
-   * <=                        | Less than or equal to           | %3C%3D     .
-   *
-   * @default ""
-   */
-  filters?: string;
-  /**
-   * Limit number of returned metrics.
-   *
-   * @default 10000
-   */
-  limit?: number;
-  /**
-   * One or more metrics to compute.
-   */
-  metrics?: string[];
-  /**
-   * Start of time interval to query, defaults to 6 hours before request received.
-   *
-   * @default <6 hours ago>
-   * @example 2019-01-02T02:20:00Z
-   * @format date-time
-   */
-  since?: string;
-  /**
-   * Array of dimensions or metrics to sort by, each dimension/metric may be prefixed by - (descending) or + (ascending).
-   *
-   * @default []
-   */
-  sort?: string[];
-  /**
-   * End of time interval to query, defaults to current time.
-   *
-   * @default <now>
-   * @example 2019-01-02T03:20:00Z
-   * @format date-time
-   */
-  until?: string;
-};
-
-/**
- * Metrics on Workers KV requests.
- */
-export type WorkersKvResult = {
-  data:
-    | {
-        dimensions?: string[];
-        /**
-         * List of metrics returned by the query.
-         */
-        metrics: number[][];
-      }[]
-    | null;
-  /**
-   * Number of seconds between current time and last processed event, i.e. how many seconds of data could be missing.
-   *
-   * @example 0
-   * @minimum 0
-   */
-  data_lag: number;
-  /**
-   * Maximum results for each metric.
-   */
-  max: {
-    [key: string]: number;
-  };
-  /**
-   * Minimum results for each metric.
-   */
-  min: {
-    [key: string]: number;
-  };
-  query: WorkersKvQuery;
-  /**
-   * Total number of rows in the result.
-   *
-   * @example 2
-   * @minimum 0
-   */
-  rows: number;
-  /**
-   * Time interval buckets by beginning and ending
-   */
-  time_intervals?: string[][];
-  /**
-   * Total results for metrics across all data.
-   */
-  totals: {
-    [key: string]: number;
-  };
-};
-
 export type WorkersKvResultInfo = {
   /**
    * Total number of results for the requested service
@@ -49371,67 +49238,6 @@ export type WorkersKvResultInfo = {
    * @example 2000
    */
   total_count?: number;
-};
-
-/**
- * Metrics on Workers KV requests.
- */
-export type WorkersKvSchemasResult = {
-  /**
-   * @example {"metrics":[[2,4],[16,32]]}
-   */
-  data:
-    | {
-        dimensions?: string[];
-        /**
-         * List of metrics returned by the query.
-         */
-        metrics: number[][];
-      }[]
-    | null;
-  /**
-   * Number of seconds between current time and last processed event, i.e. how many seconds of data could be missing.
-   *
-   * @example 0
-   * @minimum 0
-   */
-  data_lag: number;
-  /**
-   * Maximum results for each metric.
-   *
-   * @example {"readKiB":32,"requests":4}
-   */
-  max: {
-    [key: string]: number;
-  };
-  /**
-   * Minimum results for each metric.
-   *
-   * @example {"readKiB":16,"requests":2}
-   */
-  min: {
-    [key: string]: number;
-  };
-  query: WorkersKvQuery;
-  /**
-   * Total number of rows in the result.
-   *
-   * @example 2
-   * @minimum 0
-   */
-  rows: number;
-  /**
-   * Time interval buckets by beginning and ending
-   */
-  time_intervals?: string[][];
-  /**
-   * Total results for metrics across all data.
-   *
-   * @example {"readKiB":48,"requests":6}
-   */
-  totals: {
-    [key: string]: number;
-  };
 };
 
 /**
