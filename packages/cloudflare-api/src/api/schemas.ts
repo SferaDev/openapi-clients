@@ -49204,6 +49204,12 @@ export type WorkersKvMessages = {
 export type WorkersKvMetadata = string;
 
 export type WorkersKvNamespace = {
+  /**
+   * True if new beta namespace, with additional preview features.
+   *
+   * @example true
+   */
+  beta?: boolean;
   id: WorkersKvNamespaceIdentifier;
   /**
    * True if keys written on the URL will be URL-decoded before storing. For example, if set to "true", a key written on the URL as "%3F" will be stored as "?".
