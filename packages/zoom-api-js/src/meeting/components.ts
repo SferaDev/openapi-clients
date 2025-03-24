@@ -54,7 +54,7 @@ export type ListArchivedFilesQueryParams = {
    */
   group_id?: string;
   /**
-   * The group IDs. To get a group ID, use the [List groups](https://developers.zoom.us/docs/api/rest/reference/scim-api/methods/#operation/groupSCIM2List) API.
+   * The group IDs. To get a group ID, use the [List groups](/docs/api/rest/reference/scim-api/methods/#operation/groupSCIM2List) API.
    * (The maximum number of supported groups for filtering is 7.)
    *
    * @example CVCF1k8ZR3e52ChmEzlNxA,lwQiDh2kS0WaawetgMjtfw
@@ -91,7 +91,7 @@ export type ListArchivedFilesResponse = {
        *
        *  **OAuth apps**
        *
-       *  If a user has authorized and installed your OAuth app that contains recording scopes, use the user's [OAuth access token](https://developers.zoom.us/docs/integrations/oauth/) to download the file. For example, `https://{{base-domain}}/rec/archive/download/xxx--header 'Authorization: Bearer {{OAuth-access-token}}'`
+       *  If a user has authorized and installed your OAuth app that contains recording scopes, use the user's [OAuth access token](/docs/integrations/oauth/) to download the file. For example, `https://{{base-domain}}/rec/archive/download/xxx--header 'Authorization: Bearer {{OAuth-access-token}}'`
        *
        *  **Note:** This field does **not** return for [Zoom on-premise accounts](https://support.zoom.us/hc/en-us/articles/360034064852-Zoom-On-Premise-Deployment). Instead, this API will return the `file_path` field.
        *
@@ -146,7 +146,7 @@ export type ListArchivedFilesResponse = {
        */
       individual: boolean;
       /**
-       * The individual recording file's participant email address. This value is returned when the `individual` value is `true`. If the participant is **not** part of the host's account, this returns an empty string value, with some exceptions. See [Email address display rules](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#email-address-display-rules) for details.
+       * The individual recording file's participant email address. This value is returned when the `individual` value is `true`. If the participant is **not** part of the host's account, this returns an empty string value, with some exceptions. See [Email address display rules](/docs/api/using-zoom-apis/#email-address-display-rules) for details.
        *
        * @format email
        * @example jchill@example.com
@@ -292,7 +292,7 @@ export type ListArchivedFilesResponse = {
      */
     start_time: string;
     /**
-     * The meeting or webinar's [timezone](https://developers.zoom.us/docs/api/rest/other-references/abbreviation-lists/#timezones).
+     * The meeting or webinar's [timezone](/docs/api/references/abbreviations/#timezones).
      *
      * @example Asia/Shanghai
      */
@@ -352,6 +352,43 @@ export type ListArchivedFilesResponse = {
      * @example pvFIYKSDTum9iCDOOtQL4w,_FsqLyI0RlO6LVPeUVWi8g
      */
     group_id?: string;
+    /**
+     * Information about the physical files.
+     */
+    physical_files?: {
+      /**
+       * The physical file's unique ID.
+       *
+       * @example pvKocCqVSMygaOcKus5Afw
+       */
+      file_id?: string;
+      /**
+       * The physical file's name.
+       *
+       * @example Screenshot 2025-02-12 at 10.42.27 AM.png
+       */
+      file_name?: string;
+      /**
+       * The physical file's size, in bytes.
+       *
+       * @example 540680
+       */
+      file_size?: number;
+      /**
+       * The URL to download the the archive file.
+       *
+       *  **OAuth apps**
+       *
+       *  If a user has authorized and installed your OAuth app that contains recording scopes, use the user's [OAuth access token](/docs/integrations/oauth/) to download the file.
+       *
+       *  Example:
+       *
+       *  `https://{{base-domain}}/rec/archive/attached/download/xxx--header 'Authorization: Bearer {{OAuth-access-token}}'`
+       *
+       * @example https://example.com/rec/archive/attached/download/HBAXbHc15BXbnq0JoDu6tc5MWlww9MAo9JJq2d14VAWkpcT5FEA.AK5calud4EJB7bMq
+       */
+      download_url?: string;
+    }[];
   }[];
   /**
    * Use the next page token to paginate through large result sets. A next page token is returned whenever the set of available results exceeds the current page size. This token's expiration period is 15 minutes.
@@ -586,7 +623,7 @@ export type GetArchivedFilesPathParams = {
   /**
    * The meeting's universally unique identifier (UUID). Each meeting instance generates a UUID. After a meeting ends, a new UUID is generated for the next meeting instance.
    *
-   * If the meeting UUID begins with a `/` character or contains a `//` character, you **must** [double encode](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#meeting-id-and-uuid) the meeting UUID when using the meeting UUID for other API calls.
+   * If the meeting UUID begins with a `/` character or contains a `//` character, you **must** [double encode](/docs/api/using-zoom-apis/#meeting-id-and-uuid) the meeting UUID when using the meeting UUID for other API calls.
    *
    * @example 4444AAAiAAAAAiAiAiiAii==
    */
@@ -611,7 +648,7 @@ export type GetArchivedFilesResponse = {
      *
      *  **OAuth apps**
      *
-     *  If a user has authorized and installed your OAuth app that contains recording scopes, use the user's [OAuth access token](https://developers.zoom.us/docs/integrations/oauth/) to download the file. For example:
+     *  If a user has authorized and installed your OAuth app that contains recording scopes, use the user's [OAuth access token](/docs/integrations/oauth/) to download the file. For example:
      *
      *  `https://{{base-domain}}/rec/archive/download/xxx--header 'Authorization: Bearer {{OAuth-access-token}}'`
      *
@@ -668,7 +705,7 @@ export type GetArchivedFilesResponse = {
      */
     individual: boolean;
     /**
-     * The individual recording file's participant email address. This value is returned when the `individual` value is `true`. If the participant is **not** part of the host's account, this returns an empty string value, with some exceptions. See [Email address display rules](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#email-address-display-rules) for details.
+     * The individual recording file's participant email address. This value is returned when the `individual` value is `true`. If the participant is **not** part of the host's account, this returns an empty string value, with some exceptions. See [Email address display rules](/docs/api/using-zoom-apis/#email-address-display-rules) for details.
      *
      * @format email
      * @example jchill@example.com
@@ -814,7 +851,7 @@ export type GetArchivedFilesResponse = {
    */
   start_time: string;
   /**
-   * The meeting or webinar's [timezone](https://developers.zoom.us/docs/api/rest/other-references/abbreviation-lists/#timezones).
+   * The meeting or webinar's [timezone](/docs/api/references/abbreviations/#timezones).
    *
    * @example Asia/Shanghai
    */
@@ -874,6 +911,41 @@ export type GetArchivedFilesResponse = {
    * @example pvFIYKSDTum9iCDOOtQL4w,_FsqLyI0RlO6LVPeUVWi8g
    */
   group_id?: string;
+  /**
+   * Information about the physical files.
+   */
+  physical_files?: {
+    /**
+     * The physical file's unique ID.
+     *
+     * @example pvKocCqVSMygaOcKus5Afw
+     */
+    file_id?: string;
+    /**
+     * The physical file's name.
+     *
+     * @example Screenshot 2025-02-12 at 10.42.27 AM.png
+     */
+    file_name?: string;
+    /**
+     * The physical file's size, in bytes.
+     *
+     * @example 540680
+     */
+    file_size?: number;
+    /**
+     * The URL to download the the archive file.
+     *
+     *  **OAuth apps**
+     *
+     *  If a user has authorized and installed your OAuth app that contains recording scopes, use the user's [OAuth access token](/docs/integrations/oauth/) to download the file. For example:
+     *
+     *  `https://{{base-domain}}/rec/archive/attached/download/xxx--header 'Authorization: Bearer {{OAuth-access-token}}'`
+     *
+     * @example https://local.zoom.us/rec/archive/attached/download/HBAXbHc15BXbnq0JoDu6tc5MWlww9MAo9JJq2d14VAWkpcT5FEA.AK5calud4EJB7bMq
+     */
+    download_url?: string;
+  }[];
 };
 
 export type GetArchivedFilesVariables = {
