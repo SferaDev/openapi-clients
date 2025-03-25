@@ -31220,6 +31220,13 @@ export type MqQueueSettings = {
    */
   delivery_delay?: number;
   /**
+   * Indicates if message delivery to consumers is currently paused.
+   *
+   * @example true
+   * @x-auditable true
+   */
+  delivery_paused?: boolean;
+  /**
    * Number of seconds after which an unconsumed message will be delayed.
    *
    * @example 345600
@@ -49020,42 +49027,49 @@ export type WorkersKvApiResponseCommonNoResult = WorkersKvApiResponseCommon & {
   result?: Record<string, any> | null;
 };
 
-/**
- * Requested keys are paired with their values in an object
- *
- * @example {"key1":"value1","key2":"value2"}
- */
 export type WorkersKvBulkGetResult = {
-  [key: string]:
-    | string
-    | number
-    | boolean
-    | {
-        [key: string]: any;
-      };
-};
-
-/**
- * Requested keys are paired with their values and metadata in an object
- *
- * @example {"key1":{"expiration":1577836800,"metadata":{"someMetadataKey":"someMetadataValue"},"value":"value1"},"key2":{"metadata":{"anotherKey":"anotherValue"},"value":"value2"}}
- */
-export type WorkersKvBulkGetResultWithMetadata = {
-  [key: string]: {
-    /**
-     * The metadata associated with the key
-     */
-    metadata?: string;
-    /**
-     * The value associated with the key
-     */
-    value?:
+  /**
+   * Requested keys are paired with their values in an object
+   *
+   * @example {"key1":"value1","key2":"value2"}
+   */
+  values?: {
+    [key: string]:
       | string
       | number
       | boolean
       | {
           [key: string]: any;
         };
+  };
+};
+
+export type WorkersKvBulkGetResultWithMetadata = {
+  /**
+   * Requested keys are paired with their values and metadata in an object
+   *
+   * @example {"key1":{"expiration":1577836800,"metadata":{"someMetadataKey":"someMetadataValue"},"value":"value1"},"key2":{"metadata":{"anotherKey":"anotherValue"},"value":"value2"}}
+   */
+  values?: {
+    [key: string]: {
+      expiration?: WorkersKvExpiration;
+      /**
+       * The metadata associated with the key
+       */
+      metadata: {
+        [key: string]: any;
+      } | null;
+      /**
+       * The value associated with the key
+       */
+      value:
+        | string
+        | number
+        | boolean
+        | {
+            [key: string]: any;
+          };
+    } | null;
   };
 };
 
