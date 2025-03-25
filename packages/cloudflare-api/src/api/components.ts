@@ -65358,6 +65358,36 @@ export const queuesGet = (variables: QueuesGetVariables, signal?: AbortSignal) =
     signal
   });
 
+export type QueuesUpdatePartialPathParams = {
+  queueId: Schemas.MqIdentifier;
+  accountId: Schemas.MqIdentifier;
+};
+
+export type QueuesUpdatePartialError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.MqApiV4Failure;
+}>;
+
+export type QueuesUpdatePartialResponse = Schemas.MqApiV4Success & {
+  result?: Schemas.MqQueue;
+};
+
+export type QueuesUpdatePartialVariables = {
+  body?: Schemas.MqQueue;
+  pathParams: QueuesUpdatePartialPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Updates a Queue.
+ */
+export const queuesUpdatePartial = (variables: QueuesUpdatePartialVariables, signal?: AbortSignal) =>
+  fetch<QueuesUpdatePartialResponse, QueuesUpdatePartialError, Schemas.MqQueue, {}, {}, QueuesUpdatePartialPathParams>({
+    url: '/accounts/{accountId}/queues/{queueId}',
+    method: 'patch',
+    ...variables,
+    signal
+  });
+
 export type QueuesUpdatePathParams = {
   queueId: Schemas.MqIdentifier;
   accountId: Schemas.MqIdentifier;
@@ -65608,6 +65638,88 @@ export const queuesPullMessages = (variables: QueuesPullMessagesVariables, signa
     {},
     QueuesPullMessagesPathParams
   >({ url: '/accounts/{accountId}/queues/{queueId}/messages/pull', method: 'post', ...variables, signal });
+
+export type QueuesPurgeGetPathParams = {
+  queueId: Schemas.MqIdentifier;
+  accountId: Schemas.MqIdentifier;
+};
+
+export type QueuesPurgeGetError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.MqApiV4Failure;
+}>;
+
+export type QueuesPurgeGetResponse = Schemas.MqApiV4Success & {
+  result?: {
+    /**
+     * Indicates if the last purge operation completed successfully.
+     *
+     * @x-auditable true
+     */
+    completed?: string;
+    /**
+     * Timestamp when the last purge operation started.
+     *
+     * @x-auditable true
+     */
+    started_at?: string;
+  };
+};
+
+export type QueuesPurgeGetVariables = {
+  pathParams: QueuesPurgeGetPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Get details about a Queue's purge status.
+ */
+export const queuesPurgeGet = (variables: QueuesPurgeGetVariables, signal?: AbortSignal) =>
+  fetch<QueuesPurgeGetResponse, QueuesPurgeGetError, undefined, {}, {}, QueuesPurgeGetPathParams>({
+    url: '/accounts/{accountId}/queues/{queueId}/purge',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type QueuesPurgePathParams = {
+  queueId: Schemas.MqIdentifier;
+  accountId: Schemas.MqIdentifier;
+};
+
+export type QueuesPurgeError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.MqApiV4Failure;
+}>;
+
+export type QueuesPurgeResponse = Schemas.MqApiV4Success & {
+  result?: Schemas.MqQueue;
+};
+
+export type QueuesPurgeRequestBody = {
+  /**
+   * Confimation that all messages will be deleted permanently.
+   *
+   * @example true
+   * @x-auditable true
+   */
+  delete_messages_permanently?: boolean;
+};
+
+export type QueuesPurgeVariables = {
+  body?: QueuesPurgeRequestBody;
+  pathParams: QueuesPurgePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Deletes all messages from the Queue.
+ */
+export const queuesPurge = (variables: QueuesPurgeVariables, signal?: AbortSignal) =>
+  fetch<QueuesPurgeResponse, QueuesPurgeError, QueuesPurgeRequestBody, {}, {}, QueuesPurgePathParams>({
+    url: '/accounts/{accountId}/queues/{queueId}/purge',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type R2ListBucketsPathParams = {
   accountId: Schemas.R2AccountIdentifier;
@@ -136561,13 +136673,16 @@ export const operationsByTag = {
     queuesCreate,
     queuesDelete,
     queuesGet,
+    queuesUpdatePartial,
     queuesUpdate,
     queuesListConsumers,
     queuesCreateConsumer,
     queuesDeleteConsumer,
     queuesUpdateConsumer,
     queuesAckMessages,
-    queuesPullMessages
+    queuesPullMessages,
+    queuesPurgeGet,
+    queuesPurge
   },
   r2Account: { r2GetAccountLevelMetrics },
   registrarDomains: { registrarDomainsListDomains, registrarDomainsGetDomain, registrarDomainsUpdateDomain },
