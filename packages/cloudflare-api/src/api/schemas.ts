@@ -26160,20 +26160,14 @@ export type LogpushOutputOptions = {
   ['CVE-2021-44228']?: boolean | null;
   /**
    * String to be prepended before each batch.
-   *
-   * @default
    */
   batch_prefix?: string | null;
   /**
    * String to be appended after each batch.
-   *
-   * @default
    */
   batch_suffix?: string | null;
   /**
    * String to join fields. This field be ignored when `record_template` is set.
-   *
-   * @default ,
    */
   field_delimiter?: string | null;
   /**
@@ -26193,26 +26187,18 @@ export type LogpushOutputOptions = {
   output_type?: 'ndjson' | 'csv';
   /**
    * String to be inserted in-between the records as separator.
-   *
-   * @default
    */
   record_delimiter?: string | null;
   /**
    * String to be prepended before each record.
-   *
-   * @default {
    */
   record_prefix?: string | null;
   /**
    * String to be appended after each record.
-   *
-   * @default }
    */
   record_suffix?: string | null;
   /**
-   * String to use as template for each record instead of the default comma-separated list. All fields used in the template must be present in `field_names` as well, otherwise they will end up as null. Format as a Go `text/template` without any standard functions, like conditionals, loops, sub-templates, etc.
-   *
-   * @default
+   * String to use as template for each record instead of the default json key value mapping. All fields used in the template must be present in `field_names` as well, otherwise they will end up as null. Format as a Go `text/template` without any standard functions, like conditionals, loops, sub-templates, etc.
    */
   record_template?: string | null;
   /**
