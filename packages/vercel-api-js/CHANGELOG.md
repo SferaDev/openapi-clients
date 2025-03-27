@@ -1,5 +1,13 @@
 # vercel-api-js
 
+## 0.23.1
+
+### Patch Changes
+
+- 1331e24: Change handling for lambdas createdAt and readyState in CreateDeploymentResponse
+- 4efc49f: Change readySubstate values and added a new 'ROLLING' state
+- ad83874: [BREAKING] Change deliveryFormat options in log drain endpoints
+
 ## 0.23.0
 
 ### Minor Changes

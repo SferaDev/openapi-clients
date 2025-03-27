@@ -1,5 +1,22 @@
 # cloudflare-api-js
 
+## 0.10.0
+
+### Minor Changes
+
+- d55f18f: Add new endpoint to get multiple KV pairs from a namespace
+- 297a985: Add new endpoint to update partial Queue details
+
+### Patch Changes
+
+- 7fb3398: Add 'LabelDiscovery' to ApiShieldApiDiscoveryOrigin enum
+- 2fadebb: Add new 'crawler_protection' attribute to BotManagementBaseConfig
+- 5d56a2f: [BREAKING] Add 'x-auditable' attribute to various schemas for auditing purposes
+- 1091d4b: Add new endpoint to retrieve Global WARP override state
+- fc542f8: [BREAKING] Remove 'accountLevelCustomNameserversGetEligibleZonesForAccountCustomNameservers' API endpoint
+- 971aff0: Add beta field to WorkersKvNamespace type
+- 0909d1e: [BREAKING] Remove default values for batch_prefix, batch_suffix, field_delimiter, record_delimiter, record_prefix, and record_suffix in LogpushOutputOptions
+
 ## 0.9.2
 
 ### Patch Changes
