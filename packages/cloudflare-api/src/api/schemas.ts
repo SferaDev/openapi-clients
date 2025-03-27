@@ -23590,6 +23590,7 @@ export type IntelAdditionalInformation = {
    * Suspected DGA malware family.
    *
    * @example
+   * @x-auditable true
    */
   suspected_malware_family?: string;
 };
@@ -23641,13 +23642,20 @@ export type IntelApiResponseSingle = IntelSchemasApiResponseCommon;
  * Application that the hostname belongs to.
  */
 export type IntelApplication = {
+  /**
+   * @x-auditable true
+   */
   id?: number;
   /**
    * @example CLOUDFLARE
+   * @x-auditable true
    */
   name?: string;
 };
 
+/**
+ * @x-auditable true
+ */
 export type IntelAsn = number;
 
 export type IntelAsnComponentsSchemasResponse = IntelApiResponseSingle & {
@@ -23656,11 +23664,13 @@ export type IntelAsnComponentsSchemasResponse = IntelApiResponseSingle & {
 
 /**
  * @example US
+ * @x-auditable true
  */
 export type IntelAsnCountry = string;
 
 /**
  * @example CLOUDFLARENET
+ * @x-auditable true
  */
 export type IntelAsnDescription = string;
 
@@ -23668,14 +23678,24 @@ export type IntelAsnDescription = string;
  * Infrastructure type of this ASN.
  *
  * @example hosting_provider
+ * @x-auditable true
  */
 export type IntelAsnType = 'hosting_provider' | 'isp' | 'organization';
 
 export type IntelCategoriesWithSuperCategoryIdsExampleEmpty = IntelCategoryWithSuperCategoryId[];
 
 export type IntelCategoryWithSuperCategoryId = {
+  /**
+   * @x-auditable true
+   */
   id?: number;
+  /**
+   * @x-auditable true
+   */
   name?: string;
+  /**
+   * @x-auditable true
+   */
   super_category_id?: number;
 };
 
@@ -23706,8 +23726,17 @@ export type IntelComponentsSchemasSingleResponse = IntelSchemasApiResponseCollec
  * @example {"id":155,"name":"Technology","super_category_id":26}
  */
 export type IntelContentCategories = {
+  /**
+   * @x-auditable true
+   */
   id?: number;
+  /**
+   * @x-auditable true
+   */
   name?: string;
+  /**
+   * @x-auditable true
+   */
   super_category_id?: number;
 }[];
 
@@ -23741,11 +23770,13 @@ export type IntelDomainHistory = {
     /**
      * @example 2021-04-30
      * @format date
+     * @x-auditable true
      */
     end?: string;
     /**
      * @example 2021-04-01
      * @format date
+     * @x-auditable true
      */
     start?: string;
   }[];
@@ -23754,6 +23785,7 @@ export type IntelDomainHistory = {
 
 /**
  * @example cloudflare.com
+ * @x-auditable true
  */
 export type IntelDomainName = string;
 
@@ -23762,6 +23794,7 @@ export type IntelDomainName = string;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type IntelIdentifier = string;
 
@@ -23769,18 +23802,30 @@ export type IntelInheritedContentCategories = IntelCategoriesWithSuperCategoryId
 
 /**
  * Domain from which `inherited_content_categories` and `inherited_risk_types` are inherited, if applicable.
+ *
+ * @x-auditable true
  */
 export type IntelInheritedFrom = string;
 
 export type IntelInheritedRiskTypes = IntelCategoriesWithSuperCategoryIdsExampleEmpty;
 
+/**
+ * @x-auditable true
+ */
 export type IntelIp = IntelIpv4 | IntelIpv6;
 
 export type IntelIpList = {
+  /**
+   * @x-auditable true
+   */
   description?: string;
+  /**
+   * @x-auditable true
+   */
   id?: number;
   /**
    * @example Malware
+   * @x-auditable true
    */
   name?: string;
 };
@@ -23788,12 +23833,14 @@ export type IntelIpList = {
 /**
  * @example 192.0.2.0
  * @format ipv4
+ * @x-auditable true
  */
 export type IntelIpv4 = string;
 
 /**
  * @example 2001:0DB8::
  * @format ipv6
+ * @x-auditable true
  */
 export type IntelIpv6 = string;
 
@@ -23820,10 +23867,13 @@ export type IntelMiscategorization = {
   content_removes?: number[];
   /**
    * @example domain
+   * @x-auditable true
    */
   indicator_type?: 'domain' | 'ipv4' | 'ipv6' | 'url';
   /**
    * Provide only if indicator_type is `ipv4` or `ipv6`.
+   *
+   * @x-auditable true
    */
   ip?: string | null;
   /**
@@ -23841,6 +23891,8 @@ export type IntelMiscategorization = {
   security_removes?: number[];
   /**
    * Provide only if indicator_type is `domain` or `url`. Example if indicator_type is `domain`: `example.com`. Example if indicator_type is `url`: `https://example.com/news/`.
+   *
+   * @x-auditable true
    */
   url?: string;
 };
@@ -23880,10 +23932,13 @@ export type IntelPassiveDnsByIp = {
      *
      * @example 2021-04-01
      * @format date
+     * @x-auditable true
      */
     first_seen?: string;
     /**
      * Hostname that the IP was observed resolving to.
+     *
+     * @x-auditable true
      */
     hostname?: string;
     /**
@@ -23891,6 +23946,7 @@ export type IntelPassiveDnsByIp = {
      *
      * @example 2021-04-30
      * @format date
+     * @x-auditable true
      */
     last_seen?: string;
   }[];
@@ -23912,12 +23968,14 @@ export type IntelPhishingUrlInfo = {
      * Name of the category applied.
      *
      * @example PHISHING
+     * @x-auditable true
      */
     category?: string;
     /**
      * Result of human review for this categorization.
      *
      * @example confirmed
+     * @x-auditable true
      */
     verification_status?: string;
   }[];
@@ -23929,6 +23987,7 @@ export type IntelPhishingUrlInfo = {
      * Name of the model.
      *
      * @example MACHINE_LEARNING_v2
+     * @x-auditable true
      */
     model_name?: string;
     /**
@@ -23954,12 +24013,14 @@ export type IntelPhishingUrlInfo = {
      * Description of the signature that matched.
      *
      * @example Match frequently used social followers phishing kit
+     * @x-auditable true
      */
     description?: string;
     /**
      * Name of the signature that matched.
      *
      * @example phishkit.social_followers
+     * @x-auditable true
      */
     name?: string;
   }[];
@@ -23971,6 +24032,7 @@ export type IntelPhishingUrlInfo = {
      * Timestamp of when the submission was processed.
      *
      * @example Wed, 26 Oct 2022 16:04:51 GMT
+     * @x-auditable true
      */
     last_processed?: string;
     /**
@@ -23979,10 +24041,14 @@ export type IntelPhishingUrlInfo = {
     scan_complete?: boolean;
     /**
      * Status code that the crawler received when loading the submitted URL.
+     *
+     * @x-auditable true
      */
     status_code?: number;
     /**
      * ID of the most recent submission.
+     *
+     * @x-auditable true
      */
     submission_id?: number;
   };
@@ -23998,6 +24064,7 @@ export type IntelPhishingUrlInfo = {
    * URL that was submitted.
    *
    * @example https://www.cloudflare.com
+   * @x-auditable true
    */
   url?: string;
 };
@@ -24015,6 +24082,7 @@ export type IntelPhishingUrlSubmit = {
      * URL that was excluded.
      *
      * @example https://developers.cloudflare.com
+     * @x-auditable true
      */
     url?: string;
   }[];
@@ -24026,12 +24094,14 @@ export type IntelPhishingUrlSubmit = {
      * URL that was skipped.
      *
      * @example https://www.cloudflare.com/developer-week/
+     * @x-auditable true
      */
     url?: string;
     /**
      * ID of the submission of that URL that is currently scanning.
      *
      * @example 2
+     * @x-auditable true
      */
     url_id?: number;
   }[];
@@ -24043,12 +24113,14 @@ export type IntelPhishingUrlSubmit = {
      * URL that was submitted.
      *
      * @example https://www.cloudflare.com
+     * @x-auditable true
      */
     url?: string;
     /**
      * ID assigned to this URL submission. Used to retrieve scanning results.
      *
      * @example 1
+     * @x-auditable true
      */
     url_id?: number;
   }[];
@@ -24060,6 +24132,8 @@ export type IntelPhishingUrlSubmitComponentsSchemasSingleResponse = IntelApiResp
 
 /**
  * Global Cloudflare 100k ranking for the last 30 days, if available for the hostname. The top ranked domain is 1, the lowest ranked domain is 100,000.
+ *
+ * @x-auditable true
  */
 export type IntelPopularityRank = number;
 
@@ -24069,6 +24143,7 @@ export type IntelResolvesToRef = {
    * IP address or domain name.
    *
    * @example 192.0.2.0
+   * @x-auditable true
    */
   value?: string;
 };
@@ -24135,6 +24210,9 @@ export type IntelSchemasAsn = {
   asn?: IntelAsn;
   country?: IntelAsnCountry;
   description?: IntelAsnDescription;
+  /**
+   * @x-auditable true
+   */
   domain_count?: number;
   /**
    * @example example.com
@@ -24150,22 +24228,29 @@ export type IntelSchemasIp = {
   belongs_to_ref?: {
     /**
      * @example US
+     * @x-auditable true
      */
     country?: string;
     /**
      * @example CLOUDFLARENET
+     * @x-auditable true
      */
     description?: string;
     /**
      * @example autonomous-system--2fa28d71-3549-5a38-af05-770b79ad6ea8
+     * @x-auditable true
      */
     id?: string;
     /**
      * Infrastructure type of this ASN.
      *
      * @example hosting_provider
+     * @x-auditable true
      */
     type?: 'hosting_provider' | 'isp' | 'organization';
+    /**
+     * @x-auditable true
+     */
     value?: string;
   };
   ip?: IntelIp;
@@ -24174,6 +24259,9 @@ export type IntelSchemasIp = {
    */
   risk_types?: {
     id?: number;
+    /**
+     * @x-auditable true
+     */
     name?: string;
     super_category_id?: number;
   }[];
@@ -24197,6 +24285,7 @@ export type IntelStartEndParams = {
    *
    * @example 2021-04-30
    * @format date
+   * @x-auditable true
    */
   end?: string;
   /**
@@ -24204,6 +24293,7 @@ export type IntelStartEndParams = {
    *
    * @example 2021-04-01
    * @format date
+   * @x-auditable true
    */
   start?: string;
 };
@@ -24212,6 +24302,7 @@ export type IntelStartEndParams = {
  * STIX 2.1 identifier: https://docs.oasis-open.org/cti/stix/v2.1/cs02/stix-v2.1-cs02.html#_64yvzeku5a5c
  *
  * @example ipv4-addr--baa568ec-6efe-5902-be55-0663833db537
+ * @x-auditable true
  */
 export type IntelStixIdentifier = string;
 
@@ -24220,6 +24311,7 @@ export type IntelStixIdentifier = string;
  *
  * @example https://www.cloudflare.com
  * @format uri
+ * @x-auditable true
  */
 export type IntelUrl = string;
 
@@ -24231,6 +24323,7 @@ export type IntelWhois = {
   /**
    * @example 2009-02-17
    * @format date
+   * @x-auditable true
    */
   created_date?: string;
   domain?: IntelDomainName;
@@ -24244,27 +24337,33 @@ export type IntelWhois = {
   nameservers?: string[];
   /**
    * @example DATA REDACTED
+   * @x-auditable true
    */
   registrant?: string;
   /**
    * @example United States
+   * @x-auditable true
    */
   registrant_country?: string;
   /**
    * @example https://domaincontact.cloudflareregistrar.com/cloudflare.com
+   * @x-auditable true
    */
   registrant_email?: string;
   /**
    * @example DATA REDACTED
+   * @x-auditable true
    */
   registrant_org?: string;
   /**
    * @example Cloudflare, Inc.
+   * @x-auditable true
    */
   registrar?: string;
   /**
    * @example 2017-05-24
    * @format date
+   * @x-auditable true
    */
   updated_date?: string;
 };
