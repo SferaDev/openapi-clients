@@ -1,5 +1,11 @@
 # zoom-api-js
 
+## 0.4.3
+
+### Patch Changes
+
+- 6bad508: Change in the meeting UUID description
+
 ## 0.4.2
 
 ### Patch Changes
