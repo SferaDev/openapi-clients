@@ -326,7 +326,7 @@ export type AaaAuditLogsV2 = {
      *
      * @example user
      */
-    type?: 'user' | 'account' | 'cloudflare-admin';
+    type?: 'account' | 'cloudflare_admin' | 'system' | 'user';
   };
   id?: AaaSchemasIdentifier;
   /**
