@@ -38766,6 +38766,7 @@ export type RumApiResponseCommonFailure = {
  * If enabled, the JavaScript snippet is automatically injected for orange-clouded sites.
  *
  * @example true
+ * @x-auditable true
  */
 export type RumAutoInstall = boolean;
 
@@ -38809,6 +38810,7 @@ export type RumEditable = boolean;
  * Enables or disables RUM. This option can be used only when auto_install is set to true.
  *
  * @example true
+ * @x-auditable true
  */
 export type RumEnabled = boolean;
 
@@ -38816,11 +38818,13 @@ export type RumEnabled = boolean;
  * The hostname to use for gray-clouded sites.
  *
  * @example example.com
+ * @x-auditable true
  */
 export type RumHost = string;
 
 /**
  * @example rum
+ * @x-auditable true
  */
 export type RumId = string;
 
@@ -38836,11 +38840,14 @@ export type RumIdentifier = string;
  * Whether to match the hostname using a regular expression.
  *
  * @example false
+ * @x-auditable true
  */
 export type RumIsHostRegex = boolean;
 
 /**
  * If enabled, the JavaScript snippet will not be injected for visitors from the EU.
+ *
+ * @x-auditable true
  */
 export type RumLite = boolean;
 
@@ -38941,6 +38948,7 @@ export type RumRule = {
    * The hostname the rule will be applied to.
    *
    * @example example.com
+   * @x-auditable true
    */
   host?: string;
   id?: RumRuleIdentifier;
@@ -38948,12 +38956,14 @@ export type RumRule = {
    * Whether the rule includes or excludes traffic from being measured.
    *
    * @example true
+   * @x-auditable true
    */
   inclusive?: boolean;
   /**
    * Whether the rule is paused or not.
    *
    * @example false
+   * @x-auditable true
    */
   is_paused?: boolean;
   /**
@@ -38964,6 +38974,7 @@ export type RumRule = {
   paths?: string[];
   /**
    * @example 1000
+   * @x-auditable true
    */
   priority?: number;
 };
@@ -38982,6 +38993,7 @@ export type RumRuleResponseSingle = RumApiResponseCommon & {
  * The Web Analytics rule identifier.
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
+ * @x-auditable true
  */
 export type RumRuleIdentifier = string;
 
@@ -39016,6 +39028,7 @@ export type RumRuleset = {
  * The Web Analytics ruleset identifier.
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
+ * @x-auditable true
  */
 export type RumRulesetIdentifier = string;
 
@@ -39053,6 +39066,7 @@ export type RumSiteTagResponseSingle = RumApiResponseCommon & {
  * The Web Analytics site identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
+ * @x-auditable true
  */
 export type RumSiteTag = string;
 
@@ -39060,6 +39074,7 @@ export type RumSiteTag = string;
  * The Web Analytics site token.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
+ * @x-auditable true
  */
 export type RumSiteToken = string;
 
@@ -39072,12 +39087,14 @@ export type RumSitesResponseCollection = RumApiResponseCommon & {
  * Encoded JavaScript snippet.
  *
  * @example <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "bc40a2d1b5834453aba85c1b9a3054da"}'></script><!-- End Cloudflare Web Analytics -->
+ * @x-auditable true
  */
 export type RumSnippet = string;
 
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type RumTimestamp = string;
 
@@ -39102,6 +39119,7 @@ export type RumUpdateSiteRequest = {
  * Current state of RUM. Returns On, Off, or Manual
  *
  * @example on
+ * @x-auditable true
  */
 export type RumValue = string;
 
@@ -39109,6 +39127,7 @@ export type RumValue = string;
  * The zone identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
+ * @x-auditable true
  */
 export type RumZoneTag = string;
 
