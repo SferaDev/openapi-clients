@@ -1,5 +1,12 @@
 # cloudflare-api-js
 
+## 0.10.1
+
+### Patch Changes
+
+- 6bef323: [BREAKING] Change type enum values in AaaAuditLogsV2 schema
+- 6cd4bfb: Add x-auditable metadata to various schema fields
+
 ## 0.10.0
 
 ### Minor Changes
