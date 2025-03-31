@@ -8081,7 +8081,23 @@ export type WorkersAiPostRunCfBaaiBgeM3Response = {
         }[];
       }
     | {
+        /**
+         * The pooling method used in the embedding process.
+         */
+        pooling?: 'mean' | 'cls';
         response?: number[][];
+        shape?: number[];
+      }
+    | {
+        /**
+         * Embeddings of the requested text values
+         */
+        data?: number[][];
+        /**
+         * The pooling method used in the embedding process.
+         */
+        pooling?: 'mean' | 'cls';
+        shape?: number[];
       };
   /**
    * @default true
@@ -8089,28 +8105,42 @@ export type WorkersAiPostRunCfBaaiBgeM3Response = {
   success?: boolean;
 };
 
-export type WorkersAiPostRunCfBaaiBgeM3RequestBody = {
-  /**
-   * List of provided contexts. Note that the index in this array is important, as the response will refer to it.
-   */
-  contexts: {
-    /**
-     * One of the provided context content
-     *
-     * @minLength 1
-     */
-    text?: string;
-  }[];
-  /**
-   * A query you wish to perform against the provided contexts. If no query is provided the model with respond with embeddings for contexts
-   *
-   * @minLength 1
-   */
-  query?: string;
-};
-
 export type WorkersAiPostRunCfBaaiBgeM3Variables = {
-  body: WorkersAiPostRunCfBaaiBgeM3RequestBody;
+  body?:
+    | {
+        /**
+         * List of provided contexts. Note that the index in this array is important, as the response will refer to it.
+         */
+        contexts: {
+          /**
+           * One of the provided context content
+           *
+           * @minLength 1
+           */
+          text?: string;
+        }[];
+        /**
+         * A query you wish to perform against the provided contexts. If no query is provided the model with respond with embeddings for contexts
+         *
+         * @minLength 1
+         */
+        query?: string;
+        /**
+         * When provided with too long context should the model error out or truncate the context to fit?
+         *
+         * @default false
+         */
+        truncate_inputs?: boolean;
+      }
+    | {
+        text: string | string[];
+        /**
+         * When provided with too long context should the model error out or truncate the context to fit?
+         *
+         * @default false
+         */
+        truncate_inputs?: boolean;
+      };
   pathParams: WorkersAiPostRunCfBaaiBgeM3PathParams;
 } & FetcherExtraProps;
 
@@ -8118,7 +8148,40 @@ export const workersAiPostRunCfBaaiBgeM3 = (variables: WorkersAiPostRunCfBaaiBge
   fetch<
     WorkersAiPostRunCfBaaiBgeM3Response,
     WorkersAiPostRunCfBaaiBgeM3Error,
-    WorkersAiPostRunCfBaaiBgeM3RequestBody,
+    | {
+        /**
+         * List of provided contexts. Note that the index in this array is important, as the response will refer to it.
+         */
+        contexts: {
+          /**
+           * One of the provided context content
+           *
+           * @minLength 1
+           */
+          text?: string;
+        }[];
+        /**
+         * A query you wish to perform against the provided contexts. If no query is provided the model with respond with embeddings for contexts
+         *
+         * @minLength 1
+         */
+        query?: string;
+        /**
+         * When provided with too long context should the model error out or truncate the context to fit?
+         *
+         * @default false
+         */
+        truncate_inputs?: boolean;
+      }
+    | {
+        text: string | string[];
+        /**
+         * When provided with too long context should the model error out or truncate the context to fit?
+         *
+         * @default false
+         */
+        truncate_inputs?: boolean;
+      },
     {},
     {},
     WorkersAiPostRunCfBaaiBgeM3PathParams
