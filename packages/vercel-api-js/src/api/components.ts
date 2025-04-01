@@ -3806,10 +3806,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    id?: string;
     createdAt?: number;
-    entrypoint?: string | null;
+    id?: string;
     readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    entrypoint?: string | null;
     readyStateAt?: number;
     output: {
       path: string;
@@ -4099,7 +4099,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
             src?: string;
             dest?: string;
             status?: number;
@@ -4132,7 +4132,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         org: string;
@@ -4144,7 +4144,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         owner: string;
@@ -4156,7 +4156,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | null;
   flags?:
@@ -4638,10 +4638,10 @@ export type CancelDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    id?: string;
     createdAt?: number;
-    entrypoint?: string | null;
+    id?: string;
     readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    entrypoint?: string | null;
     readyStateAt?: number;
     output: {
       path: string;
@@ -4654,8 +4654,8 @@ export type CancelDeploymentResponse = {
   team?: {
     id: string;
     name: string;
-    avatar?: string;
     slug: string;
+    avatar?: string;
   };
   userAliases?: string[];
   previewCommentsEnabled?: boolean;
@@ -4883,7 +4883,7 @@ export type CancelDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
             src?: string;
             dest?: string;
             status?: number;
@@ -4905,7 +4905,7 @@ export type CancelDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         org: string;
@@ -4917,7 +4917,7 @@ export type CancelDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         owner: string;
@@ -4929,7 +4929,7 @@ export type CancelDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | null;
   flags?:
@@ -16394,7 +16394,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16498,7 +16498,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17389,7 +17389,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17493,7 +17493,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17596,7 +17596,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17790,7 +17790,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -22601,6 +22601,14 @@ export type GetDeploymentsQueryParams = {
    * Filter deployments based on their rollback candidacy
    */
   rollbackCandidate?: boolean;
+  /**
+   * Filter deployments based on the branch name
+   */
+  branch?: string;
+  /**
+   * Filter deployments based on the SHA
+   */
+  sha?: string;
   /**
    * The Team identifier to perform the request on behalf of.
    */
