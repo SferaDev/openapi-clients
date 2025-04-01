@@ -71469,7 +71469,6 @@ export type StreamVideosUploadVideosFromAUrlPathParams = {
 
 export type StreamVideosUploadVideosFromAUrlHeaders = {
   ['Upload-Creator']?: Schemas.StreamCreator;
-  ['Upload-Metadata']?: Schemas.StreamUploadMetadata;
 };
 
 export type StreamVideosUploadVideosFromAUrlError = Fetcher.ErrorWrapper<{
