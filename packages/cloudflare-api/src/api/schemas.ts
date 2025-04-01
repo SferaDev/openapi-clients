@@ -41566,7 +41566,7 @@ export type StreamUploadLength = number;
 
 /**
  * Comma-separated key-value pairs following the TUS protocol specification. Values are Base-64 encoded.
- * Supported keys: `name`, `requiresignedurls`, `allowedorigins`, `thumbnailtimestamppct`, `watermark`, `scheduleddeletion`.
+ * Supported keys: `name`, `requiresignedurls`, `allowedorigins`, `thumbnailtimestamppct`, `watermark`, `scheduleddeletion`, `maxdurationseconds`.
  *
  * @example name aGVsbG8gd29ybGQ=, requiresignedurls, allowedorigins ZXhhbXBsZS5jb20sdGVzdC5jb20=
  */
