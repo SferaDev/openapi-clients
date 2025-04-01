@@ -7974,6 +7974,13 @@ export type WorkersAiPostRunCfBaaiBgeBaseEnV15PathParams = {
   accountId: string;
 };
 
+export type WorkersAiPostRunCfBaaiBgeBaseEnV15QueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
+};
+
 export type WorkersAiPostRunCfBaaiBgeBaseEnV15Error = Fetcher.ErrorWrapper<undefined>;
 
 export type WorkersAiPostRunCfBaaiBgeBaseEnV15Response = {
@@ -7997,6 +8004,7 @@ export type WorkersAiPostRunCfBaaiBgeBaseEnV15RequestBody = {
 export type WorkersAiPostRunCfBaaiBgeBaseEnV15Variables = {
   body: WorkersAiPostRunCfBaaiBgeBaseEnV15RequestBody;
   pathParams: WorkersAiPostRunCfBaaiBgeBaseEnV15PathParams;
+  queryParams?: WorkersAiPostRunCfBaaiBgeBaseEnV15QueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfBaaiBgeBaseEnV15 = (
@@ -8008,7 +8016,7 @@ export const workersAiPostRunCfBaaiBgeBaseEnV15 = (
     WorkersAiPostRunCfBaaiBgeBaseEnV15Error,
     WorkersAiPostRunCfBaaiBgeBaseEnV15RequestBody,
     {},
-    {},
+    WorkersAiPostRunCfBaaiBgeBaseEnV15QueryParams,
     WorkersAiPostRunCfBaaiBgeBaseEnV15PathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/baai/bge-base-en-v1.5', method: 'post', ...variables, signal });
 
@@ -8017,6 +8025,13 @@ export type WorkersAiPostRunCfBaaiBgeLargeEnV15PathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfBaaiBgeLargeEnV15QueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfBaaiBgeLargeEnV15Error = Fetcher.ErrorWrapper<undefined>;
@@ -8042,6 +8057,7 @@ export type WorkersAiPostRunCfBaaiBgeLargeEnV15RequestBody = {
 export type WorkersAiPostRunCfBaaiBgeLargeEnV15Variables = {
   body: WorkersAiPostRunCfBaaiBgeLargeEnV15RequestBody;
   pathParams: WorkersAiPostRunCfBaaiBgeLargeEnV15PathParams;
+  queryParams?: WorkersAiPostRunCfBaaiBgeLargeEnV15QueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfBaaiBgeLargeEnV15 = (
@@ -8053,7 +8069,7 @@ export const workersAiPostRunCfBaaiBgeLargeEnV15 = (
     WorkersAiPostRunCfBaaiBgeLargeEnV15Error,
     WorkersAiPostRunCfBaaiBgeLargeEnV15RequestBody,
     {},
-    {},
+    WorkersAiPostRunCfBaaiBgeLargeEnV15QueryParams,
     WorkersAiPostRunCfBaaiBgeLargeEnV15PathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/baai/bge-large-en-v1.5', method: 'post', ...variables, signal });
 
@@ -8062,6 +8078,13 @@ export type WorkersAiPostRunCfBaaiBgeM3PathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfBaaiBgeM3QueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfBaaiBgeM3Error = Fetcher.ErrorWrapper<undefined>;
@@ -8142,6 +8165,7 @@ export type WorkersAiPostRunCfBaaiBgeM3Variables = {
         truncate_inputs?: boolean;
       };
   pathParams: WorkersAiPostRunCfBaaiBgeM3PathParams;
+  queryParams?: WorkersAiPostRunCfBaaiBgeM3QueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfBaaiBgeM3 = (variables: WorkersAiPostRunCfBaaiBgeM3Variables, signal?: AbortSignal) =>
@@ -8183,7 +8207,7 @@ export const workersAiPostRunCfBaaiBgeM3 = (variables: WorkersAiPostRunCfBaaiBge
         truncate_inputs?: boolean;
       },
     {},
-    {},
+    WorkersAiPostRunCfBaaiBgeM3QueryParams,
     WorkersAiPostRunCfBaaiBgeM3PathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/baai/bge-m3', method: 'post', ...variables, signal });
 
@@ -8192,6 +8216,13 @@ export type WorkersAiPostRunCfBaaiBgeRerankerBasePathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfBaaiBgeRerankerBaseQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfBaaiBgeRerankerBaseError = Fetcher.ErrorWrapper<undefined>;
@@ -8244,6 +8275,7 @@ export type WorkersAiPostRunCfBaaiBgeRerankerBaseRequestBody = {
 export type WorkersAiPostRunCfBaaiBgeRerankerBaseVariables = {
   body: WorkersAiPostRunCfBaaiBgeRerankerBaseRequestBody;
   pathParams: WorkersAiPostRunCfBaaiBgeRerankerBasePathParams;
+  queryParams?: WorkersAiPostRunCfBaaiBgeRerankerBaseQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfBaaiBgeRerankerBase = (
@@ -8255,7 +8287,7 @@ export const workersAiPostRunCfBaaiBgeRerankerBase = (
     WorkersAiPostRunCfBaaiBgeRerankerBaseError,
     WorkersAiPostRunCfBaaiBgeRerankerBaseRequestBody,
     {},
-    {},
+    WorkersAiPostRunCfBaaiBgeRerankerBaseQueryParams,
     WorkersAiPostRunCfBaaiBgeRerankerBasePathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/baai/bge-reranker-base', method: 'post', ...variables, signal });
 
@@ -8264,6 +8296,13 @@ export type WorkersAiPostRunCfBaaiBgeSmallEnV15PathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfBaaiBgeSmallEnV15QueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfBaaiBgeSmallEnV15Error = Fetcher.ErrorWrapper<undefined>;
@@ -8289,6 +8328,7 @@ export type WorkersAiPostRunCfBaaiBgeSmallEnV15RequestBody = {
 export type WorkersAiPostRunCfBaaiBgeSmallEnV15Variables = {
   body: WorkersAiPostRunCfBaaiBgeSmallEnV15RequestBody;
   pathParams: WorkersAiPostRunCfBaaiBgeSmallEnV15PathParams;
+  queryParams?: WorkersAiPostRunCfBaaiBgeSmallEnV15QueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfBaaiBgeSmallEnV15 = (
@@ -8300,7 +8340,7 @@ export const workersAiPostRunCfBaaiBgeSmallEnV15 = (
     WorkersAiPostRunCfBaaiBgeSmallEnV15Error,
     WorkersAiPostRunCfBaaiBgeSmallEnV15RequestBody,
     {},
-    {},
+    WorkersAiPostRunCfBaaiBgeSmallEnV15QueryParams,
     WorkersAiPostRunCfBaaiBgeSmallEnV15PathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/baai/bge-small-en-v1.5', method: 'post', ...variables, signal });
 
@@ -8309,6 +8349,13 @@ export type WorkersAiPostRunCfBlackForestLabsFlux1SchnellPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfBlackForestLabsFlux1SchnellQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfBlackForestLabsFlux1SchnellError = Fetcher.ErrorWrapper<undefined>;
@@ -8346,6 +8393,7 @@ export type WorkersAiPostRunCfBlackForestLabsFlux1SchnellRequestBody = {
 export type WorkersAiPostRunCfBlackForestLabsFlux1SchnellVariables = {
   body: WorkersAiPostRunCfBlackForestLabsFlux1SchnellRequestBody;
   pathParams: WorkersAiPostRunCfBlackForestLabsFlux1SchnellPathParams;
+  queryParams?: WorkersAiPostRunCfBlackForestLabsFlux1SchnellQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfBlackForestLabsFlux1Schnell = (
@@ -8357,7 +8405,7 @@ export const workersAiPostRunCfBlackForestLabsFlux1Schnell = (
     WorkersAiPostRunCfBlackForestLabsFlux1SchnellError,
     WorkersAiPostRunCfBlackForestLabsFlux1SchnellRequestBody,
     {},
-    {},
+    WorkersAiPostRunCfBlackForestLabsFlux1SchnellQueryParams,
     WorkersAiPostRunCfBlackForestLabsFlux1SchnellPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/black-forest-labs/flux-1-schnell', method: 'post', ...variables, signal });
 
@@ -8366,6 +8414,13 @@ export type WorkersAiPostRunCfBytedanceStableDiffusionXlLightningPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfBytedanceStableDiffusionXlLightningQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfBytedanceStableDiffusionXlLightningError = Fetcher.ErrorWrapper<undefined>;
@@ -8435,6 +8490,7 @@ export type WorkersAiPostRunCfBytedanceStableDiffusionXlLightningRequestBody = {
 export type WorkersAiPostRunCfBytedanceStableDiffusionXlLightningVariables = {
   body: WorkersAiPostRunCfBytedanceStableDiffusionXlLightningRequestBody;
   pathParams: WorkersAiPostRunCfBytedanceStableDiffusionXlLightningPathParams;
+  queryParams?: WorkersAiPostRunCfBytedanceStableDiffusionXlLightningQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfBytedanceStableDiffusionXlLightning = (
@@ -8446,7 +8502,7 @@ export const workersAiPostRunCfBytedanceStableDiffusionXlLightning = (
     WorkersAiPostRunCfBytedanceStableDiffusionXlLightningError,
     WorkersAiPostRunCfBytedanceStableDiffusionXlLightningRequestBody,
     {},
-    {},
+    WorkersAiPostRunCfBytedanceStableDiffusionXlLightningQueryParams,
     WorkersAiPostRunCfBytedanceStableDiffusionXlLightningPathParams
   >({
     url: '/accounts/{accountId}/ai/run/@cf/bytedance/stable-diffusion-xl-lightning',
@@ -8460,6 +8516,13 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekMath7bInstructPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfDeepseekAiDeepseekMath7bInstructQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfDeepseekAiDeepseekMath7bInstructError = Fetcher.ErrorWrapper<undefined>;
@@ -8783,6 +8846,7 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekMath7bInstructVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfDeepseekAiDeepseekMath7bInstructPathParams;
+  queryParams?: WorkersAiPostRunCfDeepseekAiDeepseekMath7bInstructQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfDeepseekAiDeepseekMath7bInstruct = (
@@ -9058,7 +9122,7 @@ export const workersAiPostRunCfDeepseekAiDeepseekMath7bInstruct = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfDeepseekAiDeepseekMath7bInstructQueryParams,
     WorkersAiPostRunCfDeepseekAiDeepseekMath7bInstructPathParams
   >({
     url: '/accounts/{accountId}/ai/run/@cf/deepseek-ai/deepseek-math-7b-instruct',
@@ -9072,6 +9136,13 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bError = Fetcher.ErrorWrapper<undefined>;
@@ -9395,6 +9466,7 @@ export type WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bPathParams;
+  queryParams?: WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32b = (
@@ -9670,7 +9742,7 @@ export const workersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32b = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bQueryParams,
     WorkersAiPostRunCfDeepseekAiDeepseekR1DistillQwen32bPathParams
   >({
     url: '/accounts/{accountId}/ai/run/@cf/deepseek-ai/deepseek-r1-distill-qwen-32b',
@@ -9684,6 +9756,13 @@ export type WorkersAiPostRunCfDefogSqlcoder7b2PathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfDefogSqlcoder7b2QueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfDefogSqlcoder7b2Error = Fetcher.ErrorWrapper<undefined>;
@@ -10007,6 +10086,7 @@ export type WorkersAiPostRunCfDefogSqlcoder7b2Variables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfDefogSqlcoder7b2PathParams;
+  queryParams?: WorkersAiPostRunCfDefogSqlcoder7b2QueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfDefogSqlcoder7b2 = (
@@ -10282,7 +10362,7 @@ export const workersAiPostRunCfDefogSqlcoder7b2 = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfDefogSqlcoder7b2QueryParams,
     WorkersAiPostRunCfDefogSqlcoder7b2PathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/defog/sqlcoder-7b-2', method: 'post', ...variables, signal });
 
@@ -10291,6 +10371,13 @@ export type WorkersAiPostRunCfFacebookBartLargeCnnPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfFacebookBartLargeCnnQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfFacebookBartLargeCnnError = Fetcher.ErrorWrapper<undefined>;
@@ -10326,6 +10413,7 @@ export type WorkersAiPostRunCfFacebookBartLargeCnnRequestBody = {
 export type WorkersAiPostRunCfFacebookBartLargeCnnVariables = {
   body: WorkersAiPostRunCfFacebookBartLargeCnnRequestBody;
   pathParams: WorkersAiPostRunCfFacebookBartLargeCnnPathParams;
+  queryParams?: WorkersAiPostRunCfFacebookBartLargeCnnQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfFacebookBartLargeCnn = (
@@ -10337,7 +10425,7 @@ export const workersAiPostRunCfFacebookBartLargeCnn = (
     WorkersAiPostRunCfFacebookBartLargeCnnError,
     WorkersAiPostRunCfFacebookBartLargeCnnRequestBody,
     {},
-    {},
+    WorkersAiPostRunCfFacebookBartLargeCnnQueryParams,
     WorkersAiPostRunCfFacebookBartLargeCnnPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/facebook/bart-large-cnn', method: 'post', ...variables, signal });
 
@@ -10346,6 +10434,13 @@ export type WorkersAiPostRunCfFacebookDetrResnet50PathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfFacebookDetrResnet50QueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfFacebookDetrResnet50Error = Fetcher.ErrorWrapper<undefined>;
@@ -10394,6 +10489,7 @@ export type WorkersAiPostRunCfFacebookDetrResnet50Response = {
 export type WorkersAiPostRunCfFacebookDetrResnet50Variables = {
   body?: Blob;
   pathParams: WorkersAiPostRunCfFacebookDetrResnet50PathParams;
+  queryParams?: WorkersAiPostRunCfFacebookDetrResnet50QueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfFacebookDetrResnet50 = (
@@ -10405,7 +10501,7 @@ export const workersAiPostRunCfFacebookDetrResnet50 = (
     WorkersAiPostRunCfFacebookDetrResnet50Error,
     Blob,
     {},
-    {},
+    WorkersAiPostRunCfFacebookDetrResnet50QueryParams,
     WorkersAiPostRunCfFacebookDetrResnet50PathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/facebook/detr-resnet-50', method: 'post', ...variables, signal });
 
@@ -10414,6 +10510,13 @@ export type WorkersAiPostRunCfFblgitUnaCybertron7bV2Bf16PathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfFblgitUnaCybertron7bV2Bf16QueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfFblgitUnaCybertron7bV2Bf16Error = Fetcher.ErrorWrapper<undefined>;
@@ -10737,6 +10840,7 @@ export type WorkersAiPostRunCfFblgitUnaCybertron7bV2Bf16Variables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfFblgitUnaCybertron7bV2Bf16PathParams;
+  queryParams?: WorkersAiPostRunCfFblgitUnaCybertron7bV2Bf16QueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfFblgitUnaCybertron7bV2Bf16 = (
@@ -11012,7 +11116,7 @@ export const workersAiPostRunCfFblgitUnaCybertron7bV2Bf16 = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfFblgitUnaCybertron7bV2Bf16QueryParams,
     WorkersAiPostRunCfFblgitUnaCybertron7bV2Bf16PathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/fblgit/una-cybertron-7b-v2-bf16', method: 'post', ...variables, signal });
 
@@ -11021,6 +11125,13 @@ export type WorkersAiPostRunCfGoogleGemma2bItLoraPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfGoogleGemma2bItLoraQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfGoogleGemma2bItLoraError = Fetcher.ErrorWrapper<undefined>;
@@ -11344,6 +11455,7 @@ export type WorkersAiPostRunCfGoogleGemma2bItLoraVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfGoogleGemma2bItLoraPathParams;
+  queryParams?: WorkersAiPostRunCfGoogleGemma2bItLoraQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfGoogleGemma2bItLora = (
@@ -11619,7 +11731,7 @@ export const workersAiPostRunCfGoogleGemma2bItLora = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfGoogleGemma2bItLoraQueryParams,
     WorkersAiPostRunCfGoogleGemma2bItLoraPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/google/gemma-2b-it-lora', method: 'post', ...variables, signal });
 
@@ -11628,6 +11740,13 @@ export type WorkersAiPostRunCfGoogleGemma7bItLoraPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfGoogleGemma7bItLoraQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfGoogleGemma7bItLoraError = Fetcher.ErrorWrapper<undefined>;
@@ -11951,6 +12070,7 @@ export type WorkersAiPostRunCfGoogleGemma7bItLoraVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfGoogleGemma7bItLoraPathParams;
+  queryParams?: WorkersAiPostRunCfGoogleGemma7bItLoraQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfGoogleGemma7bItLora = (
@@ -12226,7 +12346,7 @@ export const workersAiPostRunCfGoogleGemma7bItLora = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfGoogleGemma7bItLoraQueryParams,
     WorkersAiPostRunCfGoogleGemma7bItLoraPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/google/gemma-7b-it-lora', method: 'post', ...variables, signal });
 
@@ -12235,6 +12355,13 @@ export type WorkersAiPostRunCfHuggingfaceDistilbertSst2Int8PathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfHuggingfaceDistilbertSst2Int8QueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfHuggingfaceDistilbertSst2Int8Error = Fetcher.ErrorWrapper<undefined>;
@@ -12271,6 +12398,7 @@ export type WorkersAiPostRunCfHuggingfaceDistilbertSst2Int8RequestBody = {
 export type WorkersAiPostRunCfHuggingfaceDistilbertSst2Int8Variables = {
   body: WorkersAiPostRunCfHuggingfaceDistilbertSst2Int8RequestBody;
   pathParams: WorkersAiPostRunCfHuggingfaceDistilbertSst2Int8PathParams;
+  queryParams?: WorkersAiPostRunCfHuggingfaceDistilbertSst2Int8QueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfHuggingfaceDistilbertSst2Int8 = (
@@ -12282,7 +12410,7 @@ export const workersAiPostRunCfHuggingfaceDistilbertSst2Int8 = (
     WorkersAiPostRunCfHuggingfaceDistilbertSst2Int8Error,
     WorkersAiPostRunCfHuggingfaceDistilbertSst2Int8RequestBody,
     {},
-    {},
+    WorkersAiPostRunCfHuggingfaceDistilbertSst2Int8QueryParams,
     WorkersAiPostRunCfHuggingfaceDistilbertSst2Int8PathParams
   >({
     url: '/accounts/{accountId}/ai/run/@cf/huggingface/distilbert-sst-2-int8',
@@ -12296,6 +12424,13 @@ export type WorkersAiPostRunCfLykonDreamshaper8LcmPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfLykonDreamshaper8LcmQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfLykonDreamshaper8LcmError = Fetcher.ErrorWrapper<undefined>;
@@ -12365,6 +12500,7 @@ export type WorkersAiPostRunCfLykonDreamshaper8LcmRequestBody = {
 export type WorkersAiPostRunCfLykonDreamshaper8LcmVariables = {
   body: WorkersAiPostRunCfLykonDreamshaper8LcmRequestBody;
   pathParams: WorkersAiPostRunCfLykonDreamshaper8LcmPathParams;
+  queryParams?: WorkersAiPostRunCfLykonDreamshaper8LcmQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfLykonDreamshaper8Lcm = (
@@ -12376,7 +12512,7 @@ export const workersAiPostRunCfLykonDreamshaper8Lcm = (
     WorkersAiPostRunCfLykonDreamshaper8LcmError,
     WorkersAiPostRunCfLykonDreamshaper8LcmRequestBody,
     {},
-    {},
+    WorkersAiPostRunCfLykonDreamshaper8LcmQueryParams,
     WorkersAiPostRunCfLykonDreamshaper8LcmPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/lykon/dreamshaper-8-lcm', method: 'post', ...variables, signal });
 
@@ -12385,6 +12521,13 @@ export type WorkersAiPostRunCfMetaLlamaLlama27bChatHfLoraPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaLlamaLlama27bChatHfLoraQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMetaLlamaLlama27bChatHfLoraError = Fetcher.ErrorWrapper<undefined>;
@@ -12708,6 +12851,7 @@ export type WorkersAiPostRunCfMetaLlamaLlama27bChatHfLoraVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfMetaLlamaLlama27bChatHfLoraPathParams;
+  queryParams?: WorkersAiPostRunCfMetaLlamaLlama27bChatHfLoraQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMetaLlamaLlama27bChatHfLora = (
@@ -12983,7 +13127,7 @@ export const workersAiPostRunCfMetaLlamaLlama27bChatHfLora = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfMetaLlamaLlama27bChatHfLoraQueryParams,
     WorkersAiPostRunCfMetaLlamaLlama27bChatHfLoraPathParams
   >({
     url: '/accounts/{accountId}/ai/run/@cf/meta-llama/llama-2-7b-chat-hf-lora',
@@ -12997,6 +13141,13 @@ export type WorkersAiPostRunCfMetaLlama27bChatFp16PathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaLlama27bChatFp16QueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMetaLlama27bChatFp16Error = Fetcher.ErrorWrapper<undefined>;
@@ -13320,6 +13471,7 @@ export type WorkersAiPostRunCfMetaLlama27bChatFp16Variables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfMetaLlama27bChatFp16PathParams;
+  queryParams?: WorkersAiPostRunCfMetaLlama27bChatFp16QueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMetaLlama27bChatFp16 = (
@@ -13595,7 +13747,7 @@ export const workersAiPostRunCfMetaLlama27bChatFp16 = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfMetaLlama27bChatFp16QueryParams,
     WorkersAiPostRunCfMetaLlama27bChatFp16PathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/meta/llama-2-7b-chat-fp16', method: 'post', ...variables, signal });
 
@@ -13604,6 +13756,13 @@ export type WorkersAiPostRunCfMetaLlama27bChatInt8PathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaLlama27bChatInt8QueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMetaLlama27bChatInt8Error = Fetcher.ErrorWrapper<undefined>;
@@ -13927,6 +14086,7 @@ export type WorkersAiPostRunCfMetaLlama27bChatInt8Variables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfMetaLlama27bChatInt8PathParams;
+  queryParams?: WorkersAiPostRunCfMetaLlama27bChatInt8QueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMetaLlama27bChatInt8 = (
@@ -14202,7 +14362,7 @@ export const workersAiPostRunCfMetaLlama27bChatInt8 = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfMetaLlama27bChatInt8QueryParams,
     WorkersAiPostRunCfMetaLlama27bChatInt8PathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/meta/llama-2-7b-chat-int8', method: 'post', ...variables, signal });
 
@@ -14211,6 +14371,13 @@ export type WorkersAiPostRunCfMetaLlama38bInstructPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaLlama38bInstructQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMetaLlama38bInstructError = Fetcher.ErrorWrapper<undefined>;
@@ -14534,6 +14701,7 @@ export type WorkersAiPostRunCfMetaLlama38bInstructVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfMetaLlama38bInstructPathParams;
+  queryParams?: WorkersAiPostRunCfMetaLlama38bInstructQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMetaLlama38bInstruct = (
@@ -14809,7 +14977,7 @@ export const workersAiPostRunCfMetaLlama38bInstruct = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfMetaLlama38bInstructQueryParams,
     WorkersAiPostRunCfMetaLlama38bInstructPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/meta/llama-3-8b-instruct', method: 'post', ...variables, signal });
 
@@ -14818,6 +14986,13 @@ export type WorkersAiPostRunCfMetaLlama38bInstructAwqPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaLlama38bInstructAwqQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMetaLlama38bInstructAwqError = Fetcher.ErrorWrapper<undefined>;
@@ -15141,6 +15316,7 @@ export type WorkersAiPostRunCfMetaLlama38bInstructAwqVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfMetaLlama38bInstructAwqPathParams;
+  queryParams?: WorkersAiPostRunCfMetaLlama38bInstructAwqQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMetaLlama38bInstructAwq = (
@@ -15416,7 +15592,7 @@ export const workersAiPostRunCfMetaLlama38bInstructAwq = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfMetaLlama38bInstructAwqQueryParams,
     WorkersAiPostRunCfMetaLlama38bInstructAwqPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/meta/llama-3-8b-instruct-awq', method: 'post', ...variables, signal });
 
@@ -15425,6 +15601,13 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaLlama3170bInstructQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMetaLlama3170bInstructError = Fetcher.ErrorWrapper<undefined>;
@@ -15748,6 +15931,7 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfMetaLlama3170bInstructPathParams;
+  queryParams?: WorkersAiPostRunCfMetaLlama3170bInstructQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMetaLlama3170bInstruct = (
@@ -16023,7 +16207,7 @@ export const workersAiPostRunCfMetaLlama3170bInstruct = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfMetaLlama3170bInstructQueryParams,
     WorkersAiPostRunCfMetaLlama3170bInstructPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/meta/llama-3.1-70b-instruct', method: 'post', ...variables, signal });
 
@@ -16032,6 +16216,13 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructPreviewPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaLlama3170bInstructPreviewQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMetaLlama3170bInstructPreviewError = Fetcher.ErrorWrapper<undefined>;
@@ -16355,6 +16546,7 @@ export type WorkersAiPostRunCfMetaLlama3170bInstructPreviewVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfMetaLlama3170bInstructPreviewPathParams;
+  queryParams?: WorkersAiPostRunCfMetaLlama3170bInstructPreviewQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMetaLlama3170bInstructPreview = (
@@ -16630,7 +16822,7 @@ export const workersAiPostRunCfMetaLlama3170bInstructPreview = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfMetaLlama3170bInstructPreviewQueryParams,
     WorkersAiPostRunCfMetaLlama3170bInstructPreviewPathParams
   >({
     url: '/accounts/{accountId}/ai/run/@cf/meta/llama-3.1-70b-instruct-preview',
@@ -16644,6 +16836,13 @@ export type WorkersAiPostRunCfMetaLlama3170bPreviewPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaLlama3170bPreviewQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMetaLlama3170bPreviewError = Fetcher.ErrorWrapper<undefined>;
@@ -16967,6 +17166,7 @@ export type WorkersAiPostRunCfMetaLlama3170bPreviewVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfMetaLlama3170bPreviewPathParams;
+  queryParams?: WorkersAiPostRunCfMetaLlama3170bPreviewQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMetaLlama3170bPreview = (
@@ -17242,7 +17442,7 @@ export const workersAiPostRunCfMetaLlama3170bPreview = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfMetaLlama3170bPreviewQueryParams,
     WorkersAiPostRunCfMetaLlama3170bPreviewPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/meta/llama-3.1-70b-preview', method: 'post', ...variables, signal });
 
@@ -17251,6 +17451,13 @@ export type WorkersAiPostRunCfMetaLlama318bInstructPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaLlama318bInstructQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMetaLlama318bInstructError = Fetcher.ErrorWrapper<undefined>;
@@ -17574,6 +17781,7 @@ export type WorkersAiPostRunCfMetaLlama318bInstructVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfMetaLlama318bInstructPathParams;
+  queryParams?: WorkersAiPostRunCfMetaLlama318bInstructQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMetaLlama318bInstruct = (
@@ -17849,7 +18057,7 @@ export const workersAiPostRunCfMetaLlama318bInstruct = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfMetaLlama318bInstructQueryParams,
     WorkersAiPostRunCfMetaLlama318bInstructPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/meta/llama-3.1-8b-instruct', method: 'post', ...variables, signal });
 
@@ -17858,6 +18066,13 @@ export type WorkersAiPostRunCfMetaLlama318bInstructAwqPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaLlama318bInstructAwqQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMetaLlama318bInstructAwqError = Fetcher.ErrorWrapper<undefined>;
@@ -18181,6 +18396,7 @@ export type WorkersAiPostRunCfMetaLlama318bInstructAwqVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfMetaLlama318bInstructAwqPathParams;
+  queryParams?: WorkersAiPostRunCfMetaLlama318bInstructAwqQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMetaLlama318bInstructAwq = (
@@ -18456,7 +18672,7 @@ export const workersAiPostRunCfMetaLlama318bInstructAwq = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfMetaLlama318bInstructAwqQueryParams,
     WorkersAiPostRunCfMetaLlama318bInstructAwqPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/meta/llama-3.1-8b-instruct-awq', method: 'post', ...variables, signal });
 
@@ -18465,6 +18681,13 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFastPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaLlama318bInstructFastQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMetaLlama318bInstructFastError = Fetcher.ErrorWrapper<undefined>;
@@ -18788,6 +19011,7 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFastVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfMetaLlama318bInstructFastPathParams;
+  queryParams?: WorkersAiPostRunCfMetaLlama318bInstructFastQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMetaLlama318bInstructFast = (
@@ -19063,7 +19287,7 @@ export const workersAiPostRunCfMetaLlama318bInstructFast = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfMetaLlama318bInstructFastQueryParams,
     WorkersAiPostRunCfMetaLlama318bInstructFastPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/meta/llama-3.1-8b-instruct-fast', method: 'post', ...variables, signal });
 
@@ -19072,6 +19296,13 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFp8PathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaLlama318bInstructFp8QueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMetaLlama318bInstructFp8Error = Fetcher.ErrorWrapper<undefined>;
@@ -19395,6 +19626,7 @@ export type WorkersAiPostRunCfMetaLlama318bInstructFp8Variables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfMetaLlama318bInstructFp8PathParams;
+  queryParams?: WorkersAiPostRunCfMetaLlama318bInstructFp8QueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMetaLlama318bInstructFp8 = (
@@ -19670,7 +19902,7 @@ export const workersAiPostRunCfMetaLlama318bInstructFp8 = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfMetaLlama318bInstructFp8QueryParams,
     WorkersAiPostRunCfMetaLlama318bInstructFp8PathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/meta/llama-3.1-8b-instruct-fp8', method: 'post', ...variables, signal });
 
@@ -19679,6 +19911,13 @@ export type WorkersAiPostRunCfMetaLlama318bPreviewPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaLlama318bPreviewQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMetaLlama318bPreviewError = Fetcher.ErrorWrapper<undefined>;
@@ -20002,6 +20241,7 @@ export type WorkersAiPostRunCfMetaLlama318bPreviewVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfMetaLlama318bPreviewPathParams;
+  queryParams?: WorkersAiPostRunCfMetaLlama318bPreviewQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMetaLlama318bPreview = (
@@ -20277,7 +20517,7 @@ export const workersAiPostRunCfMetaLlama318bPreview = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfMetaLlama318bPreviewQueryParams,
     WorkersAiPostRunCfMetaLlama318bPreviewPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/meta/llama-3.1-8b-preview', method: 'post', ...variables, signal });
 
@@ -20286,6 +20526,13 @@ export type WorkersAiPostRunCfMetaLlama3211bVisionInstructPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaLlama3211bVisionInstructQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMetaLlama3211bVisionInstructError = Fetcher.ErrorWrapper<undefined>;
@@ -20577,6 +20824,7 @@ export type WorkersAiPostRunCfMetaLlama3211bVisionInstructVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfMetaLlama3211bVisionInstructPathParams;
+  queryParams?: WorkersAiPostRunCfMetaLlama3211bVisionInstructQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMetaLlama3211bVisionInstruct = (
@@ -20843,7 +21091,7 @@ export const workersAiPostRunCfMetaLlama3211bVisionInstruct = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfMetaLlama3211bVisionInstructQueryParams,
     WorkersAiPostRunCfMetaLlama3211bVisionInstructPathParams
   >({
     url: '/accounts/{accountId}/ai/run/@cf/meta/llama-3.2-11b-vision-instruct',
@@ -20857,6 +21105,13 @@ export type WorkersAiPostRunCfMetaLlama321bInstructPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaLlama321bInstructQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMetaLlama321bInstructError = Fetcher.ErrorWrapper<undefined>;
@@ -21180,6 +21435,7 @@ export type WorkersAiPostRunCfMetaLlama321bInstructVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfMetaLlama321bInstructPathParams;
+  queryParams?: WorkersAiPostRunCfMetaLlama321bInstructQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMetaLlama321bInstruct = (
@@ -21455,7 +21711,7 @@ export const workersAiPostRunCfMetaLlama321bInstruct = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfMetaLlama321bInstructQueryParams,
     WorkersAiPostRunCfMetaLlama321bInstructPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/meta/llama-3.2-1b-instruct', method: 'post', ...variables, signal });
 
@@ -21464,6 +21720,13 @@ export type WorkersAiPostRunCfMetaLlama323bInstructPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaLlama323bInstructQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMetaLlama323bInstructError = Fetcher.ErrorWrapper<undefined>;
@@ -21787,6 +22050,7 @@ export type WorkersAiPostRunCfMetaLlama323bInstructVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfMetaLlama323bInstructPathParams;
+  queryParams?: WorkersAiPostRunCfMetaLlama323bInstructQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMetaLlama323bInstruct = (
@@ -22062,7 +22326,7 @@ export const workersAiPostRunCfMetaLlama323bInstruct = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfMetaLlama323bInstructQueryParams,
     WorkersAiPostRunCfMetaLlama323bInstructPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/meta/llama-3.2-3b-instruct', method: 'post', ...variables, signal });
 
@@ -22071,6 +22335,13 @@ export type WorkersAiPostRunCfMetaLlama3370bInstructFp8FastPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaLlama3370bInstructFp8FastQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMetaLlama3370bInstructFp8FastError = Fetcher.ErrorWrapper<undefined>;
@@ -22394,6 +22665,7 @@ export type WorkersAiPostRunCfMetaLlama3370bInstructFp8FastVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfMetaLlama3370bInstructFp8FastPathParams;
+  queryParams?: WorkersAiPostRunCfMetaLlama3370bInstructFp8FastQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMetaLlama3370bInstructFp8Fast = (
@@ -22669,7 +22941,7 @@ export const workersAiPostRunCfMetaLlama3370bInstructFp8Fast = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfMetaLlama3370bInstructFp8FastQueryParams,
     WorkersAiPostRunCfMetaLlama3370bInstructFp8FastPathParams
   >({
     url: '/accounts/{accountId}/ai/run/@cf/meta/llama-3.3-70b-instruct-fp8-fast',
@@ -22683,6 +22955,13 @@ export type WorkersAiPostRunCfMetaLlamaGuard38bPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaLlamaGuard38bQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMetaLlamaGuard38bError = Fetcher.ErrorWrapper<undefined>;
@@ -22773,6 +23052,7 @@ export type WorkersAiPostRunCfMetaLlamaGuard38bRequestBody = {
 export type WorkersAiPostRunCfMetaLlamaGuard38bVariables = {
   body: WorkersAiPostRunCfMetaLlamaGuard38bRequestBody;
   pathParams: WorkersAiPostRunCfMetaLlamaGuard38bPathParams;
+  queryParams?: WorkersAiPostRunCfMetaLlamaGuard38bQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMetaLlamaGuard38b = (
@@ -22784,7 +23064,7 @@ export const workersAiPostRunCfMetaLlamaGuard38b = (
     WorkersAiPostRunCfMetaLlamaGuard38bError,
     WorkersAiPostRunCfMetaLlamaGuard38bRequestBody,
     {},
-    {},
+    WorkersAiPostRunCfMetaLlamaGuard38bQueryParams,
     WorkersAiPostRunCfMetaLlamaGuard38bPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/meta/llama-guard-3-8b', method: 'post', ...variables, signal });
 
@@ -22793,6 +23073,13 @@ export type WorkersAiPostRunCfMetaM2m10012bPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaM2m10012bQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMetaM2m10012bError = Fetcher.ErrorWrapper<undefined>;
@@ -22832,6 +23119,7 @@ export type WorkersAiPostRunCfMetaM2m10012bRequestBody = {
 export type WorkersAiPostRunCfMetaM2m10012bVariables = {
   body: WorkersAiPostRunCfMetaM2m10012bRequestBody;
   pathParams: WorkersAiPostRunCfMetaM2m10012bPathParams;
+  queryParams?: WorkersAiPostRunCfMetaM2m10012bQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMetaM2m10012b = (
@@ -22843,7 +23131,7 @@ export const workersAiPostRunCfMetaM2m10012b = (
     WorkersAiPostRunCfMetaM2m10012bError,
     WorkersAiPostRunCfMetaM2m10012bRequestBody,
     {},
-    {},
+    WorkersAiPostRunCfMetaM2m10012bQueryParams,
     WorkersAiPostRunCfMetaM2m10012bPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/meta/m2m100-1.2b', method: 'post', ...variables, signal });
 
@@ -22852,6 +23140,13 @@ export type WorkersAiPostRunCfMicrosoftPhi2PathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMicrosoftPhi2QueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMicrosoftPhi2Error = Fetcher.ErrorWrapper<undefined>;
@@ -23175,6 +23470,7 @@ export type WorkersAiPostRunCfMicrosoftPhi2Variables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfMicrosoftPhi2PathParams;
+  queryParams?: WorkersAiPostRunCfMicrosoftPhi2QueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMicrosoftPhi2 = (
@@ -23450,7 +23746,7 @@ export const workersAiPostRunCfMicrosoftPhi2 = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfMicrosoftPhi2QueryParams,
     WorkersAiPostRunCfMicrosoftPhi2PathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/microsoft/phi-2', method: 'post', ...variables, signal });
 
@@ -23459,6 +23755,13 @@ export type WorkersAiPostRunCfMicrosoftResnet50PathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMicrosoftResnet50QueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMicrosoftResnet50Error = Fetcher.ErrorWrapper<undefined>;
@@ -23483,6 +23786,7 @@ export type WorkersAiPostRunCfMicrosoftResnet50Response = {
 export type WorkersAiPostRunCfMicrosoftResnet50Variables = {
   body?: Blob;
   pathParams: WorkersAiPostRunCfMicrosoftResnet50PathParams;
+  queryParams?: WorkersAiPostRunCfMicrosoftResnet50QueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMicrosoftResnet50 = (
@@ -23494,7 +23798,7 @@ export const workersAiPostRunCfMicrosoftResnet50 = (
     WorkersAiPostRunCfMicrosoftResnet50Error,
     Blob,
     {},
-    {},
+    WorkersAiPostRunCfMicrosoftResnet50QueryParams,
     WorkersAiPostRunCfMicrosoftResnet50PathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/microsoft/resnet-50', method: 'post', ...variables, signal });
 
@@ -23503,6 +23807,13 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV01PathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMistralMistral7bInstructV01QueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMistralMistral7bInstructV01Error = Fetcher.ErrorWrapper<undefined>;
@@ -23826,6 +24137,7 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV01Variables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfMistralMistral7bInstructV01PathParams;
+  queryParams?: WorkersAiPostRunCfMistralMistral7bInstructV01QueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMistralMistral7bInstructV01 = (
@@ -24101,7 +24413,7 @@ export const workersAiPostRunCfMistralMistral7bInstructV01 = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfMistralMistral7bInstructV01QueryParams,
     WorkersAiPostRunCfMistralMistral7bInstructV01PathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/mistral/mistral-7b-instruct-v0.1', method: 'post', ...variables, signal });
 
@@ -24110,6 +24422,13 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV02LoraPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMistralMistral7bInstructV02LoraQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMistralMistral7bInstructV02LoraError = Fetcher.ErrorWrapper<undefined>;
@@ -24433,6 +24752,7 @@ export type WorkersAiPostRunCfMistralMistral7bInstructV02LoraVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfMistralMistral7bInstructV02LoraPathParams;
+  queryParams?: WorkersAiPostRunCfMistralMistral7bInstructV02LoraQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMistralMistral7bInstructV02Lora = (
@@ -24708,7 +25028,7 @@ export const workersAiPostRunCfMistralMistral7bInstructV02Lora = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfMistralMistral7bInstructV02LoraQueryParams,
     WorkersAiPostRunCfMistralMistral7bInstructV02LoraPathParams
   >({
     url: '/accounts/{accountId}/ai/run/@cf/mistral/mistral-7b-instruct-v0.2-lora',
@@ -24722,6 +25042,13 @@ export type WorkersAiPostRunCfMyshellAiMelottsPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfMyshellAiMelottsQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfMyshellAiMelottsError = Fetcher.ErrorWrapper<undefined>;
@@ -24759,6 +25086,7 @@ export type WorkersAiPostRunCfMyshellAiMelottsRequestBody = {
 export type WorkersAiPostRunCfMyshellAiMelottsVariables = {
   body: WorkersAiPostRunCfMyshellAiMelottsRequestBody;
   pathParams: WorkersAiPostRunCfMyshellAiMelottsPathParams;
+  queryParams?: WorkersAiPostRunCfMyshellAiMelottsQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfMyshellAiMelotts = (
@@ -24770,7 +25098,7 @@ export const workersAiPostRunCfMyshellAiMelotts = (
     WorkersAiPostRunCfMyshellAiMelottsError,
     WorkersAiPostRunCfMyshellAiMelottsRequestBody,
     {},
-    {},
+    WorkersAiPostRunCfMyshellAiMelottsQueryParams,
     WorkersAiPostRunCfMyshellAiMelottsPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/myshell-ai/melotts', method: 'post', ...variables, signal });
 
@@ -24779,6 +25107,13 @@ export type WorkersAiPostRunCfOpenaiWhisperPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfOpenaiWhisperQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfOpenaiWhisperError = Fetcher.ErrorWrapper<undefined>;
@@ -24812,6 +25147,7 @@ export type WorkersAiPostRunCfOpenaiWhisperResponse = {
 export type WorkersAiPostRunCfOpenaiWhisperVariables = {
   body?: Blob;
   pathParams: WorkersAiPostRunCfOpenaiWhisperPathParams;
+  queryParams?: WorkersAiPostRunCfOpenaiWhisperQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfOpenaiWhisper = (
@@ -24823,7 +25159,7 @@ export const workersAiPostRunCfOpenaiWhisper = (
     WorkersAiPostRunCfOpenaiWhisperError,
     Blob,
     {},
-    {},
+    WorkersAiPostRunCfOpenaiWhisperQueryParams,
     WorkersAiPostRunCfOpenaiWhisperPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/openai/whisper', method: 'post', ...variables, signal });
 
@@ -24832,6 +25168,13 @@ export type WorkersAiPostRunCfOpenaiWhisperLargeV3TurboPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfOpenaiWhisperLargeV3TurboQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfOpenaiWhisperLargeV3TurboError = Fetcher.ErrorWrapper<undefined>;
@@ -24955,6 +25298,7 @@ export type WorkersAiPostRunCfOpenaiWhisperLargeV3TurboRequestBody = {
 export type WorkersAiPostRunCfOpenaiWhisperLargeV3TurboVariables = {
   body: WorkersAiPostRunCfOpenaiWhisperLargeV3TurboRequestBody;
   pathParams: WorkersAiPostRunCfOpenaiWhisperLargeV3TurboPathParams;
+  queryParams?: WorkersAiPostRunCfOpenaiWhisperLargeV3TurboQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfOpenaiWhisperLargeV3Turbo = (
@@ -24966,7 +25310,7 @@ export const workersAiPostRunCfOpenaiWhisperLargeV3Turbo = (
     WorkersAiPostRunCfOpenaiWhisperLargeV3TurboError,
     WorkersAiPostRunCfOpenaiWhisperLargeV3TurboRequestBody,
     {},
-    {},
+    WorkersAiPostRunCfOpenaiWhisperLargeV3TurboQueryParams,
     WorkersAiPostRunCfOpenaiWhisperLargeV3TurboPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/openai/whisper-large-v3-turbo', method: 'post', ...variables, signal });
 
@@ -24975,6 +25319,13 @@ export type WorkersAiPostRunCfOpenaiWhisperTinyEnPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfOpenaiWhisperTinyEnQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfOpenaiWhisperTinyEnError = Fetcher.ErrorWrapper<undefined>;
@@ -25008,6 +25359,7 @@ export type WorkersAiPostRunCfOpenaiWhisperTinyEnResponse = {
 export type WorkersAiPostRunCfOpenaiWhisperTinyEnVariables = {
   body?: Blob;
   pathParams: WorkersAiPostRunCfOpenaiWhisperTinyEnPathParams;
+  queryParams?: WorkersAiPostRunCfOpenaiWhisperTinyEnQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfOpenaiWhisperTinyEn = (
@@ -25019,7 +25371,7 @@ export const workersAiPostRunCfOpenaiWhisperTinyEn = (
     WorkersAiPostRunCfOpenaiWhisperTinyEnError,
     Blob,
     {},
-    {},
+    WorkersAiPostRunCfOpenaiWhisperTinyEnQueryParams,
     WorkersAiPostRunCfOpenaiWhisperTinyEnPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/openai/whisper-tiny-en', method: 'post', ...variables, signal });
 
@@ -25028,6 +25380,13 @@ export type WorkersAiPostRunCfOpenchatOpenchat350106PathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfOpenchatOpenchat350106QueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfOpenchatOpenchat350106Error = Fetcher.ErrorWrapper<undefined>;
@@ -25351,6 +25710,7 @@ export type WorkersAiPostRunCfOpenchatOpenchat350106Variables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfOpenchatOpenchat350106PathParams;
+  queryParams?: WorkersAiPostRunCfOpenchatOpenchat350106QueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfOpenchatOpenchat350106 = (
@@ -25626,7 +25986,7 @@ export const workersAiPostRunCfOpenchatOpenchat350106 = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfOpenchatOpenchat350106QueryParams,
     WorkersAiPostRunCfOpenchatOpenchat350106PathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/openchat/openchat-3.5-0106', method: 'post', ...variables, signal });
 
@@ -25635,6 +25995,13 @@ export type WorkersAiPostRunCfQwenQwen1505bChatPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfQwenQwen1505bChatQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfQwenQwen1505bChatError = Fetcher.ErrorWrapper<undefined>;
@@ -25958,6 +26325,7 @@ export type WorkersAiPostRunCfQwenQwen1505bChatVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfQwenQwen1505bChatPathParams;
+  queryParams?: WorkersAiPostRunCfQwenQwen1505bChatQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfQwenQwen1505bChat = (
@@ -26233,7 +26601,7 @@ export const workersAiPostRunCfQwenQwen1505bChat = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfQwenQwen1505bChatQueryParams,
     WorkersAiPostRunCfQwenQwen1505bChatPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/qwen/qwen1.5-0.5b-chat', method: 'post', ...variables, signal });
 
@@ -26242,6 +26610,13 @@ export type WorkersAiPostRunCfQwenQwen1518bChatPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfQwenQwen1518bChatQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfQwenQwen1518bChatError = Fetcher.ErrorWrapper<undefined>;
@@ -26565,6 +26940,7 @@ export type WorkersAiPostRunCfQwenQwen1518bChatVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfQwenQwen1518bChatPathParams;
+  queryParams?: WorkersAiPostRunCfQwenQwen1518bChatQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfQwenQwen1518bChat = (
@@ -26840,7 +27216,7 @@ export const workersAiPostRunCfQwenQwen1518bChat = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfQwenQwen1518bChatQueryParams,
     WorkersAiPostRunCfQwenQwen1518bChatPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/qwen/qwen1.5-1.8b-chat', method: 'post', ...variables, signal });
 
@@ -26849,6 +27225,13 @@ export type WorkersAiPostRunCfQwenQwen1514bChatAwqPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfQwenQwen1514bChatAwqQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfQwenQwen1514bChatAwqError = Fetcher.ErrorWrapper<undefined>;
@@ -27172,6 +27555,7 @@ export type WorkersAiPostRunCfQwenQwen1514bChatAwqVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfQwenQwen1514bChatAwqPathParams;
+  queryParams?: WorkersAiPostRunCfQwenQwen1514bChatAwqQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfQwenQwen1514bChatAwq = (
@@ -27447,7 +27831,7 @@ export const workersAiPostRunCfQwenQwen1514bChatAwq = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfQwenQwen1514bChatAwqQueryParams,
     WorkersAiPostRunCfQwenQwen1514bChatAwqPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/qwen/qwen1.5-14b-chat-awq', method: 'post', ...variables, signal });
 
@@ -27456,6 +27840,13 @@ export type WorkersAiPostRunCfQwenQwen157bChatAwqPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfQwenQwen157bChatAwqQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfQwenQwen157bChatAwqError = Fetcher.ErrorWrapper<undefined>;
@@ -27779,6 +28170,7 @@ export type WorkersAiPostRunCfQwenQwen157bChatAwqVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfQwenQwen157bChatAwqPathParams;
+  queryParams?: WorkersAiPostRunCfQwenQwen157bChatAwqQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfQwenQwen157bChatAwq = (
@@ -28054,7 +28446,7 @@ export const workersAiPostRunCfQwenQwen157bChatAwq = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfQwenQwen157bChatAwqQueryParams,
     WorkersAiPostRunCfQwenQwen157bChatAwqPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/qwen/qwen1.5-7b-chat-awq', method: 'post', ...variables, signal });
 
@@ -28063,6 +28455,13 @@ export type WorkersAiPostRunCfRunwaymlStableDiffusionV15Img2imgPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfRunwaymlStableDiffusionV15Img2imgQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfRunwaymlStableDiffusionV15Img2imgError = Fetcher.ErrorWrapper<undefined>;
@@ -28132,6 +28531,7 @@ export type WorkersAiPostRunCfRunwaymlStableDiffusionV15Img2imgRequestBody = {
 export type WorkersAiPostRunCfRunwaymlStableDiffusionV15Img2imgVariables = {
   body: WorkersAiPostRunCfRunwaymlStableDiffusionV15Img2imgRequestBody;
   pathParams: WorkersAiPostRunCfRunwaymlStableDiffusionV15Img2imgPathParams;
+  queryParams?: WorkersAiPostRunCfRunwaymlStableDiffusionV15Img2imgQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfRunwaymlStableDiffusionV15Img2img = (
@@ -28143,7 +28543,7 @@ export const workersAiPostRunCfRunwaymlStableDiffusionV15Img2img = (
     WorkersAiPostRunCfRunwaymlStableDiffusionV15Img2imgError,
     WorkersAiPostRunCfRunwaymlStableDiffusionV15Img2imgRequestBody,
     {},
-    {},
+    WorkersAiPostRunCfRunwaymlStableDiffusionV15Img2imgQueryParams,
     WorkersAiPostRunCfRunwaymlStableDiffusionV15Img2imgPathParams
   >({
     url: '/accounts/{accountId}/ai/run/@cf/runwayml/stable-diffusion-v1-5-img2img',
@@ -28157,6 +28557,13 @@ export type WorkersAiPostRunCfRunwaymlStableDiffusionV15InpaintingPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfRunwaymlStableDiffusionV15InpaintingQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfRunwaymlStableDiffusionV15InpaintingError = Fetcher.ErrorWrapper<undefined>;
@@ -28226,6 +28633,7 @@ export type WorkersAiPostRunCfRunwaymlStableDiffusionV15InpaintingRequestBody = 
 export type WorkersAiPostRunCfRunwaymlStableDiffusionV15InpaintingVariables = {
   body: WorkersAiPostRunCfRunwaymlStableDiffusionV15InpaintingRequestBody;
   pathParams: WorkersAiPostRunCfRunwaymlStableDiffusionV15InpaintingPathParams;
+  queryParams?: WorkersAiPostRunCfRunwaymlStableDiffusionV15InpaintingQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfRunwaymlStableDiffusionV15Inpainting = (
@@ -28237,7 +28645,7 @@ export const workersAiPostRunCfRunwaymlStableDiffusionV15Inpainting = (
     WorkersAiPostRunCfRunwaymlStableDiffusionV15InpaintingError,
     WorkersAiPostRunCfRunwaymlStableDiffusionV15InpaintingRequestBody,
     {},
-    {},
+    WorkersAiPostRunCfRunwaymlStableDiffusionV15InpaintingQueryParams,
     WorkersAiPostRunCfRunwaymlStableDiffusionV15InpaintingPathParams
   >({
     url: '/accounts/{accountId}/ai/run/@cf/runwayml/stable-diffusion-v1-5-inpainting',
@@ -28251,6 +28659,13 @@ export type WorkersAiPostRunCfStabilityaiStableDiffusionXlBase10PathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfStabilityaiStableDiffusionXlBase10QueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfStabilityaiStableDiffusionXlBase10Error = Fetcher.ErrorWrapper<undefined>;
@@ -28320,6 +28735,7 @@ export type WorkersAiPostRunCfStabilityaiStableDiffusionXlBase10RequestBody = {
 export type WorkersAiPostRunCfStabilityaiStableDiffusionXlBase10Variables = {
   body: WorkersAiPostRunCfStabilityaiStableDiffusionXlBase10RequestBody;
   pathParams: WorkersAiPostRunCfStabilityaiStableDiffusionXlBase10PathParams;
+  queryParams?: WorkersAiPostRunCfStabilityaiStableDiffusionXlBase10QueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfStabilityaiStableDiffusionXlBase10 = (
@@ -28331,7 +28747,7 @@ export const workersAiPostRunCfStabilityaiStableDiffusionXlBase10 = (
     WorkersAiPostRunCfStabilityaiStableDiffusionXlBase10Error,
     WorkersAiPostRunCfStabilityaiStableDiffusionXlBase10RequestBody,
     {},
-    {},
+    WorkersAiPostRunCfStabilityaiStableDiffusionXlBase10QueryParams,
     WorkersAiPostRunCfStabilityaiStableDiffusionXlBase10PathParams
   >({
     url: '/accounts/{accountId}/ai/run/@cf/stabilityai/stable-diffusion-xl-base-1.0',
@@ -28345,6 +28761,13 @@ export type WorkersAiPostRunCfTheblokeDiscolmGerman7bV1AwqPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfTheblokeDiscolmGerman7bV1AwqQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfTheblokeDiscolmGerman7bV1AwqError = Fetcher.ErrorWrapper<undefined>;
@@ -28668,6 +29091,7 @@ export type WorkersAiPostRunCfTheblokeDiscolmGerman7bV1AwqVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfTheblokeDiscolmGerman7bV1AwqPathParams;
+  queryParams?: WorkersAiPostRunCfTheblokeDiscolmGerman7bV1AwqQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfTheblokeDiscolmGerman7bV1Awq = (
@@ -28943,7 +29367,7 @@ export const workersAiPostRunCfTheblokeDiscolmGerman7bV1Awq = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfTheblokeDiscolmGerman7bV1AwqQueryParams,
     WorkersAiPostRunCfTheblokeDiscolmGerman7bV1AwqPathParams
   >({
     url: '/accounts/{accountId}/ai/run/@cf/thebloke/discolm-german-7b-v1-awq',
@@ -28957,6 +29381,13 @@ export type WorkersAiPostRunCfTiiuaeFalcon7bInstructPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfTiiuaeFalcon7bInstructQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfTiiuaeFalcon7bInstructError = Fetcher.ErrorWrapper<undefined>;
@@ -29280,6 +29711,7 @@ export type WorkersAiPostRunCfTiiuaeFalcon7bInstructVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfTiiuaeFalcon7bInstructPathParams;
+  queryParams?: WorkersAiPostRunCfTiiuaeFalcon7bInstructQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfTiiuaeFalcon7bInstruct = (
@@ -29555,7 +29987,7 @@ export const workersAiPostRunCfTiiuaeFalcon7bInstruct = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfTiiuaeFalcon7bInstructQueryParams,
     WorkersAiPostRunCfTiiuaeFalcon7bInstructPathParams
   >({ url: '/accounts/{accountId}/ai/run/@cf/tiiuae/falcon-7b-instruct', method: 'post', ...variables, signal });
 
@@ -29564,6 +29996,13 @@ export type WorkersAiPostRunCfTinyllamaTinyllama11bChatV10PathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunCfTinyllamaTinyllama11bChatV10QueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunCfTinyllamaTinyllama11bChatV10Error = Fetcher.ErrorWrapper<undefined>;
@@ -29887,6 +30326,7 @@ export type WorkersAiPostRunCfTinyllamaTinyllama11bChatV10Variables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunCfTinyllamaTinyllama11bChatV10PathParams;
+  queryParams?: WorkersAiPostRunCfTinyllamaTinyllama11bChatV10QueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunCfTinyllamaTinyllama11bChatV10 = (
@@ -30162,7 +30602,7 @@ export const workersAiPostRunCfTinyllamaTinyllama11bChatV10 = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunCfTinyllamaTinyllama11bChatV10QueryParams,
     WorkersAiPostRunCfTinyllamaTinyllama11bChatV10PathParams
   >({
     url: '/accounts/{accountId}/ai/run/@cf/tinyllama/tinyllama-1.1b-chat-v1.0',
@@ -30176,6 +30616,13 @@ export type WorkersAiPostRunHfGoogleGemma7bItPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunHfGoogleGemma7bItQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunHfGoogleGemma7bItError = Fetcher.ErrorWrapper<undefined>;
@@ -30499,6 +30946,7 @@ export type WorkersAiPostRunHfGoogleGemma7bItVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunHfGoogleGemma7bItPathParams;
+  queryParams?: WorkersAiPostRunHfGoogleGemma7bItQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunHfGoogleGemma7bIt = (
@@ -30774,7 +31222,7 @@ export const workersAiPostRunHfGoogleGemma7bIt = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunHfGoogleGemma7bItQueryParams,
     WorkersAiPostRunHfGoogleGemma7bItPathParams
   >({ url: '/accounts/{accountId}/ai/run/@hf/google/gemma-7b-it', method: 'post', ...variables, signal });
 
@@ -30783,6 +31231,13 @@ export type WorkersAiPostRunHfMetaLlamaMetaLlama38bInstructPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunHfMetaLlamaMetaLlama38bInstructQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunHfMetaLlamaMetaLlama38bInstructError = Fetcher.ErrorWrapper<undefined>;
@@ -31106,6 +31561,7 @@ export type WorkersAiPostRunHfMetaLlamaMetaLlama38bInstructVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunHfMetaLlamaMetaLlama38bInstructPathParams;
+  queryParams?: WorkersAiPostRunHfMetaLlamaMetaLlama38bInstructQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunHfMetaLlamaMetaLlama38bInstruct = (
@@ -31381,7 +31837,7 @@ export const workersAiPostRunHfMetaLlamaMetaLlama38bInstruct = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunHfMetaLlamaMetaLlama38bInstructQueryParams,
     WorkersAiPostRunHfMetaLlamaMetaLlama38bInstructPathParams
   >({
     url: '/accounts/{accountId}/ai/run/@hf/meta-llama/meta-llama-3-8b-instruct',
@@ -31395,6 +31851,13 @@ export type WorkersAiPostRunHfMistralMistral7bInstructV02PathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunHfMistralMistral7bInstructV02QueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunHfMistralMistral7bInstructV02Error = Fetcher.ErrorWrapper<undefined>;
@@ -31718,6 +32181,7 @@ export type WorkersAiPostRunHfMistralMistral7bInstructV02Variables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunHfMistralMistral7bInstructV02PathParams;
+  queryParams?: WorkersAiPostRunHfMistralMistral7bInstructV02QueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunHfMistralMistral7bInstructV02 = (
@@ -31993,7 +32457,7 @@ export const workersAiPostRunHfMistralMistral7bInstructV02 = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunHfMistralMistral7bInstructV02QueryParams,
     WorkersAiPostRunHfMistralMistral7bInstructV02PathParams
   >({ url: '/accounts/{accountId}/ai/run/@hf/mistral/mistral-7b-instruct-v0.2', method: 'post', ...variables, signal });
 
@@ -32002,6 +32466,13 @@ export type WorkersAiPostRunHfMistralaiMistral7bInstructV02PathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunHfMistralaiMistral7bInstructV02QueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunHfMistralaiMistral7bInstructV02Error = Fetcher.ErrorWrapper<undefined>;
@@ -32325,6 +32796,7 @@ export type WorkersAiPostRunHfMistralaiMistral7bInstructV02Variables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunHfMistralaiMistral7bInstructV02PathParams;
+  queryParams?: WorkersAiPostRunHfMistralaiMistral7bInstructV02QueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunHfMistralaiMistral7bInstructV02 = (
@@ -32600,7 +33072,7 @@ export const workersAiPostRunHfMistralaiMistral7bInstructV02 = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunHfMistralaiMistral7bInstructV02QueryParams,
     WorkersAiPostRunHfMistralaiMistral7bInstructV02PathParams
   >({
     url: '/accounts/{accountId}/ai/run/@hf/mistralai/mistral-7b-instruct-v0.2',
@@ -32614,6 +33086,13 @@ export type WorkersAiPostRunHfNexusflowStarlingLm7bBetaPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunHfNexusflowStarlingLm7bBetaQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunHfNexusflowStarlingLm7bBetaError = Fetcher.ErrorWrapper<undefined>;
@@ -32937,6 +33416,7 @@ export type WorkersAiPostRunHfNexusflowStarlingLm7bBetaVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunHfNexusflowStarlingLm7bBetaPathParams;
+  queryParams?: WorkersAiPostRunHfNexusflowStarlingLm7bBetaQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunHfNexusflowStarlingLm7bBeta = (
@@ -33212,7 +33692,7 @@ export const workersAiPostRunHfNexusflowStarlingLm7bBeta = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunHfNexusflowStarlingLm7bBetaQueryParams,
     WorkersAiPostRunHfNexusflowStarlingLm7bBetaPathParams
   >({ url: '/accounts/{accountId}/ai/run/@hf/nexusflow/starling-lm-7b-beta', method: 'post', ...variables, signal });
 
@@ -33221,6 +33701,13 @@ export type WorkersAiPostRunHfNousresearchHermes2ProMistral7bPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunHfNousresearchHermes2ProMistral7bQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunHfNousresearchHermes2ProMistral7bError = Fetcher.ErrorWrapper<undefined>;
@@ -33544,6 +34031,7 @@ export type WorkersAiPostRunHfNousresearchHermes2ProMistral7bVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunHfNousresearchHermes2ProMistral7bPathParams;
+  queryParams?: WorkersAiPostRunHfNousresearchHermes2ProMistral7bQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunHfNousresearchHermes2ProMistral7b = (
@@ -33819,7 +34307,7 @@ export const workersAiPostRunHfNousresearchHermes2ProMistral7b = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunHfNousresearchHermes2ProMistral7bQueryParams,
     WorkersAiPostRunHfNousresearchHermes2ProMistral7bPathParams
   >({
     url: '/accounts/{accountId}/ai/run/@hf/nousresearch/hermes-2-pro-mistral-7b',
@@ -33833,6 +34321,13 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bBaseAwqPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunHfTheblokeDeepseekCoder67bBaseAwqQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunHfTheblokeDeepseekCoder67bBaseAwqError = Fetcher.ErrorWrapper<undefined>;
@@ -34156,6 +34651,7 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bBaseAwqVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunHfTheblokeDeepseekCoder67bBaseAwqPathParams;
+  queryParams?: WorkersAiPostRunHfTheblokeDeepseekCoder67bBaseAwqQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunHfTheblokeDeepseekCoder67bBaseAwq = (
@@ -34431,7 +34927,7 @@ export const workersAiPostRunHfTheblokeDeepseekCoder67bBaseAwq = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunHfTheblokeDeepseekCoder67bBaseAwqQueryParams,
     WorkersAiPostRunHfTheblokeDeepseekCoder67bBaseAwqPathParams
   >({
     url: '/accounts/{accountId}/ai/run/@hf/thebloke/deepseek-coder-6.7b-base-awq',
@@ -34445,6 +34941,13 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bInstructAwqPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunHfTheblokeDeepseekCoder67bInstructAwqQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunHfTheblokeDeepseekCoder67bInstructAwqError = Fetcher.ErrorWrapper<undefined>;
@@ -34768,6 +35271,7 @@ export type WorkersAiPostRunHfTheblokeDeepseekCoder67bInstructAwqVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunHfTheblokeDeepseekCoder67bInstructAwqPathParams;
+  queryParams?: WorkersAiPostRunHfTheblokeDeepseekCoder67bInstructAwqQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunHfTheblokeDeepseekCoder67bInstructAwq = (
@@ -35043,7 +35547,7 @@ export const workersAiPostRunHfTheblokeDeepseekCoder67bInstructAwq = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunHfTheblokeDeepseekCoder67bInstructAwqQueryParams,
     WorkersAiPostRunHfTheblokeDeepseekCoder67bInstructAwqPathParams
   >({
     url: '/accounts/{accountId}/ai/run/@hf/thebloke/deepseek-coder-6.7b-instruct-awq',
@@ -35057,6 +35561,13 @@ export type WorkersAiPostRunHfTheblokeLlama213bChatAwqPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunHfTheblokeLlama213bChatAwqQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunHfTheblokeLlama213bChatAwqError = Fetcher.ErrorWrapper<undefined>;
@@ -35380,6 +35891,7 @@ export type WorkersAiPostRunHfTheblokeLlama213bChatAwqVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunHfTheblokeLlama213bChatAwqPathParams;
+  queryParams?: WorkersAiPostRunHfTheblokeLlama213bChatAwqQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunHfTheblokeLlama213bChatAwq = (
@@ -35655,7 +36167,7 @@ export const workersAiPostRunHfTheblokeLlama213bChatAwq = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunHfTheblokeLlama213bChatAwqQueryParams,
     WorkersAiPostRunHfTheblokeLlama213bChatAwqPathParams
   >({ url: '/accounts/{accountId}/ai/run/@hf/thebloke/llama-2-13b-chat-awq', method: 'post', ...variables, signal });
 
@@ -35664,6 +36176,13 @@ export type WorkersAiPostRunHfTheblokeLlamaguard7bAwqPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunHfTheblokeLlamaguard7bAwqQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunHfTheblokeLlamaguard7bAwqError = Fetcher.ErrorWrapper<undefined>;
@@ -35987,6 +36506,7 @@ export type WorkersAiPostRunHfTheblokeLlamaguard7bAwqVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunHfTheblokeLlamaguard7bAwqPathParams;
+  queryParams?: WorkersAiPostRunHfTheblokeLlamaguard7bAwqQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunHfTheblokeLlamaguard7bAwq = (
@@ -36262,7 +36782,7 @@ export const workersAiPostRunHfTheblokeLlamaguard7bAwq = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunHfTheblokeLlamaguard7bAwqQueryParams,
     WorkersAiPostRunHfTheblokeLlamaguard7bAwqPathParams
   >({ url: '/accounts/{accountId}/ai/run/@hf/thebloke/llamaguard-7b-awq', method: 'post', ...variables, signal });
 
@@ -36271,6 +36791,13 @@ export type WorkersAiPostRunHfTheblokeMistral7bInstructV01AwqPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunHfTheblokeMistral7bInstructV01AwqQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunHfTheblokeMistral7bInstructV01AwqError = Fetcher.ErrorWrapper<undefined>;
@@ -36594,6 +37121,7 @@ export type WorkersAiPostRunHfTheblokeMistral7bInstructV01AwqVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunHfTheblokeMistral7bInstructV01AwqPathParams;
+  queryParams?: WorkersAiPostRunHfTheblokeMistral7bInstructV01AwqQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunHfTheblokeMistral7bInstructV01Awq = (
@@ -36869,7 +37397,7 @@ export const workersAiPostRunHfTheblokeMistral7bInstructV01Awq = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunHfTheblokeMistral7bInstructV01AwqQueryParams,
     WorkersAiPostRunHfTheblokeMistral7bInstructV01AwqPathParams
   >({
     url: '/accounts/{accountId}/ai/run/@hf/thebloke/mistral-7b-instruct-v0.1-awq',
@@ -36883,6 +37411,13 @@ export type WorkersAiPostRunHfTheblokeNeuralChat7bV31AwqPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunHfTheblokeNeuralChat7bV31AwqQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunHfTheblokeNeuralChat7bV31AwqError = Fetcher.ErrorWrapper<undefined>;
@@ -37206,6 +37741,7 @@ export type WorkersAiPostRunHfTheblokeNeuralChat7bV31AwqVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunHfTheblokeNeuralChat7bV31AwqPathParams;
+  queryParams?: WorkersAiPostRunHfTheblokeNeuralChat7bV31AwqQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunHfTheblokeNeuralChat7bV31Awq = (
@@ -37481,7 +38017,7 @@ export const workersAiPostRunHfTheblokeNeuralChat7bV31Awq = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunHfTheblokeNeuralChat7bV31AwqQueryParams,
     WorkersAiPostRunHfTheblokeNeuralChat7bV31AwqPathParams
   >({ url: '/accounts/{accountId}/ai/run/@hf/thebloke/neural-chat-7b-v3-1-awq', method: 'post', ...variables, signal });
 
@@ -37490,6 +38026,13 @@ export type WorkersAiPostRunHfTheblokeOpenhermes25Mistral7bAwqPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunHfTheblokeOpenhermes25Mistral7bAwqQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunHfTheblokeOpenhermes25Mistral7bAwqError = Fetcher.ErrorWrapper<undefined>;
@@ -37813,6 +38356,7 @@ export type WorkersAiPostRunHfTheblokeOpenhermes25Mistral7bAwqVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunHfTheblokeOpenhermes25Mistral7bAwqPathParams;
+  queryParams?: WorkersAiPostRunHfTheblokeOpenhermes25Mistral7bAwqQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunHfTheblokeOpenhermes25Mistral7bAwq = (
@@ -38088,7 +38632,7 @@ export const workersAiPostRunHfTheblokeOpenhermes25Mistral7bAwq = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunHfTheblokeOpenhermes25Mistral7bAwqQueryParams,
     WorkersAiPostRunHfTheblokeOpenhermes25Mistral7bAwqPathParams
   >({
     url: '/accounts/{accountId}/ai/run/@hf/thebloke/openhermes-2.5-mistral-7b-awq',
@@ -38102,6 +38646,13 @@ export type WorkersAiPostRunHfTheblokeZephyr7bBetaAwqPathParams = {
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    */
   accountId: string;
+};
+
+export type WorkersAiPostRunHfTheblokeZephyr7bBetaAwqQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
 };
 
 export type WorkersAiPostRunHfTheblokeZephyr7bBetaAwqError = Fetcher.ErrorWrapper<undefined>;
@@ -38425,6 +38976,7 @@ export type WorkersAiPostRunHfTheblokeZephyr7bBetaAwqVariables = {
         top_p?: number;
       };
   pathParams: WorkersAiPostRunHfTheblokeZephyr7bBetaAwqPathParams;
+  queryParams?: WorkersAiPostRunHfTheblokeZephyr7bBetaAwqQueryParams;
 } & FetcherExtraProps;
 
 export const workersAiPostRunHfTheblokeZephyr7bBetaAwq = (
@@ -38700,7 +39252,7 @@ export const workersAiPostRunHfTheblokeZephyr7bBetaAwq = (
         top_p?: number;
       },
     {},
-    {},
+    WorkersAiPostRunHfTheblokeZephyr7bBetaAwqQueryParams,
     WorkersAiPostRunHfTheblokeZephyr7bBetaAwqPathParams
   >({ url: '/accounts/{accountId}/ai/run/@hf/thebloke/zephyr-7b-beta-awq', method: 'post', ...variables, signal });
 
@@ -41181,6 +41733,7 @@ export type BrapiPostContentRequestBody = {
   authenticate?: {
     /**
      * @minLength 1
+     * @x-sensitive true
      */
     password: string;
     /**
@@ -41332,6 +41885,856 @@ export const brapiPostContent = (variables: BrapiPostContentVariables, signal?: 
     BrapiPostContentPathParams
   >({ url: '/accounts/{accountId}/browser-rendering/content', method: 'post', ...variables, signal });
 
+export type BrapiPostJsonPathParams = {
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type BrapiPostJsonQueryParams = {
+  /**
+   * Cache TTL default is 5s. Set to 0 to disable.
+   *
+   * @default 5
+   * @maximum 86400
+   */
+  cacheTTL?: number;
+};
+
+export type BrapiPostJsonError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+  | {
+      status: 500;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+>;
+
+export type BrapiPostJsonResponse = {
+  errors?: {
+    /**
+     * Error code
+     */
+    code: number;
+    /**
+     * Error Message
+     */
+    message: string;
+  }[];
+  result: {
+    [key: string]: Record<string, any> | null;
+  };
+  /**
+   * Response status
+   */
+  status: boolean;
+};
+
+export type BrapiPostJsonRequestBody = {
+  /**
+   * Adds a `<script>` tag into the page with the desired URL or content.
+   */
+  addScriptTag?: {
+    content?: string;
+    id?: string;
+    type?: string;
+    url?: string;
+  }[];
+  /**
+   * Adds a `<link rel="stylesheet">` tag into the page with the desired URL or a `<style type="text/css">` tag with the content.
+   */
+  addStyleTag?: {
+    content?: string;
+    url?: string;
+  }[];
+  /**
+   * Only allow requests that match the provided regex patterns, eg. '/^.*\.(css)'.
+   */
+  allowRequestPattern?: string[];
+  /**
+   * Only allow requests that match the provided resource types, eg. 'image' or 'script'.
+   */
+  allowResourceTypes?: (
+    | 'document'
+    | 'stylesheet'
+    | 'image'
+    | 'media'
+    | 'font'
+    | 'script'
+    | 'texttrack'
+    | 'xhr'
+    | 'fetch'
+    | 'prefetch'
+    | 'eventsource'
+    | 'websocket'
+    | 'manifest'
+    | 'signedexchange'
+    | 'ping'
+    | 'cspviolationreport'
+    | 'preflight'
+    | 'other'
+  )[];
+  /**
+   * Provide credentials for HTTP authentication.
+   */
+  authenticate?: {
+    /**
+     * @minLength 1
+     * @x-sensitive true
+     */
+    password: string;
+    /**
+     * @minLength 1
+     */
+    username: string;
+  };
+  /**
+   * Attempt to proceed when 'awaited' events fail or timeout.
+   */
+  bestAttempt?: boolean;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.page.setcookie).
+   */
+  cookies?: {
+    domain?: string;
+    expires?: number;
+    httpOnly?: boolean;
+    name: string;
+    partitionKey?: string;
+    path?: string;
+    priority?: 'Low' | 'Medium' | 'High';
+    sameParty?: boolean;
+    sameSite?: 'Strict' | 'Lax' | 'None';
+    secure?: boolean;
+    sourcePort?: number;
+    sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
+    url?: string;
+    value: string;
+  }[];
+  emulateMediaType?: string;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.gotooptions).
+   *
+   * @default {}
+   */
+  gotoOptions?: {
+    referer?: string;
+    referrerPolicy?: string;
+    /**
+     * @default 30000
+     * @maximum 60000
+     */
+    timeout?: number;
+    /**
+     * @default domcontentloaded
+     */
+    waitUntil?:
+      | 'load'
+      | 'domcontentloaded'
+      | 'networkidle0'
+      | 'networkidle2'
+      | ('load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2')[];
+  };
+  /**
+   * Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either `html` or `url` must be set.
+   *
+   * @minLength 1
+   */
+  html?: string;
+  prompt?: string;
+  /**
+   * Block undesired requests that match the provided regex patterns, eg. '/^.*\.(css)'.
+   */
+  rejectRequestPattern?: string[];
+  /**
+   * Block undesired requests that match the provided resource types, eg. 'image' or 'script'.
+   */
+  rejectResourceTypes?: (
+    | 'document'
+    | 'stylesheet'
+    | 'image'
+    | 'media'
+    | 'font'
+    | 'script'
+    | 'texttrack'
+    | 'xhr'
+    | 'fetch'
+    | 'prefetch'
+    | 'eventsource'
+    | 'websocket'
+    | 'manifest'
+    | 'signedexchange'
+    | 'ping'
+    | 'cspviolationreport'
+    | 'preflight'
+    | 'other'
+  )[];
+  response_format?: {
+    /**
+     * Schema for the response format. More information here: https://developers.cloudflare.com/workers-ai/json-mode/
+     */
+    schema?: {
+      [key: string]: Record<string, any> | null;
+    };
+    type: string;
+  };
+  setExtraHTTPHeaders?: {
+    [key: string]: string;
+  };
+  setJavaScriptEnabled?: boolean;
+  /**
+   * URL to navigate to, eg. `https://example.com`.
+   *
+   * @format uri
+   */
+  url?: string;
+  /**
+   * @default Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36
+   */
+  userAgent?: string;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
+   */
+  viewport?: {
+    deviceScaleFactor?: number;
+    hasTouch?: boolean;
+    height: number;
+    isLandscape?: boolean;
+    isMobile?: boolean;
+    width: number;
+  };
+  /**
+   * Wait for the selector to appear in page. Check [options](https://pptr.dev/api/puppeteer.page.waitforselector).
+   */
+  waitForSelector?: {
+    hidden?: true;
+    selector: string;
+    /**
+     * @maximum 60000
+     */
+    timeout?: number;
+    visible?: true;
+  };
+  /**
+   * Waits for a specified timeout before continuing.
+   *
+   * @maximum 60000
+   */
+  waitForTimeout?: number;
+};
+
+export type BrapiPostJsonVariables = {
+  body?: BrapiPostJsonRequestBody;
+  pathParams: BrapiPostJsonPathParams;
+  queryParams?: BrapiPostJsonQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Gets json from a webpage from a provided URL or HTML. Pass `prompt` or `schema` in the body. Control page loading with `gotoOptions` and `waitFor*` options.
+ */
+export const brapiPostJson = (variables: BrapiPostJsonVariables, signal?: AbortSignal) =>
+  fetch<
+    BrapiPostJsonResponse,
+    BrapiPostJsonError,
+    BrapiPostJsonRequestBody,
+    {},
+    BrapiPostJsonQueryParams,
+    BrapiPostJsonPathParams
+  >({ url: '/accounts/{accountId}/browser-rendering/json', method: 'post', ...variables, signal });
+
+export type BrapiPostLinksPathParams = {
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type BrapiPostLinksQueryParams = {
+  /**
+   * Cache TTL default is 5s. Set to 0 to disable.
+   *
+   * @default 5
+   * @maximum 86400
+   */
+  cacheTTL?: number;
+};
+
+export type BrapiPostLinksError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+  | {
+      status: 500;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+>;
+
+export type BrapiPostLinksResponse = {
+  errors?: {
+    /**
+     * Error code
+     */
+    code: number;
+    /**
+     * Error Message
+     */
+    message: string;
+  }[];
+  result: string[];
+  /**
+   * Response status
+   */
+  status: boolean;
+};
+
+export type BrapiPostLinksRequestBody = {
+  /**
+   * Adds a `<script>` tag into the page with the desired URL or content.
+   */
+  addScriptTag?: {
+    content?: string;
+    id?: string;
+    type?: string;
+    url?: string;
+  }[];
+  /**
+   * Adds a `<link rel="stylesheet">` tag into the page with the desired URL or a `<style type="text/css">` tag with the content.
+   */
+  addStyleTag?: {
+    content?: string;
+    url?: string;
+  }[];
+  /**
+   * Only allow requests that match the provided regex patterns, eg. '/^.*\.(css)'.
+   */
+  allowRequestPattern?: string[];
+  /**
+   * Only allow requests that match the provided resource types, eg. 'image' or 'script'.
+   */
+  allowResourceTypes?: (
+    | 'document'
+    | 'stylesheet'
+    | 'image'
+    | 'media'
+    | 'font'
+    | 'script'
+    | 'texttrack'
+    | 'xhr'
+    | 'fetch'
+    | 'prefetch'
+    | 'eventsource'
+    | 'websocket'
+    | 'manifest'
+    | 'signedexchange'
+    | 'ping'
+    | 'cspviolationreport'
+    | 'preflight'
+    | 'other'
+  )[];
+  /**
+   * Provide credentials for HTTP authentication.
+   */
+  authenticate?: {
+    /**
+     * @minLength 1
+     * @x-sensitive true
+     */
+    password: string;
+    /**
+     * @minLength 1
+     */
+    username: string;
+  };
+  /**
+   * Attempt to proceed when 'awaited' events fail or timeout.
+   */
+  bestAttempt?: boolean;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.page.setcookie).
+   */
+  cookies?: {
+    domain?: string;
+    expires?: number;
+    httpOnly?: boolean;
+    name: string;
+    partitionKey?: string;
+    path?: string;
+    priority?: 'Low' | 'Medium' | 'High';
+    sameParty?: boolean;
+    sameSite?: 'Strict' | 'Lax' | 'None';
+    secure?: boolean;
+    sourcePort?: number;
+    sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
+    url?: string;
+    value: string;
+  }[];
+  emulateMediaType?: string;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.gotooptions).
+   *
+   * @default {}
+   */
+  gotoOptions?: {
+    referer?: string;
+    referrerPolicy?: string;
+    /**
+     * @default 30000
+     * @maximum 60000
+     */
+    timeout?: number;
+    /**
+     * @default domcontentloaded
+     */
+    waitUntil?:
+      | 'load'
+      | 'domcontentloaded'
+      | 'networkidle0'
+      | 'networkidle2'
+      | ('load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2')[];
+  };
+  /**
+   * Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either `html` or `url` must be set.
+   *
+   * @minLength 1
+   */
+  html?: string;
+  /**
+   * Block undesired requests that match the provided regex patterns, eg. '/^.*\.(css)'.
+   */
+  rejectRequestPattern?: string[];
+  /**
+   * Block undesired requests that match the provided resource types, eg. 'image' or 'script'.
+   */
+  rejectResourceTypes?: (
+    | 'document'
+    | 'stylesheet'
+    | 'image'
+    | 'media'
+    | 'font'
+    | 'script'
+    | 'texttrack'
+    | 'xhr'
+    | 'fetch'
+    | 'prefetch'
+    | 'eventsource'
+    | 'websocket'
+    | 'manifest'
+    | 'signedexchange'
+    | 'ping'
+    | 'cspviolationreport'
+    | 'preflight'
+    | 'other'
+  )[];
+  setExtraHTTPHeaders?: {
+    [key: string]: string;
+  };
+  setJavaScriptEnabled?: boolean;
+  /**
+   * URL to navigate to, eg. `https://example.com`.
+   *
+   * @format uri
+   */
+  url?: string;
+  /**
+   * @default Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36
+   */
+  userAgent?: string;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
+   */
+  viewport?: {
+    deviceScaleFactor?: number;
+    hasTouch?: boolean;
+    height: number;
+    isLandscape?: boolean;
+    isMobile?: boolean;
+    width: number;
+  };
+  visibleLinksOnly?: boolean;
+  /**
+   * Wait for the selector to appear in page. Check [options](https://pptr.dev/api/puppeteer.page.waitforselector).
+   */
+  waitForSelector?: {
+    hidden?: true;
+    selector: string;
+    /**
+     * @maximum 60000
+     */
+    timeout?: number;
+    visible?: true;
+  };
+  /**
+   * Waits for a specified timeout before continuing.
+   *
+   * @maximum 60000
+   */
+  waitForTimeout?: number;
+};
+
+export type BrapiPostLinksVariables = {
+  body?: BrapiPostLinksRequestBody;
+  pathParams: BrapiPostLinksPathParams;
+  queryParams?: BrapiPostLinksQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Get links from a web page.
+ */
+export const brapiPostLinks = (variables: BrapiPostLinksVariables, signal?: AbortSignal) =>
+  fetch<
+    BrapiPostLinksResponse,
+    BrapiPostLinksError,
+    BrapiPostLinksRequestBody,
+    {},
+    BrapiPostLinksQueryParams,
+    BrapiPostLinksPathParams
+  >({ url: '/accounts/{accountId}/browser-rendering/links', method: 'post', ...variables, signal });
+
+export type BrapiPostMarkdownPathParams = {
+  /**
+   * Account ID.
+   */
+  accountId: string;
+};
+
+export type BrapiPostMarkdownQueryParams = {
+  /**
+   * Cache TTL default is 5s. Set to 0 to disable.
+   *
+   * @default 5
+   * @maximum 86400
+   */
+  cacheTTL?: number;
+};
+
+export type BrapiPostMarkdownError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+  | {
+      status: 500;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+>;
+
+export type BrapiPostMarkdownResponse = {
+  errors?: {
+    /**
+     * Error code
+     */
+    code: number;
+    /**
+     * Error Message
+     */
+    message: string;
+  }[];
+  /**
+   * Markdown
+   */
+  result?: string;
+  /**
+   * Response status
+   */
+  status: boolean;
+};
+
+export type BrapiPostMarkdownRequestBody = {
+  /**
+   * Adds a `<script>` tag into the page with the desired URL or content.
+   */
+  addScriptTag?: {
+    content?: string;
+    id?: string;
+    type?: string;
+    url?: string;
+  }[];
+  /**
+   * Adds a `<link rel="stylesheet">` tag into the page with the desired URL or a `<style type="text/css">` tag with the content.
+   */
+  addStyleTag?: {
+    content?: string;
+    url?: string;
+  }[];
+  /**
+   * Only allow requests that match the provided regex patterns, eg. '/^.*\.(css)'.
+   */
+  allowRequestPattern?: string[];
+  /**
+   * Only allow requests that match the provided resource types, eg. 'image' or 'script'.
+   */
+  allowResourceTypes?: (
+    | 'document'
+    | 'stylesheet'
+    | 'image'
+    | 'media'
+    | 'font'
+    | 'script'
+    | 'texttrack'
+    | 'xhr'
+    | 'fetch'
+    | 'prefetch'
+    | 'eventsource'
+    | 'websocket'
+    | 'manifest'
+    | 'signedexchange'
+    | 'ping'
+    | 'cspviolationreport'
+    | 'preflight'
+    | 'other'
+  )[];
+  /**
+   * Provide credentials for HTTP authentication.
+   */
+  authenticate?: {
+    /**
+     * @minLength 1
+     * @x-sensitive true
+     */
+    password: string;
+    /**
+     * @minLength 1
+     */
+    username: string;
+  };
+  /**
+   * Attempt to proceed when 'awaited' events fail or timeout.
+   */
+  bestAttempt?: boolean;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.page.setcookie).
+   */
+  cookies?: {
+    domain?: string;
+    expires?: number;
+    httpOnly?: boolean;
+    name: string;
+    partitionKey?: string;
+    path?: string;
+    priority?: 'Low' | 'Medium' | 'High';
+    sameParty?: boolean;
+    sameSite?: 'Strict' | 'Lax' | 'None';
+    secure?: boolean;
+    sourcePort?: number;
+    sourceScheme?: 'Unset' | 'NonSecure' | 'Secure';
+    url?: string;
+    value: string;
+  }[];
+  emulateMediaType?: string;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.gotooptions).
+   *
+   * @default {}
+   */
+  gotoOptions?: {
+    referer?: string;
+    referrerPolicy?: string;
+    /**
+     * @default 30000
+     * @maximum 60000
+     */
+    timeout?: number;
+    /**
+     * @default domcontentloaded
+     */
+    waitUntil?:
+      | 'load'
+      | 'domcontentloaded'
+      | 'networkidle0'
+      | 'networkidle2'
+      | ('load' | 'domcontentloaded' | 'networkidle0' | 'networkidle2')[];
+  };
+  /**
+   * Set the content of the page, eg: `<h1>Hello World!!</h1>`. Either `html` or `url` must be set.
+   *
+   * @minLength 1
+   */
+  html?: string;
+  /**
+   * Block undesired requests that match the provided regex patterns, eg. '/^.*\.(css)'.
+   */
+  rejectRequestPattern?: string[];
+  /**
+   * Block undesired requests that match the provided resource types, eg. 'image' or 'script'.
+   */
+  rejectResourceTypes?: (
+    | 'document'
+    | 'stylesheet'
+    | 'image'
+    | 'media'
+    | 'font'
+    | 'script'
+    | 'texttrack'
+    | 'xhr'
+    | 'fetch'
+    | 'prefetch'
+    | 'eventsource'
+    | 'websocket'
+    | 'manifest'
+    | 'signedexchange'
+    | 'ping'
+    | 'cspviolationreport'
+    | 'preflight'
+    | 'other'
+  )[];
+  setExtraHTTPHeaders?: {
+    [key: string]: string;
+  };
+  setJavaScriptEnabled?: boolean;
+  /**
+   * URL to navigate to, eg. `https://example.com`.
+   *
+   * @format uri
+   */
+  url?: string;
+  /**
+   * @default Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36
+   */
+  userAgent?: string;
+  /**
+   * Check [options](https://pptr.dev/api/puppeteer.page.setviewport).
+   */
+  viewport?: {
+    deviceScaleFactor?: number;
+    hasTouch?: boolean;
+    height: number;
+    isLandscape?: boolean;
+    isMobile?: boolean;
+    width: number;
+  };
+  /**
+   * Wait for the selector to appear in page. Check [options](https://pptr.dev/api/puppeteer.page.waitforselector).
+   */
+  waitForSelector?: {
+    hidden?: true;
+    selector: string;
+    /**
+     * @maximum 60000
+     */
+    timeout?: number;
+    visible?: true;
+  };
+  /**
+   * Waits for a specified timeout before continuing.
+   *
+   * @maximum 60000
+   */
+  waitForTimeout?: number;
+};
+
+export type BrapiPostMarkdownVariables = {
+  body?: BrapiPostMarkdownRequestBody;
+  pathParams: BrapiPostMarkdownPathParams;
+  queryParams?: BrapiPostMarkdownQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Gets markdown of a webpage from provided URL or HTML. Control page loading with `gotoOptions` and `waitFor*` options.
+ */
+export const brapiPostMarkdown = (variables: BrapiPostMarkdownVariables, signal?: AbortSignal) =>
+  fetch<
+    BrapiPostMarkdownResponse,
+    BrapiPostMarkdownError,
+    BrapiPostMarkdownRequestBody,
+    {},
+    BrapiPostMarkdownQueryParams,
+    BrapiPostMarkdownPathParams
+  >({ url: '/accounts/{accountId}/browser-rendering/markdown', method: 'post', ...variables, signal });
+
 export type BrapiPostPdfPathParams = {
   /**
    * Account ID.
@@ -41440,6 +42843,7 @@ export type BrapiPostPdfRequestBody = {
   authenticate?: {
     /**
      * @minLength 1
+     * @x-sensitive true
      */
     password: string;
     /**
@@ -41756,6 +43160,7 @@ export type BrapiPostScrapeRequestBody = {
   authenticate?: {
     /**
      * @minLength 1
+     * @x-sensitive true
      */
     password: string;
     /**
@@ -42038,6 +43443,7 @@ export type BrapiPostScreenshotRequestBody = {
   authenticate?: {
     /**
      * @minLength 1
+     * @x-sensitive true
      */
     password: string;
     /**
@@ -42354,6 +43760,7 @@ export type BrapiPostSnapshotRequestBody = {
   authenticate?: {
     /**
      * @minLength 1
+     * @x-sensitive true
      */
     password: string;
     /**
@@ -136022,7 +137429,16 @@ export const operationsByTag = {
   },
   phishingURLScanner: { phishingUrlScannerSubmitSuspiciousUrlForScanning },
   phishingURLInformation: { phishingUrlInformationGetResultsForAUrlScan },
-  brapi: { brapiPostContent, brapiPostPdf, brapiPostScrape, brapiPostScreenshot, brapiPostSnapshot },
+  brapi: {
+    brapiPostContent,
+    brapiPostJson,
+    brapiPostLinks,
+    brapiPostMarkdown,
+    brapiPostPdf,
+    brapiPostScrape,
+    brapiPostScreenshot,
+    brapiPostSnapshot
+  },
   callsApps: {
     callsAppsList,
     callsAppsCreateANewApp,
