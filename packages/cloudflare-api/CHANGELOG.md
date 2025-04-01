@@ -1,5 +1,16 @@
 # cloudflare-api-js
 
+## 0.11.0
+
+### Minor Changes
+
+- c59d758: Add new optional 'pooling' field to WorkersAiPostRunCfBaaiBgeM3Response
+- 593c6de: Add ZeroTrustGatewayAccountLogOptions type for gateway account logging
+
+### Patch Changes
+
+- 6ed62b6: Add 'x-auditable' attribute to multiple types
+
 ## 0.10.1
 
 ### Patch Changes
