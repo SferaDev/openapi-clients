@@ -39133,6 +39133,7 @@ export type RumZoneTag = string;
 
 /**
  * @example 01a7362d577a6c3019a474fd6f485823
+ * @x-auditable true
  */
 export type SecondaryDnsAccountIdentifier = string;
 
@@ -39146,6 +39147,7 @@ export type SecondaryDnsAcl = {
  * The name of the acl.
  *
  * @example my-acl-1
+ * @x-auditable true
  */
 export type SecondaryDnsAclComponentsSchemasName = string;
 
@@ -39153,6 +39155,7 @@ export type SecondaryDnsAclComponentsSchemasName = string;
  * TSIG algorithm.
  *
  * @example hmac-sha512.
+ * @x-auditable true
  */
 export type SecondaryDnsAlgo = string;
 
@@ -39194,6 +39197,7 @@ export type SecondaryDnsApiResponseSingle = SecondaryDnsApiResponseCommon;
  * Not applicable for primary zones.
  *
  * @example 86400
+ * @x-auditable true
  */
 export type SecondaryDnsAutoRefreshSeconds = number;
 
@@ -39205,6 +39209,7 @@ export type SecondaryDnsComponentsSchemasIdResponse = SecondaryDnsApiResponseSin
 
 /**
  * @example 23ff594956f20c2a721606e94745a8aa
+ * @x-auditable true
  */
 export type SecondaryDnsComponentsSchemasIdentifier = string;
 
@@ -39212,6 +39217,7 @@ export type SecondaryDnsComponentsSchemasIdentifier = string;
  * The name of the peer.
  *
  * @example my-peer-1
+ * @x-auditable true
  */
 export type SecondaryDnsComponentsSchemasName = string;
 
@@ -39231,6 +39237,7 @@ export type SecondaryDnsDisableTransferResponse = SecondaryDnsApiResponseSingle 
  * The zone transfer status of a primary zone
  *
  * @example Disabled
+ * @x-auditable true
  */
 export type SecondaryDnsDisableTransferResult = string;
 
@@ -39249,6 +39256,7 @@ export type SecondaryDnsEnableTransferResponse = SecondaryDnsApiResponseSingle &
  * The zone transfer status of a primary zone
  *
  * @example Enabled
+ * @x-auditable true
  */
 export type SecondaryDnsEnableTransferResult = string;
 
@@ -39260,6 +39268,7 @@ export type SecondaryDnsForceResponse = SecondaryDnsApiResponseSingle & {
  * When force_axfr query parameter is set to true, the response is a simple string
  *
  * @example OK
+ * @x-auditable true
  */
 export type SecondaryDnsForceResult = string;
 
@@ -39271,6 +39280,7 @@ export type SecondaryDnsIdResponse = SecondaryDnsApiResponseSingle & {
 
 /**
  * @example 269d8f4853475ca241c4e730be286b20
+ * @x-auditable true
  */
 export type SecondaryDnsIdentifier = string;
 
@@ -39278,6 +39288,7 @@ export type SecondaryDnsIdentifier = string;
  * IPv4/IPv6 address of primary or secondary nameserver, depending on what zone this peer is linked to. For primary zones this IP defines the IP of the secondary nameserver Cloudflare will NOTIFY upon zone changes. For secondary zones this IP defines the IP of the primary nameserver Cloudflare will send AXFR/IXFR requests to.
  *
  * @example 192.0.2.53
+ * @x-auditable true
  */
 export type SecondaryDnsIp = string;
 
@@ -39285,6 +39296,7 @@ export type SecondaryDnsIp = string;
  * Allowed IPv4/IPv6 address range of primary or secondary nameservers. This will be applied for the entire account. The IP range is used to allow additional NOTIFY IPs for secondary zones and IPs Cloudflare allows AXFR/IXFR requests from for primary zones. CIDRs are limited to a maximum of /24 for IPv4 and /64 for IPv6 respectively.
  *
  * @example 192.0.2.53/28
+ * @x-auditable true
  */
 export type SecondaryDnsIpRange = string;
 
@@ -39292,6 +39304,7 @@ export type SecondaryDnsIpRange = string;
  * Enable IXFR transfer protocol, default is AXFR. Only applicable to secondary zones.
  *
  * @example false
+ * @x-auditable true
  */
 export type SecondaryDnsIxfrEnable = boolean;
 
@@ -39307,6 +39320,7 @@ export type SecondaryDnsMessages = {
  * Zone name.
  *
  * @example www.example.com.
+ * @x-auditable true
  */
 export type SecondaryDnsName = string;
 
@@ -39331,6 +39345,7 @@ export type SecondaryDnsPeers = SecondaryDnsIdentifier[];
  * DNS port of primary or secondary nameserver, depending on what zone this peer is linked to.
  *
  * @example 53
+ * @x-auditable true
  */
 export type SecondaryDnsPort = number;
 
@@ -39373,6 +39388,7 @@ export type SecondaryDnsSchemasForceResponse = SecondaryDnsApiResponseSingle & {
  * When force_notify query parameter is set to true, the response is a simple string
  *
  * @example OK
+ * @x-auditable true
  */
 export type SecondaryDnsSchemasForceResult = string;
 
@@ -39384,6 +39400,7 @@ export type SecondaryDnsSchemasIdResponse = SecondaryDnsApiResponseSingle & {
 
 /**
  * @example 69cd1e104af3e6ed3cb344f263fd0d5a
+ * @x-auditable true
  */
 export type SecondaryDnsSchemasIdentifier = string;
 
@@ -39391,6 +39408,7 @@ export type SecondaryDnsSchemasIdentifier = string;
  * TSIG key name.
  *
  * @example tsig.customer.cf.
+ * @x-auditable true
  */
 export type SecondaryDnsSchemasName = string;
 
@@ -39406,6 +39424,7 @@ export type SecondaryDnsSchemasSingleResponse = SecondaryDnsApiResponseSingle & 
  * TSIG secret.
  *
  * @example caf79a7804b04337c9c66ccd7bef9190a1e1679b5dd03d8aa10f7ad45e1a9dab92b417896c15d4d007c7c14194538d2a5d0feffdecc5a7f0e1c570cfa700837c
+ * @x-sensitive true
  */
 export type SecondaryDnsSecret = string;
 
@@ -39448,6 +39467,7 @@ export type SecondaryDnsSingleResponseOutgoing = SecondaryDnsApiResponseSingle &
  * The serial number of the SOA for the given zone.
  *
  * @example 2019102400
+ * @x-auditable true
  */
 export type SecondaryDnsSoaSerial = number;
 
@@ -39455,6 +39475,7 @@ export type SecondaryDnsSoaSerial = number;
  * The time for a specific event.
  *
  * @example 2019-10-24T17:09:42.883908+01:00
+ * @x-auditable true
  */
 export type SecondaryDnsTime = string;
 
@@ -39469,6 +39490,7 @@ export type SecondaryDnsTsig = {
  * TSIG authentication will be used for zone transfer if configured.
  *
  * @example 69cd1e104af3e6ed3cb344f263fd0d5a
+ * @x-auditable true
  */
 export type SecondaryDnsTsigId = string;
 
