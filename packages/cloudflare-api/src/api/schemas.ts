@@ -47999,6 +47999,7 @@ export type WaitingroomAdditionalRoutes = {
    * The hostname to which this waiting room will be applied (no wildcards). The hostname must be the primary domain, subdomain, or custom hostname (if using SSL for SaaS) of this zone. Please do not include the scheme (http:// or https://).
    *
    * @example shop2.example.com
+   * @x-auditable true
    */
   host?: string;
   /**
@@ -48006,6 +48007,7 @@ export type WaitingroomAdditionalRoutes = {
    *
    * @default /
    * @example /shop2/checkout
+   * @x-auditable true
    */
   path?: string;
 }[];
@@ -48045,6 +48047,7 @@ export type WaitingroomCookieAttributes = {
    *
    * @default auto
    * @example auto
+   * @x-auditable true
    */
   samesite?: 'auto' | 'lax' | 'none' | 'strict';
   /**
@@ -48052,6 +48055,7 @@ export type WaitingroomCookieAttributes = {
    *
    * @default auto
    * @example auto
+   * @x-auditable true
    */
   secure?: 'auto' | 'always' | 'never';
 };
@@ -48060,6 +48064,7 @@ export type WaitingroomCookieAttributes = {
  * Appends a '_' + a custom suffix to the end of Cloudflare Waiting Room's cookie name(__cf_waitingroom). If `cookie_suffix` is "abcd", the cookie name will be `__cf_waitingroom_abcd`. This field is required if using `additional_routes`.
  *
  * @example abcd
+ * @x-auditable true
  */
 export type WaitingroomCookieSuffix = string;
 
@@ -48083,6 +48088,7 @@ export type WaitingroomCreateRule = {
  *
  * @default
  * @example {{#waitTimeKnown}} {{waitTime}} mins {{/waitTimeKnown}} {{^waitTimeKnown}} Queue all enabled {{/waitTimeKnown}}
+ * @x-auditable true
  */
 export type WaitingroomCustomPageHtml = string;
 
@@ -48091,6 +48097,7 @@ export type WaitingroomCustomPageHtml = string;
  *
  * @default en-US
  * @example es-ES
+ * @x-auditable true
  */
 export type WaitingroomDefaultTemplateLanguage =
   | 'en-US'
@@ -48137,6 +48144,7 @@ export type WaitingroomDefaultTemplateLanguage =
  *
  * @default
  * @example Production - DO NOT MODIFY
+ * @x-auditable true
  */
 export type WaitingroomDescription = string;
 
@@ -48145,6 +48153,7 @@ export type WaitingroomDescription = string;
  *
  * @default false
  * @example false
+ * @x-auditable true
  */
 export type WaitingroomDisableSessionRenewal = boolean;
 
@@ -48153,14 +48162,21 @@ export type WaitingroomDisableSessionRenewal = boolean;
  */
 export type WaitingroomEnabledOriginCommands = 'revoke'[];
 
+/**
+ * @x-auditable true
+ */
 export type WaitingroomEstimatedQueuedUsers = number;
 
+/**
+ * @x-auditable true
+ */
 export type WaitingroomEstimatedTotalActiveUsers = number;
 
 /**
  * If set, the event will override the waiting room's `custom_page_html` property while it is active. If null, the event will inherit it.
  *
  * @example {{#waitTimeKnown}} {{waitTime}} mins {{/waitTimeKnown}} {{^waitTimeKnown}} Event is prequeueing / Queue all enabled {{/waitTimeKnown}}
+ * @x-auditable true
  */
 export type WaitingroomEventCustomPageHtml = string | null;
 
@@ -48169,23 +48185,30 @@ export type WaitingroomEventCustomPageHtml = string | null;
  *
  * @default
  * @example Production event - DO NOT MODIFY
+ * @x-auditable true
  */
 export type WaitingroomEventDescription = string;
 
 /**
  * @example {{#waitTimeKnown}} {{waitTime}} mins {{/waitTimeKnown}} {{^waitTimeKnown}} Event is prequeueing / Queue all enabled {{/waitTimeKnown}}
+ * @x-auditable true
  */
 export type WaitingroomEventDetailsCustomPageHtml = string;
 
 /**
  * @example false
+ * @x-auditable true
  */
 export type WaitingroomEventDetailsDisableSessionRenewal = boolean;
 
+/**
+ * @x-auditable true
+ */
 export type WaitingroomEventDetailsNewUsersPerMinute = number;
 
 /**
  * @example random
+ * @x-auditable true
  */
 export type WaitingroomEventDetailsQueueingMethod = string;
 
@@ -48212,12 +48235,20 @@ export type WaitingroomEventDetailsResult = {
   total_active_users?: WaitingroomEventDetailsTotalActiveUsers;
 };
 
+/**
+ * @x-auditable true
+ */
 export type WaitingroomEventDetailsSessionDuration = number;
 
+/**
+ * @x-auditable true
+ */
 export type WaitingroomEventDetailsTotalActiveUsers = number;
 
 /**
  * If set, the event will override the waiting room's `disable_session_renewal` property while it is active. If null, the event will inherit it.
+ *
+ * @x-auditable true
  */
 export type WaitingroomEventDisableSessionRenewal = boolean | null;
 
@@ -48225,11 +48256,13 @@ export type WaitingroomEventDisableSessionRenewal = boolean | null;
  * An ISO 8601 timestamp that marks the end of the event.
  *
  * @example 2021-09-28T17:00:00.000Z
+ * @x-auditable true
  */
 export type WaitingroomEventEndTime = string;
 
 /**
  * @example 25756b2dfe6e378a06b033b670413757
+ * @x-auditable true
  */
 export type WaitingroomEventId = string;
 
@@ -48243,6 +48276,7 @@ export type WaitingroomEventIdResponse = WaitingroomApiResponseSingle & {
  * A unique name to identify the event. Only alphanumeric characters, hyphens and underscores are allowed.
  *
  * @example production_webinar_event
+ * @x-auditable true
  */
 export type WaitingroomEventName = string;
 
@@ -48251,6 +48285,7 @@ export type WaitingroomEventName = string;
  *
  * @maximum 2147483647
  * @minimum 200
+ * @x-auditable true
  */
 export type WaitingroomEventNewUsersPerMinute = number | null;
 
@@ -48258,6 +48293,7 @@ export type WaitingroomEventNewUsersPerMinute = number | null;
  * An ISO 8601 timestamp that marks when to begin queueing all users before the event starts. The prequeue must start at least five minutes before `event_start_time`.
  *
  * @example 2021-09-28T15:00:00.000Z
+ * @x-auditable true
  */
 export type WaitingroomEventPrequeueStartTime = string | null;
 
@@ -48265,6 +48301,7 @@ export type WaitingroomEventPrequeueStartTime = string | null;
  * If set, the event will override the waiting room's `queueing_method` property while it is active. If null, the event will inherit it.
  *
  * @example random
+ * @x-auditable true
  */
 export type WaitingroomEventQueueingMethod = string | null;
 
@@ -48293,6 +48330,8 @@ export type WaitingroomEventResult = {
   shuffle_at_event_start?: WaitingroomEventShuffleAtEventStart;
   suspended?: WaitingroomEventSuspended;
   total_active_users?: WaitingroomEventTotalActiveUsers;
+  turnstile_action?: WaitingroomEventTurnstileAction;
+  turnstile_mode?: WaitingroomEventTurnstileMode;
 };
 
 /**
@@ -48300,6 +48339,7 @@ export type WaitingroomEventResult = {
  *
  * @maximum 30
  * @minimum 1
+ * @x-auditable true
  */
 export type WaitingroomEventSessionDuration = number | null;
 
@@ -48307,6 +48347,7 @@ export type WaitingroomEventSessionDuration = number | null;
  * If enabled, users in the prequeue will be shuffled randomly at the `event_start_time`. Requires that `prequeue_start_time` is not null. This is useful for situations when many users will join the event prequeue at the same time and you want to shuffle them to ensure fairness. Naturally, it makes the most sense to enable this feature when the `queueing_method` during the event respects ordering such as **fifo**, or else the shuffling may be unnecessary.
  *
  * @default false
+ * @x-auditable true
  */
 export type WaitingroomEventShuffleAtEventStart = boolean;
 
@@ -48314,6 +48355,7 @@ export type WaitingroomEventShuffleAtEventStart = boolean;
  * An ISO 8601 timestamp that marks the start of the event. At this time, queued users will be processed with the event's configuration. The start time must be at least one minute before `event_end_time`.
  *
  * @example 2021-09-28T15:30:00.000Z
+ * @x-auditable true
  */
 export type WaitingroomEventStartTime = string;
 
@@ -48321,6 +48363,7 @@ export type WaitingroomEventStartTime = string;
  * Suspends or allows an event. If set to `true`, the event is ignored and traffic will be handled based on the waiting room configuration.
  *
  * @default false
+ * @x-auditable true
  */
 export type WaitingroomEventSuspended = boolean;
 
@@ -48329,13 +48372,29 @@ export type WaitingroomEventSuspended = boolean;
  *
  * @maximum 2147483647
  * @minimum 200
+ * @x-auditable true
  */
 export type WaitingroomEventTotalActiveUsers = number | null;
+
+/**
+ * If set, the event will override the waiting room's `turnstile_action` property while it is active. If null, the event will inherit it.
+ *
+ * @x-auditable true
+ */
+export type WaitingroomEventTurnstileAction = 'log' | 'infinite_queue' | null;
+
+/**
+ * If set, the event will override the waiting room's `turnstile_mode` property while it is active. If null, the event will inherit it.
+ *
+ * @x-auditable true
+ */
+export type WaitingroomEventTurnstileMode = 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed' | null;
 
 /**
  * The host name to which the waiting room will be applied (no wildcards). Please do not include the scheme (http:// or https://). The host and path combination must be unique.
  *
  * @example shop.example.com
+ * @x-auditable true
  */
 export type WaitingroomHost = string;
 
@@ -48440,9 +48499,13 @@ export type WaitingroomIdentifier = string;
  *
  * @default false
  * @example false
+ * @x-auditable true
  */
 export type WaitingroomJsonResponseEnabled = boolean;
 
+/**
+ * @x-auditable true
+ */
 export type WaitingroomMaxEstimatedTimeMinutes = number;
 
 export type WaitingroomMessages = {
@@ -48457,6 +48520,7 @@ export type WaitingroomMessages = {
  * A unique name to identify the waiting room. Only alphanumeric characters, hyphens and underscores are allowed.
  *
  * @example production_webinar
+ * @x-auditable true
  */
 export type WaitingroomName = string;
 
@@ -48465,6 +48529,7 @@ export type WaitingroomName = string;
  *
  * @maximum 2147483647
  * @minimum 200
+ * @x-auditable true
  */
 export type WaitingroomNewUsersPerMinute = number;
 
@@ -48472,6 +48537,7 @@ export type WaitingroomNewUsersPerMinute = number;
  * An ISO 8601 timestamp that marks when the next event will begin queueing.
  *
  * @example 2021-09-28T15:00:00.000Z
+ * @x-auditable true
  */
 export type WaitingroomNextEventPrequeueStartTime = string | null;
 
@@ -48479,6 +48545,7 @@ export type WaitingroomNextEventPrequeueStartTime = string | null;
  * An ISO 8601 timestamp that marks when the next event will start.
  *
  * @example 2021-09-28T15:00:00.000Z
+ * @x-auditable true
  */
 export type WaitingroomNextEventStartTime = string | null;
 
@@ -48495,6 +48562,7 @@ export type WaitingroomPatchRule = {
  *
  * @default /
  * @example /shop/checkout
+ * @x-auditable true
  */
 export type WaitingroomPath = string;
 
@@ -48508,6 +48576,7 @@ export type WaitingroomPreviewResponse = WaitingroomApiResponseSingle & {
  * URL where the custom waiting room page can temporarily be previewed.
  *
  * @example http://waitingrooms.dev/preview/35af8c12-6d68-4608-babb-b53435a5ddfb
+ * @x-auditable true
  */
 export type WaitingroomPreviewUrl = string;
 
@@ -48525,6 +48594,8 @@ export type WaitingroomQueryEvent = {
   shuffle_at_event_start?: WaitingroomEventShuffleAtEventStart;
   suspended?: WaitingroomEventSuspended;
   total_active_users?: WaitingroomEventTotalActiveUsers;
+  turnstile_action?: WaitingroomEventTurnstileAction;
+  turnstile_mode?: WaitingroomEventTurnstileMode;
 };
 
 export type WaitingroomQueryPreview = {
@@ -48560,6 +48631,7 @@ export type WaitingroomQueryWaitingroom = {
  *
  * @default false
  * @example true
+ * @x-auditable true
  */
 export type WaitingroomQueueAll = boolean;
 
@@ -48572,6 +48644,7 @@ export type WaitingroomQueueAll = boolean;
  *
  * @default fifo
  * @example fifo
+ * @x-auditable true
  */
 export type WaitingroomQueueingMethod = 'fifo' | 'random' | 'passthrough' | 'reject';
 
@@ -48580,6 +48653,7 @@ export type WaitingroomQueueingMethod = 'fifo' | 'random' | 'passthrough' | 'rej
  *
  * @default 200
  * @example 202
+ * @x-auditable true
  */
 export type WaitingroomQueueingStatusCode = 200 | 202 | 429;
 
@@ -48618,6 +48692,7 @@ export type WaitingroomResultInfo = {
  * The action to take when the expression matches.
  *
  * @example bypass_waiting_room
+ * @x-auditable true
  */
 export type WaitingroomRuleAction = 'bypass_waiting_room';
 
@@ -48626,6 +48701,7 @@ export type WaitingroomRuleAction = 'bypass_waiting_room';
  *
  * @default
  * @example allow all traffic from 10.20.30.40
+ * @x-auditable true
  */
 export type WaitingroomRuleDescription = string;
 
@@ -48634,6 +48710,7 @@ export type WaitingroomRuleDescription = string;
  *
  * @default true
  * @example true
+ * @x-auditable true
  */
 export type WaitingroomRuleEnabled = boolean;
 
@@ -48641,6 +48718,7 @@ export type WaitingroomRuleEnabled = boolean;
  * Criteria defining when there is a match for the current rule.
  *
  * @example ip.src in {10.20.30.40}
+ * @x-auditable true
  */
 export type WaitingroomRuleExpression = string;
 
@@ -48648,6 +48726,7 @@ export type WaitingroomRuleExpression = string;
  * The ID of the rule.
  *
  * @example 25756b2dfe6e378a06b033b670413757
+ * @x-auditable true
  */
 export type WaitingroomRuleId = string;
 
@@ -48658,6 +48737,8 @@ export type WaitingroomRulePosition =
   | {
       /**
        * Places the rule in the exact position specified by the integer number <POSITION_NUMBER>. Position numbers start with 1. Existing rules in the ruleset from the specified position number onward are shifted one position (no rule is overwritten).
+       *
+       * @x-auditable true
        */
       index?: number;
     }
@@ -48666,6 +48747,7 @@ export type WaitingroomRulePosition =
        * Places the rule before rule <RULE_ID>. Use this argument with an empty rule ID value ("") to set the rule as the first rule in the ruleset.
        *
        * @example <RULE_ID>
+       * @x-auditable true
        */
       before?: string;
     }
@@ -48674,6 +48756,7 @@ export type WaitingroomRulePosition =
        * Places the rule after rule <RULE_ID>. Use this argument with an empty rule ID value ("") to set the rule as the last rule in the ruleset.
        *
        * @example <RULE_ID>
+       * @x-auditable true
        */
       after?: string;
     };
@@ -48692,6 +48775,7 @@ export type WaitingroomRuleResult = {
  * The version of the rule.
  *
  * @example 1
+ * @x-auditable true
  */
 export type WaitingroomRuleVersion = string;
 
@@ -48717,6 +48801,7 @@ export type WaitingroomSchemasApiResponseCommon = {
  *
  * @default false
  * @example true
+ * @x-auditable true
  */
 export type WaitingroomSearchEngineCrawlerBypass = boolean;
 
@@ -48726,6 +48811,7 @@ export type WaitingroomSearchEngineCrawlerBypass = boolean;
  * @default 5
  * @maximum 30
  * @minimum 1
+ * @x-auditable true
  */
 export type WaitingroomSessionDuration = number;
 
@@ -48735,11 +48821,13 @@ export type WaitingroomSingleResponse = WaitingroomApiResponseSingle & {
 
 /**
  * @example queueing
+ * @x-auditable true
  */
 export type WaitingroomStatus = 'event_prequeueing' | 'not_queueing' | 'queueing' | 'suspended';
 
 /**
  * @example 25756b2dfe6e378a06b033b670413757
+ * @x-auditable true
  */
 export type WaitingroomStatusEventId = string;
 
@@ -48757,12 +48845,14 @@ export type WaitingroomStatusResponse = WaitingroomApiResponseSingle & {
  * Suspends or allows traffic going to the waiting room. If set to `true`, the traffic will not go to the waiting room.
  *
  * @default false
+ * @x-auditable true
  */
 export type WaitingroomSuspended = boolean;
 
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type WaitingroomTimestamp = string;
 
@@ -48771,6 +48861,7 @@ export type WaitingroomTimestamp = string;
  *
  * @maximum 2147483647
  * @minimum 200
+ * @x-auditable true
  */
 export type WaitingroomTotalActiveUsers = number;
 
@@ -48782,6 +48873,7 @@ export type WaitingroomTotalActiveUsers = number;
  * origin. `infinite_queue` requires Advanced Waiting Room.
  *
  * @default log
+ * @x-auditable true
  */
 export type WaitingroomTurnstileAction = 'log' | 'infinite_queue';
 
@@ -48793,6 +48885,7 @@ export type WaitingroomTurnstileAction = 'log' | 'infinite_queue';
  * `off` or `invisible` requires Advanced Waiting Room.
  *
  * @default invisible
+ * @x-auditable true
  */
 export type WaitingroomTurnstileMode = 'off' | 'invisible' | 'visible_non_interactive' | 'visible_managed';
 
@@ -48800,6 +48893,7 @@ export type WaitingroomUpdateRules = WaitingroomCreateRule[];
 
 /**
  * @example 699d98642c564d2e855e9661899b7252
+ * @x-auditable true
  */
 export type WaitingroomWaitingRoomId = string;
 
@@ -57032,7 +57126,7 @@ export type ZonesTrueClientIpHeaderValue = 'on' | 'off';
  * @default full
  * @example full
  */
-export type ZonesType = 'full' | 'partial' | 'secondary';
+export type ZonesType = 'full' | 'partial' | 'secondary' | 'internal';
 
 /**
  * URL target.
