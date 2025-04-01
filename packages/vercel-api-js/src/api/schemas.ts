@@ -978,18 +978,6 @@ export type UserEvent = {
                 host: string;
                 id: string;
               }
-            | {
-                type: 'google';
-                id: string;
-                login: string;
-                createdAt: number;
-              }
-            | {
-                type: 'tiktok';
-                id: string;
-                login: string;
-                createdAt: number;
-              }
           )[];
           customerId?: string | null;
           orbCustomerId?: string | null;
@@ -2635,9 +2623,7 @@ export type UserEvent = {
           | 'passkey'
           | 'otp'
           | 'sms'
-          | 'invite'
-          | 'google'
-          | 'tiktok';
+          | 'invite';
       };
 };
 
@@ -2850,38 +2836,14 @@ export type AuthToken = {
           origin: 'totp' | 'webauthn' | 'recovery-code';
           expiresAt: number;
         };
-        origin:
-          | 'saml'
-          | 'github'
-          | 'gitlab'
-          | 'bitbucket'
-          | 'email'
-          | 'manual'
-          | 'passkey'
-          | 'otp'
-          | 'sms'
-          | 'invite'
-          | 'google'
-          | 'tiktok';
+        origin: 'saml' | 'github' | 'gitlab' | 'bitbucket' | 'email' | 'manual' | 'passkey' | 'otp' | 'sms' | 'invite';
         createdAt: number;
         expiresAt?: number;
       }
     | {
         type: 'team';
         teamId: string;
-        origin:
-          | 'saml'
-          | 'github'
-          | 'gitlab'
-          | 'bitbucket'
-          | 'email'
-          | 'manual'
-          | 'passkey'
-          | 'otp'
-          | 'sms'
-          | 'invite'
-          | 'google'
-          | 'tiktok';
+        origin: 'saml' | 'github' | 'gitlab' | 'bitbucket' | 'email' | 'manual' | 'passkey' | 'otp' | 'sms' | 'invite';
         createdAt: number;
         expiresAt?: number;
       }
