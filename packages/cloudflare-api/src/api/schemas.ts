@@ -51584,6 +51584,21 @@ export type ZarazZarazWorkflowResponse = ZarazApiResponseCommon & {
 
 export type ZarazZoneIdentifier = ZarazIdentifier;
 
+export type ZeroTrustGatewayAccountLogOptions = {
+  /**
+   * Log all requests to this service.
+   *
+   * @example false
+   */
+  log_all?: boolean;
+  /**
+   * Log only blocking requests to this service.
+   *
+   * @example true
+   */
+  log_blocks?: boolean;
+};
+
 /**
  * The action to preform when the associated traffic, identity, and device posture expressions are either absent or evaluate to `true`.
  *
@@ -52251,18 +52266,9 @@ export type ZeroTrustGatewayGatewayAccountLoggingSettings = {
    * Logging settings by rule type.
    */
   settings_by_rule_type?: {
-    /**
-     * Logging settings for DNS firewall.
-     */
-    dns?: Record<string, any>;
-    /**
-     * Logging settings for HTTP/HTTPS firewall.
-     */
-    http?: Record<string, any>;
-    /**
-     * Logging settings for Network firewall.
-     */
-    l4?: Record<string, any>;
+    dns?: ZeroTrustGatewayAccountLogOptions;
+    http?: ZeroTrustGatewayAccountLogOptions;
+    l4?: ZeroTrustGatewayAccountLogOptions;
   };
 };
 
