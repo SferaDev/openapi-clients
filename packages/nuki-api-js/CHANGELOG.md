@@ -1,5 +1,11 @@
 # nuki-api-js
 
+## 0.0.3
+
+### Patch Changes
+
+- 66d3d00: Update API version to 3.6.0
+
 ## 0.0.2
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # vercel-api-js
 
+## 0.23.2
+
+### Patch Changes
+
+- a365114: [BREAKING] Change the order of 'type' options in CreateProjectEnvResponse
+- ad484c6: [BREAKING] Change handle values in CreateDeploymentResponse
+
 ## 0.23.1
 
 ### Patch Changes
