@@ -70779,6 +70779,344 @@ export const shareResourceUpdate = (variables: ShareResourceUpdateVariables, sig
     ShareResourceUpdatePathParams
   >({ url: '/accounts/{accountId}/shares/{shareId}/resources/{resourceId}', method: 'put', ...variables, signal });
 
+export type SlurperListJobsPathParams = {
+  accountId: string;
+};
+
+export type SlurperListJobsQueryParams = {
+  /**
+   * @maximum 50
+   */
+  limit?: number;
+  offset?: number;
+};
+
+export type SlurperListJobsError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.R2SlurperApiV4Failure;
+}>;
+
+export type SlurperListJobsResponse = Schemas.R2SlurperApiV4Success & {
+  result?: Schemas.R2SlurperJobResponse[];
+};
+
+export type SlurperListJobsVariables = {
+  pathParams: SlurperListJobsPathParams;
+  queryParams?: SlurperListJobsQueryParams;
+} & FetcherExtraProps;
+
+export const slurperListJobs = (variables: SlurperListJobsVariables, signal?: AbortSignal) =>
+  fetch<
+    SlurperListJobsResponse,
+    SlurperListJobsError,
+    undefined,
+    {},
+    SlurperListJobsQueryParams,
+    SlurperListJobsPathParams
+  >({ url: '/accounts/{accountId}/slurper/jobs', method: 'get', ...variables, signal });
+
+export type SlurperCreateJobPathParams = {
+  accountId: string;
+};
+
+export type SlurperCreateJobError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.R2SlurperApiV4Failure;
+    }
+  | {
+      status: 409;
+      payload: Schemas.R2SlurperApiV4Failure;
+    }
+>;
+
+export type SlurperCreateJobResponse = Schemas.R2SlurperApiV4Success & {
+  result?: {
+    id?: string;
+  };
+};
+
+export type SlurperCreateJobVariables = {
+  body?: Schemas.R2SlurperCreateJobRequest;
+  pathParams: SlurperCreateJobPathParams;
+} & FetcherExtraProps;
+
+export const slurperCreateJob = (variables: SlurperCreateJobVariables, signal?: AbortSignal) =>
+  fetch<
+    SlurperCreateJobResponse,
+    SlurperCreateJobError,
+    Schemas.R2SlurperCreateJobRequest,
+    {},
+    {},
+    SlurperCreateJobPathParams
+  >({ url: '/accounts/{accountId}/slurper/jobs', method: 'post', ...variables, signal });
+
+export type SlurperAbortAllJobsPathParams = {
+  accountId: string;
+};
+
+export type SlurperAbortAllJobsError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.R2SlurperApiV4Failure;
+}>;
+
+export type SlurperAbortAllJobsResponse = Schemas.R2SlurperApiV4Success & {
+  result?: string;
+};
+
+export type SlurperAbortAllJobsVariables = {
+  pathParams: SlurperAbortAllJobsPathParams;
+} & FetcherExtraProps;
+
+export const slurperAbortAllJobs = (variables: SlurperAbortAllJobsVariables, signal?: AbortSignal) =>
+  fetch<SlurperAbortAllJobsResponse, SlurperAbortAllJobsError, undefined, {}, {}, SlurperAbortAllJobsPathParams>({
+    url: '/accounts/{accountId}/slurper/jobs/abortAll',
+    method: 'put',
+    ...variables,
+    signal
+  });
+
+export type SlurperGetJobPathParams = {
+  accountId: string;
+  jobId: string;
+};
+
+export type SlurperGetJobError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.R2SlurperApiV4Failure;
+}>;
+
+export type SlurperGetJobResponse = Schemas.R2SlurperApiV4Success & {
+  result?: Schemas.R2SlurperJobResponse;
+};
+
+export type SlurperGetJobVariables = {
+  pathParams: SlurperGetJobPathParams;
+} & FetcherExtraProps;
+
+export const slurperGetJob = (variables: SlurperGetJobVariables, signal?: AbortSignal) =>
+  fetch<SlurperGetJobResponse, SlurperGetJobError, undefined, {}, {}, SlurperGetJobPathParams>({
+    url: '/accounts/{accountId}/slurper/jobs/{jobId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type SlurperAbortJobPathParams = {
+  accountId: string;
+  jobId: string;
+};
+
+export type SlurperAbortJobError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.R2SlurperApiV4Failure;
+}>;
+
+export type SlurperAbortJobResponse = Schemas.R2SlurperApiV4Success & {
+  result?: string;
+};
+
+export type SlurperAbortJobVariables = {
+  pathParams: SlurperAbortJobPathParams;
+} & FetcherExtraProps;
+
+export const slurperAbortJob = (variables: SlurperAbortJobVariables, signal?: AbortSignal) =>
+  fetch<SlurperAbortJobResponse, SlurperAbortJobError, undefined, {}, {}, SlurperAbortJobPathParams>({
+    url: '/accounts/{accountId}/slurper/jobs/{jobId}/abort',
+    method: 'put',
+    ...variables,
+    signal
+  });
+
+export type SlurperGetJobLogsPathParams = {
+  accountId: string;
+  jobId: string;
+};
+
+export type SlurperGetJobLogsQueryParams = {
+  /**
+   * @maximum 50
+   */
+  limit?: number;
+  offset?: number;
+};
+
+export type SlurperGetJobLogsError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.R2SlurperApiV4Failure;
+}>;
+
+export type SlurperGetJobLogsResponse = Schemas.R2SlurperApiV4Success & {
+  result?: Schemas.R2SlurperJobLogResponse[];
+};
+
+export type SlurperGetJobLogsVariables = {
+  pathParams: SlurperGetJobLogsPathParams;
+  queryParams?: SlurperGetJobLogsQueryParams;
+} & FetcherExtraProps;
+
+export const slurperGetJobLogs = (variables: SlurperGetJobLogsVariables, signal?: AbortSignal) =>
+  fetch<
+    SlurperGetJobLogsResponse,
+    SlurperGetJobLogsError,
+    undefined,
+    {},
+    SlurperGetJobLogsQueryParams,
+    SlurperGetJobLogsPathParams
+  >({ url: '/accounts/{accountId}/slurper/jobs/{jobId}/logs', method: 'get', ...variables, signal });
+
+export type SlurperPauseJobPathParams = {
+  accountId: string;
+  jobId: string;
+};
+
+export type SlurperPauseJobError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: Schemas.R2SlurperApiV4Failure;
+    }
+  | {
+      status: 409;
+      payload: Schemas.R2SlurperApiV4Failure;
+    }
+>;
+
+export type SlurperPauseJobResponse = Schemas.R2SlurperApiV4Success & {
+  result?: string;
+};
+
+export type SlurperPauseJobVariables = {
+  pathParams: SlurperPauseJobPathParams;
+} & FetcherExtraProps;
+
+export const slurperPauseJob = (variables: SlurperPauseJobVariables, signal?: AbortSignal) =>
+  fetch<SlurperPauseJobResponse, SlurperPauseJobError, undefined, {}, {}, SlurperPauseJobPathParams>({
+    url: '/accounts/{accountId}/slurper/jobs/{jobId}/pause',
+    method: 'put',
+    ...variables,
+    signal
+  });
+
+export type SlurperGetJobProgressPathParams = {
+  accountId: string;
+  jobId: string;
+};
+
+export type SlurperGetJobProgressError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.R2SlurperApiV4Failure;
+}>;
+
+export type SlurperGetJobProgressResponse = Schemas.R2SlurperApiV4Success & {
+  result?: Schemas.R2SlurperJobProgressResponse;
+};
+
+export type SlurperGetJobProgressVariables = {
+  pathParams: SlurperGetJobProgressPathParams;
+} & FetcherExtraProps;
+
+export const slurperGetJobProgress = (variables: SlurperGetJobProgressVariables, signal?: AbortSignal) =>
+  fetch<SlurperGetJobProgressResponse, SlurperGetJobProgressError, undefined, {}, {}, SlurperGetJobProgressPathParams>({
+    url: '/accounts/{accountId}/slurper/jobs/{jobId}/progress',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type SlurperResumeJobPathParams = {
+  accountId: string;
+  jobId: string;
+};
+
+export type SlurperResumeJobError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.R2SlurperApiV4Failure;
+}>;
+
+export type SlurperResumeJobResponse = Schemas.R2SlurperApiV4Success & {
+  result?: string;
+};
+
+export type SlurperResumeJobVariables = {
+  pathParams: SlurperResumeJobPathParams;
+} & FetcherExtraProps;
+
+export const slurperResumeJob = (variables: SlurperResumeJobVariables, signal?: AbortSignal) =>
+  fetch<SlurperResumeJobResponse, SlurperResumeJobError, undefined, {}, {}, SlurperResumeJobPathParams>({
+    url: '/accounts/{accountId}/slurper/jobs/{jobId}/resume',
+    method: 'put',
+    ...variables,
+    signal
+  });
+
+export type SlurperCheckSourceConnectivityPathParams = {
+  accountId: string;
+};
+
+export type SlurperCheckSourceConnectivityError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.R2SlurperApiV4Failure;
+}>;
+
+export type SlurperCheckSourceConnectivityResponse = Schemas.R2SlurperApiV4Success & {
+  result?: Schemas.R2SlurperConnectivityResponse;
+};
+
+export type SlurperCheckSourceConnectivityVariables = {
+  body?: Schemas.R2SlurperSourceJobSchema;
+  pathParams: SlurperCheckSourceConnectivityPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Check whether tokens are valid against the source bucket
+ */
+export const slurperCheckSourceConnectivity = (
+  variables: SlurperCheckSourceConnectivityVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    SlurperCheckSourceConnectivityResponse,
+    SlurperCheckSourceConnectivityError,
+    Schemas.R2SlurperSourceJobSchema,
+    {},
+    {},
+    SlurperCheckSourceConnectivityPathParams
+  >({ url: '/accounts/{accountId}/slurper/source/connectivity-precheck', method: 'put', ...variables, signal });
+
+export type SlurperCheckTargetConnectivityPathParams = {
+  accountId: string;
+};
+
+export type SlurperCheckTargetConnectivityError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.R2SlurperApiV4Failure;
+}>;
+
+export type SlurperCheckTargetConnectivityResponse = Schemas.R2SlurperApiV4Success & {
+  result?: Schemas.R2SlurperConnectivityResponse;
+};
+
+export type SlurperCheckTargetConnectivityVariables = {
+  body?: Schemas.R2SlurperR2TargetSchema;
+  pathParams: SlurperCheckTargetConnectivityPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Check whether tokens are valid against the target bucket
+ */
+export const slurperCheckTargetConnectivity = (
+  variables: SlurperCheckTargetConnectivityVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    SlurperCheckTargetConnectivityResponse,
+    SlurperCheckTargetConnectivityError,
+    Schemas.R2SlurperR2TargetSchema,
+    {},
+    {},
+    SlurperCheckTargetConnectivityPathParams
+  >({ url: '/accounts/{accountId}/slurper/target/connectivity-precheck', method: 'put', ...variables, signal });
+
 export type WorkersKvNamespaceListNamespacesPathParams = {
   accountId: Schemas.WorkersKvIdentifier;
 };
@@ -138235,6 +138573,19 @@ export const operationsByTag = {
     shareResourcesGetById,
     shareResourceUpdate,
     organizationSharesList
+  },
+  r2SuperSlurper: {
+    slurperListJobs,
+    slurperCreateJob,
+    slurperAbortAllJobs,
+    slurperGetJob,
+    slurperAbortJob,
+    slurperGetJobLogs,
+    slurperPauseJob,
+    slurperGetJobProgress,
+    slurperResumeJob,
+    slurperCheckSourceConnectivity,
+    slurperCheckTargetConnectivity
   },
   workersKVNamespace: {
     workersKvNamespaceListNamespaces,

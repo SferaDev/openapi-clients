@@ -33239,6 +33239,168 @@ export type PagesStage = {
   status?: 'success' | 'idle' | 'active' | 'failure' | 'canceled';
 };
 
+export type R2SlurperConnectivityResponse = {
+  connectivityStatus?: 'success' | 'error';
+};
+
+export type R2SlurperCreateJobRequest = {
+  /**
+   * @default true
+   */
+  overwrite?: boolean;
+  source?: R2SlurperSourceJobSchema;
+  target?: R2SlurperR2TargetSchema;
+};
+
+export type R2SlurperGCSLikeCredsSchema = {
+  clientEmail?: string;
+  /**
+   * @x-sensitive true
+   */
+  privateKey?: string;
+};
+
+export type R2SlurperGCSSourceSchema = {
+  bucket?: string;
+  secret?: R2SlurperGCSLikeCredsSchema;
+  vendor?: 'gcs';
+};
+
+export type R2SlurperJobLogResponse = {
+  createdAt?: string;
+  job?: string;
+  logType?:
+    | 'migrationStart'
+    | 'migrationComplete'
+    | 'migrationAbort'
+    | 'migrationError'
+    | 'migrationPause'
+    | 'migrationResume'
+    | 'migrationErrorFailedContinuation'
+    | 'importErrorRetryExhaustion'
+    | 'importSkippedStorageClass'
+    | 'importSkippedOversized'
+    | 'importSkippedEmptyObject'
+    | 'importSkippedUnsupportedContentType'
+    | 'importSkippedExcludedContentType'
+    | 'importSkippedInvalidMedia'
+    | 'importSkippedRequiresRetrieval';
+  message?: string | null;
+  objectKey?: string | null;
+};
+
+export type R2SlurperJobProgressResponse = {
+  createdAt?: string;
+  failedObjects?: number;
+  id?: string;
+  objects?: number;
+  skippedObjects?: number;
+  status?: R2SlurperJobStatus;
+  transferredObjects?: number;
+};
+
+export type R2SlurperJobResponse = {
+  createdAt?: string;
+  finishedAt?: string | null;
+  id?: string;
+  overwrite?: boolean;
+  source?:
+    | {
+        bucket?: string;
+        endpoint?: string | null;
+        pathPrefix?: string | null;
+        vendor?: 's3';
+      }
+    | {
+        bucket?: string;
+        pathPrefix?: string | null;
+        vendor?: 'gcs';
+      }
+    | {
+        bucket?: string;
+        jurisdiction?: R2SlurperJurisdiction;
+        pathPrefix?: string | null;
+        vendor?: 'r2';
+      };
+  status?: R2SlurperJobStatus;
+  target?: {
+    bucket?: string;
+    jurisdiction?: R2SlurperJurisdiction;
+    vendor?: 'r2';
+  };
+};
+
+export type R2SlurperJobStatus = 'running' | 'paused' | 'aborted' | 'completed';
+
+export type R2SlurperJurisdiction = 'default' | 'eu' | 'fedramp';
+
+export type R2SlurperR2SourceSchema = {
+  bucket?: string;
+  jurisdiction?: R2SlurperJurisdiction;
+  secret?: R2SlurperS3LikeCredsSchema;
+  vendor?: 'r2';
+};
+
+export type R2SlurperR2TargetSchema = R2SlurperR2SourceSchema;
+
+export type R2SlurperS3LikeCredsSchema = {
+  accessKeyId?: string;
+  /**
+   * @x-sensitive true
+   */
+  secretAccessKey?: string;
+};
+
+export type R2SlurperS3SourceSchema = {
+  bucket?: string;
+  endpoint?: string | null;
+  secret?: R2SlurperS3LikeCredsSchema;
+  vendor?: 's3';
+};
+
+export type R2SlurperSourceJobSchema = R2SlurperS3SourceSchema | R2SlurperGCSSourceSchema | R2SlurperR2SourceSchema;
+
+/**
+ * @example {"code":7003,"message":"No route for the URI"}
+ * @minLength 1
+ */
+export type R2SlurperApiV4Error = {
+  /**
+   * @minimum 1000
+   * @x-auditable true
+   */
+  code: number;
+  /**
+   * @x-auditable true
+   */
+  message: string;
+}[];
+
+export type R2SlurperApiV4Failure = {
+  errors?: R2SlurperApiV4Error;
+  messages?: R2SlurperApiV4Message;
+  /**
+   * Indicates if the API call was successful or not.
+   *
+   * @example false
+   * @x-auditable true
+   */
+  success?: false;
+};
+
+export type R2SlurperApiV4Message = string[];
+
+export type R2SlurperApiV4Success = {
+  errors?: R2SlurperApiV4Error;
+  messages?: R2SlurperApiV4Message;
+  /**
+   * Indicates if the API call was successful or not.
+   *
+   * @x-auditable true
+   */
+  success?: true;
+};
+
 /**
  * Account ID
  *
