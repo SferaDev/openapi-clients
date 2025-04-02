@@ -1165,6 +1165,7 @@ import {
   worCreateNewWorkflowInstance,
   worBatchCreateWorkflowInstance,
   worDescribeWorkflowInstance,
+  worSendEventWorkflowInstance,
   worChangeStatusWorkflowInstance,
   worListWorkflowVersions,
   worDescribeWorkflowVersions,
@@ -3257,6 +3258,8 @@ export const operationsByPath = {
   'POST /accounts/{account_id}/workflows/{workflow_name}/instances': worCreateNewWorkflowInstance,
   'POST /accounts/{account_id}/workflows/{workflow_name}/instances/batch': worBatchCreateWorkflowInstance,
   'GET /accounts/{account_id}/workflows/{workflow_name}/instances/{instance_id}': worDescribeWorkflowInstance,
+  'POST /accounts/{account_id}/workflows/{workflow_name}/instances/{instance_id}/events/{event_type}':
+    worSendEventWorkflowInstance,
   'PATCH /accounts/{account_id}/workflows/{workflow_name}/instances/{instance_id}/status':
     worChangeStatusWorkflowInstance,
   'GET /accounts/{account_id}/workflows/{workflow_name}/versions': worListWorkflowVersions,

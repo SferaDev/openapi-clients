@@ -1266,6 +1266,20 @@ export type AbuseReportsBaseReportFields = {
    */
   ports_protocols?: string;
   /**
+   * Text containing 2 characters
+   *
+   * @maxLength 2
+   * @minLength 2
+   */
+  reported_country?: string;
+  /**
+   * Text not exceeding 255 characters
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  reported_user_agent?: string;
+  /**
    * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
    */
   signature?: string;
@@ -1416,6 +1430,20 @@ export type AbuseReportsChildrenAbuseReport = {
    * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
    */
   ports_protocols?: string;
+  /**
+   * Text containing 2 characters
+   *
+   * @maxLength 2
+   * @minLength 2
+   */
+  reported_country?: string;
+  /**
+   * Text not exceeding 255 characters
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  reported_user_agent?: string;
   /**
    * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
    */
@@ -1572,6 +1600,20 @@ export type AbuseReportsDMCAReport = {
    * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
    */
   ports_protocols?: string;
+  /**
+   * Text containing 2 characters
+   *
+   * @maxLength 2
+   * @minLength 2
+   */
+  reported_country?: string;
+  /**
+   * Text not exceeding 255 characters
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  reported_user_agent?: string;
   /**
    * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
    */
@@ -1770,6 +1812,20 @@ export type AbuseReportsGeneralReport = {
    */
   ports_protocols?: string;
   /**
+   * Text containing 2 characters
+   *
+   * @maxLength 2
+   * @minLength 2
+   */
+  reported_country?: string;
+  /**
+   * Text not exceeding 255 characters
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  reported_user_agent?: string;
+  /**
    * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
    */
   signature?: string;
@@ -1940,6 +1996,20 @@ export type AbuseReportsNCSEIReport = {
    * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
    */
   ports_protocols?: string;
+  /**
+   * Text containing 2 characters
+   *
+   * @maxLength 2
+   * @minLength 2
+   */
+  reported_country?: string;
+  /**
+   * Text not exceeding 255 characters
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  reported_user_agent?: string;
   /**
    * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
    */
@@ -2112,6 +2182,20 @@ export type AbuseReportsPhishingReport = {
    */
   ports_protocols?: string;
   /**
+   * Text containing 2 characters
+   *
+   * @maxLength 2
+   * @minLength 2
+   */
+  reported_country?: string;
+  /**
+   * Text not exceeding 255 characters
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  reported_user_agent?: string;
+  /**
    * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
    */
   signature?: string;
@@ -2267,6 +2351,20 @@ export type AbuseReportsRegistrarWhoisReport = {
    * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
    */
   ports_protocols?: string;
+  /**
+   * Text containing 2 characters
+   *
+   * @maxLength 2
+   * @minLength 2
+   */
+  reported_country?: string;
+  /**
+   * Text not exceeding 255 characters
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  reported_user_agent?: string;
   /**
    * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
    */
@@ -2473,6 +2571,20 @@ export type AbuseReportsThreatReport = {
    */
   ports_protocols?: string;
   /**
+   * Text containing 2 characters
+   *
+   * @maxLength 2
+   * @minLength 2
+   */
+  reported_country?: string;
+  /**
+   * Text not exceeding 255 characters
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  reported_user_agent?: string;
+  /**
    * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
    */
   signature?: string;
@@ -2623,6 +2735,20 @@ export type AbuseReportsTrademarkReport = {
    * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
    */
   ports_protocols?: string;
+  /**
+   * Text containing 2 characters
+   *
+   * @maxLength 2
+   * @minLength 2
+   */
+  reported_country?: string;
+  /**
+   * Text not exceeding 255 characters
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  reported_user_agent?: string;
   /**
    * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
    */
