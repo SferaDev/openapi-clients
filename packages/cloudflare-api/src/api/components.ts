@@ -81548,6 +81548,94 @@ export const worDescribeWorkflowInstance = (variables: WorDescribeWorkflowInstan
     signal
   });
 
+export type WorSendEventWorkflowInstancePathParams = {
+  /**
+   * @maxLength 64
+   * @minLength 1
+   * @pattern ^[a-zA-Z0-9_][a-zA-Z0-9-_]*$
+   */
+  workflowName: string;
+  /**
+   * @maxLength 64
+   * @minLength 1
+   * @pattern ^[a-zA-Z0-9_][a-zA-Z0-9-_]*$
+   */
+  instanceId: string;
+  /**
+   * @maxLength 64
+   * @minLength 1
+   * @pattern ^[a-zA-Z0-9_][a-zA-Z0-9-_]*$
+   */
+  eventType: string;
+  accountId: string;
+};
+
+export type WorSendEventWorkflowInstanceError = Fetcher.ErrorWrapper<
+  | {
+      status: 400;
+      payload: {
+        errors: {
+          code: number;
+          message: string;
+        }[];
+        messages: string[];
+        result: any | null;
+        success: false;
+      };
+    }
+  | {
+      status: 404;
+      payload: {
+        errors: {
+          code: number;
+          message: string;
+        }[];
+        messages: string[];
+        result: any | null;
+        success: false;
+      };
+    }
+>;
+
+export type WorSendEventWorkflowInstanceResponse = {
+  errors: {
+    code: number;
+    message: string;
+  }[];
+  messages: {
+    code: number;
+    message: string;
+  }[];
+  result?: Record<string, any>;
+  result_info?: {
+    count: number;
+    page: number;
+    per_page: number;
+    total_count: number;
+  };
+  success: true;
+};
+
+export type WorSendEventWorkflowInstanceVariables = {
+  body?: Record<string, any>;
+  pathParams: WorSendEventWorkflowInstancePathParams;
+} & FetcherExtraProps;
+
+export const worSendEventWorkflowInstance = (variables: WorSendEventWorkflowInstanceVariables, signal?: AbortSignal) =>
+  fetch<
+    WorSendEventWorkflowInstanceResponse,
+    WorSendEventWorkflowInstanceError,
+    Record<string, any>,
+    {},
+    {},
+    WorSendEventWorkflowInstancePathParams
+  >({
+    url: '/accounts/{accountId}/workflows/{workflowName}/instances/{instanceId}/events/{eventType}',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
 export type WorChangeStatusWorkflowInstancePathParams = {
   /**
    * @maxLength 64
@@ -138837,6 +138925,7 @@ export const operationsByTag = {
     worCreateNewWorkflowInstance,
     worBatchCreateWorkflowInstance,
     worDescribeWorkflowInstance,
+    worSendEventWorkflowInstance,
     worChangeStatusWorkflowInstance,
     worListWorkflowVersions,
     worDescribeWorkflowVersions
