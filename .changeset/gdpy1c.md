@@ -1,5 +1,5 @@
 ---
-"nuki-api-js": minor
+"nuki-api-js": patch
 ---
 
 Bump version to 3.7.0
