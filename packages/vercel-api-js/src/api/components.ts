@@ -7066,9 +7066,6 @@ export type GetConfigurableLogDrainResponse = {
   configurationId?: string;
   sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   environments: ('preview' | 'production')[];
-  status?: 'disabled' | 'enabled' | 'errored';
-  disabledAt?: number;
-  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
@@ -7087,6 +7084,9 @@ export type GetConfigurableLogDrainResponse = {
   ownerId: string;
   createdFrom?: 'integration' | 'self-served';
   deliveryFormat: 'json' | 'ndjson' | 'protobuf' | 'syslog';
+  status?: 'disabled' | 'enabled' | 'errored';
+  disabledAt?: number;
+  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
   secret: string;
 };
 
@@ -7166,9 +7166,6 @@ export type GetAllLogDrainsResponse = {
   configurationId?: string;
   sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   environments: ('preview' | 'production')[];
-  status?: 'disabled' | 'enabled' | 'errored';
-  disabledAt?: number;
-  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
@@ -7187,6 +7184,9 @@ export type GetAllLogDrainsResponse = {
   ownerId: string;
   createdFrom?: 'integration' | 'self-served';
   deliveryFormat: 'json' | 'ndjson' | 'protobuf' | 'syslog';
+  status?: 'disabled' | 'enabled' | 'errored';
+  disabledAt?: number;
+  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
   secret: string;
 }[];
 
@@ -7227,9 +7227,6 @@ export type CreateConfigurableLogDrainResponse = {
   configurationId?: string;
   sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
   environments: ('preview' | 'production')[];
-  status?: 'disabled' | 'enabled' | 'errored';
-  disabledAt?: number;
-  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
   disabledBy?: string;
   firstErrorTimestamp?: number;
   samplingRate?: number;
@@ -7248,6 +7245,9 @@ export type CreateConfigurableLogDrainResponse = {
   ownerId: string;
   createdFrom?: 'integration' | 'self-served';
   deliveryFormat: 'json' | 'ndjson' | 'protobuf' | 'syslog';
+  status?: 'disabled' | 'enabled' | 'errored';
+  disabledAt?: number;
+  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
 };
 
 export type CreateConfigurableLogDrainRequestBody = {
@@ -16394,7 +16394,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16498,7 +16498,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17389,7 +17389,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17493,7 +17493,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17596,7 +17596,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17790,7 +17790,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
