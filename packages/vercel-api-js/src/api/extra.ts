@@ -84,7 +84,7 @@ import {
   deleteIntegrationLogDrain,
   gitNamespaces,
   searchRepo,
-  getV1ExperimentationItems,
+  queryExperimentationItems,
   postV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItems,
   patchV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemId,
   deleteV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemId,
@@ -261,7 +261,7 @@ export const operationsByPath = {
   'DELETE /v1/integrations/log-drains/{id}': deleteIntegrationLogDrain,
   'GET /v1/integrations/git-namespaces': gitNamespaces,
   'GET /v1/integrations/search-repo': searchRepo,
-  'GET /v1/experimentation/items': getV1ExperimentationItems,
+  'GET /v1/experimentation/items': queryExperimentationItems,
   'POST /v1/installations/{integrationConfigurationId}/resources/{resourceId}/experimentation/items':
     postV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItems,
   'PATCH /v1/installations/{integrationConfigurationId}/resources/{resourceId}/experimentation/items/{itemId}':
@@ -309,7 +309,7 @@ export const operationsByPath = {
   'GET /v1/security/firewall/bypass': getBypassIp,
   'POST /v1/security/firewall/bypass': addBypassIp,
   'DELETE /v1/security/firewall/bypass': removeBypassIp,
-  'GET /v2/teams/{teamId}/members': getTeamMembers,
+  'GET /v3/teams/{teamId}/members': getTeamMembers,
   'POST /v1/teams/{teamId}/members': inviteUserToTeam,
   'POST /v1/teams/{teamId}/request': requestAccessToTeam,
   'GET /v1/teams/{teamId}/request/{userId}': getTeamAccessRequest,
