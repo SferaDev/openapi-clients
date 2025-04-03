@@ -10181,13 +10181,13 @@ export const searchRepo = (variables: SearchRepoVariables, signal?: AbortSignal)
     {}
   >({ url: '/v1/integrations/search-repo', method: 'get', ...variables, signal });
 
-export type GetV1ExperimentationItemsQueryParams = {
+export type QueryExperimentationItemsQueryParams = {
   resourceId?: string;
 };
 
-export type GetV1ExperimentationItemsError = Fetcher.ErrorWrapper<undefined>;
+export type QueryExperimentationItemsError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetV1ExperimentationItemsResponse = {
+export type QueryExperimentationItemsResponse = {
   items: {
     /**
      * The Vercel generated ID for this item Integrations should not receive this in API responses
@@ -10219,20 +10219,20 @@ export type GetV1ExperimentationItemsResponse = {
   }[];
 };
 
-export type GetV1ExperimentationItemsVariables = {
-  queryParams?: GetV1ExperimentationItemsQueryParams;
+export type QueryExperimentationItemsVariables = {
+  queryParams?: QueryExperimentationItemsQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Query experimentation items
+ * Queries flags, experiments under a Marketplace resource.
  */
-export const getV1ExperimentationItems = (variables: GetV1ExperimentationItemsVariables, signal?: AbortSignal) =>
+export const queryExperimentationItems = (variables: QueryExperimentationItemsVariables, signal?: AbortSignal) =>
   fetch<
-    GetV1ExperimentationItemsResponse,
-    GetV1ExperimentationItemsError,
+    QueryExperimentationItemsResponse,
+    QueryExperimentationItemsError,
     undefined,
     {},
-    GetV1ExperimentationItemsQueryParams,
+    QueryExperimentationItemsQueryParams,
     {}
   >({ url: '/v1/experimentation/items', method: 'get', ...variables, signal });
 
@@ -19857,7 +19857,7 @@ export type GetTeamMembersVariables = {
  */
 export const getTeamMembers = (variables: GetTeamMembersVariables, signal?: AbortSignal) =>
   fetch<GetTeamMembersResponse, GetTeamMembersError, undefined, {}, GetTeamMembersQueryParams, {}>({
-    url: '/v2/teams/{teamId}/members',
+    url: '/v3/teams/{teamId}/members',
     method: 'get',
     ...variables,
     signal
@@ -23543,13 +23543,13 @@ export const operationsByTag = {
     updateResourceSecretsById,
     importResource,
     exchangeSsoToken,
+    queryExperimentationItems,
     postV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItems,
     patchV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemId,
     deleteV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemId,
     putV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationEdgeConfig
   },
   authentication: { exchangeSsoToken, listAuthTokens, createAuthToken, getAuthToken, deleteAuthToken },
-  apiExperimentation: { getV1ExperimentationItems },
   projectMembers: { getProjectMembers, addProjectMember, removeProjectMember },
   environment: {
     createCustomEnvironment,
