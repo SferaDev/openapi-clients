@@ -26636,7 +26636,6 @@ export type MagicTransitApiResponseCollection = {
    * @example true
    */
   success: true;
-  result_info?: MagicTransitResultInfo;
 };
 
 export type MagicTransitApiResponseCommon = {
@@ -26855,33 +26854,6 @@ export type MagicTransitPacketsTtl = number;
  * @minimum 0
  */
 export type MagicTransitPort = number;
-
-export type MagicTransitResultInfo = {
-  /**
-   * Total number of results for the requested service
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
 
 /**
  * Standard deviation of the RTTs in ms.
