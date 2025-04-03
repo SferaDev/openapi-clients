@@ -17787,6 +17787,7 @@ export type DnsSettingsApiResponseSingle = DnsSettingsApiResponseCommon;
  *
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type DnsSettingsCreatedTime = string;
 
@@ -17817,6 +17818,7 @@ export type DnsSettingsDnsSettingsAccount = DnsSettingsDnsSettings & {
      * Nameserver type
      *
      * @example cloudflare.standard
+     * @x-auditable true
      */
     type: 'cloudflare.standard' | 'cloudflare.standard.random' | 'custom.account' | 'custom.tenant';
   };
@@ -17833,12 +17835,14 @@ export type DnsSettingsDnsSettingsZone = DnsSettingsDnsSettings & {
      * @example 1
      * @maximum 5
      * @minimum 1
+     * @x-auditable true
      */
     ns_set?: number;
     /**
      * Nameserver type
      *
      * @example cloudflare.standard
+     * @x-auditable true
      */
     type: 'cloudflare.standard' | 'custom.account' | 'custom.tenant' | 'custom.zone';
   };
@@ -17875,6 +17879,7 @@ export type DnsSettingsDnsViewResponseSingle = DnsSettingsApiResponseSingle & {
  * Whether to flatten all CNAME records in the zone. Note that, due to DNS limitations, a CNAME record at the zone apex will always be flattened.
  *
  * @example false
+ * @x-auditable true
  */
 export type DnsSettingsFlattenAllCnames = boolean;
 
@@ -17882,6 +17887,7 @@ export type DnsSettingsFlattenAllCnames = boolean;
  * Whether to enable Foundation DNS Advanced Nameservers on the zone.
  *
  * @example false
+ * @x-auditable true
  */
 export type DnsSettingsFoundationDns = boolean;
 
@@ -17926,6 +17932,7 @@ export type DnsSettingsMessages = {
  *
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type DnsSettingsModifiedTime = string;
 
@@ -17933,6 +17940,7 @@ export type DnsSettingsModifiedTime = string;
  * Whether to enable multi-provider DNS, which causes Cloudflare to activate the zone even when non-Cloudflare NS records exist, and to respect NS records at the zone apex during outbound zone transfers.
  *
  * @example false
+ * @x-auditable true
  */
 export type DnsSettingsMultiProvider = boolean;
 
@@ -17942,6 +17950,7 @@ export type DnsSettingsMultiProvider = boolean;
  * @example my view
  * @maxLength 255
  * @minLength 1
+ * @x-auditable true
  */
 export type DnsSettingsName = string;
 
@@ -17951,6 +17960,7 @@ export type DnsSettingsName = string;
  * @example 86400
  * @maximum 86400
  * @minimum 30
+ * @x-auditable true
  */
 export type DnsSettingsNsTtl = number;
 
@@ -18014,6 +18024,7 @@ export type DnsSettingsSchemasDnsResponseSingle = DnsSettingsApiResponseSingle &
  * Allows a Secondary DNS zone to use (proxied) override records and CNAME flattening at the zone apex.
  *
  * @example false
+ * @x-auditable true
  */
 export type DnsSettingsSecondaryOverrides = boolean;
 
@@ -18027,6 +18038,7 @@ export type DnsSettingsSoa = {
    * @example 604800
    * @maximum 2419200
    * @minimum 86400
+   * @x-auditable true
    */
   expire: number;
   /**
@@ -18035,12 +18047,14 @@ export type DnsSettingsSoa = {
    * @example 1800
    * @maximum 86400
    * @minimum 60
+   * @x-auditable true
    */
   min_ttl: number;
   /**
    * The primary nameserver, which may be used for outbound zone transfers.
    *
    * @example kristina.ns.cloudflare.com
+   * @x-auditable true
    */
   mname: string;
   /**
@@ -18049,6 +18063,7 @@ export type DnsSettingsSoa = {
    * @example 10000
    * @maximum 86400
    * @minimum 600
+   * @x-auditable true
    */
   refresh: number;
   /**
@@ -18057,12 +18072,14 @@ export type DnsSettingsSoa = {
    * @example 2400
    * @maximum 86400
    * @minimum 600
+   * @x-auditable true
    */
   retry: number;
   /**
    * The email address of the zone administrator, with the first label representing the local part of the email address.
    *
    * @example admin.example.com
+   * @x-auditable true
    */
   rname: string;
   /**
@@ -18071,6 +18088,7 @@ export type DnsSettingsSoa = {
    * @example 3600
    * @maximum 86400
    * @minimum 300
+   * @x-auditable true
    */
   ttl: number;
 };
@@ -18079,6 +18097,7 @@ export type DnsSettingsSoa = {
  * Whether the zone mode is a regular or CDN/DNS only zone.
  *
  * @example dns_only
+ * @x-auditable true
  */
 export type DnsSettingsZoneMode = 'standard' | 'cdn_only' | 'dns_only';
 
@@ -42875,6 +42894,16 @@ export type TeamsDevicesExcludeOfficeIps = boolean;
  */
 export type TeamsDevicesExcludeRequest = TeamsDevicesSplitTunnel[];
 
+export type TeamsDevicesExcludeSplitTunnelWithAddress = {
+  address: TeamsDevicesSplitTunnelAddress;
+  description?: TeamsDevicesSplitTunnelDescription;
+};
+
+export type TeamsDevicesExcludeSplitTunnelWithHost = {
+  description?: TeamsDevicesSplitTunnelDescription;
+  host: TeamsDevicesSplitTunnelHost;
+};
+
 /**
  * Sets the expiration time for a posture check result. If empty, the result remains valid until it is overwritten by new data from the WARP client.
  *
@@ -42997,12 +43026,44 @@ export type TeamsDevicesIdentifier = void;
 /**
  * List of routes included in the WARP client's tunnel.
  */
-export type TeamsDevicesInclude = TeamsDevicesSplitTunnelInclude[];
+export type TeamsDevicesInclude = TeamsDevicesSplitTunnel[];
 
 /**
  * List of routes included in the WARP client's tunnel. Both 'exclude' and 'include' cannot be set in the same request.
  */
 export type TeamsDevicesIncludeRequest = TeamsDevicesSplitTunnel[];
+
+/**
+ * The address in CIDR format to include in the tunnel. If `address` is present, `host` must not be present.
+ *
+ * @example 192.0.2.0/24
+ */
+export type TeamsDevicesIncludeSplitTunnelAddress = string;
+
+/**
+ * A description of the Split Tunnel item, displayed in the client UI.
+ *
+ * @example Include testing domains in the tunnel
+ * @maxLength 100
+ */
+export type TeamsDevicesIncludeSplitTunnelDescription = string;
+
+/**
+ * The domain name to include in the tunnel. If `host` is present, `address` must not be present.
+ *
+ * @example *.example.com
+ */
+export type TeamsDevicesIncludeSplitTunnelHost = string;
+
+export type TeamsDevicesIncludeSplitTunnelWithAddress = {
+  address: TeamsDevicesIncludeSplitTunnelAddress;
+  description?: TeamsDevicesIncludeSplitTunnelDescription;
+};
+
+export type TeamsDevicesIncludeSplitTunnelWithHost = {
+  description?: TeamsDevicesIncludeSplitTunnelDescription;
+  host: TeamsDevicesIncludeSplitTunnelHost;
+};
 
 /**
  * The value to be checked against.
@@ -43394,7 +43455,7 @@ export type TeamsDevicesSchemasIdResponse = TeamsDevicesApiResponseSingle & {
 /**
  * The wirefilter expression to match devices.
  *
- * @example user.identity == "test@cloudflare.com"
+ * @example identity.email == "test@cloudflare.com"
  * @maxLength 500
  */
 export type TeamsDevicesSchemasMatch = string;
@@ -43564,49 +43625,35 @@ export type TeamsDevicesSingleResponse = TeamsDevicesApiResponseSingle & {
   result?: TeamsDevicesDevicePostureRules;
 };
 
-export type TeamsDevicesSplitTunnel = {
-  /**
-   * The address in CIDR format to exclude from the tunnel. If `address` is present, `host` must not be present.
-   *
-   * @example 192.0.2.0/24
-   */
-  address: string;
-  /**
-   * A description of the Split Tunnel item, displayed in the client UI.
-   *
-   * @example Exclude testing domains from the tunnel
-   * @maxLength 100
-   */
-  description: string;
-  /**
-   * The domain name to exclude from the tunnel. If `host` is present, `address` must not be present.
-   *
-   * @example *.example.com
-   */
-  host?: string;
-};
+export type TeamsDevicesSplitTunnel =
+  | TeamsDevicesExcludeSplitTunnelWithAddress
+  | TeamsDevicesExcludeSplitTunnelWithHost;
 
-export type TeamsDevicesSplitTunnelInclude = {
-  /**
-   * The address in CIDR format to include in the tunnel. If address is present, host must not be present.
-   *
-   * @example 192.0.2.0/24
-   */
-  address: string;
-  /**
-   * A description of the split tunnel item, displayed in the client UI.
-   *
-   * @example Include testing domains from the tunnel
-   * @maxLength 100
-   */
-  description: string;
-  /**
-   * The domain name to include in the tunnel. If host is present, address must not be present.
-   *
-   * @example *.example.com
-   */
-  host?: string;
-};
+/**
+ * The address in CIDR format to exclude from the tunnel. If `address` is present, `host` must not be present.
+ *
+ * @example 192.0.2.0/24
+ */
+export type TeamsDevicesSplitTunnelAddress = string;
+
+/**
+ * A description of the Split Tunnel item, displayed in the client UI.
+ *
+ * @example Exclude testing domains from the tunnel
+ * @maxLength 100
+ */
+export type TeamsDevicesSplitTunnelDescription = string;
+
+/**
+ * The domain name to exclude from the tunnel. If `host` is present, `address` must not be present.
+ *
+ * @example *.example.com
+ */
+export type TeamsDevicesSplitTunnelHost = string;
+
+export type TeamsDevicesSplitTunnelInclude =
+  | TeamsDevicesIncludeSplitTunnelWithAddress
+  | TeamsDevicesIncludeSplitTunnelWithHost;
 
 export type TeamsDevicesSplitTunnelIncludeResponseCollection = TeamsDevicesApiResponseCollection & {
   result?: TeamsDevicesSplitTunnelInclude[];
