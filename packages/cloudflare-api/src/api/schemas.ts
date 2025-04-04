@@ -26147,7 +26147,7 @@ export type LogpushApiResponseCommon = {
   errors: LogpushMessages;
   messages: LogpushMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -26163,7 +26163,7 @@ export type LogpushApiResponseCommonFailure = {
   messages: LogpushMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -26261,7 +26261,7 @@ export type LogpushGetOwnershipResponse = LogpushApiResponseCommon & {
 export type LogpushId = number;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -26380,7 +26380,11 @@ export type LogpushMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
