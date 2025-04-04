@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.23.3
+
+### Patch Changes
+
+- 11e409a: Rename 'GetV1ExperimentationItems' type to 'QueryExperimentationItems'
+
 ## 0.23.2
 
 ### Patch Changes
