@@ -13800,6 +13800,7 @@ export type CustomPagesUrl = string;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type D1AccountIdentifier = string;
 
@@ -13836,6 +13837,7 @@ export type D1ApiResponseCommonFailure = {
  *
  * @example 2022-11-15T18:25:44.442097Z
  * @format date-time
+ * @x-auditable true
  */
 export type D1CreatedAt = string;
 
@@ -13852,6 +13854,7 @@ export type D1DatabaseDetailsResponse = {
  * D1 database identifier (UUID).
  *
  * @example xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+ * @x-auditable true
  */
 export type D1DatabaseIdentifier = string;
 
@@ -13860,6 +13863,7 @@ export type D1DatabaseIdentifier = string;
  *
  * @example my-database
  * @pattern ^[a-z0-9][a-z0-9-_]*$
+ * @x-auditable true
  */
 export type D1DatabaseName = string;
 
@@ -13873,6 +13877,7 @@ export type D1DatabaseResponse = {
 /**
  * @example production
  * @pattern ^(alpha|beta|production)$
+ * @x-auditable true
  */
 export type D1DatabaseVersion = string;
 
@@ -13880,6 +13885,7 @@ export type D1DatabaseVersion = string;
  * The D1 database's size, in bytes.
  *
  * @example 12
+ * @x-auditable true
  */
 export type D1FileSize = number;
 
@@ -13901,16 +13907,38 @@ export type D1Params = string[];
  * Specify the region to create the D1 primary, if available. If this option is omitted, the D1 will be created as close as possible to the current user.
  *
  * @example wnam
+ * @x-auditable true
  */
 export type D1PrimaryLocationHint = 'wnam' | 'enam' | 'weur' | 'eeur' | 'apac' | 'oc';
 
 export type D1QueryMeta = {
+  /**
+   * @x-auditable true
+   */
   changed_db?: boolean;
+  /**
+   * @x-auditable true
+   */
   changes?: number;
+  /**
+   * @x-auditable true
+   */
   duration?: number;
+  /**
+   * @x-auditable true
+   */
   last_row_id?: number;
+  /**
+   * @x-auditable true
+   */
   rows_read?: number;
+  /**
+   * @x-auditable true
+   */
   rows_written?: number;
+  /**
+   * @x-auditable true
+   */
   size_after?: number;
 };
 
@@ -13938,6 +13966,7 @@ export type D1Sql = string;
 
 /**
  * @example 12
+ * @x-auditable true
  */
 export type D1TableCount = number;
 
@@ -13974,7 +14003,7 @@ export type DigitalExperienceMonitoringApiResponseCommon = {
   errors: DigitalExperienceMonitoringMessages;
   messages: DigitalExperienceMonitoringMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -13990,7 +14019,7 @@ export type DigitalExperienceMonitoringApiResponseCommonFailure = {
   messages: DigitalExperienceMonitoringMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -14328,7 +14357,11 @@ export type DigitalExperienceMonitoringMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -14427,25 +14460,25 @@ export type DigitalExperienceMonitoringRamUsedPctByApp = {
 
 export type DigitalExperienceMonitoringResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -16367,7 +16400,7 @@ export type DnsFirewallApiResponseCommon = {
   errors: DnsFirewallMessages;
   messages: DnsFirewallMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -16383,7 +16416,7 @@ export type DnsFirewallApiResponseCommonFailure = {
   messages: DnsFirewallMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -16400,6 +16433,7 @@ export type DnsFirewallAttackMitigation = {
    * When enabled, automatically mitigate random-prefix attacks to protect upstream DNS servers
    *
    * @example true
+   * @x-auditable true
    */
   enabled?: boolean;
   /**
@@ -16407,6 +16441,7 @@ export type DnsFirewallAttackMitigation = {
    *
    * @default true
    * @example false
+   * @x-auditable true
    */
   only_when_upstream_unhealthy?: boolean;
 } | null;
@@ -16415,6 +16450,7 @@ export type DnsFirewallAttackMitigation = {
  * Whether to refuse to answer queries for the ANY type
  *
  * @example true
+ * @x-auditable true
  */
 export type DnsFirewallDeprecateAnyRequests = boolean;
 
@@ -16474,11 +16510,12 @@ export type DnsFirewallDnsFirewallSingleResponse = DnsFirewallApiResponseSingle 
  * Whether to forward client IP (resolver) subnet if no EDNS Client Subnet is sent
  *
  * @example false
+ * @x-auditable true
  */
 export type DnsFirewallEcsFallback = boolean;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -16492,6 +16529,7 @@ export type DnsFirewallIdentifier = string;
  * @example 900
  * @maximum 36000
  * @minimum 30
+ * @x-auditable true
  */
 export type DnsFirewallMaximumCacheTtl = number;
 
@@ -16500,7 +16538,11 @@ export type DnsFirewallMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -16510,6 +16552,7 @@ export type DnsFirewallMessages = {
  * @example 60
  * @maximum 36000
  * @minimum 30
+ * @x-auditable true
  */
 export type DnsFirewallMinimumCacheTtl = number;
 
@@ -16518,6 +16561,7 @@ export type DnsFirewallMinimumCacheTtl = number;
  *
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type DnsFirewallModifiedOn = string;
 
@@ -16527,6 +16571,7 @@ export type DnsFirewallModifiedOn = string;
  * @example My Awesome DNS Firewall cluster
  * @maxLength 160
  * @minLength 1
+ * @x-auditable true
  */
 export type DnsFirewallName = string;
 
@@ -16536,6 +16581,7 @@ export type DnsFirewallName = string;
  * @example 900
  * @maximum 36000
  * @minimum 30
+ * @x-auditable true
  */
 export type DnsFirewallNegativeCacheTtl = number | null;
 
@@ -16545,30 +16591,31 @@ export type DnsFirewallNegativeCacheTtl = number | null;
  * @example 600
  * @maximum 1000000000
  * @minimum 100
+ * @x-auditable true
  */
 export type DnsFirewallRatelimit = number | null;
 
 export type DnsFirewallResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -16582,6 +16629,7 @@ export type DnsFirewallResultInfo = {
  * @example 2
  * @maximum 2
  * @minimum 0
+ * @x-auditable true
  */
 export type DnsFirewallRetries = number;
 
@@ -21882,6 +21930,7 @@ export type HyperdriveResultInfo = {
  * Allow or deny operations against the resources.
  *
  * @example allow
+ * @x-auditable true
  */
 export type IamAccess = 'allow' | 'deny';
 
@@ -21891,6 +21940,7 @@ export type IamAccount = {
    *
    * @example 2014-03-01T12:21:02.0000Z
    * @format date-time
+   * @x-auditable true
    */
   created_on?: string;
   id: IamCommonComponentsSchemasIdentifier;
@@ -21907,6 +21957,8 @@ export type IamAccount = {
   settings?: {
     /**
      * Sets an abuse contact email to notify for abuse reports.
+     *
+     * @x-auditable true
      */
     abuse_contact_email?: string;
     /**
@@ -21930,6 +21982,7 @@ export type IamAccount = {
      * Two-Factor Authentication is enabled
      *
      * @default false
+     * @x-auditable true
      */
     enforce_twofactor?: boolean;
     /**
@@ -21950,6 +22003,7 @@ export type IamAccount = {
  *
  * @example eb78d65290b24279ba6f44721b3ea3c4
  * @maxLength 32
+ * @x-auditable true
  */
 export type IamAccountIdentifier = string;
 
@@ -21958,10 +22012,10 @@ export type IamApiResponseCollection = IamApiResponseCommon & {
 };
 
 export type IamApiResponseCommon = {
-  errors: IamMessages;
-  messages: IamMessages;
+  errors: IamSchemasMessages;
+  messages: IamSchemasMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -21973,11 +22027,11 @@ export type IamApiResponseCommonFailure = {
    * @example {"code":7003,"message":"No route for the URI"}
    * @minLength 1
    */
-  errors: IamMessages;
-  messages: IamMessages;
+  errors: IamSchemasMessages;
+  messages: IamSchemasMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -21996,6 +22050,7 @@ export type IamApiResponseSingleId = IamApiResponseCommon & {
  * Enterprise only. Indicates whether or not API access is enabled specifically for this user on a given account.
  *
  * @example true
+ * @x-auditable true
  */
 export type IamApiAccessEnabled = boolean | null;
 
@@ -22073,6 +22128,7 @@ export type IamCondition = {
  *
  * @example US
  * @maxLength 30
+ * @x-auditable true
  */
 export type IamCountry = string | null;
 
@@ -22085,6 +22141,7 @@ export type IamCreateAccount = {
    * the type of account being created. For self-serve customers, use standard. for enterprise customers, use enterprise.
    *
    * @example standard
+   * @x-auditable true
    */
   type: 'standard' | 'enterprise';
   /**
@@ -22095,6 +22152,7 @@ export type IamCreateAccount = {
      * Tenant unit ID
      *
      * @example f267e341f3dd4697bd3b9f71dd96247f
+     * @x-auditable true
      */
     id?: string;
   };
@@ -22108,6 +22166,7 @@ export type IamCreateMemberWithPolicies = {
   policies: IamCreateMemberPolicy[];
   /**
    * @default pending
+   * @x-auditable true
    */
   status?: 'accepted' | 'pending';
 };
@@ -22120,6 +22179,7 @@ export type IamCreateMemberWithRoles = {
   roles: IamRoleComponentsSchemasIdentifier[];
   /**
    * @default pending
+   * @x-auditable true
    */
   status?: 'accepted' | 'pending';
 };
@@ -22161,6 +22221,7 @@ export type IamCreateResourceGroup = {
    * Name of the resource group.
    *
    * @example NameOfTheResourceGroup
+   * @x-auditable true
    */
   name?: string;
   scope: IamCreateScope;
@@ -22195,6 +22256,7 @@ export type IamCreatedResourceGroupResponse = {
    * Identifier of the group.
    *
    * @example 6d7f2f5f5b1d4a0e9081fdc98d432fd1
+   * @x-auditable true
    */
   id?: string;
   /**
@@ -22210,6 +22272,7 @@ export type IamCreatedResourceGroupResponse = {
  * Allow or deny operations against the resources.
  *
  * @example allow
+ * @x-auditable true
  */
 export type IamEffect = 'allow' | 'deny';
 
@@ -22218,6 +22281,7 @@ export type IamEffect = 'allow' | 'deny';
  *
  * @example user@example.com
  * @maxLength 90
+ * @x-auditable true
  */
 export type IamEmail = string;
 
@@ -22226,6 +22290,7 @@ export type IamEmail = string;
  *
  * @example 2020-01-01T00:00:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type IamExpiresOn = string;
 
@@ -22234,6 +22299,7 @@ export type IamExpiresOn = string;
  *
  * @example John
  * @maxLength 60
+ * @x-auditable true
  */
 export type IamFirstName = string | null;
 
@@ -22243,10 +22309,12 @@ export type IamFirstName = string | null;
 export type IamGrants = {
   /**
    * @example true
+   * @x-auditable true
    */
   read?: boolean;
   /**
    * @example true
+   * @x-auditable true
    */
   write?: boolean;
 };
@@ -22255,6 +22323,7 @@ export type IamGrants = {
  * Policy identifier.
  *
  * @example f267e341f3dd4697bd3b9f71dd96247f
+ * @x-auditable true
  */
 export type IamIdentifier = string;
 
@@ -22263,6 +22332,7 @@ export type IamIdentifier = string;
  *
  * @example 4f5f0c14a2a41d5063dd301b2f829f04
  * @maxLength 32
+ * @x-auditable true
  */
 export type IamInviteComponentsSchemasIdentifier = string;
 
@@ -22271,6 +22341,7 @@ export type IamInviteComponentsSchemasIdentifier = string;
  *
  * @example user@example.com
  * @maxLength 90
+ * @x-auditable true
  */
 export type IamInvitedBy = string;
 
@@ -22279,6 +22350,7 @@ export type IamInvitedBy = string;
  *
  * @example user@example.com
  * @maxLength 90
+ * @x-auditable true
  */
 export type IamInvitedMemberEmail = string;
 
@@ -22287,6 +22359,7 @@ export type IamInvitedMemberEmail = string;
  *
  * @example 2014-01-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type IamInvitedOn = string;
 
@@ -22295,6 +22368,7 @@ export type IamInvitedOn = string;
  *
  * @example 2018-07-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type IamIssuedOn = string;
 
@@ -22303,6 +22377,7 @@ export type IamIssuedOn = string;
  *
  * @example Appleseed
  * @maxLength 60
+ * @x-auditable true
  */
 export type IamLastName = string | null;
 
@@ -22311,6 +22386,7 @@ export type IamLastName = string | null;
  *
  * @example 2020-01-02T12:34:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type IamLastUsedOn = string;
 
@@ -22329,6 +22405,7 @@ export type IamMemberPermissionGroup = {
    * Identifier of the group.
    *
    * @example c8fed203ed3043cba015a93ad1616f1f
+   * @x-auditable true
    */
   id: string;
 };
@@ -22349,6 +22426,7 @@ export type IamMemberResourceGroup = {
    * Identifier of the group.
    *
    * @example 6d7f2f5f5b1d4a0e9081fdc98d432fd1
+   * @x-auditable true
    */
   id: string;
 };
@@ -22372,6 +22450,7 @@ export type IamMemberWithPolicies = {
    * A member's status in the account.
    *
    * @example accepted
+   * @x-auditable true
    */
   status?: 'accepted' | 'pending';
   /**
@@ -22423,6 +22502,7 @@ export type IamMembershipWithPolicies = {
  *
  * @example 4536bcfad5faccb111b47003c79917fa
  * @maxLength 32
+ * @x-auditable true
  */
 export type IamMembershipComponentsSchemasIdentifier = string;
 
@@ -22439,6 +22519,7 @@ export type IamMessages = {
  *
  * @example 2018-07-02T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type IamModifiedOn = string;
 
@@ -22455,6 +22536,7 @@ export type IamName = string;
  *
  * @example 2018-07-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type IamNotBefore = string;
 
@@ -22477,6 +22559,7 @@ export type IamPermissionGroup = {
    * Identifier of the group.
    *
    * @example 6d7f2f5f5b1d4a0e9081fdc98d432fd1
+   * @x-auditable true
    */
   id: string;
   /**
@@ -22492,6 +22575,7 @@ export type IamPermissionGroup = {
    * Name of the group.
    *
    * @example Load Balancer
+   * @x-auditable true
    */
   name?: string;
 };
@@ -22501,6 +22585,7 @@ export type IamPermissionGroup = {
  *
  * @example 6d7f2f5f5b1d4a0e9081fdc98d432fd1
  * @maxLength 32
+ * @x-auditable true
  */
 export type IamPermissionGroupComponentsSchemasIdentifier = string;
 
@@ -22543,10 +22628,14 @@ export type IamPermissionsGroupResponseCollection = IamApiResponseCollection & {
   result?: {
     /**
      * Public ID.
+     *
+     * @x-auditable true
      */
     id?: string;
     /**
      * Permission Group Name
+     *
+     * @x-auditable true
      */
     name?: string;
     /**
@@ -22573,6 +22662,7 @@ export type IamPolicyWithPermissionGroupsAndResources = {
  *
  * @example Demo Account
  * @maxLength 100
+ * @x-auditable true
  */
 export type IamPropertiesName = string;
 
@@ -22594,6 +22684,7 @@ export type IamResourceGroup = {
    * Identifier of the group.
    *
    * @example 6d7f2f5f5b1d4a0e9081fdc98d432fd1
+   * @x-auditable true
    */
   id: string;
   /**
@@ -22609,6 +22700,7 @@ export type IamResourceGroup = {
    * Name of the resource group.
    *
    * @example com.cloudflare.api.account.eb78d65290b24279ba6f44721b3ea3c4
+   * @x-auditable true
    */
   name?: string;
   /**
@@ -22622,6 +22714,7 @@ export type IamResourceGroup = {
  *
  * @example 6d7f2f5f5b1d4a0e9081fdc98d432fd1
  * @maxLength 32
+ * @x-auditable true
  */
 export type IamResourceGroupComponentsSchemasIdentifier = string;
 
@@ -22706,6 +22799,7 @@ export type IamRole = {
    * Description of role's permissions.
    *
    * @example Administrative access to the entire Account
+   * @x-auditable true
    */
   description: string;
   id: IamRoleComponentsSchemasIdentifier;
@@ -22714,6 +22808,7 @@ export type IamRole = {
    *
    * @example Account Administrator
    * @maxLength 120
+   * @x-auditable true
    */
   name: string;
   /**
@@ -22727,6 +22822,7 @@ export type IamRole = {
  *
  * @example 3536bcfad5faccb999b47003c79917fb
  * @maxLength 32
+ * @x-auditable true
  */
 export type IamRoleComponentsSchemasIdentifier = string;
 
@@ -22746,14 +22842,28 @@ export type IamSchemasCollectionInviteResponse = IamApiResponseCollection & {
  *
  * @example 2014-01-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type IamSchemasExpiresOn = string;
+
+export type IamSchemasMessages = {
+  /**
+   * @minimum 1000
+   */
+  code: number;
+  documentation_url?: string;
+  message: string;
+  source?: {
+    pointer?: string;
+  };
+}[];
 
 /**
  * Organization name.
  *
  * @example Cloudflare, Inc.
  * @maxLength 100
+ * @x-auditable true
  */
 export type IamSchemasName = string;
 
@@ -22766,6 +22876,7 @@ export type IamSchemasPermissions = string[];
  * Status of this membership.
  *
  * @example accepted
+ * @x-auditable true
  */
 export type IamSchemasStatus = 'accepted' | 'pending' | 'rejected';
 
@@ -22841,6 +22952,7 @@ export type IamSingleUserResponse = IamApiResponseSingle & {
  * Status of the token.
  *
  * @example active
+ * @x-auditable true
  */
 export type IamStatus = 'active' | 'disabled' | 'expired';
 
@@ -22849,6 +22961,7 @@ export type IamStatus = 'active' | 'disabled' | 'expired';
  *
  * @example +1 123-123-1234
  * @maxLength 20
+ * @x-auditable true
  */
 export type IamTelephone = string | null;
 
@@ -22906,6 +23019,7 @@ export type IamTwoFactorAuthenticationEnabled = boolean;
  * Tenant unit identifier.
  *
  * @example f267e341f3dd4697bd3b9f71dd96247f
+ * @x-auditable true
  */
 export type IamUnitIdentifier = string;
 
@@ -22926,6 +23040,7 @@ export type IamUpdateMemberWithRoles = {
    * A member's status in the account.
    *
    * @example accepted
+   * @x-auditable true
    */
   status?: 'accepted' | 'pending';
   /**
@@ -22995,6 +23110,7 @@ export type IamValue = string;
  *
  * @example 12345
  * @maxLength 20
+ * @x-auditable true
  */
 export type IamZipcode = string | null;
 
@@ -26068,7 +26184,7 @@ export type LogcontrolApiResponseCommon = {
   errors: LogcontrolMessages;
   messages: LogcontrolMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -26084,7 +26200,7 @@ export type LogcontrolApiResponseCommonFailure = {
   messages: LogcontrolMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -26109,7 +26225,7 @@ export type LogcontrolCmbConfigResponseSingle = LogcontrolApiResponseSingle & {
 export type LogcontrolFlag = boolean;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -26121,7 +26237,11 @@ export type LogcontrolMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -39777,6 +39897,206 @@ export type SecondaryDnsTsig = {
  */
 export type SecondaryDnsTsigId = string;
 
+export type SecretsStoreSecretStatus = 'pending' | 'active' | 'deleted';
+
+/**
+ * Account Identifier
+ *
+ * @example 985e105f4ecef8ad9ca31a8372d0c353
+ * @maxLength 32
+ */
+export type SecretsStoreAccountIdentifier = string;
+
+export type SecretsStoreApiResponseCollection = SecretsStoreApiResponseCommon & {
+  result_info?: SecretsStoreResultInfo;
+};
+
+export type SecretsStoreApiResponseCommon = {
+  errors: SecretsStoreMessages;
+  messages: SecretsStoreMessages;
+  /**
+   * Whether the API call was successful.
+   *
+   * @example true
+   */
+  success: true;
+};
+
+export type SecretsStoreApiResponseCommonFailure = {
+  /**
+   * @example {"code":7003,"message":"No route for the URI"}
+   * @minLength 1
+   */
+  errors: SecretsStoreMessages;
+  messages: SecretsStoreMessages;
+  result: any | null;
+  /**
+   * Whether the API call was successful.
+   *
+   * @example false
+   */
+  success: false;
+};
+
+/**
+ * Freeform text describing the secret
+ *
+ * @example info about my secret
+ */
+export type SecretsStoreComment = string;
+
+export type SecretsStoreCreateSecretObject = {
+  comment?: SecretsStoreComment;
+  name: SecretsStoreSecretName;
+  value: SecretsStoreValue;
+};
+
+/**
+ * Whenthe secret was created.
+ *
+ * @example 2023-09-21T18:56:32.624632Z
+ * @format date-time
+ */
+export type SecretsStoreCreated = string;
+
+export type SecretsStoreDeleteSecretObject = {
+  id: SecretsStoreIdentifier;
+};
+
+export type SecretsStoreDuplicateSecretObject = {
+  comment?: SecretsStoreComment;
+  name: SecretsStoreSecretName;
+};
+
+/**
+ * Secret identifier tag.
+ *
+ * @example 3fd85f74b32742f1bff64a85009dda07
+ * @maxLength 32
+ */
+export type SecretsStoreIdentifier = string;
+
+export type SecretsStoreMessages = {
+  /**
+   * @minimum 1000
+   */
+  code: number;
+  documentation_url?: string;
+  message: string;
+  source?: {
+    pointer?: string;
+  };
+}[];
+
+/**
+ * When the secret was modified.
+ *
+ * @example 2023-09-21T18:56:32.624632Z
+ * @format date-time
+ */
+export type SecretsStoreModified = string;
+
+export type SecretsStorePatchSecretObject = {
+  comment?: SecretsStoreComment;
+  name: SecretsStoreSecretName;
+  value?: SecretsStoreValue;
+};
+
+/**
+ * The number of secrets the account is entitlted to use
+ *
+ * @example 10
+ */
+export type SecretsStoreQuota = number;
+
+export type SecretsStoreQuotaResponse = SecretsStoreApiResponseCollection & {
+  result?: SecretsStoreSecretsUsageObject;
+};
+
+export type SecretsStoreResultInfo = {
+  /**
+   * Total number of results for the requested service.
+   *
+   * @example 1
+   */
+  count?: number;
+  /**
+   * Current page within paginated list of results.
+   *
+   * @example 1
+   */
+  page?: number;
+  /**
+   * Number of results per page of results.
+   *
+   * @example 20
+   */
+  per_page?: number;
+  /**
+   * Total results available without any search parameters.
+   *
+   * @example 2000
+   */
+  total_count?: number;
+};
+
+export type SecretsStoreSecretObject = {
+  comment?: SecretsStoreComment;
+  created: SecretsStoreCreated;
+  id: SecretsStoreIdentifier;
+  modified: SecretsStoreModified;
+  name: SecretsStoreSecretName;
+  status: SecretsStoreSecretStatus;
+  store_id: SecretsStoreStoreIdentifier;
+};
+
+/**
+ * The name of the secret
+ *
+ * @example MY_API_KEY
+ */
+export type SecretsStoreSecretName = string;
+
+export type SecretsStoreSecretResponse = SecretsStoreApiResponseCollection & {
+  result?: SecretsStoreSecretObject;
+};
+
+export type SecretsStoreSecretsUsageObject = {
+  secrets: SecretsStoreUsageQuotaObject;
+};
+
+export type SecretsStoreSecretsResponseCollection = SecretsStoreApiResponseCollection & {
+  result?: SecretsStoreSecretObject[];
+};
+
+/**
+ * Store Identifier
+ *
+ * @example 023e105f4ecef8ad9ca31a8372d0c353
+ * @maxLength 32
+ */
+export type SecretsStoreStoreIdentifier = string;
+
+/**
+ * The number of secrets the account is currently using
+ *
+ * @example 10
+ */
+export type SecretsStoreUsage = number;
+
+export type SecretsStoreUsageQuotaObject = {
+  quota: SecretsStoreQuota;
+  usage: SecretsStoreUsage;
+};
+
+/**
+ * The value of the secret. Note that this is 'write only' - no API reponse will provide this value, it is only used to create/modify secrets.
+ *
+ * @example api-token-secret-123
+ * @x-sensitive true
+ */
+export type SecretsStoreValue = string;
+
 export type SecurityCenterAccountId = SecurityCenterIdentifier;
 
 export type SecurityCenterApiResponseCommon = {
@@ -42412,6 +42732,30 @@ export type TeamsDevicesCrowdstrikeInputRequest = {
   versionOperator?: '<' | '<=' | '>' | '>=' | '==';
 };
 
+/**
+ * v4 public API Pagination/Cursor info
+ *
+ * @example {"count":1,"cursor":"ais86dftf.asdf7ba8","page":null,"per_page":10,"total_count":null}
+ */
+export type TeamsDevicesCursorResultInfo = {
+  /**
+   * Number of records in the response.
+   */
+  count: number;
+  /**
+   * Opaque token to request the next set of records.
+   */
+  cursor: string;
+  /**
+   * The limit for the number of records in the response.
+   */
+  per_page: number;
+  /**
+   * Total number of records available.
+   */
+  total_count?: number | null;
+};
+
 export type TeamsDevicesCustomS2sConfigRequest = {
   /**
    * This id will be passed in the `CF-Access-Client-ID` header when hitting the `api_url`
@@ -42852,6 +43196,8 @@ export type TeamsDevicesDomainJoinedInputRequest = {
  * @maxLength 90
  */
 export type TeamsDevicesEmail = string;
+
+export type TeamsDevicesEmptyBody = Record<string, any> | null;
 
 /**
  * List of routes excluded in the WARP client's tunnel.
@@ -43309,6 +43655,12 @@ export type TeamsDevicesOsVersionInputRequest = {
   version: string;
 };
 
+export type TeamsDevicesOverrideCodes = {
+  disable_for_time?: {
+    [key: string]: string;
+  };
+};
+
 export type TeamsDevicesOverrideCodesResponse = TeamsDevicesApiResponseCollection & {
   result?: {
     disable_for_time?: TeamsDevicesDisableForTime;
@@ -43322,6 +43674,112 @@ export type TeamsDevicesOverrideCodesResponse = TeamsDevicesApiResponseCollectio
  * @example /path2
  */
 export type TeamsDevicesPaths = string[];
+
+/**
+ * A WARP Device.
+ */
+export type TeamsDevicesPhysicalDevice = {
+  /**
+   * The number of active registrations for the device. Active registrations are those which haven't been revoked or deleted.
+   *
+   * @example 1
+   */
+  active_registrations: number;
+  /**
+   * Version of the WARP client.
+   *
+   * @example 1.0.0
+   */
+  client_version?: string | null;
+  /**
+   * The RFC3339 timestamp when the device was created.
+   *
+   * @example 2025-02-14T13:17:00Z
+   */
+  created_at: string;
+  /**
+   * The RFC3339 timestamp when the device was deleted.
+   *
+   * @example 2025-02-14T13:17:00Z
+   */
+  deleted_at?: string | null;
+  /**
+   * The device operating system.
+   *
+   * @example linux
+   */
+  device_type?: string | null;
+  /**
+   * A string that uniquely identifies the hardware or virtual machine (VM).
+   */
+  hardware_id?: string | null;
+  /**
+   * The unique ID of the device.
+   *
+   * @example fc9ab6ab-3b94-4319-9941-459462b3d73e
+   */
+  id: string;
+  /**
+   * The RFC3339 timestamp when the device was last seen.
+   *
+   * @example 2025-02-14T13:17:00Z
+   */
+  last_seen_at: string | null;
+  /**
+   * The last Access user to use the WARP device.
+   */
+  last_seen_user?: TeamsDevicesUser | null;
+  /**
+   * The device MAC address.
+   *
+   * @example f5:01:73:cf:12:23
+   */
+  mac_address?: string | null;
+  /**
+   * The device manufacturer.
+   *
+   * @example ACME
+   */
+  manufacturer?: string | null;
+  /**
+   * The model name of the device.
+   *
+   * @example Mark VII
+   */
+  model?: string | null;
+  /**
+   * The name of the device.
+   *
+   * @example My Device
+   */
+  name: string;
+  /**
+   * The device operating system version number.
+   */
+  os_version?: string | null;
+  /**
+   * Additional operating system version data. For macOS or iOS, the Product Version Extra. For Linux, the kernel release version.
+   */
+  os_version_extra?: string | null;
+  /**
+   * The public IP address of the WARP client.
+   *
+   * @example 1.1.1.1
+   */
+  public_ip?: string | null;
+  /**
+   * The device serial number.
+   *
+   * @example ABS765ASD8A
+   */
+  serial_number?: string | null;
+  /**
+   * The RFC3339 timestamp when the device was last updated.
+   *
+   * @example 2025-02-14T13:17:00Z
+   */
+  updated_at: string;
+};
 
 /**
  * @example windows
@@ -43341,6 +43799,92 @@ export type TeamsDevicesPrecedence = number;
  * @example true
  */
 export type TeamsDevicesRegisterInterfaceIpWithDns = boolean;
+
+/**
+ * A WARP configuration tied to a single user. Multiple registrations can be created from a single WARP device.
+ */
+export type TeamsDevicesRegistration = {
+  /**
+   * The RFC3339 timestamp when the registration was created.
+   *
+   * @example 2025-02-14T13:17:00Z
+   */
+  created_at: string;
+  /**
+   * The RFC3339 timestamp when the registration was deleted.
+   *
+   * @example 2025-02-14T13:17:00Z
+   */
+  deleted_at?: string | null;
+  device: TeamsDevicesRegistrationDeviceDetails;
+  /**
+   * The ID of the registration.
+   *
+   * @example 11ffb86f-3f0c-4306-b4a2-e62f872b166a
+   */
+  id: string;
+  /**
+   * The public key used to connect to the Cloudflare network.
+   *
+   * @example U+QTP50RsWfeLGHF4tlGDnmGeuwtsz46KCHr5OyhWq00Rsdfl45mgnQAuEJ6CO0YrkyTl9FUf5iB0bwYR3g4EEFEHhtu6jFaqfMrBMBSz6itv9HQXkaR9OieKQ==
+   */
+  key: string;
+  /**
+   * The type of encryption key used by the WARP client for the active key. Currently 'curve25519' for WireGuard and 'secp256r1' for MASQUE
+   *
+   * @example secp256r1
+   */
+  key_type?: string | null;
+  /**
+   * The RFC3339 timestamp when the registration was last seen.
+   *
+   * @example 2025-02-14T13:17:00Z
+   */
+  last_seen_at: string;
+  /**
+   * The RFC3339 timestamp when the registration was revoked.
+   *
+   * @example 2025-02-14T13:17:00Z
+   */
+  revoked_at?: string | null;
+  /**
+   * Type of the tunnel - wireguard or masque.
+   *
+   * @example masque
+   */
+  tunnel_type?: string | null;
+  /**
+   * The RFC3339 timestamp when the registration was last updated.
+   *
+   * @example 2025-02-14T13:17:00Z
+   */
+  updated_at: string;
+  user?: TeamsDevicesUser;
+};
+
+/**
+ * Device details embedded inside of a registration.
+ */
+export type TeamsDevicesRegistrationDeviceDetails = {
+  /**
+   * Version of the WARP client
+   *
+   * @example 1.0.0
+   */
+  client_version?: string;
+  /**
+   * The ID of the device
+   *
+   * @example 32aa0404-78f1-49a4-99e0-97f575081356
+   */
+  id: string;
+  /**
+   * The name of the device
+   *
+   * @example My Device
+   */
+  name: string;
+};
 
 /**
  * Whether to check all disks for encryption.
@@ -43901,6 +44445,14 @@ export type TeamsDevicesUser = {
  * @maxLength 36
  */
 export type TeamsDevicesUuid = string;
+
+/**
+ * A message which can be returned in either the 'errors' or 'messages' fields in a v4 API response.
+ */
+export type TeamsDevicesV4ResponseMessage = {
+  code: number;
+  message: string;
+};
 
 /**
  * The WARP client version.
@@ -49669,6 +50221,7 @@ export type WorkersKvExpirationTtl = number;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type WorkersKvIdentifier = string;
 
@@ -49731,6 +50284,7 @@ export type WorkersKvNamespace = {
    * True if new beta namespace, with additional preview features.
    *
    * @example true
+   * @x-auditable true
    */
   beta?: boolean;
   id: WorkersKvNamespaceIdentifier;
@@ -49738,6 +50292,7 @@ export type WorkersKvNamespace = {
    * True if keys written on the URL will be URL-decoded before storing. For example, if set to "true", a key written on the URL as "%3F" will be stored as "?".
    *
    * @example true
+   * @x-auditable true
    */
   supports_url_encoding?: boolean;
   title: WorkersKvNamespaceTitle;
@@ -49748,6 +50303,7 @@ export type WorkersKvNamespace = {
  *
  * @example 0f2ac74b498b48028cb68387c421e279
  * @maxLength 32
+ * @x-auditable true
  */
 export type WorkersKvNamespaceIdentifier = string;
 
@@ -49755,6 +50311,7 @@ export type WorkersKvNamespaceIdentifier = string;
  * A human-readable string name for a Namespace.
  *
  * @example My Own Namespace
+ * @x-auditable true
  */
 export type WorkersKvNamespaceTitle = string;
 
@@ -49792,6 +50349,544 @@ export type WorkersKvResultInfo = {
  */
 export type WorkersKvValue = string;
 
+/**
+ * The statistics object contains information about query performance from the database, it does not include any network latency
+ */
+export type WorkersObservabilityPerformanceInformation = {
+  /**
+   * Number of uncompressed bytes read from the table.
+   */
+  bytes_read: number;
+  /**
+   * Time in seconds for the query to run.
+   */
+  elapsed: number;
+  /**
+   * Number of rows scanned from the table.
+   */
+  rows_read: number;
+};
+
+export type WorkersObservabilityQuery = {
+  created: string;
+  /**
+   * @example Query description
+   * @maxLength 1000
+   */
+  description: string | null;
+  /**
+   * ID of your environment
+   *
+   * @example my-environment
+   * @maxLength 64
+   * @minLength 1
+   * @pattern ^[a-z0-9_]+(?:-[a-z0-9_]+)*$
+   */
+  environmentId: string;
+  /**
+   * Flag for alerts automatically created
+   */
+  generated: boolean | null;
+  /**
+   * ID of the query
+   *
+   * @example query-1
+   * @maxLength 64
+   * @minLength 1
+   * @pattern ^[a-z0-9_]+(?:-[a-z0-9_]+)*$
+   */
+  id: string;
+  /**
+   * Query name
+   */
+  name: string | null;
+  parameters: {
+    /**
+     * Create Calculations to compute as part of the query.
+     */
+    calculations?: {
+      alias?: string;
+      key?: string;
+      keyType?: 'string' | 'number' | 'boolean';
+      operator:
+        | 'uniq'
+        | 'count'
+        | 'max'
+        | 'min'
+        | 'sum'
+        | 'avg'
+        | 'median'
+        | 'p001'
+        | 'p01'
+        | 'p05'
+        | 'p10'
+        | 'p25'
+        | 'p75'
+        | 'p90'
+        | 'p95'
+        | 'p99'
+        | 'p999'
+        | 'stddev'
+        | 'variance'
+        | 'COUNT_DISTINCT'
+        | 'COUNT'
+        | 'MAX'
+        | 'MIN'
+        | 'SUM'
+        | 'AVG'
+        | 'MEDIAN'
+        | 'P001'
+        | 'P01'
+        | 'P05'
+        | 'P10'
+        | 'P25'
+        | 'P75'
+        | 'P90'
+        | 'P95'
+        | 'P99'
+        | 'P999'
+        | 'STDDEV'
+        | 'VARIANCE';
+    }[];
+    /**
+     * Set the Datasets to query. Leave it empty to query all the datasets.
+     */
+    datasets?: string[];
+    /**
+     * Set a Flag to describe how to combine the filters on the query.
+     */
+    filterCombination?: 'and' | 'or' | 'AND' | 'OR';
+    /**
+     * Configure the Filters to apply to the query.
+     */
+    filters?: {
+      key: string;
+      operation:
+        | 'includes'
+        | 'not_includes'
+        | 'starts_with'
+        | 'regex'
+        | 'exists'
+        | 'is_null'
+        | 'in'
+        | 'not_in'
+        | 'eq'
+        | 'neq'
+        | 'gt'
+        | 'gte'
+        | 'lt'
+        | 'lte'
+        | '='
+        | '!='
+        | '>'
+        | '>='
+        | '<'
+        | '<='
+        | 'INCLUDES'
+        | 'DOES_NOT_INCLUDE'
+        | 'MATCH_REGEX'
+        | 'EXISTS'
+        | 'DOES_NOT_EXIST'
+        | 'IN'
+        | 'NOT_IN'
+        | 'STARTS_WITH';
+      type: 'string' | 'number' | 'boolean';
+      value?: string | number | boolean;
+    }[];
+    /**
+     * Define how to group the results of the query.
+     */
+    groupBys?: {
+      type: 'string' | 'number' | 'boolean';
+      value: string;
+    }[];
+    /**
+     * Configure the Having clauses that filter on calculations in the query result.
+     */
+    havings?: {
+      key: string;
+      operation: 'eq' | 'neq' | 'gt' | 'gte' | 'lt' | 'lte';
+      value: number;
+    }[];
+    /**
+     * Set a limit on the number of results / records returned by the query
+     *
+     * @maximum 100
+     * @minimum 0
+     */
+    limit?: number;
+    /**
+     * Define an expression to search using full-text search.
+     */
+    needle?: {
+      isRegex?: boolean;
+      matchCase?: boolean;
+      value: string | number | boolean;
+    };
+    /**
+     * Configure the order of the results returned by the query.
+     */
+    orderBy?: {
+      /**
+       * Set the order of the results
+       */
+      order?: 'asc' | 'desc';
+      /**
+       * Configure which Calculation to order the results by.
+       */
+      value: string;
+    };
+  };
+  updated: string;
+  /**
+   * @example JY2UKXLO60AEV94R
+   */
+  userId: string;
+  /**
+   * ID of your workspace
+   *
+   * @example my-workspace
+   * @maxLength 64
+   * @minLength 1
+   * @pattern ^[a-z0-9_]+(?:-[a-z0-9_]+)*$
+   */
+  workspaceId: string;
+};
+
+export type WorkersObservabilityQueryResults = {
+  calculations?: {
+    aggregates: {
+      count: number;
+      groups?: {
+        key: string;
+        value: string | number | boolean;
+      }[];
+      interval: number;
+      sampleInterval: number;
+      value: number;
+    }[];
+    alias?: string;
+    calculation: string;
+    series: {
+      data: {
+        count: number;
+        firstSeen: string;
+        groups?: {
+          key: string;
+          value: string | number | boolean;
+        }[];
+        interval: number;
+        lastSeen: string;
+        sampleInterval: number;
+        value: number;
+      }[];
+      time: string;
+    }[];
+  }[];
+  compare?: {
+    aggregates: {
+      count: number;
+      groups?: {
+        key: string;
+        value: string | number | boolean;
+      }[];
+      interval: number;
+      sampleInterval: number;
+      value: number;
+    }[];
+    alias?: string;
+    calculation: string;
+    series: {
+      data: {
+        count: number;
+        firstSeen: string;
+        groups?: {
+          key: string;
+          value: string | number | boolean;
+        }[];
+        interval: number;
+        lastSeen: string;
+        sampleInterval: number;
+        value: number;
+      }[];
+      time: string;
+    }[];
+  }[];
+  events?: {
+    count?: number;
+    events?: WorkersObservabilityTelemetryEvent[];
+    fields?: {
+      key: string;
+      type: string;
+    }[];
+    series?: {
+      data: {
+        aggregates: {
+          /**
+           * @deprecated true
+           * @exclusiveMinimum true
+           * @minimum 0
+           */
+          _count: number;
+          /**
+           * @deprecated true
+           */
+          _firstSeen: string;
+          /**
+           * @deprecated true
+           * @exclusiveMinimum true
+           * @minimum 0
+           */
+          _interval: number;
+          /**
+           * @deprecated true
+           */
+          _lastSeen: string;
+          /**
+           * @deprecated true
+           */
+          bin?: Record<string, any>;
+        };
+        count: number;
+        errors?: number;
+        /**
+         * Groups in the query results.
+         */
+        groups?: {
+          [key: string]: string | number | boolean;
+        };
+        interval: number;
+        sampleInterval: number;
+      }[];
+      time: string;
+    }[];
+  };
+  invocations?: {
+    [key: string]: WorkersObservabilityTelemetryEvent[];
+  };
+  patterns?: {
+    count: number;
+    pattern: string;
+    series: {
+      data: {
+        count: number;
+        groups?: {
+          key: string;
+          value: string | number | boolean;
+        }[];
+        interval: number;
+        sampleInterval: number;
+        value: number;
+      };
+      time: string;
+    }[];
+    service: string;
+  }[];
+  run: WorkersObservabilityQueryRun;
+  statistics: WorkersObservabilityPerformanceInformation;
+};
+
+/**
+ * A Workers Observability Query Object
+ */
+export type WorkersObservabilityQueryRun = {
+  accountId: string;
+  created?: string;
+  dry: boolean;
+  /**
+   * @deprecated true
+   */
+  environmentId: string;
+  granularity: number;
+  id: string;
+  query: WorkersObservabilityQuery;
+  statistics?: {
+    /**
+     * Number of uncompressed bytes read from the table.
+     */
+    bytes_read: number;
+    /**
+     * Time in seconds for the query to run.
+     */
+    elapsed: number;
+    /**
+     * Number of rows scanned from the table.
+     */
+    rows_read: number;
+  };
+  status: 'STARTED' | 'COMPLETED';
+  timeframe: {
+    /**
+     * Set the start time for your query using UNIX time in milliseconds.
+     *
+     * @exclusiveMinimum true
+     * @minimum 0
+     */
+    from: number;
+    /**
+     * Set the end time for your query using UNIX time in milliseconds.
+     *
+     * @exclusiveMinimum true
+     * @minimum 0
+     */
+    to: number;
+  };
+  updated?: string;
+  userId: string;
+  /**
+   * @deprecated true
+   */
+  workspaceId: string;
+};
+
+/**
+ * The data structure of a telemetry event
+ */
+export type WorkersObservabilityTelemetryEvent = {
+  $metadata: {
+    account?: string;
+    cloudService?: string;
+    /**
+     * @exclusiveMinimum true
+     * @minimum 0
+     */
+    coldStart?: number;
+    /**
+     * @exclusiveMinimum true
+     * @minimum 0
+     */
+    cost?: number;
+    /**
+     * @exclusiveMinimum true
+     * @minimum 0
+     */
+    duration?: number;
+    /**
+     * @minimum 0
+     */
+    endTime?: number;
+    error?: string;
+    errorTemplate?: string;
+    fingerprint?: string;
+    id: string;
+    level?: string;
+    message?: string;
+    messageTemplate?: string;
+    metricName?: string;
+    origin?: string;
+    parentSpanId?: string;
+    provider?: string;
+    region?: string;
+    requestId?: string;
+    service?: string;
+    spanId?: string;
+    spanName?: string;
+    stackId?: string;
+    /**
+     * @minimum 0
+     */
+    startTime?: number;
+    /**
+     * @exclusiveMinimum true
+     * @minimum 0
+     */
+    statusCode?: number;
+    /**
+     * @exclusiveMinimum true
+     * @minimum 0
+     */
+    traceDuration?: number;
+    traceId?: string;
+    trigger?: string;
+    type?: string;
+    url?: string;
+  };
+  /**
+   * Cloudflare Workers event information enriches your logs so you can easily identify and debug issues.
+   */
+  $workers?:
+    | {
+        entrypoint?: string;
+        event?: {
+          [key: string]:
+            | string
+            | number
+            | boolean
+            | {
+                [key: string]:
+                  | string
+                  | number
+                  | boolean
+                  | {
+                      [key: string]: (string | number | boolean)[] | string | number | boolean;
+                    };
+              };
+        };
+        eventType:
+          | 'fetch'
+          | 'scheduled'
+          | 'alarm'
+          | 'cron'
+          | 'queue'
+          | 'email'
+          | 'tail'
+          | 'rpc'
+          | 'websocket'
+          | 'unknown';
+        executionModel?: 'durableObject' | 'stateless';
+        outcome: string;
+        requestId: string;
+        scriptName: string;
+        scriptVersion?: {
+          id?: string;
+          message?: string;
+          tag?: string;
+        };
+        truncated?: boolean;
+      }
+    | {
+        cpuTimeMs: number;
+        diagnosticsChannelEvents?: {
+          channel: string;
+          message: string;
+          timestamp: number;
+        }[];
+        dispatchNamespace?: string;
+        entrypoint?: string;
+        event?: {
+          [key: string]: string | number | boolean;
+        };
+        eventType:
+          | 'fetch'
+          | 'scheduled'
+          | 'alarm'
+          | 'cron'
+          | 'queue'
+          | 'email'
+          | 'tail'
+          | 'rpc'
+          | 'websocket'
+          | 'unknown';
+        executionModel?: 'durableObject' | 'stateless';
+        outcome: string;
+        requestId: string;
+        scriptName: string;
+        scriptVersion?: {
+          id?: string;
+          message?: string;
+          tag?: string;
+        };
+        truncated?: boolean;
+        wallTimeMs: number;
+      };
+  dataset: string;
+  source: string | Record<string, any>;
+  /**
+   * @minimum 0
+   */
+  timestamp: number;
+};
+
 export type WorkersAccountSettings = {
   default_usage_model?: string;
   green_compute?: boolean;
@@ -49816,7 +50911,7 @@ export type WorkersApiResponseCommon = {
   errors: WorkersMessages;
   messages: WorkersMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -49832,7 +50927,7 @@ export type WorkersApiResponseCommonFailure = {
   messages: WorkersMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -50484,7 +51579,7 @@ export type WorkersHostname = string;
 export type WorkersId = string;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -50526,7 +51621,11 @@ export type WorkersMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 export type WorkersMigrationStep = {
@@ -50813,25 +51912,25 @@ export type WorkersPlacementStatus = 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'IN
 
 export type WorkersResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -53603,7 +54702,7 @@ export type ZoneActivationApiResponseCommon = {
   errors: ZoneActivationMessages;
   messages: ZoneActivationMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -53619,7 +54718,7 @@ export type ZoneActivationApiResponseCommonFailure = {
   messages: ZoneActivationMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -53629,7 +54728,7 @@ export type ZoneActivationApiResponseCommonFailure = {
 export type ZoneActivationApiResponseSingle = ZoneActivationApiResponseCommon;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -53641,7 +54740,11 @@ export type ZoneActivationMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 export type ZoneAnalyticsApiApiResponseCommon = {
