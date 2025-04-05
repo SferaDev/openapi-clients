@@ -145,6 +145,97 @@ export type ResourceSharingStatus = Schemas.ResourceSharingShareStatus;
 export type ResourceSharingTargetType = Schemas.ResourceSharingShareTargetType;
 
 /**
+ * @default desc
+ */
+export type SecretsStoreDirection = 'asc' | 'desc';
+
+/**
+ * @default created
+ */
+export type SecretsStoreOrder = 'name' | 'comment' | 'created' | 'modified' | 'status';
+
+/**
+ * @example 2
+ * @minimum 0
+ * @multipleOf 1
+ */
+export type SecretsStorePage = number;
+
+/**
+ * @example 20
+ * @maximum 100
+ * @minimum 0
+ * @multipleOf 1
+ */
+export type SecretsStorePerPage = number;
+
+export type SecretsStoreSearch = string;
+
+export type TeamsDevicesDevicesListDevicesParamActiveRegistrations = 'include' | 'only' | 'exclude';
+
+export type TeamsDevicesDevicesListDevicesParamCursor = string;
+
+export type TeamsDevicesDevicesListDevicesParamId = string[];
+
+export type TeamsDevicesDevicesListDevicesParamInclude = string;
+
+export type TeamsDevicesDevicesListDevicesParamLastSeenUserEmail = string;
+
+/**
+ * @format uint64
+ */
+export type TeamsDevicesDevicesListDevicesParamPerPage = number;
+
+export type TeamsDevicesDevicesListDevicesParamSearch = string;
+
+export type TeamsDevicesDevicesListDevicesParamSeenAfter = string;
+
+export type TeamsDevicesDevicesListDevicesParamSeenBefore = string;
+
+export type TeamsDevicesDevicesListDevicesParamSortBy =
+  | 'name'
+  | 'id'
+  | 'client_version'
+  | 'last_seen_user.email'
+  | 'last_seen_at'
+  | 'active_registrations'
+  | 'created_at';
+
+export type TeamsDevicesDevicesListDevicesParamSortOrder = 'asc' | 'desc';
+
+export type TeamsDevicesDevicesListRegistrationsParamCursor = string;
+
+export type TeamsDevicesDevicesListRegistrationsParamDeviceId = string;
+
+export type TeamsDevicesDevicesListRegistrationsParamId = string[];
+
+export type TeamsDevicesDevicesListRegistrationsParamInclude = string;
+
+/**
+ * @format uint64
+ */
+export type TeamsDevicesDevicesListRegistrationsParamPerPage = number;
+
+export type TeamsDevicesDevicesListRegistrationsParamSearch = string;
+
+export type TeamsDevicesDevicesListRegistrationsParamSeenAfter = string;
+
+export type TeamsDevicesDevicesListRegistrationsParamSeenBefore = string;
+
+export type TeamsDevicesDevicesListRegistrationsParamSortBy =
+  | 'id'
+  | 'user.name'
+  | 'user.email'
+  | 'last_seen_at'
+  | 'created_at';
+
+export type TeamsDevicesDevicesListRegistrationsParamSortOrder = 'asc' | 'desc';
+
+export type TeamsDevicesDevicesListRegistrationsParamStatus = 'active' | 'all' | 'revoked';
+
+export type TeamsDevicesDevicesListRegistrationsParamUserId = string[];
+
+/**
  * @default 1
  * @minimum 1
  */
