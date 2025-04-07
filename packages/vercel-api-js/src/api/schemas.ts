@@ -1068,6 +1068,8 @@ export type UserEvent = {
             cronJobsPerProject?: number;
             microfrontendGroupsPerTeam?: number;
             microfrontendProjectsPerGroup?: number;
+            flagsExplorerOverridesThreshold?: number;
+            flagsExplorerUnlimitedOverrides?: boolean;
           };
           /**
            * User | Team resource limits
@@ -3032,6 +3034,14 @@ export type AuthUser = {
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
     microfrontendProjectsPerGroup?: number;
+    /**
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+     */
+    flagsExplorerOverridesThreshold?: number;
+    /**
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+     */
+    flagsExplorerUnlimitedOverrides?: boolean;
   };
   /**
    * Prefix that will be used in the URL of "Preview" deployments created by the User account.
