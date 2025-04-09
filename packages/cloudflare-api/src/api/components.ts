@@ -22950,6 +22950,702 @@ export const workersAiPostRunCfMetaLlama3370bInstructFp8Fast = (
     signal
   });
 
+export type WorkersAiPostRunCfMetaLlama4Scout17b16eInstructPathParams = {
+  /**
+   * @example 023e105f4ecef8ad9ca31a8372d0c353
+   */
+  accountId: string;
+};
+
+export type WorkersAiPostRunCfMetaLlama4Scout17b16eInstructQueryParams = {
+  /**
+   * @example true
+   */
+  queueRequest?: string;
+};
+
+export type WorkersAiPostRunCfMetaLlama4Scout17b16eInstructError = Fetcher.ErrorWrapper<undefined>;
+
+export type WorkersAiPostRunCfMetaLlama4Scout17b16eInstructResponse = {
+  result?:
+    | {
+        /**
+         * The generated text response from the model
+         */
+        response: string;
+        /**
+         * An array of tool calls requests made during the response generation
+         */
+        tool_calls?: {
+          /**
+           * The arguments passed to be passed to the tool call request
+           */
+          arguments?: Record<string, any>;
+          /**
+           * The name of the tool to be called
+           */
+          name?: string;
+        }[];
+        /**
+         * Usage statistics for the inference request
+         */
+        usage?: {
+          /**
+           * Total number of tokens in output
+           *
+           * @default 0
+           */
+          completion_tokens?: number;
+          /**
+           * Total number of tokens in input
+           *
+           * @default 0
+           */
+          prompt_tokens?: number;
+          /**
+           * Total number of input and output tokens
+           *
+           * @default 0
+           */
+          total_tokens?: number;
+        };
+      }
+    | Blob;
+  /**
+   * @default true
+   */
+  success?: boolean;
+};
+
+export type WorkersAiPostRunCfMetaLlama4Scout17b16eInstructVariables = {
+  body?:
+    | {
+        /**
+         * Decreases the likelihood of the model repeating the same lines verbatim.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        frequency_penalty?: number;
+        /**
+         * JSON schema that should be fulfilled for the response.
+         */
+        guided_json?: Record<string, any>;
+        /**
+         * The maximum number of tokens to generate in the response.
+         *
+         * @default 256
+         */
+        max_tokens?: number;
+        /**
+         * Increases the likelihood of the model introducing new topics.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        presence_penalty?: number;
+        /**
+         * The input text prompt for the model to generate a response.
+         *
+         * @minLength 1
+         */
+        prompt: string;
+        /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
+         * Penalty for repeated tokens; higher values discourage repetition.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
+        /**
+         * Random seed for reproducibility of the generation.
+         *
+         * @maximum 9999999999
+         * @minimum 1
+         */
+        seed?: number;
+        /**
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
+         *
+         * @default false
+         */
+        stream?: boolean;
+        /**
+         * Controls the randomness of the output; higher values produce more random results.
+         *
+         * @default 0.15
+         * @maximum 5
+         * @minimum 0
+         */
+        temperature?: number;
+        /**
+         * Limits the AI to choose from the top 'k' most probable words. Lower values make responses more focused; higher values introduce more variety and potential surprises.
+         *
+         * @maximum 50
+         * @minimum 1
+         */
+        top_k?: number;
+        /**
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        top_p?: number;
+      }
+    | {
+        /**
+         * Decreases the likelihood of the model repeating the same lines verbatim.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        frequency_penalty?: number;
+        functions?: {
+          code: string;
+          name: string;
+        }[];
+        /**
+         * JSON schema that should be fufilled for the response.
+         */
+        guided_json?: Record<string, any>;
+        /**
+         * The maximum number of tokens to generate in the response.
+         *
+         * @default 256
+         */
+        max_tokens?: number;
+        /**
+         * An array of message objects representing the conversation history.
+         */
+        messages: {
+          content?:
+            | string
+            | {
+                image_url?: {
+                  /**
+                   * image uri with data (e.g. data:image/jpeg;base64,/9j/...). HTTP URL will not be accepted
+                   *
+                   * @pattern ^data:*
+                   */
+                  url?: string;
+                };
+                text?: string;
+                /**
+                 * Type of the content provided
+                 */
+                type?: string;
+              }[]
+            | {
+                image_url?: {
+                  /**
+                   * image uri with data (e.g. data:image/jpeg;base64,/9j/...). HTTP URL will not be accepted
+                   *
+                   * @pattern ^data:*
+                   */
+                  url?: string;
+                };
+                text?: string;
+                /**
+                 * Type of the content provided
+                 */
+                type?: string;
+              };
+          /**
+           * The role of the message sender (e.g., 'user', 'assistant', 'system', 'tool').
+           */
+          role?: string;
+          /**
+           * The tool call id. Must be supplied for tool calls for Mistral-3. If you don't know what to put here you can fall back to 000000001
+           *
+           * @pattern [a-zA-Z0-9]{9}
+           */
+          tool_call_id?: string;
+        }[];
+        /**
+         * Increases the likelihood of the model introducing new topics.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        presence_penalty?: number;
+        /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
+         * Penalty for repeated tokens; higher values discourage repetition.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
+        /**
+         * Random seed for reproducibility of the generation.
+         *
+         * @maximum 9999999999
+         * @minimum 1
+         */
+        seed?: number;
+        /**
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
+         *
+         * @default false
+         */
+        stream?: boolean;
+        /**
+         * Controls the randomness of the output; higher values produce more random results.
+         *
+         * @default 0.15
+         * @maximum 5
+         * @minimum 0
+         */
+        temperature?: number;
+        /**
+         * A list of tools available for the assistant to use.
+         */
+        tools?: (
+          | {
+              /**
+               * A brief description of what the tool does.
+               */
+              description: string;
+              /**
+               * The name of the tool. More descriptive the better.
+               */
+              name: string;
+              /**
+               * Schema defining the parameters accepted by the tool.
+               */
+              parameters: {
+                /**
+                 * Definitions of each parameter.
+                 */
+                properties: {
+                  [key: string]: {
+                    /**
+                     * A description of the expected parameter.
+                     */
+                    description: string;
+                    /**
+                     * The data type of the parameter.
+                     */
+                    type: string;
+                  };
+                };
+                /**
+                 * List of required parameter names.
+                 */
+                required?: string[];
+                /**
+                 * The type of the parameters object (usually 'object').
+                 */
+                type: string;
+              };
+            }
+          | {
+              /**
+               * Details of the function tool.
+               */
+              ['function']: {
+                /**
+                 * A brief description of what the function does.
+                 */
+                description: string;
+                /**
+                 * The name of the function.
+                 */
+                name: string;
+                /**
+                 * Schema defining the parameters accepted by the function.
+                 */
+                parameters: {
+                  /**
+                   * Definitions of each parameter.
+                   */
+                  properties: {
+                    [key: string]: {
+                      /**
+                       * A description of the expected parameter.
+                       */
+                      description: string;
+                      /**
+                       * The data type of the parameter.
+                       */
+                      type: string;
+                    };
+                  };
+                  /**
+                   * List of required parameter names.
+                   */
+                  required?: string[];
+                  /**
+                   * The type of the parameters object (usually 'object').
+                   */
+                  type: string;
+                };
+              };
+              /**
+               * Specifies the type of tool (e.g., 'function').
+               */
+              type: string;
+            }
+        )[];
+        /**
+         * Limits the AI to choose from the top 'k' most probable words. Lower values make responses more focused; higher values introduce more variety and potential surprises.
+         *
+         * @maximum 50
+         * @minimum 1
+         */
+        top_k?: number;
+        /**
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        top_p?: number;
+      };
+  pathParams: WorkersAiPostRunCfMetaLlama4Scout17b16eInstructPathParams;
+  queryParams?: WorkersAiPostRunCfMetaLlama4Scout17b16eInstructQueryParams;
+} & FetcherExtraProps;
+
+export const workersAiPostRunCfMetaLlama4Scout17b16eInstruct = (
+  variables: WorkersAiPostRunCfMetaLlama4Scout17b16eInstructVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    WorkersAiPostRunCfMetaLlama4Scout17b16eInstructResponse,
+    WorkersAiPostRunCfMetaLlama4Scout17b16eInstructError,
+    | {
+        /**
+         * Decreases the likelihood of the model repeating the same lines verbatim.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        frequency_penalty?: number;
+        /**
+         * JSON schema that should be fulfilled for the response.
+         */
+        guided_json?: Record<string, any>;
+        /**
+         * The maximum number of tokens to generate in the response.
+         *
+         * @default 256
+         */
+        max_tokens?: number;
+        /**
+         * Increases the likelihood of the model introducing new topics.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        presence_penalty?: number;
+        /**
+         * The input text prompt for the model to generate a response.
+         *
+         * @minLength 1
+         */
+        prompt: string;
+        /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
+         * Penalty for repeated tokens; higher values discourage repetition.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
+        /**
+         * Random seed for reproducibility of the generation.
+         *
+         * @maximum 9999999999
+         * @minimum 1
+         */
+        seed?: number;
+        /**
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
+         *
+         * @default false
+         */
+        stream?: boolean;
+        /**
+         * Controls the randomness of the output; higher values produce more random results.
+         *
+         * @default 0.15
+         * @maximum 5
+         * @minimum 0
+         */
+        temperature?: number;
+        /**
+         * Limits the AI to choose from the top 'k' most probable words. Lower values make responses more focused; higher values introduce more variety and potential surprises.
+         *
+         * @maximum 50
+         * @minimum 1
+         */
+        top_k?: number;
+        /**
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        top_p?: number;
+      }
+    | {
+        /**
+         * Decreases the likelihood of the model repeating the same lines verbatim.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        frequency_penalty?: number;
+        functions?: {
+          code: string;
+          name: string;
+        }[];
+        /**
+         * JSON schema that should be fufilled for the response.
+         */
+        guided_json?: Record<string, any>;
+        /**
+         * The maximum number of tokens to generate in the response.
+         *
+         * @default 256
+         */
+        max_tokens?: number;
+        /**
+         * An array of message objects representing the conversation history.
+         */
+        messages: {
+          content?:
+            | string
+            | {
+                image_url?: {
+                  /**
+                   * image uri with data (e.g. data:image/jpeg;base64,/9j/...). HTTP URL will not be accepted
+                   *
+                   * @pattern ^data:*
+                   */
+                  url?: string;
+                };
+                text?: string;
+                /**
+                 * Type of the content provided
+                 */
+                type?: string;
+              }[]
+            | {
+                image_url?: {
+                  /**
+                   * image uri with data (e.g. data:image/jpeg;base64,/9j/...). HTTP URL will not be accepted
+                   *
+                   * @pattern ^data:*
+                   */
+                  url?: string;
+                };
+                text?: string;
+                /**
+                 * Type of the content provided
+                 */
+                type?: string;
+              };
+          /**
+           * The role of the message sender (e.g., 'user', 'assistant', 'system', 'tool').
+           */
+          role?: string;
+          /**
+           * The tool call id. Must be supplied for tool calls for Mistral-3. If you don't know what to put here you can fall back to 000000001
+           *
+           * @pattern [a-zA-Z0-9]{9}
+           */
+          tool_call_id?: string;
+        }[];
+        /**
+         * Increases the likelihood of the model introducing new topics.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        presence_penalty?: number;
+        /**
+         * If true, a chat template is not applied and you must adhere to the specific model's expected formatting.
+         *
+         * @default false
+         */
+        raw?: boolean;
+        /**
+         * Penalty for repeated tokens; higher values discourage repetition.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        repetition_penalty?: number;
+        response_format?: {
+          json_schema?: void;
+          type?: 'json_object' | 'json_schema';
+        };
+        /**
+         * Random seed for reproducibility of the generation.
+         *
+         * @maximum 9999999999
+         * @minimum 1
+         */
+        seed?: number;
+        /**
+         * If true, the response will be streamed back incrementally using SSE, Server Sent Events.
+         *
+         * @default false
+         */
+        stream?: boolean;
+        /**
+         * Controls the randomness of the output; higher values produce more random results.
+         *
+         * @default 0.15
+         * @maximum 5
+         * @minimum 0
+         */
+        temperature?: number;
+        /**
+         * A list of tools available for the assistant to use.
+         */
+        tools?: (
+          | {
+              /**
+               * A brief description of what the tool does.
+               */
+              description: string;
+              /**
+               * The name of the tool. More descriptive the better.
+               */
+              name: string;
+              /**
+               * Schema defining the parameters accepted by the tool.
+               */
+              parameters: {
+                /**
+                 * Definitions of each parameter.
+                 */
+                properties: {
+                  [key: string]: {
+                    /**
+                     * A description of the expected parameter.
+                     */
+                    description: string;
+                    /**
+                     * The data type of the parameter.
+                     */
+                    type: string;
+                  };
+                };
+                /**
+                 * List of required parameter names.
+                 */
+                required?: string[];
+                /**
+                 * The type of the parameters object (usually 'object').
+                 */
+                type: string;
+              };
+            }
+          | {
+              /**
+               * Details of the function tool.
+               */
+              ['function']: {
+                /**
+                 * A brief description of what the function does.
+                 */
+                description: string;
+                /**
+                 * The name of the function.
+                 */
+                name: string;
+                /**
+                 * Schema defining the parameters accepted by the function.
+                 */
+                parameters: {
+                  /**
+                   * Definitions of each parameter.
+                   */
+                  properties: {
+                    [key: string]: {
+                      /**
+                       * A description of the expected parameter.
+                       */
+                      description: string;
+                      /**
+                       * The data type of the parameter.
+                       */
+                      type: string;
+                    };
+                  };
+                  /**
+                   * List of required parameter names.
+                   */
+                  required?: string[];
+                  /**
+                   * The type of the parameters object (usually 'object').
+                   */
+                  type: string;
+                };
+              };
+              /**
+               * Specifies the type of tool (e.g., 'function').
+               */
+              type: string;
+            }
+        )[];
+        /**
+         * Limits the AI to choose from the top 'k' most probable words. Lower values make responses more focused; higher values introduce more variety and potential surprises.
+         *
+         * @maximum 50
+         * @minimum 1
+         */
+        top_k?: number;
+        /**
+         * Adjusts the creativity of the AI's responses by controlling how many possible words it considers. Lower values make outputs more predictable; higher values allow for more varied and creative responses.
+         *
+         * @maximum 2
+         * @minimum 0
+         */
+        top_p?: number;
+      },
+    {},
+    WorkersAiPostRunCfMetaLlama4Scout17b16eInstructQueryParams,
+    WorkersAiPostRunCfMetaLlama4Scout17b16eInstructPathParams
+  >({
+    url: '/accounts/{accountId}/ai/run/@cf/meta/llama-4-scout-17b-16e-instruct',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
 export type WorkersAiPostRunCfMetaLlamaGuard38bPathParams = {
   /**
    * @example 023e105f4ecef8ad9ca31a8372d0c353
@@ -41642,6 +42338,25 @@ export type BrapiPostContentError = Fetcher.ErrorWrapper<
       };
     }
   | {
+      status: 422;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+  | {
       status: 500;
       payload: {
         errors?: {
@@ -41905,6 +42620,25 @@ export type BrapiPostJsonQueryParams = {
 export type BrapiPostJsonError = Fetcher.ErrorWrapper<
   | {
       status: 400;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+  | {
+      status: 422;
       payload: {
         errors?: {
           /**
@@ -42213,6 +42947,25 @@ export type BrapiPostLinksError = Fetcher.ErrorWrapper<
       };
     }
   | {
+      status: 422;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+  | {
       status: 500;
       payload: {
         errors?: {
@@ -42474,6 +43227,25 @@ export type BrapiPostMarkdownQueryParams = {
 export type BrapiPostMarkdownError = Fetcher.ErrorWrapper<
   | {
       status: 400;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+  | {
+      status: 422;
       payload: {
         errors?: {
           /**
@@ -42773,6 +43545,25 @@ export type BrapiPostPdfError = Fetcher.ErrorWrapper<
       };
     }
   | {
+      status: 422;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+  | {
       status: 500;
       payload: {
         errors?: {
@@ -43013,6 +43804,25 @@ export type BrapiPostScrapeQueryParams = {
 export type BrapiPostScrapeError = Fetcher.ErrorWrapper<
   | {
       status: 400;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+  | {
+      status: 422;
       payload: {
         errors?: {
           /**
@@ -43356,6 +44166,25 @@ export type BrapiPostScreenshotError = Fetcher.ErrorWrapper<
       };
     }
   | {
+      status: 422;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+  | {
       status: 500;
       payload: {
         errors?: {
@@ -43645,6 +44474,25 @@ export type BrapiPostSnapshotQueryParams = {
 export type BrapiPostSnapshotError = Fetcher.ErrorWrapper<
   | {
       status: 400;
+      payload: {
+        errors?: {
+          /**
+           * Error code
+           */
+          code: number;
+          /**
+           * Error Message
+           */
+          message: string;
+        }[];
+        /**
+         * Response status
+         */
+        status: boolean;
+      };
+    }
+  | {
+      status: 422;
       payload: {
         errors?: {
           /**
@@ -44385,7 +45233,7 @@ export type CloudflareTunnelConfigurationGetConfigurationPathParams = {
 
 export type CloudflareTunnelConfigurationGetConfigurationError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.TunnelApiResponseCommonFailure;
+  payload: Schemas.TunnelSchemasApiResponseCommonFailure;
 }>;
 
 export type CloudflareTunnelConfigurationGetConfigurationVariables = {
@@ -44415,7 +45263,7 @@ export type CloudflareTunnelConfigurationPutConfigurationPathParams = {
 
 export type CloudflareTunnelConfigurationPutConfigurationError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.TunnelApiResponseCommonFailure;
+  payload: Schemas.TunnelSchemasApiResponseCommonFailure;
 }>;
 
 export type CloudflareTunnelConfigurationPutConfigurationRequestBody = {
@@ -48581,6 +49429,89 @@ export const cloudflareD1GetDatabase = (variables: CloudflareD1GetDatabaseVariab
     CloudflareD1GetDatabasePathParams
   >({ url: '/accounts/{accountId}/d1/database/{databaseId}', method: 'get', ...variables, signal });
 
+export type CloudflareD1UpdatePartialDatabasePathParams = {
+  accountId: Schemas.D1AccountIdentifier;
+  databaseId: Schemas.D1DatabaseIdentifier;
+};
+
+export type CloudflareD1UpdatePartialDatabaseError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.D1ApiResponseCommonFailure;
+}>;
+
+export type CloudflareD1UpdatePartialDatabaseResponse = {
+  errors: Schemas.D1Messages;
+  messages: Schemas.D1Messages;
+  result: Schemas.D1DatabaseDetailsResponse;
+  /**
+   * Whether the API call was successful
+   *
+   * @example true
+   */
+  success: true;
+};
+
+export type CloudflareD1UpdatePartialDatabaseVariables = {
+  body?: Schemas.D1DatabaseUpdatePartialRequestBody;
+  pathParams: CloudflareD1UpdatePartialDatabasePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Updates partially the specified D1 database.
+ */
+export const cloudflareD1UpdatePartialDatabase = (
+  variables: CloudflareD1UpdatePartialDatabaseVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    CloudflareD1UpdatePartialDatabaseResponse,
+    CloudflareD1UpdatePartialDatabaseError,
+    Schemas.D1DatabaseUpdatePartialRequestBody,
+    {},
+    {},
+    CloudflareD1UpdatePartialDatabasePathParams
+  >({ url: '/accounts/{accountId}/d1/database/{databaseId}', method: 'patch', ...variables, signal });
+
+export type CloudflareD1UpdateDatabasePathParams = {
+  accountId: Schemas.D1AccountIdentifier;
+  databaseId: Schemas.D1DatabaseIdentifier;
+};
+
+export type CloudflareD1UpdateDatabaseError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.D1ApiResponseCommonFailure;
+}>;
+
+export type CloudflareD1UpdateDatabaseResponse = {
+  errors: Schemas.D1Messages;
+  messages: Schemas.D1Messages;
+  result: Schemas.D1DatabaseDetailsResponse;
+  /**
+   * Whether the API call was successful
+   *
+   * @example true
+   */
+  success: true;
+};
+
+export type CloudflareD1UpdateDatabaseVariables = {
+  body: Schemas.D1DatabaseUpdateRequestBody;
+  pathParams: CloudflareD1UpdateDatabasePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Updates the specified D1 database.
+ */
+export const cloudflareD1UpdateDatabase = (variables: CloudflareD1UpdateDatabaseVariables, signal?: AbortSignal) =>
+  fetch<
+    CloudflareD1UpdateDatabaseResponse,
+    CloudflareD1UpdateDatabaseError,
+    Schemas.D1DatabaseUpdateRequestBody,
+    {},
+    {},
+    CloudflareD1UpdateDatabasePathParams
+  >({ url: '/accounts/{accountId}/d1/database/{databaseId}', method: 'put', ...variables, signal });
+
 export type CloudflareD1ExportDatabasePathParams = {
   accountId: Schemas.D1AccountIdentifier;
   databaseId: Schemas.D1DatabaseIdentifier;
@@ -48594,15 +49525,21 @@ export type CloudflareD1ExportDatabaseError = Fetcher.ErrorWrapper<{
 export type CloudflareD1ExportDatabaseRequestBody = {
   /**
    * To poll an in-progress export, provide the current bookmark (returned by your first polling response)
+   *
+   * @x-auditable true
    */
   current_bookmark?: string;
   dump_options?: {
     /**
      * Export only the table definitions, not their contents
+     *
+     * @x-auditable true
      */
     no_data?: boolean;
     /**
      * Export only each table's contents, not its definition
+     *
+     * @x-auditable true
      */
     no_schema?: boolean;
     /**
@@ -48612,6 +49549,8 @@ export type CloudflareD1ExportDatabaseRequestBody = {
   };
   /**
    * Specifies that you will poll this endpoint until the export completes
+   *
+   * @x-auditable true
    */
   output_format: 'polling';
 };
@@ -48634,10 +49573,14 @@ export const cloudflareD1ExportDatabase = (variables: CloudflareD1ExportDatabase
         result: {
           /**
            * The current time-travel bookmark for your D1, used to poll for updates. Will not change for the duration of the export task.
+           *
+           * @x-auditable true
            */
           at_bookmark?: string;
           /**
            * Only present when status = 'error'. Contains the error message.
+           *
+           * @x-auditable true
            */
           error?: string;
           /**
@@ -48650,6 +49593,8 @@ export const cloudflareD1ExportDatabase = (variables: CloudflareD1ExportDatabase
           result?: {
             /**
              * The generated SQL filename.
+             *
+             * @x-auditable true
              */
             filename?: string;
             /**
@@ -48657,8 +49602,17 @@ export const cloudflareD1ExportDatabase = (variables: CloudflareD1ExportDatabase
              */
             signed_url?: string;
           };
+          /**
+           * @x-auditable true
+           */
           status?: 'complete' | 'error';
+          /**
+           * @x-auditable true
+           */
           success?: boolean;
+          /**
+           * @x-auditable true
+           */
           type?: 'export';
         };
         /**
@@ -48674,14 +49628,25 @@ export const cloudflareD1ExportDatabase = (variables: CloudflareD1ExportDatabase
         result: {
           /**
            * The current time-travel bookmark for your D1, used to poll for updates. Will not change for the duration of the export task.
+           *
+           * @x-auditable true
            */
           at_bookmark?: string;
           /**
            * Logs since the last time you polled
            */
           messages?: string[];
+          /**
+           * @x-auditable true
+           */
           status?: 'active';
+          /**
+           * @x-auditable true
+           */
           success?: boolean;
+          /**
+           * @x-auditable true
+           */
           type?: 'export';
         };
         /**
@@ -48713,34 +49678,48 @@ export type CloudflareD1ImportDatabaseVariables = {
     | {
         /**
          * Indicates you have a new SQL file to upload.
+         *
+         * @x-auditable true
          */
         action: 'init';
         /**
          * Required when action is 'init' or 'ingest'. An md5 hash of the file you're uploading. Used to check if it already exists, and validate its contents before ingesting.
+         *
+         * @x-auditable true
          */
         etag: string;
       }
     | {
         /**
          * Indicates you've finished uploading to tell the D1 to start consuming it
+         *
+         * @x-auditable true
          */
         action: 'ingest';
         /**
          * An md5 hash of the file you're uploading. Used to check if it already exists, and validate its contents before ingesting.
+         *
+         * @x-auditable true
          */
         etag: string;
         /**
          * The filename you have successfully uploaded.
+         *
+         * @x-auditable true
          */
         filename: string;
       }
     | {
         /**
          * Indicates you've finished uploading to tell the D1 to start consuming it
+         *
+         * @x-auditable true
          */
         action: 'poll';
         /**
          * This identifies the currently-running import, checking its status.
+         *
+         * @x-auditable true
          */
         current_bookmark: string;
       };
@@ -48759,14 +49738,20 @@ export const cloudflareD1ImportDatabase = (variables: CloudflareD1ImportDatabase
         result: {
           /**
            * The current time-travel bookmark for your D1, used to poll for updates. Will not change for the duration of the import. Only returned if an import process is currently running or recently finished.
+           *
+           * @x-auditable true
            */
           at_bookmark?: string;
           /**
            * Only present when status = 'error'. Contains the error message that prevented the import from succeeding.
+           *
+           * @x-auditable true
            */
           error?: string;
           /**
            * Derived from the database ID and etag, to use in avoiding repeated uploads. Only returned when for the 'init' action.
+           *
+           * @x-auditable true
            */
           filename?: string;
           /**
@@ -48779,16 +49764,29 @@ export const cloudflareD1ImportDatabase = (variables: CloudflareD1ImportDatabase
           result?: {
             /**
              * The time-travel bookmark if you need restore your D1 to directly after the import succeeded.
+             *
+             * @x-auditable true
              */
             final_bookmark?: string;
             meta?: Schemas.D1QueryMeta;
             /**
              * The total number of queries that were executed during the import.
+             *
+             * @x-auditable true
              */
             num_queries?: number;
           };
+          /**
+           * @x-auditable true
+           */
           status?: 'complete' | 'error';
+          /**
+           * @x-auditable true
+           */
           success?: boolean;
+          /**
+           * @x-auditable true
+           */
           type?: 'import';
           /**
            * The R2 presigned URL to use for uploading. Only returned when for the 'init' action.
@@ -48808,14 +49806,25 @@ export const cloudflareD1ImportDatabase = (variables: CloudflareD1ImportDatabase
         result: {
           /**
            * The current time-travel bookmark for your D1, used to poll for updates. Will not change for the duration of the import.
+           *
+           * @x-auditable true
            */
           at_bookmark?: string;
           /**
            * Logs since the last time you polled
            */
           messages?: string[];
+          /**
+           * @x-auditable true
+           */
           status?: 'active';
+          /**
+           * @x-auditable true
+           */
           success?: boolean;
+          /**
+           * @x-auditable true
+           */
           type?: 'import';
         };
         /**
@@ -48829,34 +49838,48 @@ export const cloudflareD1ImportDatabase = (variables: CloudflareD1ImportDatabase
     | {
         /**
          * Indicates you have a new SQL file to upload.
+         *
+         * @x-auditable true
          */
         action: 'init';
         /**
          * Required when action is 'init' or 'ingest'. An md5 hash of the file you're uploading. Used to check if it already exists, and validate its contents before ingesting.
+         *
+         * @x-auditable true
          */
         etag: string;
       }
     | {
         /**
          * Indicates you've finished uploading to tell the D1 to start consuming it
+         *
+         * @x-auditable true
          */
         action: 'ingest';
         /**
          * An md5 hash of the file you're uploading. Used to check if it already exists, and validate its contents before ingesting.
+         *
+         * @x-auditable true
          */
         etag: string;
         /**
          * The filename you have successfully uploaded.
+         *
+         * @x-auditable true
          */
         filename: string;
       }
     | {
         /**
          * Indicates you've finished uploading to tell the D1 to start consuming it
+         *
+         * @x-auditable true
          */
         action: 'poll';
         /**
          * This identifies the currently-running import, checking its status.
+         *
+         * @x-auditable true
          */
         current_bookmark: string;
       },
@@ -48969,7 +49992,11 @@ export type DevicesListDevicesVariables = {
 } & FetcherExtraProps;
 
 /**
- * Fetches a list of enrolled devices.
+ * List WARP registrations.
+ *
+ * **Deprecated**: please use one of the following endpoints instead:
+ * - GET /accounts/{account_id}/devices/physical-devices
+ * - GET /accounts/{account_id}/devices/registrations
  */
 export const devicesListDevices = (variables: DevicesListDevicesVariables, signal?: AbortSignal) =>
   fetch<Schemas.TeamsDevicesDevicesResponse, DevicesListDevicesError, undefined, {}, {}, DevicesListDevicesPathParams>({
@@ -49287,6 +50314,188 @@ export const deviceManagedNetworksUpdateDeviceManagedNetwork = (
     {},
     DeviceManagedNetworksUpdateDeviceManagedNetworkPathParams
   >({ url: '/accounts/{accountId}/devices/networks/{networkId}', method: 'put', ...variables, signal });
+
+export type ListDevicesPathParams = {
+  accountId: string;
+};
+
+export type ListDevicesQueryParams = {
+  /**
+   * Opaque token indicating the starting position when requesting the next set of records. A cursor value can be obtained from the result_info.cursor field in the response.
+   */
+  cursor?: string;
+  /**
+   * The device field to order results by.
+   */
+  sort_by?:
+    | 'name'
+    | 'id'
+    | 'client_version'
+    | 'last_seen_user.email'
+    | 'last_seen_at'
+    | 'active_registrations'
+    | 'created_at';
+  /**
+   * Sort direction.
+   */
+  sort_order?: 'asc' | 'desc';
+  /**
+   * Filter by the last seen user's email.
+   */
+  ['last_seen_user.email']?: string;
+  /**
+   * Filters by the last_seen timestamp - returns only devices last seen after this timestamp.
+   */
+  seen_after?: string;
+  /**
+   * Filter by the last_seen timestamp - returns only devices last seen before this timestamp.
+   */
+  seen_before?: string;
+  /**
+   * The maximum number of devices to return in a single response.
+   *
+   * @format uint64
+   */
+  per_page?: number;
+  /**
+   * Search by device details.
+   */
+  search?: string;
+  /**
+   * Include or exclude devices with active registrations. The default is "only" - return only devices with active registrations.
+   */
+  active_registrations?: 'include' | 'only' | 'exclude';
+  /**
+   * Filter by a one or more device IDs.
+   */
+  id?: string[];
+  include?: string;
+};
+
+export type ListDevicesError = Fetcher.ErrorWrapper<undefined>;
+
+export type ListDevicesResponse = {
+  errors: Schemas.TeamsDevicesV4ResponseMessage[];
+  messages: Schemas.TeamsDevicesV4ResponseMessage[];
+  result: Schemas.TeamsDevicesPhysicalDevice[];
+  result_info?: Schemas.TeamsDevicesCursorResultInfo;
+  /**
+   * Whether the API call was successful.
+   */
+  success: boolean;
+};
+
+export type ListDevicesVariables = {
+  pathParams: ListDevicesPathParams;
+  queryParams?: ListDevicesQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Lists WARP devices.
+ */
+export const listDevices = (variables: ListDevicesVariables, signal?: AbortSignal) =>
+  fetch<ListDevicesResponse, ListDevicesError, undefined, {}, ListDevicesQueryParams, ListDevicesPathParams>({
+    url: '/accounts/{accountId}/devices/physical-devices',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type DeleteDevicePathParams = {
+  deviceId: string;
+  accountId: string;
+};
+
+export type DeleteDeviceError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteDeviceResponse = {
+  errors: Schemas.TeamsDevicesV4ResponseMessage[];
+  messages: Schemas.TeamsDevicesV4ResponseMessage[];
+  result?: Schemas.TeamsDevicesEmptyBody;
+  /**
+   * Whether the API call was successful.
+   */
+  success: boolean;
+};
+
+export type DeleteDeviceVariables = {
+  pathParams: DeleteDevicePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Deletes a WARP device.
+ */
+export const deleteDevice = (variables: DeleteDeviceVariables, signal?: AbortSignal) =>
+  fetch<DeleteDeviceResponse, DeleteDeviceError, undefined, {}, {}, DeleteDevicePathParams>({
+    url: '/accounts/{accountId}/devices/physical-devices/{deviceId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type GetDevicePathParams = {
+  deviceId: string;
+  accountId: string;
+};
+
+export type GetDeviceError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetDeviceResponse = {
+  errors: Schemas.TeamsDevicesV4ResponseMessage[];
+  messages: Schemas.TeamsDevicesV4ResponseMessage[];
+  result: Schemas.TeamsDevicesPhysicalDevice;
+  /**
+   * Whether the API call was successful.
+   */
+  success: boolean;
+};
+
+export type GetDeviceVariables = {
+  pathParams: GetDevicePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Fetches a single WARP device.
+ */
+export const getDevice = (variables: GetDeviceVariables, signal?: AbortSignal) =>
+  fetch<GetDeviceResponse, GetDeviceError, undefined, {}, {}, GetDevicePathParams>({
+    url: '/accounts/{accountId}/devices/physical-devices/{deviceId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type RevokeDevicePathParams = {
+  accountId: string;
+  deviceId: string;
+};
+
+export type RevokeDeviceError = Fetcher.ErrorWrapper<undefined>;
+
+export type RevokeDeviceResponse = {
+  errors: Schemas.TeamsDevicesV4ResponseMessage[];
+  messages: Schemas.TeamsDevicesV4ResponseMessage[];
+  result?: Schemas.TeamsDevicesEmptyBody;
+  /**
+   * Whether the API call was successful.
+   */
+  success: boolean;
+};
+
+export type RevokeDeviceVariables = {
+  pathParams: RevokeDevicePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Revokes all registrations associated with the specified device.
+ */
+export const revokeDevice = (variables: RevokeDeviceVariables, signal?: AbortSignal) =>
+  fetch<RevokeDeviceResponse, RevokeDeviceError, undefined, {}, {}, RevokeDevicePathParams>({
+    url: '/accounts/{accountId}/devices/physical-devices/{deviceId}/revoke',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DevicesListDeviceSettingsPoliciesPathParams = {
   accountId: Schemas.TeamsDevicesIdentifier;
@@ -50299,6 +51508,320 @@ export const devicePostureRulesUpdateDevicePostureRule = (
     DevicePostureRulesUpdateDevicePostureRulePathParams
   >({ url: '/accounts/{accountId}/devices/posture/{ruleId}', method: 'put', ...variables, signal });
 
+export type DeleteRegistrationsPathParams = {
+  accountId: string;
+};
+
+export type DeleteRegistrationsQueryParams = {
+  /**
+   * A list of registration IDs to delete.
+   */
+  id: string[];
+};
+
+export type DeleteRegistrationsError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteRegistrationsResponse = {
+  errors: Schemas.TeamsDevicesV4ResponseMessage[];
+  messages: Schemas.TeamsDevicesV4ResponseMessage[];
+  result: Schemas.TeamsDevicesEmptyBody;
+  result_info?: Schemas.TeamsDevicesCursorResultInfo;
+  /**
+   * Whether the API call was successful.
+   */
+  success: boolean;
+};
+
+export type DeleteRegistrationsVariables = {
+  pathParams: DeleteRegistrationsPathParams;
+  queryParams: DeleteRegistrationsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Deletes a list of WARP registrations.
+ */
+export const deleteRegistrations = (variables: DeleteRegistrationsVariables, signal?: AbortSignal) =>
+  fetch<
+    DeleteRegistrationsResponse,
+    DeleteRegistrationsError,
+    undefined,
+    {},
+    DeleteRegistrationsQueryParams,
+    DeleteRegistrationsPathParams
+  >({ url: '/accounts/{accountId}/devices/registrations', method: 'delete', ...variables, signal });
+
+export type ListRegistrationsPathParams = {
+  accountId: string;
+};
+
+export type ListRegistrationsQueryParams = {
+  /**
+   * Filter by Access user ID
+   */
+  ['user.id']?: string[];
+  /**
+   * Filters by the last_seen timestamp - returns only registrations last seen after this timestamp.
+   */
+  seen_after?: string;
+  /**
+   * Filters by the last_seen timestamp - returns only registrations last seen before this timestamp.
+   */
+  seen_before?: string;
+  /**
+   * Filter by registration status. Defaults to 'active'.
+   */
+  status?: 'active' | 'all' | 'revoked';
+  /**
+   * The maximum number of devices to return in a single response.
+   *
+   * @format uint64
+   */
+  per_page?: number;
+  /**
+   * Filter by registration details.
+   */
+  search?: string;
+  /**
+   * The registration field to order results by.
+   */
+  sort_by?: 'id' | 'user.name' | 'user.email' | 'last_seen_at' | 'created_at';
+  /**
+   * Sort direction.
+   */
+  sort_order?: 'asc' | 'desc';
+  /**
+   * Opaque token indicating the starting position when requesting the next set of records. A cursor value can be obtained from the result_info.cursor field in the response.
+   */
+  cursor?: string;
+  /**
+   * Filter by registration ID.
+   */
+  id?: string[];
+  /**
+   * Filter by WARP device ID.
+   */
+  ['device.id']?: string;
+  include?: string;
+};
+
+export type ListRegistrationsError = Fetcher.ErrorWrapper<undefined>;
+
+export type ListRegistrationsResponse = {
+  errors: Schemas.TeamsDevicesV4ResponseMessage[];
+  messages: Schemas.TeamsDevicesV4ResponseMessage[];
+  result: Schemas.TeamsDevicesRegistration[];
+  result_info?: Schemas.TeamsDevicesCursorResultInfo;
+  /**
+   * Whether the API call was successful.
+   */
+  success: boolean;
+};
+
+export type ListRegistrationsVariables = {
+  pathParams: ListRegistrationsPathParams;
+  queryParams?: ListRegistrationsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * List WARP registrations.
+ */
+export const listRegistrations = (variables: ListRegistrationsVariables, signal?: AbortSignal) =>
+  fetch<
+    ListRegistrationsResponse,
+    ListRegistrationsError,
+    undefined,
+    {},
+    ListRegistrationsQueryParams,
+    ListRegistrationsPathParams
+  >({ url: '/accounts/{accountId}/devices/registrations', method: 'get', ...variables, signal });
+
+export type RevokeRegistrationsPathParams = {
+  accountId: string;
+};
+
+export type RevokeRegistrationsQueryParams = {
+  /**
+   * A list of registration IDs to revoke
+   */
+  id: string[];
+};
+
+export type RevokeRegistrationsError = Fetcher.ErrorWrapper<undefined>;
+
+export type RevokeRegistrationsResponse = {
+  errors: Schemas.TeamsDevicesV4ResponseMessage[];
+  messages: Schemas.TeamsDevicesV4ResponseMessage[];
+  result: Schemas.TeamsDevicesEmptyBody;
+  result_info?: Schemas.TeamsDevicesCursorResultInfo;
+  /**
+   * Whether the API call was successful.
+   */
+  success: boolean;
+};
+
+export type RevokeRegistrationsVariables = {
+  pathParams: RevokeRegistrationsPathParams;
+  queryParams: RevokeRegistrationsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Revokes a list of WARP registrations.
+ */
+export const revokeRegistrations = (variables: RevokeRegistrationsVariables, signal?: AbortSignal) =>
+  fetch<
+    RevokeRegistrationsResponse,
+    RevokeRegistrationsError,
+    undefined,
+    {},
+    RevokeRegistrationsQueryParams,
+    RevokeRegistrationsPathParams
+  >({ url: '/accounts/{accountId}/devices/registrations/revoke', method: 'post', ...variables, signal });
+
+export type UnrevokeRegistrationsPathParams = {
+  accountId: string;
+};
+
+export type UnrevokeRegistrationsQueryParams = {
+  /**
+   * A list of registration IDs to unrevoke
+   */
+  id: string[];
+};
+
+export type UnrevokeRegistrationsError = Fetcher.ErrorWrapper<undefined>;
+
+export type UnrevokeRegistrationsResponse = {
+  errors: Schemas.TeamsDevicesV4ResponseMessage[];
+  messages: Schemas.TeamsDevicesV4ResponseMessage[];
+  result: Schemas.TeamsDevicesEmptyBody;
+  result_info?: Schemas.TeamsDevicesCursorResultInfo;
+  /**
+   * Whether the API call was successful.
+   */
+  success: boolean;
+};
+
+export type UnrevokeRegistrationsVariables = {
+  pathParams: UnrevokeRegistrationsPathParams;
+  queryParams: UnrevokeRegistrationsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Unrevokes a list of WARP registrations.
+ */
+export const unrevokeRegistrations = (variables: UnrevokeRegistrationsVariables, signal?: AbortSignal) =>
+  fetch<
+    UnrevokeRegistrationsResponse,
+    UnrevokeRegistrationsError,
+    undefined,
+    {},
+    UnrevokeRegistrationsQueryParams,
+    UnrevokeRegistrationsPathParams
+  >({ url: '/accounts/{accountId}/devices/registrations/unrevoke', method: 'post', ...variables, signal });
+
+export type DeleteRegistrationPathParams = {
+  registrationId: string;
+  accountId: string;
+};
+
+export type DeleteRegistrationError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteRegistrationResponse = {
+  errors: Schemas.TeamsDevicesV4ResponseMessage[];
+  messages: Schemas.TeamsDevicesV4ResponseMessage[];
+  result?: Schemas.TeamsDevicesEmptyBody;
+  /**
+   * Whether the API call was successful.
+   */
+  success: boolean;
+};
+
+export type DeleteRegistrationVariables = {
+  pathParams: DeleteRegistrationPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Deletes a WARP registration.
+ */
+export const deleteRegistration = (variables: DeleteRegistrationVariables, signal?: AbortSignal) =>
+  fetch<DeleteRegistrationResponse, DeleteRegistrationError, undefined, {}, {}, DeleteRegistrationPathParams>({
+    url: '/accounts/{accountId}/devices/registrations/{registrationId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type GetRegistrationPathParams = {
+  registrationId: string;
+  accountId: string;
+};
+
+export type GetRegistrationError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetRegistrationResponse = {
+  errors: Schemas.TeamsDevicesV4ResponseMessage[];
+  messages: Schemas.TeamsDevicesV4ResponseMessage[];
+  result: Schemas.TeamsDevicesRegistration;
+  /**
+   * Whether the API call was successful.
+   */
+  success: boolean;
+};
+
+export type GetRegistrationVariables = {
+  pathParams: GetRegistrationPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Fetches a single WARP registration.
+ */
+export const getRegistration = (variables: GetRegistrationVariables, signal?: AbortSignal) =>
+  fetch<GetRegistrationResponse, GetRegistrationError, undefined, {}, {}, GetRegistrationPathParams>({
+    url: '/accounts/{accountId}/devices/registrations/{registrationId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type GetRegistrationOverrideCodesPathParams = {
+  accountId: string;
+  registrationId: string;
+};
+
+export type GetRegistrationOverrideCodesError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetRegistrationOverrideCodesResponse = {
+  errors: Schemas.TeamsDevicesV4ResponseMessage[];
+  messages: Schemas.TeamsDevicesV4ResponseMessage[];
+  result: Schemas.TeamsDevicesOverrideCodes;
+  /**
+   * Whether the API call was successful.
+   */
+  success: boolean;
+};
+
+export type GetRegistrationOverrideCodesVariables = {
+  pathParams: GetRegistrationOverrideCodesPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Fetches one-time use admin override codes for a registration. This relies on the **Admin Override** setting being enabled in your device configuration.
+ */
+export const getRegistrationOverrideCodes = (variables: GetRegistrationOverrideCodesVariables, signal?: AbortSignal) =>
+  fetch<
+    GetRegistrationOverrideCodesResponse,
+    GetRegistrationOverrideCodesError,
+    undefined,
+    {},
+    {},
+    GetRegistrationOverrideCodesPathParams
+  >({
+    url: '/accounts/{accountId}/devices/registrations/{registrationId}/override_codes',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
 export type DevicesResilienceRetrieveGlobalWarpOverridePathParams = {
   accountId: Schemas.TeamsDevicesIdentifier;
 };
@@ -50373,7 +51896,9 @@ export type DevicesRevokeDevicesVariables = {
 } & FetcherExtraProps;
 
 /**
- * Revokes a list of devices.
+ * Revokes a list of registrations.
+ *
+ * **Deprecated**: please use POST /accounts/{account_id}/devices/registrations/revoke instead.
  */
 export const devicesRevokeDevices = (variables: DevicesRevokeDevicesVariables, signal?: AbortSignal) =>
   fetch<
@@ -50489,7 +52014,9 @@ export type DevicesUnrevokeDevicesVariables = {
 } & FetcherExtraProps;
 
 /**
- * Unrevokes a list of devices.
+ * Unrevokes a list of registrations.
+ *
+ * **Deprecated**: please use POST /accounts/{account_id}/devices/registrations/unrevoke instead.
  */
 export const devicesUnrevokeDevices = (variables: DevicesUnrevokeDevicesVariables, signal?: AbortSignal) =>
   fetch<
@@ -50502,7 +52029,7 @@ export const devicesUnrevokeDevices = (variables: DevicesUnrevokeDevicesVariable
   >({ url: '/accounts/{accountId}/devices/unrevoke', method: 'post', ...variables, signal });
 
 export type DevicesDeviceDetailsPathParams = {
-  deviceId: Schemas.TeamsDevicesSchemasUuid;
+  deviceId: Schemas.TeamsDevicesRegistrationId;
   accountId: Schemas.TeamsDevicesIdentifier;
 };
 
@@ -50516,7 +52043,11 @@ export type DevicesDeviceDetailsVariables = {
 } & FetcherExtraProps;
 
 /**
- * Fetches details for a single device.
+ * Fetches a single WARP registration.
+ *
+ * **Deprecated**: please use one of the following endpoints instead:
+ * - GET /accounts/{account_id}/devices/physical-devices/{device_id}
+ * - GET /accounts/{account_id}/devices/registrations/{registration_id}
  */
 export const devicesDeviceDetails = (variables: DevicesDeviceDetailsVariables, signal?: AbortSignal) =>
   fetch<
@@ -50529,7 +52060,7 @@ export const devicesDeviceDetails = (variables: DevicesDeviceDetailsVariables, s
   >({ url: '/accounts/{accountId}/devices/{deviceId}', method: 'get', ...variables, signal });
 
 export type DevicesListAdminOverrideCodeForDevicePathParams = {
-  deviceId: Schemas.TeamsDevicesSchemasUuid;
+  deviceId: Schemas.TeamsDevicesRegistrationId;
   accountId: Schemas.TeamsDevicesIdentifier;
 };
 
@@ -50543,7 +52074,9 @@ export type DevicesListAdminOverrideCodeForDeviceVariables = {
 } & FetcherExtraProps;
 
 /**
- * Fetches a one-time use admin override code for a device. This relies on the **Admin Override** setting being enabled in your device configuration.
+ * Fetches a one-time use admin override code for a registration. This relies on the **Admin Override** setting being enabled in your device configuration.
+ *
+ * **Deprecated:** please use GET /accounts/{account_id}/devices/registrations/{registration_id}/override_codes instead.
  */
 export const devicesListAdminOverrideCodeForDevice = (
   variables: DevicesListAdminOverrideCodeForDeviceVariables,
@@ -50721,6 +52254,7 @@ export type PostCommandsRequestBody = {
        *
        * @default 5
        * @minimum 1
+       * @x-auditable true
        */
       ['max-file-size-mb']?: number;
       /**
@@ -50728,12 +52262,14 @@ export type PostCommandsRequestBody = {
        *
        * @default 160
        * @minimum 1
+       * @x-auditable true
        */
       ['packet-size-bytes']?: number;
       /**
        * Test an IP address from all included or excluded ranges. Tests an IP address from all included or excluded ranges. Essentially the same as running 'route get <ip>'' and collecting the results. This option may increase the time taken to collect the warp-diag
        *
        * @default true
+       * @x-auditable true
        */
       ['test-all-routes']?: boolean;
       /**
@@ -50741,11 +52277,14 @@ export type PostCommandsRequestBody = {
        *
        * @default 5
        * @minimum 1
+       * @x-auditable true
        */
       ['time-limit-min']?: number;
     };
     /**
      * Type of command to execute on the device
+     *
+     * @x-auditable true
      */
     command_type: 'pcap' | 'warp-diag';
     /**
@@ -53278,7 +54817,7 @@ export type DnsViewsForAnAccountDeleteInternalDnsViewError = Fetcher.ErrorWrappe
     errors: Schemas.DnsSettingsMessages;
     messages: Schemas.DnsSettingsMessages;
     /**
-     * Whether the API call was successful
+     * Whether the API call was successful.
      *
      * @example false
      */
@@ -56880,7 +58419,7 @@ export type ZeroTrustListsZeroTrustListDetailsPathParams = {
 
 export type ZeroTrustListsZeroTrustListDetailsError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.ZeroTrustGatewaySchemasSingleResponse & Schemas.ZeroTrustGatewayApiResponseCommonFailure;
+  payload: Schemas.ZeroTrustGatewayListSingleResponse & Schemas.ZeroTrustGatewayApiResponseCommonFailure;
 }>;
 
 export type ZeroTrustListsZeroTrustListDetailsVariables = {
@@ -56895,7 +58434,7 @@ export const zeroTrustListsZeroTrustListDetails = (
   signal?: AbortSignal
 ) =>
   fetch<
-    Schemas.ZeroTrustGatewaySchemasSingleResponse,
+    Schemas.ZeroTrustGatewayListSingleResponse,
     ZeroTrustListsZeroTrustListDetailsError,
     undefined,
     {},
@@ -56910,7 +58449,7 @@ export type ZeroTrustListsPatchZeroTrustListPathParams = {
 
 export type ZeroTrustListsPatchZeroTrustListError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.ZeroTrustGatewaySchemasSingleResponse & Schemas.ZeroTrustGatewayApiResponseCommonFailure;
+  payload: Schemas.ZeroTrustGatewayListSingleResponse & Schemas.ZeroTrustGatewayApiResponseCommonFailure;
 }>;
 
 export type ZeroTrustListsPatchZeroTrustListRequestBody = {
@@ -56934,7 +58473,7 @@ export const zeroTrustListsPatchZeroTrustList = (
   signal?: AbortSignal
 ) =>
   fetch<
-    Schemas.ZeroTrustGatewaySchemasSingleResponse,
+    Schemas.ZeroTrustGatewayListSingleResponse,
     ZeroTrustListsPatchZeroTrustListError,
     ZeroTrustListsPatchZeroTrustListRequestBody,
     {},
@@ -56949,7 +58488,7 @@ export type ZeroTrustListsUpdateZeroTrustListPathParams = {
 
 export type ZeroTrustListsUpdateZeroTrustListError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.ZeroTrustGatewaySchemasSingleResponse & Schemas.ZeroTrustGatewayApiResponseCommonFailure;
+  payload: Schemas.ZeroTrustGatewayListSingleResponse & Schemas.ZeroTrustGatewayApiResponseCommonFailure;
 }>;
 
 export type ZeroTrustListsUpdateZeroTrustListRequestBody = {
@@ -56971,7 +58510,7 @@ export const zeroTrustListsUpdateZeroTrustList = (
   signal?: AbortSignal
 ) =>
   fetch<
-    Schemas.ZeroTrustGatewaySchemasSingleResponse,
+    Schemas.ZeroTrustGatewayListSingleResponse,
     ZeroTrustListsUpdateZeroTrustListError,
     ZeroTrustListsUpdateZeroTrustListRequestBody,
     {},
@@ -57045,7 +58584,7 @@ export type ZeroTrustGatewayLocationsCreateZeroTrustGatewayLocationPathParams = 
 
 export type ZeroTrustGatewayLocationsCreateZeroTrustGatewayLocationError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.ZeroTrustGatewayComponentsSchemasSingleResponse & Schemas.ZeroTrustGatewayApiResponseCommonFailure;
+  payload: Schemas.ZeroTrustGatewaySchemasSingleResponse & Schemas.ZeroTrustGatewayApiResponseCommonFailure;
 }>;
 
 export type ZeroTrustGatewayLocationsCreateZeroTrustGatewayLocationRequestBody = {
@@ -57070,7 +58609,7 @@ export const zeroTrustGatewayLocationsCreateZeroTrustGatewayLocation = (
   signal?: AbortSignal
 ) =>
   fetch<
-    Schemas.ZeroTrustGatewayComponentsSchemasSingleResponse,
+    Schemas.ZeroTrustGatewaySchemasSingleResponse,
     ZeroTrustGatewayLocationsCreateZeroTrustGatewayLocationError,
     ZeroTrustGatewayLocationsCreateZeroTrustGatewayLocationRequestBody,
     {},
@@ -57115,7 +58654,7 @@ export type ZeroTrustGatewayLocationsZeroTrustGatewayLocationDetailsPathParams =
 
 export type ZeroTrustGatewayLocationsZeroTrustGatewayLocationDetailsError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.ZeroTrustGatewayComponentsSchemasSingleResponse & Schemas.ZeroTrustGatewayApiResponseCommonFailure;
+  payload: Schemas.ZeroTrustGatewaySchemasSingleResponse & Schemas.ZeroTrustGatewayApiResponseCommonFailure;
 }>;
 
 export type ZeroTrustGatewayLocationsZeroTrustGatewayLocationDetailsVariables = {
@@ -57130,7 +58669,7 @@ export const zeroTrustGatewayLocationsZeroTrustGatewayLocationDetails = (
   signal?: AbortSignal
 ) =>
   fetch<
-    Schemas.ZeroTrustGatewayComponentsSchemasSingleResponse,
+    Schemas.ZeroTrustGatewaySchemasSingleResponse,
     ZeroTrustGatewayLocationsZeroTrustGatewayLocationDetailsError,
     undefined,
     {},
@@ -57145,7 +58684,7 @@ export type ZeroTrustGatewayLocationsUpdateZeroTrustGatewayLocationPathParams = 
 
 export type ZeroTrustGatewayLocationsUpdateZeroTrustGatewayLocationError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.ZeroTrustGatewayComponentsSchemasSingleResponse & Schemas.ZeroTrustGatewayApiResponseCommonFailure;
+  payload: Schemas.ZeroTrustGatewaySchemasSingleResponse & Schemas.ZeroTrustGatewayApiResponseCommonFailure;
 }>;
 
 export type ZeroTrustGatewayLocationsUpdateZeroTrustGatewayLocationRequestBody = {
@@ -57170,7 +58709,7 @@ export const zeroTrustGatewayLocationsUpdateZeroTrustGatewayLocation = (
   signal?: AbortSignal
 ) =>
   fetch<
-    Schemas.ZeroTrustGatewayComponentsSchemasSingleResponse,
+    Schemas.ZeroTrustGatewaySchemasSingleResponse,
     ZeroTrustGatewayLocationsUpdateZeroTrustGatewayLocationError,
     ZeroTrustGatewayLocationsUpdateZeroTrustGatewayLocationRequestBody,
     {},
@@ -57444,7 +58983,7 @@ export type ZeroTrustGatewayRulesCreateZeroTrustGatewayRulePathParams = {
 export type ZeroTrustGatewayRulesCreateZeroTrustGatewayRuleError = Fetcher.ErrorWrapper<{
   status: 400;
   payload: Record<string, any> &
-    Schemas.ZeroTrustGatewayRulesComponentsSchemasSingleResponse &
+    Schemas.ZeroTrustGatewayComponentsSchemasSingleResponse &
     Schemas.ZeroTrustGatewayApiResponseCommonFailure;
 }>;
 
@@ -57476,7 +59015,7 @@ export const zeroTrustGatewayRulesCreateZeroTrustGatewayRule = (
   signal?: AbortSignal
 ) =>
   fetch<
-    Schemas.ZeroTrustGatewayRulesComponentsSchemasSingleResponse,
+    Schemas.ZeroTrustGatewayComponentsSchemasSingleResponse,
     ZeroTrustGatewayRulesCreateZeroTrustGatewayRuleError,
     ZeroTrustGatewayRulesCreateZeroTrustGatewayRuleRequestBody,
     {},
@@ -57522,7 +59061,7 @@ export type ZeroTrustGatewayRulesZeroTrustGatewayRuleDetailsPathParams = {
 export type ZeroTrustGatewayRulesZeroTrustGatewayRuleDetailsError = Fetcher.ErrorWrapper<{
   status: 400;
   payload: Record<string, any> &
-    Schemas.ZeroTrustGatewayRulesComponentsSchemasSingleResponse &
+    Schemas.ZeroTrustGatewayComponentsSchemasSingleResponse &
     Schemas.ZeroTrustGatewayApiResponseCommonFailure;
 }>;
 
@@ -57538,7 +59077,7 @@ export const zeroTrustGatewayRulesZeroTrustGatewayRuleDetails = (
   signal?: AbortSignal
 ) =>
   fetch<
-    Schemas.ZeroTrustGatewayRulesComponentsSchemasSingleResponse,
+    Schemas.ZeroTrustGatewayComponentsSchemasSingleResponse,
     ZeroTrustGatewayRulesZeroTrustGatewayRuleDetailsError,
     undefined,
     {},
@@ -57554,7 +59093,7 @@ export type ZeroTrustGatewayRulesUpdateZeroTrustGatewayRulePathParams = {
 export type ZeroTrustGatewayRulesUpdateZeroTrustGatewayRuleError = Fetcher.ErrorWrapper<{
   status: 400;
   payload: Record<string, any> &
-    Schemas.ZeroTrustGatewayRulesComponentsSchemasSingleResponse &
+    Schemas.ZeroTrustGatewayComponentsSchemasSingleResponse &
     Schemas.ZeroTrustGatewayApiResponseCommonFailure;
 }>;
 
@@ -57586,7 +59125,7 @@ export const zeroTrustGatewayRulesUpdateZeroTrustGatewayRule = (
   signal?: AbortSignal
 ) =>
   fetch<
-    Schemas.ZeroTrustGatewayRulesComponentsSchemasSingleResponse,
+    Schemas.ZeroTrustGatewayComponentsSchemasSingleResponse,
     ZeroTrustGatewayRulesUpdateZeroTrustGatewayRuleError,
     ZeroTrustGatewayRulesUpdateZeroTrustGatewayRuleRequestBody,
     {},
@@ -57601,8 +59140,7 @@ export type ZeroTrustGatewayRulesResetExpirationZeroTrustGatewayRulePathParams =
 
 export type ZeroTrustGatewayRulesResetExpirationZeroTrustGatewayRuleError = Fetcher.ErrorWrapper<{
   status: 400;
-  payload: Schemas.ZeroTrustGatewayRulesComponentsSchemasSingleResponse &
-    Schemas.ZeroTrustGatewayApiResponseCommonFailure;
+  payload: Schemas.ZeroTrustGatewayComponentsSchemasSingleResponse & Schemas.ZeroTrustGatewayApiResponseCommonFailure;
 }>;
 
 export type ZeroTrustGatewayRulesResetExpirationZeroTrustGatewayRuleVariables = {
@@ -57619,7 +59157,7 @@ export const zeroTrustGatewayRulesResetExpirationZeroTrustGatewayRule = (
   signal?: AbortSignal
 ) =>
   fetch<
-    Schemas.ZeroTrustGatewayRulesComponentsSchemasSingleResponse,
+    Schemas.ZeroTrustGatewayComponentsSchemasSingleResponse,
     ZeroTrustGatewayRulesResetExpirationZeroTrustGatewayRuleError,
     undefined,
     {},
@@ -59710,7 +61248,7 @@ export type IpIntelligenceGetIpOverviewVariables = {
 } & FetcherExtraProps;
 
 /**
- * Gets the geolocation, ASN, infrastructure type of the ASN, and any security threat categories of an IP address.
+ * Gets the geolocation, ASN, infrastructure type of the ASN, and any security threat categories of an IP address. This is an alternative to the `/intel/ip/{ipv_type}/{ip_address}` endpoint. Must provide query parameters containing `IPv4` or `IPv6` and the IP address.
  */
 export const ipIntelligenceGetIpOverview = (variables: IpIntelligenceGetIpOverviewVariables, signal?: AbortSignal) =>
   fetch<
@@ -59745,6 +61283,37 @@ export const ipListGetIpLists = (variables: IpListGetIpListsVariables, signal?: 
     ...variables,
     signal
   });
+
+export type IpIntelligenceGetIpOverviewWithPathParamsPathParams = {
+  accountId: Schemas.IntelIdentifier;
+  ipvType: 'ipv4' | 'ipv6';
+  ipAddress: string;
+};
+
+export type IpIntelligenceGetIpOverviewWithPathParamsError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.IntelSchemasResponse & Schemas.IntelApiResponseCommonFailure;
+}>;
+
+export type IpIntelligenceGetIpOverviewWithPathParamsVariables = {
+  pathParams: IpIntelligenceGetIpOverviewWithPathParamsPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Gets the geolocation, ASN, infrastructure type of the ASN, and any security threat categories of an IP address. This is an alternative to `/intel/ip` endpoint.
+ */
+export const ipIntelligenceGetIpOverviewWithPathParams = (
+  variables: IpIntelligenceGetIpOverviewWithPathParamsVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.IntelSchemasResponse,
+    IpIntelligenceGetIpOverviewWithPathParamsError,
+    undefined,
+    {},
+    {},
+    IpIntelligenceGetIpOverviewWithPathParamsPathParams
+  >({ url: '/accounts/{accountId}/intel/ip/{ipvType}/{ipAddress}', method: 'get', ...variables, signal });
 
 export type MiscategorizationCreateMiscategorizationPathParams = {
   accountId: Schemas.IntelIdentifier;
@@ -66681,6 +68250,519 @@ export const magicPcapCollectionDownloadSimplePcap = (
     MagicPcapCollectionDownloadSimplePcapPathParams
   >({ url: '/accounts/{accountId}/pcaps/{pcapId}/download', method: 'get', ...variables, signal });
 
+export type GetV4AccountsByAccountIdPipelinesPathParams = {
+  accountId: Schemas.CloudflarePipelinesWorkersPipelinesAccountId;
+};
+
+export type GetV4AccountsByAccountIdPipelinesQueryParams = {
+  search?: string;
+  /**
+   * @default 1
+   */
+  page?: string;
+  /**
+   * @default 25
+   */
+  per_page?: string;
+};
+
+export type GetV4AccountsByAccountIdPipelinesError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      code: number;
+      message: string;
+    }[];
+    /**
+     * @x-stainless-empty-object true
+     */
+    results: Record<string, any> | null;
+    /**
+     * Indicates whether the API call was successful.
+     *
+     * @example true
+     */
+    success: Schemas.CloudflarePipelinesWorkerPipelinesCommonSuccess;
+  };
+}>;
+
+export type GetV4AccountsByAccountIdPipelinesResponse = {
+  result_info: {
+    /**
+     * Indicates the number of items on current page.
+     *
+     * @example 1
+     */
+    count: number;
+    /**
+     * Indicates the current page number.
+     *
+     * @example 0
+     */
+    page: number;
+    /**
+     * Indicates the number of items per page.
+     *
+     * @example 10
+     */
+    per_page: number;
+    /**
+     * Indicates the total number of items.
+     *
+     * @example 1
+     */
+    total_count: number;
+  };
+  results: Schemas.CloudflarePipelinesWorkersPipelinesPipeline[];
+  success: Schemas.CloudflarePipelinesWorkerPipelinesCommonSuccess;
+};
+
+export type GetV4AccountsByAccountIdPipelinesVariables = {
+  pathParams: GetV4AccountsByAccountIdPipelinesPathParams;
+  queryParams?: GetV4AccountsByAccountIdPipelinesQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * List, filter, and paginate pipelines in an account.
+ */
+export const getV4AccountsByAccountIdPipelines = (
+  variables: GetV4AccountsByAccountIdPipelinesVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    GetV4AccountsByAccountIdPipelinesResponse,
+    GetV4AccountsByAccountIdPipelinesError,
+    undefined,
+    {},
+    GetV4AccountsByAccountIdPipelinesQueryParams,
+    GetV4AccountsByAccountIdPipelinesPathParams
+  >({ url: '/accounts/{accountId}/pipelines', method: 'get', ...variables, signal });
+
+export type PostV4AccountsByAccountIdPipelinesPathParams = {
+  accountId: Schemas.CloudflarePipelinesWorkersPipelinesAccountId;
+};
+
+export type PostV4AccountsByAccountIdPipelinesError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      code: number;
+      message: string;
+    }[];
+    /**
+     * @x-stainless-empty-object true
+     */
+    results: Record<string, any> | null;
+    /**
+     * Indicates whether the API call was successful.
+     *
+     * @example true
+     */
+    success: Schemas.CloudflarePipelinesWorkerPipelinesCommonSuccess;
+  };
+}>;
+
+export type PostV4AccountsByAccountIdPipelinesResponse = {
+  result: Schemas.CloudflarePipelinesWorkersPipelinesPipeline;
+  success: Schemas.CloudflarePipelinesWorkerPipelinesCommonSuccess;
+};
+
+export type PostV4AccountsByAccountIdPipelinesRequestBody = {
+  destination: {
+    batch: {
+      /**
+       * Specifies rough maximum size of files.
+       *
+       * @default 100000000
+       * @maximum 100000000
+       * @minimum 1000
+       */
+      max_bytes?: number;
+      /**
+       * Specifies duration to wait to aggregate batches files.
+       *
+       * @default 300
+       * @maximum 300
+       * @minimum 0.25
+       */
+      max_duration_s?: number;
+      /**
+       * Specifies rough maximum number of rows per file.
+       *
+       * @default 10000000
+       * @maximum 10000000
+       * @minimum 100
+       */
+      max_rows?: number;
+    };
+    compression: {
+      /**
+       * Specifies the desired compression algorithm and format.
+       *
+       * @default gzip
+       * @example gzip
+       */
+      type?: 'none' | 'gzip' | 'deflate';
+    };
+    credentials: {
+      /**
+       * Specifies the R2 Bucket Access Key Id.
+       *
+       * @example <access key id>
+       */
+      access_key_id: string;
+      /**
+       * Specifies the R2 Endpoint.
+       *
+       * @example https://123f8a8258064ed892a347f173372359.r2.cloudflarestorage.com
+       */
+      endpoint: string;
+      /**
+       * Specifies the R2 Bucket Secret Access Key.
+       *
+       * @example <secret key>
+       */
+      secret_access_key: string;
+    };
+    /**
+     * Specifies the format of data to deliver.
+     */
+    format: 'json';
+    /**
+     * @example {"bucket":"bucket","prefix":"base"}
+     */
+    path: {
+      /**
+       * Specifies the R2 Bucket to store files.
+       *
+       * @example bucket
+       */
+      bucket: string;
+      /**
+       * Specifies the name pattern to for individual data files.
+       *
+       * @example ${slug}${extension}
+       */
+      filename?: string;
+      /**
+       * Specifies the name pattern for directory.
+       *
+       * @example ${date}/${hour}
+       */
+      filepath?: string;
+      /**
+       * Specifies the base directory within the bucket.
+       *
+       * @example base
+       */
+      prefix?: string;
+    };
+    /**
+     * Specifies the type of destination.
+     */
+    type: 'r2';
+  };
+  /**
+   * Defines the name of the pipeline.
+   *
+   * @example sample_pipeline
+   * @maxLength 128
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * @minItems 1
+   */
+  source: (
+    | (Omit<Schemas.CloudflarePipelinesWorkersPipelinesHttpSource, 'type'> & {
+        type: 'http';
+      })
+    | (Omit<Schemas.CloudflarePipelinesWorkersPipelinesBindingSource, 'type'> & {
+        type: 'binding';
+      })
+  )[];
+};
+
+export type PostV4AccountsByAccountIdPipelinesVariables = {
+  body: PostV4AccountsByAccountIdPipelinesRequestBody;
+  pathParams: PostV4AccountsByAccountIdPipelinesPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Create a new pipeline.
+ */
+export const postV4AccountsByAccountIdPipelines = (
+  variables: PostV4AccountsByAccountIdPipelinesVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    PostV4AccountsByAccountIdPipelinesResponse,
+    PostV4AccountsByAccountIdPipelinesError,
+    PostV4AccountsByAccountIdPipelinesRequestBody,
+    {},
+    {},
+    PostV4AccountsByAccountIdPipelinesPathParams
+  >({ url: '/accounts/{accountId}/pipelines', method: 'post', ...variables, signal });
+
+export type DeleteV4AccountsByAccountIdPipelinesByPipelineNamePathParams = {
+  accountId: Schemas.CloudflarePipelinesWorkersPipelinesAccountId;
+  /**
+   * @example sample_pipeline
+   * @maxLength 128
+   * @minLength 1
+   */
+  pipelineName: string;
+};
+
+export type DeleteV4AccountsByAccountIdPipelinesByPipelineNameError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteV4AccountsByAccountIdPipelinesByPipelineNameVariables = {
+  pathParams: DeleteV4AccountsByAccountIdPipelinesByPipelineNamePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Delete a pipeline.
+ */
+export const deleteV4AccountsByAccountIdPipelinesByPipelineName = (
+  variables: DeleteV4AccountsByAccountIdPipelinesByPipelineNameVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    undefined,
+    DeleteV4AccountsByAccountIdPipelinesByPipelineNameError,
+    undefined,
+    {},
+    {},
+    DeleteV4AccountsByAccountIdPipelinesByPipelineNamePathParams
+  >({ url: '/accounts/{accountId}/pipelines/{pipelineName}', method: 'delete', ...variables, signal });
+
+export type GetV4AccountsByAccountIdPipelinesByPipelineNamePathParams = {
+  accountId: Schemas.CloudflarePipelinesWorkersPipelinesAccountId;
+  /**
+   * @example sample_pipeline
+   * @maxLength 128
+   * @minLength 1
+   */
+  pipelineName: string;
+};
+
+export type GetV4AccountsByAccountIdPipelinesByPipelineNameError = Fetcher.ErrorWrapper<{
+  status: 404;
+  payload: {
+    errors: {
+      code: number;
+      message: string;
+    }[];
+    /**
+     * @x-stainless-empty-object true
+     */
+    results: Record<string, any> | null;
+    /**
+     * Indicates whether the API call was successful.
+     *
+     * @example true
+     */
+    success: Schemas.CloudflarePipelinesWorkerPipelinesCommonSuccess;
+  };
+}>;
+
+export type GetV4AccountsByAccountIdPipelinesByPipelineNameResponse = {
+  result: Schemas.CloudflarePipelinesWorkersPipelinesPipeline;
+  success: Schemas.CloudflarePipelinesWorkerPipelinesCommonSuccess;
+};
+
+export type GetV4AccountsByAccountIdPipelinesByPipelineNameVariables = {
+  pathParams: GetV4AccountsByAccountIdPipelinesByPipelineNamePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Get configuration of a pipeline.
+ */
+export const getV4AccountsByAccountIdPipelinesByPipelineName = (
+  variables: GetV4AccountsByAccountIdPipelinesByPipelineNameVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    GetV4AccountsByAccountIdPipelinesByPipelineNameResponse,
+    GetV4AccountsByAccountIdPipelinesByPipelineNameError,
+    undefined,
+    {},
+    {},
+    GetV4AccountsByAccountIdPipelinesByPipelineNamePathParams
+  >({ url: '/accounts/{accountId}/pipelines/{pipelineName}', method: 'get', ...variables, signal });
+
+export type PutV4AccountsByAccountIdPipelinesByPipelineNamePathParams = {
+  accountId: Schemas.CloudflarePipelinesWorkersPipelinesAccountId;
+  /**
+   * @example sample_pipeline
+   * @maxLength 128
+   * @minLength 1
+   */
+  pipelineName: string;
+};
+
+export type PutV4AccountsByAccountIdPipelinesByPipelineNameError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: {
+    errors: {
+      code: number;
+      message: string;
+    }[];
+    /**
+     * @x-stainless-empty-object true
+     */
+    results: Record<string, any> | null;
+    /**
+     * Indicates whether the API call was successful.
+     *
+     * @example true
+     */
+    success: Schemas.CloudflarePipelinesWorkerPipelinesCommonSuccess;
+  };
+}>;
+
+export type PutV4AccountsByAccountIdPipelinesByPipelineNameResponse = {
+  result: Schemas.CloudflarePipelinesWorkersPipelinesPipeline;
+  success: Schemas.CloudflarePipelinesWorkerPipelinesCommonSuccess;
+};
+
+export type PutV4AccountsByAccountIdPipelinesByPipelineNameRequestBody = {
+  destination: {
+    batch: {
+      /**
+       * Specifies rough maximum size of files.
+       *
+       * @default 100000000
+       * @maximum 100000000
+       * @minimum 1000
+       */
+      max_bytes?: number;
+      /**
+       * Specifies duration to wait to aggregate batches files.
+       *
+       * @default 300
+       * @maximum 300
+       * @minimum 0.25
+       */
+      max_duration_s?: number;
+      /**
+       * Specifies rough maximum number of rows per file.
+       *
+       * @default 10000000
+       * @maximum 10000000
+       * @minimum 100
+       */
+      max_rows?: number;
+    };
+    compression: {
+      /**
+       * Specifies the desired compression algorithm and format.
+       *
+       * @default gzip
+       * @example gzip
+       */
+      type?: 'none' | 'gzip' | 'deflate';
+    };
+    credentials?: {
+      /**
+       * Specifies the R2 Bucket Access Key Id.
+       *
+       * @example <access key id>
+       */
+      access_key_id: string;
+      /**
+       * Specifies the R2 Endpoint.
+       *
+       * @example https://123f8a8258064ed892a347f173372359.r2.cloudflarestorage.com
+       */
+      endpoint: string;
+      /**
+       * Specifies the R2 Bucket Secret Access Key.
+       *
+       * @example <secret key>
+       */
+      secret_access_key: string;
+    };
+    /**
+     * Specifies the format of data to deliver.
+     */
+    format: 'json';
+    /**
+     * @example {"bucket":"bucket","prefix":"base"}
+     */
+    path: {
+      /**
+       * Specifies the R2 Bucket to store files.
+       *
+       * @example bucket
+       */
+      bucket: string;
+      /**
+       * Specifies the name pattern to for individual data files.
+       *
+       * @example ${slug}${extension}
+       */
+      filename?: string;
+      /**
+       * Specifies the name pattern for directory.
+       *
+       * @example ${date}/${hour}
+       */
+      filepath?: string;
+      /**
+       * Specifies the base directory within the bucket.
+       *
+       * @example base
+       */
+      prefix?: string;
+    };
+    /**
+     * Specifies the type of destination.
+     */
+    type: 'r2';
+  };
+  /**
+   * Defines the name of the pipeline.
+   *
+   * @example sample_pipeline
+   * @maxLength 128
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * @minItems 1
+   */
+  source: (
+    | (Omit<Schemas.CloudflarePipelinesWorkersPipelinesHttpSource, 'type'> & {
+        type: 'http';
+      })
+    | (Omit<Schemas.CloudflarePipelinesWorkersPipelinesBindingSource, 'type'> & {
+        type: 'binding';
+      })
+  )[];
+};
+
+export type PutV4AccountsByAccountIdPipelinesByPipelineNameVariables = {
+  body: PutV4AccountsByAccountIdPipelinesByPipelineNameRequestBody;
+  pathParams: PutV4AccountsByAccountIdPipelinesByPipelineNamePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Update an existing pipeline.
+ */
+export const putV4AccountsByAccountIdPipelinesByPipelineName = (
+  variables: PutV4AccountsByAccountIdPipelinesByPipelineNameVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    PutV4AccountsByAccountIdPipelinesByPipelineNameResponse,
+    PutV4AccountsByAccountIdPipelinesByPipelineNameError,
+    PutV4AccountsByAccountIdPipelinesByPipelineNameRequestBody,
+    {},
+    {},
+    PutV4AccountsByAccountIdPipelinesByPipelineNamePathParams
+  >({ url: '/accounts/{accountId}/pipelines/{pipelineName}', method: 'put', ...variables, signal });
+
 export type QueuesListPathParams = {
   accountId: Schemas.MqIdentifier;
 };
@@ -70006,6 +72088,398 @@ export const secondaryDnsTsigUpdateTsig = (variables: SecondaryDnsTsigUpdateTsig
     {},
     SecondaryDnsTsigUpdateTsigPathParams
   >({ url: '/accounts/{accountId}/secondary_dns/tsigs/{tsigId}', method: 'put', ...variables, signal });
+
+export type SecretsStoreQuotaPathParams = {
+  accountId: Schemas.SecretsStoreAccountIdentifier;
+};
+
+export type SecretsStoreQuotaError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecretsStoreApiResponseCommonFailure;
+}>;
+
+export type SecretsStoreQuotaVariables = {
+  pathParams: SecretsStoreQuotaPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Lists the number of secrets used in the account.
+ */
+export const secretsStoreQuota = (variables: SecretsStoreQuotaVariables, signal?: AbortSignal) =>
+  fetch<Schemas.SecretsStoreQuotaResponse, SecretsStoreQuotaError, undefined, {}, {}, SecretsStoreQuotaPathParams>({
+    url: '/accounts/{accountId}/secrets_store/quota',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type SecretsStoreListPathParams = {
+  accountId: Schemas.SecretsStoreAccountIdentifier;
+};
+
+export type SecretsStoreListQueryParams = {
+  /**
+   * Direction to sort objects
+   *
+   * @default desc
+   */
+  direction?: 'asc' | 'desc';
+  /**
+   * Page number
+   *
+   * @example 2
+   * @minimum 0
+   * @multipleOf 1
+   */
+  page?: number;
+  /**
+   * Number of objects to return per page
+   *
+   * @example 20
+   * @maximum 100
+   * @minimum 0
+   * @multipleOf 1
+   */
+  per_page?: number;
+  /**
+   * Order secrets by values in the given field
+   *
+   * @default created
+   */
+  order?: 'name' | 'comment' | 'created' | 'modified' | 'status';
+};
+
+export type SecretsStoreListError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecretsStoreApiResponseCommonFailure;
+}>;
+
+export type SecretsStoreListVariables = {
+  pathParams: SecretsStoreListPathParams;
+  queryParams?: SecretsStoreListQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Lists all the stores in an account
+ */
+export const secretsStoreList = (variables: SecretsStoreListVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.SecretsStoreStoresResponseCollection,
+    SecretsStoreListError,
+    undefined,
+    {},
+    SecretsStoreListQueryParams,
+    SecretsStoreListPathParams
+  >({ url: '/accounts/{accountId}/secrets_store/stores', method: 'get', ...variables, signal });
+
+export type SecretsStoreCreatePathParams = {
+  accountId: Schemas.SecretsStoreAccountIdentifier;
+};
+
+export type SecretsStoreCreateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecretsStoreApiResponseCommonFailure;
+}>;
+
+export type SecretsStoreCreateRequestBody = Schemas.SecretsStoreCreateStoreObject[];
+
+export type SecretsStoreCreateVariables = {
+  body?: SecretsStoreCreateRequestBody;
+  pathParams: SecretsStoreCreatePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Creates a store in the account
+ */
+export const secretsStoreCreate = (variables: SecretsStoreCreateVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.SecretsStoreStoresResponseCollection,
+    SecretsStoreCreateError,
+    SecretsStoreCreateRequestBody,
+    {},
+    {},
+    SecretsStoreCreatePathParams
+  >({ url: '/accounts/{accountId}/secrets_store/stores', method: 'post', ...variables, signal });
+
+export type SecretsStoreDeleteByIdPathParams = {
+  accountId: Schemas.SecretsStoreAccountIdentifier;
+  storeId: Schemas.SecretsStoreStoreIdentifier;
+};
+
+export type SecretsStoreDeleteByIdError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecretsStoreApiResponseCommonFailure;
+}>;
+
+export type SecretsStoreDeleteByIdVariables = {
+  pathParams: SecretsStoreDeleteByIdPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Deletes a single store
+ */
+export const secretsStoreDeleteById = (variables: SecretsStoreDeleteByIdVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.SecretsStoreStoreResponse,
+    SecretsStoreDeleteByIdError,
+    undefined,
+    {},
+    {},
+    SecretsStoreDeleteByIdPathParams
+  >({ url: '/accounts/{accountId}/secrets_store/stores/{storeId}', method: 'delete', ...variables, signal });
+
+export type SecretsStoreDeleteBulkPathParams = {
+  accountId: Schemas.SecretsStoreAccountIdentifier;
+  storeId: Schemas.SecretsStoreStoreIdentifier;
+};
+
+export type SecretsStoreDeleteBulkError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecretsStoreApiResponseCommonFailure;
+}>;
+
+export type SecretsStoreDeleteBulkRequestBody = Schemas.SecretsStoreDeleteSecretObject[];
+
+export type SecretsStoreDeleteBulkVariables = {
+  body?: SecretsStoreDeleteBulkRequestBody;
+  pathParams: SecretsStoreDeleteBulkPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Deletes one or more secrets
+ */
+export const secretsStoreDeleteBulk = (variables: SecretsStoreDeleteBulkVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.SecretsStoreSecretsResponseCollection,
+    SecretsStoreDeleteBulkError,
+    SecretsStoreDeleteBulkRequestBody,
+    {},
+    {},
+    SecretsStoreDeleteBulkPathParams
+  >({ url: '/accounts/{accountId}/secrets_store/stores/{storeId}/secrets', method: 'delete', ...variables, signal });
+
+export type SecretsStoreSecretsListPathParams = {
+  accountId: Schemas.SecretsStoreAccountIdentifier;
+  storeId: Schemas.SecretsStoreStoreIdentifier;
+};
+
+export type SecretsStoreSecretsListQueryParams = {
+  /**
+   * Direction to sort objects
+   *
+   * @default desc
+   */
+  direction?: 'asc' | 'desc';
+  /**
+   * Page number
+   *
+   * @example 2
+   * @minimum 0
+   * @multipleOf 1
+   */
+  page?: number;
+  /**
+   * Number of objects to return per page
+   *
+   * @example 20
+   * @maximum 100
+   * @minimum 0
+   * @multipleOf 1
+   */
+  per_page?: number;
+  /**
+   * Search secrets using a filter string, filtering across name and comment
+   */
+  search?: string;
+  /**
+   * Order secrets by values in the given field
+   *
+   * @default created
+   */
+  order?: 'name' | 'comment' | 'created' | 'modified' | 'status';
+};
+
+export type SecretsStoreSecretsListError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecretsStoreApiResponseCommonFailure;
+}>;
+
+export type SecretsStoreSecretsListVariables = {
+  pathParams: SecretsStoreSecretsListPathParams;
+  queryParams?: SecretsStoreSecretsListQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Lists all store secrets
+ */
+export const secretsStoreSecretsList = (variables: SecretsStoreSecretsListVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.SecretsStoreSecretsResponseCollection,
+    SecretsStoreSecretsListError,
+    undefined,
+    {},
+    SecretsStoreSecretsListQueryParams,
+    SecretsStoreSecretsListPathParams
+  >({ url: '/accounts/{accountId}/secrets_store/stores/{storeId}/secrets', method: 'get', ...variables, signal });
+
+export type SecretsStoreSecretCreatePathParams = {
+  accountId: Schemas.SecretsStoreAccountIdentifier;
+  storeId: Schemas.SecretsStoreStoreIdentifier;
+};
+
+export type SecretsStoreSecretCreateError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecretsStoreApiResponseCommonFailure;
+}>;
+
+export type SecretsStoreSecretCreateRequestBody = Schemas.SecretsStoreCreateSecretObject[];
+
+export type SecretsStoreSecretCreateVariables = {
+  body?: SecretsStoreSecretCreateRequestBody;
+  pathParams: SecretsStoreSecretCreatePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Creates a secret in the account
+ */
+export const secretsStoreSecretCreate = (variables: SecretsStoreSecretCreateVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.SecretsStoreSecretsResponseCollection,
+    SecretsStoreSecretCreateError,
+    SecretsStoreSecretCreateRequestBody,
+    {},
+    {},
+    SecretsStoreSecretCreatePathParams
+  >({ url: '/accounts/{accountId}/secrets_store/stores/{storeId}/secrets', method: 'post', ...variables, signal });
+
+export type SecretsStoreSecretDeleteByIdPathParams = {
+  accountId: Schemas.SecretsStoreAccountIdentifier;
+  storeId: Schemas.SecretsStoreStoreIdentifier;
+  secretId: Schemas.SecretsStoreIdentifier;
+};
+
+export type SecretsStoreSecretDeleteByIdError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecretsStoreApiResponseCommonFailure;
+}>;
+
+export type SecretsStoreSecretDeleteByIdVariables = {
+  pathParams: SecretsStoreSecretDeleteByIdPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Deletes a single secret
+ */
+export const secretsStoreSecretDeleteById = (variables: SecretsStoreSecretDeleteByIdVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.SecretsStoreSecretResponse,
+    SecretsStoreSecretDeleteByIdError,
+    undefined,
+    {},
+    {},
+    SecretsStoreSecretDeleteByIdPathParams
+  >({
+    url: '/accounts/{accountId}/secrets_store/stores/{storeId}/secrets/{secretId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type SecretsStoreGetByIdPathParams = {
+  accountId: Schemas.SecretsStoreAccountIdentifier;
+  storeId: Schemas.SecretsStoreStoreIdentifier;
+  secretId: Schemas.SecretsStoreIdentifier;
+};
+
+export type SecretsStoreGetByIdError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecretsStoreApiResponseCommonFailure;
+}>;
+
+export type SecretsStoreGetByIdVariables = {
+  pathParams: SecretsStoreGetByIdPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Returns details of a single secret
+ */
+export const secretsStoreGetById = (variables: SecretsStoreGetByIdVariables, signal?: AbortSignal) =>
+  fetch<Schemas.SecretsStoreSecretResponse, SecretsStoreGetByIdError, undefined, {}, {}, SecretsStoreGetByIdPathParams>(
+    {
+      url: '/accounts/{accountId}/secrets_store/stores/{storeId}/secrets/{secretId}',
+      method: 'get',
+      ...variables,
+      signal
+    }
+  );
+
+export type SecretsStorePatchByIdPathParams = {
+  accountId: Schemas.SecretsStoreAccountIdentifier;
+  storeId: Schemas.SecretsStoreStoreIdentifier;
+  secretId: Schemas.SecretsStoreIdentifier;
+};
+
+export type SecretsStorePatchByIdError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecretsStoreApiResponseCommonFailure;
+}>;
+
+export type SecretsStorePatchByIdVariables = {
+  body: Schemas.SecretsStorePatchSecretObject;
+  pathParams: SecretsStorePatchByIdPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Updates a single secret
+ */
+export const secretsStorePatchById = (variables: SecretsStorePatchByIdVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.SecretsStoreSecretResponse,
+    SecretsStorePatchByIdError,
+    Schemas.SecretsStorePatchSecretObject,
+    {},
+    {},
+    SecretsStorePatchByIdPathParams
+  >({
+    url: '/accounts/{accountId}/secrets_store/stores/{storeId}/secrets/{secretId}',
+    method: 'patch',
+    ...variables,
+    signal
+  });
+
+export type SecretsStoreDuplicateByIdPathParams = {
+  accountId: Schemas.SecretsStoreAccountIdentifier;
+  storeId: Schemas.SecretsStoreStoreIdentifier;
+  secretId: Schemas.SecretsStoreIdentifier;
+};
+
+export type SecretsStoreDuplicateByIdError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.SecretsStoreApiResponseCommonFailure;
+}>;
+
+export type SecretsStoreDuplicateByIdVariables = {
+  body: Schemas.SecretsStoreDuplicateSecretObject;
+  pathParams: SecretsStoreDuplicateByIdPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Duplicates the secret, keeping the value
+ */
+export const secretsStoreDuplicateById = (variables: SecretsStoreDuplicateByIdVariables, signal?: AbortSignal) =>
+  fetch<
+    Schemas.SecretsStoreSecretResponse,
+    SecretsStoreDuplicateByIdError,
+    Schemas.SecretsStoreDuplicateSecretObject,
+    {},
+    {},
+    SecretsStoreDuplicateByIdPathParams
+  >({
+    url: '/accounts/{accountId}/secrets_store/stores/{storeId}/secrets/{secretId}/duplicate',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetSecurityCenterInsightsPathParams = {
   accountId: Schemas.SecurityCenterIdentifier;
@@ -79479,6 +81953,492 @@ export const durableObjectsNamespaceListObjects = (
     signal
   });
 
+export type TelemetryKeysListPathParams = {
+  /**
+   * Your Cloudflare account ID.
+   */
+  accountId: string;
+};
+
+export type TelemetryKeysListError = Fetcher.ErrorWrapper<
+  | {
+      status: 401;
+      payload: {
+        errors: {
+          detail?: string;
+          message: 'Unauthorized';
+        }[];
+        messages: {
+          message: string;
+        }[];
+        success: false;
+      };
+    }
+  | {
+      status: 500;
+      payload: {
+        errors: {
+          detail?: string;
+          message: 'Internal error';
+        }[];
+        messages: {
+          message: string;
+        }[];
+        success: false;
+      };
+    }
+>;
+
+export type TelemetryKeysListResponse = {
+  errors: {
+    message: string;
+  }[];
+  messages: {
+    message: 'Successful request';
+  }[];
+  result: {
+    key: string;
+    lastSeenAt: number;
+    type: 'string' | 'boolean' | 'number';
+  }[];
+  success: true;
+};
+
+export type TelemetryKeysListRequestBody = {
+  datasets?: string[];
+  filters?: {
+    key: string;
+    operation:
+      | 'includes'
+      | 'not_includes'
+      | 'starts_with'
+      | 'regex'
+      | 'exists'
+      | 'is_null'
+      | 'in'
+      | 'not_in'
+      | 'eq'
+      | 'neq'
+      | 'gt'
+      | 'gte'
+      | 'lt'
+      | 'lte'
+      | '='
+      | '!='
+      | '>'
+      | '>='
+      | '<'
+      | '<='
+      | 'INCLUDES'
+      | 'DOES_NOT_INCLUDE'
+      | 'MATCH_REGEX'
+      | 'EXISTS'
+      | 'DOES_NOT_EXIST'
+      | 'IN'
+      | 'NOT_IN'
+      | 'STARTS_WITH';
+    type: 'string' | 'number' | 'boolean';
+    value?: string | number | boolean;
+  }[];
+  /**
+   * Search for a specific substring in the keys.
+   */
+  keyNeedle?: {
+    isRegex?: boolean;
+    matchCase?: boolean;
+    value: string | number | boolean;
+  };
+  limit?: number;
+  /**
+   * Search for a specific substring in the event.
+   */
+  needle?: {
+    isRegex?: boolean;
+    matchCase?: boolean;
+    value: string | number | boolean;
+  };
+  timeframe?: {
+    from: number;
+    to: number;
+  };
+};
+
+export type TelemetryKeysListVariables = {
+  body?: TelemetryKeysListRequestBody;
+  pathParams: TelemetryKeysListPathParams;
+} & FetcherExtraProps;
+
+/**
+ * List all the keys in your telemetry events.
+ */
+export const telemetryKeysList = (variables: TelemetryKeysListVariables, signal?: AbortSignal) =>
+  fetch<
+    TelemetryKeysListResponse,
+    TelemetryKeysListError,
+    TelemetryKeysListRequestBody,
+    {},
+    {},
+    TelemetryKeysListPathParams
+  >({ url: '/accounts/{accountId}/workers/observability/telemetry/keys', method: 'post', ...variables, signal });
+
+export type TelemetryQueryPathParams = {
+  /**
+   * Your Cloudflare account ID.
+   */
+  accountId: string;
+};
+
+export type TelemetryQueryError = Fetcher.ErrorWrapper<
+  | {
+      status: 401;
+      payload: {
+        errors: {
+          detail?: string;
+          message: 'Unauthorized';
+        }[];
+        messages: {
+          message: string;
+        }[];
+        success: false;
+      };
+    }
+  | {
+      status: 500;
+      payload: {
+        errors: {
+          detail?: string;
+          message: 'Internal error';
+        }[];
+        messages: {
+          message: string;
+        }[];
+        success: false;
+      };
+    }
+>;
+
+export type TelemetryQueryResponse = {
+  errors: {
+    message: string;
+  }[];
+  messages: {
+    message: 'Successful request';
+  }[];
+  result: Schemas.WorkersObservabilityQueryResults;
+  success: true;
+};
+
+export type TelemetryQueryRequestBody = {
+  chart?: boolean;
+  compare?: boolean;
+  /**
+   * @default false
+   */
+  dry?: boolean;
+  granularity?: number;
+  /**
+   * @default false
+   */
+  ignoreSeries?: boolean;
+  /**
+   * @default 50
+   * @maximum 100
+   */
+  limit?: number;
+  offset?: string;
+  offsetBy?: number;
+  offsetDirection?: string;
+  parameters?: {
+    /**
+     * Create Calculations to compute as part of the query.
+     */
+    calculations?: {
+      alias?: string;
+      key?: string;
+      keyType?: 'string' | 'number' | 'boolean';
+      operator:
+        | 'uniq'
+        | 'count'
+        | 'max'
+        | 'min'
+        | 'sum'
+        | 'avg'
+        | 'median'
+        | 'p001'
+        | 'p01'
+        | 'p05'
+        | 'p10'
+        | 'p25'
+        | 'p75'
+        | 'p90'
+        | 'p95'
+        | 'p99'
+        | 'p999'
+        | 'stddev'
+        | 'variance'
+        | 'COUNT_DISTINCT'
+        | 'COUNT'
+        | 'MAX'
+        | 'MIN'
+        | 'SUM'
+        | 'AVG'
+        | 'MEDIAN'
+        | 'P001'
+        | 'P01'
+        | 'P05'
+        | 'P10'
+        | 'P25'
+        | 'P75'
+        | 'P90'
+        | 'P95'
+        | 'P99'
+        | 'P999'
+        | 'STDDEV'
+        | 'VARIANCE';
+    }[];
+    /**
+     * Set the Datasets to query. Leave it empty to query all the datasets.
+     */
+    datasets?: string[];
+    /**
+     * Set a Flag to describe how to combine the filters on the query.
+     */
+    filterCombination?: 'and' | 'or' | 'AND' | 'OR';
+    /**
+     * Configure the Filters to apply to the query.
+     */
+    filters?: {
+      key: string;
+      operation:
+        | 'includes'
+        | 'not_includes'
+        | 'starts_with'
+        | 'regex'
+        | 'exists'
+        | 'is_null'
+        | 'in'
+        | 'not_in'
+        | 'eq'
+        | 'neq'
+        | 'gt'
+        | 'gte'
+        | 'lt'
+        | 'lte'
+        | '='
+        | '!='
+        | '>'
+        | '>='
+        | '<'
+        | '<='
+        | 'INCLUDES'
+        | 'DOES_NOT_INCLUDE'
+        | 'MATCH_REGEX'
+        | 'EXISTS'
+        | 'DOES_NOT_EXIST'
+        | 'IN'
+        | 'NOT_IN'
+        | 'STARTS_WITH';
+      type: 'string' | 'number' | 'boolean';
+      value?: string | number | boolean;
+    }[];
+    /**
+     * Define how to group the results of the query.
+     */
+    groupBys?: {
+      type: 'string' | 'number' | 'boolean';
+      value: string;
+    }[];
+    /**
+     * Configure the Having clauses that filter on calculations in the query result.
+     */
+    havings?: {
+      key: string;
+      operation: 'eq' | 'neq' | 'gt' | 'gte' | 'lt' | 'lte';
+      value: number;
+    }[];
+    /**
+     * Set a limit on the number of results / records returned by the query
+     *
+     * @maximum 100
+     * @minimum 0
+     */
+    limit?: number;
+    /**
+     * Define an expression to search using full-text search.
+     */
+    needle?: {
+      isRegex?: boolean;
+      matchCase?: boolean;
+      value: string | number | boolean;
+    };
+    /**
+     * Configure the order of the results returned by the query.
+     */
+    orderBy?: {
+      /**
+       * Set the order of the results
+       */
+      order?: 'asc' | 'desc';
+      /**
+       * Configure which Calculation to order the results by.
+       */
+      value: string;
+    };
+  };
+  patternType?: 'message' | 'error';
+  queryId: string;
+  timeframe: {
+    from: number;
+    to: number;
+  };
+  /**
+   * @default calculations
+   */
+  view?: 'traces' | 'events' | 'calculations' | 'invocations' | 'requests' | 'patterns';
+};
+
+export type TelemetryQueryVariables = {
+  body: TelemetryQueryRequestBody;
+  pathParams: TelemetryQueryPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Runs a temporary or saved query
+ */
+export const telemetryQuery = (variables: TelemetryQueryVariables, signal?: AbortSignal) =>
+  fetch<TelemetryQueryResponse, TelemetryQueryError, TelemetryQueryRequestBody, {}, {}, TelemetryQueryPathParams>({
+    url: '/accounts/{accountId}/workers/observability/telemetry/query',
+    method: 'post',
+    ...variables,
+    signal
+  });
+
+export type TelemetryValuesListPathParams = {
+  /**
+   * Your Cloudflare account ID.
+   */
+  accountId: string;
+};
+
+export type TelemetryValuesListError = Fetcher.ErrorWrapper<
+  | {
+      status: 401;
+      payload: {
+        errors: {
+          detail?: string;
+          message: 'Unauthorized';
+        }[];
+        messages: {
+          message: string;
+        }[];
+        success: false;
+      };
+    }
+  | {
+      status: 500;
+      payload: {
+        errors: {
+          detail?: string;
+          message: 'Internal error';
+        }[];
+        messages: {
+          message: string;
+        }[];
+        success: false;
+      };
+    }
+>;
+
+export type TelemetryValuesListResponse = {
+  errors: {
+    message: string;
+  }[];
+  messages: {
+    message: 'Successful request';
+  }[];
+  result: {
+    dataset: string;
+    key: string;
+    type: 'string' | 'boolean' | 'number';
+    value: string | number | boolean;
+  }[];
+  success: true;
+};
+
+export type TelemetryValuesListRequestBody = {
+  datasets: string[];
+  filters?: {
+    key: string;
+    operation:
+      | 'includes'
+      | 'not_includes'
+      | 'starts_with'
+      | 'regex'
+      | 'exists'
+      | 'is_null'
+      | 'in'
+      | 'not_in'
+      | 'eq'
+      | 'neq'
+      | 'gt'
+      | 'gte'
+      | 'lt'
+      | 'lte'
+      | '='
+      | '!='
+      | '>'
+      | '>='
+      | '<'
+      | '<='
+      | 'INCLUDES'
+      | 'DOES_NOT_INCLUDE'
+      | 'MATCH_REGEX'
+      | 'EXISTS'
+      | 'DOES_NOT_EXIST'
+      | 'IN'
+      | 'NOT_IN'
+      | 'STARTS_WITH';
+    type: 'string' | 'number' | 'boolean';
+    value?: string | number | boolean;
+  }[];
+  key: string;
+  /**
+   * @default 50
+   */
+  limit?: number;
+  /**
+   * Search for a specific substring in the event.
+   */
+  needle?: {
+    isRegex?: boolean;
+    matchCase?: boolean;
+    value: string | number | boolean;
+  };
+  timeframe: {
+    from: number;
+    to: number;
+  };
+  type: 'string' | 'boolean' | 'number';
+};
+
+export type TelemetryValuesListVariables = {
+  body: TelemetryValuesListRequestBody;
+  pathParams: TelemetryValuesListPathParams;
+} & FetcherExtraProps;
+
+/**
+ * List unique values found in your events
+ */
+export const telemetryValuesList = (variables: TelemetryValuesListVariables, signal?: AbortSignal) =>
+  fetch<
+    TelemetryValuesListResponse,
+    TelemetryValuesListError,
+    TelemetryValuesListRequestBody,
+    {},
+    {},
+    TelemetryValuesListPathParams
+  >({ url: '/accounts/{accountId}/workers/observability/telemetry/values', method: 'post', ...variables, signal });
+
 export type WorkerScriptListWorkersPathParams = {
   accountId: Schemas.WorkersIdentifier;
 };
@@ -80276,7 +83236,7 @@ export type WorkerTailLogsDeleteTailError = Fetcher.ErrorWrapper<{
     errors: Schemas.WorkersMessages;
     messages: Schemas.WorkersMessages;
     /**
-     * Whether the API call was successful
+     * Whether the API call was successful.
      *
      * @example false
      */
@@ -81509,6 +84469,24 @@ export type WorDescribeWorkflowInstanceResponse = {
             source: string;
           };
           type: 'termination';
+        }
+      | {
+          /**
+           * @format date-time
+           */
+          end: string;
+          error: {
+            message: string;
+            name: string;
+          } | null;
+          finished: boolean;
+          name: string;
+          output: Record<string, any> | string | number | boolean;
+          /**
+           * @format date-time
+           */
+          start: string;
+          type: 'waitForEvent';
         }
     )[];
     success: boolean | null;
@@ -126912,7 +129890,7 @@ export type DnsRecordsForAZoneDeleteDnsRecordError = Fetcher.ErrorWrapper<{
     errors: Schemas.DnsRecordsMessages;
     messages: Schemas.DnsRecordsMessages;
     /**
-     * Whether the API call was successful
+     * Whether the API call was successful.
      *
      * @example false
      */
@@ -128014,6 +130992,7 @@ export type ZoneLockdownListZoneLockdownRulesQueryParams = {
    * A string to search for in the description of existing rules.
    *
    * @example endpoints
+   * @x-auditable true
    */
   description?: Schemas.FirewallSchemasDescriptionSearch;
   /**
@@ -128021,6 +131000,7 @@ export type ZoneLockdownListZoneLockdownRulesQueryParams = {
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: Schemas.FirewallModifiedOn;
   /**
@@ -128033,18 +131013,21 @@ export type ZoneLockdownListZoneLockdownRulesQueryParams = {
    * The priority of the rule to control the processing order. A lower number indicates higher priority. If not provided, any rules with a configured priority will be processed before rules without a priority.
    *
    * @example 5
+   * @x-auditable true
    */
   priority?: Schemas.FirewallSchemasPriority;
   /**
    * A single URI to search for in the list of URLs of existing rules.
    *
    * @example /some/path
+   * @x-auditable true
    */
   uri_search?: Schemas.FirewallUriSearch;
   /**
    * A single IP address range to search for in existing rules.
    *
    * @example 1.2.3.0/16
+   * @x-auditable true
    */
   ip_range_search?: Schemas.FirewallIpRangeSearch;
   /**
@@ -128597,12 +131580,14 @@ export type UserAgentBlockingRulesListUserAgentBlockingRulesQueryParams = {
    * A string to search for in the description of existing rules.
    *
    * @example abusive
+   * @x-auditable true
    */
   description?: Schemas.FirewallDescriptionSearch;
   /**
    * A string to search for in the description of existing rules.
    *
    * @example abusive
+   * @x-auditable true
    */
   description_search?: Schemas.FirewallDescriptionSearch;
   /**
@@ -137784,6 +140769,7 @@ export const operationsByTag = {
     workersAiPostRunCfMetaLlama321bInstruct,
     workersAiPostRunCfMetaLlama323bInstruct,
     workersAiPostRunCfMetaLlama3370bInstructFp8Fast,
+    workersAiPostRunCfMetaLlama4Scout17b16eInstruct,
     workersAiPostRunCfMetaLlamaGuard38b,
     workersAiPostRunCfMicrosoftPhi2,
     workersAiPostRunCfMistralMistral7bInstructV01,
@@ -137976,6 +140962,8 @@ export const operationsByTag = {
     cloudflareD1CreateDatabase,
     cloudflareD1DeleteDatabase,
     cloudflareD1GetDatabase,
+    cloudflareD1UpdatePartialDatabase,
+    cloudflareD1UpdateDatabase,
     cloudflareD1ExportDatabase,
     cloudflareD1ImportDatabase,
     cloudflareD1QueryDatabase,
@@ -138023,6 +141011,7 @@ export const operationsByTag = {
     deviceManagedNetworksDeviceManagedNetworkDetails,
     deviceManagedNetworksUpdateDeviceManagedNetwork
   },
+  physicalDevices: { listDevices, deleteDevice, getDevice, revokeDevice, deleteRegistrations },
   devicePostureRules: {
     devicePostureRulesListDevicePostureRules,
     devicePostureRulesCreateDevicePostureRule,
@@ -138037,6 +141026,8 @@ export const operationsByTag = {
     devicePostureIntegrationsDevicePostureIntegrationDetails,
     devicePostureIntegrationsUpdateDevicePostureIntegration
   },
+  registrations: { listRegistrations, revokeRegistrations, unrevokeRegistrations, deleteRegistration, getRegistration },
+  warpTeamsDeviceApiOther: { getRegistrationOverrideCodes },
   devicesResilience: { devicesResilienceRetrieveGlobalWarpOverride, devicesResilienceSetGlobalWarpOverride },
   zeroTrustAccounts: {
     zeroTrustAccountsGetDeviceSettingsForZeroTrustAccount,
@@ -138335,7 +141326,7 @@ export const operationsByTag = {
     customIndicatorFeedsUpdateIndicatorFeedData,
     customIndicatorFeedsDownloadIndicatorFeedData
   },
-  iPIntelligence: { ipIntelligenceGetIpOverview },
+  iPIntelligence: { ipIntelligenceGetIpOverview, ipIntelligenceGetIpOverviewWithPathParams },
   iPList: { ipListGetIpLists },
   miscategorization: { miscategorizationCreateMiscategorization },
   sinkholeConfig: { sinkholeConfigGetSinkholes },
@@ -138572,6 +141563,13 @@ export const operationsByTag = {
     magicPcapCollectionGetPcapRequest,
     magicPcapCollectionDownloadSimplePcap
   },
+  workersPipelinesOther: {
+    getV4AccountsByAccountIdPipelines,
+    postV4AccountsByAccountIdPipelines,
+    deleteV4AccountsByAccountIdPipelinesByPipelineName,
+    getV4AccountsByAccountIdPipelinesByPipelineName,
+    putV4AccountsByAccountIdPipelinesByPipelineName
+  },
   queue: {
     queuesList,
     queuesCreate,
@@ -138644,6 +141642,19 @@ export const operationsByTag = {
     secondaryDnsTsigDeleteTsig,
     secondaryDnsTsigTsigDetails,
     secondaryDnsTsigUpdateTsig
+  },
+  secretsStore: {
+    secretsStoreQuota,
+    secretsStoreList,
+    secretsStoreCreate,
+    secretsStoreDeleteById,
+    secretsStoreDeleteBulk,
+    secretsStoreSecretsList,
+    secretsStoreSecretCreate,
+    secretsStoreSecretDeleteById,
+    secretsStoreGetById,
+    secretsStorePatchById,
+    secretsStoreDuplicateById
   },
   resourceSharing: {
     sharesList,
@@ -138902,6 +141913,9 @@ export const operationsByTag = {
     workerDomainGetADomain
   },
   durableObjectsNamespace: { durableObjectsNamespaceListNamespaces, durableObjectsNamespaceListObjects },
+  keys: { telemetryKeysList },
+  queryRun: { telemetryQuery },
+  values: { telemetryValuesList },
   workerDeployments: { workerDeploymentsListDeployments, workerDeploymentsCreateDeployment },
   workerCronTrigger: { workerCronTriggerGetCronTriggers, workerCronTriggerUpdateCronTriggers },
   workerTailLogs: {
