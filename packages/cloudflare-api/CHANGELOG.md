@@ -1,5 +1,17 @@
 # cloudflare-api-js
 
+## 0.11.1
+
+### Patch Changes
+
+- ab47f1f: Add x-auditable field to various DNS settings types
+- 04d82ef: Removed MagicTransitResultInfo from MagicTransitApiResponseCollection
+- ece05e3: [BREAKING] Add support for 'internal' type in ZonesType
+- 832b72f: [BREAKING] Fix typo in LogpushApiResponseCommon and LogpushApiResponseCommonFailure
+- 4d46ca9: [BREAKING] Add new endpoint to send event for workflow instance
+- 54f7337: [BREAKING] Add new property `maxdurationseconds` to StreamUploadMetadata
+- d28b04d: Add new endpoints to check source and target connectivity
+
 ## 0.11.0
 
 ### Minor Changes

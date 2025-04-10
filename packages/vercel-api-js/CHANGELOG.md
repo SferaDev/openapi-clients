@@ -1,5 +1,13 @@
 # vercel-api-js
 
+## 0.23.3
+
+### Patch Changes
+
+- 320f4c8: Add new flags explorer overrides threshold and unlimited overrides
+- 11e409a: Rename 'GetV1ExperimentationItems' type to 'QueryExperimentationItems'
+- 9220b02: Add new optional fields to ImportResourceRequestBody
+
 ## 0.23.2
 
 ### Patch Changes
