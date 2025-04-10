@@ -994,20 +994,10 @@ export type UserEvent = {
               createdAt: number;
             }[];
           }[];
-          favoriteProjectsAndSpaces?: (
-            | {
-                projectId: string;
-                scopeSlug: string;
-                scopeId: string;
-                teamId?: string;
-              }
-            | {
-                spaceId: string;
-                scopeSlug: string;
-                scopeId: string;
-                teamId?: string;
-              }
-          )[];
+          favoriteProjectsAndSpaces?: {
+            teamId: string;
+            projectId: string;
+          }[];
           email: string;
           id: string;
           importFlowGitNamespace?: string | number | null;
@@ -3076,20 +3066,10 @@ export type AuthUser = {
   /**
    * A list of projects and spaces across teams that a user has marked as a favorite.
    */
-  favoriteProjectsAndSpaces?: (
-    | {
-        projectId: string;
-        scopeSlug: string;
-        scopeId: string;
-        teamId?: string;
-      }
-    | {
-        spaceId: string;
-        scopeSlug: string;
-        scopeId: string;
-        teamId?: string;
-      }
-  )[];
+  favoriteProjectsAndSpaces?: {
+    teamId: string;
+    projectId: string;
+  }[];
   /**
    * Whether the user has a trial available for a paid plan subscription.
    */
