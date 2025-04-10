@@ -7305,6 +7305,12 @@ export type MeetingUpdateRequestBody = {
      * @default false
      */
     disable_participant_video?: boolean;
+    /**
+     * Whether to include authenticated guest's email addresses in meetings' attendee reports.
+     *
+     * @example true
+     */
+    email_in_attendee_report?: boolean;
   };
   /**
    * Meeting start time. When using a format like `yyyy-MM-dd'T'HH:mm:ss'Z'`, always use GMT time. When using a format like `yyyy-MM-dd'T'HH:mm:ss`, use local time and specify the time zone. Only used for scheduled meetings and recurring meetings with a fixed time.
@@ -25255,6 +25261,12 @@ export type WebinarUpdateRequestBody = {
      * @default false
      */
     allow_host_control_participant_mute_state?: boolean;
+    /**
+     * Whether to include guest's email addresses in webinars' attendee reports.
+     *
+     * @example true
+     */
+    email_in_attendee_report?: boolean;
   };
   /**
    * Webinar start time, in the format `yyyy-MM-dd'T'HH:mm:ss'Z'`. Should be in GMT time. In the format `yyyy-MM-dd'T'HH:mm:ss`. This should be in local time and the timezone should be specified. Only used for scheduled webinars and recurring webinars with a fixed time.
