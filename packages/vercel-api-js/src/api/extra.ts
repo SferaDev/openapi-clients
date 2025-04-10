@@ -84,7 +84,6 @@ import {
   deleteIntegrationLogDrain,
   gitNamespaces,
   searchRepo,
-  queryExperimentationItems,
   postV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItems,
   patchV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemId,
   deleteV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemId,
@@ -261,7 +260,6 @@ export const operationsByPath = {
   'DELETE /v1/integrations/log-drains/{id}': deleteIntegrationLogDrain,
   'GET /v1/integrations/git-namespaces': gitNamespaces,
   'GET /v1/integrations/search-repo': searchRepo,
-  'GET /v1/experimentation/items': queryExperimentationItems,
   'POST /v1/installations/{integrationConfigurationId}/resources/{resourceId}/experimentation/items':
     postV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItems,
   'PATCH /v1/installations/{integrationConfigurationId}/resources/{resourceId}/experimentation/items/{itemId}':
