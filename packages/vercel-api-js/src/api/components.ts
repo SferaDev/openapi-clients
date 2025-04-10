@@ -9083,7 +9083,18 @@ export type ImportResourceRequestBody = {
     id: string;
     type: 'prepayment' | 'subscription';
     name: string;
+    description?: string;
     paymentMethodRequired?: boolean;
+    cost?: string;
+    details?: {
+      label: string;
+      value?: string;
+    }[];
+    heightlightedDetails?: {
+      label: string;
+      value?: string;
+    }[];
+    effectiveDate?: string;
   } & {
     [key: string]: any;
   };
@@ -9537,6 +9548,51 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          * @example all
          */
         projectSelection: 'selected' | 'all';
+        transferRequest:
+          | {
+              kind: 'transfer-to-marketplace';
+              metadata?: {
+                [key: string]: any;
+              };
+              billingPlan?: {
+                id: string;
+                type: 'subscription' | 'prepayment';
+                scope?: 'installation' | 'resource';
+                name: string;
+                description: string;
+                paymentMethodRequired?: boolean;
+                preauthorizationAmount?: number;
+              };
+              requestId: string;
+              transferId: string;
+              requester: {
+                name: string;
+                email?: string;
+              };
+              createdAt: number;
+              expiresAt: number;
+              discardedAt?: number;
+              discardedBy?: string;
+              approvedAt?: number;
+              approvedBy?: string;
+              authorizationId?: string;
+            }
+          | {
+              kind: 'transfer-from-marketplace';
+              requestId: string;
+              transferId: string;
+              requester: {
+                name: string;
+                email?: string;
+              };
+              createdAt: number;
+              expiresAt: number;
+              discardedAt?: number;
+              discardedBy?: string;
+              approvedAt?: number;
+              approvedBy?: string;
+              authorizationId?: string;
+            };
         /**
          * When a configuration is limited to access certain projects, this will contain each of the project ID it is allowed to access. If it is not defined, the configuration has full access.
          *
@@ -10180,61 +10236,6 @@ export const searchRepo = (variables: SearchRepoVariables, signal?: AbortSignal)
     SearchRepoQueryParams,
     {}
   >({ url: '/v1/integrations/search-repo', method: 'get', ...variables, signal });
-
-export type QueryExperimentationItemsQueryParams = {
-  resourceId?: string;
-};
-
-export type QueryExperimentationItemsError = Fetcher.ErrorWrapper<undefined>;
-
-export type QueryExperimentationItemsResponse = {
-  items: {
-    /**
-     * The Vercel generated ID for this item Integrations should not receive this in API responses
-     */
-    id: string;
-    slug: string;
-    origin: string;
-    /**
-     * The ID the partner has for this item. Integrations should receive this as `id` in API responses
-     */
-    externalId: string;
-    /**
-     * The id of the integration installation on a team
-     */
-    integrationConfigurationId: string;
-    /**
-     * The flags collection ID
-     */
-    resourceId: string;
-    /**
-     * An optional functional category for the item. Categorization semantics are: - flag (can resolve variants, can freely update variant resolution, usually does not perform analysis) - experiment (has variants, constrains changes to variant allocations, performs analysis) Using statsig as an example: - FeatureGate -> flag - Experiment -> experiment - Autotune -> experiment Forwards compatibility for other primitives can be considered, ex. `DynamicConfig`, `Holdouts`, `Layers`
-     */
-    category?: 'experiment' | 'flag';
-    name?: string;
-    description?: string;
-    isArchived?: boolean;
-    createdAt?: number;
-    updatedAt?: number;
-  }[];
-};
-
-export type QueryExperimentationItemsVariables = {
-  queryParams?: QueryExperimentationItemsQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Queries flags, experiments under a Marketplace resource.
- */
-export const queryExperimentationItems = (variables: QueryExperimentationItemsVariables, signal?: AbortSignal) =>
-  fetch<
-    QueryExperimentationItemsResponse,
-    QueryExperimentationItemsError,
-    undefined,
-    {},
-    QueryExperimentationItemsQueryParams,
-    {}
-  >({ url: '/v1/experimentation/items', method: 'get', ...variables, signal });
 
 export type PostV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsPathParams = {
   integrationConfigurationId: string;
@@ -12945,12 +12946,14 @@ export type CreateProjectRequestBody = {
   oidcTokenConfig?: {
     /**
      * Whether or not to generate OpenID Connect JSON Web Tokens.
+     *
+     * @default true
      */
-    enabled: boolean;
+    enabled?: boolean;
     /**
      * team: `https://oidc.vercel.com/[team_slug]` global: `https://oidc.vercel.com`
      *
-     * @default global
+     * @default team
      */
     issuerMode?: 'global' | 'team';
   };
@@ -15047,12 +15050,14 @@ export type UpdateProjectRequestBody = {
   oidcTokenConfig?: {
     /**
      * Whether or not to generate OpenID Connect JSON Web Tokens.
+     *
+     * @default true
      */
-    enabled: boolean;
+    enabled?: boolean;
     /**
      * team: `https://oidc.vercel.com/[team_slug]` global: `https://oidc.vercel.com`
      *
-     * @default global
+     * @default team
      */
     issuerMode?: 'global' | 'team';
   };
@@ -23543,7 +23548,6 @@ export const operationsByTag = {
     updateResourceSecretsById,
     importResource,
     exchangeSsoToken,
-    queryExperimentationItems,
     postV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItems,
     patchV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemId,
     deleteV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemId,
