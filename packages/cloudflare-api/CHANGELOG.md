@@ -1,5 +1,11 @@
 # cloudflare-api-js
 
+## 0.11.2
+
+### Patch Changes
+
+- 03f9eb5: Change WorkersSecretResponse to use WorkersSecret type
+
 ## 0.11.1
 
 ### Patch Changes
