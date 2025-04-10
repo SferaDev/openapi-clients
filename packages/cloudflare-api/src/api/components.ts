@@ -81334,7 +81334,7 @@ export type NamespaceWorkerListScriptSecretsError = Fetcher.ErrorWrapper<{
 }>;
 
 export type NamespaceWorkerListScriptSecretsResponse = Schemas.WorkersApiResponseCommon & {
-  result?: Schemas.WorkersSecretResponse[];
+  result?: Schemas.WorkersSecret[];
 };
 
 export type NamespaceWorkerListScriptSecretsVariables = {
@@ -81374,7 +81374,7 @@ export type NamespaceWorkerPutScriptSecretsError = Fetcher.ErrorWrapper<{
 }>;
 
 export type NamespaceWorkerPutScriptSecretsResponse = Schemas.WorkersApiResponseCommon & {
-  result?: Schemas.WorkersSecretResponse;
+  result?: Schemas.WorkersSecret;
 };
 
 export type NamespaceWorkerPutScriptSecretsVariables = {
@@ -81453,7 +81453,7 @@ export type NamespaceWorkerGetScriptSecretsError = Fetcher.ErrorWrapper<{
 }>;
 
 export type NamespaceWorkerGetScriptSecretsResponse = Schemas.WorkersApiResponseCommon & {
-  result?: Schemas.WorkersSecretResponse;
+  result?: Schemas.WorkersSecret;
 };
 
 export type NamespaceWorkerGetScriptSecretsVariables = {
@@ -82889,7 +82889,7 @@ export type WorkerListScriptSecretsError = Fetcher.ErrorWrapper<{
 }>;
 
 export type WorkerListScriptSecretsResponse = Schemas.WorkersApiResponseCommon & {
-  result?: Schemas.WorkersSecretResponse[];
+  result?: Schemas.WorkersSecret[];
 };
 
 export type WorkerListScriptSecretsVariables = {
@@ -82920,7 +82920,7 @@ export type WorkerPutScriptSecretError = Fetcher.ErrorWrapper<{
 }>;
 
 export type WorkerPutScriptSecretResponse = Schemas.WorkersApiResponseCommon & {
-  result?: Schemas.WorkersSecretResponse;
+  result?: Schemas.WorkersSecret;
 };
 
 export type WorkerPutScriptSecretVariables = {
@@ -82986,7 +82986,7 @@ export type WorkerGetScriptSecretError = Fetcher.ErrorWrapper<{
 }>;
 
 export type WorkerGetScriptSecretResponse = Schemas.WorkersApiResponseCommon & {
-  result?: Schemas.WorkersSecretResponse;
+  result?: Schemas.WorkersSecret;
 };
 
 export type WorkerGetScriptSecretVariables = {
@@ -87144,12 +87144,6 @@ export type RadarGetDnsAs112TimeseriesByDnssecQueryParams = {
    */
   dateEnd?: string[];
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
-  /**
    * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
    *
    * @example US,CA
@@ -87421,12 +87415,6 @@ export type RadarGetDnsAs112TimeseriesByEdnsQueryParams = {
    * @example 2023-09-01T11:41:33.782Z
    */
   dateEnd?: string[];
-  /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
   /**
    * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
    *
@@ -87700,12 +87688,6 @@ export type RadarGetDnsAs112TimeseriesByIpVersionQueryParams = {
    */
   dateEnd?: string[];
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
-  /**
    * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
    *
    * @example US,CA
@@ -87977,12 +87959,6 @@ export type RadarGetDnsAs112TimeseriesByProtocolQueryParams = {
    * @example 2023-09-01T11:41:33.782Z
    */
   dateEnd?: string[];
-  /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
   /**
    * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
    *
@@ -88260,12 +88236,6 @@ export type RadarGetDnsAs112TimeseriesByQueryTypeQueryParams = {
    */
   dateEnd?: string[];
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
-  /**
    * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
    *
    * @example US,CA
@@ -88446,12 +88416,6 @@ export type RadarGetDnsAs112TimeseriesByResponseCodesQueryParams = {
    * @example 2023-09-01T11:41:33.782Z
    */
   dateEnd?: string[];
-  /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
   /**
    * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
    *
@@ -88709,12 +88673,6 @@ export type RadarGetDnsAs112TimeseriesQueryParams = {
    * @example 2023-09-01T11:41:33.782Z
    */
   dateEnd?: string[];
-  /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
   /**
    * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
    *
@@ -88985,12 +88943,6 @@ export type RadarGetDnsAs112TimeseriesGroupByDnssecQueryParams = {
    */
   dateEnd?: string[];
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
-  /**
    * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
    *
    * @example US,CA
@@ -89207,12 +89159,6 @@ export type RadarGetDnsAs112TimeseriesGroupByEdnsQueryParams = {
    * @example 2023-09-01T11:41:33.782Z
    */
   dateEnd?: string[];
-  /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
   /**
    * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
    *
@@ -89431,12 +89377,6 @@ export type RadarGetDnsAs112TimeseriesGroupByIpVersionQueryParams = {
    */
   dateEnd?: string[];
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
-  /**
    * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
    *
    * @example US,CA
@@ -89654,12 +89594,6 @@ export type RadarGetDnsAs112TimeseriesGroupByProtocolQueryParams = {
    */
   dateEnd?: string[];
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
-  /**
    * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
    *
    * @example US,CA
@@ -89875,12 +89809,6 @@ export type RadarGetDnsAs112TimeseriesGroupByQueryTypeQueryParams = {
    */
   dateEnd?: string[];
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
-  /**
    * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
    *
    * @example US,CA
@@ -90014,12 +89942,6 @@ export type RadarGetDnsAs112TimeseriesGroupByResponseCodesQueryParams = {
    * @example 2023-09-01T11:41:33.782Z
    */
   dateEnd?: string[];
-  /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
   /**
    * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
    *
@@ -90225,12 +90147,6 @@ export type RadarGetDnsAs112TopLocationsQueryParams = {
    */
   dateEnd?: string[];
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
-  /**
    * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
    *
    * @example US,CA
@@ -90390,12 +90306,6 @@ export type RadarGetDnsAs112TopLocationsByDnssecQueryParams = {
    * @example 2023-09-01T11:41:33.782Z
    */
   dateEnd?: string[];
-  /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
   /**
    * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
    *
@@ -90561,12 +90471,6 @@ export type RadarGetDnsAs112TopLocationsByEdnsQueryParams = {
    */
   dateEnd?: string[];
   /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
-  /**
    * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
    *
    * @example US,CA
@@ -90728,12 +90632,6 @@ export type RadarGetDnsAs112TopLocationsByIpVersionQueryParams = {
    * @example 2023-09-01T11:41:33.782Z
    */
   dateEnd?: string[];
-  /**
-   * Comma-separated list of Autonomous System Numbers (ASNs). Prefix with `-` to exclude ASNs from results. For example, `-174, 3356` excludes results from AS174, but includes results from AS3356.
-   *
-   * @example 15169
-   */
-  asn?: string[];
   /**
    * Comma-separated list of locations (alpha-2 codes). Prefix with `-` to exclude locations from results. For example, `-US,PT` excludes results from the US, but includes results from PT.
    *
