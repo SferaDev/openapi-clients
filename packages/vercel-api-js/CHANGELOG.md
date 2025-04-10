@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.23.4
+
+### Patch Changes
+
+- c39ff4a: [BREAKING] Change structure of favoriteProjectsAndSpaces in UserEvent and AuthUser
+
 ## 0.23.3
 
 ### Patch Changes
