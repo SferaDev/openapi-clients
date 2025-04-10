@@ -1338,7 +1338,7 @@ export type AbuseReportsBaseReportFields = {
 };
 
 export type AbuseReportsChildrenAbuseReport = {
-  act?: AbuseReportsReportType;
+  act: AbuseReportsReportType;
   /**
    * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -1393,19 +1393,19 @@ export type AbuseReportsChildrenAbuseReport = {
   /**
    * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
-  email?: string;
+  email: string;
   /**
    * Should match the value provided in `email`
    */
-  email2?: string;
-  host_notification: AbuseReportsNotification;
+  email2: string;
+  host_notification?: AbuseReportsNotification;
   /**
    * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
    *
    * @maxLength 5000
    * @minLength 1
    */
-  justification: string;
+  justification?: string;
   /**
    * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -1413,7 +1413,7 @@ export type AbuseReportsChildrenAbuseReport = {
    * @minLength 1
    */
   name: string;
-  ncmec_notification: AbuseReportsNotification;
+  ncmec_notification?: AbuseReportsNotification;
   /**
    * If the submitter is the target of NCSEI in the URLs of the abuse report.
    */
@@ -1425,7 +1425,7 @@ export type AbuseReportsChildrenAbuseReport = {
    * @minLength 1
    */
   original_work?: string;
-  owner_notification: AbuseReportsNotification;
+  owner_notification?: AbuseReportsNotification;
   /**
    * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
    */
@@ -1499,7 +1499,7 @@ export type AbuseReportsChildrenAbuseReport = {
    * A list of valid URLs separated by ‘
    * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
-  urls?: string;
+  urls: string;
 };
 
 /**
@@ -1508,32 +1508,32 @@ export type AbuseReportsChildrenAbuseReport = {
 export type AbuseReportsDBError = string;
 
 export type AbuseReportsDMCAReport = {
-  act?: AbuseReportsReportType;
+  act: AbuseReportsReportType;
   /**
    * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 100
    * @minLength 1
    */
-  address1: string;
+  address1?: string;
   /**
    * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 60
    * @minLength 1
    */
-  agent_name: string;
+  agent_name?: string;
   /**
    * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
    */
-  agree: 1 | 1;
+  agree?: 1 | 1;
   /**
    * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 255
    * @minLength 1
    */
-  city: string;
+  city?: string;
   /**
    * Any additional comments about the infringement not exceeding 2000 characters
    *
@@ -1554,7 +1554,7 @@ export type AbuseReportsDMCAReport = {
    * @maxLength 255
    * @minLength 1
    */
-  country: string;
+  country?: string;
   /**
    * A list of IP addresses separated by ‘
    * ’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
@@ -1563,12 +1563,12 @@ export type AbuseReportsDMCAReport = {
   /**
    * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
-  email?: string;
+  email: string;
   /**
    * Should match the value provided in `email`
    */
-  email2?: string;
-  host_notification: AbuseReportsNotification;
+  email2: string;
+  host_notification?: AbuseReportsNotification;
   /**
    * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
    *
@@ -1582,7 +1582,7 @@ export type AbuseReportsDMCAReport = {
    * @maxLength 255
    * @minLength 1
    */
-  name?: string;
+  name: string;
   ncmec_notification?: AbuseReportsNotification;
   /**
    * If the submitter is the target of NCSEI in the URLs of the abuse report.
@@ -1594,8 +1594,8 @@ export type AbuseReportsDMCAReport = {
    * @maxLength 255
    * @minLength 1
    */
-  original_work: string;
-  owner_notification: AbuseReportsNotification;
+  original_work?: string;
+  owner_notification?: AbuseReportsNotification;
   /**
    * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
    */
@@ -1617,7 +1617,7 @@ export type AbuseReportsDMCAReport = {
   /**
    * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
    */
-  signature: string;
+  signature?: string;
   /**
    * A list of IP addresses separated by ‘
    * ’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
@@ -1629,7 +1629,7 @@ export type AbuseReportsDMCAReport = {
    * @maxLength 255
    * @minLength 1
    */
-  state: string;
+  state?: string;
   /**
    * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -1669,7 +1669,7 @@ export type AbuseReportsDMCAReport = {
    * A list of valid URLs separated by ‘
    * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
-  urls?: string;
+  urls: string;
 };
 
 /**
@@ -1719,7 +1719,7 @@ export type AbuseReportsErrorCode =
   | AbuseReportsUrlNotvalidError;
 
 export type AbuseReportsGeneralReport = {
-  act?: AbuseReportsReportType;
+  act: AbuseReportsReportType;
   /**
    * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -1774,19 +1774,19 @@ export type AbuseReportsGeneralReport = {
   /**
    * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
-  email?: string;
+  email: string;
   /**
    * Should match the value provided in `email`
    */
-  email2?: string;
-  host_notification: AbuseReportsNotification;
+  email2: string;
+  host_notification?: AbuseReportsNotification;
   /**
    * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
    *
    * @maxLength 5000
    * @minLength 1
    */
-  justification: string;
+  justification?: string;
   /**
    * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -1806,7 +1806,7 @@ export type AbuseReportsGeneralReport = {
    * @minLength 1
    */
   original_work?: string;
-  owner_notification: AbuseReportsNotification;
+  owner_notification?: AbuseReportsNotification;
   /**
    * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
    */
@@ -1904,7 +1904,7 @@ export type AbuseReportsMaxIPsError = string;
 export type AbuseReportsMustNotifyError = string;
 
 export type AbuseReportsNCSEIReport = {
-  act?: AbuseReportsReportType;
+  act: AbuseReportsReportType;
   /**
    * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -1959,12 +1959,12 @@ export type AbuseReportsNCSEIReport = {
   /**
    * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
-  email?: string;
+  email: string;
   /**
    * Should match the value provided in `email`
    */
-  email2?: string;
-  host_notification: AbuseReportsNotification;
+  email2: string;
+  host_notification?: AbuseReportsNotification;
   /**
    * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
    *
@@ -1983,7 +1983,7 @@ export type AbuseReportsNCSEIReport = {
   /**
    * If the submitter is the target of NCSEI in the URLs of the abuse report.
    */
-  ncsei_subject_representation: boolean;
+  ncsei_subject_representation?: boolean;
   /**
    * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -1991,7 +1991,7 @@ export type AbuseReportsNCSEIReport = {
    * @minLength 1
    */
   original_work?: string;
-  owner_notification: AbuseReportsNotification;
+  owner_notification?: AbuseReportsNotification;
   /**
    * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
    */
@@ -2089,177 +2089,7 @@ export type AbuseReportsNoSigError = string;
 export type AbuseReportsNotification = 'send' | 'send-anon' | 'none';
 
 export type AbuseReportsPhishingReport = {
-  act?: AbuseReportsReportType;
-  /**
-   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 100
-   * @minLength 1
-   */
-  address1?: string;
-  /**
-   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 60
-   * @minLength 1
-   */
-  agent_name?: string;
-  /**
-   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
-   */
-  agree?: 0 | 1;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  city?: string;
-  /**
-   * Any additional comments about the infringement not exceeding 2000 characters
-   *
-   * @maxLength 2000
-   * @minLength 1
-   */
-  comments?: string;
-  /**
-   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 100
-   * @minLength 1
-   */
-  company?: string;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  country?: string;
-  /**
-   * A list of IP addresses separated by ‘
-   * ’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
-   */
-  destination_ips?: string;
-  /**
-   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   */
-  email?: string;
-  /**
-   * Should match the value provided in `email`
-   */
-  email2?: string;
-  host_notification: AbuseReportsNotification;
-  /**
-   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
-   *
-   * @maxLength 5000
-   * @minLength 1
-   */
-  justification: string;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  name: string;
-  ncmec_notification?: AbuseReportsNotification;
-  /**
-   * If the submitter is the target of NCSEI in the URLs of the abuse report.
-   */
-  ncsei_subject_representation?: boolean;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  original_work?: string;
-  owner_notification: AbuseReportsNotification;
-  /**
-   * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
-   */
-  ports_protocols?: string;
-  /**
-   * Text containing 2 characters
-   *
-   * @maxLength 2
-   * @minLength 2
-   */
-  reported_country?: string;
-  /**
-   * Text not exceeding 255 characters
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  reported_user_agent?: string;
-  /**
-   * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
-   */
-  signature?: string;
-  /**
-   * A list of IP addresses separated by ‘
-   * ’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
-   */
-  source_ips?: string;
-  /**
-   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  state?: string;
-  /**
-   * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   *
-   * @maxLength 20
-   * @minLength 1
-   */
-  tele?: string;
-  /**
-   * Text not exceeding 255 characters
-   *
-   * @maxLength 255
-   * @minLength 1
-   */
-  title?: string;
-  /**
-   * Text not exceeding 1000 characters
-   *
-   * @maxLength 1000
-   * @minLength 1
-   */
-  trademark_number?: string;
-  /**
-   * Text not exceeding 1000 characters
-   *
-   * @maxLength 1000
-   * @minLength 1
-   */
-  trademark_office?: string;
-  /**
-   * Text not exceeding 1000 characters
-   *
-   * @maxLength 1000
-   * @minLength 1
-   */
-  trademark_symbol?: string;
-  /**
-   * A list of valid URLs separated by ‘
-   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
-   */
-  urls: string;
-};
-
-/**
- * Provided value has invalid size
- */
-export type AbuseReportsPortsProtocolError = string;
-
-export type AbuseReportsRegistrarWhoisReport = {
-  act?: AbuseReportsReportType;
+  act: AbuseReportsReportType;
   /**
    * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -2346,7 +2176,177 @@ export type AbuseReportsRegistrarWhoisReport = {
    * @minLength 1
    */
   original_work?: string;
-  owner_notification: AbuseReportsNotification;
+  owner_notification?: AbuseReportsNotification;
+  /**
+   * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
+   */
+  ports_protocols?: string;
+  /**
+   * Text containing 2 characters
+   *
+   * @maxLength 2
+   * @minLength 2
+   */
+  reported_country?: string;
+  /**
+   * Text not exceeding 255 characters
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  reported_user_agent?: string;
+  /**
+   * Required for DMCA reports, should be same as Name. An affirmation that all information in the report is true and accurate while agreeing to the policies of Cloudflare's abuse reports
+   */
+  signature?: string;
+  /**
+   * A list of IP addresses separated by ‘
+   * ’ (new line character). The list of source IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
+   */
+  source_ips?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  state?: string;
+  /**
+   * Text not exceeding 20 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 20
+   * @minLength 1
+   */
+  tele?: string;
+  /**
+   * Text not exceeding 255 characters
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  title?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_number?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_office?: string;
+  /**
+   * Text not exceeding 1000 characters
+   *
+   * @maxLength 1000
+   * @minLength 1
+   */
+  trademark_symbol?: string;
+  /**
+   * A list of valid URLs separated by ‘
+   * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  urls: string;
+};
+
+/**
+ * Provided value has invalid size
+ */
+export type AbuseReportsPortsProtocolError = string;
+
+export type AbuseReportsRegistrarWhoisReport = {
+  act: AbuseReportsReportType;
+  /**
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 100
+   * @minLength 1
+   */
+  address1?: string;
+  /**
+   * The name of the copyright holder. Text not exceeding 60 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 60
+   * @minLength 1
+   */
+  agent_name?: string;
+  /**
+   * Can be `0` for false or `1` for true. Must be value: 1 for DMCA reports
+   */
+  agree?: 0 | 1;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  city?: string;
+  /**
+   * Any additional comments about the infringement not exceeding 2000 characters
+   *
+   * @maxLength 2000
+   * @minLength 1
+   */
+  comments?: string;
+  /**
+   * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 100
+   * @minLength 1
+   */
+  company?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  country?: string;
+  /**
+   * A list of IP addresses separated by ‘
+   * ’ (new line character). The list of destination IPs should not exceed 30 IP addresses. Each one of the IP addresses ought to be unique
+   */
+  destination_ips?: string;
+  /**
+   * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   */
+  email: string;
+  /**
+   * Should match the value provided in `email`
+   */
+  email2: string;
+  host_notification?: AbuseReportsNotification;
+  /**
+   * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
+   *
+   * @maxLength 5000
+   * @minLength 1
+   */
+  justification?: string;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  name: string;
+  ncmec_notification?: AbuseReportsNotification;
+  /**
+   * If the submitter is the target of NCSEI in the URLs of the abuse report.
+   */
+  ncsei_subject_representation?: boolean;
+  /**
+   * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
+   *
+   * @maxLength 255
+   * @minLength 1
+   */
+  original_work?: string;
+  owner_notification?: AbuseReportsNotification;
   /**
    * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
    */
@@ -2478,7 +2478,7 @@ export type AbuseReportsSubmitReportResponse = {
 };
 
 export type AbuseReportsThreatReport = {
-  act?: AbuseReportsReportType;
+  act: AbuseReportsReportType;
   /**
    * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -2533,19 +2533,19 @@ export type AbuseReportsThreatReport = {
   /**
    * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
-  email?: string;
+  email: string;
   /**
    * Should match the value provided in `email`
    */
-  email2?: string;
-  host_notification: AbuseReportsNotification;
+  email2: string;
+  host_notification?: AbuseReportsNotification;
   /**
    * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
    *
    * @maxLength 5000
    * @minLength 1
    */
-  justification: string;
+  justification?: string;
   /**
    * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -2565,7 +2565,7 @@ export type AbuseReportsThreatReport = {
    * @minLength 1
    */
   original_work?: string;
-  owner_notification: AbuseReportsNotification;
+  owner_notification?: AbuseReportsNotification;
   /**
    * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
    */
@@ -2643,7 +2643,7 @@ export type AbuseReportsThreatReport = {
 };
 
 export type AbuseReportsTrademarkReport = {
-  act?: AbuseReportsReportType;
+  act: AbuseReportsReportType;
   /**
    * Text not exceeding 100 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
@@ -2698,26 +2698,26 @@ export type AbuseReportsTrademarkReport = {
   /**
    * A valid email of the abuse reporter. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
-  email?: string;
+  email: string;
   /**
    * Should match the value provided in `email`
    */
-  email2?: string;
-  host_notification: AbuseReportsNotification;
+  email2: string;
+  host_notification?: AbuseReportsNotification;
   /**
    * A detailed description of the infringement, including any necessary access details and the exact steps needed to view the content, not exceeding 5000 characters
    *
    * @maxLength 5000
    * @minLength 1
    */
-  justification: string;
+  justification?: string;
   /**
    * Text not exceeding 255 characters. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    *
    * @maxLength 255
    * @minLength 1
    */
-  name?: string;
+  name: string;
   ncmec_notification?: AbuseReportsNotification;
   /**
    * If the submitter is the target of NCSEI in the URLs of the abuse report.
@@ -2730,7 +2730,7 @@ export type AbuseReportsTrademarkReport = {
    * @minLength 1
    */
   original_work?: string;
-  owner_notification: AbuseReportsNotification;
+  owner_notification?: AbuseReportsNotification;
   /**
    * A comma separated list of ports and protocols e.g. 80/TCP, 22/UDP. The total size of the field should not exceed 2000 characters. Each individual port/protocol should not exceed 100 characters. The list should not have more than 30 unique ports and protocols.
    */
@@ -2785,26 +2785,26 @@ export type AbuseReportsTrademarkReport = {
    * @maxLength 1000
    * @minLength 1
    */
-  trademark_number: string;
+  trademark_number?: string;
   /**
    * Text not exceeding 1000 characters
    *
    * @maxLength 1000
    * @minLength 1
    */
-  trademark_office: string;
+  trademark_office?: string;
   /**
    * Text not exceeding 1000 characters
    *
    * @maxLength 1000
    * @minLength 1
    */
-  trademark_symbol: string;
+  trademark_symbol?: string;
   /**
    * A list of valid URLs separated by ‘
    * ’ (new line character). The list of the URLs should not exceed 250 URLs. All URLs should have the same hostname. Each URL should be unique. This field may be released by Cloudflare to third parties such as the Lumen Database (https://lumendatabase.org/).
    */
-  urls?: string;
+  urls: string;
 };
 
 /**
@@ -3031,7 +3031,7 @@ export type AccessApiResponseCommon = {
   errors: AccessMessages;
   messages: AccessMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -3047,7 +3047,7 @@ export type AccessApiResponseCommonFailure = {
   messages: AccessMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -4655,7 +4655,7 @@ export type AccessIdResponse = AccessApiResponseSingle & {
 };
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -5142,7 +5142,11 @@ export type AccessMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -6007,6 +6011,7 @@ export type AccessRdpProps = {
   name?: AccessAppsComponentsSchemasName;
   options_preflight_bypass?: AccessOptionsPreflightBypass;
   path_cookie_attribute?: AccessPathCookieAttribute;
+  read_service_tokens_from_header?: AccessReadServiceTokensFromHeader;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
   self_hosted_domains?: AccessSelfHostedDomains;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
@@ -6020,6 +6025,19 @@ export type AccessRdpProps = {
    */
   type: string;
 };
+
+/**
+ * Allows matching Access Service Tokens passed HTTP in a single header with this name.
+ * This works as an alternative to the (CF-Access-Client-Id, CF-Access-Client-Secret) pair of headers.
+ * The header value will be interpreted as a json object similar to:
+ *   {
+ *     "cf-access-client-id": "88bf3b6d86161464f6509f7219099e57.access.example.com",
+ *     "cf-access-client-secret": "bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5"
+ *   }
+ *
+ * @example Authorization
+ */
+export type AccessReadServiceTokensFromHeader = string;
 
 /**
  * The request method of the SCIM request.
@@ -6166,25 +6184,25 @@ export type AccessResponses = {
 
 export type AccessResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -7191,7 +7209,7 @@ export type AccessSchemasIdResponse = AccessApiResponseSingle & {
 };
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 699d98642c564d2e855e9661899b7252
  * @maxLength 32
@@ -8658,6 +8676,7 @@ export type AccessSelfHostedProps = {
   name?: AccessAppsComponentsSchemasName;
   options_preflight_bypass?: AccessOptionsPreflightBypass;
   path_cookie_attribute?: AccessPathCookieAttribute;
+  read_service_tokens_from_header?: AccessReadServiceTokensFromHeader;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
   self_hosted_domains?: AccessSelfHostedDomains;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
@@ -8678,7 +8697,7 @@ export type AccessServiceTokens = {
   duration?: AccessDuration;
   expires_at?: AccessTimestamp;
   /**
-   * UUID
+   * UUID.
    *
    * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
    * @maxLength 36
@@ -8787,6 +8806,7 @@ export type AccessSshProps = {
   name?: AccessAppsComponentsSchemasName;
   options_preflight_bypass?: AccessOptionsPreflightBypass;
   path_cookie_attribute?: AccessPathCookieAttribute;
+  read_service_tokens_from_header?: AccessReadServiceTokensFromHeader;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
   self_hosted_domains?: AccessSelfHostedDomains;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
@@ -9082,7 +9102,7 @@ export type AccessUsersComponentsSchemasResponseCollection = AccessApiResponseCo
 };
 
 /**
- * UUID
+ * UUID.
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
@@ -9107,6 +9127,7 @@ export type AccessVncProps = {
   name?: AccessAppsComponentsSchemasName;
   options_preflight_bypass?: AccessOptionsPreflightBypass;
   path_cookie_attribute?: AccessPathCookieAttribute;
+  read_service_tokens_from_header?: AccessReadServiceTokensFromHeader;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
   self_hosted_domains?: AccessSelfHostedDomains;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
@@ -9817,7 +9838,7 @@ export type ApiShieldApiResponseCommon = {
   errors: ApiShieldMessages;
   messages: ApiShieldMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -9833,7 +9854,7 @@ export type ApiShieldApiResponseCommonFailure = {
   messages: ApiShieldMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -9998,7 +10019,7 @@ export type ApiShieldEndpoint = string;
 export type ApiShieldHost = string;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -10017,7 +10038,11 @@ export type ApiShieldMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -10320,25 +10345,25 @@ export type ApiShieldResponseUserSchemasHosts = {
 
 export type ApiShieldResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -10406,7 +10431,7 @@ export type ApiShieldSchemaUploadResponse = {
 };
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -10420,7 +10445,7 @@ export type ApiShieldSchemasIdentifier = ApiShieldIdentifier & string;
 export type ApiShieldSchemasTimestamp = ApiShieldTimestamp & string;
 
 /**
- * UUID
+ * UUID.
  *
  * @minLength 36
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
@@ -10468,7 +10493,7 @@ export type ApiShieldTrafficStats = {
 };
 
 /**
- * UUID
+ * UUID.
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
@@ -12248,7 +12273,7 @@ export type CacheApiResponseCommon = {
   errors: CacheMessages;
   messages: CacheMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -12264,7 +12289,7 @@ export type CacheApiResponseCommonFailure = {
   messages: CacheMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -12278,7 +12303,7 @@ export type CacheAutomaticUpgraderResponse = CacheApiResponseSingle & {
 };
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -12290,7 +12315,11 @@ export type CacheMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -12357,7 +12386,7 @@ export type CacheSchemasValue = 'auto' | 'custom';
 export type CacheTimestamp = string;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -12376,7 +12405,7 @@ export type CallsApiResponseCommon = {
   errors: CallsMessages;
   messages: CallsMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -12392,7 +12421,7 @@ export type CallsApiResponseCommonFailure = {
   messages: CallsMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -12454,7 +12483,11 @@ export type CallsMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -12621,6 +12654,166 @@ export type CloudConnectorRules = {
 }[];
 
 export type CloudConnectorZoneIdentifier = CloudConnectorIdentifier;
+
+/**
+ * Indicates whether the API call was successful.
+ *
+ * @example true
+ */
+export type CloudflarePipelinesWorkerPipelinesCommonSuccess = boolean;
+
+/**
+ * Specifies the public ID of the account.
+ *
+ * @example 023e105f4ecef8ad9ca31a8372d0c353
+ */
+export type CloudflarePipelinesWorkersPipelinesAccountId = string;
+
+/**
+ * Describes the configuration of a pipeline.
+ */
+export type CloudflarePipelinesWorkersPipelinesPipeline = {
+  destination: {
+    batch: {
+      /**
+       * Specifies rough maximum size of files.
+       *
+       * @default 100000000
+       * @maximum 100000000
+       * @minimum 1000
+       */
+      max_bytes: number;
+      /**
+       * Specifies duration to wait to aggregate batches files.
+       *
+       * @default 300
+       * @maximum 300
+       * @minimum 0.25
+       */
+      max_duration_s: number;
+      /**
+       * Specifies rough maximum number of rows per file.
+       *
+       * @default 10000000
+       * @maximum 10000000
+       * @minimum 100
+       */
+      max_rows: number;
+    };
+    compression: {
+      /**
+       * Specifies the desired compression algorithm and format.
+       *
+       * @default gzip
+       * @example gzip
+       */
+      type: 'none' | 'gzip' | 'deflate';
+    };
+    /**
+     * Specifies the format of data to deliver.
+     */
+    format: 'json';
+    /**
+     * @example {"bucket":"bucket","prefix":"base"}
+     */
+    path: {
+      /**
+       * Specifies the R2 Bucket to store files.
+       *
+       * @example bucket
+       */
+      bucket: string;
+      /**
+       * Specifies the name pattern to for individual data files.
+       *
+       * @example ${slug}${extension}
+       */
+      filename?: string;
+      /**
+       * Specifies the name pattern for directory.
+       *
+       * @example ${date}/${hour}
+       */
+      filepath?: string;
+      /**
+       * Specifies the base directory within the bucket.
+       *
+       * @example base
+       */
+      prefix?: string;
+    };
+    /**
+     * Specifies the type of destination.
+     */
+    type: 'r2';
+  };
+  /**
+   * Indicates the endpoint URL to send traffic.
+   *
+   * @example https://123f8a8258064ed892a347f173372359.pipelines.cloudflare.com
+   */
+  endpoint: string;
+  /**
+   * Specifies the pipeline identifier.
+   *
+   * @example 123f8a8258064ed892a347f173372359
+   */
+  id: string;
+  /**
+   * Defines the name of the pipeline.
+   *
+   * @example sample_pipeline
+   * @maxLength 128
+   * @minLength 1
+   */
+  name: string;
+  /**
+   * @minItems 1
+   */
+  source: (
+    | (Omit<CloudflarePipelinesWorkersPipelinesHttpSource, 'type'> & {
+        type: 'http';
+      })
+    | (Omit<CloudflarePipelinesWorkersPipelinesBindingSource, 'type'> & {
+        type: 'binding';
+      })
+  )[];
+  /**
+   * Indicates the version number of last saved configuration.
+   *
+   * @example 2
+   */
+  version: number;
+};
+
+export type CloudflarePipelinesWorkersPipelinesBindingSource = {
+  /**
+   * Specifies the format of source data.
+   */
+  format: 'json';
+  type: string;
+};
+
+export type CloudflarePipelinesWorkersPipelinesHttpSource = {
+  /**
+   * Specifies whether authentication is required to send to this pipeline via HTTP.
+   */
+  authentication?: boolean;
+  cors?: {
+    /**
+     * Specifies allowed origins to allow Cross Origin HTTP Requests.
+     *
+     * @example *
+     * @maxItems 5
+     */
+    origins?: (string | string)[];
+  };
+  /**
+   * Specifies the format of source data.
+   */
+  format: 'json';
+  type: string;
+};
 
 export type CloudforceOnePortScanApiApiResponseCommon = {
   errors: CloudforceOnePortScanApiMessages;
@@ -13397,10 +13590,10 @@ export type CloudforceOneWhoisWhois = {
 };
 
 export type CustomIndicatorFeedsApiResponseCommon = {
-  errors: CustomIndicatorFeedsMessages;
-  messages: CustomIndicatorFeedsMessages;
+  errors: CustomIndicatorFeedsSchemasMessages;
+  messages: CustomIndicatorFeedsSchemasMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -13613,6 +13806,18 @@ export type CustomIndicatorFeedsProviderId = string;
  */
 export type CustomIndicatorFeedsProviderName = string;
 
+export type CustomIndicatorFeedsSchemasMessages = {
+  /**
+   * @minimum 1000
+   */
+  code: number;
+  documentation_url?: string;
+  message: string;
+  source?: {
+    pointer?: string;
+  };
+}[];
+
 export type CustomIndicatorFeedsUpdateFeed = {
   /**
    * Feed id
@@ -13800,6 +14005,7 @@ export type CustomPagesUrl = string;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type D1AccountIdentifier = string;
 
@@ -13836,14 +14042,19 @@ export type D1ApiResponseCommonFailure = {
  *
  * @example 2022-11-15T18:25:44.442097Z
  * @format date-time
+ * @x-auditable true
  */
 export type D1CreatedAt = string;
 
+/**
+ * The details of the D1 database.
+ */
 export type D1DatabaseDetailsResponse = {
   created_at?: D1CreatedAt;
   file_size?: D1FileSize;
   name?: D1DatabaseName;
   num_tables?: D1TableCount;
+  read_replication?: D1ReadReplicationDetails;
   uuid?: D1DatabaseIdentifier;
   version?: D1DatabaseVersion;
 };
@@ -13852,6 +14063,7 @@ export type D1DatabaseDetailsResponse = {
  * D1 database identifier (UUID).
  *
  * @example xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+ * @x-auditable true
  */
 export type D1DatabaseIdentifier = string;
 
@@ -13860,6 +14072,7 @@ export type D1DatabaseIdentifier = string;
  *
  * @example my-database
  * @pattern ^[a-z0-9][a-z0-9-_]*$
+ * @x-auditable true
  */
 export type D1DatabaseName = string;
 
@@ -13870,9 +14083,28 @@ export type D1DatabaseResponse = {
   version?: D1DatabaseVersion;
 };
 
+export type D1DatabaseUpdatePartialRequestBody = {
+  /**
+   * Configuration for D1 read replication.
+   */
+  read_replication?: {
+    mode: D1ReadReplicationMode;
+  };
+};
+
+export type D1DatabaseUpdateRequestBody = {
+  /**
+   * Configuration for D1 read replication.
+   */
+  read_replication: {
+    mode: D1ReadReplicationMode;
+  };
+};
+
 /**
  * @example production
  * @pattern ^(alpha|beta|production)$
+ * @x-auditable true
  */
 export type D1DatabaseVersion = string;
 
@@ -13880,6 +14112,7 @@ export type D1DatabaseVersion = string;
  * The D1 database's size, in bytes.
  *
  * @example 12
+ * @x-auditable true
  */
 export type D1FileSize = number;
 
@@ -13901,17 +14134,71 @@ export type D1Params = string[];
  * Specify the region to create the D1 primary, if available. If this option is omitted, the D1 will be created as close as possible to the current user.
  *
  * @example wnam
+ * @x-auditable true
  */
 export type D1PrimaryLocationHint = 'wnam' | 'enam' | 'weur' | 'eeur' | 'apac' | 'oc';
 
 export type D1QueryMeta = {
+  /**
+   * Denotes if the database has been altered in some way, like deleting rows.
+   *
+   * @x-auditable true
+   */
   changed_db?: boolean;
+  /**
+   * Rough indication of how many rows were modified by the query, as provided by SQLite's `sqlite3_total_changes()`.
+   *
+   * @x-auditable true
+   */
   changes?: number;
+  /**
+   * The duration of the SQL query execution inside the database. Does not include any network communication.
+   *
+   * @x-auditable true
+   */
   duration?: number;
+  /**
+   * The row ID of the last inserted row in a table with an `INTEGER PRIMARY KEY` as provided by SQLite. Tables created with `WITHOUT ROWID` do not populate this.
+   *
+   * @x-auditable true
+   */
   last_row_id?: number;
+  /**
+   * Number of rows read during the SQL query execution, including indices (not all rows are necessarily returned).
+   *
+   * @x-auditable true
+   */
   rows_read?: number;
+  /**
+   * Number of rows written during the SQL query execution, including indices.
+   *
+   * @x-auditable true
+   */
   rows_written?: number;
+  /**
+   * Denotes if the query has been handled by the database primary instance.
+   *
+   * @x-auditable true
+   */
+  served_by_primary?: boolean;
+  served_by_region?: D1ServedByRegion;
+  /**
+   * Size of the database after the query committed, in bytes.
+   *
+   * @x-auditable true
+   */
   size_after?: number;
+  /**
+   * Various durations for the query.
+   */
+  timings?: {
+    /**
+     * The duration of the SQL query execution inside the database. Does not include any network communication.
+     *
+     * @x-auditable true
+     */
+    sql_duration_ms?: number;
+  };
 };
 
 export type D1QueryResultResponse = {
@@ -13930,6 +14217,29 @@ export type D1RawResultResponse = {
 };
 
 /**
+ * Configuration for D1 read replication.
+ */
+export type D1ReadReplicationDetails = {
+  mode: D1ReadReplicationMode;
+};
+
+/**
+ * The read replication mode for the database. Use 'auto' to create replicas and allow D1 automatically place them around the world, or 'disabled' to not use any database replicas (it can take a few hours for all replicas to be deleted).
+ *
+ * @example auto
+ * @x-auditable true
+ */
+export type D1ReadReplicationMode = 'auto' | 'disabled';
+
+/**
+ * Region location hint of the database instance that handled the query.
+ *
+ * @example EEUR
+ * @x-auditable true
+ */
+export type D1ServedByRegion = 'WNAM' | 'ENAM' | 'WEUR' | 'EEUR' | 'APAC' | 'OC';
+
+/**
  * Your SQL query. Supports multiple statements, joined by semicolons, which will be executed as a batch.
  *
  * @example SELECT * FROM myTable WHERE field = ? OR field = ?;
@@ -13938,6 +14248,7 @@ export type D1Sql = string;
 
 /**
  * @example 12
+ * @x-auditable true
  */
 export type D1TableCount = number;
 
@@ -13974,7 +14285,7 @@ export type DigitalExperienceMonitoringApiResponseCommon = {
   errors: DigitalExperienceMonitoringMessages;
   messages: DigitalExperienceMonitoringMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -13990,7 +14301,7 @@ export type DigitalExperienceMonitoringApiResponseCommonFailure = {
   messages: DigitalExperienceMonitoringMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -14328,7 +14639,11 @@ export type DigitalExperienceMonitoringMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -14427,25 +14742,25 @@ export type DigitalExperienceMonitoringRamUsedPctByApp = {
 
 export type DigitalExperienceMonitoringResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -15752,7 +16067,7 @@ export type DlpApiResponseCommon = {
   errors: DlpMessages;
   messages: DlpMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -15768,7 +16083,7 @@ export type DlpApiResponseCommonFailure = {
   messages: DlpMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -15782,30 +16097,34 @@ export type DlpMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 export type DlpResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -16367,7 +16686,7 @@ export type DnsFirewallApiResponseCommon = {
   errors: DnsFirewallMessages;
   messages: DnsFirewallMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -16383,7 +16702,7 @@ export type DnsFirewallApiResponseCommonFailure = {
   messages: DnsFirewallMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -16400,6 +16719,7 @@ export type DnsFirewallAttackMitigation = {
    * When enabled, automatically mitigate random-prefix attacks to protect upstream DNS servers
    *
    * @example true
+   * @x-auditable true
    */
   enabled?: boolean;
   /**
@@ -16407,6 +16727,7 @@ export type DnsFirewallAttackMitigation = {
    *
    * @default true
    * @example false
+   * @x-auditable true
    */
   only_when_upstream_unhealthy?: boolean;
 } | null;
@@ -16415,6 +16736,7 @@ export type DnsFirewallAttackMitigation = {
  * Whether to refuse to answer queries for the ANY type
  *
  * @example true
+ * @x-auditable true
  */
 export type DnsFirewallDeprecateAnyRequests = boolean;
 
@@ -16474,11 +16796,12 @@ export type DnsFirewallDnsFirewallSingleResponse = DnsFirewallApiResponseSingle 
  * Whether to forward client IP (resolver) subnet if no EDNS Client Subnet is sent
  *
  * @example false
+ * @x-auditable true
  */
 export type DnsFirewallEcsFallback = boolean;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -16492,6 +16815,7 @@ export type DnsFirewallIdentifier = string;
  * @example 900
  * @maximum 36000
  * @minimum 30
+ * @x-auditable true
  */
 export type DnsFirewallMaximumCacheTtl = number;
 
@@ -16500,7 +16824,11 @@ export type DnsFirewallMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -16510,6 +16838,7 @@ export type DnsFirewallMessages = {
  * @example 60
  * @maximum 36000
  * @minimum 30
+ * @x-auditable true
  */
 export type DnsFirewallMinimumCacheTtl = number;
 
@@ -16518,6 +16847,7 @@ export type DnsFirewallMinimumCacheTtl = number;
  *
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type DnsFirewallModifiedOn = string;
 
@@ -16527,6 +16857,7 @@ export type DnsFirewallModifiedOn = string;
  * @example My Awesome DNS Firewall cluster
  * @maxLength 160
  * @minLength 1
+ * @x-auditable true
  */
 export type DnsFirewallName = string;
 
@@ -16536,6 +16867,7 @@ export type DnsFirewallName = string;
  * @example 900
  * @maximum 36000
  * @minimum 30
+ * @x-auditable true
  */
 export type DnsFirewallNegativeCacheTtl = number | null;
 
@@ -16545,30 +16877,31 @@ export type DnsFirewallNegativeCacheTtl = number | null;
  * @example 600
  * @maximum 1000000000
  * @minimum 100
+ * @x-auditable true
  */
 export type DnsFirewallRatelimit = number | null;
 
 export type DnsFirewallResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -16582,6 +16915,7 @@ export type DnsFirewallResultInfo = {
  * @example 2
  * @maximum 2
  * @minimum 0
+ * @x-auditable true
  */
 export type DnsFirewallRetries = number;
 
@@ -16910,7 +17244,6 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
     /**
      * Minutes of latitude.
      *
-     * @default 0
      * @example 46
      * @maximum 59
      * @minimum 0
@@ -16919,7 +17252,6 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
     /**
      * Seconds of latitude.
      *
-     * @default 0
      * @example 46
      * @maximum 59.999
      * @minimum 0
@@ -16942,7 +17274,6 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
     /**
      * Minutes of longitude.
      *
-     * @default 0
      * @example 23
      * @maximum 59
      * @minimum 0
@@ -16951,7 +17282,6 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
     /**
      * Seconds of longitude.
      *
-     * @default 0
      * @example 35
      * @maximum 59.999
      * @minimum 0
@@ -16960,7 +17290,6 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
     /**
      * Horizontal precision of location.
      *
-     * @default 0
      * @example 0
      * @maximum 90000000
      * @minimum 0
@@ -16969,7 +17298,6 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
     /**
      * Vertical precision of location.
      *
-     * @default 0
      * @example 0
      * @maximum 90000000
      * @minimum 0
@@ -16978,7 +17306,6 @@ export type DnsRecordsLOCRecord = DnsRecordsDnsRecordSharedFields & {
     /**
      * Size of location in meters.
      *
-     * @default 0
      * @example 100
      * @maximum 90000000
      * @minimum 0
@@ -17389,7 +17716,7 @@ export type DnsRecordsApiResponseCommon = {
   errors: DnsRecordsMessages;
   messages: DnsRecordsMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -17405,7 +17732,7 @@ export type DnsRecordsApiResponseCommonFailure = {
   messages: DnsRecordsMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -17565,7 +17892,7 @@ export type DnsRecordsDnsResponseSingle = DnsRecordsApiResponseSingle & {
 };
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -17585,7 +17912,11 @@ export type DnsRecordsMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -17642,25 +17973,25 @@ export type DnsRecordsProxied = boolean;
 
 export type DnsRecordsResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -17757,7 +18088,7 @@ export type DnsSettingsApiResponseCommon = {
   errors: DnsSettingsMessages;
   messages: DnsSettingsMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -17773,7 +18104,7 @@ export type DnsSettingsApiResponseCommonFailure = {
   messages: DnsSettingsMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -17892,7 +18223,7 @@ export type DnsSettingsFlattenAllCnames = boolean;
 export type DnsSettingsFoundationDns = boolean;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -17906,7 +18237,7 @@ export type DnsSettingsInternalDns = {
   /**
    * The ID of the zone to fallback to.
    *
-   * @example {"description":"Identifier","example":"023e105f4ecef8ad9ca31a8372d0c353","maxLength":32,"type":"string"}
+   * @example {"description":"Identifier.","example":"023e105f4ecef8ad9ca31a8372d0c353","maxLength":32,"type":"string"}
    */
   reference_zone_id?: string;
 };
@@ -17924,7 +18255,11 @@ export type DnsSettingsMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -17991,25 +18326,25 @@ export type DnsSettingsPerPage = number;
 
 export type DnsSettingsResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -18110,6 +18445,7 @@ export type DnsSettingsZones = string[];
  * Algorithm key code.
  *
  * @example 13
+ * @x-auditable true
  */
 export type DnssecAlgorithm = string | null;
 
@@ -18117,7 +18453,7 @@ export type DnssecApiResponseCommon = {
   errors: DnssecMessages;
   messages: DnssecMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -18133,7 +18469,7 @@ export type DnssecApiResponseCommonFailure = {
   messages: DnssecMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -18153,6 +18489,7 @@ export type DnssecDeleteDnssecResponseSingle = DnssecApiResponseSingle & {
  * Digest hash.
  *
  * @example 48E939042E82C22542CB377B580DFDC52A361CEFDC72E7F9107E2B6BD9306A45
+ * @x-auditable true
  */
 export type DnssecDigest = string | null;
 
@@ -18160,6 +18497,7 @@ export type DnssecDigest = string | null;
  * Type of digest algorithm.
  *
  * @example SHA256
+ * @x-auditable true
  */
 export type DnssecDigestAlgorithm = string | null;
 
@@ -18167,6 +18505,7 @@ export type DnssecDigestAlgorithm = string | null;
  * Coded type for digest algorithm.
  *
  * @example 2
+ * @x-auditable true
  */
 export type DnssecDigestType = string | null;
 
@@ -18195,6 +18534,7 @@ export type DnssecDnssec = {
  * See [Multi-signer DNSSEC](https://developers.cloudflare.com/dns/dnssec/multi-signer-dnssec/) for details.
  *
  * @example false
+ * @x-auditable true
  */
 export type DnssecDnssecMultiSigner = boolean;
 
@@ -18207,6 +18547,7 @@ export type DnssecDnssecMultiSigner = boolean;
  * See [Cloudflare as Secondary](https://developers.cloudflare.com/dns/zone-setups/zone-transfers/cloudflare-as-secondary/setup/#dnssec) for details.
  *
  * @example true
+ * @x-auditable true
  */
 export type DnssecDnssecPresigned = boolean;
 
@@ -18218,6 +18559,7 @@ export type DnssecDnssecResponseSingle = DnssecApiResponseSingle & {
  * Full DS record.
  *
  * @example example.com. 3600 IN DS 16953 13 2 48E939042E82C22542CB377B580DFDC52A361CEFDC72E7F9107E2B6BD9306A45
+ * @x-auditable true
  */
 export type DnssecDs = string | null;
 
@@ -18225,11 +18567,12 @@ export type DnssecDs = string | null;
  * Flag for DNSSEC record.
  *
  * @example 257
+ * @x-auditable true
  */
 export type DnssecFlags = number | null;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -18240,6 +18583,7 @@ export type DnssecIdentifier = string;
  * Code for key tag.
  *
  * @example 42
+ * @x-auditable true
  */
 export type DnssecKeyTag = number | null;
 
@@ -18247,6 +18591,7 @@ export type DnssecKeyTag = number | null;
  * Algorithm key type.
  *
  * @example ECDSAP256SHA256
+ * @x-auditable true
  */
 export type DnssecKeyType = string | null;
 
@@ -18255,7 +18600,11 @@ export type DnssecMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -18263,6 +18612,7 @@ export type DnssecMessages = {
  *
  * @example 2014-01-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type DnssecModifiedOn = string | null;
 
@@ -18270,6 +18620,7 @@ export type DnssecModifiedOn = string | null;
  * Public key for DS record.
  *
  * @example oXiGYrSTO+LSCJ3mohc8EP+CzF9KxBj8/ydXJ22pKuZP3VAC3/Md/k7xZfz470CoRyZJ6gV6vml07IC3d8xqhA==
+ * @x-auditable true
  */
 export type DnssecPublicKey = string | null;
 
@@ -18277,6 +18628,7 @@ export type DnssecPublicKey = string | null;
  * Status of DNSSEC, based on user-desired state and presence of necessary records.
  *
  * @example active
+ * @x-auditable true
  */
 export type DnssecStatus = 'active' | 'pending' | 'disabled' | 'pending-disabled' | 'error';
 
@@ -18284,7 +18636,7 @@ export type DosApiResponseCommon = {
   errors: DosMessages;
   messages: DosMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -18300,7 +18652,7 @@ export type DosApiResponseCommonFailure = {
   messages: DosMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -18327,7 +18679,7 @@ export type DosAsnDescription = string;
 export type DosAsnType = 'hosting_provider' | 'isp' | 'organization';
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -18339,7 +18691,11 @@ export type DosMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -19700,6 +20056,7 @@ export type FirewallActionParametersSetConfig = {
    * Enable or disable Automatic HTTPS Rewrites for matching requests
    *
    * @example true
+   * @x-auditable true
    */
   automatic_https_rewrites?: boolean;
   /**
@@ -19723,84 +20080,98 @@ export type FirewallActionParametersSetConfig = {
    * Enable or disable Browser Integrity Check
    *
    * @example true
+   * @x-auditable true
    */
   bic?: boolean;
   /**
    * Disable all active Cloudflare Apps
    *
    * @example true
+   * @x-auditable true
    */
   disable_apps?: boolean;
   /**
    * Disable Cloudflare Railgun
    *
    * @example true
+   * @x-auditable true
    */
   disable_railgun?: boolean;
   /**
    * Disable Cloudflare Railgun
    *
    * @example true
+   * @x-auditable true
    */
   disable_zaraz?: boolean;
   /**
    * Enable or disable Email Obfuscation
    *
    * @example false
+   * @x-auditable true
    */
   email_obfuscation?: boolean;
   /**
    * Enable or disable Hotlink Protection
    *
    * @example false
+   * @x-auditable true
    */
   hotlink_protection?: boolean;
   /**
    * Enable or disable Mirage
    *
    * @example false
+   * @x-auditable true
    */
   mirage?: boolean;
   /**
    * Enable or disableOpportunistic Encryption
    *
    * @example false
+   * @x-auditable true
    */
   opportunistic_encryption?: boolean;
   /**
    * Set Polish compression options
    *
    * @example lossless
+   * @x-auditable true
    */
   polish?: string;
   /**
    * Enable or disable Rocket Loader
    *
    * @example false
+   * @x-auditable true
    */
   rocket_loader?: boolean;
   /**
    * Set the Security Level
    *
    * @example low
+   * @x-auditable true
    */
   security_level?: string;
   /**
    * Enable or disable Server Side Excludes
    *
    * @example false
+   * @x-auditable true
    */
   server_side_excludes?: boolean;
   /**
    * Select the SSL encryption mode
    *
    * @example flexible
+   * @x-auditable true
    */
   ssl?: string;
   /**
    * Enable or disable Signed Exchangesn(SXG)
    *
    * @example false
+   * @x-auditable true
    */
   sxg?: boolean;
 };
@@ -20036,6 +20407,7 @@ export type FirewallComponentsSchemasActionParameters = FirewallActionParameters
  *
  * @example Enable Cloudflare Magento ruleset for shop.example.com
  * @maxLength 1024
+ * @x-auditable true
  */
 export type FirewallComponentsSchemasDescription = string | null;
 
@@ -20134,6 +20506,7 @@ export type FirewallComponentsSchemasRuleset = {
  *
  * @example 372e67954025e0ba6aaa6d586b9e0b59
  * @maxLength 32
+ * @x-auditable true
  */
 export type FirewallComponentsUaRuleId = string;
 
@@ -20186,6 +20559,7 @@ export type FirewallConfigurations = (FirewallSchemasIpConfiguration | FirewallS
  *
  * @example text/xml
  * @maxLength 50
+ * @x-auditable true
  */
 export type FirewallContentType = string;
 
@@ -20200,6 +20574,7 @@ export type FirewallCountryConfiguration = {
    * The two-letter ISO-3166-1 alpha-2 code to match. For more information, refer to [IP Access rules: Parameters](https://developers.cloudflare.com/waf/tools/ip-access-rules/parameters/#country).
    *
    * @example US
+   * @x-auditable true
    */
   value?: string;
 };
@@ -20227,6 +20602,7 @@ export type FirewallCreateUpdateRules = (FirewallCreateUpdateRule | void)[];
  *
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type FirewallCreatedOn = string;
 
@@ -20261,6 +20637,7 @@ export type FirewallDeletedFilter = {
  *
  * @example Prevent multiple login failures to mitigate brute force attacks
  * @maxLength 1024
+ * @x-auditable true
  */
 export type FirewallDescription = string;
 
@@ -20268,6 +20645,7 @@ export type FirewallDescription = string;
  * A string to search for in the description of existing rules.
  *
  * @example abusive
+ * @x-auditable true
  */
 export type FirewallDescriptionSearch = string;
 
@@ -20282,6 +20660,7 @@ export type FirewallDetectionMode = 'anomaly' | 'traditional';
  * When true, indicates that the rate limit is currently disabled.
  *
  * @example false
+ * @x-auditable true
  */
 export type FirewallDisabled = boolean;
 
@@ -20409,6 +20788,7 @@ export type FirewallFilters = {
    * The target to search in existing rules.
    *
    * @example ip
+   * @x-auditable true
    */
   ['configuration.target']?: 'ip' | 'ip_range' | 'asn' | 'country';
   /**
@@ -20422,6 +20802,7 @@ export type FirewallFilters = {
    * When set to `all`, all the search requirements must match. When set to `any`, only one of the search requirements has to match.
    *
    * @default all
+   * @x-auditable true
    */
   match?: 'any' | 'all';
   mode?: FirewallSchemasMode;
@@ -20430,6 +20811,7 @@ export type FirewallFilters = {
    * Notes: For example, the string 'attack' would match IP Access rules with notes 'Attack 26/02' and 'Attack 27/02'. The search is case insensitive.
    *
    * @example my note
+   * @x-auditable true
    */
   notes?: string;
 };
@@ -20503,6 +20885,7 @@ export type FirewallGroups = {
  * The name of the response header to match.
  *
  * @example Cf-Cache-Status
+ * @x-auditable true
  */
 export type FirewallHeaderName = string;
 
@@ -20510,6 +20893,7 @@ export type FirewallHeaderName = string;
  * The operator used when matching: `eq` means "equal" and `ne` means "not equal".
  *
  * @example ne
+ * @x-auditable true
  */
 export type FirewallHeaderOp = 'eq' | 'ne';
 
@@ -20517,6 +20901,7 @@ export type FirewallHeaderOp = 'eq' | 'ne';
  * The value of the response header, which must match exactly.
  *
  * @example HIT
+ * @x-auditable true
  */
 export type FirewallHeaderValue = string;
 
@@ -20525,6 +20910,7 @@ export type FirewallHeaderValue = string;
  *
  * @example 372e67954025e0ba6aaa6d586b9e0b59
  * @maxLength 32
+ * @x-auditable true
  */
 export type FirewallId = string;
 
@@ -20555,6 +20941,7 @@ export type FirewallIpConfiguration = {
  * A single IP address range to search for in existing rules.
  *
  * @example 1.2.3.0/16
+ * @x-auditable true
  */
 export type FirewallIpRangeSearch = string;
 
@@ -20593,6 +20980,7 @@ export type FirewallLockdownsComponentsSchemasDescription = string;
  *
  * @example 372e67954025e0ba6aaa6d586b9e0b59
  * @maxLength 32
+ * @x-auditable true
  */
 export type FirewallLockdownsComponentsSchemasId = string;
 
@@ -20649,6 +21037,7 @@ export type FirewallMethods = ('GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH' | 'HE
  * The action to perform.
  *
  * @example challenge
+ * @x-auditable true
  */
 export type FirewallMode = 'simulate' | 'ban' | 'challenge' | 'js_challenge' | 'managed_challenge';
 
@@ -20657,6 +21046,7 @@ export type FirewallMode = 'simulate' | 'ban' | 'challenge' | 'js_challenge' | '
  *
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type FirewallModifiedOn = string;
 
@@ -20671,12 +21061,15 @@ export type FirewallName = string;
  * An informative summary of the rule, typically used as a reminder or explanation.
  *
  * @example This rule is enabled because of an event that occurred on date X.
+ * @x-auditable true
  */
 export type FirewallNotes = string;
 
 /**
  * When true, only the uncached traffic served from your origin servers will count towards rate limiting. In this case, any cached traffic served by Cloudflare will not count towards rate limiting. This field is optional.
  * Notes: This field is deprecated. Instead, use response headers and set "origin_traffic" to "false" to avoid legacy behaviour interacting with the "response_headers" property.
+ *
+ * @x-auditable true
  */
 export type FirewallOriginTraffic = boolean;
 
@@ -20713,6 +21106,7 @@ export type FirewallOverrideResponseSingle = FirewallApiResponseSingle & {
  *
  * @example de677e5818985db1285d0e80225f06e5
  * @maxLength 32
+ * @x-auditable true
  */
 export type FirewallOverridesId = string;
 
@@ -20749,6 +21143,8 @@ export type FirewallPackageResponseSingle =
 
 /**
  * When true, indicates that the WAF package is currently paused.
+ *
+ * @x-auditable true
  */
 export type FirewallPaused = boolean;
 
@@ -20758,6 +21154,7 @@ export type FirewallPaused = boolean;
  * @example 900
  * @maximum 86400
  * @minimum 10
+ * @x-auditable true
  */
 export type FirewallPeriod = number;
 
@@ -20775,6 +21172,7 @@ export type FirewallPhase =
  * @example 1
  * @maximum 1000000000
  * @minimum -1000000000
+ * @x-auditable true
  */
 export type FirewallPriority = number;
 
@@ -21033,6 +21431,7 @@ export type FirewallSchemasDescription = string;
  * A string to search for in the description of existing rules.
  *
  * @example endpoints
+ * @x-auditable true
  */
 export type FirewallSchemasDescriptionSearch = string;
 
@@ -21048,6 +21447,7 @@ export type FirewallSchemasExpression = string;
  *
  * @example 92f17202ed8bd63d69a66b86a49a8f6b
  * @maxLength 32
+ * @x-auditable true
  */
 export type FirewallSchemasIdentifier = string;
 
@@ -21070,6 +21470,7 @@ export type FirewallSchemasIpConfiguration = {
  * The action to apply to a matched request.
  *
  * @example challenge
+ * @x-auditable true
  */
 export type FirewallSchemasMode = 'block' | 'challenge' | 'whitelist' | 'js_challenge' | 'managed_challenge';
 
@@ -21077,6 +21478,7 @@ export type FirewallSchemasMode = 'block' | 'challenge' | 'whitelist' | 'js_chal
  * When true, indicates that the rule is currently paused.
  *
  * @example false
+ * @x-auditable true
  */
 export type FirewallSchemasPaused = boolean;
 
@@ -21084,6 +21486,7 @@ export type FirewallSchemasPaused = boolean;
  * The priority of the rule to control the processing order. A lower number indicates higher priority. If not provided, any rules with a configured priority will be processed before rules without a priority.
  *
  * @example 5
+ * @x-auditable true
  */
 export type FirewallSchemasPriority = number;
 
@@ -21148,6 +21551,7 @@ export type FirewallSchemasUrls = string[];
  *
  * @example HTTP
  * @example HTTPS
+ * @x-auditable true
  */
 export type FirewallSchemes = string[];
 
@@ -21170,6 +21574,7 @@ export type FirewallStatus = 'active';
  *
  * @example 60
  * @minimum 1
+ * @x-auditable true
  */
 export type FirewallThreshold = number;
 
@@ -21180,6 +21585,7 @@ export type FirewallThreshold = number;
  * @example 86400
  * @maximum 86400
  * @minimum 1
+ * @x-auditable true
  */
 export type FirewallTimeout = number;
 
@@ -21261,6 +21667,7 @@ export type FirewallUpdateRuleset = {
  * A single URI to search for in the list of URLs of existing rules.
  *
  * @example /some/path
+ * @x-auditable true
  */
 export type FirewallUriSearch = string;
 
@@ -21269,6 +21676,7 @@ export type FirewallUriSearch = string;
  *
  * @example *.example.org/path*
  * @maxLength 1024
+ * @x-auditable true
  */
 export type FirewallUrl = string;
 
@@ -21284,6 +21692,8 @@ export type FirewallWafAction = 'challenge' | 'block' | 'simulate' | 'disable' |
 
 /**
  * The WAF rule action to apply.
+ *
+ * @x-auditable true
  */
 export type FirewallWafRewriteAction = 'challenge' | 'block' | 'simulate' | 'disable' | 'default';
 
@@ -21882,6 +22292,7 @@ export type HyperdriveResultInfo = {
  * Allow or deny operations against the resources.
  *
  * @example allow
+ * @x-auditable true
  */
 export type IamAccess = 'allow' | 'deny';
 
@@ -21891,6 +22302,7 @@ export type IamAccount = {
    *
    * @example 2014-03-01T12:21:02.0000Z
    * @format date-time
+   * @x-auditable true
    */
   created_on?: string;
   id: IamCommonComponentsSchemasIdentifier;
@@ -21907,6 +22319,8 @@ export type IamAccount = {
   settings?: {
     /**
      * Sets an abuse contact email to notify for abuse reports.
+     *
+     * @x-auditable true
      */
     abuse_contact_email?: string;
     /**
@@ -21930,6 +22344,7 @@ export type IamAccount = {
      * Two-Factor Authentication is enabled
      *
      * @default false
+     * @x-auditable true
      */
     enforce_twofactor?: boolean;
     /**
@@ -21950,6 +22365,7 @@ export type IamAccount = {
  *
  * @example eb78d65290b24279ba6f44721b3ea3c4
  * @maxLength 32
+ * @x-auditable true
  */
 export type IamAccountIdentifier = string;
 
@@ -21958,10 +22374,10 @@ export type IamApiResponseCollection = IamApiResponseCommon & {
 };
 
 export type IamApiResponseCommon = {
-  errors: IamMessages;
-  messages: IamMessages;
+  errors: IamSchemasMessages;
+  messages: IamSchemasMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -21973,11 +22389,11 @@ export type IamApiResponseCommonFailure = {
    * @example {"code":7003,"message":"No route for the URI"}
    * @minLength 1
    */
-  errors: IamMessages;
-  messages: IamMessages;
+  errors: IamSchemasMessages;
+  messages: IamSchemasMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -21996,6 +22412,7 @@ export type IamApiResponseSingleId = IamApiResponseCommon & {
  * Enterprise only. Indicates whether or not API access is enabled specifically for this user on a given account.
  *
  * @example true
+ * @x-auditable true
  */
 export type IamApiAccessEnabled = boolean | null;
 
@@ -22073,6 +22490,7 @@ export type IamCondition = {
  *
  * @example US
  * @maxLength 30
+ * @x-auditable true
  */
 export type IamCountry = string | null;
 
@@ -22085,6 +22503,7 @@ export type IamCreateAccount = {
    * the type of account being created. For self-serve customers, use standard. for enterprise customers, use enterprise.
    *
    * @example standard
+   * @x-auditable true
    */
   type: 'standard' | 'enterprise';
   /**
@@ -22095,6 +22514,7 @@ export type IamCreateAccount = {
      * Tenant unit ID
      *
      * @example f267e341f3dd4697bd3b9f71dd96247f
+     * @x-auditable true
      */
     id?: string;
   };
@@ -22108,6 +22528,7 @@ export type IamCreateMemberWithPolicies = {
   policies: IamCreateMemberPolicy[];
   /**
    * @default pending
+   * @x-auditable true
    */
   status?: 'accepted' | 'pending';
 };
@@ -22120,6 +22541,7 @@ export type IamCreateMemberWithRoles = {
   roles: IamRoleComponentsSchemasIdentifier[];
   /**
    * @default pending
+   * @x-auditable true
    */
   status?: 'accepted' | 'pending';
 };
@@ -22161,6 +22583,7 @@ export type IamCreateResourceGroup = {
    * Name of the resource group.
    *
    * @example NameOfTheResourceGroup
+   * @x-auditable true
    */
   name?: string;
   scope: IamCreateScope;
@@ -22195,6 +22618,7 @@ export type IamCreatedResourceGroupResponse = {
    * Identifier of the group.
    *
    * @example 6d7f2f5f5b1d4a0e9081fdc98d432fd1
+   * @x-auditable true
    */
   id?: string;
   /**
@@ -22210,6 +22634,7 @@ export type IamCreatedResourceGroupResponse = {
  * Allow or deny operations against the resources.
  *
  * @example allow
+ * @x-auditable true
  */
 export type IamEffect = 'allow' | 'deny';
 
@@ -22218,6 +22643,7 @@ export type IamEffect = 'allow' | 'deny';
  *
  * @example user@example.com
  * @maxLength 90
+ * @x-auditable true
  */
 export type IamEmail = string;
 
@@ -22226,6 +22652,7 @@ export type IamEmail = string;
  *
  * @example 2020-01-01T00:00:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type IamExpiresOn = string;
 
@@ -22234,6 +22661,7 @@ export type IamExpiresOn = string;
  *
  * @example John
  * @maxLength 60
+ * @x-auditable true
  */
 export type IamFirstName = string | null;
 
@@ -22243,10 +22671,12 @@ export type IamFirstName = string | null;
 export type IamGrants = {
   /**
    * @example true
+   * @x-auditable true
    */
   read?: boolean;
   /**
    * @example true
+   * @x-auditable true
    */
   write?: boolean;
 };
@@ -22255,6 +22685,7 @@ export type IamGrants = {
  * Policy identifier.
  *
  * @example f267e341f3dd4697bd3b9f71dd96247f
+ * @x-auditable true
  */
 export type IamIdentifier = string;
 
@@ -22263,6 +22694,7 @@ export type IamIdentifier = string;
  *
  * @example 4f5f0c14a2a41d5063dd301b2f829f04
  * @maxLength 32
+ * @x-auditable true
  */
 export type IamInviteComponentsSchemasIdentifier = string;
 
@@ -22271,6 +22703,7 @@ export type IamInviteComponentsSchemasIdentifier = string;
  *
  * @example user@example.com
  * @maxLength 90
+ * @x-auditable true
  */
 export type IamInvitedBy = string;
 
@@ -22279,6 +22712,7 @@ export type IamInvitedBy = string;
  *
  * @example user@example.com
  * @maxLength 90
+ * @x-auditable true
  */
 export type IamInvitedMemberEmail = string;
 
@@ -22287,6 +22721,7 @@ export type IamInvitedMemberEmail = string;
  *
  * @example 2014-01-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type IamInvitedOn = string;
 
@@ -22295,6 +22730,7 @@ export type IamInvitedOn = string;
  *
  * @example 2018-07-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type IamIssuedOn = string;
 
@@ -22303,6 +22739,7 @@ export type IamIssuedOn = string;
  *
  * @example Appleseed
  * @maxLength 60
+ * @x-auditable true
  */
 export type IamLastName = string | null;
 
@@ -22311,6 +22748,7 @@ export type IamLastName = string | null;
  *
  * @example 2020-01-02T12:34:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type IamLastUsedOn = string;
 
@@ -22329,6 +22767,7 @@ export type IamMemberPermissionGroup = {
    * Identifier of the group.
    *
    * @example c8fed203ed3043cba015a93ad1616f1f
+   * @x-auditable true
    */
   id: string;
 };
@@ -22349,6 +22788,7 @@ export type IamMemberResourceGroup = {
    * Identifier of the group.
    *
    * @example 6d7f2f5f5b1d4a0e9081fdc98d432fd1
+   * @x-auditable true
    */
   id: string;
 };
@@ -22372,6 +22812,7 @@ export type IamMemberWithPolicies = {
    * A member's status in the account.
    *
    * @example accepted
+   * @x-auditable true
    */
   status?: 'accepted' | 'pending';
   /**
@@ -22423,6 +22864,7 @@ export type IamMembershipWithPolicies = {
  *
  * @example 4536bcfad5faccb111b47003c79917fa
  * @maxLength 32
+ * @x-auditable true
  */
 export type IamMembershipComponentsSchemasIdentifier = string;
 
@@ -22439,6 +22881,7 @@ export type IamMessages = {
  *
  * @example 2018-07-02T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type IamModifiedOn = string;
 
@@ -22455,6 +22898,7 @@ export type IamName = string;
  *
  * @example 2018-07-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type IamNotBefore = string;
 
@@ -22477,6 +22921,7 @@ export type IamPermissionGroup = {
    * Identifier of the group.
    *
    * @example 6d7f2f5f5b1d4a0e9081fdc98d432fd1
+   * @x-auditable true
    */
   id: string;
   /**
@@ -22492,6 +22937,7 @@ export type IamPermissionGroup = {
    * Name of the group.
    *
    * @example Load Balancer
+   * @x-auditable true
    */
   name?: string;
 };
@@ -22501,6 +22947,7 @@ export type IamPermissionGroup = {
  *
  * @example 6d7f2f5f5b1d4a0e9081fdc98d432fd1
  * @maxLength 32
+ * @x-auditable true
  */
 export type IamPermissionGroupComponentsSchemasIdentifier = string;
 
@@ -22543,10 +22990,14 @@ export type IamPermissionsGroupResponseCollection = IamApiResponseCollection & {
   result?: {
     /**
      * Public ID.
+     *
+     * @x-auditable true
      */
     id?: string;
     /**
      * Permission Group Name
+     *
+     * @x-auditable true
      */
     name?: string;
     /**
@@ -22573,6 +23024,7 @@ export type IamPolicyWithPermissionGroupsAndResources = {
  *
  * @example Demo Account
  * @maxLength 100
+ * @x-auditable true
  */
 export type IamPropertiesName = string;
 
@@ -22594,6 +23046,7 @@ export type IamResourceGroup = {
    * Identifier of the group.
    *
    * @example 6d7f2f5f5b1d4a0e9081fdc98d432fd1
+   * @x-auditable true
    */
   id: string;
   /**
@@ -22609,6 +23062,7 @@ export type IamResourceGroup = {
    * Name of the resource group.
    *
    * @example com.cloudflare.api.account.eb78d65290b24279ba6f44721b3ea3c4
+   * @x-auditable true
    */
   name?: string;
   /**
@@ -22622,6 +23076,7 @@ export type IamResourceGroup = {
  *
  * @example 6d7f2f5f5b1d4a0e9081fdc98d432fd1
  * @maxLength 32
+ * @x-auditable true
  */
 export type IamResourceGroupComponentsSchemasIdentifier = string;
 
@@ -22706,6 +23161,7 @@ export type IamRole = {
    * Description of role's permissions.
    *
    * @example Administrative access to the entire Account
+   * @x-auditable true
    */
   description: string;
   id: IamRoleComponentsSchemasIdentifier;
@@ -22714,6 +23170,7 @@ export type IamRole = {
    *
    * @example Account Administrator
    * @maxLength 120
+   * @x-auditable true
    */
   name: string;
   /**
@@ -22727,6 +23184,7 @@ export type IamRole = {
  *
  * @example 3536bcfad5faccb999b47003c79917fb
  * @maxLength 32
+ * @x-auditable true
  */
 export type IamRoleComponentsSchemasIdentifier = string;
 
@@ -22746,14 +23204,28 @@ export type IamSchemasCollectionInviteResponse = IamApiResponseCollection & {
  *
  * @example 2014-01-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type IamSchemasExpiresOn = string;
+
+export type IamSchemasMessages = {
+  /**
+   * @minimum 1000
+   */
+  code: number;
+  documentation_url?: string;
+  message: string;
+  source?: {
+    pointer?: string;
+  };
+}[];
 
 /**
  * Organization name.
  *
  * @example Cloudflare, Inc.
  * @maxLength 100
+ * @x-auditable true
  */
 export type IamSchemasName = string;
 
@@ -22766,6 +23238,7 @@ export type IamSchemasPermissions = string[];
  * Status of this membership.
  *
  * @example accepted
+ * @x-auditable true
  */
 export type IamSchemasStatus = 'accepted' | 'pending' | 'rejected';
 
@@ -22841,6 +23314,7 @@ export type IamSingleUserResponse = IamApiResponseSingle & {
  * Status of the token.
  *
  * @example active
+ * @x-auditable true
  */
 export type IamStatus = 'active' | 'disabled' | 'expired';
 
@@ -22849,6 +23323,7 @@ export type IamStatus = 'active' | 'disabled' | 'expired';
  *
  * @example +1 123-123-1234
  * @maxLength 20
+ * @x-auditable true
  */
 export type IamTelephone = string | null;
 
@@ -22906,6 +23381,7 @@ export type IamTwoFactorAuthenticationEnabled = boolean;
  * Tenant unit identifier.
  *
  * @example f267e341f3dd4697bd3b9f71dd96247f
+ * @x-auditable true
  */
 export type IamUnitIdentifier = string;
 
@@ -22926,6 +23402,7 @@ export type IamUpdateMemberWithRoles = {
    * A member's status in the account.
    *
    * @example accepted
+   * @x-auditable true
    */
   status?: 'accepted' | 'pending';
   /**
@@ -22995,6 +23472,7 @@ export type IamValue = string;
  *
  * @example 12345
  * @maxLength 20
+ * @x-auditable true
  */
 export type IamZipcode = string | null;
 
@@ -23588,7 +24066,7 @@ export type InfraApiResponseCommon = {
   errors: InfraMessages;
   messages: InfraMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -23604,7 +24082,7 @@ export type InfraApiResponseCommonFailure = {
   messages: InfraMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -23618,30 +24096,34 @@ export type InfraMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 export type InfraResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -23652,7 +24134,7 @@ export type IntelSinkholesApiResponseCommon = {
   errors: IntelSinkholesMessages;
   messages: IntelSinkholesMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -23687,7 +24169,11 @@ export type IntelSinkholesMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -24337,14 +24823,14 @@ export type IntelRiskScore = number;
 export type IntelRiskTypes = IntelCategoriesWithSuperCategoryIdsExampleEmpty;
 
 export type IntelSchemasApiResponseCollection = IntelSchemasApiResponseCommon & {
-  result_info?: IntelResultInfo;
+  result_info?: IntelSchemasResultInfo;
 };
 
 export type IntelSchemasApiResponseCommon = {
-  errors: IntelMessages;
-  messages: IntelMessages;
+  errors: IntelSchemasMessages;
+  messages: IntelSchemasMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -24412,8 +24898,47 @@ export type IntelSchemasIp = {
   }[];
 };
 
+export type IntelSchemasMessages = {
+  /**
+   * @minimum 1000
+   */
+  code: number;
+  documentation_url?: string;
+  message: string;
+  source?: {
+    pointer?: string;
+  };
+}[];
+
 export type IntelSchemasResponse = IntelApiResponseCollection & {
   result?: IntelSchemasIp[];
+};
+
+export type IntelSchemasResultInfo = {
+  /**
+   * Total number of results for the requested service.
+   *
+   * @example 1
+   */
+  count?: number;
+  /**
+   * Current page within paginated list of results.
+   *
+   * @example 1
+   */
+  page?: number;
+  /**
+   * Number of results per page of results.
+   *
+   * @example 20
+   */
+  per_page?: number;
+  /**
+   * Total results available without any search parameters.
+   *
+   * @example 2000
+   */
+  total_count?: number;
 };
 
 export type IntelSchemasSingleResponse = IntelApiResponseSingle & {
@@ -25810,8 +26335,6 @@ export type LoadBalancingRules = {
   priority?: number;
   /**
    * If this rule's condition is true, this causes rule evaluation to stop after processing this rule.
-   *
-   * @default false
    */
   terminates?: boolean;
 }[];
@@ -26068,7 +26591,7 @@ export type LogcontrolApiResponseCommon = {
   errors: LogcontrolMessages;
   messages: LogcontrolMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -26084,7 +26607,7 @@ export type LogcontrolApiResponseCommonFailure = {
   messages: LogcontrolMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -26109,7 +26632,7 @@ export type LogcontrolCmbConfigResponseSingle = LogcontrolApiResponseSingle & {
 export type LogcontrolFlag = boolean;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -26121,7 +26644,11 @@ export type LogcontrolMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -28303,7 +28830,7 @@ export type MagicLansAddSingleRequest = {
   physport: MagicPort;
   routed_subnets?: MagicRoutedSubnet[];
   static_addressing?: MagicLanStaticAddressing;
-  vlan_tag: MagicVlanTag;
+  vlan_tag?: MagicVlanTag;
 };
 
 export type MagicLansCollectionResponse = MagicApiResponseSingle & {
@@ -28774,9 +29301,9 @@ export type MagicTunnelsCollectionResponse = MagicApiResponseSingle & {
 export type MagicUnidirectional = boolean;
 
 /**
- * VLAN port number.
+ * VLAN ID. Use zero for untagged.
  *
- * @example 0
+ * @example 42
  * @x-auditable true
  */
 export type MagicVlanTag = number;
@@ -28835,7 +29362,7 @@ export type MagicWansAddSingleRequest = {
   physport: MagicPort;
   priority?: number;
   static_addressing?: MagicWanStaticAddressing;
-  vlan_tag: MagicVlanTag;
+  vlan_tag?: MagicVlanTag;
 };
 
 export type MagicWansCollectionResponse = MagicApiResponseSingle & {
@@ -30420,6 +30947,7 @@ export type MconnSnapshot = {
    * Time spent in user mode (milliseconds)
    */
   cpu_time_user_ms?: number;
+  dhcp_leases?: MconnSnapshotDhcpLease[];
   disks?: MconnSnapshotDisk[];
   /**
    * Name of high availability state
@@ -30429,6 +30957,7 @@ export type MconnSnapshot = {
    * Numeric value associated with high availability state (0 = unknown, 1 = active, 2 = standby, 3 = disabled, 4 = fault)
    */
   ha_value?: number;
+  interfaces?: MconnSnapshotInterface[];
   /**
    * Percentage of time over a 10 second window that all tasks were stalled
    */
@@ -30984,6 +31513,7 @@ export type MconnSnapshot = {
    */
   t: number;
   thermals?: MconnSnapshotThermal[];
+  tunnels?: MconnSnapshotTunnel[];
   /**
    * Sum of how much time each core has spent idle
    */
@@ -30996,6 +31526,40 @@ export type MconnSnapshot = {
    * Version
    */
   v: string;
+};
+
+/**
+ * Snapshot DHCP lease
+ */
+export type MconnSnapshotDhcpLease = {
+  /**
+   * Client ID of the device the IP Address was leased to
+   */
+  client_id: string;
+  /**
+   * Connector identifier
+   */
+  connector_id?: string;
+  /**
+   * Expiry time of the DHCP lease (seconds since the Unix epoch)
+   */
+  expiry_time: number;
+  /**
+   * Hostname of the device the IP Address was leased to
+   */
+  hostname: string;
+  /**
+   * Name of the network interface
+   */
+  interface_name: string;
+  /**
+   * IP Address that was leased
+   */
+  ip_address: string;
+  /**
+   * MAC Address of the device the IP Address was leased to
+   */
+  mac_address: string;
 };
 
 /**
@@ -31086,6 +31650,47 @@ export type MconnSnapshotDisk = {
    * Writes merged
    */
   writes_merged: number;
+};
+
+/**
+ * Snapshot Interface
+ */
+export type MconnSnapshotInterface = {
+  /**
+   * Connector identifier
+   */
+  connector_id?: string;
+  ip_addresses?: MconnSnapshotInterfaceAddress[];
+  /**
+   * Name of the network interface
+   */
+  name: string;
+  /**
+   * UP/DOWN state of the network interface
+   */
+  operstate: string;
+  /**
+   * Speed of the network interface (bits per second)
+   */
+  speed?: number;
+};
+
+/**
+ * Snapshot Interface Address
+ */
+export type MconnSnapshotInterfaceAddress = {
+  /**
+   * Connector identifier
+   */
+  connector_id?: string;
+  /**
+   * Name of the network interface
+   */
+  interface_name: string;
+  /**
+   * IP address of the network interface
+   */
+  ip_address: string;
 };
 
 export type MconnSnapshotMetadata = {
@@ -31243,6 +31848,32 @@ export type MconnSnapshotThermal = {
    * Maximum temperature of the component (degrees Celsius)
    */
   max_celcius?: number;
+};
+
+/**
+ * Snapshot Tunnels
+ */
+export type MconnSnapshotTunnel = {
+  /**
+   * Connector identifier
+   */
+  connector_id?: string;
+  /**
+   * Name of tunnel health state (unknown, healthy, degraded, down)
+   */
+  health_state: string;
+  /**
+   * Numeric value associated with tunnel state (0 = unknown, 1 = healthy, 2 = degraded, 3 = down)
+   */
+  health_value: number;
+  /**
+   * The tunnel interface name (i.e. xfrm1, xfrm3.99, etc.)
+   */
+  interface_name: string;
+  /**
+   * Tunnel identifier
+   */
+  tunnel_id: string;
 };
 
 export type MconnUuid = string;
@@ -31790,11 +32421,11 @@ export type ObservatoryApiResponseCommonFailure = {
    * @example {"code":7003,"message":"No route for the URI"}
    * @minLength 1
    */
-  errors: ObservatoryMessages;
-  messages: ObservatoryMessages;
+  errors: ObservatorySchemasMessages;
+  messages: ObservatorySchemasMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -31878,7 +32509,7 @@ export type ObservatoryCreateScheduleResponse = ObservatoryApiResponseSingle & {
 export type ObservatoryDeviceType = 'DESKTOP' | 'MOBILE';
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -32116,6 +32747,18 @@ export type ObservatoryScheduleResponseSingle = ObservatoryApiResponseSingle & {
  */
 export type ObservatoryScheduleFrequency = 'DAILY' | 'WEEKLY';
 
+export type ObservatorySchemasMessages = {
+  /**
+   * @minimum 1000
+   */
+  code: number;
+  documentation_url?: string;
+  message: string;
+  source?: {
+    pointer?: string;
+  };
+}[];
+
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
@@ -32169,7 +32812,7 @@ export type ObservatoryTrendResponse = ObservatoryApiResponseSingle & {
 export type ObservatoryUrl = string;
 
 /**
- * UUID
+ * UUID.
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
@@ -39777,6 +40420,251 @@ export type SecondaryDnsTsig = {
  */
 export type SecondaryDnsTsigId = string;
 
+/**
+ * @x-auditable true
+ */
+export type SecretsStoreSecretStatus = 'pending' | 'active' | 'deleted';
+
+/**
+ * Account Identifier
+ *
+ * @example 985e105f4ecef8ad9ca31a8372d0c353
+ * @maxLength 32
+ */
+export type SecretsStoreAccountIdentifier = string;
+
+export type SecretsStoreApiResponseCollection = SecretsStoreApiResponseCommon & {
+  result_info?: SecretsStoreResultInfo;
+};
+
+export type SecretsStoreApiResponseCommon = {
+  errors: SecretsStoreMessages;
+  messages: SecretsStoreMessages;
+  /**
+   * Whether the API call was successful.
+   *
+   * @example true
+   */
+  success: true;
+};
+
+export type SecretsStoreApiResponseCommonFailure = {
+  /**
+   * @example {"code":7003,"message":"No route for the URI"}
+   * @minLength 1
+   */
+  errors: SecretsStoreMessages;
+  messages: SecretsStoreMessages;
+  result: any | null;
+  /**
+   * Whether the API call was successful.
+   *
+   * @example false
+   */
+  success: false;
+};
+
+/**
+ * Freeform text describing the secret
+ *
+ * @example info about my secret
+ * @x-auditable true
+ */
+export type SecretsStoreComment = string;
+
+export type SecretsStoreCreateSecretObject = {
+  comment?: SecretsStoreComment;
+  name: SecretsStoreSecretName;
+  scopes: SecretsStoreScopes;
+  value: SecretsStoreValue;
+};
+
+export type SecretsStoreCreateStoreObject = {
+  name: SecretsStoreStoreName;
+};
+
+/**
+ * Whenthe secret was created.
+ *
+ * @example 2023-09-21T18:56:32.624632Z
+ * @format date-time
+ * @x-auditable true
+ */
+export type SecretsStoreCreated = string;
+
+export type SecretsStoreDeleteSecretObject = {
+  id: SecretsStoreIdentifier;
+};
+
+export type SecretsStoreDuplicateSecretObject = {
+  comment?: SecretsStoreComment;
+  name: SecretsStoreSecretName;
+};
+
+/**
+ * Secret identifier tag.
+ *
+ * @example 3fd85f74b32742f1bff64a85009dda07
+ * @maxLength 32
+ * @x-auditable true
+ */
+export type SecretsStoreIdentifier = string;
+
+export type SecretsStoreMessages = {
+  /**
+   * @minimum 1000
+   */
+  code: number;
+  documentation_url?: string;
+  message: string;
+  source?: {
+    pointer?: string;
+  };
+}[];
+
+/**
+ * When the secret was modified.
+ *
+ * @example 2023-09-21T18:56:32.624632Z
+ * @format date-time
+ * @x-auditable true
+ */
+export type SecretsStoreModified = string;
+
+export type SecretsStorePatchSecretObject = {
+  comment?: SecretsStoreComment;
+  name: SecretsStoreSecretName;
+  scopes?: SecretsStoreScopes;
+  value?: SecretsStoreValue;
+};
+
+/**
+ * The number of secrets the account is entitlted to use
+ *
+ * @example 10
+ * @x-auditable true
+ */
+export type SecretsStoreQuota = number;
+
+export type SecretsStoreQuotaResponse = SecretsStoreApiResponseCollection & {
+  result?: SecretsStoreSecretsUsageObject;
+};
+
+export type SecretsStoreResultInfo = {
+  /**
+   * Total number of results for the requested service.
+   *
+   * @example 1
+   */
+  count?: number;
+  /**
+   * Current page within paginated list of results.
+   *
+   * @example 1
+   */
+  page?: number;
+  /**
+   * Number of results per page of results.
+   *
+   * @example 20
+   */
+  per_page?: number;
+  /**
+   * Total results available without any search parameters.
+   *
+   * @example 2000
+   */
+  total_count?: number;
+};
+
+/**
+ * The list of services that can use this secret.
+ *
+ * @example workers
+ */
+export type SecretsStoreScopes = string[];
+
+export type SecretsStoreSecretObject = {
+  comment?: SecretsStoreComment;
+  created: SecretsStoreCreated;
+  id: SecretsStoreIdentifier;
+  modified: SecretsStoreModified;
+  name: SecretsStoreSecretName;
+  status: SecretsStoreSecretStatus;
+  store_id: SecretsStoreStoreIdentifier;
+};
+
+/**
+ * The name of the secret
+ *
+ * @example MY_API_KEY
+ */
+export type SecretsStoreSecretName = string;
+
+export type SecretsStoreSecretResponse = SecretsStoreApiResponseCollection & {
+  result?: SecretsStoreSecretObject;
+};
+
+export type SecretsStoreSecretsUsageObject = {
+  secrets: SecretsStoreUsageQuotaObject;
+};
+
+export type SecretsStoreSecretsResponseCollection = SecretsStoreApiResponseCollection & {
+  result?: SecretsStoreSecretObject[];
+};
+
+export type SecretsStoreStoreObject = {
+  created: SecretsStoreCreated;
+  id: SecretsStoreStoreIdentifier;
+  modified: SecretsStoreModified;
+  name: SecretsStoreStoreName;
+};
+
+/**
+ * Store Identifier
+ *
+ * @example 023e105f4ecef8ad9ca31a8372d0c353
+ * @maxLength 32
+ * @x-auditable true
+ */
+export type SecretsStoreStoreIdentifier = string;
+
+/**
+ * The name of the store
+ *
+ * @example service_x_keys
+ */
+export type SecretsStoreStoreName = string;
+
+export type SecretsStoreStoreResponse = SecretsStoreApiResponseCollection & {
+  result?: SecretsStoreStoreObject;
+};
+
+export type SecretsStoreStoresResponseCollection = SecretsStoreApiResponseCollection & {
+  result?: SecretsStoreStoreObject[];
+};
+
+/**
+ * The number of secrets the account is currently using
+ *
+ * @example 10
+ * @x-auditable true
+ */
+export type SecretsStoreUsage = number;
+
+export type SecretsStoreUsageQuotaObject = {
+  quota: SecretsStoreQuota;
+  usage: SecretsStoreUsage;
+};
+
+/**
+ * The value of the secret. Note that this is 'write only' - no API reponse will provide this value, it is only used to create/modify secrets.
+ *
+ * @example api-token-secret-123
+ * @x-sensitive true
+ */
+export type SecretsStoreValue = string;
+
 export type SecurityCenterAccountId = SecurityCenterIdentifier;
 
 export type SecurityCenterApiResponseCommon = {
@@ -40830,7 +41718,7 @@ export type StreamApiResponseCommon = {
   errors: StreamMessages;
   messages: StreamMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -40846,7 +41734,7 @@ export type StreamApiResponseCommonFailure = {
   messages: StreamMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -41429,7 +42317,11 @@ export type StreamMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -41686,7 +42578,7 @@ export type StreamScale = number;
 export type StreamScheduledDeletion = string;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -42412,6 +43304,30 @@ export type TeamsDevicesCrowdstrikeInputRequest = {
   versionOperator?: '<' | '<=' | '>' | '>=' | '==';
 };
 
+/**
+ * v4 public API Pagination/Cursor info
+ *
+ * @example {"count":1,"cursor":"ais86dftf.asdf7ba8","page":null,"per_page":10,"total_count":null}
+ */
+export type TeamsDevicesCursorResultInfo = {
+  /**
+   * Number of records in the response.
+   */
+  count: number;
+  /**
+   * Opaque token to request the next set of records.
+   */
+  cursor: string;
+  /**
+   * The limit for the number of records in the response.
+   */
+  per_page: number;
+  /**
+   * Total number of records available.
+   */
+  total_count?: number | null;
+};
+
 export type TeamsDevicesCustomS2sConfigRequest = {
   /**
    * This id will be passed in the `CF-Access-Client-ID` header when hitting the `api_url`
@@ -42517,7 +43433,7 @@ export type TeamsDevicesDevice = {
   deleted?: TeamsDevicesDeleted;
   device_type?: TeamsDevicesDeviceType;
   gateway_device_id?: TeamsDevicesGatewayDeviceId;
-  id?: TeamsDevicesDeviceId;
+  id?: TeamsDevicesRegistrationId;
   ip?: TeamsDevicesIp;
   key?: TeamsDevicesKey;
   key_type?: TeamsDevicesKeyType;
@@ -42636,13 +43552,6 @@ export type TeamsDevicesDevicePostureRules = {
   type?: TeamsDevicesType;
 };
 
-/**
- * Device ID.
- *
- * @example LM63E90AXfafe14643cbbbc-4a0ed4fc8415A
- */
-export type TeamsDevicesDeviceId = string;
-
 export type TeamsDevicesDeviceResponse = TeamsDevicesApiResponseSingle & {
   result?: TeamsDevicesDevice;
 };
@@ -42704,7 +43613,7 @@ export type TeamsDevicesDevices = {
   created?: TeamsDevicesCreated;
   deleted?: TeamsDevicesDeleted;
   device_type?: TeamsDevicesPlatform;
-  id?: TeamsDevicesSchemasUuid;
+  id?: TeamsDevicesRegistrationId;
   ip?: TeamsDevicesIp;
   key?: TeamsDevicesKey;
   last_seen?: TeamsDevicesLastSeen;
@@ -42852,6 +43761,8 @@ export type TeamsDevicesDomainJoinedInputRequest = {
  * @maxLength 90
  */
 export type TeamsDevicesEmail = string;
+
+export type TeamsDevicesEmptyBody = Record<string, any> | null;
 
 /**
  * List of routes excluded in the WARP client's tunnel.
@@ -43002,12 +43913,12 @@ export type TeamsDevicesIdentifier = void;
 /**
  * List of routes included in the WARP client's tunnel.
  */
-export type TeamsDevicesInclude = TeamsDevicesSplitTunnel[];
+export type TeamsDevicesInclude = TeamsDevicesSplitTunnelInclude[];
 
 /**
  * List of routes included in the WARP client's tunnel. Both 'exclude' and 'include' cannot be set in the same request.
  */
-export type TeamsDevicesIncludeRequest = TeamsDevicesSplitTunnel[];
+export type TeamsDevicesIncludeRequest = TeamsDevicesSplitTunnelInclude[];
 
 /**
  * The address in CIDR format to include in the tunnel. If `address` is present, `host` must not be present.
@@ -43309,6 +44220,12 @@ export type TeamsDevicesOsVersionInputRequest = {
   version: string;
 };
 
+export type TeamsDevicesOverrideCodes = {
+  disable_for_time?: {
+    [key: string]: string;
+  };
+};
+
 export type TeamsDevicesOverrideCodesResponse = TeamsDevicesApiResponseCollection & {
   result?: {
     disable_for_time?: TeamsDevicesDisableForTime;
@@ -43322,6 +44239,112 @@ export type TeamsDevicesOverrideCodesResponse = TeamsDevicesApiResponseCollectio
  * @example /path2
  */
 export type TeamsDevicesPaths = string[];
+
+/**
+ * A WARP Device.
+ */
+export type TeamsDevicesPhysicalDevice = {
+  /**
+   * The number of active registrations for the device. Active registrations are those which haven't been revoked or deleted.
+   *
+   * @example 1
+   */
+  active_registrations: number;
+  /**
+   * Version of the WARP client.
+   *
+   * @example 1.0.0
+   */
+  client_version?: string | null;
+  /**
+   * The RFC3339 timestamp when the device was created.
+   *
+   * @example 2025-02-14T13:17:00Z
+   */
+  created_at: string;
+  /**
+   * The RFC3339 timestamp when the device was deleted.
+   *
+   * @example 2025-02-14T13:17:00Z
+   */
+  deleted_at?: string | null;
+  /**
+   * The device operating system.
+   *
+   * @example linux
+   */
+  device_type?: string | null;
+  /**
+   * A string that uniquely identifies the hardware or virtual machine (VM).
+   */
+  hardware_id?: string | null;
+  /**
+   * The unique ID of the device.
+   *
+   * @example fc9ab6ab-3b94-4319-9941-459462b3d73e
+   */
+  id: string;
+  /**
+   * The RFC3339 timestamp when the device was last seen.
+   *
+   * @example 2025-02-14T13:17:00Z
+   */
+  last_seen_at: string | null;
+  /**
+   * The last Access user to use the WARP device.
+   */
+  last_seen_user?: TeamsDevicesUser | null;
+  /**
+   * The device MAC address.
+   *
+   * @example f5:01:73:cf:12:23
+   */
+  mac_address?: string | null;
+  /**
+   * The device manufacturer.
+   *
+   * @example ACME
+   */
+  manufacturer?: string | null;
+  /**
+   * The model name of the device.
+   *
+   * @example Mark VII
+   */
+  model?: string | null;
+  /**
+   * The name of the device.
+   *
+   * @example My Device
+   */
+  name: string;
+  /**
+   * The device operating system version number.
+   */
+  os_version?: string | null;
+  /**
+   * Additional operating system version data. For macOS or iOS, the Product Version Extra. For Linux, the kernel release version.
+   */
+  os_version_extra?: string | null;
+  /**
+   * The public IP address of the WARP client.
+   *
+   * @example 1.1.1.1
+   */
+  public_ip?: string | null;
+  /**
+   * The device serial number.
+   *
+   * @example ABS765ASD8A
+   */
+  serial_number?: string | null;
+  /**
+   * The RFC3339 timestamp when the device was last updated.
+   *
+   * @example 2025-02-14T13:17:00Z
+   */
+  updated_at: string;
+};
 
 /**
  * @example windows
@@ -43341,6 +44364,100 @@ export type TeamsDevicesPrecedence = number;
  * @example true
  */
 export type TeamsDevicesRegisterInterfaceIpWithDns = boolean;
+
+/**
+ * A WARP configuration tied to a single user. Multiple registrations can be created from a single WARP device.
+ */
+export type TeamsDevicesRegistration = {
+  /**
+   * The RFC3339 timestamp when the registration was created.
+   *
+   * @example 2025-02-14T13:17:00Z
+   */
+  created_at: string;
+  /**
+   * The RFC3339 timestamp when the registration was deleted.
+   *
+   * @example 2025-02-14T13:17:00Z
+   */
+  deleted_at?: string | null;
+  device: TeamsDevicesRegistrationDeviceDetails;
+  /**
+   * The ID of the registration.
+   *
+   * @example 11ffb86f-3f0c-4306-b4a2-e62f872b166a
+   */
+  id: string;
+  /**
+   * The public key used to connect to the Cloudflare network.
+   *
+   * @example U+QTP50RsWfeLGHF4tlGDnmGeuwtsz46KCHr5OyhWq00Rsdfl45mgnQAuEJ6CO0YrkyTl9FUf5iB0bwYR3g4EEFEHhtu6jFaqfMrBMBSz6itv9HQXkaR9OieKQ==
+   */
+  key: string;
+  /**
+   * The type of encryption key used by the WARP client for the active key. Currently 'curve25519' for WireGuard and 'secp256r1' for MASQUE
+   *
+   * @example secp256r1
+   */
+  key_type?: string | null;
+  /**
+   * The RFC3339 timestamp when the registration was last seen.
+   *
+   * @example 2025-02-14T13:17:00Z
+   */
+  last_seen_at: string;
+  /**
+   * The RFC3339 timestamp when the registration was revoked.
+   *
+   * @example 2025-02-14T13:17:00Z
+   */
+  revoked_at?: string | null;
+  /**
+   * Type of the tunnel - wireguard or masque.
+   *
+   * @example masque
+   */
+  tunnel_type?: string | null;
+  /**
+   * The RFC3339 timestamp when the registration was last updated.
+   *
+   * @example 2025-02-14T13:17:00Z
+   */
+  updated_at: string;
+  user?: TeamsDevicesUser;
+};
+
+/**
+ * Device details embedded inside of a registration.
+ */
+export type TeamsDevicesRegistrationDeviceDetails = {
+  /**
+   * Version of the WARP client
+   *
+   * @example 1.0.0
+   */
+  client_version?: string;
+  /**
+   * The ID of the device
+   *
+   * @example 32aa0404-78f1-49a4-99e0-97f575081356
+   */
+  id: string;
+  /**
+   * The name of the device
+   *
+   * @example My Device
+   */
+  name: string;
+};
+
+/**
+ * Registration ID. Equal to Device ID except for accounts which enabled [multi-user mode](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/warp/deployment/mdm-deployment/windows-multiuser/).
+ *
+ * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
+ * @maxLength 36
+ */
+export type TeamsDevicesRegistrationId = string;
 
 /**
  * Whether to check all disks for encryption.
@@ -43381,11 +44498,11 @@ export type TeamsDevicesResultInfo = {
 };
 
 /**
- * A list of device ids to revoke.
+ * A list of Registration IDs to revoke.
  *
  * @maxLength 200
  */
-export type TeamsDevicesRevokeDevicesRequest = TeamsDevicesSchemasUuid[];
+export type TeamsDevicesRevokeDevicesRequest = TeamsDevicesRegistrationId[];
 
 /**
  * When the device was revoked.
@@ -43475,8 +44592,6 @@ export type TeamsDevicesSchemasType =
   | 'custom_s2s';
 
 /**
- * Device ID.
- *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
  */
@@ -43841,11 +44956,11 @@ export type TeamsDevicesUniqueClientIdInputRequest = {
 };
 
 /**
- * A list of device ids to unrevoke.
+ * A list of Registration IDs to unrevoke.
  *
  * @maxLength 200
  */
-export type TeamsDevicesUnrevokeDevicesRequest = TeamsDevicesSchemasUuid[];
+export type TeamsDevicesUnrevokeDevicesRequest = TeamsDevicesRegistrationId[];
 
 /**
  * When the device was updated.
@@ -43901,6 +45016,14 @@ export type TeamsDevicesUser = {
  * @maxLength 36
  */
 export type TeamsDevicesUuid = string;
+
+/**
+ * A message which can be returned in either the 'errors' or 'messages' fields in a v4 API response.
+ */
+export type TeamsDevicesV4ResponseMessage = {
+  code: number;
+  message: string;
+};
 
 /**
  * The WARP client version.
@@ -46396,7 +47519,7 @@ export type TunnelFeatures = string[];
 export type TunnelIcmpProxyEnabled = boolean;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -46706,14 +47829,30 @@ export type TunnelRouteResponseSingle = {
 export type TunnelRunAt = string;
 
 export type TunnelSchemasApiResponseCommon = {
-  errors: TunnelMessages;
-  messages: TunnelMessages;
+  errors: TunnelSchemasMessages;
+  messages: TunnelSchemasMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
   success: true;
+};
+
+export type TunnelSchemasApiResponseCommonFailure = {
+  /**
+   * @example {"code":7003,"message":"No route for the URI"}
+   * @minLength 1
+   */
+  errors: TunnelSchemasMessages;
+  messages: TunnelSchemasMessages;
+  result: any | null;
+  /**
+   * Whether the API call was successful.
+   *
+   * @example false
+   */
+  success: false;
 };
 
 export type TunnelSchemasApiResponseSingle = TunnelSchemasApiResponseCommon;
@@ -46752,6 +47891,18 @@ export type TunnelSchemasConnection = {
   origin_ip?: TunnelIp;
   uuid?: TunnelConnectionId;
 };
+
+export type TunnelSchemasMessages = {
+  /**
+   * @minimum 1000
+   */
+  code: number;
+  documentation_url?: string;
+  message: string;
+  source?: {
+    pointer?: string;
+  };
+}[];
 
 /**
  * UUID of the tunnel.
@@ -49669,6 +50820,7 @@ export type WorkersKvExpirationTtl = number;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type WorkersKvIdentifier = string;
 
@@ -49731,6 +50883,7 @@ export type WorkersKvNamespace = {
    * True if new beta namespace, with additional preview features.
    *
    * @example true
+   * @x-auditable true
    */
   beta?: boolean;
   id: WorkersKvNamespaceIdentifier;
@@ -49738,6 +50891,7 @@ export type WorkersKvNamespace = {
    * True if keys written on the URL will be URL-decoded before storing. For example, if set to "true", a key written on the URL as "%3F" will be stored as "?".
    *
    * @example true
+   * @x-auditable true
    */
   supports_url_encoding?: boolean;
   title: WorkersKvNamespaceTitle;
@@ -49748,6 +50902,7 @@ export type WorkersKvNamespace = {
  *
  * @example 0f2ac74b498b48028cb68387c421e279
  * @maxLength 32
+ * @x-auditable true
  */
 export type WorkersKvNamespaceIdentifier = string;
 
@@ -49755,6 +50910,7 @@ export type WorkersKvNamespaceIdentifier = string;
  * A human-readable string name for a Namespace.
  *
  * @example My Own Namespace
+ * @x-auditable true
  */
 export type WorkersKvNamespaceTitle = string;
 
@@ -49792,6 +50948,544 @@ export type WorkersKvResultInfo = {
  */
 export type WorkersKvValue = string;
 
+/**
+ * The statistics object contains information about query performance from the database, it does not include any network latency
+ */
+export type WorkersObservabilityPerformanceInformation = {
+  /**
+   * Number of uncompressed bytes read from the table.
+   */
+  bytes_read: number;
+  /**
+   * Time in seconds for the query to run.
+   */
+  elapsed: number;
+  /**
+   * Number of rows scanned from the table.
+   */
+  rows_read: number;
+};
+
+export type WorkersObservabilityQuery = {
+  created: string;
+  /**
+   * @example Query description
+   * @maxLength 1000
+   */
+  description: string | null;
+  /**
+   * ID of your environment
+   *
+   * @example my-environment
+   * @maxLength 64
+   * @minLength 1
+   * @pattern ^[a-z0-9_]+(?:-[a-z0-9_]+)*$
+   */
+  environmentId: string;
+  /**
+   * Flag for alerts automatically created
+   */
+  generated: boolean | null;
+  /**
+   * ID of the query
+   *
+   * @example query-1
+   * @maxLength 64
+   * @minLength 1
+   * @pattern ^[a-z0-9_]+(?:-[a-z0-9_]+)*$
+   */
+  id: string;
+  /**
+   * Query name
+   */
+  name: string | null;
+  parameters: {
+    /**
+     * Create Calculations to compute as part of the query.
+     */
+    calculations?: {
+      alias?: string;
+      key?: string;
+      keyType?: 'string' | 'number' | 'boolean';
+      operator:
+        | 'uniq'
+        | 'count'
+        | 'max'
+        | 'min'
+        | 'sum'
+        | 'avg'
+        | 'median'
+        | 'p001'
+        | 'p01'
+        | 'p05'
+        | 'p10'
+        | 'p25'
+        | 'p75'
+        | 'p90'
+        | 'p95'
+        | 'p99'
+        | 'p999'
+        | 'stddev'
+        | 'variance'
+        | 'COUNT_DISTINCT'
+        | 'COUNT'
+        | 'MAX'
+        | 'MIN'
+        | 'SUM'
+        | 'AVG'
+        | 'MEDIAN'
+        | 'P001'
+        | 'P01'
+        | 'P05'
+        | 'P10'
+        | 'P25'
+        | 'P75'
+        | 'P90'
+        | 'P95'
+        | 'P99'
+        | 'P999'
+        | 'STDDEV'
+        | 'VARIANCE';
+    }[];
+    /**
+     * Set the Datasets to query. Leave it empty to query all the datasets.
+     */
+    datasets?: string[];
+    /**
+     * Set a Flag to describe how to combine the filters on the query.
+     */
+    filterCombination?: 'and' | 'or' | 'AND' | 'OR';
+    /**
+     * Configure the Filters to apply to the query.
+     */
+    filters?: {
+      key: string;
+      operation:
+        | 'includes'
+        | 'not_includes'
+        | 'starts_with'
+        | 'regex'
+        | 'exists'
+        | 'is_null'
+        | 'in'
+        | 'not_in'
+        | 'eq'
+        | 'neq'
+        | 'gt'
+        | 'gte'
+        | 'lt'
+        | 'lte'
+        | '='
+        | '!='
+        | '>'
+        | '>='
+        | '<'
+        | '<='
+        | 'INCLUDES'
+        | 'DOES_NOT_INCLUDE'
+        | 'MATCH_REGEX'
+        | 'EXISTS'
+        | 'DOES_NOT_EXIST'
+        | 'IN'
+        | 'NOT_IN'
+        | 'STARTS_WITH';
+      type: 'string' | 'number' | 'boolean';
+      value?: string | number | boolean;
+    }[];
+    /**
+     * Define how to group the results of the query.
+     */
+    groupBys?: {
+      type: 'string' | 'number' | 'boolean';
+      value: string;
+    }[];
+    /**
+     * Configure the Having clauses that filter on calculations in the query result.
+     */
+    havings?: {
+      key: string;
+      operation: 'eq' | 'neq' | 'gt' | 'gte' | 'lt' | 'lte';
+      value: number;
+    }[];
+    /**
+     * Set a limit on the number of results / records returned by the query
+     *
+     * @maximum 100
+     * @minimum 0
+     */
+    limit?: number;
+    /**
+     * Define an expression to search using full-text search.
+     */
+    needle?: {
+      isRegex?: boolean;
+      matchCase?: boolean;
+      value: string | number | boolean;
+    };
+    /**
+     * Configure the order of the results returned by the query.
+     */
+    orderBy?: {
+      /**
+       * Set the order of the results
+       */
+      order?: 'asc' | 'desc';
+      /**
+       * Configure which Calculation to order the results by.
+       */
+      value: string;
+    };
+  };
+  updated: string;
+  /**
+   * @example JY2UKXLO60AEV94R
+   */
+  userId: string;
+  /**
+   * ID of your workspace
+   *
+   * @example my-workspace
+   * @maxLength 64
+   * @minLength 1
+   * @pattern ^[a-z0-9_]+(?:-[a-z0-9_]+)*$
+   */
+  workspaceId: string;
+};
+
+export type WorkersObservabilityQueryResults = {
+  calculations?: {
+    aggregates: {
+      count: number;
+      groups?: {
+        key: string;
+        value: string | number | boolean;
+      }[];
+      interval: number;
+      sampleInterval: number;
+      value: number;
+    }[];
+    alias?: string;
+    calculation: string;
+    series: {
+      data: {
+        count: number;
+        firstSeen: string;
+        groups?: {
+          key: string;
+          value: string | number | boolean;
+        }[];
+        interval: number;
+        lastSeen: string;
+        sampleInterval: number;
+        value: number;
+      }[];
+      time: string;
+    }[];
+  }[];
+  compare?: {
+    aggregates: {
+      count: number;
+      groups?: {
+        key: string;
+        value: string | number | boolean;
+      }[];
+      interval: number;
+      sampleInterval: number;
+      value: number;
+    }[];
+    alias?: string;
+    calculation: string;
+    series: {
+      data: {
+        count: number;
+        firstSeen: string;
+        groups?: {
+          key: string;
+          value: string | number | boolean;
+        }[];
+        interval: number;
+        lastSeen: string;
+        sampleInterval: number;
+        value: number;
+      }[];
+      time: string;
+    }[];
+  }[];
+  events?: {
+    count?: number;
+    events?: WorkersObservabilityTelemetryEvent[];
+    fields?: {
+      key: string;
+      type: string;
+    }[];
+    series?: {
+      data: {
+        aggregates: {
+          /**
+           * @deprecated true
+           * @exclusiveMinimum true
+           * @minimum 0
+           */
+          _count: number;
+          /**
+           * @deprecated true
+           */
+          _firstSeen: string;
+          /**
+           * @deprecated true
+           * @exclusiveMinimum true
+           * @minimum 0
+           */
+          _interval: number;
+          /**
+           * @deprecated true
+           */
+          _lastSeen: string;
+          /**
+           * @deprecated true
+           */
+          bin?: Record<string, any>;
+        };
+        count: number;
+        errors?: number;
+        /**
+         * Groups in the query results.
+         */
+        groups?: {
+          [key: string]: string | number | boolean;
+        };
+        interval: number;
+        sampleInterval: number;
+      }[];
+      time: string;
+    }[];
+  };
+  invocations?: {
+    [key: string]: WorkersObservabilityTelemetryEvent[];
+  };
+  patterns?: {
+    count: number;
+    pattern: string;
+    series: {
+      data: {
+        count: number;
+        groups?: {
+          key: string;
+          value: string | number | boolean;
+        }[];
+        interval: number;
+        sampleInterval: number;
+        value: number;
+      };
+      time: string;
+    }[];
+    service: string;
+  }[];
+  run: WorkersObservabilityQueryRun;
+  statistics: WorkersObservabilityPerformanceInformation;
+};
+
+/**
+ * A Workers Observability Query Object
+ */
+export type WorkersObservabilityQueryRun = {
+  accountId: string;
+  created?: string;
+  dry: boolean;
+  /**
+   * @deprecated true
+   */
+  environmentId: string;
+  granularity: number;
+  id: string;
+  query: WorkersObservabilityQuery;
+  statistics?: {
+    /**
+     * Number of uncompressed bytes read from the table.
+     */
+    bytes_read: number;
+    /**
+     * Time in seconds for the query to run.
+     */
+    elapsed: number;
+    /**
+     * Number of rows scanned from the table.
+     */
+    rows_read: number;
+  };
+  status: 'STARTED' | 'COMPLETED';
+  timeframe: {
+    /**
+     * Set the start time for your query using UNIX time in milliseconds.
+     *
+     * @exclusiveMinimum true
+     * @minimum 0
+     */
+    from: number;
+    /**
+     * Set the end time for your query using UNIX time in milliseconds.
+     *
+     * @exclusiveMinimum true
+     * @minimum 0
+     */
+    to: number;
+  };
+  updated?: string;
+  userId: string;
+  /**
+   * @deprecated true
+   */
+  workspaceId: string;
+};
+
+/**
+ * The data structure of a telemetry event
+ */
+export type WorkersObservabilityTelemetryEvent = {
+  $metadata: {
+    account?: string;
+    cloudService?: string;
+    /**
+     * @exclusiveMinimum true
+     * @minimum 0
+     */
+    coldStart?: number;
+    /**
+     * @exclusiveMinimum true
+     * @minimum 0
+     */
+    cost?: number;
+    /**
+     * @exclusiveMinimum true
+     * @minimum 0
+     */
+    duration?: number;
+    /**
+     * @minimum 0
+     */
+    endTime?: number;
+    error?: string;
+    errorTemplate?: string;
+    fingerprint?: string;
+    id: string;
+    level?: string;
+    message?: string;
+    messageTemplate?: string;
+    metricName?: string;
+    origin?: string;
+    parentSpanId?: string;
+    provider?: string;
+    region?: string;
+    requestId?: string;
+    service?: string;
+    spanId?: string;
+    spanName?: string;
+    stackId?: string;
+    /**
+     * @minimum 0
+     */
+    startTime?: number;
+    /**
+     * @exclusiveMinimum true
+     * @minimum 0
+     */
+    statusCode?: number;
+    /**
+     * @exclusiveMinimum true
+     * @minimum 0
+     */
+    traceDuration?: number;
+    traceId?: string;
+    trigger?: string;
+    type?: string;
+    url?: string;
+  };
+  /**
+   * Cloudflare Workers event information enriches your logs so you can easily identify and debug issues.
+   */
+  $workers?:
+    | {
+        entrypoint?: string;
+        event?: {
+          [key: string]:
+            | string
+            | number
+            | boolean
+            | {
+                [key: string]:
+                  | string
+                  | number
+                  | boolean
+                  | {
+                      [key: string]: (string | number | boolean)[] | string | number | boolean;
+                    };
+              };
+        };
+        eventType:
+          | 'fetch'
+          | 'scheduled'
+          | 'alarm'
+          | 'cron'
+          | 'queue'
+          | 'email'
+          | 'tail'
+          | 'rpc'
+          | 'websocket'
+          | 'unknown';
+        executionModel?: 'durableObject' | 'stateless';
+        outcome: string;
+        requestId: string;
+        scriptName: string;
+        scriptVersion?: {
+          id?: string;
+          message?: string;
+          tag?: string;
+        };
+        truncated?: boolean;
+      }
+    | {
+        cpuTimeMs: number;
+        diagnosticsChannelEvents?: {
+          channel: string;
+          message: string;
+          timestamp: number;
+        }[];
+        dispatchNamespace?: string;
+        entrypoint?: string;
+        event?: {
+          [key: string]: string | number | boolean;
+        };
+        eventType:
+          | 'fetch'
+          | 'scheduled'
+          | 'alarm'
+          | 'cron'
+          | 'queue'
+          | 'email'
+          | 'tail'
+          | 'rpc'
+          | 'websocket'
+          | 'unknown';
+        executionModel?: 'durableObject' | 'stateless';
+        outcome: string;
+        requestId: string;
+        scriptName: string;
+        scriptVersion?: {
+          id?: string;
+          message?: string;
+          tag?: string;
+        };
+        truncated?: boolean;
+        wallTimeMs: number;
+      };
+  dataset: string;
+  source: string | Record<string, any>;
+  /**
+   * @minimum 0
+   */
+  timestamp: number;
+};
+
 export type WorkersAccountSettings = {
   default_usage_model?: string;
   green_compute?: boolean;
@@ -49816,7 +51510,7 @@ export type WorkersApiResponseCommon = {
   errors: WorkersMessages;
   messages: WorkersMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -49832,7 +51526,7 @@ export type WorkersApiResponseCommonFailure = {
   messages: WorkersMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -50484,7 +52178,7 @@ export type WorkersHostname = string;
 export type WorkersId = string;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -50526,7 +52220,11 @@ export type WorkersMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 export type WorkersMigrationStep = {
@@ -50813,25 +52511,25 @@ export type WorkersPlacementStatus = 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'IN
 
 export type WorkersResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -52295,8 +53993,8 @@ export type ZeroTrustGatewayCertificates = {
    * @example -----BEGIN CERTIFICATE-----\nMIIDmDCCAoCgAwIBAgIUKTOAZNjcXVZRj4oQt0SHsl1c1vMwDQYJKoZIhvcNAQELBQAwUTELMAkGA1UEBhMCVVMxFjAUBgNVBAgMDVNhbiBGcmFuY2lzY28xEzARBgNVBAcMCkNhbGlmb3JuaWExFTATBgNVBAoMDEV4YW1wbGUgSW5jLjAgFw0yMjExMjIxNjU5NDdaGA8yMTIyMTAyOTE2NTk0N1owUTELMAkGA1UEBhMCVVMxFjAUBgNVBAgMDVNhbiBGcmFuY2lzY28xEzARBgNVBAcMCkNhbGlmb3JuaWExFTATBgNVBAoMDEV4YW1wbGUgSW5jLjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBAMRcORwgJFTdcG/2GKI+cFYiOBNDKjCZUXEOvXWY42BkH9wxiMT869CO+enA1w5pIrXow6kCM1sQspHHaVmJUlotEMJxyoLFfA/8Kt1EKFyobOjuZs2SwyVyJ2sStvQuUQEosULZCNGZEqoH5g6zhMPxaxm7ZLrrsDZ9maNGVqo7EWLWHrZ57Q/5MtTrbxQL+eXjUmJ9K3kS+3uEwMdqR6Z3BluU1ivanpPc1CN2GNhdO0/hSY4YkGEnuLsqJyDd3cIiB1MxuCBJ4ZaqOd2viV1WcP3oU3dxVPm4MWyfYIldMWB14FahScxLhWdRnM9YZ/i9IFcLypXsuz7DjrJPtPUCAwEAAaNmMGQwHQYDVR0OBBYEFP5JzLUawNF+c3AXsYTEWHh7z2czMB8GA1UdIwQYMBaAFP5JzLUawNF+c3AXsYTEWHh7z2czMA4GA1UdDwEB/wQEAwIBBjASBgNVHRMBAf8ECDAGAQH/AgEBMA0GCSqGSIb3DQEBCwUAA4IBAQBc+Be7NDhpE09y7hLPZGRPl1cSKBw4RI0XIv6rlbSTFs5EebpTGjhx/whNxwEZhB9HZ7111Oa1YlT8xkI9DshB78mjAHCKBAJ76moK8tkG0aqdYpJ4ZcJTVBB7l98Rvgc7zfTii7WemTy72deBbSeiEtXavm4EF0mWjHhQ5Nxpnp00Bqn5g1x8CyTDypgmugnep+xG+iFzNmTdsz7WI9T/7kDMXqB7M/FPWBORyS98OJqNDswCLF8bIZYwUBEe+bRHFomoShMzaC3tvim7WCb16noDkSTMlfKO4pnvKhpcVdSgwcruATV7y+W+Lvmz2OT/Gui4JhqeoTewsxndhDDE\n-----END CERTIFICATE-----\n
    */
   certificate?: string;
-  created_at?: ZeroTrustGatewayTimestamp;
-  expires_on?: ZeroTrustGatewayTimestamp;
+  created_at?: ZeroTrustGatewayReadOnlyTimestamp;
+  expires_on?: ZeroTrustGatewayReadOnlyTimestamp;
   /**
    * The SHA256 fingerprint of the certificate.
    *
@@ -52321,8 +54019,8 @@ export type ZeroTrustGatewayCertificates = {
    */
   issuer_raw?: string;
   type?: ZeroTrustGatewayType;
-  updated_at?: ZeroTrustGatewayTimestamp;
-  uploaded_on?: ZeroTrustGatewayTimestamp;
+  updated_at?: ZeroTrustGatewayReadOnlyTimestamp;
+  uploaded_on?: ZeroTrustGatewayReadOnlyTimestamp;
 };
 
 /**
@@ -52366,7 +54064,7 @@ export type ZeroTrustGatewayComponentsSchemasResponseCollection = ZeroTrustGatew
 };
 
 export type ZeroTrustGatewayComponentsSchemasSingleResponse = ZeroTrustGatewayApiResponseSingle & {
-  result?: ZeroTrustGatewayLocations;
+  result?: ZeroTrustGatewayRules;
 };
 
 /**
@@ -52717,8 +54415,8 @@ export type ZeroTrustGatewayGatewayAccountConfig = ZeroTrustGatewayApiResponseSi
    * Account settings
    */
   result?: ZeroTrustGatewayGatewayAccountSettings & {
-    created_at?: ZeroTrustGatewayTimestamp;
-    updated_at?: ZeroTrustGatewayTimestamp;
+    created_at?: ZeroTrustGatewayReadOnlyTimestamp;
+    updated_at?: ZeroTrustGatewayReadOnlyTimestamp;
   };
 };
 
@@ -52833,7 +54531,7 @@ export type ZeroTrustGatewayIpv6Networks = ZeroTrustGatewayIpv6Network[];
  * The items in the list.
  */
 export type ZeroTrustGatewayItems = {
-  created_at?: ZeroTrustGatewayTimestamp;
+  created_at?: ZeroTrustGatewayReadOnlyTimestamp;
   description?: ZeroTrustGatewayDescriptionItem;
   value?: ZeroTrustGatewayValue;
 }[];
@@ -52869,19 +54567,24 @@ export type ZeroTrustGatewayListItemResponseCollection = ZeroTrustGatewayApiResp
   };
 };
 
+export type ZeroTrustGatewayListSingleResponse = ZeroTrustGatewayApiResponseSingle & {
+  result?: ZeroTrustGatewayLists;
+};
+
 export type ZeroTrustGatewayLists = {
   count?: ZeroTrustGatewayCount;
-  created_at?: ZeroTrustGatewayTimestamp;
+  created_at?: ZeroTrustGatewayReadOnlyTimestamp;
   description?: ZeroTrustGatewayDescription;
   id?: ZeroTrustGatewaySchemasUuid;
+  items?: ZeroTrustGatewayItems;
   name?: ZeroTrustGatewayName;
   type?: ZeroTrustGatewaySchemasType;
-  updated_at?: ZeroTrustGatewayTimestamp;
+  updated_at?: ZeroTrustGatewayReadOnlyTimestamp;
 };
 
 export type ZeroTrustGatewayLocations = {
   client_default?: ZeroTrustGatewayClientDefault;
-  created_at?: ZeroTrustGatewayTimestamp;
+  created_at?: ZeroTrustGatewayReadOnlyTimestamp;
   dns_destination_ips_id?: ZeroTrustGatewayDnsDestinationIpsIdRead;
   dns_destination_ipv6_block_id?: ZeroTrustGatewayDnsDestinationIpv6BlockId;
   doh_subdomain?: ZeroTrustGatewaySubdomain;
@@ -52903,7 +54606,7 @@ export type ZeroTrustGatewayLocations = {
   ipv4_destination_backup?: string;
   name?: ZeroTrustGatewaySchemasName;
   networks?: ZeroTrustGatewayIpv4Networks;
-  updated_at?: ZeroTrustGatewayTimestamp;
+  updated_at?: ZeroTrustGatewayReadOnlyTimestamp;
 };
 
 export type ZeroTrustGatewayMessages = {
@@ -52964,12 +54667,12 @@ export type ZeroTrustGatewayProtocolDetection = {
 export type ZeroTrustGatewayProviderName = string;
 
 export type ZeroTrustGatewayProxyEndpoints = {
-  created_at?: ZeroTrustGatewayTimestamp;
+  created_at?: ZeroTrustGatewayReadOnlyTimestamp;
   id?: ZeroTrustGatewayComponentsSchemasUuid;
   ips?: ZeroTrustGatewayIps;
   name?: ZeroTrustGatewayProxyEndpointsComponentsSchemasName;
   subdomain?: ZeroTrustGatewaySchemasSubdomain;
-  updated_at?: ZeroTrustGatewayTimestamp;
+  updated_at?: ZeroTrustGatewayReadOnlyTimestamp;
 };
 
 /**
@@ -52994,6 +54697,12 @@ export type ZeroTrustGatewayProxyEndpointsComponentsSchemasSingleResponse = Zero
  * @example 1pyl6I1tL7xfJuFYVzXlUW8uXXlpxegHXBzGCBKaSFA=
  */
 export type ZeroTrustGatewayPublicKey = string;
+
+/**
+ * @example 2014-01-01T05:20:00.12345Z
+ * @format date-time
+ */
+export type ZeroTrustGatewayReadOnlyTimestamp = string;
 
 export type ZeroTrustGatewayResponseCollection = ZeroTrustGatewayApiResponseCollection & {
   result?: ZeroTrustGatewayCertificates[];
@@ -53305,6 +55014,10 @@ export type ZeroTrustGatewayRuleSettings = {
    */
   redirect?: {
     /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
+    /**
      * If true, the path and query parameters from the original request will be appended to target_uri
      */
     preserve_path_and_query?: boolean;
@@ -53351,7 +55064,7 @@ export type ZeroTrustGatewayRuleSettings = {
 
 export type ZeroTrustGatewayRules = {
   action?: ZeroTrustGatewayAction;
-  created_at?: ZeroTrustGatewayTimestamp;
+  created_at?: ZeroTrustGatewayReadOnlyTimestamp;
   deleted_at?: ZeroTrustGatewayDeletedAt;
   description?: ZeroTrustGatewaySchemasDescription;
   device_posture?: ZeroTrustGatewayDevicePosture;
@@ -53365,16 +55078,12 @@ export type ZeroTrustGatewayRules = {
   rule_settings?: ZeroTrustGatewayRuleSettings;
   schedule?: ZeroTrustGatewaySchedule;
   traffic?: ZeroTrustGatewayTraffic;
-  updated_at?: ZeroTrustGatewayTimestamp;
+  updated_at?: ZeroTrustGatewayReadOnlyTimestamp;
   version?: ZeroTrustGatewayVersion;
 };
 
 export type ZeroTrustGatewayRulesComponentsSchemasResponseCollection = ZeroTrustGatewayApiResponseCollection & {
   result?: ZeroTrustGatewayRules[];
-};
-
-export type ZeroTrustGatewayRulesComponentsSchemasSingleResponse = ZeroTrustGatewayApiResponseSingle & {
-  result?: ZeroTrustGatewayRules;
 };
 
 /**
@@ -53482,7 +55191,7 @@ export type ZeroTrustGatewaySchemasResponseCollection = ZeroTrustGatewayApiRespo
 };
 
 export type ZeroTrustGatewaySchemasSingleResponse = ZeroTrustGatewayApiResponseSingle & {
-  result?: ZeroTrustGatewayLists;
+  result?: ZeroTrustGatewayLocations;
 };
 
 /**
@@ -53508,10 +55217,10 @@ export type ZeroTrustGatewaySchemasType = 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' 
 export type ZeroTrustGatewaySchemasUuid = string;
 
 export type ZeroTrustGatewaySettings = {
-  created_at?: ZeroTrustGatewayTimestamp;
+  created_at?: ZeroTrustGatewayReadOnlyTimestamp;
   public_key?: ZeroTrustGatewayPublicKey;
   seed_id?: ZeroTrustGatewayAuditSshSettingsComponentsSchemasUuid;
-  updated_at?: ZeroTrustGatewayTimestamp;
+  updated_at?: ZeroTrustGatewayReadOnlyTimestamp;
 };
 
 export type ZeroTrustGatewaySingleResponse = ZeroTrustGatewayApiResponseSingle & {
@@ -53520,13 +55229,13 @@ export type ZeroTrustGatewaySingleResponse = ZeroTrustGatewayApiResponseSingle &
 
 export type ZeroTrustGatewaySingleResponseWithListItems = ZeroTrustGatewayApiResponseSingle & {
   result?: {
-    created_at?: ZeroTrustGatewayTimestamp;
+    created_at?: ZeroTrustGatewayReadOnlyTimestamp;
     description?: ZeroTrustGatewayDescription;
     id?: ZeroTrustGatewaySchemasUuid;
     items?: ZeroTrustGatewayItems;
     name?: ZeroTrustGatewayName;
     type?: ZeroTrustGatewaySchemasType;
-    updated_at?: ZeroTrustGatewayTimestamp;
+    updated_at?: ZeroTrustGatewayReadOnlyTimestamp;
   };
 };
 
@@ -53603,7 +55312,7 @@ export type ZoneActivationApiResponseCommon = {
   errors: ZoneActivationMessages;
   messages: ZoneActivationMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -53619,7 +55328,7 @@ export type ZoneActivationApiResponseCommonFailure = {
   messages: ZoneActivationMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -53629,7 +55338,7 @@ export type ZoneActivationApiResponseCommonFailure = {
 export type ZoneActivationApiResponseSingle = ZoneActivationApiResponseCommon;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -53641,7 +55350,11 @@ export type ZoneActivationMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 export type ZoneAnalyticsApiApiResponseCommon = {
