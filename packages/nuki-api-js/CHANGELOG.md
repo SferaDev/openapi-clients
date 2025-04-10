@@ -1,5 +1,11 @@
 # nuki-api-js
 
+## 0.0.4
+
+### Patch Changes
+
+- d5dedd9: Bump version to 3.7.0
+
 ## 0.0.3
 
 ### Patch Changes
