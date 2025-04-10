@@ -41198,7 +41198,7 @@ export type SpectrumConfigApiResponseCommon = {
   errors: SpectrumConfigMessages;
   messages: SpectrumConfigMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -41214,7 +41214,7 @@ export type SpectrumConfigApiResponseCommonFailure = {
   messages: SpectrumConfigMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -41252,7 +41252,7 @@ export type SpectrumConfigAppConfigSingle = SpectrumConfigApiResponseSingle & {
 };
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -41348,7 +41348,7 @@ export type SpectrumConfigEdgeIps =
     };
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -41368,7 +41368,11 @@ export type SpectrumConfigMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -41441,25 +41445,25 @@ export type SpectrumConfigProxyProtocol = 'off' | 'v1' | 'v2' | 'simple';
 
 export type SpectrumConfigResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -41490,7 +41494,7 @@ export type SpectrumConfigTrafficType = 'direct' | 'http' | 'https';
 export type SpectrumConfigUpdateAppConfig = SpectrumConfigAppConfig | SpectrumConfigPaygoAppConfig;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -51543,72 +51547,34 @@ export type WorkersApiResponseSingle = WorkersApiResponseCommon;
  * A binding to allow the Worker to communicate with resources
  */
 export type WorkersBindingItem =
-  | (Omit<WorkersBindingKindAi, 'type'> & {
-      type: 'ai';
-    })
-  | (Omit<WorkersBindingKindAnalyticsEngine, 'type'> & {
-      type: 'analytics_engine';
-    })
-  | (Omit<WorkersBindingKindAssets, 'type'> & {
-      type: 'assets';
-    })
-  | (Omit<WorkersBindingKindBrowserRendering, 'type'> & {
-      type: 'browser_rendering';
-    })
-  | (Omit<WorkersBindingKindD1, 'type'> & {
-      type: 'd1';
-    })
-  | (Omit<WorkersBindingKindDispatchNamespace, 'type'> & {
-      type: 'dispatch_namespace';
-    })
-  | (Omit<WorkersBindingKindDurableObjectNamespace, 'type'> & {
-      type: 'durable_object_namespace';
-    })
-  | (Omit<WorkersBindingKindHyperdrive, 'type'> & {
-      type: 'hyperdrive';
-    })
-  | (Omit<WorkersBindingKindJson, 'type'> & {
-      type: 'json';
-    })
-  | (Omit<WorkersBindingKindKvNamespace, 'type'> & {
-      type: 'kv_namespace';
-    })
-  | (Omit<WorkersBindingKindMtlsCertificate, 'type'> & {
-      type: 'mtls_certificate';
-    })
-  | (Omit<WorkersBindingKindPlainText, 'type'> & {
-      type: 'plain_text';
-    })
-  | (Omit<WorkersBindingKindQueue, 'type'> & {
-      type: 'queue';
-    })
-  | (Omit<WorkersBindingKindR2Bucket, 'type'> & {
-      type: 'r2_bucket';
-    })
-  | (Omit<WorkersBindingKindSecretText, 'type'> & {
-      type: 'secret_text';
-    })
-  | (Omit<WorkersBindingKindService, 'type'> & {
-      type: 'service';
-    })
-  | (Omit<WorkersBindingKindTailConsumer, 'type'> & {
-      type: 'tail_consumer';
-    })
-  | (Omit<WorkersBindingKindVectorize, 'type'> & {
-      type: 'vectorize';
-    })
-  | (Omit<WorkersBindingKindVersionMetadata, 'type'> & {
-      type: 'version_metadata';
-    });
+  | WorkersBindingKindAi
+  | WorkersBindingKindAnalyticsEngine
+  | WorkersBindingKindAssets
+  | WorkersBindingKindBrowserRendering
+  | WorkersBindingKindD1
+  | WorkersBindingKindDispatchNamespace
+  | WorkersBindingKindDurableObjectNamespace
+  | WorkersBindingKindHyperdrive
+  | WorkersBindingKindJson
+  | WorkersBindingKindKvNamespace
+  | WorkersBindingKindMtlsCertificate
+  | WorkersBindingKindPlainText
+  | WorkersBindingKindQueue
+  | WorkersBindingKindR2Bucket
+  | WorkersBindingKindSecretText
+  | WorkersBindingKindService
+  | WorkersBindingKindTailConsumer
+  | WorkersBindingKindVectorize
+  | WorkersBindingKindVersionMetadata
+  | WorkersBindingKindSecretsStoreSecret
+  | WorkersBindingKindSecretKey;
 
 export type WorkersBindingKindAi = {
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
-   *
-   * @example ai
    */
-  type: WorkersBindingType & 'ai';
+  type: 'ai';
 };
 
 export type WorkersBindingKindAnalyticsEngine = {
@@ -51621,30 +51587,24 @@ export type WorkersBindingKindAnalyticsEngine = {
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
-   *
-   * @example analytics_engine
    */
-  type: WorkersBindingType & 'analytics_engine';
+  type: 'analytics_engine';
 };
 
 export type WorkersBindingKindAssets = {
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
-   *
-   * @example assets
    */
-  type: WorkersBindingType & 'assets';
+  type: 'assets';
 };
 
 export type WorkersBindingKindBrowserRendering = {
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
-   *
-   * @example browser_rendering
    */
-  type: WorkersBindingType & 'browser_rendering';
+  type: 'browser_rendering';
 };
 
 export type WorkersBindingKindD1 = {
@@ -51657,10 +51617,8 @@ export type WorkersBindingKindD1 = {
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
-   *
-   * @example d1
    */
-  type: WorkersBindingType & 'd1';
+  type: 'd1';
 };
 
 export type WorkersBindingKindDispatchNamespace = {
@@ -51695,10 +51653,8 @@ export type WorkersBindingKindDispatchNamespace = {
   };
   /**
    * The kind of resource that the binding provides.
-   *
-   * @example dispatch_namespace
    */
-  type: WorkersBindingType & 'dispatch_namespace';
+  type: 'dispatch_namespace';
 };
 
 export type WorkersBindingKindDurableObjectNamespace = {
@@ -51724,10 +51680,8 @@ export type WorkersBindingKindDurableObjectNamespace = {
   script_name?: string;
   /**
    * The kind of resource that the binding provides.
-   *
-   * @example durable_object_namespace
    */
-  type: WorkersBindingType & 'durable_object_namespace';
+  type: 'durable_object_namespace';
 };
 
 export type WorkersBindingKindHyperdrive = {
@@ -51740,10 +51694,8 @@ export type WorkersBindingKindHyperdrive = {
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
-   *
-   * @example hyperdrive
    */
-  type: WorkersBindingType & 'hyperdrive';
+  type: 'hyperdrive';
 };
 
 export type WorkersBindingKindJson = {
@@ -51756,10 +51708,8 @@ export type WorkersBindingKindJson = {
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
-   *
-   * @example json
    */
-  type: WorkersBindingType & 'json';
+  type: 'json';
 };
 
 export type WorkersBindingKindKvNamespace = {
@@ -51767,10 +51717,8 @@ export type WorkersBindingKindKvNamespace = {
   namespace_id: WorkersNamespaceIdentifier;
   /**
    * The kind of resource that the binding provides.
-   *
-   * @example kv_namespace
    */
-  type: WorkersBindingType & 'kv_namespace';
+  type: 'kv_namespace';
 };
 
 export type WorkersBindingKindMtlsCertificate = {
@@ -51783,10 +51731,8 @@ export type WorkersBindingKindMtlsCertificate = {
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
-   *
-   * @example mtls_certificate
    */
-  type: WorkersBindingType & 'mtls_certificate';
+  type: 'mtls_certificate';
 };
 
 export type WorkersBindingKindPlainText = {
@@ -51799,10 +51745,8 @@ export type WorkersBindingKindPlainText = {
   text: string;
   /**
    * The kind of resource that the binding provides.
-   *
-   * @example plain_text
    */
-  type: WorkersBindingType & 'plain_text';
+  type: 'plain_text';
 };
 
 export type WorkersBindingKindQueue = {
@@ -51815,10 +51759,8 @@ export type WorkersBindingKindQueue = {
   queue_name: string;
   /**
    * The kind of resource that the binding provides.
-   *
-   * @example queue
    */
-  type: WorkersBindingType & 'queue';
+  type: 'queue';
 };
 
 export type WorkersBindingKindR2Bucket = {
@@ -51831,10 +51773,45 @@ export type WorkersBindingKindR2Bucket = {
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
-   *
-   * @example r2_bucket
    */
-  type: WorkersBindingType & 'r2_bucket';
+  type: 'r2_bucket';
+};
+
+export type WorkersBindingKindSecretKey = {
+  /**
+   * Algorithm-specific key parameters ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm)).
+   */
+  algorithm: Record<string, any>;
+  /**
+   * Data format of the key ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format)).
+   *
+   * @example raw
+   */
+  format: 'raw' | 'pkcs8' | 'spki' | 'jwk';
+  /**
+   * Base64-encoded key data. Required if `format` is "raw", "pkcs8", or "spki".
+   *
+   * @x-sensitive true
+   */
+  key_base64?: string;
+  /**
+   * Key data in [JSON Web Key](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#json_web_key) format. Required if `format` is "jwk".
+   *
+   * @x-sensitive true
+   */
+  key_jwk?: Record<string, any>;
+  name: WorkersBindingName;
+  /**
+   * The kind of resource that the binding provides.
+   */
+  type: 'secret_key';
+  /**
+   * Allowed operations with the key ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages)).
+   *
+   * @example encrypt
+   * @example decrypt
+   */
+  usages: ('encrypt' | 'decrypt' | 'sign' | 'verify' | 'deriveKey' | 'deriveBits' | 'wrapKey' | 'unwrapKey')[];
 };
 
 export type WorkersBindingKindSecretText = {
@@ -51848,10 +51825,28 @@ export type WorkersBindingKindSecretText = {
   text: string;
   /**
    * The kind of resource that the binding provides.
-   *
-   * @example secret_text
    */
-  type: WorkersBindingType & 'secret_text';
+  type: 'secret_text';
+};
+
+export type WorkersBindingKindSecretsStoreSecret = {
+  name: WorkersBindingName;
+  /**
+   * Name of the secret in the store.
+   *
+   * @example my_secret
+   */
+  secret_name: string;
+  /**
+   * ID of the store containing the secret.
+   *
+   * @example 8c8b1387108e49be85669169793e7bd2
+   */
+  store_id: string;
+  /**
+   * The kind of resource that the binding provides.
+   */
+  type: 'secrets_store_secret';
 };
 
 export type WorkersBindingKindService = {
@@ -51870,10 +51865,8 @@ export type WorkersBindingKindService = {
   service: string;
   /**
    * The kind of resource that the binding provides.
-   *
-   * @example service
    */
-  type: WorkersBindingType & 'service';
+  type: 'service';
 };
 
 export type WorkersBindingKindTailConsumer = {
@@ -51886,10 +51879,8 @@ export type WorkersBindingKindTailConsumer = {
   service: string;
   /**
    * The kind of resource that the binding provides.
-   *
-   * @example tail_consumer
    */
-  type: WorkersBindingType & 'tail_consumer';
+  type: 'tail_consumer';
 };
 
 export type WorkersBindingKindVectorize = {
@@ -51902,20 +51893,16 @@ export type WorkersBindingKindVectorize = {
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
-   *
-   * @example vectorize
    */
-  type: WorkersBindingType & 'vectorize';
+  type: 'vectorize';
 };
 
 export type WorkersBindingKindVersionMetadata = {
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
-   *
-   * @example version_metadata
    */
-  type: WorkersBindingType & 'version_metadata';
+  type: 'version_metadata';
 };
 
 /**
@@ -51924,30 +51911,6 @@ export type WorkersBindingKindVersionMetadata = {
  * @example myBinding
  */
 export type WorkersBindingName = string;
-
-/**
- * The kind of resource that the binding provides.
- */
-export type WorkersBindingType =
-  | 'ai'
-  | 'analytics_engine'
-  | 'assets'
-  | 'browser_rendering'
-  | 'd1'
-  | 'dispatch_namespace'
-  | 'durable_object_namespace'
-  | 'hyperdrive'
-  | 'json'
-  | 'kv_namespace'
-  | 'mtls_certificate'
-  | 'plain_text'
-  | 'queue'
-  | 'r2_bucket'
-  | 'secret_text'
-  | 'service'
-  | 'tail_consumer'
-  | 'vectorize'
-  | 'version_metadata';
 
 /**
  * List of bindings attached to a Worker. You can find more about bindings on our docs: https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
@@ -52488,6 +52451,13 @@ export type WorkersPattern = string;
  * Configuration for [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
  */
 export type WorkersPlacementInfo = {
+  /**
+   * The last time the script was analyzed for [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   *
+   * @example 2025-01-01T00:00:00Z
+   * @format date-time
+   */
+  last_analyzed_at?: string;
   mode?: WorkersPlacementMode;
   status?: WorkersPlacementStatus;
 };
@@ -52685,42 +52655,10 @@ export type WorkersScriptCount = number;
  */
 export type WorkersScriptName = string;
 
-export type WorkersSecret = {
-  /**
-   * The name of this secret, this is what will be used to access it inside the Worker.
-   *
-   * @example MY_SECRET
-   */
-  name?: string;
-  /**
-   * The value of the secret.
-   *
-   * @example eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
-   * @x-sensitive true
-   */
-  text?: string;
-  /**
-   * The type of secret to put.
-   *
-   * @example secret_text
-   */
-  type?: 'secret_text';
-};
-
-export type WorkersSecretResponse = {
-  /**
-   * The name of this secret, this is what will be used to access it inside the Worker.
-   *
-   * @example MY_SECRET
-   */
-  name?: string;
-  /**
-   * The type of secret.
-   *
-   * @example secret_text
-   */
-  type?: 'secret_text';
-};
+/**
+ * A secret value accessible through a binding.
+ */
+export type WorkersSecret = WorkersBindingKindSecretText | WorkersBindingKindSecretKey;
 
 /**
  * A JavaScript variable name for the secret binding.
