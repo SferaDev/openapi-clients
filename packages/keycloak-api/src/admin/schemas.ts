@@ -123,6 +123,7 @@ export type AddressClaimSet = {
 };
 
 export type AdminEventRepresentation = {
+  id?: string;
   /**
    * @format int64
    */
@@ -666,6 +667,7 @@ export type CredentialRepresentation = {
    * @deprecated true
    */
   config?: MultivaluedHashMapStringString;
+  federationLink?: string;
 };
 
 export type DecisionEffect = 'DENY' | 'PERMIT';
@@ -674,15 +676,33 @@ export type DecisionStrategy = 'AFFIRMATIVE' | 'CONSENSUS' | 'UNANIMOUS';
 
 export type EnforcementMode = 'DISABLED' | 'ENFORCING' | 'PERMISSIVE';
 
+export type ErrorRepresentation = {
+  field?: string;
+  errorMessage?: string;
+  params?: any[];
+  errors?: ErrorRepresentation[];
+};
+
 export type EvaluationResultRepresentation = {
   resource?: ResourceRepresentation;
   scopes?: ScopeRepresentation[];
+  /**
+   * @uniqueItems true
+   */
   policies?: PolicyResultRepresentation[];
   status?: DecisionEffect;
+  /**
+   * @uniqueItems true
+   */
   allowedScopes?: ScopeRepresentation[];
+  /**
+   * @uniqueItems true
+   */
+  deniedScopes?: ScopeRepresentation[];
 };
 
 export type EventRepresentation = {
+  id?: string;
   /**
    * @format int64
    */
@@ -1158,6 +1178,7 @@ export type PolicyEvaluationRequest = {
     };
   };
   resources?: ResourceRepresentation[];
+  resourceType?: string;
   clientId?: string;
   userId?: string;
   roleIds?: string[];
@@ -1219,6 +1240,7 @@ export type PolicyResultRepresentation = {
    * @uniqueItems true
    */
   scopes?: string[];
+  resourceType?: string;
 };
 
 export type PropertyConfig = {
@@ -1687,6 +1709,10 @@ export type ResourceType = {
    * @uniqueItems true
    */
   scopes?: string[];
+  scopeAliases?: {
+    [key: string]: string[];
+  };
+  groupType?: string;
 };
 
 export type RoleRepresentation = {

@@ -129,8 +129,18 @@ export type GetAdminRealmsRealmAdminEventsQueryParams = {
    * user id
    */
   authUser?: string;
+  /**
+   * From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp
+   */
   dateFrom?: string;
+  /**
+   * To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp
+   */
   dateTo?: string;
+  /**
+   * The direction to sort events by (asc or desc)
+   */
+  direction?: string;
   /**
    * @format int32
    */
@@ -3789,6 +3799,7 @@ export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPermissionQue
   permission?: boolean;
   policyId?: string;
   resource?: string;
+  resourceType?: string;
   scope?: string;
   type?: string;
 };
@@ -4001,6 +4012,7 @@ export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPolicyQueryPa
   permission?: boolean;
   policyId?: string;
   resource?: string;
+  resourceType?: string;
   scope?: string;
   type?: string;
 };
@@ -5524,6 +5536,7 @@ export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAcc
 };
 
 export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleAccessTokenQueryParams = {
+  audience?: string;
   scope?: string;
   userId?: string;
 };
@@ -5566,6 +5579,7 @@ export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdT
 };
 
 export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleIdTokenQueryParams = {
+  audience?: string;
   scope?: string;
   userId?: string;
 };
@@ -5615,10 +5629,6 @@ export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUse
 export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoError =
   Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoResponse = {
-  [key: string]: any;
-};
-
 export type GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoVariables = {
   pathParams: GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoPathParams;
   queryParams?: GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoQueryParams;
@@ -5629,7 +5639,7 @@ export const getAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUs
   signal?: AbortSignal
 ) =>
   fetch<
-    GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoResponse,
+    Record<string, any>,
     GetAdminRealmsRealmClientsClientUuidEvaluateScopesGenerateExampleUserinfoError,
     undefined,
     {},
@@ -6900,7 +6910,7 @@ export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsQueryParams =
 
 export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsResponse = Schemas.GroupRepresentation[];
+export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsResponse = Schemas.UserRepresentation[];
 
 export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsVariables = {
   pathParams: GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsPathParams;
@@ -8099,13 +8109,17 @@ export type GetAdminRealmsRealmEventsQueryParams = {
    */
   client?: string;
   /**
-   * From date
+   * From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp
    */
   dateFrom?: string;
   /**
-   * To date
+   * To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp
    */
   dateTo?: string;
+  /**
+   * The direction to sort events by (asc or desc)
+   */
+  direction?: string;
   /**
    * Paging offset
    *
@@ -9884,9 +9898,9 @@ export type GetAdminRealmsRealmOrganizationsPathParams = {
 
 export type GetAdminRealmsRealmOrganizationsQueryParams = {
   /**
-   * if true, return the full representation. Otherwise, only the basic fields are returned.
+   * if false, return the full representation. Otherwise, only the basic fields are returned.
    *
-   * @default false
+   * @default true
    */
   briefRepresentation?: boolean;
   /**
@@ -10515,7 +10529,7 @@ export const postAdminRealmsRealmPartialExport = (
   signal?: AbortSignal
 ) =>
   fetch<
-    undefined,
+    Schemas.RealmRepresentation,
     PostAdminRealmsRealmPartialExportError,
     undefined,
     {},
@@ -10541,12 +10555,14 @@ export const postAdminRealmsRealmPartialImport = (
   variables: PostAdminRealmsRealmPartialImportVariables,
   signal?: AbortSignal
 ) =>
-  fetch<undefined, PostAdminRealmsRealmPartialImportError, Blob, {}, {}, PostAdminRealmsRealmPartialImportPathParams>({
-    url: '/admin/realms/{realm}/partialImport',
-    method: 'post',
-    ...variables,
-    signal
-  });
+  fetch<
+    Record<string, any>,
+    PostAdminRealmsRealmPartialImportError,
+    Blob,
+    {},
+    {},
+    PostAdminRealmsRealmPartialImportPathParams
+  >({ url: '/admin/realms/{realm}/partialImport', method: 'post', ...variables, signal });
 
 export type PostAdminRealmsRealmPushRevocationPathParams = {
   /**
@@ -11251,7 +11267,7 @@ export type GetAdminRealmsRealmRolesRoleNameGroupsQueryParams = {
 
 export type GetAdminRealmsRealmRolesRoleNameGroupsError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetAdminRealmsRealmRolesRoleNameGroupsResponse = Schemas.GroupRepresentation[];
+export type GetAdminRealmsRealmRolesRoleNameGroupsResponse = Schemas.UserRepresentation[];
 
 export type GetAdminRealmsRealmRolesRoleNameGroupsVariables = {
   pathParams: GetAdminRealmsRealmRolesRoleNameGroupsPathParams;
@@ -12444,7 +12460,10 @@ export type PostAdminRealmsRealmUsersUserIdImpersonationPathParams = {
   userId: string;
 };
 
-export type PostAdminRealmsRealmUsersUserIdImpersonationError = Fetcher.ErrorWrapper<undefined>;
+export type PostAdminRealmsRealmUsersUserIdImpersonationError = Fetcher.ErrorWrapper<{
+  status: 400;
+  payload: Schemas.ErrorRepresentation;
+}>;
 
 export type PostAdminRealmsRealmUsersUserIdImpersonationResponse = {
   [key: string]: any;
