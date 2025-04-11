@@ -45171,7 +45171,7 @@ export type TlsCertificatesAndHostnamesApiResponseCommon = {
   errors: TlsCertificatesAndHostnamesMessages;
   messages: TlsCertificatesAndHostnamesMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -45187,7 +45187,7 @@ export type TlsCertificatesAndHostnamesApiResponseCommonFailure = {
   messages: TlsCertificatesAndHostnamesMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -46088,7 +46088,7 @@ export type TlsCertificatesAndHostnamesHostnames = string[];
 export type TlsCertificatesAndHostnamesHosts = string[];
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -46159,7 +46159,11 @@ export type TlsCertificatesAndHostnamesMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -46439,25 +46443,25 @@ export type TlsCertificatesAndHostnamesRequestedValidity = 7 | 30 | 90 | 365 | 7
 
 export type TlsCertificatesAndHostnamesResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -54575,6 +54579,10 @@ export type ZeroTrustGatewayNotificationSettings = {
    */
   enabled?: boolean;
   /**
+   * If true, context information will be passed as query parameters
+   */
+  include_context?: boolean;
+  /**
    * Customize the message shown in the notification.
    */
   msg?: string;
@@ -54784,6 +54792,21 @@ export type ZeroTrustGatewayRuleSettings = {
     version?: 'v1' | 'v2';
   };
   /**
+   * Custom block page settings. If missing/null, blocking will use the the account settings.
+   */
+  block_page?: {
+    /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
+    /**
+     * URI to which the user will be redirected
+     *
+     * @format uri
+     */
+    target_uri: string;
+  };
+  /**
    * Enable the custom block page.
    *
    * @example true
@@ -54895,6 +54918,10 @@ export type ZeroTrustGatewayRuleSettings = {
      * Set notification on
      */
     enabled?: boolean;
+    /**
+     * If true, context information will be passed as query parameters
+     */
+    include_context?: boolean;
     /**
      * Customize the message shown in the notification.
      */
