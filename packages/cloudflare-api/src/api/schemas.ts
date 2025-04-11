@@ -40956,7 +40956,7 @@ export type SpectrumAnalyticsApiResponseCommon = {
   errors: SpectrumAnalyticsMessages;
   messages: SpectrumAnalyticsMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -40972,7 +40972,7 @@ export type SpectrumAnalyticsApiResponseCommonFailure = {
   messages: SpectrumAnalyticsMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -41025,7 +41025,7 @@ export type SpectrumAnalyticsDimensions = ('event' | 'appID' | 'coloName' | 'ipV
 export type SpectrumAnalyticsFilters = string;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -41037,7 +41037,11 @@ export type SpectrumAnalyticsMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -41082,7 +41086,7 @@ export type SpectrumAnalyticsQuery = {
 export type SpectrumAnalyticsQueryResponseAggregate = SpectrumAnalyticsApiResponseSingle & {
   result?: {
     /**
-     * Identifier
+     * Identifier.
      *
      * @example 023e105f4ecef8ad9ca31a8372d0c353
      * @maxLength 32
