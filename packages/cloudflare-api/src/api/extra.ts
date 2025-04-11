@@ -195,6 +195,7 @@ import {
   workersAiPostRunCfFacebookDetrResnet50,
   workersAiPostRunCfFblgitUnaCybertron7bV2Bf16,
   workersAiPostRunCfGoogleGemma2bItLora,
+  workersAiPostRunCfGoogleGemma312bIt,
   workersAiPostRunCfGoogleGemma7bItLora,
   workersAiPostRunCfHuggingfaceDistilbertSst2Int8,
   workersAiPostRunCfLykonDreamshaper8Lcm,
@@ -214,7 +215,6 @@ import {
   workersAiPostRunCfMetaLlama3211bVisionInstruct,
   workersAiPostRunCfMetaLlama321bInstruct,
   workersAiPostRunCfMetaLlama323bInstruct,
-  workersAiPostRunCfMetaLlama3370bInstructFp8Fast,
   workersAiPostRunCfMetaLlama4Scout17b16eInstruct,
   workersAiPostRunCfMetaLlamaGuard38b,
   workersAiPostRunCfMetaM2m10012b,
@@ -222,6 +222,7 @@ import {
   workersAiPostRunCfMicrosoftResnet50,
   workersAiPostRunCfMistralMistral7bInstructV01,
   workersAiPostRunCfMistralMistral7bInstructV02Lora,
+  workersAiPostRunCfMistralaiMistralSmall3124bInstruct,
   workersAiPostRunCfMyshellAiMelotts,
   workersAiPostRunCfOpenaiWhisper,
   workersAiPostRunCfOpenaiWhisperLargeV3Turbo,
@@ -231,6 +232,8 @@ import {
   workersAiPostRunCfQwenQwen1518bChat,
   workersAiPostRunCfQwenQwen1514bChatAwq,
   workersAiPostRunCfQwenQwen157bChatAwq,
+  workersAiPostRunCfQwenQwen25Coder32bInstruct,
+  workersAiPostRunCfQwenQwq32b,
   workersAiPostRunCfRunwaymlStableDiffusionV15Img2img,
   workersAiPostRunCfRunwaymlStableDiffusionV15Inpainting,
   workersAiPostRunCfStabilityaiStableDiffusionXlBase10,
@@ -2206,6 +2209,7 @@ export const operationsByPath = {
   'POST /accounts/{account_id}/ai/run/@cf/fblgit/una-cybertron-7b-v2-bf16':
     workersAiPostRunCfFblgitUnaCybertron7bV2Bf16,
   'POST /accounts/{account_id}/ai/run/@cf/google/gemma-2b-it-lora': workersAiPostRunCfGoogleGemma2bItLora,
+  'POST /accounts/{account_id}/ai/run/@cf/google/gemma-3-12b-it': workersAiPostRunCfGoogleGemma312bIt,
   'POST /accounts/{account_id}/ai/run/@cf/google/gemma-7b-it-lora': workersAiPostRunCfGoogleGemma7bItLora,
   'POST /accounts/{account_id}/ai/run/@cf/huggingface/distilbert-sst-2-int8':
     workersAiPostRunCfHuggingfaceDistilbertSst2Int8,
@@ -2229,8 +2233,6 @@ export const operationsByPath = {
     workersAiPostRunCfMetaLlama3211bVisionInstruct,
   'POST /accounts/{account_id}/ai/run/@cf/meta/llama-3.2-1b-instruct': workersAiPostRunCfMetaLlama321bInstruct,
   'POST /accounts/{account_id}/ai/run/@cf/meta/llama-3.2-3b-instruct': workersAiPostRunCfMetaLlama323bInstruct,
-  'POST /accounts/{account_id}/ai/run/@cf/meta/llama-3.3-70b-instruct-fp8-fast':
-    workersAiPostRunCfMetaLlama3370bInstructFp8Fast,
   'POST /accounts/{account_id}/ai/run/@cf/meta/llama-4-scout-17b-16e-instruct':
     workersAiPostRunCfMetaLlama4Scout17b16eInstruct,
   'POST /accounts/{account_id}/ai/run/@cf/meta/llama-guard-3-8b': workersAiPostRunCfMetaLlamaGuard38b,
@@ -2241,6 +2243,8 @@ export const operationsByPath = {
     workersAiPostRunCfMistralMistral7bInstructV01,
   'POST /accounts/{account_id}/ai/run/@cf/mistral/mistral-7b-instruct-v0.2-lora':
     workersAiPostRunCfMistralMistral7bInstructV02Lora,
+  'POST /accounts/{account_id}/ai/run/@cf/mistralai/mistral-small-3.1-24b-instruct':
+    workersAiPostRunCfMistralaiMistralSmall3124bInstruct,
   'POST /accounts/{account_id}/ai/run/@cf/myshell-ai/melotts': workersAiPostRunCfMyshellAiMelotts,
   'POST /accounts/{account_id}/ai/run/@cf/openai/whisper': workersAiPostRunCfOpenaiWhisper,
   'POST /accounts/{account_id}/ai/run/@cf/openai/whisper-large-v3-turbo': workersAiPostRunCfOpenaiWhisperLargeV3Turbo,
@@ -2250,6 +2254,9 @@ export const operationsByPath = {
   'POST /accounts/{account_id}/ai/run/@cf/qwen/qwen1.5-1.8b-chat': workersAiPostRunCfQwenQwen1518bChat,
   'POST /accounts/{account_id}/ai/run/@cf/qwen/qwen1.5-14b-chat-awq': workersAiPostRunCfQwenQwen1514bChatAwq,
   'POST /accounts/{account_id}/ai/run/@cf/qwen/qwen1.5-7b-chat-awq': workersAiPostRunCfQwenQwen157bChatAwq,
+  'POST /accounts/{account_id}/ai/run/@cf/qwen/qwen2.5-coder-32b-instruct':
+    workersAiPostRunCfQwenQwen25Coder32bInstruct,
+  'POST /accounts/{account_id}/ai/run/@cf/qwen/qwq-32b': workersAiPostRunCfQwenQwq32b,
   'POST /accounts/{account_id}/ai/run/@cf/runwayml/stable-diffusion-v1-5-img2img':
     workersAiPostRunCfRunwaymlStableDiffusionV15Img2img,
   'POST /accounts/{account_id}/ai/run/@cf/runwayml/stable-diffusion-v1-5-inpainting':
