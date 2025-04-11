@@ -12398,6 +12398,7 @@ export type CacheZoneIdentifier = void & void & CacheIdentifier;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type CallsAccountIdentifier = string;
 
@@ -12475,6 +12476,7 @@ export type CallsCreated = string;
  * @example 2a95132c15732412d22c1476fa83f27a
  * @maxLength 32
  * @minLength 32
+ * @x-auditable true
  */
 export type CallsIdentifier = string;
 
@@ -12503,6 +12505,7 @@ export type CallsModified = string;
  *
  * @default
  * @example production-realtime-app
+ * @x-auditable true
  */
 export type CallsName = string;
 
@@ -12539,6 +12542,7 @@ export type CallsTurnKeyEditableFields = {
  *
  * @default
  * @example my-turn-key
+ * @x-auditable true
  */
 export type CallsTurnKeyName = string;
 
@@ -41678,6 +41682,7 @@ export type StreamAccessRules = {
    * The action to take when a request matches a rule. If the action is `block`, the signed token blocks views for viewers matching the rule.
    *
    * @example allow
+   * @x-auditable true
    */
   action?: 'allow' | 'block';
   /**
@@ -41692,6 +41697,7 @@ export type StreamAccessRules = {
    * Lists available rule types to match for requests. An `any` type matches all requests and can be used as a wildcard to apply default actions after other rules.
    *
    * @example ip.src
+   * @x-auditable true
    */
   type?: 'any' | 'ip.src' | 'ip.geoip.country';
 };
@@ -41701,6 +41707,7 @@ export type StreamAccessRules = {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type StreamAccountIdentifier = string;
 
@@ -41763,6 +41770,7 @@ export type StreamAsc = boolean;
  * Denotes whether the audio track will be played by default in a player.
  *
  * @default false
+ * @x-auditable true
  */
 export type StreamAudioDefault = boolean;
 
@@ -41771,6 +41779,7 @@ export type StreamAudioDefault = boolean;
  *
  * @example ea95132c15732412d22c1476fa83f27a
  * @maxLength 32
+ * @x-auditable true
  */
 export type StreamAudioIdentifier = string;
 
@@ -41778,11 +41787,14 @@ export type StreamAudioIdentifier = string;
  * A string to uniquely identify the track amongst other audio track labels for the specified video.
  *
  * @example director commentary
+ * @x-auditable true
  */
 export type StreamAudioLabel = string;
 
 /**
  * Specifies the processing status of the video.
+ *
+ * @x-auditable true
  */
 export type StreamAudioState = 'queued' | 'ready' | 'error';
 
@@ -41791,12 +41803,15 @@ export type StreamCaptionBasicUpload = {
    * The WebVTT file containing the caption or subtitle content.
    *
    * @example @/Users/kyle/Desktop/tr.vtt
+   * @x-auditable true
    */
   file: string;
 };
 
 /**
  * The status of a generated caption.
+ *
+ * @x-auditable true
  */
 export type StreamCaptionStatus = 'ready' | 'inprogress' | 'error';
 
@@ -41816,6 +41831,7 @@ export type StreamClipResponseSingle = StreamApiResponseCommon & {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type StreamClippedFromVideoUid = string;
 
@@ -41852,6 +41868,7 @@ export type StreamCopyAudioTrack = {
    *
    * @example https://www.examplestorage.com/audio_file.mp3
    * @format uri
+   * @x-auditable true
    */
   url?: string;
 };
@@ -41874,6 +41891,7 @@ export type StreamCreateOutputRequest = {
  *
  * @example 2014-01-02T02:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type StreamCreated = string;
 
@@ -41882,6 +41900,7 @@ export type StreamCreated = string;
  *
  * @example creator-id_abcde12345
  * @maxLength 64
+ * @x-auditable true
  */
 export type StreamCreator = string;
 
@@ -41901,6 +41920,7 @@ export type StreamDirectUploadRequest = {
    * @default Now + 30 minutes
    * @example 2021-01-02T02:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   expiry?: string;
   maxDurationSeconds: StreamMaxDurationSeconds;
@@ -41930,6 +41950,7 @@ export type StreamDirectUploadResponse = StreamApiResponseSingle & {
  *
  * @default false
  * @example true
+ * @x-auditable true
  */
 export type StreamDirectUser = boolean;
 
@@ -41937,6 +41958,7 @@ export type StreamDirectUser = boolean;
  * The source URL for a downloaded image. If the watermark profile was created via direct upload, this field is null.
  *
  * @example https://company.com/logo.png
+ * @x-auditable true
  */
 export type StreamDownloadedFrom = string;
 
@@ -41946,6 +41968,8 @@ export type StreamDownloadsResponse = StreamApiResponseSingle & {
 
 /**
  * The duration of the video in seconds. A value of `-1` means the duration is unknown. The duration becomes available after the upload and before the video is ready.
+ *
+ * @x-auditable true
  */
 export type StreamDuration = number;
 
@@ -41964,6 +41988,8 @@ export type StreamEnd = string;
 
 /**
  * Specifies the end time for the video clip in seconds.
+ *
+ * @x-auditable true
  */
 export type StreamEndTimeSeconds = number;
 
@@ -41971,6 +41997,7 @@ export type StreamEndTimeSeconds = number;
  * Specifies why the video failed to encode. This field is empty if the video is not in an `error` state. Preferred for programmatic use.
  *
  * @example ERR_NON_VIDEO
+ * @x-auditable true
  */
 export type StreamErrorReasonCode = string;
 
@@ -41978,6 +42005,7 @@ export type StreamErrorReasonCode = string;
  * Specifies why the video failed to encode using a human readable error message in English. This field is empty if the video is not in an `error` state.
  *
  * @example The file was not recognized as a valid video file.
+ * @x-auditable true
  */
 export type StreamErrorReasonText = string;
 
@@ -41985,11 +42013,14 @@ export type StreamErrorReasonText = string;
  * Whether the caption was generated via AI.
  *
  * @example true
+ * @x-auditable true
  */
 export type StreamGeneratedCaption = boolean;
 
 /**
  * The height of the image in pixels.
+ *
+ * @x-auditable true
  */
 export type StreamHeight = number;
 
@@ -41998,6 +42029,7 @@ export type StreamHeight = number;
  *
  * @example ea95132c15732412d22c1476fa83f27a
  * @maxLength 32
+ * @x-auditable true
  */
 export type StreamIdentifier = string;
 
@@ -42012,10 +42044,14 @@ export type StreamIncludeCounts = boolean;
 export type StreamInput = {
   /**
    * The video height in pixels. A value of `-1` means the height is unknown. The value becomes available after the upload and before the video is ready.
+   *
+   * @x-auditable true
    */
   height?: number;
   /**
    * The video width in pixels. A value of `-1` means the width is unknown. The value becomes available after the upload and before the video is ready.
+   *
+   * @x-auditable true
    */
   width?: number;
 };
@@ -42040,6 +42076,7 @@ export type StreamInputRtmpsStreamKey = string;
  * The RTMPS URL you provide to the broadcaster, which they stream live video to.
  *
  * @example rtmps://live.cloudflare.com:443/live/
+ * @x-sensitive true
  */
 export type StreamInputRtmpsUrl = string;
 
@@ -42056,6 +42093,7 @@ export type StreamInputSrt = {
  * The identifier of the live input to use when streaming via SRT.
  *
  * @example f256e6ea9341d51eea64c9454659e576
+ * @x-auditable true
  */
 export type StreamInputSrtStreamId = string;
 
@@ -42071,6 +42109,7 @@ export type StreamInputSrtStreamPassphrase = string;
  * The SRT URL you provide to the broadcaster, which they stream live video to.
  *
  * @example srt://live.cloudflare.com:778
+ * @x-sensitive true
  */
 export type StreamInputSrtUrl = string;
 
@@ -42085,6 +42124,7 @@ export type StreamInputWebrtc = {
  * The WebRTC URL you provide to the broadcaster, which they stream live video to.
  *
  * @example https://customer-m033z5x00ks6nunl.cloudflarestream.com/b236bde30eb07b9d01318940e5fc3edake34a3efb3896e18f2dc277ce6cc993ad/webRTC/publish
+ * @x-sensitive true
  */
 export type StreamInputWebrtcUrl = string;
 
@@ -42118,6 +42158,7 @@ export type StreamKeys = {
  * The language label displayed in the native language to users.
  *
  * @example Türkçe
+ * @x-auditable true
  */
 export type StreamLabel = string;
 
@@ -42125,6 +42166,7 @@ export type StreamLabel = string;
  * The language tag in BCP 47 format.
  *
  * @example tr
+ * @x-auditable true
  */
 export type StreamLanguage = string;
 
@@ -42145,6 +42187,7 @@ export type StreamListAudioTrackResponse = StreamApiResponseCommon & {
  *
  * @example fc0a8dc887b16759bfd9ad922230a014
  * @maxLength 32
+ * @x-auditable true
  */
 export type StreamLiveInput = string;
 
@@ -42153,11 +42196,14 @@ export type StreamLiveInput = string;
  *
  * @example 2014-01-02T02:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type StreamLiveInputCreated = string;
 
 /**
  * Sets the creator ID asssociated with this live input.
+ *
+ * @x-auditable true
  */
 export type StreamLiveInputDefaultCreator = string;
 
@@ -42166,6 +42212,7 @@ export type StreamLiveInputDefaultCreator = string;
  *
  * @example 66be4bf738797e01e1fca35a7bdecdcd
  * @maxLength 32
+ * @x-auditable true
  */
 export type StreamLiveInputIdentifier = string;
 
@@ -42181,6 +42228,7 @@ export type StreamLiveInputMetadata = Record<string, any>;
  *
  * @example 2014-01-02T02:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type StreamLiveInputModified = string;
 
@@ -42204,6 +42252,7 @@ export type StreamLiveInputRecordingAllowedOrigins = string[];
  *
  * @example 45
  * @minimum 30
+ * @x-auditable true
  */
 export type StreamLiveInputRecordingDeletion = number;
 
@@ -42212,6 +42261,7 @@ export type StreamLiveInputRecordingDeletion = number;
  *
  * @default false
  * @example true
+ * @x-auditable true
  */
 export type StreamLiveInputRecordingHideLiveViewerCount = boolean;
 
@@ -42220,6 +42270,7 @@ export type StreamLiveInputRecordingHideLiveViewerCount = boolean;
  *
  * @default off
  * @example automatic
+ * @x-auditable true
  */
 export type StreamLiveInputRecordingMode = 'off' | 'automatic';
 
@@ -42228,6 +42279,7 @@ export type StreamLiveInputRecordingMode = 'off' | 'automatic';
  *
  * @default false
  * @example true
+ * @x-auditable true
  */
 export type StreamLiveInputRecordingRequireSignedURLs = boolean;
 
@@ -42248,6 +42300,7 @@ export type StreamLiveInputRecordingSettings = {
  * Determines the amount of time a live input configured in `automatic` mode should wait before a recording transitions from live to on-demand. `0` is recommended for most use cases and indicates the platform default should be used.
  *
  * @default 0
+ * @x-auditable true
  */
 export type StreamLiveInputRecordingTimeoutSeconds = number;
 
@@ -42275,6 +42328,8 @@ export type StreamLiveInputResponseSingle = StreamApiResponseSingle & {
 
 /**
  * The connection status of a live input.
+ *
+ * @x-auditable true
  */
 export type StreamLiveInputStatus =
   | any
@@ -42293,6 +42348,7 @@ export type StreamLiveInputStatus =
  *
  * @maximum 21600
  * @minimum 1
+ * @x-auditable true
  */
 export type StreamMaxDurationSeconds = number;
 
@@ -42307,6 +42363,7 @@ export type StreamMediaMetadata = Record<string, any>;
  * Specifies the processing status for all quality levels for a video.
  *
  * @example inprogress
+ * @x-auditable true
  */
 export type StreamMediaState = 'pendingupload' | 'downloading' | 'queued' | 'inprogress' | 'ready' | 'error';
 
@@ -42337,6 +42394,7 @@ export type StreamMessages = {
  *
  * @example 2014-01-02T02:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type StreamModified = string;
 
@@ -42345,6 +42403,7 @@ export type StreamModified = string;
  *
  * @default
  * @example Marketing Videos
+ * @x-auditable true
  */
 export type StreamName = string;
 
@@ -42353,6 +42412,7 @@ export type StreamName = string;
  *
  * @example https://example.com
  * @format uri
+ * @x-auditable true
  */
 export type StreamNotificationUrl = string;
 
@@ -42361,6 +42421,7 @@ export type StreamNotificationUrl = string;
  *
  * @example 2014-01-02T02:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type StreamOneTimeUploadExpiry = string;
 
@@ -42371,6 +42432,7 @@ export type StreamOneTimeUploadExpiry = string;
  * @example 0.75
  * @maximum 1
  * @minimum 0
+ * @x-auditable true
  */
 export type StreamOpacity = number;
 
@@ -42386,6 +42448,7 @@ export type StreamOutput = {
  *
  * @default true
  * @example true
+ * @x-auditable true
  */
 export type StreamOutputEnabled = boolean;
 
@@ -42394,6 +42457,7 @@ export type StreamOutputEnabled = boolean;
  *
  * @example baea4d9c515887b80289d5c33cf01145
  * @maxLength 32
+ * @x-auditable true
  */
 export type StreamOutputIdentifier = string;
 
@@ -42409,6 +42473,7 @@ export type StreamOutputResponseSingle = StreamApiResponseSingle & {
  * The streamKey used to authenticate against an output's target.
  *
  * @example uzya-f19y-g2g9-a2ee-51j2
+ * @x-sensitive true
  */
 export type StreamOutputStreamKey = string;
 
@@ -42416,6 +42481,7 @@ export type StreamOutputStreamKey = string;
  * The URL an output uses to restream.
  *
  * @example rtmp://a.rtmp.youtube.com/live2
+ * @x-sensitive true
  */
 export type StreamOutputUrl = string;
 
@@ -42426,6 +42492,7 @@ export type StreamOutputUrl = string;
  * @example 0.1
  * @maximum 1
  * @minimum 0
+ * @x-auditable true
  */
 export type StreamPadding = number;
 
@@ -42434,6 +42501,7 @@ export type StreamPadding = number;
  *
  * @maximum 100
  * @minimum 0
+ * @x-auditable true
  */
 export type StreamPctComplete = string;
 
@@ -42450,12 +42518,14 @@ export type StreamPlayback = {
    * DASH Media Presentation Description for the video.
    *
    * @example https://customer-m033z5x00ks6nunl.cloudflarestream.com/ea95132c15732412d22c1476fa83f27a/manifest/video.mpd
+   * @x-auditable true
    */
   dash?: string;
   /**
    * The HLS manifest for the video.
    *
    * @example https://customer-m033z5x00ks6nunl.cloudflarestream.com/ea95132c15732412d22c1476fa83f27a/manifest/video.m3u8
+   * @x-auditable true
    */
   hls?: string;
 };
@@ -42480,6 +42550,7 @@ export type StreamPlaybackRtmpsStreamKey = string;
  * The URL used to play live video over RTMPS.
  *
  * @example rtmps://live.cloudflare.com:443/live/
+ * @x-sensitive true
  */
 export type StreamPlaybackRtmpsUrl = string;
 
@@ -42496,6 +42567,7 @@ export type StreamPlaybackSrt = {
  * The identifier of the live input to use for playback via SRT.
  *
  * @example f256e6ea9341d51eea64c9454659e576
+ * @x-auditable true
  */
 export type StreamPlaybackSrtStreamId = string;
 
@@ -42511,6 +42583,7 @@ export type StreamPlaybackSrtStreamPassphrase = string;
  * The URL used to play live video over SRT.
  *
  * @example rtmps://live.cloudflare.com:443/live/
+ * @x-sensitive true
  */
 export type StreamPlaybackSrtUrl = string;
 
@@ -42525,6 +42598,7 @@ export type StreamPlaybackWebrtc = {
  * The URL used to play live video over WebRTC.
  *
  * @example https://customer-m033z5x00ks6nunl.cloudflarestream.com/b236bde30eb07b9d01318940e5fc3edake34a3efb3896e18f2dc277ce6cc993ad/webRTC/play
+ * @x-sensitive true
  */
 export type StreamPlaybackWebrtcUrl = string;
 
@@ -42533,6 +42607,7 @@ export type StreamPlaybackWebrtcUrl = string;
  *
  * @default upperRight
  * @example center
+ * @x-auditable true
  */
 export type StreamPosition = string;
 
@@ -42541,6 +42616,7 @@ export type StreamPosition = string;
  *
  * @example https://customer-m033z5x00ks6nunl.cloudflarestream.com/ea95132c15732412d22c1476fa83f27a/watch
  * @format uri
+ * @x-auditable true
  */
 export type StreamPreview = string;
 
@@ -42548,6 +42624,7 @@ export type StreamPreview = string;
  * Indicates whether the video is playable. The field is empty if the video is not ready for viewing or the live stream is still in progress.
  *
  * @example true
+ * @x-auditable true
  */
 export type StreamReadyToStream = boolean;
 
@@ -42556,6 +42633,7 @@ export type StreamReadyToStream = boolean;
  *
  * @example 2014-01-02T02:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type StreamReadyToStreamAt = string;
 
@@ -42564,6 +42642,7 @@ export type StreamReadyToStreamAt = string;
  *
  * @default false
  * @example true
+ * @x-auditable true
  */
 export type StreamRequireSignedURLs = boolean;
 
@@ -42574,6 +42653,7 @@ export type StreamRequireSignedURLs = boolean;
  * @example 0.1
  * @maximum 1
  * @minimum 0
+ * @x-auditable true
  */
 export type StreamScale = number;
 
@@ -42582,6 +42662,7 @@ export type StreamScale = number;
  *
  * @example 2014-01-02T02:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type StreamScheduledDeletion = string;
 
@@ -42597,6 +42678,7 @@ export type StreamSchemasIdentifier = string;
  * Searches over the `name` key in the `meta` field. This field can be set with or after the upload request.
  *
  * @example puppy.mp4
+ * @x-auditable true
  */
 export type StreamSearch = string;
 
@@ -42613,6 +42695,7 @@ export type StreamSignedTokenRequest = {
    * The optional boolean value that enables using signed tokens to access MP4 download links for a video.
    *
    * @default false
+   * @x-auditable true
    */
   downloadable?: boolean;
   /**
@@ -42623,10 +42706,13 @@ export type StreamSignedTokenRequest = {
    * The optional ID of a Stream signing key. If present, the `pem` field is also required.
    *
    * @example ab0d4ef71g4425f8dcba9041231813000
+   * @x-auditable true
    */
   id?: string;
   /**
    * The optional unix epoch timestamp that specifies the time before a the token is not accepted. If this field is not set, the default is one hour before issuing.
+   *
+   * @x-auditable true
    */
   nbf?: number;
   /**
@@ -42655,6 +42741,7 @@ export type StreamSignedTokenResponse = StreamApiResponseSingle & {
  *
  * @example 2014-01-02T02:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type StreamSigningKeyCreated = string;
 
@@ -42662,6 +42749,7 @@ export type StreamSigningKeyCreated = string;
  * The size of the media item in bytes.
  *
  * @example 4190963
+ * @x-auditable true
  */
 export type StreamSize = number;
 
@@ -42675,6 +42763,8 @@ export type StreamStart = string;
 
 /**
  * Specifies the start time for the video clip in seconds.
+ *
+ * @x-auditable true
  */
 export type StreamStartTimeSeconds = number;
 
@@ -42703,6 +42793,7 @@ export type StreamStorageUseResponse = StreamApiResponseSingle & {
  * @example 0.529241
  * @maximum 1
  * @minimum 0
+ * @x-auditable true
  */
 export type StreamThumbnailTimestampPct = number;
 
@@ -42711,6 +42802,7 @@ export type StreamThumbnailTimestampPct = number;
  *
  * @example https://customer-m033z5x00ks6nunl.cloudflarestream.com/ea95132c15732412d22c1476fa83f27a/thumbnails/thumbnail.jpg
  * @format uri
+ * @x-auditable true
  */
 export type StreamThumbnailUrl = string;
 
@@ -42719,6 +42811,7 @@ export type StreamThumbnailUrl = string;
  * Notes: The only supported version of TUS protocol is 1.0.0.
  *
  * @example 1.0.0
+ * @x-auditable true
  */
 export type StreamTusResumable = '1.0.0';
 
@@ -42726,6 +42819,7 @@ export type StreamTusResumable = '1.0.0';
  * Specifies whether the video is `vod` or `live`.
  *
  * @example live
+ * @x-auditable true
  */
 export type StreamType = string;
 
@@ -42744,6 +42838,7 @@ export type StreamUpdateOutputRequest = {
  * Indicates the size of the entire upload in bytes. The value must be a non-negative integer.
  *
  * @minimum 0
+ * @x-auditable true
  */
 export type StreamUploadLength = number;
 
@@ -42752,6 +42847,7 @@ export type StreamUploadLength = number;
  * Supported keys: `name`, `requiresignedurls`, `allowedorigins`, `thumbnailtimestamppct`, `watermark`, `scheduleddeletion`, `maxdurationseconds`.
  *
  * @example name aGVsbG8gd29ybGQ=, requiresignedurls, allowedorigins ZXhhbXBsZS5jb20sdGVzdC5jb20=
+ * @x-auditable true
  */
 export type StreamUploadMetadata = string;
 
@@ -42760,6 +42856,7 @@ export type StreamUploadMetadata = string;
  *
  * @example 2014-01-02T02:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type StreamUploaded = string;
 
@@ -42856,6 +42953,7 @@ export type StreamWatermarkAtUpload = {
    *
    * @example ea95132c15732412d22c1476fa83f27a
    * @maxLength 32
+   * @x-auditable true
    */
   uid?: string;
 };
@@ -42865,6 +42963,7 @@ export type StreamWatermarkBasicUpload = {
    * The image file to upload.
    *
    * @example @/Users/rchen/Downloads/watermark.png
+   * @x-auditable true
    */
   file: string;
   name?: StreamName;
@@ -42879,6 +42978,7 @@ export type StreamWatermarkBasicUpload = {
  *
  * @example 2014-01-02T02:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type StreamWatermarkCreated = string;
 
@@ -42887,6 +42987,7 @@ export type StreamWatermarkCreated = string;
  *
  * @example ea95132c15732412d22c1476fa83f27a
  * @maxLength 32
+ * @x-auditable true
  */
 export type StreamWatermarkIdentifier = string;
 
@@ -42902,6 +43003,7 @@ export type StreamWatermarkResponseSingle = StreamApiResponseSingle & {
  * The size of the image in bytes.
  *
  * @example 29472
+ * @x-auditable true
  */
 export type StreamWatermarkSize = number;
 
@@ -42929,6 +43031,8 @@ export type StreamWebhookResponseSingle = StreamApiResponseSingle & {
 
 /**
  * The width of the image in pixels.
+ *
+ * @x-auditable true
  */
 export type StreamWidth = number;
 
@@ -59604,6 +59708,7 @@ export type StreamWatermarkAtUpload2 = {
    *
    * @example ea95132c15732412d22c1476fa83f27a
    * @maxLength 32
+   * @x-auditable true
    */
   uid?: string;
 };
