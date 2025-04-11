@@ -1,5 +1,15 @@
 # cloudflare-api-js
 
+## 0.12.0
+
+### Minor Changes
+
+- 3a597c4: Add 'include_context' option to ZeroTrustGatewayNotificationSettings
+
+### Patch Changes
+
+- 6abb2fa: Fix typo in spectrum analytics API response comments
+
 ## 0.11.2
 
 ### Patch Changes
