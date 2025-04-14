@@ -2861,6 +2861,7 @@ export type AccessAccessGroupRule = {
  * True if the seat is part of Access.
  *
  * @example false
+ * @x-auditable true
  */
 export type AccessAccessSeat = boolean;
 
@@ -2956,6 +2957,7 @@ export type AccessAllowAllOrigins = boolean;
  * When set to true, users can authenticate via WARP for any application in your organization. Application settings will take precedence over this value.
  *
  * @example false
+ * @x-auditable true
  */
 export type AccessAllowAuthenticateViaWarp = boolean;
 
@@ -2966,6 +2968,8 @@ export type AccessAllowCredentials = boolean;
 
 /**
  * Enables using Identity Provider email alias as SSH username.
+ *
+ * @x-auditable true
  */
 export type AccessAllowEmailAlias = boolean;
 
@@ -3068,6 +3072,7 @@ export type AccessAppPoliciesComponentsSchemasSingleResponse = AccessApiResponse
  * Number of access applications currently using this policy.
  *
  * @example 2
+ * @x-auditable true
  */
 export type AccessAppCount = number;
 
@@ -3283,6 +3288,7 @@ export type AccessAssociatedHostnames = string[];
  *
  * @example 737646a56ab1df6ec9bddc7e5ca84eaf3b0768850f3ffb5d74f1534911fe3893
  * @maxLength 64
+ * @x-auditable true
  */
 export type AccessAud = string;
 
@@ -3317,6 +3323,7 @@ export type AccessAuthContextRule = {
  * The unique subdomain assigned to your Zero Trust organization.
  *
  * @example test.cloudflareaccess.com
+ * @x-auditable true
  */
 export type AccessAuthDomain = string;
 
@@ -3338,6 +3345,7 @@ export type AccessAuthenticationMethodRule = {
  * When set to `true`, users skip the identity provider selection step during login.
  *
  * @default false
+ * @x-auditable true
  */
 export type AccessAutoRedirectToIdentity = boolean;
 
@@ -3349,20 +3357,27 @@ export type AccessAzureAD = {
     AccessCustomClaimsSupport & {
       /**
        * Should Cloudflare try to load authentication contexts from your account
+       *
+       * @x-auditable true
        */
       conditional_access_enabled?: boolean;
       /**
        * Your Azure directory uuid
        *
        * @example <your azure directory uuid>
+       * @x-auditable true
        */
       directory_id?: string;
       /**
        * Indicates the type of user interaction that is required. prompt=login forces the user to enter their credentials on that request, negating single-sign on. prompt=none is the opposite. It ensures that the user isn't presented with any interactive prompt. If the request can't be completed silently by using single-sign on, the Microsoft identity platform returns an interaction_required error. prompt=select_account interrupts single sign-on providing account selection experience listing all the accounts either in session or any remembered account or an option to choose to use a different account altogether.
+       *
+       * @x-auditable true
        */
       prompt?: 'login' | 'select_account' | 'none';
       /**
        * Should Cloudflare try to load groups from your account
+       *
+       * @x-auditable true
        */
       support_groups?: boolean;
     };
@@ -3374,18 +3389,26 @@ export type AccessAzureAD = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @x-auditable true
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @x-auditable true
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     *
+     * @x-auditable true
      */
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @x-auditable true
      */
     seat_deprovision?: boolean;
     /**
@@ -3396,6 +3419,8 @@ export type AccessAzureAD = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @x-auditable true
      */
     user_deprovision?: boolean;
   };
@@ -3530,7 +3555,7 @@ export type AccessBookmarks = {
    * The unique identifier for the Bookmark application.
    */
   id?: string;
-  logo_url?: AccessLogoUrl;
+  logo_url?: AccessSchemasLogoUrl;
   name?: AccessBookmarksComponentsSchemasName;
   updated_at?: AccessTimestamp;
 };
@@ -3539,6 +3564,7 @@ export type AccessBookmarks = {
  * The name of the Bookmark application.
  *
  * @example My Website
+ * @x-auditable true
  */
 export type AccessBookmarksComponentsSchemasName = string;
 
@@ -3570,12 +3596,26 @@ export type AccessCa = {
   public_key?: AccessPublicKey;
 };
 
+export type AccessCaComponentsSchemasIdResponse = AccessApiResponseSingle & {
+  result?: {
+    id?: AccessComponentsSchemasId;
+  };
+};
+
 export type AccessCaComponentsSchemasResponseCollection = AccessApiResponseCollection & {
   result?: AccessCa[];
 };
 
+export type AccessCaComponentsSchemasResponseCollection2 = AccessApiResponseCollection & {
+  result?: AccessSchemasCa[];
+};
+
 export type AccessCaComponentsSchemasSingleResponse = AccessApiResponseSingle & {
   result?: AccessCa;
+};
+
+export type AccessCaComponentsSchemasSingleResponse2 = AccessApiResponseSingle & {
+  result?: AccessSchemasCa;
 };
 
 export type AccessCentrify = {
@@ -3588,12 +3628,14 @@ export type AccessCentrify = {
        * Your centrify account url
        *
        * @example https://abc123.my.centrify.com/
+       * @x-auditable true
        */
       centrify_account?: string;
       /**
        * Your centrify app id
        *
        * @example exampleapp
+       * @x-auditable true
        */
       centrify_app_id?: string;
     };
@@ -3605,18 +3647,26 @@ export type AccessCentrify = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @x-auditable true
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @x-auditable true
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     *
+     * @x-auditable true
      */
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @x-auditable true
      */
     seat_deprovision?: boolean;
     /**
@@ -3627,6 +3677,8 @@ export type AccessCentrify = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @x-auditable true
      */
     user_deprovision?: boolean;
   };
@@ -3672,6 +3724,8 @@ export type AccessCertificates = {
   fingerprint?: AccessFingerprint;
   /**
    * The ID of the application that will use this certificate.
+   *
+   * @x-auditable true
    */
   id?: string;
   name?: AccessCertificatesComponentsSchemasName;
@@ -3682,8 +3736,16 @@ export type AccessCertificates = {
  * The name of the certificate.
  *
  * @example Allow devs
+ * @x-auditable true
  */
 export type AccessCertificatesComponentsSchemasName = string;
+
+/**
+ * The name of the certificate.
+ *
+ * @example Allow devs
+ */
+export type AccessCertificatesComponentsSchemasName2 = string;
 
 export type AccessCertificatesComponentsSchemasResponseCollection = AccessApiResponseCollection & {
   result?: AccessCertificates[];
@@ -3737,8 +3799,16 @@ export type AccessCommonNameRule = {
   };
 };
 
+/**
+ * The Application Audience (AUD) tag. Identifies the application associated with the CA.
+ *
+ * @example 737646a56ab1df6ec9bddc7e5ca84eaf3b0768850f3ffb5d74f1534911fe3893
+ * @maxLength 64
+ */
+export type AccessComponentsSchemasAud = string;
+
 export type AccessComponentsSchemasCertificates = {
-  associated_hostnames?: AccessAssociatedHostnames;
+  associated_hostnames?: AccessSchemasAssociatedHostnames;
   created_at?: AccessTimestamp;
   expires_on?: AccessTimestamp;
   fingerprint?: AccessFingerprint;
@@ -3746,7 +3816,7 @@ export type AccessComponentsSchemasCertificates = {
    * The ID of the application that will use this certificate.
    */
   id?: void;
-  name?: AccessCertificatesComponentsSchemasName;
+  name?: AccessCertificatesComponentsSchemasName2;
   updated_at?: AccessTimestamp;
 };
 
@@ -3770,10 +3840,18 @@ export type AccessComponentsSchemasGroups = {
   exclude?: AccessExclude;
   id?: AccessUuid;
   include?: AccessInclude;
-  name?: AccessGroupsComponentsSchemasName;
+  name?: AccessGroupsComponentsSchemasName2;
   require?: AccessRequire;
   updated_at?: AccessTimestamp;
 };
+
+/**
+ * The ID of the CA.
+ *
+ * @example 7eddae4619b50ab1361ba8ae9bd72269a432fea041529ed9
+ * @maxLength 48
+ */
+export type AccessComponentsSchemasId = string;
 
 export type AccessComponentsSchemasIdResponse = AccessApiResponseCommon & {
   result?: {
@@ -3783,6 +3861,7 @@ export type AccessComponentsSchemasIdResponse = AccessApiResponseCommon & {
 
 /**
  * @example 699d98642c564d2e855e9661899b7252
+ * @x-auditable true
  */
 export type AccessComponentsSchemasIdentifier = string;
 
@@ -3894,18 +3973,22 @@ export type AccessCustomClaimsSupport = {
    * @example email_verified
    * @example preferred_username
    * @example custom_claim_name
+   * @x-auditable true
    */
   claims?: string[];
   /**
    * The claim name for email in the id_token response.
    *
    * @example custom_claim_name
+   * @x-auditable true
    */
   email_claim_name?: string;
 };
 
 /**
  * Custom page name.
+ *
+ * @x-auditable true
  */
 export type AccessCustomPagesComponentsSchemasName = string;
 
@@ -3939,6 +4022,7 @@ export type AccessCustomPage = {
    * Custom page HTML.
    *
    * @example <html><body><h1>Access Denied</h1></body></html>
+   * @x-auditable true
    */
   custom_html: string;
   name: AccessCustomPagesComponentsSchemasName;
@@ -3975,6 +4059,7 @@ export type AccessCustomPages = {
  * The number of days until the next key rotation.
  *
  * @example 1
+ * @x-auditable true
  */
 export type AccessDaysUntilNextRotation = number;
 
@@ -4028,7 +4113,13 @@ export type AccessDestinations = (
 )[];
 
 export type AccessDevicePostureCheck = {
+  /**
+   * @x-auditable true
+   */
   exists?: boolean;
+  /**
+   * @x-auditable true
+   */
   path?: string;
 };
 
@@ -4050,6 +4141,9 @@ export type AccessDevicePostureRule = {
  * @example {"last_authenticated":1638832687}
  */
 export type AccessDeviceSession = {
+  /**
+   * @x-auditable true
+   */
   last_authenticated?: number;
 };
 
@@ -4065,6 +4159,7 @@ export type AccessDirection = 'desc' | 'asc';
  * The duration the DoH JWT is valid for. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.  Note that the maximum duration for this setting is the same as the key rotation period on the account. Default expiration is 24h
  *
  * @example 800h
+ * @x-auditable true
  */
 export type AccessDohJwtDuration = string;
 
@@ -4094,6 +4189,7 @@ export type AccessDomainRule = {
  *
  * @default 8760h
  * @example 60m
+ * @x-auditable true
  */
 export type AccessDuration = string;
 
@@ -4209,18 +4305,26 @@ export type AccessFacebook = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @x-auditable true
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @x-auditable true
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     *
+     * @x-auditable true
      */
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @x-auditable true
      */
     seat_deprovision?: boolean;
     /**
@@ -4231,6 +4335,8 @@ export type AccessFacebook = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @x-auditable true
      */
     user_deprovision?: boolean;
   };
@@ -4320,6 +4426,7 @@ export type AccessGatewayCaComponentsSchemasSingleResponse = AccessApiResponseSi
  * True if the seat is part of Gateway.
  *
  * @example false
+ * @x-auditable true
  */
 export type AccessGatewaySeat = boolean;
 
@@ -4343,6 +4450,9 @@ export type AccessGenericOauthConfig = {
  * @example {"country":"US"}
  */
 export type AccessGeo = {
+  /**
+   * @x-auditable true
+   */
   country?: string;
 };
 
@@ -4359,18 +4469,26 @@ export type AccessGithub = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @x-auditable true
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @x-auditable true
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     *
+     * @x-auditable true
      */
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @x-auditable true
      */
     seat_deprovision?: boolean;
     /**
@@ -4381,6 +4499,8 @@ export type AccessGithub = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @x-auditable true
      */
     user_deprovision?: boolean;
   };
@@ -4446,18 +4566,26 @@ export type AccessGoogle = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @x-auditable true
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @x-auditable true
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     *
+     * @x-auditable true
      */
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @x-auditable true
      */
     seat_deprovision?: boolean;
     /**
@@ -4468,6 +4596,8 @@ export type AccessGoogle = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @x-auditable true
      */
     user_deprovision?: boolean;
   };
@@ -4514,18 +4644,26 @@ export type AccessGoogleApps = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @x-auditable true
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @x-auditable true
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     *
+     * @x-auditable true
      */
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @x-auditable true
      */
     seat_deprovision?: boolean;
     /**
@@ -4536,6 +4674,8 @@ export type AccessGoogleApps = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @x-auditable true
      */
     user_deprovision?: boolean;
   };
@@ -4590,8 +4730,16 @@ export type AccessGroupsName = string;
  * The name of the Access group.
  *
  * @example Allow devs
+ * @x-auditable true
  */
 export type AccessGroupsComponentsSchemasName = string;
+
+/**
+ * The name of the Access group.
+ *
+ * @example Allow devs
+ */
+export type AccessGroupsComponentsSchemasName2 = string;
 
 export type AccessGroupsComponentsSchemasResponseCollection = AccessApiResponseCollection & {
   result?: AccessComponentsSchemasGroups[];
@@ -4665,10 +4813,12 @@ export type AccessIdentifier = string;
 export type AccessIdentity = {
   /**
    * @example 1234567890
+   * @x-auditable true
    */
   account_id?: string;
   /**
    * @example NONE
+   * @x-auditable true
    */
   auth_status?: string;
   /**
@@ -4746,18 +4896,26 @@ export type AccessIdentityProvider = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @x-auditable true
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @x-auditable true
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     *
+     * @x-auditable true
      */
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @x-auditable true
      */
     seat_deprovision?: boolean;
     /**
@@ -4768,6 +4926,8 @@ export type AccessIdentityProvider = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @x-auditable true
      */
     user_deprovision?: boolean;
   };
@@ -4931,6 +5091,8 @@ export type AccessIpRule = {
 
 /**
  * Whether this is the default group
+ *
+ * @x-auditable true
  */
 export type AccessIsDefault = boolean;
 
@@ -4938,6 +5100,7 @@ export type AccessIsDefault = boolean;
  * Lock all settings as Read-Only in the Dashboard, regardless of user permission. Updates may only be made via the API or Terraform for this account when enabled.
  *
  * @example false
+ * @x-auditable true
  */
 export type AccessIsUiReadOnly = boolean;
 
@@ -4961,6 +5124,7 @@ export type AccessKeyConfig = {
  * @example 30
  * @maximum 365
  * @minimum 21
+ * @x-auditable true
  */
 export type AccessKeyRotationIntervalDays = number;
 
@@ -4984,6 +5148,7 @@ export type AccessLandingPageDesign = {
  *
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type AccessLastKeyRotationAt = string;
 
@@ -5020,18 +5185,26 @@ export type AccessLinkedin = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @x-auditable true
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @x-auditable true
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     *
+     * @x-auditable true
      */
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @x-auditable true
      */
     seat_deprovision?: boolean;
     /**
@@ -5042,6 +5215,8 @@ export type AccessLinkedin = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @x-auditable true
      */
     user_deprovision?: boolean;
   };
@@ -5173,6 +5348,7 @@ export type AccessMeta = {
  * The name of your Zero Trust organization.
  *
  * @example Widget Corps Internal Applications
+ * @x-auditable true
  */
 export type AccessName = string;
 
@@ -5232,18 +5408,26 @@ export type AccessOidc = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @x-auditable true
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @x-auditable true
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     *
+     * @x-auditable true
      */
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @x-auditable true
      */
     seat_deprovision?: boolean;
     /**
@@ -5254,6 +5438,8 @@ export type AccessOidc = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @x-auditable true
      */
     user_deprovision?: boolean;
   };
@@ -5424,6 +5610,7 @@ export type AccessOkta = {
        * Your okta account url
        *
        * @example https://dev-abc123.oktapreview.com
+       * @x-auditable true
        */
       okta_account?: string;
     };
@@ -5435,18 +5622,26 @@ export type AccessOkta = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @x-auditable true
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @x-auditable true
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     *
+     * @x-auditable true
      */
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @x-auditable true
      */
     seat_deprovision?: boolean;
     /**
@@ -5457,6 +5652,8 @@ export type AccessOkta = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @x-auditable true
      */
     user_deprovision?: boolean;
   };
@@ -5513,6 +5710,7 @@ export type AccessOnelogin = {
        * Your OneLogin account url
        *
        * @example https://mycompany.onelogin.com
+       * @x-auditable true
        */
       onelogin_account?: string;
     };
@@ -5524,18 +5722,26 @@ export type AccessOnelogin = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @x-auditable true
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @x-auditable true
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     *
+     * @x-auditable true
      */
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @x-auditable true
      */
     seat_deprovision?: boolean;
     /**
@@ -5546,6 +5752,8 @@ export type AccessOnelogin = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @x-auditable true
      */
     user_deprovision?: boolean;
   };
@@ -5586,18 +5794,26 @@ export type AccessOnetimepin = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @x-auditable true
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @x-auditable true
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     *
+     * @x-auditable true
      */
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @x-auditable true
      */
     seat_deprovision?: boolean;
     /**
@@ -5608,6 +5824,8 @@ export type AccessOnetimepin = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @x-auditable true
      */
     user_deprovision?: boolean;
   };
@@ -5661,16 +5879,16 @@ export type AccessOrganizations = {
  */
 export type AccessOrganizationsComponentsSchemasIdentifier = void;
 
+/**
+ * The name of your Zero Trust organization.
+ *
+ * @example Widget Corps Internal Applications
+ */
+export type AccessOrganizationsComponentsSchemasName = string;
+
 export type AccessOrganizationsComponentsSchemasSingleResponse = AccessApiResponseSingle & {
   result?: AccessSchemasOrganizations;
 };
-
-/**
- * The number of pages of (processed) users.
- *
- * @example 2
- */
-export type AccessPagesProcessed = number;
 
 /**
  * Enables cookie paths to scope an application's JWT to the application path. If disabled, the JWT will scope to the hostname by default
@@ -5684,6 +5902,7 @@ export type AccessPathCookieAttribute = boolean;
  * The percentage of (processed) users approved based on policy evaluation results.
  *
  * @example 25
+ * @x-auditable true
  */
 export type AccessPercentApproved = number;
 
@@ -5691,8 +5910,17 @@ export type AccessPercentApproved = number;
  * The percentage of (processed) users blocked based on policy evaluation results.
  *
  * @example 25
+ * @x-auditable true
  */
 export type AccessPercentBlocked = number;
+
+/**
+ * The percentage of (processed) users errored based on policy evaluation results.
+ *
+ * @example 25
+ * @x-auditable true
+ */
+export type AccessPercentErrored = number;
 
 /**
  * The percentage of users processed so far (of the entire user base).
@@ -5711,6 +5939,7 @@ export type AccessPingone = {
        * Your PingOne environment identifier
        *
        * @example 342b5660-0c32-4936-a5a4-ce21fae57b0a
+       * @x-auditable true
        */
       ping_env_id?: string;
     };
@@ -5722,18 +5951,26 @@ export type AccessPingone = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @x-auditable true
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @x-auditable true
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     *
+     * @x-auditable true
      */
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @x-auditable true
      */
     seat_deprovision?: boolean;
     /**
@@ -5744,6 +5981,8 @@ export type AccessPingone = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @x-auditable true
      */
     user_deprovision?: boolean;
   };
@@ -5909,20 +6148,22 @@ export type AccessPolicyResp = AccessBasePolicyResp & {
  *
  * @example f1a8b3c9d4e5f6789a0b1c2d3e4f5678a9b0c1d2e3f4a5b67890c1d2e3f4b5a6
  * @maxLength 64
+ * @x-auditable true
  */
 export type AccessPolicyTestId = string;
 
 export type AccessPolicyUpdateResp = AccessApiResponseSingle & {
   result?: {
     id?: AccessPolicyTestId;
-    pages_processed?: AccessPagesProcessed;
     percent_approved?: AccessPercentApproved;
     percent_blocked?: AccessPercentBlocked;
+    percent_errored?: AccessPercentErrored;
     percent_users_processed?: AccessPercentUsersProcessed;
     status?: AccessUpdateStatus;
     total_users?: AccessTotalUsers;
     users_approved?: AccessUsersApproved;
     users_blocked?: AccessUsersBlocked;
+    users_errored?: AccessUsersErrored;
   };
 };
 
@@ -5956,6 +6197,7 @@ export type AccessPrecedence = number;
  * The communication protocol your application secures.
  *
  * @example ssh
+ * @x-auditable true
  */
 export type AccessProtocol = 'ssh';
 
@@ -6293,6 +6535,7 @@ export type AccessSaml = {
      * The attribute name for email in the SAML response.
      *
      * @example Email
+     * @x-auditable true
      */
     email_attribute_name?: string;
     /**
@@ -6316,6 +6559,7 @@ export type AccessSaml = {
      * IdP Entity ID or Issuer URL
      *
      * @example https://whoami.com
+     * @x-auditable true
      */
     issuer_url?: string;
     /**
@@ -6326,6 +6570,7 @@ export type AccessSaml = {
      * URL to send the SAML authentication requests to
      *
      * @example https://edgeaccess.org/idp/saml/login
+     * @x-auditable true
      */
     sso_target_url?: string;
   };
@@ -6337,18 +6582,26 @@ export type AccessSaml = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @x-auditable true
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @x-auditable true
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     *
+     * @x-auditable true
      */
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @x-auditable true
      */
     seat_deprovision?: boolean;
     /**
@@ -6359,6 +6612,8 @@ export type AccessSaml = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @x-auditable true
      */
     user_deprovision?: boolean;
   };
@@ -6561,6 +6816,8 @@ export type AccessSchemasAllowedOrigins = any[];
 
 /**
  * Number of apps the custom page is assigned to.
+ *
+ * @x-auditable true
  */
 export type AccessSchemasAppCount = number;
 
@@ -6589,6 +6846,7 @@ export type AccessSchemasAppLauncherProps = {
  * Displays the application in the App Launcher.
  *
  * @example true
+ * @x-auditable true
  */
 export type AccessSchemasAppLauncherVisible = boolean;
 
@@ -6625,12 +6883,24 @@ export type AccessSchemasApprovalGroup = {
 export type AccessSchemasApprovalGroups = AccessSchemasApprovalGroup[];
 
 /**
+ * The hostnames of the applications that will use this certificate.
+ */
+export type AccessSchemasAssociatedHostnames = string[];
+
+/**
  * Audience tag.
  *
  * @example 737646a56ab1df6ec9bddc7e5ca84eaf3b0768850f3ffb5d74f1534911fe3893
  * @maxLength 64
  */
 export type AccessSchemasAud = string;
+
+/**
+ * The unique subdomain assigned to your Zero Trust organization.
+ *
+ * @example test.cloudflareaccess.com
+ */
+export type AccessSchemasAuthDomain = string;
 
 /**
  * When set to `true`, users skip the identity provider selection step during login. You must specify only one identity provider in allowed_idps.
@@ -6768,6 +7038,12 @@ export type AccessSchemasBookmarkProps = {
   type: string;
 };
 
+export type AccessSchemasCa = {
+  aud?: AccessComponentsSchemasAud;
+  id?: AccessComponentsSchemasId;
+  public_key?: AccessPublicKey;
+};
+
 export type AccessSchemasCentrify = {
   /**
    * The configuration parameters for the identity provider. To view the required parameters for a specific provider, refer to our [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
@@ -6844,6 +7120,8 @@ export type AccessSchemasCentrify = {
 export type AccessSchemasCertificates = {
   /**
    * The key ID of this certificate.
+   *
+   * @x-auditable true
    */
   id?: string;
   /**
@@ -6861,6 +7139,21 @@ export type AccessSchemasCorsHeaders = {
   allowed_methods?: AccessAllowedMethods;
   allowed_origins?: AccessSchemasAllowedOrigins;
   max_age?: AccessMaxAge;
+};
+
+export type AccessSchemasCreateResponse = AccessApiResponseSingle & {
+  result?: {
+    client_id?: AccessClientId;
+    client_secret?: AccessClientSecret;
+    created_at?: AccessTimestamp;
+    duration?: AccessSchemasDuration;
+    /**
+     * The ID of the service token.
+     */
+    id?: string;
+    name?: AccessServiceTokensComponentsSchemasName;
+    updated_at?: AccessTimestamp;
+  };
 };
 
 /**
@@ -6883,12 +7176,30 @@ export type AccessSchemasDecision = 'allow' | 'deny' | 'non_identity' | 'bypass'
 export type AccessSchemasDevicePostureRule = {
   check?: AccessDevicePostureCheck;
   data?: Record<string, any>;
+  /**
+   * @x-auditable true
+   */
   description?: string;
   error?: string;
+  /**
+   * @x-auditable true
+   */
   id?: string;
+  /**
+   * @x-auditable true
+   */
   rule_name?: string;
+  /**
+   * @x-auditable true
+   */
   success?: boolean;
+  /**
+   * @x-auditable true
+   */
   timestamp?: string;
+  /**
+   * @x-auditable true
+   */
   type?: string;
 };
 
@@ -6896,8 +7207,17 @@ export type AccessSchemasDevicePostureRule = {
  * The domain of the Bookmark application.
  *
  * @example example.com
+ * @x-auditable true
  */
 export type AccessSchemasDomain = string;
+
+/**
+ * The duration for how long the service token will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. The default is 1 year in hours (8760h).
+ *
+ * @default 8760h
+ * @example 60m
+ */
+export type AccessSchemasDuration = string;
 
 /**
  * The email of the user.
@@ -7199,6 +7519,7 @@ export type AccessSchemasGroups = {
  *
  * @example 7eddae4619b50ab1361ba8ae9bd72269a432fea041529ed9
  * @maxLength 48
+ * @x-auditable true
  */
 export type AccessSchemasId = string;
 
@@ -7292,6 +7613,13 @@ export type AccessSchemasIdentityProviders =
   | AccessSchemasYandex;
 
 /**
+ * Lock all settings as Read-Only in the Dashboard, regardless of user permission. Updates may only be made via the API or Terraform for this account when enabled.
+ *
+ * @example false
+ */
+export type AccessSchemasIsUiReadOnly = boolean;
+
+/**
  * Require this application to be served in an isolated browser for users matching this policy.
  *
  * @default false
@@ -7360,9 +7688,18 @@ export type AccessSchemasLinkedin = {
 };
 
 /**
+ * The image URL for the logo shown in the App Launcher dashboard.
+ *
+ * @example https://www.cloudflare.com/img/logo-web-badges/cf-logo-on-white-bg.svg
+ * @x-auditable true
+ */
+export type AccessSchemasLogoUrl = string;
+
+/**
  * The name of the service token.
  *
  * @example CI/CD token
+ * @x-auditable true
  */
 export type AccessSchemasName = string;
 
@@ -7795,11 +8132,11 @@ export type AccessSchemasOnetimepin = {
 };
 
 export type AccessSchemasOrganizations = {
-  auth_domain?: AccessAuthDomain;
+  auth_domain?: AccessSchemasAuthDomain;
   created_at?: AccessTimestamp;
-  is_ui_read_only?: AccessIsUiReadOnly;
+  is_ui_read_only?: AccessSchemasIsUiReadOnly;
   login_design?: AccessLoginDesign;
-  name?: AccessName;
+  name?: AccessOrganizationsComponentsSchemasName;
   ui_read_only_toggle_reason?: AccessUiReadOnlyToggleReason;
   updated_at?: AccessTimestamp;
   user_seat_expiration_inactive_time?: AccessSchemasUserSeatExpirationInactiveTime;
@@ -7951,6 +8288,10 @@ export type AccessSchemasRequire = AccessRule[];
 
 export type AccessSchemasResponseCollection = AccessApiResponseCollection & {
   result?: AccessSchemasGroups[];
+};
+
+export type AccessSchemasResponseCollectionHostnames = AccessApiResponseCollection & {
+  result?: AccessSchemasSettings[];
 };
 
 export type AccessSchemasSaasProps = {
@@ -8259,6 +8600,23 @@ export type AccessSchemasSelfHostedProps = {
   type: string;
 };
 
+export type AccessSchemasServiceTokens = {
+  client_id?: AccessClientId;
+  created_at?: AccessTimestamp;
+  duration?: AccessSchemasDuration;
+  expires_at?: AccessTimestamp;
+  /**
+   * UUID.
+   *
+   * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
+   * @maxLength 36
+   */
+  id?: void & AccessUuid;
+  last_seen_at?: AccessTimestamp;
+  name?: AccessServiceTokensComponentsSchemasName;
+  updated_at?: AccessTimestamp;
+};
+
 /**
  * The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.
  *
@@ -8266,6 +8624,27 @@ export type AccessSchemasSelfHostedProps = {
  * @example 24h
  */
 export type AccessSchemasSessionDuration = string;
+
+export type AccessSchemasSettings = {
+  /**
+   * Request client certificates for this hostname in China. Can only be set to true if this zone is china network enabled.
+   *
+   * @example false
+   */
+  china_network: boolean;
+  /**
+   * Client Certificate Forwarding is a feature that takes the client cert provided by the eyeball to the edge, and forwards it to the origin as a HTTP header to allow logging on the origin.
+   *
+   * @example true
+   */
+  client_certificate_forwarding: boolean;
+  /**
+   * The hostname that these settings apply to.
+   *
+   * @example admin.example.com
+   */
+  hostname: string;
+};
 
 export type AccessSchemasSingleResponse = AccessApiResponseSingle & {
   result?: AccessServiceTokens;
@@ -8298,6 +8677,8 @@ export type AccessSchemasSshProps = {
 
 /**
  * Custom page type.
+ *
+ * @x-auditable true
  */
 export type AccessSchemasType = 'identity_denied' | 'forbidden';
 
@@ -8632,6 +9013,7 @@ export type AccessSeat = {
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
+ * @x-auditable true
  */
 export type AccessSeatUid = string;
 
@@ -8709,6 +9091,21 @@ export type AccessServiceTokens = {
 };
 
 /**
+ * The name of the service token.
+ *
+ * @example CI/CD token
+ */
+export type AccessServiceTokensComponentsSchemasName = string;
+
+export type AccessServiceTokensComponentsSchemasResponseCollection = AccessApiResponseCollection & {
+  result?: AccessSchemasServiceTokens[];
+};
+
+export type AccessServiceTokensComponentsSchemasSingleResponse = AccessApiResponseSingle & {
+  result?: AccessSchemasServiceTokens;
+};
+
+/**
  * Returns a 401 status code when the request is blocked by a Service Auth policy.
  *
  * @example true
@@ -8741,18 +9138,21 @@ export type AccessSettings = {
    * Request client certificates for this hostname in China. Can only be set to true if this zone is china network enabled.
    *
    * @example false
+   * @x-auditable true
    */
   china_network: boolean;
   /**
    * Client Certificate Forwarding is a feature that takes the client cert provided by the eyeball to the edge, and forwards it to the origin as a HTTP header to allow logging on the origin.
    *
    * @example true
+   * @x-auditable true
    */
   client_certificate_forwarding: boolean;
   /**
    * The hostname that these settings apply to.
    *
    * @example admin.example.com
+   * @x-auditable true
    */
   hostname: string;
 };
@@ -8825,6 +9225,7 @@ export type AccessSshProps = {
  * The status of the policy test request.
  *
  * @example success
+ * @x-auditable true
  */
 export type AccessStatus = 'success';
 
@@ -8840,6 +9241,7 @@ export type AccessTag = {
    * The number of applications that have this tag
    *
    * @example 1
+   * @x-auditable true
    */
   app_count?: number;
   created_at?: AccessTimestamp;
@@ -8909,6 +9311,7 @@ export type AccessTitle = string;
  * The total number of users in the user base.
  *
  * @example 20
+ * @x-auditable true
  */
 export type AccessTotalUsers = number;
 
@@ -8954,20 +9357,23 @@ export type AccessUntil = string;
  * The status of the policy test.
  *
  * @example complete
+ * @x-auditable true
  */
-export type AccessUpdateStatus = 'blocked' | 'processing' | 'complete';
+export type AccessUpdateStatus = 'blocked' | 'processing' | 'exceeded time' | 'complete';
 
 /**
  * Policy evaluation result for an individual user.
  *
  * @example approved
+ * @x-auditable true
  */
-export type AccessUserResult = 'approved' | 'blocked';
+export type AccessUserResult = 'approved' | 'blocked' | 'error';
 
 /**
  * The amount of time a user seat is inactive before it expires. When the user seat exceeds the set time of inactivity, the user is removed as an active seat and no longer counts against your Teams seat count.  Minimum value for this setting is 1 month (730h). Must be in the format `300ms` or `2h45m`. Valid time units are: `ns`, `us` (or `µs`), `ms`, `s`, `m`, `h`.
  *
  * @example 730h
+ * @x-auditable true
  */
 export type AccessUserSeatExpirationInactiveTime = string;
 
@@ -9061,6 +9467,7 @@ export type AccessUsersName = string;
  * The number of (processed) users approved based on policy evaluation results.
  *
  * @example 5
+ * @x-auditable true
  */
 export type AccessUsersApproved = number;
 
@@ -9068,6 +9475,7 @@ export type AccessUsersApproved = number;
  * The number of (processed) users blocked based on policy evaluation results.
  *
  * @example 5
+ * @x-auditable true
  */
 export type AccessUsersBlocked = number;
 
@@ -9100,6 +9508,13 @@ export type AccessUsersComponentsSchemasResponseCollection = AccessApiResponseCo
 } & {
   result?: AccessSchemasUsers[];
 };
+
+/**
+ * The number of (processed) users errored based on policy evaluation results.
+ *
+ * @example 5
+ */
+export type AccessUsersErrored = number;
 
 /**
  * UUID.
@@ -9146,6 +9561,7 @@ export type AccessVncProps = {
  * The amount of time that tokens issued for applications will be valid. Must be in the format `30m` or `2h45m`. Valid time units are: m, h.
  *
  * @example 24h
+ * @x-auditable true
  */
 export type AccessWarpAuthSessionDuration = string;
 
@@ -9189,18 +9605,26 @@ export type AccessYandex = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @x-auditable true
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @x-auditable true
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
      * The base URL of Cloudflare's SCIM V2.0 API endpoint.
+     *
+     * @x-auditable true
      */
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @x-auditable true
      */
     seat_deprovision?: boolean;
     /**
@@ -9211,6 +9635,8 @@ export type AccessYandex = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @x-auditable true
      */
     user_deprovision?: boolean;
   };
@@ -11584,7 +12010,7 @@ export type CachePurgeFlexPurgeByPrefixes = {
 
 export type CachePurgeFlexPurgeByTags = {
   /**
-   * For more information on cache tags and purging by tags, please refer to [purge by cache-tags documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge-by-tags/#purge-cache-by-cache-tags-enterprise-only).
+   * For more information on cache tags and purging by tags, please refer to [purge by cache-tags documentation page](https://developers.cloudflare.com/cache/how-to/purge-cache/purge-by-tags/).
    *
    * @example a-cache-tag
    * @example another-cache-tag
@@ -11628,7 +12054,7 @@ export type CachePurgeApiResponseCommon = {
   errors: CachePurgeMessages;
   messages: CachePurgeMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -11644,7 +12070,7 @@ export type CachePurgeApiResponseCommonFailure = {
   messages: CachePurgeMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -11664,11 +12090,15 @@ export type CachePurgeMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -12823,22 +13253,36 @@ export type CloudforceOnePortScanApiApiResponseCommon = {
   errors: CloudforceOnePortScanApiMessages;
   messages: CloudforceOnePortScanApiMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
   success: true;
 };
 
+export type CloudforceOnePortScanApiApiResponseCommonFailure = {
+  /**
+   * @example {"code":10433,"message":"request error"}
+   */
+  errors: CloudforceOnePortScanApiMessages;
+  messages: CloudforceOnePortScanApiMessages;
+  /**
+   * Whether the API call was successful.
+   *
+   * @example false
+   */
+  success: true;
+};
+
 /**
- * The number of days between each scan (0 = no recurring scans).
+ * Defines the number of days between each scan (0 = One-off scan).
  *
  * @example 7
  */
 export type CloudforceOnePortScanApiFrequency = number;
 
 /**
- * A list of IP addresses or CIDR blocks to scan. The maximum number of total IP addresses allowed is 5000.
+ * Defines a list of IP addresses or CIDR blocks to scan. The maximum number of total IP addresses allowed is 5000.
  *
  * @example 1.1.1.1
  * @example 2606:4700:4700::1111
@@ -12850,7 +13294,11 @@ export type CloudforceOnePortScanApiMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 export type CloudforceOnePortScanApiPort = {
@@ -12869,7 +13317,7 @@ export type CloudforceOnePortScanApiPort = {
 };
 
 /**
- * A list of ports to scan. Allowed values:"default", "all", or a comma-separated list of ports or range of ports (e.g. ["1-80", "443"]). Default will scan the 100 most commonly open ports.
+ * Defines a list of ports to scan. Valid values are:"default", "all", or a comma-separated list of ports or range of ports (e.g. ["1-80", "443"]). "default" scans the 100 most commonly open ports.
  *
  * @example default
  */
@@ -12882,7 +13330,7 @@ export type CloudforceOnePortScanApiScanConfig = {
   account_id: string;
   frequency: CloudforceOnePortScanApiFrequency;
   /**
-   * Config ID
+   * Defines the Config ID.
    *
    * @example uuid
    */
@@ -15320,6 +15768,7 @@ export type DlpCustomProfileUpdate = {
 };
 
 export type DlpDataset = {
+  case_sensitive?: boolean;
   columns: DlpDatasetColumn[];
   /**
    * @format date-time
@@ -15403,6 +15852,7 @@ export type DlpDatasetCreation = {
 };
 
 export type DlpDatasetNewVersion = {
+  case_sensitive?: boolean;
   columns?: DlpDatasetColumn[];
   /**
    * @format int32
@@ -15425,6 +15875,12 @@ export type DlpDatasetNewVersion = {
 };
 
 export type DlpDatasetUpdate = {
+  /**
+   * Determines if the words should be matched in a case-sensitive manner.
+   *
+   * Only required for custom word lists.
+   */
+  case_sensitive?: boolean;
   /**
    * The description of the dataset
    */
@@ -15547,6 +16003,12 @@ export type DlpEntryUpdateType =
 
 export type DlpExactDataEntry = {
   /**
+   * Only applies to custom word lists.
+   * Determines if the words should be matched in a case-sensitive manner
+   * Cannot be set to false if secret is true
+   */
+  case_sensitive: boolean;
+  /**
    * @format date-time
    */
   created_at: string;
@@ -15660,6 +16122,12 @@ export type DlpNewCustomProfiles =
   | DlpNewCustomProfile;
 
 export type DlpNewDataset = {
+  /**
+   * Only applies to custom word lists.
+   * Determines if the words should be matched in a case-sensitive manner
+   * Cannot be set to false if `secret` is true or undefined
+   */
+  case_sensitive?: boolean;
   /**
    * The description of the dataset
    */
