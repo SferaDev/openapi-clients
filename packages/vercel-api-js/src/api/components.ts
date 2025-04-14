@@ -20794,6 +20794,7 @@ export type UploadFileHeaders = {
 export type UploadFileError = Fetcher.ErrorWrapper<undefined>;
 
 export type UploadFileVariables = {
+  body?: Blob;
   headers?: UploadFileHeaders;
   queryParams?: UploadFileQueryParams;
 } & FetcherExtraProps;
@@ -20813,7 +20814,7 @@ export const uploadFile = (variables: UploadFileVariables, signal?: AbortSignal)
       }
     | Record<string, any>,
     UploadFileError,
-    undefined,
+    Blob,
     UploadFileHeaders,
     UploadFileQueryParams,
     {}
