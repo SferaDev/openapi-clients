@@ -39681,11 +39681,11 @@ export type RumApiResponseCommonFailure = {
    * @example {"code":7003,"message":"No route for the URI"}
    * @minLength 1
    */
-  errors: RumMessages;
-  messages: RumMessages;
+  errors: RumSchemasMessages;
+  messages: RumSchemasMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -39759,7 +39759,7 @@ export type RumHost = string;
 export type RumId = string;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -39971,6 +39971,18 @@ export type RumRumSite = {
   id?: RumId;
   value?: RumValue;
 };
+
+export type RumSchemasMessages = {
+  /**
+   * @minimum 1000
+   */
+  code: number;
+  documentation_url?: string;
+  message: string;
+  source?: {
+    pointer?: string;
+  };
+}[];
 
 export type RumSite = {
   auto_install?: RumAutoInstall;
