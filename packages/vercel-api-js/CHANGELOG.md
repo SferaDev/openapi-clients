@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.23.5
+
+### Patch Changes
+
+- a747080: Add body parameter to upload file endpoint
+
 ## 0.23.4
 
 ### Patch Changes

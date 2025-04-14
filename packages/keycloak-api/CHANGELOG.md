@@ -1,5 +1,11 @@
 # keycloak-api
 
+## 0.2.4
+
+### Patch Changes
+
+- 0ffd14e: Add new query parameters 'direction', 'resourceType', and 'audience' to several endpoint definitions
+
 ## 0.2.3
 
 ### Patch Changes
