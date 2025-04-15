@@ -2035,7 +2035,13 @@ export type UpdateProjectDataCacheResponse = {
     aliasFinal?: string | null;
     automaticAliases?: string[];
     branchMatcher?: {
+      /**
+       * The type of matching to perform
+       */
       type: 'endsWith' | 'equals' | 'startsWith';
+      /**
+       * The pattern to match against branch names
+       */
       pattern: string;
     };
     buildingAt?: number;
@@ -2273,7 +2279,13 @@ export type UpdateProjectDataCacheResponse = {
       aliasFinal?: string | null;
       automaticAliases?: string[];
       branchMatcher?: {
+        /**
+         * The type of matching to perform
+         */
         type: 'endsWith' | 'equals' | 'startsWith';
+        /**
+         * The pattern to match against branch names
+         */
         pattern: string;
       };
       buildingAt?: number;
@@ -2552,7 +2564,7 @@ export type UpdateProjectDataCacheResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -2560,7 +2572,7 @@ export type UpdateProjectDataCacheResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
       }
     | null;
   gitComments?: {
@@ -9291,6 +9303,7 @@ export const getConfigurations = (variables: GetConfigurationsVariables, signal?
             | 'tag_security'
             | 'tag_testing'
             | 'tag_video'
+            | 'tag_workflow'
           )[];
         };
         /**
@@ -11161,7 +11174,13 @@ export type GetProjectsResponse = {
       aliasFinal?: string | null;
       automaticAliases?: string[];
       branchMatcher?: {
+        /**
+         * The type of matching to perform
+         */
         type: 'endsWith' | 'equals' | 'startsWith';
+        /**
+         * The pattern to match against branch names
+         */
         pattern: string;
       };
       buildingAt?: number;
@@ -11399,7 +11418,13 @@ export type GetProjectsResponse = {
         aliasFinal?: string | null;
         automaticAliases?: string[];
         branchMatcher?: {
+          /**
+           * The type of matching to perform
+           */
           type: 'endsWith' | 'equals' | 'startsWith';
+          /**
+           * The pattern to match against branch names
+           */
           pattern: string;
         };
         buildingAt?: number;
@@ -11678,7 +11703,7 @@ export type GetProjectsResponse = {
     hasActiveBranches?: boolean;
     trustedIps?:
       | {
-          deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+          deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
           addresses: {
             value: string;
             note?: string;
@@ -11686,7 +11711,7 @@ export type GetProjectsResponse = {
           protectionMode: 'additional' | 'exclusive';
         }
       | {
-          deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+          deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         }
       | null;
     gitComments?: {
@@ -12113,7 +12138,13 @@ export type CreateProjectResponse = {
     aliasFinal?: string | null;
     automaticAliases?: string[];
     branchMatcher?: {
+      /**
+       * The type of matching to perform
+       */
       type: 'endsWith' | 'equals' | 'startsWith';
+      /**
+       * The pattern to match against branch names
+       */
       pattern: string;
     };
     buildingAt?: number;
@@ -12351,7 +12382,13 @@ export type CreateProjectResponse = {
       aliasFinal?: string | null;
       automaticAliases?: string[];
       branchMatcher?: {
+        /**
+         * The type of matching to perform
+         */
         type: 'endsWith' | 'equals' | 'startsWith';
+        /**
+         * The pattern to match against branch names
+         */
         pattern: string;
       };
       buildingAt?: number;
@@ -12630,7 +12667,7 @@ export type CreateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -12638,7 +12675,7 @@ export type CreateProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
       }
     | null;
   gitComments?: {
@@ -13247,7 +13284,13 @@ export type GetProjectResponse = {
     aliasFinal?: string | null;
     automaticAliases?: string[];
     branchMatcher?: {
+      /**
+       * The type of matching to perform
+       */
       type: 'endsWith' | 'equals' | 'startsWith';
+      /**
+       * The pattern to match against branch names
+       */
       pattern: string;
     };
     buildingAt?: number;
@@ -13485,7 +13528,13 @@ export type GetProjectResponse = {
       aliasFinal?: string | null;
       automaticAliases?: string[];
       branchMatcher?: {
+        /**
+         * The type of matching to perform
+         */
         type: 'endsWith' | 'equals' | 'startsWith';
+        /**
+         * The pattern to match against branch names
+         */
         pattern: string;
       };
       buildingAt?: number;
@@ -13764,7 +13813,7 @@ export type GetProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -13772,7 +13821,7 @@ export type GetProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
       }
     | null;
   gitComments?: {
@@ -14207,7 +14256,13 @@ export type UpdateProjectResponse = {
     aliasFinal?: string | null;
     automaticAliases?: string[];
     branchMatcher?: {
+      /**
+       * The type of matching to perform
+       */
       type: 'endsWith' | 'equals' | 'startsWith';
+      /**
+       * The pattern to match against branch names
+       */
       pattern: string;
     };
     buildingAt?: number;
@@ -14445,7 +14500,13 @@ export type UpdateProjectResponse = {
       aliasFinal?: string | null;
       automaticAliases?: string[];
       branchMatcher?: {
+        /**
+         * The type of matching to perform
+         */
         type: 'endsWith' | 'equals' | 'startsWith';
+        /**
+         * The pattern to match against branch names
+         */
         pattern: string;
       };
       buildingAt?: number;
@@ -14724,7 +14785,7 @@ export type UpdateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -14732,7 +14793,7 @@ export type UpdateProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
       }
     | null;
   gitComments?: {
@@ -16399,7 +16460,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16503,7 +16564,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17394,7 +17455,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17498,7 +17559,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17601,7 +17662,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17795,7 +17856,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
