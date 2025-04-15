@@ -75,6 +75,8 @@ importers:
 
   packages/keycloak-api: {}
 
+  packages/litellm-api: {}
+
   packages/netlify-api: {}
 
   packages/nuki-api-js: {}
