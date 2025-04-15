@@ -1,5 +1,11 @@
 # zoom-api-js
 
+## 0.4.4
+
+### Patch Changes
+
+- 71999cd: Add summary_template_id to MeetingResponse, MeetingUpdateRequestBody, MeetingCreateResponse, MeetingCreateRequestBody
+
 ## 0.4.3
 
 ### Patch Changes
