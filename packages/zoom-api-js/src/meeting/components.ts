@@ -6224,6 +6224,12 @@ export type MeetingResponse = {
      */
     who_can_ask_questions?: 1 | 2 | 3 | 4 | 5;
     /**
+     * The summary template ID used to generate a meeting summary based on a predefined template. To get available summary templates, use the **Get user summary templates** API.
+     *
+     * @example 1e1356ad
+     */
+    summary_template_id?: string;
+    /**
      * Enable the device testing.
      *
      * @example false
@@ -6244,6 +6250,12 @@ export type MeetingResponse = {
      * @default false
      */
     disable_participant_video?: boolean;
+    /**
+     * Whether to include authenticated guest's email addresses in meetings' attendee reports.
+     *
+     * @example true
+     */
+    email_in_attendee_report?: boolean;
   };
   /**
    * Meeting start time in GMT or UTC. Start time will not be returned if the meeting is an **instant** meeting.
@@ -7284,6 +7296,12 @@ export type MeetingUpdateRequestBody = {
      * @example 1
      */
     who_can_ask_questions?: 1 | 2 | 3 | 4 | 5;
+    /**
+     * The summary template ID used to generate a meeting summary based on a predefined template. To get available summary templates, use the **Get user summary templates** API.
+     *
+     * @example 1e1356ad
+     */
+    summary_template_id?: string;
     /**
      * Enable the device testing.
      *
@@ -13799,6 +13817,12 @@ export type MeetingCreateResponse = {
      */
     who_can_ask_questions?: 1 | 2 | 3 | 4 | 5;
     /**
+     * The summary template ID used to generate a meeting summary based on a predefined template. To get available summary templates, use the **Get user summary templates** API.
+     *
+     * @example 1e1356ad
+     */
+    summary_template_id?: string;
+    /**
      * Enable the device testing.
      *
      * @example false
@@ -13819,6 +13843,12 @@ export type MeetingCreateResponse = {
      * @default false
      */
     disable_participant_video?: boolean;
+    /**
+     * Whether to include authenticated guest's email addresses in meetings' attendee reports.
+     *
+     * @example true
+     */
+    email_in_attendee_report?: boolean;
   };
   /**
    * Meeting start date-time in UTC/GMT, such as `2020-03-31T12:02:00Z`.
@@ -13875,7 +13905,7 @@ export type MeetingCreateResponse = {
     visible?: boolean;
   }[];
   /**
-   * The type of meeting.
+   * The meeting type.
    * * `1` - An instant meeting.
    * * `2` - A scheduled meeting.
    * * `3` - A recurring meeting with no fixed time.
@@ -14667,6 +14697,12 @@ export type MeetingCreateRequestBody = {
      */
     who_can_ask_questions?: 1 | 2 | 3 | 4 | 5;
     /**
+     * The summary template ID used to generate a meeting summary based on a predefined template. To get available summary templates, use the **Get user summary templates** API.
+     *
+     * @example 1e1356ad
+     */
+    summary_template_id?: string;
+    /**
      * Enable the device testing.
      *
      * @example false
@@ -14687,6 +14723,12 @@ export type MeetingCreateRequestBody = {
      * @default false
      */
     disable_participant_video?: boolean;
+    /**
+     * Whether to include authenticated guest's email addresses in meetings' attendee reports.
+     *
+     * @example true
+     */
+    email_in_attendee_report?: boolean;
   };
   /**
    * The meeting's start time. This field is only used for scheduled or recurring meetings with a fixed time. This supports local time and GMT formats.
@@ -15425,7 +15467,7 @@ export type ReportDailyQueryParams = {
    */
   month?: number;
   /**
-   * The group ID. To get a group ID, use the [**List groups**](/api-reference/zoom-api/methods#operation/groups) API.
+   * The group ID. To get a group ID, use the [**List groups**](/docs/api/users/#tag/groups/GET/groups) API.
    *
    *  **Note:** The API response will only contain users who are members of the queried group ID.
    *
@@ -15502,7 +15544,7 @@ export type ReportDailyVariables = {
  *
  * **Scopes:** `report:read:admin`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
 export const reportDaily = (variables: ReportDailyVariables, signal?: AbortSignal) =>
   fetch<ReportDailyResponse, ReportDailyError, undefined, {}, ReportDailyQueryParams, {}>({
@@ -22914,6 +22956,12 @@ export type WebinarCreateResponse = {
      * @default false
      */
     allow_host_control_participant_mute_state?: boolean;
+    /**
+     * Whether to include guest's email addresses in attendee reports for webinars.
+     *
+     * @example true
+     */
+    email_in_attendee_report?: boolean;
   };
   /**
    * Webinar start time in GMT/UTC.
@@ -22986,6 +23034,12 @@ export type WebinarCreateResponse = {
    * @example f09340e1-cdc3-4eae-9a74-98f9777ed908
    */
   record_file_id?: string;
+  /**
+   * Whether to transition a simulive webinar to live. The host must be present at the time of transition.
+   *
+   * @example false
+   */
+  transition_to_live?: boolean;
   /**
    * The platform through which the meeting was created.
    * * `other` - Created through another platform.
@@ -23612,6 +23666,12 @@ export type WebinarCreateRequestBody = {
      * @default false
      */
     allow_host_control_participant_mute_state?: boolean;
+    /**
+     * Whether to include guest's email addresses in webinars' attendee reports.
+     *
+     * @example true
+     */
+    email_in_attendee_report?: boolean;
   };
   /**
    * Webinar start time. We support two formats for `start_time` - local time and GMT.
@@ -23686,6 +23746,12 @@ export type WebinarCreateRequestBody = {
    * @example f09340e1-cdc3-4eae-9a74-98f9777ed908
    */
   record_file_id?: string;
+  /**
+   * Whether to transition a simulive webinar to live. The host must be present at the time of transition.
+   *
+   * @example false
+   */
+  transition_to_live?: boolean;
 };
 
 export type WebinarCreateVariables = {
@@ -24444,6 +24510,12 @@ export type WebinarResponse = {
      * @default false
      */
     allow_host_control_participant_mute_state?: boolean;
+    /**
+     * Whether to include guest's email addresses in webinars' attendee reports.
+     *
+     * @example true
+     */
+    email_in_attendee_report?: boolean;
   };
   /**
    * Webinar start time in GMT/UTC.
@@ -24516,6 +24588,12 @@ export type WebinarResponse = {
    * @example f09340e1-cdc3-4eae-9a74-98f9777ed908
    */
   record_file_id?: string;
+  /**
+   * Whether to transition a simulive webinar to live. The host must be present at the time of transition.
+   *
+   * @example false
+   */
+  transition_to_live?: boolean;
   /**
    * The platform used when creating the meeting.
    * * `other` - Created through another platform.
@@ -25328,6 +25406,12 @@ export type WebinarUpdateRequestBody = {
    * @example f09340e1-cdc3-4eae-9a74-98f9777ed908
    */
   record_file_id?: string;
+  /**
+   * Whether to transition a simulive webinar to live. The host must be present at the time of transition.
+   *
+   * @example false
+   */
+  transition_to_live?: boolean;
 };
 
 export type WebinarUpdateVariables = {
