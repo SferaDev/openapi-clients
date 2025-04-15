@@ -2224,6 +2224,9 @@ export type UserEvent = {
         previousCanceledAt?: string;
       }
     | {
+        enforced: boolean;
+      }
+    | {
         name?: string;
       }
     | {
