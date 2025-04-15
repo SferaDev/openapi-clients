@@ -32884,6 +32884,7 @@ export type ObservatoryApiResponseCommon = {
    * Whether the API call was successful.
    *
    * @example true
+   * @x-auditable true
    */
   success: boolean;
 };
@@ -32912,6 +32913,7 @@ export type ObservatoryAvailabilities = {
      * Cloudflare plan.
      *
      * @example free
+     * @x-auditable true
      */
     plan?: string;
     /**
@@ -32924,12 +32926,14 @@ export type ObservatoryAvailabilities = {
      * The number of remaining schedules available.
      *
      * @example 1
+     * @x-auditable true
      */
     remainingSchedules?: number;
     /**
      * The number of remaining tests available.
      *
      * @example 30
+     * @x-auditable true
      */
     remainingTests?: number;
     /**
@@ -32961,6 +32965,7 @@ export type ObservatoryCountResponse = ObservatoryApiResponseSingle & {
      * Number of items affected.
      *
      * @example 1
+     * @x-auditable true
      */
     count?: number;
   };
@@ -32977,6 +32982,7 @@ export type ObservatoryCreateScheduleResponse = ObservatoryApiResponseSingle & {
  * The type of device.
  *
  * @example DESKTOP
+ * @x-auditable true
  */
 export type ObservatoryDeviceType = 'DESKTOP' | 'MOBILE';
 
@@ -32994,6 +33000,7 @@ export type ObservatoryIdentifier = string;
 export type ObservatoryLabeledRegion = {
   /**
    * @example Iowa, USA
+   * @x-auditable true
    */
   label?: string;
   value?: ObservatoryRegion;
@@ -33003,6 +33010,7 @@ export type ObservatoryLabeledRegion = {
  * The error code of the Lighthouse result.
  *
  * @example NOT_REACHABLE
+ * @x-auditable true
  */
 export type ObservatoryLighthouseErrorCode =
   | 'NOT_REACHABLE'
@@ -33019,6 +33027,7 @@ export type ObservatoryLighthouseReport = {
    * Cumulative Layout Shift.
    *
    * @example 100
+   * @x-auditable true
    */
   cls?: number;
   deviceType?: ObservatoryDeviceType;
@@ -33028,12 +33037,14 @@ export type ObservatoryLighthouseReport = {
      * Detailed error message.
      *
      * @example Details: net::ERR_CONNECTION_CLOSED
+     * @x-auditable true
      */
     detail?: string;
     /**
      * The final URL displayed to the user.
      *
      * @example example.com
+     * @x-auditable true
      */
     finalDisplayedUrl?: string;
   };
@@ -33041,28 +33052,34 @@ export type ObservatoryLighthouseReport = {
    * First Contentful Paint.
    *
    * @example 100
+   * @x-auditable true
    */
   fcp?: number;
   /**
    * The URL to the full Lighthouse JSON report.
+   *
+   * @x-auditable true
    */
   jsonReportUrl?: string;
   /**
    * Largest Contentful Paint.
    *
    * @example 100
+   * @x-auditable true
    */
   lcp?: number;
   /**
    * The Lighthouse performance score.
    *
    * @example 90
+   * @x-auditable true
    */
   performanceScore?: number;
   /**
    * Speed Index.
    *
    * @example 100
+   * @x-auditable true
    */
   si?: number;
   state?: ObservatoryLighthouseState;
@@ -33070,18 +33087,21 @@ export type ObservatoryLighthouseReport = {
    * Total Blocking Time.
    *
    * @example 100
+   * @x-auditable true
    */
   tbt?: number;
   /**
    * Time To First Byte.
    *
    * @example 100
+   * @x-auditable true
    */
   ttfb?: number;
   /**
    * Time To Interactive.
    *
    * @example 100
+   * @x-auditable true
    */
   tti?: number;
 };
@@ -33090,14 +33110,19 @@ export type ObservatoryLighthouseReport = {
  * The state of the Lighthouse report.
  *
  * @example COMPLETE
+ * @x-auditable true
  */
 export type ObservatoryLighthouseState = 'RUNNING' | 'COMPLETE' | 'FAILED';
 
 export type ObservatoryMessages = {
   /**
    * @minimum 1000
+   * @x-auditable true
    */
   code: number;
+  /**
+   * @x-auditable true
+   */
   message: string;
 }[];
 
@@ -33136,18 +33161,22 @@ export type ObservatoryPagesResponseCollection = ObservatoryApiResponseCollectio
 export type ObservatoryPlanPropertiesInfo = {
   /**
    * @example 1
+   * @x-auditable true
    */
   business?: number;
   /**
    * @example 1
+   * @x-auditable true
    */
   enterprise?: number;
   /**
    * @example 1
+   * @x-auditable true
    */
   free?: number;
   /**
    * @example 1
+   * @x-auditable true
    */
   pro?: number;
 };
@@ -33156,6 +33185,7 @@ export type ObservatoryPlanPropertiesInfo = {
  * A test region.
  *
  * @example us-central1
+ * @x-auditable true
  */
 export type ObservatoryRegion =
   | 'asia-east1'
@@ -33183,18 +33213,22 @@ export type ObservatoryRegion =
 export type ObservatoryResultInfo = {
   /**
    * @example 5
+   * @x-auditable true
    */
   count?: number;
   /**
    * @example 1
+   * @x-auditable true
    */
   page?: number;
   /**
    * @example 5
+   * @x-auditable true
    */
   per_page?: number;
   /**
    * @example 3
+   * @x-auditable true
    */
   total_count?: number;
 };
@@ -33216,6 +33250,7 @@ export type ObservatoryScheduleResponseSingle = ObservatoryApiResponseSingle & {
  * The frequency of the test.
  *
  * @example DAILY
+ * @x-auditable true
  */
 export type ObservatoryScheduleFrequency = 'DAILY' | 'WEEKLY';
 
@@ -33280,6 +33315,7 @@ export type ObservatoryTrendResponse = ObservatoryApiResponseSingle & {
  * A URL.
  *
  * @example example.com
+ * @x-auditable true
  */
 export type ObservatoryUrl = string;
 
