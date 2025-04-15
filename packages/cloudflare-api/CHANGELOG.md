@@ -1,5 +1,11 @@
 # cloudflare-api-js
 
+## 0.12.1
+
+### Patch Changes
+
+- bdaac6f: Add x-auditable field to various types in schemas
+
 ## 0.12.0
 
 ### Minor Changes

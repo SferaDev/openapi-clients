@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.23.6
+
+### Patch Changes
+
+- 0214182: Add team member MFA status field to project responses
+
 ## 0.23.5
 
 ### Patch Changes
