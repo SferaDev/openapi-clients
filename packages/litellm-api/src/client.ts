@@ -45,6 +45,7 @@ export class LiteLLMApi {
   }
 
   get api() {
+    const baseUrl = this.#baseUrl;
     const token = this.#token;
     const fetchImpl = this.#fetch;
 
@@ -67,7 +68,7 @@ export class LiteLLMApi {
                 const method = operationsByTag[namespace][operation] as any;
 
                 return async (params: Record<string, unknown>) => {
-                  return await method({ ...params, token, fetchImpl });
+                  return await method({ ...params, baseUrl, token, fetchImpl });
                 };
               }
             }
