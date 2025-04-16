@@ -431,9 +431,9 @@ export type ListArchivedFilesVariables = {
  *  **Prerequisites:**
  * * The [**Meeting and Webinar Archiving** feature](https://support.zoom.us/hc/en-us/articles/4405656451213--Archiving-for-meetings-and-webinars) enabled for your account by [Zoom Support](https://support.zoom.us/hc/en-us/articles/201362003).
  *
- * **Scopes:** `recording:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:read:admin`
  *
- * **Granular Scopes:** `archiving:read:list_archived_files:admin`,`archiving:read:list_archived_files:master`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `archiving:read:list_archived_files:admin`,`archiving:read:list_archived_files:master`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -557,9 +557,9 @@ export type GetArchivedFileStatisticsVariables = {
  *  **Prerequisites:**
  * * The [**Meeting and Webinar Archiving** feature](https://support.zoom.us/hc/en-us/articles/4405656451213--Archiving-for-meetings-and-webinars) enabled for your account by [Zoom Support](https://support.zoom.us/hc/en-us/articles/201362003).
  *
- * **Scopes:** `recording:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:read:admin`
  *
- * **Granular Scopes:** `archiving:read:archived_file_statistics:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `archiving:read:archived_file_statistics:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -605,9 +605,9 @@ export type UpdateArchivedFileVariables = {
  * * [Zoom Support](https://support.zoom.us/hc/en-us/articles/201362003) must enable the [**Meeting and Webinar Archiving** feature](https://support.zoom.us/hc/en-us/articles/4405656451213--Archiving-for-meetings-and-webinars) for your account.
  * * Open the disabling auto-delete feature in OP. Contact [Zoom Support](https://support.zoom.us/hc/en-us/articles/201362003) to open.
  *
- * **Scopes:** `recording:write`,`recording:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:write`,`recording:write:admin`
  *
- * **Granular Scopes:** `archiving:update:archived_file_auto_delete_status`,`archiving:update:archived_file_auto_delete_status:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `archiving:update:archived_file_auto_delete_status`,`archiving:update:archived_file_auto_delete_status:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -958,9 +958,9 @@ export type GetArchivedFilesVariables = {
  *  **Prerequisites:**
  * * The [**Meeting and Webinar Archiving** feature](https://support.zoom.us/hc/en-us/articles/4405656451213--Archiving-for-meetings-and-webinars) enabled for your account by [Zoom Support](https://support.zoom.us/hc/en-us/articles/201362003).
  *
- * **Scopes:** `recording:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:read`
  *
- * **Granular Scopes:** `archiving:read:archived_files:admin`,`archiving:read:archived_files`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `archiving:read:archived_files:admin`,`archiving:read:archived_files`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -995,9 +995,9 @@ export type DeleteArchivedFilesVariables = {
  *  **Prerequisites:**
  * * The [**Meeting and Webinar Archiving** feature](https://support.zoom.us/hc/en-us/articles/4405656451213--Archiving-for-meetings-and-webinars) enabled for your account by [Zoom Support](https://support.zoom.us/hc/en-us/articles/201362003).
  *
- * **Scopes:** `recording:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:write:admin`
  *
- * **Granular Scopes:** `archiving:delete:archived_files:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `archiving:delete:archived_files:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -1377,9 +1377,9 @@ export type RecordingGetVariables = {
  *
  *  `curl -H 'Authorization: Bearer <ACCESS_TOKEN>' https://{{base-domain}}/rec/archive/download/xyz`
  *
- * **Scopes:** `recording:read`,`phone_recording:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:read`,`phone_recording:read:admin`
  *
- * **Granular Scopes:** `cloud_recording:read:list_recording_files:admin`,`cloud_recording:read:list_recording_files`,`cloud_recording:read:list_recording_files:master`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:read:list_recording_files:admin`,`cloud_recording:read:list_recording_files`,`cloud_recording:read:list_recording_files:master`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -1431,9 +1431,9 @@ export type RecordingDeleteVariables = {
  *
  *
  *
- * **Scopes:** `recording:write:admin`,`recording:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:write:admin`,`recording:write`
  *
- * **Granular Scopes:** `cloud_recording:delete:meeting_recording`,`cloud_recording:delete:meeting_recording:admin`,`cloud_recording:delete:meeting_recording:master`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:delete:meeting_recording`,`cloud_recording:delete:meeting_recording:admin`,`cloud_recording:delete:meeting_recording:master`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -1573,7 +1573,7 @@ export type AnalyticsDetailsVariables = {
 /**
  * Retrieve a meeting or webinar recording's [analytics details](https://support.zoom.us/hc/en-us/articles/205347605-Managing-cloud-recordings#h_0b665029-ce74-4849-9794-d1aa0320d163). **Maximum duration:** 1 month.
  *
- * **Granular Scopes:** `cloud_recording:read:recording_analytics_details`,`cloud_recording:read:recording_analytics_details:master`,`cloud_recording:read:recording_analytics_details:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:read:recording_analytics_details`,`cloud_recording:read:recording_analytics_details:master`,`cloud_recording:read:recording_analytics_details:admin`
  */
 export const analyticsDetails = (variables: AnalyticsDetailsVariables, signal?: AbortSignal) =>
   fetch<
@@ -1665,7 +1665,7 @@ export type AnalyticsSummaryVariables = {
 /**
  * Retrieve meeting recording's [analytics summary](https://support.zoom.us/hc/en-us/articles/205347605-Managing-cloud-recordings#h_0b665029-ce74-4849-9794-d1aa0320d163). **Maximum duration:** 1 month.
  *
- * **Granular Scopes:** `cloud_recording:read:recording_analytics_summary`,`cloud_recording:read:recording_analytics_summary:master`,`cloud_recording:read:recording_analytics_summary:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:read:recording_analytics_summary`,`cloud_recording:read:recording_analytics_summary:master`,`cloud_recording:read:recording_analytics_summary:admin`
  */
 export const analyticsSummary = (variables: AnalyticsSummaryVariables, signal?: AbortSignal) =>
   fetch<
@@ -1938,9 +1938,9 @@ export type MeetingRecordingRegistrantsVariables = {
  *
  *
  *
- * **Scopes:** `recording:read:admin`,`recording:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:read:admin`,`recording:read`
  *
- * **Granular Scopes:** `cloud_recording:read:list_recording_registrants`,`cloud_recording:read:list_recording_registrants:admin`,`cloud_recording:read:list_recording_registrants:master`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:read:list_recording_registrants`,`cloud_recording:read:list_recording_registrants:admin`,`cloud_recording:read:list_recording_registrants:master`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -2166,9 +2166,9 @@ export type MeetingRecordingRegistrantCreateVariables = {
  *
  *
  *
- * **Scopes:** `recording:write:admin`,`recording:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:write:admin`,`recording:write`
  *
- * **Granular Scopes:** `cloud_recording:write:recording_registrant`,`cloud_recording:write:recording_registrant:master`,`cloud_recording:write:recording_registrant:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:write:recording_registrant`,`cloud_recording:write:recording_registrant:master`,`cloud_recording:write:recording_registrant:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -2272,9 +2272,9 @@ export type RecordingRegistrantsQuestionsGetVariables = {
  *
  *
  *
- * **Scopes:** `recording:read:admin`,`recording:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:read:admin`,`recording:read`
  *
- * **Granular Scopes:** `cloud_recording:read:registration_questions`,`cloud_recording:read:registration_questions:master`,`cloud_recording:read:registration_questions:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:read:registration_questions`,`cloud_recording:read:registration_questions:master`,`cloud_recording:read:registration_questions:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -2379,9 +2379,9 @@ export type RecordingRegistrantQuestionUpdateVariables = {
  *
  *
  *
- * **Scopes:** `recording:write:admin`,`recording:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:write:admin`,`recording:write`
  *
- * **Granular Scopes:** `cloud_recording:update:registration_questions:admin`,`cloud_recording:update:registration_questions`,`cloud_recording:update:registration_questions:master`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:update:registration_questions:admin`,`cloud_recording:update:registration_questions`,`cloud_recording:update:registration_questions:master`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -2441,9 +2441,9 @@ export type MeetingRecordingRegistrantStatusVariables = {
  *
  *
  *
- * **Scopes:** `recording:write:admin`,`recording:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:write:admin`,`recording:write`
  *
- * **Granular Scopes:** `cloud_recording:update:registrant_status`,`cloud_recording:update:registrant_status:master`,`cloud_recording:update:registrant_status:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:update:registrant_status`,`cloud_recording:update:registrant_status:master`,`cloud_recording:update:registrant_status:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -2588,9 +2588,9 @@ export type RecordingSettingUpdateVariables = {
  *
  * Response includes recording content access information, which requires the current user to have the `View the recording content` permission to access it.
  *
- * **Scopes:** `recording:read:admin`,`recording:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:read:admin`,`recording:read`
  *
- * **Granular Scopes:** `cloud_recording:read:recording_settings`,`cloud_recording:read:recording_settings:admin`,`cloud_recording:read:recording_settings:master`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:read:recording_settings`,`cloud_recording:read:recording_settings:admin`,`cloud_recording:read:recording_settings:master`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -2720,9 +2720,9 @@ export type RecordingSettingsUpdateVariables = {
  * Update settings applied to a meeting's [cloud recording](https://support.zoom.us/hc/en-us/articles/203741855-Cloud-Recording).
  * The request contains the recording content access information, which requires the current user to have the `view recording content` and `recording editing` permissions to access.
  *
- * **Scopes:** `recording:write:admin`,`recording:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:write:admin`,`recording:write`
  *
- * **Granular Scopes:** `cloud_recording:update:recording_settings`,`cloud_recording:update:recording_settings:master`,`cloud_recording:update:recording_settings:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:update:recording_settings`,`cloud_recording:update:recording_settings:master`,`cloud_recording:update:recording_settings:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -2779,9 +2779,9 @@ export type RecordingDeleteOneVariables = {
  *
  *
  *
- * **Scopes:** `recording:write:admin`,`recording:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:write:admin`,`recording:write`
  *
- * **Granular Scopes:** `cloud_recording:delete:recording_file`,`cloud_recording:delete:recording_file:admin`,`cloud_recording:delete:recording_file:master`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:delete:recording_file`,`cloud_recording:delete:recording_file:admin`,`cloud_recording:delete:recording_file:master`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -2830,9 +2830,9 @@ export type RecordingStatusUpdateOneVariables = {
  *
  *
  *
- * **Scopes:** `recording:write:admin`,`recording:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:write:admin`,`recording:write`
  *
- * **Granular Scopes:** `cloud_recording:update:recover_single_recording`,`cloud_recording:update:recover_single_recording:master`,`cloud_recording:update:recover_single_recording:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:update:recover_single_recording`,`cloud_recording:update:recover_single_recording:master`,`cloud_recording:update:recover_single_recording:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -2880,9 +2880,9 @@ export type RecordingStatusUpdateVariables = {
  *
  * * A Pro user with Cloud Recording enabled.
  *
- * **Scopes:** `recording:write:admin`,`recording:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:write:admin`,`recording:write`
  *
- * **Granular Scopes:** `cloud_recording:update:recover_meeting_recordings`,`cloud_recording:update:recover_meeting_recordings:master`,`cloud_recording:update:recover_meeting_recordings:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:update:recover_meeting_recordings`,`cloud_recording:update:recover_meeting_recordings:master`,`cloud_recording:update:recover_meeting_recordings:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -3283,9 +3283,9 @@ export type RecordingsListVariables = {
  * * Must have a Pro or a higher plan.
  * * Must enable Cloud Recording on the user's account.
  *
- * **Scopes:** `recording:read:admin`,`recording:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `recording:read:admin`,`recording:read`
  *
- * **Granular Scopes:** `cloud_recording:read:list_user_recordings`,`cloud_recording:read:list_user_recordings:master`,`cloud_recording:read:list_user_recordings:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `cloud_recording:read:list_user_recordings`,`cloud_recording:read:list_user_recordings:master`,`cloud_recording:read:list_user_recordings:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -3523,7 +3523,7 @@ export type ListDevicesVariables = {
  *
  *
  *
- * **Scopes:** `device:read:admin`,`device:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:read:admin`,`device:write:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
@@ -3620,7 +3620,7 @@ export type AddDeviceVariables = {
  *
  *  **[Rate Limit Label](https://developers.zoom.us/docs/api/rest/rate-limits/):** `Medium`
  *
- * **Scopes:** `device:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:write:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -3698,9 +3698,9 @@ export type GetzdmgroupinfoVariables = {
 /**
  * Get Zoom Device Manager (ZDM) group information for an account.
  *
- * **Scopes:** `device:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:read:admin`
  *
- * **Granular Scopes:** `device:read:list_groups:admin`,`device:read:list_groups:master`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:read:list_groups:admin`,`device:read:list_groups:master`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -3745,9 +3745,9 @@ export type AssigndevicetoauserCommonareaVariables = {
  * **Prerequisites:**
  * * Device must be enrolled in Zoom Device Management (ZDM).
  *
- * **Scopes:** `device:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:write:admin`
  *
- * **Granular Scopes:** `device:write:zpa_device:admin`,`device:write:zpa_device:master`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:write:zpa_device:admin`,`device:write:zpa_device:master`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -3855,9 +3855,9 @@ export type GetZpaDeviceListProfileSettingOfaUserVariables = {
 /**
  * Get a user's Zoom Phone Appliance (ZPA) device profile settings. For user-level apps, pass the `me` value instead of the `userId` parameter.
  *
- * **Scopes:** `device:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:read:admin`
  *
- * **Granular Scopes:** `device:read:user_setting:admin`,`device:read:user_setting:master`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:read:user_setting:admin`,`device:read:user_setting:master`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -3940,9 +3940,9 @@ export type UpgradeZpasAppVariables = {
  *
  * * Account owner or admin permissions.
  *
- * **Scopes:** `device:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:write:admin`
  *
- * **Granular Scopes:** `device:write:zpa_os_app:admin`,`device:write:zpa_os_app:master`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:write:zpa_os_app:admin`,`device:write:zpa_os_app:master`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
@@ -3978,9 +3978,9 @@ export type DeleteZpaDeviceByVendorAndMacAddressVariables = {
 /**
  * Remove a ZPA device from the device manager, by vendor and mac address.
  *
- * **Scopes:** `device:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:write:admin`
  *
- * **Granular Scopes:** `device:delete:zpa_device:admin`,`device:delete:zpa_device:master`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:delete:zpa_device:admin`,`device:delete:zpa_device:master`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -4055,9 +4055,9 @@ export type GetZpaVersioninfoVariables = {
 /**
  * Get ZPA firmware and app version information that can be upgraded for devices.
  *
- * **Scopes:** `device:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:read:admin`
  *
- * **Granular Scopes:** `device:read:list_zpa_versions:admin`,`device:read:list_zpa_versions:master`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:read:list_zpa_versions:admin`,`device:read:list_zpa_versions:master`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -4211,7 +4211,7 @@ export type GetDeviceVariables = {
 /**
  * Retrieve a device's details.
  *
- * **Scopes:** `device:read:admin`,`device:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:read:admin`,`device:write:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
@@ -4244,7 +4244,7 @@ export type DeleteDeviceVariables = {
  * **Prerequisites:**
  * * Device must be enrolled in ZMD (Zoom Device Management)
  *
- * **Scopes:** `device:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:write:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
@@ -4308,7 +4308,7 @@ export type UpdateDeviceVariables = {
  * **Prerequisites:**
  * * Device must be enrolled in ZMD (Zoom Device Management)
  *
- * **Scopes:** `device:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:write:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -4348,9 +4348,9 @@ export type AssginGroupVariables = {
 /**
  * Assign a device to a new group.
  *
- * **Scopes:** `device:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:write:admin`
  *
- * **Granular Scopes:** `device:write:group:admin`,`device:write:group:master`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:write:group:admin`,`device:write:group:master`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -4405,9 +4405,9 @@ export type ChangeDeviceAssociationVariables = {
 /**
  * Change a device's association from one Zoom Room to another. **Prerequisites:** Device must be enrolled in ZDM (Zoom Device Management).
  *
- * **Scopes:** `device:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:write:admin`
  *
- * **Granular Scopes:** `device:update:zdm_device_assignment:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `device:update:zdm_device_assignment:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -4535,9 +4535,9 @@ export type DeviceListVariables = {
  *
  *
  *
- * **Scopes:** `h323:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `h323:read:admin`
  *
- * **Granular Scopes:** `h323_device:read:list_devices:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `h323_device:read:list_devices:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -4633,9 +4633,9 @@ export type DeviceCreateVariables = {
  *
  *
  *
- * **Scopes:** `h323:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `h323:write:admin`
  *
- * **Granular Scopes:** `h323_device:write:device:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `h323_device:write:device:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -4668,9 +4668,9 @@ export type DeviceDeleteVariables = {
  *
  *
  *
- * **Scopes:** `h323:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `h323:write:admin`
  *
- * **Granular Scopes:** `h323_device:delete:device:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `h323_device:delete:device:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -4738,9 +4738,9 @@ export type DeviceUpdateVariables = {
  *
  *
  *
- * **Scopes:** `h323:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `h323:write:admin`
  *
- * **Granular Scopes:** `h323_device:update:device:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `h323_device:update:device:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -4792,9 +4792,9 @@ export type DeleteMeetingChatMessageByIdVariables = {
  * **Prerequisites:**
  * * Have Zoom enable the DLP for the in-meeting chat feature to use this API.
  *
- * **Scopes:** `meeting:write`,`meeting:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
  *
- * **Granular Scopes:** `meeting:delete:live_meeting_chat_message`,`meeting:delete:live_meeting_chat_message:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:delete:live_meeting_chat_message`,`meeting:delete:live_meeting_chat_message:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -4845,9 +4845,9 @@ export type UpdateMeetingChatMessageByIdVariables = {
 /**
  * Update a message in a live meeting, based on ID. **Prerequisites:** * Have Zoom enable the DLP for the in-meeting chat feature to use this API.
  *
- * **Scopes:** `meeting:write`,`meeting:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
  *
- * **Granular Scopes:** `meeting:update:live_meeting_chat_message`,`meeting:update:live_meeting_chat_message:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:live_meeting_chat_message`,`meeting:update:live_meeting_chat_message:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -5061,9 +5061,9 @@ export type InMeetingControlVariables = {
  * * Recording control: [Cloud recording](https://support.zoom.us/hc/en-us/articles/360060231472-Enabling-cloud-recording) must be enabled on the account.
  * * The user calling this API must be the host or an alternative meeting host.
  *
- * **Scopes:** `meeting:write`,`meeting:write:admin`,`meeting:master`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`,`meeting:master`
  *
- * **Granular Scopes:** `meeting:update:in_meeting_controls`,`meeting:update:in_meeting_controls:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:in_meeting_controls`,`meeting:update:in_meeting_controls:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -5230,9 +5230,9 @@ export type ListmeetingsummariesVariables = {
  * * The Meeting Summary with AI Companion feature enabled in the host's account.
  * * E2ee meetings do not have summary feature enabled.
  *
- * **Scopes:** `meeting_summary:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_summary:read:admin`
  *
- * **Granular Scopes:** `meeting:read:list_summaries:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_summaries:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -6364,9 +6364,9 @@ export type MeetingVariables = {
  * **Prerequisites**:
  * * Host user must have a Zoom Meetings Basic license or higher.
  *
- * **Scopes:** `meeting:read`,`meeting:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read`,`meeting:read:admin`
  *
- * **Granular Scopes:** `meeting:read:meeting`,`meeting:read:meeting:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:meeting`,`meeting:read:meeting:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -6429,9 +6429,9 @@ export type MeetingDeleteVariables = {
  * **Prerequisites**:
  * * For recurring meetings, the `occurrence_id` is required to delete a specific occurrence. If not provided, the entire recurring series will be deleted.
  *
- * **Scopes:** `meeting:write:admin`,`meeting:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
  *
- * **Granular Scopes:** `meeting:delete:meeting`,`meeting:delete:meeting:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:delete:meeting`,`meeting:delete:meeting:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -7405,9 +7405,9 @@ export type MeetingUpdateVariables = {
  * * The `recurrence` object is required only when updating the entire series of a recurring meeting with `type=8`.
  * * This API has a rate limit of **100 requests per day**. You can update a meeting for a maximum of 100 times within a 24-hour period.
  *
- * **Scopes:** `meeting:write`,`meeting:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
  *
- * **Granular Scopes:** `meeting:update:meeting:admin`,`meeting:update:meeting`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:meeting:admin`,`meeting:update:meeting`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -7801,9 +7801,9 @@ export type CreateBatchPollsVariables = {
  * * Polling feature must be enabled in the host's account.
  * * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
  *
- * **Scopes:** `meeting:write:admin`,`meeting:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
  *
- * **Granular Scopes:** `meeting:write:batch_polls`,`meeting:write:batch_polls:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:batch_polls`,`meeting:write:batch_polls:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -7913,9 +7913,9 @@ export type AddBatchRegistrantsVariables = {
  *
  *
  *
- * **Scopes:** `meeting:write`,`meeting:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
  *
- * **Granular Scopes:** `meeting:write:batch_registrants`,`meeting:write:batch_registrants:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:batch_registrants`,`meeting:write:batch_registrants:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
@@ -7992,9 +7992,9 @@ export type MeetingInvitationVariables = {
  * **Prerequisites**:
  * * Host user must have a Zoom Meetings Basic license or higher.
  *
- * **Scopes:** `meeting:read`,`meeting:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read`,`meeting:read:admin`
  *
- * **Granular Scopes:** `meeting:read:invitation`,`meeting:read:invitation:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:invitation`,`meeting:read:invitation:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -8098,9 +8098,9 @@ export type MeetingInviteLinksCreateVariables = {
  * **Prerequisites**:
  * * The `ttl` value, in seconds, defines the invite link's expiration time. It must be between `0` or no expiration and `7776000` or 90 days, and has a default value of `7200` or 2 hours.
  *
- * **Scopes:** `meeting:write:admin`,`meeting:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
  *
- * **Granular Scopes:** `meeting:write:invite_links`,`meeting:write:invite_links:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:invite_links`,`meeting:write:invite_links:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -8155,9 +8155,9 @@ export type MeetingLiveStreamingJoinTokenVariables = {
  * * A Pro or higher plan for the meeting host.
  * * The **Allow livestreaming of meetings** user setting enabled in the Zoom web portal.
  *
- * **Scopes:** `meeting_token:read:admin:live_streaming`,`meeting_token:read:live_streaming`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_token:read:admin:live_streaming`,`meeting_token:read:live_streaming`
  *
- * **Granular Scopes:** `meeting:read:live_streaming_token`,`meeting:read:live_streaming_token:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:live_streaming_token`,`meeting:read:live_streaming_token:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -8215,9 +8215,9 @@ export type MeetingLocalArchivingArchiveTokenVariables = {
  * * A Pro or higher plan for the meeting host.
  * * The **Archive meetings and webinars** account setting enabled in the Zoom web portal.
  *
- * **Scopes:** `meeting_token:read:admin:local_archiving`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_token:read:admin:local_archiving`
  *
- * **Granular Scopes:** `meeting:read:local_archiving_token:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:local_archiving_token:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -8284,9 +8284,9 @@ export type MeetingLocalRecordingJoinTokenVariables = {
  * **Prerequisites:**
  * * The **Local recording** user setting enabled in the Zoom web portal.
  *
- * **Scopes:** `meeting_token:read:admin:local_recording`,`meeting_token:read:local_recording`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_token:read:admin:local_recording`,`meeting_token:read:local_recording`
  *
- * **Granular Scopes:** `meeting:read:local_recording_token`,`meeting:read:local_recording_token:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:local_recording_token`,`meeting:read:local_recording_token:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -8358,9 +8358,9 @@ export type GetMeetingLiveStreamDetailsVariables = {
  *
  *
  *
- * **Scopes:** `meeting:read:admin`,`meeting:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
  *
- * **Granular Scopes:** `meeting:read:livestream`,`meeting:read:livestream:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:livestream`,`meeting:read:livestream:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -8430,9 +8430,9 @@ export type MeetingLiveStreamUpdateVariables = {
  * **Prerequisites:**
  * * Meeting host must have a Pro license.
  *
- * **Scopes:** `meeting:write:admin`,`meeting:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
  *
- * **Granular Scopes:** `meeting:update:livestream`,`meeting:update:livestream:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:livestream`,`meeting:update:livestream:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -8522,9 +8522,9 @@ export type MeetingLiveStreamStatusUpdateVariables = {
  * **Prerequisites:**
  * * Meeting host must have a Pro license.
  *
- * **Scopes:** `meeting:write:admin`,`meeting:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
  *
- * **Granular Scopes:** `meeting:update:livestream_status`,`meeting:update:livestream_status:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:livestream_status`,`meeting:update:livestream_status:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -8709,9 +8709,9 @@ export type GetameetingsummaryVariables = {
  * * Enable the Meeting Summary with AI Companion feature in the host's account.
  * * E2ee meetings do not have summary feature enabled.
  *
- * **Scopes:** `meeting_summary:read`,`meeting_summary:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_summary:read`,`meeting_summary:read:admin`
  *
- * **Granular Scopes:** `meeting:read:summary`,`meeting:read:summary:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:summary`,`meeting:read:summary:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -8771,9 +8771,9 @@ export type MeetingAppAddVariables = {
  * * The meeting must not be a live meeting.
  * * The **Zoom Apps Quick Launch Button** setting enabled in the Zoom web portal.
  *
- * **Scopes:** `meeting:write`,`meeting:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
  *
- * **Granular Scopes:** `meeting:write:open_app`,`meeting:write:open_app:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:open_app`,`meeting:write:open_app:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -8810,9 +8810,9 @@ export type MeetingAppDeleteVariables = {
  * * The meeting must not be a live meeting.
  * * The **Zoom Apps Quick Launch Button** setting enabled in the Zoom web portal.
  *
- * **Scopes:** `meeting:write`,`meeting:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
  *
- * **Granular Scopes:** `meeting:delete:open_app`,`meeting:delete:open_app:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:delete:open_app`,`meeting:delete:open_app:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -9077,9 +9077,9 @@ export type MeetingPollsVariables = {
  * * Host user type must be **Pro** or higher plan.
  * * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
  *
- * **Scopes:** `meeting:read:admin`,`meeting:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
  *
- * **Granular Scopes:** `meeting:read:list_polls`,`meeting:read:list_polls:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_polls`,`meeting:read:list_polls:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -9507,9 +9507,9 @@ export type MeetingPollCreateVariables = {
  * * Polling feature must be enabled in the host's account.
  * * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
  *
- * **Scopes:** `meeting:write:admin`,`meeting:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
  *
- * **Granular Scopes:** `meeting:write:poll`,`meeting:write:poll:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:poll`,`meeting:write:poll:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -9756,9 +9756,9 @@ export type MeetingPollGetVariables = {
  * * Host must have Pro or higher plan.
  * * Enable the **Meeting Polls/Quizzes** setting in the Zoom web portal.
  *
- * **Scopes:** `meeting:read:admin`,`meeting:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
  *
- * **Granular Scopes:** `meeting:read:poll`,`meeting:read:poll:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:poll`,`meeting:read:poll:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -9988,9 +9988,9 @@ export type MeetingPollUpdateVariables = {
  * * The **Meeting Polls/Quizzes** setting enabled in the Zoom web portal.
  * * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
  *
- * **Scopes:** `meeting:write:admin`,`meeting:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
  *
- * **Granular Scopes:** `meeting:update:poll`,`meeting:update:poll:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:poll`,`meeting:update:poll:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -10035,9 +10035,9 @@ export type MeetingPollDeleteVariables = {
  * * Polling feature should be enabled in the host's account.
  * * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
  *
- * **Scopes:** `meeting:write:admin`,`meeting:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
  *
- * **Granular Scopes:** `meeting:delete:poll`,`meeting:delete:poll:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:delete:poll`,`meeting:delete:poll:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -10339,9 +10339,9 @@ export type MeetingRegistrantsVariables = {
  * * Host user type must be **Pro** or higher plan.
  * * Registration must be enabled for the meeting.
  *
- * **Scopes:** `meeting:read:admin`,`meeting:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
  *
- * **Granular Scopes:** `meeting:read:list_registrants`,`meeting:read:list_registrants:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_registrants`,`meeting:read:list_registrants:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -10654,9 +10654,9 @@ export type MeetingRegistrantCreateVariables = {
  *  **Prerequisites:**
  * * The host must be a **Licensed** user type.
  *
- * **Scopes:** `meeting:write:admin`,`meeting:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
  *
- * **Granular Scopes:** `meeting:write:registrant`,`meeting:write:registrant:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:registrant`,`meeting:write:registrant:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -10756,9 +10756,9 @@ export type MeetingRegistrantsQuestionsGetVariables = {
  * * Host user type must be **Pro** or higher plan.
  * * Registration must be enabled for the meeting.
  *
- * **Scopes:** `meeting:read`,`meeting:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read`,`meeting:read:admin`
  *
- * **Granular Scopes:** `meeting:read:list_registration_questions`,`meeting:read:list_registration_questions:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_registration_questions`,`meeting:read:list_registration_questions:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -10862,9 +10862,9 @@ export type MeetingRegistrantQuestionUpdateVariables = {
  * * Host user type must be **Pro** or higher plan.
  * * Registration must be enabled for the meeting.
  *
- * **Scopes:** `meeting:write`,`meeting:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
  *
- * **Granular Scopes:** `meeting:update:registration_question`,`meeting:update:registration_question:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:registration_question`,`meeting:update:registration_question:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -10944,9 +10944,9 @@ export type MeetingRegistrantStatusVariables = {
  * * Host user type must be **Pro** or higher plan.
  * * Registration must be enabled for the meeting.
  *
- * **Scopes:** `meeting:write:admin`,`meeting:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
  *
- * **Granular Scopes:** `meeting:update:registrant_status`,`meeting:update:registrant_status:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:registrant_status`,`meeting:update:registrant_status:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -11173,9 +11173,9 @@ export type MeetingRegistrantGetVariables = {
  * **Prerequisites:**
  * * The account must have a Meeting plan
  *
- * **Scopes:** `meeting:read:admin`,`meeting:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
  *
- * **Granular Scopes:** `meeting:read:registrant`,`meeting:read:registrant:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:registrant`,`meeting:read:registrant:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -11228,9 +11228,9 @@ export type MeetingregistrantdeleteVariables = {
  *   * The `registration_type` must be 2 or 3 to require the `occurrence_id` field.
  *   * If the `registration_type` is 1, the `occurrence_id` is not needed, as registrants can attend any occurrence.
  *
- * **Scopes:** `meeting:write:admin`,`meeting:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
  *
- * **Granular Scopes:** `meeting:delete:registrant`,`meeting:delete:registrant:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:delete:registrant`,`meeting:delete:registrant:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -11306,9 +11306,9 @@ export type GetSipDialingWithPasscodeVariables = {
  * **Prerequisites**:
  * * The SIP URI is valid for 2 hours, or 7200 seconds, by default. After this period, the URI will expire and the API must be called again to retrieve a new one.
  *
- * **Scopes:** `meeting:write:sip_dialing`,`meeting:write:admin:sip_dialing`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:sip_dialing`,`meeting:write:admin:sip_dialing`
  *
- * **Granular Scopes:** `meeting:write:sip_dialing`,`meeting:write:sip_dialing:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:sip_dialing`,`meeting:write:sip_dialing:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -11358,9 +11358,9 @@ export type MeetingStatusVariables = {
  * **Prerequisites**:
  * * Host user must have a Zoom Meetings Basic license or higher.
  *
- * **Scopes:** `meeting:write:admin`,`meeting:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
  *
- * **Granular Scopes:** `meeting:update:status`,`meeting:update:status:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:status`,`meeting:update:status:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -11596,9 +11596,9 @@ export type MeetingSurveyGetVariables = {
 /**
  * Display information about a [meeting survey](https://support.zoom.us/hc/en-us/articles/4404969060621-Post-meeting-survey-and-reporting).  **Prerequisites:** * The host has a **Pro** license. * The [**Meeting Survey**](https://support.zoom.us/hc/en-us/articles/4404939095053-Enabling-meeting-surveys) feature is enabled on the host's account. * The meeting must be a scheduled meeting. Instant meetings do not have survey features enabled.
  *
- * **Scopes:** `meeting:read`,`meeting:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read`,`meeting:read:admin`
  *
- * **Granular Scopes:** `meeting:read:survey`,`meeting:read:survey:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:survey`,`meeting:read:survey:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -11636,9 +11636,9 @@ export type MeetingSurveyDeleteVariables = {
  * * The [**Meeting Survey**](https://support.zoom.us/hc/en-us/articles/4404939095053-Enabling-meeting-surveys) feature enabled in the host's account.
  * * The meeting must be a scheduled meeting. Instant meetings do not have survey features enabled.
  *
- * **Scopes:** `meeting:write`,`meeting:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
  *
- * **Granular Scopes:** `meeting:delete:survey`,`meeting:delete:survey:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:delete:survey`,`meeting:delete:survey:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -11875,9 +11875,9 @@ export type MeetingSurveyUpdateVariables = {
 /**
  * Update a [meeting survey](https://support.zoom.us/hc/en-us/articles/4404969060621-Post-meeting-survey-and-reporting).  **Prerequisites:** * The host must be a **Pro** user type. * The [**Meeting Survey**](https://support.zoom.us/hc/en-us/articles/4404939095053-Enabling-meeting-surveys) feature is enabled in the host's account. * The meeting must be a scheduled meeting. Instant meetings do not have survey features enabled.
  *
- * **Scopes:** `meeting:write`,`meeting:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write`,`meeting:write:admin`
  *
- * **Granular Scopes:** `meeting:update:survey`,`meeting:update:survey:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:update:survey`,`meeting:update:survey:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -11937,9 +11937,9 @@ export type MeetingTokenVariables = {
  * * The **Closed captioning** setting enabled in the Zoom web portal.
  * * The **Allow use of caption API Token to integrate with third-party closed captioning services** setting enabled.
  *
- * **Scopes:** `meeting:read`,`meeting:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read`,`meeting:read:admin`
  *
- * **Granular Scopes:** `meeting:read:token`,`meeting:read:token:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:token`,`meeting:read:token:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -12073,9 +12073,9 @@ export type PastMeetingDetailsVariables = {
  * * The meeting must have ended before you can retrieve the data.
  * * You cannot access a meeting that occurred more than one year ago.
  *
- * **Scopes:** `meeting:read:admin`,`meeting:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
  *
- * **Granular Scopes:** `meeting:read:past_meeting`,`meeting:read:past_meeting:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:past_meeting`,`meeting:read:past_meeting:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -12131,9 +12131,9 @@ export type PastMeetingsVariables = {
  * * The meeting must have already occurred at least once. This endpoint only returns instances of meetings that have ended.
  * * You cannot retrieve instances for meetings that occurred more than 15 months ago.
  *
- * **Scopes:** `meeting:read:admin`,`meeting:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
  *
- * **Granular Scopes:** `meeting:read:list_past_instances`,`meeting:read:list_past_instances:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_past_instances`,`meeting:read:list_past_instances:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -12298,9 +12298,9 @@ export type PastMeetingParticipantsVariables = {
  *    **Note**: Please double encode your UUID when using this API if the UUID begins with a '/'or contains '//' in it.
  *
  *
- * **Scopes:** `meeting:read:admin`,`meeting:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
  *
- * **Granular Scopes:** `meeting:read:list_past_participants`,`meeting:read:list_past_participants:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_past_participants`,`meeting:read:list_past_participants:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -12403,9 +12403,9 @@ export type ListPastMeetingPollsVariables = {
  * * Host user type must be **Pro**.
  * * Meeting must be a scheduled meeting. Instant meetings do not have polling features enabled.
  *
- * **Scopes:** `meeting:read:admin`,`meeting:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
  *
- * **Granular Scopes:** `meeting:read:list_poll_results`,`meeting:read:list_poll_results:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_poll_results`,`meeting:read:list_poll_results:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -12493,9 +12493,9 @@ export type ListPastMeetingQAVariables = {
  * * The meeting must have ended before you can retrieve the data.
  * * You cannot retrieve Q&A data for meetings that occurred more than 15 months ago.
  *
- * **Scopes:** `meeting:read:admin`,`meeting:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
  *
- * **Granular Scopes:** `meeting:read:past_qa`,`meeting:read:past_qa:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:past_qa`,`meeting:read:past_qa:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -12561,9 +12561,9 @@ export type ListMeetingTemplatesVariables = {
  * **Prerequisites**:
  * * Host user must have a Zoom Meetings Basic license or higher.
  *
- * **Scopes:** `meeting:read`,`meeting:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read`,`meeting:read:admin`
  *
- * **Granular Scopes:** `meeting:read:list_templates`,`meeting:read:list_templates:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_templates`,`meeting:read:list_templates:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -12643,9 +12643,9 @@ export type MeetingTemplateCreateVariables = {
  * * Host user must have a Zoom Meetings Basic license or higher.
  * * You can only create up to 40 meeting templates.
  *
- * **Scopes:** `meeting:write:admin`,`meeting:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
  *
- * **Granular Scopes:** `meeting:write:template`,`meeting:write:template:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:template`,`meeting:write:template:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -12856,9 +12856,9 @@ export type MeetingsVariables = {
  * * This API only returns a user's [unexpired meetings](https://support.zoom.us/hc/en-us/articles/201362373-Meeting-ID#h_c73f9b08-c1c0-4a1a-b538-e01ebb98e844).
  * * When `type` is set to `upcoming`, `upcoming_meetings`, or `previous_meetings`, only a maximum of 6 months of meeting data will be returned.
  *
- * **Scopes:** `meeting:read:admin`,`meeting:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
  *
- * **Granular Scopes:** `meeting:read:list_meetings`,`meeting:read:list_meetings:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_meetings`,`meeting:read:list_meetings:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -14808,9 +14808,9 @@ export type MeetingCreateVariables = {
  * * For security reasons, the recommended way to programmatically get the updated `start_url` value after expiry is to call the [**Get a meeting**](/docs/api/meetings/#tag/meetings/GET/meetings/{meetingId}) API. Refer to the `start_url` value in the response.
  * * **100 requests per day**. The rate limit is applied against the `userId` of the **meeting host** used to make the request.
  *
- * **Scopes:** `meeting:write:admin`,`meeting:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:admin`,`meeting:write`
  *
- * **Granular Scopes:** `meeting:write:meeting`,`meeting:write:meeting:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:write:meeting`,`meeting:write:meeting:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -14928,9 +14928,9 @@ export type ListUpcomingMeetingVariables = {
  * **Prerequisites**:
  * * To retrieve data for Zoom meetings that the user has been invited to from a third-party calendar (Google, Exchange, Office 365, Apple iCloud), the [**Calendar and Contacts Integration**](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0069503) must be enabled in the Zoom Web Portal.
  *
- * **Scopes:** `meeting:read`,`meeting:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read`,`meeting:read:admin`
  *
- * **Granular Scopes:** `meeting:read:list_upcoming_meetings`,`meeting:read:list_upcoming_meetings:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:list_upcoming_meetings`,`meeting:read:list_upcoming_meetings:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -15029,9 +15029,9 @@ export type UserPACsVariables = {
  * * A Pro or higher plan with an [Audio Conferencing](https://support.zoom.us/hc/en-us/articles/204517069-Getting-Started-with-Personal-Audio-Conference) subscription.
  * * The [**Personal Audio Conference**](https://support.zoom.us/hc/en-us/articles/204517069-Getting-Started-with-Personal-Audio-Conference#h_01F5BPM447M6QDJXX50RSFXKJ3) setting enabled in the user's profile.
  *
- * **Scopes:** `pac:read:admin`,`pac:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `pac:read:admin`,`pac:read`
  *
- * **Granular Scopes:** `pac:read:list_pac_accounts`,`pac:read:list_pac_accounts:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `pac:read:list_pac_accounts`,`pac:read:list_pac_accounts:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -15159,9 +15159,9 @@ export type ReportSignInSignOutActivitiesVariables = {
  *
  *
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
- * **Granular Scopes:** `report:read:user_activities:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:user_activities:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
  */
@@ -15245,9 +15245,9 @@ export type GetBillingReportVariables = FetcherExtraProps;
  *
  *
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
- * **Granular Scopes:** `report:read:billing:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:billing:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
  */
@@ -15338,9 +15338,9 @@ export type GetBillingInvoicesReportsVariables = {
  *
  *
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
- * **Granular Scopes:** `report:read:billing_invoice:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:billing_invoice:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
@@ -15441,7 +15441,7 @@ export type ReportCloudRecordingVariables = {
  *
  *
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
  */
@@ -15542,7 +15542,7 @@ export type ReportDailyVariables = {
  *
  *
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
@@ -15980,9 +15980,9 @@ export type GethistorymeetingandwebinarlistVariables = {
 /**
  * Retrieve a list of history meetings and webinars.
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
- * **Granular Scopes:** `report:read:list_history_meetings:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:list_history_meetings:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
@@ -16141,9 +16141,9 @@ export type ReportMeetingactivitylogsVariables = {
 /**
  * Retrieve a list of a meeting activity logs. Contact Zoom Support to enable the meeting audit trail log feature on your account.
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
- * **Granular Scopes:** `report:read:meeting_activity_log:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:meeting_activity_log:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
@@ -16299,9 +16299,9 @@ export type ReportMeetingDetailsVariables = {
  *
  *
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
- * **Granular Scopes:** `report:read:meeting:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:meeting:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
  */
@@ -16491,9 +16491,9 @@ export type ReportMeetingParticipantsVariables = {
  * **Prerequisites:**
  * * A Pro or a higher plan.
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
- * **Granular Scopes:** `report:read:list_meeting_participants:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:list_meeting_participants:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
@@ -16610,9 +16610,9 @@ export type ReportMeetingPollsVariables = {
  *  **Prerequisites:**
  * * A Pro or a higher plan.
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
- * **Granular Scopes:** `report:read:list_meeting_polls:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:list_meeting_polls:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
  */
@@ -16784,9 +16784,9 @@ export type ReportMeetingQAVariables = {
  *
  * * Pro plan or higher.
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
- * **Granular Scopes:** `report:read:meeting_qna:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:meeting_qna:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
@@ -16915,9 +16915,9 @@ export type ReportMeetingSurveyVariables = {
  *
  * * Pro or a higher plan.
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
- * **Granular Scopes:** `report:read:meeting_survey:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:meeting_survey:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
@@ -17061,9 +17061,9 @@ export type ReportOperationLogsVariables = {
  *
  * * Pro or higher plan.
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
- * **Granular Scopes:** `report:read:operation_logs:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:operation_logs:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
  */
@@ -17313,9 +17313,9 @@ export type ReportTelephoneVariables = {
  *
  * * Pro or higher plan.
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
- * **Granular Scopes:** `report:read:telephone:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:telephone:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
@@ -17462,9 +17462,9 @@ export type ReportUpcomingEventsVariables = {
  * **Prerequisites:**
  * * A Pro or higher plan
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
- * **Granular Scopes:** `report:read:upcoming_meetings_webinars:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:upcoming_meetings_webinars:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
  */
@@ -17704,9 +17704,9 @@ export type ReportUsersVariables = {
  *
  * * Pro or higher plan.
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
- * **Granular Scopes:** `report:read:list_users:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:list_users:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
@@ -18024,9 +18024,9 @@ export type ReportMeetingsVariables = {
  *
  * * Pro or higher plan.
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
- * **Granular Scopes:** `report:read:user:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:user:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
  */
@@ -18183,9 +18183,9 @@ export type ReportWebinarDetailsVariables = {
  *
  * * Pro or higher plan with Webinar add-on.
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
- * **Granular Scopes:** `report:read:webinar:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:webinar:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
  */
@@ -18369,9 +18369,9 @@ export type ReportWebinarParticipantsVariables = {
  *  **Prerequisites:**
  * * A Pro or a higher plan with Webinar add-on enabled.
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
- * **Granular Scopes:** `report:read:list_webinar_participants:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:list_webinar_participants:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
@@ -18492,9 +18492,9 @@ export type ReportWebinarPollsVariables = {
  *
  * * Pro or a higher plan with Webinar add-on enabled.
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
- * **Granular Scopes:** `report:read:list_webinar_polls:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:list_webinar_polls:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
  */
@@ -18668,9 +18668,9 @@ export type ReportWebinarQAVariables = {
  *
  * * Pro or a higher plan with the Webinar add-on enabled.
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
- * **Granular Scopes:** `report:read:webinar_qna:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:webinar_qna:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
@@ -18801,9 +18801,9 @@ export type ReportWebinarSurveyVariables = {
  *
  * * Pro or a higher plan with Webinar add-on enabled.
  *
- * **Scopes:** `report:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:admin`
  *
- * **Granular Scopes:** `report:read:webinar_survey:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:webinar_survey:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
@@ -19001,9 +19001,9 @@ export type ListSipPhonesVariables = {
  * * User must enable SIP Phone Integration by contacting the [Sales](https://zoom.us/contactsales) team.
  *
  *
- * **Scopes:** `sip_phone:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:read:admin`
  *
- * **Granular Scopes:** `sip_phone:read:list_sip_phones:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:read:list_sip_phones:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -19260,9 +19260,9 @@ export type CreateSIPPhoneVariables = {
  * * The account owner or account admin must first enable SIP Phone Integration by contacting the [Sales](https://zoom.us/contactsales) team.
  *
  *
- * **Scopes:** `sip_phone:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:write:admin`
  *
- * **Granular Scopes:** `sip_phone:write:sip_phone:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:write:sip_phone:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -19456,9 +19456,9 @@ export type ListSIPPhonePhonesVariables = {
  * * User must enable SIP Phone Integration by contacting the [Sales](https://zoom.us/contactsales) team.
  *
  *
- * **Scopes:** `sip_phone:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:read:admin`
  *
- * **Granular Scopes:** `sip_phone:read:list_sip_phones:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:read:list_sip_phones:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -19745,9 +19745,9 @@ export type EnableSIPPhonePhonesVariables = {
  * * The account owner or account admin must first enable SIP Phone Integration by contacting the [Sales](https://zoom.us/contactsales) team.
  *
  *
- * **Scopes:** `sip_phone:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:write:admin`
  *
- * **Granular Scopes:** `sip_phone:write:sip_phone:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:write:sip_phone:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -19781,9 +19781,9 @@ export type DeleteSIPPhonePhonesVariables = {
  * * Currently only supported on Cisco and Avaya PBX systems.
  * * The user must enable **SIP Phone Integration** by contacting the [Zoom Sales](https://zoom.us/contactsales) team.
  *
- * **Scopes:** `sip_phone:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:write:admin`
  *
- * **Granular Scopes:** `sip_phone:delete:sip_phone:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:delete:sip_phone:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -19940,9 +19940,9 @@ export type UpdateSIPPhonePhonesVariables = {
  * * The account owner or account admin must first enable SIP Phone Integration by contacting the [Sales](https://zoom.us/contactsales) team.
  *
  *
- * **Scopes:** `sip_phone:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:write:admin`
  *
- * **Granular Scopes:** `sip_phone:update:sip_phone:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:update:sip_phone:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -19976,9 +19976,9 @@ export type DeleteSIPPhoneVariables = {
  * * Currently only supported on Cisco and Avaya PBX systems.
  * * The user must enable **SIP Phone Integration** by contacting the [Zoom Sales](https://zoom.us/contactsales) team.
  *
- * **Scopes:** `sip_phone:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:write:admin`
  *
- * **Granular Scopes:** `sip_phone:delete:sip_phone:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:delete:sip_phone:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -20112,9 +20112,9 @@ export type UpdateSIPPhoneVariables = {
 /**
  * Update information of a specific SIP phone on a Zoom account.  n Zoom's Phone System Integration (PSI), also referred as SIP phones, enables an organization to leverage the Zoom client to complete a Softphone registration to supported premise based PBX system. End users will have the ability to have Softphone functionality within a single client while maintaining a comparable interface to Zoom Phone.   **Prerequisites**:* Currently only supported on Cisco and Avaya PBX systems. * The account owner or account admin must first enable SIP Phone Integration by contacting the [Sales](https://zoom.us/contactsales) team.
  *
- * **Scopes:** `sip_phone:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:write:admin`
  *
- * **Granular Scopes:** `sip_phone:update:sip_phone:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `sip_phone:update:sip_phone:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -20204,9 +20204,9 @@ export type TspVariables = FetcherExtraProps;
  *
  * * A Pro or a higher plan.
  *
- * **Scopes:** `tsp:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:read:admin`
  *
- * **Granular Scopes:** `tsp:read:tsp:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:read:tsp:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -20273,9 +20273,9 @@ export type TspUpdateVariables = {
  *
  *
  *
- * **Scopes:** `tsp:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:write:admin`
  *
- * **Granular Scopes:** `tsp:update:tsp:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:update:tsp:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -20373,9 +20373,9 @@ export type UserTSPsVariables = {
 /**
  * List all of a user's TSP accounts. A user can have a maximum of two TSP accounts.
  *
- * **Scopes:** `tsp:read:admin`,`tsp:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:read:admin`,`tsp:read`
  *
- * **Granular Scopes:** `tsp:read:list_tsp_accounts`,`tsp:read:list_tsp_accounts:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:read:list_tsp_accounts`,`tsp:read:list_tsp_accounts:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -20537,9 +20537,9 @@ export type UserTSPCreateVariables = {
  *
  *
  *
- * **Scopes:** `tsp:write:admin`,`tsp:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:write:admin`,`tsp:write`
  *
- * **Granular Scopes:** `tsp:write:tsp_account`,`tsp:write:tsp_account:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:write:tsp_account`,`tsp:write:tsp_account:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -20581,9 +20581,9 @@ export type TspUrlUpdateVariables = {
  * A global dial-in page can provide a list of global access numbers to use to conduct audio conferencing. Call this API to set the URL for a global dial-in page of a user whose Zoom account has TSP and special TSP with third-party audio conferencing options enabled.
  *
  *
- * **Scopes:** `tsp:write:admin`,`tsp:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:write:admin`,`tsp:write`
  *
- * **Granular Scopes:** `tsp:update:tsp_settings`,`tsp:update:tsp_settings:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:update:tsp_settings`,`tsp:update:tsp_settings:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -20688,9 +20688,9 @@ export type UserTSPVariables = {
  *
  *
  *
- * **Scopes:** `tsp:read:admin`,`tsp:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:read:admin`,`tsp:read`
  *
- * **Granular Scopes:** `tsp:read:tsp_account`,`tsp:read:tsp_account:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:read:tsp_account`,`tsp:read:tsp_account:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -20727,9 +20727,9 @@ export type UserTSPDeleteVariables = {
  *
  *
  *
- * **Scopes:** `tsp:write:admin`,`tsp:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:write:admin`,`tsp:write`
  *
- * **Granular Scopes:** `tsp:delete:tsp_account`,`tsp:delete:tsp_account:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:delete:tsp_account`,`tsp:delete:tsp_account:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -20828,9 +20828,9 @@ export type UserTSPUpdateVariables = {
  *
  *
  *
- * **Scopes:** `tsp:write:admin`,`tsp:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:write:admin`,`tsp:write`
  *
- * **Granular Scopes:** `tsp:update:tsp_account`,`tsp:update:tsp_account:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:update:tsp_account`,`tsp:update:tsp_account:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -20894,9 +20894,9 @@ export type TrackingfieldListVariables = FetcherExtraProps;
  * **Prerequisites:**
  * * A Business, Education, API or higher plan.
  *
- * **Scopes:** `tracking_fields:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tracking_fields:read:admin`
  *
- * **Granular Scopes:** `tracking_field:read:list_tracking_fields:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tracking_field:read:list_tracking_fields:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -20976,9 +20976,9 @@ export type TrackingfieldCreateVariables = {
  * **Prerequisites:**
  * * A Business, Education, API or higher plan.
  *
- * **Scopes:** `tracking_fields:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tracking_fields:write:admin`
  *
- * **Granular Scopes:** `tracking_field:write:tracking_field:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tracking_field:write:tracking_field:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -21042,9 +21042,9 @@ export type TrackingfieldGetVariables = {
  * **Prerequisites:**
  * * A Business, Education, API or higher plan.
  *
- * **Scopes:** `tracking_fields:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tracking_fields:read:admin`
  *
- * **Granular Scopes:** `tracking_field:read:tracking_field:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tracking_field:read:tracking_field:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -21077,9 +21077,9 @@ export type TrackingfieldDeleteVariables = {
  * **Prerequisites:**
  * * A Business, Education, API or higher plan.
  *
- * **Scopes:** `tracking_fields:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tracking_fields:write:admin`
  *
- * **Granular Scopes:** `tracking_field:delete:tracking_field:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tracking_field:delete:tracking_field:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -21138,9 +21138,9 @@ export type TrackingfieldUpdateVariables = {
  * **Prerequisites:**
  * * A Business, Education, API or higher plan.
  *
- * **Scopes:** `tracking_fields:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tracking_fields:write:admin`
  *
- * **Granular Scopes:** `tracking_field:update:tracking_field:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tracking_field:update:tracking_field:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -21190,9 +21190,9 @@ export type DeleteWebinarChatMessageByIdVariables = {
  * **Prerequisites:**
  * * Have Zoom enable the DLP for the in-meeting chat feature to use this API.
  *
- * **Scopes:** `webinar:write`,`webinar:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write`,`webinar:write:admin`
  *
- * **Granular Scopes:** `webinar:delete:live_webinar_chat_message`,`webinar:delete:live_webinar_chat_message:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:delete:live_webinar_chat_message`,`webinar:delete:live_webinar_chat_message:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -21470,9 +21470,9 @@ export type WebinarAbsenteesVariables = {
  *
  *
  *
- * **Scopes:** `webinar:read:admin`,`webinar:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
- * **Granular Scopes:** `webinar:read:list_absentees`,`webinar:read:list_absentees:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:list_absentees`,`webinar:read:list_absentees:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
@@ -21529,9 +21529,9 @@ export type PastWebinarsVariables = {
  *
  *
  *
- * **Scopes:** `webinar:read:admin`,`webinar:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
- * **Granular Scopes:** `webinar:read:list_past_instances`,`webinar:read:list_past_instances:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:list_past_instances`,`webinar:read:list_past_instances:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -21689,9 +21689,9 @@ export type ListWebinarParticipantsVariables = {
  * **Prerequisites:**
  * * A Pro or higher plan with a webinar add-on.
  *
- * **Scopes:** `webinar:read:admin`,`webinar:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
- * **Granular Scopes:** `webinar:read:list_past_participants:admin`,`webinar:read:list_past_participants`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:list_past_participants:admin`,`webinar:read:list_past_participants`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -21795,9 +21795,9 @@ export type ListPastWebinarPollResultsVariables = {
  *
  *
  *
- * **Scopes:** `webinar:read:admin`,`webinar:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
- * **Granular Scopes:** `webinar:read:list_past_polls`,`webinar:read:list_past_polls:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:list_past_polls`,`webinar:read:list_past_polls:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -21890,9 +21890,9 @@ export type ListPastWebinarQAVariables = {
  *
  *
  *
- * **Scopes:** `webinar:read:admin`,`webinar:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
- * **Granular Scopes:** `webinar:read:past_qa`,`webinar:read:past_qa:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:past_qa`,`webinar:read:past_qa:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -21954,9 +21954,9 @@ export type ListWebinarTemplatesVariables = {
 /**
  * Display a list of a user's [webinar templates](https://support.zoom.us/hc/en-us/articles/115001079746-Webinar-Templates). For user-level apps, pass [the `me` value](/docs/api-reference/using-zoom-apis#mekeyword) instead of the `userId` parameter. When you schedule a webinar, save the settings for that webinar as a template for scheduling future webinars.  To use a template when scheduling a webinar, use the `id` value in this API response in the `template_id` field of the [**Create a webinar**](/docs/api-reference/zoom-api/methods#operation/webinarCreate) API. **Prerequisites:** * A Pro or a higher account with the [Zoom Webinar plan](https://zoom.us/pricing/webinar).
  *
- * **Scopes:** `webinar:read`,`webinar:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read`,`webinar:read:admin`
  *
- * **Granular Scopes:** `webinar:read:list_templates`,`webinar:read:list_templates:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:list_templates`,`webinar:read:list_templates:admin`
  */
 export const listWebinarTemplates = (variables: ListWebinarTemplatesVariables, signal?: AbortSignal) =>
   fetch<ListWebinarTemplatesResponse, ListWebinarTemplatesError, undefined, {}, {}, ListWebinarTemplatesPathParams>({
@@ -22032,9 +22032,9 @@ export type WebinarTemplateCreateVariables = {
  *
  *
  *
- * **Scopes:** `webinar:write:admin`,`webinar:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
- * **Granular Scopes:** `webinar:write:template`,`webinar:write:template:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:template`,`webinar:write:template:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -22220,9 +22220,9 @@ export type WebinarsVariables = {
  *  **Prerequisites**
  * * A Pro or higher plan with the webinar add-on.
  *
- * **Scopes:** `webinar:read:admin`,`webinar:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
- * **Granular Scopes:** `webinar:read:list_webinars`,`webinar:read:list_webinars:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:list_webinars`,`webinar:read:list_webinars:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -23770,9 +23770,9 @@ export type WebinarCreateVariables = {
  * **Prerequisites:**
  * * A Pro or higher plan with a [Webinar plan](https://zoom.us/webinar) add-on.
  *
- * **Scopes:** `webinar:write`,`webinar:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write`,`webinar:write:admin`
  *
- * **Granular Scopes:** `webinar:write:webinar`,`webinar:write:webinar:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:webinar`,`webinar:write:webinar:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -24618,9 +24618,9 @@ export type WebinarVariables = {
  * **Prerequisites:**
  * * Pro or higher plan with a Webinar add-on.
  *
- * **Scopes:** `webinar:read:admin`,`webinar:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
- * **Granular Scopes:** `webinar:read:webinar`,`webinar:read:webinar:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:webinar`,`webinar:read:webinar:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -24676,9 +24676,9 @@ export type WebinarDeleteVariables = {
  *
  * * Pro or higher plan with the webinar add-on.
  *
- * **Scopes:** `webinar:write:admin`,`webinar:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
- * **Granular Scopes:** `webinar:delete:webinar`,`webinar:delete:webinar:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:delete:webinar`,`webinar:delete:webinar:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -25428,9 +25428,9 @@ export type WebinarUpdateVariables = {
  * **Prerequisites**
  * * A Pro or higher plan with a webinar add-on.
  *
- * **Scopes:** `webinar:write`,`webinar:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write`,`webinar:write:admin`
  *
- * **Granular Scopes:** `webinar:update:webinar`,`webinar:update:webinar:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:update:webinar`,`webinar:update:webinar:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -25522,9 +25522,9 @@ export type AddBatchWebinarRegistrantsVariables = {
  *
  *
  *
- * **Scopes:** `webinar:write`,`webinar:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write`,`webinar:write:admin`
  *
- * **Granular Scopes:** `webinar:write:batch_registrants`,`webinar:write:batch_registrants:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:batch_registrants`,`webinar:write:batch_registrants:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
@@ -25635,9 +25635,9 @@ export type GetWebinarBrandingVariables = {
 /**
  * Get the webinar's [session branding](https://support.zoom.us/hc/en-us/articles/4836268732045-Using-Webinar-Session-Branding) information. Session branding lets hosts visually customize a webinar by setting a webinar wallpaper that displays behind video tiles. Session branding also lets hosts set the virtual background for and apply name tags to hosts, alternative hosts, panelists, interpreters, and speakers.  **Prerequisites:** * A Pro or higher plan with the Webinar add-on. * The **Webinar Session Branding** setting enabled.
  *
- * **Scopes:** `webinar:read`,`webinar:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read`,`webinar:read:admin`
  *
- * **Granular Scopes:** `webinar:read:branding`,`webinar:read:branding:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:branding`,`webinar:read:branding:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -25755,9 +25755,9 @@ export type CreateWebinarBrandingNameTagVariables = {
  * Create a webinar's [session branding](https://support.zoom.us/hc/en-us/articles/4836268732045-Using-Webinar-Session-Branding) name tag. There's a limit of 20 name tags per webinar. **Prerequisites:**
  * *  The **Webinar Session Branding** setting enabled.
  *
- * **Scopes:** `webinar:write`,`webinar:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write`,`webinar:write:admin`
  *
- * **Granular Scopes:** `webinar:write:branding_name_tag`,`webinar:write:branding_name_tag:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:branding_name_tag`,`webinar:write:branding_name_tag:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -25803,9 +25803,9 @@ export type DeleteWebinarBrandingNameTagVariables = {
  *  **Prerequisites:**
  * * The **Webinar Session Branding** setting enabled.
  *
- * **Scopes:** `webinar:write`,`webinar:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write`,`webinar:write:admin`
  *
- * **Granular Scopes:** `webinar:delete:branding_name_tag`,`webinar:delete:branding_name_tag:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:delete:branding_name_tag`,`webinar:delete:branding_name_tag:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -25892,9 +25892,9 @@ export type UpdateWebinarBrandingNameTagVariables = {
  * Update a webinar's [session branding](https://support.zoom.us/hc/en-us/articles/4836268732045-Using-Webinar-Session-Branding) name tag. **Prerequisites:**
  * *  The **Webinar Session Branding** setting enabled.
  *
- * **Scopes:** `webinar:write`,`webinar:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write`,`webinar:write:admin`
  *
- * **Granular Scopes:** `webinar:update:branding_name_tag`,`webinar:update:branding_name_tag:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:update:branding_name_tag`,`webinar:update:branding_name_tag:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -25992,9 +25992,9 @@ export type UploadWebinarBrandingVBVariables = {
  *  **Prerequisites:**
  * *  The **Webinar Session Branding** setting enabled.
  *
- * **Scopes:** `webinar:write`,`webinar:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write`,`webinar:write:admin`
  *
- * **Granular Scopes:** `webinar:write:branding_virtual_background`,`webinar:write:branding_virtual_background:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:branding_virtual_background`,`webinar:write:branding_virtual_background:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -26040,9 +26040,9 @@ export type DeleteWebinarBrandingVBVariables = {
  *  **Prerequisites:**
  * * The **Webinar Session Branding** setting enabled.
  *
- * **Scopes:** `webinar:write`,`webinar:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write`,`webinar:write:admin`
  *
- * **Granular Scopes:** `webinar:delete:branding_virtual_background`,`webinar:delete:branding_virtual_background:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:delete:branding_virtual_background`,`webinar:delete:branding_virtual_background:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -26094,9 +26094,9 @@ export type SetWebinarBrandingVBVariables = {
  *  **Prerequisites:**
  * * The **Webinar Session Branding** setting enabled.
  *
- * **Scopes:** `webinar:write`,`webinar:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write`,`webinar:write:admin`
  *
- * **Granular Scopes:** `webinar:update:branding_virtual_background`,`webinar:update:branding_virtual_background:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:update:branding_virtual_background`,`webinar:update:branding_virtual_background:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -26174,9 +26174,9 @@ export type UploadWebinarBrandingWallpaperVariables = {
  *  **Prerequisites:**
  * *  The **Webinar Session Branding** setting enabled.
  *
- * **Scopes:** `webinar:write`,`webinar:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write`,`webinar:write:admin`
  *
- * **Granular Scopes:** `webinar:write:branding_wallpaper`,`webinar:write:branding_wallpaper:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:branding_wallpaper`,`webinar:write:branding_wallpaper:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -26215,9 +26215,9 @@ export type DeleteWebinarBrandingWallpaperVariables = {
  *  **Prerequisites:**
  * * The **Webinar Session Branding** setting enabled.
  *
- * **Scopes:** `webinar:write`,`webinar:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write`,`webinar:write:admin`
  *
- * **Granular Scopes:** `webinar:delete:branding_wallpaper`,`webinar:delete:branding_wallpaper:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:delete:branding_wallpaper`,`webinar:delete:branding_wallpaper:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -26323,9 +26323,9 @@ export type WebinarInviteLinksCreateVariables = {
  *
  * * Business, Education or API Plan with the Webinar add-on.
  *
- * **Scopes:** `webinar:write:admin`,`webinar:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
- * **Granular Scopes:** `webinar:write:invite_links`,`webinar:write:invite_links:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:invite_links`,`webinar:write:invite_links:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -26378,9 +26378,9 @@ export type WebinarLiveStreamingJoinTokenVariables = {
  * * A Pro or higher plan with a Webinar add-on.
  * * The **Allow livestreaming of webinars** user setting enabled in the Zoom web portal.
  *
- * **Scopes:** `webinar_token:read:admin:live_streaming`,`webinar_token:read:live_streaming`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar_token:read:admin:live_streaming`,`webinar_token:read:live_streaming`
  *
- * **Granular Scopes:** `webinar:read:live_streaming_token`,`webinar:read:live_streaming_token:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:live_streaming_token`,`webinar:read:live_streaming_token:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -26436,9 +26436,9 @@ export type WebinarLocalArchivingArchiveTokenVariables = {
  * * A Pro or higher plan with a Webinar Add-on.
  * * The **Archive meetings and webinars** account setting enabled in the Zoom web portal.
  *
- * **Scopes:** `webinar_token:read:admin:local_archiving`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar_token:read:admin:local_archiving`
  *
- * **Granular Scopes:** `webinar:read:local_archiving_token:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:local_archiving_token:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -26494,9 +26494,9 @@ export type WebinarLocalRecordingJoinTokenVariables = {
  * * A Pro or higher plan with a Webinar add-on.
  * * The **Local recording** user setting enabled in the Zoom web portal.
  *
- * **Scopes:** `webinar_token:read:admin:local_recording`,`webinar_token:read:local_recording`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar_token:read:admin:local_recording`,`webinar_token:read:local_recording`
  *
- * **Granular Scopes:** `webinar:read:local_recording_token`,`webinar:read:local_recording_token:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:local_recording_token`,`webinar:read:local_recording_token:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -26570,9 +26570,9 @@ export type GetWebinarLiveStreamDetailsVariables = {
  *
  *
  *
- * **Scopes:** `webinar:read:admin`,`webinar:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
- * **Granular Scopes:** `webinar:read:livestream`,`webinar:read:livestream:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:livestream`,`webinar:read:livestream:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -26647,9 +26647,9 @@ export type WebinarLiveStreamUpdateVariables = {
  *
  *
  *
- * **Scopes:** `webinar:write:admin`,`webinar:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
- * **Granular Scopes:** `webinar:update:livestream`,`webinar:update:livestream:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:update:livestream`,`webinar:update:livestream:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -26725,9 +26725,9 @@ export type WebinarLiveStreamStatusUpdateVariables = {
  *
  *
  *
- * **Scopes:** `webinar:write:admin`,`webinar:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
- * **Granular Scopes:** `webinar:update:livestream_status`,`webinar:update:livestream_status:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:update:livestream_status`,`webinar:update:livestream_status:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -26842,9 +26842,9 @@ export type WebinarPanelistsVariables = {
  * * Pro or a higher plan with [Webinar Add-on](https://zoom.us/webinar).
  *
  *
- * **Scopes:** `webinar:read:admin`,`webinar:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
- * **Granular Scopes:** `webinar:read:list_panelists`,`webinar:read:list_panelists:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:list_panelists`,`webinar:read:list_panelists:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -26953,9 +26953,9 @@ export type WebinarPanelistCreateVariables = {
  * * Pro or a higher plan with the [Webinar Add-on](https://zoom.us/webinar).
  *
  *
- * **Scopes:** `webinar:write:admin`,`webinar:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
- * **Granular Scopes:** `webinar:write:panelist`,`webinar:write:panelist:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:panelist`,`webinar:write:panelist:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -26993,9 +26993,9 @@ export type WebinarPanelistsDeleteVariables = {
  * * Pro or a higher plan with the [webinar add-on](https://zoom.us/webinar).
  *
  *
- * **Scopes:** `webinar:write:admin`,`webinar:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
- * **Granular Scopes:** `webinar:delete:panelist`,`webinar:delete:panelist:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:delete:panelist`,`webinar:delete:panelist:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -27039,9 +27039,9 @@ export type WebinarPanelistDeleteVariables = {
  * * Pro or a higher plan with the [webinar add-on](https://zoom.us/webinar).
  *
  *
- * **Scopes:** `webinar:write:admin`,`webinar:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
- * **Granular Scopes:** `webinar:delete:panelist`,`webinar:delete:panelist:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:delete:panelist`,`webinar:delete:panelist:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -27300,9 +27300,9 @@ export type WebinarPollsVariables = {
  *
  *
  *
- * **Scopes:** `webinar:read:admin`,`webinar:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
- * **Granular Scopes:** `webinar:read:list_polls`,`webinar:read:list_polls:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:list_polls`,`webinar:read:list_polls:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -27723,9 +27723,9 @@ export type WebinarPollCreateVariables = {
  *
  *
  *
- * **Scopes:** `webinar:write:admin`,`webinar:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
- * **Granular Scopes:** `webinar:write:poll`,`webinar:write:poll:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:poll`,`webinar:write:poll:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -27969,9 +27969,9 @@ export type WebinarPollGetVariables = {
  *
  *
  *
- * **Scopes:** `webinar:read:admin`,`webinar:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
- * **Granular Scopes:** `webinar:read:poll`,`webinar:read:poll:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:poll`,`webinar:read:poll:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -28197,9 +28197,9 @@ export type WebinarPollUpdateVariables = {
  *
  *
  *
- * **Scopes:** `webinar:write:admin`,`webinar:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
- * **Granular Scopes:** `webinar:update:poll`,`webinar:update:poll:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:update:poll`,`webinar:update:poll:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -28239,9 +28239,9 @@ export type WebinarPollDeleteVariables = {
  *
  *
  *
- * **Scopes:** `webinar:write:admin`,`webinar:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
- * **Granular Scopes:** `webinar:delete:poll`,`webinar:delete:poll:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:delete:poll`,`webinar:delete:poll:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -28542,9 +28542,9 @@ export type WebinarRegistrantsVariables = {
  *
  *
  *
- * **Scopes:** `webinar:read:admin`,`webinar:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
- * **Granular Scopes:** `webinar:read:list_registrants`,`webinar:read:list_registrants:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:list_registrants`,`webinar:read:list_registrants:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -28844,9 +28844,9 @@ export type WebinarRegistrantCreateVariables = {
  * **Prerequisites:**
  * * A Pro or higher plan with the Webinar add-on.
  *
- * **Scopes:** `webinar:write:admin`,`webinar:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
- * **Granular Scopes:** `webinar:write:registrant`,`webinar:write:registrant:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:registrant`,`webinar:write:registrant:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -28947,9 +28947,9 @@ export type WebinarRegistrantsQuestionsGetVariables = {
  * * Pro or higher plan with the webinar add-on.
  *
  *
- * **Scopes:** `webinar:read:admin`,`webinar:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
- * **Granular Scopes:** `webinar:read:list_registration_questions`,`webinar:read:list_registration_questions:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:list_registration_questions`,`webinar:read:list_registration_questions:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -29054,9 +29054,9 @@ export type WebinarRegistrantQuestionUpdateVariables = {
  * * Registration option for Webinar should be set as required to use this API.
  *
  *
- * **Scopes:** `webinar:write:admin`,`webinar:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
- * **Granular Scopes:** `webinar:update:registration_question`,`webinar:update:registration_question:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:update:registration_question`,`webinar:update:registration_question:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -29135,9 +29135,9 @@ export type WebinarRegistrantStatusVariables = {
 /**
  * Update webinar registrants' registration status. You can approve or deny a registrant, or revoke a registrant's approval.
  *
- * **Scopes:** `webinar:write:admin`,`webinar:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
- * **Granular Scopes:** `webinar:update:registrant_status`,`webinar:update:registrant_status:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:update:registrant_status`,`webinar:update:registrant_status:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
@@ -29398,9 +29398,9 @@ export type WebinarRegistrantGetVariables = {
  *
  * * The account must have a webinar plan.
  *
- * **Scopes:** `webinar:read:admin`,`webinar:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
- * **Granular Scopes:** `webinar:read:registrant`,`webinar:read:registrant:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:registrant`,`webinar:read:registrant:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -29451,9 +29451,9 @@ export type DeleteWebinarRegistrantVariables = {
  *
  *
  *
- * **Scopes:** `webinar:write:admin`,`webinar:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
- * **Granular Scopes:** `webinar:delete:registrant`,`webinar:delete:registrant:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:delete:registrant`,`webinar:delete:registrant:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -29526,9 +29526,9 @@ export type GetWebinarSipDialingWithPasscodeVariables = {
 /**
  * Get a webinar's SIP URI. The URI consists of the webinar ID, an optional user-supplied passcode, and participant identifier code. The API return data also includes additional fields to indicate whether the API caller has a valid Cloud Room Connector subscription, the participant identifier code from the URI, and the SIP URI validity period in seconds.
  *
- * **Scopes:** `webinar:write:sip_dialing`,`webinar:write:admin:sip_dialing`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:sip_dialing`,`webinar:write:admin:sip_dialing`
  *
- * **Granular Scopes:** `webinar:write:sip_dialing`,`webinar:write:sip_dialing:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:sip_dialing`,`webinar:write:sip_dialing:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -29577,9 +29577,9 @@ export type WebinarStatusVariables = {
  *
  * * The account must hold a valid [Webinar plan](https://zoom.us/webinar).
  *
- * **Scopes:** `webinar:write:admin`,`webinar:write`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write:admin`,`webinar:write`
  *
- * **Granular Scopes:** `webinar:update:status`,`webinar:update:status:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:update:status`,`webinar:update:status:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -29830,9 +29830,9 @@ export type WebinarSurveyGetVariables = {
  * * A Pro or higher plan with the Webinar add-on.
  * * The [**Webinar Survey**](https://support.zoom.us/hc/en-us/articles/360061293191-Enabling-webinar-survey) feature enabled in the host's account.
  *
- * **Scopes:** `webinar:read:admin`,`webinar:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
- * **Granular Scopes:** `webinar:read:survey`,`webinar:read:survey:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:survey`,`webinar:read:survey:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -29867,9 +29867,9 @@ export type WebinarSurveyDeleteVariables = {
  * * A Pro or higher plan with the Webinar Add-on.
  * * The [**Webinar Survey**](https://support.zoom.us/hc/en-us/articles/360061293191-Enabling-webinar-survey) feature enabled in the host's account.
  *
- * **Scopes:** `webinar:write`,`webinar:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write`,`webinar:write:admin`
  *
- * **Granular Scopes:** `webinar:delete:survey`,`webinar:delete:survey:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:delete:survey`,`webinar:delete:survey:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -30117,9 +30117,9 @@ export type WebinarSurveyUpdateVariables = {
 /**
  * Update a [webinar survey](https://support.zoom.us/hc/en-us/articles/360048745651).  **Prerequisites:** * A Pro or higher plan with the Webinar add-on. * Enable the [**Webinar Survey**](https://support.zoom.us/hc/en-us/articles/360061293191-Enabling-webinar-survey) feature in the host's account.
  *
- * **Scopes:** `webinar:write`,`webinar:write:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:write`,`webinar:write:admin`
  *
- * **Granular Scopes:** `webinar:update:survey`,`webinar:update:survey:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:update:survey`,`webinar:update:survey:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -30179,9 +30179,9 @@ export type WebinarTokenVariables = {
  * *
  * * The **Allow use of caption API Token to integrate with 3rd-party Closed Captioning services** setting enabled.
  *
- * **Scopes:** `webinar:read`,`webinar:read:admin`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read`,`webinar:read:admin`
  *
- * **Granular Scopes:** `webinar:read:token`,`webinar:read:token:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:token`,`webinar:read:token:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
@@ -30263,9 +30263,9 @@ export type GetTrackingSourcesVariables = {
  * * Registration must be required for the Webinar.
  *
  *
- * **Scopes:** `webinar:read:admin`,`webinar:read`
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
- * **Granular Scopes:** `webinar:read:list_tracking_sources`,`webinar:read:list_tracking_sources:admin`
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:list_tracking_sources`,`webinar:read:list_tracking_sources:admin`
  *
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `MEDIUM`
  */
