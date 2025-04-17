@@ -2190,7 +2190,7 @@ export type UpdateProjectDataCacheResponse = {
          */
         isDefaultApp?: boolean;
         /**
-         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI. Includes the leading slash, e.g. `/docs`
          */
         defaultRoute?: string;
         /**
@@ -2226,6 +2226,7 @@ export type UpdateProjectDataCacheResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
+    buildMachineType?: 'enhanced';
   };
   rollingRelease?: {
     /**
@@ -2255,6 +2256,7 @@ export type UpdateProjectDataCacheResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
+    buildMachineType?: 'enhanced';
   };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -2488,6 +2490,8 @@ export type UpdateProjectDataCacheResponse = {
     endpointVerification?: Schemas.ACLAction[];
     projectTransferIn?: Schemas.ACLAction[];
     oauth2Application?: Schemas.ACLAction[];
+    vercelRun?: Schemas.ACLAction[];
+    vercelRunExec?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
     productionAliasProtectionBypass?: Schemas.ACLAction[];
@@ -3819,10 +3823,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    id?: string;
     createdAt?: number;
-    entrypoint?: string | null;
+    id?: string;
     readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    entrypoint?: string | null;
     readyStateAt?: number;
     output: {
       path: string;
@@ -4112,7 +4116,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'resource' | 'rewrite';
             src?: string;
             dest?: string;
             status?: number;
@@ -4145,7 +4149,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         org: string;
@@ -4157,7 +4161,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         owner: string;
@@ -4169,7 +4173,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | null;
   flags?:
@@ -7057,70 +7061,6 @@ export const deleteDomain = (variables: DeleteDomainVariables, signal?: AbortSig
     signal
   });
 
-export type GetConfigurableLogDrainPathParams = {
-  id: string;
-};
-
-export type GetConfigurableLogDrainQueryParams = {
-  /**
-   * The Team identifier to perform the request on behalf of.
-   */
-  teamId?: string;
-  /**
-   * The Team slug to perform the request on behalf of.
-   */
-  slug?: string;
-};
-
-export type GetConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetConfigurableLogDrainResponse = {
-  clientId?: string;
-  configurationId?: string;
-  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
-  environments: ('preview' | 'production')[];
-  disabledBy?: string;
-  firstErrorTimestamp?: number;
-  samplingRate?: number;
-  hideIpAddresses?: boolean;
-  id: string;
-  createdAt: number;
-  deletedAt: number | null;
-  updatedAt: number;
-  url: string;
-  headers?: {
-    [key: string]: string;
-  };
-  projectIds?: string[];
-  name: string;
-  teamId?: string | null;
-  ownerId: string;
-  createdFrom?: 'integration' | 'self-served';
-  deliveryFormat: 'json' | 'ndjson' | 'protobuf' | 'syslog';
-  status?: 'disabled' | 'enabled' | 'errored';
-  disabledAt?: number;
-  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
-  secret: string;
-};
-
-export type GetConfigurableLogDrainVariables = {
-  pathParams: GetConfigurableLogDrainPathParams;
-  queryParams?: GetConfigurableLogDrainQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieves a Configurable Log Drain. This endpoint must be called with a team AccessToken (integration OAuth2 clients are not allowed). Only log drains owned by the authenticated team can be accessed.
- */
-export const getConfigurableLogDrain = (variables: GetConfigurableLogDrainVariables, signal?: AbortSignal) =>
-  fetch<
-    GetConfigurableLogDrainResponse,
-    GetConfigurableLogDrainError,
-    undefined,
-    {},
-    GetConfigurableLogDrainQueryParams,
-    GetConfigurableLogDrainPathParams
-  >({ url: '/v1/log-drains/{id}', method: 'get', ...variables, signal });
-
 export type DeleteConfigurableLogDrainPathParams = {
   id: string;
 };
@@ -7155,183 +7095,6 @@ export const deleteConfigurableLogDrain = (variables: DeleteConfigurableLogDrain
     DeleteConfigurableLogDrainQueryParams,
     DeleteConfigurableLogDrainPathParams
   >({ url: '/v1/log-drains/{id}', method: 'delete', ...variables, signal });
-
-export type GetAllLogDrainsQueryParams = {
-  /**
-   * @pattern ^[a-zA-z0-9_]+$
-   */
-  projectId?: string;
-  projectIdOrName?: string;
-  /**
-   * The Team identifier to perform the request on behalf of.
-   */
-  teamId?: string;
-  /**
-   * The Team slug to perform the request on behalf of.
-   */
-  slug?: string;
-};
-
-export type GetAllLogDrainsError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetAllLogDrainsResponse = {
-  clientId?: string;
-  configurationId?: string;
-  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
-  environments: ('preview' | 'production')[];
-  disabledBy?: string;
-  firstErrorTimestamp?: number;
-  samplingRate?: number;
-  hideIpAddresses?: boolean;
-  id: string;
-  createdAt: number;
-  deletedAt: number | null;
-  updatedAt: number;
-  url: string;
-  headers?: {
-    [key: string]: string;
-  };
-  projectIds?: string[];
-  name: string;
-  teamId?: string | null;
-  ownerId: string;
-  createdFrom?: 'integration' | 'self-served';
-  deliveryFormat: 'json' | 'ndjson' | 'protobuf' | 'syslog';
-  status?: 'disabled' | 'enabled' | 'errored';
-  disabledAt?: number;
-  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
-  secret: string;
-}[];
-
-export type GetAllLogDrainsVariables = {
-  queryParams?: GetAllLogDrainsQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Retrieves a list of all the Log Drains owned by the account. This endpoint must be called with an account AccessToken (integration OAuth2 clients are not allowed). Only log drains owned by the authenticated account can be accessed.
- */
-export const getAllLogDrains = (variables: GetAllLogDrainsVariables, signal?: AbortSignal) =>
-  fetch<GetAllLogDrainsResponse, GetAllLogDrainsError, undefined, {}, GetAllLogDrainsQueryParams, {}>({
-    url: '/v1/log-drains',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type CreateConfigurableLogDrainQueryParams = {
-  /**
-   * The Team identifier to perform the request on behalf of.
-   */
-  teamId?: string;
-  /**
-   * The Team slug to perform the request on behalf of.
-   */
-  slug?: string;
-};
-
-export type CreateConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
-
-export type CreateConfigurableLogDrainResponse = {
-  /**
-   * The secret to validate the log-drain payload
-   */
-  secret?: string;
-  clientId?: string;
-  configurationId?: string;
-  sources?: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
-  environments: ('preview' | 'production')[];
-  disabledBy?: string;
-  firstErrorTimestamp?: number;
-  samplingRate?: number;
-  hideIpAddresses?: boolean;
-  id: string;
-  createdAt: number;
-  deletedAt: number | null;
-  updatedAt: number;
-  url: string;
-  headers?: {
-    [key: string]: string;
-  };
-  projectIds?: string[];
-  name: string;
-  teamId?: string | null;
-  ownerId: string;
-  createdFrom?: 'integration' | 'self-served';
-  deliveryFormat: 'json' | 'ndjson' | 'protobuf' | 'syslog';
-  status?: 'disabled' | 'enabled' | 'errored';
-  disabledAt?: number;
-  disabledReason?: 'account-plan-downgrade' | 'disabled-by-admin' | 'disabled-by-owner' | 'feature-not-available';
-};
-
-export type CreateConfigurableLogDrainRequestBody = {
-  /**
-   * The delivery log format
-   *
-   * @example json
-   */
-  deliveryFormat: 'json' | 'ndjson';
-  /**
-   * The log drain url
-   *
-   * @format uri
-   * @pattern ^(http|https)?://
-   */
-  url: string;
-  /**
-   * Headers to be sent together with the request
-   */
-  headers?: {
-    [key: string]: string;
-  };
-  /**
-   * @minItems 1
-   * @maxItems 50
-   */
-  projectIds?: string[];
-  /**
-   * @uniqueItems true
-   * @minItems 1
-   */
-  sources: ('build' | 'edge' | 'external' | 'firewall' | 'lambda' | 'static')[];
-  /**
-   * @uniqueItems true
-   * @minItems 1
-   */
-  environments?: ('preview' | 'production')[];
-  /**
-   * Custom secret of log drain
-   */
-  secret?: string;
-  /**
-   * The sampling rate for this log drain. It should be a percentage rate between 0 and 100. With max 2 decimal points
-   *
-   * @minimum 0.01
-   * @maximum 1
-   */
-  samplingRate?: number;
-  /**
-   * The custom name of this log drain.
-   */
-  name?: string;
-};
-
-export type CreateConfigurableLogDrainVariables = {
-  body: CreateConfigurableLogDrainRequestBody;
-  queryParams?: CreateConfigurableLogDrainQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Creates a configurable log drain. This endpoint must be called with a team AccessToken (integration OAuth2 clients are not allowed)
- */
-export const createConfigurableLogDrain = (variables: CreateConfigurableLogDrainVariables, signal?: AbortSignal) =>
-  fetch<
-    CreateConfigurableLogDrainResponse,
-    CreateConfigurableLogDrainError,
-    CreateConfigurableLogDrainRequestBody,
-    {},
-    CreateConfigurableLogDrainQueryParams,
-    {}
-  >({ url: '/v1/log-drains', method: 'post', ...variables, signal });
 
 export type GetEdgeConfigsQueryParams = {
   /**
@@ -9783,6 +9546,10 @@ export type ExchangeSsoTokenRequestBody = {
    * The integration redirect URI
    */
   redirect_uri?: string;
+  /**
+   * The grant type, when using x-www-form-urlencoded content type
+   */
+  grant_type?: 'authorization_code';
 };
 
 export type ExchangeSsoTokenVariables = {
@@ -10150,106 +9917,6 @@ export const deleteIntegrationLogDrain = (variables: DeleteIntegrationLogDrainVa
     DeleteIntegrationLogDrainQueryParams,
     DeleteIntegrationLogDrainPathParams
   >({ url: '/v1/integrations/log-drains/{id}', method: 'delete', ...variables, signal });
-
-export type GitNamespacesQueryParams = {
-  /**
-   * The custom Git host if using a custom Git provider, like GitHub Enterprise Server
-   *
-   * @example ghes-test.now.systems
-   */
-  host?: string;
-  provider?: 'github' | 'github-custom-host' | 'gitlab' | 'bitbucket';
-};
-
-export type GitNamespacesError = Fetcher.ErrorWrapper<undefined>;
-
-export type GitNamespacesResponse = {
-  provider: string;
-  slug: string;
-  id: string | number;
-  ownerType: string;
-  name?: string;
-  isAccessRestricted?: boolean;
-  installationId?: number;
-  requireReauth?: boolean;
-}[];
-
-export type GitNamespacesVariables = {
-  queryParams?: GitNamespacesQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Lists git namespaces for a supported provider. Supported providers are `github`, `gitlab` and `bitbucket`. If the provider is not provided, it will try to obtain it from the user that authenticated the request.
- */
-export const gitNamespaces = (variables: GitNamespacesVariables, signal?: AbortSignal) =>
-  fetch<GitNamespacesResponse, GitNamespacesError, undefined, {}, GitNamespacesQueryParams, {}>({
-    url: '/v1/integrations/git-namespaces',
-    method: 'get',
-    ...variables,
-    signal
-  });
-
-export type SearchRepoQueryParams = {
-  query?: string;
-  namespaceId?: void | null;
-  provider?: 'github' | 'github-custom-host' | 'gitlab' | 'bitbucket';
-  installationId?: string;
-  /**
-   * The custom Git host if using a custom Git provider, like GitHub Enterprise Server
-   *
-   * @example ghes-test.now.systems
-   */
-  host?: string;
-  /**
-   * The Team identifier to perform the request on behalf of.
-   */
-  teamId?: string;
-  /**
-   * The Team slug to perform the request on behalf of.
-   */
-  slug?: string;
-};
-
-export type SearchRepoError = Fetcher.ErrorWrapper<undefined>;
-
-export type SearchRepoVariables = {
-  queryParams?: SearchRepoQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Lists git repositories linked to a namespace `id` for a supported provider. A specific namespace `id` can be obtained via the `git-namespaces`  endpoint. Supported providers are `github`, `gitlab` and `bitbucket`. If the provider or namespace is not provided, it will try to obtain it from the user that authenticated the request.
- */
-export const searchRepo = (variables: SearchRepoVariables, signal?: AbortSignal) =>
-  fetch<
-    | Record<string, any>
-    | {
-        gitAccount: {
-          provider: 'github' | 'github-custom-host' | 'gitlab' | 'bitbucket';
-          namespaceId: string | number | null;
-        };
-        repos: {
-          id: string | number;
-          provider: 'github' | 'github-custom-host' | 'gitlab' | 'bitbucket';
-          url: string;
-          name: string;
-          slug: string;
-          namespace: string;
-          owner: {
-            id: string | number;
-            name: string;
-          };
-          ownerType: 'user' | 'team';
-          private: boolean;
-          defaultBranch: string;
-          updatedAt: number;
-        }[];
-      },
-    SearchRepoError,
-    undefined,
-    {},
-    SearchRepoQueryParams,
-    {}
-  >({ url: '/v1/integrations/search-repo', method: 'get', ...variables, signal });
 
 export type PostV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsPathParams = {
   integrationConfigurationId: string;
@@ -11330,7 +10997,7 @@ export type GetProjectsResponse = {
            */
           isDefaultApp?: boolean;
           /**
-           * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+           * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI. Includes the leading slash, e.g. `/docs`
            */
           defaultRoute?: string;
           /**
@@ -11366,6 +11033,7 @@ export type GetProjectsResponse = {
       functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
       functionZeroConfigFailover?: boolean;
       elasticConcurrencyEnabled?: boolean;
+      buildMachineType?: 'enhanced';
     };
     rollingRelease?: {
       /**
@@ -11395,6 +11063,7 @@ export type GetProjectsResponse = {
       functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
       functionZeroConfigFailover?: boolean;
       elasticConcurrencyEnabled?: boolean;
+      buildMachineType?: 'enhanced';
     };
     rootDirectory?: string | null;
     serverlessFunctionRegion?: string | null;
@@ -11628,6 +11297,8 @@ export type GetProjectsResponse = {
       endpointVerification?: Schemas.ACLAction[];
       projectTransferIn?: Schemas.ACLAction[];
       oauth2Application?: Schemas.ACLAction[];
+      vercelRun?: Schemas.ACLAction[];
+      vercelRunExec?: Schemas.ACLAction[];
       aliasProject?: Schemas.ACLAction[];
       aliasProtectionBypass?: Schemas.ACLAction[];
       productionAliasProtectionBypass?: Schemas.ACLAction[];
@@ -12295,7 +11966,7 @@ export type CreateProjectResponse = {
          */
         isDefaultApp?: boolean;
         /**
-         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI. Includes the leading slash, e.g. `/docs`
          */
         defaultRoute?: string;
         /**
@@ -12331,6 +12002,7 @@ export type CreateProjectResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
+    buildMachineType?: 'enhanced';
   };
   rollingRelease?: {
     /**
@@ -12360,6 +12032,7 @@ export type CreateProjectResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
+    buildMachineType?: 'enhanced';
   };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -12593,6 +12266,8 @@ export type CreateProjectResponse = {
     endpointVerification?: Schemas.ACLAction[];
     projectTransferIn?: Schemas.ACLAction[];
     oauth2Application?: Schemas.ACLAction[];
+    vercelRun?: Schemas.ACLAction[];
+    vercelRunExec?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
     productionAliasProtectionBypass?: Schemas.ACLAction[];
@@ -13442,7 +13117,7 @@ export type GetProjectResponse = {
          */
         isDefaultApp?: boolean;
         /**
-         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI. Includes the leading slash, e.g. `/docs`
          */
         defaultRoute?: string;
         /**
@@ -13478,6 +13153,7 @@ export type GetProjectResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
+    buildMachineType?: 'enhanced';
   };
   rollingRelease?: {
     /**
@@ -13507,6 +13183,7 @@ export type GetProjectResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
+    buildMachineType?: 'enhanced';
   };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -13740,6 +13417,8 @@ export type GetProjectResponse = {
     endpointVerification?: Schemas.ACLAction[];
     projectTransferIn?: Schemas.ACLAction[];
     oauth2Application?: Schemas.ACLAction[];
+    vercelRun?: Schemas.ACLAction[];
+    vercelRunExec?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
     productionAliasProtectionBypass?: Schemas.ACLAction[];
@@ -14415,7 +14094,7 @@ export type UpdateProjectResponse = {
          */
         isDefaultApp?: boolean;
         /**
-         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI. Includes the leading slash, e.g. `/docs`
          */
         defaultRoute?: string;
         /**
@@ -14451,6 +14130,7 @@ export type UpdateProjectResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
+    buildMachineType?: 'enhanced';
   };
   rollingRelease?: {
     /**
@@ -14480,6 +14160,7 @@ export type UpdateProjectResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
+    buildMachineType?: 'enhanced';
   };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -14713,6 +14394,8 @@ export type UpdateProjectResponse = {
     endpointVerification?: Schemas.ACLAction[];
     projectTransferIn?: Schemas.ACLAction[];
     oauth2Application?: Schemas.ACLAction[];
+    vercelRun?: Schemas.ACLAction[];
+    vercelRunExec?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
     productionAliasProtectionBypass?: Schemas.ACLAction[];
@@ -16111,7 +15794,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16216,7 +15899,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -16323,7 +16006,7 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
           target?:
             | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
             | ('production' | 'preview' | 'development' | 'preview' | 'development');
-          type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+          type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
           /**
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
@@ -16465,7 +16148,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -16569,7 +16252,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17107,7 +16790,7 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17204,7 +16887,7 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17307,7 +16990,7 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17460,7 +17143,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17564,7 +17247,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17667,7 +17350,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17861,7 +17544,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -23552,14 +23235,7 @@ export const operationsByTag = {
     getDeployments,
     deleteDeployment
   },
-  integrations: {
-    updateIntegrationDeploymentAction,
-    getConfigurations,
-    getConfiguration,
-    deleteConfiguration,
-    gitNamespaces,
-    searchRepo
-  },
+  integrations: { updateIntegrationDeploymentAction, getConfigurations, getConfiguration, deleteConfiguration },
   domains: {
     buyDomain,
     checkDomainPrice,
@@ -23573,15 +23249,7 @@ export const operationsByTag = {
     deleteDomain
   },
   dns: { getRecords, createRecord, updateRecord, removeRecord },
-  logDrains: {
-    getConfigurableLogDrain,
-    deleteConfigurableLogDrain,
-    getAllLogDrains,
-    createConfigurableLogDrain,
-    getIntegrationLogDrains,
-    createLogDrain,
-    deleteIntegrationLogDrain
-  },
+  logDrains: { deleteConfigurableLogDrain, getIntegrationLogDrains, createLogDrain, deleteIntegrationLogDrain },
   edgeConfig: {
     getEdgeConfigs,
     createEdgeConfig,
