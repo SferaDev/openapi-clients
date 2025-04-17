@@ -8654,10 +8654,13 @@ export type GetameetingsummaryResponse = {
    * The summary overview.
    *
    * @example Meeting overview
+   * @deprecated true
    */
   summary_overview?: string;
   /**
    * The summary content details.
+   *
+   * @deprecated true
    */
   summary_details?: {
     /**
@@ -8675,8 +8678,15 @@ export type GetameetingsummaryResponse = {
   }[];
   /**
    * The next steps.
+   *
+   * @deprecated true
    */
   next_steps?: string[];
+  /**
+   * The edited summary content.
+   *
+   * @deprecated true
+   */
   edited_summary?: {
     /**
      * The user edited summary overview.
@@ -8695,6 +8705,64 @@ export type GetameetingsummaryResponse = {
      */
     next_steps?: string[];
   };
+  /**
+     * The complete meeting summary in Markdown format. This unified field is used for all summaries. For compatibility, the legacy fields `summary_overview`, `summary_details`, `next_steps`, and `edited_summary` are still returned, but are deprecated and will not be supported in the future.
+     *
+     * @example ## Key takeaways
+    - Mobile app performance issues are affecting user retention.
+    - New onboarding flow received positive feedback from beta testers.
+    - Need to prioritize accessibility improvements.
+    - Customer support response time has improved by 25%.
+    
+    ## Discussed topics
+    ### Mobile App Performance
+    Discussion of recent performance metrics and user complaints
+    - **Details**
+        - Sarah (Product): Reports of app crashes increased 15% this month
+        - Mike (Engineering): Memory optimization needed in latest release
+        - Tom (QA): Identified memory leak in photo upload feature
+    - **Conclusion**
+        - Implement performance monitoring tools
+        - Prioritize memory optimization in next sprint
+    
+    ### Onboarding Flow
+    Review of beta testing results for new user onboarding
+    - **Details**
+        - Rachel (UX): 90% completion rate in beta testing
+        - David (Product): Positive feedback on simplified registration
+    - **Conclusion**
+        - Ready for full rollout next month
+        - Need to monitor analytics post-launch
+    
+    ### Accessibility Compliance
+    Discussion of current accessibility status and needed improvements
+    - **Details**
+        - Lisa (Design): Screen reader compatibility issues identified
+        - John (Engineering): WCAG compliance at 80%
+    - **Conclusion**
+        - Create accessibility improvement roadmap
+        - Schedule external audit
+    
+    ## Challenges
+    * Resource constraints for performance optimization
+    * Integration testing environment stability issues
+    * Lack of accessibility expertise in the team
+    
+    ## Action items
+    - **Sarah**
+      - Prepare performance monitoring implementation plan
+      - Schedule follow-up meeting with engineering team
+    - **Mike**
+      - Investigate memory leak fix
+      - Document performance optimization guidelines
+    - **Lisa**
+      - Create accessibility improvement proposal
+      - Research accessibility testing tools
+    - **Rachel**
+      - Prepare onboarding analytics dashboard
+      - Document beta testing findings
+     */
+  summary_content?: string;
 };
 
 export type GetameetingsummaryVariables = {
@@ -8704,9 +8772,9 @@ export type GetameetingsummaryVariables = {
 /**
  * Display information about a meeting summary.
  *
- * **Prerequisites**:
+ * **Prerequisites**
  * * Host user type must have a Pro or higher plan.
- * * Enable the Meeting Summary with AI Companion feature in the host's account.
+ * * Enable the **Meeting Summary with AI Companion** feature in the host's account.
  * * E2ee meetings do not have summary feature enabled.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_summary:read`,`meeting_summary:read:admin`
