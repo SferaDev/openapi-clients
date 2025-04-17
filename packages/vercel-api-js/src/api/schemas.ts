@@ -1060,6 +1060,11 @@ export type UserEvent = {
             microfrontendProjectsPerGroup?: number;
             flagsExplorerOverridesThreshold?: number;
             flagsExplorerUnlimitedOverrides?: boolean;
+            buildMachine?: {
+              purchaseType?: 'enhanced';
+              cores?: number;
+              memory?: number;
+            };
           };
           /**
            * User | Team resource limits
@@ -2444,7 +2449,7 @@ export type UserEvent = {
                  */
                 isDefaultApp?: boolean;
                 /**
-                 * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+                 * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI. Includes the leading slash, e.g. `/docs`
                  */
                 defaultRoute?: string;
                 /**
@@ -2486,7 +2491,7 @@ export type UserEvent = {
                    */
                   isDefaultApp?: boolean;
                   /**
-                   * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+                   * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI. Includes the leading slash, e.g. `/docs`
                    */
                   defaultRoute?: string;
                   /**
@@ -3035,6 +3040,23 @@ export type AuthUser = {
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
     flagsExplorerUnlimitedOverrides?: boolean;
+    /**
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+     */
+    buildMachine?: {
+      /**
+       * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+       */
+      purchaseType?: 'enhanced';
+      /**
+       * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+       */
+      cores?: number;
+      /**
+       * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+       */
+      memory?: number;
+    };
   };
   /**
    * Prefix that will be used in the URL of "Preview" deployments created by the User account.
