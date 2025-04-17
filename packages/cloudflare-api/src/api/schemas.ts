@@ -3060,6 +3060,12 @@ export type AccessApiResponseCommonFailure = {
 
 export type AccessApiResponseSingle = AccessApiResponseCommon;
 
+export type AccessAppPoliciesComponentsSchemasIdResponse = AccessApiResponseSingle & {
+  result?: {
+    id?: AccessUuid;
+  };
+};
+
 export type AccessAppPoliciesComponentsSchemasResponseCollection = AccessApiResponseCollection & {
   result?: AccessAppPolicyResponse[];
 };
@@ -3240,7 +3246,6 @@ export type AccessApprovalGroups = AccessApprovalGroup[];
 /**
  * Requires the user to request access from an administrator at the start of each session.
  *
- * @default false
  * @example true
  */
 export type AccessApprovalRequired = boolean;
@@ -5107,7 +5112,6 @@ export type AccessIsUiReadOnly = boolean;
 /**
  * Require this application to be served in an isolated browser for users matching this policy. 'Client Web Isolation' must be on for the account in order to use this feature.
  *
- * @default false
  * @example false
  */
 export type AccessIsolationRequired = boolean;
@@ -6010,7 +6014,7 @@ export type AccessPingone = {
 
 export type AccessPolicies = {
   approval_groups?: AccessSchemasApprovalGroups;
-  approval_required?: AccessApprovalRequired;
+  approval_required?: AccessSchemasApprovalRequired;
   created_at?: AccessTimestamp;
   decision?: AccessSchemasDecision;
   exclude?: AccessSchemasExclude;
@@ -6020,7 +6024,7 @@ export type AccessPolicies = {
   name?: AccessPoliciesComponentsSchemasName;
   precedence?: AccessSchemasPrecedence;
   purpose_justification_prompt?: AccessPurposeJustificationPrompt;
-  purpose_justification_required?: AccessPurposeJustificationRequired;
+  purpose_justification_required?: AccessSchemasPurposeJustificationRequired;
   require?: AccessSchemasRequire;
   updated_at?: AccessTimestamp;
 };
@@ -6218,7 +6222,6 @@ export type AccessPurposeJustificationPrompt = string;
 /**
  * Require users to enter a justification when they log in to the application.
  *
- * @default false
  * @example true
  */
 export type AccessPurposeJustificationRequired = boolean;
@@ -6881,6 +6884,14 @@ export type AccessSchemasApprovalGroup = {
  * @example {"approvals_needed":3,"email_list_uuid":"597147a1-976b-4ef2-9af0-81d5d007fc34"}
  */
 export type AccessSchemasApprovalGroups = AccessSchemasApprovalGroup[];
+
+/**
+ * Requires the user to request access from an administrator at the start of each session.
+ *
+ * @default false
+ * @example true
+ */
+export type AccessSchemasApprovalRequired = boolean;
 
 /**
  * The hostnames of the applications that will use this certificate.
@@ -7687,6 +7698,39 @@ export type AccessSchemasLinkedin = {
     | 'yandex';
 };
 
+export type AccessSchemasLoginDesign = {
+  /**
+   * The background color on your login page.
+   *
+   * @example #c5ed1b
+   */
+  background_color?: string;
+  /**
+   * The text at the bottom of your login page.
+   *
+   * @example This is an example description.
+   */
+  footer_text?: string;
+  /**
+   * The text at the top of your login page.
+   *
+   * @example This is an example description.
+   */
+  header_text?: string;
+  /**
+   * The URL of the logo on your login page.
+   *
+   * @example https://example.com/logo.png
+   */
+  logo_path?: string;
+  /**
+   * The text color on your login page.
+   *
+   * @example #c5ed1b
+   */
+  text_color?: string;
+};
+
 /**
  * The image URL for the logo shown in the App Launcher dashboard.
  *
@@ -8135,7 +8179,7 @@ export type AccessSchemasOrganizations = {
   auth_domain?: AccessSchemasAuthDomain;
   created_at?: AccessTimestamp;
   is_ui_read_only?: AccessSchemasIsUiReadOnly;
-  login_design?: AccessLoginDesign;
+  login_design?: AccessSchemasLoginDesign;
   name?: AccessOrganizationsComponentsSchemasName;
   ui_read_only_toggle_reason?: AccessUiReadOnlyToggleReason;
   updated_at?: AccessTimestamp;
@@ -8280,6 +8324,14 @@ export type AccessSchemasPolicyCheckResponse = AccessApiResponseSingle & {
  * The order of execution for this policy. Must be unique for each policy.
  */
 export type AccessSchemasPrecedence = number;
+
+/**
+ * Require users to enter a justification when they log in to the application.
+ *
+ * @default false
+ * @example true
+ */
+export type AccessSchemasPurposeJustificationRequired = boolean;
 
 /**
  * Rules evaluated with an AND logical operator. To match the policy, a user must meet all of the Require rules.
@@ -9165,9 +9217,10 @@ export type AccessSettings = {
  */
 export type AccessSince = string;
 
-export type AccessSingleResponse = AccessApiResponseSingle & {
-  result?: AccessOrganizations;
-};
+export type AccessSingleResponse = AccessApiResponseSingle &
+  Record<string, any> & {
+    result?: AccessOrganizations;
+  };
 
 export type AccessSingleResponseWithoutHtml = AccessApiResponseSingle & {
   result?: AccessCustomPageWithoutHtml;
@@ -9726,7 +9779,7 @@ export type AddressingApiResponseCommon = {
   errors: AddressingMessages;
   messages: AddressingMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -9742,7 +9795,7 @@ export type AddressingApiResponseCommonFailure = {
   messages: AddressingMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -10051,7 +10104,11 @@ export type AddressingMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -10111,25 +10168,25 @@ export type AddressingResponseCollectionBgp = AddressingApiResponseCollection & 
 
 export type AddressingResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -15651,7 +15708,7 @@ export type DlpContextAwareness = {
 export type DlpCreateEmailRule = {
   action: DlpEmailRuleAction;
   /**
-   * Rule is triggered if all conditions match
+   * Rule is triggered if all conditions match.
    */
   conditions: DlpEmailRuleCondition[];
   description?: string | null;
@@ -15667,7 +15724,7 @@ export type DlpCreateIntegrationBody = {
    */
   reference_id?: string | null;
   /**
-   * The base url of the tenant, e.g. "https://tenant.okta.com"
+   * The base url of the tenant, e.g. "https://tenant.okta.com".
    *
    * @format uri
    */
@@ -15711,29 +15768,29 @@ export type DlpCustomProfile = {
   confidence_threshold?: DlpConfidence;
   context_awareness: DlpContextAwareness;
   /**
-   * When the profile was created
+   * When the profile was created.
    *
    * @format date-time
    */
   created_at: string;
   /**
-   * The description of the profile
+   * The description of the profile.
    */
   description?: string | null;
   entries: DlpEntry[];
   /**
-   * The id of the profile (uuid)
+   * The id of the profile (uuid).
    *
    * @format uuid
    */
   id: string;
   /**
-   * The name of the profile
+   * The name of the profile.
    */
   name: string;
   ocr_enabled: boolean;
   /**
-   * When the profile was lasted updated
+   * When the profile was lasted updated.
    *
    * @format date-time
    */
@@ -15749,7 +15806,7 @@ export type DlpCustomProfileUpdate = {
   confidence_threshold?: string | null;
   context_awareness?: DlpContextAwareness;
   /**
-   * The description of the profile
+   * The description of the profile.
    */
   description?: string | null;
   /**
@@ -15775,7 +15832,7 @@ export type DlpDataset = {
    */
   created_at: string;
   /**
-   * The description of the dataset
+   * The description of the dataset.
    */
   description?: string | null;
   /**
@@ -15825,7 +15882,7 @@ export type DlpDatasetColumnArray = DlpDatasetColumn[];
 export type DlpDatasetCreation = {
   dataset: DlpDataset;
   /**
-   * Encoding version to use for dataset
+   * Encoding version to use for dataset.
    *
    * @format int32
    * @minimum 0
@@ -15882,11 +15939,11 @@ export type DlpDatasetUpdate = {
    */
   case_sensitive?: boolean;
   /**
-   * The description of the dataset
+   * The description of the dataset.
    */
   description?: string | null;
   /**
-   * The name of the dataset, must be unique
+   * The name of the dataset, must be unique.
    */
   name?: string | null;
 };
@@ -15908,7 +15965,7 @@ export type DlpDatasetUploadStatus = 'empty' | 'uploading' | 'processing' | 'fai
 export type DlpEmailRule = {
   action: DlpEmailRuleAction;
   /**
-   * Rule is triggered if all conditions match
+   * Rule is triggered if all conditions match.
    */
   conditions: DlpEmailRuleCondition[];
   /**
@@ -15973,11 +16030,11 @@ export type DlpEntry =
 
 export type DlpEntryConfidence = {
   /**
-   * Indicates whether this entry has AI remote service validation
+   * Indicates whether this entry has AI remote service validation.
    */
   ai_context_available: boolean;
   /**
-   * Indicates whether this entry has any form of validation that is not an AI remote service
+   * Indicates whether this entry has any form of validation that is not an AI remote service.
    */
   available: boolean;
 };
@@ -16052,7 +16109,7 @@ export type DlpIntegrationProfile = {
    */
   created_at: string;
   /**
-   * The description of the profile
+   * The description of the profile.
    */
   description?: string | null;
   entries: DlpEntry[];
@@ -16103,7 +16160,7 @@ export type DlpNewCustomProfile = {
   confidence_threshold?: string | null;
   context_awareness?: DlpContextAwareness;
   /**
-   * The description of the profile
+   * The description of the profile.
    */
   description?: string | null;
   entries: DlpEntryOfNewProfile[];
@@ -16129,7 +16186,7 @@ export type DlpNewDataset = {
    */
   case_sensitive?: boolean;
   /**
-   * The description of the dataset
+   * The description of the dataset.
    */
   description?: string | null;
   /**
@@ -16268,18 +16325,18 @@ export type DlpPredefinedProfile = {
   context_awareness?: DlpContextAwareness;
   entries: DlpEntry[];
   /**
-   * The id of the predefined profile (uuid)
+   * The id of the predefined profile (uuid).
    *
    * @format uuid
    */
   id: string;
   /**
-   * The name of the predefined profile
+   * The name of the predefined profile.
    */
   name: string;
   ocr_enabled?: boolean;
   /**
-   * Whether this profile can be accessed by anyone
+   * Whether this profile can be accessed by anyone.
    */
   open_access?: boolean;
 };
@@ -16390,11 +16447,11 @@ export type DlpRiskScoreIntegration = {
    */
   reference_id: string;
   /**
-   * The base URL for the tenant. E.g. "https://tenant.okta.com"
+   * The base URL for the tenant. E.g. "https://tenant.okta.com".
    */
   tenant_url: string;
   /**
-   * The URL for the Shared Signals Framework configuration, e.g. "/.well-known/sse-configuration/{integration_uuid}/". https://openid.net/specs/openid-sse-framework-1_0.html#rfc.section.6.2.1
+   * The URL for the Shared Signals Framework configuration, e.g. "/.well-known/sse-configuration/{integration_uuid}/". https://openid.net/specs/openid-sse-framework-1_0.html#rfc.section.6.2.1.
    */
   well_known_url: string;
 };
@@ -16460,7 +16517,7 @@ export type DlpUpdateBehaviors = {
 
 /**
  * Used to update multiple email rule priorities as an atomic action,
- * to support patterns such as swapping the priorities of two email rules
+ * to support patterns such as swapping the priorities of two email rules.
  */
 export type DlpUpdateEmailRulePriorities = {
   new_priorities: {
@@ -16479,7 +16536,7 @@ export type DlpUpdateIntegrationBody = {
    */
   reference_id?: string | null;
   /**
-   * The base url of the tenant, e.g. "https://tenant.okta.com"
+   * The base url of the tenant, e.g. "https://tenant.okta.com".
    *
    * @format uri
    */
@@ -16604,7 +16661,6 @@ export type DlpResultInfo = {
 };
 
 export type DlsApiResponseCollection = DlsApiResponseCommon & {
-  result?: any[] | null;
   result_info?: DlsResultInfo;
 };
 
@@ -16612,7 +16668,7 @@ export type DlsApiResponseCommon = {
   errors: DlsMessages;
   messages: DlsMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -16628,7 +16684,7 @@ export type DlsApiResponseCommonFailure = {
   messages: DlsMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -16643,7 +16699,7 @@ export type DlsApiResponseCommonFailure = {
 export type DlsHostname = string;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -16655,7 +16711,11 @@ export type DlsMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -16675,34 +16735,40 @@ export type DlsRegionalHostnameResponse = {
   created_on: DlsTimestamp & void & void;
   hostname: DlsHostname;
   region_key: DlsRegionKey;
+  routing?: DlsRouting;
 };
 
 export type DlsResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
   total_count?: number;
 };
+
+/**
+ * Configure which routing method to use for the regional hostname
+ */
+export type DlsRouting = string;
 
 /**
  * @example 2014-01-01T05:20:00.12345Z
@@ -22619,6 +22685,7 @@ export type HyperdriveHyperdriveConfig = {
    * @x-auditable true
    */
   modified_on?: string;
+  mtls?: HyperdriveHyperdriveMtls;
   name: HyperdriveHyperdriveName;
   origin:
     | (HyperdriveHyperdriveDatabaseFull & HyperdriveInternetOrigin)
@@ -22627,6 +22694,7 @@ export type HyperdriveHyperdriveConfig = {
 
 export type HyperdriveHyperdriveConfigPatch = {
   caching?: HyperdriveHyperdriveCaching;
+  mtls?: HyperdriveHyperdriveMtls;
   name?: HyperdriveHyperdriveName;
   origin?: HyperdriveHyperdriveDatabase | (HyperdriveInternetOrigin | HyperdriveOverAccessOrigin);
 };
@@ -22659,6 +22727,27 @@ export type HyperdriveHyperdriveDatabase = {
 
 export type HyperdriveHyperdriveDatabaseFull = HyperdriveHyperdriveDatabase;
 
+export type HyperdriveHyperdriveMtls = {
+  /**
+   * CA certificate ID
+   *
+   * @example 00000000-0000-0000-0000-0000000000
+   */
+  ca_certificate_id?: string;
+  /**
+   * mTLS certificate ID
+   *
+   * @example 00000000-0000-0000-0000-0000000000
+   */
+  mtls_certificate_id?: string;
+  /**
+   * SSL mode used for CA verification. Must be 'require', 'verify-ca', or 'verify-full'
+   *
+   * @example verify-full
+   */
+  sslmode?: string;
+};
+
 /**
  * @example example-hyperdrive
  * @x-auditable true
@@ -22673,7 +22762,7 @@ export type HyperdriveHyperdriveOrigin = HyperdriveHyperdriveDatabase &
  *
  * @x-auditable true
  */
-export type HyperdriveHyperdriveScheme = 'postgres' | 'postgresql';
+export type HyperdriveHyperdriveScheme = 'postgres' | 'postgresql' | 'mysql';
 
 /**
  * Identifier
@@ -27174,11 +27263,35 @@ export type LogpushApiResponseSingle = LogpushApiResponseCommon;
 /**
  * Name of the dataset. A list of supported datasets can be found on the [Developer Docs](https://developers.cloudflare.com/logs/reference/log-fields/).
  *
+ * @default http_requests
  * @example http_requests
- * @maxLength 256
- * @pattern ^[a-zA-Z0-9_\-]*$
  */
-export type LogpushDataset = string | null;
+export type LogpushDataset =
+  | 'access_requests'
+  | 'audit_logs'
+  | 'biso_user_actions'
+  | 'casb_findings'
+  | 'device_posture_results'
+  | 'dlp_forensic_copies'
+  | 'dns_firewall_logs'
+  | 'dns_logs'
+  | 'email_security_alerts'
+  | 'firewall_events'
+  | 'gateway_dns'
+  | 'gateway_http'
+  | 'gateway_network'
+  | 'http_requests'
+  | 'magic_ids_detections'
+  | 'nel_reports'
+  | 'network_analytics_logs'
+  | 'page_shield_events'
+  | 'sinkhole_http_logs'
+  | 'spectrum_events'
+  | 'ssh_logs'
+  | 'workers_trace_events'
+  | 'zaraz_events'
+  | 'zero_trust_network_sessions'
+  | null;
 
 /**
  * Uniquely identifies a resource (such as an s3 bucket) where data will be pushed. Additional configuration parameters supported by the destination may be included.
@@ -39973,7 +40086,7 @@ export type RulesetsSkipRule = {
    */
   action_parameters?: {
     /**
-     * A list of phases to skip the execution of. This option is incompatible with the ruleset and rulesets options.
+     * A list of phases to skip the execution of. This option is incompatible with the rulesets options.
      *
      * @minItems 1
      * @uniqueItems true
@@ -39996,7 +40109,7 @@ export type RulesetsSkipRule = {
       [key: string]: (RulesetsRuleId & void)[];
     };
     /**
-     * A ruleset to skip the execution of. This option is incompatible with the rulesets, rules and phases options.
+     * A ruleset to skip the execution of. This option is incompatible with the rulesets, rules. It can be incompatible with phases options base on the phase of the ruleset.
      */
     ruleset?: 'current';
     /**
@@ -51039,9 +51152,12 @@ export type WaitingroomZoneSettingsResponse = WaitingroomApiResponseSingle & {
 export type Web3ApiResponseCollection = {
   errors: Web3Messages;
   messages: Web3Messages;
-  result: Record<string, any> | any[] | string | null;
   /**
-   * Whether the API call was successful
+   * Provides the API response.
+   */
+  result: never;
+  /**
+   * Specifies whether the API call was successful.
    *
    * @example true
    */
@@ -51052,9 +51168,12 @@ export type Web3ApiResponseCollection = {
 export type Web3ApiResponseCommon = {
   errors: Web3Messages;
   messages: Web3Messages;
+  /**
+   * Provides the API response.
+   */
   result: Record<string, any> | any[] | string;
   /**
-   * Whether the API call was successful
+   * Specifies whether the API call was successful.
    *
    * @example true
    */
@@ -51070,28 +51189,26 @@ export type Web3ApiResponseCommonFailure = {
   messages: Web3Messages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Specifies whether the API call was successful.
    *
    * @example false
    */
   success: false;
 };
 
-export type Web3ApiResponseSingle = {
-  errors: Web3Messages;
-  messages: Web3Messages;
-  result: (Record<string, any> | null) | (string | null) | string;
+export type Web3ApiResponseSingle = Web3ApiResponseCommon & {
   /**
-   * Whether the API call was successful
-   *
-   * @example true
+   * Provides the API response.
    */
-  success: true;
+  result_info?: (Record<string, any> | null) | (string | null);
 };
 
 export type Web3ApiResponseSingleId = {
   errors: Web3Messages;
   messages: Web3Messages;
+  /**
+   * Provides the API response.
+   */
   result:
     | {
         id: Web3Identifier;
@@ -51100,7 +51217,7 @@ export type Web3ApiResponseSingleId = {
     | string
     | null;
   /**
-   * Whether the API call was successful
+   * Specifies whether the API call was successful.
    *
    * @example true
    */
@@ -51127,12 +51244,12 @@ export type Web3ContentListDetailsResponse = Web3ApiResponseSingle & {
 };
 
 /**
- * Content list entries.
+ * Provides content list entries.
  */
 export type Web3ContentListEntries = Web3ContentListEntry[];
 
 /**
- * Content list entry to be blocked.
+ * Specify a content list entry to block.
  */
 export type Web3ContentListEntry = {
   content?: Web3ContentListEntryContent;
@@ -51150,7 +51267,7 @@ export type Web3ContentListEntryCollectionResponse = Web3ApiResponseCollection &
 };
 
 /**
- * CID or content path of content to block.
+ * Specify the CID or content path of content to block.
  *
  * @example QmPZ9gcCEpqKTo6aq61g2nXGUhM4iCL3ewB6LDXZCtioEB
  * @maxLength 500
@@ -51164,7 +51281,7 @@ export type Web3ContentListEntryCreateRequest = {
 };
 
 /**
- * An optional description of the content list entry.
+ * Specify an optional description of the content list entry.
  *
  * @example this is my content list entry
  * @maxLength 500
@@ -51176,7 +51293,7 @@ export type Web3ContentListEntrySingleResponse = Web3ApiResponseSingle & {
 };
 
 /**
- * Type of content list entry to block.
+ * Specify the type of content list entry to block.
  *
  * @example cid
  */
@@ -51195,7 +51312,7 @@ export type Web3CreateRequest = {
 };
 
 /**
- * An optional description of the hostname.
+ * Specify an optional description of the hostname.
  *
  * @example This is my IPFS gateway.
  * @maxLength 500
@@ -51203,14 +51320,14 @@ export type Web3CreateRequest = {
 export type Web3Description = string;
 
 /**
- * DNSLink value used if the target is ipfs.
+ * Specify the DNSLink value used if the target is ipfs.
  *
  * @example /ipns/onboarding.ipfs.cloudflare.com
  */
 export type Web3Dnslink = string;
 
 /**
- * Identifier
+ * Specify the identifier of the hostname.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -51231,7 +51348,7 @@ export type Web3ModifyRequest = {
 };
 
 /**
- * The hostname that will point to the target gateway via CNAME.
+ * Specify the hostname that points to the target gateway via CNAME.
  *
  * @example gateway.example.com
  * @maxLength 255
@@ -51240,25 +51357,25 @@ export type Web3Name = string;
 
 export type Web3ResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Specifies the total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Specifies the current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Specifies the number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Specifies the total results available without any search parameters.
    *
    * @example 2000
    */
@@ -51270,14 +51387,14 @@ export type Web3SingleResponse = Web3ApiResponseSingle & {
 };
 
 /**
- * Status of the hostname's activation.
+ * Specifies the status of the hostname's activation.
  *
  * @example active
  */
 export type Web3Status = 'active' | 'pending' | 'deleting' | 'error';
 
 /**
- * Target gateway of the hostname.
+ * Specify the target gateway of the hostname.
  *
  * @example ipfs
  */
@@ -52187,6 +52304,7 @@ export type WorkersBindingItem =
   | WorkersBindingKindKvNamespace
   | WorkersBindingKindMtlsCertificate
   | WorkersBindingKindPlainText
+  | WorkersBindingKindPipelines
   | WorkersBindingKindQueue
   | WorkersBindingKindR2Bucket
   | WorkersBindingKindSecretText
@@ -52361,6 +52479,20 @@ export type WorkersBindingKindMtlsCertificate = {
    * The kind of resource that the binding provides.
    */
   type: 'mtls_certificate';
+};
+
+export type WorkersBindingKindPipelines = {
+  name: WorkersBindingName;
+  /**
+   * Name of the Pipeline to bind to.
+   *
+   * @example my-pipeline
+   */
+  pipeline: string;
+  /**
+   * The kind of resource that the binding provides.
+   */
+  type: 'pipelines';
 };
 
 export type WorkersBindingKindPlainText = {
@@ -57231,6 +57363,9 @@ export type ZonesCiphersValue = string[];
 
 /**
  * Whether or not cname flattening is on.
+ *
+ * @deprecated true
+ * @x-stainless-deprecation-message This zone setting is deprecated; please use the DNS Settings route instead. More information at https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-03-21
  */
 export type ZonesCnameFlattening = {
   /**
@@ -57264,6 +57399,8 @@ export type ZonesCnameFlattening = {
  * Value of the cname flattening setting.
  *
  * @default flatten_at_root
+ * @deprecated true
+ * @x-stainless-deprecation-message This zone setting is deprecated; please use the DNS Settings route instead. More information at https://developers.cloudflare.com/fundamentals/api/reference/deprecations/#2025-03-21
  */
 export type ZonesCnameFlatteningValue = 'flatten_at_root' | 'flatten_all';
 
@@ -58173,7 +58310,7 @@ export type ZonesOriginErrorPagePassThruValue = 'on' | 'off';
 export type ZonesPageRule = {
   actions: ZonesActions;
   created_on: ZonesCreatedOn;
-  id: ZonesIdentifier;
+  id: ZonesSchemasIdentifier;
   modified_on: ZonesModifiedOn;
   priority: ZonesPriority;
   status: ZonesStatus;
@@ -58569,10 +58706,10 @@ export type ZonesSchemasAlwaysUseHttps = {
 };
 
 export type ZonesSchemasApiResponseCommon = {
-  errors: ZonesMessages;
-  messages: ZonesMessages;
+  errors: ZonesSchemasMessages;
+  messages: ZonesSchemasMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -58584,11 +58721,11 @@ export type ZonesSchemasApiResponseCommonFailure = {
    * @example {"code":7003,"message":"No route for the URI"}
    * @minLength 1
    */
-  errors: ZonesMessages;
-  messages: ZonesMessages;
+  errors: ZonesSchemasMessages;
+  messages: ZonesSchemasMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -58609,7 +58746,7 @@ export type ZonesSchemasApiResponseSingle = {
 
 export type ZonesSchemasApiResponseSingleId = ZonesSchemasApiResponseCommon & {
   result?: {
-    id: ZonesIdentifier;
+    id: ZonesSchemasIdentifier;
   } | null;
 };
 
@@ -58833,6 +58970,14 @@ export type ZonesSchemasEmailObfuscation = {
 };
 
 /**
+ * Identifier.
+ *
+ * @example 023e105f4ecef8ad9ca31a8372d0c353
+ * @maxLength 32
+ */
+export type ZonesSchemasIdentifier = string;
+
+/**
  * Enable IP Geolocation to have Cloudflare geolocate visitors to your website and pass the country code to you. (https://support.cloudflare.com/hc/en-us/articles/200168236).
  */
 export type ZonesSchemasIpGeolocation = {
@@ -58862,6 +59007,18 @@ export type ZonesSchemasIpGeolocation = {
    */
   value: ZonesIpGeolocationValue;
 };
+
+export type ZonesSchemasMessages = {
+  /**
+   * @minimum 1000
+   */
+  code: number;
+  documentation_url?: string;
+  message: string;
+  source?: {
+    pointer?: string;
+  };
+}[];
 
 /**
  * Automatically optimize image loading for website visitors on mobile
