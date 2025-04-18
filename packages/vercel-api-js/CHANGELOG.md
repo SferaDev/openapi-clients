@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.24.0
+
+### Minor Changes
+
+- 06a8f43: [BREAKING] New endpoint vercelRun to perform a new action
+
 ## 0.23.6
 
 ### Patch Changes
