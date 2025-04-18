@@ -52539,11 +52539,11 @@ export type WorkersBindingKindR2Bucket = {
 
 export type WorkersBindingKindSecretKey = {
   /**
-   * Algorithm-specific key parameters ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm)).
+   * Algorithm-specific key parameters. [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm).
    */
   algorithm: Record<string, any>;
   /**
-   * Data format of the key ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format)).
+   * Data format of the key. [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format).
    *
    * @example raw
    */
@@ -52566,7 +52566,7 @@ export type WorkersBindingKindSecretKey = {
    */
   type: 'secret_key';
   /**
-   * Allowed operations with the key ([learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages)).
+   * Allowed operations with the key. [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#keyUsages).
    *
    * @example encrypt
    * @example decrypt
@@ -53203,11 +53203,6 @@ export type WorkersObservability = {
 };
 
 /**
- * @example example.net/*
- */
-export type WorkersPattern = string;
-
-/**
  * Configuration for [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
  */
 export type WorkersPlacementInfo = {
@@ -53266,23 +53261,20 @@ export type WorkersResultInfo = {
   total_count?: number;
 };
 
-export type WorkersRouteNoId = {
-  pattern: WorkersPattern;
-  script?: WorkersScriptName;
-};
-
-export type WorkersRouteResponseCollection = WorkersApiResponseCommon & {
-  result?: WorkersRoutes[];
-};
-
-export type WorkersRouteResponseSingle = WorkersApiResponseSingle & {
-  result?: WorkersRoutes;
-};
-
-export type WorkersRoutes = {
+export type WorkersRoute = {
   id: WorkersIdentifier;
-  pattern: WorkersPattern;
-  script: WorkersScriptName;
+  /**
+   * Pattern to match incoming requests against. [Learn more](https://developers.cloudflare.com/workers/configuration/routing/routes/#matching-behavior).
+   *
+   * @example example.com/*
+   */
+  pattern: string;
+  /**
+   * Name of the script to run if the route matches.
+   *
+   * @example my-workers-script
+   */
+  script: string;
 };
 
 /**
