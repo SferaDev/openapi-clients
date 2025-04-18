@@ -1,5 +1,12 @@
 # cloudflare-api-js
 
+## 0.13.0
+
+### Minor Changes
+
+- b70b4e3: Refactor WorkersRoute type to use a more descriptive pattern property
+- 787a5bd: [BREAKING] Remove deviceDEXTests endpoints
+
 ## 0.12.1
 
 ### Patch Changes
