@@ -8,7 +8,7 @@
     "tsc": "turbo run tsc"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.28.1",
+    "@changesets/cli": "^2.29.2",
     "@openapi-codegen/cli": "^3.1.0",
     "@openapi-codegen/typescript": "^11.0.1",
     "@types/isomorphic-fetch": "^0.0.39",
@@ -16,7 +16,7 @@
     "builtin-modules": "^5.0.0",
     "case": "^1.6.3",
     "isomorphic-fetch": "^3.0.0",
-    "openai": "^4.93.0",
+    "openai": "^4.95.1",
     "openapi3-ts": "^4.4.0",
     "rimraf": "^6.0.1",
     "ts-morph": "^25.0.1",
