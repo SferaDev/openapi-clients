@@ -1,5 +1,5 @@
 ---
-"vercel-api-js": undefined
+"vercel-api-js": patch
 ---
 
-undefined
+Remove vsmValue
