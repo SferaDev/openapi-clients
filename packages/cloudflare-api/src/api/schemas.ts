@@ -28022,6 +28022,7 @@ export type MagicTransitWaitTime = number;
 
 /**
  * @example 6f91088a406011ed95aed352566e8d4c
+ * @x-auditable true
  */
 export type MagicVisibilityMnmAccountIdentifier = string;
 
@@ -28098,6 +28099,7 @@ export type MagicVisibilityMnmMnmConfig = {
  *
  * @default 1
  * @minimum 1
+ * @x-auditable true
  */
 export type MagicVisibilityMnmMnmConfigDefaultSampling = number;
 
@@ -28105,6 +28107,7 @@ export type MagicVisibilityMnmMnmConfigDefaultSampling = number;
  * The account name.
  *
  * @example cloudflare user's account
+ * @x-auditable true
  */
 export type MagicVisibilityMnmMnmConfigName = string;
 
@@ -28112,6 +28115,7 @@ export type MagicVisibilityMnmMnmConfigName = string;
  * IPv4 CIDR of the router sourcing flow data. Only /32 addresses are currently supported.
  *
  * @example 203.0.113.1
+ * @x-auditable true
  */
 export type MagicVisibilityMnmMnmConfigRouterIp = string;
 
@@ -28129,18 +28133,21 @@ export type MagicVisibilityMnmMnmConfigWarpDevice = {
    * Unique identifier for the warp device.
    *
    * @example 5360368d-b351-4791-abe1-93550dabd351
+   * @x-auditable true
    */
   id: string;
   /**
    * Name of the warp device.
    *
    * @example My warp device
+   * @x-auditable true
    */
   name: string;
   /**
    * IPv4 CIDR of the router sourcing flow data associated with this warp device. Only /32 addresses are currently supported.
    *
    * @example 203.0.113.1
+   * @x-auditable true
    */
   router_ip: string;
 };
@@ -28173,6 +28180,7 @@ export type MagicVisibilityMnmMnmRuleAdvertisementSingleResponse = MagicVisibili
  * Toggle on if you would like Cloudflare to automatically advertise the IP Prefixes within the rule via Magic Transit when the rule is triggered. Only available for users of Magic Transit.
  *
  * @example false
+ * @x-auditable true
  */
 export type MagicVisibilityMnmMnmRuleAutomaticAdvertisement = boolean | null;
 
@@ -28181,6 +28189,7 @@ export type MagicVisibilityMnmMnmRuleAutomaticAdvertisement = boolean | null;
  *
  * @example 1000
  * @minimum 1
+ * @x-auditable true
  */
 export type MagicVisibilityMnmMnmRuleBandwidthThreshold = number;
 
@@ -28189,6 +28198,7 @@ export type MagicVisibilityMnmMnmRuleBandwidthThreshold = number;
  *
  * @default 1m
  * @example 300s
+ * @x-auditable true
  */
 export type MagicVisibilityMnmMnmRuleDuration = '1m' | '5m' | '10m' | '15m' | '20m' | '30m' | '45m' | '60m';
 
@@ -28196,6 +28206,7 @@ export type MagicVisibilityMnmMnmRuleDuration = '1m' | '5m' | '10m' | '15m' | '2
  * The IP prefixes that are monitored for this rule. Must be a CIDR range like 203.0.113.0/24. Max 5000 different CIDR ranges.
  *
  * @example 203.0.113.1/32
+ * @x-auditable true
  */
 export type MagicVisibilityMnmMnmRuleIpPrefix = string;
 
@@ -28205,6 +28216,7 @@ export type MagicVisibilityMnmMnmRuleIpPrefixes = MagicVisibilityMnmMnmRuleIpPre
  * The name of the rule. Must be unique. Supports characters A-Z, a-z, 0-9, underscore (_), dash (-), period (.), and tilde (~). You can’t have a space in the rule name. Max 256 characters.
  *
  * @example my_rule_1
+ * @x-auditable true
  */
 export type MagicVisibilityMnmMnmRuleName = string;
 
@@ -28213,6 +28225,7 @@ export type MagicVisibilityMnmMnmRuleName = string;
  *
  * @example 10000
  * @minimum 1
+ * @x-auditable true
  */
 export type MagicVisibilityMnmMnmRulePacketThreshold = number;
 
@@ -28220,6 +28233,7 @@ export type MagicVisibilityMnmMnmRulePacketThreshold = number;
  * Prefix match type to be applied for a prefix auto advertisement when using an advanced_ddos rule.
  *
  * @example exact
+ * @x-auditable true
  */
 export type MagicVisibilityMnmMnmRulePrefixMatch = 'exact' | 'subnet' | 'supernet' | null;
 
@@ -28227,6 +28241,7 @@ export type MagicVisibilityMnmMnmRulePrefixMatch = 'exact' | 'subnet' | 'superne
  * MNM rule type.
  *
  * @example zscore
+ * @x-auditable true
  */
 export type MagicVisibilityMnmMnmRuleType = 'threshold' | 'zscore' | 'advanced_ddos';
 
@@ -28234,6 +28249,7 @@ export type MagicVisibilityMnmMnmRuleType = 'threshold' | 'zscore' | 'advanced_d
  * Level of sensitivity set for zscore rules.
  *
  * @example high
+ * @x-auditable true
  */
 export type MagicVisibilityMnmMnmRuleZscoreSensitivity = 'low' | 'medium' | 'high' | null;
 
@@ -28241,6 +28257,7 @@ export type MagicVisibilityMnmMnmRuleZscoreSensitivity = 'low' | 'medium' | 'hig
  * Target of the zscore rule analysis.
  *
  * @example bits
+ * @x-auditable true
  */
 export type MagicVisibilityMnmMnmRuleZscoreTarget = 'bits' | 'packets' | null;
 
@@ -28260,6 +28277,7 @@ export type MagicVisibilityMnmMnmVpcFlowsSingleResponse = MagicVisibilityMnmApiR
  * Authentication token to be used for VPC Flows export authentication.
  *
  * @example JWE/JWT auth token
+ * @x-sensitive true
  */
 export type MagicVisibilityMnmMnmVpcFlowsToken = string;
 
@@ -28294,6 +28312,7 @@ export type MagicVisibilityMnmResultInfo = {
  * The id of the rule. Must be unique.
  *
  * @example 2890e6fa406311ed9b5a23f70f6fb8cf
+ * @x-auditable true
  */
 export type MagicVisibilityMnmRuleIdentifier = string;
 
