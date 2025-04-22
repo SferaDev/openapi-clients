@@ -1015,7 +1015,7 @@ export type RecordingGetPathParams = {
    *
    * To get a webinar's cloud recordings, provide the webinar's ID or UUID. If providing the webinar ID instead of UUID, the response will be for the latest webinar instance.
    *
-   * If a UUID starts with `/` or contains `//` (example: `/ajXp112QmuoKj4854875==`), **[double encode](/docs/api-reference/using-zoom-apis/#meeting-id-and-uuid) the UUID** before making an API request.
+   * If a UUID starts with `/` or contains `//` (example: `/ajXp112QmuoKj4854875==`), **[double encode](/docs/api/using-zoom-apis/#meeting-id-and-uuid) the UUID** before making an API request.
    *
    * @example atsXxhSEQWit9t+U02HXNQ==
    */
@@ -1055,11 +1055,11 @@ export type RecordingGetResponse = {
     /**
      * The URL to download the recording.
      *
-     * If a user has authorized and installed your OAuth app that contains recording scopes, use the `download_access_token` or the user's [OAuth access token](https://developers.zoom.us/docs/integrations/oauth/) to download the file. Set the `access_token` as a Bearer token in the Authorization header. For example:
+     * If a user has authorized and installed your OAuth app that contains recording scopes, use the `download_access_token` or the user's [OAuth access token](/docs/integrations/oauth/) to download the file. Set the `access_token` as a Bearer token in the Authorization header. For example:
      *
      * `curl -H 'Authorization: Bearer <ACCESS_TOKEN>' https://{{base-domain}}/rec/archive/download/xyz`.
      *
-     * **Note:** This field does **not** return for [Zoom on-premise accounts](https://support.zoom.us/hc/en-us/articles/360034064852-Zoom-On-Premise-Deployment). Instead, this API returns the `file_path` field. The URL may be a redirect. In that case, use `curl --location` to follow redirects or use another tool, like Postman.
+     * **Note:** This field does **not** return for Zoom on-premise accounts. Instead, this API returns the `file_path` field. The URL may be a redirect. In that case, use `curl --location` to follow redirects or use another tool, like Postman.
      *
      * @example https://example.com/rec/download/Qg75t7xZBtEbAkjdlgbfdngBBBB
      */
@@ -1067,7 +1067,7 @@ export type RecordingGetResponse = {
     /**
      * The file path to the on-premise account recording.
      *
-     * **Note:** This API only returns this field for [Zoom On-Premise accounts](https://support.zoom.us/hc/en-us/articles/360034064852-Zoom-On-Premise-Deployment). It does **not** return the `download_url` field.
+     * **Note:** This API only returns this field for Zoom On-Premise accounts. It does **not** return the `download_url` field.
      *
      * @example /9090876528/path01/demo.mp4
      */
@@ -1083,7 +1083,7 @@ export type RecordingGetResponse = {
      *
      * `MP4` - Video file of the recording.
      *  `M4A` - Audio-only file of the recording.
-     *  `TIMELINE` - Timestamp file of the recording in JSON file format. To get a timeline file, the **Add a timestamp to the recording** setting must be enabled in the [recording settings](https://support.zoom.us/hc/en-us/articles/203741855-Cloud-recording#h_3f14c3a4-d16b-4a3c-bbe5-ef7d24500048). The time will display in the host's timezone, set on their Zoom profile.
+     *  `TIMELINE` - Timestamp file of the recording in JSON file format. To get a timeline file, the **Add a timestamp to the recording** setting must be enabled in the [recording settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0062627#h_3f14c3a4-d16b-4a3c-bbe5-ef7d24500048). The time will display in the host's timezone, set on their Zoom profile.
      *
      *   `TRANSCRIPT` - Transcription file of the recording in VTT format.
      *   `CHAT` - A TXT file containing in-meeting chat messages that were sent during the meeting.
@@ -1177,13 +1177,13 @@ export type RecordingGetResponse = {
    */
   account_id?: string;
   /**
-   * Meeting duration.
+   * The duration of the meeting's recording.
    *
    * @example 20
    */
   duration?: number;
   /**
-   * ID of the user set as the host of the meeting.
+   * The ID of the user set as the host of the meeting.
    *
    * @example _0ctZtY0REqWalTmwvrdIw
    */
@@ -1195,7 +1195,7 @@ export type RecordingGetResponse = {
    */
   id?: number;
   /**
-   * Number of recording files returned in the response of this API call. This includes the `recording_files` and  `participant_audio_files` files.
+   * The number of recording files returned in the response of this API call. This includes the `recording_files` and  `participant_audio_files` files.
    *
    * @example 22
    */
@@ -1228,7 +1228,7 @@ export type RecordingGetResponse = {
    * * `2` - Scheduled meeting.
    * * `3` - A recurring meeting with no fixed time.
    * * `4` - A meeting created via PMI (Personal Meeting ID).
-   * * `7` - A [Personal Audio Conference](https://support.zoom.us/hc/en-us/articles/204517069-Getting-Started-with-Personal-Audio-Conference) (PAC).
+   * * `7` - A [Personal Audio Conference](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0060449) (PAC).
    * * `8` - Recurring meeting with a fixed time.
    *
    * If the recording is of a webinar:
@@ -1244,7 +1244,7 @@ export type RecordingGetResponse = {
    */
   type?: '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8' | '9' | '99';
   /**
-   * Unique meeting identifier. Each instance of the meeting has its own UUID.
+   * The unique meeting identifier. Each instance of the meeting has its own UUID.
    *
    * @example BOKXuumlTAGXuqwr3bLyuQ==
    */
@@ -1256,7 +1256,7 @@ export type RecordingGetResponse = {
    */
   recording_play_passcode?: string;
   /**
-   * Auto-delete status of a meeting's [cloud recording](https://support.zoom.us/hc/en-us/articles/203741855-Cloud-Recording).
+   * Auto-delete status of a meeting's [cloud recording](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0062627).
    *
    * Prerequisite: To get the auto-delete status, the host of the recording must have the recording setting **Delete cloud recordings after a specified number of days** enabled.
    *
@@ -1274,11 +1274,11 @@ export type RecordingGetResponse = {
    */
   participant_audio_files?: {
     /**
-     * The URL to download the recording. If a user has authorized and installed your OAuth app that contains recording scopes, use the user's [OAuth access token](https://developers.zoom.us/docs/integrations/oauth/) to download the file, and set the `access_token` as a Bearer token in the Authorization header.
+     * The URL to download the recording. If a user has authorized and installed your OAuth app that contains recording scopes, use the user's [OAuth access token](/docs/integrations/oauth/) to download the file, and set the `access_token` as a Bearer token in the Authorization header.
      *
      * `curl -H 'Authorization: Bearer <ACCESS_TOKEN>' https://{{base-domain}}/rec/archive/download/xyz`
      *
-     * **Note:** This field does **not** return for [Zoom On-Premise accounts](https://support.zoom.us/hc/en-us/articles/360034064852-Zoom-On-Premise-Deployment). Instead, this API will return the `file_path` field.
+     * **Note:** This field does **not** return for Zoom On-Premise accounts. Instead, this API will return the `file_path` field.
      *
      * @example https://example.com/rec/download/Qg75t7xZBtEbAkjdlgbfdngBBBB
      */
@@ -1292,7 +1292,7 @@ export type RecordingGetResponse = {
     /**
      * The file path to the on-premise account recording.
      *
-     * **Note:** This API only returns this field for [Zoom on-premise accounts](https://support.zoom.us/hc/en-us/articles/360034064852-Zoom-On-Premise-Deployment). It does **not** return the `download_url` field.
+     * **Note:** This API only returns this field for Zoom on-premise accounts. It does **not** return the `download_url` field.
      *
      * @example /9090876528/path01/demo.mp4
      */
@@ -1308,7 +1308,7 @@ export type RecordingGetResponse = {
      *
      * * `MP4` - Video file.
      * * `M4A` - Audio-only file.
-     * * `TIMELINE` - Timestamp file of the recording, in JSON file format. To get a timeline file, the **Add a timestamp to the recording** setting **must** be enabled in the [recording settings](https://support.zoom.us/hc/en-us/articles/203741855-Cloud-recording#h_3f14c3a4-d16b-4a3c-bbe5-ef7d24500048). The time will display in the host's timezone.
+     * * `TIMELINE` - Timestamp file of the recording, in JSON file format. To get a timeline file, the **Add a timestamp to the recording** setting **must** be enabled in the [recording settings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0062627#h_3f14c3a4-d16b-4a3c-bbe5-ef7d24500048). The time will display in the host's timezone.
      * * `TRANSCRIPT` - A transcript of the recording, in VTT format.
      * * `CHAT` - A text file containing chat messages sent during the meeting.
      * * `CC` - A file containing the closed captions of the recording, in VTT file format.
@@ -1373,7 +1373,7 @@ export type RecordingGetVariables = {
 } & FetcherExtraProps;
 
 /**
- * Return all of a meeting's [recordings](https://support.zoom.us/hc/en-us/articles/203741855-Cloud-Recording#h_7420acb5-1897-4061-87b4-5b76e99c03b4). Use the `download_url` property listed in the response to download the recording files.  To access a password-protected cloud recording, send the `download_access_token` or the user's [OAuth access token](https://developers.zoom.us/docs/integrations/oauth/) as a Bearer token in the Authorization header. For example:
+ * Returns all of a meeting's [recordings](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0062627#h_7420acb5-1897-4061-87b4-5b76e99c03b4). Use the `download_url` property listed in the response to download the recording files.  To access a password-protected cloud recording, send the `download_access_token` or the user's [OAuth access token](/docs/integrations/oauth/) as a Bearer token in the Authorization header. For example:
  *
  *  `curl -H 'Authorization: Bearer <ACCESS_TOKEN>' https://{{base-domain}}/rec/archive/download/xyz`
  *
@@ -19436,6 +19436,13 @@ export type ListSIPPhonePhonesResponse = {
      */
     voice_mail?: string;
     /**
+     * The displayed phone number associated with the user can be either in extension format or E.164 format. You can specify the displayed number when the dialable number differs from the SIP username.
+     *
+     * @maxLength 64
+     * @example 5551110105
+     */
+    display_number?: string;
+    /**
      * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
      */
     server?: {
@@ -19599,6 +19606,13 @@ export type EnableSIPPhonePhonesResponse = {
    */
   voice_mail?: string;
   /**
+   * The displayed phone number associated with the user can be either in extension format or E.164 format. You can specify the displayed number when the dialable number differs from the SIP username.
+   *
+   * @maxLength 64
+   * @example 5551110105
+   */
+  display_number?: string;
+  /**
    * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
    */
   server?: {
@@ -19724,6 +19738,13 @@ export type EnableSIPPhonePhonesRequestBody = {
    * @example 4000
    */
   voice_mail?: string;
+  /**
+   * The displayed phone number associated with the user can be either in extension format or E.164 format. You can specify the displayed number when the dialable number differs from the SIP username.
+   *
+   * @maxLength 64
+   * @example 5551110105
+   */
+  display_number?: string;
   /**
    * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
    */
@@ -19919,72 +19940,79 @@ export type UpdateSIPPhonePhonesRequestBody = {
    */
   voice_mail?: string;
   /**
-   * Defined a set of basic components of SIP network architecture, including `proxy_server`, `register_server`, and `transport_protocol`.
+   * The displayed phone number associated with the user can be either in extension format or E.164 format. You can specify the displayed number when the dialable number differs from the SIP username.
+   *
+   * @maxLength 64
+   * @example 5551110105
+   */
+  display_number?: string;
+  /**
+   * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
    */
   server?: {
     /**
-     * The IP address of the proxy server for SIP requests. If you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
+     * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
      *
      * @example 192.0.2.2
      */
     proxy_server?: string;
     /**
-     * The IP address of the server that accepts REGISTER requests. If you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
+     * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
      *
      * @example 192.0.2.2
      */
     register_server?: string;
     /**
      * Protocols supported by the SIP provider.
-     *  The value must be either `UDP`, `TCP`, `TLS`, or `AUTO`.
+     *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
      *
      * @example UDP
      */
     transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
   };
   /**
-   * Defined a set of basic components of SIP network architecture, including `proxy_server`, `register_server`, and `transport_protocol`.
+   * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
    */
   server_2?: {
     /**
-     * The IP address of the proxy server for SIP requests. If you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
+     * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
      *
      * @example 192.0.2.2
      */
     proxy_server?: string;
     /**
-     * The IP address of the server that accepts REGISTER requests. If you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
+     * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
      *
      * @example 192.0.2.2
      */
     register_server?: string;
     /**
      * Protocols supported by the SIP provider.
-     *  The value must be either `UDP`, `TCP`, `TLS`, or `AUTO`.
+     *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
      *
      * @example UDP
      */
     transport_protocol?: 'UDP' | 'TCP' | 'TLS' | 'AUTO';
   };
   /**
-   * Defined a set of basic components of SIP network architecture, including `proxy_server`, `register_server`, and `transport_protocol`.
+   * Defined a set of basic components of SIP network architecture, including proxy_server, register_server and transport_protocol.
    */
   server_3?: {
     /**
-     * The IP address of the proxy server for SIP requests. If you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
+     * The IP address of the proxy server for SIP requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address. If you are not using a proxy server, this value can be the same as the Register Server.
      *
      * @example 192.0.2.2
      */
     proxy_server?: string;
     /**
-     * The IP address of the server that accepts REGISTER requests. If you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
+     * The IP address of the server that accepts REGISTER requests. Note that if you are using the UDP transport protocol, the default port is 5060. If you are using UDP with a different port number, that port number must be included with the IP address.
      *
      * @example 192.0.2.2
      */
     register_server?: string;
     /**
      * Protocols supported by the SIP provider.
-     *  The value must be either `UDP`, `TCP`, `TLS`, or `AUTO`.
+     *   The value must be either `UDP`, `TCP`, `TLS`, `AUTO`.
      *
      * @example UDP
      */
