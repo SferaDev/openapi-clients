@@ -615,10 +615,6 @@ export type UserEvent = {
          */
         value?: string;
         /**
-         * The value of the shared environment variable decrypted against api-secrets-management.
-         */
-        vsmValue?: string;
-        /**
          * The unique identifiers of the projects which the Shared Env Var is linked to.
          *
          * @example prj_2WjyKQmM8ZnGcJsPWMrHRHrE
@@ -723,10 +719,6 @@ export type UserEvent = {
            */
           value?: string;
           /**
-           * The value of the shared environment variable decrypted against api-secrets-management.
-           */
-          vsmValue?: string;
-          /**
            * The unique identifiers of the projects which the Shared Env Var is linked to.
            *
            * @example prj_2WjyKQmM8ZnGcJsPWMrHRHrE
@@ -828,10 +820,6 @@ export type UserEvent = {
            * The value of the Shared Env Var.
            */
           value?: string;
-          /**
-           * The value of the shared environment variable decrypted against api-secrets-management.
-           */
-          vsmValue?: string;
           /**
            * The unique identifiers of the projects which the Shared Env Var is linked to.
            *
