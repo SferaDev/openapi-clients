@@ -1,5 +1,12 @@
 # zoom-api-js
 
+## 0.4.5
+
+### Patch Changes
+
+- 93af0c9: Update URL in comments for double encode UUID
+- 58398e6: [BREAKING] Deprecated and replaced legacy meeting summary fields with a unified 'summary_content' field in GetameetingsummaryResponse
+
 ## 0.4.4
 
 ### Patch Changes

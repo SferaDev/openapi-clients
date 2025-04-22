@@ -1,5 +1,15 @@
 # vercel-api-js
 
+## 0.24.0
+
+### Minor Changes
+
+- 06a8f43: [BREAKING] New endpoint vercelRun to perform a new action
+
+### Patch Changes
+
+- fea55e7: Remove vsmValue
+
 ## 0.23.6
 
 ### Patch Changes
