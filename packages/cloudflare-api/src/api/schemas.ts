@@ -27265,6 +27265,7 @@ export type LogpushApiResponseSingle = LogpushApiResponseCommon;
  *
  * @default http_requests
  * @example http_requests
+ * @x-auditable true
  */
 export type LogpushDataset =
   | 'access_requests'
@@ -27306,6 +27307,7 @@ export type LogpushDestinationExistsResponse = LogpushApiResponseCommon & {
   result?: {
     /**
      * @example false
+     * @x-auditable true
      */
     exists?: boolean;
   } | null;
@@ -27315,6 +27317,7 @@ export type LogpushDestinationExistsResponse = LogpushApiResponseCommon & {
  * Flag that indicates if the job is enabled.
  *
  * @example false
+ * @x-auditable true
  */
 export type LogpushEnabled = boolean;
 
@@ -27322,6 +27325,7 @@ export type LogpushEnabled = boolean;
  * If not null, the job is currently failing. Failures are usually repetitive (example: no permissions to write to destination bucket). Only the last failure is recorded. On successful execution of a job the error_message and last_error are set to null.
  *
  * @format date-time
+ * @x-auditable true
  */
 export type LogpushErrorMessage = string | null;
 
@@ -27329,6 +27333,7 @@ export type LogpushErrorMessage = string | null;
  * Comma-separated list of fields.
  *
  * @example ClientIP,ClientRequestHost,ClientRequestMethod,ClientRequestURI,EdgeEndTimestamp,EdgeResponseBytes,EdgeResponseStatus,EdgeStartTimestamp,RayID
+ * @x-auditable true
  */
 export type LogpushFields = string;
 
@@ -27336,6 +27341,7 @@ export type LogpushFields = string;
  * Filters to drill down into specific events.
  *
  * @example {"where":{"and":[{"key":"ClientCountry","operator":"neq","value":"ca"}]}}
+ * @x-auditable true
  */
 export type LogpushFilter = string;
 
@@ -27345,6 +27351,7 @@ export type LogpushFilter = string;
  * @default high
  * @deprecated true
  * @example high
+ * @x-auditable true
  */
 export type LogpushFrequency = 'high' | 'low' | null;
 
@@ -27352,14 +27359,17 @@ export type LogpushGetOwnershipResponse = LogpushApiResponseCommon & {
   result?: {
     /**
      * @example logs/challenge-filename.txt
+     * @x-auditable true
      */
     filename?: string;
     /**
      * @example
+     * @x-auditable true
      */
     message?: string;
     /**
      * @example true
+     * @x-auditable true
      */
     valid?: boolean;
   } | null;
@@ -27369,6 +27379,7 @@ export type LogpushGetOwnershipResponse = LogpushApiResponseCommon & {
  * Unique id of the job.
  *
  * @minimum 1
+ * @x-auditable true
  */
 export type LogpushId = number;
 
@@ -27401,6 +27412,7 @@ export type LogpushInstantLogsJobResponseSingle = LogpushApiResponseSingle & {
  *
  * @default
  * @example
+ * @x-auditable true
  */
 export type LogpushKind = 'edge' | null;
 
@@ -27408,6 +27420,7 @@ export type LogpushKind = 'edge' | null;
  * Records the last time for which logs have been successfully pushed. If the last successful push was for logs range 2018-07-23T10:00:00Z to 2018-07-23T10:01:00Z then the value of this field will be 2018-07-23T10:01:00Z. If the job has never run or has just been enabled and hasn't run yet then the field will be empty.
  *
  * @format date-time
+ * @x-auditable true
  */
 export type LogpushLastComplete = string | null;
 
@@ -27415,6 +27428,7 @@ export type LogpushLastComplete = string | null;
  * Records the last time the job failed. If not null, the job is currently failing. If null, the job has either never failed or has run successfully at least once since last failure. See also the error_message field.
  *
  * @format date-time
+ * @x-auditable true
  */
 export type LogpushLastError = string | null;
 
@@ -27425,6 +27439,7 @@ export type LogpushLastError = string | null;
  * @example fields=RayID,ClientIP,EdgeStartTimestamp&timestamps=rfc3339
  * @format uri-reference
  * @maxLength 4096
+ * @x-auditable true
  */
 export type LogpushLogpullOptions = string | null;
 
@@ -27464,6 +27479,7 @@ export type LogpushLogpushJobResponseSingle = LogpushApiResponseSingle & {
  * @example 5000000
  * @maximum 1000000000
  * @minimum 5000000
+ * @x-auditable true
  */
 export type LogpushMaxUploadBytes = number | null;
 
@@ -27474,6 +27490,7 @@ export type LogpushMaxUploadBytes = number | null;
  * @example 30
  * @maximum 300
  * @minimum 30
+ * @x-auditable true
  */
 export type LogpushMaxUploadIntervalSeconds = number | null;
 
@@ -27484,6 +27501,7 @@ export type LogpushMaxUploadIntervalSeconds = number | null;
  * @example 1000
  * @maximum 1000000
  * @minimum 1000
+ * @x-auditable true
  */
 export type LogpushMaxUploadRecords = number | null;
 
@@ -27505,6 +27523,7 @@ export type LogpushMessages = {
  * @example example.com
  * @maxLength 512
  * @pattern ^[a-zA-Z0-9\-\.]*$
+ * @x-auditable true
  */
 export type LogpushName = string | null;
 
@@ -27516,18 +27535,25 @@ export type LogpushOutputOptions = {
    * If set to true, will cause all occurrences of `${` in the generated files to be replaced with `x{`.
    *
    * @default false
+   * @x-auditable true
    */
   ['CVE-2021-44228']?: boolean | null;
   /**
    * String to be prepended before each batch.
+   *
+   * @x-auditable true
    */
   batch_prefix?: string | null;
   /**
    * String to be appended after each batch.
+   *
+   * @x-auditable true
    */
   batch_suffix?: string | null;
   /**
    * String to join fields. This field be ignored when `record_template` is set.
+   *
+   * @x-auditable true
    */
   field_delimiter?: string | null;
   /**
@@ -27543,22 +27569,31 @@ export type LogpushOutputOptions = {
    *
    * @default ndjson
    * @example ndjson
+   * @x-auditable true
    */
   output_type?: 'ndjson' | 'csv';
   /**
    * String to be inserted in-between the records as separator.
+   *
+   * @x-auditable true
    */
   record_delimiter?: string | null;
   /**
    * String to be prepended before each record.
+   *
+   * @x-auditable true
    */
   record_prefix?: string | null;
   /**
    * String to be appended after each record.
+   *
+   * @x-auditable true
    */
   record_suffix?: string | null;
   /**
    * String to use as template for each record instead of the default json key value mapping. All fields used in the template must be present in `field_names` as well, otherwise they will end up as null. Format as a Go `text/template` without any standard functions, like conditionals, loops, sub-templates, etc.
+   *
+   * @x-auditable true
    */
   record_template?: string | null;
   /**
@@ -27568,12 +27603,14 @@ export type LogpushOutputOptions = {
    * @format float
    * @maximum 1
    * @minimum 0
+   * @x-auditable true
    */
   sample_rate?: number | null;
   /**
    * String to specify the format for timestamps, such as `unixnano`, `unix`, or `rfc3339`.
    *
    * @default unixnano
+   * @x-auditable true
    */
   timestamp_format?: 'unixnano' | 'unix' | 'rfc3339';
 } | null;
@@ -27592,6 +27629,7 @@ export type LogpushOwnershipChallenge = string;
  * The sample parameter is the sample rate of the records set by the client: "sample": 1 is 100% of records "sample": 10 is 10% and so on.
  *
  * @example 1
+ * @x-auditable true
  */
 export type LogpushSample = number;
 
@@ -27601,6 +27639,7 @@ export type LogpushSample = number;
  * @example wss://logs.cloudflare.com/instant-logs/ws/sessions/99d471b1ca3c23cc8e30b6acec5db987
  * @format uri
  * @maxLength 4096
+ * @x-auditable true
  */
 export type LogpushSchemasDestinationConf = string;
 
@@ -27608,6 +27647,7 @@ export type LogpushSchemasDestinationConf = string;
  * Unique session id of the job.
  *
  * @example 99d471b1ca3c23cc8e30b6acec5db987
+ * @x-auditable true
  */
 export type LogpushSessionId = string;
 
@@ -27615,6 +27655,7 @@ export type LogpushValidateOwnershipResponse = LogpushApiResponseCommon & {
   result?: {
     /**
      * @example true
+     * @x-auditable true
      */
     valid?: boolean;
   } | null;
@@ -27624,10 +27665,12 @@ export type LogpushValidateResponse = LogpushApiResponseCommon & {
   result?: {
     /**
      * @example
+     * @x-auditable true
      */
     message?: string;
     /**
      * @example true
+     * @x-auditable true
      */
     valid?: boolean;
   } | null;
