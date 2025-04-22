@@ -958,7 +958,7 @@ export type UserEvent = {
           createdAt: number;
           credentials?: (
             | {
-                type: 'gitlab' | 'bitbucket' | 'github-oauth' | 'github-app';
+                type: 'gitlab' | 'bitbucket' | 'google' | 'github-oauth' | 'github-app';
                 id: string;
               }
             | {
@@ -1774,6 +1774,7 @@ export type UserEvent = {
         viaGithub: boolean;
         viaGitlab: boolean;
         viaBitbucket: boolean;
+        viaGoogle: boolean;
         viaSamlSso: boolean;
         viaPasskey: boolean;
         ssoType?: string;
@@ -2611,7 +2612,8 @@ export type UserEvent = {
           | 'passkey'
           | 'otp'
           | 'sms'
-          | 'invite';
+          | 'invite'
+          | 'google';
       };
 };
 
@@ -2824,14 +2826,36 @@ export type AuthToken = {
           origin: 'totp' | 'webauthn' | 'recovery-code';
           expiresAt: number;
         };
-        origin: 'saml' | 'github' | 'gitlab' | 'bitbucket' | 'email' | 'manual' | 'passkey' | 'otp' | 'sms' | 'invite';
+        origin:
+          | 'saml'
+          | 'github'
+          | 'gitlab'
+          | 'bitbucket'
+          | 'email'
+          | 'manual'
+          | 'passkey'
+          | 'otp'
+          | 'sms'
+          | 'invite'
+          | 'google';
         createdAt: number;
         expiresAt?: number;
       }
     | {
         type: 'team';
         teamId: string;
-        origin: 'saml' | 'github' | 'gitlab' | 'bitbucket' | 'email' | 'manual' | 'passkey' | 'otp' | 'sms' | 'invite';
+        origin:
+          | 'saml'
+          | 'github'
+          | 'gitlab'
+          | 'bitbucket'
+          | 'email'
+          | 'manual'
+          | 'passkey'
+          | 'otp'
+          | 'sms'
+          | 'invite'
+          | 'google';
         createdAt: number;
         expiresAt?: number;
       }
