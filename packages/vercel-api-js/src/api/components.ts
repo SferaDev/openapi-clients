@@ -1874,9 +1874,11 @@ export type UpdateProjectDataCacheResponse = {
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
     sunsetSecretId?: string;
+    decrypted?: boolean;
+    value: string;
+    vsmValue?: string;
     id?: string;
     key: string;
-    value: string;
     configurationId?: string | null;
     createdAt?: number;
     updatedAt?: number;
@@ -1960,13 +1962,8 @@ export type UpdateProjectDataCacheResponse = {
        */
       encryptedValue: string;
     } | null;
-    /**
-     * Whether `value` and `vsmValue` are decrypted.
-     */
-    decrypted?: boolean;
     comment?: string;
     customEnvironmentIds?: string[];
-    vsmValue?: string;
   }[];
   customEnvironments?: Record<string, any>[];
   framework?:
@@ -2246,6 +2243,14 @@ export type UpdateProjectDataCacheResponse = {
            * The percentage of traffic to serve to the new deployment
            */
           targetPercentage: number;
+          /**
+           * minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth starting percentage to ending percentage stage. So once we have fetched the document with the update time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving.
+           */
+          minutesToRelease?: number;
+          /**
+           * Whether or not this stage requires approval to proceed.
+           */
+          requireApproval?: boolean;
         }[]
       | null;
   } | null;
@@ -3072,6 +3077,10 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         aliasAssigned: boolean;
         bootedAt: number;
         buildingAt: number;
+        /**
+         * Since April 2025 it necessary for On-Demand Concurrency Minutes calculation
+         */
+        buildContainerFinishedAt?: number;
         buildSkipped: boolean;
         creator: {
           uid: string;
@@ -3462,6 +3471,10 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         aliasAssigned: boolean;
         bootedAt: number;
         buildingAt: number;
+        /**
+         * Since April 2025 it necessary for On-Demand Concurrency Minutes calculation
+         */
+        buildContainerFinishedAt?: number;
         buildSkipped: boolean;
         creator: {
           uid: string;
@@ -3814,6 +3827,10 @@ export type CreateDeploymentResponse = {
   aliasAssigned: boolean;
   bootedAt: number;
   buildingAt: number;
+  /**
+   * Since April 2025 it necessary for On-Demand Concurrency Minutes calculation
+   */
+  buildContainerFinishedAt?: number;
   buildSkipped: boolean;
   creator: {
     uid: string;
@@ -4646,6 +4663,10 @@ export type CancelDeploymentResponse = {
   aliasAssigned: boolean;
   bootedAt: number;
   buildingAt: number;
+  /**
+   * Since April 2025 it necessary for On-Demand Concurrency Minutes calculation
+   */
+  buildContainerFinishedAt?: number;
   buildSkipped: boolean;
   creator: {
     uid: string;
@@ -10681,9 +10702,11 @@ export type GetProjectsResponse = {
        * This is used to identiy variables that have been migrated from type secret to sensitive.
        */
       sunsetSecretId?: string;
+      decrypted?: boolean;
+      value: string;
+      vsmValue?: string;
       id?: string;
       key: string;
-      value: string;
       configurationId?: string | null;
       createdAt?: number;
       updatedAt?: number;
@@ -10767,13 +10790,8 @@ export type GetProjectsResponse = {
          */
         encryptedValue: string;
       } | null;
-      /**
-       * Whether `value` and `vsmValue` are decrypted.
-       */
-      decrypted?: boolean;
       comment?: string;
       customEnvironmentIds?: string[];
-      vsmValue?: string;
     }[];
     customEnvironments?: Record<string, any>[];
     framework?:
@@ -11053,6 +11071,14 @@ export type GetProjectsResponse = {
              * The percentage of traffic to serve to the new deployment
              */
             targetPercentage: number;
+            /**
+             * minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth starting percentage to ending percentage stage. So once we have fetched the document with the update time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving.
+             */
+            minutesToRelease?: number;
+            /**
+             * Whether or not this stage requires approval to proceed.
+             */
+            requireApproval?: boolean;
           }[]
         | null;
     } | null;
@@ -11650,9 +11676,11 @@ export type CreateProjectResponse = {
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
     sunsetSecretId?: string;
+    decrypted?: boolean;
+    value: string;
+    vsmValue?: string;
     id?: string;
     key: string;
-    value: string;
     configurationId?: string | null;
     createdAt?: number;
     updatedAt?: number;
@@ -11736,13 +11764,8 @@ export type CreateProjectResponse = {
        */
       encryptedValue: string;
     } | null;
-    /**
-     * Whether `value` and `vsmValue` are decrypted.
-     */
-    decrypted?: boolean;
     comment?: string;
     customEnvironmentIds?: string[];
-    vsmValue?: string;
   }[];
   customEnvironments?: Record<string, any>[];
   framework?:
@@ -12022,6 +12045,14 @@ export type CreateProjectResponse = {
            * The percentage of traffic to serve to the new deployment
            */
           targetPercentage: number;
+          /**
+           * minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth starting percentage to ending percentage stage. So once we have fetched the document with the update time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving.
+           */
+          minutesToRelease?: number;
+          /**
+           * Whether or not this stage requires approval to proceed.
+           */
+          requireApproval?: boolean;
         }[]
       | null;
   } | null;
@@ -12801,9 +12832,11 @@ export type GetProjectResponse = {
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
     sunsetSecretId?: string;
+    decrypted?: boolean;
+    value: string;
+    vsmValue?: string;
     id?: string;
     key: string;
-    value: string;
     configurationId?: string | null;
     createdAt?: number;
     updatedAt?: number;
@@ -12887,13 +12920,8 @@ export type GetProjectResponse = {
        */
       encryptedValue: string;
     } | null;
-    /**
-     * Whether `value` and `vsmValue` are decrypted.
-     */
-    decrypted?: boolean;
     comment?: string;
     customEnvironmentIds?: string[];
-    vsmValue?: string;
   }[];
   customEnvironments?: Record<string, any>[];
   framework?:
@@ -13173,6 +13201,14 @@ export type GetProjectResponse = {
            * The percentage of traffic to serve to the new deployment
            */
           targetPercentage: number;
+          /**
+           * minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth starting percentage to ending percentage stage. So once we have fetched the document with the update time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving.
+           */
+          minutesToRelease?: number;
+          /**
+           * Whether or not this stage requires approval to proceed.
+           */
+          requireApproval?: boolean;
         }[]
       | null;
   } | null;
@@ -13778,9 +13814,11 @@ export type UpdateProjectResponse = {
      * This is used to identiy variables that have been migrated from type secret to sensitive.
      */
     sunsetSecretId?: string;
+    decrypted?: boolean;
+    value: string;
+    vsmValue?: string;
     id?: string;
     key: string;
-    value: string;
     configurationId?: string | null;
     createdAt?: number;
     updatedAt?: number;
@@ -13864,13 +13902,8 @@ export type UpdateProjectResponse = {
        */
       encryptedValue: string;
     } | null;
-    /**
-     * Whether `value` and `vsmValue` are decrypted.
-     */
-    decrypted?: boolean;
     comment?: string;
     customEnvironmentIds?: string[];
-    vsmValue?: string;
   }[];
   customEnvironments?: Record<string, any>[];
   framework?:
@@ -14150,6 +14183,14 @@ export type UpdateProjectResponse = {
            * The percentage of traffic to serve to the new deployment
            */
           targetPercentage: number;
+          /**
+           * minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth starting percentage to ending percentage stage. So once we have fetched the document with the update time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving.
+           */
+          minutesToRelease?: number;
+          /**
+           * Whether or not this stage requires approval to proceed.
+           */
+          requireApproval?: boolean;
         }[]
       | null;
   } | null;
@@ -15317,34 +15358,6 @@ export type GetProjectDomainsQueryParams = {
 
 export type GetProjectDomainsError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetProjectDomainsResponse = {
-  domains: {
-    name: string;
-    apexName: string;
-    projectId: string;
-    redirect?: string | null;
-    redirectStatusCode?: 301 | 302 | 307 | 308 | null;
-    gitBranch?: string | null;
-    customEnvironmentId?: string | null;
-    updatedAt?: number;
-    createdAt?: number;
-    /**
-     * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
-     */
-    verified: boolean;
-    /**
-     * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
-     */
-    verification?: {
-      type: string;
-      domain: string;
-      value: string;
-      reason: string;
-    }[];
-  }[];
-  pagination: Schemas.Pagination;
-};
-
 export type GetProjectDomainsVariables = {
   pathParams: GetProjectDomainsPathParams;
   queryParams?: GetProjectDomainsQueryParams;
@@ -15355,7 +15368,64 @@ export type GetProjectDomainsVariables = {
  */
 export const getProjectDomains = (variables: GetProjectDomainsVariables, signal?: AbortSignal) =>
   fetch<
-    GetProjectDomainsResponse,
+    | {
+        domains: {
+          name: string;
+          apexName: string;
+          projectId: string;
+          redirect?: string | null;
+          redirectStatusCode?: 307 | 301 | 302 | 308 | null;
+          gitBranch?: string | null;
+          customEnvironmentId?: string | null;
+          updatedAt?: number;
+          createdAt?: number;
+          /**
+           * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+           */
+          verified: boolean;
+          /**
+           * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+           */
+          verification?: {
+            type: string;
+            domain: string;
+            value: string;
+            reason: string;
+          }[];
+        }[];
+        pagination: {
+          count: number;
+          next: number | null;
+          prev: number | null;
+        };
+      }
+    | {
+        domains: {
+          name: string;
+          apexName: string;
+          projectId: string;
+          redirect?: string | null;
+          redirectStatusCode?: 307 | 301 | 302 | 308 | null;
+          gitBranch?: string | null;
+          customEnvironmentId?: string | null;
+          updatedAt?: number;
+          createdAt?: number;
+          /**
+           * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+           */
+          verified: boolean;
+          /**
+           * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+           */
+          verification?: {
+            type: string;
+            domain: string;
+            value: string;
+            reason: string;
+          }[];
+        }[];
+        pagination: Schemas.Pagination;
+      },
     GetProjectDomainsError,
     undefined,
     {},
@@ -15799,9 +15869,11 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
         sunsetSecretId?: string;
+        decrypted?: boolean;
+        value?: string;
+        vsmValue?: string;
         id?: string;
         key?: string;
-        value?: string;
         configurationId?: string | null;
         createdAt?: number;
         updatedAt?: number;
@@ -15885,13 +15957,8 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
            */
           encryptedValue: string;
         } | null;
-        /**
-         * Whether `value` and `vsmValue` are decrypted.
-         */
-        decrypted?: boolean;
         comment?: string;
         customEnvironmentIds?: string[];
-        vsmValue?: string;
         system?: boolean;
       }
     | {
@@ -15904,9 +15971,11 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
           sunsetSecretId?: string;
+          decrypted?: boolean;
+          value?: string;
+          vsmValue?: string;
           id?: string;
           key?: string;
-          value?: string;
           configurationId?: string | null;
           createdAt?: number;
           updatedAt?: number;
@@ -15990,13 +16059,8 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
              */
             encryptedValue: string;
           } | null;
-          /**
-           * Whether `value` and `vsmValue` are decrypted.
-           */
-          decrypted?: boolean;
           comment?: string;
           customEnvironmentIds?: string[];
-          vsmValue?: string;
           system?: boolean;
         }[];
         pagination: Schemas.Pagination;
@@ -16011,9 +16075,11 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
            * This is used to identiy variables that have been migrated from type secret to sensitive.
            */
           sunsetSecretId?: string;
+          decrypted?: boolean;
+          value?: string;
+          vsmValue?: string;
           id?: string;
           key?: string;
-          value?: string;
           configurationId?: string | null;
           createdAt?: number;
           updatedAt?: number;
@@ -16097,13 +16163,8 @@ export const filterProjectEnvs = (variables: FilterProjectEnvsVariables, signal?
              */
             encryptedValue: string;
           } | null;
-          /**
-           * Whether `value` and `vsmValue` are decrypted.
-           */
-          decrypted?: boolean;
           comment?: string;
           customEnvironmentIds?: string[];
-          vsmValue?: string;
           system?: boolean;
         }[];
       },
@@ -16153,9 +16214,11 @@ export type CreateProjectEnvResponse = {
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
         sunsetSecretId?: string;
+        decrypted?: boolean;
+        value?: string;
+        vsmValue?: string;
         id?: string;
         key?: string;
-        value?: string;
         configurationId?: string | null;
         createdAt?: number;
         updatedAt?: number;
@@ -16239,13 +16302,8 @@ export type CreateProjectEnvResponse = {
            */
           encryptedValue: string;
         } | null;
-        /**
-         * Whether `value` and `vsmValue` are decrypted.
-         */
-        decrypted?: boolean;
         comment?: string;
         customEnvironmentIds?: string[];
-        vsmValue?: string;
         system?: boolean;
       }
     | {
@@ -16257,9 +16315,11 @@ export type CreateProjectEnvResponse = {
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
         sunsetSecretId?: string;
+        decrypted?: boolean;
+        value?: string;
+        vsmValue?: string;
         id?: string;
         key?: string;
-        value?: string;
         configurationId?: string | null;
         createdAt?: number;
         updatedAt?: number;
@@ -16343,13 +16403,8 @@ export type CreateProjectEnvResponse = {
            */
           encryptedValue: string;
         } | null;
-        /**
-         * Whether `value` and `vsmValue` are decrypted.
-         */
-        decrypted?: boolean;
         comment?: string;
         customEnvironmentIds?: string[];
-        vsmValue?: string;
         system?: boolean;
       }[];
   failed: {
@@ -16892,9 +16947,11 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
         sunsetSecretId?: string;
+        decrypted?: boolean;
+        value: string;
+        vsmValue?: string;
         id?: string;
         key: string;
-        value: string;
         configurationId?: string | null;
         createdAt?: number;
         updatedAt?: number;
@@ -16978,13 +17035,8 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
            */
           encryptedValue: string;
         } | null;
-        /**
-         * Whether `value` and `vsmValue` are decrypted.
-         */
-        decrypted?: boolean;
         comment?: string;
         customEnvironmentIds?: string[];
-        vsmValue?: string;
       }
     | {
         target?:
@@ -16995,9 +17047,10 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
         sunsetSecretId?: string;
+        decrypted?: boolean;
+        value: string;
         id?: string;
         key: string;
-        value: string;
         configurationId?: string | null;
         createdAt?: number;
         updatedAt?: number;
@@ -17081,10 +17134,6 @@ export const getProjectEnv = (variables: GetProjectEnvVariables, signal?: AbortS
            */
           encryptedValue: string;
         } | null;
-        /**
-         * Whether `value` and `vsmValue` are decrypted.
-         */
-        decrypted?: boolean;
         comment?: string;
         customEnvironmentIds?: string[];
       },
@@ -17148,9 +17197,11 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
         sunsetSecretId?: string;
+        decrypted?: boolean;
+        value: string;
+        vsmValue?: string;
         id?: string;
         key: string;
-        value: string;
         configurationId?: string | null;
         createdAt?: number;
         updatedAt?: number;
@@ -17234,13 +17285,8 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
            */
           encryptedValue: string;
         } | null;
-        /**
-         * Whether `value` and `vsmValue` are decrypted.
-         */
-        decrypted?: boolean;
         comment?: string;
         customEnvironmentIds?: string[];
-        vsmValue?: string;
       }[]
     | {
         system?: boolean;
@@ -17252,9 +17298,11 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
         sunsetSecretId?: string;
+        decrypted?: boolean;
+        value: string;
+        vsmValue?: string;
         id?: string;
         key: string;
-        value: string;
         configurationId?: string | null;
         createdAt?: number;
         updatedAt?: number;
@@ -17338,13 +17386,8 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
            */
           encryptedValue: string;
         } | null;
-        /**
-         * Whether `value` and `vsmValue` are decrypted.
-         */
-        decrypted?: boolean;
         comment?: string;
         customEnvironmentIds?: string[];
-        vsmValue?: string;
       }
     | {
         target?:
@@ -17355,9 +17398,11 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
         sunsetSecretId?: string;
+        decrypted?: boolean;
+        value: string;
+        vsmValue?: string;
         id?: string;
         key: string;
-        value: string;
         configurationId?: string | null;
         createdAt?: number;
         updatedAt?: number;
@@ -17441,13 +17486,8 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
            */
           encryptedValue: string;
         } | null;
-        /**
-         * Whether `value` and `vsmValue` are decrypted.
-         */
-        decrypted?: boolean;
         comment?: string;
         customEnvironmentIds?: string[];
-        vsmValue?: string;
       },
     RemoveProjectEnvError,
     undefined,
@@ -17549,9 +17589,10 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
         sunsetSecretId?: string;
+        decrypted?: boolean;
+        value: string;
         id?: string;
         key: string;
-        value: string;
         configurationId?: string | null;
         createdAt?: number;
         updatedAt?: number;
@@ -17635,10 +17676,6 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
            */
           encryptedValue: string;
         } | null;
-        /**
-         * Whether `value` and `vsmValue` are decrypted.
-         */
-        decrypted?: boolean;
         comment?: string;
         customEnvironmentIds?: string[];
       }
