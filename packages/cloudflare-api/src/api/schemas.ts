@@ -50092,9 +50092,9 @@ export type WafManagedRulesTraditionalDenyRule = WafManagedRulesBase & {
 export type WafProductApiBundleApiResponseCollection = {
   errors: WafProductApiBundleMessages;
   messages: WafProductApiBundleMessages;
-  result: Record<string, any> | any[] | string | null;
+  result: Record<string, any> | Record<string, any>[] | string | null;
   /**
-   * Whether the API call was successful
+   * Defines whether the API call was successful.
    *
    * @example true
    */
@@ -50104,9 +50104,9 @@ export type WafProductApiBundleApiResponseCollection = {
 export type WafProductApiBundleApiResponseCommon = {
   errors: WafProductApiBundleMessages;
   messages: WafProductApiBundleMessages;
-  result: Record<string, any> | any[] | string;
+  result: Record<string, any> | Record<string, any>[] | string;
   /**
-   * Whether the API call was successful
+   * Defines whether the API call was successful.
    *
    * @example true
    */
@@ -50122,7 +50122,7 @@ export type WafProductApiBundleApiResponseCommonFailure = {
   messages: WafProductApiBundleMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Defines whether the API call was successful.
    *
    * @example false
    */
@@ -50134,7 +50134,7 @@ export type WafProductApiBundleApiResponseSingle = {
   messages: WafProductApiBundleMessages;
   result: (Record<string, any> | null) | (string | null) | string;
   /**
-   * Whether the API call was successful
+   * Defines whether the API call was successful.
    *
    * @example true
    */
@@ -50142,18 +50142,18 @@ export type WafProductApiBundleApiResponseSingle = {
 };
 
 /**
- * A custom set of username/password expressions to match Leaked Credential Checks on
+ * Defines a custom set of username/password expressions to match Leaked Credential Checks on.
  */
 export type WafProductApiBundleCustomDetection = {
   id?: WafProductApiBundleDetectionId;
   /**
-   * The ruleset expression to use in matching the password in a request
+   * Defines ehe ruleset expression to use in matching the password in a request.
    *
    * @example lookup_json_string(http.request.body.raw, "secret")
    */
   password?: string;
   /**
-   * The ruleset expression to use in matching the username in a request
+   * Defines the ruleset expression to use in matching the username in a request.
    *
    * @example lookup_json_string(http.request.body.raw, "user")
    */
@@ -50161,7 +50161,7 @@ export type WafProductApiBundleCustomDetection = {
 };
 
 /**
- * A custom scan expression to match Content Scanning on
+ * Defines a custom scan expression to match Content Scanning on.
  */
 export type WafProductApiBundleCustomScan = {
   id?: WafProductApiBundleCustomScanId;
@@ -50169,7 +50169,7 @@ export type WafProductApiBundleCustomScan = {
 };
 
 /**
- * Identifier
+ * Defines an identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -50177,14 +50177,14 @@ export type WafProductApiBundleCustomScan = {
 export type WafProductApiBundleCustomScanId = WafProductApiBundleIdentifier;
 
 /**
- * Ruleset expression to use in matching content objects
+ * Defines the ruleset expression to use in matching content objects.
  *
  * @example lookup_json_string(http.request.body.raw, "file")
  */
 export type WafProductApiBundleCustomScanPayload = string;
 
 /**
- * Identifier
+ * Defines an identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -50192,7 +50192,7 @@ export type WafProductApiBundleCustomScanPayload = string;
 export type WafProductApiBundleDetectionId = WafProductApiBundleIdentifier;
 
 /**
- * Identifier
+ * Defines an identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -50226,9 +50226,9 @@ export type WafProductApiBundleResponseStatus = WafProductApiBundleApiResponseSi
 export type WafProductApiBundleSchemasApiResponseCollection = {
   errors: WafProductApiBundleMessages;
   messages: WafProductApiBundleMessages;
-  result: Record<string, any> | any[] | (string | null) | null;
+  result: Record<string, any> | Record<string, any>[] | (string | null) | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -50238,9 +50238,9 @@ export type WafProductApiBundleSchemasApiResponseCollection = {
 export type WafProductApiBundleSchemasApiResponseCommon = {
   errors: WafProductApiBundleMessages;
   messages: WafProductApiBundleMessages;
-  result: Record<string, any> | any[] | (string | null);
+  result: Record<string, any> | Record<string, any>[] | (string | null);
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -50256,7 +50256,7 @@ export type WafProductApiBundleSchemasApiResponseCommonFailure = {
   messages: WafProductApiBundleMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -50268,7 +50268,7 @@ export type WafProductApiBundleSchemasApiResponseSingle = {
   messages: WafProductApiBundleMessages;
   result: (Record<string, any> | null) | (string | null) | (string | null);
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -50280,17 +50280,17 @@ export type WafProductApiBundleSchemasResponseStatus = WafProductApiBundleSchema
 };
 
 /**
- * The status for Content Scanning
+ * Defines the status for Content Scanning.
  */
 export type WafProductApiBundleSchemasStatus = {
   /**
-   * Last modification date (ISO 8601) of the Content Scanning status
+   * Defines the last modification date (ISO 8601) of the Content Scanning status.
    *
    * @example 2024-12-02T09:57:23.150259Z
    */
   modified?: string;
   /**
-   * Status of Content Scanning
+   * Defines the status of Content Scanning.
    *
    * @example enabled
    */
@@ -50298,11 +50298,11 @@ export type WafProductApiBundleSchemasStatus = {
 };
 
 /**
- * The overall status for Leaked Credential Checks
+ * Defines the overall status for Leaked Credential Checks.
  */
 export type WafProductApiBundleStatus = {
   /**
-   * Whether or not Leaked Credential Checks are enabled
+   * Determines whether or not Leaked Credential Checks are enabled.
    *
    * @example true
    */
