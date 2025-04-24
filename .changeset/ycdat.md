@@ -1,5 +1,5 @@
 ---
-"vercel-api-js": minor
+"vercel-api-js": patch
 ---
 
-Add 'decrypted' and 'vsmValue' fields to UpdateProjectDataCacheResponse type
+Update `requireApproval` and `minutesToRelease` fields
