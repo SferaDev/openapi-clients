@@ -10690,6 +10690,11 @@ export type ApiShieldOperationMitigationAction = 'log' | 'block' | 'none' | any 
 
 export type ApiShieldOperationSchemaValidationSettings = {
   mitigation_action?: ApiShieldOperationMitigationAction;
+  operation_id?: ApiShieldSchemasUuid;
+};
+
+export type ApiShieldOperationSchemaValidationSettingsModifyRequest = {
+  mitigation_action?: ApiShieldOperationMitigationAction;
 };
 
 /**
@@ -26453,6 +26458,7 @@ export type LoadBalancingOrigin = {
   enabled?: LoadBalancingSchemasEnabled;
   header?: LoadBalancingSchemasHeader;
   name?: LoadBalancingSchemasName;
+  port?: LoadBalancingOriginPort;
   virtual_network_id?: LoadBalancingVirtualNetworkId;
   weight?: LoadBalancingWeight;
 };
@@ -26535,6 +26541,13 @@ export type LoadBalancingOriginHealthData = {
   response_code?: number;
   rtt?: string;
 };
+
+/**
+ * The port for upstream connections. A value of 0 means the default port for the protocol will be used.
+ *
+ * @default 0
+ */
+export type LoadBalancingOriginPort = number;
 
 /**
  * Configures origin steering for the pool. Controls how origins are selected for new sessions and traffic without session affinity.
@@ -29165,6 +29178,34 @@ export type MagicComponentsSchemasTunnelsCollectionResponse = MagicApiResponseSi
  */
 export type MagicConnectorId = string;
 
+export type MagicCreateGreTunnelRequest = {
+  cloudflare_gre_endpoint: MagicCloudflareGreEndpoint;
+  customer_gre_endpoint: MagicCustomerGreEndpoint;
+  description?: MagicSchemasDescription;
+  health_check?: MagicTunnelHealthCheck;
+  interface_address: MagicInterfaceAddress;
+  mtu?: MagicMtu;
+  name: MagicGreTunnelName;
+  ttl?: MagicTtl;
+};
+
+export type MagicCreateGreTunnelResponse = MagicApiResponseSingle & {
+  result?: MagicGreTunnel;
+};
+
+export type MagicCreateRouteRequest = {
+  description?: MagicDescription;
+  nexthop: MagicNexthop;
+  prefix: MagicPrefix;
+  priority: MagicPriority;
+  scope?: MagicScope;
+  weight?: MagicWeight;
+};
+
+export type MagicCreateRouteResponse = MagicApiResponseSingle & {
+  result?: MagicRoute;
+};
+
 /**
  * When the route was created.
  *
@@ -29220,11 +29261,11 @@ export type MagicGreTunnel = {
   customer_gre_endpoint: MagicCustomerGreEndpoint;
   description?: MagicSchemasDescription;
   health_check?: MagicTunnelHealthCheck;
-  id?: MagicSchemasIdentifier;
+  id: MagicSchemasIdentifier;
   interface_address: MagicInterfaceAddress;
   modified_on?: MagicSchemasModifiedOn;
   mtu?: MagicMtu;
-  name: MagicName;
+  name: MagicGreTunnelName;
   ttl?: MagicTtl;
 };
 
@@ -29235,9 +29276,17 @@ export type MagicGreTunnelAddSingleRequest = {
   health_check?: MagicTunnelHealthCheck;
   interface_address: MagicInterfaceAddress;
   mtu?: MagicMtu;
-  name: MagicName;
+  name: MagicGreTunnelName;
   ttl?: MagicTtl;
 };
+
+/**
+ * The name of the tunnel. The name cannot contain spaces or special characters, must be 15 characters or less, and cannot share a name with another GRE tunnel.
+ *
+ * @example GRE_1
+ * @x-auditable true
+ */
+export type MagicGreTunnelName = string;
 
 export type MagicGreTunnelUpdateRequest = MagicGreTunnelAddSingleRequest;
 
@@ -29352,10 +29401,10 @@ export type MagicIpsecTunnel = {
   customer_endpoint?: MagicCustomerIpsecEndpoint;
   description?: MagicComponentsSchemasDescription;
   health_check?: MagicTunnelHealthCheck;
-  id?: MagicSchemasIdentifier;
+  id: MagicSchemasIdentifier;
   interface_address: MagicInterfaceAddress;
   modified_on?: MagicSchemasModifiedOn;
-  name: MagicSchemasName;
+  name: MagicIpsecTunnelName;
   psk_metadata?: MagicPskMetadata;
   replay_protection?: MagicReplayProtection;
 };
@@ -29368,10 +29417,17 @@ export type MagicIpsecTunnelAddSingleRequest = {
   description?: MagicComponentsSchemasDescription;
   health_check?: MagicTunnelHealthCheck;
   interface_address: MagicInterfaceAddress;
-  name: MagicSchemasName;
+  name: MagicIpsecTunnelName;
   psk?: MagicPsk;
   replay_protection?: MagicReplayProtection;
 };
+
+/**
+ * The name of the IPsec tunnel. The name cannot share a name with other tunnels.
+ *
+ * @example IPsec_1
+ */
+export type MagicIpsecTunnelName = string;
 
 export type MagicIpsecTunnelUpdateRequest = MagicIpsecTunnelAddSingleRequest;
 
@@ -29557,14 +29613,6 @@ export type MagicMultipleRouteModifiedResponse = MagicApiResponseSingle & {
   };
 };
 
-/**
- * The name of the tunnel. The name cannot contain spaces or special characters, must be 15 characters or less, and cannot share a name with another GRE tunnel.
- *
- * @example GRE_1
- * @x-auditable true
- */
-export type MagicName = string;
-
 export type MagicNat = {
   static_prefix?: MagicCidr;
 };
@@ -29630,7 +29678,7 @@ export type MagicReplayProtection = boolean;
 export type MagicRoute = {
   created_on?: MagicCreatedOn;
   description?: MagicDescription;
-  id?: MagicIdentifier;
+  id: MagicIdentifier;
   modified_on?: MagicModifiedOn;
   nexthop: MagicNexthop;
   prefix: MagicPrefix;
@@ -29704,6 +29752,10 @@ export type MagicRoutesCollectionResponse = MagicApiResponseSingle & {
   };
 };
 
+export type MagicSchemasCreateIpsecTunnelResponse = MagicApiResponseSingle & {
+  result?: MagicIpsecTunnel;
+};
+
 /**
  * The date and time the tunnel was created.
  *
@@ -29722,7 +29774,7 @@ export type MagicSchemasCreatedOn = string;
 export type MagicSchemasDescription = string;
 
 /**
- * Tunnel identifier tag.
+ * Identifier
  *
  * @example c4a7362d577a6c3019a474fd6f485821
  * @maxLength 32
@@ -29755,13 +29807,6 @@ export type MagicSchemasModifiedTunnelsCollectionResponse = MagicApiResponseSing
  * @default 1476
  */
 export type MagicSchemasMtu = number;
-
-/**
- * The name of the IPsec tunnel. The name cannot share a name with other tunnels.
- *
- * @example IPsec_1
- */
-export type MagicSchemasName = string;
 
 export type MagicSchemasTunnelDeletedResponse = MagicApiResponseSingle & {
   result?: {
@@ -41366,7 +41411,7 @@ export type SecurityCenterApiResponseCommon = {
   errors: SecurityCenterMessages;
   messages: SecurityCenterMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -41382,7 +41427,7 @@ export type SecurityCenterApiResponseCommonFailure = {
   messages: SecurityCenterMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -41404,7 +41449,7 @@ export type SecurityCenterCount = number;
 export type SecurityCenterDismissed = boolean;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -41463,7 +41508,11 @@ export type SecurityCenterMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -45349,7 +45398,7 @@ export type TeamsDevicesSchemasIdResponse = TeamsDevicesApiResponseSingle & {
 };
 
 /**
- * The wirefilter expression to match devices.
+ * The wirefilter expression to match devices. Available values: "identity.email", "identity.groups.id", "identity.groups.name", "identity.groups.email", "identity.service_token_uuid", "identity.saml_attributes", "network", "os.name", "os.version"
  *
  * @example identity.email == "test@cloudflare.com"
  * @maxLength 500
@@ -53324,6 +53373,12 @@ export type WorkersResultInfo = {
 };
 
 export type WorkersRoute = {
+  /**
+   * Identifier.
+   *
+   * @example 023e105f4ecef8ad9ca31a8372d0c353
+   * @maxLength 32
+   */
   id: WorkersIdentifier;
   /**
    * Pattern to match incoming requests against. [Learn more](https://developers.cloudflare.com/workers/configuration/routing/routes/#matching-behavior).
@@ -54886,6 +54941,7 @@ export type ZeroTrustGatewayDescriptionItem = string;
 /**
  * The wirefilter expression used for device posture check matching.
  *
+ * @default
  * @example any(device_posture.checks.passed[*] in {"1308749e-fcfb-4ebc-b051-fe022b632644"})
  */
 export type ZeroTrustGatewayDevicePosture = string;
@@ -55202,6 +55258,7 @@ export type ZeroTrustGatewayIdentifier = string;
 /**
  * The wirefilter expression used for identity matching.
  *
+ * @default
  * @example any(identity.groups.name[*] in {"finance"})
  */
 export type ZeroTrustGatewayIdentity = string;
@@ -56050,6 +56107,7 @@ export type ZeroTrustGatewayTlsSettings = {
 /**
  * The wirefilter expression used for traffic matching.
  *
+ * @default
  * @example http.request.uri matches ".*a/partial/uri.*" and http.request.host in $01302951-49f9-47c9-a400-0297e60b6a10
  */
 export type ZeroTrustGatewayTraffic = string;
