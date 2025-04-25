@@ -9820,6 +9820,17 @@ export type AddressingApproved = string;
  */
 export type AddressingAsn = number | null;
 
+/**
+ * Number of times to prepend the Cloudflare ASN to the BGP AS-Path attribute
+ *
+ * @default 0
+ * @example 2
+ * @maximum 3
+ * @minimum 0
+ * @x-auditable true
+ */
+export type AddressingAsnPrependCount = number;
+
 export type AddressingBgpOnDemand = {
   advertised?: AddressingAdvertised;
   advertised_modified_at?: AddressingModifiedAtNullable;
@@ -9841,9 +9852,11 @@ export type AddressingBgpPrefixCreate = {
 export type AddressingBgpPrefixIdentifier = string;
 
 export type AddressingBgpPrefixUpdateAdvertisement = {
+  asn_prepend_count?: AddressingAsnPrependCount;
   on_demand?: {
     advertised?: boolean;
   };
+  withdraw_if_no_route?: AddressingWithdrawIfNoRoute;
 };
 
 export type AddressingBgpSignalOpts = {
@@ -10004,12 +10017,14 @@ export type AddressingIpAddress = string;
 
 export type AddressingIpamBgpPrefixes = {
   asn?: AddressingAsn;
+  asn_prepend_count?: AddressingAsnPrependCount;
   bgp_signal_opts?: AddressingBgpSignalOpts;
   cidr?: AddressingCidr;
   created_at?: AddressingTimestamp;
   id?: AddressingBgpPrefixIdentifier;
   modified_at?: AddressingTimestamp;
   on_demand?: AddressingBgpOnDemand;
+  withdraw_if_no_route?: AddressingWithdrawIfNoRoute;
 };
 
 export type AddressingIpamDelegations = {
@@ -10305,6 +10320,15 @@ export type AddressingVerified = boolean;
 export type AddressingVerifiedAt = string | null;
 
 /**
+ * Controls whether the BGP prefix is automatically withdrawn when prefix is withdrawn from Magic routing table (for Magic Transit customers using Direct CNI)
+ *
+ * @default false
+ * @example true
+ * @x-auditable true
+ */
+export type AddressingWithdrawIfNoRoute = boolean;
+
+/**
  * Identifier of a zone.
  *
  * @example 8ac8489932db6327334c9b6d58544cfe
@@ -10348,6 +10372,8 @@ export type ApiShieldApiResponseSingle = ApiShieldApiResponseCommon;
 
 /**
  * * `ML` - Discovered operation was sourced using ML API Discovery * `SessionIdentifier` - Discovered operation was sourced using Session Identifier API Discovery * `LabelDiscovery` - Discovered operation was identified to have a specific label
+ *
+ * @x-auditable true
  */
 export type ApiShieldApiDiscoveryOrigin = 'ML' | 'SessionIdentifier' | 'LabelDiscovery';
 
@@ -10370,6 +10396,8 @@ export type ApiShieldApiDiscoveryPatchMultipleRequestEntry = {
  *   * `review` - Operation is not saved into API Shield Endpoint Management
  *   * `saved` - Operation is saved into API Shield Endpoint Management
  *   * `ignored` - Operation is marked as ignored
+ *
+ * @x-auditable true
  */
 export type ApiShieldApiDiscoveryState = 'review' | 'saved' | 'ignored';
 
@@ -10377,6 +10405,8 @@ export type ApiShieldApiDiscoveryState = 'review' | 'saved' | 'ignored';
  * Mark state of operation in API Discovery
  *   * `review` - Mark operation as for review
  *   * `ignored` - Mark operation as ignored
+ *
+ * @x-auditable true
  */
 export type ApiShieldApiDiscoveryStatePatch = 'review' | 'ignored';
 
@@ -10389,12 +10419,14 @@ export type ApiShieldAuthIdCharacteristic = {
    *
    * @example authorization
    * @maxLength 128
+   * @x-auditable true
    */
   name: string;
   /**
    * The type of characteristic.
    *
    * @example header
+   * @x-auditable true
    */
   type: 'header' | 'cookie';
 };
@@ -10413,12 +10445,14 @@ export type ApiShieldAuthIdCharacteristicJwtClaim = {
    * @example e0de1a3a-8c2c-4f90-98d8-cbdf0a3f2cb5:$.foo.bar[0].baz
    * @maxLength 128
    * @pattern ^(?<token_config_id>[a-z0-9\-]{32,36}):\$(?<json_path>.*?)$
+   * @x-auditable true
    */
   name: string;
   /**
    * The type of characteristic.
    *
    * @example jwt
+   * @x-auditable true
    */
   type: 'jwt';
 };
@@ -10431,6 +10465,8 @@ export type ApiShieldAuthIdCharacteristics = (ApiShieldAuthIdCharacteristic | Ap
 
 /**
  * The total number of auth-ids seen across this calculation.
+ *
+ * @x-auditable true
  */
 export type ApiShieldAuthIdTokens = number;
 
@@ -10448,12 +10484,14 @@ export type ApiShieldConfidenceIntervalsBounds = {
    * Lower bound for percentile estimate
    *
    * @example 20.5
+   * @x-auditable true
    */
   lower?: number;
   /**
    * Upper bound for percentile estimate
    *
    * @example 30.4
+   * @x-auditable true
    */
   upper?: number;
 };
@@ -10468,6 +10506,8 @@ export type ApiShieldConfigurationSingleResponse = ApiShieldApiResponseCommon & 
 
 /**
  * The number of data points used for the threshold suggestion calculation.
+ *
+ * @x-auditable true
  */
 export type ApiShieldDataPoints = number;
 
@@ -10489,6 +10529,7 @@ export type ApiShieldDiscoveryOperation = {
  * @format uri-template
  * @maxLength 4096
  * @pattern ^/.*$
+ * @x-auditable true
  */
 export type ApiShieldEndpoint = string;
 
@@ -10498,6 +10539,7 @@ export type ApiShieldEndpoint = string;
  * @example www.example.com
  * @format hostname
  * @maxLength 255
+ * @x-auditable true
  */
 export type ApiShieldHost = string;
 
@@ -10513,6 +10555,7 @@ export type ApiShieldIdentifier = string;
  * Kind of schema
  *
  * @example openapi_v3
+ * @x-auditable true
  */
 export type ApiShieldKind = 'openapi_v3';
 
@@ -10532,6 +10575,7 @@ export type ApiShieldMessages = {
  * The HTTP method used to access the endpoint.
  *
  * @example GET
+ * @x-auditable true
  */
 export type ApiShieldMethod = 'GET' | 'POST' | 'HEAD' | 'OPTIONS' | 'PUT' | 'DELETE' | 'CONNECT' | 'PATCH' | 'TRACE';
 
@@ -10546,6 +10590,8 @@ export type ApiShieldMultipleOperationResponsePaginated = ApiShieldApiResponseCo
 export type ApiShieldObjectWithOperationId = {
   /**
    * The ID of the operation
+   *
+   * @x-auditable true
    */
   operation_id: string & ApiShieldSchemasUuid;
 };
@@ -10585,6 +10631,7 @@ export type ApiShieldOperationFeatureApiRouting = {
      * Target route.
      *
      * @example https://api.example.com/api/service
+     * @x-auditable true
      */
     route?: string;
   };
@@ -10606,6 +10653,7 @@ export type ApiShieldOperationFeatureConfidenceIntervals = {
        * Suggested threshold.
        *
        * @example 25.5
+       * @x-auditable true
        */
       mean?: number;
     };
@@ -10631,12 +10679,14 @@ export type ApiShieldOperationFeatureSchemaInfo = {
        * True if schema is Cloudflare-provided.
        *
        * @example true
+       * @x-auditable true
        */
       is_learned?: boolean;
       /**
        * Schema file name.
        *
        * @example api-endpoints-8694824bf5c04d019edcbf399c03c103-api-discovery.example.com-thresholds.json
+       * @x-auditable true
        */
       name?: string;
     };
@@ -10644,12 +10694,14 @@ export type ApiShieldOperationFeatureSchemaInfo = {
      * True if a Cloudflare-provided learned schema is available for this endpoint.
      *
      * @example true
+     * @x-auditable true
      */
     learned_available?: boolean;
     /**
      * Action taken on requests failing validation.
      *
      * @example block
+     * @x-auditable true
      */
     mitigation_action?: 'none' | 'log' | 'block' | null;
   };
@@ -10685,6 +10737,7 @@ export type ApiShieldOperationFeatures =
  *   - `null` indicates that no operation level mitigation is in place, see Zone Level Schema Validation Settings for mitigation action that will be applied
  *
  * @example block
+ * @x-auditable true
  */
 export type ApiShieldOperationMitigationAction = 'log' | 'block' | 'none' | any | null;
 
@@ -10713,16 +10766,22 @@ export type ApiShieldOperationSchemaValidationSettingsMultipleRequestEntry = {
 
 /**
  * The p50 quantile of requests (in period_seconds).
+ *
+ * @x-auditable true
  */
 export type ApiShieldP50 = number;
 
 /**
  * The p90 quantile of requests (in period_seconds).
+ *
+ * @x-auditable true
  */
 export type ApiShieldP90 = number;
 
 /**
  * The p99 quantile of requests (in period_seconds).
+ *
+ * @x-auditable true
  */
 export type ApiShieldP99 = number;
 
@@ -10756,6 +10815,8 @@ export type ApiShieldPatchDiscoveryResponse = ApiShieldApiResponseCommon & {
 
 /**
  * The period over which this threshold is suggested.
+ *
+ * @x-auditable true
  */
 export type ApiShieldPeriodSeconds = number;
 
@@ -10774,6 +10835,7 @@ export type ApiShieldPublicSchema = {
    * Name of the schema
    *
    * @example petstore schema
+   * @x-auditable true
    */
   name: string;
   schema_id: ApiShieldSchemasUuid;
@@ -10781,6 +10843,7 @@ export type ApiShieldPublicSchema = {
    * Source of the schema
    *
    * @example <schema file bytes>
+   * @x-auditable true
    */
   source?: string;
   validation_enabled?: ApiShieldValidationEnabled;
@@ -10798,6 +10861,8 @@ export type ApiShieldRequestExpressionTemplatesFallthrough = {
 
 /**
  * The estimated number of requests covered by these calculations.
+ *
+ * @x-auditable true
  */
 export type ApiShieldRequests = number;
 
@@ -10806,12 +10871,14 @@ export type ApiShieldResponseExpressionTemplatesFallthrough = {
    * WAF Expression for fallthrough
    *
    * @example (cf.api_gateway.fallthrough_detected)
+   * @x-auditable true
    */
   expression: string;
   /**
    * Title for the expression
    *
    * @example Fallthrough Expression for [zone.domain.tld]
+   * @x-auditable true
    */
   title: string;
 };
@@ -10826,6 +10893,7 @@ export type ApiShieldResponseUserSchemasHosts = {
    * Name of the schema
    *
    * @example petstore schema
+   * @x-auditable true
    */
   name: string;
   schema_id: ApiShieldSchemasUuid;
@@ -10861,6 +10929,9 @@ export type ApiShieldResultInfo = {
 export type ApiShieldSchemaResponseWithThresholds = ApiShieldApiResponseCommon & {
   result: {
     schemas?: ApiShieldOpenapiWithThresholds[];
+    /**
+     * @x-auditable true
+     */
     timestamp?: string;
   };
 };
@@ -10899,6 +10970,7 @@ export type ApiShieldSchemaUploadLogEvent = {
    * Code that identifies the event that occurred.
    *
    * @example 28
+   * @x-auditable true
    */
   code: number;
   /**
@@ -10909,6 +10981,7 @@ export type ApiShieldSchemaUploadLogEvent = {
    * Diagnostic message that describes the event.
    *
    * @example unsupported media type: application/octet-stream
+   * @x-auditable true
    */
   message?: string;
 };
@@ -10923,12 +10996,14 @@ export type ApiShieldSchemaUploadResponse = {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type ApiShieldSchemasIdentifier = ApiShieldIdentifier & string;
 
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type ApiShieldSchemasTimestamp = ApiShieldTimestamp & string;
 
@@ -10936,6 +11011,7 @@ export type ApiShieldSchemasTimestamp = ApiShieldTimestamp & string;
  * UUID.
  *
  * @minLength 36
+ * @x-auditable true
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
  */
@@ -10952,6 +11028,8 @@ export type ApiShieldStandardOperation = ApiShieldBasicOperation & {
 
 /**
  * The suggested threshold in requests done by the same auth_id or period_seconds.
+ *
+ * @x-auditable true
  */
 export type ApiShieldSuggestedThreshold = number;
 
@@ -10968,6 +11046,7 @@ export type ApiShieldTrafficStats = {
      * The period in seconds these statistics were computed over
      *
      * @example 3600
+     * @x-auditable true
      */
     period_seconds: number;
     /**
@@ -10975,6 +11054,7 @@ export type ApiShieldTrafficStats = {
      *
      * @example 1987.06
      * @format float
+     * @x-auditable true
      */
     requests: number;
   };
@@ -10999,6 +11079,7 @@ export type ApiShieldUuid = string;
  * A special value of of `none` will skip running schema validation entirely for the request when there is no mitigation action defined on the operation
  *
  * @example block
+ * @x-auditable true
  */
 export type ApiShieldValidationDefaultMitigationAction = 'none' | 'log' | 'block';
 
@@ -11014,11 +11095,14 @@ export type ApiShieldValidationDefaultMitigationAction = 'none' | 'log' | 'block
  * `null` will have no effect.
  *
  * @example block
+ * @x-auditable true
  */
 export type ApiShieldValidationDefaultMitigationActionPatch = 'none' | 'log' | 'block' | any | null;
 
 /**
  * Flag whether schema is enabled for validation.
+ *
+ * @x-auditable true
  */
 export type ApiShieldValidationEnabled = boolean;
 
@@ -11029,6 +11113,7 @@ export type ApiShieldValidationEnabled = boolean;
  *   - `null` indicates that no override is in place
  *
  * @example disable_override
+ * @x-auditable true
  */
 export type ApiShieldValidationOverrideMitigationAction = 'none' | any | null;
 
@@ -11042,6 +11127,7 @@ export type ApiShieldValidationOverrideMitigationAction = 'none' | any | null;
  * `null` will have no effect.
  *
  * @example none
+ * @x-auditable true
  */
 export type ApiShieldValidationOverrideMitigationActionPatch = 'none' | 'disable_override' | any | null;
 
@@ -11054,6 +11140,7 @@ export type ApiShieldValidationOverrideMitigationActionPatch = 'none' | 'disable
  * To clear any override, use the special value `disable_override` or `null`
  *
  * @example none
+ * @x-auditable true
  */
 export type ApiShieldValidationOverrideMitigationActionWrite = 'none' | 'disable_override' | any | null;
 
@@ -20364,7 +20451,7 @@ export type EmailVerified = string;
 export type EmailZoneId = EmailIdentifier;
 
 /**
- * Identifier
+ * Defines an account identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -20514,21 +20601,21 @@ export type FirewallActionParametersSetCacheSettings = {
         /**
          * @example cookie_1
          */
-        check_presence?: any[];
+        check_presence?: string[];
         /**
          * @example cookie1
          */
-        include?: any[];
+        include?: string[];
       };
       header?: {
         /**
          * @example header_1
          */
-        check_presence?: any[];
+        check_presence?: string[];
         /**
          * @example header1
          */
-        include?: any[];
+        include?: string[];
       };
       host?: {
         /**
@@ -20754,9 +20841,9 @@ export type FirewallAnomalyPackage = {
 export type FirewallApiResponseCollection = {
   errors: FirewallMessages;
   messages: FirewallMessages;
-  result: Record<string, any> | any[] | string | null;
+  result: Record<string, any> | Record<string, any>[] | string | null;
   /**
-   * Whether the API call was successful
+   * Defines whether the API call was successful.
    *
    * @example true
    */
@@ -20767,9 +20854,9 @@ export type FirewallApiResponseCollection = {
 export type FirewallApiResponseCommon = {
   errors: FirewallMessages;
   messages: FirewallMessages;
-  result: Record<string, any> | any[] | string;
+  result: Record<string, any> | Record<string, any>[] | string;
   /**
-   * Whether the API call was successful
+   * Defines whether the API call was successful.
    *
    * @example true
    */
@@ -20785,7 +20872,7 @@ export type FirewallApiResponseCommonFailure = {
   messages: FirewallMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Defines whether the API call was successful.
    *
    * @example false
    */
@@ -20797,7 +20884,7 @@ export type FirewallApiResponseSingle = {
   messages: FirewallMessages;
   result: (Record<string, any> | null) | (string | null) | string;
   /**
-   * Whether the API call was successful
+   * Defines whether the API call was successful.
    *
    * @example true
    */
@@ -20811,11 +20898,11 @@ export type FirewallApiResponseSingleId = {
     | {
         id: FirewallIdentifier;
       }
-    | any[]
+    | Record<string, any>[]
     | string
     | null;
   /**
-   * Whether the API call was successful
+   * Defines whether the API call was successful.
    *
    * @example true
    */
@@ -21458,7 +21545,7 @@ export type FirewallHeaderValue = string;
 export type FirewallId = string;
 
 /**
- * Identifier
+ * Defines an identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -21665,7 +21752,7 @@ export type FirewallPackageDefinition = {
 };
 
 /**
- * Identifier
+ * Defines a package identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -21724,7 +21811,7 @@ export type FirewallProducts = ('zoneLockdown' | 'uaBlock' | 'bic' | 'hot' | 'se
 export type FirewallRateLimits = FirewallRatelimit;
 
 /**
- * The unique identifier of the rate limit.
+ * Defines the unique identifier of the rate limit.
  *
  * @example 372e67954025e0ba6aaa6d586b9e0b59
  * @maxLength 32
@@ -21768,25 +21855,25 @@ export type FirewallResponseSingle = FirewallApiResponseSingle & {
 
 export type FirewallResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Defines the total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Defines the current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Defines the number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Defines the total results available without any search parameters.
    *
    * @example 2000
    */
@@ -21840,7 +21927,7 @@ export type FirewallRuleCollectionResponse = FirewallApiResponseCollection & {
 };
 
 /**
- * Unique identifier for a rule
+ * Unique identifier for a rule.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -22049,7 +22136,7 @@ export type FirewallSchemasRule = FirewallRule & {
     email?: FirewallEmail;
     id?: FirewallIdentifier;
     /**
-     * The scope of the rule.
+     * Defines the scope of the rule.
      *
      * @example user
      */
@@ -45201,7 +45288,7 @@ export type TeamsDevicesPhysicalDevice = {
 /**
  * @example windows
  */
-export type TeamsDevicesPlatform = 'windows' | 'mac' | 'linux' | 'android' | 'ios';
+export type TeamsDevicesPlatform = 'windows' | 'mac' | 'linux' | 'android' | 'ios' | 'chromeos';
 
 /**
  * The precedence of the policy. Lower values indicate higher precedence. Policies will be evaluated in ascending order of this field.
@@ -51770,6 +51857,7 @@ export type WorkersKvNamespaceIdentifier = string;
  * A human-readable string name for a Namespace.
  *
  * @example My Own Namespace
+ * @maxLength 512
  * @x-auditable true
  */
 export type WorkersKvNamespaceTitle = string;
@@ -54498,12 +54586,14 @@ export type ZeroTrustGatewayAccountLogOptions = {
   /**
    * Log all requests to this service.
    *
+   * @default false
    * @example false
    */
   log_all?: boolean;
   /**
    * Log only blocking requests to this service.
    *
+   * @default false
    * @example true
    */
   log_blocks?: boolean;
@@ -54539,10 +54629,11 @@ export type ZeroTrustGatewayActivityLogSettings = {
   /**
    * Enable activity logging.
    *
+   * @default true
    * @example true
    */
   enabled?: boolean;
-};
+} | null;
 
 /**
  * Anti-virus settings.
@@ -54659,45 +54750,55 @@ export type ZeroTrustGatewayBindingStatus = 'pending_deployment' | 'available' |
 export type ZeroTrustGatewayBlockPageSettings = {
   /**
    * If mode is customized_block_page: block page background color in #rrggbb format.
+   *
+   * @default
    */
   background_color?: string;
   /**
    * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
    *
+   * @default false
    * @example true
    */
   enabled?: boolean;
   /**
    * If mode is customized_block_page: block page footer text.
    *
+   * @default
    * @example --footer--
    */
   footer_text?: string;
   /**
    * If mode is customized_block_page: block page header text.
    *
+   * @default
    * @example --header--
    */
   header_text?: string;
   /**
    * If mode is redirect_uri: when enabled, context will be appended to target_uri as query parameters.
+   *
+   * @default false
    */
   include_context?: boolean;
   /**
    * If mode is customized_block_page: full URL to the logo file.
    *
+   * @default
    * @example https://logos.com/a.png
    */
   logo_path?: string;
   /**
    * If mode is customized_block_page: admin email for users to contact.
    *
+   * @default
    * @example admin@example.com
    */
   mailto_address?: string;
   /**
    * If mode is customized_block_page: subject line for emails created from block page.
    *
+   * @default
    * @example Blocked User Inquiry
    */
   mailto_subject?: string;
@@ -54716,16 +54817,18 @@ export type ZeroTrustGatewayBlockPageSettings = {
   /**
    * If mode is customized_block_page: suppress detailed info at the bottom of the block page.
    *
+   * @default
    * @example false
    */
   suppress_footer?: boolean;
   /**
    * If mode is redirect_uri: URI to which the user should be redirected.
    *
+   * @default
    * @format uri
    */
   target_uri?: string;
-};
+} | null;
 
 /**
  * DLP body scanning settings.
@@ -54737,7 +54840,7 @@ export type ZeroTrustGatewayBodyScanningSettings = {
    * @example deep
    */
   inspection_mode?: string;
-};
+} | null;
 
 /**
  * Browser isolation settings.
@@ -54746,16 +54849,18 @@ export type ZeroTrustGatewayBrowserIsolationSettings = {
   /**
    * Enable non-identity onramp support for Browser Isolation.
    *
+   * @default false
    * @example true
    */
   non_identity_enabled?: boolean;
   /**
    * Enable Clientless Browser Isolation.
    *
+   * @default false
    * @example true
    */
   url_browser_isolation_enabled?: boolean;
-};
+} | null;
 
 export type ZeroTrustGatewayCategories = {
   beta?: ZeroTrustGatewayBeta;
@@ -54790,7 +54895,7 @@ export type ZeroTrustGatewayCertificateSettings = {
    * @example d1b364c5-1311-466e-a194-f0e943e0799f
    */
   id: string;
-};
+} | null;
 
 export type ZeroTrustGatewayCertificates = {
   binding_status?: ZeroTrustGatewayBindingStatus;
@@ -54811,6 +54916,8 @@ export type ZeroTrustGatewayCertificates = {
   id?: ZeroTrustGatewayUuid;
   /**
    * Use this certificate for Gateway TLS interception
+   *
+   * @default false
    */
   in_use?: boolean;
   /**
@@ -54848,6 +54955,7 @@ export type ZeroTrustGatewayClass = 'free' | 'premium' | 'blocked' | 'removalPen
 /**
  * True if the location is the default location.
  *
+ * @default false
  * @example false
  */
 export type ZeroTrustGatewayClientDefault = boolean;
@@ -54901,6 +55009,7 @@ export type ZeroTrustGatewayCustomCertificateSettings = {
   /**
    * Enable use of custom certificate authority for signing Gateway traffic.
    *
+   * @default false
    * @example true
    */
   enabled: boolean;
@@ -54914,7 +55023,7 @@ export type ZeroTrustGatewayCustomCertificateSettings = {
    * @format date-time
    */
   updated_at?: string;
-};
+} | null;
 
 /**
  * Date of deletion, if any.
@@ -55050,6 +55159,7 @@ export type ZeroTrustGatewayDotEndpoint = {
 /**
  * True if the location needs to resolve EDNS queries.
  *
+ * @default false
  * @example false
  */
 export type ZeroTrustGatewayEcsSupport = boolean;
@@ -55061,6 +55171,7 @@ export type ZeroTrustGatewayEmptyResponse = ZeroTrustGatewayApiResponseSingle & 
 /**
  * True if the rule is enabled.
  *
+ * @default false
  * @example true
  */
 export type ZeroTrustGatewayEnabled = boolean;
@@ -55068,6 +55179,7 @@ export type ZeroTrustGatewayEnabled = boolean;
 /**
  * Enable anti-virus scanning on downloads.
  *
+ * @default false
  * @example false
  */
 export type ZeroTrustGatewayEnabledDownloadPhase = boolean;
@@ -55075,6 +55187,7 @@ export type ZeroTrustGatewayEnabledDownloadPhase = boolean;
 /**
  * Enable anti-virus scanning on uploads.
  *
+ * @default false
  * @example false
  */
 export type ZeroTrustGatewayEnabledUploadPhase = boolean;
@@ -55126,7 +55239,7 @@ export type ZeroTrustGatewayExpiration = {
    * @format date-time
    */
   expires_at: ZeroTrustGatewayTimestamp & string;
-};
+} | null;
 
 /**
  * Extended e-mail matching settings.
@@ -55135,6 +55248,7 @@ export type ZeroTrustGatewayExtendedEmailMatching = {
   /**
    * Enable matching all variants of user emails (with + or . modifiers) used as criteria in Firewall policies.
    *
+   * @default false
    * @example true
    */
   enabled?: boolean;
@@ -55143,6 +55257,7 @@ export type ZeroTrustGatewayExtendedEmailMatching = {
 /**
  * Block requests for files that cannot be scanned.
  *
+ * @default false
  * @example false
  */
 export type ZeroTrustGatewayFailClosed = boolean;
@@ -55161,15 +55276,17 @@ export type ZeroTrustGatewayFipsSettings = {
   /**
    * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
    *
+   * @default false
    * @example true
    */
   tls?: boolean;
-};
+} | null;
 
 export type ZeroTrustGatewayGatewayAccountLoggingSettings = {
   /**
    * Redact personally identifiable information from activity logging (PII fields are: source IP, user email, user ID, device ID, URL, referrer, user agent).
    *
+   * @default false
    * @example true
    */
   redact_pii?: boolean;
@@ -55439,10 +55556,14 @@ export type ZeroTrustGatewayName = string;
 export type ZeroTrustGatewayNotificationSettings = {
   /**
    * Set notification on
+   *
+   * @default false
    */
   enabled?: boolean;
   /**
    * If true, context information will be passed as query parameters
+   *
+   * @default false
    */
   include_context?: boolean;
   /**
@@ -55453,7 +55574,7 @@ export type ZeroTrustGatewayNotificationSettings = {
    * Optional URL to direct users to additional information. If not set, the notification will open a block page.
    */
   support_url?: string;
-};
+} | null;
 
 /**
  * Precedence sets the order of your rules. Lower values indicate higher precedence. At each processing phase, applicable rules are evaluated in ascending order of this value.
@@ -55467,10 +55588,11 @@ export type ZeroTrustGatewayProtocolDetection = {
   /**
    * Enable detecting protocol on initial bytes of client traffic.
    *
+   * @default false
    * @example true
    */
   enabled?: boolean;
-};
+} | null;
 
 /**
  * The name of the provider. Usually Cloudflare.
@@ -55559,13 +55681,13 @@ export type ZeroTrustGatewayRuleSettings = {
    */
   add_headers?: {
     [key: string]: string;
-  };
+  } | null;
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
    *
    * @example false
    */
-  allow_child_bypass?: boolean;
+  allow_child_bypass?: boolean | null;
   /**
    * Settings for the Audit SSH action.
    */
@@ -55573,10 +55695,11 @@ export type ZeroTrustGatewayRuleSettings = {
     /**
      * Enable to turn on SSH command logging.
      *
+     * @default false
      * @example false
      */
     command_logging?: boolean;
-  };
+  } | null;
   /**
    * Configure how browser isolation behaves.
    */
@@ -55590,18 +55713,21 @@ export type ZeroTrustGatewayRuleSettings = {
     /**
      * Set to false to enable copy-pasting. Only applies when `version == "v1"`.
      *
+     * @default false
      * @example false
      */
     dcp?: boolean;
     /**
      * Set to false to enable downloading. Only applies when `version == "v1"`.
      *
+     * @default false
      * @example false
      */
     dd?: boolean;
     /**
      * Set to false to enable keyboard usage. Only applies when `version == "v1"`.
      *
+     * @default false
      * @example false
      */
     dk?: boolean;
@@ -55614,12 +55740,14 @@ export type ZeroTrustGatewayRuleSettings = {
     /**
      * Set to false to enable printing. Only applies when `version == "v1"`.
      *
+     * @default false
      * @example false
      */
     dp?: boolean;
     /**
      * Set to false to enable uploading. Only applies when `version == "v1"`.
      *
+     * @default false
      * @example false
      */
     du?: boolean;
@@ -55653,13 +55781,15 @@ export type ZeroTrustGatewayRuleSettings = {
      * @default v1
      */
     version?: 'v1' | 'v2';
-  };
+  } | null;
   /**
    * Custom block page settings. If missing/null, blocking will use the the account settings.
    */
   block_page?: {
     /**
      * If true, context information will be passed as query parameters
+     *
+     * @default false
      */
     include_context?: boolean;
     /**
@@ -55668,16 +55798,18 @@ export type ZeroTrustGatewayRuleSettings = {
      * @format uri
      */
     target_uri: string;
-  };
+  } | null;
   /**
    * Enable the custom block page.
    *
+   * @default false
    * @example true
    */
   block_page_enabled?: boolean;
   /**
    * The text describing why this block occurred, displayed on the custom block page (if enabled).
    *
+   * @default
    * @example This website is a security risk
    */
   block_reason?: string;
@@ -55686,7 +55818,7 @@ export type ZeroTrustGatewayRuleSettings = {
    *
    * @example false
    */
-  bypass_parent_rule?: boolean;
+  bypass_parent_rule?: boolean | null;
   /**
    * Configure how session check behaves.
    */
@@ -55700,17 +55832,18 @@ export type ZeroTrustGatewayRuleSettings = {
     /**
      * Set to true to enable session enforcement.
      *
+     * @default false
      * @example true
      */
     enforce?: boolean;
-  };
+  } | null;
   /**
    * Add your own custom resolvers to route queries that match the resolver policy. Cannot be used when 'resolve_dns_through_cloudflare' or 'resolve_dns_internally' are set. DNS queries will route to the address closest to their origin. Only valid when a rule's action is set to 'resolve'.
    */
   dns_resolvers?: {
     ipv4?: ZeroTrustGatewayDnsResolverSettingsV4[];
     ipv6?: ZeroTrustGatewayDnsResolverSettingsV6[];
-  };
+  } | null;
   /**
    * Configure how Gateway Proxy traffic egresses. You can enable this setting for rules with Egress actions and filters, or omit it to indicate local egress via WARP IPs.
    */
@@ -55733,28 +55866,32 @@ export type ZeroTrustGatewayRuleSettings = {
      * @example 2001:DB8::/64
      */
     ipv6?: string;
-  };
+  } | null;
   /**
    * Set to true, to ignore the category matches at CNAME domains in a response. If unchecked, the categories in this rule will be checked against all the CNAME domain categories in a response.
    *
+   * @default false
    * @example true
    */
   ignore_cname_category_matches?: boolean;
   /**
    * INSECURE - disable DNSSEC validation (for Allow actions).
    *
+   * @default false
    * @example false
    */
   insecure_disable_dnssec_validation?: boolean;
   /**
    * Set to true to enable IPs in DNS resolver category blocks. By default categories only block based on domain names.
    *
+   * @default false
    * @example true
    */
   ip_categories?: boolean;
   /**
    * Set to true to include IPs in DNS resolver indicator feed blocks. By default indicator feeds only block based on domain names.
    *
+   * @default false
    * @example true
    */
   ip_indicator_feeds?: boolean;
@@ -55772,13 +55909,15 @@ export type ZeroTrustGatewayRuleSettings = {
      * A port number to use for TCP/UDP overrides.
      */
     port?: number;
-  };
+  } | null;
   /**
    * Configure a notification to display on the user's device when this rule is matched.
    */
   notification_settings?: {
     /**
      * Set notification on
+     *
+     * @default false
      */
     enabled?: boolean;
     /**
@@ -55793,10 +55932,11 @@ export type ZeroTrustGatewayRuleSettings = {
      * Optional URL to direct users to additional information. If not set, the notification will open a block page.
      */
     support_url?: string;
-  };
+  } | null;
   /**
    * Override matching DNS queries with a hostname.
    *
+   * @default
    * @example example.com
    */
   override_host?: string;
@@ -55806,7 +55946,7 @@ export type ZeroTrustGatewayRuleSettings = {
    * @example 1.1.1.1
    * @example 2.2.2.2
    */
-  override_ips?: string[];
+  override_ips?: string[] | null;
   /**
    * Configure DLP payload logging.
    */
@@ -55814,10 +55954,11 @@ export type ZeroTrustGatewayRuleSettings = {
     /**
      * Set to true to enable DLP payload logging for this rule.
      *
+     * @default false
      * @example true
      */
     enabled?: boolean;
-  };
+  } | null;
   /**
    * Settings that apply to quarantine rules
    */
@@ -55840,17 +55981,21 @@ export type ZeroTrustGatewayRuleSettings = {
       | 'zip'
       | 'rar'
     )[];
-  };
+  } | null;
   /**
    * Settings that apply to redirect rules
    */
   redirect?: {
     /**
      * If true, context information will be passed as query parameters
+     *
+     * @default false
      */
     include_context?: boolean;
     /**
      * If true, the path and query parameters from the original request will be appended to target_uri
+     *
+     * @default false
      */
     preserve_path_and_query?: boolean;
     /**
@@ -55859,7 +56004,7 @@ export type ZeroTrustGatewayRuleSettings = {
      * @format uri
      */
     target_uri: string;
-  };
+  } | null;
   /**
    * Configure to forward the query to the internal DNS service, passing the specified 'view_id' as input. Cannot be set when 'dns_resolvers' are specified or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is set to 'resolve'.
    */
@@ -55874,10 +56019,11 @@ export type ZeroTrustGatewayRuleSettings = {
      * The internal DNS view identifier that's passed to the internal DNS service.
      */
     view_id?: string;
-  };
+  } | null;
   /**
    * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS resolver. Cannot be set when 'dns_resolvers' are specified or 'resolve_dns_internally' is set. Only valid when a rule's action is set to 'resolve'.
    *
+   * @default false
    * @example true
    */
   resolve_dns_through_cloudflare?: boolean;
@@ -55891,7 +56037,7 @@ export type ZeroTrustGatewayRuleSettings = {
      * @example error
      */
     action?: 'pass_through' | 'block' | 'error';
-  };
+  } | null;
 };
 
 export type ZeroTrustGatewayRules = {
@@ -55933,6 +56079,7 @@ export type ZeroTrustGatewaySandbox = {
   /**
    * Enable sandbox.
    *
+   * @default false
    * @example true
    */
   enabled?: boolean;
@@ -55940,7 +56087,7 @@ export type ZeroTrustGatewaySandbox = {
    * Action to take when the file cannot be scanned.
    */
   fallback_action?: 'allow' | 'block';
-};
+} | null;
 
 /**
  * The schedule for activating DNS policies. This does not apply to HTTP or network policies.
@@ -55994,11 +56141,12 @@ export type ZeroTrustGatewaySchedule = {
    * @example 08:00-12:30,13:30-17:00
    */
   wed?: string;
-};
+} | null;
 
 /**
  * The description of the rule.
  *
+ * @default
  * @example Block bad websites based on their host name.
  */
 export type ZeroTrustGatewaySchemasDescription = string;
@@ -56099,10 +56247,11 @@ export type ZeroTrustGatewayTlsSettings = {
   /**
    * Enable inspecting encrypted HTTP traffic.
    *
+   * @default true
    * @example true
    */
   enabled?: boolean;
-};
+} | null;
 
 /**
  * The wirefilter expression used for traffic matching.
