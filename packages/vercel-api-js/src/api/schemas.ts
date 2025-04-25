@@ -1048,6 +1048,7 @@ export type UserEvent = {
             microfrontendProjectsPerGroup?: number;
             flagsExplorerOverridesThreshold?: number;
             flagsExplorerUnlimitedOverrides?: boolean;
+            customEnvironmentsPerProject?: number;
             buildMachine?: {
               purchaseType?: 'enhanced';
               abovePlan?: boolean;
@@ -3053,6 +3054,10 @@ export type AuthUser = {
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
     flagsExplorerUnlimitedOverrides?: boolean;
+    /**
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+     */
+    customEnvironmentsPerProject?: number;
     /**
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */

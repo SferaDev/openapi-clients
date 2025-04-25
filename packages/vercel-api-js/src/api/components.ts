@@ -2444,6 +2444,7 @@ export type UpdateProjectDataCacheResponse = {
     notificationCustomerBudget?: Schemas.ACLAction[];
     notificationStatementOfReasons?: Schemas.ACLAction[];
     observabilityConfiguration?: Schemas.ACLAction[];
+    observabilityNotebook?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
@@ -11272,6 +11273,7 @@ export type GetProjectsResponse = {
       notificationCustomerBudget?: Schemas.ACLAction[];
       notificationStatementOfReasons?: Schemas.ACLAction[];
       observabilityConfiguration?: Schemas.ACLAction[];
+      observabilityNotebook?: Schemas.ACLAction[];
       openTelemetryEndpoint?: Schemas.ACLAction[];
       paymentMethod?: Schemas.ACLAction[];
       permissions?: Schemas.ACLAction[];
@@ -12246,6 +12248,7 @@ export type CreateProjectResponse = {
     notificationCustomerBudget?: Schemas.ACLAction[];
     notificationStatementOfReasons?: Schemas.ACLAction[];
     observabilityConfiguration?: Schemas.ACLAction[];
+    observabilityNotebook?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
@@ -13402,6 +13405,7 @@ export type GetProjectResponse = {
     notificationCustomerBudget?: Schemas.ACLAction[];
     notificationStatementOfReasons?: Schemas.ACLAction[];
     observabilityConfiguration?: Schemas.ACLAction[];
+    observabilityNotebook?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
@@ -14384,6 +14388,7 @@ export type UpdateProjectResponse = {
     notificationCustomerBudget?: Schemas.ACLAction[];
     notificationStatementOfReasons?: Schemas.ACLAction[];
     observabilityConfiguration?: Schemas.ACLAction[];
+    observabilityNotebook?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
