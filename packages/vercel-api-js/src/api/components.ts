@@ -2164,6 +2164,29 @@ export type UpdateProjectDataCacheResponse = {
         updatedAt?: number;
         sourceless?: boolean;
         productionBranch?: string;
+      }
+    | {
+        org?: string;
+        /**
+         * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes.
+         */
+        repoOwnerId?: number;
+        repo?: string;
+        repoId?: number;
+        type?: 'github-custom-host';
+        host?: string;
+        createdAt?: number;
+        deployHooks: {
+          createdAt?: number;
+          id: string;
+          name: string;
+          ref: string;
+          url: string;
+        }[];
+        gitCredentialId?: string;
+        updatedAt?: number;
+        sourceless?: boolean;
+        productionBranch?: string;
       };
   microfrontends?:
     | {
@@ -3173,6 +3196,23 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               prId?: number | null;
             }
           | {
+              type: 'github-custom-host';
+              host: string;
+              repoId: string | number;
+              ref?: string | null;
+              sha?: string;
+              prId?: number | null;
+            }
+          | {
+              type: 'github-custom-host';
+              host: string;
+              org: string;
+              repo: string;
+              ref?: string | null;
+              sha?: string;
+              prId?: number | null;
+            }
+          | {
               type: 'gitlab';
               projectId: string | number;
               ref?: string | null;
@@ -3203,6 +3243,15 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
             }
           | {
               type: 'github';
+              ref: string;
+              sha: string;
+              repoId: number;
+              org?: string;
+              repo?: string;
+            }
+          | {
+              type: 'github';
+              host: string;
               ref: string;
               sha: string;
               repoId: number;
@@ -3567,6 +3616,23 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               prId?: number | null;
             }
           | {
+              type: 'github-custom-host';
+              host: string;
+              repoId: string | number;
+              ref?: string | null;
+              sha?: string;
+              prId?: number | null;
+            }
+          | {
+              type: 'github-custom-host';
+              host: string;
+              org: string;
+              repo: string;
+              ref?: string | null;
+              sha?: string;
+              prId?: number | null;
+            }
+          | {
               type: 'gitlab';
               projectId: string | number;
               ref?: string | null;
@@ -3597,6 +3663,15 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
             }
           | {
               type: 'github';
+              ref: string;
+              sha: string;
+              repoId: number;
+              org?: string;
+              repo?: string;
+            }
+          | {
+              type: 'github';
+              host: string;
               ref: string;
               sha: string;
               repoId: number;
@@ -3895,6 +3970,23 @@ export type CreateDeploymentResponse = {
         prId?: number | null;
       }
     | {
+        type: 'github-custom-host';
+        host: string;
+        repoId: string | number;
+        ref?: string | null;
+        sha?: string;
+        prId?: number | null;
+      }
+    | {
+        type: 'github-custom-host';
+        host: string;
+        org: string;
+        repo: string;
+        ref?: string | null;
+        sha?: string;
+        prId?: number | null;
+      }
+    | {
         type: 'gitlab';
         projectId: string | number;
         ref?: string | null;
@@ -3925,6 +4017,15 @@ export type CreateDeploymentResponse = {
       }
     | {
         type: 'github';
+        ref: string;
+        sha: string;
+        repoId: number;
+        org?: string;
+        repo?: string;
+      }
+    | {
+        type: 'github';
+        host: string;
         ref: string;
         sha: string;
         repoId: number;
@@ -4756,6 +4857,23 @@ export type CancelDeploymentResponse = {
         prId?: number | null;
       }
     | {
+        type: 'github-custom-host';
+        host: string;
+        repoId: string | number;
+        ref?: string | null;
+        sha?: string;
+        prId?: number | null;
+      }
+    | {
+        type: 'github-custom-host';
+        host: string;
+        org: string;
+        repo: string;
+        ref?: string | null;
+        sha?: string;
+        prId?: number | null;
+      }
+    | {
         type: 'gitlab';
         projectId: string | number;
         ref?: string | null;
@@ -4786,6 +4904,15 @@ export type CancelDeploymentResponse = {
       }
     | {
         type: 'github';
+        ref: string;
+        sha: string;
+        repoId: number;
+        org?: string;
+        repo?: string;
+      }
+    | {
+        type: 'github';
+        host: string;
         ref: string;
         sha: string;
         repoId: number;
@@ -10993,6 +11120,29 @@ export type GetProjectsResponse = {
           updatedAt?: number;
           sourceless?: boolean;
           productionBranch?: string;
+        }
+      | {
+          org?: string;
+          /**
+           * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes.
+           */
+          repoOwnerId?: number;
+          repo?: string;
+          repoId?: number;
+          type?: 'github-custom-host';
+          host?: string;
+          createdAt?: number;
+          deployHooks: {
+            createdAt?: number;
+            id: string;
+            name: string;
+            ref: string;
+            url: string;
+          }[];
+          gitCredentialId?: string;
+          updatedAt?: number;
+          sourceless?: boolean;
+          productionBranch?: string;
         };
     microfrontends?:
       | {
@@ -11956,6 +12106,29 @@ export type CreateProjectResponse = {
         type?: 'bitbucket';
         uuid?: string;
         workspaceUuid?: string;
+        createdAt?: number;
+        deployHooks: {
+          createdAt?: number;
+          id: string;
+          name: string;
+          ref: string;
+          url: string;
+        }[];
+        gitCredentialId?: string;
+        updatedAt?: number;
+        sourceless?: boolean;
+        productionBranch?: string;
+      }
+    | {
+        org?: string;
+        /**
+         * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes.
+         */
+        repoOwnerId?: number;
+        repo?: string;
+        repoId?: number;
+        type?: 'github-custom-host';
+        host?: string;
         createdAt?: number;
         deployHooks: {
           createdAt?: number;
@@ -13125,6 +13298,29 @@ export type GetProjectResponse = {
         updatedAt?: number;
         sourceless?: boolean;
         productionBranch?: string;
+      }
+    | {
+        org?: string;
+        /**
+         * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes.
+         */
+        repoOwnerId?: number;
+        repo?: string;
+        repoId?: number;
+        type?: 'github-custom-host';
+        host?: string;
+        createdAt?: number;
+        deployHooks: {
+          createdAt?: number;
+          id: string;
+          name: string;
+          ref: string;
+          url: string;
+        }[];
+        gitCredentialId?: string;
+        updatedAt?: number;
+        sourceless?: boolean;
+        productionBranch?: string;
       };
   microfrontends?:
     | {
@@ -14096,6 +14292,29 @@ export type UpdateProjectResponse = {
         type?: 'bitbucket';
         uuid?: string;
         workspaceUuid?: string;
+        createdAt?: number;
+        deployHooks: {
+          createdAt?: number;
+          id: string;
+          name: string;
+          ref: string;
+          url: string;
+        }[];
+        gitCredentialId?: string;
+        updatedAt?: number;
+        sourceless?: boolean;
+        productionBranch?: string;
+      }
+    | {
+        org?: string;
+        /**
+         * A new field, should be included in all new project links, is being added just in time when a deployment is created. This is needed for Protected Git scopes.
+         */
+        repoOwnerId?: number;
+        repo?: string;
+        repoId?: number;
+        type?: 'github-custom-host';
+        host?: string;
         createdAt?: number;
         deployHooks: {
           createdAt?: number;

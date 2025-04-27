@@ -962,7 +962,7 @@ export type UserEvent = {
                 id: string;
               }
             | {
-                type: 'github-oauth-custom-host';
+                type: 'github-oauth-custom-host' | 'github-app-custom-host';
                 host: string;
                 id: string;
               }
@@ -990,7 +990,7 @@ export type UserEvent = {
           id: string;
           importFlowGitNamespace?: string | number | null;
           importFlowGitNamespaceId?: string | number | null;
-          importFlowGitProvider?: 'github' | 'gitlab' | 'bitbucket' | null;
+          importFlowGitProvider?: 'github' | 'gitlab' | 'bitbucket' | 'github-custom-host' | null;
           preferredScopesAndGitNamespaces?: {
             scopeId: string;
             gitNamespaceId: string | number | null;
@@ -3095,7 +3095,7 @@ export type AuthUser = {
   }[];
   importFlowGitNamespace?: string | number | null;
   importFlowGitNamespaceId?: string | number | null;
-  importFlowGitProvider?: 'bitbucket' | 'github' | 'gitlab' | null;
+  importFlowGitProvider?: 'bitbucket' | 'github' | 'github-custom-host' | 'gitlab' | null;
   preferredScopesAndGitNamespaces?: {
     scopeId: string;
     gitNamespaceId: string | number | null;
