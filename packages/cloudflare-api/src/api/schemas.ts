@@ -50,12 +50,14 @@ export type AaaAlertType =
   | 'block_notification_block_removed'
   | 'block_notification_new_block'
   | 'block_notification_review_rejected'
+  | 'bot_traffic_basic_alert'
   | 'brand_protection_alert'
   | 'brand_protection_digest'
   | 'clickhouse_alert_fw_anomaly'
   | 'clickhouse_alert_fw_ent_anomaly'
   | 'cloudforce_one_request_notification'
   | 'custom_analytics'
+  | 'custom_bot_detection_alert'
   | 'custom_ssl_certificate_event_type'
   | 'dedicated_ssl_certificate_event_type'
   | 'device_connectivity_anomaly_alert'
@@ -34981,7 +34983,7 @@ export type R2SlurperApiV4Success = {
 };
 
 /**
- * Account ID
+ * Account ID.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -34989,7 +34991,7 @@ export type R2SlurperApiV4Success = {
 export type R2AccountIdentifier = string;
 
 /**
- * Metrics based on the class they belong to
+ * Metrics based on the class they belong to.
  */
 export type R2AccountLevelMetrics = {
   infrequentAccess?: R2ClassBasedMetrics;
@@ -35001,7 +35003,7 @@ export type R2AccountLevelMetrics = {
  */
 export type R2AddCustomDomainRequest = {
   /**
-   * Name of the custom domain to be added
+   * Name of the custom domain to be added.
    */
   domain: string;
   /**
@@ -35013,7 +35015,7 @@ export type R2AddCustomDomainRequest = {
    */
   minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
   /**
-   * Zone ID of the custom domain
+   * Zone ID of the custom domain.
    */
   zoneId: string;
 };
@@ -35023,11 +35025,11 @@ export type R2AddCustomDomainRequest = {
  */
 export type R2AddCustomDomainResponse = {
   /**
-   * Domain name of the affected custom domain
+   * Domain name of the affected custom domain.
    */
   domain: string;
   /**
-   * Whether this bucket is publicly accessible at the specified custom domain
+   * Whether this bucket is publicly accessible at the specified custom domain.
    */
   enabled: boolean;
   /**
@@ -35037,11 +35039,11 @@ export type R2AddCustomDomainResponse = {
 };
 
 /**
- * A single R2 bucket
+ * A single R2 bucket.
  */
 export type R2Bucket = {
   /**
-   * Creation timestamp
+   * Creation timestamp.
    */
   creation_date?: string;
   location?: R2BucketLocation;
@@ -35063,17 +35065,17 @@ export type R2BucketConfig = {
 export type R2BucketLockRule = {
   condition: R2LockRuleAgeCondition | R2LockRuleDateCondition | R2LockRuleIndefiniteCondition;
   /**
-   * Whether or not this rule is in effect
+   * Whether or not this rule is in effect.
    */
   enabled: boolean;
   /**
-   * Unique identifier for this rule
+   * Unique identifier for this rule.
    *
    * @example Lock all objects for 24 hours
    */
   id: string;
   /**
-   * Rule will only apply to objects/uploads in the bucket that start with the given prefix, an empty prefix can be provided to scope rule to all objects/uploads
+   * Rule will only apply to objects/uploads in the bucket that start with the given prefix, an empty prefix can be provided to scope rule to all objects/uploads.
    */
   prefix?: string;
 };
@@ -35083,12 +35085,12 @@ export type R2BucketLockRuleConfig = {
 };
 
 /**
- * Location of the bucket
+ * Location of the bucket.
  */
 export type R2BucketLocation = 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam' | 'oc';
 
 /**
- * Name of the bucket
+ * Name of the bucket.
  *
  * @example example-bucket
  * @maxLength 64
@@ -35098,7 +35100,7 @@ export type R2BucketLocation = 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam' | 'oc'
 export type R2BucketName = string;
 
 /**
- * Metrics based on what state they are in(uploaded or published)
+ * Metrics based on what state they are in(uploaded or published).
  */
 export type R2ClassBasedMetrics = {
   published?: R2ObjectSizeMetrics;
@@ -35128,7 +35130,7 @@ export type R2CorsRule = {
    */
   exposeHeaders?: string[];
   /**
-   * Identifier for this rule
+   * Identifier for this rule.
    *
    * @example Allow Local Development
    */
@@ -35142,7 +35144,7 @@ export type R2CorsRule = {
 };
 
 /**
- * Name of the custom domain
+ * Name of the custom domain.
  *
  * @example example-domain/custom-domain.com
  */
@@ -35153,7 +35155,7 @@ export type R2DomainName = string;
  */
 export type R2EditCustomDomainRequest = {
   /**
-   * Whether to enable public bucket access at the specified custom domain
+   * Whether to enable public bucket access at the specified custom domain.
    */
   enabled?: boolean;
   /**
@@ -35167,11 +35169,11 @@ export type R2EditCustomDomainRequest = {
  */
 export type R2EditCustomDomainResponse = {
   /**
-   * Domain name of the affected custom domain
+   * Domain name of the affected custom domain.
    */
   domain: string;
   /**
-   * Whether this bucket is publicly accessible at the specified custom domain
+   * Whether this bucket is publicly accessible at the specified custom domain.
    */
   enabled?: boolean;
   /**
@@ -35185,19 +35187,19 @@ export type R2EditCustomDomainResponse = {
  */
 export type R2EditManagedDomainRequest = {
   /**
-   * Whether to enable public bucket access at the r2.dev domain
+   * Whether to enable public bucket access at the r2.dev domain.
    */
   enabled: boolean;
 };
 
 export type R2EnableSippyAws = {
   /**
-   * R2 bucket to copy objects to
+   * R2 bucket to copy objects to.
    */
   destination?: {
     /**
      * ID of a Cloudflare API token.
-     * This is the value labelled "Access Key ID" when creating an API
+     * This is the value labelled "Access Key ID" when creating an API.
      * token from the [R2 dashboard](https://dash.cloudflare.com/?to=/:account/r2/api-tokens).
      *
      * Sippy will use this token when writing objects to R2, so it is
@@ -35207,7 +35209,7 @@ export type R2EnableSippyAws = {
     provider?: 'r2';
     /**
      * Value of a Cloudflare API token.
-     * This is the value labelled "Secret Access Key" when creating an API
+     * This is the value labelled "Secret Access Key" when creating an API.
      * token from the [R2 dashboard](https://dash.cloudflare.com/?to=/:account/r2/api-tokens).
      *
      * Sippy will use this token when writing objects to R2, so it is
@@ -35218,24 +35220,24 @@ export type R2EnableSippyAws = {
     secretAccessKey?: string;
   };
   /**
-   * AWS S3 bucket to copy objects from
+   * AWS S3 bucket to copy objects from.
    */
   source?: {
     /**
-     * Access Key ID of an IAM credential (ideally scoped to a single S3 bucket)
+     * Access Key ID of an IAM credential (ideally scoped to a single S3 bucket).
      */
     accessKeyId?: string;
     /**
-     * Name of the AWS S3 bucket
+     * Name of the AWS S3 bucket.
      */
     bucket?: string;
     provider?: 'aws';
     /**
-     * Name of the AWS availability zone
+     * Name of the AWS availability zone.
      */
     region?: string;
     /**
-     * Secret Access Key of an IAM credential (ideally scoped to a single S3 bucket)
+     * Secret Access Key of an IAM credential (ideally scoped to a single S3 bucket).
      *
      * @x-sensitive true
      */
@@ -35245,12 +35247,12 @@ export type R2EnableSippyAws = {
 
 export type R2EnableSippyGcs = {
   /**
-   * R2 bucket to copy objects to
+   * R2 bucket to copy objects to.
    */
   destination?: {
     /**
      * ID of a Cloudflare API token.
-     * This is the value labelled "Access Key ID" when creating an API
+     * This is the value labelled "Access Key ID" when creating an API.
      * token from the [R2 dashboard](https://dash.cloudflare.com/?to=/:account/r2/api-tokens).
      *
      * Sippy will use this token when writing objects to R2, so it is
@@ -35260,7 +35262,7 @@ export type R2EnableSippyGcs = {
     provider?: 'r2';
     /**
      * Value of a Cloudflare API token.
-     * This is the value labelled "Secret Access Key" when creating an API
+     * This is the value labelled "Secret Access Key" when creating an API.
      * token from the [R2 dashboard](https://dash.cloudflare.com/?to=/:account/r2/api-tokens).
      *
      * Sippy will use this token when writing objects to R2, so it is
@@ -35271,19 +35273,19 @@ export type R2EnableSippyGcs = {
     secretAccessKey?: string;
   };
   /**
-   * GCS bucket to copy objects from
+   * GCS bucket to copy objects from.
    */
   source?: {
     /**
-     * Name of the GCS bucket
+     * Name of the GCS bucket.
      */
     bucket?: string;
     /**
-     * Client email of an IAM credential (ideally scoped to a single GCS bucket)
+     * Client email of an IAM credential (ideally scoped to a single GCS bucket).
      */
     clientEmail?: string;
     /**
-     * Private Key of an IAM credential (ideally scoped to a single GCS bucket)
+     * Private Key of an IAM credential (ideally scoped to a single GCS bucket).
      *
      * @x-sensitive true
      */
@@ -35305,11 +35307,11 @@ export type R2Errors = {
  */
 export type R2GetCustomDomainResponse = {
   /**
-   * Domain name of the custom domain to be added
+   * Domain name of the custom domain to be added.
    */
   domain: string;
   /**
-   * Whether this bucket is publicly accessible at the specified custom domain
+   * Whether this bucket is publicly accessible at the specified custom domain.
    */
   enabled: boolean;
   /**
@@ -35318,26 +35320,26 @@ export type R2GetCustomDomainResponse = {
   minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
   status: {
     /**
-     * Ownership status of the domain
+     * Ownership status of the domain.
      */
     ownership: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error' | 'unknown';
     /**
-     * SSL certificate status
+     * SSL certificate status.
      */
     ssl: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error' | 'unknown';
   };
   /**
-   * Zone ID of the custom domain resides in
+   * Zone ID of the custom domain resides in.
    */
   zoneId?: string;
   /**
-   * Zone that the custom domain resides in
+   * Zone that the custom domain resides in.
    */
   zoneName?: string;
 };
 
 /**
- * Condition for lifecycle transitions to apply after an object reaches an age in seconds
+ * Condition for lifecycle transitions to apply after an object reaches an age in seconds.
  */
 export type R2LifecycleAgeCondition = {
   maxAge: number;
@@ -35349,7 +35351,7 @@ export type R2LifecycleConfig = {
 };
 
 /**
- * Condition for lifecycle transitions to apply on a specific date
+ * Condition for lifecycle transitions to apply on a specific date.
  */
 export type R2LifecycleDateCondition = {
   /**
@@ -35361,41 +35363,41 @@ export type R2LifecycleDateCondition = {
 
 export type R2LifecycleRule = {
   /**
-   * Transition to abort ongoing multipart uploads
+   * Transition to abort ongoing multipart uploads.
    */
   abortMultipartUploadsTransition?: {
     /**
-     * Condition for lifecycle transitions to apply after an object reaches an age in seconds
+     * Condition for lifecycle transitions to apply after an object reaches an age in seconds.
      */
     condition?: R2LifecycleAgeCondition;
   };
   /**
-   * Conditions that apply to all transitions of this rule
+   * Conditions that apply to all transitions of this rule.
    */
   conditions: {
     /**
-     * Transitions will only apply to objects/uploads in the bucket that start with the given prefix, an empty prefix can be provided to scope rule to all objects/uploads
+     * Transitions will only apply to objects/uploads in the bucket that start with the given prefix, an empty prefix can be provided to scope rule to all objects/uploads.
      */
     prefix: string;
   };
   /**
-   * Transition to delete objects
+   * Transition to delete objects.
    */
   deleteObjectsTransition?: {
     condition?: R2LifecycleAgeCondition | R2LifecycleDateCondition;
   };
   /**
-   * Whether or not this rule is in effect
+   * Whether or not this rule is in effect.
    */
   enabled: boolean;
   /**
-   * Unique identifier for this rule
+   * Unique identifier for this rule.
    *
    * @example Expire all objects older than 24 hours
    */
   id: string;
   /**
-   * Transitions to change the storage class of objects
+   * Transitions to change the storage class of objects.
    */
   storageClassTransitions?: R2LifecycleStorageTransition[];
 };
@@ -35411,11 +35413,11 @@ export type R2LifecycleStorageTransition = {
 export type R2ListCustomDomainsResponse = {
   domains: {
     /**
-     * Domain name of the custom domain to be added
+     * Domain name of the custom domain to be added.
      */
     domain: string;
     /**
-     * Whether this bucket is publicly accessible at the specified custom domain
+     * Whether this bucket is publicly accessible at the specified custom domain.
      */
     enabled: boolean;
     /**
@@ -35424,27 +35426,27 @@ export type R2ListCustomDomainsResponse = {
     minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
     status: {
       /**
-       * Ownership status of the domain
+       * Ownership status of the domain.
        */
       ownership: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error' | 'unknown';
       /**
-       * SSL certificate status
+       * SSL certificate status.
        */
       ssl: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error' | 'unknown';
     };
     /**
-     * Zone ID of the custom domain resides in
+     * Zone ID of the custom domain resides in.
      */
     zoneId?: string;
     /**
-     * Zone that the custom domain resides in
+     * Zone that the custom domain resides in.
      */
     zoneName?: string;
   }[];
 };
 
 /**
- * Condition to apply a lock rule to an object for how long in seconds
+ * Condition to apply a lock rule to an object for how long in seconds.
  */
 export type R2LockRuleAgeCondition = {
   /**
@@ -35455,7 +35457,7 @@ export type R2LockRuleAgeCondition = {
 };
 
 /**
- * Condition to apply a lock rule to an object until a specific date
+ * Condition to apply a lock rule to an object until a specific date.
  */
 export type R2LockRuleDateCondition = {
   /**
@@ -35466,7 +35468,7 @@ export type R2LockRuleDateCondition = {
 };
 
 /**
- * Condition to apply a lock rule indefinitely
+ * Condition to apply a lock rule indefinitely.
  */
 export type R2LockRuleIndefiniteCondition = {
   type: 'Indefinite';
@@ -35477,17 +35479,17 @@ export type R2LockRuleIndefiniteCondition = {
  */
 export type R2ManagedDomainResponse = {
   /**
-   * Bucket ID
+   * Bucket ID.
    *
    * @maxLength 32
    */
   bucketId: string;
   /**
-   * Domain name of the bucket's r2.dev domain
+   * Domain name of the bucket's r2.dev domain.
    */
   domain: string;
   /**
-   * Whether this bucket is publicly accessible at the r2.dev domain
+   * Whether this bucket is publicly accessible at the r2.dev domain.
    */
   enabled: boolean;
 };
@@ -35495,25 +35497,25 @@ export type R2ManagedDomainResponse = {
 export type R2Messages = string[];
 
 /**
- * Metrics on number of objects/amount of storage used
+ * Metrics on number of objects/amount of storage used.
  */
 export type R2ObjectSizeMetrics = {
   /**
-   * Amount of
+   * Amount of.
    */
   metadataSize?: number;
   /**
-   * Number of objects stored
+   * Number of objects stored.
    */
   objects?: number;
   /**
-   * Amount of storage used by object data
+   * Amount of storage used by object data.
    */
   payloadSize?: number;
 };
 
 /**
- * Queue ID
+ * Queue ID.
  *
  * @example 11111aa1-11aa-111a-a1a1-a1a111a11a11
  * @maxLength 32
@@ -35522,20 +35524,20 @@ export type R2QueueIdentifier = string;
 
 export type R2QueuesConfig = {
   /**
-   * Queue ID
+   * Queue ID.
    *
    * @example 11111aa1-11aa-111a-a1a1-a1a111a11a11
    */
   queueId?: string;
   /**
-   * Name of the queue
+   * Name of the queue.
    *
    * @example first-queue
    */
   queueName?: string;
   rules?: {
     /**
-     * Array of R2 object actions that will trigger notifications
+     * Array of R2 object actions that will trigger notifications.
      *
      * @example PutObject
      * @example CopyObject
@@ -35543,31 +35545,31 @@ export type R2QueuesConfig = {
      */
     actions: R2R2Action[];
     /**
-     * A description that can be used to identify the event notification rule after creation
+     * A description that can be used to identify the event notification rule after creation.
      *
      * @example Notifications from source bucket to queue
      */
     description?: string;
     /**
-     * Notifications will be sent only for objects with this prefix
+     * Notifications will be sent only for objects with this prefix.
      *
      * @example img/
      */
     prefix?: string;
     /**
-     * Notifications will be sent only for objects with this suffix
+     * Notifications will be sent only for objects with this suffix.
      *
      * @example .jpeg
      */
     suffix?: string;
     /**
-     * Timestamp when the rule was created
+     * Timestamp when the rule was created.
      *
      * @example 2024-09-19T21:54:48.405Z
      */
     createdAt?: string;
     /**
-     * Rule ID
+     * Rule ID.
      *
      * @example 11111aa1-11aa-111a-a1a1-a1a111a11a11
      */
@@ -35582,20 +35584,20 @@ export type R2R2Action = 'PutObject' | 'CopyObject' | 'DeleteObject' | 'Complete
  */
 export type R2RemoveCustomDomainResponse = {
   /**
-   * Name of the removed custom domain
+   * Name of the removed custom domain.
    */
   domain: string;
 };
 
 export type R2ResultInfo = {
   /**
-   * A continuation token that should be used to fetch the next page of results
+   * A continuation token that should be used to fetch the next page of results.
    *
    * @example 1-JTdCJTIydiUyMiUzQTElMkMlMjJzdGFydEFmdGVyJTIyJTNBJTIyZGF2aWRwdWJsaWMlMjIlN0Q=
    */
   cursor?: string;
   /**
-   * Maximum number of results on this page
+   * Maximum number of results on this page.
    *
    * @example 20
    */
@@ -35604,7 +35606,7 @@ export type R2ResultInfo = {
 
 export type R2Rule = {
   /**
-   * Array of R2 object actions that will trigger notifications
+   * Array of R2 object actions that will trigger notifications.
    *
    * @example PutObject
    * @example CopyObject
@@ -35612,19 +35614,19 @@ export type R2Rule = {
    */
   actions: R2R2Action[];
   /**
-   * A description that can be used to identify the event notification rule after creation
+   * A description that can be used to identify the event notification rule after creation.
    *
    * @example Notifications from source bucket to queue
    */
   description?: string;
   /**
-   * Notifications will be sent only for objects with this prefix
+   * Notifications will be sent only for objects with this prefix.
    *
    * @example img/
    */
   prefix?: string;
   /**
-   * Notifications will be sent only for objects with this suffix
+   * Notifications will be sent only for objects with this suffix.
    *
    * @example .jpeg
    */
@@ -35633,36 +35635,36 @@ export type R2Rule = {
 
 export type R2Sippy = {
   /**
-   * Details about the configured destination bucket
+   * Details about the configured destination bucket.
    */
   destination?: {
     /**
      * ID of the Cloudflare API token used when writing objects to this
-     * bucket
+     * bucket.
      */
     accessKeyId?: string;
     account?: string;
     /**
-     * Name of the bucket on the provider
+     * Name of the bucket on the provider.
      */
     bucket?: string;
     provider?: 'r2';
   };
   /**
-   * State of Sippy for this bucket
+   * State of Sippy for this bucket.
    */
   enabled?: boolean;
   /**
-   * Details about the configured source bucket
+   * Details about the configured source bucket.
    */
   source?: {
     /**
-     * Name of the bucket on the provider
+     * Name of the bucket on the provider.
      */
     bucket?: string;
     provider?: 'aws' | 'gcs';
     /**
-     * Region where the bucket resides (AWS only)
+     * Region where the bucket resides (AWS only).
      */
     region?: string | null;
   };
@@ -35680,27 +35682,27 @@ export type R2StorageClass = 'Standard' | 'InfrequentAccess';
  */
 export type R2TempAccessCredsRequest = {
   /**
-   * Name of the R2 bucket
+   * Name of the R2 bucket.
    */
   bucket: string;
   /**
-   * Optional object paths to scope the credentials to
+   * Optional object paths to scope the credentials to.
    */
   objects?: string[];
   /**
-   * The parent access key id to use for signing
+   * The parent access key id to use for signing.
    */
   parentAccessKeyId: string;
   /**
-   * Permissions allowed on the credentials
+   * Permissions allowed on the credentials.
    */
   permission: 'admin-read-write' | 'admin-read-only' | 'object-read-write' | 'object-read-only';
   /**
-   * Optional prefix paths to scope the credentials to
+   * Optional prefix paths to scope the credentials to.
    */
   prefixes?: string[];
   /**
-   * How long the credentials will live for in seconds
+   * How long the credentials will live for in seconds.
    *
    * @default 900
    * @maximum 604800
@@ -35713,17 +35715,17 @@ export type R2TempAccessCredsRequest = {
  */
 export type R2TempAccessCredsResponse = {
   /**
-   * ID for new access key
+   * ID for new access key.
    */
   accessKeyId?: string;
   /**
-   * Secret access key
+   * Secret access key.
    *
    * @x-sensitive true
    */
   secretAccessKey?: string;
   /**
-   * Security token
+   * Security token.
    *
    * @x-sensitive true
    */
@@ -35735,7 +35737,7 @@ export type R2V4Response = {
   messages: R2Messages;
   result: Record<string, any>;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    */
   success: true;
 };
@@ -35745,7 +35747,7 @@ export type R2V4ResponseFailure = {
   messages: R2Messages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -52914,7 +52916,7 @@ export type WorkersCreateAssetsUploadSessionObject = {
   /**
    * A manifest ([path]: {hash, size}) map of files to upload. As an example, `/blog/hello-world.html` would be a valid path key.
    */
-  manifest?: {
+  manifest: {
     [key: string]: WorkersManifestValue;
   };
 };
@@ -53130,11 +53132,11 @@ export type WorkersManifestValue = {
   /**
    * The hash of the file.
    */
-  hash?: string;
+  hash: string;
   /**
    * The size of the file in bytes.
    */
-  size?: number;
+  size: number;
 };
 
 export type WorkersMessages = {
@@ -53250,14 +53252,12 @@ export type WorkersMultipartScript = {
         /**
          * When true, requests will always invoke the Worker script. Otherwise, attempt to serve an asset matching the request, falling back to the Worker script.
          *
-         * @default false
          * @example false
          */
         run_worker_first?: boolean;
         /**
          * When true and the incoming request matches an asset, that will be served instead of invoking the Worker script. When false, requests will always invoke the Worker script.
          *
-         * @default true
          * @deprecated true
          * @example true
          */
