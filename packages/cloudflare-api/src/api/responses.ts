@@ -5,6 +5,102 @@
  */
 import type * as Schemas from './schemas';
 
+export type ApiShieldGenericFailure = Schemas.ApiShieldApiResponseCommonFailure;
+
+export type ApiShieldGlobalSettingsEditSuccess = Schemas.ApiShieldApiResponseSingle & {
+  result: Schemas.ApiShieldGlobalSettings;
+};
+
+export type ApiShieldGlobalSettingsGetSuccess = Schemas.ApiShieldApiResponseSingle & {
+  result: Schemas.ApiShieldGlobalSettings;
+};
+
+export type ApiShieldGlobalSettingsUpdateSuccess = Schemas.ApiShieldApiResponseSingle & {
+  result: Schemas.ApiShieldGlobalSettings;
+};
+
+export type ApiShieldPerOperationSettingGetSuccess = Schemas.ApiShieldApiResponseCommon & {
+  result: Schemas.ApiShieldPerOperationSetting;
+};
+
+export type ApiShieldPerOperationSettingUpdateSuccess = Schemas.ApiShieldApiResponseCommon & {
+  result: Schemas.ApiShieldPerOperationSetting;
+};
+
+export type ApiShieldPerOperationSettingsBulkEditSuccess = Schemas.ApiShieldApiResponseCommon & {
+  result: Schemas.ApiShieldPerOperationBulkSettings;
+};
+
+export type ApiShieldPerOperationSettingsDeleteSuccess = Schemas.ApiShieldApiResponseCommon & {
+  result: {
+    operation_id?: Schemas.ApiShieldSchemasUuid;
+  };
+};
+
+export type ApiShieldPerOperationSettingsListSuccess = Schemas.ApiShieldApiResponseCollection & {
+  result: Schemas.ApiShieldPerOperationSetting[];
+};
+
+export type ApiShieldSchemaCreateFailure = {
+  /**
+   * Describes errors in the schema that prohibited accepting the schema.
+   *
+   * @example {"code":7003,"message":"No route for the URI"}
+   * @minLength 1
+   */
+  errors: Schemas.ApiShieldMessages;
+  /**
+   * Describes issues in the schema and how they were resolved to accept the schema.
+   */
+  messages: Schemas.ApiShieldMessages;
+  result: any | null;
+  /**
+   * Whether the API call was successful.
+   *
+   * @example false
+   */
+  success?: false;
+};
+
+export type ApiShieldSchemaCreateSuccess = Schemas.ApiShieldPublicSchemaSuccessResult & {
+  /**
+   * Describes errors in the schema that prohibited accepting the schema.
+   */
+  errors?: Schemas.ApiShieldSchemaIssueNotification[];
+  /**
+   * Describes issues in the schema and how they were resolved to accept the schema.
+   */
+  messages: Schemas.ApiShieldSchemaIssueNotification[];
+};
+
+export type ApiShieldSchemaDeleteSuccess = Schemas.ApiShieldApiResponseSingle & {
+  result: {
+    /**
+     * The ID of the schema that was just deleted
+     *
+     * @format uuid
+     * @x-auditable true
+     */
+    schema_id: string;
+  };
+};
+
+export type ApiShieldSchemaEditSuccess = Schemas.ApiShieldPublicSchemaSuccessResult;
+
+export type ApiShieldSchemaGetSuccess = Schemas.ApiShieldPublicSchemaSuccessResult;
+
+export type ApiShieldSchemaHostsGetSuccess = Schemas.ApiShieldApiResponseCollection & {
+  result: Schemas.ApiShieldSchemaHosts[];
+};
+
+export type ApiShieldSchemasExtractOperationsGetSuccess = Schemas.ApiShieldApiResponseCollection & {
+  result: (Schemas.ApiShieldOperation | Schemas.ApiShieldBasicOperation)[];
+};
+
+export type ApiShieldSchemasListSuccess = Schemas.ApiShieldApiResponseCollection & {
+  result: Schemas.ApiShieldSchemasPublicSchema[];
+};
+
 export type EmailSecurityClientError = {
   /**
    * @example {"code":7003,"message":"No route for the URI"}
