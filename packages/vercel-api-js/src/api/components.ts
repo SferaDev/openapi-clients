@@ -6465,11 +6465,6 @@ export type GetDomainConfigResponse = {
    * Whether or not the domain is configured AND we can automatically generate a TLS certificate.
    */
   misconfigured: boolean;
-  /**
-   * Recommended IPs and CNAME for the domain.
-   */
-  recommendedIps?: string[];
-  recommendedCname?: string;
 };
 
 export type GetDomainConfigVariables = {
@@ -15303,6 +15298,12 @@ export type GetV9ProjectsIdOrNameCustomEnvironmentsQueryParams = {
 export type GetV9ProjectsIdOrNameCustomEnvironmentsError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetV9ProjectsIdOrNameCustomEnvironmentsResponse = {
+  /**
+   * The maximum number of custom environments allowed either by the team's plan type or a custom override.
+   */
+  accountLimit: {
+    total: number;
+  };
   environments: Record<string, any>[];
 };
 
