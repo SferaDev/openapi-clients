@@ -10535,6 +10535,54 @@ export type ApiShieldDiscoveryOperation = {
  */
 export type ApiShieldEndpoint = string;
 
+export type ApiShieldGlobalSettingChangeBase = {
+  /**
+   * The default mitigation action used
+   * Mitigation actions are as follows:
+   *
+   *   - `"log"` - log request when request does not conform to schema
+   *   - `"block"` - deny access to the site when request does not conform to schema
+   *   - `"none"` - skip running schema validation
+   *
+   * @example block
+   * @x-auditable true
+   */
+  validation_default_mitigation_action?: 'none' | 'log' | 'block';
+  /**
+   * When set, this overrides both zone level and operation level mitigation actions.
+   *
+   *   - `"none"` - skip running schema validation entirely for the request
+   *   - `null` - clears any existing override
+   *
+   * @x-auditable true
+   */
+  validation_override_mitigation_action?: 'none' | any | null;
+};
+
+export type ApiShieldGlobalSettings = {
+  /**
+   * The default mitigation action used
+   *
+   * Mitigation actions are as follows:
+   *
+   *   - `log` - log request when request does not conform to schema
+   *   - `block` - deny access to the site when request does not conform to schema
+   *   - `none` - skip running schema validation
+   *
+   * @example block
+   * @x-auditable true
+   */
+  validation_default_mitigation_action: 'none' | 'log' | 'block';
+  /**
+   * When not null, this overrides global both zone level and operation level mitigation actions. This can serve as a quick way to disable schema validation for the whole zone.
+   *
+   *   - `"none"` will skip running schema validation entirely for the request
+   *
+   * @x-auditable true
+   */
+  validation_override_mitigation_action?: 'none';
+};
+
 /**
  * RFC3986-compliant host.
  *
@@ -10816,6 +10864,45 @@ export type ApiShieldPatchDiscoveryResponse = ApiShieldApiResponseCommon & {
 };
 
 /**
+ * Operation ID to per operation setting mapping
+ *
+ * @example {"3818d821-5901-4147-a474-f5f5aec1d54e":{"mitigation_action":"log"},"b17c8043-99a0-4202-b7d9-8f7cdbee02cd":{"mitigation_action":"block"}}
+ */
+export type ApiShieldPerOperationBulkSettings = {
+  [key: string]: ApiShieldPerOperationSetting;
+};
+
+export type ApiShieldPerOperationSetting = {
+  /**
+   * When set, this applies a mitigation action to this operation which supersedes a global schema validation setting just for this operation
+   *
+   *   - `"log"` - log request when request does not conform to schema for this operation
+   *   - `"block"` - deny access to the site when request does not conform to schema for this operation
+   *   - `"none"` - will skip mitigation for this operation
+   *
+   * @example block
+   * @x-auditable true
+   */
+  mitigation_action: 'log' | 'block' | 'none';
+  operation_id: ApiShieldSchemasUuid;
+};
+
+export type ApiShieldPerOperationSettingChangeBase = {
+  /**
+   * When set, this applies a mitigation action to this operation
+   *
+   *   - `"log"` - log request when request does not conform to schema for this operation
+   *   - `"block"` - deny access to the site when request does not conform to schema for this operation
+   *   - `"none"` - will skip mitigation for this operation
+   *   - `null` - clears any mitigation action
+   *
+   * @example block
+   * @x-auditable true
+   */
+  mitigation_action?: 'log' | 'block' | 'none' | any | null;
+};
+
+/**
  * The period over which this threshold is suggested.
  *
  * @x-auditable true
@@ -10849,6 +10936,10 @@ export type ApiShieldPublicSchema = {
    */
   source?: string;
   validation_enabled?: ApiShieldValidationEnabled;
+};
+
+export type ApiShieldPublicSchemaSuccessResult = ApiShieldApiResponseCommon & {
+  result: ApiShieldSchemasPublicSchema;
 };
 
 export type ApiShieldRequestExpressionTemplatesFallthrough = {
@@ -10938,6 +11029,49 @@ export type ApiShieldSchemaResponseWithThresholds = ApiShieldApiResponseCommon &
   };
 };
 
+export type ApiShieldSchemaHosts = {
+  created_at: ApiShieldSchemasTimestamp;
+  /**
+   * Hosts serving the schema, e.g zone.host.com
+   *
+   * @x-auditable true
+   */
+  hosts: string[];
+  /**
+   * Name of the schema
+   *
+   * @example petstore schema
+   * @x-auditable true
+   */
+  name: string;
+  /**
+   * A unique identifier of this schema
+   *
+   * @x-auditable true
+   * @format uuid
+   */
+  schema_id: ApiShieldSchemasUuid & string;
+};
+
+export type ApiShieldSchemaIssueNotification = {
+  /**
+   * A unique error code that describes the kind of issue with the schema
+   *
+   * @minimum 1000
+   */
+  code: number;
+  /**
+   * A short text explaining the issue with the schema
+   */
+  message: string;
+  source?: {
+    /**
+     * A list of JSON path expression(s) that describe the location(s) of the issue within the provided resource. See [https://goessner.net/articles/JsonPath/](https://goessner.net/articles/JsonPath/) for JSONPath specification.
+     */
+    locations?: string[];
+  } | null;
+};
+
 export type ApiShieldSchemaResponseDiscovery = ApiShieldApiResponseCommon & {
   result: {
     schemas: ApiShieldOpenapi[];
@@ -11001,6 +11135,47 @@ export type ApiShieldSchemaUploadResponse = {
  * @x-auditable true
  */
 export type ApiShieldSchemasIdentifier = ApiShieldIdentifier & string;
+
+/**
+ * A schema used in schema validation
+ */
+export type ApiShieldSchemasPublicSchema = {
+  created_at: ApiShieldSchemasTimestamp;
+  /**
+   * The kind of the schema
+   *
+   * @example openapi_v3
+   * @x-auditable true
+   */
+  kind: 'openapi_v3';
+  /**
+   * A human-readable name for the schema
+   *
+   * @example petstore schema
+   * @x-auditable true
+   */
+  name: string;
+  /**
+   * A unique identifier of this schema
+   *
+   * @x-auditable true
+   * @format uuid
+   */
+  schema_id: ApiShieldSchemasUuid & string;
+  /**
+   * The raw schema, e.g., the OpenAPI schema, either as JSON or YAML
+   *
+   * @example <schema file contents>
+   * @x-auditable true
+   */
+  source: string;
+  /**
+   * An indicator if this schema is enabled
+   *
+   * @x-auditable true
+   */
+  validation_enabled?: boolean;
+};
 
 /**
  * @example 2014-01-01T05:20:00.12345Z
@@ -15880,6 +16055,8 @@ export type DlpCustomProfile = {
   id: string;
   /**
    * The name of the profile.
+   *
+   * @x-auditable true
    */
   name: string;
   ocr_enabled: boolean;
@@ -25696,9 +25873,9 @@ export type IntelWhois = {
 export type ListsApiResponseCollection = {
   errors: ListsMessages;
   messages: ListsMessages;
-  result: Record<string, any> | any[] | null;
+  result: Record<string, any> | Record<string, any>[] | null;
   /**
-   * Whether the API call was successful
+   * Defines whether the API call was successful.
    *
    * @example true
    */
@@ -25708,9 +25885,9 @@ export type ListsApiResponseCollection = {
 export type ListsApiResponseCommon = {
   errors: ListsMessages;
   messages: ListsMessages;
-  result: Record<string, any> | any[];
+  result: Record<string, any> | Record<string, any>[];
   /**
-   * Whether the API call was successful
+   * Defines whether the API call was successful.
    *
    * @example true
    */
@@ -25726,7 +25903,7 @@ export type ListsApiResponseCommonFailure = {
   messages: ListsMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Defines whether the API call was successful.
    *
    * @example false
    */
@@ -25741,6 +25918,7 @@ export type ListsBulkOperationResponseCollection = ListsApiResponseCollection & 
  * The RFC 3339 timestamp of when the list was created.
  *
  * @example 2020-01-01T08:00:00Z
+ * @x-auditable true
  */
 export type ListsCreatedOn = string;
 
@@ -25749,14 +25927,16 @@ export type ListsCreatedOn = string;
  *
  * @example This is a note
  * @maxLength 500
+ * @x-auditable true
  */
 export type ListsDescription = string;
 
 /**
- * Identifier
+ * Defines an identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type ListsIdentifier = string;
 
@@ -25770,16 +25950,18 @@ export type ListsItemResponseCollection = ListsApiResponseCollection & {
 };
 
 /**
- * A non-negative 32 bit integer
+ * Defines a non-negative 32 bit integer.
  *
  * @example 5567
+ * @x-auditable true
  */
 export type ListsItemAsn = number;
 
 /**
- * An informative summary of the list item.
+ * Defines an informative summary of the list item.
  *
  * @example Private IP address
+ * @x-auditable true
  */
 export type ListsItemComment = string;
 
@@ -25789,14 +25971,16 @@ export type ListsItemComment = string;
 export type ListsItemHostname = {
   /**
    * @example example.com
+   * @x-auditable true
    */
   url_hostname: string;
 };
 
 /**
- * The unique ID of the item in the List.
+ * Defines the unique ID of the item in the List.
  *
  * @example 34b12448945f11eaa1b71c4d701ab86e
+ * @x-auditable true
  */
 export type ListsItemId = string;
 
@@ -25804,6 +25988,7 @@ export type ListsItemId = string;
  * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a maximum of /64.
  *
  * @example 10.0.0.1
+ * @x-auditable true
  */
 export type ListsItemIp = string;
 
@@ -25813,30 +25998,37 @@ export type ListsItemIp = string;
 export type ListsItemRedirect = {
   /**
    * @default false
+   * @x-auditable true
    */
   include_subdomains?: boolean;
   /**
    * @default false
+   * @x-auditable true
    */
   preserve_path_suffix?: boolean;
   /**
    * @default false
+   * @x-auditable true
    */
   preserve_query_string?: boolean;
   /**
    * @example example.com/arch
+   * @x-auditable true
    */
   source_url: string;
   /**
    * @default 301
+   * @x-auditable true
    */
   status_code?: 301 | 302 | 307 | 308;
   /**
    * @default false
+   * @x-auditable true
    */
   subpath_matching?: boolean;
   /**
    * @example https://archlinux.org/
+   * @x-auditable true
    */
   target_url: string;
 };
@@ -25849,10 +26041,12 @@ export type ListsItemsListResponseCollection = ListsApiResponseCollection & {
     cursors?: {
       /**
        * @example yyy
+       * @x-auditable true
        */
       after?: string;
       /**
        * @example xxx
+       * @x-auditable true
        */
       before?: string;
     };
@@ -25892,9 +26086,9 @@ export type ListsListDeleteResponseCollection = {
     | {
         id?: ListsItemId;
       }
-    | any[];
+    | Record<string, any>[];
   /**
-   * Whether the API call was successful
+   * Defines whether the API call was successful.
    *
    * @example true
    */
@@ -25906,7 +26100,7 @@ export type ListsListResponseCollection = {
   messages: ListsMessages;
   result: ListsList;
   /**
-   * Whether the API call was successful
+   * Defines whether the API call was successful.
    *
    * @example true
    */
@@ -25919,6 +26113,7 @@ export type ListsListResponseCollection = {
  * @example 2c0fc9fa937b11eaa1b71c4d701ab86e
  * @maxLength 32
  * @minLength 32
+ * @x-auditable true
  */
 export type ListsListId = string;
 
@@ -25953,6 +26148,7 @@ export type ListsMessages = {
  * The RFC 3339 timestamp of when the list was last modified.
  *
  * @example 2020-01-10T14:00:00Z
+ * @x-auditable true
  */
 export type ListsModifiedOn = string;
 
@@ -25962,6 +26158,7 @@ export type ListsModifiedOn = string;
  * @example list1
  * @maxLength 50
  * @pattern ^[a-zA-Z0-9_]+$
+ * @x-auditable true
  */
 export type ListsName = string;
 
@@ -25969,6 +26166,7 @@ export type ListsName = string;
  * The number of items in the list.
  *
  * @example 10
+ * @x-auditable true
  */
 export type ListsNumItems = number;
 
@@ -25976,6 +26174,7 @@ export type ListsNumItems = number;
  * The number of [filters](/operations/filters-list-filters) referencing the list.
  *
  * @example 2
+ * @x-auditable true
  */
 export type ListsNumReferencingFilters = number;
 
@@ -25984,12 +26183,14 @@ export type ListsOperation = {
    * The RFC 3339 timestamp of when the operation was completed.
    *
    * @example 2020-01-01T08:00:00Z
+   * @x-auditable true
    */
   completed?: string;
   /**
    * A message describing the error when the status is `failed`.
    *
    * @example This list is at the maximum number of items
+   * @x-auditable true
    */
   error?: string;
   id: ListsOperationId;
@@ -25997,6 +26198,7 @@ export type ListsOperation = {
    * The current status of the asynchronous operation.
    *
    * @example failed
+   * @x-auditable true
    */
   status: 'pending' | 'running' | 'completed' | 'failed';
 };
@@ -26005,6 +26207,7 @@ export type ListsOperation = {
  * The unique operation ID of the asynchronous action.
  *
  * @example 4da8780eeb215e6cb7f48dd981c4ea02
+ * @x-auditable true
  */
 export type ListsOperationId = string;
 
@@ -35004,18 +35207,26 @@ export type R2AccountLevelMetrics = {
 export type R2AddCustomDomainRequest = {
   /**
    * Name of the custom domain to be added.
+   *
+   * @x-auditable true
    */
   domain: string;
   /**
    * Whether to enable public bucket access at the custom domain. If undefined, the domain will be enabled.
+   *
+   * @x-auditable true
    */
   enabled: boolean;
   /**
    * Minimum TLS Version the custom domain will accept for incoming connections. If not set, defaults to 1.0.
+   *
+   * @x-auditable true
    */
   minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
   /**
    * Zone ID of the custom domain.
+   *
+   * @x-auditable true
    */
   zoneId: string;
 };
@@ -35026,6 +35237,8 @@ export type R2AddCustomDomainRequest = {
 export type R2AddCustomDomainResponse = {
   /**
    * Domain name of the affected custom domain.
+   *
+   * @x-auditable true
    */
   domain: string;
   /**
@@ -35034,6 +35247,8 @@ export type R2AddCustomDomainResponse = {
   enabled: boolean;
   /**
    * Minimum TLS Version the custom domain will accept for incoming connections. If not set, defaults to 1.0.
+   *
+   * @x-auditable true
    */
   minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
 };
@@ -35054,6 +35269,8 @@ export type R2Bucket = {
 export type R2BucketConfig = {
   /**
    * Name of the bucket.
+   *
+   * @x-auditable true
    */
   bucketName?: string;
   /**
@@ -35066,16 +35283,21 @@ export type R2BucketLockRule = {
   condition: R2LockRuleAgeCondition | R2LockRuleDateCondition | R2LockRuleIndefiniteCondition;
   /**
    * Whether or not this rule is in effect.
+   *
+   * @x-auditable true
    */
   enabled: boolean;
   /**
    * Unique identifier for this rule.
    *
    * @example Lock all objects for 24 hours
+   * @x-auditable true
    */
   id: string;
   /**
    * Rule will only apply to objects/uploads in the bucket that start with the given prefix, an empty prefix can be provided to scope rule to all objects/uploads.
+   *
+   * @x-auditable true
    */
   prefix?: string;
 };
@@ -35086,6 +35308,8 @@ export type R2BucketLockRuleConfig = {
 
 /**
  * Location of the bucket.
+ *
+ * @x-auditable true
  */
 export type R2BucketLocation = 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam' | 'oc';
 
@@ -35096,6 +35320,7 @@ export type R2BucketLocation = 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam' | 'oc'
  * @maxLength 64
  * @minLength 3
  * @pattern ^[a-z0-9][a-z0-9-]*[a-z0-9]
+ * @x-auditable true
  */
 export type R2BucketName = string;
 
@@ -35133,12 +35358,14 @@ export type R2CorsRule = {
    * Identifier for this rule.
    *
    * @example Allow Local Development
+   * @x-auditable true
    */
   id?: string;
   /**
    * Specifies the amount of time (in seconds) browsers are allowed to cache CORS preflight responses. Browsers may limit this to 2 hours or less, even if the maximum value (86400) is specified.
    *
    * @example 3600
+   * @x-auditable true
    */
   maxAgeSeconds?: number;
 };
@@ -35147,6 +35374,7 @@ export type R2CorsRule = {
  * Name of the custom domain.
  *
  * @example example-domain/custom-domain.com
+ * @x-auditable true
  */
 export type R2DomainName = string;
 
@@ -35156,10 +35384,14 @@ export type R2DomainName = string;
 export type R2EditCustomDomainRequest = {
   /**
    * Whether to enable public bucket access at the specified custom domain.
+   *
+   * @x-auditable true
    */
   enabled?: boolean;
   /**
    * Minimum TLS Version the custom domain will accept for incoming connections. If not set, defaults to previous value.
+   *
+   * @x-auditable true
    */
   minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
 };
@@ -35170,14 +35402,20 @@ export type R2EditCustomDomainRequest = {
 export type R2EditCustomDomainResponse = {
   /**
    * Domain name of the affected custom domain.
+   *
+   * @x-auditable true
    */
   domain: string;
   /**
    * Whether this bucket is publicly accessible at the specified custom domain.
+   *
+   * @x-auditable true
    */
   enabled?: boolean;
   /**
    * Minimum TLS Version the custom domain will accept for incoming connections. If not set, defaults to 1.0.
+   *
+   * @x-auditable true
    */
   minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
 };
@@ -35188,6 +35426,8 @@ export type R2EditCustomDomainResponse = {
 export type R2EditManagedDomainRequest = {
   /**
    * Whether to enable public bucket access at the r2.dev domain.
+   *
+   * @x-auditable true
    */
   enabled: boolean;
 };
@@ -35206,6 +35446,9 @@ export type R2EnableSippyAws = {
      * best to scope this token to the bucket you're enabling Sippy for.
      */
     accessKeyId?: string;
+    /**
+     * @x-auditable true
+     */
     provider?: 'r2';
     /**
      * Value of a Cloudflare API token.
@@ -35229,11 +35472,18 @@ export type R2EnableSippyAws = {
     accessKeyId?: string;
     /**
      * Name of the AWS S3 bucket.
+     *
+     * @x-auditable true
      */
     bucket?: string;
+    /**
+     * @x-auditable true
+     */
     provider?: 'aws';
     /**
      * Name of the AWS availability zone.
+     *
+     * @x-auditable true
      */
     region?: string;
     /**
@@ -35278,6 +35528,8 @@ export type R2EnableSippyGcs = {
   source?: {
     /**
      * Name of the GCS bucket.
+     *
+     * @x-auditable true
      */
     bucket?: string;
     /**
@@ -35308,32 +35560,46 @@ export type R2Errors = {
 export type R2GetCustomDomainResponse = {
   /**
    * Domain name of the custom domain to be added.
+   *
+   * @x-auditable true
    */
   domain: string;
   /**
    * Whether this bucket is publicly accessible at the specified custom domain.
+   *
+   * @x-auditable true
    */
   enabled: boolean;
   /**
    * Minimum TLS Version the custom domain will accept for incoming connections. If not set, defaults to 1.0.
+   *
+   * @x-auditable true
    */
   minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
   status: {
     /**
      * Ownership status of the domain.
+     *
+     * @x-auditable true
      */
     ownership: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error' | 'unknown';
     /**
      * SSL certificate status.
+     *
+     * @x-auditable true
      */
     ssl: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error' | 'unknown';
   };
   /**
    * Zone ID of the custom domain resides in.
+   *
+   * @x-auditable true
    */
   zoneId?: string;
   /**
    * Zone that the custom domain resides in.
+   *
+   * @x-auditable true
    */
   zoneName?: string;
 };
@@ -35342,7 +35608,13 @@ export type R2GetCustomDomainResponse = {
  * Condition for lifecycle transitions to apply after an object reaches an age in seconds.
  */
 export type R2LifecycleAgeCondition = {
+  /**
+   * @x-auditable true
+   */
   maxAge: number;
+  /**
+   * @x-auditable true
+   */
   type: 'Age';
 };
 
@@ -35356,8 +35628,12 @@ export type R2LifecycleConfig = {
 export type R2LifecycleDateCondition = {
   /**
    * @format date
+   * @x-auditable true
    */
   date: string;
+  /**
+   * @x-auditable true
+   */
   type: 'Date';
 };
 
@@ -35377,6 +35653,8 @@ export type R2LifecycleRule = {
   conditions: {
     /**
      * Transitions will only apply to objects/uploads in the bucket that start with the given prefix, an empty prefix can be provided to scope rule to all objects/uploads.
+     *
+     * @x-auditable true
      */
     prefix: string;
   };
@@ -35388,12 +35666,15 @@ export type R2LifecycleRule = {
   };
   /**
    * Whether or not this rule is in effect.
+   *
+   * @x-auditable true
    */
   enabled: boolean;
   /**
    * Unique identifier for this rule.
    *
    * @example Expire all objects older than 24 hours
+   * @x-auditable true
    */
   id: string;
   /**
@@ -35404,6 +35685,9 @@ export type R2LifecycleRule = {
 
 export type R2LifecycleStorageTransition = {
   condition: R2LifecycleAgeCondition | R2LifecycleDateCondition;
+  /**
+   * @x-auditable true
+   */
   storageClass: 'InfrequentAccess';
 };
 
@@ -35414,32 +35698,46 @@ export type R2ListCustomDomainsResponse = {
   domains: {
     /**
      * Domain name of the custom domain to be added.
+     *
+     * @x-auditable true
      */
     domain: string;
     /**
      * Whether this bucket is publicly accessible at the specified custom domain.
+     *
+     * @x-auditable true
      */
     enabled: boolean;
     /**
      * Minimum TLS Version the custom domain will accept for incoming connections. If not set, defaults to 1.0.
+     *
+     * @x-auditable true
      */
     minTLS?: '1.0' | '1.1' | '1.2' | '1.3';
     status: {
       /**
        * Ownership status of the domain.
+       *
+       * @x-auditable true
        */
       ownership: 'pending' | 'active' | 'deactivated' | 'blocked' | 'error' | 'unknown';
       /**
        * SSL certificate status.
+       *
+       * @x-auditable true
        */
       ssl: 'initializing' | 'pending' | 'active' | 'deactivated' | 'error' | 'unknown';
     };
     /**
      * Zone ID of the custom domain resides in.
+     *
+     * @x-auditable true
      */
     zoneId?: string;
     /**
      * Zone that the custom domain resides in.
+     *
+     * @x-auditable true
      */
     zoneName?: string;
   }[];
@@ -35451,8 +35749,12 @@ export type R2ListCustomDomainsResponse = {
 export type R2LockRuleAgeCondition = {
   /**
    * @example 100
+   * @x-auditable true
    */
   maxAgeSeconds: number;
+  /**
+   * @x-auditable true
+   */
   type: 'Age';
 };
 
@@ -35462,8 +35764,12 @@ export type R2LockRuleAgeCondition = {
 export type R2LockRuleDateCondition = {
   /**
    * @format date
+   * @x-auditable true
    */
   date: string;
+  /**
+   * @x-auditable true
+   */
   type: 'Date';
 };
 
@@ -35471,6 +35777,9 @@ export type R2LockRuleDateCondition = {
  * Condition to apply a lock rule indefinitely.
  */
 export type R2LockRuleIndefiniteCondition = {
+  /**
+   * @x-auditable true
+   */
   type: 'Indefinite';
 };
 
@@ -35482,14 +35791,19 @@ export type R2ManagedDomainResponse = {
    * Bucket ID.
    *
    * @maxLength 32
+   * @x-auditable true
    */
   bucketId: string;
   /**
    * Domain name of the bucket's r2.dev domain.
+   *
+   * @x-auditable true
    */
   domain: string;
   /**
    * Whether this bucket is publicly accessible at the r2.dev domain.
+   *
+   * @x-auditable true
    */
   enabled: boolean;
 };
@@ -35519,6 +35833,7 @@ export type R2ObjectSizeMetrics = {
  *
  * @example 11111aa1-11aa-111a-a1a1-a1a111a11a11
  * @maxLength 32
+ * @x-auditable true
  */
 export type R2QueueIdentifier = string;
 
@@ -35527,12 +35842,14 @@ export type R2QueuesConfig = {
    * Queue ID.
    *
    * @example 11111aa1-11aa-111a-a1a1-a1a111a11a11
+   * @x-auditable true
    */
   queueId?: string;
   /**
    * Name of the queue.
    *
    * @example first-queue
+   * @x-auditable true
    */
   queueName?: string;
   rules?: {
@@ -35548,35 +35865,43 @@ export type R2QueuesConfig = {
      * A description that can be used to identify the event notification rule after creation.
      *
      * @example Notifications from source bucket to queue
+     * @x-auditable true
      */
     description?: string;
     /**
      * Notifications will be sent only for objects with this prefix.
      *
      * @example img/
+     * @x-auditable true
      */
     prefix?: string;
     /**
      * Notifications will be sent only for objects with this suffix.
      *
      * @example .jpeg
+     * @x-auditable true
      */
     suffix?: string;
     /**
      * Timestamp when the rule was created.
      *
      * @example 2024-09-19T21:54:48.405Z
+     * @x-auditable true
      */
     createdAt?: string;
     /**
      * Rule ID.
      *
      * @example 11111aa1-11aa-111a-a1a1-a1a111a11a11
+     * @x-auditable true
      */
     ruleId?: string;
   }[];
 };
 
+/**
+ * @x-auditable true
+ */
 export type R2R2Action = 'PutObject' | 'CopyObject' | 'DeleteObject' | 'CompleteMultipartUpload' | 'LifecycleDeletion';
 
 /**
@@ -35585,6 +35910,8 @@ export type R2R2Action = 'PutObject' | 'CopyObject' | 'DeleteObject' | 'Complete
 export type R2RemoveCustomDomainResponse = {
   /**
    * Name of the removed custom domain.
+   *
+   * @x-auditable true
    */
   domain: string;
 };
@@ -35617,18 +35944,21 @@ export type R2Rule = {
    * A description that can be used to identify the event notification rule after creation.
    *
    * @example Notifications from source bucket to queue
+   * @x-auditable true
    */
   description?: string;
   /**
    * Notifications will be sent only for objects with this prefix.
    *
    * @example img/
+   * @x-auditable true
    */
   prefix?: string;
   /**
    * Notifications will be sent only for objects with this suffix.
    *
    * @example .jpeg
+   * @x-auditable true
    */
   suffix?: string;
 };
@@ -35643,15 +35973,25 @@ export type R2Sippy = {
      * bucket.
      */
     accessKeyId?: string;
+    /**
+     * @x-auditable true
+     */
     account?: string;
     /**
      * Name of the bucket on the provider.
+     *
+     * @x-auditable true
      */
     bucket?: string;
+    /**
+     * @x-auditable true
+     */
     provider?: 'r2';
   };
   /**
    * State of Sippy for this bucket.
+   *
+   * @x-auditable true
    */
   enabled?: boolean;
   /**
@@ -35660,11 +36000,18 @@ export type R2Sippy = {
   source?: {
     /**
      * Name of the bucket on the provider.
+     *
+     * @x-auditable true
      */
     bucket?: string;
+    /**
+     * @x-auditable true
+     */
     provider?: 'aws' | 'gcs';
     /**
      * Region where the bucket resides (AWS only).
+     *
+     * @x-auditable true
      */
     region?: string | null;
   };
@@ -35674,6 +36021,7 @@ export type R2Sippy = {
  * Storage class for newly uploaded objects, unless specified otherwise.
  *
  * @default Standard
+ * @x-auditable true
  */
 export type R2StorageClass = 'Standard' | 'InfrequentAccess';
 
@@ -35683,6 +36031,8 @@ export type R2StorageClass = 'Standard' | 'InfrequentAccess';
 export type R2TempAccessCredsRequest = {
   /**
    * Name of the R2 bucket.
+   *
+   * @x-auditable true
    */
   bucket: string;
   /**
@@ -35695,6 +36045,8 @@ export type R2TempAccessCredsRequest = {
   parentAccessKeyId: string;
   /**
    * Permissions allowed on the credentials.
+   *
+   * @x-auditable true
    */
   permission: 'admin-read-write' | 'admin-read-only' | 'object-read-write' | 'object-read-only';
   /**
@@ -35706,6 +36058,7 @@ export type R2TempAccessCredsRequest = {
    *
    * @default 900
    * @maximum 604800
+   * @x-auditable true
    */
   ttlSeconds: number;
 };
@@ -52496,7 +52849,7 @@ export type WorkersBindingItem =
   | WorkersBindingKindAi
   | WorkersBindingKindAnalyticsEngine
   | WorkersBindingKindAssets
-  | WorkersBindingKindBrowserRendering
+  | WorkersBindingKindBrowser
   | WorkersBindingKindD1
   | WorkersBindingKindDispatchNamespace
   | WorkersBindingKindDurableObjectNamespace
@@ -52546,12 +52899,12 @@ export type WorkersBindingKindAssets = {
   type: 'assets';
 };
 
-export type WorkersBindingKindBrowserRendering = {
+export type WorkersBindingKindBrowser = {
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
    */
-  type: 'browser_rendering';
+  type: 'browser';
 };
 
 export type WorkersBindingKindD1 = {

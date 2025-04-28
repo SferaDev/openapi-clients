@@ -5,6 +5,94 @@
  */
 import type * as Schemas from './schemas';
 
+export type ApiShieldGlobalSettingsEdit = Schemas.ApiShieldGlobalSettingChangeBase;
+
+export type ApiShieldGlobalSettingsUpdate = {
+  /**
+   * The default mitigation action used
+   * Mitigation actions are as follows:
+   *
+   *   - `"log"` - log request when request does not conform to schema
+   *   - `"block"` - deny access to the site when request does not conform to schema
+   *   - `"none"` - skip running schema validation
+   *
+   * @example block
+   * @x-auditable true
+   */
+  validation_default_mitigation_action: 'none' | 'log' | 'block';
+  /**
+   * When set, this overrides both zone level and operation level mitigation actions.
+   *
+   *   - `"none"` - skip running schema validation entirely for the request
+   *   - `null` - clears any existing override
+   *
+   * @x-auditable true
+   */
+  validation_override_mitigation_action?: 'none' | any | null;
+};
+
+export type ApiShieldPerOperationSettingUpdate = {
+  /**
+   * When set, this applies a mitigation action to this operation
+   *
+   *   - `"log"` - log request when request does not conform to schema for this operation
+   *   - `"block"` - deny access to the site when request does not conform to schema for this operation
+   *   - `"none"` - will skip mitigation for this operation
+   *   - `null` - clears any mitigation action
+   *
+   * @example block
+   * @x-auditable true
+   */
+  mitigation_action: 'log' | 'block' | 'none' | any | null;
+};
+
+/**
+ * @example {"3818d821-5901-4147-a474-f5f5aec1d54e":{"mitigation_action":"log"},"b17c8043-99a0-4202-b7d9-8f7cdbee02cd":{"mitigation_action":"block"}}
+ */
+export type ApiShieldPerOperationSettingsBulkEdit = {
+  [key: string]: {
+    /**
+     * Mitigation actions are as follows:
+     * * `log` - log request when request does not conform to schema * `block` - deny access to the site when request does not conform to schema * `none` - skip running schema validation * null - clears any existing per-operation setting
+     *
+     * @example block
+     */
+    mitigation_action?: 'none' | 'log' | 'block' | any | null;
+  };
+};
+
+export type ApiShieldSchemaCreate = {
+  /**
+   * The kind of the schema
+   *
+   * @example openapi_v3
+   */
+  kind: 'openapi_v3';
+  /**
+   * A human-readable name for the schema
+   *
+   * @example petstore schema
+   */
+  name: string;
+  /**
+   * The raw schema, e.g., the OpenAPI schema, either as JSON or YAML
+   *
+   * @example <schema file contents>
+   */
+  source: string;
+  /**
+   * An indicator if this schema is enabled
+   */
+  validation_enabled?: boolean;
+};
+
+export type ApiShieldSchemaEdit = {
+  /**
+   * Flag whether schema is enabled for validation.
+   */
+  validation_enabled?: boolean;
+};
+
 /**
  * A ruleset object.
  */

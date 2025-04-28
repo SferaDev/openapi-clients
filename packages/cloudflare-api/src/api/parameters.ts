@@ -48,6 +48,11 @@ export type ApiShieldMethodParameter = string[];
 export type ApiShieldOmitSource = boolean;
 
 /**
+ * @default false
+ */
+export type ApiShieldOmitSourceQuery = boolean;
+
+/**
  * @example thresholds
  * @uniqueItems true
  */
@@ -87,6 +92,11 @@ export type ApiShieldPerPage = number;
  * @maxLength 36
  */
 export type ApiShieldSchemaId = string;
+
+/**
+ * @format uuid
+ */
+export type ApiShieldSchemaIdPath = Schemas.ApiShieldSchemasUuid & string;
 
 export type ApiShieldZoneId = Schemas.ApiShieldSchemasIdentifier;
 
