@@ -1,5 +1,16 @@
 # vercel-api-js
 
+## 0.24.1
+
+### Patch Changes
+
+- 14decee: Add new endpoint to move project domain to another project
+- 93d6b84: Remove recommendedIps and recommendedCname fields from GetDomainConfigResponse
+- 6c401f1: Add 'abovePlan' field to 'buildMachine' in UserEvent type
+- 3d20390: [BREAKING] Add new field customEnvironmentsPerProject to UserEvent and AuthUser schemas
+- de0d55c: [BREAKING] Add new 'google' type to user credentials and auth tokens
+- b9da014: Update `requireApproval` and `minutesToRelease` fields
+
 ## 0.24.0
 
 ### Minor Changes

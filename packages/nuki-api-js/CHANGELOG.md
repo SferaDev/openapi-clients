@@ -1,5 +1,11 @@
 # nuki-api-js
 
+## 0.0.5
+
+### Patch Changes
+
+- c518729: Update API version to 3.8.0
+
 ## 0.0.4
 
 ### Patch Changes
