@@ -1,5 +1,16 @@
 # cloudflare-api-js
 
+## 0.13.1
+
+### Patch Changes
+
+- 3cc92fe: Add x-auditable flag to Logpush API schemas
+- 6f4798a: Add new endpoint to update LAN device settings policy
+- 438e0b9: Updates properties of an existing R2 bucket
+- 78060c9: Disable Content Scanning.
+- 61a1bd4: Creates a new GRE tunnel. Use `?validate_only=true` as an optional query parameter to only run validation without persisting changes.
+- dfac69b: Add x-auditable metadata to multiple types
+
 ## 0.13.0
 
 ### Minor Changes
