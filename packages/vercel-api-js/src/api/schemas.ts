@@ -1052,6 +1052,7 @@ export type UserEvent = {
             buildMachine?: {
               purchaseType?: 'enhanced';
               abovePlan?: boolean;
+              isDefaultBuildMachine?: boolean;
               cores?: number;
               memory?: number;
             };
@@ -3070,6 +3071,10 @@ export type AuthUser = {
        * An object containing infomation related to the amount of platform resources may be allocated to the User account.
        */
       abovePlan?: boolean;
+      /**
+       * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+       */
+      isDefaultBuildMachine?: boolean;
       /**
        * An object containing infomation related to the amount of platform resources may be allocated to the User account.
        */
