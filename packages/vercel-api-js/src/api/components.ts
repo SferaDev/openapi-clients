@@ -14375,13 +14375,13 @@ export type UpdateProjectResponse = {
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   resourceConfig: {
+    buildMachineType?: 'enhanced';
     fluid?: boolean;
     functionDefaultRegions: string[];
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced';
   };
   rollingRelease?: {
     /**
@@ -14413,13 +14413,13 @@ export type UpdateProjectResponse = {
       | null;
   } | null;
   defaultResourceConfig: {
+    buildMachineType?: 'enhanced';
     fluid?: boolean;
     functionDefaultRegions: string[];
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced';
   };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -14738,7 +14738,7 @@ export type UpdateProjectResponse = {
           value: string;
           note?: string;
         }[];
-        protectionMode: 'additional' | 'exclusive';
+        protectionMode: 'exclusive' | 'additional';
       }
     | {
         deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
@@ -15958,6 +15958,85 @@ export const addProjectDomain = (variables: AddProjectDomainVariables, signal?: 
     AddProjectDomainQueryParams,
     AddProjectDomainPathParams
   >({ url: '/v10/projects/{idOrName}/domains', method: 'post', ...variables, signal });
+
+export type MoveProjectDomainPathParams = {
+  /**
+   * The unique project identifier or the project name
+   */
+  idOrName: string;
+  /**
+   * The project domain name
+   *
+   * @example www.example.com
+   */
+  domain: string;
+};
+
+export type MoveProjectDomainQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type MoveProjectDomainError = Fetcher.ErrorWrapper<undefined>;
+
+export type MoveProjectDomainResponse = {
+  name: string;
+  apexName: string;
+  projectId: string;
+  redirect?: string | null;
+  redirectStatusCode?: 301 | 302 | 307 | 308 | null;
+  gitBranch?: string | null;
+  customEnvironmentId?: string | null;
+  updatedAt?: number;
+  createdAt?: number;
+  /**
+   * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+   */
+  verified: boolean;
+  /**
+   * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+   */
+  verification?: {
+    type: string;
+    domain: string;
+    value: string;
+    reason: string;
+  }[];
+};
+
+export type MoveProjectDomainRequestBody = {
+  /**
+   * The unique target project identifier
+   *
+   * @example prj_XLKmu1DyR1eY7zq8UgeRKbA7yVLA
+   */
+  projectId: string;
+};
+
+export type MoveProjectDomainVariables = {
+  body: MoveProjectDomainRequestBody;
+  pathParams: MoveProjectDomainPathParams;
+  queryParams?: MoveProjectDomainQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Move one project's domain to another project. Also allows the move of all redirects pointed to that domain in the same project.
+ */
+export const moveProjectDomain = (variables: MoveProjectDomainVariables, signal?: AbortSignal) =>
+  fetch<
+    MoveProjectDomainResponse,
+    MoveProjectDomainError,
+    MoveProjectDomainRequestBody,
+    {},
+    MoveProjectDomainQueryParams,
+    MoveProjectDomainPathParams
+  >({ url: '/v1/projects/{idOrName}/domains/{domain}/move', method: 'post', ...variables, signal });
 
 export type VerifyProjectDomainPathParams = {
   /**
@@ -23471,6 +23550,7 @@ export const operationsByTag = {
     updateProjectDomain,
     removeProjectDomain,
     addProjectDomain,
+    moveProjectDomain,
     verifyProjectDomain,
     filterProjectEnvs,
     createProjectEnv,
