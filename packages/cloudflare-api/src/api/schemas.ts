@@ -13333,7 +13333,7 @@ export type CloudConnectorApiResponseCommon = {
   errors: CloudConnectorMessages;
   messages: CloudConnectorMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -13349,7 +13349,7 @@ export type CloudConnectorApiResponseCommonFailure = {
   messages: CloudConnectorMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -13357,7 +13357,7 @@ export type CloudConnectorApiResponseCommonFailure = {
 };
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -13369,7 +13369,11 @@ export type CloudConnectorMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -13379,10 +13383,7 @@ export type CloudConnectorMessages = {
  */
 export type CloudConnectorProvider = 'aws_s3' | 'r2' | 'gcp_storage' | 'azure_storage';
 
-/**
- * List of Cloud Connector rules
- */
-export type CloudConnectorRules = {
+export type CloudConnectorRule = {
   /**
    * @example Rule description
    */
@@ -13411,7 +13412,12 @@ export type CloudConnectorRules = {
     host?: string;
   };
   provider?: CloudConnectorProvider;
-}[];
+};
+
+/**
+ * List of Cloud Connector rules
+ */
+export type CloudConnectorRules = CloudConnectorRule[];
 
 export type CloudConnectorZoneIdentifier = CloudConnectorIdentifier;
 
