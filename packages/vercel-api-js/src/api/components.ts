@@ -2469,6 +2469,7 @@ export type UpdateProjectDataCacheResponse = {
     observabilityConfiguration?: Schemas.ACLAction[];
     observabilityNotebook?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
+    vercelAppInstallation?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
     postgres?: Schemas.ACLAction[];
@@ -11420,6 +11421,7 @@ export type GetProjectsResponse = {
       observabilityConfiguration?: Schemas.ACLAction[];
       observabilityNotebook?: Schemas.ACLAction[];
       openTelemetryEndpoint?: Schemas.ACLAction[];
+      vercelAppInstallation?: Schemas.ACLAction[];
       paymentMethod?: Schemas.ACLAction[];
       permissions?: Schemas.ACLAction[];
       postgres?: Schemas.ACLAction[];
@@ -12418,6 +12420,7 @@ export type CreateProjectResponse = {
     observabilityConfiguration?: Schemas.ACLAction[];
     observabilityNotebook?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
+    vercelAppInstallation?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
     postgres?: Schemas.ACLAction[];
@@ -13598,6 +13601,7 @@ export type GetProjectResponse = {
     observabilityConfiguration?: Schemas.ACLAction[];
     observabilityNotebook?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
+    vercelAppInstallation?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
     postgres?: Schemas.ACLAction[];
@@ -14375,13 +14379,13 @@ export type UpdateProjectResponse = {
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   resourceConfig: {
-    buildMachineType?: 'enhanced';
     fluid?: boolean;
     functionDefaultRegions: string[];
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
+    buildMachineType?: 'enhanced';
   };
   rollingRelease?: {
     /**
@@ -14413,13 +14417,13 @@ export type UpdateProjectResponse = {
       | null;
   } | null;
   defaultResourceConfig: {
-    buildMachineType?: 'enhanced';
     fluid?: boolean;
     functionDefaultRegions: string[];
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
+    buildMachineType?: 'enhanced';
   };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -14604,6 +14608,7 @@ export type UpdateProjectResponse = {
     observabilityConfiguration?: Schemas.ACLAction[];
     observabilityNotebook?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
+    vercelAppInstallation?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
     permissions?: Schemas.ACLAction[];
     postgres?: Schemas.ACLAction[];
@@ -14738,7 +14743,7 @@ export type UpdateProjectResponse = {
           value: string;
           note?: string;
         }[];
-        protectionMode: 'exclusive' | 'additional';
+        protectionMode: 'additional' | 'exclusive';
       }
     | {
         deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
