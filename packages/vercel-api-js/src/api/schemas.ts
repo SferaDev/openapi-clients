@@ -1434,6 +1434,19 @@ export type UserEvent = {
               blockedAt?: number | null;
             };
           };
+          /**
+           * Contains the timestamps for usage summary emails.
+           */
+          overageMetadata?: {
+            /**
+             * Tracks if the first time on-demand overage email has been sent.
+             */
+            firstTimeOnDemandNotificationSentAt?: number;
+            /**
+             * Tracks the last time we sent a summary email.
+             */
+            overageSummaryEmailSentAt?: number;
+          };
           username: string;
           updatedAt: number;
           /**
