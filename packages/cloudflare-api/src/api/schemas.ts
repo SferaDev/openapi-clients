@@ -2976,6 +2976,13 @@ export type AccessAllowCredentials = boolean;
 export type AccessAllowEmailAlias = boolean;
 
 /**
+ * Enables loading application content in an iFrame.
+ *
+ * @example true
+ */
+export type AccessAllowIframe = boolean;
+
+/**
  * The result of the authentication event.
  *
  * @default false
@@ -3205,6 +3212,16 @@ export type AccessAppResponse =
   | (AccessBasicAppResponseProps & AccessBookmarkProps)
   | (AccessBasicAppResponseProps & AccessInfraProps & AccessInfraAppRespEmbeddedPolicies)
   | (AccessBasicAppResponseProps & AccessRdpProps & AccessAppRespEmbeddedPolicies);
+
+export type AccessAppSettingsRequest = {
+  allow_iframe?: AccessAllowIframe;
+  skip_interstitial?: AccessSkipInterstitial;
+};
+
+export type AccessAppSettingsResponse = {
+  allow_iframe?: AccessAllowIframe;
+  skip_interstitial?: AccessSkipInterstitial;
+};
 
 /**
  * The unique identifier for the Access application.
@@ -6242,6 +6259,7 @@ export type AccessRayId = string;
 export type AccessRdpProps = {
   target_criteria?: AccessTargetCriteria[];
   allow_authenticate_via_warp?: AccessSchemasAllowAuthenticateViaWarp;
+  allow_iframe?: AccessAllowIframe;
   allowed_idps?: AccessAllowedIdps;
   app_launcher_visible?: AccessAppLauncherVisible;
   auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
@@ -8630,6 +8648,7 @@ export type AccessSchemasScimConfigSingleAuthentication =
 export type AccessSchemasSeatUid = string;
 
 export type AccessSchemasSelfHostedProps = {
+  allow_iframe?: AccessAllowIframe;
   allowed_idps?: AccessAllowedIdps;
   app_launcher_visible?: AccessAppLauncherVisible;
   auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
@@ -8705,6 +8724,7 @@ export type AccessSchemasSingleResponse = AccessApiResponseSingle & {
 };
 
 export type AccessSchemasSshProps = {
+  allow_iframe?: AccessAllowIframe;
   allowed_idps?: AccessAllowedIdps;
   app_launcher_visible?: AccessAppLauncherVisible;
   auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
@@ -8766,6 +8786,7 @@ export type AccessSchemasUsers = {
 export type AccessSchemasUuid = string;
 
 export type AccessSchemasVncProps = {
+  allow_iframe?: AccessAllowIframe;
   allowed_idps?: AccessAllowedIdps;
   app_launcher_visible?: AccessAppLauncherVisible;
   auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
@@ -9096,6 +9117,7 @@ export type AccessSelfHostedDomains = string[];
 
 export type AccessSelfHostedProps = {
   allow_authenticate_via_warp?: AccessSchemasAllowAuthenticateViaWarp;
+  allow_iframe?: AccessAllowIframe;
   allowed_idps?: AccessAllowedIdps;
   app_launcher_visible?: AccessAppLauncherVisible;
   auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
@@ -9224,6 +9246,10 @@ export type AccessSingleResponse = AccessApiResponseSingle &
     result?: AccessOrganizations;
   };
 
+export type AccessSingleResponseUpdate = AccessApiResponseSingle & {
+  result?: AccessAppSettingsResponse;
+};
+
 export type AccessSingleResponseWithoutHtml = AccessApiResponseSingle & {
   result?: AccessCustomPageWithoutHtml;
 };
@@ -9245,6 +9271,7 @@ export type AccessSkipInterstitial = boolean;
 
 export type AccessSshProps = {
   allow_authenticate_via_warp?: AccessSchemasAllowAuthenticateViaWarp;
+  allow_iframe?: AccessAllowIframe;
   allowed_idps?: AccessAllowedIdps;
   app_launcher_visible?: AccessAppLauncherVisible;
   auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
@@ -9581,6 +9608,7 @@ export type AccessUuid = string;
 
 export type AccessVncProps = {
   allow_authenticate_via_warp?: AccessSchemasAllowAuthenticateViaWarp;
+  allow_iframe?: AccessAllowIframe;
   allowed_idps?: AccessAllowedIdps;
   app_launcher_visible?: AccessAppLauncherVisible;
   auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
