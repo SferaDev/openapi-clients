@@ -20138,7 +20138,7 @@ export type EmailApiResponseCommon = {
   errors: EmailMessages;
   messages: EmailMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -20185,6 +20185,7 @@ export type EmailCreated = string;
  *
  * @example ea95132c15732412d22c1476fa83f27a
  * @maxLength 32
+ * @x-auditable true
  */
 export type EmailDestinationAddressIdentifier = string;
 
@@ -20247,6 +20248,7 @@ export type EmailDnsRecord = {
    *
    * @example example.com
    * @maxLength 255
+   * @x-auditable true
    */
   name?: string;
   /**
@@ -20255,18 +20257,21 @@ export type EmailDnsRecord = {
    * @example 12
    * @maximum 65535
    * @minimum 0
+   * @x-auditable true
    */
   priority?: number;
   /**
    * Time to live, in seconds, of the DNS record. Must be between 60 and 86400, or 1 for 'automatic'.
    *
    * @example 1
+   * @x-auditable true
    */
   ttl?: number | 1;
   /**
    * DNS record type.
    *
    * @example NS
+   * @x-auditable true
    */
   type?:
     | 'A'
@@ -20298,6 +20303,7 @@ export type EmailDnsSettingsResponseCollection = EmailApiResponseCollection & {
  *
  * @example user@example.com
  * @maxLength 90
+ * @x-auditable true
  */
 export type EmailEmail = string;
 
@@ -20331,6 +20337,7 @@ export type EmailEmailSettingDnsRequestBody = {
  * State of the zone settings for Email Routing.
  *
  * @example true
+ * @x-auditable true
  */
 export type EmailEmailSettingEnabled = true | false;
 
@@ -20339,6 +20346,7 @@ export type EmailEmailSettingEnabled = true | false;
  *
  * @example 75610dab9e69410a82cf7e400a09ecec
  * @maxLength 32
+ * @x-auditable true
  */
 export type EmailEmailSettingIdentifier = string;
 
@@ -20354,6 +20362,7 @@ export type EmailEmailSettingModified = string;
  * Domain of your zone.
  *
  * @example example.net
+ * @x-auditable true
  */
 export type EmailEmailSettingName = string;
 
@@ -20396,7 +20405,7 @@ export type EmailEmailSettingsResponseSingle = EmailApiResponseSingle & {
 };
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -20408,7 +20417,11 @@ export type EmailMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -20421,25 +20434,25 @@ export type EmailModified = string;
 
 export type EmailResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -20454,9 +20467,10 @@ export type EmailRuleAction = {
    * Type of supported action.
    *
    * @example forward
+   * @x-auditable true
    */
   type: 'drop' | 'forward' | 'worker';
-  value: string[];
+  value?: string[];
 };
 
 /**
@@ -20472,6 +20486,7 @@ export type EmailRuleCatchallAction = {
    * Type of action for catch-all rule.
    *
    * @example forward
+   * @x-auditable true
    */
   type: 'drop' | 'forward' | 'worker';
   value?: string[];
@@ -20490,6 +20505,7 @@ export type EmailRuleCatchallMatcher = {
    * Type of matcher. Default is 'all'.
    *
    * @example all
+   * @x-auditable true
    */
   type: 'all';
 };
@@ -20504,6 +20520,7 @@ export type EmailRuleCatchallMatchers = EmailRuleCatchallMatcher[];
  *
  * @default true
  * @example true
+ * @x-auditable true
  */
 export type EmailRuleEnabled = true | false;
 
@@ -20512,6 +20529,7 @@ export type EmailRuleEnabled = true | false;
  *
  * @example a7e6fb77503c41d8a7f3113c6918f10c
  * @maxLength 32
+ * @x-auditable true
  */
 export type EmailRuleIdentifier = string;
 
@@ -20523,12 +20541,14 @@ export type EmailRuleMatcher = {
    * Field for type matcher.
    *
    * @example to
+   * @x-auditable true
    */
-  field: 'to';
+  field?: 'to';
   /**
    * Type of matcher.
    *
    * @example literal
+   * @x-auditable true
    */
   type: 'literal';
   /**
@@ -20536,8 +20556,9 @@ export type EmailRuleMatcher = {
    *
    * @example test@example.com
    * @maxLength 90
+   * @x-auditable true
    */
-  value: string;
+  value?: string;
 };
 
 /**
@@ -20550,6 +20571,7 @@ export type EmailRuleMatchers = EmailRuleMatcher[];
  *
  * @example Send to user@example.net rule.
  * @maxLength 256
+ * @x-auditable true
  */
 export type EmailRuleName = string;
 
@@ -20558,6 +20580,7 @@ export type EmailRuleName = string;
  *
  * @default 0
  * @minimum 0
+ * @x-auditable true
  */
 export type EmailRulePriority = number;
 
@@ -50230,7 +50253,7 @@ export type VectorizeUpdateIndexRequest = {
 export type VectorizeVectorIdentifier = string;
 
 /**
- * The available states for the rule group.
+ * Defines the available states for the rule group.
  *
  * @example on
  * @example off
@@ -50254,7 +50277,7 @@ export type WafManagedRulesAllowedModesAllowTraditional = WafManagedRulesModeAll
 export type WafManagedRulesAllowedModesAnomaly = WafManagedRulesModeAnomaly[];
 
 /**
- * The list of possible actions of the WAF rule when it is triggered.
+ * Defines the list of possible actions of the WAF rule when it is triggered.
  *
  * @example default
  * @example disable
@@ -50272,25 +50295,15 @@ export type WafManagedRulesAnomalyRule = WafManagedRulesSchemasBase & {
   mode?: WafManagedRulesModeAnomaly;
 };
 
-export type WafManagedRulesApiResponseCollection = {
-  errors: WafManagedRulesMessages;
-  messages: WafManagedRulesMessages;
-  result: Record<string, any> | any[] | string | null;
-  /**
-   * Whether the API call was successful
-   *
-   * @example true
-   */
-  success: true;
+export type WafManagedRulesApiResponseCollection = WafManagedRulesApiResponseCommon & {
   result_info?: WafManagedRulesResultInfo;
 };
 
 export type WafManagedRulesApiResponseCommon = {
   errors: WafManagedRulesMessages;
   messages: WafManagedRulesMessages;
-  result: Record<string, any> | any[] | string;
   /**
-   * Whether the API call was successful
+   * Defines whether the API call was successful.
    *
    * @example true
    */
@@ -50306,29 +50319,21 @@ export type WafManagedRulesApiResponseCommonFailure = {
   messages: WafManagedRulesMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Defines whether the API call was successful.
    *
    * @example false
    */
   success: false;
 };
 
-export type WafManagedRulesApiResponseSingle = {
-  errors: WafManagedRulesMessages;
-  messages: WafManagedRulesMessages;
-  result: (Record<string, any> | any[] | string | null) | (Record<string, any> | any[] | string | null);
-  /**
-   * Whether the API call was successful
-   *
-   * @example true
-   */
-  success: true;
+export type WafManagedRulesApiResponseSingle = WafManagedRulesApiResponseCommon & {
+  result?: (Record<string, any> | null) | (string | null);
 };
 
 export type WafManagedRulesBase = {
   description?: WafManagedRulesSchemasDescription;
   /**
-   * The rule group to which the current WAF rule belongs.
+   * Defines the rule group to which the current WAF rule belongs.
    */
   group?: {
     id?: WafManagedRulesComponentsSchemasIdentifier;
@@ -50340,7 +50345,7 @@ export type WafManagedRulesBase = {
 };
 
 /**
- * The unique identifier of the rule group.
+ * Defines the unique identifier of the rule group.
  *
  * @example de677e5818985db1285d0e80225f06e5
  * @maxLength 32
@@ -50348,14 +50353,14 @@ export type WafManagedRulesBase = {
 export type WafManagedRulesComponentsSchemasIdentifier = string;
 
 /**
- * The default action/mode of a rule.
+ * Defines the default action/mode of a rule.
  *
  * @example block
  */
 export type WafManagedRulesDefaultMode = 'disable' | 'simulate' | 'block' | 'challenge';
 
 /**
- * An informative summary of what the rule group does.
+ * Defines an informative summary of what the rule group does.
  *
  * @example Group designed to protect against IP addresses that are a threat and typically used to launch DDoS attacks
  */
@@ -50371,7 +50376,7 @@ export type WafManagedRulesGroup = {
 };
 
 /**
- * The unique identifier of a WAF package.
+ * Defines the unique identifier of a WAF package.
  *
  * @example a25a9a7e9c00afc1fb2e0245519d725b
  * @maxLength 32
@@ -50387,7 +50392,7 @@ export type WafManagedRulesMessages = {
 }[];
 
 /**
- * The state of the rules contained in the rule group. When `on`, the rules in the group are configurable/usable.
+ * Defines the state of the rules contained in the rule group. When `on`, the rules in the group are configurable/usable.
  *
  * @default on
  */
@@ -50401,21 +50406,21 @@ export type WafManagedRulesMode = 'on' | 'off';
 export type WafManagedRulesModeAllowTraditional = 'on' | 'off';
 
 /**
- * When set to `on`, the current WAF rule will be used when evaluating the request. Applies to anomaly detection WAF rules.
+ * Defines the mode anomaly. When set to `on`, the current WAF rule will be used when evaluating the request. Applies to anomaly detection WAF rules.
  *
  * @example on
  */
 export type WafManagedRulesModeAnomaly = 'on' | 'off';
 
 /**
- * The action that the current WAF rule will perform when triggered. Applies to traditional (deny) WAF rules.
+ * Defines the action that the current WAF rule will perform when triggered. Applies to traditional (deny) WAF rules.
  *
  * @example block
  */
 export type WafManagedRulesModeDenyTraditional = 'default' | 'disable' | 'simulate' | 'block' | 'challenge';
 
 /**
- * The number of rules within the group that have been modified from their default configuration.
+ * Defines the number of rules within the group that have been modified from their default configuration.
  *
  * @default 0
  * @example 2
@@ -50423,38 +50428,38 @@ export type WafManagedRulesModeDenyTraditional = 'default' | 'disable' | 'simula
 export type WafManagedRulesModifiedRulesCount = number;
 
 /**
- * The name of the rule group.
+ * Defines the name of the rule group.
  *
  * @example Project Honey Pot
  */
 export type WafManagedRulesName = string;
 
 /**
- * The order in which the individual WAF rule is executed within its rule group.
+ * Defines the order in which the individual WAF rule is executed within its rule group.
  */
 export type WafManagedRulesPriority = string;
 
 export type WafManagedRulesResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Defines the total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Defines the current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Defines the number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Defines the total results available without any search parameters.
    *
    * @example 2000
    */
@@ -50467,7 +50472,7 @@ export type WafManagedRulesRule =
   | WafManagedRulesTraditionalAllowRule;
 
 /**
- * The unique identifier of the WAF rule.
+ * Defines the unique identifier of the WAF rule.
  *
  * @example f939de3be84e66e757adcdcb87908023
  * @maxLength 32
@@ -50491,7 +50496,7 @@ export type WafManagedRulesRuleResponseSingle = WafManagedRulesApiResponseSingle
 };
 
 /**
- * The number of rules in the current rule group.
+ * Defines the number of rules in the current rule group.
  *
  * @default 0
  * @example 10
@@ -50501,7 +50506,7 @@ export type WafManagedRulesRulesCount = number;
 export type WafManagedRulesSchemasBase = WafManagedRulesBase;
 
 /**
- * The public description of the WAF rule.
+ * Defines the public description of the WAF rule.
  *
  * @example SQL injection prevention for SELECT statements
  */
@@ -50513,7 +50518,7 @@ export type WafManagedRulesSchemasGroup = WafManagedRulesGroup & {
 };
 
 /**
- * Identifier
+ * Defines an identifier of a schema.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
