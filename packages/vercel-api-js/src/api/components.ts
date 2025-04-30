@@ -2274,6 +2274,10 @@ export type UpdateProjectDataCacheResponse = {
            * Whether or not this stage requires approval to proceed.
            */
           requireApproval?: boolean;
+          /**
+           * duration is the total time to serve a stage, at the given targetPercentage.
+           */
+          duration?: number;
         }[]
       | null;
   } | null;
@@ -11226,6 +11230,10 @@ export type GetProjectsResponse = {
              * Whether or not this stage requires approval to proceed.
              */
             requireApproval?: boolean;
+            /**
+             * duration is the total time to serve a stage, at the given targetPercentage.
+             */
+            duration?: number;
           }[]
         | null;
     } | null;
@@ -12225,6 +12233,10 @@ export type CreateProjectResponse = {
            * Whether or not this stage requires approval to proceed.
            */
           requireApproval?: boolean;
+          /**
+           * duration is the total time to serve a stage, at the given targetPercentage.
+           */
+          duration?: number;
         }[]
       | null;
   } | null;
@@ -13406,6 +13418,10 @@ export type GetProjectResponse = {
            * Whether or not this stage requires approval to proceed.
            */
           requireApproval?: boolean;
+          /**
+           * duration is the total time to serve a stage, at the given targetPercentage.
+           */
+          duration?: number;
         }[]
       | null;
   } | null;
@@ -14413,6 +14429,10 @@ export type UpdateProjectResponse = {
            * Whether or not this stage requires approval to proceed.
            */
           requireApproval?: boolean;
+          /**
+           * duration is the total time to serve a stage, at the given targetPercentage.
+           */
+          duration?: number;
         }[]
       | null;
   } | null;
