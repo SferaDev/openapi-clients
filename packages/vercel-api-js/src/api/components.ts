@@ -13212,6 +13212,14 @@ export type CreateProjectResponse = {
 
 export type CreateProjectRequestBody = {
   /**
+   * Opt-in to preview toolbar on the project level
+   */
+  enablePreviewFeedback?: boolean | null;
+  /**
+   * Opt-in to production toolbar on the project level
+   */
+  enableProductionFeedback?: boolean | null;
+  /**
    * The build command for this project. When `null` is used this value will be automatically detected
    *
    * @maxLength 256
@@ -17520,7 +17528,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -17621,7 +17629,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -18503,7 +18511,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -18604,7 +18612,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -18704,7 +18712,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -18895,7 +18903,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -23347,6 +23355,157 @@ export const deleteAlias = (variables: DeleteAliasVariables, signal?: AbortSigna
     ...variables,
     signal
   });
+
+export type PatchAliasesIdProtectionBypassPathParams = {
+  /**
+   * The alias or deployment ID
+   */
+  id: string;
+};
+
+export type PatchAliasesIdProtectionBypassError = Fetcher.ErrorWrapper<undefined>;
+
+export type PatchAliasesIdProtectionBypassResponse = {
+  [key: string]: any;
+};
+
+export type PatchAliasesIdProtectionBypassVariables = {
+  body?:
+    | {
+        /**
+         * Optional instructions for revoking and regenerating a shareable link
+         */
+        revoke?: {
+          /**
+           * Sharebale link to revoked
+           */
+          secret: string;
+          /**
+           * Whether or not a new shareable link should be created after the provided secret is revoked
+           */
+          regenerate: boolean;
+        };
+      }
+    | {
+        /**
+         * Instructions for creating a user scoped protection bypass
+         */
+        scope:
+          | {
+              /**
+               * Specified user id for the scoped bypass.
+               */
+              userId: string;
+              /**
+               * Specified email for the scoped bypass.
+               *
+               * @format email
+               */
+              email?: string;
+              /**
+               * Invitation status for the user scoped bypass.
+               */
+              access?: 'denied' | 'granted';
+            }
+          | {
+              /**
+               * Specified user id for the scoped bypass.
+               */
+              userId?: string;
+              /**
+               * Specified email for the scoped bypass.
+               *
+               * @format email
+               */
+              email: string;
+              /**
+               * Invitation status for the user scoped bypass.
+               */
+              access?: 'denied' | 'granted';
+            };
+      }
+    | {
+        override: {
+          scope: 'alias-protection-override';
+          action: 'create' | 'revoke';
+        };
+      };
+  pathParams: PatchAliasesIdProtectionBypassPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Update the protection bypass for the alias (used for user access & comment access for deployments). Used as shareable links and user scoped access for Vercel Authentication and also to allow external (logged in) people to comment on previews for Preview Comments (next-live-mode).
+ */
+export const patchAliasesIdProtectionBypass = (
+  variables: PatchAliasesIdProtectionBypassVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    PatchAliasesIdProtectionBypassResponse,
+    PatchAliasesIdProtectionBypassError,
+    | {
+        /**
+         * Optional instructions for revoking and regenerating a shareable link
+         */
+        revoke?: {
+          /**
+           * Sharebale link to revoked
+           */
+          secret: string;
+          /**
+           * Whether or not a new shareable link should be created after the provided secret is revoked
+           */
+          regenerate: boolean;
+        };
+      }
+    | {
+        /**
+         * Instructions for creating a user scoped protection bypass
+         */
+        scope:
+          | {
+              /**
+               * Specified user id for the scoped bypass.
+               */
+              userId: string;
+              /**
+               * Specified email for the scoped bypass.
+               *
+               * @format email
+               */
+              email?: string;
+              /**
+               * Invitation status for the user scoped bypass.
+               */
+              access?: 'denied' | 'granted';
+            }
+          | {
+              /**
+               * Specified user id for the scoped bypass.
+               */
+              userId?: string;
+              /**
+               * Specified email for the scoped bypass.
+               *
+               * @format email
+               */
+              email: string;
+              /**
+               * Invitation status for the user scoped bypass.
+               */
+              access?: 'denied' | 'granted';
+            };
+      }
+    | {
+        override: {
+          scope: 'alias-protection-override';
+          action: 'create' | 'revoke';
+        };
+      },
+    {},
+    {},
+    PatchAliasesIdProtectionBypassPathParams
+  >({ url: '/aliases/{id}/protection-bypass', method: 'patch', ...variables, signal });
 
 export type GetCertsError = Fetcher.ErrorWrapper<undefined>;
 
