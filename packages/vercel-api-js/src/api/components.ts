@@ -1965,7 +1965,76 @@ export type UpdateProjectDataCacheResponse = {
     comment?: string;
     customEnvironmentIds?: string[];
   }[];
-  customEnvironments?: Record<string, any>[];
+  customEnvironments?: {
+    /**
+     * Unique identifier for the custom environment (format: env_*)
+     */
+    id: string;
+    /**
+     * URL-friendly name of the environment
+     */
+    slug: string;
+    /**
+     * The type of environment (production, preview, or development)
+     */
+    type: 'development' | 'preview' | 'production';
+    /**
+     * Optional description of the environment's purpose
+     */
+    description?: string;
+    /**
+     * Configuration for matching git branches to this environment
+     */
+    branchMatcher?: {
+      /**
+       * The type of matching to perform
+       */
+      type: 'endsWith' | 'equals' | 'startsWith';
+      /**
+       * The pattern to match against branch names
+       */
+      pattern: string;
+    };
+    /**
+     * List of domains associated with this environment
+     */
+    domains?: {
+      name: string;
+      apexName: string;
+      projectId: string;
+      redirect?: string | null;
+      redirectStatusCode?: 301 | 302 | 307 | 308 | null;
+      gitBranch?: string | null;
+      customEnvironmentId?: string | null;
+      updatedAt?: number;
+      createdAt?: number;
+      /**
+       * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+       */
+      verified: boolean;
+      /**
+       * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+       */
+      verification?: {
+        type: string;
+        domain: string;
+        value: string;
+        reason: string;
+      }[];
+    }[];
+    /**
+     * List of aliases for the current deployment
+     */
+    currentDeploymentAliases?: string[];
+    /**
+     * Timestamp when the environment was created
+     */
+    createdAt: number;
+    /**
+     * Timestamp when the environment was last updated
+     */
+    updatedAt: number;
+  }[];
   framework?:
     | 'angular'
     | 'astro'
@@ -2603,7 +2672,7 @@ export type UpdateProjectDataCacheResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         addresses: {
           value: string;
           note?: string;
@@ -2611,7 +2680,7 @@ export type UpdateProjectDataCacheResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
       }
     | null;
   gitComments?: {
@@ -3142,7 +3211,76 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         previewCommentsEnabled?: boolean;
         ttyBuildLogs?: boolean;
         customEnvironment?:
-          | Record<string, any>
+          | {
+              /**
+               * Unique identifier for the custom environment (format: env_*)
+               */
+              id: string;
+              /**
+               * URL-friendly name of the environment
+               */
+              slug: string;
+              /**
+               * The type of environment (production, preview, or development)
+               */
+              type: 'production' | 'preview' | 'development';
+              /**
+               * Optional description of the environment's purpose
+               */
+              description?: string;
+              /**
+               * Configuration for matching git branches to this environment
+               */
+              branchMatcher?: {
+                /**
+                 * The type of matching to perform
+                 */
+                type: 'startsWith' | 'equals' | 'endsWith';
+                /**
+                 * The pattern to match against branch names
+                 */
+                pattern: string;
+              };
+              /**
+               * List of domains associated with this environment
+               */
+              domains?: {
+                name: string;
+                apexName: string;
+                projectId: string;
+                redirect?: string | null;
+                redirectStatusCode?: 307 | 301 | 302 | 308 | null;
+                gitBranch?: string | null;
+                customEnvironmentId?: string | null;
+                updatedAt?: number;
+                createdAt?: number;
+                /**
+                 * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+                 */
+                verified: boolean;
+                /**
+                 * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+                 */
+                verification?: {
+                  type: string;
+                  domain: string;
+                  value: string;
+                  reason: string;
+                }[];
+              }[];
+              /**
+               * List of aliases for the current deployment
+               */
+              currentDeploymentAliases?: string[];
+              /**
+               * Timestamp when the environment was created
+               */
+              createdAt: number;
+              /**
+               * Timestamp when the environment was last updated
+               */
+              updatedAt: number;
+            }
           | {
               id: string;
             };
@@ -3255,7 +3393,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               repo?: string;
             }
           | {
-              type: 'github';
+              type: 'github-custom-host';
               host: string;
               ref: string;
               sha: string;
@@ -3562,7 +3700,76 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         previewCommentsEnabled?: boolean;
         ttyBuildLogs?: boolean;
         customEnvironment?:
-          | Record<string, any>
+          | {
+              /**
+               * Unique identifier for the custom environment (format: env_*)
+               */
+              id: string;
+              /**
+               * URL-friendly name of the environment
+               */
+              slug: string;
+              /**
+               * The type of environment (production, preview, or development)
+               */
+              type: 'production' | 'preview' | 'development';
+              /**
+               * Optional description of the environment's purpose
+               */
+              description?: string;
+              /**
+               * Configuration for matching git branches to this environment
+               */
+              branchMatcher?: {
+                /**
+                 * The type of matching to perform
+                 */
+                type: 'startsWith' | 'equals' | 'endsWith';
+                /**
+                 * The pattern to match against branch names
+                 */
+                pattern: string;
+              };
+              /**
+               * List of domains associated with this environment
+               */
+              domains?: {
+                name: string;
+                apexName: string;
+                projectId: string;
+                redirect?: string | null;
+                redirectStatusCode?: 307 | 301 | 302 | 308 | null;
+                gitBranch?: string | null;
+                customEnvironmentId?: string | null;
+                updatedAt?: number;
+                createdAt?: number;
+                /**
+                 * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+                 */
+                verified: boolean;
+                /**
+                 * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+                 */
+                verification?: {
+                  type: string;
+                  domain: string;
+                  value: string;
+                  reason: string;
+                }[];
+              }[];
+              /**
+               * List of aliases for the current deployment
+               */
+              currentDeploymentAliases?: string[];
+              /**
+               * Timestamp when the environment was created
+               */
+              createdAt: number;
+              /**
+               * Timestamp when the environment was last updated
+               */
+              updatedAt: number;
+            }
           | {
               id: string;
             };
@@ -3675,7 +3882,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               repo?: string;
             }
           | {
-              type: 'github';
+              type: 'github-custom-host';
               host: string;
               ref: string;
               sha: string;
@@ -3944,7 +4151,76 @@ export type CreateDeploymentResponse = {
   previewCommentsEnabled?: boolean;
   ttyBuildLogs?: boolean;
   customEnvironment?:
-    | Record<string, any>
+    | {
+        /**
+         * Unique identifier for the custom environment (format: env_*)
+         */
+        id: string;
+        /**
+         * URL-friendly name of the environment
+         */
+        slug: string;
+        /**
+         * The type of environment (production, preview, or development)
+         */
+        type: 'production' | 'preview' | 'development';
+        /**
+         * Optional description of the environment's purpose
+         */
+        description?: string;
+        /**
+         * Configuration for matching git branches to this environment
+         */
+        branchMatcher?: {
+          /**
+           * The type of matching to perform
+           */
+          type: 'startsWith' | 'equals' | 'endsWith';
+          /**
+           * The pattern to match against branch names
+           */
+          pattern: string;
+        };
+        /**
+         * List of domains associated with this environment
+         */
+        domains?: {
+          name: string;
+          apexName: string;
+          projectId: string;
+          redirect?: string | null;
+          redirectStatusCode?: 307 | 301 | 302 | 308 | null;
+          gitBranch?: string | null;
+          customEnvironmentId?: string | null;
+          updatedAt?: number;
+          createdAt?: number;
+          /**
+           * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+           */
+          verified: boolean;
+          /**
+           * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+           */
+          verification?: {
+            type: string;
+            domain: string;
+            value: string;
+            reason: string;
+          }[];
+        }[];
+        /**
+         * List of aliases for the current deployment
+         */
+        currentDeploymentAliases?: string[];
+        /**
+         * Timestamp when the environment was created
+         */
+        createdAt: number;
+        /**
+         * Timestamp when the environment was last updated
+         */
+        updatedAt: number;
+      }
     | {
         id: string;
       };
@@ -4029,7 +4305,7 @@ export type CreateDeploymentResponse = {
         repo?: string;
       }
     | {
-        type: 'github';
+        type: 'github-custom-host';
         host: string;
         ref: string;
         sha: string;
@@ -4421,6 +4697,14 @@ export type CreateDeploymentRequestBody = {
         type: 'github';
       }
     | {
+        org: string;
+        ref: string;
+        repo: string;
+        sha?: string;
+        host: string;
+        type: 'github-custom-host';
+      }
+    | {
         projectId: number | string;
         ref: string;
         sha?: string;
@@ -4806,7 +5090,76 @@ export type CancelDeploymentResponse = {
   previewCommentsEnabled?: boolean;
   ttyBuildLogs?: boolean;
   customEnvironment?:
-    | Record<string, any>
+    | {
+        /**
+         * Unique identifier for the custom environment (format: env_*)
+         */
+        id: string;
+        /**
+         * URL-friendly name of the environment
+         */
+        slug: string;
+        /**
+         * The type of environment (production, preview, or development)
+         */
+        type: 'production' | 'preview' | 'development';
+        /**
+         * Optional description of the environment's purpose
+         */
+        description?: string;
+        /**
+         * Configuration for matching git branches to this environment
+         */
+        branchMatcher?: {
+          /**
+           * The type of matching to perform
+           */
+          type: 'startsWith' | 'equals' | 'endsWith';
+          /**
+           * The pattern to match against branch names
+           */
+          pattern: string;
+        };
+        /**
+         * List of domains associated with this environment
+         */
+        domains?: {
+          name: string;
+          apexName: string;
+          projectId: string;
+          redirect?: string | null;
+          redirectStatusCode?: 307 | 301 | 302 | 308 | null;
+          gitBranch?: string | null;
+          customEnvironmentId?: string | null;
+          updatedAt?: number;
+          createdAt?: number;
+          /**
+           * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+           */
+          verified: boolean;
+          /**
+           * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+           */
+          verification?: {
+            type: string;
+            domain: string;
+            value: string;
+            reason: string;
+          }[];
+        }[];
+        /**
+         * List of aliases for the current deployment
+         */
+        currentDeploymentAliases?: string[];
+        /**
+         * Timestamp when the environment was created
+         */
+        createdAt: number;
+        /**
+         * Timestamp when the environment was last updated
+         */
+        updatedAt: number;
+      }
     | {
         id: string;
       };
@@ -4916,7 +5269,7 @@ export type CancelDeploymentResponse = {
         repo?: string;
       }
     | {
-        type: 'github';
+        type: 'github-custom-host';
         host: string;
         ref: string;
         sha: string;
@@ -10921,7 +11274,76 @@ export type GetProjectsResponse = {
       comment?: string;
       customEnvironmentIds?: string[];
     }[];
-    customEnvironments?: Record<string, any>[];
+    customEnvironments?: {
+      /**
+       * Unique identifier for the custom environment (format: env_*)
+       */
+      id: string;
+      /**
+       * URL-friendly name of the environment
+       */
+      slug: string;
+      /**
+       * The type of environment (production, preview, or development)
+       */
+      type: 'development' | 'preview' | 'production';
+      /**
+       * Optional description of the environment's purpose
+       */
+      description?: string;
+      /**
+       * Configuration for matching git branches to this environment
+       */
+      branchMatcher?: {
+        /**
+         * The type of matching to perform
+         */
+        type: 'endsWith' | 'equals' | 'startsWith';
+        /**
+         * The pattern to match against branch names
+         */
+        pattern: string;
+      };
+      /**
+       * List of domains associated with this environment
+       */
+      domains?: {
+        name: string;
+        apexName: string;
+        projectId: string;
+        redirect?: string | null;
+        redirectStatusCode?: 301 | 302 | 307 | 308 | null;
+        gitBranch?: string | null;
+        customEnvironmentId?: string | null;
+        updatedAt?: number;
+        createdAt?: number;
+        /**
+         * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+         */
+        verified: boolean;
+        /**
+         * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+         */
+        verification?: {
+          type: string;
+          domain: string;
+          value: string;
+          reason: string;
+        }[];
+      }[];
+      /**
+       * List of aliases for the current deployment
+       */
+      currentDeploymentAliases?: string[];
+      /**
+       * Timestamp when the environment was created
+       */
+      createdAt: number;
+      /**
+       * Timestamp when the environment was last updated
+       */
+      updatedAt: number;
+    }[];
     framework?:
       | 'angular'
       | 'astro'
@@ -11559,7 +11981,7 @@ export type GetProjectsResponse = {
     hasActiveBranches?: boolean;
     trustedIps?:
       | {
-          deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+          deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
           addresses: {
             value: string;
             note?: string;
@@ -11567,7 +11989,7 @@ export type GetProjectsResponse = {
           protectionMode: 'additional' | 'exclusive';
         }
       | {
-          deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+          deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         }
       | null;
     gitComments?: {
@@ -11924,7 +12346,76 @@ export type CreateProjectResponse = {
     comment?: string;
     customEnvironmentIds?: string[];
   }[];
-  customEnvironments?: Record<string, any>[];
+  customEnvironments?: {
+    /**
+     * Unique identifier for the custom environment (format: env_*)
+     */
+    id: string;
+    /**
+     * URL-friendly name of the environment
+     */
+    slug: string;
+    /**
+     * The type of environment (production, preview, or development)
+     */
+    type: 'development' | 'preview' | 'production';
+    /**
+     * Optional description of the environment's purpose
+     */
+    description?: string;
+    /**
+     * Configuration for matching git branches to this environment
+     */
+    branchMatcher?: {
+      /**
+       * The type of matching to perform
+       */
+      type: 'endsWith' | 'equals' | 'startsWith';
+      /**
+       * The pattern to match against branch names
+       */
+      pattern: string;
+    };
+    /**
+     * List of domains associated with this environment
+     */
+    domains?: {
+      name: string;
+      apexName: string;
+      projectId: string;
+      redirect?: string | null;
+      redirectStatusCode?: 301 | 302 | 307 | 308 | null;
+      gitBranch?: string | null;
+      customEnvironmentId?: string | null;
+      updatedAt?: number;
+      createdAt?: number;
+      /**
+       * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+       */
+      verified: boolean;
+      /**
+       * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+       */
+      verification?: {
+        type: string;
+        domain: string;
+        value: string;
+        reason: string;
+      }[];
+    }[];
+    /**
+     * List of aliases for the current deployment
+     */
+    currentDeploymentAliases?: string[];
+    /**
+     * Timestamp when the environment was created
+     */
+    createdAt: number;
+    /**
+     * Timestamp when the environment was last updated
+     */
+    updatedAt: number;
+  }[];
   framework?:
     | 'angular'
     | 'astro'
@@ -12562,7 +13053,7 @@ export type CreateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         addresses: {
           value: string;
           note?: string;
@@ -12570,7 +13061,7 @@ export type CreateProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
       }
     | null;
   gitComments?: {
@@ -13109,7 +13600,76 @@ export type GetProjectResponse = {
     comment?: string;
     customEnvironmentIds?: string[];
   }[];
-  customEnvironments?: Record<string, any>[];
+  customEnvironments?: {
+    /**
+     * Unique identifier for the custom environment (format: env_*)
+     */
+    id: string;
+    /**
+     * URL-friendly name of the environment
+     */
+    slug: string;
+    /**
+     * The type of environment (production, preview, or development)
+     */
+    type: 'development' | 'preview' | 'production';
+    /**
+     * Optional description of the environment's purpose
+     */
+    description?: string;
+    /**
+     * Configuration for matching git branches to this environment
+     */
+    branchMatcher?: {
+      /**
+       * The type of matching to perform
+       */
+      type: 'endsWith' | 'equals' | 'startsWith';
+      /**
+       * The pattern to match against branch names
+       */
+      pattern: string;
+    };
+    /**
+     * List of domains associated with this environment
+     */
+    domains?: {
+      name: string;
+      apexName: string;
+      projectId: string;
+      redirect?: string | null;
+      redirectStatusCode?: 301 | 302 | 307 | 308 | null;
+      gitBranch?: string | null;
+      customEnvironmentId?: string | null;
+      updatedAt?: number;
+      createdAt?: number;
+      /**
+       * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+       */
+      verified: boolean;
+      /**
+       * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+       */
+      verification?: {
+        type: string;
+        domain: string;
+        value: string;
+        reason: string;
+      }[];
+    }[];
+    /**
+     * List of aliases for the current deployment
+     */
+    currentDeploymentAliases?: string[];
+    /**
+     * Timestamp when the environment was created
+     */
+    createdAt: number;
+    /**
+     * Timestamp when the environment was last updated
+     */
+    updatedAt: number;
+  }[];
   framework?:
     | 'angular'
     | 'astro'
@@ -13747,7 +14307,7 @@ export type GetProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         addresses: {
           value: string;
           note?: string;
@@ -13755,7 +14315,7 @@ export type GetProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
       }
     | null;
   gitComments?: {
@@ -14120,7 +14680,76 @@ export type UpdateProjectResponse = {
     comment?: string;
     customEnvironmentIds?: string[];
   }[];
-  customEnvironments?: Record<string, any>[];
+  customEnvironments?: {
+    /**
+     * Unique identifier for the custom environment (format: env_*)
+     */
+    id: string;
+    /**
+     * URL-friendly name of the environment
+     */
+    slug: string;
+    /**
+     * The type of environment (production, preview, or development)
+     */
+    type: 'development' | 'preview' | 'production';
+    /**
+     * Optional description of the environment's purpose
+     */
+    description?: string;
+    /**
+     * Configuration for matching git branches to this environment
+     */
+    branchMatcher?: {
+      /**
+       * The type of matching to perform
+       */
+      type: 'endsWith' | 'equals' | 'startsWith';
+      /**
+       * The pattern to match against branch names
+       */
+      pattern: string;
+    };
+    /**
+     * List of domains associated with this environment
+     */
+    domains?: {
+      name: string;
+      apexName: string;
+      projectId: string;
+      redirect?: string | null;
+      redirectStatusCode?: 301 | 302 | 307 | 308 | null;
+      gitBranch?: string | null;
+      customEnvironmentId?: string | null;
+      updatedAt?: number;
+      createdAt?: number;
+      /**
+       * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+       */
+      verified: boolean;
+      /**
+       * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+       */
+      verification?: {
+        type: string;
+        domain: string;
+        value: string;
+        reason: string;
+      }[];
+    }[];
+    /**
+     * List of aliases for the current deployment
+     */
+    currentDeploymentAliases?: string[];
+    /**
+     * Timestamp when the environment was created
+     */
+    createdAt: number;
+    /**
+     * Timestamp when the environment was last updated
+     */
+    updatedAt: number;
+  }[];
   framework?:
     | 'angular'
     | 'astro'
@@ -14758,7 +15387,7 @@ export type UpdateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         addresses: {
           value: string;
           note?: string;
@@ -14766,7 +15395,7 @@ export type UpdateProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
       }
     | null;
   gitComments?: {
@@ -15245,6 +15874,77 @@ export type CreateCustomEnvironmentQueryParams = {
 
 export type CreateCustomEnvironmentError = Fetcher.ErrorWrapper<undefined>;
 
+export type CreateCustomEnvironmentResponse = {
+  /**
+   * Unique identifier for the custom environment (format: env_*)
+   */
+  id: string;
+  /**
+   * URL-friendly name of the environment
+   */
+  slug: string;
+  /**
+   * The type of environment (production, preview, or development)
+   */
+  type: 'development' | 'preview' | 'production';
+  /**
+   * Optional description of the environment's purpose
+   */
+  description?: string;
+  /**
+   * Configuration for matching git branches to this environment
+   */
+  branchMatcher?: {
+    /**
+     * The type of matching to perform
+     */
+    type: 'endsWith' | 'equals' | 'startsWith';
+    /**
+     * The pattern to match against branch names
+     */
+    pattern: string;
+  };
+  /**
+   * List of domains associated with this environment
+   */
+  domains?: {
+    name: string;
+    apexName: string;
+    projectId: string;
+    redirect?: string | null;
+    redirectStatusCode?: 301 | 302 | 307 | 308 | null;
+    gitBranch?: string | null;
+    customEnvironmentId?: string | null;
+    updatedAt?: number;
+    createdAt?: number;
+    /**
+     * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+     */
+    verified: boolean;
+    /**
+     * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+     */
+    verification?: {
+      type: string;
+      domain: string;
+      value: string;
+      reason: string;
+    }[];
+  }[];
+  /**
+   * List of aliases for the current deployment
+   */
+  currentDeploymentAliases?: string[];
+  /**
+   * Timestamp when the environment was created
+   */
+  createdAt: number;
+  /**
+   * Timestamp when the environment was last updated
+   */
+  updatedAt: number;
+};
+
 export type CreateCustomEnvironmentRequestBody = {
   /**
    * The slug of the custom environment to create.
@@ -15290,7 +15990,7 @@ export type CreateCustomEnvironmentVariables = {
  */
 export const createCustomEnvironment = (variables: CreateCustomEnvironmentVariables, signal?: AbortSignal) =>
   fetch<
-    Record<string, any>,
+    CreateCustomEnvironmentResponse,
     CreateCustomEnvironmentError,
     CreateCustomEnvironmentRequestBody,
     {},
@@ -15329,7 +16029,76 @@ export type GetV9ProjectsIdOrNameCustomEnvironmentsResponse = {
   accountLimit: {
     total: number;
   };
-  environments: Record<string, any>[];
+  environments: {
+    /**
+     * Unique identifier for the custom environment (format: env_*)
+     */
+    id: string;
+    /**
+     * URL-friendly name of the environment
+     */
+    slug: string;
+    /**
+     * The type of environment (production, preview, or development)
+     */
+    type: 'development' | 'preview' | 'production';
+    /**
+     * Optional description of the environment's purpose
+     */
+    description?: string;
+    /**
+     * Configuration for matching git branches to this environment
+     */
+    branchMatcher?: {
+      /**
+       * The type of matching to perform
+       */
+      type: 'endsWith' | 'equals' | 'startsWith';
+      /**
+       * The pattern to match against branch names
+       */
+      pattern: string;
+    };
+    /**
+     * List of domains associated with this environment
+     */
+    domains?: {
+      name: string;
+      apexName: string;
+      projectId: string;
+      redirect?: string | null;
+      redirectStatusCode?: 301 | 302 | 307 | 308 | null;
+      gitBranch?: string | null;
+      customEnvironmentId?: string | null;
+      updatedAt?: number;
+      createdAt?: number;
+      /**
+       * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+       */
+      verified: boolean;
+      /**
+       * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+       */
+      verification?: {
+        type: string;
+        domain: string;
+        value: string;
+        reason: string;
+      }[];
+    }[];
+    /**
+     * List of aliases for the current deployment
+     */
+    currentDeploymentAliases?: string[];
+    /**
+     * Timestamp when the environment was created
+     */
+    createdAt: number;
+    /**
+     * Timestamp when the environment was last updated
+     */
+    updatedAt: number;
+  }[];
 };
 
 export type GetV9ProjectsIdOrNameCustomEnvironmentsVariables = {
@@ -15377,6 +16146,77 @@ export type GetCustomEnvironmentQueryParams = {
 
 export type GetCustomEnvironmentError = Fetcher.ErrorWrapper<undefined>;
 
+export type GetCustomEnvironmentResponse = {
+  /**
+   * Unique identifier for the custom environment (format: env_*)
+   */
+  id: string;
+  /**
+   * URL-friendly name of the environment
+   */
+  slug: string;
+  /**
+   * The type of environment (production, preview, or development)
+   */
+  type: 'development' | 'preview' | 'production';
+  /**
+   * Optional description of the environment's purpose
+   */
+  description?: string;
+  /**
+   * Configuration for matching git branches to this environment
+   */
+  branchMatcher?: {
+    /**
+     * The type of matching to perform
+     */
+    type: 'endsWith' | 'equals' | 'startsWith';
+    /**
+     * The pattern to match against branch names
+     */
+    pattern: string;
+  };
+  /**
+   * List of domains associated with this environment
+   */
+  domains?: {
+    name: string;
+    apexName: string;
+    projectId: string;
+    redirect?: string | null;
+    redirectStatusCode?: 301 | 302 | 307 | 308 | null;
+    gitBranch?: string | null;
+    customEnvironmentId?: string | null;
+    updatedAt?: number;
+    createdAt?: number;
+    /**
+     * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+     */
+    verified: boolean;
+    /**
+     * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+     */
+    verification?: {
+      type: string;
+      domain: string;
+      value: string;
+      reason: string;
+    }[];
+  }[];
+  /**
+   * List of aliases for the current deployment
+   */
+  currentDeploymentAliases?: string[];
+  /**
+   * Timestamp when the environment was created
+   */
+  createdAt: number;
+  /**
+   * Timestamp when the environment was last updated
+   */
+  updatedAt: number;
+};
+
 export type GetCustomEnvironmentVariables = {
   pathParams: GetCustomEnvironmentPathParams;
   queryParams?: GetCustomEnvironmentQueryParams;
@@ -15387,7 +16227,7 @@ export type GetCustomEnvironmentVariables = {
  */
 export const getCustomEnvironment = (variables: GetCustomEnvironmentVariables, signal?: AbortSignal) =>
   fetch<
-    Record<string, any>,
+    GetCustomEnvironmentResponse,
     GetCustomEnvironmentError,
     undefined,
     {},
@@ -15418,6 +16258,77 @@ export type UpdateCustomEnvironmentQueryParams = {
 };
 
 export type UpdateCustomEnvironmentError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateCustomEnvironmentResponse = {
+  /**
+   * Unique identifier for the custom environment (format: env_*)
+   */
+  id: string;
+  /**
+   * URL-friendly name of the environment
+   */
+  slug: string;
+  /**
+   * The type of environment (production, preview, or development)
+   */
+  type: 'development' | 'preview' | 'production';
+  /**
+   * Optional description of the environment's purpose
+   */
+  description?: string;
+  /**
+   * Configuration for matching git branches to this environment
+   */
+  branchMatcher?: {
+    /**
+     * The type of matching to perform
+     */
+    type: 'endsWith' | 'equals' | 'startsWith';
+    /**
+     * The pattern to match against branch names
+     */
+    pattern: string;
+  };
+  /**
+   * List of domains associated with this environment
+   */
+  domains?: {
+    name: string;
+    apexName: string;
+    projectId: string;
+    redirect?: string | null;
+    redirectStatusCode?: 301 | 302 | 307 | 308 | null;
+    gitBranch?: string | null;
+    customEnvironmentId?: string | null;
+    updatedAt?: number;
+    createdAt?: number;
+    /**
+     * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+     */
+    verified: boolean;
+    /**
+     * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+     */
+    verification?: {
+      type: string;
+      domain: string;
+      value: string;
+      reason: string;
+    }[];
+  }[];
+  /**
+   * List of aliases for the current deployment
+   */
+  currentDeploymentAliases?: string[];
+  /**
+   * Timestamp when the environment was created
+   */
+  createdAt: number;
+  /**
+   * Timestamp when the environment was last updated
+   */
+  updatedAt: number;
+};
 
 export type UpdateCustomEnvironmentRequestBody = {
   /**
@@ -15460,7 +16371,7 @@ export type UpdateCustomEnvironmentVariables = {
  */
 export const updateCustomEnvironment = (variables: UpdateCustomEnvironmentVariables, signal?: AbortSignal) =>
   fetch<
-    Record<string, any>,
+    UpdateCustomEnvironmentResponse,
     UpdateCustomEnvironmentError,
     UpdateCustomEnvironmentRequestBody,
     {},
@@ -15497,6 +16408,77 @@ export type RemoveCustomEnvironmentQueryParams = {
 
 export type RemoveCustomEnvironmentError = Fetcher.ErrorWrapper<undefined>;
 
+export type RemoveCustomEnvironmentResponse = {
+  /**
+   * Unique identifier for the custom environment (format: env_*)
+   */
+  id: string;
+  /**
+   * URL-friendly name of the environment
+   */
+  slug: string;
+  /**
+   * The type of environment (production, preview, or development)
+   */
+  type: 'development' | 'preview' | 'production';
+  /**
+   * Optional description of the environment's purpose
+   */
+  description?: string;
+  /**
+   * Configuration for matching git branches to this environment
+   */
+  branchMatcher?: {
+    /**
+     * The type of matching to perform
+     */
+    type: 'endsWith' | 'equals' | 'startsWith';
+    /**
+     * The pattern to match against branch names
+     */
+    pattern: string;
+  };
+  /**
+   * List of domains associated with this environment
+   */
+  domains?: {
+    name: string;
+    apexName: string;
+    projectId: string;
+    redirect?: string | null;
+    redirectStatusCode?: 301 | 302 | 307 | 308 | null;
+    gitBranch?: string | null;
+    customEnvironmentId?: string | null;
+    updatedAt?: number;
+    createdAt?: number;
+    /**
+     * `true` if the domain is verified for use with the project. If `false` it will not be used as an alias on this project until the challenge in `verification` is completed.
+     */
+    verified: boolean;
+    /**
+     * A list of verification challenges, one of which must be completed to verify the domain for use on the project. After the challenge is complete `POST /projects/:idOrName/domains/:domain/verify` to verify the domain. Possible challenges: - If `verification.type = TXT` the `verification.domain` will be checked for a TXT record matching `verification.value`.
+     */
+    verification?: {
+      type: string;
+      domain: string;
+      value: string;
+      reason: string;
+    }[];
+  }[];
+  /**
+   * List of aliases for the current deployment
+   */
+  currentDeploymentAliases?: string[];
+  /**
+   * Timestamp when the environment was created
+   */
+  createdAt: number;
+  /**
+   * Timestamp when the environment was last updated
+   */
+  updatedAt: number;
+};
+
 export type RemoveCustomEnvironmentRequestBody = {
   /**
    * Delete Environment Variables that are not assigned to any environments.
@@ -15515,7 +16497,7 @@ export type RemoveCustomEnvironmentVariables = {
  */
 export const removeCustomEnvironment = (variables: RemoveCustomEnvironmentVariables, signal?: AbortSignal) =>
   fetch<
-    Record<string, any>,
+    RemoveCustomEnvironmentResponse,
     RemoveCustomEnvironmentError,
     RemoveCustomEnvironmentRequestBody,
     {},
