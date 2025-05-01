@@ -1955,8 +1955,26 @@ export type UserEvent = {
         project: {
           id: string;
           name?: string;
-          oldConnectConfigurations: Record<string, any>[] | null;
-          newConnectConfigurations: Record<string, any>[] | null;
+          oldConnectConfigurations:
+            | {
+                envId: string | ('preview' | 'production');
+                connectConfigurationId: string;
+                passive: boolean;
+                buildsEnabled: boolean;
+                createdAt: number;
+                updatedAt: number;
+              }[]
+            | null;
+          newConnectConfigurations:
+            | {
+                envId: string | ('preview' | 'production');
+                connectConfigurationId: string;
+                passive: boolean;
+                buildsEnabled: boolean;
+                createdAt: number;
+                updatedAt: number;
+              }[]
+            | null;
         };
       }
     | {
