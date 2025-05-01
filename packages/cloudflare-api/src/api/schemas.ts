@@ -37303,7 +37303,7 @@ export type RulesetsCompressResponseRule = {
       /**
        * Name of compression algorithm to enable.
        */
-      name?: 'none' | 'auto' | 'default' | 'gzip' | 'brotli';
+      name?: 'none' | 'auto' | 'default' | 'gzip' | 'brotli' | 'zstd';
     }[];
   };
   /**
@@ -38175,7 +38175,6 @@ export type RulesetsLogCustomFieldRule = {
       /**
        * Whether to log duplicate values of the same header.
        *
-       * @default false
        * @example true
        */
       preserve_duplicates?: boolean;
@@ -38210,7 +38209,6 @@ export type RulesetsLogCustomFieldRule = {
       /**
        * Whether to log duplicate values of the same header.
        *
-       * @default false
        * @example true
        */
       preserve_duplicates?: boolean;
@@ -39092,6 +39090,16 @@ export type RulesetsRewriteRule = {
             operation: 'remove';
           }
         | {
+            operation: 'add';
+            /**
+             * Static value for the header.
+             *
+             * @example static-header-value
+             * @minLength 1
+             */
+            value: string;
+          }
+        | {
             operation: 'set';
             /**
              * Static value for the header.
@@ -39100,6 +39108,16 @@ export type RulesetsRewriteRule = {
              * @minLength 1
              */
             value: string;
+          }
+        | {
+            /**
+             * Expression for the header value.
+             *
+             * @example ip.src
+             * @minLength 1
+             */
+            expression: string;
+            operation: 'add';
           }
         | {
             /**
