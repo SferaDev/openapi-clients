@@ -12089,6 +12089,7 @@ export type BillSubsApiZoneSubscriptionResponseSingle = BillSubsApiApiResponseSi
  * Enable rule to block AI Scrapers and Crawlers.
  *
  * @example block
+ * @x-auditable true
  */
 export type BotManagementAiBotsProtection = 'block' | 'disabled';
 
@@ -12096,7 +12097,7 @@ export type BotManagementApiResponseCommon = {
   errors: BotManagementMessages;
   messages: BotManagementMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -12112,7 +12113,7 @@ export type BotManagementApiResponseCommonFailure = {
   messages: BotManagementMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -12125,6 +12126,7 @@ export type BotManagementApiResponseSingle = BotManagementApiResponseCommon;
  * Automatically update to the newest bot detection models created by Cloudflare as they are released. [Learn more.](https://developers.cloudflare.com/bots/reference/machine-learning-models#model-versions-and-release-notes)
  *
  * @example true
+ * @x-auditable true
  */
 export type BotManagementAutoUpdateModel = boolean;
 
@@ -12184,6 +12186,7 @@ export type BotManagementConfigSingle =
  * Enable rule to punish AI Scrapers and Crawlers via a link maze.
  *
  * @example enabled
+ * @x-auditable true
  */
 export type BotManagementCrawlerProtection = 'enabled' | 'disabled';
 
@@ -12191,6 +12194,7 @@ export type BotManagementCrawlerProtection = 'enabled' | 'disabled';
  * Use lightweight, invisible JavaScript detections to improve Bot Management. [Learn more about JavaScript Detections](https://developers.cloudflare.com/bots/reference/javascript-detections/).
  *
  * @example true
+ * @x-auditable true
  */
 export type BotManagementEnableJs = boolean;
 
@@ -12198,16 +12202,19 @@ export type BotManagementEnableJs = boolean;
  * Whether to enable Bot Fight Mode.
  *
  * @example true
+ * @x-auditable true
  */
 export type BotManagementFightMode = boolean;
 
 /**
  * Indicates that the zone's Bot Fight Mode is turned on.
+ *
+ * @x-auditable true
  */
 export type BotManagementFightModeTurnedOn = boolean;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -12219,18 +12226,25 @@ export type BotManagementMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
  * Whether to optimize Super Bot Fight Mode protections for Wordpress.
  *
  * @example true
+ * @x-auditable true
  */
 export type BotManagementOptimizeWordpress = boolean;
 
 /**
  * Indicates that the zone's wordpress optimization for SBFM is turned on.
+ *
+ * @x-auditable true
  */
 export type BotManagementOptimizeWordpressTurnedOn = boolean;
 
@@ -12238,11 +12252,14 @@ export type BotManagementOptimizeWordpressTurnedOn = boolean;
  * Super Bot Fight Mode (SBFM) action to take on definitely automated requests.
  *
  * @example allow
+ * @x-auditable true
  */
 export type BotManagementSbfmDefinitelyAutomated = 'allow' | 'block' | 'managed_challenge';
 
 /**
  * Indicates that the zone's definitely automated requests are being blocked or challenged.
+ *
+ * @x-auditable true
  */
 export type BotManagementSbfmDefinitelyAutomatedTurnedOn = string;
 
@@ -12264,11 +12281,14 @@ export type BotManagementSbfmDefinitelyConfig = BotManagementBaseConfig & {
  * Super Bot Fight Mode (SBFM) action to take on likely automated requests.
  *
  * @example allow
+ * @x-auditable true
  */
 export type BotManagementSbfmLikelyAutomated = 'allow' | 'block' | 'managed_challenge';
 
 /**
  * Indicates that the zone's likely automated requests are being blocked or challenged.
+ *
+ * @x-auditable true
  */
 export type BotManagementSbfmLikelyAutomatedTurnedOn = string;
 
@@ -12292,11 +12312,14 @@ export type BotManagementSbfmLikelyConfig = BotManagementBaseConfig & {
  * Note: Static resource protection can also result in legitimate traffic being blocked.
  *
  * @example true
+ * @x-auditable true
  */
 export type BotManagementSbfmStaticResourceProtection = boolean;
 
 /**
  * Indicates that the zone's static resource protection is turned on.
+ *
+ * @x-auditable true
  */
 export type BotManagementSbfmStaticResourceProtectionTurnedOn = string;
 
@@ -12304,11 +12327,14 @@ export type BotManagementSbfmStaticResourceProtectionTurnedOn = string;
  * Super Bot Fight Mode (SBFM) action to take on verified bots requests.
  *
  * @example allow
+ * @x-auditable true
  */
 export type BotManagementSbfmVerifiedBots = 'allow' | 'block';
 
 /**
  * Indicates that the zone's verified bot requests are being blocked.
+ *
+ * @x-auditable true
  */
 export type BotManagementSbfmVerifiedBotsTurnedOn = string;
 
@@ -12317,11 +12343,14 @@ export type BotManagementSbfmVerifiedBotsTurnedOn = string;
  *
  * @default false
  * @example false
+ * @x-auditable true
  */
 export type BotManagementSuppressSessionScore = boolean;
 
 /**
  * Indicates that the zone's session score tracking is disabled.
+ *
+ * @x-auditable true
  */
 export type BotManagementSuppressSessionScoreTurnedOff = boolean;
 
@@ -12329,6 +12358,7 @@ export type BotManagementSuppressSessionScoreTurnedOff = boolean;
  * A read-only field that indicates whether the zone currently is running the latest ML model.
  *
  * @example true
+ * @x-auditable true
  */
 export type BotManagementUsingLatestModel = boolean;
 
@@ -55731,6 +55761,7 @@ export type ZeroTrustGatewayGatewayAccountSettings = {
     custom_certificate?: ZeroTrustGatewayCustomCertificateSettings;
     extended_email_matching?: ZeroTrustGatewayExtendedEmailMatching;
     fips?: ZeroTrustGatewayFipsSettings;
+    host_selector?: ZeroTrustGatewayHostSelectorSettings;
     protocol_detection?: ZeroTrustGatewayProtocolDetection;
     sandbox?: ZeroTrustGatewaySandbox;
     tls_decrypt?: ZeroTrustGatewayTlsSettings;
@@ -55765,12 +55796,24 @@ export type ZeroTrustGatewayGatewayTag = string;
 
 export type ZeroTrustGatewayGenerateCertRequest = {
   /**
-   * Number of days the generated certificate will be valid, minimum 1 day and maximum 30 years. Defaults to 5 years.
+   * Number of days the generated certificate will be valid, minimum 1 day and maximum 30 years. Defaults to 5 years. In terraform, validity_period_days can only be used while creating a certificate, and this CAN NOT be used to extend the validity of an already generated certificate.
    *
    * @example 1826
    */
   validity_period_days?: number;
 };
+
+/**
+ * Setting to enable host selector in egress policies.
+ */
+export type ZeroTrustGatewayHostSelectorSettings = {
+  /**
+   * Enable filtering via hosts for egress policies.
+   *
+   * @example false
+   */
+  enabled?: boolean;
+} | null;
 
 /**
  * The identifier for this category. There is only one category per ID.
