@@ -1106,7 +1106,6 @@ export type UserEvent = {
               | 'FAIR_USE_LIMITS_EXCEEDED'
               | 'BLOCKED_FOR_PLATFORM_ABUSE';
             blockedDueToOverageType?:
-              | 'aiCredits'
               | 'analyticsUsage'
               | 'artifacts'
               | 'bandwidth'
@@ -1217,11 +1216,6 @@ export type UserEvent = {
             blockingAt?: number | null;
           } | null;
           overageUsageAlerts?: {
-            aiCredits?: {
-              currentThreshold: number;
-              warningAt?: number | null;
-              blockedAt?: number | null;
-            };
             analyticsUsage?: {
               currentThreshold: number;
               warningAt?: number | null;
@@ -1504,7 +1498,6 @@ export type UserEvent = {
               blockedUntil?: number;
               blockReason?: 'admin_override' | 'limits_exceeded';
               overageReason:
-                | 'aiCredits'
                 | 'analyticsUsage'
                 | 'artifacts'
                 | 'bandwidth'
@@ -1554,7 +1547,6 @@ export type UserEvent = {
               blockedUntil?: number;
               blockReason?: 'admin_override' | 'limits_exceeded';
               overageReason:
-                | 'aiCredits'
                 | 'analyticsUsage'
                 | 'artifacts'
                 | 'bandwidth'
@@ -1604,7 +1596,6 @@ export type UserEvent = {
               blockedUntil?: number;
               blockReason?: 'admin_override' | 'limits_exceeded';
               overageReason:
-                | 'aiCredits'
                 | 'analyticsUsage'
                 | 'artifacts'
                 | 'bandwidth'
@@ -2936,7 +2927,6 @@ export type AuthUser = {
       | 'SUBSCRIPTION_EXPIRED'
       | 'UNPAID_INVOICE';
     blockedDueToOverageType?:
-      | 'aiCredits'
       | 'analyticsUsage'
       | 'artifacts'
       | 'bandwidth'
