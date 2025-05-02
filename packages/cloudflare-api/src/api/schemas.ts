@@ -14231,10 +14231,10 @@ export type CloudforceOneRequestsTlp = 'clear' | 'amber' | 'amber-strict' | 'gre
 export type CloudforceOneRequestsUuid = string;
 
 export type CloudforceOneWhoisApiResponseCommon = {
-  errors: CloudforceOneWhoisMessages;
-  messages: CloudforceOneWhoisMessages;
+  errors: CloudforceOneWhoisSchemasMessages;
+  messages: CloudforceOneWhoisSchemasMessages;
   /**
-   * Whether the API call was successful
+   * Returns a boolean for the success/failure of the API call.
    *
    * @example true
    */
@@ -14250,7 +14250,7 @@ export type CloudforceOneWhoisApiResponseCommonFailure = {
   messages: CloudforceOneWhoisMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Returns a boolean for the success/failure of the API call.
    *
    * @example false
    */
@@ -14265,7 +14265,7 @@ export type CloudforceOneWhoisApiResponseSingle = CloudforceOneWhoisApiResponseC
 export type CloudforceOneWhoisDomainName = string;
 
 /**
- * Identifier
+ * Use to uniquely identify or reference the resource.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -14278,6 +14278,18 @@ export type CloudforceOneWhoisMessages = {
    */
   code: number;
   message: string;
+}[];
+
+export type CloudforceOneWhoisSchemasMessages = {
+  /**
+   * @minimum 1000
+   */
+  code: number;
+  documentation_url?: string;
+  message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 export type CloudforceOneWhoisSchemasSingleResponse = CloudforceOneWhoisApiResponseSingle & {
@@ -14325,7 +14337,7 @@ export type CloudforceOneWhoisWhois = {
   /**
    * @example true
    */
-  dnssec?: boolean;
+  dnssec: boolean;
   domain: CloudforceOneWhoisDomainName;
   /**
    * @example 2033-02-17T22:07:54.000Z
