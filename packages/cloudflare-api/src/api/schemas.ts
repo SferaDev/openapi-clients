@@ -44335,6 +44335,16 @@ export type StreamWebhookResponseSingle = StreamApiResponseSingle & {
  */
 export type StreamWidth = number;
 
+export type TeamsDevicesAccessSerialNumberListInputRequest = {
+  /**
+   * UUID of Access List
+   *
+   * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
+   * @maxLength 36
+   */
+  id: string;
+};
+
 export type TeamsDevicesAccount = {
   /**
    * @deprecated true
@@ -44376,7 +44386,7 @@ export type TeamsDevicesAllowedToLeave = boolean;
 export type TeamsDevicesApiResponseCollection = {
   errors: TeamsDevicesMessages;
   messages: TeamsDevicesMessages;
-  result: Record<string, any> | any[] | string | null;
+  result: Record<string, any> | Record<string, any>[] | string | null;
   /**
    * Whether the API call was successful.
    *
@@ -44389,7 +44399,7 @@ export type TeamsDevicesApiResponseCollection = {
 export type TeamsDevicesApiResponseCollectionCommon = {
   errors: TeamsDevicesMessages;
   messages: TeamsDevicesMessages;
-  result: Record<string, any> | any[] | string | null;
+  result: Record<string, any> | Record<string, any>[] | string | null;
   /**
    * Whether the API call was successful.
    *
@@ -44401,7 +44411,7 @@ export type TeamsDevicesApiResponseCollectionCommon = {
 export type TeamsDevicesApiResponseCommon = {
   errors: TeamsDevicesMessages;
   messages: TeamsDevicesMessages;
-  result: Record<string, any> | any[] | string;
+  result: Record<string, any> | Record<string, any>[] | string;
   /**
    * Whether the API call was successful.
    *
@@ -44419,7 +44429,7 @@ export type TeamsDevicesApiResponseCommonFailure = {
   messages: TeamsDevicesMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -44440,7 +44450,7 @@ export type TeamsDevicesApiResponseSingle = {
 
 export type TeamsDevicesApplicationInputRequest = {
   /**
-   * Operating system
+   * Operating system.
    *
    * @example mac
    */
@@ -44481,7 +44491,7 @@ export type TeamsDevicesCaptivePortal = number;
 
 export type TeamsDevicesCarbonblackInputRequest = {
   /**
-   * Operating system
+   * Operating system.
    *
    * @example mac
    */
@@ -44524,7 +44534,7 @@ export type TeamsDevicesClientCertificateInputRequest = {
    */
   certificate_id: string;
   /**
-   * Common Name that is protected by the certificate
+   * Common Name that is protected by the certificate.
    *
    * @example example.com
    */
@@ -44552,7 +44562,7 @@ export type TeamsDevicesClientCertificateV2InputRequest = {
    */
   cn?: string;
   /**
-   * List of values indicating purposes for which the certificate public key can be used
+   * List of values indicating purposes for which the certificate public key can be used.
    *
    * @example clientAuth
    * @example emailProtection
@@ -44563,7 +44573,7 @@ export type TeamsDevicesClientCertificateV2InputRequest = {
     trust_stores?: TeamsDevicesTrustStores;
   };
   /**
-   * Operating System
+   * Operating System.
    *
    * @example windows
    */
@@ -44593,7 +44603,7 @@ export type TeamsDevicesComponentsSchemasSingleResponse = TeamsDevicesApiRespons
 export type TeamsDevicesComponentsSchemasType = 'tls';
 
 /**
- * UUID
+ * UUID.
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
@@ -44672,25 +44682,25 @@ export type TeamsDevicesCrowdstrikeInputRequest = {
    */
   last_seen?: string;
   /**
-   * Operator
+   * Operator.
    *
    * @example >
    */
   operator?: '<' | '<=' | '>' | '>=' | '==';
   /**
-   * Os Version
+   * Os Version.
    *
    * @example 13.3.0
    */
   os?: string;
   /**
-   * overall
+   * Overall.
    *
    * @example 90
    */
   overall?: string;
   /**
-   * SensorConfig
+   * SensorConfig.
    *
    * @example 90
    */
@@ -44702,13 +44712,13 @@ export type TeamsDevicesCrowdstrikeInputRequest = {
    */
   state?: 'online' | 'offline' | 'unknown';
   /**
-   * Version
+   * Version.
    *
    * @example 13.3.0
    */
   version?: string;
   /**
-   * Version Operator
+   * Version Operator.
    *
    * @example >
    */
@@ -44716,7 +44726,7 @@ export type TeamsDevicesCrowdstrikeInputRequest = {
 };
 
 /**
- * v4 public API Pagination/Cursor info
+ * V4 public API Pagination/Cursor info.
  *
  * @example {"count":1,"cursor":"ais86dftf.asdf7ba8","page":null,"per_page":10,"total_count":null}
  */
@@ -44741,13 +44751,13 @@ export type TeamsDevicesCursorResultInfo = {
 
 export type TeamsDevicesCustomS2sConfigRequest = {
   /**
-   * This id will be passed in the `CF-Access-Client-ID` header when hitting the `api_url`
+   * This id will be passed in the `CF-Access-Client-ID` header when hitting the `api_url`.
    *
    * @example 88bf3b6d86161464f6509f7219099e57.access
    */
   access_client_id: string;
   /**
-   * This secret will be passed in the `CF-Access-Client-Secret` header when hitting the `api_url`
+   * This secret will be passed in the `CF-Access-Client-Secret` header when hitting the `api_url`.
    *
    * @example bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5
    * @x-sensitive true
@@ -44769,7 +44779,7 @@ export type TeamsDevicesCustomS2sInputRequest = {
    */
   connection_id: string;
   /**
-   * operator
+   * Operator.
    *
    * @example >
    */
@@ -44926,7 +44936,7 @@ export type TeamsDevicesDeviceDexTestSchemasInterval = string;
 export type TeamsDevicesDeviceDexTestSchemasName = string;
 
 /**
- * Device settings profiles targeted by this test
+ * Device settings profiles targeted by this test.
  */
 export type TeamsDevicesDeviceDexTestTargetPolicies = TeamsDevicesDexTargetPolicy[];
 
@@ -45052,7 +45062,9 @@ export type TeamsDevicesDevicesPolicyCertificates = {
   enabled: boolean;
 };
 
-export type TeamsDevicesDevicesPolicyCertificatesSingle = TeamsDevicesApiResponseSingle;
+export type TeamsDevicesDevicesPolicyCertificatesSingle = TeamsDevicesApiResponseSingle & {
+  result?: TeamsDevicesDevicesPolicyCertificates;
+};
 
 export type TeamsDevicesDevicesResponse = TeamsDevicesApiResponseCollection & {
   result?: TeamsDevicesDevices[];
@@ -45065,7 +45077,7 @@ export type TeamsDevicesDexDeleteResponseCollection = {
     | {
         dex_tests?: TeamsDevicesDeviceDexTestSchemasHttp[];
       }
-    | any[]
+    | Record<string, any>[]
     | string;
   /**
    * Whether the API call was successful.
@@ -45085,15 +45097,15 @@ export type TeamsDevicesDexSingleResponse = TeamsDevicesApiResponseSingle & {
 
 export type TeamsDevicesDexTargetPolicy = {
   /**
-   * Whether the profile is the account default
+   * Whether the profile is the account default.
    */
   ['default']?: boolean;
   /**
-   * The id of the device settings profile
+   * The id of the device settings profile.
    */
   id?: string;
   /**
-   * The name of the device settings profile
+   * The name of the device settings profile.
    */
   name?: string;
 };
@@ -45111,31 +45123,31 @@ export type TeamsDevicesDisableForTime = {
    *
    * @example 9106681
    */
-  ['1']?: void;
+  ['1']?: string;
   /**
    * Override code that is valid for 3 hours.
    *
    * @example 5356247
    */
-  ['3']?: void;
+  ['3']?: string;
   /**
    * Override code that is valid for 6 hours.
    *
    * @example 9478972
    */
-  ['6']?: void;
+  ['6']?: string;
   /**
    * Override code that is valid for 12 hour2.
    *
    * @example 3424359
    */
-  ['12']?: void;
+  ['12']?: string;
   /**
    * Override code that is valid for 24 hour.2.
    *
    * @example 2887634
    */
-  ['24']?: void;
+  ['24']?: string;
 };
 
 /**
@@ -45152,13 +45164,13 @@ export type TeamsDevicesDiskEncryptionInputRequest = {
 
 export type TeamsDevicesDomainJoinedInputRequest = {
   /**
-   * Domain
+   * Domain.
    *
    * @example example.com
    */
   domain?: string;
   /**
-   * Operating System
+   * Operating System.
    *
    * @example windows
    */
@@ -45239,13 +45251,13 @@ export type TeamsDevicesFallbackDomains = TeamsDevicesFallbackDomain[];
 
 export type TeamsDevicesFileInputRequest = {
   /**
-   * Whether or not file exists
+   * Whether or not file exists.
    *
    * @example true
    */
   exists?: boolean;
   /**
-   * Operating system
+   * Operating system.
    *
    * @example mac
    */
@@ -45272,13 +45284,13 @@ export type TeamsDevicesFileInputRequest = {
 
 export type TeamsDevicesFirewallInputRequest = {
   /**
-   * Enabled
+   * Enabled.
    *
    * @example true
    */
   enabled: boolean;
   /**
-   * Operating System
+   * Operating System.
    *
    * @example windows
    */
@@ -45376,6 +45388,7 @@ export type TeamsDevicesInput =
   | TeamsDevicesFirewallInputRequest
   | TeamsDevicesSentineloneInputRequest
   | TeamsDevicesCarbonblackInputRequest
+  | TeamsDevicesAccessSerialNumberListInputRequest
   | TeamsDevicesDiskEncryptionInputRequest
   | TeamsDevicesApplicationInputRequest
   | TeamsDevicesClientCertificateInputRequest
@@ -45419,7 +45432,7 @@ export type TeamsDevicesIntuneConfigRequest = {
 
 export type TeamsDevicesIntuneInputRequest = {
   /**
-   * Compliance Status
+   * Compliance Status.
    *
    * @example compliant
    */
@@ -45484,7 +45497,7 @@ export type TeamsDevicesKolideInputRequest = {
    */
   connection_id: string;
   /**
-   * Count Operator
+   * Count Operator.
    *
    * @example >
    */
@@ -45594,37 +45607,37 @@ export type TeamsDevicesOsVersionExtra = string;
 
 export type TeamsDevicesOsVersionInputRequest = {
   /**
-   * Operating System
+   * Operating System.
    *
    * @example windows
    */
   operating_system: 'windows';
   /**
-   * Operator
+   * Operator.
    *
    * @example 13.3.0
    */
   operator: '<' | '<=' | '>' | '>=' | '==';
   /**
-   * Operating System Distribution Name (linux only)
+   * Operating System Distribution Name (linux only).
    *
    * @example ubuntu
    */
   os_distro_name?: string;
   /**
-   * Version of OS Distribution (linux only)
+   * Version of OS Distribution (linux only).
    *
    * @example 11.3.1
    */
   os_distro_revision?: string;
   /**
-   * Additional version data. For Mac or iOS, the Product Version Extra. For Linux, the kernel release version. (Mac, iOS, and Linux only)
+   * Additional version data. For Mac or iOS, the Product Version Extra. For Linux, the kernel release version. (Mac, iOS, and Linux only).
    *
    * @example (a) or -1007
    */
   os_version_extra?: string;
   /**
-   * Version of OS
+   * Version of OS.
    *
    * @example 13.3.0
    */
@@ -45806,7 +45819,7 @@ export type TeamsDevicesRegistration = {
    */
   key: string;
   /**
-   * The type of encryption key used by the WARP client for the active key. Currently 'curve25519' for WireGuard and 'secp256r1' for MASQUE
+   * The type of encryption key used by the WARP client for the active key. Currently 'curve25519' for WireGuard and 'secp256r1' for MASQUE.
    *
    * @example secp256r1
    */
@@ -45843,19 +45856,19 @@ export type TeamsDevicesRegistration = {
  */
 export type TeamsDevicesRegistrationDeviceDetails = {
   /**
-   * Version of the WARP client
+   * Version of the WARP client.
    *
    * @example 1.0.0
    */
   client_version?: string;
   /**
-   * The ID of the device
+   * The ID of the device.
    *
    * @example 32aa0404-78f1-49a4-99e0-97f575081356
    */
   id: string;
   /**
-   * The name of the device
+   * The name of the device.
    *
    * @example My Device
    */
@@ -45883,25 +45896,25 @@ export type TeamsDevicesResponseCollection = TeamsDevicesApiResponseCollection &
 
 export type TeamsDevicesResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -45957,7 +45970,7 @@ export type TeamsDevicesSchemasIdResponse = TeamsDevicesApiResponseSingle & {
 };
 
 /**
- * The wirefilter expression to match devices. Available values: "identity.email", "identity.groups.id", "identity.groups.name", "identity.groups.email", "identity.service_token_uuid", "identity.saml_attributes", "network", "os.name", "os.version"
+ * The wirefilter expression to match devices. Available values: "identity.email", "identity.groups.id", "identity.groups.name", "identity.groups.email", "identity.service_token_uuid", "identity.saml_attributes", "network", "os.name", "os.version".
  *
  * @example identity.email == "test@cloudflare.com"
  * @maxLength 500
@@ -46010,7 +46023,7 @@ export type TeamsDevicesSchemasUuid = string;
 
 export type TeamsDevicesSentineloneInputRequest = {
   /**
-   * Operating system
+   * Operating system.
    *
    * @example mac
    */
@@ -46094,7 +46107,7 @@ export type TeamsDevicesSentineloneS2sInputRequest = {
     | 'disabled_error'
     | 'db_corruption';
   /**
-   * operator
+   * Operator.
    *
    * @example >
    */
@@ -46181,13 +46194,13 @@ export type TeamsDevicesSwitchLocked = boolean;
 
 export type TeamsDevicesTaniumConfigRequest = {
   /**
-   * If present, this id will be passed in the `CF-Access-Client-ID` header when hitting the `api_url`
+   * If present, this id will be passed in the `CF-Access-Client-ID` header when hitting the `api_url`.
    *
    * @example 88bf3b6d86161464f6509f7219099e57.access
    */
   access_client_id?: string;
   /**
-   * If present, this secret will be passed in the `CF-Access-Client-Secret` header when hitting the `api_url`
+   * If present, this secret will be passed in the `CF-Access-Client-Secret` header when hitting the `api_url`.
    *
    * @example bdd31cbc4dec990953e39163fbbb194c93313ca9f0a6e420346af9d326b1d2a5
    * @x-sensitive true
@@ -46234,7 +46247,7 @@ export type TeamsDevicesTaniumInputRequest = {
    */
   risk_level?: 'low' | 'medium' | 'high' | 'critical';
   /**
-   * Score Operator
+   * Score Operator.
    *
    * @example >
    */
@@ -46249,11 +46262,11 @@ export type TeamsDevicesTaniumInputRequest = {
 
 export type TeamsDevicesTargetDexTest = {
   /**
-   * The id of the DEX test targeting this policy
+   * The id of the DEX test targeting this policy.
    */
   id?: string;
   /**
-   * The name of the DEX test targeting this policy
+   * The name of the DEX test targeting this policy.
    */
   name?: string;
 };
@@ -46335,6 +46348,7 @@ export type TeamsDevicesType =
   | 'gateway'
   | 'warp'
   | 'disk_encryption'
+  | 'serial_number'
   | 'sentinelone'
   | 'carbonblack'
   | 'firewall'
@@ -46359,7 +46373,7 @@ export type TeamsDevicesUniqueClientIdInputRequest = {
    */
   id: string;
   /**
-   * Operating System
+   * Operating System.
    *
    * @example android
    */
@@ -46497,7 +46511,7 @@ export type TeamsDevicesWorkspaceOneConfigResponse = {
 
 export type TeamsDevicesWorkspaceOneInputRequest = {
   /**
-   * Compliance Status
+   * Compliance Status.
    *
    * @example compliant
    */
