@@ -13733,7 +13733,7 @@ export type CloudforceOneRequestsApiResponseCommon = {
   errors: CloudforceOneRequestsMessages;
   messages: CloudforceOneRequestsMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -13741,13 +13741,10 @@ export type CloudforceOneRequestsApiResponseCommon = {
 };
 
 export type CloudforceOneRequestsApiResponseCommonFailure = {
-  /**
-   * @example {"code":10433,"message":"request error"}
-   */
   errors: CloudforceOneRequestsMessages;
   messages: CloudforceOneRequestsMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -13755,14 +13752,14 @@ export type CloudforceOneRequestsApiResponseCommonFailure = {
 };
 
 /**
- * Asset file to upload
+ * Asset file to upload.
  *
  * @example @/Users/me/example.docx
  */
 export type CloudforceOneRequestsAssetContent = string;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -13770,7 +13767,7 @@ export type CloudforceOneRequestsAssetContent = string;
 export type CloudforceOneRequestsIdentifier = string;
 
 /**
- * List of labels
+ * List of labels.
  *
  * @example DoS
  * @example CVE
@@ -13778,7 +13775,7 @@ export type CloudforceOneRequestsIdentifier = string;
 export type CloudforceOneRequestsLabels = string[];
 
 /**
- * Content of message
+ * Content of message.
  *
  * @example Can you elaborate on the type of DoS that occurred?
  */
@@ -13789,7 +13786,11 @@ export type CloudforceOneRequestsMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 export type CloudforceOneRequestsPriority = 'routine' | 'high' | 'urgent';
@@ -13797,13 +13798,13 @@ export type CloudforceOneRequestsPriority = 'routine' | 'high' | 'urgent';
 export type CloudforceOneRequestsPriorityEdit = {
   labels: CloudforceOneRequestsLabels;
   /**
-   * Priority
+   * Priority.
    *
    * @example 1
    */
   priority: number;
   /**
-   * Requirement
+   * Requirement.
    *
    * @example DoS attacks carried out by CVEs
    */
@@ -13813,43 +13814,43 @@ export type CloudforceOneRequestsPriorityEdit = {
 
 export type CloudforceOneRequestsPriorityItem = {
   /**
-   * Priority creation time
+   * Priority creation time.
    *
    * @example 2022-04-01T05:20:00Z
    * @format date-time
    */
-  created: CloudforceOneRequestsTime & void;
+  created: CloudforceOneRequestsTime;
   id: CloudforceOneRequestsUuid;
   labels: CloudforceOneRequestsLabels;
   /**
-   * Priority
+   * Priority.
    *
    * @example 1
    */
   priority: number;
   /**
-   * Requirement
+   * Requirement.
    *
    * @example DoS attacks carried out by CVEs
    */
   requirement: string;
   tlp: CloudforceOneRequestsTlp;
   /**
-   * Priority last updated time
+   * Priority last updated time.
    *
    * @example 2022-04-01T05:20:00Z
    * @format date-time
    */
-  updated: CloudforceOneRequestsTime & void;
+  updated: CloudforceOneRequestsTime;
 };
 
 export type CloudforceOneRequestsPriorityList = {
   /**
-   * Page number of results
+   * Page number of results.
    */
   page: number;
   /**
-   * Number of results per page
+   * Number of results per page.
    *
    * @example 10
    */
@@ -13858,27 +13859,27 @@ export type CloudforceOneRequestsPriorityList = {
 
 export type CloudforceOneRequestsQuota = {
   /**
-   * Anniversary date is when annual quota limit is refresh
+   * Anniversary date is when annual quota limit is refreshed.
    *
-   * @example 2022-01-01T00:00:00Z
+   * @example 2022-04-01T05:20:00Z
    * @format date-time
    */
-  anniversary_date?: CloudforceOneRequestsTime & void & void;
+  anniversary_date?: CloudforceOneRequestsTime;
   /**
-   * Quater anniversary date is when quota limit is refreshed each quarter
+   * Quarter anniversary date is when quota limit is refreshed each quarter.
    *
-   * @example 2022-04-01T00:00:00Z
+   * @example 2022-04-01T05:20:00Z
    * @format date-time
    */
-  quarter_anniversary_date?: CloudforceOneRequestsTime & void & void;
+  quarter_anniversary_date?: CloudforceOneRequestsTime;
   /**
-   * Tokens for the quarter
+   * Tokens for the quarter.
    *
    * @example 120
    */
   quota?: number;
   /**
-   * Tokens remaining for the quarter
+   * Tokens remaining for the quarter.
    *
    * @example 64
    */
@@ -13891,30 +13892,30 @@ export type CloudforceOneRequestsRequestAssetEdit = {
 
 export type CloudforceOneRequestsRequestAssetItem = {
   /**
-   * Asset creation time
+   * Defines the asset creation time.
    *
-   * @example 2022-01-01T00:00:00Z
+   * @example 2022-04-01T05:20:00Z
    * @format date-time
    */
-  created?: CloudforceOneRequestsTime & void & void;
+  created?: CloudforceOneRequestsTime;
   /**
-   * Asset description
+   * Asset description.
    *
    * @example example description
    */
   description?: string;
   /**
-   * Asset file type
+   * Asset file type.
    *
    * @example docx
    */
   file_type?: string;
   /**
-   * Asset ID
+   * Asset ID.
    */
   id: number;
   /**
-   * Asset name
+   * Asset name.
    *
    * @example example.docx
    */
@@ -13923,11 +13924,11 @@ export type CloudforceOneRequestsRequestAssetItem = {
 
 export type CloudforceOneRequestsRequestAssetList = {
   /**
-   * Page number of results
+   * Page number of results.
    */
   page: number;
   /**
-   * Number of results per page
+   * Number of results per page.
    *
    * @example 10
    */
@@ -13961,7 +13962,7 @@ export type CloudforceOneRequestsRequestConstants = {
 };
 
 /**
- * Request content
+ * Request content.
  *
  * @example What regions were most effected by the recent DoS?
  */
@@ -13970,7 +13971,7 @@ export type CloudforceOneRequestsRequestContent = string;
 export type CloudforceOneRequestsRequestEdit = {
   content?: CloudforceOneRequestsRequestContent;
   /**
-   * Priority for analyzing the request
+   * Priority for analyzing the request.
    *
    * @example routine
    */
@@ -13986,7 +13987,7 @@ export type CloudforceOneRequestsRequestItem = {
   created: CloudforceOneRequestsTime;
   id: CloudforceOneRequestsUuid;
   /**
-   * Tokens for the request messages
+   * Tokens for the request messages.
    *
    * @example 1
    */
@@ -13998,7 +13999,7 @@ export type CloudforceOneRequestsRequestItem = {
   summary: CloudforceOneRequestsRequestSummary;
   tlp: CloudforceOneRequestsTlp;
   /**
-   * Tokens for the request
+   * Tokens for the request.
    *
    * @example 16
    */
@@ -14008,52 +14009,52 @@ export type CloudforceOneRequestsRequestItem = {
 
 export type CloudforceOneRequestsRequestList = {
   /**
-   * Retrieve requests completed after this time
+   * Retrieve requests completed after this time.
    *
-   * @example 2022-01-01T00:00:00Z
+   * @example 2022-04-01T05:20:00Z
    * @format date-time
    */
-  completed_after?: CloudforceOneRequestsTime & void & void;
+  completed_after?: CloudforceOneRequestsTime;
   /**
-   * Retrieve requests completed before this time
+   * Retrieve requests completed before this time.
    *
-   * @example 2024-01-01T00:00:00Z
+   * @example 2022-04-01T05:20:00Z
    * @format date-time
    */
-  completed_before?: CloudforceOneRequestsTime & void & void;
+  completed_before?: CloudforceOneRequestsTime;
   /**
-   * Retrieve requests created after this time
+   * Retrieve requests created after this time.
    *
-   * @example 2022-01-01T00:00:00Z
+   * @example 2022-04-01T05:20:00Z
    * @format date-time
    */
-  created_after?: CloudforceOneRequestsTime & void & void;
+  created_after?: CloudforceOneRequestsTime;
   /**
-   * Retrieve requests created before this time
+   * Retrieve requests created before this time.
    *
-   * @example 2024-01-01T00:00:00Z
+   * @example 2022-04-01T05:20:00Z
    * @format date-time
    */
-  created_before?: CloudforceOneRequestsTime & void & void;
+  created_before?: CloudforceOneRequestsTime;
   /**
-   * Page number of results
+   * Page number of results.
    */
   page: number;
   /**
-   * Number of results per page
+   * Number of results per page.
    *
    * @example 10
    */
   per_page: number;
   request_type?: CloudforceOneRequestsRequestType;
   /**
-   * Field to sort results by
+   * Field to sort results by.
    *
    * @example created
    */
   sort_by?: string;
   /**
-   * Sort order (asc or desc)
+   * Sort order (asc or desc).
    */
   sort_order?: 'asc' | 'desc';
   status?: CloudforceOneRequestsRequestStatus;
@@ -14061,22 +14062,22 @@ export type CloudforceOneRequestsRequestList = {
 
 export type CloudforceOneRequestsRequestListItem = {
   /**
-   * Request completion time
+   * Request completion time.
    *
-   * @example 2024-01-01T00:00:00Z
+   * @example 2022-04-01T05:20:00Z
    * @format date-time
    */
-  completed?: CloudforceOneRequestsTime & void & void;
+  completed?: CloudforceOneRequestsTime;
   /**
-   * Request creation time
+   * Request creation time.
    *
-   * @example 2022-04-01T00:00:00Z
+   * @example 2022-04-01T05:20:00Z
    * @format date-time
    */
-  created: CloudforceOneRequestsTime & void & void;
+  created: CloudforceOneRequestsTime;
   id: CloudforceOneRequestsUuid;
   /**
-   * Tokens for the request messages
+   * Tokens for the request messages.
    *
    * @example 16
    */
@@ -14088,16 +14089,16 @@ export type CloudforceOneRequestsRequestListItem = {
   summary: CloudforceOneRequestsRequestSummary;
   tlp: CloudforceOneRequestsTlp;
   /**
-   * Tokens for the request
+   * Tokens for the request.
    */
   tokens?: number;
   /**
-   * Request last updated time
+   * Request last updated time.
    *
-   * @example 2022-04-01T00:00:00Z
+   * @example 2022-04-01T05:20:00Z
    * @format date-time
    */
-  updated: CloudforceOneRequestsTime & void & void;
+  updated: CloudforceOneRequestsTime;
 };
 
 export type CloudforceOneRequestsRequestMessageEdit = {
@@ -14106,82 +14107,82 @@ export type CloudforceOneRequestsRequestMessageEdit = {
 
 export type CloudforceOneRequestsRequestMessageItem = {
   /**
-   * Author of message
+   * Author of message.
    *
    * @example user@domain.com
    */
   author: string;
   content: CloudforceOneRequestsMessageContent;
   /**
-   * Message creation time
+   * Defines the message creation time.
    *
-   * @example 2022-01-01T00:00:00Z
+   * @example 2022-04-01T05:20:00Z
    * @format date-time
    */
-  created?: CloudforceOneRequestsTime & void & void;
+  created?: CloudforceOneRequestsTime;
   /**
-   * Message ID
+   * Message ID.
    */
   id: number;
   /**
-   * Whether the message is a follow-on request
+   * Whether the message is a follow-on request.
    */
   is_follow_on_request: boolean;
   /**
-   * Message last updated time
+   * Defines the message last updated time.
    *
-   * @example 2022-01-01T00:00:00Z
+   * @example 2022-04-01T05:20:00Z
    * @format date-time
    */
-  updated: CloudforceOneRequestsTime & void & void;
+  updated: CloudforceOneRequestsTime;
 };
 
 export type CloudforceOneRequestsRequestMessageList = {
   /**
-   * Retrieve messages created after this time
+   * Retrieve mes  ges created after this time.
    *
-   * @example 2022-01-01T00:00:00Z
+   * @example 2022-04-01T05:20:00Z
    * @format date-time
    */
-  after?: CloudforceOneRequestsTime & void & void;
+  after?: CloudforceOneRequestsTime;
   /**
-   * Retrieve messages created before this time
+   * Retrieve messages created before this time.
    *
-   * @example 2024-01-01T00:00:00Z
+   * @example 2022-04-01T05:20:00Z
    * @format date-time
    */
-  before?: CloudforceOneRequestsTime & void & void;
+  before?: CloudforceOneRequestsTime;
   /**
-   * Page number of results
+   * Page number of results.
    */
   page: number;
   /**
-   * Number of results per page
+   * Number of results per page.
    *
    * @example 10
    */
   per_page: number;
   /**
-   * Field to sort results by
+   * Field to sort results by.
    *
    * @example created
    */
   sort_by?: string;
   /**
-   * Sort order (asc or desc)
+   * Sort order (asc or desc).
    */
   sort_order?: 'asc' | 'desc';
 };
 
 /**
- * Readable Request ID
+ * Readable Request ID.
  *
  * @example RFI-2022-000001
  */
 export type CloudforceOneRequestsRequestReadableId = string;
 
 /**
- * Request Status
+ * Request Status.
  */
 export type CloudforceOneRequestsRequestStatus =
   | 'open'
@@ -14192,14 +14193,14 @@ export type CloudforceOneRequestsRequestStatus =
   | 'declined';
 
 /**
- * Brief description of the request
+ * Brief description of the request.
  *
  * @example DoS attack
  */
 export type CloudforceOneRequestsRequestSummary = string;
 
 /**
- * Requested information from request
+ * Requested information from request.
  *
  * @example Victomology
  */
@@ -14218,12 +14219,12 @@ export type CloudforceOneRequestsRequestTypes = string[];
 export type CloudforceOneRequestsTime = string;
 
 /**
- * The CISA defined Traffic Light Protocol (TLP)
+ * The CISA defined Traffic Light Protocol (TLP).
  */
 export type CloudforceOneRequestsTlp = 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
 
 /**
- * UUID
+ * UUID.
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
@@ -54101,6 +54102,21 @@ export type WorkersService = string;
  * A single set of migrations to apply.
  */
 export type WorkersSingleStepMigrations = WorkersMigrationTagConditions & WorkersMigrationStep;
+
+export type WorkersSubdomain = {
+  /**
+   * Whether the Worker is available on the workers.dev subdomain.
+   *
+   * @example true
+   */
+  enabled: boolean;
+  /**
+   * Whether the Worker's Preview URLs are available on the workers.dev subdomain.
+   *
+   * @example true
+   */
+  previews_enabled: boolean;
+};
 
 export type WorkersSubdomainObject = {
   /**
