@@ -659,13 +659,13 @@ export type UserEvent = {
            * @format date-time
            * @example 2021-02-10T13:11:49.180Z
            */
-          created: string;
+          created?: string;
           /**
            * The name of the Shared Env Var.
            *
            * @example my-api-key
            */
-          key: string;
+          key?: string;
           /**
            * The unique identifier of the owner (team) the Shared Env Var was created for.
            *
@@ -677,7 +677,7 @@ export type UserEvent = {
            *
            * @example env_XCG7t7AIHuO2SBA8667zNUiM
            */
-          id: string;
+          id?: string;
           /**
            * The unique identifier of the user who created the Shared Env Var.
            *
@@ -744,7 +744,7 @@ export type UserEvent = {
           /**
            * whether or not this env variable is decrypted
            */
-          decrypted: boolean;
+          decrypted?: boolean;
           /**
            * A user provided comment that describes what this Shared Env Var is for.
            */
@@ -761,13 +761,13 @@ export type UserEvent = {
            * @format date-time
            * @example 2021-02-10T13:11:49.180Z
            */
-          created: string;
+          created?: string;
           /**
            * The name of the Shared Env Var.
            *
            * @example my-api-key
            */
-          key: string;
+          key?: string;
           /**
            * The unique identifier of the owner (team) the Shared Env Var was created for.
            *
@@ -779,7 +779,7 @@ export type UserEvent = {
            *
            * @example env_XCG7t7AIHuO2SBA8667zNUiM
            */
-          id: string;
+          id?: string;
           /**
            * The unique identifier of the user who created the Shared Env Var.
            *
@@ -846,7 +846,7 @@ export type UserEvent = {
           /**
            * whether or not this env variable is decrypted
            */
-          decrypted: boolean;
+          decrypted?: boolean;
           /**
            * A user provided comment that describes what this Shared Env Var is for.
            */
@@ -1174,11 +1174,11 @@ export type UserEvent = {
               origin:
                 | 'teams'
                 | 'saml'
-                | 'link'
                 | 'github'
                 | 'gitlab'
                 | 'bitbucket'
                 | 'mail'
+                | 'link'
                 | 'import'
                 | 'dsync'
                 | 'feedback'
@@ -1816,11 +1816,11 @@ export type UserEvent = {
               origin:
                 | 'teams'
                 | 'saml'
-                | 'link'
                 | 'github'
                 | 'gitlab'
                 | 'bitbucket'
                 | 'mail'
+                | 'link'
                 | 'import'
                 | 'dsync'
                 | 'feedback'
@@ -2164,7 +2164,7 @@ export type UserEvent = {
         computeUnitsMax?: number;
         computeUnitsMin?: number;
         suspendTimeoutSeconds?: number;
-        type: 'integration' | 'edge-config' | 'redis' | 'postgres' | 'blob';
+        type: 'redis' | 'postgres' | 'edge-config' | 'blob' | 'integration';
       }
     | {
         storeType: 'redis' | 'postgres';

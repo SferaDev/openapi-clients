@@ -4132,10 +4132,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    id?: string;
     createdAt?: number;
-    entrypoint?: string | null;
+    id?: string;
     readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    entrypoint?: string | null;
     readyStateAt?: number;
     output: {
       path: string;
@@ -4179,7 +4179,7 @@ export type CreateDeploymentResponse = {
           /**
            * The type of matching to perform
            */
-          type: 'startsWith' | 'equals' | 'endsWith';
+          type: 'endsWith' | 'startsWith' | 'equals';
           /**
            * The pattern to match against branch names
            */
@@ -4520,7 +4520,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
+            handle: 'error' | 'resource' | 'filesystem' | 'hit' | 'miss' | 'rewrite';
             src?: string;
             dest?: string;
             status?: number;
@@ -4553,7 +4553,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         org: string;
@@ -4565,7 +4565,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         owner: string;
@@ -4577,7 +4577,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | null;
   flags?:
@@ -15823,6 +15823,31 @@ export type UpdateProjectRequestBody = {
       value: string;
     }[];
   } | null;
+  /**
+   * The list of connections from project environment to Secure Compute network
+   *
+   * @minItems 1
+   */
+  connectConfigurations?:
+    | {
+        /**
+         * The ID of the environment
+         */
+        envId: string;
+        /**
+         * The ID of the Secure Compute network
+         */
+        connectConfigurationId: string;
+        /**
+         * Whether the configuration should be passive, meaning builds will not run there and only passive Serverless Functions will be deployed
+         */
+        passive: boolean;
+        /**
+         * Flag saying if project builds should use Secure Compute
+         */
+        buildsEnabled: boolean;
+      }[]
+    | null;
 };
 
 export type UpdateProjectVariables = {
@@ -20507,18 +20532,18 @@ export const getBypassIp = (variables: GetBypassIpVariables, signal?: AbortSigna
   fetch<
     | {
         result: {
-          OwnerId: string;
-          Id: string;
-          Domain: string;
-          Ip: string;
+          OwnerId?: string;
+          Id?: string;
+          Domain?: string;
+          Ip?: string;
           Action?: 'block' | 'bypass';
           ProjectId?: string;
           IsProjectRule?: boolean;
           Note?: string;
-          CreatedAt: string;
+          CreatedAt?: string;
           ActorId?: string;
-          UpdatedAt: string;
-          UpdatedAtHour: string;
+          UpdatedAt?: string;
+          UpdatedAtHour?: string;
           DeletedAt?: string;
           ExpiresAt?: number | null;
         }[];
@@ -20526,18 +20551,18 @@ export const getBypassIp = (variables: GetBypassIpVariables, signal?: AbortSigna
       }
     | {
         result?: {
-          OwnerId: string;
-          Id: string;
-          Domain: string;
-          Ip: string;
+          OwnerId?: string;
+          Id?: string;
+          Domain?: string;
+          Ip?: string;
           Action?: 'block' | 'bypass';
           ProjectId?: string;
           IsProjectRule?: boolean;
           Note?: string;
-          CreatedAt: string;
+          CreatedAt?: string;
           ActorId?: string;
-          UpdatedAt: string;
-          UpdatedAtHour: string;
+          UpdatedAt?: string;
+          UpdatedAtHour?: string;
           DeletedAt?: string;
           ExpiresAt?: number | null;
         }[];
