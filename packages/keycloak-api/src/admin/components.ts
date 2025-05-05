@@ -130,11 +130,11 @@ export type GetAdminRealmsRealmAdminEventsQueryParams = {
    */
   authUser?: string;
   /**
-   * From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp
+   * From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
    */
   dateFrom?: string;
   /**
-   * To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp
+   * To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
    */
   dateTo?: string;
   /**
@@ -8109,11 +8109,11 @@ export type GetAdminRealmsRealmEventsQueryParams = {
    */
   client?: string;
   /**
-   * From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp
+   * From (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
    */
   dateFrom?: string;
   /**
-   * To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp
+   * To (inclusive) date (yyyy-MM-dd) or time in Epoch timestamp millis (number of milliseconds since January 1, 1970, 00:00:00 GMT)
    */
   dateTo?: string;
   /**
