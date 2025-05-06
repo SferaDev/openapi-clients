@@ -27746,12 +27746,11 @@ export type LogpushErrorMessage = string | null;
 export type LogpushFields = string;
 
 /**
- * Filters to drill down into specific events.
+ * The filters to select the events to include and/or remove from your logs. For more information, refer to [Filters](https://developers.cloudflare.com/logs/reference/filters/).
  *
- * @example {"where":{"and":[{"key":"ClientCountry","operator":"neq","value":"ca"}]}}
- * @x-auditable true
+ * @example {"where":{"and":[{"key":"ClientRequestPath","operator":"contains","value":"/static"},{"key":"ClientRequestHost","operator":"eq","value":"example.com"}]}}
  */
-export type LogpushFilter = string;
+export type LogpushFilter = string | null;
 
 /**
  * This field is deprecated. Please use `max_upload_*` parameters instead. The frequency at which Cloudflare sends batches of logs to your destination. Setting frequency to high sends your logs in larger quantities of smaller files. Setting frequency to low sends logs in smaller quantities of larger files.
@@ -27802,7 +27801,7 @@ export type LogpushIdentifier = string;
 export type LogpushInstantLogsJob = {
   destination_conf?: LogpushSchemasDestinationConf;
   fields?: LogpushFields;
-  filter?: LogpushFilter;
+  filter?: LogpushSchemasFilter;
   sample?: LogpushSample;
   session_id?: LogpushSessionId;
 } | null;
@@ -28050,6 +28049,14 @@ export type LogpushSample = number;
  * @x-auditable true
  */
 export type LogpushSchemasDestinationConf = string;
+
+/**
+ * Filters to drill down into specific events.
+ *
+ * @example {"where":{"and":[{"key":"ClientCountry","operator":"neq","value":"ca"}]}}
+ * @x-auditable true
+ */
+export type LogpushSchemasFilter = string;
 
 /**
  * Unique session id of the job.
