@@ -37157,11 +37157,12 @@ export type RulesetsBlockRule = {
      *
      * @example 60
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
     /**
      * The threshold of requests per period after which the action will be executed for the first time.
      *
      * @example 1000
+     * @minimum 1
      */
     requests_per_period?: number;
     /**
@@ -37299,11 +37300,12 @@ export type RulesetsChallengeRule = {
      *
      * @example 60
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
     /**
      * The threshold of requests per period after which the action will be executed for the first time.
      *
      * @example 1000
+     * @minimum 1
      */
     requests_per_period?: number;
     /**
@@ -37453,11 +37455,12 @@ export type RulesetsCompressResponseRule = {
      *
      * @example 60
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
     /**
      * The threshold of requests per period after which the action will be executed for the first time.
      *
      * @example 1000
+     * @minimum 1
      */
     requests_per_period?: number;
     /**
@@ -37603,11 +37606,12 @@ export type RulesetsDDoSDynamicRule = {
      *
      * @example 60
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
     /**
      * The threshold of requests per period after which the action will be executed for the first time.
      *
      * @example 1000
+     * @minimum 1
      */
     requests_per_period?: number;
     /**
@@ -37862,11 +37866,12 @@ export type RulesetsExecuteRule = {
      *
      * @example 60
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
     /**
      * The threshold of requests per period after which the action will be executed for the first time.
      *
      * @example 1000
+     * @minimum 1
      */
     requests_per_period?: number;
     /**
@@ -38006,11 +38011,12 @@ export type RulesetsForceConnectionCloseRule = {
      *
      * @example 60
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
     /**
      * The threshold of requests per period after which the action will be executed for the first time.
      *
      * @example 1000
+     * @minimum 1
      */
     requests_per_period?: number;
     /**
@@ -38148,11 +38154,12 @@ export type RulesetsJsChallengeRule = {
      *
      * @example 60
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
     /**
      * The threshold of requests per period after which the action will be executed for the first time.
      *
      * @example 1000
+     * @minimum 1
      */
     requests_per_period?: number;
     /**
@@ -38375,11 +38382,12 @@ export type RulesetsLogCustomFieldRule = {
      *
      * @example 60
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
     /**
      * The threshold of requests per period after which the action will be executed for the first time.
      *
      * @example 1000
+     * @minimum 1
      */
     requests_per_period?: number;
     /**
@@ -38517,11 +38525,12 @@ export type RulesetsLogRule = {
      *
      * @example 60
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
     /**
      * The threshold of requests per period after which the action will be executed for the first time.
      *
      * @example 1000
+     * @minimum 1
      */
     requests_per_period?: number;
     /**
@@ -38659,11 +38668,12 @@ export type RulesetsManagedChallengeRule = {
      *
      * @example 60
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
     /**
      * The threshold of requests per period after which the action will be executed for the first time.
      *
      * @example 1000
+     * @minimum 1
      */
     requests_per_period?: number;
     /**
@@ -38988,11 +38998,12 @@ export type RulesetsRedirectRule = {
      *
      * @example 60
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
     /**
      * The threshold of requests per period after which the action will be executed for the first time.
      *
      * @example 1000
+     * @minimum 1
      */
     requests_per_period?: number;
     /**
@@ -39295,11 +39306,12 @@ export type RulesetsRewriteRule = {
      *
      * @example 60
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
     /**
      * The threshold of requests per period after which the action will be executed for the first time.
      *
      * @example 1000
+     * @minimum 1
      */
     requests_per_period?: number;
     /**
@@ -39496,11 +39508,12 @@ export type RulesetsRouteRule = {
      *
      * @example 60
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
     /**
      * The threshold of requests per period after which the action will be executed for the first time.
      *
      * @example 1000
+     * @minimum 1
      */
     requests_per_period?: number;
     /**
@@ -39637,11 +39650,12 @@ export type RulesetsRule = {
      *
      * @example 60
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
     /**
      * The threshold of requests per period after which the action will be executed for the first time.
      *
      * @example 1000
+     * @minimum 1
      */
     requests_per_period?: number;
     /**
@@ -39918,11 +39932,12 @@ export type RulesetsScoreRule = {
      *
      * @example 60
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
     /**
      * The threshold of requests per period after which the action will be executed for the first time.
      *
      * @example 1000
+     * @minimum 1
      */
     requests_per_period?: number;
     /**
@@ -40083,11 +40098,12 @@ export type RulesetsServeErrorRule = {
      *
      * @example 60
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
     /**
      * The threshold of requests per period after which the action will be executed for the first time.
      *
      * @example 1000
+     * @minimum 1
      */
     requests_per_period?: number;
     /**
@@ -40487,11 +40503,12 @@ export type RulesetsSetCacheSettingsRule = {
      *
      * @example 60
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
     /**
      * The threshold of requests per period after which the action will be executed for the first time.
      *
      * @example 1000
+     * @minimum 1
      */
     requests_per_period?: number;
     /**
@@ -40711,11 +40728,12 @@ export type RulesetsSetConfigRule = {
      *
      * @example 60
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
     /**
      * The threshold of requests per period after which the action will be executed for the first time.
      *
      * @example 1000
+     * @minimum 1
      */
     requests_per_period?: number;
     /**
@@ -40891,11 +40909,12 @@ export type RulesetsSkipRule = {
      *
      * @example 60
      */
-    period: 10 | 60 | 600 | 3600;
+    period: number;
     /**
      * The threshold of requests per period after which the action will be executed for the first time.
      *
      * @example 1000
+     * @minimum 1
      */
     requests_per_period?: number;
     /**
