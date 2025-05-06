@@ -1090,7 +1090,7 @@ export type UserEvent = {
             flagsExplorerUnlimitedOverrides?: boolean;
             customEnvironmentsPerProject?: number;
             buildMachine?: {
-              purchaseType?: 'enhanced';
+              purchaseType?: 'enhanced' | 'ultra';
               isDefaultBuildMachine?: boolean;
               cores?: number;
               memory?: number;
@@ -3128,7 +3128,7 @@ export type AuthUser = {
       /**
        * An object containing infomation related to the amount of platform resources may be allocated to the User account.
        */
-      purchaseType?: 'enhanced';
+      purchaseType?: 'enhanced' | 'ultra';
       /**
        * An object containing infomation related to the amount of platform resources may be allocated to the User account.
        */
