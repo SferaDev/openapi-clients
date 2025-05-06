@@ -23504,23 +23504,6 @@ export type IamCreatePayload = {
   policies: IamTokenPolicies;
 };
 
-export type IamCreateResourceGroup = {
-  /**
-   * Attributes associated to the resource group.
-   *
-   * @example {"editable":"false"}
-   */
-  meta?: Record<string, any>;
-  /**
-   * Name of the resource group.
-   *
-   * @example NameOfTheResourceGroup
-   * @x-auditable true
-   */
-  name?: string;
-  scope: IamCreateScope;
-};
-
 /**
  * This is a combination of pre-defined resource name and identifier (like Account ID etc.)
  *
@@ -23960,6 +23943,16 @@ export type IamPolicyWithPermissionGroupsAndResources = {
  */
 export type IamPropertiesName = string;
 
+export type IamRequestCreateResourceGroup = {
+  /**
+   * Name of the resource group
+   *
+   * @example NewResourceGroup
+   */
+  name: string;
+  scope: IamCreateScope;
+};
+
 /**
  * Client IP restrictions.
  *
@@ -23968,6 +23961,16 @@ export type IamPropertiesName = string;
 export type IamRequestIp = {
   ['in']?: IamCidrList;
   not_in?: IamCidrList;
+};
+
+export type IamRequestUpdateResourceGroup = {
+  /**
+   * Name of the resource group
+   *
+   * @example UpdatedResourceGroup
+   */
+  name?: string;
+  scope?: IamCreateScope;
 };
 
 /**
@@ -50901,7 +50904,7 @@ export type WaitingroomApiResponseCommonFailure = {
   messages: WaitingroomMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -51273,7 +51276,7 @@ export type WaitingroomEventTurnstileMode = 'off' | 'invisible' | 'visible_non_i
 export type WaitingroomHost = string;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -51292,7 +51295,7 @@ export type WaitingroomIdentifier = string;
  * 8. `queueIsFull`: Boolean indicating if the waiting room's queue is currently full and not accepting new users at the moment.
  * 9. `queueAll`: Boolean indicating if all users will be queued in the waiting room and no one will be let into the origin website.
  * 10. `lastUpdated`: String displaying the timestamp as an ISO 8601 string of the user's last attempt to leave the waiting room and be let into the origin website. The user is able to make another attempt after `refreshIntervalSeconds` past this time. If the user makes a request too soon, it will be ignored and `lastUpdated` will not change.
- * 11. `refreshIntervalSeconds`: Integer indicating the number of seconds after `lastUpdated` until the user is able to make another attempt to leave the waiting room and be let into the origin website. When the `queueingMethod` is `reject`, there is no specified refresh time — it will always be **zero**.
+ * 11. `refreshIntervalSeconds`: Integer indicating the number of seconds after `lastUpdated` until the user is able to make another attempt to leave the waiting room and be let into the origin website. When the `queueingMethod` is `reject`, there is no specified refresh time —\_it will always be **zero**.
  * 12. `queueingMethod`: The queueing method currently used by the waiting room. It is either **fifo**, **random**, **passthrough**, or **reject**.
  * 13. `isFIFOQueue`: Boolean indicating if the waiting room uses a FIFO (First-In-First-Out) queue.
  * 14. `isRandomQueue`: Boolean indicating if the waiting room uses a Random queue where users gain access randomly.
@@ -51305,6 +51308,8 @@ export type WaitingroomIdentifier = string;
  * 21. `timeUntilEventEnd`: Valid only when `isEventActive` is **true**. Integer indicating the number of minutes until the event ends.
  * 22. `timeUntilEventEndFormatted`: String displaying the `timeUntilEventEnd` formatted in English for users. If `isEventActive` is **false**, `timeUntilEventEndFormatted` will display **unavailable**.
  * 23. `shuffleAtEventStart`: Valid only when `isEventActive` is **true**. Boolean indicating if the users in the prequeue are shuffled randomly when the event starts.
+ * 24. `turnstile`: Empty when turnstile isn't enabled. String displaying an html tag to display the Turnstile widget. Please add the `{{{turnstile}}}` tag to the `custom_html` template to ensure the Turnstile widget appears.
+ * 25. `infiniteQueue`: Boolean indicating whether the response is for a user in the infinite queue.
  *
  * An example cURL to a waiting room could be:
  *
@@ -51369,7 +51374,7 @@ export type WaitingroomIdentifier = string;
  * 			"timeUntilEventEndFormatted": "15 minutes",
  * 			"shuffleAtEventStart": true
  * 		}
- * 	}.
+ * 	}
  *
  * @default false
  * @example false
@@ -51387,7 +51392,11 @@ export type WaitingroomMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -51537,25 +51546,25 @@ export type WaitingroomResponseCollection = WaitingroomApiResponseCollection & {
 
 export type WaitingroomResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -51661,7 +51670,7 @@ export type WaitingroomSchemasApiResponseCommon = {
   errors: WaitingroomMessages;
   messages: WaitingroomMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
