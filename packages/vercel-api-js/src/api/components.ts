@@ -2315,7 +2315,7 @@ export type UpdateProjectDataCacheResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced';
+    buildMachineType?: 'enhanced' | 'ultra';
   };
   rollingRelease?: {
     /**
@@ -2357,7 +2357,7 @@ export type UpdateProjectDataCacheResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced';
+    buildMachineType?: 'enhanced' | 'ultra';
   };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -11634,7 +11634,7 @@ export type GetProjectsResponse = {
       functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
       functionZeroConfigFailover?: boolean;
       elasticConcurrencyEnabled?: boolean;
-      buildMachineType?: 'enhanced';
+      buildMachineType?: 'enhanced' | 'ultra';
     };
     rollingRelease?: {
       /**
@@ -11676,7 +11676,7 @@ export type GetProjectsResponse = {
       functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
       functionZeroConfigFailover?: boolean;
       elasticConcurrencyEnabled?: boolean;
-      buildMachineType?: 'enhanced';
+      buildMachineType?: 'enhanced' | 'ultra';
     };
     rootDirectory?: string | null;
     serverlessFunctionRegion?: string | null;
@@ -12710,7 +12710,7 @@ export type CreateProjectResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced';
+    buildMachineType?: 'enhanced' | 'ultra';
   };
   rollingRelease?: {
     /**
@@ -12752,7 +12752,7 @@ export type CreateProjectResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced';
+    buildMachineType?: 'enhanced' | 'ultra';
   };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -13976,7 +13976,7 @@ export type GetProjectResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced';
+    buildMachineType?: 'enhanced' | 'ultra';
   };
   rollingRelease?: {
     /**
@@ -14018,7 +14018,7 @@ export type GetProjectResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced';
+    buildMachineType?: 'enhanced' | 'ultra';
   };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -15060,7 +15060,7 @@ export type UpdateProjectResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced';
+    buildMachineType?: 'enhanced' | 'ultra';
   };
   rollingRelease?: {
     /**
@@ -15102,7 +15102,7 @@ export type UpdateProjectResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced';
+    buildMachineType?: 'enhanced' | 'ultra';
   };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -22241,6 +22241,10 @@ export type CreateWebhookResponse = {
     | 'project-removed'
     | 'project.created'
     | 'project.removed'
+    | 'project.rolling-release.aborted'
+    | 'project.rolling-release.approved'
+    | 'project.rolling-release.completed'
+    | 'project.rolling-release.started'
     | 'test-webhook'
   )[];
   /**
@@ -22333,6 +22337,10 @@ export type CreateWebhookRequestBody = {
     | 'project-removed'
     | 'project.created'
     | 'project.removed'
+    | 'project.rolling-release.aborted'
+    | 'project.rolling-release.approved'
+    | 'project.rolling-release.completed'
+    | 'project.rolling-release.started'
     | 'test-webhook'
   )[];
   /**
@@ -22470,6 +22478,10 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'integration-resource.project-disconnected'
           | 'project.created'
           | 'project.removed'
+          | 'project.rolling-release.started'
+          | 'project.rolling-release.aborted'
+          | 'project.rolling-release.completed'
+          | 'project.rolling-release.approved'
           | 'deployment-checks-completed'
           | 'deployment-ready'
           | 'deployment-prepared'
@@ -22558,6 +22570,10 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'integration-resource.project-disconnected'
           | 'project.created'
           | 'project.removed'
+          | 'project.rolling-release.started'
+          | 'project.rolling-release.aborted'
+          | 'project.rolling-release.completed'
+          | 'project.rolling-release.approved'
           | 'deployment-checks-completed'
           | 'deployment-ready'
           | 'deployment-prepared'
@@ -22688,6 +22704,10 @@ export type GetWebhookResponse = {
     | 'project-removed'
     | 'project.created'
     | 'project.removed'
+    | 'project.rolling-release.aborted'
+    | 'project.rolling-release.approved'
+    | 'project.rolling-release.completed'
+    | 'project.rolling-release.started'
     | 'test-webhook'
   )[];
   /**
