@@ -145,21 +145,61 @@ export type UserEvent = {
    */
   createdAt: number;
   /**
-   * Metadata for the User who generated the event.
+   * Metadata for {@link userId}.
    */
   user?: {
     avatar: string;
     email: string;
+    username: string;
     slug?: string;
     uid: string;
-    username: string;
   };
+  principal?:
+    | {
+        type?: 'user';
+        avatar: string;
+        email: string;
+        slug?: string;
+        uid: string;
+        username: string;
+      }
+    | {
+        type: 'app';
+        clientId: string;
+        name: string;
+      };
   /**
-   * The unique identifier of the User who generated the event.
+   * Metadata for {@link viaIds}.
+   */
+  via?: (
+    | {
+        type?: 'user';
+        avatar: string;
+        email: string;
+        slug?: string;
+        uid: string;
+        username: string;
+      }
+    | {
+        type: 'app';
+        clientId: string;
+        name: string;
+      }
+  )[];
+  /**
+   * When the principal who generated the event is a user, this is their ID; otherwise, it is empty.
    *
    * @example zTuNVUXEAvvnNN3IaqinkyMw
    */
   userId: string;
+  /**
+   * The ID of the principal who generated the event. The principal is typically a user, but it could also be an app, an integration, etc. The principal may have delegated its authority to an acting party, and so {@link viaIds} should be checked as well.
+   */
+  principalId: string;
+  /**
+   * If the principal delegated its authority (for example, a user delegating to an app), then this array contains the ID of the current actor. For example, if `principalId` is "user123" and `viaIds` is `["app456"]`, we can say the event was triggered by - "app456 on behalf of user123", or - "user123 via app4556". Both are equivalent. Arbitrarily long chains of delegation can be represented. For example, if `principalId` is "user123" and `viaIds` is `["service1", "service2"]`, we can say the event was triggered by "user123 via service1 via service2".
+   */
+  viaIds?: string[];
   payload?:
     | Record<string, any>
     | {
