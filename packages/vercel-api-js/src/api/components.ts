@@ -2667,11 +2667,18 @@ export type UpdateProjectDataCacheResponse = {
     type: 'promote' | 'rollback';
   } | null;
   protectionBypass?: {
-    [key: string]: {
-      createdAt: number;
-      createdBy: string;
-      scope: 'automation-bypass';
-    };
+    [key: string]:
+      | {
+          createdAt: number;
+          createdBy: string;
+          scope: 'integration-automation-bypass';
+          integrationId: string;
+        }
+      | {
+          createdAt: number;
+          createdBy: string;
+          scope: 'automation-bypass';
+        };
   };
   hasActiveBranches?: boolean;
   trustedIps?:
@@ -4132,10 +4139,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    id?: string;
     createdAt?: number;
-    entrypoint?: string | null;
+    id?: string;
     readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    entrypoint?: string | null;
     readyStateAt?: number;
     output: {
       path: string;
@@ -4179,7 +4186,7 @@ export type CreateDeploymentResponse = {
           /**
            * The type of matching to perform
            */
-          type: 'startsWith' | 'equals' | 'endsWith';
+          type: 'endsWith' | 'startsWith' | 'equals';
           /**
            * The pattern to match against branch names
            */
@@ -4520,7 +4527,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
+            handle: 'error' | 'resource' | 'filesystem' | 'hit' | 'miss' | 'rewrite';
             src?: string;
             dest?: string;
             status?: number;
@@ -4553,7 +4560,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         org: string;
@@ -4565,7 +4572,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | {
         owner: string;
@@ -4577,7 +4584,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'team' | 'user';
+        ownerType: 'user' | 'team';
       }
     | null;
   flags?:
@@ -11986,11 +11993,18 @@ export type GetProjectsResponse = {
       type: 'promote' | 'rollback';
     } | null;
     protectionBypass?: {
-      [key: string]: {
-        createdAt: number;
-        createdBy: string;
-        scope: 'automation-bypass';
-      };
+      [key: string]:
+        | {
+            createdAt: number;
+            createdBy: string;
+            scope: 'integration-automation-bypass';
+            integrationId: string;
+          }
+        | {
+            createdAt: number;
+            createdBy: string;
+            scope: 'automation-bypass';
+          };
     };
     hasActiveBranches?: boolean;
     trustedIps?:
@@ -13062,11 +13076,18 @@ export type CreateProjectResponse = {
     type: 'promote' | 'rollback';
   } | null;
   protectionBypass?: {
-    [key: string]: {
-      createdAt: number;
-      createdBy: string;
-      scope: 'automation-bypass';
-    };
+    [key: string]:
+      | {
+          createdAt: number;
+          createdBy: string;
+          scope: 'integration-automation-bypass';
+          integrationId: string;
+        }
+      | {
+          createdAt: number;
+          createdBy: string;
+          scope: 'automation-bypass';
+        };
   };
   hasActiveBranches?: boolean;
   trustedIps?:
@@ -13410,6 +13431,31 @@ export type CreateProjectRequestBody = {
    * Opt-in to skip deployments when there are no changes to the root directory and its dependencies
    */
   enableAffectedProjectsDeployments?: boolean;
+  /**
+   * Specifies resource override configuration for the project
+   */
+  resourceConfig?: {
+    fluid?: boolean;
+    /**
+     * The regions to deploy Vercel Functions to for this project
+     *
+     * @minItems 1
+     * @uniqueItems true
+     */
+    functionDefaultRegions?: string[];
+    /**
+     * @maximum 900
+     * @minimum 1
+     */
+    functionDefaultTimeout?: number;
+    functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
+    /**
+     * Specifies whether Zero Config Failover is enabled for this project.
+     */
+    functionZeroConfigFailover?: boolean;
+    elasticConcurrencyEnabled?: boolean;
+    buildMachineType?: 'enhanced' | 'ultra';
+  };
 };
 
 export type CreateProjectVariables = {
@@ -14328,11 +14374,18 @@ export type GetProjectResponse = {
     type: 'promote' | 'rollback';
   } | null;
   protectionBypass?: {
-    [key: string]: {
-      createdAt: number;
-      createdBy: string;
-      scope: 'automation-bypass';
-    };
+    [key: string]:
+      | {
+          createdAt: number;
+          createdBy: string;
+          scope: 'integration-automation-bypass';
+          integrationId: string;
+        }
+      | {
+          createdAt: number;
+          createdBy: string;
+          scope: 'automation-bypass';
+        };
   };
   hasActiveBranches?: boolean;
   trustedIps?:
@@ -15412,11 +15465,18 @@ export type UpdateProjectResponse = {
     type: 'promote' | 'rollback';
   } | null;
   protectionBypass?: {
-    [key: string]: {
-      createdAt: number;
-      createdBy: string;
-      scope: 'automation-bypass';
-    };
+    [key: string]:
+      | {
+          createdAt: number;
+          createdBy: string;
+          scope: 'integration-automation-bypass';
+          integrationId: string;
+        }
+      | {
+          createdAt: number;
+          createdBy: string;
+          scope: 'automation-bypass';
+        };
   };
   hasActiveBranches?: boolean;
   trustedIps?:
@@ -15691,6 +15751,31 @@ export type UpdateProjectRequestBody = {
    * Specifies whether the source code and logs of the deployments for this project should be public or not
    */
   publicSource?: boolean | null;
+  /**
+   * Specifies resource override configuration for the project
+   */
+  resourceConfig?: {
+    buildMachineType?: 'enhanced' | any | 'ultra';
+    fluid?: boolean;
+    /**
+     * The regions to deploy Vercel Functions to for this project
+     *
+     * @minItems 1
+     * @uniqueItems true
+     */
+    functionDefaultRegions?: string[];
+    /**
+     * @maximum 900
+     * @minimum 1
+     */
+    functionDefaultTimeout?: number;
+    functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
+    /**
+     * Specifies whether Zero Config Failover is enabled for this project.
+     */
+    functionZeroConfigFailover?: boolean;
+    elasticConcurrencyEnabled?: boolean;
+  };
   /**
    * The name of a directory or relative path to the source code of your project. When `null` is used it will default to the project root
    *
@@ -19192,11 +19277,18 @@ export type UpdateProjectProtectionBypassError = Fetcher.ErrorWrapper<undefined>
 
 export type UpdateProjectProtectionBypassResponse = {
   protectionBypass?: {
-    [key: string]: {
-      createdAt: number;
-      createdBy: string;
-      scope: 'automation-bypass';
-    };
+    [key: string]:
+      | {
+          createdAt: number;
+          createdBy: string;
+          scope: 'integration-automation-bypass';
+          integrationId: string;
+        }
+      | {
+          createdAt: number;
+          createdBy: string;
+          scope: 'automation-bypass';
+        };
   };
 };
 
@@ -19219,7 +19311,7 @@ export type UpdateProjectProtectionBypassRequestBody = {
    */
   generate?: {
     /**
-     * Optional value of the secret to generate
+     * Optional value of the secret to generate, don't send it for oauth2 tokens
      *
      * @pattern ^[a-zA-Z0-9]{32}$
      */
@@ -23427,20 +23519,31 @@ export const deleteAlias = (variables: DeleteAliasVariables, signal?: AbortSigna
     signal
   });
 
-export type PatchAliasesIdProtectionBypassPathParams = {
+export type PatchUrlProtectionBypassPathParams = {
   /**
    * The alias or deployment ID
    */
   id: string;
 };
 
-export type PatchAliasesIdProtectionBypassError = Fetcher.ErrorWrapper<undefined>;
+export type PatchUrlProtectionBypassQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
 
-export type PatchAliasesIdProtectionBypassResponse = {
+export type PatchUrlProtectionBypassError = Fetcher.ErrorWrapper<undefined>;
+
+export type PatchUrlProtectionBypassResponse = {
   [key: string]: any;
 };
 
-export type PatchAliasesIdProtectionBypassVariables = {
+export type PatchUrlProtectionBypassVariables = {
   body?:
     | {
         /**
@@ -23501,19 +23604,17 @@ export type PatchAliasesIdProtectionBypassVariables = {
           action: 'create' | 'revoke';
         };
       };
-  pathParams: PatchAliasesIdProtectionBypassPathParams;
+  pathParams: PatchUrlProtectionBypassPathParams;
+  queryParams?: PatchUrlProtectionBypassQueryParams;
 } & FetcherExtraProps;
 
 /**
- * Update the protection bypass for the alias (used for user access & comment access for deployments). Used as shareable links and user scoped access for Vercel Authentication and also to allow external (logged in) people to comment on previews for Preview Comments (next-live-mode).
+ * Update the protection bypass for the alias or deployment URL (used for user access & comment access for deployments). Used as shareable links and user scoped access for Vercel Authentication and also to allow external (logged in) people to comment on previews for Preview Comments (next-live-mode).
  */
-export const patchAliasesIdProtectionBypass = (
-  variables: PatchAliasesIdProtectionBypassVariables,
-  signal?: AbortSignal
-) =>
+export const patchUrlProtectionBypass = (variables: PatchUrlProtectionBypassVariables, signal?: AbortSignal) =>
   fetch<
-    PatchAliasesIdProtectionBypassResponse,
-    PatchAliasesIdProtectionBypassError,
+    PatchUrlProtectionBypassResponse,
+    PatchUrlProtectionBypassError,
     | {
         /**
          * Optional instructions for revoking and regenerating a shareable link
@@ -23574,8 +23675,8 @@ export const patchAliasesIdProtectionBypass = (
         };
       },
     {},
-    {},
-    PatchAliasesIdProtectionBypassPathParams
+    PatchUrlProtectionBypassQueryParams,
+    PatchUrlProtectionBypassPathParams
   >({ url: '/aliases/{id}/protection-bypass', method: 'patch', ...variables, signal });
 
 export type GetCertsError = Fetcher.ErrorWrapper<undefined>;
@@ -24902,7 +25003,7 @@ export const operationsByTag = {
     deleteTeamInviteCode
   },
   webhooks: { createWebhook, getWebhooks, getWebhook, deleteWebhook },
-  aliases: { listDeploymentAliases, assignAlias, listAliases, getAlias, deleteAlias },
+  aliases: { listDeploymentAliases, assignAlias, listAliases, getAlias, deleteAlias, patchUrlProtectionBypass },
   certs: { getCertById, removeCert, issueCert, uploadCert },
   secrets: { getSecrets, createSecret, renameSecret, getSecret, deleteSecret }
 };
