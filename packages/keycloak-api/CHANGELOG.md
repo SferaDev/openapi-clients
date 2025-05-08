@@ -1,5 +1,11 @@
 # keycloak-api
 
+## 0.2.5
+
+### Patch Changes
+
+- fa00357: Change dateFrom and dateTo to accept timestamps in milliseconds
+
 ## 0.2.4
 
 ### Patch Changes
