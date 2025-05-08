@@ -1,5 +1,11 @@
 # nuki-api-js
 
+## 0.0.6
+
+### Patch Changes
+
+- 8e2667e: Bump version to 3.8.1
+
 ## 0.0.5
 
 ### Patch Changes

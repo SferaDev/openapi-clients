@@ -1,5 +1,21 @@
 # vercel-api-js
 
+## 0.24.2
+
+### Patch Changes
+
+- 6466a46: Add new 'fromRollingReleaseId' field to lastAliasRequest type
+- 3dab4ff: Removed 'aiCredits' from UserEvent and AuthUser schemas
+- 6feddf3: [BREAKING] Add new 'vercelAppInstallation' property to 'GetProjectsResponse', 'CreateProjectResponse', 'GetProjectResponse', and 'UpdateProjectResponse'
+- 9298c0b: Make some changes to optional properties
+- fbe45d4: Reorder 'handle' properties in 'CreateDeploymentResponse' to match alphabetical order
+- 9ae5776: Remove 'abovePlan' field from UserEvent type
+- 7dddb74: undefined
+- 99819ef: Change ordering of 'type' values in matching options
+- 80457f9: Update build machine type options in various API responses
+- 37efdb6: Update customEnvironments type to include detailed properties for each environment
+- 16764f0: Add patchAliasesIdProtectionBypass
+
 ## 0.24.1
 
 ### Patch Changes

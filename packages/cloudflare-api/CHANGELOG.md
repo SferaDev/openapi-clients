@@ -1,5 +1,24 @@
 # cloudflare-api-js
 
+## 0.14.0
+
+### Minor Changes
+
+- ba95cf1: Add TeamsDevicesAccessSerialNumberListInputRequest
+
+### Patch Changes
+
+- 12473b8: Add new endpoint to get event list
+- 2cb75b8: Add new endpoint to delete a workflow
+- 03c3941: [BREAKING] Add support for zstd compression algorithm
+- eeee8d0: Add new field 'filter' to request bodies for log push jobs
+- 9bcf0d3: Add new endpoint to update access application settings
+- dfa0d59: Change type and structure of errors and messages in Whois API response
+- 0ff63aa: [BREAKING] Change CloudConnectorRules to CloudConnectorRule in the schemas
+- 25c4794: Change type of body in AccountResourceGroupCreateVariables from Schemas.IamCreateResourceGroup to Schemas.IamRequestCreateResourceGroup
+- 022df88: Change type of 'period' property to 'number' in RulesetsBlockRule, RulesetsChallengeRule, RulesetsCompressResponseRule, ...
+- f46b555: Defines the state of the rules contained in the rule group. When `on`, the rules in the group are configurable/usable.
+
 ## 0.13.1
 
 ### Patch Changes
