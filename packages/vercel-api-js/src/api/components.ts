@@ -11341,7 +11341,7 @@ export type GetProjectsQueryParams = {
   /**
    * Search projects by the name field
    *
-   * @maxLength 511
+   * @maxLength 100
    */
   search?: string;
   /**
