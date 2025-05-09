@@ -2682,6 +2682,27 @@ export type UserEvent = {
 };
 
 /**
+ * Data representing a Team.
+ */
+export type Team = {
+  /**
+   * The Preset's unique identifier.
+   *
+   * @example ABCDEFG000011111
+   */
+  id: string;
+  data: {
+    query: string;
+    creatorId: string;
+    title: string;
+    groupId: string;
+    ownerId: string;
+    projectId: string;
+    createdAt: number;
+  };
+};
+
+/**
  * A limited form of data representing a Team, due to the authentication token missing privileges to read the full Team data.
  */
 export type TeamLimited = {
@@ -2847,11 +2868,6 @@ export type TeamLimited = {
    */
   createdAt: number;
 };
-
-/**
- * Data representing a Team.
- */
-export type Team = Record<string, any>;
 
 /**
  * Authentication token metadata.

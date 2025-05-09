@@ -79,6 +79,11 @@ import {
   getIntegrationLogDrains,
   createLogDrain,
   deleteIntegrationLogDrain,
+  getProjectsProjectIdLogsPresets,
+  postProjectsProjectIdLogsPresets,
+  deleteProjectsProjectIdLogsPresetsId,
+  patchProjectsProjectIdLogsPresetsId,
+  getRuntimeLogs,
   postV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItems,
   patchV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemId,
   deleteV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemId,
@@ -252,6 +257,11 @@ export const operationsByPath = {
   'GET /v2/integrations/log-drains': getIntegrationLogDrains,
   'POST /v2/integrations/log-drains': createLogDrain,
   'DELETE /v1/integrations/log-drains/{id}': deleteIntegrationLogDrain,
+  'GET /projects/{projectId}/logs-presets': getProjectsProjectIdLogsPresets,
+  'POST /projects/{projectId}/logs-presets': postProjectsProjectIdLogsPresets,
+  'DELETE /projects/{projectId}/logs-presets/{id}': deleteProjectsProjectIdLogsPresetsId,
+  'PATCH /projects/{projectId}/logs-presets/{id}': patchProjectsProjectIdLogsPresetsId,
+  'GET /v1/projects/{projectId}/deployments/{deploymentId}/runtime-logs': getRuntimeLogs,
   'POST /v1/installations/{integrationConfigurationId}/resources/{resourceId}/experimentation/items':
     postV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItems,
   'PATCH /v1/installations/{integrationConfigurationId}/resources/{resourceId}/experimentation/items/{itemId}':
