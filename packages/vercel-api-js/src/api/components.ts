@@ -5168,9 +5168,9 @@ export type CancelDeploymentResponse = {
   lambdas?: {
     id?: string;
     createdAt?: number;
-    entrypoint?: string | null;
     readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
     readyStateAt?: number;
+    entrypoint?: string | null;
     output: {
       path: string;
       functionName: string;
@@ -5182,8 +5182,8 @@ export type CancelDeploymentResponse = {
   team?: {
     id: string;
     name: string;
-    avatar?: string;
     slug: string;
+    avatar?: string;
   };
   userAliases?: string[];
   previewCommentsEnabled?: boolean;
@@ -21720,7 +21720,7 @@ export type GetTeamVariables = {
  * Get information for the Team specified by the `teamId` parameter.
  */
 export const getTeam = (variables: GetTeamVariables, signal?: AbortSignal) =>
-  fetch<Schemas.Team, GetTeamError, undefined, {}, GetTeamQueryParams, GetTeamPathParams>({
+  fetch<Schemas.TeamLimited, GetTeamError, undefined, {}, GetTeamQueryParams, GetTeamPathParams>({
     url: '/v2/teams/{teamId}',
     method: 'get',
     ...variables,
@@ -21862,7 +21862,7 @@ export type PatchTeamVariables = {
  * Update the information of a Team specified by the `teamId` parameter. The request body should contain the information that will be updated on the Team.
  */
 export const patchTeam = (variables: PatchTeamVariables, signal?: AbortSignal) =>
-  fetch<Schemas.Team, PatchTeamError, PatchTeamRequestBody, {}, PatchTeamQueryParams, PatchTeamPathParams>({
+  fetch<Schemas.TeamLimited, PatchTeamError, PatchTeamRequestBody, {}, PatchTeamQueryParams, PatchTeamPathParams>({
     url: '/v2/teams/{teamId}',
     method: 'patch',
     ...variables,
