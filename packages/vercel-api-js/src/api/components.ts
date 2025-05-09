@@ -2951,7 +2951,95 @@ export type GetDeploymentEventsVariables = {
  */
 export const getDeploymentEvents = (variables: GetDeploymentEventsVariables, signal?: AbortSignal) =>
   fetch<
-    undefined,
+    | (
+        | {
+            type:
+              | 'delimiter'
+              | 'command'
+              | 'stdout'
+              | 'stderr'
+              | 'exit'
+              | 'deployment-state'
+              | 'middleware'
+              | 'middleware-invocation'
+              | 'edge-function-invocation'
+              | 'metric'
+              | 'report'
+              | 'fatal';
+            created: number;
+            payload: {
+              deploymentId: string;
+              info?: {
+                type: string;
+                name: string;
+                entrypoint?: string;
+                path?: string;
+                step?: string;
+                readyState?: string;
+              };
+              text?: string;
+              id: string;
+              date: number;
+              serial: string;
+              created?: number;
+              statusCode?: number;
+              requestId?: string;
+              proxy?: {
+                timestamp: number;
+                method: string;
+                host: string;
+                path: string;
+                statusCode?: number;
+                userAgent: string[];
+                referer: string;
+                clientIp?: string;
+                region: string;
+                scheme?: string;
+                responseByteSize?: number;
+                cacheId?: string;
+                pathType?: string;
+                pathTypeVariant?: string;
+                vercelId?: string;
+                vercelCache?: 'MISS' | 'HIT' | 'STALE' | 'BYPASS' | 'PRERENDER' | 'REVALIDATED';
+                lambdaRegion?: string;
+                wafAction?: 'log' | 'challenge' | 'deny' | 'bypass' | 'rate_limit';
+                wafRuleId?: string;
+              };
+            };
+          }
+        | {
+            created: number;
+            date: number;
+            deploymentId: string;
+            id: string;
+            info: {
+              type: string;
+              name: string;
+              entrypoint?: string;
+              path?: string;
+              step?: string;
+              readyState?: string;
+            };
+            serial: string;
+            text?: string;
+            type:
+              | 'delimiter'
+              | 'command'
+              | 'stdout'
+              | 'stderr'
+              | 'exit'
+              | 'deployment-state'
+              | 'middleware'
+              | 'middleware-invocation'
+              | 'edge-function-invocation'
+              | 'metric'
+              | 'report'
+              | 'fatal';
+            level?: 'error' | 'warning';
+          }
+        | null
+      )[]
+    | null,
     GetDeploymentEventsError,
     undefined,
     {},
@@ -4139,10 +4227,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    createdAt?: number;
     id?: string;
-    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    createdAt?: number;
     entrypoint?: string | null;
+    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
     readyStateAt?: number;
     output: {
       path: string;
@@ -4186,7 +4274,7 @@ export type CreateDeploymentResponse = {
           /**
            * The type of matching to perform
            */
-          type: 'endsWith' | 'startsWith' | 'equals';
+          type: 'startsWith' | 'equals' | 'endsWith';
           /**
            * The pattern to match against branch names
            */
@@ -4527,7 +4615,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'resource' | 'filesystem' | 'hit' | 'miss' | 'rewrite';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
             src?: string;
             dest?: string;
             status?: number;
@@ -4560,7 +4648,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         org: string;
@@ -4572,7 +4660,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         owner: string;
@@ -4584,7 +4672,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | null;
   flags?:
@@ -8524,6 +8612,12 @@ export type ListUserEventsQueryParams = {
    */
   principalId?: string;
   /**
+   * Comma-delimited list of project IDs to filter the results by.
+   *
+   * @example aeIInYVk59zbFF2SxfyxxmuO
+   */
+  projectIds?: string;
+  /**
    * When set to `true`, the response will include the `payload` field for each event.
    *
    * @example true
@@ -11071,6 +11165,8 @@ export type GetProjectsQueryParams = {
   limit?: string;
   /**
    * Search projects by the name field
+   *
+   * @maxLength 511
    */
   search?: string;
   /**
