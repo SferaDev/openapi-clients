@@ -5168,9 +5168,9 @@ export type CancelDeploymentResponse = {
   lambdas?: {
     id?: string;
     createdAt?: number;
+    entrypoint?: string | null;
     readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
     readyStateAt?: number;
-    entrypoint?: string | null;
     output: {
       path: string;
       functionName: string;
@@ -5182,8 +5182,8 @@ export type CancelDeploymentResponse = {
   team?: {
     id: string;
     name: string;
-    slug: string;
     avatar?: string;
+    slug: string;
   };
   userAliases?: string[];
   previewCommentsEnabled?: boolean;
@@ -10530,6 +10530,181 @@ export const deleteIntegrationLogDrain = (variables: DeleteIntegrationLogDrainVa
     DeleteIntegrationLogDrainQueryParams,
     DeleteIntegrationLogDrainPathParams
   >({ url: '/v1/integrations/log-drains/{id}', method: 'delete', ...variables, signal });
+
+export type GetProjectsProjectIdLogsPresetsPathParams = {
+  projectId: string;
+};
+
+export type GetProjectsProjectIdLogsPresetsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetProjectsProjectIdLogsPresetsResponse = Schemas.Team[];
+
+export type GetProjectsProjectIdLogsPresetsVariables = {
+  pathParams: GetProjectsProjectIdLogsPresetsPathParams;
+} & FetcherExtraProps;
+
+export const getProjectsProjectIdLogsPresets = (
+  variables: GetProjectsProjectIdLogsPresetsVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    GetProjectsProjectIdLogsPresetsResponse,
+    GetProjectsProjectIdLogsPresetsError,
+    undefined,
+    {},
+    {},
+    GetProjectsProjectIdLogsPresetsPathParams
+  >({ url: '/projects/{projectId}/logs-presets', method: 'get', ...variables, signal });
+
+export type PostProjectsProjectIdLogsPresetsPathParams = {
+  /**
+   * projectId of the preset
+   */
+  projectId: string;
+};
+
+export type PostProjectsProjectIdLogsPresetsError = Fetcher.ErrorWrapper<undefined>;
+
+export type PostProjectsProjectIdLogsPresetsRequestBody = {
+  /**
+   * query parameter for saved filter preset
+   *
+   * @example timeline=past30Minutes&startDate=1690446214407&endDate=1690448014407&levels=info&domains=vercel.com
+   * @maxLength 1000
+   */
+  query: string;
+  /**
+   * The title of the preset
+   *
+   * @example Request Path
+   * @maxLength 70
+   */
+  title: string;
+  group: 'personal' | 'team';
+};
+
+export type PostProjectsProjectIdLogsPresetsVariables = {
+  body: PostProjectsProjectIdLogsPresetsRequestBody;
+  pathParams: PostProjectsProjectIdLogsPresetsPathParams;
+} & FetcherExtraProps;
+
+export const postProjectsProjectIdLogsPresets = (
+  variables: PostProjectsProjectIdLogsPresetsVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.Team,
+    PostProjectsProjectIdLogsPresetsError,
+    PostProjectsProjectIdLogsPresetsRequestBody,
+    {},
+    {},
+    PostProjectsProjectIdLogsPresetsPathParams
+  >({ url: '/projects/{projectId}/logs-presets', method: 'post', ...variables, signal });
+
+export type DeleteProjectsProjectIdLogsPresetsIdPathParams = {
+  /**
+   * projectId of the preset
+   */
+  projectId: string;
+  /**
+   * id of the preset
+   */
+  id: string;
+};
+
+export type DeleteProjectsProjectIdLogsPresetsIdError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteProjectsProjectIdLogsPresetsIdVariables = {
+  pathParams: DeleteProjectsProjectIdLogsPresetsIdPathParams;
+} & FetcherExtraProps;
+
+export const deleteProjectsProjectIdLogsPresetsId = (
+  variables: DeleteProjectsProjectIdLogsPresetsIdVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    undefined,
+    DeleteProjectsProjectIdLogsPresetsIdError,
+    undefined,
+    {},
+    {},
+    DeleteProjectsProjectIdLogsPresetsIdPathParams
+  >({ url: '/projects/{projectId}/logs-presets/{id}', method: 'delete', ...variables, signal });
+
+export type PatchProjectsProjectIdLogsPresetsIdPathParams = {
+  /**
+   * projectId of the preset
+   */
+  projectId: string;
+  /**
+   * Id of the preset
+   */
+  id: string;
+};
+
+export type PatchProjectsProjectIdLogsPresetsIdError = Fetcher.ErrorWrapper<undefined>;
+
+export type PatchProjectsProjectIdLogsPresetsIdRequestBody = {
+  /**
+   * The title of the preset
+   *
+   * @example Request Path
+   * @maxLength 70
+   */
+  title: string;
+};
+
+export type PatchProjectsProjectIdLogsPresetsIdVariables = {
+  body: PatchProjectsProjectIdLogsPresetsIdRequestBody;
+  pathParams: PatchProjectsProjectIdLogsPresetsIdPathParams;
+} & FetcherExtraProps;
+
+export const patchProjectsProjectIdLogsPresetsId = (
+  variables: PatchProjectsProjectIdLogsPresetsIdVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    Schemas.Team,
+    PatchProjectsProjectIdLogsPresetsIdError,
+    PatchProjectsProjectIdLogsPresetsIdRequestBody,
+    {},
+    {},
+    PatchProjectsProjectIdLogsPresetsIdPathParams
+  >({ url: '/projects/{projectId}/logs-presets/{id}', method: 'patch', ...variables, signal });
+
+export type GetRuntimeLogsPathParams = {
+  projectId: string;
+  deploymentId: string;
+};
+
+export type GetRuntimeLogsQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type GetRuntimeLogsError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetRuntimeLogsVariables = {
+  pathParams: GetRuntimeLogsPathParams;
+  queryParams?: GetRuntimeLogsQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Returns a stream of logs for a given deployment.
+ */
+export const getRuntimeLogs = (variables: GetRuntimeLogsVariables, signal?: AbortSignal) =>
+  fetch<undefined, GetRuntimeLogsError, undefined, {}, GetRuntimeLogsQueryParams, GetRuntimeLogsPathParams>({
+    url: '/v1/projects/{projectId}/deployments/{deploymentId}/runtime-logs',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsPathParams = {
   integrationConfigurationId: string;
@@ -25065,6 +25240,7 @@ export const operationsByTag = {
     putV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationEdgeConfig
   },
   authentication: { exchangeSsoToken, listAuthTokens, createAuthToken, getAuthToken, deleteAuthToken },
+  logs: { getRuntimeLogs },
   projectMembers: { getProjectMembers, addProjectMember, removeProjectMember },
   environment: {
     createCustomEnvironment,
