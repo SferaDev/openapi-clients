@@ -2682,11 +2682,6 @@ export type UserEvent = {
 };
 
 /**
- * Data representing a Team.
- */
-export type Team = Record<string, any>;
-
-/**
  * A limited form of data representing a Team, due to the authentication token missing privileges to read the full Team data.
  */
 export type TeamLimited = {
@@ -2801,6 +2796,7 @@ export type TeamLimited = {
     entitlements?: {
       entitlement: string;
     }[];
+    teamId?: string;
     confirmed: boolean;
     confirmedAt: number;
     accessRequestedAt?: number;
@@ -2813,7 +2809,6 @@ export type TeamLimited = {
       | 'FullProductionDeployment'
       | 'UsageViewer'
     )[];
-    teamId?: string;
     createdAt: number;
     created: number;
     joinedFrom?: {
@@ -2852,6 +2847,11 @@ export type TeamLimited = {
    */
   createdAt: number;
 };
+
+/**
+ * Data representing a Team.
+ */
+export type Team = Record<string, any>;
 
 /**
  * Authentication token metadata.
