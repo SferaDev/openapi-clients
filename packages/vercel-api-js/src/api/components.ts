@@ -2673,6 +2673,7 @@ export type UpdateProjectDataCacheResponse = {
           createdBy: string;
           scope: 'integration-automation-bypass';
           integrationId: string;
+          configurationId: string;
         }
       | {
           createdAt: number;
@@ -12270,6 +12271,7 @@ export type GetProjectsResponse = {
             createdBy: string;
             scope: 'integration-automation-bypass';
             integrationId: string;
+            configurationId: string;
           }
         | {
             createdAt: number;
@@ -13353,6 +13355,7 @@ export type CreateProjectResponse = {
           createdBy: string;
           scope: 'integration-automation-bypass';
           integrationId: string;
+          configurationId: string;
         }
       | {
           createdAt: number;
@@ -14651,6 +14654,7 @@ export type GetProjectResponse = {
           createdBy: string;
           scope: 'integration-automation-bypass';
           integrationId: string;
+          configurationId: string;
         }
       | {
           createdAt: number;
@@ -15742,6 +15746,7 @@ export type UpdateProjectResponse = {
           createdBy: string;
           scope: 'integration-automation-bypass';
           integrationId: string;
+          configurationId: string;
         }
       | {
           createdAt: number;
@@ -17935,7 +17940,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -18036,7 +18041,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -18918,7 +18923,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -19019,7 +19024,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -19119,7 +19124,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -19310,7 +19315,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -19554,6 +19559,7 @@ export type UpdateProjectProtectionBypassResponse = {
           createdBy: string;
           scope: 'integration-automation-bypass';
           integrationId: string;
+          configurationId: string;
         }
       | {
           createdAt: number;
