@@ -148,9 +148,9 @@ export type UserEvent = {
    * Metadata for {@link userId}.
    */
   user?: {
+    username: string;
     avatar: string;
     email: string;
-    username: string;
     slug?: string;
     uid: string;
   };
@@ -241,8 +241,8 @@ export type UserEvent = {
           id: string;
           name?: string;
         };
-        next_role?: string | null;
-        previous_role?: string;
+        next_role?: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER' | null;
+        previous_role?: 'ADMIN' | 'PROJECT_DEVELOPER' | 'PROJECT_VIEWER';
       }
     | {
         alias?: string;
@@ -1076,7 +1076,6 @@ export type UserEvent = {
             edgeConfigSize?: number;
             edgeFunctionMaxSizeBytes?: number;
             edgeFunctionExecutionTimeoutMs?: number;
-            serverlessFunctionDefaultMaxExecutionTime?: number;
             serverlessFunctionMaxMemorySize?: number;
             kvDatabases?: number;
             postgresDatabases?: number;
@@ -2010,6 +2009,15 @@ export type UserEvent = {
       }
     | {
         projectId: string;
+      }
+    | {
+        projectId: string;
+        projectName: string;
+      }
+    | {
+        projectId?: string;
+        projectName?: string;
+        newTargetPercentage?: number;
       }
     | {
         gitProvider: string;
@@ -3085,10 +3093,6 @@ export type AuthUser = {
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
     edgeFunctionExecutionTimeoutMs?: number;
-    /**
-     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
-     */
-    serverlessFunctionDefaultMaxExecutionTime?: number;
     /**
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
