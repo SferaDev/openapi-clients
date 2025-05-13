@@ -1,5 +1,12 @@
 # vercel-api-js
 
+## 0.24.3
+
+### Patch Changes
+
+- 52b71a8: Reduce maxLength constraint on project search field
+- 158dcb6: Adjust type definition for GetDeploymentEvents response
+
 ## 0.24.2
 
 ### Patch Changes
