@@ -2,4 +2,4 @@
 "vercel-api-js": patch
 ---
 
-Move 'secret' type before 'sensitive' type
+Add shared v0 token
