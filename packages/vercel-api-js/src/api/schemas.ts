@@ -2728,17 +2728,17 @@ export type TeamLimited = {
      */
     connection?: {
       /**
-       * The Identity Provider "type", for example Okta.
-       *
-       * @example OktaSAML
-       */
-      type: string;
-      /**
        * Current status of the connection.
        *
        * @example linked
        */
       status: string;
+      /**
+       * The Identity Provider "type", for example Okta.
+       *
+       * @example OktaSAML
+       */
+      type: string;
       /**
        * Current state of the connection.
        *
@@ -2825,7 +2825,6 @@ export type TeamLimited = {
     entitlements?: {
       entitlement: string;
     }[];
-    teamId?: string;
     confirmed: boolean;
     confirmedAt: number;
     accessRequestedAt?: number;
@@ -2838,6 +2837,7 @@ export type TeamLimited = {
       | 'FullProductionDeployment'
       | 'UsageViewer'
     )[];
+    teamId?: string;
     createdAt: number;
     created: number;
     joinedFrom?: {
