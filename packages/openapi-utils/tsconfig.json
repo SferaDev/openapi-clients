@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "types": ["node"],
+    "allowJs": true,
+    "noEmit": true,
+    "module": "esnext",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "noUncheckedIndexedAccess": true,
+    "inlineSources": false,
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleResolution": "bundler",
+    "preserveWatchOutput": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "paths": {
+      "~/*": ["./src/*"]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "@kubb/react"
+  }
+}
