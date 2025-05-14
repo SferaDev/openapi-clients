@@ -3294,6 +3294,14 @@ export type AccessAppsComponentsSchemasResponseCollection2 = AccessApiResponseCo
   result?: AccessApps[];
 };
 
+/**
+ * The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.
+ *
+ * @default 24h
+ * @example 24h
+ */
+export type AccessAppsComponentsSchemasSessionDuration = string;
+
 export type AccessAppsComponentsSchemasSingleResponse = AccessApiResponseSingle & {
   result?: AccessAppResponse;
 };
@@ -6856,7 +6864,7 @@ export type AccessSchemasAppLauncherProps = {
    * @example App Launcher
    */
   name?: AccessAppsComponentsSchemasName;
-  session_duration?: AccessSchemasSessionDuration;
+  session_duration?: AccessAppsComponentsSchemasSessionDuration;
   /**
    * The application type.
    *
@@ -7039,7 +7047,7 @@ export type AccessSchemasBisoProps = {
    * @example Clientless Web Isolation
    */
   name?: AccessAppsComponentsSchemasName;
-  session_duration?: AccessSchemasSessionDuration;
+  session_duration?: AccessAppsComponentsSchemasSessionDuration;
   /**
    * The application type.
    *
@@ -7336,7 +7344,7 @@ export type AccessSchemasFeatureAppProps = {
   auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
   domain?: AccessComponentsSchemasDomain;
   name?: AccessAppsComponentsSchemasName;
-  session_duration?: AccessSchemasSessionDuration;
+  session_duration?: AccessAppsComponentsSchemasSessionDuration;
   type: AccessComponentsSchemasType;
 };
 
@@ -8663,7 +8671,7 @@ export type AccessSchemasSelfHostedProps = {
   options_preflight_bypass?: AccessOptionsPreflightBypass;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
-  session_duration?: AccessSchemasSessionDuration;
+  session_duration?: AccessAppsComponentsSchemasSessionDuration;
   skip_interstitial?: AccessSkipInterstitial;
   /**
    * The application type.
@@ -8691,7 +8699,7 @@ export type AccessSchemasServiceTokens = {
 };
 
 /**
- * The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.
+ * The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
  *
  * @default 24h
  * @example 24h
@@ -8739,7 +8747,7 @@ export type AccessSchemasSshProps = {
   options_preflight_bypass?: AccessOptionsPreflightBypass;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
-  session_duration?: AccessSchemasSessionDuration;
+  session_duration?: AccessAppsComponentsSchemasSessionDuration;
   skip_interstitial?: AccessSkipInterstitial;
   /**
    * The application type.
@@ -8801,7 +8809,7 @@ export type AccessSchemasVncProps = {
   options_preflight_bypass?: AccessOptionsPreflightBypass;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
-  session_duration?: AccessSchemasSessionDuration;
+  session_duration?: AccessAppsComponentsSchemasSessionDuration;
   skip_interstitial?: AccessSkipInterstitial;
   /**
    * The application type.
@@ -8823,7 +8831,7 @@ export type AccessSchemasWarpProps = {
    * @example Warp Login App
    */
   name?: AccessAppsComponentsSchemasName;
-  session_duration?: AccessSchemasSessionDuration;
+  session_duration?: AccessAppsComponentsSchemasSessionDuration;
   /**
    * The application type.
    *
@@ -15136,6 +15144,10 @@ export type DigitalExperienceMonitoringApiResponseCollection = DigitalExperience
   result_info?: DigitalExperienceMonitoringResultInfo;
 };
 
+export type DigitalExperienceMonitoringApiResponseCollectionCommon = DigitalExperienceMonitoringApiResponseCommon & {
+  result?: any[] | null;
+};
+
 export type DigitalExperienceMonitoringApiResponseCommon = {
   errors: DigitalExperienceMonitoringMessages;
   messages: DigitalExperienceMonitoringMessages;
@@ -15318,11 +15330,111 @@ export type DigitalExperienceMonitoringDevice = {
 };
 
 /**
+ * The configuration object which contains the details for the WARP client to conduct the test.
+ *
+ * @example {"host":"https://dash.cloudflare.com","kind":"http","method":"GET"}
+ */
+export type DigitalExperienceMonitoringDeviceDexTestSchemasData = {
+  /**
+   * The desired endpoint to test.
+   *
+   * @example https://dash.cloudflare.com
+   */
+  host?: string;
+  /**
+   * The type of test.
+   *
+   * @example http
+   */
+  kind?: string;
+  /**
+   * The HTTP request method type.
+   *
+   * @example GET
+   */
+  method?: string;
+};
+
+/**
+ * Additional details about the test.
+ *
+ * @example Checks the dash endpoint every 30 minutes
+ */
+export type DigitalExperienceMonitoringDeviceDexTestSchemasDescription = string;
+
+/**
+ * Determines whether or not the test is active.
+ *
+ * @example true
+ */
+export type DigitalExperienceMonitoringDeviceDexTestSchemasEnabled = boolean;
+
+export type DigitalExperienceMonitoringDeviceDexTestSchemasHttp = {
+  data: DigitalExperienceMonitoringDeviceDexTestSchemasData;
+  description?: DigitalExperienceMonitoringDeviceDexTestSchemasDescription;
+  enabled: DigitalExperienceMonitoringDeviceDexTestSchemasEnabled;
+  interval: DigitalExperienceMonitoringDeviceDexTestSchemasInterval;
+  name: DigitalExperienceMonitoringDeviceDexTestSchemasName;
+  target_policies?: DigitalExperienceMonitoringDeviceDexTestTargetPolicies;
+  targeted?: boolean;
+  test_id?: DigitalExperienceMonitoringSchemasTestId;
+};
+
+/**
+ * How often the test will run.
+ *
+ * @example 30m
+ */
+export type DigitalExperienceMonitoringDeviceDexTestSchemasInterval = string;
+
+/**
+ * The name of the DEX test. Must be unique.
+ *
+ * @example HTTP dash health check
+ */
+export type DigitalExperienceMonitoringDeviceDexTestSchemasName = string;
+
+/**
+ * DEX rules targeted by this test
+ */
+export type DigitalExperienceMonitoringDeviceDexTestTargetPolicies = DigitalExperienceMonitoringDexTargetPolicy[];
+
+/**
  * Device-specific ID, given as UUID v4
  *
  * @example cb49c27f-7f97-49c5-b6f3-f7c01ead0fd7
  */
 export type DigitalExperienceMonitoringDeviceId = string;
+
+export type DigitalExperienceMonitoringDexDeleteResponseCollection = DigitalExperienceMonitoringApiResponseCommon & {
+  result?: {
+    dex_tests?: DigitalExperienceMonitoringDeviceDexTestSchemasHttp[];
+  };
+};
+
+export type DigitalExperienceMonitoringDexResponseCollection =
+  DigitalExperienceMonitoringApiResponseCollectionCommon & {
+    result?: DigitalExperienceMonitoringDeviceDexTestSchemasHttp[];
+  };
+
+export type DigitalExperienceMonitoringDexSingleResponse = DigitalExperienceMonitoringApiResponseSingle & {
+  result?: DigitalExperienceMonitoringDeviceDexTestSchemasHttp;
+};
+
+export type DigitalExperienceMonitoringDexTargetPolicy = {
+  /**
+   * Whether the DEX rule is the account default
+   */
+  ['default']?: boolean;
+  /**
+   * The id of the DEX rule
+   */
+  id?: string;
+  /**
+   * The name of the DEX rule
+   */
+  name?: string;
+};
 
 export type DigitalExperienceMonitoringFleetStatusDevicesResponse = DigitalExperienceMonitoringApiResponseCollection & {
   result?: DigitalExperienceMonitoringDevice[];
@@ -15621,6 +15733,14 @@ export type DigitalExperienceMonitoringResultInfo = {
    */
   total_count?: number;
 };
+
+/**
+ * The unique identifier for the test.
+ *
+ * @example 372e67954025e0ba6aaa6d586b9e0b59
+ * @maxLength 32
+ */
+export type DigitalExperienceMonitoringSchemasTestId = string;
 
 /**
  * Number of minutes before current time
@@ -16007,6 +16127,73 @@ export type DigitalExperienceMonitoringUuid = string;
  * @example 1.0.0
  */
 export type DigitalExperienceMonitoringVersion = string;
+
+export type DigitalExperienceMonitoringWarpConfigChangeEvent = {
+  device_id?: DigitalExperienceMonitoringUuid;
+  device_registration?: DigitalExperienceMonitoringUuid;
+  from?: DigitalExperienceMonitoringWarpConfigDetails;
+  /**
+   * The hostname of the machine the event is from
+   */
+  hostname?: string;
+  /**
+   * The serial number of the machine the event is from
+   */
+  serial_number?: string;
+  timestamp?: DigitalExperienceMonitoringTimestamp;
+  to?: DigitalExperienceMonitoringWarpConfigDetails;
+  /**
+   * Email tied to the device
+   */
+  user_email?: string;
+};
+
+export type DigitalExperienceMonitoringWarpConfigDetails = {
+  /**
+   * The account name.
+   */
+  account_name?: string;
+  account_tag?: DigitalExperienceMonitoringUuid;
+  /**
+   * The name of the WARP configuration.
+   */
+  config_name?: string;
+};
+
+export type DigitalExperienceMonitoringWarpEventsResponse = (
+  | DigitalExperienceMonitoringWarpToggleChangeEvent
+  | DigitalExperienceMonitoringWarpConfigChangeEvent
+)[];
+
+export type DigitalExperienceMonitoringWarpToggleChangeEvent = {
+  /**
+   * The account name.
+   */
+  account_name?: string;
+  /**
+   * The public account identifier.
+   */
+  account_tag?: string;
+  device_id?: DigitalExperienceMonitoringUuid;
+  device_registration?: DigitalExperienceMonitoringUuid;
+  /**
+   * The hostname of the machine the event is from
+   */
+  hostname?: string;
+  /**
+   * The serial number of the machine the event is from
+   */
+  serial_number?: string;
+  timestamp?: DigitalExperienceMonitoringTimestamp;
+  /**
+   * The state of the WARP toggle.
+   */
+  toggle?: 'on' | 'off';
+  /**
+   * Email tied to the device
+   */
+  user_email?: string;
+};
 
 export type DlpAddinAccountMapping = {
   /**
@@ -19402,6 +19589,7 @@ export type DnssecDnssec = {
   digest_type?: DnssecDigestType;
   dnssec_multi_signer?: DnssecDnssecMultiSigner;
   dnssec_presigned?: DnssecDnssecPresigned;
+  dnssec_use_nsec3?: DnssecDnssecUseNsec3;
   ds?: DnssecDs;
   flags?: DnssecFlags;
   key_tag?: DnssecKeyTag;
@@ -19440,6 +19628,20 @@ export type DnssecDnssecPresigned = boolean;
 export type DnssecDnssecResponseSingle = DnssecApiResponseSingle & {
   result?: DnssecDnssec;
 };
+
+/**
+ * If true, enables the use of NSEC3 together with DNSSEC on the zone.
+ * Combined with setting dnssec_presigned to true, this enables the use of
+ * NSEC3 records when transferring in from an external provider.
+ * If dnssec_presigned is instead set to false (default), NSEC3 records will be
+ * generated and signed at request time.
+ *
+ * See [DNSSEC with NSEC3](https://developers.cloudflare.com/dns/dnssec/enable-nsec3/) for details.
+ *
+ * @example false
+ * @x-auditable true
+ */
+export type DnssecDnssecUseNsec3 = boolean;
 
 /**
  * Full DS record.
@@ -20621,7 +20823,7 @@ export type EmailRuleMatcher = {
    * @example literal
    * @x-auditable true
    */
-  type: 'literal';
+  type: 'all' | 'literal';
   /**
    * Value for matcher.
    *
@@ -22964,16 +23166,7 @@ export type HealthchecksTimestamp = string;
  */
 export type HealthchecksType = string;
 
-export type HyperdriveApiResponseCollection = {
-  errors: HyperdriveMessages;
-  messages: HyperdriveMessages;
-  result: never;
-  /**
-   * Whether the API call was successful
-   *
-   * @example true
-   */
-  success: true;
+export type HyperdriveApiResponseCollection = HyperdriveApiResponseCommon & {
   result_info?: HyperdriveResultInfo;
 };
 
@@ -22982,7 +23175,7 @@ export type HyperdriveApiResponseCommon = {
   messages: HyperdriveMessages;
   result: Record<string, any>;
   /**
-   * Whether the API call was successful
+   * Return the status of the API call success.
    *
    * @example true
    */
@@ -22998,7 +23191,7 @@ export type HyperdriveApiResponseCommonFailure = {
   messages: HyperdriveMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Return the status of the API call success.
    *
    * @example false
    */
@@ -23011,7 +23204,7 @@ export type HyperdriveHyperdriveCaching = HyperdriveHyperdriveCachingDisabled | 
 
 export type HyperdriveHyperdriveCachingCommon = {
   /**
-   * When set to true, disables the caching of SQL responses. (Default: false)
+   * Set to true to disable caching of SQL responses. Default is false.
    *
    * @x-auditable true
    */
@@ -23022,14 +23215,14 @@ export type HyperdriveHyperdriveCachingDisabled = HyperdriveHyperdriveCachingCom
 
 export type HyperdriveHyperdriveCachingEnabled = HyperdriveHyperdriveCachingCommon & {
   /**
-   * When present, specifies max duration for which items should persist in the cache. Not returned if set to default. (Default: 60)
+   * Specify the maximum duration items should persist in the cache. Not returned if set to the default (60).
    *
    * @example 60
    * @x-auditable true
    */
   max_age?: number;
   /**
-   * When present, indicates the number of seconds cache may serve the response after it becomes stale. Not returned if set to default. (Default: 15)
+   * Specify the number of seconds the cache may serve a stale response. Omitted if set to the default (15).
    *
    * @example 15
    * @x-auditable true
@@ -23040,7 +23233,7 @@ export type HyperdriveHyperdriveCachingEnabled = HyperdriveHyperdriveCachingComm
 export type HyperdriveHyperdriveConfig = {
   caching?: HyperdriveHyperdriveCaching;
   /**
-   * When the Hyperdrive configuration was created.
+   * Defines the creation time of the Hyperdrive configuration.
    *
    * @example 2017-01-01T00:00:00Z
    * @format date-time
@@ -23049,7 +23242,7 @@ export type HyperdriveHyperdriveConfig = {
   created_on?: string;
   id: HyperdriveIdentifier;
   /**
-   * When the Hyperdrive configuration was last modified.
+   * Defines the last modified time of the Hyperdrive configuration.
    *
    * @example 2017-01-01T00:00:00Z
    * @format date-time
@@ -23074,21 +23267,21 @@ export type HyperdriveHyperdriveConfigResponse = HyperdriveHyperdriveConfig;
 
 export type HyperdriveHyperdriveDatabase = {
   /**
-   * The name of your origin database.
+   * Set the name of your origin database.
    *
    * @example postgres
    * @x-auditable true
    */
   database?: string;
   /**
-   * The password required to access your origin database. This value is write-only and never returned by the API.
+   * Set the password needed to access your origin database. The API never returns this write-only value.
    *
    * @x-sensitive true
    */
   password?: string;
   scheme?: HyperdriveHyperdriveScheme;
   /**
-   * The user of your origin database.
+   * Set the user of your origin database.
    *
    * @example postgres
    * @x-auditable true
@@ -23100,19 +23293,19 @@ export type HyperdriveHyperdriveDatabaseFull = HyperdriveHyperdriveDatabase;
 
 export type HyperdriveHyperdriveMtls = {
   /**
-   * CA certificate ID
+   * Define CA certificate ID obtained after uploading CA cert.
    *
    * @example 00000000-0000-0000-0000-0000000000
    */
   ca_certificate_id?: string;
   /**
-   * mTLS certificate ID
+   * Define mTLS certificate ID obtained after uploading client cert.
    *
    * @example 00000000-0000-0000-0000-0000000000
    */
   mtls_certificate_id?: string;
   /**
-   * SSL mode used for CA verification. Must be 'require', 'verify-ca', or 'verify-full'
+   * Set SSL mode to 'require', 'verify-ca', or 'verify-full' to verify the CA.
    *
    * @example verify-full
    */
@@ -23136,7 +23329,7 @@ export type HyperdriveHyperdriveOrigin = HyperdriveHyperdriveDatabase &
 export type HyperdriveHyperdriveScheme = 'postgres' | 'postgresql' | 'mysql';
 
 /**
- * Identifier
+ * Define configurations using a unique string identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -23146,14 +23339,14 @@ export type HyperdriveIdentifier = string;
 
 export type HyperdriveInternetOrigin = {
   /**
-   * The host (hostname or IP) of your origin database.
+   * Defines the host (hostname or IP) of your origin database.
    *
    * @example database.example.com
    * @x-auditable true
    */
   host: string;
   /**
-   * The port (default: 5432 for Postgres) of your origin database.
+   * Defines the port (default: 5432 for Postgres) of your origin database.
    *
    * @example 5432
    * @x-auditable true
@@ -23171,21 +23364,21 @@ export type HyperdriveMessages = {
 
 export type HyperdriveOverAccessOrigin = {
   /**
-   * The Client ID of the Access token to use when connecting to the origin database.
+   * Defines the Client ID of the Access token to use when connecting to the origin database.
    *
    * @example 0123456789abcdef0123456789abcdef.access
    * @x-auditable true
    */
   access_client_id: string;
   /**
-   * The Client Secret of the Access token to use when connecting to the origin database. This value is write-only and never returned by the API.
+   * Defines the Client Secret of the Access Token to use when connecting to the origin database. The API never returns this write-only value.
    *
    * @example 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
    * @x-sensitive true
    */
   access_client_secret: string;
   /**
-   * The host (hostname or IP) of your origin database.
+   * Defines the host (hostname or IP) of your origin database.
    *
    * @example database.example.com
    * @x-auditable true
@@ -23195,25 +23388,25 @@ export type HyperdriveOverAccessOrigin = {
 
 export type HyperdriveResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Defines the total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Defines the current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Defines the number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Defines the total results available without any search parameters.
    *
    * @example 2000
    */
@@ -23256,22 +23449,6 @@ export type IamAccount = {
      */
     abuse_contact_email?: string;
     /**
-     * Specifies the default nameservers to be used for new zones added to this account.
-     *
-     * - `cloudflare.standard` for Cloudflare-branded nameservers
-     * - `custom.account` for account custom nameservers
-     * - `custom.tenant` for tenant custom nameservers
-     *
-     * See [Custom Nameservers](https://developers.cloudflare.com/dns/additional-options/custom-nameservers/)
-     * for more information.
-     *
-     * Deprecated in favor of [DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-an-account-update-dns-settings).
-     *
-     * @default cloudflare.standard
-     * @deprecated true
-     */
-    default_nameservers?: 'cloudflare.standard' | 'custom.account' | 'custom.tenant';
-    /**
      * Indicates whether membership in this account requires that
      * Two-Factor Authentication is enabled
      *
@@ -23279,16 +23456,6 @@ export type IamAccount = {
      * @x-auditable true
      */
     enforce_twofactor?: boolean;
-    /**
-     * Indicates whether new zones should use the account-level custom
-     * nameservers by default.
-     *
-     * Deprecated in favor of [DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-an-account-update-dns-settings).
-     *
-     * @default false
-     * @deprecated true
-     */
-    use_account_custom_ns_by_default?: boolean;
   };
 };
 
@@ -25164,9 +25331,9 @@ export type IntelAdditionalInformation = {
 export type IntelApiResponseCollection = {
   errors: IntelMessages;
   messages: IntelMessages;
-  result: Record<string, any> | any[] | string | null;
+  result: Record<string, any> | (string | Record<string, any>)[] | string | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -25177,9 +25344,9 @@ export type IntelApiResponseCollection = {
 export type IntelApiResponseCommon = {
   errors: IntelMessages;
   messages: IntelMessages;
-  result: Record<string, any> | any[] | string;
+  result: Record<string, any> | (string | Record<string, any>)[] | string;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -25195,7 +25362,7 @@ export type IntelApiResponseCommonFailure = {
   messages: IntelMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -25332,7 +25499,16 @@ export type IntelDomainHistory = {
     /**
      * @example {"id":155,"name":"Technology"}
      */
-    categories?: void;
+    categories?: {
+      /**
+       * @example 155
+       */
+      id?: number;
+      /**
+       * @example Technology
+       */
+      name?: string;
+    }[];
     /**
      * @example 2021-04-30
      * @format date
@@ -25356,7 +25532,7 @@ export type IntelDomainHistory = {
 export type IntelDomainName = string;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -25557,7 +25733,7 @@ export type IntelPhishingUrlInfo = {
      */
     model_name?: string;
     /**
-     * Score output by the model for this submission.
+     * This is the score that is outputted by the model for this submission.
      *
      * @example 0.024
      */
@@ -25653,7 +25829,7 @@ export type IntelPhishingUrlSubmit = {
     url?: string;
   }[];
   /**
-   * URLs that were skipped because the same URL is currently being scanned
+   * URLs that were skipped because the same URL is currently being scanned.
    */
   skipped_urls?: {
     /**
@@ -25725,25 +25901,25 @@ export type IntelResponse = IntelApiResponseCollection & {
 
 export type IntelResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -25904,7 +26080,7 @@ export type IntelStartEndParams = {
 };
 
 /**
- * STIX 2.1 identifier: https://docs.oasis-open.org/cti/stix/v2.1/cs02/stix-v2.1-cs02.html#_64yvzeku5a5c
+ * STIX 2.1 identifier: https://docs.oasis-open.org/cti/stix/v2.1/cs02/stix-v2.1-cs02.html#_64yvzeku5a5c.
  *
  * @example ipv4-addr--baa568ec-6efe-5902-be55-0663833db537
  * @x-auditable true
@@ -25912,7 +26088,7 @@ export type IntelStartEndParams = {
 export type IntelStixIdentifier = string;
 
 /**
- * URL(s) to filter submissions results by
+ * URL(s) to filter submissions results by.
  *
  * @example https://www.cloudflare.com
  * @format uri
@@ -27732,7 +27908,6 @@ export type LogpushEnabled = boolean;
 /**
  * If not null, the job is currently failing. Failures are usually repetitive (example: no permissions to write to destination bucket). Only the last failure is recorded. On successful execution of a job the error_message and last_error are set to null.
  *
- * @format date-time
  * @x-auditable true
  */
 export type LogpushErrorMessage = string | null;
@@ -27820,8 +27995,9 @@ export type LogpushInstantLogsJobResponseSingle = LogpushApiResponseSingle & {
  * @default
  * @example
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
-export type LogpushKind = 'edge' | null;
+export type LogpushKind = 'edge';
 
 /**
  * Records the last time for which logs have been successfully pushed. If the last successful push was for logs range 2018-07-23T10:00:00Z to 2018-07-23T10:01:00Z then the value of this field will be 2018-07-23T10:01:00Z. If the job has never run or has just been enabled and hasn't run yet then the field will be empty.
@@ -28849,6 +29025,7 @@ export type MagicVisibilityPcapsMessages = {
  * @example 500000
  * @maximum 1000000000
  * @minimum 1
+ * @x-auditable true
  */
 export type MagicVisibilityPcapsPcapsByteLimit = number;
 
@@ -28860,6 +29037,7 @@ export type MagicVisibilityPcapsPcapsCollectionResponse = MagicVisibilityPcapsAp
  * The name of the data center used for the packet capture. This can be a specific colo (ord02) or a multi-colo name (ORD). This field only applies to `full` packet captures.
  *
  * @example ord02
+ * @x-auditable true
  */
 export type MagicVisibilityPcapsPcapsColoName = string;
 
@@ -28885,30 +29063,35 @@ export type MagicVisibilityPcapsPcapsFilterV1 = {
    * The destination IP address of the packet.
    *
    * @example 1.2.3.4
+   * @x-auditable true
    */
   destination_address?: string;
   /**
    * The destination port of the packet.
    *
    * @example 80
+   * @x-auditable true
    */
   destination_port?: number;
   /**
    * The protocol number of the packet.
    *
    * @example 6
+   * @x-auditable true
    */
   protocol?: number;
   /**
    * The source IP address of the packet.
    *
    * @example 1.2.3.4
+   * @x-auditable true
    */
   source_address?: string;
   /**
    * The source port of the packet.
    *
    * @example 123
+   * @x-auditable true
    */
   source_port?: number;
 };
@@ -28919,6 +29102,7 @@ export type MagicVisibilityPcapsPcapsFilterV1 = {
  * @example 66802ca5668e47a2b82c2e6746e45037
  * @maxLength 32
  * @minLength 32
+ * @x-auditable true
  */
 export type MagicVisibilityPcapsPcapsId = string;
 
@@ -28927,6 +29111,7 @@ export type MagicVisibilityPcapsPcapsId = string;
  *
  * @example 2020-01-01T08:00:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type MagicVisibilityPcapsPcapsOffsetTime = string;
 
@@ -28999,8 +29184,14 @@ export type MagicVisibilityPcapsPcapsOwnershipValidateRequest = {
  * @example 10000
  * @maximum 10000
  * @minimum 1
+ * @x-auditable true
  */
 export type MagicVisibilityPcapsPcapsPacketLimit = number;
+
+/**
+ * The number of packets captured.
+ */
+export type MagicVisibilityPcapsPcapsPacketsCaptured = number;
 
 export type MagicVisibilityPcapsPcapsRequestFull = {
   byte_limit?: MagicVisibilityPcapsPcapsByteLimit;
@@ -29009,7 +29200,7 @@ export type MagicVisibilityPcapsPcapsRequestFull = {
   filter_v1?: MagicVisibilityPcapsPcapsFilterV1;
   packet_limit?: MagicVisibilityPcapsPcapsPacketLimit;
   system: MagicVisibilityPcapsPcapsSystem;
-  time_limit: MagicVisibilityPcapsPcapsTimeLimit;
+  time_limit: MagicVisibilityPcapsPcapsTimeLimitFull;
   type: MagicVisibilityPcapsPcapsType;
 };
 
@@ -29022,7 +29213,7 @@ export type MagicVisibilityPcapsPcapsRequestSimple = {
   offset_time?: MagicVisibilityPcapsPcapsOffsetTime;
   packet_limit: MagicVisibilityPcapsPcapsPacketLimit;
   system: MagicVisibilityPcapsPcapsSystem;
-  time_limit: MagicVisibilityPcapsPcapsTimeLimit;
+  time_limit: MagicVisibilityPcapsPcapsTimeLimitSampled;
   type: MagicVisibilityPcapsPcapsType;
 };
 
@@ -29033,10 +29224,12 @@ export type MagicVisibilityPcapsPcapsResponseFull = {
   error_message?: MagicVisibilityPcapsPcapsErrorMessage;
   filter_v1?: MagicVisibilityPcapsPcapsFilterV1;
   id?: MagicVisibilityPcapsPcapsId;
+  packets_captured?: MagicVisibilityPcapsPcapsPacketsCaptured;
   status?: MagicVisibilityPcapsPcapsStatus;
+  stop_requested?: MagicVisibilityPcapsPcapsStopRequested;
   submitted?: MagicVisibilityPcapsPcapsSubmitted;
   system?: MagicVisibilityPcapsPcapsSystem;
-  time_limit?: MagicVisibilityPcapsPcapsTimeLimit;
+  time_limit?: MagicVisibilityPcapsPcapsTimeLimitFull;
   type?: MagicVisibilityPcapsPcapsType;
 };
 
@@ -29047,7 +29240,7 @@ export type MagicVisibilityPcapsPcapsResponseSimple = {
   status?: MagicVisibilityPcapsPcapsStatus;
   submitted?: MagicVisibilityPcapsPcapsSubmitted;
   system?: MagicVisibilityPcapsPcapsSystem;
-  time_limit?: MagicVisibilityPcapsPcapsTimeLimit;
+  time_limit?: MagicVisibilityPcapsPcapsTimeLimitSampled;
   type?: MagicVisibilityPcapsPcapsType;
 };
 
@@ -29071,6 +29264,13 @@ export type MagicVisibilityPcapsPcapsStatus =
   | 'failed';
 
 /**
+ * The RFC 3339 timestamp when stopping the packet capture was requested. This field only applies to `full` packet captures.
+ *
+ * @format date-time
+ */
+export type MagicVisibilityPcapsPcapsStopRequested = string;
+
+/**
  * The RFC 3339 timestamp when the packet capture was created.
  *
  * @example 2020-01-01T08:00:00Z
@@ -29081,8 +29281,19 @@ export type MagicVisibilityPcapsPcapsSubmitted = string;
  * The system used to collect packet captures.
  *
  * @example magic-transit
+ * @x-auditable true
  */
 export type MagicVisibilityPcapsPcapsSystem = 'magic-transit';
+
+/**
+ * The packet capture duration in seconds.
+ *
+ * @example 86400
+ * @maximum 86400
+ * @minimum 1
+ * @x-auditable true
+ */
+export type MagicVisibilityPcapsPcapsTimeLimitFull = number;
 
 /**
  * The packet capture duration in seconds.
@@ -29090,13 +29301,15 @@ export type MagicVisibilityPcapsPcapsSystem = 'magic-transit';
  * @example 300
  * @maximum 300
  * @minimum 1
+ * @x-auditable true
  */
-export type MagicVisibilityPcapsPcapsTimeLimit = number;
+export type MagicVisibilityPcapsPcapsTimeLimitSampled = number;
 
 /**
  * The type of packet capture. `Simple` captures sampled packets, and `full` captures entire payloads and non-sampled packets.
  *
  * @example simple
+ * @x-auditable true
  */
 export type MagicVisibilityPcapsPcapsType = 'simple' | 'full';
 
@@ -31408,6 +31621,10 @@ export type MconnAdminDevice = {
   last_updated: string;
   license_key_sha256?: string;
   metadata: string;
+  pki_rotation_finished_at?: string;
+  pki_rotation_output?: string;
+  pki_rotation_started_at?: string;
+  pki_rotation_status_code?: number;
   serial_number?: string;
 };
 
@@ -31443,6 +31660,10 @@ export type MconnAdminDeviceFields = {
   last_updated?: string;
   license_key_sha256?: string;
   metadata?: string;
+  pki_rotation_finished_at?: string;
+  pki_rotation_output?: string;
+  pki_rotation_started_at?: string;
+  pki_rotation_status_code?: number;
   serial_number?: string;
 };
 
@@ -31464,6 +31685,15 @@ export type MconnAdminDeviceUpdateResponse = MconnGoodResponse & {
 
 export type MconnAdminEventGetSuccess = MconnEnvelope & {
   result: MconnRecordedEvent;
+};
+
+export type MconnAdminEventsGetLatestResult = {
+  count: number;
+  items: MconnRecordedEvent[];
+};
+
+export type MconnAdminEventsGetLatestSuccess = MconnEnvelope & {
+  result: MconnAdminEventsGetLatestResult;
 };
 
 export type MconnAdminEventsGetResult = {
@@ -31527,6 +31757,15 @@ export type MconnAdminSite = {
 
 export type MconnAdminSnapshotGetSuccess = MconnEnvelope & {
   result: MconnSnapshot;
+};
+
+export type MconnAdminSnapshotsGetLatestResult = {
+  count: number;
+  items: MconnSnapshot[];
+};
+
+export type MconnAdminSnapshotsGetLatestSuccess = MconnEnvelope & {
+  result: MconnAdminSnapshotsGetLatestResult;
 };
 
 export type MconnAdminSnapshotsGetResult = {
@@ -31776,6 +32015,15 @@ export type MconnCustomerEventGetSuccess = MconnEnvelope & {
   result: MconnRecordedEvent;
 };
 
+export type MconnCustomerEventsGetLatestResult = {
+  count: number;
+  items: MconnRecordedEvent[];
+};
+
+export type MconnCustomerEventsGetLatestSuccess = MconnEnvelope & {
+  result: MconnCustomerEventsGetLatestResult;
+};
+
 export type MconnCustomerEventsGetResult = {
   count: number;
   cursor?: string;
@@ -31788,6 +32036,15 @@ export type MconnCustomerEventsGetSuccess = MconnEnvelope & {
 
 export type MconnCustomerSnapshotGetSuccess = MconnEnvelope & {
   result: MconnSnapshot;
+};
+
+export type MconnCustomerSnapshotsGetLatestResult = {
+  count: number;
+  items: MconnSnapshot[];
+};
+
+export type MconnCustomerSnapshotsGetLatestSuccess = MconnEnvelope & {
+  result: MconnCustomerSnapshotsGetLatestResult;
 };
 
 export type MconnCustomerSnapshotsGetResult = {
@@ -31862,6 +32119,24 @@ export type MconnEvent =
        * Failed crypt key rotation
        */
       k: 'FinishRotateCryptKeyFailure';
+    }
+  | {
+      /**
+       * Started PKI rotation
+       */
+      k: 'StartRotatePki';
+    }
+  | {
+      /**
+       * Finished PKI rotation
+       */
+      k: 'FinishRotatePkiSuccess';
+    }
+  | {
+      /**
+       * Failed PKI rotation
+       */
+      k: 'FinishRotatePkiFailure';
     }
   | {
       /**
@@ -32048,7 +32323,7 @@ export type MconnSnapshot = {
    */
   ha_state?: string;
   /**
-   * Numeric value associated with high availability state (0 = unknown, 1 = active, 2 = standby, 3 = disabled, 4 = fault)
+   * Numeric value associated with high availability state (0 = disabled, 1 = active, 2 = standby, 3 = stopped, 4 = fault)
    */
   ha_value?: number;
   interfaces?: MconnSnapshotInterface[];
@@ -33111,6 +33386,41 @@ export type MqQueue = {
 
 export type MqQueueBatch = {
   /**
+   * The number of seconds to wait for attempting to deliver this batch to consumers
+   *
+   * @example text
+   * @x-auditable true
+   */
+  delay_seconds?: number;
+  messages?: MqQueueMessage[];
+};
+
+export type MqQueueMessage = MqQueueMessageText | MqQueueMessageJson;
+
+export type MqQueueMessageJson = {
+  body?: Record<string, any>;
+  /**
+   * @x-auditable true
+   */
+  content_type?: 'json';
+};
+
+export type MqQueueMessageText = {
+  body?: string;
+  /**
+   * @x-auditable true
+   */
+  content_type?: 'text';
+};
+
+/**
+ * @example example-queue
+ * @x-auditable true
+ */
+export type MqQueueName = string;
+
+export type MqQueuePullBatch = {
+  /**
    * @example 1
    * @x-auditable true
    */
@@ -33135,12 +33445,6 @@ export type MqQueueBatch = {
    */
   timestamp_ms?: number;
 }[];
-
-/**
- * @example example-queue
- * @x-auditable true
- */
-export type MqQueueName = string;
 
 export type MqQueueSettings = {
   /**
@@ -35371,6 +35675,7 @@ export type R2Bucket = {
    * Creation timestamp.
    */
   creation_date?: string;
+  jurisdiction?: R2Jurisdiction;
   location?: R2BucketLocation;
   name?: R2BucketName;
   storage_class?: R2StorageClass;
@@ -35420,6 +35725,7 @@ export type R2BucketLockRuleConfig = {
  * Location of the bucket.
  *
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type R2BucketLocation = 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam' | 'oc';
 
@@ -35713,6 +36019,15 @@ export type R2GetCustomDomainResponse = {
    */
   zoneName?: string;
 };
+
+/**
+ * Jurisdiction where objects in this bucket are guaranteed to be stored.
+ *
+ * @default default
+ * @x-auditable true
+ * @x-stainless-param jurisdiction
+ */
+export type R2Jurisdiction = 'default' | 'eu' | 'fedramp';
 
 /**
  * Condition for lifecycle transitions to apply after an object reaches an age in seconds.
@@ -40781,7 +41096,7 @@ export type RulesetsSkipRule = {
    */
   action_parameters?: {
     /**
-     * A list of phases to skip the execution of. This option is incompatible with the rulesets options.
+     * A list of phases to skip the execution of. This option is incompatible with the rulesets option.
      *
      * @minItems 1
      * @uniqueItems true
@@ -40804,7 +41119,7 @@ export type RulesetsSkipRule = {
       [key: string]: (RulesetsRuleId & void)[];
     };
     /**
-     * A ruleset to skip the execution of. This option is incompatible with the rulesets, rules. It can be incompatible with phases options base on the phase of the ruleset.
+     * A ruleset to skip the execution of. This option is incompatible with the rulesets option.
      */
     ruleset?: 'current';
     /**
@@ -44367,7 +44682,7 @@ export type StreamWidth = number;
 
 export type TeamsDevicesAccessSerialNumberListInputRequest = {
   /**
-   * UUID of Access List
+   * UUID of Access List.
    *
    * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
    * @maxLength 36
@@ -46041,7 +46356,7 @@ export type TeamsDevicesSchemasType =
   | 'uptycs'
   | 'intune'
   | 'kolide'
-  | 'tanium'
+  | 'tanium_s2s'
   | 'sentinelone_s2s'
   | 'custom_s2s';
 
@@ -46607,6 +46922,7 @@ export type TlsCertificatesAndHostnamesAdvancedCertificatePackResponseSingle =
  * Type of certificate pack.
  *
  * @example advanced
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesAdvancedType = 'advanced';
 
@@ -46659,6 +46975,7 @@ export type TlsCertificatesAndHostnamesBase = {
    *
    * @example 2014-01-01T05:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   created_on: string;
   enabled: TlsCertificatesAndHostnamesEnabled;
@@ -46669,6 +46986,7 @@ export type TlsCertificatesAndHostnamesBase = {
    *
    * @example 2014-01-01T05:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on: string;
   name: TlsCertificatesAndHostnamesName;
@@ -46688,6 +47006,7 @@ export type TlsCertificatesAndHostnamesBase = {
  * Certificate Authority is manually reviewing the order.
  *
  * @example false
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesBrandCheck = boolean;
 
@@ -46696,6 +47015,7 @@ export type TlsCertificatesAndHostnamesBrandCheck = boolean;
  *
  * @default ubiquitous
  * @example ubiquitous
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesBundleMethod = 'ubiquitous' | 'optimal' | 'force';
 
@@ -46703,6 +47023,7 @@ export type TlsCertificatesAndHostnamesBundleMethod = 'ubiquitous' | 'optimal' |
  * Indicates whether the certificate is a CA or leaf certificate.
  *
  * @example true
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCa = boolean;
 
@@ -46711,6 +47032,7 @@ export type TlsCertificatesAndHostnamesCa = boolean;
  *
  * @example 2458ce5a-0c35-4c7f-82c7-8e9487d3ff60
  * @maxLength 36
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCertId = string;
 
@@ -46718,6 +47040,7 @@ export type TlsCertificatesAndHostnamesCertId = string;
  * Certificate Pack UUID.
  *
  * @example a77f8bd7-3b47-46b4-a6f1-75cf98109948
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCertPackUuid = string;
 
@@ -46753,6 +47076,7 @@ export type TlsCertificatesAndHostnamesCertificate = string;
  * Status of certificate pack.
  *
  * @example initializing
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCertificatePacksComponentsSchemasStatus =
   | 'initializing'
@@ -46808,6 +47132,7 @@ export type TlsCertificatesAndHostnamesCertificateAnalyzeResponse = TlsCertifica
  * The Certificate Authority that will issue the certificate
  *
  * @example google
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCertificateAuthority = 'digicert' | 'google' | 'lets_encrypt' | 'ssl_com';
 
@@ -46856,6 +47181,7 @@ export type TlsCertificatesAndHostnamesCertificateRevokeResponse = {
  * Current status of certificate.
  *
  * @example active
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCertificateStatus =
   | 'initializing'
@@ -46889,10 +47215,12 @@ export type TlsCertificatesAndHostnamesClientCertificatesComponentsSchemasCertif
 export type TlsCertificatesAndHostnamesClientCertificatesComponentsSchemasCertificateAuthority = {
   /**
    * @example 568b6b74-7b0c-4755-8840-4e3b8c24adeb
+   * @x-auditable true
    */
   id?: string;
   /**
    * @example Cloudflare Managed CA for account
+   * @x-auditable true
    */
   name?: string;
 };
@@ -46901,6 +47229,7 @@ export type TlsCertificatesAndHostnamesClientCertificatesComponentsSchemasCertif
  * Client Certificates may be active or revoked, and the pending_reactivation or pending_revocation represent in-progress asynchronous transitions
  *
  * @example active
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesClientCertificatesComponentsSchemasStatus =
   | 'active'
@@ -46943,6 +47272,7 @@ export type TlsCertificatesAndHostnamesClientCertificateResponseSingle =
  * Whether or not to add Cloudflare Branding for the order.  This will add a subdomain of sni.cloudflaressl.com as the Common Name if set to true.
  *
  * @example false
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCloudflareBranding = boolean;
 
@@ -46950,6 +47280,7 @@ export type TlsCertificatesAndHostnamesCloudflareBranding = boolean;
  * Common Name of the Client Certificate
  *
  * @example Cloudflare
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCommonName = string;
 
@@ -46992,6 +47323,7 @@ export type TlsCertificatesAndHostnamesComponentsSchemasCertificateObject = {
  * The Certificate Authority that Total TLS certificates will be issued through.
  *
  * @example google
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasCertificateAuthority = 'google' | 'lets_encrypt' | 'ssl_com';
 
@@ -47010,6 +47342,7 @@ export type TlsCertificatesAndHostnamesComponentsSchemasCertificateResponseSingl
  *
  * @example 2100-01-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasCreatedAt = string;
 
@@ -47017,6 +47350,7 @@ export type TlsCertificatesAndHostnamesComponentsSchemasCreatedAt = string;
  * If enabled, Total TLS will order a hostname specific TLS certificate for any proxied A, AAAA, or CNAME record in your zone.
  *
  * @example true
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasEnabled = boolean;
 
@@ -47025,6 +47359,7 @@ export type TlsCertificatesAndHostnamesComponentsSchemasEnabled = boolean;
  *
  * @example 2100-01-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasExpiresOn = string;
 
@@ -47032,11 +47367,12 @@ export type TlsCertificatesAndHostnamesComponentsSchemasExpiresOn = string;
  * The hostname for which the tls settings are set.
  *
  * @example app.example.com
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasHostname = string;
 
 /**
- * The private key for the certificate
+ * The private key for the certificate. This field is only needed for specific use cases such as using a custom certificate with Zero Trust's block page.
  * 
  * @example -----BEGIN PRIVATE KEY-----
 MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDEXDkcICRU3XBv9hiiPnBWIjgTQyowmVFxDr11mONgZB/cMYjE/OvQjvnpwNcOaSK16MOpAjNbELKRx2lZiVJaLRDCccqCxXwP/CrdRChcqGzo7mbNksMlcidrErb0LlEBKLFC2QjRmRKqB+YOs4TD8WsZu2S667A2fZmjRlaqOxFi1h62ee0P+TLU628UC/nl41JifSt5Evt7hMDHakemdwZblNYr2p6T3NQjdhjYXTtP4UmOGJBhJ7i7Kicg3d3CIgdTMbggSeGWqjndr4ldVnD96FN3cVT5uDFsn2CJXTFgdeBWoUnMS4VnUZzPWGf4vSBXC8qV7Ls+w46yT7T1AgMBAAECggEAQZnp/oqCeNPOR6l5S2L+1tfx0gWjZ78hJVteUpZ0iHSK7F6kKeOxyOird7vUXV0kmo+cJq+0hp0Ke4eam640FCpwKfYoSQ4/R3vgujGWJnaihCN5tv5sMet0XeJPuz5qE7ALoKCvwI6aXLHs20aAeZIDTQJ9QbGSGnJVzOWn+JDTidIgZpN57RpXfSAwnJPTQK/PN8i5z108hsaDOdEgGmxYZ7kYqMqzX20KXmth58LDfPixs5JGtS60iiKC/wOcGzkB2/AdTSojR76oEU77cANP/3zO25NG//whUdYlW0t0d7PgXxIeJe+xgYnamDQJx3qonVyt4H77ha0ObRAj9QKBgQDicZr+VTwFMnELP3a+FXGnjehRiuS1i7MXGKxNweCD+dFlML0FplSQS8Ro2n+d8lu8BBXGx0qm6VXu8Rhn7TAUL6q+PCgfarzxfIhacb/TZCqfieIHsMlVBfhV5HCXnk+kis0tuC/PRArcWTwDHJUJXkBhvkUsNswvQzavDPI7KwKBgQDd/WgLkj7A3X5fgIHZH/GbDSBiXwzKb+rF4ZCT2XFgG/OAW7vapfcX/w+v+5lBLyrocmOAS3PGGAhM5T3HLnUCQfnK4qgps1Lqibkc9Tmnsn60LanUjuUMsYv/zSw70tozbzhJ0pioEpWfRxRZBztO2Rr8Ntm7h6Fk701EXGNAXwKBgQCD1xsjy2J3sCerIdcz0u5qXLAPkeuZW+34m4/ucdwTWwc0gEz9lhsULFj9p4G351zLuiEnq+7mAWLcDJlmIO3mQt6JhiLiL9Y0T4pgBmxmWqKKYtAsJB0EmMY+1BNN44mBRqMxZFTJu1cLdhT/xstrOeoIPqytknYNanfTMZlzIwKBgHrLXe5oq0XMP8dcMneEcAUwsaU4pr6kQd3L9EmUkl5zl7J9C+DaxWAEuwzBw/iGutlxzRB+rD/7szu14wJ29EqXbDGKRzMp+se5/yfBjm7xEZ1hVPw7PwBShfqt57X/4Ktq7lwHnmH6RcGhc+P7WBc5iO/S94YAdIp8xOT3pf9JAoGAE0QkqJUY+5Mgr+fBO0VNV72ZoPveGpW+De59uhKAOnu1zljQCUtk59m6+DXfm0tNYKtawa5n8iN71Zh+s62xXSt3pYi1Y5CCCmv8Y4BhwIcPwXKk3zEvLgSHVTpC0bayA9aSO4bbZgVXa5w+Z0w/vvfp9DWo1IS3EnQRrz6WMYA=
@@ -47049,6 +47385,7 @@ export type TlsCertificatesAndHostnamesComponentsSchemasPrivateKey = string;
  * The serial number on the created Client Certificate.
  *
  * @example 3bb94ff144ac567b9f75ad664b6c55f8d5e48182
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasSerialNumber = string;
 
@@ -47056,6 +47393,7 @@ export type TlsCertificatesAndHostnamesComponentsSchemasSerialNumber = string;
  * The type of hash used for the Client Certificate..
  *
  * @example SHA256WithRSA
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasSignature = string;
 
@@ -47063,6 +47401,7 @@ export type TlsCertificatesAndHostnamesComponentsSchemasSignature = string;
  * Status of the hostname's activation.
  *
  * @example pending
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasStatus =
   | 'active'
@@ -47087,6 +47426,7 @@ export type TlsCertificatesAndHostnamesComponentsSchemasStatus =
  *
  * @example 2022-11-22T17:32:30.467938Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasUpdatedAt = string;
 
@@ -47095,6 +47435,7 @@ export type TlsCertificatesAndHostnamesComponentsSchemasUpdatedAt = string;
  *
  * @example 2019-10-28T18:11:23.37411Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasUploadedOn = string;
 
@@ -47108,6 +47449,7 @@ export type TlsCertificatesAndHostnamesConfig = TlsCertificatesAndHostnamesHostn
  * Country, provided by the CSR
  *
  * @example US
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCountry = string;
 
@@ -47116,6 +47458,7 @@ export type TlsCertificatesAndHostnamesCountry = string;
  *
  * @example 2020-02-06T18:11:23.531995Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCreatedAt = string;
 
@@ -47177,6 +47520,7 @@ export type TlsCertificatesAndHostnamesCustomHostname = {
  * Status of the fallback origin's activation.
  *
  * @example pending_deployment
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCustomHostnameFallbackOriginComponentsSchemasStatus =
   | 'initializing'
@@ -47234,6 +47578,7 @@ export type TlsCertificatesAndHostnamesCustomMetadata = {
  * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME record.
  *
  * @example origin2.example.com
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCustomOriginServer = string;
 
@@ -47241,6 +47586,7 @@ export type TlsCertificatesAndHostnamesCustomOriginServer = string;
  * A hostname that will be sent to your custom origin server as SNI for TLS handshake. This can be a valid subdomain of the zone or custom origin server name or the string ':request_host_header:' which will cause the host header in the request to be used as SNI. Not configurable with default/fallback origin server.
  *
  * @example sni.example.com
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCustomOriginSni = string;
 
@@ -47273,6 +47619,7 @@ export type TlsCertificatesAndHostnamesDeleteAdvancedCertificatePackResponseSing
  * Whether or not the Keyless SSL is on or off.
  *
  * @example false
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesEnabled = boolean;
 
@@ -47287,6 +47634,7 @@ export type TlsCertificatesAndHostnamesEnabledResponse = TlsCertificatesAndHostn
  *
  * @deprecated true
  * @example false
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesEnabledWrite = boolean;
 
@@ -47301,6 +47649,7 @@ export type TlsCertificatesAndHostnamesErrors = string[];
  * Date that the Client Certificate expires
  *
  * @example 2033-02-20T23:18:00Z
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesExpiredOn = string;
 
@@ -47309,6 +47658,7 @@ export type TlsCertificatesAndHostnamesExpiredOn = string;
  *
  * @example 2016-01-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesExpiresOn = string;
 
@@ -47328,6 +47678,7 @@ export type TlsCertificatesAndHostnamesFallbackorigin = {
  * Unique identifier of the Client Certificate
  *
  * @example 256c24690243359fb8cf139a125bd05ebf1d968b71e4caf330718e9f5c8a89ea
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesFingerprintSha256 = string;
 
@@ -47337,6 +47688,7 @@ export type TlsCertificatesAndHostnamesFingerprintSha256 = string;
 export type TlsCertificatesAndHostnamesGeoRestrictions = {
   /**
    * @example us
+   * @x-auditable true
    */
   label?: 'us' | 'eu' | 'highest_security';
 };
@@ -47347,6 +47699,7 @@ export type TlsCertificatesAndHostnamesGeoRestrictions = {
  * @example example.com
  * @format hostname
  * @maxLength 253
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesHost = string;
 
@@ -47355,6 +47708,7 @@ export type TlsCertificatesAndHostnamesHost = string;
  *
  * @example app.example.com
  * @maxLength 255
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesHostname = string;
 
@@ -47419,6 +47773,7 @@ export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponents
  * Indicates whether hostname-level authenticated origin pulls is enabled. A null value voids the association.
  *
  * @example true
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasEnabled = boolean | null;
 
@@ -47427,6 +47782,7 @@ export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponents
  *
  * @example 2100-01-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasExpiresOn = string;
 
@@ -47434,6 +47790,7 @@ export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponents
  * Status of the certificate or the association.
  *
  * @example active
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasStatus =
   | 'initializing'
@@ -47449,6 +47806,7 @@ export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponents
  *
  * @example 2023-07-10T20:01:50.219171Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasCreatedAt = string;
 
@@ -47456,6 +47814,7 @@ export type TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasCreat
  * Deployment status for the given tls setting.
  *
  * @example pending_deployment
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasStatus = string;
 
@@ -47464,6 +47823,7 @@ export type TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasStatu
  *
  * @example 2023-07-10T20:01:50.219171Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasUpdatedAt = string;
 
@@ -47483,6 +47843,7 @@ export type TlsCertificatesAndHostnamesHostnameAssociation = {
    *
    * @maxLength 36
    * @minLength 36
+   * @x-auditable true
    */
   mtls_certificate_id?: string;
 };
@@ -47521,6 +47882,7 @@ export type TlsCertificatesAndHostnamesHostnameCertidObject = {
  *
  * @example app.example.com
  * @maxLength 255
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesHostnamePost = string;
 
@@ -47546,6 +47908,7 @@ export type TlsCertificatesAndHostnamesIdentifier = string;
  * Date that the Client Certificate was issued by the Certificate Authority
  *
  * @example 2023-02-23T23:18:00Z
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesIssuedOn = string;
 
@@ -47553,6 +47916,7 @@ export type TlsCertificatesAndHostnamesIssuedOn = string;
  * The certificate authority that issued the certificate.
  *
  * @example GlobalSign
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesIssuer = string;
 
@@ -47562,6 +47926,7 @@ export type TlsCertificatesAndHostnamesKeylessCertificate = TlsCertificatesAndHo
  * Private IP of the Key Server Host
  *
  * @example 10.0.0.1
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesKeylessPrivateIp = string;
 
@@ -47591,6 +47956,7 @@ export type TlsCertificatesAndHostnamesKeylessTunnel = {
  * Cloudflare Tunnel Virtual Network ID
  *
  * @example 7365377a-85a4-4390-9480-531ef7dc7a3c
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesKeylessVnetId = string;
 
@@ -47598,6 +47964,7 @@ export type TlsCertificatesAndHostnamesKeylessVnetId = string;
  * Location, provided by the CSR
  *
  * @example Somewhere
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesLocation = string;
 
@@ -47618,6 +47985,7 @@ export type TlsCertificatesAndHostnamesMessages = {
  *
  * @example 2014-01-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesModifiedOn = string;
 
@@ -47661,6 +48029,7 @@ export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasCertificat
  *
  * @example 2122-10-29T16:59:47Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasExpiresOn = string;
 
@@ -47668,6 +48037,7 @@ export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasExpiresOn 
  * Certificate deployment status for the given service.
  *
  * @example pending_deployment
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasStatus = string;
 
@@ -47676,6 +48046,7 @@ export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasStatus = s
  *
  * @example 2022-11-22T17:32:30.467938Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasUploadedOn = string;
 
@@ -47684,6 +48055,7 @@ export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasUploadedOn
  *
  * @example example.com Keyless SSL
  * @maxLength 180
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesName = string;
 
@@ -47692,6 +48064,7 @@ export type TlsCertificatesAndHostnamesName = string;
  *
  * @example example.com Keyless SSL
  * @maxLength 180
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesNameWrite = string;
 
@@ -47699,6 +48072,7 @@ export type TlsCertificatesAndHostnamesNameWrite = string;
  * Organization, provided by the CSR
  *
  * @example Organization
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesOrganization = string;
 
@@ -47706,6 +48080,7 @@ export type TlsCertificatesAndHostnamesOrganization = string;
  * Organizational Unit, provided by the CSR
  *
  * @example Organizational Unit
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesOrganizationalUnit = string;
 
@@ -47714,6 +48089,7 @@ export type TlsCertificatesAndHostnamesOrganizationalUnit = string;
  *
  * @example fallback.example.com
  * @maxLength 255
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesOrigin = string;
 
@@ -47725,12 +48101,14 @@ export type TlsCertificatesAndHostnamesOwnershipVerification = {
    * DNS Name for record.
    *
    * @example _cf-custom-hostname.app.example.com
+   * @x-auditable true
    */
   name?: string;
   /**
    * DNS Record type.
    *
    * @example txt
+   * @x-auditable true
    */
   type?: 'txt';
   /**
@@ -47808,6 +48186,7 @@ export type TlsCertificatesAndHostnamesPerHostnameSettingsResponseDelete =
  * Specify the policy that determines the region where your private key will be held locally. HTTPS connections to any excluded data center will still be fully encrypted, but will incur some latency while Keyless SSL is used to complete the handshake with the nearest allowed data center. Any combination of countries, specified by their two letter country code (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements) can be chosen, such as 'country: IN', as well as 'region: EU' which refers to the EU region. If there are too few data centers satisfying the policy, it will be rejected.
  *
  * @example (country: US) or (region: EU)
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesPolicy = string;
 
@@ -47817,6 +48196,7 @@ export type TlsCertificatesAndHostnamesPolicy = string;
  * @default 24008
  * @example 24008
  * @maxLength 65535
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesPort = number;
 
@@ -47825,6 +48205,7 @@ export type TlsCertificatesAndHostnamesPort = number;
  *
  * @default 0
  * @example 1
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesPriority = number;
 
@@ -47865,10 +48246,14 @@ export type TlsCertificatesAndHostnamesPrivateKey = string;
 export type TlsCertificatesAndHostnamesQuota = {
   /**
    * Quantity Allocated.
+   *
+   * @x-auditable true
    */
   allocated?: number;
   /**
    * Quantity Used.
+   *
+   * @x-auditable true
    */
   used?: number;
 };
@@ -47877,6 +48262,7 @@ export type TlsCertificatesAndHostnamesQuota = {
  * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa), or "keyless-certificate" (for Keyless SSL servers).
  *
  * @example origin-rsa
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesRequestType = 'origin-rsa' | 'origin-ecc' | 'keyless-certificate';
 
@@ -47885,6 +48271,7 @@ export type TlsCertificatesAndHostnamesRequestType = 'origin-rsa' | 'origin-ecc'
  *
  * @default 5475
  * @example 5475
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesRequestedValidity = 7 | 30 | 90 | 365 | 730 | 1095 | 5475;
 
@@ -47920,6 +48307,7 @@ export type TlsCertificatesAndHostnamesResultInfo = {
  *
  * @example 2024-09-06T18:43:47.928893Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesRevokedAt = string;
 
@@ -47945,6 +48333,7 @@ export type TlsCertificatesAndHostnamesSchemasCertificateObject = {
  * Certificate Authority selected for the order.  For information on any certificate authority specific details or restrictions [see this page for more details.](https://developers.cloudflare.com/ssl/reference/certificate-authorities)
  *
  * @example lets_encrypt
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasCertificateAuthority = 'google' | 'lets_encrypt' | 'ssl_com';
 
@@ -47972,6 +48361,7 @@ export type TlsCertificatesAndHostnamesSchemasCertificates = string;
  *
  * @example 2019-10-28T18:11:23.37411Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasCreatedAt = string;
 
@@ -47979,6 +48369,7 @@ export type TlsCertificatesAndHostnamesSchemasCreatedAt = string;
  * The Certificate Signing Request (CSR). Must be newline-encoded.
  *
  * @example -----BEGIN CERTIFICATE REQUEST-----\nMIICY....\n-----END CERTIFICATE REQUEST-----\n
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasCsr = string;
 
@@ -47998,6 +48389,7 @@ export type TlsCertificatesAndHostnamesSchemasCsr = string;
  * If you do not have a valid custom or advanced certificate at Cloudflare's edge and are unsure if any of the above Cloudflare settings are enabled, or if any HTTP redirects exist at your origin, we advise leaving Universal SSL enabled for your domain.
  *
  * @example true
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasEnabled = boolean;
 
@@ -48005,6 +48397,7 @@ export type TlsCertificatesAndHostnamesSchemasEnabled = boolean;
  * When the certificate will expire.
  *
  * @example 2014-01-01 05:20:00 +0000 UTC
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasExpiresOn = string;
 
@@ -48013,6 +48406,7 @@ export type TlsCertificatesAndHostnamesSchemasExpiresOn = string;
  *
  * @example app.example.com
  * @maxLength 255
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasHostname = string;
 
@@ -48032,6 +48426,7 @@ export type TlsCertificatesAndHostnamesSchemasHosts = string[];
  *
  * @example 4d2844d2ce78891c34d0b6c0535a291e
  * @maxLength 32
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasIdentifier = string;
 
@@ -48039,6 +48434,7 @@ export type TlsCertificatesAndHostnamesSchemasIdentifier = string;
  * The certificate authority that issued the certificate.
  *
  * @example O=Example Inc.,L=California,ST=San Francisco,C=US
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasIssuer = string;
 
@@ -48046,6 +48442,7 @@ export type TlsCertificatesAndHostnamesSchemasIssuer = string;
  * Optional unique name for the certificate. Only used for human readability.
  *
  * @example example_ca_cert
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasName = string;
 
@@ -48087,11 +48484,14 @@ export type TlsCertificatesAndHostnamesSchemasPrivateKey = string;
  * The certificate serial number.
  *
  * @example 235217144297995885180570755458463043449861756659
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasSerialNumber = string;
 
 /**
  * Certificate's signature algorithm.
+ *
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasSignature = 'ECDSAWithSHA256' | 'SHA1WithRSA' | 'SHA256WithRSA';
 
@@ -48099,6 +48499,7 @@ export type TlsCertificatesAndHostnamesSchemasSignature = 'ECDSAWithSHA256' | 'S
  * Status of the Keyless SSL.
  *
  * @example active
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasStatus = 'active' | 'deleted';
 
@@ -48107,6 +48508,7 @@ export type TlsCertificatesAndHostnamesSchemasStatus = 'active' | 'deleted';
  *
  * @example 2100-01-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasUpdatedAt = string;
 
@@ -48115,6 +48517,7 @@ export type TlsCertificatesAndHostnamesSchemasUpdatedAt = string;
  *
  * @example 2019-10-28T18:11:23.37411Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasUploadedOn = string;
 
@@ -48122,6 +48525,7 @@ export type TlsCertificatesAndHostnamesSchemasUploadedOn = string;
  * Validation method in use for a certificate pack order.
  *
  * @example txt
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasValidationMethod = 'http' | 'cname' | 'txt';
 
@@ -48129,6 +48533,7 @@ export type TlsCertificatesAndHostnamesSchemasValidationMethod = 'http' | 'cname
  * The number of days the Client Certificate will be valid after the issued_on date
  *
  * @example 3650
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasValidityDays = number;
 
@@ -48136,6 +48541,7 @@ export type TlsCertificatesAndHostnamesSchemasValidityDays = number;
  * The serial number on the uploaded certificate.
  *
  * @example 6743787633689793699141714808227354901
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSerialNumber = string;
 
@@ -48143,6 +48549,7 @@ export type TlsCertificatesAndHostnamesSerialNumber = string;
  * The service using the certificate.
  *
  * @example gateway
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesService = string;
 
@@ -48164,6 +48571,8 @@ export type TlsCertificatesAndHostnamesSettingObjectDelete = {
 
 /**
  * The TLS Setting name.
+ *
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSettingId = 'ciphers' | 'min_tls_version' | 'http2';
 
@@ -48171,6 +48580,7 @@ export type TlsCertificatesAndHostnamesSettingId = 'ciphers' | 'min_tls_version'
  * The type of hash used for the certificate.
  *
  * @example SHA256WithRSA
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSignature = string;
 
@@ -48178,6 +48588,7 @@ export type TlsCertificatesAndHostnamesSignature = string;
  * Subject Key Identifier
  *
  * @example 8e375af1389a069a0f921f8cc8e1eb12d784b949
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSki = string;
 
@@ -48190,6 +48601,7 @@ export type TlsCertificatesAndHostnamesSsl = {
    *
    * @default ubiquitous
    * @example ubiquitous
+   * @x-auditable true
    */
   bundle_method?: 'ubiquitous' | 'optimal' | 'force';
   certificate_authority?: TlsCertificatesAndHostnamesCertificateAuthority;
@@ -48203,6 +48615,7 @@ export type TlsCertificatesAndHostnamesSsl = {
    * The identifier for the Custom CSR that was used.
    *
    * @example 7b163417-1d2b-4c84-a38a-2fb7a0cd7752
+   * @x-auditable true
    */
   custom_csr_id?: string;
   /**
@@ -48243,6 +48656,7 @@ export type TlsCertificatesAndHostnamesSsl = {
    *
    * @example 2021-02-06T18:11:23.531995Z
    * @format date-time
+   * @x-auditable true
    */
   expires_on?: string;
   /**
@@ -48258,24 +48672,28 @@ export type TlsCertificatesAndHostnamesSsl = {
    * @example 0d89c70d-ad9f-4843-b99f-6cc0252067e9
    * @maxLength 36
    * @minLength 36
+   * @x-auditable true
    */
   id?: string;
   /**
    * The issuer on a custom uploaded certificate.
    *
    * @example DigiCertInc
+   * @x-auditable true
    */
   issuer?: string;
   /**
    * Domain control validation (DCV) method used for this hostname.
    *
    * @example txt
+   * @x-auditable true
    */
   method?: 'http' | 'txt' | 'email';
   /**
    * The serial number on a custom uploaded certificate.
    *
    * @example 6743787633689793699141714808227354901
+   * @x-auditable true
    */
   serial_number?: string;
   settings?: TlsCertificatesAndHostnamesSslsettings;
@@ -48283,12 +48701,14 @@ export type TlsCertificatesAndHostnamesSsl = {
    * The signature on a custom uploaded certificate.
    *
    * @example SHA256WithRSA
+   * @x-auditable true
    */
   signature?: string;
   /**
    * Status of the hostname's SSL certificates.
    *
    * @example pending_validation
+   * @x-auditable true
    */
   status?:
     | 'initializing'
@@ -48316,6 +48736,7 @@ export type TlsCertificatesAndHostnamesSsl = {
    * Level of validation to be used for this hostname. Domain validation (dv) must be used.
    *
    * @example dv
+   * @x-auditable true
    */
   type?: 'dv';
   /**
@@ -48323,6 +48744,7 @@ export type TlsCertificatesAndHostnamesSsl = {
    *
    * @example 2020-02-06T18:11:23.531995Z
    * @format date-time
+   * @x-auditable true
    */
   uploaded_on?: string;
   /**
@@ -48333,6 +48755,7 @@ export type TlsCertificatesAndHostnamesSsl = {
      * A domain validation error.
      *
      * @example SERVFAIL looking up CAA for app.example.com
+     * @x-auditable true
      */
     message?: string;
   }[];
@@ -48341,6 +48764,7 @@ export type TlsCertificatesAndHostnamesSsl = {
    * Indicates whether the certificate covers a wildcard.
    *
    * @example false
+   * @x-auditable true
    */
   wildcard?: boolean;
 };
@@ -48370,6 +48794,7 @@ export type TlsCertificatesAndHostnamesSslpost = {
    *
    * @default ubiquitous
    * @example ubiquitous
+   * @x-auditable true
    */
   bundle_method?: 'ubiquitous' | 'optimal' | 'force';
   certificate_authority?: TlsCertificatesAndHostnamesCertificateAuthority;
@@ -48377,6 +48802,7 @@ export type TlsCertificatesAndHostnamesSslpost = {
    * Whether or not to add Cloudflare Branding for the order.  This will add a subdomain of sni.cloudflaressl.com as the Common Name if set to true
    *
    * @example false
+   * @x-auditable true
    */
   cloudflare_branding?: boolean;
   custom_cert_bundle?: TlsCertificatesAndHostnamesCustomCertBundle;
@@ -48384,6 +48810,7 @@ export type TlsCertificatesAndHostnamesSslpost = {
    * If a custom uploaded certificate is used.
    *
    * @example -----BEGIN CERTIFICATE-----\nMIIFJDCCBAygAwIBAgIQD0ifmj/Yi5NP/2gdUySbfzANBgkqhkiG9w0BAQsFADBN\nMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMScwJQYDVQQDEx5E...SzSHfXp5lnu/3V08I72q1QNzOCgY1XeL4GKVcj4or6cT6tX6oJH7ePPmfrBfqI/O\nOeH8gMJ+FuwtXYEPa4hBf38M5eU5xWG7\n-----END CERTIFICATE-----\n
+   * @x-auditable true
    */
   custom_certificate?: string;
   /**
@@ -48423,6 +48850,7 @@ export type TlsCertificatesAndHostnamesSslpost = {
    * Domain control validation (DCV) method used for this hostname.
    *
    * @example http
+   * @x-auditable true
    */
   method?: 'http' | 'txt' | 'email';
   settings?: TlsCertificatesAndHostnamesSslsettings;
@@ -48430,12 +48858,14 @@ export type TlsCertificatesAndHostnamesSslpost = {
    * Level of validation to be used for this hostname. Domain validation (dv) must be used.
    *
    * @example dv
+   * @x-auditable true
    */
   type?: 'dv';
   /**
    * Indicates whether the certificate covers a wildcard.
    *
    * @example false
+   * @x-auditable true
    */
   wildcard?: boolean;
 };
@@ -48456,24 +48886,28 @@ export type TlsCertificatesAndHostnamesSslsettings = {
    * Whether or not Early Hints is enabled.
    *
    * @example on
+   * @x-auditable true
    */
   early_hints?: 'on' | 'off';
   /**
    * Whether or not HTTP2 is enabled.
    *
    * @example on
+   * @x-auditable true
    */
   http2?: 'on' | 'off';
   /**
    * The minimum TLS version supported.
    *
    * @example 1.2
+   * @x-auditable true
    */
   min_tls_version?: '1.0' | '1.1' | '1.2' | '1.3';
   /**
    * Whether or not TLS 1.3 is enabled.
    *
    * @example on
+   * @x-auditable true
    */
   tls_1_3?: 'on' | 'off';
 };
@@ -48482,6 +48916,7 @@ export type TlsCertificatesAndHostnamesSslsettings = {
  * State, provided by the CSR
  *
  * @example CA
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesState = string;
 
@@ -48489,6 +48924,7 @@ export type TlsCertificatesAndHostnamesState = string;
  * Status of the zone's custom SSL.
  *
  * @example active
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesStatus = 'active' | 'expired' | 'deleted' | 'pending' | 'initializing';
 
@@ -48505,6 +48941,7 @@ export type TlsCertificatesAndHostnamesTotalTlsSettingsResponse = TlsCertificate
  *
  * @default legacy_custom
  * @example sni_custom
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesType = 'legacy_custom' | 'sni_custom';
 
@@ -48517,6 +48954,7 @@ export type TlsCertificatesAndHostnamesUniversal = {
  *
  * @example 2020-03-16T18:11:23.531995Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesUpdatedAt = string;
 
@@ -48525,6 +48963,7 @@ export type TlsCertificatesAndHostnamesUpdatedAt = string;
  *
  * @example 2014-01-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesUploadedOn = string;
 
@@ -48532,6 +48971,7 @@ export type TlsCertificatesAndHostnamesUploadedOn = string;
  * The DCV Delegation unique identifier.
  *
  * @example abc123def456ghi7
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesUuid = string;
 
@@ -48543,6 +48983,7 @@ export type TlsCertificatesAndHostnamesUuidObject = {
  * Validation Method selected for the order.
  *
  * @example txt
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesValidationMethod = 'txt' | 'http' | 'email';
 
@@ -48550,6 +48991,7 @@ export type TlsCertificatesAndHostnamesValidationMethod = 'txt' | 'http' | 'emai
  * Result status.
  *
  * @example pending_validation
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesValidationMethodComponentsSchemasStatus = string;
 
@@ -48557,6 +48999,7 @@ export type TlsCertificatesAndHostnamesValidationMethodComponentsSchemasStatus =
  * Desired validation method.
  *
  * @example txt
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesValidationMethodDefinition = 'http' | 'cname' | 'txt' | 'email';
 
@@ -48587,6 +49030,7 @@ export type TlsCertificatesAndHostnamesValidationRecord = {
    * The hostname that the certificate authority (CA) will check for a TXT record during domain validation .
    *
    * @example _acme-challenge.app.example.com
+   * @x-auditable true
    */
   txt_name?: string;
   /**
@@ -48599,11 +49043,15 @@ export type TlsCertificatesAndHostnamesValidationRecord = {
 
 /**
  * Validity Days selected for the order.
+ *
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesValidityDays = 14 | 30 | 90 | 365;
 
 /**
  * The validity period in days for the certificates ordered via Total TLS.
+ *
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesValidityPeriod = 90;
 
@@ -48642,6 +49090,7 @@ export type TlsCertificatesAndHostnamesVerificationInfo = {
    *
    * @example b3b90cfedd89a3e487d3e383c56c4267.example.com
    * @format hostname
+   * @x-auditable true
    */
   record_name?: 'record_name' | 'http_url' | 'cname' | 'txt_name';
   /**
@@ -48649,6 +49098,7 @@ export type TlsCertificatesAndHostnamesVerificationInfo = {
    *
    * @example 6979be7e4cfc9e5c603e31df7efac9cc60fee82d.comodoca.com
    * @format hostname
+   * @x-auditable true
    */
   record_target?: 'record_value' | 'http_body' | 'cname_target' | 'txt_value';
 };
@@ -48657,6 +49107,7 @@ export type TlsCertificatesAndHostnamesVerificationInfo = {
  * Status of the required verification information, omitted if verification status is unknown.
  *
  * @example true
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesVerificationStatus = boolean;
 
@@ -48664,6 +49115,7 @@ export type TlsCertificatesAndHostnamesVerificationStatus = boolean;
  * Method of verification.
  *
  * @example cname
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesVerificationType = 'cname' | 'meta tag';
 
@@ -48711,6 +49163,7 @@ export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSche
  * Indicates whether zone-level authenticated origin pulls is enabled.
  *
  * @example true
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSchemasEnabled = boolean;
 
@@ -48718,6 +49171,7 @@ export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSche
  * Status of the certificate activation.
  *
  * @example active
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSchemasStatus =
   | 'initializing'
@@ -48855,9 +49309,6 @@ export type TunnelConfig = {
    * Enable private network access from WARP users to private network routes. This is enabled if the tunnel has an assigned route.
    */
   ['warp-routing']?: {
-    /**
-     * @default false
-     */
     enabled?: boolean;
   };
 };
@@ -49746,6 +50197,7 @@ export type TurnstileApiResponseCommonFailure = {
  * expensive challenges in response to malicious bots (ENT only).
  *
  * @example false
+ * @x-auditable true
  */
 export type TurnstileBotFightMode = boolean;
 
@@ -49754,6 +50206,7 @@ export type TurnstileBotFightMode = boolean;
  * this setting can determine the clearance level to be set
  *
  * @example interactive
+ * @x-auditable true
  */
 export type TurnstileClearanceLevel = 'no_clearance' | 'jschallenge' | 'managed' | 'interactive';
 
@@ -49777,6 +50230,7 @@ export type TurnstileDomains = string[];
  * Return the Ephemeral ID in /siteverify (ENT only).
  *
  * @example false
+ * @x-auditable true
  */
 export type TurnstileEphemeralId = boolean;
 
@@ -49785,6 +50239,7 @@ export type TurnstileEphemeralId = boolean;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type TurnstileIdentifier = string;
 
@@ -49794,6 +50249,7 @@ export type TurnstileIdentifier = string;
  * invalidated, and requests using it will be rejected.
  *
  * @default false
+ * @x-auditable true
  */
 export type TurnstileInvalidateImmediately = boolean;
 
@@ -49821,6 +50277,7 @@ export type TurnstileModifiedOn = string;
  * @example blog.cloudflare.com login form
  * @maxLength 254
  * @minLength 1
+ * @x-auditable true
  */
 export type TurnstileName = string;
 
@@ -49828,15 +50285,17 @@ export type TurnstileName = string;
  * Do not show any Cloudflare branding on the widget (ENT only).
  *
  * @example false
+ * @x-auditable true
  */
 export type TurnstileOfflabel = boolean;
 
 /**
- * Region where this widget can be used.
+ * Region where this widget can be used. This cannot be changed after creation.
  *
  * @default world
+ * @x-auditable true
  */
-export type TurnstileRegion = 'world';
+export type TurnstileRegion = 'world' | 'china';
 
 export type TurnstileResultInfo = {
   /**
@@ -49869,6 +50328,7 @@ export type TurnstileResultInfo = {
  * Secret key for this widget.
  *
  * @example 0x4AAF00AAAABn0R22HWm098HVBjhdsYUc
+ * @x-sensitive true
  */
 export type TurnstileSecret = string;
 
@@ -49877,6 +50337,7 @@ export type TurnstileSecret = string;
  *
  * @example 0x4AAF00AAAABn0R22HWm-YUc
  * @maxLength 32
+ * @x-auditable true
  */
 export type TurnstileSitekey = string;
 
@@ -49919,6 +50380,7 @@ export type TurnstileWidgetList = {
  * Widget Mode
  *
  * @example invisible
+ * @x-auditable true
  */
 export type TurnstileWidgetMode = 'non-interactive' | 'invisible' | 'managed';
 
@@ -53111,8 +53573,9 @@ export type WorkersBindingKindDurableObjectNamespace = {
    * The exported class name of the Durable Object.
    *
    * @example MyDurableObject
+   * @x-stainless-terraform-configurability computed_optional
    */
-  class_name: string;
+  class_name?: string;
   /**
    * The environment of the script_name to bind to.
    *
@@ -53120,11 +53583,19 @@ export type WorkersBindingKindDurableObjectNamespace = {
    */
   environment?: string;
   name: WorkersBindingName;
-  namespace_id?: WorkersNamespaceIdentifier;
+  /**
+   * Namespace identifier tag.
+   *
+   * @example 0f2ac74b498b48028cb68387c421e279
+   * @maxLength 32
+   * @x-stainless-terraform-configurability computed_optional
+   */
+  namespace_id?: WorkersNamespaceIdentifier & void;
   /**
    * The script where the Durable Object is defined, if it is external to this Worker.
    *
    * @example my-other-worker
+   * @x-stainless-terraform-configurability computed_optional
    */
   script_name?: string;
   /**
@@ -53901,6 +54372,29 @@ export type WorkersObservability = {
    * @example 0.1
    */
   head_sampling_rate?: number | null;
+  /**
+   * Log settings for the Worker.
+   */
+  logs?: {
+    /**
+     * Whether logs are enabled for the Worker.
+     *
+     * @example true
+     */
+    enabled: boolean;
+    /**
+     * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+     *
+     * @example 0.1
+     */
+    head_sampling_rate?: number | null;
+    /**
+     * Whether [invocation logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/#invocation-logs) are enabled for the Worker.
+     *
+     * @example true
+     */
+    invocation_logs: boolean;
+  } | null;
 };
 
 /**
@@ -54020,20 +54514,59 @@ export type WorkersSchemasService = string;
 export type WorkersSchemasVersionIdentifier = string;
 
 export type WorkersScriptAndVersionSettingsItem = {
-  bindings?: WorkersBindings;
-  compatibility_date?: WorkersCompatibilityDate;
-  compatibility_flags?: WorkersCompatibilityFlags;
+  /**
+   * List of bindings attached to a Worker. You can find more about bindings on our docs: https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
+   *
+   * @example {"name":"MY_ENV_VAR","text":"my_data","type":"plain_text"}
+   */
+  bindings?: WorkersBindings & void;
+  /**
+   * Date indicating targeted support in the Workers runtime. Backwards incompatible fixes to the runtime following this date will not affect this Worker.
+   *
+   * @example 2021-01-01
+   * @default
+   */
+  compatibility_date?: WorkersCompatibilityDate & void;
+  /**
+   * Flags that enable or disable certain features in the Workers runtime. Used to enable upcoming features or opt in or out of specific changes not included in a `compatibility_date`.
+   *
+   * @example nodejs_compat
+   */
+  compatibility_flags?: WorkersCompatibilityFlags & void;
   limits?: WorkersLimits;
-  logpush?: WorkersLogpush;
+  /**
+   * Whether Logpush is turned on for the Worker.
+   *
+   * @example false
+   * @default false
+   */
+  logpush?: WorkersLogpush & void;
   /**
    * Migrations to apply for Durable Objects associated with this Worker.
    */
   migrations?: WorkersSingleStepMigrations | WorkersMultipleStepMigrations;
   observability?: WorkersObservability;
-  placement?: WorkersPlacementInfoNoStatus;
-  tags?: WorkersTags;
-  tail_consumers?: WorkersTailConsumers;
-  usage_model?: WorkersUsageModel;
+  /**
+   * Configuration for [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   *
+   * @default {}
+   */
+  placement?: WorkersPlacementInfoNoStatus & void;
+  /**
+   * Tags to help you manage your Workers
+   */
+  tags?: WorkersTags & void;
+  /**
+   * List of Workers that will consume logs from the attached Worker.
+   */
+  tail_consumers?: WorkersTailConsumers & void;
+  /**
+   * Usage model for the Worker invocations.
+   *
+   * @example standard
+   * @default standard
+   */
+  usage_model?: WorkersUsageModel & void;
 };
 
 export type WorkersScriptAndVersionSettingsResponse = WorkersApiResponseCommon & {
@@ -54090,9 +54623,21 @@ export type WorkersScriptResponseUploadSingle = WorkersApiResponseSingle & {
 };
 
 export type WorkersScriptSettingsItem = {
-  logpush?: WorkersLogpush;
-  observability?: WorkersObservability;
-  tail_consumers?: WorkersTailConsumers;
+  /**
+   * Whether Logpush is turned on for the Worker.
+   *
+   * @example false
+   * @default false
+   */
+  logpush?: WorkersLogpush & void;
+  /**
+   * Observability settings for the Worker.
+   */
+  observability?: WorkersObservability & (Record<string, any> | null);
+  /**
+   * List of Workers that will consume logs from the attached Worker.
+   */
+  tail_consumers?: WorkersTailConsumersScript[] | null;
 };
 
 export type WorkersScriptSettingsResponse = WorkersApiResponseCommon & {
@@ -55150,7 +55695,7 @@ export type ZeroTrustGatewayActivityLogSettings = {
    * @example true
    */
   enabled?: boolean;
-} | null;
+};
 
 /**
  * Anti-virus settings.
@@ -55345,7 +55890,7 @@ export type ZeroTrustGatewayBlockPageSettings = {
    * @format uri
    */
   target_uri?: string;
-} | null;
+};
 
 /**
  * DLP body scanning settings.
@@ -55357,7 +55902,7 @@ export type ZeroTrustGatewayBodyScanningSettings = {
    * @example deep
    */
   inspection_mode?: string;
-} | null;
+};
 
 /**
  * Browser isolation settings.
@@ -55377,7 +55922,7 @@ export type ZeroTrustGatewayBrowserIsolationSettings = {
    * @example true
    */
   url_browser_isolation_enabled?: boolean;
-} | null;
+};
 
 export type ZeroTrustGatewayCategories = {
   beta?: ZeroTrustGatewayBeta;
@@ -55412,7 +55957,7 @@ export type ZeroTrustGatewayCertificateSettings = {
    * @example d1b364c5-1311-466e-a194-f0e943e0799f
    */
   id: string;
-} | null;
+};
 
 export type ZeroTrustGatewayCertificates = {
   binding_status?: ZeroTrustGatewayBindingStatus;
@@ -55540,7 +56085,7 @@ export type ZeroTrustGatewayCustomCertificateSettings = {
    * @format date-time
    */
   updated_at?: string;
-} | null;
+};
 
 /**
  * Date of deletion, if any.
@@ -55756,7 +56301,7 @@ export type ZeroTrustGatewayExpiration = {
    * @format date-time
    */
   expires_at: ZeroTrustGatewayTimestamp & string;
-} | null;
+};
 
 /**
  * Extended e-mail matching settings.
@@ -55797,7 +56342,7 @@ export type ZeroTrustGatewayFipsSettings = {
    * @example true
    */
   tls?: boolean;
-} | null;
+};
 
 export type ZeroTrustGatewayGatewayAccountLoggingSettings = {
   /**
@@ -55890,7 +56435,7 @@ export type ZeroTrustGatewayHostSelectorSettings = {
    * @example false
    */
   enabled?: boolean;
-} | null;
+};
 
 /**
  * The identifier for this category. There is only one category per ID.
@@ -56104,10 +56649,10 @@ export type ZeroTrustGatewayNotificationSettings = {
    * Optional URL to direct users to additional information. If not set, the notification will open a block page.
    */
   support_url?: string;
-} | null;
+};
 
 /**
- * Precedence sets the order of your rules. Lower values indicate higher precedence. At each processing phase, applicable rules are evaluated in ascending order of this value.
+ * Precedence sets the order of your rules. Lower values indicate higher precedence. At each processing phase, applicable rules are evaluated in ascending order of this value. Refer to [Order of enforcement](http://developers.cloudflare.com/learning-paths/secure-internet-traffic/understand-policies/order-of-enforcement/#manage-precedence-with-terraform) docs on how to manage precedence via Terraform.
  */
 export type ZeroTrustGatewayPrecedence = number;
 
@@ -56122,7 +56667,7 @@ export type ZeroTrustGatewayProtocolDetection = {
    * @example true
    */
   enabled?: boolean;
-} | null;
+};
 
 /**
  * The name of the provider. Usually Cloudflare.
@@ -56211,7 +56756,7 @@ export type ZeroTrustGatewayRuleSettings = {
    */
   add_headers?: {
     [key: string]: string;
-  } | null;
+  };
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
    *
@@ -56229,7 +56774,7 @@ export type ZeroTrustGatewayRuleSettings = {
      * @example false
      */
     command_logging?: boolean;
-  } | null;
+  };
   /**
    * Configure how browser isolation behaves.
    */
@@ -56311,7 +56856,7 @@ export type ZeroTrustGatewayRuleSettings = {
      * @default v1
      */
     version?: 'v1' | 'v2';
-  } | null;
+  };
   /**
    * Custom block page settings. If missing/null, blocking will use the the account settings.
    */
@@ -56328,7 +56873,7 @@ export type ZeroTrustGatewayRuleSettings = {
      * @format uri
      */
     target_uri: string;
-  } | null;
+  };
   /**
    * Enable the custom block page.
    *
@@ -56366,14 +56911,14 @@ export type ZeroTrustGatewayRuleSettings = {
      * @example true
      */
     enforce?: boolean;
-  } | null;
+  };
   /**
    * Add your own custom resolvers to route queries that match the resolver policy. Cannot be used when 'resolve_dns_through_cloudflare' or 'resolve_dns_internally' are set. DNS queries will route to the address closest to their origin. Only valid when a rule's action is set to 'resolve'.
    */
   dns_resolvers?: {
     ipv4?: ZeroTrustGatewayDnsResolverSettingsV4[];
     ipv6?: ZeroTrustGatewayDnsResolverSettingsV6[];
-  } | null;
+  };
   /**
    * Configure how Gateway Proxy traffic egresses. You can enable this setting for rules with Egress actions and filters, or omit it to indicate local egress via WARP IPs.
    */
@@ -56396,7 +56941,7 @@ export type ZeroTrustGatewayRuleSettings = {
      * @example 2001:DB8::/64
      */
     ipv6?: string;
-  } | null;
+  };
   /**
    * Set to true, to ignore the category matches at CNAME domains in a response. If unchecked, the categories in this rule will be checked against all the CNAME domain categories in a response.
    *
@@ -56439,7 +56984,7 @@ export type ZeroTrustGatewayRuleSettings = {
      * A port number to use for TCP/UDP overrides.
      */
     port?: number;
-  } | null;
+  };
   /**
    * Configure a notification to display on the user's device when this rule is matched.
    */
@@ -56462,7 +57007,7 @@ export type ZeroTrustGatewayRuleSettings = {
      * Optional URL to direct users to additional information. If not set, the notification will open a block page.
      */
     support_url?: string;
-  } | null;
+  };
   /**
    * Override matching DNS queries with a hostname.
    *
@@ -56476,7 +57021,7 @@ export type ZeroTrustGatewayRuleSettings = {
    * @example 1.1.1.1
    * @example 2.2.2.2
    */
-  override_ips?: string[] | null;
+  override_ips?: string[];
   /**
    * Configure DLP payload logging.
    */
@@ -56488,7 +57033,7 @@ export type ZeroTrustGatewayRuleSettings = {
      * @example true
      */
     enabled?: boolean;
-  } | null;
+  };
   /**
    * Settings that apply to quarantine rules
    */
@@ -56511,7 +57056,7 @@ export type ZeroTrustGatewayRuleSettings = {
       | 'zip'
       | 'rar'
     )[];
-  } | null;
+  };
   /**
    * Settings that apply to redirect rules
    */
@@ -56534,7 +57079,7 @@ export type ZeroTrustGatewayRuleSettings = {
      * @format uri
      */
     target_uri: string;
-  } | null;
+  };
   /**
    * Configure to forward the query to the internal DNS service, passing the specified 'view_id' as input. Cannot be set when 'dns_resolvers' are specified or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is set to 'resolve'.
    */
@@ -56549,7 +57094,7 @@ export type ZeroTrustGatewayRuleSettings = {
      * The internal DNS view identifier that's passed to the internal DNS service.
      */
     view_id?: string;
-  } | null;
+  };
   /**
    * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS resolver. Cannot be set when 'dns_resolvers' are specified or 'resolve_dns_internally' is set. Only valid when a rule's action is set to 'resolve'.
    *
@@ -56567,7 +57112,7 @@ export type ZeroTrustGatewayRuleSettings = {
      * @example error
      */
     action?: 'pass_through' | 'block' | 'error';
-  } | null;
+  };
 };
 
 export type ZeroTrustGatewayRules = {
@@ -56617,7 +57162,7 @@ export type ZeroTrustGatewaySandbox = {
    * Action to take when the file cannot be scanned.
    */
   fallback_action?: 'allow' | 'block';
-} | null;
+};
 
 /**
  * The schedule for activating DNS policies. This does not apply to HTTP or network policies.
@@ -56671,7 +57216,7 @@ export type ZeroTrustGatewaySchedule = {
    * @example 08:00-12:30,13:30-17:00
    */
   wed?: string;
-} | null;
+};
 
 /**
  * The description of the rule.
@@ -56781,7 +57326,7 @@ export type ZeroTrustGatewayTlsSettings = {
    * @example true
    */
   enabled?: boolean;
-} | null;
+};
 
 /**
  * The wirefilter expression used for traffic matching.
@@ -58113,6 +58658,44 @@ export type ZonesChallengeTtlValue =
   | 31536000;
 
 /**
+ * Determines whether or not the china network is enabled.
+ */
+export type ZonesChinaNetworkEnabled = {
+  /**
+   * Whether or not this setting can be modified for this zone (based on your Cloudflare plan level).
+   *
+   * @default true
+   */
+  editable?: true | false;
+  /**
+   * ID of the zone setting.
+   *
+   * @example china_network_enabled
+   */
+  id: 'china_network_enabled';
+  /**
+   * last time this setting was modified.
+   *
+   * @example 2014-01-01T05:20:00.12345Z
+   * @format date-time
+   */
+  modified_on?: string | null;
+  /**
+   * Current value of the zone setting.
+   *
+   * @example on
+   */
+  value: ZonesChinaNetworkEnabledValue;
+};
+
+/**
+ * Value of the zone setting.
+ *
+ * @default off
+ */
+export type ZonesChinaNetworkEnabledValue = 'on' | 'off';
+
+/**
  * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
  */
 export type ZonesCiphers = {
@@ -58637,7 +59220,7 @@ export type ZonesHttp3Value = 'on' | 'off';
 export type ZonesIdentifier = string;
 
 /**
- * Image Resizing provides on-demand resizing, conversion and optimisation for images served through Cloudflare's network. Refer to the [Image Resizing documentation](https://developers.cloudflare.com/images/) for more information.
+ * Image Transformations provides on-demand resizing, conversion and optimization for images served through Cloudflare's network. Refer to the [Image Transformations documentation](https://developers.cloudflare.com/images/) for more information.
  */
 export type ZonesImageResizing = {
   /**
@@ -58869,6 +59452,7 @@ export type ZonesMultipleSettings = (
   | ZonesSchemasBrowserCheck
   | ZonesSchemasCacheLevel
   | ZonesChallengeTtl
+  | ZonesChinaNetworkEnabled
   | ZonesCiphers
   | ZonesCnameFlattening
   | ZonesDevelopmentMode
@@ -60305,6 +60889,7 @@ export type ZonesSetting =
   | ZonesSchemasBrowserCheck
   | ZonesSchemasCacheLevel
   | ZonesChallengeTtl
+  | ZonesChinaNetworkEnabled
   | ZonesCiphers
   | ZonesCnameFlattening
   | ZonesDevelopmentMode
@@ -60347,6 +60932,8 @@ export type ZonesSetting =
   | ZonesTls12Only
   | ZonesTls13
   | ZonesTlsClientAuth
+  | ZonesTransformations
+  | ZonesTransformationsAllowedOrigins
   | ZonesSchemasTrueClientIpHeader
   | ZonesSchemasWaf
   | ZonesWebp
@@ -60365,6 +60952,65 @@ export type ZonesSettingReadonly = false;
  * Value of the zone setting.
  */
 export type ZonesSettingToggle = 'on' | 'off';
+
+export type ZonesSettingValue =
+  | Zones0rttValue
+  | ZonesAdvancedDdosValue
+  | ZonesCacheRulesAegisValue
+  | ZonesAlwaysOnlineValue
+  | ZonesAlwaysUseHttpsValue
+  | ZonesAutomaticHttpsRewritesValue
+  | ZonesBrotliValue
+  | ZonesBrowserCacheTtlValue
+  | ZonesBrowserCheckValue
+  | ZonesCacheLevelValue
+  | ZonesChallengeTtlValue
+  | ZonesChinaNetworkEnabledValue
+  | ZonesCiphersValue
+  | ZonesCnameFlatteningValue
+  | ZonesDevelopmentModeValue
+  | ZonesEarlyHintsValue
+  | ZonesEdgeCacheTtlValue
+  | ZonesEmailObfuscationValue
+  | ZonesH2PrioritizationValue
+  | ZonesHotlinkProtectionValue
+  | ZonesHttp2Value
+  | ZonesHttp3Value
+  | ZonesImageResizingValue
+  | ZonesIpGeolocationValue
+  | ZonesIpv6Value
+  | ZonesMaxUploadValue
+  | ZonesMinTlsVersionValue
+  | ZonesMirageValue
+  | ZonesNelValue
+  | ZonesOpportunisticEncryptionValue
+  | ZonesOpportunisticOnionValue
+  | ZonesOrangeToOrangeValue
+  | ZonesOriginErrorPagePassThruValue
+  | ZonesCacheRulesOriginH2MaxStreamsValue
+  | ZonesCacheRulesOriginMaxHttpVersionValue
+  | ZonesPolishValue
+  | ZonesPrefetchPreloadValue
+  | ZonesPrivacyPassValue
+  | ZonesProxyReadTimeoutValue
+  | ZonesPseudoIpv4Value
+  | ZonesReplaceInsecureJsValue
+  | ZonesResponseBufferingValue
+  | ZonesRocketLoaderValue
+  | ZonesAutomaticPlatformOptimization
+  | ZonesSecurityHeaderValue
+  | ZonesSecurityLevelValue
+  | ZonesServerSideExcludeValue
+  | ZonesSha1SupportValue
+  | ZonesSortQueryStringForCacheValue
+  | ZonesSslValue
+  | ZonesTls12OnlyValue
+  | ZonesTls13Value
+  | ZonesTlsClientAuthValue
+  | ZonesTrueClientIpHeaderValue
+  | ZonesWafValue
+  | ZonesWebpValue
+  | ZonesWebsocketsValue;
 
 export type ZonesSettingWritable = true;
 
@@ -60656,6 +61302,74 @@ export type ZonesTlsClientAuth = {
  */
 export type ZonesTlsClientAuthValue = 'on' | 'off';
 
+/**
+ * Media Transformations provides on-demand resizing, conversion and optimization for images and video served through Cloudflare's network. Refer to the [Image Transformations](https://developers.cloudflare.com/images/) and [Video Transformations](https://developers.cloudflare.com/stream/transform-videos/#getting-started) documentation for more information.
+ */
+export type ZonesTransformations = {
+  /**
+   * Whether or not this setting can be modified for this zone (based on your Cloudflare plan level).
+   *
+   * @default true
+   */
+  editable?: true | false;
+  /**
+   * ID of the zone setting. Shared between Image Transformations and Video Transformations.
+   *
+   * @example transformations
+   */
+  id: 'transformations';
+  /**
+   * last time this setting was modified.
+   *
+   * @example 2014-01-01T05:20:00.12345Z
+   * @format date-time
+   */
+  modified_on?: string | null;
+  /**
+   * Current value of the zone setting.
+   *
+   * @example on
+   */
+  value: ZonesImageResizingValue;
+};
+
+/**
+ * Media Transformations Allowed Origins restricts transformations for images and video served through Cloudflare's network. Refer to the [Image Transformations](https://developers.cloudflare.com/images/) and [Video Transformations](https://developers.cloudflare.com/stream/transform-videos/#getting-started) documentation for more information.
+ */
+export type ZonesTransformationsAllowedOrigins = {
+  /**
+   * Whether or not this setting can be modified for this zone (based on your Cloudflare plan level).
+   *
+   * @default true
+   */
+  editable?: true | false;
+  /**
+   * ID of the zone setting. Shared between Image Transformations and Video Transformations.
+   *
+   * @example transformations_allowed_origins
+   */
+  id: 'transformations_allowed_origins';
+  /**
+   * last time this setting was modified.
+   *
+   * @example 2014-01-01T05:20:00.12345Z
+   * @format date-time
+   */
+  modified_on?: string | null;
+  /**
+   * Current value of the zone setting.
+   *
+   * @example on
+   */
+  value: ZonesTransformationsAllowedOriginsValue;
+};
+
+/**
+ * Comma-separated list of allowed origins.
+ * Refer to the [Image Transformations](https://developers.cloudflare.com/images/transform-images/sources/) and [Video Transformations](https://developers.cloudflare.com/stream/transform-videos/#getting-started) documentation for more information.
+ */
+export type ZonesTransformationsAllowedOriginsValue = string;
+
 export type ZonesTrueClientIpHeader = {
   /**
    * Turn on or off the True-Client-IP Header feature of the Cloudflare Network app.
@@ -60854,6 +61568,13 @@ export type ZonesZone = {
    */
   activated_on: string | null;
   /**
+   * Allows the customer to use a custom apex.
+   * *Tenants Only Configuration*.
+   *
+   * @example cdn.cloudflare.com
+   */
+  cname_suffix?: string;
+  /**
    * When the zone was created
    *
    * @example 2014-01-01T05:20:00.12345Z
@@ -60976,11 +61697,102 @@ export type ZonesZone = {
   };
   paused?: ZonesPaused;
   /**
+   * Legacy permissions based on legacy user membership information.
+   *
+   * @deprecated true
+   * @x-stainless-message This has been replaced by Account memberships.
+   */
+  permissions?: string[];
+  /**
+     * A Zones subscription information.
+     *
+     * @deprecated true
+     * @x-stainless-message Please use the `/zones/{zone_id}/subscription` API
+    to update a zone's plan. Changing this value will create/cancel
+    associated subscriptions. To view available plans for this zone,
+    see [Zone Plans](https://developers.cloudflare.com/api/resources/zones/subresources/plans/).
+     */
+  plan: {
+    /**
+     * States if the subscription can be activated.
+     *
+     * @example false
+     */
+    can_subscribe?: boolean;
+    /**
+     * The denomination of the customer.
+     *
+     * @example USD
+     */
+    currency?: string;
+    /**
+     * If this Zone is managed by another company.
+     *
+     * @example false
+     */
+    externally_managed?: boolean;
+    /**
+     * How often the customer is billed.
+     *
+     * @example monthly
+     */
+    frequency?: string;
+    id?: ZonesIdentifier;
+    /**
+     * States if the subscription active.
+     *
+     * @example false
+     */
+    is_subscribed?: boolean;
+    /**
+     * If the legacy discount applies to this Zone.
+     *
+     * @example false
+     */
+    legacy_discount?: boolean;
+    /**
+     * The legacy name of the plan.
+     *
+     * @example free
+     */
+    legacy_id?: string;
+    /**
+     * Name of the owner
+     *
+     * @example Example Org
+     */
+    name?: string;
+    /**
+     * How much the customer is paying.
+     *
+     * @example 10.99
+     */
+    price?: number;
+  };
+  /**
    * The zone status on Cloudflare.
    *
    * @example active
    */
   status?: 'initializing' | 'pending' | 'active' | 'moved';
+  /**
+   * The root organizational unit that this zone belongs to (such as a tenant or organization).
+   */
+  tenant?: {
+    id?: ZonesIdentifier;
+    /**
+     * The name of the Tenant account.
+     *
+     * @example Example Account Name
+     */
+    name?: string;
+  };
+  /**
+   * The immediate parent organizational unit that this zone belongs to (such as under a tenant or sub-organization).
+   */
+  tenant_unit?: {
+    id?: ZonesIdentifier;
+  };
   type?: ZonesType;
   /**
    * An array of domains used for custom name servers. This is only available for Business and Enterprise plans.
@@ -61052,12 +61864,22 @@ export type ZonesZoneSettingsResponseCollection = ZonesApiResponseCommon & {
     | ZonesTls12Only
     | ZonesTls13
     | ZonesTlsClientAuth
+    | ZonesTransformations
+    | ZonesTransformationsAllowedOrigins
     | ZonesSchemasTrueClientIpHeader
     | ZonesSchemasWaf
     | ZonesWebp
     | ZonesWebsockets
   )[];
 };
+
+export type ZonesZoneSettingsSingleRequest =
+  | {
+      enabled?: ZonesSslRecommenderEnabled;
+    }
+  | {
+      value?: ZonesSettingValue;
+    };
 
 /**
  * A component value for a subscription.
