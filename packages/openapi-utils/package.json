@@ -1,0 +1,47 @@
+{
+  "name": "openapi-utils",
+  "version": "0.0.1",
+  "description": "Utilities for OpenAPI clients",
+  "private": "true",
+  "author": "SferaDev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SferaDev/openapi-clients/issues"
+  },
+  "homepage": "https://github.com/SferaDev/openapi-clients#readme",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "typings": "dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "import": {
+        "types": "./dist/index.d.mts",
+        "default": "./dist/index.mjs"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    }
+  },
+  "scripts": {
+    "tsc": "tsc --noEmit",
+    "build": "unbuild",
+    "prepack": "unbuild"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SferaDev/openapi-clients.git"
+  },
+  "dependencies": {
+    "@kubb/core": "^3.10.11",
+    "@kubb/oas": "^3.10.11",
+    "@kubb/plugin-client": "^3.10.11",
+    "@kubb/plugin-mcp": "^3.10.11",
+    "@kubb/plugin-oas": "^3.10.11",
+    "@kubb/plugin-ts": "^3.10.11",
+    "@kubb/plugin-zod": "^3.10.11",
+    "@kubb/react": "^3.10.11"
+  }
+}
