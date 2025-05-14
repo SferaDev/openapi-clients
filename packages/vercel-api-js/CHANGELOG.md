@@ -1,5 +1,15 @@
 # vercel-api-js
 
+## 0.25.0
+
+### Minor Changes
+
+- 9df31d8: [BREAKING] Added configurationId field to CreateProjectResponse, GetProjectResponse, UpdateProjectResponse, and UpdateProjectDataCacheResponse
+
+### Patch Changes
+
+- 640279f: Add shared v0 token
+
 ## 0.24.3
 
 ### Patch Changes
