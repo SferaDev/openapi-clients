@@ -15382,13 +15382,13 @@ export type UpdateProjectResponse = {
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   resourceConfig: {
+    buildMachineType?: 'enhanced' | 'ultra';
     fluid?: boolean;
     functionDefaultRegions: string[];
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced' | 'ultra';
   };
   rollingRelease?: {
     /**
@@ -15424,13 +15424,13 @@ export type UpdateProjectResponse = {
       | null;
   } | null;
   defaultResourceConfig: {
+    buildMachineType?: 'enhanced' | 'ultra';
     fluid?: boolean;
     functionDefaultRegions: string[];
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced' | 'ultra';
   };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -15757,15 +15757,15 @@ export type UpdateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
         addresses: {
           value: string;
           note?: string;
         }[];
-        protectionMode: 'additional' | 'exclusive';
+        protectionMode: 'exclusive' | 'additional';
       }
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
       }
     | null;
   gitComments?: {
@@ -19624,6 +19624,10 @@ export type RequestPromotePathParams = {
 };
 
 export type RequestPromoteQueryParams = {
+  /**
+   * Skip the rolling release process and promote directly to production
+   */
+  dangerouslyForcePromoteCanary?: boolean;
   /**
    * The Team identifier to perform the request on behalf of.
    */
