@@ -7241,20 +7241,9 @@ export const getDomains = (variables: GetDomainsVariables, signal?: AbortSignal)
     signal
   });
 
-export type CreateOrTransferDomainQueryParams = {
-  /**
-   * The Team identifier to perform the request on behalf of.
-   */
-  teamId?: string;
-  /**
-   * The Team slug to perform the request on behalf of.
-   */
-  slug?: string;
-};
+export type PostDomainsError = Fetcher.ErrorWrapper<undefined>;
 
-export type CreateOrTransferDomainError = Fetcher.ErrorWrapper<undefined>;
-
-export type CreateOrTransferDomainResponse = {
+export type PostDomainsResponse = {
   domain: {
     /**
      * If the domain has the ownership verified.
@@ -7360,7 +7349,7 @@ export type CreateOrTransferDomainResponse = {
   };
 };
 
-export type CreateOrTransferDomainVariables = {
+export type PostDomainsVariables = {
   body?:
     | {
         /**
@@ -7429,16 +7418,12 @@ export type CreateOrTransferDomainVariables = {
          */
         expectedPrice?: number;
       };
-  queryParams?: CreateOrTransferDomainQueryParams;
 } & FetcherExtraProps;
 
-/**
- * This endpoint is used for adding a new apex domain name with Vercel for the authenticating user. Can also be used for initiating a domain transfer request from an external Registrar to Vercel.
- */
-export const createOrTransferDomain = (variables: CreateOrTransferDomainVariables, signal?: AbortSignal) =>
+export const postDomains = (variables: PostDomainsVariables, signal?: AbortSignal) =>
   fetch<
-    CreateOrTransferDomainResponse,
-    CreateOrTransferDomainError,
+    PostDomainsResponse,
+    PostDomainsError,
     | {
         /**
          * The domain name you want to add.
@@ -7507,9 +7492,9 @@ export const createOrTransferDomain = (variables: CreateOrTransferDomainVariable
         expectedPrice?: number;
       },
     {},
-    CreateOrTransferDomainQueryParams,
+    {},
     {}
-  >({ url: '/v5/domains', method: 'post', ...variables, signal });
+  >({ url: '/domains', method: 'post', ...variables, signal });
 
 export type PatchDomainPathParams = {
   domain?: string;
@@ -17940,7 +17925,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -18041,7 +18026,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -18923,7 +18908,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -19024,7 +19009,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -19124,7 +19109,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -19315,7 +19300,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
+        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -25209,7 +25194,6 @@ export const operationsByTag = {
     getDomainConfig,
     getDomain,
     getDomains,
-    createOrTransferDomain,
     patchDomain,
     deleteDomain
   },
