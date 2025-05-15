@@ -20429,7 +20429,32 @@ export type EmailAccountId = EmailIdentifier;
 export type EmailAddresses = EmailDestinationAddressProperties;
 
 export type EmailApiResponseCollection = EmailApiResponseCommon & {
-  result_info?: EmailResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type EmailApiResponseCommon = {
@@ -20707,6 +20732,7 @@ export type EmailEmailSettingsResponseSingle = EmailApiResponseSingle & {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type EmailIdentifier = string;
 
@@ -20729,33 +20755,6 @@ export type EmailMessages = {
  * @format date-time
  */
 export type EmailModified = string;
-
-export type EmailResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
 
 /**
  * Actions pattern.
@@ -49458,6 +49457,7 @@ export type TunnelIcmpProxyEnabled = boolean;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type TunnelIdentifier = string;
 
@@ -49953,7 +49953,7 @@ export type TunnelTeamnet = {
   tun_type?: TunnelTunnelType;
   tunnel_id?: TunnelTunnelId;
   tunnel_name?: TunnelTunnelName;
-  virtual_network_id?: TunnelVirtualNetworkId;
+  virtual_network_id?: TunnelVirtualNetworkIdComputedOptional;
   virtual_network_name?: TunnelVirtualNetworkName;
 };
 
@@ -49976,6 +49976,7 @@ export type TunnelTeamnetResponseSingle = {
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type TunnelTimestamp = string;
 
@@ -50129,6 +50130,16 @@ export type TunnelVirtualNetworkComment = string;
  * @x-auditable true
  */
 export type TunnelVirtualNetworkId = string;
+
+/**
+ * UUID of the virtual network.
+ *
+ * @example f70ff985-a4ef-4643-bbbc-4a0ed4fc8415
+ * @format uuid
+ * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
+ */
+export type TunnelVirtualNetworkIdComputedOptional = string;
 
 /**
  * A user-friendly name for the virtual network.
