@@ -18808,7 +18808,32 @@ export type DnsRecordsURIRecord = DnsRecordsDnsRecordSharedFields & {
 };
 
 export type DnsRecordsApiResponseCollection = DnsRecordsApiResponseCommon & {
-  result_info?: DnsRecordsResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type DnsRecordsApiResponseCommon = {
@@ -18995,6 +19020,7 @@ export type DnsRecordsDnsResponseSingle = DnsRecordsApiResponseSingle & {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type DnsRecordsIdentifier = string;
 
@@ -19069,33 +19095,6 @@ export type DnsRecordsPriority = number;
  * @example true
  */
 export type DnsRecordsProxied = boolean;
-
-export type DnsRecordsResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
 
 /**
  * Allows searching in multiple properties of a DNS record simultaneously. This parameter is intended for human users, not automation. Its exact behavior is intentionally left unspecified and is subject to change in the future. This parameter works independently of the `match` setting. For automated searches, please use the other available parameters.
