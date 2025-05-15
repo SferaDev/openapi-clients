@@ -1,5 +1,11 @@
 # vercel-api-js
 
+## 0.25.1
+
+### Patch Changes
+
+- ee2684f: Update buildMachineType field in resourceConfig and defaultResourceConfig
+
 ## 0.25.0
 
 ### Minor Changes
