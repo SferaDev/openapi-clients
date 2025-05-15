@@ -563,6 +563,7 @@ import {
   emailRoutingDestinationAddressesGetADestinationAddress,
   r2GetEventNotificationConfigs,
   r2EventNotificationDeleteConfig,
+  r2GetEventNotificationConfig,
   r2PutEventNotificationConfig,
   ipAccessRulesForAnAccountListIpAccessRules,
   ipAccessRulesForAnAccountCreateAnIpAccessRule,
@@ -2649,6 +2650,8 @@ export const operationsByPath = {
   'GET /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration': r2GetEventNotificationConfigs,
   'DELETE /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}':
     r2EventNotificationDeleteConfig,
+  'GET /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}':
+    r2GetEventNotificationConfig,
   'PUT /accounts/{account_id}/event_notifications/r2/{bucket_name}/configuration/queues/{queue_id}':
     r2PutEventNotificationConfig,
   'GET /accounts/{account_id}/firewall/access_rules/rules': ipAccessRulesForAnAccountListIpAccessRules,

@@ -3086,6 +3086,7 @@ export type AccessAppPoliciesComponentsSchemasSingleResponse = AccessApiResponse
 /**
  * Number of access applications currently using this policy.
  *
+ * @default 0
  * @example 2
  * @x-auditable true
  */
@@ -3502,7 +3503,7 @@ export type AccessAzureGroupRule = {
 export type AccessBasePolicyReq = {
   decision: AccessDecision;
   exclude?: AccessSchemasExclude;
-  include: AccessInclude;
+  include: AccessSchemasInclude;
   name: AccessPolicyComponentsSchemasName;
   require?: AccessSchemasRequire;
 };
@@ -3512,7 +3513,7 @@ export type AccessBasePolicyResp = {
   decision?: AccessDecision;
   exclude?: AccessSchemasExclude;
   id?: AccessSchemasUuid;
-  include?: AccessInclude;
+  include?: AccessSchemasInclude;
   name?: AccessPolicyComponentsSchemasName;
   require?: AccessSchemasRequire;
   updated_at?: AccessTimestamp;
@@ -3867,6 +3868,11 @@ export type AccessComponentsSchemasDomain = string;
  */
 export type AccessComponentsSchemasEmail = string;
 
+/**
+ * Rules evaluated with a NOT logical operator. To match the policy, a user cannot meet any of the Exclude rules.
+ */
+export type AccessComponentsSchemasExclude = AccessRule[];
+
 export type AccessComponentsSchemasGroups = {
   created_at?: AccessTimestamp;
   exclude?: AccessExclude;
@@ -3903,6 +3909,11 @@ export type AccessComponentsSchemasIdentifier = string;
  * @example Widget Corps IDP
  */
 export type AccessComponentsSchemasName = string;
+
+/**
+ * Rules evaluated with an AND logical operator. To match the policy, a user must meet all of the Require rules.
+ */
+export type AccessComponentsSchemasRequire = AccessRule[];
 
 export type AccessComponentsSchemasResponseCollection = AccessApiResponseCollection & {
   result?: AccessServiceTokens[];
@@ -6044,7 +6055,7 @@ export type AccessPolicies = {
   approval_required?: AccessSchemasApprovalRequired;
   created_at?: AccessTimestamp;
   decision?: AccessSchemasDecision;
-  exclude?: AccessSchemasExclude;
+  exclude?: AccessComponentsSchemasExclude;
   id?: AccessUuid;
   include?: AccessInclude;
   isolation_required?: AccessSchemasIsolationRequired;
@@ -6052,7 +6063,7 @@ export type AccessPolicies = {
   precedence?: AccessSchemasPrecedence;
   purpose_justification_prompt?: AccessPurposeJustificationPrompt;
   purpose_justification_required?: AccessSchemasPurposeJustificationRequired;
-  require?: AccessSchemasRequire;
+  require?: AccessComponentsSchemasRequire;
   updated_at?: AccessTimestamp;
 };
 
@@ -6595,6 +6606,8 @@ export type AccessSaml = {
     issuer_url?: string;
     /**
      * Sign the SAML authentication request with Access credentials. To verify the signature, use the public key from the Access certs endpoints.
+     *
+     * @default false
      */
     sign_request?: boolean;
     /**
@@ -7652,6 +7665,11 @@ export type AccessSchemasIdentityProviders =
   | AccessSchemasYandex;
 
 /**
+ * Rules evaluated with an OR logical operator. A user needs to meet only one of the Include rules.
+ */
+export type AccessSchemasInclude = AccessRule[];
+
+/**
  * Lock all settings as Read-Only in the Dashboard, regardless of user permission. Updates may only be made via the API or Terraform for this account when enabled.
  *
  * @example false
@@ -8203,6 +8221,14 @@ export type AccessSchemasOnetimepin = {
     | 'yandex';
 };
 
+/**
+ * Allows options preflight requests to bypass Access authentication and go directly to the origin. Cannot turn on if cors_headers is set.
+ *
+ * @default false
+ * @example true
+ */
+export type AccessSchemasOptionsPreflightBypass = boolean;
+
 export type AccessSchemasOrganizations = {
   auth_domain?: AccessSchemasAuthDomain;
   created_at?: AccessTimestamp;
@@ -8668,7 +8694,7 @@ export type AccessSchemasSelfHostedProps = {
   http_only_cookie_attribute?: AccessHttpOnlyCookieAttribute;
   logo_url?: AccessLogoUrl;
   name?: AccessAppsComponentsSchemasName;
-  options_preflight_bypass?: AccessOptionsPreflightBypass;
+  options_preflight_bypass?: AccessSchemasOptionsPreflightBypass;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
   session_duration?: AccessAppsComponentsSchemasSessionDuration;
@@ -8744,7 +8770,7 @@ export type AccessSchemasSshProps = {
   http_only_cookie_attribute?: AccessHttpOnlyCookieAttribute;
   logo_url?: AccessLogoUrl;
   name?: AccessAppsComponentsSchemasName;
-  options_preflight_bypass?: AccessOptionsPreflightBypass;
+  options_preflight_bypass?: AccessSchemasOptionsPreflightBypass;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
   session_duration?: AccessAppsComponentsSchemasSessionDuration;
@@ -8806,7 +8832,7 @@ export type AccessSchemasVncProps = {
   http_only_cookie_attribute?: AccessHttpOnlyCookieAttribute;
   logo_url?: AccessLogoUrl;
   name?: AccessAppsComponentsSchemasName;
-  options_preflight_bypass?: AccessOptionsPreflightBypass;
+  options_preflight_bypass?: AccessSchemasOptionsPreflightBypass;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
   session_duration?: AccessAppsComponentsSchemasSessionDuration;
