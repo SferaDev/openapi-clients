@@ -2610,6 +2610,7 @@ export type UpdateProjectDataCacheResponse = {
     deploymentPrivate?: Schemas.ACLAction[];
     deploymentPromote?: Schemas.ACLAction[];
     deploymentRollback?: Schemas.ACLAction[];
+    edgeCacheNamespace?: Schemas.ACLAction[];
     environments?: Schemas.ACLAction[];
     logs?: Schemas.ACLAction[];
     logsPreset?: Schemas.ACLAction[];
@@ -12193,6 +12194,7 @@ export type GetProjectsResponse = {
       deploymentPrivate?: Schemas.ACLAction[];
       deploymentPromote?: Schemas.ACLAction[];
       deploymentRollback?: Schemas.ACLAction[];
+      edgeCacheNamespace?: Schemas.ACLAction[];
       environments?: Schemas.ACLAction[];
       logs?: Schemas.ACLAction[];
       logsPreset?: Schemas.ACLAction[];
@@ -13277,6 +13279,7 @@ export type CreateProjectResponse = {
     deploymentPrivate?: Schemas.ACLAction[];
     deploymentPromote?: Schemas.ACLAction[];
     deploymentRollback?: Schemas.ACLAction[];
+    edgeCacheNamespace?: Schemas.ACLAction[];
     environments?: Schemas.ACLAction[];
     logs?: Schemas.ACLAction[];
     logsPreset?: Schemas.ACLAction[];
@@ -14576,6 +14579,7 @@ export type GetProjectResponse = {
     deploymentPrivate?: Schemas.ACLAction[];
     deploymentPromote?: Schemas.ACLAction[];
     deploymentRollback?: Schemas.ACLAction[];
+    edgeCacheNamespace?: Schemas.ACLAction[];
     environments?: Schemas.ACLAction[];
     logs?: Schemas.ACLAction[];
     logsPreset?: Schemas.ACLAction[];
@@ -15668,6 +15672,7 @@ export type UpdateProjectResponse = {
     deploymentPrivate?: Schemas.ACLAction[];
     deploymentPromote?: Schemas.ACLAction[];
     deploymentRollback?: Schemas.ACLAction[];
+    edgeCacheNamespace?: Schemas.ACLAction[];
     environments?: Schemas.ACLAction[];
     logs?: Schemas.ACLAction[];
     logsPreset?: Schemas.ACLAction[];
