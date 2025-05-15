@@ -15382,13 +15382,13 @@ export type UpdateProjectResponse = {
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
   resourceConfig: {
-    buildMachineType?: 'enhanced' | 'ultra';
     fluid?: boolean;
     functionDefaultRegions: string[];
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
+    buildMachineType?: 'enhanced' | 'ultra';
   };
   rollingRelease?: {
     /**
@@ -15424,13 +15424,13 @@ export type UpdateProjectResponse = {
       | null;
   } | null;
   defaultResourceConfig: {
-    buildMachineType?: 'enhanced' | 'ultra';
     fluid?: boolean;
     functionDefaultRegions: string[];
     functionDefaultTimeout?: number;
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
+    buildMachineType?: 'enhanced' | 'ultra';
   };
   rootDirectory?: string | null;
   serverlessFunctionRegion?: string | null;
@@ -15757,15 +15757,15 @@ export type UpdateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
         addresses: {
           value: string;
           note?: string;
         }[];
-        protectionMode: 'exclusive' | 'additional';
+        protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
       }
     | null;
   gitComments?: {
@@ -17940,7 +17940,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -18041,7 +18041,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -18923,7 +18923,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -19024,7 +19024,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -19124,7 +19124,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -19315,7 +19315,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
