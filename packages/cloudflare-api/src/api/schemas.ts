@@ -45193,6 +45193,7 @@ export type TeamsDevicesDefaultDeviceSettingsPolicy = {
   gateway_unique_id?: TeamsDevicesGatewayUniqueId;
   include?: TeamsDevicesInclude;
   register_interface_ip_with_dns?: TeamsDevicesRegisterInterfaceIpWithDns;
+  sccm_vpn_boundary_support?: TeamsDevicesSccmVpnBoundarySupport;
   service_mode_v2?: TeamsDevicesServiceModeV2;
   support_url?: TeamsDevicesSupportUrl;
   switch_locked?: TeamsDevicesSwitchLocked;
@@ -45379,6 +45380,7 @@ export type TeamsDevicesDeviceSettingsPolicy = {
   policy_id?: TeamsDevicesSchemasUuid;
   precedence?: TeamsDevicesPrecedence;
   register_interface_ip_with_dns?: TeamsDevicesRegisterInterfaceIpWithDns;
+  sccm_vpn_boundary_support?: TeamsDevicesSccmVpnBoundarySupport;
   service_mode_v2?: TeamsDevicesServiceModeV2;
   support_url?: TeamsDevicesSupportUrl;
   switch_locked?: TeamsDevicesSwitchLocked;
@@ -46304,6 +46306,13 @@ export type TeamsDevicesRevokeDevicesRequest = TeamsDevicesRegistrationId[];
  * @format date-time
  */
 export type TeamsDevicesRevokedAt = string;
+
+/**
+ * Determines whether the WARP client indicates to SCCM that it is inside a VPN boundary. (Windows only).
+ *
+ * @example false
+ */
+export type TeamsDevicesSccmVpnBoundarySupport = boolean;
 
 /**
  * Polling frequency for the WARP client posture check. Default: `5m` (poll every five minutes). Minimum: `1m`.
