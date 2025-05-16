@@ -53450,10 +53450,6 @@ export type WorkersAccountSettings = {
   green_compute?: boolean;
 };
 
-export type WorkersAccountSettingsResponse = WorkersApiResponseCommon & {
-  result?: WorkersAccountSettings;
-};
-
 /**
  * Identifer of the account.
  *
@@ -53462,7 +53458,32 @@ export type WorkersAccountSettingsResponse = WorkersApiResponseCommon & {
 export type WorkersAccountIdentifier = string;
 
 export type WorkersApiResponseCollection = WorkersApiResponseCommon & {
-  result_info?: WorkersResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type WorkersApiResponseCommon = {
@@ -53499,7 +53520,7 @@ export type WorkersApiResponseNullResult = WorkersApiResponseCommon & {
 export type WorkersApiResponseSingle = WorkersApiResponseCommon;
 
 /**
- * A binding to allow the Worker to communicate with resources
+ * A binding to allow the Worker to communicate with resources.
  */
 export type WorkersBindingItem =
   | WorkersBindingKindAi
@@ -53635,7 +53656,7 @@ export type WorkersBindingKindDurableObjectNamespace = {
    * @maxLength 32
    * @x-stainless-terraform-configurability computed_optional
    */
-  namespace_id?: WorkersNamespaceIdentifier & void;
+  namespace_id?: WorkersNamespaceIdentifier & string;
   /**
    * The script where the Durable Object is defined, if it is external to this Worker.
    *
@@ -53669,7 +53690,7 @@ export type WorkersBindingKindJson = {
    *
    * @example { "message": "Hello, world!" }
    */
-  json: void;
+  json: string;
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
@@ -53962,21 +53983,6 @@ export type WorkersCreateAssetsUploadSessionResponse = WorkersApiResponseCommon 
  */
 export type WorkersCreatedOn = string;
 
-export type WorkersCronObject = {
-  created_on?: string;
-  /**
-   * @example [see original specs]
-   */
-  cron?: string;
-  modified_on?: string;
-};
-
-export type WorkersCronTriggerResponseCollection = WorkersApiResponseCommon & {
-  result?: {
-    schedules?: WorkersCronObject[];
-  };
-};
-
 /**
  * Opaque token indicating the position from which to continue when requesting the next set of records. A valid value for the cursor can be obtained from the cursors object in the result_info structure.
  *
@@ -54113,17 +54119,11 @@ export type WorkersHasModules = boolean;
 export type WorkersHostname = string;
 
 /**
- * Identifier for the tail.
- *
- * @example 03dc9f77817b488fb26c5861ec18f791
- */
-export type WorkersId = string;
-
-/**
  * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type WorkersIdentifier = string;
 
@@ -54223,7 +54223,7 @@ export type WorkersMigrationTagConditions = {
 export type WorkersModifiedOn = string;
 
 /**
- * @example {"metadata":{"compatibility_date":"2021-01-01","compatibility_flags":["nodejs_compat"],"main_module":"worker.js"},"worker.js":["export default {\n  async fetch(request, env, ctx) {\n    return new Response(\"Hello, world!\");\n  }\n};"]}
+ * @example {"metadata":{"compatibility_date":{},"compatibility_flags":["nodejs_compat"],"main_module":"worker.js"},"worker.js":["export default {\n  async fetch(request, env, ctx) {\n    return new Response(\"Hello, world!\");\n  }\n};"]}
  */
 export type WorkersMultipartScript = {
   /**
@@ -54231,7 +54231,7 @@ export type WorkersMultipartScript = {
    */
   metadata: {
     /**
-     * Configuration for assets within a Worker
+     * Configuration for assets within a Worker.
      */
     assets?: {
       /**
@@ -54239,7 +54239,7 @@ export type WorkersMultipartScript = {
        */
       config?: {
         /**
-                 * The contents of a _headers file (used to attach custom headers on asset responses)
+                 * The contents of a _headers file (used to attach custom headers on asset responses).
                  *
                  * @example /dashboard/*
                 X-Frame-Options: DENY
@@ -54249,7 +54249,7 @@ export type WorkersMultipartScript = {
                  */
         _headers?: string;
         /**
-                 * The contents of a _redirects file (used to apply redirects or proxy paths ahead of asset serving)
+                 * The contents of a _redirects file (used to apply redirects or proxy paths ahead of asset serving).
                  *
                  * @example /foo /bar 301
                 /news/* /blog/:splat
@@ -54371,7 +54371,7 @@ export type WorkersNamespaceScriptResponse = {
 };
 
 export type WorkersNamespaceScriptResponseSingle = WorkersApiResponseCommon & {
-  result?: WorkersNamespaceScriptResponse;
+  result: WorkersNamespaceScriptResponse;
 };
 
 export type WorkersNamespaceSingleResponse = WorkersApiResponseCommon & {
@@ -54474,39 +54474,13 @@ export type WorkersPlacementMode = 'smart';
  */
 export type WorkersPlacementStatus = 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
 
-export type WorkersResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
-
 export type WorkersRoute = {
   /**
    * Identifier.
    *
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    * @maxLength 32
+   * @x-auditable true
    */
   id: WorkersIdentifier;
   /**
@@ -54521,6 +54495,15 @@ export type WorkersRoute = {
    * @example my-workers-script
    */
   script: string;
+};
+
+export type WorkersSchedule = {
+  created_on?: string;
+  /**
+   * @example [see original specs]
+   */
+  cron: string;
+  modified_on?: string;
 };
 
 /**
@@ -54552,6 +54535,13 @@ export type WorkersSchemasScriptName = string;
  */
 export type WorkersSchemasService = string;
 
+export type WorkersSchemasSubdomain = {
+  /**
+   * @example my-subdomain
+   */
+  subdomain: string;
+};
+
 /**
  * @example bcf48806-b317-4351-9ee7-36e7d557d4de
  * @maxLength 36
@@ -54564,28 +54554,28 @@ export type WorkersScriptAndVersionSettingsItem = {
    *
    * @example {"name":"MY_ENV_VAR","text":"my_data","type":"plain_text"}
    */
-  bindings?: WorkersBindings & void;
+  bindings?: WorkersBindings & WorkersBindingItem[];
   /**
    * Date indicating targeted support in the Workers runtime. Backwards incompatible fixes to the runtime following this date will not affect this Worker.
    *
    * @example 2021-01-01
    * @default
    */
-  compatibility_date?: WorkersCompatibilityDate & void;
+  compatibility_date?: WorkersCompatibilityDate & string;
   /**
    * Flags that enable or disable certain features in the Workers runtime. Used to enable upcoming features or opt in or out of specific changes not included in a `compatibility_date`.
    *
    * @example nodejs_compat
    */
-  compatibility_flags?: WorkersCompatibilityFlags & void;
+  compatibility_flags?: WorkersCompatibilityFlags & string[];
   limits?: WorkersLimits;
   /**
    * Whether Logpush is turned on for the Worker.
    *
    * @example false
-   * @default false
+   * @default
    */
-  logpush?: WorkersLogpush & void;
+  logpush?: WorkersLogpush & boolean;
   /**
    * Migrations to apply for Durable Objects associated with this Worker.
    */
@@ -54596,26 +54586,26 @@ export type WorkersScriptAndVersionSettingsItem = {
    *
    * @default {}
    */
-  placement?: WorkersPlacementInfoNoStatus & void;
+  placement?: WorkersPlacementInfoNoStatus & Record<string, any>;
   /**
-   * Tags to help you manage your Workers
+   * Tags to help you manage your Workers.
    */
-  tags?: WorkersTags & void;
+  tags?: WorkersTags & string[];
   /**
    * List of Workers that will consume logs from the attached Worker.
    */
-  tail_consumers?: WorkersTailConsumers & void;
+  tail_consumers?: WorkersTailConsumers & WorkersTailConsumersScript[];
   /**
    * Usage model for the Worker invocations.
    *
    * @example standard
    * @default standard
    */
-  usage_model?: WorkersUsageModel & void;
+  usage_model?: WorkersUsageModel & string;
 };
 
 export type WorkersScriptAndVersionSettingsResponse = WorkersApiResponseCommon & {
-  result?: WorkersScriptAndVersionSettingsItem;
+  result: WorkersScriptAndVersionSettingsItem;
 };
 
 export type WorkersScriptResponse = {
@@ -54637,34 +54627,34 @@ export type WorkersScriptResponse = {
    *
    * @deprecated true
    */
-  placement_mode?: WorkersPlacementMode & void;
+  placement_mode?: WorkersPlacementMode & string;
   /**
    * Status of [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
    *
    * @deprecated true
    */
-  placement_status?: WorkersPlacementStatus & void;
+  placement_status?: WorkersPlacementStatus & string;
   tail_consumers?: WorkersTailConsumers;
   usage_model?: WorkersUsageModel;
 };
 
 export type WorkersScriptResponseCollection = WorkersApiResponseCommon & {
-  result?: WorkersScriptResponse[];
+  result: WorkersScriptResponse[];
 };
 
 export type WorkersScriptResponseSingle = WorkersApiResponseSingle & {
-  result?: WorkersScriptResponse;
+  result: WorkersScriptResponse;
 };
 
 export type WorkersScriptResponseUpload = WorkersScriptResponse & {
   /**
    * @example 10
    */
-  startup_time_ms?: number;
+  startup_time_ms: number;
 };
 
-export type WorkersScriptResponseUploadSingle = WorkersApiResponseSingle & {
-  result?: WorkersScriptResponseUpload;
+export type WorkersScriptResponseUploadSingle = WorkersApiResponseCommon & {
+  result: WorkersScriptResponseUpload;
 };
 
 export type WorkersScriptSettingsItem = {
@@ -54674,7 +54664,7 @@ export type WorkersScriptSettingsItem = {
    * @example false
    * @default false
    */
-  logpush?: WorkersLogpush & void;
+  logpush?: WorkersLogpush & boolean;
   /**
    * Observability settings for the Worker.
    */
@@ -54686,11 +54676,11 @@ export type WorkersScriptSettingsItem = {
 };
 
 export type WorkersScriptSettingsResponse = WorkersApiResponseCommon & {
-  result?: WorkersScriptSettingsItem;
+  result: WorkersScriptSettingsItem;
 };
 
 /**
- * The current number of scripts in this Dispatch Namespace
+ * The current number of scripts in this Dispatch Namespace.
  *
  * @example 800
  */
@@ -54717,7 +54707,7 @@ export type WorkersSecret = WorkersBindingKindSecretText | WorkersBindingKindSec
 export type WorkersSecretName = string;
 
 /**
- * Name of Worker to bind to
+ * Name of Worker to bind to.
  *
  * @example my-worker
  */
@@ -54743,35 +54733,29 @@ export type WorkersSubdomain = {
   previews_enabled: boolean;
 };
 
-export type WorkersSubdomainObject = {
-  /**
-   * @example example-subdomain
-   */
-  subdomain?: string;
-};
-
-export type WorkersSubdomainResponse = WorkersApiResponseCommon & {
-  result?: WorkersSubdomainObject;
-};
-
 /**
- * Tag to help you manage your Worker
+ * Tag to help you manage your Worker.
  *
  * @example my-tag
  */
 export type WorkersTag = string;
 
 /**
- * Tags to help you manage your Workers
+ * Tags to help you manage your Workers.
  */
 export type WorkersTags = WorkersTag[];
 
-export type WorkersTailResponse = WorkersApiResponseCommon & {
-  result?: {
-    expires_at?: string;
-    id?: string;
-    url?: string;
-  };
+export type WorkersTail = {
+  expires_at: string;
+  /**
+   * Identifier.
+   *
+   * @example 023e105f4ecef8ad9ca31a8372d0c353
+   * @maxLength 32
+   * @x-auditable true
+   */
+  id: WorkersIdentifier;
+  url: string;
 };
 
 /**
@@ -54807,7 +54791,7 @@ export type WorkersUploadAssetsResponse = WorkersApiResponseCommon & {
   /**
    * @maxProperties 0
    */
-  result?: void;
+  result?: {};
 };
 
 export type WorkersUsageModelObject = {
@@ -54815,7 +54799,7 @@ export type WorkersUsageModelObject = {
 };
 
 export type WorkersUsageModelResponse = WorkersApiResponseCommon & {
-  result?: WorkersUsageModelObject;
+  result: WorkersUsageModelObject;
 };
 
 /**
@@ -54869,17 +54853,17 @@ export type WorkersVersionItemUploaded = WorkersVersionItemFull & {
 export type WorkersVersionIdentifier = string;
 
 export type WorkersVersionsListResponse = WorkersApiResponseCommon & {
-  result?: {
+  result: {
     items?: WorkersVersionItemShort[];
   };
 };
 
 export type WorkersVersionsSingleResponse = WorkersApiResponseCommon & {
-  result?: WorkersVersionItemFull;
+  result: WorkersVersionItemFull;
 };
 
 export type WorkersVersionsUploadResponse = WorkersApiResponseCommon & {
-  result?: WorkersVersionItemUploaded;
+  result: WorkersVersionItemUploaded;
 };
 
 /**
