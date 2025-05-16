@@ -1,5 +1,5 @@
 ---
-"cloudflare-api-js": undefined
+"cloudflare-api-js": patch
 ---
 
-undefined
+Update workers endpoints
