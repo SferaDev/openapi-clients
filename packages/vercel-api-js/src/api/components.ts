@@ -1811,8 +1811,19 @@ export type UpdateProjectDataCacheResponse = {
   autoAssignCustomDomainsUpdatedBy?: string;
   buildCommand?: string | null;
   commandForIgnoringBuildStep?: string | null;
+  connectConfigurations?:
+    | {
+        envId: string | ('production' | 'preview');
+        connectConfigurationId: string;
+        passive: boolean;
+        buildsEnabled: boolean;
+        createdAt: number;
+        updatedAt: number;
+      }[]
+    | null;
   connectConfigurationId?: string | null;
   connectBuildsEnabled?: boolean;
+  passiveConnectConfigurationId?: string | null;
   createdAt?: number;
   customerSupportCodeVisibility?: boolean;
   crons?: {
@@ -2304,7 +2315,6 @@ export type UpdateProjectDataCacheResponse = {
     }[];
   } | null;
   outputDirectory?: string | null;
-  passiveConnectConfigurationId?: string | null;
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
@@ -4229,10 +4239,10 @@ export type CreateDeploymentResponse = {
   initReadyAt?: number;
   isFirstBranchDeployment?: boolean;
   lambdas?: {
-    createdAt?: number;
     id?: string;
-    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
+    createdAt?: number;
     entrypoint?: string | null;
+    readyState?: 'BUILDING' | 'ERROR' | 'INITIALIZING' | 'READY';
     readyStateAt?: number;
     output: {
       path: string;
@@ -4276,7 +4286,7 @@ export type CreateDeploymentResponse = {
           /**
            * The type of matching to perform
            */
-          type: 'endsWith' | 'startsWith' | 'equals';
+          type: 'startsWith' | 'equals' | 'endsWith';
           /**
            * The pattern to match against branch names
            */
@@ -4617,7 +4627,7 @@ export type CreateDeploymentResponse = {
             middleware?: number;
           }
         | {
-            handle: 'error' | 'resource' | 'filesystem' | 'hit' | 'miss' | 'rewrite';
+            handle: 'error' | 'filesystem' | 'hit' | 'miss' | 'rewrite' | 'resource';
             src?: string;
             dest?: string;
             status?: number;
@@ -4650,7 +4660,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         org: string;
@@ -4662,7 +4672,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | {
         owner: string;
@@ -4674,7 +4684,7 @@ export type CreateDeploymentResponse = {
         defaultBranch: string;
         name: string;
         private: boolean;
-        ownerType: 'user' | 'team';
+        ownerType: 'team' | 'user';
       }
     | null;
   flags?:
@@ -11395,8 +11405,19 @@ export type GetProjectsResponse = {
     autoAssignCustomDomainsUpdatedBy?: string;
     buildCommand?: string | null;
     commandForIgnoringBuildStep?: string | null;
+    connectConfigurations?:
+      | {
+          envId: string | ('production' | 'preview');
+          connectConfigurationId: string;
+          passive: boolean;
+          buildsEnabled: boolean;
+          createdAt: number;
+          updatedAt: number;
+        }[]
+      | null;
     connectConfigurationId?: string | null;
     connectBuildsEnabled?: boolean;
+    passiveConnectConfigurationId?: string | null;
     createdAt?: number;
     customerSupportCodeVisibility?: boolean;
     crons?: {
@@ -11888,7 +11909,6 @@ export type GetProjectsResponse = {
       }[];
     } | null;
     outputDirectory?: string | null;
-    passiveConnectConfigurationId?: string | null;
     passwordProtection?: Record<string, any> | null;
     productionDeploymentsFastLane?: boolean;
     publicSource?: boolean | null;
@@ -12480,8 +12500,19 @@ export type CreateProjectResponse = {
   autoAssignCustomDomainsUpdatedBy?: string;
   buildCommand?: string | null;
   commandForIgnoringBuildStep?: string | null;
+  connectConfigurations?:
+    | {
+        envId: string | ('production' | 'preview');
+        connectConfigurationId: string;
+        passive: boolean;
+        buildsEnabled: boolean;
+        createdAt: number;
+        updatedAt: number;
+      }[]
+    | null;
   connectConfigurationId?: string | null;
   connectBuildsEnabled?: boolean;
+  passiveConnectConfigurationId?: string | null;
   createdAt?: number;
   customerSupportCodeVisibility?: boolean;
   crons?: {
@@ -12973,7 +13004,6 @@ export type CreateProjectResponse = {
     }[];
   } | null;
   outputDirectory?: string | null;
-  passiveConnectConfigurationId?: string | null;
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
@@ -13780,8 +13810,19 @@ export type GetProjectResponse = {
   autoAssignCustomDomainsUpdatedBy?: string;
   buildCommand?: string | null;
   commandForIgnoringBuildStep?: string | null;
+  connectConfigurations?:
+    | {
+        envId: string | ('production' | 'preview');
+        connectConfigurationId: string;
+        passive: boolean;
+        buildsEnabled: boolean;
+        createdAt: number;
+        updatedAt: number;
+      }[]
+    | null;
   connectConfigurationId?: string | null;
   connectBuildsEnabled?: boolean;
+  passiveConnectConfigurationId?: string | null;
   createdAt?: number;
   customerSupportCodeVisibility?: boolean;
   crons?: {
@@ -14273,7 +14314,6 @@ export type GetProjectResponse = {
     }[];
   } | null;
   outputDirectory?: string | null;
-  passiveConnectConfigurationId?: string | null;
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
@@ -14873,8 +14913,19 @@ export type UpdateProjectResponse = {
   autoAssignCustomDomainsUpdatedBy?: string;
   buildCommand?: string | null;
   commandForIgnoringBuildStep?: string | null;
+  connectConfigurations?:
+    | {
+        envId: string | ('production' | 'preview');
+        connectConfigurationId: string;
+        passive: boolean;
+        buildsEnabled: boolean;
+        createdAt: number;
+        updatedAt: number;
+      }[]
+    | null;
   connectConfigurationId?: string | null;
   connectBuildsEnabled?: boolean;
+  passiveConnectConfigurationId?: string | null;
   createdAt?: number;
   customerSupportCodeVisibility?: boolean;
   crons?: {
@@ -15366,7 +15417,6 @@ export type UpdateProjectResponse = {
     }[];
   } | null;
   outputDirectory?: string | null;
-  passiveConnectConfigurationId?: string | null;
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
