@@ -30777,7 +30777,7 @@ export type McnCatalogSyncsPrebuiltPolicy = {
 };
 
 /**
- * IP prefix in CIDR format.
+ * An IP address prefix in CIDR format.
  *
  * @example 192.168.0.0/16
  */
@@ -31149,7 +31149,7 @@ export type McnOnramp = {
     [key: string]: McnResourceDetails;
   };
   /**
-   * The list of vpc IDs for which resource details could not be generated.
+   * The list of vpc IDs for which resource details failed to generate.
    */
   vpcs_by_id_unavailable?: McnResourceId[];
 };
@@ -31462,7 +31462,7 @@ export type McnResultInfo = {
    */
   page: number;
   /**
-   * Max items per page.
+   * The maximum numnber of items per page.
    *
    * @example 20
    */
@@ -33941,6 +33941,7 @@ export type ObservatoryDeviceType = 'DESKTOP' | 'MOBILE';
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type ObservatoryIdentifier = string;
 
@@ -34219,6 +34220,7 @@ export type ObservatorySchemasMessages = {
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type ObservatoryTimestamp = string;
 
@@ -34274,6 +34276,7 @@ export type ObservatoryUrl = string;
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
+ * @x-auditable true
  */
 export type ObservatoryUuid = string;
 
