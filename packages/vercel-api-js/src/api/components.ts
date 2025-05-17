@@ -9375,6 +9375,12 @@ export type UpdateResourceSecretsRequestBody = {
     name: string;
     value: string;
     prefix?: string;
+    /**
+     * @hidden
+     */
+    environmentOverrides?: {
+      [key: string]: string;
+    };
   }[];
   /**
    * If true, will only update the provided secrets
@@ -9417,6 +9423,12 @@ export type UpdateResourceSecretsByIdRequestBody = {
     name: string;
     value: string;
     prefix?: string;
+    /**
+     * @hidden
+     */
+    environmentOverrides?: {
+      [key: string]: string;
+    };
   }[];
   /**
    * If true, will only update the provided secrets
@@ -9497,6 +9509,12 @@ export type ImportResourceRequestBody = {
     name: string;
     value: string;
     prefix?: string;
+    /**
+     * @hidden
+     */
+    environmentOverrides?: {
+      [key: string]: string;
+    };
   }[];
 };
 
@@ -10167,7 +10185,7 @@ export type ExchangeSsoTokenVariables = {
 } & FetcherExtraProps;
 
 /**
- * During the autorization process, Vercel sends the user to the provider [redirectLoginUrl](https://vercel.com/docs/integrations/create-integration/submit-integration#redirect-login-url), that includes the OAuth authorization `code` parameter. The provider then calls the SSO Token Exchange endpoint with the sent code and receives the OIDC token. They log the user in based on this token and redirects the user back to the Vercel account using deep-link parameters included the redirectLoginUrl. This is used to verify the identity of the user during the [**Open in Provider** flow](https://vercel.com/docs/integrations/marketplace-flows#open-in-provider-button-flow). Providers should not persist the returned `id_token` in a database since the token will expire.
+ * During the autorization process, Vercel sends the user to the provider [redirectLoginUrl](https://vercel.com/docs/integrations/create-integration/submit-integration#redirect-login-url), that includes the OAuth authorization `code` parameter. The provider then calls the SSO Token Exchange endpoint with the sent code and receives the OIDC token. They log the user in based on this token and redirects the user back to the Vercel account using deep-link parameters included the redirectLoginUrl. Providers should not persist the returned `id_token` in a database since the token will expire. See [**Authentication with SSO**](https://vercel.com/docs/integrations/create-integration/marketplace-api#authentication-with-sso) for more details.
  */
 export const exchangeSsoToken = (variables: ExchangeSsoTokenVariables, signal?: AbortSignal) =>
   fetch<ExchangeSsoTokenResponse, ExchangeSsoTokenError, ExchangeSsoTokenRequestBody, {}, {}, {}>({
