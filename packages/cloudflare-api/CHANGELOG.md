@@ -1,5 +1,16 @@
 # cloudflare-api-js
 
+## 0.15.1
+
+### Patch Changes
+
+- 55fee33: [BREAKING] Add new query parameter 'forceRefresh' to 'GetEventListGetQueryParams'
+- 676de5b: List Catalog Syncs (Closed Beta) - fix typo in endpoint description
+- ad1807f: [BREAKING] Change type of virtual_network_id in TunnelRouteCreateATunnelRouteRequestBody and TunnelRouteUpdateATunnelRouteRequestBody to TunnelVirtualNetworkIdComputedOptional
+- 5e07130: Add sccm_vpn_boundary_support field to TeamsDevicesDefaultDeviceSettingsPolicy and TeamsDevicesDeviceSettingsPolicy
+- cf68a5d: [BREAKING] Removed DnsRecordsResultInfo type and moved its properties to DnsRecordsApiResponseCollection type
+- e922b8d: Update workers endpoints
+
 ## 0.15.0
 
 ### Minor Changes
