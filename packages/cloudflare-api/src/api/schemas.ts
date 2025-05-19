@@ -31895,6 +31895,7 @@ export type MconnControllerDevice = {
    * @x-sensitive true
    */
   crypt_key: string;
+  crypt_key_rotation_finished_at?: string;
   id: MconnUuid;
   imaged_at?: string;
   /**
@@ -41419,6 +41420,7 @@ export type RumId = string;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type RumIdentifier = string;
 
@@ -42705,6 +42707,7 @@ export type SpectrumAnalyticsFilters = string;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type SpectrumAnalyticsIdentifier = string;
 
@@ -42766,6 +42769,7 @@ export type SpectrumAnalyticsQueryResponseAggregate = SpectrumAnalyticsApiRespon
      *
      * @example 023e105f4ecef8ad9ca31a8372d0c353
      * @maxLength 32
+     * @x-auditable true
      */
     appID: void & SpectrumAnalyticsIdentifier;
     /**
@@ -42838,6 +42842,7 @@ export type SpectrumAnalyticsQueryResponseSingle = SpectrumAnalyticsApiResponseS
  *
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type SpectrumAnalyticsSince = void & SpectrumAnalyticsTimestamp;
 
@@ -42859,6 +42864,7 @@ export type SpectrumAnalyticsStat = {
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type SpectrumAnalyticsTimestamp = string;
 
@@ -42867,6 +42873,7 @@ export type SpectrumAnalyticsTimestamp = string;
  *
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type SpectrumAnalyticsUntil = void & SpectrumAnalyticsTimestamp;
 
@@ -55724,11 +55731,10 @@ export type ZeroTrustGatewayActivityLogSettings = {
   /**
    * Enable activity logging.
    *
-   * @default true
    * @example true
    */
   enabled?: boolean;
-};
+} | null;
 
 /**
  * Anti-virus settings.
@@ -55738,7 +55744,7 @@ export type ZeroTrustGatewayAntiVirusSettings = {
   enabled_upload_phase?: ZeroTrustGatewayEnabledUploadPhase;
   fail_closed?: ZeroTrustGatewayFailClosed;
   notification_settings?: ZeroTrustGatewayNotificationSettings;
-};
+} | null;
 
 export type ZeroTrustGatewayApiResponseCollection = ZeroTrustGatewayApiResponseCommon & {
   result_info?: ZeroTrustGatewayResultInfo;
@@ -55845,55 +55851,45 @@ export type ZeroTrustGatewayBindingStatus = 'pending_deployment' | 'available' |
 export type ZeroTrustGatewayBlockPageSettings = {
   /**
    * If mode is customized_block_page: block page background color in #rrggbb format.
-   *
-   * @default
    */
   background_color?: string;
   /**
    * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
    *
-   * @default false
    * @example true
    */
   enabled?: boolean;
   /**
    * If mode is customized_block_page: block page footer text.
    *
-   * @default
    * @example --footer--
    */
   footer_text?: string;
   /**
    * If mode is customized_block_page: block page header text.
    *
-   * @default
    * @example --header--
    */
   header_text?: string;
   /**
    * If mode is redirect_uri: when enabled, context will be appended to target_uri as query parameters.
-   *
-   * @default false
    */
   include_context?: boolean;
   /**
    * If mode is customized_block_page: full URL to the logo file.
    *
-   * @default
    * @example https://logos.com/a.png
    */
   logo_path?: string;
   /**
    * If mode is customized_block_page: admin email for users to contact.
    *
-   * @default
    * @example admin@example.com
    */
   mailto_address?: string;
   /**
    * If mode is customized_block_page: subject line for emails created from block page.
    *
-   * @default
    * @example Blocked User Inquiry
    */
   mailto_subject?: string;
@@ -55912,18 +55908,16 @@ export type ZeroTrustGatewayBlockPageSettings = {
   /**
    * If mode is customized_block_page: suppress detailed info at the bottom of the block page.
    *
-   * @default
    * @example false
    */
   suppress_footer?: boolean;
   /**
    * If mode is redirect_uri: URI to which the user should be redirected.
    *
-   * @default
    * @format uri
    */
   target_uri?: string;
-};
+} | null;
 
 /**
  * DLP body scanning settings.
@@ -55935,7 +55929,7 @@ export type ZeroTrustGatewayBodyScanningSettings = {
    * @example deep
    */
   inspection_mode?: string;
-};
+} | null;
 
 /**
  * Browser isolation settings.
@@ -55944,18 +55938,16 @@ export type ZeroTrustGatewayBrowserIsolationSettings = {
   /**
    * Enable non-identity onramp support for Browser Isolation.
    *
-   * @default false
    * @example true
    */
   non_identity_enabled?: boolean;
   /**
    * Enable Clientless Browser Isolation.
    *
-   * @default false
    * @example true
    */
   url_browser_isolation_enabled?: boolean;
-};
+} | null;
 
 export type ZeroTrustGatewayCategories = {
   beta?: ZeroTrustGatewayBeta;
@@ -55990,7 +55982,7 @@ export type ZeroTrustGatewayCertificateSettings = {
    * @example d1b364c5-1311-466e-a194-f0e943e0799f
    */
   id: string;
-};
+} | null;
 
 export type ZeroTrustGatewayCertificates = {
   binding_status?: ZeroTrustGatewayBindingStatus;
@@ -56104,7 +56096,6 @@ export type ZeroTrustGatewayCustomCertificateSettings = {
   /**
    * Enable use of custom certificate authority for signing Gateway traffic.
    *
-   * @default false
    * @example true
    */
   enabled: boolean;
@@ -56118,7 +56109,7 @@ export type ZeroTrustGatewayCustomCertificateSettings = {
    * @format date-time
    */
   updated_at?: string;
-};
+} | null;
 
 /**
  * Date of deletion, if any.
@@ -56274,7 +56265,6 @@ export type ZeroTrustGatewayEnabled = boolean;
 /**
  * Enable anti-virus scanning on downloads.
  *
- * @default false
  * @example false
  */
 export type ZeroTrustGatewayEnabledDownloadPhase = boolean;
@@ -56282,7 +56272,6 @@ export type ZeroTrustGatewayEnabledDownloadPhase = boolean;
 /**
  * Enable anti-virus scanning on uploads.
  *
- * @default false
  * @example false
  */
 export type ZeroTrustGatewayEnabledUploadPhase = boolean;
@@ -56334,7 +56323,7 @@ export type ZeroTrustGatewayExpiration = {
    * @format date-time
    */
   expires_at: ZeroTrustGatewayTimestamp & string;
-};
+} | null;
 
 /**
  * Extended e-mail matching settings.
@@ -56343,16 +56332,14 @@ export type ZeroTrustGatewayExtendedEmailMatching = {
   /**
    * Enable matching all variants of user emails (with + or . modifiers) used as criteria in Firewall policies.
    *
-   * @default false
    * @example true
    */
   enabled?: boolean;
-};
+} | null;
 
 /**
  * Block requests for files that cannot be scanned.
  *
- * @default false
  * @example false
  */
 export type ZeroTrustGatewayFailClosed = boolean;
@@ -56371,11 +56358,10 @@ export type ZeroTrustGatewayFipsSettings = {
   /**
    * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
    *
-   * @default false
    * @example true
    */
   tls?: boolean;
-};
+} | null;
 
 export type ZeroTrustGatewayGatewayAccountLoggingSettings = {
   /**
@@ -56468,7 +56454,7 @@ export type ZeroTrustGatewayHostSelectorSettings = {
    * @example false
    */
   enabled?: boolean;
-};
+} | null;
 
 /**
  * The identifier for this category. There is only one category per ID.
@@ -56664,14 +56650,10 @@ export type ZeroTrustGatewayName = string;
 export type ZeroTrustGatewayNotificationSettings = {
   /**
    * Set notification on
-   *
-   * @default false
    */
   enabled?: boolean;
   /**
    * If true, context information will be passed as query parameters
-   *
-   * @default false
    */
   include_context?: boolean;
   /**
@@ -56682,7 +56664,7 @@ export type ZeroTrustGatewayNotificationSettings = {
    * Optional URL to direct users to additional information. If not set, the notification will open a block page.
    */
   support_url?: string;
-};
+} | null;
 
 /**
  * Precedence sets the order of your rules. Lower values indicate higher precedence. At each processing phase, applicable rules are evaluated in ascending order of this value. Refer to [Order of enforcement](http://developers.cloudflare.com/learning-paths/secure-internet-traffic/understand-policies/order-of-enforcement/#manage-precedence-with-terraform) docs on how to manage precedence via Terraform.
@@ -56696,11 +56678,10 @@ export type ZeroTrustGatewayProtocolDetection = {
   /**
    * Enable detecting protocol on initial bytes of client traffic.
    *
-   * @default false
    * @example true
    */
   enabled?: boolean;
-};
+} | null;
 
 /**
  * The name of the provider. Usually Cloudflare.
@@ -56789,7 +56770,7 @@ export type ZeroTrustGatewayRuleSettings = {
    */
   add_headers?: {
     [key: string]: string;
-  };
+  } | null;
   /**
    * Set by parent MSP accounts to enable their children to bypass this rule.
    *
@@ -56803,11 +56784,10 @@ export type ZeroTrustGatewayRuleSettings = {
     /**
      * Enable to turn on SSH command logging.
      *
-     * @default false
      * @example false
      */
     command_logging?: boolean;
-  };
+  } | null;
   /**
    * Configure how browser isolation behaves.
    */
@@ -56889,15 +56869,13 @@ export type ZeroTrustGatewayRuleSettings = {
      * @default v1
      */
     version?: 'v1' | 'v2';
-  };
+  } | null;
   /**
    * Custom block page settings. If missing/null, blocking will use the the account settings.
    */
   block_page?: {
     /**
      * If true, context information will be passed as query parameters
-     *
-     * @default false
      */
     include_context?: boolean;
     /**
@@ -56906,18 +56884,16 @@ export type ZeroTrustGatewayRuleSettings = {
      * @format uri
      */
     target_uri: string;
-  };
+  } | null;
   /**
    * Enable the custom block page.
    *
-   * @default false
    * @example true
    */
   block_page_enabled?: boolean;
   /**
    * The text describing why this block occurred, displayed on the custom block page (if enabled).
    *
-   * @default
    * @example This website is a security risk
    */
   block_reason?: string;
@@ -56940,18 +56916,17 @@ export type ZeroTrustGatewayRuleSettings = {
     /**
      * Set to true to enable session enforcement.
      *
-     * @default false
      * @example true
      */
     enforce?: boolean;
-  };
+  } | null;
   /**
    * Add your own custom resolvers to route queries that match the resolver policy. Cannot be used when 'resolve_dns_through_cloudflare' or 'resolve_dns_internally' are set. DNS queries will route to the address closest to their origin. Only valid when a rule's action is set to 'resolve'.
    */
   dns_resolvers?: {
     ipv4?: ZeroTrustGatewayDnsResolverSettingsV4[];
     ipv6?: ZeroTrustGatewayDnsResolverSettingsV6[];
-  };
+  } | null;
   /**
    * Configure how Gateway Proxy traffic egresses. You can enable this setting for rules with Egress actions and filters, or omit it to indicate local egress via WARP IPs.
    */
@@ -56974,32 +56949,28 @@ export type ZeroTrustGatewayRuleSettings = {
      * @example 2001:DB8::/64
      */
     ipv6?: string;
-  };
+  } | null;
   /**
    * Set to true, to ignore the category matches at CNAME domains in a response. If unchecked, the categories in this rule will be checked against all the CNAME domain categories in a response.
    *
-   * @default false
    * @example true
    */
   ignore_cname_category_matches?: boolean;
   /**
    * INSECURE - disable DNSSEC validation (for Allow actions).
    *
-   * @default false
    * @example false
    */
   insecure_disable_dnssec_validation?: boolean;
   /**
    * Set to true to enable IPs in DNS resolver category blocks. By default categories only block based on domain names.
    *
-   * @default false
    * @example true
    */
   ip_categories?: boolean;
   /**
    * Set to true to include IPs in DNS resolver indicator feed blocks. By default indicator feeds only block based on domain names.
    *
-   * @default false
    * @example true
    */
   ip_indicator_feeds?: boolean;
@@ -57017,15 +56988,13 @@ export type ZeroTrustGatewayRuleSettings = {
      * A port number to use for TCP/UDP overrides.
      */
     port?: number;
-  };
+  } | null;
   /**
    * Configure a notification to display on the user's device when this rule is matched.
    */
   notification_settings?: {
     /**
      * Set notification on
-     *
-     * @default false
      */
     enabled?: boolean;
     /**
@@ -57040,11 +57009,10 @@ export type ZeroTrustGatewayRuleSettings = {
      * Optional URL to direct users to additional information. If not set, the notification will open a block page.
      */
     support_url?: string;
-  };
+  } | null;
   /**
    * Override matching DNS queries with a hostname.
    *
-   * @default
    * @example example.com
    */
   override_host?: string;
@@ -57054,7 +57022,7 @@ export type ZeroTrustGatewayRuleSettings = {
    * @example 1.1.1.1
    * @example 2.2.2.2
    */
-  override_ips?: string[];
+  override_ips?: string[] | null;
   /**
    * Configure DLP payload logging.
    */
@@ -57062,11 +57030,10 @@ export type ZeroTrustGatewayRuleSettings = {
     /**
      * Set to true to enable DLP payload logging for this rule.
      *
-     * @default false
      * @example true
      */
     enabled?: boolean;
-  };
+  } | null;
   /**
    * Settings that apply to quarantine rules
    */
@@ -57089,21 +57056,17 @@ export type ZeroTrustGatewayRuleSettings = {
       | 'zip'
       | 'rar'
     )[];
-  };
+  } | null;
   /**
    * Settings that apply to redirect rules
    */
   redirect?: {
     /**
      * If true, context information will be passed as query parameters
-     *
-     * @default false
      */
     include_context?: boolean;
     /**
      * If true, the path and query parameters from the original request will be appended to target_uri
-     *
-     * @default false
      */
     preserve_path_and_query?: boolean;
     /**
@@ -57112,29 +57075,26 @@ export type ZeroTrustGatewayRuleSettings = {
      * @format uri
      */
     target_uri: string;
-  };
+  } | null;
   /**
    * Configure to forward the query to the internal DNS service, passing the specified 'view_id' as input. Cannot be set when 'dns_resolvers' are specified or 'resolve_dns_through_cloudflare' is set. Only valid when a rule's action is set to 'resolve'.
    */
   resolve_dns_internally?: {
     /**
      * The fallback behavior to apply when the internal DNS response code is different from 'NOERROR' or when the response data only contains CNAME records for 'A' or 'AAAA' queries.
-     *
-     * @default none
      */
     fallback?: 'none' | 'public_dns';
     /**
      * The internal DNS view identifier that's passed to the internal DNS service.
      */
     view_id?: string;
-  };
+  } | null;
   /**
    * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS resolver. Cannot be set when 'dns_resolvers' are specified or 'resolve_dns_internally' is set. Only valid when a rule's action is set to 'resolve'.
    *
-   * @default false
    * @example true
    */
-  resolve_dns_through_cloudflare?: boolean;
+  resolve_dns_through_cloudflare?: boolean | null;
   /**
    * Configure behavior when an upstream cert is invalid or an SSL error occurs.
    */
@@ -57145,7 +57105,7 @@ export type ZeroTrustGatewayRuleSettings = {
      * @example error
      */
     action?: 'pass_through' | 'block' | 'error';
-  };
+  } | null;
 };
 
 export type ZeroTrustGatewayRules = {
@@ -57187,7 +57147,6 @@ export type ZeroTrustGatewaySandbox = {
   /**
    * Enable sandbox.
    *
-   * @default false
    * @example true
    */
   enabled?: boolean;
@@ -57195,7 +57154,7 @@ export type ZeroTrustGatewaySandbox = {
    * Action to take when the file cannot be scanned.
    */
   fallback_action?: 'allow' | 'block';
-};
+} | null;
 
 /**
  * The schedule for activating DNS policies. This does not apply to HTTP or network policies.
@@ -57249,12 +57208,11 @@ export type ZeroTrustGatewaySchedule = {
    * @example 08:00-12:30,13:30-17:00
    */
   wed?: string;
-};
+} | null;
 
 /**
  * The description of the rule.
  *
- * @default
  * @example Block bad websites based on their host name.
  */
 export type ZeroTrustGatewaySchemasDescription = string;
@@ -57355,11 +57313,10 @@ export type ZeroTrustGatewayTlsSettings = {
   /**
    * Enable inspecting encrypted HTTP traffic.
    *
-   * @default true
    * @example true
    */
   enabled?: boolean;
-};
+} | null;
 
 /**
  * The wirefilter expression used for traffic matching.
