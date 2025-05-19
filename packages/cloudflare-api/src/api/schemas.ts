@@ -54505,7 +54505,7 @@ export type WorkersRoute = {
    *
    * @example my-workers-script
    */
-  script: string;
+  script?: string;
 };
 
 export type WorkersSchedule = {
