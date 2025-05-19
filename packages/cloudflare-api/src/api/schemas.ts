@@ -27805,6 +27805,7 @@ export type LogcontrolFlag = boolean;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type LogcontrolIdentifier = string;
 
@@ -27821,11 +27822,11 @@ export type LogcontrolMessages = {
 }[];
 
 /**
- * Comma-separated list of regions.
+ * Name of the region.
  *
  * @example eu
  * @maxLength 256
- * @pattern ^[a-z,]*$
+ * @pattern ^[a-z]*$
  */
 export type LogcontrolRegions = string;
 
