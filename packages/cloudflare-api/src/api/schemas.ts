@@ -9836,7 +9836,32 @@ export type AddressingAdvertisedResponse = AddressingApiResponseSingle & {
 };
 
 export type AddressingApiResponseCollection = AddressingApiResponseCommon & {
-  result_info?: AddressingResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type AddressingApiResponseCommon = {
@@ -10245,33 +10270,6 @@ export type AddressingResponseCollectionBgp = AddressingApiResponseCollection & 
   result?: AddressingIpamBgpPrefixes[];
 };
 
-export type AddressingResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
-
 /**
  * Advertisement status of the prefix. If `true`, the BGP route for the prefix is advertised to the Internet. If
  * `false`, the BGP route is withdrawn.
@@ -10364,6 +10362,7 @@ export type AddressingSizeBytes = number;
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type AddressingTimestamp = string;
 
