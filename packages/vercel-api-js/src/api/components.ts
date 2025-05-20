@@ -3721,6 +3721,10 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
                */
               isDefaultApp?: boolean;
               /**
+               * The project name of the default app of this deployment's microfrontends group.
+               */
+              defaultAppProjectName: string;
+              /**
                * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
                */
               defaultRoute?: string;
@@ -3750,6 +3754,10 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
                 };
               };
               isDefaultApp: boolean;
+              /**
+               * The project name of the default app of this deployment's microfrontends group.
+               */
+              defaultAppProjectName: string;
               /**
                * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
                */
@@ -4512,6 +4520,10 @@ export type CreateDeploymentResponse = {
          */
         isDefaultApp?: boolean;
         /**
+         * The project name of the default app of this deployment's microfrontends group.
+         */
+        defaultAppProjectName: string;
+        /**
          * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
          */
         defaultRoute?: string;
@@ -4541,6 +4553,10 @@ export type CreateDeploymentResponse = {
           };
         };
         isDefaultApp: boolean;
+        /**
+         * The project name of the default app of this deployment's microfrontends group.
+         */
+        defaultAppProjectName: string;
         /**
          * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
          */
@@ -5592,6 +5608,10 @@ export type CancelDeploymentResponse = {
          */
         isDefaultApp?: boolean;
         /**
+         * The project name of the default app of this deployment's microfrontends group.
+         */
+        defaultAppProjectName: string;
+        /**
          * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
          */
         defaultRoute?: string;
@@ -5621,6 +5641,10 @@ export type CancelDeploymentResponse = {
           };
         };
         isDefaultApp: boolean;
+        /**
+         * The project name of the default app of this deployment's microfrontends group.
+         */
+        defaultAppProjectName: string;
         /**
          * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
          */
