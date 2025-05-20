@@ -13155,6 +13155,7 @@ export type CacheAutomaticUpgraderResponse = CacheApiResponseSingle & {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type CacheIdentifier = string;
 
@@ -13199,7 +13200,7 @@ export type CacheResponseBase = {
    */
   modified_on: string;
   /**
-   * next time this zone will be scanned by the Automatic SSL/TLS.
+   * Next time this zone will be scanned by the Automatic SSL/TLS.
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
@@ -13233,13 +13234,7 @@ export type CacheSchemasValue = 'auto' | 'custom';
  */
 export type CacheTimestamp = string;
 
-/**
- * Identifier.
- *
- * @example 023e105f4ecef8ad9ca31a8372d0c353
- * @maxLength 32
- */
-export type CacheZoneIdentifier = void & void & CacheIdentifier;
+export type CacheZoneIdentifier = CacheIdentifier;
 
 /**
  * The account identifier tag.
@@ -15167,7 +15162,32 @@ export type DigitalExperienceMonitoringAggregateTimeSlot = {
 };
 
 export type DigitalExperienceMonitoringApiResponseCollection = DigitalExperienceMonitoringApiResponseCommon & {
-  result_info?: DigitalExperienceMonitoringResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type DigitalExperienceMonitoringApiResponseCollectionCommon = DigitalExperienceMonitoringApiResponseCommon & {
@@ -15732,33 +15752,6 @@ export type DigitalExperienceMonitoringRamUsedPctByApp = {
    */
   ram_used_pct?: number;
 }[];
-
-export type DigitalExperienceMonitoringResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
 
 /**
  * The unique identifier for the test.
@@ -17150,7 +17143,32 @@ export type DlpWordListEntry = {
 };
 
 export type DlpApiResponseCollection = DlpApiResponseCommon & {
-  result_info?: DlpResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type DlpApiResponseCommon = {
@@ -17193,33 +17211,6 @@ export type DlpMessages = {
     pointer?: string;
   };
 }[];
-
-export type DlpResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
 
 export type DlsApiResponseCollection = DlsApiResponseCommon & {
   result_info?: DlsResultInfo;
@@ -60337,6 +60328,7 @@ export type ZonesSchemasEmailObfuscation = {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type ZonesSchemasIdentifier = string;
 
