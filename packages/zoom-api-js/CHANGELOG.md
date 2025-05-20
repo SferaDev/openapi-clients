@@ -1,5 +1,11 @@
 # zoom-api-js
 
+## 0.5.0
+
+### Minor Changes
+
+- 428dd8e: Add new endpoint to update Real-Time Media Streams (RTMS) status for a specific participant in a meeting
+
 ## 0.4.5
 
 ### Patch Changes

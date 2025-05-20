@@ -1,5 +1,16 @@
 # vercel-api-js
 
+## 0.25.2
+
+### Patch Changes
+
+- 36bb5d7: Add new 'connectConfigurations' field to 'UpdateProjectDataCacheResponse'
+- afab785: Add `increasedOnDemandEmailSentAt`
+- 85cfccd: Add environmentOverrides field to UpdateResourceSecretsRequestBody, UpdateResourceSecretsByIdRequestBody, and ImportResourceRequestBody types
+- 26b0be3: Add edgeCacheNamespace to project related responses
+- 0029939: Add removeRedirects field to RemoveProjectDomainRequestBody
+- f8b866f: Rename createOrTransferDomain to postDomains for consistency
+
 ## 0.25.1
 
 ### Patch Changes

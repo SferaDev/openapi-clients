@@ -1,5 +1,21 @@
 # cloudflare-api-js
 
+## 0.15.1
+
+### Patch Changes
+
+- 55fee33: [BREAKING] Add new query parameter 'forceRefresh' to 'GetEventListGetQueryParams'
+- 676de5b: List Catalog Syncs (Closed Beta) - fix typo in endpoint description
+- ad1807f: [BREAKING] Change type of virtual_network_id in TunnelRouteCreateATunnelRouteRequestBody and TunnelRouteUpdateATunnelRouteRequestBody to TunnelVirtualNetworkIdComputedOptional
+- 5e07130: Add sccm_vpn_boundary_support field to TeamsDevicesDefaultDeviceSettingsPolicy and TeamsDevicesDeviceSettingsPolicy
+- b0fb688: Add 'x-auditable' property to RumIdentifier and SpectrumAnalyticsIdentifier types
+- 2a0cc51: [BREAKING] Change pattern for LogcontrolRegions from ^[a-z,]_$ to ^[a-z]_$
+- a3b53bf: Make script property optional in WorkersRoute type
+- 0a8ee17: Update result type from R2LifecycleRule to R2QueuesConfig
+- cf68a5d: [BREAKING] Removed DnsRecordsResultInfo type and moved its properties to DnsRecordsApiResponseCollection type
+- e922b8d: Update workers endpoints
+- 9803c5b: [BREAKING] Remove AddressingResultInfo interface, replace with nested result_info in AddressingApiResponseCollection
+
 ## 0.15.0
 
 ### Minor Changes
