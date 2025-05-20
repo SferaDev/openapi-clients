@@ -10401,7 +10401,32 @@ export type AddressingWithdrawIfNoRoute = boolean;
 export type AddressingZoneIdentifier = string;
 
 export type ApiShieldApiResponseCollection = ApiShieldApiResponseCommon & {
-  result_info?: ApiShieldResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type ApiShieldApiResponseCommon = {
@@ -10659,6 +10684,7 @@ export type ApiShieldHost = string;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type ApiShieldIdentifier = string;
 
@@ -11053,33 +11079,6 @@ export type ApiShieldResponseUserSchemasHosts = {
   schema_id: ApiShieldSchemasUuid;
 };
 
-export type ApiShieldResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
-
 export type ApiShieldSchemaResponseWithThresholds = ApiShieldApiResponseCommon & {
   result: {
     schemas?: ApiShieldOpenapiWithThresholds[];
@@ -11274,6 +11273,7 @@ export type ApiShieldSuggestedThreshold = number;
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type ApiShieldTimestamp = string;
 
@@ -11303,6 +11303,7 @@ export type ApiShieldTrafficStats = {
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
+ * @x-auditable true
  */
 export type ApiShieldUuid = string;
 
