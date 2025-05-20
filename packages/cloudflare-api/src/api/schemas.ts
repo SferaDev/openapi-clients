@@ -25184,7 +25184,32 @@ export type InfraTargetArray = InfraTarget[];
 export type InfraTargetId = string;
 
 export type InfraApiResponseCollection = InfraApiResponseCommon & {
-  result_info?: InfraResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type InfraApiResponseCommon = {
@@ -25227,33 +25252,6 @@ export type InfraMessages = {
     pointer?: string;
   };
 }[];
-
-export type InfraResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
 
 export type IntelSinkholesApiResponseCommon = {
   errors: IntelSinkholesMessages;
