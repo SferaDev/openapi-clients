@@ -1817,6 +1817,10 @@ export type UpdateProjectDataCacheResponse = {
         connectConfigurationId: string;
         passive: boolean;
         buildsEnabled: boolean;
+        aws?: {
+          subnetIds: string[];
+          securityGroupId: string;
+        };
         createdAt: number;
         updatedAt: number;
       }[]
@@ -11429,6 +11433,10 @@ export type GetProjectsResponse = {
           connectConfigurationId: string;
           passive: boolean;
           buildsEnabled: boolean;
+          aws?: {
+            subnetIds: string[];
+            securityGroupId: string;
+          };
           createdAt: number;
           updatedAt: number;
         }[]
@@ -12524,6 +12532,10 @@ export type CreateProjectResponse = {
         connectConfigurationId: string;
         passive: boolean;
         buildsEnabled: boolean;
+        aws?: {
+          subnetIds: string[];
+          securityGroupId: string;
+        };
         createdAt: number;
         updatedAt: number;
       }[]
@@ -13834,6 +13846,10 @@ export type GetProjectResponse = {
         connectConfigurationId: string;
         passive: boolean;
         buildsEnabled: boolean;
+        aws?: {
+          subnetIds: string[];
+          securityGroupId: string;
+        };
         createdAt: number;
         updatedAt: number;
       }[]
@@ -14937,6 +14953,10 @@ export type UpdateProjectResponse = {
         connectConfigurationId: string;
         passive: boolean;
         buildsEnabled: boolean;
+        aws?: {
+          subnetIds: string[];
+          securityGroupId: string;
+        };
         createdAt: number;
         updatedAt: number;
       }[]

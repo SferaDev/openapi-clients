@@ -1995,6 +1995,10 @@ export type UserEvent = {
                 connectConfigurationId: string;
                 passive: boolean;
                 buildsEnabled: boolean;
+                aws?: {
+                  subnetIds: string[];
+                  securityGroupId: string;
+                };
                 createdAt: number;
                 updatedAt: number;
               }[]
@@ -2005,6 +2009,10 @@ export type UserEvent = {
                 connectConfigurationId: string;
                 passive: boolean;
                 buildsEnabled: boolean;
+                aws?: {
+                  subnetIds: string[];
+                  securityGroupId: string;
+                };
                 createdAt: number;
                 updatedAt: number;
               }[]
