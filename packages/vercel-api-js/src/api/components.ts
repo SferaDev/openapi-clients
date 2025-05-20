@@ -17330,7 +17330,15 @@ export type RemoveProjectDomainQueryParams = {
 
 export type RemoveProjectDomainError = Fetcher.ErrorWrapper<undefined>;
 
+export type RemoveProjectDomainRequestBody = {
+  /**
+   * Whether to remove all domains from this project that redirect to the domain being removed.
+   */
+  removeRedirects?: boolean;
+};
+
 export type RemoveProjectDomainVariables = {
+  body: RemoveProjectDomainRequestBody;
   pathParams: RemoveProjectDomainPathParams;
   queryParams?: RemoveProjectDomainQueryParams;
 } & FetcherExtraProps;
@@ -17342,7 +17350,7 @@ export const removeProjectDomain = (variables: RemoveProjectDomainVariables, sig
   fetch<
     Record<string, any>,
     RemoveProjectDomainError,
-    undefined,
+    RemoveProjectDomainRequestBody,
     {},
     RemoveProjectDomainQueryParams,
     RemoveProjectDomainPathParams
@@ -24083,7 +24091,7 @@ export type GetCertByIdVariables = {
  */
 export const getCertById = (variables: GetCertByIdVariables, signal?: AbortSignal) =>
   fetch<GetCertByIdResponse, GetCertByIdError, undefined, {}, GetCertByIdQueryParams, GetCertByIdPathParams>({
-    url: '/v7/certs/{id}',
+    url: '/v8/certs/{id}',
     method: 'get',
     ...variables,
     signal
@@ -24119,7 +24127,7 @@ export type RemoveCertVariables = {
  */
 export const removeCert = (variables: RemoveCertVariables, signal?: AbortSignal) =>
   fetch<Record<string, any>, RemoveCertError, undefined, {}, RemoveCertQueryParams, RemoveCertPathParams>({
-    url: '/v7/certs/{id}',
+    url: '/v8/certs/{id}',
     method: 'delete',
     ...variables,
     signal
@@ -24163,7 +24171,7 @@ export type IssueCertVariables = {
  */
 export const issueCert = (variables: IssueCertVariables, signal?: AbortSignal) =>
   fetch<IssueCertResponse, IssueCertError, IssueCertRequestBody, {}, IssueCertQueryParams, {}>({
-    url: '/v7/certs',
+    url: '/v8/certs',
     method: 'post',
     ...variables,
     signal
@@ -24219,7 +24227,7 @@ export type UploadCertVariables = {
  */
 export const uploadCert = (variables: UploadCertVariables, signal?: AbortSignal) =>
   fetch<UploadCertResponse, UploadCertError, UploadCertRequestBody, {}, UploadCertQueryParams, {}>({
-    url: '/v7/certs',
+    url: '/v8/certs',
     method: 'put',
     ...variables,
     signal
@@ -24309,7 +24317,7 @@ export const getDeploymentFileContents = (variables: GetDeploymentFileContentsVa
     {},
     GetDeploymentFileContentsQueryParams,
     GetDeploymentFileContentsPathParams
-  >({ url: '/v7/deployments/{id}/files/{fileId}', method: 'get', ...variables, signal });
+  >({ url: '/v8/deployments/{id}/files/{fileId}', method: 'get', ...variables, signal });
 
 export type GetDeploymentsQueryParams = {
   /**
