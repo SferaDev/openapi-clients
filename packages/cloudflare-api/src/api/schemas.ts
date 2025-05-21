@@ -29630,7 +29630,7 @@ export type MagicAppSingleResponse = {
 };
 
 /**
- * CIDRs to associate with traffic decisions.
+ * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently unsupported)
  */
 export type MagicAppSubnets = (MagicCidr & void)[];
 
