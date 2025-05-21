@@ -2,4 +2,4 @@
 "vercel-api-js": patch
 ---
 
-Change order of 'id' and 'createdAt' in 'lambdas' type
+Remove dangerous promotion from canary
