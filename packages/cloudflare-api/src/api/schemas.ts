@@ -44374,6 +44374,7 @@ export type StreamScheduledDeletion = string;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type StreamSchemasIdentifier = string;
 
