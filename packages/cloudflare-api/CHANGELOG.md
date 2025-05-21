@@ -1,5 +1,18 @@
 # cloudflare-api-js
 
+## 0.15.2
+
+### Patch Changes
+
+- 8ae636d: Add 'webp' option to the polish configuration
+- 06a9d2a: [BREAKING] Change CIDRs to IPv4 only and note that IPv6 CIDRs are currently unsupported
+- ede8536: Add x-auditable flag to CustomIndicatorFeedsDescription type
+- a44aa65: Add new endpoint to fetch all DEX tests
+- 22b8ffe: [BREAKING] Add new x-auditable attribute to StreamSchemasIdentifier type definition
+- 4ee2ac1: Add detailed result information to ApiShieldApiResponseCollection
+- 9c610a7: Change InfraApiResponseCollection to include result_info as a nested object
+- 2c9fe89: Add x-auditable property to DnsSettingsIdentifier schema
+
 ## 0.15.1
 
 ### Patch Changes

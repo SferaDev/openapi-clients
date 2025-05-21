@@ -1,5 +1,13 @@
 # vercel-api-js
 
+## 0.25.3
+
+### Patch Changes
+
+- d186f87: Add AWS configuration options to user event and project responses
+- e4a886b: Remove dangerous promotion from canary
+- 9b061f2: Remove northstarMigration from AuthUser schema
+
 ## 0.25.2
 
 ### Patch Changes
