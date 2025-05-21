@@ -19170,7 +19170,32 @@ export type DnsSettingsAccountSettings = {
 };
 
 export type DnsSettingsApiResponseCollection = DnsSettingsApiResponseCommon & {
-  result_info?: DnsSettingsResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type DnsSettingsApiResponseCommon = {
@@ -19316,6 +19341,7 @@ export type DnsSettingsFoundationDns = boolean;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type DnsSettingsIdentifier = string;
 
@@ -19326,7 +19352,7 @@ export type DnsSettingsInternalDns = {
   /**
    * The ID of the zone to fallback to.
    *
-   * @example {"description":"Identifier.","example":"023e105f4ecef8ad9ca31a8372d0c353","maxLength":32,"type":"string"}
+   * @example {"description":"Identifier.","example":"023e105f4ecef8ad9ca31a8372d0c353","maxLength":32,"type":"string","x-auditable":true}
    */
   reference_zone_id?: string;
 };
@@ -19412,33 +19438,6 @@ export type DnsSettingsPage = number;
  * @minimum 1
  */
 export type DnsSettingsPerPage = number;
-
-export type DnsSettingsResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
 
 export type DnsSettingsSchemasDnsResponseSingle = DnsSettingsApiResponseSingle & {
   result?: DnsSettingsDnsSettingsZone;
