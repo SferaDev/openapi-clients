@@ -40980,7 +40980,7 @@ export type RulesetsSetConfigRule = {
     /**
      * Configure the Polish level.
      */
-    polish?: 'off' | 'lossless' | 'lossy';
+    polish?: 'off' | 'lossless' | 'lossy' | 'webp';
     /**
      * Turn on or off Rocket Loader
      */
