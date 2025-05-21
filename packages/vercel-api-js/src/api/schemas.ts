@@ -3241,36 +3241,6 @@ export type AuthUser = {
       isCurrentlyBlocked: boolean;
     };
   };
-  northstarMigration?: {
-    /**
-     * The ID of the team we created for this user.
-     */
-    teamId: string;
-    /**
-     * The number of projects migrated for this user.
-     */
-    projects: number;
-    /**
-     * The number of stores migrated for this user.
-     */
-    stores: number;
-    /**
-     * The number of integration configurations migrated for this user.
-     */
-    integrationConfigurations: number;
-    /**
-     * The number of integration clients migrated for this user.
-     */
-    integrationClients: number;
-    /**
-     * The migration start time timestamp for this user.
-     */
-    startTime: number;
-    /**
-     * The migration end time timestamp for this user.
-     */
-    endTime: number;
-  };
   /**
    * The User's unique identifier.
    *
@@ -3305,10 +3275,6 @@ export type AuthUser = {
    * The user's default team.
    */
   defaultTeamId: string | null;
-  /**
-   * The user's version. Will always be `northstar`.
-   */
-  version: 'northstar';
 };
 
 /**
@@ -3353,10 +3319,6 @@ export type AuthUserLimited = {
    * The user's default team.
    */
   defaultTeamId: string | null;
-  /**
-   * The user's version. Will always be `northstar`.
-   */
-  version: 'northstar';
 };
 
 /**
