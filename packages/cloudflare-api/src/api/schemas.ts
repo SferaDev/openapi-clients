@@ -14516,6 +14516,8 @@ export type CustomIndicatorFeedsCreateFeedResponse = CustomIndicatorFeedsApiResp
 
 /**
  * The description of the example test
+ *
+ * @x-auditable true
  */
 export type CustomIndicatorFeedsDescription = string;
 
@@ -14523,11 +14525,14 @@ export type CustomIndicatorFeedsDescription = string;
  * Indicator feed ID
  *
  * @example 12
+ * @x-auditable true
  */
 export type CustomIndicatorFeedsFeedId = number;
 
 /**
  * The unique identifier for the indicator feed
+ *
+ * @x-auditable true
  */
 export type CustomIndicatorFeedsId = number;
 
@@ -14536,6 +14541,7 @@ export type CustomIndicatorFeedsId = number;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type CustomIndicatorFeedsIdentifier = string;
 
@@ -14547,6 +14553,7 @@ export type CustomIndicatorFeedsIndicatorFeedItem = {
    * The date and time when the data entry was created
    *
    * @format date-time
+   * @x-auditable true
    */
   created_on?: string;
   description?: CustomIndicatorFeedsDescription;
@@ -14558,6 +14565,7 @@ export type CustomIndicatorFeedsIndicatorFeedItem = {
    * The date and time when the data entry was last modified
    *
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string;
   name?: CustomIndicatorFeedsName;
@@ -14571,6 +14579,7 @@ export type CustomIndicatorFeedsIndicatorFeedMetadata = {
    * The date and time when the data entry was created
    *
    * @format date-time
+   * @x-auditable true
    */
   created_on?: string;
   description?: CustomIndicatorFeedsDescription;
@@ -14580,12 +14589,15 @@ export type CustomIndicatorFeedsIndicatorFeedMetadata = {
   is_public?: CustomIndicatorFeedsIsPublic;
   /**
    * Status of the latest snapshot uploaded
+   *
+   * @x-auditable true
    */
   latest_upload_status?: 'Mirroring' | 'Unifying' | 'Loading' | 'Provisioning' | 'Complete' | 'Error';
   /**
    * The date and time when the data entry was last modified
    *
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string;
   name?: CustomIndicatorFeedsName;
@@ -14611,16 +14623,22 @@ export type CustomIndicatorFeedsIndicatorFeedResponseSingle = CustomIndicatorFee
 
 /**
  * Whether the indicator feed can be attributed to a provider
+ *
+ * @x-auditable true
  */
 export type CustomIndicatorFeedsIsAttributable = boolean;
 
 /**
  * Whether the indicator feed can be downloaded
+ *
+ * @x-auditable true
  */
 export type CustomIndicatorFeedsIsDownloadable = boolean;
 
 /**
  * Whether the indicator feed is exposed to customers
+ *
+ * @x-auditable true
  */
 export type CustomIndicatorFeedsIsPublic = boolean;
 
@@ -14634,6 +14652,8 @@ export type CustomIndicatorFeedsMessages = {
 
 /**
  * The name of the indicator feed
+ *
+ * @x-auditable true
  */
 export type CustomIndicatorFeedsName = string;
 
@@ -14659,12 +14679,14 @@ export type CustomIndicatorFeedsPermissionsRequest = {
    * The Cloudflare account tag of the account to change permissions on
    *
    * @example 823f45f16fd2f7e21e1e054aga4d2859
+   * @x-auditable true
    */
   account_tag?: string;
   /**
    * The ID of the feed to add/remove permissions on
    *
    * @example 1
+   * @x-auditable true
    */
   feed_id?: number;
 };
@@ -14676,17 +14698,23 @@ export type CustomIndicatorFeedsPermissionsResponse = CustomIndicatorFeedsApiRes
 export type CustomIndicatorFeedsPermissionsUpdate = {
   /**
    * Whether the update succeeded or not
+   *
+   * @x-auditable true
    */
   success?: boolean;
 };
 
 /**
  * The unique identifier for the provider
+ *
+ * @x-auditable true
  */
 export type CustomIndicatorFeedsProviderId = string;
 
 /**
  * The provider of the indicator feed
+ *
+ * @x-auditable true
  */
 export type CustomIndicatorFeedsProviderName = string;
 
@@ -14707,18 +14735,21 @@ export type CustomIndicatorFeedsUpdateFeed = {
    * Feed id
    *
    * @example 1
+   * @x-auditable true
    */
   file_id?: number;
   /**
    * Name of the file unified in our system
    *
    * @example snapshot_file.unified
+   * @x-auditable true
    */
   filename?: string;
   /**
    * Current status of upload, should be unified
    *
    * @example unified
+   * @x-auditable true
    */
   status?: string;
 };
@@ -14732,30 +14763,35 @@ export type CustomIndicatorFeedsUpdatePublicFieldRequest = {
    * The new description of the feed
    *
    * @example This is an example description
+   * @x-auditable true
    */
   description?: string;
   /**
    * The new is_attributable value of the feed
    *
    * @example true
+   * @x-auditable true
    */
   is_attributable?: boolean;
   /**
    * The new is_downloadable value of the feed
    *
    * @example true
+   * @x-auditable true
    */
   is_downloadable?: boolean;
   /**
    * The new is_public value of the feed
    *
    * @example true
+   * @x-auditable true
    */
   is_public?: boolean;
   /**
    * The new name of the feed
    *
    * @example indicator_list
+   * @x-auditable true
    */
   name?: string;
 };
