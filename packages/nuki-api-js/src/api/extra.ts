@@ -18,9 +18,6 @@ import {
   getAccountSubResource,
   postAccountSubResource,
   deleteAccountSubResource,
-  postAccountSubscriptionPayResource,
-  postAccountSubscriptionActivateResource,
-  postAccountSubscriptionTerminateResource,
   getAccountUsersResource,
   putAccountUsersResource,
   getAccountUserResource,
@@ -59,7 +56,6 @@ import {
   postApiKeyTokenResource,
   deleteApiKeyTokenResource,
   getWebhookLogsResource,
-  getAccountSubscriptionsResource,
   postSmartlockBulkWebConfigResource,
   getCompaniesResource,
   getNotificationsResource,
@@ -105,9 +101,7 @@ import {
   postSmartlockConfigResource,
   getSmartlockLogsResource,
   postSmartlockSyncResource,
-  postSmartlockWebConfigResource,
-  getSubscriptionsResource,
-  getSubscriptionResource
+  postSmartlockWebConfigResource
 } from './components';
 
 export const operationsByPath = {
@@ -130,9 +124,6 @@ export const operationsByPath = {
   'GET /account/sub/{accountId}': getAccountSubResource,
   'POST /account/sub/{accountId}': postAccountSubResource,
   'DELETE /account/sub/{accountId}': deleteAccountSubResource,
-  'POST /account/subscription/pay': postAccountSubscriptionPayResource,
-  'POST /account/subscription/{id}/activate': postAccountSubscriptionActivateResource,
-  'POST /account/subscription/{id}/terminate': postAccountSubscriptionTerminateResource,
   'GET /account/user': getAccountUsersResource,
   'PUT /account/user': putAccountUsersResource,
   'GET /account/user/{accountUserId}': getAccountUserResource,
@@ -171,7 +162,6 @@ export const operationsByPath = {
   'POST /api/key/{apiKeyId}/token/{id}': postApiKeyTokenResource,
   'DELETE /api/key/{apiKeyId}/token/{id}': deleteApiKeyTokenResource,
   'GET /api/key/{apiKeyId}/webhook/logs': getWebhookLogsResource,
-  'GET /app/account/subscription': getAccountSubscriptionsResource,
   'POST /bulk-web-config': postSmartlockBulkWebConfigResource,
   'GET /company': getCompaniesResource,
   'GET /notification': getNotificationsResource,
@@ -217,7 +207,5 @@ export const operationsByPath = {
   'POST /smartlock/{smartlockId}/config': postSmartlockConfigResource,
   'GET /smartlock/{smartlockId}/log': getSmartlockLogsResource,
   'POST /smartlock/{smartlockId}/sync': postSmartlockSyncResource,
-  'POST /smartlock/{smartlockId}/web/config': postSmartlockWebConfigResource,
-  'GET /subscription': getSubscriptionsResource,
-  'GET /subscription/{subscriptionId}': getSubscriptionResource
+  'POST /smartlock/{smartlockId}/web/config': postSmartlockWebConfigResource
 };
