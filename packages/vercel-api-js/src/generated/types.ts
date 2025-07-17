@@ -304,14 +304,13 @@ export const credentialsTypeEnum = {
   bitbucket: 'bitbucket',
   google: 'google',
   'github-oauth': 'github-oauth',
-  'github-app': 'github-app',
+  'github-oauth-limited': 'github-oauth-limited',
 } as const
 
 export type CredentialsTypeEnum = (typeof credentialsTypeEnum)[keyof typeof credentialsTypeEnum]
 
 export const credentialsTypeEnum2 = {
   'github-oauth-custom-host': 'github-oauth-custom-host',
-  'github-app-custom-host': 'github-app-custom-host',
 } as const
 
 export type CredentialsTypeEnum2 = (typeof credentialsTypeEnum2)[keyof typeof credentialsTypeEnum2]
@@ -320,6 +319,7 @@ export const newOwnerImportFlowGitProviderEnum = {
   github: 'github',
   gitlab: 'gitlab',
   bitbucket: 'bitbucket',
+  'github-limited': 'github-limited',
   'github-custom-host': 'github-custom-host',
 } as const
 
@@ -5361,6 +5361,10 @@ export type UserEvent = {
                      */
                     connectConfigurationId: string
                     /**
+                     * @type string | undefined
+                     */
+                    dc?: string | undefined
+                    /**
                      * @type boolean
                      */
                     passive: boolean
@@ -5403,6 +5407,10 @@ export type UserEvent = {
                      * @type string
                      */
                     connectConfigurationId: string
+                    /**
+                     * @type string | undefined
+                     */
+                    dc?: string | undefined
                     /**
                      * @type boolean
                      */
@@ -8040,6 +8048,7 @@ export const authUserImportFlowGitProviderEnum = {
   bitbucket: 'bitbucket',
   github: 'github',
   'github-custom-host': 'github-custom-host',
+  'github-limited': 'github-limited',
   gitlab: 'gitlab',
 } as const
 

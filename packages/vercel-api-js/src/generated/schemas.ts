@@ -773,11 +773,11 @@ export const userEventSchema = z
                 .array(
                   z.union([
                     z.object({
-                      type: z.enum(['gitlab', 'bitbucket', 'google', 'github-oauth', 'github-app']),
+                      type: z.enum(['gitlab', 'bitbucket', 'google', 'github-oauth', 'github-oauth-limited']),
                       id: z.string(),
                     }),
                     z.object({
-                      type: z.enum(['github-oauth-custom-host', 'github-app-custom-host']),
+                      type: z.enum(['github-oauth-custom-host']),
                       host: z.string(),
                       id: z.string(),
                     }),
@@ -819,7 +819,7 @@ export const userEventSchema = z
               id: z.string(),
               importFlowGitNamespace: z.union([z.string(), z.number()]).nullable().nullish(),
               importFlowGitNamespaceId: z.union([z.string(), z.number()]).nullable().nullish(),
-              importFlowGitProvider: z.enum(['github', 'gitlab', 'bitbucket', 'github-custom-host']).nullable().nullish(),
+              importFlowGitProvider: z.enum(['github', 'gitlab', 'bitbucket', 'github-limited', 'github-custom-host']).nullable().nullish(),
               preferredScopesAndGitNamespaces: z
                 .array(
                   z.object({
@@ -1890,6 +1890,7 @@ export const userEventSchema = z
                 z.object({
                   envId: z.union([z.string(), z.enum(['preview', 'production'])]),
                   connectConfigurationId: z.string(),
+                  dc: z.string().optional(),
                   passive: z.boolean(),
                   buildsEnabled: z.boolean(),
                   aws: z
@@ -1908,6 +1909,7 @@ export const userEventSchema = z
                 z.object({
                   envId: z.union([z.string(), z.enum(['preview', 'production'])]),
                   connectConfigurationId: z.string(),
+                  dc: z.string().optional(),
                   passive: z.boolean(),
                   buildsEnabled: z.boolean(),
                   aws: z
@@ -3028,7 +3030,7 @@ export const authUserSchema = z
       .optional(),
     importFlowGitNamespace: z.union([z.string(), z.number()]).nullable().nullish(),
     importFlowGitNamespaceId: z.union([z.string(), z.number()]).nullable().nullish(),
-    importFlowGitProvider: z.enum(['bitbucket', 'github', 'github-custom-host', 'gitlab']).nullable().nullish(),
+    importFlowGitProvider: z.enum(['bitbucket', 'github', 'github-custom-host', 'github-limited', 'gitlab']).nullable().nullish(),
     preferredScopesAndGitNamespaces: z
       .array(
         z.object({
