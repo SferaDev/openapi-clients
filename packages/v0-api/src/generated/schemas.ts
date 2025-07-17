@@ -245,7 +245,7 @@ export const chatsCreate429Schema = z.unknown()
  */
 export const chatsCreate500Schema = z.unknown()
 
-export const chatsCreateMutationResponseSchema = chatsCreate200Schema
+export const chatsCreateMutationResponseSchema = z.lazy(() => chatsCreate200Schema)
 
 export const chatsFindQueryParamsSchema = z.object({
   limit: z.coerce.number().max(60).default(60).describe('Query parameter "limit"'),
@@ -301,7 +301,54 @@ export const chatsFind429Schema = z.unknown()
  */
 export const chatsFind500Schema = z.unknown()
 
-export const chatsFindQueryResponseSchema = chatsFind200Schema
+export const chatsFindQueryResponseSchema = z.lazy(() => chatsFind200Schema)
+
+/**
+ * @description Success
+ */
+export const chatsInitCreate200Schema = z.unknown()
+
+/**
+ * @description Unauthorized
+ */
+export const chatsInitCreate401Schema = z.unknown()
+
+/**
+ * @description Forbidden
+ */
+export const chatsInitCreate403Schema = z.unknown()
+
+/**
+ * @description Not Found
+ */
+export const chatsInitCreate404Schema = z.unknown()
+
+/**
+ * @description Conflict
+ */
+export const chatsInitCreate409Schema = z.unknown()
+
+/**
+ * @description Payload Too Large
+ */
+export const chatsInitCreate413Schema = z.unknown()
+
+/**
+ * @description Unprocessable Entity
+ */
+export const chatsInitCreate422Schema = z.unknown()
+
+/**
+ * @description Too Many Requests
+ */
+export const chatsInitCreate429Schema = z.unknown()
+
+/**
+ * @description Internal Server Error
+ */
+export const chatsInitCreate500Schema = z.unknown()
+
+export const chatsInitCreateMutationResponseSchema = z.lazy(() => chatsInitCreate200Schema)
 
 export const chatsDeletePathParamsSchema = z.object({
   chatId: z.string().describe('Path parameter "chatId"'),
@@ -352,7 +399,7 @@ export const chatsDelete429Schema = z.unknown()
  */
 export const chatsDelete500Schema = z.unknown()
 
-export const chatsDeleteMutationResponseSchema = chatsDelete200Schema
+export const chatsDeleteMutationResponseSchema = z.lazy(() => chatsDelete200Schema)
 
 export const chatsGetByIdPathParamsSchema = z.object({
   chatId: z.string().describe('Path parameter "chatId"'),
@@ -403,7 +450,7 @@ export const chatsGetById429Schema = z.unknown()
  */
 export const chatsGetById500Schema = z.unknown()
 
-export const chatsGetByIdQueryResponseSchema = chatsGetById200Schema
+export const chatsGetByIdQueryResponseSchema = z.lazy(() => chatsGetById200Schema)
 
 export const chatsUpdatePathParamsSchema = z.object({
   chatId: z.string().describe('Path parameter "chatId"'),
@@ -454,7 +501,7 @@ export const chatsUpdate429Schema = z.unknown()
  */
 export const chatsUpdate500Schema = z.unknown()
 
-export const chatsUpdateMutationResponseSchema = chatsUpdate200Schema
+export const chatsUpdateMutationResponseSchema = z.lazy(() => chatsUpdate200Schema)
 
 export const chatsFavoritePathParamsSchema = z.object({
   chatId: z.string().describe('Path parameter "chatId"'),
@@ -505,7 +552,7 @@ export const chatsFavorite429Schema = z.unknown()
  */
 export const chatsFavorite500Schema = z.unknown()
 
-export const chatsFavoriteMutationResponseSchema = chatsFavorite200Schema
+export const chatsFavoriteMutationResponseSchema = z.lazy(() => chatsFavorite200Schema)
 
 export const chatsForkPathParamsSchema = z.object({
   chatId: z.string().describe('Path parameter "chatId"'),
@@ -556,7 +603,7 @@ export const chatsFork429Schema = z.unknown()
  */
 export const chatsFork500Schema = z.unknown()
 
-export const chatsForkMutationResponseSchema = chatsFork200Schema
+export const chatsForkMutationResponseSchema = z.lazy(() => chatsFork200Schema)
 
 export const projectsGetByChatIdPathParamsSchema = z.object({
   chatId: z.string().describe('Path parameter "chatId"'),
@@ -607,7 +654,7 @@ export const projectsGetByChatId429Schema = z.unknown()
  */
 export const projectsGetByChatId500Schema = z.unknown()
 
-export const projectsGetByChatIdQueryResponseSchema = projectsGetByChatId200Schema
+export const projectsGetByChatIdQueryResponseSchema = z.lazy(() => projectsGetByChatId200Schema)
 
 export const chatsSendMessagePathParamsSchema = z.object({
   chatId: z.string().describe('Path parameter "chatId"'),
@@ -658,7 +705,7 @@ export const chatsSendMessage429Schema = z.unknown()
  */
 export const chatsSendMessage500Schema = z.unknown()
 
-export const chatsSendMessageMutationResponseSchema = chatsSendMessage200Schema
+export const chatsSendMessageMutationResponseSchema = z.lazy(() => chatsSendMessage200Schema)
 
 export const chatsGetMetadataPathParamsSchema = z.object({
   chatId: z.string().describe('Path parameter "chatId"'),
@@ -709,7 +756,7 @@ export const chatsGetMetadata429Schema = z.unknown()
  */
 export const chatsGetMetadata500Schema = z.unknown()
 
-export const chatsGetMetadataQueryResponseSchema = chatsGetMetadata200Schema
+export const chatsGetMetadataQueryResponseSchema = z.lazy(() => chatsGetMetadata200Schema)
 
 export const chatsResumePathParamsSchema = z.object({
   chatId: z.string().describe('Path parameter "chatId"'),
@@ -761,7 +808,7 @@ export const chatsResume429Schema = z.unknown()
  */
 export const chatsResume500Schema = z.unknown()
 
-export const chatsResumeMutationResponseSchema = chatsResume200Schema
+export const chatsResumeMutationResponseSchema = z.lazy(() => chatsResume200Schema)
 
 export const deploymentsFindLogsPathParamsSchema = z.object({
   deploymentId: z.string().describe('Path parameter "deploymentId"'),
@@ -818,7 +865,7 @@ export const deploymentsFindLogs429Schema = z.unknown()
  */
 export const deploymentsFindLogs500Schema = z.unknown()
 
-export const deploymentsFindLogsQueryResponseSchema = deploymentsFindLogs200Schema
+export const deploymentsFindLogsQueryResponseSchema = z.lazy(() => deploymentsFindLogs200Schema)
 
 export const deploymentsFindErrorsPathParamsSchema = z.object({
   deploymentId: z.string().describe('Path parameter "deploymentId"'),
@@ -869,7 +916,7 @@ export const deploymentsFindErrors429Schema = z.unknown()
  */
 export const deploymentsFindErrors500Schema = z.unknown()
 
-export const deploymentsFindErrorsQueryResponseSchema = deploymentsFindErrors200Schema
+export const deploymentsFindErrorsQueryResponseSchema = z.lazy(() => deploymentsFindErrors200Schema)
 
 /**
  * @description Success
@@ -916,7 +963,7 @@ export const integrationsVercelProjectsFind429Schema = z.unknown()
  */
 export const integrationsVercelProjectsFind500Schema = z.unknown()
 
-export const integrationsVercelProjectsFindQueryResponseSchema = integrationsVercelProjectsFind200Schema
+export const integrationsVercelProjectsFindQueryResponseSchema = z.lazy(() => integrationsVercelProjectsFind200Schema)
 
 /**
  * @description Success
@@ -963,7 +1010,7 @@ export const integrationsVercelProjectsCreate429Schema = z.unknown()
  */
 export const integrationsVercelProjectsCreate500Schema = z.unknown()
 
-export const integrationsVercelProjectsCreateMutationResponseSchema = integrationsVercelProjectsCreate200Schema
+export const integrationsVercelProjectsCreateMutationResponseSchema = z.lazy(() => integrationsVercelProjectsCreate200Schema)
 
 /**
  * @description Success
@@ -1010,7 +1057,7 @@ export const projectsFind429Schema = z.unknown()
  */
 export const projectsFind500Schema = z.unknown()
 
-export const projectsFindQueryResponseSchema = projectsFind200Schema
+export const projectsFindQueryResponseSchema = z.lazy(() => projectsFind200Schema)
 
 /**
  * @description Success
@@ -1057,7 +1104,7 @@ export const projectsCreate429Schema = z.unknown()
  */
 export const projectsCreate500Schema = z.unknown()
 
-export const projectsCreateMutationResponseSchema = projectsCreate200Schema
+export const projectsCreateMutationResponseSchema = z.lazy(() => projectsCreate200Schema)
 
 export const projectsAssignPathParamsSchema = z.object({
   projectId: z.string().describe('Path parameter "projectId"'),
@@ -1108,7 +1155,7 @@ export const projectsAssign429Schema = z.unknown()
  */
 export const projectsAssign500Schema = z.unknown()
 
-export const projectsAssignMutationResponseSchema = projectsAssign200Schema
+export const projectsAssignMutationResponseSchema = z.lazy(() => projectsAssign200Schema)
 
 export const rateLimitsFindQueryParamsSchema = z
   .object({
@@ -1161,7 +1208,7 @@ export const rateLimitsFind429Schema = z.unknown()
  */
 export const rateLimitsFind500Schema = z.unknown()
 
-export const rateLimitsFindQueryResponseSchema = rateLimitsFind200Schema
+export const rateLimitsFindQueryResponseSchema = z.lazy(() => rateLimitsFind200Schema)
 
 /**
  * @description Success
@@ -1208,7 +1255,7 @@ export const userGet429Schema = z.unknown()
  */
 export const userGet500Schema = z.unknown()
 
-export const userGetQueryResponseSchema = userGet200Schema
+export const userGetQueryResponseSchema = z.lazy(() => userGet200Schema)
 
 export const userGetBillingQueryParamsSchema = z
   .object({
@@ -1261,7 +1308,7 @@ export const userGetBilling429Schema = z.unknown()
  */
 export const userGetBilling500Schema = z.unknown()
 
-export const userGetBillingQueryResponseSchema = userGetBilling200Schema
+export const userGetBillingQueryResponseSchema = z.lazy(() => userGetBilling200Schema)
 
 /**
  * @description Success
@@ -1308,7 +1355,7 @@ export const userGetPlan429Schema = z.unknown()
  */
 export const userGetPlan500Schema = z.unknown()
 
-export const userGetPlanQueryResponseSchema = userGetPlan200Schema
+export const userGetPlanQueryResponseSchema = z.lazy(() => userGetPlan200Schema)
 
 /**
  * @description Success
@@ -1355,4 +1402,4 @@ export const userGetScopes429Schema = z.unknown()
  */
 export const userGetScopes500Schema = z.unknown()
 
-export const userGetScopesQueryResponseSchema = userGetScopes200Schema
+export const userGetScopesQueryResponseSchema = z.lazy(() => userGetScopes200Schema)

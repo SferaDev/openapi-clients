@@ -57,8 +57,7 @@ export const baseConfig = {
             typed: false, // Workaround for https://github.com/kubb-labs/kubb/issues/1775
             dateType: 'date',
             unknownType: 'unknown',
-            importPath: 'zod',
-            version: '4'
+            version: '3'
         }),
         pluginMcp({
             output: {

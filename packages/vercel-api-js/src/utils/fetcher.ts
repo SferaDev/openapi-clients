@@ -1,8 +1,9 @@
 import { FetchImpl } from './fetch';
 import { compactObject } from './lang';
 
+const baseUrl = 'https://api.vercel.com';
+
 export type FetcherConfig = {
-  baseUrl?: string;
   token?: string | null;
   fetchImpl?: FetchImpl;
   headers?: Record<string, any>;
@@ -35,7 +36,6 @@ export async function client<
   queryParams,
   signal,
   token = null,
-  baseUrl = '',
   fetchImpl = fetch as FetchImpl
 }: FetcherOptions<TBody, THeaders, TQueryParams, TPathParams>): Promise<TData> {
   try {

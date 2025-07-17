@@ -707,6 +707,66 @@ export type ChatsFindQuery = {
   Errors: ChatsFind401 | ChatsFind403 | ChatsFind404 | ChatsFind409 | ChatsFind413 | ChatsFind422 | ChatsFind429 | ChatsFind500
 }
 
+/**
+ * @description Success
+ */
+export type ChatsInitCreate200 = unknown
+
+/**
+ * @description Unauthorized
+ */
+export type ChatsInitCreate401 = unknown
+
+/**
+ * @description Forbidden
+ */
+export type ChatsInitCreate403 = unknown
+
+/**
+ * @description Not Found
+ */
+export type ChatsInitCreate404 = unknown
+
+/**
+ * @description Conflict
+ */
+export type ChatsInitCreate409 = unknown
+
+/**
+ * @description Payload Too Large
+ */
+export type ChatsInitCreate413 = unknown
+
+/**
+ * @description Unprocessable Entity
+ */
+export type ChatsInitCreate422 = unknown
+
+/**
+ * @description Too Many Requests
+ */
+export type ChatsInitCreate429 = unknown
+
+/**
+ * @description Internal Server Error
+ */
+export type ChatsInitCreate500 = unknown
+
+export type ChatsInitCreateMutationResponse = ChatsInitCreate200
+
+export type ChatsInitCreateMutation = {
+  Response: ChatsInitCreate200
+  Errors:
+    | ChatsInitCreate401
+    | ChatsInitCreate403
+    | ChatsInitCreate404
+    | ChatsInitCreate409
+    | ChatsInitCreate413
+    | ChatsInitCreate422
+    | ChatsInitCreate429
+    | ChatsInitCreate500
+}
+
 export type ChatsDeletePathParams = {
   /**
    * @description Path parameter \"chatId\"

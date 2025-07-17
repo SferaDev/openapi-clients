@@ -3163,7 +3163,7 @@ export const readAccessGroup401Schema = z.unknown()
  */
 export const readAccessGroup403Schema = z.unknown()
 
-export const readAccessGroupQueryResponseSchema = readAccessGroup200Schema
+export const readAccessGroupQueryResponseSchema = z.lazy(() => readAccessGroup200Schema)
 
 export const updateAccessGroupPathParamsSchema = z.object({
   idOrName: z.string(),
@@ -3190,7 +3190,7 @@ export const updateAccessGroup401Schema = z.unknown()
  */
 export const updateAccessGroup403Schema = z.unknown()
 
-export const updateAccessGroupMutationResponseSchema = updateAccessGroup200Schema
+export const updateAccessGroupMutationResponseSchema = z.lazy(() => updateAccessGroup200Schema)
 
 export const deleteAccessGroupPathParamsSchema = z.object({
   idOrName: z.string(),
@@ -3217,7 +3217,7 @@ export const deleteAccessGroup401Schema = z.unknown()
  */
 export const deleteAccessGroup403Schema = z.unknown()
 
-export const deleteAccessGroupMutationResponseSchema = deleteAccessGroup200Schema
+export const deleteAccessGroupMutationResponseSchema = z.lazy(() => deleteAccessGroup200Schema)
 
 export const listAccessGroupMembersPathParamsSchema = z.object({
   idOrName: z.string().describe('The ID or name of the Access Group.'),
@@ -3247,7 +3247,7 @@ export const listAccessGroupMembers401Schema = z.unknown()
  */
 export const listAccessGroupMembers403Schema = z.unknown()
 
-export const listAccessGroupMembersQueryResponseSchema = listAccessGroupMembers200Schema
+export const listAccessGroupMembersQueryResponseSchema = z.lazy(() => listAccessGroupMembers200Schema)
 
 export const listAccessGroupsQueryParamsSchema = z
   .object({
@@ -3276,7 +3276,7 @@ export const listAccessGroups401Schema = z.unknown()
  */
 export const listAccessGroups403Schema = z.unknown()
 
-export const listAccessGroupsQueryResponseSchema = listAccessGroups200Schema
+export const listAccessGroupsQueryResponseSchema = z.lazy(() => listAccessGroups200Schema)
 
 export const createAccessGroupQueryParamsSchema = z
   .object({
@@ -3299,7 +3299,7 @@ export const createAccessGroup401Schema = z.unknown()
  */
 export const createAccessGroup403Schema = z.unknown()
 
-export const createAccessGroupMutationResponseSchema = createAccessGroup200Schema
+export const createAccessGroupMutationResponseSchema = z.lazy(() => createAccessGroup200Schema)
 
 export const listAccessGroupProjectsPathParamsSchema = z.object({
   idOrName: z.string().describe('The ID or name of the Access Group.'),
@@ -3328,7 +3328,7 @@ export const listAccessGroupProjects401Schema = z.unknown()
  */
 export const listAccessGroupProjects403Schema = z.unknown()
 
-export const listAccessGroupProjectsQueryResponseSchema = listAccessGroupProjects200Schema
+export const listAccessGroupProjectsQueryResponseSchema = z.lazy(() => listAccessGroupProjects200Schema)
 
 export const createAccessGroupProjectPathParamsSchema = z.object({
   accessGroupIdOrName: z.string(),
@@ -3355,7 +3355,7 @@ export const createAccessGroupProject401Schema = z.unknown()
  */
 export const createAccessGroupProject403Schema = z.unknown()
 
-export const createAccessGroupProjectMutationResponseSchema = createAccessGroupProject200Schema
+export const createAccessGroupProjectMutationResponseSchema = z.lazy(() => createAccessGroupProject200Schema)
 
 export const readAccessGroupProjectPathParamsSchema = z.object({
   accessGroupIdOrName: z.string(),
@@ -3383,7 +3383,7 @@ export const readAccessGroupProject401Schema = z.unknown()
  */
 export const readAccessGroupProject403Schema = z.unknown()
 
-export const readAccessGroupProjectQueryResponseSchema = readAccessGroupProject200Schema
+export const readAccessGroupProjectQueryResponseSchema = z.lazy(() => readAccessGroupProject200Schema)
 
 export const updateAccessGroupProjectPathParamsSchema = z.object({
   accessGroupIdOrName: z.string(),
@@ -3411,7 +3411,7 @@ export const updateAccessGroupProject401Schema = z.unknown()
  */
 export const updateAccessGroupProject403Schema = z.unknown()
 
-export const updateAccessGroupProjectMutationResponseSchema = updateAccessGroupProject200Schema
+export const updateAccessGroupProjectMutationResponseSchema = z.lazy(() => updateAccessGroupProject200Schema)
 
 export const deleteAccessGroupProjectPathParamsSchema = z.object({
   accessGroupIdOrName: z.string(),
@@ -3439,7 +3439,7 @@ export const deleteAccessGroupProject401Schema = z.unknown()
  */
 export const deleteAccessGroupProject403Schema = z.unknown()
 
-export const deleteAccessGroupProjectMutationResponseSchema = deleteAccessGroupProject200Schema
+export const deleteAccessGroupProjectMutationResponseSchema = z.lazy(() => deleteAccessGroupProject200Schema)
 
 export const recordEventsQueryParamsSchema = z
   .object({
@@ -3477,7 +3477,7 @@ export const recordEvents402Schema = z.unknown()
  */
 export const recordEvents403Schema = z.unknown()
 
-export const recordEventsMutationResponseSchema = recordEvents200Schema
+export const recordEventsMutationResponseSchema = z.lazy(() => recordEvents200Schema)
 
 export const statusQueryParamsSchema = z
   .object({
@@ -3502,7 +3502,7 @@ export const status402Schema = z.unknown()
  */
 export const status403Schema = z.unknown()
 
-export const statusQueryResponseSchema = status200Schema
+export const statusQueryResponseSchema = z.lazy(() => status200Schema)
 
 export const uploadArtifactPathParamsSchema = z.object({
   hash: z.string().describe('The artifact hash'),
@@ -3549,7 +3549,7 @@ export const uploadArtifact402Schema = z.unknown()
  */
 export const uploadArtifact403Schema = z.unknown()
 
-export const uploadArtifactMutationResponseSchema = uploadArtifact202Schema
+export const uploadArtifactMutationResponseSchema = z.lazy(() => uploadArtifact202Schema)
 
 export const downloadArtifactPathParamsSchema = z.object({
   hash: z.string().describe('The artifact hash'),
@@ -3596,7 +3596,7 @@ export const downloadArtifact403Schema = z.unknown()
  */
 export const downloadArtifact404Schema = z.unknown()
 
-export const downloadArtifactQueryResponseSchema = downloadArtifact200Schema
+export const downloadArtifactQueryResponseSchema = z.lazy(() => downloadArtifact200Schema)
 
 export const artifactQueryQueryParamsSchema = z
   .object({
@@ -3624,7 +3624,7 @@ export const artifactQuery402Schema = z.unknown()
  */
 export const artifactQuery403Schema = z.unknown()
 
-export const artifactQueryMutationResponseSchema = artifactQuery200Schema
+export const artifactQueryMutationResponseSchema = z.lazy(() => artifactQuery200Schema)
 
 export const createCheckPathParamsSchema = z.object({
   deploymentId: z.string().describe('The deployment to create the check for.'),
@@ -3656,7 +3656,7 @@ export const createCheck403Schema = z.unknown()
  */
 export const createCheck404Schema = z.unknown()
 
-export const createCheckMutationResponseSchema = createCheck200Schema
+export const createCheckMutationResponseSchema = z.lazy(() => createCheck200Schema)
 
 export const getAllChecksPathParamsSchema = z.object({
   deploymentId: z.string().describe('The deployment to get all checks for'),
@@ -3688,7 +3688,7 @@ export const getAllChecks403Schema = z.unknown()
  */
 export const getAllChecks404Schema = z.unknown()
 
-export const getAllChecksQueryResponseSchema = getAllChecks200Schema
+export const getAllChecksQueryResponseSchema = z.lazy(() => getAllChecks200Schema)
 
 export const getCheckPathParamsSchema = z.object({
   deploymentId: z.string().describe('The deployment to get the check for.'),
@@ -3721,7 +3721,7 @@ export const getCheck403Schema = z.unknown()
  */
 export const getCheck404Schema = z.unknown()
 
-export const getCheckQueryResponseSchema = getCheck200Schema
+export const getCheckQueryResponseSchema = z.lazy(() => getCheck200Schema)
 
 export const updateCheckPathParamsSchema = z.object({
   deploymentId: z.string().describe('The deployment to update the check for.'),
@@ -3759,7 +3759,7 @@ export const updateCheck404Schema = z.unknown()
  */
 export const updateCheck413Schema = z.unknown()
 
-export const updateCheckMutationResponseSchema = updateCheck200Schema
+export const updateCheckMutationResponseSchema = z.lazy(() => updateCheck200Schema)
 
 export const rerequestCheckPathParamsSchema = z.object({
   deploymentId: z.string().describe('The deployment to rerun the check for.'),
@@ -3792,7 +3792,7 @@ export const rerequestCheck403Schema = z.unknown()
  */
 export const rerequestCheck404Schema = z.unknown()
 
-export const rerequestCheckMutationResponseSchema = rerequestCheck200Schema
+export const rerequestCheckMutationResponseSchema = z.lazy(() => rerequestCheck200Schema)
 
 export const purgeAllDataCacheQueryParamsSchema = z.object({
   projectIdOrName: z.string(),
@@ -3814,7 +3814,7 @@ export const purgeAllDataCache403Schema = z.unknown()
 
 export const purgeAllDataCache404Schema = z.unknown()
 
-export const purgeAllDataCacheMutationResponseSchema = purgeAllDataCache200Schema
+export const purgeAllDataCacheMutationResponseSchema = z.lazy(() => purgeAllDataCache200Schema)
 
 export const updateDataCacheBillingSettings200Schema = z.unknown()
 
@@ -3832,7 +3832,7 @@ export const updateDataCacheBillingSettings403Schema = z.unknown()
 
 export const updateDataCacheBillingSettings404Schema = z.unknown()
 
-export const updateDataCacheBillingSettingsMutationResponseSchema = updateDataCacheBillingSettings200Schema
+export const updateDataCacheBillingSettingsMutationResponseSchema = z.lazy(() => updateDataCacheBillingSettings200Schema)
 
 export const updateProjectDataCachePathParamsSchema = z.object({
   projectId: z.string().describe('The unique project identifier'),
@@ -3861,7 +3861,7 @@ export const updateProjectDataCache403Schema = z.unknown()
 
 export const updateProjectDataCache404Schema = z.unknown()
 
-export const updateProjectDataCacheMutationResponseSchema = updateProjectDataCache200Schema
+export const updateProjectDataCacheMutationResponseSchema = z.lazy(() => updateProjectDataCache200Schema)
 
 export const getDeploymentEventsPathParamsSchema = z.object({
   idOrUrl: z.string().describe('The unique identifier or hostname of the deployment.'),
@@ -3900,7 +3900,7 @@ export const getDeploymentEvents403Schema = z.unknown()
 
 export const getDeploymentEvents500Schema = z.unknown()
 
-export const getDeploymentEventsQueryResponseSchema = getDeploymentEvents200Schema
+export const getDeploymentEventsQueryResponseSchema = z.lazy(() => getDeploymentEvents200Schema)
 
 export const updateIntegrationDeploymentActionPathParamsSchema = z.object({
   deploymentId: z.string(),
@@ -3923,7 +3923,7 @@ export const updateIntegrationDeploymentAction401Schema = z.unknown()
  */
 export const updateIntegrationDeploymentAction403Schema = z.unknown()
 
-export const updateIntegrationDeploymentActionMutationResponseSchema = updateIntegrationDeploymentAction202Schema
+export const updateIntegrationDeploymentActionMutationResponseSchema = z.lazy(() => updateIntegrationDeploymentAction202Schema)
 
 export const getDeploymentPathParamsSchema = z.object({
   idOrUrl: z.string().describe('The unique identifier or hostname of the deployment.'),
@@ -3957,7 +3957,7 @@ export const getDeployment403Schema = z.unknown()
  */
 export const getDeployment404Schema = z.unknown()
 
-export const getDeploymentQueryResponseSchema = getDeployment200Schema
+export const getDeploymentQueryResponseSchema = z.lazy(() => getDeployment200Schema)
 
 export const createDeploymentQueryParamsSchema = z
   .object({
@@ -4002,7 +4002,7 @@ export const createDeployment409Schema = z.unknown()
 
 export const createDeployment500Schema = z.unknown()
 
-export const createDeploymentMutationResponseSchema = createDeployment200Schema
+export const createDeploymentMutationResponseSchema = z.lazy(() => createDeployment200Schema)
 
 export const cancelDeploymentPathParamsSchema = z.object({
   id: z.string().describe('The unique identifier of the deployment.'),
@@ -4031,7 +4031,7 @@ export const cancelDeployment403Schema = z.unknown()
 
 export const cancelDeployment404Schema = z.unknown()
 
-export const cancelDeploymentMutationResponseSchema = cancelDeployment200Schema
+export const cancelDeploymentMutationResponseSchema = z.lazy(() => cancelDeployment200Schema)
 
 export const buyDomainQueryParamsSchema = z
   .object({
@@ -4060,7 +4060,7 @@ export const buyDomain409Schema = z.unknown()
 
 export const buyDomain429Schema = z.unknown()
 
-export const buyDomainMutationResponseSchema = z.union([buyDomain201Schema, buyDomain202Schema])
+export const buyDomainMutationResponseSchema = z.union([z.lazy(() => buyDomain201Schema), z.lazy(() => buyDomain202Schema)])
 
 export const checkDomainPriceQueryParamsSchema = z.object({
   name: z.string().describe('The name of the domain for which the price needs to be checked.'),
@@ -4086,7 +4086,7 @@ export const checkDomainPrice401Schema = z.unknown()
  */
 export const checkDomainPrice403Schema = z.unknown()
 
-export const checkDomainPriceQueryResponseSchema = checkDomainPrice200Schema
+export const checkDomainPriceQueryResponseSchema = z.lazy(() => checkDomainPrice200Schema)
 
 export const checkDomainStatusQueryParamsSchema = z.object({
   name: z.string().describe('The name of the domain for which we would like to check the status.'),
@@ -4115,7 +4115,7 @@ export const checkDomainStatus408Schema = z.unknown()
 
 export const checkDomainStatus500Schema = z.unknown()
 
-export const checkDomainStatusQueryResponseSchema = checkDomainStatus200Schema
+export const checkDomainStatusQueryResponseSchema = z.lazy(() => checkDomainStatus200Schema)
 
 export const getRecordsPathParamsSchema = z.object({
   domain: z.string(),
@@ -4150,7 +4150,7 @@ export const getRecords403Schema = z.unknown()
 
 export const getRecords404Schema = z.unknown()
 
-export const getRecordsQueryResponseSchema = getRecords200Schema
+export const getRecordsQueryResponseSchema = z.lazy(() => getRecords200Schema)
 
 export const createRecordPathParamsSchema = z.object({
   domain: z.string().describe('The domain used to create the DNS record.'),
@@ -4189,7 +4189,7 @@ export const createRecord404Schema = z.unknown()
 
 export const createRecord409Schema = z.unknown()
 
-export const createRecordMutationResponseSchema = createRecord200Schema
+export const createRecordMutationResponseSchema = z.lazy(() => createRecord200Schema)
 
 export const updateRecordPathParamsSchema = z.object({
   recordId: z.string().describe('The id of the DNS record'),
@@ -4225,7 +4225,7 @@ export const updateRecord404Schema = z.unknown()
 
 export const updateRecord409Schema = z.unknown()
 
-export const updateRecordMutationResponseSchema = updateRecord200Schema
+export const updateRecordMutationResponseSchema = z.lazy(() => updateRecord200Schema)
 
 export const removeRecordPathParamsSchema = z.object({
   domain: z.string(),
@@ -4258,7 +4258,7 @@ export const removeRecord403Schema = z.unknown()
 
 export const removeRecord404Schema = z.unknown()
 
-export const removeRecordMutationResponseSchema = removeRecord200Schema
+export const removeRecordMutationResponseSchema = z.lazy(() => removeRecord200Schema)
 
 export const getDomainTransferPathParamsSchema = z.object({
   domain: z.string(),
@@ -4282,7 +4282,7 @@ export const getDomainTransfer401Schema = z.unknown()
  */
 export const getDomainTransfer403Schema = z.unknown()
 
-export const getDomainTransferQueryResponseSchema = getDomainTransfer200Schema
+export const getDomainTransferQueryResponseSchema = z.lazy(() => getDomainTransfer200Schema)
 
 export const getDomainConfigPathParamsSchema = z.object({
   domain: z.string().describe('The name of the domain.'),
@@ -4317,7 +4317,7 @@ export const getDomainConfig403Schema = z.unknown()
 
 export const getDomainConfig500Schema = z.unknown()
 
-export const getDomainConfigQueryResponseSchema = getDomainConfig200Schema
+export const getDomainConfigQueryResponseSchema = z.lazy(() => getDomainConfig200Schema)
 
 export const getDomainPathParamsSchema = z.object({
   domain: z.string().describe('The name of the domain.'),
@@ -4349,7 +4349,7 @@ export const getDomain403Schema = z.unknown()
 
 export const getDomain404Schema = z.unknown()
 
-export const getDomainQueryResponseSchema = getDomain200Schema
+export const getDomainQueryResponseSchema = z.lazy(() => getDomain200Schema)
 
 export const getDomainsQueryParamsSchema = z
   .object({
@@ -4380,7 +4380,7 @@ export const getDomains403Schema = z.unknown()
 
 export const getDomains409Schema = z.unknown()
 
-export const getDomainsQueryResponseSchema = getDomains200Schema
+export const getDomainsQueryResponseSchema = z.lazy(() => getDomains200Schema)
 
 export const createOrTransferDomainQueryParamsSchema = z
   .object({
@@ -4417,7 +4417,7 @@ export const createOrTransferDomain409Schema = z.unknown()
 
 export const createOrTransferDomain500Schema = z.unknown()
 
-export const createOrTransferDomainMutationResponseSchema = createOrTransferDomain200Schema
+export const createOrTransferDomainMutationResponseSchema = z.lazy(() => createOrTransferDomain200Schema)
 
 export const patchDomainPathParamsSchema = z.object({
   domain: z.string(),
@@ -4448,7 +4448,7 @@ export const patchDomain404Schema = z.unknown()
 
 export const patchDomain409Schema = z.unknown()
 
-export const patchDomainMutationResponseSchema = patchDomain200Schema
+export const patchDomainMutationResponseSchema = z.lazy(() => patchDomain200Schema)
 
 export const deleteDomainPathParamsSchema = z.object({
   domain: z.string().describe('The name of the domain.'),
@@ -4482,7 +4482,7 @@ export const deleteDomain404Schema = z.unknown()
 
 export const deleteDomain409Schema = z.unknown()
 
-export const deleteDomainMutationResponseSchema = deleteDomain200Schema
+export const deleteDomainMutationResponseSchema = z.lazy(() => deleteDomain200Schema)
 
 export const getEdgeConfigsQueryParamsSchema = z
   .object({
@@ -4508,7 +4508,7 @@ export const getEdgeConfigs401Schema = z.unknown()
  */
 export const getEdgeConfigs403Schema = z.unknown()
 
-export const getEdgeConfigsQueryResponseSchema = getEdgeConfigs200Schema
+export const getEdgeConfigsQueryResponseSchema = z.lazy(() => getEdgeConfigs200Schema)
 
 export const createEdgeConfigQueryParamsSchema = z
   .object({
@@ -4536,7 +4536,7 @@ export const createEdgeConfig402Schema = z.unknown()
  */
 export const createEdgeConfig403Schema = z.unknown()
 
-export const createEdgeConfigMutationResponseSchema = createEdgeConfig201Schema
+export const createEdgeConfigMutationResponseSchema = z.lazy(() => createEdgeConfig201Schema)
 
 export const getEdgeConfigPathParamsSchema = z.object({
   edgeConfigId: z.string(),
@@ -4568,7 +4568,7 @@ export const getEdgeConfig403Schema = z.unknown()
 
 export const getEdgeConfig404Schema = z.unknown()
 
-export const getEdgeConfigQueryResponseSchema = getEdgeConfig200Schema
+export const getEdgeConfigQueryResponseSchema = z.lazy(() => getEdgeConfig200Schema)
 
 export const updateEdgeConfigPathParamsSchema = z.object({
   edgeConfigId: z.string(),
@@ -4602,7 +4602,7 @@ export const updateEdgeConfig403Schema = z.unknown()
 
 export const updateEdgeConfig404Schema = z.unknown()
 
-export const updateEdgeConfigMutationResponseSchema = updateEdgeConfig200Schema
+export const updateEdgeConfigMutationResponseSchema = z.lazy(() => updateEdgeConfig200Schema)
 
 export const deleteEdgeConfigPathParamsSchema = z.object({
   edgeConfigId: z.string(),
@@ -4631,7 +4631,7 @@ export const deleteEdgeConfig403Schema = z.unknown()
 
 export const deleteEdgeConfig404Schema = z.unknown()
 
-export const deleteEdgeConfigMutationResponseSchema = deleteEdgeConfig204Schema
+export const deleteEdgeConfigMutationResponseSchema = z.lazy(() => deleteEdgeConfig204Schema)
 
 export const getEdgeConfigItemsPathParamsSchema = z.object({
   edgeConfigId: z.string().regex(/^ecfg_/),
@@ -4663,7 +4663,7 @@ export const getEdgeConfigItems403Schema = z.unknown()
 
 export const getEdgeConfigItems404Schema = z.unknown()
 
-export const getEdgeConfigItemsQueryResponseSchema = getEdgeConfigItems200Schema
+export const getEdgeConfigItemsQueryResponseSchema = z.lazy(() => getEdgeConfigItems200Schema)
 
 export const patchEdgeConfigItemsPathParamsSchema = z.object({
   edgeConfigId: z.string().regex(/^ecfg_/),
@@ -4700,7 +4700,7 @@ export const patchEdgeConfigItems404Schema = z.unknown()
 
 export const patchEdgeConfigItems409Schema = z.unknown()
 
-export const patchEdgeConfigItemsMutationResponseSchema = patchEdgeConfigItems200Schema
+export const patchEdgeConfigItemsMutationResponseSchema = z.lazy(() => patchEdgeConfigItems200Schema)
 
 export const getEdgeConfigSchemaPathParamsSchema = z.object({
   edgeConfigId: z.string(),
@@ -4732,7 +4732,7 @@ export const getEdgeConfigSchema403Schema = z.unknown()
 
 export const getEdgeConfigSchema404Schema = z.unknown()
 
-export const getEdgeConfigSchemaQueryResponseSchema = getEdgeConfigSchema200Schema
+export const getEdgeConfigSchemaQueryResponseSchema = z.lazy(() => getEdgeConfigSchema200Schema)
 
 export const patchEdgeConfigSchemaPathParamsSchema = z.object({
   edgeConfigId: z.string(),
@@ -4767,7 +4767,7 @@ export const patchEdgeConfigSchema403Schema = z.unknown()
 
 export const patchEdgeConfigSchema404Schema = z.unknown()
 
-export const patchEdgeConfigSchemaMutationResponseSchema = patchEdgeConfigSchema200Schema
+export const patchEdgeConfigSchemaMutationResponseSchema = z.lazy(() => patchEdgeConfigSchema200Schema)
 
 export const deleteEdgeConfigSchemaPathParamsSchema = z.object({
   edgeConfigId: z.string(),
@@ -4801,7 +4801,7 @@ export const deleteEdgeConfigSchema403Schema = z.unknown()
 
 export const deleteEdgeConfigSchema404Schema = z.unknown()
 
-export const deleteEdgeConfigSchemaMutationResponseSchema = deleteEdgeConfigSchema204Schema
+export const deleteEdgeConfigSchemaMutationResponseSchema = z.lazy(() => deleteEdgeConfigSchema204Schema)
 
 export const getEdgeConfigItemPathParamsSchema = z.object({
   edgeConfigId: z.string().regex(/^ecfg_/),
@@ -4834,7 +4834,7 @@ export const getEdgeConfigItem403Schema = z.unknown()
 
 export const getEdgeConfigItem404Schema = z.unknown()
 
-export const getEdgeConfigItemQueryResponseSchema = getEdgeConfigItem200Schema
+export const getEdgeConfigItemQueryResponseSchema = z.lazy(() => getEdgeConfigItem200Schema)
 
 export const getEdgeConfigTokensPathParamsSchema = z.object({
   edgeConfigId: z.string(),
@@ -4866,7 +4866,7 @@ export const getEdgeConfigTokens403Schema = z.unknown()
 
 export const getEdgeConfigTokens404Schema = z.unknown()
 
-export const getEdgeConfigTokensQueryResponseSchema = getEdgeConfigTokens200Schema
+export const getEdgeConfigTokensQueryResponseSchema = z.lazy(() => getEdgeConfigTokens200Schema)
 
 export const deleteEdgeConfigTokensPathParamsSchema = z.object({
   edgeConfigId: z.string(),
@@ -4900,7 +4900,7 @@ export const deleteEdgeConfigTokens403Schema = z.unknown()
 
 export const deleteEdgeConfigTokens404Schema = z.unknown()
 
-export const deleteEdgeConfigTokensMutationResponseSchema = deleteEdgeConfigTokens204Schema
+export const deleteEdgeConfigTokensMutationResponseSchema = z.lazy(() => deleteEdgeConfigTokens204Schema)
 
 export const getEdgeConfigTokenPathParamsSchema = z.object({
   edgeConfigId: z.string(),
@@ -4933,7 +4933,7 @@ export const getEdgeConfigToken403Schema = z.unknown()
 
 export const getEdgeConfigToken404Schema = z.unknown()
 
-export const getEdgeConfigTokenQueryResponseSchema = getEdgeConfigToken200Schema
+export const getEdgeConfigTokenQueryResponseSchema = z.lazy(() => getEdgeConfigToken200Schema)
 
 export const createEdgeConfigTokenPathParamsSchema = z.object({
   edgeConfigId: z.string(),
@@ -4967,7 +4967,7 @@ export const createEdgeConfigToken403Schema = z.unknown()
 
 export const createEdgeConfigToken404Schema = z.unknown()
 
-export const createEdgeConfigTokenMutationResponseSchema = createEdgeConfigToken201Schema
+export const createEdgeConfigTokenMutationResponseSchema = z.lazy(() => createEdgeConfigToken201Schema)
 
 export const getEdgeConfigBackupPathParamsSchema = z.object({
   edgeConfigId: z.string(),
@@ -4997,7 +4997,7 @@ export const getEdgeConfigBackup403Schema = z.unknown()
 
 export const getEdgeConfigBackup404Schema = z.unknown()
 
-export const getEdgeConfigBackupQueryResponseSchema = getEdgeConfigBackup200Schema
+export const getEdgeConfigBackupQueryResponseSchema = z.lazy(() => getEdgeConfigBackup200Schema)
 
 export const getEdgeConfigBackupsPathParamsSchema = z.object({
   edgeConfigId: z.string(),
@@ -5029,7 +5029,7 @@ export const getEdgeConfigBackups403Schema = z.unknown()
 
 export const getEdgeConfigBackups404Schema = z.unknown()
 
-export const getEdgeConfigBackupsQueryResponseSchema = getEdgeConfigBackups200Schema
+export const getEdgeConfigBackupsQueryResponseSchema = z.lazy(() => getEdgeConfigBackups200Schema)
 
 export const listUserEventsQueryParamsSchema = z
   .object({
@@ -5066,7 +5066,7 @@ export const listUserEvents401Schema = z.unknown()
  */
 export const listUserEvents403Schema = z.unknown()
 
-export const listUserEventsQueryResponseSchema = listUserEvents200Schema
+export const listUserEventsQueryResponseSchema = z.lazy(() => listUserEvents200Schema)
 
 export const getAccountInfoPathParamsSchema = z.object({
   integrationConfigurationId: z.string(),
@@ -5088,7 +5088,7 @@ export const getAccountInfo403Schema = z.unknown()
 
 export const getAccountInfo404Schema = z.unknown()
 
-export const getAccountInfoQueryResponseSchema = getAccountInfo200Schema
+export const getAccountInfoQueryResponseSchema = z.lazy(() => getAccountInfo200Schema)
 
 export const getMemberPathParamsSchema = z.object({
   integrationConfigurationId: z.string(),
@@ -5111,7 +5111,7 @@ export const getMember403Schema = z.unknown()
 
 export const getMember404Schema = z.unknown()
 
-export const getMemberQueryResponseSchema = getMember200Schema
+export const getMemberQueryResponseSchema = z.lazy(() => getMember200Schema)
 
 export const createEventPathParamsSchema = z.object({
   integrationConfigurationId: z.string(),
@@ -5133,7 +5133,7 @@ export const createEvent403Schema = z.unknown()
 
 export const createEvent404Schema = z.unknown()
 
-export const createEventMutationResponseSchema = createEvent201Schema
+export const createEventMutationResponseSchema = z.lazy(() => createEvent201Schema)
 
 export const getIntegrationResourcesPathParamsSchema = z.object({
   integrationConfigurationId: z.string(),
@@ -5155,7 +5155,7 @@ export const getIntegrationResources403Schema = z.unknown()
 
 export const getIntegrationResources404Schema = z.unknown()
 
-export const getIntegrationResourcesQueryResponseSchema = getIntegrationResources200Schema
+export const getIntegrationResourcesQueryResponseSchema = z.lazy(() => getIntegrationResources200Schema)
 
 export const getIntegrationResourcePathParamsSchema = z.object({
   integrationConfigurationId: z.string().describe('The ID of the integration configuration (installation) the resource belongs to'),
@@ -5178,7 +5178,7 @@ export const getIntegrationResource403Schema = z.unknown()
 
 export const getIntegrationResource404Schema = z.unknown()
 
-export const getIntegrationResourceQueryResponseSchema = getIntegrationResource200Schema
+export const getIntegrationResourceQueryResponseSchema = z.lazy(() => getIntegrationResource200Schema)
 
 export const deleteIntegrationResourcePathParamsSchema = z.object({
   integrationConfigurationId: z.string(),
@@ -5201,7 +5201,7 @@ export const deleteIntegrationResource403Schema = z.unknown()
 
 export const deleteIntegrationResource404Schema = z.unknown()
 
-export const deleteIntegrationResourceMutationResponseSchema = deleteIntegrationResource204Schema
+export const deleteIntegrationResourceMutationResponseSchema = z.lazy(() => deleteIntegrationResource204Schema)
 
 export const importResourcePathParamsSchema = z.object({
   integrationConfigurationId: z.string(),
@@ -5224,7 +5224,7 @@ export const importResource403Schema = z.unknown()
 
 export const importResource404Schema = z.unknown()
 
-export const importResourceMutationResponseSchema = importResource200Schema
+export const importResourceMutationResponseSchema = z.lazy(() => importResource200Schema)
 
 export const submitBillingDataPathParamsSchema = z.object({
   integrationConfigurationId: z.string(),
@@ -5246,7 +5246,7 @@ export const submitBillingData403Schema = z.unknown()
 
 export const submitBillingData404Schema = z.unknown()
 
-export const submitBillingDataMutationResponseSchema = submitBillingData201Schema
+export const submitBillingDataMutationResponseSchema = z.lazy(() => submitBillingData201Schema)
 
 export const submitInvoicePathParamsSchema = z.object({
   integrationConfigurationId: z.string(),
@@ -5268,7 +5268,7 @@ export const submitInvoice403Schema = z.unknown()
 
 export const submitInvoice404Schema = z.unknown()
 
-export const submitInvoiceMutationResponseSchema = submitInvoice200Schema
+export const submitInvoiceMutationResponseSchema = z.lazy(() => submitInvoice200Schema)
 
 export const getInvoicePathParamsSchema = z.object({
   integrationConfigurationId: z.string(),
@@ -5291,7 +5291,7 @@ export const getInvoice403Schema = z.unknown()
 
 export const getInvoice404Schema = z.unknown()
 
-export const getInvoiceQueryResponseSchema = getInvoice200Schema
+export const getInvoiceQueryResponseSchema = z.lazy(() => getInvoice200Schema)
 
 export const updateInvoicePathParamsSchema = z.object({
   integrationConfigurationId: z.string(),
@@ -5314,7 +5314,7 @@ export const updateInvoice403Schema = z.unknown()
 
 export const updateInvoice404Schema = z.unknown()
 
-export const updateInvoiceMutationResponseSchema = updateInvoice204Schema
+export const updateInvoiceMutationResponseSchema = z.lazy(() => updateInvoice204Schema)
 
 export const submitPrepaymentBalancesPathParamsSchema = z.object({
   integrationConfigurationId: z.string(),
@@ -5336,7 +5336,7 @@ export const submitPrepaymentBalances403Schema = z.unknown()
 
 export const submitPrepaymentBalances404Schema = z.unknown()
 
-export const submitPrepaymentBalancesMutationResponseSchema = submitPrepaymentBalances201Schema
+export const submitPrepaymentBalancesMutationResponseSchema = z.lazy(() => submitPrepaymentBalances201Schema)
 
 export const updateResourceSecretsPathParamsSchema = z.object({
   integrationConfigurationId: z.string(),
@@ -5360,7 +5360,7 @@ export const updateResourceSecrets403Schema = z.unknown()
 
 export const updateResourceSecrets404Schema = z.unknown()
 
-export const updateResourceSecretsMutationResponseSchema = updateResourceSecrets201Schema
+export const updateResourceSecretsMutationResponseSchema = z.lazy(() => updateResourceSecrets201Schema)
 
 export const updateResourceSecretsByIdPathParamsSchema = z.object({
   integrationConfigurationId: z.string(),
@@ -5385,7 +5385,7 @@ export const updateResourceSecretsById404Schema = z.unknown()
 
 export const updateResourceSecretsById422Schema = z.unknown()
 
-export const updateResourceSecretsByIdMutationResponseSchema = updateResourceSecretsById201Schema
+export const updateResourceSecretsByIdMutationResponseSchema = z.lazy(() => updateResourceSecretsById201Schema)
 
 export const getConfigurationsQueryParamsSchema = z.object({
   view: z.enum(['account', 'project']),
@@ -5412,7 +5412,7 @@ export const getConfigurations401Schema = z.unknown()
  */
 export const getConfigurations403Schema = z.unknown()
 
-export const getConfigurationsQueryResponseSchema = getConfigurations200Schema
+export const getConfigurationsQueryResponseSchema = z.lazy(() => getConfigurations200Schema)
 
 export const getConfigurationPathParamsSchema = z.object({
   id: z.string().describe('ID of the configuration to check'),
@@ -5447,7 +5447,7 @@ export const getConfiguration403Schema = z.unknown()
  */
 export const getConfiguration404Schema = z.unknown()
 
-export const getConfigurationQueryResponseSchema = getConfiguration200Schema
+export const getConfigurationQueryResponseSchema = z.lazy(() => getConfiguration200Schema)
 
 export const deleteConfigurationPathParamsSchema = z.object({
   id: z.string(),
@@ -5482,7 +5482,7 @@ export const deleteConfiguration403Schema = z.unknown()
  */
 export const deleteConfiguration404Schema = z.unknown()
 
-export const deleteConfigurationMutationResponseSchema = deleteConfiguration204Schema
+export const deleteConfigurationMutationResponseSchema = z.lazy(() => deleteConfiguration204Schema)
 
 export const exchangeSsoToken200Schema = z.unknown()
 
@@ -5495,7 +5495,7 @@ export const exchangeSsoToken404Schema = z.unknown()
 
 export const exchangeSsoToken500Schema = z.unknown()
 
-export const exchangeSsoTokenMutationResponseSchema = exchangeSsoToken200Schema
+export const exchangeSsoTokenMutationResponseSchema = z.lazy(() => exchangeSsoToken200Schema)
 
 export const getIntegrationLogDrainsQueryParamsSchema = z
   .object({
@@ -5518,7 +5518,7 @@ export const getIntegrationLogDrains401Schema = z.unknown()
  */
 export const getIntegrationLogDrains403Schema = z.unknown()
 
-export const getIntegrationLogDrainsQueryResponseSchema = getIntegrationLogDrains200Schema
+export const getIntegrationLogDrainsQueryResponseSchema = z.lazy(() => getIntegrationLogDrains200Schema)
 
 export const createLogDrainQueryParamsSchema = z
   .object({
@@ -5544,7 +5544,7 @@ export const createLogDrain401Schema = z.unknown()
  */
 export const createLogDrain403Schema = z.unknown()
 
-export const createLogDrainMutationResponseSchema = createLogDrain200Schema
+export const createLogDrainMutationResponseSchema = z.lazy(() => createLogDrain200Schema)
 
 export const deleteIntegrationLogDrainPathParamsSchema = z.object({
   id: z.string().describe('ID of the log drain to be deleted'),
@@ -5579,7 +5579,7 @@ export const deleteIntegrationLogDrain403Schema = z.unknown()
  */
 export const deleteIntegrationLogDrain404Schema = z.unknown()
 
-export const deleteIntegrationLogDrainMutationResponseSchema = deleteIntegrationLogDrain204Schema
+export const deleteIntegrationLogDrainMutationResponseSchema = z.lazy(() => deleteIntegrationLogDrain204Schema)
 
 export const getRuntimeLogsPathParamsSchema = z.object({
   projectId: z.string(),
@@ -5607,7 +5607,7 @@ export const getRuntimeLogs401Schema = z.unknown()
  */
 export const getRuntimeLogs403Schema = z.unknown()
 
-export const getRuntimeLogsQueryResponseSchema = getRuntimeLogs200Schema
+export const getRuntimeLogsQueryResponseSchema = z.lazy(() => getRuntimeLogs200Schema)
 
 export const createExperimentationItemPathParamsSchema = z.object({
   integrationConfigurationId: z.string(),
@@ -5633,7 +5633,7 @@ export const createExperimentationItem403Schema = z.unknown()
 
 export const createExperimentationItem404Schema = z.unknown()
 
-export const createExperimentationItemMutationResponseSchema = createExperimentationItem204Schema
+export const createExperimentationItemMutationResponseSchema = z.lazy(() => createExperimentationItem204Schema)
 
 export const updateExperimentationItemPathParamsSchema = z.object({
   integrationConfigurationId: z.string(),
@@ -5660,7 +5660,7 @@ export const updateExperimentationItem403Schema = z.unknown()
 
 export const updateExperimentationItem404Schema = z.unknown()
 
-export const updateExperimentationItemMutationResponseSchema = updateExperimentationItem204Schema
+export const updateExperimentationItemMutationResponseSchema = z.lazy(() => updateExperimentationItem204Schema)
 
 export const deleteExperimentationItemPathParamsSchema = z.object({
   integrationConfigurationId: z.string(),
@@ -5687,7 +5687,7 @@ export const deleteExperimentationItem403Schema = z.unknown()
 
 export const deleteExperimentationItem404Schema = z.unknown()
 
-export const deleteExperimentationItemMutationResponseSchema = deleteExperimentationItem204Schema
+export const deleteExperimentationItemMutationResponseSchema = z.lazy(() => deleteExperimentationItem204Schema)
 
 export const updateExperimentationEdgeConfigPathParamsSchema = z.object({
   integrationConfigurationId: z.string(),
@@ -5715,7 +5715,7 @@ export const updateExperimentationEdgeConfig404Schema = z.unknown()
 
 export const updateExperimentationEdgeConfig412Schema = z.unknown()
 
-export const updateExperimentationEdgeConfigMutationResponseSchema = updateExperimentationEdgeConfig200Schema
+export const updateExperimentationEdgeConfigMutationResponseSchema = z.lazy(() => updateExperimentationEdgeConfig200Schema)
 
 export const getProjectMembersPathParamsSchema = z.object({
   idOrName: z.string().describe('The ID or name of the Project.'),
@@ -5749,7 +5749,7 @@ export const getProjectMembers401Schema = z.unknown()
  */
 export const getProjectMembers403Schema = z.unknown()
 
-export const getProjectMembersQueryResponseSchema = getProjectMembers200Schema
+export const getProjectMembersQueryResponseSchema = z.lazy(() => getProjectMembers200Schema)
 
 export const addProjectMemberPathParamsSchema = z.object({
   idOrName: z.string().describe('The ID or name of the Project.'),
@@ -5781,7 +5781,7 @@ export const addProjectMember403Schema = z.unknown()
 
 export const addProjectMember500Schema = z.unknown()
 
-export const addProjectMemberMutationResponseSchema = addProjectMember200Schema
+export const addProjectMemberMutationResponseSchema = z.lazy(() => addProjectMember200Schema)
 
 export const removeProjectMemberPathParamsSchema = z.object({
   idOrName: z.string().describe('The ID or name of the Project.'),
@@ -5809,7 +5809,7 @@ export const removeProjectMember401Schema = z.unknown()
  */
 export const removeProjectMember403Schema = z.unknown()
 
-export const removeProjectMemberMutationResponseSchema = removeProjectMember200Schema
+export const removeProjectMemberMutationResponseSchema = z.lazy(() => removeProjectMember200Schema)
 
 export const getProjectsQueryParamsSchema = z
   .object({
@@ -5849,7 +5849,7 @@ export const getProjects401Schema = z.unknown()
  */
 export const getProjects403Schema = z.unknown()
 
-export const getProjectsQueryResponseSchema = getProjects200Schema
+export const getProjectsQueryResponseSchema = z.lazy(() => getProjects200Schema)
 
 export const createProjectQueryParamsSchema = z
   .object({
@@ -5885,7 +5885,7 @@ export const createProject403Schema = z.unknown()
  */
 export const createProject409Schema = z.unknown()
 
-export const createProjectMutationResponseSchema = createProject200Schema
+export const createProjectMutationResponseSchema = z.lazy(() => createProject200Schema)
 
 export const getProjectPathParamsSchema = z.object({
   idOrName: z.union([z.boolean(), z.string()]).describe('The unique project identifier or the project name'),
@@ -5915,7 +5915,7 @@ export const getProject401Schema = z.unknown()
  */
 export const getProject403Schema = z.unknown()
 
-export const getProjectQueryResponseSchema = getProject200Schema
+export const getProjectQueryResponseSchema = z.lazy(() => getProject200Schema)
 
 export const updateProjectPathParamsSchema = z.object({
   idOrName: z.string().describe('The unique project identifier or the project name'),
@@ -5962,7 +5962,7 @@ export const updateProject409Schema = z.unknown()
  */
 export const updateProject428Schema = z.unknown()
 
-export const updateProjectMutationResponseSchema = updateProject200Schema
+export const updateProjectMutationResponseSchema = z.lazy(() => updateProject200Schema)
 
 export const deleteProjectPathParamsSchema = z.object({
   idOrName: z.string().describe('The unique project identifier or the project name'),
@@ -5994,7 +5994,7 @@ export const deleteProject403Schema = z.unknown()
 
 export const deleteProject409Schema = z.unknown()
 
-export const deleteProjectMutationResponseSchema = deleteProject204Schema
+export const deleteProjectMutationResponseSchema = z.lazy(() => deleteProject204Schema)
 
 export const createCustomEnvironmentPathParamsSchema = z.object({
   idOrName: z.string().describe('The unique project identifier or the project name'),
@@ -6028,7 +6028,7 @@ export const createCustomEnvironment403Schema = z.unknown()
 
 export const createCustomEnvironment500Schema = z.unknown()
 
-export const createCustomEnvironmentMutationResponseSchema = createCustomEnvironment201Schema
+export const createCustomEnvironmentMutationResponseSchema = z.lazy(() => createCustomEnvironment201Schema)
 
 export const listCustomEnvironmentsPathParamsSchema = z.object({
   idOrName: z.string().describe('The unique project identifier or the project name'),
@@ -6056,7 +6056,7 @@ export const listCustomEnvironments401Schema = z.unknown()
  */
 export const listCustomEnvironments403Schema = z.unknown()
 
-export const listCustomEnvironmentsQueryResponseSchema = listCustomEnvironments200Schema
+export const listCustomEnvironmentsQueryResponseSchema = z.lazy(() => listCustomEnvironments200Schema)
 
 export const getCustomEnvironmentPathParamsSchema = z.object({
   idOrName: z.string().describe('The unique project identifier or the project name'),
@@ -6086,7 +6086,7 @@ export const getCustomEnvironment403Schema = z.unknown()
 
 export const getCustomEnvironment404Schema = z.unknown()
 
-export const getCustomEnvironmentQueryResponseSchema = getCustomEnvironment200Schema
+export const getCustomEnvironmentQueryResponseSchema = z.lazy(() => getCustomEnvironment200Schema)
 
 export const updateCustomEnvironmentPathParamsSchema = z.object({
   idOrName: z.string().describe('The unique project identifier or the project name'),
@@ -6121,7 +6121,7 @@ export const updateCustomEnvironment403Schema = z.unknown()
 
 export const updateCustomEnvironment500Schema = z.unknown()
 
-export const updateCustomEnvironmentMutationResponseSchema = updateCustomEnvironment200Schema
+export const updateCustomEnvironmentMutationResponseSchema = z.lazy(() => updateCustomEnvironment200Schema)
 
 export const removeCustomEnvironmentPathParamsSchema = z.object({
   idOrName: z.string().describe('The unique project identifier or the project name'),
@@ -6149,7 +6149,7 @@ export const removeCustomEnvironment401Schema = z.unknown()
  */
 export const removeCustomEnvironment403Schema = z.unknown()
 
-export const removeCustomEnvironmentMutationResponseSchema = removeCustomEnvironment200Schema
+export const removeCustomEnvironmentMutationResponseSchema = z.lazy(() => removeCustomEnvironment200Schema)
 
 export const getProjectDomainsPathParamsSchema = z.object({
   idOrName: z.union([z.coerce.number().int(), z.string()]).describe('The unique project identifier or the project name'),
@@ -6191,7 +6191,7 @@ export const getProjectDomains401Schema = z.unknown()
  */
 export const getProjectDomains403Schema = z.unknown()
 
-export const getProjectDomainsQueryResponseSchema = getProjectDomains200Schema
+export const getProjectDomainsQueryResponseSchema = z.lazy(() => getProjectDomains200Schema)
 
 export const getProjectDomainPathParamsSchema = z.object({
   idOrName: z.string().describe('The unique project identifier or the project name'),
@@ -6219,7 +6219,7 @@ export const getProjectDomain401Schema = z.unknown()
  */
 export const getProjectDomain403Schema = z.unknown()
 
-export const getProjectDomainQueryResponseSchema = getProjectDomain200Schema
+export const getProjectDomainQueryResponseSchema = z.lazy(() => getProjectDomain200Schema)
 
 export const updateProjectDomainPathParamsSchema = z.object({
   idOrName: z.string().describe('The unique project identifier or the project name'),
@@ -6255,7 +6255,7 @@ export const updateProjectDomain403Schema = z.unknown()
  */
 export const updateProjectDomain409Schema = z.unknown()
 
-export const updateProjectDomainMutationResponseSchema = updateProjectDomain200Schema
+export const updateProjectDomainMutationResponseSchema = z.lazy(() => updateProjectDomain200Schema)
 
 export const removeProjectDomainPathParamsSchema = z.object({
   idOrName: z.string().describe('The unique project identifier or the project name'),
@@ -6293,7 +6293,7 @@ export const removeProjectDomain404Schema = z.unknown()
  */
 export const removeProjectDomain409Schema = z.unknown()
 
-export const removeProjectDomainMutationResponseSchema = removeProjectDomain200Schema
+export const removeProjectDomainMutationResponseSchema = z.lazy(() => removeProjectDomain200Schema)
 
 export const addProjectDomainPathParamsSchema = z.object({
   idOrName: z.string().describe('The unique project identifier or the project name'),
@@ -6333,7 +6333,7 @@ export const addProjectDomain403Schema = z.unknown()
  */
 export const addProjectDomain409Schema = z.unknown()
 
-export const addProjectDomainMutationResponseSchema = addProjectDomain200Schema
+export const addProjectDomainMutationResponseSchema = z.lazy(() => addProjectDomain200Schema)
 
 export const moveProjectDomainPathParamsSchema = z.object({
   idOrName: z.string().describe('The unique project identifier or the project name'),
@@ -6369,7 +6369,7 @@ export const moveProjectDomain403Schema = z.unknown()
  */
 export const moveProjectDomain409Schema = z.unknown()
 
-export const moveProjectDomainMutationResponseSchema = moveProjectDomain200Schema
+export const moveProjectDomainMutationResponseSchema = z.lazy(() => moveProjectDomain200Schema)
 
 export const verifyProjectDomainPathParamsSchema = z.object({
   idOrName: z.string().describe('The unique project identifier or the project name'),
@@ -6400,7 +6400,7 @@ export const verifyProjectDomain401Schema = z.unknown()
  */
 export const verifyProjectDomain403Schema = z.unknown()
 
-export const verifyProjectDomainMutationResponseSchema = verifyProjectDomain200Schema
+export const verifyProjectDomainMutationResponseSchema = z.lazy(() => verifyProjectDomain200Schema)
 
 export const filterProjectEnvsPathParamsSchema = z.object({
   idOrName: z.string().describe('The unique project identifier or the project name'),
@@ -6439,7 +6439,7 @@ export const filterProjectEnvs401Schema = z.unknown()
  */
 export const filterProjectEnvs403Schema = z.unknown()
 
-export const filterProjectEnvsQueryResponseSchema = filterProjectEnvs200Schema
+export const filterProjectEnvsQueryResponseSchema = z.lazy(() => filterProjectEnvs200Schema)
 
 export const createProjectEnvPathParamsSchema = z.object({
   idOrName: z.string().describe('The unique project identifier or the project name'),
@@ -6480,7 +6480,7 @@ export const createProjectEnv403Schema = z.unknown()
  */
 export const createProjectEnv409Schema = z.unknown()
 
-export const createProjectEnvMutationResponseSchema = createProjectEnv201Schema
+export const createProjectEnvMutationResponseSchema = z.lazy(() => createProjectEnv201Schema)
 
 export const getProjectEnvPathParamsSchema = z.object({
   idOrName: z.string().describe('The unique project identifier or the project name'),
@@ -6508,7 +6508,7 @@ export const getProjectEnv401Schema = z.unknown()
  */
 export const getProjectEnv403Schema = z.unknown()
 
-export const getProjectEnvQueryResponseSchema = getProjectEnv200Schema
+export const getProjectEnvQueryResponseSchema = z.lazy(() => getProjectEnv200Schema)
 
 export const removeProjectEnvPathParamsSchema = z.object({
   idOrName: z.string().describe('The unique project identifier or the project name'),
@@ -6547,7 +6547,7 @@ export const removeProjectEnv404Schema = z.unknown()
  */
 export const removeProjectEnv409Schema = z.unknown()
 
-export const removeProjectEnvMutationResponseSchema = removeProjectEnv200Schema
+export const removeProjectEnvMutationResponseSchema = z.lazy(() => removeProjectEnv200Schema)
 
 export const editProjectEnvPathParamsSchema = z.object({
   idOrName: z.string().describe('The unique project identifier or the project name'),
@@ -6583,7 +6583,7 @@ export const editProjectEnv403Schema = z.unknown()
  */
 export const editProjectEnv409Schema = z.unknown()
 
-export const editProjectEnvMutationResponseSchema = editProjectEnv200Schema
+export const editProjectEnvMutationResponseSchema = z.lazy(() => editProjectEnv200Schema)
 
 export const getRollingReleaseBillingStatusPathParamsSchema = z.object({
   idOrName: z.string().describe('Project ID or project name (URL-encoded)'),
@@ -6612,7 +6612,7 @@ export const getRollingReleaseBillingStatus403Schema = z.unknown()
 
 export const getRollingReleaseBillingStatus404Schema = z.unknown()
 
-export const getRollingReleaseBillingStatusQueryResponseSchema = getRollingReleaseBillingStatus200Schema
+export const getRollingReleaseBillingStatusQueryResponseSchema = z.lazy(() => getRollingReleaseBillingStatus200Schema)
 
 export const getRollingReleaseConfigPathParamsSchema = z.object({
   idOrName: z.string().describe('Project ID or project name (URL-encoded)'),
@@ -6641,7 +6641,7 @@ export const getRollingReleaseConfig403Schema = z.unknown()
 
 export const getRollingReleaseConfig404Schema = z.unknown()
 
-export const getRollingReleaseConfigQueryResponseSchema = getRollingReleaseConfig200Schema
+export const getRollingReleaseConfigQueryResponseSchema = z.lazy(() => getRollingReleaseConfig200Schema)
 
 export const deleteRollingReleaseConfigPathParamsSchema = z.object({
   idOrName: z.string().describe('Project ID or project name (URL-encoded)'),
@@ -6670,7 +6670,7 @@ export const deleteRollingReleaseConfig403Schema = z.unknown()
 
 export const deleteRollingReleaseConfig404Schema = z.unknown()
 
-export const deleteRollingReleaseConfigMutationResponseSchema = deleteRollingReleaseConfig200Schema
+export const deleteRollingReleaseConfigMutationResponseSchema = z.lazy(() => deleteRollingReleaseConfig200Schema)
 
 export const updateRollingReleaseConfigPathParamsSchema = z.object({
   idOrName: z.string().describe('Project ID or project name (URL-encoded)'),
@@ -6699,7 +6699,7 @@ export const updateRollingReleaseConfig403Schema = z.unknown()
 
 export const updateRollingReleaseConfig404Schema = z.unknown()
 
-export const updateRollingReleaseConfigMutationResponseSchema = updateRollingReleaseConfig200Schema
+export const updateRollingReleaseConfigMutationResponseSchema = z.lazy(() => updateRollingReleaseConfig200Schema)
 
 export const getRollingReleasePathParamsSchema = z.object({
   idOrName: z.string().describe('Project ID or project name (URL-encoded)'),
@@ -6729,7 +6729,7 @@ export const getRollingRelease403Schema = z.unknown()
 
 export const getRollingRelease404Schema = z.unknown()
 
-export const getRollingReleaseQueryResponseSchema = getRollingRelease200Schema
+export const getRollingReleaseQueryResponseSchema = z.lazy(() => getRollingRelease200Schema)
 
 export const approveRollingReleaseStagePathParamsSchema = z.object({
   idOrName: z.string().describe('Project ID or project name (URL-encoded)'),
@@ -6760,7 +6760,7 @@ export const approveRollingReleaseStage404Schema = z.unknown()
 
 export const approveRollingReleaseStage500Schema = z.unknown()
 
-export const approveRollingReleaseStageMutationResponseSchema = approveRollingReleaseStage200Schema
+export const approveRollingReleaseStageMutationResponseSchema = z.lazy(() => approveRollingReleaseStage200Schema)
 
 export const completeRollingReleasePathParamsSchema = z.object({
   idOrName: z.string().describe('Project ID or project name (URL-encoded)'),
@@ -6789,7 +6789,7 @@ export const completeRollingRelease403Schema = z.unknown()
 
 export const completeRollingRelease404Schema = z.unknown()
 
-export const completeRollingReleaseMutationResponseSchema = completeRollingRelease200Schema
+export const completeRollingReleaseMutationResponseSchema = z.lazy(() => completeRollingRelease200Schema)
 
 export const createProjectTransferRequestPathParamsSchema = z.object({
   idOrName: z.string().describe('The ID or name of the project to transfer.'),
@@ -6819,7 +6819,7 @@ export const createProjectTransferRequest401Schema = z.unknown()
  */
 export const createProjectTransferRequest403Schema = z.unknown()
 
-export const createProjectTransferRequestMutationResponseSchema = createProjectTransferRequest200Schema
+export const createProjectTransferRequestMutationResponseSchema = z.lazy(() => createProjectTransferRequest200Schema)
 
 export const acceptProjectTransferRequestPathParamsSchema = z.object({
   code: z.string().describe('The code of the project transfer request.'),
@@ -6853,7 +6853,7 @@ export const acceptProjectTransferRequest404Schema = z.unknown()
 
 export const acceptProjectTransferRequest422Schema = z.unknown()
 
-export const acceptProjectTransferRequestMutationResponseSchema = acceptProjectTransferRequest202Schema
+export const acceptProjectTransferRequestMutationResponseSchema = z.lazy(() => acceptProjectTransferRequest202Schema)
 
 export const updateProjectProtectionBypassPathParamsSchema = z.object({
   idOrName: z.string().describe('The unique project identifier or the project name'),
@@ -6884,7 +6884,7 @@ export const updateProjectProtectionBypass404Schema = z.unknown()
 
 export const updateProjectProtectionBypass409Schema = z.unknown()
 
-export const updateProjectProtectionBypassMutationResponseSchema = updateProjectProtectionBypass200Schema
+export const updateProjectProtectionBypassMutationResponseSchema = z.lazy(() => updateProjectProtectionBypass200Schema)
 
 export const requestPromotePathParamsSchema = z.object({
   projectId: z.string(),
@@ -6916,7 +6916,7 @@ export const requestPromote403Schema = z.unknown()
 
 export const requestPromote409Schema = z.unknown()
 
-export const requestPromoteMutationResponseSchema = z.union([requestPromote201Schema, requestPromote202Schema])
+export const requestPromoteMutationResponseSchema = z.union([z.lazy(() => requestPromote201Schema), z.lazy(() => requestPromote202Schema)])
 
 export const listPromoteAliasesPathParamsSchema = z.object({
   projectId: z.string(),
@@ -6949,7 +6949,7 @@ export const listPromoteAliases403Schema = z.unknown()
 
 export const listPromoteAliases404Schema = z.unknown()
 
-export const listPromoteAliasesQueryResponseSchema = listPromoteAliases200Schema
+export const listPromoteAliasesQueryResponseSchema = z.lazy(() => listPromoteAliases200Schema)
 
 export const pauseProjectPathParamsSchema = z.object({
   projectId: z.string().describe('The unique project identifier'),
@@ -6983,7 +6983,7 @@ export const pauseProject403Schema = z.unknown()
 
 export const pauseProject500Schema = z.unknown()
 
-export const pauseProjectMutationResponseSchema = pauseProject200Schema
+export const pauseProjectMutationResponseSchema = z.lazy(() => pauseProject200Schema)
 
 export const unpauseProjectPathParamsSchema = z.object({
   projectId: z.string().describe('The unique project identifier'),
@@ -7012,7 +7012,7 @@ export const unpauseProject403Schema = z.unknown()
 
 export const unpauseProject500Schema = z.unknown()
 
-export const unpauseProjectMutationResponseSchema = unpauseProject200Schema
+export const unpauseProjectMutationResponseSchema = z.lazy(() => unpauseProject200Schema)
 
 export const updateAttackChallengeModeQueryParamsSchema = z
   .object({
@@ -7037,7 +7037,7 @@ export const updateAttackChallengeMode403Schema = z.unknown()
 
 export const updateAttackChallengeMode404Schema = z.unknown()
 
-export const updateAttackChallengeModeMutationResponseSchema = updateAttackChallengeMode200Schema
+export const updateAttackChallengeModeMutationResponseSchema = z.lazy(() => updateAttackChallengeMode200Schema)
 
 export const putFirewallConfigQueryParamsSchema = z.object({
   projectId: z.string(),
@@ -7065,7 +7065,7 @@ export const putFirewallConfig404Schema = z.unknown()
 
 export const putFirewallConfig500Schema = z.unknown()
 
-export const putFirewallConfigMutationResponseSchema = putFirewallConfig200Schema
+export const putFirewallConfigMutationResponseSchema = z.lazy(() => putFirewallConfig200Schema)
 
 export const updateFirewallConfigQueryParamsSchema = z.object({
   projectId: z.string(),
@@ -7093,7 +7093,7 @@ export const updateFirewallConfig404Schema = z.unknown()
 
 export const updateFirewallConfig500Schema = z.unknown()
 
-export const updateFirewallConfigMutationResponseSchema = updateFirewallConfig200Schema
+export const updateFirewallConfigMutationResponseSchema = z.lazy(() => updateFirewallConfig200Schema)
 
 export const getFirewallConfigPathParamsSchema = z.object({
   configVersion: z.string(),
@@ -7124,7 +7124,7 @@ export const getFirewallConfig403Schema = z.unknown()
 
 export const getFirewallConfig404Schema = z.unknown()
 
-export const getFirewallConfigQueryResponseSchema = getFirewallConfig200Schema
+export const getFirewallConfigQueryResponseSchema = z.lazy(() => getFirewallConfig200Schema)
 
 export const getActiveAttackStatusQueryParamsSchema = z.object({
   projectId: z.string(),
@@ -7148,7 +7148,7 @@ export const getActiveAttackStatus403Schema = z.unknown()
 
 export const getActiveAttackStatus404Schema = z.unknown()
 
-export const getActiveAttackStatusQueryResponseSchema = getActiveAttackStatus200Schema
+export const getActiveAttackStatusQueryResponseSchema = z.lazy(() => getActiveAttackStatus200Schema)
 
 export const getBypassIpQueryParamsSchema = z.object({
   projectId: z.string(),
@@ -7184,7 +7184,7 @@ export const getBypassIp404Schema = z.unknown()
 
 export const getBypassIp500Schema = z.unknown()
 
-export const getBypassIpQueryResponseSchema = getBypassIp200Schema
+export const getBypassIpQueryResponseSchema = z.lazy(() => getBypassIp200Schema)
 
 export const addBypassIpQueryParamsSchema = z.object({
   projectId: z.string(),
@@ -7210,7 +7210,7 @@ export const addBypassIp404Schema = z.unknown()
 
 export const addBypassIp500Schema = z.unknown()
 
-export const addBypassIpMutationResponseSchema = addBypassIp200Schema
+export const addBypassIpMutationResponseSchema = z.lazy(() => addBypassIp200Schema)
 
 export const removeBypassIpQueryParamsSchema = z.object({
   projectId: z.string(),
@@ -7236,7 +7236,7 @@ export const removeBypassIp404Schema = z.unknown()
 
 export const removeBypassIp500Schema = z.unknown()
 
-export const removeBypassIpMutationResponseSchema = removeBypassIp200Schema
+export const removeBypassIpMutationResponseSchema = z.lazy(() => removeBypassIp200Schema)
 
 export const getTeamMembersPathParamsSchema = z.object({
   teamId: z.string(),
@@ -7270,7 +7270,7 @@ export const getTeamMembers403Schema = z.unknown()
 
 export const getTeamMembers404Schema = z.unknown()
 
-export const getTeamMembersQueryResponseSchema = getTeamMembers200Schema
+export const getTeamMembersQueryResponseSchema = z.lazy(() => getTeamMembers200Schema)
 
 export const inviteUserToTeamPathParamsSchema = z.object({
   teamId: z.string(),
@@ -7295,7 +7295,7 @@ export const inviteUserToTeam403Schema = z.unknown()
 
 export const inviteUserToTeam503Schema = z.unknown()
 
-export const inviteUserToTeamMutationResponseSchema = inviteUserToTeam200Schema
+export const inviteUserToTeamMutationResponseSchema = z.lazy(() => inviteUserToTeam200Schema)
 
 export const requestAccessToTeamPathParamsSchema = z.object({
   teamId: z.string(),
@@ -7325,7 +7325,7 @@ export const requestAccessToTeam404Schema = z.unknown()
 
 export const requestAccessToTeam503Schema = z.unknown()
 
-export const requestAccessToTeamMutationResponseSchema = requestAccessToTeam200Schema
+export const requestAccessToTeamMutationResponseSchema = z.lazy(() => requestAccessToTeam200Schema)
 
 export const getTeamAccessRequestPathParamsSchema = z.object({
   userId: z.string(),
@@ -7354,7 +7354,7 @@ export const getTeamAccessRequest403Schema = z.unknown()
  */
 export const getTeamAccessRequest404Schema = z.unknown()
 
-export const getTeamAccessRequestQueryResponseSchema = getTeamAccessRequest200Schema
+export const getTeamAccessRequestQueryResponseSchema = z.lazy(() => getTeamAccessRequest200Schema)
 
 export const joinTeamPathParamsSchema = z.object({
   teamId: z.string(),
@@ -7381,7 +7381,7 @@ export const joinTeam403Schema = z.unknown()
 
 export const joinTeam404Schema = z.unknown()
 
-export const joinTeamMutationResponseSchema = joinTeam200Schema
+export const joinTeamMutationResponseSchema = z.lazy(() => joinTeam200Schema)
 
 export const updateTeamMemberPathParamsSchema = z.object({
   uid: z.string().describe('The ID of the member.'),
@@ -7417,7 +7417,7 @@ export const updateTeamMember404Schema = z.unknown()
 
 export const updateTeamMember500Schema = z.unknown()
 
-export const updateTeamMemberMutationResponseSchema = updateTeamMember200Schema
+export const updateTeamMemberMutationResponseSchema = z.lazy(() => updateTeamMember200Schema)
 
 export const removeTeamMemberPathParamsSchema = z.object({
   uid: z.string().describe('The user ID of the member.'),
@@ -7451,7 +7451,7 @@ export const removeTeamMember404Schema = z.unknown()
 
 export const removeTeamMember503Schema = z.unknown()
 
-export const removeTeamMemberMutationResponseSchema = removeTeamMember200Schema
+export const removeTeamMemberMutationResponseSchema = z.lazy(() => removeTeamMember200Schema)
 
 export const getTeamPathParamsSchema = z.object({
   teamId: z.string().describe('The Team identifier to perform the request on behalf of.'),
@@ -7485,7 +7485,7 @@ export const getTeam403Schema = z.unknown()
  */
 export const getTeam404Schema = z.unknown()
 
-export const getTeamQueryResponseSchema = getTeam200Schema
+export const getTeamQueryResponseSchema = z.lazy(() => getTeam200Schema)
 
 export const patchTeamPathParamsSchema = z.object({
   teamId: z.string().describe('The Team identifier to perform the request on behalf of.'),
@@ -7521,7 +7521,7 @@ export const patchTeam403Schema = z.unknown()
  */
 export const patchTeam428Schema = z.unknown()
 
-export const patchTeamMutationResponseSchema = patchTeam200Schema
+export const patchTeamMutationResponseSchema = z.lazy(() => patchTeam200Schema)
 
 export const getTeamsQueryParamsSchema = z
   .object({
@@ -7548,7 +7548,7 @@ export const getTeams401Schema = z.unknown()
  */
 export const getTeams403Schema = z.unknown()
 
-export const getTeamsQueryResponseSchema = getTeams200Schema
+export const getTeamsQueryResponseSchema = z.lazy(() => getTeams200Schema)
 
 /**
  * @description The team was created successfully
@@ -7567,7 +7567,7 @@ export const createTeam401Schema = z.unknown()
  */
 export const createTeam403Schema = z.unknown()
 
-export const createTeamMutationResponseSchema = createTeam200Schema
+export const createTeamMutationResponseSchema = z.lazy(() => createTeam200Schema)
 
 export const deleteTeamPathParamsSchema = z.object({
   teamId: z.string().describe('The Team identifier to perform the request on behalf of.'),
@@ -7601,7 +7601,7 @@ export const deleteTeam403Schema = z.unknown()
 
 export const deleteTeam409Schema = z.unknown()
 
-export const deleteTeamMutationResponseSchema = deleteTeam200Schema
+export const deleteTeamMutationResponseSchema = z.lazy(() => deleteTeam200Schema)
 
 export const deleteTeamInviteCodePathParamsSchema = z.object({
   inviteId: z.string().describe('The Team invite code ID.'),
@@ -7630,7 +7630,7 @@ export const deleteTeamInviteCode403Schema = z.unknown()
  */
 export const deleteTeamInviteCode404Schema = z.unknown()
 
-export const deleteTeamInviteCodeMutationResponseSchema = deleteTeamInviteCode200Schema
+export const deleteTeamInviteCodeMutationResponseSchema = z.lazy(() => deleteTeamInviteCode200Schema)
 
 export const uploadFileQueryParamsSchema = z
   .object({
@@ -7669,7 +7669,7 @@ export const uploadFile401Schema = z.unknown()
  */
 export const uploadFile403Schema = z.unknown()
 
-export const uploadFileMutationResponseSchema = uploadFile200Schema
+export const uploadFileMutationResponseSchema = z.lazy(() => uploadFile200Schema)
 
 export const listAuthTokens200Schema = z.unknown()
 
@@ -7682,7 +7682,7 @@ export const listAuthTokens401Schema = z.unknown()
  */
 export const listAuthTokens403Schema = z.unknown()
 
-export const listAuthTokensQueryResponseSchema = listAuthTokens200Schema
+export const listAuthTokensQueryResponseSchema = z.lazy(() => listAuthTokens200Schema)
 
 export const createAuthTokenQueryParamsSchema = z
   .object({
@@ -7708,7 +7708,7 @@ export const createAuthToken401Schema = z.unknown()
  */
 export const createAuthToken403Schema = z.unknown()
 
-export const createAuthTokenMutationResponseSchema = createAuthToken200Schema
+export const createAuthTokenMutationResponseSchema = z.lazy(() => createAuthToken200Schema)
 
 export const getAuthTokenPathParamsSchema = z.object({
   tokenId: z
@@ -7740,7 +7740,7 @@ export const getAuthToken403Schema = z.unknown()
  */
 export const getAuthToken404Schema = z.unknown()
 
-export const getAuthTokenQueryResponseSchema = getAuthToken200Schema
+export const getAuthTokenQueryResponseSchema = z.lazy(() => getAuthToken200Schema)
 
 export const deleteAuthTokenPathParamsSchema = z.object({
   tokenId: z
@@ -7772,7 +7772,7 @@ export const deleteAuthToken403Schema = z.unknown()
  */
 export const deleteAuthToken404Schema = z.unknown()
 
-export const deleteAuthTokenMutationResponseSchema = deleteAuthToken200Schema
+export const deleteAuthTokenMutationResponseSchema = z.lazy(() => deleteAuthToken200Schema)
 
 /**
  * @description Successful response.
@@ -7790,7 +7790,7 @@ export const getAuthUser403Schema = z.unknown()
 
 export const getAuthUser409Schema = z.unknown()
 
-export const getAuthUserQueryResponseSchema = getAuthUser200Schema
+export const getAuthUserQueryResponseSchema = z.lazy(() => getAuthUser200Schema)
 
 /**
  * @description Response indicating that the User deletion process has been initiated, and a confirmation email has been sent.
@@ -7811,7 +7811,7 @@ export const requestDelete402Schema = z.unknown()
  */
 export const requestDelete403Schema = z.unknown()
 
-export const requestDeleteMutationResponseSchema = requestDelete202Schema
+export const requestDeleteMutationResponseSchema = z.lazy(() => requestDelete202Schema)
 
 export const createWebhookQueryParamsSchema = z
   .object({
@@ -7834,7 +7834,7 @@ export const createWebhook401Schema = z.unknown()
  */
 export const createWebhook403Schema = z.unknown()
 
-export const createWebhookMutationResponseSchema = createWebhook200Schema
+export const createWebhookMutationResponseSchema = z.lazy(() => createWebhook200Schema)
 
 export const getWebhooksQueryParamsSchema = z
   .object({
@@ -7861,7 +7861,7 @@ export const getWebhooks401Schema = z.unknown()
  */
 export const getWebhooks403Schema = z.unknown()
 
-export const getWebhooksQueryResponseSchema = getWebhooks200Schema
+export const getWebhooksQueryResponseSchema = z.lazy(() => getWebhooks200Schema)
 
 export const getWebhookPathParamsSchema = z.object({
   id: z.string(),
@@ -7888,7 +7888,7 @@ export const getWebhook401Schema = z.unknown()
  */
 export const getWebhook403Schema = z.unknown()
 
-export const getWebhookQueryResponseSchema = getWebhook200Schema
+export const getWebhookQueryResponseSchema = z.lazy(() => getWebhook200Schema)
 
 export const deleteWebhookPathParamsSchema = z.object({
   id: z.string(),
@@ -7915,7 +7915,7 @@ export const deleteWebhook401Schema = z.unknown()
  */
 export const deleteWebhook403Schema = z.unknown()
 
-export const deleteWebhookMutationResponseSchema = deleteWebhook204Schema
+export const deleteWebhookMutationResponseSchema = z.lazy(() => deleteWebhook204Schema)
 
 export const listDeploymentAliasesPathParamsSchema = z.object({
   id: z.string().describe('The ID of the deployment the aliases should be listed for'),
@@ -7950,7 +7950,7 @@ export const listDeploymentAliases403Schema = z.unknown()
  */
 export const listDeploymentAliases404Schema = z.unknown()
 
-export const listDeploymentAliasesQueryResponseSchema = listDeploymentAliases200Schema
+export const listDeploymentAliasesQueryResponseSchema = z.lazy(() => listDeploymentAliases200Schema)
 
 export const assignAliasPathParamsSchema = z.object({
   id: z.string().describe('The ID of the deployment the aliases should be listed for'),
@@ -7995,7 +7995,7 @@ export const assignAlias404Schema = z.unknown()
  */
 export const assignAlias409Schema = z.unknown()
 
-export const assignAliasMutationResponseSchema = assignAlias200Schema
+export const assignAliasMutationResponseSchema = z.lazy(() => assignAlias200Schema)
 
 export const listAliasesQueryParamsSchema = z
   .object({
@@ -8033,7 +8033,7 @@ export const listAliases403Schema = z.unknown()
 
 export const listAliases404Schema = z.unknown()
 
-export const listAliasesQueryResponseSchema = listAliases200Schema
+export const listAliasesQueryResponseSchema = z.lazy(() => listAliases200Schema)
 
 export const getAliasPathParamsSchema = z.object({
   idOrAlias: z.string().describe('The alias or alias ID to be retrieved'),
@@ -8072,7 +8072,7 @@ export const getAlias403Schema = z.unknown()
  */
 export const getAlias404Schema = z.unknown()
 
-export const getAliasQueryResponseSchema = getAlias200Schema
+export const getAliasQueryResponseSchema = z.lazy(() => getAlias200Schema)
 
 export const deleteAliasPathParamsSchema = z.object({
   aliasId: z.string().describe('The ID or alias that will be removed'),
@@ -8107,7 +8107,7 @@ export const deleteAlias403Schema = z.unknown()
  */
 export const deleteAlias404Schema = z.unknown()
 
-export const deleteAliasMutationResponseSchema = deleteAlias200Schema
+export const deleteAliasMutationResponseSchema = z.lazy(() => deleteAlias200Schema)
 
 export const patchUrlProtectionBypassPathParamsSchema = z.object({
   id: z.string().describe('The alias or deployment ID'),
@@ -8142,7 +8142,7 @@ export const patchUrlProtectionBypass428Schema = z.unknown()
 
 export const patchUrlProtectionBypass500Schema = z.unknown()
 
-export const patchUrlProtectionBypassMutationResponseSchema = patchUrlProtectionBypass200Schema
+export const patchUrlProtectionBypassMutationResponseSchema = z.lazy(() => patchUrlProtectionBypass200Schema)
 
 export const listCerts200Schema = z.unknown()
 
@@ -8155,7 +8155,7 @@ export const listCerts401Schema = z.unknown()
  */
 export const listCerts403Schema = z.unknown()
 
-export const listCertsQueryResponseSchema = listCerts200Schema
+export const listCertsQueryResponseSchema = z.lazy(() => listCerts200Schema)
 
 export const getCertByIdPathParamsSchema = z.object({
   id: z.string().describe('The cert id'),
@@ -8184,7 +8184,7 @@ export const getCertById403Schema = z.unknown()
 
 export const getCertById404Schema = z.unknown()
 
-export const getCertByIdQueryResponseSchema = getCertById200Schema
+export const getCertByIdQueryResponseSchema = z.lazy(() => getCertById200Schema)
 
 export const removeCertPathParamsSchema = z.object({
   id: z.string().describe('The cert id to remove'),
@@ -8213,7 +8213,7 @@ export const removeCert403Schema = z.unknown()
 
 export const removeCert404Schema = z.unknown()
 
-export const removeCertMutationResponseSchema = removeCert200Schema
+export const removeCertMutationResponseSchema = z.lazy(() => removeCert200Schema)
 
 export const issueCertQueryParamsSchema = z
   .object({
@@ -8247,7 +8247,7 @@ export const issueCert449Schema = z.unknown()
 
 export const issueCert500Schema = z.unknown()
 
-export const issueCertMutationResponseSchema = issueCert200Schema
+export const issueCertMutationResponseSchema = z.lazy(() => issueCert200Schema)
 
 export const uploadCertQueryParamsSchema = z
   .object({
@@ -8275,7 +8275,7 @@ export const uploadCert402Schema = z.unknown()
  */
 export const uploadCert403Schema = z.unknown()
 
-export const uploadCertMutationResponseSchema = uploadCert200Schema
+export const uploadCertMutationResponseSchema = z.lazy(() => uploadCert200Schema)
 
 export const listDeploymentFilesPathParamsSchema = z.object({
   id: z.string().describe('The unique deployment identifier'),
@@ -8310,7 +8310,7 @@ export const listDeploymentFiles403Schema = z.unknown()
  */
 export const listDeploymentFiles404Schema = z.unknown()
 
-export const listDeploymentFilesQueryResponseSchema = listDeploymentFiles200Schema
+export const listDeploymentFilesQueryResponseSchema = z.lazy(() => listDeploymentFiles200Schema)
 
 export const getDeploymentFileContentsPathParamsSchema = z.object({
   id: z.string().describe('The unique deployment identifier'),
@@ -8387,7 +8387,7 @@ export const getDeployments404Schema = z.unknown()
 
 export const getDeployments422Schema = z.unknown()
 
-export const getDeploymentsQueryResponseSchema = getDeployments200Schema
+export const getDeploymentsQueryResponseSchema = z.lazy(() => getDeployments200Schema)
 
 export const deleteDeploymentPathParamsSchema = z.object({
   id: z.string().describe('The ID of the deployment to be deleted'),
@@ -8423,7 +8423,7 @@ export const deleteDeployment403Schema = z.unknown()
  */
 export const deleteDeployment404Schema = z.unknown()
 
-export const deleteDeploymentMutationResponseSchema = deleteDeployment200Schema
+export const deleteDeploymentMutationResponseSchema = z.lazy(() => deleteDeployment200Schema)
 
 export const getSecretsQueryParamsSchema = z
   .object({
@@ -8453,7 +8453,7 @@ export const getSecrets403Schema = z.unknown()
 
 export const getSecrets410Schema = z.unknown()
 
-export const getSecretsQueryResponseSchema = getSecrets200Schema
+export const getSecretsQueryResponseSchema = z.lazy(() => getSecrets200Schema)
 
 export const createSecretPathParamsSchema = z.object({
   name: z.string(),
@@ -8490,7 +8490,7 @@ export const createSecret403Schema = z.unknown()
 
 export const createSecret410Schema = z.unknown()
 
-export const createSecretMutationResponseSchema = createSecret200Schema
+export const createSecretMutationResponseSchema = z.lazy(() => createSecret200Schema)
 
 export const renameSecretPathParamsSchema = z.object({
   name: z.string().describe('The name of the secret.'),
@@ -8519,7 +8519,7 @@ export const renameSecret403Schema = z.unknown()
 
 export const renameSecret410Schema = z.unknown()
 
-export const renameSecretMutationResponseSchema = renameSecret200Schema
+export const renameSecretMutationResponseSchema = z.lazy(() => renameSecret200Schema)
 
 export const getSecretPathParamsSchema = z.object({
   idOrName: z.string().describe('The name or the unique identifier to which the secret belongs to.'),
@@ -8557,7 +8557,7 @@ export const getSecret404Schema = z.unknown()
 
 export const getSecret410Schema = z.unknown()
 
-export const getSecretQueryResponseSchema = getSecret200Schema
+export const getSecretQueryResponseSchema = z.lazy(() => getSecret200Schema)
 
 export const deleteSecretPathParamsSchema = z.object({
   idOrName: z.string().describe('The name or the unique identifier to which the secret belongs to.'),
@@ -8586,4 +8586,4 @@ export const deleteSecret403Schema = z.unknown()
 
 export const deleteSecret410Schema = z.unknown()
 
-export const deleteSecretMutationResponseSchema = deleteSecret200Schema
+export const deleteSecretMutationResponseSchema = z.lazy(() => deleteSecret200Schema)

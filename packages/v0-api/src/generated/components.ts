@@ -25,6 +25,15 @@ import type {
   ChatsFind422,
   ChatsFind429,
   ChatsFind500,
+  ChatsInitCreateMutationResponse,
+  ChatsInitCreate401,
+  ChatsInitCreate403,
+  ChatsInitCreate404,
+  ChatsInitCreate409,
+  ChatsInitCreate413,
+  ChatsInitCreate422,
+  ChatsInitCreate429,
+  ChatsInitCreate500,
   ChatsDeleteMutationResponse,
   ChatsDeletePathParams,
   ChatsDelete401,
@@ -234,7 +243,7 @@ import type {
 /**
  * @description Create a new chat
  * @summary Create Chat
- * {@link chats}
+ * {@link /chats}
  */
 export async function chatsCreate({ config = {} }: { config?: Partial<FetcherConfig> & { client?: typeof client } }) {
   const { client: request = client, ...requestConfig } = config
@@ -246,14 +255,14 @@ export async function chatsCreate({ config = {} }: { config?: Partial<FetcherCon
     Record<string, string>,
     Record<string, string>,
     Record<string, string>
-  >({ method: 'POST', url: `chats`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/chats`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return data
 }
 
 /**
  * @description Find all chats
  * @summary Find Chats
- * {@link chats}
+ * {@link /chats}
  */
 export async function chatsFind({
   queryParams,
@@ -271,14 +280,42 @@ export async function chatsFind({
     Record<string, string>,
     ChatsFindQueryParams,
     Record<string, string>
-  >({ method: 'GET', url: `chats`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/chats`, queryParams, ...requestConfig })
+  return data
+}
+
+/**
+ * @description Initialize a new chat from files
+ * @summary Initialize Chat
+ * {@link /chats/init}
+ */
+export async function chatsInitCreate({ config = {} }: { config?: Partial<FetcherConfig> & { client?: typeof client } }) {
+  const { client: request = client, ...requestConfig } = config
+
+  const data = await request<
+    ChatsInitCreateMutationResponse,
+    ErrorWrapper<
+      | ChatsInitCreate401
+      | ChatsInitCreate403
+      | ChatsInitCreate404
+      | ChatsInitCreate409
+      | ChatsInitCreate413
+      | ChatsInitCreate422
+      | ChatsInitCreate429
+      | ChatsInitCreate500
+    >,
+    null,
+    Record<string, string>,
+    Record<string, string>,
+    Record<string, string>
+  >({ method: 'POST', url: `/chats/init`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return data
 }
 
 /**
  * @description Delete a chat
  * @summary Delete Chat
- * {@link chatsChatId}
+ * {@link /chats/:chatId}
  */
 export async function chatsDelete({
   pathParams: { chatId },
@@ -300,14 +337,14 @@ export async function chatsDelete({
     Record<string, string>,
     Record<string, string>,
     ChatsDeletePathParams
-  >({ method: 'DELETE', url: `chatsChatId`, ...requestConfig })
+  >({ method: 'DELETE', url: `/chats/${chatId}`, ...requestConfig })
   return data
 }
 
 /**
  * @description Get a chat
  * @summary Get Chat
- * {@link chatsChatId}
+ * {@link /chats/:chatId}
  */
 export async function chatsGetById({
   pathParams: { chatId },
@@ -329,14 +366,14 @@ export async function chatsGetById({
     Record<string, string>,
     Record<string, string>,
     ChatsGetByIdPathParams
-  >({ method: 'GET', url: `chatsChatId`, ...requestConfig })
+  >({ method: 'GET', url: `/chats/${chatId}`, ...requestConfig })
   return data
 }
 
 /**
  * @description Update a chat
  * @summary Update Chat
- * {@link chatsChatId}
+ * {@link /chats/:chatId}
  */
 export async function chatsUpdate({
   pathParams: { chatId },
@@ -358,14 +395,14 @@ export async function chatsUpdate({
     Record<string, string>,
     Record<string, string>,
     ChatsUpdatePathParams
-  >({ method: 'PATCH', url: `chatsChatId`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'PATCH', url: `/chats/${chatId}`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return data
 }
 
 /**
  * @description Favorite a chat
  * @summary Favorite Chat
- * {@link chatsChatIdFavorite}
+ * {@link /chats/:chatId/favorite}
  */
 export async function chatsFavorite({
   pathParams: { chatId },
@@ -389,14 +426,14 @@ export async function chatsFavorite({
     Record<string, string>,
     Record<string, string>,
     ChatsFavoritePathParams
-  >({ method: 'PUT', url: `chatsChatIdFavorite`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'PUT', url: `/chats/${chatId}/favorite`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return data
 }
 
 /**
  * @description Fork a version in a chat
  * @summary Fork Chat
- * {@link chatsChatIdFork}
+ * {@link /chats/:chatId/fork}
  */
 export async function chatsFork({
   pathParams: { chatId },
@@ -418,14 +455,14 @@ export async function chatsFork({
     Record<string, string>,
     Record<string, string>,
     ChatsForkPathParams
-  >({ method: 'POST', url: `chatsChatIdFork`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/chats/${chatId}/fork`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return data
 }
 
 /**
  * @description Get the project for a chat
  * @summary Get Project by Chat ID
- * {@link chatsChatIdProject}
+ * {@link /chats/:chatId/project}
  */
 export async function projectsGetByChatId({
   pathParams: { chatId },
@@ -456,14 +493,14 @@ export async function projectsGetByChatId({
     Record<string, string>,
     Record<string, string>,
     ProjectsGetByChatIdPathParams
-  >({ method: 'GET', url: `chatsChatIdProject`, ...requestConfig })
+  >({ method: 'GET', url: `/chats/${chatId}/project`, ...requestConfig })
   return data
 }
 
 /**
  * @description Create a new message in a chat
  * @summary Create Message
- * {@link chatsChatIdMessages}
+ * {@link /chats/:chatId/messages}
  */
 export async function chatsSendMessage({
   pathParams: { chatId },
@@ -494,14 +531,14 @@ export async function chatsSendMessage({
     Record<string, string>,
     Record<string, string>,
     ChatsSendMessagePathParams
-  >({ method: 'POST', url: `chatsChatIdMessages`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/chats/${chatId}/messages`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return data
 }
 
 /**
  * @description Get the metadata for a chat
  * @summary Get Chat Metadata
- * {@link chatsChatIdMetadata}
+ * {@link /chats/:chatId/metadata}
  */
 export async function chatsGetMetadata({
   pathParams: { chatId },
@@ -532,14 +569,14 @@ export async function chatsGetMetadata({
     Record<string, string>,
     Record<string, string>,
     ChatsGetMetadataPathParams
-  >({ method: 'GET', url: `chatsChatIdMetadata`, ...requestConfig })
+  >({ method: 'GET', url: `/chats/${chatId}/metadata`, ...requestConfig })
   return data
 }
 
 /**
  * @description Resume a chat message
  * @summary Resume Chat Message
- * {@link chatsChatIdMessagesMessageIdResume}
+ * {@link /chats/:chatId/messages/:messageId/resume}
  */
 export async function chatsResume({
   pathParams: { chatId, messageId },
@@ -565,14 +602,14 @@ export async function chatsResume({
     Record<string, string>,
     Record<string, string>,
     ChatsResumePathParams
-  >({ method: 'POST', url: `chatsChatIdMessagesMessageIdResume`, ...requestConfig })
+  >({ method: 'POST', url: `/chats/${chatId}/messages/${messageId}/resume`, ...requestConfig })
   return data
 }
 
 /**
  * @description Find logs for a deployment
  * @summary Find Deployment Logs
- * {@link deploymentsDeploymentIdLogs}
+ * {@link /deployments/:deploymentId/logs}
  */
 export async function deploymentsFindLogs({
   pathParams: { deploymentId },
@@ -605,14 +642,14 @@ export async function deploymentsFindLogs({
     Record<string, string>,
     DeploymentsFindLogsQueryParams,
     DeploymentsFindLogsPathParams
-  >({ method: 'GET', url: `deploymentsDeploymentIdLogs`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/deployments/${deploymentId}/logs`, queryParams, ...requestConfig })
   return data
 }
 
 /**
  * @description Find errors for a deployment
  * @summary Find Deployment Errors
- * {@link deploymentsDeploymentIdErrors}
+ * {@link /deployments/:deploymentId/errors}
  */
 export async function deploymentsFindErrors({
   pathParams: { deploymentId },
@@ -643,14 +680,14 @@ export async function deploymentsFindErrors({
     Record<string, string>,
     Record<string, string>,
     DeploymentsFindErrorsPathParams
-  >({ method: 'GET', url: `deploymentsDeploymentIdErrors`, ...requestConfig })
+  >({ method: 'GET', url: `/deployments/${deploymentId}/errors`, ...requestConfig })
   return data
 }
 
 /**
  * @description Find all Vercel projects
  * @summary Find Vercel Projects
- * {@link integrationsVercelProjects}
+ * {@link /integrations/vercel/projects}
  */
 export async function integrationsVercelProjectsFind({ config = {} }: { config?: Partial<FetcherConfig> & { client?: typeof client } }) {
   const { client: request = client, ...requestConfig } = config
@@ -671,14 +708,14 @@ export async function integrationsVercelProjectsFind({ config = {} }: { config?:
     Record<string, string>,
     Record<string, string>,
     Record<string, string>
-  >({ method: 'GET', url: `integrationsVercelProjects`, ...requestConfig })
+  >({ method: 'GET', url: `/integrations/vercel/projects`, ...requestConfig })
   return data
 }
 
 /**
  * @description Create a new Vercel project
  * @summary Create Vercel Project
- * {@link integrationsVercelProjects}
+ * {@link /integrations/vercel/projects}
  */
 export async function integrationsVercelProjectsCreate({ config = {} }: { config?: Partial<FetcherConfig> & { client?: typeof client } }) {
   const { client: request = client, ...requestConfig } = config
@@ -699,14 +736,14 @@ export async function integrationsVercelProjectsCreate({ config = {} }: { config
     Record<string, string>,
     Record<string, string>,
     Record<string, string>
-  >({ method: 'POST', url: `integrationsVercelProjects`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/integrations/vercel/projects`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return data
 }
 
 /**
  * @description Find all projects
  * @summary Find Projects
- * {@link projects}
+ * {@link /projects}
  */
 export async function projectsFind({ config = {} }: { config?: Partial<FetcherConfig> & { client?: typeof client } }) {
   const { client: request = client, ...requestConfig } = config
@@ -718,14 +755,14 @@ export async function projectsFind({ config = {} }: { config?: Partial<FetcherCo
     Record<string, string>,
     Record<string, string>,
     Record<string, string>
-  >({ method: 'GET', url: `projects`, ...requestConfig })
+  >({ method: 'GET', url: `/projects`, ...requestConfig })
   return data
 }
 
 /**
  * @description Create a new project
  * @summary Create Project
- * {@link projects}
+ * {@link /projects}
  */
 export async function projectsCreate({ config = {} }: { config?: Partial<FetcherConfig> & { client?: typeof client } }) {
   const { client: request = client, ...requestConfig } = config
@@ -746,14 +783,14 @@ export async function projectsCreate({ config = {} }: { config?: Partial<Fetcher
     Record<string, string>,
     Record<string, string>,
     Record<string, string>
-  >({ method: 'POST', url: `projects`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/projects`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return data
 }
 
 /**
  * @description Assign a project to a chat
  * @summary Assign Project to Chat
- * {@link projectsProjectIdAssign}
+ * {@link /projects/:projectId/assign}
  */
 export async function projectsAssign({
   pathParams: { projectId },
@@ -784,14 +821,14 @@ export async function projectsAssign({
     Record<string, string>,
     Record<string, string>,
     ProjectsAssignPathParams
-  >({ method: 'POST', url: `projectsProjectIdAssign`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/projects/${projectId}/assign`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return data
 }
 
 /**
  * @description Find the rate limit for a scope
  * @summary Find Rate Limit
- * {@link rateLimits}
+ * {@link /rate-limits}
  */
 export async function rateLimitsFind({
   queryParams,
@@ -818,14 +855,14 @@ export async function rateLimitsFind({
     Record<string, string>,
     RateLimitsFindQueryParams,
     Record<string, string>
-  >({ method: 'GET', url: `rateLimits`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/rate-limits`, queryParams, ...requestConfig })
   return data
 }
 
 /**
  * @description Get the user
  * @summary Get User
- * {@link user}
+ * {@link /user}
  */
 export async function userGet({ config = {} }: { config?: Partial<FetcherConfig> & { client?: typeof client } }) {
   const { client: request = client, ...requestConfig } = config
@@ -837,14 +874,14 @@ export async function userGet({ config = {} }: { config?: Partial<FetcherConfig>
     Record<string, string>,
     Record<string, string>,
     Record<string, string>
-  >({ method: 'GET', url: `user`, ...requestConfig })
+  >({ method: 'GET', url: `/user`, ...requestConfig })
   return data
 }
 
 /**
  * @description Get the billing for the user
  * @summary Get Billing
- * {@link userBilling}
+ * {@link /user/billing}
  */
 export async function userGetBilling({
   queryParams,
@@ -871,14 +908,14 @@ export async function userGetBilling({
     Record<string, string>,
     UserGetBillingQueryParams,
     Record<string, string>
-  >({ method: 'GET', url: `userBilling`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/user/billing`, queryParams, ...requestConfig })
   return data
 }
 
 /**
  * @description Get the plan for the user
  * @summary Get Plan
- * {@link userPlan}
+ * {@link /user/plan}
  */
 export async function userGetPlan({ config = {} }: { config?: Partial<FetcherConfig> & { client?: typeof client } }) {
   const { client: request = client, ...requestConfig } = config
@@ -890,14 +927,14 @@ export async function userGetPlan({ config = {} }: { config?: Partial<FetcherCon
     Record<string, string>,
     Record<string, string>,
     Record<string, string>
-  >({ method: 'GET', url: `userPlan`, ...requestConfig })
+  >({ method: 'GET', url: `/user/plan`, ...requestConfig })
   return data
 }
 
 /**
  * @description Get all scopes for the user
  * @summary Get User Scopes
- * {@link userScopes}
+ * {@link /user/scopes}
  */
 export async function userGetScopes({ config = {} }: { config?: Partial<FetcherConfig> & { client?: typeof client } }) {
   const { client: request = client, ...requestConfig } = config
@@ -911,40 +948,42 @@ export async function userGetScopes({ config = {} }: { config?: Partial<FetcherC
     Record<string, string>,
     Record<string, string>,
     Record<string, string>
-  >({ method: 'GET', url: `userScopes`, ...requestConfig })
+  >({ method: 'GET', url: `/user/scopes`, ...requestConfig })
   return data
 }
 
 export const operationsByPath = {
-  'POST chats': chatsCreate,
-  'GET chats': chatsFind,
-  'DELETE chatsChatId': chatsDelete,
-  'GET chatsChatId': chatsGetById,
-  'PATCH chatsChatId': chatsUpdate,
-  'PUT chatsChatIdFavorite': chatsFavorite,
-  'POST chatsChatIdFork': chatsFork,
-  'GET chatsChatIdProject': projectsGetByChatId,
-  'POST chatsChatIdMessages': chatsSendMessage,
-  'GET chatsChatIdMetadata': chatsGetMetadata,
-  'POST chatsChatIdMessagesMessageIdResume': chatsResume,
-  'GET deploymentsDeploymentIdLogs': deploymentsFindLogs,
-  'GET deploymentsDeploymentIdErrors': deploymentsFindErrors,
-  'GET integrationsVercelProjects': integrationsVercelProjectsFind,
-  'POST integrationsVercelProjects': integrationsVercelProjectsCreate,
-  'GET projects': projectsFind,
-  'POST projects': projectsCreate,
-  'POST projectsProjectIdAssign': projectsAssign,
-  'GET rateLimits': rateLimitsFind,
-  'GET user': userGet,
-  'GET userBilling': userGetBilling,
-  'GET userPlan': userGetPlan,
-  'GET userScopes': userGetScopes,
+  'POST /chats': chatsCreate,
+  'GET /chats': chatsFind,
+  'POST /chats/init': chatsInitCreate,
+  'DELETE /chats/{chatId}': chatsDelete,
+  'GET /chats/{chatId}': chatsGetById,
+  'PATCH /chats/{chatId}': chatsUpdate,
+  'PUT /chats/{chatId}/favorite': chatsFavorite,
+  'POST /chats/{chatId}/fork': chatsFork,
+  'GET /chats/{chatId}/project': projectsGetByChatId,
+  'POST /chats/{chatId}/messages': chatsSendMessage,
+  'GET /chats/{chatId}/metadata': chatsGetMetadata,
+  'POST /chats/{chatId}/messages/{messageId}/resume': chatsResume,
+  'GET /deployments/{deploymentId}/logs': deploymentsFindLogs,
+  'GET /deployments/{deploymentId}/errors': deploymentsFindErrors,
+  'GET /integrations/vercel/projects': integrationsVercelProjectsFind,
+  'POST /integrations/vercel/projects': integrationsVercelProjectsCreate,
+  'GET /projects': projectsFind,
+  'POST /projects': projectsCreate,
+  'POST /projects/{projectId}/assign': projectsAssign,
+  'GET /rate-limits': rateLimitsFind,
+  'GET /user': userGet,
+  'GET /user/billing': userGetBilling,
+  'GET /user/plan': userGetPlan,
+  'GET /user/scopes': userGetScopes,
 }
 
 export const operationsByTag = {
   chats: {
     chatsCreate,
     chatsFind,
+    chatsInitCreate,
     chatsDelete,
     chatsGetById,
     chatsUpdate,
@@ -981,7 +1020,7 @@ export const operationsByTag = {
 
 export const tagDictionary = {
   chats: {
-    POST: ['chatsCreate', 'chatsFork', 'chatsSendMessage', 'chatsResume'],
+    POST: ['chatsCreate', 'chatsInitCreate', 'chatsFork', 'chatsSendMessage', 'chatsResume'],
     GET: ['chatsFind', 'chatsGetById', 'chatsGetMetadata'],
     DELETE: ['chatsDelete'],
     PATCH: ['chatsUpdate'],

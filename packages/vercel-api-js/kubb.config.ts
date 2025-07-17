@@ -39,8 +39,8 @@ export default defineConfig(async () => {
   // Fix constraints on union types
   openAPIDocument = fixUnionConstraints(openAPIDocument);
 
-  // Camel case all properties
-  openAPIDocument = camelCaseProperties(openAPIDocument);
+  // Camel case all properties except path strings
+  openAPIDocument = camelCaseProperties(openAPIDocument, false);
 
   return {
     ...baseConfig,
@@ -256,14 +256,21 @@ function fixUnionConstraints(obj: any): any {
   return obj;
 }
 
-function camelCaseProperties(obj: any): any {
+function camelCaseProperties(obj: any, isPathsObject = false): any {
   if (Array.isArray(obj)) {
-    return obj.map(camelCaseProperties);
+    return obj.map(item => camelCaseProperties(item, false));
   }
   if (obj !== null && typeof obj === 'object') {
     return Object.keys(obj).reduce((result, key) => {
-      const camelKey = c.camel(key);
-      result[camelKey] = camelCaseProperties(obj[key]);
+      // Don't camel case path strings in the paths object
+      if (isPathsObject && key.startsWith('/')) {
+        result[key] = camelCaseProperties(obj[key], false);
+      } else {
+        const camelKey = c.camel(key);
+        // Check if we're processing the paths object
+        const isPathsChild = key === 'paths';
+        result[camelKey] = camelCaseProperties(obj[key], isPathsChild);
+      }
       return result;
     }, {} as any);
   }

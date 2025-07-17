@@ -1484,7 +1484,7 @@ import {
 /**
  * @description Allows to read an access group
  * @summary Reads an access group
- * {@link v1AccessGroupsIdOrName}
+ * {@link /v1/access-groups/:idOrName}
  */
 export async function readAccessGroup({
   pathParams: { idOrName },
@@ -1508,14 +1508,14 @@ export async function readAccessGroup({
     Record<string, string>,
     ReadAccessGroupQueryParams,
     ReadAccessGroupPathParams
-  >({ method: 'GET', url: `v1AccessGroupsIdOrName`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/access-groups/${idOrName}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Allows to update an access group metadata
  * @summary Update an access group
- * {@link v1AccessGroupsIdOrName}
+ * {@link /v1/access-groups/:idOrName}
  */
 export async function updateAccessGroup({
   pathParams: { idOrName },
@@ -1539,14 +1539,20 @@ export async function updateAccessGroup({
     Record<string, string>,
     UpdateAccessGroupQueryParams,
     UpdateAccessGroupPathParams
-  >({ method: 'POST', url: `v1AccessGroupsIdOrName`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({
+    method: 'POST',
+    url: `/v1/access-groups/${idOrName}`,
+    queryParams,
+    ...requestConfig,
+    headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
+  })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Allows to delete an access group
  * @summary Deletes an access group
- * {@link v1AccessGroupsIdOrName}
+ * {@link /v1/access-groups/:idOrName}
  */
 export async function deleteAccessGroup({
   pathParams: { idOrName },
@@ -1570,14 +1576,14 @@ export async function deleteAccessGroup({
     Record<string, string>,
     DeleteAccessGroupQueryParams,
     DeleteAccessGroupPathParams
-  >({ method: 'DELETE', url: `v1AccessGroupsIdOrName`, queryParams, ...requestConfig })
+  >({ method: 'DELETE', url: `/v1/access-groups/${idOrName}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description List members of an access group
  * @summary List members of an access group
- * {@link v1AccessGroupsIdOrNameMembers}
+ * {@link /v1/access-groups/:idOrName/members}
  */
 export async function listAccessGroupMembers({
   pathParams: { idOrName },
@@ -1601,14 +1607,14 @@ export async function listAccessGroupMembers({
     Record<string, string>,
     ListAccessGroupMembersQueryParams,
     ListAccessGroupMembersPathParams
-  >({ method: 'GET', url: `v1AccessGroupsIdOrNameMembers`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/access-groups/${idOrName}/members`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description List access groups
  * @summary List access groups for a team, project or member
- * {@link v1AccessGroups}
+ * {@link /v1/access-groups}
  */
 export async function listAccessGroups({
   queryParams,
@@ -1626,14 +1632,14 @@ export async function listAccessGroups({
     Record<string, string>,
     ListAccessGroupsQueryParams,
     Record<string, string>
-  >({ method: 'GET', url: `v1AccessGroups`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/access-groups`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Allows to create an access group
  * @summary Creates an access group
- * {@link v1AccessGroups}
+ * {@link /v1/access-groups}
  */
 export async function createAccessGroup({
   queryParams,
@@ -1651,14 +1657,14 @@ export async function createAccessGroup({
     Record<string, string>,
     CreateAccessGroupQueryParams,
     Record<string, string>
-  >({ method: 'POST', url: `v1AccessGroups`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/v1/access-groups`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description List projects of an access group
  * @summary List projects of an access group
- * {@link v1AccessGroupsIdOrNameProjects}
+ * {@link /v1/access-groups/:idOrName/projects}
  */
 export async function listAccessGroupProjects({
   pathParams: { idOrName },
@@ -1682,14 +1688,14 @@ export async function listAccessGroupProjects({
     Record<string, string>,
     ListAccessGroupProjectsQueryParams,
     ListAccessGroupProjectsPathParams
-  >({ method: 'GET', url: `v1AccessGroupsIdOrNameProjects`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/access-groups/${idOrName}/projects`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Allows creation of an access group project
  * @summary Create an access group project
- * {@link v1AccessGroupsAccessGroupIdOrNameProjects}
+ * {@link /v1/access-groups/:accessGroupIdOrName/projects}
  */
 export async function createAccessGroupProject({
   pathParams: { accessGroupIdOrName },
@@ -1715,7 +1721,7 @@ export async function createAccessGroupProject({
     CreateAccessGroupProjectPathParams
   >({
     method: 'POST',
-    url: `v1AccessGroupsAccessGroupIdOrNameProjects`,
+    url: `/v1/access-groups/${accessGroupIdOrName}/projects`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -1726,7 +1732,7 @@ export async function createAccessGroupProject({
 /**
  * @description Allows reading an access group project
  * @summary Reads an access group project
- * {@link v1AccessGroupsAccessGroupIdOrNameProjectsProjectId}
+ * {@link /v1/access-groups/:accessGroupIdOrName/projects/:projectId}
  */
 export async function readAccessGroupProject({
   pathParams: { accessGroupIdOrName, projectId },
@@ -1754,14 +1760,14 @@ export async function readAccessGroupProject({
     Record<string, string>,
     ReadAccessGroupProjectQueryParams,
     ReadAccessGroupProjectPathParams
-  >({ method: 'GET', url: `v1AccessGroupsAccessGroupIdOrNameProjectsProjectId`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/access-groups/${accessGroupIdOrName}/projects/${projectId}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Allows update of an access group project
  * @summary Update an access group project
- * {@link v1AccessGroupsAccessGroupIdOrNameProjectsProjectId}
+ * {@link /v1/access-groups/:accessGroupIdOrName/projects/:projectId}
  */
 export async function updateAccessGroupProject({
   pathParams: { accessGroupIdOrName, projectId },
@@ -1791,7 +1797,7 @@ export async function updateAccessGroupProject({
     UpdateAccessGroupProjectPathParams
   >({
     method: 'PATCH',
-    url: `v1AccessGroupsAccessGroupIdOrNameProjectsProjectId`,
+    url: `/v1/access-groups/${accessGroupIdOrName}/projects/${projectId}`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -1802,7 +1808,7 @@ export async function updateAccessGroupProject({
 /**
  * @description Allows deletion of an access group project
  * @summary Delete an access group project
- * {@link v1AccessGroupsAccessGroupIdOrNameProjectsProjectId}
+ * {@link /v1/access-groups/:accessGroupIdOrName/projects/:projectId}
  */
 export async function deleteAccessGroupProject({
   pathParams: { accessGroupIdOrName, projectId },
@@ -1830,14 +1836,14 @@ export async function deleteAccessGroupProject({
     Record<string, string>,
     DeleteAccessGroupProjectQueryParams,
     DeleteAccessGroupProjectPathParams
-  >({ method: 'DELETE', url: `v1AccessGroupsAccessGroupIdOrNameProjectsProjectId`, queryParams, ...requestConfig })
+  >({ method: 'DELETE', url: `/v1/access-groups/${accessGroupIdOrName}/projects/${projectId}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Records an artifacts cache usage event. The body of this request is an array of cache usage events. The supported event types are `HIT` and `MISS`. The source is either `LOCAL` the cache event was on the users filesystem cache or `REMOTE` if the cache event is for a remote cache. When the event is a `HIT` the request also accepts a number `duration` which is the time taken to generate the artifact in the cache.
  * @summary Record an artifacts cache usage event
- * {@link v8ArtifactsEvents}
+ * {@link /v8/artifacts/events}
  */
 export async function recordEvents({
   queryParams,
@@ -1859,7 +1865,7 @@ export async function recordEvents({
     Record<string, string>
   >({
     method: 'POST',
-    url: `v8ArtifactsEvents`,
+    url: `/v8/artifacts/events`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...headers, ...requestConfig.headers },
@@ -1870,7 +1876,7 @@ export async function recordEvents({
 /**
  * @description Check the status of Remote Caching for this principal. Returns a JSON-encoded status indicating if Remote Caching is enabled, disabled, or disabled due to usage limits.
  * @summary Get status of Remote Caching for this principal
- * {@link v8ArtifactsStatus}
+ * {@link /v8/artifacts/status}
  */
 export async function status({
   queryParams,
@@ -1888,14 +1894,14 @@ export async function status({
     Record<string, string>,
     StatusQueryParams,
     Record<string, string>
-  >({ method: 'GET', url: `v8ArtifactsStatus`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v8/artifacts/status`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Uploads a cache artifact identified by the `hash` specified on the path. The cache artifact can then be downloaded with the provided `hash`.
  * @summary Upload a cache artifact
- * {@link v8ArtifactsHash}
+ * {@link /v8/artifacts/:hash}
  */
 export async function uploadArtifact({
   pathParams: { hash },
@@ -1923,7 +1929,7 @@ export async function uploadArtifact({
     UploadArtifactPathParams
   >({
     method: 'PUT',
-    url: `v8ArtifactsHash`,
+    url: `/v8/artifacts/${hash}`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationOctetStream', ...headers, ...requestConfig.headers },
@@ -1934,7 +1940,7 @@ export async function uploadArtifact({
 /**
  * @description Downloads a cache artifact indentified by its `hash` specified on the request path. The artifact is downloaded as an octet-stream. The client should verify the content-length header and response body.
  * @summary Download a cache artifact
- * {@link v8ArtifactsHash}
+ * {@link /v8/artifacts/:hash}
  */
 export async function downloadArtifact({
   pathParams: { hash },
@@ -1960,14 +1966,14 @@ export async function downloadArtifact({
     DownloadArtifactHeaderParams,
     DownloadArtifactQueryParams,
     DownloadArtifactPathParams
-  >({ method: 'GET', url: `v8ArtifactsHash`, queryParams, ...requestConfig, headers: { ...headers, ...requestConfig.headers } })
+  >({ method: 'GET', url: `/v8/artifacts/${hash}`, queryParams, ...requestConfig, headers: { ...headers, ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Query information about an array of artifacts.
  * @summary Query information about an artifact
- * {@link v8Artifacts}
+ * {@link /v8/artifacts}
  */
 export async function artifactQuery({
   queryParams,
@@ -1985,14 +1991,14 @@ export async function artifactQuery({
     Record<string, string>,
     ArtifactQueryQueryParams,
     Record<string, string>
-  >({ method: 'POST', url: `v8Artifacts`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/v8/artifacts`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Creates a new check. This endpoint must be called with an OAuth2 or it will produce a 400 error.
  * @summary Creates a new Check
- * {@link v1DeploymentsDeploymentIdChecks}
+ * {@link /v1/deployments/:deploymentId/checks}
  */
 export async function createCheck({
   pathParams: { deploymentId },
@@ -2018,7 +2024,7 @@ export async function createCheck({
     CreateCheckPathParams
   >({
     method: 'POST',
-    url: `v1DeploymentsDeploymentIdChecks`,
+    url: `/v1/deployments/${deploymentId}/checks`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -2029,7 +2035,7 @@ export async function createCheck({
 /**
  * @description List all of the checks created for a deployment.
  * @summary Retrieve a list of all checks
- * {@link v1DeploymentsDeploymentIdChecks}
+ * {@link /v1/deployments/:deploymentId/checks}
  */
 export async function getAllChecks({
   pathParams: { deploymentId },
@@ -2053,14 +2059,14 @@ export async function getAllChecks({
     Record<string, string>,
     GetAllChecksQueryParams,
     GetAllChecksPathParams
-  >({ method: 'GET', url: `v1DeploymentsDeploymentIdChecks`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/deployments/${deploymentId}/checks`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Return a detailed response for a single check.
  * @summary Get a single check
- * {@link v1DeploymentsDeploymentIdChecksCheckId}
+ * {@link /v1/deployments/:deploymentId/checks/:checkId}
  */
 export async function getCheck({
   pathParams: { deploymentId, checkId },
@@ -2088,14 +2094,14 @@ export async function getCheck({
     Record<string, string>,
     GetCheckQueryParams,
     GetCheckPathParams
-  >({ method: 'GET', url: `v1DeploymentsDeploymentIdChecksCheckId`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/deployments/${deploymentId}/checks/${checkId}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Update an existing check. This endpoint must be called with an OAuth2 or it will produce a 400 error.
  * @summary Update a check
- * {@link v1DeploymentsDeploymentIdChecksCheckId}
+ * {@link /v1/deployments/:deploymentId/checks/:checkId}
  */
 export async function updateCheck({
   pathParams: { deploymentId, checkId },
@@ -2125,7 +2131,7 @@ export async function updateCheck({
     UpdateCheckPathParams
   >({
     method: 'PATCH',
-    url: `v1DeploymentsDeploymentIdChecksCheckId`,
+    url: `/v1/deployments/${deploymentId}/checks/${checkId}`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -2136,7 +2142,7 @@ export async function updateCheck({
 /**
  * @description Rerequest a selected check that has failed.
  * @summary Rerequest a check
- * {@link v1DeploymentsDeploymentIdChecksCheckIdRerequest}
+ * {@link /v1/deployments/:deploymentId/checks/:checkId/rerequest}
  */
 export async function rerequestCheck({
   pathParams: { deploymentId, checkId },
@@ -2164,12 +2170,12 @@ export async function rerequestCheck({
     Record<string, string>,
     RerequestCheckQueryParams,
     RerequestCheckPathParams
-  >({ method: 'POST', url: `v1DeploymentsDeploymentIdChecksCheckIdRerequest`, queryParams, ...requestConfig })
+  >({ method: 'POST', url: `/v1/deployments/${deploymentId}/checks/${checkId}/rerequest`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
- * {@link dataCachePurgeAll}
+ * {@link /data-cache/purge-all}
  */
 export async function purgeAllDataCache({
   queryParams,
@@ -2187,12 +2193,12 @@ export async function purgeAllDataCache({
     Record<string, string>,
     PurgeAllDataCacheQueryParams,
     Record<string, string>
-  >({ method: 'DELETE', url: `dataCachePurgeAll`, queryParams, ...requestConfig })
+  >({ method: 'DELETE', url: `/data-cache/purge-all`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
- * {@link dataCacheBillingSettings}
+ * {@link /data-cache/billing-settings}
  */
 export async function updateDataCacheBillingSettings({
   config = {},
@@ -2208,14 +2214,14 @@ export async function updateDataCacheBillingSettings({
     Record<string, string>,
     Record<string, string>,
     Record<string, string>
-  >({ method: 'PATCH', url: `dataCacheBillingSettings`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'PATCH', url: `/data-cache/billing-settings`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Update the data cache feature on a project.
  * @summary Update the data cache feature
- * {@link v1DataCacheProjectsProjectId}
+ * {@link /v1/data-cache/projects/:projectId}
  */
 export async function updateProjectDataCache({
   pathParams: { projectId },
@@ -2241,7 +2247,7 @@ export async function updateProjectDataCache({
     UpdateProjectDataCachePathParams
   >({
     method: 'PATCH',
-    url: `v1DataCacheProjectsProjectId`,
+    url: `/v1/data-cache/projects/${projectId}`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -2252,7 +2258,7 @@ export async function updateProjectDataCache({
 /**
  * @description Get the build logs of a deployment by deployment ID and build ID. It can work as an infinite stream of logs or as a JSON endpoint depending on the input parameters.
  * @summary Get deployment events
- * {@link v3DeploymentsIdOrUrlEvents}
+ * {@link /v3/deployments/:idOrUrl/events}
  */
 export async function getDeploymentEvents({
   pathParams: { idOrUrl },
@@ -2276,14 +2282,14 @@ export async function getDeploymentEvents({
     Record<string, string>,
     GetDeploymentEventsQueryParams,
     GetDeploymentEventsPathParams
-  >({ method: 'GET', url: `v3DeploymentsIdOrUrlEvents`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v3/deployments/${idOrUrl}/events`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Updates the deployment integration action for the specified integration installation
  * @summary Update deployment integration action
- * {@link v1DeploymentsDeploymentIdIntegrationsIntegrationConfigurationIdResourcesResourceIdActionsAction}
+ * {@link /v1/deployments/:deploymentId/integrations/:integrationConfigurationId/resources/:resourceId/actions/:action}
  */
 export async function updateIntegrationDeploymentAction({
   pathParams: { deploymentId, integrationConfigurationId, resourceId, action },
@@ -2319,7 +2325,7 @@ export async function updateIntegrationDeploymentAction({
     UpdateIntegrationDeploymentActionPathParams
   >({
     method: 'PATCH',
-    url: `v1DeploymentsDeploymentIdIntegrationsIntegrationConfigurationIdResourcesResourceIdActionsAction`,
+    url: `/v1/deployments/${deploymentId}/integrations/${integrationConfigurationId}/resources/${resourceId}/actions/${action}`,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
   })
@@ -2329,7 +2335,7 @@ export async function updateIntegrationDeploymentAction({
 /**
  * @description Retrieves information for a deployment either by supplying its ID (`id` property) or Hostname (`url` property). Additional details will be included when the authenticated user or team is an owner of the deployment.
  * @summary Get a deployment by ID or URL
- * {@link v13DeploymentsIdOrUrl}
+ * {@link /v13/deployments/:idOrUrl}
  */
 export async function getDeployment({
   pathParams: { idOrUrl },
@@ -2353,14 +2359,14 @@ export async function getDeployment({
     Record<string, string>,
     GetDeploymentQueryParams,
     GetDeploymentPathParams
-  >({ method: 'GET', url: `v13DeploymentsIdOrUrl`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v13/deployments/${idOrUrl}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Create a new deployment with all the required and intended data. If the deployment is not a git deployment, all files must be provided with the request, either referenced or inlined. Additionally, a deployment id can be specified to redeploy a previous deployment.
  * @summary Create a new deployment
- * {@link v13Deployments}
+ * {@link /v13/deployments}
  */
 export async function createDeployment({
   queryParams,
@@ -2380,14 +2386,14 @@ export async function createDeployment({
     Record<string, string>,
     CreateDeploymentQueryParams,
     Record<string, string>
-  >({ method: 'POST', url: `v13Deployments`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/v13/deployments`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description This endpoint allows you to cancel a deployment which is currently building, by supplying its `id` in the URL.
  * @summary Cancel a deployment
- * {@link v12DeploymentsIdCancel}
+ * {@link /v12/deployments/:id/cancel}
  */
 export async function cancelDeployment({
   pathParams: { id },
@@ -2411,14 +2417,14 @@ export async function cancelDeployment({
     Record<string, string>,
     CancelDeploymentQueryParams,
     CancelDeploymentPathParams
-  >({ method: 'PATCH', url: `v12DeploymentsIdCancel`, queryParams, ...requestConfig })
+  >({ method: 'PATCH', url: `/v12/deployments/${id}/cancel`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Allows to purchase the specified domain.
  * @summary Purchase a domain
- * {@link v5DomainsBuy}
+ * {@link /v5/domains/buy}
  */
 export async function buyDomain({
   queryParams,
@@ -2436,14 +2442,14 @@ export async function buyDomain({
     Record<string, string>,
     BuyDomainQueryParams,
     Record<string, string>
-  >({ method: 'POST', url: `v5DomainsBuy`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/v5/domains/buy`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Check the price to purchase a domain and how long a single purchase period is.
  * @summary Check the price for a domain
- * {@link v4DomainsPrice}
+ * {@link /v4/domains/price}
  */
 export async function checkDomainPrice({
   queryParams,
@@ -2461,14 +2467,14 @@ export async function checkDomainPrice({
     Record<string, string>,
     CheckDomainPriceQueryParams,
     Record<string, string>
-  >({ method: 'GET', url: `v4DomainsPrice`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v4/domains/price`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Check if a domain name is available for purchase.
  * @summary Check a Domain Availability
- * {@link v4DomainsStatus}
+ * {@link /v4/domains/status}
  */
 export async function checkDomainStatus({
   queryParams,
@@ -2486,14 +2492,14 @@ export async function checkDomainStatus({
     Record<string, string>,
     CheckDomainStatusQueryParams,
     Record<string, string>
-  >({ method: 'GET', url: `v4DomainsStatus`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v4/domains/status`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Retrieves a list of DNS records created for a domain name. By default it returns 20 records if no limit is provided. The rest can be retrieved using the pagination options.
  * @summary List existing DNS records
- * {@link v4DomainsDomainRecords}
+ * {@link /v4/domains/:domain/records}
  */
 export async function getRecords({
   pathParams: { domain },
@@ -2517,14 +2523,14 @@ export async function getRecords({
     Record<string, string>,
     GetRecordsQueryParams,
     GetRecordsPathParams
-  >({ method: 'GET', url: `v4DomainsDomainRecords`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v4/domains/${domain}/records`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Creates a DNS record for a domain.
  * @summary Create a DNS record
- * {@link v2DomainsDomainRecords}
+ * {@link /v2/domains/:domain/records}
  */
 export async function createRecord({
   pathParams: { domain },
@@ -2548,14 +2554,20 @@ export async function createRecord({
     Record<string, string>,
     CreateRecordQueryParams,
     CreateRecordPathParams
-  >({ method: 'POST', url: `v2DomainsDomainRecords`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({
+    method: 'POST',
+    url: `/v2/domains/${domain}/records`,
+    queryParams,
+    ...requestConfig,
+    headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
+  })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Updates an existing DNS record for a domain name.
  * @summary Update an existing DNS record
- * {@link v1DomainsRecordsRecordId}
+ * {@link /v1/domains/records/:recordId}
  */
 export async function updateRecord({
   pathParams: { recordId },
@@ -2581,7 +2593,7 @@ export async function updateRecord({
     UpdateRecordPathParams
   >({
     method: 'PATCH',
-    url: `v1DomainsRecordsRecordId`,
+    url: `/v1/domains/records/${recordId}`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -2592,7 +2604,7 @@ export async function updateRecord({
 /**
  * @description Removes an existing DNS record from a domain name.
  * @summary Delete a DNS record
- * {@link v2DomainsDomainRecordsRecordId}
+ * {@link /v2/domains/:domain/records/:recordId}
  */
 export async function removeRecord({
   pathParams: { domain, recordId },
@@ -2620,14 +2632,14 @@ export async function removeRecord({
     Record<string, string>,
     RemoveRecordQueryParams,
     RemoveRecordPathParams
-  >({ method: 'DELETE', url: `v2DomainsDomainRecordsRecordId`, queryParams, ...requestConfig })
+  >({ method: 'DELETE', url: `/v2/domains/${domain}/records/${recordId}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Fetch domain transfer availability or transfer status if a transfer is in progress.
  * @summary Get domain transfer info.
- * {@link v1DomainsDomainRegistry}
+ * {@link /v1/domains/:domain/registry}
  */
 export async function getDomainTransfer({
   pathParams: { domain },
@@ -2651,14 +2663,14 @@ export async function getDomainTransfer({
     Record<string, string>,
     GetDomainTransferQueryParams,
     GetDomainTransferPathParams
-  >({ method: 'GET', url: `v1DomainsDomainRegistry`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/domains/${domain}/registry`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Get a Domain's configuration.
  * @summary Get a Domain's configuration
- * {@link v6DomainsDomainConfig}
+ * {@link /v6/domains/:domain/config}
  */
 export async function getDomainConfig({
   pathParams: { domain },
@@ -2682,14 +2694,14 @@ export async function getDomainConfig({
     Record<string, string>,
     GetDomainConfigQueryParams,
     GetDomainConfigPathParams
-  >({ method: 'GET', url: `v6DomainsDomainConfig`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v6/domains/${domain}/config`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Get information for a single domain in an account or team.
  * @summary Get Information for a Single Domain
- * {@link v5DomainsDomain}
+ * {@link /v5/domains/:domain}
  */
 export async function getDomain({
   pathParams: { domain },
@@ -2713,14 +2725,14 @@ export async function getDomain({
     Record<string, string>,
     GetDomainQueryParams,
     GetDomainPathParams
-  >({ method: 'GET', url: `v5DomainsDomain`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v5/domains/${domain}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Retrieves a list of domains registered for the authenticated user or team. By default it returns the last 20 domains if no limit is provided.
  * @summary List all the domains
- * {@link v5Domains}
+ * {@link /v5/domains}
  */
 export async function getDomains({
   queryParams,
@@ -2738,14 +2750,14 @@ export async function getDomains({
     Record<string, string>,
     GetDomainsQueryParams,
     Record<string, string>
-  >({ method: 'GET', url: `v5Domains`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v5/domains`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description This endpoint is used for adding a new apex domain name with Vercel for the authenticating user. Can also be used for initiating a domain transfer request from an external Registrar to Vercel.
  * @summary Register or transfer-in a new Domain
- * {@link v7Domains}
+ * {@link /v7/domains}
  */
 export async function createOrTransferDomain({
   queryParams,
@@ -2771,14 +2783,14 @@ export async function createOrTransferDomain({
     Record<string, string>,
     CreateOrTransferDomainQueryParams,
     Record<string, string>
-  >({ method: 'POST', url: `v7Domains`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/v7/domains`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Update or move apex domain.
  * @summary Update or move apex domain
- * {@link v3DomainsDomain}
+ * {@link /v3/domains/:domain}
  */
 export async function patchDomain({
   pathParams: { domain },
@@ -2802,14 +2814,14 @@ export async function patchDomain({
     Record<string, string>,
     PatchDomainQueryParams,
     PatchDomainPathParams
-  >({ method: 'PATCH', url: `v3DomainsDomain`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'PATCH', url: `/v3/domains/${domain}`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Delete a previously registered domain name from Vercel. Deleting a domain will automatically remove any associated aliases.
  * @summary Remove a domain by name
- * {@link v6DomainsDomain}
+ * {@link /v6/domains/:domain}
  */
 export async function deleteDomain({
   pathParams: { domain },
@@ -2833,14 +2845,14 @@ export async function deleteDomain({
     Record<string, string>,
     DeleteDomainQueryParams,
     DeleteDomainPathParams
-  >({ method: 'DELETE', url: `v6DomainsDomain`, queryParams, ...requestConfig })
+  >({ method: 'DELETE', url: `/v6/domains/${domain}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Returns all Edge Configs.
  * @summary Get Edge Configs
- * {@link v1EdgeConfig}
+ * {@link /v1/edge-config}
  */
 export async function getEdgeConfigs({
   queryParams,
@@ -2858,14 +2870,14 @@ export async function getEdgeConfigs({
     Record<string, string>,
     GetEdgeConfigsQueryParams,
     Record<string, string>
-  >({ method: 'GET', url: `v1EdgeConfig`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/edge-config`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Creates an Edge Config.
  * @summary Create an Edge Config
- * {@link v1EdgeConfig}
+ * {@link /v1/edge-config}
  */
 export async function createEdgeConfig({
   queryParams,
@@ -2883,14 +2895,14 @@ export async function createEdgeConfig({
     Record<string, string>,
     CreateEdgeConfigQueryParams,
     Record<string, string>
-  >({ method: 'POST', url: `v1EdgeConfig`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/v1/edge-config`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Returns an Edge Config.
  * @summary Get an Edge Config
- * {@link v1EdgeConfigEdgeConfigId}
+ * {@link /v1/edge-config/:edgeConfigId}
  */
 export async function getEdgeConfig({
   pathParams: { edgeConfigId },
@@ -2914,14 +2926,14 @@ export async function getEdgeConfig({
     Record<string, string>,
     GetEdgeConfigQueryParams,
     GetEdgeConfigPathParams
-  >({ method: 'GET', url: `v1EdgeConfigEdgeConfigId`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/edge-config/${edgeConfigId}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Updates an Edge Config.
  * @summary Update an Edge Config
- * {@link v1EdgeConfigEdgeConfigId}
+ * {@link /v1/edge-config/:edgeConfigId}
  */
 export async function updateEdgeConfig({
   pathParams: { edgeConfigId },
@@ -2945,14 +2957,20 @@ export async function updateEdgeConfig({
     Record<string, string>,
     UpdateEdgeConfigQueryParams,
     UpdateEdgeConfigPathParams
-  >({ method: 'PUT', url: `v1EdgeConfigEdgeConfigId`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({
+    method: 'PUT',
+    url: `/v1/edge-config/${edgeConfigId}`,
+    queryParams,
+    ...requestConfig,
+    headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
+  })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Delete an Edge Config by id.
  * @summary Delete an Edge Config
- * {@link v1EdgeConfigEdgeConfigId}
+ * {@link /v1/edge-config/:edgeConfigId}
  */
 export async function deleteEdgeConfig({
   pathParams: { edgeConfigId },
@@ -2976,14 +2994,14 @@ export async function deleteEdgeConfig({
     Record<string, string>,
     DeleteEdgeConfigQueryParams,
     DeleteEdgeConfigPathParams
-  >({ method: 'DELETE', url: `v1EdgeConfigEdgeConfigId`, queryParams, ...requestConfig })
+  >({ method: 'DELETE', url: `/v1/edge-config/${edgeConfigId}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Returns all items of an Edge Config.
  * @summary Get Edge Config items
- * {@link v1EdgeConfigEdgeConfigIdItems}
+ * {@link /v1/edge-config/:edgeConfigId/items}
  */
 export async function getEdgeConfigItems({
   pathParams: { edgeConfigId },
@@ -3007,14 +3025,14 @@ export async function getEdgeConfigItems({
     Record<string, string>,
     GetEdgeConfigItemsQueryParams,
     GetEdgeConfigItemsPathParams
-  >({ method: 'GET', url: `v1EdgeConfigEdgeConfigIdItems`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/edge-config/${edgeConfigId}/items`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Update multiple Edge Config Items in batch.
  * @summary Update Edge Config items in batch
- * {@link v1EdgeConfigEdgeConfigIdItems}
+ * {@link /v1/edge-config/:edgeConfigId/items}
  */
 export async function patchEdgeConfigItems({
   pathParams: { edgeConfigId },
@@ -3042,7 +3060,7 @@ export async function patchEdgeConfigItems({
     PatchEdgeConfigItemsPathParams
   >({
     method: 'PATCH',
-    url: `v1EdgeConfigEdgeConfigIdItems`,
+    url: `/v1/edge-config/${edgeConfigId}/items`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -3053,7 +3071,7 @@ export async function patchEdgeConfigItems({
 /**
  * @description Returns the schema of an Edge Config.
  * @summary Get Edge Config schema
- * {@link v1EdgeConfigEdgeConfigIdSchema}
+ * {@link /v1/edge-config/:edgeConfigId/schema}
  */
 export async function getEdgeConfigSchema({
   pathParams: { edgeConfigId },
@@ -3077,14 +3095,14 @@ export async function getEdgeConfigSchema({
     Record<string, string>,
     GetEdgeConfigSchemaQueryParams,
     GetEdgeConfigSchemaPathParams
-  >({ method: 'GET', url: `v1EdgeConfigEdgeConfigIdSchema`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/edge-config/${edgeConfigId}/schema`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Update an Edge Config's schema.
  * @summary Update Edge Config schema
- * {@link v1EdgeConfigEdgeConfigIdSchema}
+ * {@link /v1/edge-config/:edgeConfigId/schema}
  */
 export async function patchEdgeConfigSchema({
   pathParams: { edgeConfigId },
@@ -3110,7 +3128,7 @@ export async function patchEdgeConfigSchema({
     PatchEdgeConfigSchemaPathParams
   >({
     method: 'POST',
-    url: `v1EdgeConfigEdgeConfigIdSchema`,
+    url: `/v1/edge-config/${edgeConfigId}/schema`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -3121,7 +3139,7 @@ export async function patchEdgeConfigSchema({
 /**
  * @description Deletes the schema of existing Edge Config.
  * @summary Delete an Edge Config's schema
- * {@link v1EdgeConfigEdgeConfigIdSchema}
+ * {@link /v1/edge-config/:edgeConfigId/schema}
  */
 export async function deleteEdgeConfigSchema({
   pathParams: { edgeConfigId },
@@ -3145,14 +3163,14 @@ export async function deleteEdgeConfigSchema({
     Record<string, string>,
     DeleteEdgeConfigSchemaQueryParams,
     DeleteEdgeConfigSchemaPathParams
-  >({ method: 'DELETE', url: `v1EdgeConfigEdgeConfigIdSchema`, queryParams, ...requestConfig })
+  >({ method: 'DELETE', url: `/v1/edge-config/${edgeConfigId}/schema`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Returns a specific Edge Config Item.
  * @summary Get an Edge Config item
- * {@link v1EdgeConfigEdgeConfigIdItemEdgeConfigItemKey}
+ * {@link /v1/edge-config/:edgeConfigId/item/:edgeConfigItemKey}
  */
 export async function getEdgeConfigItem({
   pathParams: { edgeConfigId, edgeConfigItemKey },
@@ -3180,14 +3198,14 @@ export async function getEdgeConfigItem({
     Record<string, string>,
     GetEdgeConfigItemQueryParams,
     GetEdgeConfigItemPathParams
-  >({ method: 'GET', url: `v1EdgeConfigEdgeConfigIdItemEdgeConfigItemKey`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/edge-config/${edgeConfigId}/item/${edgeConfigItemKey}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Returns all tokens of an Edge Config.
  * @summary Get all tokens of an Edge Config
- * {@link v1EdgeConfigEdgeConfigIdTokens}
+ * {@link /v1/edge-config/:edgeConfigId/tokens}
  */
 export async function getEdgeConfigTokens({
   pathParams: { edgeConfigId },
@@ -3211,14 +3229,14 @@ export async function getEdgeConfigTokens({
     Record<string, string>,
     GetEdgeConfigTokensQueryParams,
     GetEdgeConfigTokensPathParams
-  >({ method: 'GET', url: `v1EdgeConfigEdgeConfigIdTokens`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/edge-config/${edgeConfigId}/tokens`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Deletes one or more tokens of an existing Edge Config.
  * @summary Delete one or more Edge Config tokens
- * {@link v1EdgeConfigEdgeConfigIdTokens}
+ * {@link /v1/edge-config/:edgeConfigId/tokens}
  */
 export async function deleteEdgeConfigTokens({
   pathParams: { edgeConfigId },
@@ -3244,7 +3262,7 @@ export async function deleteEdgeConfigTokens({
     DeleteEdgeConfigTokensPathParams
   >({
     method: 'DELETE',
-    url: `v1EdgeConfigEdgeConfigIdTokens`,
+    url: `/v1/edge-config/${edgeConfigId}/tokens`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -3255,7 +3273,7 @@ export async function deleteEdgeConfigTokens({
 /**
  * @description Return meta data about an Edge Config token.
  * @summary Get Edge Config token meta data
- * {@link v1EdgeConfigEdgeConfigIdTokenToken}
+ * {@link /v1/edge-config/:edgeConfigId/token/:token}
  */
 export async function getEdgeConfigToken({
   pathParams: { edgeConfigId, token },
@@ -3283,14 +3301,14 @@ export async function getEdgeConfigToken({
     Record<string, string>,
     GetEdgeConfigTokenQueryParams,
     GetEdgeConfigTokenPathParams
-  >({ method: 'GET', url: `v1EdgeConfigEdgeConfigIdTokenToken`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/edge-config/${edgeConfigId}/token/${token}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Adds a token to an existing Edge Config.
  * @summary Create an Edge Config token
- * {@link v1EdgeConfigEdgeConfigIdToken}
+ * {@link /v1/edge-config/:edgeConfigId/token}
  */
 export async function createEdgeConfigToken({
   pathParams: { edgeConfigId },
@@ -3316,7 +3334,7 @@ export async function createEdgeConfigToken({
     CreateEdgeConfigTokenPathParams
   >({
     method: 'POST',
-    url: `v1EdgeConfigEdgeConfigIdToken`,
+    url: `/v1/edge-config/${edgeConfigId}/token`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -3327,7 +3345,7 @@ export async function createEdgeConfigToken({
 /**
  * @description Retrieves a specific version of an Edge Config from backup storage.
  * @summary Get Edge Config backup
- * {@link v1EdgeConfigEdgeConfigIdBackupsEdgeConfigBackupVersionId}
+ * {@link /v1/edge-config/:edgeConfigId/backups/:edgeConfigBackupVersionId}
  */
 export async function getEdgeConfigBackup({
   pathParams: { edgeConfigId, edgeConfigBackupVersionId },
@@ -3355,14 +3373,14 @@ export async function getEdgeConfigBackup({
     Record<string, string>,
     GetEdgeConfigBackupQueryParams,
     GetEdgeConfigBackupPathParams
-  >({ method: 'GET', url: `v1EdgeConfigEdgeConfigIdBackupsEdgeConfigBackupVersionId`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/edge-config/${edgeConfigId}/backups/${edgeConfigBackupVersionId}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Returns backups of an Edge Config.
  * @summary Get Edge Config backups
- * {@link v1EdgeConfigEdgeConfigIdBackups}
+ * {@link /v1/edge-config/:edgeConfigId/backups}
  */
 export async function getEdgeConfigBackups({
   pathParams: { edgeConfigId },
@@ -3386,14 +3404,14 @@ export async function getEdgeConfigBackups({
     Record<string, string>,
     GetEdgeConfigBackupsQueryParams,
     GetEdgeConfigBackupsPathParams
-  >({ method: 'GET', url: `v1EdgeConfigEdgeConfigIdBackups`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/edge-config/${edgeConfigId}/backups`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Retrieves a list of "events" generated by the User on Vercel. Events are generated when the User performs a particular action, such as logging in, creating a deployment, and joining a Team (just to name a few). When the `teamId` parameter is supplied, then the events that are returned will be in relation to the Team that was specified.
  * @summary List User Events
- * {@link v3Events}
+ * {@link /v3/events}
  */
 export async function listUserEvents({
   queryParams,
@@ -3411,14 +3429,14 @@ export async function listUserEvents({
     Record<string, string>,
     ListUserEventsQueryParams,
     Record<string, string>
-  >({ method: 'GET', url: `v3Events`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v3/events`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Fetches the best account or user’s contact info
  * @summary Get Account Information
- * {@link v1InstallationsIntegrationConfigurationIdAccount}
+ * {@link /v1/installations/:integrationConfigurationId/account}
  */
 export async function getAccountInfo({
   pathParams: { integrationConfigurationId },
@@ -3440,14 +3458,14 @@ export async function getAccountInfo({
     Record<string, string>,
     Record<string, string>,
     GetAccountInfoPathParams
-  >({ method: 'GET', url: `v1InstallationsIntegrationConfigurationIdAccount`, ...requestConfig })
+  >({ method: 'GET', url: `/v1/installations/${integrationConfigurationId}/account`, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Returns the member role and other information for a given member ID ("user_id" claim in the SSO OIDC token).
  * @summary Get Member Information
- * {@link v1InstallationsIntegrationConfigurationIdMemberMemberId}
+ * {@link /v1/installations/:integrationConfigurationId/member/:memberId}
  */
 export async function getMember({
   pathParams: { integrationConfigurationId, memberId },
@@ -3473,14 +3491,14 @@ export async function getMember({
     Record<string, string>,
     Record<string, string>,
     GetMemberPathParams
-  >({ method: 'GET', url: `v1InstallationsIntegrationConfigurationIdMemberMemberId`, ...requestConfig })
+  >({ method: 'GET', url: `/v1/installations/${integrationConfigurationId}/member/${memberId}`, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Partner notifies Vercel of any changes made to an Installation or a Resource. Vercel is expected to use `list-resources` and other read APIs to get the new state.<br/> <br/> `resource.updated` event should be dispatched when any state of a resource linked to Vercel is modified by the partner.<br/> `installation.updated` event should be dispatched when an installation's billing plan is changed via the provider instead of Vercel.<br/> <br/> Resource update use cases: <br/> <br/> - The user renames a database in the partner’s application. The partner should dispatch a `resource.updated` event to notify Vercel to update the resource in Vercel’s datastores.<br/> - A resource has been suspended due to a lack of use. The partner should dispatch a `resource.updated` event to notify Vercel to update the resource's status in Vercel's datastores.<br/>
  * @summary Create Event
- * {@link v1InstallationsIntegrationConfigurationIdEvents}
+ * {@link /v1/installations/:integrationConfigurationId/events}
  */
 export async function createEvent({
   pathParams: { integrationConfigurationId },
@@ -3504,7 +3522,7 @@ export async function createEvent({
     CreateEventPathParams
   >({
     method: 'POST',
-    url: `v1InstallationsIntegrationConfigurationIdEvents`,
+    url: `/v1/installations/${integrationConfigurationId}/events`,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
   })
@@ -3514,7 +3532,7 @@ export async function createEvent({
 /**
  * @description Get all resources for a given installation ID.
  * @summary Get Integration Resources
- * {@link v1InstallationsIntegrationConfigurationIdResources}
+ * {@link /v1/installations/:integrationConfigurationId/resources}
  */
 export async function getIntegrationResources({
   pathParams: { integrationConfigurationId },
@@ -3536,14 +3554,14 @@ export async function getIntegrationResources({
     Record<string, string>,
     Record<string, string>,
     GetIntegrationResourcesPathParams
-  >({ method: 'GET', url: `v1InstallationsIntegrationConfigurationIdResources`, ...requestConfig })
+  >({ method: 'GET', url: `/v1/installations/${integrationConfigurationId}/resources`, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Get a resource by its partner ID.
  * @summary Get Integration Resource
- * {@link v1InstallationsIntegrationConfigurationIdResourcesResourceId}
+ * {@link /v1/installations/:integrationConfigurationId/resources/:resourceId}
  */
 export async function getIntegrationResource({
   pathParams: { integrationConfigurationId, resourceId },
@@ -3569,14 +3587,14 @@ export async function getIntegrationResource({
     Record<string, string>,
     Record<string, string>,
     GetIntegrationResourcePathParams
-  >({ method: 'GET', url: `v1InstallationsIntegrationConfigurationIdResourcesResourceId`, ...requestConfig })
+  >({ method: 'GET', url: `/v1/installations/${integrationConfigurationId}/resources/${resourceId}`, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Delete a resource owned by the selected installation ID.
  * @summary Delete Integration Resource
- * {@link v1InstallationsIntegrationConfigurationIdResourcesResourceId}
+ * {@link /v1/installations/:integrationConfigurationId/resources/:resourceId}
  */
 export async function deleteIntegrationResource({
   pathParams: { integrationConfigurationId, resourceId },
@@ -3602,14 +3620,14 @@ export async function deleteIntegrationResource({
     Record<string, string>,
     Record<string, string>,
     DeleteIntegrationResourcePathParams
-  >({ method: 'DELETE', url: `v1InstallationsIntegrationConfigurationIdResourcesResourceId`, ...requestConfig })
+  >({ method: 'DELETE', url: `/v1/installations/${integrationConfigurationId}/resources/${resourceId}`, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description This endpoint imports (upserts) a resource to Vercel's installation. This may be needed if resources can be independently created on the partner's side and need to be synchronized to Vercel.
  * @summary Import Resource
- * {@link v1InstallationsIntegrationConfigurationIdResourcesResourceId}
+ * {@link /v1/installations/:integrationConfigurationId/resources/:resourceId}
  */
 export async function importResource({
   pathParams: { integrationConfigurationId, resourceId },
@@ -3637,7 +3655,7 @@ export async function importResource({
     ImportResourcePathParams
   >({
     method: 'PUT',
-    url: `v1InstallationsIntegrationConfigurationIdResourcesResourceId`,
+    url: `/v1/installations/${integrationConfigurationId}/resources/${resourceId}`,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
   })
@@ -3647,7 +3665,7 @@ export async function importResource({
 /**
  * @description Sends the billing and usage data. The partner should do this at least once a day and ideally once per hour. <br/> Use the `credentials.access_token` we provided in the [Upsert Installation](#upsert-installation) body to authorize this request.
  * @summary Submit Billing Data
- * {@link v1InstallationsIntegrationConfigurationIdBilling}
+ * {@link /v1/installations/:integrationConfigurationId/billing}
  */
 export async function submitBillingData({
   pathParams: { integrationConfigurationId },
@@ -3671,7 +3689,7 @@ export async function submitBillingData({
     SubmitBillingDataPathParams
   >({
     method: 'POST',
-    url: `v1InstallationsIntegrationConfigurationIdBilling`,
+    url: `/v1/installations/${integrationConfigurationId}/billing`,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
   })
@@ -3681,7 +3699,7 @@ export async function submitBillingData({
 /**
  * @description This endpoint allows the partner to submit an invoice to Vercel. The invoice is created in Vercel's billing system and sent to the customer. Depending on the type of billing plan, the invoice can be sent at a time of signup, at the start of the billing period, or at the end of the billing period.<br/> <br/> Use the `credentials.access_token` we provided in the [Upsert Installation](#upsert-installation) body to authorize this request. <br/> There are several limitations to the invoice submission:<br/> <br/> 1. A resource can only be billed once per the billing period and the billing plan.<br/> 2. The billing plan used to bill the resource must have been active for this resource during the billing period.<br/> 3. The billing plan used must be a subscription plan.<br/> 4. The interim usage data must be sent hourly for all types of subscriptions. See [Send subscription billing and usage data](#send-subscription-billing-and-usage-data) API on how to send interim billing and usage data.<br/>
  * @summary Submit Invoice
- * {@link v1InstallationsIntegrationConfigurationIdBillingInvoices}
+ * {@link /v1/installations/:integrationConfigurationId/billing/invoices}
  */
 export async function submitInvoice({
   pathParams: { integrationConfigurationId },
@@ -3705,7 +3723,7 @@ export async function submitInvoice({
     SubmitInvoicePathParams
   >({
     method: 'POST',
-    url: `v1InstallationsIntegrationConfigurationIdBillingInvoices`,
+    url: `/v1/installations/${integrationConfigurationId}/billing/invoices`,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
   })
@@ -3715,7 +3733,7 @@ export async function submitInvoice({
 /**
  * @description Get Invoice details and status for a given invoice ID.<br/> <br/> See Billing Events with Webhooks documentation on how to receive invoice events. This endpoint is used to retrieve the invoice details.
  * @summary Get Invoice
- * {@link v1InstallationsIntegrationConfigurationIdBillingInvoicesInvoiceId}
+ * {@link /v1/installations/:integrationConfigurationId/billing/invoices/:invoiceId}
  */
 export async function getInvoice({
   pathParams: { integrationConfigurationId, invoiceId },
@@ -3741,14 +3759,14 @@ export async function getInvoice({
     Record<string, string>,
     Record<string, string>,
     GetInvoicePathParams
-  >({ method: 'GET', url: `v1InstallationsIntegrationConfigurationIdBillingInvoicesInvoiceId`, ...requestConfig })
+  >({ method: 'GET', url: `/v1/installations/${integrationConfigurationId}/billing/invoices/${invoiceId}`, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description This endpoint allows the partner to request a refund for an invoice to Vercel. The invoice is created using the [Submit Invoice API](#submit-invoice-api).
  * @summary Invoice Actions
- * {@link v1InstallationsIntegrationConfigurationIdBillingInvoicesInvoiceIdActions}
+ * {@link /v1/installations/:integrationConfigurationId/billing/invoices/:invoiceId/actions}
  */
 export async function updateInvoice({
   pathParams: { integrationConfigurationId, invoiceId },
@@ -3776,7 +3794,7 @@ export async function updateInvoice({
     UpdateInvoicePathParams
   >({
     method: 'POST',
-    url: `v1InstallationsIntegrationConfigurationIdBillingInvoicesInvoiceIdActions`,
+    url: `/v1/installations/${integrationConfigurationId}/billing/invoices/${invoiceId}/actions`,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
   })
@@ -3786,7 +3804,7 @@ export async function updateInvoice({
 /**
  * @description Sends the prepayment balances. The partner should do this at least once a day and ideally once per hour. <br/> Use the `credentials.access_token` we provided in the [Upsert Installation](#upsert-installation) body to authorize this request.
  * @summary Submit Prepayment Balances
- * {@link v1InstallationsIntegrationConfigurationIdBillingBalance}
+ * {@link /v1/installations/:integrationConfigurationId/billing/balance}
  */
 export async function submitPrepaymentBalances({
   pathParams: { integrationConfigurationId },
@@ -3810,7 +3828,7 @@ export async function submitPrepaymentBalances({
     SubmitPrepaymentBalancesPathParams
   >({
     method: 'POST',
-    url: `v1InstallationsIntegrationConfigurationIdBillingBalance`,
+    url: `/v1/installations/${integrationConfigurationId}/billing/balance`,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
   })
@@ -3820,7 +3838,7 @@ export async function submitPrepaymentBalances({
 /**
  * @description This endpoint is deprecated and replaced with the endpoint [Update Resource Secrets](#update-resource-secrets). <br/> This endpoint updates the secrets of a resource. If a resource has projects connected, the connected secrets are updated with the new secrets. The old secrets may still be used by existing connected projects because they are not automatically redeployed. Redeployment is a manual action and must be completed by the user. All new project connections will use the new secrets.<br/> <br/> Use cases for this endpoint:<br/> <br/> - Resetting the credentials of a database in the partner. If the user requests the credentials to be updated in the partner’s application, the partner post the new set of secrets to Vercel, the user should redeploy their application and the expire the old credentials.<br/>
  * @summary Update Resource Secrets (Deprecated)
- * {@link v1InstallationsIntegrationConfigurationIdProductsIntegrationProductIdOrSlugResourcesResourceIdSecrets}
+ * {@link /v1/installations/:integrationConfigurationId/products/:integrationProductIdOrSlug/resources/:resourceId/secrets}
  */
 export async function updateResourceSecrets({
   pathParams: { integrationConfigurationId, integrationProductIdOrSlug, resourceId },
@@ -3852,7 +3870,7 @@ export async function updateResourceSecrets({
     UpdateResourceSecretsPathParams
   >({
     method: 'PUT',
-    url: `v1InstallationsIntegrationConfigurationIdProductsIntegrationProductIdOrSlugResourcesResourceIdSecrets`,
+    url: `/v1/installations/${integrationConfigurationId}/products/${integrationProductIdOrSlug}/resources/${resourceId}/secrets`,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
   })
@@ -3862,7 +3880,7 @@ export async function updateResourceSecrets({
 /**
  * @description This endpoint updates the secrets of a resource. If a resource has projects connected, the connected secrets are updated with the new secrets. The old secrets may still be used by existing connected projects because they are not automatically redeployed. Redeployment is a manual action and must be completed by the user. All new project connections will use the new secrets.<br/> <br/> Use cases for this endpoint:<br/> <br/> - Resetting the credentials of a database in the partner. If the user requests the credentials to be updated in the partner’s application, the partner post the new set of secrets to Vercel, the user should redeploy their application and the expire the old credentials.<br/>
  * @summary Update Resource Secrets
- * {@link v1InstallationsIntegrationConfigurationIdResourcesResourceIdSecrets}
+ * {@link /v1/installations/:integrationConfigurationId/resources/:resourceId/secrets}
  */
 export async function updateResourceSecretsById({
   pathParams: { integrationConfigurationId, resourceId },
@@ -3892,7 +3910,7 @@ export async function updateResourceSecretsById({
     UpdateResourceSecretsByIdPathParams
   >({
     method: 'PUT',
-    url: `v1InstallationsIntegrationConfigurationIdResourcesResourceIdSecrets`,
+    url: `/v1/installations/${integrationConfigurationId}/resources/${resourceId}/secrets`,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
   })
@@ -3902,7 +3920,7 @@ export async function updateResourceSecretsById({
 /**
  * @description Allows to retrieve all configurations for an authenticated integration. When the `project` view is used, configurations generated for the authorization flow will be filtered out of the results.
  * @summary Get configurations for the authenticated user or team
- * {@link v1IntegrationsConfigurations}
+ * {@link /v1/integrations/configurations}
  */
 export async function getConfigurations({
   queryParams,
@@ -3920,14 +3938,14 @@ export async function getConfigurations({
     Record<string, string>,
     GetConfigurationsQueryParams,
     Record<string, string>
-  >({ method: 'GET', url: `v1IntegrationsConfigurations`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/integrations/configurations`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Allows to retrieve a the configuration with the provided id in case it exists. The authenticated user or team must be the owner of the config in order to access it.
  * @summary Retrieve an integration configuration
- * {@link v1IntegrationsConfigurationId}
+ * {@link /v1/integrations/configuration/:id}
  */
 export async function getConfiguration({
   pathParams: { id },
@@ -3951,14 +3969,14 @@ export async function getConfiguration({
     Record<string, string>,
     GetConfigurationQueryParams,
     GetConfigurationPathParams
-  >({ method: 'GET', url: `v1IntegrationsConfigurationId`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/integrations/configuration/${id}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Allows to remove the configuration with the `id` provided in the parameters. The configuration and all of its resources will be removed. This includes Webhooks, LogDrains and Project Env variables.
  * @summary Delete an integration configuration
- * {@link v1IntegrationsConfigurationId}
+ * {@link /v1/integrations/configuration/:id}
  */
 export async function deleteConfiguration({
   pathParams: { id },
@@ -3982,14 +4000,14 @@ export async function deleteConfiguration({
     Record<string, string>,
     DeleteConfigurationQueryParams,
     DeleteConfigurationPathParams
-  >({ method: 'DELETE', url: `v1IntegrationsConfigurationId`, queryParams, ...requestConfig })
+  >({ method: 'DELETE', url: `/v1/integrations/configuration/${id}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description During the autorization process, Vercel sends the user to the provider [redirectLoginUrl](https://vercel.com/docs/integrations/create-integration/submit-integration#redirect-login-url), that includes the OAuth authorization `code` parameter. The provider then calls the SSO Token Exchange endpoint with the sent code and receives the OIDC token. They log the user in based on this token and redirects the user back to the Vercel account using deep-link parameters included the redirectLoginUrl. Providers should not persist the returned `id_token` in a database since the token will expire. See [**Authentication with SSO**](https://vercel.com/docs/integrations/create-integration/marketplace-api#authentication-with-sso) for more details.
  * @summary SSO Token Exchange
- * {@link v1IntegrationsSsoToken}
+ * {@link /v1/integrations/sso/token}
  */
 export async function exchangeSsoToken({ config = {} }: { config?: Partial<FetcherConfig> & { client?: typeof client } }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -4001,14 +4019,14 @@ export async function exchangeSsoToken({ config = {} }: { config?: Partial<Fetch
     Record<string, string>,
     Record<string, string>,
     Record<string, string>
-  >({ method: 'POST', url: `v1IntegrationsSsoToken`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/v1/integrations/sso/token`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Retrieves a list of all Integration log drains that are defined for the authenticated user or team. When using an OAuth2 token, the list is limited to log drains created by the authenticated integration.
  * @summary Retrieves a list of Integration log drains
- * {@link v2IntegrationsLogDrains}
+ * {@link /v2/integrations/log-drains}
  */
 export async function getIntegrationLogDrains({
   queryParams,
@@ -4026,14 +4044,14 @@ export async function getIntegrationLogDrains({
     Record<string, string>,
     GetIntegrationLogDrainsQueryParams,
     Record<string, string>
-  >({ method: 'GET', url: `v2IntegrationsLogDrains`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v2/integrations/log-drains`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Creates an Integration log drain. This endpoint must be called with an OAuth2 client (integration), since log drains are tied to integrations. If it is called with a different token type it will produce a 400 error.
  * @summary Creates a new Integration Log Drain
- * {@link v2IntegrationsLogDrains}
+ * {@link /v2/integrations/log-drains}
  */
 export async function createLogDrain({
   queryParams,
@@ -4051,14 +4069,20 @@ export async function createLogDrain({
     Record<string, string>,
     CreateLogDrainQueryParams,
     Record<string, string>
-  >({ method: 'POST', url: `v2IntegrationsLogDrains`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({
+    method: 'POST',
+    url: `/v2/integrations/log-drains`,
+    queryParams,
+    ...requestConfig,
+    headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
+  })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Deletes the Integration log drain with the provided `id`. When using an OAuth2 Token, the log drain can be deleted only if the integration owns it.
  * @summary Deletes the Integration log drain with the provided `id`
- * {@link v1IntegrationsLogDrainsId}
+ * {@link /v1/integrations/log-drains/:id}
  */
 export async function deleteIntegrationLogDrain({
   pathParams: { id },
@@ -4082,14 +4106,14 @@ export async function deleteIntegrationLogDrain({
     Record<string, string>,
     DeleteIntegrationLogDrainQueryParams,
     DeleteIntegrationLogDrainPathParams
-  >({ method: 'DELETE', url: `v1IntegrationsLogDrainsId`, queryParams, ...requestConfig })
+  >({ method: 'DELETE', url: `/v1/integrations/log-drains/${id}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Returns a stream of logs for a given deployment.
  * @summary Get logs for a deployment
- * {@link v1ProjectsProjectIdDeploymentsDeploymentIdRuntimeLogs}
+ * {@link /v1/projects/:projectId/deployments/:deploymentId/runtime-logs}
  */
 export async function getRuntimeLogs({
   pathParams: { projectId, deploymentId },
@@ -4117,14 +4141,14 @@ export async function getRuntimeLogs({
     Record<string, string>,
     GetRuntimeLogsQueryParams,
     GetRuntimeLogsPathParams
-  >({ method: 'GET', url: `v1ProjectsProjectIdDeploymentsDeploymentIdRuntimeLogs`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/projects/${projectId}/deployments/${deploymentId}/runtime-logs`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Create one or multiple experimentation items
  * @summary Create one or multiple experimentation items
- * {@link v1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItems}
+ * {@link /v1/installations/:integrationConfigurationId/resources/:resourceId/experimentation/items}
  */
 export async function createExperimentationItem({
   pathParams: { integrationConfigurationId, resourceId },
@@ -4152,7 +4176,7 @@ export async function createExperimentationItem({
     CreateExperimentationItemPathParams
   >({
     method: 'POST',
-    url: `v1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItems`,
+    url: `/v1/installations/${integrationConfigurationId}/resources/${resourceId}/experimentation/items`,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
   })
@@ -4162,7 +4186,7 @@ export async function createExperimentationItem({
 /**
  * @description Patch an existing experimentation item
  * @summary Patch an existing experimentation item
- * {@link v1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemId}
+ * {@link /v1/installations/:integrationConfigurationId/resources/:resourceId/experimentation/items/:itemId}
  */
 export async function updateExperimentationItem({
   pathParams: { integrationConfigurationId, resourceId, itemId },
@@ -4194,7 +4218,7 @@ export async function updateExperimentationItem({
     UpdateExperimentationItemPathParams
   >({
     method: 'PATCH',
-    url: `v1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemId`,
+    url: `/v1/installations/${integrationConfigurationId}/resources/${resourceId}/experimentation/items/${itemId}`,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
   })
@@ -4204,7 +4228,7 @@ export async function updateExperimentationItem({
 /**
  * @description Delete an existing experimentation item
  * @summary Delete an existing experimentation item
- * {@link v1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemId}
+ * {@link /v1/installations/:integrationConfigurationId/resources/:resourceId/experimentation/items/:itemId}
  */
 export async function deleteExperimentationItem({
   pathParams: { integrationConfigurationId, resourceId, itemId },
@@ -4234,14 +4258,14 @@ export async function deleteExperimentationItem({
     Record<string, string>,
     Record<string, string>,
     DeleteExperimentationItemPathParams
-  >({ method: 'DELETE', url: `v1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemId`, ...requestConfig })
+  >({ method: 'DELETE', url: `/v1/installations/${integrationConfigurationId}/resources/${resourceId}/experimentation/items/${itemId}`, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description When the user enabled Edge Config syncing, then this endpoint can be used by the partner to push their configuration data into the relevant Edge Config.
  * @summary Push data into a user-provided Edge Config
- * {@link v1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationEdgeConfig}
+ * {@link /v1/installations/:integrationConfigurationId/resources/:resourceId/experimentation/edge-config}
  */
 export async function updateExperimentationEdgeConfig({
   pathParams: { integrationConfigurationId, resourceId },
@@ -4275,7 +4299,7 @@ export async function updateExperimentationEdgeConfig({
     UpdateExperimentationEdgeConfigPathParams
   >({
     method: 'PUT',
-    url: `v1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationEdgeConfig`,
+    url: `/v1/installations/${integrationConfigurationId}/resources/${resourceId}/experimentation/edge-config`,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
   })
@@ -4285,7 +4309,7 @@ export async function updateExperimentationEdgeConfig({
 /**
  * @description Lists all members of a project.
  * @summary List project members
- * {@link v1ProjectsIdOrNameMembers}
+ * {@link /v1/projects/:idOrName/members}
  */
 export async function getProjectMembers({
   pathParams: { idOrName },
@@ -4309,14 +4333,14 @@ export async function getProjectMembers({
     Record<string, string>,
     GetProjectMembersQueryParams,
     GetProjectMembersPathParams
-  >({ method: 'GET', url: `v1ProjectsIdOrNameMembers`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/projects/${idOrName}/members`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Adds a new member to the project.
  * @summary Adds a new member to a project.
- * {@link v1ProjectsIdOrNameMembers}
+ * {@link /v1/projects/:idOrName/members}
  */
 export async function addProjectMember({
   pathParams: { idOrName },
@@ -4342,7 +4366,7 @@ export async function addProjectMember({
     AddProjectMemberPathParams
   >({
     method: 'POST',
-    url: `v1ProjectsIdOrNameMembers`,
+    url: `/v1/projects/${idOrName}/members`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -4353,7 +4377,7 @@ export async function addProjectMember({
 /**
  * @description Remove a member from a specific project
  * @summary Remove a Project Member
- * {@link v1ProjectsIdOrNameMembersUid}
+ * {@link /v1/projects/:idOrName/members/:uid}
  */
 export async function removeProjectMember({
   pathParams: { idOrName, uid },
@@ -4381,14 +4405,14 @@ export async function removeProjectMember({
     Record<string, string>,
     RemoveProjectMemberQueryParams,
     RemoveProjectMemberPathParams
-  >({ method: 'DELETE', url: `v1ProjectsIdOrNameMembersUid`, queryParams, ...requestConfig })
+  >({ method: 'DELETE', url: `/v1/projects/${idOrName}/members/${uid}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Allows to retrieve the list of projects of the authenticated user or team. The list will be paginated and the provided query parameters allow filtering the returned projects.
  * @summary Retrieve a list of projects
- * {@link v10Projects}
+ * {@link /v10/projects}
  */
 export async function getProjects({
   queryParams,
@@ -4406,14 +4430,14 @@ export async function getProjects({
     Record<string, string>,
     GetProjectsQueryParams,
     Record<string, string>
-  >({ method: 'GET', url: `v10Projects`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v10/projects`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Allows to create a new project with the provided configuration. It only requires the project `name` but more configuration can be provided to override the defaults.
  * @summary Create a new project
- * {@link v11Projects}
+ * {@link /v11/projects}
  */
 export async function createProject({
   queryParams,
@@ -4431,14 +4455,14 @@ export async function createProject({
     Record<string, string>,
     CreateProjectQueryParams,
     Record<string, string>
-  >({ method: 'POST', url: `v11Projects`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/v11/projects`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Get the information for a specific project by passing either the project `id` or `name` in the URL.
  * @summary Find a project by id or name
- * {@link v9ProjectsIdOrName}
+ * {@link /v9/projects/:idOrName}
  */
 export async function getProject({
   pathParams: { idOrName },
@@ -4462,14 +4486,14 @@ export async function getProject({
     Record<string, string>,
     GetProjectQueryParams,
     GetProjectPathParams
-  >({ method: 'GET', url: `v9ProjectsIdOrName`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v9/projects/${idOrName}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Update the fields of a project using either its `name` or `id`.
  * @summary Update an existing project
- * {@link v9ProjectsIdOrName}
+ * {@link /v9/projects/:idOrName}
  */
 export async function updateProject({
   pathParams: { idOrName },
@@ -4493,14 +4517,20 @@ export async function updateProject({
     Record<string, string>,
     UpdateProjectQueryParams,
     UpdateProjectPathParams
-  >({ method: 'PATCH', url: `v9ProjectsIdOrName`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({
+    method: 'PATCH',
+    url: `/v9/projects/${idOrName}`,
+    queryParams,
+    ...requestConfig,
+    headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
+  })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Delete a specific project by passing either the project `id` or `name` in the URL.
  * @summary Delete a Project
- * {@link v9ProjectsIdOrName}
+ * {@link /v9/projects/:idOrName}
  */
 export async function deleteProject({
   pathParams: { idOrName },
@@ -4524,14 +4554,14 @@ export async function deleteProject({
     Record<string, string>,
     DeleteProjectQueryParams,
     DeleteProjectPathParams
-  >({ method: 'DELETE', url: `v9ProjectsIdOrName`, queryParams, ...requestConfig })
+  >({ method: 'DELETE', url: `/v9/projects/${idOrName}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Creates a custom environment for the current project. Cannot be named 'Production' or 'Preview'.
  * @summary Create a custom environment for the current project.
- * {@link v9ProjectsIdOrNameCustomEnvironments}
+ * {@link /v9/projects/:idOrName/custom-environments}
  */
 export async function createCustomEnvironment({
   pathParams: { idOrName },
@@ -4559,7 +4589,7 @@ export async function createCustomEnvironment({
     CreateCustomEnvironmentPathParams
   >({
     method: 'POST',
-    url: `v9ProjectsIdOrNameCustomEnvironments`,
+    url: `/v9/projects/${idOrName}/custom-environments`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -4570,7 +4600,7 @@ export async function createCustomEnvironment({
 /**
  * @description Retrieve custom environments for the project. Must not be named 'Production' or 'Preview'.
  * @summary Retrieve custom environments
- * {@link v9ProjectsIdOrNameCustomEnvironments}
+ * {@link /v9/projects/:idOrName/custom-environments}
  */
 export async function listCustomEnvironments({
   pathParams: { idOrName },
@@ -4594,14 +4624,14 @@ export async function listCustomEnvironments({
     Record<string, string>,
     ListCustomEnvironmentsQueryParams,
     ListCustomEnvironmentsPathParams
-  >({ method: 'GET', url: `v9ProjectsIdOrNameCustomEnvironments`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v9/projects/${idOrName}/custom-environments`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Retrieve a custom environment for the project. Must not be named 'Production' or 'Preview'.
  * @summary Retrieve a custom environment
- * {@link v9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId}
+ * {@link /v9/projects/:idOrName/custom-environments/:environmentSlugOrId}
  */
 export async function getCustomEnvironment({
   pathParams: { idOrName, environmentSlugOrId },
@@ -4629,14 +4659,14 @@ export async function getCustomEnvironment({
     Record<string, string>,
     GetCustomEnvironmentQueryParams,
     GetCustomEnvironmentPathParams
-  >({ method: 'GET', url: `v9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v9/projects/${idOrName}/custom-environments/${environmentSlugOrId}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Update a custom environment for the project. Must not be named 'Production' or 'Preview'.
  * @summary Update a custom environment
- * {@link v9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId}
+ * {@link /v9/projects/:idOrName/custom-environments/:environmentSlugOrId}
  */
 export async function updateCustomEnvironment({
   pathParams: { idOrName, environmentSlugOrId },
@@ -4668,7 +4698,7 @@ export async function updateCustomEnvironment({
     UpdateCustomEnvironmentPathParams
   >({
     method: 'PATCH',
-    url: `v9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId`,
+    url: `/v9/projects/${idOrName}/custom-environments/${environmentSlugOrId}`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -4679,7 +4709,7 @@ export async function updateCustomEnvironment({
 /**
  * @description Remove a custom environment for the project. Must not be named 'Production' or 'Preview'.
  * @summary Remove a custom environment
- * {@link v9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId}
+ * {@link /v9/projects/:idOrName/custom-environments/:environmentSlugOrId}
  */
 export async function removeCustomEnvironment({
   pathParams: { idOrName, environmentSlugOrId },
@@ -4709,7 +4739,7 @@ export async function removeCustomEnvironment({
     RemoveCustomEnvironmentPathParams
   >({
     method: 'DELETE',
-    url: `v9ProjectsIdOrNameCustomEnvironmentsEnvironmentSlugOrId`,
+    url: `/v9/projects/${idOrName}/custom-environments/${environmentSlugOrId}`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -4720,7 +4750,7 @@ export async function removeCustomEnvironment({
 /**
  * @description Retrieve the domains associated with a given project by passing either the project `id` or `name` in the URL.
  * @summary Retrieve project domains by project by id or name
- * {@link v9ProjectsIdOrNameDomains}
+ * {@link /v9/projects/:idOrName/domains}
  */
 export async function getProjectDomains({
   pathParams: { idOrName },
@@ -4744,14 +4774,14 @@ export async function getProjectDomains({
     Record<string, string>,
     GetProjectDomainsQueryParams,
     GetProjectDomainsPathParams
-  >({ method: 'GET', url: `v9ProjectsIdOrNameDomains`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v9/projects/${idOrName}/domains`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Get project domain by project id/name and domain name.
  * @summary Get a project domain
- * {@link v9ProjectsIdOrNameDomainsDomain}
+ * {@link /v9/projects/:idOrName/domains/:domain}
  */
 export async function getProjectDomain({
   pathParams: { idOrName, domain },
@@ -4779,14 +4809,14 @@ export async function getProjectDomain({
     Record<string, string>,
     GetProjectDomainQueryParams,
     GetProjectDomainPathParams
-  >({ method: 'GET', url: `v9ProjectsIdOrNameDomainsDomain`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v9/projects/${idOrName}/domains/${domain}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Update a project domain's configuration, including the name, git branch and redirect of the domain.
  * @summary Update a project domain
- * {@link v9ProjectsIdOrNameDomainsDomain}
+ * {@link /v9/projects/:idOrName/domains/:domain}
  */
 export async function updateProjectDomain({
   pathParams: { idOrName, domain },
@@ -4816,7 +4846,7 @@ export async function updateProjectDomain({
     UpdateProjectDomainPathParams
   >({
     method: 'PATCH',
-    url: `v9ProjectsIdOrNameDomainsDomain`,
+    url: `/v9/projects/${idOrName}/domains/${domain}`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -4827,7 +4857,7 @@ export async function updateProjectDomain({
 /**
  * @description Remove a domain from a project by passing the domain name and by specifying the project by either passing the project `id` or `name` in the URL.
  * @summary Remove a domain from a project
- * {@link v9ProjectsIdOrNameDomainsDomain}
+ * {@link /v9/projects/:idOrName/domains/:domain}
  */
 export async function removeProjectDomain({
   pathParams: { idOrName, domain },
@@ -4857,7 +4887,7 @@ export async function removeProjectDomain({
     RemoveProjectDomainPathParams
   >({
     method: 'DELETE',
-    url: `v9ProjectsIdOrNameDomainsDomain`,
+    url: `/v9/projects/${idOrName}/domains/${domain}`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -4868,7 +4898,7 @@ export async function removeProjectDomain({
 /**
  * @description Add a domain to the project by passing its domain name and by specifying the project by either passing the project `id` or `name` in the URL. If the domain is not yet verified to be used on this project, the request will return `verified = false`, and the domain will need to be verified according to the `verification` challenge via `POST /projects/:idOrName/domains/:domain/verify`. If the domain already exists on the project, the request will fail with a `400` status code.
  * @summary Add a domain to a project
- * {@link v10ProjectsIdOrNameDomains}
+ * {@link /v10/projects/:idOrName/domains}
  */
 export async function addProjectDomain({
   pathParams: { idOrName },
@@ -4894,7 +4924,7 @@ export async function addProjectDomain({
     AddProjectDomainPathParams
   >({
     method: 'POST',
-    url: `v10ProjectsIdOrNameDomains`,
+    url: `/v10/projects/${idOrName}/domains`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -4905,7 +4935,7 @@ export async function addProjectDomain({
 /**
  * @description Move one project's domain to another project. Also allows the move of all redirects pointed to that domain in the same project.
  * @summary Move a project domain
- * {@link v1ProjectsIdOrNameDomainsDomainMove}
+ * {@link /v1/projects/:idOrName/domains/:domain/move}
  */
 export async function moveProjectDomain({
   pathParams: { idOrName, domain },
@@ -4935,7 +4965,7 @@ export async function moveProjectDomain({
     MoveProjectDomainPathParams
   >({
     method: 'POST',
-    url: `v1ProjectsIdOrNameDomainsDomainMove`,
+    url: `/v1/projects/${idOrName}/domains/${domain}/move`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -4946,7 +4976,7 @@ export async function moveProjectDomain({
 /**
  * @description Attempts to verify a project domain with `verified = false` by checking the correctness of the project domain's `verification` challenge.
  * @summary Verify project domain
- * {@link v9ProjectsIdOrNameDomainsDomainVerify}
+ * {@link /v9/projects/:idOrName/domains/:domain/verify}
  */
 export async function verifyProjectDomain({
   pathParams: { idOrName, domain },
@@ -4974,14 +5004,14 @@ export async function verifyProjectDomain({
     Record<string, string>,
     VerifyProjectDomainQueryParams,
     VerifyProjectDomainPathParams
-  >({ method: 'POST', url: `v9ProjectsIdOrNameDomainsDomainVerify`, queryParams, ...requestConfig })
+  >({ method: 'POST', url: `/v9/projects/${idOrName}/domains/${domain}/verify`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Retrieve the environment variables for a given project by passing either the project `id` or `name` in the URL.
  * @summary Retrieve the environment variables of a project by id or name
- * {@link v10ProjectsIdOrNameEnv}
+ * {@link /v10/projects/:idOrName/env}
  */
 export async function filterProjectEnvs({
   pathParams: { idOrName },
@@ -5005,14 +5035,14 @@ export async function filterProjectEnvs({
     Record<string, string>,
     FilterProjectEnvsQueryParams,
     FilterProjectEnvsPathParams
-  >({ method: 'GET', url: `v10ProjectsIdOrNameEnv`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v10/projects/${idOrName}/env`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Create one or more environment variables for a project by passing its `key`, `value`, `type` and `target` and by specifying the project by either passing the project `id` or `name` in the URL. If you include `upsert=true` as a query parameter, a new environment variable will not be created if it already exists but, the existing variable's value will be updated.
  * @summary Create one or more environment variables
- * {@link v10ProjectsIdOrNameEnv}
+ * {@link /v10/projects/:idOrName/env}
  */
 export async function createProjectEnv({
   pathParams: { idOrName },
@@ -5036,14 +5066,20 @@ export async function createProjectEnv({
     Record<string, string>,
     CreateProjectEnvQueryParams,
     CreateProjectEnvPathParams
-  >({ method: 'POST', url: `v10ProjectsIdOrNameEnv`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({
+    method: 'POST',
+    url: `/v10/projects/${idOrName}/env`,
+    queryParams,
+    ...requestConfig,
+    headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
+  })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Retrieve the environment variable for a given project.
  * @summary Retrieve the decrypted value of an environment variable of a project by id
- * {@link v1ProjectsIdOrNameEnvId}
+ * {@link /v1/projects/:idOrName/env/:id}
  */
 export async function getProjectEnv({
   pathParams: { idOrName, id },
@@ -5071,14 +5107,14 @@ export async function getProjectEnv({
     Record<string, string>,
     GetProjectEnvQueryParams,
     GetProjectEnvPathParams
-  >({ method: 'GET', url: `v1ProjectsIdOrNameEnvId`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/projects/${idOrName}/env/${id}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Delete a specific environment variable for a given project by passing the environment variable identifier and either passing the project `id` or `name` in the URL.
  * @summary Remove an environment variable
- * {@link v9ProjectsIdOrNameEnvId}
+ * {@link /v9/projects/:idOrName/env/:id}
  */
 export async function removeProjectEnv({
   pathParams: { idOrName, id },
@@ -5106,14 +5142,14 @@ export async function removeProjectEnv({
     Record<string, string>,
     RemoveProjectEnvQueryParams,
     RemoveProjectEnvPathParams
-  >({ method: 'DELETE', url: `v9ProjectsIdOrNameEnvId`, queryParams, ...requestConfig })
+  >({ method: 'DELETE', url: `/v9/projects/${idOrName}/env/${id}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Edit a specific environment variable for a given project by passing the environment variable identifier and either passing the project `id` or `name` in the URL.
  * @summary Edit an environment variable
- * {@link v9ProjectsIdOrNameEnvId}
+ * {@link /v9/projects/:idOrName/env/:id}
  */
 export async function editProjectEnv({
   pathParams: { idOrName, id },
@@ -5143,7 +5179,7 @@ export async function editProjectEnv({
     EditProjectEnvPathParams
   >({
     method: 'PATCH',
-    url: `v9ProjectsIdOrNameEnvId`,
+    url: `/v9/projects/${idOrName}/env/${id}`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -5154,7 +5190,7 @@ export async function editProjectEnv({
 /**
  * @description Get the Rolling Releases billing status for a project. The team level billing status is used to determine if the project can be configured for rolling releases.
  * @summary Get rolling release billing status
- * {@link v1ProjectsIdOrNameRollingReleaseBilling}
+ * {@link /v1/projects/:idOrName/rolling-release/billing}
  */
 export async function getRollingReleaseBillingStatus({
   pathParams: { idOrName },
@@ -5178,14 +5214,14 @@ export async function getRollingReleaseBillingStatus({
     Record<string, string>,
     GetRollingReleaseBillingStatusQueryParams,
     GetRollingReleaseBillingStatusPathParams
-  >({ method: 'GET', url: `v1ProjectsIdOrNameRollingReleaseBilling`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/projects/${idOrName}/rolling-release/billing`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Get the Rolling Releases configuration for a project. The project-level config is simply a template that will be used for any future rolling release, and not the configuration for any active rolling release.
  * @summary Get rolling release configuration
- * {@link v1ProjectsIdOrNameRollingReleaseConfig}
+ * {@link /v1/projects/:idOrName/rolling-release/config}
  */
 export async function getRollingReleaseConfig({
   pathParams: { idOrName },
@@ -5209,14 +5245,14 @@ export async function getRollingReleaseConfig({
     Record<string, string>,
     GetRollingReleaseConfigQueryParams,
     GetRollingReleaseConfigPathParams
-  >({ method: 'GET', url: `v1ProjectsIdOrNameRollingReleaseConfig`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/projects/${idOrName}/rolling-release/config`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Disable Rolling Releases for a project means that future deployments will not undergo a rolling release. Changing the config never alters a rollout that's already in-flight—it only affects the next production deployment. If you want to also stop the current rollout, call this endpoint to disable the feature, and then call either the /complete or /abort endpoint.
  * @summary Delete rolling release configuration
- * {@link v1ProjectsIdOrNameRollingReleaseConfig}
+ * {@link /v1/projects/:idOrName/rolling-release/config}
  */
 export async function deleteRollingReleaseConfig({
   pathParams: { idOrName },
@@ -5240,14 +5276,14 @@ export async function deleteRollingReleaseConfig({
     Record<string, string>,
     DeleteRollingReleaseConfigQueryParams,
     DeleteRollingReleaseConfigPathParams
-  >({ method: 'DELETE', url: `v1ProjectsIdOrNameRollingReleaseConfig`, queryParams, ...requestConfig })
+  >({ method: 'DELETE', url: `/v1/projects/${idOrName}/rolling-release/config`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Update (or disable) Rolling Releases for a project. Changing the config never alters a rollout that's already in-flight. It only affects the next production deployment. This also applies to disabling Rolling Releases. If you want to also stop the current rollout, call this endpoint to disable the feature, and then call either the /complete or /abort endpoint. Note: Enabling Rolling Releases automatically enables skew protection on the project with the default value if it wasn't configured already.
  * @summary Update the rolling release settings for the project
- * {@link v1ProjectsIdOrNameRollingReleaseConfig}
+ * {@link /v1/projects/:idOrName/rolling-release/config}
  */
 export async function updateRollingReleaseConfig({
   pathParams: { idOrName },
@@ -5271,14 +5307,14 @@ export async function updateRollingReleaseConfig({
     Record<string, string>,
     UpdateRollingReleaseConfigQueryParams,
     UpdateRollingReleaseConfigPathParams
-  >({ method: 'PATCH', url: `v1ProjectsIdOrNameRollingReleaseConfig`, queryParams, ...requestConfig })
+  >({ method: 'PATCH', url: `/v1/projects/${idOrName}/rolling-release/config`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Return the Rolling Release for a project, regardless of whether the rollout is active, aborted, or completed. If the feature is enabled but no deployment has occurred yet, null will be returned.
  * @summary Get the active rolling release information for a project
- * {@link v1ProjectsIdOrNameRollingRelease}
+ * {@link /v1/projects/:idOrName/rolling-release}
  */
 export async function getRollingRelease({
   pathParams: { idOrName },
@@ -5302,14 +5338,14 @@ export async function getRollingRelease({
     Record<string, string>,
     GetRollingReleaseQueryParams,
     GetRollingReleasePathParams
-  >({ method: 'GET', url: `v1ProjectsIdOrNameRollingRelease`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/projects/${idOrName}/rolling-release`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Advance a rollout to the next stage. This is only needed when rolling releases is configured to require manual approval.
  * @summary Update the active rolling release to the next stage for a project
- * {@link v1ProjectsIdOrNameRollingReleaseApproveStage}
+ * {@link /v1/projects/:idOrName/rolling-release/approve-stage}
  */
 export async function approveRollingReleaseStage({
   pathParams: { idOrName },
@@ -5341,7 +5377,7 @@ export async function approveRollingReleaseStage({
     ApproveRollingReleaseStagePathParams
   >({
     method: 'POST',
-    url: `v1ProjectsIdOrNameRollingReleaseApproveStage`,
+    url: `/v1/projects/${idOrName}/rolling-release/approve-stage`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -5352,7 +5388,7 @@ export async function approveRollingReleaseStage({
 /**
  * @description Force-complete a Rolling Release. The canary deployment will begin serving 100% of the traffic.
  * @summary Complete the rolling release for the project
- * {@link v1ProjectsIdOrNameRollingReleaseComplete}
+ * {@link /v1/projects/:idOrName/rolling-release/complete}
  */
 export async function completeRollingRelease({
   pathParams: { idOrName },
@@ -5378,7 +5414,7 @@ export async function completeRollingRelease({
     CompleteRollingReleasePathParams
   >({
     method: 'POST',
-    url: `v1ProjectsIdOrNameRollingReleaseComplete`,
+    url: `/v1/projects/${idOrName}/rolling-release/complete`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -5389,7 +5425,7 @@ export async function completeRollingRelease({
 /**
  * @description Initiates a project transfer request from one team to another. <br/> Returns a `code` that remains valid for 24 hours and can be used to accept the transfer request by another team using the `PUT /projects/transfer-request/:code` endpoint. <br/> Users can also accept the project transfer request using the claim URL: `https://vercel.com/claim-deployment?code=<code>&returnUrl=<returnUrl>`. <br/> The `code` parameter specifies the project transfer request code generated using this endpoint. <br/> The `returnUrl` parameter redirects users to a specific page of the application if the claim URL is invalid or expired.
  * @summary Create project transfer request
- * {@link projectsIdOrNameTransferRequest}
+ * {@link /projects/:idOrName/transfer-request}
  */
 export async function createProjectTransferRequest({
   pathParams: { idOrName },
@@ -5415,7 +5451,7 @@ export async function createProjectTransferRequest({
     CreateProjectTransferRequestPathParams
   >({
     method: 'POST',
-    url: `projectsIdOrNameTransferRequest`,
+    url: `/projects/${idOrName}/transfer-request`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -5426,7 +5462,7 @@ export async function createProjectTransferRequest({
 /**
  * @description Accept a project transfer request initated by another team. <br/> The `code` is generated using the `POST /projects/:idOrName/transfer-request` endpoint.
  * @summary Accept project transfer request
- * {@link projectsTransferRequestCode}
+ * {@link /projects/transfer-request/:code}
  */
 export async function acceptProjectTransferRequest({
   pathParams: { code },
@@ -5458,7 +5494,7 @@ export async function acceptProjectTransferRequest({
     AcceptProjectTransferRequestPathParams
   >({
     method: 'PUT',
-    url: `projectsTransferRequestCode`,
+    url: `/projects/transfer-request/${code}`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -5469,7 +5505,7 @@ export async function acceptProjectTransferRequest({
 /**
  * @description Update the deployment protection automation bypass for a project
  * @summary Update Protection Bypass for Automation
- * {@link v1ProjectsIdOrNameProtectionBypass}
+ * {@link /v1/projects/:idOrName/protection-bypass}
  */
 export async function updateProjectProtectionBypass({
   pathParams: { idOrName },
@@ -5501,7 +5537,7 @@ export async function updateProjectProtectionBypass({
     UpdateProjectProtectionBypassPathParams
   >({
     method: 'PATCH',
-    url: `v1ProjectsIdOrNameProtectionBypass`,
+    url: `/v1/projects/${idOrName}/protection-bypass`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -5512,7 +5548,7 @@ export async function updateProjectProtectionBypass({
 /**
  * @description Allows users to promote a deployment to production. Note: This does NOT rebuild the deployment. If you need that, then call create-deployments endpoint.
  * @summary Points all production domains for a project to the given deploy
- * {@link v10ProjectsProjectIdPromoteDeploymentId}
+ * {@link /v10/projects/:projectId/promote/:deploymentId}
  */
 export async function requestPromote({
   pathParams: { projectId, deploymentId },
@@ -5540,14 +5576,14 @@ export async function requestPromote({
     Record<string, string>,
     RequestPromoteQueryParams,
     RequestPromotePathParams
-  >({ method: 'POST', url: `v10ProjectsProjectIdPromoteDeploymentId`, queryParams, ...requestConfig })
+  >({ method: 'POST', url: `/v10/projects/${projectId}/promote/${deploymentId}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Get a list of aliases related to the last promote request with their mapping status
  * @summary Gets a list of aliases with status for the current promote
- * {@link v1ProjectsProjectIdPromoteAliases}
+ * {@link /v1/projects/:projectId/promote/aliases}
  */
 export async function listPromoteAliases({
   pathParams: { projectId },
@@ -5571,14 +5607,14 @@ export async function listPromoteAliases({
     Record<string, string>,
     ListPromoteAliasesQueryParams,
     ListPromoteAliasesPathParams
-  >({ method: 'GET', url: `v1ProjectsProjectIdPromoteAliases`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/projects/${projectId}/promote/aliases`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Pause a project by passing its project `id` in the URL. If the project does not exist given the id then the request will fail with 400 status code. If the project disables auto assigning custom production domains and blocks the active Production Deployment then the request will return with 200 status code.
  * @summary Pause a project
- * {@link v1ProjectsProjectIdPause}
+ * {@link /v1/projects/:projectId/pause}
  */
 export async function pauseProject({
   pathParams: { projectId },
@@ -5602,14 +5638,14 @@ export async function pauseProject({
     Record<string, string>,
     PauseProjectQueryParams,
     PauseProjectPathParams
-  >({ method: 'POST', url: `v1ProjectsProjectIdPause`, queryParams, ...requestConfig })
+  >({ method: 'POST', url: `/v1/projects/${projectId}/pause`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Unpause a project by passing its project `id` in the URL. If the project does not exist given the id then the request will fail with 400 status code. If the project enables auto assigning custom production domains and unblocks the active Production Deployment then the request will return with 200 status code.
  * @summary Unpause a project
- * {@link v1ProjectsProjectIdUnpause}
+ * {@link /v1/projects/:projectId/unpause}
  */
 export async function unpauseProject({
   pathParams: { projectId },
@@ -5633,14 +5669,14 @@ export async function unpauseProject({
     Record<string, string>,
     UnpauseProjectQueryParams,
     UnpauseProjectPathParams
-  >({ method: 'POST', url: `v1ProjectsProjectIdUnpause`, queryParams, ...requestConfig })
+  >({ method: 'POST', url: `/v1/projects/${projectId}/unpause`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Update the setting for determining if the project has Attack Challenge mode enabled.
  * @summary Update Attack Challenge mode
- * {@link v1SecurityAttackMode}
+ * {@link /v1/security/attack-mode}
  */
 export async function updateAttackChallengeMode({
   queryParams,
@@ -5658,14 +5694,20 @@ export async function updateAttackChallengeMode({
     Record<string, string>,
     UpdateAttackChallengeModeQueryParams,
     Record<string, string>
-  >({ method: 'POST', url: `v1SecurityAttackMode`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({
+    method: 'POST',
+    url: `/v1/security/attack-mode`,
+    queryParams,
+    ...requestConfig,
+    headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
+  })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Set the firewall configuration to provided rules and settings. Creates or overwrite the existing firewall configuration.
  * @summary Put Firewall Configuration
- * {@link v1SecurityFirewallConfig}
+ * {@link /v1/security/firewall/config}
  */
 export async function putFirewallConfig({
   queryParams,
@@ -5683,14 +5725,20 @@ export async function putFirewallConfig({
     Record<string, string>,
     PutFirewallConfigQueryParams,
     Record<string, string>
-  >({ method: 'PUT', url: `v1SecurityFirewallConfig`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({
+    method: 'PUT',
+    url: `/v1/security/firewall/config`,
+    queryParams,
+    ...requestConfig,
+    headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
+  })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Process updates to modify the existing firewall config for a project
  * @summary Update Firewall Configuration
- * {@link v1SecurityFirewallConfig}
+ * {@link /v1/security/firewall/config}
  */
 export async function updateFirewallConfig({
   queryParams,
@@ -5712,7 +5760,7 @@ export async function updateFirewallConfig({
     Record<string, string>
   >({
     method: 'PATCH',
-    url: `v1SecurityFirewallConfig`,
+    url: `/v1/security/firewall/config`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -5723,7 +5771,7 @@ export async function updateFirewallConfig({
 /**
  * @description Retrieve the specified firewall configuration for a project. The deployed configVersion will be `active`
  * @summary Read Firewall Configuration
- * {@link v1SecurityFirewallConfigConfigVersion}
+ * {@link /v1/security/firewall/config/:configVersion}
  */
 export async function getFirewallConfig({
   pathParams: { configVersion },
@@ -5747,14 +5795,14 @@ export async function getFirewallConfig({
     Record<string, string>,
     GetFirewallConfigQueryParams,
     GetFirewallConfigPathParams
-  >({ method: 'GET', url: `v1SecurityFirewallConfigConfigVersion`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/security/firewall/config/${configVersion}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Retrieve active attack data within the last 24h window
  * @summary Read active attack data
- * {@link v1SecurityFirewallAttackStatus}
+ * {@link /v1/security/firewall/attack-status}
  */
 export async function getActiveAttackStatus({
   queryParams,
@@ -5772,14 +5820,14 @@ export async function getActiveAttackStatus({
     Record<string, string>,
     GetActiveAttackStatusQueryParams,
     Record<string, string>
-  >({ method: 'GET', url: `v1SecurityFirewallAttackStatus`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/security/firewall/attack-status`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Retrieve the system bypass rules configured for the specified project
  * @summary Read System Bypass
- * {@link v1SecurityFirewallBypass}
+ * {@link /v1/security/firewall/bypass}
  */
 export async function getBypassIp({
   queryParams,
@@ -5797,14 +5845,14 @@ export async function getBypassIp({
     Record<string, string>,
     GetBypassIpQueryParams,
     Record<string, string>
-  >({ method: 'GET', url: `v1SecurityFirewallBypass`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/security/firewall/bypass`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Create new system bypass rules
  * @summary Create System Bypass Rule
- * {@link v1SecurityFirewallBypass}
+ * {@link /v1/security/firewall/bypass}
  */
 export async function addBypassIp({
   queryParams,
@@ -5824,7 +5872,7 @@ export async function addBypassIp({
     Record<string, string>
   >({
     method: 'POST',
-    url: `v1SecurityFirewallBypass`,
+    url: `/v1/security/firewall/bypass`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -5835,7 +5883,7 @@ export async function addBypassIp({
 /**
  * @description Remove system bypass rules
  * @summary Remove System Bypass Rule
- * {@link v1SecurityFirewallBypass}
+ * {@link /v1/security/firewall/bypass}
  */
 export async function removeBypassIp({
   queryParams,
@@ -5855,7 +5903,7 @@ export async function removeBypassIp({
     Record<string, string>
   >({
     method: 'DELETE',
-    url: `v1SecurityFirewallBypass`,
+    url: `/v1/security/firewall/bypass`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -5866,7 +5914,7 @@ export async function removeBypassIp({
 /**
  * @description Get a paginated list of team members for the provided team.
  * @summary List team members
- * {@link v3TeamsTeamIdMembers}
+ * {@link /v3/teams/:teamId/members}
  */
 export async function getTeamMembers({
   pathParams: { teamId },
@@ -5890,14 +5938,14 @@ export async function getTeamMembers({
     Record<string, string>,
     GetTeamMembersQueryParams,
     GetTeamMembersPathParams
-  >({ method: 'GET', url: `v3TeamsTeamIdMembers`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v3/teams/${teamId}/members`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Invite a user to join the team specified in the URL. The authenticated user needs to be an `OWNER` in order to successfully invoke this endpoint. The user can be specified with an email or an ID. If both email and ID are provided, ID will take priority.
  * @summary Invite a user
- * {@link v1TeamsTeamIdMembers}
+ * {@link /v1/teams/:teamId/members}
  */
 export async function inviteUserToTeam({
   pathParams: { teamId },
@@ -5919,14 +5967,14 @@ export async function inviteUserToTeam({
     Record<string, string>,
     Record<string, string>,
     InviteUserToTeamPathParams
-  >({ method: 'POST', url: `v1TeamsTeamIdMembers`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/v1/teams/${teamId}/members`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Request access to a team as a member. An owner has to approve the request. Only 10 users can request access to a team at the same time.
  * @summary Request access to a team
- * {@link v1TeamsTeamIdRequest}
+ * {@link /v1/teams/:teamId/request}
  */
 export async function requestAccessToTeam({
   pathParams: { teamId },
@@ -5948,14 +5996,14 @@ export async function requestAccessToTeam({
     Record<string, string>,
     Record<string, string>,
     RequestAccessToTeamPathParams
-  >({ method: 'POST', url: `v1TeamsTeamIdRequest`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/v1/teams/${teamId}/request`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Check the status of a join request. It'll respond with a 404 if the request has been declined. If no `userId` path segment was provided, this endpoint will instead return the status of the authenticated user.
  * @summary Get access request status
- * {@link v1TeamsTeamIdRequestUserId}
+ * {@link /v1/teams/:teamId/request/:userId}
  */
 export async function getTeamAccessRequest({
   pathParams: { userId, teamId },
@@ -5981,14 +6029,14 @@ export async function getTeamAccessRequest({
     Record<string, string>,
     Record<string, string>,
     GetTeamAccessRequestPathParams
-  >({ method: 'GET', url: `v1TeamsTeamIdRequestUserId`, ...requestConfig })
+  >({ method: 'GET', url: `/v1/teams/${teamId}/request/${userId}`, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Join a team with a provided invite code or team ID.
  * @summary Join a team
- * {@link v1TeamsTeamIdMembersTeamsJoin}
+ * {@link /v1/teams/:teamId/members/teams/join}
  */
 export async function joinTeam({
   pathParams: { teamId },
@@ -6010,14 +6058,19 @@ export async function joinTeam({
     Record<string, string>,
     Record<string, string>,
     JoinTeamPathParams
-  >({ method: 'POST', url: `v1TeamsTeamIdMembersTeamsJoin`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({
+    method: 'POST',
+    url: `/v1/teams/${teamId}/members/teams/join`,
+    ...requestConfig,
+    headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
+  })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Update the membership of a Team Member on the Team specified by `teamId`, such as changing the _role_ of the member, or confirming a request to join the Team for an unconfirmed member. The authenticated user must be an `OWNER` of the Team.
  * @summary Update a Team Member
- * {@link v1TeamsTeamIdMembersUid}
+ * {@link /v1/teams/:teamId/members/:uid}
  */
 export async function updateTeamMember({
   pathParams: { uid, teamId },
@@ -6043,14 +6096,14 @@ export async function updateTeamMember({
     Record<string, string>,
     Record<string, string>,
     UpdateTeamMemberPathParams
-  >({ method: 'PATCH', url: `v1TeamsTeamIdMembersUid`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'PATCH', url: `/v1/teams/${teamId}/members/${uid}`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Remove a Team Member from the Team, or dismiss a user that requested access, or leave a team.
  * @summary Remove a Team Member
- * {@link v1TeamsTeamIdMembersUid}
+ * {@link /v1/teams/:teamId/members/:uid}
  */
 export async function removeTeamMember({
   pathParams: { uid, teamId },
@@ -6078,14 +6131,14 @@ export async function removeTeamMember({
     Record<string, string>,
     RemoveTeamMemberQueryParams,
     RemoveTeamMemberPathParams
-  >({ method: 'DELETE', url: `v1TeamsTeamIdMembersUid`, queryParams, ...requestConfig })
+  >({ method: 'DELETE', url: `/v1/teams/${teamId}/members/${uid}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Get information for the Team specified by the `teamId` parameter.
  * @summary Get a Team
- * {@link v2TeamsTeamId}
+ * {@link /v2/teams/:teamId}
  */
 export async function getTeam({
   pathParams: { teamId },
@@ -6109,14 +6162,14 @@ export async function getTeam({
     Record<string, string>,
     GetTeamQueryParams,
     GetTeamPathParams
-  >({ method: 'GET', url: `v2TeamsTeamId`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v2/teams/${teamId}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Update the information of a Team specified by the `teamId` parameter. The request body should contain the information that will be updated on the Team.
  * @summary Update a Team
- * {@link v2TeamsTeamId}
+ * {@link /v2/teams/:teamId}
  */
 export async function patchTeam({
   pathParams: { teamId },
@@ -6140,14 +6193,14 @@ export async function patchTeam({
     Record<string, string>,
     PatchTeamQueryParams,
     PatchTeamPathParams
-  >({ method: 'PATCH', url: `v2TeamsTeamId`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'PATCH', url: `/v2/teams/${teamId}`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Get a paginated list of all the Teams the authenticated User is a member of.
  * @summary List all teams
- * {@link v2Teams}
+ * {@link /v2/teams}
  */
 export async function getTeams({
   queryParams,
@@ -6165,14 +6218,14 @@ export async function getTeams({
     Record<string, string>,
     GetTeamsQueryParams,
     Record<string, string>
-  >({ method: 'GET', url: `v2Teams`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v2/teams`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Create a new Team under your account. You need to send a POST request with the desired Team slug, and optionally the Team name.
  * @summary Create a Team
- * {@link v1Teams}
+ * {@link /v1/teams}
  */
 export async function createTeam({ config = {} }: { config?: Partial<FetcherConfig> & { client?: typeof client } }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6184,14 +6237,14 @@ export async function createTeam({ config = {} }: { config?: Partial<FetcherConf
     Record<string, string>,
     Record<string, string>,
     Record<string, string>
-  >({ method: 'POST', url: `v1Teams`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/v1/teams`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Delete a team under your account. You need to send a `DELETE` request with the desired team `id`. An optional array of reasons for deletion may also be sent.
  * @summary Delete a Team
- * {@link v1TeamsTeamId}
+ * {@link /v1/teams/:teamId}
  */
 export async function deleteTeam({
   pathParams: { teamId },
@@ -6215,14 +6268,14 @@ export async function deleteTeam({
     Record<string, string>,
     DeleteTeamQueryParams,
     DeleteTeamPathParams
-  >({ method: 'DELETE', url: `v1TeamsTeamId`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'DELETE', url: `/v1/teams/${teamId}`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Delete an active Team invite code.
  * @summary Delete a Team invite code
- * {@link v1TeamsTeamIdInvitesInviteId}
+ * {@link /v1/teams/:teamId/invites/:inviteId}
  */
 export async function deleteTeamInviteCode({
   pathParams: { inviteId, teamId },
@@ -6248,14 +6301,14 @@ export async function deleteTeamInviteCode({
     Record<string, string>,
     Record<string, string>,
     DeleteTeamInviteCodePathParams
-  >({ method: 'DELETE', url: `v1TeamsTeamIdInvitesInviteId`, ...requestConfig })
+  >({ method: 'DELETE', url: `/v1/teams/${teamId}/invites/${inviteId}`, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Before you create a deployment you need to upload the required files for that deployment. To do it, you need to first upload each file to this endpoint. Once that's completed, you can create a new deployment with the uploaded files. The file content must be placed inside the body of the request. In the case of a successful response you'll receive a status code 200 with an empty body.
  * @summary Upload Deployment Files
- * {@link v2Files}
+ * {@link /v2/files}
  */
 export async function uploadFile({
   queryParams,
@@ -6277,7 +6330,7 @@ export async function uploadFile({
     Record<string, string>
   >({
     method: 'POST',
-    url: `v2Files`,
+    url: `/v2/files`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationOctetStream', ...headers, ...requestConfig.headers },
@@ -6288,7 +6341,7 @@ export async function uploadFile({
 /**
  * @description Retrieve a list of the current User's authentication tokens.
  * @summary List Auth Tokens
- * {@link v5UserTokens}
+ * {@link /v5/user/tokens}
  */
 export async function listAuthTokens({ config = {} }: { config?: Partial<FetcherConfig> & { client?: typeof client } }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6300,14 +6353,14 @@ export async function listAuthTokens({ config = {} }: { config?: Partial<Fetcher
     Record<string, string>,
     Record<string, string>,
     Record<string, string>
-  >({ method: 'GET', url: `v5UserTokens`, ...requestConfig })
+  >({ method: 'GET', url: `/v5/user/tokens`, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Creates and returns a new authentication token for the currently authenticated User. The `bearerToken` property is only provided once, in the response body, so be sure to save it on the client for use with API requests.
  * @summary Create an Auth Token
- * {@link v3UserTokens}
+ * {@link /v3/user/tokens}
  */
 export async function createAuthToken({
   queryParams,
@@ -6325,14 +6378,14 @@ export async function createAuthToken({
     Record<string, string>,
     CreateAuthTokenQueryParams,
     Record<string, string>
-  >({ method: 'POST', url: `v3UserTokens`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/v3/user/tokens`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Retrieve metadata about an authentication token belonging to the currently authenticated User.
  * @summary Get Auth Token Metadata
- * {@link v5UserTokensTokenId}
+ * {@link /v5/user/tokens/:tokenId}
  */
 export async function getAuthToken({
   pathParams: { tokenId },
@@ -6354,14 +6407,14 @@ export async function getAuthToken({
     Record<string, string>,
     Record<string, string>,
     GetAuthTokenPathParams
-  >({ method: 'GET', url: `v5UserTokensTokenId`, ...requestConfig })
+  >({ method: 'GET', url: `/v5/user/tokens/${tokenId}`, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Invalidate an authentication token, such that it will no longer be valid for future HTTP requests.
  * @summary Delete an authentication token
- * {@link v3UserTokensTokenId}
+ * {@link /v3/user/tokens/:tokenId}
  */
 export async function deleteAuthToken({
   pathParams: { tokenId },
@@ -6383,14 +6436,14 @@ export async function deleteAuthToken({
     Record<string, string>,
     Record<string, string>,
     DeleteAuthTokenPathParams
-  >({ method: 'DELETE', url: `v3UserTokensTokenId`, ...requestConfig })
+  >({ method: 'DELETE', url: `/v3/user/tokens/${tokenId}`, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Retrieves information related to the currently authenticated User.
  * @summary Get the User
- * {@link v2User}
+ * {@link /v2/user}
  */
 export async function getAuthUser({ config = {} }: { config?: Partial<FetcherConfig> & { client?: typeof client } }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6402,14 +6455,14 @@ export async function getAuthUser({ config = {} }: { config?: Partial<FetcherCon
     Record<string, string>,
     Record<string, string>,
     Record<string, string>
-  >({ method: 'GET', url: `v2User`, ...requestConfig })
+  >({ method: 'GET', url: `/v2/user`, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Initiates the deletion process for the currently authenticated User, by sending a deletion confirmation email. The email contains a link that the user needs to visit in order to proceed with the deletion process.
  * @summary Delete User Account
- * {@link v1User}
+ * {@link /v1/user}
  */
 export async function requestDelete({ config = {} }: { config?: Partial<FetcherConfig> & { client?: typeof client } }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6421,14 +6474,14 @@ export async function requestDelete({ config = {} }: { config?: Partial<FetcherC
     Record<string, string>,
     Record<string, string>,
     Record<string, string>
-  >({ method: 'DELETE', url: `v1User`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'DELETE', url: `/v1/user`, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Creates a webhook
  * @summary Creates a webhook
- * {@link v1Webhooks}
+ * {@link /v1/webhooks}
  */
 export async function createWebhook({
   queryParams,
@@ -6446,14 +6499,14 @@ export async function createWebhook({
     Record<string, string>,
     CreateWebhookQueryParams,
     Record<string, string>
-  >({ method: 'POST', url: `v1Webhooks`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/v1/webhooks`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Get a list of webhooks
  * @summary Get a list of webhooks
- * {@link v1Webhooks}
+ * {@link /v1/webhooks}
  */
 export async function getWebhooks({
   queryParams,
@@ -6471,14 +6524,14 @@ export async function getWebhooks({
     Record<string, string>,
     GetWebhooksQueryParams,
     Record<string, string>
-  >({ method: 'GET', url: `v1Webhooks`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/webhooks`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Get a webhook
  * @summary Get a webhook
- * {@link v1WebhooksId}
+ * {@link /v1/webhooks/:id}
  */
 export async function getWebhook({
   pathParams: { id },
@@ -6502,14 +6555,14 @@ export async function getWebhook({
     Record<string, string>,
     GetWebhookQueryParams,
     GetWebhookPathParams
-  >({ method: 'GET', url: `v1WebhooksId`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v1/webhooks/${id}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Deletes a webhook
  * @summary Deletes a webhook
- * {@link v1WebhooksId}
+ * {@link /v1/webhooks/:id}
  */
 export async function deleteWebhook({
   pathParams: { id },
@@ -6533,14 +6586,14 @@ export async function deleteWebhook({
     Record<string, string>,
     DeleteWebhookQueryParams,
     DeleteWebhookPathParams
-  >({ method: 'DELETE', url: `v1WebhooksId`, queryParams, ...requestConfig })
+  >({ method: 'DELETE', url: `/v1/webhooks/${id}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Retrieves all Aliases for the Deployment with the given ID. The authenticated user or team must own the deployment.
  * @summary List Deployment Aliases
- * {@link v2DeploymentsIdAliases}
+ * {@link /v2/deployments/:id/aliases}
  */
 export async function listDeploymentAliases({
   pathParams: { id },
@@ -6564,14 +6617,14 @@ export async function listDeploymentAliases({
     Record<string, string>,
     ListDeploymentAliasesQueryParams,
     ListDeploymentAliasesPathParams
-  >({ method: 'GET', url: `v2DeploymentsIdAliases`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v2/deployments/${id}/aliases`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Creates a new alias for the deployment with the given deployment ID. The authenticated user or team must own this deployment. If the desired alias is already assigned to another deployment, then it will be removed from the old deployment and assigned to the new one.
  * @summary Assign an Alias
- * {@link v2DeploymentsIdAliases}
+ * {@link /v2/deployments/:id/aliases}
  */
 export async function assignAlias({
   pathParams: { id },
@@ -6595,14 +6648,20 @@ export async function assignAlias({
     Record<string, string>,
     AssignAliasQueryParams,
     AssignAliasPathParams
-  >({ method: 'POST', url: `v2DeploymentsIdAliases`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({
+    method: 'POST',
+    url: `/v2/deployments/${id}/aliases`,
+    queryParams,
+    ...requestConfig,
+    headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
+  })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Retrieves a list of aliases for the authenticated User or Team. When `domain` is provided, only aliases for that domain will be returned. When `projectId` is provided, it will only return the given project aliases.
  * @summary List aliases
- * {@link v4Aliases}
+ * {@link /v4/aliases}
  */
 export async function listAliases({
   queryParams,
@@ -6620,14 +6679,14 @@ export async function listAliases({
     Record<string, string>,
     ListAliasesQueryParams,
     Record<string, string>
-  >({ method: 'GET', url: `v4Aliases`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v4/aliases`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Retrieves an Alias for the given host name or alias ID.
  * @summary Get an Alias
- * {@link v4AliasesIdOrAlias}
+ * {@link /v4/aliases/:idOrAlias}
  */
 export async function getAlias({
   pathParams: { idOrAlias },
@@ -6651,14 +6710,14 @@ export async function getAlias({
     Record<string, string>,
     GetAliasQueryParams,
     GetAliasPathParams
-  >({ method: 'GET', url: `v4AliasesIdOrAlias`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v4/aliases/${idOrAlias}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Delete an Alias with the specified ID.
  * @summary Delete an Alias
- * {@link v2AliasesAliasId}
+ * {@link /v2/aliases/:aliasId}
  */
 export async function deleteAlias({
   pathParams: { aliasId },
@@ -6682,14 +6741,14 @@ export async function deleteAlias({
     Record<string, string>,
     DeleteAliasQueryParams,
     DeleteAliasPathParams
-  >({ method: 'DELETE', url: `v2AliasesAliasId`, queryParams, ...requestConfig })
+  >({ method: 'DELETE', url: `/v2/aliases/${aliasId}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Update the protection bypass for the alias or deployment URL (used for user access & comment access for deployments). Used as shareable links and user scoped access for Vercel Authentication and also to allow external (logged in) people to comment on previews for Preview Comments (next-live-mode).
  * @summary Update the protection bypass for a URL
- * {@link aliasesIdProtectionBypass}
+ * {@link /aliases/:id/protection-bypass}
  */
 export async function patchUrlProtectionBypass({
   pathParams: { id },
@@ -6723,7 +6782,7 @@ export async function patchUrlProtectionBypass({
     PatchUrlProtectionBypassPathParams
   >({
     method: 'PATCH',
-    url: `aliasesIdProtectionBypass`,
+    url: `/aliases/${id}/protection-bypass`,
     queryParams,
     ...requestConfig,
     headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers },
@@ -6732,7 +6791,7 @@ export async function patchUrlProtectionBypass({
 }
 
 /**
- * {@link certs}
+ * {@link /certs}
  */
 export async function listCerts({ config = {} }: { config?: Partial<FetcherConfig> & { client?: typeof client } }): Promise<Promise<CallToolResult>> {
   const { client: request = client, ...requestConfig } = config
@@ -6744,14 +6803,14 @@ export async function listCerts({ config = {} }: { config?: Partial<FetcherConfi
     Record<string, string>,
     Record<string, string>,
     Record<string, string>
-  >({ method: 'GET', url: `certs`, ...requestConfig })
+  >({ method: 'GET', url: `/certs`, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Get cert by id
  * @summary Get cert by id
- * {@link v8CertsId}
+ * {@link /v8/certs/:id}
  */
 export async function getCertById({
   pathParams: { id },
@@ -6775,14 +6834,14 @@ export async function getCertById({
     Record<string, string>,
     GetCertByIdQueryParams,
     GetCertByIdPathParams
-  >({ method: 'GET', url: `v8CertsId`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v8/certs/${id}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Remove cert
  * @summary Remove cert
- * {@link v8CertsId}
+ * {@link /v8/certs/:id}
  */
 export async function removeCert({
   pathParams: { id },
@@ -6806,14 +6865,14 @@ export async function removeCert({
     Record<string, string>,
     RemoveCertQueryParams,
     RemoveCertPathParams
-  >({ method: 'DELETE', url: `v8CertsId`, queryParams, ...requestConfig })
+  >({ method: 'DELETE', url: `/v8/certs/${id}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Issue a new cert
  * @summary Issue a new cert
- * {@link v8Certs}
+ * {@link /v8/certs}
  */
 export async function issueCert({
   queryParams,
@@ -6831,14 +6890,14 @@ export async function issueCert({
     Record<string, string>,
     IssueCertQueryParams,
     Record<string, string>
-  >({ method: 'POST', url: `v8Certs`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/v8/certs`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Upload a cert
  * @summary Upload a cert
- * {@link v8Certs}
+ * {@link /v8/certs}
  */
 export async function uploadCert({
   queryParams,
@@ -6856,14 +6915,14 @@ export async function uploadCert({
     Record<string, string>,
     UploadCertQueryParams,
     Record<string, string>
-  >({ method: 'PUT', url: `v8Certs`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'PUT', url: `/v8/certs`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Allows to retrieve the file structure of the source code of a deployment by supplying the deployment unique identifier. If the deployment was created with the Vercel CLI or the API directly with the `files` key, it will have a file tree that can be retrievable.
  * @summary List Deployment Files
- * {@link v6DeploymentsIdFiles}
+ * {@link /v6/deployments/:id/files}
  */
 export async function listDeploymentFiles({
   pathParams: { id },
@@ -6887,14 +6946,14 @@ export async function listDeploymentFiles({
     Record<string, string>,
     ListDeploymentFilesQueryParams,
     ListDeploymentFilesPathParams
-  >({ method: 'GET', url: `v6DeploymentsIdFiles`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v6/deployments/${id}/files`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Allows to retrieve the content of a file by supplying the file identifier and the deployment unique identifier. The response body will contain a JSON response containing the contents of the file encoded as base64.
  * @summary Get Deployment File Contents
- * {@link v8DeploymentsIdFilesFileId}
+ * {@link /v8/deployments/:id/files/:fileId}
  */
 export async function getDeploymentFileContents({
   pathParams: { id, fileId },
@@ -6924,14 +6983,14 @@ export async function getDeploymentFileContents({
     Record<string, string>,
     GetDeploymentFileContentsQueryParams,
     GetDeploymentFileContentsPathParams
-  >({ method: 'GET', url: `v8DeploymentsIdFilesFileId`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v8/deployments/${id}/files/${fileId}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description List deployments under the authenticated user or team. If a deployment hasn't finished uploading (is incomplete), the `url` property will have a value of `null`.
  * @summary List deployments
- * {@link v6Deployments}
+ * {@link /v6/deployments}
  */
 export async function getDeployments({
   queryParams,
@@ -6949,14 +7008,14 @@ export async function getDeployments({
     Record<string, string>,
     GetDeploymentsQueryParams,
     Record<string, string>
-  >({ method: 'GET', url: `v6Deployments`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v6/deployments`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description This API allows you to delete a deployment, either by supplying its `id` in the URL or the `url` of the deployment as a query parameter. You can obtain the ID, for example, by listing all deployments.
  * @summary Delete a Deployment
- * {@link v13DeploymentsId}
+ * {@link /v13/deployments/:id}
  */
 export async function deleteDeployment({
   pathParams: { id },
@@ -6980,14 +7039,14 @@ export async function deleteDeployment({
     Record<string, string>,
     DeleteDeploymentQueryParams,
     DeleteDeploymentPathParams
-  >({ method: 'DELETE', url: `v13DeploymentsId`, queryParams, ...requestConfig })
+  >({ method: 'DELETE', url: `/v13/deployments/${id}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Retrieves the active Vercel secrets for the authenticated user or team. By default it returns 20 secrets. The rest can be retrieved using the pagination options. The body will contain an entry for each secret.
  * @summary List secrets
- * {@link v3Secrets}
+ * {@link /v3/secrets}
  */
 export async function getSecrets({
   queryParams,
@@ -7005,14 +7064,14 @@ export async function getSecrets({
     Record<string, string>,
     GetSecretsQueryParams,
     Record<string, string>
-  >({ method: 'GET', url: `v3Secrets`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v3/secrets`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Allows to create a new secret.
  * @summary Create a new secret
- * {@link v2SecretsName}
+ * {@link /v2/secrets/:name}
  */
 export async function createSecret({
   pathParams: { name },
@@ -7036,14 +7095,14 @@ export async function createSecret({
     Record<string, string>,
     CreateSecretQueryParams,
     CreateSecretPathParams
-  >({ method: 'POST', url: `v2SecretsName`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'POST', url: `/v2/secrets/${name}`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Enables to edit the name of a secret. The name has to be unique to the user or team’s secrets.
  * @summary Change secret name
- * {@link v2SecretsName}
+ * {@link /v2/secrets/:name}
  */
 export async function renameSecret({
   pathParams: { name },
@@ -7067,14 +7126,14 @@ export async function renameSecret({
     Record<string, string>,
     RenameSecretQueryParams,
     RenameSecretPathParams
-  >({ method: 'PATCH', url: `v2SecretsName`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
+  >({ method: 'PATCH', url: `/v2/secrets/${name}`, queryParams, ...requestConfig, headers: { 'Content-Type': 'applicationJson', ...requestConfig.headers } })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description Retrieves the information for a specific secret by passing either the secret id or name in the URL.
  * @summary Get a single secret
- * {@link v3SecretsIdOrName}
+ * {@link /v3/secrets/:idOrName}
  */
 export async function getSecret({
   pathParams: { idOrName },
@@ -7098,14 +7157,14 @@ export async function getSecret({
     Record<string, string>,
     GetSecretQueryParams,
     GetSecretPathParams
-  >({ method: 'GET', url: `v3SecretsIdOrName`, queryParams, ...requestConfig })
+  >({ method: 'GET', url: `/v3/secrets/${idOrName}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
 /**
  * @description This deletes the user or team’s secret defined in the URL.
  * @summary Delete a secret
- * {@link v2SecretsIdOrName}
+ * {@link /v2/secrets/:idOrName}
  */
 export async function deleteSecret({
   pathParams: { idOrName },
@@ -7129,7 +7188,7 @@ export async function deleteSecret({
     Record<string, string>,
     DeleteSecretQueryParams,
     DeleteSecretPathParams
-  >({ method: 'DELETE', url: `v2SecretsIdOrName`, queryParams, ...requestConfig })
+  >({ method: 'DELETE', url: `/v2/secrets/${idOrName}`, queryParams, ...requestConfig })
   return { content: [{ type: 'text', text: JSON.stringify(data) }] }
 }
 
@@ -7422,7 +7481,7 @@ export function initMcpTools<Server>(serverLike: Server, config: FetcherConfig) 
 
   server.tool(
     'purgeAllDataCache',
-    'Make a DELETE request to dataCachePurgeAll',
+    'Make a DELETE request to /data-cache/purge-all',
     { queryParams: purgeAllDataCacheQueryParamsSchema },
     async ({ queryParams }) => {
       try {
@@ -7433,7 +7492,7 @@ export function initMcpTools<Server>(serverLike: Server, config: FetcherConfig) 
     },
   )
 
-  server.tool('updateDataCacheBillingSettings', 'Make a PATCH request to dataCacheBillingSettings', async () => {
+  server.tool('updateDataCacheBillingSettings', 'Make a PATCH request to /data-cache/billing-settings', async () => {
     try {
       return await updateDataCacheBillingSettings({ config })
     } catch (error) {
@@ -9331,7 +9390,7 @@ export function initMcpTools<Server>(serverLike: Server, config: FetcherConfig) 
     },
   )
 
-  server.tool('listCerts', 'Make a GET request to certs', async () => {
+  server.tool('listCerts', 'Make a GET request to /certs', async () => {
     try {
       return await listCerts({ config })
     } catch (error) {

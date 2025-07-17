@@ -28,7 +28,7 @@
     "@modelcontextprotocol/sdk": "^1.15.1"
   },
   "dependencies": {
-    "zod": "^4.0.5"
+    "zod": "=3.25.76"
   },
   "files": [
     "dist"
