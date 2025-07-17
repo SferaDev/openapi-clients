@@ -1,5 +1,11 @@
 # keycloak-api
 
+## 0.2.6
+
+### Patch Changes
+
+- 9301bf7: Add subGroupsCount parameter to GetAdminRealmsRealmGroupsQueryParams
+
 ## 0.2.5
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # nuki-api-js
 
+## 0.1.0
+
+### Minor Changes
+
+- 3098c23: [BREAKING] Remove subscription-related APIs and data types
+
 ## 0.0.6
 
 ### Patch Changes
