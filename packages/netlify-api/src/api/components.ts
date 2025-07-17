@@ -5784,7 +5784,7 @@ export type GetAccountResponse = {
    * @format dateTime
    */
   updated_at?: string;
-}[];
+};
 
 export type GetAccountVariables = {
   pathParams: GetAccountPathParams;
