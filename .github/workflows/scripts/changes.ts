@@ -75,7 +75,7 @@ async function main() {
         { role: 'system', content: prompt },
         { role: 'user', content: diff }
       ],
-      model: 'gpt-3.5-turbo-1106',
+      model: 'gpt-4o',
       response_format: { type: 'json_object' }
     });
 
