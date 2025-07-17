@@ -425,7 +425,7 @@ export type EnvVar = {
   /**
    * The scopes that this environment variable is set to
    */
-  scopes?: ('builds' | 'functions' | 'runtime' | 'post-processing')[];
+  scopes?: ("builds" | "functions" | "runtime" | "post-processing")[];
   /**
    * An array of Value objects containing values and metadata
    *
@@ -447,7 +447,13 @@ export type EnvVar = {
     /**
      * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
      */
-    context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+    context?:
+      | "all"
+      | "dev"
+      | "branch-deploy"
+      | "deploy-preview"
+      | "production"
+      | "branch";
     /**
      * An additional parameter for custom branches. Currently, this is used for specifying a branch name when `context=branch`.
      */
@@ -511,7 +517,13 @@ export type EnvVarValue = {
   /**
    * The deploy context in which this value will be used. `dev` refers to local development when running `netlify dev`.
    */
-  context?: 'all' | 'dev' | 'branch-deploy' | 'deploy-preview' | 'production' | 'branch';
+  context?:
+    | "all"
+    | "dev"
+    | "branch-deploy"
+    | "deploy-preview"
+    | "production"
+    | "branch";
   /**
    * An additional parameter for custom branches. Currently, this is used for specifying a branch name when `context=branch`.
    */
@@ -683,7 +695,7 @@ export type DeployFiles = {
         pattern?: string;
         literal?: string;
         expression?: string;
-        methods?: ('GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS')[];
+        methods?: ("GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "OPTIONS")[];
         prefer_static?: boolean;
       }[];
       excluded_routes?: {
@@ -698,13 +710,13 @@ export type DeployFiles = {
           config?: {
             to?: string;
             rate_limit_config?: {
-              algorithm?: 'sliding_window';
+              algorithm?: "sliding_window";
               window_size?: number;
               window_limit?: number;
             };
             aggregate?: {
               keys?: {
-                type?: 'ip' | 'domain';
+                type?: "ip" | "domain";
               }[];
             };
           };
@@ -767,7 +779,12 @@ export type Build = {
 export type BuildLogMsg = {
   message?: string;
   error?: boolean;
-  section?: 'initializing' | 'building' | 'deploying' | 'cleanup' | 'postprocessing';
+  section?:
+    | "initializing"
+    | "building"
+    | "deploying"
+    | "cleanup"
+    | "postprocessing";
 };
 
 export type PluginRunData = {
@@ -1109,7 +1126,7 @@ export type AccountSetup = {
   name: string;
   type_id: string;
   payment_method_id?: string;
-  period?: 'monthly' | 'yearly';
+  period?: "monthly" | "yearly";
   extra_seats_block?: number;
 };
 
@@ -1124,13 +1141,13 @@ export type AccountUpdateSetup = {
 };
 
 export type AccountAddMemberSetup = {
-  role?: 'Owner' | 'Developer' | 'Billing Admin' | 'Reviewer';
+  role?: "Owner" | "Developer" | "Billing Admin" | "Reviewer";
   email?: string;
 };
 
 export type AccountUpdateMemberSetup = {
-  role?: 'Owner' | 'Developer' | 'Billing Admin' | 'Reviewer';
-  site_access?: 'all' | 'none' | 'selected';
+  role?: "Owner" | "Developer" | "Billing Admin" | "Reviewer";
+  site_access?: "all" | "none" | "selected";
   site_ids?: string[];
 };
 
@@ -1268,7 +1285,7 @@ export type FunctionConfig = {
     pattern?: string;
     literal?: string;
     expression?: string;
-    methods?: ('GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS')[];
+    methods?: ("GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "OPTIONS")[];
     prefer_static?: boolean;
   }[];
   excluded_routes?: {
@@ -1283,13 +1300,13 @@ export type FunctionConfig = {
       config?: {
         to?: string;
         rate_limit_config?: {
-          algorithm?: 'sliding_window';
+          algorithm?: "sliding_window";
           window_size?: number;
           window_limit?: number;
         };
         aggregate?: {
           keys?: {
-            type?: 'ip' | 'domain';
+            type?: "ip" | "domain";
           }[];
         };
       };
@@ -1301,7 +1318,7 @@ export type FunctionRoute = {
   pattern?: string;
   literal?: string;
   expression?: string;
-  methods?: ('GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS')[];
+  methods?: ("GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "OPTIONS")[];
   prefer_static?: boolean;
 };
 
@@ -1317,13 +1334,13 @@ export type TrafficRulesConfig = {
     config?: {
       to?: string;
       rate_limit_config?: {
-        algorithm?: 'sliding_window';
+        algorithm?: "sliding_window";
         window_size?: number;
         window_limit?: number;
       };
       aggregate?: {
         keys?: {
-          type?: 'ip' | 'domain';
+          type?: "ip" | "domain";
         }[];
       };
     };
@@ -1331,14 +1348,14 @@ export type TrafficRulesConfig = {
 };
 
 export type TrafficRulesRateLimitConfig = {
-  algorithm?: 'sliding_window';
+  algorithm?: "sliding_window";
   window_size?: number;
   window_limit?: number;
 };
 
 export type TrafficRulesAggregateConfig = {
   keys?: {
-    type?: 'ip' | 'domain';
+    type?: "ip" | "domain";
   }[];
 };
 
@@ -1397,11 +1414,11 @@ export type DevServerHook = {
    * @format dateTime
    */
   created_at?: string;
-  type?: 'new_dev_server' | 'content_refresh';
+  type?: "new_dev_server" | "content_refresh";
 };
 
 export type DevServerHookSetup = {
   title?: string;
   branch?: string;
-  type?: 'new_dev_server' | 'content_refresh';
+  type?: "new_dev_server" | "content_refresh";
 };
