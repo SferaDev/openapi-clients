@@ -26,6 +26,7 @@ export const toolsGenerator = createReactGenerator<PluginMcp>({
     };
 
     return (
+      // @ts-ignore - JSX runtime module resolution issue
       <File
         baseName={mcp.file.baseName}
         path={mcp.file.path}
@@ -33,7 +34,7 @@ export const toolsGenerator = createReactGenerator<PluginMcp>({
         banner={getBanner({ oas, output: options.output })}
         footer={getFooter({ oas, output: options.output })}
       >
-        <File.Source>{`import { CallToolResult } from '@modelcontextprotocol/sdk/types.js'`}</File.Source>
+        <File.Import name={['CallToolResult']} path="../utils/mcp" isTypeOnly />
         <File.Import name={'client'} path={options.client.importPath} />
         <File.Import name={['FetcherConfig', 'ErrorWrapper']} path={options.client.importPath} isTypeOnly />
         <File.Import name={['RequestConfig', 'ResponseErrorConfig']} path={options.client.importPath} isTypeOnly />

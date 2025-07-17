@@ -9,26 +9,10 @@
     "url": "https://github.com/SferaDev/openapi-clients/issues"
   },
   "homepage": "https://github.com/SferaDev/openapi-clients#readme",
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "typings": "dist/index.d.ts",
-  "exports": {
-    "./package.json": "./package.json",
-    ".": {
-      "import": {
-        "types": "./dist/index.d.mts",
-        "default": "./dist/index.mjs"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      }
-    }
-  },
+  "zshy": "./src/index.ts",
   "scripts": {
     "tsc": "tsc --noEmit",
-    "build": "unbuild",
-    "prepack": "unbuild"
+    "build": "zshy"
   },
   "repository": {
     "type": "git",
@@ -43,5 +27,24 @@
     "@kubb/plugin-ts": "^3.16.0",
     "@kubb/plugin-zod": "^3.16.0",
     "@kubb/react": "^3.16.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
   }
 }

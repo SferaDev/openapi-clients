@@ -1,12 +1,12 @@
-import { FetchImpl } from '../utils/fetch';
-import { compactObject } from '../utils/lang';
+import { FetchImpl } from './fetch';
+import { compactObject } from './lang';
 
-export type FetcherExtraProps = {
-  token: string | null;
-  fetchImpl: FetchImpl;
+export type FetcherConfig = {
+  baseUrl?: string;
+  token?: string | null;
+  fetchImpl?: FetchImpl;
+  headers?: Record<string, any>;
 };
-
-const baseUrl = 'https://api.vercel.com';
 
 export type ErrorWrapper<TError> = TError | { status: 'unknown'; payload: string };
 
@@ -18,25 +18,25 @@ export type FetcherOptions<TBody, THeaders, TQueryParams, TPathParams> = {
   queryParams?: TQueryParams | undefined;
   pathParams?: TPathParams | undefined;
   signal?: AbortSignal | undefined;
-} & FetcherExtraProps;
+} & FetcherConfig;
 
-export async function fetch<
+export async function client<
   TData,
   TError,
-  TBody extends {} | FormData | undefined | null,
-  THeaders extends {},
-  TQueryParams extends {},
-  TPathParams extends {}
+  TBody,
+  THeaders,
+  TQueryParams,
+  TPathParams
 >({
   url,
   method,
   body,
   headers,
-  pathParams,
   queryParams,
   signal,
-  token,
-  fetchImpl
+  token = null,
+  baseUrl = '',
+  fetchImpl = fetch as FetchImpl
 }: FetcherOptions<TBody, THeaders, TQueryParams, TPathParams>): Promise<TData> {
   try {
     const requestHeaders: HeadersInit = compactObject({
@@ -59,10 +59,12 @@ export async function fetch<
       body instanceof FormData
         ? body
         : requestHeaders['Content-Type'] === 'application/json'
-        ? JSON.stringify(body)
-        : (body as string);
+          ? JSON.stringify(body)
+          : (body as unknown as string);
 
-    const response = await fetchImpl(`${baseUrl}${resolveUrl(url, queryParams, pathParams)}`, {
+    const fullUrl = `${baseUrl}${resolveUrl(url, queryParams)}`;
+
+    const response = await fetchImpl(fullUrl, {
       signal,
       method: method.toUpperCase(),
       body: payload,
@@ -79,7 +81,6 @@ export async function fetch<
           payload: e instanceof Error ? `Unexpected error (${e.message})` : 'Unexpected error'
         };
       }
-
       throw error;
     }
 
@@ -90,17 +91,18 @@ export async function fetch<
       return (await response.text()) as unknown as TData;
     }
   } catch (e) {
-    let errorObject: Error = {
+    const errorObject: Error = {
       name: 'unknown' as const,
-      message: e instanceof Error ? `Network error (${e.message})` : 'Network error',
-      stack: e as string
+      message: (e as any)?.message ? `${(e as any)?.message}` : 'Network error'
     };
     throw errorObject;
   }
 }
 
-const resolveUrl = (url: string, queryParams: Record<string, string> = {}, pathParams: Record<string, string> = {}) => {
+const resolveUrl = (url: string, queryParams: any = {}) => {
   let query = new URLSearchParams(queryParams).toString();
   if (query) query = `?${query}`;
-  return url.replace(/\{\w*\}/g, (key) => pathParams[key.slice(1, -1)] ?? '') + query;
+  return url + query;
 };
+
+export default client;

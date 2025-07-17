@@ -8,30 +8,39 @@
     "url": "https://github.com/SferaDev/openapi-clients/issues"
   },
   "homepage": "https://github.com/SferaDev/openapi-clients#readme",
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "typings": "dist/index.d.ts",
-  "exports": {
-    "./package.json": "./package.json",
-    ".": {
-      "import": {
-        "types": "./dist/index.d.mts",
-        "default": "./dist/index.mjs"
-      },
-      "require": {
-        "types": "./dist/index.d.cts",
-        "default": "./dist/index.cjs"
-      }
-    }
-  },
+  "zshy": "./src/index.ts",
   "scripts": {
     "tsc": "tsc --noEmit",
-    "build": "unbuild",
-    "prepack": "unbuild",
-    "generate": "openapi-codegen vercel"
+    "build": "zshy",
+    "generate": "rimraf ./src/generated && kubb generate"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SferaDev/openapi-clients.git"
+  },
+  "devDependencies": {
+    "@kubb/cli": "^3.16.0",
+    "@kubb/core": "^3.16.0",
+    "@modelcontextprotocol/sdk": "^1.15.1",
+    "openapi-utils": "workspace:*"
+  },
+  "peerDependencies": {
+    "@modelcontextprotocol/sdk": "^1.15.1"
+  },
+  "dependencies": {
+    "zod": "^4.0.5"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
   }
 }

@@ -12,7 +12,7 @@ export const clientGenerator = createReactGenerator<PluginClient>({
   Operation({ options, operation }) {
     const {
       plugin: {
-        options: { output, urlType }
+        options: { output }
       },
       pluginManager
     } = useApp<PluginClient>();
@@ -40,6 +40,7 @@ export const clientGenerator = createReactGenerator<PluginClient>({
     };
 
     return (
+      // @ts-ignore - JSX runtime module resolution issue
       <File
         baseName={client.file.baseName}
         path={client.file.path}

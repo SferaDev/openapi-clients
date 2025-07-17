@@ -9,14 +9,14 @@ import { clientGenerator } from './client/operations';
 import { serverGenerator } from './mcp/server';
 import { toolsGenerator } from './mcp/tools';
 
-export const baseConfig: Omit<UserConfig, 'input'> = {
+export const baseConfig = {
     root: '.',
     output: {
         path: './src/generated'
     },
     plugins: [
         pluginOas({
-            validate: true,
+            validate: false,
             output: {
                 path: './json',
                 barrelType: false
@@ -54,10 +54,11 @@ export const baseConfig: Omit<UserConfig, 'input'> = {
                 path: './schemas.ts',
                 barrelType: false
             },
-            typed: true,
+            typed: false, // Workaround for https://github.com/kubb-labs/kubb/issues/1775
             dateType: 'date',
             unknownType: 'unknown',
-            importPath: 'zod'
+            importPath: 'zod',
+            version: '4'
         }),
         pluginMcp({
             output: {
@@ -68,4 +69,4 @@ export const baseConfig: Omit<UserConfig, 'input'> = {
             generators: [toolsGenerator, serverGenerator]
         })
     ]
-}
+} satisfies Omit<UserConfig, 'input'>;

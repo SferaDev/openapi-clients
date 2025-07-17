@@ -53,7 +53,7 @@ export function getParams({
   });
 }
 
-export function ClientOperation({
+export const ClientOperation: any = function({
   name,
   isExportable = true,
   isIndexable = true,
@@ -168,6 +168,7 @@ export function ClientOperation({
   );
 
   return (
+    // @ts-ignore - JSX runtime module resolution issue
     <File.Source name={name} isExportable={isExportable} isIndexable={isIndexable}>
       <Function
         name={name}
@@ -179,8 +180,18 @@ export function ClientOperation({
         }}
         returnType={returnType}
       >
-        {'const { client:request = client, ...requestConfig } = config'}
+        {'const { client: request = client, ...requestConfig } = config;'}
         <br />
+        <br />
+        {typeSchemas.pathParams?.schema &&
+          `${Object.keys(typeSchemas.pathParams.schema.properties || {})
+            .map((key) => {
+              return `if (!${key}) {
+              throw new Error(\`Missing required path parameter: ${key}\`);
+            }`;
+            })
+            .join('\n\n')}
+        `}
         <br />
         {formData}
         {`const data = await request<${generics.join(', ')}>(${clientParams.toCall()})`}
