@@ -396,12 +396,22 @@ export type ClientPoliciesRepresentation = {
 
 export type ClientPolicyConditionRepresentation = {
   condition?: string;
-  configuration?: any[];
+  /**
+   * Configuration settings as a JSON object
+   */
+  configuration?: {
+    [key: string]: any;
+  };
 };
 
 export type ClientPolicyExecutorRepresentation = {
   executor?: string;
-  configuration?: any[];
+  /**
+   * Configuration settings as a JSON object
+   */
+  configuration?: {
+    [key: string]: any;
+  };
 };
 
 export type ClientPolicyRepresentation = {
@@ -733,6 +743,7 @@ export type GlobalRequestResult = {
 export type GroupRepresentation = {
   id?: string;
   name?: string;
+  description?: string;
   path?: string;
   parentId?: string;
   /**
@@ -900,6 +911,14 @@ export type KeyStoreConfig = {
   keyAlias?: string;
   realmAlias?: string;
   format?: string;
+  /**
+   * @format int32
+   */
+  keySize?: number;
+  /**
+   * @format int32
+   */
+  validity?: number;
 };
 
 export type KeyUse = 'ENC' | 'SIG';
@@ -939,13 +958,13 @@ export type MemberRepresentation = {
     [key: string]: string[];
   };
   userProfileMetadata?: UserProfileMetadata;
+  enabled?: boolean;
   self?: string;
   origin?: string;
   /**
    * @format int64
    */
   createdTimestamp?: number;
-  enabled?: boolean;
   totp?: boolean;
   federationLink?: string;
   serviceAccountClientId?: string;
@@ -1527,6 +1546,7 @@ export type RealmRepresentation = {
   webAuthnPolicyPasswordlessAvoidSameAuthenticatorRegister?: boolean;
   webAuthnPolicyPasswordlessAcceptableAaguids?: string[];
   webAuthnPolicyPasswordlessExtraOrigins?: string[];
+  webAuthnPolicyPasswordlessPasskeysEnabled?: boolean;
   clientProfiles?: ClientProfilesRepresentation;
   clientPolicies?: ClientPoliciesRepresentation;
   users?: UserRepresentation[];
@@ -1936,13 +1956,13 @@ export type UserRepresentation = {
     [key: string]: string[];
   };
   userProfileMetadata?: UserProfileMetadata;
+  enabled?: boolean;
   self?: string;
   origin?: string;
   /**
    * @format int64
    */
   createdTimestamp?: number;
-  enabled?: boolean;
   totp?: boolean;
   federationLink?: string;
   serviceAccountClientId?: string;
