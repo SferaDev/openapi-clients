@@ -8,7 +8,12 @@
     "url": "https://github.com/SferaDev/openapi-clients/issues"
   },
   "homepage": "https://github.com/SferaDev/openapi-clients#readme",
-  "zshy": "./src/index.ts",
+  "zshy": {
+    "exports": {
+      ".": "./src/index.ts",
+      "./mcp": "./src/mcp.ts"
+    }
+  },
   "scripts": {
     "tsc": "tsc --noEmit",
     "build": "zshy",
@@ -41,6 +46,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
+    },
+    "./mcp": {
+      "types": "./dist/mcp.d.ts",
+      "import": "./dist/mcp.mjs",
+      "require": "./dist/mcp.js"
     }
   }
 }
