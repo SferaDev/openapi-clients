@@ -124,6 +124,25 @@ importers:
         specifier: ^19.1.0
         version: 19.1.0(react@19.1.0)
 
+  packages/v0-api:
+    dependencies:
+      zod:
+        specifier: ^4.0.5
+        version: 4.0.5
+    devDependencies:
+      '@kubb/cli':
+        specifier: ^3.16.0
+        version: 3.16.0(typescript@5.8.3)
+      '@kubb/core':
+        specifier: ^3.16.0
+        version: 3.16.0
+      '@modelcontextprotocol/sdk':
+        specifier: ^1.15.1
+        version: 1.15.1
+      openapi-utils:
+        specifier: workspace:*
+        version: link:../openapi-utils
+
   packages/vercel-api-js:
     dependencies:
       zod:
