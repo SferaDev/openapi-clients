@@ -3,7 +3,7 @@ import { withAuth } from '@/lib/with-auth';
 import { initMcpTools as vercelMcp } from 'vercel-api-js/mcp';
 
 const handler = withAuth((request, token) => {
-    const provider = request.nextUrl.pathname.split('/')[3];
+    const provider = request.nextUrl.pathname.split('/')[2];
 
     const mcpHandler = createMcpHandler(
         async (server) => {
@@ -11,7 +11,7 @@ const handler = withAuth((request, token) => {
         },
         { capabilities: {} },
         {
-            basePath: `/api/ai/${provider}`,
+            basePath: `/api/${provider}`,
             verboseLogs: true,
             maxDuration: 800
         }

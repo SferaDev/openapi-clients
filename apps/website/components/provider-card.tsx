@@ -1,51 +1,119 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { CodeBlock } from "@/components/code-block"
-import type { Provider } from "@/lib/types"
-import { Github } from "lucide-react"
-import Link from "next/link"
-import { Badge } from "@/components/ui/badge"
+"use client"
 
-interface ProviderCardProps {
-  provider: Provider
+import { CodeBlock } from "@/components/code-block"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import type { Provider } from "@/lib/types"
+import { BotMessageSquare, CodeXml } from "lucide-react"
+import { useEffect, useState } from "react"
+
+interface UnifiedProviderInterfaceProps {
+  providers: Provider[]
 }
 
-export function ProviderCard({ provider }: ProviderCardProps) {
+const generateMcpConfig = (provider: Provider) => `{
+  "mcpServers": {
+    "${provider.id}": {
+      "url": "https://openapi.sferadev.com/api/${provider.id}/mcp"
+    }
+  }
+}`
+
+export function UnifiedProviderInterface({ providers }: UnifiedProviderInterfaceProps) {
+  const [activeTab, setActiveTab] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("activeProviderTab") || providers[0]?.id || ""
+    }
+    return providers[0]?.id || ""
+  })
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("activeProviderTab", activeTab)
+    }
+  }, [activeTab])
+
   return (
-    <Card className="flex flex-col hover:border-primary/50 hover:shadow-lg transition-all duration-300">
-      <CardHeader className="flex-row items-start gap-4">
-        {provider.logo}
-        <div className="flex-1">
-          <CardTitle>{provider.name}</CardTitle>
-          <CardDescription>{provider.description}</CardDescription>
-        </div>
-      </CardHeader>
-      <CardContent className="flex-grow">
-        <Tabs defaultValue="usage" className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="usage">Usage</TabsTrigger>
-            <TabsTrigger value="install">Install</TabsTrigger>
+    <div className="w-full">
+      {/* Provider Selection Tabs */}
+      <div className="mb-6">
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+          <TabsList className="grid w-full grid-cols-9 h-auto p-1">
+            {providers.map((provider) => (
+              <TabsTrigger 
+                key={provider.id} 
+                value={provider.id} 
+                className="py-2 text-sm font-medium"
+              >
+                {provider.name}
+              </TabsTrigger>
+            ))}
           </TabsList>
-          <TabsContent value="usage" className="mt-4">
-            <CodeBlock language="typescript" code={provider.usage} />
-          </TabsContent>
-          <TabsContent value="install" className="mt-4">
-            <CodeBlock language="bash" code={`npm install @sferadev/openapi-${provider.slug}`} />
-          </TabsContent>
         </Tabs>
-      </CardContent>
-      <CardFooter className="flex justify-between items-center text-sm text-muted-foreground">
-        <Badge variant="outline">v{provider.version}</Badge>
-        <Link
-          href={`https://github.com/SferaDev/openapi-clients/tree/main/packages/${provider.slug}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-1 hover:text-primary transition-colors"
+      </div>
+
+      {/* Content Sections */}
+      {providers.map((provider) => (
+        <div 
+          key={provider.id} 
+          className={`${activeTab === provider.id ? 'block' : 'hidden'}`}
         >
-          <Github className="h-4 w-4" />
-          Source
-        </Link>
-      </CardFooter>
-    </Card>
+          <div className={`grid grid-cols-1 gap-6 h-full ${provider.hasMcp ? 'xl:grid-cols-2' : 'xl:grid-cols-1'}`}>
+            {/* TypeScript SDK Section */}
+            <Card className="flex flex-col">
+              <CardHeader className="flex flex-row items-center justify-center gap-3 pb-4">
+                <CodeXml className="h-6 w-6" />
+                <CardTitle className="text-xl font-bold tracking-tight">
+                  TypeScript SDK
+                </CardTitle>
+                <Badge variant="outline" className="text-xs">v{provider.version}</Badge>
+              </CardHeader>
+              <CardContent className="flex-1 space-y-5">
+                <div>
+                  <h3 className="text-base font-semibold mb-2">Installation</h3>
+                  <Tabs defaultValue="pnpm" className="w-full">
+                    <TabsList className="grid w-full grid-cols-3 h-8">
+                      <TabsTrigger value="pnpm" className="text-xs">pnpm</TabsTrigger>
+                      <TabsTrigger value="npm" className="text-xs">npm</TabsTrigger>
+                      <TabsTrigger value="yarn" className="text-xs">yarn</TabsTrigger>
+                    </TabsList>
+                    <TabsContent value="pnpm" className="mt-3">
+                      <CodeBlock language="bash" code={`pnpm add ${provider.packageName}`} />
+                    </TabsContent>
+                    <TabsContent value="npm" className="mt-3">
+                      <CodeBlock language="bash" code={`npm install ${provider.packageName}`} />
+                    </TabsContent>
+                    <TabsContent value="yarn" className="mt-3">
+                      <CodeBlock language="bash" code={`yarn add ${provider.packageName}`} />
+                    </TabsContent>
+                  </Tabs>
+                </div>
+                <div>
+                  <h3 className="text-base font-semibold mb-2">Usage Example</h3>
+                  <CodeBlock language="typescript" code={provider.usage} />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* MCP Integration Section - Only show if provider has MCP */}
+            {provider.hasMcp && (
+              <Card className="flex flex-col">
+                <CardHeader className="flex flex-row items-center justify-center gap-3 pb-4">
+                  <BotMessageSquare className="h-6 w-6" />
+                  <CardTitle className="text-xl font-bold tracking-tight">MCP Server</CardTitle>
+                </CardHeader>
+                <CardContent className="flex-1">
+                  <div>
+                    <h3 className="text-base font-semibold mb-2">Configuration</h3>
+                    <CodeBlock language="json" code={generateMcpConfig(provider)} />
+                  </div>
+                </CardContent>
+              </Card>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
   )
 }

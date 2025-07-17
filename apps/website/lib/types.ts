@@ -1,7 +1,7 @@
 export interface Provider {
+  id: string
   name: string
-  slug: string
-  description: string
+  packageName: string
   version: string
   usage: string
   hasMcp?: boolean
