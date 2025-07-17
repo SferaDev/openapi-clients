@@ -3,7 +3,7 @@
  * Do not edit manually.
  */
 
-import { z } from 'zod'
+import { z } from 'zod';
 
 export const chatDetailSchema = z.object({
   id: z.string(),
@@ -36,10 +36,10 @@ export const chatDetailSchema = z.object({
         'renamed-file',
         'replace-src',
         'reverted-block',
-        'sync-git',
+        'sync-git'
       ]),
-      role: z.enum(['assistant', 'user']),
-    }),
+      role: z.enum(['assistant', 'user'])
+    })
   ),
   latestVersion: z
     .object({
@@ -50,9 +50,9 @@ export const chatDetailSchema = z.object({
         z.object({
           object: z.literal('file'),
           name: z.string(),
-          content: z.string(),
-        }),
-      ),
+          content: z.string()
+        })
+      )
     })
     .optional(),
   files: z
@@ -60,8 +60,8 @@ export const chatDetailSchema = z.object({
       z.object({
         lang: z.string(),
         meta: z.object({}).catchall(z.string()),
-        source: z.string(),
-      }),
+        source: z.string()
+      })
     )
     .optional(),
   demo: z.string().optional(),
@@ -69,9 +69,9 @@ export const chatDetailSchema = z.object({
   modelConfiguration: z.object({
     modelId: z.enum(['v0-1.5-lg', 'v0-1.5-md', 'v0-1.5-sm']),
     imageGenerations: z.boolean().default(false),
-    thinking: z.boolean().default(false),
-  }),
-})
+    thinking: z.boolean().default(false)
+  })
+});
 
 export const chatSummarySchema = z.object({
   id: z.string(),
@@ -86,21 +86,21 @@ export const chatSummarySchema = z.object({
     .object({
       id: z.string(),
       object: z.literal('version'),
-      status: z.enum(['completed', 'failed', 'pending']),
+      status: z.enum(['completed', 'failed', 'pending'])
     })
-    .optional(),
-})
+    .optional()
+});
 
 export const fileDetailSchema = z.object({
   object: z.literal('file'),
   name: z.string(),
-  content: z.string(),
-})
+  content: z.string()
+});
 
 export const fileSummarySchema = z.object({
   object: z.literal('file'),
-  name: z.string(),
-})
+  name: z.string()
+});
 
 export const messageDetailSchema = z.object({
   id: z.string(),
@@ -110,17 +110,17 @@ export const messageDetailSchema = z.object({
   files: z.array(
     z.object({
       object: z.literal('file'),
-      name: z.string(),
-    }),
+      name: z.string()
+    })
   ),
   demo: z.string().optional(),
   text: z.string(),
   modelConfiguration: z.object({
     modelId: z.enum(['v0-1.5-lg', 'v0-1.5-md', 'v0-1.5-sm']),
     imageGenerations: z.boolean().default(false),
-    thinking: z.boolean().default(false),
-  }),
-})
+    thinking: z.boolean().default(false)
+  })
+});
 
 export const messageSummarySchema = z.object({
   id: z.string(),
@@ -142,44 +142,44 @@ export const messageSummarySchema = z.object({
     'renamed-file',
     'replace-src',
     'reverted-block',
-    'sync-git',
+    'sync-git'
   ]),
-  role: z.enum(['assistant', 'user']),
-})
+  role: z.enum(['assistant', 'user'])
+});
 
 export const projectDetailSchema = z.object({
   id: z.string(),
   object: z.literal('project'),
   name: z.string(),
-  vercelProjectId: z.string().optional(),
-})
+  vercelProjectId: z.string().optional()
+});
 
 export const projectSummarySchema = z.object({
   id: z.string(),
   object: z.literal('project'),
   name: z.string(),
-  vercelProjectId: z.string().optional(),
-})
+  vercelProjectId: z.string().optional()
+});
 
 export const scopeSummarySchema = z.object({
   id: z.string(),
   object: z.literal('scope'),
-  name: z.string().optional(),
-})
+  name: z.string().optional()
+});
 
 export const userDetailSchema = z.object({
   id: z.string(),
   object: z.literal('user'),
   name: z.string().optional(),
   email: z.string(),
-  avatar: z.string(),
-})
+  avatar: z.string()
+});
 
 export const vercelProjectDetailSchema = z.object({
   id: z.string(),
   object: z.literal('vercel_project'),
-  name: z.string(),
-})
+  name: z.string()
+});
 
 export const versionDetailSchema = z.object({
   id: z.string(),
@@ -189,1217 +189,1221 @@ export const versionDetailSchema = z.object({
     z.object({
       object: z.literal('file'),
       name: z.string(),
-      content: z.string(),
-    }),
-  ),
-})
+      content: z.string()
+    })
+  )
+});
 
 export const versionSummarySchema = z.object({
   id: z.string(),
   object: z.literal('version'),
-  status: z.enum(['completed', 'failed', 'pending']),
-})
+  status: z.enum(['completed', 'failed', 'pending'])
+});
 
 /**
  * @description Success
  */
-export const chatsCreate200Schema = z.unknown()
+export const chatsCreate200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const chatsCreate401Schema = z.unknown()
+export const chatsCreate401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const chatsCreate403Schema = z.unknown()
+export const chatsCreate403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const chatsCreate404Schema = z.unknown()
+export const chatsCreate404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const chatsCreate409Schema = z.unknown()
+export const chatsCreate409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const chatsCreate413Schema = z.unknown()
+export const chatsCreate413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const chatsCreate422Schema = z.unknown()
+export const chatsCreate422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const chatsCreate429Schema = z.unknown()
+export const chatsCreate429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const chatsCreate500Schema = z.unknown()
+export const chatsCreate500Schema = z.unknown();
 
-export const chatsCreateMutationResponseSchema = z.lazy(() => chatsCreate200Schema)
+export const chatsCreateMutationResponseSchema = z.lazy(() => chatsCreate200Schema);
 
 export const chatsFindQueryParamsSchema = z.object({
   limit: z.coerce.number().max(60).default(60).describe('Query parameter "limit"'),
   offset: z.coerce.number().default(0).describe('Query parameter "offset"'),
   isFavorite: z
     .boolean()
-    .describe('If true, only favorites will be returned. If false, unfavorited chats will be returned. If not provided, all chats will be returned.')
-    .optional(),
-})
+    .describe(
+      'If true, only favorites will be returned. If false, unfavorited chats will be returned. If not provided, all chats will be returned.'
+    )
+    .optional()
+});
 
 /**
  * @description Success
  */
-export const chatsFind200Schema = z.unknown()
+export const chatsFind200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const chatsFind401Schema = z.unknown()
+export const chatsFind401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const chatsFind403Schema = z.unknown()
+export const chatsFind403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const chatsFind404Schema = z.unknown()
+export const chatsFind404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const chatsFind409Schema = z.unknown()
+export const chatsFind409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const chatsFind413Schema = z.unknown()
+export const chatsFind413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const chatsFind422Schema = z.unknown()
+export const chatsFind422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const chatsFind429Schema = z.unknown()
+export const chatsFind429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const chatsFind500Schema = z.unknown()
+export const chatsFind500Schema = z.unknown();
 
-export const chatsFindQueryResponseSchema = z.lazy(() => chatsFind200Schema)
+export const chatsFindQueryResponseSchema = z.lazy(() => chatsFind200Schema);
 
 /**
  * @description Success
  */
-export const chatsInitCreate200Schema = z.unknown()
+export const chatsInitCreate200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const chatsInitCreate401Schema = z.unknown()
+export const chatsInitCreate401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const chatsInitCreate403Schema = z.unknown()
+export const chatsInitCreate403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const chatsInitCreate404Schema = z.unknown()
+export const chatsInitCreate404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const chatsInitCreate409Schema = z.unknown()
+export const chatsInitCreate409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const chatsInitCreate413Schema = z.unknown()
+export const chatsInitCreate413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const chatsInitCreate422Schema = z.unknown()
+export const chatsInitCreate422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const chatsInitCreate429Schema = z.unknown()
+export const chatsInitCreate429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const chatsInitCreate500Schema = z.unknown()
+export const chatsInitCreate500Schema = z.unknown();
 
-export const chatsInitCreateMutationResponseSchema = z.lazy(() => chatsInitCreate200Schema)
+export const chatsInitCreateMutationResponseSchema = z.lazy(() => chatsInitCreate200Schema);
 
 export const chatsDeletePathParamsSchema = z.object({
-  chatId: z.string().describe('Path parameter "chatId"'),
-})
+  chatId: z.string().describe('Path parameter "chatId"')
+});
 
 /**
  * @description Success
  */
-export const chatsDelete200Schema = z.unknown()
+export const chatsDelete200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const chatsDelete401Schema = z.unknown()
+export const chatsDelete401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const chatsDelete403Schema = z.unknown()
+export const chatsDelete403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const chatsDelete404Schema = z.unknown()
+export const chatsDelete404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const chatsDelete409Schema = z.unknown()
+export const chatsDelete409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const chatsDelete413Schema = z.unknown()
+export const chatsDelete413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const chatsDelete422Schema = z.unknown()
+export const chatsDelete422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const chatsDelete429Schema = z.unknown()
+export const chatsDelete429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const chatsDelete500Schema = z.unknown()
+export const chatsDelete500Schema = z.unknown();
 
-export const chatsDeleteMutationResponseSchema = z.lazy(() => chatsDelete200Schema)
+export const chatsDeleteMutationResponseSchema = z.lazy(() => chatsDelete200Schema);
 
 export const chatsGetByIdPathParamsSchema = z.object({
-  chatId: z.string().describe('Path parameter "chatId"'),
-})
+  chatId: z.string().describe('Path parameter "chatId"')
+});
 
 /**
  * @description Success
  */
-export const chatsGetById200Schema = z.unknown()
+export const chatsGetById200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const chatsGetById401Schema = z.unknown()
+export const chatsGetById401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const chatsGetById403Schema = z.unknown()
+export const chatsGetById403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const chatsGetById404Schema = z.unknown()
+export const chatsGetById404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const chatsGetById409Schema = z.unknown()
+export const chatsGetById409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const chatsGetById413Schema = z.unknown()
+export const chatsGetById413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const chatsGetById422Schema = z.unknown()
+export const chatsGetById422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const chatsGetById429Schema = z.unknown()
+export const chatsGetById429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const chatsGetById500Schema = z.unknown()
+export const chatsGetById500Schema = z.unknown();
 
-export const chatsGetByIdQueryResponseSchema = z.lazy(() => chatsGetById200Schema)
+export const chatsGetByIdQueryResponseSchema = z.lazy(() => chatsGetById200Schema);
 
 export const chatsUpdatePathParamsSchema = z.object({
-  chatId: z.string().describe('Path parameter "chatId"'),
-})
+  chatId: z.string().describe('Path parameter "chatId"')
+});
 
 /**
  * @description Success
  */
-export const chatsUpdate200Schema = z.unknown()
+export const chatsUpdate200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const chatsUpdate401Schema = z.unknown()
+export const chatsUpdate401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const chatsUpdate403Schema = z.unknown()
+export const chatsUpdate403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const chatsUpdate404Schema = z.unknown()
+export const chatsUpdate404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const chatsUpdate409Schema = z.unknown()
+export const chatsUpdate409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const chatsUpdate413Schema = z.unknown()
+export const chatsUpdate413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const chatsUpdate422Schema = z.unknown()
+export const chatsUpdate422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const chatsUpdate429Schema = z.unknown()
+export const chatsUpdate429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const chatsUpdate500Schema = z.unknown()
+export const chatsUpdate500Schema = z.unknown();
 
-export const chatsUpdateMutationResponseSchema = z.lazy(() => chatsUpdate200Schema)
+export const chatsUpdateMutationResponseSchema = z.lazy(() => chatsUpdate200Schema);
 
 export const chatsFavoritePathParamsSchema = z.object({
-  chatId: z.string().describe('Path parameter "chatId"'),
-})
+  chatId: z.string().describe('Path parameter "chatId"')
+});
 
 /**
  * @description Success
  */
-export const chatsFavorite200Schema = z.unknown()
+export const chatsFavorite200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const chatsFavorite401Schema = z.unknown()
+export const chatsFavorite401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const chatsFavorite403Schema = z.unknown()
+export const chatsFavorite403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const chatsFavorite404Schema = z.unknown()
+export const chatsFavorite404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const chatsFavorite409Schema = z.unknown()
+export const chatsFavorite409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const chatsFavorite413Schema = z.unknown()
+export const chatsFavorite413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const chatsFavorite422Schema = z.unknown()
+export const chatsFavorite422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const chatsFavorite429Schema = z.unknown()
+export const chatsFavorite429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const chatsFavorite500Schema = z.unknown()
+export const chatsFavorite500Schema = z.unknown();
 
-export const chatsFavoriteMutationResponseSchema = z.lazy(() => chatsFavorite200Schema)
+export const chatsFavoriteMutationResponseSchema = z.lazy(() => chatsFavorite200Schema);
 
 export const chatsForkPathParamsSchema = z.object({
-  chatId: z.string().describe('Path parameter "chatId"'),
-})
+  chatId: z.string().describe('Path parameter "chatId"')
+});
 
 /**
  * @description Success
  */
-export const chatsFork200Schema = z.unknown()
+export const chatsFork200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const chatsFork401Schema = z.unknown()
+export const chatsFork401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const chatsFork403Schema = z.unknown()
+export const chatsFork403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const chatsFork404Schema = z.unknown()
+export const chatsFork404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const chatsFork409Schema = z.unknown()
+export const chatsFork409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const chatsFork413Schema = z.unknown()
+export const chatsFork413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const chatsFork422Schema = z.unknown()
+export const chatsFork422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const chatsFork429Schema = z.unknown()
+export const chatsFork429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const chatsFork500Schema = z.unknown()
+export const chatsFork500Schema = z.unknown();
 
-export const chatsForkMutationResponseSchema = z.lazy(() => chatsFork200Schema)
+export const chatsForkMutationResponseSchema = z.lazy(() => chatsFork200Schema);
 
 export const projectsGetByChatIdPathParamsSchema = z.object({
-  chatId: z.string().describe('Path parameter "chatId"'),
-})
+  chatId: z.string().describe('Path parameter "chatId"')
+});
 
 /**
  * @description Success
  */
-export const projectsGetByChatId200Schema = z.unknown()
+export const projectsGetByChatId200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const projectsGetByChatId401Schema = z.unknown()
+export const projectsGetByChatId401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const projectsGetByChatId403Schema = z.unknown()
+export const projectsGetByChatId403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const projectsGetByChatId404Schema = z.unknown()
+export const projectsGetByChatId404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const projectsGetByChatId409Schema = z.unknown()
+export const projectsGetByChatId409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const projectsGetByChatId413Schema = z.unknown()
+export const projectsGetByChatId413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const projectsGetByChatId422Schema = z.unknown()
+export const projectsGetByChatId422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const projectsGetByChatId429Schema = z.unknown()
+export const projectsGetByChatId429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const projectsGetByChatId500Schema = z.unknown()
+export const projectsGetByChatId500Schema = z.unknown();
 
-export const projectsGetByChatIdQueryResponseSchema = z.lazy(() => projectsGetByChatId200Schema)
+export const projectsGetByChatIdQueryResponseSchema = z.lazy(() => projectsGetByChatId200Schema);
 
 export const chatsSendMessagePathParamsSchema = z.object({
-  chatId: z.string().describe('Path parameter "chatId"'),
-})
+  chatId: z.string().describe('Path parameter "chatId"')
+});
 
 /**
  * @description Success
  */
-export const chatsSendMessage200Schema = z.unknown()
+export const chatsSendMessage200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const chatsSendMessage401Schema = z.unknown()
+export const chatsSendMessage401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const chatsSendMessage403Schema = z.unknown()
+export const chatsSendMessage403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const chatsSendMessage404Schema = z.unknown()
+export const chatsSendMessage404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const chatsSendMessage409Schema = z.unknown()
+export const chatsSendMessage409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const chatsSendMessage413Schema = z.unknown()
+export const chatsSendMessage413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const chatsSendMessage422Schema = z.unknown()
+export const chatsSendMessage422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const chatsSendMessage429Schema = z.unknown()
+export const chatsSendMessage429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const chatsSendMessage500Schema = z.unknown()
+export const chatsSendMessage500Schema = z.unknown();
 
-export const chatsSendMessageMutationResponseSchema = z.lazy(() => chatsSendMessage200Schema)
+export const chatsSendMessageMutationResponseSchema = z.lazy(() => chatsSendMessage200Schema);
 
 export const chatsGetMetadataPathParamsSchema = z.object({
-  chatId: z.string().describe('Path parameter "chatId"'),
-})
+  chatId: z.string().describe('Path parameter "chatId"')
+});
 
 /**
  * @description Success
  */
-export const chatsGetMetadata200Schema = z.unknown()
+export const chatsGetMetadata200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const chatsGetMetadata401Schema = z.unknown()
+export const chatsGetMetadata401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const chatsGetMetadata403Schema = z.unknown()
+export const chatsGetMetadata403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const chatsGetMetadata404Schema = z.unknown()
+export const chatsGetMetadata404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const chatsGetMetadata409Schema = z.unknown()
+export const chatsGetMetadata409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const chatsGetMetadata413Schema = z.unknown()
+export const chatsGetMetadata413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const chatsGetMetadata422Schema = z.unknown()
+export const chatsGetMetadata422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const chatsGetMetadata429Schema = z.unknown()
+export const chatsGetMetadata429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const chatsGetMetadata500Schema = z.unknown()
+export const chatsGetMetadata500Schema = z.unknown();
 
-export const chatsGetMetadataQueryResponseSchema = z.lazy(() => chatsGetMetadata200Schema)
+export const chatsGetMetadataQueryResponseSchema = z.lazy(() => chatsGetMetadata200Schema);
 
 export const chatsResumePathParamsSchema = z.object({
   chatId: z.string().describe('Path parameter "chatId"'),
-  messageId: z.string().describe('Path parameter "messageId"'),
-})
+  messageId: z.string().describe('Path parameter "messageId"')
+});
 
 /**
  * @description Success
  */
-export const chatsResume200Schema = z.unknown()
+export const chatsResume200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const chatsResume401Schema = z.unknown()
+export const chatsResume401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const chatsResume403Schema = z.unknown()
+export const chatsResume403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const chatsResume404Schema = z.unknown()
+export const chatsResume404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const chatsResume409Schema = z.unknown()
+export const chatsResume409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const chatsResume413Schema = z.unknown()
+export const chatsResume413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const chatsResume422Schema = z.unknown()
+export const chatsResume422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const chatsResume429Schema = z.unknown()
+export const chatsResume429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const chatsResume500Schema = z.unknown()
+export const chatsResume500Schema = z.unknown();
 
-export const chatsResumeMutationResponseSchema = z.lazy(() => chatsResume200Schema)
+export const chatsResumeMutationResponseSchema = z.lazy(() => chatsResume200Schema);
 
 export const deploymentsFindLogsPathParamsSchema = z.object({
-  deploymentId: z.string().describe('Path parameter "deploymentId"'),
-})
+  deploymentId: z.string().describe('Path parameter "deploymentId"')
+});
 
 export const deploymentsFindLogsQueryParamsSchema = z
   .object({
-    since: z.coerce.number().describe('Query parameter "since"').optional(),
+    since: z.coerce.number().describe('Query parameter "since"').optional()
   })
-  .optional()
+  .optional();
 
 /**
  * @description Success
  */
-export const deploymentsFindLogs200Schema = z.unknown()
+export const deploymentsFindLogs200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const deploymentsFindLogs401Schema = z.unknown()
+export const deploymentsFindLogs401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const deploymentsFindLogs403Schema = z.unknown()
+export const deploymentsFindLogs403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const deploymentsFindLogs404Schema = z.unknown()
+export const deploymentsFindLogs404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const deploymentsFindLogs409Schema = z.unknown()
+export const deploymentsFindLogs409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const deploymentsFindLogs413Schema = z.unknown()
+export const deploymentsFindLogs413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const deploymentsFindLogs422Schema = z.unknown()
+export const deploymentsFindLogs422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const deploymentsFindLogs429Schema = z.unknown()
+export const deploymentsFindLogs429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const deploymentsFindLogs500Schema = z.unknown()
+export const deploymentsFindLogs500Schema = z.unknown();
 
-export const deploymentsFindLogsQueryResponseSchema = z.lazy(() => deploymentsFindLogs200Schema)
+export const deploymentsFindLogsQueryResponseSchema = z.lazy(() => deploymentsFindLogs200Schema);
 
 export const deploymentsFindErrorsPathParamsSchema = z.object({
-  deploymentId: z.string().describe('Path parameter "deploymentId"'),
-})
+  deploymentId: z.string().describe('Path parameter "deploymentId"')
+});
 
 /**
  * @description Success
  */
-export const deploymentsFindErrors200Schema = z.unknown()
+export const deploymentsFindErrors200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const deploymentsFindErrors401Schema = z.unknown()
+export const deploymentsFindErrors401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const deploymentsFindErrors403Schema = z.unknown()
+export const deploymentsFindErrors403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const deploymentsFindErrors404Schema = z.unknown()
+export const deploymentsFindErrors404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const deploymentsFindErrors409Schema = z.unknown()
+export const deploymentsFindErrors409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const deploymentsFindErrors413Schema = z.unknown()
+export const deploymentsFindErrors413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const deploymentsFindErrors422Schema = z.unknown()
+export const deploymentsFindErrors422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const deploymentsFindErrors429Schema = z.unknown()
+export const deploymentsFindErrors429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const deploymentsFindErrors500Schema = z.unknown()
+export const deploymentsFindErrors500Schema = z.unknown();
 
-export const deploymentsFindErrorsQueryResponseSchema = z.lazy(() => deploymentsFindErrors200Schema)
+export const deploymentsFindErrorsQueryResponseSchema = z.lazy(() => deploymentsFindErrors200Schema);
 
 /**
  * @description Success
  */
-export const integrationsVercelProjectsFind200Schema = z.unknown()
+export const integrationsVercelProjectsFind200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const integrationsVercelProjectsFind401Schema = z.unknown()
+export const integrationsVercelProjectsFind401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const integrationsVercelProjectsFind403Schema = z.unknown()
+export const integrationsVercelProjectsFind403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const integrationsVercelProjectsFind404Schema = z.unknown()
+export const integrationsVercelProjectsFind404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const integrationsVercelProjectsFind409Schema = z.unknown()
+export const integrationsVercelProjectsFind409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const integrationsVercelProjectsFind413Schema = z.unknown()
+export const integrationsVercelProjectsFind413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const integrationsVercelProjectsFind422Schema = z.unknown()
+export const integrationsVercelProjectsFind422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const integrationsVercelProjectsFind429Schema = z.unknown()
+export const integrationsVercelProjectsFind429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const integrationsVercelProjectsFind500Schema = z.unknown()
+export const integrationsVercelProjectsFind500Schema = z.unknown();
 
-export const integrationsVercelProjectsFindQueryResponseSchema = z.lazy(() => integrationsVercelProjectsFind200Schema)
+export const integrationsVercelProjectsFindQueryResponseSchema = z.lazy(() => integrationsVercelProjectsFind200Schema);
 
 /**
  * @description Success
  */
-export const integrationsVercelProjectsCreate200Schema = z.unknown()
+export const integrationsVercelProjectsCreate200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const integrationsVercelProjectsCreate401Schema = z.unknown()
+export const integrationsVercelProjectsCreate401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const integrationsVercelProjectsCreate403Schema = z.unknown()
+export const integrationsVercelProjectsCreate403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const integrationsVercelProjectsCreate404Schema = z.unknown()
+export const integrationsVercelProjectsCreate404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const integrationsVercelProjectsCreate409Schema = z.unknown()
+export const integrationsVercelProjectsCreate409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const integrationsVercelProjectsCreate413Schema = z.unknown()
+export const integrationsVercelProjectsCreate413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const integrationsVercelProjectsCreate422Schema = z.unknown()
+export const integrationsVercelProjectsCreate422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const integrationsVercelProjectsCreate429Schema = z.unknown()
+export const integrationsVercelProjectsCreate429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const integrationsVercelProjectsCreate500Schema = z.unknown()
+export const integrationsVercelProjectsCreate500Schema = z.unknown();
 
-export const integrationsVercelProjectsCreateMutationResponseSchema = z.lazy(() => integrationsVercelProjectsCreate200Schema)
+export const integrationsVercelProjectsCreateMutationResponseSchema = z.lazy(
+  () => integrationsVercelProjectsCreate200Schema
+);
 
 /**
  * @description Success
  */
-export const projectsFind200Schema = z.unknown()
+export const projectsFind200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const projectsFind401Schema = z.unknown()
+export const projectsFind401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const projectsFind403Schema = z.unknown()
+export const projectsFind403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const projectsFind404Schema = z.unknown()
+export const projectsFind404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const projectsFind409Schema = z.unknown()
+export const projectsFind409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const projectsFind413Schema = z.unknown()
+export const projectsFind413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const projectsFind422Schema = z.unknown()
+export const projectsFind422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const projectsFind429Schema = z.unknown()
+export const projectsFind429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const projectsFind500Schema = z.unknown()
+export const projectsFind500Schema = z.unknown();
 
-export const projectsFindQueryResponseSchema = z.lazy(() => projectsFind200Schema)
+export const projectsFindQueryResponseSchema = z.lazy(() => projectsFind200Schema);
 
 /**
  * @description Success
  */
-export const projectsCreate200Schema = z.unknown()
+export const projectsCreate200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const projectsCreate401Schema = z.unknown()
+export const projectsCreate401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const projectsCreate403Schema = z.unknown()
+export const projectsCreate403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const projectsCreate404Schema = z.unknown()
+export const projectsCreate404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const projectsCreate409Schema = z.unknown()
+export const projectsCreate409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const projectsCreate413Schema = z.unknown()
+export const projectsCreate413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const projectsCreate422Schema = z.unknown()
+export const projectsCreate422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const projectsCreate429Schema = z.unknown()
+export const projectsCreate429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const projectsCreate500Schema = z.unknown()
+export const projectsCreate500Schema = z.unknown();
 
-export const projectsCreateMutationResponseSchema = z.lazy(() => projectsCreate200Schema)
+export const projectsCreateMutationResponseSchema = z.lazy(() => projectsCreate200Schema);
 
 export const projectsAssignPathParamsSchema = z.object({
-  projectId: z.string().describe('Path parameter "projectId"'),
-})
+  projectId: z.string().describe('Path parameter "projectId"')
+});
 
 /**
  * @description Success
  */
-export const projectsAssign200Schema = z.unknown()
+export const projectsAssign200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const projectsAssign401Schema = z.unknown()
+export const projectsAssign401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const projectsAssign403Schema = z.unknown()
+export const projectsAssign403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const projectsAssign404Schema = z.unknown()
+export const projectsAssign404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const projectsAssign409Schema = z.unknown()
+export const projectsAssign409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const projectsAssign413Schema = z.unknown()
+export const projectsAssign413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const projectsAssign422Schema = z.unknown()
+export const projectsAssign422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const projectsAssign429Schema = z.unknown()
+export const projectsAssign429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const projectsAssign500Schema = z.unknown()
+export const projectsAssign500Schema = z.unknown();
 
-export const projectsAssignMutationResponseSchema = z.lazy(() => projectsAssign200Schema)
+export const projectsAssignMutationResponseSchema = z.lazy(() => projectsAssign200Schema);
 
 export const rateLimitsFindQueryParamsSchema = z
   .object({
-    scope: z.string().describe('Query parameter "scope"').optional(),
+    scope: z.string().describe('Query parameter "scope"').optional()
   })
-  .optional()
+  .optional();
 
 /**
  * @description Success
  */
-export const rateLimitsFind200Schema = z.unknown()
+export const rateLimitsFind200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const rateLimitsFind401Schema = z.unknown()
+export const rateLimitsFind401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const rateLimitsFind403Schema = z.unknown()
+export const rateLimitsFind403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const rateLimitsFind404Schema = z.unknown()
+export const rateLimitsFind404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const rateLimitsFind409Schema = z.unknown()
+export const rateLimitsFind409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const rateLimitsFind413Schema = z.unknown()
+export const rateLimitsFind413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const rateLimitsFind422Schema = z.unknown()
+export const rateLimitsFind422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const rateLimitsFind429Schema = z.unknown()
+export const rateLimitsFind429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const rateLimitsFind500Schema = z.unknown()
+export const rateLimitsFind500Schema = z.unknown();
 
-export const rateLimitsFindQueryResponseSchema = z.lazy(() => rateLimitsFind200Schema)
+export const rateLimitsFindQueryResponseSchema = z.lazy(() => rateLimitsFind200Schema);
 
 /**
  * @description Success
  */
-export const userGet200Schema = z.unknown()
+export const userGet200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const userGet401Schema = z.unknown()
+export const userGet401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const userGet403Schema = z.unknown()
+export const userGet403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const userGet404Schema = z.unknown()
+export const userGet404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const userGet409Schema = z.unknown()
+export const userGet409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const userGet413Schema = z.unknown()
+export const userGet413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const userGet422Schema = z.unknown()
+export const userGet422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const userGet429Schema = z.unknown()
+export const userGet429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const userGet500Schema = z.unknown()
+export const userGet500Schema = z.unknown();
 
-export const userGetQueryResponseSchema = z.lazy(() => userGet200Schema)
+export const userGetQueryResponseSchema = z.lazy(() => userGet200Schema);
 
 export const userGetBillingQueryParamsSchema = z
   .object({
-    scope: z.string().describe('Query parameter "scope"').optional(),
+    scope: z.string().describe('Query parameter "scope"').optional()
   })
-  .optional()
+  .optional();
 
 /**
  * @description Success
  */
-export const userGetBilling200Schema = z.unknown()
+export const userGetBilling200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const userGetBilling401Schema = z.unknown()
+export const userGetBilling401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const userGetBilling403Schema = z.unknown()
+export const userGetBilling403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const userGetBilling404Schema = z.unknown()
+export const userGetBilling404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const userGetBilling409Schema = z.unknown()
+export const userGetBilling409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const userGetBilling413Schema = z.unknown()
+export const userGetBilling413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const userGetBilling422Schema = z.unknown()
+export const userGetBilling422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const userGetBilling429Schema = z.unknown()
+export const userGetBilling429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const userGetBilling500Schema = z.unknown()
+export const userGetBilling500Schema = z.unknown();
 
-export const userGetBillingQueryResponseSchema = z.lazy(() => userGetBilling200Schema)
+export const userGetBillingQueryResponseSchema = z.lazy(() => userGetBilling200Schema);
 
 /**
  * @description Success
  */
-export const userGetPlan200Schema = z.unknown()
+export const userGetPlan200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const userGetPlan401Schema = z.unknown()
+export const userGetPlan401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const userGetPlan403Schema = z.unknown()
+export const userGetPlan403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const userGetPlan404Schema = z.unknown()
+export const userGetPlan404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const userGetPlan409Schema = z.unknown()
+export const userGetPlan409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const userGetPlan413Schema = z.unknown()
+export const userGetPlan413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const userGetPlan422Schema = z.unknown()
+export const userGetPlan422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const userGetPlan429Schema = z.unknown()
+export const userGetPlan429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const userGetPlan500Schema = z.unknown()
+export const userGetPlan500Schema = z.unknown();
 
-export const userGetPlanQueryResponseSchema = z.lazy(() => userGetPlan200Schema)
+export const userGetPlanQueryResponseSchema = z.lazy(() => userGetPlan200Schema);
 
 /**
  * @description Success
  */
-export const userGetScopes200Schema = z.unknown()
+export const userGetScopes200Schema = z.unknown();
 
 /**
  * @description Unauthorized
  */
-export const userGetScopes401Schema = z.unknown()
+export const userGetScopes401Schema = z.unknown();
 
 /**
  * @description Forbidden
  */
-export const userGetScopes403Schema = z.unknown()
+export const userGetScopes403Schema = z.unknown();
 
 /**
  * @description Not Found
  */
-export const userGetScopes404Schema = z.unknown()
+export const userGetScopes404Schema = z.unknown();
 
 /**
  * @description Conflict
  */
-export const userGetScopes409Schema = z.unknown()
+export const userGetScopes409Schema = z.unknown();
 
 /**
  * @description Payload Too Large
  */
-export const userGetScopes413Schema = z.unknown()
+export const userGetScopes413Schema = z.unknown();
 
 /**
  * @description Unprocessable Entity
  */
-export const userGetScopes422Schema = z.unknown()
+export const userGetScopes422Schema = z.unknown();
 
 /**
  * @description Too Many Requests
  */
-export const userGetScopes429Schema = z.unknown()
+export const userGetScopes429Schema = z.unknown();
 
 /**
  * @description Internal Server Error
  */
-export const userGetScopes500Schema = z.unknown()
+export const userGetScopes500Schema = z.unknown();
 
-export const userGetScopesQueryResponseSchema = z.lazy(() => userGetScopes200Schema)
+export const userGetScopesQueryResponseSchema = z.lazy(() => userGetScopes200Schema);

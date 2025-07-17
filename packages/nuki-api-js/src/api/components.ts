@@ -3,24 +3,21 @@
  *
  * @version 3.10.2
  */
-import type * as Fetcher from "./fetcher";
-import { fetch, FetcherExtraProps } from "./fetcher";
-import type * as Schemas from "./schemas";
-import type * as RequestBodies from "./requestBodies";
+import type * as Fetcher from './fetcher';
+import { type FetcherExtraProps, fetch } from './fetcher';
+import type * as RequestBodies from './requestBodies';
+import type * as Schemas from './schemas';
 
 export type GetAccountsResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetAccountsResourceVariables = FetcherExtraProps;
 
-export const getAccountsResource = (
-  variables: GetAccountsResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const getAccountsResource = (variables: GetAccountsResourceVariables, signal?: AbortSignal) =>
   fetch<Schemas.MyAccount, GetAccountsResourceError, undefined, {}, {}, {}>({
-    url: "/account",
-    method: "get",
+    url: '/account',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostAccountsResourceQueryParams = {
@@ -39,36 +36,27 @@ export type PostAccountsResourceVariables = {
   queryParams?: PostAccountsResourceQueryParams;
 } & FetcherExtraProps;
 
-export const postAccountsResource = (
-  variables: PostAccountsResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    PostAccountsResourceError,
-    Schemas.AccountUpdate,
-    {},
-    PostAccountsResourceQueryParams,
-    {}
-  >({ url: "/account", method: "post", ...variables, signal });
+export const postAccountsResource = (variables: PostAccountsResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, PostAccountsResourceError, Schemas.AccountUpdate, {}, PostAccountsResourceQueryParams, {}>({
+    url: '/account',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteAccountsResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAccountsResourceVariables = FetcherExtraProps;
 
-export const deleteAccountsResource = (
-  variables: DeleteAccountsResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const deleteAccountsResource = (variables: DeleteAccountsResourceVariables, signal?: AbortSignal) =>
   fetch<undefined, DeleteAccountsResourceError, undefined, {}, {}, {}>({
-    url: "/account",
-    method: "delete",
+    url: '/account',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
-export type PostAccountEmailChangeResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostAccountEmailChangeResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PostAccountEmailChangeResourceVariables = {
   body: Schemas.AccountEmailChange;
@@ -76,53 +64,46 @@ export type PostAccountEmailChangeResourceVariables = {
 
 export const postAccountEmailChangeResource = (
   variables: PostAccountEmailChangeResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
-  fetch<
-    undefined,
-    PostAccountEmailChangeResourceError,
-    Schemas.AccountEmailChange,
-    {},
-    {},
-    {}
-  >({ url: "/account/email/change", method: "post", ...variables, signal });
+  fetch<undefined, PostAccountEmailChangeResourceError, Schemas.AccountEmailChange, {}, {}, {}>({
+    url: '/account/email/change',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
-export type PostAccountEmailVerifyResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostAccountEmailVerifyResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PostAccountEmailVerifyResourceVariables = FetcherExtraProps;
 
 export const postAccountEmailVerifyResource = (
   variables: PostAccountEmailVerifyResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   fetch<undefined, PostAccountEmailVerifyResourceError, undefined, {}, {}, {}>({
-    url: "/account/email/verify",
-    method: "post",
+    url: '/account/email/verify',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
-export type GetAccountIntegrationsResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type GetAccountIntegrationsResourceError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetAccountIntegrationsResourceResponse =
-  Schemas.AccountIntegration[];
+export type GetAccountIntegrationsResourceResponse = Schemas.AccountIntegration[];
 
 export type GetAccountIntegrationsResourceVariables = FetcherExtraProps;
 
 export const getAccountIntegrationsResource = (
   variables: GetAccountIntegrationsResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
-  fetch<
-    GetAccountIntegrationsResourceResponse,
-    GetAccountIntegrationsResourceError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/account/integration", method: "get", ...variables, signal });
+  fetch<GetAccountIntegrationsResourceResponse, GetAccountIntegrationsResourceError, undefined, {}, {}, {}>({
+    url: '/account/integration',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type DeleteAccountIntegrationsResourceQueryParams = {
   /**
@@ -135,8 +116,7 @@ export type DeleteAccountIntegrationsResourceQueryParams = {
   tokenId?: number;
 };
 
-export type DeleteAccountIntegrationsResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type DeleteAccountIntegrationsResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAccountIntegrationsResourceVariables = {
   queryParams?: DeleteAccountIntegrationsResourceQueryParams;
@@ -144,7 +124,7 @@ export type DeleteAccountIntegrationsResourceVariables = {
 
 export const deleteAccountIntegrationsResource = (
   variables: DeleteAccountIntegrationsResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   fetch<
     undefined,
@@ -153,7 +133,7 @@ export const deleteAccountIntegrationsResource = (
     {},
     DeleteAccountIntegrationsResourceQueryParams,
     {}
-  >({ url: "/account/integration", method: "delete", ...variables, signal });
+  >({ url: '/account/integration', method: 'delete', ...variables, signal });
 
 export type PostAccountOtpResourceError = Fetcher.ErrorWrapper<undefined>;
 
@@ -161,51 +141,39 @@ export type PostAccountOtpResourceVariables = {
   body: Schemas.AccountOtpEnable;
 } & FetcherExtraProps;
 
-export const postAccountOtpResource = (
-  variables: PostAccountOtpResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    PostAccountOtpResourceError,
-    Schemas.AccountOtpEnable,
-    {},
-    {},
-    {}
-  >({ url: "/account/otp", method: "post", ...variables, signal });
+export const postAccountOtpResource = (variables: PostAccountOtpResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, PostAccountOtpResourceError, Schemas.AccountOtpEnable, {}, {}, {}>({
+    url: '/account/otp',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PutAccountOtpResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PutAccountOtpResourceVariables = FetcherExtraProps;
 
-export const putAccountOtpResource = (
-  variables: PutAccountOtpResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const putAccountOtpResource = (variables: PutAccountOtpResourceVariables, signal?: AbortSignal) =>
   fetch<string, PutAccountOtpResourceError, undefined, {}, {}, {}>({
-    url: "/account/otp",
-    method: "put",
+    url: '/account/otp',
+    method: 'put',
     ...variables,
-    signal,
+    signal
   });
 
 export type DeleteAccountOtpResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAccountOtpResourceVariables = FetcherExtraProps;
 
-export const deleteAccountOtpResource = (
-  variables: DeleteAccountOtpResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const deleteAccountOtpResource = (variables: DeleteAccountOtpResourceVariables, signal?: AbortSignal) =>
   fetch<undefined, DeleteAccountOtpResourceError, undefined, {}, {}, {}>({
-    url: "/account/otp",
-    method: "delete",
+    url: '/account/otp',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
-export type PostAccountPasswordResetResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostAccountPasswordResetResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PostAccountPasswordResetResourceVariables = {
   body: Schemas.AccountPasswordReset;
@@ -213,33 +181,26 @@ export type PostAccountPasswordResetResourceVariables = {
 
 export const postAccountPasswordResetResource = (
   variables: PostAccountPasswordResetResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
-  fetch<
-    undefined,
-    PostAccountPasswordResetResourceError,
-    Schemas.AccountPasswordReset,
-    {},
-    {},
-    {}
-  >({ url: "/account/password/reset", method: "post", ...variables, signal });
+  fetch<undefined, PostAccountPasswordResetResourceError, Schemas.AccountPasswordReset, {}, {}, {}>({
+    url: '/account/password/reset',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAccountSettingResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetAccountSettingResourceVariables = FetcherExtraProps;
 
-export const getAccountSettingResource = (
-  variables: GetAccountSettingResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    Schemas.AccountSetting,
-    GetAccountSettingResourceError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/account/setting", method: "get", ...variables, signal });
+export const getAccountSettingResource = (variables: GetAccountSettingResourceVariables, signal?: AbortSignal) =>
+  fetch<Schemas.AccountSetting, GetAccountSettingResourceError, undefined, {}, {}, {}>({
+    url: '/account/setting',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAccountSettingResourceError = Fetcher.ErrorWrapper<undefined>;
 
@@ -247,32 +208,24 @@ export type PutAccountSettingResourceVariables = {
   body?: Schemas.AccountSetting;
 } & FetcherExtraProps;
 
-export const putAccountSettingResource = (
-  variables: PutAccountSettingResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    Schemas.AccountSetting,
-    PutAccountSettingResourceError,
-    Schemas.AccountSetting,
-    {},
-    {},
-    {}
-  >({ url: "/account/setting", method: "put", ...variables, signal });
+export const putAccountSettingResource = (variables: PutAccountSettingResourceVariables, signal?: AbortSignal) =>
+  fetch<Schemas.AccountSetting, PutAccountSettingResourceError, Schemas.AccountSetting, {}, {}, {}>({
+    url: '/account/setting',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteAccountSettingResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteAccountSettingResourceVariables = FetcherExtraProps;
 
-export const deleteAccountSettingResource = (
-  variables: DeleteAccountSettingResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const deleteAccountSettingResource = (variables: DeleteAccountSettingResourceVariables, signal?: AbortSignal) =>
   fetch<undefined, DeleteAccountSettingResourceError, undefined, {}, {}, {}>({
-    url: "/account/setting",
-    method: "delete",
+    url: '/account/setting',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetAccountSubsResourceQueryParams = {
@@ -288,18 +241,13 @@ export type GetAccountSubsResourceVariables = {
   queryParams?: GetAccountSubsResourceQueryParams;
 } & FetcherExtraProps;
 
-export const getAccountSubsResource = (
-  variables: GetAccountSubsResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    Schemas.Account,
-    GetAccountSubsResourceError,
-    undefined,
-    {},
-    GetAccountSubsResourceQueryParams,
-    {}
-  >({ url: "/account/sub", method: "get", ...variables, signal });
+export const getAccountSubsResource = (variables: GetAccountSubsResourceVariables, signal?: AbortSignal) =>
+  fetch<Schemas.Account, GetAccountSubsResourceError, undefined, {}, GetAccountSubsResourceQueryParams, {}>({
+    url: '/account/sub',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAccountSubsResourceError = Fetcher.ErrorWrapper<undefined>;
 
@@ -307,18 +255,13 @@ export type PutAccountSubsResourceVariables = {
   body: Schemas.AccountSubCreate;
 } & FetcherExtraProps;
 
-export const putAccountSubsResource = (
-  variables: PutAccountSubsResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    Schemas.MyAccount,
-    PutAccountSubsResourceError,
-    Schemas.AccountSubCreate,
-    {},
-    {},
-    {}
-  >({ url: "/account/sub", method: "put", ...variables, signal });
+export const putAccountSubsResource = (variables: PutAccountSubsResourceVariables, signal?: AbortSignal) =>
+  fetch<Schemas.MyAccount, PutAccountSubsResourceError, Schemas.AccountSubCreate, {}, {}, {}>({
+    url: '/account/sub',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type GetAccountSubResourcePathParams = {
   /**
@@ -333,18 +276,13 @@ export type GetAccountSubResourceVariables = {
   pathParams: GetAccountSubResourcePathParams;
 } & FetcherExtraProps;
 
-export const getAccountSubResource = (
-  variables: GetAccountSubResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    Schemas.Account,
-    GetAccountSubResourceError,
-    undefined,
-    {},
-    {},
-    GetAccountSubResourcePathParams
-  >({ url: "/account/sub/{accountId}", method: "get", ...variables, signal });
+export const getAccountSubResource = (variables: GetAccountSubResourceVariables, signal?: AbortSignal) =>
+  fetch<Schemas.Account, GetAccountSubResourceError, undefined, {}, {}, GetAccountSubResourcePathParams>({
+    url: '/account/sub/{accountId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAccountSubResourcePathParams = {
   /**
@@ -360,18 +298,13 @@ export type PostAccountSubResourceVariables = {
   pathParams: PostAccountSubResourcePathParams;
 } & FetcherExtraProps;
 
-export const postAccountSubResource = (
-  variables: PostAccountSubResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    PostAccountSubResourceError,
-    Schemas.AccountSubUpdate,
-    {},
-    {},
-    PostAccountSubResourcePathParams
-  >({ url: "/account/sub/{accountId}", method: "post", ...variables, signal });
+export const postAccountSubResource = (variables: PostAccountSubResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, PostAccountSubResourceError, Schemas.AccountSubUpdate, {}, {}, PostAccountSubResourcePathParams>({
+    url: '/account/sub/{accountId}',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteAccountSubResourcePathParams = {
   /**
@@ -386,22 +319,12 @@ export type DeleteAccountSubResourceVariables = {
   pathParams: DeleteAccountSubResourcePathParams;
 } & FetcherExtraProps;
 
-export const deleteAccountSubResource = (
-  variables: DeleteAccountSubResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    DeleteAccountSubResourceError,
-    undefined,
-    {},
-    {},
-    DeleteAccountSubResourcePathParams
-  >({
-    url: "/account/sub/{accountId}",
-    method: "delete",
+export const deleteAccountSubResource = (variables: DeleteAccountSubResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, DeleteAccountSubResourceError, undefined, {}, {}, DeleteAccountSubResourcePathParams>({
+    url: '/account/sub/{accountId}',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetAccountUsersResourceQueryParams = {
@@ -412,11 +335,11 @@ export type GetAccountUsersResourceQueryParams = {
   /**
    * The offset of the first user in the collection to return
    */
-  offset?: void;
+  offset?: undefined;
   /**
    * The maximum number of users to return. If the value exceeds the maximum, then the maximum value will be used.
    */
-  limit?: void;
+  limit?: undefined;
 };
 
 export type GetAccountUsersResourceError = Fetcher.ErrorWrapper<undefined>;
@@ -427,10 +350,7 @@ export type GetAccountUsersResourceVariables = {
   queryParams?: GetAccountUsersResourceQueryParams;
 } & FetcherExtraProps;
 
-export const getAccountUsersResource = (
-  variables: GetAccountUsersResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const getAccountUsersResource = (variables: GetAccountUsersResourceVariables, signal?: AbortSignal) =>
   fetch<
     GetAccountUsersResourceResponse,
     GetAccountUsersResourceError,
@@ -438,7 +358,7 @@ export const getAccountUsersResource = (
     {},
     GetAccountUsersResourceQueryParams,
     {}
-  >({ url: "/account/user", method: "get", ...variables, signal });
+  >({ url: '/account/user', method: 'get', ...variables, signal });
 
 export type PutAccountUsersResourceError = Fetcher.ErrorWrapper<undefined>;
 
@@ -446,18 +366,13 @@ export type PutAccountUsersResourceVariables = {
   body: Schemas.AccountUserCreate;
 } & FetcherExtraProps;
 
-export const putAccountUsersResource = (
-  variables: PutAccountUsersResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    Schemas.AccountUser,
-    PutAccountUsersResourceError,
-    Schemas.AccountUserCreate,
-    {},
-    {},
-    {}
-  >({ url: "/account/user", method: "put", ...variables, signal });
+export const putAccountUsersResource = (variables: PutAccountUsersResourceVariables, signal?: AbortSignal) =>
+  fetch<Schemas.AccountUser, PutAccountUsersResourceError, Schemas.AccountUserCreate, {}, {}, {}>({
+    url: '/account/user',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type GetAccountUserResourcePathParams = {
   /**
@@ -472,22 +387,12 @@ export type GetAccountUserResourceVariables = {
   pathParams: GetAccountUserResourcePathParams;
 } & FetcherExtraProps;
 
-export const getAccountUserResource = (
-  variables: GetAccountUserResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    Schemas.AccountUser,
-    GetAccountUserResourceError,
-    undefined,
-    {},
-    {},
-    GetAccountUserResourcePathParams
-  >({
-    url: "/account/user/{accountUserId}",
-    method: "get",
+export const getAccountUserResource = (variables: GetAccountUserResourceVariables, signal?: AbortSignal) =>
+  fetch<Schemas.AccountUser, GetAccountUserResourceError, undefined, {}, {}, GetAccountUserResourcePathParams>({
+    url: '/account/user/{accountUserId}',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostAccountUserResourcePathParams = {
@@ -504,10 +409,7 @@ export type PostAccountUserResourceVariables = {
   pathParams: PostAccountUserResourcePathParams;
 } & FetcherExtraProps;
 
-export const postAccountUserResource = (
-  variables: PostAccountUserResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const postAccountUserResource = (variables: PostAccountUserResourceVariables, signal?: AbortSignal) =>
   fetch<
     Schemas.AccountUser,
     PostAccountUserResourceError,
@@ -516,10 +418,10 @@ export const postAccountUserResource = (
     {},
     PostAccountUserResourcePathParams
   >({
-    url: "/account/user/{accountUserId}",
-    method: "post",
+    url: '/account/user/{accountUserId}',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type DeleteAccountUserResourcePathParams = {
@@ -535,22 +437,12 @@ export type DeleteAccountUserResourceVariables = {
   pathParams: DeleteAccountUserResourcePathParams;
 } & FetcherExtraProps;
 
-export const deleteAccountUserResource = (
-  variables: DeleteAccountUserResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    DeleteAccountUserResourceError,
-    undefined,
-    {},
-    {},
-    DeleteAccountUserResourcePathParams
-  >({
-    url: "/account/user/{accountUserId}",
-    method: "delete",
+export const deleteAccountUserResource = (variables: DeleteAccountUserResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, DeleteAccountUserResourceError, undefined, {}, {}, DeleteAccountUserResourcePathParams>({
+    url: '/account/user/{accountUserId}',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetAddressesResourceError = Fetcher.ErrorWrapper<undefined>;
@@ -559,18 +451,13 @@ export type GetAddressesResourceResponse = Schemas.Address[];
 
 export type GetAddressesResourceVariables = FetcherExtraProps;
 
-export const getAddressesResource = (
-  variables: GetAddressesResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    GetAddressesResourceResponse,
-    GetAddressesResourceError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/address", method: "get", ...variables, signal });
+export const getAddressesResource = (variables: GetAddressesResourceVariables, signal?: AbortSignal) =>
+  fetch<GetAddressesResourceResponse, GetAddressesResourceError, undefined, {}, {}, {}>({
+    url: '/address',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAddressesResourceError = Fetcher.ErrorWrapper<undefined>;
 
@@ -578,18 +465,13 @@ export type PutAddressesResourceVariables = {
   body: Schemas.AddressCreate;
 } & FetcherExtraProps;
 
-export const putAddressesResource = (
-  variables: PutAddressesResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    Schemas.Address,
-    PutAddressesResourceError,
-    Schemas.AddressCreate,
-    {},
-    {},
-    {}
-  >({ url: "/address", method: "put", ...variables, signal });
+export const putAddressesResource = (variables: PutAddressesResourceVariables, signal?: AbortSignal) =>
+  fetch<Schemas.Address, PutAddressesResourceError, Schemas.AddressCreate, {}, {}, {}>({
+    url: '/address',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type GetAddressTokenResourcePathParams = {
   /**
@@ -604,18 +486,13 @@ export type GetAddressTokenResourceVariables = {
   pathParams: GetAddressTokenResourcePathParams;
 } & FetcherExtraProps;
 
-export const getAddressTokenResource = (
-  variables: GetAddressTokenResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    Schemas.AddressTokenInfo,
-    GetAddressTokenResourceError,
-    undefined,
-    {},
-    {},
-    GetAddressTokenResourcePathParams
-  >({ url: "/address/token/{id}", method: "get", ...variables, signal });
+export const getAddressTokenResource = (variables: GetAddressTokenResourceVariables, signal?: AbortSignal) =>
+  fetch<Schemas.AddressTokenInfo, GetAddressTokenResourceError, undefined, {}, {}, GetAddressTokenResourcePathParams>({
+    url: '/address/token/{id}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAddressTokenRedeemResourcePathParams = {
   /**
@@ -624,8 +501,7 @@ export type GetAddressTokenRedeemResourcePathParams = {
   id: string;
 };
 
-export type GetAddressTokenRedeemResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type GetAddressTokenRedeemResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetAddressTokenRedeemResourceVariables = {
   pathParams: GetAddressTokenRedeemResourcePathParams;
@@ -633,7 +509,7 @@ export type GetAddressTokenRedeemResourceVariables = {
 
 export const getAddressTokenRedeemResource = (
   variables: GetAddressTokenRedeemResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   fetch<
     Schemas.AddressToken,
@@ -642,7 +518,7 @@ export const getAddressTokenRedeemResource = (
     {},
     {},
     GetAddressTokenRedeemResourcePathParams
-  >({ url: "/address/token/{id}/redeem", method: "get", ...variables, signal });
+  >({ url: '/address/token/{id}/redeem', method: 'get', ...variables, signal });
 
 export type PostAddressTokenRedeemResourcePathParams = {
   /**
@@ -658,8 +534,7 @@ export type PostAddressTokenRedeemResourceQueryParams = {
   email?: boolean;
 };
 
-export type PostAddressTokenRedeemResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostAddressTokenRedeemResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PostAddressTokenRedeemResourceVariables = {
   pathParams: PostAddressTokenRedeemResourcePathParams;
@@ -668,7 +543,7 @@ export type PostAddressTokenRedeemResourceVariables = {
 
 export const postAddressTokenRedeemResource = (
   variables: PostAddressTokenRedeemResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   fetch<
     undefined,
@@ -678,10 +553,10 @@ export const postAddressTokenRedeemResource = (
     PostAddressTokenRedeemResourceQueryParams,
     PostAddressTokenRedeemResourcePathParams
   >({
-    url: "/address/token/{id}/redeem",
-    method: "post",
+    url: '/address/token/{id}/redeem',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostAddressResourcePathParams = {
@@ -698,18 +573,13 @@ export type PostAddressResourceVariables = {
   pathParams: PostAddressResourcePathParams;
 } & FetcherExtraProps;
 
-export const postAddressResource = (
-  variables: PostAddressResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    PostAddressResourceError,
-    Schemas.AddressUpdate,
-    {},
-    {},
-    PostAddressResourcePathParams
-  >({ url: "/address/{addressId}", method: "post", ...variables, signal });
+export const postAddressResource = (variables: PostAddressResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, PostAddressResourceError, Schemas.AddressUpdate, {}, {}, PostAddressResourcePathParams>({
+    url: '/address/{addressId}',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteAddressResourcePathParams = {
   /**
@@ -724,18 +594,13 @@ export type DeleteAddressResourceVariables = {
   pathParams: DeleteAddressResourcePathParams;
 } & FetcherExtraProps;
 
-export const deleteAddressResource = (
-  variables: DeleteAddressResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    DeleteAddressResourceError,
-    undefined,
-    {},
-    {},
-    DeleteAddressResourcePathParams
-  >({ url: "/address/{addressId}", method: "delete", ...variables, signal });
+export const deleteAddressResource = (variables: DeleteAddressResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, DeleteAddressResourceError, undefined, {}, {}, DeleteAddressResourcePathParams>({
+    url: '/address/{addressId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAddressReservationsResourcePathParams = {
   /**
@@ -744,11 +609,9 @@ export type GetAddressReservationsResourcePathParams = {
   addressId: number;
 };
 
-export type GetAddressReservationsResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type GetAddressReservationsResourceError = Fetcher.ErrorWrapper<undefined>;
 
-export type GetAddressReservationsResourceResponse =
-  Schemas.AddressReservation[];
+export type GetAddressReservationsResourceResponse = Schemas.AddressReservation[];
 
 export type GetAddressReservationsResourceVariables = {
   pathParams: GetAddressReservationsResourcePathParams;
@@ -756,7 +619,7 @@ export type GetAddressReservationsResourceVariables = {
 
 export const getAddressReservationsResource = (
   variables: GetAddressReservationsResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   fetch<
     GetAddressReservationsResourceResponse,
@@ -766,10 +629,10 @@ export const getAddressReservationsResource = (
     {},
     GetAddressReservationsResourcePathParams
   >({
-    url: "/address/{addressId}/reservation",
-    method: "get",
+    url: '/address/{addressId}/reservation',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostAddressReservationIssueResourcePathParams = {
@@ -783,8 +646,7 @@ export type PostAddressReservationIssueResourcePathParams = {
   id: string;
 };
 
-export type PostAddressReservationIssueResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostAddressReservationIssueResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PostAddressReservationIssueResourceVariables = {
   pathParams: PostAddressReservationIssueResourcePathParams;
@@ -792,7 +654,7 @@ export type PostAddressReservationIssueResourceVariables = {
 
 export const postAddressReservationIssueResource = (
   variables: PostAddressReservationIssueResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   fetch<
     undefined,
@@ -802,10 +664,10 @@ export const postAddressReservationIssueResource = (
     {},
     PostAddressReservationIssueResourcePathParams
   >({
-    url: "/address/{addressId}/reservation/{id}/issue",
-    method: "post",
+    url: '/address/{addressId}/reservation/{id}/issue',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostAddressReservationRevokeResourcePathParams = {
@@ -819,8 +681,7 @@ export type PostAddressReservationRevokeResourcePathParams = {
   id: string;
 };
 
-export type PostAddressReservationRevokeResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostAddressReservationRevokeResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PostAddressReservationRevokeResourceVariables = {
   pathParams: PostAddressReservationRevokeResourcePathParams;
@@ -828,7 +689,7 @@ export type PostAddressReservationRevokeResourceVariables = {
 
 export const postAddressReservationRevokeResource = (
   variables: PostAddressReservationRevokeResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   fetch<
     undefined,
@@ -838,10 +699,10 @@ export const postAddressReservationRevokeResource = (
     {},
     PostAddressReservationRevokeResourcePathParams
   >({
-    url: "/address/{addressId}/reservation/{id}/revoke",
-    method: "post",
+    url: '/address/{addressId}/reservation/{id}/revoke',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostReservationAccessTimesUpdateResourcePathParams = {
@@ -855,8 +716,7 @@ export type PostReservationAccessTimesUpdateResourcePathParams = {
   id: string;
 };
 
-export type PostReservationAccessTimesUpdateResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostReservationAccessTimesUpdateResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PostReservationAccessTimesUpdateResourceVariables = {
   body?: Schemas.ReservationAccessTimesUpdate;
@@ -865,7 +725,7 @@ export type PostReservationAccessTimesUpdateResourceVariables = {
 
 export const postReservationAccessTimesUpdateResource = (
   variables: PostReservationAccessTimesUpdateResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   fetch<
     undefined,
@@ -875,10 +735,10 @@ export const postReservationAccessTimesUpdateResource = (
     {},
     PostReservationAccessTimesUpdateResourcePathParams
   >({
-    url: "/address/{addressId}/reservation/{id}/update/accesstimes",
-    method: "post",
+    url: '/address/{addressId}/reservation/{id}/update/accesstimes',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetAddressTokensResourcePathParams = {
@@ -896,10 +756,7 @@ export type GetAddressTokensResourceVariables = {
   pathParams: GetAddressTokensResourcePathParams;
 } & FetcherExtraProps;
 
-export const getAddressTokensResource = (
-  variables: GetAddressTokensResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const getAddressTokensResource = (variables: GetAddressTokensResourceVariables, signal?: AbortSignal) =>
   fetch<
     GetAddressTokensResourceResponse,
     GetAddressTokensResourceError,
@@ -907,7 +764,7 @@ export const getAddressTokensResource = (
     {},
     {},
     GetAddressTokensResourcePathParams
-  >({ url: "/address/{addressId}/token", method: "get", ...variables, signal });
+  >({ url: '/address/{addressId}/token', method: 'get', ...variables, signal });
 
 export type GetAddressUnitsResourcePathParams = {
   /**
@@ -924,10 +781,7 @@ export type GetAddressUnitsResourceVariables = {
   pathParams: GetAddressUnitsResourcePathParams;
 } & FetcherExtraProps;
 
-export const getAddressUnitsResource = (
-  variables: GetAddressUnitsResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const getAddressUnitsResource = (variables: GetAddressUnitsResourceVariables, signal?: AbortSignal) =>
   fetch<
     GetAddressUnitsResourceResponse,
     GetAddressUnitsResourceError,
@@ -935,7 +789,7 @@ export const getAddressUnitsResource = (
     {},
     {},
     GetAddressUnitsResourcePathParams
-  >({ url: "/address/{addressId}/unit", method: "get", ...variables, signal });
+  >({ url: '/address/{addressId}/unit', method: 'get', ...variables, signal });
 
 export type PutAddressUnitsResourcePathParams = {
   /**
@@ -951,10 +805,7 @@ export type PutAddressUnitsResourceVariables = {
   pathParams: PutAddressUnitsResourcePathParams;
 } & FetcherExtraProps;
 
-export const putAddressUnitsResource = (
-  variables: PutAddressUnitsResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const putAddressUnitsResource = (variables: PutAddressUnitsResourceVariables, signal?: AbortSignal) =>
   fetch<
     Schemas.AddressUnitResponse,
     PutAddressUnitsResourceError,
@@ -962,7 +813,7 @@ export const putAddressUnitsResource = (
     {},
     {},
     PutAddressUnitsResourcePathParams
-  >({ url: "/address/{addressId}/unit", method: "put", ...variables, signal });
+  >({ url: '/address/{addressId}/unit', method: 'put', ...variables, signal });
 
 export type DeleteAddressUnitsResourcePathParams = {
   /**
@@ -980,10 +831,7 @@ export type DeleteAddressUnitsResourceVariables = {
   pathParams: DeleteAddressUnitsResourcePathParams;
 } & FetcherExtraProps;
 
-export const deleteAddressUnitsResource = (
-  variables: DeleteAddressUnitsResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const deleteAddressUnitsResource = (variables: DeleteAddressUnitsResourceVariables, signal?: AbortSignal) =>
   fetch<
     Schemas.AdvancedConfirmationResponse,
     DeleteAddressUnitsResourceError,
@@ -992,10 +840,10 @@ export const deleteAddressUnitsResource = (
     {},
     DeleteAddressUnitsResourcePathParams
   >({
-    url: "/address/{addressId}/unit",
-    method: "delete",
+    url: '/address/{addressId}/unit',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type DeleteAddressUnitResourcePathParams = {
@@ -1015,10 +863,7 @@ export type DeleteAddressUnitResourceVariables = {
   pathParams: DeleteAddressUnitResourcePathParams;
 } & FetcherExtraProps;
 
-export const deleteAddressUnitResource = (
-  variables: DeleteAddressUnitResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const deleteAddressUnitResource = (variables: DeleteAddressUnitResourceVariables, signal?: AbortSignal) =>
   fetch<
     Schemas.AdvancedConfirmationResponse,
     DeleteAddressUnitResourceError,
@@ -1027,10 +872,10 @@ export const deleteAddressUnitResource = (
     {},
     DeleteAddressUnitResourcePathParams
   >({
-    url: "/address/{addressId}/unit/{id}",
-    method: "delete",
+    url: '/address/{addressId}/unit/{id}',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetDecentralWebhooksResourceError = Fetcher.ErrorWrapper<undefined>;
@@ -1039,18 +884,13 @@ export type GetDecentralWebhooksResourceResponse = Schemas.DecentralWebhook[];
 
 export type GetDecentralWebhooksResourceVariables = FetcherExtraProps;
 
-export const getDecentralWebhooksResource = (
-  variables: GetDecentralWebhooksResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    GetDecentralWebhooksResourceResponse,
-    GetDecentralWebhooksResourceError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/api/decentralWebhook", method: "get", ...variables, signal });
+export const getDecentralWebhooksResource = (variables: GetDecentralWebhooksResourceVariables, signal?: AbortSignal) =>
+  fetch<GetDecentralWebhooksResourceResponse, GetDecentralWebhooksResourceError, undefined, {}, {}, {}>({
+    url: '/api/decentralWebhook',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutDecentralWebhooksResourceError = Fetcher.ErrorWrapper<undefined>;
 
@@ -1058,18 +898,13 @@ export type PutDecentralWebhooksResourceVariables = {
   body: Schemas.DecentralWebhook;
 } & FetcherExtraProps;
 
-export const putDecentralWebhooksResource = (
-  variables: PutDecentralWebhooksResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    Schemas.DecentralWebhook,
-    PutDecentralWebhooksResourceError,
-    Schemas.DecentralWebhook,
-    {},
-    {},
-    {}
-  >({ url: "/api/decentralWebhook", method: "put", ...variables, signal });
+export const putDecentralWebhooksResource = (variables: PutDecentralWebhooksResourceVariables, signal?: AbortSignal) =>
+  fetch<Schemas.DecentralWebhook, PutDecentralWebhooksResourceError, Schemas.DecentralWebhook, {}, {}, {}>({
+    url: '/api/decentralWebhook',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteDecentralWebhookResourcePathParams = {
   /**
@@ -1078,8 +913,7 @@ export type DeleteDecentralWebhookResourcePathParams = {
   id: number;
 };
 
-export type DeleteDecentralWebhookResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type DeleteDecentralWebhookResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteDecentralWebhookResourceVariables = {
   pathParams: DeleteDecentralWebhookResourcePathParams;
@@ -1087,20 +921,13 @@ export type DeleteDecentralWebhookResourceVariables = {
 
 export const deleteDecentralWebhookResource = (
   variables: DeleteDecentralWebhookResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
-  fetch<
-    undefined,
-    DeleteDecentralWebhookResourceError,
-    undefined,
-    {},
-    {},
-    DeleteDecentralWebhookResourcePathParams
-  >({
-    url: "/api/decentralWebhook/{id}",
-    method: "delete",
+  fetch<undefined, DeleteDecentralWebhookResourceError, undefined, {}, {}, DeleteDecentralWebhookResourcePathParams>({
+    url: '/api/decentralWebhook/{id}',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetApiKeysResourceError = Fetcher.ErrorWrapper<undefined>;
@@ -1109,18 +936,13 @@ export type GetApiKeysResourceResponse = Schemas.ApiKey[];
 
 export type GetApiKeysResourceVariables = FetcherExtraProps;
 
-export const getApiKeysResource = (
-  variables: GetApiKeysResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    GetApiKeysResourceResponse,
-    GetApiKeysResourceError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/api/key", method: "get", ...variables, signal });
+export const getApiKeysResource = (variables: GetApiKeysResourceVariables, signal?: AbortSignal) =>
+  fetch<GetApiKeysResourceResponse, GetApiKeysResourceError, undefined, {}, {}, {}>({
+    url: '/api/key',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutApiKeysResourceError = Fetcher.ErrorWrapper<undefined>;
 
@@ -1128,18 +950,13 @@ export type PutApiKeysResourceVariables = {
   body?: Schemas.ApiKeyCreate;
 } & FetcherExtraProps;
 
-export const putApiKeysResource = (
-  variables: PutApiKeysResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    Schemas.ApiKey,
-    PutApiKeysResourceError,
-    Schemas.ApiKeyCreate,
-    {},
-    {},
-    {}
-  >({ url: "/api/key", method: "put", ...variables, signal });
+export const putApiKeysResource = (variables: PutApiKeysResourceVariables, signal?: AbortSignal) =>
+  fetch<Schemas.ApiKey, PutApiKeysResourceError, Schemas.ApiKeyCreate, {}, {}, {}>({
+    url: '/api/key',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type PostApiKeyResourcePathParams = {
   /**
@@ -1155,18 +972,13 @@ export type PostApiKeyResourceVariables = {
   pathParams: PostApiKeyResourcePathParams;
 } & FetcherExtraProps;
 
-export const postApiKeyResource = (
-  variables: PostApiKeyResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    PostApiKeyResourceError,
-    Schemas.ApiKeyUpdate,
-    {},
-    {},
-    PostApiKeyResourcePathParams
-  >({ url: "/api/key/{apiKeyId}", method: "post", ...variables, signal });
+export const postApiKeyResource = (variables: PostApiKeyResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, PostApiKeyResourceError, Schemas.ApiKeyUpdate, {}, {}, PostApiKeyResourcePathParams>({
+    url: '/api/key/{apiKeyId}',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteApiKeyResourcePathParams = {
   /**
@@ -1181,18 +993,13 @@ export type DeleteApiKeyResourceVariables = {
   pathParams: DeleteApiKeyResourcePathParams;
 } & FetcherExtraProps;
 
-export const deleteApiKeyResource = (
-  variables: DeleteApiKeyResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    DeleteApiKeyResourceError,
-    undefined,
-    {},
-    {},
-    DeleteApiKeyResourcePathParams
-  >({ url: "/api/key/{apiKeyId}", method: "delete", ...variables, signal });
+export const deleteApiKeyResource = (variables: DeleteApiKeyResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, DeleteApiKeyResourceError, undefined, {}, {}, DeleteApiKeyResourcePathParams>({
+    url: '/api/key/{apiKeyId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetApiKeyAdvancedResourcePathParams = {
   /**
@@ -1207,23 +1014,15 @@ export type GetApiKeyAdvancedResourceVariables = {
   pathParams: GetApiKeyAdvancedResourcePathParams;
 } & FetcherExtraProps;
 
-export const getApiKeyAdvancedResource = (
-  variables: GetApiKeyAdvancedResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    Schemas.AdvancedApiKey,
-    GetApiKeyAdvancedResourceError,
-    undefined,
-    {},
-    {},
-    GetApiKeyAdvancedResourcePathParams
-  >({
-    url: "/api/key/{apiKeyId}/advanced",
-    method: "get",
-    ...variables,
-    signal,
-  });
+export const getApiKeyAdvancedResource = (variables: GetApiKeyAdvancedResourceVariables, signal?: AbortSignal) =>
+  fetch<Schemas.AdvancedApiKey, GetApiKeyAdvancedResourceError, undefined, {}, {}, GetApiKeyAdvancedResourcePathParams>(
+    {
+      url: '/api/key/{apiKeyId}/advanced',
+      method: 'get',
+      ...variables,
+      signal
+    }
+  );
 
 export type PostApiKeyAdvancedResourcePathParams = {
   /**
@@ -1239,10 +1038,7 @@ export type PostApiKeyAdvancedResourceVariables = {
   pathParams: PostApiKeyAdvancedResourcePathParams;
 } & FetcherExtraProps;
 
-export const postApiKeyAdvancedResource = (
-  variables: PostApiKeyAdvancedResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const postApiKeyAdvancedResource = (variables: PostApiKeyAdvancedResourceVariables, signal?: AbortSignal) =>
   fetch<
     undefined,
     PostApiKeyAdvancedResourceError,
@@ -1251,10 +1047,10 @@ export const postApiKeyAdvancedResource = (
     {},
     PostApiKeyAdvancedResourcePathParams
   >({
-    url: "/api/key/{apiKeyId}/advanced",
-    method: "post",
+    url: '/api/key/{apiKeyId}/advanced',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type PutApiKeyAdvancedResourcePathParams = {
@@ -1271,10 +1067,7 @@ export type PutApiKeyAdvancedResourceVariables = {
   pathParams: PutApiKeyAdvancedResourcePathParams;
 } & FetcherExtraProps;
 
-export const putApiKeyAdvancedResource = (
-  variables: PutApiKeyAdvancedResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const putApiKeyAdvancedResource = (variables: PutApiKeyAdvancedResourceVariables, signal?: AbortSignal) =>
   fetch<
     undefined,
     PutApiKeyAdvancedResourceError,
@@ -1283,10 +1076,10 @@ export const putApiKeyAdvancedResource = (
     {},
     PutApiKeyAdvancedResourcePathParams
   >({
-    url: "/api/key/{apiKeyId}/advanced",
-    method: "put",
+    url: '/api/key/{apiKeyId}/advanced',
+    method: 'put',
     ...variables,
-    signal,
+    signal
   });
 
 export type DeleteApiKeyAdvancedResourcePathParams = {
@@ -1302,22 +1095,12 @@ export type DeleteApiKeyAdvancedResourceVariables = {
   pathParams: DeleteApiKeyAdvancedResourcePathParams;
 } & FetcherExtraProps;
 
-export const deleteApiKeyAdvancedResource = (
-  variables: DeleteApiKeyAdvancedResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    DeleteApiKeyAdvancedResourceError,
-    undefined,
-    {},
-    {},
-    DeleteApiKeyAdvancedResourcePathParams
-  >({
-    url: "/api/key/{apiKeyId}/advanced",
-    method: "delete",
+export const deleteApiKeyAdvancedResource = (variables: DeleteApiKeyAdvancedResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, DeleteApiKeyAdvancedResourceError, undefined, {}, {}, DeleteApiKeyAdvancedResourcePathParams>({
+    url: '/api/key/{apiKeyId}/advanced',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostApiKeyAdvancedReactivateResourcePathParams = {
@@ -1327,8 +1110,7 @@ export type PostApiKeyAdvancedReactivateResourcePathParams = {
   apiKeyId: number;
 };
 
-export type PostApiKeyAdvancedReactivateResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostApiKeyAdvancedReactivateResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PostApiKeyAdvancedReactivateResourceVariables = {
   pathParams: PostApiKeyAdvancedReactivateResourcePathParams;
@@ -1336,7 +1118,7 @@ export type PostApiKeyAdvancedReactivateResourceVariables = {
 
 export const postApiKeyAdvancedReactivateResource = (
   variables: PostApiKeyAdvancedReactivateResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   fetch<
     undefined,
@@ -1346,10 +1128,10 @@ export const postApiKeyAdvancedReactivateResource = (
     {},
     PostApiKeyAdvancedReactivateResourcePathParams
   >({
-    url: "/api/key/{apiKeyId}/advanced/reactivate",
-    method: "post",
+    url: '/api/key/{apiKeyId}/advanced/reactivate',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetApiKeyTokensResourcePathParams = {
@@ -1367,10 +1149,7 @@ export type GetApiKeyTokensResourceVariables = {
   pathParams: GetApiKeyTokensResourcePathParams;
 } & FetcherExtraProps;
 
-export const getApiKeyTokensResource = (
-  variables: GetApiKeyTokensResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const getApiKeyTokensResource = (variables: GetApiKeyTokensResourceVariables, signal?: AbortSignal) =>
   fetch<
     GetApiKeyTokensResourceResponse,
     GetApiKeyTokensResourceError,
@@ -1378,7 +1157,7 @@ export const getApiKeyTokensResource = (
     {},
     {},
     GetApiKeyTokensResourcePathParams
-  >({ url: "/api/key/{apiKeyId}/token", method: "get", ...variables, signal });
+  >({ url: '/api/key/{apiKeyId}/token', method: 'get', ...variables, signal });
 
 export type PutApiKeyTokensResourcePathParams = {
   /**
@@ -1394,10 +1173,7 @@ export type PutApiKeyTokensResourceVariables = {
   pathParams: PutApiKeyTokensResourcePathParams;
 } & FetcherExtraProps;
 
-export const putApiKeyTokensResource = (
-  variables: PutApiKeyTokensResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const putApiKeyTokensResource = (variables: PutApiKeyTokensResourceVariables, signal?: AbortSignal) =>
   fetch<
     Schemas.ApiKeyToken,
     PutApiKeyTokensResourceError,
@@ -1405,7 +1181,7 @@ export const putApiKeyTokensResource = (
     {},
     {},
     PutApiKeyTokensResourcePathParams
-  >({ url: "/api/key/{apiKeyId}/token", method: "put", ...variables, signal });
+  >({ url: '/api/key/{apiKeyId}/token', method: 'put', ...variables, signal });
 
 export type PostApiKeyTokenResourcePathParams = {
   /**
@@ -1425,22 +1201,12 @@ export type PostApiKeyTokenResourceVariables = {
   pathParams: PostApiKeyTokenResourcePathParams;
 } & FetcherExtraProps;
 
-export const postApiKeyTokenResource = (
-  variables: PostApiKeyTokenResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    PostApiKeyTokenResourceError,
-    Schemas.ApiKeyTokenUpdate,
-    {},
-    {},
-    PostApiKeyTokenResourcePathParams
-  >({
-    url: "/api/key/{apiKeyId}/token/{id}",
-    method: "post",
+export const postApiKeyTokenResource = (variables: PostApiKeyTokenResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, PostApiKeyTokenResourceError, Schemas.ApiKeyTokenUpdate, {}, {}, PostApiKeyTokenResourcePathParams>({
+    url: '/api/key/{apiKeyId}/token/{id}',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type DeleteApiKeyTokenResourcePathParams = {
@@ -1460,22 +1226,12 @@ export type DeleteApiKeyTokenResourceVariables = {
   pathParams: DeleteApiKeyTokenResourcePathParams;
 } & FetcherExtraProps;
 
-export const deleteApiKeyTokenResource = (
-  variables: DeleteApiKeyTokenResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    DeleteApiKeyTokenResourceError,
-    undefined,
-    {},
-    {},
-    DeleteApiKeyTokenResourcePathParams
-  >({
-    url: "/api/key/{apiKeyId}/token/{id}",
-    method: "delete",
+export const deleteApiKeyTokenResource = (variables: DeleteApiKeyTokenResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, DeleteApiKeyTokenResourceError, undefined, {}, {}, DeleteApiKeyTokenResourcePathParams>({
+    url: '/api/key/{apiKeyId}/token/{id}',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetWebhookLogsResourcePathParams = {
@@ -1507,10 +1263,7 @@ export type GetWebhookLogsResourceVariables = {
   queryParams?: GetWebhookLogsResourceQueryParams;
 } & FetcherExtraProps;
 
-export const getWebhookLogsResource = (
-  variables: GetWebhookLogsResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const getWebhookLogsResource = (variables: GetWebhookLogsResourceVariables, signal?: AbortSignal) =>
   fetch<
     GetWebhookLogsResourceResponse,
     GetWebhookLogsResourceError,
@@ -1519,14 +1272,13 @@ export const getWebhookLogsResource = (
     GetWebhookLogsResourceQueryParams,
     GetWebhookLogsResourcePathParams
   >({
-    url: "/api/key/{apiKeyId}/webhook/logs",
-    method: "get",
+    url: '/api/key/{apiKeyId}/webhook/logs',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
-export type PostSmartlockBulkWebConfigResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostSmartlockBulkWebConfigResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PostSmartlockBulkWebConfigResourceVariables = {
   body?: Schemas.BulkWebConfigRequest;
@@ -1534,16 +1286,14 @@ export type PostSmartlockBulkWebConfigResourceVariables = {
 
 export const postSmartlockBulkWebConfigResource = (
   variables: PostSmartlockBulkWebConfigResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
-  fetch<
-    undefined,
-    PostSmartlockBulkWebConfigResourceError,
-    Schemas.BulkWebConfigRequest,
-    {},
-    {},
-    {}
-  >({ url: "/bulk-web-config", method: "post", ...variables, signal });
+  fetch<undefined, PostSmartlockBulkWebConfigResourceError, Schemas.BulkWebConfigRequest, {}, {}, {}>({
+    url: '/bulk-web-config',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetCompaniesResourceError = Fetcher.ErrorWrapper<undefined>;
 
@@ -1551,18 +1301,13 @@ export type GetCompaniesResourceResponse = Schemas.Company[];
 
 export type GetCompaniesResourceVariables = FetcherExtraProps;
 
-export const getCompaniesResource = (
-  variables: GetCompaniesResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    GetCompaniesResourceResponse,
-    GetCompaniesResourceError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/company", method: "get", ...variables, signal });
+export const getCompaniesResource = (variables: GetCompaniesResourceVariables, signal?: AbortSignal) =>
+  fetch<GetCompaniesResourceResponse, GetCompaniesResourceError, undefined, {}, {}, {}>({
+    url: '/company',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetNotificationsResourceQueryParams = {
   /**
@@ -1579,10 +1324,7 @@ export type GetNotificationsResourceVariables = {
   queryParams?: GetNotificationsResourceQueryParams;
 } & FetcherExtraProps;
 
-export const getNotificationsResource = (
-  variables: GetNotificationsResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const getNotificationsResource = (variables: GetNotificationsResourceVariables, signal?: AbortSignal) =>
   fetch<
     GetNotificationsResourceResponse,
     GetNotificationsResourceError,
@@ -1590,7 +1332,7 @@ export const getNotificationsResource = (
     {},
     GetNotificationsResourceQueryParams,
     {}
-  >({ url: "/notification", method: "get", ...variables, signal });
+  >({ url: '/notification', method: 'get', ...variables, signal });
 
 export type PutNotificationsResourceError = Fetcher.ErrorWrapper<undefined>;
 
@@ -1598,18 +1340,13 @@ export type PutNotificationsResourceVariables = {
   body: Schemas.Notification;
 } & FetcherExtraProps;
 
-export const putNotificationsResource = (
-  variables: PutNotificationsResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    Schemas.Notification,
-    PutNotificationsResourceError,
-    Schemas.Notification,
-    {},
-    {},
-    {}
-  >({ url: "/notification", method: "put", ...variables, signal });
+export const putNotificationsResource = (variables: PutNotificationsResourceVariables, signal?: AbortSignal) =>
+  fetch<Schemas.Notification, PutNotificationsResourceError, Schemas.Notification, {}, {}, {}>({
+    url: '/notification',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type GetNotificationResourcePathParams = {
   /**
@@ -1624,22 +1361,12 @@ export type GetNotificationResourceVariables = {
   pathParams: GetNotificationResourcePathParams;
 } & FetcherExtraProps;
 
-export const getNotificationResource = (
-  variables: GetNotificationResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    Schemas.Notification,
-    GetNotificationResourceError,
-    undefined,
-    {},
-    {},
-    GetNotificationResourcePathParams
-  >({
-    url: "/notification/{notificationId}",
-    method: "get",
+export const getNotificationResource = (variables: GetNotificationResourceVariables, signal?: AbortSignal) =>
+  fetch<Schemas.Notification, GetNotificationResourceError, undefined, {}, {}, GetNotificationResourcePathParams>({
+    url: '/notification/{notificationId}',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostNotificationResourcePathParams = {
@@ -1656,10 +1383,7 @@ export type PostNotificationResourceVariables = {
   pathParams: PostNotificationResourcePathParams;
 } & FetcherExtraProps;
 
-export const postNotificationResource = (
-  variables: PostNotificationResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const postNotificationResource = (variables: PostNotificationResourceVariables, signal?: AbortSignal) =>
   fetch<
     Schemas.Notification,
     PostNotificationResourceError,
@@ -1668,10 +1392,10 @@ export const postNotificationResource = (
     {},
     PostNotificationResourcePathParams
   >({
-    url: "/notification/{notificationId}",
-    method: "post",
+    url: '/notification/{notificationId}',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type DeleteNotificationResourcePathParams = {
@@ -1687,22 +1411,12 @@ export type DeleteNotificationResourceVariables = {
   pathParams: DeleteNotificationResourcePathParams;
 } & FetcherExtraProps;
 
-export const deleteNotificationResource = (
-  variables: DeleteNotificationResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    DeleteNotificationResourceError,
-    undefined,
-    {},
-    {},
-    DeleteNotificationResourcePathParams
-  >({
-    url: "/notification/{notificationId}",
-    method: "delete",
+export const deleteNotificationResource = (variables: DeleteNotificationResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, DeleteNotificationResourceError, undefined, {}, {}, DeleteNotificationResourcePathParams>({
+    url: '/notification/{notificationId}',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetOpenerBrandsResourceError = Fetcher.ErrorWrapper<undefined>;
@@ -1711,18 +1425,13 @@ export type GetOpenerBrandsResourceResponse = Schemas.OpenerIntercomBrand[];
 
 export type GetOpenerBrandsResourceVariables = FetcherExtraProps;
 
-export const getOpenerBrandsResource = (
-  variables: GetOpenerBrandsResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    GetOpenerBrandsResourceResponse,
-    GetOpenerBrandsResourceError,
-    undefined,
-    {},
-    {},
-    {}
-  >({ url: "/opener/brand", method: "get", ...variables, signal });
+export const getOpenerBrandsResource = (variables: GetOpenerBrandsResourceVariables, signal?: AbortSignal) =>
+  fetch<GetOpenerBrandsResourceResponse, GetOpenerBrandsResourceError, undefined, {}, {}, {}>({
+    url: '/opener/brand',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetOpenerBrandResourcePathParams = {
   /**
@@ -1737,18 +1446,13 @@ export type GetOpenerBrandResourceVariables = {
   pathParams: GetOpenerBrandResourcePathParams;
 } & FetcherExtraProps;
 
-export const getOpenerBrandResource = (
-  variables: GetOpenerBrandResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    Schemas.OpenerIntercomBrand,
-    GetOpenerBrandResourceError,
-    undefined,
-    {},
-    {},
-    GetOpenerBrandResourcePathParams
-  >({ url: "/opener/brand/{brandId}", method: "get", ...variables, signal });
+export const getOpenerBrandResource = (variables: GetOpenerBrandResourceVariables, signal?: AbortSignal) =>
+  fetch<Schemas.OpenerIntercomBrand, GetOpenerBrandResourceError, undefined, {}, {}, GetOpenerBrandResourcePathParams>({
+    url: '/opener/brand/{brandId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetOpenerIntercomsResourceQueryParams = {
   /**
@@ -1773,10 +1477,7 @@ export type GetOpenerIntercomsResourceVariables = {
   queryParams?: GetOpenerIntercomsResourceQueryParams;
 } & FetcherExtraProps;
 
-export const getOpenerIntercomsResource = (
-  variables: GetOpenerIntercomsResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const getOpenerIntercomsResource = (variables: GetOpenerIntercomsResourceVariables, signal?: AbortSignal) =>
   fetch<
     GetOpenerIntercomsResourceResponse,
     GetOpenerIntercomsResourceError,
@@ -1784,7 +1485,7 @@ export const getOpenerIntercomsResource = (
     {},
     GetOpenerIntercomsResourceQueryParams,
     {}
-  >({ url: "/opener/intercom", method: "get", ...variables, signal });
+  >({ url: '/opener/intercom', method: 'get', ...variables, signal });
 
 export type GetOpenerIntercomResourcePathParams = {
   /**
@@ -1799,10 +1500,7 @@ export type GetOpenerIntercomResourceVariables = {
   pathParams: GetOpenerIntercomResourcePathParams;
 } & FetcherExtraProps;
 
-export const getOpenerIntercomResource = (
-  variables: GetOpenerIntercomResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const getOpenerIntercomResource = (variables: GetOpenerIntercomResourceVariables, signal?: AbortSignal) =>
   fetch<
     Schemas.OpenerIntercomModel,
     GetOpenerIntercomResourceError,
@@ -1811,10 +1509,10 @@ export const getOpenerIntercomResource = (
     {},
     GetOpenerIntercomResourcePathParams
   >({
-    url: "/opener/intercom/{intercomId}",
-    method: "get",
+    url: '/opener/intercom/{intercomId}',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetServicesResourceQueryParams = {
@@ -1832,18 +1530,13 @@ export type GetServicesResourceVariables = {
   queryParams?: GetServicesResourceQueryParams;
 } & FetcherExtraProps;
 
-export const getServicesResource = (
-  variables: GetServicesResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    GetServicesResourceResponse,
-    GetServicesResourceError,
-    undefined,
-    {},
-    GetServicesResourceQueryParams,
-    {}
-  >({ url: "/service", method: "get", ...variables, signal });
+export const getServicesResource = (variables: GetServicesResourceVariables, signal?: AbortSignal) =>
+  fetch<GetServicesResourceResponse, GetServicesResourceError, undefined, {}, GetServicesResourceQueryParams, {}>({
+    url: '/service',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetServiceResourcePathParams = {
   /**
@@ -1858,18 +1551,13 @@ export type GetServiceResourceVariables = {
   pathParams: GetServiceResourcePathParams;
 } & FetcherExtraProps;
 
-export const getServiceResource = (
-  variables: GetServiceResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    Schemas.Service,
-    GetServiceResourceError,
-    undefined,
-    {},
-    {},
-    GetServiceResourcePathParams
-  >({ url: "/service/{serviceId}", method: "get", ...variables, signal });
+export const getServiceResource = (variables: GetServiceResourceVariables, signal?: AbortSignal) =>
+  fetch<Schemas.Service, GetServiceResourceError, undefined, {}, {}, GetServiceResourcePathParams>({
+    url: '/service/{serviceId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostServiceLinkResourcePathParams = {
   /**
@@ -1884,18 +1572,13 @@ export type PostServiceLinkResourceVariables = {
   pathParams: PostServiceLinkResourcePathParams;
 } & FetcherExtraProps;
 
-export const postServiceLinkResource = (
-  variables: PostServiceLinkResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    string,
-    PostServiceLinkResourceError,
-    undefined,
-    {},
-    {},
-    PostServiceLinkResourcePathParams
-  >({ url: "/service/{serviceId}/link", method: "post", ...variables, signal });
+export const postServiceLinkResource = (variables: PostServiceLinkResourceVariables, signal?: AbortSignal) =>
+  fetch<string, PostServiceLinkResourceError, undefined, {}, {}, PostServiceLinkResourcePathParams>({
+    url: '/service/{serviceId}/link',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PostServiceSyncResourcePathParams = {
   /**
@@ -1910,18 +1593,13 @@ export type PostServiceSyncResourceVariables = {
   pathParams: PostServiceSyncResourcePathParams;
 } & FetcherExtraProps;
 
-export const postServiceSyncResource = (
-  variables: PostServiceSyncResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    PostServiceSyncResourceError,
-    undefined,
-    {},
-    {},
-    PostServiceSyncResourcePathParams
-  >({ url: "/service/{serviceId}/sync", method: "post", ...variables, signal });
+export const postServiceSyncResource = (variables: PostServiceSyncResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, PostServiceSyncResourceError, undefined, {}, {}, PostServiceSyncResourcePathParams>({
+    url: '/service/{serviceId}/sync',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PostServiceUnlinkResourcePathParams = {
   /**
@@ -1936,22 +1614,12 @@ export type PostServiceUnlinkResourceVariables = {
   pathParams: PostServiceUnlinkResourcePathParams;
 } & FetcherExtraProps;
 
-export const postServiceUnlinkResource = (
-  variables: PostServiceUnlinkResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    PostServiceUnlinkResourceError,
-    undefined,
-    {},
-    {},
-    PostServiceUnlinkResourcePathParams
-  >({
-    url: "/service/{serviceId}/unlink",
-    method: "post",
+export const postServiceUnlinkResource = (variables: PostServiceUnlinkResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, PostServiceUnlinkResourceError, undefined, {}, {}, PostServiceUnlinkResourcePathParams>({
+    url: '/service/{serviceId}/unlink',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetSmartlocksResourceQueryParams = {
@@ -1973,18 +1641,10 @@ export type GetSmartlocksResourceVariables = {
   queryParams?: GetSmartlocksResourceQueryParams;
 } & FetcherExtraProps;
 
-export const getSmartlocksResource = (
-  variables: GetSmartlocksResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    GetSmartlocksResourceResponse,
-    GetSmartlocksResourceError,
-    undefined,
-    {},
-    GetSmartlocksResourceQueryParams,
-    {}
-  >({ url: "/smartlock", method: "get", ...variables, signal });
+export const getSmartlocksResource = (variables: GetSmartlocksResourceVariables, signal?: AbortSignal) =>
+  fetch<GetSmartlocksResourceResponse, GetSmartlocksResourceError, undefined, {}, GetSmartlocksResourceQueryParams, {}>(
+    { url: '/smartlock', method: 'get', ...variables, signal }
+  );
 
 export type GetSmartlocksAuthsResourceQueryParams = {
   /**
@@ -2005,10 +1665,7 @@ export type GetSmartlocksAuthsResourceVariables = {
   queryParams?: GetSmartlocksAuthsResourceQueryParams;
 } & FetcherExtraProps;
 
-export const getSmartlocksAuthsResource = (
-  variables: GetSmartlocksAuthsResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const getSmartlocksAuthsResource = (variables: GetSmartlocksAuthsResourceVariables, signal?: AbortSignal) =>
   fetch<
     GetSmartlocksAuthsResourceResponse,
     GetSmartlocksAuthsResourceError,
@@ -2016,29 +1673,23 @@ export const getSmartlocksAuthsResource = (
     {},
     GetSmartlocksAuthsResourceQueryParams,
     {}
-  >({ url: "/smartlock/auth", method: "get", ...variables, signal });
+  >({ url: '/smartlock/auth', method: 'get', ...variables, signal });
 
 export type PostSmartlocksAuthsResourceError = Fetcher.ErrorWrapper<undefined>;
 
-export type PostSmartlocksAuthsResourceRequestBody =
-  Schemas.SmartlockAuthMultiUpdate[];
+export type PostSmartlocksAuthsResourceRequestBody = Schemas.SmartlockAuthMultiUpdate[];
 
 export type PostSmartlocksAuthsResourceVariables = {
   body?: PostSmartlocksAuthsResourceRequestBody;
 } & FetcherExtraProps;
 
-export const postSmartlocksAuthsResource = (
-  variables: PostSmartlocksAuthsResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    PostSmartlocksAuthsResourceError,
-    PostSmartlocksAuthsResourceRequestBody,
-    {},
-    {},
-    {}
-  >({ url: "/smartlock/auth", method: "post", ...variables, signal });
+export const postSmartlocksAuthsResource = (variables: PostSmartlocksAuthsResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, PostSmartlocksAuthsResourceError, PostSmartlocksAuthsResourceRequestBody, {}, {}, {}>({
+    url: '/smartlock/auth',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PutSmartlocksAuthsResourceError = Fetcher.ErrorWrapper<undefined>;
 
@@ -2046,21 +1697,15 @@ export type PutSmartlocksAuthsResourceVariables = {
   body: Schemas.SmartlocksAuthCreate;
 } & FetcherExtraProps;
 
-export const putSmartlocksAuthsResource = (
-  variables: PutSmartlocksAuthsResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    PutSmartlocksAuthsResourceError,
-    Schemas.SmartlocksAuthCreate,
-    {},
-    {},
-    {}
-  >({ url: "/smartlock/auth", method: "put", ...variables, signal });
+export const putSmartlocksAuthsResource = (variables: PutSmartlocksAuthsResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, PutSmartlocksAuthsResourceError, Schemas.SmartlocksAuthCreate, {}, {}, {}>({
+    url: '/smartlock/auth',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
-export type DeleteSmartlocksAuthsResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type DeleteSmartlocksAuthsResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type DeleteSmartlocksAuthsResourceRequestBody = string[];
 
@@ -2070,19 +1715,16 @@ export type DeleteSmartlocksAuthsResourceVariables = {
 
 export const deleteSmartlocksAuthsResource = (
   variables: DeleteSmartlocksAuthsResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
-  fetch<
-    undefined,
-    DeleteSmartlocksAuthsResourceError,
-    DeleteSmartlocksAuthsResourceRequestBody,
-    {},
-    {},
-    {}
-  >({ url: "/smartlock/auth", method: "delete", ...variables, signal });
+  fetch<undefined, DeleteSmartlocksAuthsResourceError, DeleteSmartlocksAuthsResourceRequestBody, {}, {}, {}>({
+    url: '/smartlock/auth',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
-export type PutSmartlockAuthsAdvancedResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PutSmartlockAuthsAdvancedResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PutSmartlockAuthsAdvancedResourceVariables = {
   body: Schemas.SmartlocksAuthAdvancedCreate;
@@ -2090,7 +1732,7 @@ export type PutSmartlockAuthsAdvancedResourceVariables = {
 
 export const putSmartlockAuthsAdvancedResource = (
   variables: PutSmartlockAuthsAdvancedResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   fetch<
     Schemas.AdvancedConfirmationResponse,
@@ -2099,7 +1741,7 @@ export const putSmartlockAuthsAdvancedResource = (
     {},
     {},
     {}
-  >({ url: "/smartlock/auth/advanced", method: "put", ...variables, signal });
+  >({ url: '/smartlock/auth/advanced', method: 'put', ...variables, signal });
 
 export type GetSmartlocksLogsResourceQueryParams = {
   /**
@@ -2138,10 +1780,7 @@ export type GetSmartlocksLogsResourceVariables = {
   queryParams?: GetSmartlocksLogsResourceQueryParams;
 } & FetcherExtraProps;
 
-export const getSmartlocksLogsResource = (
-  variables: GetSmartlocksLogsResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const getSmartlocksLogsResource = (variables: GetSmartlocksLogsResourceVariables, signal?: AbortSignal) =>
   fetch<
     GetSmartlocksLogsResourceResponse,
     GetSmartlocksLogsResourceError,
@@ -2149,7 +1788,7 @@ export const getSmartlocksLogsResource = (
     {},
     GetSmartlocksLogsResourceQueryParams,
     {}
-  >({ url: "/smartlock/log", method: "get", ...variables, signal });
+  >({ url: '/smartlock/log', method: 'get', ...variables, signal });
 
 export type GetSmartlockResourcePathParams = {
   /**
@@ -2164,18 +1803,13 @@ export type GetSmartlockResourceVariables = {
   pathParams: GetSmartlockResourcePathParams;
 } & FetcherExtraProps;
 
-export const getSmartlockResource = (
-  variables: GetSmartlockResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    Schemas.Smartlock,
-    GetSmartlockResourceError,
-    undefined,
-    {},
-    {},
-    GetSmartlockResourcePathParams
-  >({ url: "/smartlock/{smartlockId}", method: "get", ...variables, signal });
+export const getSmartlockResource = (variables: GetSmartlockResourceVariables, signal?: AbortSignal) =>
+  fetch<Schemas.Smartlock, GetSmartlockResourceError, undefined, {}, {}, GetSmartlockResourcePathParams>({
+    url: '/smartlock/{smartlockId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostSmartlockResourcePathParams = {
   /**
@@ -2191,18 +1825,13 @@ export type PostSmartlockResourceVariables = {
   pathParams: PostSmartlockResourcePathParams;
 } & FetcherExtraProps;
 
-export const postSmartlockResource = (
-  variables: PostSmartlockResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    PostSmartlockResourceError,
-    Schemas.SmartlockUpdate,
-    {},
-    {},
-    PostSmartlockResourcePathParams
-  >({ url: "/smartlock/{smartlockId}", method: "post", ...variables, signal });
+export const postSmartlockResource = (variables: PostSmartlockResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, PostSmartlockResourceError, Schemas.SmartlockUpdate, {}, {}, PostSmartlockResourcePathParams>({
+    url: '/smartlock/{smartlockId}',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteSmartlockResourcePathParams = {
   /**
@@ -2217,22 +1846,12 @@ export type DeleteSmartlockResourceVariables = {
   pathParams: DeleteSmartlockResourcePathParams;
 } & FetcherExtraProps;
 
-export const deleteSmartlockResource = (
-  variables: DeleteSmartlockResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    DeleteSmartlockResourceError,
-    undefined,
-    {},
-    {},
-    DeleteSmartlockResourcePathParams
-  >({
-    url: "/smartlock/{smartlockId}",
-    method: "delete",
+export const deleteSmartlockResource = (variables: DeleteSmartlockResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, DeleteSmartlockResourceError, undefined, {}, {}, DeleteSmartlockResourcePathParams>({
+    url: '/smartlock/{smartlockId}',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostSmartlockActionResourcePathParams = {
@@ -2249,10 +1868,7 @@ export type PostSmartlockActionResourceVariables = {
   pathParams: PostSmartlockActionResourcePathParams;
 } & FetcherExtraProps;
 
-export const postSmartlockActionResource = (
-  variables: PostSmartlockActionResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const postSmartlockActionResource = (variables: PostSmartlockActionResourceVariables, signal?: AbortSignal) =>
   fetch<
     undefined,
     PostSmartlockActionResourceError,
@@ -2261,10 +1877,10 @@ export const postSmartlockActionResource = (
     {},
     PostSmartlockActionResourcePathParams
   >({
-    url: "/smartlock/{smartlockId}/action",
-    method: "post",
+    url: '/smartlock/{smartlockId}/action',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostSmartlockActionAdvancedResourcePathParams = {
@@ -2274,8 +1890,7 @@ export type PostSmartlockActionAdvancedResourcePathParams = {
   smartlockId: string;
 };
 
-export type PostSmartlockActionAdvancedResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostSmartlockActionAdvancedResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PostSmartlockActionAdvancedResourceVariables = {
   body: RequestBodies.SmartlockAction;
@@ -2284,7 +1899,7 @@ export type PostSmartlockActionAdvancedResourceVariables = {
 
 export const postSmartlockActionAdvancedResource = (
   variables: PostSmartlockActionAdvancedResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   fetch<
     Schemas.AdvancedConfirmationResponse,
@@ -2294,10 +1909,10 @@ export const postSmartlockActionAdvancedResource = (
     {},
     PostSmartlockActionAdvancedResourcePathParams
   >({
-    url: "/smartlock/{smartlockId}/action/advanced",
-    method: "post",
+    url: '/smartlock/{smartlockId}/action/advanced',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostSmartlockLockActionResourcePathParams = {
@@ -2307,8 +1922,7 @@ export type PostSmartlockLockActionResourcePathParams = {
   smartlockId: string;
 };
 
-export type PostSmartlockLockActionResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostSmartlockLockActionResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PostSmartlockLockActionResourceVariables = {
   pathParams: PostSmartlockLockActionResourcePathParams;
@@ -2316,20 +1930,13 @@ export type PostSmartlockLockActionResourceVariables = {
 
 export const postSmartlockLockActionResource = (
   variables: PostSmartlockLockActionResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
-  fetch<
-    undefined,
-    PostSmartlockLockActionResourceError,
-    undefined,
-    {},
-    {},
-    PostSmartlockLockActionResourcePathParams
-  >({
-    url: "/smartlock/{smartlockId}/action/lock",
-    method: "post",
+  fetch<undefined, PostSmartlockLockActionResourceError, undefined, {}, {}, PostSmartlockLockActionResourcePathParams>({
+    url: '/smartlock/{smartlockId}/action/lock',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostSmartlockLockActionAdvancedResourcePathParams = {
@@ -2339,8 +1946,7 @@ export type PostSmartlockLockActionAdvancedResourcePathParams = {
   smartlockId: string;
 };
 
-export type PostSmartlockLockActionAdvancedResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostSmartlockLockActionAdvancedResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PostSmartlockLockActionAdvancedResourceVariables = {
   pathParams: PostSmartlockLockActionAdvancedResourcePathParams;
@@ -2348,7 +1954,7 @@ export type PostSmartlockLockActionAdvancedResourceVariables = {
 
 export const postSmartlockLockActionAdvancedResource = (
   variables: PostSmartlockLockActionAdvancedResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   fetch<
     Schemas.AdvancedConfirmationResponse,
@@ -2358,10 +1964,10 @@ export const postSmartlockLockActionAdvancedResource = (
     {},
     PostSmartlockLockActionAdvancedResourcePathParams
   >({
-    url: "/smartlock/{smartlockId}/action/lock/advanced",
-    method: "post",
+    url: '/smartlock/{smartlockId}/action/lock/advanced',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostSmartlockUnlockActionResourcePathParams = {
@@ -2371,8 +1977,7 @@ export type PostSmartlockUnlockActionResourcePathParams = {
   smartlockId: string;
 };
 
-export type PostSmartlockUnlockActionResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostSmartlockUnlockActionResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PostSmartlockUnlockActionResourceVariables = {
   pathParams: PostSmartlockUnlockActionResourcePathParams;
@@ -2380,7 +1985,7 @@ export type PostSmartlockUnlockActionResourceVariables = {
 
 export const postSmartlockUnlockActionResource = (
   variables: PostSmartlockUnlockActionResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   fetch<
     undefined,
@@ -2390,10 +1995,10 @@ export const postSmartlockUnlockActionResource = (
     {},
     PostSmartlockUnlockActionResourcePathParams
   >({
-    url: "/smartlock/{smartlockId}/action/unlock",
-    method: "post",
+    url: '/smartlock/{smartlockId}/action/unlock',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostSmartlockUnlockActionAdvancedResourcePathParams = {
@@ -2403,8 +2008,7 @@ export type PostSmartlockUnlockActionAdvancedResourcePathParams = {
   smartlockId: string;
 };
 
-export type PostSmartlockUnlockActionAdvancedResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostSmartlockUnlockActionAdvancedResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PostSmartlockUnlockActionAdvancedResourceVariables = {
   pathParams: PostSmartlockUnlockActionAdvancedResourcePathParams;
@@ -2412,7 +2016,7 @@ export type PostSmartlockUnlockActionAdvancedResourceVariables = {
 
 export const postSmartlockUnlockActionAdvancedResource = (
   variables: PostSmartlockUnlockActionAdvancedResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   fetch<
     Schemas.AdvancedConfirmationResponse,
@@ -2422,10 +2026,10 @@ export const postSmartlockUnlockActionAdvancedResource = (
     {},
     PostSmartlockUnlockActionAdvancedResourcePathParams
   >({
-    url: "/smartlock/{smartlockId}/action/unlock/advanced",
-    method: "post",
+    url: '/smartlock/{smartlockId}/action/unlock/advanced',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostSmartlockAdminPinResourcePathParams = {
@@ -2435,8 +2039,7 @@ export type PostSmartlockAdminPinResourcePathParams = {
   smartlockId: number;
 };
 
-export type PostSmartlockAdminPinResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostSmartlockAdminPinResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PostSmartlockAdminPinResourceVariables = {
   body: Schemas.SmartlockAdminPinUpdate;
@@ -2445,7 +2048,7 @@ export type PostSmartlockAdminPinResourceVariables = {
 
 export const postSmartlockAdminPinResource = (
   variables: PostSmartlockAdminPinResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   fetch<
     undefined,
@@ -2455,10 +2058,10 @@ export const postSmartlockAdminPinResource = (
     {},
     PostSmartlockAdminPinResourcePathParams
   >({
-    url: "/smartlock/{smartlockId}/admin/pin",
-    method: "post",
+    url: '/smartlock/{smartlockId}/admin/pin',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostSmartlockAdvancedConfigResourcePathParams = {
@@ -2468,8 +2071,7 @@ export type PostSmartlockAdvancedConfigResourcePathParams = {
   smartlockId: number;
 };
 
-export type PostSmartlockAdvancedConfigResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostSmartlockAdvancedConfigResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PostSmartlockAdvancedConfigResourceVariables = {
   body: Schemas.SmartlockAdvancedConfig;
@@ -2478,7 +2080,7 @@ export type PostSmartlockAdvancedConfigResourceVariables = {
 
 export const postSmartlockAdvancedConfigResource = (
   variables: PostSmartlockAdvancedConfigResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   fetch<
     undefined,
@@ -2488,10 +2090,10 @@ export const postSmartlockAdvancedConfigResource = (
     {},
     PostSmartlockAdvancedConfigResourcePathParams
   >({
-    url: "/smartlock/{smartlockId}/advanced/config",
-    method: "post",
+    url: '/smartlock/{smartlockId}/advanced/config',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostSmartlockOpenerAdvancedConfigResourcePathParams = {
@@ -2501,8 +2103,7 @@ export type PostSmartlockOpenerAdvancedConfigResourcePathParams = {
   smartlockId: number;
 };
 
-export type PostSmartlockOpenerAdvancedConfigResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostSmartlockOpenerAdvancedConfigResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PostSmartlockOpenerAdvancedConfigResourceVariables = {
   body: Schemas.SmartlockOpenerAdvancedConfig;
@@ -2511,7 +2112,7 @@ export type PostSmartlockOpenerAdvancedConfigResourceVariables = {
 
 export const postSmartlockOpenerAdvancedConfigResource = (
   variables: PostSmartlockOpenerAdvancedConfigResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   fetch<
     undefined,
@@ -2521,10 +2122,10 @@ export const postSmartlockOpenerAdvancedConfigResource = (
     {},
     PostSmartlockOpenerAdvancedConfigResourcePathParams
   >({
-    url: "/smartlock/{smartlockId}/advanced/openerconfig",
-    method: "post",
+    url: '/smartlock/{smartlockId}/advanced/openerconfig',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostSmartdoorAdvancedConfigResourcePathParams = {
@@ -2534,8 +2135,7 @@ export type PostSmartdoorAdvancedConfigResourcePathParams = {
   smartlockId: number;
 };
 
-export type PostSmartdoorAdvancedConfigResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostSmartdoorAdvancedConfigResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PostSmartdoorAdvancedConfigResourceVariables = {
   body: Schemas.SmartlockSmartdoorAdvancedConfig;
@@ -2544,7 +2144,7 @@ export type PostSmartdoorAdvancedConfigResourceVariables = {
 
 export const postSmartdoorAdvancedConfigResource = (
   variables: PostSmartdoorAdvancedConfigResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   fetch<
     undefined,
@@ -2554,10 +2154,10 @@ export const postSmartdoorAdvancedConfigResource = (
     {},
     PostSmartdoorAdvancedConfigResourcePathParams
   >({
-    url: "/smartlock/{smartlockId}/advanced/smartdoorconfig",
-    method: "post",
+    url: '/smartlock/{smartlockId}/advanced/smartdoorconfig',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetSmartlockAuthsResourcePathParams = {
@@ -2583,10 +2183,7 @@ export type GetSmartlockAuthsResourceVariables = {
   queryParams?: GetSmartlockAuthsResourceQueryParams;
 } & FetcherExtraProps;
 
-export const getSmartlockAuthsResource = (
-  variables: GetSmartlockAuthsResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const getSmartlockAuthsResource = (variables: GetSmartlockAuthsResourceVariables, signal?: AbortSignal) =>
   fetch<
     GetSmartlockAuthsResourceResponse,
     GetSmartlockAuthsResourceError,
@@ -2595,10 +2192,10 @@ export const getSmartlockAuthsResource = (
     GetSmartlockAuthsResourceQueryParams,
     GetSmartlockAuthsResourcePathParams
   >({
-    url: "/smartlock/{smartlockId}/auth",
-    method: "get",
+    url: '/smartlock/{smartlockId}/auth',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type PutSmartlockAuthsResourcePathParams = {
@@ -2615,10 +2212,7 @@ export type PutSmartlockAuthsResourceVariables = {
   pathParams: PutSmartlockAuthsResourcePathParams;
 } & FetcherExtraProps;
 
-export const putSmartlockAuthsResource = (
-  variables: PutSmartlockAuthsResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const putSmartlockAuthsResource = (variables: PutSmartlockAuthsResourceVariables, signal?: AbortSignal) =>
   fetch<
     undefined,
     PutSmartlockAuthsResourceError,
@@ -2627,10 +2221,10 @@ export const putSmartlockAuthsResource = (
     {},
     PutSmartlockAuthsResourcePathParams
   >({
-    url: "/smartlock/{smartlockId}/auth",
-    method: "put",
+    url: '/smartlock/{smartlockId}/auth',
+    method: 'put',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostSmartlockAuthWithSharedKeyResourcePathParams = {
@@ -2640,11 +2234,9 @@ export type PostSmartlockAuthWithSharedKeyResourcePathParams = {
   smartlockId: number;
 };
 
-export type PostSmartlockAuthWithSharedKeyResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostSmartlockAuthWithSharedKeyResourceError = Fetcher.ErrorWrapper<undefined>;
 
-export type PostSmartlockAuthWithSharedKeyResourceResponse =
-  Schemas.SmartlockAuth[];
+export type PostSmartlockAuthWithSharedKeyResourceResponse = Schemas.SmartlockAuth[];
 
 export type PostSmartlockAuthWithSharedKeyResourceVariables = {
   body: Schemas.SmartlockAuthWithSharedKeyCreate;
@@ -2653,7 +2245,7 @@ export type PostSmartlockAuthWithSharedKeyResourceVariables = {
 
 export const postSmartlockAuthWithSharedKeyResource = (
   variables: PostSmartlockAuthWithSharedKeyResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   fetch<
     PostSmartlockAuthWithSharedKeyResourceResponse,
@@ -2663,10 +2255,10 @@ export const postSmartlockAuthWithSharedKeyResource = (
     {},
     PostSmartlockAuthWithSharedKeyResourcePathParams
   >({
-    url: "/smartlock/{smartlockId}/auth/advanced/sharedkey",
-    method: "post",
+    url: '/smartlock/{smartlockId}/auth/advanced/sharedkey',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetSmartlockAuthResourcePathParams = {
@@ -2686,22 +2278,12 @@ export type GetSmartlockAuthResourceVariables = {
   pathParams: GetSmartlockAuthResourcePathParams;
 } & FetcherExtraProps;
 
-export const getSmartlockAuthResource = (
-  variables: GetSmartlockAuthResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    Schemas.SmartlockAuth,
-    GetSmartlockAuthResourceError,
-    undefined,
-    {},
-    {},
-    GetSmartlockAuthResourcePathParams
-  >({
-    url: "/smartlock/{smartlockId}/auth/{id}",
-    method: "get",
+export const getSmartlockAuthResource = (variables: GetSmartlockAuthResourceVariables, signal?: AbortSignal) =>
+  fetch<Schemas.SmartlockAuth, GetSmartlockAuthResourceError, undefined, {}, {}, GetSmartlockAuthResourcePathParams>({
+    url: '/smartlock/{smartlockId}/auth/{id}',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostSmartlockAuthResourcePathParams = {
@@ -2722,10 +2304,7 @@ export type PostSmartlockAuthResourceVariables = {
   pathParams: PostSmartlockAuthResourcePathParams;
 } & FetcherExtraProps;
 
-export const postSmartlockAuthResource = (
-  variables: PostSmartlockAuthResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const postSmartlockAuthResource = (variables: PostSmartlockAuthResourceVariables, signal?: AbortSignal) =>
   fetch<
     undefined,
     PostSmartlockAuthResourceError,
@@ -2734,10 +2313,10 @@ export const postSmartlockAuthResource = (
     {},
     PostSmartlockAuthResourcePathParams
   >({
-    url: "/smartlock/{smartlockId}/auth/{id}",
-    method: "post",
+    url: '/smartlock/{smartlockId}/auth/{id}',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type DeleteSmartlockAuthResourcePathParams = {
@@ -2757,22 +2336,12 @@ export type DeleteSmartlockAuthResourceVariables = {
   pathParams: DeleteSmartlockAuthResourcePathParams;
 } & FetcherExtraProps;
 
-export const deleteSmartlockAuthResource = (
-  variables: DeleteSmartlockAuthResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    DeleteSmartlockAuthResourceError,
-    undefined,
-    {},
-    {},
-    DeleteSmartlockAuthResourcePathParams
-  >({
-    url: "/smartlock/{smartlockId}/auth/{id}",
-    method: "delete",
+export const deleteSmartlockAuthResource = (variables: DeleteSmartlockAuthResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, DeleteSmartlockAuthResourceError, undefined, {}, {}, DeleteSmartlockAuthResourcePathParams>({
+    url: '/smartlock/{smartlockId}/auth/{id}',
+    method: 'delete',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostSmartlockConfigResourcePathParams = {
@@ -2789,10 +2358,7 @@ export type PostSmartlockConfigResourceVariables = {
   pathParams: PostSmartlockConfigResourcePathParams;
 } & FetcherExtraProps;
 
-export const postSmartlockConfigResource = (
-  variables: PostSmartlockConfigResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const postSmartlockConfigResource = (variables: PostSmartlockConfigResourceVariables, signal?: AbortSignal) =>
   fetch<
     undefined,
     PostSmartlockConfigResourceError,
@@ -2801,10 +2367,10 @@ export const postSmartlockConfigResource = (
     {},
     PostSmartlockConfigResourcePathParams
   >({
-    url: "/smartlock/{smartlockId}/config",
-    method: "post",
+    url: '/smartlock/{smartlockId}/config',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type GetSmartlockLogsResourcePathParams = {
@@ -2856,10 +2422,7 @@ export type GetSmartlockLogsResourceVariables = {
   queryParams?: GetSmartlockLogsResourceQueryParams;
 } & FetcherExtraProps;
 
-export const getSmartlockLogsResource = (
-  variables: GetSmartlockLogsResourceVariables,
-  signal?: AbortSignal,
-) =>
+export const getSmartlockLogsResource = (variables: GetSmartlockLogsResourceVariables, signal?: AbortSignal) =>
   fetch<
     GetSmartlockLogsResourceResponse,
     GetSmartlockLogsResourceError,
@@ -2868,10 +2431,10 @@ export const getSmartlockLogsResource = (
     GetSmartlockLogsResourceQueryParams,
     GetSmartlockLogsResourcePathParams
   >({
-    url: "/smartlock/{smartlockId}/log",
-    method: "get",
+    url: '/smartlock/{smartlockId}/log',
+    method: 'get',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostSmartlockSyncResourcePathParams = {
@@ -2887,22 +2450,12 @@ export type PostSmartlockSyncResourceVariables = {
   pathParams: PostSmartlockSyncResourcePathParams;
 } & FetcherExtraProps;
 
-export const postSmartlockSyncResource = (
-  variables: PostSmartlockSyncResourceVariables,
-  signal?: AbortSignal,
-) =>
-  fetch<
-    undefined,
-    PostSmartlockSyncResourceError,
-    undefined,
-    {},
-    {},
-    PostSmartlockSyncResourcePathParams
-  >({
-    url: "/smartlock/{smartlockId}/sync",
-    method: "post",
+export const postSmartlockSyncResource = (variables: PostSmartlockSyncResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, PostSmartlockSyncResourceError, undefined, {}, {}, PostSmartlockSyncResourcePathParams>({
+    url: '/smartlock/{smartlockId}/sync',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export type PostSmartlockWebConfigResourcePathParams = {
@@ -2912,8 +2465,7 @@ export type PostSmartlockWebConfigResourcePathParams = {
   smartlockId: number;
 };
 
-export type PostSmartlockWebConfigResourceError =
-  Fetcher.ErrorWrapper<undefined>;
+export type PostSmartlockWebConfigResourceError = Fetcher.ErrorWrapper<undefined>;
 
 export type PostSmartlockWebConfigResourceVariables = {
   body?: Schemas.SmartlockWebConfig;
@@ -2922,7 +2474,7 @@ export type PostSmartlockWebConfigResourceVariables = {
 
 export const postSmartlockWebConfigResource = (
   variables: PostSmartlockWebConfigResourceVariables,
-  signal?: AbortSignal,
+  signal?: AbortSignal
 ) =>
   fetch<
     undefined,
@@ -2932,10 +2484,10 @@ export const postSmartlockWebConfigResource = (
     {},
     PostSmartlockWebConfigResourcePathParams
   >({
-    url: "/smartlock/{smartlockId}/web/config",
-    method: "post",
+    url: '/smartlock/{smartlockId}/web/config',
+    method: 'post',
     ...variables,
-    signal,
+    signal
   });
 
 export const operationsByTag = {
@@ -2958,14 +2510,14 @@ export const operationsByTag = {
     putAccountSubsResource,
     getAccountSubResource,
     postAccountSubResource,
-    deleteAccountSubResource,
+    deleteAccountSubResource
   },
   accountUser: {
     getAccountUsersResource,
     putAccountUsersResource,
     getAccountUserResource,
     postAccountUserResource,
-    deleteAccountUserResource,
+    deleteAccountUserResource
   },
   address: {
     getAddressesResource,
@@ -2975,19 +2527,19 @@ export const operationsByTag = {
     getAddressUnitsResource,
     putAddressUnitsResource,
     deleteAddressUnitsResource,
-    deleteAddressUnitResource,
+    deleteAddressUnitResource
   },
   addressToken: {
     getAddressTokenResource,
     getAddressTokenRedeemResource,
     postAddressTokenRedeemResource,
-    getAddressTokensResource,
+    getAddressTokensResource
   },
   addressReservation: {
     getAddressReservationsResource,
     postAddressReservationIssueResource,
     postAddressReservationRevokeResource,
-    postReservationAccessTimesUpdateResource,
+    postReservationAccessTimesUpdateResource
   },
   advancedApi: {
     getDecentralWebhooksResource,
@@ -2997,7 +2549,7 @@ export const operationsByTag = {
     putSmartlockAuthsAdvancedResource,
     postSmartlockActionAdvancedResource,
     postSmartlockLockActionAdvancedResource,
-    postSmartlockUnlockActionAdvancedResource,
+    postSmartlockUnlockActionAdvancedResource
   },
   apiKey: {
     getApiKeysResource,
@@ -3012,7 +2564,7 @@ export const operationsByTag = {
     getApiKeyTokensResource,
     putApiKeyTokensResource,
     postApiKeyTokenResource,
-    deleteApiKeyTokenResource,
+    deleteApiKeyTokenResource
   },
   smartlock: {
     postSmartlockBulkWebConfigResource,
@@ -3029,7 +2581,7 @@ export const operationsByTag = {
     postSmartdoorAdvancedConfigResource,
     postSmartlockConfigResource,
     postSmartlockSyncResource,
-    postSmartlockWebConfigResource,
+    postSmartlockWebConfigResource
   },
   company: { getCompaniesResource },
   notification: {
@@ -3037,20 +2589,20 @@ export const operationsByTag = {
     putNotificationsResource,
     getNotificationResource,
     postNotificationResource,
-    deleteNotificationResource,
+    deleteNotificationResource
   },
   opener: {
     getOpenerBrandsResource,
     getOpenerBrandResource,
     getOpenerIntercomsResource,
-    getOpenerIntercomResource,
+    getOpenerIntercomResource
   },
   service: {
     getServicesResource,
     getServiceResource,
     postServiceLinkResource,
     postServiceSyncResource,
-    postServiceUnlinkResource,
+    postServiceUnlinkResource
   },
   smartlockAuth: {
     getSmartlocksAuthsResource,
@@ -3062,7 +2614,7 @@ export const operationsByTag = {
     postSmartlockAuthWithSharedKeyResource,
     getSmartlockAuthResource,
     postSmartlockAuthResource,
-    deleteSmartlockAuthResource,
+    deleteSmartlockAuthResource
   },
-  smartlockLog: { getSmartlocksLogsResource, getSmartlockLogsResource },
+  smartlockLog: { getSmartlocksLogsResource, getSmartlockLogsResource }
 };

@@ -196,7 +196,7 @@ export type CreateSiteDeployDeploy = {
         pattern?: string;
         literal?: string;
         expression?: string;
-        methods?: ("GET" | "POST" | "PUT" | "PATCH" | "DELETE" | "OPTIONS")[];
+        methods?: ('GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE' | 'OPTIONS')[];
         prefer_static?: boolean;
       }[];
       excluded_routes?: {
@@ -211,13 +211,13 @@ export type CreateSiteDeployDeploy = {
           config?: {
             to?: string;
             rate_limit_config?: {
-              algorithm?: "sliding_window";
+              algorithm?: 'sliding_window';
               window_size?: number;
               window_limit?: number;
             };
             aggregate?: {
               keys?: {
-                type?: "ip" | "domain";
+                type?: 'ip' | 'domain';
               }[];
             };
           };
@@ -237,5 +237,5 @@ export type CreateSplitTestBranchTests = {
 export type CreateSiteDevServerHookDevserverhook = {
   title?: string;
   branch?: string;
-  type?: "new_dev_server" | "content_refresh";
+  type?: 'new_dev_server' | 'content_refresh';
 };

@@ -68,7 +68,7 @@ export type Account = {
   /**
    * subscription type of the account (b2b)
    */
-  shsSubscriptionType?: "BUSINESS" | "STANDARD" | "BUSINESS_PLUS" | "API_ONLY";
+  shsSubscriptionType?: 'BUSINESS' | 'STANDARD' | 'BUSINESS_PLUS' | 'API_ONLY';
   b2bActive?: boolean;
   apiTermsOfUse?: TermsOfUse;
 };
@@ -94,7 +94,7 @@ export type AccountDescent = {
   /**
    * The account origin source
    */
-  origin: "GOOGLE" | "APPLE";
+  origin: 'GOOGLE' | 'APPLE';
 };
 
 export type AccountProfile = {
@@ -135,7 +135,7 @@ export type AccountIntegration = {
   /**
    * If the integration/device is an legacy or from the new oauth implementation
    */
-  version: "LEGACY" | "HYDRA";
+  version: 'LEGACY' | 'HYDRA';
   /**
    * Enum key identifying the integration/device, values are e.g. ALEXA, IOS, NUKI_WEB, API_TOKEN etc
    */
@@ -230,15 +230,11 @@ export type AccountSettingWeb = {
   /**
    * The initial view type of the device page
    */
-  deviceViewType?: "LIST" | "TILE";
+  deviceViewType?: 'LIST' | 'TILE';
   /**
    * The initial sort type of the device page
    */
-  deviceSortType?:
-    | "FAVOURITES_FIRST"
-    | "NAME_ASC"
-    | "NAME_DESC"
-    | "LAST_ADDED_DESC";
+  deviceSortType?: 'FAVOURITES_FIRST' | 'NAME_ASC' | 'NAME_DESC' | 'LAST_ADDED_DESC';
   /**
    * If true, Nuki Club info is dismissed and no banner is shown
    */
@@ -416,7 +412,7 @@ export type AccountUserCreate = {
   /**
    * The language code
    */
-  language?: "en" | "de" | "es" | "fr" | "it" | "nl" | "cs" | "sk";
+  language?: 'en' | 'de' | 'es' | 'fr' | 'it' | 'nl' | 'cs' | 'sk';
 };
 
 export type AccountUserUpdate = {
@@ -433,7 +429,7 @@ export type AccountUserUpdate = {
   /**
    * The new language code
    */
-  language?: "en" | "de" | "es" | "fr" | "it" | "nl" | "cs" | "sk";
+  language?: 'en' | 'de' | 'es' | 'fr' | 'it' | 'nl' | 'cs' | 'sk';
 };
 
 export type Address = {
@@ -460,7 +456,7 @@ export type Address = {
   /**
    * The optional service id if the address is from an partner service
    */
-  serviceId?: "airbnb" | "bookingsync";
+  serviceId?: 'airbnb' | 'bookingsync';
   /**
    * The timezone
    */
@@ -552,11 +548,11 @@ export type AddressReservation = {
   /**
    * The state
    */
-  state: "canceled" | "accepted";
+  state: 'canceled' | 'accepted';
   /**
    * The optional service id if the address is from an partner service
    */
-  serviceId?: "airbnb" | "bookingsync";
+  serviceId?: 'airbnb' | 'bookingsync';
   /**
    * The reference (booking code)
    */
@@ -632,7 +628,7 @@ export type AddressToken = {
   /**
    * The redeem result
    */
-  redeemResult?: "ok" | "failed";
+  redeemResult?: 'ok' | 'failed';
 };
 
 export type AddressTokenInfo = {
@@ -713,7 +709,7 @@ export type AddressUnitResponse = {
   /**
    * The redeem result
    */
-  redeemResult?: "ok" | "failed";
+  redeemResult?: 'ok' | 'failed';
 };
 
 export type AddressUpdate = {
@@ -749,11 +745,11 @@ export type AdvancedApiKey = {
   /**
    * The application type
    */
-  type: "ONLY_SECRET" | "SHORT_RENTAL" | "HEALTHCARE" | "SMART_HOME" | "OTHER";
+  type: 'ONLY_SECRET' | 'SHORT_RENTAL' | 'HEALTHCARE' | 'SMART_HOME' | 'OTHER';
   /**
    * The status of the webhook posting automation
    */
-  webhookStatus?: "ACTIVE" | "DEACTIVATED";
+  webhookStatus?: 'ACTIVE' | 'DEACTIVATED';
   /**
    * A website where we can find more information on the company and its business model
    */
@@ -772,12 +768,12 @@ export type AdvancedApiKey = {
    * @uniqueItems true
    */
   webhookFeatures: (
-    | "DEVICE_STATUS"
-    | "DEVICE_MASTERDATA"
-    | "DEVICE_CONFIG"
-    | "DEVICE_LOGS"
-    | "DEVICE_AUTHS"
-    | "ACCOUNT_USER"
+    | 'DEVICE_STATUS'
+    | 'DEVICE_MASTERDATA'
+    | 'DEVICE_CONFIG'
+    | 'DEVICE_LOGS'
+    | 'DEVICE_AUTHS'
+    | 'ACCOUNT_USER'
   )[];
   /**
    * Whether the advanced API key is restricted
@@ -790,7 +786,7 @@ export type AdvancedApiKey = {
   /**
    * The application status
    */
-  status: "INACTIVE" | "APPLIED" | "TESTING" | "ACTIVE";
+  status: 'INACTIVE' | 'APPLIED' | 'TESTING' | 'ACTIVE';
   /**
    * The creation date
    *
@@ -821,11 +817,11 @@ export type AdvancedApiKeyCreate = {
   /**
    * The application type
    */
-  type: "ONLY_SECRET" | "SHORT_RENTAL" | "HEALTHCARE" | "SMART_HOME" | "OTHER";
+  type: 'ONLY_SECRET' | 'SHORT_RENTAL' | 'HEALTHCARE' | 'SMART_HOME' | 'OTHER';
   /**
    * The status of the webhook posting automation
    */
-  webhookStatus?: "ACTIVE" | "DEACTIVATED";
+  webhookStatus?: 'ACTIVE' | 'DEACTIVATED';
   /**
    * A website where we can find more information on the company and its business model
    */
@@ -844,12 +840,12 @@ export type AdvancedApiKeyCreate = {
    * @uniqueItems true
    */
   webhookFeatures: (
-    | "DEVICE_STATUS"
-    | "DEVICE_MASTERDATA"
-    | "DEVICE_CONFIG"
-    | "DEVICE_LOGS"
-    | "DEVICE_AUTHS"
-    | "ACCOUNT_USER"
+    | 'DEVICE_STATUS'
+    | 'DEVICE_MASTERDATA'
+    | 'DEVICE_CONFIG'
+    | 'DEVICE_LOGS'
+    | 'DEVICE_AUTHS'
+    | 'ACCOUNT_USER'
   )[];
   /**
    * Whether the advanced API key is restricted
@@ -868,12 +864,12 @@ export type AdvancedApiKeyUpdate = {
    * @uniqueItems true
    */
   webhookFeatures: (
-    | "DEVICE_STATUS"
-    | "DEVICE_MASTERDATA"
-    | "DEVICE_CONFIG"
-    | "DEVICE_LOGS"
-    | "DEVICE_AUTHS"
-    | "ACCOUNT_USER"
+    | 'DEVICE_STATUS'
+    | 'DEVICE_MASTERDATA'
+    | 'DEVICE_CONFIG'
+    | 'DEVICE_LOGS'
+    | 'DEVICE_AUTHS'
+    | 'ACCOUNT_USER'
   )[];
 };
 
@@ -925,19 +921,19 @@ export type ApiKeyAdvanced = {
   name?: string;
   country?: string;
   description?: string;
-  type?: "ONLY_SECRET" | "SHORT_RENTAL" | "HEALTHCARE" | "SMART_HOME" | "OTHER";
+  type?: 'ONLY_SECRET' | 'SHORT_RENTAL' | 'HEALTHCARE' | 'SMART_HOME' | 'OTHER';
   url?: string;
   email?: string;
   /**
    * @uniqueItems true
    */
   webhookFeatures?: (
-    | "DEVICE_STATUS"
-    | "DEVICE_MASTERDATA"
-    | "DEVICE_CONFIG"
-    | "DEVICE_LOGS"
-    | "DEVICE_AUTHS"
-    | "ACCOUNT_USER"
+    | 'DEVICE_STATUS'
+    | 'DEVICE_MASTERDATA'
+    | 'DEVICE_CONFIG'
+    | 'DEVICE_LOGS'
+    | 'DEVICE_AUTHS'
+    | 'ACCOUNT_USER'
   )[];
   webhookUrl?: string;
   /**
@@ -957,8 +953,8 @@ export type ApiKeyAdvanced = {
    */
   lastPostDuration?: number;
   lastPostSuccesful?: boolean;
-  status?: "INACTIVE" | "APPLIED" | "TESTING" | "ACTIVE";
-  webhookStatus?: "ACTIVE" | "DEACTIVATED";
+  status?: 'INACTIVE' | 'APPLIED' | 'TESTING' | 'ACTIVE';
+  webhookStatus?: 'ACTIVE' | 'DEACTIVATED';
   /**
    * @format date-time
    */
@@ -1316,12 +1312,12 @@ export type DecentralWebhook = {
    * @uniqueItems true
    */
   webhookFeatures: (
-    | "DEVICE_STATUS"
-    | "DEVICE_MASTERDATA"
-    | "DEVICE_CONFIG"
-    | "DEVICE_LOGS"
-    | "DEVICE_AUTHS"
-    | "ACCOUNT_USER"
+    | 'DEVICE_STATUS'
+    | 'DEVICE_MASTERDATA'
+    | 'DEVICE_CONFIG'
+    | 'DEVICE_LOGS'
+    | 'DEVICE_AUTHS'
+    | 'ACCOUNT_USER'
   )[];
 };
 
@@ -1556,7 +1552,7 @@ export type MyAccount = {
   /**
    * subscription type of the account (b2b)
    */
-  shsSubscriptionType?: "BUSINESS" | "STANDARD" | "BUSINESS_PLUS" | "API_ONLY";
+  shsSubscriptionType?: 'BUSINESS' | 'STANDARD' | 'BUSINESS_PLUS' | 'API_ONLY';
   b2bActive?: boolean;
   apiTermsOfUse?: TermsOfUse;
 };
@@ -2070,16 +2066,16 @@ export type Response = {
    * @uniqueItems true
    */
   dimensions?: (
-    | "AUTHORIZATION"
-    | "CHARACTER_SET"
-    | "CLIENT_ADDRESS"
-    | "CLIENT_AGENT"
-    | "UNSPECIFIED"
-    | "ENCODING"
-    | "LANGUAGE"
-    | "MEDIA_TYPE"
-    | "TIME"
-    | "ORIGIN"
+    | 'AUTHORIZATION'
+    | 'CHARACTER_SET'
+    | 'CLIENT_ADDRESS'
+    | 'CLIENT_AGENT'
+    | 'UNSPECIFIED'
+    | 'ENCODING'
+    | 'LANGUAGE'
+    | 'MEDIA_TYPE'
+    | 'TIME'
+    | 'ORIGIN'
   )[];
   locationRef?: Reference;
   proxyChallengeRequests?: ChallengeRequest[];
@@ -2167,16 +2163,9 @@ export type Service = {
 };
 
 export type ShsSubscription = {
-  type?: "B2C" | "B2B";
-  state?:
-    | "ACTIVE"
-    | "INACTIVE"
-    | "CANCELLED"
-    | "EXPIRED"
-    | "ON_HOLD"
-    | "PENDING"
-    | "PENDING_CANCEL";
-  shsSubscriptionType?: "BUSINESS" | "STANDARD" | "BUSINESS_PLUS" | "API_ONLY";
+  type?: 'B2C' | 'B2B';
+  state?: 'ACTIVE' | 'INACTIVE' | 'CANCELLED' | 'EXPIRED' | 'ON_HOLD' | 'PENDING' | 'PENDING_CANCEL';
+  shsSubscriptionType?: 'BUSINESS' | 'STANDARD' | 'BUSINESS_PLUS' | 'API_ONLY';
   /**
    * @format date-time
    */
@@ -3576,7 +3565,7 @@ export type TaskService = {
 };
 
 export type TermsOfUse = {
-  state?: "Accepted" | "Inactive";
+  state?: 'Accepted' | 'Inactive';
   /**
    * @format date-time
    */

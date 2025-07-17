@@ -87,17 +87,17 @@ export const serverGenerator = createReactGenerator<PluginMcp>({
               const server = serverLike as McpServer;
               
               ${operationsMapped
-              .map(({ tool, mcp, zod }) => {
-                const params = getParams({ schemas: zod.schemas });
-                const clientParams = getClientParams({ paramsCasing: 'camelcase', typeSchemas: zod.schemas });
+                .map(({ tool, mcp, zod }) => {
+                  const params = getParams({ schemas: zod.schemas });
+                  const clientParams = getClientParams({ paramsCasing: 'camelcase', typeSchemas: zod.schemas });
 
-                if (
-                  zod.schemas.request?.name ||
-                  zod.schemas.headerParams?.name ||
-                  zod.schemas.queryParams?.name ||
-                  zod.schemas.pathParams?.name
-                ) {
-                  return `
+                  if (
+                    zod.schemas.request?.name ||
+                    zod.schemas.headerParams?.name ||
+                    zod.schemas.queryParams?.name ||
+                    zod.schemas.pathParams?.name
+                  ) {
+                    return `
                       server.tool(${JSON.stringify(tool.name)}, ${JSON.stringify(tool.description)}, ${params.toObjectValue()}, async (${params.toObject()}) => {
                         try {
                           return await ${mcp.name}(${clientParams.toObject()})
@@ -105,9 +105,9 @@ export const serverGenerator = createReactGenerator<PluginMcp>({
                           return { isError: true, content: [{ type: 'text', text: JSON.stringify(error) }] };
                         }
                       })`;
-                }
+                  }
 
-                return `
+                  return `
                     server.tool(${JSON.stringify(tool.name)}, ${JSON.stringify(tool.description)}, async () => {
                       try {
                         return await ${mcp.name}(${clientParams.toObject()})
@@ -116,9 +116,9 @@ export const serverGenerator = createReactGenerator<PluginMcp>({
                       }
                     })
           `;
-              })
-              .filter(Boolean)
-              .join('\n')}
+                })
+                .filter(Boolean)
+                .join('\n')}
             }`}
         </File.Source>
       </File>
@@ -162,21 +162,21 @@ function getParams({ schemas }: { schemas: OperationSchemas }) {
         ),
         body: schemas.request?.name
           ? {
-            value: schemas.request?.name,
-            optional: isOptional(schemas.request?.schema)
-          }
+              value: schemas.request?.name,
+              optional: isOptional(schemas.request?.schema)
+            }
           : undefined,
         queryParams: schemas.queryParams?.name
           ? {
-            value: schemas.queryParams?.name,
-            optional: isOptional(schemas.queryParams?.schema)
-          }
+              value: schemas.queryParams?.name,
+              optional: isOptional(schemas.queryParams?.schema)
+            }
           : undefined,
         headers: schemas.headerParams?.name
           ? {
-            value: schemas.headerParams?.name,
-            optional: isOptional(schemas.headerParams?.schema)
-          }
+              value: schemas.headerParams?.name,
+              optional: isOptional(schemas.headerParams?.schema)
+            }
           : undefined
       }
     }

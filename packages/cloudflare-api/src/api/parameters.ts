@@ -3,13 +3,11 @@
  *
  * @version 4.0.0
  */
-import type * as Schemas from "./schemas";
+import type * as Schemas from './schemas';
 
-export type ApiShieldApiDiscoveryOriginParameter =
-  Schemas.ApiShieldApiDiscoveryOrigin;
+export type ApiShieldApiDiscoveryOriginParameter = Schemas.ApiShieldApiDiscoveryOrigin;
 
-export type ApiShieldApiDiscoveryStateParameter =
-  Schemas.ApiShieldApiDiscoveryState;
+export type ApiShieldApiDiscoveryStateParameter = Schemas.ApiShieldApiDiscoveryState;
 
 /**
  * When `true`, only return API Discovery results that are not saved into API Shield Endpoint Management
@@ -21,7 +19,7 @@ export type ApiShieldDiffParameter = boolean;
  *
  * @example desc
  */
-export type ApiShieldDirectionParameter = "asc" | "desc";
+export type ApiShieldDirectionParameter = 'asc' | 'desc';
 
 /**
  * Filter results to only include endpoints containing this pattern.
@@ -58,11 +56,7 @@ export type ApiShieldOmitSourceQuery = boolean;
  * @example thresholds
  * @uniqueItems true
  */
-export type ApiShieldOperationFeatureParameter = (
-  | "thresholds"
-  | "parameter_schemas"
-  | "schema_info"
-)[];
+export type ApiShieldOperationFeatureParameter = ('thresholds' | 'parameter_schemas' | 'schema_info')[];
 
 export type ApiShieldOperationId = Schemas.ApiShieldUuid;
 
@@ -72,11 +66,11 @@ export type ApiShieldOperationId = Schemas.ApiShieldUuid;
  * @example method
  */
 export type ApiShieldOrderParameter =
-  | "host"
-  | "method"
-  | "endpoint"
-  | "traffic_stats.requests"
-  | "traffic_stats.last_updated";
+  | 'host'
+  | 'method'
+  | 'endpoint'
+  | 'traffic_stats.requests'
+  | 'traffic_stats.last_updated';
 
 /**
  * @default 1
@@ -128,14 +122,14 @@ export type HealthchecksPerPage = number;
 /**
  * @default asc
  */
-export type ResourceSharingDirection = "asc" | "desc";
+export type ResourceSharingDirection = 'asc' | 'desc';
 
 export type ResourceSharingKind = Schemas.ResourceSharingShareKind;
 
 /**
  * @default created
  */
-export type ResourceSharingOrder = "name" | "created";
+export type ResourceSharingOrder = 'name' | 'created';
 
 /**
  * @example 2
@@ -152,8 +146,7 @@ export type ResourceSharingPage = number;
  */
 export type ResourceSharingPerPage = number;
 
-export type ResourceSharingResourceStatus =
-  Schemas.ResourceSharingResourceStatus;
+export type ResourceSharingResourceStatus = Schemas.ResourceSharingResourceStatus;
 
 export type ResourceSharingResourceType = Schemas.ResourceSharingResourceType;
 
@@ -164,17 +157,12 @@ export type ResourceSharingTargetType = Schemas.ResourceSharingShareTargetType;
 /**
  * @default desc
  */
-export type SecretsStoreDirection = "asc" | "desc";
+export type SecretsStoreDirection = 'asc' | 'desc';
 
 /**
  * @default created
  */
-export type SecretsStoreOrder =
-  | "name"
-  | "comment"
-  | "created"
-  | "modified"
-  | "status";
+export type SecretsStoreOrder = 'name' | 'comment' | 'created' | 'modified' | 'status';
 
 /**
  * @example 2
@@ -193,10 +181,7 @@ export type SecretsStorePerPage = number;
 
 export type SecretsStoreSearch = string;
 
-export type TeamsDevicesDevicesListDevicesParamActiveRegistrations =
-  | "include"
-  | "only"
-  | "exclude";
+export type TeamsDevicesDevicesListDevicesParamActiveRegistrations = 'include' | 'only' | 'exclude';
 
 export type TeamsDevicesDevicesListDevicesParamCursor = string;
 
@@ -218,15 +203,15 @@ export type TeamsDevicesDevicesListDevicesParamSeenAfter = string;
 export type TeamsDevicesDevicesListDevicesParamSeenBefore = string;
 
 export type TeamsDevicesDevicesListDevicesParamSortBy =
-  | "name"
-  | "id"
-  | "client_version"
-  | "last_seen_user.email"
-  | "last_seen_at"
-  | "active_registrations"
-  | "created_at";
+  | 'name'
+  | 'id'
+  | 'client_version'
+  | 'last_seen_user.email'
+  | 'last_seen_at'
+  | 'active_registrations'
+  | 'created_at';
 
-export type TeamsDevicesDevicesListDevicesParamSortOrder = "asc" | "desc";
+export type TeamsDevicesDevicesListDevicesParamSortOrder = 'asc' | 'desc';
 
 export type TeamsDevicesDevicesListRegistrationsParamCursor = string;
 
@@ -248,18 +233,15 @@ export type TeamsDevicesDevicesListRegistrationsParamSeenAfter = string;
 export type TeamsDevicesDevicesListRegistrationsParamSeenBefore = string;
 
 export type TeamsDevicesDevicesListRegistrationsParamSortBy =
-  | "id"
-  | "user.name"
-  | "user.email"
-  | "last_seen_at"
-  | "created_at";
+  | 'id'
+  | 'user.name'
+  | 'user.email'
+  | 'last_seen_at'
+  | 'created_at';
 
-export type TeamsDevicesDevicesListRegistrationsParamSortOrder = "asc" | "desc";
+export type TeamsDevicesDevicesListRegistrationsParamSortOrder = 'asc' | 'desc';
 
-export type TeamsDevicesDevicesListRegistrationsParamStatus =
-  | "active"
-  | "all"
-  | "revoked";
+export type TeamsDevicesDevicesListRegistrationsParamStatus = 'active' | 'all' | 'revoked';
 
 export type TeamsDevicesDevicesListRegistrationsParamUserId = string[];
 

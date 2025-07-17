@@ -8,7 +8,7 @@ export type AddTeamCallback = {
   /**
    * @default success_and_failure
    */
-  callback_type?: ("success" | "failure" | "success_and_failure") | null;
+  callback_type?: ('success' | 'failure' | 'success_and_failure') | null;
   callback_vars: {
     [key: string]: string;
   };
@@ -150,15 +150,15 @@ export type BodyTestModelConnectionHealthTestConnectionPost = {
    */
   mode?:
     | (
-        | "chat"
-        | "completion"
-        | "embedding"
-        | "audio_speech"
-        | "audio_transcription"
-        | "image_generation"
-        | "batch"
-        | "rerank"
-        | "realtime"
+        | 'chat'
+        | 'completion'
+        | 'embedding'
+        | 'audio_speech'
+        | 'audio_transcription'
+        | 'image_generation'
+        | 'batch'
+        | 'rerank'
+        | 'realtime'
       )
     | null;
   /**
@@ -251,70 +251,70 @@ export type CachePingResponse = {
 };
 
 export type CallTypes =
-  | "embedding"
-  | "aembedding"
-  | "completion"
-  | "acompletion"
-  | "atext_completion"
-  | "text_completion"
-  | "image_generation"
-  | "aimage_generation"
-  | "image_edit"
-  | "aimage_edit"
-  | "moderation"
-  | "amoderation"
-  | "atranscription"
-  | "transcription"
-  | "aspeech"
-  | "speech"
-  | "rerank"
-  | "arerank"
-  | "_arealtime"
-  | "create_batch"
-  | "acreate_batch"
-  | "aretrieve_batch"
-  | "retrieve_batch"
-  | "pass_through_endpoint"
-  | "anthropic_messages"
-  | "get_assistants"
-  | "aget_assistants"
-  | "create_assistants"
-  | "acreate_assistants"
-  | "delete_assistant"
-  | "adelete_assistant"
-  | "acreate_thread"
-  | "create_thread"
-  | "aget_thread"
-  | "get_thread"
-  | "a_add_message"
-  | "add_message"
-  | "aget_messages"
-  | "get_messages"
-  | "arun_thread"
-  | "run_thread"
-  | "arun_thread_stream"
-  | "run_thread_stream"
-  | "afile_retrieve"
-  | "file_retrieve"
-  | "afile_delete"
-  | "file_delete"
-  | "afile_list"
-  | "file_list"
-  | "acreate_file"
-  | "create_file"
-  | "afile_content"
-  | "file_content"
-  | "create_fine_tuning_job"
-  | "acreate_fine_tuning_job"
-  | "acancel_fine_tuning_job"
-  | "cancel_fine_tuning_job"
-  | "alist_fine_tuning_jobs"
-  | "list_fine_tuning_jobs"
-  | "aretrieve_fine_tuning_job"
-  | "retrieve_fine_tuning_job"
-  | "responses"
-  | "aresponses"
-  | "alist_input_items";
+  | 'embedding'
+  | 'aembedding'
+  | 'completion'
+  | 'acompletion'
+  | 'atext_completion'
+  | 'text_completion'
+  | 'image_generation'
+  | 'aimage_generation'
+  | 'image_edit'
+  | 'aimage_edit'
+  | 'moderation'
+  | 'amoderation'
+  | 'atranscription'
+  | 'transcription'
+  | 'aspeech'
+  | 'speech'
+  | 'rerank'
+  | 'arerank'
+  | '_arealtime'
+  | 'create_batch'
+  | 'acreate_batch'
+  | 'aretrieve_batch'
+  | 'retrieve_batch'
+  | 'pass_through_endpoint'
+  | 'anthropic_messages'
+  | 'get_assistants'
+  | 'aget_assistants'
+  | 'create_assistants'
+  | 'acreate_assistants'
+  | 'delete_assistant'
+  | 'adelete_assistant'
+  | 'acreate_thread'
+  | 'create_thread'
+  | 'aget_thread'
+  | 'get_thread'
+  | 'a_add_message'
+  | 'add_message'
+  | 'aget_messages'
+  | 'get_messages'
+  | 'arun_thread'
+  | 'run_thread'
+  | 'arun_thread_stream'
+  | 'run_thread_stream'
+  | 'afile_retrieve'
+  | 'file_retrieve'
+  | 'afile_delete'
+  | 'file_delete'
+  | 'afile_list'
+  | 'file_list'
+  | 'acreate_file'
+  | 'create_file'
+  | 'afile_content'
+  | 'file_content'
+  | 'create_fine_tuning_job'
+  | 'acreate_fine_tuning_job'
+  | 'acancel_fine_tuning_job'
+  | 'cancel_fine_tuning_job'
+  | 'alist_fine_tuning_jobs'
+  | 'list_fine_tuning_jobs'
+  | 'aretrieve_fine_tuning_job'
+  | 'retrieve_fine_tuning_job'
+  | 'responses'
+  | 'aresponses'
+  | 'alist_input_items';
 
 export type ChatCompletionAnnotation = {
   type?: string;
@@ -377,7 +377,7 @@ export type Choices = {
   finish_reason: string;
   index: number;
   message: Message;
-  logprobs?: ChoiceLogprobs | void | null;
+  logprobs?: ChoiceLogprobs | undefined | null;
   provider_specific_fields?: Record<string, any> | null;
 } & {
   [key: string]: any;
@@ -473,14 +473,7 @@ export type DefaultInternalUserParams = {
    *
    * @default internal_user
    */
-  user_role?:
-    | (
-        | "proxy_admin"
-        | "proxy_admin_viewer"
-        | "internal_user"
-        | "internal_user_viewer"
-      )
-    | null;
+  user_role?: ('proxy_admin' | 'proxy_admin_viewer' | 'internal_user' | 'internal_user_viewer') | null;
   /**
    * Default maximum budget (in USD) for new users created
    */
@@ -556,7 +549,7 @@ export type Deployment = {
   [key: string]: any;
 };
 
-export type EmailEvent = "Virtual Key Created" | "New User Invitation";
+export type EmailEvent = 'Virtual Key Created' | 'New User Invitation';
 
 export type EmailEventSettings = {
   event: EmailEvent;
@@ -684,7 +677,7 @@ export type GenerateKeyResponse = {
   key_name?: string | null;
   expires?: string | null;
   token_id?: string | null;
-  litellm_budget_table?: void | null;
+  litellm_budget_table?: undefined | null;
   token?: string | null;
   created_by?: string | null;
   updated_by?: string | null;
@@ -735,7 +728,7 @@ export type GuardrailInfoResponse = {
   /**
    * @default config
    */
-  guardrail_definition_location?: "config" | "db";
+  guardrail_definition_location?: 'config' | 'db';
 };
 
 export type HTTPValidationError = {
@@ -761,7 +754,7 @@ export type InternalUserSettingsResponse = {
 };
 
 export type KeyHealthResponse = {
-  key?: "healthy" | "unhealthy";
+  key?: 'healthy' | 'unhealthy';
   logging_callbacks?: LoggingCallbackStatus | null;
 };
 
@@ -823,7 +816,7 @@ export type LiteLLMFineTuningJobCreate = {
   validation_file?: string | null;
   integrations?: string[] | null;
   seed?: number | null;
-  custom_llm_provider?: ("openai" | "azure" | "vertex_ai") | null;
+  custom_llm_provider?: ('openai' | 'azure' | 'vertex_ai') | null;
 } & {
   [key: string]: any;
 };
@@ -850,7 +843,7 @@ export type LiteLLMEndUserTable = {
    * @default 0
    */
   spend?: number;
-  allowed_model_region?: ("eu" | "us") | null;
+  allowed_model_region?: ('eu' | 'us') | null;
   default_model?: string | null;
   litellm_budget_table?: LiteLLMBudgetTable | null;
 };
@@ -863,9 +856,9 @@ export type LiteLLMMCPServerTable = {
   alias?: string | null;
   description?: string | null;
   url: string;
-  transport: "sse" | "http";
-  spec_version: "2024-11-05" | "2025-03-26";
-  auth_type?: ("none" | "api_key" | "bearer_token" | "basic") | null;
+  transport: 'sse' | 'http';
+  spec_version: '2024-11-05' | '2025-03-26';
+  auth_type?: ('none' | 'api_key' | 'bearer_token' | 'basic') | null;
   created_at?: string | null;
   created_by?: string | null;
   updated_at?: string | null;
@@ -939,7 +932,7 @@ export type LiteLLMOrganizationMembershipTable = {
    * @format date-time
    */
   updated_at: string;
-  user?: void | null;
+  user?: undefined | null;
   litellm_budget_table?: LiteLLMBudgetTable | null;
 };
 
@@ -1016,9 +1009,7 @@ export type LiteLLMParams = {
   stream_timeout?: number | string | null;
   max_retries?: number | null;
   organization?: string | null;
-  configurable_clientside_auth_params?:
-    | (string | ConfigurableClientsideParamsCustomAuth)[]
-    | null;
+  configurable_clientside_auth_params?: (string | ConfigurableClientsideParamsCustomAuth)[] | null;
   litellm_credential_name?: string | null;
   litellm_trace_id?: string | null;
   max_file_size_mb?: number | null;
@@ -1037,7 +1028,7 @@ export type LiteLLMParams = {
    */
   merge_reasoning_content_in_choices?: boolean | null;
   model_info?: Record<string, any> | null;
-  mock_response?: string | ModelResponse | void | null;
+  mock_response?: string | ModelResponse | undefined | null;
   model: string;
 } & {
   [key: string]: any;
@@ -1080,13 +1071,13 @@ export type LiteLLMSpendLogs = {
   /**
    * @default {}
    */
-  metadata?: void | null;
+  metadata?: undefined | null;
   /**
    * @default False
    */
   cache_hit?: string | null;
   cache_key?: string | null;
-  request_tags?: void | null;
+  request_tags?: undefined | null;
   requester_ip_address?: string | null;
   messages: string | any[] | Record<string, any> | null;
   response: string | any[] | Record<string, any> | null;
@@ -1439,17 +1430,17 @@ export type LitellmParams = {
  * CUSTOMER: External users -> these are customers
  */
 export type LitellmUserRoles =
-  | "proxy_admin"
-  | "proxy_admin_viewer"
-  | "org_admin"
-  | "internal_user"
-  | "internal_user_viewer"
-  | "team"
-  | "customer";
+  | 'proxy_admin'
+  | 'proxy_admin_viewer'
+  | 'org_admin'
+  | 'internal_user'
+  | 'internal_user_viewer'
+  | 'team'
+  | 'customer';
 
 export type LoggingCallbackStatus = {
   callbacks?: string[];
-  status?: "healthy" | "unhealthy";
+  status?: 'healthy' | 'unhealthy';
   details?: string | null;
 };
 
@@ -1462,19 +1453,17 @@ export type MCPInfo = {
 export type Member = {
   user_id?: string | null;
   user_email?: string | null;
-  role: "admin" | "user";
+  role: 'admin' | 'user';
 };
 
 export type Message = {
   content: string | null;
-  role: "assistant" | "user" | "system" | "tool" | "function";
+  role: 'assistant' | 'user' | 'system' | 'tool' | 'function';
   tool_calls: ChatCompletionMessageToolCall[] | null;
   function_call: FunctionCall | null;
   audio?: ChatCompletionAudioResponse | null;
   reasoning_content?: string | null;
-  thinking_blocks?:
-    | (ChatCompletionThinkingBlock | ChatCompletionRedactedThinkingBlock)[]
-    | null;
+  thinking_blocks?: (ChatCompletionThinkingBlock | ChatCompletionRedactedThinkingBlock)[] | null;
   provider_specific_fields?: Record<string, any> | null;
   annotations?: ChatCompletionAnnotation[] | null;
 } & {
@@ -1497,7 +1486,7 @@ export type ModelInfo = {
   created_at?: string | null;
   created_by?: string | null;
   base_model?: string | null;
-  tier?: ("free" | "paid") | null;
+  tier?: ('free' | 'paid') | null;
   team_id?: string | null;
   team_public_model_name?: string | null;
 } & {
@@ -1565,7 +1554,7 @@ export type NewCustomerRequest = {
    */
   blocked?: boolean;
   spend?: number | null;
-  allowed_model_region?: ("eu" | "us") | null;
+  allowed_model_region?: ('eu' | 'us') | null;
   default_model?: string | null;
 };
 
@@ -1576,12 +1565,12 @@ export type NewMCPServerRequest = {
   /**
    * @default sse
    */
-  transport?: "sse" | "http";
+  transport?: 'sse' | 'http';
   /**
    * @default 2025-03-26
    */
-  spec_version?: "2024-11-05" | "2025-03-26";
-  auth_type?: ("none" | "api_key" | "bearer_token" | "basic") | null;
+  spec_version?: '2024-11-05' | '2025-03-26';
+  auth_type?: ('none' | 'api_key' | 'bearer_token' | 'basic') | null;
   url: string;
 };
 
@@ -1694,14 +1683,7 @@ export type NewUserRequest = {
   object_permission?: LiteLLMObjectPermissionBase | null;
   user_email?: string | null;
   user_alias?: string | null;
-  user_role?:
-    | (
-        | "proxy_admin"
-        | "proxy_admin_viewer"
-        | "internal_user"
-        | "internal_user_viewer"
-      )
-    | null;
+  user_role?: ('proxy_admin' | 'proxy_admin_viewer' | 'internal_user' | 'internal_user_viewer') | null;
   teams?: any[] | null;
   /**
    * @default true
@@ -1758,21 +1740,14 @@ export type NewUserResponse = {
   key_name?: string | null;
   expires?: string | null;
   token_id?: string | null;
-  litellm_budget_table?: void | null;
+  litellm_budget_table?: undefined | null;
   token?: string | null;
   created_by?: string | null;
   updated_by?: string | null;
   created_at?: string | null;
   updated_at?: string | null;
   user_email?: string | null;
-  user_role?:
-    | (
-        | "proxy_admin"
-        | "proxy_admin_viewer"
-        | "internal_user"
-        | "internal_user_viewer"
-      )
-    | null;
+  user_role?: ('proxy_admin' | 'proxy_admin_viewer' | 'internal_user' | 'internal_user_viewer') | null;
   teams?: any[] | null;
   user_alias?: string | null;
 };
@@ -1780,7 +1755,7 @@ export type NewUserResponse = {
 export type OrgMember = {
   user_id?: string | null;
   user_email?: string | null;
-  role: "org_admin" | "internal_user" | "internal_user_viewer";
+  role: 'org_admin' | 'internal_user' | 'internal_user_viewer';
 };
 
 export type OrganizationAddMemberResponse = {
@@ -1868,48 +1843,48 @@ export type PatchGuardrailRequest = {
   guardrail_info?: Record<string, any> | null;
 };
 
-export type PiiAction = "BLOCK" | "MASK";
+export type PiiAction = 'BLOCK' | 'MASK';
 
 export type PiiEntityType =
-  | "CREDIT_CARD"
-  | "CRYPTO"
-  | "DATE_TIME"
-  | "EMAIL_ADDRESS"
-  | "IBAN_CODE"
-  | "IP_ADDRESS"
-  | "NRP"
-  | "LOCATION"
-  | "PERSON"
-  | "PHONE_NUMBER"
-  | "MEDICAL_LICENSE"
-  | "URL"
-  | "US_BANK_NUMBER"
-  | "US_DRIVER_LICENSE"
-  | "US_ITIN"
-  | "US_PASSPORT"
-  | "US_SSN"
-  | "UK_NHS"
-  | "UK_NINO"
-  | "ES_NIF"
-  | "ES_NIE"
-  | "IT_FISCAL_CODE"
-  | "IT_DRIVER_LICENSE"
-  | "IT_VAT_CODE"
-  | "IT_PASSPORT"
-  | "IT_IDENTITY_CARD"
-  | "PL_PESEL"
-  | "SG_NRIC_FIN"
-  | "SG_UEN"
-  | "AU_ABN"
-  | "AU_ACN"
-  | "AU_TFN"
-  | "AU_MEDICARE"
-  | "IN_PAN"
-  | "IN_AADHAAR"
-  | "IN_VEHICLE_REGISTRATION"
-  | "IN_VOTER"
-  | "IN_PASSPORT"
-  | "FI_PERSONAL_IDENTITY_CODE";
+  | 'CREDIT_CARD'
+  | 'CRYPTO'
+  | 'DATE_TIME'
+  | 'EMAIL_ADDRESS'
+  | 'IBAN_CODE'
+  | 'IP_ADDRESS'
+  | 'NRP'
+  | 'LOCATION'
+  | 'PERSON'
+  | 'PHONE_NUMBER'
+  | 'MEDICAL_LICENSE'
+  | 'URL'
+  | 'US_BANK_NUMBER'
+  | 'US_DRIVER_LICENSE'
+  | 'US_ITIN'
+  | 'US_PASSPORT'
+  | 'US_SSN'
+  | 'UK_NHS'
+  | 'UK_NINO'
+  | 'ES_NIF'
+  | 'ES_NIE'
+  | 'IT_FISCAL_CODE'
+  | 'IT_DRIVER_LICENSE'
+  | 'IT_VAT_CODE'
+  | 'IT_PASSPORT'
+  | 'IT_IDENTITY_CARD'
+  | 'PL_PESEL'
+  | 'SG_NRIC_FIN'
+  | 'SG_UEN'
+  | 'AU_ABN'
+  | 'AU_ACN'
+  | 'AU_TFN'
+  | 'AU_MEDICARE'
+  | 'IN_PAN'
+  | 'IN_AADHAAR'
+  | 'IN_VEHICLE_REGISTRATION'
+  | 'IN_VOTER'
+  | 'IN_PASSPORT'
+  | 'FI_PERSONAL_IDENTITY_CODE';
 
 /**
  * Complete provider budget configuration and status.
@@ -2031,7 +2006,7 @@ export type SCIMPatchOp = {
 export type SCIMPatchOperation = {
   op: string;
   path?: string | null;
-  value?: void | null;
+  value?: undefined | null;
 };
 
 export type SCIMUser = {
@@ -2290,7 +2265,7 @@ export type TeamMemberUpdateRequest = {
   user_email?: string | null;
   team_id: string;
   max_budget_in_team?: number | null;
-  role?: ("admin" | "user") | null;
+  role?: ('admin' | 'user') | null;
 };
 
 export type TeamMemberUpdateResponse = {
@@ -2379,7 +2354,7 @@ export type UpdateCustomerRequest = {
   blocked?: boolean;
   max_budget?: number | null;
   budget_id?: string | null;
-  allowed_model_region?: ("eu" | "us") | null;
+  allowed_model_region?: ('eu' | 'us') | null;
   default_model?: string | null;
 };
 
@@ -2438,12 +2413,12 @@ export type UpdateMCPServerRequest = {
   /**
    * @default sse
    */
-  transport?: "sse" | "http";
+  transport?: 'sse' | 'http';
   /**
    * @default 2025-03-26
    */
-  spec_version?: "2024-11-05" | "2025-03-26";
-  auth_type?: ("none" | "api_key" | "bearer_token" | "basic") | null;
+  spec_version?: '2024-11-05' | '2025-03-26';
+  auth_type?: ('none' | 'api_key' | 'bearer_token' | 'basic') | null;
   url: string;
 };
 
@@ -2524,14 +2499,7 @@ export type UpdateUserRequest = {
   object_permission?: LiteLLMObjectPermissionBase | null;
   password?: string | null;
   user_email?: string | null;
-  user_role?:
-    | (
-        | "proxy_admin"
-        | "proxy_admin_viewer"
-        | "internal_user"
-        | "internal_user_viewer"
-      )
-    | null;
+  user_role?: ('proxy_admin' | 'proxy_admin_viewer' | 'internal_user' | 'internal_user_viewer') | null;
 };
 
 /**
@@ -2616,8 +2584,8 @@ export type UserAPIKeyAuth = {
   last_refreshed_at?: number | null;
   api_key?: string | null;
   user_role?: LitellmUserRoles | null;
-  allowed_model_region?: ("eu" | "us") | null;
-  parent_otel_span?: void | null;
+  allowed_model_region?: ('eu' | 'us') | null;
+  parent_otel_span?: undefined | null;
   rpm_limit_per_model?: {
     [key: string]: number;
   } | null;
@@ -2682,9 +2650,7 @@ export type UpdateLiteLLMParams = {
   stream_timeout?: number | string | null;
   max_retries?: number | null;
   organization?: string | null;
-  configurable_clientside_auth_params?:
-    | (string | ConfigurableClientsideParamsCustomAuth)[]
-    | null;
+  configurable_clientside_auth_params?: (string | ConfigurableClientsideParamsCustomAuth)[] | null;
   litellm_credential_name?: string | null;
   litellm_trace_id?: string | null;
   max_file_size_mb?: number | null;
@@ -2703,7 +2669,7 @@ export type UpdateLiteLLMParams = {
    */
   merge_reasoning_content_in_choices?: boolean | null;
   model_info?: Record<string, any> | null;
-  mock_response?: string | ModelResponse | void | null;
+  mock_response?: string | ModelResponse | undefined | null;
   model?: string | null;
 } & {
   [key: string]: any;

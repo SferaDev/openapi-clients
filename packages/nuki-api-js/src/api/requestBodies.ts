@@ -3,6 +3,6 @@
  *
  * @version 3.10.2
  */
-import type * as Schemas from "./schemas";
+import type * as Schemas from './schemas';
 
 export type SmartlockAction = Schemas.SmartlockAction;
