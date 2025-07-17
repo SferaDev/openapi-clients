@@ -23,8 +23,8 @@ export function HeroHeader() {
       <section className="relative bg-gradient-to-b from-background to-background/50 border-b">
         <div className="container mx-auto px-4 max-w-7xl">
           <div className="text-center pt-16 pb-8">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600 dark:from-gray-50 dark:to-gray-400 mb-6">
-              Unofficial, Type-Safe OpenAPI Clients
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tighter mb-6">
+              Unofficial Type-Safe OpenAPI Clients
             </h1>
             <p className="text-muted-foreground text-lg md:text-xl max-w-4xl mx-auto">
               A collection of automatically generated and updated API clients for popular services
