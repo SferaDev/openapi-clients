@@ -1,6 +1,5 @@
-import { Operation } from '@kubb/oas';
 import { PluginClient } from '@kubb/plugin-client';
-import { createReactGenerator, OperationSchemas } from '@kubb/plugin-oas';
+import { createReactGenerator } from '@kubb/plugin-oas';
 import { useOas, useOperationManager } from '@kubb/plugin-oas/hooks';
 import { getBanner, getFooter } from '@kubb/plugin-oas/utils';
 import { File, useApp } from '@kubb/react';
@@ -8,7 +7,7 @@ import c from 'case';
 
 export const extraGenerator = createReactGenerator<PluginClient>({
   name: 'extra',
-  Operations({ operations, operationsByMethod }) {
+  Operations({ operations }) {
     const { pluginManager, plugin } = useApp<PluginClient>();
     const oas = useOas();
     const { getFile, getName } = useOperationManager();
@@ -24,32 +23,15 @@ export const extraGenerator = createReactGenerator<PluginClient>({
       return <File.Import key={name} name={[name]} root={file.path} path={getFile(operation).path} />;
     });
 
-    const tags = Array.from(new Set(operations.flatMap((operation) => operation.getTags().map((tag) => tag.name))));
+    const tags = Array.from(new Set(operations.flatMap((operation) => operation.getTags().map((tag: { name: string }) => tag.name))));
 
     const operationsByPath = Object.fromEntries(
-      Object.entries(operationsByMethod).flatMap(([path, methods]) => {
-        return Object.entries(methods)
-          .filter(
-            ([method, { operation }]: [
-              string,
-              {
-                operation: Operation;
-                schemas: OperationSchemas;
-              }
-            ]) =>
-              ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].includes(method.toUpperCase()) &&
-              operation.getOperationId() !== undefined
-          )
-          .map(
-            ([method, { operation }]: [
-              string,
-              {
-                operation: Operation;
-                schemas: OperationSchemas;
-              }
-            ]) => [`${method.toUpperCase()} ${path}`, operation.getOperationId()]
-          );
-      })
+      operations
+        .filter((operation) => 
+          ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].includes(operation.method.toUpperCase()) &&
+          operation.getOperationId() !== undefined
+        )
+        .map((operation) => [`${operation.method.toUpperCase()} ${operation.path}`, operation.getOperationId()])
     );
 
     const operationsByTag = Object.fromEntries(
@@ -59,7 +41,7 @@ export const extraGenerator = createReactGenerator<PluginClient>({
           .filter((operation) => {
             return operation
               .getTags()
-              .map((tag) => tag.name)
+              .map((tag: { name: string }) => tag.name)
               .includes(name);
           })
           .map((operation) => operation.getOperationId())
@@ -69,27 +51,19 @@ export const extraGenerator = createReactGenerator<PluginClient>({
     const tagDictionary = Object.fromEntries(
       tags.map((name) => [
         c.camel(name.toLowerCase()),
-        Object.entries(operationsByMethod).reduce(
-          (acc, [, methods]) => {
-            for (const [method, { operation }] of Object.entries(methods) as [
-              string,
-              {
-                operation: Operation;
-                schemas: OperationSchemas;
-              }
-            ][]) {
-              const upperMethod = method.toUpperCase();
-              if (
-                operation
-                  .getTags()
-                  .map((tag) => tag.name)
-                  .includes(name) &&
-                ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].includes(upperMethod) &&
-                operation?.getOperationId() !== undefined
-              ) {
-                acc[upperMethod] = acc[upperMethod] ?? [];
-                acc[upperMethod].push(operation.getOperationId());
-              }
+        operations.reduce(
+          (acc, operation) => {
+            const upperMethod = operation.method.toUpperCase();
+            if (
+              operation
+                .getTags()
+                .map((tag: { name: string }) => tag.name)
+                .includes(name) &&
+              ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].includes(upperMethod) &&
+              operation?.getOperationId() !== undefined
+            ) {
+              acc[upperMethod] = acc[upperMethod] ?? [];
+              acc[upperMethod].push(operation.getOperationId());
             }
 
             return acc;
@@ -100,6 +74,7 @@ export const extraGenerator = createReactGenerator<PluginClient>({
     );
 
     return (
+      // @ts-ignore - JSX runtime module resolution issue
       <File
         baseName={file.baseName}
         path={file.path}

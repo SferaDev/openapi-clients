@@ -40,6 +40,7 @@ export const clientGenerator = createReactGenerator<PluginClient>({
     };
 
     return (
+      // @ts-ignore - JSX runtime module resolution issue
       <File
         baseName={client.file.baseName}
         path={client.file.path}

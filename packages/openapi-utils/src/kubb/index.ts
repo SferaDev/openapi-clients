@@ -54,10 +54,11 @@ export const baseConfig = {
                 path: './schemas.ts',
                 barrelType: false
             },
-            typed: true,
+            typed: false, // Workaround for https://github.com/kubb-labs/kubb/issues/1775
             dateType: 'date',
             unknownType: 'unknown',
-            importPath: 'zod'
+            importPath: 'zod',
+            version: '4'
         }),
         pluginMcp({
             output: {

@@ -1,7 +1,6 @@
-import { operationsByTag } from './api/components';
-import { operationsByPath } from './api/extra';
-import { FetcherExtraProps, fetch as vercelFetch } from './api/fetcher';
+import { operationsByPath, operationsByTag, tagDictionary } from './generated/components';
 import { FetchImpl, formEncoded } from './utils/fetch';
+import fetchFn, { FetcherConfig } from './utils/fetcher';
 import { RequiredKeys } from './utils/types';
 
 export interface VercelApiOptions {
@@ -9,41 +8,80 @@ export interface VercelApiOptions {
   fetch?: FetchImpl;
 }
 
-type ApiProxy = {
+export type ApiClient = {
   [Tag in keyof typeof operationsByTag]: {
-    [Method in keyof (typeof operationsByTag)[Tag]]: (typeof operationsByTag)[Tag][Method] extends infer Operation extends (
-      ...args: any
-    ) => any
-      ? Omit<Parameters<Operation>[0], keyof FetcherExtraProps> extends infer Params
-        ? RequiredKeys<Params> extends never
-          ? (params?: Params) => ReturnType<Operation>
-          : (params: Params) => ReturnType<Operation>
-        : never
-      : never;
+    [Method in keyof (typeof operationsByTag)[Tag]]: (typeof operationsByTag)[Tag][Method] extends infer Operation extends
+    (...args: any) => any
+    ? Omit<Parameters<Operation>[0], keyof FetcherConfig> extends infer Params
+    ? RequiredKeys<Params> extends never
+    ? (params?: Params) => ReturnType<Operation>
+    : (params: Params) => ReturnType<Operation>
+    : never
+    : never;
   };
 };
 
+type HttpMethod = 'GET' | 'POST' | 'PUT' | 'DELETE' | 'PATCH';
+
+export type ApiOperation = {
+  [Tag in keyof typeof operationsByTag]: keyof (typeof operationsByTag)[Tag] extends string
+  ? `${Tag}.${keyof (typeof operationsByTag)[Tag]}`
+  : never;
+}[keyof typeof operationsByTag];
+
+export type ApiOperationByMethod<Method extends HttpMethod> = {
+  [Tag in keyof typeof tagDictionary]: {
+    [TagMethod in keyof (typeof tagDictionary)[Tag]]: TagMethod extends Method
+    ? (typeof tagDictionary)[Tag][TagMethod] extends readonly any[]
+    ? `${Tag}.${(typeof tagDictionary)[Tag][TagMethod][number]}`
+    : never
+    : never;
+  }[keyof (typeof tagDictionary)[Tag]];
+}[keyof typeof tagDictionary];
+
+export type ApiOperationParams<T extends ApiOperation> = T extends `${infer Tag}.${infer Operation}`
+  ? Tag extends keyof typeof operationsByTag
+  ? Operation extends keyof (typeof operationsByTag)[Tag]
+  ? (typeof operationsByTag)[Tag][Operation] extends infer Operation extends (...args: any) => any
+  ? Omit<Parameters<Operation>[0], keyof FetcherConfig>
+  : never
+  : never
+  : never
+  : never;
+
+export type ApiOperationResult<T extends ApiOperation> = T extends `${infer Tag}.${infer Operation}`
+  ? Tag extends keyof typeof operationsByTag
+  ? Operation extends keyof (typeof operationsByTag)[Tag]
+  ? (typeof operationsByTag)[Tag][Operation] extends (...args: any) => any
+  ? Awaited<ReturnType<(typeof operationsByTag)[Tag][Operation]>>
+  : never
+  : never
+  : never
+  : never;
+
 type RequestEndpointParams<T extends keyof typeof operationsByPath> = Omit<
   Parameters<(typeof operationsByPath)[T]>[0],
-  keyof FetcherExtraProps
+  keyof FetcherConfig
 >;
 
 type RequestEndpointResult<T extends keyof typeof operationsByPath> = ReturnType<(typeof operationsByPath)[T]>;
 
-export class VercelApi {
-  #token: string | null;
-  #fetch: FetchImpl;
+export class XataApi {
+  token: string | null;
+  fetch: FetchImpl;
 
   constructor(options: VercelApiOptions) {
-    this.#token = options.token;
+    this.token = options.token;
 
-    this.#fetch = options.fetch || (fetch as FetchImpl);
-    if (!this.#fetch) throw new Error('Fetch is required');
+    this.fetch = options.fetch || (fetch as FetchImpl);
+    if (!this.fetch) throw new Error('Fetch is required');
   }
 
   get api() {
-    const token = this.#token;
-    const fetchImpl = this.#fetch;
+    const getConfig = async (): Promise<FetcherConfig> => ({
+      token: this.token,
+      fetchImpl: this.fetch
+    });
 
     return new Proxy(
       {},
@@ -64,14 +102,14 @@ export class VercelApi {
                 const method = operationsByTag[namespace][operation] as any;
 
                 return async (params: Record<string, unknown>) => {
-                  return await method({ ...params, token, fetchImpl });
+                  return await method({ ...params, config: await getConfig() });
                 };
               }
             }
           );
         }
       }
-    ) as ApiProxy;
+    ) as ApiClient;
   }
 
   get auth() {
@@ -88,11 +126,11 @@ export class VercelApi {
           installation_id: string;
           user_id: string;
           team_id: string | null;
-        } = await vercelFetch({
+        } = await fetchFn({
           method: 'POST',
           url: `/v2/oauth/access_token`,
           token: null,
-          fetchImpl: this.#fetch,
+          fetchImpl: this.fetch,
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: formEncoded({ code, redirect_uri: redirectUri, client_id: clientId, client_secret: clientSecret })
         });
@@ -115,7 +153,14 @@ export class VercelApi {
     const [method = '', url = ''] = endpoint.split(' ');
     const extraParams = (params || {}) as Record<string, unknown>;
 
-    const result = await vercelFetch({ ...extraParams, method, url, token: this.#token, fetchImpl: this.#fetch });
+    const result = await fetchFn({
+      ...extraParams,
+      method,
+      url,
+      token: this.token,
+      fetchImpl: this.fetch
+    });
+
     return result as RequestEndpointResult<Endpoint>;
   }
 }

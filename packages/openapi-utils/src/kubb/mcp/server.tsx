@@ -69,6 +69,7 @@ export const serverGenerator = createReactGenerator<PluginMcp>({
     });
 
     return (
+      // @ts-ignore - JSX runtime module resolution issue
       <>
         <File
           baseName={file.baseName}

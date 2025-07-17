@@ -53,7 +53,7 @@ export function getParams({
   });
 }
 
-export function ClientOperation({
+export const ClientOperation: any = function({
   name,
   isExportable = true,
   isIndexable = true,
@@ -168,6 +168,7 @@ export function ClientOperation({
   );
 
   return (
+    // @ts-ignore - JSX runtime module resolution issue
     <File.Source name={name} isExportable={isExportable} isIndexable={isIndexable}>
       <Function
         name={name}
