@@ -3037,7 +3037,32 @@ export type AccessAnyValidServiceTokenRule = {
 };
 
 export type AccessApiResponseCollection = AccessApiResponseCommon & {
-  result_info?: AccessResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type AccessApiResponseCommon = {
@@ -3294,6 +3319,14 @@ export type AccessAppsComponentsSchemasResponseCollection2 = AccessApiResponseCo
   result?: AccessApps[];
 };
 
+/**
+ * The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.
+ *
+ * @default 24h
+ * @example 24h
+ */
+export type AccessAppsComponentsSchemasSessionDuration = string;
+
 export type AccessAppsComponentsSchemasSingleResponse = AccessApiResponseSingle & {
   result?: AccessAppResponse;
 };
@@ -3414,13 +3447,17 @@ export type AccessAzureAD = {
     /**
      * A flag to enable or disable SCIM for the identity provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
      *
+     * @default no_action
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -3432,7 +3469,9 @@ export type AccessAzureAD = {
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -3444,7 +3483,9 @@ export type AccessAzureAD = {
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -3494,7 +3535,7 @@ export type AccessAzureGroupRule = {
 export type AccessBasePolicyReq = {
   decision: AccessDecision;
   exclude?: AccessSchemasExclude;
-  include: AccessInclude;
+  include: AccessSchemasInclude;
   name: AccessPolicyComponentsSchemasName;
   require?: AccessSchemasRequire;
 };
@@ -3504,7 +3545,7 @@ export type AccessBasePolicyResp = {
   decision?: AccessDecision;
   exclude?: AccessSchemasExclude;
   id?: AccessSchemasUuid;
-  include?: AccessInclude;
+  include?: AccessSchemasInclude;
   name?: AccessPolicyComponentsSchemasName;
   require?: AccessSchemasRequire;
   updated_at?: AccessTimestamp;
@@ -3568,7 +3609,7 @@ export type AccessBookmarkProps = {
    *
    * @example bookmark
    */
-  type?: string;
+  type?: AccessType & void;
 };
 
 export type AccessBookmarks = {
@@ -3672,13 +3713,17 @@ export type AccessCentrify = {
     /**
      * A flag to enable or disable SCIM for the identity provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
      *
+     * @default no_action
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -3690,7 +3735,9 @@ export type AccessCentrify = {
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -3702,7 +3749,9 @@ export type AccessCentrify = {
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -3859,6 +3908,11 @@ export type AccessComponentsSchemasDomain = string;
  */
 export type AccessComponentsSchemasEmail = string;
 
+/**
+ * Rules evaluated with a NOT logical operator. To match the policy, a user cannot meet any of the Exclude rules.
+ */
+export type AccessComponentsSchemasExclude = AccessRule[];
+
 export type AccessComponentsSchemasGroups = {
   created_at?: AccessTimestamp;
   exclude?: AccessExclude;
@@ -3895,6 +3949,11 @@ export type AccessComponentsSchemasIdentifier = string;
  * @example Widget Corps IDP
  */
 export type AccessComponentsSchemasName = string;
+
+/**
+ * Rules evaluated with an AND logical operator. To match the policy, a user must meet all of the Require rules.
+ */
+export type AccessComponentsSchemasRequire = AccessRule[];
 
 export type AccessComponentsSchemasResponseCollection = AccessApiResponseCollection & {
   result?: AccessServiceTokens[];
@@ -4330,13 +4389,17 @@ export type AccessFacebook = {
     /**
      * A flag to enable or disable SCIM for the identity provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
      *
+     * @default no_action
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -4348,7 +4411,9 @@ export type AccessFacebook = {
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -4360,7 +4425,9 @@ export type AccessFacebook = {
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -4494,13 +4561,17 @@ export type AccessGithub = {
     /**
      * A flag to enable or disable SCIM for the identity provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
      *
+     * @default no_action
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -4512,7 +4583,9 @@ export type AccessGithub = {
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -4524,7 +4597,9 @@ export type AccessGithub = {
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -4591,13 +4666,17 @@ export type AccessGoogle = {
     /**
      * A flag to enable or disable SCIM for the identity provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
      *
+     * @default no_action
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -4609,7 +4688,9 @@ export type AccessGoogle = {
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -4621,7 +4702,9 @@ export type AccessGoogle = {
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -4669,13 +4752,17 @@ export type AccessGoogleApps = {
     /**
      * A flag to enable or disable SCIM for the identity provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
      *
+     * @default no_action
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -4687,7 +4774,9 @@ export type AccessGoogleApps = {
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -4699,7 +4788,9 @@ export type AccessGoogleApps = {
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -4831,6 +4922,7 @@ export type AccessIdResponse = AccessApiResponseSingle & {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type AccessIdentifier = string;
 
@@ -4921,13 +5013,17 @@ export type AccessIdentityProvider = {
     /**
      * A flag to enable or disable SCIM for the identity provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
      *
+     * @default no_action
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -4939,7 +5035,9 @@ export type AccessIdentityProvider = {
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -4951,7 +5049,9 @@ export type AccessIdentityProvider = {
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -5209,13 +5309,17 @@ export type AccessLinkedin = {
     /**
      * A flag to enable or disable SCIM for the identity provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
      *
+     * @default no_action
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -5227,7 +5331,9 @@ export type AccessLinkedin = {
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -5239,7 +5345,9 @@ export type AccessLinkedin = {
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -5432,13 +5540,17 @@ export type AccessOidc = {
     /**
      * A flag to enable or disable SCIM for the identity provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
      *
+     * @default no_action
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -5450,7 +5562,9 @@ export type AccessOidc = {
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -5462,7 +5576,9 @@ export type AccessOidc = {
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -5486,6 +5602,33 @@ export type AccessOidc = {
     | 'onelogin'
     | 'pingone'
     | 'yandex';
+};
+
+/**
+ * Matches an OIDC claim.
+ * Requires an OIDC identity provider.
+ */
+export type AccessOidcClaimRule = {
+  oidc: {
+    /**
+     * The name of the OIDC claim.
+     *
+     * @example group
+     */
+    claim_name: string;
+    /**
+     * The OIDC claim value to look for.
+     *
+     * @example devs@cloudflare.com
+     */
+    claim_value: string;
+    /**
+     * The ID of your OIDC identity provider.
+     *
+     * @example ea85612a-29c8-46c2-bacb-669d65136971
+     */
+    identity_provider_id: string;
+  };
 };
 
 export type AccessOidcSaasApp = {
@@ -5646,13 +5789,17 @@ export type AccessOkta = {
     /**
      * A flag to enable or disable SCIM for the identity provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
      *
+     * @default no_action
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -5664,7 +5811,9 @@ export type AccessOkta = {
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -5676,7 +5825,9 @@ export type AccessOkta = {
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -5746,13 +5897,17 @@ export type AccessOnelogin = {
     /**
      * A flag to enable or disable SCIM for the identity provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
      *
+     * @default no_action
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -5764,7 +5919,9 @@ export type AccessOnelogin = {
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -5776,7 +5933,9 @@ export type AccessOnelogin = {
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -5818,13 +5977,17 @@ export type AccessOnetimepin = {
     /**
      * A flag to enable or disable SCIM for the identity provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
      *
+     * @default no_action
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -5836,7 +5999,9 @@ export type AccessOnetimepin = {
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -5848,7 +6013,9 @@ export type AccessOnetimepin = {
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -5975,13 +6142,17 @@ export type AccessPingone = {
     /**
      * A flag to enable or disable SCIM for the identity provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
      *
+     * @default no_action
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -5993,7 +6164,9 @@ export type AccessPingone = {
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -6005,7 +6178,9 @@ export type AccessPingone = {
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -6036,7 +6211,7 @@ export type AccessPolicies = {
   approval_required?: AccessSchemasApprovalRequired;
   created_at?: AccessTimestamp;
   decision?: AccessSchemasDecision;
-  exclude?: AccessSchemasExclude;
+  exclude?: AccessComponentsSchemasExclude;
   id?: AccessUuid;
   include?: AccessInclude;
   isolation_required?: AccessSchemasIsolationRequired;
@@ -6044,7 +6219,7 @@ export type AccessPolicies = {
   precedence?: AccessSchemasPrecedence;
   purpose_justification_prompt?: AccessPurposeJustificationPrompt;
   purpose_justification_required?: AccessSchemasPurposeJustificationRequired;
-  require?: AccessSchemasRequire;
+  require?: AccessComponentsSchemasRequire;
   updated_at?: AccessTimestamp;
 };
 
@@ -6219,10 +6394,10 @@ export type AccessPrecedence = number;
 /**
  * The communication protocol your application secures.
  *
- * @example ssh
+ * @example SSH
  * @x-auditable true
  */
-export type AccessProtocol = 'ssh';
+export type AccessProtocol = 'SSH';
 
 /**
  * The public key to add to your SSH server configuration.
@@ -6288,7 +6463,7 @@ export type AccessRdpProps = {
    *
    * @example rdp
    */
-  type: string;
+  type: AccessType & void;
 };
 
 /**
@@ -6447,33 +6622,6 @@ export type AccessResponses = {
   status?: string;
 };
 
-export type AccessResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
-
 export type AccessReusablePoliciesComponentsSchemasIdResponse = AccessApiResponseSingle & {
   result?: {
     id?: AccessSchemasUuid;
@@ -6515,6 +6663,7 @@ export type AccessRule =
   | AccessIpRule
   | AccessOktaGroupRule
   | AccessSamlGroupRule
+  | AccessOidcClaimRule
   | AccessServiceTokenRule;
 
 export type AccessSaasProps = {
@@ -6531,7 +6680,7 @@ export type AccessSaasProps = {
    *
    * @example saas
    */
-  type?: string;
+  type?: AccessType & void;
 };
 
 /**
@@ -6587,6 +6736,8 @@ export type AccessSaml = {
     issuer_url?: string;
     /**
      * Sign the SAML authentication request with Access credentials. To verify the signature, use the public key from the Access certs endpoints.
+     *
+     * @default false
      */
     sign_request?: boolean;
     /**
@@ -6606,13 +6757,17 @@ export type AccessSaml = {
     /**
      * A flag to enable or disable SCIM for the identity provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
      *
+     * @default no_action
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -6624,7 +6779,9 @@ export type AccessSaml = {
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -6636,7 +6793,9 @@ export type AccessSaml = {
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -6856,7 +7015,7 @@ export type AccessSchemasAppLauncherProps = {
    * @example App Launcher
    */
   name?: AccessAppsComponentsSchemasName;
-  session_duration?: AccessSchemasSessionDuration;
+  session_duration?: AccessAppsComponentsSchemasSessionDuration;
   /**
    * The application type.
    *
@@ -6944,7 +7103,7 @@ export type AccessSchemasAzureAD = {
   /**
    * The configuration parameters for the identity provider. To view the required parameters for a specific provider, refer to our [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
    */
-  config: AccessGenericOauthConfig & {
+  config: AccessSchemasGenericOauthConfig & {
     /**
      * Should Cloudflare try to load authentication contexts from your account
      */
@@ -6972,10 +7131,16 @@ export type AccessSchemasAzureAD = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @default no_action
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -6984,6 +7149,9 @@ export type AccessSchemasAzureAD = {
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -6994,6 +7162,9 @@ export type AccessSchemasAzureAD = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -7039,7 +7210,7 @@ export type AccessSchemasBisoProps = {
    * @example Clientless Web Isolation
    */
   name?: AccessAppsComponentsSchemasName;
-  session_duration?: AccessSchemasSessionDuration;
+  session_duration?: AccessAppsComponentsSchemasSessionDuration;
   /**
    * The application type.
    *
@@ -7079,7 +7250,7 @@ export type AccessSchemasCentrify = {
   /**
    * The configuration parameters for the identity provider. To view the required parameters for a specific provider, refer to our [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
    */
-  config: AccessGenericOauthConfig & {
+  config: AccessSchemasGenericOauthConfig & {
     /**
      * Your centrify account url
      *
@@ -7101,10 +7272,16 @@ export type AccessSchemasCentrify = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @default no_action
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -7113,6 +7290,9 @@ export type AccessSchemasCentrify = {
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -7123,6 +7303,9 @@ export type AccessSchemasCentrify = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -7275,7 +7458,7 @@ export type AccessSchemasFacebook = {
   /**
    * The configuration parameters for the identity provider. To view the required parameters for a specific provider, refer to our [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
    */
-  config: AccessGenericOauthConfig;
+  config: AccessSchemasGenericOauthConfig;
   id?: AccessUuid;
   name: AccessComponentsSchemasName;
   /**
@@ -7284,10 +7467,16 @@ export type AccessSchemasFacebook = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @default no_action
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -7296,6 +7485,9 @@ export type AccessSchemasFacebook = {
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -7306,6 +7498,9 @@ export type AccessSchemasFacebook = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -7336,7 +7531,7 @@ export type AccessSchemasFeatureAppProps = {
   auto_redirect_to_identity?: AccessSchemasAutoRedirectToIdentity;
   domain?: AccessComponentsSchemasDomain;
   name?: AccessAppsComponentsSchemasName;
-  session_duration?: AccessSchemasSessionDuration;
+  session_duration?: AccessAppsComponentsSchemasSessionDuration;
   type: AccessComponentsSchemasType;
 };
 
@@ -7347,11 +7542,27 @@ export type AccessSchemasFeatureAppProps = {
  */
 export type AccessSchemasGatewaySeat = boolean;
 
+export type AccessSchemasGenericOauthConfig = {
+  /**
+   * Your OAuth Client ID
+   *
+   * @example <your client id>
+   */
+  client_id?: string;
+  /**
+   * Your OAuth Client Secret
+   *
+   * @example <your client secret>
+   * @x-sensitive true
+   */
+  client_secret?: string;
+};
+
 export type AccessSchemasGithub = {
   /**
    * The configuration parameters for the identity provider. To view the required parameters for a specific provider, refer to our [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
    */
-  config: AccessGenericOauthConfig;
+  config: AccessSchemasGenericOauthConfig;
   id?: AccessUuid;
   name: AccessComponentsSchemasName;
   /**
@@ -7360,10 +7571,16 @@ export type AccessSchemasGithub = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @default no_action
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -7372,6 +7589,9 @@ export type AccessSchemasGithub = {
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -7382,6 +7602,9 @@ export type AccessSchemasGithub = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -7411,7 +7634,7 @@ export type AccessSchemasGoogle = {
   /**
    * The configuration parameters for the identity provider. To view the required parameters for a specific provider, refer to our [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
    */
-  config: AccessGenericOauthConfig;
+  config: AccessSchemasGenericOauthConfig;
   id?: AccessUuid;
   name: AccessComponentsSchemasName;
   /**
@@ -7420,10 +7643,16 @@ export type AccessSchemasGoogle = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @default no_action
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -7432,6 +7661,9 @@ export type AccessSchemasGoogle = {
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -7442,6 +7674,9 @@ export type AccessSchemasGoogle = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -7471,7 +7706,7 @@ export type AccessSchemasGoogleApps = {
   /**
    * The configuration parameters for the identity provider. To view the required parameters for a specific provider, refer to our [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
    */
-  config: AccessGenericOauthConfig & {
+  config: AccessSchemasGenericOauthConfig & {
     /**
      * Your companies TLD
      *
@@ -7487,10 +7722,16 @@ export type AccessSchemasGoogleApps = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @default no_action
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -7499,6 +7740,9 @@ export type AccessSchemasGoogleApps = {
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -7509,6 +7753,9 @@ export type AccessSchemasGoogleApps = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -7565,6 +7812,7 @@ export type AccessSchemasIdResponse = AccessApiResponseSingle & {
  *
  * @example 699d98642c564d2e855e9661899b7252
  * @maxLength 32
+ * @x-auditable true
  */
 export type AccessSchemasIdentifier = AccessIdentifier & void;
 
@@ -7581,10 +7829,16 @@ export type AccessSchemasIdentityProvider = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @default no_action
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -7593,6 +7847,9 @@ export type AccessSchemasIdentityProvider = {
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -7603,6 +7860,9 @@ export type AccessSchemasIdentityProvider = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -7644,6 +7904,11 @@ export type AccessSchemasIdentityProviders =
   | AccessSchemasYandex;
 
 /**
+ * Rules evaluated with an OR logical operator. A user needs to meet only one of the Include rules.
+ */
+export type AccessSchemasInclude = AccessRule[];
+
+/**
  * Lock all settings as Read-Only in the Dashboard, regardless of user permission. Updates may only be made via the API or Terraform for this account when enabled.
  *
  * @example false
@@ -7662,7 +7927,7 @@ export type AccessSchemasLinkedin = {
   /**
    * The configuration parameters for the identity provider. To view the required parameters for a specific provider, refer to our [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
    */
-  config: AccessGenericOauthConfig;
+  config: AccessSchemasGenericOauthConfig;
   id?: AccessUuid;
   name: AccessComponentsSchemasName;
   /**
@@ -7671,10 +7936,16 @@ export type AccessSchemasLinkedin = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @default no_action
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -7683,6 +7954,9 @@ export type AccessSchemasLinkedin = {
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -7693,6 +7967,9 @@ export type AccessSchemasLinkedin = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -7771,7 +8048,7 @@ export type AccessSchemasOidc = {
   /**
    * The configuration parameters for the identity provider. To view the required parameters for a specific provider, refer to our [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
    */
-  config: AccessGenericOauthConfig & {
+  config: AccessSchemasGenericOauthConfig & {
     /**
      * The authorization_endpoint URL of your IdP
      *
@@ -7814,10 +8091,16 @@ export type AccessSchemasOidc = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @default no_action
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -7826,6 +8109,9 @@ export type AccessSchemasOidc = {
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -7836,6 +8122,9 @@ export type AccessSchemasOidc = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -8003,7 +8292,7 @@ export type AccessSchemasOkta = {
   /**
    * The configuration parameters for the identity provider. To view the required parameters for a specific provider, refer to our [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
    */
-  config: AccessGenericOauthConfig & {
+  config: AccessSchemasGenericOauthConfig & {
     /**
      * Your okta account url
      *
@@ -8019,10 +8308,16 @@ export type AccessSchemasOkta = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @default no_action
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -8031,6 +8326,9 @@ export type AccessSchemasOkta = {
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -8041,6 +8339,9 @@ export type AccessSchemasOkta = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -8070,7 +8371,7 @@ export type AccessSchemasOnelogin = {
   /**
    * The configuration parameters for the identity provider. To view the required parameters for a specific provider, refer to our [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
    */
-  config: AccessGenericOauthConfig & {
+  config: AccessSchemasGenericOauthConfig & {
     /**
      * Your OneLogin account url
      *
@@ -8086,10 +8387,16 @@ export type AccessSchemasOnelogin = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @default no_action
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -8098,6 +8405,9 @@ export type AccessSchemasOnelogin = {
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -8108,6 +8418,9 @@ export type AccessSchemasOnelogin = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -8148,10 +8461,16 @@ export type AccessSchemasOnetimepin = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @default no_action
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -8160,6 +8479,9 @@ export type AccessSchemasOnetimepin = {
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -8170,6 +8492,9 @@ export type AccessSchemasOnetimepin = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -8195,6 +8520,14 @@ export type AccessSchemasOnetimepin = {
     | 'yandex';
 };
 
+/**
+ * Allows options preflight requests to bypass Access authentication and go directly to the origin. Cannot turn on if cors_headers is set.
+ *
+ * @default false
+ * @example true
+ */
+export type AccessSchemasOptionsPreflightBypass = boolean;
+
 export type AccessSchemasOrganizations = {
   auth_domain?: AccessSchemasAuthDomain;
   created_at?: AccessTimestamp;
@@ -8210,7 +8543,7 @@ export type AccessSchemasPingone = {
   /**
    * The configuration parameters for the identity provider. To view the required parameters for a specific provider, refer to our [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
    */
-  config: AccessGenericOauthConfig & {
+  config: AccessSchemasGenericOauthConfig & {
     /**
      * Your PingOne environment identifier
      *
@@ -8226,10 +8559,16 @@ export type AccessSchemasPingone = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @default no_action
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -8238,6 +8577,9 @@ export type AccessSchemasPingone = {
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -8248,6 +8590,9 @@ export type AccessSchemasPingone = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -8442,10 +8787,16 @@ export type AccessSchemasSaml = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @default no_action
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -8454,6 +8805,9 @@ export type AccessSchemasSaml = {
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -8464,6 +8818,9 @@ export type AccessSchemasSaml = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -8660,10 +9017,10 @@ export type AccessSchemasSelfHostedProps = {
   http_only_cookie_attribute?: AccessHttpOnlyCookieAttribute;
   logo_url?: AccessLogoUrl;
   name?: AccessAppsComponentsSchemasName;
-  options_preflight_bypass?: AccessOptionsPreflightBypass;
+  options_preflight_bypass?: AccessSchemasOptionsPreflightBypass;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
-  session_duration?: AccessSchemasSessionDuration;
+  session_duration?: AccessAppsComponentsSchemasSessionDuration;
   skip_interstitial?: AccessSkipInterstitial;
   /**
    * The application type.
@@ -8683,6 +9040,7 @@ export type AccessSchemasServiceTokens = {
    *
    * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
    * @maxLength 36
+   * @x-auditable true
    */
   id?: void & AccessUuid;
   last_seen_at?: AccessTimestamp;
@@ -8691,7 +9049,7 @@ export type AccessSchemasServiceTokens = {
 };
 
 /**
- * The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h.
+ * The amount of time that tokens issued for this application will be valid. Must be in the format `300ms` or `2h45m`. Valid time units are: ns, us (or µs), ms, s, m, h. Note: unsupported for infrastructure type applications.
  *
  * @default 24h
  * @example 24h
@@ -8736,10 +9094,10 @@ export type AccessSchemasSshProps = {
   http_only_cookie_attribute?: AccessHttpOnlyCookieAttribute;
   logo_url?: AccessLogoUrl;
   name?: AccessAppsComponentsSchemasName;
-  options_preflight_bypass?: AccessOptionsPreflightBypass;
+  options_preflight_bypass?: AccessSchemasOptionsPreflightBypass;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
-  session_duration?: AccessSchemasSessionDuration;
+  session_duration?: AccessAppsComponentsSchemasSessionDuration;
   skip_interstitial?: AccessSkipInterstitial;
   /**
    * The application type.
@@ -8798,10 +9156,10 @@ export type AccessSchemasVncProps = {
   http_only_cookie_attribute?: AccessHttpOnlyCookieAttribute;
   logo_url?: AccessLogoUrl;
   name?: AccessAppsComponentsSchemasName;
-  options_preflight_bypass?: AccessOptionsPreflightBypass;
+  options_preflight_bypass?: AccessSchemasOptionsPreflightBypass;
   same_site_cookie_attribute?: AccessSameSiteCookieAttribute;
   service_auth_401_redirect?: AccessServiceAuth401Redirect;
-  session_duration?: AccessSchemasSessionDuration;
+  session_duration?: AccessAppsComponentsSchemasSessionDuration;
   skip_interstitial?: AccessSkipInterstitial;
   /**
    * The application type.
@@ -8823,7 +9181,7 @@ export type AccessSchemasWarpProps = {
    * @example Warp Login App
    */
   name?: AccessAppsComponentsSchemasName;
-  session_duration?: AccessSchemasSessionDuration;
+  session_duration?: AccessAppsComponentsSchemasSessionDuration;
   /**
    * The application type.
    *
@@ -8836,7 +9194,7 @@ export type AccessSchemasYandex = {
   /**
    * The configuration parameters for the identity provider. To view the required parameters for a specific provider, refer to our [developer documentation](https://developers.cloudflare.com/cloudflare-one/identity/idp-integration/).
    */
-  config: AccessGenericOauthConfig;
+  config: AccessSchemasGenericOauthConfig;
   id?: AccessUuid;
   name: AccessComponentsSchemasName;
   /**
@@ -8845,10 +9203,16 @@ export type AccessSchemasYandex = {
   scim_config?: {
     /**
      * A flag to enable or disable SCIM for the identity provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
+     *
+     * @default no_action
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -8857,6 +9221,9 @@ export type AccessSchemasYandex = {
     scim_base_url?: string;
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -8867,6 +9234,9 @@ export type AccessSchemasYandex = {
     secret?: string;
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
+     *
+     * @default false
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -9146,7 +9516,7 @@ export type AccessSelfHostedProps = {
    *
    * @example self_hosted
    */
-  type: string;
+  type: AccessType & void;
 };
 
 export type AccessServiceTokens = {
@@ -9159,6 +9529,7 @@ export type AccessServiceTokens = {
    *
    * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
    * @maxLength 36
+   * @x-auditable true
    */
   id?: void & AccessUuid;
   last_seen_at?: AccessTimestamp;
@@ -9300,7 +9671,7 @@ export type AccessSshProps = {
    *
    * @example ssh
    */
-  type: string;
+  type: AccessType & void;
 };
 
 /**
@@ -9378,6 +9749,7 @@ export type AccessTargetCriteria = {
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type AccessTimestamp = string;
 
@@ -9603,6 +9975,7 @@ export type AccessUsersErrored = number;
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
+ * @x-auditable true
  */
 export type AccessUuid = string;
 
@@ -9637,7 +10010,7 @@ export type AccessVncProps = {
    *
    * @example vnc
    */
-  type: string;
+  type: AccessType & void;
 };
 
 /**
@@ -9689,13 +10062,17 @@ export type AccessYandex = {
     /**
      * A flag to enable or disable SCIM for the identity provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     enabled?: boolean;
     /**
      * Indicates how a SCIM event updates a user identity used for policy evaluation. Use "automatic" to automatically update a user's identity and augment it with fields from the SCIM user resource. Use "reauth" to force re-authentication on group membership updates, user identity update will only occur after successful re-authentication. With "reauth" identities will not contain fields from the SCIM user resource. With "no_action" identities will not be changed by SCIM updates in any way and users will not be prompted to reauthenticate.
      *
+     * @default no_action
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     identity_update_behavior?: 'automatic' | 'reauth' | 'no_action';
     /**
@@ -9707,7 +10084,9 @@ export type AccessYandex = {
     /**
      * A flag to remove a user's seat in Zero Trust when they have been deprovisioned in the Identity Provider.  This cannot be enabled unless user_deprovision is also enabled.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     seat_deprovision?: boolean;
     /**
@@ -9719,7 +10098,9 @@ export type AccessYandex = {
     /**
      * A flag to enable revoking a user's session in Access and Gateway when they have been deprovisioned in the Identity Provider.
      *
+     * @default false
      * @x-auditable true
+     * @x-stainless-terraform-configurability computed_optional
      */
     user_deprovision?: boolean;
   };
@@ -9802,7 +10183,32 @@ export type AddressingAdvertisedResponse = AddressingApiResponseSingle & {
 };
 
 export type AddressingApiResponseCollection = AddressingApiResponseCommon & {
-  result_info?: AddressingResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type AddressingApiResponseCommon = {
@@ -9993,13 +10399,6 @@ export type AddressingDescription = string;
 export type AddressingEnabled = boolean | null;
 
 /**
- * A digest of the IP data. Useful for determining if the data has changed.
- *
- * @example a8e453d9d129a3769407127936edfdb0
- */
-export type AddressingEtag = string;
-
-/**
  * Name of LOA document. Max file size 10MB, and supported filetype is pdf.
  *
  * @example site_loa_doc.pdf
@@ -10009,7 +10408,7 @@ export type AddressingFilename = string;
 
 export type AddressingFullResponse = AddressingApiResponseSingle & {
   result?: AddressingAddressMaps & {
-    ips?: AddressingSchemasIps;
+    ips?: AddressingIps;
     memberships?: AddressingMemberships;
   };
 };
@@ -10082,33 +10481,10 @@ export type AddressingIpamPrefixes = {
   on_demand_locked?: AddressingOnDemandLocked;
 };
 
-export type AddressingIps = {
-  etag?: AddressingEtag;
-  ipv4_cidrs?: AddressingIpv4Cidrs;
-  ipv6_cidrs?: AddressingIpv6Cidrs;
-};
-
-export type AddressingIpsJdcloud = {
-  etag?: AddressingEtag;
-  ipv4_cidrs?: AddressingIpv4Cidrs;
-  ipv6_cidrs?: AddressingIpv6Cidrs;
-  jdcloud_cidrs?: AddressingJdcloudCidrs;
-};
-
 /**
- * List of Cloudflare IPv4 CIDR addresses.
+ * The set of IPs on the Address Map.
  */
-export type AddressingIpv4Cidrs = string[];
-
-/**
- * List of Cloudflare IPv6 CIDR addresses.
- */
-export type AddressingIpv6Cidrs = string[];
-
-/**
- * List IPv4 and IPv6 CIDRs, only populated if `?networks=jdcloud` is used.
- */
-export type AddressingJdcloudCidrs = string[];
+export type AddressingIps = AddressingAddressMapsIp[];
 
 /**
  * The type of the membership.
@@ -10211,33 +10587,6 @@ export type AddressingResponseCollectionBgp = AddressingApiResponseCollection & 
   result?: AddressingIpamBgpPrefixes[];
 };
 
-export type AddressingResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
-
 /**
  * Advertisement status of the prefix. If `true`, the BGP route for the prefix is advertised to the Internet. If
  * `false`, the BGP route is withdrawn.
@@ -10262,11 +10611,6 @@ export type AddressingSchemasCanDelete = boolean;
  * @x-auditable true
  */
 export type AddressingSchemasDescription = string | null;
-
-/**
- * The set of IPs on the Address Map.
- */
-export type AddressingSchemasIps = AddressingAddressMapsIp[];
 
 export type AddressingSchemasResponseCollection = AddressingApiResponseCollection & {
   result?: AddressingIpamDelegations[];
@@ -10330,6 +10674,7 @@ export type AddressingSizeBytes = number;
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type AddressingTimestamp = string;
 
@@ -10368,7 +10713,32 @@ export type AddressingWithdrawIfNoRoute = boolean;
 export type AddressingZoneIdentifier = string;
 
 export type ApiShieldApiResponseCollection = ApiShieldApiResponseCommon & {
-  result_info?: ApiShieldResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type ApiShieldApiResponseCommon = {
@@ -10626,6 +10996,7 @@ export type ApiShieldHost = string;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type ApiShieldIdentifier = string;
 
@@ -11020,33 +11391,6 @@ export type ApiShieldResponseUserSchemasHosts = {
   schema_id: ApiShieldSchemasUuid;
 };
 
-export type ApiShieldResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
-
 export type ApiShieldSchemaResponseWithThresholds = ApiShieldApiResponseCommon & {
   result: {
     schemas?: ApiShieldOpenapiWithThresholds[];
@@ -11241,6 +11585,7 @@ export type ApiShieldSuggestedThreshold = number;
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type ApiShieldTimestamp = string;
 
@@ -11270,6 +11615,7 @@ export type ApiShieldTrafficStats = {
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
+ * @x-auditable true
  */
 export type ApiShieldUuid = string;
 
@@ -11504,7 +11850,7 @@ export type BillSubsApiAccountSubscriptionResponseCollection = BillSubsApiApiRes
 };
 
 export type BillSubsApiAccountSubscriptionResponseSingle = BillSubsApiApiResponseSingle & {
-  result?: Record<string, any>;
+  result?: BillSubsApiSubscription;
 };
 
 /**
@@ -12082,16 +12428,17 @@ export type BillSubsApiZone = {
 };
 
 export type BillSubsApiZoneSubscriptionResponseSingle = BillSubsApiApiResponseSingle & {
-  result?: Record<string, any>;
+  result?: BillSubsApiSubscription;
 };
 
 /**
- * Enable rule to block AI Scrapers and Crawlers.
+ * Enable rule to block AI Scrapers and Crawlers. Please note the value `only_on_ad_pages` is currently not available for Enterprise customers.
  *
  * @example block
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
-export type BotManagementAiBotsProtection = 'block' | 'disabled';
+export type BotManagementAiBotsProtection = 'block' | 'disabled' | 'only_on_ad_pages';
 
 export type BotManagementApiResponseCommon = {
   errors: BotManagementMessages;
@@ -12127,6 +12474,7 @@ export type BotManagementApiResponseSingle = BotManagementApiResponseCommon;
  *
  * @example true
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type BotManagementAutoUpdateModel = boolean;
 
@@ -12187,6 +12535,7 @@ export type BotManagementConfigSingle =
  *
  * @example enabled
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type BotManagementCrawlerProtection = 'enabled' | 'disabled';
 
@@ -12195,6 +12544,7 @@ export type BotManagementCrawlerProtection = 'enabled' | 'disabled';
  *
  * @example true
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type BotManagementEnableJs = boolean;
 
@@ -12203,6 +12553,7 @@ export type BotManagementEnableJs = boolean;
  *
  * @example true
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type BotManagementFightMode = boolean;
 
@@ -12210,6 +12561,7 @@ export type BotManagementFightMode = boolean;
  * Indicates that the zone's Bot Fight Mode is turned on.
  *
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type BotManagementFightModeTurnedOn = boolean;
 
@@ -12218,6 +12570,7 @@ export type BotManagementFightModeTurnedOn = boolean;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type BotManagementIdentifier = string;
 
@@ -12238,6 +12591,7 @@ export type BotManagementMessages = {
  *
  * @example true
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type BotManagementOptimizeWordpress = boolean;
 
@@ -12245,6 +12599,7 @@ export type BotManagementOptimizeWordpress = boolean;
  * Indicates that the zone's wordpress optimization for SBFM is turned on.
  *
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type BotManagementOptimizeWordpressTurnedOn = boolean;
 
@@ -12253,6 +12608,7 @@ export type BotManagementOptimizeWordpressTurnedOn = boolean;
  *
  * @example allow
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type BotManagementSbfmDefinitelyAutomated = 'allow' | 'block' | 'managed_challenge';
 
@@ -12282,6 +12638,7 @@ export type BotManagementSbfmDefinitelyConfig = BotManagementBaseConfig & {
  *
  * @example allow
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type BotManagementSbfmLikelyAutomated = 'allow' | 'block' | 'managed_challenge';
 
@@ -12313,6 +12670,7 @@ export type BotManagementSbfmLikelyConfig = BotManagementBaseConfig & {
  *
  * @example true
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type BotManagementSbfmStaticResourceProtection = boolean;
 
@@ -12328,6 +12686,7 @@ export type BotManagementSbfmStaticResourceProtectionTurnedOn = string;
  *
  * @example allow
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type BotManagementSbfmVerifiedBots = 'allow' | 'block';
 
@@ -12335,6 +12694,7 @@ export type BotManagementSbfmVerifiedBots = 'allow' | 'block';
  * Indicates that the zone's verified bot requests are being blocked.
  *
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type BotManagementSbfmVerifiedBotsTurnedOn = string;
 
@@ -12344,6 +12704,7 @@ export type BotManagementSbfmVerifiedBotsTurnedOn = string;
  * @default false
  * @example false
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type BotManagementSuppressSessionScore = boolean;
 
@@ -12351,6 +12712,7 @@ export type BotManagementSuppressSessionScore = boolean;
  * Indicates that the zone's session score tracking is disabled.
  *
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type BotManagementSuppressSessionScoreTurnedOff = boolean;
 
@@ -12359,8 +12721,81 @@ export type BotManagementSuppressSessionScoreTurnedOff = boolean;
  *
  * @example true
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type BotManagementUsingLatestModel = boolean;
+
+export type BrandProtectionApiError = {
+  /**
+   * Error code
+   */
+  code?: number;
+  /**
+   * Errors
+   */
+  errors?: {
+    [key: string]: any;
+  };
+  /**
+   * Error message
+   */
+  message?: string;
+  /**
+   * Error name
+   */
+  status?: string;
+};
+
+export type BrandProtectionApiImageFile = {
+  /**
+   * @format binary
+   */
+  image?: Blob;
+};
+
+export type BrandProtectionApiLogo = {
+  id?: number;
+  tag?: string;
+  upload_path?: string;
+};
+
+export type BrandProtectionApiLogoMatch = {
+  matches?: {
+    [key: string]: any;
+  }[];
+  total?: number;
+};
+
+export type BrandProtectionApiPaginationMetadata = {
+  first_page?: number;
+  last_page?: number;
+  next_page?: number;
+  page?: number;
+  previous_page?: number;
+  total?: number;
+  total_pages?: number;
+};
+
+export type BrandProtectionApiQuery = {
+  /**
+   * @format date-time
+   */
+  max_time?: string | null;
+  /**
+   * @format date-time
+   */
+  min_time?: string | null;
+  scan?: boolean;
+  string_matches?: void;
+  tag?: string;
+};
+
+export type BrandProtectionApiQueryMatch = {
+  matches?: {
+    [key: string]: any;
+  }[];
+  total?: number;
+};
 
 export type CachePurgeEverything = {
   /**
@@ -12486,6 +12921,7 @@ export type CachePurgeMessages = {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type CachePurgeSchemasIdentifier = string;
 
@@ -12496,6 +12932,7 @@ export type CacheRulesAegis = {
   /**
    * ID of the zone setting.
    *
+   * @x-auditable true
    * @example aegis
    */
   id: 'aegis';
@@ -12504,6 +12941,7 @@ export type CacheRulesAegis = {
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string | null;
   value?: CacheRulesAegisValue;
@@ -12519,12 +12957,15 @@ export type CacheRulesAegisResponseValue = {
 export type CacheRulesAegisValue = {
   /**
    * Whether the feature is enabled or not.
+   *
+   * @x-auditable true
    */
   enabled?: boolean;
   /**
    * Egress pool id which refers to a grouping of dedicated egress IPs through which Cloudflare will connect to origin.
    *
    * @example pool-id
+   * @x-auditable true
    */
   pool_id?: string;
 };
@@ -12559,6 +13000,8 @@ export type CacheRulesApiResponseCommonFailure = {
 export type CacheRulesBase = {
   /**
    * Identifier of the zone setting.
+   *
+   * @x-auditable true
    */
   id: string;
   /**
@@ -12566,6 +13009,7 @@ export type CacheRulesBase = {
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string | null;
 };
@@ -12577,6 +13021,7 @@ export type CacheRulesCacheReserve = {
   /**
    * ID of the zone setting.
    *
+   * @x-auditable true
    * @example cache_reserve
    */
   id: 'cache_reserve';
@@ -12585,6 +13030,7 @@ export type CacheRulesCacheReserve = {
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string | null;
 };
@@ -12596,6 +13042,7 @@ export type CacheRulesCacheReserveClear = {
   /**
    * ID of the zone setting.
    *
+   * @x-auditable true
    * @example cache_reserve_clear
    */
   id: 'cache_reserve_clear';
@@ -12604,6 +13051,7 @@ export type CacheRulesCacheReserveClear = {
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string | null;
 };
@@ -12613,6 +13061,7 @@ export type CacheRulesCacheReserveClear = {
  *
  * @example 2023-10-02T12:00:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type CacheRulesCacheReserveClearEndTs = string;
 
@@ -12632,6 +13081,7 @@ export type CacheRulesCacheReserveClearResponseValue = {
  *
  * @example 2023-10-02T10:00:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type CacheRulesCacheReserveClearStartTs = string;
 
@@ -12639,6 +13089,7 @@ export type CacheRulesCacheReserveClearStartTs = string;
  * The current state of the Cache Reserve Clear operation.
  *
  * @example In-progress
+ * @x-auditable true
  */
 export type CacheRulesCacheReserveClearState = 'In-progress' | 'Completed';
 
@@ -12655,6 +13106,7 @@ export type CacheRulesCacheReserveResponseValue = {
  * Value of the Cache Reserve zone setting.
  *
  * @default off
+ * @x-auditable true
  */
 export type CacheRulesCacheReserveValue = 'on' | 'off';
 
@@ -12663,6 +13115,7 @@ export type CacheRulesCacheReserveValue = 'on' | 'off';
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type CacheRulesIdentifier = string;
 
@@ -12681,6 +13134,7 @@ export type CacheRulesOriginH2MaxStreams = {
   /**
    * Value of the zone setting.
    *
+   * @x-auditable true
    * @example origin_h2_max_streams
    */
   id: 'origin_h2_max_streams';
@@ -12689,6 +13143,7 @@ export type CacheRulesOriginH2MaxStreams = {
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string | null;
   value?: CacheRulesOriginH2MaxStreamsValue;
@@ -12704,6 +13159,7 @@ export type CacheRulesOriginH2MaxStreamsResponseValue = {
  * @example 50
  * @maximum 1000
  * @minimum 1
+ * @x-auditable true
  */
 export type CacheRulesOriginH2MaxStreamsValue = number;
 
@@ -12714,6 +13170,7 @@ export type CacheRulesOriginMaxHttpVersion = {
   /**
    * Value of the zone setting.
    *
+   * @x-auditable true
    * @example origin_max_http_version
    */
   id: 'origin_max_http_version';
@@ -12722,6 +13179,7 @@ export type CacheRulesOriginMaxHttpVersion = {
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string | null;
   value?: CacheRulesOriginMaxHttpVersionValue;
@@ -12733,6 +13191,8 @@ export type CacheRulesOriginMaxHttpVersionResponseValue = {
 
 /**
  * Value of the Origin Max HTTP Version Setting.
+ *
+ * @x-auditable true
  */
 export type CacheRulesOriginMaxHttpVersionValue = '2' | '1';
 
@@ -12743,6 +13203,7 @@ export type CacheRulesOriginPostQuantumEncryption = {
   /**
    * Value of the zone setting.
    *
+   * @x-auditable true
    * @example origin_pqe
    */
   id: 'origin_pqe';
@@ -12751,6 +13212,7 @@ export type CacheRulesOriginPostQuantumEncryption = {
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string | null;
 };
@@ -12768,6 +13230,7 @@ export type CacheRulesOriginPostQuantumEncryptionResponseValue = {
  * Value of the Origin Post Quantum Encryption Setting.
  *
  * @default supported
+ * @x-auditable true
  */
 export type CacheRulesOriginPostQuantumEncryptionValue = 'preferred' | 'supported' | 'off';
 
@@ -12785,6 +13248,7 @@ export type CacheRulesRegionalTieredCache = {
   /**
    * ID of the zone setting.
    *
+   * @x-auditable true
    * @example tc_regional
    */
   id: 'tc_regional';
@@ -12793,6 +13257,7 @@ export type CacheRulesRegionalTieredCache = {
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string | null;
 };
@@ -12810,26 +13275,34 @@ export type CacheRulesRegionalTieredCacheResponseValue = {
  * Value of the Regional Tiered Cache zone setting.
  *
  * @default off
+ * @x-auditable true
  */
 export type CacheRulesRegionalTieredCacheValue = 'on' | 'off';
 
 export type CacheRulesResultObject = {
   /**
    * Whether the setting is editable
+   *
+   * @x-auditable true
    */
   editable: boolean;
   /**
    * The identifier of the caching setting
+   *
+   * @x-auditable true
    */
   id: string;
   /**
    * The time when the setting was last modified
    *
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string;
   /**
    * The value of the feature
+   *
+   * @x-auditable true
    */
   value: string;
 };
@@ -12837,20 +13310,27 @@ export type CacheRulesResultObject = {
 export type CacheRulesResultObjectComplex = {
   /**
    * Whether the setting is editable
+   *
+   * @x-auditable true
    */
   editable: boolean;
   /**
    * The identifier of the caching setting
+   *
+   * @x-auditable true
    */
   id: string;
   /**
    * The time when the setting was last modified
    *
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string;
   /**
    * The value of the feature
+   *
+   * @x-auditable true
    */
   value: Record<string, any>;
 };
@@ -12858,16 +13338,21 @@ export type CacheRulesResultObjectComplex = {
 export type CacheRulesResultObjectDelete = {
   /**
    * Whether the setting is editable
+   *
+   * @x-auditable true
    */
   editable: boolean;
   /**
    * The identifier of the caching setting
+   *
+   * @x-auditable true
    */
   id: string;
   /**
    * The time when the setting was last modified
    *
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string;
 };
@@ -12876,6 +13361,7 @@ export type CacheRulesSmartTieredCache = {
   /**
    * ID of the zone setting.
    *
+   * @x-auditable true
    * @example tiered_cache_smart_topology_enable
    */
   id: 'tiered_cache_smart_topology_enable';
@@ -12884,6 +13370,7 @@ export type CacheRulesSmartTieredCache = {
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string | null;
 };
@@ -12896,6 +13383,7 @@ export type CacheRulesSmartTieredCachePatch = {
    * Enable or disable the Smart Tiered Cache
    *
    * @example on
+   * @x-auditable true
    */
   value: 'on' | 'off';
 };
@@ -12910,6 +13398,7 @@ export type CacheRulesSmartTieredCacheResponseValue = {
  * Value of the Smart Tiered Cache zone setting.
  *
  * @default off
+ * @x-auditable true
  */
 export type CacheRulesSmartTieredCacheValue = 'on' | 'off';
 
@@ -12917,6 +13406,7 @@ export type CacheRulesTieredCache = {
   /**
    * ID of the zone setting.
    *
+   * @x-auditable true
    * @example tiered_caching
    */
   id: 'tiered_caching';
@@ -12925,6 +13415,7 @@ export type CacheRulesTieredCache = {
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string | null;
 };
@@ -12939,6 +13430,7 @@ export type CacheRulesTieredCacheResponseValue = {
  * Value of the Tiered Cache zone setting.
  *
  * @default off
+ * @x-auditable true
  */
 export type CacheRulesTieredCacheValue = 'on' | 'off';
 
@@ -12946,6 +13438,7 @@ export type CacheRulesTieredCacheValue = 'on' | 'off';
  * Enables Tiered Caching.
  *
  * @example on
+ * @x-auditable true
  */
 export type CacheRulesValue = 'on' | 'off';
 
@@ -12956,6 +13449,7 @@ export type CacheRulesVariants = {
   /**
    * ID of the zone setting.
    *
+   * @x-auditable true
    * @example variants
    */
   id: 'variants';
@@ -12964,6 +13458,7 @@ export type CacheRulesVariants = {
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string | null;
 };
@@ -13121,6 +13616,7 @@ export type CacheAutomaticUpgraderResponse = CacheApiResponseSingle & {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type CacheIdentifier = string;
 
@@ -13165,7 +13661,7 @@ export type CacheResponseBase = {
    */
   modified_on: string;
   /**
-   * next time this zone will be scanned by the Automatic SSL/TLS.
+   * Next time this zone will be scanned by the Automatic SSL/TLS.
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
@@ -13199,13 +13695,7 @@ export type CacheSchemasValue = 'auto' | 'custom';
  */
 export type CacheTimestamp = string;
 
-/**
- * Identifier.
- *
- * @example 023e105f4ecef8ad9ca31a8372d0c353
- * @maxLength 32
- */
-export type CacheZoneIdentifier = void & void & CacheIdentifier;
+export type CacheZoneIdentifier = CacheIdentifier;
 
 /**
  * The account identifier tag.
@@ -13419,6 +13909,7 @@ export type CloudConnectorApiResponseCommonFailure = {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type CloudConnectorIdentifier = string;
 
@@ -13438,24 +13929,29 @@ export type CloudConnectorMessages = {
  * Cloud Provider type
  *
  * @example aws_s3
+ * @x-auditable true
  */
-export type CloudConnectorProvider = 'aws_s3' | 'r2' | 'gcp_storage' | 'azure_storage';
+export type CloudConnectorProvider = 'aws_s3' | 'cloudflare_r2' | 'gcp_storage' | 'azure_storage';
 
 export type CloudConnectorRule = {
   /**
    * @example Rule description
+   * @x-auditable true
    */
   description?: string;
   /**
    * @example true
+   * @x-auditable true
    */
   enabled?: boolean;
   /**
    * @example http.cookie eq "a=b"
+   * @x-auditable true
    */
   expression?: string;
   /**
    * @example 95c365e17e1b46599cd99e5b231fac4e
+   * @x-auditable true
    */
   id?: string;
   /**
@@ -13466,6 +13962,7 @@ export type CloudConnectorRule = {
      * Host to perform Cloud Connection to
      *
      * @example examplebucket.s3.eu-north-1.amazonaws.com
+     * @x-auditable true
      */
     host?: string;
   };
@@ -13771,6 +14268,7 @@ export type CloudforceOneRequestsIdentifier = string;
  *
  * @example DoS
  * @example CVE
+ * @x-auditable true
  */
 export type CloudforceOneRequestsLabels = string[];
 
@@ -13778,6 +14276,7 @@ export type CloudforceOneRequestsLabels = string[];
  * Content of message.
  *
  * @example Can you elaborate on the type of DoS that occurred?
+ * @x-auditable true
  */
 export type CloudforceOneRequestsMessageContent = string;
 
@@ -13793,6 +14292,9 @@ export type CloudforceOneRequestsMessages = {
   };
 }[];
 
+/**
+ * @x-auditable true
+ */
 export type CloudforceOneRequestsPriority = 'routine' | 'high' | 'urgent';
 
 export type CloudforceOneRequestsPriorityEdit = {
@@ -13801,12 +14303,14 @@ export type CloudforceOneRequestsPriorityEdit = {
    * Priority.
    *
    * @example 1
+   * @x-auditable true
    */
   priority: number;
   /**
    * Requirement.
    *
    * @example DoS attacks carried out by CVEs
+   * @x-auditable true
    */
   requirement: string;
   tlp: CloudforceOneRequestsTlp;
@@ -13818,6 +14322,7 @@ export type CloudforceOneRequestsPriorityItem = {
    *
    * @example 2022-04-01T05:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   created: CloudforceOneRequestsTime;
   id: CloudforceOneRequestsUuid;
@@ -13826,12 +14331,14 @@ export type CloudforceOneRequestsPriorityItem = {
    * Priority.
    *
    * @example 1
+   * @x-auditable true
    */
   priority: number;
   /**
    * Requirement.
    *
    * @example DoS attacks carried out by CVEs
+   * @x-auditable true
    */
   requirement: string;
   tlp: CloudforceOneRequestsTlp;
@@ -13840,6 +14347,7 @@ export type CloudforceOneRequestsPriorityItem = {
    *
    * @example 2022-04-01T05:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   updated: CloudforceOneRequestsTime;
 };
@@ -13863,6 +14371,7 @@ export type CloudforceOneRequestsQuota = {
    *
    * @example 2022-04-01T05:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   anniversary_date?: CloudforceOneRequestsTime;
   /**
@@ -13870,18 +14379,21 @@ export type CloudforceOneRequestsQuota = {
    *
    * @example 2022-04-01T05:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   quarter_anniversary_date?: CloudforceOneRequestsTime;
   /**
    * Tokens for the quarter.
    *
    * @example 120
+   * @x-auditable true
    */
   quota?: number;
   /**
    * Tokens remaining for the quarter.
    *
    * @example 64
+   * @x-auditable true
    */
   remaining?: number;
 };
@@ -13896,28 +14408,34 @@ export type CloudforceOneRequestsRequestAssetItem = {
    *
    * @example 2022-04-01T05:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   created?: CloudforceOneRequestsTime;
   /**
    * Asset description.
    *
    * @example example description
+   * @x-auditable true
    */
   description?: string;
   /**
    * Asset file type.
    *
    * @example docx
+   * @x-auditable true
    */
   file_type?: string;
   /**
    * Asset ID.
+   *
+   * @x-auditable true
    */
   id: number;
   /**
    * Asset name.
    *
    * @example example.docx
+   * @x-auditable true
    */
   name: string;
 };
@@ -13974,6 +14492,7 @@ export type CloudforceOneRequestsRequestEdit = {
    * Priority for analyzing the request.
    *
    * @example routine
+   * @x-auditable true
    */
   priority?: string;
   request_type?: CloudforceOneRequestsRequestType;
@@ -13990,6 +14509,7 @@ export type CloudforceOneRequestsRequestItem = {
    * Tokens for the request messages.
    *
    * @example 1
+   * @x-auditable true
    */
   message_tokens?: number;
   priority: CloudforceOneRequestsTime;
@@ -14002,6 +14522,7 @@ export type CloudforceOneRequestsRequestItem = {
    * Tokens for the request.
    *
    * @example 16
+   * @x-auditable true
    */
   tokens?: number;
   updated: CloudforceOneRequestsTime;
@@ -14013,6 +14534,7 @@ export type CloudforceOneRequestsRequestList = {
    *
    * @example 2022-04-01T05:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   completed_after?: CloudforceOneRequestsTime;
   /**
@@ -14020,6 +14542,7 @@ export type CloudforceOneRequestsRequestList = {
    *
    * @example 2022-04-01T05:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   completed_before?: CloudforceOneRequestsTime;
   /**
@@ -14027,6 +14550,7 @@ export type CloudforceOneRequestsRequestList = {
    *
    * @example 2022-04-01T05:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   created_after?: CloudforceOneRequestsTime;
   /**
@@ -14034,6 +14558,7 @@ export type CloudforceOneRequestsRequestList = {
    *
    * @example 2022-04-01T05:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   created_before?: CloudforceOneRequestsTime;
   /**
@@ -14066,6 +14591,7 @@ export type CloudforceOneRequestsRequestListItem = {
    *
    * @example 2022-04-01T05:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   completed?: CloudforceOneRequestsTime;
   /**
@@ -14073,6 +14599,7 @@ export type CloudforceOneRequestsRequestListItem = {
    *
    * @example 2022-04-01T05:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   created: CloudforceOneRequestsTime;
   id: CloudforceOneRequestsUuid;
@@ -14080,6 +14607,7 @@ export type CloudforceOneRequestsRequestListItem = {
    * Tokens for the request messages.
    *
    * @example 16
+   * @x-auditable true
    */
   message_tokens?: number;
   priority: CloudforceOneRequestsPriority;
@@ -14090,6 +14618,8 @@ export type CloudforceOneRequestsRequestListItem = {
   tlp: CloudforceOneRequestsTlp;
   /**
    * Tokens for the request.
+   *
+   * @x-auditable true
    */
   tokens?: number;
   /**
@@ -14097,6 +14627,7 @@ export type CloudforceOneRequestsRequestListItem = {
    *
    * @example 2022-04-01T05:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   updated: CloudforceOneRequestsTime;
 };
@@ -14110,6 +14641,7 @@ export type CloudforceOneRequestsRequestMessageItem = {
    * Author of message.
    *
    * @example user@domain.com
+   * @x-auditable true
    */
   author: string;
   content: CloudforceOneRequestsMessageContent;
@@ -14118,14 +14650,19 @@ export type CloudforceOneRequestsRequestMessageItem = {
    *
    * @example 2022-04-01T05:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   created?: CloudforceOneRequestsTime;
   /**
    * Message ID.
+   *
+   * @x-auditable true
    */
   id: number;
   /**
    * Whether the message is a follow-on request.
+   *
+   * @x-auditable true
    */
   is_follow_on_request: boolean;
   /**
@@ -14133,6 +14670,7 @@ export type CloudforceOneRequestsRequestMessageItem = {
    *
    * @example 2022-04-01T05:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   updated: CloudforceOneRequestsTime;
 };
@@ -14143,6 +14681,7 @@ export type CloudforceOneRequestsRequestMessageList = {
    *
    * @example 2022-04-01T05:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   after?: CloudforceOneRequestsTime;
   /**
@@ -14150,6 +14689,7 @@ export type CloudforceOneRequestsRequestMessageList = {
    *
    * @example 2022-04-01T05:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   before?: CloudforceOneRequestsTime;
   /**
@@ -14178,11 +14718,14 @@ export type CloudforceOneRequestsRequestMessageList = {
  * Readable Request ID.
  *
  * @example RFI-2022-000001
+ * @x-auditable true
  */
 export type CloudforceOneRequestsRequestReadableId = string;
 
 /**
  * Request Status.
+ *
+ * @x-auditable true
  */
 export type CloudforceOneRequestsRequestStatus =
   | 'open'
@@ -14196,6 +14739,7 @@ export type CloudforceOneRequestsRequestStatus =
  * Brief description of the request.
  *
  * @example DoS attack
+ * @x-auditable true
  */
 export type CloudforceOneRequestsRequestSummary = string;
 
@@ -14203,6 +14747,7 @@ export type CloudforceOneRequestsRequestSummary = string;
  * Requested information from request.
  *
  * @example Victomology
+ * @x-auditable true
  */
 export type CloudforceOneRequestsRequestType = string;
 
@@ -14215,11 +14760,14 @@ export type CloudforceOneRequestsRequestTypes = string[];
 /**
  * @example 2022-04-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type CloudforceOneRequestsTime = string;
 
 /**
  * The CISA defined Traffic Light Protocol (TLP).
+ *
+ * @x-auditable true
  */
 export type CloudforceOneRequestsTlp = 'clear' | 'amber' | 'amber-strict' | 'green' | 'red';
 
@@ -14487,6 +15035,8 @@ export type CustomIndicatorFeedsCreateFeedResponse = CustomIndicatorFeedsApiResp
 
 /**
  * The description of the example test
+ *
+ * @x-auditable true
  */
 export type CustomIndicatorFeedsDescription = string;
 
@@ -14494,11 +15044,14 @@ export type CustomIndicatorFeedsDescription = string;
  * Indicator feed ID
  *
  * @example 12
+ * @x-auditable true
  */
 export type CustomIndicatorFeedsFeedId = number;
 
 /**
  * The unique identifier for the indicator feed
+ *
+ * @x-auditable true
  */
 export type CustomIndicatorFeedsId = number;
 
@@ -14507,6 +15060,7 @@ export type CustomIndicatorFeedsId = number;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type CustomIndicatorFeedsIdentifier = string;
 
@@ -14518,6 +15072,7 @@ export type CustomIndicatorFeedsIndicatorFeedItem = {
    * The date and time when the data entry was created
    *
    * @format date-time
+   * @x-auditable true
    */
   created_on?: string;
   description?: CustomIndicatorFeedsDescription;
@@ -14529,6 +15084,7 @@ export type CustomIndicatorFeedsIndicatorFeedItem = {
    * The date and time when the data entry was last modified
    *
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string;
   name?: CustomIndicatorFeedsName;
@@ -14542,6 +15098,7 @@ export type CustomIndicatorFeedsIndicatorFeedMetadata = {
    * The date and time when the data entry was created
    *
    * @format date-time
+   * @x-auditable true
    */
   created_on?: string;
   description?: CustomIndicatorFeedsDescription;
@@ -14551,12 +15108,15 @@ export type CustomIndicatorFeedsIndicatorFeedMetadata = {
   is_public?: CustomIndicatorFeedsIsPublic;
   /**
    * Status of the latest snapshot uploaded
+   *
+   * @x-auditable true
    */
   latest_upload_status?: 'Mirroring' | 'Unifying' | 'Loading' | 'Provisioning' | 'Complete' | 'Error';
   /**
    * The date and time when the data entry was last modified
    *
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string;
   name?: CustomIndicatorFeedsName;
@@ -14582,16 +15142,22 @@ export type CustomIndicatorFeedsIndicatorFeedResponseSingle = CustomIndicatorFee
 
 /**
  * Whether the indicator feed can be attributed to a provider
+ *
+ * @x-auditable true
  */
 export type CustomIndicatorFeedsIsAttributable = boolean;
 
 /**
  * Whether the indicator feed can be downloaded
+ *
+ * @x-auditable true
  */
 export type CustomIndicatorFeedsIsDownloadable = boolean;
 
 /**
  * Whether the indicator feed is exposed to customers
+ *
+ * @x-auditable true
  */
 export type CustomIndicatorFeedsIsPublic = boolean;
 
@@ -14605,6 +15171,8 @@ export type CustomIndicatorFeedsMessages = {
 
 /**
  * The name of the indicator feed
+ *
+ * @x-auditable true
  */
 export type CustomIndicatorFeedsName = string;
 
@@ -14630,12 +15198,14 @@ export type CustomIndicatorFeedsPermissionsRequest = {
    * The Cloudflare account tag of the account to change permissions on
    *
    * @example 823f45f16fd2f7e21e1e054aga4d2859
+   * @x-auditable true
    */
   account_tag?: string;
   /**
    * The ID of the feed to add/remove permissions on
    *
    * @example 1
+   * @x-auditable true
    */
   feed_id?: number;
 };
@@ -14647,17 +15217,23 @@ export type CustomIndicatorFeedsPermissionsResponse = CustomIndicatorFeedsApiRes
 export type CustomIndicatorFeedsPermissionsUpdate = {
   /**
    * Whether the update succeeded or not
+   *
+   * @x-auditable true
    */
   success?: boolean;
 };
 
 /**
  * The unique identifier for the provider
+ *
+ * @x-auditable true
  */
 export type CustomIndicatorFeedsProviderId = string;
 
 /**
  * The provider of the indicator feed
+ *
+ * @x-auditable true
  */
 export type CustomIndicatorFeedsProviderName = string;
 
@@ -14678,18 +15254,21 @@ export type CustomIndicatorFeedsUpdateFeed = {
    * Feed id
    *
    * @example 1
+   * @x-auditable true
    */
   file_id?: number;
   /**
    * Name of the file unified in our system
    *
    * @example snapshot_file.unified
+   * @x-auditable true
    */
   filename?: string;
   /**
    * Current status of upload, should be unified
    *
    * @example unified
+   * @x-auditable true
    */
   status?: string;
 };
@@ -14703,30 +15282,35 @@ export type CustomIndicatorFeedsUpdatePublicFieldRequest = {
    * The new description of the feed
    *
    * @example This is an example description
+   * @x-auditable true
    */
   description?: string;
   /**
    * The new is_attributable value of the feed
    *
    * @example true
+   * @x-auditable true
    */
   is_attributable?: boolean;
   /**
    * The new is_downloadable value of the feed
    *
    * @example true
+   * @x-auditable true
    */
   is_downloadable?: boolean;
   /**
    * The new is_public value of the feed
    *
    * @example true
+   * @x-auditable true
    */
   is_public?: boolean;
   /**
    * The new name of the feed
    *
    * @example indicator_list
+   * @x-auditable true
    */
   name?: string;
 };
@@ -15133,7 +15717,36 @@ export type DigitalExperienceMonitoringAggregateTimeSlot = {
 };
 
 export type DigitalExperienceMonitoringApiResponseCollection = DigitalExperienceMonitoringApiResponseCommon & {
-  result_info?: DigitalExperienceMonitoringResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
+};
+
+export type DigitalExperienceMonitoringApiResponseCollectionCommon = DigitalExperienceMonitoringApiResponseCommon & {
+  result?: any[] | null;
 };
 
 export type DigitalExperienceMonitoringApiResponseCommon = {
@@ -15318,11 +15931,111 @@ export type DigitalExperienceMonitoringDevice = {
 };
 
 /**
+ * The configuration object which contains the details for the WARP client to conduct the test.
+ *
+ * @example {"host":"https://dash.cloudflare.com","kind":"http","method":"GET"}
+ */
+export type DigitalExperienceMonitoringDeviceDexTestSchemasData = {
+  /**
+   * The desired endpoint to test.
+   *
+   * @example https://dash.cloudflare.com
+   */
+  host?: string;
+  /**
+   * The type of test.
+   *
+   * @example http
+   */
+  kind?: string;
+  /**
+   * The HTTP request method type.
+   *
+   * @example GET
+   */
+  method?: string;
+};
+
+/**
+ * Additional details about the test.
+ *
+ * @example Checks the dash endpoint every 30 minutes
+ */
+export type DigitalExperienceMonitoringDeviceDexTestSchemasDescription = string;
+
+/**
+ * Determines whether or not the test is active.
+ *
+ * @example true
+ */
+export type DigitalExperienceMonitoringDeviceDexTestSchemasEnabled = boolean;
+
+export type DigitalExperienceMonitoringDeviceDexTestSchemasHttp = {
+  data: DigitalExperienceMonitoringDeviceDexTestSchemasData;
+  description?: DigitalExperienceMonitoringDeviceDexTestSchemasDescription;
+  enabled: DigitalExperienceMonitoringDeviceDexTestSchemasEnabled;
+  interval: DigitalExperienceMonitoringDeviceDexTestSchemasInterval;
+  name: DigitalExperienceMonitoringDeviceDexTestSchemasName;
+  target_policies?: DigitalExperienceMonitoringDeviceDexTestTargetPolicies;
+  targeted?: boolean;
+  test_id?: DigitalExperienceMonitoringSchemasTestId;
+};
+
+/**
+ * How often the test will run.
+ *
+ * @example 30m
+ */
+export type DigitalExperienceMonitoringDeviceDexTestSchemasInterval = string;
+
+/**
+ * The name of the DEX test. Must be unique.
+ *
+ * @example HTTP dash health check
+ */
+export type DigitalExperienceMonitoringDeviceDexTestSchemasName = string;
+
+/**
+ * DEX rules targeted by this test
+ */
+export type DigitalExperienceMonitoringDeviceDexTestTargetPolicies = DigitalExperienceMonitoringDexTargetPolicy[];
+
+/**
  * Device-specific ID, given as UUID v4
  *
  * @example cb49c27f-7f97-49c5-b6f3-f7c01ead0fd7
  */
 export type DigitalExperienceMonitoringDeviceId = string;
+
+export type DigitalExperienceMonitoringDexDeleteResponseCollection = DigitalExperienceMonitoringApiResponseCommon & {
+  result?: {
+    dex_tests?: DigitalExperienceMonitoringDeviceDexTestSchemasHttp[];
+  };
+};
+
+export type DigitalExperienceMonitoringDexResponseCollection =
+  DigitalExperienceMonitoringApiResponseCollectionCommon & {
+    result?: DigitalExperienceMonitoringDeviceDexTestSchemasHttp[];
+  };
+
+export type DigitalExperienceMonitoringDexSingleResponse = DigitalExperienceMonitoringApiResponseSingle & {
+  result?: DigitalExperienceMonitoringDeviceDexTestSchemasHttp;
+};
+
+export type DigitalExperienceMonitoringDexTargetPolicy = {
+  /**
+   * Whether the DEX rule is the account default
+   */
+  ['default']?: boolean;
+  /**
+   * The id of the DEX rule
+   */
+  id?: string;
+  /**
+   * The name of the DEX rule
+   */
+  name?: string;
+};
 
 export type DigitalExperienceMonitoringFleetStatusDevicesResponse = DigitalExperienceMonitoringApiResponseCollection & {
   result?: DigitalExperienceMonitoringDevice[];
@@ -15595,32 +16308,13 @@ export type DigitalExperienceMonitoringRamUsedPctByApp = {
   ram_used_pct?: number;
 }[];
 
-export type DigitalExperienceMonitoringResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
+/**
+ * The unique identifier for the test.
+ *
+ * @example 372e67954025e0ba6aaa6d586b9e0b59
+ * @maxLength 32
+ */
+export type DigitalExperienceMonitoringSchemasTestId = string;
 
 /**
  * Number of minutes before current time
@@ -16008,6 +16702,73 @@ export type DigitalExperienceMonitoringUuid = string;
  */
 export type DigitalExperienceMonitoringVersion = string;
 
+export type DigitalExperienceMonitoringWarpConfigChangeEvent = {
+  device_id?: DigitalExperienceMonitoringUuid;
+  device_registration?: DigitalExperienceMonitoringUuid;
+  from?: DigitalExperienceMonitoringWarpConfigDetails;
+  /**
+   * The hostname of the machine the event is from
+   */
+  hostname?: string;
+  /**
+   * The serial number of the machine the event is from
+   */
+  serial_number?: string;
+  timestamp?: DigitalExperienceMonitoringTimestamp;
+  to?: DigitalExperienceMonitoringWarpConfigDetails;
+  /**
+   * Email tied to the device
+   */
+  user_email?: string;
+};
+
+export type DigitalExperienceMonitoringWarpConfigDetails = {
+  /**
+   * The account name.
+   */
+  account_name?: string;
+  account_tag?: DigitalExperienceMonitoringUuid;
+  /**
+   * The name of the WARP configuration.
+   */
+  config_name?: string;
+};
+
+export type DigitalExperienceMonitoringWarpEventsResponse = (
+  | DigitalExperienceMonitoringWarpToggleChangeEvent
+  | DigitalExperienceMonitoringWarpConfigChangeEvent
+)[];
+
+export type DigitalExperienceMonitoringWarpToggleChangeEvent = {
+  /**
+   * The account name.
+   */
+  account_name?: string;
+  /**
+   * The public account identifier.
+   */
+  account_tag?: string;
+  device_id?: DigitalExperienceMonitoringUuid;
+  device_registration?: DigitalExperienceMonitoringUuid;
+  /**
+   * The hostname of the machine the event is from
+   */
+  hostname?: string;
+  /**
+   * The serial number of the machine the event is from
+   */
+  serial_number?: string;
+  timestamp?: DigitalExperienceMonitoringTimestamp;
+  /**
+   * The state of the WARP toggle.
+   */
+  toggle?: 'on' | 'off';
+  /**
+   * Email tied to the device
+   */
+  user_email?: string;
+};
+
 export type DlpAddinAccountMapping = {
   /**
    * @format uuid
@@ -16097,6 +16858,15 @@ export type DlpCustomEntry = {
    * @format date-time
    */
   updated_at: string;
+};
+
+export type DlpCustomEntryUpdate = DlpCustomEntryUpdateType & {
+  enabled: boolean;
+};
+
+export type DlpCustomEntryUpdateType = {
+  name: string;
+  pattern: DlpPattern;
 };
 
 export type DlpCustomProfile = {
@@ -16308,7 +17078,24 @@ export type DlpDatasetUpload = {
   version: number;
 };
 
-export type DlpDatasetUploadStatus = 'empty' | 'uploading' | 'processing' | 'failed' | 'complete';
+export type DlpDatasetUploadStatus = 'empty' | 'uploading' | 'pending' | 'processing' | 'failed' | 'complete';
+
+export type DlpDocumentFingerprintEntry = {
+  /**
+   * @format date-time
+   */
+  created_at: string;
+  enabled: boolean;
+  /**
+   * @format uuid
+   */
+  id: string;
+  name: string;
+  /**
+   * @format date-time
+   */
+  updated_at: string;
+};
 
 export type DlpEmailRule = {
   action: DlpEmailRuleAction;
@@ -16372,6 +17159,9 @@ export type DlpEntry =
   | (DlpExactDataEntry & {
       type: 'exact_data';
     })
+  | (DlpDocumentFingerprintEntry & {
+      type: 'document_fingerprint';
+    })
   | (DlpWordListEntry & {
       type: 'word_list';
     });
@@ -16394,11 +17184,9 @@ export type DlpEntryUpdate = DlpEntryUpdateType & {
 };
 
 export type DlpEntryUpdateType =
-  | {
-      name: string;
-      pattern: DlpPattern;
+  | (DlpCustomEntryUpdateType & {
       type: 'custom';
-    }
+    })
   | {
       type: 'predefined';
     }
@@ -16520,12 +17308,6 @@ export type DlpNewCustomProfile = {
   shared_entries?: DlpNewSharedEntry[];
 };
 
-export type DlpNewCustomProfiles =
-  | {
-      profiles: DlpNewCustomProfile[];
-    }
-  | DlpNewCustomProfile;
-
 export type DlpNewDataset = {
   /**
    * Only applies to custom word lists.
@@ -16581,6 +17363,32 @@ export type DlpNewEntry = {
   profile_id: string;
 };
 
+/**
+ * Struct for creating a new predefined or integration entry. Predefined or integration entries
+ * can not be updated via the API so these fields will simply update the entry's settings
+ */
+export type DlpNewPredefinedEntry = {
+  enabled: boolean;
+  /**
+   * @format uuid
+   */
+  entry_id: string;
+  /**
+   * This field is not actually used as the owning profile for a predefined entry is already set
+   * to a predefined profile
+   *
+   * @format uuid
+   */
+  profile_id?: string | null;
+};
+
+export type DlpNewPredefinedProfile = DlpPredefinedProfileUpdate & {
+  /**
+   * @format uuid
+   */
+  profile_id: string;
+};
+
 export type DlpNewSharedEntry =
   | {
       enabled: boolean;
@@ -16613,6 +17421,14 @@ export type DlpNewSharedEntry =
        */
       entry_id: string;
       entry_type: 'exact_data';
+    }
+  | {
+      enabled: boolean;
+      /**
+       * @format uuid
+       */
+      entry_id: string;
+      entry_type: 'document_fingerprint';
     };
 
 export type DlpNewWordListEntry = {
@@ -16657,10 +17473,6 @@ export type DlpPredefinedEntry = {
 
 export type DlpPredefinedEntryUpdate = {
   enabled: boolean;
-  /**
-   * @format uuid
-   */
-  id: string;
 };
 
 export type DlpPredefinedProfile = {
@@ -16689,6 +17501,14 @@ export type DlpPredefinedProfile = {
   open_access?: boolean;
 };
 
+export type DlpPredefinedProfileEntryUpdate = {
+  enabled: boolean;
+  /**
+   * @format uuid
+   */
+  id: string;
+};
+
 export type DlpPredefinedProfileUpdate = {
   ai_context_enabled?: boolean;
   /**
@@ -16697,7 +17517,10 @@ export type DlpPredefinedProfileUpdate = {
   allowed_match_count?: number | null;
   confidence_threshold?: string | null;
   context_awareness?: DlpContextAwareness;
-  entries: DlpPredefinedEntryUpdate[];
+  /**
+   * @deprecated true
+   */
+  entries?: DlpPredefinedProfileEntryUpdate[];
   ocr_enabled?: boolean;
 };
 
@@ -16715,8 +17538,6 @@ export type DlpProfile =
 export type DlpProfileArray = DlpProfile[];
 
 export type DlpProfileEntryUpdate = DlpNewCustomEntryWithId | DlpNewCustomEntry;
-
-export type DlpProfileOrProfileArray = DlpProfile | DlpProfile[];
 
 export type DlpRegexValidationQuery = {
   /**
@@ -16836,6 +17657,14 @@ export type DlpSharedEntryUpdate =
        */
       entry_id: string;
       entry_type: 'exact_data';
+    }
+  | {
+      enabled: boolean;
+      /**
+       * @format uuid
+       */
+      entry_id: string;
+      entry_type: 'document_fingerprint';
     };
 
 /**
@@ -16937,7 +17766,32 @@ export type DlpWordListEntry = {
 };
 
 export type DlpApiResponseCollection = DlpApiResponseCommon & {
-  result_info?: DlpResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type DlpApiResponseCommon = {
@@ -16980,33 +17834,6 @@ export type DlpMessages = {
     pointer?: string;
   };
 }[];
-
-export type DlpResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
 
 export type DlsApiResponseCollection = DlsApiResponseCommon & {
   result_info?: DlsResultInfo;
@@ -17128,7 +17955,7 @@ export type DnsAnalyticsApiResponseCommon = {
   errors: DnsAnalyticsMessages;
   messages: DnsAnalyticsMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -17144,7 +17971,7 @@ export type DnsAnalyticsApiResponseCommonFailure = {
   messages: DnsAnalyticsMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -17178,10 +18005,11 @@ export type DnsAnalyticsDimensions = string;
 export type DnsAnalyticsFilters = string;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type DnsAnalyticsIdentifier = string;
 
@@ -17198,7 +18026,11 @@ export type DnsAnalyticsMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -17565,7 +18397,32 @@ export type DnsCustomNameserversZoneMetadata = {
 };
 
 export type DnsFirewallApiResponseCollection = DnsFirewallApiResponseCommon & {
-  result_info?: DnsFirewallResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type DnsFirewallApiResponseCommon = {
@@ -17691,6 +18548,7 @@ export type DnsFirewallEcsFallback = boolean;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type DnsFirewallIdentifier = string;
 
@@ -17766,33 +18624,6 @@ export type DnsFirewallNegativeCacheTtl = number | null;
  * @x-auditable true
  */
 export type DnsFirewallRatelimit = number | null;
-
-export type DnsFirewallResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
 
 /**
  * Number of retries for fetching DNS responses from upstream nameservers (not counting the initial attempt)
@@ -18595,7 +19426,32 @@ export type DnsRecordsURIRecord = DnsRecordsDnsRecordSharedFields & {
 };
 
 export type DnsRecordsApiResponseCollection = DnsRecordsApiResponseCommon & {
-  result_info?: DnsRecordsResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type DnsRecordsApiResponseCommon = {
@@ -18642,29 +19498,6 @@ export type DnsRecordsComment = string;
  */
 export type DnsRecordsDirection = 'asc' | 'desc';
 
-export type DnsRecordsDnsRecord =
-  | DnsRecordsARecord
-  | DnsRecordsAAAARecord
-  | DnsRecordsCAARecord
-  | DnsRecordsCERTRecord
-  | DnsRecordsCNAMERecord
-  | DnsRecordsDNSKEYRecord
-  | DnsRecordsDSRecord
-  | DnsRecordsHTTPSRecord
-  | DnsRecordsLOCRecord
-  | DnsRecordsMXRecord
-  | DnsRecordsNAPTRRecord
-  | DnsRecordsNSRecord
-  | DnsRecordsOPENPGPKEYRecord
-  | DnsRecordsPTRRecord
-  | DnsRecordsSMIMEARecord
-  | DnsRecordsSRVRecord
-  | DnsRecordsSSHFPRecord
-  | DnsRecordsSVCBRecord
-  | DnsRecordsTLSARecord
-  | DnsRecordsTXTRecord
-  | DnsRecordsURIRecord;
-
 export type DnsRecordsDnsRecordBatchDelete = {
   id?: DnsRecordsIdentifier;
 };
@@ -18679,51 +19512,11 @@ export type DnsRecordsDnsRecordBatchPut = DnsRecordsDnsRecordPost & {
   id: DnsRecordsIdentifier;
 };
 
-export type DnsRecordsDnsRecordPatch = DnsRecordsDnsRecord;
+export type DnsRecordsDnsRecordPatch = DnsRecordsDnsRecordWithoutData | DnsRecordsDnsRecordWithData;
 
-export type DnsRecordsDnsRecordPost = DnsRecordsDnsRecord;
+export type DnsRecordsDnsRecordPost = DnsRecordsDnsRecordWithoutData | DnsRecordsDnsRecordWithData;
 
-export type DnsRecordsDnsRecordResponse = DnsRecordsDnsRecord & {
-  /**
-   * When the record comment was last modified. Omitted if there is no comment.
-   *
-   * @example 2024-01-01T05:20:00.12345Z
-   * @format date-time
-   */
-  comment_modified_on?: string;
-  /**
-   * When the record was created.
-   *
-   * @example 2014-01-01T05:20:00.12345Z
-   * @format date-time
-   */
-  created_on: string;
-  id: DnsRecordsIdentifier;
-  /**
-   * Extra Cloudflare-specific information about the record.
-   */
-  meta: Record<string, any>;
-  /**
-   * When the record was last modified.
-   *
-   * @example 2014-01-01T05:20:00.12345Z
-   * @format date-time
-   */
-  modified_on: string;
-  /**
-   * Whether the record can be proxied by Cloudflare or not.
-   *
-   * @example true
-   */
-  proxiable: boolean;
-  /**
-   * When the record tags were last modified. Omitted if there are no tags.
-   *
-   * @example 2025-01-01T05:20:00.12345Z
-   * @format date-time
-   */
-  tags_modified_on?: string;
-};
+export type DnsRecordsDnsRecordResponse = DnsRecordsDnsRecordWithoutData | DnsRecordsDnsRecordWithData;
 
 export type DnsRecordsDnsRecordSharedFields = {
   comment?: DnsRecordsComment;
@@ -18733,6 +19526,31 @@ export type DnsRecordsDnsRecordSharedFields = {
   tags?: DnsRecordsTags;
   ttl?: DnsRecordsTtl;
 };
+
+export type DnsRecordsDnsRecordWithData =
+  | DnsRecordsCAARecord
+  | DnsRecordsCERTRecord
+  | DnsRecordsDNSKEYRecord
+  | DnsRecordsDSRecord
+  | DnsRecordsHTTPSRecord
+  | DnsRecordsLOCRecord
+  | DnsRecordsNAPTRRecord
+  | DnsRecordsSMIMEARecord
+  | DnsRecordsSRVRecord
+  | DnsRecordsSSHFPRecord
+  | DnsRecordsSVCBRecord
+  | DnsRecordsTLSARecord
+  | DnsRecordsURIRecord;
+
+export type DnsRecordsDnsRecordWithoutData =
+  | DnsRecordsARecord
+  | DnsRecordsAAAARecord
+  | DnsRecordsCNAMERecord
+  | DnsRecordsMXRecord
+  | DnsRecordsNSRecord
+  | DnsRecordsOPENPGPKEYRecord
+  | DnsRecordsPTRRecord
+  | DnsRecordsTXTRecord;
 
 export type DnsRecordsDnsRequestBatchObject = {
   deletes?: DnsRecordsDnsRecordBatchDelete[];
@@ -18782,6 +19600,7 @@ export type DnsRecordsDnsResponseSingle = DnsRecordsApiResponseSingle & {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type DnsRecordsIdentifier = string;
 
@@ -18856,33 +19675,6 @@ export type DnsRecordsPriority = number;
  * @example true
  */
 export type DnsRecordsProxied = boolean;
-
-export type DnsRecordsResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
 
 /**
  * Allows searching in multiple properties of a DNS record simultaneously. This parameter is intended for human users, not automation. Its exact behavior is intentionally left unspecified and is subject to change in the future. This parameter works independently of the `match` setting. For automated searches, please use the other available parameters.
@@ -18967,7 +19759,32 @@ export type DnsSettingsAccountSettings = {
 };
 
 export type DnsSettingsApiResponseCollection = DnsSettingsApiResponseCommon & {
-  result_info?: DnsSettingsResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type DnsSettingsApiResponseCommon = {
@@ -19113,6 +19930,7 @@ export type DnsSettingsFoundationDns = boolean;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type DnsSettingsIdentifier = string;
 
@@ -19123,7 +19941,7 @@ export type DnsSettingsInternalDns = {
   /**
    * The ID of the zone to fallback to.
    *
-   * @example {"description":"Identifier.","example":"023e105f4ecef8ad9ca31a8372d0c353","maxLength":32,"type":"string"}
+   * @example {"description":"Identifier.","example":"023e105f4ecef8ad9ca31a8372d0c353","maxLength":32,"type":"string","x-auditable":true}
    */
   reference_zone_id?: string;
 };
@@ -19209,33 +20027,6 @@ export type DnsSettingsPage = number;
  * @minimum 1
  */
 export type DnsSettingsPerPage = number;
-
-export type DnsSettingsResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
 
 export type DnsSettingsSchemasDnsResponseSingle = DnsSettingsApiResponseSingle & {
   result?: DnsSettingsDnsSettingsZone;
@@ -19402,6 +20193,7 @@ export type DnssecDnssec = {
   digest_type?: DnssecDigestType;
   dnssec_multi_signer?: DnssecDnssecMultiSigner;
   dnssec_presigned?: DnssecDnssecPresigned;
+  dnssec_use_nsec3?: DnssecDnssecUseNsec3;
   ds?: DnssecDs;
   flags?: DnssecFlags;
   key_tag?: DnssecKeyTag;
@@ -19442,6 +20234,20 @@ export type DnssecDnssecResponseSingle = DnssecApiResponseSingle & {
 };
 
 /**
+ * If true, enables the use of NSEC3 together with DNSSEC on the zone.
+ * Combined with setting dnssec_presigned to true, this enables the use of
+ * NSEC3 records when transferring in from an external provider.
+ * If dnssec_presigned is instead set to false (default), NSEC3 records will be
+ * generated and signed at request time.
+ *
+ * See [DNSSEC with NSEC3](https://developers.cloudflare.com/dns/dnssec/enable-nsec3/) for details.
+ *
+ * @example false
+ * @x-auditable true
+ */
+export type DnssecDnssecUseNsec3 = boolean;
+
+/**
  * Full DS record.
  *
  * @example example.com. 3600 IN DS 16953 13 2 48E939042E82C22542CB377B580DFDC52A361CEFDC72E7F9107E2B6BD9306A45
@@ -19462,6 +20268,7 @@ export type DnssecFlags = number | null;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type DnssecIdentifier = string;
 
@@ -19605,52 +20412,70 @@ export type EmailSecurityAccountId = string;
 export type EmailSecurityAllowPolicy = {
   /**
    * @maxLength 1024
+   * @x-auditable true
    */
   comments?: string | null;
   /**
    * Messages from this sender will be exempted from Spam, Spoof and Bulk dispositions.
    * Note: This will not exempt messages with Malicious or Suspicious dispositions.
+   *
+   * @x-auditable true
    */
   is_acceptable_sender?: boolean;
   /**
    * Messages to this recipient will bypass all detections.
+   *
+   * @x-auditable true
    */
   is_exempt_recipient?: boolean;
   /**
    * @deprecated true
+   * @x-auditable true
    */
   is_recipient?: boolean;
+  /**
+   * @x-auditable true
+   */
   is_regex: boolean;
   /**
    * @deprecated true
+   * @x-auditable true
    */
   is_sender?: boolean;
   /**
    * @deprecated true
+   * @x-auditable true
    */
   is_spoof?: boolean;
   /**
    * Messages from this sender will bypass all detections and link following.
+   *
+   * @x-auditable true
    */
   is_trusted_sender?: boolean;
   /**
    * @maxLength 1024
    * @minLength 1
+   * @x-auditable true
    */
   pattern: string;
   pattern_type: EmailSecurityPatternType;
   /**
    * Enforce DMARC, SPF or DKIM authentication.
    * When on, Email Security only honors policies that pass authentication.
+   *
+   * @x-auditable true
    */
   verify_sender: boolean;
   /**
    * @format date-time
+   * @x-auditable true
    */
   created_at: string;
   id: EmailSecurityAllowPolicyId;
   /**
    * @format date-time
+   * @x-auditable true
    */
   last_modified: string;
 };
@@ -19689,22 +20514,29 @@ export type EmailSecurityAttachment = {
 export type EmailSecurityBlockedSender = {
   /**
    * @maxLength 1024
+   * @x-auditable true
    */
   comments?: string | null;
+  /**
+   * @x-auditable true
+   */
   is_regex?: boolean;
   /**
    * @maxLength 1024
    * @minLength 1
+   * @x-auditable true
    */
   pattern?: string;
   pattern_type?: EmailSecurityPatternType;
   /**
    * @format date-time
+   * @x-auditable true
    */
   created_at: string;
   id: EmailSecurityBlockedSenderId;
   /**
    * @format date-time
+   * @x-auditable true
    */
   last_modified: string;
 };
@@ -19723,43 +20555,59 @@ export type EmailSecurityBlockedSenderId = number;
 export type EmailSecurityCreateAllowPolicy = {
   /**
    * @maxLength 1024
+   * @x-auditable true
    */
   comments?: string | null;
   /**
    * Messages from this sender will be exempted from Spam, Spoof and Bulk dispositions.
    * Note: This will not exempt messages with Malicious or Suspicious dispositions.
+   *
+   * @x-auditable true
    */
   is_acceptable_sender: boolean;
   /**
    * Messages to this recipient will bypass all detections.
+   *
+   * @x-auditable true
    */
   is_exempt_recipient: boolean;
   /**
    * @deprecated true
+   * @x-auditable true
    */
   is_recipient?: boolean;
+  /**
+   * @x-auditable true
+   */
   is_regex: boolean;
   /**
    * @deprecated true
+   * @x-auditable true
    */
   is_sender?: boolean;
   /**
    * @deprecated true
+   * @x-auditable true
    */
   is_spoof?: boolean;
   /**
    * Messages from this sender will bypass all detections and link following.
+   *
+   * @x-auditable true
    */
   is_trusted_sender: boolean;
   /**
    * @maxLength 1024
    * @minLength 1
+   * @x-auditable true
    */
   pattern: string;
   pattern_type: EmailSecurityPatternType;
   /**
    * Enforce DMARC, SPF or DKIM authentication.
    * When on, Email Security only honors policies that pass authentication.
+   *
+   * @x-auditable true
    */
   verify_sender: boolean;
 };
@@ -19770,22 +20618,34 @@ export type EmailSecurityCreateAllowPolicy = {
 export type EmailSecurityCreateBlockedSender = {
   /**
    * @maxLength 1024
+   * @x-auditable true
    */
   comments?: string | null;
+  /**
+   * @x-auditable true
+   */
   is_regex: boolean;
   /**
    * @maxLength 1024
    * @minLength 1
+   * @x-auditable true
    */
   pattern: string;
   pattern_type: EmailSecurityPatternType;
 };
 
 export type EmailSecurityCreateDisplayName = {
+  /**
+   * @x-auditable true
+   */
   email: string;
+  /**
+   * @x-auditable true
+   */
   is_email_regex: boolean;
   /**
    * @maxLength 1024
+   * @x-auditable true
    */
   name: string;
 };
@@ -19796,23 +20656,32 @@ export type EmailSecurityCreateDisplayName = {
 export type EmailSecurityCreateTrustedDomain = {
   /**
    * @maxLength 1024
+   * @x-auditable true
    */
   comments?: string | null;
   /**
    * Select to prevent recently registered domains from triggering a
    * Suspicious or Malicious disposition.
+   *
+   * @x-auditable true
    */
   is_recent: boolean;
+  /**
+   * @x-auditable true
+   */
   is_regex: boolean;
   /**
    * Select for partner or other approved domains that have similar
    * spelling to your connected domains. Prevents listed domains from
    * triggering a Spoof disposition.
+   *
+   * @x-auditable true
    */
   is_similarity: boolean;
   /**
    * @maxLength 1024
    * @minLength 1
+   * @x-auditable true
    */
   pattern: string;
 };
@@ -19820,10 +20689,17 @@ export type EmailSecurityCreateTrustedDomain = {
 export type EmailSecurityDeliveryMode = 'DIRECT' | 'BCC' | 'JOURNAL' | 'API' | 'RETRO_SCAN';
 
 export type EmailSecurityDisplayName = {
+  /**
+   * @x-auditable true
+   */
   email?: string;
+  /**
+   * @x-auditable true
+   */
   is_email_regex?: boolean;
   /**
    * @maxLength 1024
+   * @x-auditable true
    */
   name?: string;
   comments?: string | null;
@@ -19940,7 +20816,7 @@ export type EmailSecurityLink = {
 };
 
 /**
- * @example {"action_log":[],"alert_id":"4Njp3P0STMz2c02Q-2022-12-30T02:44:49","client_recipients":["email@example.com"],"delivery_mode":"DIRECT","detection_reasons":["Selector is a source of spam/uce : Smtp-Helo-Server-Ip=<b>127.0.0[dot]186</b>"],"edf_hash":null,"final_disposition":"MALICIOUS","from":"d1994@example.com","from_name":"Sender Name","id":"47JJcT1w6GztQV7-email@example.com","is_phish_submission":false,"is_quarantined":false,"message_id":"<4VAZPrAdg7IGNxdt1DWRNu0gvOeL_iZiwP4BQfo4DaE.Yw-woXuugQbeFhBpzwFQtqq_v2v1HOKznoMBqbciQpE@example.com>","postfix_id":"47JJcT1w6GztQV7","sent_date":"2019-11-21T00:22:01","subject":"listen, I highly recommend u to read that email, just to ensure not a thing will take place","threat_categories":["IPReputation","ASNReputation"],"to":["email@example.com"],"to_name":["Recipient Name"],"ts":"2019-11-20T23:22:01","validation":{"comment":null,"dkim":"pass","dmarc":"none","spf":"fail"}}
+ * @example {"action_log":[],"alert_id":"4Njp3P0STMz2c02Q-2022-12-30T02:44:49","client_recipients":["email@example.com"],"delivery_mode":"DIRECT","detection_reasons":["Selector is a source of spam/uce : Smtp-Helo-Server-Ip=<b>127.0.0[dot]186</b>"],"edf_hash":null,"final_disposition":"MALICIOUS","from":"d1994@example.com","from_name":"Sender Name","id":"47JJcT1w6GztQV7-email@example.com","is_phish_submission":false,"is_quarantined":false,"message_id":"<4VAZPrAdg7IGNxdt1DWRNu0gvOeL_iZiwP4BQfo4DaE.Yw-woXuugQbeFhBpzwFQtqq_v2v1HOKznoMBqbciQpE@example.com>","postfix_id":"47JJcT1w6GztQV7","properties":{},"sent_date":"2019-11-21T00:22:01","subject":"listen, I highly recommend u to read that email, just to ensure not a thing will take place","threat_categories":["IPReputation","ASNReputation"],"to":["email@example.com"],"to_name":["Recipient Name"],"ts":"2019-11-20T23:22:01","validation":{"comment":null,"dkim":"pass","dmarc":"none","spf":"fail"}}
  */
 export type EmailSecurityMailsearchMessage = {
   action_log: void;
@@ -19956,6 +20832,13 @@ export type EmailSecurityMailsearchMessage = {
   is_quarantined: boolean;
   message_id?: string | null;
   postfix_id: EmailSecurityPostfixId;
+  properties: {
+    allowlisted_pattern_type?: string;
+    /**
+     * @deprecated true
+     */
+    whitelisted_pattern_type?: string;
+  };
   sent_date?: string | null;
   subject?: string | null;
   threat_categories?: string[] | null;
@@ -19968,6 +20851,9 @@ export type EmailSecurityMailsearchMessage = {
     dmarc?: EmailSecurityValidationStatus & (string | null);
     spf?: EmailSecurityValidationStatus & (string | null);
   } | null;
+  /**
+   * @x-auditable true
+   */
   id: string;
 };
 
@@ -20050,15 +20936,15 @@ export type EmailSecurityRetractionResponseItem = {
    * @format date-time
    */
   completed_timestamp: string;
-  destination: string;
+  destination?: string | null;
   /**
    * @format int32
    */
   item_count: number;
-  message_id: string;
-  operation: string;
-  recipient: string;
-  status: string;
+  message_id?: string | null;
+  operation?: string | null;
+  recipient?: string | null;
+  status?: string | null;
 };
 
 export type EmailSecurityScannableFolder = 'AllItems' | 'Inbox';
@@ -20109,27 +20995,37 @@ export type EmailSecurityTraceLine = {
 export type EmailSecurityTrustedDomain = {
   /**
    * @maxLength 1024
+   * @x-auditable true
    */
   comments?: string | null;
   /**
    * Select to prevent recently registered domains from triggering a
    * Suspicious or Malicious disposition.
+   *
+   * @x-auditable true
    */
   is_recent?: boolean;
+  /**
+   * @x-auditable true
+   */
   is_regex?: boolean;
   /**
    * Select for partner or other approved domains that have similar
    * spelling to your connected domains. Prevents listed domains from
    * triggering a Spoof disposition.
+   *
+   * @x-auditable true
    */
   is_similarity?: boolean;
   /**
    * @maxLength 1024
    * @minLength 1
+   * @x-auditable true
    */
   pattern: string;
   /**
    * @format date-time
+   * @x-auditable true
    */
   created_at: string;
   /**
@@ -20141,6 +21037,7 @@ export type EmailSecurityTrustedDomain = {
   id: number;
   /**
    * @format date-time
+   * @x-auditable true
    */
   last_modified: string;
 };
@@ -20156,40 +21053,60 @@ export type EmailSecurityTrustedDomainId = number;
 export type EmailSecurityUpdateAllowPolicy = {
   /**
    * @maxLength 1024
+   * @x-auditable true
    */
   comments?: string | null;
   /**
    * Messages from this sender will be exempted from Spam, Spoof and Bulk dispositions.
    * Note: This will not exempt messages with Malicious or Suspicious dispositions.
+   *
+   * @x-auditable true
    */
   is_acceptable_sender?: boolean | null;
   /**
    * Messages to this recipient will bypass all detections.
+   *
+   * @x-auditable true
    */
   is_exempt_recipient?: boolean | null;
+  /**
+   * @x-auditable true
+   */
   is_regex?: boolean | null;
   /**
    * Messages from this sender will bypass all detections and link following.
+   *
+   * @x-auditable true
    */
   is_trusted_sender?: boolean | null;
   /**
    * @maxLength 1024
    * @minLength 1
+   * @x-auditable true
    */
   pattern?: string | null;
   pattern_type?: EmailSecurityPatternType & (string | null);
   /**
    * Enforce DMARC, SPF or DKIM authentication.
    * When on, Email Security only honors policies that pass authentication.
+   *
+   * @x-auditable true
    */
   verify_sender?: boolean | null;
 };
 
 export type EmailSecurityUpdateBlockedSender = {
+  /**
+   * @x-auditable true
+   */
   comments?: string | null;
+  /**
+   * @x-auditable true
+   */
   is_regex?: boolean | null;
   /**
    * @minLength 1
+   * @x-auditable true
    */
   pattern?: string | null;
   pattern_type?: EmailSecurityPatternType & (string | null);
@@ -20202,7 +21119,32 @@ export type EmailAccountId = EmailIdentifier;
 export type EmailAddresses = EmailDestinationAddressProperties;
 
 export type EmailApiResponseCollection = EmailApiResponseCommon & {
-  result_info?: EmailResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type EmailApiResponseCommon = {
@@ -20480,6 +21422,7 @@ export type EmailEmailSettingsResponseSingle = EmailApiResponseSingle & {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type EmailIdentifier = string;
 
@@ -20502,33 +21445,6 @@ export type EmailMessages = {
  * @format date-time
  */
 export type EmailModified = string;
-
-export type EmailResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
 
 /**
  * Actions pattern.
@@ -20621,7 +21537,7 @@ export type EmailRuleMatcher = {
    * @example literal
    * @x-auditable true
    */
-  type: 'literal';
+  type: 'all' | 'literal';
   /**
    * Value for matcher.
    *
@@ -20752,338 +21668,6 @@ export type FirewallAction = {
  * @default challenge
  */
 export type FirewallActionMode = 'simulate' | 'block' | 'challenge';
-
-/**
- * The parameters configuring the action.
- */
-export type FirewallActionParameters = FirewallActionParametersRoute;
-
-/**
- * The configuration parameters for the redirect action.
- */
-export type FirewallActionParametersRedirect = {
-  /**
-   * The parameters that control the redirect.
-   */
-  from_value?: {
-    /**
-     * Whether the query string for the request should be carried to the redirect's target url.
-     *
-     * @example true
-     */
-    preserve_query_string?: boolean;
-    /**
-     * The status code to use for the redirect.
-     */
-    status_code?: number;
-    target_url?:
-      | {
-          /**
-           * An expression defining a dynamic value for the target url of the redirect.
-           *
-           * @example concat(http.request.full_uri, "/latest")
-           */
-          expression?: string;
-        }
-      | {
-          /**
-           * The value defining the target url of the redirect.
-           *
-           * @example https://example.com/blog/latest
-           */
-          value?: string;
-        };
-  };
-};
-
-/**
- * The configuration parameters for the rewrite action.
- */
-export type FirewallActionParametersRewrite = {
-  /**
-   * The URI rewrite configuration to rewrite the URI path, the query string, or both.
-   */
-  uri?: {
-    /**
-     * The new URI path sent to the origin.
-     */
-    path?: void;
-    /**
-     * The new query string sent to the origin.
-     */
-    query?: void;
-  };
-};
-
-/**
- * The configuration parameters for the route action.
- */
-export type FirewallActionParametersRoute = {
-  /**
-   * The value of the Host header.
-   *
-   * @example foo.example.com
-   */
-  host_header?: string;
-  /**
-   * The parameters that control where the origin is.
-   */
-  origin?: {
-    /**
-     * The host to use for origin.
-     *
-     * @example foo.example.com
-     */
-    host?: string;
-    /**
-     * The port to use for origin.
-     */
-    port?: number;
-  };
-  /**
-   * The parameters that control the SNI.
-   */
-  sni?: {
-    /**
-     * The SNI used to connect to the origin.
-     *
-     * @example foo.example.com
-     */
-    value?: string;
-  };
-};
-
-/**
- * The configuration parameters for the set_cache_settings action.
- */
-export type FirewallActionParametersSetCacheSettings = {
-  /**
-   * Set the Browser TTL.
-   */
-  browser_ttl?: {
-    ['default']?: number;
-    /**
-     * @example override_origin
-     */
-    mode?: string;
-  };
-  /**
-   * Set the Cache TTL.
-   */
-  cache_key?: {
-    /**
-     * @example true
-     */
-    cache_deception_armor?: boolean;
-    custom_key?: {
-      cookie?: {
-        /**
-         * @example cookie_1
-         */
-        check_presence?: string[];
-        /**
-         * @example cookie1
-         */
-        include?: string[];
-      };
-      header?: {
-        /**
-         * @example header_1
-         */
-        check_presence?: string[];
-        /**
-         * @example header1
-         */
-        include?: string[];
-      };
-      host?: {
-        /**
-         * @example false
-         */
-        resolved?: boolean;
-      };
-      query_string?: {
-        /**
-         * @example *
-         */
-        include?: string;
-      };
-      user?: {
-        /**
-         * @example true
-         */
-        device_type?: boolean;
-        /**
-         * @example false
-         */
-        geo?: boolean;
-        /**
-         * @example false
-         */
-        lang?: boolean;
-      };
-    };
-    /**
-     * @example true
-     */
-    ignore_query_strings_order?: boolean;
-  };
-  /**
-   * Set the Cache TTL.
-   */
-  edge_ttl?: {
-    /**
-     * @example respect_origin
-     */
-    mode?: string;
-    status_code_ttl?: {
-      status_code?: number;
-      value?: number;
-    };
-  };
-  /**
-   * @example true
-   */
-  origin_error_page_passthru?: boolean;
-  /**
-   * @example true
-   */
-  respect_strong_etags?: boolean;
-  serve_stale?: {
-    /**
-     * @example true
-     */
-    disable_stale_while_updating?: boolean;
-  };
-};
-
-/**
- * The configuration parameters for the set_config action.
- */
-export type FirewallActionParametersSetConfig = {
-  /**
-   * Enable or disable Automatic HTTPS Rewrites for matching requests
-   *
-   * @example true
-   * @x-auditable true
-   */
-  automatic_https_rewrites?: boolean;
-  /**
-   * Select which file extensions to minify automatically.
-   */
-  autominify?: {
-    /**
-     * @example true
-     */
-    css?: boolean;
-    /**
-     * @example true
-     */
-    html?: boolean;
-    /**
-     * @example true
-     */
-    js?: boolean;
-  };
-  /**
-   * Enable or disable Browser Integrity Check
-   *
-   * @example true
-   * @x-auditable true
-   */
-  bic?: boolean;
-  /**
-   * Disable all active Cloudflare Apps
-   *
-   * @example true
-   * @x-auditable true
-   */
-  disable_apps?: boolean;
-  /**
-   * Disable Cloudflare Railgun
-   *
-   * @example true
-   * @x-auditable true
-   */
-  disable_railgun?: boolean;
-  /**
-   * Disable Cloudflare Railgun
-   *
-   * @example true
-   * @x-auditable true
-   */
-  disable_zaraz?: boolean;
-  /**
-   * Enable or disable Email Obfuscation
-   *
-   * @example false
-   * @x-auditable true
-   */
-  email_obfuscation?: boolean;
-  /**
-   * Enable or disable Hotlink Protection
-   *
-   * @example false
-   * @x-auditable true
-   */
-  hotlink_protection?: boolean;
-  /**
-   * Enable or disable Mirage
-   *
-   * @example false
-   * @x-auditable true
-   */
-  mirage?: boolean;
-  /**
-   * Enable or disableOpportunistic Encryption
-   *
-   * @example false
-   * @x-auditable true
-   */
-  opportunistic_encryption?: boolean;
-  /**
-   * Set Polish compression options
-   *
-   * @example lossless
-   * @x-auditable true
-   */
-  polish?: string;
-  /**
-   * Enable or disable Rocket Loader
-   *
-   * @example false
-   * @x-auditable true
-   */
-  rocket_loader?: boolean;
-  /**
-   * Set the Security Level
-   *
-   * @example low
-   * @x-auditable true
-   */
-  security_level?: string;
-  /**
-   * Enable or disable Server Side Excludes
-   *
-   * @example false
-   * @x-auditable true
-   */
-  server_side_excludes?: boolean;
-  /**
-   * Select the SSL encryption mode
-   *
-   * @example flexible
-   * @x-auditable true
-   */
-  ssl?: string;
-  /**
-   * Enable or disable Signed Exchangesn(SXG)
-   *
-   * @example false
-   * @x-auditable true
-   */
-  sxg?: boolean;
-};
 
 /**
  * A summary of the purpose/function of the WAF package.
@@ -21227,62 +21811,6 @@ export type FirewallBypass = {
   value?: string;
 }[];
 
-/**
- * The parameters configuring the action.
- */
-export type FirewallCacheRulesComponentsSchemasActionParameters = FirewallActionParametersSetCacheSettings;
-
-export type FirewallCacheRulesComponentsSchemasRule = {
-  /**
-   * @example set_cache_settings
-   */
-  action?: void;
-  action_parameters?: FirewallCacheRulesComponentsSchemasActionParameters;
-  /**
-   * @example use the cache settings
-   */
-  description?: void;
-  /**
-   * @example http.cookie contains "something"
-   */
-  expression?: void;
-  /**
-   * @example 3a03d665bac047339bb530ecb439a90d
-   */
-  id?: void;
-  /**
-   * @example 1
-   */
-  version?: void;
-};
-
-export type FirewallCacheRulesComponentsSchemasRuleset = {
-  /**
-   * @example
-   */
-  description?: void;
-  /**
-   * @example 2f2feab2026849078ba485f918791bdc
-   */
-  id?: void;
-  /**
-   * @example zone
-   */
-  kind?: void;
-  /**
-   * @example default
-   */
-  name?: void;
-  /**
-   * @example http_request_cache_settings
-   */
-  phase?: void;
-  /**
-   * The rules in the ruleset.
-   */
-  rules?: FirewallCacheRulesComponentsSchemasRule[];
-};
-
 export type FirewallCidrConfiguration = {
   /**
    * The configuration target. You must set the target to `ip_range` when specifying an IP address range in the rule.
@@ -21305,11 +21833,6 @@ export type FirewallCidrConfiguration = {
  * @pattern ^[a-z_]+$
  */
 export type FirewallComponentsSchemasAction = string;
-
-/**
- * The parameters configuring the action.
- */
-export type FirewallComponentsSchemasActionParameters = FirewallActionParametersRedirect;
 
 /**
  * An informative summary of the current URI-based WAF override.
@@ -21359,57 +21882,6 @@ export type FirewallComponentsSchemasPriority = number;
  */
 export type FirewallComponentsSchemasRef = string;
 
-export type FirewallComponentsSchemasRule = {
-  /**
-   * @example route
-   */
-  action?: void;
-  action_parameters?: FirewallActionParameters;
-  /**
-   * @example change the host header, origin, and SNI
-   */
-  description?: void;
-  /**
-   * @example http.cookie contains "something"
-   */
-  expression?: void;
-  /**
-   * @example 3a03d665bac047339bb530ecb439a90d
-   */
-  id?: void;
-  /**
-   * @example 1
-   */
-  version?: void;
-};
-
-export type FirewallComponentsSchemasRuleset = {
-  /**
-   * @example
-   */
-  description?: void;
-  /**
-   * @example 2f2feab2026849078ba485f918791bdc
-   */
-  id?: void;
-  /**
-   * @example zone
-   */
-  kind?: void;
-  /**
-   * @example default
-   */
-  name?: void;
-  /**
-   * @example http_config_settings
-   */
-  phase?: void;
-  /**
-   * The rules in the ruleset.
-   */
-  rules?: FirewallConfigRulesComponentsSchemasRule[];
-};
-
 /**
  * The unique identifier of the User Agent Blocking rule.
  *
@@ -21418,35 +21890,6 @@ export type FirewallComponentsSchemasRuleset = {
  * @x-auditable true
  */
 export type FirewallComponentsUaRuleId = string;
-
-/**
- * The parameters configuring the action.
- */
-export type FirewallConfigRulesComponentsSchemasActionParameters = FirewallActionParametersSetConfig;
-
-export type FirewallConfigRulesComponentsSchemasRule = {
-  /**
-   * @example set_config
-   */
-  action?: void;
-  action_parameters?: FirewallConfigRulesComponentsSchemasActionParameters;
-  /**
-   * @example enable Email Obfuscation
-   */
-  description?: void;
-  /**
-   * @example http.cookie contains "something"
-   */
-  expression?: void;
-  /**
-   * @example 3a03d665bac047339bb530ecb439a90d
-   */
-  id?: void;
-  /**
-   * @example 1
-   */
-  version?: void;
-};
 
 /**
  * The rule configuration.
@@ -21489,24 +21932,6 @@ export type FirewallCountryConfiguration = {
 };
 
 /**
- * A rule object.
- */
-export type FirewallCreateUpdateRule = {
-  action: FirewallComponentsSchemasAction;
-  action_parameters?: FirewallSchemasActionParameters;
-  description?: FirewallRulesComponentsSchemasDescription;
-  enabled?: FirewallEnabled;
-  expression: FirewallSchemasExpression;
-  logging?: FirewallLogging;
-  ref?: FirewallComponentsSchemasRef;
-};
-
-/**
- * The list of rules in the ruleset.
- */
-export type FirewallCreateUpdateRules = (FirewallCreateUpdateRule | void)[];
-
-/**
  * The timestamp of when the rule was created.
  *
  * @example 2014-01-01T05:20:00.12345Z
@@ -21542,7 +21967,7 @@ export type FirewallDeletedFilter = {
 };
 
 /**
- * An informative summary of the rate limit. This value is sanitized and any tags will be removed.
+ * An informative summary of the rule. This value is sanitized and any tags will be removed.
  *
  * @example Prevent multiple login failures to mitigate brute force attacks
  * @maxLength 1024
@@ -21572,30 +21997,6 @@ export type FirewallDetectionMode = 'anomaly' | 'traditional';
  * @x-auditable true
  */
 export type FirewallDisabled = boolean;
-
-export type FirewallDynamicRedirectRulesComponentsSchemasRule = {
-  /**
-   * @example redirect
-   */
-  action?: void;
-  action_parameters?: FirewallComponentsSchemasActionParameters;
-  /**
-   * @example Blog redirect
-   */
-  description?: void;
-  /**
-   * @example http.request.uri.path == "/blog"
-   */
-  expression?: void;
-  /**
-   * @example 3a03d665bac047339bb530ecb439a90d
-   */
-  id?: void;
-  /**
-   * @example 1
-   */
-  version?: void;
-};
 
 /**
  * The contact email address of the user.
@@ -21629,13 +22030,7 @@ export type FirewallFilter = {
 };
 
 export type FirewallFilterDeleteResponseCollection = FirewallApiResponseCollection & {
-  result?: {
-    description?: FirewallFiltersComponentsSchemasDescription;
-    expression?: FirewallExpression;
-    id: FirewallFiltersComponentsSchemasId;
-    paused?: FirewallFiltersComponentsSchemasPaused;
-    ref?: FirewallSchemasRef;
-  }[];
+  result?: FirewallFilter[];
 };
 
 export type FirewallFilterDeleteResponseSingle = FirewallApiResponseSingle & {
@@ -21649,13 +22044,7 @@ export type FirewallFilterDeleteResponseSingle = FirewallApiResponseSingle & {
 };
 
 export type FirewallFilterResponseCollection = FirewallApiResponseCollection & {
-  result?: {
-    description?: FirewallFiltersComponentsSchemasDescription;
-    expression: FirewallExpression;
-    id: FirewallFiltersComponentsSchemasId;
-    paused: FirewallFiltersComponentsSchemasPaused;
-    ref?: FirewallSchemasRef;
-  }[];
+  result?: FirewallFilter[];
 };
 
 export type FirewallFilterResponseSingle = FirewallApiResponseSingle & {
@@ -21677,19 +22066,19 @@ export type FirewallFilterRuleResponse = FirewallFilterRuleBase & {
 };
 
 export type FirewallFilterRulesResponseCollection = FirewallApiResponseCollection & {
-  result: (FirewallFilterRuleResponse & Record<string, any>)[];
+  result: FirewallFilterRuleResponse[];
 };
 
 export type FirewallFilterRulesResponseCollectionDelete = FirewallApiResponseCollection & {
-  result: (FirewallFilterRuleResponse & Record<string, any>)[];
+  result: FirewallFilterRuleResponse[];
 };
 
 export type FirewallFilterRulesSingleResponse = FirewallApiResponseSingle & {
-  result: FirewallFilterRuleResponse & Record<string, any>;
+  result: FirewallFilterRuleResponse;
 };
 
 export type FirewallFilterRulesSingleResponseDelete = FirewallApiResponseSingle & {
-  result: FirewallFilterRuleResponse & Record<string, any>;
+  result: FirewallFilterRuleResponse;
 };
 
 export type FirewallFilters = {
@@ -21767,19 +22156,27 @@ export type FirewallFirewallRulesComponentsSchemasId = string;
 
 export type FirewallFirewalluablock = {
   configuration?: FirewallSchemasConfiguration;
-  description?: FirewallUaRulesComponentsSchemasDescription;
+  description?: FirewallFirewalluablockComponentsSchemasDescription;
   id?: FirewallComponentsUaRuleId;
   mode?: FirewallComponentsSchemasMode;
   paused?: FirewallSchemasPaused;
 };
 
-export type FirewallFirewalluablockResponseCollection = FirewallApiResponseCollection & {
-  result?: FirewallUaRules[];
-};
+/**
+ * An informative summary of the rule.
+ *
+ * @example Prevent access from abusive clients identified by this User Agent to mitigate a DDoS attack
+ * @maxLength 1024
+ */
+export type FirewallFirewalluablockComponentsSchemasDescription = string;
 
-export type FirewallFirewalluablockResponseSingle = FirewallApiResponseSingle & {
-  result?: Record<string, any>;
-};
+export type FirewallFirewalluablockResponseCollection = {
+  result?: FirewallFirewalluablock[];
+} & FirewallApiResponseCollection;
+
+export type FirewallFirewalluablockResponseSingle = {
+  result?: FirewallFirewalluablock;
+} & FirewallApiResponseSingle;
 
 /**
  * An object that allows you to enable or disable WAF rule groups for the current WAF override. Each key of this object must be the ID of a WAF rule group, and each value must be a valid WAF action (usually `default` or `disable`). When creating a new URI-based WAF override, you must provide a `groups` object or a `rules` object.
@@ -21894,20 +22291,6 @@ export type FirewallLockdownsComponentsSchemasDescription = string;
 export type FirewallLockdownsComponentsSchemasId = string;
 
 /**
- * An object configuring the rule's logging behavior.
- *
- * @example {"enabled":true}
- */
-export type FirewallLogging = {
-  /**
-   * Whether to generate a log when the rule matches.
-   *
-   * @example true
-   */
-  enabled?: boolean;
-};
-
-/**
  * Determines which traffic the rate limit counts towards the threshold.
  */
 export type FirewallMatch = {
@@ -21994,16 +22377,7 @@ export type FirewallOverride = {
 };
 
 export type FirewallOverrideResponseCollection = FirewallApiResponseCollection & {
-  result: {
-    description?: FirewallComponentsSchemasDescription;
-    groups?: FirewallGroups;
-    id: FirewallOverridesId;
-    paused: FirewallPaused;
-    priority: FirewallPriority;
-    rewrite_action?: FirewallRewriteAction;
-    rules?: FirewallRules;
-    urls: FirewallUrls;
-  }[];
+  result: FirewallOverride[];
 };
 
 export type FirewallOverrideResponseSingle = FirewallApiResponseSingle & {
@@ -22051,7 +22425,7 @@ export type FirewallPackageResponseSingle =
     };
 
 /**
- * When true, indicates that the WAF package is currently paused.
+ * When true, indicates that the rule is currently paused.
  *
  * @x-auditable true
  */
@@ -22066,14 +22440,6 @@ export type FirewallPaused = boolean;
  * @x-auditable true
  */
 export type FirewallPeriod = number;
-
-/**
- * The phase where the ruleset is executed.
- */
-export type FirewallPhase =
-  | 'http_request_transform'
-  | 'http_request_late_transform'
-  | 'http_response_headers_transform';
 
 /**
  * The relative priority of the current URI-based WAF override when multiple overrides match a single URL. A lower number indicates higher priority. Higher priority overrides may overwrite values set by lower priority overrides.
@@ -22240,41 +22606,6 @@ export type FirewallRules = {
  */
 export type FirewallRulesComponentsSchemasDescription = string;
 
-export type FirewallRuleset = {
-  /**
-   * @example
-   */
-  description?: void;
-  /**
-   * @example 2f2feab2026849078ba485f918791bdc
-   */
-  id?: void;
-  /**
-   * @example zone
-   */
-  kind?: void;
-  /**
-   * @example default
-   */
-  name?: void;
-  /**
-   * @example http_request_origin
-   */
-  phase?: void;
-  /**
-   * The rules in the ruleset.
-   */
-  rules?: FirewallComponentsSchemasRule[];
-};
-
-/**
- * An informative description of the ruleset.
- *
- * @default
- * @example My ruleset to execute managed rulesets
- */
-export type FirewallRulesetsComponentsSchemasDescription = string;
-
 /**
  * The action to apply to a matched request. The `log` action is only available on an Enterprise plan.
  *
@@ -22288,13 +22619,6 @@ export type FirewallSchemasAction =
   | 'allow'
   | 'log'
   | 'bypass';
-
-/**
- * The parameters configuring the rule action.
- *
- * @example {"id":"4814384a9e5d4991b9815dcfc25d2f1f"}
- */
-export type FirewallSchemasActionParameters = Record<string, any>;
 
 export type FirewallSchemasCidrConfiguration = {
   /**
@@ -22423,33 +22747,6 @@ export type FirewallSchemasRule = FirewallRule & {
   };
 };
 
-export type FirewallSchemasRuleset = {
-  /**
-   * @example
-   */
-  description?: void;
-  /**
-   * @example 2f2feab2026849078ba485f918791bdc
-   */
-  id?: void;
-  /**
-   * @example zone
-   */
-  kind?: void;
-  /**
-   * @example default
-   */
-  name?: void;
-  /**
-   * @example http_request_dynamic_redirect
-   */
-  phase?: void;
-  /**
-   * The rules in the ruleset.
-   */
-  rules?: FirewallDynamicRedirectRulesComponentsSchemasRule[];
-};
-
 /**
  * The URLs to include in the rule definition. You can use wildcards. Each entered URL will be escaped before use, which means you can only use simple wildcard patterns.
  */
@@ -22498,78 +22795,20 @@ export type FirewallThreshold = number;
  */
 export type FirewallTimeout = number;
 
-/**
- * The parameters configuring the action.
- */
-export type FirewallTransformRulesComponentsSchemasActionParameters = FirewallActionParametersRewrite;
-
-export type FirewallTransformRulesComponentsSchemasRule = {
+export type FirewallUaConfiguration = {
   /**
-   * @example rewrite
+   * The configuration target. You must set the target to `ua` when specifying a user agent in the rule.
+   *
+   * @example ua
    */
-  action?: void;
-  action_parameters?: FirewallTransformRulesComponentsSchemasActionParameters;
+  target?: 'ua';
   /**
-   * @example change request based on ip location
+   * the user agent to exactly match
+   *
+   * @example Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1)
+   * @x-auditable true
    */
-  description?: void;
-  /**
-   * @example ip.geoip.country eq "AL"
-   */
-  expression?: void;
-  /**
-   * @example 3a03d665bac047339bb530ecb439a90d
-   */
-  id?: void;
-  /**
-   * @example 1
-   */
-  version?: void;
-};
-
-export type FirewallTransformRulesComponentsSchemasRuleset = {
-  /**
-   * @example
-   */
-  description?: void;
-  /**
-   * @example 2f2feab2026849078ba485f918791bdc
-   */
-  id?: void;
-  /**
-   * @example zone
-   */
-  kind?: void;
-  /**
-   * @example default
-   */
-  name?: void;
-  /**
-   * @example http_request_transform
-   */
-  phase?: void;
-  /**
-   * The rules in the ruleset.
-   */
-  rules?: FirewallTransformRulesComponentsSchemasRule[];
-};
-
-export type FirewallUaRules = FirewallFirewalluablock;
-
-/**
- * An informative summary of the rule.
- *
- * @example Prevent access from abusive clients identified by this User Agent to mitigate a DDoS attack
- * @maxLength 1024
- */
-export type FirewallUaRulesComponentsSchemasDescription = string;
-
-/**
- * A ruleset object.
- */
-export type FirewallUpdateRuleset = {
-  description?: FirewallRulesetsComponentsSchemasDescription;
-  rules: FirewallCreateUpdateRules;
+  value?: string;
 };
 
 /**
@@ -22964,16 +23203,7 @@ export type HealthchecksTimestamp = string;
  */
 export type HealthchecksType = string;
 
-export type HyperdriveApiResponseCollection = {
-  errors: HyperdriveMessages;
-  messages: HyperdriveMessages;
-  result: never;
-  /**
-   * Whether the API call was successful
-   *
-   * @example true
-   */
-  success: true;
+export type HyperdriveApiResponseCollection = HyperdriveApiResponseCommon & {
   result_info?: HyperdriveResultInfo;
 };
 
@@ -22982,7 +23212,7 @@ export type HyperdriveApiResponseCommon = {
   messages: HyperdriveMessages;
   result: Record<string, any>;
   /**
-   * Whether the API call was successful
+   * Return the status of the API call success.
    *
    * @example true
    */
@@ -22998,7 +23228,7 @@ export type HyperdriveApiResponseCommonFailure = {
   messages: HyperdriveMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Return the status of the API call success.
    *
    * @example false
    */
@@ -23011,7 +23241,7 @@ export type HyperdriveHyperdriveCaching = HyperdriveHyperdriveCachingDisabled | 
 
 export type HyperdriveHyperdriveCachingCommon = {
   /**
-   * When set to true, disables the caching of SQL responses. (Default: false)
+   * Set to true to disable caching of SQL responses. Default is false.
    *
    * @x-auditable true
    */
@@ -23022,14 +23252,14 @@ export type HyperdriveHyperdriveCachingDisabled = HyperdriveHyperdriveCachingCom
 
 export type HyperdriveHyperdriveCachingEnabled = HyperdriveHyperdriveCachingCommon & {
   /**
-   * When present, specifies max duration for which items should persist in the cache. Not returned if set to default. (Default: 60)
+   * Specify the maximum duration items should persist in the cache. Not returned if set to the default (60).
    *
    * @example 60
    * @x-auditable true
    */
   max_age?: number;
   /**
-   * When present, indicates the number of seconds cache may serve the response after it becomes stale. Not returned if set to default. (Default: 15)
+   * Specify the number of seconds the cache may serve a stale response. Omitted if set to the default (15).
    *
    * @example 15
    * @x-auditable true
@@ -23040,7 +23270,7 @@ export type HyperdriveHyperdriveCachingEnabled = HyperdriveHyperdriveCachingComm
 export type HyperdriveHyperdriveConfig = {
   caching?: HyperdriveHyperdriveCaching;
   /**
-   * When the Hyperdrive configuration was created.
+   * Defines the creation time of the Hyperdrive configuration.
    *
    * @example 2017-01-01T00:00:00Z
    * @format date-time
@@ -23049,7 +23279,7 @@ export type HyperdriveHyperdriveConfig = {
   created_on?: string;
   id: HyperdriveIdentifier;
   /**
-   * When the Hyperdrive configuration was last modified.
+   * Defines the last modified time of the Hyperdrive configuration.
    *
    * @example 2017-01-01T00:00:00Z
    * @format date-time
@@ -23061,6 +23291,7 @@ export type HyperdriveHyperdriveConfig = {
   origin:
     | (HyperdriveHyperdriveDatabaseFull & HyperdriveInternetOrigin)
     | (HyperdriveHyperdriveDatabaseFull & HyperdriveOverAccessOrigin);
+  origin_connection_limit?: HyperdriveHyperdriveOriginConnectionLimit;
 };
 
 export type HyperdriveHyperdriveConfigPatch = {
@@ -23068,27 +23299,28 @@ export type HyperdriveHyperdriveConfigPatch = {
   mtls?: HyperdriveHyperdriveMtls;
   name?: HyperdriveHyperdriveName;
   origin?: HyperdriveHyperdriveDatabase | (HyperdriveInternetOrigin | HyperdriveOverAccessOrigin);
+  origin_connection_limit?: HyperdriveHyperdriveOriginConnectionLimit;
 };
 
 export type HyperdriveHyperdriveConfigResponse = HyperdriveHyperdriveConfig;
 
 export type HyperdriveHyperdriveDatabase = {
   /**
-   * The name of your origin database.
+   * Set the name of your origin database.
    *
    * @example postgres
    * @x-auditable true
    */
   database?: string;
   /**
-   * The password required to access your origin database. This value is write-only and never returned by the API.
+   * Set the password needed to access your origin database. The API never returns this write-only value.
    *
    * @x-sensitive true
    */
   password?: string;
   scheme?: HyperdriveHyperdriveScheme;
   /**
-   * The user of your origin database.
+   * Set the user of your origin database.
    *
    * @example postgres
    * @x-auditable true
@@ -23100,19 +23332,19 @@ export type HyperdriveHyperdriveDatabaseFull = HyperdriveHyperdriveDatabase;
 
 export type HyperdriveHyperdriveMtls = {
   /**
-   * CA certificate ID
+   * Define CA certificate ID obtained after uploading CA cert.
    *
    * @example 00000000-0000-0000-0000-0000000000
    */
   ca_certificate_id?: string;
   /**
-   * mTLS certificate ID
+   * Define mTLS certificate ID obtained after uploading client cert.
    *
    * @example 00000000-0000-0000-0000-0000000000
    */
   mtls_certificate_id?: string;
   /**
-   * SSL mode used for CA verification. Must be 'require', 'verify-ca', or 'verify-full'
+   * Set SSL mode to 'require', 'verify-ca', or 'verify-full' to verify the CA.
    *
    * @example verify-full
    */
@@ -23129,6 +23361,16 @@ export type HyperdriveHyperdriveOrigin = HyperdriveHyperdriveDatabase &
   (HyperdriveInternetOrigin | HyperdriveOverAccessOrigin);
 
 /**
+ * The (soft) maximum number of connections the Hyperdrive is allowed to make to the origin database.
+ *
+ * @example 60
+ * @maximum 100
+ * @minimum 5
+ * @x-auditable true
+ */
+export type HyperdriveHyperdriveOriginConnectionLimit = number;
+
+/**
  * Specifies the URL scheme used to connect to your origin database.
  *
  * @x-auditable true
@@ -23136,7 +23378,7 @@ export type HyperdriveHyperdriveOrigin = HyperdriveHyperdriveDatabase &
 export type HyperdriveHyperdriveScheme = 'postgres' | 'postgresql' | 'mysql';
 
 /**
- * Identifier
+ * Define configurations using a unique string identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -23146,14 +23388,14 @@ export type HyperdriveIdentifier = string;
 
 export type HyperdriveInternetOrigin = {
   /**
-   * The host (hostname or IP) of your origin database.
+   * Defines the host (hostname or IP) of your origin database.
    *
    * @example database.example.com
    * @x-auditable true
    */
   host: string;
   /**
-   * The port (default: 5432 for Postgres) of your origin database.
+   * Defines the port (default: 5432 for Postgres) of your origin database.
    *
    * @example 5432
    * @x-auditable true
@@ -23171,21 +23413,21 @@ export type HyperdriveMessages = {
 
 export type HyperdriveOverAccessOrigin = {
   /**
-   * The Client ID of the Access token to use when connecting to the origin database.
+   * Defines the Client ID of the Access token to use when connecting to the origin database.
    *
    * @example 0123456789abcdef0123456789abcdef.access
    * @x-auditable true
    */
   access_client_id: string;
   /**
-   * The Client Secret of the Access token to use when connecting to the origin database. This value is write-only and never returned by the API.
+   * Defines the Client Secret of the Access Token to use when connecting to the origin database. The API never returns this write-only value.
    *
    * @example 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
    * @x-sensitive true
    */
   access_client_secret: string;
   /**
-   * The host (hostname or IP) of your origin database.
+   * Defines the host (hostname or IP) of your origin database.
    *
    * @example database.example.com
    * @x-auditable true
@@ -23195,25 +23437,25 @@ export type HyperdriveOverAccessOrigin = {
 
 export type HyperdriveResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Defines the total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Defines the current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Defines the number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Defines the total results available without any search parameters.
    *
    * @example 2000
    */
@@ -23243,6 +23485,7 @@ export type IamAccount = {
    *
    * @example Demo Account
    * @maxLength 100
+   * @x-auditable true
    */
   name: string;
   /**
@@ -23256,22 +23499,6 @@ export type IamAccount = {
      */
     abuse_contact_email?: string;
     /**
-     * Specifies the default nameservers to be used for new zones added to this account.
-     *
-     * - `cloudflare.standard` for Cloudflare-branded nameservers
-     * - `custom.account` for account custom nameservers
-     * - `custom.tenant` for tenant custom nameservers
-     *
-     * See [Custom Nameservers](https://developers.cloudflare.com/dns/additional-options/custom-nameservers/)
-     * for more information.
-     *
-     * Deprecated in favor of [DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-an-account-update-dns-settings).
-     *
-     * @default cloudflare.standard
-     * @deprecated true
-     */
-    default_nameservers?: 'cloudflare.standard' | 'custom.account' | 'custom.tenant';
-    /**
      * Indicates whether membership in this account requires that
      * Two-Factor Authentication is enabled
      *
@@ -23279,27 +23506,18 @@ export type IamAccount = {
      * @x-auditable true
      */
     enforce_twofactor?: boolean;
-    /**
-     * Indicates whether new zones should use the account-level custom
-     * nameservers by default.
-     *
-     * Deprecated in favor of [DNS Settings](https://developers.cloudflare.com/api/operations/dns-settings-for-an-account-update-dns-settings).
-     *
-     * @default false
-     * @deprecated true
-     */
-    use_account_custom_ns_by_default?: boolean;
   };
 };
 
 /**
- * Account identifier tag.
+ * Identifier
  *
- * @example eb78d65290b24279ba6f44721b3ea3c4
+ * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @minLength 32
  * @x-auditable true
  */
-export type IamAccountIdentifier = string;
+export type IamAccountIdentifier = IamCommonComponentsSchemasIdentifier;
 
 export type IamApiResponseCollection = IamApiResponseCommon & {
   result_info?: IamResultInfo;
@@ -23401,6 +23619,8 @@ export type IamCollectionTokensResponse = IamApiResponseCollection & {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @minLength 32
+ * @x-auditable true
  */
 export type IamCommonComponentsSchemasIdentifier = string;
 
@@ -23410,6 +23630,7 @@ export type IamComponentsSchemasAccount = IamAccount;
  * Whether the user is a member of the organization or has an invitation pending.
  *
  * @example member
+ * @x-auditable true
  */
 export type IamComponentsSchemasStatus = 'member' | 'invited';
 
@@ -23422,7 +23643,6 @@ export type IamCondition = {
  *
  * @example US
  * @maxLength 30
- * @x-auditable true
  */
 export type IamCountry = string | null;
 
@@ -23524,6 +23744,20 @@ export type IamCreateResourceGroupScopeScopeObject = {
  * @example com.cloudflare.api.account.zone.23f8d65290b24279ba6f44721b3eaad5
  */
 export type IamCreateResourceGroupScopeScopeObjectKey = void;
+
+export type IamCreateUserGroupBody = {
+  /**
+   * Name of the User group.
+   *
+   * @example My New User Group
+   * @x-auditable true
+   */
+  name: string;
+  /**
+   * Policies attached to the User group
+   */
+  policies: IamUserGroupPolicyWriteBody[];
+};
 
 /**
  * A group of scoped resources.
@@ -23805,6 +24039,7 @@ export type IamModifiedOn = string;
  *
  * @example readonly token
  * @maxLength 120
+ * @x-auditable true
  */
 export type IamName = string;
 
@@ -23833,7 +24068,7 @@ export type IamOrganization = {
  */
 export type IamPermissionGroup = {
   /**
-   * Identifier of the group.
+   * Identifier of the permission group.
    *
    * @example 6d7f2f5f5b1d4a0e9081fdc98d432fd1
    * @x-auditable true
@@ -23845,11 +24080,17 @@ export type IamPermissionGroup = {
    * @example {"label":"load_balancer_admin","scopes":"com.cloudflare.api.account"}
    */
   meta?: {
+    /**
+     * @x-auditable true
+     */
     key?: string;
+    /**
+     * @x-auditable true
+     */
     value?: string;
   };
   /**
-   * Name of the group.
+   * Name of the permission group.
    *
    * @example Load Balancer
    * @x-auditable true
@@ -23858,13 +24099,24 @@ export type IamPermissionGroup = {
 };
 
 /**
- * Permission Group identifier tag.
+ * Identifier
  *
- * @example 6d7f2f5f5b1d4a0e9081fdc98d432fd1
+ * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @minLength 32
  * @x-auditable true
  */
-export type IamPermissionGroupComponentsSchemasIdentifier = string;
+export type IamPermissionGroupIdentifier = IamCommonComponentsSchemasIdentifier;
+
+/**
+ * A set of permission groups that are specified to the policy.
+ *
+ * @example {"id":"c8fed203ed3043cba015a93ad1616f1f"}
+ * @example {"id":"82e64a83756745bbbb1c9c2701bf816b"}
+ */
+export type IamPermissionGroupIds = {
+  id: IamPermissionGroupIdentifier;
+}[];
 
 /**
  * A set of permission groups that are specified to the policy.
@@ -23978,7 +24230,7 @@ export type IamRequestUpdateResourceGroup = {
  */
 export type IamResourceGroup = {
   /**
-   * Identifier of the group.
+   * Identifier of the resource group.
    *
    * @example 6d7f2f5f5b1d4a0e9081fdc98d432fd1
    * @x-auditable true
@@ -24007,13 +24259,23 @@ export type IamResourceGroup = {
 };
 
 /**
- * Resource Group identifier tag.
+ * Identifier
  *
- * @example 6d7f2f5f5b1d4a0e9081fdc98d432fd1
+ * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @minLength 32
  * @x-auditable true
  */
-export type IamResourceGroupComponentsSchemasIdentifier = string;
+export type IamResourceGroupIdentifier = IamCommonComponentsSchemasIdentifier;
+
+/**
+ * A set of resource groups that are specified to the policy.
+ *
+ * @example {"id":"6d7f2f5f5b1d4a0e9081fdc98d432fd1"}
+ */
+export type IamResourceGroupIds = {
+  id: IamResourceGroupIdentifier;
+}[];
 
 /**
  * A list of resource groups that the policy applies to.
@@ -24023,10 +24285,14 @@ export type IamResourceGroups = IamResourceGroup[];
 /**
  * A list of resource names that the policy applies to.
  *
- * @example {"com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43":"*","com.cloudflare.api.account.zone.eb78d65290b24279ba6f44721b3ea3c4":"*"}
+ * @example {"object":{"summary":"Nested object value","value":{"com.cloudflare.api.account.eb78d65290b24279ba6f44721b3ea3c4":{"com.cloudflare.api.account.zone.*":"*"}}},"string":{"summary":"Single string value","value":{"com.cloudflare.api.account.zone.22b1de5f1c0e4b3ea97bb1e963b06a43":"*"}}}
  */
 export type IamResources = {
-  [key: string]: string;
+  [key: string]:
+    | string
+    | {
+        [key: string]: string;
+      };
 };
 
 export type IamResponseCollection = IamApiResponseCollection & {
@@ -24049,15 +24315,6 @@ export type IamResponseSingle = IamApiResponseSingle & {
 
 export type IamResponseSingleAccount = IamApiResponseSingle & {
   result?: IamAccount;
-};
-
-export type IamResponseSingleSegment = IamApiResponseSingle & {
-  result?: {
-    expires_on?: IamExpiresOn;
-    id: IamTokenIdentifier;
-    not_before?: IamNotBefore;
-    status: IamStatus;
-  };
 };
 
 export type IamResponseSingleValue = IamApiResponseSingle & {
@@ -24192,6 +24449,7 @@ export type IamScope = {
  * This is a combination of pre-defined resource name and identifier (like Account ID etc.)
  *
  * @example com.cloudflare.api.account.eb78d65290b24279ba6f44721b3ea3c4
+ * @x-auditable true
  */
 export type IamScopeKey = void;
 
@@ -24206,6 +24464,7 @@ export type IamScopeObject = {
  * This is a combination of pre-defined resource name and identifier (like Zone ID etc.)
  *
  * @example com.cloudflare.api.account.zone.23f8d65290b24279ba6f44721b3eaad5
+ * @x-auditable true
  */
 export type IamScopeObjectKey = void;
 
@@ -24242,23 +24501,57 @@ export type IamSingleTokenResponse = IamApiResponseSingle & {
 };
 
 export type IamSingleUserResponse = IamApiResponseSingle & {
-  result?: Record<string, any>;
+  result?: {
+    /**
+     * Lists the betas that the user is participating in.
+     */
+    betas?: string[];
+    country?: IamCountry;
+    first_name?: IamFirstName;
+    /**
+     * Indicates whether user has any business zones
+     *
+     * @default false
+     */
+    has_business_zones?: boolean;
+    /**
+     * Indicates whether user has any enterprise zones
+     *
+     * @default false
+     */
+    has_enterprise_zones?: boolean;
+    /**
+     * Indicates whether user has any pro zones
+     *
+     * @default false
+     */
+    has_pro_zones?: boolean;
+    /**
+     * Identifier of the user.
+     *
+     * @example 6d7f2f5f5b1d4a0e9081fdc98d432fd1
+     */
+    id?: string;
+    last_name?: IamLastName;
+    organizations?: IamOrganization[];
+    /**
+     * Indicates whether user has been suspended
+     *
+     * @default false
+     */
+    suspended?: boolean;
+    telephone?: IamTelephone;
+    two_factor_authentication_enabled?: IamTwoFactorAuthenticationEnabled;
+    two_factor_authentication_locked?: IamTwoFactorAuthenticationLocked;
+    zipcode?: IamZipcode;
+  };
 };
-
-/**
- * Status of the token.
- *
- * @example active
- * @x-auditable true
- */
-export type IamStatus = 'active' | 'disabled' | 'expired';
 
 /**
  * User's telephone number
  *
  * @example +1 123-123-1234
  * @maxLength 20
- * @x-auditable true
  */
 export type IamTelephone = string | null;
 
@@ -24272,7 +24565,7 @@ export type IamTokenBase = {
   name?: IamName;
   not_before?: IamNotBefore;
   policies?: IamTokenPolicies;
-  status?: IamStatus;
+  status?: IamTokenStatus;
 };
 
 export type IamTokenBody = {
@@ -24285,7 +24578,7 @@ export type IamTokenBody = {
   name: IamName;
   not_before?: IamNotBefore;
   policies: IamTokenPolicies;
-  status: IamStatus;
+  status?: IamTokenStatus;
 };
 
 /**
@@ -24293,6 +24586,7 @@ export type IamTokenBody = {
  *
  * @example ed17574386854bf78a67040be0a770b0
  * @maxLength 32
+ * @x-auditable true
  */
 export type IamTokenIdentifier = string;
 
@@ -24300,6 +24594,24 @@ export type IamTokenIdentifier = string;
  * List of access policies assigned to the token.
  */
 export type IamTokenPolicies = IamPolicyWithPermissionGroupsAndResources[];
+
+/**
+ * Status of the token.
+ *
+ * @example active
+ * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
+ */
+export type IamTokenStatus = 'active' | 'disabled' | 'expired';
+
+export type IamTokenVerifyResponseSingleSegment = IamApiResponseSingle & {
+  result?: {
+    expires_on?: IamExpiresOn;
+    id: IamTokenIdentifier;
+    not_before?: IamNotBefore;
+    status: IamTokenStatus;
+  };
+};
 
 export type IamTokenWithValue = IamTokenBase & {
   value?: IamValue;
@@ -24311,6 +24623,13 @@ export type IamTokenWithValue = IamTokenBase & {
  * @default false
  */
 export type IamTwoFactorAuthenticationEnabled = boolean;
+
+/**
+ * Indicates whether two-factor authentication is required by one of the accounts that the user is a member of.
+ *
+ * @default false
+ */
+export type IamTwoFactorAuthenticationLocked = boolean;
 
 /**
  * Tenant unit identifier.
@@ -24352,6 +24671,115 @@ export type IamUpdateMemberWithRoles = {
   };
 };
 
+export type IamUpdateUserGroupBody = {
+  /**
+   * Name of the User group.
+   *
+   * @example My New User Group
+   */
+  name?: string;
+  /**
+   * Policies attached to the User group
+   */
+  policies?: ({
+    /**
+     * Policy identifier.
+     *
+     * @example f267e341f3dd4697bd3b9f71dd96247f
+     */
+    id: string;
+  } & IamUserGroupPolicyWriteBody)[];
+};
+
+/**
+ * A group of policies resources.
+ */
+export type IamUserGroup = {
+  /**
+   * Timestamp for the creation of the user group
+   *
+   * @example 2024-03-01T12:21:02.0000Z
+   * @format date-time
+   * @x-auditable true
+   */
+  created_on: string;
+  id: IamUserGroupIdentifier;
+  /**
+   * Last time the user group was modified.
+   *
+   * @example 2024-03-01T12:21:02.0000Z
+   * @format date-time
+   * @x-auditable true
+   */
+  modified_on: string;
+  /**
+   * Name of the user group.
+   *
+   * @example My New User Group
+   * @x-auditable true
+   */
+  name: string;
+  /**
+   * Policies attached to the User group
+   */
+  policies?: {
+    access?: IamAccess;
+    id?: IamIdentifier;
+    permission_groups?: IamPermissionGroups;
+    resource_groups?: IamResourceGroups;
+  }[];
+};
+
+/**
+ * Identifier
+ *
+ * @example 023e105f4ecef8ad9ca31a8372d0c353
+ * @maxLength 32
+ * @minLength 32
+ * @x-auditable true
+ */
+export type IamUserGroupIdentifier = IamCommonComponentsSchemasIdentifier;
+
+/**
+ * Member attached to a User Group.
+ */
+export type IamUserGroupMember = {
+  email?: IamEmail;
+  /**
+   * Account member identifier.
+   *
+   * @example 4f5f0c14a2a41d5063dd301b2f829f04
+   */
+  id: string;
+  /**
+   * The member's status in the account.
+   *
+   * @example accepted
+   */
+  status?: 'accepted' | 'pending';
+};
+
+/**
+ * Identifier
+ *
+ * @example 023e105f4ecef8ad9ca31a8372d0c353
+ * @maxLength 32
+ * @minLength 32
+ * @x-auditable true
+ */
+export type IamUserGroupMemberIdentifier = IamCommonComponentsSchemasIdentifier;
+
+export type IamUserGroupPolicyWriteBody = {
+  access: IamAccess;
+  permission_groups: IamPermissionGroupIds;
+  resource_groups: IamResourceGroupIds;
+};
+
+/**
+ * A list of user groups for the account.
+ */
+export type IamUserGroups = IamUserGroup[];
+
 export type IamUserInvite = {
   expires_on?: IamSchemasExpiresOn;
   id?: IamInviteComponentsSchemasIdentifier;
@@ -24362,6 +24790,7 @@ export type IamUserInvite = {
    *
    * @example 5a7805061c76ada191ed06f989cc3dac
    * @maxLength 32
+   * @x-auditable true
    */
   invited_member_id: string | null;
   invited_on?: IamInvitedOn;
@@ -24370,10 +24799,12 @@ export type IamUserInvite = {
    *
    * @example 5a7805061c76ada191ed06f989cc3dac
    * @maxLength 32
+   * @x-auditable true
    */
   organization_id: string;
   /**
    * @example true
+   * @x-auditable true
    */
   organization_is_enforcing_twofactor?: boolean;
   /**
@@ -24381,6 +24812,7 @@ export type IamUserInvite = {
    *
    * @example Cloudflare, Inc.
    * @maxLength 100
+   * @x-auditable true
    */
   organization_name?: string;
   roles?: IamRoleNames;
@@ -24388,6 +24820,7 @@ export type IamUserInvite = {
    * Current status of the invitation.
    *
    * @example accepted
+   * @x-auditable true
    */
   status?: 'pending' | 'accepted' | 'rejected' | 'expired';
 };
@@ -24407,7 +24840,6 @@ export type IamValue = string;
  *
  * @example 12345
  * @maxLength 20
- * @x-auditable true
  */
 export type IamZipcode = string | null;
 
@@ -24504,7 +24936,13 @@ export type ImagesImageBasicUpload = {
    * @format binary
    * @x-auditable true
    */
-  file?: void;
+  file?: Blob;
+  /**
+   * An optional custom unique identifier for your image.
+   *
+   * @x-auditable true
+   */
+  id?: string;
   /**
    * User modifiable key-value store. Can use used for keeping references to another system of record for managing images.
    */
@@ -24994,7 +25432,32 @@ export type InfraTargetArray = InfraTarget[];
 export type InfraTargetId = string;
 
 export type InfraApiResponseCollection = InfraApiResponseCommon & {
-  result_info?: InfraResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type InfraApiResponseCommon = {
@@ -25037,33 +25500,6 @@ export type InfraMessages = {
     pointer?: string;
   };
 }[];
-
-export type InfraResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
 
 export type IntelSinkholesApiResponseCommon = {
   errors: IntelSinkholesMessages;
@@ -25164,9 +25600,9 @@ export type IntelAdditionalInformation = {
 export type IntelApiResponseCollection = {
   errors: IntelMessages;
   messages: IntelMessages;
-  result: Record<string, any> | any[] | string | null;
+  result: Record<string, any> | (string | Record<string, any>)[] | string | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -25177,9 +25613,9 @@ export type IntelApiResponseCollection = {
 export type IntelApiResponseCommon = {
   errors: IntelMessages;
   messages: IntelMessages;
-  result: Record<string, any> | any[] | string;
+  result: Record<string, any> | (string | Record<string, any>)[] | string;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -25195,7 +25631,7 @@ export type IntelApiResponseCommonFailure = {
   messages: IntelMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -25332,7 +25768,16 @@ export type IntelDomainHistory = {
     /**
      * @example {"id":155,"name":"Technology"}
      */
-    categories?: void;
+    categories?: {
+      /**
+       * @example 155
+       */
+      id?: number;
+      /**
+       * @example Technology
+       */
+      name?: string;
+    }[];
     /**
      * @example 2021-04-30
      * @format date
@@ -25356,7 +25801,7 @@ export type IntelDomainHistory = {
 export type IntelDomainName = string;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -25557,7 +26002,7 @@ export type IntelPhishingUrlInfo = {
      */
     model_name?: string;
     /**
-     * Score output by the model for this submission.
+     * This is the score that is outputted by the model for this submission.
      *
      * @example 0.024
      */
@@ -25653,7 +26098,7 @@ export type IntelPhishingUrlSubmit = {
     url?: string;
   }[];
   /**
-   * URLs that were skipped because the same URL is currently being scanned
+   * URLs that were skipped because the same URL is currently being scanned.
    */
   skipped_urls?: {
     /**
@@ -25725,25 +26170,25 @@ export type IntelResponse = IntelApiResponseCollection & {
 
 export type IntelResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -25904,7 +26349,7 @@ export type IntelStartEndParams = {
 };
 
 /**
- * STIX 2.1 identifier: https://docs.oasis-open.org/cti/stix/v2.1/cs02/stix-v2.1-cs02.html#_64yvzeku5a5c
+ * STIX 2.1 identifier: https://docs.oasis-open.org/cti/stix/v2.1/cs02/stix-v2.1-cs02.html#_64yvzeku5a5c.
  *
  * @example ipv4-addr--baa568ec-6efe-5902-be55-0663833db537
  * @x-auditable true
@@ -25912,7 +26357,7 @@ export type IntelStartEndParams = {
 export type IntelStixIdentifier = string;
 
 /**
- * URL(s) to filter submissions results by
+ * URL(s) to filter submissions results by.
  *
  * @example https://www.cloudflare.com
  * @format uri
@@ -25974,9 +26419,9 @@ export type IntelWhois = {
 };
 
 export type ListsApiResponseCollection = {
+  result: Record<string, any> | Record<string, any>[] | null;
   errors: ListsMessages;
   messages: ListsMessages;
-  result: Record<string, any> | Record<string, any>[] | null;
   /**
    * Defines whether the API call was successful.
    *
@@ -26013,9 +26458,9 @@ export type ListsApiResponseCommonFailure = {
   success: false;
 };
 
-export type ListsBulkOperationResponseCollection = ListsApiResponseCollection & {
+export type ListsBulkOperationResponseCollection = {
   result?: ListsOperation;
-};
+} & ListsApiResponseCollection;
 
 /**
  * The RFC 3339 timestamp of when the list was created.
@@ -26046,11 +26491,32 @@ export type ListsIdentifier = string;
 /**
  * @example {"comment":"Private IP address","created_on":"2020-01-01T08:00:00Z","id":"2c0fc9fa937b11eaa1b71c4d701ab86e","ip":"10.0.0.1","modified_on":"2020-01-10T14:00:00Z"}
  */
-export type ListsItem = ListsItemIp | ListsItemRedirect | ListsItemHostname | ListsItemAsn;
-
-export type ListsItemResponseCollection = ListsApiResponseCollection & {
-  result?: ListsItem;
+export type ListsItem = {
+  asn?: ListsItemAsn;
+  comment?: ListsItemComment;
+  /**
+   * The RFC 3339 timestamp of when the item was created.
+   *
+   * @example 2020-01-01T08:00:00Z
+   * @x-auditable true
+   */
+  created_on?: string;
+  hostname?: ListsItemHostname;
+  id?: ListsListId;
+  ip?: ListsItemIp;
+  /**
+   * The RFC 3339 timestamp of when the item was last modified.
+   *
+   * @example 2020-01-10T14:00:00Z
+   * @x-auditable true
+   */
+  modified_on?: string;
+  redirect?: ListsItemRedirect;
 };
+
+export type ListsItemResponseCollection = {
+  result?: ListsItem;
+} & ListsApiResponseCollection;
 
 /**
  * Defines a non-negative 32 bit integer.
@@ -26083,12 +26549,14 @@ export type ListsItemHostname = {
  * Defines the unique ID of the item in the List.
  *
  * @example 34b12448945f11eaa1b71c4d701ab86e
+ * @maxLength 32
+ * @minLength 32
  * @x-auditable true
  */
 export type ListsItemId = string;
 
 /**
- * An IPv4 address, an IPv4 CIDR, or an IPv6 CIDR. IPv6 CIDRs are limited to a maximum of /64.
+ * An IPv4 address, an IPv4 CIDR, an IPv6 address, or an IPv6 CIDR.
  *
  * @example 10.0.0.1
  * @x-auditable true
@@ -26138,7 +26606,7 @@ export type ListsItemRedirect = {
 
 export type ListsItems = ListsItem[];
 
-export type ListsItemsListResponseCollection = ListsApiResponseCollection & {
+export type ListsItemsListResponseCollection = {
   result?: ListsItems;
   result_info?: {
     cursors?: {
@@ -26154,7 +26622,7 @@ export type ListsItemsListResponseCollection = ListsApiResponseCollection & {
       before?: string;
     };
   };
-};
+} & ListsApiResponseCollection;
 
 export type ListsItemsUpdateRequestCollection = {
   asn?: ListsItemAsn;
@@ -26183,13 +26651,13 @@ export type ListsList = {
 };
 
 export type ListsListDeleteResponseCollection = {
-  errors: ListsMessages;
-  messages: ListsMessages;
   result:
     | {
         id?: ListsItemId;
       }
     | Record<string, any>[];
+  errors: ListsMessages;
+  messages: ListsMessages;
   /**
    * Defines whether the API call was successful.
    *
@@ -26199,9 +26667,9 @@ export type ListsListDeleteResponseCollection = {
 };
 
 export type ListsListResponseCollection = {
+  result: ListsList;
   errors: ListsMessages;
   messages: ListsMessages;
-  result: ListsList;
   /**
    * Defines whether the API call was successful.
    *
@@ -26220,24 +26688,15 @@ export type ListsListResponseCollection = {
  */
 export type ListsListId = string;
 
-export type ListsListsAsyncResponse = ListsApiResponseCollection & {
+export type ListsListsAsyncResponse = {
   result?: {
     operation_id?: ListsOperationId;
   };
-};
+} & ListsApiResponseCollection;
 
-export type ListsListsResponseCollection = ListsApiResponseCollection & {
-  result?: {
-    created_on: ListsCreatedOn;
-    description?: ListsDescription;
-    id: ListsListId;
-    kind: ListsKind;
-    modified_on: ListsModifiedOn;
-    name: ListsName;
-    num_items: ListsNumItems;
-    num_referencing_filters?: ListsNumReferencingFilters;
-  }[];
-};
+export type ListsListsResponseCollection = {
+  result?: ListsList[];
+} & ListsApiResponseCollection;
 
 export type ListsMessages = {
   /**
@@ -26328,6 +26787,7 @@ export type LoadBalancingAdaptiveRouting = {
    *
    * @default false
    * @example true
+   * @x-auditable true
    */
   failover_across_pools?: boolean;
 };
@@ -26336,6 +26796,7 @@ export type LoadBalancingAdaptiveRouting = {
  * The IP address (IPv4 or IPv6) of the origin, or its publicly addressable hostname. Hostnames entered here should resolve directly to the origin, and not be a hostname proxied by Cloudflare. To set an internal/reserved address, virtual_network_id must also be set.
  *
  * @example 0.0.0.0
+ * @x-auditable true
  */
 export type LoadBalancingAddress = string;
 
@@ -26344,6 +26805,7 @@ export type LoadBalancingAddress = string;
  *
  * @default false
  * @example true
+ * @x-auditable true
  */
 export type LoadBalancingAllowInsecure = boolean;
 
@@ -26431,6 +26893,7 @@ export type LoadBalancingCheckRegions =
  * Object description.
  *
  * @example Load Balancer for www.example.com
+ * @x-auditable true
  */
 export type LoadBalancingComponentsSchemasDescription = string;
 
@@ -26439,6 +26902,7 @@ export type LoadBalancingComponentsSchemasDescription = string;
  *
  * @default true
  * @example true
+ * @x-auditable true
  */
 export type LoadBalancingComponentsSchemasEnabled = boolean;
 
@@ -26453,6 +26917,7 @@ export type LoadBalancingComponentsSchemasIdResponse = LoadBalancingApiResponseS
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type LoadBalancingComponentsSchemasIdentifier = string;
 
@@ -26460,6 +26925,7 @@ export type LoadBalancingComponentsSchemasIdentifier = string;
  * The DNS hostname to associate with your Load Balancer. If this hostname already exists as a DNS record in Cloudflare's DNS, the Load Balancer will take precedence and the DNS record will not be used.
  *
  * @example www.example.com
+ * @x-auditable true
  */
 export type LoadBalancingComponentsSchemasName = string;
 
@@ -26478,6 +26944,7 @@ export type LoadBalancingComponentsSchemasSingleResponse = LoadBalancingApiRespo
 
 /**
  * @example example.com
+ * @x-auditable true
  */
 export type LoadBalancingComponentsSchemasZoneName = string;
 
@@ -26485,6 +26952,7 @@ export type LoadBalancingComponentsSchemasZoneName = string;
  * To be marked unhealthy the monitored origin must fail this healthcheck N consecutive times.
  *
  * @default 0
+ * @x-auditable true
  */
 export type LoadBalancingConsecutiveDown = number;
 
@@ -26492,6 +26960,7 @@ export type LoadBalancingConsecutiveDown = number;
  * To be marked healthy the monitored origin must pass this healthcheck N consecutive times.
  *
  * @default 0
+ * @x-auditable true
  */
 export type LoadBalancingConsecutiveUp = number;
 
@@ -26517,6 +26986,7 @@ export type LoadBalancingDefaultPools = string[];
  * Object description.
  *
  * @example Login page monitor
+ * @x-auditable true
  */
 export type LoadBalancingDescription = string;
 
@@ -26524,6 +26994,7 @@ export type LoadBalancingDescription = string;
  * This field shows up only if the origin is disabled. This field is set with the time the origin was disabled.
  *
  * @format date-time
+ * @x-auditable true
  */
 export type LoadBalancingDisabledAt = string;
 
@@ -26532,6 +27003,7 @@ export type LoadBalancingDisabledAt = string;
  *
  * @default true
  * @example false
+ * @x-auditable true
  */
 export type LoadBalancingEnabled = boolean;
 
@@ -26539,6 +27011,7 @@ export type LoadBalancingEnabled = boolean;
  * A case-insensitive sub-string to look for in the response body. If this string is not found, the origin will be marked as unhealthy. This parameter is only valid for HTTP and HTTPS monitors.
  *
  * @example alive
+ * @x-auditable true
  */
 export type LoadBalancingExpectedBody = string;
 
@@ -26546,11 +27019,14 @@ export type LoadBalancingExpectedBody = string;
  * The expected HTTP response code or code range of the health check. This parameter is only valid for HTTP and HTTPS monitors.
  *
  * @example 2xx
+ * @x-auditable true
  */
 export type LoadBalancingExpectedCodes = string;
 
 /**
  * The pool ID to use when all other pools are detected as unhealthy.
+ *
+ * @x-auditable true
  */
 export type LoadBalancingFallbackPool = string;
 
@@ -26562,10 +27038,13 @@ export type LoadBalancingFilterOptions = {
    * If set true, disable notifications for this type of resource (pool or origin).
    *
    * @default false
+   * @x-auditable true
    */
   disable?: boolean;
   /**
    * If present, send notifications only for this health status (e.g. false for only DOWN events). Use null to reset (all events).
+   *
+   * @x-auditable true
    */
   healthy?: boolean | null;
 } | null;
@@ -26575,6 +27054,7 @@ export type LoadBalancingFilterOptions = {
  *
  * @default false
  * @example true
+ * @x-auditable true
  */
 export type LoadBalancingFollowRedirects = boolean;
 
@@ -26598,6 +27078,7 @@ export type LoadBalancingHealthDetails = LoadBalancingApiResponseSingle & {
      * Pool ID
      *
      * @example 17b5962d775c646f3f9725cbc7a53df4
+     * @x-auditable true
      */
     pool_id?: string;
     /**
@@ -26608,6 +27089,7 @@ export type LoadBalancingHealthDetails = LoadBalancingApiResponseSingle & {
        * Whether health check in region is healthy.
        *
        * @example true
+       * @x-auditable true
        */
       healthy?: boolean;
       origins?: LoadBalancingOriginHealth[];
@@ -26623,6 +27105,7 @@ export type LoadBalancingIdResponse = LoadBalancingApiResponseSingle & {
 
 /**
  * @example f1aba936b94213e5b8dca0c0dbf1f9cc
+ * @x-auditable true
  */
 export type LoadBalancingIdentifier = string;
 
@@ -26630,11 +27113,14 @@ export type LoadBalancingIdentifier = string;
  * The interval between each health check. Shorter intervals may improve failover time, but will increase load on the origins as we check from multiple locations.
  *
  * @default 60
+ * @x-auditable true
  */
 export type LoadBalancingInterval = number;
 
 /**
  * The latitude of the data center containing the origins used in this pool in decimal degrees. If this is set, longitude must also be set.
+ *
+ * @x-auditable true
  */
 export type LoadBalancingLatitude = number;
 
@@ -26666,6 +27152,7 @@ export type LoadBalancingLoadBalancer = {
 
 /**
  * @example 699d98642c564d2e855e9661899b7252
+ * @x-auditable true
  */
 export type LoadBalancingLoadBalancerComponentsSchemasIdentifier = string;
 
@@ -26688,12 +27175,14 @@ export type LoadBalancingLoadShedding = {
    * @default 0
    * @maximum 100
    * @minimum 0
+   * @x-auditable true
    */
   default_percent?: number;
   /**
    * The default policy to use when load shedding. A random policy randomly sheds a given percent of requests. A hash policy computes a hash over the CF-Connecting-IP address and sheds all requests originating from a percent of IPs.
    *
    * @default random
+   * @x-auditable true
    */
   default_policy?: 'random' | 'hash';
   /**
@@ -26702,12 +27191,14 @@ export type LoadBalancingLoadShedding = {
    * @default 0
    * @maximum 100
    * @minimum 0
+   * @x-auditable true
    */
   session_percent?: number;
   /**
    * Only the hash policy is supported for existing sessions (to avoid exponential decay).
    *
    * @default hash
+   * @x-auditable true
    */
   session_policy?: 'hash';
 };
@@ -26723,6 +27214,7 @@ export type LoadBalancingLocationStrategy = {
    *
    * @default pop
    * @example resolver_ip
+   * @x-auditable true
    */
   mode?: 'pop' | 'resolver_ip';
   /**
@@ -26734,12 +27226,15 @@ export type LoadBalancingLocationStrategy = {
    *
    * @default proximity
    * @example always
+   * @x-auditable true
    */
   prefer_ecs?: 'always' | 'never' | 'proximity' | 'geo';
 };
 
 /**
  * The longitude of the data center containing the origins used in this pool in decimal degrees. If this is set, latitude must also be set.
+ *
+ * @x-auditable true
  */
 export type LoadBalancingLongitude = number;
 
@@ -26756,6 +27251,7 @@ export type LoadBalancingMessages = {
  *
  * @default GET
  * @example GET
+ * @x-auditable true
  */
 export type LoadBalancingMethod = string;
 
@@ -26763,6 +27259,7 @@ export type LoadBalancingMethod = string;
  * The minimum number of origins that must be healthy for this pool to serve traffic. If the number of healthy origins falls below this number, the pool will be marked unhealthy and will failover to the next available pool.
  *
  * @default 1
+ * @x-auditable true
  */
 export type LoadBalancingMinimumOrigins = number;
 
@@ -26798,9 +27295,21 @@ export type LoadBalancingMonitorReferencesResponse = LoadBalancingApiResponseCom
    * @example {"reference_type":"referrer","resource_id":"17b5962d775c646f3f9725cbc7a53df4","resource_name":"primary-dc-1","resource_type":"pool"}
    */
   result?: {
+    /**
+     * @x-auditable true
+     */
     reference_type?: '*' | 'referral' | 'referrer';
+    /**
+     * @x-auditable true
+     */
     resource_id?: string;
+    /**
+     * @x-auditable true
+     */
     resource_name?: string;
+    /**
+     * @x-auditable true
+     */
     resource_type?: string;
   }[];
 };
@@ -26815,6 +27324,8 @@ export type LoadBalancingMonitorResponseSingle = LoadBalancingApiResponseSingle 
 
 /**
  * The ID of the Monitor to use for checking the health of origins within this pool.
+ *
+ * @x-auditable true
  */
 export type LoadBalancingMonitorId = string;
 
@@ -26822,6 +27333,7 @@ export type LoadBalancingMonitorId = string;
  * A short name (tag) for the pool. Only alphanumeric characters, hyphens, and underscores are allowed.
  *
  * @example primary-dc-1
+ * @x-auditable true
  */
 export type LoadBalancingName = string;
 
@@ -26834,6 +27346,7 @@ export type LoadBalancingNetworks = string[];
  * This field is now deprecated. It has been moved to Cloudflare's Centralized Notification service https://developers.cloudflare.com/fundamentals/notifications/. The email address to send health status notifications to. This can be an individual mailbox or a mailing list. Multiple emails can be supplied as a comma delimited list.
  *
  * @example someone@example.com,sometwo@example.com
+ * @x-auditable true
  */
 export type LoadBalancingNotificationEmail = string;
 
@@ -26872,6 +27385,7 @@ export type LoadBalancingOriginAnalytics = {
  * Whether the origin has changed health status.
  *
  * @example true
+ * @x-auditable true
  */
 export type LoadBalancingOriginChanged = boolean;
 
@@ -26879,6 +27393,7 @@ export type LoadBalancingOriginChanged = boolean;
  * Failure reason for un-healthy origin health check.
  *
  * @example No failures
+ * @x-auditable true
  */
 export type LoadBalancingOriginFailureReason = string;
 
@@ -26888,24 +27403,28 @@ export type LoadBalancingOriginHealth = {
      * Failure reason.
      *
      * @example No failure reasons
+     * @x-auditable true
      */
     failure_reason?: string;
     /**
      * Origin health status.
      *
      * @example true
+     * @x-auditable true
      */
     healthy?: boolean;
     /**
      * Response code from origin health check.
      *
      * @example 200
+     * @x-auditable true
      */
     response_code?: number;
     /**
      * Origin RTT (Round Trip Time) response.
      *
      * @example 201.5ms
+     * @x-auditable true
      */
     rtt?: string;
   };
@@ -26915,6 +27434,7 @@ export type LoadBalancingOriginHealth = {
  * Whether the origin is reported as healthy.
  *
  * @example true
+ * @x-auditable true
  */
 export type LoadBalancingOriginHealthy = boolean;
 
@@ -26922,6 +27442,7 @@ export type LoadBalancingOriginHealthy = boolean;
  * The IP address (IPv4 or IPv6) of the origin.
  *
  * @example 198.51.100.4
+ * @x-auditable true
  */
 export type LoadBalancingOriginIp = string;
 
@@ -26931,9 +27452,21 @@ export type LoadBalancingOriginIp = string;
  * @example {"failure_reason":"No failures","healthy":true,"response_code":200,"rtt":"66ms"}
  */
 export type LoadBalancingOriginHealthData = {
+  /**
+   * @x-auditable true
+   */
   failure_reason?: string;
+  /**
+   * @x-auditable true
+   */
   healthy?: boolean;
+  /**
+   * @x-auditable true
+   */
   response_code?: number;
+  /**
+   * @x-auditable true
+   */
   rtt?: string;
 };
 
@@ -26956,6 +27489,7 @@ export type LoadBalancingOriginSteering = {
    * - `"least_connections"`: Select an origin by taking into consideration origin weights, as well as each origin's number of open connections. Origins with more open connections are weighted proportionately less relative to others. Supported for HTTP/1 and HTTP/2 connections.
    *
    * @default random
+   * @x-auditable true
    */
   policy?: 'random' | 'hash' | 'least_outstanding_requests' | 'least_connections';
 };
@@ -26977,6 +27511,7 @@ export type LoadBalancingPatchPoolsNotificationEmail = '';
  *
  * @default /
  * @example /health
+ * @x-auditable true
  */
 export type LoadBalancingPath = string;
 
@@ -27005,6 +27540,7 @@ export type LoadBalancingPool = {
  * The name for the pool to filter.
  *
  * @example primary-dc
+ * @x-auditable true
  */
 export type LoadBalancingPoolName = string;
 
@@ -27016,9 +27552,21 @@ export type LoadBalancingPoolsReferencesResponse = LoadBalancingApiResponseCommo
    * @example {"reference_type":"referral","resource_id":"f1aba936b94213e5b8dca0c0dbf1f9cc","resource_name":"Login page monitor","resource_type":"monitor"}
    */
   result?: {
+    /**
+     * @x-auditable true
+     */
     reference_type?: '*' | 'referral' | 'referrer';
+    /**
+     * @x-auditable true
+     */
     resource_id?: string;
+    /**
+     * @x-auditable true
+     */
     resource_name?: string;
+    /**
+     * @x-auditable true
+     */
     resource_type?: string;
   }[];
 };
@@ -27036,6 +27584,7 @@ export type LoadBalancingPopPools = {
  * The port number to connect to for the health check. Required for TCP, UDP, and SMTP checks. HTTP and HTTPS checks should only define the port when using a non-standard port (HTTP: default 80, HTTPS: default 443).
  *
  * @default 0
+ * @x-auditable true
  */
 export type LoadBalancingPort = number;
 
@@ -27065,6 +27614,9 @@ export type LoadBalancingPreviewResponse = LoadBalancingApiResponseSingle & {
  */
 export type LoadBalancingPreviewResult = {
   [key: string]: {
+    /**
+     * @x-auditable true
+     */
     healthy?: boolean;
     origins?: {
       [key: string]: LoadBalancingOriginHealthData;
@@ -27080,6 +27632,7 @@ export type LoadBalancingPreviewResultResponse = LoadBalancingApiResponseSingle 
  * Assign this monitor to emulate the specified zone while probing. This parameter is only valid for HTTP and HTTPS monitors.
  *
  * @example example.com
+ * @x-auditable true
  */
 export type LoadBalancingProbeZone = string;
 
@@ -27088,6 +27641,7 @@ export type LoadBalancingProbeZone = string;
  *
  * @default false
  * @example true
+ * @x-auditable true
  */
 export type LoadBalancingProxied = boolean;
 
@@ -27106,6 +27660,7 @@ export type LoadBalancingRandomSteering = {
    * @maximum 1
    * @minimum 0
    * @multipleOf 0.1
+   * @x-auditable true
    */
   default_weight?: number;
   /**
@@ -27157,6 +27712,8 @@ export type LoadBalancingRegionPools = {
 export type LoadBalancingResourceReference = {
   /**
    * When listed as a reference, the type (direction) of the reference.
+   *
+   * @x-auditable true
    */
   reference_type?: 'referral' | 'referrer';
   /**
@@ -27174,12 +27731,14 @@ export type LoadBalancingResourceReference = {
    * The human-identifiable name of the resource.
    *
    * @example primary-dc-1
+   * @x-auditable true
    */
   resource_name?: string;
   /**
    * The type of the resource.
    *
    * @example pool
+   * @x-auditable true
    */
   resource_type?: 'load_balancer' | 'monitor' | 'pool';
 };
@@ -27221,6 +27780,7 @@ export type LoadBalancingResultInfo = {
  * The number of retries to attempt in case of a timeout before marking the origin as unhealthy. Retries are attempted immediately.
  *
  * @default 2
+ * @x-auditable true
  */
 export type LoadBalancingRetries = number;
 
@@ -27232,12 +27792,14 @@ export type LoadBalancingRules = {
    * The condition expressions to evaluate. If the condition evaluates to true, the overrides or fixed_response in this rule will be applied. An empty condition is always true. For more details on condition expressions, please see https://developers.cloudflare.com/load-balancing/understand-basics/load-balancing-rules/expressions.
    *
    * @example http.request.uri.path contains "/testing"
+   * @x-auditable true
    */
   condition?: string;
   /**
    * Disable this specific rule. It will no longer be evaluated by this load balancer.
    *
    * @default false
+   * @x-auditable true
    */
   disabled?: boolean;
   /**
@@ -27249,6 +27811,7 @@ export type LoadBalancingRules = {
      *
      * @example application/json
      * @maxLength 32
+     * @x-auditable true
      */
     content_type?: string;
     /**
@@ -27256,6 +27819,7 @@ export type LoadBalancingRules = {
      *
      * @example www.example.com
      * @maxLength 2048
+     * @x-auditable true
      */
     location?: string;
     /**
@@ -27263,10 +27827,13 @@ export type LoadBalancingRules = {
      *
      * @example Testing Hello
      * @maxLength 1024
+     * @x-auditable true
      */
     message_body?: string;
     /**
      * The http status code to respond with.
+     *
+     * @x-auditable true
      */
     status_code?: number;
   };
@@ -27275,6 +27842,7 @@ export type LoadBalancingRules = {
    *
    * @example route the path /testing to testing datacenter.
    * @maxLength 200
+   * @x-auditable true
    */
   name?: string;
   /**
@@ -27300,10 +27868,13 @@ export type LoadBalancingRules = {
    *
    * @default 0
    * @minimum 0
+   * @x-auditable true
    */
   priority?: number;
   /**
    * If this rule's condition is true, this causes rule evaluation to stop after processing this rule.
+   *
+   * @x-auditable true
    */
   terminates?: boolean;
 }[];
@@ -27312,6 +27883,7 @@ export type LoadBalancingRules = {
  * A human-readable description of the pool.
  *
  * @example Primary data center - Provider XYZ
+ * @x-auditable true
  */
 export type LoadBalancingSchemasDescription = string;
 
@@ -27319,6 +27891,7 @@ export type LoadBalancingSchemasDescription = string;
  * This field shows up only if the pool is disabled. This field is set with the time the pool was disabled at.
  *
  * @format date-time
+ * @x-auditable true
  */
 export type LoadBalancingSchemasDisabledAt = string;
 
@@ -27327,6 +27900,7 @@ export type LoadBalancingSchemasDisabledAt = string;
  *
  * @default true
  * @example true
+ * @x-auditable true
  */
 export type LoadBalancingSchemasEnabled = boolean;
 
@@ -27345,6 +27919,7 @@ export type LoadBalancingSchemasIdResponse = LoadBalancingApiResponseSingle & {
 
 /**
  * @example 17b5962d775c646f3f9725cbc7a53df4
+ * @x-auditable true
  */
 export type LoadBalancingSchemasIdentifier = string;
 
@@ -27352,6 +27927,7 @@ export type LoadBalancingSchemasIdentifier = string;
  * A human-identifiable name for the origin.
  *
  * @example app-server-1
+ * @x-auditable true
  */
 export type LoadBalancingSchemasName = string;
 
@@ -27375,23 +27951,6 @@ export type LoadBalancingSearch = {
   resources?: LoadBalancingResourceReference[];
 };
 
-export type LoadBalancingSearchParams = {
-  /**
-   * Search query term.
-   *
-   * @default
-   * @example primary
-   */
-  query?: string;
-  /**
-   * The type of references to include ("*" for all).
-   *
-   * @default
-   * @example *
-   */
-  references?: '' | '*' | 'referral' | 'referrer';
-};
-
 export type LoadBalancingSearchResult = {
   result?: LoadBalancingSearch;
 };
@@ -27404,6 +27963,7 @@ export type LoadBalancingSearchResult = {
  *
  * @default none
  * @example cookie
+ * @x-auditable true
  */
 export type LoadBalancingSessionAffinity = 'none' | 'cookie' | 'ip_cookie' | 'header';
 
@@ -27415,6 +27975,7 @@ export type LoadBalancingSessionAffinityAttributes = {
    * Configures the drain duration in seconds. This field is only used when session affinity is enabled on the load balancer.
    *
    * @example 100
+   * @x-auditable true
    */
   drain_duration?: number;
   /**
@@ -27430,6 +27991,7 @@ export type LoadBalancingSessionAffinityAttributes = {
    * - `"false"`: Load balancing requests must contain *at least one* of the HTTP headers specified by the `headers` session affinity attribute, otherwise sessions aren't created.
    *
    * @default false
+   * @x-auditable true
    */
   require_all_headers?: boolean;
   /**
@@ -27437,6 +27999,7 @@ export type LoadBalancingSessionAffinityAttributes = {
    *
    * @default Auto
    * @example Auto
+   * @x-auditable true
    */
   samesite?: 'Auto' | 'Lax' | 'None' | 'Strict';
   /**
@@ -27444,6 +28007,7 @@ export type LoadBalancingSessionAffinityAttributes = {
    *
    * @default Auto
    * @example Auto
+   * @x-auditable true
    */
   secure?: 'Auto' | 'Always' | 'Never';
   /**
@@ -27454,6 +28018,7 @@ export type LoadBalancingSessionAffinityAttributes = {
    *
    * @default none
    * @example sticky
+   * @x-auditable true
    */
   zero_downtime_failover?: 'none' | 'temporary' | 'sticky';
 };
@@ -27464,6 +28029,7 @@ export type LoadBalancingSessionAffinityAttributes = {
  * - `"header"`: The current default of 1800 seconds will be used unless explicitly set. The accepted range of values is between [30, 3600]. Note: With session affinity by header, sessions only expire after they haven't been used for the number of seconds specified.
  *
  * @example 1800
+ * @x-auditable true
  */
 export type LoadBalancingSessionAffinityTtl = number;
 
@@ -27480,6 +28046,7 @@ export type LoadBalancingSessionAffinityTtl = number;
  *
  * @default
  * @example dynamic_latency
+ * @x-auditable true
  */
 export type LoadBalancingSteeringPolicy =
   | 'off'
@@ -27495,6 +28062,7 @@ export type LoadBalancingSteeringPolicy =
  * Two-letter subdivision code followed in ISO 3166-2.
  *
  * @example CA
+ * @x-auditable true
  */
 export type LoadBalancingSubdivisionCodeA2 = string;
 
@@ -27502,12 +28070,14 @@ export type LoadBalancingSubdivisionCodeA2 = string;
  * The timeout (in seconds) before marking the health check as failed.
  *
  * @default 5
+ * @x-auditable true
  */
 export type LoadBalancingTimeout = number;
 
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type LoadBalancingTimestamp = string;
 
@@ -27515,6 +28085,7 @@ export type LoadBalancingTimestamp = string;
  * Time to live (TTL) of the DNS entry for the IP address returned by this load balancer. This only applies to gray-clouded (unproxied) load balancers.
  *
  * @example 30
+ * @x-auditable true
  */
 export type LoadBalancingTtl = number;
 
@@ -27523,6 +28094,7 @@ export type LoadBalancingTtl = number;
  *
  * @default http
  * @example https
+ * @x-auditable true
  */
 export type LoadBalancingType = 'http' | 'https' | 'tcp' | 'udp_icmp' | 'icmp_ping' | 'smtp';
 
@@ -27531,6 +28103,7 @@ export type LoadBalancingType = 'http' | 'https' | 'tcp' | 'udp_icmp' | 'icmp_pi
  *
  * @example 2016-11-11T13:00:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type LoadBalancingUntil = string;
 
@@ -27551,10 +28124,18 @@ export type LoadBalancingVirtualNetworkId = string;
  * @maximum 1
  * @minimum 0
  * @multipleOf 0.01
+ * @x-auditable true
  */
 export type LoadBalancingWeight = number;
 
 export type LogcontrolAccountIdentifier = LogcontrolIdentifier;
+
+/**
+ * Allow out of region access
+ *
+ * @example false
+ */
+export type LogcontrolAllowOutOfRegionAccess = boolean;
 
 export type LogcontrolApiResponseCommon = {
   errors: LogcontrolMessages;
@@ -27586,6 +28167,7 @@ export type LogcontrolApiResponseCommonFailure = {
 export type LogcontrolApiResponseSingle = LogcontrolApiResponseCommon;
 
 export type LogcontrolCmbConfig = {
+  allow_out_of_region_access?: LogcontrolAllowOutOfRegionAccess;
   regions?: LogcontrolRegions;
 } | null;
 
@@ -27605,6 +28187,7 @@ export type LogcontrolFlag = boolean;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type LogcontrolIdentifier = string;
 
@@ -27621,11 +28204,11 @@ export type LogcontrolMessages = {
 }[];
 
 /**
- * Comma-separated list of regions.
+ * Name of the region.
  *
  * @example eu
  * @maxLength 256
- * @pattern ^[a-z,]*$
+ * @pattern ^[a-z]*$
  */
 export type LogcontrolRegions = string;
 
@@ -27732,7 +28315,6 @@ export type LogpushEnabled = boolean;
 /**
  * If not null, the job is currently failing. Failures are usually repetitive (example: no permissions to write to destination bucket). Only the last failure is recorded. On successful execution of a job the error_message and last_error are set to null.
  *
- * @format date-time
  * @x-auditable true
  */
 export type LogpushErrorMessage = string | null;
@@ -27795,6 +28377,7 @@ export type LogpushId = number;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type LogpushIdentifier = string;
 
@@ -27815,13 +28398,14 @@ export type LogpushInstantLogsJobResponseSingle = LogpushApiResponseSingle & {
 };
 
 /**
- * The kind parameter (optional) is used to differentiate between Logpush and Edge Log Delivery jobs. Currently, Edge Log Delivery is only supported for the `http_requests` dataset.
+ * The kind parameter (optional) is used to differentiate between Logpush and Edge Log Delivery jobs (when supported by the dataset).
  *
  * @default
  * @example
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
-export type LogpushKind = 'edge' | null;
+export type LogpushKind = '' | 'edge';
 
 /**
  * Records the last time for which logs have been successfully pushed. If the last successful push was for logs range 2018-07-23T10:00:00Z to 2018-07-23T10:01:00Z then the value of this field will be 2018-07-23T10:01:00Z. If the job has never run or has just been enabled and hasn't run yet then the field will be empty.
@@ -27881,36 +28465,30 @@ export type LogpushLogpushJobResponseSingle = LogpushApiResponseSingle & {
 };
 
 /**
- * The maximum uncompressed file size of a batch of logs. This setting value must be between `5 MB` and `1 GB`, or `0` to disable it. Note that you cannot set a minimum file size; this means that log files may be much smaller than this batch size. This parameter is not available for jobs with `edge` as its kind.
+ * The maximum uncompressed file size of a batch of logs. This setting value must be between `5 MB` and `1 GB`, or `0` to disable it. Note that you cannot set a minimum file size; this means that log files may be much smaller than this batch size.
  *
  * @example 5000000
- * @maximum 1000000000
- * @minimum 5000000
  * @x-auditable true
  */
-export type LogpushMaxUploadBytes = number | null;
+export type LogpushMaxUploadBytes = 0 | number | null;
 
 /**
- * The maximum interval in seconds for log batches. This setting must be between 30 and 300 seconds (5 minutes), or `0` to disable it. Note that you cannot specify a minimum interval for log batches; this means that log files may be sent in shorter intervals than this. This parameter is only used for jobs with `edge` as its kind.
+ * The maximum interval in seconds for log batches. This setting must be between 30 and 300 seconds (5 minutes), or `0` to disable it. Note that you cannot specify a minimum interval for log batches; this means that log files may be sent in shorter intervals than this.
  *
  * @default 30
  * @example 30
- * @maximum 300
- * @minimum 30
  * @x-auditable true
  */
-export type LogpushMaxUploadIntervalSeconds = number | null;
+export type LogpushMaxUploadIntervalSeconds = 0 | number | null;
 
 /**
- * The maximum number of log lines per batch. This setting must be between 1000 and 1,000,000 lines, or `0` to disable it. Note that you cannot specify a minimum number of log lines per batch; this means that log files may contain many fewer lines than this. This parameter is not available for jobs with `edge` as its kind.
+ * The maximum number of log lines per batch. This setting must be between 1000 and 1,000,000 lines, or `0` to disable it. Note that you cannot specify a minimum number of log lines per batch; this means that log files may contain many fewer lines than this.
  *
  * @default 100000
  * @example 1000
- * @maximum 1000000
- * @minimum 1000
  * @x-auditable true
  */
-export type LogpushMaxUploadRecords = number | null;
+export type LogpushMaxUploadRecords = 0 | number | null;
 
 export type LogpushMessages = {
   /**
@@ -28849,6 +29427,7 @@ export type MagicVisibilityPcapsMessages = {
  * @example 500000
  * @maximum 1000000000
  * @minimum 1
+ * @x-auditable true
  */
 export type MagicVisibilityPcapsPcapsByteLimit = number;
 
@@ -28860,6 +29439,7 @@ export type MagicVisibilityPcapsPcapsCollectionResponse = MagicVisibilityPcapsAp
  * The name of the data center used for the packet capture. This can be a specific colo (ord02) or a multi-colo name (ORD). This field only applies to `full` packet captures.
  *
  * @example ord02
+ * @x-auditable true
  */
 export type MagicVisibilityPcapsPcapsColoName = string;
 
@@ -28885,30 +29465,35 @@ export type MagicVisibilityPcapsPcapsFilterV1 = {
    * The destination IP address of the packet.
    *
    * @example 1.2.3.4
+   * @x-auditable true
    */
   destination_address?: string;
   /**
    * The destination port of the packet.
    *
    * @example 80
+   * @x-auditable true
    */
   destination_port?: number;
   /**
    * The protocol number of the packet.
    *
    * @example 6
+   * @x-auditable true
    */
   protocol?: number;
   /**
    * The source IP address of the packet.
    *
    * @example 1.2.3.4
+   * @x-auditable true
    */
   source_address?: string;
   /**
    * The source port of the packet.
    *
    * @example 123
+   * @x-auditable true
    */
   source_port?: number;
 };
@@ -28919,6 +29504,7 @@ export type MagicVisibilityPcapsPcapsFilterV1 = {
  * @example 66802ca5668e47a2b82c2e6746e45037
  * @maxLength 32
  * @minLength 32
+ * @x-auditable true
  */
 export type MagicVisibilityPcapsPcapsId = string;
 
@@ -28927,6 +29513,7 @@ export type MagicVisibilityPcapsPcapsId = string;
  *
  * @example 2020-01-01T08:00:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type MagicVisibilityPcapsPcapsOffsetTime = string;
 
@@ -28999,8 +29586,14 @@ export type MagicVisibilityPcapsPcapsOwnershipValidateRequest = {
  * @example 10000
  * @maximum 10000
  * @minimum 1
+ * @x-auditable true
  */
 export type MagicVisibilityPcapsPcapsPacketLimit = number;
+
+/**
+ * The number of packets captured.
+ */
+export type MagicVisibilityPcapsPcapsPacketsCaptured = number;
 
 export type MagicVisibilityPcapsPcapsRequestFull = {
   byte_limit?: MagicVisibilityPcapsPcapsByteLimit;
@@ -29009,7 +29602,7 @@ export type MagicVisibilityPcapsPcapsRequestFull = {
   filter_v1?: MagicVisibilityPcapsPcapsFilterV1;
   packet_limit?: MagicVisibilityPcapsPcapsPacketLimit;
   system: MagicVisibilityPcapsPcapsSystem;
-  time_limit: MagicVisibilityPcapsPcapsTimeLimit;
+  time_limit: MagicVisibilityPcapsPcapsTimeLimitFull;
   type: MagicVisibilityPcapsPcapsType;
 };
 
@@ -29022,7 +29615,7 @@ export type MagicVisibilityPcapsPcapsRequestSimple = {
   offset_time?: MagicVisibilityPcapsPcapsOffsetTime;
   packet_limit: MagicVisibilityPcapsPcapsPacketLimit;
   system: MagicVisibilityPcapsPcapsSystem;
-  time_limit: MagicVisibilityPcapsPcapsTimeLimit;
+  time_limit: MagicVisibilityPcapsPcapsTimeLimitSampled;
   type: MagicVisibilityPcapsPcapsType;
 };
 
@@ -29033,10 +29626,12 @@ export type MagicVisibilityPcapsPcapsResponseFull = {
   error_message?: MagicVisibilityPcapsPcapsErrorMessage;
   filter_v1?: MagicVisibilityPcapsPcapsFilterV1;
   id?: MagicVisibilityPcapsPcapsId;
+  packets_captured?: MagicVisibilityPcapsPcapsPacketsCaptured;
   status?: MagicVisibilityPcapsPcapsStatus;
+  stop_requested?: MagicVisibilityPcapsPcapsStopRequested;
   submitted?: MagicVisibilityPcapsPcapsSubmitted;
   system?: MagicVisibilityPcapsPcapsSystem;
-  time_limit?: MagicVisibilityPcapsPcapsTimeLimit;
+  time_limit?: MagicVisibilityPcapsPcapsTimeLimitFull;
   type?: MagicVisibilityPcapsPcapsType;
 };
 
@@ -29047,7 +29642,7 @@ export type MagicVisibilityPcapsPcapsResponseSimple = {
   status?: MagicVisibilityPcapsPcapsStatus;
   submitted?: MagicVisibilityPcapsPcapsSubmitted;
   system?: MagicVisibilityPcapsPcapsSystem;
-  time_limit?: MagicVisibilityPcapsPcapsTimeLimit;
+  time_limit?: MagicVisibilityPcapsPcapsTimeLimitSampled;
   type?: MagicVisibilityPcapsPcapsType;
 };
 
@@ -29071,6 +29666,13 @@ export type MagicVisibilityPcapsPcapsStatus =
   | 'failed';
 
 /**
+ * The RFC 3339 timestamp when stopping the packet capture was requested. This field only applies to `full` packet captures.
+ *
+ * @format date-time
+ */
+export type MagicVisibilityPcapsPcapsStopRequested = string;
+
+/**
  * The RFC 3339 timestamp when the packet capture was created.
  *
  * @example 2020-01-01T08:00:00Z
@@ -29081,8 +29683,19 @@ export type MagicVisibilityPcapsPcapsSubmitted = string;
  * The system used to collect packet captures.
  *
  * @example magic-transit
+ * @x-auditable true
  */
 export type MagicVisibilityPcapsPcapsSystem = 'magic-transit';
+
+/**
+ * The packet capture duration in seconds.
+ *
+ * @example 86400
+ * @maximum 86400
+ * @minimum 1
+ * @x-auditable true
+ */
+export type MagicVisibilityPcapsPcapsTimeLimitFull = number;
 
 /**
  * The packet capture duration in seconds.
@@ -29090,13 +29703,15 @@ export type MagicVisibilityPcapsPcapsSystem = 'magic-transit';
  * @example 300
  * @maximum 300
  * @minimum 1
+ * @x-auditable true
  */
-export type MagicVisibilityPcapsPcapsTimeLimit = number;
+export type MagicVisibilityPcapsPcapsTimeLimitSampled = number;
 
 /**
  * The type of packet capture. `Simple` captures sampled packets, and `full` captures entire payloads and non-sampled packets.
  *
  * @example simple
+ * @x-auditable true
  */
 export type MagicVisibilityPcapsPcapsType = 'simple' | 'full';
 
@@ -29403,7 +30018,7 @@ export type MagicAppSingleResponse = {
 };
 
 /**
- * CIDRs to associate with traffic decisions.
+ * IPv4 CIDRs to associate with traffic decisions. (IPv6 CIDRs are currently unsupported)
  */
 export type MagicAppSubnets = (MagicCidr & void)[];
 
@@ -30470,21 +31085,39 @@ export type MagicWansCollectionResponse = MagicApiResponseSingle & {
  */
 export type MagicWeight = number;
 
+/**
+ * @x-auditable true
+ */
 export type McnAccountId = string;
 
 export type McnApplyProgress = {
+  /**
+   * @x-auditable true
+   */
   done: number;
+  /**
+   * @x-auditable true
+   */
   total: number;
 };
 
 export type McnAwsTrustPolicy = {
   aws_trust_policy: string;
+  /**
+   * @x-auditable true
+   */
   item_type: string;
 };
 
 export type McnAzureSetup = {
   azure_consent_url: string;
+  /**
+   * @x-auditable true
+   */
   integration_identity_tag: string;
+  /**
+   * @x-auditable true
+   */
   item_type: string;
   tag_cli_command: string;
 };
@@ -30516,9 +31149,13 @@ export type McnCatalogSync = {
 
 /**
  * @format uuid
+ * @x-auditable true
  */
 export type McnCatalogSyncDestinationId = string;
 
+/**
+ * @x-auditable true
+ */
 export type McnCatalogSyncDestinationType = 'NONE' | 'ZERO_TRUST_LIST';
 
 /**
@@ -30526,6 +31163,9 @@ export type McnCatalogSyncDestinationType = 'NONE' | 'ZERO_TRUST_LIST';
  */
 export type McnCatalogSyncId = string;
 
+/**
+ * @x-auditable true
+ */
 export type McnCatalogSyncUpdateMode = 'AUTO' | 'MANUAL';
 
 export type McnCatalogSyncsPrebuiltPoliciesResponse = McnGoodResponse & {
@@ -30540,31 +31180,46 @@ export type McnCatalogSyncsPrebuiltPolicy = {
 };
 
 /**
- * IP prefix in CIDR format.
+ * An IP address prefix in CIDR format.
  *
  * @example 192.168.0.0/16
+ * @x-auditable true
  */
 export type McnCidrPrefix = string;
 
 export type McnCloudPlatformClient = {
+  /**
+   * @x-auditable true
+   */
   client_type: 'MAGIC_WAN_CLOUD_ONRAMP';
   id: McnPlatformClientId;
+  /**
+   * @x-auditable true
+   */
   name: string;
 };
 
+/**
+ * @x-auditable true
+ */
 export type McnCloudType = 'AWS' | 'AZURE' | 'GOOGLE' | 'CLOUDFLARE';
 
 /**
  * @format uuid
+ * @x-auditable true
  */
 export type McnConduitRouteId = string;
 
 /**
  * @format uuid
+ * @x-auditable true
  */
 export type McnConduitTunnelId = string;
 
 export type McnCost = {
+  /**
+   * @x-auditable true
+   */
   currency: string;
   /**
    * @format double
@@ -30573,6 +31228,9 @@ export type McnCost = {
 };
 
 export type McnCostDiff = {
+  /**
+   * @x-auditable true
+   */
   currency: string;
   /**
    * @format double
@@ -30607,11 +31265,26 @@ export type McnCreateOnrampRequest = {
   cloud_type: McnOnrampCloudType;
   description?: string;
   hub_provider_id?: McnProviderId;
+  /**
+   * @x-auditable true
+   */
   install_routes_in_cloud: boolean;
+  /**
+   * @x-auditable true
+   */
   install_routes_in_magic_wan: boolean;
+  /**
+   * @x-auditable true
+   */
   manage_hub_to_hub_attachments?: boolean;
+  /**
+   * @x-auditable true
+   */
   manage_vpc_to_hub_attachments?: boolean;
   name: string;
+  /**
+   * @x-auditable true
+   */
   region?: string;
   type: McnOnrampType;
   vpc?: McnResourceId;
@@ -30623,7 +31296,13 @@ export type McnCreateOnrampResponse = McnGoodResponse & {
 
 export type McnCreateProviderRequest = {
   cloud_type: McnCloudType;
+  /**
+   * @x-auditable true
+   */
   description?: string;
+  /**
+   * @x-auditable true
+   */
   friendly_name: string;
 };
 
@@ -30664,6 +31343,9 @@ export type McnDeletedResource = {
 };
 
 export type McnError = {
+  /**
+   * @x-auditable true
+   */
   code:
     | 1001
     | 1002
@@ -30820,20 +31502,41 @@ export type McnError = {
 };
 
 export type McnErrorMeta = {
+  /**
+   * @x-auditable true
+   */
   l10n_key?: string;
   loggable_error?: string;
   template_data?: Record<string, any>;
+  /**
+   * @x-auditable true
+   */
   trace_id?: string;
 };
 
 export type McnErrorSource = {
+  /**
+   * @x-auditable true
+   */
   parameter?: string;
+  /**
+   * @x-auditable true
+   */
   parameter_value_index?: number;
+  /**
+   * @x-auditable true
+   */
   pointer?: string;
 };
 
 export type McnGcpSetup = {
+  /**
+   * @x-auditable true
+   */
   integration_identity_tag: string;
+  /**
+   * @x-auditable true
+   */
   item_type: string;
   tag_cli_command: string;
 };
@@ -30874,7 +31577,13 @@ export type McnMagicWanAddressSpace = {
 };
 
 export type McnObservation = {
+  /**
+   * @x-auditable true
+   */
   first_observed_at: string;
+  /**
+   * @x-auditable true
+   */
   last_observed_at: string;
   provider_id: McnProviderId;
   resource_id: McnResourceId;
@@ -30884,25 +31593,61 @@ export type McnOnramp = {
   attached_hubs?: McnResourceId[];
   attached_vpcs?: McnResourceId[];
   cloud_type: McnOnrampCloudType;
+  /**
+   * @x-auditable true
+   */
   description?: string;
   hub?: McnResourceId;
   id: McnOnrampId;
+  /**
+   * @x-auditable true
+   */
   install_routes_in_cloud: boolean;
+  /**
+   * @x-auditable true
+   */
   install_routes_in_magic_wan: boolean;
+  /**
+   * @x-auditable true
+   */
   last_applied_at?: string;
+  /**
+   * @x-auditable true
+   */
   last_exported_at?: string;
+  /**
+   * @x-auditable true
+   */
   last_planned_at?: string;
+  /**
+   * @x-auditable true
+   */
   manage_hub_to_hub_attachments?: boolean;
+  /**
+   * @x-auditable true
+   */
   manage_vpc_to_hub_attachments?: boolean;
+  /**
+   * @x-auditable true
+   */
   name: string;
   planned_monthly_cost_estimate?: McnCostDiff;
   planned_resources?: McnResourceDiff[];
+  /**
+   * @x-auditable true
+   */
   planned_resources_unavailable?: boolean;
   post_apply_monthly_cost_estimate?: McnCost;
   post_apply_resources?: {
     [key: string]: McnResourceDetails;
   };
+  /**
+   * @x-auditable true
+   */
   post_apply_resources_unavailable?: boolean;
+  /**
+   * @x-auditable true
+   */
   region?: string;
   status?: McnOnrampStatus;
   type: McnOnrampType;
@@ -30912,18 +31657,25 @@ export type McnOnramp = {
     [key: string]: McnResourceDetails;
   };
   /**
-   * The list of vpc IDs for which resource details could not be generated.
+   * The list of vpc IDs for which resource details failed to generate.
    */
   vpcs_by_id_unavailable?: McnResourceId[];
 };
 
+/**
+ * @x-auditable true
+ */
 export type McnOnrampCloudType = 'AWS' | 'AZURE' | 'GOOGLE';
 
 /**
  * @format uuid
+ * @x-auditable true
  */
 export type McnOnrampId = string;
 
+/**
+ * @x-auditable true
+ */
 export type McnOnrampLifecycleState =
   | 'OnrampNeedsApply'
   | 'OnrampPendingPlan'
@@ -30949,6 +31701,9 @@ export type McnOnrampStatus = {
   tunnels: McnConduitTunnelId[];
 };
 
+/**
+ * @x-auditable true
+ */
 export type McnOnrampType = 'OnrampTypeSingle' | 'OnrampTypeHub';
 
 export type McnOnrampWithAccount = McnOnramp & {
@@ -30956,29 +31711,57 @@ export type McnOnrampWithAccount = McnOnramp & {
 };
 
 export type McnPlanProgress = {
+  /**
+   * @x-auditable true
+   */
   done: number;
+  /**
+   * @x-auditable true
+   */
   total: number;
 };
 
+/**
+ * @x-auditable true
+ */
 export type McnPlannedAction = 'no_op' | 'create' | 'update' | 'replace' | 'destroy';
 
 /**
  * @format uuid
+ * @x-auditable true
  */
 export type McnPlatformClientId = string;
 
 export type McnPolicyResult = string;
 
 export type McnProvider = {
+  /**
+   * @x-auditable true
+   */
   aws_arn?: string;
+  /**
+   * @x-auditable true
+   */
   azure_subscription_id?: string;
+  /**
+   * @x-auditable true
+   */
   azure_tenant_id?: string;
   cloud_type: McnCloudType;
   description?: string;
   friendly_name: string;
+  /**
+   * @x-auditable true
+   */
   gcp_project_id?: string;
+  /**
+   * @x-auditable true
+   */
   gcp_service_account_email?: string;
   id: McnProviderId;
+  /**
+   * @x-auditable true
+   */
   last_updated: string;
   lifecycle_state: McnProviderLifecycleState;
   state: McnProviderDiscoveryStatus;
@@ -30987,15 +31770,28 @@ export type McnProvider = {
 };
 
 export type McnProviderDiscoveryProgress = {
+  /**
+   * @x-auditable true
+   */
   done: number;
+  /**
+   * @x-auditable true
+   */
   total: number;
+  /**
+   * @x-auditable true
+   */
   unit: string;
 };
 
+/**
+ * @x-auditable true
+ */
 export type McnProviderDiscoveryStatus = 'UNSPECIFIED' | 'PENDING' | 'DISCOVERING' | 'FAILED' | 'SUCCEEDED';
 
 /**
  * @format uuid
+ * @x-auditable true
  */
 export type McnProviderId = string;
 
@@ -31003,23 +31799,56 @@ export type McnProviderInitialSetupResponse = McnGoodResponse & {
   result?: McnAwsTrustPolicy | McnAzureSetup | McnGcpSetup;
 };
 
+/**
+ * @x-auditable true
+ */
 export type McnProviderLifecycleState = 'ACTIVE' | 'PENDING_SETUP' | 'RETIRED';
 
 export type McnProviderStatus = {
+  /**
+   * @x-auditable true
+   */
   credentials_good_since?: string;
+  /**
+   * @x-auditable true
+   */
   credentials_missing_since?: string;
+  /**
+   * @x-auditable true
+   */
   credentials_rejected_since?: string;
+  /**
+   * @x-auditable true
+   */
   discovery_message?: string;
+  /**
+   * @x-auditable true
+   */
   discovery_message_v2?: string;
   discovery_progress: McnProviderDiscoveryProgress;
   discovery_progress_v2: McnProviderDiscoveryProgress;
   in_use_by?: McnCloudPlatformClient[];
+  /**
+   * @x-auditable true
+   */
   last_discovery_completed_at?: string;
+  /**
+   * @x-auditable true
+   */
   last_discovery_completed_at_v2?: string;
+  /**
+   * @x-auditable true
+   */
   last_discovery_started_at?: string;
+  /**
+   * @x-auditable true
+   */
   last_discovery_started_at_v2?: string;
   last_discovery_status: McnProviderDiscoveryStatus;
   last_discovery_status_v2: McnProviderDiscoveryStatus;
+  /**
+   * @x-auditable true
+   */
   last_updated?: string;
   regions: string[];
 };
@@ -31065,6 +31894,9 @@ export type McnResourceDetails = {
   };
   deployment_provider: McnProviderId;
   id: McnResourceId;
+  /**
+   * @x-auditable true
+   */
   managed: boolean;
   managed_by?: McnCloudPlatformClient[];
   monthly_cost_estimate: McnCost;
@@ -31077,7 +31909,13 @@ export type McnResourceDetails = {
   provider_names_by_id: {
     [key: string]: string;
   };
+  /**
+   * @x-auditable true
+   */
   region: string;
+  /**
+   * @x-auditable true
+   */
   resource_group: string;
   resource_type: McnResourceType;
   sections: McnResourceDetailsSection[];
@@ -31114,6 +31952,7 @@ export type McnResourceDiff = {
 
 /**
  * @format uuid
+ * @x-auditable true
  */
 export type McnResourceId = string;
 
@@ -31127,10 +31966,16 @@ export type McnResourcePreview = {
 };
 
 export type McnResourcePreviewItem = {
+  /**
+   * @x-auditable true
+   */
   item_type: string;
   resource_preview: McnResourcePreview;
 };
 
+/**
+ * @x-auditable true
+ */
 export type McnResourceType =
   | 'aws_customer_gateway'
   | 'aws_egress_only_internet_gateway'
@@ -31202,6 +32047,9 @@ export type McnResourcesCatalogPolicyPreviewResponse = McnGoodResponse & {
 
 export type McnResponse = {
   messages: McnError[];
+  /**
+   * @x-auditable true
+   */
   success: boolean;
 };
 
@@ -31225,7 +32073,7 @@ export type McnResultInfo = {
    */
   page: number;
   /**
-   * Max items per page.
+   * The maximum numnber of items per page.
    *
    * @example 20
    */
@@ -31272,6 +32120,9 @@ export type McnUpdateOnrampRequest = {
   attached_hubs?: McnResourceId[];
   attached_vpcs?: McnResourceId[];
   description?: string;
+  /**
+   * @x-auditable true
+   */
   install_routes_in_cloud?: boolean;
   install_routes_in_magic_wan?: boolean;
   manage_hub_to_hub_attachments?: boolean;
@@ -31285,12 +32136,33 @@ export type McnUpdateOnrampResponse = McnGoodResponse & {
 };
 
 export type McnUpdateProviderRequest = {
+  /**
+   * @x-auditable true
+   */
   aws_arn?: string;
+  /**
+   * @x-auditable true
+   */
   azure_subscription_id?: string;
+  /**
+   * @x-auditable true
+   */
   azure_tenant_id?: string;
+  /**
+   * @x-auditable true
+   */
   description?: string;
+  /**
+   * @x-auditable true
+   */
   friendly_name?: string;
+  /**
+   * @x-auditable true
+   */
   gcp_project_id?: string;
+  /**
+   * @x-auditable true
+   */
   gcp_service_account_email?: string;
 };
 
@@ -31317,6 +32189,8 @@ export type McnYamlItem = {
 };
 
 /**
+ * Account identifier
+ *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
  */
@@ -31338,7 +32212,6 @@ export type MconnAdminConnector = {
   pinned_version?: string;
   timezone: string;
   upgrade_asap: boolean;
-  upgrade_attempts: number;
 };
 
 export type MconnAdminConnectorCreateRequest = MconnAdminConnectorFields;
@@ -31370,7 +32243,6 @@ export type MconnAdminConnectorFields = {
   pinned_version?: string;
   timezone?: string;
   upgrade_asap?: boolean;
-  upgrade_attempts?: number;
 };
 
 export type MconnAdminConnectorListResponse = MconnGoodResponse & {
@@ -31408,6 +32280,10 @@ export type MconnAdminDevice = {
   last_updated: string;
   license_key_sha256?: string;
   metadata: string;
+  pki_rotation_finished_at?: string;
+  pki_rotation_output?: string;
+  pki_rotation_started_at?: string;
+  pki_rotation_status_code?: number;
   serial_number?: string;
 };
 
@@ -31443,6 +32319,10 @@ export type MconnAdminDeviceFields = {
   last_updated?: string;
   license_key_sha256?: string;
   metadata?: string;
+  pki_rotation_finished_at?: string;
+  pki_rotation_output?: string;
+  pki_rotation_started_at?: string;
+  pki_rotation_status_code?: number;
   serial_number?: string;
 };
 
@@ -31464,6 +32344,15 @@ export type MconnAdminDeviceUpdateResponse = MconnGoodResponse & {
 
 export type MconnAdminEventGetSuccess = MconnEnvelope & {
   result: MconnRecordedEvent;
+};
+
+export type MconnAdminEventsGetLatestResult = {
+  count: number;
+  items: MconnRecordedEvent[];
+};
+
+export type MconnAdminEventsGetLatestSuccess = MconnEnvelope & {
+  result: MconnAdminEventsGetLatestResult;
 };
 
 export type MconnAdminEventsGetResult = {
@@ -31527,6 +32416,15 @@ export type MconnAdminSite = {
 
 export type MconnAdminSnapshotGetSuccess = MconnEnvelope & {
   result: MconnSnapshot;
+};
+
+export type MconnAdminSnapshotsGetLatestResult = {
+  count: number;
+  items: MconnSnapshot[];
+};
+
+export type MconnAdminSnapshotsGetLatestSuccess = MconnEnvelope & {
+  result: MconnAdminSnapshotsGetLatestResult;
 };
 
 export type MconnAdminSnapshotsGetResult = {
@@ -31617,7 +32515,6 @@ export type MconnControllerConnector = {
   pinned_version?: string;
   timezone: string;
   upgrade_asap: boolean;
-  upgrade_attempts: number;
 };
 
 export type MconnControllerConnectorIdentity = {
@@ -31631,6 +32528,7 @@ export type MconnControllerDevice = {
    * @x-sensitive true
    */
   crypt_key: string;
+  crypt_key_rotation_finished_at?: string;
   id: MconnUuid;
   imaged_at?: string;
   /**
@@ -31733,16 +32631,52 @@ export type MconnCreateConnectorResponse = MconnGoodResponse & {
 };
 
 export type MconnCustomerConnector = {
+  /**
+   * @x-auditable true
+   */
   activated: boolean;
   device?: MconnCustomerDevice;
   id: MconnUuid;
+  /**
+   * @x-auditable true
+   */
   interrupt_window_duration_hours: number;
+  /**
+   * @x-auditable true
+   */
   interrupt_window_hour_of_day: number;
+  /**
+   * @x-auditable true
+   */
   last_heartbeat?: string;
+  /**
+   * @x-auditable true
+   */
   last_seen_version?: string;
+  /**
+   * @x-auditable true
+   */
   last_updated: string;
+  /**
+   * @x-auditable true
+   */
   notes: string;
+  /**
+   * @x-auditable true
+   */
   timezone: string;
+};
+
+export type MconnCustomerConnectorCreateRequest = {
+  device: MconnCustomerDeviceIdentifier;
+} & MconnCustomerConnectorFields;
+
+export type MconnCustomerConnectorCreateResponse = MconnGoodResponse & {
+  result?: MconnCustomerConnector;
+};
+
+export type MconnCustomerConnectorDeleteResponse = MconnGoodResponse & {
+  result?: MconnCustomerConnector;
 };
 
 export type MconnCustomerConnectorFetchResponse = MconnGoodResponse & {
@@ -31750,10 +32684,25 @@ export type MconnCustomerConnectorFetchResponse = MconnGoodResponse & {
 };
 
 export type MconnCustomerConnectorFields = {
+  /**
+   * @x-auditable true
+   */
   activated?: boolean;
+  /**
+   * @x-auditable true
+   */
   interrupt_window_duration_hours?: number;
+  /**
+   * @x-auditable true
+   */
   interrupt_window_hour_of_day?: number;
+  /**
+   * @x-auditable true
+   */
   notes?: string;
+  /**
+   * @x-auditable true
+   */
   timezone?: string;
 };
 
@@ -31769,11 +32718,38 @@ export type MconnCustomerConnectorUpdateResponse = MconnGoodResponse & {
 
 export type MconnCustomerDevice = {
   id: MconnUuid;
+  /**
+   * @x-auditable true
+   */
+  serial_number?: string;
+};
+
+/**
+ * @maxProperties 1
+ * @minProperties 1
+ */
+export type MconnCustomerDeviceIdentifier = {
+  /**
+   * @x-auditable true
+   */
+  id?: string;
+  /**
+   * @x-auditable true
+   */
   serial_number?: string;
 };
 
 export type MconnCustomerEventGetSuccess = MconnEnvelope & {
   result: MconnRecordedEvent;
+};
+
+export type MconnCustomerEventsGetLatestResult = {
+  count: number;
+  items: MconnRecordedEvent[];
+};
+
+export type MconnCustomerEventsGetLatestSuccess = MconnEnvelope & {
+  result: MconnCustomerEventsGetLatestResult;
 };
 
 export type MconnCustomerEventsGetResult = {
@@ -31788,6 +32764,15 @@ export type MconnCustomerEventsGetSuccess = MconnEnvelope & {
 
 export type MconnCustomerSnapshotGetSuccess = MconnEnvelope & {
   result: MconnSnapshot;
+};
+
+export type MconnCustomerSnapshotsGetLatestResult = {
+  count: number;
+  items: MconnSnapshot[];
+};
+
+export type MconnCustomerSnapshotsGetLatestSuccess = MconnEnvelope & {
+  result: MconnCustomerSnapshotsGetLatestResult;
 };
 
 export type MconnCustomerSnapshotsGetResult = {
@@ -31862,6 +32847,24 @@ export type MconnEvent =
        * Failed crypt key rotation
        */
       k: 'FinishRotateCryptKeyFailure';
+    }
+  | {
+      /**
+       * Started PKI rotation
+       */
+      k: 'StartRotatePki';
+    }
+  | {
+      /**
+       * Finished PKI rotation
+       */
+      k: 'FinishRotatePkiSuccess';
+    }
+  | {
+      /**
+       * Failed PKI rotation
+       */
+      k: 'FinishRotatePkiFailure';
     }
   | {
       /**
@@ -32048,7 +33051,7 @@ export type MconnSnapshot = {
    */
   ha_state?: string;
   /**
-   * Numeric value associated with high availability state (0 = unknown, 1 = active, 2 = standby, 3 = disabled, 4 = fault)
+   * Numeric value associated with high availability state (0 = disabled, 1 = active, 2 = standby, 3 = stopped, 4 = fault)
    */
   ha_value?: number;
   interfaces?: MconnSnapshotInterface[];
@@ -32970,6 +33973,9 @@ export type MconnSnapshotTunnel = {
   tunnel_id: string;
 };
 
+/**
+ * @x-auditable true
+ */
 export type MconnUuid = string;
 
 /**
@@ -33111,6 +34117,41 @@ export type MqQueue = {
 
 export type MqQueueBatch = {
   /**
+   * The number of seconds to wait for attempting to deliver this batch to consumers
+   *
+   * @example text
+   * @x-auditable true
+   */
+  delay_seconds?: number;
+  messages?: MqQueueMessage[];
+};
+
+export type MqQueueMessage = MqQueueMessageText | MqQueueMessageJson;
+
+export type MqQueueMessageJson = {
+  body?: Record<string, any>;
+  /**
+   * @x-auditable true
+   */
+  content_type?: 'json';
+};
+
+export type MqQueueMessageText = {
+  body?: string;
+  /**
+   * @x-auditable true
+   */
+  content_type?: 'text';
+};
+
+/**
+ * @example example-queue
+ * @x-auditable true
+ */
+export type MqQueueName = string;
+
+export type MqQueuePullBatch = {
+  /**
    * @example 1
    * @x-auditable true
    */
@@ -33135,12 +34176,6 @@ export type MqQueueBatch = {
    */
   timestamp_ms?: number;
 }[];
-
-/**
- * @example example-queue
- * @x-auditable true
- */
-export type MqQueueName = string;
 
 export type MqQueueSettings = {
   /**
@@ -33613,6 +34648,7 @@ export type ObservatoryDeviceType = 'DESKTOP' | 'MOBILE';
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type ObservatoryIdentifier = string;
 
@@ -33891,6 +34927,7 @@ export type ObservatorySchemasMessages = {
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type ObservatoryTimestamp = string;
 
@@ -33946,6 +34983,7 @@ export type ObservatoryUrl = string;
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
+ * @x-auditable true
  */
 export type ObservatoryUuid = string;
 
@@ -35133,6 +36171,82 @@ export type PagesStage = {
   status?: 'success' | 'idle' | 'active' | 'failure' | 'canceled';
 };
 
+export type PublicIpApiResponseCommon = {
+  errors: PublicIpMessages;
+  messages: PublicIpMessages;
+  /**
+   * Whether the API call was successful.
+   *
+   * @example true
+   */
+  success: true;
+};
+
+export type PublicIpApiResponseCommonFailure = {
+  /**
+   * @example {"code":7003,"message":"No route for the URI"}
+   * @minLength 1
+   */
+  errors: PublicIpMessages;
+  messages: PublicIpMessages;
+  result: any | null;
+  /**
+   * Whether the API call was successful.
+   *
+   * @example false
+   */
+  success: false;
+};
+
+export type PublicIpApiResponseSingle = PublicIpApiResponseCommon;
+
+/**
+ * A digest of the IP data. Useful for determining if the data has changed.
+ *
+ * @example a8e453d9d129a3769407127936edfdb0
+ */
+export type PublicIpEtag = string;
+
+export type PublicIpIps = {
+  etag?: PublicIpEtag;
+  ipv4_cidrs?: PublicIpIpv4Cidrs;
+  ipv6_cidrs?: PublicIpIpv6Cidrs;
+};
+
+export type PublicIpIpsJdcloud = {
+  etag?: PublicIpEtag;
+  ipv4_cidrs?: PublicIpIpv4Cidrs;
+  ipv6_cidrs?: PublicIpIpv6Cidrs;
+  jdcloud_cidrs?: PublicIpJdcloudCidrs;
+};
+
+/**
+ * List of Cloudflare IPv4 CIDR addresses.
+ */
+export type PublicIpIpv4Cidrs = string[];
+
+/**
+ * List of Cloudflare IPv6 CIDR addresses.
+ */
+export type PublicIpIpv6Cidrs = string[];
+
+/**
+ * List IPv4 and IPv6 CIDRs, only populated if `?networks=jdcloud` is used.
+ */
+export type PublicIpJdcloudCidrs = string[];
+
+export type PublicIpMessages = {
+  /**
+   * @minimum 1000
+   */
+  code: number;
+  documentation_url?: string;
+  message: string;
+  source?: {
+    pointer?: string;
+  };
+}[];
+
 export type R2SlurperConnectivityResponse = {
   connectivityStatus?: 'success' | 'error';
 };
@@ -35371,6 +36485,7 @@ export type R2Bucket = {
    * Creation timestamp.
    */
   creation_date?: string;
+  jurisdiction?: R2Jurisdiction;
   location?: R2BucketLocation;
   name?: R2BucketName;
   storage_class?: R2StorageClass;
@@ -35420,6 +36535,7 @@ export type R2BucketLockRuleConfig = {
  * Location of the bucket.
  *
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type R2BucketLocation = 'apac' | 'eeur' | 'enam' | 'weur' | 'wnam' | 'oc';
 
@@ -35713,6 +36829,15 @@ export type R2GetCustomDomainResponse = {
    */
   zoneName?: string;
 };
+
+/**
+ * Jurisdiction where objects in this bucket are guaranteed to be stored.
+ *
+ * @default default
+ * @x-auditable true
+ * @x-stainless-param jurisdiction
+ */
+export type R2Jurisdiction = 'default' | 'eu' | 'fedramp';
 
 /**
  * Condition for lifecycle transitions to apply after an object reaches an age in seconds.
@@ -36292,6 +37417,7 @@ export type RegistrarApiApiResponseSingle = {
  * Auto-renew controls whether subscription is automatically renewed upon domain expiration.
  *
  * @example true
+ * @x-auditable true
  */
 export type RegistrarApiAutoRenew = boolean;
 
@@ -36462,6 +37588,7 @@ export type RegistrarApiLastName = string | null;
  * Shows whether a registrar lock is in place for a domain.
  *
  * @example false
+ * @x-auditable true
  */
 export type RegistrarApiLocked = boolean;
 
@@ -36484,6 +37611,7 @@ export type RegistrarApiOrganization = string;
  * Privacy option controls redacting WHOIS information.
  *
  * @example true
+ * @x-auditable true
  */
 export type RegistrarApiPrivacy = boolean;
 
@@ -40178,11 +41306,11 @@ export type RulesetsSetCacheSettingsRule = {
      */
     cache_key?: {
       /**
-       * Separate cached content based on the visitor’s device type
+       * Separate cached content based on the visitor’s device type.
        */
       cache_by_device_type?: boolean;
       /**
-       * Protect from web cache deception attacks while allowing static assets to be cached
+       * Protect from web cache deception attacks while allowing static assets to be cached.
        */
       cache_deception_armor?: boolean;
       /**
@@ -40351,11 +41479,11 @@ export type RulesetsSetCacheSettingsRule = {
        */
       ['default']: number;
       /**
-       * edge ttl options
+       * Edge TTL options.
        */
       mode: 'respect_origin' | 'bypass_by_default' | 'override_origin';
       /**
-       * List of single status codes, or status code ranges to apply the selected mode
+       * List of single status codes, or status code ranges to apply the selected mode.
        */
       status_code_ttl: {
         /**
@@ -40363,16 +41491,16 @@ export type RulesetsSetCacheSettingsRule = {
          */
         status_code_range?: {
           /**
-           * response status code lower bound
+           * Response status code lower bound.
            */
           from: number;
           /**
-           * response status code upper bound
+           * Response status code upper bound.
            */
           to: number;
         };
         /**
-         * Set the ttl for responses with this specific status code
+         * Set the TTL for responses with this specific status code.
          */
         status_code_value?: number;
         /**
@@ -40386,7 +41514,7 @@ export type RulesetsSetCacheSettingsRule = {
      */
     origin_cache_control?: boolean;
     /**
-     * Generate Cloudflare error pages from issues sent from the origin server. When on, error pages will trigger for issues from the origin
+     * Generate Cloudflare error pages from issues sent from the origin server. When on, error pages will trigger for issues from the origin.
      */
     origin_error_page_passthru?: boolean;
     /**
@@ -40422,7 +41550,7 @@ export type RulesetsSetCacheSettingsRule = {
    * An informative description of the rule.
    *
    * @default
-   * @example Set cache settings when the hostname  address is not example.com
+   * @example Set cache settings when the hostname address is not example.com
    */
   description?: string;
   /**
@@ -40612,9 +41740,9 @@ export type RulesetsSetConfigRule = {
     /**
      * Configure the Polish level.
      */
-    polish?: 'off' | 'lossless' | 'lossy';
+    polish?: 'off' | 'lossless' | 'lossy' | 'webp';
     /**
-     * Turn on or off Rocket Loader
+     * Turn on or off Rocket Loader.
      */
     rocket_loader?: boolean;
     /**
@@ -40781,7 +41909,7 @@ export type RulesetsSkipRule = {
    */
   action_parameters?: {
     /**
-     * A list of phases to skip the execution of. This option is incompatible with the rulesets options.
+     * A list of phases to skip the execution of. This option is incompatible with the rulesets option.
      *
      * @minItems 1
      * @uniqueItems true
@@ -40804,7 +41932,7 @@ export type RulesetsSkipRule = {
       [key: string]: (RulesetsRuleId & void)[];
     };
     /**
-     * A ruleset to skip the execution of. This option is incompatible with the rulesets, rules. It can be incompatible with phases options base on the phase of the ruleset.
+     * A ruleset to skip the execution of. This option is incompatible with the rulesets option.
      */
     ruleset?: 'current';
     /**
@@ -41076,6 +42204,7 @@ export type RumId = string;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type RumIdentifier = string;
 
@@ -41415,14 +42544,39 @@ export type SecondaryDnsAclComponentsSchemasName = string;
 export type SecondaryDnsAlgo = string;
 
 export type SecondaryDnsApiResponseCollection = SecondaryDnsApiResponseCommon & {
-  result_info?: SecondaryDnsResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type SecondaryDnsApiResponseCommon = {
   errors: SecondaryDnsMessages;
   messages: SecondaryDnsMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -41438,7 +42592,7 @@ export type SecondaryDnsApiResponseCommonFailure = {
   messages: SecondaryDnsMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -41568,7 +42722,11 @@ export type SecondaryDnsMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 /**
@@ -41606,33 +42764,6 @@ export type SecondaryDnsPort = number;
 
 export type SecondaryDnsResponseCollection = SecondaryDnsApiResponseCollection & {
   result?: SecondaryDnsTsig[];
-};
-
-export type SecondaryDnsResultInfo = {
-  /**
-   * Total number of results for the requested service
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters
-   *
-   * @example 2000
-   */
-  total_count?: number;
 };
 
 export type SecondaryDnsSchemasForceResponse = SecondaryDnsApiResponseSingle & {
@@ -42029,11 +43160,13 @@ export type SecurityCenterApiResponseSingle = SecurityCenterApiResponseCommon;
  * Total number of results
  *
  * @example 1
+ * @x-auditable true
  */
 export type SecurityCenterCount = number;
 
 /**
  * @example false
+ * @x-auditable true
  */
 export type SecurityCenterDismissed = boolean;
 
@@ -42042,34 +43175,51 @@ export type SecurityCenterDismissed = boolean;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type SecurityCenterIdentifier = string;
 
 export type SecurityCenterIssue = {
   /**
    * @example false
+   * @x-auditable true
    */
   dismissed?: boolean;
+  /**
+   * @x-auditable true
+   */
   id?: string;
   issue_class?: SecurityCenterIssueClass;
   issue_type?: SecurityCenterIssueType;
   payload?: Record<string, any>;
+  /**
+   * @x-auditable true
+   */
   resolve_link?: string;
+  /**
+   * @x-auditable true
+   */
   resolve_text?: string;
+  /**
+   * @x-auditable true
+   */
   severity?: 'Low' | 'Moderate' | 'Critical';
   /**
    * @format date-time
+   * @x-auditable true
    */
   since?: string;
   subject?: SecurityCenterSubject;
   /**
    * @format date-time
+   * @x-auditable true
    */
   timestamp?: string;
 };
 
 /**
  * @example always_use_https_not_enabled
+ * @x-auditable true
  */
 export type SecurityCenterIssueClass = string;
 
@@ -42079,6 +43229,9 @@ export type SecurityCenterIssueClass = string;
  */
 export type SecurityCenterIssueClasses = SecurityCenterIssueClass[];
 
+/**
+ * @x-auditable true
+ */
 export type SecurityCenterIssueType =
   | 'compliance_violation'
   | 'email_security'
@@ -42143,6 +43296,7 @@ export type SecurityCenterSecurityTxt = {
   contact?: string[];
   /**
    * @example true
+   * @x-auditable true
    */
   enabled?: boolean;
   /**
@@ -42153,6 +43307,7 @@ export type SecurityCenterSecurityTxt = {
   encryption?: string[];
   /**
    * @format date-time
+   * @x-auditable true
    */
   expires?: string;
   /**
@@ -42165,6 +43320,7 @@ export type SecurityCenterSecurityTxt = {
   policy?: string[];
   /**
    * @example en, es, fr
+   * @x-auditable true
    */
   preferredLanguages?: string;
 };
@@ -42177,6 +43333,7 @@ export type SecurityCenterSeverityQueryParam = ('low' | 'moderate' | 'critical')
 
 /**
  * @example example.com
+ * @x-auditable true
  */
 export type SecurityCenterSubject = string;
 
@@ -42186,8 +43343,12 @@ export type SecurityCenterValueCountsResponse = SecurityCenterApiResponseCommon 
   result?: {
     /**
      * @example 1
+     * @x-auditable true
      */
     count?: number;
+    /**
+     * @x-auditable true
+     */
     value?: string;
   }[];
 };
@@ -42362,6 +43523,7 @@ export type SpectrumAnalyticsFilters = string;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type SpectrumAnalyticsIdentifier = string;
 
@@ -42423,6 +43585,7 @@ export type SpectrumAnalyticsQueryResponseAggregate = SpectrumAnalyticsApiRespon
      *
      * @example 023e105f4ecef8ad9ca31a8372d0c353
      * @maxLength 32
+     * @x-auditable true
      */
     appID: void & SpectrumAnalyticsIdentifier;
     /**
@@ -42495,6 +43658,7 @@ export type SpectrumAnalyticsQueryResponseSingle = SpectrumAnalyticsApiResponseS
  *
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type SpectrumAnalyticsSince = void & SpectrumAnalyticsTimestamp;
 
@@ -42516,6 +43680,7 @@ export type SpectrumAnalyticsStat = {
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type SpectrumAnalyticsTimestamp = string;
 
@@ -42524,11 +43689,37 @@ export type SpectrumAnalyticsTimestamp = string;
  *
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type SpectrumAnalyticsUntil = void & SpectrumAnalyticsTimestamp;
 
 export type SpectrumConfigApiResponseCollection = SpectrumConfigApiResponseCommon & {
-  result_info?: SpectrumConfigResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type SpectrumConfigApiResponseCommon = {
@@ -42593,6 +43784,7 @@ export type SpectrumConfigAppConfigSingle = SpectrumConfigApiResponseSingle & {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type SpectrumConfigAppIdentifier = void & void & SpectrumConfigIdentifier;
 
@@ -42616,6 +43808,7 @@ export type SpectrumConfigBaseAppConfig = {
  *
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type SpectrumConfigCreated = void & void & SpectrumConfigTimestamp;
 
@@ -42689,6 +43882,7 @@ export type SpectrumConfigEdgeIps =
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type SpectrumConfigIdentifier = string;
 
@@ -42717,6 +43911,7 @@ export type SpectrumConfigMessages = {
  *
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type SpectrumConfigModified = void & void & SpectrumConfigTimestamp;
 
@@ -42780,36 +43975,10 @@ export type SpectrumConfigProtocol = string;
  */
 export type SpectrumConfigProxyProtocol = 'off' | 'v1' | 'v2' | 'simple';
 
-export type SpectrumConfigResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
-
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type SpectrumConfigTimestamp = string;
 
@@ -42835,6 +44004,7 @@ export type SpectrumConfigUpdateAppConfig = SpectrumConfigAppConfig | SpectrumCo
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type SpectrumConfigZoneIdentifier = void & void & SpectrumConfigIdentifier;
 
@@ -43675,7 +44845,7 @@ export type StreamLiveInputStatus =
 /**
  * The maximum duration in seconds for a video upload. Can be set for a video that is not yet uploaded to limit its duration. Uploads that exceed the specified duration will fail during processing. A value of `-1` means the value is unknown.
  *
- * @maximum 21600
+ * @maximum 36000
  * @minimum 1
  * @x-auditable true
  */
@@ -44000,6 +45170,7 @@ export type StreamScheduledDeletion = string;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type StreamSchemasIdentifier = string;
 
@@ -44367,10 +45538,11 @@ export type StreamWidth = number;
 
 export type TeamsDevicesAccessSerialNumberListInputRequest = {
   /**
-   * UUID of Access List
+   * UUID of Access List.
    *
    * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
    * @maxLength 36
+   * @x-auditable true
    */
   id: string;
 };
@@ -44388,6 +45560,7 @@ export type TeamsDevicesAccount = {
    * The name of the enrolled account.
    *
    * @example Company
+   * @x-auditable true
    */
   name?: string;
 };
@@ -44395,6 +45568,7 @@ export type TeamsDevicesAccount = {
 /**
  * Whether to allow the user to switch WARP between modes.
  *
+ * @default false
  * @example true
  */
 export type TeamsDevicesAllowModeSwitch = boolean;
@@ -44402,6 +45576,7 @@ export type TeamsDevicesAllowModeSwitch = boolean;
 /**
  * Whether to receive update notifications when a new version of the client is available.
  *
+ * @default false
  * @example true
  */
 export type TeamsDevicesAllowUpdates = boolean;
@@ -44409,6 +45584,7 @@ export type TeamsDevicesAllowUpdates = boolean;
 /**
  * Whether to allow devices to leave the organization.
  *
+ * @default true
  * @example true
  */
 export type TeamsDevicesAllowedToLeave = boolean;
@@ -44483,24 +45659,28 @@ export type TeamsDevicesApplicationInputRequest = {
    * Operating system.
    *
    * @example mac
+   * @x-auditable true
    */
   operating_system: 'windows' | 'linux' | 'mac';
   /**
    * Path for the application.
    *
    * @example /bin/cat
+   * @x-auditable true
    */
   path: string;
   /**
    * SHA-256.
    *
    * @example b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c
+   * @x-auditable true
    */
   sha256?: string;
   /**
    * Signing certificate thumbprint.
    *
    * @example 0aabab210bdb998e9cf45da2c9ce352977ab531c681b74cf1e487be1bbe9fe6e
+   * @x-auditable true
    */
   thumbprint?: string;
 };
@@ -44508,6 +45688,7 @@ export type TeamsDevicesApplicationInputRequest = {
 /**
  * The amount of time in seconds to reconnect after having been disabled.
  *
+ * @default 0
  * @example 0
  */
 export type TeamsDevicesAutoConnect = number;
@@ -44515,6 +45696,7 @@ export type TeamsDevicesAutoConnect = number;
 /**
  * Turn on the captive portal after the specified amount of time.
  *
+ * @default 180
  * @example 180
  */
 export type TeamsDevicesCaptivePortal = number;
@@ -44524,24 +45706,28 @@ export type TeamsDevicesCarbonblackInputRequest = {
    * Operating system.
    *
    * @example mac
+   * @x-auditable true
    */
   operating_system: 'windows' | 'linux' | 'mac';
   /**
    * File path.
    *
    * @example /bin/cat
+   * @x-auditable true
    */
   path: string;
   /**
    * SHA-256.
    *
    * @example b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c
+   * @x-auditable true
    */
   sha256?: string;
   /**
    * Signing certificate thumbprint.
    *
    * @example 0aabab210bdb998e9cf45da2c9ce352977ab531c681b74cf1e487be1bbe9fe6e
+   * @x-auditable true
    */
   thumbprint?: string;
 };
@@ -44586,7 +45772,7 @@ export type TeamsDevicesClientCertificateV2InputRequest = {
    */
   check_private_key: boolean;
   /**
-   * Common Name that is protected by the client certificate. This may include one or more variables in the ${ } notation. Only ${serial_number} and ${hostname} are valid variables.
+   * Certificate Common Name. This may include one or more variables in the ${ } notation. Only ${serial_number} and ${hostname} are valid variables.
    *
    * @example ${hostname}.com.${serial_number}
    */
@@ -44608,12 +45794,20 @@ export type TeamsDevicesClientCertificateV2InputRequest = {
    * @example windows
    */
   operating_system: 'windows' | 'mac' | 'linux';
+  /**
+   * List of certificate Subject Alternative Names.
+   *
+   * @example example.com
+   * @example sample.com
+   */
+  subject_alternative_names?: string[];
 };
 
 /**
  * The name of the device posture integration.
  *
  * @example My Workspace One Integration
+ * @x-auditable true
  */
 export type TeamsDevicesComponentsSchemasName = string;
 
@@ -44629,6 +45823,7 @@ export type TeamsDevicesComponentsSchemasSingleResponse = TeamsDevicesApiRespons
  * The type of device managed network.
  *
  * @example tls
+ * @x-auditable true
  */
 export type TeamsDevicesComponentsSchemasType = 'tls';
 
@@ -44637,6 +45832,7 @@ export type TeamsDevicesComponentsSchemasType = 'tls';
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
+ * @x-auditable true
  */
 export type TeamsDevicesComponentsSchemasUuid = string;
 
@@ -44667,6 +45863,7 @@ export type TeamsDevicesConfigResponse = TeamsDevicesWorkspaceOneConfigResponse;
  *
  * @example 2017-06-14T00:00:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type TeamsDevicesCreated = string;
 
@@ -44675,6 +45872,7 @@ export type TeamsDevicesCrowdstrikeConfigRequest = {
    * The Crowdstrike API URL.
    *
    * @example https://api.us-2.crowdstrike.com
+   * @x-auditable true
    */
   api_url: string;
   /**
@@ -44694,6 +45892,7 @@ export type TeamsDevicesCrowdstrikeConfigRequest = {
    * The Crowdstrike customer ID.
    *
    * @example example customer id
+   * @x-auditable true
    */
   customer_id: string;
 };
@@ -44703,54 +45902,63 @@ export type TeamsDevicesCrowdstrikeInputRequest = {
    * Posture Integration ID.
    *
    * @example bc7cbfbb-600a-42e4-8a23-45b5e85f804f
+   * @x-auditable true
    */
   connection_id: string;
   /**
    * For more details on last seen, please refer to the Crowdstrike documentation.
    *
    * @example 15d3h20m4s
+   * @x-auditable true
    */
   last_seen?: string;
   /**
    * Operator.
    *
    * @example >
+   * @x-auditable true
    */
   operator?: '<' | '<=' | '>' | '>=' | '==';
   /**
    * Os Version.
    *
    * @example 13.3.0
+   * @x-auditable true
    */
   os?: string;
   /**
    * Overall.
    *
    * @example 90
+   * @x-auditable true
    */
   overall?: string;
   /**
    * SensorConfig.
    *
    * @example 90
+   * @x-auditable true
    */
   sensor_config?: string;
   /**
    * For more details on state, please refer to the Crowdstrike documentation.
    *
    * @example online
+   * @x-auditable true
    */
   state?: 'online' | 'offline' | 'unknown';
   /**
    * Version.
    *
    * @example 13.3.0
+   * @x-auditable true
    */
   version?: string;
   /**
    * Version Operator.
    *
    * @example >
+   * @x-auditable true
    */
   versionOperator?: '<' | '<=' | '>' | '>=' | '==';
 };
@@ -44797,6 +46005,7 @@ export type TeamsDevicesCustomS2sConfigRequest = {
    * The Custom Device Posture Integration  API URL.
    *
    * @example https://example.custom-s2s.com
+   * @x-auditable true
    */
   api_url: string;
 };
@@ -44854,6 +46063,7 @@ export type TeamsDevicesDefaultDeviceSettingsPolicy = {
   gateway_unique_id?: TeamsDevicesGatewayUniqueId;
   include?: TeamsDevicesInclude;
   register_interface_ip_with_dns?: TeamsDevicesRegisterInterfaceIpWithDns;
+  sccm_vpn_boundary_support?: TeamsDevicesSccmVpnBoundarySupport;
   service_mode_v2?: TeamsDevicesServiceModeV2;
   support_url?: TeamsDevicesSupportUrl;
   switch_locked?: TeamsDevicesSwitchLocked;
@@ -44874,7 +46084,9 @@ export type TeamsDevicesDeleted = boolean;
 /**
  * The description of the device posture rule.
  *
+ * @default
  * @example The rule for admin serial numbers
+ * @x-auditable true
  */
 export type TeamsDevicesDescription = string;
 
@@ -44981,6 +46193,7 @@ export type TeamsDevicesDeviceManagedNetworks = {
  * The name of the device managed network. This name must be unique.
  *
  * @example managed-network-1
+ * @x-auditable true
  */
 export type TeamsDevicesDeviceManagedNetworksComponentsSchemasName = string;
 
@@ -45040,6 +46253,7 @@ export type TeamsDevicesDeviceSettingsPolicy = {
   policy_id?: TeamsDevicesSchemasUuid;
   precedence?: TeamsDevicesPrecedence;
   register_interface_ip_with_dns?: TeamsDevicesRegisterInterfaceIpWithDns;
+  sccm_vpn_boundary_support?: TeamsDevicesSccmVpnBoundarySupport;
   service_mode_v2?: TeamsDevicesServiceModeV2;
   support_url?: TeamsDevicesSupportUrl;
   switch_locked?: TeamsDevicesSwitchLocked;
@@ -45057,6 +46271,7 @@ export type TeamsDevicesDeviceSettingsResponseCollection = TeamsDevicesApiRespon
 
 /**
  * @example windows
+ * @x-auditable true
  */
 export type TeamsDevicesDeviceType = string;
 
@@ -45143,7 +46358,9 @@ export type TeamsDevicesDexTargetPolicy = {
 /**
  * If the `dns_server` field of a fallback domain is not present, the client will fall back to a best guess of the default/system DNS resolvers unless this policy option is set to `true`.
  *
+ * @default false
  * @example true
+ * @x-auditable true
  */
 export type TeamsDevicesDisableAutoFallback = boolean;
 
@@ -45184,6 +46401,7 @@ export type TeamsDevicesDisableForTime = {
  * Disconnects all devices on the account using Global WARP override.
  *
  * @example false
+ * @x-auditable true
  */
 export type TeamsDevicesDisconnect = boolean;
 
@@ -45197,12 +46415,14 @@ export type TeamsDevicesDomainJoinedInputRequest = {
    * Domain.
    *
    * @example example.com
+   * @x-auditable true
    */
   domain?: string;
   /**
    * Operating System.
    *
    * @example windows
+   * @x-auditable true
    */
   operating_system: 'windows';
 };
@@ -45212,6 +46432,7 @@ export type TeamsDevicesDomainJoinedInputRequest = {
  *
  * @example user@example.com
  * @maxLength 90
+ * @x-auditable true
  */
 export type TeamsDevicesEmail = string;
 
@@ -45219,12 +46440,30 @@ export type TeamsDevicesEmptyBody = Record<string, any> | null;
 
 /**
  * List of routes excluded in the WARP client's tunnel.
+ *
+ * @default {"address":"10.0.0.0/8"}
+ * @default {"address":"100.64.0.0/10"}
+ * @default {"address":"169.254.0.0/16","description":"DHCP Unspecified"}
+ * @default {"address":"172.16.0.0/12"}
+ * @default {"address":"192.0.0.0/24"}
+ * @default {"address":"192.168.0.0/16"}
+ * @default {"address":"224.0.0.0/24"}
+ * @default {"address":"240.0.0.0/4"}
+ * @default {"address":"255.255.255.255/32","description":"DHCP Broadcast"}
+ * @default {"address":"fe80::/10","description":"IPv6 Link Local"}
+ * @default {"address":"fd00::/8"}
+ * @default {"address":"ff01::/16"}
+ * @default {"address":"ff02::/16"}
+ * @default {"address":"ff03::/16"}
+ * @default {"address":"ff04::/16"}
+ * @default {"address":"ff05::/16"}
  */
 export type TeamsDevicesExclude = TeamsDevicesSplitTunnel[];
 
 /**
  * Whether to add Microsoft IPs to Split Tunnel exclusions.
  *
+ * @default false
  * @example true
  */
 export type TeamsDevicesExcludeOfficeIps = boolean;
@@ -45251,6 +46490,9 @@ export type TeamsDevicesExcludeSplitTunnelWithHost = {
  */
 export type TeamsDevicesExpiration = string;
 
+/**
+ * @x-auditable true
+ */
 export type TeamsDevicesExtendedKeyUsageEnum = 'clientAuth' | 'emailProtection';
 
 export type TeamsDevicesFallbackDomain = {
@@ -45259,6 +46501,7 @@ export type TeamsDevicesFallbackDomain = {
    *
    * @example Domain bypass for local development
    * @maxLength 100
+   * @x-auditable true
    */
   description?: string;
   /**
@@ -45269,6 +46512,7 @@ export type TeamsDevicesFallbackDomain = {
    * The domain suffix to match when resolving locally.
    *
    * @example example.com
+   * @x-auditable true
    */
   suffix: string;
 };
@@ -45277,6 +46521,22 @@ export type TeamsDevicesFallbackDomainResponseCollection = TeamsDevicesApiRespon
   result?: TeamsDevicesFallbackDomain[];
 };
 
+/**
+ * @default {"suffix":"intranet"}
+ * @default {"suffix":"internal"}
+ * @default {"suffix":"private"}
+ * @default {"suffix":"localdomain"}
+ * @default {"suffix":"domain"}
+ * @default {"suffix":"lan"}
+ * @default {"suffix":"home"}
+ * @default {"suffix":"host"}
+ * @default {"suffix":"corp"}
+ * @default {"suffix":"local"}
+ * @default {"suffix":"localhost"}
+ * @default {"suffix":"home.arpa"}
+ * @default {"suffix":"invalid"}
+ * @default {"suffix":"test"}
+ */
 export type TeamsDevicesFallbackDomains = TeamsDevicesFallbackDomain[];
 
 export type TeamsDevicesFileInputRequest = {
@@ -45284,18 +46544,21 @@ export type TeamsDevicesFileInputRequest = {
    * Whether or not file exists.
    *
    * @example true
+   * @x-auditable true
    */
   exists?: boolean;
   /**
    * Operating system.
    *
    * @example mac
+   * @x-auditable true
    */
   operating_system: 'windows' | 'linux' | 'mac';
   /**
    * File path.
    *
    * @example /bin/cat
+   * @x-auditable true
    */
   path: string;
   /**
@@ -45317,12 +46580,14 @@ export type TeamsDevicesFirewallInputRequest = {
    * Enabled.
    *
    * @example true
+   * @x-auditable true
    */
   enabled: boolean;
   /**
    * Operating System.
    *
    * @example windows
+   * @x-auditable true
    */
   operating_system: 'windows' | 'mac';
 };
@@ -45435,6 +46700,7 @@ export type TeamsDevicesInput =
  * The interval between each posture check with the third-party API. Use `m` for minutes (e.g. `5m`) and `h` for hours (e.g. `12h`).
  *
  * @example 10m
+ * @x-auditable true
  */
 export type TeamsDevicesInterval = string;
 
@@ -45465,12 +46731,14 @@ export type TeamsDevicesIntuneInputRequest = {
    * Compliance Status.
    *
    * @example compliant
+   * @x-auditable true
    */
   compliance_status: 'compliant' | 'noncompliant' | 'unknown' | 'notapplicable' | 'ingraceperiod' | 'error';
   /**
    * Posture Integration ID.
    *
    * @example bc7cbfbb-600a-42e4-8a23-45b5e85f804f
+   * @x-auditable true
    */
   connection_id: string;
 };
@@ -45479,6 +46747,7 @@ export type TeamsDevicesIntuneInputRequest = {
  * IPv4 or IPv6 address.
  *
  * @example 1.1.1.1
+ * @x-auditable true
  */
 export type TeamsDevicesIp = string;
 
@@ -45486,6 +46755,7 @@ export type TeamsDevicesIp = string;
  * Reasoning for setting the Global WARP override state. This will be surfaced in the audit log.
  *
  * @example Turning off WARP for testing purposes.
+ * @x-auditable true
  */
 export type TeamsDevicesJustification = string;
 
@@ -45500,6 +46770,7 @@ export type TeamsDevicesKey = string;
  * Type of the key.
  *
  * @example curve25519
+ * @x-auditable true
  */
 export type TeamsDevicesKeyType = string;
 
@@ -45524,18 +46795,21 @@ export type TeamsDevicesKolideInputRequest = {
    * Posture Integration ID.
    *
    * @example bc7cbfbb-600a-42e4-8a23-45b5e85f804f
+   * @x-auditable true
    */
   connection_id: string;
   /**
    * Count Operator.
    *
    * @example >
+   * @x-auditable true
    */
   countOperator: '<' | '<=' | '>' | '>=' | '==';
   /**
    * The Number of Issues.
    *
    * @example 1
+   * @x-auditable true
    */
   issue_count: string;
 };
@@ -45559,6 +46833,7 @@ export type TeamsDevicesLanAllowSubnetSize = number;
  *
  * @example 2017-06-14T00:00:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type TeamsDevicesLastSeen = string;
 
@@ -45566,6 +46841,7 @@ export type TeamsDevicesLastSeen = string;
  * The device mac address.
  *
  * @example 00-00-5E-00-53-00
+ * @x-auditable true
  */
 export type TeamsDevicesMacAddress = string;
 
@@ -45604,6 +46880,7 @@ export type TeamsDevicesModel = string;
  * The name of the device posture rule.
  *
  * @example Admin Serial Numbers
+ * @x-auditable true
  */
 export type TeamsDevicesName = string;
 
@@ -45611,6 +46888,7 @@ export type TeamsDevicesName = string;
  * The Linux distro name.
  *
  * @example ubuntu
+ * @x-auditable true
  */
 export type TeamsDevicesOsDistroName = string;
 
@@ -45618,6 +46896,7 @@ export type TeamsDevicesOsDistroName = string;
  * The Linux distro revision.
  *
  * @example 1.0.0
+ * @x-auditable true
  */
 export type TeamsDevicesOsDistroRevision = string;
 
@@ -45640,36 +46919,42 @@ export type TeamsDevicesOsVersionInputRequest = {
    * Operating System.
    *
    * @example windows
+   * @x-auditable true
    */
   operating_system: 'windows';
   /**
    * Operator.
    *
    * @example 13.3.0
+   * @x-auditable true
    */
   operator: '<' | '<=' | '>' | '>=' | '==';
   /**
    * Operating System Distribution Name (linux only).
    *
    * @example ubuntu
+   * @x-auditable true
    */
   os_distro_name?: string;
   /**
    * Version of OS Distribution (linux only).
    *
    * @example 11.3.1
+   * @x-auditable true
    */
   os_distro_revision?: string;
   /**
    * Additional version data. For Mac or iOS, the Product Version Extra. For Linux, the kernel release version. (Mac, iOS, and Linux only).
    *
    * @example (a) or -1007
+   * @x-auditable true
    */
   os_version_extra?: string;
   /**
    * Version of OS.
    *
    * @example 13.3.0
+   * @x-auditable true
    */
   version: string;
 };
@@ -45702,106 +46987,127 @@ export type TeamsDevicesPhysicalDevice = {
    * The number of active registrations for the device. Active registrations are those which haven't been revoked or deleted.
    *
    * @example 1
+   * @x-auditable true
    */
   active_registrations: number;
   /**
    * Version of the WARP client.
    *
    * @example 1.0.0
+   * @x-auditable true
    */
   client_version?: string | null;
   /**
    * The RFC3339 timestamp when the device was created.
    *
    * @example 2025-02-14T13:17:00Z
+   * @x-auditable true
    */
   created_at: string;
   /**
    * The RFC3339 timestamp when the device was deleted.
    *
    * @example 2025-02-14T13:17:00Z
+   * @x-auditable true
    */
   deleted_at?: string | null;
   /**
    * The device operating system.
    *
    * @example linux
+   * @x-auditable true
    */
   device_type?: string | null;
   /**
    * A string that uniquely identifies the hardware or virtual machine (VM).
+   *
+   * @x-auditable true
    */
   hardware_id?: string | null;
   /**
    * The unique ID of the device.
    *
    * @example fc9ab6ab-3b94-4319-9941-459462b3d73e
+   * @x-auditable true
    */
   id: string;
   /**
    * The RFC3339 timestamp when the device was last seen.
    *
    * @example 2025-02-14T13:17:00Z
+   * @x-auditable true
    */
   last_seen_at: string | null;
   /**
-   * The last Access user to use the WARP device.
+   * The last user to use the WARP device.
    */
   last_seen_user?: TeamsDevicesUser | null;
   /**
    * The device MAC address.
    *
    * @example f5:01:73:cf:12:23
+   * @x-auditable true
    */
   mac_address?: string | null;
   /**
    * The device manufacturer.
    *
    * @example ACME
+   * @x-auditable true
    */
   manufacturer?: string | null;
   /**
    * The model name of the device.
    *
    * @example Mark VII
+   * @x-auditable true
    */
   model?: string | null;
   /**
    * The name of the device.
    *
    * @example My Device
+   * @x-auditable true
    */
   name: string;
   /**
    * The device operating system version number.
+   *
+   * @x-auditable true
    */
   os_version?: string | null;
   /**
    * Additional operating system version data. For macOS or iOS, the Product Version Extra. For Linux, the kernel release version.
+   *
+   * @x-auditable true
    */
   os_version_extra?: string | null;
   /**
    * The public IP address of the WARP client.
    *
    * @example 1.1.1.1
+   * @x-auditable true
    */
   public_ip?: string | null;
   /**
    * The device serial number.
    *
    * @example ABS765ASD8A
+   * @x-auditable true
    */
   serial_number?: string | null;
   /**
    * The RFC3339 timestamp when the device was last updated.
    *
    * @example 2025-02-14T13:17:00Z
+   * @x-auditable true
    */
   updated_at: string;
 };
 
 /**
  * @example windows
+ * @x-auditable true
  */
 export type TeamsDevicesPlatform = 'windows' | 'mac' | 'linux' | 'android' | 'ios' | 'chromeos';
 
@@ -45815,6 +47121,7 @@ export type TeamsDevicesPrecedence = number;
 /**
  * Determines if the operating system will register WARP's local interface IP with your on-premises DNS server.
  *
+ * @default true
  * @example true
  */
 export type TeamsDevicesRegisterInterfaceIpWithDns = boolean;
@@ -45827,12 +47134,14 @@ export type TeamsDevicesRegistration = {
    * The RFC3339 timestamp when the registration was created.
    *
    * @example 2025-02-14T13:17:00Z
+   * @x-auditable true
    */
   created_at: string;
   /**
    * The RFC3339 timestamp when the registration was deleted.
    *
    * @example 2025-02-14T13:17:00Z
+   * @x-auditable true
    */
   deleted_at?: string | null;
   device: TeamsDevicesRegistrationDeviceDetails;
@@ -45840,42 +47149,49 @@ export type TeamsDevicesRegistration = {
    * The ID of the registration.
    *
    * @example 11ffb86f-3f0c-4306-b4a2-e62f872b166a
+   * @x-auditable true
    */
   id: string;
   /**
    * The public key used to connect to the Cloudflare network.
    *
    * @example U+QTP50RsWfeLGHF4tlGDnmGeuwtsz46KCHr5OyhWq00Rsdfl45mgnQAuEJ6CO0YrkyTl9FUf5iB0bwYR3g4EEFEHhtu6jFaqfMrBMBSz6itv9HQXkaR9OieKQ==
+   * @x-auditable true
    */
   key: string;
   /**
    * The type of encryption key used by the WARP client for the active key. Currently 'curve25519' for WireGuard and 'secp256r1' for MASQUE.
    *
    * @example secp256r1
+   * @x-auditable true
    */
   key_type?: string | null;
   /**
    * The RFC3339 timestamp when the registration was last seen.
    *
    * @example 2025-02-14T13:17:00Z
+   * @x-auditable true
    */
   last_seen_at: string;
   /**
    * The RFC3339 timestamp when the registration was revoked.
    *
    * @example 2025-02-14T13:17:00Z
+   * @x-auditable true
    */
   revoked_at?: string | null;
   /**
    * Type of the tunnel - wireguard or masque.
    *
    * @example masque
+   * @x-auditable true
    */
   tunnel_type?: string | null;
   /**
    * The RFC3339 timestamp when the registration was last updated.
    *
    * @example 2025-02-14T13:17:00Z
+   * @x-auditable true
    */
   updated_at: string;
   user?: TeamsDevicesUser;
@@ -45889,18 +47205,21 @@ export type TeamsDevicesRegistrationDeviceDetails = {
    * Version of the WARP client.
    *
    * @example 1.0.0
+   * @x-auditable true
    */
   client_version?: string;
   /**
    * The ID of the device.
    *
    * @example 32aa0404-78f1-49a4-99e0-97f575081356
+   * @x-auditable true
    */
   id: string;
   /**
    * The name of the device.
    *
    * @example My Device
+   * @x-auditable true
    */
   name: string;
 };
@@ -45910,6 +47229,7 @@ export type TeamsDevicesRegistrationDeviceDetails = {
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
+ * @x-auditable true
  */
 export type TeamsDevicesRegistrationId = string;
 
@@ -45917,6 +47237,7 @@ export type TeamsDevicesRegistrationId = string;
  * Whether to check all disks for encryption.
  *
  * @example true
+ * @x-auditable true
  */
 export type TeamsDevicesRequireAll = boolean;
 
@@ -45963,13 +47284,23 @@ export type TeamsDevicesRevokeDevicesRequest = TeamsDevicesRegistrationId[];
  *
  * @example 2017-06-14T00:00:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type TeamsDevicesRevokedAt = string;
+
+/**
+ * Determines whether the WARP client indicates to SCCM that it is inside a VPN boundary. (Windows only).
+ *
+ * @default false
+ * @example false
+ */
+export type TeamsDevicesSccmVpnBoundarySupport = boolean;
 
 /**
  * Polling frequency for the WARP client posture check. Default: `5m` (poll every five minutes). Minimum: `1m`.
  *
  * @example 1h
+ * @x-auditable true
  */
 export type TeamsDevicesSchedule = string;
 
@@ -46034,6 +47365,7 @@ export type TeamsDevicesSchemasTestId = string;
  * The type of device posture integration.
  *
  * @example workspace_one
+ * @x-auditable true
  */
 export type TeamsDevicesSchemasType =
   | 'workspace_one'
@@ -46041,13 +47373,14 @@ export type TeamsDevicesSchemasType =
   | 'uptycs'
   | 'intune'
   | 'kolide'
-  | 'tanium'
+  | 'tanium_s2s'
   | 'sentinelone_s2s'
   | 'custom_s2s';
 
 /**
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
+ * @x-auditable true
  */
 export type TeamsDevicesSchemasUuid = string;
 
@@ -46056,24 +47389,28 @@ export type TeamsDevicesSentineloneInputRequest = {
    * Operating system.
    *
    * @example mac
+   * @x-auditable true
    */
   operating_system: 'windows' | 'linux' | 'mac';
   /**
    * File path.
    *
    * @example /bin/cat
+   * @x-auditable true
    */
   path: string;
   /**
    * SHA-256.
    *
    * @example b5bb9d8014a0f9b1d61e21e796d78dccdf1352f23cd32812f4850b878ae4944c
+   * @x-auditable true
    */
   sha256?: string;
   /**
    * Signing certificate thumbprint.
    *
    * @example 0aabab210bdb998e9cf45da2c9ce352977ab531c681b74cf1e487be1bbe9fe6e
+   * @x-auditable true
    */
   thumbprint?: string;
 };
@@ -46156,12 +47493,14 @@ export type TeamsDevicesServiceModeV2 = {
    * The mode to run the WARP client under.
    *
    * @example proxy
+   * @x-auditable true
    */
   mode?: string;
   /**
    * The port number when used with proxy mode.
    *
    * @example 3000
+   * @x-auditable true
    */
   port?: number;
 };
@@ -46211,6 +47550,7 @@ export type TeamsDevicesSplitTunnelResponseCollection = TeamsDevicesApiResponseC
 /**
  * The URL to launch when the Send Feedback button is clicked.
  *
+ * @default
  * @example https://1.1.1.1/help
  */
 export type TeamsDevicesSupportUrl = string;
@@ -46218,6 +47558,7 @@ export type TeamsDevicesSupportUrl = string;
 /**
  * Whether to allow the user to turn off the WARP switch and disconnect the client.
  *
+ * @default false
  * @example true
  */
 export type TeamsDevicesSwitchLocked = boolean;
@@ -46240,6 +47581,7 @@ export type TeamsDevicesTaniumConfigRequest = {
    * The Tanium API URL.
    *
    * @example https://dummy-tanium-api.cloudflare.com/plugin/products/gateway/graphql
+   * @x-auditable true
    */
   api_url: string;
   /**
@@ -46256,36 +47598,42 @@ export type TeamsDevicesTaniumInputRequest = {
    * Posture Integration ID.
    *
    * @example bc7cbfbb-600a-42e4-8a23-45b5e85f804f
+   * @x-auditable true
    */
   connection_id: string;
   /**
    * For more details on eid last seen, refer to the Tanium documentation.
    *
    * @example 2023-07-20T23:16:32Z
+   * @x-auditable true
    */
   eid_last_seen?: string;
   /**
    * Operator to evaluate risk_level or eid_last_seen.
    *
    * @example >
+   * @x-auditable true
    */
   operator?: '<' | '<=' | '>' | '>=' | '==';
   /**
    * For more details on risk level, refer to the Tanium documentation.
    *
    * @example low
+   * @x-auditable true
    */
   risk_level?: 'low' | 'medium' | 'high' | 'critical';
   /**
    * Score Operator.
    *
    * @example >
+   * @x-auditable true
    */
   scoreOperator?: '<' | '<=' | '>' | '>=' | '==';
   /**
    * For more details on total score, refer to the Tanium documentation.
    *
    * @example 1
+   * @x-auditable true
    */
   total_score?: number;
 };
@@ -46306,6 +47654,7 @@ export type TeamsDevicesTargetDexTest = {
  *
  * @example 1970-01-01T00:00:00.000Z
  * @format date-time
+ * @x-auditable true
  */
 export type TeamsDevicesTimestamp = string;
 
@@ -46338,6 +47687,7 @@ export type TeamsDevicesTlsConfigResponse = {
    * A network address of the form "host:port" that the WARP client will use to detect the presence of a TLS host.
    *
    * @example foobar:1234
+   * @x-auditable true
    */
   tls_sockaddr: string;
 };
@@ -46350,11 +47700,15 @@ export type TeamsDevicesTlsConfigResponse = {
  */
 export type TeamsDevicesTrustStores = TeamsDevicesTrustStoresEnum[];
 
+/**
+ * @x-auditable true
+ */
 export type TeamsDevicesTrustStoresEnum = 'system' | 'user';
 
 /**
  * Determines which tunnel protocol to use.
  *
+ * @default
  * @example wireguard
  */
 export type TeamsDevicesTunnelProtocol = string;
@@ -46363,6 +47717,7 @@ export type TeamsDevicesTunnelProtocol = string;
  * Type of the tunnel connection used.
  *
  * @example masque
+ * @x-auditable true
  */
 export type TeamsDevicesTunnelType = string;
 
@@ -46370,6 +47725,7 @@ export type TeamsDevicesTunnelType = string;
  * The type of device posture rule.
  *
  * @example file
+ * @x-auditable true
  */
 export type TeamsDevicesType =
   | 'file'
@@ -46400,12 +47756,14 @@ export type TeamsDevicesUniqueClientIdInputRequest = {
    * List ID.
    *
    * @example da3de859-8f6e-47ea-a2b5-b2433858471f
+   * @x-auditable true
    */
   id: string;
   /**
    * Operating System.
    *
    * @example android
+   * @x-auditable true
    */
   operating_system: 'android' | 'ios' | 'chromeos';
 };
@@ -46422,6 +47780,7 @@ export type TeamsDevicesUnrevokeDevicesRequest = TeamsDevicesRegistrationId[];
  *
  * @example 2017-06-14T00:00:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type TeamsDevicesUpdated = string;
 
@@ -46430,6 +47789,7 @@ export type TeamsDevicesUptycsConfigRequest = {
    * The Uptycs API URL.
    *
    * @example rnd.uptycs.io
+   * @x-auditable true
    */
   api_url: string;
   /**
@@ -46469,6 +47829,7 @@ export type TeamsDevicesUser = {
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
+ * @x-auditable true
  */
 export type TeamsDevicesUuid = string;
 
@@ -46544,12 +47905,14 @@ export type TeamsDevicesWorkspaceOneInputRequest = {
    * Compliance Status.
    *
    * @example compliant
+   * @x-auditable true
    */
   compliance_status: 'compliant' | 'noncompliant' | 'unknown';
   /**
    * Posture Integration ID.
    *
    * @example bc7cbfbb-600a-42e4-8a23-45b5e85f804f
+   * @x-auditable true
    */
   connection_id: string;
 };
@@ -46607,6 +47970,7 @@ export type TlsCertificatesAndHostnamesAdvancedCertificatePackResponseSingle =
  * Type of certificate pack.
  *
  * @example advanced
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesAdvancedType = 'advanced';
 
@@ -46659,6 +48023,7 @@ export type TlsCertificatesAndHostnamesBase = {
    *
    * @example 2014-01-01T05:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   created_on: string;
   enabled: TlsCertificatesAndHostnamesEnabled;
@@ -46669,6 +48034,7 @@ export type TlsCertificatesAndHostnamesBase = {
    *
    * @example 2014-01-01T05:20:00Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on: string;
   name: TlsCertificatesAndHostnamesName;
@@ -46688,6 +48054,7 @@ export type TlsCertificatesAndHostnamesBase = {
  * Certificate Authority is manually reviewing the order.
  *
  * @example false
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesBrandCheck = boolean;
 
@@ -46696,6 +48063,7 @@ export type TlsCertificatesAndHostnamesBrandCheck = boolean;
  *
  * @default ubiquitous
  * @example ubiquitous
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesBundleMethod = 'ubiquitous' | 'optimal' | 'force';
 
@@ -46703,6 +48071,7 @@ export type TlsCertificatesAndHostnamesBundleMethod = 'ubiquitous' | 'optimal' |
  * Indicates whether the certificate is a CA or leaf certificate.
  *
  * @example true
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCa = boolean;
 
@@ -46711,6 +48080,7 @@ export type TlsCertificatesAndHostnamesCa = boolean;
  *
  * @example 2458ce5a-0c35-4c7f-82c7-8e9487d3ff60
  * @maxLength 36
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCertId = string;
 
@@ -46718,6 +48088,7 @@ export type TlsCertificatesAndHostnamesCertId = string;
  * Certificate Pack UUID.
  *
  * @example a77f8bd7-3b47-46b4-a6f1-75cf98109948
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCertPackUuid = string;
 
@@ -46753,6 +48124,7 @@ export type TlsCertificatesAndHostnamesCertificate = string;
  * Status of certificate pack.
  *
  * @example initializing
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCertificatePacksComponentsSchemasStatus =
   | 'initializing'
@@ -46808,6 +48180,7 @@ export type TlsCertificatesAndHostnamesCertificateAnalyzeResponse = TlsCertifica
  * The Certificate Authority that will issue the certificate
  *
  * @example google
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCertificateAuthority = 'digicert' | 'google' | 'lets_encrypt' | 'ssl_com';
 
@@ -46856,6 +48229,7 @@ export type TlsCertificatesAndHostnamesCertificateRevokeResponse = {
  * Current status of certificate.
  *
  * @example active
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCertificateStatus =
   | 'initializing'
@@ -46889,10 +48263,12 @@ export type TlsCertificatesAndHostnamesClientCertificatesComponentsSchemasCertif
 export type TlsCertificatesAndHostnamesClientCertificatesComponentsSchemasCertificateAuthority = {
   /**
    * @example 568b6b74-7b0c-4755-8840-4e3b8c24adeb
+   * @x-auditable true
    */
   id?: string;
   /**
    * @example Cloudflare Managed CA for account
+   * @x-auditable true
    */
   name?: string;
 };
@@ -46901,6 +48277,7 @@ export type TlsCertificatesAndHostnamesClientCertificatesComponentsSchemasCertif
  * Client Certificates may be active or revoked, and the pending_reactivation or pending_revocation represent in-progress asynchronous transitions
  *
  * @example active
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesClientCertificatesComponentsSchemasStatus =
   | 'active'
@@ -46943,6 +48320,7 @@ export type TlsCertificatesAndHostnamesClientCertificateResponseSingle =
  * Whether or not to add Cloudflare Branding for the order.  This will add a subdomain of sni.cloudflaressl.com as the Common Name if set to true.
  *
  * @example false
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCloudflareBranding = boolean;
 
@@ -46950,6 +48328,7 @@ export type TlsCertificatesAndHostnamesCloudflareBranding = boolean;
  * Common Name of the Client Certificate
  *
  * @example Cloudflare
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCommonName = string;
 
@@ -46992,6 +48371,7 @@ export type TlsCertificatesAndHostnamesComponentsSchemasCertificateObject = {
  * The Certificate Authority that Total TLS certificates will be issued through.
  *
  * @example google
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasCertificateAuthority = 'google' | 'lets_encrypt' | 'ssl_com';
 
@@ -47010,6 +48390,7 @@ export type TlsCertificatesAndHostnamesComponentsSchemasCertificateResponseSingl
  *
  * @example 2100-01-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasCreatedAt = string;
 
@@ -47017,6 +48398,7 @@ export type TlsCertificatesAndHostnamesComponentsSchemasCreatedAt = string;
  * If enabled, Total TLS will order a hostname specific TLS certificate for any proxied A, AAAA, or CNAME record in your zone.
  *
  * @example true
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasEnabled = boolean;
 
@@ -47025,6 +48407,7 @@ export type TlsCertificatesAndHostnamesComponentsSchemasEnabled = boolean;
  *
  * @example 2100-01-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasExpiresOn = string;
 
@@ -47032,11 +48415,12 @@ export type TlsCertificatesAndHostnamesComponentsSchemasExpiresOn = string;
  * The hostname for which the tls settings are set.
  *
  * @example app.example.com
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasHostname = string;
 
 /**
- * The private key for the certificate
+ * The private key for the certificate. This field is only needed for specific use cases such as using a custom certificate with Zero Trust's block page.
  * 
  * @example -----BEGIN PRIVATE KEY-----
 MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDEXDkcICRU3XBv9hiiPnBWIjgTQyowmVFxDr11mONgZB/cMYjE/OvQjvnpwNcOaSK16MOpAjNbELKRx2lZiVJaLRDCccqCxXwP/CrdRChcqGzo7mbNksMlcidrErb0LlEBKLFC2QjRmRKqB+YOs4TD8WsZu2S667A2fZmjRlaqOxFi1h62ee0P+TLU628UC/nl41JifSt5Evt7hMDHakemdwZblNYr2p6T3NQjdhjYXTtP4UmOGJBhJ7i7Kicg3d3CIgdTMbggSeGWqjndr4ldVnD96FN3cVT5uDFsn2CJXTFgdeBWoUnMS4VnUZzPWGf4vSBXC8qV7Ls+w46yT7T1AgMBAAECggEAQZnp/oqCeNPOR6l5S2L+1tfx0gWjZ78hJVteUpZ0iHSK7F6kKeOxyOird7vUXV0kmo+cJq+0hp0Ke4eam640FCpwKfYoSQ4/R3vgujGWJnaihCN5tv5sMet0XeJPuz5qE7ALoKCvwI6aXLHs20aAeZIDTQJ9QbGSGnJVzOWn+JDTidIgZpN57RpXfSAwnJPTQK/PN8i5z108hsaDOdEgGmxYZ7kYqMqzX20KXmth58LDfPixs5JGtS60iiKC/wOcGzkB2/AdTSojR76oEU77cANP/3zO25NG//whUdYlW0t0d7PgXxIeJe+xgYnamDQJx3qonVyt4H77ha0ObRAj9QKBgQDicZr+VTwFMnELP3a+FXGnjehRiuS1i7MXGKxNweCD+dFlML0FplSQS8Ro2n+d8lu8BBXGx0qm6VXu8Rhn7TAUL6q+PCgfarzxfIhacb/TZCqfieIHsMlVBfhV5HCXnk+kis0tuC/PRArcWTwDHJUJXkBhvkUsNswvQzavDPI7KwKBgQDd/WgLkj7A3X5fgIHZH/GbDSBiXwzKb+rF4ZCT2XFgG/OAW7vapfcX/w+v+5lBLyrocmOAS3PGGAhM5T3HLnUCQfnK4qgps1Lqibkc9Tmnsn60LanUjuUMsYv/zSw70tozbzhJ0pioEpWfRxRZBztO2Rr8Ntm7h6Fk701EXGNAXwKBgQCD1xsjy2J3sCerIdcz0u5qXLAPkeuZW+34m4/ucdwTWwc0gEz9lhsULFj9p4G351zLuiEnq+7mAWLcDJlmIO3mQt6JhiLiL9Y0T4pgBmxmWqKKYtAsJB0EmMY+1BNN44mBRqMxZFTJu1cLdhT/xstrOeoIPqytknYNanfTMZlzIwKBgHrLXe5oq0XMP8dcMneEcAUwsaU4pr6kQd3L9EmUkl5zl7J9C+DaxWAEuwzBw/iGutlxzRB+rD/7szu14wJ29EqXbDGKRzMp+se5/yfBjm7xEZ1hVPw7PwBShfqt57X/4Ktq7lwHnmH6RcGhc+P7WBc5iO/S94YAdIp8xOT3pf9JAoGAE0QkqJUY+5Mgr+fBO0VNV72ZoPveGpW+De59uhKAOnu1zljQCUtk59m6+DXfm0tNYKtawa5n8iN71Zh+s62xXSt3pYi1Y5CCCmv8Y4BhwIcPwXKk3zEvLgSHVTpC0bayA9aSO4bbZgVXa5w+Z0w/vvfp9DWo1IS3EnQRrz6WMYA=
@@ -47049,6 +48433,7 @@ export type TlsCertificatesAndHostnamesComponentsSchemasPrivateKey = string;
  * The serial number on the created Client Certificate.
  *
  * @example 3bb94ff144ac567b9f75ad664b6c55f8d5e48182
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasSerialNumber = string;
 
@@ -47056,6 +48441,7 @@ export type TlsCertificatesAndHostnamesComponentsSchemasSerialNumber = string;
  * The type of hash used for the Client Certificate..
  *
  * @example SHA256WithRSA
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasSignature = string;
 
@@ -47063,6 +48449,7 @@ export type TlsCertificatesAndHostnamesComponentsSchemasSignature = string;
  * Status of the hostname's activation.
  *
  * @example pending
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasStatus =
   | 'active'
@@ -47087,6 +48474,7 @@ export type TlsCertificatesAndHostnamesComponentsSchemasStatus =
  *
  * @example 2022-11-22T17:32:30.467938Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasUpdatedAt = string;
 
@@ -47095,6 +48483,7 @@ export type TlsCertificatesAndHostnamesComponentsSchemasUpdatedAt = string;
  *
  * @example 2019-10-28T18:11:23.37411Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesComponentsSchemasUploadedOn = string;
 
@@ -47108,6 +48497,7 @@ export type TlsCertificatesAndHostnamesConfig = TlsCertificatesAndHostnamesHostn
  * Country, provided by the CSR
  *
  * @example US
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCountry = string;
 
@@ -47116,6 +48506,7 @@ export type TlsCertificatesAndHostnamesCountry = string;
  *
  * @example 2020-02-06T18:11:23.531995Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCreatedAt = string;
 
@@ -47177,6 +48568,7 @@ export type TlsCertificatesAndHostnamesCustomHostname = {
  * Status of the fallback origin's activation.
  *
  * @example pending_deployment
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCustomHostnameFallbackOriginComponentsSchemasStatus =
   | 'initializing'
@@ -47234,6 +48626,7 @@ export type TlsCertificatesAndHostnamesCustomMetadata = {
  * a valid hostname that’s been added to your DNS zone as an A, AAAA, or CNAME record.
  *
  * @example origin2.example.com
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCustomOriginServer = string;
 
@@ -47241,6 +48634,7 @@ export type TlsCertificatesAndHostnamesCustomOriginServer = string;
  * A hostname that will be sent to your custom origin server as SNI for TLS handshake. This can be a valid subdomain of the zone or custom origin server name or the string ':request_host_header:' which will cause the host header in the request to be used as SNI. Not configurable with default/fallback origin server.
  *
  * @example sni.example.com
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesCustomOriginSni = string;
 
@@ -47273,6 +48667,7 @@ export type TlsCertificatesAndHostnamesDeleteAdvancedCertificatePackResponseSing
  * Whether or not the Keyless SSL is on or off.
  *
  * @example false
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesEnabled = boolean;
 
@@ -47287,6 +48682,7 @@ export type TlsCertificatesAndHostnamesEnabledResponse = TlsCertificatesAndHostn
  *
  * @deprecated true
  * @example false
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesEnabledWrite = boolean;
 
@@ -47301,6 +48697,7 @@ export type TlsCertificatesAndHostnamesErrors = string[];
  * Date that the Client Certificate expires
  *
  * @example 2033-02-20T23:18:00Z
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesExpiredOn = string;
 
@@ -47309,6 +48706,7 @@ export type TlsCertificatesAndHostnamesExpiredOn = string;
  *
  * @example 2016-01-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesExpiresOn = string;
 
@@ -47328,6 +48726,7 @@ export type TlsCertificatesAndHostnamesFallbackorigin = {
  * Unique identifier of the Client Certificate
  *
  * @example 256c24690243359fb8cf139a125bd05ebf1d968b71e4caf330718e9f5c8a89ea
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesFingerprintSha256 = string;
 
@@ -47337,6 +48736,7 @@ export type TlsCertificatesAndHostnamesFingerprintSha256 = string;
 export type TlsCertificatesAndHostnamesGeoRestrictions = {
   /**
    * @example us
+   * @x-auditable true
    */
   label?: 'us' | 'eu' | 'highest_security';
 };
@@ -47347,6 +48747,7 @@ export type TlsCertificatesAndHostnamesGeoRestrictions = {
  * @example example.com
  * @format hostname
  * @maxLength 253
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesHost = string;
 
@@ -47355,6 +48756,7 @@ export type TlsCertificatesAndHostnamesHost = string;
  *
  * @example app.example.com
  * @maxLength 255
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesHostname = string;
 
@@ -47419,6 +48821,7 @@ export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponents
  * Indicates whether hostname-level authenticated origin pulls is enabled. A null value voids the association.
  *
  * @example true
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasEnabled = boolean | null;
 
@@ -47427,6 +48830,7 @@ export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponents
  *
  * @example 2100-01-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasExpiresOn = string;
 
@@ -47434,6 +48838,7 @@ export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponents
  * Status of the certificate or the association.
  *
  * @example active
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponentsSchemasStatus =
   | 'initializing'
@@ -47449,6 +48854,7 @@ export type TlsCertificatesAndHostnamesHostnameAuthenticatedOriginPullComponents
  *
  * @example 2023-07-10T20:01:50.219171Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasCreatedAt = string;
 
@@ -47456,6 +48862,7 @@ export type TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasCreat
  * Deployment status for the given tls setting.
  *
  * @example pending_deployment
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasStatus = string;
 
@@ -47464,6 +48871,7 @@ export type TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasStatu
  *
  * @example 2023-07-10T20:01:50.219171Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesHostnameTlsSettingsComponentsSchemasUpdatedAt = string;
 
@@ -47483,6 +48891,7 @@ export type TlsCertificatesAndHostnamesHostnameAssociation = {
    *
    * @maxLength 36
    * @minLength 36
+   * @x-auditable true
    */
   mtls_certificate_id?: string;
 };
@@ -47521,6 +48930,7 @@ export type TlsCertificatesAndHostnamesHostnameCertidObject = {
  *
  * @example app.example.com
  * @maxLength 255
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesHostnamePost = string;
 
@@ -47546,6 +48956,7 @@ export type TlsCertificatesAndHostnamesIdentifier = string;
  * Date that the Client Certificate was issued by the Certificate Authority
  *
  * @example 2023-02-23T23:18:00Z
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesIssuedOn = string;
 
@@ -47553,6 +48964,7 @@ export type TlsCertificatesAndHostnamesIssuedOn = string;
  * The certificate authority that issued the certificate.
  *
  * @example GlobalSign
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesIssuer = string;
 
@@ -47562,6 +48974,7 @@ export type TlsCertificatesAndHostnamesKeylessCertificate = TlsCertificatesAndHo
  * Private IP of the Key Server Host
  *
  * @example 10.0.0.1
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesKeylessPrivateIp = string;
 
@@ -47591,6 +49004,7 @@ export type TlsCertificatesAndHostnamesKeylessTunnel = {
  * Cloudflare Tunnel Virtual Network ID
  *
  * @example 7365377a-85a4-4390-9480-531ef7dc7a3c
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesKeylessVnetId = string;
 
@@ -47598,6 +49012,7 @@ export type TlsCertificatesAndHostnamesKeylessVnetId = string;
  * Location, provided by the CSR
  *
  * @example Somewhere
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesLocation = string;
 
@@ -47618,6 +49033,7 @@ export type TlsCertificatesAndHostnamesMessages = {
  *
  * @example 2014-01-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesModifiedOn = string;
 
@@ -47661,6 +49077,7 @@ export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasCertificat
  *
  * @example 2122-10-29T16:59:47Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasExpiresOn = string;
 
@@ -47668,6 +49085,7 @@ export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasExpiresOn 
  * Certificate deployment status for the given service.
  *
  * @example pending_deployment
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasStatus = string;
 
@@ -47676,6 +49094,7 @@ export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasStatus = s
  *
  * @example 2022-11-22T17:32:30.467938Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasUploadedOn = string;
 
@@ -47684,6 +49103,7 @@ export type TlsCertificatesAndHostnamesMtlsManagementComponentsSchemasUploadedOn
  *
  * @example example.com Keyless SSL
  * @maxLength 180
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesName = string;
 
@@ -47692,6 +49112,7 @@ export type TlsCertificatesAndHostnamesName = string;
  *
  * @example example.com Keyless SSL
  * @maxLength 180
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesNameWrite = string;
 
@@ -47699,6 +49120,7 @@ export type TlsCertificatesAndHostnamesNameWrite = string;
  * Organization, provided by the CSR
  *
  * @example Organization
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesOrganization = string;
 
@@ -47706,6 +49128,7 @@ export type TlsCertificatesAndHostnamesOrganization = string;
  * Organizational Unit, provided by the CSR
  *
  * @example Organizational Unit
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesOrganizationalUnit = string;
 
@@ -47714,6 +49137,7 @@ export type TlsCertificatesAndHostnamesOrganizationalUnit = string;
  *
  * @example fallback.example.com
  * @maxLength 255
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesOrigin = string;
 
@@ -47725,12 +49149,14 @@ export type TlsCertificatesAndHostnamesOwnershipVerification = {
    * DNS Name for record.
    *
    * @example _cf-custom-hostname.app.example.com
+   * @x-auditable true
    */
   name?: string;
   /**
    * DNS Record type.
    *
    * @example txt
+   * @x-auditable true
    */
   type?: 'txt';
   /**
@@ -47808,6 +49234,7 @@ export type TlsCertificatesAndHostnamesPerHostnameSettingsResponseDelete =
  * Specify the policy that determines the region where your private key will be held locally. HTTPS connections to any excluded data center will still be fully encrypted, but will incur some latency while Keyless SSL is used to complete the handshake with the nearest allowed data center. Any combination of countries, specified by their two letter country code (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2#Officially_assigned_code_elements) can be chosen, such as 'country: IN', as well as 'region: EU' which refers to the EU region. If there are too few data centers satisfying the policy, it will be rejected.
  *
  * @example (country: US) or (region: EU)
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesPolicy = string;
 
@@ -47817,6 +49244,7 @@ export type TlsCertificatesAndHostnamesPolicy = string;
  * @default 24008
  * @example 24008
  * @maxLength 65535
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesPort = number;
 
@@ -47825,6 +49253,7 @@ export type TlsCertificatesAndHostnamesPort = number;
  *
  * @default 0
  * @example 1
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesPriority = number;
 
@@ -47865,10 +49294,14 @@ export type TlsCertificatesAndHostnamesPrivateKey = string;
 export type TlsCertificatesAndHostnamesQuota = {
   /**
    * Quantity Allocated.
+   *
+   * @x-auditable true
    */
   allocated?: number;
   /**
    * Quantity Used.
+   *
+   * @x-auditable true
    */
   used?: number;
 };
@@ -47877,6 +49310,7 @@ export type TlsCertificatesAndHostnamesQuota = {
  * Signature type desired on certificate ("origin-rsa" (rsa), "origin-ecc" (ecdsa), or "keyless-certificate" (for Keyless SSL servers).
  *
  * @example origin-rsa
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesRequestType = 'origin-rsa' | 'origin-ecc' | 'keyless-certificate';
 
@@ -47885,6 +49319,7 @@ export type TlsCertificatesAndHostnamesRequestType = 'origin-rsa' | 'origin-ecc'
  *
  * @default 5475
  * @example 5475
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesRequestedValidity = 7 | 30 | 90 | 365 | 730 | 1095 | 5475;
 
@@ -47920,6 +49355,7 @@ export type TlsCertificatesAndHostnamesResultInfo = {
  *
  * @example 2024-09-06T18:43:47.928893Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesRevokedAt = string;
 
@@ -47945,6 +49381,7 @@ export type TlsCertificatesAndHostnamesSchemasCertificateObject = {
  * Certificate Authority selected for the order.  For information on any certificate authority specific details or restrictions [see this page for more details.](https://developers.cloudflare.com/ssl/reference/certificate-authorities)
  *
  * @example lets_encrypt
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasCertificateAuthority = 'google' | 'lets_encrypt' | 'ssl_com';
 
@@ -47972,6 +49409,7 @@ export type TlsCertificatesAndHostnamesSchemasCertificates = string;
  *
  * @example 2019-10-28T18:11:23.37411Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasCreatedAt = string;
 
@@ -47979,6 +49417,7 @@ export type TlsCertificatesAndHostnamesSchemasCreatedAt = string;
  * The Certificate Signing Request (CSR). Must be newline-encoded.
  *
  * @example -----BEGIN CERTIFICATE REQUEST-----\nMIICY....\n-----END CERTIFICATE REQUEST-----\n
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasCsr = string;
 
@@ -47998,6 +49437,7 @@ export type TlsCertificatesAndHostnamesSchemasCsr = string;
  * If you do not have a valid custom or advanced certificate at Cloudflare's edge and are unsure if any of the above Cloudflare settings are enabled, or if any HTTP redirects exist at your origin, we advise leaving Universal SSL enabled for your domain.
  *
  * @example true
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasEnabled = boolean;
 
@@ -48005,6 +49445,7 @@ export type TlsCertificatesAndHostnamesSchemasEnabled = boolean;
  * When the certificate will expire.
  *
  * @example 2014-01-01 05:20:00 +0000 UTC
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasExpiresOn = string;
 
@@ -48013,6 +49454,7 @@ export type TlsCertificatesAndHostnamesSchemasExpiresOn = string;
  *
  * @example app.example.com
  * @maxLength 255
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasHostname = string;
 
@@ -48032,6 +49474,7 @@ export type TlsCertificatesAndHostnamesSchemasHosts = string[];
  *
  * @example 4d2844d2ce78891c34d0b6c0535a291e
  * @maxLength 32
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasIdentifier = string;
 
@@ -48039,6 +49482,7 @@ export type TlsCertificatesAndHostnamesSchemasIdentifier = string;
  * The certificate authority that issued the certificate.
  *
  * @example O=Example Inc.,L=California,ST=San Francisco,C=US
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasIssuer = string;
 
@@ -48046,6 +49490,7 @@ export type TlsCertificatesAndHostnamesSchemasIssuer = string;
  * Optional unique name for the certificate. Only used for human readability.
  *
  * @example example_ca_cert
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasName = string;
 
@@ -48087,11 +49532,14 @@ export type TlsCertificatesAndHostnamesSchemasPrivateKey = string;
  * The certificate serial number.
  *
  * @example 235217144297995885180570755458463043449861756659
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasSerialNumber = string;
 
 /**
  * Certificate's signature algorithm.
+ *
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasSignature = 'ECDSAWithSHA256' | 'SHA1WithRSA' | 'SHA256WithRSA';
 
@@ -48099,6 +49547,7 @@ export type TlsCertificatesAndHostnamesSchemasSignature = 'ECDSAWithSHA256' | 'S
  * Status of the Keyless SSL.
  *
  * @example active
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasStatus = 'active' | 'deleted';
 
@@ -48107,6 +49556,7 @@ export type TlsCertificatesAndHostnamesSchemasStatus = 'active' | 'deleted';
  *
  * @example 2100-01-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasUpdatedAt = string;
 
@@ -48115,6 +49565,7 @@ export type TlsCertificatesAndHostnamesSchemasUpdatedAt = string;
  *
  * @example 2019-10-28T18:11:23.37411Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasUploadedOn = string;
 
@@ -48122,6 +49573,7 @@ export type TlsCertificatesAndHostnamesSchemasUploadedOn = string;
  * Validation method in use for a certificate pack order.
  *
  * @example txt
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasValidationMethod = 'http' | 'cname' | 'txt';
 
@@ -48129,6 +49581,7 @@ export type TlsCertificatesAndHostnamesSchemasValidationMethod = 'http' | 'cname
  * The number of days the Client Certificate will be valid after the issued_on date
  *
  * @example 3650
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSchemasValidityDays = number;
 
@@ -48136,6 +49589,7 @@ export type TlsCertificatesAndHostnamesSchemasValidityDays = number;
  * The serial number on the uploaded certificate.
  *
  * @example 6743787633689793699141714808227354901
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSerialNumber = string;
 
@@ -48143,6 +49597,7 @@ export type TlsCertificatesAndHostnamesSerialNumber = string;
  * The service using the certificate.
  *
  * @example gateway
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesService = string;
 
@@ -48164,6 +49619,8 @@ export type TlsCertificatesAndHostnamesSettingObjectDelete = {
 
 /**
  * The TLS Setting name.
+ *
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSettingId = 'ciphers' | 'min_tls_version' | 'http2';
 
@@ -48171,6 +49628,7 @@ export type TlsCertificatesAndHostnamesSettingId = 'ciphers' | 'min_tls_version'
  * The type of hash used for the certificate.
  *
  * @example SHA256WithRSA
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSignature = string;
 
@@ -48178,6 +49636,7 @@ export type TlsCertificatesAndHostnamesSignature = string;
  * Subject Key Identifier
  *
  * @example 8e375af1389a069a0f921f8cc8e1eb12d784b949
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesSki = string;
 
@@ -48190,6 +49649,7 @@ export type TlsCertificatesAndHostnamesSsl = {
    *
    * @default ubiquitous
    * @example ubiquitous
+   * @x-auditable true
    */
   bundle_method?: 'ubiquitous' | 'optimal' | 'force';
   certificate_authority?: TlsCertificatesAndHostnamesCertificateAuthority;
@@ -48203,6 +49663,7 @@ export type TlsCertificatesAndHostnamesSsl = {
    * The identifier for the Custom CSR that was used.
    *
    * @example 7b163417-1d2b-4c84-a38a-2fb7a0cd7752
+   * @x-auditable true
    */
   custom_csr_id?: string;
   /**
@@ -48243,6 +49704,7 @@ export type TlsCertificatesAndHostnamesSsl = {
    *
    * @example 2021-02-06T18:11:23.531995Z
    * @format date-time
+   * @x-auditable true
    */
   expires_on?: string;
   /**
@@ -48258,24 +49720,28 @@ export type TlsCertificatesAndHostnamesSsl = {
    * @example 0d89c70d-ad9f-4843-b99f-6cc0252067e9
    * @maxLength 36
    * @minLength 36
+   * @x-auditable true
    */
   id?: string;
   /**
    * The issuer on a custom uploaded certificate.
    *
    * @example DigiCertInc
+   * @x-auditable true
    */
   issuer?: string;
   /**
    * Domain control validation (DCV) method used for this hostname.
    *
    * @example txt
+   * @x-auditable true
    */
   method?: 'http' | 'txt' | 'email';
   /**
    * The serial number on a custom uploaded certificate.
    *
    * @example 6743787633689793699141714808227354901
+   * @x-auditable true
    */
   serial_number?: string;
   settings?: TlsCertificatesAndHostnamesSslsettings;
@@ -48283,12 +49749,14 @@ export type TlsCertificatesAndHostnamesSsl = {
    * The signature on a custom uploaded certificate.
    *
    * @example SHA256WithRSA
+   * @x-auditable true
    */
   signature?: string;
   /**
    * Status of the hostname's SSL certificates.
    *
    * @example pending_validation
+   * @x-auditable true
    */
   status?:
     | 'initializing'
@@ -48316,6 +49784,7 @@ export type TlsCertificatesAndHostnamesSsl = {
    * Level of validation to be used for this hostname. Domain validation (dv) must be used.
    *
    * @example dv
+   * @x-auditable true
    */
   type?: 'dv';
   /**
@@ -48323,6 +49792,7 @@ export type TlsCertificatesAndHostnamesSsl = {
    *
    * @example 2020-02-06T18:11:23.531995Z
    * @format date-time
+   * @x-auditable true
    */
   uploaded_on?: string;
   /**
@@ -48333,6 +49803,7 @@ export type TlsCertificatesAndHostnamesSsl = {
      * A domain validation error.
      *
      * @example SERVFAIL looking up CAA for app.example.com
+     * @x-auditable true
      */
     message?: string;
   }[];
@@ -48341,6 +49812,7 @@ export type TlsCertificatesAndHostnamesSsl = {
    * Indicates whether the certificate covers a wildcard.
    *
    * @example false
+   * @x-auditable true
    */
   wildcard?: boolean;
 };
@@ -48370,6 +49842,7 @@ export type TlsCertificatesAndHostnamesSslpost = {
    *
    * @default ubiquitous
    * @example ubiquitous
+   * @x-auditable true
    */
   bundle_method?: 'ubiquitous' | 'optimal' | 'force';
   certificate_authority?: TlsCertificatesAndHostnamesCertificateAuthority;
@@ -48377,6 +49850,7 @@ export type TlsCertificatesAndHostnamesSslpost = {
    * Whether or not to add Cloudflare Branding for the order.  This will add a subdomain of sni.cloudflaressl.com as the Common Name if set to true
    *
    * @example false
+   * @x-auditable true
    */
   cloudflare_branding?: boolean;
   custom_cert_bundle?: TlsCertificatesAndHostnamesCustomCertBundle;
@@ -48384,6 +49858,7 @@ export type TlsCertificatesAndHostnamesSslpost = {
    * If a custom uploaded certificate is used.
    *
    * @example -----BEGIN CERTIFICATE-----\nMIIFJDCCBAygAwIBAgIQD0ifmj/Yi5NP/2gdUySbfzANBgkqhkiG9w0BAQsFADBN\nMQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMScwJQYDVQQDEx5E...SzSHfXp5lnu/3V08I72q1QNzOCgY1XeL4GKVcj4or6cT6tX6oJH7ePPmfrBfqI/O\nOeH8gMJ+FuwtXYEPa4hBf38M5eU5xWG7\n-----END CERTIFICATE-----\n
+   * @x-auditable true
    */
   custom_certificate?: string;
   /**
@@ -48423,6 +49898,7 @@ export type TlsCertificatesAndHostnamesSslpost = {
    * Domain control validation (DCV) method used for this hostname.
    *
    * @example http
+   * @x-auditable true
    */
   method?: 'http' | 'txt' | 'email';
   settings?: TlsCertificatesAndHostnamesSslsettings;
@@ -48430,12 +49906,14 @@ export type TlsCertificatesAndHostnamesSslpost = {
    * Level of validation to be used for this hostname. Domain validation (dv) must be used.
    *
    * @example dv
+   * @x-auditable true
    */
   type?: 'dv';
   /**
    * Indicates whether the certificate covers a wildcard.
    *
    * @example false
+   * @x-auditable true
    */
   wildcard?: boolean;
 };
@@ -48456,24 +49934,28 @@ export type TlsCertificatesAndHostnamesSslsettings = {
    * Whether or not Early Hints is enabled.
    *
    * @example on
+   * @x-auditable true
    */
   early_hints?: 'on' | 'off';
   /**
    * Whether or not HTTP2 is enabled.
    *
    * @example on
+   * @x-auditable true
    */
   http2?: 'on' | 'off';
   /**
    * The minimum TLS version supported.
    *
    * @example 1.2
+   * @x-auditable true
    */
   min_tls_version?: '1.0' | '1.1' | '1.2' | '1.3';
   /**
    * Whether or not TLS 1.3 is enabled.
    *
    * @example on
+   * @x-auditable true
    */
   tls_1_3?: 'on' | 'off';
 };
@@ -48482,6 +49964,7 @@ export type TlsCertificatesAndHostnamesSslsettings = {
  * State, provided by the CSR
  *
  * @example CA
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesState = string;
 
@@ -48489,6 +49972,7 @@ export type TlsCertificatesAndHostnamesState = string;
  * Status of the zone's custom SSL.
  *
  * @example active
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesStatus = 'active' | 'expired' | 'deleted' | 'pending' | 'initializing';
 
@@ -48505,6 +49989,7 @@ export type TlsCertificatesAndHostnamesTotalTlsSettingsResponse = TlsCertificate
  *
  * @default legacy_custom
  * @example sni_custom
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesType = 'legacy_custom' | 'sni_custom';
 
@@ -48517,6 +50002,7 @@ export type TlsCertificatesAndHostnamesUniversal = {
  *
  * @example 2020-03-16T18:11:23.531995Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesUpdatedAt = string;
 
@@ -48525,6 +50011,7 @@ export type TlsCertificatesAndHostnamesUpdatedAt = string;
  *
  * @example 2014-01-01T05:20:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesUploadedOn = string;
 
@@ -48532,6 +50019,7 @@ export type TlsCertificatesAndHostnamesUploadedOn = string;
  * The DCV Delegation unique identifier.
  *
  * @example abc123def456ghi7
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesUuid = string;
 
@@ -48543,6 +50031,7 @@ export type TlsCertificatesAndHostnamesUuidObject = {
  * Validation Method selected for the order.
  *
  * @example txt
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesValidationMethod = 'txt' | 'http' | 'email';
 
@@ -48550,6 +50039,7 @@ export type TlsCertificatesAndHostnamesValidationMethod = 'txt' | 'http' | 'emai
  * Result status.
  *
  * @example pending_validation
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesValidationMethodComponentsSchemasStatus = string;
 
@@ -48557,6 +50047,7 @@ export type TlsCertificatesAndHostnamesValidationMethodComponentsSchemasStatus =
  * Desired validation method.
  *
  * @example txt
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesValidationMethodDefinition = 'http' | 'cname' | 'txt' | 'email';
 
@@ -48587,6 +50078,7 @@ export type TlsCertificatesAndHostnamesValidationRecord = {
    * The hostname that the certificate authority (CA) will check for a TXT record during domain validation .
    *
    * @example _acme-challenge.app.example.com
+   * @x-auditable true
    */
   txt_name?: string;
   /**
@@ -48599,11 +50091,15 @@ export type TlsCertificatesAndHostnamesValidationRecord = {
 
 /**
  * Validity Days selected for the order.
+ *
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesValidityDays = 14 | 30 | 90 | 365;
 
 /**
  * The validity period in days for the certificates ordered via Total TLS.
+ *
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesValidityPeriod = 90;
 
@@ -48642,6 +50138,7 @@ export type TlsCertificatesAndHostnamesVerificationInfo = {
    *
    * @example b3b90cfedd89a3e487d3e383c56c4267.example.com
    * @format hostname
+   * @x-auditable true
    */
   record_name?: 'record_name' | 'http_url' | 'cname' | 'txt_name';
   /**
@@ -48649,6 +50146,7 @@ export type TlsCertificatesAndHostnamesVerificationInfo = {
    *
    * @example 6979be7e4cfc9e5c603e31df7efac9cc60fee82d.comodoca.com
    * @format hostname
+   * @x-auditable true
    */
   record_target?: 'record_value' | 'http_body' | 'cname_target' | 'txt_value';
 };
@@ -48657,6 +50155,7 @@ export type TlsCertificatesAndHostnamesVerificationInfo = {
  * Status of the required verification information, omitted if verification status is unknown.
  *
  * @example true
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesVerificationStatus = boolean;
 
@@ -48664,6 +50163,7 @@ export type TlsCertificatesAndHostnamesVerificationStatus = boolean;
  * Method of verification.
  *
  * @example cname
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesVerificationType = 'cname' | 'meta tag';
 
@@ -48711,6 +50211,7 @@ export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSche
  * Indicates whether zone-level authenticated origin pulls is enabled.
  *
  * @example true
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSchemasEnabled = boolean;
 
@@ -48718,6 +50219,7 @@ export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSche
  * Status of the certificate activation.
  *
  * @example active
+ * @x-auditable true
  */
 export type TlsCertificatesAndHostnamesZoneAuthenticatedOriginPullComponentsSchemasStatus =
   | 'initializing'
@@ -48810,7 +50312,7 @@ export type TunnelArgoTunnel = {
  */
 export type TunnelCfdTunnel = {
   account_tag?: TunnelAccountId;
-  connections?: TunnelConnections;
+  connections?: TunnelConnectionsDeprecated;
   conns_active_at?: TunnelConnsActiveAt;
   conns_inactive_at?: TunnelConnsInactiveAt;
   created_at?: TunnelCreatedAt;
@@ -48855,9 +50357,6 @@ export type TunnelConfig = {
    * Enable private network access from WARP users to private network routes. This is enabled if the tunnel has an assigned route.
    */
   ['warp-routing']?: {
-    /**
-     * @default false
-     */
     enabled?: boolean;
   };
 };
@@ -48911,6 +50410,14 @@ export type TunnelConnectionId = string;
  * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
  */
 export type TunnelConnections = TunnelSchemasConnection[];
+
+/**
+ * The Cloudflare Tunnel connections between your origin and Cloudflare's edge.
+ *
+ * @deprecated true
+ * @x-stainless-deprecation-message This field will start returning an empty array. To fetch the connections of a given tunnel, please use the dedicated endpoint `/accounts/{account_id}/{tunnel_type}/{tunnel_id}/connections`
+ */
+export type TunnelConnectionsDeprecated = TunnelSchemasConnection[];
 
 /**
  * Timestamp of when the tunnel established at least one connection to Cloudflare's edge. If `null`, the tunnel is inactive.
@@ -48982,6 +50489,7 @@ export type TunnelIcmpProxyEnabled = boolean;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type TunnelIdentifier = string;
 
@@ -48999,7 +50507,6 @@ export type TunnelIngressRule = {
   /**
    * Requests with this path route to this public hostname.
    *
-   * @default
    * @example subpath
    */
   path?: string;
@@ -49036,8 +50543,19 @@ export type TunnelIpNetworkEncoded = string;
  *
  * @example true
  * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type TunnelIsDefaultNetwork = boolean;
+
+/**
+ * If `true`, this virtual network is the default for the account.
+ *
+ * @default false
+ * @example false
+ * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
+ */
+export type TunnelIsDefaultNetworkOptional = boolean;
 
 /**
  * Cloudflare continues to track connections for several minutes after they disconnect. This is an optimization to improve latency and reliability of reconnecting.  If `true`, the connection has disconnected but is still being tracked. If `false`, the connection is actively serving traffic.
@@ -49107,24 +50625,22 @@ export type TunnelOriginRequest = {
     /**
      * Deny traffic that has not fulfilled Access authorization.
      *
-     * @default false
+     * @example false
      */
     required?: boolean;
     /**
-     * @default Your Zero Trust organization name.
+     * @example zero-trust-organization-name
      */
     teamName: string;
   };
   /**
    * Path to the certificate authority (CA) for the certificate of your origin. This option should be used only if your certificate is not signed by Cloudflare.
-   *
-   * @default
    */
   caPool?: string;
   /**
    * Timeout for establishing a new TCP connection to your origin server. This excludes the time taken to establish TLS, which is controlled by tlsTimeout.
    *
-   * @default 10
+   * @example 10
    */
   connectTimeout?: number;
   /**
@@ -49142,49 +50658,45 @@ export type TunnelOriginRequest = {
   /**
    * Maximum number of idle keepalive connections between Tunnel and your origin. This does not restrict the total number of concurrent connections.
    *
-   * @default 100
+   * @example 100
    */
   keepAliveConnections?: number;
   /**
    * Timeout after which an idle keepalive connection can be discarded.
    *
-   * @default 90
+   * @example 90
    */
   keepAliveTimeout?: number;
   /**
    * Disable the “happy eyeballs” algorithm for IPv4/IPv6 fallback if your local network has misconfigured one of the protocols.
    *
-   * @default false
+   * @example false
    */
   noHappyEyeballs?: boolean;
   /**
    * Disables TLS verification of the certificate presented by your origin. Will allow any certificate from the origin to be accepted.
    *
-   * @default false
+   * @example false
    */
   noTLSVerify?: boolean;
   /**
    * Hostname that cloudflared should expect from your origin server certificate.
-   *
-   * @default
    */
   originServerName?: string;
   /**
    * cloudflared starts a proxy server to translate HTTP traffic into TCP when proxying, for example, SSH or RDP. This configures what type of proxy will be started. Valid options are: "" for the regular proxy and "socks" for a SOCKS5 proxy.
-   *
-   * @default
    */
   proxyType?: string;
   /**
    * The timeout after which a TCP keepalive packet is sent on a connection between Tunnel and the origin server.
    *
-   * @default 30
+   * @example 30
    */
   tcpKeepAlive?: number;
   /**
    * Timeout for completing a TLS handshake to your origin server, if you have chosen to connect Tunnel to an HTTPS server.
    *
-   * @default 10
+   * @example 10
    */
   tlsTimeout?: number;
 };
@@ -49319,8 +50831,8 @@ export type TunnelSchemasApiResponseSingle = TunnelSchemasApiResponseCommon;
 /**
  * Indicates if this is a locally or remotely configured tunnel. If `local`, manage the tunnel using a YAML file on the origin machine. If `cloudflare`, manage the tunnel's configuration on the Zero Trust dashboard.
  *
- * @default local
  * @example cloudflare
+ * @x-stainless-terraform-configurability computed_optional
  */
 export type TunnelSchemasConfigSrc = 'local' | 'cloudflare';
 
@@ -49477,7 +50989,7 @@ export type TunnelTeamnet = {
   tun_type?: TunnelTunnelType;
   tunnel_id?: TunnelTunnelId;
   tunnel_name?: TunnelTunnelName;
-  virtual_network_id?: TunnelVirtualNetworkId;
+  virtual_network_id?: TunnelVirtualNetworkIdComputedOptional;
   virtual_network_name?: TunnelVirtualNetworkName;
 };
 
@@ -49500,6 +51012,7 @@ export type TunnelTeamnetResponseSingle = {
 /**
  * @example 2014-01-01T05:20:00.12345Z
  * @format date-time
+ * @x-auditable true
  */
 export type TunnelTimestamp = string;
 
@@ -49655,6 +51168,16 @@ export type TunnelVirtualNetworkComment = string;
 export type TunnelVirtualNetworkId = string;
 
 /**
+ * UUID of the virtual network.
+ *
+ * @example f70ff985-a4ef-4643-bbbc-4a0ed4fc8415
+ * @format uuid
+ * @x-auditable true
+ * @x-stainless-terraform-configurability computed_optional
+ */
+export type TunnelVirtualNetworkIdComputedOptional = string;
+
+/**
  * A user-friendly name for the virtual network.
  *
  * @example us-east-1-vpc
@@ -49684,7 +51207,7 @@ export type TunnelVnetResponseSingle = {
  */
 export type TunnelWarpConnectorTunnel = {
   account_tag?: TunnelAccountId;
-  connections?: TunnelConnections;
+  connections?: TunnelConnectionsDeprecated;
   conns_active_at?: TunnelConnsActiveAt;
   conns_inactive_at?: TunnelConnsInactiveAt;
   created_at?: TunnelCreatedAt;
@@ -49746,6 +51269,7 @@ export type TurnstileApiResponseCommonFailure = {
  * expensive challenges in response to malicious bots (ENT only).
  *
  * @example false
+ * @x-auditable true
  */
 export type TurnstileBotFightMode = boolean;
 
@@ -49754,6 +51278,7 @@ export type TurnstileBotFightMode = boolean;
  * this setting can determine the clearance level to be set
  *
  * @example interactive
+ * @x-auditable true
  */
 export type TurnstileClearanceLevel = 'no_clearance' | 'jschallenge' | 'managed' | 'interactive';
 
@@ -49777,6 +51302,7 @@ export type TurnstileDomains = string[];
  * Return the Ephemeral ID in /siteverify (ENT only).
  *
  * @example false
+ * @x-auditable true
  */
 export type TurnstileEphemeralId = boolean;
 
@@ -49785,6 +51311,7 @@ export type TurnstileEphemeralId = boolean;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type TurnstileIdentifier = string;
 
@@ -49794,6 +51321,7 @@ export type TurnstileIdentifier = string;
  * invalidated, and requests using it will be rejected.
  *
  * @default false
+ * @x-auditable true
  */
 export type TurnstileInvalidateImmediately = boolean;
 
@@ -49821,6 +51349,7 @@ export type TurnstileModifiedOn = string;
  * @example blog.cloudflare.com login form
  * @maxLength 254
  * @minLength 1
+ * @x-auditable true
  */
 export type TurnstileName = string;
 
@@ -49828,15 +51357,17 @@ export type TurnstileName = string;
  * Do not show any Cloudflare branding on the widget (ENT only).
  *
  * @example false
+ * @x-auditable true
  */
 export type TurnstileOfflabel = boolean;
 
 /**
- * Region where this widget can be used.
+ * Region where this widget can be used. This cannot be changed after creation.
  *
  * @default world
+ * @x-auditable true
  */
-export type TurnstileRegion = 'world';
+export type TurnstileRegion = 'world' | 'china';
 
 export type TurnstileResultInfo = {
   /**
@@ -49869,6 +51400,7 @@ export type TurnstileResultInfo = {
  * Secret key for this widget.
  *
  * @example 0x4AAF00AAAABn0R22HWm098HVBjhdsYUc
+ * @x-sensitive true
  */
 export type TurnstileSecret = string;
 
@@ -49877,6 +51409,7 @@ export type TurnstileSecret = string;
  *
  * @example 0x4AAF00AAAABn0R22HWm-YUc
  * @maxLength 32
+ * @x-auditable true
  */
 export type TurnstileSitekey = string;
 
@@ -49919,6 +51452,7 @@ export type TurnstileWidgetList = {
  * Widget Mode
  *
  * @example invisible
+ * @x-auditable true
  */
 export type TurnstileWidgetMode = 'non-interactive' | 'invisible' | 'managed';
 
@@ -49991,6 +51525,7 @@ export type VectorizeCreateIndexResponse = {
    *
    * @example 2022-11-15T18:25:44.442097Z
    * @format date-time
+   * @x-auditable true
    */
   created_on?: string;
   description?: VectorizeIndexDescription;
@@ -49999,6 +51534,7 @@ export type VectorizeCreateIndexResponse = {
    *
    * @example 2022-11-15T18:25:44.442097Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string;
   name?: VectorizeIndexName;
@@ -50007,12 +51543,15 @@ export type VectorizeCreateIndexResponse = {
 export type VectorizeCreateMetadataIndexRequest = {
   /**
    * Specifies the type of metadata property to index.
+   *
+   * @x-auditable true
    */
   indexType: 'string' | 'number' | 'boolean';
   /**
    * Specifies the metadata property to index.
    *
    * @example random_metadata_property
+   * @x-auditable true
    */
   propertyName: string;
 };
@@ -50026,6 +51565,7 @@ export type VectorizeDeleteMetadataIndexRequest = {
    * Specifies the metadata property for which the index must be deleted.
    *
    * @example random_metadata_property
+   * @x-auditable true
    */
   propertyName: string;
 };
@@ -50039,6 +51579,7 @@ export type VectorizeDeleteMetadataIndexResponse = {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type VectorizeIdentifier = string;
 
@@ -50078,6 +51619,7 @@ export type VectorizeIndexDeleteVectorsByIdV2Response = {
  * Specifies the description of the index.
  *
  * @example This is my example index.
+ * @x-auditable true
  */
 export type VectorizeIndexDescription = string;
 
@@ -50092,6 +51634,7 @@ export type VectorizeIndexDimensionConfiguration = {
  * @example 768
  * @maximum 1536
  * @minimum 1
+ * @x-auditable true
  */
 export type VectorizeIndexDimensions = number;
 
@@ -50125,6 +51668,7 @@ export type VectorizeIndexInfoResponse = {
    *
    * @example 2024-07-22T18:25:44.442097Z
    * @format date-time
+   * @x-auditable true
    */
   processedUpToDatetime?: string | null;
   processedUpToMutation?: VectorizeMutationUuid;
@@ -50132,6 +51676,7 @@ export type VectorizeIndexInfoResponse = {
    * Specifies the number of vectors present in the index
    *
    * @example 300000
+   * @x-auditable true
    */
   vectorCount?: number;
 };
@@ -50141,6 +51686,7 @@ export type VectorizeIndexInsertResponse = {
    * Specifies the count of the vectors successfully inserted.
    *
    * @example 768
+   * @x-auditable true
    */
   count?: number;
   /**
@@ -50155,12 +51701,15 @@ export type VectorizeIndexInsertV2Response = {
 
 /**
  * Specifies the type of metric to use calculating distance.
+ *
+ * @x-auditable true
  */
 export type VectorizeIndexMetric = 'cosine' | 'euclidean' | 'dot-product';
 
 /**
  * @example example-index
  * @pattern ^([a-z]+[a-z0-9_-]*[a-z0-9]+)$
+ * @x-auditable true
  */
 export type VectorizeIndexName = string;
 
@@ -50168,6 +51717,7 @@ export type VectorizeIndexName = string;
  * Specifies the preset to use for the index.
  *
  * @example @cf/baai/bge-small-en-v1.5
+ * @x-auditable true
  */
 export type VectorizeIndexPreset =
   | '@cf/baai/bge-small-en-v1.5'
@@ -50296,6 +51846,7 @@ export type VectorizeIndexUpsertResponse = {
    * Specifies the count of the vectors successfully inserted.
    *
    * @example 768
+   * @x-auditable true
    */
   count?: number;
   /**
@@ -50318,12 +51869,15 @@ export type VectorizeListMetadataIndexResponse = {
   metadataIndexes?: {
     /**
      * Specifies the type of indexed metadata property.
+     *
+     * @x-auditable true
      */
     indexType?: 'string' | 'number' | 'boolean';
     /**
      * Specifies the indexed metadata property.
      *
      * @example random_metadata_property
+     * @x-auditable true
      */
     propertyName?: string;
   }[];
@@ -50342,6 +51896,7 @@ export type VectorizeMessages = {
  *
  * @example 0000aaaa-11bb-22cc-33dd-444444eeeeee
  * @maxLength 36
+ * @x-auditable true
  */
 export type VectorizeMutationUuid = void;
 
@@ -50481,6 +52036,7 @@ export type WafManagedRulesBase = {
  *
  * @example de677e5818985db1285d0e80225f06e5
  * @maxLength 32
+ * @x-auditable true
  */
 export type WafManagedRulesComponentsSchemasIdentifier = string;
 
@@ -50495,6 +52051,7 @@ export type WafManagedRulesDefaultMode = 'disable' | 'simulate' | 'block' | 'cha
  * Defines an informative summary of what the rule group does.
  *
  * @example Group designed to protect against IP addresses that are a threat and typically used to launch DDoS attacks
+ * @x-auditable true
  */
 export type WafManagedRulesDescription = string | null;
 
@@ -50512,6 +52069,7 @@ export type WafManagedRulesGroup = {
  *
  * @example a25a9a7e9c00afc1fb2e0245519d725b
  * @maxLength 32
+ * @x-auditable true
  */
 export type WafManagedRulesIdentifier = string;
 
@@ -50527,6 +52085,7 @@ export type WafManagedRulesMessages = {
  * Defines the state of the rules contained in the rule group. When `on`, the rules in the group are configurable/usable.
  *
  * @default on
+ * @x-auditable true
  */
 export type WafManagedRulesMode = 'on' | 'off';
 
@@ -50534,6 +52093,7 @@ export type WafManagedRulesMode = 'on' | 'off';
  * When set to `on`, the current rule will be used when evaluating the request. Applies to traditional (allow) WAF rules.
  *
  * @example on
+ * @x-auditable true
  */
 export type WafManagedRulesModeAllowTraditional = 'on' | 'off';
 
@@ -50541,6 +52101,7 @@ export type WafManagedRulesModeAllowTraditional = 'on' | 'off';
  * Defines the mode anomaly. When set to `on`, the current WAF rule will be used when evaluating the request. Applies to anomaly detection WAF rules.
  *
  * @example on
+ * @x-auditable true
  */
 export type WafManagedRulesModeAnomaly = 'on' | 'off';
 
@@ -50548,6 +52109,7 @@ export type WafManagedRulesModeAnomaly = 'on' | 'off';
  * Defines the action that the current WAF rule will perform when triggered. Applies to traditional (deny) WAF rules.
  *
  * @example block
+ * @x-auditable true
  */
 export type WafManagedRulesModeDenyTraditional = 'default' | 'disable' | 'simulate' | 'block' | 'challenge';
 
@@ -50556,6 +52118,7 @@ export type WafManagedRulesModeDenyTraditional = 'default' | 'disable' | 'simula
  *
  * @default 0
  * @example 2
+ * @x-auditable true
  */
 export type WafManagedRulesModifiedRulesCount = number;
 
@@ -50563,11 +52126,14 @@ export type WafManagedRulesModifiedRulesCount = number;
  * Defines the name of the rule group.
  *
  * @example Project Honey Pot
+ * @x-auditable true
  */
 export type WafManagedRulesName = string;
 
 /**
  * Defines the order in which the individual WAF rule is executed within its rule group.
+ *
+ * @x-auditable true
  */
 export type WafManagedRulesPriority = string;
 
@@ -50608,6 +52174,7 @@ export type WafManagedRulesRule =
  *
  * @example f939de3be84e66e757adcdcb87908023
  * @maxLength 32
+ * @x-auditable true
  */
 export type WafManagedRulesRuleComponentsSchemasIdentifier = string;
 
@@ -50632,6 +52199,7 @@ export type WafManagedRulesRuleResponseSingle = WafManagedRulesApiResponseSingle
  *
  * @default 0
  * @example 10
+ * @x-auditable true
  */
 export type WafManagedRulesRulesCount = number;
 
@@ -50641,6 +52209,7 @@ export type WafManagedRulesSchemasBase = WafManagedRulesBase;
  * Defines the public description of the WAF rule.
  *
  * @example SQL injection prevention for SELECT statements
+ * @x-auditable true
  */
 export type WafManagedRulesSchemasDescription = string;
 
@@ -50654,6 +52223,7 @@ export type WafManagedRulesSchemasGroup = WafManagedRulesGroup & {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type WafManagedRulesSchemasIdentifier = string;
 
@@ -50735,12 +52305,14 @@ export type WafProductApiBundleCustomDetection = {
    * Defines ehe ruleset expression to use in matching the password in a request.
    *
    * @example lookup_json_string(http.request.body.raw, "secret")
+   * @x-auditable true
    */
   password?: string;
   /**
    * Defines the ruleset expression to use in matching the username in a request.
    *
    * @example lookup_json_string(http.request.body.raw, "user")
+   * @x-auditable true
    */
   username?: string;
 };
@@ -50758,6 +52330,7 @@ export type WafProductApiBundleCustomScan = {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type WafProductApiBundleCustomScanId = WafProductApiBundleIdentifier;
 
@@ -50765,6 +52338,7 @@ export type WafProductApiBundleCustomScanId = WafProductApiBundleIdentifier;
  * Defines the ruleset expression to use in matching content objects.
  *
  * @example lookup_json_string(http.request.body.raw, "file")
+ * @x-auditable true
  */
 export type WafProductApiBundleCustomScanPayload = string;
 
@@ -50772,6 +52346,7 @@ export type WafProductApiBundleCustomScanPayload = string;
  * Defines an identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
+ * @x-auditable true
  * @maxLength 32
  */
 export type WafProductApiBundleDetectionId = WafProductApiBundleIdentifier;
@@ -50781,6 +52356,7 @@ export type WafProductApiBundleDetectionId = WafProductApiBundleIdentifier;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type WafProductApiBundleIdentifier = string;
 
@@ -50872,12 +52448,14 @@ export type WafProductApiBundleSchemasStatus = {
    * Defines the last modification date (ISO 8601) of the Content Scanning status.
    *
    * @example 2024-12-02T09:57:23.150259Z
+   * @x-auditable true
    */
   modified?: string;
   /**
    * Defines the status of Content Scanning.
    *
    * @example enabled
+   * @x-auditable true
    */
   value?: string;
 };
@@ -50890,6 +52468,7 @@ export type WafProductApiBundleStatus = {
    * Determines whether or not Leaked Credential Checks are enabled.
    *
    * @example true
+   * @x-auditable true
    */
   enabled?: boolean;
 };
@@ -50916,7 +52495,32 @@ export type WaitingroomAdditionalRoutes = {
 }[];
 
 export type WaitingroomApiResponseCollection = WaitingroomSchemasApiResponseCommon & {
-  result_info?: WaitingroomResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type WaitingroomApiResponseCommon = Record<string, any>;
@@ -51306,6 +52910,7 @@ export type WaitingroomHost = string;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type WaitingroomIdentifier = string;
 
@@ -51568,33 +53173,6 @@ export type WaitingroomQueueingStatusCode = 200 | 202 | 429;
 
 export type WaitingroomResponseCollection = WaitingroomApiResponseCollection & {
   result?: WaitingroomWaitingroom[];
-};
-
-export type WaitingroomResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
 };
 
 /**
@@ -52119,6 +53697,16 @@ export type Web3Web3Hostname = {
   target?: Web3Target;
 };
 
+export type WorkersKvAny =
+  | string
+  | number
+  | number
+  | boolean
+  | ({
+      [key: string]: any;
+    } | null)
+  | WorkersKvAny[];
+
 export type WorkersKvApiResponseCollection = WorkersKvApiResponseCommon & {
   result_info?: WorkersKvResultInfo;
 };
@@ -52127,7 +53715,7 @@ export type WorkersKvApiResponseCommon = {
   errors: WorkersKvMessages;
   messages: WorkersKvMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -52138,15 +53726,19 @@ export type WorkersKvApiResponseCommonFailure = {
   /**
    * @example {"code":7003,"message":"No route for the URI"}
    * @minLength 1
+   * @uniqueItems true
    */
   errors: WorkersKvMessages;
+  /**
+   * @uniqueItems true
+   */
   messages: WorkersKvMessages;
   /**
    * @x-stainless-empty-object true
    */
   result: Record<string, any> | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -52162,7 +53754,7 @@ export type WorkersKvApiResponseCommonNoResult = WorkersKvApiResponseCommon & {
 
 export type WorkersKvBulkGetResult = {
   /**
-   * Requested keys are paired with their values in an object
+   * Requested keys are paired with their values in an object.
    *
    * @example {"key1":"value1","key2":"value2"}
    */
@@ -52179,7 +53771,7 @@ export type WorkersKvBulkGetResult = {
 
 export type WorkersKvBulkGetResultWithMetadata = {
   /**
-   * Requested keys are paired with their values and metadata in an object
+   * Requested keys are paired with their values and metadata in an object.
    *
    * @example {"key1":{"expiration":1577836800,"metadata":{"someMetadataKey":"someMetadataValue"},"value":"value1"},"key2":{"metadata":{"anotherKey":"anotherValue"},"value":"value2"}}
    */
@@ -52187,28 +53779,20 @@ export type WorkersKvBulkGetResultWithMetadata = {
     [key: string]: {
       expiration?: WorkersKvExpiration;
       /**
-       * The metadata associated with the key
+       * The metadata associated with the key.
        */
-      metadata: {
-        [key: string]: any;
-      } | null;
+      metadata: WorkersKvAny & void;
       /**
-       * The value associated with the key
+       * The value associated with the key.
        */
-      value:
-        | string
-        | number
-        | boolean
-        | {
-            [key: string]: any;
-          };
+      value: WorkersKvAny & void;
     } | null;
   };
 };
 
 export type WorkersKvBulkResult = {
   /**
-   * Number of keys successfully updated
+   * Number of keys successfully updated.
    *
    * @example 100
    */
@@ -52223,14 +53807,14 @@ export type WorkersKvBulkDelete = WorkersKvKeyNameBulk[];
 
 export type WorkersKvBulkWrite = {
   /**
-   * Whether or not the server should base64 decode the value before storing it. Useful for writing values that wouldn't otherwise be valid JSON strings, such as images.
+   * Indicates whether or not the server should base64 decode the value before storing it. Useful for writing values that wouldn't otherwise be valid JSON strings, such as images.
    *
    * @default false
    */
   base64?: boolean;
   expiration?: WorkersKvExpiration;
   expiration_ttl?: WorkersKvExpirationTtl;
-  key?: WorkersKvKeyNameBulk;
+  key: WorkersKvKeyNameBulk;
   metadata?: WorkersKvListMetadata;
   /**
    * A UTF-8 encoded string to be stored, up to 25 MiB in length.
@@ -52238,7 +53822,7 @@ export type WorkersKvBulkWrite = {
    * @example Some string
    * @maxLength 26214400
    */
-  value?: string;
+  value: string;
 }[];
 
 export type WorkersKvCreateRenameNamespaceBody = {
@@ -52253,21 +53837,22 @@ export type WorkersKvCreateRenameNamespaceBody = {
 export type WorkersKvCursor = string;
 
 /**
- * The time, measured in number of seconds since the UNIX epoch, at which the key should expire.
+ * Expires the key at a certain time, measured in number of seconds since the UNIX epoch.
  *
  * @example 1578435000
  */
 export type WorkersKvExpiration = number;
 
 /**
- * The number of seconds for which the key should be visible before it expires. At least 60.
+ * Expires the key after a number of seconds. Must be at least 60.
  *
  * @example 300
+ * @minimum 60
  */
 export type WorkersKvExpirationTtl = number;
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
@@ -52310,10 +53895,11 @@ export type WorkersKvKeyNameBulk = string;
  *
  * @example {"someMetadataKey":"someMetadataValue"}
  */
-export type WorkersKvListMetadata = {
-  [key: string]: any;
-};
+export type WorkersKvListMetadata = WorkersKvAny & void;
 
+/**
+ * @uniqueItems true
+ */
 export type WorkersKvMessages = {
   /**
    * @minimum 1000
@@ -52323,11 +53909,11 @@ export type WorkersKvMessages = {
 }[];
 
 /**
- * Arbitrary JSON to be associated with a key/value pair.
+ * Associates arbitrary JSON data with a key/value pair.
  *
- * @example {"someMetadataKey": "someMetadataValue"}
+ * @example {"someMetadataKey":"someMetadataValue"}
  */
-export type WorkersKvMetadata = string;
+export type WorkersKvMetadata = WorkersKvAny & void;
 
 export type WorkersKvNamespace = {
   /**
@@ -52368,25 +53954,25 @@ export type WorkersKvNamespaceTitle = string;
 
 export type WorkersKvResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
@@ -52398,7 +53984,7 @@ export type WorkersKvResultInfo = {
  *
  * @example Some Value
  */
-export type WorkersKvValue = string;
+export type WorkersKvValue = string | Blob;
 
 /**
  * The statistics object contains information about query performance from the database, it does not include any network latency
@@ -52939,23 +54525,51 @@ export type WorkersObservabilityTelemetryEvent = {
 };
 
 export type WorkersAccountSettings = {
+  /**
+   * @x-auditable true
+   */
   default_usage_model?: string;
+  /**
+   * @x-auditable true
+   */
   green_compute?: boolean;
-};
-
-export type WorkersAccountSettingsResponse = WorkersApiResponseCommon & {
-  result?: WorkersAccountSettings;
 };
 
 /**
  * Identifer of the account.
  *
  * @example 9a7806061c88ada191ed06f989cc3dac
+ * @x-auditable true
  */
 export type WorkersAccountIdentifier = string;
 
 export type WorkersApiResponseCollection = WorkersApiResponseCommon & {
-  result_info?: WorkersResultInfo;
+  result_info?: {
+    /**
+     * Total number of results for the requested service.
+     *
+     * @example 1
+     */
+    count?: number;
+    /**
+     * Current page within paginated list of results.
+     *
+     * @example 1
+     */
+    page?: number;
+    /**
+     * Number of results per page of results.
+     *
+     * @example 20
+     */
+    per_page?: number;
+    /**
+     * Total results available without any search parameters.
+     *
+     * @example 2000
+     */
+    total_count?: number;
+  };
 };
 
 export type WorkersApiResponseCommon = {
@@ -52992,7 +54606,7 @@ export type WorkersApiResponseNullResult = WorkersApiResponseCommon & {
 export type WorkersApiResponseSingle = WorkersApiResponseCommon;
 
 /**
- * A binding to allow the Worker to communicate with resources
+ * A binding to allow the Worker to communicate with resources.
  */
 export type WorkersBindingItem =
   | WorkersBindingKindAi
@@ -53016,12 +54630,15 @@ export type WorkersBindingItem =
   | WorkersBindingKindVectorize
   | WorkersBindingKindVersionMetadata
   | WorkersBindingKindSecretsStoreSecret
-  | WorkersBindingKindSecretKey;
+  | WorkersBindingKindSecretKey
+  | WorkersBindingKindWorkflow;
 
 export type WorkersBindingKindAi = {
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'ai';
 };
@@ -53031,11 +54648,14 @@ export type WorkersBindingKindAnalyticsEngine = {
    * The name of the dataset to bind to.
    *
    * @example some_dataset
+   * @x-auditable true
    */
   dataset: string;
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'analytics_engine';
 };
@@ -53044,6 +54664,8 @@ export type WorkersBindingKindAssets = {
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'assets';
 };
@@ -53052,6 +54674,8 @@ export type WorkersBindingKindBrowser = {
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'browser';
 };
@@ -53061,11 +54685,14 @@ export type WorkersBindingKindD1 = {
    * Identifier of the D1 database to bind to.
    *
    * @example xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+   * @x-auditable true
    */
   id: string;
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'd1';
 };
@@ -53076,6 +54703,7 @@ export type WorkersBindingKindDispatchNamespace = {
    * Namespace to bind to.
    *
    * @example xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+   * @x-auditable true
    */
   namespace: string;
   /**
@@ -53092,16 +54720,22 @@ export type WorkersBindingKindDispatchNamespace = {
     worker?: {
       /**
        * Environment of the outbound worker.
+       *
+       * @x-auditable true
        */
       environment?: string;
       /**
        * Name of the outbound worker.
+       *
+       * @x-auditable true
        */
       service?: string;
     };
   };
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'dispatch_namespace';
 };
@@ -53111,24 +54745,39 @@ export type WorkersBindingKindDurableObjectNamespace = {
    * The exported class name of the Durable Object.
    *
    * @example MyDurableObject
+   * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
-  class_name: string;
+  class_name?: string;
   /**
    * The environment of the script_name to bind to.
    *
    * @example production
+   * @x-auditable true
    */
   environment?: string;
   name: WorkersBindingName;
-  namespace_id?: WorkersNamespaceIdentifier;
+  /**
+   * Namespace identifier tag.
+   *
+   * @example 0f2ac74b498b48028cb68387c421e279
+   * @maxLength 32
+   * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
+   */
+  namespace_id?: WorkersNamespaceIdentifier & string;
   /**
    * The script where the Durable Object is defined, if it is external to this Worker.
    *
    * @example my-other-worker
+   * @x-auditable true
+   * @x-stainless-terraform-configurability computed_optional
    */
   script_name?: string;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'durable_object_namespace';
 };
@@ -53138,11 +54787,14 @@ export type WorkersBindingKindHyperdrive = {
    * Identifier of the Hyperdrive connection to bind to.
    *
    * @example 57b7076f58be42419276f058a8968187
+   * @x-auditable true
    */
   id: string;
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'hyperdrive';
 };
@@ -53153,10 +54805,12 @@ export type WorkersBindingKindJson = {
    *
    * @example { "message": "Hello, world!" }
    */
-  json: void;
+  json: string;
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'json';
 };
@@ -53166,6 +54820,8 @@ export type WorkersBindingKindKvNamespace = {
   namespace_id: WorkersNamespaceIdentifier;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'kv_namespace';
 };
@@ -53175,11 +54831,14 @@ export type WorkersBindingKindMtlsCertificate = {
    * Identifier of the certificate to bind to.
    *
    * @example efwu2n6s-q69d-2kr9-184j-4913e8h391k6
+   * @x-auditable true
    */
   certificate_id: string;
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'mtls_certificate';
 };
@@ -53190,10 +54849,13 @@ export type WorkersBindingKindPipelines = {
    * Name of the Pipeline to bind to.
    *
    * @example my-pipeline
+   * @x-auditable true
    */
   pipeline: string;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'pipelines';
 };
@@ -53204,10 +54866,13 @@ export type WorkersBindingKindPlainText = {
    * The text value to use.
    *
    * @example Hello, world!
+   * @x-auditable true
    */
   text: string;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'plain_text';
 };
@@ -53222,6 +54887,8 @@ export type WorkersBindingKindQueue = {
   queue_name: string;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'queue';
 };
@@ -53231,11 +54898,14 @@ export type WorkersBindingKindR2Bucket = {
    * R2 bucket to bind to.
    *
    * @example my-r2-bucket
+   * @x-auditable true
    */
   bucket_name: string;
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'r2_bucket';
 };
@@ -53243,12 +54913,15 @@ export type WorkersBindingKindR2Bucket = {
 export type WorkersBindingKindSecretKey = {
   /**
    * Algorithm-specific key parameters. [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#algorithm).
+   *
+   * @x-auditable true
    */
   algorithm: Record<string, any>;
   /**
    * Data format of the key. [Learn more](https://developer.mozilla.org/en-US/docs/Web/API/SubtleCrypto/importKey#format).
    *
    * @example raw
+   * @x-auditable true
    */
   format: 'raw' | 'pkcs8' | 'spki' | 'jwk';
   /**
@@ -53266,6 +54939,8 @@ export type WorkersBindingKindSecretKey = {
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'secret_key';
   /**
@@ -53273,6 +54948,7 @@ export type WorkersBindingKindSecretKey = {
    *
    * @example encrypt
    * @example decrypt
+   * @x-auditable true
    */
   usages: ('encrypt' | 'decrypt' | 'sign' | 'verify' | 'deriveKey' | 'deriveBits' | 'wrapKey' | 'unwrapKey')[];
 };
@@ -53288,6 +54964,8 @@ export type WorkersBindingKindSecretText = {
   text: string;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'secret_text';
 };
@@ -53298,16 +54976,20 @@ export type WorkersBindingKindSecretsStoreSecret = {
    * Name of the secret in the store.
    *
    * @example my_secret
+   * @x-auditable true
    */
   secret_name: string;
   /**
    * ID of the store containing the secret.
    *
    * @example 8c8b1387108e49be85669169793e7bd2
+   * @x-auditable true
    */
   store_id: string;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'secrets_store_secret';
 };
@@ -53317,6 +54999,7 @@ export type WorkersBindingKindService = {
    * Optional environment if the Worker utilizes one.
    *
    * @example production
+   * @x-auditable true
    */
   environment: string;
   name: WorkersBindingName;
@@ -53324,10 +55007,13 @@ export type WorkersBindingKindService = {
    * Name of Worker to bind to.
    *
    * @example my-worker
+   * @x-auditable true
    */
   service: string;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'service';
 };
@@ -53338,10 +55024,13 @@ export type WorkersBindingKindTailConsumer = {
    * Name of Tail Worker to bind to.
    *
    * @example my-worker
+   * @x-auditable true
    */
   service: string;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'tail_consumer';
 };
@@ -53351,11 +55040,14 @@ export type WorkersBindingKindVectorize = {
    * Name of the Vectorize index to bind to.
    *
    * @example my-index-name
+   * @x-auditable true
    */
   index_name: string;
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'vectorize';
 };
@@ -53364,14 +55056,44 @@ export type WorkersBindingKindVersionMetadata = {
   name: WorkersBindingName;
   /**
    * The kind of resource that the binding provides.
+   *
+   * @x-auditable true
    */
   type: 'version_metadata';
+};
+
+export type WorkersBindingKindWorkflow = {
+  /**
+   * Class name of the Workflow. Should only be provided if the Workflow belongs to this script.
+   *
+   * @example my-workflow
+   */
+  class_name?: string;
+  name: WorkersBindingName;
+  /**
+   * Script name that contains the Workflow. If not provided, defaults to this script name.
+   *
+   * @example my-workflow
+   * @x-auditable true
+   */
+  script_name?: string;
+  /**
+   * The kind of resource that the binding provides.
+   */
+  type: 'workflow';
+  /**
+   * Name of the Workflow to bind to.
+   *
+   * @example my-workflow
+   */
+  workflow_name: string;
 };
 
 /**
  * A JavaScript variable name for the binding.
  *
  * @example myBinding
+ * @x-auditable true
  */
 export type WorkersBindingName = string;
 
@@ -53386,6 +55108,7 @@ export type WorkersBindings = WorkersBindingItem[];
  * Date indicating targeted support in the Workers runtime. Backwards incompatible fixes to the runtime following this date will not affect this Worker.
  *
  * @example 2021-01-01
+ * @x-auditable true
  */
 export type WorkersCompatibilityDate = string;
 
@@ -53393,6 +55116,7 @@ export type WorkersCompatibilityDate = string;
  * Flag that enables or disables a specific feature in the Workers runtime.
  *
  * @example nodejs_compat
+ * @x-auditable true
  */
 export type WorkersCompatibilityFlag = string;
 
@@ -53413,6 +55137,15 @@ export type WorkersCompletedUploadAssetsResponse = WorkersApiResponseCommon & {
     jwt?: string;
   };
 };
+
+/**
+ * Name of the script.
+ *
+ * @example this-is_my_script-01
+ * @pattern ^[a-z0-9_][a-z0-9-_]*$
+ * @x-auditable true
+ */
+export type WorkersComponentsSchemasScriptName = string;
 
 export type WorkersCreateAssetsUploadSessionObject = {
   /**
@@ -53443,23 +55176,9 @@ export type WorkersCreateAssetsUploadSessionResponse = WorkersApiResponseCommon 
  *
  * @example 2017-01-01T00:00:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type WorkersCreatedOn = string;
-
-export type WorkersCronObject = {
-  created_on?: string;
-  /**
-   * @example [see original specs]
-   */
-  cron?: string;
-  modified_on?: string;
-};
-
-export type WorkersCronTriggerResponseCollection = WorkersApiResponseCommon & {
-  result?: {
-    schedules?: WorkersCronObject[];
-  };
-};
 
 /**
  * Opaque token indicating the position from which to continue when requesting the next set of records. A valid value for the cursor can be obtained from the cursors object in the result_info structure.
@@ -53471,6 +55190,7 @@ export type WorkersCursor = string;
 /**
  * @example dc78f0bc-05c5-46b7-bb4e-137f55930378
  * @maxLength 36
+ * @x-auditable true
  */
 export type WorkersDeploymentIdentifier = string;
 
@@ -53481,26 +55201,34 @@ export type WorkersDeploymentsBase = {
      *
      * @example Deploy bug fix.
      * @maxLength 100
+     * @x-auditable true
      */
     ['workers/message']?: string;
   };
   /**
    * @example user@example.com
+   * @x-auditable true
    */
   author_email?: string;
   /**
    * @example 2022-11-08T17:19:29.176266Z
+   * @x-auditable true
    */
   created_on?: string;
   /**
    * @example dc78f0bc-05c5-46b7-bb4e-137f55930378
    * @maxLength 36
+   * @x-auditable true
    */
   id?: WorkersDeploymentIdentifier;
   /**
    * @example api
+   * @x-auditable true
    */
   source?: string;
+  /**
+   * @x-auditable true
+   */
   strategy?: string;
 };
 
@@ -53517,12 +55245,16 @@ export type WorkersDeploymentsSingleResponse = WorkersApiResponseCommon & {
 };
 
 export type WorkersDeploymentsStrategyPercentage = {
+  /**
+   * @x-auditable true
+   */
   strategy: 'percentage';
   versions: {
     /**
      * @example 100
      * @maximum 100
      * @minimum 0.01
+     * @x-auditable true
      */
     percentage: number;
     version_id: WorkersSchemasVersionIdentifier;
@@ -53534,6 +55266,7 @@ export type WorkersDeploymentsStrategyPercentage = {
  *
  * @example my-dispatch-namespace
  * @pattern ^.+$
+ * @x-auditable true
  */
 export type WorkersDispatchNamespaceName = string;
 
@@ -53558,6 +55291,7 @@ export type WorkersDomainResponseSingle = WorkersApiResponseCommon & {
  * Identifer of the Worker Domain.
  *
  * @example dbe10b4bc17c295377eabd600e1787fd
+ * @x-auditable true
  */
 export type WorkersDomainIdentifier = string;
 
@@ -53565,6 +55299,7 @@ export type WorkersDomainIdentifier = string;
  * Optional environment if the Worker utilizes one.
  *
  * @example production
+ * @x-auditable true
  */
 export type WorkersEnvironment = string;
 
@@ -53579,6 +55314,7 @@ export type WorkersEtag = string;
  * Whether a Worker contains assets.
  *
  * @example false
+ * @x-auditable true
  */
 export type WorkersHasAssets = boolean;
 
@@ -53586,6 +55322,7 @@ export type WorkersHasAssets = boolean;
  * Whether a Worker contains modules.
  *
  * @example false
+ * @x-auditable true
  */
 export type WorkersHasModules = boolean;
 
@@ -53593,21 +55330,16 @@ export type WorkersHasModules = boolean;
  * Hostname of the Worker Domain.
  *
  * @example foo.example.com
+ * @x-auditable true
  */
 export type WorkersHostname = string;
-
-/**
- * Identifier for the tail.
- *
- * @example 03dc9f77817b488fb26c5861ec18f791
- */
-export type WorkersId = string;
 
 /**
  * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type WorkersIdentifier = string;
 
@@ -53619,6 +55351,7 @@ export type WorkersLimits = {
    * The amount of CPU time this Worker can use in milliseconds.
    *
    * @example 50
+   * @x-auditable true
    */
   cpu_ms?: number;
 };
@@ -53627,6 +55360,7 @@ export type WorkersLimits = {
  * Whether Logpush is turned on for the Worker.
  *
  * @example false
+ * @x-auditable true
  */
 export type WorkersLogpush = boolean;
 
@@ -53670,15 +55404,30 @@ export type WorkersMigrationStep = {
    * A list of classes with Durable Object namespaces that were renamed.
    */
   renamed_classes?: {
+    /**
+     * @x-auditable true
+     */
     from?: string;
+    /**
+     * @x-auditable true
+     */
     to?: string;
   }[];
   /**
    * A list of transfers for Durable Object namespaces from a different Worker and class to a class defined in this Worker.
    */
   transferred_classes?: {
+    /**
+     * @x-auditable true
+     */
     from?: string;
+    /**
+     * @x-auditable true
+     */
     from_script?: string;
+    /**
+     * @x-auditable true
+     */
     to?: string;
   }[];
 };
@@ -53688,12 +55437,14 @@ export type WorkersMigrationTagConditions = {
    * Tag to set as the latest migration tag.
    *
    * @example v2
+   * @x-auditable true
    */
   new_tag?: string;
   /**
    * Tag used to verify against the latest migration tag for this Worker. If they don't match, the upload is rejected.
    *
    * @example v1
+   * @x-auditable true
    */
   old_tag?: string;
 };
@@ -53703,11 +55454,12 @@ export type WorkersMigrationTagConditions = {
  *
  * @example 2017-01-01T00:00:00Z
  * @format date-time
+ * @x-auditable true
  */
 export type WorkersModifiedOn = string;
 
 /**
- * @example {"metadata":{"compatibility_date":"2021-01-01","compatibility_flags":["nodejs_compat"],"main_module":"worker.js"},"worker.js":["export default {\n  async fetch(request, env, ctx) {\n    return new Response(\"Hello, world!\");\n  }\n};"]}
+ * @example {"metadata":{"compatibility_date":{},"compatibility_flags":["nodejs_compat"],"main_module":"worker.js"},"worker.js":["export default {\n  async fetch(request, env, ctx) {\n    return new Response(\"Hello, world!\");\n  }\n};"]}
  */
 export type WorkersMultipartScript = {
   /**
@@ -53715,7 +55467,7 @@ export type WorkersMultipartScript = {
    */
   metadata: {
     /**
-     * Configuration for assets within a Worker
+     * Configuration for assets within a Worker.
      */
     assets?: {
       /**
@@ -53723,7 +55475,7 @@ export type WorkersMultipartScript = {
        */
       config?: {
         /**
-                 * The contents of a _headers file (used to attach custom headers on asset responses)
+                 * The contents of a _headers file (used to attach custom headers on asset responses).
                  *
                  * @example /dashboard/*
                 X-Frame-Options: DENY
@@ -53733,7 +55485,7 @@ export type WorkersMultipartScript = {
                  */
         _headers?: string;
         /**
-                 * The contents of a _redirects file (used to apply redirects or proxy paths ahead of asset serving)
+                 * The contents of a _redirects file (used to apply redirects or proxy paths ahead of asset serving).
                  *
                  * @example /foo /bar 301
                 /news/* /blog/:splat
@@ -53751,12 +55503,7 @@ export type WorkersMultipartScript = {
          * @example 404-page
          */
         not_found_handling?: 'none' | '404-page' | 'single-page-application';
-        /**
-         * When true, requests will always invoke the Worker script. Otherwise, attempt to serve an asset matching the request, falling back to the Worker script.
-         *
-         * @example false
-         */
-        run_worker_first?: boolean;
+        run_worker_first?: string[] | boolean;
         /**
          * When true and the incoming request matches an asset, that will be served instead of invoking the Worker script. When false, requests will always invoke the Worker script.
          *
@@ -53855,7 +55602,7 @@ export type WorkersNamespaceScriptResponse = {
 };
 
 export type WorkersNamespaceScriptResponseSingle = WorkersApiResponseCommon & {
-  result?: WorkersNamespaceScriptResponse;
+  result: WorkersNamespaceScriptResponse;
 };
 
 export type WorkersNamespaceSingleResponse = WorkersApiResponseCommon & {
@@ -53867,6 +55614,7 @@ export type WorkersNamespaceSingleResponse = WorkersApiResponseCommon & {
  *
  * @example 0f2ac74b498b48028cb68387c421e279
  * @maxLength 32
+ * @x-auditable true
  */
 export type WorkersNamespaceIdentifier = string;
 
@@ -53893,14 +55641,42 @@ export type WorkersObservability = {
    * Whether observability is enabled for the Worker.
    *
    * @example true
+   * @x-auditable true
    */
   enabled: boolean;
   /**
    * The sampling rate for incoming requests. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
    *
    * @example 0.1
+   * @x-auditable true
    */
   head_sampling_rate?: number | null;
+  /**
+   * Log settings for the Worker.
+   */
+  logs?: {
+    /**
+     * Whether logs are enabled for the Worker.
+     *
+     * @example true
+     * @x-auditable true
+     */
+    enabled: boolean;
+    /**
+     * The sampling rate for logs. From 0 to 1 (1 = 100%, 0.1 = 10%). Default is 1.
+     *
+     * @example 0.1
+     * @x-auditable true
+     */
+    head_sampling_rate?: number | null;
+    /**
+     * Whether [invocation logs](https://developers.cloudflare.com/workers/observability/logs/workers-logs/#invocation-logs) are enabled for the Worker.
+     *
+     * @example true
+     * @x-auditable true
+     */
+    invocation_logs: boolean;
+  } | null;
 };
 
 /**
@@ -53927,40 +55703,17 @@ export type WorkersPlacementInfoNoStatus = {
 
 /**
  * Enables [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+ *
+ * @x-auditable true
  */
 export type WorkersPlacementMode = 'smart';
 
 /**
  * Status of [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+ *
+ * @x-auditable true
  */
 export type WorkersPlacementStatus = 'SUCCESS' | 'UNSUPPORTED_APPLICATION' | 'INSUFFICIENT_INVOCATIONS';
-
-export type WorkersResultInfo = {
-  /**
-   * Total number of results for the requested service.
-   *
-   * @example 1
-   */
-  count?: number;
-  /**
-   * Current page within paginated list of results.
-   *
-   * @example 1
-   */
-  page?: number;
-  /**
-   * Number of results per page of results.
-   *
-   * @example 20
-   */
-  per_page?: number;
-  /**
-   * Total results available without any search parameters.
-   *
-   * @example 2000
-   */
-  total_count?: number;
-};
 
 export type WorkersRoute = {
   /**
@@ -53968,26 +55721,43 @@ export type WorkersRoute = {
    *
    * @example 023e105f4ecef8ad9ca31a8372d0c353
    * @maxLength 32
+   * @x-auditable true
    */
   id: WorkersIdentifier;
   /**
    * Pattern to match incoming requests against. [Learn more](https://developers.cloudflare.com/workers/configuration/routing/routes/#matching-behavior).
    *
    * @example example.com/*
+   * @x-auditable true
    */
   pattern: string;
   /**
    * Name of the script to run if the route matches.
    *
    * @example my-workers-script
+   * @x-auditable true
    */
-  script: string;
+  script?: string;
+};
+
+export type WorkersSchedule = {
+  /**
+   * @x-auditable true
+   */
+  created_on?: string;
+  /**
+   * @example [see original specs]
+   * @x-auditable true
+   */
+  cron: string;
+  modified_on?: string;
 };
 
 /**
  * Worker environment associated with the zone and hostname.
  *
  * @example production
+ * @x-auditable true
  */
 export type WorkersSchemasEnvironment = string;
 
@@ -54010,34 +55780,85 @@ export type WorkersSchemasScriptName = string;
  * Worker service associated with the zone and hostname.
  *
  * @example foo
+ * @x-auditable true
  */
 export type WorkersSchemasService = string;
+
+export type WorkersSchemasSubdomain = {
+  /**
+   * @example my-subdomain
+   */
+  subdomain: string;
+};
 
 /**
  * @example bcf48806-b317-4351-9ee7-36e7d557d4de
  * @maxLength 36
+ * @x-auditable true
  */
 export type WorkersSchemasVersionIdentifier = string;
 
 export type WorkersScriptAndVersionSettingsItem = {
-  bindings?: WorkersBindings;
-  compatibility_date?: WorkersCompatibilityDate;
-  compatibility_flags?: WorkersCompatibilityFlags;
+  /**
+   * List of bindings attached to a Worker. You can find more about bindings on our docs: https://developers.cloudflare.com/workers/configuration/multipart-upload-metadata/#bindings.
+   *
+   * @example {"name":"MY_ENV_VAR","text":"my_data","type":"plain_text"}
+   */
+  bindings?: WorkersBindings & WorkersBindingItem[];
+  /**
+   * Date indicating targeted support in the Workers runtime. Backwards incompatible fixes to the runtime following this date will not affect this Worker.
+   *
+   * @example 2021-01-01
+   * @x-auditable true
+   * @default
+   */
+  compatibility_date?: WorkersCompatibilityDate & string;
+  /**
+   * Flags that enable or disable certain features in the Workers runtime. Used to enable upcoming features or opt in or out of specific changes not included in a `compatibility_date`.
+   *
+   * @example nodejs_compat
+   */
+  compatibility_flags?: WorkersCompatibilityFlags & string[];
   limits?: WorkersLimits;
-  logpush?: WorkersLogpush;
+  /**
+   * Whether Logpush is turned on for the Worker.
+   *
+   * @example false
+   * @x-auditable true
+   * @default
+   */
+  logpush?: WorkersLogpush & boolean;
   /**
    * Migrations to apply for Durable Objects associated with this Worker.
    */
   migrations?: WorkersSingleStepMigrations | WorkersMultipleStepMigrations;
   observability?: WorkersObservability;
-  placement?: WorkersPlacementInfoNoStatus;
-  tags?: WorkersTags;
-  tail_consumers?: WorkersTailConsumers;
-  usage_model?: WorkersUsageModel;
+  /**
+   * Configuration for [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
+   *
+   * @default {}
+   */
+  placement?: WorkersPlacementInfoNoStatus & Record<string, any>;
+  /**
+   * Tags to help you manage your Workers.
+   */
+  tags?: WorkersTags & string[];
+  /**
+   * List of Workers that will consume logs from the attached Worker.
+   */
+  tail_consumers?: WorkersTailConsumers & WorkersTailConsumersScript[];
+  /**
+   * Usage model for the Worker invocations.
+   *
+   * @example standard
+   * @x-auditable true
+   * @default standard
+   */
+  usage_model?: WorkersUsageModel & string;
 };
 
 export type WorkersScriptAndVersionSettingsResponse = WorkersApiResponseCommon & {
-  result?: WorkersScriptAndVersionSettingsItem;
+  result: WorkersScriptAndVersionSettingsItem;
 };
 
 export type WorkersScriptResponse = {
@@ -54049,6 +55870,7 @@ export type WorkersScriptResponse = {
    * The id of the script in the Workers system. Usually the script name.
    *
    * @example my-workers-script
+   * @x-auditable true
    */
   id?: string;
   logpush?: WorkersLogpush;
@@ -54057,50 +55879,68 @@ export type WorkersScriptResponse = {
   /**
    * Enables [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
    *
+   * @x-auditable true
    * @deprecated true
    */
-  placement_mode?: WorkersPlacementMode & void;
+  placement_mode?: WorkersPlacementMode & string;
   /**
    * Status of [Smart Placement](https://developers.cloudflare.com/workers/configuration/smart-placement).
    *
+   * @x-auditable true
    * @deprecated true
    */
-  placement_status?: WorkersPlacementStatus & void;
+  placement_status?: WorkersPlacementStatus & string;
   tail_consumers?: WorkersTailConsumers;
   usage_model?: WorkersUsageModel;
 };
 
 export type WorkersScriptResponseCollection = WorkersApiResponseCommon & {
-  result?: WorkersScriptResponse[];
+  result: WorkersScriptResponse[];
 };
 
 export type WorkersScriptResponseSingle = WorkersApiResponseSingle & {
-  result?: WorkersScriptResponse;
+  result: WorkersScriptResponse;
 };
 
 export type WorkersScriptResponseUpload = WorkersScriptResponse & {
   /**
    * @example 10
+   * @x-auditable true
    */
-  startup_time_ms?: number;
+  startup_time_ms: number;
 };
 
-export type WorkersScriptResponseUploadSingle = WorkersApiResponseSingle & {
-  result?: WorkersScriptResponseUpload;
+export type WorkersScriptResponseUploadSingle = WorkersApiResponseCommon & {
+  result: WorkersScriptResponseUpload;
 };
 
 export type WorkersScriptSettingsItem = {
-  logpush?: WorkersLogpush;
-  observability?: WorkersObservability;
-  tail_consumers?: WorkersTailConsumers;
+  /**
+   * Whether Logpush is turned on for the Worker.
+   *
+   * @example false
+   * @x-auditable true
+   * @default false
+   */
+  logpush?: WorkersLogpush & boolean;
+  /**
+   * Observability settings for the Worker.
+   *
+   * @x-auditable true
+   */
+  observability?: WorkersObservability & (Record<string, any> | null);
+  /**
+   * List of Workers that will consume logs from the attached Worker.
+   */
+  tail_consumers?: WorkersTailConsumersScript[] | null;
 };
 
 export type WorkersScriptSettingsResponse = WorkersApiResponseCommon & {
-  result?: WorkersScriptSettingsItem;
+  result: WorkersScriptSettingsItem;
 };
 
 /**
- * The current number of scripts in this Dispatch Namespace
+ * The current number of scripts in this Dispatch Namespace.
  *
  * @example 800
  */
@@ -54111,6 +55951,7 @@ export type WorkersScriptCount = number;
  *
  * @example this-is_my_script-01
  * @pattern ^[a-z0-9_][a-z0-9-_]*$
+ * @x-auditable true
  */
 export type WorkersScriptName = string;
 
@@ -54123,13 +55964,15 @@ export type WorkersSecret = WorkersBindingKindSecretText | WorkersBindingKindSec
  * A JavaScript variable name for the secret binding.
  *
  * @example mySecret
+ * @x-auditable true
  */
 export type WorkersSecretName = string;
 
 /**
- * Name of Worker to bind to
+ * Name of Worker to bind to.
  *
  * @example my-worker
+ * @x-auditable true
  */
 export type WorkersService = string;
 
@@ -54143,45 +55986,42 @@ export type WorkersSubdomain = {
    * Whether the Worker is available on the workers.dev subdomain.
    *
    * @example true
+   * @x-auditable true
    */
   enabled: boolean;
   /**
    * Whether the Worker's Preview URLs are available on the workers.dev subdomain.
    *
    * @example true
+   * @x-auditable true
    */
   previews_enabled: boolean;
 };
 
-export type WorkersSubdomainObject = {
-  /**
-   * @example example-subdomain
-   */
-  subdomain?: string;
-};
-
-export type WorkersSubdomainResponse = WorkersApiResponseCommon & {
-  result?: WorkersSubdomainObject;
-};
-
 /**
- * Tag to help you manage your Worker
+ * Tag to help you manage your Worker.
  *
  * @example my-tag
+ * @x-auditable true
  */
 export type WorkersTag = string;
 
 /**
- * Tags to help you manage your Workers
+ * Tags to help you manage your Workers.
  */
 export type WorkersTags = WorkersTag[];
 
-export type WorkersTailResponse = WorkersApiResponseCommon & {
-  result?: {
-    expires_at?: string;
-    id?: string;
-    url?: string;
-  };
+export type WorkersTail = {
+  expires_at: string;
+  /**
+   * Identifier.
+   *
+   * @example 023e105f4ecef8ad9ca31a8372d0c353
+   * @maxLength 32
+   * @x-auditable true
+   */
+  id: WorkersIdentifier;
+  url: string;
 };
 
 /**
@@ -54197,18 +56037,21 @@ export type WorkersTailConsumersScript = {
    * Optional environment if the Worker utilizes one.
    *
    * @example production
+   * @x-auditable true
    */
   environment?: string;
   /**
    * Optional dispatch namespace the script belongs to.
    *
    * @example my-namespace
+   * @x-auditable true
    */
   namespace?: string;
   /**
    * Name of Worker that is to be the consumer.
    *
    * @example my-log-consumer
+   * @x-auditable true
    */
   service: string;
 };
@@ -54217,21 +56060,25 @@ export type WorkersUploadAssetsResponse = WorkersApiResponseCommon & {
   /**
    * @maxProperties 0
    */
-  result?: void;
+  result?: {};
 };
 
 export type WorkersUsageModelObject = {
+  /**
+   * @x-auditable true
+   */
   usage_model?: string;
 };
 
 export type WorkersUsageModelResponse = WorkersApiResponseCommon & {
-  result?: WorkersUsageModelObject;
+  result: WorkersUsageModelObject;
 };
 
 /**
  * Usage model for the Worker invocations.
  *
  * @example standard
+ * @x-auditable true
  */
 export type WorkersUsageModel = 'standard';
 
@@ -54240,6 +56087,7 @@ export type WorkersUsageModel = 'standard';
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
+ * @x-auditable true
  */
 export type WorkersUuid = string;
 
@@ -54247,7 +56095,68 @@ export type WorkersVersionItemFull = WorkersVersionItemShort & {
   /**
    * @example {"bindings":[{"json":"example_binding","name":"JSON_VAR","type":"json"}],"script":{"etag":"13a3240e8fb414561b0366813b0b8f42b3e6cfa0d9e70e99835dae83d0d8a794","handlers":["fetch"],"last_deployed_from":"api"},"script_runtime":{"usage_model":"standard"}}
    */
-  resources: Record<string, any>;
+  resources: {
+    /**
+     * @example {"json":"example_binding","name":"JSON_VAR","type":"json"}
+     */
+    bindings?: {
+      result?: WorkersBindings;
+    };
+    /**
+     * @example {"etag":"13a3240e8fb414561b0366813b0b8f42b3e6cfa0d9e70e99835dae83d0d8a794","handlers":["fetch"],"last_deployed_from":"api","named_handlers":[{"handlers":["fetch"],"name":"MyClass"}]}
+     */
+    script?: {
+      /**
+       * @example 13a3240e8fb414561b0366813b0b8f42b3e6cfa0d9e70e99835dae83d0d8a794
+       */
+      etag?: string;
+      /**
+       * @example fetch
+       */
+      handlers?: string[];
+      /**
+       * @example api
+       */
+      last_deployed_from?: string;
+      /**
+       * @example {"handlers":["fetch"],"name":"MyClass"}
+       */
+      named_handlers?: {
+        /**
+         * @example fetch
+         */
+        handlers?: string[];
+        /**
+         * @example MyClass
+         */
+        name?: string;
+      }[];
+    };
+    script_runtime?: {
+      /**
+       * @example 2022-11-08
+       */
+      compatibility_date?: string;
+      compatibility_flags?: string[];
+      /**
+       * @example {"cpu_ms":50}
+       */
+      limits?: {
+        /**
+         * @example 50
+         */
+        cpu_ms?: number;
+      };
+      /**
+       * @example v1
+       */
+      migration_tag?: string;
+      /**
+       * @example standard
+       */
+      usage_model?: 'bundled' | 'unbound' | 'standard';
+    };
+  };
 };
 
 export type WorkersVersionItemShort = {
@@ -54258,7 +56167,39 @@ export type WorkersVersionItemShort = {
   /**
    * @example {"author_email":"user@example.com","author_id":"408cbcdfd4dda4617efef40b04d168a1","created_on":"2022-11-08T17:19:29.176266Z","modified_on":"2022-11-08T17:19:29.176266Z","source":"api"}
    */
-  metadata?: Record<string, any>;
+  metadata?: {
+    /**
+     * @example user@example.com
+     */
+    author_email?: string;
+    /**
+     * @example 408cbcdfd4dda4617efef40b04d168a1
+     */
+    author_id?: string;
+    /**
+     * @example 2022-11-08T17:19:29.176266Z
+     */
+    created_on?: string;
+    hasPreview?: boolean;
+    /**
+     * @example 2022-11-08T17:19:29.176266Z
+     */
+    modified_on?: string;
+    /**
+     * @example api
+     */
+    source?:
+      | 'unknown'
+      | 'api'
+      | 'wrangler'
+      | 'terraform'
+      | 'dash'
+      | 'dash_template'
+      | 'integration'
+      | 'quick_editor'
+      | 'playground'
+      | 'workersci';
+  };
   /**
    * @example 1
    */
@@ -54279,23 +56220,24 @@ export type WorkersVersionItemUploaded = WorkersVersionItemFull & {
 export type WorkersVersionIdentifier = string;
 
 export type WorkersVersionsListResponse = WorkersApiResponseCommon & {
-  result?: {
+  result: {
     items?: WorkersVersionItemShort[];
   };
 };
 
 export type WorkersVersionsSingleResponse = WorkersApiResponseCommon & {
-  result?: WorkersVersionItemFull;
+  result: WorkersVersionItemFull;
 };
 
 export type WorkersVersionsUploadResponse = WorkersApiResponseCommon & {
-  result?: WorkersVersionItemUploaded;
+  result: WorkersVersionItemUploaded;
 };
 
 /**
  * Identifier of the zone.
  *
  * @example 593c9c94de529bbbfaac7c53ced0447d
+ * @x-auditable true
  */
 export type WorkersZoneIdentifier = string;
 
@@ -54303,6 +56245,7 @@ export type WorkersZoneIdentifier = string;
  * Name of the zone.
  *
  * @example example.com
+ * @x-auditable true
  */
 export type WorkersZoneName = string;
 
@@ -54327,7 +56270,7 @@ export type ZarazApiResponseCommonFailure = {
   messages: ZarazMessages;
   result: any | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -54530,10 +56473,11 @@ export type ZarazFormSubmissionRule = {
 };
 
 /**
- * Identifier
+ * Identifier.
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type ZarazIdentifier = string;
 
@@ -54575,7 +56519,11 @@ export type ZarazMessages = {
    * @minimum 1000
    */
   code: number;
+  documentation_url?: string;
   message: string;
+  source?: {
+    pointer?: string;
+  };
 }[];
 
 export type ZarazScrollDepthRule = {
@@ -55105,6 +57053,7 @@ export type ZeroTrustGatewayAccountLogOptions = {
    *
    * @default false
    * @example false
+   * @x-auditable true
    */
   log_all?: boolean;
   /**
@@ -55112,6 +57061,7 @@ export type ZeroTrustGatewayAccountLogOptions = {
    *
    * @default false
    * @example true
+   * @x-auditable true
    */
   log_blocks?: boolean;
 };
@@ -55120,6 +57070,7 @@ export type ZeroTrustGatewayAccountLogOptions = {
  * The action to preform when the associated traffic, identity, and device posture expressions are either absent or evaluate to `true`.
  *
  * @example allow
+ * @x-auditable true
  */
 export type ZeroTrustGatewayAction =
   | 'on'
@@ -55146,8 +57097,8 @@ export type ZeroTrustGatewayActivityLogSettings = {
   /**
    * Enable activity logging.
    *
-   * @default true
    * @example true
+   * @x-auditable true
    */
   enabled?: boolean;
 } | null;
@@ -55160,7 +57111,7 @@ export type ZeroTrustGatewayAntiVirusSettings = {
   enabled_upload_phase?: ZeroTrustGatewayEnabledUploadPhase;
   fail_closed?: ZeroTrustGatewayFailClosed;
   notification_settings?: ZeroTrustGatewayNotificationSettings;
-};
+} | null;
 
 export type ZeroTrustGatewayApiResponseCollection = ZeroTrustGatewayApiResponseCommon & {
   result_info?: ZeroTrustGatewayResultInfo;
@@ -55201,6 +57152,7 @@ export type ZeroTrustGatewayAppTypes = ZeroTrustGatewayApplication | ZeroTrustGa
  * The name of the application or application type.
  *
  * @example Facebook
+ * @x-auditable true
  */
 export type ZeroTrustGatewayAppTypesComponentsSchemasName = string;
 
@@ -55210,11 +57162,15 @@ export type ZeroTrustGatewayAppTypesComponentsSchemasResponseCollection = ZeroTr
 
 /**
  * The identifier for this application. There is only one application per ID.
+ *
+ * @x-auditable true
  */
 export type ZeroTrustGatewayAppId = number;
 
 /**
  * The identifier for the type of this application. There can be many applications with the same type. This refers to the `id` of a returned application type.
+ *
+ * @x-auditable true
  */
 export type ZeroTrustGatewayAppTypeId = number;
 
@@ -55246,6 +57202,7 @@ export type ZeroTrustGatewayAuditSshSettingsComponentsSchemasSingleResponse = Ze
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
+ * @x-auditable true
  */
 export type ZeroTrustGatewayAuditSshSettingsComponentsSchemasUuid = string;
 
@@ -55253,11 +57210,14 @@ export type ZeroTrustGatewayAuditSshSettingsComponentsSchemasUuid = string;
  * True if the category is in beta and subject to change.
  *
  * @example false
+ * @x-auditable true
  */
 export type ZeroTrustGatewayBeta = boolean;
 
 /**
  * The deployment status of the certificate on Cloudflare's edge. Certificates in the 'available' (previously called 'active') state may be used for Gateway TLS interception.
+ *
+ * @x-auditable true
  */
 export type ZeroTrustGatewayBindingStatus = 'pending_deployment' | 'available' | 'pending_deletion' | 'inactive';
 
@@ -55268,81 +57228,94 @@ export type ZeroTrustGatewayBlockPageSettings = {
   /**
    * If mode is customized_block_page: block page background color in #rrggbb format.
    *
-   * @default
+   * @x-auditable true
    */
   background_color?: string;
   /**
    * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
    *
-   * @default false
    * @example true
+   * @x-auditable true
    */
   enabled?: boolean;
   /**
    * If mode is customized_block_page: block page footer text.
    *
-   * @default
    * @example --footer--
+   * @x-auditable true
    */
   footer_text?: string;
   /**
    * If mode is customized_block_page: block page header text.
    *
-   * @default
    * @example --header--
+   * @x-auditable true
    */
   header_text?: string;
   /**
    * If mode is redirect_uri: when enabled, context will be appended to target_uri as query parameters.
    *
-   * @default false
+   * @x-auditable true
    */
   include_context?: boolean;
   /**
    * If mode is customized_block_page: full URL to the logo file.
    *
-   * @default
    * @example https://logos.com/a.png
+   * @x-auditable true
    */
   logo_path?: string;
   /**
    * If mode is customized_block_page: admin email for users to contact.
    *
-   * @default
    * @example admin@example.com
+   * @x-auditable true
    */
   mailto_address?: string;
   /**
    * If mode is customized_block_page: subject line for emails created from block page.
    *
-   * @default
    * @example Blocked User Inquiry
+   * @x-auditable true
    */
   mailto_subject?: string;
   /**
    * Controls whether the user is redirected to a Cloudflare-hosted block page or to a customer-provided URI.
    *
    * @default customized_block_page
+   * @x-auditable true
    */
   mode?: 'customized_block_page' | 'redirect_uri';
   /**
    * If mode is customized_block_page: block page title.
    *
    * @example Cloudflare
+   * @x-auditable true
    */
   name?: string;
   /**
+   * This setting was shared via the Orgs API and cannot be edited by the current account
+   *
+   * @x-auditable true
+   */
+  read_only?: boolean;
+  /**
+   * Account tag of account that shared this setting
+   *
+   * @x-auditable true
+   */
+  source_account?: string;
+  /**
    * If mode is customized_block_page: suppress detailed info at the bottom of the block page.
    *
-   * @default
    * @example false
    */
   suppress_footer?: boolean;
   /**
    * If mode is redirect_uri: URI to which the user should be redirected.
    *
-   * @default
    * @format uri
+   * @x-auditable true
    */
   target_uri?: string;
 } | null;
@@ -55355,6 +57328,7 @@ export type ZeroTrustGatewayBodyScanningSettings = {
    * Set the inspection mode to either `deep` or `shallow`.
    *
    * @example deep
+   * @x-auditable true
    */
   inspection_mode?: string;
 } | null;
@@ -55366,15 +57340,15 @@ export type ZeroTrustGatewayBrowserIsolationSettings = {
   /**
    * Enable non-identity onramp support for Browser Isolation.
    *
-   * @default false
    * @example true
+   * @x-auditable true
    */
   non_identity_enabled?: boolean;
   /**
    * Enable Clientless Browser Isolation.
    *
-   * @default false
    * @example true
+   * @x-auditable true
    */
   url_browser_isolation_enabled?: boolean;
 } | null;
@@ -55410,6 +57384,7 @@ export type ZeroTrustGatewayCertificateSettings = {
    * UUID of certificate to be used for interception. Certificate must be available (previously called 'active') on the edge. A nil UUID will indicate the Cloudflare Root CA should be used.
    *
    * @example d1b364c5-1311-466e-a194-f0e943e0799f
+   * @x-auditable true
    */
   id: string;
 } | null;
@@ -55428,6 +57403,7 @@ export type ZeroTrustGatewayCertificates = {
    * The SHA256 fingerprint of the certificate.
    *
    * @example E9:19:49:AA:DD:D8:1E:C1:20:2A:D8:22:BF:A5:F8:FC:1A:F7:10:9F:C7:5B:69:AB:0:31:91:8B:61:B4:BF:1C
+   * @x-auditable true
    */
   fingerprint?: string;
   id?: ZeroTrustGatewayUuid;
@@ -55441,12 +57417,14 @@ export type ZeroTrustGatewayCertificates = {
    * The organization that issued the certificate.
    *
    * @example Example Inc.
+   * @x-auditable true
    */
   issuer_org?: string;
   /**
    * The entire issuer field of the certificate.
    *
    * @example O=Example Inc.,L=California,ST=San Francisco,C=US
+   * @x-auditable true
    */
   issuer_raw?: string;
   type?: ZeroTrustGatewayType;
@@ -55466,6 +57444,7 @@ export type ZeroTrustGatewayCfAccountId = string;
  * Which account types are allowed to create policies based on this category. `blocked` categories are blocked unconditionally for all accounts. `removalPending` categories can be removed from policies but not added. `noBlock` categories cannot be blocked.
  *
  * @example premium
+ * @x-auditable true
  */
 export type ZeroTrustGatewayClass = 'free' | 'premium' | 'blocked' | 'removalPending' | 'noBlock';
 
@@ -55474,6 +57453,7 @@ export type ZeroTrustGatewayClass = 'free' | 'premium' | 'blocked' | 'removalPen
  *
  * @default false
  * @example false
+ * @x-auditable true
  */
 export type ZeroTrustGatewayClientDefault = boolean;
 
@@ -55481,13 +57461,24 @@ export type ZeroTrustGatewayClientDefault = boolean;
  * A short summary of domains in the category.
  *
  * @example Sites related to educational content that are not included in other categories such as Science, Technology or Educational institutions.
+ * @x-auditable true
  */
 export type ZeroTrustGatewayComponentsSchemasDescription = string;
+
+/**
+ * Identifier
+ *
+ * @example 023e105f4ecef8ad9ca31a8372d0c353
+ * @maxLength 32
+ * @x-auditable true
+ */
+export type ZeroTrustGatewayComponentsSchemasIdentifier = string;
 
 /**
  * The name of the rule.
  *
  * @example block bad websites
+ * @x-auditable true
  */
 export type ZeroTrustGatewayComponentsSchemasName = string;
 
@@ -55501,6 +57492,7 @@ export type ZeroTrustGatewayComponentsSchemasSingleResponse = ZeroTrustGatewayAp
 
 /**
  * @example ed35569b41ce4d1facfe683550f54086
+ * @x-auditable true
  */
 export type ZeroTrustGatewayComponentsSchemasUuid = string;
 
@@ -55521,19 +57513,21 @@ export type ZeroTrustGatewayCustomCertificateSettings = {
    * Certificate status (internal).
    *
    * @example pending_deployment
+   * @x-auditable true
    */
   binding_status?: string;
   /**
    * Enable use of custom certificate authority for signing Gateway traffic.
    *
-   * @default false
    * @example true
+   * @x-auditable true
    */
   enabled: boolean;
   /**
    * UUID of certificate (ID from MTLS certificate store).
    *
    * @example d1b364c5-1311-466e-a194-f0e943e0799f
+   * @x-auditable true
    */
   id?: string;
   /**
@@ -55553,6 +57547,7 @@ export type ZeroTrustGatewayDeletedAt = string | null;
  * The description of the list.
  *
  * @example The serial numbers for administrators
+ * @x-auditable true
  */
 export type ZeroTrustGatewayDescription = string;
 
@@ -55569,6 +57564,7 @@ export type ZeroTrustGatewayDescriptionItem = string;
  *
  * @default
  * @example any(device_posture.checks.passed[*] in {"1308749e-fcfb-4ebc-b051-fe022b632644"})
+ * @x-auditable true
  */
 export type ZeroTrustGatewayDevicePosture = string;
 
@@ -55576,6 +57572,7 @@ export type ZeroTrustGatewayDevicePosture = string;
  * The identifier of the pair of IPv4 addresses assigned to this location.
  *
  * @example 0e4a32c6-6fb8-4858-9296-98f51631e8e6
+ * @x-auditable true
  */
 export type ZeroTrustGatewayDnsDestinationIpsIdRead = string;
 
@@ -55583,6 +57580,7 @@ export type ZeroTrustGatewayDnsDestinationIpsIdRead = string;
  * The identifier of the pair of IPv4 addresses assigned to this location. When creating a location, if this field is absent or set with null, the pair of shared IPv4 addresses (0e4a32c6-6fb8-4858-9296-98f51631e8e6) is auto-assigned. When updating a location, if the field is absent or set with null, the pre-assigned pair remains unchanged.
  *
  * @example 0e4a32c6-6fb8-4858-9296-98f51631e8e6
+ * @x-auditable true
  */
 export type ZeroTrustGatewayDnsDestinationIpsIdWrite = string;
 
@@ -55590,32 +57588,37 @@ export type ZeroTrustGatewayDnsDestinationIpsIdWrite = string;
  * The uuid identifier of the IPv6 block brought to the gateway, so that this location's IPv6 address is allocated from the Bring Your Own Ipv6(BYOIPv6) block and not from the standard CloudFlare IPv6 block.
  *
  * @example b08f7231-d458-495c-98ef-190604c9ee83
+ * @x-auditable true
  */
-export type ZeroTrustGatewayDnsDestinationIpv6BlockId = string;
+export type ZeroTrustGatewayDnsDestinationIpv6BlockId = string | null;
 
 export type ZeroTrustGatewayDnsResolverSettingsV4 = {
   /**
    * IPv4 address of upstream resolver.
    *
    * @example 2.2.2.2
+   * @x-auditable true
    */
   ip: string;
   /**
    * A port number to use for upstream resolver. Defaults to 53 if unspecified.
    *
    * @example 5053
+   * @x-auditable true
    */
   port?: number;
   /**
    * Whether to connect to this resolver over a private network. Must be set when vnet_id is set.
    *
    * @example true
+   * @x-auditable true
    */
   route_through_private_network?: boolean;
   /**
    * Optionally specify a virtual network for this resolver. Uses default virtual network id if omitted.
    *
    * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
+   * @x-auditable true
    */
   vnet_id?: string;
 };
@@ -55625,24 +57628,28 @@ export type ZeroTrustGatewayDnsResolverSettingsV6 = {
    * IPv6 address of upstream resolver.
    *
    * @example 2001:DB8::
+   * @x-auditable true
    */
   ip: string;
   /**
    * A port number to use for upstream resolver. Defaults to 53 if unspecified.
    *
    * @example 5053
+   * @x-auditable true
    */
   port?: number;
   /**
    * Whether to connect to this resolver over a private network. Must be set when vnet_id is set.
    *
    * @example true
+   * @x-auditable true
    */
   route_through_private_network?: boolean;
   /**
    * Optionally specify a virtual network for this resolver. Uses default virtual network id if omitted.
    *
    * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
+   * @x-auditable true
    */
   vnet_id?: string;
 };
@@ -55652,6 +57659,7 @@ export type ZeroTrustGatewayDohEndpoint = {
    * True if the endpoint is enabled for this location.
    *
    * @example true
+   * @x-auditable true
    */
   enabled?: boolean;
   networks?: ZeroTrustGatewayIpNetworks;
@@ -55659,6 +57667,7 @@ export type ZeroTrustGatewayDohEndpoint = {
    * True if the endpoint requires [user identity](https://developers.cloudflare.com/cloudflare-one/connections/connect-devices/agentless/dns/dns-over-https/#filter-doh-requests-by-user) authentication.
    *
    * @example true
+   * @x-auditable true
    */
   require_token?: boolean;
 };
@@ -55668,6 +57677,7 @@ export type ZeroTrustGatewayDotEndpoint = {
    * True if the endpoint is enabled for this location.
    *
    * @example true
+   * @x-auditable true
    */
   enabled?: boolean;
   networks?: ZeroTrustGatewayIpNetworks;
@@ -55678,6 +57688,7 @@ export type ZeroTrustGatewayDotEndpoint = {
  *
  * @default false
  * @example false
+ * @x-auditable true
  */
 export type ZeroTrustGatewayEcsSupport = boolean;
 
@@ -55690,22 +57701,23 @@ export type ZeroTrustGatewayEmptyResponse = ZeroTrustGatewayApiResponseSingle & 
  *
  * @default false
  * @example true
+ * @x-auditable true
  */
 export type ZeroTrustGatewayEnabled = boolean;
 
 /**
  * Enable anti-virus scanning on downloads.
  *
- * @default false
  * @example false
+ * @x-auditable true
  */
 export type ZeroTrustGatewayEnabledDownloadPhase = boolean;
 
 /**
  * Enable anti-virus scanning on uploads.
  *
- * @default false
  * @example false
+ * @x-auditable true
  */
 export type ZeroTrustGatewayEnabledUploadPhase = boolean;
 
@@ -55731,12 +57743,14 @@ export type ZeroTrustGatewayExpiration = {
    *
    * @example 10
    * @minimum 5
+   * @x-auditable true
    */
   duration?: number;
   /**
    * Whether the policy has expired.
    *
    * @example false
+   * @x-auditable true
    */
   expired?: boolean;
   /**
@@ -55754,6 +57768,7 @@ export type ZeroTrustGatewayExpiration = {
    *
    * @example 2014-01-01T05:20:20Z
    * @format date-time
+   * @x-auditable true
    */
   expires_at: ZeroTrustGatewayTimestamp & string;
 } | null;
@@ -55765,17 +57780,29 @@ export type ZeroTrustGatewayExtendedEmailMatching = {
   /**
    * Enable matching all variants of user emails (with + or . modifiers) used as criteria in Firewall policies.
    *
-   * @default false
    * @example true
+   * @x-auditable true
    */
   enabled?: boolean;
-};
+  /**
+   * This setting was shared via the Orgs API and cannot be edited by the current account
+   *
+   * @x-auditable true
+   */
+  read_only?: boolean;
+  /**
+   * Account tag of account that shared this setting
+   *
+   * @x-auditable true
+   */
+  source_account?: string;
+} | null;
 
 /**
  * Block requests for files that cannot be scanned.
  *
- * @default false
  * @example false
+ * @x-auditable true
  */
 export type ZeroTrustGatewayFailClosed = boolean;
 
@@ -55793,8 +57820,8 @@ export type ZeroTrustGatewayFipsSettings = {
   /**
    * Enable only cipher suites and TLS versions compliant with FIPS 140-2.
    *
-   * @default false
    * @example true
+   * @x-auditable true
    */
   tls?: boolean;
 } | null;
@@ -55805,6 +57832,7 @@ export type ZeroTrustGatewayGatewayAccountLoggingSettings = {
    *
    * @default false
    * @example true
+   * @x-auditable true
    */
   redact_pii?: boolean;
   /**
@@ -55876,6 +57904,7 @@ export type ZeroTrustGatewayGenerateCertRequest = {
    * Number of days the generated certificate will be valid, minimum 1 day and maximum 30 years. Defaults to 5 years. In terraform, validity_period_days can only be used while creating a certificate, and this CAN NOT be used to extend the validity of an already generated certificate.
    *
    * @example 1826
+   * @x-auditable true
    */
   validity_period_days?: number;
 };
@@ -55888,12 +57917,15 @@ export type ZeroTrustGatewayHostSelectorSettings = {
    * Enable filtering via hosts for egress policies.
    *
    * @example false
+   * @x-auditable true
    */
   enabled?: boolean;
 } | null;
 
 /**
  * The identifier for this category. There is only one category per ID.
+ *
+ * @x-auditable true
  */
 export type ZeroTrustGatewayId = number;
 
@@ -55907,6 +57939,7 @@ export type ZeroTrustGatewayIdentifier = string;
  *
  * @default
  * @example any(identity.groups.name[*] in {"finance"})
+ * @x-auditable true
  */
 export type ZeroTrustGatewayIdentity = string;
 
@@ -55914,6 +57947,7 @@ export type ZeroTrustGatewayIdentity = string;
  * IPV6 destination ip assigned to this location. DNS requests sent to this IP will counted as the request under this location. This field is auto-generated by Gateway.
  *
  * @example 2001:0db8:85a3:0000:0000:8a2e:0370:7334
+ * @x-auditable true
  */
 export type ZeroTrustGatewayIp = string;
 
@@ -55922,6 +57956,7 @@ export type ZeroTrustGatewayIpNetwork = {
    * The IP address or IP CIDR.
    *
    * @example 2001:85a3::/64
+   * @x-auditable true
    */
   network: string;
 };
@@ -55941,6 +57976,7 @@ export type ZeroTrustGatewayIpv4Endpoint = {
    * True if the endpoint is enabled for this location.
    *
    * @example true
+   * @x-auditable true
    */
   enabled?: boolean;
 };
@@ -55950,6 +57986,7 @@ export type ZeroTrustGatewayIpv4Network = {
    * The IPv4 address or IPv4 CIDR. IPv4 CIDRs are limited to a maximum of /24.
    *
    * @example 192.0.2.1/32
+   * @x-auditable true
    */
   network: string;
 };
@@ -55964,6 +58001,7 @@ export type ZeroTrustGatewayIpv6Endpoint = {
    * True if the endpoint is enabled for this location.
    *
    * @example true
+   * @x-auditable true
    */
   enabled?: boolean;
   networks?: ZeroTrustGatewayIpv6Networks;
@@ -55974,6 +58012,7 @@ export type ZeroTrustGatewayIpv6Network = {
    * The IPv6 address or IPv6 CIDR.
    *
    * @example 2001:85a3::/64
+   * @x-auditable true
    */
   network: string;
 };
@@ -55988,6 +58027,14 @@ export type ZeroTrustGatewayIpv6Networks = ZeroTrustGatewayIpv6Network[];
  */
 export type ZeroTrustGatewayItems = {
   created_at?: ZeroTrustGatewayReadOnlyTimestamp;
+  description?: ZeroTrustGatewayDescriptionItem;
+  value?: ZeroTrustGatewayValue;
+}[];
+
+/**
+ * items to add to the list.
+ */
+export type ZeroTrustGatewayItemsInput = {
   description?: ZeroTrustGatewayDescriptionItem;
   value?: ZeroTrustGatewayValue;
 }[];
@@ -56023,6 +58070,9 @@ export type ZeroTrustGatewayListItemResponseCollection = ZeroTrustGatewayApiResp
   };
 };
 
+/**
+ * @x-auditable true
+ */
 export type ZeroTrustGatewayListSingleResponse = ZeroTrustGatewayApiResponseSingle & {
   result?: ZeroTrustGatewayLists;
 };
@@ -56077,6 +58127,7 @@ export type ZeroTrustGatewayMessages = {
  * The name of the list.
  *
  * @example Admin Serial Numbers
+ * @x-auditable true
  */
 export type ZeroTrustGatewayName = string;
 
@@ -56087,27 +58138,33 @@ export type ZeroTrustGatewayNotificationSettings = {
   /**
    * Set notification on
    *
-   * @default false
+   * @x-auditable true
    */
   enabled?: boolean;
   /**
    * If true, context information will be passed as query parameters
    *
-   * @default false
+   * @x-auditable true
    */
   include_context?: boolean;
   /**
    * Customize the message shown in the notification.
+   *
+   * @x-auditable true
    */
   msg?: string;
   /**
    * Optional URL to direct users to additional information. If not set, the notification will open a block page.
+   *
+   * @x-auditable true
    */
   support_url?: string;
 } | null;
 
 /**
- * Precedence sets the order of your rules. Lower values indicate higher precedence. At each processing phase, applicable rules are evaluated in ascending order of this value.
+ * Precedence sets the order of your rules. Lower values indicate higher precedence. At each processing phase, applicable rules are evaluated in ascending order of this value. Refer to [Order of enforcement](http://developers.cloudflare.com/learning-paths/secure-internet-traffic/understand-policies/order-of-enforcement/#manage-precedence-with-terraform) docs on how to manage precedence via Terraform.
+ *
+ * @x-auditable true
  */
 export type ZeroTrustGatewayPrecedence = number;
 
@@ -56118,8 +58175,8 @@ export type ZeroTrustGatewayProtocolDetection = {
   /**
    * Enable detecting protocol on initial bytes of client traffic.
    *
-   * @default false
    * @example true
+   * @x-auditable true
    */
   enabled?: boolean;
 } | null;
@@ -56144,6 +58201,7 @@ export type ZeroTrustGatewayProxyEndpoints = {
  * The name of the proxy endpoint.
  *
  * @example Devops team
+ * @x-auditable true
  */
 export type ZeroTrustGatewayProxyEndpointsComponentsSchemasName = string;
 
@@ -56160,6 +58218,7 @@ export type ZeroTrustGatewayProxyEndpointsComponentsSchemasSingleResponse = Zero
  * Base64 encoded HPKE public key used to encrypt all your ssh session logs. https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/use-cases/ssh/ssh-infrastructure-access/#enable-ssh-command-logging
  *
  * @example 1pyl6I1tL7xfJuFYVzXlUW8uXXlpxegHXBzGCBKaSFA=
+ * @x-auditable true
  */
 export type ZeroTrustGatewayPublicKey = string;
 
@@ -56216,6 +58275,7 @@ export type ZeroTrustGatewayRuleSettings = {
    * Set by parent MSP accounts to enable their children to bypass this rule.
    *
    * @example false
+   * @x-auditable true
    */
   allow_child_bypass?: boolean | null;
   /**
@@ -56225,8 +58285,8 @@ export type ZeroTrustGatewayRuleSettings = {
     /**
      * Enable to turn on SSH command logging.
      *
-     * @default false
      * @example false
+     * @x-auditable true
      */
     command_logging?: boolean;
   } | null;
@@ -56238,6 +58298,7 @@ export type ZeroTrustGatewayRuleSettings = {
      * Configure whether copy is enabled or not. When set with "remote_only", copying isolated content from the remote browser to the user's local clipboard is disabled. When absent, copy is enabled. Only applies when `version == "v2"`.
      *
      * @example remote_only
+     * @x-auditable true
      */
     copy?: 'enabled' | 'disabled' | 'remote_only';
     /**
@@ -56245,6 +58306,7 @@ export type ZeroTrustGatewayRuleSettings = {
      *
      * @default false
      * @example false
+     * @x-auditable true
      */
     dcp?: boolean;
     /**
@@ -56252,6 +58314,7 @@ export type ZeroTrustGatewayRuleSettings = {
      *
      * @default false
      * @example false
+     * @x-auditable true
      */
     dd?: boolean;
     /**
@@ -56259,19 +58322,22 @@ export type ZeroTrustGatewayRuleSettings = {
      *
      * @default false
      * @example false
+     * @x-auditable true
      */
     dk?: boolean;
     /**
-     * Configure whether downloading enabled or not. When absent, downloading is enabled. Only applies when `version == "v2"`.
+     * Configure whether downloading enabled or not. When set with "remote_only", downloads are only available for viewing. Only applies when `version == "v2"`.
      *
      * @example enabled
+     * @x-auditable true
      */
-    download?: 'enabled' | 'disabled';
+    download?: 'enabled' | 'disabled' | 'remote_only';
     /**
      * Set to false to enable printing. Only applies when `version == "v1"`.
      *
      * @default false
      * @example false
+     * @x-auditable true
      */
     dp?: boolean;
     /**
@@ -56279,36 +58345,42 @@ export type ZeroTrustGatewayRuleSettings = {
      *
      * @default false
      * @example false
+     * @x-auditable true
      */
     du?: boolean;
     /**
      * Configure whether keyboard usage is enabled or not. When absent, keyboard usage is enabled. Only applies when `version == "v2"`.
      *
      * @example enabled
+     * @x-auditable true
      */
     keyboard?: 'enabled' | 'disabled';
     /**
      * Configure whether pasting is enabled or not. When set with "remote_only", pasting content from the user's local clipboard into isolated pages is disabled. When absent, paste is enabled. Only applies when `version == "v2"`.
      *
      * @example enabled
+     * @x-auditable true
      */
     paste?: 'enabled' | 'disabled' | 'remote_only';
     /**
      * Configure whether printing is enabled or not. When absent, printing is enabled. Only applies when `version == "v2"`.
      *
      * @example enabled
+     * @x-auditable true
      */
     printing?: 'enabled' | 'disabled';
     /**
      * Configure whether uploading is enabled or not. When absent, uploading is enabled. Only applies when `version == "v2"`.
      *
      * @example enabled
+     * @x-auditable true
      */
     upload?: 'enabled' | 'disabled';
     /**
      * Indicates which version of the browser isolation controls should apply.
      *
      * @default v1
+     * @x-auditable true
      */
     version?: 'v1' | 'v2';
   } | null;
@@ -56319,34 +58391,36 @@ export type ZeroTrustGatewayRuleSettings = {
     /**
      * If true, context information will be passed as query parameters
      *
-     * @default false
+     * @x-auditable true
      */
     include_context?: boolean;
     /**
      * URI to which the user will be redirected
      *
      * @format uri
+     * @x-auditable true
      */
     target_uri: string;
   } | null;
   /**
    * Enable the custom block page.
    *
-   * @default false
    * @example true
+   * @x-auditable true
    */
   block_page_enabled?: boolean;
   /**
    * The text describing why this block occurred, displayed on the custom block page (if enabled).
    *
-   * @default
    * @example This website is a security risk
+   * @x-auditable true
    */
   block_reason?: string;
   /**
    * Set by children MSP accounts to bypass their parent's rules.
    *
    * @example false
+   * @x-auditable true
    */
   bypass_parent_rule?: boolean | null;
   /**
@@ -56357,13 +58431,14 @@ export type ZeroTrustGatewayRuleSettings = {
      * Configure how fresh the session needs to be to be considered valid.
      *
      * @example 300s
+     * @x-auditable true
      */
     duration?: string;
     /**
      * Set to true to enable session enforcement.
      *
-     * @default false
      * @example true
+     * @x-auditable true
      */
     enforce?: boolean;
   } | null;
@@ -56382,47 +58457,50 @@ export type ZeroTrustGatewayRuleSettings = {
      * The IPv4 address to be used for egress.
      *
      * @example 192.0.2.2
+     * @x-auditable true
      */
     ipv4?: string;
     /**
      * The fallback IPv4 address to be used for egress in the event of an error egressing with the primary IPv4. Can be '0.0.0.0' to indicate local egress via WARP IPs.
      *
      * @example 192.0.2.3
+     * @x-auditable true
      */
     ipv4_fallback?: string;
     /**
      * The IPv6 range to be used for egress.
      *
      * @example 2001:DB8::/64
+     * @x-auditable true
      */
     ipv6?: string;
   } | null;
   /**
    * Set to true, to ignore the category matches at CNAME domains in a response. If unchecked, the categories in this rule will be checked against all the CNAME domain categories in a response.
    *
-   * @default false
    * @example true
+   * @x-auditable true
    */
   ignore_cname_category_matches?: boolean;
   /**
    * INSECURE - disable DNSSEC validation (for Allow actions).
    *
-   * @default false
    * @example false
+   * @x-auditable true
    */
   insecure_disable_dnssec_validation?: boolean;
   /**
    * Set to true to enable IPs in DNS resolver category blocks. By default categories only block based on domain names.
    *
-   * @default false
    * @example true
+   * @x-auditable true
    */
   ip_categories?: boolean;
   /**
    * Set to true to include IPs in DNS resolver indicator feed blocks. By default indicator feeds only block based on domain names.
    *
-   * @default false
    * @example true
+   * @x-auditable true
    */
   ip_indicator_feeds?: boolean;
   /**
@@ -56433,10 +58511,13 @@ export type ZeroTrustGatewayRuleSettings = {
      * IPv4 or IPv6 address.
      *
      * @example 1.1.1.1
+     * @x-auditable true
      */
     ip?: string;
     /**
      * A port number to use for TCP/UDP overrides.
+     *
+     * @x-auditable true
      */
     port?: number;
   } | null;
@@ -56447,27 +58528,33 @@ export type ZeroTrustGatewayRuleSettings = {
     /**
      * Set notification on
      *
-     * @default false
+     * @x-auditable true
      */
     enabled?: boolean;
     /**
      * If true, context information will be passed as query parameters
+     *
+     * @x-auditable true
      */
     include_context?: boolean;
     /**
      * Customize the message shown in the notification.
+     *
+     * @x-auditable true
      */
     msg?: string;
     /**
      * Optional URL to direct users to additional information. If not set, the notification will open a block page.
+     *
+     * @x-auditable true
      */
     support_url?: string;
   } | null;
   /**
    * Override matching DNS queries with a hostname.
    *
-   * @default
    * @example example.com
+   * @x-auditable true
    */
   override_host?: string;
   /**
@@ -56484,8 +58571,8 @@ export type ZeroTrustGatewayRuleSettings = {
     /**
      * Set to true to enable DLP payload logging for this rule.
      *
-     * @default false
      * @example true
+     * @x-auditable true
      */
     enabled?: boolean;
   } | null;
@@ -56519,19 +58606,20 @@ export type ZeroTrustGatewayRuleSettings = {
     /**
      * If true, context information will be passed as query parameters
      *
-     * @default false
+     * @x-auditable true
      */
     include_context?: boolean;
     /**
      * If true, the path and query parameters from the original request will be appended to target_uri
      *
-     * @default false
+     * @x-auditable true
      */
     preserve_path_and_query?: boolean;
     /**
      * URI to which the user will be redirected
      *
      * @format uri
+     * @x-auditable true
      */
     target_uri: string;
   } | null;
@@ -56542,21 +58630,23 @@ export type ZeroTrustGatewayRuleSettings = {
     /**
      * The fallback behavior to apply when the internal DNS response code is different from 'NOERROR' or when the response data only contains CNAME records for 'A' or 'AAAA' queries.
      *
-     * @default none
+     * @x-auditable true
      */
     fallback?: 'none' | 'public_dns';
     /**
      * The internal DNS view identifier that's passed to the internal DNS service.
+     *
+     * @x-auditable true
      */
     view_id?: string;
   } | null;
   /**
    * Enable to send queries that match the policy to Cloudflare's default 1.1.1.1 DNS resolver. Cannot be set when 'dns_resolvers' are specified or 'resolve_dns_internally' is set. Only valid when a rule's action is set to 'resolve'.
    *
-   * @default false
    * @example true
+   * @x-auditable true
    */
-  resolve_dns_through_cloudflare?: boolean;
+  resolve_dns_through_cloudflare?: boolean | null;
   /**
    * Configure behavior when an upstream cert is invalid or an SSL error occurs.
    */
@@ -56565,6 +58655,7 @@ export type ZeroTrustGatewayRuleSettings = {
      * The action performed when an untrusted certificate is seen. The default action is an error with HTTP code 526.
      *
      * @example error
+     * @x-auditable true
      */
     action?: 'pass_through' | 'block' | 'error';
   } | null;
@@ -56588,6 +58679,7 @@ export type ZeroTrustGatewayRules = {
   traffic?: ZeroTrustGatewayTraffic;
   updated_at?: ZeroTrustGatewayReadOnlyTimestamp;
   version?: ZeroTrustGatewayVersion;
+  warning_status?: ZeroTrustGatewayWarningStatus;
 };
 
 export type ZeroTrustGatewayRulesComponentsSchemasResponseCollection = ZeroTrustGatewayApiResponseCollection & {
@@ -56599,6 +58691,7 @@ export type ZeroTrustGatewayRulesComponentsSchemasResponseCollection = ZeroTrust
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
+ * @x-auditable true
  */
 export type ZeroTrustGatewayRulesComponentsSchemasUuid = string;
 
@@ -56609,12 +58702,14 @@ export type ZeroTrustGatewaySandbox = {
   /**
    * Enable sandbox.
    *
-   * @default false
    * @example true
+   * @x-auditable true
    */
   enabled?: boolean;
   /**
    * Action to take when the file cannot be scanned.
+   *
+   * @x-auditable true
    */
   fallback_action?: 'allow' | 'block';
 } | null;
@@ -56627,48 +58722,56 @@ export type ZeroTrustGatewaySchedule = {
    * The time intervals when the rule will be active on Fridays, in increasing order from 00:00-24:00.  If this parameter is omitted, the rule will be deactivated on Fridays.
    *
    * @example 08:00-12:30,13:30-17:00
+   * @x-auditable true
    */
   fri?: string;
   /**
    * The time intervals when the rule will be active on Mondays, in increasing order from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on Mondays.
    *
    * @example 08:00-12:30,13:30-17:00
+   * @x-auditable true
    */
   mon?: string;
   /**
    * The time intervals when the rule will be active on Saturdays, in increasing order from 00:00-24:00.  If this parameter is omitted, the rule will be deactivated on Saturdays.
    *
    * @example 08:00-12:30,13:30-17:00
+   * @x-auditable true
    */
   sat?: string;
   /**
    * The time intervals when the rule will be active on Sundays, in increasing order from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on Sundays.
    *
    * @example 08:00-12:30,13:30-17:00
+   * @x-auditable true
    */
   sun?: string;
   /**
    * The time intervals when the rule will be active on Thursdays, in increasing order from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on Thursdays.
    *
    * @example 08:00-12:30,13:30-17:00
+   * @x-auditable true
    */
   thu?: string;
   /**
    * The time zone the rule will be evaluated against. If a [valid time zone city name](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List) is provided, Gateway will always use the current time at that time zone. If this parameter is omitted, then Gateway will use the time zone inferred from the user's source IP to evaluate the rule. If Gateway cannot determine the time zone from the IP, we will fall back to the time zone of the user's connected data center.
    *
    * @example America/New York
+   * @x-auditable true
    */
   time_zone?: string;
   /**
    * The time intervals when the rule will be active on Tuesdays, in increasing order from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on Tuesdays.
    *
    * @example 08:00-12:30,13:30-17:00
+   * @x-auditable true
    */
   tue?: string;
   /**
    * The time intervals when the rule will be active on Wednesdays, in increasing order from 00:00-24:00. If this parameter is omitted, the rule will be deactivated on Wednesdays.
    *
    * @example 08:00-12:30,13:30-17:00
+   * @x-auditable true
    */
   wed?: string;
 } | null;
@@ -56676,16 +58779,14 @@ export type ZeroTrustGatewaySchedule = {
 /**
  * The description of the rule.
  *
- * @default
  * @example Block bad websites based on their host name.
+ * @x-auditable true
  */
 export type ZeroTrustGatewaySchemasDescription = string;
 
 /**
- * Identifier
- *
- * @example 023e105f4ecef8ad9ca31a8372d0c353
- * @maxLength 32
+ * @example 699d98642c564d2e855e9661899b7252
+ * @x-auditable true
  */
 export type ZeroTrustGatewaySchemasIdentifier = string;
 
@@ -56693,6 +58794,7 @@ export type ZeroTrustGatewaySchemasIdentifier = string;
  * The name of the location.
  *
  * @example Austin Office Location
+ * @x-auditable true
  */
 export type ZeroTrustGatewaySchemasName = string;
 
@@ -56708,6 +58810,7 @@ export type ZeroTrustGatewaySchemasSingleResponse = ZeroTrustGatewayApiResponseS
  * The subdomain to be used as the destination in the proxy client.
  *
  * @example oli3n9zkz5.proxy.cloudflare-gateway.com
+ * @x-auditable true
  */
 export type ZeroTrustGatewaySchemasSubdomain = string;
 
@@ -56715,6 +58818,7 @@ export type ZeroTrustGatewaySchemasSubdomain = string;
  * The type of list.
  *
  * @example SERIAL
+ * @x-auditable true
  */
 export type ZeroTrustGatewaySchemasType = 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' | 'IP';
 
@@ -56723,6 +58827,7 @@ export type ZeroTrustGatewaySchemasType = 'SERIAL' | 'URL' | 'DOMAIN' | 'EMAIL' 
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
+ * @x-auditable true
  */
 export type ZeroTrustGatewaySchemasUuid = string;
 
@@ -56761,6 +58866,7 @@ export type ZeroTrustGatewaySubcategory = {
  * The DNS over HTTPS domain to send DNS requests to. This field is auto-generated by Gateway.
  *
  * @example oli3n9zkz5
+ * @x-auditable true
  */
 export type ZeroTrustGatewaySubdomain = string;
 
@@ -56777,8 +58883,8 @@ export type ZeroTrustGatewayTlsSettings = {
   /**
    * Enable inspecting encrypted HTTP traffic.
    *
-   * @default true
    * @example true
+   * @x-auditable true
    */
   enabled?: boolean;
 } | null;
@@ -56788,6 +58894,7 @@ export type ZeroTrustGatewayTlsSettings = {
  *
  * @default
  * @example http.request.uri matches ".*a/partial/uri.*" and http.request.host in $01302951-49f9-47c9-a400-0297e60b6a10
+ * @x-auditable true
  */
 export type ZeroTrustGatewayTraffic = string;
 
@@ -56795,6 +58902,7 @@ export type ZeroTrustGatewayTraffic = string;
  * The type of certificate, either BYO-PKI (custom) or Gateway-managed.
  *
  * @example gateway_managed
+ * @x-auditable true
  */
 export type ZeroTrustGatewayType = 'custom' | 'gateway_managed';
 
@@ -56803,6 +58911,7 @@ export type ZeroTrustGatewayType = 'custom' | 'gateway_managed';
  *
  * @example f174e90a-fafe-4643-bbbc-4a0ed4fc8415
  * @maxLength 36
+ * @x-auditable true
  */
 export type ZeroTrustGatewayUuid = string;
 
@@ -56810,6 +58919,7 @@ export type ZeroTrustGatewayUuid = string;
  * The value of the item in a list.
  *
  * @example 8GE8721REF
+ * @x-auditable true
  */
 export type ZeroTrustGatewayValue = string;
 
@@ -56817,8 +58927,14 @@ export type ZeroTrustGatewayValue = string;
  * version number of the rule
  *
  * @example 1
+ * @x-auditable true
  */
 export type ZeroTrustGatewayVersion = number;
+
+/**
+ * Warning for a misconfigured rule, if any.
+ */
+export type ZeroTrustGatewayWarningStatus = string | null;
 
 export type ZoneActivationApiResponseCommon = {
   errors: ZoneActivationMessages;
@@ -56854,6 +58970,7 @@ export type ZoneActivationApiResponseSingle = ZoneActivationApiResponseCommon;
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type ZoneActivationIdentifier = string;
 
@@ -57459,7 +59576,7 @@ export type ZonesApiResponseCommon = {
   errors: ZonesMessages;
   messages: ZonesMessages;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example true
    */
@@ -57475,7 +59592,7 @@ export type ZonesApiResponseCommonFailure = {
   messages: ZonesMessages;
   result: Record<string, any> | null;
   /**
-   * Whether the API call was successful
+   * Whether the API call was successful.
    *
    * @example false
    */
@@ -57733,6 +59850,7 @@ export type ZonesCacheRulesAegis = {
   /**
    * ID of the zone setting.
    *
+   * @x-auditable true
    * @example aegis
    */
   id: 'aegis';
@@ -57741,6 +59859,7 @@ export type ZonesCacheRulesAegis = {
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string | null;
   value?: ZonesCacheRulesAegisValue;
@@ -57752,12 +59871,15 @@ export type ZonesCacheRulesAegis = {
 export type ZonesCacheRulesAegisValue = {
   /**
    * Whether the feature is enabled or not.
+   *
+   * @x-auditable true
    */
   enabled?: boolean;
   /**
    * Egress pool id which refers to a grouping of dedicated egress IPs through which Cloudflare will connect to origin.
    *
    * @example pool-id
+   * @x-auditable true
    */
   pool_id?: string;
 };
@@ -57765,6 +59887,8 @@ export type ZonesCacheRulesAegisValue = {
 export type ZonesCacheRulesBase = {
   /**
    * Identifier of the zone setting.
+   *
+   * @x-auditable true
    */
   id: string;
   /**
@@ -57772,6 +59896,7 @@ export type ZonesCacheRulesBase = {
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string | null;
 };
@@ -57783,6 +59908,7 @@ export type ZonesCacheRulesOriginH2MaxStreams = {
   /**
    * Value of the zone setting.
    *
+   * @x-auditable true
    * @example origin_h2_max_streams
    */
   id: 'origin_h2_max_streams';
@@ -57791,6 +59917,7 @@ export type ZonesCacheRulesOriginH2MaxStreams = {
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string | null;
   value?: ZonesCacheRulesOriginH2MaxStreamsValue;
@@ -57802,6 +59929,7 @@ export type ZonesCacheRulesOriginH2MaxStreams = {
  * @example 50
  * @maximum 1000
  * @minimum 1
+ * @x-auditable true
  */
 export type ZonesCacheRulesOriginH2MaxStreamsValue = number;
 
@@ -57812,6 +59940,7 @@ export type ZonesCacheRulesOriginMaxHttpVersion = {
   /**
    * Value of the zone setting.
    *
+   * @x-auditable true
    * @example origin_max_http_version
    */
   id: 'origin_max_http_version';
@@ -57820,6 +59949,7 @@ export type ZonesCacheRulesOriginMaxHttpVersion = {
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
+   * @x-auditable true
    */
   modified_on?: string | null;
   value?: ZonesCacheRulesOriginMaxHttpVersionValue;
@@ -57827,6 +59957,8 @@ export type ZonesCacheRulesOriginMaxHttpVersion = {
 
 /**
  * Value of the Origin Max HTTP Version Setting.
+ *
+ * @x-auditable true
  */
 export type ZonesCacheRulesOriginMaxHttpVersionValue = '2' | '1';
 
@@ -58113,6 +60245,44 @@ export type ZonesChallengeTtlValue =
   | 31536000;
 
 /**
+ * Determines whether or not the china network is enabled.
+ */
+export type ZonesChinaNetworkEnabled = {
+  /**
+   * Whether or not this setting can be modified for this zone (based on your Cloudflare plan level).
+   *
+   * @default true
+   */
+  editable?: true | false;
+  /**
+   * ID of the zone setting.
+   *
+   * @example china_network_enabled
+   */
+  id: 'china_network_enabled';
+  /**
+   * last time this setting was modified.
+   *
+   * @example 2014-01-01T05:20:00.12345Z
+   * @format date-time
+   */
+  modified_on?: string | null;
+  /**
+   * Current value of the zone setting.
+   *
+   * @example on
+   */
+  value: ZonesChinaNetworkEnabledValue;
+};
+
+/**
+ * Value of the zone setting.
+ *
+ * @default off
+ */
+export type ZonesChinaNetworkEnabledValue = 'on' | 'off';
+
+/**
  * An allowlist of ciphers for TLS termination. These ciphers must be in the BoringSSL format.
  */
 export type ZonesCiphers = {
@@ -58205,6 +60375,22 @@ export type ZonesComponentsSchemasApiResponseCommon = {
    * @example true
    */
   success: true;
+};
+
+export type ZonesComponentsSchemasApiResponseCommonFailure = {
+  /**
+   * @example {"code":7003,"message":"No route for the URI"}
+   * @minLength 1
+   */
+  errors: ZonesMessages;
+  messages: ZonesMessages;
+  result: Record<string, any> | null;
+  /**
+   * Whether the API call was successful
+   *
+   * @example false
+   */
+  success: boolean;
 };
 
 /**
@@ -58637,7 +60823,7 @@ export type ZonesHttp3Value = 'on' | 'off';
 export type ZonesIdentifier = string;
 
 /**
- * Image Resizing provides on-demand resizing, conversion and optimisation for images served through Cloudflare's network. Refer to the [Image Resizing documentation](https://developers.cloudflare.com/images/) for more information.
+ * Image Transformations provides on-demand resizing, conversion and optimization for images served through Cloudflare's network. Refer to the [Image Transformations documentation](https://developers.cloudflare.com/images/) for more information.
  */
 export type ZonesImageResizing = {
   /**
@@ -58773,7 +60959,25 @@ export type ZonesMaxUpload = {
  *
  * @default 100
  */
-export type ZonesMaxUploadValue = 100 | 200 | 500;
+export type ZonesMaxUploadValue =
+  | 100
+  | 125
+  | 150
+  | 175
+  | 200
+  | 225
+  | 250
+  | 275
+  | 300
+  | 325
+  | 350
+  | 375
+  | 400
+  | 425
+  | 450
+  | 475
+  | 500
+  | 1000;
 
 export type ZonesMessages = {
   /**
@@ -58869,6 +61073,7 @@ export type ZonesMultipleSettings = (
   | ZonesSchemasBrowserCheck
   | ZonesSchemasCacheLevel
   | ZonesChallengeTtl
+  | ZonesChinaNetworkEnabled
   | ZonesCiphers
   | ZonesCnameFlattening
   | ZonesDevelopmentMode
@@ -58917,7 +61122,7 @@ export type ZonesMultipleSettings = (
 )[];
 
 /**
- * The domain name
+ * The domain name.
  *
  * @example example.com
  * @maxLength 253
@@ -59415,29 +61620,35 @@ export type ZonesResponseBufferingValue = 'on' | 'off';
 
 export type ZonesResultInfo = {
   /**
-   * Total number of results for the requested service
+   * Total number of results for the requested service.
    *
    * @example 1
    */
   count?: number;
   /**
-   * Current page within paginated list of results
+   * Current page within paginated list of results.
    *
    * @example 1
    */
   page?: number;
   /**
-   * Number of results per page of results
+   * Number of results per page of results.
    *
    * @example 20
    */
   per_page?: number;
   /**
-   * Total results available without any search parameters
+   * Total results available without any search parameters.
    *
    * @example 2000
    */
   total_count?: number;
+  /**
+   * Total number of pages
+   *
+   * @example 100
+   */
+  total_pages?: number;
 };
 
 export type ZonesRocketLoader = {
@@ -59765,6 +61976,7 @@ export type ZonesSchemasEmailObfuscation = {
  *
  * @example 023e105f4ecef8ad9ca31a8372d0c353
  * @maxLength 32
+ * @x-auditable true
  */
 export type ZonesSchemasIdentifier = string;
 
@@ -60305,6 +62517,7 @@ export type ZonesSetting =
   | ZonesSchemasBrowserCheck
   | ZonesSchemasCacheLevel
   | ZonesChallengeTtl
+  | ZonesChinaNetworkEnabled
   | ZonesCiphers
   | ZonesCnameFlattening
   | ZonesDevelopmentMode
@@ -60347,6 +62560,8 @@ export type ZonesSetting =
   | ZonesTls12Only
   | ZonesTls13
   | ZonesTlsClientAuth
+  | ZonesTransformations
+  | ZonesTransformationsAllowedOrigins
   | ZonesSchemasTrueClientIpHeader
   | ZonesSchemasWaf
   | ZonesWebp
@@ -60365,6 +62580,65 @@ export type ZonesSettingReadonly = false;
  * Value of the zone setting.
  */
 export type ZonesSettingToggle = 'on' | 'off';
+
+export type ZonesSettingValue =
+  | Zones0rttValue
+  | ZonesAdvancedDdosValue
+  | ZonesCacheRulesAegisValue
+  | ZonesAlwaysOnlineValue
+  | ZonesAlwaysUseHttpsValue
+  | ZonesAutomaticHttpsRewritesValue
+  | ZonesBrotliValue
+  | ZonesBrowserCacheTtlValue
+  | ZonesBrowserCheckValue
+  | ZonesCacheLevelValue
+  | ZonesChallengeTtlValue
+  | ZonesChinaNetworkEnabledValue
+  | ZonesCiphersValue
+  | ZonesCnameFlatteningValue
+  | ZonesDevelopmentModeValue
+  | ZonesEarlyHintsValue
+  | ZonesEdgeCacheTtlValue
+  | ZonesEmailObfuscationValue
+  | ZonesH2PrioritizationValue
+  | ZonesHotlinkProtectionValue
+  | ZonesHttp2Value
+  | ZonesHttp3Value
+  | ZonesImageResizingValue
+  | ZonesIpGeolocationValue
+  | ZonesIpv6Value
+  | ZonesMaxUploadValue
+  | ZonesMinTlsVersionValue
+  | ZonesMirageValue
+  | ZonesNelValue
+  | ZonesOpportunisticEncryptionValue
+  | ZonesOpportunisticOnionValue
+  | ZonesOrangeToOrangeValue
+  | ZonesOriginErrorPagePassThruValue
+  | ZonesCacheRulesOriginH2MaxStreamsValue
+  | ZonesCacheRulesOriginMaxHttpVersionValue
+  | ZonesPolishValue
+  | ZonesPrefetchPreloadValue
+  | ZonesPrivacyPassValue
+  | ZonesProxyReadTimeoutValue
+  | ZonesPseudoIpv4Value
+  | ZonesReplaceInsecureJsValue
+  | ZonesResponseBufferingValue
+  | ZonesRocketLoaderValue
+  | ZonesAutomaticPlatformOptimization
+  | ZonesSecurityHeaderValue
+  | ZonesSecurityLevelValue
+  | ZonesServerSideExcludeValue
+  | ZonesSha1SupportValue
+  | ZonesSortQueryStringForCacheValue
+  | ZonesSslValue
+  | ZonesTls12OnlyValue
+  | ZonesTls13Value
+  | ZonesTlsClientAuthValue
+  | ZonesTrueClientIpHeaderValue
+  | ZonesWafValue
+  | ZonesWebpValue
+  | ZonesWebsocketsValue;
 
 export type ZonesSettingWritable = true;
 
@@ -60392,6 +62666,17 @@ export type ZonesSettingWritable = true;
  * @example {"id":"ssl","properties":[{"choices":["off","flexible","full","strict"],"multiple":false,"name":"value","type":"choice"}]}
  */
 export type ZonesSettings = Record<string, any>[];
+
+export type ZonesSettingsApiComponentsSchemasApiResponseCommon = {
+  errors: ZonesMessages;
+  messages: ZonesMessages;
+  /**
+   * Whether the API call was successful
+   *
+   * @example true
+   */
+  success: boolean;
+};
 
 /**
  * Allow SHA1 support.
@@ -60656,6 +62941,74 @@ export type ZonesTlsClientAuth = {
  */
 export type ZonesTlsClientAuthValue = 'on' | 'off';
 
+/**
+ * Media Transformations provides on-demand resizing, conversion and optimization for images and video served through Cloudflare's network. Refer to the [Image Transformations](https://developers.cloudflare.com/images/) and [Video Transformations](https://developers.cloudflare.com/stream/transform-videos/#getting-started) documentation for more information.
+ */
+export type ZonesTransformations = {
+  /**
+   * Whether or not this setting can be modified for this zone (based on your Cloudflare plan level).
+   *
+   * @default true
+   */
+  editable?: true | false;
+  /**
+   * ID of the zone setting. Shared between Image Transformations and Video Transformations.
+   *
+   * @example transformations
+   */
+  id: 'transformations';
+  /**
+   * last time this setting was modified.
+   *
+   * @example 2014-01-01T05:20:00.12345Z
+   * @format date-time
+   */
+  modified_on?: string | null;
+  /**
+   * Current value of the zone setting.
+   *
+   * @example on
+   */
+  value: ZonesImageResizingValue;
+};
+
+/**
+ * Media Transformations Allowed Origins restricts transformations for images and video served through Cloudflare's network. Refer to the [Image Transformations](https://developers.cloudflare.com/images/) and [Video Transformations](https://developers.cloudflare.com/stream/transform-videos/#getting-started) documentation for more information.
+ */
+export type ZonesTransformationsAllowedOrigins = {
+  /**
+   * Whether or not this setting can be modified for this zone (based on your Cloudflare plan level).
+   *
+   * @default true
+   */
+  editable?: true | false;
+  /**
+   * ID of the zone setting. Shared between Image Transformations and Video Transformations.
+   *
+   * @example transformations_allowed_origins
+   */
+  id: 'transformations_allowed_origins';
+  /**
+   * last time this setting was modified.
+   *
+   * @example 2014-01-01T05:20:00.12345Z
+   * @format date-time
+   */
+  modified_on?: string | null;
+  /**
+   * Current value of the zone setting.
+   *
+   * @example on
+   */
+  value: ZonesTransformationsAllowedOriginsValue;
+};
+
+/**
+ * Comma-separated list of allowed origins.
+ * Refer to the [Image Transformations](https://developers.cloudflare.com/images/transform-images/sources/) and [Video Transformations](https://developers.cloudflare.com/stream/transform-videos/#getting-started) documentation for more information.
+ */
+export type ZonesTransformationsAllowedOriginsValue = string;
+
 export type ZonesTrueClientIpHeader = {
   /**
    * Turn on or off the True-Client-IP Header feature of the Cloudflare Network app.
@@ -60834,12 +63187,12 @@ export type ZonesWebsocketsValue = 'off' | 'on';
 
 export type ZonesZone = {
   /**
-   * The account the zone belongs to
+   * The account the zone belongs to.
    */
   account: {
     id?: ZonesIdentifier;
     /**
-     * The name of the account
+     * The name of the account.
      *
      * @example Example Account Name
      */
@@ -60847,14 +63200,21 @@ export type ZonesZone = {
   };
   /**
    * The last time proof of ownership was detected and the zone was made
-   * active
+   * active.
    *
    * @example 2014-01-02T00:01:00.12345Z
    * @format date-time
    */
   activated_on: string | null;
   /**
-   * When the zone was created
+   * Allows the customer to use a custom apex.
+   * *Tenants Only Configuration*.
+   *
+   * @example cdn.cloudflare.com
+   */
+  cname_suffix?: string;
+  /**
+   * When the zone was created.
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
@@ -60870,41 +63230,41 @@ export type ZonesZone = {
   development_mode: number;
   id: ZonesIdentifier;
   /**
-   * Metadata about the zone
+   * Metadata about the zone.
    */
   meta: {
     /**
-     * The zone is only configured for CDN
+     * The zone is only configured for CDN.
      *
      * @example true
      */
     cdn_only?: boolean;
     /**
-     * Number of Custom Certificates the zone can have
+     * Number of Custom Certificates the zone can have.
      *
      * @example 1
      */
     custom_certificate_quota?: number;
     /**
-     * The zone is only configured for DNS
+     * The zone is only configured for DNS.
      *
      * @example true
      */
     dns_only?: boolean;
     /**
-     * The zone is setup with Foundation DNS
+     * The zone is setup with Foundation DNS.
      *
      * @example true
      */
     foundation_dns?: boolean;
     /**
-     * Number of Page Rules a zone can have
+     * Number of Page Rules a zone can have.
      *
      * @example 100
      */
     page_rule_quota?: number;
     /**
-     * The zone has been flagged for phishing
+     * The zone has been flagged for phishing.
      *
      * @example false
      */
@@ -60915,14 +63275,14 @@ export type ZonesZone = {
     step?: number;
   };
   /**
-   * When the zone was last modified
+   * When the zone was last modified.
    *
    * @example 2014-01-01T05:20:00.12345Z
    * @format date-time
    */
   modified_on: string;
   /**
-   * The domain name
+   * The domain name.
    *
    * @example example.com
    * @maxLength 253
@@ -60930,45 +63290,45 @@ export type ZonesZone = {
    */
   name: string;
   /**
-   * The name servers Cloudflare assigns to a zone
+   * The name servers Cloudflare assigns to a zone.
    *
    * @example bob.ns.cloudflare.com
    * @example lola.ns.cloudflare.com
    */
   name_servers: string[];
   /**
-   * DNS host at the time of switching to Cloudflare
+   * DNS host at the time of switching to Cloudflare.
    *
    * @example NameCheap
    * @maxLength 50
    */
   original_dnshost: string | null;
   /**
-   * Original name servers before moving to Cloudflare
+   * Original name servers before moving to Cloudflare.
    *
    * @example ns1.originaldnshost.com
    * @example ns2.originaldnshost.com
    */
   original_name_servers: string[] | null;
   /**
-   * Registrar for the domain at the time of switching to Cloudflare
+   * Registrar for the domain at the time of switching to Cloudflare.
    *
    * @example GoDaddy
    */
   original_registrar: string | null;
   /**
-   * The owner of the zone
+   * The owner of the zone.
    */
   owner: {
     id?: ZonesIdentifier;
     /**
-     * Name of the owner
+     * Name of the owner.
      *
      * @example Example Org
      */
     name?: string;
     /**
-     * The type of owner
+     * The type of owner.
      *
      * @example organization
      */
@@ -60976,11 +63336,102 @@ export type ZonesZone = {
   };
   paused?: ZonesPaused;
   /**
+   * Legacy permissions based on legacy user membership information.
+   *
+   * @deprecated true
+   * @x-stainless-message This has been replaced by Account memberships.
+   */
+  permissions?: string[];
+  /**
+     * A Zones subscription information.
+     *
+     * @deprecated true
+     * @x-stainless-message Please use the `/zones/{zone_id}/subscription` API
+    to update a zone's plan. Changing this value will create/cancel
+    associated subscriptions. To view available plans for this zone,
+    see [Zone Plans](https://developers.cloudflare.com/api/resources/zones/subresources/plans/).
+     */
+  plan: {
+    /**
+     * States if the subscription can be activated.
+     *
+     * @example false
+     */
+    can_subscribe?: boolean;
+    /**
+     * The denomination of the customer.
+     *
+     * @example USD
+     */
+    currency?: string;
+    /**
+     * If this Zone is managed by another company.
+     *
+     * @example false
+     */
+    externally_managed?: boolean;
+    /**
+     * How often the customer is billed.
+     *
+     * @example monthly
+     */
+    frequency?: string;
+    id?: ZonesIdentifier;
+    /**
+     * States if the subscription active.
+     *
+     * @example false
+     */
+    is_subscribed?: boolean;
+    /**
+     * If the legacy discount applies to this Zone.
+     *
+     * @example false
+     */
+    legacy_discount?: boolean;
+    /**
+     * The legacy name of the plan.
+     *
+     * @example free
+     */
+    legacy_id?: string;
+    /**
+     * Name of the owner.
+     *
+     * @example Example Org
+     */
+    name?: string;
+    /**
+     * How much the customer is paying.
+     *
+     * @example 10.99
+     */
+    price?: number;
+  };
+  /**
    * The zone status on Cloudflare.
    *
    * @example active
    */
   status?: 'initializing' | 'pending' | 'active' | 'moved';
+  /**
+   * The root organizational unit that this zone belongs to (such as a tenant or organization).
+   */
+  tenant?: {
+    id?: ZonesIdentifier;
+    /**
+     * The name of the Tenant account.
+     *
+     * @example Example Account Name
+     */
+    name?: string;
+  };
+  /**
+   * The immediate parent organizational unit that this zone belongs to (such as under a tenant or sub-organization).
+   */
+  tenant_unit?: {
+    id?: ZonesIdentifier;
+  };
   type?: ZonesType;
   /**
    * An array of domains used for custom name servers. This is only available for Business and Enterprise plans.
@@ -60997,7 +63448,7 @@ export type ZonesZone = {
   verification_key?: string;
 };
 
-export type ZonesZoneSettingsResponseCollection = ZonesApiResponseCommon & {
+export type ZonesZoneSettingsResponseCollection = ZonesSettingsApiComponentsSchemasApiResponseCommon & {
   result?: (
     | Zones0rtt
     | ZonesAdvancedDdos
@@ -61052,12 +63503,22 @@ export type ZonesZoneSettingsResponseCollection = ZonesApiResponseCommon & {
     | ZonesTls12Only
     | ZonesTls13
     | ZonesTlsClientAuth
+    | ZonesTransformations
+    | ZonesTransformationsAllowedOrigins
     | ZonesSchemasTrueClientIpHeader
     | ZonesSchemasWaf
     | ZonesWebp
     | ZonesWebsockets
   )[];
 };
+
+export type ZonesZoneSettingsSingleRequest =
+  | {
+      enabled?: ZonesSslRecommenderEnabled;
+    }
+  | {
+      value?: ZonesSettingValue;
+    };
 
 /**
  * A component value for a subscription.
@@ -61144,6 +63605,7 @@ export type DnsFirewallDnsFirewallReverseDnsResponse2 = DnsFirewallApiResponseSi
  *
  * @default true
  * @example true
+ * @x-auditable true
  */
 export type LoadBalancingOriginHealthy2 = boolean;
 

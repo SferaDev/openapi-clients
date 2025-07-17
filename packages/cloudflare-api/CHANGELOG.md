@@ -1,5 +1,40 @@
 # cloudflare-api-js
 
+## 0.15.2
+
+### Patch Changes
+
+- 8ae636d: Add 'webp' option to the polish configuration
+- 06a9d2a: [BREAKING] Change CIDRs to IPv4 only and note that IPv6 CIDRs are currently unsupported
+- ede8536: Add x-auditable flag to CustomIndicatorFeedsDescription type
+- a44aa65: Add new endpoint to fetch all DEX tests
+- 22b8ffe: [BREAKING] Add new x-auditable attribute to StreamSchemasIdentifier type definition
+- 4ee2ac1: Add detailed result information to ApiShieldApiResponseCollection
+- 9c610a7: Change InfraApiResponseCollection to include result_info as a nested object
+- 2c9fe89: Add x-auditable property to DnsSettingsIdentifier schema
+
+## 0.15.1
+
+### Patch Changes
+
+- 55fee33: [BREAKING] Add new query parameter 'forceRefresh' to 'GetEventListGetQueryParams'
+- 676de5b: List Catalog Syncs (Closed Beta) - fix typo in endpoint description
+- ad1807f: [BREAKING] Change type of virtual_network_id in TunnelRouteCreateATunnelRouteRequestBody and TunnelRouteUpdateATunnelRouteRequestBody to TunnelVirtualNetworkIdComputedOptional
+- 5e07130: Add sccm_vpn_boundary_support field to TeamsDevicesDefaultDeviceSettingsPolicy and TeamsDevicesDeviceSettingsPolicy
+- b0fb688: Add 'x-auditable' property to RumIdentifier and SpectrumAnalyticsIdentifier types
+- 2a0cc51: [BREAKING] Change pattern for LogcontrolRegions from ^[a-z,]_$ to ^[a-z]_$
+- a3b53bf: Make script property optional in WorkersRoute type
+- 0a8ee17: Update result type from R2LifecycleRule to R2QueuesConfig
+- cf68a5d: [BREAKING] Removed DnsRecordsResultInfo type and moved its properties to DnsRecordsApiResponseCollection type
+- e922b8d: Update workers endpoints
+- 9803c5b: [BREAKING] Remove AddressingResultInfo interface, replace with nested result_info in AddressingApiResponseCollection
+
+## 0.15.0
+
+### Minor Changes
+
+- 18102a2: Add new endpoint to get a single event notification rule
+
 ## 0.14.0
 
 ### Minor Changes

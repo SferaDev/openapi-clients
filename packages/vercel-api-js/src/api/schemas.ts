@@ -928,6 +928,22 @@ export type UserEvent = {
         source: string;
       }
     | {
+        projectId: string;
+        rulesetName: string;
+        active: boolean;
+        action?: 'log' | 'challenge' | 'deny';
+      }
+    | {
+        projectId: string;
+        rulesetName: string;
+        ruleGroups: {
+          [key: string]: {
+            active: boolean;
+            action?: 'log' | 'challenge' | 'deny';
+          };
+        };
+      }
+    | {
         integrationId: string;
         integrationSlug: string;
         integrationName: string;
@@ -1065,6 +1081,7 @@ export type UserEvent = {
           resourceConfig?: {
             nodeType?: string;
             concurrentBuilds?: number;
+            elasticConcurrencyEnabled?: boolean;
             buildEntitlements?: {
               enhancedBuilds?: boolean;
             };
@@ -1089,7 +1106,7 @@ export type UserEvent = {
             flagsExplorerUnlimitedOverrides?: boolean;
             customEnvironmentsPerProject?: number;
             buildMachine?: {
-              purchaseType?: 'enhanced' | 'ultra';
+              purchaseType?: 'enhanced' | 'turbo';
               isDefaultBuildMachine?: boolean;
               cores?: number;
               memory?: number;
@@ -1152,6 +1169,7 @@ export type UserEvent = {
               | 'blobTotalAvgSizeInBytes'
               | 'blobTotalGetResponseObjectSizeInBytes'
               | 'blobTotalSimpleRequests'
+              | 'connectDataTransfer'
               | 'dataCacheRead'
               | 'dataCacheWrite'
               | 'edgeConfigRead'
@@ -1163,6 +1181,8 @@ export type UserEvent = {
               | 'elasticConcurrencyBuildSlots'
               | 'fastDataTransfer'
               | 'fastOriginTransfer'
+              | 'fluidCpuDuration'
+              | 'fluidDuration'
               | 'functionDuration'
               | 'functionInvocation'
               | 'imageOptimizationCacheRead'
@@ -1172,17 +1192,11 @@ export type UserEvent = {
               | 'monitoringMetric'
               | 'blobDataTransfer'
               | 'observabilityEvent'
-              | 'postgresComputeTime'
-              | 'postgresDataStorage'
-              | 'postgresDataTransfer'
-              | 'postgresDatabase'
-              | 'postgresWrittenData'
+              | 'onDemandConcurrencyMinutes'
+              | 'runtimeCacheRead'
+              | 'runtimeCacheWrite'
               | 'serverlessFunctionExecution'
               | 'sourceImages'
-              | 'storageRedisTotalBandwidthInBytes'
-              | 'storageRedisTotalCommands'
-              | 'storageRedisTotalDailyAvgStorageInBytes'
-              | 'storageRedisTotalDatabases'
               | 'wafOwaspExcessBytes'
               | 'wafOwaspRequests'
               | 'wafRateLimitRequest'
@@ -1213,11 +1227,11 @@ export type UserEvent = {
               origin:
                 | 'teams'
                 | 'saml'
+                | 'link'
                 | 'github'
                 | 'gitlab'
                 | 'bitbucket'
                 | 'mail'
-                | 'link'
                 | 'import'
                 | 'dsync'
                 | 'feedback'
@@ -1290,6 +1304,11 @@ export type UserEvent = {
               warningAt?: number | null;
               blockedAt?: number | null;
             };
+            connectDataTransfer?: {
+              currentThreshold: number;
+              warningAt?: number | null;
+              blockedAt?: number | null;
+            };
             dataCacheRead?: {
               currentThreshold: number;
               warningAt?: number | null;
@@ -1345,6 +1364,16 @@ export type UserEvent = {
               warningAt?: number | null;
               blockedAt?: number | null;
             };
+            fluidCpuDuration?: {
+              currentThreshold: number;
+              warningAt?: number | null;
+              blockedAt?: number | null;
+            };
+            fluidDuration?: {
+              currentThreshold: number;
+              warningAt?: number | null;
+              blockedAt?: number | null;
+            };
             functionDuration?: {
               currentThreshold: number;
               warningAt?: number | null;
@@ -1390,27 +1419,17 @@ export type UserEvent = {
               warningAt?: number | null;
               blockedAt?: number | null;
             };
-            postgresComputeTime?: {
+            onDemandConcurrencyMinutes?: {
               currentThreshold: number;
               warningAt?: number | null;
               blockedAt?: number | null;
             };
-            postgresDataStorage?: {
+            runtimeCacheRead?: {
               currentThreshold: number;
               warningAt?: number | null;
               blockedAt?: number | null;
             };
-            postgresDataTransfer?: {
-              currentThreshold: number;
-              warningAt?: number | null;
-              blockedAt?: number | null;
-            };
-            postgresDatabase?: {
-              currentThreshold: number;
-              warningAt?: number | null;
-              blockedAt?: number | null;
-            };
-            postgresWrittenData?: {
+            runtimeCacheWrite?: {
               currentThreshold: number;
               warningAt?: number | null;
               blockedAt?: number | null;
@@ -1421,26 +1440,6 @@ export type UserEvent = {
               blockedAt?: number | null;
             };
             sourceImages?: {
-              currentThreshold: number;
-              warningAt?: number | null;
-              blockedAt?: number | null;
-            };
-            storageRedisTotalBandwidthInBytes?: {
-              currentThreshold: number;
-              warningAt?: number | null;
-              blockedAt?: number | null;
-            };
-            storageRedisTotalCommands?: {
-              currentThreshold: number;
-              warningAt?: number | null;
-              blockedAt?: number | null;
-            };
-            storageRedisTotalDailyAvgStorageInBytes?: {
-              currentThreshold: number;
-              warningAt?: number | null;
-              blockedAt?: number | null;
-            };
-            storageRedisTotalDatabases?: {
               currentThreshold: number;
               warningAt?: number | null;
               blockedAt?: number | null;
@@ -1475,9 +1474,25 @@ export type UserEvent = {
              */
             firstTimeOnDemandNotificationSentAt?: number;
             /**
-             * Tracks the last time we sent a summary email.
+             * Tracks the last time we sent a daily summary email.
              */
-            overageSummaryEmailSentAt?: number;
+            dailyOverageSummaryEmailSentAt?: number;
+            /**
+             * Tracks the last time we sent a weekly summary email.
+             */
+            weeklyOverageSummaryEmailSentAt?: number;
+            /**
+             * Tracks when the overage summary email will stop auto-sending. We currently lock the user into email for a month after the last on-demand usage.
+             */
+            overageSummaryExpiresAt?: number;
+            /**
+             * Tracks the last time we sent a increased on-demand email.
+             */
+            increasedOnDemandEmailSentAt?: number;
+            /**
+             * Tracks the last time we attempted to send an increased on-demand email. This check is to limit the number of attempts per day.
+             */
+            increasedOnDemandEmailAttemptedAt?: number;
           };
           username: string;
           updatedAt: number;
@@ -1544,6 +1559,7 @@ export type UserEvent = {
                 | 'blobTotalAvgSizeInBytes'
                 | 'blobTotalGetResponseObjectSizeInBytes'
                 | 'blobTotalSimpleRequests'
+                | 'connectDataTransfer'
                 | 'dataCacheRead'
                 | 'dataCacheWrite'
                 | 'edgeConfigRead'
@@ -1555,6 +1571,8 @@ export type UserEvent = {
                 | 'elasticConcurrencyBuildSlots'
                 | 'fastDataTransfer'
                 | 'fastOriginTransfer'
+                | 'fluidCpuDuration'
+                | 'fluidDuration'
                 | 'functionDuration'
                 | 'functionInvocation'
                 | 'imageOptimizationCacheRead'
@@ -1564,17 +1582,11 @@ export type UserEvent = {
                 | 'monitoringMetric'
                 | 'blobDataTransfer'
                 | 'observabilityEvent'
-                | 'postgresComputeTime'
-                | 'postgresDataStorage'
-                | 'postgresDataTransfer'
-                | 'postgresDatabase'
-                | 'postgresWrittenData'
+                | 'onDemandConcurrencyMinutes'
+                | 'runtimeCacheRead'
+                | 'runtimeCacheWrite'
                 | 'serverlessFunctionExecution'
                 | 'sourceImages'
-                | 'storageRedisTotalBandwidthInBytes'
-                | 'storageRedisTotalCommands'
-                | 'storageRedisTotalDailyAvgStorageInBytes'
-                | 'storageRedisTotalDatabases'
                 | 'wafOwaspExcessBytes'
                 | 'wafOwaspRequests'
                 | 'wafRateLimitRequest'
@@ -1593,6 +1605,7 @@ export type UserEvent = {
                 | 'blobTotalAvgSizeInBytes'
                 | 'blobTotalGetResponseObjectSizeInBytes'
                 | 'blobTotalSimpleRequests'
+                | 'connectDataTransfer'
                 | 'dataCacheRead'
                 | 'dataCacheWrite'
                 | 'edgeConfigRead'
@@ -1604,6 +1617,8 @@ export type UserEvent = {
                 | 'elasticConcurrencyBuildSlots'
                 | 'fastDataTransfer'
                 | 'fastOriginTransfer'
+                | 'fluidCpuDuration'
+                | 'fluidDuration'
                 | 'functionDuration'
                 | 'functionInvocation'
                 | 'imageOptimizationCacheRead'
@@ -1613,17 +1628,11 @@ export type UserEvent = {
                 | 'monitoringMetric'
                 | 'blobDataTransfer'
                 | 'observabilityEvent'
-                | 'postgresComputeTime'
-                | 'postgresDataStorage'
-                | 'postgresDataTransfer'
-                | 'postgresDatabase'
-                | 'postgresWrittenData'
+                | 'onDemandConcurrencyMinutes'
+                | 'runtimeCacheRead'
+                | 'runtimeCacheWrite'
                 | 'serverlessFunctionExecution'
                 | 'sourceImages'
-                | 'storageRedisTotalBandwidthInBytes'
-                | 'storageRedisTotalCommands'
-                | 'storageRedisTotalDailyAvgStorageInBytes'
-                | 'storageRedisTotalDatabases'
                 | 'wafOwaspExcessBytes'
                 | 'wafOwaspRequests'
                 | 'wafRateLimitRequest'
@@ -1642,6 +1651,7 @@ export type UserEvent = {
                 | 'blobTotalAvgSizeInBytes'
                 | 'blobTotalGetResponseObjectSizeInBytes'
                 | 'blobTotalSimpleRequests'
+                | 'connectDataTransfer'
                 | 'dataCacheRead'
                 | 'dataCacheWrite'
                 | 'edgeConfigRead'
@@ -1653,6 +1663,8 @@ export type UserEvent = {
                 | 'elasticConcurrencyBuildSlots'
                 | 'fastDataTransfer'
                 | 'fastOriginTransfer'
+                | 'fluidCpuDuration'
+                | 'fluidDuration'
                 | 'functionDuration'
                 | 'functionInvocation'
                 | 'imageOptimizationCacheRead'
@@ -1662,17 +1674,11 @@ export type UserEvent = {
                 | 'monitoringMetric'
                 | 'blobDataTransfer'
                 | 'observabilityEvent'
-                | 'postgresComputeTime'
-                | 'postgresDataStorage'
-                | 'postgresDataTransfer'
-                | 'postgresDatabase'
-                | 'postgresWrittenData'
+                | 'onDemandConcurrencyMinutes'
+                | 'runtimeCacheRead'
+                | 'runtimeCacheWrite'
                 | 'serverlessFunctionExecution'
                 | 'sourceImages'
-                | 'storageRedisTotalBandwidthInBytes'
-                | 'storageRedisTotalCommands'
-                | 'storageRedisTotalDailyAvgStorageInBytes'
-                | 'storageRedisTotalDatabases'
                 | 'wafOwaspExcessBytes'
                 | 'wafOwaspRequests'
                 | 'wafRateLimitRequest'
@@ -1845,6 +1851,9 @@ export type UserEvent = {
         projectName: string;
       }
     | {
+        projectName: string;
+      }
+    | {
         plan: string;
         removedUsers?: {
           [key: string]: {
@@ -1855,11 +1864,11 @@ export type UserEvent = {
               origin:
                 | 'teams'
                 | 'saml'
+                | 'link'
                 | 'github'
                 | 'gitlab'
                 | 'bitbucket'
                 | 'mail'
-                | 'link'
                 | 'import'
                 | 'dsync'
                 | 'feedback'
@@ -1923,36 +1932,48 @@ export type UserEvent = {
         projectName: string;
         ssoProtection:
           | {
-              deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
+              deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'all_except_custom_domains';
             }
-          | ('all' | 'preview' | 'prod_deployment_urls_and_all_previews')
+          | ('all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'all_except_custom_domains')
           | null;
         oldSsoProtection:
           | {
-              deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
+              deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'all_except_custom_domains';
             }
-          | ('all' | 'preview' | 'prod_deployment_urls_and_all_previews')
+          | ('all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'all_except_custom_domains')
           | null;
       }
     | {
         projectName: string;
         passwordProtection:
           | {
-              deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
+              deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'all_except_custom_domains';
             }
-          | ('all' | 'preview' | 'prod_deployment_urls_and_all_previews')
+          | ('all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'all_except_custom_domains')
           | null;
         oldPasswordProtection:
           | {
-              deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
+              deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'all_except_custom_domains';
             }
-          | ('all' | 'preview' | 'prod_deployment_urls_and_all_previews')
+          | ('all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'all_except_custom_domains')
           | null;
       }
     | {
         projectName: string;
-        trustedIps?: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production' | null;
-        oldTrustedIps?: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production' | null;
+        trustedIps?:
+          | 'all'
+          | 'preview'
+          | 'prod_deployment_urls_and_all_previews'
+          | 'all_except_custom_domains'
+          | 'production'
+          | null;
+        oldTrustedIps?:
+          | 'all'
+          | 'preview'
+          | 'prod_deployment_urls_and_all_previews'
+          | 'all_except_custom_domains'
+          | 'production'
+          | null;
         addedAddresses?: string[] | null;
         removedAddresses?: string[] | null;
       }
@@ -1991,6 +2012,10 @@ export type UserEvent = {
                 connectConfigurationId: string;
                 passive: boolean;
                 buildsEnabled: boolean;
+                aws?: {
+                  subnetIds: string[];
+                  securityGroupId: string;
+                };
                 createdAt: number;
                 updatedAt: number;
               }[]
@@ -2001,6 +2026,10 @@ export type UserEvent = {
                 connectConfigurationId: string;
                 passive: boolean;
                 buildsEnabled: boolean;
+                aws?: {
+                  subnetIds: string[];
+                  securityGroupId: string;
+                };
                 createdAt: number;
                 updatedAt: number;
               }[]
@@ -2460,17 +2489,22 @@ export type UserEvent = {
         edgeConfigTokenIds: string[];
       }
     | {
+        action: 'enable' | 'disable';
+      }
+    | {
         id: string;
         slug: string;
         name: string;
       }
     | {
         id: string;
-        slug: string;
-        name: string;
+        slug?: string;
+        name?: string;
+        fallbackEnvironment?: string;
         prev: {
           name: string;
           slug: string;
+          fallbackEnvironment?: string;
         };
       }
     | {
@@ -2693,21 +2727,284 @@ export type UserEvent = {
  * Data representing a Team.
  */
 export type Team = {
+  connect?: {
+    enabled?: boolean;
+  };
   /**
-   * The Preset's unique identifier.
+   * The ID of the user who created the Team.
    *
-   * @example ABCDEFG000011111
+   * @example R6efeCJQ2HKXywuasPDc0fOWB
+   */
+  creatorId: string;
+  /**
+   * Timestamp (in milliseconds) of when the Team was last updated.
+   *
+   * @example 1611796915677
+   */
+  updatedAt: number;
+  /**
+   * Hostname that'll be matched with emails on sign-up to automatically join the Team.
+   *
+   * @example example.com
+   */
+  emailDomain?: string | null;
+  /**
+   * When "Single Sign-On (SAML)" is configured, this object contains information regarding the configuration of the Identity Provider (IdP).
+   */
+  saml?: {
+    /**
+     * Information for the SAML Single Sign-On configuration.
+     */
+    connection?: {
+      /**
+       * The Identity Provider "type", for example Okta.
+       *
+       * @example OktaSAML
+       */
+      type: string;
+      /**
+       * Current status of the connection.
+       *
+       * @example linked
+       */
+      status: string;
+      /**
+       * Current state of the connection.
+       *
+       * @example active
+       */
+      state: string;
+      /**
+       * Timestamp (in milliseconds) of when the configuration was connected.
+       *
+       * @example 1611796915677
+       */
+      connectedAt: number;
+      /**
+       * Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.
+       *
+       * @example 1611796915677
+       */
+      lastReceivedWebhookEvent?: number;
+    };
+    /**
+     * Information for the Directory Sync configuration.
+     */
+    directory?: {
+      /**
+       * The Identity Provider "type", for example Okta.
+       *
+       * @example OktaSAML
+       */
+      type: string;
+      /**
+       * Current state of the connection.
+       *
+       * @example active
+       */
+      state: string;
+      /**
+       * Timestamp (in milliseconds) of when the configuration was connected.
+       *
+       * @example 1611796915677
+       */
+      connectedAt: number;
+      /**
+       * Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.
+       *
+       * @example 1611796915677
+       */
+      lastReceivedWebhookEvent?: number;
+    };
+    /**
+     * When `true`, interactions with the Team **must** be done with an authentication token that has been authenticated with the Team's SAML Single Sign-On provider.
+     */
+    enforced: boolean;
+    /**
+     * When "Directory Sync" is configured, this object contains a mapping of which Directory Group (by ID) should be assigned to which Vercel Team "role".
+     */
+    roles?: {
+      [key: string]:
+        | {
+            accessGroupId: string;
+          }
+        | ('OWNER' | 'MEMBER' | 'DEVELOPER' | 'SECURITY' | 'BILLING' | 'VIEWER' | 'CONTRIBUTOR');
+    };
+  };
+  /**
+   * Code that can be used to join this Team. Only visible to Team owners.
+   *
+   * @example hasihf9e89
+   */
+  inviteCode?: string;
+  /**
+   * A short description of the Team.
+   *
+   * @example Our mission is to make cloud computing accessible to everyone.
+   */
+  description: string | null;
+  /**
+   * The prefix that is prepended to automatic aliases.
+   */
+  stagingPrefix: string;
+  resourceConfig?: {
+    /**
+     * The total amount of concurrent builds that can be used.
+     */
+    concurrentBuilds?: number;
+    /**
+     * Whether every build for this team / user has elastic concurrency enabled automatically.
+     */
+    elasticConcurrencyEnabled?: boolean;
+    /**
+     * The maximum size in kilobytes of an Edge Config. Only specified if a custom limit is set.
+     */
+    edgeConfigSize?: number;
+    /**
+     * The maximum number of edge configs an account can create.
+     */
+    edgeConfigs?: number;
+    /**
+     * The maximum number of kv databases an account can create.
+     */
+    kvDatabases?: number;
+    /**
+     * The maximum number of blob stores an account can create.
+     */
+    blobStores?: number;
+    /**
+     * The maximum number of postgres databases an account can create.
+     */
+    postgresDatabases?: number;
+    buildEntitlements?: {
+      enhancedBuilds?: boolean;
+    };
+  };
+  /**
+   * The hostname that is current set as preview deployment suffix.
+   *
+   * @example example.dev
+   */
+  previewDeploymentSuffix?: string | null;
+  /**
+   * Is remote caching enabled for this team
+   */
+  remoteCaching?: {
+    enabled?: boolean;
+  };
+  /**
+   * Default deployment protection for this team
+   */
+  defaultDeploymentProtection?: {
+    passwordProtection?: {
+      deploymentType: string;
+    };
+    ssoProtection?: {
+      deploymentType: string;
+    };
+  };
+  /**
+   * Whether toolbar is enabled on preview deployments
+   */
+  enablePreviewFeedback?: 'default' | 'default-force' | 'off' | 'off-force' | 'on' | 'on-force' | null;
+  /**
+   * Whether toolbar is enabled on production deployments
+   */
+  enableProductionFeedback?: 'default' | 'default-force' | 'off' | 'off-force' | 'on' | 'on-force' | null;
+  /**
+   * Sensitive environment variable policy for this team
+   */
+  sensitiveEnvironmentVariablePolicy?: 'default' | 'off' | 'on' | null;
+  /**
+   * Indicates if IP addresses should be accessible in observability (o11y) tooling
+   */
+  hideIpAddresses?: boolean | null;
+  /**
+   * Indicates if IP addresses should be accessible in log drains
+   */
+  hideIpAddressesInLogDrains?: boolean | null;
+  ipBuckets?: {
+    bucket: string;
+    supportUntil?: number;
+  }[];
+  /**
+   * The Team's unique identifier.
+   *
+   * @example team_nllPyCtREAqxxdyFKbbMDlxd
    */
   id: string;
-  data: {
-    query: string;
-    creatorId: string;
-    title: string;
-    groupId: string;
-    ownerId: string;
-    projectId: string;
+  /**
+   * The Team's slug, which is unique across the Vercel platform.
+   *
+   * @example my-team
+   */
+  slug: string;
+  /**
+   * Name associated with the Team account, or `null` if none has been provided.
+   *
+   * @example My Team
+   */
+  name: string | null;
+  /**
+   * The ID of the file used as avatar for this Team.
+   *
+   * @example 6eb07268bcfadd309905ffb1579354084c24655c
+   */
+  avatar: string | null;
+  /**
+   * The membership of the authenticated User in relation to the Team.
+   */
+  membership: {
+    uid?: string;
+    entitlements?: {
+      entitlement: string;
+    }[];
+    teamId?: string;
+    confirmed: boolean;
+    confirmedAt: number;
+    accessRequestedAt?: number;
+    role: 'BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'SECURITY' | 'VIEWER';
+    teamRoles?: ('BILLING' | 'CONTRIBUTOR' | 'DEVELOPER' | 'MEMBER' | 'OWNER' | 'SECURITY' | 'VIEWER')[];
+    teamPermissions?: (
+      | 'CreateProject'
+      | 'EnvVariableManager'
+      | 'EnvironmentManager'
+      | 'FullProductionDeployment'
+      | 'UsageViewer'
+    )[];
     createdAt: number;
+    created: number;
+    joinedFrom?: {
+      origin:
+        | 'bitbucket'
+        | 'dsync'
+        | 'feedback'
+        | 'github'
+        | 'gitlab'
+        | 'import'
+        | 'link'
+        | 'mail'
+        | 'organization-teams'
+        | 'saml'
+        | 'teams';
+      commitId?: string;
+      repoId?: string;
+      repoPath?: string;
+      gitUserId?: string | number;
+      gitUserLogin?: string;
+      ssoUserId?: string;
+      ssoConnectedAt?: number;
+      idpUserId?: string;
+      dsyncUserId?: string;
+      dsyncConnectedAt?: number;
+    };
   };
+  /**
+   * UNIX timestamp (in milliseconds) when the Team was created.
+   *
+   * @example 1630748523395
+   */
+  createdAt: number;
 };
 
 /**
@@ -2792,7 +3089,6 @@ export type TeamLimited = {
      */
     enforced: boolean;
   };
-  mfaEnforced?: boolean;
   /**
    * The Team's unique identifier.
    *
@@ -2865,10 +3161,6 @@ export type TeamLimited = {
       dsyncConnectedAt?: number;
     };
   };
-  /**
-   * Will remain undocumented. Remove in v3 API.
-   */
-  created: string;
   /**
    * UNIX timestamp (in milliseconds) when the Team was created.
    *
@@ -3001,6 +3293,7 @@ export type AuthUser = {
       | 'blobTotalAvgSizeInBytes'
       | 'blobTotalGetResponseObjectSizeInBytes'
       | 'blobTotalSimpleRequests'
+      | 'connectDataTransfer'
       | 'dataCacheRead'
       | 'dataCacheWrite'
       | 'edgeConfigRead'
@@ -3012,6 +3305,8 @@ export type AuthUser = {
       | 'elasticConcurrencyBuildSlots'
       | 'fastDataTransfer'
       | 'fastOriginTransfer'
+      | 'fluidCpuDuration'
+      | 'fluidDuration'
       | 'functionDuration'
       | 'functionInvocation'
       | 'imageOptimizationCacheRead'
@@ -3020,17 +3315,11 @@ export type AuthUser = {
       | 'logDrainsVolume'
       | 'monitoringMetric'
       | 'observabilityEvent'
-      | 'postgresComputeTime'
-      | 'postgresDataStorage'
-      | 'postgresDataTransfer'
-      | 'postgresDatabase'
-      | 'postgresWrittenData'
+      | 'onDemandConcurrencyMinutes'
+      | 'runtimeCacheRead'
+      | 'runtimeCacheWrite'
       | 'serverlessFunctionExecution'
       | 'sourceImages'
-      | 'storageRedisTotalBandwidthInBytes'
-      | 'storageRedisTotalCommands'
-      | 'storageRedisTotalDailyAvgStorageInBytes'
-      | 'storageRedisTotalDatabases'
       | 'wafOwaspExcessBytes'
       | 'wafOwaspRequests'
       | 'wafRateLimitRequest'
@@ -3052,6 +3341,10 @@ export type AuthUser = {
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
     concurrentBuilds?: number;
+    /**
+     * An object containing infomation related to the amount of platform resources may be allocated to the User account.
+     */
+    elasticConcurrencyEnabled?: boolean;
     /**
      * An object containing infomation related to the amount of platform resources may be allocated to the User account.
      */
@@ -3148,7 +3441,7 @@ export type AuthUser = {
       /**
        * An object containing infomation related to the amount of platform resources may be allocated to the User account.
        */
-      purchaseType?: 'enhanced' | 'ultra';
+      purchaseType?: 'enhanced' | 'turbo';
       /**
        * An object containing infomation related to the amount of platform resources may be allocated to the User account.
        */
@@ -3226,36 +3519,6 @@ export type AuthUser = {
       isCurrentlyBlocked: boolean;
     };
   };
-  northstarMigration?: {
-    /**
-     * The ID of the team we created for this user.
-     */
-    teamId: string;
-    /**
-     * The number of projects migrated for this user.
-     */
-    projects: number;
-    /**
-     * The number of stores migrated for this user.
-     */
-    stores: number;
-    /**
-     * The number of integration configurations migrated for this user.
-     */
-    integrationConfigurations: number;
-    /**
-     * The number of integration clients migrated for this user.
-     */
-    integrationClients: number;
-    /**
-     * The migration start time timestamp for this user.
-     */
-    startTime: number;
-    /**
-     * The migration end time timestamp for this user.
-     */
-    endTime: number;
-  };
   /**
    * The User's unique identifier.
    *
@@ -3290,10 +3553,6 @@ export type AuthUser = {
    * The user's default team.
    */
   defaultTeamId: string | null;
-  /**
-   * The user's version. Will always be `northstar`.
-   */
-  version: 'northstar';
 };
 
 /**
@@ -3338,10 +3597,6 @@ export type AuthUserLimited = {
    * The user's default team.
    */
   defaultTeamId: string | null;
-  /**
-   * The user's version. Will always be `northstar`.
-   */
-  version: 'northstar';
 };
 
 /**

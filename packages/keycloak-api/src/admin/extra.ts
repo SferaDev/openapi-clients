@@ -280,6 +280,7 @@ import {
   postAdminRealmsRealmLogoutAll,
   getAdminRealmsRealmOrganizations,
   postAdminRealmsRealmOrganizations,
+  getAdminRealmsRealmOrganizationsCount,
   getAdminRealmsRealmOrganizationsMembersMemberIdOrganizations,
   getAdminRealmsRealmOrganizationsOrgId,
   putAdminRealmsRealmOrganizationsOrgId,
@@ -839,6 +840,7 @@ export const operationsByPath = {
   'POST /admin/realms/{realm}/logout-all': postAdminRealmsRealmLogoutAll,
   'GET /admin/realms/{realm}/organizations': getAdminRealmsRealmOrganizations,
   'POST /admin/realms/{realm}/organizations': postAdminRealmsRealmOrganizations,
+  'GET /admin/realms/{realm}/organizations/count': getAdminRealmsRealmOrganizationsCount,
   'GET /admin/realms/{realm}/organizations/members/{member-id}/organizations':
     getAdminRealmsRealmOrganizationsMembersMemberIdOrganizations,
   'GET /admin/realms/{realm}/organizations/{org-id}': getAdminRealmsRealmOrganizationsOrgId,

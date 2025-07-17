@@ -101,6 +101,10 @@ export type ApiShieldSchemasListSuccess = Schemas.ApiShieldApiResponseCollection
   result: Schemas.ApiShieldSchemasPublicSchema[];
 };
 
+export type BrandProtectionApiDEFAULTERROR = Schemas.BrandProtectionApiError;
+
+export type BrandProtectionApiUNPROCESSABLECONTENT = Schemas.BrandProtectionApiError;
+
 export type EmailSecurityClientError = {
   /**
    * @example {"code":7003,"message":"No route for the URI"}
@@ -207,9 +211,6 @@ export type RulesetsUrlNormalization = {
 /**
  * @example {"errors":[],"messages":[],"result":{"created_on":"2022-05-05T05:15:11.602148Z","etag":"777f24a43bef5f69174aa69ceaf1dea67968d510a31d1vw3e49d34a0187c06d1","handlers":["fetch"],"id":"this-is_my_script-01","logpush":false,"modified_on":"2022-05-20T19:02:56.446492Z","placement_mode":"smart","startup_time_ms":10,"tail_consumers":[{"environment":"production","service":"my-log-consumer"}],"usage_model":"standard"},"success":true}
  */
-export type Workers200 = Schemas.WorkersScriptResponseUploadSingle & void;
+export type Workers200 = Schemas.WorkersScriptResponseUploadSingle & Record<string, any>;
 
-/**
- * @example {"errors":[],"messages":[],"result":{"created_on":"2022-05-05T05:15:11.602148Z","etag":"777f24a43bef5f69174aa69ceaf1dea67968d510a31d1vw3e49d34a0187c06d1","handlers":["fetch"],"id":"this-is_my_script-01","logpush":false,"modified_on":"2022-05-20T19:02:56.446492Z","tail_consumers":[{"environment":"production","service":"my-log-consumer"}],"usage_model":"standard"},"success":true}
- */
-export type Workers4XX = void & Schemas.WorkersApiResponseCommonFailure;
+export type Workers4XX = Schemas.WorkersApiResponseCommonFailure;

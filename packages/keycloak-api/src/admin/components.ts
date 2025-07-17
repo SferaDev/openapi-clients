@@ -8302,6 +8302,12 @@ export type GetAdminRealmsRealmGroupsQueryParams = {
   populateHierarchy?: boolean;
   q?: string;
   search?: string;
+  /**
+   * Boolean which defines whether to return the count of subgroups for each group (default: true
+   *
+   * @default true
+   */
+  subGroupsCount?: boolean;
 };
 
 export type GetAdminRealmsRealmGroupsError = Fetcher.ErrorWrapper<undefined>;
@@ -8508,6 +8514,12 @@ export type GetAdminRealmsRealmGroupsGroupIdChildrenQueryParams = {
    * A String representing either an exact group name or a partial name
    */
   search?: string;
+  /**
+   * Boolean which defines whether to return the count of subgroups for each subgroup of this group (default: true
+   *
+   * @default true
+   */
+  subGroupsCount?: boolean;
 };
 
 export type GetAdminRealmsRealmGroupsGroupIdChildrenError = Fetcher.ErrorWrapper<undefined>;
@@ -9980,6 +9992,48 @@ export const postAdminRealmsRealmOrganizations = (
     PostAdminRealmsRealmOrganizationsPathParams
   >({ url: '/admin/realms/{realm}/organizations', method: 'post', ...variables, signal });
 
+export type GetAdminRealmsRealmOrganizationsCountPathParams = {
+  /**
+   * realm name (not id!)
+   */
+  realm: string;
+};
+
+export type GetAdminRealmsRealmOrganizationsCountQueryParams = {
+  /**
+   * Boolean which defines whether the param 'search' must match exactly or not
+   */
+  exact?: boolean;
+  /**
+   * A query to search for custom attributes, in the format 'key1:value2 key2:value2'
+   */
+  q?: string;
+  /**
+   * A String representing either an organization name or domain
+   */
+  search?: string;
+};
+
+export type GetAdminRealmsRealmOrganizationsCountError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetAdminRealmsRealmOrganizationsCountVariables = {
+  pathParams: GetAdminRealmsRealmOrganizationsCountPathParams;
+  queryParams?: GetAdminRealmsRealmOrganizationsCountQueryParams;
+} & FetcherExtraProps;
+
+export const getAdminRealmsRealmOrganizationsCount = (
+  variables: GetAdminRealmsRealmOrganizationsCountVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    number,
+    GetAdminRealmsRealmOrganizationsCountError,
+    undefined,
+    {},
+    GetAdminRealmsRealmOrganizationsCountQueryParams,
+    GetAdminRealmsRealmOrganizationsCountPathParams
+  >({ url: '/admin/realms/{realm}/organizations/count', method: 'get', ...variables, signal });
+
 export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsPathParams = {
   /**
    * realm name (not id!)
@@ -9988,12 +10042,22 @@ export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsPathPara
   memberId: string;
 };
 
+export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsQueryParams = {
+  /**
+   * if false, return the full representation. Otherwise, only the basic fields are returned.
+   *
+   * @default true
+   */
+  briefRepresentation?: boolean;
+};
+
 export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsResponse = Schemas.OrganizationRepresentation[];
 
 export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsVariables = {
   pathParams: GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsPathParams;
+  queryParams?: GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsQueryParams;
 } & FetcherExtraProps;
 
 export const getAdminRealmsRealmOrganizationsMembersMemberIdOrganizations = (
@@ -10005,7 +10069,7 @@ export const getAdminRealmsRealmOrganizationsMembersMemberIdOrganizations = (
     GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsError,
     undefined,
     {},
-    {},
+    GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsQueryParams,
     GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsPathParams
   >({
     url: '/admin/realms/{realm}/organizations/members/{memberId}/organizations',
@@ -10478,6 +10542,15 @@ export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsPat
   memberId: string;
 };
 
+export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsQueryParams = {
+  /**
+   * if false, return the full representation. Otherwise, only the basic fields are returned.
+   *
+   * @default true
+   */
+  briefRepresentation?: boolean;
+};
+
 export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsResponse =
@@ -10485,6 +10558,7 @@ export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsRes
 
 export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsVariables = {
   pathParams: GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsPathParams;
+  queryParams?: GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsQueryParams;
 } & FetcherExtraProps;
 
 export const getAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizations = (
@@ -10496,7 +10570,7 @@ export const getAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizations =
     GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsError,
     undefined,
     {},
-    {},
+    GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsQueryParams,
     GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsPathParams
   >({
     url: '/admin/realms/{realm}/organizations/{orgId}/members/{memberId}/organizations',
@@ -13421,6 +13495,7 @@ export const operationsByTag = {
   organizations: {
     getAdminRealmsRealmOrganizations,
     postAdminRealmsRealmOrganizations,
+    getAdminRealmsRealmOrganizationsCount,
     getAdminRealmsRealmOrganizationsMembersMemberIdOrganizations,
     getAdminRealmsRealmOrganizationsOrgId,
     putAdminRealmsRealmOrganizationsOrgId,

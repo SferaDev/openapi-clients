@@ -1811,8 +1811,23 @@ export type UpdateProjectDataCacheResponse = {
   autoAssignCustomDomainsUpdatedBy?: string;
   buildCommand?: string | null;
   commandForIgnoringBuildStep?: string | null;
+  connectConfigurations?:
+    | {
+        envId: string | ('production' | 'preview');
+        connectConfigurationId: string;
+        passive: boolean;
+        buildsEnabled: boolean;
+        aws?: {
+          subnetIds: string[];
+          securityGroupId: string;
+        };
+        createdAt: number;
+        updatedAt: number;
+      }[]
+    | null;
   connectConfigurationId?: string | null;
   connectBuildsEnabled?: boolean;
+  passiveConnectConfigurationId?: string | null;
   createdAt?: number;
   customerSupportCodeVisibility?: boolean;
   crons?: {
@@ -2057,6 +2072,7 @@ export type UpdateProjectDataCacheResponse = {
     | 'jekyll'
     | 'middleman'
     | 'nextjs'
+    | 'nitro'
     | 'nuxtjs'
     | 'parcel'
     | 'polymer'
@@ -2304,7 +2320,6 @@ export type UpdateProjectDataCacheResponse = {
     }[];
   } | null;
   outputDirectory?: string | null;
-  passiveConnectConfigurationId?: string | null;
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
@@ -2315,40 +2330,70 @@ export type UpdateProjectDataCacheResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced' | 'ultra';
+    buildMachineType?: 'enhanced' | 'turbo';
   };
+  /**
+   * Description of why a project was rolled back, and by whom. Note that lastAliasRequest contains the from/to details of the rollback.
+   */
+  rollbackDescription?: {
+    /**
+     * The user who rolled back the project.
+     */
+    userId: string;
+    /**
+     * The username of the user who rolled back the project.
+     */
+    username: string;
+    /**
+     * User-supplied explanation of why they rolled back the project. Limited to 250 characters.
+     */
+    description: string;
+    /**
+     * Timestamp of when the rollback was requested.
+     */
+    createdAt: number;
+  };
+  /**
+   * Project-level rolling release configuration that defines how deployments should be gradually rolled out
+   */
   rollingRelease?: {
     /**
      * The environment that the release targets, currently only supports production. Adding in case we want to configure with alias groups or custom environments.
+     *
+     * @example production
      */
     target: string;
     /**
-     * minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth 0-100 stage. So once we have fetched the document with the start time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving. There is no approval required, and for the case of Vercel, it would just slowly shift traffic 0 to 100%.
-     */
-    minutesToRelease?: number;
-    /**
-     * An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.
+     * An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.
      */
     stages?:
       | {
           /**
-           * The percentage of traffic to serve to the new deployment
+           * The percentage of traffic to serve to the canary deployment (0-100)
+           *
+           * @example 25
            */
           targetPercentage: number;
           /**
-           * minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth starting percentage to ending percentage stage. So once we have fetched the document with the update time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving.
-           */
-          minutesToRelease?: number;
-          /**
-           * Whether or not this stage requires approval to proceed.
+           * Whether or not this stage requires manual approval to proceed
+           *
+           * @example false
            */
           requireApproval?: boolean;
           /**
-           * duration is the total time to serve a stage, at the given targetPercentage.
+           * Duration in minutes for automatic advancement to the next stage
+           *
+           * @example 600
            */
           duration?: number;
         }[]
       | null;
+    /**
+     * Whether the request served by a canary deployment should return a header indicating a canary was served. Defaults to `false` when omitted.
+     *
+     * @example false
+     */
+    canaryResponseHeader?: boolean;
   } | null;
   defaultResourceConfig: {
     fluid?: boolean;
@@ -2357,10 +2402,9 @@ export type UpdateProjectDataCacheResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced' | 'ultra';
+    buildMachineType?: 'enhanced' | 'turbo';
   };
   rootDirectory?: string | null;
-  serverlessFunctionRegion?: string | null;
   serverlessFunctionZeroConfigFailover?: boolean;
   skewProtectionBoundaryAt?: number;
   skewProtectionMaxAge?: number;
@@ -2368,7 +2412,7 @@ export type UpdateProjectDataCacheResponse = {
   sourceFilesOutsideRootDirectory?: boolean;
   enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
-    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
+    deploymentType: 'all' | 'all_except_custom_domains' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
@@ -2484,6 +2528,7 @@ export type UpdateProjectDataCacheResponse = {
     concurrentBuilds?: Schemas.ACLAction[];
     connect?: Schemas.ACLAction[];
     connectConfiguration?: Schemas.ACLAction[];
+    defaultDeploymentProtection?: Schemas.ACLAction[];
     domain?: Schemas.ACLAction[];
     domainAcceptDelegation?: Schemas.ACLAction[];
     domainAuthCodes?: Schemas.ACLAction[];
@@ -2537,10 +2582,12 @@ export type UpdateProjectDataCacheResponse = {
     NotificationMonitoringAlert?: Schemas.ACLAction[];
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
+    notificationPreferences?: Schemas.ACLAction[];
     notificationCustomerBudget?: Schemas.ACLAction[];
     notificationStatementOfReasons?: Schemas.ACLAction[];
     observabilityConfiguration?: Schemas.ACLAction[];
     observabilityNotebook?: Schemas.ACLAction[];
+    observabilityFunnel?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     vercelAppInstallation?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
@@ -2595,8 +2642,11 @@ export type UpdateProjectDataCacheResponse = {
     oauth2Application?: Schemas.ACLAction[];
     vercelRun?: Schemas.ACLAction[];
     vercelRunExec?: Schemas.ACLAction[];
+    apiKey?: Schemas.ACLAction[];
+    apiKeyOwnedBySelf?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
+    buildMachine?: Schemas.ACLAction[];
     productionAliasProtectionBypass?: Schemas.ACLAction[];
     connectConfigurationLink?: Schemas.ACLAction[];
     dataCacheNamespace?: Schemas.ACLAction[];
@@ -2610,6 +2660,7 @@ export type UpdateProjectDataCacheResponse = {
     deploymentPrivate?: Schemas.ACLAction[];
     deploymentPromote?: Schemas.ACLAction[];
     deploymentRollback?: Schemas.ACLAction[];
+    edgeCacheNamespace?: Schemas.ACLAction[];
     environments?: Schemas.ACLAction[];
     logs?: Schemas.ACLAction[];
     logsPreset?: Schemas.ACLAction[];
@@ -2617,10 +2668,14 @@ export type UpdateProjectDataCacheResponse = {
     optionsAllowlist?: Schemas.ACLAction[];
     job?: Schemas.ACLAction[];
     observabilityData?: Schemas.ACLAction[];
+    onDemandBuild?: Schemas.ACLAction[];
+    onDemandConcurrency?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
     projectFromV0?: Schemas.ACLAction[];
     projectAccessGroup?: Schemas.ACLAction[];
     projectAnalyticsSampling?: Schemas.ACLAction[];
+    projectCheck?: Schemas.ACLAction[];
+    projectCheckRun?: Schemas.ACLAction[];
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
     projectDomainMove?: Schemas.ACLAction[];
@@ -2684,7 +2739,12 @@ export type UpdateProjectDataCacheResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType:
+          | 'production'
+          | 'preview'
+          | 'all'
+          | 'prod_deployment_urls_and_all_previews'
+          | 'all_except_custom_domains';
         addresses: {
           value: string;
           note?: string;
@@ -2692,7 +2752,12 @@ export type UpdateProjectDataCacheResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType:
+          | 'production'
+          | 'preview'
+          | 'all'
+          | 'prod_deployment_urls_and_all_previews'
+          | 'all_except_custom_domains';
       }
     | null;
   gitComments?: {
@@ -2825,20 +2890,35 @@ export type UpdateProjectDataCacheResponse = {
     ja4Enabled?: boolean;
     firewallBypassIps?: string[];
     managedRules?: {
-      [key: string]: {
+      bot_filter: {
+        active: boolean;
+        action?: 'challenge' | 'deny' | 'log';
+      };
+      ai_bots: {
+        active: boolean;
+        action?: 'challenge' | 'deny' | 'log';
+      };
+      owasp: {
         active: boolean;
         action?: 'challenge' | 'deny' | 'log';
       };
     } | null;
+    botIdEnabled?: boolean;
   };
   oidcTokenConfig?: {
-    enabled: boolean;
+    /**
+     * Whether or not to generate OpenID Connect JSON Web Tokens.
+     */
+    enabled?: boolean;
     /**
      * - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
      */
     issuerMode?: 'global' | 'team';
   };
   tier?: 'advanced' | 'critical' | 'standard';
+  features?: {
+    webAnalytics?: boolean;
+  };
 };
 
 export type UpdateProjectDataCacheRequestBody = {
@@ -3060,6 +3140,11 @@ export type UpdateIntegrationDeploymentActionError = Fetcher.ErrorWrapper<undefi
 export type UpdateIntegrationDeploymentActionRequestBody = {
   status?: 'failed' | 'running' | 'succeeded';
   statusText?: string;
+  /**
+   * @format uri
+   * @pattern ^https?://|^sso:
+   */
+  statusUrl?: string;
   outcomes?: {
     kind: string;
     secrets: {
@@ -3201,6 +3286,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
             | 'sanity-v3'
             | 'sanity'
             | 'storybook'
+            | 'nitro'
             | null;
           commandForIgnoringBuildStep?: string | null;
           installCommand?: string | null;
@@ -3223,7 +3309,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         };
         readyStateReason?: string;
         integrations?: {
-          status: 'error' | 'skipped' | 'pending' | 'ready' | 'timeout';
+          status: 'skipped' | 'pending' | 'ready' | 'error' | 'timeout';
           startedAt: number;
           completedAt?: number;
           skippedAt?: number;
@@ -3335,7 +3421,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
                 /**
                  * The type of matching to perform
                  */
-                type: 'startsWith' | 'equals' | 'endsWith';
+                type: 'endsWith' | 'startsWith' | 'equals';
                 /**
                  * The pattern to match against branch names
                  */
@@ -3384,6 +3470,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
           | {
               id: string;
             };
+        oomReport?: 'out-of-memory';
         aliasWarning?: {
           code: string;
           message: string;
@@ -3566,11 +3653,38 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
         }[];
         functions?: {
           [key: string]: {
+            architecture?: 'x86_64' | 'arm64';
             memory?: number;
             maxDuration?: number;
             runtime?: string;
             includeFiles?: string;
             excludeFiles?: string;
+            experimentalTriggers?: {
+              /**
+               * Event type - must be "queue/v1beta" (REQUIRED)
+               */
+              type: 'queue/v1beta';
+              /**
+               * Name of the queue topic to consume from (REQUIRED)
+               */
+              topic: string;
+              /**
+               * Name of the consumer group for this trigger (REQUIRED)
+               */
+              consumer: string;
+              /**
+               * Maximum number of delivery attempts for message processing (OPTIONAL) This represents the total number of times a message can be delivered, not the number of retries. Must be at least 1 if specified. Behavior when not specified depends on the server's default configuration.
+               */
+              maxDeliveries?: number;
+              /**
+               * Delay in seconds before retrying failed executions (OPTIONAL) Behavior when not specified depends on the server's default configuration.
+               */
+              retryAfterSeconds?: number;
+              /**
+               * Initial delay in seconds before first execution attempt (OPTIONAL) Must be 0 or greater. Use 0 for no initial delay. Behavior when not specified depends on the server's default configuration.
+               */
+              initialDelaySeconds?: number;
+            }[];
           };
         } | null;
         monorepoManager?: string | null;
@@ -3597,25 +3711,105 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
                   has?: (
                     | {
                         type: 'host';
-                        value: string;
+                        value:
+                          | string
+                          | {
+                              eq?: string | number;
+                              neq?: string;
+                              inc?: string[];
+                              ninc?: string[];
+                              pre?: string;
+                              suf?: string;
+                              re?: string;
+                              gt?: number;
+                              gte?: number;
+                              lt?: number;
+                              lte?: number;
+                            };
                       }
                     | {
                         type: 'header' | 'cookie' | 'query';
                         key: string;
-                        value?: string;
+                        value?:
+                          | string
+                          | {
+                              eq?: string | number;
+                              neq?: string;
+                              inc?: string[];
+                              ninc?: string[];
+                              pre?: string;
+                              suf?: string;
+                              re?: string;
+                              gt?: number;
+                              gte?: number;
+                              lt?: number;
+                              lte?: number;
+                            };
                       }
                   )[];
                   missing?: (
                     | {
                         type: 'host';
-                        value: string;
+                        value:
+                          | string
+                          | {
+                              eq?: string | number;
+                              neq?: string;
+                              inc?: string[];
+                              ninc?: string[];
+                              pre?: string;
+                              suf?: string;
+                              re?: string;
+                              gt?: number;
+                              gte?: number;
+                              lt?: number;
+                              lte?: number;
+                            };
                       }
                     | {
                         type: 'header' | 'cookie' | 'query';
                         key: string;
-                        value?: string;
+                        value?:
+                          | string
+                          | {
+                              eq?: string | number;
+                              neq?: string;
+                              inc?: string[];
+                              ninc?: string[];
+                              pre?: string;
+                              suf?: string;
+                              re?: string;
+                              gt?: number;
+                              gte?: number;
+                              lt?: number;
+                              lte?: number;
+                            };
                       }
                   )[];
+                  mitigate?: {
+                    action: 'challenge' | 'deny';
+                  };
+                  transforms?: {
+                    type: 'request.headers' | 'request.query' | 'response.headers';
+                    op: 'append' | 'set' | 'delete';
+                    target: {
+                      key:
+                        | string
+                        | {
+                            eq?: string | number;
+                            neq?: string;
+                            inc?: string[];
+                            ninc?: string[];
+                            pre?: string;
+                            suf?: string;
+                            gt?: number;
+                            gte?: number;
+                            lt?: number;
+                            lte?: number;
+                          };
+                    };
+                    args?: string | string[];
+                  }[];
                   locale?: {
                     redirect?: {
                       [key: string]: string;
@@ -3706,6 +3900,10 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
                */
               isDefaultApp?: boolean;
               /**
+               * The project name of the default app of this deployment's microfrontends group.
+               */
+              defaultAppProjectName: string;
+              /**
                * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
                */
               defaultRoute?: string;
@@ -3716,6 +3914,14 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
                * @minItems 2
                */
               groupIds: (string | string)[];
+              /**
+               * Whether the MicrofrontendsAlias team flag should be considered enabled for this deployment or not. This is used to ensure that we don't accidentally switch an existing branch alias to a microfrontends branch alias.
+               */
+              microfrontendsAliasEnabled?: boolean;
+              /**
+               * Whether this deployment, if a preview deployment on the production branch, should get the -env-preview alias instead of a normal branch alias. This is used to always generate a microfrontends fallback on the preview branch.
+               */
+              previewEnvAliasEnabled?: boolean;
             }
           | {
               /**
@@ -3723,6 +3929,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
                */
               applications?: {
                 [key: string]: {
+                  isDefaultApp?: boolean;
                   /**
                    * This is the production alias, it will always show the most up to date of each application.
                    */
@@ -3736,6 +3943,10 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
               };
               isDefaultApp: boolean;
               /**
+               * The project name of the default app of this deployment's microfrontends group.
+               */
+              defaultAppProjectName: string;
+              /**
                * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
                */
               defaultRoute?: string;
@@ -3746,6 +3957,14 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
                * @minItems 2
                */
               groupIds: (string | string)[];
+              /**
+               * Whether the MicrofrontendsAlias team flag should be considered enabled for this deployment or not. This is used to ensure that we don't accidentally switch an existing branch alias to a microfrontends branch alias.
+               */
+              microfrontendsAliasEnabled?: boolean;
+              /**
+               * Whether this deployment, if a preview deployment on the production branch, should get the -env-preview alias instead of a normal branch alias. This is used to always generate a microfrontends fallback on the preview branch.
+               */
+              previewEnvAliasEnabled?: boolean;
             };
         /**
          * Since February 2025 the configuration must include snapshot data at the time of deployment creation to capture properties for the /deployments/:id/config endpoint utilized for displaying Deployment Configuration on the frontend This is optional because older deployments may not have this data captured
@@ -3757,6 +3976,17 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
           functionTimeout: number | null;
           secureComputePrimaryRegion: string | null;
           secureComputeFallbackRegion: string | null;
+          isUsingActiveCPU?: boolean;
+        };
+        checks?: {
+          /**
+           * Condensed check data. Retrieve individual check and check run data using api-checks v2 routes.
+           */
+          ['deployment-alias']: {
+            state: 'succeeded' | 'failed' | 'pending';
+            startedAt: number;
+            completedAt?: number;
+          };
         };
       }
     | {
@@ -3824,7 +4054,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
                 /**
                  * The type of matching to perform
                  */
-                type: 'startsWith' | 'equals' | 'endsWith';
+                type: 'endsWith' | 'startsWith' | 'equals';
                 /**
                  * The pattern to match against branch names
                  */
@@ -3873,6 +4103,7 @@ export const getDeployment = (variables: GetDeploymentVariables, signal?: AbortS
           | {
               id: string;
             };
+        oomReport?: 'out-of-memory';
         aliasWarning?: {
           code: string;
           message: string;
@@ -4117,6 +4348,7 @@ export type CreateDeploymentResponse = {
       | 'jekyll'
       | 'middleman'
       | 'nextjs'
+      | 'nitro'
       | 'nuxtjs'
       | 'parcel'
       | 'polymer'
@@ -4242,8 +4474,8 @@ export type CreateDeploymentResponse = {
   ready?: number;
   status: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
   team?: {
-    name: string;
     id: string;
+    name: string;
     slug: string;
     avatar?: string;
   };
@@ -4275,7 +4507,7 @@ export type CreateDeploymentResponse = {
           /**
            * The type of matching to perform
            */
-          type: 'startsWith' | 'equals' | 'endsWith';
+          type: 'endsWith' | 'startsWith' | 'equals';
           /**
            * The pattern to match against branch names
            */
@@ -4324,11 +4556,12 @@ export type CreateDeploymentResponse = {
     | {
         id: string;
       };
-  type: 'LAMBDAS';
+  oomReport?: 'out-of-memory';
+  id: string;
   name: string;
   createdAt: number;
+  type: 'LAMBDAS';
   deletedAt?: number | null;
-  id: string;
   version: 2;
   /**
    * applies to custom domains only, defaults to `true`
@@ -4439,12 +4672,12 @@ export type CreateDeploymentResponse = {
   readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
   source?: 'api-trigger-git-deploy' | 'cli' | 'clone/repo' | 'git' | 'import' | 'import/repo' | 'redeploy' | 'v0-web';
   target?: 'production' | 'staging' | null;
+  errorMessage?: string | null;
   /**
    * Since November 2023 this field defines a set of regions that we will deploy the lambda to passively Lambdas will be deployed to these regions but only invoked if all of the primary `regions` are marked as out of service
    */
   passiveRegions?: string[];
   regions: string[];
-  errorMessage?: string | null;
   aliasWarning?: {
     code: string;
     message: string;
@@ -4487,58 +4720,10 @@ export type CreateDeploymentResponse = {
     project_id: string;
     environment: string;
   };
-  plan: 'enterprise' | 'hobby' | 'pro';
   projectId: string;
   ownerId: string;
-  microfrontends?:
-    | {
-        /**
-         * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
-         */
-        isDefaultApp?: boolean;
-        /**
-         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
-         */
-        defaultRoute?: string;
-        /**
-         * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
-         *
-         * @maxItems 2
-         * @minItems 2
-         */
-        groupIds: (string | string)[];
-      }
-    | {
-        /**
-         * A map of the other applications that are part of this group. Only defined on the default application. The field is set after deployments have been created, so can be undefined, but should be there for a successful deployment.
-         */
-        applications?: {
-          [key: string]: {
-            /**
-             * This is the production alias, it will always show the most up to date of each application.
-             */
-            productionHost: string;
-            /**
-             * Use the fixed deploymentAlias and deploymentHost so that the microfrontend preview stays in sync with the deployment. These are only present for mono-repos when a single commit creates multiple deployments. If they are not present, productionHost will be used.
-             */
-            deploymentAlias?: string;
-            deploymentHost?: string;
-          };
-        };
-        isDefaultApp: boolean;
-        /**
-         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
-         */
-        defaultRoute?: string;
-        /**
-         * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
-         *
-         * @maxItems 2
-         * @minItems 2
-         */
-        groupIds: (string | string)[];
-      };
   monorepoManager?: string | null;
+  plan: 'enterprise' | 'hobby' | 'pro';
   /**
    * Since February 2025 the configuration must include snapshot data at the time of deployment creation to capture properties for the /deployments/:id/config endpoint utilized for displaying Deployment Configuration on the frontend This is optional because older deployments may not have this data captured
    */
@@ -4549,14 +4734,42 @@ export type CreateDeploymentResponse = {
     functionTimeout: number | null;
     secureComputePrimaryRegion: string | null;
     secureComputeFallbackRegion: string | null;
+    isUsingActiveCPU?: boolean;
   };
   functions?: {
     [key: string]: {
+      architecture?: 'arm64' | 'x86_64';
       memory?: number;
       maxDuration?: number;
       runtime?: string;
       includeFiles?: string;
       excludeFiles?: string;
+      experimentalTriggers?: {
+        /**
+         * Event type - must be "queue/v1beta" (REQUIRED)
+         */
+        type: 'queue/v1beta';
+        /**
+         * Name of the queue topic to consume from (REQUIRED)
+         */
+        topic: string;
+        /**
+         * Name of the consumer group for this trigger (REQUIRED)
+         */
+        consumer: string;
+        /**
+         * Maximum number of delivery attempts for message processing (OPTIONAL) This represents the total number of times a message can be delivered, not the number of retries. Must be at least 1 if specified. Behavior when not specified depends on the server's default configuration.
+         */
+        maxDeliveries?: number;
+        /**
+         * Delay in seconds before retrying failed executions (OPTIONAL) Behavior when not specified depends on the server's default configuration.
+         */
+        retryAfterSeconds?: number;
+        /**
+         * Initial delay in seconds before first execution attempt (OPTIONAL) Must be 0 or greater. Use 0 for no initial delay. Behavior when not specified depends on the server's default configuration.
+         */
+        initialDelaySeconds?: number;
+      }[];
     };
   } | null;
   routes:
@@ -4577,25 +4790,105 @@ export type CreateDeploymentResponse = {
             has?: (
               | {
                   type: 'host';
-                  value: string;
+                  value:
+                    | string
+                    | {
+                        eq?: string | number;
+                        neq?: string;
+                        inc?: string[];
+                        ninc?: string[];
+                        pre?: string;
+                        suf?: string;
+                        re?: string;
+                        gt?: number;
+                        gte?: number;
+                        lt?: number;
+                        lte?: number;
+                      };
                 }
               | {
                   type: 'header' | 'cookie' | 'query';
                   key: string;
-                  value?: string;
+                  value?:
+                    | string
+                    | {
+                        eq?: string | number;
+                        neq?: string;
+                        inc?: string[];
+                        ninc?: string[];
+                        pre?: string;
+                        suf?: string;
+                        re?: string;
+                        gt?: number;
+                        gte?: number;
+                        lt?: number;
+                        lte?: number;
+                      };
                 }
             )[];
             missing?: (
               | {
                   type: 'host';
-                  value: string;
+                  value:
+                    | string
+                    | {
+                        eq?: string | number;
+                        neq?: string;
+                        inc?: string[];
+                        ninc?: string[];
+                        pre?: string;
+                        suf?: string;
+                        re?: string;
+                        gt?: number;
+                        gte?: number;
+                        lt?: number;
+                        lte?: number;
+                      };
                 }
               | {
                   type: 'header' | 'cookie' | 'query';
                   key: string;
-                  value?: string;
+                  value?:
+                    | string
+                    | {
+                        eq?: string | number;
+                        neq?: string;
+                        inc?: string[];
+                        ninc?: string[];
+                        pre?: string;
+                        suf?: string;
+                        re?: string;
+                        gt?: number;
+                        gte?: number;
+                        lt?: number;
+                        lte?: number;
+                      };
                 }
             )[];
+            mitigate?: {
+              action: 'challenge' | 'deny';
+            };
+            transforms?: {
+              type: 'request.headers' | 'request.query' | 'response.headers';
+              op: 'append' | 'set' | 'delete';
+              target: {
+                key:
+                  | string
+                  | {
+                      eq?: string | number;
+                      neq?: string;
+                      inc?: string[];
+                      ninc?: string[];
+                      pre?: string;
+                      suf?: string;
+                      gt?: number;
+                      gte?: number;
+                      lt?: number;
+                      lte?: number;
+                    };
+              };
+              args?: string | string[];
+            }[];
             locale?: {
               redirect?: {
                 [key: string]: string;
@@ -4632,6 +4925,89 @@ export type CreateDeploymentResponse = {
     schedule: string;
     path: string;
   }[];
+  checks?: {
+    /**
+     * Condensed check data. Retrieve individual check and check run data using api-checks v2 routes.
+     */
+    ['deployment-alias']: {
+      state: 'failed' | 'pending' | 'succeeded';
+      startedAt: number;
+      completedAt?: number;
+    };
+  };
+  microfrontends?:
+    | {
+        /**
+         * Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
+         */
+        isDefaultApp?: boolean;
+        /**
+         * The project name of the default app of this deployment's microfrontends group.
+         */
+        defaultAppProjectName: string;
+        /**
+         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+         */
+        defaultRoute?: string;
+        /**
+         * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+         *
+         * @maxItems 2
+         * @minItems 2
+         */
+        groupIds: (string | string)[];
+        /**
+         * Whether the MicrofrontendsAlias team flag should be considered enabled for this deployment or not. This is used to ensure that we don't accidentally switch an existing branch alias to a microfrontends branch alias.
+         */
+        microfrontendsAliasEnabled?: boolean;
+        /**
+         * Whether this deployment, if a preview deployment on the production branch, should get the -env-preview alias instead of a normal branch alias. This is used to always generate a microfrontends fallback on the preview branch.
+         */
+        previewEnvAliasEnabled?: boolean;
+      }
+    | {
+        /**
+         * A map of the other applications that are part of this group. Only defined on the default application. The field is set after deployments have been created, so can be undefined, but should be there for a successful deployment.
+         */
+        applications?: {
+          [key: string]: {
+            isDefaultApp?: boolean;
+            /**
+             * This is the production alias, it will always show the most up to date of each application.
+             */
+            productionHost: string;
+            /**
+             * Use the fixed deploymentAlias and deploymentHost so that the microfrontend preview stays in sync with the deployment. These are only present for mono-repos when a single commit creates multiple deployments. If they are not present, productionHost will be used.
+             */
+            deploymentAlias?: string;
+            deploymentHost?: string;
+          };
+        };
+        isDefaultApp: boolean;
+        /**
+         * The project name of the default app of this deployment's microfrontends group.
+         */
+        defaultAppProjectName: string;
+        /**
+         * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
+         */
+        defaultRoute?: string;
+        /**
+         * The group of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
+         *
+         * @maxItems 2
+         * @minItems 2
+         */
+        groupIds: (string | string)[];
+        /**
+         * Whether the MicrofrontendsAlias team flag should be considered enabled for this deployment or not. This is used to ensure that we don't accidentally switch an existing branch alias to a microfrontends branch alias.
+         */
+        microfrontendsAliasEnabled?: boolean;
+        /**
+         * Whether this deployment, if a preview deployment on the production branch, should get the -env-preview alias instead of a normal branch alias. This is used to always generate a microfrontends fallback on the preview branch.
+         */
+        previewEnvAliasEnabled?: boolean;
+      };
   connectBuildsEnabled?: boolean;
   connectConfigurationId?: string;
   createdIn: string;
@@ -4755,6 +5131,12 @@ export type CreateDeploymentRequestBody = {
      */
     commitAuthorName?: string;
     /**
+     * The email of the author of the commit
+     *
+     * @example kyliau@example.com
+     */
+    commitAuthorEmail?: string;
+    /**
      * The commit message
      *
      * @example add method to measure Interaction to Next Paint (INP) (#36490)
@@ -4795,14 +5177,6 @@ export type CreateDeploymentRequestBody = {
         repo: string;
         sha?: string;
         type: 'github';
-      }
-    | {
-        org: string;
-        ref: string;
-        repo: string;
-        sha?: string;
-        host: string;
-        type: 'github-custom-host';
       }
     | {
         projectId: number | string;
@@ -4894,6 +5268,7 @@ export type CreateDeploymentRequestBody = {
       | 'jekyll'
       | 'middleman'
       | 'nextjs'
+      | 'nitro'
       | any
       | 'nuxtjs'
       | 'parcel'
@@ -5055,6 +5430,7 @@ export type CancelDeploymentResponse = {
       | 'jekyll'
       | 'middleman'
       | 'nextjs'
+      | 'nitro'
       | 'nuxtjs'
       | 'parcel'
       | 'polymer'
@@ -5214,7 +5590,7 @@ export type CancelDeploymentResponse = {
           /**
            * The type of matching to perform
            */
-          type: 'startsWith' | 'equals' | 'endsWith';
+          type: 'endsWith' | 'startsWith' | 'equals';
           /**
            * The pattern to match against branch names
            */
@@ -5263,6 +5639,7 @@ export type CancelDeploymentResponse = {
     | {
         id: string;
       };
+  oomReport?: 'out-of-memory';
   id: string;
   aliasError?: {
     code: string;
@@ -5435,11 +5812,38 @@ export type CancelDeploymentResponse = {
   }[];
   functions?: {
     [key: string]: {
+      architecture?: 'arm64' | 'x86_64';
       memory?: number;
       maxDuration?: number;
       runtime?: string;
       includeFiles?: string;
       excludeFiles?: string;
+      experimentalTriggers?: {
+        /**
+         * Event type - must be "queue/v1beta" (REQUIRED)
+         */
+        type: 'queue/v1beta';
+        /**
+         * Name of the queue topic to consume from (REQUIRED)
+         */
+        topic: string;
+        /**
+         * Name of the consumer group for this trigger (REQUIRED)
+         */
+        consumer: string;
+        /**
+         * Maximum number of delivery attempts for message processing (OPTIONAL) This represents the total number of times a message can be delivered, not the number of retries. Must be at least 1 if specified. Behavior when not specified depends on the server's default configuration.
+         */
+        maxDeliveries?: number;
+        /**
+         * Delay in seconds before retrying failed executions (OPTIONAL) Behavior when not specified depends on the server's default configuration.
+         */
+        retryAfterSeconds?: number;
+        /**
+         * Initial delay in seconds before first execution attempt (OPTIONAL) Must be 0 or greater. Use 0 for no initial delay. Behavior when not specified depends on the server's default configuration.
+         */
+        initialDelaySeconds?: number;
+      }[];
     };
   } | null;
   monorepoManager?: string | null;
@@ -5468,25 +5872,105 @@ export type CancelDeploymentResponse = {
             has?: (
               | {
                   type: 'host';
-                  value: string;
+                  value:
+                    | string
+                    | {
+                        eq?: string | number;
+                        neq?: string;
+                        inc?: string[];
+                        ninc?: string[];
+                        pre?: string;
+                        suf?: string;
+                        re?: string;
+                        gt?: number;
+                        gte?: number;
+                        lt?: number;
+                        lte?: number;
+                      };
                 }
               | {
                   type: 'header' | 'cookie' | 'query';
                   key: string;
-                  value?: string;
+                  value?:
+                    | string
+                    | {
+                        eq?: string | number;
+                        neq?: string;
+                        inc?: string[];
+                        ninc?: string[];
+                        pre?: string;
+                        suf?: string;
+                        re?: string;
+                        gt?: number;
+                        gte?: number;
+                        lt?: number;
+                        lte?: number;
+                      };
                 }
             )[];
             missing?: (
               | {
                   type: 'host';
-                  value: string;
+                  value:
+                    | string
+                    | {
+                        eq?: string | number;
+                        neq?: string;
+                        inc?: string[];
+                        ninc?: string[];
+                        pre?: string;
+                        suf?: string;
+                        re?: string;
+                        gt?: number;
+                        gte?: number;
+                        lt?: number;
+                        lte?: number;
+                      };
                 }
               | {
                   type: 'header' | 'cookie' | 'query';
                   key: string;
-                  value?: string;
+                  value?:
+                    | string
+                    | {
+                        eq?: string | number;
+                        neq?: string;
+                        inc?: string[];
+                        ninc?: string[];
+                        pre?: string;
+                        suf?: string;
+                        re?: string;
+                        gt?: number;
+                        gte?: number;
+                        lt?: number;
+                        lte?: number;
+                      };
                 }
             )[];
+            mitigate?: {
+              action: 'challenge' | 'deny';
+            };
+            transforms?: {
+              type: 'request.headers' | 'request.query' | 'response.headers';
+              op: 'append' | 'set' | 'delete';
+              target: {
+                key:
+                  | string
+                  | {
+                      eq?: string | number;
+                      neq?: string;
+                      inc?: string[];
+                      ninc?: string[];
+                      pre?: string;
+                      suf?: string;
+                      gt?: number;
+                      gte?: number;
+                      lt?: number;
+                      lte?: number;
+                    };
+              };
+              args?: string | string[];
+            }[];
             locale?: {
               redirect?: {
                 [key: string]: string;
@@ -5577,6 +6061,10 @@ export type CancelDeploymentResponse = {
          */
         isDefaultApp?: boolean;
         /**
+         * The project name of the default app of this deployment's microfrontends group.
+         */
+        defaultAppProjectName: string;
+        /**
          * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
          */
         defaultRoute?: string;
@@ -5587,6 +6075,14 @@ export type CancelDeploymentResponse = {
          * @minItems 2
          */
         groupIds: (string | string)[];
+        /**
+         * Whether the MicrofrontendsAlias team flag should be considered enabled for this deployment or not. This is used to ensure that we don't accidentally switch an existing branch alias to a microfrontends branch alias.
+         */
+        microfrontendsAliasEnabled?: boolean;
+        /**
+         * Whether this deployment, if a preview deployment on the production branch, should get the -env-preview alias instead of a normal branch alias. This is used to always generate a microfrontends fallback on the preview branch.
+         */
+        previewEnvAliasEnabled?: boolean;
       }
     | {
         /**
@@ -5594,6 +6090,7 @@ export type CancelDeploymentResponse = {
          */
         applications?: {
           [key: string]: {
+            isDefaultApp?: boolean;
             /**
              * This is the production alias, it will always show the most up to date of each application.
              */
@@ -5607,6 +6104,10 @@ export type CancelDeploymentResponse = {
         };
         isDefaultApp: boolean;
         /**
+         * The project name of the default app of this deployment's microfrontends group.
+         */
+        defaultAppProjectName: string;
+        /**
          * A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI.
          */
         defaultRoute?: string;
@@ -5617,6 +6118,14 @@ export type CancelDeploymentResponse = {
          * @minItems 2
          */
         groupIds: (string | string)[];
+        /**
+         * Whether the MicrofrontendsAlias team flag should be considered enabled for this deployment or not. This is used to ensure that we don't accidentally switch an existing branch alias to a microfrontends branch alias.
+         */
+        microfrontendsAliasEnabled?: boolean;
+        /**
+         * Whether this deployment, if a preview deployment on the production branch, should get the -env-preview alias instead of a normal branch alias. This is used to always generate a microfrontends fallback on the preview branch.
+         */
+        previewEnvAliasEnabled?: boolean;
       };
   /**
    * Since February 2025 the configuration must include snapshot data at the time of deployment creation to capture properties for the /deployments/:id/config endpoint utilized for displaying Deployment Configuration on the frontend This is optional because older deployments may not have this data captured
@@ -5628,6 +6137,17 @@ export type CancelDeploymentResponse = {
     functionTimeout: number | null;
     secureComputePrimaryRegion: string | null;
     secureComputeFallbackRegion: string | null;
+    isUsingActiveCPU?: boolean;
+  };
+  checks?: {
+    /**
+     * Condensed check data. Retrieve individual check and check run data using api-checks v2 routes.
+     */
+    ['deployment-alias']: {
+      state: 'failed' | 'pending' | 'succeeded';
+      startedAt: number;
+      completedAt?: number;
+    };
   };
 };
 
@@ -5806,7 +6326,7 @@ export type CheckDomainPriceResponse = {
    *
    * @example 1
    */
-  period: number;
+  period: 1 | 10 | 2;
 };
 
 export type CheckDomainPriceVariables = {
@@ -7509,7 +8029,7 @@ export const createOrTransferDomain = (variables: CreateOrTransferDomainVariable
     {},
     CreateOrTransferDomainQueryParams,
     {}
-  >({ url: '/v5/domains', method: 'post', ...variables, signal });
+  >({ url: '/v7/domains', method: 'post', ...variables, signal });
 
 export type PatchDomainPathParams = {
   domain?: string;
@@ -7662,41 +8182,6 @@ export const deleteDomain = (variables: DeleteDomainVariables, signal?: AbortSig
     ...variables,
     signal
   });
-
-export type DeleteConfigurableLogDrainPathParams = {
-  id: string;
-};
-
-export type DeleteConfigurableLogDrainQueryParams = {
-  /**
-   * The Team identifier to perform the request on behalf of.
-   */
-  teamId?: string;
-  /**
-   * The Team slug to perform the request on behalf of.
-   */
-  slug?: string;
-};
-
-export type DeleteConfigurableLogDrainError = Fetcher.ErrorWrapper<undefined>;
-
-export type DeleteConfigurableLogDrainVariables = {
-  pathParams: DeleteConfigurableLogDrainPathParams;
-  queryParams?: DeleteConfigurableLogDrainQueryParams;
-} & FetcherExtraProps;
-
-/**
- * Deletes a Configurable Log Drain. This endpoint must be called with a team AccessToken (integration OAuth2 clients are not allowed). Only log drains owned by the authenticated team can be deleted.
- */
-export const deleteConfigurableLogDrain = (variables: DeleteConfigurableLogDrainVariables, signal?: AbortSignal) =>
-  fetch<
-    undefined,
-    DeleteConfigurableLogDrainError,
-    undefined,
-    {},
-    DeleteConfigurableLogDrainQueryParams,
-    DeleteConfigurableLogDrainPathParams
-  >({ url: '/v1/log-drains/{id}', method: 'delete', ...variables, signal });
 
 export type GetEdgeConfigsQueryParams = {
   /**
@@ -8026,6 +8511,8 @@ export type GetEdgeConfigItemsQueryParams = {
 
 export type GetEdgeConfigItemsError = Fetcher.ErrorWrapper<undefined>;
 
+export type GetEdgeConfigItemsResponse = Schemas.EdgeConfigItem[];
+
 export type GetEdgeConfigItemsVariables = {
   pathParams: GetEdgeConfigItemsPathParams;
   queryParams?: GetEdgeConfigItemsQueryParams;
@@ -8036,7 +8523,7 @@ export type GetEdgeConfigItemsVariables = {
  */
 export const getEdgeConfigItems = (variables: GetEdgeConfigItemsVariables, signal?: AbortSignal) =>
   fetch<
-    Schemas.EdgeConfigItem,
+    GetEdgeConfigItemsResponse,
     GetEdgeConfigItemsError,
     undefined,
     {},
@@ -8706,6 +9193,9 @@ export type GetMemberError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetMemberResponse = {
   id: string;
+  /**
+   * "The `ADMIN` role, by default, is provided to users capable of installing integrations, while the `USER` role can be granted to Vercel users with the Vercel `Billing` or Vercel `Viewer` role, which are considered to be Read-Only roles."
+   */
   role: 'ADMIN' | 'USER';
 };
 
@@ -8764,6 +9254,278 @@ export const createEvent = (variables: CreateEventVariables, signal?: AbortSigna
   fetch<undefined, CreateEventError, CreateEventRequestBody, {}, {}, CreateEventPathParams>({
     url: '/v1/installations/{integrationConfigurationId}/events',
     method: 'post',
+    ...variables,
+    signal
+  });
+
+export type GetIntegrationResourcesPathParams = {
+  integrationConfigurationId: string;
+};
+
+export type GetIntegrationResourcesError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetIntegrationResourcesResponse = {
+  resources: {
+    /**
+     * The ID provided by the partner for the given resource
+     */
+    partnerId: string;
+    /**
+     * The ID assigned by Vercel for the given resource
+     */
+    internalId: string;
+    /**
+     * The name of the resource as it is recorded in Vercel
+     */
+    name: string;
+    /**
+     * The current status of the resource
+     */
+    status?: 'error' | 'pending' | 'ready' | 'resumed' | 'suspended' | 'uninstalled';
+    /**
+     * The ID of the product the resource is derived from
+     */
+    productId: string;
+    /**
+     * Any settings provided for the resource to support its product's protocols
+     */
+    protocolSettings?: {
+      experimentation?: {
+        edgeConfigSyncingEnabled?: boolean;
+        edgeConfigId?: string;
+        edgeConfigTokenId?: string;
+      };
+    };
+    /**
+     * The notification, if set, displayed to the user when viewing the resource in Vercel
+     */
+    notification?: {
+      level: 'error' | 'info' | 'warn';
+      title: string;
+      message?: string;
+      href?: string;
+    };
+    /**
+     * The ID of the billing plan the resource is subscribed to, if applicable
+     */
+    billingPlanId?: string;
+    /**
+     * The configured metadata for the resource as defined by its product's Metadata Schema
+     */
+    metadata?: {
+      [key: string]: string | number | boolean | string[] | number[];
+    };
+  }[];
+};
+
+export type GetIntegrationResourcesVariables = {
+  pathParams: GetIntegrationResourcesPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Get all resources for a given installation ID.
+ */
+export const getIntegrationResources = (variables: GetIntegrationResourcesVariables, signal?: AbortSignal) =>
+  fetch<
+    GetIntegrationResourcesResponse,
+    GetIntegrationResourcesError,
+    undefined,
+    {},
+    {},
+    GetIntegrationResourcesPathParams
+  >({ url: '/v1/installations/{integrationConfigurationId}/resources', method: 'get', ...variables, signal });
+
+export type GetIntegrationResourcePathParams = {
+  /**
+   * The ID of the integration configuration (installation) the resource belongs to
+   */
+  integrationConfigurationId: string;
+  /**
+   * The ID provided by the 3rd party provider for the given resource
+   */
+  resourceId: string;
+};
+
+export type GetIntegrationResourceError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetIntegrationResourceResponse = {
+  /**
+   * The ID provided by the 3rd party provider for the given resource
+   */
+  id: string;
+  /**
+   * The ID assigned by Vercel for the given resource
+   */
+  internalId: string;
+  /**
+   * The name of the resource as it is recorded in Vercel
+   */
+  name: string;
+  /**
+   * The current status of the resource
+   */
+  status?: 'error' | 'pending' | 'ready' | 'resumed' | 'suspended' | 'uninstalled';
+  /**
+   * The ID of the product the resource is derived from
+   */
+  productId: string;
+  /**
+   * Any settings provided for the resource to support its product's protocols
+   */
+  protocolSettings?: {
+    experimentation?: {
+      edgeConfigSyncingEnabled?: boolean;
+      edgeConfigId?: string;
+      edgeConfigTokenId?: string;
+    };
+  };
+  /**
+   * The notification, if set, displayed to the user when viewing the resource in Vercel
+   */
+  notification?: {
+    level: 'error' | 'info' | 'warn';
+    title: string;
+    message?: string;
+    href?: string;
+  };
+  /**
+   * The ID of the billing plan the resource is subscribed to, if applicable
+   */
+  billingPlanId?: string;
+  /**
+   * The configured metadata for the resource as defined by its product's Metadata Schema
+   */
+  metadata?: {
+    [key: string]: string | number | boolean | string[] | number[];
+  };
+};
+
+export type GetIntegrationResourceVariables = {
+  pathParams: GetIntegrationResourcePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Get a resource by its partner ID.
+ */
+export const getIntegrationResource = (variables: GetIntegrationResourceVariables, signal?: AbortSignal) =>
+  fetch<
+    GetIntegrationResourceResponse,
+    GetIntegrationResourceError,
+    undefined,
+    {},
+    {},
+    GetIntegrationResourcePathParams
+  >({
+    url: '/v1/installations/{integrationConfigurationId}/resources/{resourceId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
+
+export type DeleteIntegrationResourcePathParams = {
+  integrationConfigurationId: string;
+  resourceId: string;
+};
+
+export type DeleteIntegrationResourceError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteIntegrationResourceVariables = {
+  pathParams: DeleteIntegrationResourcePathParams;
+} & FetcherExtraProps;
+
+/**
+ * Delete a resource owned by the selected installation ID.
+ */
+export const deleteIntegrationResource = (variables: DeleteIntegrationResourceVariables, signal?: AbortSignal) =>
+  fetch<undefined, DeleteIntegrationResourceError, undefined, {}, {}, DeleteIntegrationResourcePathParams>({
+    url: '/v1/installations/{integrationConfigurationId}/resources/{resourceId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
+
+export type ImportResourcePathParams = {
+  integrationConfigurationId: string;
+  resourceId: string;
+};
+
+export type ImportResourceError = Fetcher.ErrorWrapper<undefined>;
+
+export type ImportResourceResponse = {
+  name: string;
+};
+
+export type ImportResourceRequestBody = {
+  productId: string;
+  name: string;
+  status: 'error' | 'pending' | 'ready' | 'resumed' | 'suspended' | 'uninstalled';
+  metadata?: {
+    [key: string]: any;
+  };
+  billingPlan?: {
+    id: string;
+    type: 'prepayment' | 'subscription';
+    name: string;
+    description?: string;
+    paymentMethodRequired?: boolean;
+    cost?: string;
+    details?: {
+      label: string;
+      value?: string;
+    }[];
+    heightlightedDetails?: {
+      label: string;
+      value?: string;
+    }[];
+    effectiveDate?: string;
+  } & {
+    [key: string]: any;
+  };
+  notification?: {
+    level: 'error' | 'info' | 'warn';
+    title: string;
+    message?: string;
+    /**
+     * @format uri
+     */
+    href?: string;
+  };
+  secrets?: {
+    name: string;
+    value: string;
+    prefix?: string;
+    /**
+     * A map of environments to override values for the secret, used for setting different values across deployments in production, preview, and development environments. Note: the same value will be used for all deployments in the given environment.
+     */
+    environmentOverrides?: {
+      /**
+       * Value used for development environment.
+       */
+      development?: string;
+      /**
+       * Value used for preview environment.
+       */
+      preview?: string;
+      /**
+       * Value used for production environment.
+       */
+      production?: string;
+    };
+  }[];
+};
+
+export type ImportResourceVariables = {
+  body: ImportResourceRequestBody;
+  pathParams: ImportResourcePathParams;
+} & FetcherExtraProps;
+
+/**
+ * This endpoint imports (upserts) a resource to Vercel's installation. This may be needed if resources can be independently created on the partner's side and need to be synchronized to Vercel.
+ */
+export const importResource = (variables: ImportResourceVariables, signal?: AbortSignal) =>
+  fetch<ImportResourceResponse, ImportResourceError, ImportResourceRequestBody, {}, {}, ImportResourcePathParams>({
+    url: '/v1/installations/{integrationConfigurationId}/resources/{resourceId}',
+    method: 'put',
     ...variables,
     signal
   });
@@ -9379,6 +10141,23 @@ export type UpdateResourceSecretsRequestBody = {
     name: string;
     value: string;
     prefix?: string;
+    /**
+     * A map of environments to override values for the secret, used for setting different values across deployments in production, preview, and development environments. Note: the same value will be used for all deployments in the given environment.
+     */
+    environmentOverrides?: {
+      /**
+       * Value used for development environment.
+       */
+      development?: string;
+      /**
+       * Value used for preview environment.
+       */
+      preview?: string;
+      /**
+       * Value used for production environment.
+       */
+      production?: string;
+    };
   }[];
   /**
    * If true, will only update the provided secrets
@@ -9421,9 +10200,26 @@ export type UpdateResourceSecretsByIdRequestBody = {
     name: string;
     value: string;
     prefix?: string;
+    /**
+     * A map of environments to override values for the secret, used for setting different values across deployments in production, preview, and development environments. Note: the same value will be used for all deployments in the given environment.
+     */
+    environmentOverrides?: {
+      /**
+       * Value used for development environment.
+       */
+      development?: string;
+      /**
+       * Value used for preview environment.
+       */
+      preview?: string;
+      /**
+       * Value used for production environment.
+       */
+      production?: string;
+    };
   }[];
   /**
-   * If true, will only update the provided secrets
+   * If true, will only overwrite the provided secrets instead of replacing all secrets.
    */
   partial?: boolean;
 };
@@ -9446,75 +10242,6 @@ export const updateResourceSecretsById = (variables: UpdateResourceSecretsByIdVa
     UpdateResourceSecretsByIdPathParams
   >({
     url: '/v1/installations/{integrationConfigurationId}/resources/{resourceId}/secrets',
-    method: 'put',
-    ...variables,
-    signal
-  });
-
-export type ImportResourcePathParams = {
-  integrationConfigurationId: string;
-  resourceId: string;
-};
-
-export type ImportResourceError = Fetcher.ErrorWrapper<undefined>;
-
-export type ImportResourceResponse = {
-  name: string;
-};
-
-export type ImportResourceRequestBody = {
-  productId: string;
-  name: string;
-  status: 'error' | 'pending' | 'ready' | 'resumed' | 'suspended' | 'uninstalled';
-  metadata?: {
-    [key: string]: any;
-  };
-  billingPlan?: {
-    id: string;
-    type: 'prepayment' | 'subscription';
-    name: string;
-    description?: string;
-    paymentMethodRequired?: boolean;
-    cost?: string;
-    details?: {
-      label: string;
-      value?: string;
-    }[];
-    heightlightedDetails?: {
-      label: string;
-      value?: string;
-    }[];
-    effectiveDate?: string;
-  } & {
-    [key: string]: any;
-  };
-  notification?: {
-    level: 'error' | 'info' | 'warn';
-    title: string;
-    message?: string;
-    /**
-     * @format uri
-     */
-    href?: string;
-  };
-  secrets?: {
-    name: string;
-    value: string;
-    prefix?: string;
-  }[];
-};
-
-export type ImportResourceVariables = {
-  body: ImportResourceRequestBody;
-  pathParams: ImportResourcePathParams;
-} & FetcherExtraProps;
-
-/**
- * This endpoint imports (upserts) a resource to Vercel's installation. This may be needed if resources can be independently created on the partner's side and need to be synchronized to Vercel.
- */
-export const importResource = (variables: ImportResourceVariables, signal?: AbortSignal) =>
-  fetch<ImportResourceResponse, ImportResourceError, ImportResourceRequestBody, {}, {}, ImportResourcePathParams>({
-    url: '/v1/installations/{integrationConfigurationId}/resources/{resourceId}',
     method: 'put',
     ...variables,
     signal
@@ -9939,6 +10666,12 @@ export const getConfiguration = (variables: GetConfigurationVariables, signal?: 
          * @example all
          */
         projectSelection: 'selected' | 'all';
+        notification: {
+          level: 'info' | 'warn' | 'error';
+          title: string;
+          message?: string;
+          href?: string;
+        };
         transferRequest:
           | {
               kind: 'transfer-to-marketplace';
@@ -10171,7 +10904,7 @@ export type ExchangeSsoTokenVariables = {
 } & FetcherExtraProps;
 
 /**
- * During the autorization process, Vercel sends the user to the provider [redirectLoginUrl](https://vercel.com/docs/integrations/create-integration/submit-integration#redirect-login-url), that includes the OAuth authorization `code` parameter. The provider then calls the SSO Token Exchange endpoint with the sent code and receives the OIDC token. They log the user in based on this token and redirects the user back to the Vercel account using deep-link parameters included the redirectLoginUrl. This is used to verify the identity of the user during the [**Open in Provider** flow](https://vercel.com/docs/integrations/marketplace-flows#open-in-provider-button-flow). Providers should not persist the returned `id_token` in a database since the token will expire.
+ * During the autorization process, Vercel sends the user to the provider [redirectLoginUrl](https://vercel.com/docs/integrations/create-integration/submit-integration#redirect-login-url), that includes the OAuth authorization `code` parameter. The provider then calls the SSO Token Exchange endpoint with the sent code and receives the OIDC token. They log the user in based on this token and redirects the user back to the Vercel account using deep-link parameters included the redirectLoginUrl. Providers should not persist the returned `id_token` in a database since the token will expire. See [**Authentication with SSO**](https://vercel.com/docs/integrations/create-integration/marketplace-api#authentication-with-sso) for more details.
  */
 export const exchangeSsoToken = (variables: ExchangeSsoTokenVariables, signal?: AbortSignal) =>
   fetch<ExchangeSsoTokenResponse, ExchangeSsoTokenError, ExchangeSsoTokenRequestBody, {}, {}, {}>({
@@ -10204,7 +10937,7 @@ export type GetIntegrationLogDrainsResponse = {
   /**
    * The client configuration this log drain was created with
    *
-   * @example icfg_cuwj0AdCdH3BwWT4LPijCC7t
+   * @example icfg_3bwCLgxL8qt5kjRLcv2Dit7F
    */
   configurationId?: string;
   /**
@@ -10334,7 +11067,7 @@ export type CreateLogDrainResponse = {
   /**
    * The client configuration this log drain was created with
    *
-   * @example icfg_cuwj0AdCdH3BwWT4LPijCC7t
+   * @example icfg_3bwCLgxL8qt5kjRLcv2Dit7F
    */
   configurationId?: string;
   /**
@@ -10531,147 +11264,6 @@ export const deleteIntegrationLogDrain = (variables: DeleteIntegrationLogDrainVa
     DeleteIntegrationLogDrainQueryParams,
     DeleteIntegrationLogDrainPathParams
   >({ url: '/v1/integrations/log-drains/{id}', method: 'delete', ...variables, signal });
-
-export type GetProjectsProjectIdLogsPresetsPathParams = {
-  projectId: string;
-};
-
-export type GetProjectsProjectIdLogsPresetsError = Fetcher.ErrorWrapper<undefined>;
-
-export type GetProjectsProjectIdLogsPresetsResponse = Schemas.Team[];
-
-export type GetProjectsProjectIdLogsPresetsVariables = {
-  pathParams: GetProjectsProjectIdLogsPresetsPathParams;
-} & FetcherExtraProps;
-
-export const getProjectsProjectIdLogsPresets = (
-  variables: GetProjectsProjectIdLogsPresetsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    GetProjectsProjectIdLogsPresetsResponse,
-    GetProjectsProjectIdLogsPresetsError,
-    undefined,
-    {},
-    {},
-    GetProjectsProjectIdLogsPresetsPathParams
-  >({ url: '/projects/{projectId}/logs-presets', method: 'get', ...variables, signal });
-
-export type PostProjectsProjectIdLogsPresetsPathParams = {
-  /**
-   * projectId of the preset
-   */
-  projectId: string;
-};
-
-export type PostProjectsProjectIdLogsPresetsError = Fetcher.ErrorWrapper<undefined>;
-
-export type PostProjectsProjectIdLogsPresetsRequestBody = {
-  /**
-   * query parameter for saved filter preset
-   *
-   * @example timeline=past30Minutes&startDate=1690446214407&endDate=1690448014407&levels=info&domains=vercel.com
-   * @maxLength 1000
-   */
-  query: string;
-  /**
-   * The title of the preset
-   *
-   * @example Request Path
-   * @maxLength 70
-   */
-  title: string;
-  group: 'personal' | 'team';
-};
-
-export type PostProjectsProjectIdLogsPresetsVariables = {
-  body: PostProjectsProjectIdLogsPresetsRequestBody;
-  pathParams: PostProjectsProjectIdLogsPresetsPathParams;
-} & FetcherExtraProps;
-
-export const postProjectsProjectIdLogsPresets = (
-  variables: PostProjectsProjectIdLogsPresetsVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.Team,
-    PostProjectsProjectIdLogsPresetsError,
-    PostProjectsProjectIdLogsPresetsRequestBody,
-    {},
-    {},
-    PostProjectsProjectIdLogsPresetsPathParams
-  >({ url: '/projects/{projectId}/logs-presets', method: 'post', ...variables, signal });
-
-export type DeleteProjectsProjectIdLogsPresetsIdPathParams = {
-  /**
-   * projectId of the preset
-   */
-  projectId: string;
-  /**
-   * id of the preset
-   */
-  id: string;
-};
-
-export type DeleteProjectsProjectIdLogsPresetsIdError = Fetcher.ErrorWrapper<undefined>;
-
-export type DeleteProjectsProjectIdLogsPresetsIdVariables = {
-  pathParams: DeleteProjectsProjectIdLogsPresetsIdPathParams;
-} & FetcherExtraProps;
-
-export const deleteProjectsProjectIdLogsPresetsId = (
-  variables: DeleteProjectsProjectIdLogsPresetsIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    undefined,
-    DeleteProjectsProjectIdLogsPresetsIdError,
-    undefined,
-    {},
-    {},
-    DeleteProjectsProjectIdLogsPresetsIdPathParams
-  >({ url: '/projects/{projectId}/logs-presets/{id}', method: 'delete', ...variables, signal });
-
-export type PatchProjectsProjectIdLogsPresetsIdPathParams = {
-  /**
-   * projectId of the preset
-   */
-  projectId: string;
-  /**
-   * Id of the preset
-   */
-  id: string;
-};
-
-export type PatchProjectsProjectIdLogsPresetsIdError = Fetcher.ErrorWrapper<undefined>;
-
-export type PatchProjectsProjectIdLogsPresetsIdRequestBody = {
-  /**
-   * The title of the preset
-   *
-   * @example Request Path
-   * @maxLength 70
-   */
-  title: string;
-};
-
-export type PatchProjectsProjectIdLogsPresetsIdVariables = {
-  body: PatchProjectsProjectIdLogsPresetsIdRequestBody;
-  pathParams: PatchProjectsProjectIdLogsPresetsIdPathParams;
-} & FetcherExtraProps;
-
-export const patchProjectsProjectIdLogsPresetsId = (
-  variables: PatchProjectsProjectIdLogsPresetsIdVariables,
-  signal?: AbortSignal
-) =>
-  fetch<
-    Schemas.Team,
-    PatchProjectsProjectIdLogsPresetsIdError,
-    PatchProjectsProjectIdLogsPresetsIdRequestBody,
-    {},
-    {},
-    PatchProjectsProjectIdLogsPresetsIdPathParams
-  >({ url: '/projects/{projectId}/logs-presets/{id}', method: 'patch', ...variables, signal });
 
 export type GetRuntimeLogsPathParams = {
   projectId: string;
@@ -11409,8 +12001,23 @@ export type GetProjectsResponse = {
     autoAssignCustomDomainsUpdatedBy?: string;
     buildCommand?: string | null;
     commandForIgnoringBuildStep?: string | null;
+    connectConfigurations?:
+      | {
+          envId: string | ('production' | 'preview');
+          connectConfigurationId: string;
+          passive: boolean;
+          buildsEnabled: boolean;
+          aws?: {
+            subnetIds: string[];
+            securityGroupId: string;
+          };
+          createdAt: number;
+          updatedAt: number;
+        }[]
+      | null;
     connectConfigurationId?: string | null;
     connectBuildsEnabled?: boolean;
+    passiveConnectConfigurationId?: string | null;
     createdAt?: number;
     customerSupportCodeVisibility?: boolean;
     crons?: {
@@ -11655,6 +12262,7 @@ export type GetProjectsResponse = {
       | 'jekyll'
       | 'middleman'
       | 'nextjs'
+      | 'nitro'
       | 'nuxtjs'
       | 'parcel'
       | 'polymer'
@@ -11902,7 +12510,6 @@ export type GetProjectsResponse = {
       }[];
     } | null;
     outputDirectory?: string | null;
-    passiveConnectConfigurationId?: string | null;
     passwordProtection?: Record<string, any> | null;
     productionDeploymentsFastLane?: boolean;
     publicSource?: boolean | null;
@@ -11913,40 +12520,70 @@ export type GetProjectsResponse = {
       functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
       functionZeroConfigFailover?: boolean;
       elasticConcurrencyEnabled?: boolean;
-      buildMachineType?: 'enhanced' | 'ultra';
+      buildMachineType?: 'enhanced' | 'turbo';
     };
+    /**
+     * Description of why a project was rolled back, and by whom. Note that lastAliasRequest contains the from/to details of the rollback.
+     */
+    rollbackDescription?: {
+      /**
+       * The user who rolled back the project.
+       */
+      userId: string;
+      /**
+       * The username of the user who rolled back the project.
+       */
+      username: string;
+      /**
+       * User-supplied explanation of why they rolled back the project. Limited to 250 characters.
+       */
+      description: string;
+      /**
+       * Timestamp of when the rollback was requested.
+       */
+      createdAt: number;
+    };
+    /**
+     * Project-level rolling release configuration that defines how deployments should be gradually rolled out
+     */
     rollingRelease?: {
       /**
        * The environment that the release targets, currently only supports production. Adding in case we want to configure with alias groups or custom environments.
+       *
+       * @example production
        */
       target: string;
       /**
-       * minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth 0-100 stage. So once we have fetched the document with the start time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving. There is no approval required, and for the case of Vercel, it would just slowly shift traffic 0 to 100%.
-       */
-      minutesToRelease?: number;
-      /**
-       * An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.
+       * An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.
        */
       stages?:
         | {
             /**
-             * The percentage of traffic to serve to the new deployment
+             * The percentage of traffic to serve to the canary deployment (0-100)
+             *
+             * @example 25
              */
             targetPercentage: number;
             /**
-             * minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth starting percentage to ending percentage stage. So once we have fetched the document with the update time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving.
-             */
-            minutesToRelease?: number;
-            /**
-             * Whether or not this stage requires approval to proceed.
+             * Whether or not this stage requires manual approval to proceed
+             *
+             * @example false
              */
             requireApproval?: boolean;
             /**
-             * duration is the total time to serve a stage, at the given targetPercentage.
+             * Duration in minutes for automatic advancement to the next stage
+             *
+             * @example 600
              */
             duration?: number;
           }[]
         | null;
+      /**
+       * Whether the request served by a canary deployment should return a header indicating a canary was served. Defaults to `false` when omitted.
+       *
+       * @example false
+       */
+      canaryResponseHeader?: boolean;
     } | null;
     defaultResourceConfig: {
       fluid?: boolean;
@@ -11955,10 +12592,9 @@ export type GetProjectsResponse = {
       functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
       functionZeroConfigFailover?: boolean;
       elasticConcurrencyEnabled?: boolean;
-      buildMachineType?: 'enhanced' | 'ultra';
+      buildMachineType?: 'enhanced' | 'turbo';
     };
     rootDirectory?: string | null;
-    serverlessFunctionRegion?: string | null;
     serverlessFunctionZeroConfigFailover?: boolean;
     skewProtectionBoundaryAt?: number;
     skewProtectionMaxAge?: number;
@@ -11966,7 +12602,7 @@ export type GetProjectsResponse = {
     sourceFilesOutsideRootDirectory?: boolean;
     enableAffectedProjectsDeployments?: boolean;
     ssoProtection?: {
-      deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
+      deploymentType: 'all' | 'all_except_custom_domains' | 'preview' | 'prod_deployment_urls_and_all_previews';
     } | null;
     targets?: {
       [key: string]: {
@@ -12056,6 +12692,70 @@ export type GetProjectsResponse = {
     enablePreviewFeedback?: boolean | null;
     enableProductionFeedback?: boolean | null;
     permissions?: {
+      aliasProject?: Schemas.ACLAction[];
+      aliasProtectionBypass?: Schemas.ACLAction[];
+      buildMachine?: Schemas.ACLAction[];
+      productionAliasProtectionBypass?: Schemas.ACLAction[];
+      connectConfigurationLink?: Schemas.ACLAction[];
+      dataCacheNamespace?: Schemas.ACLAction[];
+      deployment?: Schemas.ACLAction[];
+      deploymentCheck?: Schemas.ACLAction[];
+      deploymentCheckPreview?: Schemas.ACLAction[];
+      deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
+      deploymentProductionGit?: Schemas.ACLAction[];
+      deploymentV0?: Schemas.ACLAction[];
+      deploymentPreview?: Schemas.ACLAction[];
+      deploymentPrivate?: Schemas.ACLAction[];
+      deploymentPromote?: Schemas.ACLAction[];
+      deploymentRollback?: Schemas.ACLAction[];
+      edgeCacheNamespace?: Schemas.ACLAction[];
+      environments?: Schemas.ACLAction[];
+      logs?: Schemas.ACLAction[];
+      logsPreset?: Schemas.ACLAction[];
+      passwordProtection?: Schemas.ACLAction[];
+      optionsAllowlist?: Schemas.ACLAction[];
+      job?: Schemas.ACLAction[];
+      observabilityData?: Schemas.ACLAction[];
+      onDemandBuild?: Schemas.ACLAction[];
+      onDemandConcurrency?: Schemas.ACLAction[];
+      project?: Schemas.ACLAction[];
+      projectFromV0?: Schemas.ACLAction[];
+      projectAccessGroup?: Schemas.ACLAction[];
+      projectAnalyticsSampling?: Schemas.ACLAction[];
+      projectCheck?: Schemas.ACLAction[];
+      projectCheckRun?: Schemas.ACLAction[];
+      projectDeploymentHook?: Schemas.ACLAction[];
+      projectDomain?: Schemas.ACLAction[];
+      projectDomainMove?: Schemas.ACLAction[];
+      projectDomainCheckConfig?: Schemas.ACLAction[];
+      projectEnvVars?: Schemas.ACLAction[];
+      projectEnvVarsProduction?: Schemas.ACLAction[];
+      projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
+      projectFlags?: Schemas.ACLAction[];
+      projectId?: Schemas.ACLAction[];
+      projectIntegrationConfiguration?: Schemas.ACLAction[];
+      projectLink?: Schemas.ACLAction[];
+      projectMember?: Schemas.ACLAction[];
+      projectMonitoring?: Schemas.ACLAction[];
+      projectPermissions?: Schemas.ACLAction[];
+      projectProductionBranch?: Schemas.ACLAction[];
+      projectTransfer?: Schemas.ACLAction[];
+      projectTransferOut?: Schemas.ACLAction[];
+      projectProtectionBypass?: Schemas.ACLAction[];
+      projectUsage?: Schemas.ACLAction[];
+      projectAnalyticsUsage?: Schemas.ACLAction[];
+      projectSupportCase?: Schemas.ACLAction[];
+      projectSupportCaseComment?: Schemas.ACLAction[];
+      projectDeploymentExpiration?: Schemas.ACLAction[];
+      projectRollingRelease?: Schemas.ACLAction[];
+      projectTier?: Schemas.ACLAction[];
+      seawallConfig?: Schemas.ACLAction[];
+      skewProtection?: Schemas.ACLAction[];
+      analytics?: Schemas.ACLAction[];
+      trustedIps?: Schemas.ACLAction[];
+      webAnalytics?: Schemas.ACLAction[];
+      sharedEnvVarConnection?: Schemas.ACLAction[];
+      sonar?: Schemas.ACLAction[];
       user?: Schemas.ACLAction[];
       userConnection?: Schemas.ACLAction[];
       userSudo?: Schemas.ACLAction[];
@@ -12082,6 +12782,7 @@ export type GetProjectsResponse = {
       concurrentBuilds?: Schemas.ACLAction[];
       connect?: Schemas.ACLAction[];
       connectConfiguration?: Schemas.ACLAction[];
+      defaultDeploymentProtection?: Schemas.ACLAction[];
       domain?: Schemas.ACLAction[];
       domainAcceptDelegation?: Schemas.ACLAction[];
       domainAuthCodes?: Schemas.ACLAction[];
@@ -12135,10 +12836,12 @@ export type GetProjectsResponse = {
       NotificationMonitoringAlert?: Schemas.ACLAction[];
       notificationPaymentFailed?: Schemas.ACLAction[];
       notificationUsageAlert?: Schemas.ACLAction[];
+      notificationPreferences?: Schemas.ACLAction[];
       notificationCustomerBudget?: Schemas.ACLAction[];
       notificationStatementOfReasons?: Schemas.ACLAction[];
       observabilityConfiguration?: Schemas.ACLAction[];
       observabilityNotebook?: Schemas.ACLAction[];
+      observabilityFunnel?: Schemas.ACLAction[];
       openTelemetryEndpoint?: Schemas.ACLAction[];
       vercelAppInstallation?: Schemas.ACLAction[];
       paymentMethod?: Schemas.ACLAction[];
@@ -12193,64 +12896,8 @@ export type GetProjectsResponse = {
       oauth2Application?: Schemas.ACLAction[];
       vercelRun?: Schemas.ACLAction[];
       vercelRunExec?: Schemas.ACLAction[];
-      aliasProject?: Schemas.ACLAction[];
-      aliasProtectionBypass?: Schemas.ACLAction[];
-      productionAliasProtectionBypass?: Schemas.ACLAction[];
-      connectConfigurationLink?: Schemas.ACLAction[];
-      dataCacheNamespace?: Schemas.ACLAction[];
-      deployment?: Schemas.ACLAction[];
-      deploymentCheck?: Schemas.ACLAction[];
-      deploymentCheckPreview?: Schemas.ACLAction[];
-      deploymentCheckReRunFromProductionBranch?: Schemas.ACLAction[];
-      deploymentProductionGit?: Schemas.ACLAction[];
-      deploymentV0?: Schemas.ACLAction[];
-      deploymentPreview?: Schemas.ACLAction[];
-      deploymentPrivate?: Schemas.ACLAction[];
-      deploymentPromote?: Schemas.ACLAction[];
-      deploymentRollback?: Schemas.ACLAction[];
-      environments?: Schemas.ACLAction[];
-      logs?: Schemas.ACLAction[];
-      logsPreset?: Schemas.ACLAction[];
-      passwordProtection?: Schemas.ACLAction[];
-      optionsAllowlist?: Schemas.ACLAction[];
-      job?: Schemas.ACLAction[];
-      observabilityData?: Schemas.ACLAction[];
-      project?: Schemas.ACLAction[];
-      projectFromV0?: Schemas.ACLAction[];
-      projectAccessGroup?: Schemas.ACLAction[];
-      projectAnalyticsSampling?: Schemas.ACLAction[];
-      projectDeploymentHook?: Schemas.ACLAction[];
-      projectDomain?: Schemas.ACLAction[];
-      projectDomainMove?: Schemas.ACLAction[];
-      projectDomainCheckConfig?: Schemas.ACLAction[];
-      projectEnvVars?: Schemas.ACLAction[];
-      projectEnvVarsProduction?: Schemas.ACLAction[];
-      projectEnvVarsUnownedByIntegration?: Schemas.ACLAction[];
-      projectFlags?: Schemas.ACLAction[];
-      projectId?: Schemas.ACLAction[];
-      projectIntegrationConfiguration?: Schemas.ACLAction[];
-      projectLink?: Schemas.ACLAction[];
-      projectMember?: Schemas.ACLAction[];
-      projectMonitoring?: Schemas.ACLAction[];
-      projectPermissions?: Schemas.ACLAction[];
-      projectProductionBranch?: Schemas.ACLAction[];
-      projectTransfer?: Schemas.ACLAction[];
-      projectTransferOut?: Schemas.ACLAction[];
-      projectProtectionBypass?: Schemas.ACLAction[];
-      projectUsage?: Schemas.ACLAction[];
-      projectAnalyticsUsage?: Schemas.ACLAction[];
-      projectSupportCase?: Schemas.ACLAction[];
-      projectSupportCaseComment?: Schemas.ACLAction[];
-      projectDeploymentExpiration?: Schemas.ACLAction[];
-      projectRollingRelease?: Schemas.ACLAction[];
-      projectTier?: Schemas.ACLAction[];
-      seawallConfig?: Schemas.ACLAction[];
-      skewProtection?: Schemas.ACLAction[];
-      analytics?: Schemas.ACLAction[];
-      trustedIps?: Schemas.ACLAction[];
-      webAnalytics?: Schemas.ACLAction[];
-      sharedEnvVarConnection?: Schemas.ACLAction[];
-      sonar?: Schemas.ACLAction[];
+      apiKey?: Schemas.ACLAction[];
+      apiKeyOwnedBySelf?: Schemas.ACLAction[];
     };
     lastRollbackTarget?: Record<string, any> | null;
     lastAliasRequest?: {
@@ -12282,7 +12929,12 @@ export type GetProjectsResponse = {
     hasActiveBranches?: boolean;
     trustedIps?:
       | {
-          deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+          deploymentType:
+            | 'production'
+            | 'preview'
+            | 'all'
+            | 'prod_deployment_urls_and_all_previews'
+            | 'all_except_custom_domains';
           addresses: {
             value: string;
             note?: string;
@@ -12290,7 +12942,12 @@ export type GetProjectsResponse = {
           protectionMode: 'additional' | 'exclusive';
         }
       | {
-          deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+          deploymentType:
+            | 'production'
+            | 'preview'
+            | 'all'
+            | 'prod_deployment_urls_and_all_previews'
+            | 'all_except_custom_domains';
         }
       | null;
     gitComments?: {
@@ -12423,20 +13080,35 @@ export type GetProjectsResponse = {
       ja4Enabled?: boolean;
       firewallBypassIps?: string[];
       managedRules?: {
-        [key: string]: {
+        bot_filter: {
+          active: boolean;
+          action?: 'challenge' | 'deny' | 'log';
+        };
+        ai_bots: {
+          active: boolean;
+          action?: 'challenge' | 'deny' | 'log';
+        };
+        owasp: {
           active: boolean;
           action?: 'challenge' | 'deny' | 'log';
         };
       } | null;
+      botIdEnabled?: boolean;
     };
     oidcTokenConfig?: {
-      enabled: boolean;
+      /**
+       * Whether or not to generate OpenID Connect JSON Web Tokens.
+       */
+      enabled?: boolean;
       /**
        * - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
        */
       issuerMode?: 'global' | 'team';
     };
     tier?: 'advanced' | 'critical' | 'standard';
+    features?: {
+      webAnalytics?: boolean;
+    };
   }[];
   pagination: Schemas.Pagination;
 };
@@ -12493,8 +13165,23 @@ export type CreateProjectResponse = {
   autoAssignCustomDomainsUpdatedBy?: string;
   buildCommand?: string | null;
   commandForIgnoringBuildStep?: string | null;
+  connectConfigurations?:
+    | {
+        envId: string | ('preview' | 'production');
+        connectConfigurationId: string;
+        passive: boolean;
+        buildsEnabled: boolean;
+        aws?: {
+          subnetIds: string[];
+          securityGroupId: string;
+        };
+        createdAt: number;
+        updatedAt: number;
+      }[]
+    | null;
   connectConfigurationId?: string | null;
   connectBuildsEnabled?: boolean;
+  passiveConnectConfigurationId?: string | null;
   createdAt?: number;
   customerSupportCodeVisibility?: boolean;
   crons?: {
@@ -12739,6 +13426,7 @@ export type CreateProjectResponse = {
     | 'jekyll'
     | 'middleman'
     | 'nextjs'
+    | 'nitro'
     | 'nuxtjs'
     | 'parcel'
     | 'polymer'
@@ -12986,7 +13674,6 @@ export type CreateProjectResponse = {
     }[];
   } | null;
   outputDirectory?: string | null;
-  passiveConnectConfigurationId?: string | null;
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
@@ -12997,40 +13684,70 @@ export type CreateProjectResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced' | 'ultra';
+    buildMachineType?: 'enhanced' | 'turbo';
   };
+  /**
+   * Description of why a project was rolled back, and by whom. Note that lastAliasRequest contains the from/to details of the rollback.
+   */
+  rollbackDescription?: {
+    /**
+     * The user who rolled back the project.
+     */
+    userId: string;
+    /**
+     * The username of the user who rolled back the project.
+     */
+    username: string;
+    /**
+     * User-supplied explanation of why they rolled back the project. Limited to 250 characters.
+     */
+    description: string;
+    /**
+     * Timestamp of when the rollback was requested.
+     */
+    createdAt: number;
+  };
+  /**
+   * Project-level rolling release configuration that defines how deployments should be gradually rolled out
+   */
   rollingRelease?: {
     /**
      * The environment that the release targets, currently only supports production. Adding in case we want to configure with alias groups or custom environments.
+     *
+     * @example production
      */
     target: string;
     /**
-     * minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth 0-100 stage. So once we have fetched the document with the start time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving. There is no approval required, and for the case of Vercel, it would just slowly shift traffic 0 to 100%.
-     */
-    minutesToRelease?: number;
-    /**
-     * An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.
+     * An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.
      */
     stages?:
       | {
           /**
-           * The percentage of traffic to serve to the new deployment
+           * The percentage of traffic to serve to the canary deployment (0-100)
+           *
+           * @example 25
            */
           targetPercentage: number;
           /**
-           * minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth starting percentage to ending percentage stage. So once we have fetched the document with the update time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving.
-           */
-          minutesToRelease?: number;
-          /**
-           * Whether or not this stage requires approval to proceed.
+           * Whether or not this stage requires manual approval to proceed
+           *
+           * @example false
            */
           requireApproval?: boolean;
           /**
-           * duration is the total time to serve a stage, at the given targetPercentage.
+           * Duration in minutes for automatic advancement to the next stage
+           *
+           * @example 600
            */
           duration?: number;
         }[]
       | null;
+    /**
+     * Whether the request served by a canary deployment should return a header indicating a canary was served. Defaults to `false` when omitted.
+     *
+     * @example false
+     */
+    canaryResponseHeader?: boolean;
   } | null;
   defaultResourceConfig: {
     fluid?: boolean;
@@ -13039,10 +13756,9 @@ export type CreateProjectResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced' | 'ultra';
+    buildMachineType?: 'enhanced' | 'turbo';
   };
   rootDirectory?: string | null;
-  serverlessFunctionRegion?: string | null;
   serverlessFunctionZeroConfigFailover?: boolean;
   skewProtectionBoundaryAt?: number;
   skewProtectionMaxAge?: number;
@@ -13050,7 +13766,7 @@ export type CreateProjectResponse = {
   sourceFilesOutsideRootDirectory?: boolean;
   enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
-    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
+    deploymentType: 'all' | 'all_except_custom_domains' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
@@ -13166,6 +13882,7 @@ export type CreateProjectResponse = {
     concurrentBuilds?: Schemas.ACLAction[];
     connect?: Schemas.ACLAction[];
     connectConfiguration?: Schemas.ACLAction[];
+    defaultDeploymentProtection?: Schemas.ACLAction[];
     domain?: Schemas.ACLAction[];
     domainAcceptDelegation?: Schemas.ACLAction[];
     domainAuthCodes?: Schemas.ACLAction[];
@@ -13219,10 +13936,12 @@ export type CreateProjectResponse = {
     NotificationMonitoringAlert?: Schemas.ACLAction[];
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
+    notificationPreferences?: Schemas.ACLAction[];
     notificationCustomerBudget?: Schemas.ACLAction[];
     notificationStatementOfReasons?: Schemas.ACLAction[];
     observabilityConfiguration?: Schemas.ACLAction[];
     observabilityNotebook?: Schemas.ACLAction[];
+    observabilityFunnel?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     vercelAppInstallation?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
@@ -13277,8 +13996,11 @@ export type CreateProjectResponse = {
     oauth2Application?: Schemas.ACLAction[];
     vercelRun?: Schemas.ACLAction[];
     vercelRunExec?: Schemas.ACLAction[];
+    apiKey?: Schemas.ACLAction[];
+    apiKeyOwnedBySelf?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
+    buildMachine?: Schemas.ACLAction[];
     productionAliasProtectionBypass?: Schemas.ACLAction[];
     connectConfigurationLink?: Schemas.ACLAction[];
     dataCacheNamespace?: Schemas.ACLAction[];
@@ -13292,6 +14014,7 @@ export type CreateProjectResponse = {
     deploymentPrivate?: Schemas.ACLAction[];
     deploymentPromote?: Schemas.ACLAction[];
     deploymentRollback?: Schemas.ACLAction[];
+    edgeCacheNamespace?: Schemas.ACLAction[];
     environments?: Schemas.ACLAction[];
     logs?: Schemas.ACLAction[];
     logsPreset?: Schemas.ACLAction[];
@@ -13299,10 +14022,14 @@ export type CreateProjectResponse = {
     optionsAllowlist?: Schemas.ACLAction[];
     job?: Schemas.ACLAction[];
     observabilityData?: Schemas.ACLAction[];
+    onDemandBuild?: Schemas.ACLAction[];
+    onDemandConcurrency?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
     projectFromV0?: Schemas.ACLAction[];
     projectAccessGroup?: Schemas.ACLAction[];
     projectAnalyticsSampling?: Schemas.ACLAction[];
+    projectCheck?: Schemas.ACLAction[];
+    projectCheckRun?: Schemas.ACLAction[];
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
     projectDomainMove?: Schemas.ACLAction[];
@@ -13366,7 +14093,12 @@ export type CreateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType:
+          | 'all'
+          | 'preview'
+          | 'prod_deployment_urls_and_all_previews'
+          | 'all_except_custom_domains'
+          | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -13374,7 +14106,12 @@ export type CreateProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType:
+          | 'all'
+          | 'preview'
+          | 'prod_deployment_urls_and_all_previews'
+          | 'all_except_custom_domains'
+          | 'production';
       }
     | null;
   gitComments?: {
@@ -13507,20 +14244,35 @@ export type CreateProjectResponse = {
     ja4Enabled?: boolean;
     firewallBypassIps?: string[];
     managedRules?: {
-      [key: string]: {
+      bot_filter: {
+        active: boolean;
+        action?: 'challenge' | 'deny' | 'log';
+      };
+      ai_bots: {
+        active: boolean;
+        action?: 'challenge' | 'deny' | 'log';
+      };
+      owasp: {
         active: boolean;
         action?: 'challenge' | 'deny' | 'log';
       };
     } | null;
+    botIdEnabled?: boolean;
   };
   oidcTokenConfig?: {
-    enabled: boolean;
+    /**
+     * Whether or not to generate OpenID Connect JSON Web Tokens.
+     */
+    enabled?: boolean;
     /**
      * - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
      */
     issuerMode?: 'global' | 'team';
   };
   tier?: 'advanced' | 'critical' | 'standard';
+  features?: {
+    webAnalytics?: boolean;
+  };
 };
 
 export type CreateProjectRequestBody = {
@@ -13600,6 +14352,7 @@ export type CreateProjectRequestBody = {
     | 'jekyll'
     | 'middleman'
     | 'nextjs'
+    | 'nitro'
     | any
     | 'nuxtjs'
     | 'parcel'
@@ -13659,6 +14412,12 @@ export type CreateProjectRequestBody = {
    */
   skipGitConnectDuringLink?: boolean;
   /**
+   * The Vercel Auth setting for the project (historically named \"SSO Protection\")
+   */
+  ssoProtection?: {
+    deploymentType: 'all' | 'all_except_custom_domains' | 'preview' | 'prod_deployment_urls_and_all_previews';
+  } | null;
+  /**
    * The output directory of the project. When `null` is used this value will be automatically detected
    *
    * @maxLength 256
@@ -13691,6 +14450,7 @@ export type CreateProjectRequestBody = {
     /**
      * Whether or not to generate OpenID Connect JSON Web Tokens.
      *
+     * @deprecated true
      * @default true
      */
     enabled?: boolean;
@@ -13728,7 +14488,7 @@ export type CreateProjectRequestBody = {
      */
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced' | 'ultra';
+    buildMachineType?: 'enhanced' | 'turbo';
   };
 };
 
@@ -13769,6 +14529,20 @@ export type GetProjectQueryParams = {
 export type GetProjectError = Fetcher.ErrorWrapper<undefined>;
 
 export type GetProjectResponse = {
+  integrations?: {
+    /**
+     * The integration installation ID.
+     *
+     * @example icfg_3bwCLgxL8qt5kjRLcv2Dit7F
+     */
+    installationId: string;
+    /**
+     * The list of the installation resources connected to the project.
+     */
+    resources?: {
+      externalResourceId: string;
+    }[];
+  }[];
   accountId: string;
   analytics?: {
     id: string;
@@ -13792,8 +14566,23 @@ export type GetProjectResponse = {
   autoAssignCustomDomainsUpdatedBy?: string;
   buildCommand?: string | null;
   commandForIgnoringBuildStep?: string | null;
+  connectConfigurations?:
+    | {
+        envId: string | ('preview' | 'production');
+        connectConfigurationId: string;
+        passive: boolean;
+        buildsEnabled: boolean;
+        aws?: {
+          subnetIds: string[];
+          securityGroupId: string;
+        };
+        createdAt: number;
+        updatedAt: number;
+      }[]
+    | null;
   connectConfigurationId?: string | null;
   connectBuildsEnabled?: boolean;
+  passiveConnectConfigurationId?: string | null;
   createdAt?: number;
   customerSupportCodeVisibility?: boolean;
   crons?: {
@@ -14038,6 +14827,7 @@ export type GetProjectResponse = {
     | 'jekyll'
     | 'middleman'
     | 'nextjs'
+    | 'nitro'
     | 'nuxtjs'
     | 'parcel'
     | 'polymer'
@@ -14285,7 +15075,6 @@ export type GetProjectResponse = {
     }[];
   } | null;
   outputDirectory?: string | null;
-  passiveConnectConfigurationId?: string | null;
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
@@ -14296,40 +15085,70 @@ export type GetProjectResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced' | 'ultra';
+    buildMachineType?: 'enhanced' | 'turbo';
   };
+  /**
+   * Description of why a project was rolled back, and by whom. Note that lastAliasRequest contains the from/to details of the rollback.
+   */
+  rollbackDescription?: {
+    /**
+     * The user who rolled back the project.
+     */
+    userId: string;
+    /**
+     * The username of the user who rolled back the project.
+     */
+    username: string;
+    /**
+     * User-supplied explanation of why they rolled back the project. Limited to 250 characters.
+     */
+    description: string;
+    /**
+     * Timestamp of when the rollback was requested.
+     */
+    createdAt: number;
+  };
+  /**
+   * Project-level rolling release configuration that defines how deployments should be gradually rolled out
+   */
   rollingRelease?: {
     /**
      * The environment that the release targets, currently only supports production. Adding in case we want to configure with alias groups or custom environments.
+     *
+     * @example production
      */
     target: string;
     /**
-     * minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth 0-100 stage. So once we have fetched the document with the start time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving. There is no approval required, and for the case of Vercel, it would just slowly shift traffic 0 to 100%.
-     */
-    minutesToRelease?: number;
-    /**
-     * An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.
+     * An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.
      */
     stages?:
       | {
           /**
-           * The percentage of traffic to serve to the new deployment
+           * The percentage of traffic to serve to the canary deployment (0-100)
+           *
+           * @example 25
            */
           targetPercentage: number;
           /**
-           * minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth starting percentage to ending percentage stage. So once we have fetched the document with the update time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving.
-           */
-          minutesToRelease?: number;
-          /**
-           * Whether or not this stage requires approval to proceed.
+           * Whether or not this stage requires manual approval to proceed
+           *
+           * @example false
            */
           requireApproval?: boolean;
           /**
-           * duration is the total time to serve a stage, at the given targetPercentage.
+           * Duration in minutes for automatic advancement to the next stage
+           *
+           * @example 600
            */
           duration?: number;
         }[]
       | null;
+    /**
+     * Whether the request served by a canary deployment should return a header indicating a canary was served. Defaults to `false` when omitted.
+     *
+     * @example false
+     */
+    canaryResponseHeader?: boolean;
   } | null;
   defaultResourceConfig: {
     fluid?: boolean;
@@ -14338,10 +15157,9 @@ export type GetProjectResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced' | 'ultra';
+    buildMachineType?: 'enhanced' | 'turbo';
   };
   rootDirectory?: string | null;
-  serverlessFunctionRegion?: string | null;
   serverlessFunctionZeroConfigFailover?: boolean;
   skewProtectionBoundaryAt?: number;
   skewProtectionMaxAge?: number;
@@ -14349,7 +15167,7 @@ export type GetProjectResponse = {
   sourceFilesOutsideRootDirectory?: boolean;
   enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
-    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
+    deploymentType: 'all' | 'all_except_custom_domains' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
@@ -14465,6 +15283,7 @@ export type GetProjectResponse = {
     concurrentBuilds?: Schemas.ACLAction[];
     connect?: Schemas.ACLAction[];
     connectConfiguration?: Schemas.ACLAction[];
+    defaultDeploymentProtection?: Schemas.ACLAction[];
     domain?: Schemas.ACLAction[];
     domainAcceptDelegation?: Schemas.ACLAction[];
     domainAuthCodes?: Schemas.ACLAction[];
@@ -14518,10 +15337,12 @@ export type GetProjectResponse = {
     NotificationMonitoringAlert?: Schemas.ACLAction[];
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
+    notificationPreferences?: Schemas.ACLAction[];
     notificationCustomerBudget?: Schemas.ACLAction[];
     notificationStatementOfReasons?: Schemas.ACLAction[];
     observabilityConfiguration?: Schemas.ACLAction[];
     observabilityNotebook?: Schemas.ACLAction[];
+    observabilityFunnel?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     vercelAppInstallation?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
@@ -14576,8 +15397,11 @@ export type GetProjectResponse = {
     oauth2Application?: Schemas.ACLAction[];
     vercelRun?: Schemas.ACLAction[];
     vercelRunExec?: Schemas.ACLAction[];
+    apiKey?: Schemas.ACLAction[];
+    apiKeyOwnedBySelf?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
+    buildMachine?: Schemas.ACLAction[];
     productionAliasProtectionBypass?: Schemas.ACLAction[];
     connectConfigurationLink?: Schemas.ACLAction[];
     dataCacheNamespace?: Schemas.ACLAction[];
@@ -14591,6 +15415,7 @@ export type GetProjectResponse = {
     deploymentPrivate?: Schemas.ACLAction[];
     deploymentPromote?: Schemas.ACLAction[];
     deploymentRollback?: Schemas.ACLAction[];
+    edgeCacheNamespace?: Schemas.ACLAction[];
     environments?: Schemas.ACLAction[];
     logs?: Schemas.ACLAction[];
     logsPreset?: Schemas.ACLAction[];
@@ -14598,10 +15423,14 @@ export type GetProjectResponse = {
     optionsAllowlist?: Schemas.ACLAction[];
     job?: Schemas.ACLAction[];
     observabilityData?: Schemas.ACLAction[];
+    onDemandBuild?: Schemas.ACLAction[];
+    onDemandConcurrency?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
     projectFromV0?: Schemas.ACLAction[];
     projectAccessGroup?: Schemas.ACLAction[];
     projectAnalyticsSampling?: Schemas.ACLAction[];
+    projectCheck?: Schemas.ACLAction[];
+    projectCheckRun?: Schemas.ACLAction[];
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
     projectDomainMove?: Schemas.ACLAction[];
@@ -14665,7 +15494,12 @@ export type GetProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType:
+          | 'all'
+          | 'preview'
+          | 'prod_deployment_urls_and_all_previews'
+          | 'all_except_custom_domains'
+          | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -14673,7 +15507,12 @@ export type GetProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType:
+          | 'all'
+          | 'preview'
+          | 'prod_deployment_urls_and_all_previews'
+          | 'all_except_custom_domains'
+          | 'production';
       }
     | null;
   gitComments?: {
@@ -14806,20 +15645,35 @@ export type GetProjectResponse = {
     ja4Enabled?: boolean;
     firewallBypassIps?: string[];
     managedRules?: {
-      [key: string]: {
+      bot_filter: {
+        active: boolean;
+        action?: 'challenge' | 'deny' | 'log';
+      };
+      ai_bots: {
+        active: boolean;
+        action?: 'challenge' | 'deny' | 'log';
+      };
+      owasp: {
         active: boolean;
         action?: 'challenge' | 'deny' | 'log';
       };
     } | null;
+    botIdEnabled?: boolean;
   };
   oidcTokenConfig?: {
-    enabled: boolean;
+    /**
+     * Whether or not to generate OpenID Connect JSON Web Tokens.
+     */
+    enabled?: boolean;
     /**
      * - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
      */
     issuerMode?: 'global' | 'team';
   };
   tier?: 'advanced' | 'critical' | 'standard';
+  features?: {
+    webAnalytics?: boolean;
+  };
 };
 
 export type GetProjectVariables = {
@@ -14884,8 +15738,23 @@ export type UpdateProjectResponse = {
   autoAssignCustomDomainsUpdatedBy?: string;
   buildCommand?: string | null;
   commandForIgnoringBuildStep?: string | null;
+  connectConfigurations?:
+    | {
+        envId: string | ('preview' | 'production');
+        connectConfigurationId: string;
+        passive: boolean;
+        buildsEnabled: boolean;
+        aws?: {
+          subnetIds: string[];
+          securityGroupId: string;
+        };
+        createdAt: number;
+        updatedAt: number;
+      }[]
+    | null;
   connectConfigurationId?: string | null;
   connectBuildsEnabled?: boolean;
+  passiveConnectConfigurationId?: string | null;
   createdAt?: number;
   customerSupportCodeVisibility?: boolean;
   crons?: {
@@ -15130,6 +15999,7 @@ export type UpdateProjectResponse = {
     | 'jekyll'
     | 'middleman'
     | 'nextjs'
+    | 'nitro'
     | 'nuxtjs'
     | 'parcel'
     | 'polymer'
@@ -15377,7 +16247,6 @@ export type UpdateProjectResponse = {
     }[];
   } | null;
   outputDirectory?: string | null;
-  passiveConnectConfigurationId?: string | null;
   passwordProtection?: Record<string, any> | null;
   productionDeploymentsFastLane?: boolean;
   publicSource?: boolean | null;
@@ -15388,40 +16257,70 @@ export type UpdateProjectResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced' | 'ultra';
+    buildMachineType?: 'enhanced' | 'turbo';
   };
+  /**
+   * Description of why a project was rolled back, and by whom. Note that lastAliasRequest contains the from/to details of the rollback.
+   */
+  rollbackDescription?: {
+    /**
+     * The user who rolled back the project.
+     */
+    userId: string;
+    /**
+     * The username of the user who rolled back the project.
+     */
+    username: string;
+    /**
+     * User-supplied explanation of why they rolled back the project. Limited to 250 characters.
+     */
+    description: string;
+    /**
+     * Timestamp of when the rollback was requested.
+     */
+    createdAt: number;
+  };
+  /**
+   * Project-level rolling release configuration that defines how deployments should be gradually rolled out
+   */
   rollingRelease?: {
     /**
      * The environment that the release targets, currently only supports production. Adding in case we want to configure with alias groups or custom environments.
+     *
+     * @example production
      */
     target: string;
     /**
-     * minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth 0-100 stage. So once we have fetched the document with the start time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving. There is no approval required, and for the case of Vercel, it would just slowly shift traffic 0 to 100%.
-     */
-    minutesToRelease?: number;
-    /**
-     * An array of all the stages required during a deployment release. each stage requires an approval before advancing to the next stage.
+     * An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.
      */
     stages?:
       | {
           /**
-           * The percentage of traffic to serve to the new deployment
+           * The percentage of traffic to serve to the canary deployment (0-100)
+           *
+           * @example 25
            */
           targetPercentage: number;
           /**
-           * minutesToRelease is the total time to gradually shift percentages. This value overrides stages and instead creates a single smooth starting percentage to ending percentage stage. So once we have fetched the document with the update time, subtract from the current time, and divide by total minutesToRelease, to determine what percentage of traffic the new deployment should be serving.
-           */
-          minutesToRelease?: number;
-          /**
-           * Whether or not this stage requires approval to proceed.
+           * Whether or not this stage requires manual approval to proceed
+           *
+           * @example false
            */
           requireApproval?: boolean;
           /**
-           * duration is the total time to serve a stage, at the given targetPercentage.
+           * Duration in minutes for automatic advancement to the next stage
+           *
+           * @example 600
            */
           duration?: number;
         }[]
       | null;
+    /**
+     * Whether the request served by a canary deployment should return a header indicating a canary was served. Defaults to `false` when omitted.
+     *
+     * @example false
+     */
+    canaryResponseHeader?: boolean;
   } | null;
   defaultResourceConfig: {
     fluid?: boolean;
@@ -15430,10 +16329,9 @@ export type UpdateProjectResponse = {
     functionDefaultMemoryType?: 'performance' | 'standard' | 'standard_legacy';
     functionZeroConfigFailover?: boolean;
     elasticConcurrencyEnabled?: boolean;
-    buildMachineType?: 'enhanced' | 'ultra';
+    buildMachineType?: 'enhanced' | 'turbo';
   };
   rootDirectory?: string | null;
-  serverlessFunctionRegion?: string | null;
   serverlessFunctionZeroConfigFailover?: boolean;
   skewProtectionBoundaryAt?: number;
   skewProtectionMaxAge?: number;
@@ -15441,7 +16339,7 @@ export type UpdateProjectResponse = {
   sourceFilesOutsideRootDirectory?: boolean;
   enableAffectedProjectsDeployments?: boolean;
   ssoProtection?: {
-    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
+    deploymentType: 'all' | 'all_except_custom_domains' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   targets?: {
     [key: string]: {
@@ -15557,6 +16455,7 @@ export type UpdateProjectResponse = {
     concurrentBuilds?: Schemas.ACLAction[];
     connect?: Schemas.ACLAction[];
     connectConfiguration?: Schemas.ACLAction[];
+    defaultDeploymentProtection?: Schemas.ACLAction[];
     domain?: Schemas.ACLAction[];
     domainAcceptDelegation?: Schemas.ACLAction[];
     domainAuthCodes?: Schemas.ACLAction[];
@@ -15610,10 +16509,12 @@ export type UpdateProjectResponse = {
     NotificationMonitoringAlert?: Schemas.ACLAction[];
     notificationPaymentFailed?: Schemas.ACLAction[];
     notificationUsageAlert?: Schemas.ACLAction[];
+    notificationPreferences?: Schemas.ACLAction[];
     notificationCustomerBudget?: Schemas.ACLAction[];
     notificationStatementOfReasons?: Schemas.ACLAction[];
     observabilityConfiguration?: Schemas.ACLAction[];
     observabilityNotebook?: Schemas.ACLAction[];
+    observabilityFunnel?: Schemas.ACLAction[];
     openTelemetryEndpoint?: Schemas.ACLAction[];
     vercelAppInstallation?: Schemas.ACLAction[];
     paymentMethod?: Schemas.ACLAction[];
@@ -15668,8 +16569,11 @@ export type UpdateProjectResponse = {
     oauth2Application?: Schemas.ACLAction[];
     vercelRun?: Schemas.ACLAction[];
     vercelRunExec?: Schemas.ACLAction[];
+    apiKey?: Schemas.ACLAction[];
+    apiKeyOwnedBySelf?: Schemas.ACLAction[];
     aliasProject?: Schemas.ACLAction[];
     aliasProtectionBypass?: Schemas.ACLAction[];
+    buildMachine?: Schemas.ACLAction[];
     productionAliasProtectionBypass?: Schemas.ACLAction[];
     connectConfigurationLink?: Schemas.ACLAction[];
     dataCacheNamespace?: Schemas.ACLAction[];
@@ -15683,6 +16587,7 @@ export type UpdateProjectResponse = {
     deploymentPrivate?: Schemas.ACLAction[];
     deploymentPromote?: Schemas.ACLAction[];
     deploymentRollback?: Schemas.ACLAction[];
+    edgeCacheNamespace?: Schemas.ACLAction[];
     environments?: Schemas.ACLAction[];
     logs?: Schemas.ACLAction[];
     logsPreset?: Schemas.ACLAction[];
@@ -15690,10 +16595,14 @@ export type UpdateProjectResponse = {
     optionsAllowlist?: Schemas.ACLAction[];
     job?: Schemas.ACLAction[];
     observabilityData?: Schemas.ACLAction[];
+    onDemandBuild?: Schemas.ACLAction[];
+    onDemandConcurrency?: Schemas.ACLAction[];
     project?: Schemas.ACLAction[];
     projectFromV0?: Schemas.ACLAction[];
     projectAccessGroup?: Schemas.ACLAction[];
     projectAnalyticsSampling?: Schemas.ACLAction[];
+    projectCheck?: Schemas.ACLAction[];
+    projectCheckRun?: Schemas.ACLAction[];
     projectDeploymentHook?: Schemas.ACLAction[];
     projectDomain?: Schemas.ACLAction[];
     projectDomainMove?: Schemas.ACLAction[];
@@ -15757,7 +16666,12 @@ export type UpdateProjectResponse = {
   hasActiveBranches?: boolean;
   trustedIps?:
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType:
+          | 'all'
+          | 'preview'
+          | 'prod_deployment_urls_and_all_previews'
+          | 'all_except_custom_domains'
+          | 'production';
         addresses: {
           value: string;
           note?: string;
@@ -15765,7 +16679,12 @@ export type UpdateProjectResponse = {
         protectionMode: 'additional' | 'exclusive';
       }
     | {
-        deploymentType: 'production' | 'preview' | 'all' | 'prod_deployment_urls_and_all_previews';
+        deploymentType:
+          | 'all'
+          | 'preview'
+          | 'prod_deployment_urls_and_all_previews'
+          | 'all_except_custom_domains'
+          | 'production';
       }
     | null;
   gitComments?: {
@@ -15898,20 +16817,35 @@ export type UpdateProjectResponse = {
     ja4Enabled?: boolean;
     firewallBypassIps?: string[];
     managedRules?: {
-      [key: string]: {
+      bot_filter: {
+        active: boolean;
+        action?: 'challenge' | 'deny' | 'log';
+      };
+      ai_bots: {
+        active: boolean;
+        action?: 'challenge' | 'deny' | 'log';
+      };
+      owasp: {
         active: boolean;
         action?: 'challenge' | 'deny' | 'log';
       };
     } | null;
+    botIdEnabled?: boolean;
   };
   oidcTokenConfig?: {
-    enabled: boolean;
+    /**
+     * Whether or not to generate OpenID Connect JSON Web Tokens.
+     */
+    enabled?: boolean;
     /**
      * - team: `https://oidc.vercel.com/[team_slug]` - global: `https://oidc.vercel.com`
      */
     issuerMode?: 'global' | 'team';
   };
   tier?: 'advanced' | 'critical' | 'standard';
+  features?: {
+    webAnalytics?: boolean;
+  };
 };
 
 export type UpdateProjectRequestBody = {
@@ -15964,6 +16898,7 @@ export type UpdateProjectRequestBody = {
     | 'jekyll'
     | 'middleman'
     | 'nextjs'
+    | 'nitro'
     | any
     | 'nuxtjs'
     | 'parcel'
@@ -16031,7 +16966,7 @@ export type UpdateProjectRequestBody = {
    * Specifies resource override configuration for the project
    */
   resourceConfig?: {
-    buildMachineType?: 'enhanced' | any | 'ultra';
+    buildMachineType?: 'enhanced' | any | 'turbo';
     fluid?: boolean;
     /**
      * The regions to deploy Vercel Functions to for this project
@@ -16109,6 +17044,7 @@ export type UpdateProjectRequestBody = {
     /**
      * Whether or not to generate OpenID Connect JSON Web Tokens.
      *
+     * @deprecated true
      * @default true
      */
     enabled?: boolean;
@@ -16126,7 +17062,7 @@ export type UpdateProjectRequestBody = {
     /**
      * Specify if the password will apply to every Deployment Target or just Preview
      */
-    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
+    deploymentType: 'all' | 'all_except_custom_domains' | 'preview' | 'prod_deployment_urls_and_all_previews';
     /**
      * The password that will be used to protect Project Deployments
      *
@@ -16143,7 +17079,7 @@ export type UpdateProjectRequestBody = {
      *
      * @default preview
      */
-    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews';
+    deploymentType: 'all' | 'all_except_custom_domains' | 'preview' | 'prod_deployment_urls_and_all_previews';
   } | null;
   /**
    * Restricts access to deployments based on the incoming request IP address
@@ -16152,7 +17088,12 @@ export type UpdateProjectRequestBody = {
     /**
      * Specify if the Trusted IPs will apply to every Deployment Target or just Preview
      */
-    deploymentType: 'all' | 'preview' | 'prod_deployment_urls_and_all_previews' | 'production';
+    deploymentType:
+      | 'all'
+      | 'all_except_custom_domains'
+      | 'preview'
+      | 'prod_deployment_urls_and_all_previews'
+      | 'production';
     /**
      * @minItems 1
      */
@@ -17272,7 +18213,15 @@ export type RemoveProjectDomainQueryParams = {
 
 export type RemoveProjectDomainError = Fetcher.ErrorWrapper<undefined>;
 
+export type RemoveProjectDomainRequestBody = {
+  /**
+   * Whether to remove all domains from this project that redirect to the domain being removed.
+   */
+  removeRedirects?: boolean;
+};
+
 export type RemoveProjectDomainVariables = {
+  body: RemoveProjectDomainRequestBody;
   pathParams: RemoveProjectDomainPathParams;
   queryParams?: RemoveProjectDomainQueryParams;
 } & FetcherExtraProps;
@@ -17284,7 +18233,7 @@ export const removeProjectDomain = (variables: RemoveProjectDomainVariables, sig
   fetch<
     Record<string, any>,
     RemoveProjectDomainError,
-    undefined,
+    RemoveProjectDomainRequestBody,
     {},
     RemoveProjectDomainQueryParams,
     RemoveProjectDomainPathParams
@@ -17940,7 +18889,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -18041,7 +18990,7 @@ export type CreateProjectEnvResponse = {
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type?: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type?: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -18923,7 +19872,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -19024,7 +19973,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -19124,7 +20073,7 @@ export const removeProjectEnv = (variables: RemoveProjectEnvVariables, signal?: 
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -19315,7 +20264,7 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
         target?:
           | ('production' | 'preview' | 'development' | 'preview' | 'development')[]
           | ('production' | 'preview' | 'development' | 'preview' | 'development');
-        type: 'system' | 'encrypted' | 'plain' | 'sensitive' | 'secret';
+        type: 'system' | 'secret' | 'encrypted' | 'plain' | 'sensitive';
         /**
          * This is used to identiy variables that have been migrated from type secret to sensitive.
          */
@@ -19417,6 +20366,972 @@ export const editProjectEnv = (variables: EditProjectEnvVariables, signal?: Abor
     EditProjectEnvQueryParams,
     EditProjectEnvPathParams
   >({ url: '/v9/projects/{idOrName}/env/{id}', method: 'patch', ...variables, signal });
+
+export type GetRollingReleaseBillingStatusPathParams = {
+  /**
+   * Project ID or project name (URL-encoded)
+   */
+  idOrName: string;
+};
+
+export type GetRollingReleaseBillingStatusQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type GetRollingReleaseBillingStatusError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetRollingReleaseBillingStatusVariables = {
+  pathParams: GetRollingReleaseBillingStatusPathParams;
+  queryParams?: GetRollingReleaseBillingStatusQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Get the Rolling Releases billing status for a project. The team level billing status is used to determine if the project can be configured for rolling releases.
+ */
+export const getRollingReleaseBillingStatus = (
+  variables: GetRollingReleaseBillingStatusVariables,
+  signal?: AbortSignal
+) =>
+  fetch<
+    | {
+        availableSlots: 0;
+        reason: 'plan_not_supported';
+        message: string;
+      }
+    | {
+        availableSlots: 'unlimited';
+        reason: 'unlimited_slots';
+        message: string;
+      }
+    | {
+        availableSlots: 0;
+        reason: 'no_available_slots';
+        message: string;
+        enabledProjects: string[];
+      }
+    | {
+        availableSlots: number;
+        reason: 'available_slots';
+        message: string;
+      },
+    GetRollingReleaseBillingStatusError,
+    undefined,
+    {},
+    GetRollingReleaseBillingStatusQueryParams,
+    GetRollingReleaseBillingStatusPathParams
+  >({ url: '/v1/projects/{idOrName}/rolling-release/billing', method: 'get', ...variables, signal });
+
+export type GetRollingReleaseConfigPathParams = {
+  /**
+   * Project ID or project name (URL-encoded)
+   */
+  idOrName: string;
+};
+
+export type GetRollingReleaseConfigQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type GetRollingReleaseConfigError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetRollingReleaseConfigResponse = {
+  /**
+   * Project-level rolling release configuration that defines how deployments should be gradually rolled out
+   */
+  rollingRelease: {
+    /**
+     * The environment that the release targets, currently only supports production. Adding in case we want to configure with alias groups or custom environments.
+     *
+     * @example production
+     */
+    target: string;
+    /**
+     * An array of all the stages required during a deployment release. Each stage defines a target percentage and advancement rules. The final stage must always have targetPercentage: 100.
+     */
+    stages?:
+      | {
+          /**
+           * The percentage of traffic to serve to the canary deployment (0-100)
+           *
+           * @example 25
+           */
+          targetPercentage: number;
+          /**
+           * Whether or not this stage requires manual approval to proceed
+           *
+           * @example false
+           */
+          requireApproval?: boolean;
+          /**
+           * Duration in minutes for automatic advancement to the next stage
+           *
+           * @example 600
+           */
+          duration?: number;
+        }[]
+      | null;
+    /**
+     * Whether the request served by a canary deployment should return a header indicating a canary was served. Defaults to `false` when omitted.
+     *
+     * @example false
+     */
+    canaryResponseHeader?: boolean;
+  } | null;
+};
+
+export type GetRollingReleaseConfigVariables = {
+  pathParams: GetRollingReleaseConfigPathParams;
+  queryParams?: GetRollingReleaseConfigQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Get the Rolling Releases configuration for a project. The project-level config is simply a template that will be used for any future rolling release, and not the configuration for any active rolling release.
+ */
+export const getRollingReleaseConfig = (variables: GetRollingReleaseConfigVariables, signal?: AbortSignal) =>
+  fetch<
+    GetRollingReleaseConfigResponse,
+    GetRollingReleaseConfigError,
+    undefined,
+    {},
+    GetRollingReleaseConfigQueryParams,
+    GetRollingReleaseConfigPathParams
+  >({ url: '/v1/projects/{idOrName}/rolling-release/config', method: 'get', ...variables, signal });
+
+export type DeleteRollingReleaseConfigPathParams = {
+  /**
+   * Project ID or project name (URL-encoded)
+   */
+  idOrName: string;
+};
+
+export type DeleteRollingReleaseConfigQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type DeleteRollingReleaseConfigError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeleteRollingReleaseConfigResponse = {
+  rollingRelease: void | null;
+};
+
+export type DeleteRollingReleaseConfigVariables = {
+  pathParams: DeleteRollingReleaseConfigPathParams;
+  queryParams?: DeleteRollingReleaseConfigQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Disable Rolling Releases for a project means that future deployments will not undergo a rolling release. Changing the config never alters a rollout that's already in-flight—it only affects the next production deployment. If you want to also stop the current rollout, call this endpoint to disable the feature, and then call either the /complete or /abort endpoint.
+ */
+export const deleteRollingReleaseConfig = (variables: DeleteRollingReleaseConfigVariables, signal?: AbortSignal) =>
+  fetch<
+    DeleteRollingReleaseConfigResponse,
+    DeleteRollingReleaseConfigError,
+    undefined,
+    {},
+    DeleteRollingReleaseConfigQueryParams,
+    DeleteRollingReleaseConfigPathParams
+  >({ url: '/v1/projects/{idOrName}/rolling-release/config', method: 'delete', ...variables, signal });
+
+export type UpdateRollingReleaseConfigPathParams = {
+  /**
+   * Project ID or project name (URL-encoded)
+   */
+  idOrName: string;
+};
+
+export type UpdateRollingReleaseConfigQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type UpdateRollingReleaseConfigError = Fetcher.ErrorWrapper<undefined>;
+
+export type UpdateRollingReleaseConfigVariables = {
+  pathParams: UpdateRollingReleaseConfigPathParams;
+  queryParams?: UpdateRollingReleaseConfigQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Update (or disable) Rolling Releases for a project. Changing the config never alters a rollout that's already in-flight. It only affects the next production deployment. This also applies to disabling Rolling Releases. If you want to also stop the current rollout, call this endpoint to disable the feature, and then call either the /complete or /abort endpoint. Note: Enabling Rolling Releases automatically enables skew protection on the project with the default value if it wasn't configured already.
+ */
+export const updateRollingReleaseConfig = (variables: UpdateRollingReleaseConfigVariables, signal?: AbortSignal) =>
+  fetch<
+    | {
+        rollingRelease: void | null;
+      }
+    | {
+        rollingRelease: {
+          stages?:
+            | {
+                /**
+                 * The percentage of traffic to serve to the canary deployment (0-100)
+                 *
+                 * @example 25
+                 */
+                targetPercentage: number;
+                /**
+                 * Whether or not this stage requires manual approval to proceed
+                 *
+                 * @example false
+                 */
+                requireApproval?: boolean;
+                /**
+                 * Duration in minutes for automatic advancement to the next stage
+                 *
+                 * @example 600
+                 */
+                duration?: number;
+              }[]
+            | null;
+        } | null;
+      },
+    UpdateRollingReleaseConfigError,
+    undefined,
+    {},
+    UpdateRollingReleaseConfigQueryParams,
+    UpdateRollingReleaseConfigPathParams
+  >({ url: '/v1/projects/{idOrName}/rolling-release/config', method: 'patch', ...variables, signal });
+
+export type GetRollingReleasePathParams = {
+  /**
+   * Project ID or project name (URL-encoded)
+   */
+  idOrName: string;
+};
+
+export type GetRollingReleaseQueryParams = {
+  /**
+   * Filter by rolling release state
+   */
+  state?: 'ACTIVE' | 'COMPLETE' | 'ABORTED';
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type GetRollingReleaseError = Fetcher.ErrorWrapper<undefined>;
+
+export type GetRollingReleaseResponse = {
+  /**
+   * Rolling release information including configuration and document details, or null if no rolling release exists
+   */
+  rollingRelease: {
+    /**
+     * The current state of the rolling release
+     *
+     * @example ACTIVE
+     */
+    state: 'ABORTED' | 'ACTIVE' | 'COMPLETE';
+    /**
+     * The current deployment receiving production traffic
+     *
+     * @example {"id":"dpl_abc123","name":"my-shop@main","url":"my-shop.vercel.app","target":"production","source":"git","createdAt":1716206500000,"readyState":"READY","readyStateAt":1716206800000}
+     */
+    currentDeployment: {
+      id: string;
+      name: string;
+      url: string;
+      target?: 'production' | 'staging' | null;
+      source?:
+        | 'api-trigger-git-deploy'
+        | 'cli'
+        | 'clone/repo'
+        | 'git'
+        | 'import'
+        | 'import/repo'
+        | 'redeploy'
+        | 'v0-web';
+      createdAt: number;
+      readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+      readyStateAt?: number;
+    } | null;
+    /**
+     * The canary deployment being rolled out
+     *
+     * @example {"id":"dpl_def456","name":"my-shop@9c7e2f4","url":"9c7e2f4-my-shop.vercel.app","target":"production","source":"git","createdAt":1716210100000,"readyState":"READY","readyStateAt":1716210400000}
+     */
+    canaryDeployment: {
+      id: string;
+      name: string;
+      url: string;
+      target?: 'production' | 'staging' | null;
+      source?:
+        | 'api-trigger-git-deploy'
+        | 'cli'
+        | 'clone/repo'
+        | 'git'
+        | 'import'
+        | 'import/repo'
+        | 'redeploy'
+        | 'v0-web';
+      createdAt: number;
+      readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+      readyStateAt?: number;
+    } | null;
+    /**
+     * The ID of a deployment queued for the next rolling release
+     *
+     * @example dpl_ghi789
+     */
+    queuedDeploymentId: string | null;
+    /**
+     * The advancement type of the rolling release
+     *
+     * @example manual-approval
+     */
+    advancementType: 'automatic' | 'manual-approval';
+    /**
+     * All stages configured for this rolling release
+     *
+     * @example {"index":0,"isFinalStage":false,"targetPercentage":5,"requireApproval":true,"duration":null}
+     * @example {"index":1,"isFinalStage":false,"targetPercentage":25,"requireApproval":true,"duration":null}
+     * @example {"index":2,"isFinalStage":false,"targetPercentage":60,"requireApproval":true,"duration":null}
+     * @example {"index":3,"isFinalStage":true,"targetPercentage":100,"requireApproval":false,"duration":null}
+     */
+    stages: {
+      /**
+       * The zero-based index of the stage
+       *
+       * @example 0
+       */
+      index: number;
+      /**
+       * Whether or not this stage is the final stage (targetPercentage === 100)
+       *
+       * @example false
+       */
+      isFinalStage: boolean;
+      /**
+       * The percentage of traffic to serve to the canary deployment (0-100)
+       *
+       * @example 25
+       */
+      targetPercentage: number;
+      /**
+       * Whether or not this stage requires manual approval to proceed
+       */
+      requireApproval: boolean;
+      /**
+       * Duration in seconds for automatic advancement, null for manual stages or the final stage
+       *
+       * @example null
+       */
+      duration: number | null;
+    }[];
+    /**
+     * The currently active stage, null if the rollout is aborted
+     *
+     * @example {"index":1,"isFinalStage":false,"targetPercentage":25,"requireApproval":true,"duration":null}
+     */
+    activeStage: {
+      /**
+       * The zero-based index of the stage
+       *
+       * @example 0
+       */
+      index: number;
+      /**
+       * Whether or not this stage is the final stage (targetPercentage === 100)
+       *
+       * @example false
+       */
+      isFinalStage: boolean;
+      /**
+       * The percentage of traffic to serve to the canary deployment (0-100)
+       *
+       * @example 25
+       */
+      targetPercentage: number;
+      /**
+       * Whether or not this stage requires manual approval to proceed
+       */
+      requireApproval: boolean;
+      /**
+       * Duration in seconds for automatic advancement, null for manual stages or the final stage
+       *
+       * @example null
+       */
+      duration: number | null;
+    } | null;
+    /**
+     * The next stage to be activated, null if not in ACTIVE state
+     *
+     * @example {"index":2,"isFinalStage":false,"targetPercentage":60,"requireApproval":true,"duration":null}
+     */
+    nextStage: {
+      /**
+       * The zero-based index of the stage
+       *
+       * @example 0
+       */
+      index: number;
+      /**
+       * Whether or not this stage is the final stage (targetPercentage === 100)
+       *
+       * @example false
+       */
+      isFinalStage: boolean;
+      /**
+       * The percentage of traffic to serve to the canary deployment (0-100)
+       *
+       * @example 25
+       */
+      targetPercentage: number;
+      /**
+       * Whether or not this stage requires manual approval to proceed
+       */
+      requireApproval: boolean;
+      /**
+       * Duration in seconds for automatic advancement, null for manual stages or the final stage
+       *
+       * @example null
+       */
+      duration: number | null;
+    } | null;
+    /**
+     * Unix timestamp in milliseconds when the rolling release started
+     *
+     * @example 1716210500000
+     */
+    startedAt: number;
+    /**
+     * Unix timestamp in milliseconds when the rolling release was last updated
+     *
+     * @example 1716210600000
+     */
+    updatedAt: number;
+  } | null;
+};
+
+export type GetRollingReleaseVariables = {
+  pathParams: GetRollingReleasePathParams;
+  queryParams?: GetRollingReleaseQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Return the Rolling Release for a project, regardless of whether the rollout is active, aborted, or completed. If the feature is enabled but no deployment has occurred yet, null will be returned.
+ */
+export const getRollingRelease = (variables: GetRollingReleaseVariables, signal?: AbortSignal) =>
+  fetch<
+    GetRollingReleaseResponse,
+    GetRollingReleaseError,
+    undefined,
+    {},
+    GetRollingReleaseQueryParams,
+    GetRollingReleasePathParams
+  >({ url: '/v1/projects/{idOrName}/rolling-release', method: 'get', ...variables, signal });
+
+export type ApproveRollingReleaseStagePathParams = {
+  /**
+   * Project ID or project name (URL-encoded)
+   */
+  idOrName: string;
+};
+
+export type ApproveRollingReleaseStageQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type ApproveRollingReleaseStageError = Fetcher.ErrorWrapper<undefined>;
+
+export type ApproveRollingReleaseStageResponse = {
+  /**
+   * Rolling release information including configuration and document details, or null if no rolling release exists
+   */
+  rollingRelease: {
+    /**
+     * The current state of the rolling release
+     *
+     * @example ACTIVE
+     */
+    state: 'ABORTED' | 'ACTIVE' | 'COMPLETE';
+    /**
+     * The current deployment receiving production traffic
+     *
+     * @example {"id":"dpl_abc123","name":"my-shop@main","url":"my-shop.vercel.app","target":"production","source":"git","createdAt":1716206500000,"readyState":"READY","readyStateAt":1716206800000}
+     */
+    currentDeployment: {
+      id: string;
+      name: string;
+      url: string;
+      target?: 'production' | 'staging' | null;
+      source?:
+        | 'api-trigger-git-deploy'
+        | 'cli'
+        | 'clone/repo'
+        | 'git'
+        | 'import'
+        | 'import/repo'
+        | 'redeploy'
+        | 'v0-web';
+      createdAt: number;
+      readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+      readyStateAt?: number;
+    } | null;
+    /**
+     * The canary deployment being rolled out
+     *
+     * @example {"id":"dpl_def456","name":"my-shop@9c7e2f4","url":"9c7e2f4-my-shop.vercel.app","target":"production","source":"git","createdAt":1716210100000,"readyState":"READY","readyStateAt":1716210400000}
+     */
+    canaryDeployment: {
+      id: string;
+      name: string;
+      url: string;
+      target?: 'production' | 'staging' | null;
+      source?:
+        | 'api-trigger-git-deploy'
+        | 'cli'
+        | 'clone/repo'
+        | 'git'
+        | 'import'
+        | 'import/repo'
+        | 'redeploy'
+        | 'v0-web';
+      createdAt: number;
+      readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+      readyStateAt?: number;
+    } | null;
+    /**
+     * The ID of a deployment queued for the next rolling release
+     *
+     * @example dpl_ghi789
+     */
+    queuedDeploymentId: string | null;
+    /**
+     * The advancement type of the rolling release
+     *
+     * @example manual-approval
+     */
+    advancementType: 'automatic' | 'manual-approval';
+    /**
+     * All stages configured for this rolling release
+     *
+     * @example {"index":0,"isFinalStage":false,"targetPercentage":5,"requireApproval":true,"duration":null}
+     * @example {"index":1,"isFinalStage":false,"targetPercentage":25,"requireApproval":true,"duration":null}
+     * @example {"index":2,"isFinalStage":false,"targetPercentage":60,"requireApproval":true,"duration":null}
+     * @example {"index":3,"isFinalStage":true,"targetPercentage":100,"requireApproval":false,"duration":null}
+     */
+    stages: {
+      /**
+       * The zero-based index of the stage
+       *
+       * @example 0
+       */
+      index: number;
+      /**
+       * Whether or not this stage is the final stage (targetPercentage === 100)
+       *
+       * @example false
+       */
+      isFinalStage: boolean;
+      /**
+       * The percentage of traffic to serve to the canary deployment (0-100)
+       *
+       * @example 25
+       */
+      targetPercentage: number;
+      /**
+       * Whether or not this stage requires manual approval to proceed
+       */
+      requireApproval: boolean;
+      /**
+       * Duration in seconds for automatic advancement, null for manual stages or the final stage
+       *
+       * @example null
+       */
+      duration: number | null;
+    }[];
+    /**
+     * The currently active stage, null if the rollout is aborted
+     *
+     * @example {"index":1,"isFinalStage":false,"targetPercentage":25,"requireApproval":true,"duration":null}
+     */
+    activeStage: {
+      /**
+       * The zero-based index of the stage
+       *
+       * @example 0
+       */
+      index: number;
+      /**
+       * Whether or not this stage is the final stage (targetPercentage === 100)
+       *
+       * @example false
+       */
+      isFinalStage: boolean;
+      /**
+       * The percentage of traffic to serve to the canary deployment (0-100)
+       *
+       * @example 25
+       */
+      targetPercentage: number;
+      /**
+       * Whether or not this stage requires manual approval to proceed
+       */
+      requireApproval: boolean;
+      /**
+       * Duration in seconds for automatic advancement, null for manual stages or the final stage
+       *
+       * @example null
+       */
+      duration: number | null;
+    } | null;
+    /**
+     * The next stage to be activated, null if not in ACTIVE state
+     *
+     * @example {"index":2,"isFinalStage":false,"targetPercentage":60,"requireApproval":true,"duration":null}
+     */
+    nextStage: {
+      /**
+       * The zero-based index of the stage
+       *
+       * @example 0
+       */
+      index: number;
+      /**
+       * Whether or not this stage is the final stage (targetPercentage === 100)
+       *
+       * @example false
+       */
+      isFinalStage: boolean;
+      /**
+       * The percentage of traffic to serve to the canary deployment (0-100)
+       *
+       * @example 25
+       */
+      targetPercentage: number;
+      /**
+       * Whether or not this stage requires manual approval to proceed
+       */
+      requireApproval: boolean;
+      /**
+       * Duration in seconds for automatic advancement, null for manual stages or the final stage
+       *
+       * @example null
+       */
+      duration: number | null;
+    } | null;
+    /**
+     * Unix timestamp in milliseconds when the rolling release started
+     *
+     * @example 1716210500000
+     */
+    startedAt: number;
+    /**
+     * Unix timestamp in milliseconds when the rolling release was last updated
+     *
+     * @example 1716210600000
+     */
+    updatedAt: number;
+  } | null;
+};
+
+export type ApproveRollingReleaseStageRequestBody = {
+  /**
+   * The index of the stage to transition to
+   */
+  nextStageIndex: number;
+  /**
+   * The id of the canary deployment to approve for the next stage
+   */
+  canaryDeploymentId: string;
+};
+
+export type ApproveRollingReleaseStageVariables = {
+  body: ApproveRollingReleaseStageRequestBody;
+  pathParams: ApproveRollingReleaseStagePathParams;
+  queryParams?: ApproveRollingReleaseStageQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Advance a rollout to the next stage. This is only needed when rolling releases is configured to require manual approval.
+ */
+export const approveRollingReleaseStage = (variables: ApproveRollingReleaseStageVariables, signal?: AbortSignal) =>
+  fetch<
+    ApproveRollingReleaseStageResponse,
+    ApproveRollingReleaseStageError,
+    ApproveRollingReleaseStageRequestBody,
+    {},
+    ApproveRollingReleaseStageQueryParams,
+    ApproveRollingReleaseStagePathParams
+  >({ url: '/v1/projects/{idOrName}/rolling-release/approve-stage', method: 'post', ...variables, signal });
+
+export type CompleteRollingReleasePathParams = {
+  /**
+   * Project ID or project name (URL-encoded)
+   */
+  idOrName: string;
+};
+
+export type CompleteRollingReleaseQueryParams = {
+  /**
+   * The Team identifier to perform the request on behalf of.
+   */
+  teamId?: string;
+  /**
+   * The Team slug to perform the request on behalf of.
+   */
+  slug?: string;
+};
+
+export type CompleteRollingReleaseError = Fetcher.ErrorWrapper<undefined>;
+
+export type CompleteRollingReleaseResponse = {
+  /**
+   * Rolling release information including configuration and document details, or null if no rolling release exists
+   */
+  rollingRelease: {
+    /**
+     * The current state of the rolling release
+     *
+     * @example ACTIVE
+     */
+    state: 'ABORTED' | 'ACTIVE' | 'COMPLETE';
+    /**
+     * The current deployment receiving production traffic
+     *
+     * @example {"id":"dpl_abc123","name":"my-shop@main","url":"my-shop.vercel.app","target":"production","source":"git","createdAt":1716206500000,"readyState":"READY","readyStateAt":1716206800000}
+     */
+    currentDeployment: {
+      id: string;
+      name: string;
+      url: string;
+      target?: 'production' | 'staging' | null;
+      source?:
+        | 'api-trigger-git-deploy'
+        | 'cli'
+        | 'clone/repo'
+        | 'git'
+        | 'import'
+        | 'import/repo'
+        | 'redeploy'
+        | 'v0-web';
+      createdAt: number;
+      readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+      readyStateAt?: number;
+    } | null;
+    /**
+     * The canary deployment being rolled out
+     *
+     * @example {"id":"dpl_def456","name":"my-shop@9c7e2f4","url":"9c7e2f4-my-shop.vercel.app","target":"production","source":"git","createdAt":1716210100000,"readyState":"READY","readyStateAt":1716210400000}
+     */
+    canaryDeployment: {
+      id: string;
+      name: string;
+      url: string;
+      target?: 'production' | 'staging' | null;
+      source?:
+        | 'api-trigger-git-deploy'
+        | 'cli'
+        | 'clone/repo'
+        | 'git'
+        | 'import'
+        | 'import/repo'
+        | 'redeploy'
+        | 'v0-web';
+      createdAt: number;
+      readyState: 'BUILDING' | 'CANCELED' | 'ERROR' | 'INITIALIZING' | 'QUEUED' | 'READY';
+      readyStateAt?: number;
+    } | null;
+    /**
+     * The ID of a deployment queued for the next rolling release
+     *
+     * @example dpl_ghi789
+     */
+    queuedDeploymentId: string | null;
+    /**
+     * The advancement type of the rolling release
+     *
+     * @example manual-approval
+     */
+    advancementType: 'automatic' | 'manual-approval';
+    /**
+     * All stages configured for this rolling release
+     *
+     * @example {"index":0,"isFinalStage":false,"targetPercentage":5,"requireApproval":true,"duration":null}
+     * @example {"index":1,"isFinalStage":false,"targetPercentage":25,"requireApproval":true,"duration":null}
+     * @example {"index":2,"isFinalStage":false,"targetPercentage":60,"requireApproval":true,"duration":null}
+     * @example {"index":3,"isFinalStage":true,"targetPercentage":100,"requireApproval":false,"duration":null}
+     */
+    stages: {
+      /**
+       * The zero-based index of the stage
+       *
+       * @example 0
+       */
+      index: number;
+      /**
+       * Whether or not this stage is the final stage (targetPercentage === 100)
+       *
+       * @example false
+       */
+      isFinalStage: boolean;
+      /**
+       * The percentage of traffic to serve to the canary deployment (0-100)
+       *
+       * @example 25
+       */
+      targetPercentage: number;
+      /**
+       * Whether or not this stage requires manual approval to proceed
+       */
+      requireApproval: boolean;
+      /**
+       * Duration in seconds for automatic advancement, null for manual stages or the final stage
+       *
+       * @example null
+       */
+      duration: number | null;
+    }[];
+    /**
+     * The currently active stage, null if the rollout is aborted
+     *
+     * @example {"index":1,"isFinalStage":false,"targetPercentage":25,"requireApproval":true,"duration":null}
+     */
+    activeStage: {
+      /**
+       * The zero-based index of the stage
+       *
+       * @example 0
+       */
+      index: number;
+      /**
+       * Whether or not this stage is the final stage (targetPercentage === 100)
+       *
+       * @example false
+       */
+      isFinalStage: boolean;
+      /**
+       * The percentage of traffic to serve to the canary deployment (0-100)
+       *
+       * @example 25
+       */
+      targetPercentage: number;
+      /**
+       * Whether or not this stage requires manual approval to proceed
+       */
+      requireApproval: boolean;
+      /**
+       * Duration in seconds for automatic advancement, null for manual stages or the final stage
+       *
+       * @example null
+       */
+      duration: number | null;
+    } | null;
+    /**
+     * The next stage to be activated, null if not in ACTIVE state
+     *
+     * @example {"index":2,"isFinalStage":false,"targetPercentage":60,"requireApproval":true,"duration":null}
+     */
+    nextStage: {
+      /**
+       * The zero-based index of the stage
+       *
+       * @example 0
+       */
+      index: number;
+      /**
+       * Whether or not this stage is the final stage (targetPercentage === 100)
+       *
+       * @example false
+       */
+      isFinalStage: boolean;
+      /**
+       * The percentage of traffic to serve to the canary deployment (0-100)
+       *
+       * @example 25
+       */
+      targetPercentage: number;
+      /**
+       * Whether or not this stage requires manual approval to proceed
+       */
+      requireApproval: boolean;
+      /**
+       * Duration in seconds for automatic advancement, null for manual stages or the final stage
+       *
+       * @example null
+       */
+      duration: number | null;
+    } | null;
+    /**
+     * Unix timestamp in milliseconds when the rolling release started
+     *
+     * @example 1716210500000
+     */
+    startedAt: number;
+    /**
+     * Unix timestamp in milliseconds when the rolling release was last updated
+     *
+     * @example 1716210600000
+     */
+    updatedAt: number;
+  } | null;
+};
+
+export type CompleteRollingReleaseRequestBody = {
+  /**
+   * The ID of the canary deployment to complete
+   */
+  canaryDeploymentId: string;
+};
+
+export type CompleteRollingReleaseVariables = {
+  body: CompleteRollingReleaseRequestBody;
+  pathParams: CompleteRollingReleasePathParams;
+  queryParams?: CompleteRollingReleaseQueryParams;
+} & FetcherExtraProps;
+
+/**
+ * Force-complete a Rolling Release. The canary deployment will begin serving 100% of the traffic.
+ */
+export const completeRollingRelease = (variables: CompleteRollingReleaseVariables, signal?: AbortSignal) =>
+  fetch<
+    CompleteRollingReleaseResponse,
+    CompleteRollingReleaseError,
+    CompleteRollingReleaseRequestBody,
+    {},
+    CompleteRollingReleaseQueryParams,
+    CompleteRollingReleasePathParams
+  >({ url: '/v1/projects/{idOrName}/rolling-release/complete', method: 'post', ...variables, signal });
 
 export type CreateProjectTransferRequestPathParams = {
   /**
@@ -19523,7 +21438,19 @@ export type AcceptProjectTransferRequestVariables = {
  */
 export const acceptProjectTransferRequest = (variables: AcceptProjectTransferRequestVariables, signal?: AbortSignal) =>
   fetch<
-    Record<string, any>,
+    | {
+        partnerCalls: {
+          installationId: string;
+          resourceIds: string[];
+          result: {
+            status: 'fulfilled' | 'errored';
+            error?: Record<string, any>;
+            code?: string;
+          };
+        }[];
+        resourceTransferErrors: Record<string, any>[];
+      }
+    | Record<string, any>,
     AcceptProjectTransferRequestError,
     AcceptProjectTransferRequestRequestBody,
     {},
@@ -19964,7 +21891,21 @@ export type PutFirewallConfigResponse = {
     }[];
     changes: Record<string, any>[];
     managedRules?: {
-      [key: string]: {
+      bot_protection?: {
+        active: boolean;
+        action?: 'challenge' | 'deny' | 'log';
+        updatedAt?: string;
+        userId?: string;
+        username?: string;
+      };
+      ai_bots?: {
+        active: boolean;
+        action?: 'challenge' | 'deny' | 'log';
+        updatedAt?: string;
+        userId?: string;
+        username?: string;
+      };
+      owasp?: {
         active: boolean;
         action?: 'challenge' | 'deny' | 'log';
         updatedAt?: string;
@@ -19972,6 +21913,7 @@ export type PutFirewallConfigResponse = {
         username?: string;
       };
     };
+    botIdEnabled?: boolean;
   };
 };
 
@@ -20109,6 +22051,7 @@ export type PutFirewallConfigRequestBody = {
     notes?: string;
     action: 'bypass' | 'challenge' | 'deny' | 'log';
   }[];
+  botIdEnabled?: boolean;
 };
 
 export type PutFirewallConfigVariables = {
@@ -20383,6 +22326,11 @@ export type UpdateFirewallConfigVariables = {
             action?: 'log' | 'challenge' | 'deny';
           };
         };
+      }
+    | {
+        action: string;
+        id?: null;
+        value: boolean;
       };
   queryParams: UpdateFirewallConfigQueryParams;
 } & FetcherExtraProps;
@@ -20632,6 +22580,11 @@ export const updateFirewallConfig = (variables: UpdateFirewallConfigVariables, s
             action?: 'log' | 'challenge' | 'deny';
           };
         };
+      }
+    | {
+        action: string;
+        id?: null;
+        value: boolean;
       },
     {},
     UpdateFirewallConfigQueryParams,
@@ -20769,7 +22722,21 @@ export type GetFirewallConfigResponse = {
   }[];
   changes: Record<string, any>[];
   managedRules?: {
-    [key: string]: {
+    bot_protection?: {
+      active: boolean;
+      action?: 'challenge' | 'deny' | 'log';
+      updatedAt?: string;
+      userId?: string;
+      username?: string;
+    };
+    ai_bots?: {
+      active: boolean;
+      action?: 'challenge' | 'deny' | 'log';
+      updatedAt?: string;
+      userId?: string;
+      username?: string;
+    };
+    owasp?: {
       active: boolean;
       action?: 'challenge' | 'deny' | 'log';
       updatedAt?: string;
@@ -20777,6 +22744,7 @@ export type GetFirewallConfigResponse = {
       username?: string;
     };
   };
+  botIdEnabled?: boolean;
 };
 
 export type GetFirewallConfigVariables = {
@@ -21901,7 +23869,7 @@ export type GetTeamVariables = {
  * Get information for the Team specified by the `teamId` parameter.
  */
 export const getTeam = (variables: GetTeamVariables, signal?: AbortSignal) =>
-  fetch<Schemas.TeamLimited, GetTeamError, undefined, {}, GetTeamQueryParams, GetTeamPathParams>({
+  fetch<Schemas.Team, GetTeamError, undefined, {}, GetTeamQueryParams, GetTeamPathParams>({
     url: '/v2/teams/{teamId}',
     method: 'get',
     ...variables,
@@ -22031,6 +23999,37 @@ export type PatchTeamRequestBody = {
    * @example false
    */
   hideIpAddressesInLogDrains?: boolean;
+  /**
+   * Default deployment protection settings for new projects.
+   */
+  defaultDeploymentProtection?: {
+    /**
+     * Allows to protect project deployments with a password
+     */
+    passwordProtection?: {
+      /**
+       * Specify if the password will apply to every Deployment Target or just Preview
+       */
+      deploymentType: 'all' | 'all_except_custom_domains' | 'preview' | 'prod_deployment_urls_and_all_previews';
+      /**
+       * The password that will be used to protect Project Deployments
+       *
+       * @maxLength 72
+       */
+      password?: string | null;
+    } | null;
+    /**
+     * Ensures visitors to your Preview Deployments are logged into Vercel and have a minimum of Viewer access on your team
+     */
+    ssoProtection?: {
+      /**
+       * Specify if the Vercel Authentication (SSO Protection) will apply to every Deployment Target or just Preview
+       *
+       * @default preview
+       */
+      deploymentType: 'all' | 'all_except_custom_domains' | 'preview' | 'prod_deployment_urls_and_all_previews';
+    } | null;
+  };
 };
 
 export type PatchTeamVariables = {
@@ -22043,7 +24042,7 @@ export type PatchTeamVariables = {
  * Update the information of a Team specified by the `teamId` parameter. The request body should contain the information that will be updated on the Team.
  */
 export const patchTeam = (variables: PatchTeamVariables, signal?: AbortSignal) =>
-  fetch<Schemas.TeamLimited, PatchTeamError, PatchTeamRequestBody, {}, PatchTeamQueryParams, PatchTeamPathParams>({
+  fetch<Schemas.Team, PatchTeamError, PatchTeamRequestBody, {}, PatchTeamQueryParams, PatchTeamPathParams>({
     url: '/v2/teams/{teamId}',
     method: 'patch',
     ...variables,
@@ -22103,10 +24102,6 @@ export type CreateTeamResponse = {
    */
   id: string;
   slug: string;
-  /**
-   * IMPORTANT: If extending Billing, particularly with optional fields, make sure you also update `sync-orb-subscription-to-owner.ts` to handle the items when the object is recreated.
-   */
-  billing: Record<string, any>;
 };
 
 export type CreateTeamRequestBody = {
@@ -22353,7 +24348,6 @@ export type ListAuthTokensError = Fetcher.ErrorWrapper<undefined>;
 
 export type ListAuthTokensResponse = {
   tokens: Schemas.AuthToken[];
-  testingToken?: Schemas.AuthToken;
   pagination: Schemas.Pagination;
 };
 
@@ -22583,6 +24577,10 @@ export type CreateWebhookResponse = {
     | 'deployment-ready'
     | 'deployment.canceled'
     | 'deployment.check-rerequested'
+    | 'deployment.checkrun.cancel'
+    | 'deployment.checkrun.start'
+    | 'deployment.checks.failed'
+    | 'deployment.checks.succeeded'
     | 'deployment.created'
     | 'deployment.error'
     | 'deployment.integration.action.cancel'
@@ -22592,7 +24590,19 @@ export type CreateWebhookResponse = {
     | 'deployment.ready'
     | 'deployment.succeeded'
     | 'domain-created'
+    | 'domain.auto-renew.changed'
+    | 'domain.certificate.add'
+    | 'domain.certificate.add.failed'
+    | 'domain.certificate.deleted'
+    | 'domain.certificate.renew'
+    | 'domain.certificate.renew.failed'
     | 'domain.created'
+    | 'domain.dns.records.changed'
+    | 'domain.renewal'
+    | 'domain.renewal.failed'
+    | 'domain.transfer-in.completed'
+    | 'domain.transfer-in.failed'
+    | 'domain.transfer-in.started'
     | 'edge-config.created'
     | 'edge-config.deleted'
     | 'edge-config.items.updated'
@@ -22613,6 +24623,12 @@ export type CreateWebhookResponse = {
     | 'project-created'
     | 'project-removed'
     | 'project.created'
+    | 'project.domain.created'
+    | 'project.domain.deleted'
+    | 'project.domain.moved'
+    | 'project.domain.unverified'
+    | 'project.domain.updated'
+    | 'project.domain.verified'
     | 'project.removed'
     | 'project.rolling-release.aborted'
     | 'project.rolling-release.approved'
@@ -22679,6 +24695,10 @@ export type CreateWebhookRequestBody = {
     | 'deployment-ready'
     | 'deployment.canceled'
     | 'deployment.check-rerequested'
+    | 'deployment.checkrun.cancel'
+    | 'deployment.checkrun.start'
+    | 'deployment.checks.failed'
+    | 'deployment.checks.succeeded'
     | 'deployment.created'
     | 'deployment.error'
     | 'deployment.integration.action.cancel'
@@ -22688,7 +24708,19 @@ export type CreateWebhookRequestBody = {
     | 'deployment.ready'
     | 'deployment.succeeded'
     | 'domain-created'
+    | 'domain.auto-renew.changed'
+    | 'domain.certificate.add'
+    | 'domain.certificate.add.failed'
+    | 'domain.certificate.deleted'
+    | 'domain.certificate.renew'
+    | 'domain.certificate.renew.failed'
     | 'domain.created'
+    | 'domain.dns.records.changed'
+    | 'domain.renewal'
+    | 'domain.renewal.failed'
+    | 'domain.transfer-in.completed'
+    | 'domain.transfer-in.failed'
+    | 'domain.transfer-in.started'
     | 'edge-config.created'
     | 'edge-config.deleted'
     | 'edge-config.items.updated'
@@ -22709,6 +24741,12 @@ export type CreateWebhookRequestBody = {
     | 'project-created'
     | 'project-removed'
     | 'project.created'
+    | 'project.domain.created'
+    | 'project.domain.deleted'
+    | 'project.domain.moved'
+    | 'project.domain.unverified'
+    | 'project.domain.updated'
+    | 'project.domain.verified'
     | 'project.removed'
     | 'project.rolling-release.aborted'
     | 'project.rolling-release.approved'
@@ -22817,6 +24855,7 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
                 | 'sanity-v3'
                 | 'sanity'
                 | 'storybook'
+                | 'nitro'
                 | null;
               latestDeployment?: string;
             }[]
@@ -22830,6 +24869,18 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'budget.reached'
           | 'budget.reset'
           | 'domain.created'
+          | 'domain.dns.records.changed'
+          | 'domain.transfer-in.started'
+          | 'domain.transfer-in.completed'
+          | 'domain.transfer-in.failed'
+          | 'domain.certificate.add'
+          | 'domain.certificate.add.failed'
+          | 'domain.certificate.renew'
+          | 'domain.certificate.renew.failed'
+          | 'domain.certificate.deleted'
+          | 'domain.renewal'
+          | 'domain.renewal.failed'
+          | 'domain.auto-renew.changed'
           | 'deployment.created'
           | 'deployment.error'
           | 'deployment.canceled'
@@ -22840,6 +24891,8 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'deployment.integration.action.start'
           | 'deployment.integration.action.cancel'
           | 'deployment.integration.action.cleanup'
+          | 'deployment.checkrun.start'
+          | 'deployment.checkrun.cancel'
           | 'edge-config.created'
           | 'edge-config.deleted'
           | 'edge-config.items.updated'
@@ -22851,10 +24904,18 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'integration-resource.project-disconnected'
           | 'project.created'
           | 'project.removed'
+          | 'project.domain.created'
+          | 'project.domain.updated'
+          | 'project.domain.deleted'
+          | 'project.domain.verified'
+          | 'project.domain.unverified'
+          | 'project.domain.moved'
           | 'project.rolling-release.started'
           | 'project.rolling-release.aborted'
           | 'project.rolling-release.completed'
           | 'project.rolling-release.approved'
+          | 'deployment.checks.failed'
+          | 'deployment.checks.succeeded'
           | 'deployment-checks-completed'
           | 'deployment-ready'
           | 'deployment-prepared'
@@ -22922,6 +24983,18 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'budget.reached'
           | 'budget.reset'
           | 'domain.created'
+          | 'domain.dns.records.changed'
+          | 'domain.transfer-in.started'
+          | 'domain.transfer-in.completed'
+          | 'domain.transfer-in.failed'
+          | 'domain.certificate.add'
+          | 'domain.certificate.add.failed'
+          | 'domain.certificate.renew'
+          | 'domain.certificate.renew.failed'
+          | 'domain.certificate.deleted'
+          | 'domain.renewal'
+          | 'domain.renewal.failed'
+          | 'domain.auto-renew.changed'
           | 'deployment.created'
           | 'deployment.error'
           | 'deployment.canceled'
@@ -22932,6 +25005,8 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'deployment.integration.action.start'
           | 'deployment.integration.action.cancel'
           | 'deployment.integration.action.cleanup'
+          | 'deployment.checkrun.start'
+          | 'deployment.checkrun.cancel'
           | 'edge-config.created'
           | 'edge-config.deleted'
           | 'edge-config.items.updated'
@@ -22943,10 +25018,18 @@ export const getWebhooks = (variables: GetWebhooksVariables, signal?: AbortSigna
           | 'integration-resource.project-disconnected'
           | 'project.created'
           | 'project.removed'
+          | 'project.domain.created'
+          | 'project.domain.updated'
+          | 'project.domain.deleted'
+          | 'project.domain.verified'
+          | 'project.domain.unverified'
+          | 'project.domain.moved'
           | 'project.rolling-release.started'
           | 'project.rolling-release.aborted'
           | 'project.rolling-release.completed'
           | 'project.rolling-release.approved'
+          | 'deployment.checks.failed'
+          | 'deployment.checks.succeeded'
           | 'deployment-checks-completed'
           | 'deployment-ready'
           | 'deployment-prepared'
@@ -23046,6 +25129,10 @@ export type GetWebhookResponse = {
     | 'deployment-ready'
     | 'deployment.canceled'
     | 'deployment.check-rerequested'
+    | 'deployment.checkrun.cancel'
+    | 'deployment.checkrun.start'
+    | 'deployment.checks.failed'
+    | 'deployment.checks.succeeded'
     | 'deployment.created'
     | 'deployment.error'
     | 'deployment.integration.action.cancel'
@@ -23055,7 +25142,19 @@ export type GetWebhookResponse = {
     | 'deployment.ready'
     | 'deployment.succeeded'
     | 'domain-created'
+    | 'domain.auto-renew.changed'
+    | 'domain.certificate.add'
+    | 'domain.certificate.add.failed'
+    | 'domain.certificate.deleted'
+    | 'domain.certificate.renew'
+    | 'domain.certificate.renew.failed'
     | 'domain.created'
+    | 'domain.dns.records.changed'
+    | 'domain.renewal'
+    | 'domain.renewal.failed'
+    | 'domain.transfer-in.completed'
+    | 'domain.transfer-in.failed'
+    | 'domain.transfer-in.started'
     | 'edge-config.created'
     | 'edge-config.deleted'
     | 'edge-config.items.updated'
@@ -23076,6 +25175,12 @@ export type GetWebhookResponse = {
     | 'project-created'
     | 'project-removed'
     | 'project.created'
+    | 'project.domain.created'
+    | 'project.domain.deleted'
+    | 'project.domain.moved'
+    | 'project.domain.unverified'
+    | 'project.domain.updated'
+    | 'project.domain.verified'
     | 'project.removed'
     | 'project.rolling-release.aborted'
     | 'project.rolling-release.approved'
@@ -23543,6 +25648,35 @@ export type ListAliasesResponse = {
             scope: 'email_invite';
           };
     };
+    /**
+     * The microfrontends for the alias including the routing configuration
+     */
+    microfrontends?: {
+      defaultApp: {
+        projectId: string;
+      };
+      /**
+       * A list of the deployment routing information for each project.
+       */
+      applications: {
+        /**
+         * The project ID that should use the below configuration.
+         */
+        projectId: string;
+        /**
+         * This is always set and is the fallback host to send the request to if there is no deployment ID.
+         */
+        fallbackHost: string;
+        /**
+         * This is only set if there are changes to the application. This is the deployment ID to use for requests to that application. If this is unset, requests will be sent to the `fallbackHost`.
+         */
+        deploymentId?: string;
+        /**
+         * This is used and set in the exact same way as `deploymentId`.
+         */
+        deploymentUrl?: string;
+      }[];
+    };
   }[];
   pagination: Schemas.Pagination;
 };
@@ -23739,6 +25873,35 @@ export type GetAliasResponse = {
           lastUpdatedBy: string;
           scope: 'email_invite';
         };
+  };
+  /**
+   * The microfrontends for the alias including the routing configuration
+   */
+  microfrontends?: {
+    defaultApp: {
+      projectId: string;
+    };
+    /**
+     * A list of the deployment routing information for each project.
+     */
+    applications: {
+      /**
+       * The project ID that should use the below configuration.
+       */
+      projectId: string;
+      /**
+       * This is always set and is the fallback host to send the request to if there is no deployment ID.
+       */
+      fallbackHost: string;
+      /**
+       * This is only set if there are changes to the application. This is the deployment ID to use for requests to that application. If this is unset, requests will be sent to the `fallbackHost`.
+       */
+      deploymentId?: string;
+      /**
+       * This is used and set in the exact same way as `deploymentId`.
+       */
+      deploymentUrl?: string;
+    }[];
   };
 };
 
@@ -24021,7 +26184,7 @@ export type GetCertByIdVariables = {
  */
 export const getCertById = (variables: GetCertByIdVariables, signal?: AbortSignal) =>
   fetch<GetCertByIdResponse, GetCertByIdError, undefined, {}, GetCertByIdQueryParams, GetCertByIdPathParams>({
-    url: '/v7/certs/{id}',
+    url: '/v8/certs/{id}',
     method: 'get',
     ...variables,
     signal
@@ -24057,7 +26220,7 @@ export type RemoveCertVariables = {
  */
 export const removeCert = (variables: RemoveCertVariables, signal?: AbortSignal) =>
   fetch<Record<string, any>, RemoveCertError, undefined, {}, RemoveCertQueryParams, RemoveCertPathParams>({
-    url: '/v7/certs/{id}',
+    url: '/v8/certs/{id}',
     method: 'delete',
     ...variables,
     signal
@@ -24101,7 +26264,7 @@ export type IssueCertVariables = {
  */
 export const issueCert = (variables: IssueCertVariables, signal?: AbortSignal) =>
   fetch<IssueCertResponse, IssueCertError, IssueCertRequestBody, {}, IssueCertQueryParams, {}>({
-    url: '/v7/certs',
+    url: '/v8/certs',
     method: 'post',
     ...variables,
     signal
@@ -24157,7 +26320,7 @@ export type UploadCertVariables = {
  */
 export const uploadCert = (variables: UploadCertVariables, signal?: AbortSignal) =>
   fetch<UploadCertResponse, UploadCertError, UploadCertRequestBody, {}, UploadCertQueryParams, {}>({
-    url: '/v7/certs',
+    url: '/v8/certs',
     method: 'put',
     ...variables,
     signal
@@ -24247,7 +26410,7 @@ export const getDeploymentFileContents = (variables: GetDeploymentFileContentsVa
     {},
     GetDeploymentFileContentsQueryParams,
     GetDeploymentFileContentsPathParams
-  >({ url: '/v7/deployments/{id}/files/{fileId}', method: 'get', ...variables, signal });
+  >({ url: '/v8/deployments/{id}/files/{fileId}', method: 'get', ...variables, signal });
 
 export type GetDeploymentsQueryParams = {
   /**
@@ -24351,6 +26514,10 @@ export type GetDeploymentsResponse = {
      * @example docs
      */
     name: string;
+    /**
+     * The project ID of the deployment
+     */
+    projectId: string;
     /**
      * The URL of the deployment.
      *
@@ -24497,6 +26664,19 @@ export type GetDeploymentsResponse = {
      */
     checksConclusion?: 'canceled' | 'failed' | 'skipped' | 'succeeded';
     /**
+     * Detailed information about v2 deployment checks. Includes information about blocked workflows in the deployment lifecycle.
+     */
+    checks?: {
+      /**
+       * Detailed information about v2 deployment checks. Includes information about blocked workflows in the deployment lifecycle.
+       */
+      ['deployment-alias']: {
+        state: 'failed' | 'pending' | 'succeeded';
+        startedAt: number;
+        completedAt?: number;
+      };
+    };
+    /**
      * Vercel URL to inspect the deployment.
      *
      * @example https://vercel.com/acme/nextjs/J1hXN00qjUeoYfpEEf7dnDtpSiVq
@@ -24532,6 +26712,7 @@ export type GetDeploymentsResponse = {
         | 'jekyll'
         | 'middleman'
         | 'nextjs'
+        | 'nitro'
         | 'nuxtjs'
         | 'parcel'
         | 'polymer'
@@ -24568,7 +26749,6 @@ export type GetDeploymentsResponse = {
       outputDirectory?: string | null;
       publicSource?: boolean | null;
       rootDirectory?: string | null;
-      serverlessFunctionRegion?: string | null;
       sourceFilesOutsideRootDirectory?: boolean;
       commandForIgnoringBuildStep?: string | null;
       createdAt?: number;
@@ -25210,7 +27390,6 @@ export const operationsByTag = {
     deleteDomain
   },
   dns: { getRecords, createRecord, updateRecord, removeRecord },
-  logDrains: { deleteConfigurableLogDrain, getIntegrationLogDrains, createLogDrain, deleteIntegrationLogDrain },
   edgeConfig: {
     getEdgeConfigs,
     createEdgeConfig,
@@ -25235,6 +27414,10 @@ export const operationsByTag = {
     getAccountInfo,
     getMember,
     createEvent,
+    getIntegrationResources,
+    getIntegrationResource,
+    deleteIntegrationResource,
+    importResource,
     submitBillingData,
     submitInvoice,
     getInvoice,
@@ -25242,7 +27425,6 @@ export const operationsByTag = {
     submitPrepaymentBalances,
     updateResourceSecrets,
     updateResourceSecretsById,
-    importResource,
     exchangeSsoToken,
     postV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItems,
     patchV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationItemsItemId,
@@ -25250,6 +27432,7 @@ export const operationsByTag = {
     putV1InstallationsIntegrationConfigurationIdResourcesResourceIdExperimentationEdgeConfig
   },
   authentication: { exchangeSsoToken, listAuthTokens, createAuthToken, getAuthToken, deleteAuthToken },
+  logDrains: { getIntegrationLogDrains, createLogDrain, deleteIntegrationLogDrain },
   logs: { getRuntimeLogs },
   projectMembers: { getProjectMembers, addProjectMember, removeProjectMember },
   environment: {
@@ -25258,6 +27441,15 @@ export const operationsByTag = {
     getCustomEnvironment,
     updateCustomEnvironment,
     removeCustomEnvironment
+  },
+  rollingRelease: {
+    getRollingReleaseBillingStatus,
+    getRollingReleaseConfig,
+    deleteRollingReleaseConfig,
+    updateRollingReleaseConfig,
+    getRollingRelease,
+    approveRollingReleaseStage,
+    completeRollingRelease
   },
   security: {
     updateAttackChallengeMode,

@@ -1,5 +1,30 @@
 # vercel-api-js
 
+## 0.25.3
+
+### Patch Changes
+
+- d186f87: Add AWS configuration options to user event and project responses
+- e4a886b: Remove dangerous promotion from canary
+- 9b061f2: Remove northstarMigration from AuthUser schema
+
+## 0.25.2
+
+### Patch Changes
+
+- 36bb5d7: Add new 'connectConfigurations' field to 'UpdateProjectDataCacheResponse'
+- afab785: Add `increasedOnDemandEmailSentAt`
+- 85cfccd: Add environmentOverrides field to UpdateResourceSecretsRequestBody, UpdateResourceSecretsByIdRequestBody, and ImportResourceRequestBody types
+- 26b0be3: Add edgeCacheNamespace to project related responses
+- 0029939: Add removeRedirects field to RemoveProjectDomainRequestBody
+- f8b866f: Rename createOrTransferDomain to postDomains for consistency
+
+## 0.25.1
+
+### Patch Changes
+
+- ee2684f: Update buildMachineType field in resourceConfig and defaultResourceConfig
+
 ## 0.25.0
 
 ### Minor Changes
