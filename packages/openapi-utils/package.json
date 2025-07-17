@@ -43,5 +43,11 @@
     "@kubb/plugin-ts": "^3.10.11",
     "@kubb/plugin-zod": "^3.10.11",
     "@kubb/react": "^3.10.11"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.4",
+    "@types/react-dom": "^19.1.5",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
   }
 }

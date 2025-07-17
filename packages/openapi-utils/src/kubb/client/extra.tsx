@@ -4,7 +4,7 @@ import { createReactGenerator, OperationSchemas } from '@kubb/plugin-oas';
 import { useOas, useOperationManager } from '@kubb/plugin-oas/hooks';
 import { getBanner, getFooter } from '@kubb/plugin-oas/utils';
 import { File, useApp } from '@kubb/react';
-import c from 'case';
+import { camelCase } from '@kubb/core/transformers';
 
 export const extraGenerator = createReactGenerator<PluginClient>({
   name: 'extra',
@@ -54,7 +54,7 @@ export const extraGenerator = createReactGenerator<PluginClient>({
 
     const operationsByTag = Object.fromEntries(
       tags.map((name) => [
-        c.camel(name),
+        camelCase(name),
         operations
           .filter((operation) => {
             return operation
@@ -68,7 +68,7 @@ export const extraGenerator = createReactGenerator<PluginClient>({
 
     const tagDictionary = Object.fromEntries(
       tags.map((name) => [
-        c.camel(name),
+        camelCase(name),
         Object.entries(operationsByMethod).reduce(
           (acc, [, methods]) => {
             for (const [method, { operation }] of Object.entries(methods) as [

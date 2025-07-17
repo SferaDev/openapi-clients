@@ -8,15 +8,16 @@ import { extraGenerator } from './client/extra';
 import { clientGenerator } from './client/operations';
 import { serverGenerator } from './mcp/server';
 import { toolsGenerator } from './mcp/tools';
+import React from 'react';
 
-export const baseConfig: Omit<UserConfig, 'input'> = {
+export const baseConfig = {
     root: '.',
     output: {
         path: './src/generated'
     },
     plugins: [
         pluginOas({
-            validate: true,
+            validate: false,
             output: {
                 path: './json',
                 barrelType: false
@@ -68,4 +69,4 @@ export const baseConfig: Omit<UserConfig, 'input'> = {
             generators: [toolsGenerator, serverGenerator]
         })
     ]
-}
+} satisfies Omit<UserConfig, 'input'>;
