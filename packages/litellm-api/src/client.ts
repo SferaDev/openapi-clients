@@ -1,8 +1,8 @@
 import { operationsByTag } from './api/components';
-import { operationsByPath } from './api/extra';
-import { FetcherExtraProps, fetch as apiFetch } from './api/fetcher';
-import { FetchImpl } from './utils/fetch';
-import { RequiredKeys } from './utils/types';
+import type { operationsByPath } from './api/extra';
+import { fetch as apiFetch, type FetcherExtraProps } from './api/fetcher';
+import type { FetchImpl } from './utils/fetch';
+import type { RequiredKeys } from './utils/types';
 
 export interface LiteLLMApiOptions {
   baseUrl: string;
@@ -12,15 +12,14 @@ export interface LiteLLMApiOptions {
 
 type ApiProxy = {
   [Tag in keyof typeof operationsByTag]: {
-    [Method in keyof (typeof operationsByTag)[Tag]]: (typeof operationsByTag)[Tag][Method] extends infer Operation extends (
-      ...args: any
-    ) => any
-    ? Omit<Parameters<Operation>[0], keyof FetcherExtraProps> extends infer Params
-    ? RequiredKeys<Params> extends never
-    ? (params?: Params) => ReturnType<Operation>
-    : (params: Params) => ReturnType<Operation>
-    : never
-    : never;
+    [Method in keyof (typeof operationsByTag)[Tag]]: (typeof operationsByTag)[Tag][Method] extends infer Operation extends
+      (...args: any) => any
+      ? Omit<Parameters<Operation>[0], keyof FetcherExtraProps> extends infer Params
+        ? RequiredKeys<Params> extends never
+          ? (params?: Params) => ReturnType<Operation>
+          : (params: Params) => ReturnType<Operation>
+        : never
+      : never;
   };
 };
 
@@ -86,8 +85,12 @@ export class LiteLLMApi {
     const extraParams = (params || {}) as Record<string, unknown>;
 
     const result = await apiFetch({
-      ...extraParams, method, url, baseUrl: this.#baseUrl,
-      token: this.#token, fetchImpl: this.#fetch
+      ...extraParams,
+      method,
+      url,
+      baseUrl: this.#baseUrl,
+      token: this.#token,
+      fetchImpl: this.#fetch
     });
     return result as RequestEndpointResult<Endpoint>;
   }

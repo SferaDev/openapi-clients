@@ -8,10 +8,10 @@ export const chatDetailPrivacyEnum = {
   public: 'public',
   team: 'team',
   'team-edit': 'team-edit',
-  unlisted: 'unlisted',
-} as const
+  unlisted: 'unlisted'
+} as const;
 
-export type ChatDetailPrivacyEnum = (typeof chatDetailPrivacyEnum)[keyof typeof chatDetailPrivacyEnum]
+export type ChatDetailPrivacyEnum = (typeof chatDetailPrivacyEnum)[keyof typeof chatDetailPrivacyEnum];
 
 export const messagesTypeEnum = {
   'added-environment-variables': 'added-environment-variables',
@@ -28,71 +28,72 @@ export const messagesTypeEnum = {
   'renamed-file': 'renamed-file',
   'replace-src': 'replace-src',
   'reverted-block': 'reverted-block',
-  'sync-git': 'sync-git',
-} as const
+  'sync-git': 'sync-git'
+} as const;
 
-export type MessagesTypeEnum = (typeof messagesTypeEnum)[keyof typeof messagesTypeEnum]
+export type MessagesTypeEnum = (typeof messagesTypeEnum)[keyof typeof messagesTypeEnum];
 
 export const messagesRoleEnum = {
   assistant: 'assistant',
-  user: 'user',
-} as const
+  user: 'user'
+} as const;
 
-export type MessagesRoleEnum = (typeof messagesRoleEnum)[keyof typeof messagesRoleEnum]
+export type MessagesRoleEnum = (typeof messagesRoleEnum)[keyof typeof messagesRoleEnum];
 
 export const latestVersionStatusEnum = {
   completed: 'completed',
   failed: 'failed',
-  pending: 'pending',
-} as const
+  pending: 'pending'
+} as const;
 
-export type LatestVersionStatusEnum = (typeof latestVersionStatusEnum)[keyof typeof latestVersionStatusEnum]
+export type LatestVersionStatusEnum = (typeof latestVersionStatusEnum)[keyof typeof latestVersionStatusEnum];
 
 export const modelConfigurationModelIdEnum = {
   'v0-1.5-lg': 'v0-1.5-lg',
   'v0-1.5-md': 'v0-1.5-md',
-  'v0-1.5-sm': 'v0-1.5-sm',
-} as const
+  'v0-1.5-sm': 'v0-1.5-sm'
+} as const;
 
-export type ModelConfigurationModelIdEnum = (typeof modelConfigurationModelIdEnum)[keyof typeof modelConfigurationModelIdEnum]
+export type ModelConfigurationModelIdEnum =
+  (typeof modelConfigurationModelIdEnum)[keyof typeof modelConfigurationModelIdEnum];
 
 export type ChatDetail = {
   /**
    * @type string
    */
-  id: string
+  id: string;
   /**
    * @type string
    */
-  object: 'chat'
+  object: 'chat';
   /**
    * @type string
    */
-  url: string
+  url: string;
   /**
    * @type boolean
    */
-  shareable: boolean
+  shareable: boolean;
   /**
    * @type string | undefined
    */
-  privacy?: ChatDetailPrivacyEnum | undefined
+  privacy?: ChatDetailPrivacyEnum | undefined;
   /**
    * @type string | undefined
    */
-  title?: string | undefined
+  title?: string | undefined;
   /**
    * @type string | undefined
    */
-  updatedAt?: string | undefined
+  updatedAt?: string | undefined;
   /**
    * @type boolean
    */
-  favorite: boolean
+  favorite: boolean;
   /**
    * @type string
    */
-  authorId: string
+  authorId: string;
   /**
    * @type array
    */
@@ -100,28 +101,28 @@ export type ChatDetail = {
     /**
      * @type string
      */
-    id: string
+    id: string;
     /**
      * @type string
      */
-    object: 'message'
+    object: 'message';
     /**
      * @type string
      */
-    content: string
+    content: string;
     /**
      * @type string
      */
-    createdAt: string
+    createdAt: string;
     /**
      * @type string
      */
-    type: MessagesTypeEnum
+    type: MessagesTypeEnum;
     /**
      * @type string
      */
-    role: MessagesRoleEnum
-  }[]
+    role: MessagesRoleEnum;
+  }[];
   /**
    * @type object | undefined
    */
@@ -130,15 +131,15 @@ export type ChatDetail = {
         /**
          * @type string
          */
-        id: string
+        id: string;
         /**
          * @type string
          */
-        object: 'version'
+        object: 'version';
         /**
          * @type string
          */
-        status: LatestVersionStatusEnum
+        status: LatestVersionStatusEnum;
         /**
          * @type array
          */
@@ -146,18 +147,18 @@ export type ChatDetail = {
           /**
            * @type string
            */
-          object: 'file'
+          object: 'file';
           /**
            * @type string
            */
-          name: string
+          name: string;
           /**
            * @type string
            */
-          content: string
-        }[]
+          content: string;
+        }[];
       }
-    | undefined
+    | undefined;
   /**
    * @type array | undefined
    */
@@ -166,27 +167,27 @@ export type ChatDetail = {
         /**
          * @type string
          */
-        lang: string
+        lang: string;
         /**
          * @type object
          */
         meta: {
-          [key: string]: string
-        }
+          [key: string]: string;
+        };
         /**
          * @type string
          */
-        source: string
+        source: string;
       }[]
-    | undefined
+    | undefined;
   /**
    * @type string | undefined
    */
-  demo?: string | undefined
+  demo?: string | undefined;
   /**
    * @type string
    */
-  text: string
+  text: string;
   /**
    * @type object
    */
@@ -194,71 +195,71 @@ export type ChatDetail = {
     /**
      * @type string
      */
-    modelId: ModelConfigurationModelIdEnum
+    modelId: ModelConfigurationModelIdEnum;
     /**
      * @default false
      * @type boolean | undefined
      */
-    imageGenerations?: boolean | undefined
+    imageGenerations?: boolean | undefined;
     /**
      * @default false
      * @type boolean | undefined
      */
-    thinking?: boolean | undefined
-  }
-}
+    thinking?: boolean | undefined;
+  };
+};
 
 export const chatSummaryPrivacyEnum = {
   private: 'private',
   public: 'public',
   team: 'team',
   'team-edit': 'team-edit',
-  unlisted: 'unlisted',
-} as const
+  unlisted: 'unlisted'
+} as const;
 
-export type ChatSummaryPrivacyEnum = (typeof chatSummaryPrivacyEnum)[keyof typeof chatSummaryPrivacyEnum]
+export type ChatSummaryPrivacyEnum = (typeof chatSummaryPrivacyEnum)[keyof typeof chatSummaryPrivacyEnum];
 
 export const latestVersionStatusEnum2 = {
   completed: 'completed',
   failed: 'failed',
-  pending: 'pending',
-} as const
+  pending: 'pending'
+} as const;
 
-export type LatestVersionStatusEnum2 = (typeof latestVersionStatusEnum2)[keyof typeof latestVersionStatusEnum2]
+export type LatestVersionStatusEnum2 = (typeof latestVersionStatusEnum2)[keyof typeof latestVersionStatusEnum2];
 
 export type ChatSummary = {
   /**
    * @type string
    */
-  id: string
+  id: string;
   /**
    * @type string
    */
-  object: 'chat'
+  object: 'chat';
   /**
    * @type boolean
    */
-  shareable: boolean
+  shareable: boolean;
   /**
    * @type string
    */
-  privacy: ChatSummaryPrivacyEnum
+  privacy: ChatSummaryPrivacyEnum;
   /**
    * @type string | undefined
    */
-  title?: string | undefined
+  title?: string | undefined;
   /**
    * @type string
    */
-  updatedAt: string
+  updatedAt: string;
   /**
    * @type boolean
    */
-  favorite: boolean
+  favorite: boolean;
   /**
    * @type string
    */
-  authorId: string
+  authorId: string;
   /**
    * @type object | undefined
    */
@@ -267,70 +268,71 @@ export type ChatSummary = {
         /**
          * @type string
          */
-        id: string
+        id: string;
         /**
          * @type string
          */
-        object: 'version'
+        object: 'version';
         /**
          * @type string
          */
-        status: LatestVersionStatusEnum2
+        status: LatestVersionStatusEnum2;
       }
-    | undefined
-}
+    | undefined;
+};
 
 export type FileDetail = {
   /**
    * @type string
    */
-  object: 'file'
+  object: 'file';
   /**
    * @type string
    */
-  name: string
+  name: string;
   /**
    * @type string
    */
-  content: string
-}
+  content: string;
+};
 
 export type FileSummary = {
   /**
    * @type string
    */
-  object: 'file'
+  object: 'file';
   /**
    * @type string
    */
-  name: string
-}
+  name: string;
+};
 
 export const modelConfigurationModelIdEnum2 = {
   'v0-1.5-lg': 'v0-1.5-lg',
   'v0-1.5-md': 'v0-1.5-md',
-  'v0-1.5-sm': 'v0-1.5-sm',
-} as const
+  'v0-1.5-sm': 'v0-1.5-sm'
+} as const;
 
-export type ModelConfigurationModelIdEnum2 = (typeof modelConfigurationModelIdEnum2)[keyof typeof modelConfigurationModelIdEnum2]
+export type ModelConfigurationModelIdEnum2 =
+  (typeof modelConfigurationModelIdEnum2)[keyof typeof modelConfigurationModelIdEnum2];
 
 export type MessageDetail = {
   /**
    * @type string
    */
-  id: string
+  id: string;
   /**
    * @type string
    */
-  object: 'message'
+  object: 'message';
   /**
    * @type string
    */
-  chatId: string
+  chatId: string;
   /**
    * @type string
    */
-  url: string
+  url: string;
   /**
    * @type array
    */
@@ -338,20 +340,20 @@ export type MessageDetail = {
     /**
      * @type string
      */
-    object: 'file'
+    object: 'file';
     /**
      * @type string
      */
-    name: string
-  }[]
+    name: string;
+  }[];
   /**
    * @type string | undefined
    */
-  demo?: string | undefined
+  demo?: string | undefined;
   /**
    * @type string
    */
-  text: string
+  text: string;
   /**
    * @type object
    */
@@ -359,19 +361,19 @@ export type MessageDetail = {
     /**
      * @type string
      */
-    modelId: ModelConfigurationModelIdEnum2
+    modelId: ModelConfigurationModelIdEnum2;
     /**
      * @default false
      * @type boolean | undefined
      */
-    imageGenerations?: boolean | undefined
+    imageGenerations?: boolean | undefined;
     /**
      * @default false
      * @type boolean | undefined
      */
-    thinking?: boolean | undefined
-  }
-}
+    thinking?: boolean | undefined;
+  };
+};
 
 export const messageSummaryTypeEnum = {
   'added-environment-variables': 'added-environment-variables',
@@ -388,157 +390,157 @@ export const messageSummaryTypeEnum = {
   'renamed-file': 'renamed-file',
   'replace-src': 'replace-src',
   'reverted-block': 'reverted-block',
-  'sync-git': 'sync-git',
-} as const
+  'sync-git': 'sync-git'
+} as const;
 
-export type MessageSummaryTypeEnum = (typeof messageSummaryTypeEnum)[keyof typeof messageSummaryTypeEnum]
+export type MessageSummaryTypeEnum = (typeof messageSummaryTypeEnum)[keyof typeof messageSummaryTypeEnum];
 
 export const messageSummaryRoleEnum = {
   assistant: 'assistant',
-  user: 'user',
-} as const
+  user: 'user'
+} as const;
 
-export type MessageSummaryRoleEnum = (typeof messageSummaryRoleEnum)[keyof typeof messageSummaryRoleEnum]
+export type MessageSummaryRoleEnum = (typeof messageSummaryRoleEnum)[keyof typeof messageSummaryRoleEnum];
 
 export type MessageSummary = {
   /**
    * @type string
    */
-  id: string
+  id: string;
   /**
    * @type string
    */
-  object: 'message'
+  object: 'message';
   /**
    * @type string
    */
-  content: string
+  content: string;
   /**
    * @type string
    */
-  createdAt: string
+  createdAt: string;
   /**
    * @type string
    */
-  type: MessageSummaryTypeEnum
+  type: MessageSummaryTypeEnum;
   /**
    * @type string
    */
-  role: MessageSummaryRoleEnum
-}
+  role: MessageSummaryRoleEnum;
+};
 
 export type ProjectDetail = {
   /**
    * @type string
    */
-  id: string
+  id: string;
   /**
    * @type string
    */
-  object: 'project'
+  object: 'project';
   /**
    * @type string
    */
-  name: string
+  name: string;
   /**
    * @type string | undefined
    */
-  vercelProjectId?: string | undefined
-}
+  vercelProjectId?: string | undefined;
+};
 
 export type ProjectSummary = {
   /**
    * @type string
    */
-  id: string
+  id: string;
   /**
    * @type string
    */
-  object: 'project'
+  object: 'project';
   /**
    * @type string
    */
-  name: string
+  name: string;
   /**
    * @type string | undefined
    */
-  vercelProjectId?: string | undefined
-}
+  vercelProjectId?: string | undefined;
+};
 
 export type ScopeSummary = {
   /**
    * @type string
    */
-  id: string
+  id: string;
   /**
    * @type string
    */
-  object: 'scope'
+  object: 'scope';
   /**
    * @type string | undefined
    */
-  name?: string | undefined
-}
+  name?: string | undefined;
+};
 
 export type UserDetail = {
   /**
    * @type string
    */
-  id: string
+  id: string;
   /**
    * @type string
    */
-  object: 'user'
+  object: 'user';
   /**
    * @type string | undefined
    */
-  name?: string | undefined
+  name?: string | undefined;
   /**
    * @type string
    */
-  email: string
+  email: string;
   /**
    * @type string
    */
-  avatar: string
-}
+  avatar: string;
+};
 
 export type VercelProjectDetail = {
   /**
    * @type string
    */
-  id: string
+  id: string;
   /**
    * @type string
    */
-  object: 'vercel_project'
+  object: 'vercel_project';
   /**
    * @type string
    */
-  name: string
-}
+  name: string;
+};
 
 export const versionDetailStatusEnum = {
   completed: 'completed',
   failed: 'failed',
-  pending: 'pending',
-} as const
+  pending: 'pending'
+} as const;
 
-export type VersionDetailStatusEnum = (typeof versionDetailStatusEnum)[keyof typeof versionDetailStatusEnum]
+export type VersionDetailStatusEnum = (typeof versionDetailStatusEnum)[keyof typeof versionDetailStatusEnum];
 
 export type VersionDetail = {
   /**
    * @type string
    */
-  id: string
+  id: string;
   /**
    * @type string
    */
-  object: 'version'
+  object: 'version';
   /**
    * @type string
    */
-  status: VersionDetailStatusEnum
+  status: VersionDetailStatusEnum;
   /**
    * @type array
    */
@@ -546,92 +548,100 @@ export type VersionDetail = {
     /**
      * @type string
      */
-    object: 'file'
+    object: 'file';
     /**
      * @type string
      */
-    name: string
+    name: string;
     /**
      * @type string
      */
-    content: string
-  }[]
-}
+    content: string;
+  }[];
+};
 
 export const versionSummaryStatusEnum = {
   completed: 'completed',
   failed: 'failed',
-  pending: 'pending',
-} as const
+  pending: 'pending'
+} as const;
 
-export type VersionSummaryStatusEnum = (typeof versionSummaryStatusEnum)[keyof typeof versionSummaryStatusEnum]
+export type VersionSummaryStatusEnum = (typeof versionSummaryStatusEnum)[keyof typeof versionSummaryStatusEnum];
 
 export type VersionSummary = {
   /**
    * @type string
    */
-  id: string
+  id: string;
   /**
    * @type string
    */
-  object: 'version'
+  object: 'version';
   /**
    * @type string
    */
-  status: VersionSummaryStatusEnum
-}
+  status: VersionSummaryStatusEnum;
+};
 
 /**
  * @description Success
  */
-export type ChatsCreate200 = unknown
+export type ChatsCreate200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type ChatsCreate401 = unknown
+export type ChatsCreate401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type ChatsCreate403 = unknown
+export type ChatsCreate403 = unknown;
 
 /**
  * @description Not Found
  */
-export type ChatsCreate404 = unknown
+export type ChatsCreate404 = unknown;
 
 /**
  * @description Conflict
  */
-export type ChatsCreate409 = unknown
+export type ChatsCreate409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type ChatsCreate413 = unknown
+export type ChatsCreate413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type ChatsCreate422 = unknown
+export type ChatsCreate422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type ChatsCreate429 = unknown
+export type ChatsCreate429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type ChatsCreate500 = unknown
+export type ChatsCreate500 = unknown;
 
-export type ChatsCreateMutationResponse = ChatsCreate200
+export type ChatsCreateMutationResponse = ChatsCreate200;
 
 export type ChatsCreateMutation = {
-  Response: ChatsCreate200
-  Errors: ChatsCreate401 | ChatsCreate403 | ChatsCreate404 | ChatsCreate409 | ChatsCreate413 | ChatsCreate422 | ChatsCreate429 | ChatsCreate500
-}
+  Response: ChatsCreate200;
+  Errors:
+    | ChatsCreate401
+    | ChatsCreate403
+    | ChatsCreate404
+    | ChatsCreate409
+    | ChatsCreate413
+    | ChatsCreate422
+    | ChatsCreate429
+    | ChatsCreate500;
+};
 
 export type ChatsFindQueryParams = {
   /**
@@ -640,436 +650,544 @@ export type ChatsFindQueryParams = {
    * @default 60
    * @type number | undefined
    */
-  limit?: number | undefined
+  limit?: number | undefined;
   /**
    * @description Query parameter \"offset\"
    * @default 0
    * @type number | undefined
    */
-  offset?: number | undefined
+  offset?: number | undefined;
   /**
    * @description If true, only favorites will be returned. If false, unfavorited chats will be returned. If not provided, all chats will be returned.
    * @type boolean | undefined
    */
-  isFavorite?: boolean | undefined
-}
+  isFavorite?: boolean | undefined;
+};
 
 /**
  * @description Success
  */
-export type ChatsFind200 = unknown
+export type ChatsFind200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type ChatsFind401 = unknown
+export type ChatsFind401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type ChatsFind403 = unknown
+export type ChatsFind403 = unknown;
 
 /**
  * @description Not Found
  */
-export type ChatsFind404 = unknown
+export type ChatsFind404 = unknown;
 
 /**
  * @description Conflict
  */
-export type ChatsFind409 = unknown
+export type ChatsFind409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type ChatsFind413 = unknown
+export type ChatsFind413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type ChatsFind422 = unknown
+export type ChatsFind422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type ChatsFind429 = unknown
+export type ChatsFind429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type ChatsFind500 = unknown
+export type ChatsFind500 = unknown;
 
-export type ChatsFindQueryResponse = ChatsFind200
+export type ChatsFindQueryResponse = ChatsFind200;
 
 export type ChatsFindQuery = {
-  Response: ChatsFind200
-  QueryParams: ChatsFindQueryParams
-  Errors: ChatsFind401 | ChatsFind403 | ChatsFind404 | ChatsFind409 | ChatsFind413 | ChatsFind422 | ChatsFind429 | ChatsFind500
-}
+  Response: ChatsFind200;
+  QueryParams: ChatsFindQueryParams;
+  Errors:
+    | ChatsFind401
+    | ChatsFind403
+    | ChatsFind404
+    | ChatsFind409
+    | ChatsFind413
+    | ChatsFind422
+    | ChatsFind429
+    | ChatsFind500;
+};
+
+/**
+ * @description Success
+ */
+export type ChatsInitCreate200 = unknown;
+
+/**
+ * @description Unauthorized
+ */
+export type ChatsInitCreate401 = unknown;
+
+/**
+ * @description Forbidden
+ */
+export type ChatsInitCreate403 = unknown;
+
+/**
+ * @description Not Found
+ */
+export type ChatsInitCreate404 = unknown;
+
+/**
+ * @description Conflict
+ */
+export type ChatsInitCreate409 = unknown;
+
+/**
+ * @description Payload Too Large
+ */
+export type ChatsInitCreate413 = unknown;
+
+/**
+ * @description Unprocessable Entity
+ */
+export type ChatsInitCreate422 = unknown;
+
+/**
+ * @description Too Many Requests
+ */
+export type ChatsInitCreate429 = unknown;
+
+/**
+ * @description Internal Server Error
+ */
+export type ChatsInitCreate500 = unknown;
+
+export type ChatsInitCreateMutationResponse = ChatsInitCreate200;
+
+export type ChatsInitCreateMutation = {
+  Response: ChatsInitCreate200;
+  Errors:
+    | ChatsInitCreate401
+    | ChatsInitCreate403
+    | ChatsInitCreate404
+    | ChatsInitCreate409
+    | ChatsInitCreate413
+    | ChatsInitCreate422
+    | ChatsInitCreate429
+    | ChatsInitCreate500;
+};
 
 export type ChatsDeletePathParams = {
   /**
    * @description Path parameter \"chatId\"
    * @type string
    */
-  chatId: string
-}
+  chatId: string;
+};
 
 /**
  * @description Success
  */
-export type ChatsDelete200 = unknown
+export type ChatsDelete200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type ChatsDelete401 = unknown
+export type ChatsDelete401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type ChatsDelete403 = unknown
+export type ChatsDelete403 = unknown;
 
 /**
  * @description Not Found
  */
-export type ChatsDelete404 = unknown
+export type ChatsDelete404 = unknown;
 
 /**
  * @description Conflict
  */
-export type ChatsDelete409 = unknown
+export type ChatsDelete409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type ChatsDelete413 = unknown
+export type ChatsDelete413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type ChatsDelete422 = unknown
+export type ChatsDelete422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type ChatsDelete429 = unknown
+export type ChatsDelete429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type ChatsDelete500 = unknown
+export type ChatsDelete500 = unknown;
 
-export type ChatsDeleteMutationResponse = ChatsDelete200
+export type ChatsDeleteMutationResponse = ChatsDelete200;
 
 export type ChatsDeleteMutation = {
-  Response: ChatsDelete200
-  PathParams: ChatsDeletePathParams
-  Errors: ChatsDelete401 | ChatsDelete403 | ChatsDelete404 | ChatsDelete409 | ChatsDelete413 | ChatsDelete422 | ChatsDelete429 | ChatsDelete500
-}
+  Response: ChatsDelete200;
+  PathParams: ChatsDeletePathParams;
+  Errors:
+    | ChatsDelete401
+    | ChatsDelete403
+    | ChatsDelete404
+    | ChatsDelete409
+    | ChatsDelete413
+    | ChatsDelete422
+    | ChatsDelete429
+    | ChatsDelete500;
+};
 
 export type ChatsGetByIdPathParams = {
   /**
    * @description Path parameter \"chatId\"
    * @type string
    */
-  chatId: string
-}
+  chatId: string;
+};
 
 /**
  * @description Success
  */
-export type ChatsGetById200 = unknown
+export type ChatsGetById200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type ChatsGetById401 = unknown
+export type ChatsGetById401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type ChatsGetById403 = unknown
+export type ChatsGetById403 = unknown;
 
 /**
  * @description Not Found
  */
-export type ChatsGetById404 = unknown
+export type ChatsGetById404 = unknown;
 
 /**
  * @description Conflict
  */
-export type ChatsGetById409 = unknown
+export type ChatsGetById409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type ChatsGetById413 = unknown
+export type ChatsGetById413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type ChatsGetById422 = unknown
+export type ChatsGetById422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type ChatsGetById429 = unknown
+export type ChatsGetById429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type ChatsGetById500 = unknown
+export type ChatsGetById500 = unknown;
 
-export type ChatsGetByIdQueryResponse = ChatsGetById200
+export type ChatsGetByIdQueryResponse = ChatsGetById200;
 
 export type ChatsGetByIdQuery = {
-  Response: ChatsGetById200
-  PathParams: ChatsGetByIdPathParams
-  Errors: ChatsGetById401 | ChatsGetById403 | ChatsGetById404 | ChatsGetById409 | ChatsGetById413 | ChatsGetById422 | ChatsGetById429 | ChatsGetById500
-}
+  Response: ChatsGetById200;
+  PathParams: ChatsGetByIdPathParams;
+  Errors:
+    | ChatsGetById401
+    | ChatsGetById403
+    | ChatsGetById404
+    | ChatsGetById409
+    | ChatsGetById413
+    | ChatsGetById422
+    | ChatsGetById429
+    | ChatsGetById500;
+};
 
 export type ChatsUpdatePathParams = {
   /**
    * @description Path parameter \"chatId\"
    * @type string
    */
-  chatId: string
-}
+  chatId: string;
+};
 
 /**
  * @description Success
  */
-export type ChatsUpdate200 = unknown
+export type ChatsUpdate200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type ChatsUpdate401 = unknown
+export type ChatsUpdate401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type ChatsUpdate403 = unknown
+export type ChatsUpdate403 = unknown;
 
 /**
  * @description Not Found
  */
-export type ChatsUpdate404 = unknown
+export type ChatsUpdate404 = unknown;
 
 /**
  * @description Conflict
  */
-export type ChatsUpdate409 = unknown
+export type ChatsUpdate409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type ChatsUpdate413 = unknown
+export type ChatsUpdate413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type ChatsUpdate422 = unknown
+export type ChatsUpdate422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type ChatsUpdate429 = unknown
+export type ChatsUpdate429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type ChatsUpdate500 = unknown
+export type ChatsUpdate500 = unknown;
 
-export type ChatsUpdateMutationResponse = ChatsUpdate200
+export type ChatsUpdateMutationResponse = ChatsUpdate200;
 
 export type ChatsUpdateMutation = {
-  Response: ChatsUpdate200
-  PathParams: ChatsUpdatePathParams
-  Errors: ChatsUpdate401 | ChatsUpdate403 | ChatsUpdate404 | ChatsUpdate409 | ChatsUpdate413 | ChatsUpdate422 | ChatsUpdate429 | ChatsUpdate500
-}
+  Response: ChatsUpdate200;
+  PathParams: ChatsUpdatePathParams;
+  Errors:
+    | ChatsUpdate401
+    | ChatsUpdate403
+    | ChatsUpdate404
+    | ChatsUpdate409
+    | ChatsUpdate413
+    | ChatsUpdate422
+    | ChatsUpdate429
+    | ChatsUpdate500;
+};
 
 export type ChatsFavoritePathParams = {
   /**
    * @description Path parameter \"chatId\"
    * @type string
    */
-  chatId: string
-}
+  chatId: string;
+};
 
 /**
  * @description Success
  */
-export type ChatsFavorite200 = unknown
+export type ChatsFavorite200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type ChatsFavorite401 = unknown
+export type ChatsFavorite401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type ChatsFavorite403 = unknown
+export type ChatsFavorite403 = unknown;
 
 /**
  * @description Not Found
  */
-export type ChatsFavorite404 = unknown
+export type ChatsFavorite404 = unknown;
 
 /**
  * @description Conflict
  */
-export type ChatsFavorite409 = unknown
+export type ChatsFavorite409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type ChatsFavorite413 = unknown
+export type ChatsFavorite413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type ChatsFavorite422 = unknown
+export type ChatsFavorite422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type ChatsFavorite429 = unknown
+export type ChatsFavorite429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type ChatsFavorite500 = unknown
+export type ChatsFavorite500 = unknown;
 
-export type ChatsFavoriteMutationResponse = ChatsFavorite200
+export type ChatsFavoriteMutationResponse = ChatsFavorite200;
 
 export type ChatsFavoriteMutation = {
-  Response: ChatsFavorite200
-  PathParams: ChatsFavoritePathParams
-  Errors: ChatsFavorite401 | ChatsFavorite403 | ChatsFavorite404 | ChatsFavorite409 | ChatsFavorite413 | ChatsFavorite422 | ChatsFavorite429 | ChatsFavorite500
-}
+  Response: ChatsFavorite200;
+  PathParams: ChatsFavoritePathParams;
+  Errors:
+    | ChatsFavorite401
+    | ChatsFavorite403
+    | ChatsFavorite404
+    | ChatsFavorite409
+    | ChatsFavorite413
+    | ChatsFavorite422
+    | ChatsFavorite429
+    | ChatsFavorite500;
+};
 
 export type ChatsForkPathParams = {
   /**
    * @description Path parameter \"chatId\"
    * @type string
    */
-  chatId: string
-}
+  chatId: string;
+};
 
 /**
  * @description Success
  */
-export type ChatsFork200 = unknown
+export type ChatsFork200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type ChatsFork401 = unknown
+export type ChatsFork401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type ChatsFork403 = unknown
+export type ChatsFork403 = unknown;
 
 /**
  * @description Not Found
  */
-export type ChatsFork404 = unknown
+export type ChatsFork404 = unknown;
 
 /**
  * @description Conflict
  */
-export type ChatsFork409 = unknown
+export type ChatsFork409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type ChatsFork413 = unknown
+export type ChatsFork413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type ChatsFork422 = unknown
+export type ChatsFork422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type ChatsFork429 = unknown
+export type ChatsFork429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type ChatsFork500 = unknown
+export type ChatsFork500 = unknown;
 
-export type ChatsForkMutationResponse = ChatsFork200
+export type ChatsForkMutationResponse = ChatsFork200;
 
 export type ChatsForkMutation = {
-  Response: ChatsFork200
-  PathParams: ChatsForkPathParams
-  Errors: ChatsFork401 | ChatsFork403 | ChatsFork404 | ChatsFork409 | ChatsFork413 | ChatsFork422 | ChatsFork429 | ChatsFork500
-}
+  Response: ChatsFork200;
+  PathParams: ChatsForkPathParams;
+  Errors:
+    | ChatsFork401
+    | ChatsFork403
+    | ChatsFork404
+    | ChatsFork409
+    | ChatsFork413
+    | ChatsFork422
+    | ChatsFork429
+    | ChatsFork500;
+};
 
 export type ProjectsGetByChatIdPathParams = {
   /**
    * @description Path parameter \"chatId\"
    * @type string
    */
-  chatId: string
-}
+  chatId: string;
+};
 
 /**
  * @description Success
  */
-export type ProjectsGetByChatId200 = unknown
+export type ProjectsGetByChatId200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type ProjectsGetByChatId401 = unknown
+export type ProjectsGetByChatId401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type ProjectsGetByChatId403 = unknown
+export type ProjectsGetByChatId403 = unknown;
 
 /**
  * @description Not Found
  */
-export type ProjectsGetByChatId404 = unknown
+export type ProjectsGetByChatId404 = unknown;
 
 /**
  * @description Conflict
  */
-export type ProjectsGetByChatId409 = unknown
+export type ProjectsGetByChatId409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type ProjectsGetByChatId413 = unknown
+export type ProjectsGetByChatId413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type ProjectsGetByChatId422 = unknown
+export type ProjectsGetByChatId422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type ProjectsGetByChatId429 = unknown
+export type ProjectsGetByChatId429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type ProjectsGetByChatId500 = unknown
+export type ProjectsGetByChatId500 = unknown;
 
-export type ProjectsGetByChatIdQueryResponse = ProjectsGetByChatId200
+export type ProjectsGetByChatIdQueryResponse = ProjectsGetByChatId200;
 
 export type ProjectsGetByChatIdQuery = {
-  Response: ProjectsGetByChatId200
-  PathParams: ProjectsGetByChatIdPathParams
+  Response: ProjectsGetByChatId200;
+  PathParams: ProjectsGetByChatIdPathParams;
   Errors:
     | ProjectsGetByChatId401
     | ProjectsGetByChatId403
@@ -1078,67 +1196,67 @@ export type ProjectsGetByChatIdQuery = {
     | ProjectsGetByChatId413
     | ProjectsGetByChatId422
     | ProjectsGetByChatId429
-    | ProjectsGetByChatId500
-}
+    | ProjectsGetByChatId500;
+};
 
 export type ChatsSendMessagePathParams = {
   /**
    * @description Path parameter \"chatId\"
    * @type string
    */
-  chatId: string
-}
+  chatId: string;
+};
 
 /**
  * @description Success
  */
-export type ChatsSendMessage200 = unknown
+export type ChatsSendMessage200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type ChatsSendMessage401 = unknown
+export type ChatsSendMessage401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type ChatsSendMessage403 = unknown
+export type ChatsSendMessage403 = unknown;
 
 /**
  * @description Not Found
  */
-export type ChatsSendMessage404 = unknown
+export type ChatsSendMessage404 = unknown;
 
 /**
  * @description Conflict
  */
-export type ChatsSendMessage409 = unknown
+export type ChatsSendMessage409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type ChatsSendMessage413 = unknown
+export type ChatsSendMessage413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type ChatsSendMessage422 = unknown
+export type ChatsSendMessage422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type ChatsSendMessage429 = unknown
+export type ChatsSendMessage429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type ChatsSendMessage500 = unknown
+export type ChatsSendMessage500 = unknown;
 
-export type ChatsSendMessageMutationResponse = ChatsSendMessage200
+export type ChatsSendMessageMutationResponse = ChatsSendMessage200;
 
 export type ChatsSendMessageMutation = {
-  Response: ChatsSendMessage200
-  PathParams: ChatsSendMessagePathParams
+  Response: ChatsSendMessage200;
+  PathParams: ChatsSendMessagePathParams;
   Errors:
     | ChatsSendMessage401
     | ChatsSendMessage403
@@ -1147,67 +1265,67 @@ export type ChatsSendMessageMutation = {
     | ChatsSendMessage413
     | ChatsSendMessage422
     | ChatsSendMessage429
-    | ChatsSendMessage500
-}
+    | ChatsSendMessage500;
+};
 
 export type ChatsGetMetadataPathParams = {
   /**
    * @description Path parameter \"chatId\"
    * @type string
    */
-  chatId: string
-}
+  chatId: string;
+};
 
 /**
  * @description Success
  */
-export type ChatsGetMetadata200 = unknown
+export type ChatsGetMetadata200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type ChatsGetMetadata401 = unknown
+export type ChatsGetMetadata401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type ChatsGetMetadata403 = unknown
+export type ChatsGetMetadata403 = unknown;
 
 /**
  * @description Not Found
  */
-export type ChatsGetMetadata404 = unknown
+export type ChatsGetMetadata404 = unknown;
 
 /**
  * @description Conflict
  */
-export type ChatsGetMetadata409 = unknown
+export type ChatsGetMetadata409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type ChatsGetMetadata413 = unknown
+export type ChatsGetMetadata413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type ChatsGetMetadata422 = unknown
+export type ChatsGetMetadata422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type ChatsGetMetadata429 = unknown
+export type ChatsGetMetadata429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type ChatsGetMetadata500 = unknown
+export type ChatsGetMetadata500 = unknown;
 
-export type ChatsGetMetadataQueryResponse = ChatsGetMetadata200
+export type ChatsGetMetadataQueryResponse = ChatsGetMetadata200;
 
 export type ChatsGetMetadataQuery = {
-  Response: ChatsGetMetadata200
-  PathParams: ChatsGetMetadataPathParams
+  Response: ChatsGetMetadata200;
+  PathParams: ChatsGetMetadataPathParams;
   Errors:
     | ChatsGetMetadata401
     | ChatsGetMetadata403
@@ -1216,142 +1334,150 @@ export type ChatsGetMetadataQuery = {
     | ChatsGetMetadata413
     | ChatsGetMetadata422
     | ChatsGetMetadata429
-    | ChatsGetMetadata500
-}
+    | ChatsGetMetadata500;
+};
 
 export type ChatsResumePathParams = {
   /**
    * @description Path parameter \"chatId\"
    * @type string
    */
-  chatId: string
+  chatId: string;
   /**
    * @description Path parameter \"messageId\"
    * @type string
    */
-  messageId: string
-}
+  messageId: string;
+};
 
 /**
  * @description Success
  */
-export type ChatsResume200 = unknown
+export type ChatsResume200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type ChatsResume401 = unknown
+export type ChatsResume401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type ChatsResume403 = unknown
+export type ChatsResume403 = unknown;
 
 /**
  * @description Not Found
  */
-export type ChatsResume404 = unknown
+export type ChatsResume404 = unknown;
 
 /**
  * @description Conflict
  */
-export type ChatsResume409 = unknown
+export type ChatsResume409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type ChatsResume413 = unknown
+export type ChatsResume413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type ChatsResume422 = unknown
+export type ChatsResume422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type ChatsResume429 = unknown
+export type ChatsResume429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type ChatsResume500 = unknown
+export type ChatsResume500 = unknown;
 
-export type ChatsResumeMutationResponse = ChatsResume200
+export type ChatsResumeMutationResponse = ChatsResume200;
 
 export type ChatsResumeMutation = {
-  Response: ChatsResume200
-  PathParams: ChatsResumePathParams
-  Errors: ChatsResume401 | ChatsResume403 | ChatsResume404 | ChatsResume409 | ChatsResume413 | ChatsResume422 | ChatsResume429 | ChatsResume500
-}
+  Response: ChatsResume200;
+  PathParams: ChatsResumePathParams;
+  Errors:
+    | ChatsResume401
+    | ChatsResume403
+    | ChatsResume404
+    | ChatsResume409
+    | ChatsResume413
+    | ChatsResume422
+    | ChatsResume429
+    | ChatsResume500;
+};
 
 export type DeploymentsFindLogsPathParams = {
   /**
    * @description Path parameter \"deploymentId\"
    * @type string
    */
-  deploymentId: string
-}
+  deploymentId: string;
+};
 
 export type DeploymentsFindLogsQueryParams = {
   /**
    * @description Query parameter \"since\"
    * @type number | undefined
    */
-  since?: number | undefined
-}
+  since?: number | undefined;
+};
 
 /**
  * @description Success
  */
-export type DeploymentsFindLogs200 = unknown
+export type DeploymentsFindLogs200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type DeploymentsFindLogs401 = unknown
+export type DeploymentsFindLogs401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type DeploymentsFindLogs403 = unknown
+export type DeploymentsFindLogs403 = unknown;
 
 /**
  * @description Not Found
  */
-export type DeploymentsFindLogs404 = unknown
+export type DeploymentsFindLogs404 = unknown;
 
 /**
  * @description Conflict
  */
-export type DeploymentsFindLogs409 = unknown
+export type DeploymentsFindLogs409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type DeploymentsFindLogs413 = unknown
+export type DeploymentsFindLogs413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type DeploymentsFindLogs422 = unknown
+export type DeploymentsFindLogs422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type DeploymentsFindLogs429 = unknown
+export type DeploymentsFindLogs429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type DeploymentsFindLogs500 = unknown
+export type DeploymentsFindLogs500 = unknown;
 
-export type DeploymentsFindLogsQueryResponse = DeploymentsFindLogs200
+export type DeploymentsFindLogsQueryResponse = DeploymentsFindLogs200;
 
 export type DeploymentsFindLogsQuery = {
-  Response: DeploymentsFindLogs200
-  PathParams: DeploymentsFindLogsPathParams
-  QueryParams: DeploymentsFindLogsQueryParams
+  Response: DeploymentsFindLogs200;
+  PathParams: DeploymentsFindLogsPathParams;
+  QueryParams: DeploymentsFindLogsQueryParams;
   Errors:
     | DeploymentsFindLogs401
     | DeploymentsFindLogs403
@@ -1360,67 +1486,67 @@ export type DeploymentsFindLogsQuery = {
     | DeploymentsFindLogs413
     | DeploymentsFindLogs422
     | DeploymentsFindLogs429
-    | DeploymentsFindLogs500
-}
+    | DeploymentsFindLogs500;
+};
 
 export type DeploymentsFindErrorsPathParams = {
   /**
    * @description Path parameter \"deploymentId\"
    * @type string
    */
-  deploymentId: string
-}
+  deploymentId: string;
+};
 
 /**
  * @description Success
  */
-export type DeploymentsFindErrors200 = unknown
+export type DeploymentsFindErrors200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type DeploymentsFindErrors401 = unknown
+export type DeploymentsFindErrors401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type DeploymentsFindErrors403 = unknown
+export type DeploymentsFindErrors403 = unknown;
 
 /**
  * @description Not Found
  */
-export type DeploymentsFindErrors404 = unknown
+export type DeploymentsFindErrors404 = unknown;
 
 /**
  * @description Conflict
  */
-export type DeploymentsFindErrors409 = unknown
+export type DeploymentsFindErrors409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type DeploymentsFindErrors413 = unknown
+export type DeploymentsFindErrors413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type DeploymentsFindErrors422 = unknown
+export type DeploymentsFindErrors422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type DeploymentsFindErrors429 = unknown
+export type DeploymentsFindErrors429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type DeploymentsFindErrors500 = unknown
+export type DeploymentsFindErrors500 = unknown;
 
-export type DeploymentsFindErrorsQueryResponse = DeploymentsFindErrors200
+export type DeploymentsFindErrorsQueryResponse = DeploymentsFindErrors200;
 
 export type DeploymentsFindErrorsQuery = {
-  Response: DeploymentsFindErrors200
-  PathParams: DeploymentsFindErrorsPathParams
+  Response: DeploymentsFindErrors200;
+  PathParams: DeploymentsFindErrorsPathParams;
   Errors:
     | DeploymentsFindErrors401
     | DeploymentsFindErrors403
@@ -1429,58 +1555,58 @@ export type DeploymentsFindErrorsQuery = {
     | DeploymentsFindErrors413
     | DeploymentsFindErrors422
     | DeploymentsFindErrors429
-    | DeploymentsFindErrors500
-}
+    | DeploymentsFindErrors500;
+};
 
 /**
  * @description Success
  */
-export type IntegrationsVercelProjectsFind200 = unknown
+export type IntegrationsVercelProjectsFind200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type IntegrationsVercelProjectsFind401 = unknown
+export type IntegrationsVercelProjectsFind401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type IntegrationsVercelProjectsFind403 = unknown
+export type IntegrationsVercelProjectsFind403 = unknown;
 
 /**
  * @description Not Found
  */
-export type IntegrationsVercelProjectsFind404 = unknown
+export type IntegrationsVercelProjectsFind404 = unknown;
 
 /**
  * @description Conflict
  */
-export type IntegrationsVercelProjectsFind409 = unknown
+export type IntegrationsVercelProjectsFind409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type IntegrationsVercelProjectsFind413 = unknown
+export type IntegrationsVercelProjectsFind413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type IntegrationsVercelProjectsFind422 = unknown
+export type IntegrationsVercelProjectsFind422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type IntegrationsVercelProjectsFind429 = unknown
+export type IntegrationsVercelProjectsFind429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type IntegrationsVercelProjectsFind500 = unknown
+export type IntegrationsVercelProjectsFind500 = unknown;
 
-export type IntegrationsVercelProjectsFindQueryResponse = IntegrationsVercelProjectsFind200
+export type IntegrationsVercelProjectsFindQueryResponse = IntegrationsVercelProjectsFind200;
 
 export type IntegrationsVercelProjectsFindQuery = {
-  Response: IntegrationsVercelProjectsFind200
+  Response: IntegrationsVercelProjectsFind200;
   Errors:
     | IntegrationsVercelProjectsFind401
     | IntegrationsVercelProjectsFind403
@@ -1489,58 +1615,58 @@ export type IntegrationsVercelProjectsFindQuery = {
     | IntegrationsVercelProjectsFind413
     | IntegrationsVercelProjectsFind422
     | IntegrationsVercelProjectsFind429
-    | IntegrationsVercelProjectsFind500
-}
+    | IntegrationsVercelProjectsFind500;
+};
 
 /**
  * @description Success
  */
-export type IntegrationsVercelProjectsCreate200 = unknown
+export type IntegrationsVercelProjectsCreate200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type IntegrationsVercelProjectsCreate401 = unknown
+export type IntegrationsVercelProjectsCreate401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type IntegrationsVercelProjectsCreate403 = unknown
+export type IntegrationsVercelProjectsCreate403 = unknown;
 
 /**
  * @description Not Found
  */
-export type IntegrationsVercelProjectsCreate404 = unknown
+export type IntegrationsVercelProjectsCreate404 = unknown;
 
 /**
  * @description Conflict
  */
-export type IntegrationsVercelProjectsCreate409 = unknown
+export type IntegrationsVercelProjectsCreate409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type IntegrationsVercelProjectsCreate413 = unknown
+export type IntegrationsVercelProjectsCreate413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type IntegrationsVercelProjectsCreate422 = unknown
+export type IntegrationsVercelProjectsCreate422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type IntegrationsVercelProjectsCreate429 = unknown
+export type IntegrationsVercelProjectsCreate429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type IntegrationsVercelProjectsCreate500 = unknown
+export type IntegrationsVercelProjectsCreate500 = unknown;
 
-export type IntegrationsVercelProjectsCreateMutationResponse = IntegrationsVercelProjectsCreate200
+export type IntegrationsVercelProjectsCreateMutationResponse = IntegrationsVercelProjectsCreate200;
 
 export type IntegrationsVercelProjectsCreateMutation = {
-  Response: IntegrationsVercelProjectsCreate200
+  Response: IntegrationsVercelProjectsCreate200;
   Errors:
     | IntegrationsVercelProjectsCreate401
     | IntegrationsVercelProjectsCreate403
@@ -1549,110 +1675,118 @@ export type IntegrationsVercelProjectsCreateMutation = {
     | IntegrationsVercelProjectsCreate413
     | IntegrationsVercelProjectsCreate422
     | IntegrationsVercelProjectsCreate429
-    | IntegrationsVercelProjectsCreate500
-}
+    | IntegrationsVercelProjectsCreate500;
+};
 
 /**
  * @description Success
  */
-export type ProjectsFind200 = unknown
+export type ProjectsFind200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type ProjectsFind401 = unknown
+export type ProjectsFind401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type ProjectsFind403 = unknown
+export type ProjectsFind403 = unknown;
 
 /**
  * @description Not Found
  */
-export type ProjectsFind404 = unknown
+export type ProjectsFind404 = unknown;
 
 /**
  * @description Conflict
  */
-export type ProjectsFind409 = unknown
+export type ProjectsFind409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type ProjectsFind413 = unknown
+export type ProjectsFind413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type ProjectsFind422 = unknown
+export type ProjectsFind422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type ProjectsFind429 = unknown
+export type ProjectsFind429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type ProjectsFind500 = unknown
+export type ProjectsFind500 = unknown;
 
-export type ProjectsFindQueryResponse = ProjectsFind200
+export type ProjectsFindQueryResponse = ProjectsFind200;
 
 export type ProjectsFindQuery = {
-  Response: ProjectsFind200
-  Errors: ProjectsFind401 | ProjectsFind403 | ProjectsFind404 | ProjectsFind409 | ProjectsFind413 | ProjectsFind422 | ProjectsFind429 | ProjectsFind500
-}
+  Response: ProjectsFind200;
+  Errors:
+    | ProjectsFind401
+    | ProjectsFind403
+    | ProjectsFind404
+    | ProjectsFind409
+    | ProjectsFind413
+    | ProjectsFind422
+    | ProjectsFind429
+    | ProjectsFind500;
+};
 
 /**
  * @description Success
  */
-export type ProjectsCreate200 = unknown
+export type ProjectsCreate200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type ProjectsCreate401 = unknown
+export type ProjectsCreate401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type ProjectsCreate403 = unknown
+export type ProjectsCreate403 = unknown;
 
 /**
  * @description Not Found
  */
-export type ProjectsCreate404 = unknown
+export type ProjectsCreate404 = unknown;
 
 /**
  * @description Conflict
  */
-export type ProjectsCreate409 = unknown
+export type ProjectsCreate409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type ProjectsCreate413 = unknown
+export type ProjectsCreate413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type ProjectsCreate422 = unknown
+export type ProjectsCreate422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type ProjectsCreate429 = unknown
+export type ProjectsCreate429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type ProjectsCreate500 = unknown
+export type ProjectsCreate500 = unknown;
 
-export type ProjectsCreateMutationResponse = ProjectsCreate200
+export type ProjectsCreateMutationResponse = ProjectsCreate200;
 
 export type ProjectsCreateMutation = {
-  Response: ProjectsCreate200
+  Response: ProjectsCreate200;
   Errors:
     | ProjectsCreate401
     | ProjectsCreate403
@@ -1661,67 +1795,67 @@ export type ProjectsCreateMutation = {
     | ProjectsCreate413
     | ProjectsCreate422
     | ProjectsCreate429
-    | ProjectsCreate500
-}
+    | ProjectsCreate500;
+};
 
 export type ProjectsAssignPathParams = {
   /**
    * @description Path parameter \"projectId\"
    * @type string
    */
-  projectId: string
-}
+  projectId: string;
+};
 
 /**
  * @description Success
  */
-export type ProjectsAssign200 = unknown
+export type ProjectsAssign200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type ProjectsAssign401 = unknown
+export type ProjectsAssign401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type ProjectsAssign403 = unknown
+export type ProjectsAssign403 = unknown;
 
 /**
  * @description Not Found
  */
-export type ProjectsAssign404 = unknown
+export type ProjectsAssign404 = unknown;
 
 /**
  * @description Conflict
  */
-export type ProjectsAssign409 = unknown
+export type ProjectsAssign409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type ProjectsAssign413 = unknown
+export type ProjectsAssign413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type ProjectsAssign422 = unknown
+export type ProjectsAssign422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type ProjectsAssign429 = unknown
+export type ProjectsAssign429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type ProjectsAssign500 = unknown
+export type ProjectsAssign500 = unknown;
 
-export type ProjectsAssignMutationResponse = ProjectsAssign200
+export type ProjectsAssignMutationResponse = ProjectsAssign200;
 
 export type ProjectsAssignMutation = {
-  Response: ProjectsAssign200
-  PathParams: ProjectsAssignPathParams
+  Response: ProjectsAssign200;
+  PathParams: ProjectsAssignPathParams;
   Errors:
     | ProjectsAssign401
     | ProjectsAssign403
@@ -1730,67 +1864,67 @@ export type ProjectsAssignMutation = {
     | ProjectsAssign413
     | ProjectsAssign422
     | ProjectsAssign429
-    | ProjectsAssign500
-}
+    | ProjectsAssign500;
+};
 
 export type RateLimitsFindQueryParams = {
   /**
    * @description Query parameter \"scope\"
    * @type string | undefined
    */
-  scope?: string | undefined
-}
+  scope?: string | undefined;
+};
 
 /**
  * @description Success
  */
-export type RateLimitsFind200 = unknown
+export type RateLimitsFind200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type RateLimitsFind401 = unknown
+export type RateLimitsFind401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type RateLimitsFind403 = unknown
+export type RateLimitsFind403 = unknown;
 
 /**
  * @description Not Found
  */
-export type RateLimitsFind404 = unknown
+export type RateLimitsFind404 = unknown;
 
 /**
  * @description Conflict
  */
-export type RateLimitsFind409 = unknown
+export type RateLimitsFind409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type RateLimitsFind413 = unknown
+export type RateLimitsFind413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type RateLimitsFind422 = unknown
+export type RateLimitsFind422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type RateLimitsFind429 = unknown
+export type RateLimitsFind429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type RateLimitsFind500 = unknown
+export type RateLimitsFind500 = unknown;
 
-export type RateLimitsFindQueryResponse = RateLimitsFind200
+export type RateLimitsFindQueryResponse = RateLimitsFind200;
 
 export type RateLimitsFindQuery = {
-  Response: RateLimitsFind200
-  QueryParams: RateLimitsFindQueryParams
+  Response: RateLimitsFind200;
+  QueryParams: RateLimitsFindQueryParams;
   Errors:
     | RateLimitsFind401
     | RateLimitsFind403
@@ -1799,119 +1933,119 @@ export type RateLimitsFindQuery = {
     | RateLimitsFind413
     | RateLimitsFind422
     | RateLimitsFind429
-    | RateLimitsFind500
-}
+    | RateLimitsFind500;
+};
 
 /**
  * @description Success
  */
-export type UserGet200 = unknown
+export type UserGet200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type UserGet401 = unknown
+export type UserGet401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type UserGet403 = unknown
+export type UserGet403 = unknown;
 
 /**
  * @description Not Found
  */
-export type UserGet404 = unknown
+export type UserGet404 = unknown;
 
 /**
  * @description Conflict
  */
-export type UserGet409 = unknown
+export type UserGet409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type UserGet413 = unknown
+export type UserGet413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type UserGet422 = unknown
+export type UserGet422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type UserGet429 = unknown
+export type UserGet429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type UserGet500 = unknown
+export type UserGet500 = unknown;
 
-export type UserGetQueryResponse = UserGet200
+export type UserGetQueryResponse = UserGet200;
 
 export type UserGetQuery = {
-  Response: UserGet200
-  Errors: UserGet401 | UserGet403 | UserGet404 | UserGet409 | UserGet413 | UserGet422 | UserGet429 | UserGet500
-}
+  Response: UserGet200;
+  Errors: UserGet401 | UserGet403 | UserGet404 | UserGet409 | UserGet413 | UserGet422 | UserGet429 | UserGet500;
+};
 
 export type UserGetBillingQueryParams = {
   /**
    * @description Query parameter \"scope\"
    * @type string | undefined
    */
-  scope?: string | undefined
-}
+  scope?: string | undefined;
+};
 
 /**
  * @description Success
  */
-export type UserGetBilling200 = unknown
+export type UserGetBilling200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type UserGetBilling401 = unknown
+export type UserGetBilling401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type UserGetBilling403 = unknown
+export type UserGetBilling403 = unknown;
 
 /**
  * @description Not Found
  */
-export type UserGetBilling404 = unknown
+export type UserGetBilling404 = unknown;
 
 /**
  * @description Conflict
  */
-export type UserGetBilling409 = unknown
+export type UserGetBilling409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type UserGetBilling413 = unknown
+export type UserGetBilling413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type UserGetBilling422 = unknown
+export type UserGetBilling422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type UserGetBilling429 = unknown
+export type UserGetBilling429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type UserGetBilling500 = unknown
+export type UserGetBilling500 = unknown;
 
-export type UserGetBillingQueryResponse = UserGetBilling200
+export type UserGetBillingQueryResponse = UserGetBilling200;
 
 export type UserGetBillingQuery = {
-  Response: UserGetBilling200
-  QueryParams: UserGetBillingQueryParams
+  Response: UserGetBilling200;
+  QueryParams: UserGetBillingQueryParams;
   Errors:
     | UserGetBilling401
     | UserGetBilling403
@@ -1920,109 +2054,125 @@ export type UserGetBillingQuery = {
     | UserGetBilling413
     | UserGetBilling422
     | UserGetBilling429
-    | UserGetBilling500
-}
+    | UserGetBilling500;
+};
 
 /**
  * @description Success
  */
-export type UserGetPlan200 = unknown
+export type UserGetPlan200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type UserGetPlan401 = unknown
+export type UserGetPlan401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type UserGetPlan403 = unknown
+export type UserGetPlan403 = unknown;
 
 /**
  * @description Not Found
  */
-export type UserGetPlan404 = unknown
+export type UserGetPlan404 = unknown;
 
 /**
  * @description Conflict
  */
-export type UserGetPlan409 = unknown
+export type UserGetPlan409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type UserGetPlan413 = unknown
+export type UserGetPlan413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type UserGetPlan422 = unknown
+export type UserGetPlan422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type UserGetPlan429 = unknown
+export type UserGetPlan429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type UserGetPlan500 = unknown
+export type UserGetPlan500 = unknown;
 
-export type UserGetPlanQueryResponse = UserGetPlan200
+export type UserGetPlanQueryResponse = UserGetPlan200;
 
 export type UserGetPlanQuery = {
-  Response: UserGetPlan200
-  Errors: UserGetPlan401 | UserGetPlan403 | UserGetPlan404 | UserGetPlan409 | UserGetPlan413 | UserGetPlan422 | UserGetPlan429 | UserGetPlan500
-}
+  Response: UserGetPlan200;
+  Errors:
+    | UserGetPlan401
+    | UserGetPlan403
+    | UserGetPlan404
+    | UserGetPlan409
+    | UserGetPlan413
+    | UserGetPlan422
+    | UserGetPlan429
+    | UserGetPlan500;
+};
 
 /**
  * @description Success
  */
-export type UserGetScopes200 = unknown
+export type UserGetScopes200 = unknown;
 
 /**
  * @description Unauthorized
  */
-export type UserGetScopes401 = unknown
+export type UserGetScopes401 = unknown;
 
 /**
  * @description Forbidden
  */
-export type UserGetScopes403 = unknown
+export type UserGetScopes403 = unknown;
 
 /**
  * @description Not Found
  */
-export type UserGetScopes404 = unknown
+export type UserGetScopes404 = unknown;
 
 /**
  * @description Conflict
  */
-export type UserGetScopes409 = unknown
+export type UserGetScopes409 = unknown;
 
 /**
  * @description Payload Too Large
  */
-export type UserGetScopes413 = unknown
+export type UserGetScopes413 = unknown;
 
 /**
  * @description Unprocessable Entity
  */
-export type UserGetScopes422 = unknown
+export type UserGetScopes422 = unknown;
 
 /**
  * @description Too Many Requests
  */
-export type UserGetScopes429 = unknown
+export type UserGetScopes429 = unknown;
 
 /**
  * @description Internal Server Error
  */
-export type UserGetScopes500 = unknown
+export type UserGetScopes500 = unknown;
 
-export type UserGetScopesQueryResponse = UserGetScopes200
+export type UserGetScopesQueryResponse = UserGetScopes200;
 
 export type UserGetScopesQuery = {
-  Response: UserGetScopes200
-  Errors: UserGetScopes401 | UserGetScopes403 | UserGetScopes404 | UserGetScopes409 | UserGetScopes413 | UserGetScopes422 | UserGetScopes429 | UserGetScopes500
-}
+  Response: UserGetScopes200;
+  Errors:
+    | UserGetScopes401
+    | UserGetScopes403
+    | UserGetScopes404
+    | UserGetScopes409
+    | UserGetScopes413
+    | UserGetScopes422
+    | UserGetScopes429
+    | UserGetScopes500;
+};

@@ -118,7 +118,7 @@ export type EmailSecurityClientError = {
   success: boolean;
 };
 
-export type RulesetsEmpty = void;
+export type RulesetsEmpty = undefined;
 
 /**
  * A response object.

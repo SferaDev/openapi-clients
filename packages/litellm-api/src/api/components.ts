@@ -4,7 +4,7 @@
  * @version 1.65.4
  */
 import type * as Fetcher from './fetcher';
-import { fetch, FetcherExtraProps } from './fetcher';
+import { type FetcherExtraProps, fetch } from './fetcher';
 import type * as Schemas from './schemas';
 
 export type ModelListModelsGetQueryParams = {
@@ -3616,7 +3616,7 @@ export type GenerateKeyFnKeyGeneratePostHeaders = {
   /**
    * The litellm-changed-by header enables tracking of actions performed by authorized users on behalf of other users, providing an audit trail for accountability
    */
-  ['litellm-changed-by']?: string | null;
+  'litellm-changed-by'?: string | null;
 };
 
 export type GenerateKeyFnKeyGeneratePostError = Fetcher.ErrorWrapper<{
@@ -3692,7 +3692,7 @@ export type UpdateKeyFnKeyUpdatePostHeaders = {
   /**
    * The litellm-changed-by header enables tracking of actions performed by authorized users on behalf of other users, providing an audit trail for accountability
    */
-  ['litellm-changed-by']?: string | null;
+  'litellm-changed-by'?: string | null;
 };
 
 export type UpdateKeyFnKeyUpdatePostError = Fetcher.ErrorWrapper<{
@@ -3769,7 +3769,7 @@ export type DeleteKeyFnKeyDeletePostHeaders = {
   /**
    * The litellm-changed-by header enables tracking of actions performed by authorized users on behalf of other users, providing an audit trail for accountability
    */
-  ['litellm-changed-by']?: string | null;
+  'litellm-changed-by'?: string | null;
 };
 
 export type DeleteKeyFnKeyDeletePostError = Fetcher.ErrorWrapper<{
@@ -3870,7 +3870,7 @@ export type RegenerateKeyFnKeyRegeneratePostHeaders = {
   /**
    * The litellm-changed-by header enables tracking of actions performed by authorized users on behalf of other users, providing an audit trail for accountability
    */
-  ['litellm-changed-by']?: string | null;
+  'litellm-changed-by'?: string | null;
 };
 
 export type RegenerateKeyFnKeyRegeneratePostError = Fetcher.ErrorWrapper<{
@@ -3948,7 +3948,7 @@ export type RegenerateKeyFnKeyKeyRegeneratePostHeaders = {
   /**
    * The litellm-changed-by header enables tracking of actions performed by authorized users on behalf of other users, providing an audit trail for accountability
    */
-  ['litellm-changed-by']?: string | null;
+  'litellm-changed-by'?: string | null;
 };
 
 export type RegenerateKeyFnKeyKeyRegeneratePostError = Fetcher.ErrorWrapper<{
@@ -4096,7 +4096,7 @@ export type BlockKeyKeyBlockPostHeaders = {
   /**
    * The litellm-changed-by header enables tracking of actions performed by authorized users on behalf of other users, providing an audit trail for accountability
    */
-  ['litellm-changed-by']?: string | null;
+  'litellm-changed-by'?: string | null;
 };
 
 export type BlockKeyKeyBlockPostError = Fetcher.ErrorWrapper<{
@@ -4138,7 +4138,7 @@ export type UnblockKeyKeyUnblockPostHeaders = {
   /**
    * The litellm-changed-by header enables tracking of actions performed by authorized users on behalf of other users, providing an audit trail for accountability
    */
-  ['litellm-changed-by']?: string | null;
+  'litellm-changed-by'?: string | null;
 };
 
 export type UnblockKeyKeyUnblockPostError = Fetcher.ErrorWrapper<{
@@ -4559,7 +4559,7 @@ export type DeleteUserUserDeletePostHeaders = {
   /**
    * The litellm-changed-by header enables tracking of actions performed by authorized users on behalf of other users, providing an audit trail for accountability
    */
-  ['litellm-changed-by']?: string | null;
+  'litellm-changed-by'?: string | null;
 };
 
 export type DeleteUserUserDeletePostError = Fetcher.ErrorWrapper<{
@@ -4675,7 +4675,7 @@ export type NewTeamTeamNewPostHeaders = {
   /**
    * The litellm-changed-by header enables tracking of actions performed by authorized users on behalf of other users, providing an audit trail for accountability
    */
-  ['litellm-changed-by']?: string | null;
+  'litellm-changed-by'?: string | null;
 };
 
 export type NewTeamTeamNewPostError = Fetcher.ErrorWrapper<{
@@ -4747,7 +4747,7 @@ export type UpdateTeamTeamUpdatePostHeaders = {
   /**
    * The litellm-changed-by header enables tracking of actions performed by authorized users on behalf of other users, providing an audit trail for accountability
    */
-  ['litellm-changed-by']?: string | null;
+  'litellm-changed-by'?: string | null;
 };
 
 export type UpdateTeamTeamUpdatePostError = Fetcher.ErrorWrapper<{
@@ -4917,7 +4917,7 @@ export type DeleteTeamTeamDeletePostHeaders = {
   /**
    * The litellm-changed-by header enables tracking of actions performed by authorized users on behalf of other users, providing an audit trail for accountability
    */
-  ['litellm-changed-by']?: string | null;
+  'litellm-changed-by'?: string | null;
 };
 
 export type DeleteTeamTeamDeletePostError = Fetcher.ErrorWrapper<{
@@ -5066,7 +5066,7 @@ export const unblockTeamTeamUnblockPost = (variables: UnblockTeamTeamUnblockPost
   });
 
 export type ListAvailableTeamsTeamAvailableGetQueryParams = {
-  response_model?: void;
+  response_model?: undefined;
 };
 
 export type ListAvailableTeamsTeamAvailableGetError = Fetcher.ErrorWrapper<{
@@ -7121,7 +7121,7 @@ export type AddTeamCallbacksTeamTeamIdCallbackPostHeaders = {
   /**
    * The litellm-changed-by header enables tracking of actions performed by authorized users on behalf of other users, providing an audit trail for accountability
    */
-  ['litellm-changed-by']?: string | null;
+  'litellm-changed-by'?: string | null;
 };
 
 export type AddTeamCallbacksTeamTeamIdCallbackPostError = Fetcher.ErrorWrapper<{

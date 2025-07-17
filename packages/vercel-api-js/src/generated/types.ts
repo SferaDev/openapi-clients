@@ -8,15 +8,15 @@ export const ACLActionEnum = {
   delete: 'delete',
   list: 'list',
   read: 'read',
-  update: 'update',
-} as const
+  update: 'update'
+} as const;
 
-export type ACLActionEnum = (typeof ACLActionEnum)[keyof typeof ACLActionEnum]
+export type ACLActionEnum = (typeof ACLActionEnum)[keyof typeof ACLActionEnum];
 
 /**
  * @description Enum containing the actions that can be performed against a resource. Group operations are included.
  */
-export type ACLAction = ACLActionEnum
+export type ACLAction = ACLActionEnum;
 
 export type FlagJSONValue =
   | (
@@ -25,10 +25,10 @@ export type FlagJSONValue =
       | boolean
       | unknown[]
       | {
-          [key: string]: unknown
+          [key: string]: unknown;
         }
     )
-  | null
+  | null;
 
 /**
  * @description This object contains information related to the pagination of the current request, including the necessary parameters to get the next or previous page of data.
@@ -38,18 +38,18 @@ export type Pagination = {
    * @description Amount of items in the current page.
    * @type number
    */
-  count: number
+  count: number;
   /**
    * @description Timestamp that must be used to request the next page.
    * @type number
    */
-  next: number | null
+  next: number | null;
   /**
    * @description Timestamp that must be used to request the previous page.
    * @type number
    */
-  prev: number | null
-}
+  prev: number | null;
+};
 
 export type EdgeConfigItemValue =
   | (
@@ -57,11 +57,11 @@ export type EdgeConfigItemValue =
       | number
       | boolean
       | {
-          [key: string]: unknown
+          [key: string]: unknown;
         }
       | unknown[]
     )
-  | null
+  | null;
 
 /**
  * @description The EdgeConfig.
@@ -70,25 +70,25 @@ export type EdgeConfigItem = {
   /**
    * @type string
    */
-  key: string
-  value: unknown
+  key: string;
+  value: unknown;
   /**
    * @type string | undefined
    */
-  description?: string | undefined
+  description?: string | undefined;
   /**
    * @type string
    */
-  edgeConfigId: string
+  edgeConfigId: string;
   /**
    * @type number
    */
-  createdAt: number
+  createdAt: number;
   /**
    * @type number
    */
-  updatedAt: number
-}
+  updatedAt: number;
+};
 
 /**
  * @description The EdgeConfig.
@@ -97,25 +97,25 @@ export type EdgeConfigToken = {
   /**
    * @type string
    */
-  token: string
+  token: string;
   /**
    * @type string
    */
-  label: string
+  label: string;
   /**
    * @description This is not the token itself, but rather an id to identify the token by
    * @type string
    */
-  id: string
+  id: string;
   /**
    * @type string
    */
-  edgeConfigId: string
+  edgeConfigId: string;
   /**
    * @type number
    */
-  createdAt: number
-}
+  createdAt: number;
+};
 
 export const entitiesTypeEnum = {
   author: 'author',
@@ -138,228 +138,231 @@ export const entitiesTypeEnum = {
   scaling_rules: 'scaling_rules',
   store: 'store',
   system: 'system',
-  target: 'target',
-} as const
+  target: 'target'
+} as const;
 
-export type EntitiesTypeEnum = (typeof entitiesTypeEnum)[keyof typeof entitiesTypeEnum]
+export type EntitiesTypeEnum = (typeof entitiesTypeEnum)[keyof typeof entitiesTypeEnum];
 
 export const principalTypeEnum = {
-  user: 'user',
-} as const
+  user: 'user'
+} as const;
 
-export type PrincipalTypeEnum = (typeof principalTypeEnum)[keyof typeof principalTypeEnum]
+export type PrincipalTypeEnum = (typeof principalTypeEnum)[keyof typeof principalTypeEnum];
 
 export const principalTypeEnum2 = {
-  app: 'app',
-} as const
+  app: 'app'
+} as const;
 
-export type PrincipalTypeEnum2 = (typeof principalTypeEnum2)[keyof typeof principalTypeEnum2]
+export type PrincipalTypeEnum2 = (typeof principalTypeEnum2)[keyof typeof principalTypeEnum2];
 
 export const viaTypeEnum = {
-  user: 'user',
-} as const
+  user: 'user'
+} as const;
 
-export type ViaTypeEnum = (typeof viaTypeEnum)[keyof typeof viaTypeEnum]
+export type ViaTypeEnum = (typeof viaTypeEnum)[keyof typeof viaTypeEnum];
 
 export const viaTypeEnum2 = {
-  app: 'app',
-} as const
+  app: 'app'
+} as const;
 
-export type ViaTypeEnum2 = (typeof viaTypeEnum2)[keyof typeof viaTypeEnum2]
+export type ViaTypeEnum2 = (typeof viaTypeEnum2)[keyof typeof viaTypeEnum2];
 
 export const payloadActionEnum = {
   created: 'created',
   updated: 'updated',
   deleted: 'deleted',
   archived: 'archived',
-  unarchived: 'unarchived',
-} as const
+  unarchived: 'unarchived'
+} as const;
 
-export type PayloadActionEnum = (typeof payloadActionEnum)[keyof typeof payloadActionEnum]
+export type PayloadActionEnum = (typeof payloadActionEnum)[keyof typeof payloadActionEnum];
 
 export const payloadNextRoleEnum = {
   ADMIN: 'ADMIN',
   PROJECT_DEVELOPER: 'PROJECT_DEVELOPER',
-  PROJECT_VIEWER: 'PROJECT_VIEWER',
-} as const
+  PROJECT_VIEWER: 'PROJECT_VIEWER'
+} as const;
 
-export type PayloadNextRoleEnum = (typeof payloadNextRoleEnum)[keyof typeof payloadNextRoleEnum]
+export type PayloadNextRoleEnum = (typeof payloadNextRoleEnum)[keyof typeof payloadNextRoleEnum];
 
 export const payloadPreviousRoleEnum = {
   ADMIN: 'ADMIN',
   PROJECT_DEVELOPER: 'PROJECT_DEVELOPER',
-  PROJECT_VIEWER: 'PROJECT_VIEWER',
-} as const
+  PROJECT_VIEWER: 'PROJECT_VIEWER'
+} as const;
 
-export type PayloadPreviousRoleEnum = (typeof payloadPreviousRoleEnum)[keyof typeof payloadPreviousRoleEnum]
+export type PayloadPreviousRoleEnum = (typeof payloadPreviousRoleEnum)[keyof typeof payloadPreviousRoleEnum];
 
 export const payloadActionEnum2 = {
   created: 'created',
-  removed: 'removed',
-} as const
+  removed: 'removed'
+} as const;
 
-export type PayloadActionEnum2 = (typeof payloadActionEnum2)[keyof typeof payloadActionEnum2]
+export type PayloadActionEnum2 = (typeof payloadActionEnum2)[keyof typeof payloadActionEnum2];
 
 export const payloadTypeEnum = {
   system: 'system',
   encrypted: 'encrypted',
   plain: 'plain',
-  sensitive: 'sensitive',
-} as const
+  sensitive: 'sensitive'
+} as const;
 
-export type PayloadTypeEnum = (typeof payloadTypeEnum)[keyof typeof payloadTypeEnum]
+export type PayloadTypeEnum = (typeof payloadTypeEnum)[keyof typeof payloadTypeEnum];
 
 export const payloadTargetEnum = {
   production: 'production',
   preview: 'preview',
-  development: 'development',
-} as const
+  development: 'development'
+} as const;
 
-export type PayloadTargetEnum = (typeof payloadTargetEnum)[keyof typeof payloadTargetEnum]
+export type PayloadTargetEnum = (typeof payloadTargetEnum)[keyof typeof payloadTargetEnum];
 
 export const oldEnvVarTypeEnum = {
   system: 'system',
   encrypted: 'encrypted',
   plain: 'plain',
-  sensitive: 'sensitive',
-} as const
+  sensitive: 'sensitive'
+} as const;
 
-export type OldEnvVarTypeEnum = (typeof oldEnvVarTypeEnum)[keyof typeof oldEnvVarTypeEnum]
+export type OldEnvVarTypeEnum = (typeof oldEnvVarTypeEnum)[keyof typeof oldEnvVarTypeEnum];
 
 export const oldEnvVarTargetEnum = {
   production: 'production',
   preview: 'preview',
-  development: 'development',
-} as const
+  development: 'development'
+} as const;
 
-export type OldEnvVarTargetEnum = (typeof oldEnvVarTargetEnum)[keyof typeof oldEnvVarTargetEnum]
+export type OldEnvVarTargetEnum = (typeof oldEnvVarTargetEnum)[keyof typeof oldEnvVarTargetEnum];
 
 export const newEnvVarTypeEnum = {
   system: 'system',
   encrypted: 'encrypted',
   plain: 'plain',
-  sensitive: 'sensitive',
-} as const
+  sensitive: 'sensitive'
+} as const;
 
-export type NewEnvVarTypeEnum = (typeof newEnvVarTypeEnum)[keyof typeof newEnvVarTypeEnum]
+export type NewEnvVarTypeEnum = (typeof newEnvVarTypeEnum)[keyof typeof newEnvVarTypeEnum];
 
 export const newEnvVarTargetEnum = {
   production: 'production',
   preview: 'preview',
-  development: 'development',
-} as const
+  development: 'development'
+} as const;
 
-export type NewEnvVarTargetEnum = (typeof newEnvVarTargetEnum)[keyof typeof newEnvVarTargetEnum]
+export type NewEnvVarTargetEnum = (typeof newEnvVarTargetEnum)[keyof typeof newEnvVarTargetEnum];
 
 export const updateDiffOldTargetEnum = {
   production: 'production',
   preview: 'preview',
-  development: 'development',
-} as const
+  development: 'development'
+} as const;
 
-export type UpdateDiffOldTargetEnum = (typeof updateDiffOldTargetEnum)[keyof typeof updateDiffOldTargetEnum]
+export type UpdateDiffOldTargetEnum = (typeof updateDiffOldTargetEnum)[keyof typeof updateDiffOldTargetEnum];
 
 export const updateDiffNewTargetEnum = {
   production: 'production',
   preview: 'preview',
-  development: 'development',
-} as const
+  development: 'development'
+} as const;
 
-export type UpdateDiffNewTargetEnum = (typeof updateDiffNewTargetEnum)[keyof typeof updateDiffNewTargetEnum]
+export type UpdateDiffNewTargetEnum = (typeof updateDiffNewTargetEnum)[keyof typeof updateDiffNewTargetEnum];
 
 export const payloadActionEnum3 = {
   log: 'log',
   challenge: 'challenge',
-  deny: 'deny',
-} as const
+  deny: 'deny'
+} as const;
 
-export type PayloadActionEnum3 = (typeof payloadActionEnum3)[keyof typeof payloadActionEnum3]
+export type PayloadActionEnum3 = (typeof payloadActionEnum3)[keyof typeof payloadActionEnum3];
 
 export const actionEnum = {
   log: 'log',
   challenge: 'challenge',
-  deny: 'deny',
-} as const
+  deny: 'deny'
+} as const;
 
-export type ActionEnum = (typeof actionEnum)[keyof typeof actionEnum]
+export type ActionEnum = (typeof actionEnum)[keyof typeof actionEnum];
 
 export const blockHistoryActionEnum = {
   'hard-blocked': 'hard-blocked',
   'soft-blocked': 'soft-blocked',
-  unblocked: 'unblocked',
-} as const
+  unblocked: 'unblocked'
+} as const;
 
-export type BlockHistoryActionEnum = (typeof blockHistoryActionEnum)[keyof typeof blockHistoryActionEnum]
+export type BlockHistoryActionEnum = (typeof blockHistoryActionEnum)[keyof typeof blockHistoryActionEnum];
 
 export const billingPlanEnum = {
   pro: 'pro',
   enterprise: 'enterprise',
-  hobby: 'hobby',
-} as const
+  hobby: 'hobby'
+} as const;
 
-export type BillingPlanEnum = (typeof billingPlanEnum)[keyof typeof billingPlanEnum]
+export type BillingPlanEnum = (typeof billingPlanEnum)[keyof typeof billingPlanEnum];
 
 export const credentialsTypeEnum = {
   gitlab: 'gitlab',
   bitbucket: 'bitbucket',
   google: 'google',
   'github-oauth': 'github-oauth',
-  'github-app': 'github-app',
-} as const
+  'github-oauth-limited': 'github-oauth-limited'
+} as const;
 
-export type CredentialsTypeEnum = (typeof credentialsTypeEnum)[keyof typeof credentialsTypeEnum]
+export type CredentialsTypeEnum = (typeof credentialsTypeEnum)[keyof typeof credentialsTypeEnum];
 
 export const credentialsTypeEnum2 = {
-  'github-oauth-custom-host': 'github-oauth-custom-host',
-  'github-app-custom-host': 'github-app-custom-host',
-} as const
+  'github-oauth-custom-host': 'github-oauth-custom-host'
+} as const;
 
-export type CredentialsTypeEnum2 = (typeof credentialsTypeEnum2)[keyof typeof credentialsTypeEnum2]
+export type CredentialsTypeEnum2 = (typeof credentialsTypeEnum2)[keyof typeof credentialsTypeEnum2];
 
 export const newOwnerImportFlowGitProviderEnum = {
   github: 'github',
   gitlab: 'gitlab',
   bitbucket: 'bitbucket',
-  'github-custom-host': 'github-custom-host',
-} as const
+  'github-limited': 'github-limited',
+  'github-custom-host': 'github-custom-host'
+} as const;
 
-export type NewOwnerImportFlowGitProviderEnum = (typeof newOwnerImportFlowGitProviderEnum)[keyof typeof newOwnerImportFlowGitProviderEnum]
+export type NewOwnerImportFlowGitProviderEnum =
+  (typeof newOwnerImportFlowGitProviderEnum)[keyof typeof newOwnerImportFlowGitProviderEnum];
 
 export const buildMachinePurchaseTypeEnum = {
   enhanced: 'enhanced',
-  turbo: 'turbo',
-} as const
+  turbo: 'turbo'
+} as const;
 
-export type BuildMachinePurchaseTypeEnum = (typeof buildMachinePurchaseTypeEnum)[keyof typeof buildMachinePurchaseTypeEnum]
+export type BuildMachinePurchaseTypeEnum =
+  (typeof buildMachinePurchaseTypeEnum)[keyof typeof buildMachinePurchaseTypeEnum];
 
 export const activeDashboardViewsViewPreferenceEnum = {
   cards: 'cards',
-  list: 'list',
-} as const
+  list: 'list'
+} as const;
 
-export type ActiveDashboardViewsViewPreferenceEnum = (typeof activeDashboardViewsViewPreferenceEnum)[keyof typeof activeDashboardViewsViewPreferenceEnum]
+export type ActiveDashboardViewsViewPreferenceEnum =
+  (typeof activeDashboardViewsViewPreferenceEnum)[keyof typeof activeDashboardViewsViewPreferenceEnum];
 
 export const activeDashboardViewsFavoritesViewPreferenceEnum = {
   open: 'open',
-  closed: 'closed',
-} as const
+  closed: 'closed'
+} as const;
 
 export type ActiveDashboardViewsFavoritesViewPreferenceEnum =
-  (typeof activeDashboardViewsFavoritesViewPreferenceEnum)[keyof typeof activeDashboardViewsFavoritesViewPreferenceEnum]
+  (typeof activeDashboardViewsFavoritesViewPreferenceEnum)[keyof typeof activeDashboardViewsFavoritesViewPreferenceEnum];
 
 export const activeDashboardViewsRecentsViewPreferenceEnum = {
   open: 'open',
-  closed: 'closed',
-} as const
+  closed: 'closed'
+} as const;
 
 export type ActiveDashboardViewsRecentsViewPreferenceEnum =
-  (typeof activeDashboardViewsRecentsViewPreferenceEnum)[keyof typeof activeDashboardViewsRecentsViewPreferenceEnum]
+  (typeof activeDashboardViewsRecentsViewPreferenceEnum)[keyof typeof activeDashboardViewsRecentsViewPreferenceEnum];
 
 export const siftRouteNameEnum = {
-  string: 'string',
-} as const
+  string: 'string'
+} as const;
 
-export type SiftRouteNameEnum = (typeof siftRouteNameEnum)[keyof typeof siftRouteNameEnum]
+export type SiftRouteNameEnum = (typeof siftRouteNameEnum)[keyof typeof siftRouteNameEnum];
 
 export const softBlockReasonEnum = {
   SUBSCRIPTION_CANCELED: 'SUBSCRIPTION_CANCELED',
@@ -367,10 +370,10 @@ export const softBlockReasonEnum = {
   UNPAID_INVOICE: 'UNPAID_INVOICE',
   ENTERPRISE_TRIAL_ENDED: 'ENTERPRISE_TRIAL_ENDED',
   FAIR_USE_LIMITS_EXCEEDED: 'FAIR_USE_LIMITS_EXCEEDED',
-  BLOCKED_FOR_PLATFORM_ABUSE: 'BLOCKED_FOR_PLATFORM_ABUSE',
-} as const
+  BLOCKED_FOR_PLATFORM_ABUSE: 'BLOCKED_FOR_PLATFORM_ABUSE'
+} as const;
 
-export type SoftBlockReasonEnum = (typeof softBlockReasonEnum)[keyof typeof softBlockReasonEnum]
+export type SoftBlockReasonEnum = (typeof softBlockReasonEnum)[keyof typeof softBlockReasonEnum];
 
 export const softBlockBlockedDueToOverageTypeEnum = {
   analyticsUsage: 'analyticsUsage',
@@ -411,10 +414,11 @@ export const softBlockBlockedDueToOverageTypeEnum = {
   wafOwaspExcessBytes: 'wafOwaspExcessBytes',
   wafOwaspRequests: 'wafOwaspRequests',
   wafRateLimitRequest: 'wafRateLimitRequest',
-  webAnalyticsEvent: 'webAnalyticsEvent',
-} as const
+  webAnalyticsEvent: 'webAnalyticsEvent'
+} as const;
 
-export type SoftBlockBlockedDueToOverageTypeEnum = (typeof softBlockBlockedDueToOverageTypeEnum)[keyof typeof softBlockBlockedDueToOverageTypeEnum]
+export type SoftBlockBlockedDueToOverageTypeEnum =
+  (typeof softBlockBlockedDueToOverageTypeEnum)[keyof typeof softBlockBlockedDueToOverageTypeEnum];
 
 export const teamsRoleEnum = {
   OWNER: 'OWNER',
@@ -423,10 +427,10 @@ export const teamsRoleEnum = {
   SECURITY: 'SECURITY',
   BILLING: 'BILLING',
   VIEWER: 'VIEWER',
-  CONTRIBUTOR: 'CONTRIBUTOR',
-} as const
+  CONTRIBUTOR: 'CONTRIBUTOR'
+} as const;
 
-export type TeamsRoleEnum = (typeof teamsRoleEnum)[keyof typeof teamsRoleEnum]
+export type TeamsRoleEnum = (typeof teamsRoleEnum)[keyof typeof teamsRoleEnum];
 
 export const teamsTeamRolesEnum = {
   OWNER: 'OWNER',
@@ -435,20 +439,20 @@ export const teamsTeamRolesEnum = {
   SECURITY: 'SECURITY',
   BILLING: 'BILLING',
   VIEWER: 'VIEWER',
-  CONTRIBUTOR: 'CONTRIBUTOR',
-} as const
+  CONTRIBUTOR: 'CONTRIBUTOR'
+} as const;
 
-export type TeamsTeamRolesEnum = (typeof teamsTeamRolesEnum)[keyof typeof teamsTeamRolesEnum]
+export type TeamsTeamRolesEnum = (typeof teamsTeamRolesEnum)[keyof typeof teamsTeamRolesEnum];
 
 export const teamsTeamPermissionsEnum = {
   CreateProject: 'CreateProject',
   FullProductionDeployment: 'FullProductionDeployment',
   UsageViewer: 'UsageViewer',
   EnvVariableManager: 'EnvVariableManager',
-  EnvironmentManager: 'EnvironmentManager',
-} as const
+  EnvironmentManager: 'EnvironmentManager'
+} as const;
 
-export type TeamsTeamPermissionsEnum = (typeof teamsTeamPermissionsEnum)[keyof typeof teamsTeamPermissionsEnum]
+export type TeamsTeamPermissionsEnum = (typeof teamsTeamPermissionsEnum)[keyof typeof teamsTeamPermissionsEnum];
 
 export const joinedFromOriginEnum = {
   teams: 'teams',
@@ -461,16 +465,16 @@ export const joinedFromOriginEnum = {
   import: 'import',
   dsync: 'dsync',
   feedback: 'feedback',
-  'organization-teams': 'organization-teams',
-} as const
+  'organization-teams': 'organization-teams'
+} as const;
 
-export type JoinedFromOriginEnum = (typeof joinedFromOriginEnum)[keyof typeof joinedFromOriginEnum]
+export type JoinedFromOriginEnum = (typeof joinedFromOriginEnum)[keyof typeof joinedFromOriginEnum];
 
 export const newOwnerTypeEnum = {
-  user: 'user',
-} as const
+  user: 'user'
+} as const;
 
-export type NewOwnerTypeEnum = (typeof newOwnerTypeEnum)[keyof typeof newOwnerTypeEnum]
+export type NewOwnerTypeEnum = (typeof newOwnerTypeEnum)[keyof typeof newOwnerTypeEnum];
 
 export const newOwnerEnablePreviewFeedbackEnum = {
   default: 'default',
@@ -478,74 +482,79 @@ export const newOwnerEnablePreviewFeedbackEnum = {
   off: 'off',
   'on-force': 'on-force',
   'off-force': 'off-force',
-  'default-force': 'default-force',
-} as const
+  'default-force': 'default-force'
+} as const;
 
-export type NewOwnerEnablePreviewFeedbackEnum = (typeof newOwnerEnablePreviewFeedbackEnum)[keyof typeof newOwnerEnablePreviewFeedbackEnum]
+export type NewOwnerEnablePreviewFeedbackEnum =
+  (typeof newOwnerEnablePreviewFeedbackEnum)[keyof typeof newOwnerEnablePreviewFeedbackEnum];
 
 export const webAnalyticsBlockReasonEnum = {
   admin_override: 'admin_override',
-  limits_exceeded: 'limits_exceeded',
-} as const
+  limits_exceeded: 'limits_exceeded'
+} as const;
 
-export type WebAnalyticsBlockReasonEnum = (typeof webAnalyticsBlockReasonEnum)[keyof typeof webAnalyticsBlockReasonEnum]
+export type WebAnalyticsBlockReasonEnum =
+  (typeof webAnalyticsBlockReasonEnum)[keyof typeof webAnalyticsBlockReasonEnum];
 
 export const monitoringBlockReasonEnum = {
   admin_override: 'admin_override',
-  limits_exceeded: 'limits_exceeded',
-} as const
+  limits_exceeded: 'limits_exceeded'
+} as const;
 
-export type MonitoringBlockReasonEnum = (typeof monitoringBlockReasonEnum)[keyof typeof monitoringBlockReasonEnum]
+export type MonitoringBlockReasonEnum = (typeof monitoringBlockReasonEnum)[keyof typeof monitoringBlockReasonEnum];
 
 export const monitoringBlockTypeEnum = {
   soft: 'soft',
-  hard: 'hard',
-} as const
+  hard: 'hard'
+} as const;
 
-export type MonitoringBlockTypeEnum = (typeof monitoringBlockTypeEnum)[keyof typeof monitoringBlockTypeEnum]
+export type MonitoringBlockTypeEnum = (typeof monitoringBlockTypeEnum)[keyof typeof monitoringBlockTypeEnum];
 
 export const observabilityPlusBlockReasonEnum = {
   admin_override: 'admin_override',
-  limits_exceeded: 'limits_exceeded',
-} as const
+  limits_exceeded: 'limits_exceeded'
+} as const;
 
-export type ObservabilityPlusBlockReasonEnum = (typeof observabilityPlusBlockReasonEnum)[keyof typeof observabilityPlusBlockReasonEnum]
+export type ObservabilityPlusBlockReasonEnum =
+  (typeof observabilityPlusBlockReasonEnum)[keyof typeof observabilityPlusBlockReasonEnum];
 
 export const observabilityPlusBlockTypeEnum = {
   soft: 'soft',
-  hard: 'hard',
-} as const
+  hard: 'hard'
+} as const;
 
-export type ObservabilityPlusBlockTypeEnum = (typeof observabilityPlusBlockTypeEnum)[keyof typeof observabilityPlusBlockTypeEnum]
+export type ObservabilityPlusBlockTypeEnum =
+  (typeof observabilityPlusBlockTypeEnum)[keyof typeof observabilityPlusBlockTypeEnum];
 
 export const dataCacheBlockReasonEnum = {
   admin_override: 'admin_override',
-  limits_exceeded: 'limits_exceeded',
-} as const
+  limits_exceeded: 'limits_exceeded'
+} as const;
 
-export type DataCacheBlockReasonEnum = (typeof dataCacheBlockReasonEnum)[keyof typeof dataCacheBlockReasonEnum]
+export type DataCacheBlockReasonEnum = (typeof dataCacheBlockReasonEnum)[keyof typeof dataCacheBlockReasonEnum];
 
 export const imageOptimizationTransformationBlockReasonEnum = {
   admin_override: 'admin_override',
-  limits_exceeded: 'limits_exceeded',
-} as const
+  limits_exceeded: 'limits_exceeded'
+} as const;
 
 export type ImageOptimizationTransformationBlockReasonEnum =
-  (typeof imageOptimizationTransformationBlockReasonEnum)[keyof typeof imageOptimizationTransformationBlockReasonEnum]
+  (typeof imageOptimizationTransformationBlockReasonEnum)[keyof typeof imageOptimizationTransformationBlockReasonEnum];
 
 export const sourceImagesBlockReasonEnum = {
   admin_override: 'admin_override',
-  limits_exceeded: 'limits_exceeded',
-} as const
+  limits_exceeded: 'limits_exceeded'
+} as const;
 
-export type SourceImagesBlockReasonEnum = (typeof sourceImagesBlockReasonEnum)[keyof typeof sourceImagesBlockReasonEnum]
+export type SourceImagesBlockReasonEnum =
+  (typeof sourceImagesBlockReasonEnum)[keyof typeof sourceImagesBlockReasonEnum];
 
 export const blobBlockReasonEnum = {
   admin_override: 'admin_override',
-  limits_exceeded: 'limits_exceeded',
-} as const
+  limits_exceeded: 'limits_exceeded'
+} as const;
 
-export type BlobBlockReasonEnum = (typeof blobBlockReasonEnum)[keyof typeof blobBlockReasonEnum]
+export type BlobBlockReasonEnum = (typeof blobBlockReasonEnum)[keyof typeof blobBlockReasonEnum];
 
 export const blobOverageReasonEnum = {
   analyticsUsage: 'analyticsUsage',
@@ -586,17 +595,17 @@ export const blobOverageReasonEnum = {
   wafOwaspExcessBytes: 'wafOwaspExcessBytes',
   wafOwaspRequests: 'wafOwaspRequests',
   wafRateLimitRequest: 'wafRateLimitRequest',
-  webAnalyticsEvent: 'webAnalyticsEvent',
-} as const
+  webAnalyticsEvent: 'webAnalyticsEvent'
+} as const;
 
-export type BlobOverageReasonEnum = (typeof blobOverageReasonEnum)[keyof typeof blobOverageReasonEnum]
+export type BlobOverageReasonEnum = (typeof blobOverageReasonEnum)[keyof typeof blobOverageReasonEnum];
 
 export const postgresBlockReasonEnum = {
   admin_override: 'admin_override',
-  limits_exceeded: 'limits_exceeded',
-} as const
+  limits_exceeded: 'limits_exceeded'
+} as const;
 
-export type PostgresBlockReasonEnum = (typeof postgresBlockReasonEnum)[keyof typeof postgresBlockReasonEnum]
+export type PostgresBlockReasonEnum = (typeof postgresBlockReasonEnum)[keyof typeof postgresBlockReasonEnum];
 
 export const postgresOverageReasonEnum = {
   analyticsUsage: 'analyticsUsage',
@@ -637,17 +646,17 @@ export const postgresOverageReasonEnum = {
   wafOwaspExcessBytes: 'wafOwaspExcessBytes',
   wafOwaspRequests: 'wafOwaspRequests',
   wafRateLimitRequest: 'wafRateLimitRequest',
-  webAnalyticsEvent: 'webAnalyticsEvent',
-} as const
+  webAnalyticsEvent: 'webAnalyticsEvent'
+} as const;
 
-export type PostgresOverageReasonEnum = (typeof postgresOverageReasonEnum)[keyof typeof postgresOverageReasonEnum]
+export type PostgresOverageReasonEnum = (typeof postgresOverageReasonEnum)[keyof typeof postgresOverageReasonEnum];
 
 export const redisBlockReasonEnum = {
   admin_override: 'admin_override',
-  limits_exceeded: 'limits_exceeded',
-} as const
+  limits_exceeded: 'limits_exceeded'
+} as const;
 
-export type RedisBlockReasonEnum = (typeof redisBlockReasonEnum)[keyof typeof redisBlockReasonEnum]
+export type RedisBlockReasonEnum = (typeof redisBlockReasonEnum)[keyof typeof redisBlockReasonEnum];
 
 export const redisOverageReasonEnum = {
   analyticsUsage: 'analyticsUsage',
@@ -688,16 +697,16 @@ export const redisOverageReasonEnum = {
   wafOwaspExcessBytes: 'wafOwaspExcessBytes',
   wafOwaspRequests: 'wafOwaspRequests',
   wafRateLimitRequest: 'wafRateLimitRequest',
-  webAnalyticsEvent: 'webAnalyticsEvent',
-} as const
+  webAnalyticsEvent: 'webAnalyticsEvent'
+} as const;
 
-export type RedisOverageReasonEnum = (typeof redisOverageReasonEnum)[keyof typeof redisOverageReasonEnum]
+export type RedisOverageReasonEnum = (typeof redisOverageReasonEnum)[keyof typeof redisOverageReasonEnum];
 
 export const newOwnerVersionEnum = {
-  northstar: 'northstar',
-} as const
+  northstar: 'northstar'
+} as const;
 
-export type NewOwnerVersionEnum = (typeof newOwnerVersionEnum)[keyof typeof newOwnerVersionEnum]
+export type NewOwnerVersionEnum = (typeof newOwnerVersionEnum)[keyof typeof newOwnerVersionEnum];
 
 export const browserNameEnum = {
   iphone: 'iphone',
@@ -706,10 +715,10 @@ export const browserNameEnum = {
   chrome: 'chrome',
   firefox: 'firefox',
   mozilla: 'mozilla',
-  unknown: 'unknown',
-} as const
+  unknown: 'unknown'
+} as const;
 
-export type BrowserNameEnum = (typeof browserNameEnum)[keyof typeof browserNameEnum]
+export type BrowserNameEnum = (typeof browserNameEnum)[keyof typeof browserNameEnum];
 
 export const osNameEnum = {
   unknown: 'unknown',
@@ -724,10 +733,10 @@ export const osNameEnum = {
   ios: 'ios',
   android: 'android',
   'Mac OS': 'Mac OS',
-  'OS X': 'OS X',
-} as const
+  'OS X': 'OS X'
+} as const;
 
-export type OsNameEnum = (typeof osNameEnum)[keyof typeof osNameEnum]
+export type OsNameEnum = (typeof osNameEnum)[keyof typeof osNameEnum];
 
 export const roleEnum = {
   OWNER: 'OWNER',
@@ -736,10 +745,10 @@ export const roleEnum = {
   SECURITY: 'SECURITY',
   BILLING: 'BILLING',
   VIEWER: 'VIEWER',
-  CONTRIBUTOR: 'CONTRIBUTOR',
-} as const
+  CONTRIBUTOR: 'CONTRIBUTOR'
+} as const;
 
-export type RoleEnum = (typeof roleEnum)[keyof typeof roleEnum]
+export type RoleEnum = (typeof roleEnum)[keyof typeof roleEnum];
 
 export const joinedFromOriginEnum2 = {
   teams: 'teams',
@@ -752,230 +761,240 @@ export const joinedFromOriginEnum2 = {
   import: 'import',
   dsync: 'dsync',
   feedback: 'feedback',
-  'organization-teams': 'organization-teams',
-} as const
+  'organization-teams': 'organization-teams'
+} as const;
 
-export type JoinedFromOriginEnum2 = (typeof joinedFromOriginEnum2)[keyof typeof joinedFromOriginEnum2]
+export type JoinedFromOriginEnum2 = (typeof joinedFromOriginEnum2)[keyof typeof joinedFromOriginEnum2];
 
 export const ssoProtectionDeploymentTypeEnum = {
   all: 'all',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
-  all_except_custom_domains: 'all_except_custom_domains',
-} as const
+  all_except_custom_domains: 'all_except_custom_domains'
+} as const;
 
-export type SsoProtectionDeploymentTypeEnum = (typeof ssoProtectionDeploymentTypeEnum)[keyof typeof ssoProtectionDeploymentTypeEnum]
+export type SsoProtectionDeploymentTypeEnum =
+  (typeof ssoProtectionDeploymentTypeEnum)[keyof typeof ssoProtectionDeploymentTypeEnum];
 
 export const payloadSsoProtectionEnum = {
   all: 'all',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
-  all_except_custom_domains: 'all_except_custom_domains',
-} as const
+  all_except_custom_domains: 'all_except_custom_domains'
+} as const;
 
-export type PayloadSsoProtectionEnum = (typeof payloadSsoProtectionEnum)[keyof typeof payloadSsoProtectionEnum]
+export type PayloadSsoProtectionEnum = (typeof payloadSsoProtectionEnum)[keyof typeof payloadSsoProtectionEnum];
 
 export const oldSsoProtectionDeploymentTypeEnum = {
   all: 'all',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
-  all_except_custom_domains: 'all_except_custom_domains',
-} as const
+  all_except_custom_domains: 'all_except_custom_domains'
+} as const;
 
-export type OldSsoProtectionDeploymentTypeEnum = (typeof oldSsoProtectionDeploymentTypeEnum)[keyof typeof oldSsoProtectionDeploymentTypeEnum]
+export type OldSsoProtectionDeploymentTypeEnum =
+  (typeof oldSsoProtectionDeploymentTypeEnum)[keyof typeof oldSsoProtectionDeploymentTypeEnum];
 
 export const payloadOldSsoProtectionEnum = {
   all: 'all',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
-  all_except_custom_domains: 'all_except_custom_domains',
-} as const
+  all_except_custom_domains: 'all_except_custom_domains'
+} as const;
 
-export type PayloadOldSsoProtectionEnum = (typeof payloadOldSsoProtectionEnum)[keyof typeof payloadOldSsoProtectionEnum]
+export type PayloadOldSsoProtectionEnum =
+  (typeof payloadOldSsoProtectionEnum)[keyof typeof payloadOldSsoProtectionEnum];
 
 export const passwordProtectionDeploymentTypeEnum = {
   all: 'all',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
-  all_except_custom_domains: 'all_except_custom_domains',
-} as const
+  all_except_custom_domains: 'all_except_custom_domains'
+} as const;
 
-export type PasswordProtectionDeploymentTypeEnum = (typeof passwordProtectionDeploymentTypeEnum)[keyof typeof passwordProtectionDeploymentTypeEnum]
+export type PasswordProtectionDeploymentTypeEnum =
+  (typeof passwordProtectionDeploymentTypeEnum)[keyof typeof passwordProtectionDeploymentTypeEnum];
 
 export const payloadPasswordProtectionEnum = {
   all: 'all',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
-  all_except_custom_domains: 'all_except_custom_domains',
-} as const
+  all_except_custom_domains: 'all_except_custom_domains'
+} as const;
 
-export type PayloadPasswordProtectionEnum = (typeof payloadPasswordProtectionEnum)[keyof typeof payloadPasswordProtectionEnum]
+export type PayloadPasswordProtectionEnum =
+  (typeof payloadPasswordProtectionEnum)[keyof typeof payloadPasswordProtectionEnum];
 
 export const oldPasswordProtectionDeploymentTypeEnum = {
   all: 'all',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
-  all_except_custom_domains: 'all_except_custom_domains',
-} as const
+  all_except_custom_domains: 'all_except_custom_domains'
+} as const;
 
-export type OldPasswordProtectionDeploymentTypeEnum = (typeof oldPasswordProtectionDeploymentTypeEnum)[keyof typeof oldPasswordProtectionDeploymentTypeEnum]
+export type OldPasswordProtectionDeploymentTypeEnum =
+  (typeof oldPasswordProtectionDeploymentTypeEnum)[keyof typeof oldPasswordProtectionDeploymentTypeEnum];
 
 export const payloadOldPasswordProtectionEnum = {
   all: 'all',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
-  all_except_custom_domains: 'all_except_custom_domains',
-} as const
+  all_except_custom_domains: 'all_except_custom_domains'
+} as const;
 
-export type PayloadOldPasswordProtectionEnum = (typeof payloadOldPasswordProtectionEnum)[keyof typeof payloadOldPasswordProtectionEnum]
+export type PayloadOldPasswordProtectionEnum =
+  (typeof payloadOldPasswordProtectionEnum)[keyof typeof payloadOldPasswordProtectionEnum];
 
 export const payloadTrustedIpsEnum = {
   all: 'all',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
   all_except_custom_domains: 'all_except_custom_domains',
-  production: 'production',
-} as const
+  production: 'production'
+} as const;
 
-export type PayloadTrustedIpsEnum = (typeof payloadTrustedIpsEnum)[keyof typeof payloadTrustedIpsEnum]
+export type PayloadTrustedIpsEnum = (typeof payloadTrustedIpsEnum)[keyof typeof payloadTrustedIpsEnum];
 
 export const payloadOldTrustedIpsEnum = {
   all: 'all',
   preview: 'preview',
   prod_deployment_urls_and_all_previews: 'prod_deployment_urls_and_all_previews',
   all_except_custom_domains: 'all_except_custom_domains',
-  production: 'production',
-} as const
+  production: 'production'
+} as const;
 
-export type PayloadOldTrustedIpsEnum = (typeof payloadOldTrustedIpsEnum)[keyof typeof payloadOldTrustedIpsEnum]
+export type PayloadOldTrustedIpsEnum = (typeof payloadOldTrustedIpsEnum)[keyof typeof payloadOldTrustedIpsEnum];
 
 export const payloadActionEnum4 = {
   enabled: 'enabled',
   disabled: 'disabled',
-  regenerated: 'regenerated',
-} as const
+  regenerated: 'regenerated'
+} as const;
 
-export type PayloadActionEnum4 = (typeof payloadActionEnum4)[keyof typeof payloadActionEnum4]
+export type PayloadActionEnum4 = (typeof payloadActionEnum4)[keyof typeof payloadActionEnum4];
 
 export const oldConnectConfigurationsEnvIdEnum = {
   preview: 'preview',
-  production: 'production',
-} as const
+  production: 'production'
+} as const;
 
-export type OldConnectConfigurationsEnvIdEnum = (typeof oldConnectConfigurationsEnvIdEnum)[keyof typeof oldConnectConfigurationsEnvIdEnum]
+export type OldConnectConfigurationsEnvIdEnum =
+  (typeof oldConnectConfigurationsEnvIdEnum)[keyof typeof oldConnectConfigurationsEnvIdEnum];
 
 export const newConnectConfigurationsEnvIdEnum = {
   preview: 'preview',
-  production: 'production',
-} as const
+  production: 'production'
+} as const;
 
-export type NewConnectConfigurationsEnvIdEnum = (typeof newConnectConfigurationsEnvIdEnum)[keyof typeof newConnectConfigurationsEnvIdEnum]
+export type NewConnectConfigurationsEnvIdEnum =
+  (typeof newConnectConfigurationsEnvIdEnum)[keyof typeof newConnectConfigurationsEnvIdEnum];
 
 export const budgetTypeEnum = {
-  fixed: 'fixed',
-} as const
+  fixed: 'fixed'
+} as const;
 
-export type BudgetTypeEnum = (typeof budgetTypeEnum)[keyof typeof budgetTypeEnum]
+export type BudgetTypeEnum = (typeof budgetTypeEnum)[keyof typeof budgetTypeEnum];
 
 export const budgetPricingPlanEnum = {
   legacy: 'legacy',
-  unbundled: 'unbundled',
-} as const
+  unbundled: 'unbundled'
+} as const;
 
-export type BudgetPricingPlanEnum = (typeof budgetPricingPlanEnum)[keyof typeof budgetPricingPlanEnum]
+export type BudgetPricingPlanEnum = (typeof budgetPricingPlanEnum)[keyof typeof budgetPricingPlanEnum];
 
 export const budgetItemTypeEnum = {
-  fixed: 'fixed',
-} as const
+  fixed: 'fixed'
+} as const;
 
-export type BudgetItemTypeEnum = (typeof budgetItemTypeEnum)[keyof typeof budgetItemTypeEnum]
+export type BudgetItemTypeEnum = (typeof budgetItemTypeEnum)[keyof typeof budgetItemTypeEnum];
 
 export const budgetItemPricingPlanEnum = {
   legacy: 'legacy',
-  unbundled: 'unbundled',
-} as const
+  unbundled: 'unbundled'
+} as const;
 
-export type BudgetItemPricingPlanEnum = (typeof budgetItemPricingPlanEnum)[keyof typeof budgetItemPricingPlanEnum]
+export type BudgetItemPricingPlanEnum = (typeof budgetItemPricingPlanEnum)[keyof typeof budgetItemPricingPlanEnum];
 
 export const payloadTypeEnum2 = {
   redis: 'redis',
   postgres: 'postgres',
   'edge-config': 'edge-config',
   blob: 'blob',
-  integration: 'integration',
-} as const
+  integration: 'integration'
+} as const;
 
-export type PayloadTypeEnum2 = (typeof payloadTypeEnum2)[keyof typeof payloadTypeEnum2]
+export type PayloadTypeEnum2 = (typeof payloadTypeEnum2)[keyof typeof payloadTypeEnum2];
 
 export const payloadStoreTypeEnum = {
   redis: 'redis',
-  postgres: 'postgres',
-} as const
+  postgres: 'postgres'
+} as const;
 
-export type PayloadStoreTypeEnum = (typeof payloadStoreTypeEnum)[keyof typeof payloadStoreTypeEnum]
+export type PayloadStoreTypeEnum = (typeof payloadStoreTypeEnum)[keyof typeof payloadStoreTypeEnum];
 
 export const projectMembershipRoleEnum = {
   ADMIN: 'ADMIN',
   PROJECT_DEVELOPER: 'PROJECT_DEVELOPER',
-  PROJECT_VIEWER: 'PROJECT_VIEWER',
-} as const
+  PROJECT_VIEWER: 'PROJECT_VIEWER'
+} as const;
 
-export type ProjectMembershipRoleEnum = (typeof projectMembershipRoleEnum)[keyof typeof projectMembershipRoleEnum]
+export type ProjectMembershipRoleEnum = (typeof projectMembershipRoleEnum)[keyof typeof projectMembershipRoleEnum];
 
 export const removedMembershipRoleEnum = {
   ADMIN: 'ADMIN',
   PROJECT_DEVELOPER: 'PROJECT_DEVELOPER',
-  PROJECT_VIEWER: 'PROJECT_VIEWER',
-} as const
+  PROJECT_VIEWER: 'PROJECT_VIEWER'
+} as const;
 
-export type RemovedMembershipRoleEnum = (typeof removedMembershipRoleEnum)[keyof typeof removedMembershipRoleEnum]
+export type RemovedMembershipRoleEnum = (typeof removedMembershipRoleEnum)[keyof typeof removedMembershipRoleEnum];
 
 export const projectMembershipRoleEnum2 = {
   ADMIN: 'ADMIN',
   PROJECT_DEVELOPER: 'PROJECT_DEVELOPER',
-  PROJECT_VIEWER: 'PROJECT_VIEWER',
-} as const
+  PROJECT_VIEWER: 'PROJECT_VIEWER'
+} as const;
 
-export type ProjectMembershipRoleEnum2 = (typeof projectMembershipRoleEnum2)[keyof typeof projectMembershipRoleEnum2]
+export type ProjectMembershipRoleEnum2 = (typeof projectMembershipRoleEnum2)[keyof typeof projectMembershipRoleEnum2];
 
 export const projectMembershipPreviousRoleEnum = {
   ADMIN: 'ADMIN',
   PROJECT_DEVELOPER: 'PROJECT_DEVELOPER',
-  PROJECT_VIEWER: 'PROJECT_VIEWER',
-} as const
+  PROJECT_VIEWER: 'PROJECT_VIEWER'
+} as const;
 
-export type ProjectMembershipPreviousRoleEnum = (typeof projectMembershipPreviousRoleEnum)[keyof typeof projectMembershipPreviousRoleEnum]
+export type ProjectMembershipPreviousRoleEnum =
+  (typeof projectMembershipPreviousRoleEnum)[keyof typeof projectMembershipPreviousRoleEnum];
 
 export const projectRoleEnum = {
   ADMIN: 'ADMIN',
   PROJECT_DEVELOPER: 'PROJECT_DEVELOPER',
-  PROJECT_VIEWER: 'PROJECT_VIEWER',
-} as const
+  PROJECT_VIEWER: 'PROJECT_VIEWER'
+} as const;
 
-export type ProjectRoleEnum = (typeof projectRoleEnum)[keyof typeof projectRoleEnum]
+export type ProjectRoleEnum = (typeof projectRoleEnum)[keyof typeof projectRoleEnum];
 
 export const payloadActionEnum5 = {
   enable: 'enable',
-  disable: 'disable',
-} as const
+  disable: 'disable'
+} as const;
 
-export type PayloadActionEnum5 = (typeof payloadActionEnum5)[keyof typeof payloadActionEnum5]
+export type PayloadActionEnum5 = (typeof payloadActionEnum5)[keyof typeof payloadActionEnum5];
 
 export const payloadTierEnum = {
   pro: 'pro',
-  plus: 'plus',
-} as const
+  plus: 'plus'
+} as const;
 
-export type PayloadTierEnum = (typeof payloadTierEnum)[keyof typeof payloadTierEnum]
+export type PayloadTierEnum = (typeof payloadTierEnum)[keyof typeof payloadTierEnum];
 
 export const payloadGrantTypeEnum = {
   authorization_code: 'authorization_code',
   refresh_token: 'refresh_token',
   'urn:ietf:params:oauth:grant-type:device_code': 'urn:ietf:params:oauth:grant-type:device_code',
-  client_credentials: 'client_credentials',
-} as const
+  client_credentials: 'client_credentials'
+} as const;
 
-export type PayloadGrantTypeEnum = (typeof payloadGrantTypeEnum)[keyof typeof payloadGrantTypeEnum]
+export type PayloadGrantTypeEnum = (typeof payloadGrantTypeEnum)[keyof typeof payloadGrantTypeEnum];
 
 export const payloadAuthMethodEnum = {
   email: 'email',
@@ -988,10 +1007,10 @@ export const payloadAuthMethodEnum = {
   otp: 'otp',
   sms: 'sms',
   invite: 'invite',
-  google: 'google',
-} as const
+  google: 'google'
+} as const;
 
-export type PayloadAuthMethodEnum = (typeof payloadAuthMethodEnum)[keyof typeof payloadAuthMethodEnum]
+export type PayloadAuthMethodEnum = (typeof payloadAuthMethodEnum)[keyof typeof payloadAuthMethodEnum];
 
 /**
  * @description Array of events generated by the User.
@@ -1001,12 +1020,12 @@ export type UserEvent = {
    * @description The unique identifier of the Event.
    * @type string
    */
-  id: string
+  id: string;
   /**
    * @description The human-readable text of the Event.
    * @type string
    */
-  text: string
+  text: string;
   /**
    * @description A list of \"entities\" within the event `text`. Useful for enhancing the displayed text with additional styling and links.
    * @type array
@@ -1016,23 +1035,23 @@ export type UserEvent = {
      * @description The type of entity.
      * @type string
      */
-    type: EntitiesTypeEnum
+    type: EntitiesTypeEnum;
     /**
      * @description The index of where the entity begins within the `text` (inclusive).
      * @type number
      */
-    start: number
+    start: number;
     /**
      * @description The index of where the entity ends within the `text` (non-inclusive).
      * @type number
      */
-    end: number
-  }[]
+    end: number;
+  }[];
   /**
    * @description Timestamp (in milliseconds) of when the event was generated.
    * @type number
    */
-  createdAt: number
+  createdAt: number;
   /**
    * @description Metadata for {@link userId}.
    * @type object | undefined
@@ -1042,69 +1061,69 @@ export type UserEvent = {
         /**
          * @type string
          */
-        username: string
+        username: string;
         /**
          * @type string
          */
-        avatar: string
+        avatar: string;
         /**
          * @type string
          */
-        email: string
+        email: string;
         /**
          * @type string | undefined
          */
-        slug?: string | undefined
+        slug?: string | undefined;
         /**
          * @type string
          */
-        uid: string
+        uid: string;
       }
-    | undefined
+    | undefined;
   principal?:
     | (
         | {
             /**
              * @type string | undefined
              */
-            type?: PrincipalTypeEnum | undefined
+            type?: PrincipalTypeEnum | undefined;
             /**
              * @type string
              */
-            avatar: string
+            avatar: string;
             /**
              * @type string
              */
-            email: string
+            email: string;
             /**
              * @type string | undefined
              */
-            slug?: string | undefined
+            slug?: string | undefined;
             /**
              * @type string
              */
-            uid: string
+            uid: string;
             /**
              * @type string
              */
-            username: string
+            username: string;
           }
         | {
             /**
              * @type string
              */
-            type: PrincipalTypeEnum2
+            type: PrincipalTypeEnum2;
             /**
              * @type string
              */
-            clientId: string
+            clientId: string;
             /**
              * @type string
              */
-            name: string
+            name: string;
           }
       )
-    | undefined
+    | undefined;
   /**
    * @description Metadata for {@link viaIds}.
    * @type array | undefined
@@ -1115,59 +1134,59 @@ export type UserEvent = {
             /**
              * @type string | undefined
              */
-            type?: ViaTypeEnum | undefined
+            type?: ViaTypeEnum | undefined;
             /**
              * @type string
              */
-            avatar: string
+            avatar: string;
             /**
              * @type string
              */
-            email: string
+            email: string;
             /**
              * @type string | undefined
              */
-            slug?: string | undefined
+            slug?: string | undefined;
             /**
              * @type string
              */
-            uid: string
+            uid: string;
             /**
              * @type string
              */
-            username: string
+            username: string;
           }
         | {
             /**
              * @type string
              */
-            type: ViaTypeEnum2
+            type: ViaTypeEnum2;
             /**
              * @type string
              */
-            clientId: string
+            clientId: string;
             /**
              * @type string
              */
-            name: string
+            name: string;
           }
       )[]
-    | undefined
+    | undefined;
   /**
    * @description When the principal who generated the event is a user, this is their ID; otherwise, it is empty.
    * @type string
    */
-  userId: string
+  userId: string;
   /**
    * @description The ID of the principal who generated the event. The principal is typically a user, but it could also be an app, an integration, etc. The principal may have delegated its authority to an acting party, and so {@link viaIds} should be checked as well.
    * @type string
    */
-  principalId: string
+  principalId: string;
   /**
    * @description If the principal delegated its authority (for example, a user delegating to an app), then this array contains the ID of the current actor. For example, if `principalId` is \"user123\" and `viaIds` is `[\"app456\"]`, we can say the event was triggered by - \"app456 on behalf of user123\", or - \"user123 via app4556\". Both are equivalent. Arbitrarily long chains of delegation can be represented. For example, if `principalId` is \"user123\" and `viaIds` is `[\"service1\", \"service2\"]`, we can say the event was triggered by \"user123 via service1 via service2\".
    * @type array | undefined
    */
-  viaIds?: string[] | undefined
+  viaIds?: string[] | undefined;
   payload?:
     | (
         | object
@@ -1175,19 +1194,19 @@ export type UserEvent = {
             /**
              * @type string
              */
-            action: PayloadActionEnum
+            action: PayloadActionEnum;
             /**
              * @type string
              */
-            id: string
+            id: string;
             /**
              * @type string
              */
-            slug: string
+            slug: string;
             /**
              * @type string
              */
-            projectId: string
+            projectId: string;
           }
         | {
             /**
@@ -1197,18 +1216,18 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string
                */
-              name: string
-            }
+              name: string;
+            };
           }
         | {
             /**
              * @type string
              */
-            author: string
+            author: string;
             /**
              * @type object
              */
@@ -1216,12 +1235,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string
                */
-              name: string
-            }
+              name: string;
+            };
           }
         | {
             /**
@@ -1231,12 +1250,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string | undefined
                */
-              name?: string | undefined
-            }
+              name?: string | undefined;
+            };
             /**
              * @type object
              */
@@ -1244,16 +1263,16 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string | undefined
                */
-              username?: string | undefined
-            }
+              username?: string | undefined;
+            };
             /**
              * @type string | undefined
              */
-            directoryType?: string | undefined
+            directoryType?: string | undefined;
           }
         | {
             /**
@@ -1263,12 +1282,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string
                */
-              name: string
-            }
+              name: string;
+            };
             /**
              * @type object
              */
@@ -1276,26 +1295,26 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string | undefined
                */
-              name?: string | undefined
-            }
+              name?: string | undefined;
+            };
             /**
              * @type string
              */
-            nextRole?: (PayloadNextRoleEnum | null) | undefined
+            nextRole?: (PayloadNextRoleEnum | null) | undefined;
             /**
              * @type string | undefined
              */
-            previousRole?: PayloadPreviousRoleEnum | undefined
+            previousRole?: PayloadPreviousRoleEnum | undefined;
           }
         | {
             /**
              * @type string | undefined
              */
-            alias?: string | undefined
+            alias?: string | undefined;
             /**
              * @type object
              */
@@ -1304,163 +1323,163 @@ export type UserEvent = {
                   /**
                    * @type string
                    */
-                  id: string
+                  id: string;
                   /**
                    * @type string
                    */
-                  name: string
+                  name: string;
                   /**
                    * @type string
                    */
-                  url: string
+                  url: string;
                   /**
                    * @type object
                    */
                   meta: {
-                    [key: string]: string
-                  }
+                    [key: string]: string;
+                  };
                 } | null)
-              | undefined
+              | undefined;
             /**
              * @type number | undefined
              */
-            ruleCount?: number | undefined
+            ruleCount?: number | undefined;
             /**
              * @type string | undefined
              */
-            deploymentUrl?: string | undefined
+            deploymentUrl?: string | undefined;
             /**
              * @type string | undefined
              */
-            aliasId?: string | undefined
+            aliasId?: string | undefined;
             /**
              * @type string
              */
-            deploymentId?: (string | null) | undefined
+            deploymentId?: (string | null) | undefined;
             /**
              * @type string
              */
-            oldDeploymentId?: (string | null) | undefined
+            oldDeploymentId?: (string | null) | undefined;
             /**
              * @type string | undefined
              */
-            redirect?: string | undefined
+            redirect?: string | undefined;
             /**
              * @type number
              */
-            redirectStatusCode?: (number | null) | undefined
+            redirectStatusCode?: (number | null) | undefined;
             /**
              * @type string
              */
-            target?: (string | null) | undefined
+            target?: (string | null) | undefined;
             /**
              * @type boolean | undefined
              */
-            system?: boolean | undefined
+            system?: boolean | undefined;
             /**
              * @type number | undefined
              */
-            aliasUpdatedAt?: number | undefined
+            aliasUpdatedAt?: number | undefined;
           }
         | {
             /**
              * @type string | undefined
              */
-            aliasId?: string | undefined
+            aliasId?: string | undefined;
             /**
              * @type string | undefined
              */
-            alias?: string | undefined
+            alias?: string | undefined;
             /**
              * @type string | undefined
              */
-            projectName?: string | undefined
+            projectName?: string | undefined;
           }
         | {
             /**
              * @type string | undefined
              */
-            alias?: string | undefined
+            alias?: string | undefined;
           }
         | {
             /**
              * @type string | undefined
              */
-            alias?: string | undefined
+            alias?: string | undefined;
             /**
              * @type string | undefined
              */
-            userId?: string | undefined
+            userId?: string | undefined;
             /**
              * @type string | undefined
              */
-            username?: string | undefined
+            username?: string | undefined;
           }
         | {
             /**
              * @type string | undefined
              */
-            alias?: string | undefined
+            alias?: string | undefined;
             /**
              * @type string | undefined
              */
-            aliasId?: string | undefined
+            aliasId?: string | undefined;
             /**
              * @type string | undefined
              */
-            userId?: string | undefined
+            userId?: string | undefined;
             /**
              * @type string | undefined
              */
-            username?: string | undefined
+            username?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            projectName: string
+            projectName: string;
             /**
              * @type string
              */
-            alias: string
+            alias: string;
             /**
              * @type string
              */
-            action: PayloadActionEnum2
+            action: PayloadActionEnum2;
           }
         | {
             /**
              * @type string | undefined
              */
-            alias?: string | undefined
+            alias?: string | undefined;
             /**
              * @type string | undefined
              */
-            email?: string | undefined
+            email?: string | undefined;
             /**
              * @type string | undefined
              */
-            username?: string | undefined
+            username?: string | undefined;
           }
         | {
             /**
              * @type string | undefined
              */
-            alias?: string | undefined
+            alias?: string | undefined;
             /**
              * @type string | undefined
              */
-            email?: string | undefined
+            email?: string | undefined;
           }
         | {
             /**
              * @type string | undefined
              */
-            name?: string | undefined
+            name?: string | undefined;
             /**
              * @type string
              */
-            alias: string
+            alias: string;
             /**
              * @type object | undefined
              */
@@ -1469,9 +1488,9 @@ export type UserEvent = {
                   /**
                    * @type string
                    */
-                  name: string
+                  name: string;
                 }
-              | undefined
+              | undefined;
             /**
              * @type object | undefined
              */
@@ -1480,91 +1499,91 @@ export type UserEvent = {
                   /**
                    * @type string
                    */
-                  name: string
+                  name: string;
                 }
-              | undefined
+              | undefined;
           }
         | {
             /**
              * @type string | undefined
              */
-            name?: string | undefined
+            name?: string | undefined;
             /**
              * @type string
              */
-            alias: string
+            alias: string;
             /**
              * @type string
              */
-            aliasId: string
+            aliasId: string;
             /**
              * @type string
              */
-            deploymentId: string | null
+            deploymentId: string | null;
           }
         | {
             /**
              * @type string
              */
-            alias: string
+            alias: string;
             /**
              * @type string
              */
-            deploymentUrl: string
+            deploymentUrl: string;
           }
         | {
             /**
              * @type string
              */
-            projectName: string
+            projectName: string;
             /**
              * @type boolean
              */
-            autoExposeSystemEnvs: boolean
+            autoExposeSystemEnvs: boolean;
           }
         | {
             /**
              * @type string | undefined
              */
-            avatar?: string | undefined
+            avatar?: string | undefined;
           }
         | {
             /**
              * @type string | undefined
              */
-            cn?: string | undefined
+            cn?: string | undefined;
             /**
              * @type array | undefined
              */
-            cns?: string[] | undefined
+            cns?: string[] | undefined;
             /**
              * @type boolean
              */
-            custom: boolean
+            custom: boolean;
             /**
              * @type string | undefined
              */
-            id?: string | undefined
+            id?: string | undefined;
           }
         | {
             /**
              * @type string | undefined
              */
-            cn?: string | undefined
+            cn?: string | undefined;
             /**
              * @type array | undefined
              */
-            cns?: string[] | undefined
+            cns?: string[] | undefined;
             /**
              * @type string | undefined
              */
-            id?: string | undefined
+            id?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            id: string
+            id: string;
             /**
              * @type object | undefined
              */
@@ -1573,9 +1592,9 @@ export type UserEvent = {
                   /**
                    * @type string
                    */
-                  name: string
+                  name: string;
                 }
-              | undefined
+              | undefined;
             /**
              * @type object | undefined
              */
@@ -1584,69 +1603,69 @@ export type UserEvent = {
                   /**
                    * @type string
                    */
-                  name: string
+                  name: string;
                 }
-              | undefined
+              | undefined;
           }
         | {
             /**
              * @type string
              */
-            src: string
+            src: string;
             /**
              * @type string
              */
-            dst: string
+            dst: string;
           }
         | {
             /**
              * @type string
              */
-            id: string
+            id: string;
             /**
              * @type string | undefined
              */
-            cn?: string | undefined
+            cn?: string | undefined;
             /**
              * @type array | undefined
              */
-            cns?: string[] | undefined
+            cns?: string[] | undefined;
           }
         | {
             /**
              * @type string | undefined
              */
-            cn?: string | undefined
+            cn?: string | undefined;
             /**
              * @type array | undefined
              */
-            cns?: string[] | undefined
+            cns?: string[] | undefined;
           }
         | {
             /**
              * @type string | undefined
              */
-            reason?: string | undefined
+            reason?: string | undefined;
             /**
              * @type string
              */
-            suffix: string
+            suffix: string;
           }
         | {
             /**
              * @type string
              */
-            status: string
+            status: string;
             /**
              * @type string
              */
-            suffix: string
+            suffix: string;
           }
         | {
             /**
              * @type string
              */
-            suffix: string
+            suffix: string;
           }
         | {
             /**
@@ -1656,12 +1675,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string
                */
-              name: string
-            }
+              name: string;
+            };
             /**
              * @type object
              */
@@ -1669,12 +1688,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string | undefined
                */
-              name?: string | undefined
-            }
+              name?: string | undefined;
+            };
             /**
              * @type object
              */
@@ -1682,16 +1701,16 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string | undefined
                */
-              name?: string | undefined
-            }
+              name?: string | undefined;
+            };
             /**
              * @type boolean | undefined
              */
-            buildsEnabled?: boolean | undefined
+            buildsEnabled?: boolean | undefined;
           }
         | {
             /**
@@ -1701,12 +1720,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string
                */
-              name: string
-            }
+              name: string;
+            };
             /**
              * @type object
              */
@@ -1714,12 +1733,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string | undefined
                */
-              name?: string | undefined
-            }
+              name?: string | undefined;
+            };
             /**
              * @type object
              */
@@ -1727,20 +1746,20 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string | undefined
                */
-              name?: string | undefined
-            }
+              name?: string | undefined;
+            };
             /**
              * @type boolean | undefined
              */
-            buildsEnabled?: boolean | undefined
+            buildsEnabled?: boolean | undefined;
             /**
              * @type boolean | undefined
              */
-            passive?: boolean | undefined
+            passive?: boolean | undefined;
           }
         | {
             /**
@@ -1750,12 +1769,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string
                */
-              name: string
-            }
+              name: string;
+            };
             /**
              * @type object
              */
@@ -1763,12 +1782,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string | undefined
                */
-              name?: string | undefined
-            }
+              name?: string | undefined;
+            };
             /**
              * @type object
              */
@@ -1776,12 +1795,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string | undefined
                */
-              name?: string | undefined
-            }
+              name?: string | undefined;
+            };
           }
         | {
             /**
@@ -1791,12 +1810,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string
                */
-              name: string
-            }
+              name: string;
+            };
             /**
              * @type object
              */
@@ -1804,50 +1823,50 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string | undefined
                */
-              name?: string | undefined
-            }
+              name?: string | undefined;
+            };
             /**
              * @type string
              */
-            newName: string
+            newName: string;
           }
         | {
             /**
              * @type string
              */
-            githubLogin: string
+            githubLogin: string;
           }
         | {
             /**
              * @type string
              */
-            gitlabLogin: string
+            gitlabLogin: string;
             /**
              * @type string
              */
-            gitlabEmail: string
+            gitlabEmail: string;
             /**
              * @type string | undefined
              */
-            gitlabName?: string | undefined
+            gitlabName?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            bitbucketEmail: string
+            bitbucketEmail: string;
             /**
              * @type string
              */
-            bitbucketLogin: string
+            bitbucketLogin: string;
             /**
              * @type string | undefined
              */
-            bitbucketName?: string | undefined
+            bitbucketName?: string | undefined;
           }
         | {
             /**
@@ -1857,8 +1876,8 @@ export type UserEvent = {
               /**
                * @type string
                */
-              name: string
-            }
+              name: string;
+            };
             /**
              * @type object
              */
@@ -1870,39 +1889,39 @@ export type UserEvent = {
                 /**
                  * @type number
                  */
-                createdAt: number
+                createdAt: number;
                 /**
                  * @type string
                  */
-                id: string
+                id: string;
                 /**
                  * @type string
                  */
-                name: string
+                name: string;
                 /**
                  * @type string
                  */
-                ref: string
-              }
+                ref: string;
+              };
               /**
                * @type string
                */
-              state: string
-            }
+              state: string;
+            };
           }
         | {
             /**
              * @type string | undefined
              */
-            name?: string | undefined
+            name?: string | undefined;
             /**
              * @type array | undefined
              */
-            alias?: string[] | undefined
+            alias?: string[] | undefined;
             /**
              * @type string
              */
-            target?: (string | null) | undefined
+            target?: (string | null) | undefined;
             /**
              * @type object
              */
@@ -1911,61 +1930,61 @@ export type UserEvent = {
                   /**
                    * @type string
                    */
-                  id: string
+                  id: string;
                   /**
                    * @type string
                    */
-                  name: string
+                  name: string;
                   /**
                    * @type string
                    */
-                  url: string
+                  url: string;
                   /**
                    * @type object
                    */
                   meta: {
-                    [key: string]: string
-                  }
+                    [key: string]: string;
+                  };
                 } | null)
-              | undefined
+              | undefined;
             /**
              * @type string
              */
-            url: string
+            url: string;
             /**
              * @type boolean | undefined
              */
-            forced?: boolean | undefined
+            forced?: boolean | undefined;
             /**
              * @type string | undefined
              */
-            deploymentId?: string | undefined
+            deploymentId?: string | undefined;
             /**
              * @type string | undefined
              */
-            plan?: string | undefined
+            plan?: string | undefined;
             /**
              * @type string | undefined
              */
-            project?: string | undefined
+            project?: string | undefined;
             /**
              * @type string | undefined
              */
-            projectId?: string | undefined
+            projectId?: string | undefined;
             /**
              * @type array | undefined
              */
-            regions?: string[] | undefined
+            regions?: string[] | undefined;
             /**
              * @type string | undefined
              */
-            type?: string | undefined
+            type?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            url: string
+            url: string;
             /**
              * @type object | undefined
              */
@@ -1974,9 +1993,9 @@ export type UserEvent = {
                   /**
                    * @type string
                    */
-                  name: string
+                  name: string;
                 }
-              | undefined
+              | undefined;
             /**
              * @type object | undefined
              */
@@ -1985,9 +2004,9 @@ export type UserEvent = {
                   /**
                    * @type string
                    */
-                  name: string
+                  name: string;
                 }
-              | undefined
+              | undefined;
           }
         | {
             /**
@@ -1997,142 +2016,142 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string
                */
-              name: string
+              name: string;
               /**
                * @type string
                */
-              url: string
+              url: string;
               /**
                * @type object
                */
               meta: {
-                [key: string]: string
-              }
-            }
+                [key: string]: string;
+              };
+            };
             /**
              * @type string
              */
-            deploymentId: string
+            deploymentId: string;
             /**
              * @type string
              */
-            url: string
+            url: string;
           }
         | {
             /**
              * @type string
              */
-            id: string
+            id: string;
             /**
              * @type string
              */
-            value: string
+            value: string;
             /**
              * @type string
              */
-            name: string
+            name: string;
             /**
              * @type string
              */
-            domain: string
+            domain: string;
             /**
              * @type string
              */
-            type: string
+            type: string;
             /**
              * @type number | undefined
              */
-            mxPriority?: number | undefined
+            mxPriority?: number | undefined;
           }
         | {
             /**
              * @type string
              */
-            id: string
+            id: string;
             /**
              * @type string
              */
-            domain: string
+            domain: string;
           }
         | {
             /**
              * @type string
              */
-            id: string
+            id: string;
             /**
              * @type string
              */
-            value: string
+            value: string;
             /**
              * @type string
              */
-            name: string
+            name: string;
             /**
              * @type string
              */
-            domain: string
+            domain: string;
             /**
              * @type string
              */
-            type: string
+            type: string;
           }
         | {
             /**
              * @type string
              */
-            name: string
+            name: string;
           }
         | {
             /**
              * @type string
              */
-            name: string
+            name: string;
             /**
              * @type number
              */
-            price: number
+            price: number;
             /**
              * @type string | undefined
              */
-            currency?: string | undefined
+            currency?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            name: string
+            name: string;
             /**
              * @type boolean
              */
-            cdnEnabled: boolean
+            cdnEnabled: boolean;
           }
         | {
             /**
              * @type string
              */
-            name: string
+            name: string;
             /**
              * @type string
              */
-            userId: string
+            userId: string;
             /**
              * @type string
              */
-            teamId: string
+            teamId: string;
             /**
              * @type string
              */
-            ownerName: string
+            ownerName: string;
           }
         | {
             /**
              * @type string
              */
-            name: string
+            name: string;
             /**
              * @type object | undefined
              */
@@ -2141,9 +2160,9 @@ export type UserEvent = {
                   /**
                    * @type string
                    */
-                  name: string
+                  name: string;
                 }
-              | undefined
+              | undefined;
             /**
              * @type object | undefined
              */
@@ -2152,240 +2171,240 @@ export type UserEvent = {
                   /**
                    * @type string
                    */
-                  name: string
+                  name: string;
                 }
-              | undefined
+              | undefined;
           }
         | {
             /**
              * @type string
              */
-            domainId: string
+            domainId: string;
             /**
              * @type string
              */
-            name: string
+            name: string;
           }
         | {
             /**
              * @type string
              */
-            name: string
+            name: string;
             /**
              * @type string
              */
-            fromId: string | null
+            fromId: string | null;
             /**
              * @type string
              */
-            fromName: string | null
+            fromName: string | null;
           }
         | {
             /**
              * @type string
              */
-            name: string
+            name: string;
             /**
              * @type string
              */
-            destinationId: string | null
+            destinationId: string | null;
             /**
              * @type string
              */
-            destinationName: string | null
+            destinationName: string | null;
           }
         | {
             /**
              * @type string
              */
-            name: string
+            name: string;
             /**
              * @type string
              */
-            destinationId: string
+            destinationId: string;
             /**
              * @type string
              */
-            destinationName: string
+            destinationName: string;
           }
         | {
             /**
              * @type boolean | undefined
              */
-            renew?: boolean | undefined
+            renew?: boolean | undefined;
             /**
              * @type string
              */
-            domain: string
+            domain: string;
           }
         | {
             /**
              * @type string
              */
-            name: string
+            name: string;
             /**
              * @type number | undefined
              */
-            price?: number | undefined
+            price?: number | undefined;
             /**
              * @type string | undefined
              */
-            currency?: string | undefined
+            currency?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            sha: string
+            sha: string;
             /**
              * @type string
              */
-            gitUserPlatform: string
+            gitUserPlatform: string;
             /**
              * @type string
              */
-            projectName: string
+            projectName: string;
           }
         | {
             /**
              * @type string
              */
-            email: string
+            email: string;
             /**
              * @type string
              */
-            name: string
+            name: string;
           }
         | {
             /**
              * @type string | undefined
              */
-            key?: string | undefined
+            key?: string | undefined;
             /**
              * @type string | undefined
              */
-            projectId?: string | undefined
+            projectId?: string | undefined;
             /**
              * @type string | undefined
              */
-            projectName?: string | undefined
-            target?: (string | string[]) | undefined
+            projectName?: string | undefined;
+            target?: (string | string[]) | undefined;
             /**
              * @type string | undefined
              */
-            id?: string | undefined
+            id?: string | undefined;
             /**
              * @type string | undefined
              */
-            gitBranch?: string | undefined
+            gitBranch?: string | undefined;
             /**
              * @type string
              */
-            edgeConfigId?: (string | null) | undefined
+            edgeConfigId?: (string | null) | undefined;
             /**
              * @type string
              */
-            edgeConfigTokenId?: (string | null) | undefined
+            edgeConfigTokenId?: (string | null) | undefined;
             /**
              * @type string | undefined
              */
-            source?: string | undefined
+            source?: string | undefined;
           }
         | {
             /**
              * @description The date when the Shared Env Var was created.
              * @type string | undefined, date-time
              */
-            created?: string | undefined
+            created?: string | undefined;
             /**
              * @description The name of the Shared Env Var.
              * @type string | undefined
              */
-            key?: string | undefined
+            key?: string | undefined;
             /**
              * @description The unique identifier of the owner (team) the Shared Env Var was created for.
              * @type string
              */
-            ownerId?: (string | null) | undefined
+            ownerId?: (string | null) | undefined;
             /**
              * @description The unique identifier of the Shared Env Var.
              * @type string | undefined
              */
-            id?: string | undefined
+            id?: string | undefined;
             /**
              * @description The unique identifier of the user who created the Shared Env Var.
              * @type string
              */
-            createdBy?: (string | null) | undefined
+            createdBy?: (string | null) | undefined;
             /**
              * @description The unique identifier of the user who deleted the Shared Env Var.
              * @type string
              */
-            deletedBy?: (string | null) | undefined
+            deletedBy?: (string | null) | undefined;
             /**
              * @description The unique identifier of the user who last updated the Shared Env Var.
              * @type string
              */
-            updatedBy?: (string | null) | undefined
+            updatedBy?: (string | null) | undefined;
             /**
              * @description Timestamp for when the Shared Env Var was created.
              * @type number | undefined
              */
-            createdAt?: number | undefined
+            createdAt?: number | undefined;
             /**
              * @description Timestamp for when the Shared Env Var was (soft) deleted.
              * @type number | undefined
              */
-            deletedAt?: number | undefined
+            deletedAt?: number | undefined;
             /**
              * @description Timestamp for when the Shared Env Var was last updated.
              * @type number | undefined
              */
-            updatedAt?: number | undefined
+            updatedAt?: number | undefined;
             /**
              * @description The value of the Shared Env Var.
              * @type string | undefined
              */
-            value?: string | undefined
+            value?: string | undefined;
             /**
              * @description The unique identifiers of the projects which the Shared Env Var is linked to.
              * @type array | undefined
              */
-            projectId?: string[] | undefined
+            projectId?: string[] | undefined;
             /**
              * @description The type of this cosmos doc instance, if blank, assume secret.
              * @type string | undefined
              */
-            type?: PayloadTypeEnum | undefined
+            type?: PayloadTypeEnum | undefined;
             /**
              * @description environments this env variable targets
              * @type array | undefined
              */
-            target?: PayloadTargetEnum[] | undefined
+            target?: PayloadTargetEnum[] | undefined;
             /**
              * @description whether or not this env varible applies to custom environments
              * @type boolean | undefined
              */
-            applyToAllCustomEnvironments?: boolean | undefined
+            applyToAllCustomEnvironments?: boolean | undefined;
             /**
              * @description whether or not this env variable is decrypted
              * @type boolean | undefined
              */
-            decrypted?: boolean | undefined
+            decrypted?: boolean | undefined;
             /**
              * @description A user provided comment that describes what this Shared Env Var is for.
              * @type string | undefined
              */
-            comment?: string | undefined
+            comment?: string | undefined;
             /**
              * @description The last editor full name or username.
              * @type string | undefined
              */
-            lastEditedByDisplayName?: string | undefined
+            lastEditedByDisplayName?: string | undefined;
             /**
              * @type array | undefined
              */
-            projectNames?: string[] | undefined
+            projectNames?: string[] | undefined;
           }
         | {
             /**
@@ -2397,94 +2416,94 @@ export type UserEvent = {
                    * @description The date when the Shared Env Var was created.
                    * @type string | undefined, date-time
                    */
-                  created?: string | undefined
+                  created?: string | undefined;
                   /**
                    * @description The name of the Shared Env Var.
                    * @type string | undefined
                    */
-                  key?: string | undefined
+                  key?: string | undefined;
                   /**
                    * @description The unique identifier of the owner (team) the Shared Env Var was created for.
                    * @type string
                    */
-                  ownerId?: (string | null) | undefined
+                  ownerId?: (string | null) | undefined;
                   /**
                    * @description The unique identifier of the Shared Env Var.
                    * @type string | undefined
                    */
-                  id?: string | undefined
+                  id?: string | undefined;
                   /**
                    * @description The unique identifier of the user who created the Shared Env Var.
                    * @type string
                    */
-                  createdBy?: (string | null) | undefined
+                  createdBy?: (string | null) | undefined;
                   /**
                    * @description The unique identifier of the user who deleted the Shared Env Var.
                    * @type string
                    */
-                  deletedBy?: (string | null) | undefined
+                  deletedBy?: (string | null) | undefined;
                   /**
                    * @description The unique identifier of the user who last updated the Shared Env Var.
                    * @type string
                    */
-                  updatedBy?: (string | null) | undefined
+                  updatedBy?: (string | null) | undefined;
                   /**
                    * @description Timestamp for when the Shared Env Var was created.
                    * @type number | undefined
                    */
-                  createdAt?: number | undefined
+                  createdAt?: number | undefined;
                   /**
                    * @description Timestamp for when the Shared Env Var was (soft) deleted.
                    * @type number | undefined
                    */
-                  deletedAt?: number | undefined
+                  deletedAt?: number | undefined;
                   /**
                    * @description Timestamp for when the Shared Env Var was last updated.
                    * @type number | undefined
                    */
-                  updatedAt?: number | undefined
+                  updatedAt?: number | undefined;
                   /**
                    * @description The value of the Shared Env Var.
                    * @type string | undefined
                    */
-                  value?: string | undefined
+                  value?: string | undefined;
                   /**
                    * @description The unique identifiers of the projects which the Shared Env Var is linked to.
                    * @type array | undefined
                    */
-                  projectId?: string[] | undefined
+                  projectId?: string[] | undefined;
                   /**
                    * @description The type of this cosmos doc instance, if blank, assume secret.
                    * @type string | undefined
                    */
-                  type?: OldEnvVarTypeEnum | undefined
+                  type?: OldEnvVarTypeEnum | undefined;
                   /**
                    * @description environments this env variable targets
                    * @type array | undefined
                    */
-                  target?: OldEnvVarTargetEnum[] | undefined
+                  target?: OldEnvVarTargetEnum[] | undefined;
                   /**
                    * @description whether or not this env varible applies to custom environments
                    * @type boolean | undefined
                    */
-                  applyToAllCustomEnvironments?: boolean | undefined
+                  applyToAllCustomEnvironments?: boolean | undefined;
                   /**
                    * @description whether or not this env variable is decrypted
                    * @type boolean | undefined
                    */
-                  decrypted?: boolean | undefined
+                  decrypted?: boolean | undefined;
                   /**
                    * @description A user provided comment that describes what this Shared Env Var is for.
                    * @type string | undefined
                    */
-                  comment?: string | undefined
+                  comment?: string | undefined;
                   /**
                    * @description The last editor full name or username.
                    * @type string | undefined
                    */
-                  lastEditedByDisplayName?: string | undefined
+                  lastEditedByDisplayName?: string | undefined;
                 }
-              | undefined
+              | undefined;
             /**
              * @type object | undefined
              */
@@ -2494,94 +2513,94 @@ export type UserEvent = {
                    * @description The date when the Shared Env Var was created.
                    * @type string | undefined, date-time
                    */
-                  created?: string | undefined
+                  created?: string | undefined;
                   /**
                    * @description The name of the Shared Env Var.
                    * @type string | undefined
                    */
-                  key?: string | undefined
+                  key?: string | undefined;
                   /**
                    * @description The unique identifier of the owner (team) the Shared Env Var was created for.
                    * @type string
                    */
-                  ownerId?: (string | null) | undefined
+                  ownerId?: (string | null) | undefined;
                   /**
                    * @description The unique identifier of the Shared Env Var.
                    * @type string | undefined
                    */
-                  id?: string | undefined
+                  id?: string | undefined;
                   /**
                    * @description The unique identifier of the user who created the Shared Env Var.
                    * @type string
                    */
-                  createdBy?: (string | null) | undefined
+                  createdBy?: (string | null) | undefined;
                   /**
                    * @description The unique identifier of the user who deleted the Shared Env Var.
                    * @type string
                    */
-                  deletedBy?: (string | null) | undefined
+                  deletedBy?: (string | null) | undefined;
                   /**
                    * @description The unique identifier of the user who last updated the Shared Env Var.
                    * @type string
                    */
-                  updatedBy?: (string | null) | undefined
+                  updatedBy?: (string | null) | undefined;
                   /**
                    * @description Timestamp for when the Shared Env Var was created.
                    * @type number | undefined
                    */
-                  createdAt?: number | undefined
+                  createdAt?: number | undefined;
                   /**
                    * @description Timestamp for when the Shared Env Var was (soft) deleted.
                    * @type number | undefined
                    */
-                  deletedAt?: number | undefined
+                  deletedAt?: number | undefined;
                   /**
                    * @description Timestamp for when the Shared Env Var was last updated.
                    * @type number | undefined
                    */
-                  updatedAt?: number | undefined
+                  updatedAt?: number | undefined;
                   /**
                    * @description The value of the Shared Env Var.
                    * @type string | undefined
                    */
-                  value?: string | undefined
+                  value?: string | undefined;
                   /**
                    * @description The unique identifiers of the projects which the Shared Env Var is linked to.
                    * @type array | undefined
                    */
-                  projectId?: string[] | undefined
+                  projectId?: string[] | undefined;
                   /**
                    * @description The type of this cosmos doc instance, if blank, assume secret.
                    * @type string | undefined
                    */
-                  type?: NewEnvVarTypeEnum | undefined
+                  type?: NewEnvVarTypeEnum | undefined;
                   /**
                    * @description environments this env variable targets
                    * @type array | undefined
                    */
-                  target?: NewEnvVarTargetEnum[] | undefined
+                  target?: NewEnvVarTargetEnum[] | undefined;
                   /**
                    * @description whether or not this env varible applies to custom environments
                    * @type boolean | undefined
                    */
-                  applyToAllCustomEnvironments?: boolean | undefined
+                  applyToAllCustomEnvironments?: boolean | undefined;
                   /**
                    * @description whether or not this env variable is decrypted
                    * @type boolean | undefined
                    */
-                  decrypted?: boolean | undefined
+                  decrypted?: boolean | undefined;
                   /**
                    * @description A user provided comment that describes what this Shared Env Var is for.
                    * @type string | undefined
                    */
-                  comment?: string | undefined
+                  comment?: string | undefined;
                   /**
                    * @description The last editor full name or username.
                    * @type string | undefined
                    */
-                  lastEditedByDisplayName?: string | undefined
+                  lastEditedByDisplayName?: string | undefined;
                 }
-              | undefined
+              | undefined;
             /**
              * @type object | undefined
              */
@@ -2590,31 +2609,31 @@ export type UserEvent = {
                   /**
                    * @type string
                    */
-                  id: string
+                  id: string;
                   /**
                    * @type string | undefined
                    */
-                  key?: string | undefined
+                  key?: string | undefined;
                   /**
                    * @type string | undefined
                    */
-                  newKey?: string | undefined
+                  newKey?: string | undefined;
                   /**
                    * @type array | undefined
                    */
-                  oldTarget?: UpdateDiffOldTargetEnum[] | undefined
+                  oldTarget?: UpdateDiffOldTargetEnum[] | undefined;
                   /**
                    * @type array | undefined
                    */
-                  newTarget?: UpdateDiffNewTargetEnum[] | undefined
+                  newTarget?: UpdateDiffNewTargetEnum[] | undefined;
                   /**
                    * @type string | undefined
                    */
-                  oldType?: string | undefined
+                  oldType?: string | undefined;
                   /**
                    * @type string | undefined
                    */
-                  newType?: string | undefined
+                  newType?: string | undefined;
                   /**
                    * @type array | undefined
                    */
@@ -2623,13 +2642,13 @@ export type UserEvent = {
                         /**
                          * @type string | undefined
                          */
-                        projectName?: string | undefined
+                        projectName?: string | undefined;
                         /**
                          * @type string
                          */
-                        projectId: string
+                        projectId: string;
                       }[]
-                    | undefined
+                    | undefined;
                   /**
                    * @type array | undefined
                    */
@@ -2638,83 +2657,83 @@ export type UserEvent = {
                         /**
                          * @type string | undefined
                          */
-                        projectName?: string | undefined
+                        projectName?: string | undefined;
                         /**
                          * @type string
                          */
-                        projectId: string
+                        projectId: string;
                       }[]
-                    | undefined
+                    | undefined;
                   /**
                    * @type boolean
                    */
-                  changedValue: boolean
+                  changedValue: boolean;
                 }
-              | undefined
+              | undefined;
           }
         | {
             /**
              * @type string
              */
-            projectId: string
+            projectId: string;
             /**
              * @type boolean
              */
-            restore: boolean
+            restore: boolean;
             /**
              * @type number
              */
-            configVersion: number
+            configVersion: number;
             /**
              * @type number
              */
-            configChangeCount: number
+            configChangeCount: number;
             /**
              * @type array
              */
-            configChanges: object[]
+            configChanges: object[];
           }
         | {
             /**
              * @type string
              */
-            projectId: string
+            projectId: string;
             /**
              * @type string
              */
-            scope: string
+            scope: string;
             /**
              * @type string
              */
-            source: string
+            source: string;
           }
         | {
             /**
              * @type string
              */
-            projectId: string
+            projectId: string;
             /**
              * @type string
              */
-            rulesetName: string
+            rulesetName: string;
             /**
              * @type boolean
              */
-            active: boolean
+            active: boolean;
             /**
              * @type string | undefined
              */
-            action?: PayloadActionEnum3 | undefined
+            action?: PayloadActionEnum3 | undefined;
           }
         | {
             /**
              * @type string
              */
-            projectId: string
+            projectId: string;
             /**
              * @type string
              */
-            rulesetName: string
+            rulesetName: string;
             /**
              * @type object
              */
@@ -2723,49 +2742,49 @@ export type UserEvent = {
                 /**
                  * @type boolean
                  */
-                active: boolean
+                active: boolean;
                 /**
                  * @type string | undefined
                  */
-                action?: ActionEnum | undefined
-              }
-            }
+                action?: ActionEnum | undefined;
+              };
+            };
           }
         | {
             /**
              * @type string
              */
-            integrationId: string
+            integrationId: string;
             /**
              * @type string
              */
-            integrationSlug: string
+            integrationSlug: string;
             /**
              * @type string
              */
-            integrationName: string
+            integrationName: string;
           }
         | {
             /**
              * @type string
              */
-            userId: string
+            userId: string;
             /**
              * @type string
              */
-            integrationId: string
+            integrationId: string;
             /**
              * @type string
              */
-            configurationId: string
+            configurationId: string;
             /**
              * @type string
              */
-            integrationSlug: string
+            integrationSlug: string;
             /**
              * @type string | undefined
              */
-            integrationName?: string | undefined
+            integrationName?: string | undefined;
             /**
              * @type object
              */
@@ -2784,38 +2803,38 @@ export type UserEvent = {
                           /**
                            * @type string
                            */
-                          action: BlockHistoryActionEnum
+                          action: BlockHistoryActionEnum;
                           /**
                            * @type number
                            */
-                          createdAt: number
+                          createdAt: number;
                           /**
                            * @type string | undefined
                            */
-                          caseId?: string | undefined
+                          caseId?: string | undefined;
                           /**
                            * @type string
                            */
-                          reason: string
+                          reason: string;
                           /**
                            * @type string | undefined
                            */
-                          actor?: string | undefined
+                          actor?: string | undefined;
                           /**
                            * @type number | undefined
                            */
-                          statusCode?: number | undefined
+                          statusCode?: number | undefined;
                           /**
                            * @type string | undefined
                            */
-                          comment?: string | undefined
+                          comment?: string | undefined;
                         }[]
-                      | undefined
+                      | undefined;
                     /**
                      * @description Since March 2022. Helps abuse checks by tracking git auths. Format: `<platform>:<detail>:<value>`
                      * @type array | undefined
                      */
-                    gitAuthHistory?: string[] | undefined
+                    gitAuthHistory?: string[] | undefined;
                     /**
                      * @description (scanner history). Since November 2021. First element is newest.
                      * @type array | undefined
@@ -2825,71 +2844,71 @@ export type UserEvent = {
                           /**
                            * @type string
                            */
-                          scanner: string
+                          scanner: string;
                           /**
                            * @type string
                            */
-                          reason: string
+                          reason: string;
                           /**
                            * @type string
                            */
-                          by: string
+                          by: string;
                           /**
                            * @type string
                            */
-                          byId: string
+                          byId: string;
                           /**
                            * @type number
                            */
-                          at: number
+                          at: number;
                         }[]
-                      | undefined
+                      | undefined;
                     /**
                      * @description Since September 2023. How often did this owner trigger an actual git lineage deploy block?
                      * @type number | undefined
                      */
-                    gitLineageBlocks?: number | undefined
+                    gitLineageBlocks?: number | undefined;
                     /**
                      * @description Since September 2023. How often did this owner trigger a git lineage deploy block dry run?
                      * @type number | undefined
                      */
-                    gitLineageBlocksDry?: number | undefined
+                    gitLineageBlocksDry?: number | undefined;
                     /**
                      * @description Since November 2021. Guides the abuse scanner in build container.
                      * @type string | undefined
                      */
-                    scanner?: string | undefined
+                    scanner?: string | undefined;
                     /**
                      * @description Since November 2021
                      * @type number | undefined
                      */
-                    updatedAt?: number | undefined
+                    updatedAt?: number | undefined;
                     /**
                      * @type string | undefined
                      */
-                    creationUserAgent?: string | undefined
+                    creationUserAgent?: string | undefined;
                     /**
                      * @type string | undefined
                      */
-                    creationIp?: string | undefined
+                    creationIp?: string | undefined;
                     /**
                      * @type string | undefined
                      */
-                    removedPhoneNumbers?: string | undefined
+                    removedPhoneNumbers?: string | undefined;
                   }
-                | undefined
+                | undefined;
               /**
                * @type string | undefined
                */
-              acceptanceState?: string | undefined
+              acceptanceState?: string | undefined;
               /**
                * @type number | undefined
                */
-              acceptedAt?: number | undefined
+              acceptedAt?: number | undefined;
               /**
                * @type string | undefined
                */
-              avatar?: string | undefined
+              avatar?: string | undefined;
               /**
                * @type object
                */
@@ -2897,24 +2916,24 @@ export type UserEvent = {
                 /**
                  * @type string
                  */
-                plan: BillingPlanEnum
-              }
+                plan: BillingPlanEnum;
+              };
               /**
                * @type number
                */
-              blocked: number | null
+              blocked: number | null;
               /**
                * @type string | undefined
                */
-              blockReason?: string | undefined
+              blockReason?: string | undefined;
               /**
                * @type number | undefined
                */
-              created?: number | undefined
+              created?: number | undefined;
               /**
                * @type number
                */
-              createdAt: number
+              createdAt: number;
               /**
                * @type array | undefined
                */
@@ -2924,36 +2943,36 @@ export type UserEvent = {
                         /**
                          * @type string
                          */
-                        type: CredentialsTypeEnum
+                        type: CredentialsTypeEnum;
                         /**
                          * @type string
                          */
-                        id: string
+                        id: string;
                       }
                     | {
                         /**
                          * @type string
                          */
-                        type: CredentialsTypeEnum2
+                        type: CredentialsTypeEnum2;
                         /**
                          * @type string
                          */
-                        host: string
+                        host: string;
                         /**
                          * @type string
                          */
-                        id: string
+                        id: string;
                       }
                   )[]
-                | undefined
+                | undefined;
               /**
                * @type string
                */
-              customerId?: (string | null) | undefined
+              customerId?: (string | null) | undefined;
               /**
                * @type string
                */
-              orbCustomerId?: (string | null) | undefined
+              orbCustomerId?: (string | null) | undefined;
               /**
                * @type object | undefined
                */
@@ -2962,21 +2981,21 @@ export type UserEvent = {
                     /**
                      * @type boolean | undefined
                      */
-                    excessBillingEnabled?: boolean | undefined
+                    excessBillingEnabled?: boolean | undefined;
                   }
-                | undefined
+                | undefined;
               /**
                * @type number
                */
-              deletedAt?: (number | null) | undefined
+              deletedAt?: (number | null) | undefined;
               /**
                * @type string
                */
-              deploymentSecret: string
+              deploymentSecret: string;
               /**
                * @type array | undefined
                */
-              dismissedTeams?: string[] | undefined
+              dismissedTeams?: string[] | undefined;
               /**
                * @type array | undefined
                */
@@ -2985,7 +3004,7 @@ export type UserEvent = {
                     /**
                      * @type string
                      */
-                    name: string
+                    name: string;
                     /**
                      * @type array
                      */
@@ -2993,14 +3012,14 @@ export type UserEvent = {
                       /**
                        * @type string
                        */
-                      scopeId: string
+                      scopeId: string;
                       /**
                        * @type number
                        */
-                      createdAt: number
-                    }[]
+                      createdAt: number;
+                    }[];
                   }[]
-                | undefined
+                | undefined;
               /**
                * @type array | undefined
                */
@@ -3009,27 +3028,27 @@ export type UserEvent = {
                     /**
                      * @type string
                      */
-                    teamId: string
+                    teamId: string;
                     /**
                      * @type string
                      */
-                    projectId: string
+                    projectId: string;
                   }[]
-                | undefined
+                | undefined;
               /**
                * @type string
                */
-              email: string
+              email: string;
               /**
                * @type string
                */
-              id: string
-              importFlowGitNamespace?: ((string | number) | null) | undefined
-              importFlowGitNamespaceId?: ((string | number) | null) | undefined
+              id: string;
+              importFlowGitNamespace?: ((string | number) | null) | undefined;
+              importFlowGitNamespaceId?: ((string | number) | null) | undefined;
               /**
                * @type string
                */
-              importFlowGitProvider?: (NewOwnerImportFlowGitProviderEnum | null) | undefined
+              importFlowGitProvider?: (NewOwnerImportFlowGitProviderEnum | null) | undefined;
               /**
                * @type array | undefined
                */
@@ -3038,40 +3057,40 @@ export type UserEvent = {
                     /**
                      * @type string
                      */
-                    scopeId: string
-                    gitNamespaceId: (string | number) | null
+                    scopeId: string;
+                    gitNamespaceId: (string | number) | null;
                   }[]
-                | undefined
+                | undefined;
               /**
                * @type boolean | undefined
                */
-              isDomainReseller?: boolean | undefined
+              isDomainReseller?: boolean | undefined;
               /**
                * @type boolean | undefined
                */
-              isZeitPub?: boolean | undefined
+              isZeitPub?: boolean | undefined;
               /**
                * @type number | undefined
                */
-              maxActiveSlots?: number | undefined
+              maxActiveSlots?: number | undefined;
               /**
                * @type string | undefined
                */
-              name?: string | undefined
+              name?: string | undefined;
               /**
                * @type string | undefined
                */
-              phoneNumber?: string | undefined
+              phoneNumber?: string | undefined;
               /**
                * @type number
                */
-              platformVersion: number | null
-              preventAutoBlocking?: (number | boolean) | undefined
+              platformVersion: number | null;
+              preventAutoBlocking?: (number | boolean) | undefined;
               /**
                * @description Overrides our DEFAULT project domains limit per account or per project.
                * @type number | undefined
                */
-              projectDomainsLimit?: number | undefined
+              projectDomainsLimit?: number | undefined;
               /**
                * @description Represents configuration for remote caching
                * @type object | undefined
@@ -3081,49 +3100,49 @@ export type UserEvent = {
                     /**
                      * @type boolean | undefined
                      */
-                    enabled?: boolean | undefined
+                    enabled?: boolean | undefined;
                   }
-                | undefined
+                | undefined;
               /**
                * @type number | undefined
                */
-              removedAliasesAt?: number | undefined
+              removedAliasesAt?: number | undefined;
               /**
                * @type number | undefined
                */
-              removedBillingSubscriptionAt?: number | undefined
+              removedBillingSubscriptionAt?: number | undefined;
               /**
                * @type number | undefined
                */
-              removedConfigurationsAt?: number | undefined
+              removedConfigurationsAt?: number | undefined;
               /**
                * @type number | undefined
                */
-              removedDeploymentsAt?: number | undefined
+              removedDeploymentsAt?: number | undefined;
               /**
                * @type number | undefined
                */
-              removedDomiansAt?: number | undefined
+              removedDomiansAt?: number | undefined;
               /**
                * @type number | undefined
                */
-              removedEventsAt?: number | undefined
+              removedEventsAt?: number | undefined;
               /**
                * @type number | undefined
                */
-              removedProjectsAt?: number | undefined
+              removedProjectsAt?: number | undefined;
               /**
                * @type number | undefined
                */
-              removedSecretsAt?: number | undefined
+              removedSecretsAt?: number | undefined;
               /**
                * @type number | undefined
                */
-              removedSharedEnvVarsAt?: number | undefined
+              removedSharedEnvVarsAt?: number | undefined;
               /**
                * @type number | undefined
                */
-              removedEdgeConfigsAt?: number | undefined
+              removedEdgeConfigsAt?: number | undefined;
               /**
                * @type object | undefined
                */
@@ -3132,15 +3151,15 @@ export type UserEvent = {
                     /**
                      * @type string | undefined
                      */
-                    nodeType?: string | undefined
+                    nodeType?: string | undefined;
                     /**
                      * @type number | undefined
                      */
-                    concurrentBuilds?: number | undefined
+                    concurrentBuilds?: number | undefined;
                     /**
                      * @type boolean | undefined
                      */
-                    elasticConcurrencyEnabled?: boolean | undefined
+                    elasticConcurrencyEnabled?: boolean | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3149,89 +3168,89 @@ export type UserEvent = {
                           /**
                            * @type boolean | undefined
                            */
-                          enhancedBuilds?: boolean | undefined
+                          enhancedBuilds?: boolean | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type string | undefined
                      */
-                    awsAccountType?: string | undefined
+                    awsAccountType?: string | undefined;
                     /**
                      * @type array | undefined
                      */
-                    awsAccountIds?: string[] | undefined
+                    awsAccountIds?: string[] | undefined;
                     /**
                      * @type string | undefined
                      */
-                    cfZoneName?: string | undefined
+                    cfZoneName?: string | undefined;
                     /**
                      * @type string | undefined
                      */
-                    imageOptimizationType?: string | undefined
+                    imageOptimizationType?: string | undefined;
                     /**
                      * @type number | undefined
                      */
-                    edgeConfigs?: number | undefined
+                    edgeConfigs?: number | undefined;
                     /**
                      * @type number | undefined
                      */
-                    edgeConfigSize?: number | undefined
+                    edgeConfigSize?: number | undefined;
                     /**
                      * @type number | undefined
                      */
-                    edgeFunctionMaxSizeBytes?: number | undefined
+                    edgeFunctionMaxSizeBytes?: number | undefined;
                     /**
                      * @type number | undefined
                      */
-                    edgeFunctionExecutionTimeoutMs?: number | undefined
+                    edgeFunctionExecutionTimeoutMs?: number | undefined;
                     /**
                      * @type number | undefined
                      */
-                    serverlessFunctionMaxMemorySize?: number | undefined
+                    serverlessFunctionMaxMemorySize?: number | undefined;
                     /**
                      * @type number | undefined
                      */
-                    kvDatabases?: number | undefined
+                    kvDatabases?: number | undefined;
                     /**
                      * @type number | undefined
                      */
-                    postgresDatabases?: number | undefined
+                    postgresDatabases?: number | undefined;
                     /**
                      * @type number | undefined
                      */
-                    blobStores?: number | undefined
+                    blobStores?: number | undefined;
                     /**
                      * @type number | undefined
                      */
-                    integrationStores?: number | undefined
+                    integrationStores?: number | undefined;
                     /**
                      * @type number | undefined
                      */
-                    cronJobs?: number | undefined
+                    cronJobs?: number | undefined;
                     /**
                      * @type number | undefined
                      */
-                    cronJobsPerProject?: number | undefined
+                    cronJobsPerProject?: number | undefined;
                     /**
                      * @type number | undefined
                      */
-                    microfrontendGroupsPerTeam?: number | undefined
+                    microfrontendGroupsPerTeam?: number | undefined;
                     /**
                      * @type number | undefined
                      */
-                    microfrontendProjectsPerGroup?: number | undefined
+                    microfrontendProjectsPerGroup?: number | undefined;
                     /**
                      * @type number | undefined
                      */
-                    flagsExplorerOverridesThreshold?: number | undefined
+                    flagsExplorerOverridesThreshold?: number | undefined;
                     /**
                      * @type boolean | undefined
                      */
-                    flagsExplorerUnlimitedOverrides?: boolean | undefined
+                    flagsExplorerUnlimitedOverrides?: boolean | undefined;
                     /**
                      * @type number | undefined
                      */
-                    customEnvironmentsPerProject?: number | undefined
+                    customEnvironmentsPerProject?: number | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3240,23 +3259,23 @@ export type UserEvent = {
                           /**
                            * @type string | undefined
                            */
-                          purchaseType?: BuildMachinePurchaseTypeEnum | undefined
+                          purchaseType?: BuildMachinePurchaseTypeEnum | undefined;
                           /**
                            * @type boolean | undefined
                            */
-                          isDefaultBuildMachine?: boolean | undefined
+                          isDefaultBuildMachine?: boolean | undefined;
                           /**
                            * @type number | undefined
                            */
-                          cores?: number | undefined
+                          cores?: number | undefined;
                           /**
                            * @type number | undefined
                            */
-                          memory?: number | undefined
+                          memory?: number | undefined;
                         }
-                      | undefined
+                      | undefined;
                   }
-                | undefined
+                | undefined;
               /**
                * @description User | Team resource limits
                * @type object | undefined
@@ -3267,14 +3286,14 @@ export type UserEvent = {
                       /**
                        * @type number
                        */
-                      max: number
+                      max: number;
                       /**
                        * @type number
                        */
-                      duration: number
-                    }
+                      duration: number;
+                    };
                   }
-                | undefined
+                | undefined;
               /**
                * @type array | undefined
                */
@@ -3283,21 +3302,21 @@ export type UserEvent = {
                     /**
                      * @type string
                      */
-                    scopeId: string
+                    scopeId: string;
                     /**
                      * @type string
                      */
-                    viewPreference?: (ActiveDashboardViewsViewPreferenceEnum | null) | undefined
+                    viewPreference?: (ActiveDashboardViewsViewPreferenceEnum | null) | undefined;
                     /**
                      * @type string
                      */
-                    favoritesViewPreference?: (ActiveDashboardViewsFavoritesViewPreferenceEnum | null) | undefined
+                    favoritesViewPreference?: (ActiveDashboardViewsFavoritesViewPreferenceEnum | null) | undefined;
                     /**
                      * @type string
                      */
-                    recentsViewPreference?: (ActiveDashboardViewsRecentsViewPreferenceEnum | null) | undefined
+                    recentsViewPreference?: (ActiveDashboardViewsRecentsViewPreferenceEnum | null) | undefined;
                   }[]
-                | undefined
+                | undefined;
               /**
                * @type array | undefined
                */
@@ -3306,13 +3325,13 @@ export type UserEvent = {
                     /**
                      * @type string
                      */
-                    email: string
+                    email: string;
                     /**
                      * @type boolean
                      */
-                    verified: boolean
+                    verified: boolean;
                   }[]
-                | undefined
+                | undefined;
               /**
                * @type object | undefined
                */
@@ -3327,16 +3346,16 @@ export type UserEvent = {
                             /**
                              * @type string
                              */
-                            email: string
-                          }
+                            email: string;
+                          };
                         }
-                      | undefined
+                      | undefined;
                   }
-                | undefined
+                | undefined;
               /**
                * @type number | undefined
                */
-              siftScore?: number | undefined
+              siftScore?: number | undefined;
               /**
                * @type object | undefined
                */
@@ -3346,7 +3365,7 @@ export type UserEvent = {
                       /**
                        * @type number
                        */
-                      score: number
+                      score: number;
                       /**
                        * @type array
                        */
@@ -3354,15 +3373,15 @@ export type UserEvent = {
                         /**
                          * @type string
                          */
-                        name: string
+                        name: string;
                         /**
                          * @type string
                          */
-                        value: string
-                      }[]
-                    }
+                        value: string;
+                      }[];
+                    };
                   }
-                | undefined
+                | undefined;
               /**
                * @type object | undefined
                */
@@ -3371,13 +3390,13 @@ export type UserEvent = {
                     /**
                      * @type string
                      */
-                    name: SiftRouteNameEnum
+                    name: SiftRouteNameEnum;
                   }
-                | undefined
+                | undefined;
               /**
                * @type string | undefined
                */
-              sfdcId?: string | undefined
+              sfdcId?: string | undefined;
               /**
                * @type object
                */
@@ -3386,25 +3405,25 @@ export type UserEvent = {
                     /**
                      * @type number
                      */
-                    blockedAt: number
+                    blockedAt: number;
                     /**
                      * @type string
                      */
-                    reason: SoftBlockReasonEnum
+                    reason: SoftBlockReasonEnum;
                     /**
                      * @type string | undefined
                      */
-                    blockedDueToOverageType?: SoftBlockBlockedDueToOverageTypeEnum | undefined
+                    blockedDueToOverageType?: SoftBlockBlockedDueToOverageTypeEnum | undefined;
                   } | null)
-                | undefined
+                | undefined;
               /**
                * @type string
                */
-              stagingPrefix: string
+              stagingPrefix: string;
               /**
                * @type string
                */
-              sysToken: string
+              sysToken: string;
               /**
                * @description A helper that allows to describe a relationship attribute. It receives the shape of a relationship plus the foreignKey name to make it mandatory in the resulting type.
                * @type array | undefined
@@ -3414,39 +3433,39 @@ export type UserEvent = {
                     /**
                      * @type number | undefined
                      */
-                    created?: number | undefined
+                    created?: number | undefined;
                     /**
                      * @type number | undefined
                      */
-                    createdAt?: number | undefined
+                    createdAt?: number | undefined;
                     /**
                      * @type string
                      */
-                    teamId: string
+                    teamId: string;
                     /**
                      * @type string | undefined
                      */
-                    role?: TeamsRoleEnum | undefined
+                    role?: TeamsRoleEnum | undefined;
                     /**
                      * @type boolean | undefined
                      */
-                    confirmed?: boolean | undefined
+                    confirmed?: boolean | undefined;
                     /**
                      * @type number | undefined
                      */
-                    confirmedAt?: number | undefined
+                    confirmedAt?: number | undefined;
                     /**
                      * @type number | undefined
                      */
-                    accessRequestedAt?: number | undefined
+                    accessRequestedAt?: number | undefined;
                     /**
                      * @type array | undefined
                      */
-                    teamRoles?: TeamsTeamRolesEnum[] | undefined
+                    teamRoles?: TeamsTeamRolesEnum[] | undefined;
                     /**
                      * @type array | undefined
                      */
-                    teamPermissions?: TeamsTeamPermissionsEnum[] | undefined
+                    teamPermissions?: TeamsTeamPermissionsEnum[] | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3455,67 +3474,67 @@ export type UserEvent = {
                           /**
                            * @type string
                            */
-                          origin: JoinedFromOriginEnum
+                          origin: JoinedFromOriginEnum;
                           /**
                            * @type string | undefined
                            */
-                          commitId?: string | undefined
+                          commitId?: string | undefined;
                           /**
                            * @type string | undefined
                            */
-                          repoId?: string | undefined
+                          repoId?: string | undefined;
                           /**
                            * @type string | undefined
                            */
-                          repoPath?: string | undefined
-                          gitUserId?: (string | number) | undefined
+                          repoPath?: string | undefined;
+                          gitUserId?: (string | number) | undefined;
                           /**
                            * @type string | undefined
                            */
-                          gitUserLogin?: string | undefined
+                          gitUserLogin?: string | undefined;
                           /**
                            * @type string | undefined
                            */
-                          ssoUserId?: string | undefined
+                          ssoUserId?: string | undefined;
                           /**
                            * @type number | undefined
                            */
-                          ssoConnectedAt?: number | undefined
+                          ssoConnectedAt?: number | undefined;
                           /**
                            * @type string | undefined
                            */
-                          idpUserId?: string | undefined
+                          idpUserId?: string | undefined;
                           /**
                            * @type string | undefined
                            */
-                          dsyncUserId?: string | undefined
+                          dsyncUserId?: string | undefined;
                           /**
                            * @type number | undefined
                            */
-                          dsyncConnectedAt?: number | undefined
+                          dsyncConnectedAt?: number | undefined;
                         }
-                      | undefined
+                      | undefined;
                   }[]
-                | undefined
+                | undefined;
               /**
                * @description Introduced 2022-04-12 An array of teamIds (for trial teams created after 2022-04-01), created by the user in question. Used in determining whether the team has a trial available in utils/api-teams/user-has-trial-available.ts.
                * @type array | undefined
                */
-              trialTeamIds?: string[] | undefined
+              trialTeamIds?: string[] | undefined;
               /**
                * @description Introduced 2022-04-19 Number of maximum trials to allocate to a user. When undefined, defaults to MAX_TRIALS in utils/api-teams/user-has-trial-available.ts. This is set to trialTeamIds + 1 by services/api-backoffice/src/handlers/add-additional-trial.ts.
                * @type number | undefined
                */
-              maxTrials?: number | undefined
+              maxTrials?: number | undefined;
               /**
                * @description Deprecated on 2022-04-12 in favor of trialTeamIds and using utils/api-teams/user-has-trial-available.ts.
                * @type string | undefined
                */
-              trialTeamId?: string | undefined
+              trialTeamId?: string | undefined;
               /**
                * @type string
                */
-              type: NewOwnerTypeEnum
+              type: NewOwnerTypeEnum;
               /**
                * @description Contains the timestamps when a user was notified about their usage
                * @type object
@@ -3525,13 +3544,13 @@ export type UserEvent = {
                     /**
                      * @type number
                      */
-                    warningAt?: (number | null) | undefined
+                    warningAt?: (number | null) | undefined;
                     /**
                      * @type number
                      */
-                    blockingAt?: (number | null) | undefined
+                    blockingAt?: (number | null) | undefined;
                   } | null)
-                | undefined
+                | undefined;
               /**
                * @type object | undefined
                */
@@ -3545,17 +3564,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3564,17 +3583,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3583,17 +3602,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3602,17 +3621,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3621,17 +3640,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3640,17 +3659,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3659,17 +3678,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3678,17 +3697,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3697,17 +3716,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3716,17 +3735,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3735,17 +3754,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3754,17 +3773,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3773,17 +3792,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3792,17 +3811,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3811,17 +3830,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3830,17 +3849,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3849,17 +3868,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3868,17 +3887,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3887,17 +3906,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3906,17 +3925,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3925,17 +3944,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3944,17 +3963,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3963,17 +3982,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -3982,17 +4001,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4001,17 +4020,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4020,17 +4039,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4039,17 +4058,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4058,17 +4077,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4077,17 +4096,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4096,17 +4115,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4115,17 +4134,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4134,17 +4153,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4153,17 +4172,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4172,17 +4191,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4191,17 +4210,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4210,17 +4229,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4229,17 +4248,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4248,17 +4267,17 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4267,19 +4286,19 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          currentThreshold: number
+                          currentThreshold: number;
                           /**
                            * @type number
                            */
-                          warningAt?: (number | null) | undefined
+                          warningAt?: (number | null) | undefined;
                           /**
                            * @type number
                            */
-                          blockedAt?: (number | null) | undefined
+                          blockedAt?: (number | null) | undefined;
                         }
-                      | undefined
+                      | undefined;
                   }
-                | undefined
+                | undefined;
               /**
                * @description Contains the timestamps for usage summary emails.
                * @type object | undefined
@@ -4290,47 +4309,47 @@ export type UserEvent = {
                      * @description Tracks if the first time on-demand overage email has been sent.
                      * @type number | undefined
                      */
-                    firstTimeOnDemandNotificationSentAt?: number | undefined
+                    firstTimeOnDemandNotificationSentAt?: number | undefined;
                     /**
                      * @description Tracks the last time we sent a daily summary email.
                      * @type number | undefined
                      */
-                    dailyOverageSummaryEmailSentAt?: number | undefined
+                    dailyOverageSummaryEmailSentAt?: number | undefined;
                     /**
                      * @description Tracks the last time we sent a weekly summary email.
                      * @type number | undefined
                      */
-                    weeklyOverageSummaryEmailSentAt?: number | undefined
+                    weeklyOverageSummaryEmailSentAt?: number | undefined;
                     /**
                      * @description Tracks when the overage summary email will stop auto-sending. We currently lock the user into email for a month after the last on-demand usage.
                      * @type number | undefined
                      */
-                    overageSummaryExpiresAt?: number | undefined
+                    overageSummaryExpiresAt?: number | undefined;
                     /**
                      * @description Tracks the last time we sent a increased on-demand email.
                      * @type number | undefined
                      */
-                    increasedOnDemandEmailSentAt?: number | undefined
+                    increasedOnDemandEmailSentAt?: number | undefined;
                     /**
                      * @description Tracks the last time we attempted to send an increased on-demand email. This check is to limit the number of attempts per day.
                      * @type number | undefined
                      */
-                    increasedOnDemandEmailAttemptedAt?: number | undefined
+                    increasedOnDemandEmailAttemptedAt?: number | undefined;
                   }
-                | undefined
+                | undefined;
               /**
                * @type string
                */
-              username: string
+              username: string;
               /**
                * @type number
                */
-              updatedAt: number
+              updatedAt: number;
               /**
                * @description Whether the Vercel Toolbar is enabled for preview deployments.
                * @type string | undefined
                */
-              enablePreviewFeedback?: NewOwnerEnablePreviewFeedbackEnum | undefined
+              enablePreviewFeedback?: NewOwnerEnablePreviewFeedbackEnum | undefined;
               /**
                * @description Information about which features are blocked for a user. Blocks can be either soft (the user can still access the feature, but with a warning, e.g. prompting an upgrade) or hard (the user cannot access the feature at all).
                * @type object | undefined
@@ -4345,25 +4364,25 @@ export type UserEvent = {
                           /**
                            * @type number | undefined
                            */
-                          updatedAt?: number | undefined
+                          updatedAt?: number | undefined;
                           /**
                            * @type number | undefined
                            */
-                          blockedFrom?: number | undefined
+                          blockedFrom?: number | undefined;
                           /**
                            * @type number | undefined
                            */
-                          blockedUntil?: number | undefined
+                          blockedUntil?: number | undefined;
                           /**
                            * @type string | undefined
                            */
-                          blockReason?: WebAnalyticsBlockReasonEnum | undefined
+                          blockReason?: WebAnalyticsBlockReasonEnum | undefined;
                           /**
                            * @type number | undefined
                            */
-                          graceEmailSentAt?: number | undefined
+                          graceEmailSentAt?: number | undefined;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @description A soft block indicates a temporary pause in data collection (ex limit exceeded for the current cycle) A hard block indicates a stoppage in data collection that requires manual intervention (ex upgrading a pro trial)
                      * @type object | undefined
@@ -4373,25 +4392,25 @@ export type UserEvent = {
                           /**
                            * @type number | undefined
                            */
-                          updatedAt?: number | undefined
+                          updatedAt?: number | undefined;
                           /**
                            * @type number | undefined
                            */
-                          blockedFrom?: number | undefined
+                          blockedFrom?: number | undefined;
                           /**
                            * @type number | undefined
                            */
-                          blockedUntil?: number | undefined
+                          blockedUntil?: number | undefined;
                           /**
                            * @type string | undefined
                            */
-                          blockReason?: MonitoringBlockReasonEnum | undefined
+                          blockReason?: MonitoringBlockReasonEnum | undefined;
                           /**
                            * @type string
                            */
-                          blockType: MonitoringBlockTypeEnum
+                          blockType: MonitoringBlockTypeEnum;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4400,25 +4419,25 @@ export type UserEvent = {
                           /**
                            * @type number | undefined
                            */
-                          updatedAt?: number | undefined
+                          updatedAt?: number | undefined;
                           /**
                            * @type number | undefined
                            */
-                          blockedFrom?: number | undefined
+                          blockedFrom?: number | undefined;
                           /**
                            * @type number | undefined
                            */
-                          blockedUntil?: number | undefined
+                          blockedUntil?: number | undefined;
                           /**
                            * @type string | undefined
                            */
-                          blockReason?: ObservabilityPlusBlockReasonEnum | undefined
+                          blockReason?: ObservabilityPlusBlockReasonEnum | undefined;
                           /**
                            * @type string
                            */
-                          blockType: ObservabilityPlusBlockTypeEnum
+                          blockType: ObservabilityPlusBlockTypeEnum;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4427,21 +4446,21 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          updatedAt: number
+                          updatedAt: number;
                           /**
                            * @type number | undefined
                            */
-                          blockedFrom?: number | undefined
+                          blockedFrom?: number | undefined;
                           /**
                            * @type number | undefined
                            */
-                          blockedUntil?: number | undefined
+                          blockedUntil?: number | undefined;
                           /**
                            * @type string
                            */
-                          blockReason: DataCacheBlockReasonEnum
+                          blockReason: DataCacheBlockReasonEnum;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4450,21 +4469,21 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          updatedAt: number
+                          updatedAt: number;
                           /**
                            * @type number | undefined
                            */
-                          blockedFrom?: number | undefined
+                          blockedFrom?: number | undefined;
                           /**
                            * @type number | undefined
                            */
-                          blockedUntil?: number | undefined
+                          blockedUntil?: number | undefined;
                           /**
                            * @type string
                            */
-                          blockReason: ImageOptimizationTransformationBlockReasonEnum
+                          blockReason: ImageOptimizationTransformationBlockReasonEnum;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4473,21 +4492,21 @@ export type UserEvent = {
                           /**
                            * @type number
                            */
-                          updatedAt: number
+                          updatedAt: number;
                           /**
                            * @type number | undefined
                            */
-                          blockedFrom?: number | undefined
+                          blockedFrom?: number | undefined;
                           /**
                            * @type number | undefined
                            */
-                          blockedUntil?: number | undefined
+                          blockedUntil?: number | undefined;
                           /**
                            * @type string
                            */
-                          blockReason: SourceImagesBlockReasonEnum
+                          blockReason: SourceImagesBlockReasonEnum;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4496,25 +4515,25 @@ export type UserEvent = {
                           /**
                            * @type number | undefined
                            */
-                          updatedAt?: number | undefined
+                          updatedAt?: number | undefined;
                           /**
                            * @type number | undefined
                            */
-                          blockedFrom?: number | undefined
+                          blockedFrom?: number | undefined;
                           /**
                            * @type number | undefined
                            */
-                          blockedUntil?: number | undefined
+                          blockedUntil?: number | undefined;
                           /**
                            * @type string | undefined
                            */
-                          blockReason?: BlobBlockReasonEnum | undefined
+                          blockReason?: BlobBlockReasonEnum | undefined;
                           /**
                            * @type string
                            */
-                          overageReason: BlobOverageReasonEnum
+                          overageReason: BlobOverageReasonEnum;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4523,25 +4542,25 @@ export type UserEvent = {
                           /**
                            * @type number | undefined
                            */
-                          updatedAt?: number | undefined
+                          updatedAt?: number | undefined;
                           /**
                            * @type number | undefined
                            */
-                          blockedFrom?: number | undefined
+                          blockedFrom?: number | undefined;
                           /**
                            * @type number | undefined
                            */
-                          blockedUntil?: number | undefined
+                          blockedUntil?: number | undefined;
                           /**
                            * @type string | undefined
                            */
-                          blockReason?: PostgresBlockReasonEnum | undefined
+                          blockReason?: PostgresBlockReasonEnum | undefined;
                           /**
                            * @type string
                            */
-                          overageReason: PostgresOverageReasonEnum
+                          overageReason: PostgresOverageReasonEnum;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -4550,35 +4569,35 @@ export type UserEvent = {
                           /**
                            * @type number | undefined
                            */
-                          updatedAt?: number | undefined
+                          updatedAt?: number | undefined;
                           /**
                            * @type number | undefined
                            */
-                          blockedFrom?: number | undefined
+                          blockedFrom?: number | undefined;
                           /**
                            * @type number | undefined
                            */
-                          blockedUntil?: number | undefined
+                          blockedUntil?: number | undefined;
                           /**
                            * @type string | undefined
                            */
-                          blockReason?: RedisBlockReasonEnum | undefined
+                          blockReason?: RedisBlockReasonEnum | undefined;
                           /**
                            * @type string
                            */
-                          overageReason: RedisOverageReasonEnum
+                          overageReason: RedisOverageReasonEnum;
                         }
-                      | undefined
+                      | undefined;
                   }
-                | undefined
+                | undefined;
               /**
                * @type string | undefined
                */
-              defaultTeamId?: string | undefined
+              defaultTeamId?: string | undefined;
               /**
                * @type string
                */
-              version: NewOwnerVersionEnum
+              version: NewOwnerVersionEnum;
               /**
                * @description An archive of information about the Northstar migration, derived from the old (deprecated) property, `northstarMigrationEvents`.
                * @type object | undefined
@@ -4589,44 +4608,44 @@ export type UserEvent = {
                      * @description The ID of the team we created for this user.
                      * @type string
                      */
-                    teamId: string
+                    teamId: string;
                     /**
                      * @description The number of projects migrated for this user.
                      * @type number
                      */
-                    projects: number
+                    projects: number;
                     /**
                      * @description The number of stores migrated for this user.
                      * @type number
                      */
-                    stores: number
+                    stores: number;
                     /**
                      * @description The number of integration configurations migrated for this user.
                      * @type number
                      */
-                    integrationConfigurations: number
+                    integrationConfigurations: number;
                     /**
                      * @description The number of integration clients migrated for this user.
                      * @type number
                      */
-                    integrationClients: number
+                    integrationClients: number;
                     /**
                      * @description The migration start time timestamp for this user.
                      * @type number
                      */
-                    startTime: number
+                    startTime: number;
                     /**
                      * @description The migration end time timestamp for this user.
                      * @type number
                      */
-                    endTime: number
+                    endTime: number;
                   }
-                | undefined
+                | undefined;
               /**
                * @description The salesforce opportunity ID that this user is linked to. This is used to automatically associate a team of the user\'s choosing with the opportunity.
                * @type string | undefined
                */
-              opportunityId?: string | undefined
+              opportunityId?: string | undefined;
               /**
                * @description MFA configuration. When enabled, the user will be required to provide a second factor of authentication when logging in.
                * @type object | undefined
@@ -4636,15 +4655,15 @@ export type UserEvent = {
                     /**
                      * @type boolean
                      */
-                    enabled: boolean
+                    enabled: boolean;
                     /**
                      * @type number | undefined
                      */
-                    enabledAt?: number | undefined
+                    enabledAt?: number | undefined;
                     /**
                      * @type array
                      */
-                    recoveryCodes: string[]
+                    recoveryCodes: string[];
                     /**
                      * @type object | undefined
                      */
@@ -4653,16 +4672,16 @@ export type UserEvent = {
                           /**
                            * @type string
                            */
-                          secret: string
+                          secret: string;
                           /**
                            * @type number
                            */
-                          createdAt: number
+                          createdAt: number;
                         }
-                      | undefined
+                      | undefined;
                   }
-                | undefined
-            } | null
+                | undefined;
+            } | null;
           }
         | {
             /**
@@ -4672,132 +4691,132 @@ export type UserEvent = {
               /**
                * @type string
                */
-              integrationId: string
+              integrationId: string;
               /**
                * @type string
                */
-              configurationId: string
+              configurationId: string;
               /**
                * @type string
                */
-              integrationSlug: string
+              integrationSlug: string;
               /**
                * @type string | undefined
                */
-              integrationName?: string | undefined
-            }[]
+              integrationName?: string | undefined;
+            }[];
             /**
              * @type string
              */
-            ownerId: string
+            ownerId: string;
           }
         | {
             /**
              * @type string
              */
-            integrationId: string
+            integrationId: string;
             /**
              * @type string
              */
-            configurationId: string
+            configurationId: string;
             /**
              * @type string
              */
-            integrationSlug: string
+            integrationSlug: string;
             /**
              * @type string
              */
-            integrationName: string
+            integrationName: string;
             /**
              * @type string
              */
-            ownerId: string
+            ownerId: string;
             /**
              * @type string
              */
-            billingPlanId: string
+            billingPlanId: string;
             /**
              * @type string | undefined
              */
-            billingPlanName?: string | undefined
+            billingPlanName?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            integrationId: string
+            integrationId: string;
             /**
              * @type string
              */
-            configurationId: string
+            configurationId: string;
             /**
              * @type string
              */
-            integrationSlug: string
+            integrationSlug: string;
             /**
              * @type string
              */
-            integrationName: string
+            integrationName: string;
             /**
              * @type string
              */
-            ownerId: string
+            ownerId: string;
             /**
              * @type array | undefined
              */
-            projectIds?: string[] | undefined
+            projectIds?: string[] | undefined;
           }
         | {
             /**
              * @type string
              */
-            projectId: string
+            projectId: string;
             /**
              * @type string
              */
-            fromDeploymentId: string
+            fromDeploymentId: string;
             /**
              * @type string
              */
-            toDeploymentId: string
+            toDeploymentId: string;
             /**
              * @type string
              */
-            projectName: string
+            projectName: string;
             /**
              * @type string | undefined
              */
-            reason?: string | undefined
+            reason?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            integrationId: string
+            integrationId: string;
             /**
              * @type string
              */
-            configurationId: string
+            configurationId: string;
             /**
              * @type string
              */
-            integrationSlug: string
+            integrationSlug: string;
             /**
              * @type string
              */
-            integrationName: string
+            integrationName: string;
             /**
              * @type string
              */
-            ownerId: string
+            ownerId: string;
             /**
              * @type array | undefined
              */
-            projectIds?: string[] | undefined
+            projectIds?: string[] | undefined;
             /**
              * @type array
              */
-            confirmedScopes: string[]
+            confirmedScopes: string[];
           }
         | {
             /**
@@ -4812,16 +4831,16 @@ export type UserEvent = {
                     /**
                      * @type string
                      */
-                    name: BrowserNameEnum
-                  }
+                    name: BrowserNameEnum;
+                  };
                   /**
                    * @type string
                    */
-                  ua: string
+                  ua: string;
                   /**
                    * @type string
                    */
-                  program: string
+                  program: string;
                   /**
                    * @type object
                    */
@@ -4829,10 +4848,10 @@ export type UserEvent = {
                     /**
                      * @type string
                      */
-                    name: OsNameEnum
-                  }
+                    name: OsNameEnum;
+                  };
                 }
-              | undefined
+              | undefined;
             /**
              * @type object
              */
@@ -4850,10 +4869,10 @@ export type UserEvent = {
                           /**
                            * @type string
                            */
-                          en: string
-                        }
+                          en: string;
+                        };
                       }
-                    | undefined
+                    | undefined;
                   /**
                    * @type object
                    */
@@ -4865,9 +4884,9 @@ export type UserEvent = {
                       /**
                        * @type string
                        */
-                      en: string
-                    }
-                  }
+                      en: string;
+                    };
+                  };
                   /**
                    * @type object | undefined
                    */
@@ -4880,112 +4899,112 @@ export type UserEvent = {
                           /**
                            * @type string
                            */
-                          en: string
-                        }
+                          en: string;
+                        };
                       }
-                    | undefined
+                    | undefined;
                   /**
                    * @type string | undefined
                    */
-                  regionName?: string | undefined
+                  regionName?: string | undefined;
                 } | null)
-              | undefined
+              | undefined;
             /**
              * @type boolean
              */
-            viaGithub: boolean
+            viaGithub: boolean;
             /**
              * @type boolean
              */
-            viaGitlab: boolean
+            viaGitlab: boolean;
             /**
              * @type boolean
              */
-            viaBitbucket: boolean
+            viaBitbucket: boolean;
             /**
              * @type boolean
              */
-            viaGoogle: boolean
+            viaGoogle: boolean;
             /**
              * @type boolean
              */
-            viaSamlSso: boolean
+            viaSamlSso: boolean;
             /**
              * @type boolean
              */
-            viaPasskey: boolean
+            viaPasskey: boolean;
             /**
              * @type string | undefined
              */
-            ssoType?: string | undefined
+            ssoType?: string | undefined;
             /**
              * @type string | undefined
              */
-            env?: string | undefined
+            env?: string | undefined;
             /**
              * @type string | undefined
              */
-            os?: string | undefined
+            os?: string | undefined;
             /**
              * @type string | undefined
              */
-            username?: string | undefined
+            username?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            logDrainUrl: string | null
+            logDrainUrl: string | null;
             /**
              * @type string | undefined
              */
-            integrationName?: string | undefined
+            integrationName?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            logDrainUrl: string
+            logDrainUrl: string;
             /**
              * @type string | undefined
              */
-            integrationName?: string | undefined
+            integrationName?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            drainUrl: string | null
+            drainUrl: string | null;
             /**
              * @type string | undefined
              */
-            integrationName?: string | undefined
+            integrationName?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            projectId: string
+            projectId: string;
             /**
              * @type string
              */
-            toDeploymentId: string
+            toDeploymentId: string;
             /**
              * @type string
              */
-            projectName: string
+            projectName: string;
           }
         | {
             /**
              * @type string
              */
-            projectName: string
+            projectName: string;
           }
         | {
             /**
              * @type string
              */
-            plan: string
+            plan: string;
             /**
              * @type object | undefined
              */
@@ -4995,15 +5014,15 @@ export type UserEvent = {
                     /**
                      * @type string
                      */
-                    role: RoleEnum
+                    role: RoleEnum;
                     /**
                      * @type boolean
                      */
-                    confirmed: boolean
+                    confirmed: boolean;
                     /**
                      * @type number | undefined
                      */
-                    confirmedAt?: number | undefined
+                    confirmedAt?: number | undefined;
                     /**
                      * @type object | undefined
                      */
@@ -5012,79 +5031,79 @@ export type UserEvent = {
                           /**
                            * @type string
                            */
-                          origin: JoinedFromOriginEnum2
+                          origin: JoinedFromOriginEnum2;
                           /**
                            * @type string | undefined
                            */
-                          commitId?: string | undefined
+                          commitId?: string | undefined;
                           /**
                            * @type string | undefined
                            */
-                          repoId?: string | undefined
+                          repoId?: string | undefined;
                           /**
                            * @type string | undefined
                            */
-                          repoPath?: string | undefined
-                          gitUserId?: (string | number) | undefined
+                          repoPath?: string | undefined;
+                          gitUserId?: (string | number) | undefined;
                           /**
                            * @type string | undefined
                            */
-                          gitUserLogin?: string | undefined
+                          gitUserLogin?: string | undefined;
                           /**
                            * @type string | undefined
                            */
-                          ssoUserId?: string | undefined
+                          ssoUserId?: string | undefined;
                           /**
                            * @type number | undefined
                            */
-                          ssoConnectedAt?: number | undefined
+                          ssoConnectedAt?: number | undefined;
                           /**
                            * @type string | undefined
                            */
-                          idpUserId?: string | undefined
+                          idpUserId?: string | undefined;
                           /**
                            * @type string | undefined
                            */
-                          dsyncUserId?: string | undefined
+                          dsyncUserId?: string | undefined;
                           /**
                            * @type number | undefined
                            */
-                          dsyncConnectedAt?: number | undefined
+                          dsyncConnectedAt?: number | undefined;
                         }
-                      | undefined
-                  }
+                      | undefined;
+                  };
                 }
-              | undefined
+              | undefined;
             /**
              * @type string | undefined
              */
-            priorPlan?: string | undefined
+            priorPlan?: string | undefined;
             /**
              * @type boolean | undefined
              */
-            isDowngrade?: boolean | undefined
+            isDowngrade?: boolean | undefined;
             /**
              * @type string | undefined
              */
-            userAgent?: string | undefined
+            userAgent?: string | undefined;
             /**
              * @type boolean | undefined
              */
-            isReactivate?: boolean | undefined
+            isReactivate?: boolean | undefined;
             /**
              * @type boolean | undefined
              */
-            isTrialUpgrade?: boolean | undefined
+            isTrialUpgrade?: boolean | undefined;
           }
         | {
             /**
              * @type string | undefined
              */
-            projectName?: string | undefined
+            projectName?: string | undefined;
             /**
              * @type string
              */
-            projectId: string
+            projectId: string;
             /**
              * @type object
              */
@@ -5092,32 +5111,32 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type number
                */
-              canceledAt?: (number | null) | undefined
+              canceledAt?: (number | null) | undefined;
               /**
                * @type number
                */
-              disabledAt: number
+              disabledAt: number;
               /**
                * @type number
                */
-              enabledAt: number
+              enabledAt: number;
               /**
                * @type number | undefined
                */
-              paidAt?: number | undefined
+              paidAt?: number | undefined;
               /**
                * @type number
                */
-              sampleRatePercent?: (number | null) | undefined
+              sampleRatePercent?: (number | null) | undefined;
               /**
                * @type number
                */
-              spendLimitInDollars?: (number | null) | undefined
-            } | null
+              spendLimitInDollars?: (number | null) | undefined;
+            } | null;
             /**
              * @type object
              */
@@ -5125,152 +5144,152 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type number
                */
-              canceledAt?: (number | null) | undefined
+              canceledAt?: (number | null) | undefined;
               /**
                * @type number
                */
-              disabledAt: number
+              disabledAt: number;
               /**
                * @type number
                */
-              enabledAt: number
+              enabledAt: number;
               /**
                * @type number | undefined
                */
-              paidAt?: number | undefined
+              paidAt?: number | undefined;
               /**
                * @type number
                */
-              sampleRatePercent?: (number | null) | undefined
+              sampleRatePercent?: (number | null) | undefined;
               /**
                * @type number
                */
-              spendLimitInDollars?: (number | null) | undefined
-            } | null
+              spendLimitInDollars?: (number | null) | undefined;
+            } | null;
           }
         | {
             /**
              * @type string | undefined
              */
-            projectName?: string | undefined
+            projectName?: string | undefined;
             /**
              * @type string
              */
-            projectId: string
+            projectId: string;
             /**
              * @type object | undefined
              */
             projectAnalytics?:
               | {
-                  [key: string]: unknown
+                  [key: string]: unknown;
                 }
-              | undefined
+              | undefined;
             /**
              * @type object
              */
             prevProjectAnalytics?:
               | ({
-                  [key: string]: unknown
+                  [key: string]: unknown;
                 } | null)
-              | undefined
+              | undefined;
           }
         | {
             /**
              * @type string | undefined
              */
-            projectName?: string | undefined
+            projectName?: string | undefined;
             /**
              * @type string
              */
-            projectId: string
+            projectId: string;
           }
         | {
             /**
              * @type string
              */
-            projectName: string
+            projectName: string;
             ssoProtection:
               | (
                   | {
                       /**
                        * @type string
                        */
-                      deploymentType: SsoProtectionDeploymentTypeEnum
+                      deploymentType: SsoProtectionDeploymentTypeEnum;
                     }
                   | PayloadSsoProtectionEnum
                 )
-              | null
+              | null;
             oldSsoProtection:
               | (
                   | {
                       /**
                        * @type string
                        */
-                      deploymentType: OldSsoProtectionDeploymentTypeEnum
+                      deploymentType: OldSsoProtectionDeploymentTypeEnum;
                     }
                   | PayloadOldSsoProtectionEnum
                 )
-              | null
+              | null;
           }
         | {
             /**
              * @type string
              */
-            projectName: string
+            projectName: string;
             passwordProtection:
               | (
                   | {
                       /**
                        * @type string
                        */
-                      deploymentType: PasswordProtectionDeploymentTypeEnum
+                      deploymentType: PasswordProtectionDeploymentTypeEnum;
                     }
                   | PayloadPasswordProtectionEnum
                 )
-              | null
+              | null;
             oldPasswordProtection:
               | (
                   | {
                       /**
                        * @type string
                        */
-                      deploymentType: OldPasswordProtectionDeploymentTypeEnum
+                      deploymentType: OldPasswordProtectionDeploymentTypeEnum;
                     }
                   | PayloadOldPasswordProtectionEnum
                 )
-              | null
+              | null;
           }
         | {
             /**
              * @type string
              */
-            projectName: string
+            projectName: string;
             /**
              * @type string
              */
-            trustedIps?: (PayloadTrustedIpsEnum | null) | undefined
+            trustedIps?: (PayloadTrustedIpsEnum | null) | undefined;
             /**
              * @type string
              */
-            oldTrustedIps?: (PayloadOldTrustedIpsEnum | null) | undefined
+            oldTrustedIps?: (PayloadOldTrustedIpsEnum | null) | undefined;
             /**
              * @type array
              */
-            addedAddresses?: (string[] | null) | undefined
+            addedAddresses?: (string[] | null) | undefined;
             /**
              * @type array
              */
-            removedAddresses?: (string[] | null) | undefined
+            removedAddresses?: (string[] | null) | undefined;
           }
         | {
             /**
              * @type string
              */
-            projectName: string
+            projectName: string;
             /**
              * @type object
              */
@@ -5283,10 +5302,10 @@ export type UserEvent = {
                     /**
                      * @type string
                      */
-                    value: string
-                  }[]
+                    value: string;
+                  }[];
                 } | null)
-              | undefined
+              | undefined;
             /**
              * @type object
              */
@@ -5299,30 +5318,30 @@ export type UserEvent = {
                     /**
                      * @type string
                      */
-                    value: string
-                  }[]
+                    value: string;
+                  }[];
                 } | null)
-              | undefined
+              | undefined;
           }
         | {
             /**
              * @type string
              */
-            projectName: string
+            projectName: string;
             /**
              * @type string
              */
-            action: PayloadActionEnum4
+            action: PayloadActionEnum4;
           }
         | {
             /**
              * @type string
              */
-            name: string
+            name: string;
             /**
              * @type string
              */
-            ownerId: string
+            ownerId: string;
           }
         | {
             /**
@@ -5332,12 +5351,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string
                */
-              name: string
-            }
+              name: string;
+            };
             /**
              * @type object
              */
@@ -5345,29 +5364,33 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string | undefined
                */
-              name?: string | undefined
+              name?: string | undefined;
               /**
                * @type array
                */
               oldConnectConfigurations:
                 | {
-                    envId: string | OldConnectConfigurationsEnvIdEnum
+                    envId: string | OldConnectConfigurationsEnvIdEnum;
                     /**
                      * @type string
                      */
-                    connectConfigurationId: string
+                    connectConfigurationId: string;
+                    /**
+                     * @type string | undefined
+                     */
+                    dc?: string | undefined;
                     /**
                      * @type boolean
                      */
-                    passive: boolean
+                    passive: boolean;
                     /**
                      * @type boolean
                      */
-                    buildsEnabled: boolean
+                    buildsEnabled: boolean;
                     /**
                      * @type object | undefined
                      */
@@ -5376,41 +5399,45 @@ export type UserEvent = {
                           /**
                            * @type array
                            */
-                          subnetIds: string[]
+                          subnetIds: string[];
                           /**
                            * @type string
                            */
-                          securityGroupId: string
+                          securityGroupId: string;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type number
                      */
-                    createdAt: number
+                    createdAt: number;
                     /**
                      * @type number
                      */
-                    updatedAt: number
+                    updatedAt: number;
                   }[]
-                | null
+                | null;
               /**
                * @type array
                */
               newConnectConfigurations:
                 | {
-                    envId: string | NewConnectConfigurationsEnvIdEnum
+                    envId: string | NewConnectConfigurationsEnvIdEnum;
                     /**
                      * @type string
                      */
-                    connectConfigurationId: string
+                    connectConfigurationId: string;
+                    /**
+                     * @type string | undefined
+                     */
+                    dc?: string | undefined;
                     /**
                      * @type boolean
                      */
-                    passive: boolean
+                    passive: boolean;
                     /**
                      * @type boolean
                      */
-                    buildsEnabled: boolean
+                    buildsEnabled: boolean;
                     /**
                      * @type object | undefined
                      */
@@ -5419,94 +5446,94 @@ export type UserEvent = {
                           /**
                            * @type array
                            */
-                          subnetIds: string[]
+                          subnetIds: string[];
                           /**
                            * @type string
                            */
-                          securityGroupId: string
+                          securityGroupId: string;
                         }
-                      | undefined
+                      | undefined;
                     /**
                      * @type number
                      */
-                    createdAt: number
+                    createdAt: number;
                     /**
                      * @type number
                      */
-                    updatedAt: number
+                    updatedAt: number;
                   }[]
-                | null
-            }
+                | null;
+            };
           }
         | {
             /**
              * @type string
              */
-            projectId: string
+            projectId: string;
           }
         | {
             /**
              * @type string
              */
-            projectId: string
+            projectId: string;
             /**
              * @type string
              */
-            projectName: string
+            projectName: string;
           }
         | {
             /**
              * @type string | undefined
              */
-            projectId?: string | undefined
+            projectId?: string | undefined;
             /**
              * @type string | undefined
              */
-            projectName?: string | undefined
+            projectName?: string | undefined;
             /**
              * @type number | undefined
              */
-            newTargetPercentage?: number | undefined
+            newTargetPercentage?: number | undefined;
           }
         | {
             /**
              * @type string
              */
-            gitProvider: string
+            gitProvider: string;
             /**
              * @type string
              */
-            gitProviderGroupDescriptor: string
+            gitProviderGroupDescriptor: string;
             /**
              * @type string
              */
-            gitScope: string
+            gitScope: string;
           }
         | {
             /**
              * @type number
              */
-            instances: number
+            instances: number;
             /**
              * @type string
              */
-            url: string
+            url: string;
           }
         | {
             /**
              * @type string
              */
-            email: string
+            email: string;
             /**
              * @type boolean
              */
-            verified: boolean
+            verified: boolean;
           }
         | {
             /**
              * @type string
              */
-            email: string
+            email: string;
           }
         | {
             /**
@@ -5516,12 +5543,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string | undefined
                */
-              name?: string | undefined
-            }
+              name?: string | undefined;
+            };
             /**
              * @type object | undefined
              */
@@ -5530,9 +5557,9 @@ export type UserEvent = {
                   /**
                    * @type string
                    */
-                  email: string
+                  email: string;
                 }
-              | undefined
+              | undefined;
             /**
              * @type object | undefined
              */
@@ -5541,9 +5568,9 @@ export type UserEvent = {
                   /**
                    * @type string
                    */
-                  email: string
+                  email: string;
                 }
-              | undefined
+              | undefined;
           }
         | {
             /**
@@ -5553,12 +5580,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string | undefined
                */
-              name?: string | undefined
-            }
+              name?: string | undefined;
+            };
             /**
              * @type object
              */
@@ -5566,42 +5593,42 @@ export type UserEvent = {
               /**
                * @type string
                */
-              email: string
-            }
+              email: string;
+            };
           }
         | {
             /**
              * @type string
              */
-            uid: string
+            uid: string;
             name:
               | string
               | {
                   /**
                    * @type string
                    */
-                  name: string
-                }
+                  name: string;
+                };
           }
         | {
             /**
              * @type string
              */
-            oldName: string
+            oldName: string;
             /**
              * @type string
              */
-            newName: string
+            newName: string;
             /**
              * @type string | undefined
              */
-            uid?: string | undefined
+            uid?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            bio: string
+            bio: string;
           }
         | {
             /**
@@ -5612,31 +5639,31 @@ export type UserEvent = {
                 /**
                  * @type number
                  */
-                min: number
+                min: number;
                 /**
                  * @type number
                  */
-                max: number
-              }
-            }
+                max: number;
+              };
+            };
             /**
              * @type number
              */
-            min: number
+            min: number;
             /**
              * @type number
              */
-            max: number
+            max: number;
             /**
              * @type string
              */
-            url: string
+            url: string;
           }
         | {
             /**
              * @type string | undefined
              */
-            webhookUrl?: string | undefined
+            webhookUrl?: string | undefined;
           }
         | {
             /**
@@ -5648,68 +5675,68 @@ export type UserEvent = {
                * @description The budget type
                * @type string
                */
-              type: BudgetTypeEnum
+              type: BudgetTypeEnum;
               /**
                * @description Budget amount
                * @type number
                */
-              fixedBudget: number
+              fixedBudget: number;
               /**
                * @description Array of the last 3 months of spend data
                * @type array
                */
-              previousSpend: number[]
+              previousSpend: number[];
               /**
                * @description Array of 50, 75, 100 to keep track of notifications sent out
                * @type array
                */
-              notifiedAt: number[]
+              notifiedAt: number[];
               /**
                * @description Webhook id that corresponds to a webhook in Cosmos webhook collection
                * @type string | undefined
                */
-              webhookId?: string | undefined
+              webhookId?: string | undefined;
               /**
                * @description Keep track if the webhook has been called for the month
                * @type boolean | undefined
                */
-              webhookNotified?: boolean | undefined
+              webhookNotified?: boolean | undefined;
               /**
                * @description Date time when budget is created
                * @type number
                */
-              createdAt: number
+              createdAt: number;
               /**
                * @description Date time when budget is updated last
                * @type number | undefined
                */
-              updatedAt?: number | undefined
+              updatedAt?: number | undefined;
               /**
                * @description Is the budget currently active for a customer
                * @type boolean
                */
-              isActive: boolean
+              isActive: boolean;
               /**
                * @description Should all projects be paused if budget is exceeded
                * @type boolean | undefined
                */
-              pauseProjects?: boolean | undefined
+              pauseProjects?: boolean | undefined;
               /**
                * @description The acive pricing plan the team is billed with
                * @type string | undefined
                */
-              pricingPlan?: BudgetPricingPlanEnum | undefined
+              pricingPlan?: BudgetPricingPlanEnum | undefined;
               /**
                * @description Partition key
                * @type string
                */
-              teamId: string
+              teamId: string;
               /**
                * @description Sort key that needs to be unique per teamId
                * @type string
                */
-              id: string
-            }
+              id: string;
+            };
           }
         | {
             /**
@@ -5725,101 +5752,101 @@ export type UserEvent = {
                  * @description The budget type
                  * @type string
                  */
-                type: BudgetItemTypeEnum
+                type: BudgetItemTypeEnum;
                 /**
                  * @description Budget amount
                  * @type number
                  */
-                fixedBudget: number
+                fixedBudget: number;
                 /**
                  * @description Array of the last 3 months of spend data
                  * @type array
                  */
-                previousSpend: number[]
+                previousSpend: number[];
                 /**
                  * @description Array of 50, 75, 100 to keep track of notifications sent out
                  * @type array
                  */
-                notifiedAt: number[]
+                notifiedAt: number[];
                 /**
                  * @description Webhook id that corresponds to a webhook in Cosmos webhook collection
                  * @type string | undefined
                  */
-                webhookId?: string | undefined
+                webhookId?: string | undefined;
                 /**
                  * @description Keep track if the webhook has been called for the month
                  * @type boolean | undefined
                  */
-                webhookNotified?: boolean | undefined
+                webhookNotified?: boolean | undefined;
                 /**
                  * @description Date time when budget is created
                  * @type number
                  */
-                createdAt: number
+                createdAt: number;
                 /**
                  * @description Date time when budget is updated last
                  * @type number | undefined
                  */
-                updatedAt?: number | undefined
+                updatedAt?: number | undefined;
                 /**
                  * @description Is the budget currently active for a customer
                  * @type boolean
                  */
-                isActive: boolean
+                isActive: boolean;
                 /**
                  * @description Should all projects be paused if budget is exceeded
                  * @type boolean | undefined
                  */
-                pauseProjects?: boolean | undefined
+                pauseProjects?: boolean | undefined;
                 /**
                  * @description The acive pricing plan the team is billed with
                  * @type string | undefined
                  */
-                pricingPlan?: BudgetItemPricingPlanEnum | undefined
+                pricingPlan?: BudgetItemPricingPlanEnum | undefined;
                 /**
                  * @description Partition key
                  * @type string
                  */
-                teamId: string
+                teamId: string;
                 /**
                  * @description Sort key that needs to be unique per teamId
                  * @type string
                  */
-                id: string
-              }
-            }
+                id: string;
+              };
+            };
           }
         | {
             /**
              * @type string
              */
-            id: string
+            id: string;
             /**
              * @type string | undefined
              */
-            name?: string | undefined
+            name?: string | undefined;
             /**
              * @type number | undefined
              */
-            computeUnitsMax?: number | undefined
+            computeUnitsMax?: number | undefined;
             /**
              * @type number | undefined
              */
-            computeUnitsMin?: number | undefined
+            computeUnitsMin?: number | undefined;
             /**
              * @type number | undefined
              */
-            suspendTimeoutSeconds?: number | undefined
+            suspendTimeoutSeconds?: number | undefined;
             /**
              * @type string
              */
-            type: PayloadTypeEnum2
+            type: PayloadTypeEnum2;
           }
         | {
             /**
              * @type string
              */
-            storeType: PayloadStoreTypeEnum
+            storeType: PayloadStoreTypeEnum;
           }
         | {
             /**
@@ -5829,36 +5856,36 @@ export type UserEvent = {
               /**
                * @type string
                */
-              name: string
+              name: string;
               /**
                * @type string
                */
-              id: string
-            }
+              id: string;
+            };
             /**
              * @type string | undefined
              */
-            ownerId?: string | undefined
+            ownerId?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            slug: string
+            slug: string;
           }
         | {
             /**
              * @type string
              */
-            slug: string
+            slug: string;
             /**
              * @type string
              */
-            teamId: string
+            teamId: string;
             /**
              * @type string
              */
-            by: string
+            by: string;
             /**
              * @type array | undefined
              */
@@ -5867,23 +5894,23 @@ export type UserEvent = {
                   /**
                    * @type string
                    */
-                  slug: string
+                  slug: string;
                   /**
                    * @type string
                    */
-                  description: string
+                  description: string;
                 }[]
-              | undefined
+              | undefined;
           }
         | {
             /**
              * @type string | undefined
              */
-            directoryType?: string | undefined
+            directoryType?: string | undefined;
             /**
              * @type string | undefined
              */
-            ssoType?: string | undefined
+            ssoType?: string | undefined;
             /**
              * @type object | undefined
              */
@@ -5892,29 +5919,29 @@ export type UserEvent = {
                   /**
                    * @type string
                    */
-                  username: string
+                  username: string;
                   /**
                    * @type string
                    */
-                  email: string
+                  email: string;
                 }
-              | undefined
+              | undefined;
             /**
              * @type string | undefined
              */
-            invitedEmail?: string | undefined
+            invitedEmail?: string | undefined;
             /**
              * @type string | undefined
              */
-            invitationRole?: string | undefined
+            invitationRole?: string | undefined;
             /**
              * @type array | undefined
              */
-            entitlements?: string[] | undefined
+            entitlements?: string[] | undefined;
             /**
              * @type string | undefined
              */
-            invitedUid?: string | undefined
+            invitedUid?: string | undefined;
           }
         | {
             /**
@@ -5925,53 +5952,53 @@ export type UserEvent = {
                   /**
                    * @type string
                    */
-                  username: string
+                  username: string;
                   /**
                    * @type string
                    */
-                  email: string
+                  email: string;
                 }
-              | undefined
+              | undefined;
             /**
              * @type string | undefined
              */
-            deletedUid?: string | undefined
+            deletedUid?: string | undefined;
             /**
              * @type string
              */
-            githubUsername?: (string | null) | undefined
+            githubUsername?: (string | null) | undefined;
             /**
              * @type string
              */
-            gitlabUsername?: (string | null) | undefined
+            gitlabUsername?: (string | null) | undefined;
             /**
              * @type string
              */
-            bitbucketUsername?: (string | null) | undefined
+            bitbucketUsername?: (string | null) | undefined;
             /**
              * @type string | undefined
              */
-            directoryType?: string | undefined
+            directoryType?: string | undefined;
           }
         | {
             /**
              * @type string | undefined
              */
-            role?: string | undefined
+            role?: string | undefined;
             /**
              * @type string
              */
-            uid: string
+            uid: string;
             /**
              * @type string | undefined
              */
-            origin?: string | undefined
+            origin?: string | undefined;
           }
         | {
             /**
              * @type string | undefined
              */
-            directoryType?: string | undefined
+            directoryType?: string | undefined;
             /**
              * @type object | undefined
              */
@@ -5980,31 +6007,31 @@ export type UserEvent = {
                   /**
                    * @type string
                    */
-                  username: string
+                  username: string;
                   /**
                    * @type string
                    */
-                  email: string
+                  email: string;
                 }
-              | undefined
+              | undefined;
             /**
              * @type string | undefined
              */
-            role?: string | undefined
+            role?: string | undefined;
             /**
              * @type string
              */
-            previousRole: string
+            previousRole: string;
             /**
              * @type string | undefined
              */
-            updatedUid?: string | undefined
+            updatedUid?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            entitlement: string
+            entitlement: string;
             /**
              * @type object
              */
@@ -6012,18 +6039,18 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string
                */
-              username: string
-            }
+              username: string;
+            };
           }
         | {
             /**
              * @type string
              */
-            entitlement: string
+            entitlement: string;
             /**
              * @type object
              */
@@ -6031,34 +6058,34 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string
                */
-              username: string
-            }
+              username: string;
+            };
             /**
              * @type string | undefined
              */
-            previousCanceledAt?: string | undefined
+            previousCanceledAt?: string | undefined;
           }
         | {
             /**
              * @type boolean
              */
-            enforced: boolean
+            enforced: boolean;
           }
         | {
             /**
              * @type string | undefined
              */
-            name?: string | undefined
+            name?: string | undefined;
           }
         | {
             /**
              * @type string | undefined
              */
-            slug?: string | undefined
+            slug?: string | undefined;
           }
         | {
             /**
@@ -6070,9 +6097,9 @@ export type UserEvent = {
                   /**
                    * @type boolean | undefined
                    */
-                  enabled?: boolean | undefined
+                  enabled?: boolean | undefined;
                 }
-              | undefined
+              | undefined;
           }
         | {
             /**
@@ -6082,12 +6109,12 @@ export type UserEvent = {
               /**
                * @type boolean
                */
-              enabled: boolean
+              enabled: boolean;
               /**
                * @type boolean
                */
-              totpVerified: boolean
-            }
+              totpVerified: boolean;
+            };
             /**
              * @type object
              */
@@ -6095,240 +6122,240 @@ export type UserEvent = {
               /**
                * @type boolean
                */
-              enabled: boolean
+              enabled: boolean;
               /**
                * @type boolean
                */
-              totpVerified: boolean
-            }
+              totpVerified: boolean;
+            };
           }
         | {
             /**
              * @type boolean
              */
-            enabled: boolean
+            enabled: boolean;
             /**
              * @type boolean
              */
-            totpVerified: boolean
+            totpVerified: boolean;
           }
         | {
             /**
              * @type boolean
              */
-            mfaEnabled: boolean
+            mfaEnabled: boolean;
           }
         | {
             /**
              * @type string
              */
-            email: string
+            email: string;
             /**
              * @type string
              */
-            prevEmail: string
+            prevEmail: string;
           }
         | {
             /**
              * @type string
              */
-            username: string
+            username: string;
           }
         | {
             /**
              * @type number | undefined
              */
-            price?: number | undefined
+            price?: number | undefined;
             /**
              * @type string | undefined
              */
-            currency?: string | undefined
+            currency?: string | undefined;
             /**
              * @type boolean | undefined
              */
-            enabled?: boolean | undefined
+            enabled?: boolean | undefined;
           }
         | {
             /**
              * @type string
              */
-            previewDeploymentSuffix?: (string | null) | undefined
+            previewDeploymentSuffix?: (string | null) | undefined;
             /**
              * @type string
              */
-            previousPreviewDeploymentSuffix?: (string | null) | undefined
+            previousPreviewDeploymentSuffix?: (string | null) | undefined;
           }
         | {
             /**
              * @type number | undefined
              */
-            price?: number | undefined
+            price?: number | undefined;
             /**
              * @type string | undefined
              */
-            currency?: string | undefined
+            currency?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            teamName: string
+            teamName: string;
             /**
              * @type string | undefined
              */
-            username?: string | undefined
+            username?: string | undefined;
             /**
              * @type string | undefined
              */
-            gitUsername?: string | undefined
+            gitUsername?: string | undefined;
             /**
              * @type string
              */
-            githubUsername?: (string | null) | undefined
+            githubUsername?: (string | null) | undefined;
             /**
              * @type string
              */
-            gitlabUsername?: (string | null) | undefined
+            gitlabUsername?: (string | null) | undefined;
             /**
              * @type string
              */
-            bitbucketUsername?: (string | null) | undefined
+            bitbucketUsername?: (string | null) | undefined;
             /**
              * @type string | undefined
              */
-            updatedUid?: string | undefined
+            updatedUid?: string | undefined;
             /**
              * @type string | undefined
              */
-            teamId?: string | undefined
+            teamId?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            teamName: string
+            teamName: string;
             /**
              * @type string | undefined
              */
-            username?: string | undefined
+            username?: string | undefined;
             /**
              * @type string
              */
-            gitUsername?: (string | null) | undefined
+            gitUsername?: (string | null) | undefined;
             /**
              * @type string
              */
-            githubUsername?: (string | null) | undefined
+            githubUsername?: (string | null) | undefined;
             /**
              * @type string
              */
-            gitlabUsername?: (string | null) | undefined
+            gitlabUsername?: (string | null) | undefined;
             /**
              * @type string
              */
-            bitbucketUsername?: (string | null) | undefined
+            bitbucketUsername?: (string | null) | undefined;
           }
         | {
             /**
              * @type string
              */
-            requestedTeamName: string
+            requestedTeamName: string;
             /**
              * @type string | undefined
              */
-            requestedUserName?: string | undefined
+            requestedUserName?: string | undefined;
             /**
              * @type string | undefined
              */
-            gitUsername?: string | undefined
+            gitUsername?: string | undefined;
             /**
              * @type string | undefined
              */
-            githubUsername?: string | undefined
+            githubUsername?: string | undefined;
             /**
              * @type string | undefined
              */
-            gitlabUsername?: string | undefined
+            gitlabUsername?: string | undefined;
             /**
              * @type string | undefined
              */
-            bitbucketUsername?: string | undefined
+            bitbucketUsername?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            projectId: string
+            projectId: string;
             /**
              * @type string
              */
-            projectName: string
+            projectName: string;
             /**
              * @type string
              */
-            originAccountName: string
+            originAccountName: string;
             /**
              * @type string
              */
-            destinationAccountName: string
+            destinationAccountName: string;
             /**
              * @type string
              */
-            destinationAccountId: string
+            destinationAccountId: string;
             /**
              * @type string | undefined
              */
-            transferId?: string | undefined
+            transferId?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            projectName: string
+            projectName: string;
             /**
              * @type string
              */
-            destinationAccountName: string | null
+            destinationAccountName: string | null;
             /**
              * @type string | undefined
              */
-            transferId?: string | undefined
+            transferId?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            previousProjectName: string
+            previousProjectName: string;
             /**
              * @type string
              */
-            newProjectName: string
+            newProjectName: string;
             /**
              * @type string
              */
-            destinationAccountName: string
+            destinationAccountName: string;
             /**
              * @type string | undefined
              */
-            transferId?: string | undefined
+            transferId?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            previousProjectName: string
+            previousProjectName: string;
             /**
              * @type string
              */
-            newProjectName: string
+            newProjectName: string;
             /**
              * @type string
              */
-            originAccountName: string
+            originAccountName: string;
             /**
              * @type string | undefined
              */
-            transferId?: string | undefined
+            transferId?: string | undefined;
           }
         | {
             /**
@@ -6338,12 +6365,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              name: string
+              name: string;
               /**
                * @type string | undefined
                */
-              id?: string | undefined
-            }
+              id?: string | undefined;
+            };
             /**
              * @type object
              */
@@ -6351,20 +6378,20 @@ export type UserEvent = {
               /**
                * @type string | undefined
                */
-              role?: ProjectMembershipRoleEnum | undefined
+              role?: ProjectMembershipRoleEnum | undefined;
               /**
                * @type string | undefined
                */
-              uid?: string | undefined
+              uid?: string | undefined;
               /**
                * @type number | undefined
                */
-              createdAt?: number | undefined
+              createdAt?: number | undefined;
               /**
                * @type string | undefined
                */
-              username?: string | undefined
-            } | null
+              username?: string | undefined;
+            } | null;
           }
         | {
             /**
@@ -6374,12 +6401,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              name: string
+              name: string;
               /**
                * @type string | undefined
                */
-              id?: string | undefined
-            }
+              id?: string | undefined;
+            };
             /**
              * @type object
              */
@@ -6387,20 +6414,20 @@ export type UserEvent = {
               /**
                * @type string | undefined
                */
-              role?: RemovedMembershipRoleEnum | undefined
+              role?: RemovedMembershipRoleEnum | undefined;
               /**
                * @type string | undefined
                */
-              uid?: string | undefined
+              uid?: string | undefined;
               /**
                * @type number | undefined
                */
-              createdAt?: number | undefined
+              createdAt?: number | undefined;
               /**
                * @type string | undefined
                */
-              username?: string | undefined
-            }
+              username?: string | undefined;
+            };
           }
         | {
             /**
@@ -6410,12 +6437,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string
                */
-              name: string
-            }
+              name: string;
+            };
             /**
              * @type object
              */
@@ -6423,24 +6450,24 @@ export type UserEvent = {
               /**
                * @type string | undefined
                */
-              role?: ProjectMembershipRoleEnum2 | undefined
+              role?: ProjectMembershipRoleEnum2 | undefined;
               /**
                * @type string | undefined
                */
-              uid?: string | undefined
+              uid?: string | undefined;
               /**
                * @type number | undefined
                */
-              createdAt?: number | undefined
+              createdAt?: number | undefined;
               /**
                * @type string | undefined
                */
-              username?: string | undefined
+              username?: string | undefined;
               /**
                * @type string | undefined
                */
-              previousRole?: ProjectMembershipPreviousRoleEnum | undefined
-            }
+              previousRole?: ProjectMembershipPreviousRoleEnum | undefined;
+            };
           }
         | {
             /**
@@ -6450,109 +6477,109 @@ export type UserEvent = {
               /**
                * @type string
                */
-              name: string
+              name: string;
               /**
                * @type string
                */
-              role: ProjectRoleEnum
+              role: ProjectRoleEnum;
               /**
                * @type string
                */
-              invitedUserName: string
+              invitedUserName: string;
               /**
                * @type string | undefined
                */
-              id?: string | undefined
+              id?: string | undefined;
               /**
                * @type string | undefined
                */
-              invitedUserId?: string | undefined
-            }
+              invitedUserId?: string | undefined;
+            };
           }
         | {
             /**
              * @type string
              */
-            edgeConfigId: string
+            edgeConfigId: string;
             /**
              * @type string
              */
-            edgeConfigSlug: string
+            edgeConfigSlug: string;
             /**
              * @type string
              */
-            edgeConfigDigest: string
+            edgeConfigDigest: string;
           }
         | {
             /**
              * @type string
              */
-            edgeConfigId: string
+            edgeConfigId: string;
             /**
              * @type string
              */
-            edgeConfigSlug: string
+            edgeConfigSlug: string;
             /**
              * @type string
              */
-            edgeConfigTokenId: string
+            edgeConfigTokenId: string;
             /**
              * @type string
              */
-            label: string
+            label: string;
           }
         | {
             /**
              * @type string
              */
-            edgeConfigId: string
+            edgeConfigId: string;
             /**
              * @type string
              */
-            edgeConfigSlug: string
+            edgeConfigSlug: string;
             /**
              * @description ids of deleted tokens
              * @type array
              */
-            edgeConfigTokenIds: string[]
+            edgeConfigTokenIds: string[];
           }
         | {
             /**
              * @type string
              */
-            action: PayloadActionEnum5
+            action: PayloadActionEnum5;
           }
         | {
             /**
              * @type string
              */
-            id: string
+            id: string;
             /**
              * @type string
              */
-            slug: string
+            slug: string;
             /**
              * @type string
              */
-            name: string
+            name: string;
           }
         | {
             /**
              * @type string
              */
-            id: string
+            id: string;
             /**
              * @type string | undefined
              */
-            slug?: string | undefined
+            slug?: string | undefined;
             /**
              * @type string | undefined
              */
-            name?: string | undefined
+            name?: string | undefined;
             /**
              * @type string | undefined
              */
-            fallbackEnvironment?: string | undefined
+            fallbackEnvironment?: string | undefined;
             /**
              * @type object
              */
@@ -6560,16 +6587,16 @@ export type UserEvent = {
               /**
                * @type string
                */
-              name: string
+              name: string;
               /**
                * @type string
                */
-              slug: string
+              slug: string;
               /**
                * @type string | undefined
                */
-              fallbackEnvironment?: string | undefined
-            }
+              fallbackEnvironment?: string | undefined;
+            };
           }
         | {
             /**
@@ -6579,12 +6606,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string
                */
-              name: string
-            }
+              name: string;
+            };
             /**
              * @type object
              */
@@ -6592,16 +6619,16 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string
                */
-              slug: string
+              slug: string;
               /**
                * @type string
                */
-              name: string
-            }
+              name: string;
+            };
           }
         | {
             /**
@@ -6611,11 +6638,11 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string
                */
-              name: string
+              name: string;
               microfrontends?:
                 | (
                     | {
@@ -6623,50 +6650,50 @@ export type UserEvent = {
                          * @description Timestamp when the microfrontends settings were last updated.
                          * @type number
                          */
-                        updatedAt: number
+                        updatedAt: number;
                         /**
                          * @description The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
                          * @type array
                          */
-                        groupIds: (string | string)[]
+                        groupIds: (string | string)[];
                         /**
                          * @description Whether microfrontends are enabled for this project.
                          * @type boolean
                          */
-                        enabled: boolean
+                        enabled: boolean;
                         /**
                          * @description Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
                          * @type boolean | undefined
                          */
-                        isDefaultApp?: boolean | undefined
+                        isDefaultApp?: boolean | undefined;
                         /**
                          * @description A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI. Includes the leading slash, e.g. `/docs`
                          * @type string | undefined
                          */
-                        defaultRoute?: string | undefined
+                        defaultRoute?: string | undefined;
                         /**
                          * @description Whether observability data should be routed to this microfrontend project or a root project.
                          * @type boolean | undefined
                          */
-                        routeObservabilityToThisProject?: boolean | undefined
+                        routeObservabilityToThisProject?: boolean | undefined;
                       }
                     | {
                         /**
                          * @type number
                          */
-                        updatedAt: number
+                        updatedAt: number;
                         /**
                          * @type array
                          */
-                        groupIds: (string | string)[]
+                        groupIds: (string | string)[];
                         /**
                          * @type boolean
                          */
-                        enabled: boolean
+                        enabled: boolean;
                       }
                   )
-                | undefined
-            }
+                | undefined;
+            };
             /**
              * @type object
              */
@@ -6682,51 +6709,51 @@ export type UserEvent = {
                            * @description Timestamp when the microfrontends settings were last updated.
                            * @type number
                            */
-                          updatedAt: number
+                          updatedAt: number;
                           /**
                            * @description The group IDs of microfrontends that this project belongs to. Each microfrontend project must belong to a microfrontends group that is the set of microfrontends that are used together.
                            * @type array
                            */
-                          groupIds: (string | string)[]
+                          groupIds: (string | string)[];
                           /**
                            * @description Whether microfrontends are enabled for this project.
                            * @type boolean
                            */
-                          enabled: boolean
+                          enabled: boolean;
                           /**
                            * @description Whether this project is the default application for the microfrontends group. The default application is the one that is used as the top level shell for the microfrontends group and hosts the other microfrontends.
                            * @type boolean | undefined
                            */
-                          isDefaultApp?: boolean | undefined
+                          isDefaultApp?: boolean | undefined;
                           /**
                            * @description A path that is used to take screenshots and as the default path in preview links when a domain for this microfrontend is shown in the UI. Includes the leading slash, e.g. `/docs`
                            * @type string | undefined
                            */
-                          defaultRoute?: string | undefined
+                          defaultRoute?: string | undefined;
                           /**
                            * @description Whether observability data should be routed to this microfrontend project or a root project.
                            * @type boolean | undefined
                            */
-                          routeObservabilityToThisProject?: boolean | undefined
+                          routeObservabilityToThisProject?: boolean | undefined;
                         }
                       | {
                           /**
                            * @type number
                            */
-                          updatedAt: number
+                          updatedAt: number;
                           /**
                            * @type array
                            */
-                          groupIds: (string | string)[]
+                          groupIds: (string | string)[];
                           /**
                            * @type boolean
                            */
-                          enabled: boolean
+                          enabled: boolean;
                         }
                     )
-                  | undefined
-              }
-            }
+                  | undefined;
+              };
+            };
             /**
              * @type object
              */
@@ -6734,26 +6761,26 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string
                */
-              slug: string
+              slug: string;
               /**
                * @type string
                */
-              name: string
-            }
+              name: string;
+            };
           }
         | {
             /**
              * @type string
              */
-            projectId: string
+            projectId: string;
             /**
              * @type string
              */
-            projectName: string
+            projectName: string;
             /**
              * @type object | undefined
              */
@@ -6762,25 +6789,25 @@ export type UserEvent = {
                   /**
                    * @type string
                    */
-                  id: string
+                  id: string;
                   /**
                    * @type number | undefined
                    */
-                  disabledAt?: number | undefined
+                  disabledAt?: number | undefined;
                   /**
                    * @type number | undefined
                    */
-                  canceledAt?: number | undefined
+                  canceledAt?: number | undefined;
                   /**
                    * @type number | undefined
                    */
-                  enabledAt?: number | undefined
+                  enabledAt?: number | undefined;
                   /**
                    * @type boolean | undefined
                    */
-                  hasData?: boolean | undefined
+                  hasData?: boolean | undefined;
                 }
-              | undefined
+              | undefined;
             /**
              * @type object
              */
@@ -6789,67 +6816,67 @@ export type UserEvent = {
                   /**
                    * @type string
                    */
-                  id: string
+                  id: string;
                   /**
                    * @type number | undefined
                    */
-                  disabledAt?: number | undefined
+                  disabledAt?: number | undefined;
                   /**
                    * @type number | undefined
                    */
-                  canceledAt?: number | undefined
+                  canceledAt?: number | undefined;
                   /**
                    * @type number | undefined
                    */
-                  enabledAt?: number | undefined
+                  enabledAt?: number | undefined;
                   /**
                    * @type boolean | undefined
                    */
-                  hasData?: boolean | undefined
+                  hasData?: boolean | undefined;
                 } | null)
-              | undefined
+              | undefined;
           }
         | {
             /**
              * @type string
              */
-            tier: PayloadTierEnum
+            tier: PayloadTierEnum;
           }
         | {
             /**
              * @type string
              */
-            oldName: string
+            oldName: string;
             /**
              * @type string
              */
-            newName: string
+            newName: string;
           }
         | {
             /**
              * @type string
              */
-            appName: string
+            appName: string;
             /**
              * @type array
              */
-            scopes: string[]
+            scopes: string[];
           }
         | {
             /**
              * @type string
              */
-            appName: string
+            appName: string;
             /**
              * @type array
              */
-            nextScopes: string[]
+            nextScopes: string[];
           }
         | {
             /**
              * @type string
              */
-            appName: string
+            appName: string;
           }
         | {
             /**
@@ -6859,12 +6886,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string
                */
-              name: string
-            }
+              name: string;
+            };
             /**
              * @type object
              */
@@ -6872,12 +6899,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string | undefined
                */
-              name?: string | undefined
-            }
+              name?: string | undefined;
+            };
             /**
              * @type object
              */
@@ -6885,20 +6912,20 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string
                */
-              accountId: string
+              accountId: string;
               /**
                * @type string
                */
-              region: string
+              region: string;
               /**
                * @type string
                */
-              vpcId: string
-            }
+              vpcId: string;
+            };
           }
         | {
             /**
@@ -6908,12 +6935,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string
                */
-              name: string
-            }
+              name: string;
+            };
             /**
              * @type object
              */
@@ -6921,12 +6948,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string | undefined
                */
-              name?: string | undefined
-            }
+              name?: string | undefined;
+            };
             /**
              * @type object
              */
@@ -6934,12 +6961,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string | undefined
                */
-              name?: string | undefined
-            }
+              name?: string | undefined;
+            };
           }
         | {
             /**
@@ -6949,12 +6976,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string
                */
-              name: string
-            }
+              name: string;
+            };
             /**
              * @type object
              */
@@ -6962,12 +6989,12 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string | undefined
                */
-              name?: string | undefined
-            }
+              name?: string | undefined;
+            };
             /**
              * @type object
              */
@@ -6975,48 +7002,48 @@ export type UserEvent = {
               /**
                * @type string
                */
-              id: string
+              id: string;
               /**
                * @type string | undefined
                */
-              name?: string | undefined
-            }
+              name?: string | undefined;
+            };
             /**
              * @type string | undefined
              */
-            newName?: string | undefined
+            newName?: string | undefined;
           }
         | {
             /**
              * @type string
              */
-            grantType: PayloadGrantTypeEnum
+            grantType: PayloadGrantTypeEnum;
             /**
              * @type string
              */
-            appName: string
+            appName: string;
             /**
              * @description access_token TTL
              * @type number
              */
-            atTTL: number
+            atTTL: number;
             /**
              * @description refresh_token TTL
              * @type number | undefined
              */
-            rtTTL?: number | undefined
+            rtTTL?: number | undefined;
             /**
              * @type string
              */
-            scope: string
+            scope: string;
             /**
              * @type string
              */
-            authMethod: PayloadAuthMethodEnum
+            authMethod: PayloadAuthMethodEnum;
           }
       )
-    | undefined
-}
+    | undefined;
+};
 
 export const rolesEnum = {
   OWNER: 'OWNER',
@@ -7025,10 +7052,10 @@ export const rolesEnum = {
   SECURITY: 'SECURITY',
   BILLING: 'BILLING',
   VIEWER: 'VIEWER',
-  CONTRIBUTOR: 'CONTRIBUTOR',
-} as const
+  CONTRIBUTOR: 'CONTRIBUTOR'
+} as const;
 
-export type RolesEnum = (typeof rolesEnum)[keyof typeof rolesEnum]
+export type RolesEnum = (typeof rolesEnum)[keyof typeof rolesEnum];
 
 export const teamEnablePreviewFeedbackEnum = {
   default: 'default',
@@ -7036,10 +7063,11 @@ export const teamEnablePreviewFeedbackEnum = {
   off: 'off',
   'off-force': 'off-force',
   on: 'on',
-  'on-force': 'on-force',
-} as const
+  'on-force': 'on-force'
+} as const;
 
-export type TeamEnablePreviewFeedbackEnum = (typeof teamEnablePreviewFeedbackEnum)[keyof typeof teamEnablePreviewFeedbackEnum]
+export type TeamEnablePreviewFeedbackEnum =
+  (typeof teamEnablePreviewFeedbackEnum)[keyof typeof teamEnablePreviewFeedbackEnum];
 
 export const teamEnableProductionFeedbackEnum = {
   default: 'default',
@@ -7047,19 +7075,20 @@ export const teamEnableProductionFeedbackEnum = {
   off: 'off',
   'off-force': 'off-force',
   on: 'on',
-  'on-force': 'on-force',
-} as const
+  'on-force': 'on-force'
+} as const;
 
-export type TeamEnableProductionFeedbackEnum = (typeof teamEnableProductionFeedbackEnum)[keyof typeof teamEnableProductionFeedbackEnum]
+export type TeamEnableProductionFeedbackEnum =
+  (typeof teamEnableProductionFeedbackEnum)[keyof typeof teamEnableProductionFeedbackEnum];
 
 export const teamSensitiveEnvironmentVariablePolicyEnum = {
   default: 'default',
   off: 'off',
-  on: 'on',
-} as const
+  on: 'on'
+} as const;
 
 export type TeamSensitiveEnvironmentVariablePolicyEnum =
-  (typeof teamSensitiveEnvironmentVariablePolicyEnum)[keyof typeof teamSensitiveEnvironmentVariablePolicyEnum]
+  (typeof teamSensitiveEnvironmentVariablePolicyEnum)[keyof typeof teamSensitiveEnvironmentVariablePolicyEnum];
 
 export const membershipRoleEnum = {
   BILLING: 'BILLING',
@@ -7068,10 +7097,10 @@ export const membershipRoleEnum = {
   MEMBER: 'MEMBER',
   OWNER: 'OWNER',
   SECURITY: 'SECURITY',
-  VIEWER: 'VIEWER',
-} as const
+  VIEWER: 'VIEWER'
+} as const;
 
-export type MembershipRoleEnum = (typeof membershipRoleEnum)[keyof typeof membershipRoleEnum]
+export type MembershipRoleEnum = (typeof membershipRoleEnum)[keyof typeof membershipRoleEnum];
 
 export const membershipTeamRolesEnum = {
   BILLING: 'BILLING',
@@ -7080,20 +7109,21 @@ export const membershipTeamRolesEnum = {
   MEMBER: 'MEMBER',
   OWNER: 'OWNER',
   SECURITY: 'SECURITY',
-  VIEWER: 'VIEWER',
-} as const
+  VIEWER: 'VIEWER'
+} as const;
 
-export type MembershipTeamRolesEnum = (typeof membershipTeamRolesEnum)[keyof typeof membershipTeamRolesEnum]
+export type MembershipTeamRolesEnum = (typeof membershipTeamRolesEnum)[keyof typeof membershipTeamRolesEnum];
 
 export const membershipTeamPermissionsEnum = {
   CreateProject: 'CreateProject',
   EnvVariableManager: 'EnvVariableManager',
   EnvironmentManager: 'EnvironmentManager',
   FullProductionDeployment: 'FullProductionDeployment',
-  UsageViewer: 'UsageViewer',
-} as const
+  UsageViewer: 'UsageViewer'
+} as const;
 
-export type MembershipTeamPermissionsEnum = (typeof membershipTeamPermissionsEnum)[keyof typeof membershipTeamPermissionsEnum]
+export type MembershipTeamPermissionsEnum =
+  (typeof membershipTeamPermissionsEnum)[keyof typeof membershipTeamPermissionsEnum];
 
 export const joinedFromOriginEnum3 = {
   bitbucket: 'bitbucket',
@@ -7106,10 +7136,10 @@ export const joinedFromOriginEnum3 = {
   mail: 'mail',
   'organization-teams': 'organization-teams',
   saml: 'saml',
-  teams: 'teams',
-} as const
+  teams: 'teams'
+} as const;
 
-export type JoinedFromOriginEnum3 = (typeof joinedFromOriginEnum3)[keyof typeof joinedFromOriginEnum3]
+export type JoinedFromOriginEnum3 = (typeof joinedFromOriginEnum3)[keyof typeof joinedFromOriginEnum3];
 
 /**
  * @description Data representing a Team.
@@ -7123,24 +7153,24 @@ export type Team = {
         /**
          * @type boolean | undefined
          */
-        enabled?: boolean | undefined
+        enabled?: boolean | undefined;
       }
-    | undefined
+    | undefined;
   /**
    * @description The ID of the user who created the Team.
    * @type string
    */
-  creatorId: string
+  creatorId: string;
   /**
    * @description Timestamp (in milliseconds) of when the Team was last updated.
    * @type number
    */
-  updatedAt: number
+  updatedAt: number;
   /**
    * @description Hostname that\'ll be matched with emails on sign-up to automatically join the Team.
    * @type string
    */
-  emailDomain?: (string | null) | undefined
+  emailDomain?: (string | null) | undefined;
   /**
    * @description When \"Single Sign-On (SAML)\" is configured, this object contains information regarding the configuration of the Identity Provider (IdP).
    * @type object | undefined
@@ -7157,29 +7187,29 @@ export type Team = {
                * @description The Identity Provider \"type\", for example Okta.
                * @type string
                */
-              type: string
+              type: string;
               /**
                * @description Current status of the connection.
                * @type string
                */
-              status: string
+              status: string;
               /**
                * @description Current state of the connection.
                * @type string
                */
-              state: string
+              state: string;
               /**
                * @description Timestamp (in milliseconds) of when the configuration was connected.
                * @type number
                */
-              connectedAt: number
+              connectedAt: number;
               /**
                * @description Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.
                * @type number | undefined
                */
-              lastReceivedWebhookEvent?: number | undefined
+              lastReceivedWebhookEvent?: number | undefined;
             }
-          | undefined
+          | undefined;
         /**
          * @description Information for the Directory Sync configuration.
          * @type object | undefined
@@ -7190,29 +7220,29 @@ export type Team = {
                * @description The Identity Provider \"type\", for example Okta.
                * @type string
                */
-              type: string
+              type: string;
               /**
                * @description Current state of the connection.
                * @type string
                */
-              state: string
+              state: string;
               /**
                * @description Timestamp (in milliseconds) of when the configuration was connected.
                * @type number
                */
-              connectedAt: number
+              connectedAt: number;
               /**
                * @description Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.
                * @type number | undefined
                */
-              lastReceivedWebhookEvent?: number | undefined
+              lastReceivedWebhookEvent?: number | undefined;
             }
-          | undefined
+          | undefined;
         /**
          * @description When `true`, interactions with the Team **must** be done with an authentication token that has been authenticated with the Team\'s SAML Single Sign-On provider.
          * @type boolean
          */
-        enforced: boolean
+        enforced: boolean;
         /**
          * @description When \"Directory Sync\" is configured, this object contains a mapping of which Directory Group (by ID) should be assigned to which Vercel Team \"role\".
          * @type object | undefined
@@ -7224,28 +7254,28 @@ export type Team = {
                     /**
                      * @type string
                      */
-                    accessGroupId: string
+                    accessGroupId: string;
                   }
-                | RolesEnum
+                | RolesEnum;
             }
-          | undefined
+          | undefined;
       }
-    | undefined
+    | undefined;
   /**
    * @description Code that can be used to join this Team. Only visible to Team owners.
    * @type string | undefined
    */
-  inviteCode?: string | undefined
+  inviteCode?: string | undefined;
   /**
    * @description A short description of the Team.
    * @type string
    */
-  description: string | null
+  description: string | null;
   /**
    * @description The prefix that is prepended to automatic aliases.
    * @type string
    */
-  stagingPrefix: string
+  stagingPrefix: string;
   /**
    * @type object | undefined
    */
@@ -7255,37 +7285,37 @@ export type Team = {
          * @description The total amount of concurrent builds that can be used.
          * @type number | undefined
          */
-        concurrentBuilds?: number | undefined
+        concurrentBuilds?: number | undefined;
         /**
          * @description Whether every build for this team / user has elastic concurrency enabled automatically.
          * @type boolean | undefined
          */
-        elasticConcurrencyEnabled?: boolean | undefined
+        elasticConcurrencyEnabled?: boolean | undefined;
         /**
          * @description The maximum size in kilobytes of an Edge Config. Only specified if a custom limit is set.
          * @type number | undefined
          */
-        edgeConfigSize?: number | undefined
+        edgeConfigSize?: number | undefined;
         /**
          * @description The maximum number of edge configs an account can create.
          * @type number | undefined
          */
-        edgeConfigs?: number | undefined
+        edgeConfigs?: number | undefined;
         /**
          * @description The maximum number of kv databases an account can create.
          * @type number | undefined
          */
-        kvDatabases?: number | undefined
+        kvDatabases?: number | undefined;
         /**
          * @description The maximum number of blob stores an account can create.
          * @type number | undefined
          */
-        blobStores?: number | undefined
+        blobStores?: number | undefined;
         /**
          * @description The maximum number of postgres databases an account can create.
          * @type number | undefined
          */
-        postgresDatabases?: number | undefined
+        postgresDatabases?: number | undefined;
         /**
          * @type object | undefined
          */
@@ -7294,16 +7324,16 @@ export type Team = {
               /**
                * @type boolean | undefined
                */
-              enhancedBuilds?: boolean | undefined
+              enhancedBuilds?: boolean | undefined;
             }
-          | undefined
+          | undefined;
       }
-    | undefined
+    | undefined;
   /**
    * @description The hostname that is current set as preview deployment suffix.
    * @type string
    */
-  previewDeploymentSuffix?: (string | null) | undefined
+  previewDeploymentSuffix?: (string | null) | undefined;
   /**
    * @description Is remote caching enabled for this team
    * @type object | undefined
@@ -7313,9 +7343,9 @@ export type Team = {
         /**
          * @type boolean | undefined
          */
-        enabled?: boolean | undefined
+        enabled?: boolean | undefined;
       }
-    | undefined
+    | undefined;
   /**
    * @description Default deployment protection for this team
    * @type object | undefined
@@ -7330,9 +7360,9 @@ export type Team = {
               /**
                * @type string
                */
-              deploymentType: string
+              deploymentType: string;
             }
-          | undefined
+          | undefined;
         /**
          * @type object | undefined
          */
@@ -7341,36 +7371,36 @@ export type Team = {
               /**
                * @type string
                */
-              deploymentType: string
+              deploymentType: string;
             }
-          | undefined
+          | undefined;
       }
-    | undefined
+    | undefined;
   /**
    * @description Whether toolbar is enabled on preview deployments
    * @type string
    */
-  enablePreviewFeedback?: (TeamEnablePreviewFeedbackEnum | null) | undefined
+  enablePreviewFeedback?: (TeamEnablePreviewFeedbackEnum | null) | undefined;
   /**
    * @description Whether toolbar is enabled on production deployments
    * @type string
    */
-  enableProductionFeedback?: (TeamEnableProductionFeedbackEnum | null) | undefined
+  enableProductionFeedback?: (TeamEnableProductionFeedbackEnum | null) | undefined;
   /**
    * @description Sensitive environment variable policy for this team
    * @type string
    */
-  sensitiveEnvironmentVariablePolicy?: (TeamSensitiveEnvironmentVariablePolicyEnum | null) | undefined
+  sensitiveEnvironmentVariablePolicy?: (TeamSensitiveEnvironmentVariablePolicyEnum | null) | undefined;
   /**
    * @description Indicates if IP addresses should be accessible in observability (o11y) tooling
    * @type boolean
    */
-  hideIpAddresses?: (boolean | null) | undefined
+  hideIpAddresses?: (boolean | null) | undefined;
   /**
    * @description Indicates if IP addresses should be accessible in log drains
    * @type boolean
    */
-  hideIpAddressesInLogDrains?: (boolean | null) | undefined
+  hideIpAddressesInLogDrains?: (boolean | null) | undefined;
   /**
    * @type array | undefined
    */
@@ -7379,33 +7409,33 @@ export type Team = {
         /**
          * @type string
          */
-        bucket: string
+        bucket: string;
         /**
          * @type number | undefined
          */
-        supportUntil?: number | undefined
+        supportUntil?: number | undefined;
       }[]
-    | undefined
+    | undefined;
   /**
    * @description The Team\'s unique identifier.
    * @type string
    */
-  id: string
+  id: string;
   /**
    * @description The Team\'s slug, which is unique across the Vercel platform.
    * @type string
    */
-  slug: string
+  slug: string;
   /**
    * @description Name associated with the Team account, or `null` if none has been provided.
    * @type string
    */
-  name: string | null
+  name: string | null;
   /**
    * @description The ID of the file used as avatar for this Team.
    * @type string
    */
-  avatar: string | null
+  avatar: string | null;
   /**
    * @description The membership of the authenticated User in relation to the Team.
    * @type object
@@ -7414,7 +7444,7 @@ export type Team = {
     /**
      * @type string | undefined
      */
-    uid?: string | undefined
+    uid?: string | undefined;
     /**
      * @type array | undefined
      */
@@ -7423,45 +7453,45 @@ export type Team = {
           /**
            * @type string
            */
-          entitlement: string
+          entitlement: string;
         }[]
-      | undefined
+      | undefined;
     /**
      * @type string | undefined
      */
-    teamId?: string | undefined
+    teamId?: string | undefined;
     /**
      * @type boolean
      */
-    confirmed: boolean
+    confirmed: boolean;
     /**
      * @type number
      */
-    confirmedAt: number
+    confirmedAt: number;
     /**
      * @type number | undefined
      */
-    accessRequestedAt?: number | undefined
+    accessRequestedAt?: number | undefined;
     /**
      * @type string
      */
-    role: MembershipRoleEnum
+    role: MembershipRoleEnum;
     /**
      * @type array | undefined
      */
-    teamRoles?: MembershipTeamRolesEnum[] | undefined
+    teamRoles?: MembershipTeamRolesEnum[] | undefined;
     /**
      * @type array | undefined
      */
-    teamPermissions?: MembershipTeamPermissionsEnum[] | undefined
+    teamPermissions?: MembershipTeamPermissionsEnum[] | undefined;
     /**
      * @type number
      */
-    createdAt: number
+    createdAt: number;
     /**
      * @type number
      */
-    created: number
+    created: number;
     /**
      * @type object | undefined
      */
@@ -7470,60 +7500,60 @@ export type Team = {
           /**
            * @type string
            */
-          origin: JoinedFromOriginEnum3
+          origin: JoinedFromOriginEnum3;
           /**
            * @type string | undefined
            */
-          commitId?: string | undefined
+          commitId?: string | undefined;
           /**
            * @type string | undefined
            */
-          repoId?: string | undefined
+          repoId?: string | undefined;
           /**
            * @type string | undefined
            */
-          repoPath?: string | undefined
-          gitUserId?: (string | number) | undefined
+          repoPath?: string | undefined;
+          gitUserId?: (string | number) | undefined;
           /**
            * @type string | undefined
            */
-          gitUserLogin?: string | undefined
+          gitUserLogin?: string | undefined;
           /**
            * @type string | undefined
            */
-          ssoUserId?: string | undefined
+          ssoUserId?: string | undefined;
           /**
            * @type number | undefined
            */
-          ssoConnectedAt?: number | undefined
+          ssoConnectedAt?: number | undefined;
           /**
            * @type string | undefined
            */
-          idpUserId?: string | undefined
+          idpUserId?: string | undefined;
           /**
            * @type string | undefined
            */
-          dsyncUserId?: string | undefined
+          dsyncUserId?: string | undefined;
           /**
            * @type number | undefined
            */
-          dsyncConnectedAt?: number | undefined
+          dsyncConnectedAt?: number | undefined;
         }
-      | undefined
-  }
+      | undefined;
+  };
   /**
    * @description UNIX timestamp (in milliseconds) when the Team was created.
    * @type number
    */
-  createdAt: number
-}
+  createdAt: number;
+};
 
 export const teamLimitedLimitedByEnum = {
   mfa: 'mfa',
-  scope: 'scope',
-} as const
+  scope: 'scope'
+} as const;
 
-export type TeamLimitedLimitedByEnum = (typeof teamLimitedLimitedByEnum)[keyof typeof teamLimitedLimitedByEnum]
+export type TeamLimitedLimitedByEnum = (typeof teamLimitedLimitedByEnum)[keyof typeof teamLimitedLimitedByEnum];
 
 export const membershipRoleEnum2 = {
   BILLING: 'BILLING',
@@ -7532,10 +7562,10 @@ export const membershipRoleEnum2 = {
   MEMBER: 'MEMBER',
   OWNER: 'OWNER',
   SECURITY: 'SECURITY',
-  VIEWER: 'VIEWER',
-} as const
+  VIEWER: 'VIEWER'
+} as const;
 
-export type MembershipRoleEnum2 = (typeof membershipRoleEnum2)[keyof typeof membershipRoleEnum2]
+export type MembershipRoleEnum2 = (typeof membershipRoleEnum2)[keyof typeof membershipRoleEnum2];
 
 export const membershipTeamRolesEnum2 = {
   BILLING: 'BILLING',
@@ -7544,20 +7574,21 @@ export const membershipTeamRolesEnum2 = {
   MEMBER: 'MEMBER',
   OWNER: 'OWNER',
   SECURITY: 'SECURITY',
-  VIEWER: 'VIEWER',
-} as const
+  VIEWER: 'VIEWER'
+} as const;
 
-export type MembershipTeamRolesEnum2 = (typeof membershipTeamRolesEnum2)[keyof typeof membershipTeamRolesEnum2]
+export type MembershipTeamRolesEnum2 = (typeof membershipTeamRolesEnum2)[keyof typeof membershipTeamRolesEnum2];
 
 export const membershipTeamPermissionsEnum2 = {
   CreateProject: 'CreateProject',
   EnvVariableManager: 'EnvVariableManager',
   EnvironmentManager: 'EnvironmentManager',
   FullProductionDeployment: 'FullProductionDeployment',
-  UsageViewer: 'UsageViewer',
-} as const
+  UsageViewer: 'UsageViewer'
+} as const;
 
-export type MembershipTeamPermissionsEnum2 = (typeof membershipTeamPermissionsEnum2)[keyof typeof membershipTeamPermissionsEnum2]
+export type MembershipTeamPermissionsEnum2 =
+  (typeof membershipTeamPermissionsEnum2)[keyof typeof membershipTeamPermissionsEnum2];
 
 export const joinedFromOriginEnum4 = {
   bitbucket: 'bitbucket',
@@ -7570,10 +7601,10 @@ export const joinedFromOriginEnum4 = {
   mail: 'mail',
   'organization-teams': 'organization-teams',
   saml: 'saml',
-  teams: 'teams',
-} as const
+  teams: 'teams'
+} as const;
 
-export type JoinedFromOriginEnum4 = (typeof joinedFromOriginEnum4)[keyof typeof joinedFromOriginEnum4]
+export type JoinedFromOriginEnum4 = (typeof joinedFromOriginEnum4)[keyof typeof joinedFromOriginEnum4];
 
 /**
  * @description A limited form of data representing a Team, due to the authentication token missing privileges to read the full Team data.
@@ -7583,11 +7614,11 @@ export type TeamLimited = {
    * @description Property indicating that this Team data contains only limited information, due to the authentication token missing privileges to read the full Team data or due to team having MFA enforced and the user not having MFA enabled. Re-login with the Team\'s configured SAML Single Sign-On provider in order to upgrade the authentication token with the necessary privileges.
    * @type boolean
    */
-  limited: boolean
+  limited: boolean;
   /**
    * @type array
    */
-  limitedBy: TeamLimitedLimitedByEnum[]
+  limitedBy: TeamLimitedLimitedByEnum[];
   /**
    * @description When \"Single Sign-On (SAML)\" is configured, this object contains information that allows the client-side to identify whether or not this Team has SAML enforced.
    * @type object | undefined
@@ -7604,29 +7635,29 @@ export type TeamLimited = {
                * @description The Identity Provider \"type\", for example Okta.
                * @type string
                */
-              type: string
+              type: string;
               /**
                * @description Current status of the connection.
                * @type string
                */
-              status: string
+              status: string;
               /**
                * @description Current state of the connection.
                * @type string
                */
-              state: string
+              state: string;
               /**
                * @description Timestamp (in milliseconds) of when the configuration was connected.
                * @type number
                */
-              connectedAt: number
+              connectedAt: number;
               /**
                * @description Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.
                * @type number | undefined
                */
-              lastReceivedWebhookEvent?: number | undefined
+              lastReceivedWebhookEvent?: number | undefined;
             }
-          | undefined
+          | undefined;
         /**
          * @description Information for the Directory Sync configuration.
          * @type object | undefined
@@ -7637,51 +7668,51 @@ export type TeamLimited = {
                * @description The Identity Provider \"type\", for example Okta.
                * @type string
                */
-              type: string
+              type: string;
               /**
                * @description Current state of the connection.
                * @type string
                */
-              state: string
+              state: string;
               /**
                * @description Timestamp (in milliseconds) of when the configuration was connected.
                * @type number
                */
-              connectedAt: number
+              connectedAt: number;
               /**
                * @description Timestamp (in milliseconds) of when the last webhook event was received from WorkOS.
                * @type number | undefined
                */
-              lastReceivedWebhookEvent?: number | undefined
+              lastReceivedWebhookEvent?: number | undefined;
             }
-          | undefined
+          | undefined;
         /**
          * @description When `true`, interactions with the Team **must** be done with an authentication token that has been authenticated with the Team\'s SAML Single Sign-On provider.
          * @type boolean
          */
-        enforced: boolean
+        enforced: boolean;
       }
-    | undefined
+    | undefined;
   /**
    * @description The Team\'s unique identifier.
    * @type string
    */
-  id: string
+  id: string;
   /**
    * @description The Team\'s slug, which is unique across the Vercel platform.
    * @type string
    */
-  slug: string
+  slug: string;
   /**
    * @description Name associated with the Team account, or `null` if none has been provided.
    * @type string
    */
-  name: string | null
+  name: string | null;
   /**
    * @description The ID of the file used as avatar for this Team.
    * @type string
    */
-  avatar: string | null
+  avatar: string | null;
   /**
    * @description The membership of the authenticated User in relation to the Team.
    * @type object
@@ -7690,7 +7721,7 @@ export type TeamLimited = {
     /**
      * @type string | undefined
      */
-    uid?: string | undefined
+    uid?: string | undefined;
     /**
      * @type array | undefined
      */
@@ -7699,45 +7730,45 @@ export type TeamLimited = {
           /**
            * @type string
            */
-          entitlement: string
+          entitlement: string;
         }[]
-      | undefined
+      | undefined;
     /**
      * @type string | undefined
      */
-    teamId?: string | undefined
+    teamId?: string | undefined;
     /**
      * @type boolean
      */
-    confirmed: boolean
+    confirmed: boolean;
     /**
      * @type number
      */
-    confirmedAt: number
+    confirmedAt: number;
     /**
      * @type number | undefined
      */
-    accessRequestedAt?: number | undefined
+    accessRequestedAt?: number | undefined;
     /**
      * @type string
      */
-    role: MembershipRoleEnum2
+    role: MembershipRoleEnum2;
     /**
      * @type array | undefined
      */
-    teamRoles?: MembershipTeamRolesEnum2[] | undefined
+    teamRoles?: MembershipTeamRolesEnum2[] | undefined;
     /**
      * @type array | undefined
      */
-    teamPermissions?: MembershipTeamPermissionsEnum2[] | undefined
+    teamPermissions?: MembershipTeamPermissionsEnum2[] | undefined;
     /**
      * @type number
      */
-    createdAt: number
+    createdAt: number;
     /**
      * @type number
      */
-    created: number
+    created: number;
     /**
      * @type object | undefined
      */
@@ -7746,67 +7777,67 @@ export type TeamLimited = {
           /**
            * @type string
            */
-          origin: JoinedFromOriginEnum4
+          origin: JoinedFromOriginEnum4;
           /**
            * @type string | undefined
            */
-          commitId?: string | undefined
+          commitId?: string | undefined;
           /**
            * @type string | undefined
            */
-          repoId?: string | undefined
+          repoId?: string | undefined;
           /**
            * @type string | undefined
            */
-          repoPath?: string | undefined
-          gitUserId?: (string | number) | undefined
+          repoPath?: string | undefined;
+          gitUserId?: (string | number) | undefined;
           /**
            * @type string | undefined
            */
-          gitUserLogin?: string | undefined
+          gitUserLogin?: string | undefined;
           /**
            * @type string | undefined
            */
-          ssoUserId?: string | undefined
+          ssoUserId?: string | undefined;
           /**
            * @type number | undefined
            */
-          ssoConnectedAt?: number | undefined
+          ssoConnectedAt?: number | undefined;
           /**
            * @type string | undefined
            */
-          idpUserId?: string | undefined
+          idpUserId?: string | undefined;
           /**
            * @type string | undefined
            */
-          dsyncUserId?: string | undefined
+          dsyncUserId?: string | undefined;
           /**
            * @type number | undefined
            */
-          dsyncConnectedAt?: number | undefined
+          dsyncConnectedAt?: number | undefined;
         }
-      | undefined
-  }
+      | undefined;
+  };
   /**
    * @description UNIX timestamp (in milliseconds) when the Team was created.
    * @type number
    */
-  createdAt: number
-}
+  createdAt: number;
+};
 
 export const scopesTypeEnum = {
-  user: 'user',
-} as const
+  user: 'user'
+} as const;
 
-export type ScopesTypeEnum = (typeof scopesTypeEnum)[keyof typeof scopesTypeEnum]
+export type ScopesTypeEnum = (typeof scopesTypeEnum)[keyof typeof scopesTypeEnum];
 
 export const sudoOriginEnum = {
   totp: 'totp',
   webauthn: 'webauthn',
-  'recovery-code': 'recovery-code',
-} as const
+  'recovery-code': 'recovery-code'
+} as const;
 
-export type SudoOriginEnum = (typeof sudoOriginEnum)[keyof typeof sudoOriginEnum]
+export type SudoOriginEnum = (typeof sudoOriginEnum)[keyof typeof sudoOriginEnum];
 
 export const scopesOriginEnum = {
   saml: 'saml',
@@ -7819,16 +7850,16 @@ export const scopesOriginEnum = {
   otp: 'otp',
   sms: 'sms',
   invite: 'invite',
-  google: 'google',
-} as const
+  google: 'google'
+} as const;
 
-export type ScopesOriginEnum = (typeof scopesOriginEnum)[keyof typeof scopesOriginEnum]
+export type ScopesOriginEnum = (typeof scopesOriginEnum)[keyof typeof scopesOriginEnum];
 
 export const scopesTypeEnum2 = {
-  team: 'team',
-} as const
+  team: 'team'
+} as const;
 
-export type ScopesTypeEnum2 = (typeof scopesTypeEnum2)[keyof typeof scopesTypeEnum2]
+export type ScopesTypeEnum2 = (typeof scopesTypeEnum2)[keyof typeof scopesTypeEnum2];
 
 export const scopesOriginEnum2 = {
   saml: 'saml',
@@ -7841,10 +7872,10 @@ export const scopesOriginEnum2 = {
   otp: 'otp',
   sms: 'sms',
   invite: 'invite',
-  google: 'google',
-} as const
+  google: 'google'
+} as const;
 
-export type ScopesOriginEnum2 = (typeof scopesOriginEnum2)[keyof typeof scopesOriginEnum2]
+export type ScopesOriginEnum2 = (typeof scopesOriginEnum2)[keyof typeof scopesOriginEnum2];
 
 /**
  * @description Authentication token metadata.
@@ -7854,22 +7885,22 @@ export type AuthToken = {
    * @description The unique identifier of the token.
    * @type string
    */
-  id: string
+  id: string;
   /**
    * @description The human-readable name of the token.
    * @type string
    */
-  name: string
+  name: string;
   /**
    * @description The type of the token.
    * @type string
    */
-  type: string
+  type: string;
   /**
    * @description The origin of how the token was created.
    * @type string | undefined
    */
-  origin?: string | undefined
+  origin?: string | undefined;
   /**
    * @description The access scopes granted to the token.
    * @type array | undefined
@@ -7880,7 +7911,7 @@ export type AuthToken = {
             /**
              * @type string
              */
-            type: ScopesTypeEnum
+            type: ScopesTypeEnum;
             /**
              * @type object | undefined
              */
@@ -7890,66 +7921,66 @@ export type AuthToken = {
                    * @description Possible multi-factor origins
                    * @type string
                    */
-                  origin: SudoOriginEnum
+                  origin: SudoOriginEnum;
                   /**
                    * @type number
                    */
-                  expiresAt: number
+                  expiresAt: number;
                 }
-              | undefined
+              | undefined;
             /**
              * @type string
              */
-            origin: ScopesOriginEnum
+            origin: ScopesOriginEnum;
             /**
              * @type number
              */
-            createdAt: number
+            createdAt: number;
             /**
              * @type number | undefined
              */
-            expiresAt?: number | undefined
+            expiresAt?: number | undefined;
           }
         | {
             /**
              * @type string
              */
-            type: ScopesTypeEnum2
+            type: ScopesTypeEnum2;
             /**
              * @type string
              */
-            teamId: string
+            teamId: string;
             /**
              * @type string
              */
-            origin: ScopesOriginEnum2
+            origin: ScopesOriginEnum2;
             /**
              * @type number
              */
-            createdAt: number
+            createdAt: number;
             /**
              * @type number | undefined
              */
-            expiresAt?: number | undefined
+            expiresAt?: number | undefined;
           }
       )[]
-    | undefined
+    | undefined;
   /**
    * @description Timestamp (in milliseconds) of when the token expires.
    * @type number | undefined
    */
-  expiresAt?: number | undefined
+  expiresAt?: number | undefined;
   /**
    * @description Timestamp (in milliseconds) of when the token was most recently used.
    * @type number
    */
-  activeAt: number
+  activeAt: number;
   /**
    * @description Timestamp (in milliseconds) of when the token was created.
    * @type number
    */
-  createdAt: number
-}
+  createdAt: number;
+};
 
 export const softBlockReasonEnum2 = {
   BLOCKED_FOR_PLATFORM_ABUSE: 'BLOCKED_FOR_PLATFORM_ABUSE',
@@ -7957,10 +7988,10 @@ export const softBlockReasonEnum2 = {
   FAIR_USE_LIMITS_EXCEEDED: 'FAIR_USE_LIMITS_EXCEEDED',
   SUBSCRIPTION_CANCELED: 'SUBSCRIPTION_CANCELED',
   SUBSCRIPTION_EXPIRED: 'SUBSCRIPTION_EXPIRED',
-  UNPAID_INVOICE: 'UNPAID_INVOICE',
-} as const
+  UNPAID_INVOICE: 'UNPAID_INVOICE'
+} as const;
 
-export type SoftBlockReasonEnum2 = (typeof softBlockReasonEnum2)[keyof typeof softBlockReasonEnum2]
+export type SoftBlockReasonEnum2 = (typeof softBlockReasonEnum2)[keyof typeof softBlockReasonEnum2];
 
 export const softBlockBlockedDueToOverageTypeEnum2 = {
   analyticsUsage: 'analyticsUsage',
@@ -8001,49 +8032,54 @@ export const softBlockBlockedDueToOverageTypeEnum2 = {
   wafOwaspExcessBytes: 'wafOwaspExcessBytes',
   wafOwaspRequests: 'wafOwaspRequests',
   wafRateLimitRequest: 'wafRateLimitRequest',
-  webAnalyticsEvent: 'webAnalyticsEvent',
-} as const
+  webAnalyticsEvent: 'webAnalyticsEvent'
+} as const;
 
-export type SoftBlockBlockedDueToOverageTypeEnum2 = (typeof softBlockBlockedDueToOverageTypeEnum2)[keyof typeof softBlockBlockedDueToOverageTypeEnum2]
+export type SoftBlockBlockedDueToOverageTypeEnum2 =
+  (typeof softBlockBlockedDueToOverageTypeEnum2)[keyof typeof softBlockBlockedDueToOverageTypeEnum2];
 
 export const buildMachinePurchaseTypeEnum2 = {
   enhanced: 'enhanced',
-  turbo: 'turbo',
-} as const
+  turbo: 'turbo'
+} as const;
 
-export type BuildMachinePurchaseTypeEnum2 = (typeof buildMachinePurchaseTypeEnum2)[keyof typeof buildMachinePurchaseTypeEnum2]
+export type BuildMachinePurchaseTypeEnum2 =
+  (typeof buildMachinePurchaseTypeEnum2)[keyof typeof buildMachinePurchaseTypeEnum2];
 
 export const activeDashboardViewsViewPreferenceEnum2 = {
   cards: 'cards',
-  list: 'list',
-} as const
+  list: 'list'
+} as const;
 
-export type ActiveDashboardViewsViewPreferenceEnum2 = (typeof activeDashboardViewsViewPreferenceEnum2)[keyof typeof activeDashboardViewsViewPreferenceEnum2]
+export type ActiveDashboardViewsViewPreferenceEnum2 =
+  (typeof activeDashboardViewsViewPreferenceEnum2)[keyof typeof activeDashboardViewsViewPreferenceEnum2];
 
 export const activeDashboardViewsFavoritesViewPreferenceEnum2 = {
   closed: 'closed',
-  open: 'open',
-} as const
+  open: 'open'
+} as const;
 
 export type ActiveDashboardViewsFavoritesViewPreferenceEnum2 =
-  (typeof activeDashboardViewsFavoritesViewPreferenceEnum2)[keyof typeof activeDashboardViewsFavoritesViewPreferenceEnum2]
+  (typeof activeDashboardViewsFavoritesViewPreferenceEnum2)[keyof typeof activeDashboardViewsFavoritesViewPreferenceEnum2];
 
 export const activeDashboardViewsRecentsViewPreferenceEnum2 = {
   closed: 'closed',
-  open: 'open',
-} as const
+  open: 'open'
+} as const;
 
 export type ActiveDashboardViewsRecentsViewPreferenceEnum2 =
-  (typeof activeDashboardViewsRecentsViewPreferenceEnum2)[keyof typeof activeDashboardViewsRecentsViewPreferenceEnum2]
+  (typeof activeDashboardViewsRecentsViewPreferenceEnum2)[keyof typeof activeDashboardViewsRecentsViewPreferenceEnum2];
 
 export const authUserImportFlowGitProviderEnum = {
   bitbucket: 'bitbucket',
   github: 'github',
   'github-custom-host': 'github-custom-host',
-  gitlab: 'gitlab',
-} as const
+  'github-limited': 'github-limited',
+  gitlab: 'gitlab'
+} as const;
 
-export type AuthUserImportFlowGitProviderEnum = (typeof authUserImportFlowGitProviderEnum)[keyof typeof authUserImportFlowGitProviderEnum]
+export type AuthUserImportFlowGitProviderEnum =
+  (typeof authUserImportFlowGitProviderEnum)[keyof typeof authUserImportFlowGitProviderEnum];
 
 /**
  * @description Data for the currently authenticated User.
@@ -8053,7 +8089,7 @@ export type AuthUser = {
    * @description UNIX timestamp (in milliseconds) when the User account was created.
    * @type number
    */
-  createdAt: number
+  createdAt: number;
   /**
    * @description When the User account has been \"soft blocked\", this property will contain the date when the restriction was enacted, and the identifier for why.
    * @type object
@@ -8062,21 +8098,21 @@ export type AuthUser = {
     /**
      * @type number
      */
-    blockedAt: number
+    blockedAt: number;
     /**
      * @type string
      */
-    reason: SoftBlockReasonEnum2
+    reason: SoftBlockReasonEnum2;
     /**
      * @type string | undefined
      */
-    blockedDueToOverageType?: SoftBlockBlockedDueToOverageTypeEnum2 | undefined
-  } | null
+    blockedDueToOverageType?: SoftBlockBlockedDueToOverageTypeEnum2 | undefined;
+  } | null;
   /**
    * @description An object containing billing infomation associated with the User account.
    * @type object
    */
-  billing: object | null
+  billing: object | null;
   /**
    * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
    * @type object
@@ -8086,17 +8122,17 @@ export type AuthUser = {
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type string | undefined
      */
-    nodeType?: string | undefined
+    nodeType?: string | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type number | undefined
      */
-    concurrentBuilds?: number | undefined
+    concurrentBuilds?: number | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type boolean | undefined
      */
-    elasticConcurrencyEnabled?: boolean | undefined
+    elasticConcurrencyEnabled?: boolean | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type object | undefined
@@ -8107,109 +8143,109 @@ export type AuthUser = {
            * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
            * @type boolean | undefined
            */
-          enhancedBuilds?: boolean | undefined
+          enhancedBuilds?: boolean | undefined;
         }
-      | undefined
+      | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type string | undefined
      */
-    awsAccountType?: string | undefined
+    awsAccountType?: string | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type array | undefined
      */
-    awsAccountIds?: string[] | undefined
+    awsAccountIds?: string[] | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type string | undefined
      */
-    cfZoneName?: string | undefined
+    cfZoneName?: string | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type string | undefined
      */
-    imageOptimizationType?: string | undefined
+    imageOptimizationType?: string | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type number | undefined
      */
-    edgeConfigs?: number | undefined
+    edgeConfigs?: number | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type number | undefined
      */
-    edgeConfigSize?: number | undefined
+    edgeConfigSize?: number | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type number | undefined
      */
-    edgeFunctionMaxSizeBytes?: number | undefined
+    edgeFunctionMaxSizeBytes?: number | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type number | undefined
      */
-    edgeFunctionExecutionTimeoutMs?: number | undefined
+    edgeFunctionExecutionTimeoutMs?: number | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type number | undefined
      */
-    serverlessFunctionMaxMemorySize?: number | undefined
+    serverlessFunctionMaxMemorySize?: number | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type number | undefined
      */
-    kvDatabases?: number | undefined
+    kvDatabases?: number | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type number | undefined
      */
-    postgresDatabases?: number | undefined
+    postgresDatabases?: number | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type number | undefined
      */
-    blobStores?: number | undefined
+    blobStores?: number | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type number | undefined
      */
-    integrationStores?: number | undefined
+    integrationStores?: number | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type number | undefined
      */
-    cronJobs?: number | undefined
+    cronJobs?: number | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type number | undefined
      */
-    cronJobsPerProject?: number | undefined
+    cronJobsPerProject?: number | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type number | undefined
      */
-    microfrontendGroupsPerTeam?: number | undefined
+    microfrontendGroupsPerTeam?: number | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type number | undefined
      */
-    microfrontendProjectsPerGroup?: number | undefined
+    microfrontendProjectsPerGroup?: number | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type number | undefined
      */
-    flagsExplorerOverridesThreshold?: number | undefined
+    flagsExplorerOverridesThreshold?: number | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type boolean | undefined
      */
-    flagsExplorerUnlimitedOverrides?: boolean | undefined
+    flagsExplorerUnlimitedOverrides?: boolean | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type number | undefined
      */
-    customEnvironmentsPerProject?: number | undefined
+    customEnvironmentsPerProject?: number | undefined;
     /**
      * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
      * @type object | undefined
@@ -8220,30 +8256,30 @@ export type AuthUser = {
            * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
            * @type string | undefined
            */
-          purchaseType?: BuildMachinePurchaseTypeEnum2 | undefined
+          purchaseType?: BuildMachinePurchaseTypeEnum2 | undefined;
           /**
            * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
            * @type boolean | undefined
            */
-          isDefaultBuildMachine?: boolean | undefined
+          isDefaultBuildMachine?: boolean | undefined;
           /**
            * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
            * @type number | undefined
            */
-          cores?: number | undefined
+          cores?: number | undefined;
           /**
            * @description An object containing infomation related to the amount of platform resources may be allocated to the User account.
            * @type number | undefined
            */
-          memory?: number | undefined
+          memory?: number | undefined;
         }
-      | undefined
-  }
+      | undefined;
+  };
   /**
    * @description Prefix that will be used in the URL of \"Preview\" deployments created by the User account.
    * @type string
    */
-  stagingPrefix: string
+  stagingPrefix: string;
   /**
    * @description set of dashboard view preferences (cards or list) per scopeId
    * @type array | undefined
@@ -8253,27 +8289,27 @@ export type AuthUser = {
         /**
          * @type string
          */
-        scopeId: string
+        scopeId: string;
         /**
          * @type string
          */
-        viewPreference?: (ActiveDashboardViewsViewPreferenceEnum2 | null) | undefined
+        viewPreference?: (ActiveDashboardViewsViewPreferenceEnum2 | null) | undefined;
         /**
          * @type string
          */
-        favoritesViewPreference?: (ActiveDashboardViewsFavoritesViewPreferenceEnum2 | null) | undefined
+        favoritesViewPreference?: (ActiveDashboardViewsFavoritesViewPreferenceEnum2 | null) | undefined;
         /**
          * @type string
          */
-        recentsViewPreference?: (ActiveDashboardViewsRecentsViewPreferenceEnum2 | null) | undefined
+        recentsViewPreference?: (ActiveDashboardViewsRecentsViewPreferenceEnum2 | null) | undefined;
       }[]
-    | undefined
-  importFlowGitNamespace?: ((string | number) | null) | undefined
-  importFlowGitNamespaceId?: ((string | number) | null) | undefined
+    | undefined;
+  importFlowGitNamespace?: ((string | number) | null) | undefined;
+  importFlowGitNamespaceId?: ((string | number) | null) | undefined;
   /**
    * @type string
    */
-  importFlowGitProvider?: (AuthUserImportFlowGitProviderEnum | null) | undefined
+  importFlowGitProvider?: (AuthUserImportFlowGitProviderEnum | null) | undefined;
   /**
    * @type array | undefined
    */
@@ -8282,10 +8318,10 @@ export type AuthUser = {
         /**
          * @type string
          */
-        scopeId: string
-        gitNamespaceId: (string | number) | null
+        scopeId: string;
+        gitNamespaceId: (string | number) | null;
       }[]
-    | undefined
+    | undefined;
   /**
    * @description A record of when, under a certain scopeId, a toast was dismissed
    * @type array | undefined
@@ -8295,7 +8331,7 @@ export type AuthUser = {
         /**
          * @type string
          */
-        name: string
+        name: string;
         /**
          * @type array
          */
@@ -8303,14 +8339,14 @@ export type AuthUser = {
           /**
            * @type string
            */
-          scopeId: string
+          scopeId: string;
           /**
            * @type number
            */
-          createdAt: number
-        }[]
+          createdAt: number;
+        }[];
       }[]
-    | undefined
+    | undefined;
   /**
    * @description A list of projects and spaces across teams that a user has marked as a favorite.
    * @type array | undefined
@@ -8320,18 +8356,18 @@ export type AuthUser = {
         /**
          * @type string
          */
-        teamId: string
+        teamId: string;
         /**
          * @type string
          */
-        projectId: string
+        projectId: string;
       }[]
-    | undefined
+    | undefined;
   /**
    * @description Whether the user has a trial available for a paid plan subscription.
    * @type boolean
    */
-  hasTrialAvailable: boolean
+  hasTrialAvailable: boolean;
   /**
    * @description remote caching settings
    * @type object | undefined
@@ -8341,9 +8377,9 @@ export type AuthUser = {
         /**
          * @type boolean | undefined
          */
-        enabled?: boolean | undefined
+        enabled?: boolean | undefined;
       }
-    | undefined
+    | undefined;
   /**
    * @description data cache settings
    * @type object | undefined
@@ -8353,9 +8389,9 @@ export type AuthUser = {
         /**
          * @type boolean | undefined
          */
-        excessBillingEnabled?: boolean | undefined
+        excessBillingEnabled?: boolean | undefined;
       }
-    | undefined
+    | undefined;
   /**
    * @description Feature blocks for the user
    * @type object | undefined
@@ -8370,50 +8406,50 @@ export type AuthUser = {
               /**
                * @type number | undefined
                */
-              blockedFrom?: number | undefined
+              blockedFrom?: number | undefined;
               /**
                * @type number | undefined
                */
-              blockedUntil?: number | undefined
+              blockedUntil?: number | undefined;
               /**
                * @type boolean
                */
-              isCurrentlyBlocked: boolean
+              isCurrentlyBlocked: boolean;
             }
-          | undefined
+          | undefined;
       }
-    | undefined
+    | undefined;
   /**
    * @description The User\'s unique identifier.
    * @type string
    */
-  id: string
+  id: string;
   /**
    * @description Email address associated with the User account.
    * @type string
    */
-  email: string
+  email: string;
   /**
    * @description Name associated with the User account, or `null` if none has been provided.
    * @type string
    */
-  name: string | null
+  name: string | null;
   /**
    * @description Unique username associated with the User account.
    * @type string
    */
-  username: string
+  username: string;
   /**
    * @description SHA1 hash of the avatar for the User account. Can be used in conjuction with the ... endpoint to retrieve the avatar image.
    * @type string
    */
-  avatar: string | null
+  avatar: string | null;
   /**
    * @description The user\'s default team.
    * @type string
    */
-  defaultTeamId: string | null
-}
+  defaultTeamId: string | null;
+};
 
 /**
  * @description A limited form of data for the currently authenticated User, due to the authentication token missing privileges to read the full User data.
@@ -8423,38 +8459,38 @@ export type AuthUserLimited = {
    * @description Property indicating that this User data contains only limited information, due to the authentication token missing privileges to read the full User data. Re-login with email, GitHub, GitLab or Bitbucket in order to upgrade the authentication token with the necessary privileges.
    * @type boolean
    */
-  limited: boolean
+  limited: boolean;
   /**
    * @description The User\'s unique identifier.
    * @type string
    */
-  id: string
+  id: string;
   /**
    * @description Email address associated with the User account.
    * @type string
    */
-  email: string
+  email: string;
   /**
    * @description Name associated with the User account, or `null` if none has been provided.
    * @type string
    */
-  name: string | null
+  name: string | null;
   /**
    * @description Unique username associated with the User account.
    * @type string
    */
-  username: string
+  username: string;
   /**
    * @description SHA1 hash of the avatar for the User account. Can be used in conjuction with the ... endpoint to retrieve the avatar image.
    * @type string
    */
-  avatar: string | null
+  avatar: string | null;
   /**
    * @description The user\'s default team.
    * @type string
    */
-  defaultTeamId: string | null
-}
+  defaultTeamId: string | null;
+};
 
 export const fileTreeTypeEnum = {
   directory: 'directory',
@@ -8462,10 +8498,10 @@ export const fileTreeTypeEnum = {
   invalid: 'invalid',
   lambda: 'lambda',
   middleware: 'middleware',
-  symlink: 'symlink',
-} as const
+  symlink: 'symlink'
+} as const;
 
-export type FileTreeTypeEnum = (typeof fileTreeTypeEnum)[keyof typeof fileTreeTypeEnum]
+export type FileTreeTypeEnum = (typeof fileTreeTypeEnum)[keyof typeof fileTreeTypeEnum];
 
 /**
  * @description A deployment file tree entry
@@ -8475,175 +8511,175 @@ export type FileTree = {
    * @description The name of the file tree entry
    * @type string
    */
-  name: string
+  name: string;
   /**
    * @description String indicating the type of file tree entry.
    * @type string
    */
-  type: FileTreeTypeEnum
+  type: FileTreeTypeEnum;
   /**
    * @description The unique identifier of the file (only valid for the `file` type)
    * @type string | undefined
    */
-  uid?: string | undefined
+  uid?: string | undefined;
   /**
    * @description The list of children files of the directory (only valid for the `directory` type)
    * @type array | undefined
    */
-  children?: unknown[] | undefined
+  children?: unknown[] | undefined;
   /**
    * @description The content-type of the file (only valid for the `file` type)
    * @type string | undefined
    */
-  contentType?: string | undefined
+  contentType?: string | undefined;
   /**
    * @description The file \"mode\" indicating file type and permissions.
    * @type number
    */
-  mode: number
+  mode: number;
   /**
    * @description Not currently used. See `file-list-to-tree.ts`.
    * @type string | undefined
    */
-  symlink?: string | undefined
-}
+  symlink?: string | undefined;
+};
 
 export type ReadAccessGroupPathParams = {
   /**
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type ReadAccessGroupQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type ReadAccessGroup200 = unknown
+export type ReadAccessGroup200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type ReadAccessGroup400 = unknown
+export type ReadAccessGroup400 = unknown;
 
-export type ReadAccessGroup401 = unknown
+export type ReadAccessGroup401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type ReadAccessGroup403 = unknown
+export type ReadAccessGroup403 = unknown;
 
-export type ReadAccessGroupQueryResponse = ReadAccessGroup200
+export type ReadAccessGroupQueryResponse = ReadAccessGroup200;
 
 export type ReadAccessGroupQuery = {
-  Response: ReadAccessGroup200
-  PathParams: ReadAccessGroupPathParams
-  QueryParams: ReadAccessGroupQueryParams
-  Errors: ReadAccessGroup400 | ReadAccessGroup401 | ReadAccessGroup403
-}
+  Response: ReadAccessGroup200;
+  PathParams: ReadAccessGroupPathParams;
+  QueryParams: ReadAccessGroupQueryParams;
+  Errors: ReadAccessGroup400 | ReadAccessGroup401 | ReadAccessGroup403;
+};
 
 export type UpdateAccessGroupPathParams = {
   /**
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type UpdateAccessGroupQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type UpdateAccessGroup200 = unknown
+export type UpdateAccessGroup200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type UpdateAccessGroup400 = unknown
+export type UpdateAccessGroup400 = unknown;
 
-export type UpdateAccessGroup401 = unknown
+export type UpdateAccessGroup401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateAccessGroup403 = unknown
+export type UpdateAccessGroup403 = unknown;
 
-export type UpdateAccessGroupMutationResponse = UpdateAccessGroup200
+export type UpdateAccessGroupMutationResponse = UpdateAccessGroup200;
 
 export type UpdateAccessGroupMutation = {
-  Response: UpdateAccessGroup200
-  PathParams: UpdateAccessGroupPathParams
-  QueryParams: UpdateAccessGroupQueryParams
-  Errors: UpdateAccessGroup400 | UpdateAccessGroup401 | UpdateAccessGroup403
-}
+  Response: UpdateAccessGroup200;
+  PathParams: UpdateAccessGroupPathParams;
+  QueryParams: UpdateAccessGroupQueryParams;
+  Errors: UpdateAccessGroup400 | UpdateAccessGroup401 | UpdateAccessGroup403;
+};
 
 export type DeleteAccessGroupPathParams = {
   /**
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type DeleteAccessGroupQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type DeleteAccessGroup200 = unknown
+export type DeleteAccessGroup200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type DeleteAccessGroup400 = unknown
+export type DeleteAccessGroup400 = unknown;
 
-export type DeleteAccessGroup401 = unknown
+export type DeleteAccessGroup401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type DeleteAccessGroup403 = unknown
+export type DeleteAccessGroup403 = unknown;
 
-export type DeleteAccessGroupMutationResponse = DeleteAccessGroup200
+export type DeleteAccessGroupMutationResponse = DeleteAccessGroup200;
 
 export type DeleteAccessGroupMutation = {
-  Response: DeleteAccessGroup200
-  PathParams: DeleteAccessGroupPathParams
-  QueryParams: DeleteAccessGroupQueryParams
-  Errors: DeleteAccessGroup400 | DeleteAccessGroup401 | DeleteAccessGroup403
-}
+  Response: DeleteAccessGroup200;
+  PathParams: DeleteAccessGroupPathParams;
+  QueryParams: DeleteAccessGroupQueryParams;
+  Errors: DeleteAccessGroup400 | DeleteAccessGroup401 | DeleteAccessGroup403;
+};
 
 export type ListAccessGroupMembersPathParams = {
   /**
    * @description The ID or name of the Access Group.
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type ListAccessGroupMembersQueryParams = {
   /**
@@ -8652,165 +8688,165 @@ export type ListAccessGroupMembersQueryParams = {
    * @maxLength 100
    * @type integer | undefined
    */
-  limit?: number | undefined
+  limit?: number | undefined;
   /**
    * @description Continuation cursor to retrieve the next page of results.
    * @type string | undefined
    */
-  next?: string | undefined
+  next?: string | undefined;
   /**
    * @description Search project members by their name, username, and email.
    * @type string | undefined
    */
-  search?: string | undefined
+  search?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type ListAccessGroupMembers200 = unknown
+export type ListAccessGroupMembers200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type ListAccessGroupMembers400 = unknown
+export type ListAccessGroupMembers400 = unknown;
 
-export type ListAccessGroupMembers401 = unknown
+export type ListAccessGroupMembers401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type ListAccessGroupMembers403 = unknown
+export type ListAccessGroupMembers403 = unknown;
 
-export type ListAccessGroupMembersQueryResponse = ListAccessGroupMembers200
+export type ListAccessGroupMembersQueryResponse = ListAccessGroupMembers200;
 
 export type ListAccessGroupMembersQuery = {
-  Response: ListAccessGroupMembers200
-  PathParams: ListAccessGroupMembersPathParams
-  QueryParams: ListAccessGroupMembersQueryParams
-  Errors: ListAccessGroupMembers400 | ListAccessGroupMembers401 | ListAccessGroupMembers403
-}
+  Response: ListAccessGroupMembers200;
+  PathParams: ListAccessGroupMembersPathParams;
+  QueryParams: ListAccessGroupMembersQueryParams;
+  Errors: ListAccessGroupMembers400 | ListAccessGroupMembers401 | ListAccessGroupMembers403;
+};
 
 export type ListAccessGroupsQueryParams = {
   /**
    * @description Filter access groups by project.
    * @type string | undefined
    */
-  projectId?: string | undefined
+  projectId?: string | undefined;
   /**
    * @description Search for access groups by name.
    * @type string | undefined
    */
-  search?: string | undefined
+  search?: string | undefined;
   /**
    * @description Number of members to include in the response.
    * @minLength 1
    * @maxLength 100
    * @type integer | undefined
    */
-  membersLimit?: number | undefined
+  membersLimit?: number | undefined;
   /**
    * @description Number of projects to include in the response.
    * @minLength 1
    * @maxLength 100
    * @type integer | undefined
    */
-  projectsLimit?: number | undefined
+  projectsLimit?: number | undefined;
   /**
    * @description Limit how many access group should be returned.
    * @minLength 1
    * @maxLength 100
    * @type integer | undefined
    */
-  limit?: number | undefined
+  limit?: number | undefined;
   /**
    * @description Continuation cursor to retrieve the next page of results.
    * @type string | undefined
    */
-  next?: string | undefined
+  next?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type ListAccessGroups200 = unknown
+export type ListAccessGroups200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type ListAccessGroups400 = unknown
+export type ListAccessGroups400 = unknown;
 
-export type ListAccessGroups401 = unknown
+export type ListAccessGroups401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type ListAccessGroups403 = unknown
+export type ListAccessGroups403 = unknown;
 
-export type ListAccessGroupsQueryResponse = ListAccessGroups200
+export type ListAccessGroupsQueryResponse = ListAccessGroups200;
 
 export type ListAccessGroupsQuery = {
-  Response: ListAccessGroups200
-  QueryParams: ListAccessGroupsQueryParams
-  Errors: ListAccessGroups400 | ListAccessGroups401 | ListAccessGroups403
-}
+  Response: ListAccessGroups200;
+  QueryParams: ListAccessGroupsQueryParams;
+  Errors: ListAccessGroups400 | ListAccessGroups401 | ListAccessGroups403;
+};
 
 export type CreateAccessGroupQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type CreateAccessGroup200 = unknown
+export type CreateAccessGroup200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.
  */
-export type CreateAccessGroup400 = unknown
+export type CreateAccessGroup400 = unknown;
 
-export type CreateAccessGroup401 = unknown
+export type CreateAccessGroup401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CreateAccessGroup403 = unknown
+export type CreateAccessGroup403 = unknown;
 
-export type CreateAccessGroupMutationResponse = CreateAccessGroup200
+export type CreateAccessGroupMutationResponse = CreateAccessGroup200;
 
 export type CreateAccessGroupMutation = {
-  Response: CreateAccessGroup200
-  QueryParams: CreateAccessGroupQueryParams
-  Errors: CreateAccessGroup400 | CreateAccessGroup401 | CreateAccessGroup403
-}
+  Response: CreateAccessGroup200;
+  QueryParams: CreateAccessGroupQueryParams;
+  Errors: CreateAccessGroup400 | CreateAccessGroup401 | CreateAccessGroup403;
+};
 
 export type ListAccessGroupProjectsPathParams = {
   /**
    * @description The ID or name of the Access Group.
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type ListAccessGroupProjectsQueryParams = {
   /**
@@ -8819,243 +8855,243 @@ export type ListAccessGroupProjectsQueryParams = {
    * @maxLength 100
    * @type integer | undefined
    */
-  limit?: number | undefined
+  limit?: number | undefined;
   /**
    * @description Continuation cursor to retrieve the next page of results.
    * @type string | undefined
    */
-  next?: string | undefined
+  next?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type ListAccessGroupProjects200 = unknown
+export type ListAccessGroupProjects200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type ListAccessGroupProjects400 = unknown
+export type ListAccessGroupProjects400 = unknown;
 
-export type ListAccessGroupProjects401 = unknown
+export type ListAccessGroupProjects401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type ListAccessGroupProjects403 = unknown
+export type ListAccessGroupProjects403 = unknown;
 
-export type ListAccessGroupProjectsQueryResponse = ListAccessGroupProjects200
+export type ListAccessGroupProjectsQueryResponse = ListAccessGroupProjects200;
 
 export type ListAccessGroupProjectsQuery = {
-  Response: ListAccessGroupProjects200
-  PathParams: ListAccessGroupProjectsPathParams
-  QueryParams: ListAccessGroupProjectsQueryParams
-  Errors: ListAccessGroupProjects400 | ListAccessGroupProjects401 | ListAccessGroupProjects403
-}
+  Response: ListAccessGroupProjects200;
+  PathParams: ListAccessGroupProjectsPathParams;
+  QueryParams: ListAccessGroupProjectsQueryParams;
+  Errors: ListAccessGroupProjects400 | ListAccessGroupProjects401 | ListAccessGroupProjects403;
+};
 
 export type CreateAccessGroupProjectPathParams = {
   /**
    * @type string
    */
-  accessGroupIdOrName: string
-}
+  accessGroupIdOrName: string;
+};
 
 export type CreateAccessGroupProjectQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type CreateAccessGroupProject200 = unknown
+export type CreateAccessGroupProject200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type CreateAccessGroupProject400 = unknown
+export type CreateAccessGroupProject400 = unknown;
 
-export type CreateAccessGroupProject401 = unknown
+export type CreateAccessGroupProject401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CreateAccessGroupProject403 = unknown
+export type CreateAccessGroupProject403 = unknown;
 
-export type CreateAccessGroupProjectMutationResponse = CreateAccessGroupProject200
+export type CreateAccessGroupProjectMutationResponse = CreateAccessGroupProject200;
 
 export type CreateAccessGroupProjectMutation = {
-  Response: CreateAccessGroupProject200
-  PathParams: CreateAccessGroupProjectPathParams
-  QueryParams: CreateAccessGroupProjectQueryParams
-  Errors: CreateAccessGroupProject400 | CreateAccessGroupProject401 | CreateAccessGroupProject403
-}
+  Response: CreateAccessGroupProject200;
+  PathParams: CreateAccessGroupProjectPathParams;
+  QueryParams: CreateAccessGroupProjectQueryParams;
+  Errors: CreateAccessGroupProject400 | CreateAccessGroupProject401 | CreateAccessGroupProject403;
+};
 
 export type ReadAccessGroupProjectPathParams = {
   /**
    * @type string
    */
-  accessGroupIdOrName: string
+  accessGroupIdOrName: string;
   /**
    * @type string
    */
-  projectId: string
-}
+  projectId: string;
+};
 
 export type ReadAccessGroupProjectQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type ReadAccessGroupProject200 = unknown
+export type ReadAccessGroupProject200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type ReadAccessGroupProject400 = unknown
+export type ReadAccessGroupProject400 = unknown;
 
-export type ReadAccessGroupProject401 = unknown
+export type ReadAccessGroupProject401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type ReadAccessGroupProject403 = unknown
+export type ReadAccessGroupProject403 = unknown;
 
-export type ReadAccessGroupProjectQueryResponse = ReadAccessGroupProject200
+export type ReadAccessGroupProjectQueryResponse = ReadAccessGroupProject200;
 
 export type ReadAccessGroupProjectQuery = {
-  Response: ReadAccessGroupProject200
-  PathParams: ReadAccessGroupProjectPathParams
-  QueryParams: ReadAccessGroupProjectQueryParams
-  Errors: ReadAccessGroupProject400 | ReadAccessGroupProject401 | ReadAccessGroupProject403
-}
+  Response: ReadAccessGroupProject200;
+  PathParams: ReadAccessGroupProjectPathParams;
+  QueryParams: ReadAccessGroupProjectQueryParams;
+  Errors: ReadAccessGroupProject400 | ReadAccessGroupProject401 | ReadAccessGroupProject403;
+};
 
 export type UpdateAccessGroupProjectPathParams = {
   /**
    * @type string
    */
-  accessGroupIdOrName: string
+  accessGroupIdOrName: string;
   /**
    * @type string
    */
-  projectId: string
-}
+  projectId: string;
+};
 
 export type UpdateAccessGroupProjectQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type UpdateAccessGroupProject200 = unknown
+export type UpdateAccessGroupProject200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type UpdateAccessGroupProject400 = unknown
+export type UpdateAccessGroupProject400 = unknown;
 
-export type UpdateAccessGroupProject401 = unknown
+export type UpdateAccessGroupProject401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateAccessGroupProject403 = unknown
+export type UpdateAccessGroupProject403 = unknown;
 
-export type UpdateAccessGroupProjectMutationResponse = UpdateAccessGroupProject200
+export type UpdateAccessGroupProjectMutationResponse = UpdateAccessGroupProject200;
 
 export type UpdateAccessGroupProjectMutation = {
-  Response: UpdateAccessGroupProject200
-  PathParams: UpdateAccessGroupProjectPathParams
-  QueryParams: UpdateAccessGroupProjectQueryParams
-  Errors: UpdateAccessGroupProject400 | UpdateAccessGroupProject401 | UpdateAccessGroupProject403
-}
+  Response: UpdateAccessGroupProject200;
+  PathParams: UpdateAccessGroupProjectPathParams;
+  QueryParams: UpdateAccessGroupProjectQueryParams;
+  Errors: UpdateAccessGroupProject400 | UpdateAccessGroupProject401 | UpdateAccessGroupProject403;
+};
 
 export type DeleteAccessGroupProjectPathParams = {
   /**
    * @type string
    */
-  accessGroupIdOrName: string
+  accessGroupIdOrName: string;
   /**
    * @type string
    */
-  projectId: string
-}
+  projectId: string;
+};
 
 export type DeleteAccessGroupProjectQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type DeleteAccessGroupProject200 = unknown
+export type DeleteAccessGroupProject200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type DeleteAccessGroupProject400 = unknown
+export type DeleteAccessGroupProject400 = unknown;
 
-export type DeleteAccessGroupProject401 = unknown
+export type DeleteAccessGroupProject401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type DeleteAccessGroupProject403 = unknown
+export type DeleteAccessGroupProject403 = unknown;
 
-export type DeleteAccessGroupProjectMutationResponse = DeleteAccessGroupProject200
+export type DeleteAccessGroupProjectMutationResponse = DeleteAccessGroupProject200;
 
 export type DeleteAccessGroupProjectMutation = {
-  Response: DeleteAccessGroupProject200
-  PathParams: DeleteAccessGroupProjectPathParams
-  QueryParams: DeleteAccessGroupProjectQueryParams
-  Errors: DeleteAccessGroupProject400 | DeleteAccessGroupProject401 | DeleteAccessGroupProject403
-}
+  Response: DeleteAccessGroupProject200;
+  PathParams: DeleteAccessGroupProjectPathParams;
+  QueryParams: DeleteAccessGroupProjectQueryParams;
+  Errors: DeleteAccessGroupProject400 | DeleteAccessGroupProject401 | DeleteAccessGroupProject403;
+};
 
 export type RecordEventsQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 export type RecordEventsHeaderParams = {
   /**
@@ -9063,189 +9099,189 @@ export type RecordEventsHeaderParams = {
    * @maxLength 50
    * @type string | undefined
    */
-  'x-artifact-client-ci'?: string | undefined
+  'x-artifact-client-ci'?: string | undefined;
   /**
    * @description 1 if the client is an interactive shell. Otherwise 0
    * @minLength 0
    * @maxLength 1
    * @type integer | undefined
    */
-  'x-artifact-client-interactive'?: number | undefined
-}
+  'x-artifact-client-interactive'?: number | undefined;
+};
 
 /**
  * @description Success. Event recorded.
  */
-export type RecordEvents200 = unknown
+export type RecordEvents200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the headers is invalid
  */
-export type RecordEvents400 = unknown
+export type RecordEvents400 = unknown;
 
-export type RecordEvents401 = unknown
+export type RecordEvents401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type RecordEvents402 = unknown
+export type RecordEvents402 = unknown;
 
 /**
  * @description The customer has reached their spend cap limit and has been paused. An owner can disable the cap or raise the limit in settings.\nThe Remote Caching usage limit has been reached for this account for this billing cycle.\nRemote Caching has been disabled for this team or user. An owner can enable it in the billing settings.\nYou do not have permission to access this resource.
  */
-export type RecordEvents403 = unknown
+export type RecordEvents403 = unknown;
 
-export type RecordEventsMutationResponse = RecordEvents200
+export type RecordEventsMutationResponse = RecordEvents200;
 
 export type RecordEventsMutation = {
-  Response: RecordEvents200
-  QueryParams: RecordEventsQueryParams
-  HeaderParams: RecordEventsHeaderParams
-  Errors: RecordEvents400 | RecordEvents401 | RecordEvents402 | RecordEvents403
-}
+  Response: RecordEvents200;
+  QueryParams: RecordEventsQueryParams;
+  HeaderParams: RecordEventsHeaderParams;
+  Errors: RecordEvents400 | RecordEvents401 | RecordEvents402 | RecordEvents403;
+};
 
 export type StatusQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type Status200 = unknown
+export type Status200 = unknown;
 
-export type Status400 = unknown
+export type Status400 = unknown;
 
-export type Status401 = unknown
+export type Status401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type Status402 = unknown
+export type Status402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type Status403 = unknown
+export type Status403 = unknown;
 
-export type StatusQueryResponse = Status200
+export type StatusQueryResponse = Status200;
 
 export type StatusQuery = {
-  Response: Status200
-  QueryParams: StatusQueryParams
-  Errors: Status400 | Status401 | Status402 | Status403
-}
+  Response: Status200;
+  QueryParams: StatusQueryParams;
+  Errors: Status400 | Status401 | Status402 | Status403;
+};
 
 export type UploadArtifactPathParams = {
   /**
    * @description The artifact hash
    * @type string
    */
-  hash: string
-}
+  hash: string;
+};
 
 export type UploadArtifactQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 export type UploadArtifactHeaderParams = {
   /**
    * @description The artifact size in bytes
    * @type number
    */
-  'Content-Length': number
+  'Content-Length': number;
   /**
    * @description The time taken to generate the uploaded artifact in milliseconds.
    * @type number | undefined
    */
-  'x-artifact-duration'?: number | undefined
+  'x-artifact-duration'?: number | undefined;
   /**
    * @description The continuous integration or delivery environment where this artifact was generated.
    * @maxLength 50
    * @type string | undefined
    */
-  'x-artifact-client-ci'?: string | undefined
+  'x-artifact-client-ci'?: string | undefined;
   /**
    * @description 1 if the client is an interactive shell. Otherwise 0
    * @minLength 0
    * @maxLength 1
    * @type integer | undefined
    */
-  'x-artifact-client-interactive'?: number | undefined
+  'x-artifact-client-interactive'?: number | undefined;
   /**
    * @description The base64 encoded tag for this artifact. The value is sent back to clients when the artifact is downloaded as the header `x-artifact-tag`
    * @maxLength 600
    * @type string | undefined
    */
-  'x-artifact-tag'?: string | undefined
-}
+  'x-artifact-tag'?: string | undefined;
+};
 
 /**
  * @description File successfully uploaded
  */
-export type UploadArtifact202 = unknown
+export type UploadArtifact202 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.\nOne of the provided values in the headers is invalid\nFile size is not valid
  */
-export type UploadArtifact400 = unknown
+export type UploadArtifact400 = unknown;
 
-export type UploadArtifact401 = unknown
+export type UploadArtifact401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type UploadArtifact402 = unknown
+export type UploadArtifact402 = unknown;
 
 /**
  * @description The customer has reached their spend cap limit and has been paused. An owner can disable the cap or raise the limit in settings.\nThe Remote Caching usage limit has been reached for this account for this billing cycle.\nRemote Caching has been disabled for this team or user. An owner can enable it in the billing settings.\nYou do not have permission to access this resource.
  */
-export type UploadArtifact403 = unknown
+export type UploadArtifact403 = unknown;
 
-export type UploadArtifactMutationResponse = UploadArtifact202
+export type UploadArtifactMutationResponse = UploadArtifact202;
 
 export type UploadArtifactMutation = {
-  Response: UploadArtifact202
-  PathParams: UploadArtifactPathParams
-  QueryParams: UploadArtifactQueryParams
-  HeaderParams: UploadArtifactHeaderParams
-  Errors: UploadArtifact400 | UploadArtifact401 | UploadArtifact402 | UploadArtifact403
-}
+  Response: UploadArtifact202;
+  PathParams: UploadArtifactPathParams;
+  QueryParams: UploadArtifactQueryParams;
+  HeaderParams: UploadArtifactHeaderParams;
+  Errors: UploadArtifact400 | UploadArtifact401 | UploadArtifact402 | UploadArtifact403;
+};
 
 export type DownloadArtifactPathParams = {
   /**
    * @description The artifact hash
    * @type string
    */
-  hash: string
-}
+  hash: string;
+};
 
 export type DownloadArtifactQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 export type DownloadArtifactHeaderParams = {
   /**
@@ -9253,495 +9289,501 @@ export type DownloadArtifactHeaderParams = {
    * @maxLength 50
    * @type string | undefined
    */
-  'x-artifact-client-ci'?: string | undefined
+  'x-artifact-client-ci'?: string | undefined;
   /**
    * @description 1 if the client is an interactive shell. Otherwise 0
    * @minLength 0
    * @maxLength 1
    * @type integer | undefined
    */
-  'x-artifact-client-interactive'?: number | undefined
-}
+  'x-artifact-client-interactive'?: number | undefined;
+};
 
 /**
  * @description The artifact was found and is downloaded as a stream. Content-Length should be verified.
  */
-export type DownloadArtifact200 = unknown
+export type DownloadArtifact200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.\nOne of the provided values in the headers is invalid
  */
-export type DownloadArtifact400 = unknown
+export type DownloadArtifact400 = unknown;
 
-export type DownloadArtifact401 = unknown
+export type DownloadArtifact401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type DownloadArtifact402 = unknown
+export type DownloadArtifact402 = unknown;
 
 /**
  * @description The customer has reached their spend cap limit and has been paused. An owner can disable the cap or raise the limit in settings.\nThe Remote Caching usage limit has been reached for this account for this billing cycle.\nRemote Caching has been disabled for this team or user. An owner can enable it in the billing settings.\nYou do not have permission to access this resource.
  */
-export type DownloadArtifact403 = unknown
+export type DownloadArtifact403 = unknown;
 
 /**
  * @description The artifact was not found
  */
-export type DownloadArtifact404 = unknown
+export type DownloadArtifact404 = unknown;
 
-export type DownloadArtifactQueryResponse = DownloadArtifact200
+export type DownloadArtifactQueryResponse = DownloadArtifact200;
 
 export type DownloadArtifactQuery = {
-  Response: DownloadArtifact200
-  PathParams: DownloadArtifactPathParams
-  QueryParams: DownloadArtifactQueryParams
-  HeaderParams: DownloadArtifactHeaderParams
-  Errors: DownloadArtifact400 | DownloadArtifact401 | DownloadArtifact402 | DownloadArtifact403 | DownloadArtifact404
-}
+  Response: DownloadArtifact200;
+  PathParams: DownloadArtifactPathParams;
+  QueryParams: DownloadArtifactQueryParams;
+  HeaderParams: DownloadArtifactHeaderParams;
+  Errors: DownloadArtifact400 | DownloadArtifact401 | DownloadArtifact402 | DownloadArtifact403 | DownloadArtifact404;
+};
 
 export type ArtifactQueryQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type ArtifactQuery200 = unknown
+export type ArtifactQuery200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.
  */
-export type ArtifactQuery400 = unknown
+export type ArtifactQuery400 = unknown;
 
-export type ArtifactQuery401 = unknown
+export type ArtifactQuery401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type ArtifactQuery402 = unknown
+export type ArtifactQuery402 = unknown;
 
 /**
  * @description The customer has reached their spend cap limit and has been paused. An owner can disable the cap or raise the limit in settings.\nThe Remote Caching usage limit has been reached for this account for this billing cycle.\nRemote Caching has been disabled for this team or user. An owner can enable it in the billing settings.\nYou do not have permission to access this resource.
  */
-export type ArtifactQuery403 = unknown
+export type ArtifactQuery403 = unknown;
 
-export type ArtifactQueryMutationResponse = ArtifactQuery200
+export type ArtifactQueryMutationResponse = ArtifactQuery200;
 
 export type ArtifactQueryMutation = {
-  Response: ArtifactQuery200
-  QueryParams: ArtifactQueryQueryParams
-  Errors: ArtifactQuery400 | ArtifactQuery401 | ArtifactQuery402 | ArtifactQuery403
-}
+  Response: ArtifactQuery200;
+  QueryParams: ArtifactQueryQueryParams;
+  Errors: ArtifactQuery400 | ArtifactQuery401 | ArtifactQuery402 | ArtifactQuery403;
+};
 
 export type CreateCheckPathParams = {
   /**
    * @description The deployment to create the check for.
    * @type string
    */
-  deploymentId: string
-}
+  deploymentId: string;
+};
 
 export type CreateCheckQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type CreateCheck200 = unknown
+export type CreateCheck200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.\nCannot create check for finished deployment\nThe provided token is not from an OAuth2 Client
  */
-export type CreateCheck400 = unknown
+export type CreateCheck400 = unknown;
 
-export type CreateCheck401 = unknown
+export type CreateCheck401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CreateCheck403 = unknown
+export type CreateCheck403 = unknown;
 
 /**
  * @description The deployment was not found
  */
-export type CreateCheck404 = unknown
+export type CreateCheck404 = unknown;
 
-export type CreateCheckMutationResponse = CreateCheck200
+export type CreateCheckMutationResponse = CreateCheck200;
 
 export type CreateCheckMutation = {
-  Response: CreateCheck200
-  PathParams: CreateCheckPathParams
-  QueryParams: CreateCheckQueryParams
-  Errors: CreateCheck400 | CreateCheck401 | CreateCheck403 | CreateCheck404
-}
+  Response: CreateCheck200;
+  PathParams: CreateCheckPathParams;
+  QueryParams: CreateCheckQueryParams;
+  Errors: CreateCheck400 | CreateCheck401 | CreateCheck403 | CreateCheck404;
+};
 
 export type GetAllChecksPathParams = {
   /**
    * @description The deployment to get all checks for
    * @type string
    */
-  deploymentId: string
-}
+  deploymentId: string;
+};
 
 export type GetAllChecksQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type GetAllChecks200 = unknown
+export type GetAllChecks200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetAllChecks400 = unknown
+export type GetAllChecks400 = unknown;
 
-export type GetAllChecks401 = unknown
+export type GetAllChecks401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetAllChecks403 = unknown
+export type GetAllChecks403 = unknown;
 
 /**
  * @description The deployment was not found
  */
-export type GetAllChecks404 = unknown
+export type GetAllChecks404 = unknown;
 
-export type GetAllChecksQueryResponse = GetAllChecks200
+export type GetAllChecksQueryResponse = GetAllChecks200;
 
 export type GetAllChecksQuery = {
-  Response: GetAllChecks200
-  PathParams: GetAllChecksPathParams
-  QueryParams: GetAllChecksQueryParams
-  Errors: GetAllChecks400 | GetAllChecks401 | GetAllChecks403 | GetAllChecks404
-}
+  Response: GetAllChecks200;
+  PathParams: GetAllChecksPathParams;
+  QueryParams: GetAllChecksQueryParams;
+  Errors: GetAllChecks400 | GetAllChecks401 | GetAllChecks403 | GetAllChecks404;
+};
 
 export type GetCheckPathParams = {
   /**
    * @description The deployment to get the check for.
    * @type string
    */
-  deploymentId: string
+  deploymentId: string;
   /**
    * @description The check to fetch
    * @type string
    */
-  checkId: string
-}
+  checkId: string;
+};
 
 export type GetCheckQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type GetCheck200 = unknown
+export type GetCheck200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetCheck400 = unknown
+export type GetCheck400 = unknown;
 
-export type GetCheck401 = unknown
+export type GetCheck401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.\nThe provided token is not from an OAuth2 Client that created the Check
  */
-export type GetCheck403 = unknown
+export type GetCheck403 = unknown;
 
 /**
  * @description Check was not found\nThe deployment was not found
  */
-export type GetCheck404 = unknown
+export type GetCheck404 = unknown;
 
-export type GetCheckQueryResponse = GetCheck200
+export type GetCheckQueryResponse = GetCheck200;
 
 export type GetCheckQuery = {
-  Response: GetCheck200
-  PathParams: GetCheckPathParams
-  QueryParams: GetCheckQueryParams
-  Errors: GetCheck400 | GetCheck401 | GetCheck403 | GetCheck404
-}
+  Response: GetCheck200;
+  PathParams: GetCheckPathParams;
+  QueryParams: GetCheckQueryParams;
+  Errors: GetCheck400 | GetCheck401 | GetCheck403 | GetCheck404;
+};
 
 export type UpdateCheckPathParams = {
   /**
    * @description The deployment to update the check for.
    * @type string
    */
-  deploymentId: string
+  deploymentId: string;
   /**
    * @description The check being updated
    * @type string
    */
-  checkId: string
-}
+  checkId: string;
+};
 
 export type UpdateCheckQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type UpdateCheck200 = unknown
+export type UpdateCheck200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.\nThe provided token is not from an OAuth2 Client
  */
-export type UpdateCheck400 = unknown
+export type UpdateCheck400 = unknown;
 
-export type UpdateCheck401 = unknown
+export type UpdateCheck401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateCheck403 = unknown
+export type UpdateCheck403 = unknown;
 
 /**
  * @description Check was not found\nThe deployment was not found
  */
-export type UpdateCheck404 = unknown
+export type UpdateCheck404 = unknown;
 
 /**
  * @description The output provided is too large
  */
-export type UpdateCheck413 = unknown
+export type UpdateCheck413 = unknown;
 
-export type UpdateCheckMutationResponse = UpdateCheck200
+export type UpdateCheckMutationResponse = UpdateCheck200;
 
 export type UpdateCheckMutation = {
-  Response: UpdateCheck200
-  PathParams: UpdateCheckPathParams
-  QueryParams: UpdateCheckQueryParams
-  Errors: UpdateCheck400 | UpdateCheck401 | UpdateCheck403 | UpdateCheck404 | UpdateCheck413
-}
+  Response: UpdateCheck200;
+  PathParams: UpdateCheckPathParams;
+  QueryParams: UpdateCheckQueryParams;
+  Errors: UpdateCheck400 | UpdateCheck401 | UpdateCheck403 | UpdateCheck404 | UpdateCheck413;
+};
 
 export type RerequestCheckPathParams = {
   /**
    * @description The deployment to rerun the check for.
    * @type string
    */
-  deploymentId: string
+  deploymentId: string;
   /**
    * @description The check to rerun
    * @type string
    */
-  checkId: string
-}
+  checkId: string;
+};
 
 export type RerequestCheckQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type RerequestCheck200 = unknown
+export type RerequestCheck200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type RerequestCheck400 = unknown
+export type RerequestCheck400 = unknown;
 
-export type RerequestCheck401 = unknown
+export type RerequestCheck401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type RerequestCheck403 = unknown
+export type RerequestCheck403 = unknown;
 
 /**
  * @description The deployment was not found\nCheck was not found
  */
-export type RerequestCheck404 = unknown
+export type RerequestCheck404 = unknown;
 
-export type RerequestCheckMutationResponse = RerequestCheck200
+export type RerequestCheckMutationResponse = RerequestCheck200;
 
 export type RerequestCheckMutation = {
-  Response: RerequestCheck200
-  PathParams: RerequestCheckPathParams
-  QueryParams: RerequestCheckQueryParams
-  Errors: RerequestCheck400 | RerequestCheck401 | RerequestCheck403 | RerequestCheck404
-}
+  Response: RerequestCheck200;
+  PathParams: RerequestCheckPathParams;
+  QueryParams: RerequestCheckQueryParams;
+  Errors: RerequestCheck400 | RerequestCheck401 | RerequestCheck403 | RerequestCheck404;
+};
 
 export type PurgeAllDataCacheQueryParams = {
   /**
    * @type string
    */
-  projectIdOrName: string
-}
+  projectIdOrName: string;
+};
 
-export type PurgeAllDataCache200 = unknown
+export type PurgeAllDataCache200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type PurgeAllDataCache400 = unknown
+export type PurgeAllDataCache400 = unknown;
 
-export type PurgeAllDataCache401 = unknown
+export type PurgeAllDataCache401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type PurgeAllDataCache403 = unknown
+export type PurgeAllDataCache403 = unknown;
 
-export type PurgeAllDataCache404 = unknown
+export type PurgeAllDataCache404 = unknown;
 
-export type PurgeAllDataCacheMutationResponse = PurgeAllDataCache200
+export type PurgeAllDataCacheMutationResponse = PurgeAllDataCache200;
 
 export type PurgeAllDataCacheMutation = {
-  Response: PurgeAllDataCache200
-  QueryParams: PurgeAllDataCacheQueryParams
-  Errors: PurgeAllDataCache400 | PurgeAllDataCache401 | PurgeAllDataCache403 | PurgeAllDataCache404
-}
+  Response: PurgeAllDataCache200;
+  QueryParams: PurgeAllDataCacheQueryParams;
+  Errors: PurgeAllDataCache400 | PurgeAllDataCache401 | PurgeAllDataCache403 | PurgeAllDataCache404;
+};
 
-export type UpdateDataCacheBillingSettings200 = unknown
+export type UpdateDataCacheBillingSettings200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.
  */
-export type UpdateDataCacheBillingSettings400 = unknown
+export type UpdateDataCacheBillingSettings400 = unknown;
 
-export type UpdateDataCacheBillingSettings401 = unknown
+export type UpdateDataCacheBillingSettings401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateDataCacheBillingSettings403 = unknown
+export type UpdateDataCacheBillingSettings403 = unknown;
 
-export type UpdateDataCacheBillingSettings404 = unknown
+export type UpdateDataCacheBillingSettings404 = unknown;
 
-export type UpdateDataCacheBillingSettingsMutationResponse = UpdateDataCacheBillingSettings200
+export type UpdateDataCacheBillingSettingsMutationResponse = UpdateDataCacheBillingSettings200;
 
 export type UpdateDataCacheBillingSettingsMutation = {
-  Response: UpdateDataCacheBillingSettings200
-  Errors: UpdateDataCacheBillingSettings400 | UpdateDataCacheBillingSettings401 | UpdateDataCacheBillingSettings403 | UpdateDataCacheBillingSettings404
-}
+  Response: UpdateDataCacheBillingSettings200;
+  Errors:
+    | UpdateDataCacheBillingSettings400
+    | UpdateDataCacheBillingSettings401
+    | UpdateDataCacheBillingSettings403
+    | UpdateDataCacheBillingSettings404;
+};
 
 export type UpdateProjectDataCachePathParams = {
   /**
    * @description The unique project identifier
    * @type string
    */
-  projectId: string
-}
+  projectId: string;
+};
 
 export type UpdateProjectDataCacheQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type UpdateProjectDataCache200 = unknown
+export type UpdateProjectDataCache200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type UpdateProjectDataCache400 = unknown
+export type UpdateProjectDataCache400 = unknown;
 
-export type UpdateProjectDataCache401 = unknown
+export type UpdateProjectDataCache401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateProjectDataCache403 = unknown
+export type UpdateProjectDataCache403 = unknown;
 
-export type UpdateProjectDataCache404 = unknown
+export type UpdateProjectDataCache404 = unknown;
 
-export type UpdateProjectDataCacheMutationResponse = UpdateProjectDataCache200
+export type UpdateProjectDataCacheMutationResponse = UpdateProjectDataCache200;
 
 export type UpdateProjectDataCacheMutation = {
-  Response: UpdateProjectDataCache200
-  PathParams: UpdateProjectDataCachePathParams
-  QueryParams: UpdateProjectDataCacheQueryParams
-  Errors: UpdateProjectDataCache400 | UpdateProjectDataCache401 | UpdateProjectDataCache403 | UpdateProjectDataCache404
-}
+  Response: UpdateProjectDataCache200;
+  PathParams: UpdateProjectDataCachePathParams;
+  QueryParams: UpdateProjectDataCacheQueryParams;
+  Errors: UpdateProjectDataCache400 | UpdateProjectDataCache401 | UpdateProjectDataCache403 | UpdateProjectDataCache404;
+};
 
 export type GetDeploymentEventsPathParams = {
   /**
    * @description The unique identifier or hostname of the deployment.
    * @type string
    */
-  idOrUrl: string
-}
+  idOrUrl: string;
+};
 
 export const getDeploymentEventsQueryParamsDirectionEnum = {
   backward: 'backward',
-  forward: 'forward',
-} as const
+  forward: 'forward'
+} as const;
 
 export type GetDeploymentEventsQueryParamsDirectionEnum =
-  (typeof getDeploymentEventsQueryParamsDirectionEnum)[keyof typeof getDeploymentEventsQueryParamsDirectionEnum]
+  (typeof getDeploymentEventsQueryParamsDirectionEnum)[keyof typeof getDeploymentEventsQueryParamsDirectionEnum];
 
 export const getDeploymentEventsQueryParamsFollowEnum = {
   '0': 0,
-  '1': 1,
-} as const
+  '1': 1
+} as const;
 
-export type GetDeploymentEventsQueryParamsFollowEnum = (typeof getDeploymentEventsQueryParamsFollowEnum)[keyof typeof getDeploymentEventsQueryParamsFollowEnum]
+export type GetDeploymentEventsQueryParamsFollowEnum =
+  (typeof getDeploymentEventsQueryParamsFollowEnum)[keyof typeof getDeploymentEventsQueryParamsFollowEnum];
 
 export const getDeploymentEventsQueryParamsDelimiterEnum = {
   '0': 0,
-  '1': 1,
-} as const
+  '1': 1
+} as const;
 
 export type GetDeploymentEventsQueryParamsDelimiterEnum =
-  (typeof getDeploymentEventsQueryParamsDelimiterEnum)[keyof typeof getDeploymentEventsQueryParamsDelimiterEnum]
+  (typeof getDeploymentEventsQueryParamsDelimiterEnum)[keyof typeof getDeploymentEventsQueryParamsDelimiterEnum];
 
 export const getDeploymentEventsQueryParamsBuildsEnum = {
   '0': 0,
-  '1': 1,
-} as const
+  '1': 1
+} as const;
 
-export type GetDeploymentEventsQueryParamsBuildsEnum = (typeof getDeploymentEventsQueryParamsBuildsEnum)[keyof typeof getDeploymentEventsQueryParamsBuildsEnum]
+export type GetDeploymentEventsQueryParamsBuildsEnum =
+  (typeof getDeploymentEventsQueryParamsBuildsEnum)[keyof typeof getDeploymentEventsQueryParamsBuildsEnum];
 
 export type GetDeploymentEventsQueryParams = {
   /**
@@ -9749,249 +9791,253 @@ export type GetDeploymentEventsQueryParams = {
    * @default "forward"
    * @type string | undefined
    */
-  direction?: GetDeploymentEventsQueryParamsDirectionEnum | undefined
+  direction?: GetDeploymentEventsQueryParamsDirectionEnum | undefined;
   /**
    * @description When enabled, this endpoint will return live events as they happen.
    * @type number | undefined
    */
-  follow?: GetDeploymentEventsQueryParamsFollowEnum | undefined
+  follow?: GetDeploymentEventsQueryParamsFollowEnum | undefined;
   /**
    * @description Maximum number of events to return. Provide `-1` to return all available logs.
    * @type number | undefined
    */
-  limit?: number | undefined
+  limit?: number | undefined;
   /**
    * @description Deployment build ID.
    * @type string | undefined
    */
-  name?: string | undefined
+  name?: string | undefined;
   /**
    * @description Timestamp for when build logs should be pulled from.
    * @type number | undefined
    */
-  since?: number | undefined
+  since?: number | undefined;
   /**
    * @description Timestamp for when the build logs should be pulled up until.
    * @type number | undefined
    */
-  until?: number | undefined
+  until?: number | undefined;
   /**
    * @description HTTP status code range to filter events by.
    */
-  statusCode?: (number | string) | undefined
+  statusCode?: (number | string) | undefined;
   /**
    * @type number | undefined
    */
-  delimiter?: GetDeploymentEventsQueryParamsDelimiterEnum | undefined
+  delimiter?: GetDeploymentEventsQueryParamsDelimiterEnum | undefined;
   /**
    * @type number | undefined
    */
-  builds?: GetDeploymentEventsQueryParamsBuildsEnum | undefined
+  builds?: GetDeploymentEventsQueryParamsBuildsEnum | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type GetDeploymentEvents200 = unknown
+export type GetDeploymentEvents200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetDeploymentEvents400 = unknown
+export type GetDeploymentEvents400 = unknown;
 
-export type GetDeploymentEvents401 = unknown
+export type GetDeploymentEvents401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetDeploymentEvents403 = unknown
+export type GetDeploymentEvents403 = unknown;
 
-export type GetDeploymentEvents500 = unknown
+export type GetDeploymentEvents500 = unknown;
 
-export type GetDeploymentEventsQueryResponse = GetDeploymentEvents200
+export type GetDeploymentEventsQueryResponse = GetDeploymentEvents200;
 
 export type GetDeploymentEventsQuery = {
-  Response: GetDeploymentEvents200
-  PathParams: GetDeploymentEventsPathParams
-  QueryParams: GetDeploymentEventsQueryParams
-  Errors: GetDeploymentEvents400 | GetDeploymentEvents401 | GetDeploymentEvents403 | GetDeploymentEvents500
-}
+  Response: GetDeploymentEvents200;
+  PathParams: GetDeploymentEventsPathParams;
+  QueryParams: GetDeploymentEventsQueryParams;
+  Errors: GetDeploymentEvents400 | GetDeploymentEvents401 | GetDeploymentEvents403 | GetDeploymentEvents500;
+};
 
 export type UpdateIntegrationDeploymentActionPathParams = {
   /**
    * @type string
    */
-  deploymentId: string
+  deploymentId: string;
   /**
    * @type string
    */
-  integrationConfigurationId: string
+  integrationConfigurationId: string;
   /**
    * @type string
    */
-  resourceId: string
+  resourceId: string;
   /**
    * @type string
    */
-  action: string
-}
+  action: string;
+};
 
-export type UpdateIntegrationDeploymentAction202 = unknown
+export type UpdateIntegrationDeploymentAction202 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type UpdateIntegrationDeploymentAction400 = unknown
+export type UpdateIntegrationDeploymentAction400 = unknown;
 
-export type UpdateIntegrationDeploymentAction401 = unknown
+export type UpdateIntegrationDeploymentAction401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateIntegrationDeploymentAction403 = unknown
+export type UpdateIntegrationDeploymentAction403 = unknown;
 
-export type UpdateIntegrationDeploymentActionMutationResponse = UpdateIntegrationDeploymentAction202
+export type UpdateIntegrationDeploymentActionMutationResponse = UpdateIntegrationDeploymentAction202;
 
 export type UpdateIntegrationDeploymentActionMutation = {
-  Response: UpdateIntegrationDeploymentAction202
-  PathParams: UpdateIntegrationDeploymentActionPathParams
-  Errors: UpdateIntegrationDeploymentAction400 | UpdateIntegrationDeploymentAction401 | UpdateIntegrationDeploymentAction403
-}
+  Response: UpdateIntegrationDeploymentAction202;
+  PathParams: UpdateIntegrationDeploymentActionPathParams;
+  Errors:
+    | UpdateIntegrationDeploymentAction400
+    | UpdateIntegrationDeploymentAction401
+    | UpdateIntegrationDeploymentAction403;
+};
 
 export type GetDeploymentPathParams = {
   /**
    * @description The unique identifier or hostname of the deployment.
    * @type string
    */
-  idOrUrl: string
-}
+  idOrUrl: string;
+};
 
 export type GetDeploymentQueryParams = {
   /**
    * @description Whether to add in gitRepo information.
    * @type string | undefined
    */
-  withGitRepoInfo?: string | undefined
+  withGitRepoInfo?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The deployment including only public information\nThe deployment including both public and private information
  */
-export type GetDeployment200 = unknown
+export type GetDeployment200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetDeployment400 = unknown
+export type GetDeployment400 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetDeployment403 = unknown
+export type GetDeployment403 = unknown;
 
 /**
  * @description The deployment was not found
  */
-export type GetDeployment404 = unknown
+export type GetDeployment404 = unknown;
 
-export type GetDeploymentQueryResponse = GetDeployment200
+export type GetDeploymentQueryResponse = GetDeployment200;
 
 export type GetDeploymentQuery = {
-  Response: GetDeployment200
-  PathParams: GetDeploymentPathParams
-  QueryParams: GetDeploymentQueryParams
-  Errors: GetDeployment400 | GetDeployment403 | GetDeployment404
-}
+  Response: GetDeployment200;
+  PathParams: GetDeploymentPathParams;
+  QueryParams: GetDeploymentQueryParams;
+  Errors: GetDeployment400 | GetDeployment403 | GetDeployment404;
+};
 
 export const createDeploymentQueryParamsForceNewEnum = {
   '0': '0',
-  '1': '1',
-} as const
+  '1': '1'
+} as const;
 
-export type CreateDeploymentQueryParamsForceNewEnum = (typeof createDeploymentQueryParamsForceNewEnum)[keyof typeof createDeploymentQueryParamsForceNewEnum]
+export type CreateDeploymentQueryParamsForceNewEnum =
+  (typeof createDeploymentQueryParamsForceNewEnum)[keyof typeof createDeploymentQueryParamsForceNewEnum];
 
 export const createDeploymentQueryParamsSkipAutoDetectionConfirmationEnum = {
   '0': '0',
-  '1': '1',
-} as const
+  '1': '1'
+} as const;
 
 export type CreateDeploymentQueryParamsSkipAutoDetectionConfirmationEnum =
-  (typeof createDeploymentQueryParamsSkipAutoDetectionConfirmationEnum)[keyof typeof createDeploymentQueryParamsSkipAutoDetectionConfirmationEnum]
+  (typeof createDeploymentQueryParamsSkipAutoDetectionConfirmationEnum)[keyof typeof createDeploymentQueryParamsSkipAutoDetectionConfirmationEnum];
 
 export type CreateDeploymentQueryParams = {
   /**
    * @description Forces a new deployment even if there is a previous similar deployment
    */
-  forceNew?: CreateDeploymentQueryParamsForceNewEnum | undefined
+  forceNew?: CreateDeploymentQueryParamsForceNewEnum | undefined;
   /**
    * @description Allows to skip framework detection so the API would not fail to ask for confirmation
    */
-  skipAutoDetectionConfirmation?: CreateDeploymentQueryParamsSkipAutoDetectionConfirmationEnum | undefined
+  skipAutoDetectionConfirmation?: CreateDeploymentQueryParamsSkipAutoDetectionConfirmationEnum | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The successfully created deployment
  */
-export type CreateDeployment200 = unknown
+export type CreateDeployment200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type CreateDeployment400 = unknown
+export type CreateDeployment400 = unknown;
 
-export type CreateDeployment401 = unknown
+export type CreateDeployment401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated\nPro customers are allowed to deploy Serverless Functions to up to `proMaxRegions` regions, or if the project was created before the limit was introduced.\nDeploying to Serverless Functions to multiple regions requires a plan update
  */
-export type CreateDeployment402 = unknown
+export type CreateDeployment402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CreateDeployment403 = unknown
+export type CreateDeployment403 = unknown;
 
-export type CreateDeployment404 = unknown
+export type CreateDeployment404 = unknown;
 
 /**
  * @description The deployment project is being transferred
  */
-export type CreateDeployment409 = unknown
+export type CreateDeployment409 = unknown;
 
-export type CreateDeployment500 = unknown
+export type CreateDeployment500 = unknown;
 
-export type CreateDeploymentMutationResponse = CreateDeployment200
+export type CreateDeploymentMutationResponse = CreateDeployment200;
 
 export type CreateDeploymentMutation = {
-  Response: CreateDeployment200
-  QueryParams: CreateDeploymentQueryParams
+  Response: CreateDeployment200;
+  QueryParams: CreateDeploymentQueryParams;
   Errors:
     | CreateDeployment400
     | CreateDeployment401
@@ -9999,671 +10045,678 @@ export type CreateDeploymentMutation = {
     | CreateDeployment403
     | CreateDeployment404
     | CreateDeployment409
-    | CreateDeployment500
-}
+    | CreateDeployment500;
+};
 
 export type CancelDeploymentPathParams = {
   /**
    * @description The unique identifier of the deployment.
    * @type string
    */
-  id: string
-}
+  id: string;
+};
 
 export type CancelDeploymentQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type CancelDeployment200 = unknown
+export type CancelDeployment200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type CancelDeployment400 = unknown
+export type CancelDeployment400 = unknown;
 
-export type CancelDeployment401 = unknown
+export type CancelDeployment401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CancelDeployment403 = unknown
+export type CancelDeployment403 = unknown;
 
-export type CancelDeployment404 = unknown
+export type CancelDeployment404 = unknown;
 
-export type CancelDeploymentMutationResponse = CancelDeployment200
+export type CancelDeploymentMutationResponse = CancelDeployment200;
 
 export type CancelDeploymentMutation = {
-  Response: CancelDeployment200
-  PathParams: CancelDeploymentPathParams
-  QueryParams: CancelDeploymentQueryParams
-  Errors: CancelDeployment400 | CancelDeployment401 | CancelDeployment403 | CancelDeployment404
-}
+  Response: CancelDeployment200;
+  PathParams: CancelDeploymentPathParams;
+  QueryParams: CancelDeploymentQueryParams;
+  Errors: CancelDeployment400 | CancelDeployment401 | CancelDeployment403 | CancelDeployment404;
+};
 
 export type BuyDomainQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type BuyDomain201 = unknown
+export type BuyDomain201 = unknown;
 
-export type BuyDomain202 = unknown
+export type BuyDomain202 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.
  */
-export type BuyDomain400 = unknown
+export type BuyDomain400 = unknown;
 
-export type BuyDomain401 = unknown
+export type BuyDomain401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type BuyDomain403 = unknown
+export type BuyDomain403 = unknown;
 
-export type BuyDomain409 = unknown
+export type BuyDomain409 = unknown;
 
-export type BuyDomain429 = unknown
+export type BuyDomain429 = unknown;
 
-export type BuyDomainMutationResponse = BuyDomain201 | BuyDomain202
+export type BuyDomainMutationResponse = BuyDomain201 | BuyDomain202;
 
 export type BuyDomainMutation = {
-  Response: BuyDomain201 | BuyDomain202
-  QueryParams: BuyDomainQueryParams
-  Errors: BuyDomain400 | BuyDomain401 | BuyDomain403 | BuyDomain409 | BuyDomain429
-}
+  Response: BuyDomain201 | BuyDomain202;
+  QueryParams: BuyDomainQueryParams;
+  Errors: BuyDomain400 | BuyDomain401 | BuyDomain403 | BuyDomain409 | BuyDomain429;
+};
 
 export const checkDomainPriceQueryParamsTypeEnum = {
   new: 'new',
   renewal: 'renewal',
   transfer: 'transfer',
-  redemption: 'redemption',
-} as const
+  redemption: 'redemption'
+} as const;
 
-export type CheckDomainPriceQueryParamsTypeEnum = (typeof checkDomainPriceQueryParamsTypeEnum)[keyof typeof checkDomainPriceQueryParamsTypeEnum]
+export type CheckDomainPriceQueryParamsTypeEnum =
+  (typeof checkDomainPriceQueryParamsTypeEnum)[keyof typeof checkDomainPriceQueryParamsTypeEnum];
 
 export type CheckDomainPriceQueryParams = {
   /**
    * @description The name of the domain for which the price needs to be checked.
    * @type string
    */
-  name: string
+  name: string;
   /**
    * @description In which status of the domain the price needs to be checked.
    * @type string | undefined
    */
-  type?: CheckDomainPriceQueryParamsTypeEnum | undefined
+  type?: CheckDomainPriceQueryParamsTypeEnum | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description Successful response which returns the price of the domain and the period.
  */
-export type CheckDomainPrice200 = unknown
+export type CheckDomainPrice200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type CheckDomainPrice400 = unknown
+export type CheckDomainPrice400 = unknown;
 
-export type CheckDomainPrice401 = unknown
+export type CheckDomainPrice401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CheckDomainPrice403 = unknown
+export type CheckDomainPrice403 = unknown;
 
-export type CheckDomainPriceQueryResponse = CheckDomainPrice200
+export type CheckDomainPriceQueryResponse = CheckDomainPrice200;
 
 export type CheckDomainPriceQuery = {
-  Response: CheckDomainPrice200
-  QueryParams: CheckDomainPriceQueryParams
-  Errors: CheckDomainPrice400 | CheckDomainPrice401 | CheckDomainPrice403
-}
+  Response: CheckDomainPrice200;
+  QueryParams: CheckDomainPriceQueryParams;
+  Errors: CheckDomainPrice400 | CheckDomainPrice401 | CheckDomainPrice403;
+};
 
 export type CheckDomainStatusQueryParams = {
   /**
    * @description The name of the domain for which we would like to check the status.
    * @type string
    */
-  name: string
+  name: string;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description Successful response checking if a Domain\'s name is available.
  */
-export type CheckDomainStatus200 = unknown
+export type CheckDomainStatus200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type CheckDomainStatus400 = unknown
+export type CheckDomainStatus400 = unknown;
 
-export type CheckDomainStatus401 = unknown
+export type CheckDomainStatus401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CheckDomainStatus403 = unknown
+export type CheckDomainStatus403 = unknown;
 
-export type CheckDomainStatus408 = unknown
+export type CheckDomainStatus408 = unknown;
 
-export type CheckDomainStatus500 = unknown
+export type CheckDomainStatus500 = unknown;
 
-export type CheckDomainStatusQueryResponse = CheckDomainStatus200
+export type CheckDomainStatusQueryResponse = CheckDomainStatus200;
 
 export type CheckDomainStatusQuery = {
-  Response: CheckDomainStatus200
-  QueryParams: CheckDomainStatusQueryParams
-  Errors: CheckDomainStatus400 | CheckDomainStatus401 | CheckDomainStatus403 | CheckDomainStatus408 | CheckDomainStatus500
-}
+  Response: CheckDomainStatus200;
+  QueryParams: CheckDomainStatusQueryParams;
+  Errors:
+    | CheckDomainStatus400
+    | CheckDomainStatus401
+    | CheckDomainStatus403
+    | CheckDomainStatus408
+    | CheckDomainStatus500;
+};
 
 export type GetRecordsPathParams = {
   /**
    * @type string
    */
-  domain: string
-}
+  domain: string;
+};
 
 export type GetRecordsQueryParams = {
   /**
    * @description Maximum number of records to list from a request.
    * @type string | undefined
    */
-  limit?: string | undefined
+  limit?: string | undefined;
   /**
    * @description Get records created after this JavaScript timestamp.
    * @type string | undefined
    */
-  since?: string | undefined
+  since?: string | undefined;
   /**
    * @description Get records created before this JavaScript timestamp.
    * @type string | undefined
    */
-  until?: string | undefined
+  until?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description Successful response retrieving a list of paginated DNS records.
  */
-export type GetRecords200 = unknown
+export type GetRecords200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetRecords400 = unknown
+export type GetRecords400 = unknown;
 
-export type GetRecords401 = unknown
+export type GetRecords401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetRecords403 = unknown
+export type GetRecords403 = unknown;
 
-export type GetRecords404 = unknown
+export type GetRecords404 = unknown;
 
-export type GetRecordsQueryResponse = GetRecords200
+export type GetRecordsQueryResponse = GetRecords200;
 
 export type GetRecordsQuery = {
-  Response: GetRecords200
-  PathParams: GetRecordsPathParams
-  QueryParams: GetRecordsQueryParams
-  Errors: GetRecords400 | GetRecords401 | GetRecords403 | GetRecords404
-}
+  Response: GetRecords200;
+  PathParams: GetRecordsPathParams;
+  QueryParams: GetRecordsQueryParams;
+  Errors: GetRecords400 | GetRecords401 | GetRecords403 | GetRecords404;
+};
 
 export type CreateRecordPathParams = {
   /**
    * @description The domain used to create the DNS record.
    * @type string
    */
-  domain: string
-}
+  domain: string;
+};
 
 export type CreateRecordQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description Successful response showing the uid of the newly created DNS record.
  */
-export type CreateRecord200 = unknown
+export type CreateRecord200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type CreateRecord400 = unknown
+export type CreateRecord400 = unknown;
 
-export type CreateRecord401 = unknown
+export type CreateRecord401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type CreateRecord402 = unknown
+export type CreateRecord402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CreateRecord403 = unknown
+export type CreateRecord403 = unknown;
 
-export type CreateRecord404 = unknown
+export type CreateRecord404 = unknown;
 
-export type CreateRecord409 = unknown
+export type CreateRecord409 = unknown;
 
-export type CreateRecordMutationResponse = CreateRecord200
+export type CreateRecordMutationResponse = CreateRecord200;
 
 export type CreateRecordMutation = {
-  Response: CreateRecord200
-  PathParams: CreateRecordPathParams
-  QueryParams: CreateRecordQueryParams
-  Errors: CreateRecord400 | CreateRecord401 | CreateRecord402 | CreateRecord403 | CreateRecord404 | CreateRecord409
-}
+  Response: CreateRecord200;
+  PathParams: CreateRecordPathParams;
+  QueryParams: CreateRecordQueryParams;
+  Errors: CreateRecord400 | CreateRecord401 | CreateRecord402 | CreateRecord403 | CreateRecord404 | CreateRecord409;
+};
 
 export type UpdateRecordPathParams = {
   /**
    * @description The id of the DNS record
    * @type string
    */
-  recordId: string
-}
+  recordId: string;
+};
 
 export type UpdateRecordQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type UpdateRecord200 = unknown
+export type UpdateRecord200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type UpdateRecord400 = unknown
+export type UpdateRecord400 = unknown;
 
-export type UpdateRecord401 = unknown
+export type UpdateRecord401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type UpdateRecord402 = unknown
+export type UpdateRecord402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateRecord403 = unknown
+export type UpdateRecord403 = unknown;
 
-export type UpdateRecord404 = unknown
+export type UpdateRecord404 = unknown;
 
-export type UpdateRecord409 = unknown
+export type UpdateRecord409 = unknown;
 
-export type UpdateRecordMutationResponse = UpdateRecord200
+export type UpdateRecordMutationResponse = UpdateRecord200;
 
 export type UpdateRecordMutation = {
-  Response: UpdateRecord200
-  PathParams: UpdateRecordPathParams
-  QueryParams: UpdateRecordQueryParams
-  Errors: UpdateRecord400 | UpdateRecord401 | UpdateRecord402 | UpdateRecord403 | UpdateRecord404 | UpdateRecord409
-}
+  Response: UpdateRecord200;
+  PathParams: UpdateRecordPathParams;
+  QueryParams: UpdateRecordQueryParams;
+  Errors: UpdateRecord400 | UpdateRecord401 | UpdateRecord402 | UpdateRecord403 | UpdateRecord404 | UpdateRecord409;
+};
 
 export type RemoveRecordPathParams = {
   /**
    * @type string
    */
-  domain: string
+  domain: string;
   /**
    * @type string
    */
-  recordId: string
-}
+  recordId: string;
+};
 
 export type RemoveRecordQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description Successful response by removing the specified DNS record.
  */
-export type RemoveRecord200 = unknown
+export type RemoveRecord200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type RemoveRecord400 = unknown
+export type RemoveRecord400 = unknown;
 
-export type RemoveRecord401 = unknown
+export type RemoveRecord401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type RemoveRecord403 = unknown
+export type RemoveRecord403 = unknown;
 
-export type RemoveRecord404 = unknown
+export type RemoveRecord404 = unknown;
 
-export type RemoveRecordMutationResponse = RemoveRecord200
+export type RemoveRecordMutationResponse = RemoveRecord200;
 
 export type RemoveRecordMutation = {
-  Response: RemoveRecord200
-  PathParams: RemoveRecordPathParams
-  QueryParams: RemoveRecordQueryParams
-  Errors: RemoveRecord400 | RemoveRecord401 | RemoveRecord403 | RemoveRecord404
-}
+  Response: RemoveRecord200;
+  PathParams: RemoveRecordPathParams;
+  QueryParams: RemoveRecordQueryParams;
+  Errors: RemoveRecord400 | RemoveRecord401 | RemoveRecord403 | RemoveRecord404;
+};
 
 export type GetDomainTransferPathParams = {
   /**
    * @type string
    */
-  domain: string
-}
+  domain: string;
+};
 
 export type GetDomainTransferQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type GetDomainTransfer200 = unknown
+export type GetDomainTransfer200 = unknown;
 
-export type GetDomainTransfer400 = unknown
+export type GetDomainTransfer400 = unknown;
 
-export type GetDomainTransfer401 = unknown
+export type GetDomainTransfer401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetDomainTransfer403 = unknown
+export type GetDomainTransfer403 = unknown;
 
-export type GetDomainTransferQueryResponse = GetDomainTransfer200
+export type GetDomainTransferQueryResponse = GetDomainTransfer200;
 
 export type GetDomainTransferQuery = {
-  Response: GetDomainTransfer200
-  PathParams: GetDomainTransferPathParams
-  QueryParams: GetDomainTransferQueryParams
-  Errors: GetDomainTransfer400 | GetDomainTransfer401 | GetDomainTransfer403
-}
+  Response: GetDomainTransfer200;
+  PathParams: GetDomainTransferPathParams;
+  QueryParams: GetDomainTransferQueryParams;
+  Errors: GetDomainTransfer400 | GetDomainTransfer401 | GetDomainTransfer403;
+};
 
 export type GetDomainConfigPathParams = {
   /**
    * @description The name of the domain.
    * @type string
    */
-  domain: string
-}
+  domain: string;
+};
 
 export const getDomainConfigQueryParamsStrictEnum = {
   true: 'true',
-  false: 'false',
-} as const
+  false: 'false'
+} as const;
 
-export type GetDomainConfigQueryParamsStrictEnum = (typeof getDomainConfigQueryParamsStrictEnum)[keyof typeof getDomainConfigQueryParamsStrictEnum]
+export type GetDomainConfigQueryParamsStrictEnum =
+  (typeof getDomainConfigQueryParamsStrictEnum)[keyof typeof getDomainConfigQueryParamsStrictEnum];
 
 export type GetDomainConfigQueryParams = {
   /**
    * @description When true, the response will only include the nameservers assigned directly to the specified domain. When false and there are no nameservers assigned directly to the specified domain, the response will include the nameservers of the domain\'s parent zone.
    */
-  strict?: GetDomainConfigQueryParamsStrictEnum | undefined
+  strict?: GetDomainConfigQueryParamsStrictEnum | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type GetDomainConfig200 = unknown
+export type GetDomainConfig200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetDomainConfig400 = unknown
+export type GetDomainConfig400 = unknown;
 
-export type GetDomainConfig401 = unknown
+export type GetDomainConfig401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetDomainConfig403 = unknown
+export type GetDomainConfig403 = unknown;
 
-export type GetDomainConfig500 = unknown
+export type GetDomainConfig500 = unknown;
 
-export type GetDomainConfigQueryResponse = GetDomainConfig200
+export type GetDomainConfigQueryResponse = GetDomainConfig200;
 
 export type GetDomainConfigQuery = {
-  Response: GetDomainConfig200
-  PathParams: GetDomainConfigPathParams
-  QueryParams: GetDomainConfigQueryParams
-  Errors: GetDomainConfig400 | GetDomainConfig401 | GetDomainConfig403 | GetDomainConfig500
-}
+  Response: GetDomainConfig200;
+  PathParams: GetDomainConfigPathParams;
+  QueryParams: GetDomainConfigQueryParams;
+  Errors: GetDomainConfig400 | GetDomainConfig401 | GetDomainConfig403 | GetDomainConfig500;
+};
 
 export type GetDomainPathParams = {
   /**
    * @description The name of the domain.
    * @type string
    */
-  domain: string
-}
+  domain: string;
+};
 
 export type GetDomainQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description Successful response retrieving an information for a specific domains.
  */
-export type GetDomain200 = unknown
+export type GetDomain200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetDomain400 = unknown
+export type GetDomain400 = unknown;
 
-export type GetDomain401 = unknown
+export type GetDomain401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetDomain403 = unknown
+export type GetDomain403 = unknown;
 
-export type GetDomain404 = unknown
+export type GetDomain404 = unknown;
 
-export type GetDomainQueryResponse = GetDomain200
+export type GetDomainQueryResponse = GetDomain200;
 
 export type GetDomainQuery = {
-  Response: GetDomain200
-  PathParams: GetDomainPathParams
-  QueryParams: GetDomainQueryParams
-  Errors: GetDomain400 | GetDomain401 | GetDomain403 | GetDomain404
-}
+  Response: GetDomain200;
+  PathParams: GetDomainPathParams;
+  QueryParams: GetDomainQueryParams;
+  Errors: GetDomain400 | GetDomain401 | GetDomain403 | GetDomain404;
+};
 
 export type GetDomainsQueryParams = {
   /**
    * @description Maximum number of domains to list from a request.
    * @type number | undefined
    */
-  limit?: number | undefined
+  limit?: number | undefined;
   /**
    * @description Get domains created after this JavaScript timestamp.
    * @type number | undefined
    */
-  since?: number | undefined
+  since?: number | undefined;
   /**
    * @description Get domains created before this JavaScript timestamp.
    * @type number | undefined
    */
-  until?: number | undefined
+  until?: number | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description Successful response retrieving a list of domains.
  */
-export type GetDomains200 = unknown
+export type GetDomains200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetDomains400 = unknown
+export type GetDomains400 = unknown;
 
-export type GetDomains401 = unknown
+export type GetDomains401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetDomains403 = unknown
+export type GetDomains403 = unknown;
 
-export type GetDomains409 = unknown
+export type GetDomains409 = unknown;
 
-export type GetDomainsQueryResponse = GetDomains200
+export type GetDomainsQueryResponse = GetDomains200;
 
 export type GetDomainsQuery = {
-  Response: GetDomains200
-  QueryParams: GetDomainsQueryParams
-  Errors: GetDomains400 | GetDomains401 | GetDomains403 | GetDomains409
-}
+  Response: GetDomains200;
+  QueryParams: GetDomainsQueryParams;
+  Errors: GetDomains400 | GetDomains401 | GetDomains403 | GetDomains409;
+};
 
 export type CreateOrTransferDomainQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type CreateOrTransferDomain200 = unknown
+export type CreateOrTransferDomain200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.
  */
-export type CreateOrTransferDomain400 = unknown
+export type CreateOrTransferDomain400 = unknown;
 
-export type CreateOrTransferDomain401 = unknown
+export type CreateOrTransferDomain401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type CreateOrTransferDomain402 = unknown
+export type CreateOrTransferDomain402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CreateOrTransferDomain403 = unknown
+export type CreateOrTransferDomain403 = unknown;
 
-export type CreateOrTransferDomain404 = unknown
+export type CreateOrTransferDomain404 = unknown;
 
 /**
  * @description The domain is not allowed to be used
  */
-export type CreateOrTransferDomain409 = unknown
+export type CreateOrTransferDomain409 = unknown;
 
-export type CreateOrTransferDomain500 = unknown
+export type CreateOrTransferDomain500 = unknown;
 
-export type CreateOrTransferDomainMutationResponse = CreateOrTransferDomain200
+export type CreateOrTransferDomainMutationResponse = CreateOrTransferDomain200;
 
 export type CreateOrTransferDomainMutation = {
-  Response: CreateOrTransferDomain200
-  QueryParams: CreateOrTransferDomainQueryParams
+  Response: CreateOrTransferDomain200;
+  QueryParams: CreateOrTransferDomainQueryParams;
   Errors:
     | CreateOrTransferDomain400
     | CreateOrTransferDomain401
@@ -10671,2043 +10724,2092 @@ export type CreateOrTransferDomainMutation = {
     | CreateOrTransferDomain403
     | CreateOrTransferDomain404
     | CreateOrTransferDomain409
-    | CreateOrTransferDomain500
-}
+    | CreateOrTransferDomain500;
+};
 
 export type PatchDomainPathParams = {
   /**
    * @type string
    */
-  domain: string
-}
+  domain: string;
+};
 
 export type PatchDomainQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type PatchDomain200 = unknown
+export type PatchDomain200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type PatchDomain400 = unknown
+export type PatchDomain400 = unknown;
 
-export type PatchDomain401 = unknown
+export type PatchDomain401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type PatchDomain403 = unknown
+export type PatchDomain403 = unknown;
 
-export type PatchDomain404 = unknown
+export type PatchDomain404 = unknown;
 
-export type PatchDomain409 = unknown
+export type PatchDomain409 = unknown;
 
-export type PatchDomainMutationResponse = PatchDomain200
+export type PatchDomainMutationResponse = PatchDomain200;
 
 export type PatchDomainMutation = {
-  Response: PatchDomain200
-  PathParams: PatchDomainPathParams
-  QueryParams: PatchDomainQueryParams
-  Errors: PatchDomain400 | PatchDomain401 | PatchDomain403 | PatchDomain404 | PatchDomain409
-}
+  Response: PatchDomain200;
+  PathParams: PatchDomainPathParams;
+  QueryParams: PatchDomainQueryParams;
+  Errors: PatchDomain400 | PatchDomain401 | PatchDomain403 | PatchDomain404 | PatchDomain409;
+};
 
 export type DeleteDomainPathParams = {
   /**
    * @description The name of the domain.
    * @type string
    */
-  domain: string
-}
+  domain: string;
+};
 
 export type DeleteDomainQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description Successful response removing a domain.
  */
-export type DeleteDomain200 = unknown
+export type DeleteDomain200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type DeleteDomain400 = unknown
+export type DeleteDomain400 = unknown;
 
-export type DeleteDomain401 = unknown
+export type DeleteDomain401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type DeleteDomain403 = unknown
+export type DeleteDomain403 = unknown;
 
-export type DeleteDomain404 = unknown
+export type DeleteDomain404 = unknown;
 
-export type DeleteDomain409 = unknown
+export type DeleteDomain409 = unknown;
 
-export type DeleteDomainMutationResponse = DeleteDomain200
+export type DeleteDomainMutationResponse = DeleteDomain200;
 
 export type DeleteDomainMutation = {
-  Response: DeleteDomain200
-  PathParams: DeleteDomainPathParams
-  QueryParams: DeleteDomainQueryParams
-  Errors: DeleteDomain400 | DeleteDomain401 | DeleteDomain403 | DeleteDomain404 | DeleteDomain409
-}
+  Response: DeleteDomain200;
+  PathParams: DeleteDomainPathParams;
+  QueryParams: DeleteDomainQueryParams;
+  Errors: DeleteDomain400 | DeleteDomain401 | DeleteDomain403 | DeleteDomain404 | DeleteDomain409;
+};
 
 export type GetEdgeConfigsQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description List of all edge configs.
  */
-export type GetEdgeConfigs200 = unknown
+export type GetEdgeConfigs200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetEdgeConfigs400 = unknown
+export type GetEdgeConfigs400 = unknown;
 
-export type GetEdgeConfigs401 = unknown
+export type GetEdgeConfigs401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetEdgeConfigs403 = unknown
+export type GetEdgeConfigs403 = unknown;
 
-export type GetEdgeConfigsQueryResponse = GetEdgeConfigs200
+export type GetEdgeConfigsQueryResponse = GetEdgeConfigs200;
 
 export type GetEdgeConfigsQuery = {
-  Response: GetEdgeConfigs200
-  QueryParams: GetEdgeConfigsQueryParams
-  Errors: GetEdgeConfigs400 | GetEdgeConfigs401 | GetEdgeConfigs403
-}
+  Response: GetEdgeConfigs200;
+  QueryParams: GetEdgeConfigsQueryParams;
+  Errors: GetEdgeConfigs400 | GetEdgeConfigs401 | GetEdgeConfigs403;
+};
 
 export type CreateEdgeConfigQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type CreateEdgeConfig201 = unknown
+export type CreateEdgeConfig201 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.
  */
-export type CreateEdgeConfig400 = unknown
+export type CreateEdgeConfig400 = unknown;
 
-export type CreateEdgeConfig401 = unknown
+export type CreateEdgeConfig401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type CreateEdgeConfig402 = unknown
+export type CreateEdgeConfig402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CreateEdgeConfig403 = unknown
+export type CreateEdgeConfig403 = unknown;
 
-export type CreateEdgeConfigMutationResponse = CreateEdgeConfig201
+export type CreateEdgeConfigMutationResponse = CreateEdgeConfig201;
 
 export type CreateEdgeConfigMutation = {
-  Response: CreateEdgeConfig201
-  QueryParams: CreateEdgeConfigQueryParams
-  Errors: CreateEdgeConfig400 | CreateEdgeConfig401 | CreateEdgeConfig402 | CreateEdgeConfig403
-}
+  Response: CreateEdgeConfig201;
+  QueryParams: CreateEdgeConfigQueryParams;
+  Errors: CreateEdgeConfig400 | CreateEdgeConfig401 | CreateEdgeConfig402 | CreateEdgeConfig403;
+};
 
 export type GetEdgeConfigPathParams = {
   /**
    * @type string
    */
-  edgeConfigId: string
-}
+  edgeConfigId: string;
+};
 
 export type GetEdgeConfigQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The EdgeConfig.
  */
-export type GetEdgeConfig200 = unknown
+export type GetEdgeConfig200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetEdgeConfig400 = unknown
+export type GetEdgeConfig400 = unknown;
 
-export type GetEdgeConfig401 = unknown
+export type GetEdgeConfig401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetEdgeConfig403 = unknown
+export type GetEdgeConfig403 = unknown;
 
-export type GetEdgeConfig404 = unknown
+export type GetEdgeConfig404 = unknown;
 
-export type GetEdgeConfigQueryResponse = GetEdgeConfig200
+export type GetEdgeConfigQueryResponse = GetEdgeConfig200;
 
 export type GetEdgeConfigQuery = {
-  Response: GetEdgeConfig200
-  PathParams: GetEdgeConfigPathParams
-  QueryParams: GetEdgeConfigQueryParams
-  Errors: GetEdgeConfig400 | GetEdgeConfig401 | GetEdgeConfig403 | GetEdgeConfig404
-}
+  Response: GetEdgeConfig200;
+  PathParams: GetEdgeConfigPathParams;
+  QueryParams: GetEdgeConfigQueryParams;
+  Errors: GetEdgeConfig400 | GetEdgeConfig401 | GetEdgeConfig403 | GetEdgeConfig404;
+};
 
 export type UpdateEdgeConfigPathParams = {
   /**
    * @type string
    */
-  edgeConfigId: string
-}
+  edgeConfigId: string;
+};
 
 export type UpdateEdgeConfigQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type UpdateEdgeConfig200 = unknown
+export type UpdateEdgeConfig200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type UpdateEdgeConfig400 = unknown
+export type UpdateEdgeConfig400 = unknown;
 
-export type UpdateEdgeConfig401 = unknown
+export type UpdateEdgeConfig401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type UpdateEdgeConfig402 = unknown
+export type UpdateEdgeConfig402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateEdgeConfig403 = unknown
+export type UpdateEdgeConfig403 = unknown;
 
-export type UpdateEdgeConfig404 = unknown
+export type UpdateEdgeConfig404 = unknown;
 
-export type UpdateEdgeConfigMutationResponse = UpdateEdgeConfig200
+export type UpdateEdgeConfigMutationResponse = UpdateEdgeConfig200;
 
 export type UpdateEdgeConfigMutation = {
-  Response: UpdateEdgeConfig200
-  PathParams: UpdateEdgeConfigPathParams
-  QueryParams: UpdateEdgeConfigQueryParams
-  Errors: UpdateEdgeConfig400 | UpdateEdgeConfig401 | UpdateEdgeConfig402 | UpdateEdgeConfig403 | UpdateEdgeConfig404
-}
+  Response: UpdateEdgeConfig200;
+  PathParams: UpdateEdgeConfigPathParams;
+  QueryParams: UpdateEdgeConfigQueryParams;
+  Errors: UpdateEdgeConfig400 | UpdateEdgeConfig401 | UpdateEdgeConfig402 | UpdateEdgeConfig403 | UpdateEdgeConfig404;
+};
 
 export type DeleteEdgeConfigPathParams = {
   /**
    * @type string
    */
-  edgeConfigId: string
-}
+  edgeConfigId: string;
+};
 
 export type DeleteEdgeConfigQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type DeleteEdgeConfig204 = unknown
+export type DeleteEdgeConfig204 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type DeleteEdgeConfig400 = unknown
+export type DeleteEdgeConfig400 = unknown;
 
-export type DeleteEdgeConfig401 = unknown
+export type DeleteEdgeConfig401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type DeleteEdgeConfig403 = unknown
+export type DeleteEdgeConfig403 = unknown;
 
-export type DeleteEdgeConfig404 = unknown
+export type DeleteEdgeConfig404 = unknown;
 
-export type DeleteEdgeConfigMutationResponse = DeleteEdgeConfig204
+export type DeleteEdgeConfigMutationResponse = DeleteEdgeConfig204;
 
 export type DeleteEdgeConfigMutation = {
-  Response: DeleteEdgeConfig204
-  PathParams: DeleteEdgeConfigPathParams
-  QueryParams: DeleteEdgeConfigQueryParams
-  Errors: DeleteEdgeConfig400 | DeleteEdgeConfig401 | DeleteEdgeConfig403 | DeleteEdgeConfig404
-}
+  Response: DeleteEdgeConfig204;
+  PathParams: DeleteEdgeConfigPathParams;
+  QueryParams: DeleteEdgeConfigQueryParams;
+  Errors: DeleteEdgeConfig400 | DeleteEdgeConfig401 | DeleteEdgeConfig403 | DeleteEdgeConfig404;
+};
 
 export type GetEdgeConfigItemsPathParams = {
   /**
    * @pattern ^ecfg_
    * @type string
    */
-  edgeConfigId: string
-}
+  edgeConfigId: string;
+};
 
 export type GetEdgeConfigItemsQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description List of all Edge Config items.
  */
-export type GetEdgeConfigItems200 = unknown
+export type GetEdgeConfigItems200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetEdgeConfigItems400 = unknown
+export type GetEdgeConfigItems400 = unknown;
 
-export type GetEdgeConfigItems401 = unknown
+export type GetEdgeConfigItems401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetEdgeConfigItems403 = unknown
+export type GetEdgeConfigItems403 = unknown;
 
-export type GetEdgeConfigItems404 = unknown
+export type GetEdgeConfigItems404 = unknown;
 
-export type GetEdgeConfigItemsQueryResponse = GetEdgeConfigItems200
+export type GetEdgeConfigItemsQueryResponse = GetEdgeConfigItems200;
 
 export type GetEdgeConfigItemsQuery = {
-  Response: GetEdgeConfigItems200
-  PathParams: GetEdgeConfigItemsPathParams
-  QueryParams: GetEdgeConfigItemsQueryParams
-  Errors: GetEdgeConfigItems400 | GetEdgeConfigItems401 | GetEdgeConfigItems403 | GetEdgeConfigItems404
-}
+  Response: GetEdgeConfigItems200;
+  PathParams: GetEdgeConfigItemsPathParams;
+  QueryParams: GetEdgeConfigItemsQueryParams;
+  Errors: GetEdgeConfigItems400 | GetEdgeConfigItems401 | GetEdgeConfigItems403 | GetEdgeConfigItems404;
+};
 
 export type PatchEdgeConfigItemsPathParams = {
   /**
    * @pattern ^ecfg_
    * @type string
    */
-  edgeConfigId: string
-}
+  edgeConfigId: string;
+};
 
 export type PatchEdgeConfigItemsQueryParams = {
   /**
    * @type string | undefined
    */
-  dryRun?: string | undefined
+  dryRun?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type PatchEdgeConfigItems200 = unknown
+export type PatchEdgeConfigItems200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type PatchEdgeConfigItems400 = unknown
+export type PatchEdgeConfigItems400 = unknown;
 
-export type PatchEdgeConfigItems401 = unknown
+export type PatchEdgeConfigItems401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type PatchEdgeConfigItems402 = unknown
+export type PatchEdgeConfigItems402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type PatchEdgeConfigItems403 = unknown
+export type PatchEdgeConfigItems403 = unknown;
 
-export type PatchEdgeConfigItems404 = unknown
+export type PatchEdgeConfigItems404 = unknown;
 
-export type PatchEdgeConfigItems409 = unknown
+export type PatchEdgeConfigItems409 = unknown;
 
-export type PatchEdgeConfigItemsMutationResponse = PatchEdgeConfigItems200
+export type PatchEdgeConfigItemsMutationResponse = PatchEdgeConfigItems200;
 
 export type PatchEdgeConfigItemsMutation = {
-  Response: PatchEdgeConfigItems200
-  PathParams: PatchEdgeConfigItemsPathParams
-  QueryParams: PatchEdgeConfigItemsQueryParams
+  Response: PatchEdgeConfigItems200;
+  PathParams: PatchEdgeConfigItemsPathParams;
+  QueryParams: PatchEdgeConfigItemsQueryParams;
   Errors:
     | PatchEdgeConfigItems400
     | PatchEdgeConfigItems401
     | PatchEdgeConfigItems402
     | PatchEdgeConfigItems403
     | PatchEdgeConfigItems404
-    | PatchEdgeConfigItems409
-}
+    | PatchEdgeConfigItems409;
+};
 
 export type GetEdgeConfigSchemaPathParams = {
   /**
    * @type string
    */
-  edgeConfigId: string
-}
+  edgeConfigId: string;
+};
 
 export type GetEdgeConfigSchemaQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The EdgeConfig.
  */
-export type GetEdgeConfigSchema200 = unknown
+export type GetEdgeConfigSchema200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetEdgeConfigSchema400 = unknown
+export type GetEdgeConfigSchema400 = unknown;
 
-export type GetEdgeConfigSchema401 = unknown
+export type GetEdgeConfigSchema401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetEdgeConfigSchema403 = unknown
+export type GetEdgeConfigSchema403 = unknown;
 
-export type GetEdgeConfigSchema404 = unknown
+export type GetEdgeConfigSchema404 = unknown;
 
-export type GetEdgeConfigSchemaQueryResponse = GetEdgeConfigSchema200
+export type GetEdgeConfigSchemaQueryResponse = GetEdgeConfigSchema200;
 
 export type GetEdgeConfigSchemaQuery = {
-  Response: GetEdgeConfigSchema200
-  PathParams: GetEdgeConfigSchemaPathParams
-  QueryParams: GetEdgeConfigSchemaQueryParams
-  Errors: GetEdgeConfigSchema400 | GetEdgeConfigSchema401 | GetEdgeConfigSchema403 | GetEdgeConfigSchema404
-}
+  Response: GetEdgeConfigSchema200;
+  PathParams: GetEdgeConfigSchemaPathParams;
+  QueryParams: GetEdgeConfigSchemaQueryParams;
+  Errors: GetEdgeConfigSchema400 | GetEdgeConfigSchema401 | GetEdgeConfigSchema403 | GetEdgeConfigSchema404;
+};
 
 export type PatchEdgeConfigSchemaPathParams = {
   /**
    * @type string
    */
-  edgeConfigId: string
-}
+  edgeConfigId: string;
+};
 
 export type PatchEdgeConfigSchemaQueryParams = {
   /**
    * @type string | undefined
    */
-  dryRun?: string | undefined
+  dryRun?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type PatchEdgeConfigSchema200 = unknown
+export type PatchEdgeConfigSchema200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type PatchEdgeConfigSchema400 = unknown
+export type PatchEdgeConfigSchema400 = unknown;
 
-export type PatchEdgeConfigSchema401 = unknown
+export type PatchEdgeConfigSchema401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type PatchEdgeConfigSchema402 = unknown
+export type PatchEdgeConfigSchema402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type PatchEdgeConfigSchema403 = unknown
+export type PatchEdgeConfigSchema403 = unknown;
 
-export type PatchEdgeConfigSchema404 = unknown
+export type PatchEdgeConfigSchema404 = unknown;
 
-export type PatchEdgeConfigSchemaMutationResponse = PatchEdgeConfigSchema200
+export type PatchEdgeConfigSchemaMutationResponse = PatchEdgeConfigSchema200;
 
 export type PatchEdgeConfigSchemaMutation = {
-  Response: PatchEdgeConfigSchema200
-  PathParams: PatchEdgeConfigSchemaPathParams
-  QueryParams: PatchEdgeConfigSchemaQueryParams
-  Errors: PatchEdgeConfigSchema400 | PatchEdgeConfigSchema401 | PatchEdgeConfigSchema402 | PatchEdgeConfigSchema403 | PatchEdgeConfigSchema404
-}
+  Response: PatchEdgeConfigSchema200;
+  PathParams: PatchEdgeConfigSchemaPathParams;
+  QueryParams: PatchEdgeConfigSchemaQueryParams;
+  Errors:
+    | PatchEdgeConfigSchema400
+    | PatchEdgeConfigSchema401
+    | PatchEdgeConfigSchema402
+    | PatchEdgeConfigSchema403
+    | PatchEdgeConfigSchema404;
+};
 
 export type DeleteEdgeConfigSchemaPathParams = {
   /**
    * @type string
    */
-  edgeConfigId: string
-}
+  edgeConfigId: string;
+};
 
 export type DeleteEdgeConfigSchemaQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type DeleteEdgeConfigSchema204 = unknown
+export type DeleteEdgeConfigSchema204 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type DeleteEdgeConfigSchema400 = unknown
+export type DeleteEdgeConfigSchema400 = unknown;
 
-export type DeleteEdgeConfigSchema401 = unknown
+export type DeleteEdgeConfigSchema401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type DeleteEdgeConfigSchema402 = unknown
+export type DeleteEdgeConfigSchema402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type DeleteEdgeConfigSchema403 = unknown
+export type DeleteEdgeConfigSchema403 = unknown;
 
-export type DeleteEdgeConfigSchema404 = unknown
+export type DeleteEdgeConfigSchema404 = unknown;
 
-export type DeleteEdgeConfigSchemaMutationResponse = DeleteEdgeConfigSchema204
+export type DeleteEdgeConfigSchemaMutationResponse = DeleteEdgeConfigSchema204;
 
 export type DeleteEdgeConfigSchemaMutation = {
-  Response: DeleteEdgeConfigSchema204
-  PathParams: DeleteEdgeConfigSchemaPathParams
-  QueryParams: DeleteEdgeConfigSchemaQueryParams
-  Errors: DeleteEdgeConfigSchema400 | DeleteEdgeConfigSchema401 | DeleteEdgeConfigSchema402 | DeleteEdgeConfigSchema403 | DeleteEdgeConfigSchema404
-}
+  Response: DeleteEdgeConfigSchema204;
+  PathParams: DeleteEdgeConfigSchemaPathParams;
+  QueryParams: DeleteEdgeConfigSchemaQueryParams;
+  Errors:
+    | DeleteEdgeConfigSchema400
+    | DeleteEdgeConfigSchema401
+    | DeleteEdgeConfigSchema402
+    | DeleteEdgeConfigSchema403
+    | DeleteEdgeConfigSchema404;
+};
 
 export type GetEdgeConfigItemPathParams = {
   /**
    * @pattern ^ecfg_
    * @type string
    */
-  edgeConfigId: string
+  edgeConfigId: string;
   /**
    * @type string
    */
-  edgeConfigItemKey: string
-}
+  edgeConfigItemKey: string;
+};
 
 export type GetEdgeConfigItemQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The EdgeConfig.
  */
-export type GetEdgeConfigItem200 = unknown
+export type GetEdgeConfigItem200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetEdgeConfigItem400 = unknown
+export type GetEdgeConfigItem400 = unknown;
 
-export type GetEdgeConfigItem401 = unknown
+export type GetEdgeConfigItem401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetEdgeConfigItem403 = unknown
+export type GetEdgeConfigItem403 = unknown;
 
-export type GetEdgeConfigItem404 = unknown
+export type GetEdgeConfigItem404 = unknown;
 
-export type GetEdgeConfigItemQueryResponse = GetEdgeConfigItem200
+export type GetEdgeConfigItemQueryResponse = GetEdgeConfigItem200;
 
 export type GetEdgeConfigItemQuery = {
-  Response: GetEdgeConfigItem200
-  PathParams: GetEdgeConfigItemPathParams
-  QueryParams: GetEdgeConfigItemQueryParams
-  Errors: GetEdgeConfigItem400 | GetEdgeConfigItem401 | GetEdgeConfigItem403 | GetEdgeConfigItem404
-}
+  Response: GetEdgeConfigItem200;
+  PathParams: GetEdgeConfigItemPathParams;
+  QueryParams: GetEdgeConfigItemQueryParams;
+  Errors: GetEdgeConfigItem400 | GetEdgeConfigItem401 | GetEdgeConfigItem403 | GetEdgeConfigItem404;
+};
 
 export type GetEdgeConfigTokensPathParams = {
   /**
    * @type string
    */
-  edgeConfigId: string
-}
+  edgeConfigId: string;
+};
 
 export type GetEdgeConfigTokensQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The EdgeConfig.
  */
-export type GetEdgeConfigTokens200 = unknown
+export type GetEdgeConfigTokens200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetEdgeConfigTokens400 = unknown
+export type GetEdgeConfigTokens400 = unknown;
 
-export type GetEdgeConfigTokens401 = unknown
+export type GetEdgeConfigTokens401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetEdgeConfigTokens403 = unknown
+export type GetEdgeConfigTokens403 = unknown;
 
-export type GetEdgeConfigTokens404 = unknown
+export type GetEdgeConfigTokens404 = unknown;
 
-export type GetEdgeConfigTokensQueryResponse = GetEdgeConfigTokens200
+export type GetEdgeConfigTokensQueryResponse = GetEdgeConfigTokens200;
 
 export type GetEdgeConfigTokensQuery = {
-  Response: GetEdgeConfigTokens200
-  PathParams: GetEdgeConfigTokensPathParams
-  QueryParams: GetEdgeConfigTokensQueryParams
-  Errors: GetEdgeConfigTokens400 | GetEdgeConfigTokens401 | GetEdgeConfigTokens403 | GetEdgeConfigTokens404
-}
+  Response: GetEdgeConfigTokens200;
+  PathParams: GetEdgeConfigTokensPathParams;
+  QueryParams: GetEdgeConfigTokensQueryParams;
+  Errors: GetEdgeConfigTokens400 | GetEdgeConfigTokens401 | GetEdgeConfigTokens403 | GetEdgeConfigTokens404;
+};
 
 export type DeleteEdgeConfigTokensPathParams = {
   /**
    * @type string
    */
-  edgeConfigId: string
-}
+  edgeConfigId: string;
+};
 
 export type DeleteEdgeConfigTokensQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type DeleteEdgeConfigTokens204 = unknown
+export type DeleteEdgeConfigTokens204 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type DeleteEdgeConfigTokens400 = unknown
+export type DeleteEdgeConfigTokens400 = unknown;
 
-export type DeleteEdgeConfigTokens401 = unknown
+export type DeleteEdgeConfigTokens401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type DeleteEdgeConfigTokens402 = unknown
+export type DeleteEdgeConfigTokens402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type DeleteEdgeConfigTokens403 = unknown
+export type DeleteEdgeConfigTokens403 = unknown;
 
-export type DeleteEdgeConfigTokens404 = unknown
+export type DeleteEdgeConfigTokens404 = unknown;
 
-export type DeleteEdgeConfigTokensMutationResponse = DeleteEdgeConfigTokens204
+export type DeleteEdgeConfigTokensMutationResponse = DeleteEdgeConfigTokens204;
 
 export type DeleteEdgeConfigTokensMutation = {
-  Response: DeleteEdgeConfigTokens204
-  PathParams: DeleteEdgeConfigTokensPathParams
-  QueryParams: DeleteEdgeConfigTokensQueryParams
-  Errors: DeleteEdgeConfigTokens400 | DeleteEdgeConfigTokens401 | DeleteEdgeConfigTokens402 | DeleteEdgeConfigTokens403 | DeleteEdgeConfigTokens404
-}
+  Response: DeleteEdgeConfigTokens204;
+  PathParams: DeleteEdgeConfigTokensPathParams;
+  QueryParams: DeleteEdgeConfigTokensQueryParams;
+  Errors:
+    | DeleteEdgeConfigTokens400
+    | DeleteEdgeConfigTokens401
+    | DeleteEdgeConfigTokens402
+    | DeleteEdgeConfigTokens403
+    | DeleteEdgeConfigTokens404;
+};
 
 export type GetEdgeConfigTokenPathParams = {
   /**
    * @type string
    */
-  edgeConfigId: string
+  edgeConfigId: string;
   /**
    * @type string
    */
-  token: string
-}
+  token: string;
+};
 
 export type GetEdgeConfigTokenQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The EdgeConfig.
  */
-export type GetEdgeConfigToken200 = unknown
+export type GetEdgeConfigToken200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetEdgeConfigToken400 = unknown
+export type GetEdgeConfigToken400 = unknown;
 
-export type GetEdgeConfigToken401 = unknown
+export type GetEdgeConfigToken401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetEdgeConfigToken403 = unknown
+export type GetEdgeConfigToken403 = unknown;
 
-export type GetEdgeConfigToken404 = unknown
+export type GetEdgeConfigToken404 = unknown;
 
-export type GetEdgeConfigTokenQueryResponse = GetEdgeConfigToken200
+export type GetEdgeConfigTokenQueryResponse = GetEdgeConfigToken200;
 
 export type GetEdgeConfigTokenQuery = {
-  Response: GetEdgeConfigToken200
-  PathParams: GetEdgeConfigTokenPathParams
-  QueryParams: GetEdgeConfigTokenQueryParams
-  Errors: GetEdgeConfigToken400 | GetEdgeConfigToken401 | GetEdgeConfigToken403 | GetEdgeConfigToken404
-}
+  Response: GetEdgeConfigToken200;
+  PathParams: GetEdgeConfigTokenPathParams;
+  QueryParams: GetEdgeConfigTokenQueryParams;
+  Errors: GetEdgeConfigToken400 | GetEdgeConfigToken401 | GetEdgeConfigToken403 | GetEdgeConfigToken404;
+};
 
 export type CreateEdgeConfigTokenPathParams = {
   /**
    * @type string
    */
-  edgeConfigId: string
-}
+  edgeConfigId: string;
+};
 
 export type CreateEdgeConfigTokenQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type CreateEdgeConfigToken201 = unknown
+export type CreateEdgeConfigToken201 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type CreateEdgeConfigToken400 = unknown
+export type CreateEdgeConfigToken400 = unknown;
 
-export type CreateEdgeConfigToken401 = unknown
+export type CreateEdgeConfigToken401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type CreateEdgeConfigToken402 = unknown
+export type CreateEdgeConfigToken402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CreateEdgeConfigToken403 = unknown
+export type CreateEdgeConfigToken403 = unknown;
 
-export type CreateEdgeConfigToken404 = unknown
+export type CreateEdgeConfigToken404 = unknown;
 
-export type CreateEdgeConfigTokenMutationResponse = CreateEdgeConfigToken201
+export type CreateEdgeConfigTokenMutationResponse = CreateEdgeConfigToken201;
 
 export type CreateEdgeConfigTokenMutation = {
-  Response: CreateEdgeConfigToken201
-  PathParams: CreateEdgeConfigTokenPathParams
-  QueryParams: CreateEdgeConfigTokenQueryParams
-  Errors: CreateEdgeConfigToken400 | CreateEdgeConfigToken401 | CreateEdgeConfigToken402 | CreateEdgeConfigToken403 | CreateEdgeConfigToken404
-}
+  Response: CreateEdgeConfigToken201;
+  PathParams: CreateEdgeConfigTokenPathParams;
+  QueryParams: CreateEdgeConfigTokenQueryParams;
+  Errors:
+    | CreateEdgeConfigToken400
+    | CreateEdgeConfigToken401
+    | CreateEdgeConfigToken402
+    | CreateEdgeConfigToken403
+    | CreateEdgeConfigToken404;
+};
 
 export type GetEdgeConfigBackupPathParams = {
   /**
    * @type string
    */
-  edgeConfigId: string
+  edgeConfigId: string;
   /**
    * @type string
    */
-  edgeConfigBackupVersionId: string
-}
+  edgeConfigBackupVersionId: string;
+};
 
 export type GetEdgeConfigBackupQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type GetEdgeConfigBackup200 = unknown
+export type GetEdgeConfigBackup200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetEdgeConfigBackup400 = unknown
+export type GetEdgeConfigBackup400 = unknown;
 
-export type GetEdgeConfigBackup401 = unknown
+export type GetEdgeConfigBackup401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetEdgeConfigBackup403 = unknown
+export type GetEdgeConfigBackup403 = unknown;
 
-export type GetEdgeConfigBackup404 = unknown
+export type GetEdgeConfigBackup404 = unknown;
 
-export type GetEdgeConfigBackupQueryResponse = GetEdgeConfigBackup200
+export type GetEdgeConfigBackupQueryResponse = GetEdgeConfigBackup200;
 
 export type GetEdgeConfigBackupQuery = {
-  Response: GetEdgeConfigBackup200
-  PathParams: GetEdgeConfigBackupPathParams
-  QueryParams: GetEdgeConfigBackupQueryParams
-  Errors: GetEdgeConfigBackup400 | GetEdgeConfigBackup401 | GetEdgeConfigBackup403 | GetEdgeConfigBackup404
-}
+  Response: GetEdgeConfigBackup200;
+  PathParams: GetEdgeConfigBackupPathParams;
+  QueryParams: GetEdgeConfigBackupQueryParams;
+  Errors: GetEdgeConfigBackup400 | GetEdgeConfigBackup401 | GetEdgeConfigBackup403 | GetEdgeConfigBackup404;
+};
 
 export type GetEdgeConfigBackupsPathParams = {
   /**
    * @type string
    */
-  edgeConfigId: string
-}
+  edgeConfigId: string;
+};
 
 export type GetEdgeConfigBackupsQueryParams = {
   /**
    * @type string | undefined
    */
-  next?: string | undefined
+  next?: string | undefined;
   /**
    * @minLength 0
    * @maxLength 50
    * @type number | undefined
    */
-  limit?: number | undefined
+  limit?: number | undefined;
   /**
    * @type string | undefined
    */
-  metadata?: string | undefined
+  metadata?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type GetEdgeConfigBackups200 = unknown
+export type GetEdgeConfigBackups200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetEdgeConfigBackups400 = unknown
+export type GetEdgeConfigBackups400 = unknown;
 
-export type GetEdgeConfigBackups401 = unknown
+export type GetEdgeConfigBackups401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetEdgeConfigBackups403 = unknown
+export type GetEdgeConfigBackups403 = unknown;
 
-export type GetEdgeConfigBackups404 = unknown
+export type GetEdgeConfigBackups404 = unknown;
 
-export type GetEdgeConfigBackupsQueryResponse = GetEdgeConfigBackups200
+export type GetEdgeConfigBackupsQueryResponse = GetEdgeConfigBackups200;
 
 export type GetEdgeConfigBackupsQuery = {
-  Response: GetEdgeConfigBackups200
-  PathParams: GetEdgeConfigBackupsPathParams
-  QueryParams: GetEdgeConfigBackupsQueryParams
-  Errors: GetEdgeConfigBackups400 | GetEdgeConfigBackups401 | GetEdgeConfigBackups403 | GetEdgeConfigBackups404
-}
+  Response: GetEdgeConfigBackups200;
+  PathParams: GetEdgeConfigBackupsPathParams;
+  QueryParams: GetEdgeConfigBackupsQueryParams;
+  Errors: GetEdgeConfigBackups400 | GetEdgeConfigBackups401 | GetEdgeConfigBackups403 | GetEdgeConfigBackups404;
+};
 
 export type ListUserEventsQueryParams = {
   /**
    * @description Maximum number of items which may be returned.
    * @type number | undefined
    */
-  limit?: number | undefined
+  limit?: number | undefined;
   /**
    * @description Timestamp to only include items created since then.
    * @type string | undefined
    */
-  since?: string | undefined
+  since?: string | undefined;
   /**
    * @description Timestamp to only include items created until then.
    * @type string | undefined
    */
-  until?: string | undefined
+  until?: string | undefined;
   /**
    * @description Comma-delimited list of event \\\"types\\\" to filter the results by.
    * @type string | undefined
    */
-  types?: string | undefined
+  types?: string | undefined;
   /**
    * @description Deprecated. Use `principalId` instead. If `principalId` and `userId` both exist, `principalId` will be used.
    * @type string | undefined
    */
-  userId?: string | undefined
+  userId?: string | undefined;
   /**
    * @description When retrieving events for a Team, the `principalId` parameter may be specified to filter events generated by a specific principal.
    * @type string | undefined
    */
-  principalId?: string | undefined
+  principalId?: string | undefined;
   /**
    * @description Comma-delimited list of project IDs to filter the results by.
    * @type string | undefined
    */
-  projectIds?: string | undefined
+  projectIds?: string | undefined;
   /**
    * @description When set to `true`, the response will include the `payload` field for each event.
    * @type string | undefined
    */
-  withPayload?: string | undefined
+  withPayload?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description Successful response.
  */
-export type ListUserEvents200 = unknown
+export type ListUserEvents200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type ListUserEvents400 = unknown
+export type ListUserEvents400 = unknown;
 
-export type ListUserEvents401 = unknown
+export type ListUserEvents401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type ListUserEvents403 = unknown
+export type ListUserEvents403 = unknown;
 
-export type ListUserEventsQueryResponse = ListUserEvents200
+export type ListUserEventsQueryResponse = ListUserEvents200;
 
 export type ListUserEventsQuery = {
-  Response: ListUserEvents200
-  QueryParams: ListUserEventsQueryParams
-  Errors: ListUserEvents400 | ListUserEvents401 | ListUserEvents403
-}
+  Response: ListUserEvents200;
+  QueryParams: ListUserEventsQueryParams;
+  Errors: ListUserEvents400 | ListUserEvents401 | ListUserEvents403;
+};
 
 export type GetAccountInfoPathParams = {
   /**
    * @type string
    */
-  integrationConfigurationId: string
-}
+  integrationConfigurationId: string;
+};
 
-export type GetAccountInfo200 = unknown
+export type GetAccountInfo200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetAccountInfo400 = unknown
+export type GetAccountInfo400 = unknown;
 
-export type GetAccountInfo401 = unknown
+export type GetAccountInfo401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetAccountInfo403 = unknown
+export type GetAccountInfo403 = unknown;
 
-export type GetAccountInfo404 = unknown
+export type GetAccountInfo404 = unknown;
 
-export type GetAccountInfoQueryResponse = GetAccountInfo200
+export type GetAccountInfoQueryResponse = GetAccountInfo200;
 
 export type GetAccountInfoQuery = {
-  Response: GetAccountInfo200
-  PathParams: GetAccountInfoPathParams
-  Errors: GetAccountInfo400 | GetAccountInfo401 | GetAccountInfo403 | GetAccountInfo404
-}
+  Response: GetAccountInfo200;
+  PathParams: GetAccountInfoPathParams;
+  Errors: GetAccountInfo400 | GetAccountInfo401 | GetAccountInfo403 | GetAccountInfo404;
+};
 
 export type GetMemberPathParams = {
   /**
    * @type string
    */
-  integrationConfigurationId: string
+  integrationConfigurationId: string;
   /**
    * @type string
    */
-  memberId: string
-}
+  memberId: string;
+};
 
-export type GetMember200 = unknown
+export type GetMember200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetMember400 = unknown
+export type GetMember400 = unknown;
 
-export type GetMember401 = unknown
+export type GetMember401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetMember403 = unknown
+export type GetMember403 = unknown;
 
-export type GetMember404 = unknown
+export type GetMember404 = unknown;
 
-export type GetMemberQueryResponse = GetMember200
+export type GetMemberQueryResponse = GetMember200;
 
 export type GetMemberQuery = {
-  Response: GetMember200
-  PathParams: GetMemberPathParams
-  Errors: GetMember400 | GetMember401 | GetMember403 | GetMember404
-}
+  Response: GetMember200;
+  PathParams: GetMemberPathParams;
+  Errors: GetMember400 | GetMember401 | GetMember403 | GetMember404;
+};
 
 export type CreateEventPathParams = {
   /**
    * @type string
    */
-  integrationConfigurationId: string
-}
+  integrationConfigurationId: string;
+};
 
-export type CreateEvent201 = unknown
+export type CreateEvent201 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type CreateEvent400 = unknown
+export type CreateEvent400 = unknown;
 
-export type CreateEvent401 = unknown
+export type CreateEvent401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CreateEvent403 = unknown
+export type CreateEvent403 = unknown;
 
-export type CreateEvent404 = unknown
+export type CreateEvent404 = unknown;
 
-export type CreateEventMutationResponse = CreateEvent201
+export type CreateEventMutationResponse = CreateEvent201;
 
 export type CreateEventMutation = {
-  Response: CreateEvent201
-  PathParams: CreateEventPathParams
-  Errors: CreateEvent400 | CreateEvent401 | CreateEvent403 | CreateEvent404
-}
+  Response: CreateEvent201;
+  PathParams: CreateEventPathParams;
+  Errors: CreateEvent400 | CreateEvent401 | CreateEvent403 | CreateEvent404;
+};
 
 export type GetIntegrationResourcesPathParams = {
   /**
    * @type string
    */
-  integrationConfigurationId: string
-}
+  integrationConfigurationId: string;
+};
 
-export type GetIntegrationResources200 = unknown
+export type GetIntegrationResources200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetIntegrationResources400 = unknown
+export type GetIntegrationResources400 = unknown;
 
-export type GetIntegrationResources401 = unknown
+export type GetIntegrationResources401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetIntegrationResources403 = unknown
+export type GetIntegrationResources403 = unknown;
 
-export type GetIntegrationResources404 = unknown
+export type GetIntegrationResources404 = unknown;
 
-export type GetIntegrationResourcesQueryResponse = GetIntegrationResources200
+export type GetIntegrationResourcesQueryResponse = GetIntegrationResources200;
 
 export type GetIntegrationResourcesQuery = {
-  Response: GetIntegrationResources200
-  PathParams: GetIntegrationResourcesPathParams
-  Errors: GetIntegrationResources400 | GetIntegrationResources401 | GetIntegrationResources403 | GetIntegrationResources404
-}
+  Response: GetIntegrationResources200;
+  PathParams: GetIntegrationResourcesPathParams;
+  Errors:
+    | GetIntegrationResources400
+    | GetIntegrationResources401
+    | GetIntegrationResources403
+    | GetIntegrationResources404;
+};
 
 export type GetIntegrationResourcePathParams = {
   /**
    * @description The ID of the integration configuration (installation) the resource belongs to
    * @type string
    */
-  integrationConfigurationId: string
+  integrationConfigurationId: string;
   /**
    * @description The ID provided by the 3rd party provider for the given resource
    * @type string
    */
-  resourceId: string
-}
+  resourceId: string;
+};
 
-export type GetIntegrationResource200 = unknown
+export type GetIntegrationResource200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetIntegrationResource400 = unknown
+export type GetIntegrationResource400 = unknown;
 
-export type GetIntegrationResource401 = unknown
+export type GetIntegrationResource401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetIntegrationResource403 = unknown
+export type GetIntegrationResource403 = unknown;
 
-export type GetIntegrationResource404 = unknown
+export type GetIntegrationResource404 = unknown;
 
-export type GetIntegrationResourceQueryResponse = GetIntegrationResource200
+export type GetIntegrationResourceQueryResponse = GetIntegrationResource200;
 
 export type GetIntegrationResourceQuery = {
-  Response: GetIntegrationResource200
-  PathParams: GetIntegrationResourcePathParams
-  Errors: GetIntegrationResource400 | GetIntegrationResource401 | GetIntegrationResource403 | GetIntegrationResource404
-}
+  Response: GetIntegrationResource200;
+  PathParams: GetIntegrationResourcePathParams;
+  Errors: GetIntegrationResource400 | GetIntegrationResource401 | GetIntegrationResource403 | GetIntegrationResource404;
+};
 
 export type DeleteIntegrationResourcePathParams = {
   /**
    * @type string
    */
-  integrationConfigurationId: string
+  integrationConfigurationId: string;
   /**
    * @type string
    */
-  resourceId: string
-}
+  resourceId: string;
+};
 
-export type DeleteIntegrationResource204 = unknown
+export type DeleteIntegrationResource204 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type DeleteIntegrationResource400 = unknown
+export type DeleteIntegrationResource400 = unknown;
 
-export type DeleteIntegrationResource401 = unknown
+export type DeleteIntegrationResource401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type DeleteIntegrationResource403 = unknown
+export type DeleteIntegrationResource403 = unknown;
 
-export type DeleteIntegrationResource404 = unknown
+export type DeleteIntegrationResource404 = unknown;
 
-export type DeleteIntegrationResourceMutationResponse = DeleteIntegrationResource204
+export type DeleteIntegrationResourceMutationResponse = DeleteIntegrationResource204;
 
 export type DeleteIntegrationResourceMutation = {
-  Response: DeleteIntegrationResource204
-  PathParams: DeleteIntegrationResourcePathParams
-  Errors: DeleteIntegrationResource400 | DeleteIntegrationResource401 | DeleteIntegrationResource403 | DeleteIntegrationResource404
-}
+  Response: DeleteIntegrationResource204;
+  PathParams: DeleteIntegrationResourcePathParams;
+  Errors:
+    | DeleteIntegrationResource400
+    | DeleteIntegrationResource401
+    | DeleteIntegrationResource403
+    | DeleteIntegrationResource404;
+};
 
 export type ImportResourcePathParams = {
   /**
    * @type string
    */
-  integrationConfigurationId: string
+  integrationConfigurationId: string;
   /**
    * @type string
    */
-  resourceId: string
-}
+  resourceId: string;
+};
 
-export type ImportResource200 = unknown
+export type ImportResource200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type ImportResource400 = unknown
+export type ImportResource400 = unknown;
 
-export type ImportResource401 = unknown
+export type ImportResource401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type ImportResource403 = unknown
+export type ImportResource403 = unknown;
 
-export type ImportResource404 = unknown
+export type ImportResource404 = unknown;
 
-export type ImportResourceMutationResponse = ImportResource200
+export type ImportResourceMutationResponse = ImportResource200;
 
 export type ImportResourceMutation = {
-  Response: ImportResource200
-  PathParams: ImportResourcePathParams
-  Errors: ImportResource400 | ImportResource401 | ImportResource403 | ImportResource404
-}
+  Response: ImportResource200;
+  PathParams: ImportResourcePathParams;
+  Errors: ImportResource400 | ImportResource401 | ImportResource403 | ImportResource404;
+};
 
 export type SubmitBillingDataPathParams = {
   /**
    * @type string
    */
-  integrationConfigurationId: string
-}
+  integrationConfigurationId: string;
+};
 
-export type SubmitBillingData201 = unknown
+export type SubmitBillingData201 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type SubmitBillingData400 = unknown
+export type SubmitBillingData400 = unknown;
 
-export type SubmitBillingData401 = unknown
+export type SubmitBillingData401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type SubmitBillingData403 = unknown
+export type SubmitBillingData403 = unknown;
 
-export type SubmitBillingData404 = unknown
+export type SubmitBillingData404 = unknown;
 
-export type SubmitBillingDataMutationResponse = SubmitBillingData201
+export type SubmitBillingDataMutationResponse = SubmitBillingData201;
 
 export type SubmitBillingDataMutation = {
-  Response: SubmitBillingData201
-  PathParams: SubmitBillingDataPathParams
-  Errors: SubmitBillingData400 | SubmitBillingData401 | SubmitBillingData403 | SubmitBillingData404
-}
+  Response: SubmitBillingData201;
+  PathParams: SubmitBillingDataPathParams;
+  Errors: SubmitBillingData400 | SubmitBillingData401 | SubmitBillingData403 | SubmitBillingData404;
+};
 
 export type SubmitInvoicePathParams = {
   /**
    * @type string
    */
-  integrationConfigurationId: string
-}
+  integrationConfigurationId: string;
+};
 
-export type SubmitInvoice200 = unknown
+export type SubmitInvoice200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type SubmitInvoice400 = unknown
+export type SubmitInvoice400 = unknown;
 
-export type SubmitInvoice401 = unknown
+export type SubmitInvoice401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type SubmitInvoice403 = unknown
+export type SubmitInvoice403 = unknown;
 
-export type SubmitInvoice404 = unknown
+export type SubmitInvoice404 = unknown;
 
-export type SubmitInvoiceMutationResponse = SubmitInvoice200
+export type SubmitInvoiceMutationResponse = SubmitInvoice200;
 
 export type SubmitInvoiceMutation = {
-  Response: SubmitInvoice200
-  PathParams: SubmitInvoicePathParams
-  Errors: SubmitInvoice400 | SubmitInvoice401 | SubmitInvoice403 | SubmitInvoice404
-}
+  Response: SubmitInvoice200;
+  PathParams: SubmitInvoicePathParams;
+  Errors: SubmitInvoice400 | SubmitInvoice401 | SubmitInvoice403 | SubmitInvoice404;
+};
 
 export type GetInvoicePathParams = {
   /**
    * @type string
    */
-  integrationConfigurationId: string
+  integrationConfigurationId: string;
   /**
    * @type string
    */
-  invoiceId: string
-}
+  invoiceId: string;
+};
 
-export type GetInvoice200 = unknown
+export type GetInvoice200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetInvoice400 = unknown
+export type GetInvoice400 = unknown;
 
-export type GetInvoice401 = unknown
+export type GetInvoice401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetInvoice403 = unknown
+export type GetInvoice403 = unknown;
 
-export type GetInvoice404 = unknown
+export type GetInvoice404 = unknown;
 
-export type GetInvoiceQueryResponse = GetInvoice200
+export type GetInvoiceQueryResponse = GetInvoice200;
 
 export type GetInvoiceQuery = {
-  Response: GetInvoice200
-  PathParams: GetInvoicePathParams
-  Errors: GetInvoice400 | GetInvoice401 | GetInvoice403 | GetInvoice404
-}
+  Response: GetInvoice200;
+  PathParams: GetInvoicePathParams;
+  Errors: GetInvoice400 | GetInvoice401 | GetInvoice403 | GetInvoice404;
+};
 
 export type UpdateInvoicePathParams = {
   /**
    * @type string
    */
-  integrationConfigurationId: string
+  integrationConfigurationId: string;
   /**
    * @type string
    */
-  invoiceId: string
-}
+  invoiceId: string;
+};
 
-export type UpdateInvoice204 = unknown
+export type UpdateInvoice204 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type UpdateInvoice400 = unknown
+export type UpdateInvoice400 = unknown;
 
-export type UpdateInvoice401 = unknown
+export type UpdateInvoice401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateInvoice403 = unknown
+export type UpdateInvoice403 = unknown;
 
-export type UpdateInvoice404 = unknown
+export type UpdateInvoice404 = unknown;
 
-export type UpdateInvoiceMutationResponse = UpdateInvoice204
+export type UpdateInvoiceMutationResponse = UpdateInvoice204;
 
 export type UpdateInvoiceMutation = {
-  Response: UpdateInvoice204
-  PathParams: UpdateInvoicePathParams
-  Errors: UpdateInvoice400 | UpdateInvoice401 | UpdateInvoice403 | UpdateInvoice404
-}
+  Response: UpdateInvoice204;
+  PathParams: UpdateInvoicePathParams;
+  Errors: UpdateInvoice400 | UpdateInvoice401 | UpdateInvoice403 | UpdateInvoice404;
+};
 
 export type SubmitPrepaymentBalancesPathParams = {
   /**
    * @type string
    */
-  integrationConfigurationId: string
-}
+  integrationConfigurationId: string;
+};
 
-export type SubmitPrepaymentBalances201 = unknown
+export type SubmitPrepaymentBalances201 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type SubmitPrepaymentBalances400 = unknown
+export type SubmitPrepaymentBalances400 = unknown;
 
-export type SubmitPrepaymentBalances401 = unknown
+export type SubmitPrepaymentBalances401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type SubmitPrepaymentBalances403 = unknown
+export type SubmitPrepaymentBalances403 = unknown;
 
-export type SubmitPrepaymentBalances404 = unknown
+export type SubmitPrepaymentBalances404 = unknown;
 
-export type SubmitPrepaymentBalancesMutationResponse = SubmitPrepaymentBalances201
+export type SubmitPrepaymentBalancesMutationResponse = SubmitPrepaymentBalances201;
 
 export type SubmitPrepaymentBalancesMutation = {
-  Response: SubmitPrepaymentBalances201
-  PathParams: SubmitPrepaymentBalancesPathParams
-  Errors: SubmitPrepaymentBalances400 | SubmitPrepaymentBalances401 | SubmitPrepaymentBalances403 | SubmitPrepaymentBalances404
-}
+  Response: SubmitPrepaymentBalances201;
+  PathParams: SubmitPrepaymentBalancesPathParams;
+  Errors:
+    | SubmitPrepaymentBalances400
+    | SubmitPrepaymentBalances401
+    | SubmitPrepaymentBalances403
+    | SubmitPrepaymentBalances404;
+};
 
 export type UpdateResourceSecretsPathParams = {
   /**
    * @type string
    */
-  integrationConfigurationId: string
+  integrationConfigurationId: string;
   /**
    * @type string
    */
-  integrationProductIdOrSlug: string
+  integrationProductIdOrSlug: string;
   /**
    * @type string
    */
-  resourceId: string
-}
+  resourceId: string;
+};
 
-export type UpdateResourceSecrets201 = unknown
+export type UpdateResourceSecrets201 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type UpdateResourceSecrets400 = unknown
+export type UpdateResourceSecrets400 = unknown;
 
-export type UpdateResourceSecrets401 = unknown
+export type UpdateResourceSecrets401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateResourceSecrets403 = unknown
+export type UpdateResourceSecrets403 = unknown;
 
-export type UpdateResourceSecrets404 = unknown
+export type UpdateResourceSecrets404 = unknown;
 
-export type UpdateResourceSecretsMutationResponse = UpdateResourceSecrets201
+export type UpdateResourceSecretsMutationResponse = UpdateResourceSecrets201;
 
 export type UpdateResourceSecretsMutation = {
-  Response: UpdateResourceSecrets201
-  PathParams: UpdateResourceSecretsPathParams
-  Errors: UpdateResourceSecrets400 | UpdateResourceSecrets401 | UpdateResourceSecrets403 | UpdateResourceSecrets404
-}
+  Response: UpdateResourceSecrets201;
+  PathParams: UpdateResourceSecretsPathParams;
+  Errors: UpdateResourceSecrets400 | UpdateResourceSecrets401 | UpdateResourceSecrets403 | UpdateResourceSecrets404;
+};
 
 export type UpdateResourceSecretsByIdPathParams = {
   /**
    * @type string
    */
-  integrationConfigurationId: string
+  integrationConfigurationId: string;
   /**
    * @type string
    */
-  resourceId: string
-}
+  resourceId: string;
+};
 
-export type UpdateResourceSecretsById201 = unknown
+export type UpdateResourceSecretsById201 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type UpdateResourceSecretsById400 = unknown
+export type UpdateResourceSecretsById400 = unknown;
 
-export type UpdateResourceSecretsById401 = unknown
+export type UpdateResourceSecretsById401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateResourceSecretsById403 = unknown
+export type UpdateResourceSecretsById403 = unknown;
 
-export type UpdateResourceSecretsById404 = unknown
+export type UpdateResourceSecretsById404 = unknown;
 
-export type UpdateResourceSecretsById422 = unknown
+export type UpdateResourceSecretsById422 = unknown;
 
-export type UpdateResourceSecretsByIdMutationResponse = UpdateResourceSecretsById201
+export type UpdateResourceSecretsByIdMutationResponse = UpdateResourceSecretsById201;
 
 export type UpdateResourceSecretsByIdMutation = {
-  Response: UpdateResourceSecretsById201
-  PathParams: UpdateResourceSecretsByIdPathParams
+  Response: UpdateResourceSecretsById201;
+  PathParams: UpdateResourceSecretsByIdPathParams;
   Errors:
     | UpdateResourceSecretsById400
     | UpdateResourceSecretsById401
     | UpdateResourceSecretsById403
     | UpdateResourceSecretsById404
-    | UpdateResourceSecretsById422
-}
+    | UpdateResourceSecretsById422;
+};
 
 export const getConfigurationsQueryParamsViewEnum = {
   account: 'account',
-  project: 'project',
-} as const
+  project: 'project'
+} as const;
 
-export type GetConfigurationsQueryParamsViewEnum = (typeof getConfigurationsQueryParamsViewEnum)[keyof typeof getConfigurationsQueryParamsViewEnum]
+export type GetConfigurationsQueryParamsViewEnum =
+  (typeof getConfigurationsQueryParamsViewEnum)[keyof typeof getConfigurationsQueryParamsViewEnum];
 
 export const getConfigurationsQueryParamsInstallationTypeEnum = {
   marketplace: 'marketplace',
-  external: 'external',
-} as const
+  external: 'external'
+} as const;
 
 export type GetConfigurationsQueryParamsInstallationTypeEnum =
-  (typeof getConfigurationsQueryParamsInstallationTypeEnum)[keyof typeof getConfigurationsQueryParamsInstallationTypeEnum]
+  (typeof getConfigurationsQueryParamsInstallationTypeEnum)[keyof typeof getConfigurationsQueryParamsInstallationTypeEnum];
 
 export type GetConfigurationsQueryParams = {
   /**
    * @type string
    */
-  view: GetConfigurationsQueryParamsViewEnum
+  view: GetConfigurationsQueryParamsViewEnum;
   /**
    * @type string | undefined
    */
-  installationType?: GetConfigurationsQueryParamsInstallationTypeEnum | undefined
+  installationType?: GetConfigurationsQueryParamsInstallationTypeEnum | undefined;
   /**
    * @description ID of the integration
    * @type string | undefined
    */
-  integrationIdOrSlug?: string | undefined
+  integrationIdOrSlug?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The list of configurations for the authenticated user
  */
-export type GetConfigurations200 = unknown
+export type GetConfigurations200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetConfigurations400 = unknown
+export type GetConfigurations400 = unknown;
 
-export type GetConfigurations401 = unknown
+export type GetConfigurations401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetConfigurations403 = unknown
+export type GetConfigurations403 = unknown;
 
-export type GetConfigurationsQueryResponse = GetConfigurations200
+export type GetConfigurationsQueryResponse = GetConfigurations200;
 
 export type GetConfigurationsQuery = {
-  Response: GetConfigurations200
-  QueryParams: GetConfigurationsQueryParams
-  Errors: GetConfigurations400 | GetConfigurations401 | GetConfigurations403
-}
+  Response: GetConfigurations200;
+  QueryParams: GetConfigurationsQueryParams;
+  Errors: GetConfigurations400 | GetConfigurations401 | GetConfigurations403;
+};
 
 export type GetConfigurationPathParams = {
   /**
    * @description ID of the configuration to check
    * @type string
    */
-  id: string
-}
+  id: string;
+};
 
 export type GetConfigurationQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The configuration with the provided id
  */
-export type GetConfiguration200 = unknown
+export type GetConfiguration200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetConfiguration400 = unknown
+export type GetConfiguration400 = unknown;
 
-export type GetConfiguration401 = unknown
+export type GetConfiguration401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetConfiguration403 = unknown
+export type GetConfiguration403 = unknown;
 
 /**
  * @description The configuration was not found
  */
-export type GetConfiguration404 = unknown
+export type GetConfiguration404 = unknown;
 
-export type GetConfigurationQueryResponse = GetConfiguration200
+export type GetConfigurationQueryResponse = GetConfiguration200;
 
 export type GetConfigurationQuery = {
-  Response: GetConfiguration200
-  PathParams: GetConfigurationPathParams
-  QueryParams: GetConfigurationQueryParams
-  Errors: GetConfiguration400 | GetConfiguration401 | GetConfiguration403 | GetConfiguration404
-}
+  Response: GetConfiguration200;
+  PathParams: GetConfigurationPathParams;
+  QueryParams: GetConfigurationQueryParams;
+  Errors: GetConfiguration400 | GetConfiguration401 | GetConfiguration403 | GetConfiguration404;
+};
 
 export type DeleteConfigurationPathParams = {
   /**
    * @type string
    */
-  id: string
-}
+  id: string;
+};
 
 export type DeleteConfigurationQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The configuration was successfully removed
  */
-export type DeleteConfiguration204 = unknown
+export type DeleteConfiguration204 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type DeleteConfiguration400 = unknown
+export type DeleteConfiguration400 = unknown;
 
-export type DeleteConfiguration401 = unknown
+export type DeleteConfiguration401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type DeleteConfiguration403 = unknown
+export type DeleteConfiguration403 = unknown;
 
 /**
  * @description The configuration was not found
  */
-export type DeleteConfiguration404 = unknown
+export type DeleteConfiguration404 = unknown;
 
-export type DeleteConfigurationMutationResponse = DeleteConfiguration204
+export type DeleteConfigurationMutationResponse = DeleteConfiguration204;
 
 export type DeleteConfigurationMutation = {
-  Response: DeleteConfiguration204
-  PathParams: DeleteConfigurationPathParams
-  QueryParams: DeleteConfigurationQueryParams
-  Errors: DeleteConfiguration400 | DeleteConfiguration401 | DeleteConfiguration403 | DeleteConfiguration404
-}
+  Response: DeleteConfiguration204;
+  PathParams: DeleteConfigurationPathParams;
+  QueryParams: DeleteConfigurationQueryParams;
+  Errors: DeleteConfiguration400 | DeleteConfiguration401 | DeleteConfiguration403 | DeleteConfiguration404;
+};
 
-export type ExchangeSsoToken200 = unknown
+export type ExchangeSsoToken200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.
  */
-export type ExchangeSsoToken400 = unknown
+export type ExchangeSsoToken400 = unknown;
 
-export type ExchangeSsoToken404 = unknown
+export type ExchangeSsoToken404 = unknown;
 
-export type ExchangeSsoToken500 = unknown
+export type ExchangeSsoToken500 = unknown;
 
-export type ExchangeSsoTokenMutationResponse = ExchangeSsoToken200
+export type ExchangeSsoTokenMutationResponse = ExchangeSsoToken200;
 
 export type ExchangeSsoTokenMutation = {
-  Response: ExchangeSsoToken200
-  Errors: ExchangeSsoToken400 | ExchangeSsoToken404 | ExchangeSsoToken500
-}
+  Response: ExchangeSsoToken200;
+  Errors: ExchangeSsoToken400 | ExchangeSsoToken404 | ExchangeSsoToken500;
+};
 
 export type GetIntegrationLogDrainsQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description A list of log drains
  */
-export type GetIntegrationLogDrains200 = unknown
+export type GetIntegrationLogDrains200 = unknown;
 
-export type GetIntegrationLogDrains400 = unknown
+export type GetIntegrationLogDrains400 = unknown;
 
-export type GetIntegrationLogDrains401 = unknown
+export type GetIntegrationLogDrains401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetIntegrationLogDrains403 = unknown
+export type GetIntegrationLogDrains403 = unknown;
 
-export type GetIntegrationLogDrainsQueryResponse = GetIntegrationLogDrains200
+export type GetIntegrationLogDrainsQueryResponse = GetIntegrationLogDrains200;
 
 export type GetIntegrationLogDrainsQuery = {
-  Response: GetIntegrationLogDrains200
-  QueryParams: GetIntegrationLogDrainsQueryParams
-  Errors: GetIntegrationLogDrains400 | GetIntegrationLogDrains401 | GetIntegrationLogDrains403
-}
+  Response: GetIntegrationLogDrains200;
+  QueryParams: GetIntegrationLogDrainsQueryParams;
+  Errors: GetIntegrationLogDrains400 | GetIntegrationLogDrains401 | GetIntegrationLogDrains403;
+};
 
 export type CreateLogDrainQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The log drain was successfully created
  */
-export type CreateLogDrain200 = unknown
+export type CreateLogDrain200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nThe provided token is not from an OAuth2 Client
  */
-export type CreateLogDrain400 = unknown
+export type CreateLogDrain400 = unknown;
 
-export type CreateLogDrain401 = unknown
+export type CreateLogDrain401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CreateLogDrain403 = unknown
+export type CreateLogDrain403 = unknown;
 
-export type CreateLogDrainMutationResponse = CreateLogDrain200
+export type CreateLogDrainMutationResponse = CreateLogDrain200;
 
 export type CreateLogDrainMutation = {
-  Response: CreateLogDrain200
-  QueryParams: CreateLogDrainQueryParams
-  Errors: CreateLogDrain400 | CreateLogDrain401 | CreateLogDrain403
-}
+  Response: CreateLogDrain200;
+  QueryParams: CreateLogDrainQueryParams;
+  Errors: CreateLogDrain400 | CreateLogDrain401 | CreateLogDrain403;
+};
 
 export type DeleteIntegrationLogDrainPathParams = {
   /**
    * @description ID of the log drain to be deleted
    * @type string
    */
-  id: string
-}
+  id: string;
+};
 
 export type DeleteIntegrationLogDrainQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The log drain was successfully deleted
  */
-export type DeleteIntegrationLogDrain204 = unknown
+export type DeleteIntegrationLogDrain204 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type DeleteIntegrationLogDrain400 = unknown
+export type DeleteIntegrationLogDrain400 = unknown;
 
-export type DeleteIntegrationLogDrain401 = unknown
+export type DeleteIntegrationLogDrain401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type DeleteIntegrationLogDrain403 = unknown
+export type DeleteIntegrationLogDrain403 = unknown;
 
 /**
  * @description The log drain was not found
  */
-export type DeleteIntegrationLogDrain404 = unknown
+export type DeleteIntegrationLogDrain404 = unknown;
 
-export type DeleteIntegrationLogDrainMutationResponse = DeleteIntegrationLogDrain204
+export type DeleteIntegrationLogDrainMutationResponse = DeleteIntegrationLogDrain204;
 
 export type DeleteIntegrationLogDrainMutation = {
-  Response: DeleteIntegrationLogDrain204
-  PathParams: DeleteIntegrationLogDrainPathParams
-  QueryParams: DeleteIntegrationLogDrainQueryParams
-  Errors: DeleteIntegrationLogDrain400 | DeleteIntegrationLogDrain401 | DeleteIntegrationLogDrain403 | DeleteIntegrationLogDrain404
-}
+  Response: DeleteIntegrationLogDrain204;
+  PathParams: DeleteIntegrationLogDrainPathParams;
+  QueryParams: DeleteIntegrationLogDrainQueryParams;
+  Errors:
+    | DeleteIntegrationLogDrain400
+    | DeleteIntegrationLogDrain401
+    | DeleteIntegrationLogDrain403
+    | DeleteIntegrationLogDrain404;
+};
 
 export type GetRuntimeLogsPathParams = {
   /**
    * @type string
    */
-  projectId: string
+  projectId: string;
   /**
    * @type string
    */
-  deploymentId: string
-}
+  deploymentId: string;
+};
 
 export type GetRuntimeLogsQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type GetRuntimeLogs200 = unknown
+export type GetRuntimeLogs200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetRuntimeLogs400 = unknown
+export type GetRuntimeLogs400 = unknown;
 
-export type GetRuntimeLogs401 = unknown
+export type GetRuntimeLogs401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetRuntimeLogs403 = unknown
+export type GetRuntimeLogs403 = unknown;
 
-export type GetRuntimeLogsQueryResponse = GetRuntimeLogs200
+export type GetRuntimeLogsQueryResponse = GetRuntimeLogs200;
 
 export type GetRuntimeLogsQuery = {
-  Response: GetRuntimeLogs200
-  PathParams: GetRuntimeLogsPathParams
-  QueryParams: GetRuntimeLogsQueryParams
-  Errors: GetRuntimeLogs400 | GetRuntimeLogs401 | GetRuntimeLogs403
-}
+  Response: GetRuntimeLogs200;
+  PathParams: GetRuntimeLogsPathParams;
+  QueryParams: GetRuntimeLogsQueryParams;
+  Errors: GetRuntimeLogs400 | GetRuntimeLogs401 | GetRuntimeLogs403;
+};
 
 export type CreateExperimentationItemPathParams = {
   /**
    * @type string
    */
-  integrationConfigurationId: string
+  integrationConfigurationId: string;
   /**
    * @type string
    */
-  resourceId: string
-}
+  resourceId: string;
+};
 
 /**
  * @description The items were created
  */
-export type CreateExperimentationItem204 = unknown
+export type CreateExperimentationItem204 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type CreateExperimentationItem400 = unknown
+export type CreateExperimentationItem400 = unknown;
 
-export type CreateExperimentationItem401 = unknown
+export type CreateExperimentationItem401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CreateExperimentationItem403 = unknown
+export type CreateExperimentationItem403 = unknown;
 
-export type CreateExperimentationItem404 = unknown
+export type CreateExperimentationItem404 = unknown;
 
-export type CreateExperimentationItemMutationResponse = CreateExperimentationItem204
+export type CreateExperimentationItemMutationResponse = CreateExperimentationItem204;
 
 export type CreateExperimentationItemMutation = {
-  Response: CreateExperimentationItem204
-  PathParams: CreateExperimentationItemPathParams
-  Errors: CreateExperimentationItem400 | CreateExperimentationItem401 | CreateExperimentationItem403 | CreateExperimentationItem404
-}
+  Response: CreateExperimentationItem204;
+  PathParams: CreateExperimentationItemPathParams;
+  Errors:
+    | CreateExperimentationItem400
+    | CreateExperimentationItem401
+    | CreateExperimentationItem403
+    | CreateExperimentationItem404;
+};
 
 export type UpdateExperimentationItemPathParams = {
   /**
    * @type string
    */
-  integrationConfigurationId: string
+  integrationConfigurationId: string;
   /**
    * @type string
    */
-  resourceId: string
+  resourceId: string;
   /**
    * @type string
    */
-  itemId: string
-}
+  itemId: string;
+};
 
 /**
  * @description The item was updated
  */
-export type UpdateExperimentationItem204 = unknown
+export type UpdateExperimentationItem204 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type UpdateExperimentationItem400 = unknown
+export type UpdateExperimentationItem400 = unknown;
 
-export type UpdateExperimentationItem401 = unknown
+export type UpdateExperimentationItem401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateExperimentationItem403 = unknown
+export type UpdateExperimentationItem403 = unknown;
 
-export type UpdateExperimentationItem404 = unknown
+export type UpdateExperimentationItem404 = unknown;
 
-export type UpdateExperimentationItemMutationResponse = UpdateExperimentationItem204
+export type UpdateExperimentationItemMutationResponse = UpdateExperimentationItem204;
 
 export type UpdateExperimentationItemMutation = {
-  Response: UpdateExperimentationItem204
-  PathParams: UpdateExperimentationItemPathParams
-  Errors: UpdateExperimentationItem400 | UpdateExperimentationItem401 | UpdateExperimentationItem403 | UpdateExperimentationItem404
-}
+  Response: UpdateExperimentationItem204;
+  PathParams: UpdateExperimentationItemPathParams;
+  Errors:
+    | UpdateExperimentationItem400
+    | UpdateExperimentationItem401
+    | UpdateExperimentationItem403
+    | UpdateExperimentationItem404;
+};
 
 export type DeleteExperimentationItemPathParams = {
   /**
    * @type string
    */
-  integrationConfigurationId: string
+  integrationConfigurationId: string;
   /**
    * @type string
    */
-  resourceId: string
+  resourceId: string;
   /**
    * @type string
    */
-  itemId: string
-}
+  itemId: string;
+};
 
 /**
  * @description The item was deleted
  */
-export type DeleteExperimentationItem204 = unknown
+export type DeleteExperimentationItem204 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type DeleteExperimentationItem400 = unknown
+export type DeleteExperimentationItem400 = unknown;
 
-export type DeleteExperimentationItem401 = unknown
+export type DeleteExperimentationItem401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type DeleteExperimentationItem403 = unknown
+export type DeleteExperimentationItem403 = unknown;
 
-export type DeleteExperimentationItem404 = unknown
+export type DeleteExperimentationItem404 = unknown;
 
-export type DeleteExperimentationItemMutationResponse = DeleteExperimentationItem204
+export type DeleteExperimentationItemMutationResponse = DeleteExperimentationItem204;
 
 export type DeleteExperimentationItemMutation = {
-  Response: DeleteExperimentationItem204
-  PathParams: DeleteExperimentationItemPathParams
-  Errors: DeleteExperimentationItem400 | DeleteExperimentationItem401 | DeleteExperimentationItem403 | DeleteExperimentationItem404
-}
+  Response: DeleteExperimentationItem204;
+  PathParams: DeleteExperimentationItemPathParams;
+  Errors:
+    | DeleteExperimentationItem400
+    | DeleteExperimentationItem401
+    | DeleteExperimentationItem403
+    | DeleteExperimentationItem404;
+};
 
 export type UpdateExperimentationEdgeConfigPathParams = {
   /**
    * @type string
    */
-  integrationConfigurationId: string
+  integrationConfigurationId: string;
   /**
    * @type string
    */
-  resourceId: string
-}
+  resourceId: string;
+};
 
 /**
  * @description The Edge Config was updated
  */
-export type UpdateExperimentationEdgeConfig200 = unknown
+export type UpdateExperimentationEdgeConfig200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type UpdateExperimentationEdgeConfig400 = unknown
+export type UpdateExperimentationEdgeConfig400 = unknown;
 
-export type UpdateExperimentationEdgeConfig401 = unknown
+export type UpdateExperimentationEdgeConfig401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateExperimentationEdgeConfig403 = unknown
+export type UpdateExperimentationEdgeConfig403 = unknown;
 
-export type UpdateExperimentationEdgeConfig404 = unknown
+export type UpdateExperimentationEdgeConfig404 = unknown;
 
-export type UpdateExperimentationEdgeConfig412 = unknown
+export type UpdateExperimentationEdgeConfig412 = unknown;
 
-export type UpdateExperimentationEdgeConfigMutationResponse = UpdateExperimentationEdgeConfig200
+export type UpdateExperimentationEdgeConfigMutationResponse = UpdateExperimentationEdgeConfig200;
 
 export type UpdateExperimentationEdgeConfigMutation = {
-  Response: UpdateExperimentationEdgeConfig200
-  PathParams: UpdateExperimentationEdgeConfigPathParams
+  Response: UpdateExperimentationEdgeConfig200;
+  PathParams: UpdateExperimentationEdgeConfigPathParams;
   Errors:
     | UpdateExperimentationEdgeConfig400
     | UpdateExperimentationEdgeConfig401
     | UpdateExperimentationEdgeConfig403
     | UpdateExperimentationEdgeConfig404
-    | UpdateExperimentationEdgeConfig412
-}
+    | UpdateExperimentationEdgeConfig412;
+};
 
 export type GetProjectMembersPathParams = {
   /**
    * @description The ID or name of the Project.
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type GetProjectMembersQueryParams = {
   /**
@@ -12716,1204 +12818,1230 @@ export type GetProjectMembersQueryParams = {
    * @maxLength 100
    * @type integer | undefined
    */
-  limit?: number | undefined
+  limit?: number | undefined;
   /**
    * @description Timestamp in milliseconds to only include members added since then.
    * @type integer | undefined
    */
-  since?: number | undefined
+  since?: number | undefined;
   /**
    * @description Timestamp in milliseconds to only include members added until then.
    * @type integer | undefined
    */
-  until?: number | undefined
+  until?: number | undefined;
   /**
    * @description Search project members by their name, username, and email.
    * @type string | undefined
    */
-  search?: string | undefined
+  search?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description Paginated list of members for the project.
  */
-export type GetProjectMembers200 = unknown
+export type GetProjectMembers200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetProjectMembers400 = unknown
+export type GetProjectMembers400 = unknown;
 
-export type GetProjectMembers401 = unknown
+export type GetProjectMembers401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetProjectMembers403 = unknown
+export type GetProjectMembers403 = unknown;
 
-export type GetProjectMembersQueryResponse = GetProjectMembers200
+export type GetProjectMembersQueryResponse = GetProjectMembers200;
 
 export type GetProjectMembersQuery = {
-  Response: GetProjectMembers200
-  PathParams: GetProjectMembersPathParams
-  QueryParams: GetProjectMembersQueryParams
-  Errors: GetProjectMembers400 | GetProjectMembers401 | GetProjectMembers403
-}
+  Response: GetProjectMembers200;
+  PathParams: GetProjectMembersPathParams;
+  QueryParams: GetProjectMembersQueryParams;
+  Errors: GetProjectMembers400 | GetProjectMembers401 | GetProjectMembers403;
+};
 
 export type AddProjectMemberPathParams = {
   /**
    * @description The ID or name of the Project.
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type AddProjectMemberQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description Responds with the project ID on success.
  */
-export type AddProjectMember200 = unknown
+export type AddProjectMember200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type AddProjectMember400 = unknown
+export type AddProjectMember400 = unknown;
 
-export type AddProjectMember401 = unknown
+export type AddProjectMember401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type AddProjectMember403 = unknown
+export type AddProjectMember403 = unknown;
 
-export type AddProjectMember500 = unknown
+export type AddProjectMember500 = unknown;
 
-export type AddProjectMemberMutationResponse = AddProjectMember200
+export type AddProjectMemberMutationResponse = AddProjectMember200;
 
 export type AddProjectMemberMutation = {
-  Response: AddProjectMember200
-  PathParams: AddProjectMemberPathParams
-  QueryParams: AddProjectMemberQueryParams
-  Errors: AddProjectMember400 | AddProjectMember401 | AddProjectMember403 | AddProjectMember500
-}
+  Response: AddProjectMember200;
+  PathParams: AddProjectMemberPathParams;
+  QueryParams: AddProjectMemberQueryParams;
+  Errors: AddProjectMember400 | AddProjectMember401 | AddProjectMember403 | AddProjectMember500;
+};
 
 export type RemoveProjectMemberPathParams = {
   /**
    * @description The ID or name of the Project.
    * @type string
    */
-  idOrName: string
+  idOrName: string;
   /**
    * @description The user ID of the member.
    * @type string
    */
-  uid: string
-}
+  uid: string;
+};
 
 export type RemoveProjectMemberQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type RemoveProjectMember200 = unknown
+export type RemoveProjectMember200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type RemoveProjectMember400 = unknown
+export type RemoveProjectMember400 = unknown;
 
-export type RemoveProjectMember401 = unknown
+export type RemoveProjectMember401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type RemoveProjectMember403 = unknown
+export type RemoveProjectMember403 = unknown;
 
-export type RemoveProjectMemberMutationResponse = RemoveProjectMember200
+export type RemoveProjectMemberMutationResponse = RemoveProjectMember200;
 
 export type RemoveProjectMemberMutation = {
-  Response: RemoveProjectMember200
-  PathParams: RemoveProjectMemberPathParams
-  QueryParams: RemoveProjectMemberQueryParams
-  Errors: RemoveProjectMember400 | RemoveProjectMember401 | RemoveProjectMember403
-}
+  Response: RemoveProjectMember200;
+  PathParams: RemoveProjectMemberPathParams;
+  QueryParams: RemoveProjectMemberQueryParams;
+  Errors: RemoveProjectMember400 | RemoveProjectMember401 | RemoveProjectMember403;
+};
 
 export const getProjectsQueryParamsGitForkProtectionEnum = {
   '1': '1',
-  '0': '0',
-} as const
+  '0': '0'
+} as const;
 
 export type GetProjectsQueryParamsGitForkProtectionEnum =
-  (typeof getProjectsQueryParamsGitForkProtectionEnum)[keyof typeof getProjectsQueryParamsGitForkProtectionEnum]
+  (typeof getProjectsQueryParamsGitForkProtectionEnum)[keyof typeof getProjectsQueryParamsGitForkProtectionEnum];
 
 export type GetProjectsQueryParams = {
   /**
    * @description Query only projects updated after the given timestamp
    * @type string | undefined
    */
-  from?: string | undefined
+  from?: string | undefined;
   /**
    * @description Specifies whether PRs from Git forks should require a team member\'s authorization before it can be deployed
    * @type string | undefined
    */
-  gitForkProtection?: GetProjectsQueryParamsGitForkProtectionEnum | undefined
+  gitForkProtection?: GetProjectsQueryParamsGitForkProtectionEnum | undefined;
   /**
    * @description Limit the number of projects returned
    * @type string | undefined
    */
-  limit?: string | undefined
+  limit?: string | undefined;
   /**
    * @description Search projects by the name field
    * @maxLength 100
    * @type string | undefined
    */
-  search?: string | undefined
+  search?: string | undefined;
   /**
    * @description Filter results by repo. Also used for project count
    * @type string | undefined
    */
-  repo?: string | undefined
+  repo?: string | undefined;
   /**
    * @description Filter results by Repository ID.
    * @type string | undefined
    */
-  repoId?: string | undefined
+  repoId?: string | undefined;
   /**
    * @description Filter results by Repository URL.
    * @type string | undefined
    */
-  repoUrl?: string | undefined
+  repoUrl?: string | undefined;
   /**
    * @description Filter results by excluding those projects that belong to a repo
    * @type string | undefined
    */
-  excludeRepos?: string | undefined
+  excludeRepos?: string | undefined;
   /**
    * @description Filter results by connected Edge Config ID
    * @type string | undefined
    */
-  edgeConfigId?: string | undefined
+  edgeConfigId?: string | undefined;
   /**
    * @description Filter results by connected Edge Config Token ID
    * @type string | undefined
    */
-  edgeConfigTokenId?: string | undefined
+  edgeConfigTokenId?: string | undefined;
   /**
    * @type boolean | undefined
    */
-  deprecated?: boolean | undefined
+  deprecated?: boolean | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The paginated list of projects
  */
-export type GetProjects200 = unknown
+export type GetProjects200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetProjects400 = unknown
+export type GetProjects400 = unknown;
 
-export type GetProjects401 = unknown
+export type GetProjects401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetProjects403 = unknown
+export type GetProjects403 = unknown;
 
-export type GetProjectsQueryResponse = GetProjects200
+export type GetProjectsQueryResponse = GetProjects200;
 
 export type GetProjectsQuery = {
-  Response: GetProjects200
-  QueryParams: GetProjectsQueryParams
-  Errors: GetProjects400 | GetProjects401 | GetProjects403
-}
+  Response: GetProjects200;
+  QueryParams: GetProjectsQueryParams;
+  Errors: GetProjects400 | GetProjects401 | GetProjects403;
+};
 
 export type CreateProjectQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The project was successfuly created
  */
-export type CreateProject200 = unknown
+export type CreateProject200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.\nAt least one environment variable failed validation\nThe Bitbucket Webhook for the project link could not be created\nThe Gitlab Webhook for the project link could not be created
  */
-export type CreateProject400 = unknown
+export type CreateProject400 = unknown;
 
-export type CreateProject401 = unknown
+export type CreateProject401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated\nPro customers are allowed to deploy Serverless Functions to up to `proMaxRegions` regions, or if the project was created before the limit was introduced.\nDeploying to Serverless Functions to multiple regions requires a plan update
  */
-export type CreateProject402 = unknown
+export type CreateProject402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CreateProject403 = unknown
+export type CreateProject403 = unknown;
 
 /**
  * @description A project with the provided name already exists.
  */
-export type CreateProject409 = unknown
+export type CreateProject409 = unknown;
 
-export type CreateProjectMutationResponse = CreateProject200
+export type CreateProjectMutationResponse = CreateProject200;
 
 export type CreateProjectMutation = {
-  Response: CreateProject200
-  QueryParams: CreateProjectQueryParams
-  Errors: CreateProject400 | CreateProject401 | CreateProject402 | CreateProject403 | CreateProject409
-}
+  Response: CreateProject200;
+  QueryParams: CreateProjectQueryParams;
+  Errors: CreateProject400 | CreateProject401 | CreateProject402 | CreateProject403 | CreateProject409;
+};
 
 export type GetProjectPathParams = {
   /**
    * @description The unique project identifier or the project name
    */
-  idOrName: string | boolean
-}
+  idOrName: string | boolean;
+};
 
 export type GetProjectQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The project information
  */
-export type GetProject200 = unknown
+export type GetProject200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetProject400 = unknown
+export type GetProject400 = unknown;
 
-export type GetProject401 = unknown
+export type GetProject401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetProject403 = unknown
+export type GetProject403 = unknown;
 
-export type GetProjectQueryResponse = GetProject200
+export type GetProjectQueryResponse = GetProject200;
 
 export type GetProjectQuery = {
-  Response: GetProject200
-  PathParams: GetProjectPathParams
-  QueryParams: GetProjectQueryParams
-  Errors: GetProject400 | GetProject401 | GetProject403
-}
+  Response: GetProject200;
+  PathParams: GetProjectPathParams;
+  QueryParams: GetProjectQueryParams;
+  Errors: GetProject400 | GetProject401 | GetProject403;
+};
 
 export type UpdateProjectPathParams = {
   /**
    * @description The unique project identifier or the project name
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type UpdateProjectQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The project was successfully updated
  */
-export type UpdateProject200 = unknown
+export type UpdateProject200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.\nTrusted IPs is only accessible for enterprise customers
  */
-export type UpdateProject400 = unknown
+export type UpdateProject400 = unknown;
 
-export type UpdateProject401 = unknown
+export type UpdateProject401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated\nPro customers are allowed to deploy Serverless Functions to up to `proMaxRegions` regions, or if the project was created before the limit was introduced.\nDeploying to Serverless Functions to multiple regions requires a plan update
  */
-export type UpdateProject402 = unknown
+export type UpdateProject402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateProject403 = unknown
+export type UpdateProject403 = unknown;
 
-export type UpdateProject404 = unknown
+export type UpdateProject404 = unknown;
 
 /**
  * @description The provided name for the project is already being used\nThe project is currently being transferred.
  */
-export type UpdateProject409 = unknown
+export type UpdateProject409 = unknown;
 
 /**
  * @description Owner does not have protection add-on\nAdvanced Deployment Protection is not available for the user plan
  */
-export type UpdateProject428 = unknown
+export type UpdateProject428 = unknown;
 
-export type UpdateProjectMutationResponse = UpdateProject200
+export type UpdateProjectMutationResponse = UpdateProject200;
 
 export type UpdateProjectMutation = {
-  Response: UpdateProject200
-  PathParams: UpdateProjectPathParams
-  QueryParams: UpdateProjectQueryParams
-  Errors: UpdateProject400 | UpdateProject401 | UpdateProject402 | UpdateProject403 | UpdateProject404 | UpdateProject409 | UpdateProject428
-}
+  Response: UpdateProject200;
+  PathParams: UpdateProjectPathParams;
+  QueryParams: UpdateProjectQueryParams;
+  Errors:
+    | UpdateProject400
+    | UpdateProject401
+    | UpdateProject402
+    | UpdateProject403
+    | UpdateProject404
+    | UpdateProject409
+    | UpdateProject428;
+};
 
 export type DeleteProjectPathParams = {
   /**
    * @description The unique project identifier or the project name
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type DeleteProjectQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The project was successfuly removed
  */
-export type DeleteProject204 = unknown
+export type DeleteProject204 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type DeleteProject400 = unknown
+export type DeleteProject400 = unknown;
 
-export type DeleteProject401 = unknown
+export type DeleteProject401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type DeleteProject403 = unknown
+export type DeleteProject403 = unknown;
 
-export type DeleteProject409 = unknown
+export type DeleteProject409 = unknown;
 
-export type DeleteProjectMutationResponse = DeleteProject204
+export type DeleteProjectMutationResponse = DeleteProject204;
 
 export type DeleteProjectMutation = {
-  Response: DeleteProject204
-  PathParams: DeleteProjectPathParams
-  QueryParams: DeleteProjectQueryParams
-  Errors: DeleteProject400 | DeleteProject401 | DeleteProject403 | DeleteProject409
-}
+  Response: DeleteProject204;
+  PathParams: DeleteProjectPathParams;
+  QueryParams: DeleteProjectQueryParams;
+  Errors: DeleteProject400 | DeleteProject401 | DeleteProject403 | DeleteProject409;
+};
 
 export type CreateCustomEnvironmentPathParams = {
   /**
    * @description The unique project identifier or the project name
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type CreateCustomEnvironmentQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type CreateCustomEnvironment201 = unknown
+export type CreateCustomEnvironment201 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type CreateCustomEnvironment400 = unknown
+export type CreateCustomEnvironment400 = unknown;
 
-export type CreateCustomEnvironment401 = unknown
+export type CreateCustomEnvironment401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type CreateCustomEnvironment402 = unknown
+export type CreateCustomEnvironment402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CreateCustomEnvironment403 = unknown
+export type CreateCustomEnvironment403 = unknown;
 
-export type CreateCustomEnvironment500 = unknown
+export type CreateCustomEnvironment500 = unknown;
 
-export type CreateCustomEnvironmentMutationResponse = CreateCustomEnvironment201
+export type CreateCustomEnvironmentMutationResponse = CreateCustomEnvironment201;
 
 export type CreateCustomEnvironmentMutation = {
-  Response: CreateCustomEnvironment201
-  PathParams: CreateCustomEnvironmentPathParams
-  QueryParams: CreateCustomEnvironmentQueryParams
-  Errors: CreateCustomEnvironment400 | CreateCustomEnvironment401 | CreateCustomEnvironment402 | CreateCustomEnvironment403 | CreateCustomEnvironment500
-}
+  Response: CreateCustomEnvironment201;
+  PathParams: CreateCustomEnvironmentPathParams;
+  QueryParams: CreateCustomEnvironmentQueryParams;
+  Errors:
+    | CreateCustomEnvironment400
+    | CreateCustomEnvironment401
+    | CreateCustomEnvironment402
+    | CreateCustomEnvironment403
+    | CreateCustomEnvironment500;
+};
 
 export type ListCustomEnvironmentsPathParams = {
   /**
    * @description The unique project identifier or the project name
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type ListCustomEnvironmentsQueryParams = {
   /**
    * @description Fetch custom environments for a specific git branch
    * @type string | undefined
    */
-  gitBranch?: string | undefined
+  gitBranch?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type ListCustomEnvironments200 = unknown
+export type ListCustomEnvironments200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type ListCustomEnvironments400 = unknown
+export type ListCustomEnvironments400 = unknown;
 
-export type ListCustomEnvironments401 = unknown
+export type ListCustomEnvironments401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type ListCustomEnvironments403 = unknown
+export type ListCustomEnvironments403 = unknown;
 
-export type ListCustomEnvironmentsQueryResponse = ListCustomEnvironments200
+export type ListCustomEnvironmentsQueryResponse = ListCustomEnvironments200;
 
 export type ListCustomEnvironmentsQuery = {
-  Response: ListCustomEnvironments200
-  PathParams: ListCustomEnvironmentsPathParams
-  QueryParams: ListCustomEnvironmentsQueryParams
-  Errors: ListCustomEnvironments400 | ListCustomEnvironments401 | ListCustomEnvironments403
-}
+  Response: ListCustomEnvironments200;
+  PathParams: ListCustomEnvironmentsPathParams;
+  QueryParams: ListCustomEnvironmentsQueryParams;
+  Errors: ListCustomEnvironments400 | ListCustomEnvironments401 | ListCustomEnvironments403;
+};
 
 export type GetCustomEnvironmentPathParams = {
   /**
    * @description The unique project identifier or the project name
    * @type string
    */
-  idOrName: string
+  idOrName: string;
   /**
    * @description The unique custom environment identifier within the project
    * @type string
    */
-  environmentSlugOrId: string
-}
+  environmentSlugOrId: string;
+};
 
 export type GetCustomEnvironmentQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type GetCustomEnvironment200 = unknown
+export type GetCustomEnvironment200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetCustomEnvironment400 = unknown
+export type GetCustomEnvironment400 = unknown;
 
-export type GetCustomEnvironment401 = unknown
+export type GetCustomEnvironment401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetCustomEnvironment403 = unknown
+export type GetCustomEnvironment403 = unknown;
 
-export type GetCustomEnvironment404 = unknown
+export type GetCustomEnvironment404 = unknown;
 
-export type GetCustomEnvironmentQueryResponse = GetCustomEnvironment200
+export type GetCustomEnvironmentQueryResponse = GetCustomEnvironment200;
 
 export type GetCustomEnvironmentQuery = {
-  Response: GetCustomEnvironment200
-  PathParams: GetCustomEnvironmentPathParams
-  QueryParams: GetCustomEnvironmentQueryParams
-  Errors: GetCustomEnvironment400 | GetCustomEnvironment401 | GetCustomEnvironment403 | GetCustomEnvironment404
-}
+  Response: GetCustomEnvironment200;
+  PathParams: GetCustomEnvironmentPathParams;
+  QueryParams: GetCustomEnvironmentQueryParams;
+  Errors: GetCustomEnvironment400 | GetCustomEnvironment401 | GetCustomEnvironment403 | GetCustomEnvironment404;
+};
 
 export type UpdateCustomEnvironmentPathParams = {
   /**
    * @description The unique project identifier or the project name
    * @type string
    */
-  idOrName: string
+  idOrName: string;
   /**
    * @description The unique custom environment identifier within the project
    * @type string
    */
-  environmentSlugOrId: string
-}
+  environmentSlugOrId: string;
+};
 
 export type UpdateCustomEnvironmentQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type UpdateCustomEnvironment200 = unknown
+export type UpdateCustomEnvironment200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type UpdateCustomEnvironment400 = unknown
+export type UpdateCustomEnvironment400 = unknown;
 
-export type UpdateCustomEnvironment401 = unknown
+export type UpdateCustomEnvironment401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type UpdateCustomEnvironment402 = unknown
+export type UpdateCustomEnvironment402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateCustomEnvironment403 = unknown
+export type UpdateCustomEnvironment403 = unknown;
 
-export type UpdateCustomEnvironment500 = unknown
+export type UpdateCustomEnvironment500 = unknown;
 
-export type UpdateCustomEnvironmentMutationResponse = UpdateCustomEnvironment200
+export type UpdateCustomEnvironmentMutationResponse = UpdateCustomEnvironment200;
 
 export type UpdateCustomEnvironmentMutation = {
-  Response: UpdateCustomEnvironment200
-  PathParams: UpdateCustomEnvironmentPathParams
-  QueryParams: UpdateCustomEnvironmentQueryParams
-  Errors: UpdateCustomEnvironment400 | UpdateCustomEnvironment401 | UpdateCustomEnvironment402 | UpdateCustomEnvironment403 | UpdateCustomEnvironment500
-}
+  Response: UpdateCustomEnvironment200;
+  PathParams: UpdateCustomEnvironmentPathParams;
+  QueryParams: UpdateCustomEnvironmentQueryParams;
+  Errors:
+    | UpdateCustomEnvironment400
+    | UpdateCustomEnvironment401
+    | UpdateCustomEnvironment402
+    | UpdateCustomEnvironment403
+    | UpdateCustomEnvironment500;
+};
 
 export type RemoveCustomEnvironmentPathParams = {
   /**
    * @description The unique project identifier or the project name
    * @type string
    */
-  idOrName: string
+  idOrName: string;
   /**
    * @description The unique custom environment identifier within the project
    * @type string
    */
-  environmentSlugOrId: string
-}
+  environmentSlugOrId: string;
+};
 
 export type RemoveCustomEnvironmentQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type RemoveCustomEnvironment200 = unknown
+export type RemoveCustomEnvironment200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type RemoveCustomEnvironment400 = unknown
+export type RemoveCustomEnvironment400 = unknown;
 
-export type RemoveCustomEnvironment401 = unknown
+export type RemoveCustomEnvironment401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type RemoveCustomEnvironment403 = unknown
+export type RemoveCustomEnvironment403 = unknown;
 
-export type RemoveCustomEnvironmentMutationResponse = RemoveCustomEnvironment200
+export type RemoveCustomEnvironmentMutationResponse = RemoveCustomEnvironment200;
 
 export type RemoveCustomEnvironmentMutation = {
-  Response: RemoveCustomEnvironment200
-  PathParams: RemoveCustomEnvironmentPathParams
-  QueryParams: RemoveCustomEnvironmentQueryParams
-  Errors: RemoveCustomEnvironment400 | RemoveCustomEnvironment401 | RemoveCustomEnvironment403
-}
+  Response: RemoveCustomEnvironment200;
+  PathParams: RemoveCustomEnvironmentPathParams;
+  QueryParams: RemoveCustomEnvironmentQueryParams;
+  Errors: RemoveCustomEnvironment400 | RemoveCustomEnvironment401 | RemoveCustomEnvironment403;
+};
 
 export type GetProjectDomainsPathParams = {
   /**
    * @description The unique project identifier or the project name
    */
-  idOrName: string | number
-}
+  idOrName: string | number;
+};
 
 export const getProjectDomainsQueryParamsProductionEnum = {
   true: 'true',
-  false: 'false',
-} as const
+  false: 'false'
+} as const;
 
 export type GetProjectDomainsQueryParamsProductionEnum =
-  (typeof getProjectDomainsQueryParamsProductionEnum)[keyof typeof getProjectDomainsQueryParamsProductionEnum]
+  (typeof getProjectDomainsQueryParamsProductionEnum)[keyof typeof getProjectDomainsQueryParamsProductionEnum];
 
 export const getProjectDomainsQueryParamsTargetEnum = {
   production: 'production',
-  preview: 'preview',
-} as const
+  preview: 'preview'
+} as const;
 
-export type GetProjectDomainsQueryParamsTargetEnum = (typeof getProjectDomainsQueryParamsTargetEnum)[keyof typeof getProjectDomainsQueryParamsTargetEnum]
+export type GetProjectDomainsQueryParamsTargetEnum =
+  (typeof getProjectDomainsQueryParamsTargetEnum)[keyof typeof getProjectDomainsQueryParamsTargetEnum];
 
 export const getProjectDomainsQueryParamsRedirectsEnum = {
   true: 'true',
-  false: 'false',
-} as const
+  false: 'false'
+} as const;
 
 export type GetProjectDomainsQueryParamsRedirectsEnum =
-  (typeof getProjectDomainsQueryParamsRedirectsEnum)[keyof typeof getProjectDomainsQueryParamsRedirectsEnum]
+  (typeof getProjectDomainsQueryParamsRedirectsEnum)[keyof typeof getProjectDomainsQueryParamsRedirectsEnum];
 
 export const getProjectDomainsQueryParamsVerifiedEnum = {
   true: 'true',
-  false: 'false',
-} as const
+  false: 'false'
+} as const;
 
-export type GetProjectDomainsQueryParamsVerifiedEnum = (typeof getProjectDomainsQueryParamsVerifiedEnum)[keyof typeof getProjectDomainsQueryParamsVerifiedEnum]
+export type GetProjectDomainsQueryParamsVerifiedEnum =
+  (typeof getProjectDomainsQueryParamsVerifiedEnum)[keyof typeof getProjectDomainsQueryParamsVerifiedEnum];
 
 export const getProjectDomainsQueryParamsOrderEnum = {
   ASC: 'ASC',
-  DESC: 'DESC',
-} as const
+  DESC: 'DESC'
+} as const;
 
-export type GetProjectDomainsQueryParamsOrderEnum = (typeof getProjectDomainsQueryParamsOrderEnum)[keyof typeof getProjectDomainsQueryParamsOrderEnum]
+export type GetProjectDomainsQueryParamsOrderEnum =
+  (typeof getProjectDomainsQueryParamsOrderEnum)[keyof typeof getProjectDomainsQueryParamsOrderEnum];
 
 export type GetProjectDomainsQueryParams = {
   /**
    * @description Filters only production domains when set to `true`.
    * @default "false"
    */
-  production?: GetProjectDomainsQueryParamsProductionEnum | undefined
+  production?: GetProjectDomainsQueryParamsProductionEnum | undefined;
   /**
    * @description Filters on the target of the domain. Can be either \\\"production\\\", \\\"preview\\\"
    * @type string | undefined
    */
-  target?: GetProjectDomainsQueryParamsTargetEnum | undefined
+  target?: GetProjectDomainsQueryParamsTargetEnum | undefined;
   /**
    * @description The unique custom environment identifier within the project
    * @type string | undefined
    */
-  customEnvironmentId?: string | undefined
+  customEnvironmentId?: string | undefined;
   /**
    * @description Filters domains based on specific branch.
    * @type string | undefined
    */
-  gitBranch?: string | undefined
+  gitBranch?: string | undefined;
   /**
    * @description Excludes redirect project domains when \\\"false\\\". Includes redirect project domains when \\\"true\\\" (default).
    * @default "true"
    */
-  redirects?: GetProjectDomainsQueryParamsRedirectsEnum | undefined
+  redirects?: GetProjectDomainsQueryParamsRedirectsEnum | undefined;
   /**
    * @description Filters domains based on their redirect target.
    * @type string | undefined
    */
-  redirect?: string | undefined
+  redirect?: string | undefined;
   /**
    * @description Filters domains based on their verification status.
    */
-  verified?: GetProjectDomainsQueryParamsVerifiedEnum | undefined
+  verified?: GetProjectDomainsQueryParamsVerifiedEnum | undefined;
   /**
    * @description Maximum number of domains to list from a request (max 100).
    * @type number | undefined
    */
-  limit?: number | undefined
+  limit?: number | undefined;
   /**
    * @description Get domains created after this JavaScript timestamp.
    * @type number | undefined
    */
-  since?: number | undefined
+  since?: number | undefined;
   /**
    * @description Get domains created before this JavaScript timestamp.
    * @type number | undefined
    */
-  until?: number | undefined
+  until?: number | undefined;
   /**
    * @description Domains sort order by createdAt
    * @default "DESC"
    */
-  order?: GetProjectDomainsQueryParamsOrderEnum | undefined
+  order?: GetProjectDomainsQueryParamsOrderEnum | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description Successful response retrieving a list of domains
  */
-export type GetProjectDomains200 = unknown
+export type GetProjectDomains200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetProjectDomains400 = unknown
+export type GetProjectDomains400 = unknown;
 
-export type GetProjectDomains401 = unknown
+export type GetProjectDomains401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetProjectDomains403 = unknown
+export type GetProjectDomains403 = unknown;
 
-export type GetProjectDomainsQueryResponse = GetProjectDomains200
+export type GetProjectDomainsQueryResponse = GetProjectDomains200;
 
 export type GetProjectDomainsQuery = {
-  Response: GetProjectDomains200
-  PathParams: GetProjectDomainsPathParams
-  QueryParams: GetProjectDomainsQueryParams
-  Errors: GetProjectDomains400 | GetProjectDomains401 | GetProjectDomains403
-}
+  Response: GetProjectDomains200;
+  PathParams: GetProjectDomainsPathParams;
+  QueryParams: GetProjectDomainsQueryParams;
+  Errors: GetProjectDomains400 | GetProjectDomains401 | GetProjectDomains403;
+};
 
 export type GetProjectDomainPathParams = {
   /**
    * @description The unique project identifier or the project name
    * @type string
    */
-  idOrName: string
+  idOrName: string;
   /**
    * @description The project domain name
    * @type string
    */
-  domain: string
-}
+  domain: string;
+};
 
 export type GetProjectDomainQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type GetProjectDomain200 = unknown
+export type GetProjectDomain200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetProjectDomain400 = unknown
+export type GetProjectDomain400 = unknown;
 
-export type GetProjectDomain401 = unknown
+export type GetProjectDomain401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetProjectDomain403 = unknown
+export type GetProjectDomain403 = unknown;
 
-export type GetProjectDomainQueryResponse = GetProjectDomain200
+export type GetProjectDomainQueryResponse = GetProjectDomain200;
 
 export type GetProjectDomainQuery = {
-  Response: GetProjectDomain200
-  PathParams: GetProjectDomainPathParams
-  QueryParams: GetProjectDomainQueryParams
-  Errors: GetProjectDomain400 | GetProjectDomain401 | GetProjectDomain403
-}
+  Response: GetProjectDomain200;
+  PathParams: GetProjectDomainPathParams;
+  QueryParams: GetProjectDomainQueryParams;
+  Errors: GetProjectDomain400 | GetProjectDomain401 | GetProjectDomain403;
+};
 
 export type UpdateProjectDomainPathParams = {
   /**
    * @description The unique project identifier or the project name
    * @type string
    */
-  idOrName: string
+  idOrName: string;
   /**
    * @description The project domain name
    * @type string
    */
-  domain: string
-}
+  domain: string;
+};
 
 export type UpdateProjectDomainQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The domain was updated successfuly
  */
-export type UpdateProjectDomain200 = unknown
+export type UpdateProjectDomain200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.\nThe domain redirect is not valid
  */
-export type UpdateProjectDomain400 = unknown
+export type UpdateProjectDomain400 = unknown;
 
-export type UpdateProjectDomain401 = unknown
+export type UpdateProjectDomain401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateProjectDomain403 = unknown
+export type UpdateProjectDomain403 = unknown;
 
 /**
  * @description The project is currently being transferred
  */
-export type UpdateProjectDomain409 = unknown
+export type UpdateProjectDomain409 = unknown;
 
-export type UpdateProjectDomainMutationResponse = UpdateProjectDomain200
+export type UpdateProjectDomainMutationResponse = UpdateProjectDomain200;
 
 export type UpdateProjectDomainMutation = {
-  Response: UpdateProjectDomain200
-  PathParams: UpdateProjectDomainPathParams
-  QueryParams: UpdateProjectDomainQueryParams
-  Errors: UpdateProjectDomain400 | UpdateProjectDomain401 | UpdateProjectDomain403 | UpdateProjectDomain409
-}
+  Response: UpdateProjectDomain200;
+  PathParams: UpdateProjectDomainPathParams;
+  QueryParams: UpdateProjectDomainQueryParams;
+  Errors: UpdateProjectDomain400 | UpdateProjectDomain401 | UpdateProjectDomain403 | UpdateProjectDomain409;
+};
 
 export type RemoveProjectDomainPathParams = {
   /**
    * @description The unique project identifier or the project name
    * @type string
    */
-  idOrName: string
+  idOrName: string;
   /**
    * @description The project domain name
    * @type string
    */
-  domain: string
-}
+  domain: string;
+};
 
 export type RemoveProjectDomainQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The domain was succesfully removed from the project
  */
-export type RemoveProjectDomain200 = unknown
+export type RemoveProjectDomain200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type RemoveProjectDomain400 = unknown
+export type RemoveProjectDomain400 = unknown;
 
-export type RemoveProjectDomain401 = unknown
+export type RemoveProjectDomain401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type RemoveProjectDomain403 = unknown
+export type RemoveProjectDomain403 = unknown;
 
-export type RemoveProjectDomain404 = unknown
+export type RemoveProjectDomain404 = unknown;
 
 /**
  * @description The project is currently being transferred
  */
-export type RemoveProjectDomain409 = unknown
+export type RemoveProjectDomain409 = unknown;
 
-export type RemoveProjectDomainMutationResponse = RemoveProjectDomain200
+export type RemoveProjectDomainMutationResponse = RemoveProjectDomain200;
 
 export type RemoveProjectDomainMutation = {
-  Response: RemoveProjectDomain200
-  PathParams: RemoveProjectDomainPathParams
-  QueryParams: RemoveProjectDomainQueryParams
-  Errors: RemoveProjectDomain400 | RemoveProjectDomain401 | RemoveProjectDomain403 | RemoveProjectDomain404 | RemoveProjectDomain409
-}
+  Response: RemoveProjectDomain200;
+  PathParams: RemoveProjectDomainPathParams;
+  QueryParams: RemoveProjectDomainQueryParams;
+  Errors:
+    | RemoveProjectDomain400
+    | RemoveProjectDomain401
+    | RemoveProjectDomain403
+    | RemoveProjectDomain404
+    | RemoveProjectDomain409;
+};
 
 export type AddProjectDomainPathParams = {
   /**
    * @description The unique project identifier or the project name
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type AddProjectDomainQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The domain was successfully added to the project
  */
-export type AddProjectDomain200 = unknown
+export type AddProjectDomain200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.\nThe domain is not valid\nYou can\'t set both a git branch and a redirect for the domain\nThe domain can not be added because the latest production deployment for the project was not successful\nThe domain redirect is not valid\nA domain cannot redirect to itself\nYou can not set the production branch as a branch for your domain
  */
-export type AddProjectDomain400 = unknown
+export type AddProjectDomain400 = unknown;
 
-export type AddProjectDomain401 = unknown
+export type AddProjectDomain401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type AddProjectDomain402 = unknown
+export type AddProjectDomain402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.\nYou don\'t have access to the domain you are adding
  */
-export type AddProjectDomain403 = unknown
+export type AddProjectDomain403 = unknown;
 
 /**
  * @description The domain is already assigned to another Vercel project\nCannot create project domain since owner already has `domain` on their account, but it\'s not verified yet.\nCannot create project domain since owner already has `domain` on their account, and it\'s verified.\nThe domain is not allowed to be used\nThe project is currently being transferred
  */
-export type AddProjectDomain409 = unknown
+export type AddProjectDomain409 = unknown;
 
-export type AddProjectDomainMutationResponse = AddProjectDomain200
+export type AddProjectDomainMutationResponse = AddProjectDomain200;
 
 export type AddProjectDomainMutation = {
-  Response: AddProjectDomain200
-  PathParams: AddProjectDomainPathParams
-  QueryParams: AddProjectDomainQueryParams
-  Errors: AddProjectDomain400 | AddProjectDomain401 | AddProjectDomain402 | AddProjectDomain403 | AddProjectDomain409
-}
+  Response: AddProjectDomain200;
+  PathParams: AddProjectDomainPathParams;
+  QueryParams: AddProjectDomainQueryParams;
+  Errors: AddProjectDomain400 | AddProjectDomain401 | AddProjectDomain402 | AddProjectDomain403 | AddProjectDomain409;
+};
 
 export type MoveProjectDomainPathParams = {
   /**
    * @description The unique project identifier or the project name
    * @type string
    */
-  idOrName: string
+  idOrName: string;
   /**
    * @description The project domain name
    * @type string
    */
-  domain: string
-}
+  domain: string;
+};
 
 export type MoveProjectDomainQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The domain was updated successfuly
  */
-export type MoveProjectDomain200 = unknown
+export type MoveProjectDomain200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type MoveProjectDomain400 = unknown
+export type MoveProjectDomain400 = unknown;
 
-export type MoveProjectDomain401 = unknown
+export type MoveProjectDomain401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type MoveProjectDomain403 = unknown
+export type MoveProjectDomain403 = unknown;
 
 /**
  * @description The project is currently being transferred
  */
-export type MoveProjectDomain409 = unknown
+export type MoveProjectDomain409 = unknown;
 
-export type MoveProjectDomainMutationResponse = MoveProjectDomain200
+export type MoveProjectDomainMutationResponse = MoveProjectDomain200;
 
 export type MoveProjectDomainMutation = {
-  Response: MoveProjectDomain200
-  PathParams: MoveProjectDomainPathParams
-  QueryParams: MoveProjectDomainQueryParams
-  Errors: MoveProjectDomain400 | MoveProjectDomain401 | MoveProjectDomain403 | MoveProjectDomain409
-}
+  Response: MoveProjectDomain200;
+  PathParams: MoveProjectDomainPathParams;
+  QueryParams: MoveProjectDomainQueryParams;
+  Errors: MoveProjectDomain400 | MoveProjectDomain401 | MoveProjectDomain403 | MoveProjectDomain409;
+};
 
 export type VerifyProjectDomainPathParams = {
   /**
    * @description The unique project identifier or the project name
    * @type string
    */
-  idOrName: string
+  idOrName: string;
   /**
    * @description The domain name you want to verify
    * @type string
    */
-  domain: string
-}
+  domain: string;
+};
 
 export type VerifyProjectDomainQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The project domain was verified successfully\nDomain is already verified
  */
-export type VerifyProjectDomain200 = unknown
+export type VerifyProjectDomain200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.\nThere is an existing TXT record on the domain verifying it for another project\nThe domain does not have a TXT record that attempts to verify the project domain\nThe TXT record on the domain does not match the expected challenge for the project domain\nProject domain is not assigned to project
  */
-export type VerifyProjectDomain400 = unknown
+export type VerifyProjectDomain400 = unknown;
 
-export type VerifyProjectDomain401 = unknown
+export type VerifyProjectDomain401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type VerifyProjectDomain403 = unknown
+export type VerifyProjectDomain403 = unknown;
 
-export type VerifyProjectDomainMutationResponse = VerifyProjectDomain200
+export type VerifyProjectDomainMutationResponse = VerifyProjectDomain200;
 
 export type VerifyProjectDomainMutation = {
-  Response: VerifyProjectDomain200
-  PathParams: VerifyProjectDomainPathParams
-  QueryParams: VerifyProjectDomainQueryParams
-  Errors: VerifyProjectDomain400 | VerifyProjectDomain401 | VerifyProjectDomain403
-}
+  Response: VerifyProjectDomain200;
+  PathParams: VerifyProjectDomainPathParams;
+  QueryParams: VerifyProjectDomainQueryParams;
+  Errors: VerifyProjectDomain400 | VerifyProjectDomain401 | VerifyProjectDomain403;
+};
 
 export type FilterProjectEnvsPathParams = {
   /**
    * @description The unique project identifier or the project name
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export const filterProjectEnvsQueryParamsDecryptEnum = {
   true: 'true',
-  false: 'false',
-} as const
+  false: 'false'
+} as const;
 
-export type FilterProjectEnvsQueryParamsDecryptEnum = (typeof filterProjectEnvsQueryParamsDecryptEnum)[keyof typeof filterProjectEnvsQueryParamsDecryptEnum]
+export type FilterProjectEnvsQueryParamsDecryptEnum =
+  (typeof filterProjectEnvsQueryParamsDecryptEnum)[keyof typeof filterProjectEnvsQueryParamsDecryptEnum];
 
 export type FilterProjectEnvsQueryParams = {
   /**
@@ -13921,853 +14049,870 @@ export type FilterProjectEnvsQueryParams = {
    * @maxLength 250
    * @type string | undefined
    */
-  gitBranch?: string | undefined
+  gitBranch?: string | undefined;
   /**
    * @description If true, the environment variable value will be decrypted
    * @deprecated
    * @type string | undefined
    */
-  decrypt?: FilterProjectEnvsQueryParamsDecryptEnum | undefined
+  decrypt?: FilterProjectEnvsQueryParamsDecryptEnum | undefined;
   /**
    * @description The source that is calling the endpoint.
    * @type string | undefined
    */
-  source?: string | undefined
+  source?: string | undefined;
   /**
    * @description The unique custom environment identifier within the project
    * @type string | undefined
    */
-  customEnvironmentId?: string | undefined
+  customEnvironmentId?: string | undefined;
   /**
    * @description The custom environment slug (name) within the project
    * @type string | undefined
    */
-  customEnvironmentSlug?: string | undefined
+  customEnvironmentSlug?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The list of environment variables for the given project
  */
-export type FilterProjectEnvs200 = unknown
+export type FilterProjectEnvs200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type FilterProjectEnvs400 = unknown
+export type FilterProjectEnvs400 = unknown;
 
-export type FilterProjectEnvs401 = unknown
+export type FilterProjectEnvs401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type FilterProjectEnvs403 = unknown
+export type FilterProjectEnvs403 = unknown;
 
-export type FilterProjectEnvsQueryResponse = FilterProjectEnvs200
+export type FilterProjectEnvsQueryResponse = FilterProjectEnvs200;
 
 export type FilterProjectEnvsQuery = {
-  Response: FilterProjectEnvs200
-  PathParams: FilterProjectEnvsPathParams
-  QueryParams: FilterProjectEnvsQueryParams
-  Errors: FilterProjectEnvs400 | FilterProjectEnvs401 | FilterProjectEnvs403
-}
+  Response: FilterProjectEnvs200;
+  PathParams: FilterProjectEnvsPathParams;
+  QueryParams: FilterProjectEnvsQueryParams;
+  Errors: FilterProjectEnvs400 | FilterProjectEnvs401 | FilterProjectEnvs403;
+};
 
 export type CreateProjectEnvPathParams = {
   /**
    * @description The unique project identifier or the project name
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type CreateProjectEnvQueryParams = {
   /**
    * @description Allow override of environment variable if it already exists
    * @type string | undefined
    */
-  upsert?: string | undefined
+  upsert?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The environment variable was created successfully
  */
-export type CreateProjectEnv201 = unknown
+export type CreateProjectEnv201 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.\nThe environment variable coudn\'t be created because an ongoing update env update is already happening\nThe environment variable coudn\'t be created because project document is too large
  */
-export type CreateProjectEnv400 = unknown
+export type CreateProjectEnv400 = unknown;
 
-export type CreateProjectEnv401 = unknown
+export type CreateProjectEnv401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type CreateProjectEnv402 = unknown
+export type CreateProjectEnv402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.\nThe environment variable cannot be created because it already exists\nAdditional permissions are required to create production environment variables
  */
-export type CreateProjectEnv403 = unknown
+export type CreateProjectEnv403 = unknown;
 
 /**
  * @description The project is being transfered and creating an environment variable is not possible
  */
-export type CreateProjectEnv409 = unknown
+export type CreateProjectEnv409 = unknown;
 
-export type CreateProjectEnvMutationResponse = CreateProjectEnv201
+export type CreateProjectEnvMutationResponse = CreateProjectEnv201;
 
 export type CreateProjectEnvMutation = {
-  Response: CreateProjectEnv201
-  PathParams: CreateProjectEnvPathParams
-  QueryParams: CreateProjectEnvQueryParams
-  Errors: CreateProjectEnv400 | CreateProjectEnv401 | CreateProjectEnv402 | CreateProjectEnv403 | CreateProjectEnv409
-}
+  Response: CreateProjectEnv201;
+  PathParams: CreateProjectEnvPathParams;
+  QueryParams: CreateProjectEnvQueryParams;
+  Errors: CreateProjectEnv400 | CreateProjectEnv401 | CreateProjectEnv402 | CreateProjectEnv403 | CreateProjectEnv409;
+};
 
 export type GetProjectEnvPathParams = {
   /**
    * @description The unique project identifier or the project name
    * @type string
    */
-  idOrName: string
+  idOrName: string;
   /**
    * @description The unique ID for the environment variable to get the decrypted value.
    * @type string
    */
-  id: string
-}
+  id: string;
+};
 
 export type GetProjectEnvQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type GetProjectEnv200 = unknown
+export type GetProjectEnv200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetProjectEnv400 = unknown
+export type GetProjectEnv400 = unknown;
 
-export type GetProjectEnv401 = unknown
+export type GetProjectEnv401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetProjectEnv403 = unknown
+export type GetProjectEnv403 = unknown;
 
-export type GetProjectEnvQueryResponse = GetProjectEnv200
+export type GetProjectEnvQueryResponse = GetProjectEnv200;
 
 export type GetProjectEnvQuery = {
-  Response: GetProjectEnv200
-  PathParams: GetProjectEnvPathParams
-  QueryParams: GetProjectEnvQueryParams
-  Errors: GetProjectEnv400 | GetProjectEnv401 | GetProjectEnv403
-}
+  Response: GetProjectEnv200;
+  PathParams: GetProjectEnvPathParams;
+  QueryParams: GetProjectEnvQueryParams;
+  Errors: GetProjectEnv400 | GetProjectEnv401 | GetProjectEnv403;
+};
 
 export type RemoveProjectEnvPathParams = {
   /**
    * @description The unique project identifier or the project name
    * @type string
    */
-  idOrName: string
+  idOrName: string;
   /**
    * @description The unique environment variable identifier
    * @type string
    */
-  id: string
-}
+  id: string;
+};
 
 export type RemoveProjectEnvQueryParams = {
   /**
    * @description The unique custom environment identifier within the project
    * @type string | undefined
    */
-  customEnvironmentId?: string | undefined
+  customEnvironmentId?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The environment variable was successfully removed
  */
-export type RemoveProjectEnv200 = unknown
+export type RemoveProjectEnv200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type RemoveProjectEnv400 = unknown
+export type RemoveProjectEnv400 = unknown;
 
-export type RemoveProjectEnv401 = unknown
+export type RemoveProjectEnv401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type RemoveProjectEnv403 = unknown
+export type RemoveProjectEnv403 = unknown;
 
-export type RemoveProjectEnv404 = unknown
+export type RemoveProjectEnv404 = unknown;
 
 /**
  * @description The project is being transfered and removing an environment variable is not possible
  */
-export type RemoveProjectEnv409 = unknown
+export type RemoveProjectEnv409 = unknown;
 
-export type RemoveProjectEnvMutationResponse = RemoveProjectEnv200
+export type RemoveProjectEnvMutationResponse = RemoveProjectEnv200;
 
 export type RemoveProjectEnvMutation = {
-  Response: RemoveProjectEnv200
-  PathParams: RemoveProjectEnvPathParams
-  QueryParams: RemoveProjectEnvQueryParams
-  Errors: RemoveProjectEnv400 | RemoveProjectEnv401 | RemoveProjectEnv403 | RemoveProjectEnv404 | RemoveProjectEnv409
-}
+  Response: RemoveProjectEnv200;
+  PathParams: RemoveProjectEnvPathParams;
+  QueryParams: RemoveProjectEnvQueryParams;
+  Errors: RemoveProjectEnv400 | RemoveProjectEnv401 | RemoveProjectEnv403 | RemoveProjectEnv404 | RemoveProjectEnv409;
+};
 
 export type EditProjectEnvPathParams = {
   /**
    * @description The unique project identifier or the project name
    * @type string
    */
-  idOrName: string
+  idOrName: string;
   /**
    * @description The unique environment variable identifier
    * @type string
    */
-  id: string
-}
+  id: string;
+};
 
 export type EditProjectEnvQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The environment variable was successfully edited
  */
-export type EditProjectEnv200 = unknown
+export type EditProjectEnv200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.\nAt least one environment variable failed validation
  */
-export type EditProjectEnv400 = unknown
+export type EditProjectEnv400 = unknown;
 
-export type EditProjectEnv401 = unknown
+export type EditProjectEnv401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type EditProjectEnv403 = unknown
+export type EditProjectEnv403 = unknown;
 
 /**
  * @description The project is being transfered and removing an environment variable is not possible
  */
-export type EditProjectEnv409 = unknown
+export type EditProjectEnv409 = unknown;
 
-export type EditProjectEnvMutationResponse = EditProjectEnv200
+export type EditProjectEnvMutationResponse = EditProjectEnv200;
 
 export type EditProjectEnvMutation = {
-  Response: EditProjectEnv200
-  PathParams: EditProjectEnvPathParams
-  QueryParams: EditProjectEnvQueryParams
-  Errors: EditProjectEnv400 | EditProjectEnv401 | EditProjectEnv403 | EditProjectEnv409
-}
+  Response: EditProjectEnv200;
+  PathParams: EditProjectEnvPathParams;
+  QueryParams: EditProjectEnvQueryParams;
+  Errors: EditProjectEnv400 | EditProjectEnv401 | EditProjectEnv403 | EditProjectEnv409;
+};
 
 export type GetRollingReleaseBillingStatusPathParams = {
   /**
    * @description Project ID or project name (URL-encoded)
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type GetRollingReleaseBillingStatusQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type GetRollingReleaseBillingStatus200 = unknown
+export type GetRollingReleaseBillingStatus200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetRollingReleaseBillingStatus400 = unknown
+export type GetRollingReleaseBillingStatus400 = unknown;
 
-export type GetRollingReleaseBillingStatus401 = unknown
+export type GetRollingReleaseBillingStatus401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetRollingReleaseBillingStatus403 = unknown
+export type GetRollingReleaseBillingStatus403 = unknown;
 
-export type GetRollingReleaseBillingStatus404 = unknown
+export type GetRollingReleaseBillingStatus404 = unknown;
 
-export type GetRollingReleaseBillingStatusQueryResponse = GetRollingReleaseBillingStatus200
+export type GetRollingReleaseBillingStatusQueryResponse = GetRollingReleaseBillingStatus200;
 
 export type GetRollingReleaseBillingStatusQuery = {
-  Response: GetRollingReleaseBillingStatus200
-  PathParams: GetRollingReleaseBillingStatusPathParams
-  QueryParams: GetRollingReleaseBillingStatusQueryParams
-  Errors: GetRollingReleaseBillingStatus400 | GetRollingReleaseBillingStatus401 | GetRollingReleaseBillingStatus403 | GetRollingReleaseBillingStatus404
-}
+  Response: GetRollingReleaseBillingStatus200;
+  PathParams: GetRollingReleaseBillingStatusPathParams;
+  QueryParams: GetRollingReleaseBillingStatusQueryParams;
+  Errors:
+    | GetRollingReleaseBillingStatus400
+    | GetRollingReleaseBillingStatus401
+    | GetRollingReleaseBillingStatus403
+    | GetRollingReleaseBillingStatus404;
+};
 
 export type GetRollingReleaseConfigPathParams = {
   /**
    * @description Project ID or project name (URL-encoded)
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type GetRollingReleaseConfigQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type GetRollingReleaseConfig200 = unknown
+export type GetRollingReleaseConfig200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetRollingReleaseConfig400 = unknown
+export type GetRollingReleaseConfig400 = unknown;
 
-export type GetRollingReleaseConfig401 = unknown
+export type GetRollingReleaseConfig401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetRollingReleaseConfig403 = unknown
+export type GetRollingReleaseConfig403 = unknown;
 
-export type GetRollingReleaseConfig404 = unknown
+export type GetRollingReleaseConfig404 = unknown;
 
-export type GetRollingReleaseConfigQueryResponse = GetRollingReleaseConfig200
+export type GetRollingReleaseConfigQueryResponse = GetRollingReleaseConfig200;
 
 export type GetRollingReleaseConfigQuery = {
-  Response: GetRollingReleaseConfig200
-  PathParams: GetRollingReleaseConfigPathParams
-  QueryParams: GetRollingReleaseConfigQueryParams
-  Errors: GetRollingReleaseConfig400 | GetRollingReleaseConfig401 | GetRollingReleaseConfig403 | GetRollingReleaseConfig404
-}
+  Response: GetRollingReleaseConfig200;
+  PathParams: GetRollingReleaseConfigPathParams;
+  QueryParams: GetRollingReleaseConfigQueryParams;
+  Errors:
+    | GetRollingReleaseConfig400
+    | GetRollingReleaseConfig401
+    | GetRollingReleaseConfig403
+    | GetRollingReleaseConfig404;
+};
 
 export type DeleteRollingReleaseConfigPathParams = {
   /**
    * @description Project ID or project name (URL-encoded)
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type DeleteRollingReleaseConfigQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type DeleteRollingReleaseConfig200 = unknown
+export type DeleteRollingReleaseConfig200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type DeleteRollingReleaseConfig400 = unknown
+export type DeleteRollingReleaseConfig400 = unknown;
 
-export type DeleteRollingReleaseConfig401 = unknown
+export type DeleteRollingReleaseConfig401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type DeleteRollingReleaseConfig403 = unknown
+export type DeleteRollingReleaseConfig403 = unknown;
 
-export type DeleteRollingReleaseConfig404 = unknown
+export type DeleteRollingReleaseConfig404 = unknown;
 
-export type DeleteRollingReleaseConfigMutationResponse = DeleteRollingReleaseConfig200
+export type DeleteRollingReleaseConfigMutationResponse = DeleteRollingReleaseConfig200;
 
 export type DeleteRollingReleaseConfigMutation = {
-  Response: DeleteRollingReleaseConfig200
-  PathParams: DeleteRollingReleaseConfigPathParams
-  QueryParams: DeleteRollingReleaseConfigQueryParams
-  Errors: DeleteRollingReleaseConfig400 | DeleteRollingReleaseConfig401 | DeleteRollingReleaseConfig403 | DeleteRollingReleaseConfig404
-}
+  Response: DeleteRollingReleaseConfig200;
+  PathParams: DeleteRollingReleaseConfigPathParams;
+  QueryParams: DeleteRollingReleaseConfigQueryParams;
+  Errors:
+    | DeleteRollingReleaseConfig400
+    | DeleteRollingReleaseConfig401
+    | DeleteRollingReleaseConfig403
+    | DeleteRollingReleaseConfig404;
+};
 
 export type UpdateRollingReleaseConfigPathParams = {
   /**
    * @description Project ID or project name (URL-encoded)
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type UpdateRollingReleaseConfigQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type UpdateRollingReleaseConfig200 = unknown
+export type UpdateRollingReleaseConfig200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type UpdateRollingReleaseConfig400 = unknown
+export type UpdateRollingReleaseConfig400 = unknown;
 
-export type UpdateRollingReleaseConfig401 = unknown
+export type UpdateRollingReleaseConfig401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateRollingReleaseConfig403 = unknown
+export type UpdateRollingReleaseConfig403 = unknown;
 
-export type UpdateRollingReleaseConfig404 = unknown
+export type UpdateRollingReleaseConfig404 = unknown;
 
-export type UpdateRollingReleaseConfigMutationResponse = UpdateRollingReleaseConfig200
+export type UpdateRollingReleaseConfigMutationResponse = UpdateRollingReleaseConfig200;
 
 export type UpdateRollingReleaseConfigMutation = {
-  Response: UpdateRollingReleaseConfig200
-  PathParams: UpdateRollingReleaseConfigPathParams
-  QueryParams: UpdateRollingReleaseConfigQueryParams
-  Errors: UpdateRollingReleaseConfig400 | UpdateRollingReleaseConfig401 | UpdateRollingReleaseConfig403 | UpdateRollingReleaseConfig404
-}
+  Response: UpdateRollingReleaseConfig200;
+  PathParams: UpdateRollingReleaseConfigPathParams;
+  QueryParams: UpdateRollingReleaseConfigQueryParams;
+  Errors:
+    | UpdateRollingReleaseConfig400
+    | UpdateRollingReleaseConfig401
+    | UpdateRollingReleaseConfig403
+    | UpdateRollingReleaseConfig404;
+};
 
 export type GetRollingReleasePathParams = {
   /**
    * @description Project ID or project name (URL-encoded)
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export const getRollingReleaseQueryParamsStateEnum = {
   ACTIVE: 'ACTIVE',
   COMPLETE: 'COMPLETE',
-  ABORTED: 'ABORTED',
-} as const
+  ABORTED: 'ABORTED'
+} as const;
 
-export type GetRollingReleaseQueryParamsStateEnum = (typeof getRollingReleaseQueryParamsStateEnum)[keyof typeof getRollingReleaseQueryParamsStateEnum]
+export type GetRollingReleaseQueryParamsStateEnum =
+  (typeof getRollingReleaseQueryParamsStateEnum)[keyof typeof getRollingReleaseQueryParamsStateEnum];
 
 export type GetRollingReleaseQueryParams = {
   /**
    * @description Filter by rolling release state
    * @type string | undefined
    */
-  state?: GetRollingReleaseQueryParamsStateEnum | undefined
+  state?: GetRollingReleaseQueryParamsStateEnum | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type GetRollingRelease200 = unknown
+export type GetRollingRelease200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetRollingRelease400 = unknown
+export type GetRollingRelease400 = unknown;
 
-export type GetRollingRelease401 = unknown
+export type GetRollingRelease401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetRollingRelease403 = unknown
+export type GetRollingRelease403 = unknown;
 
-export type GetRollingRelease404 = unknown
+export type GetRollingRelease404 = unknown;
 
-export type GetRollingReleaseQueryResponse = GetRollingRelease200
+export type GetRollingReleaseQueryResponse = GetRollingRelease200;
 
 export type GetRollingReleaseQuery = {
-  Response: GetRollingRelease200
-  PathParams: GetRollingReleasePathParams
-  QueryParams: GetRollingReleaseQueryParams
-  Errors: GetRollingRelease400 | GetRollingRelease401 | GetRollingRelease403 | GetRollingRelease404
-}
+  Response: GetRollingRelease200;
+  PathParams: GetRollingReleasePathParams;
+  QueryParams: GetRollingReleaseQueryParams;
+  Errors: GetRollingRelease400 | GetRollingRelease401 | GetRollingRelease403 | GetRollingRelease404;
+};
 
 export type ApproveRollingReleaseStagePathParams = {
   /**
    * @description Project ID or project name (URL-encoded)
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type ApproveRollingReleaseStageQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type ApproveRollingReleaseStage200 = unknown
+export type ApproveRollingReleaseStage200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type ApproveRollingReleaseStage400 = unknown
+export type ApproveRollingReleaseStage400 = unknown;
 
-export type ApproveRollingReleaseStage401 = unknown
+export type ApproveRollingReleaseStage401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type ApproveRollingReleaseStage403 = unknown
+export type ApproveRollingReleaseStage403 = unknown;
 
-export type ApproveRollingReleaseStage404 = unknown
+export type ApproveRollingReleaseStage404 = unknown;
 
-export type ApproveRollingReleaseStage500 = unknown
+export type ApproveRollingReleaseStage500 = unknown;
 
-export type ApproveRollingReleaseStageMutationResponse = ApproveRollingReleaseStage200
+export type ApproveRollingReleaseStageMutationResponse = ApproveRollingReleaseStage200;
 
 export type ApproveRollingReleaseStageMutation = {
-  Response: ApproveRollingReleaseStage200
-  PathParams: ApproveRollingReleaseStagePathParams
-  QueryParams: ApproveRollingReleaseStageQueryParams
+  Response: ApproveRollingReleaseStage200;
+  PathParams: ApproveRollingReleaseStagePathParams;
+  QueryParams: ApproveRollingReleaseStageQueryParams;
   Errors:
     | ApproveRollingReleaseStage400
     | ApproveRollingReleaseStage401
     | ApproveRollingReleaseStage403
     | ApproveRollingReleaseStage404
-    | ApproveRollingReleaseStage500
-}
+    | ApproveRollingReleaseStage500;
+};
 
 export type CompleteRollingReleasePathParams = {
   /**
    * @description Project ID or project name (URL-encoded)
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type CompleteRollingReleaseQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type CompleteRollingRelease200 = unknown
+export type CompleteRollingRelease200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type CompleteRollingRelease400 = unknown
+export type CompleteRollingRelease400 = unknown;
 
-export type CompleteRollingRelease401 = unknown
+export type CompleteRollingRelease401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CompleteRollingRelease403 = unknown
+export type CompleteRollingRelease403 = unknown;
 
-export type CompleteRollingRelease404 = unknown
+export type CompleteRollingRelease404 = unknown;
 
-export type CompleteRollingReleaseMutationResponse = CompleteRollingRelease200
+export type CompleteRollingReleaseMutationResponse = CompleteRollingRelease200;
 
 export type CompleteRollingReleaseMutation = {
-  Response: CompleteRollingRelease200
-  PathParams: CompleteRollingReleasePathParams
-  QueryParams: CompleteRollingReleaseQueryParams
-  Errors: CompleteRollingRelease400 | CompleteRollingRelease401 | CompleteRollingRelease403 | CompleteRollingRelease404
-}
+  Response: CompleteRollingRelease200;
+  PathParams: CompleteRollingReleasePathParams;
+  QueryParams: CompleteRollingReleaseQueryParams;
+  Errors: CompleteRollingRelease400 | CompleteRollingRelease401 | CompleteRollingRelease403 | CompleteRollingRelease404;
+};
 
 export type CreateProjectTransferRequestPathParams = {
   /**
    * @description The ID or name of the project to transfer.
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type CreateProjectTransferRequestQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The project transfer request has been initiated successfully.
  */
-export type CreateProjectTransferRequest200 = unknown
+export type CreateProjectTransferRequest200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type CreateProjectTransferRequest400 = unknown
+export type CreateProjectTransferRequest400 = unknown;
 
-export type CreateProjectTransferRequest401 = unknown
+export type CreateProjectTransferRequest401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CreateProjectTransferRequest403 = unknown
+export type CreateProjectTransferRequest403 = unknown;
 
-export type CreateProjectTransferRequestMutationResponse = CreateProjectTransferRequest200
+export type CreateProjectTransferRequestMutationResponse = CreateProjectTransferRequest200;
 
 export type CreateProjectTransferRequestMutation = {
-  Response: CreateProjectTransferRequest200
-  PathParams: CreateProjectTransferRequestPathParams
-  QueryParams: CreateProjectTransferRequestQueryParams
-  Errors: CreateProjectTransferRequest400 | CreateProjectTransferRequest401 | CreateProjectTransferRequest403
-}
+  Response: CreateProjectTransferRequest200;
+  PathParams: CreateProjectTransferRequestPathParams;
+  QueryParams: CreateProjectTransferRequestQueryParams;
+  Errors: CreateProjectTransferRequest400 | CreateProjectTransferRequest401 | CreateProjectTransferRequest403;
+};
 
 export type AcceptProjectTransferRequestPathParams = {
   /**
    * @description The code of the project transfer request.
    * @type string
    */
-  code: string
-}
+  code: string;
+};
 
 export type AcceptProjectTransferRequestQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The project has been transferred successfully.
  */
-export type AcceptProjectTransferRequest202 = unknown
+export type AcceptProjectTransferRequest202 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type AcceptProjectTransferRequest400 = unknown
+export type AcceptProjectTransferRequest400 = unknown;
 
-export type AcceptProjectTransferRequest401 = unknown
+export type AcceptProjectTransferRequest401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type AcceptProjectTransferRequest403 = unknown
+export type AcceptProjectTransferRequest403 = unknown;
 
-export type AcceptProjectTransferRequest404 = unknown
+export type AcceptProjectTransferRequest404 = unknown;
 
-export type AcceptProjectTransferRequest422 = unknown
+export type AcceptProjectTransferRequest422 = unknown;
 
-export type AcceptProjectTransferRequestMutationResponse = AcceptProjectTransferRequest202
+export type AcceptProjectTransferRequestMutationResponse = AcceptProjectTransferRequest202;
 
 export type AcceptProjectTransferRequestMutation = {
-  Response: AcceptProjectTransferRequest202
-  PathParams: AcceptProjectTransferRequestPathParams
-  QueryParams: AcceptProjectTransferRequestQueryParams
+  Response: AcceptProjectTransferRequest202;
+  PathParams: AcceptProjectTransferRequestPathParams;
+  QueryParams: AcceptProjectTransferRequestQueryParams;
   Errors:
     | AcceptProjectTransferRequest400
     | AcceptProjectTransferRequest401
     | AcceptProjectTransferRequest403
     | AcceptProjectTransferRequest404
-    | AcceptProjectTransferRequest422
-}
+    | AcceptProjectTransferRequest422;
+};
 
 export type UpdateProjectProtectionBypassPathParams = {
   /**
    * @description The unique project identifier or the project name
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type UpdateProjectProtectionBypassQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type UpdateProjectProtectionBypass200 = unknown
+export type UpdateProjectProtectionBypass200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type UpdateProjectProtectionBypass400 = unknown
+export type UpdateProjectProtectionBypass400 = unknown;
 
-export type UpdateProjectProtectionBypass401 = unknown
+export type UpdateProjectProtectionBypass401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateProjectProtectionBypass403 = unknown
+export type UpdateProjectProtectionBypass403 = unknown;
 
-export type UpdateProjectProtectionBypass404 = unknown
+export type UpdateProjectProtectionBypass404 = unknown;
 
-export type UpdateProjectProtectionBypass409 = unknown
+export type UpdateProjectProtectionBypass409 = unknown;
 
-export type UpdateProjectProtectionBypassMutationResponse = UpdateProjectProtectionBypass200
+export type UpdateProjectProtectionBypassMutationResponse = UpdateProjectProtectionBypass200;
 
 export type UpdateProjectProtectionBypassMutation = {
-  Response: UpdateProjectProtectionBypass200
-  PathParams: UpdateProjectProtectionBypassPathParams
-  QueryParams: UpdateProjectProtectionBypassQueryParams
+  Response: UpdateProjectProtectionBypass200;
+  PathParams: UpdateProjectProtectionBypassPathParams;
+  QueryParams: UpdateProjectProtectionBypassQueryParams;
   Errors:
     | UpdateProjectProtectionBypass400
     | UpdateProjectProtectionBypass401
     | UpdateProjectProtectionBypass403
     | UpdateProjectProtectionBypass404
-    | UpdateProjectProtectionBypass409
-}
+    | UpdateProjectProtectionBypass409;
+};
 
 export type RequestPromotePathParams = {
   /**
    * @type string
    */
-  projectId: string
+  projectId: string;
   /**
    * @type string
    */
-  deploymentId: string
-}
+  deploymentId: string;
+};
 
 export type RequestPromoteQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type RequestPromote201 = unknown
+export type RequestPromote201 = unknown;
 
-export type RequestPromote202 = unknown
+export type RequestPromote202 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type RequestPromote400 = unknown
+export type RequestPromote400 = unknown;
 
-export type RequestPromote401 = unknown
+export type RequestPromote401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type RequestPromote403 = unknown
+export type RequestPromote403 = unknown;
 
-export type RequestPromote409 = unknown
+export type RequestPromote409 = unknown;
 
-export type RequestPromoteMutationResponse = RequestPromote201 | RequestPromote202
+export type RequestPromoteMutationResponse = RequestPromote201 | RequestPromote202;
 
 export type RequestPromoteMutation = {
-  Response: RequestPromote201 | RequestPromote202
-  PathParams: RequestPromotePathParams
-  QueryParams: RequestPromoteQueryParams
-  Errors: RequestPromote400 | RequestPromote401 | RequestPromote403 | RequestPromote409
-}
+  Response: RequestPromote201 | RequestPromote202;
+  PathParams: RequestPromotePathParams;
+  QueryParams: RequestPromoteQueryParams;
+  Errors: RequestPromote400 | RequestPromote401 | RequestPromote403 | RequestPromote409;
+};
 
 export type ListPromoteAliasesPathParams = {
   /**
    * @type string
    */
-  projectId: string
-}
+  projectId: string;
+};
 
 export type ListPromoteAliasesQueryParams = {
   /**
@@ -14775,546 +14920,556 @@ export type ListPromoteAliasesQueryParams = {
    * @maxLength 100
    * @type number | undefined
    */
-  limit?: number | undefined
+  limit?: number | undefined;
   /**
    * @description Get aliases created after this epoch timestamp.
    * @type number | undefined
    */
-  since?: number | undefined
+  since?: number | undefined;
   /**
    * @description Get aliases created before this epoch timestamp.
    * @type number | undefined
    */
-  until?: number | undefined
+  until?: number | undefined;
   /**
    * @description Filter results down to aliases that failed to map to the requested deployment
    * @type boolean | undefined
    */
-  failedOnly?: boolean | undefined
+  failedOnly?: boolean | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type ListPromoteAliases200 = unknown
+export type ListPromoteAliases200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type ListPromoteAliases400 = unknown
+export type ListPromoteAliases400 = unknown;
 
-export type ListPromoteAliases401 = unknown
+export type ListPromoteAliases401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type ListPromoteAliases403 = unknown
+export type ListPromoteAliases403 = unknown;
 
-export type ListPromoteAliases404 = unknown
+export type ListPromoteAliases404 = unknown;
 
-export type ListPromoteAliasesQueryResponse = ListPromoteAliases200
+export type ListPromoteAliasesQueryResponse = ListPromoteAliases200;
 
 export type ListPromoteAliasesQuery = {
-  Response: ListPromoteAliases200
-  PathParams: ListPromoteAliasesPathParams
-  QueryParams: ListPromoteAliasesQueryParams
-  Errors: ListPromoteAliases400 | ListPromoteAliases401 | ListPromoteAliases403 | ListPromoteAliases404
-}
+  Response: ListPromoteAliases200;
+  PathParams: ListPromoteAliasesPathParams;
+  QueryParams: ListPromoteAliasesQueryParams;
+  Errors: ListPromoteAliases400 | ListPromoteAliases401 | ListPromoteAliases403 | ListPromoteAliases404;
+};
 
 export type PauseProjectPathParams = {
   /**
    * @description The unique project identifier
    * @type string
    */
-  projectId: string
-}
+  projectId: string;
+};
 
 export type PauseProjectQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type PauseProject200 = unknown
+export type PauseProject200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type PauseProject400 = unknown
+export type PauseProject400 = unknown;
 
-export type PauseProject401 = unknown
+export type PauseProject401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type PauseProject402 = unknown
+export type PauseProject402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type PauseProject403 = unknown
+export type PauseProject403 = unknown;
 
-export type PauseProject500 = unknown
+export type PauseProject500 = unknown;
 
-export type PauseProjectMutationResponse = PauseProject200
+export type PauseProjectMutationResponse = PauseProject200;
 
 export type PauseProjectMutation = {
-  Response: PauseProject200
-  PathParams: PauseProjectPathParams
-  QueryParams: PauseProjectQueryParams
-  Errors: PauseProject400 | PauseProject401 | PauseProject402 | PauseProject403 | PauseProject500
-}
+  Response: PauseProject200;
+  PathParams: PauseProjectPathParams;
+  QueryParams: PauseProjectQueryParams;
+  Errors: PauseProject400 | PauseProject401 | PauseProject402 | PauseProject403 | PauseProject500;
+};
 
 export type UnpauseProjectPathParams = {
   /**
    * @description The unique project identifier
    * @type string
    */
-  projectId: string
-}
+  projectId: string;
+};
 
 export type UnpauseProjectQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type UnpauseProject200 = unknown
+export type UnpauseProject200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type UnpauseProject400 = unknown
+export type UnpauseProject400 = unknown;
 
-export type UnpauseProject401 = unknown
+export type UnpauseProject401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UnpauseProject403 = unknown
+export type UnpauseProject403 = unknown;
 
-export type UnpauseProject500 = unknown
+export type UnpauseProject500 = unknown;
 
-export type UnpauseProjectMutationResponse = UnpauseProject200
+export type UnpauseProjectMutationResponse = UnpauseProject200;
 
 export type UnpauseProjectMutation = {
-  Response: UnpauseProject200
-  PathParams: UnpauseProjectPathParams
-  QueryParams: UnpauseProjectQueryParams
-  Errors: UnpauseProject400 | UnpauseProject401 | UnpauseProject403 | UnpauseProject500
-}
+  Response: UnpauseProject200;
+  PathParams: UnpauseProjectPathParams;
+  QueryParams: UnpauseProjectQueryParams;
+  Errors: UnpauseProject400 | UnpauseProject401 | UnpauseProject403 | UnpauseProject500;
+};
 
 export type UpdateAttackChallengeModeQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type UpdateAttackChallengeMode200 = unknown
+export type UpdateAttackChallengeMode200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.
  */
-export type UpdateAttackChallengeMode400 = unknown
+export type UpdateAttackChallengeMode400 = unknown;
 
-export type UpdateAttackChallengeMode401 = unknown
+export type UpdateAttackChallengeMode401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateAttackChallengeMode403 = unknown
+export type UpdateAttackChallengeMode403 = unknown;
 
-export type UpdateAttackChallengeMode404 = unknown
+export type UpdateAttackChallengeMode404 = unknown;
 
-export type UpdateAttackChallengeModeMutationResponse = UpdateAttackChallengeMode200
+export type UpdateAttackChallengeModeMutationResponse = UpdateAttackChallengeMode200;
 
 export type UpdateAttackChallengeModeMutation = {
-  Response: UpdateAttackChallengeMode200
-  QueryParams: UpdateAttackChallengeModeQueryParams
-  Errors: UpdateAttackChallengeMode400 | UpdateAttackChallengeMode401 | UpdateAttackChallengeMode403 | UpdateAttackChallengeMode404
-}
+  Response: UpdateAttackChallengeMode200;
+  QueryParams: UpdateAttackChallengeModeQueryParams;
+  Errors:
+    | UpdateAttackChallengeMode400
+    | UpdateAttackChallengeMode401
+    | UpdateAttackChallengeMode403
+    | UpdateAttackChallengeMode404;
+};
 
 export type PutFirewallConfigQueryParams = {
   /**
    * @type string
    */
-  projectId: string
+  projectId: string;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type PutFirewallConfig200 = unknown
+export type PutFirewallConfig200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type PutFirewallConfig400 = unknown
+export type PutFirewallConfig400 = unknown;
 
-export type PutFirewallConfig401 = unknown
+export type PutFirewallConfig401 = unknown;
 
-export type PutFirewallConfig402 = unknown
+export type PutFirewallConfig402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type PutFirewallConfig403 = unknown
+export type PutFirewallConfig403 = unknown;
 
-export type PutFirewallConfig404 = unknown
+export type PutFirewallConfig404 = unknown;
 
-export type PutFirewallConfig500 = unknown
+export type PutFirewallConfig500 = unknown;
 
-export type PutFirewallConfigMutationResponse = PutFirewallConfig200
+export type PutFirewallConfigMutationResponse = PutFirewallConfig200;
 
 export type PutFirewallConfigMutation = {
-  Response: PutFirewallConfig200
-  QueryParams: PutFirewallConfigQueryParams
-  Errors: PutFirewallConfig400 | PutFirewallConfig401 | PutFirewallConfig402 | PutFirewallConfig403 | PutFirewallConfig404 | PutFirewallConfig500
-}
+  Response: PutFirewallConfig200;
+  QueryParams: PutFirewallConfigQueryParams;
+  Errors:
+    | PutFirewallConfig400
+    | PutFirewallConfig401
+    | PutFirewallConfig402
+    | PutFirewallConfig403
+    | PutFirewallConfig404
+    | PutFirewallConfig500;
+};
 
 export type UpdateFirewallConfigQueryParams = {
   /**
    * @type string
    */
-  projectId: string
+  projectId: string;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type UpdateFirewallConfig200 = unknown
+export type UpdateFirewallConfig200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type UpdateFirewallConfig400 = unknown
+export type UpdateFirewallConfig400 = unknown;
 
-export type UpdateFirewallConfig401 = unknown
+export type UpdateFirewallConfig401 = unknown;
 
-export type UpdateFirewallConfig402 = unknown
+export type UpdateFirewallConfig402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateFirewallConfig403 = unknown
+export type UpdateFirewallConfig403 = unknown;
 
-export type UpdateFirewallConfig404 = unknown
+export type UpdateFirewallConfig404 = unknown;
 
-export type UpdateFirewallConfig500 = unknown
+export type UpdateFirewallConfig500 = unknown;
 
-export type UpdateFirewallConfigMutationResponse = UpdateFirewallConfig200
+export type UpdateFirewallConfigMutationResponse = UpdateFirewallConfig200;
 
 export type UpdateFirewallConfigMutation = {
-  Response: UpdateFirewallConfig200
-  QueryParams: UpdateFirewallConfigQueryParams
+  Response: UpdateFirewallConfig200;
+  QueryParams: UpdateFirewallConfigQueryParams;
   Errors:
     | UpdateFirewallConfig400
     | UpdateFirewallConfig401
     | UpdateFirewallConfig402
     | UpdateFirewallConfig403
     | UpdateFirewallConfig404
-    | UpdateFirewallConfig500
-}
+    | UpdateFirewallConfig500;
+};
 
 export type GetFirewallConfigPathParams = {
   /**
    * @type string
    */
-  configVersion: string
-}
+  configVersion: string;
+};
 
 export type GetFirewallConfigQueryParams = {
   /**
    * @type string
    */
-  projectId: string
+  projectId: string;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description If the firewall configuration includes a [custom managed ruleset](https://vercel.com/docs/security/vercel-waf/managed-rulesets), it will include a `crs` item that has the following values: sd: Scanner Detection ma: Multipart Attack lfi: Local File Inclusion Attack rfi: Remote File Inclusion Attack rce: Remote Execution Attack php: PHP Attack gen: Generic Attack xss: XSS Attack sqli: SQL Injection Attack sf: Session Fixation Attack java: Java Attack
  */
-export type GetFirewallConfig200 = unknown
+export type GetFirewallConfig200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetFirewallConfig400 = unknown
+export type GetFirewallConfig400 = unknown;
 
-export type GetFirewallConfig401 = unknown
+export type GetFirewallConfig401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetFirewallConfig403 = unknown
+export type GetFirewallConfig403 = unknown;
 
-export type GetFirewallConfig404 = unknown
+export type GetFirewallConfig404 = unknown;
 
-export type GetFirewallConfigQueryResponse = GetFirewallConfig200
+export type GetFirewallConfigQueryResponse = GetFirewallConfig200;
 
 export type GetFirewallConfigQuery = {
-  Response: GetFirewallConfig200
-  PathParams: GetFirewallConfigPathParams
-  QueryParams: GetFirewallConfigQueryParams
-  Errors: GetFirewallConfig400 | GetFirewallConfig401 | GetFirewallConfig403 | GetFirewallConfig404
-}
+  Response: GetFirewallConfig200;
+  PathParams: GetFirewallConfigPathParams;
+  QueryParams: GetFirewallConfigQueryParams;
+  Errors: GetFirewallConfig400 | GetFirewallConfig401 | GetFirewallConfig403 | GetFirewallConfig404;
+};
 
 export type GetActiveAttackStatusQueryParams = {
   /**
    * @type string
    */
-  projectId: string
+  projectId: string;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type GetActiveAttackStatus200 = unknown
+export type GetActiveAttackStatus200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetActiveAttackStatus400 = unknown
+export type GetActiveAttackStatus400 = unknown;
 
-export type GetActiveAttackStatus401 = unknown
+export type GetActiveAttackStatus401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetActiveAttackStatus403 = unknown
+export type GetActiveAttackStatus403 = unknown;
 
-export type GetActiveAttackStatus404 = unknown
+export type GetActiveAttackStatus404 = unknown;
 
-export type GetActiveAttackStatusQueryResponse = GetActiveAttackStatus200
+export type GetActiveAttackStatusQueryResponse = GetActiveAttackStatus200;
 
 export type GetActiveAttackStatusQuery = {
-  Response: GetActiveAttackStatus200
-  QueryParams: GetActiveAttackStatusQueryParams
-  Errors: GetActiveAttackStatus400 | GetActiveAttackStatus401 | GetActiveAttackStatus403 | GetActiveAttackStatus404
-}
+  Response: GetActiveAttackStatus200;
+  QueryParams: GetActiveAttackStatusQueryParams;
+  Errors: GetActiveAttackStatus400 | GetActiveAttackStatus401 | GetActiveAttackStatus403 | GetActiveAttackStatus404;
+};
 
 export type GetBypassIpQueryParams = {
   /**
    * @type string
    */
-  projectId: string
+  projectId: string;
   /**
    * @maxLength 128
    * @type number | undefined
    */
-  limit?: number | undefined
+  limit?: number | undefined;
   /**
    * @description Filter by source IP
    * @maxLength 49
    * @type string | undefined
    */
-  sourceIp?: string | undefined
+  sourceIp?: string | undefined;
   /**
    * @description Filter by domain
    * @maxLength 2544
    * @pattern ([a-z]+[a-z.]+)$
    * @type string | undefined
    */
-  domain?: string | undefined
+  domain?: string | undefined;
   /**
    * @description Filter by project scoped rules
    * @type boolean | undefined
    */
-  projectScope?: boolean | undefined
+  projectScope?: boolean | undefined;
   /**
    * @description Used for pagination. Retrieves results after the provided id
    * @maxLength 2560
    * @type string | undefined
    */
-  offset?: string | undefined
+  offset?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type GetBypassIp200 = unknown
+export type GetBypassIp200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetBypassIp400 = unknown
+export type GetBypassIp400 = unknown;
 
-export type GetBypassIp401 = unknown
+export type GetBypassIp401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetBypassIp403 = unknown
+export type GetBypassIp403 = unknown;
 
-export type GetBypassIp404 = unknown
+export type GetBypassIp404 = unknown;
 
-export type GetBypassIp500 = unknown
+export type GetBypassIp500 = unknown;
 
-export type GetBypassIpQueryResponse = GetBypassIp200
+export type GetBypassIpQueryResponse = GetBypassIp200;
 
 export type GetBypassIpQuery = {
-  Response: GetBypassIp200
-  QueryParams: GetBypassIpQueryParams
-  Errors: GetBypassIp400 | GetBypassIp401 | GetBypassIp403 | GetBypassIp404 | GetBypassIp500
-}
+  Response: GetBypassIp200;
+  QueryParams: GetBypassIpQueryParams;
+  Errors: GetBypassIp400 | GetBypassIp401 | GetBypassIp403 | GetBypassIp404 | GetBypassIp500;
+};
 
 export type AddBypassIpQueryParams = {
   /**
    * @type string
    */
-  projectId: string
+  projectId: string;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type AddBypassIp200 = unknown
+export type AddBypassIp200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type AddBypassIp400 = unknown
+export type AddBypassIp400 = unknown;
 
-export type AddBypassIp401 = unknown
+export type AddBypassIp401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type AddBypassIp403 = unknown
+export type AddBypassIp403 = unknown;
 
-export type AddBypassIp404 = unknown
+export type AddBypassIp404 = unknown;
 
-export type AddBypassIp500 = unknown
+export type AddBypassIp500 = unknown;
 
-export type AddBypassIpMutationResponse = AddBypassIp200
+export type AddBypassIpMutationResponse = AddBypassIp200;
 
 export type AddBypassIpMutation = {
-  Response: AddBypassIp200
-  QueryParams: AddBypassIpQueryParams
-  Errors: AddBypassIp400 | AddBypassIp401 | AddBypassIp403 | AddBypassIp404 | AddBypassIp500
-}
+  Response: AddBypassIp200;
+  QueryParams: AddBypassIpQueryParams;
+  Errors: AddBypassIp400 | AddBypassIp401 | AddBypassIp403 | AddBypassIp404 | AddBypassIp500;
+};
 
 export type RemoveBypassIpQueryParams = {
   /**
    * @type string
    */
-  projectId: string
+  projectId: string;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type RemoveBypassIp200 = unknown
+export type RemoveBypassIp200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type RemoveBypassIp400 = unknown
+export type RemoveBypassIp400 = unknown;
 
-export type RemoveBypassIp401 = unknown
+export type RemoveBypassIp401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type RemoveBypassIp403 = unknown
+export type RemoveBypassIp403 = unknown;
 
-export type RemoveBypassIp404 = unknown
+export type RemoveBypassIp404 = unknown;
 
-export type RemoveBypassIp500 = unknown
+export type RemoveBypassIp500 = unknown;
 
-export type RemoveBypassIpMutationResponse = RemoveBypassIp200
+export type RemoveBypassIpMutationResponse = RemoveBypassIp200;
 
 export type RemoveBypassIpMutation = {
-  Response: RemoveBypassIp200
-  QueryParams: RemoveBypassIpQueryParams
-  Errors: RemoveBypassIp400 | RemoveBypassIp401 | RemoveBypassIp403 | RemoveBypassIp404 | RemoveBypassIp500
-}
+  Response: RemoveBypassIp200;
+  QueryParams: RemoveBypassIpQueryParams;
+  Errors: RemoveBypassIp400 | RemoveBypassIp401 | RemoveBypassIp403 | RemoveBypassIp404 | RemoveBypassIp500;
+};
 
 export type GetTeamMembersPathParams = {
   /**
    * @type string
    */
-  teamId: string
-}
+  teamId: string;
+};
 
 export const getTeamMembersQueryParamsRoleEnum = {
   OWNER: 'OWNER',
@@ -15322,10 +15477,11 @@ export const getTeamMembersQueryParamsRoleEnum = {
   DEVELOPER: 'DEVELOPER',
   VIEWER: 'VIEWER',
   BILLING: 'BILLING',
-  CONTRIBUTOR: 'CONTRIBUTOR',
-} as const
+  CONTRIBUTOR: 'CONTRIBUTOR'
+} as const;
 
-export type GetTeamMembersQueryParamsRoleEnum = (typeof getTeamMembersQueryParamsRoleEnum)[keyof typeof getTeamMembersQueryParamsRoleEnum]
+export type GetTeamMembersQueryParamsRoleEnum =
+  (typeof getTeamMembersQueryParamsRoleEnum)[keyof typeof getTeamMembersQueryParamsRoleEnum];
 
 export type GetTeamMembersQueryParams = {
   /**
@@ -15333,1176 +15489,1187 @@ export type GetTeamMembersQueryParams = {
    * @minLength 1
    * @type number | undefined
    */
-  limit?: number | undefined
+  limit?: number | undefined;
   /**
    * @description Timestamp in milliseconds to only include members added since then.
    * @type number | undefined
    */
-  since?: number | undefined
+  since?: number | undefined;
   /**
    * @description Timestamp in milliseconds to only include members added until then.
    * @type number | undefined
    */
-  until?: number | undefined
+  until?: number | undefined;
   /**
    * @description Search team members by their name, username, and email.
    * @type string | undefined
    */
-  search?: string | undefined
+  search?: string | undefined;
   /**
    * @description Only return members with the specified team role.
    * @type string | undefined
    */
-  role?: GetTeamMembersQueryParamsRoleEnum | undefined
+  role?: GetTeamMembersQueryParamsRoleEnum | undefined;
   /**
    * @description Exclude members who belong to the specified project.
    * @type string | undefined
    */
-  excludeProject?: string | undefined
+  excludeProject?: string | undefined;
   /**
    * @description Include team members who are eligible to be members of the specified project.
    * @type string | undefined
    */
-  eligibleMembersForProjectId?: string | undefined
-}
+  eligibleMembersForProjectId?: string | undefined;
+};
 
-export type GetTeamMembers200 = unknown
+export type GetTeamMembers200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetTeamMembers400 = unknown
+export type GetTeamMembers400 = unknown;
 
-export type GetTeamMembers401 = unknown
+export type GetTeamMembers401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetTeamMembers403 = unknown
+export type GetTeamMembers403 = unknown;
 
-export type GetTeamMembers404 = unknown
+export type GetTeamMembers404 = unknown;
 
-export type GetTeamMembersQueryResponse = GetTeamMembers200
+export type GetTeamMembersQueryResponse = GetTeamMembers200;
 
 export type GetTeamMembersQuery = {
-  Response: GetTeamMembers200
-  PathParams: GetTeamMembersPathParams
-  QueryParams: GetTeamMembersQueryParams
-  Errors: GetTeamMembers400 | GetTeamMembers401 | GetTeamMembers403 | GetTeamMembers404
-}
+  Response: GetTeamMembers200;
+  PathParams: GetTeamMembersPathParams;
+  QueryParams: GetTeamMembersQueryParams;
+  Errors: GetTeamMembers400 | GetTeamMembers401 | GetTeamMembers403 | GetTeamMembers404;
+};
 
 export type InviteUserToTeamPathParams = {
   /**
    * @type string
    */
-  teamId: string
-}
+  teamId: string;
+};
 
 /**
  * @description The member was successfully added to the team
  */
-export type InviteUserToTeam200 = unknown
+export type InviteUserToTeam200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.\nThe user already requested access to the team\nThe team reached the maximum allowed amount of members
  */
-export type InviteUserToTeam400 = unknown
+export type InviteUserToTeam400 = unknown;
 
-export type InviteUserToTeam401 = unknown
+export type InviteUserToTeam401 = unknown;
 
 /**
  * @description The authenticated user must be a team owner to perform the action\nYou do not have permission to access this resource.
  */
-export type InviteUserToTeam403 = unknown
+export type InviteUserToTeam403 = unknown;
 
-export type InviteUserToTeam503 = unknown
+export type InviteUserToTeam503 = unknown;
 
-export type InviteUserToTeamMutationResponse = InviteUserToTeam200
+export type InviteUserToTeamMutationResponse = InviteUserToTeam200;
 
 export type InviteUserToTeamMutation = {
-  Response: InviteUserToTeam200
-  PathParams: InviteUserToTeamPathParams
-  Errors: InviteUserToTeam400 | InviteUserToTeam401 | InviteUserToTeam403 | InviteUserToTeam503
-}
+  Response: InviteUserToTeam200;
+  PathParams: InviteUserToTeamPathParams;
+  Errors: InviteUserToTeam400 | InviteUserToTeam401 | InviteUserToTeam403 | InviteUserToTeam503;
+};
 
 export type RequestAccessToTeamPathParams = {
   /**
    * @type string
    */
-  teamId: string
-}
+  teamId: string;
+};
 
 /**
  * @description Successfuly requested access to the team.
  */
-export type RequestAccessToTeam200 = unknown
+export type RequestAccessToTeam200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type RequestAccessToTeam400 = unknown
+export type RequestAccessToTeam400 = unknown;
 
-export type RequestAccessToTeam401 = unknown
+export type RequestAccessToTeam401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type RequestAccessToTeam403 = unknown
+export type RequestAccessToTeam403 = unknown;
 
 /**
  * @description The team was not found.
  */
-export type RequestAccessToTeam404 = unknown
+export type RequestAccessToTeam404 = unknown;
 
-export type RequestAccessToTeam503 = unknown
+export type RequestAccessToTeam503 = unknown;
 
-export type RequestAccessToTeamMutationResponse = RequestAccessToTeam200
+export type RequestAccessToTeamMutationResponse = RequestAccessToTeam200;
 
 export type RequestAccessToTeamMutation = {
-  Response: RequestAccessToTeam200
-  PathParams: RequestAccessToTeamPathParams
-  Errors: RequestAccessToTeam400 | RequestAccessToTeam401 | RequestAccessToTeam403 | RequestAccessToTeam404 | RequestAccessToTeam503
-}
+  Response: RequestAccessToTeam200;
+  PathParams: RequestAccessToTeamPathParams;
+  Errors:
+    | RequestAccessToTeam400
+    | RequestAccessToTeam401
+    | RequestAccessToTeam403
+    | RequestAccessToTeam404
+    | RequestAccessToTeam503;
+};
 
 export type GetTeamAccessRequestPathParams = {
   /**
    * @type string
    */
-  userId: string
+  userId: string;
   /**
    * @type string
    */
-  teamId: string
-}
+  teamId: string;
+};
 
 /**
  * @description Successfully
  */
-export type GetTeamAccessRequest200 = unknown
+export type GetTeamAccessRequest200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.\nUser is already a confirmed member of the team and did not request access. Only visible when the authenticated user does have access to the team.
  */
-export type GetTeamAccessRequest400 = unknown
+export type GetTeamAccessRequest400 = unknown;
 
-export type GetTeamAccessRequest401 = unknown
+export type GetTeamAccessRequest401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetTeamAccessRequest403 = unknown
+export type GetTeamAccessRequest403 = unknown;
 
 /**
  * @description The provided user doesn\'t have a membership.\nTeam was not found.
  */
-export type GetTeamAccessRequest404 = unknown
+export type GetTeamAccessRequest404 = unknown;
 
-export type GetTeamAccessRequestQueryResponse = GetTeamAccessRequest200
+export type GetTeamAccessRequestQueryResponse = GetTeamAccessRequest200;
 
 export type GetTeamAccessRequestQuery = {
-  Response: GetTeamAccessRequest200
-  PathParams: GetTeamAccessRequestPathParams
-  Errors: GetTeamAccessRequest400 | GetTeamAccessRequest401 | GetTeamAccessRequest403 | GetTeamAccessRequest404
-}
+  Response: GetTeamAccessRequest200;
+  PathParams: GetTeamAccessRequestPathParams;
+  Errors: GetTeamAccessRequest400 | GetTeamAccessRequest401 | GetTeamAccessRequest403 | GetTeamAccessRequest404;
+};
 
 export type JoinTeamPathParams = {
   /**
    * @type string
    */
-  teamId: string
-}
+  teamId: string;
+};
 
 /**
  * @description Successfully joined a team.
  */
-export type JoinTeam200 = unknown
+export type JoinTeam200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.
  */
-export type JoinTeam400 = unknown
+export type JoinTeam400 = unknown;
 
-export type JoinTeam401 = unknown
+export type JoinTeam401 = unknown;
 
-export type JoinTeam402 = unknown
+export type JoinTeam402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type JoinTeam403 = unknown
+export type JoinTeam403 = unknown;
 
-export type JoinTeam404 = unknown
+export type JoinTeam404 = unknown;
 
-export type JoinTeamMutationResponse = JoinTeam200
+export type JoinTeamMutationResponse = JoinTeam200;
 
 export type JoinTeamMutation = {
-  Response: JoinTeam200
-  PathParams: JoinTeamPathParams
-  Errors: JoinTeam400 | JoinTeam401 | JoinTeam402 | JoinTeam403 | JoinTeam404
-}
+  Response: JoinTeam200;
+  PathParams: JoinTeamPathParams;
+  Errors: JoinTeam400 | JoinTeam401 | JoinTeam402 | JoinTeam403 | JoinTeam404;
+};
 
 export type UpdateTeamMemberPathParams = {
   /**
    * @description The ID of the member.
    * @type string
    */
-  uid: string
+  uid: string;
   /**
    * @type string
    */
-  teamId: string
-}
+  teamId: string;
+};
 
 /**
  * @description Successfully updated the membership.
  */
-export type UpdateTeamMember200 = unknown
+export type UpdateTeamMember200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.\nCannot disconnect SSO from a Team member that does not have a SSO connection.\nCannot confirm a member that is already confirmed.\nCannot confirm a member that did not request access.
  */
-export type UpdateTeamMember400 = unknown
+export type UpdateTeamMember400 = unknown;
 
 /**
  * @description Team members can only be updated by an owner, or by the authenticated user if they are only disconnecting their SAML connection to the Team.
  */
-export type UpdateTeamMember401 = unknown
+export type UpdateTeamMember401 = unknown;
 
-export type UpdateTeamMember402 = unknown
+export type UpdateTeamMember402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UpdateTeamMember403 = unknown
+export type UpdateTeamMember403 = unknown;
 
 /**
  * @description The provided user is not part of this team.\nA user with the specified ID does not exist.
  */
-export type UpdateTeamMember404 = unknown
+export type UpdateTeamMember404 = unknown;
 
-export type UpdateTeamMember500 = unknown
+export type UpdateTeamMember500 = unknown;
 
-export type UpdateTeamMemberMutationResponse = UpdateTeamMember200
+export type UpdateTeamMemberMutationResponse = UpdateTeamMember200;
 
 export type UpdateTeamMemberMutation = {
-  Response: UpdateTeamMember200
-  PathParams: UpdateTeamMemberPathParams
-  Errors: UpdateTeamMember400 | UpdateTeamMember401 | UpdateTeamMember402 | UpdateTeamMember403 | UpdateTeamMember404 | UpdateTeamMember500
-}
+  Response: UpdateTeamMember200;
+  PathParams: UpdateTeamMemberPathParams;
+  Errors:
+    | UpdateTeamMember400
+    | UpdateTeamMember401
+    | UpdateTeamMember402
+    | UpdateTeamMember403
+    | UpdateTeamMember404
+    | UpdateTeamMember500;
+};
 
 export type RemoveTeamMemberPathParams = {
   /**
    * @description The user ID of the member.
    * @type string
    */
-  uid: string
+  uid: string;
   /**
    * @type string
    */
-  teamId: string
-}
+  teamId: string;
+};
 
 export type RemoveTeamMemberQueryParams = {
   /**
    * @description The ID of the team to set as the new default team for the Northstar user.
    * @type string | undefined
    */
-  newDefaultTeamId?: string | undefined
-}
+  newDefaultTeamId?: string | undefined;
+};
 
 /**
  * @description Successfully removed a member of the team.
  */
-export type RemoveTeamMember200 = unknown
+export type RemoveTeamMember200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type RemoveTeamMember400 = unknown
+export type RemoveTeamMember400 = unknown;
 
-export type RemoveTeamMember401 = unknown
+export type RemoveTeamMember401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.\nNot authorized to update the team.
  */
-export type RemoveTeamMember403 = unknown
+export type RemoveTeamMember403 = unknown;
 
-export type RemoveTeamMember404 = unknown
+export type RemoveTeamMember404 = unknown;
 
-export type RemoveTeamMember503 = unknown
+export type RemoveTeamMember503 = unknown;
 
-export type RemoveTeamMemberMutationResponse = RemoveTeamMember200
+export type RemoveTeamMemberMutationResponse = RemoveTeamMember200;
 
 export type RemoveTeamMemberMutation = {
-  Response: RemoveTeamMember200
-  PathParams: RemoveTeamMemberPathParams
-  QueryParams: RemoveTeamMemberQueryParams
-  Errors: RemoveTeamMember400 | RemoveTeamMember401 | RemoveTeamMember403 | RemoveTeamMember404 | RemoveTeamMember503
-}
+  Response: RemoveTeamMember200;
+  PathParams: RemoveTeamMemberPathParams;
+  QueryParams: RemoveTeamMemberQueryParams;
+  Errors: RemoveTeamMember400 | RemoveTeamMember401 | RemoveTeamMember403 | RemoveTeamMember404 | RemoveTeamMember503;
+};
 
 export type GetTeamPathParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string
    */
-  teamId: string
-}
+  teamId: string;
+};
 
 export type GetTeamQueryParams = {
   /**
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The requested team
  */
-export type GetTeam200 = unknown
+export type GetTeam200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetTeam400 = unknown
+export type GetTeam400 = unknown;
 
-export type GetTeam401 = unknown
+export type GetTeam401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.\nNot authorized to access the team.
  */
-export type GetTeam403 = unknown
+export type GetTeam403 = unknown;
 
 /**
  * @description Team was not found.
  */
-export type GetTeam404 = unknown
+export type GetTeam404 = unknown;
 
-export type GetTeamQueryResponse = GetTeam200
+export type GetTeamQueryResponse = GetTeam200;
 
 export type GetTeamQuery = {
-  Response: GetTeam200
-  PathParams: GetTeamPathParams
-  QueryParams: GetTeamQueryParams
-  Errors: GetTeam400 | GetTeam401 | GetTeam403 | GetTeam404
-}
+  Response: GetTeam200;
+  PathParams: GetTeamPathParams;
+  QueryParams: GetTeamQueryParams;
+  Errors: GetTeam400 | GetTeam401 | GetTeam403 | GetTeam404;
+};
 
 export type PatchTeamPathParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string
    */
-  teamId: string
-}
+  teamId: string;
+};
 
 export type PatchTeamQueryParams = {
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type PatchTeam200 = unknown
+export type PatchTeam200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.
  */
-export type PatchTeam400 = unknown
+export type PatchTeam400 = unknown;
 
-export type PatchTeam401 = unknown
+export type PatchTeam401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type PatchTeam402 = unknown
+export type PatchTeam402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.\nNot authorized to update the team. Must be an OWNER.
  */
-export type PatchTeam403 = unknown
+export type PatchTeam403 = unknown;
 
 /**
  * @description Owner does not have protection add-on\nAdvanced Deployment Protection is not available for the user plan
  */
-export type PatchTeam428 = unknown
+export type PatchTeam428 = unknown;
 
-export type PatchTeamMutationResponse = PatchTeam200
+export type PatchTeamMutationResponse = PatchTeam200;
 
 export type PatchTeamMutation = {
-  Response: PatchTeam200
-  PathParams: PatchTeamPathParams
-  QueryParams: PatchTeamQueryParams
-  Errors: PatchTeam400 | PatchTeam401 | PatchTeam402 | PatchTeam403 | PatchTeam428
-}
+  Response: PatchTeam200;
+  PathParams: PatchTeamPathParams;
+  QueryParams: PatchTeamQueryParams;
+  Errors: PatchTeam400 | PatchTeam401 | PatchTeam402 | PatchTeam403 | PatchTeam428;
+};
 
 export type GetTeamsQueryParams = {
   /**
    * @description Maximum number of Teams which may be returned.
    * @type number | undefined
    */
-  limit?: number | undefined
+  limit?: number | undefined;
   /**
    * @description Timestamp (in milliseconds) to only include Teams created since then.
    * @type number | undefined
    */
-  since?: number | undefined
+  since?: number | undefined;
   /**
    * @description Timestamp (in milliseconds) to only include Teams created until then.
    * @type number | undefined
    */
-  until?: number | undefined
-}
+  until?: number | undefined;
+};
 
 /**
  * @description A paginated list of teams.
  */
-export type GetTeams200 = unknown
+export type GetTeams200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetTeams400 = unknown
+export type GetTeams400 = unknown;
 
-export type GetTeams401 = unknown
+export type GetTeams401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetTeams403 = unknown
+export type GetTeams403 = unknown;
 
-export type GetTeamsQueryResponse = GetTeams200
+export type GetTeamsQueryResponse = GetTeams200;
 
 export type GetTeamsQuery = {
-  Response: GetTeams200
-  QueryParams: GetTeamsQueryParams
-  Errors: GetTeams400 | GetTeams401 | GetTeams403
-}
+  Response: GetTeams200;
+  QueryParams: GetTeamsQueryParams;
+  Errors: GetTeams400 | GetTeams401 | GetTeams403;
+};
 
 /**
  * @description The team was created successfully
  */
-export type CreateTeam200 = unknown
+export type CreateTeam200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nThe slug is already in use
  */
-export type CreateTeam400 = unknown
+export type CreateTeam400 = unknown;
 
-export type CreateTeam401 = unknown
+export type CreateTeam401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CreateTeam403 = unknown
+export type CreateTeam403 = unknown;
 
-export type CreateTeamMutationResponse = CreateTeam200
+export type CreateTeamMutationResponse = CreateTeam200;
 
 export type CreateTeamMutation = {
-  Response: CreateTeam200
-  Errors: CreateTeam400 | CreateTeam401 | CreateTeam403
-}
+  Response: CreateTeam200;
+  Errors: CreateTeam400 | CreateTeam401 | CreateTeam403;
+};
 
 export type DeleteTeamPathParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string
    */
-  teamId: string
-}
+  teamId: string;
+};
 
 export type DeleteTeamQueryParams = {
   /**
    * @description Id of the team to be set as the new default team
    * @type string | undefined
    */
-  newDefaultTeamId?: string | undefined
+  newDefaultTeamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The Team was successfully deleted
  */
-export type DeleteTeam200 = unknown
+export type DeleteTeam200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type DeleteTeam400 = unknown
+export type DeleteTeam400 = unknown;
 
-export type DeleteTeam401 = unknown
+export type DeleteTeam401 = unknown;
 
-export type DeleteTeam402 = unknown
+export type DeleteTeam402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.\nThe authenticated user can\'t access the team
  */
-export type DeleteTeam403 = unknown
+export type DeleteTeam403 = unknown;
 
-export type DeleteTeam409 = unknown
+export type DeleteTeam409 = unknown;
 
-export type DeleteTeamMutationResponse = DeleteTeam200
+export type DeleteTeamMutationResponse = DeleteTeam200;
 
 export type DeleteTeamMutation = {
-  Response: DeleteTeam200
-  PathParams: DeleteTeamPathParams
-  QueryParams: DeleteTeamQueryParams
-  Errors: DeleteTeam400 | DeleteTeam401 | DeleteTeam402 | DeleteTeam403 | DeleteTeam409
-}
+  Response: DeleteTeam200;
+  PathParams: DeleteTeamPathParams;
+  QueryParams: DeleteTeamQueryParams;
+  Errors: DeleteTeam400 | DeleteTeam401 | DeleteTeam402 | DeleteTeam403 | DeleteTeam409;
+};
 
 export type DeleteTeamInviteCodePathParams = {
   /**
    * @description The Team invite code ID.
    * @type string
    */
-  inviteId: string
+  inviteId: string;
   /**
    * @type string
    */
-  teamId: string
-}
+  teamId: string;
+};
 
 /**
  * @description Successfully deleted Team invite code.
  */
-export type DeleteTeamInviteCode200 = unknown
+export type DeleteTeamInviteCode200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type DeleteTeamInviteCode400 = unknown
+export type DeleteTeamInviteCode400 = unknown;
 
-export type DeleteTeamInviteCode401 = unknown
+export type DeleteTeamInviteCode401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.\nInvite managed by directory sync\nNot authorized to access this team.
  */
-export type DeleteTeamInviteCode403 = unknown
+export type DeleteTeamInviteCode403 = unknown;
 
 /**
  * @description Team invite code not found.
  */
-export type DeleteTeamInviteCode404 = unknown
+export type DeleteTeamInviteCode404 = unknown;
 
-export type DeleteTeamInviteCodeMutationResponse = DeleteTeamInviteCode200
+export type DeleteTeamInviteCodeMutationResponse = DeleteTeamInviteCode200;
 
 export type DeleteTeamInviteCodeMutation = {
-  Response: DeleteTeamInviteCode200
-  PathParams: DeleteTeamInviteCodePathParams
-  Errors: DeleteTeamInviteCode400 | DeleteTeamInviteCode401 | DeleteTeamInviteCode403 | DeleteTeamInviteCode404
-}
+  Response: DeleteTeamInviteCode200;
+  PathParams: DeleteTeamInviteCodePathParams;
+  Errors: DeleteTeamInviteCode400 | DeleteTeamInviteCode401 | DeleteTeamInviteCode403 | DeleteTeamInviteCode404;
+};
 
 export type UploadFileQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 export type UploadFileHeaderParams = {
   /**
    * @description The file size in bytes
    * @type number | undefined
    */
-  'Content-Length'?: number | undefined
+  'Content-Length'?: number | undefined;
   /**
    * @description The file SHA1 used to check the integrity
    * @maxLength 40
    * @type string | undefined
    */
-  'x-vercel-digest'?: string | undefined
+  'x-vercel-digest'?: string | undefined;
   /**
    * @description The file SHA1 used to check the integrity
    * @deprecated
    * @maxLength 40
    * @type string | undefined
    */
-  'x-now-digest'?: string | undefined
+  'x-now-digest'?: string | undefined;
   /**
    * @description The file size as an alternative to `Content-Length`
    * @deprecated
    * @type number | undefined
    */
-  'x-now-size'?: number | undefined
+  'x-now-size'?: number | undefined;
   /**
    * @description Shared secret token set by v0 deployments. When present and valid, the API applies an extended rate limit.
    * @type string | undefined
    */
-  'x-internal-v0-token'?: string | undefined
-}
+  'x-internal-v0-token'?: string | undefined;
+};
 
 /**
  * @description File already uploaded\nFile successfully uploaded
  */
-export type UploadFile200 = unknown
+export type UploadFile200 = unknown;
 
 /**
  * @description One of the provided values in the headers is invalid\nDigest is not valid\nFile size is not valid
  */
-export type UploadFile400 = unknown
+export type UploadFile400 = unknown;
 
-export type UploadFile401 = unknown
+export type UploadFile401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UploadFile403 = unknown
+export type UploadFile403 = unknown;
 
-export type UploadFileMutationResponse = UploadFile200
+export type UploadFileMutationResponse = UploadFile200;
 
 export type UploadFileMutation = {
-  Response: UploadFile200
-  QueryParams: UploadFileQueryParams
-  HeaderParams: UploadFileHeaderParams
-  Errors: UploadFile400 | UploadFile401 | UploadFile403
-}
+  Response: UploadFile200;
+  QueryParams: UploadFileQueryParams;
+  HeaderParams: UploadFileHeaderParams;
+  Errors: UploadFile400 | UploadFile401 | UploadFile403;
+};
 
-export type ListAuthTokens200 = unknown
+export type ListAuthTokens200 = unknown;
 
-export type ListAuthTokens400 = unknown
+export type ListAuthTokens400 = unknown;
 
-export type ListAuthTokens401 = unknown
+export type ListAuthTokens401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type ListAuthTokens403 = unknown
+export type ListAuthTokens403 = unknown;
 
-export type ListAuthTokensQueryResponse = ListAuthTokens200
+export type ListAuthTokensQueryResponse = ListAuthTokens200;
 
 export type ListAuthTokensQuery = {
-  Response: ListAuthTokens200
-  Errors: ListAuthTokens400 | ListAuthTokens401 | ListAuthTokens403
-}
+  Response: ListAuthTokens200;
+  Errors: ListAuthTokens400 | ListAuthTokens401 | ListAuthTokens403;
+};
 
 export type CreateAuthTokenQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description Successful response.
  */
-export type CreateAuthToken200 = unknown
+export type CreateAuthToken200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.
  */
-export type CreateAuthToken400 = unknown
+export type CreateAuthToken400 = unknown;
 
-export type CreateAuthToken401 = unknown
+export type CreateAuthToken401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CreateAuthToken403 = unknown
+export type CreateAuthToken403 = unknown;
 
-export type CreateAuthTokenMutationResponse = CreateAuthToken200
+export type CreateAuthTokenMutationResponse = CreateAuthToken200;
 
 export type CreateAuthTokenMutation = {
-  Response: CreateAuthToken200
-  QueryParams: CreateAuthTokenQueryParams
-  Errors: CreateAuthToken400 | CreateAuthToken401 | CreateAuthToken403
-}
+  Response: CreateAuthToken200;
+  QueryParams: CreateAuthTokenQueryParams;
+  Errors: CreateAuthToken400 | CreateAuthToken401 | CreateAuthToken403;
+};
 
 export type GetAuthTokenPathParams = {
   /**
    * @description The identifier of the token to retrieve. The special value \\\"current\\\" may be supplied, which returns the metadata for the token that the current HTTP request is authenticated with.
    * @type string
    */
-  tokenId: string
-}
+  tokenId: string;
+};
 
 /**
  * @description Successful response.
  */
-export type GetAuthToken200 = unknown
+export type GetAuthToken200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetAuthToken400 = unknown
+export type GetAuthToken400 = unknown;
 
-export type GetAuthToken401 = unknown
+export type GetAuthToken401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetAuthToken403 = unknown
+export type GetAuthToken403 = unknown;
 
 /**
  * @description Token not found with the requested `tokenId`.
  */
-export type GetAuthToken404 = unknown
+export type GetAuthToken404 = unknown;
 
-export type GetAuthTokenQueryResponse = GetAuthToken200
+export type GetAuthTokenQueryResponse = GetAuthToken200;
 
 export type GetAuthTokenQuery = {
-  Response: GetAuthToken200
-  PathParams: GetAuthTokenPathParams
-  Errors: GetAuthToken400 | GetAuthToken401 | GetAuthToken403 | GetAuthToken404
-}
+  Response: GetAuthToken200;
+  PathParams: GetAuthTokenPathParams;
+  Errors: GetAuthToken400 | GetAuthToken401 | GetAuthToken403 | GetAuthToken404;
+};
 
 export type DeleteAuthTokenPathParams = {
   /**
    * @description The identifier of the token to invalidate. The special value \\\"current\\\" may be supplied, which invalidates the token that the HTTP request was authenticated with.
    * @type string
    */
-  tokenId: string
-}
+  tokenId: string;
+};
 
 /**
  * @description Authentication token successfully deleted.
  */
-export type DeleteAuthToken200 = unknown
+export type DeleteAuthToken200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type DeleteAuthToken400 = unknown
+export type DeleteAuthToken400 = unknown;
 
-export type DeleteAuthToken401 = unknown
+export type DeleteAuthToken401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type DeleteAuthToken403 = unknown
+export type DeleteAuthToken403 = unknown;
 
 /**
  * @description Token not found with the requested `tokenId`.
  */
-export type DeleteAuthToken404 = unknown
+export type DeleteAuthToken404 = unknown;
 
-export type DeleteAuthTokenMutationResponse = DeleteAuthToken200
+export type DeleteAuthTokenMutationResponse = DeleteAuthToken200;
 
 export type DeleteAuthTokenMutation = {
-  Response: DeleteAuthToken200
-  PathParams: DeleteAuthTokenPathParams
-  Errors: DeleteAuthToken400 | DeleteAuthToken401 | DeleteAuthToken403 | DeleteAuthToken404
-}
+  Response: DeleteAuthToken200;
+  PathParams: DeleteAuthTokenPathParams;
+  Errors: DeleteAuthToken400 | DeleteAuthToken401 | DeleteAuthToken403 | DeleteAuthToken404;
+};
 
 /**
  * @description Successful response.
  */
-export type GetAuthUser200 = unknown
+export type GetAuthUser200 = unknown;
 
-export type GetAuthUser400 = unknown
+export type GetAuthUser400 = unknown;
 
-export type GetAuthUser401 = unknown
+export type GetAuthUser401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetAuthUser403 = unknown
+export type GetAuthUser403 = unknown;
 
-export type GetAuthUser409 = unknown
+export type GetAuthUser409 = unknown;
 
-export type GetAuthUserQueryResponse = GetAuthUser200
+export type GetAuthUserQueryResponse = GetAuthUser200;
 
 export type GetAuthUserQuery = {
-  Response: GetAuthUser200
-  Errors: GetAuthUser400 | GetAuthUser401 | GetAuthUser403 | GetAuthUser409
-}
+  Response: GetAuthUser200;
+  Errors: GetAuthUser400 | GetAuthUser401 | GetAuthUser403 | GetAuthUser409;
+};
 
 /**
  * @description Response indicating that the User deletion process has been initiated, and a confirmation email has been sent.
  */
-export type RequestDelete202 = unknown
+export type RequestDelete202 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.
  */
-export type RequestDelete400 = unknown
+export type RequestDelete400 = unknown;
 
-export type RequestDelete401 = unknown
+export type RequestDelete401 = unknown;
 
-export type RequestDelete402 = unknown
+export type RequestDelete402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type RequestDelete403 = unknown
+export type RequestDelete403 = unknown;
 
-export type RequestDeleteMutationResponse = RequestDelete202
+export type RequestDeleteMutationResponse = RequestDelete202;
 
 export type RequestDeleteMutation = {
-  Response: RequestDelete202
-  Errors: RequestDelete400 | RequestDelete401 | RequestDelete402 | RequestDelete403
-}
+  Response: RequestDelete202;
+  Errors: RequestDelete400 | RequestDelete401 | RequestDelete402 | RequestDelete403;
+};
 
 export type CreateWebhookQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type CreateWebhook200 = unknown
+export type CreateWebhook200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.
  */
-export type CreateWebhook400 = unknown
+export type CreateWebhook400 = unknown;
 
-export type CreateWebhook401 = unknown
+export type CreateWebhook401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CreateWebhook403 = unknown
+export type CreateWebhook403 = unknown;
 
-export type CreateWebhookMutationResponse = CreateWebhook200
+export type CreateWebhookMutationResponse = CreateWebhook200;
 
 export type CreateWebhookMutation = {
-  Response: CreateWebhook200
-  QueryParams: CreateWebhookQueryParams
-  Errors: CreateWebhook400 | CreateWebhook401 | CreateWebhook403
-}
+  Response: CreateWebhook200;
+  QueryParams: CreateWebhookQueryParams;
+  Errors: CreateWebhook400 | CreateWebhook401 | CreateWebhook403;
+};
 
 export type GetWebhooksQueryParams = {
   /**
    * @pattern ^[a-zA-z0-9_]+$
    * @type string | undefined
    */
-  projectId?: string | undefined
+  projectId?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type GetWebhooks200 = unknown
+export type GetWebhooks200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetWebhooks400 = unknown
+export type GetWebhooks400 = unknown;
 
-export type GetWebhooks401 = unknown
+export type GetWebhooks401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetWebhooks403 = unknown
+export type GetWebhooks403 = unknown;
 
-export type GetWebhooksQueryResponse = GetWebhooks200
+export type GetWebhooksQueryResponse = GetWebhooks200;
 
 export type GetWebhooksQuery = {
-  Response: GetWebhooks200
-  QueryParams: GetWebhooksQueryParams
-  Errors: GetWebhooks400 | GetWebhooks401 | GetWebhooks403
-}
+  Response: GetWebhooks200;
+  QueryParams: GetWebhooksQueryParams;
+  Errors: GetWebhooks400 | GetWebhooks401 | GetWebhooks403;
+};
 
 export type GetWebhookPathParams = {
   /**
    * @type string
    */
-  id: string
-}
+  id: string;
+};
 
 export type GetWebhookQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type GetWebhook200 = unknown
+export type GetWebhook200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetWebhook400 = unknown
+export type GetWebhook400 = unknown;
 
-export type GetWebhook401 = unknown
+export type GetWebhook401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetWebhook403 = unknown
+export type GetWebhook403 = unknown;
 
-export type GetWebhookQueryResponse = GetWebhook200
+export type GetWebhookQueryResponse = GetWebhook200;
 
 export type GetWebhookQuery = {
-  Response: GetWebhook200
-  PathParams: GetWebhookPathParams
-  QueryParams: GetWebhookQueryParams
-  Errors: GetWebhook400 | GetWebhook401 | GetWebhook403
-}
+  Response: GetWebhook200;
+  PathParams: GetWebhookPathParams;
+  QueryParams: GetWebhookQueryParams;
+  Errors: GetWebhook400 | GetWebhook401 | GetWebhook403;
+};
 
 export type DeleteWebhookPathParams = {
   /**
    * @type string
    */
-  id: string
-}
+  id: string;
+};
 
 export type DeleteWebhookQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type DeleteWebhook204 = unknown
+export type DeleteWebhook204 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type DeleteWebhook400 = unknown
+export type DeleteWebhook400 = unknown;
 
-export type DeleteWebhook401 = unknown
+export type DeleteWebhook401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type DeleteWebhook403 = unknown
+export type DeleteWebhook403 = unknown;
 
-export type DeleteWebhookMutationResponse = DeleteWebhook204
+export type DeleteWebhookMutationResponse = DeleteWebhook204;
 
 export type DeleteWebhookMutation = {
-  Response: DeleteWebhook204
-  PathParams: DeleteWebhookPathParams
-  QueryParams: DeleteWebhookQueryParams
-  Errors: DeleteWebhook400 | DeleteWebhook401 | DeleteWebhook403
-}
+  Response: DeleteWebhook204;
+  PathParams: DeleteWebhookPathParams;
+  QueryParams: DeleteWebhookQueryParams;
+  Errors: DeleteWebhook400 | DeleteWebhook401 | DeleteWebhook403;
+};
 
 export type ListDeploymentAliasesPathParams = {
   /**
    * @description The ID of the deployment the aliases should be listed for
    * @type string
    */
-  id: string
-}
+  id: string;
+};
 
 export type ListDeploymentAliasesQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The list of aliases assigned to the deployment
  */
-export type ListDeploymentAliases200 = unknown
+export type ListDeploymentAliases200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type ListDeploymentAliases400 = unknown
+export type ListDeploymentAliases400 = unknown;
 
-export type ListDeploymentAliases401 = unknown
+export type ListDeploymentAliases401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type ListDeploymentAliases403 = unknown
+export type ListDeploymentAliases403 = unknown;
 
 /**
  * @description The deployment was not found
  */
-export type ListDeploymentAliases404 = unknown
+export type ListDeploymentAliases404 = unknown;
 
-export type ListDeploymentAliasesQueryResponse = ListDeploymentAliases200
+export type ListDeploymentAliasesQueryResponse = ListDeploymentAliases200;
 
 export type ListDeploymentAliasesQuery = {
-  Response: ListDeploymentAliases200
-  PathParams: ListDeploymentAliasesPathParams
-  QueryParams: ListDeploymentAliasesQueryParams
-  Errors: ListDeploymentAliases400 | ListDeploymentAliases401 | ListDeploymentAliases403 | ListDeploymentAliases404
-}
+  Response: ListDeploymentAliases200;
+  PathParams: ListDeploymentAliasesPathParams;
+  QueryParams: ListDeploymentAliasesQueryParams;
+  Errors: ListDeploymentAliases400 | ListDeploymentAliases401 | ListDeploymentAliases403 | ListDeploymentAliases404;
+};
 
 export type AssignAliasPathParams = {
   /**
    * @description The ID of the deployment the aliases should be listed for
    */
-  id: string
-}
+  id: string;
+};
 
 export type AssignAliasQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The alias was successfully assigned to the deployment
  */
-export type AssignAlias200 = unknown
+export type AssignAlias200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.\nThe cert for the provided alias is not ready\nThe deployment is not READY and can not be aliased\nThe supplied alias is invalid
  */
-export type AssignAlias400 = unknown
+export type AssignAlias400 = unknown;
 
-export type AssignAlias401 = unknown
+export type AssignAlias401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type AssignAlias402 = unknown
+export type AssignAlias402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.\nIf no .vercel.app alias exists then we fail (nothing to mirror)
  */
-export type AssignAlias403 = unknown
+export type AssignAlias403 = unknown;
 
 /**
  * @description The domain used for the alias was not found\nThe deployment was not found
  */
-export type AssignAlias404 = unknown
+export type AssignAlias404 = unknown;
 
 /**
  * @description The provided alias is already assigned to the given deployment\nThe domain is not allowed to be used
  */
-export type AssignAlias409 = unknown
+export type AssignAlias409 = unknown;
 
-export type AssignAliasMutationResponse = AssignAlias200
+export type AssignAliasMutationResponse = AssignAlias200;
 
 export type AssignAliasMutation = {
-  Response: AssignAlias200
-  PathParams: AssignAliasPathParams
-  QueryParams: AssignAliasQueryParams
-  Errors: AssignAlias400 | AssignAlias401 | AssignAlias402 | AssignAlias403 | AssignAlias404 | AssignAlias409
-}
+  Response: AssignAlias200;
+  PathParams: AssignAliasPathParams;
+  QueryParams: AssignAliasQueryParams;
+  Errors: AssignAlias400 | AssignAlias401 | AssignAlias402 | AssignAlias403 | AssignAlias404 | AssignAlias409;
+};
 
 export type ListAliasesQueryParams = {
   /**
    * @description Get only aliases of the given domain name
    */
-  domain?: (string[] | string) | undefined
+  domain?: (string[] | string) | undefined;
   /**
    * @description Get only aliases created after the provided timestamp
    * @deprecated
    * @type number | undefined
    */
-  from?: number | undefined
+  from?: number | undefined;
   /**
    * @description Maximum number of aliases to list from a request
    * @type number | undefined
    */
-  limit?: number | undefined
+  limit?: number | undefined;
   /**
    * @description Filter aliases from the given `projectId`
    * @type string | undefined
    */
-  projectId?: string | undefined
+  projectId?: string | undefined;
   /**
    * @description Get aliases created after this JavaScript timestamp
    * @type number | undefined
    */
-  since?: number | undefined
+  since?: number | undefined;
   /**
    * @description Get aliases created before this JavaScript timestamp
    * @type number | undefined
    */
-  until?: number | undefined
+  until?: number | undefined;
   /**
    * @description Get aliases that would be rolled back for the given deployment
    * @type string | undefined
    */
-  rollbackDeploymentId?: string | undefined
+  rollbackDeploymentId?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The paginated list of aliases
  */
-export type ListAliases200 = unknown
+export type ListAliases200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type ListAliases400 = unknown
+export type ListAliases400 = unknown;
 
-export type ListAliases401 = unknown
+export type ListAliases401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type ListAliases403 = unknown
+export type ListAliases403 = unknown;
 
-export type ListAliases404 = unknown
+export type ListAliases404 = unknown;
 
-export type ListAliasesQueryResponse = ListAliases200
+export type ListAliasesQueryResponse = ListAliases200;
 
 export type ListAliasesQuery = {
-  Response: ListAliases200
-  QueryParams: ListAliasesQueryParams
-  Errors: ListAliases400 | ListAliases401 | ListAliases403 | ListAliases404
-}
+  Response: ListAliases200;
+  QueryParams: ListAliasesQueryParams;
+  Errors: ListAliases400 | ListAliases401 | ListAliases403 | ListAliases404;
+};
 
 export type GetAliasPathParams = {
   /**
    * @description The alias or alias ID to be retrieved
    * @type string
    */
-  idOrAlias: string
-}
+  idOrAlias: string;
+};
 
 export type GetAliasQueryParams = {
   /**
@@ -16510,165 +16677,165 @@ export type GetAliasQueryParams = {
    * @deprecated
    * @type number | undefined
    */
-  from?: number | undefined
+  from?: number | undefined;
   /**
    * @description Get the alias only if it is assigned to the provided project ID
    * @type string | undefined
    */
-  projectId?: string | undefined
+  projectId?: string | undefined;
   /**
    * @description Get the alias only if it was created after this JavaScript timestamp
    * @type number | undefined
    */
-  since?: number | undefined
+  since?: number | undefined;
   /**
    * @description Get the alias only if it was created before this JavaScript timestamp
    * @type number | undefined
    */
-  until?: number | undefined
+  until?: number | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The alias information
  */
-export type GetAlias200 = unknown
+export type GetAlias200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetAlias400 = unknown
+export type GetAlias400 = unknown;
 
-export type GetAlias401 = unknown
+export type GetAlias401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetAlias403 = unknown
+export type GetAlias403 = unknown;
 
 /**
  * @description The alias was not found
  */
-export type GetAlias404 = unknown
+export type GetAlias404 = unknown;
 
-export type GetAliasQueryResponse = GetAlias200
+export type GetAliasQueryResponse = GetAlias200;
 
 export type GetAliasQuery = {
-  Response: GetAlias200
-  PathParams: GetAliasPathParams
-  QueryParams: GetAliasQueryParams
-  Errors: GetAlias400 | GetAlias401 | GetAlias403 | GetAlias404
-}
+  Response: GetAlias200;
+  PathParams: GetAliasPathParams;
+  QueryParams: GetAliasQueryParams;
+  Errors: GetAlias400 | GetAlias401 | GetAlias403 | GetAlias404;
+};
 
 export type DeleteAliasPathParams = {
   /**
    * @description The ID or alias that will be removed
    */
-  aliasId: string
-}
+  aliasId: string;
+};
 
 export type DeleteAliasQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The alias was successfully removed
  */
-export type DeleteAlias200 = unknown
+export type DeleteAlias200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type DeleteAlias400 = unknown
+export type DeleteAlias400 = unknown;
 
-export type DeleteAlias401 = unknown
+export type DeleteAlias401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type DeleteAlias403 = unknown
+export type DeleteAlias403 = unknown;
 
 /**
  * @description The alias was not found
  */
-export type DeleteAlias404 = unknown
+export type DeleteAlias404 = unknown;
 
-export type DeleteAliasMutationResponse = DeleteAlias200
+export type DeleteAliasMutationResponse = DeleteAlias200;
 
 export type DeleteAliasMutation = {
-  Response: DeleteAlias200
-  PathParams: DeleteAliasPathParams
-  QueryParams: DeleteAliasQueryParams
-  Errors: DeleteAlias400 | DeleteAlias401 | DeleteAlias403 | DeleteAlias404
-}
+  Response: DeleteAlias200;
+  PathParams: DeleteAliasPathParams;
+  QueryParams: DeleteAliasQueryParams;
+  Errors: DeleteAlias400 | DeleteAlias401 | DeleteAlias403 | DeleteAlias404;
+};
 
 export type PatchUrlProtectionBypassPathParams = {
   /**
    * @description The alias or deployment ID
    * @type string
    */
-  id: string
-}
+  id: string;
+};
 
 export type PatchUrlProtectionBypassQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type PatchUrlProtectionBypass200 = unknown
+export type PatchUrlProtectionBypass200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type PatchUrlProtectionBypass400 = unknown
+export type PatchUrlProtectionBypass400 = unknown;
 
-export type PatchUrlProtectionBypass401 = unknown
+export type PatchUrlProtectionBypass401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type PatchUrlProtectionBypass403 = unknown
+export type PatchUrlProtectionBypass403 = unknown;
 
-export type PatchUrlProtectionBypass404 = unknown
+export type PatchUrlProtectionBypass404 = unknown;
 
-export type PatchUrlProtectionBypass409 = unknown
+export type PatchUrlProtectionBypass409 = unknown;
 
-export type PatchUrlProtectionBypass428 = unknown
+export type PatchUrlProtectionBypass428 = unknown;
 
-export type PatchUrlProtectionBypass500 = unknown
+export type PatchUrlProtectionBypass500 = unknown;
 
-export type PatchUrlProtectionBypassMutationResponse = PatchUrlProtectionBypass200
+export type PatchUrlProtectionBypassMutationResponse = PatchUrlProtectionBypass200;
 
 export type PatchUrlProtectionBypassMutation = {
-  Response: PatchUrlProtectionBypass200
-  PathParams: PatchUrlProtectionBypassPathParams
-  QueryParams: PatchUrlProtectionBypassQueryParams
+  Response: PatchUrlProtectionBypass200;
+  PathParams: PatchUrlProtectionBypassPathParams;
+  QueryParams: PatchUrlProtectionBypassQueryParams;
   Errors:
     | PatchUrlProtectionBypass400
     | PatchUrlProtectionBypass401
@@ -16676,486 +16843,486 @@ export type PatchUrlProtectionBypassMutation = {
     | PatchUrlProtectionBypass404
     | PatchUrlProtectionBypass409
     | PatchUrlProtectionBypass428
-    | PatchUrlProtectionBypass500
-}
+    | PatchUrlProtectionBypass500;
+};
 
-export type ListCerts200 = unknown
+export type ListCerts200 = unknown;
 
-export type ListCerts400 = unknown
+export type ListCerts400 = unknown;
 
-export type ListCerts401 = unknown
+export type ListCerts401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type ListCerts403 = unknown
+export type ListCerts403 = unknown;
 
-export type ListCertsQueryResponse = ListCerts200
+export type ListCertsQueryResponse = ListCerts200;
 
 export type ListCertsQuery = {
-  Response: ListCerts200
-  Errors: ListCerts400 | ListCerts401 | ListCerts403
-}
+  Response: ListCerts200;
+  Errors: ListCerts400 | ListCerts401 | ListCerts403;
+};
 
 export type GetCertByIdPathParams = {
   /**
    * @description The cert id
    * @type string
    */
-  id: string
-}
+  id: string;
+};
 
 export type GetCertByIdQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type GetCertById200 = unknown
+export type GetCertById200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetCertById400 = unknown
+export type GetCertById400 = unknown;
 
-export type GetCertById401 = unknown
+export type GetCertById401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetCertById403 = unknown
+export type GetCertById403 = unknown;
 
-export type GetCertById404 = unknown
+export type GetCertById404 = unknown;
 
-export type GetCertByIdQueryResponse = GetCertById200
+export type GetCertByIdQueryResponse = GetCertById200;
 
 export type GetCertByIdQuery = {
-  Response: GetCertById200
-  PathParams: GetCertByIdPathParams
-  QueryParams: GetCertByIdQueryParams
-  Errors: GetCertById400 | GetCertById401 | GetCertById403 | GetCertById404
-}
+  Response: GetCertById200;
+  PathParams: GetCertByIdPathParams;
+  QueryParams: GetCertByIdQueryParams;
+  Errors: GetCertById400 | GetCertById401 | GetCertById403 | GetCertById404;
+};
 
 export type RemoveCertPathParams = {
   /**
    * @description The cert id to remove
    * @type string
    */
-  id: string
-}
+  id: string;
+};
 
 export type RemoveCertQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type RemoveCert200 = unknown
+export type RemoveCert200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type RemoveCert400 = unknown
+export type RemoveCert400 = unknown;
 
-export type RemoveCert401 = unknown
+export type RemoveCert401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type RemoveCert403 = unknown
+export type RemoveCert403 = unknown;
 
-export type RemoveCert404 = unknown
+export type RemoveCert404 = unknown;
 
-export type RemoveCertMutationResponse = RemoveCert200
+export type RemoveCertMutationResponse = RemoveCert200;
 
 export type RemoveCertMutation = {
-  Response: RemoveCert200
-  PathParams: RemoveCertPathParams
-  QueryParams: RemoveCertQueryParams
-  Errors: RemoveCert400 | RemoveCert401 | RemoveCert403 | RemoveCert404
-}
+  Response: RemoveCert200;
+  PathParams: RemoveCertPathParams;
+  QueryParams: RemoveCertQueryParams;
+  Errors: RemoveCert400 | RemoveCert401 | RemoveCert403 | RemoveCert404;
+};
 
 export type IssueCertQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type IssueCert200 = unknown
+export type IssueCert200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.
  */
-export type IssueCert400 = unknown
+export type IssueCert400 = unknown;
 
-export type IssueCert401 = unknown
+export type IssueCert401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type IssueCert402 = unknown
+export type IssueCert402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type IssueCert403 = unknown
+export type IssueCert403 = unknown;
 
-export type IssueCert404 = unknown
+export type IssueCert404 = unknown;
 
-export type IssueCert449 = unknown
+export type IssueCert449 = unknown;
 
-export type IssueCert500 = unknown
+export type IssueCert500 = unknown;
 
-export type IssueCertMutationResponse = IssueCert200
+export type IssueCertMutationResponse = IssueCert200;
 
 export type IssueCertMutation = {
-  Response: IssueCert200
-  QueryParams: IssueCertQueryParams
-  Errors: IssueCert400 | IssueCert401 | IssueCert402 | IssueCert403 | IssueCert404 | IssueCert449 | IssueCert500
-}
+  Response: IssueCert200;
+  QueryParams: IssueCertQueryParams;
+  Errors: IssueCert400 | IssueCert401 | IssueCert402 | IssueCert403 | IssueCert404 | IssueCert449 | IssueCert500;
+};
 
 export type UploadCertQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type UploadCert200 = unknown
+export type UploadCert200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.
  */
-export type UploadCert400 = unknown
+export type UploadCert400 = unknown;
 
-export type UploadCert401 = unknown
+export type UploadCert401 = unknown;
 
 /**
  * @description This feature is only available for Enterprise customers.
  */
-export type UploadCert402 = unknown
+export type UploadCert402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type UploadCert403 = unknown
+export type UploadCert403 = unknown;
 
-export type UploadCertMutationResponse = UploadCert200
+export type UploadCertMutationResponse = UploadCert200;
 
 export type UploadCertMutation = {
-  Response: UploadCert200
-  QueryParams: UploadCertQueryParams
-  Errors: UploadCert400 | UploadCert401 | UploadCert402 | UploadCert403
-}
+  Response: UploadCert200;
+  QueryParams: UploadCertQueryParams;
+  Errors: UploadCert400 | UploadCert401 | UploadCert402 | UploadCert403;
+};
 
 export type ListDeploymentFilesPathParams = {
   /**
    * @description The unique deployment identifier
    * @type string
    */
-  id: string
-}
+  id: string;
+};
 
 export type ListDeploymentFilesQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description Retrieved the file tree successfully
  */
-export type ListDeploymentFiles200 = unknown
+export type ListDeploymentFiles200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type ListDeploymentFiles400 = unknown
+export type ListDeploymentFiles400 = unknown;
 
-export type ListDeploymentFiles401 = unknown
+export type ListDeploymentFiles401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type ListDeploymentFiles403 = unknown
+export type ListDeploymentFiles403 = unknown;
 
 /**
  * @description File tree not found\nDeployment not found
  */
-export type ListDeploymentFiles404 = unknown
+export type ListDeploymentFiles404 = unknown;
 
-export type ListDeploymentFilesQueryResponse = ListDeploymentFiles200
+export type ListDeploymentFilesQueryResponse = ListDeploymentFiles200;
 
 export type ListDeploymentFilesQuery = {
-  Response: ListDeploymentFiles200
-  PathParams: ListDeploymentFilesPathParams
-  QueryParams: ListDeploymentFilesQueryParams
-  Errors: ListDeploymentFiles400 | ListDeploymentFiles401 | ListDeploymentFiles403 | ListDeploymentFiles404
-}
+  Response: ListDeploymentFiles200;
+  PathParams: ListDeploymentFilesPathParams;
+  QueryParams: ListDeploymentFilesQueryParams;
+  Errors: ListDeploymentFiles400 | ListDeploymentFiles401 | ListDeploymentFiles403 | ListDeploymentFiles404;
+};
 
 export type GetDeploymentFileContentsPathParams = {
   /**
    * @description The unique deployment identifier
    * @type string
    */
-  id: string
+  id: string;
   /**
    * @description The unique file identifier
    * @type string
    */
-  fileId: string
-}
+  fileId: string;
+};
 
 export type GetDeploymentFileContentsQueryParams = {
   /**
    * @description Path to the file to fetch (only for Git deployments)
    * @type string | undefined
    */
-  path?: string | undefined
+  path?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetDeploymentFileContents400 = unknown
+export type GetDeploymentFileContents400 = unknown;
 
-export type GetDeploymentFileContents401 = unknown
+export type GetDeploymentFileContents401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetDeploymentFileContents403 = unknown
+export type GetDeploymentFileContents403 = unknown;
 
 /**
  * @description File not found\nDeployment not found
  */
-export type GetDeploymentFileContents404 = unknown
+export type GetDeploymentFileContents404 = unknown;
 
 /**
  * @description Invalid API version.
  */
-export type GetDeploymentFileContents410 = unknown
+export type GetDeploymentFileContents410 = unknown;
 
-export type GetDeploymentFileContentsQueryResponse = any
+export type GetDeploymentFileContentsQueryResponse = any;
 
 export type GetDeploymentFileContentsQuery = {
-  Response: any
-  PathParams: GetDeploymentFileContentsPathParams
-  QueryParams: GetDeploymentFileContentsQueryParams
+  Response: any;
+  PathParams: GetDeploymentFileContentsPathParams;
+  QueryParams: GetDeploymentFileContentsQueryParams;
   Errors:
     | GetDeploymentFileContents400
     | GetDeploymentFileContents401
     | GetDeploymentFileContents403
     | GetDeploymentFileContents404
-    | GetDeploymentFileContents410
-}
+    | GetDeploymentFileContents410;
+};
 
 export type GetDeploymentsQueryParams = {
   /**
    * @description Name of the deployment.
    * @type string | undefined
    */
-  app?: string | undefined
+  app?: string | undefined;
   /**
    * @description Gets the deployment created after this Date timestamp. (default: current time)
    * @deprecated
    * @type number | undefined
    */
-  from?: number | undefined
+  from?: number | undefined;
   /**
    * @description Maximum number of deployments to list from a request.
    * @type number | undefined
    */
-  limit?: number | undefined
+  limit?: number | undefined;
   /**
    * @description Filter deployments from the given ID or name.
    * @type string | undefined
    */
-  projectId?: string | undefined
+  projectId?: string | undefined;
   /**
    * @description Filter deployments based on the environment.
    * @type string | undefined
    */
-  target?: string | undefined
+  target?: string | undefined;
   /**
    * @description Gets the deployment created before this Date timestamp. (default: current time)
    * @deprecated
    * @type number | undefined
    */
-  to?: number | undefined
+  to?: number | undefined;
   /**
    * @description Filter out deployments based on users who have created the deployment.
    * @type string | undefined
    */
-  users?: string | undefined
+  users?: string | undefined;
   /**
    * @description Get Deployments created after this JavaScript timestamp.
    * @type number | undefined
    */
-  since?: number | undefined
+  since?: number | undefined;
   /**
    * @description Get Deployments created before this JavaScript timestamp.
    * @type number | undefined
    */
-  until?: number | undefined
+  until?: number | undefined;
   /**
    * @description Filter deployments based on their state (`BUILDING`, `ERROR`, `INITIALIZING`, `QUEUED`, `READY`, `CANCELED`)
    * @type string | undefined
    */
-  state?: string | undefined
+  state?: string | undefined;
   /**
    * @description Filter deployments based on their rollback candidacy
    * @type boolean | undefined
    */
-  rollbackCandidate?: boolean | undefined
+  rollbackCandidate?: boolean | undefined;
   /**
    * @description Filter deployments based on the branch name
    * @type string | undefined
    */
-  branch?: string | undefined
+  branch?: string | undefined;
   /**
    * @description Filter deployments based on the SHA
    * @type string | undefined
    */
-  sha?: string | undefined
+  sha?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type GetDeployments200 = unknown
+export type GetDeployments200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetDeployments400 = unknown
+export type GetDeployments400 = unknown;
 
-export type GetDeployments401 = unknown
+export type GetDeployments401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetDeployments403 = unknown
+export type GetDeployments403 = unknown;
 
-export type GetDeployments404 = unknown
+export type GetDeployments404 = unknown;
 
-export type GetDeployments422 = unknown
+export type GetDeployments422 = unknown;
 
-export type GetDeploymentsQueryResponse = GetDeployments200
+export type GetDeploymentsQueryResponse = GetDeployments200;
 
 export type GetDeploymentsQuery = {
-  Response: GetDeployments200
-  QueryParams: GetDeploymentsQueryParams
-  Errors: GetDeployments400 | GetDeployments401 | GetDeployments403 | GetDeployments404 | GetDeployments422
-}
+  Response: GetDeployments200;
+  QueryParams: GetDeploymentsQueryParams;
+  Errors: GetDeployments400 | GetDeployments401 | GetDeployments403 | GetDeployments404 | GetDeployments422;
+};
 
 export type DeleteDeploymentPathParams = {
   /**
    * @description The ID of the deployment to be deleted
    * @type string
    */
-  id: string
-}
+  id: string;
+};
 
 export type DeleteDeploymentQueryParams = {
   /**
    * @description A Deployment or Alias URL. In case it is passed, the ID will be ignored
    * @type string | undefined
    */
-  url?: string | undefined
+  url?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description The deployment was successfully deleted
  */
-export type DeleteDeployment200 = unknown
+export type DeleteDeployment200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type DeleteDeployment400 = unknown
+export type DeleteDeployment400 = unknown;
 
-export type DeleteDeployment401 = unknown
+export type DeleteDeployment401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type DeleteDeployment403 = unknown
+export type DeleteDeployment403 = unknown;
 
 /**
  * @description The deployment was not found
  */
-export type DeleteDeployment404 = unknown
+export type DeleteDeployment404 = unknown;
 
-export type DeleteDeploymentMutationResponse = DeleteDeployment200
+export type DeleteDeploymentMutationResponse = DeleteDeployment200;
 
 export type DeleteDeploymentMutation = {
-  Response: DeleteDeployment200
-  PathParams: DeleteDeploymentPathParams
-  QueryParams: DeleteDeploymentQueryParams
-  Errors: DeleteDeployment400 | DeleteDeployment401 | DeleteDeployment403 | DeleteDeployment404
-}
+  Response: DeleteDeployment200;
+  PathParams: DeleteDeploymentPathParams;
+  QueryParams: DeleteDeploymentQueryParams;
+  Errors: DeleteDeployment400 | DeleteDeployment401 | DeleteDeployment403 | DeleteDeployment404;
+};
 
 export type GetSecretsQueryParams = {
   /**
@@ -17163,256 +17330,257 @@ export type GetSecretsQueryParams = {
    * @deprecated
    * @type string | undefined
    */
-  id?: string | undefined
+  id?: string | undefined;
   /**
    * @description Filter out secrets that belong to a project.
    * @deprecated
    * @type string | undefined
    */
-  projectId?: string | undefined
+  projectId?: string | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description Successful response retrieving a list of secrets.
  */
-export type GetSecrets200 = unknown
+export type GetSecrets200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetSecrets400 = unknown
+export type GetSecrets400 = unknown;
 
-export type GetSecrets401 = unknown
+export type GetSecrets401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetSecrets403 = unknown
+export type GetSecrets403 = unknown;
 
-export type GetSecrets410 = unknown
+export type GetSecrets410 = unknown;
 
-export type GetSecretsQueryResponse = GetSecrets200
+export type GetSecretsQueryResponse = GetSecrets200;
 
 export type GetSecretsQuery = {
-  Response: GetSecrets200
-  QueryParams: GetSecretsQueryParams
-  Errors: GetSecrets400 | GetSecrets401 | GetSecrets403 | GetSecrets410
-}
+  Response: GetSecrets200;
+  QueryParams: GetSecretsQueryParams;
+  Errors: GetSecrets400 | GetSecrets401 | GetSecrets403 | GetSecrets410;
+};
 
 export type CreateSecretPathParams = {
   /**
    * @type string
    */
-  name: string
-}
+  name: string;
+};
 
 export type CreateSecretQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description Successful response showing the created secret.
  */
-export type CreateSecret200 = unknown
+export type CreateSecret200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.
  */
-export type CreateSecret400 = unknown
+export type CreateSecret400 = unknown;
 
-export type CreateSecret401 = unknown
+export type CreateSecret401 = unknown;
 
 /**
  * @description The account was soft-blocked for an unhandled reason.\nThe account is missing a payment so payment method must be updated
  */
-export type CreateSecret402 = unknown
+export type CreateSecret402 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type CreateSecret403 = unknown
+export type CreateSecret403 = unknown;
 
-export type CreateSecret410 = unknown
+export type CreateSecret410 = unknown;
 
-export type CreateSecretMutationResponse = CreateSecret200
+export type CreateSecretMutationResponse = CreateSecret200;
 
 export type CreateSecretMutation = {
-  Response: CreateSecret200
-  PathParams: CreateSecretPathParams
-  QueryParams: CreateSecretQueryParams
-  Errors: CreateSecret400 | CreateSecret401 | CreateSecret402 | CreateSecret403 | CreateSecret410
-}
+  Response: CreateSecret200;
+  PathParams: CreateSecretPathParams;
+  QueryParams: CreateSecretQueryParams;
+  Errors: CreateSecret400 | CreateSecret401 | CreateSecret402 | CreateSecret403 | CreateSecret410;
+};
 
 export type RenameSecretPathParams = {
   /**
    * @description The name of the secret.
    * @type string
    */
-  name: string
-}
+  name: string;
+};
 
 export type RenameSecretQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type RenameSecret200 = unknown
+export type RenameSecret200 = unknown;
 
 /**
  * @description One of the provided values in the request body is invalid.\nOne of the provided values in the request query is invalid.
  */
-export type RenameSecret400 = unknown
+export type RenameSecret400 = unknown;
 
-export type RenameSecret401 = unknown
+export type RenameSecret401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type RenameSecret403 = unknown
+export type RenameSecret403 = unknown;
 
-export type RenameSecret410 = unknown
+export type RenameSecret410 = unknown;
 
-export type RenameSecretMutationResponse = RenameSecret200
+export type RenameSecretMutationResponse = RenameSecret200;
 
 export type RenameSecretMutation = {
-  Response: RenameSecret200
-  PathParams: RenameSecretPathParams
-  QueryParams: RenameSecretQueryParams
-  Errors: RenameSecret400 | RenameSecret401 | RenameSecret403 | RenameSecret410
-}
+  Response: RenameSecret200;
+  PathParams: RenameSecretPathParams;
+  QueryParams: RenameSecretQueryParams;
+  Errors: RenameSecret400 | RenameSecret401 | RenameSecret403 | RenameSecret410;
+};
 
 export type GetSecretPathParams = {
   /**
    * @description The name or the unique identifier to which the secret belongs to.
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export const getSecretQueryParamsDecryptEnum = {
   true: 'true',
-  false: 'false',
-} as const
+  false: 'false'
+} as const;
 
-export type GetSecretQueryParamsDecryptEnum = (typeof getSecretQueryParamsDecryptEnum)[keyof typeof getSecretQueryParamsDecryptEnum]
+export type GetSecretQueryParamsDecryptEnum =
+  (typeof getSecretQueryParamsDecryptEnum)[keyof typeof getSecretQueryParamsDecryptEnum];
 
 export type GetSecretQueryParams = {
   /**
    * @description Whether to try to decrypt the value of the secret. Only works if `decryptable` has been set to `true` when the secret was created.
    * @type string | undefined
    */
-  decrypt?: GetSecretQueryParamsDecryptEnum | undefined
+  decrypt?: GetSecretQueryParamsDecryptEnum | undefined;
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
 /**
  * @description Successful response retrieving a secret.
  */
-export type GetSecret200 = unknown
+export type GetSecret200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type GetSecret400 = unknown
+export type GetSecret400 = unknown;
 
-export type GetSecret401 = unknown
+export type GetSecret401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type GetSecret403 = unknown
+export type GetSecret403 = unknown;
 
-export type GetSecret404 = unknown
+export type GetSecret404 = unknown;
 
-export type GetSecret410 = unknown
+export type GetSecret410 = unknown;
 
-export type GetSecretQueryResponse = GetSecret200
+export type GetSecretQueryResponse = GetSecret200;
 
 export type GetSecretQuery = {
-  Response: GetSecret200
-  PathParams: GetSecretPathParams
-  QueryParams: GetSecretQueryParams
-  Errors: GetSecret400 | GetSecret401 | GetSecret403 | GetSecret404 | GetSecret410
-}
+  Response: GetSecret200;
+  PathParams: GetSecretPathParams;
+  QueryParams: GetSecretQueryParams;
+  Errors: GetSecret400 | GetSecret401 | GetSecret403 | GetSecret404 | GetSecret410;
+};
 
 export type DeleteSecretPathParams = {
   /**
    * @description The name or the unique identifier to which the secret belongs to.
    * @type string
    */
-  idOrName: string
-}
+  idOrName: string;
+};
 
 export type DeleteSecretQueryParams = {
   /**
    * @description The Team identifier to perform the request on behalf of.
    * @type string | undefined
    */
-  teamId?: string | undefined
+  teamId?: string | undefined;
   /**
    * @description The Team slug to perform the request on behalf of.
    * @type string | undefined
    */
-  slug?: string | undefined
-}
+  slug?: string | undefined;
+};
 
-export type DeleteSecret200 = unknown
+export type DeleteSecret200 = unknown;
 
 /**
  * @description One of the provided values in the request query is invalid.
  */
-export type DeleteSecret400 = unknown
+export type DeleteSecret400 = unknown;
 
-export type DeleteSecret401 = unknown
+export type DeleteSecret401 = unknown;
 
 /**
  * @description You do not have permission to access this resource.
  */
-export type DeleteSecret403 = unknown
+export type DeleteSecret403 = unknown;
 
-export type DeleteSecret410 = unknown
+export type DeleteSecret410 = unknown;
 
-export type DeleteSecretMutationResponse = DeleteSecret200
+export type DeleteSecretMutationResponse = DeleteSecret200;
 
 export type DeleteSecretMutation = {
-  Response: DeleteSecret200
-  PathParams: DeleteSecretPathParams
-  QueryParams: DeleteSecretQueryParams
-  Errors: DeleteSecret400 | DeleteSecret401 | DeleteSecret403 | DeleteSecret410
-}
+  Response: DeleteSecret200;
+  PathParams: DeleteSecretPathParams;
+  QueryParams: DeleteSecretQueryParams;
+  Errors: DeleteSecret400 | DeleteSecret401 | DeleteSecret403 | DeleteSecret410;
+};

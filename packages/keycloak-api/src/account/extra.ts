@@ -1,23 +1,23 @@
 import {
+  buildLinkingUri,
+  createConsent,
+  deleteConsent,
+  deleteCredential,
+  deleteCurrentSession,
+  deleteLinkedProvider,
+  deleteSession,
   getAccount,
-  updateAccount,
   getApplications,
   getConsent,
-  createConsent,
-  updateConsent,
-  deleteConsent,
   getCredentials,
-  deleteCredential,
-  updateCredentialLabel,
-  getSessions,
-  deleteCurrentSession,
   getDevices,
-  deleteSession,
-  getLinkedAccounts,
-  buildLinkingUri,
-  deleteLinkedProvider,
   getGroups,
-  getOrganizations
+  getLinkedAccounts,
+  getOrganizations,
+  getSessions,
+  updateAccount,
+  updateConsent,
+  updateCredentialLabel
 } from './components';
 
 export const operationsByPath = {

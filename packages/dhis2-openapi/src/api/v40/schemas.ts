@@ -5,7 +5,7 @@
  */
 export type Access = {
   data?: AccessData;
-  ['delete']?: boolean;
+  delete?: boolean;
   externalize?: boolean;
   manage?: boolean;
   read?: boolean;
@@ -456,9 +456,9 @@ export type AppDhis = {
 };
 
 export type AppIcons = {
-  ['16']?: string;
-  ['48']?: string;
-  ['128']?: string;
+  '16'?: string;
+  '48'?: string;
+  '128'?: string;
 };
 
 export type AppSettings = {
@@ -752,7 +752,7 @@ export type AttributeValueFilter = {
   ew?: string;
   ge?: string;
   gt?: string;
-  ['in']?: string[];
+  in?: string[];
   le?: string;
   like?: string;
   lt?: string;
@@ -5724,7 +5724,7 @@ export type ErrorReport = {
    * @format class
    */
   errorKlass?: string;
-  errorProperties?: void[];
+  errorProperties?: undefined[];
   errorProperty?: string;
   mainId?: string;
   /**
@@ -5930,7 +5930,7 @@ export type EventDataFilter = {
   eq?: string;
   ge?: string;
   gt?: string;
-  ['in']?: string[];
+  in?: string[];
   le?: string;
   like?: string;
   lt?: string;
@@ -8550,7 +8550,7 @@ export type JsonObject = {
   boolean?: boolean;
   empty?: boolean;
   integer?: boolean;
-  ['null']?: boolean;
+  null?: boolean;
   number?: boolean;
   object?: boolean;
   string?: boolean;
@@ -13534,7 +13534,7 @@ export type ProgramSection = {
    * The exact type is unknown.
    * (Java type was: `org.hisp.dhis.render.DeviceRenderTypeMap<org.hisp.dhis.render.type.SectionRenderingObject>`)
    */
-  renderType?: void;
+  renderType?: undefined;
   sharing?: Sharing;
   shortName?: string;
   /**
@@ -13843,7 +13843,7 @@ export type ProgramStageDataElement = {
    * The exact type is unknown.
    * (Java type was: `org.hisp.dhis.render.DeviceRenderTypeMap<org.hisp.dhis.render.type.ValueTypeRenderingObject>`)
    */
-  renderType?: void;
+  renderType?: undefined;
   sharing?: Sharing;
   skipAnalytics?: boolean;
   skipSynchronization?: boolean;
@@ -13976,7 +13976,7 @@ export type ProgramStageSection = {
    * The exact type is unknown.
    * (Java type was: `org.hisp.dhis.render.DeviceRenderTypeMap<org.hisp.dhis.render.type.SectionRenderingObject>`)
    */
-  renderType?: void;
+  renderType?: undefined;
   sharing?: Sharing;
   shortName?: string;
   /**
@@ -14164,7 +14164,7 @@ export type ProgramTrackedEntityAttribute = {
    * The exact type is unknown.
    * (Java type was: `org.hisp.dhis.render.DeviceRenderTypeMap<org.hisp.dhis.render.type.ValueTypeRenderingObject>`)
    */
-  renderType?: void;
+  renderType?: undefined;
   searchable?: boolean;
   sharing?: Sharing;
   /**
@@ -16956,12 +16956,12 @@ export type TrackerDataView = {
    * The exact type is unknown.
    * (Java type was: `java.util.LinkedHashSet<java.lang.String>`)
    */
-  attributes?: void;
+  attributes?: undefined;
   /**
    * The exact type is unknown.
    * (Java type was: `java.util.LinkedHashSet<java.lang.String>`)
    */
-  dataElements?: void;
+  dataElements?: undefined;
 };
 
 export type TrackerEnrollment = {
@@ -17812,7 +17812,7 @@ export type UserDetails = {
    */
   id?: number;
   password?: string;
-  ['super']?: boolean;
+  super?: boolean;
   surname?: string;
   twoFactorEnabled?: boolean;
   uid?: string;
@@ -17937,7 +17937,7 @@ export type UserInfoSnapshot = {
 export type UserInviteParams = {
   email?: string;
   firstName?: string;
-  ['g-recaptcha-response']?: string;
+  'g-recaptcha-response'?: string;
   password?: string;
   surname?: string;
   token?: string;
@@ -17981,7 +17981,7 @@ export type UserMessage = {
 export type UserRegistrationParams = {
   email?: string;
   firstName?: string;
-  ['g-recaptcha-response']?: string;
+  'g-recaptcha-response'?: string;
   password?: string;
   surname?: string;
   username?: string;

@@ -1,4 +1,4 @@
-import { PluginClient } from '@kubb/plugin-client';
+import type { PluginClient } from '@kubb/plugin-client';
 import { createReactGenerator } from '@kubb/plugin-oas';
 import { useOas, useOperationManager } from '@kubb/plugin-oas/hooks';
 import { getBanner, getFooter } from '@kubb/plugin-oas/utils';

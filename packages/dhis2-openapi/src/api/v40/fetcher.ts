@@ -1,5 +1,5 @@
-import { Credentials } from '../../client';
-import { FetchImpl } from '../../utils/fetch';
+import type { Credentials } from '../../client';
+import type { FetchImpl } from '../../utils/fetch';
 
 export type FetcherExtraProps = {
   fetchImpl: FetchImpl;

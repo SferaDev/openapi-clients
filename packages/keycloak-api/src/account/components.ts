@@ -4,7 +4,7 @@
  * @version 1.0.0
  */
 import type * as Fetcher from './fetcher';
-import { fetch, FetcherExtraProps } from './fetcher';
+import { type FetcherExtraProps, fetch } from './fetcher';
 import type * as Schemas from './schemas';
 
 export type GetAccountQueryParams = {
@@ -148,7 +148,7 @@ export const deleteConsent = (variables: DeleteConsentVariables, signal?: AbortS
 
 export type GetCredentialsQueryParams = {
   type?: string;
-  ['user-credentials']?: boolean;
+  'user-credentials'?: boolean;
 };
 
 export type GetCredentialsError = Fetcher.ErrorWrapper<undefined>;
@@ -329,7 +329,12 @@ export const buildLinkingUri = (variables: BuildLinkingUriVariables, signal?: Ab
     {},
     BuildLinkingUriQueryParams,
     BuildLinkingUriPathParams
-  >({ url: '/account/linked-accounts/{providerId}', method: 'get', ...variables, signal });
+  >({
+    url: '/account/linked-accounts/{providerId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type DeleteLinkedProviderPathParams = {
   /**

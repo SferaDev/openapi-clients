@@ -1,8 +1,8 @@
 import { defineConfig } from '@openapi-codegen/cli';
+import type { Context } from '@openapi-codegen/cli/lib/types';
 import { generateFetchers, generateSchemaTypes } from '@openapi-codegen/typescript';
-import { Context } from '@openapi-codegen/cli/lib/types';
-import { ModuleKind, Project, ts, VariableDeclarationKind } from 'ts-morph';
 import Case from 'case';
+import { type ModuleKind, Project, ts, VariableDeclarationKind } from 'ts-morph';
 
 export default defineConfig({
   api: {
@@ -37,7 +37,6 @@ export default defineConfig({
 
 // Remove duplicated tags in path components
 function removeDuplicatedTags(openAPIObject: Context['openAPIDocument']) {
-
   return {
     ...openAPIObject,
     paths: Object.fromEntries(
@@ -51,7 +50,7 @@ function removeDuplicatedTags(openAPIObject: Context['openAPIDocument']) {
         return [path, pathItem];
       })
     )
-  }
+  };
 }
 
 // Remove all pass-through paths. We don't need them in the client and they are causing problems with the codegen
@@ -62,7 +61,7 @@ function ignorePassThroughPaths(openAPIObject: Context['openAPIDocument']) {
   const filteredPaths = Object.keys(paths).filter((path) => !path.endsWith('{endpoint}'));
   return {
     ...openAPIObject,
-    paths: Object.fromEntries(filteredPaths.map((path) => [path, paths[path]!]))
+    paths: Object.fromEntries(filteredPaths.map((path) => [path, paths[path]]))
   };
 }
 
@@ -125,7 +124,7 @@ function fixAPIReturns(openAPIObject: Context['openAPIDocument'], apiUpdates: Re
 function buildExtraFile(context: Context) {
   const project = new Project({
     useInMemoryFileSystem: true,
-    compilerOptions: { module: ts.ModuleKind.ESNext as ModuleKind, target: ts.ScriptTarget['ES2020'] }
+    compilerOptions: { module: ts.ModuleKind.ESNext as ModuleKind, target: ts.ScriptTarget.ES2020 }
   });
 
   const sourceFile = project.createSourceFile('extra.ts');
@@ -138,7 +137,10 @@ function buildExtraFile(context: Context) {
             ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'].includes(method.toUpperCase()) &&
             operation?.operationId !== undefined
         )
-        .map(([method, operation]: [string, any]) => [`${method.toUpperCase()} ${path}`, Case.camel(operation.operationId)]);
+        .map(([method, operation]: [string, any]) => [
+          `${method.toUpperCase()} ${path}`,
+          Case.camel(operation.operationId)
+        ]);
     })
   );
 
@@ -155,8 +157,8 @@ function buildExtraFile(context: Context) {
         name: 'operationsByPath',
         initializer: `{
             ${Object.entries(operationsByPath)
-            .map(([path, operation]) => `"${path}": ${operation}`)
-            .join(',\n')}
+              .map(([path, operation]) => `"${path}": ${operation}`)
+              .join(',\n')}
         }`
       }
     ]

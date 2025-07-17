@@ -1,6 +1,6 @@
-import { operationsByPath as meetingOperationsByPath } from './meeting/extra';
-import { FetcherExtraProps, fetch as zoomFetch } from './meeting/fetcher';
-import { FetchImpl } from './utils/fetch';
+import type { operationsByPath as meetingOperationsByPath } from './meeting/extra';
+import { type FetcherExtraProps, fetch as zoomFetch } from './meeting/fetcher';
+import type { FetchImpl } from './utils/fetch';
 
 export interface ZoomApiOptions {
   token: string | null;
@@ -12,7 +12,9 @@ type MeetingRequestEndpointParams<T extends keyof typeof meetingOperationsByPath
   keyof FetcherExtraProps
 >;
 
-type MeetingRequestEndpointResult<T extends keyof typeof meetingOperationsByPath> = ReturnType<(typeof meetingOperationsByPath)[T]>;
+type MeetingRequestEndpointResult<T extends keyof typeof meetingOperationsByPath> = ReturnType<
+  (typeof meetingOperationsByPath)[T]
+>;
 
 export class ZoomApi {
   #token: string | null;
@@ -32,10 +34,10 @@ export class ZoomApi {
         clientId,
         clientSecret
       }: RefreshTokenOptions): Promise<RefreshTokenResult> => {
-        const response = await this.#fetch("https://zoom.us/oauth/token", {
-          method: "POST",
+        const response = await this.#fetch('https://zoom.us/oauth/token', {
+          method: 'POST',
           body: new URLSearchParams({
-            grant_type: "refresh_token",
+            grant_type: 'refresh_token',
             refresh_token: refreshToken,
             client_id: clientId,
             client_secret: clientSecret
@@ -43,7 +45,7 @@ export class ZoomApi {
         });
 
         if (!response.ok) {
-          throw new Error("Failed to refresh Zoom token");
+          throw new Error('Failed to refresh Zoom token');
         }
 
         const result = await response.json();
@@ -52,7 +54,7 @@ export class ZoomApi {
           access_token: result.access_token,
           expires_in: result.expires_in,
           refresh_token: result.refresh_token
-        }
+        };
       }
     };
   }
@@ -79,4 +81,4 @@ type RefreshTokenResult = {
   access_token: string;
   expires_in: number;
   refresh_token: string;
-}
+};

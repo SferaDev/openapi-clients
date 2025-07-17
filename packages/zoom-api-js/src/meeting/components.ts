@@ -4,7 +4,7 @@
  * @version 2
  */
 import type * as Fetcher from './fetcher';
-import { fetch, FetcherExtraProps } from './fetcher';
+import { type FetcherExtraProps, fetch } from './fetcher';
 
 export type ListArchivedFilesQueryParams = {
   /**
@@ -1583,7 +1583,12 @@ export const analyticsDetails = (variables: AnalyticsDetailsVariables, signal?: 
     {},
     AnalyticsDetailsQueryParams,
     AnalyticsDetailsPathParams
-  >({ url: '/meetings/{meetingId}/recordings/analytics_details', method: 'get', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/recordings/analytics_details',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type AnalyticsSummaryPathParams = {
   /**
@@ -1675,7 +1680,12 @@ export const analyticsSummary = (variables: AnalyticsSummaryVariables, signal?: 
     {},
     AnalyticsSummaryQueryParams,
     AnalyticsSummaryPathParams
-  >({ url: '/meetings/{meetingId}/recordings/analytics_summary', method: 'get', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/recordings/analytics_summary',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type MeetingRecordingRegistrantsPathParams = {
   /**
@@ -1952,7 +1962,12 @@ export const meetingRecordingRegistrants = (variables: MeetingRecordingRegistran
     {},
     MeetingRecordingRegistrantsQueryParams,
     MeetingRecordingRegistrantsPathParams
-  >({ url: '/meetings/{meetingId}/recordings/registrants', method: 'get', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/recordings/registrants',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type MeetingRecordingRegistrantCreatePathParams = {
   /**
@@ -2183,7 +2198,12 @@ export const meetingRecordingRegistrantCreate = (
     {},
     {},
     MeetingRecordingRegistrantCreatePathParams
-  >({ url: '/meetings/{meetingId}/recordings/registrants', method: 'post', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/recordings/registrants',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type RecordingRegistrantsQuestionsGetPathParams = {
   /**
@@ -2289,7 +2309,12 @@ export const recordingRegistrantsQuestionsGet = (
     {},
     {},
     RecordingRegistrantsQuestionsGetPathParams
-  >({ url: '/meetings/{meetingId}/recordings/registrants/questions', method: 'get', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/recordings/registrants/questions',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type RecordingRegistrantQuestionUpdatePathParams = {
   /**
@@ -2396,7 +2421,12 @@ export const recordingRegistrantQuestionUpdate = (
     {},
     {},
     RecordingRegistrantQuestionUpdatePathParams
-  >({ url: '/meetings/{meetingId}/recordings/registrants/questions', method: 'patch', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/recordings/registrants/questions',
+    method: 'patch',
+    ...variables,
+    signal
+  });
 
 export type MeetingRecordingRegistrantStatusPathParams = {
   /**
@@ -2458,7 +2488,12 @@ export const meetingRecordingRegistrantStatus = (
     {},
     {},
     MeetingRecordingRegistrantStatusPathParams
-  >({ url: '/meetings/{meetingId}/recordings/registrants/status', method: 'put', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/recordings/registrants/status',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type RecordingSettingUpdatePathParams = {
   /**
@@ -2602,7 +2637,12 @@ export const recordingSettingUpdate = (variables: RecordingSettingUpdateVariable
     {},
     {},
     RecordingSettingUpdatePathParams
-  >({ url: '/meetings/{meetingId}/recordings/settings', method: 'get', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/recordings/settings',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type RecordingSettingsUpdatePathParams = {
   /**
@@ -2734,7 +2774,12 @@ export const recordingSettingsUpdate = (variables: RecordingSettingsUpdateVariab
     {},
     {},
     RecordingSettingsUpdatePathParams
-  >({ url: '/meetings/{meetingId}/recordings/settings', method: 'patch', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/recordings/settings',
+    method: 'patch',
+    ...variables,
+    signal
+  });
 
 export type RecordingDeleteOnePathParams = {
   /**
@@ -2787,7 +2832,12 @@ export type RecordingDeleteOneVariables = {
  */
 export const recordingDeleteOne = (variables: RecordingDeleteOneVariables, signal?: AbortSignal) =>
   fetch<undefined, RecordingDeleteOneError, undefined, {}, RecordingDeleteOneQueryParams, RecordingDeleteOnePathParams>(
-    { url: '/meetings/{meetingId}/recordings/{recordingId}', method: 'delete', ...variables, signal }
+    {
+      url: '/meetings/{meetingId}/recordings/{recordingId}',
+      method: 'delete',
+      ...variables,
+      signal
+    }
   );
 
 export type RecordingStatusUpdateOnePathParams = {
@@ -2844,7 +2894,12 @@ export const recordingStatusUpdateOne = (variables: RecordingStatusUpdateOneVari
     {},
     {},
     RecordingStatusUpdateOnePathParams
-  >({ url: '/meetings/{meetingId}/recordings/{recordingId}/status', method: 'put', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/recordings/{recordingId}/status',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type RecordingStatusUpdatePathParams = {
   /**
@@ -2894,7 +2949,12 @@ export const recordingStatusUpdate = (variables: RecordingStatusUpdateVariables,
     {},
     {},
     RecordingStatusUpdatePathParams
-  >({ url: '/meetings/{meetingUUID}/recordings/status', method: 'put', ...variables, signal });
+  >({
+    url: '/meetings/{meetingUUID}/recordings/status',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type RecordingsListPathParams = {
   /**
@@ -3995,7 +4055,12 @@ export const deleteZpaDeviceByVendorAndMacAddress = (
     {},
     {},
     DeleteZpaDeviceByVendorAndMacAddressPathParams
-  >({ url: '/devices/zpa/vendors/{vendor}/mac_addresses/{macAddress}', method: 'delete', ...variables, signal });
+  >({
+    url: '/devices/zpa/vendors/{vendor}/mac_addresses/{macAddress}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetZpaVersioninfoPathParams = {
   /**
@@ -4419,7 +4484,12 @@ export const changeDeviceAssociation = (variables: ChangeDeviceAssociationVariab
     {},
     {},
     ChangeDeviceAssociationPathParams
-  >({ url: '/devices/{deviceId}/assignment', method: 'patch', ...variables, signal });
+  >({
+    url: '/devices/{deviceId}/assignment',
+    method: 'patch',
+    ...variables,
+    signal
+  });
 
 export type DeviceListQueryParams = {
   /**
@@ -4806,7 +4876,12 @@ export const deleteMeetingChatMessageById = (variables: DeleteMeetingChatMessage
     {},
     DeleteMeetingChatMessageByIdQueryParams,
     DeleteMeetingChatMessageByIdPathParams
-  >({ url: '/live_meetings/{meetingId}/chat/messages/{messageId}', method: 'delete', ...variables, signal });
+  >({
+    url: '/live_meetings/{meetingId}/chat/messages/{messageId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type UpdateMeetingChatMessageByIdPathParams = {
   /**
@@ -4859,7 +4934,12 @@ export const updateMeetingChatMessageById = (variables: UpdateMeetingChatMessage
     {},
     {},
     UpdateMeetingChatMessageByIdPathParams
-  >({ url: '/live_meetings/{meetingId}/chat/messages/{messageId}', method: 'patch', ...variables, signal });
+  >({
+    url: '/live_meetings/{meetingId}/chat/messages/{messageId}',
+    method: 'patch',
+    ...variables,
+    signal
+  });
 
 export type InMeetingControlPathParams = {
   /**
@@ -5146,7 +5226,12 @@ export const meetingRTMSStatusUpdate = (variables: MeetingRTMSStatusUpdateVariab
     {},
     {},
     MeetingRTMSStatusUpdatePathParams
-  >({ url: '/live_meetings/{meetingId}/rtms_app/status', method: 'patch', ...variables, signal });
+  >({
+    url: '/live_meetings/{meetingId}/rtms_app/status',
+    method: 'patch',
+    ...variables,
+    signal
+  });
 
 export type ListmeetingsummariesQueryParams = {
   /**
@@ -7891,7 +7976,12 @@ export const createBatchPolls = (variables: CreateBatchPollsVariables, signal?: 
     {},
     {},
     CreateBatchPollsPathParams
-  >({ url: '/meetings/{meetingId}/batch_polls', method: 'post', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/batch_polls',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type AddBatchRegistrantsPathParams = {
   /**
@@ -8003,7 +8093,12 @@ export const addBatchRegistrants = (variables: AddBatchRegistrantsVariables, sig
     {},
     {},
     AddBatchRegistrantsPathParams
-  >({ url: '/meetings/{meetingId}/batch_registrants', method: 'post', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/batch_registrants',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type MeetingInvitationPathParams = {
   /**
@@ -8188,7 +8283,12 @@ export const meetingInviteLinksCreate = (variables: MeetingInviteLinksCreateVari
     {},
     {},
     MeetingInviteLinksCreatePathParams
-  >({ url: '/meetings/{meetingId}/invite_links', method: 'post', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/invite_links',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type MeetingLiveStreamingJoinTokenPathParams = {
   /**
@@ -8248,7 +8348,12 @@ export const meetingLiveStreamingJoinToken = (
     {},
     {},
     MeetingLiveStreamingJoinTokenPathParams
-  >({ url: '/meetings/{meetingId}/jointoken/live_streaming', method: 'get', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/jointoken/live_streaming',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type MeetingLocalArchivingArchiveTokenPathParams = {
   /**
@@ -8308,7 +8413,12 @@ export const meetingLocalArchivingArchiveToken = (
     {},
     {},
     MeetingLocalArchivingArchiveTokenPathParams
-  >({ url: '/meetings/{meetingId}/jointoken/local_archiving', method: 'get', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/jointoken/local_archiving',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type MeetingLocalRecordingJoinTokenPathParams = {
   /**
@@ -8377,7 +8487,12 @@ export const meetingLocalRecordingJoinToken = (
     {},
     MeetingLocalRecordingJoinTokenQueryParams,
     MeetingLocalRecordingJoinTokenPathParams
-  >({ url: '/meetings/{meetingId}/jointoken/local_recording', method: 'get', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/jointoken/local_recording',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetMeetingLiveStreamDetailsPathParams = {
   /**
@@ -8448,7 +8563,12 @@ export const getMeetingLiveStreamDetails = (variables: GetMeetingLiveStreamDetai
     {},
     {},
     GetMeetingLiveStreamDetailsPathParams
-  >({ url: '/meetings/{meetingId}/livestream', method: 'get', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/livestream',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type MeetingLiveStreamUpdatePathParams = {
   /**
@@ -8520,7 +8640,12 @@ export const meetingLiveStreamUpdate = (variables: MeetingLiveStreamUpdateVariab
     {},
     {},
     MeetingLiveStreamUpdatePathParams
-  >({ url: '/meetings/{meetingId}/livestream', method: 'patch', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/livestream',
+    method: 'patch',
+    ...variables,
+    signal
+  });
 
 export type MeetingLiveStreamStatusUpdatePathParams = {
   /**
@@ -8615,7 +8740,12 @@ export const meetingLiveStreamStatusUpdate = (
     {},
     {},
     MeetingLiveStreamStatusUpdatePathParams
-  >({ url: '/meetings/{meetingId}/livestream/status', method: 'patch', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/livestream/status',
+    method: 'patch',
+    ...variables,
+    signal
+  });
 
 export type GetameetingsummaryPathParams = {
   /**
@@ -9707,7 +9837,12 @@ export const meetingPollCreate = (variables: MeetingPollCreateVariables, signal?
     {},
     {},
     MeetingPollCreatePathParams
-  >({ url: '/meetings/{meetingId}/polls', method: 'post', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/polls',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type MeetingPollGetPathParams = {
   /**
@@ -10539,7 +10674,12 @@ export const meetingRegistrants = (variables: MeetingRegistrantsVariables, signa
     {},
     MeetingRegistrantsQueryParams,
     MeetingRegistrantsPathParams
-  >({ url: '/meetings/{meetingId}/registrants', method: 'get', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/registrants',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type MeetingRegistrantCreatePathParams = {
   /**
@@ -10854,7 +10994,12 @@ export const meetingRegistrantCreate = (variables: MeetingRegistrantCreateVariab
     {},
     MeetingRegistrantCreateQueryParams,
     MeetingRegistrantCreatePathParams
-  >({ url: '/meetings/{meetingId}/registrants', method: 'post', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/registrants',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type MeetingRegistrantsQuestionsGetPathParams = {
   /**
@@ -10959,7 +11104,12 @@ export const meetingRegistrantsQuestionsGet = (
     {},
     {},
     MeetingRegistrantsQuestionsGetPathParams
-  >({ url: '/meetings/{meetingId}/registrants/questions', method: 'get', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/registrants/questions',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type MeetingRegistrantQuestionUpdatePathParams = {
   /**
@@ -11065,7 +11215,12 @@ export const meetingRegistrantQuestionUpdate = (
     {},
     {},
     MeetingRegistrantQuestionUpdatePathParams
-  >({ url: '/meetings/{meetingId}/registrants/questions', method: 'patch', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/registrants/questions',
+    method: 'patch',
+    ...variables,
+    signal
+  });
 
 export type MeetingRegistrantStatusPathParams = {
   /**
@@ -11144,7 +11299,12 @@ export const meetingRegistrantStatus = (variables: MeetingRegistrantStatusVariab
     {},
     MeetingRegistrantStatusQueryParams,
     MeetingRegistrantStatusPathParams
-  >({ url: '/meetings/{meetingId}/registrants/status', method: 'put', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/registrants/status',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type MeetingRegistrantGetPathParams = {
   /**
@@ -11428,7 +11588,12 @@ export const meetingregistrantdelete = (variables: MeetingregistrantdeleteVariab
     {},
     MeetingregistrantdeleteQueryParams,
     MeetingregistrantdeletePathParams
-  >({ url: '/meetings/{meetingId}/registrants/{registrantId}', method: 'delete', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/registrants/{registrantId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetSipDialingWithPasscodePathParams = {
   /**
@@ -11506,7 +11671,12 @@ export const getSipDialingWithPasscode = (variables: GetSipDialingWithPasscodeVa
     {},
     {},
     GetSipDialingWithPasscodePathParams
-  >({ url: '/meetings/{meetingId}/sip_dialing', method: 'post', ...variables, signal });
+  >({
+    url: '/meetings/{meetingId}/sip_dialing',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type MeetingStatusPathParams = {
   /**
@@ -12501,7 +12671,12 @@ export const pastMeetingParticipants = (variables: PastMeetingParticipantsVariab
     {},
     PastMeetingParticipantsQueryParams,
     PastMeetingParticipantsPathParams
-  >({ url: '/past_meetings/{meetingId}/participants', method: 'get', ...variables, signal });
+  >({
+    url: '/past_meetings/{meetingId}/participants',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type ListPastMeetingPollsPathParams = {
   /**
@@ -12846,7 +13021,12 @@ export const meetingTemplateCreate = (variables: MeetingTemplateCreateVariables,
     {},
     {},
     MeetingTemplateCreatePathParams
-  >({ url: '/users/{userId}/meeting_templates', method: 'post', ...variables, signal });
+  >({
+    url: '/users/{userId}/meeting_templates',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type MeetingsPathParams = {
   /**
@@ -16703,7 +16883,12 @@ export const reportMeetingParticipants = (variables: ReportMeetingParticipantsVa
     {},
     ReportMeetingParticipantsQueryParams,
     ReportMeetingParticipantsPathParams
-  >({ url: '/report/meetings/{meetingId}/participants', method: 'get', ...variables, signal });
+  >({
+    url: '/report/meetings/{meetingId}/participants',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type ReportMeetingPollsPathParams = {
   /**
@@ -18236,7 +18421,12 @@ export const reportMeetings = (variables: ReportMeetingsVariables, signal?: Abor
     {},
     ReportMeetingsQueryParams,
     ReportMeetingsPathParams
-  >({ url: '/report/users/{userId}/meetings', method: 'get', ...variables, signal });
+  >({
+    url: '/report/users/{userId}/meetings',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type ReportWebinarDetailsPathParams = {
   /**
@@ -18581,7 +18771,12 @@ export const reportWebinarParticipants = (variables: ReportWebinarParticipantsVa
     {},
     ReportWebinarParticipantsQueryParams,
     ReportWebinarParticipantsPathParams
-  >({ url: '/report/webinars/{webinarId}/participants', method: 'get', ...variables, signal });
+  >({
+    url: '/report/webinars/{webinarId}/participants',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type ReportWebinarPollsPathParams = {
   /**
@@ -20439,7 +20634,12 @@ export type TspVariables = FetcherExtraProps;
  * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
  */
 export const tsp = (variables: TspVariables, signal?: AbortSignal) =>
-  fetch<TspResponse, TspError, undefined, {}, {}, {}>({ url: '/tsp', method: 'get', ...variables, signal });
+  fetch<TspResponse, TspError, undefined, {}, {}, {}>({
+    url: '/tsp',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type TspUpdateError = Fetcher.ErrorWrapper<undefined>;
 
@@ -21453,7 +21653,12 @@ export const deleteWebinarChatMessageById = (variables: DeleteWebinarChatMessage
     {},
     DeleteWebinarChatMessageByIdQueryParams,
     DeleteWebinarChatMessageByIdPathParams
-  >({ url: '/live_webinars/{webinarId}/chat/messages/{messageId}', method: 'delete', ...variables, signal });
+  >({
+    url: '/live_webinars/{webinarId}/chat/messages/{messageId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type WebinarAbsenteesPathParams = {
   /**
@@ -21733,7 +21938,12 @@ export const webinarAbsentees = (variables: WebinarAbsenteesVariables, signal?: 
     {},
     WebinarAbsenteesQueryParams,
     WebinarAbsenteesPathParams
-  >({ url: '/past_webinars/{webinarId}/absentees', method: 'get', ...variables, signal });
+  >({
+    url: '/past_webinars/{webinarId}/absentees',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PastWebinarsPathParams = {
   /**
@@ -21957,7 +22167,12 @@ export const listWebinarParticipants = (variables: ListWebinarParticipantsVariab
     {},
     ListWebinarParticipantsQueryParams,
     ListWebinarParticipantsPathParams
-  >({ url: '/past_webinars/{webinarId}/participants', method: 'get', ...variables, signal });
+  >({
+    url: '/past_webinars/{webinarId}/participants',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type ListPastWebinarPollResultsPathParams = {
   /**
@@ -22063,7 +22278,12 @@ export const listPastWebinarPollResults = (variables: ListPastWebinarPollResults
     {},
     {},
     ListPastWebinarPollResultsPathParams
-  >({ url: '/past_webinars/{webinarId}/polls', method: 'get', ...variables, signal });
+  >({
+    url: '/past_webinars/{webinarId}/polls',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type ListPastWebinarQAPathParams = {
   /**
@@ -22300,7 +22520,12 @@ export const webinarTemplateCreate = (variables: WebinarTemplateCreateVariables,
     {},
     {},
     WebinarTemplateCreatePathParams
-  >({ url: '/users/{userId}/webinar_templates', method: 'post', ...variables, signal });
+  >({
+    url: '/users/{userId}/webinar_templates',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type WebinarsPathParams = {
   /**
@@ -25781,7 +26006,12 @@ export const addBatchWebinarRegistrants = (variables: AddBatchWebinarRegistrants
     {},
     {},
     AddBatchWebinarRegistrantsPathParams
-  >({ url: '/webinars/{webinarId}/batch_registrants', method: 'post', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/batch_registrants',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetWebinarBrandingPathParams = {
   /**
@@ -26014,7 +26244,12 @@ export const createWebinarBrandingNameTag = (variables: CreateWebinarBrandingNam
     {},
     {},
     CreateWebinarBrandingNameTagPathParams
-  >({ url: '/webinars/{webinarId}/branding/name_tags', method: 'post', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/branding/name_tags',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteWebinarBrandingNameTagPathParams = {
   /**
@@ -26062,7 +26297,12 @@ export const deleteWebinarBrandingNameTag = (variables: DeleteWebinarBrandingNam
     {},
     DeleteWebinarBrandingNameTagQueryParams,
     DeleteWebinarBrandingNameTagPathParams
-  >({ url: '/webinars/{webinarId}/branding/name_tags', method: 'delete', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/branding/name_tags',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type UpdateWebinarBrandingNameTagPathParams = {
   /**
@@ -26151,7 +26391,12 @@ export const updateWebinarBrandingNameTag = (variables: UpdateWebinarBrandingNam
     {},
     {},
     UpdateWebinarBrandingNameTagPathParams
-  >({ url: '/webinars/{webinarId}/branding/name_tags/{nameTagId}', method: 'patch', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/branding/name_tags/{nameTagId}',
+    method: 'patch',
+    ...variables,
+    signal
+  });
 
 export type UploadWebinarBrandingVBPathParams = {
   /**
@@ -26213,7 +26458,7 @@ export type UploadWebinarBrandingVBRequestBody = {
    * @example true
    * @default false
    */
-  ['default']?: boolean;
+  default?: boolean;
   /**
    * Whether to set the virtual background file as the new default for all panelists. This includes panelists not currently assigned a default virtual background.
    *
@@ -26251,7 +26496,12 @@ export const uploadWebinarBrandingVB = (variables: UploadWebinarBrandingVBVariab
     {},
     {},
     UploadWebinarBrandingVBPathParams
-  >({ url: '/webinars/{webinarId}/branding/virtual_backgrounds', method: 'post', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/branding/virtual_backgrounds',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteWebinarBrandingVBPathParams = {
   /**
@@ -26299,7 +26549,12 @@ export const deleteWebinarBrandingVB = (variables: DeleteWebinarBrandingVBVariab
     {},
     DeleteWebinarBrandingVBQueryParams,
     DeleteWebinarBrandingVBPathParams
-  >({ url: '/webinars/{webinarId}/branding/virtual_backgrounds', method: 'delete', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/branding/virtual_backgrounds',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type SetWebinarBrandingVBPathParams = {
   /**
@@ -26353,7 +26608,12 @@ export const setWebinarBrandingVB = (variables: SetWebinarBrandingVBVariables, s
     {},
     SetWebinarBrandingVBQueryParams,
     SetWebinarBrandingVBPathParams
-  >({ url: '/webinars/{webinarId}/branding/virtual_backgrounds', method: 'patch', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/branding/virtual_backgrounds',
+    method: 'patch',
+    ...variables,
+    signal
+  });
 
 export type UploadWebinarBrandingWallpaperPathParams = {
   /**
@@ -26436,7 +26696,12 @@ export const uploadWebinarBrandingWallpaper = (
     {},
     {},
     UploadWebinarBrandingWallpaperPathParams
-  >({ url: '/webinars/{webinarId}/branding/wallpaper', method: 'post', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/branding/wallpaper',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteWebinarBrandingWallpaperPathParams = {
   /**
@@ -26582,7 +26847,12 @@ export const webinarInviteLinksCreate = (variables: WebinarInviteLinksCreateVari
     {},
     {},
     WebinarInviteLinksCreatePathParams
-  >({ url: '/webinars/{webinarId}/invite_links', method: 'post', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/invite_links',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type WebinarLiveStreamingJoinTokenPathParams = {
   /**
@@ -26640,7 +26910,12 @@ export const webinarLiveStreamingJoinToken = (
     {},
     {},
     WebinarLiveStreamingJoinTokenPathParams
-  >({ url: '/webinars/{webinarId}/jointoken/live_streaming', method: 'get', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/jointoken/live_streaming',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type WebinarLocalArchivingArchiveTokenPathParams = {
   /**
@@ -26698,7 +26973,12 @@ export const webinarLocalArchivingArchiveToken = (
     {},
     {},
     WebinarLocalArchivingArchiveTokenPathParams
-  >({ url: '/webinars/{webinarId}/jointoken/local_archiving', method: 'get', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/jointoken/local_archiving',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type WebinarLocalRecordingJoinTokenPathParams = {
   /**
@@ -26756,7 +27036,12 @@ export const webinarLocalRecordingJoinToken = (
     {},
     {},
     WebinarLocalRecordingJoinTokenPathParams
-  >({ url: '/webinars/{webinarId}/jointoken/local_recording', method: 'get', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/jointoken/local_recording',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetWebinarLiveStreamDetailsPathParams = {
   /**
@@ -26829,7 +27114,12 @@ export const getWebinarLiveStreamDetails = (variables: GetWebinarLiveStreamDetai
     {},
     {},
     GetWebinarLiveStreamDetailsPathParams
-  >({ url: '/webinars/{webinarId}/livestream', method: 'get', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/livestream',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type WebinarLiveStreamUpdatePathParams = {
   /**
@@ -26906,7 +27196,12 @@ export const webinarLiveStreamUpdate = (variables: WebinarLiveStreamUpdateVariab
     {},
     {},
     WebinarLiveStreamUpdatePathParams
-  >({ url: '/webinars/{webinarId}/livestream', method: 'patch', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/livestream',
+    method: 'patch',
+    ...variables,
+    signal
+  });
 
 export type WebinarLiveStreamStatusUpdatePathParams = {
   /**
@@ -26987,7 +27282,12 @@ export const webinarLiveStreamStatusUpdate = (
     {},
     {},
     WebinarLiveStreamStatusUpdatePathParams
-  >({ url: '/webinars/{webinarId}/livestream/status', method: 'patch', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/livestream/status',
+    method: 'patch',
+    ...variables,
+    signal
+  });
 
 export type WebinarPanelistsPathParams = {
   /**
@@ -27212,7 +27512,12 @@ export const webinarPanelistCreate = (variables: WebinarPanelistCreateVariables,
     {},
     {},
     WebinarPanelistCreatePathParams
-  >({ url: '/webinars/{webinarId}/panelists', method: 'post', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/panelists',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type WebinarPanelistsDeletePathParams = {
   /**
@@ -27982,7 +28287,12 @@ export const webinarPollCreate = (variables: WebinarPollCreateVariables, signal?
     {},
     {},
     WebinarPollCreatePathParams
-  >({ url: '/webinars/{webinarId}/polls', method: 'post', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/polls',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type WebinarPollGetPathParams = {
   /**
@@ -28801,7 +29111,12 @@ export const webinarRegistrants = (variables: WebinarRegistrantsVariables, signa
     {},
     WebinarRegistrantsQueryParams,
     WebinarRegistrantsPathParams
-  >({ url: '/webinars/{webinarId}/registrants', method: 'get', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/registrants',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type WebinarRegistrantCreatePathParams = {
   /**
@@ -29103,7 +29418,12 @@ export const webinarRegistrantCreate = (variables: WebinarRegistrantCreateVariab
     {},
     WebinarRegistrantCreateQueryParams,
     WebinarRegistrantCreatePathParams
-  >({ url: '/webinars/{webinarId}/registrants', method: 'post', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/registrants',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type WebinarRegistrantsQuestionsGetPathParams = {
   /**
@@ -29209,7 +29529,12 @@ export const webinarRegistrantsQuestionsGet = (
     {},
     {},
     WebinarRegistrantsQuestionsGetPathParams
-  >({ url: '/webinars/{webinarId}/registrants/questions', method: 'get', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/registrants/questions',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type WebinarRegistrantQuestionUpdatePathParams = {
   /**
@@ -29316,7 +29641,12 @@ export const webinarRegistrantQuestionUpdate = (
     {},
     {},
     WebinarRegistrantQuestionUpdatePathParams
-  >({ url: '/webinars/{webinarId}/registrants/questions', method: 'patch', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/registrants/questions',
+    method: 'patch',
+    ...variables,
+    signal
+  });
 
 export type WebinarRegistrantStatusPathParams = {
   /**
@@ -29394,7 +29724,12 @@ export const webinarRegistrantStatus = (variables: WebinarRegistrantStatusVariab
     {},
     WebinarRegistrantStatusQueryParams,
     WebinarRegistrantStatusPathParams
-  >({ url: '/webinars/{webinarId}/registrants/status', method: 'put', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/registrants/status',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type WebinarRegistrantGetPathParams = {
   /**
@@ -29657,7 +29992,12 @@ export const webinarRegistrantGet = (variables: WebinarRegistrantGetVariables, s
     {},
     WebinarRegistrantGetQueryParams,
     WebinarRegistrantGetPathParams
-  >({ url: '/webinars/{webinarId}/registrants/{registrantId}', method: 'get', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/registrants/{registrantId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type DeleteWebinarRegistrantPathParams = {
   /**
@@ -29710,7 +30050,12 @@ export const deleteWebinarRegistrant = (variables: DeleteWebinarRegistrantVariab
     {},
     DeleteWebinarRegistrantQueryParams,
     DeleteWebinarRegistrantPathParams
-  >({ url: '/webinars/{webinarId}/registrants/{registrantId}', method: 'delete', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/registrants/{registrantId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetWebinarSipDialingWithPasscodePathParams = {
   /**
@@ -29788,7 +30133,12 @@ export const getWebinarSipDialingWithPasscode = (
     {},
     {},
     GetWebinarSipDialingWithPasscodePathParams
-  >({ url: '/webinars/{webinarId}/sip_dialing', method: 'post', ...variables, signal });
+  >({
+    url: '/webinars/{webinarId}/sip_dialing',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type WebinarStatusPathParams = {
   /**
@@ -30650,8 +31000,23 @@ export const operationsByTag = {
     deleteSIPPhone,
     updateSIPPhone
   },
-  tsp: { tsp, tspUpdate, userTSPs, userTSPCreate, tspUrlUpdate, userTSP, userTSPDelete, userTSPUpdate },
-  trackingField: { trackingfieldList, trackingfieldCreate, trackingfieldGet, trackingfieldDelete, trackingfieldUpdate },
+  tsp: {
+    tsp,
+    tspUpdate,
+    userTSPs,
+    userTSPCreate,
+    tspUrlUpdate,
+    userTSP,
+    userTSPDelete,
+    userTSPUpdate
+  },
+  trackingField: {
+    trackingfieldList,
+    trackingfieldCreate,
+    trackingfieldGet,
+    trackingfieldDelete,
+    trackingfieldUpdate
+  },
   webinars: {
     deleteWebinarChatMessageById,
     webinarAbsentees,

@@ -167,14 +167,14 @@ export type WorkersVersionPost = {
        * @example Fixed worker code.
        * @maxLength 100
        */
-      ['workers/message']?: string;
+      'workers/message'?: string;
       /**
        * User-provided identifier for the version.
        *
        * @example any-identifier-from-external-system
        * @maxLength 25
        */
-      ['workers/tag']?: string;
+      'workers/tag'?: string;
     };
     bindings?: Schemas.WorkersBindings;
     compatibility_date?: Schemas.WorkersCompatibilityDate;

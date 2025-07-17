@@ -4,7 +4,7 @@
  * @version 2.37.0
  */
 import type * as Fetcher from './fetcher';
-import { fetch, FetcherExtraProps } from './fetcher';
+import { type FetcherExtraProps, fetch } from './fetcher';
 import type * as RequestBodies from './requestBodies';
 import type { ClientErrorStatus, ServerErrorStatus } from './utils';
 
@@ -766,7 +766,12 @@ export const getAllCertificates = (variables: GetAllCertificatesVariables, signa
     {},
     GetAllCertificatesQueryParams,
     GetAllCertificatesPathParams
-  >({ url: '/sites/{siteId}/ssl/certificates', method: 'get', ...variables, signal });
+  >({
+    url: '/sites/{siteId}/ssl/certificates',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetEnvVarsPathParams = {
   /**
@@ -1458,7 +1463,12 @@ export const updateEnvVar = (variables: UpdateEnvVarVariables, signal?: AbortSig
     {},
     UpdateEnvVarQueryParams,
     UpdateEnvVarPathParams
-  >({ url: '/accounts/{accountId}/env/{key}', method: 'put', ...variables, signal });
+  >({
+    url: '/accounts/{accountId}/env/{key}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type SetEnvVarValuePathParams = {
   /**
@@ -1598,7 +1608,12 @@ export const setEnvVarValue = (variables: SetEnvVarValueVariables, signal?: Abor
     {},
     SetEnvVarValueQueryParams,
     SetEnvVarValuePathParams
-  >({ url: '/accounts/{accountId}/env/{key}', method: 'patch', ...variables, signal });
+  >({
+    url: '/accounts/{accountId}/env/{key}',
+    method: 'patch',
+    ...variables,
+    signal
+  });
 
 export type DeleteEnvVarPathParams = {
   /**
@@ -1871,7 +1886,12 @@ export const listSiteSubmissions = (variables: ListSiteSubmissionsVariables, sig
     {},
     ListSiteSubmissionsQueryParams,
     ListSiteSubmissionsPathParams
-  >({ url: '/sites/{siteId}/submissions', method: 'get', ...variables, signal });
+  >({
+    url: '/sites/{siteId}/submissions',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type ListSiteFilesPathParams = {
   siteId: string;
@@ -2143,7 +2163,12 @@ export const updateSiteAsset = (variables: UpdateSiteAssetVariables, signal?: Ab
     {},
     UpdateSiteAssetQueryParams,
     UpdateSiteAssetPathParams
-  >({ url: '/sites/{siteId}/assets/{assetId}', method: 'put', ...variables, signal });
+  >({
+    url: '/sites/{siteId}/assets/{assetId}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteSiteAssetPathParams = {
   siteId: string;
@@ -2205,7 +2230,12 @@ export const getSiteAssetPublicSignature = (variables: GetSiteAssetPublicSignatu
     {},
     {},
     GetSiteAssetPublicSignaturePathParams
-  >({ url: '/sites/{siteId}/assets/{assetId}/public_signature', method: 'get', ...variables, signal });
+  >({
+    url: '/sites/{siteId}/assets/{assetId}/public_signature',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetSiteFileByPathNamePathParams = {
   siteId: string;
@@ -2416,7 +2446,12 @@ export type UpdateSiteSnippetVariables = {
 
 export const updateSiteSnippet = (variables: UpdateSiteSnippetVariables, signal?: AbortSignal) =>
   fetch<undefined, UpdateSiteSnippetError, RequestBodies.CreateSiteSnippetSnippet, {}, {}, UpdateSiteSnippetPathParams>(
-    { url: '/sites/{siteId}/snippets/{snippetId}', method: 'put', ...variables, signal }
+    {
+      url: '/sites/{siteId}/snippets/{snippetId}',
+      method: 'put',
+      ...variables,
+      signal
+    }
   );
 
 export type DeleteSiteSnippetPathParams = {
@@ -2583,7 +2618,12 @@ export const createSiteBuildHook = (variables: CreateSiteBuildHookVariables, sig
     {},
     {},
     CreateSiteBuildHookPathParams
-  >({ url: '/sites/{siteId}/build_hooks', method: 'post', ...variables, signal });
+  >({
+    url: '/sites/{siteId}/build_hooks',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetSiteBuildHookPathParams = {
   siteId: string;
@@ -2654,7 +2694,12 @@ export const updateSiteBuildHook = (variables: UpdateSiteBuildHookVariables, sig
     {},
     {},
     UpdateSiteBuildHookPathParams
-  >({ url: '/sites/{siteId}/build_hooks/{id}', method: 'put', ...variables, signal });
+  >({
+    url: '/sites/{siteId}/build_hooks/{id}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteSiteBuildHookPathParams = {
   siteId: string;
@@ -2689,7 +2734,7 @@ export type ListSiteDeploysPathParams = {
 };
 
 export type ListSiteDeploysQueryParams = {
-  ['deploy-previews']?: boolean;
+  'deploy-previews'?: boolean;
   production?: boolean;
   state?:
     | 'new'
@@ -2708,7 +2753,7 @@ export type ListSiteDeploysQueryParams = {
     | 'error'
     | 'retrying';
   branch?: string;
-  ['latest-published']?: boolean;
+  'latest-published'?: boolean;
   /**
    * @format int32
    */
@@ -2795,7 +2840,7 @@ export type CreateSiteDeployPathParams = {
 };
 
 export type CreateSiteDeployQueryParams = {
-  ['deploy-previews']?: boolean;
+  'deploy-previews'?: boolean;
   production?: boolean;
   state?:
     | 'new'
@@ -2814,7 +2859,7 @@ export type CreateSiteDeployQueryParams = {
     | 'error'
     | 'retrying';
   branch?: string;
-  ['latest-published']?: boolean;
+  'latest-published'?: boolean;
   title?: string;
 };
 
@@ -3037,7 +3082,12 @@ export const updateSiteDeploy = (variables: UpdateSiteDeployVariables, signal?: 
     {},
     {},
     UpdateSiteDeployPathParams
-  >({ url: '/sites/{siteId}/deploys/{deployId}', method: 'put', ...variables, signal });
+  >({
+    url: '/sites/{siteId}/deploys/{deployId}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteSiteDeployPathParams = {
   deployId: string;
@@ -3346,7 +3396,12 @@ export const listSiteDeployedBranches = (variables: ListSiteDeployedBranchesVari
     {},
     {},
     ListSiteDeployedBranchesPathParams
-  >({ url: '/sites/{siteId}/deployed-branches', method: 'get', ...variables, signal });
+  >({
+    url: '/sites/{siteId}/deployed-branches',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type UnlinkSiteRepoPathParams = {
   siteId: string;
@@ -3956,7 +4011,12 @@ export const updateDeployValidations = (variables: UpdateDeployValidationsVariab
     {},
     {},
     UpdateDeployValidationsPathParams
-  >({ url: '/deploys/{deployId}/validations_report', method: 'patch', ...variables, signal });
+  >({
+    url: '/deploys/{deployId}/validations_report',
+    method: 'patch',
+    ...variables,
+    signal
+  });
 
 export type LockDeployPathParams = {
   deployId: string;
@@ -4147,7 +4207,12 @@ export const uploadDeployFile = (variables: UploadDeployFileVariables, signal?: 
     {},
     UploadDeployFileQueryParams,
     UploadDeployFilePathParams
-  >({ url: '/deploys/{deployId}/files/{path}', method: 'put', ...variables, signal });
+  >({
+    url: '/deploys/{deployId}/files/{path}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type UploadDeployFunctionPathParams = {
   deployId: string;
@@ -4162,7 +4227,7 @@ export type UploadDeployFunctionQueryParams = {
 };
 
 export type UploadDeployFunctionHeaders = {
-  ['X-Nf-Retry-Count']?: number;
+  'X-Nf-Retry-Count'?: number;
 };
 
 export type UploadDeployFunctionError = Fetcher.ErrorWrapper<{
@@ -4197,7 +4262,12 @@ export const uploadDeployFunction = (variables: UploadDeployFunctionVariables, s
     UploadDeployFunctionHeaders,
     UploadDeployFunctionQueryParams,
     UploadDeployFunctionPathParams
-  >({ url: '/deploys/{deployId}/functions/{name}', method: 'put', ...variables, signal });
+  >({
+    url: '/deploys/{deployId}/functions/{name}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type UpdatePluginPathParams = {
   siteId: string;
@@ -4287,7 +4357,12 @@ export const getLatestPluginRuns = (variables: GetLatestPluginRunsVariables, sig
     {},
     GetLatestPluginRunsQueryParams,
     GetLatestPluginRunsPathParams
-  >({ url: '/sites/{siteId}/plugin_runs/latest', method: 'get', ...variables, signal });
+  >({
+    url: '/sites/{siteId}/plugin_runs/latest',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type CreatePluginRunPathParams = {
   deployId: string;
@@ -4401,7 +4476,12 @@ export const listFormSubmissions = (variables: ListFormSubmissionsVariables, sig
     {},
     ListFormSubmissionsQueryParams,
     ListFormSubmissionsPathParams
-  >({ url: '/forms/{formId}/submissions', method: 'get', ...variables, signal });
+  >({
+    url: '/forms/{formId}/submissions',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type ListHooksBySiteIdQueryParams = {
   site_id: string;
@@ -5508,7 +5588,12 @@ export const updateAccountMember = (variables: UpdateAccountMemberVariables, sig
     {},
     {},
     UpdateAccountMemberPathParams
-  >({ url: '/{accountSlug}/members/{memberId}', method: 'put', ...variables, signal });
+  >({
+    url: '/{accountSlug}/members/{memberId}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type RemoveAccountMemberPathParams = {
   accountSlug: string;
@@ -5956,7 +6041,12 @@ export const listAccountAuditEvents = (variables: ListAccountAuditEventsVariable
     {},
     ListAccountAuditEventsQueryParams,
     ListAccountAuditEventsPathParams
-  >({ url: '/accounts/{accountId}/audit', method: 'get', ...variables, signal });
+  >({
+    url: '/accounts/{accountId}/audit',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type ListFormSubmissionPathParams = {
   submissionId: string;
@@ -6019,7 +6109,12 @@ export const listFormSubmission = (variables: ListFormSubmissionVariables, signa
     {},
     ListFormSubmissionQueryParams,
     ListFormSubmissionPathParams
-  >({ url: '/submissions/{submissionId}', method: 'get', ...variables, signal });
+  >({
+    url: '/submissions/{submissionId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type DeleteSubmissionPathParams = {
   submissionId: string;
@@ -6096,7 +6191,12 @@ export const listServiceInstancesForSite = (variables: ListServiceInstancesForSi
     {},
     {},
     ListServiceInstancesForSitePathParams
-  >({ url: '/sites/{siteId}/service-instances', method: 'get', ...variables, signal });
+  >({
+    url: '/sites/{siteId}/service-instances',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type CreateServiceInstancePathParams = {
   siteId: string;
@@ -6148,7 +6248,12 @@ export const createServiceInstance = (variables: CreateServiceInstanceVariables,
     {},
     {},
     CreateServiceInstancePathParams
-  >({ url: '/sites/{siteId}/services/{addon}/instances', method: 'post', ...variables, signal });
+  >({
+    url: '/sites/{siteId}/services/{addon}/instances',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type ShowServiceInstancePathParams = {
   siteId: string;
@@ -6230,7 +6335,12 @@ export const updateServiceInstance = (variables: UpdateServiceInstanceVariables,
     {},
     {},
     UpdateServiceInstancePathParams
-  >({ url: '/sites/{siteId}/services/{addon}/instances/{instanceId}', method: 'put', ...variables, signal });
+  >({
+    url: '/sites/{siteId}/services/{addon}/instances/{instanceId}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteServiceInstancePathParams = {
   siteId: string;
@@ -6481,7 +6591,12 @@ export const createSplitTest = (variables: CreateSplitTestVariables, signal?: Ab
     {},
     {},
     CreateSplitTestPathParams
-  >({ url: '/sites/{siteId}/traffic_splits', method: 'post', ...variables, signal });
+  >({
+    url: '/sites/{siteId}/traffic_splits',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetSplitTestsPathParams = {
   siteId: string;
@@ -6581,7 +6696,12 @@ export const updateSplitTest = (variables: UpdateSplitTestVariables, signal?: Ab
     {},
     {},
     UpdateSplitTestPathParams
-  >({ url: '/sites/{siteId}/traffic_splits/{splitTestId}', method: 'put', ...variables, signal });
+  >({
+    url: '/sites/{siteId}/traffic_splits/{splitTestId}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type GetSplitTestPathParams = {
   siteId: string;
@@ -7013,7 +7133,12 @@ export const transferDnsZone = (variables: TransferDnsZoneVariables, signal?: Ab
     {},
     TransferDnsZoneQueryParams,
     TransferDnsZonePathParams
-  >({ url: '/dns_zones/{zoneId}/transfer', method: 'put', ...variables, signal });
+  >({
+    url: '/dns_zones/{zoneId}/transfer',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type GetDnsRecordsPathParams = {
   zoneId: string;
@@ -7185,7 +7310,12 @@ export const getIndividualDnsRecord = (variables: GetIndividualDnsRecordVariable
     {},
     {},
     GetIndividualDnsRecordPathParams
-  >({ url: '/dns_zones/{zoneId}/dns_records/{dnsRecordId}', method: 'get', ...variables, signal });
+  >({
+    url: '/dns_zones/{zoneId}/dns_records/{dnsRecordId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type DeleteDnsRecordPathParams = {
   zoneId: string;
@@ -7287,7 +7417,12 @@ export const listSiteDevServers = (variables: ListSiteDevServersVariables, signa
     {},
     ListSiteDevServersQueryParams,
     ListSiteDevServersPathParams
-  >({ url: '/sites/{siteId}/dev_servers', method: 'get', ...variables, signal });
+  >({
+    url: '/sites/{siteId}/dev_servers',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type CreateSiteDevServerPathParams = {
   siteId: string;
@@ -7354,7 +7489,12 @@ export const createSiteDevServer = (variables: CreateSiteDevServerVariables, sig
     {},
     CreateSiteDevServerQueryParams,
     CreateSiteDevServerPathParams
-  >({ url: '/sites/{siteId}/dev_servers', method: 'post', ...variables, signal });
+  >({
+    url: '/sites/{siteId}/dev_servers',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteSiteDevServersPathParams = {
   siteId: string;
@@ -7388,7 +7528,12 @@ export const deleteSiteDevServers = (variables: DeleteSiteDevServersVariables, s
     {},
     DeleteSiteDevServersQueryParams,
     DeleteSiteDevServersPathParams
-  >({ url: '/sites/{siteId}/dev_servers', method: 'delete', ...variables, signal });
+  >({
+    url: '/sites/{siteId}/dev_servers',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetSiteDevServerPathParams = {
   siteId: string;
@@ -7501,7 +7646,12 @@ export const listSiteDevServerHooks = (variables: ListSiteDevServerHooksVariable
     {},
     {},
     ListSiteDevServerHooksPathParams
-  >({ url: '/sites/{siteId}/dev_server_hooks', method: 'get', ...variables, signal });
+  >({
+    url: '/sites/{siteId}/dev_server_hooks',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type CreateSiteDevServerHookPathParams = {
   siteId: string;
@@ -7544,7 +7694,12 @@ export const createSiteDevServerHook = (variables: CreateSiteDevServerHookVariab
     {},
     {},
     CreateSiteDevServerHookPathParams
-  >({ url: '/sites/{siteId}/dev_server_hooks', method: 'post', ...variables, signal });
+  >({
+    url: '/sites/{siteId}/dev_server_hooks',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetSiteDevServerHookPathParams = {
   siteId: string;
@@ -7616,7 +7771,12 @@ export const updateSiteDevServerHook = (variables: UpdateSiteDevServerHookVariab
     {},
     {},
     UpdateSiteDevServerHookPathParams
-  >({ url: '/sites/{siteId}/dev_server_hooks/{id}', method: 'put', ...variables, signal });
+  >({
+    url: '/sites/{siteId}/dev_server_hooks/{id}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteSiteDevServerHookPathParams = {
   siteId: string;
@@ -7657,7 +7817,11 @@ export const operationsByTag = {
     createSiteInTeam,
     listSitesForAccount
   },
-  sniCertificate: { provisionSiteTLSCertificate, showSiteTLSCertificate, getAllCertificates },
+  sniCertificate: {
+    provisionSiteTLSCertificate,
+    showSiteTLSCertificate,
+    getAllCertificates
+  },
   environmentVariables: {
     getEnvVars,
     createEnvVars,
@@ -7670,14 +7834,37 @@ export const operationsByTag = {
   },
   function: { searchSiteFunctions, uploadDeployFunction },
   form: { listSiteForms, deleteSiteForm },
-  submission: { listSiteSubmissions, listFormSubmissions, listFormSubmission, deleteSubmission },
+  submission: {
+    listSiteSubmissions,
+    listFormSubmissions,
+    listFormSubmission,
+    deleteSubmission
+  },
   file: { listSiteFiles, getSiteFileByPathName, uploadDeployFile },
-  asset: { listSiteAssets, createSiteAsset, getSiteAssetInfo, updateSiteAsset, deleteSiteAsset },
+  asset: {
+    listSiteAssets,
+    createSiteAsset,
+    getSiteAssetInfo,
+    updateSiteAsset,
+    deleteSiteAsset
+  },
   assetPublicSignature: { getSiteAssetPublicSignature },
   purge: { purgeCache },
-  snippet: { listSiteSnippets, createSiteSnippet, getSiteSnippet, updateSiteSnippet, deleteSiteSnippet },
+  snippet: {
+    listSiteSnippets,
+    createSiteSnippet,
+    getSiteSnippet,
+    updateSiteSnippet,
+    deleteSiteSnippet
+  },
   metadata: { getSiteMetadata, updateSiteMetadata },
-  buildHook: { listSiteBuildHooks, createSiteBuildHook, getSiteBuildHook, updateSiteBuildHook, deleteSiteBuildHook },
+  buildHook: {
+    listSiteBuildHooks,
+    createSiteBuildHook,
+    getSiteBuildHook,
+    updateSiteBuildHook,
+    deleteSiteBuildHook
+  },
   deploy: {
     listSiteDeploys,
     createSiteDeploy,
@@ -7693,7 +7880,13 @@ export const operationsByTag = {
     lockDeploy,
     unlockDeploy
   },
-  build: { listSiteBuilds, createSiteBuild, getSiteBuild, notifyBuildStart, getAccountBuildStatus },
+  build: {
+    listSiteBuilds,
+    createSiteBuild,
+    getSiteBuild,
+    notifyBuildStart,
+    getAccountBuildStatus
+  },
   deployedBranch: { listSiteDeployedBranches },
   buildLogMsg: { updateSiteBuildLog },
   dnsZone: {
@@ -7710,15 +7903,34 @@ export const operationsByTag = {
     deleteDnsRecord
   },
   xInternal: { updatePlugin, getLatestPluginRuns, createPluginRun },
-  hook: { listHooksBySiteId, createHookBySiteId, getHook, updateHook, deleteHook, enableHook },
+  hook: {
+    listHooksBySiteId,
+    createHookBySiteId,
+    getHook,
+    updateHook,
+    deleteHook,
+    enableHook
+  },
   hookType: { listHookTypes },
   ticket: { createTicket, showTicket },
   accessToken: { exchangeTicket },
   deployKey: { listDeployKeys, createDeployKey, getDeployKey, deleteDeployKey },
-  member: { listMembersForAccount, addMemberToAccount, getAccountMember, updateAccountMember, removeAccountMember },
+  member: {
+    listMembersForAccount,
+    addMemberToAccount,
+    getAccountMember,
+    updateAccountMember,
+    removeAccountMember
+  },
   paymentMethod: { listPaymentMethodsForUser },
   accountType: { listAccountTypesForUser },
-  accountMembership: { listAccountsForUser, createAccount, getAccount, updateAccount, cancelAccount },
+  accountMembership: {
+    listAccountsForUser,
+    createAccount,
+    getAccount,
+    updateAccount,
+    cancelAccount
+  },
   auditLog: { listAccountAuditEvents },
   serviceInstance: {
     listServiceInstancesForSite,
@@ -7729,8 +7941,21 @@ export const operationsByTag = {
   },
   service: { getServices, showService, showServiceManifest },
   user: { getCurrentUser },
-  splitTest: { createSplitTest, getSplitTests, updateSplitTest, getSplitTest, enableSplitTest, disableSplitTest },
-  devServer: { listSiteDevServers, createSiteDevServer, deleteSiteDevServers, getSiteDevServer, markDevServerActivity },
+  splitTest: {
+    createSplitTest,
+    getSplitTests,
+    updateSplitTest,
+    getSplitTest,
+    enableSplitTest,
+    disableSplitTest
+  },
+  devServer: {
+    listSiteDevServers,
+    createSiteDevServer,
+    deleteSiteDevServers,
+    getSiteDevServer,
+    markDevServerActivity
+  },
   devServerHook: {
     listSiteDevServerHooks,
     createSiteDevServerHook,

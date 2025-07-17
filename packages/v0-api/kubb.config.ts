@@ -1,7 +1,7 @@
 import { defineConfig } from '@kubb/core';
-import { baseConfig } from 'openapi-utils';
-import { OpenAPIObject, PathItemObject, OperationObject } from "openapi3-ts/oas30";
 import c from 'case';
+import { baseConfig } from 'openapi-utils';
+import type { OpenAPIObject, OperationObject, PathItemObject } from 'openapi3-ts/oas30';
 
 export default defineConfig(async () => {
   const response = await fetch('https://api.v0.dev/v1/openapi.json');
@@ -23,74 +23,69 @@ export default defineConfig(async () => {
   // Fix constraints on union types
   openAPIDocument = fixUnionConstraints(openAPIDocument);
 
-  // Camel case all properties
-  openAPIDocument = camelCaseProperties(openAPIDocument);
+  // Camel case all properties except path strings
+  openAPIDocument = camelCaseProperties(openAPIDocument, false);
 
   return {
     ...baseConfig,
-    input: { data: openAPIDocument },
-  }
+    input: { data: openAPIDocument }
+  };
 });
 
-
-function fixWrongGroupIds(
-  openAPIDocument: OpenAPIObject
-) {
-  return JSON.parse(
-    JSON.stringify(openAPIDocument),
-    (key, value) => {
-      if (key === "groupIds" && value.maxItems === 0 && value.minItems === 0) {
-        return {
-          "items": {
-            "oneOf": [
-              {
-                "type": "string"
-              },
-              {
-                "type": "string"
-              }
-            ]
-          },
-          "maxItems": 2,
-          "minItems": 2,
-          "type": "array",
-        }
-      }
-
-      return value;
+function fixWrongGroupIds(openAPIDocument: OpenAPIObject) {
+  return JSON.parse(JSON.stringify(openAPIDocument), (key, value) => {
+    if (key === 'groupIds' && value.maxItems === 0 && value.minItems === 0) {
+      return {
+        items: {
+          oneOf: [
+            {
+              type: 'string'
+            },
+            {
+              type: 'string'
+            }
+          ]
+        },
+        maxItems: 2,
+        minItems: 2,
+        type: 'array'
+      };
     }
-  );
+
+    return value;
+  });
 }
 
-function fixArrayItems(
-  openAPIDocument: OpenAPIObject
-) {
-  return JSON.parse(
-    JSON.stringify(openAPIDocument),
-    (_key, value) => {
-      // Fix arrays that lack proper item typing
-      if (value && typeof value === 'object' && value.type === 'array' && !value.items) {
-        return {
-          ...value,
-          items: {
-            type: 'string'
-          }
-        };
-      }
-
-      // Fix arrays with empty items objects
-      if (value && typeof value === 'object' && value.type === 'array' && value.items && Object.keys(value.items).length === 0) {
-        return {
-          ...value,
-          items: {
-            type: 'string'
-          }
-        };
-      }
-
-      return value;
+function fixArrayItems(openAPIDocument: OpenAPIObject) {
+  return JSON.parse(JSON.stringify(openAPIDocument), (_key, value) => {
+    // Fix arrays that lack proper item typing
+    if (value && typeof value === 'object' && value.type === 'array' && !value.items) {
+      return {
+        ...value,
+        items: {
+          type: 'string'
+        }
+      };
     }
-  );
+
+    // Fix arrays with empty items objects
+    if (
+      value &&
+      typeof value === 'object' &&
+      value.type === 'array' &&
+      value.items &&
+      Object.keys(value.items).length === 0
+    ) {
+      return {
+        ...value,
+        items: {
+          type: 'string'
+        }
+      };
+    }
+
+    return value;
+  });
 }
 
 function sortArrays(openAPIDocument: OpenAPIObject) {
@@ -115,13 +110,9 @@ function sortArrays(openAPIDocument: OpenAPIObject) {
   return sortEnumValuesRecursively(openAPIDocument);
 }
 
-function cleanOperationIds({
-  openAPIDocument,
-}: {
-  openAPIDocument: OpenAPIObject;
-}) {
+function cleanOperationIds({ openAPIDocument }: { openAPIDocument: OpenAPIObject }) {
   for (const [key, pathItem] of Object.entries(openAPIDocument.paths as Record<string, PathItemObject>)) {
-    for (const method of ["get", "put", "post", "patch", "delete", "head"] as const) {
+    for (const method of ['get', 'put', 'post', 'patch', 'delete', 'head'] as const) {
       if (method === 'head') {
         delete (openAPIDocument.paths[key] as any)[method];
         continue; // Skip 'head' method as it's not used in this context
@@ -151,7 +142,7 @@ function addMissingPathParams(openAPIDocument: OpenAPIObject): OpenAPIObject {
       const pathParams = path.match(/\{([^}]+)\}/g);
       if (pathParams) {
         for (const method in pathItem) {
-          if (["get", "put", "post", "delete", "patch"].includes(method)) {
+          if (['get', 'put', 'post', 'delete', 'patch'].includes(method)) {
             const operation = pathItem[method as keyof PathItemObject] as OperationObject;
             if (operation) {
               if (!operation.parameters) {
@@ -159,17 +150,15 @@ function addMissingPathParams(openAPIDocument: OpenAPIObject): OpenAPIObject {
               }
               for (const pathParam of pathParams) {
                 const paramName = pathParam.slice(1, -1);
-                const existingParam = operation.parameters.find(
-                  (p: any) => p.in === "path" && p.name === paramName
-                );
+                const existingParam = operation.parameters.find((p: any) => p.in === 'path' && p.name === paramName);
                 if (!existingParam) {
                   operation.parameters.push({
                     name: paramName,
-                    in: "path",
+                    in: 'path',
                     required: true,
                     schema: {
-                      type: "string",
-                    },
+                      type: 'string'
+                    }
                   } as any);
                 } else {
                   (existingParam as any).required = true;
@@ -185,7 +174,7 @@ function addMissingPathParams(openAPIDocument: OpenAPIObject): OpenAPIObject {
 }
 
 function getDefaultOperationId(path: string, method: string): string {
-  const operationId = `${method.toUpperCase()} ${path}`
+  const operationId = `${method.toUpperCase()} ${path}`;
   if (hardcodedOperationIds[operationId]) {
     return hardcodedOperationIds[operationId];
   }
@@ -216,19 +205,25 @@ function fixUnionConstraints(obj: any): any {
   return obj;
 }
 
-function camelCaseProperties(obj: any): any {
+function camelCaseProperties(obj: any, isPathsObject = false): any {
   if (Array.isArray(obj)) {
-    return obj.map(camelCaseProperties);
+    return obj.map((item) => camelCaseProperties(item, false));
   }
   if (obj !== null && typeof obj === 'object') {
     return Object.keys(obj).reduce((result, key) => {
-      const camelKey = c.camel(key);
-      result[camelKey] = camelCaseProperties(obj[key]);
+      // Don't camel case path strings in the paths object
+      if (isPathsObject && key.startsWith('/')) {
+        result[key] = camelCaseProperties(obj[key], false);
+      } else {
+        const camelKey = c.camel(key);
+        // Check if we're processing the paths object
+        const isPathsChild = key === 'paths';
+        result[camelKey] = camelCaseProperties(obj[key], isPathsChild);
+      }
       return result;
     }, {} as any);
   }
   return obj;
 }
 
-const hardcodedOperationIds: Record<string, string> = {
-}
+const hardcodedOperationIds: Record<string, string> = {};

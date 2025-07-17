@@ -1,8 +1,9 @@
-import { FetchImpl } from './fetch';
+import type { FetchImpl } from './fetch';
 import { compactObject } from './lang';
 
+const baseUrl = 'https://api.vercel.com';
+
 export type FetcherConfig = {
-  baseUrl?: string;
   token?: string | null;
   fetchImpl?: FetchImpl;
   headers?: Record<string, any>;
@@ -20,14 +21,7 @@ export type FetcherOptions<TBody, THeaders, TQueryParams, TPathParams> = {
   signal?: AbortSignal | undefined;
 } & FetcherConfig;
 
-export async function client<
-  TData,
-  TError,
-  TBody,
-  THeaders,
-  TQueryParams,
-  TPathParams
->({
+export async function client<TData, TError, TBody, THeaders, TQueryParams, TPathParams>({
   url,
   method,
   body,
@@ -35,7 +29,6 @@ export async function client<
   queryParams,
   signal,
   token = null,
-  baseUrl = '',
   fetchImpl = fetch as FetchImpl
 }: FetcherOptions<TBody, THeaders, TQueryParams, TPathParams>): Promise<TData> {
   try {

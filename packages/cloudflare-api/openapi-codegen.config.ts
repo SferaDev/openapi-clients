@@ -1,9 +1,9 @@
 import { defineConfig } from '@openapi-codegen/cli';
-import { Context } from '@openapi-codegen/cli/lib/types';
+import type { Context } from '@openapi-codegen/cli/lib/types';
 import { generateFetchers, generateSchemaTypes } from '@openapi-codegen/typescript';
-import Case from "case";
-import { OperationObject, PathItemObject } from 'openapi3-ts/oas30';
-import { ModuleKind, Project, VariableDeclarationKind } from 'ts-morph';
+import Case from 'case';
+import type { OperationObject, PathItemObject } from 'openapi3-ts/oas30';
+import { type ModuleKind, Project, VariableDeclarationKind } from 'ts-morph';
 import ts from 'typescript';
 
 export default defineConfig({
@@ -20,7 +20,7 @@ export default defineConfig({
       context.openAPIDocument = cleanOperationIds({ openAPIDocument: context.openAPIDocument });
 
       // Remove duplicated schemas
-      const schemaCount: Record<string, number> = {}
+      const schemaCount: Record<string, number> = {};
       const rewrites = new Map<string, string>();
       for (const path of Object.keys(context.openAPIDocument.components?.schemas ?? {})) {
         const schemaName = Case.pascal(path);
@@ -31,14 +31,20 @@ export default defineConfig({
         schemaCount[schemaName] += 1;
         if (schemaCount[schemaName] > 1 && context.openAPIDocument.components?.schemas?.[path]) {
           rewrites.set(path, `${path}-${schemaCount[schemaName]}`);
-          context.openAPIDocument.components.schemas[`${path}-${schemaCount[schemaName]}`] = context.openAPIDocument.components.schemas[path];
+          context.openAPIDocument.components.schemas[`${path}-${schemaCount[schemaName]}`] =
+            context.openAPIDocument.components.schemas[path];
           delete context.openAPIDocument.components.schemas[path];
         }
       }
 
       // Rewrite all $ref in components with new schema names
       for (const [ref, newRef] of rewrites) {
-        context.openAPIDocument = JSON.parse(JSON.stringify(context.openAPIDocument).replace(new RegExp(`"#/components/schemas/${ref}"`, 'g'), `"#/components/schemas/${newRef}"`));
+        context.openAPIDocument = JSON.parse(
+          JSON.stringify(context.openAPIDocument).replace(
+            new RegExp(`"#/components/schemas/${ref}"`, 'g'),
+            `"#/components/schemas/${newRef}"`
+          )
+        );
       }
 
       // Rewrite status code in components response with XX suffix to avoid invalid identifier (4XX -> 400, 5XX -> 500)
@@ -48,7 +54,7 @@ export default defineConfig({
           if (responses) {
             for (const [statusCode, response] of Object.entries(responses)) {
               if (statusCode.endsWith('XX')) {
-                const newStatusCode = statusCode.slice(0, 1) + '00';
+                const newStatusCode = `${statusCode.slice(0, 1)}00`;
                 responses[newStatusCode] = response;
                 delete responses[statusCode];
               }
@@ -67,7 +73,7 @@ export default defineConfig({
 function buildExtraFile(context: Context) {
   const project = new Project({
     useInMemoryFileSystem: true,
-    compilerOptions: { module: ts.ModuleKind.ESNext as ModuleKind, target: ts.ScriptTarget['ES2020'] }
+    compilerOptions: { module: ts.ModuleKind.ESNext as ModuleKind, target: ts.ScriptTarget.ES2020 }
   });
 
   const sourceFile = project.createSourceFile('extra.ts');
@@ -93,8 +99,8 @@ function buildExtraFile(context: Context) {
         name: 'operationsByPath',
         initializer: `{
             ${Object.entries(operationsByPath)
-            .map(([path, operation]) => `"${path}": ${operation}`)
-            .join(',\n')}
+              .map(([path, operation]) => `"${path}": ${operation}`)
+              .join(',\n')}
         }`
       }
     ]
@@ -103,22 +109,17 @@ function buildExtraFile(context: Context) {
   return sourceFile.getFullText();
 }
 
-function cleanOperationIds({
-  openAPIDocument,
-}: {
-  openAPIDocument: Context['openAPIDocument'];
-}) {
+function cleanOperationIds({ openAPIDocument }: { openAPIDocument: Context['openAPIDocument'] }) {
   for (const [key, path] of Object.entries(openAPIDocument.paths as Record<string, PathItemObject>)) {
-    for (const method of ["get", "put", "post", "patch", "delete"] as const) {
+    for (const method of ['get', 'put', 'post', 'patch', 'delete'] as const) {
       if (path[method]) {
         const operationId = path[method].operationId ?? `${method} ${key}`;
         openAPIDocument.paths[key][method] = {
           ...openAPIDocument.paths[key][method],
           operationId: Case.camel(operationId)
-        }
+        };
       }
     }
-
   }
 
   return openAPIDocument;

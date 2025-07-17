@@ -1,7 +1,7 @@
 import { camelCase } from '@kubb/core/transformers';
 import { isNullable, isReference } from '@kubb/oas';
-import { PluginMcp } from '@kubb/plugin-mcp';
-import { createReactGenerator, OperationSchemas } from '@kubb/plugin-oas';
+import type { PluginMcp } from '@kubb/plugin-mcp';
+import { createReactGenerator, type OperationSchemas } from '@kubb/plugin-oas';
 import { useOas, useOperationManager } from '@kubb/plugin-oas/hooks';
 import { getBanner, getFooter, getPathParams, isOptional } from '@kubb/plugin-oas/utils';
 import { pluginTsName } from '@kubb/plugin-ts';
@@ -70,18 +70,17 @@ export const serverGenerator = createReactGenerator<PluginMcp>({
 
     return (
       // @ts-ignore - JSX runtime module resolution issue
-      <>
-        <File
-          baseName={file.baseName}
-          path={file.path}
-          meta={file.meta}
-          banner={getBanner({ oas, output: options.output, config: pluginManager.config })}
-          footer={getFooter({ oas, output: options.output })}
-        >
-          {imports}
+      <File
+        baseName={file.baseName}
+        path={file.path}
+        meta={file.meta}
+        banner={getBanner({ oas, output: options.output, config: pluginManager.config })}
+        footer={getFooter({ oas, output: options.output })}
+      >
+        {imports}
 
-          <File.Source name={fileName} isExportable isIndexable>
-            {`
+        <File.Source name={fileName} isExportable isIndexable>
+          {`
             import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
             
             export function initMcpTools<Server>(serverLike: Server, config: FetcherConfig) {
@@ -121,9 +120,8 @@ export const serverGenerator = createReactGenerator<PluginMcp>({
                 .filter(Boolean)
                 .join('\n')}
             }`}
-          </File.Source>
-        </File>
-      </>
+        </File.Source>
+      </File>
     );
   }
 });
@@ -137,30 +135,31 @@ function getParams({ schemas }: { schemas: OperationSchemas }) {
     data: {
       mode: 'object',
       children: {
-        ...Object.entries(pathParams).reduce((acc, [key, param]) => {
-          if (param && schemas.pathParams?.name) {
-            let suffix = '.shape';
+        ...Object.entries(pathParams).reduce(
+          (acc, [key, param]) => {
+            if (param && schemas.pathParams?.name) {
+              let suffix = '.shape';
 
-            if (isNullable(schemas.pathParams.schema)) {
-              if (isReference(schemas.pathParams)) {
-                suffix = '.unwrap().schema.unwrap().shape';
+              if (isNullable(schemas.pathParams.schema)) {
+                if (isReference(schemas.pathParams)) {
+                  suffix = '.unwrap().schema.unwrap().shape';
+                } else {
+                  suffix = '.unwrap().shape';
+                }
               } else {
-                suffix = '.unwrap().shape';
+                if (isReference(schemas.pathParams)) {
+                  suffix = '.schema.shape';
+                }
               }
-            } else {
-              if (isReference(schemas.pathParams)) {
-                suffix = '.schema.shape';
-              }
+
+              (param as any).value = `${schemas.pathParams?.name}${suffix}['${key}']`;
             }
 
-            (param as any).value = `${schemas.pathParams?.name}${suffix}['${key}']`;
-          }
-
-          return {
-            ...acc,
-            [camelCase(key)]: param
-          };
-        }, {}),
+            acc[camelCase(key)] = param;
+            return acc;
+          },
+          {} as Record<string, any>
+        ),
         body: schemas.request?.name
           ? {
               value: schemas.request?.name,

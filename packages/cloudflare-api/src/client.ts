@@ -1,8 +1,8 @@
 import { operationsByTag } from './api/components';
-import { operationsByPath } from './api/extra';
-import { FetcherExtraProps, baseUrl, fetch as CloudflareFetch } from './api/fetcher';
-import { FetchImpl } from './utils/fetch';
-import { RequiredKeys } from './utils/types';
+import type { operationsByPath } from './api/extra';
+import { baseUrl, fetch as CloudflareFetch, type FetcherExtraProps } from './api/fetcher';
+import type { FetchImpl } from './utils/fetch';
+import type { RequiredKeys } from './utils/types';
 
 export interface CloudflareApiOptions {
   token: string;
@@ -11,15 +11,14 @@ export interface CloudflareApiOptions {
 
 type ApiProxy = {
   [Tag in keyof typeof operationsByTag]: {
-    [Method in keyof (typeof operationsByTag)[Tag]]: (typeof operationsByTag)[Tag][Method] extends infer Operation extends (
-      ...args: any
-    ) => any
-    ? Omit<Parameters<Operation>[0], keyof FetcherExtraProps> extends infer Params
-    ? RequiredKeys<Params> extends never
-    ? (params?: Params) => ReturnType<Operation>
-    : (params: Params) => ReturnType<Operation>
-    : never
-    : never;
+    [Method in keyof (typeof operationsByTag)[Tag]]: (typeof operationsByTag)[Tag][Method] extends infer Operation extends
+      (...args: any) => any
+      ? Omit<Parameters<Operation>[0], keyof FetcherExtraProps> extends infer Params
+        ? RequiredKeys<Params> extends never
+          ? (params?: Params) => ReturnType<Operation>
+          : (params: Params) => ReturnType<Operation>
+        : never
+      : never;
   };
 };
 
@@ -104,7 +103,7 @@ export class CloudflareApi {
       method,
       url,
       token: this.#token,
-      fetchImpl: this.#fetch,
+      fetchImpl: this.#fetch
     });
 
     return result as RequestEndpointResult<Endpoint>;

@@ -1,21 +1,21 @@
+import type { FetcherExtraProps } from './api/fetcher';
 import { operationsByTag as v40Operations } from './api/v40/components';
 import { operationsByTag as v41Operations } from './api/v41/components';
-import { FetcherExtraProps } from './api/fetcher';
-import { FetchImpl } from './utils/fetch';
-import { RequiredKeys } from './utils/types';
+import type { FetchImpl } from './utils/fetch';
+import type { RequiredKeys } from './utils/types';
 
 type DHIS2Version = 'v40' | 'v41';
 
 export type Credentials =
   | {
-    type: 'basic';
-    username: string;
-    password: string;
-  }
+      type: 'basic';
+      username: string;
+      password: string;
+    }
   | {
-    type: 'apiToken';
-    token: string;
-  };
+      type: 'apiToken';
+      token: string;
+    };
 
 export interface Dhis2ApiOptions<Version extends DHIS2Version> {
   version: Version;
@@ -27,20 +27,19 @@ export interface Dhis2ApiOptions<Version extends DHIS2Version> {
 type OperationsByTag<Version extends DHIS2Version> = Version extends 'v40'
   ? typeof v40Operations
   : Version extends 'v41'
-  ? typeof v41Operations
-  : never;
+    ? typeof v41Operations
+    : never;
 
 type ApiProxy<Version extends DHIS2Version> = {
   [Tag in keyof OperationsByTag<Version>]: {
-    [Method in keyof OperationsByTag<Version>[Tag]]: OperationsByTag<Version>[Tag][Method] extends infer Operation extends (
-      ...args: any
-    ) => any
-    ? Omit<Parameters<Operation>[0], keyof FetcherExtraProps> extends infer Params
-    ? RequiredKeys<Params> extends never
-    ? (params?: Params) => ReturnType<Operation>
-    : (params: Params) => ReturnType<Operation>
-    : never
-    : never;
+    [Method in keyof OperationsByTag<Version>[Tag]]: OperationsByTag<Version>[Tag][Method] extends infer Operation extends
+      (...args: any) => any
+      ? Omit<Parameters<Operation>[0], keyof FetcherExtraProps> extends infer Params
+        ? RequiredKeys<Params> extends never
+          ? (params?: Params) => ReturnType<Operation>
+          : (params: Params) => ReturnType<Operation>
+        : never
+      : never;
   };
 };
 
@@ -70,7 +69,9 @@ export class Dhis2Api<Version extends DHIS2Version> {
     const fetchImpl = this.#fetch;
     const baseUrl = this.#baseUrl;
     const credentials = this.#credentials;
-    const operationsByTag: Record<string, Record<string, unknown>> = this.#version === 'v40' ? v40Operations : v41Operations;
+    const operationsByTag: Record<string, Record<string, unknown>> = this.#version === 'v40'
+      ? v40Operations
+      : v41Operations;
 
     return new Proxy(
       {},

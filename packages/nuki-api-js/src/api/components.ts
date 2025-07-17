@@ -4,9 +4,9 @@
  * @version 3.10.2
  */
 import type * as Fetcher from './fetcher';
-import { fetch, FetcherExtraProps } from './fetcher';
-import type * as Schemas from './schemas';
+import { type FetcherExtraProps, fetch } from './fetcher';
 import type * as RequestBodies from './requestBodies';
+import type * as Schemas from './schemas';
 
 export type GetAccountsResourceError = Fetcher.ErrorWrapper<undefined>;
 
@@ -335,11 +335,11 @@ export type GetAccountUsersResourceQueryParams = {
   /**
    * The offset of the first user in the collection to return
    */
-  offset?: void;
+  offset?: undefined;
   /**
    * The maximum number of users to return. If the value exceeds the maximum, then the maximum value will be used.
    */
-  limit?: void;
+  limit?: undefined;
 };
 
 export type GetAccountUsersResourceError = Fetcher.ErrorWrapper<undefined>;
@@ -417,7 +417,12 @@ export const postAccountUserResource = (variables: PostAccountUserResourceVariab
     {},
     {},
     PostAccountUserResourcePathParams
-  >({ url: '/account/user/{accountUserId}', method: 'post', ...variables, signal });
+  >({
+    url: '/account/user/{accountUserId}',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteAccountUserResourcePathParams = {
   /**
@@ -547,7 +552,12 @@ export const postAddressTokenRedeemResource = (
     {},
     PostAddressTokenRedeemResourceQueryParams,
     PostAddressTokenRedeemResourcePathParams
-  >({ url: '/address/token/{id}/redeem', method: 'post', ...variables, signal });
+  >({
+    url: '/address/token/{id}/redeem',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PostAddressResourcePathParams = {
   /**
@@ -618,7 +628,12 @@ export const getAddressReservationsResource = (
     {},
     {},
     GetAddressReservationsResourcePathParams
-  >({ url: '/address/{addressId}/reservation', method: 'get', ...variables, signal });
+  >({
+    url: '/address/{addressId}/reservation',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAddressReservationIssueResourcePathParams = {
   /**
@@ -648,7 +663,12 @@ export const postAddressReservationIssueResource = (
     {},
     {},
     PostAddressReservationIssueResourcePathParams
-  >({ url: '/address/{addressId}/reservation/{id}/issue', method: 'post', ...variables, signal });
+  >({
+    url: '/address/{addressId}/reservation/{id}/issue',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PostAddressReservationRevokeResourcePathParams = {
   /**
@@ -678,7 +698,12 @@ export const postAddressReservationRevokeResource = (
     {},
     {},
     PostAddressReservationRevokeResourcePathParams
-  >({ url: '/address/{addressId}/reservation/{id}/revoke', method: 'post', ...variables, signal });
+  >({
+    url: '/address/{addressId}/reservation/{id}/revoke',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PostReservationAccessTimesUpdateResourcePathParams = {
   /**
@@ -709,7 +734,12 @@ export const postReservationAccessTimesUpdateResource = (
     {},
     {},
     PostReservationAccessTimesUpdateResourcePathParams
-  >({ url: '/address/{addressId}/reservation/{id}/update/accesstimes', method: 'post', ...variables, signal });
+  >({
+    url: '/address/{addressId}/reservation/{id}/update/accesstimes',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAddressTokensResourcePathParams = {
   /**
@@ -809,7 +839,12 @@ export const deleteAddressUnitsResource = (variables: DeleteAddressUnitsResource
     {},
     {},
     DeleteAddressUnitsResourcePathParams
-  >({ url: '/address/{addressId}/unit', method: 'delete', ...variables, signal });
+  >({
+    url: '/address/{addressId}/unit',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type DeleteAddressUnitResourcePathParams = {
   /**
@@ -836,7 +871,12 @@ export const deleteAddressUnitResource = (variables: DeleteAddressUnitResourceVa
     {},
     {},
     DeleteAddressUnitResourcePathParams
-  >({ url: '/address/{addressId}/unit/{id}', method: 'delete', ...variables, signal });
+  >({
+    url: '/address/{addressId}/unit/{id}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetDecentralWebhooksResourceError = Fetcher.ErrorWrapper<undefined>;
 
@@ -976,7 +1016,12 @@ export type GetApiKeyAdvancedResourceVariables = {
 
 export const getApiKeyAdvancedResource = (variables: GetApiKeyAdvancedResourceVariables, signal?: AbortSignal) =>
   fetch<Schemas.AdvancedApiKey, GetApiKeyAdvancedResourceError, undefined, {}, {}, GetApiKeyAdvancedResourcePathParams>(
-    { url: '/api/key/{apiKeyId}/advanced', method: 'get', ...variables, signal }
+    {
+      url: '/api/key/{apiKeyId}/advanced',
+      method: 'get',
+      ...variables,
+      signal
+    }
   );
 
 export type PostApiKeyAdvancedResourcePathParams = {
@@ -1001,7 +1046,12 @@ export const postApiKeyAdvancedResource = (variables: PostApiKeyAdvancedResource
     {},
     {},
     PostApiKeyAdvancedResourcePathParams
-  >({ url: '/api/key/{apiKeyId}/advanced', method: 'post', ...variables, signal });
+  >({
+    url: '/api/key/{apiKeyId}/advanced',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PutApiKeyAdvancedResourcePathParams = {
   /**
@@ -1025,7 +1075,12 @@ export const putApiKeyAdvancedResource = (variables: PutApiKeyAdvancedResourceVa
     {},
     {},
     PutApiKeyAdvancedResourcePathParams
-  >({ url: '/api/key/{apiKeyId}/advanced', method: 'put', ...variables, signal });
+  >({
+    url: '/api/key/{apiKeyId}/advanced',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteApiKeyAdvancedResourcePathParams = {
   /**
@@ -1072,7 +1127,12 @@ export const postApiKeyAdvancedReactivateResource = (
     {},
     {},
     PostApiKeyAdvancedReactivateResourcePathParams
-  >({ url: '/api/key/{apiKeyId}/advanced/reactivate', method: 'post', ...variables, signal });
+  >({
+    url: '/api/key/{apiKeyId}/advanced/reactivate',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetApiKeyTokensResourcePathParams = {
   /**
@@ -1211,7 +1271,12 @@ export const getWebhookLogsResource = (variables: GetWebhookLogsResourceVariable
     {},
     GetWebhookLogsResourceQueryParams,
     GetWebhookLogsResourcePathParams
-  >({ url: '/api/key/{apiKeyId}/webhook/logs', method: 'get', ...variables, signal });
+  >({
+    url: '/api/key/{apiKeyId}/webhook/logs',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostSmartlockBulkWebConfigResourceError = Fetcher.ErrorWrapper<undefined>;
 
@@ -1326,7 +1391,12 @@ export const postNotificationResource = (variables: PostNotificationResourceVari
     {},
     {},
     PostNotificationResourcePathParams
-  >({ url: '/notification/{notificationId}', method: 'post', ...variables, signal });
+  >({
+    url: '/notification/{notificationId}',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteNotificationResourcePathParams = {
   /**
@@ -1438,7 +1508,12 @@ export const getOpenerIntercomResource = (variables: GetOpenerIntercomResourceVa
     {},
     {},
     GetOpenerIntercomResourcePathParams
-  >({ url: '/opener/intercom/{intercomId}', method: 'get', ...variables, signal });
+  >({
+    url: '/opener/intercom/{intercomId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetServicesResourceQueryParams = {
   /**
@@ -1801,7 +1876,12 @@ export const postSmartlockActionResource = (variables: PostSmartlockActionResour
     {},
     {},
     PostSmartlockActionResourcePathParams
-  >({ url: '/smartlock/{smartlockId}/action', method: 'post', ...variables, signal });
+  >({
+    url: '/smartlock/{smartlockId}/action',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PostSmartlockActionAdvancedResourcePathParams = {
   /**
@@ -1828,7 +1908,12 @@ export const postSmartlockActionAdvancedResource = (
     {},
     {},
     PostSmartlockActionAdvancedResourcePathParams
-  >({ url: '/smartlock/{smartlockId}/action/advanced', method: 'post', ...variables, signal });
+  >({
+    url: '/smartlock/{smartlockId}/action/advanced',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PostSmartlockLockActionResourcePathParams = {
   /**
@@ -1878,7 +1963,12 @@ export const postSmartlockLockActionAdvancedResource = (
     {},
     {},
     PostSmartlockLockActionAdvancedResourcePathParams
-  >({ url: '/smartlock/{smartlockId}/action/lock/advanced', method: 'post', ...variables, signal });
+  >({
+    url: '/smartlock/{smartlockId}/action/lock/advanced',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PostSmartlockUnlockActionResourcePathParams = {
   /**
@@ -1904,7 +1994,12 @@ export const postSmartlockUnlockActionResource = (
     {},
     {},
     PostSmartlockUnlockActionResourcePathParams
-  >({ url: '/smartlock/{smartlockId}/action/unlock', method: 'post', ...variables, signal });
+  >({
+    url: '/smartlock/{smartlockId}/action/unlock',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PostSmartlockUnlockActionAdvancedResourcePathParams = {
   /**
@@ -1930,7 +2025,12 @@ export const postSmartlockUnlockActionAdvancedResource = (
     {},
     {},
     PostSmartlockUnlockActionAdvancedResourcePathParams
-  >({ url: '/smartlock/{smartlockId}/action/unlock/advanced', method: 'post', ...variables, signal });
+  >({
+    url: '/smartlock/{smartlockId}/action/unlock/advanced',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PostSmartlockAdminPinResourcePathParams = {
   /**
@@ -1957,7 +2057,12 @@ export const postSmartlockAdminPinResource = (
     {},
     {},
     PostSmartlockAdminPinResourcePathParams
-  >({ url: '/smartlock/{smartlockId}/admin/pin', method: 'post', ...variables, signal });
+  >({
+    url: '/smartlock/{smartlockId}/admin/pin',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PostSmartlockAdvancedConfigResourcePathParams = {
   /**
@@ -1984,7 +2089,12 @@ export const postSmartlockAdvancedConfigResource = (
     {},
     {},
     PostSmartlockAdvancedConfigResourcePathParams
-  >({ url: '/smartlock/{smartlockId}/advanced/config', method: 'post', ...variables, signal });
+  >({
+    url: '/smartlock/{smartlockId}/advanced/config',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PostSmartlockOpenerAdvancedConfigResourcePathParams = {
   /**
@@ -2011,7 +2121,12 @@ export const postSmartlockOpenerAdvancedConfigResource = (
     {},
     {},
     PostSmartlockOpenerAdvancedConfigResourcePathParams
-  >({ url: '/smartlock/{smartlockId}/advanced/openerconfig', method: 'post', ...variables, signal });
+  >({
+    url: '/smartlock/{smartlockId}/advanced/openerconfig',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PostSmartdoorAdvancedConfigResourcePathParams = {
   /**
@@ -2038,7 +2153,12 @@ export const postSmartdoorAdvancedConfigResource = (
     {},
     {},
     PostSmartdoorAdvancedConfigResourcePathParams
-  >({ url: '/smartlock/{smartlockId}/advanced/smartdoorconfig', method: 'post', ...variables, signal });
+  >({
+    url: '/smartlock/{smartlockId}/advanced/smartdoorconfig',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetSmartlockAuthsResourcePathParams = {
   /**
@@ -2071,7 +2191,12 @@ export const getSmartlockAuthsResource = (variables: GetSmartlockAuthsResourceVa
     {},
     GetSmartlockAuthsResourceQueryParams,
     GetSmartlockAuthsResourcePathParams
-  >({ url: '/smartlock/{smartlockId}/auth', method: 'get', ...variables, signal });
+  >({
+    url: '/smartlock/{smartlockId}/auth',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutSmartlockAuthsResourcePathParams = {
   /**
@@ -2095,7 +2220,12 @@ export const putSmartlockAuthsResource = (variables: PutSmartlockAuthsResourceVa
     {},
     {},
     PutSmartlockAuthsResourcePathParams
-  >({ url: '/smartlock/{smartlockId}/auth', method: 'put', ...variables, signal });
+  >({
+    url: '/smartlock/{smartlockId}/auth',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type PostSmartlockAuthWithSharedKeyResourcePathParams = {
   /**
@@ -2124,7 +2254,12 @@ export const postSmartlockAuthWithSharedKeyResource = (
     {},
     {},
     PostSmartlockAuthWithSharedKeyResourcePathParams
-  >({ url: '/smartlock/{smartlockId}/auth/advanced/sharedkey', method: 'post', ...variables, signal });
+  >({
+    url: '/smartlock/{smartlockId}/auth/advanced/sharedkey',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetSmartlockAuthResourcePathParams = {
   /**
@@ -2177,7 +2312,12 @@ export const postSmartlockAuthResource = (variables: PostSmartlockAuthResourceVa
     {},
     {},
     PostSmartlockAuthResourcePathParams
-  >({ url: '/smartlock/{smartlockId}/auth/{id}', method: 'post', ...variables, signal });
+  >({
+    url: '/smartlock/{smartlockId}/auth/{id}',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteSmartlockAuthResourcePathParams = {
   /**
@@ -2226,7 +2366,12 @@ export const postSmartlockConfigResource = (variables: PostSmartlockConfigResour
     {},
     {},
     PostSmartlockConfigResourcePathParams
-  >({ url: '/smartlock/{smartlockId}/config', method: 'post', ...variables, signal });
+  >({
+    url: '/smartlock/{smartlockId}/config',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetSmartlockLogsResourcePathParams = {
   /**
@@ -2285,7 +2430,12 @@ export const getSmartlockLogsResource = (variables: GetSmartlockLogsResourceVari
     {},
     GetSmartlockLogsResourceQueryParams,
     GetSmartlockLogsResourcePathParams
-  >({ url: '/smartlock/{smartlockId}/log', method: 'get', ...variables, signal });
+  >({
+    url: '/smartlock/{smartlockId}/log',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostSmartlockSyncResourcePathParams = {
   /**
@@ -2333,7 +2483,12 @@ export const postSmartlockWebConfigResource = (
     {},
     {},
     PostSmartlockWebConfigResourcePathParams
-  >({ url: '/smartlock/{smartlockId}/web/config', method: 'post', ...variables, signal });
+  >({
+    url: '/smartlock/{smartlockId}/web/config',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export const operationsByTag = {
   account: {
@@ -2436,7 +2591,12 @@ export const operationsByTag = {
     postNotificationResource,
     deleteNotificationResource
   },
-  opener: { getOpenerBrandsResource, getOpenerBrandResource, getOpenerIntercomsResource, getOpenerIntercomResource },
+  opener: {
+    getOpenerBrandsResource,
+    getOpenerBrandResource,
+    getOpenerIntercomsResource,
+    getOpenerIntercomResource
+  },
   service: {
     getServicesResource,
     getServiceResource,

@@ -1,4 +1,4 @@
-import { FetchImpl } from '../utils/fetch';
+import type { FetchImpl } from '../utils/fetch';
 import { compactObject } from '../utils/lang';
 
 export type FetcherExtraProps = {
@@ -90,7 +90,7 @@ export async function fetch<
       return (await response.text()) as unknown as TData;
     }
   } catch (e) {
-    let errorObject: Error = {
+    const errorObject: Error = {
       name: 'unknown' as const,
       message: e instanceof Error ? `Network error (${e.message})` : 'Network error',
       stack: e as string

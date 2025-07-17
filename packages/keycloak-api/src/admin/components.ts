@@ -4,7 +4,7 @@
  * @version 1.0
  */
 import type * as Fetcher from './fetcher';
-import { fetch, FetcherExtraProps } from './fetcher';
+import { type FetcherExtraProps, fetch } from './fetcher';
 import type * as Schemas from './schemas';
 
 export type GetAdminRealmsQueryParams = {
@@ -176,7 +176,12 @@ export const getAdminRealmsRealmAdminEvents = (
     {},
     GetAdminRealmsRealmAdminEventsQueryParams,
     GetAdminRealmsRealmAdminEventsPathParams
-  >({ url: '/admin/realms/{realm}/admin-events', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/admin-events',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmAdminEventsPathParams = {
   /**
@@ -202,7 +207,12 @@ export const deleteAdminRealmsRealmAdminEvents = (
     {},
     {},
     DeleteAdminRealmsRealmAdminEventsPathParams
-  >({ url: '/admin/realms/{realm}/admin-events', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/admin-events',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmAttackDetectionBruteForceUsersPathParams = {
   /**
@@ -228,7 +238,12 @@ export const deleteAdminRealmsRealmAttackDetectionBruteForceUsers = (
     {},
     {},
     DeleteAdminRealmsRealmAttackDetectionBruteForceUsersPathParams
-  >({ url: '/admin/realms/{realm}/attack-detection/brute-force/users', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/attack-detection/brute-force/users',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmAttackDetectionBruteForceUsersUserIdPathParams = {
   /**
@@ -259,7 +274,12 @@ export const getAdminRealmsRealmAttackDetectionBruteForceUsersUserId = (
     {},
     {},
     GetAdminRealmsRealmAttackDetectionBruteForceUsersUserIdPathParams
-  >({ url: '/admin/realms/{realm}/attack-detection/brute-force/users/{userId}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/attack-detection/brute-force/users/{userId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmAttackDetectionBruteForceUsersUserIdPathParams = {
   /**
@@ -321,7 +341,12 @@ export const getAdminRealmsRealmAuthenticationAuthenticatorProviders = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationAuthenticatorProvidersPathParams
-  >({ url: '/admin/realms/{realm}/authentication/authenticator-providers', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/authenticator-providers',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmAuthenticationClientAuthenticatorProvidersPathParams = {
   /**
@@ -383,7 +408,12 @@ export const postAdminRealmsRealmAuthenticationConfig = (
     {},
     {},
     PostAdminRealmsRealmAuthenticationConfigPathParams
-  >({ url: '/admin/realms/{realm}/authentication/config', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/config',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmAuthenticationConfigDescriptionProviderIdPathParams = {
   /**
@@ -445,7 +475,12 @@ export const getAdminRealmsRealmAuthenticationConfigId = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationConfigIdPathParams
-  >({ url: '/admin/realms/{realm}/authentication/config/{id}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/config/{id}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmAuthenticationConfigIdPathParams = {
   /**
@@ -476,7 +511,12 @@ export const putAdminRealmsRealmAuthenticationConfigId = (
     {},
     {},
     PutAdminRealmsRealmAuthenticationConfigIdPathParams
-  >({ url: '/admin/realms/{realm}/authentication/config/{id}', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/config/{id}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmAuthenticationConfigIdPathParams = {
   /**
@@ -506,7 +546,12 @@ export const deleteAdminRealmsRealmAuthenticationConfigId = (
     {},
     {},
     DeleteAdminRealmsRealmAuthenticationConfigIdPathParams
-  >({ url: '/admin/realms/{realm}/authentication/config/{id}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/config/{id}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmAuthenticationExecutionsPathParams = {
   /**
@@ -533,7 +578,12 @@ export const postAdminRealmsRealmAuthenticationExecutions = (
     {},
     {},
     PostAdminRealmsRealmAuthenticationExecutionsPathParams
-  >({ url: '/admin/realms/{realm}/authentication/executions', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/executions',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmAuthenticationExecutionsExecutionIdPathParams = {
   /**
@@ -560,7 +610,12 @@ export const getAdminRealmsRealmAuthenticationExecutionsExecutionId = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationExecutionsExecutionIdPathParams
-  >({ url: '/admin/realms/{realm}/authentication/executions/{executionId}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/executions/{executionId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmAuthenticationExecutionsExecutionIdPathParams = {
   /**
@@ -590,7 +645,12 @@ export const deleteAdminRealmsRealmAuthenticationExecutionsExecutionId = (
     {},
     {},
     DeleteAdminRealmsRealmAuthenticationExecutionsExecutionIdPathParams
-  >({ url: '/admin/realms/{realm}/authentication/executions/{executionId}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/executions/{executionId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmAuthenticationExecutionsExecutionIdConfigPathParams = {
   /**
@@ -763,7 +823,12 @@ export const getAdminRealmsRealmAuthenticationFlows = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationFlowsPathParams
-  >({ url: '/admin/realms/{realm}/authentication/flows', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/flows',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmAuthenticationFlowsPathParams = {
   /**
@@ -790,7 +855,12 @@ export const postAdminRealmsRealmAuthenticationFlows = (
     {},
     {},
     PostAdminRealmsRealmAuthenticationFlowsPathParams
-  >({ url: '/admin/realms/{realm}/authentication/flows', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/flows',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasCopyPathParams = {
   /**
@@ -825,7 +895,12 @@ export const postAdminRealmsRealmAuthenticationFlowsFlowAliasCopy = (
     {},
     {},
     PostAdminRealmsRealmAuthenticationFlowsFlowAliasCopyPathParams
-  >({ url: '/admin/realms/{realm}/authentication/flows/{flowAlias}/copy', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/flows/{flowAlias}/copy',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsPathParams = {
   /**
@@ -858,7 +933,12 @@ export const getAdminRealmsRealmAuthenticationFlowsFlowAliasExecutions = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsPathParams
-  >({ url: '/admin/realms/{realm}/authentication/flows/{flowAlias}/executions', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/flows/{flowAlias}/executions',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsPathParams = {
   /**
@@ -889,7 +969,12 @@ export const putAdminRealmsRealmAuthenticationFlowsFlowAliasExecutions = (
     {},
     {},
     PutAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsPathParams
-  >({ url: '/admin/realms/{realm}/authentication/flows/{flowAlias}/executions', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/flows/{flowAlias}/executions',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmAuthenticationFlowsFlowAliasExecutionsExecutionPathParams = {
   /**
@@ -999,7 +1084,12 @@ export const getAdminRealmsRealmAuthenticationFlowsId = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationFlowsIdPathParams
-  >({ url: '/admin/realms/{realm}/authentication/flows/{id}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/flows/{id}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmAuthenticationFlowsIdPathParams = {
   /**
@@ -1027,7 +1117,12 @@ export const putAdminRealmsRealmAuthenticationFlowsId = (
     {},
     {},
     PutAdminRealmsRealmAuthenticationFlowsIdPathParams
-  >({ url: '/admin/realms/{realm}/authentication/flows/{id}', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/flows/{id}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmAuthenticationFlowsIdPathParams = {
   /**
@@ -1057,7 +1152,12 @@ export const deleteAdminRealmsRealmAuthenticationFlowsId = (
     {},
     {},
     DeleteAdminRealmsRealmAuthenticationFlowsIdPathParams
-  >({ url: '/admin/realms/{realm}/authentication/flows/{id}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/flows/{id}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmAuthenticationFormActionProvidersPathParams = {
   /**
@@ -1087,7 +1187,12 @@ export const getAdminRealmsRealmAuthenticationFormActionProviders = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationFormActionProvidersPathParams
-  >({ url: '/admin/realms/{realm}/authentication/form-action-providers', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/form-action-providers',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmAuthenticationFormProvidersPathParams = {
   /**
@@ -1117,7 +1222,12 @@ export const getAdminRealmsRealmAuthenticationFormProviders = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationFormProvidersPathParams
-  >({ url: '/admin/realms/{realm}/authentication/form-providers', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/form-providers',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmAuthenticationPerClientConfigDescriptionPathParams = {
   /**
@@ -1147,7 +1257,12 @@ export const getAdminRealmsRealmAuthenticationPerClientConfigDescription = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationPerClientConfigDescriptionPathParams
-  >({ url: '/admin/realms/{realm}/authentication/per-client-config-description', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/per-client-config-description',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmAuthenticationRegisterRequiredActionPathParams = {
   /**
@@ -1178,7 +1293,12 @@ export const postAdminRealmsRealmAuthenticationRegisterRequiredAction = (
     {},
     {},
     PostAdminRealmsRealmAuthenticationRegisterRequiredActionPathParams
-  >({ url: '/admin/realms/{realm}/authentication/register-required-action', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/register-required-action',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmAuthenticationRequiredActionsPathParams = {
   /**
@@ -1206,7 +1326,12 @@ export const getAdminRealmsRealmAuthenticationRequiredActions = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationRequiredActionsPathParams
-  >({ url: '/admin/realms/{realm}/authentication/required-actions', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/required-actions',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmAuthenticationRequiredActionsAliasPathParams = {
   /**
@@ -1236,7 +1361,12 @@ export const getAdminRealmsRealmAuthenticationRequiredActionsAlias = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationRequiredActionsAliasPathParams
-  >({ url: '/admin/realms/{realm}/authentication/required-actions/{alias}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/required-actions/{alias}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmAuthenticationRequiredActionsAliasPathParams = {
   /**
@@ -1267,7 +1397,12 @@ export const putAdminRealmsRealmAuthenticationRequiredActionsAlias = (
     {},
     {},
     PutAdminRealmsRealmAuthenticationRequiredActionsAliasPathParams
-  >({ url: '/admin/realms/{realm}/authentication/required-actions/{alias}', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/required-actions/{alias}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasPathParams = {
   /**
@@ -1297,7 +1432,12 @@ export const deleteAdminRealmsRealmAuthenticationRequiredActionsAlias = (
     {},
     {},
     DeleteAdminRealmsRealmAuthenticationRequiredActionsAliasPathParams
-  >({ url: '/admin/realms/{realm}/authentication/required-actions/{alias}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/required-actions/{alias}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmAuthenticationRequiredActionsAliasConfigPathParams = {
   /**
@@ -1539,7 +1679,12 @@ export const getAdminRealmsRealmAuthenticationUnregisteredRequiredActions = (
     {},
     {},
     GetAdminRealmsRealmAuthenticationUnregisteredRequiredActionsPathParams
-  >({ url: '/admin/realms/{realm}/authentication/unregistered-required-actions', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/authentication/unregistered-required-actions',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmClientDescriptionConverterPathParams = {
   /**
@@ -1566,7 +1711,12 @@ export const postAdminRealmsRealmClientDescriptionConverter = (
     {},
     {},
     PostAdminRealmsRealmClientDescriptionConverterPathParams
-  >({ url: '/admin/realms/{realm}/client-description-converter', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/client-description-converter',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientPoliciesPoliciesPathParams = {
   /**
@@ -1576,7 +1726,7 @@ export type GetAdminRealmsRealmClientPoliciesPoliciesPathParams = {
 };
 
 export type GetAdminRealmsRealmClientPoliciesPoliciesQueryParams = {
-  ['include-global-policies']?: boolean;
+  'include-global-policies'?: boolean;
 };
 
 export type GetAdminRealmsRealmClientPoliciesPoliciesError = Fetcher.ErrorWrapper<undefined>;
@@ -1597,7 +1747,12 @@ export const getAdminRealmsRealmClientPoliciesPolicies = (
     {},
     GetAdminRealmsRealmClientPoliciesPoliciesQueryParams,
     GetAdminRealmsRealmClientPoliciesPoliciesPathParams
-  >({ url: '/admin/realms/{realm}/client-policies/policies', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/client-policies/policies',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmClientPoliciesPoliciesPathParams = {
   /**
@@ -1624,7 +1779,12 @@ export const putAdminRealmsRealmClientPoliciesPolicies = (
     {},
     {},
     PutAdminRealmsRealmClientPoliciesPoliciesPathParams
-  >({ url: '/admin/realms/{realm}/client-policies/policies', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/client-policies/policies',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientPoliciesProfilesPathParams = {
   /**
@@ -1634,7 +1794,7 @@ export type GetAdminRealmsRealmClientPoliciesProfilesPathParams = {
 };
 
 export type GetAdminRealmsRealmClientPoliciesProfilesQueryParams = {
-  ['include-global-profiles']?: boolean;
+  'include-global-profiles'?: boolean;
 };
 
 export type GetAdminRealmsRealmClientPoliciesProfilesError = Fetcher.ErrorWrapper<undefined>;
@@ -1655,7 +1815,12 @@ export const getAdminRealmsRealmClientPoliciesProfiles = (
     {},
     GetAdminRealmsRealmClientPoliciesProfilesQueryParams,
     GetAdminRealmsRealmClientPoliciesProfilesPathParams
-  >({ url: '/admin/realms/{realm}/client-policies/profiles', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/client-policies/profiles',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmClientPoliciesProfilesPathParams = {
   /**
@@ -1682,7 +1847,12 @@ export const putAdminRealmsRealmClientPoliciesProfiles = (
     {},
     {},
     PutAdminRealmsRealmClientPoliciesProfilesPathParams
-  >({ url: '/admin/realms/{realm}/client-policies/profiles', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/client-policies/profiles',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientRegistrationPolicyProvidersPathParams = {
   /**
@@ -1710,7 +1880,12 @@ export const getAdminRealmsRealmClientRegistrationPolicyProviders = (
     {},
     {},
     GetAdminRealmsRealmClientRegistrationPolicyProvidersPathParams
-  >({ url: '/admin/realms/{realm}/client-registration-policy/providers', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/client-registration-policy/providers',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientScopesPathParams = {
   /**
@@ -1738,7 +1913,12 @@ export const getAdminRealmsRealmClientScopes = (
     {},
     {},
     GetAdminRealmsRealmClientScopesPathParams
-  >({ url: '/admin/realms/{realm}/client-scopes', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/client-scopes',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmClientScopesPathParams = {
   /**
@@ -1765,7 +1945,12 @@ export const postAdminRealmsRealmClientScopes = (
     {},
     {},
     PostAdminRealmsRealmClientScopesPathParams
-  >({ url: '/admin/realms/{realm}/client-scopes', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/client-scopes',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientScopesClientScopeIdPathParams = {
   /**
@@ -1792,7 +1977,12 @@ export const getAdminRealmsRealmClientScopesClientScopeId = (
     {},
     {},
     GetAdminRealmsRealmClientScopesClientScopeIdPathParams
-  >({ url: '/admin/realms/{realm}/client-scopes/{clientScopeId}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmClientScopesClientScopeIdPathParams = {
   /**
@@ -1820,7 +2010,12 @@ export const putAdminRealmsRealmClientScopesClientScopeId = (
     {},
     {},
     PutAdminRealmsRealmClientScopesClientScopeIdPathParams
-  >({ url: '/admin/realms/{realm}/client-scopes/{clientScopeId}', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmClientScopesClientScopeIdPathParams = {
   /**
@@ -1847,7 +2042,12 @@ export const deleteAdminRealmsRealmClientScopesClientScopeId = (
     {},
     {},
     DeleteAdminRealmsRealmClientScopesClientScopeIdPathParams
-  >({ url: '/admin/realms/{realm}/client-scopes/{clientScopeId}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmClientScopesClientScopeIdProtocolMappersAddModelsPathParams = {
   /**
@@ -2126,7 +2326,12 @@ export const getAdminRealmsRealmClientScopesClientScopeIdScopeMappings = (
     {},
     {},
     GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsPathParams
-  >({ url: '/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/client-scopes/{clientScopeId}/scope-mappings',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientScopesClientScopeIdScopeMappingsClientsClientPathParams = {
   /**
@@ -2545,7 +2750,12 @@ export const getAdminRealmsRealmClientSessionStats = (
     {},
     {},
     GetAdminRealmsRealmClientSessionStatsPathParams
-  >({ url: '/admin/realms/{realm}/client-session-stats', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/client-session-stats',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientTemplatesPathParams = {
   /**
@@ -2573,7 +2783,12 @@ export const getAdminRealmsRealmClientTemplates = (
     {},
     {},
     GetAdminRealmsRealmClientTemplatesPathParams
-  >({ url: '/admin/realms/{realm}/client-templates', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/client-templates',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmClientTemplatesPathParams = {
   /**
@@ -2600,7 +2815,12 @@ export const postAdminRealmsRealmClientTemplates = (
     {},
     {},
     PostAdminRealmsRealmClientTemplatesPathParams
-  >({ url: '/admin/realms/{realm}/client-templates', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/client-templates',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientTemplatesClientScopeIdPathParams = {
   /**
@@ -2627,7 +2847,12 @@ export const getAdminRealmsRealmClientTemplatesClientScopeId = (
     {},
     {},
     GetAdminRealmsRealmClientTemplatesClientScopeIdPathParams
-  >({ url: '/admin/realms/{realm}/client-templates/{clientScopeId}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/client-templates/{clientScopeId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmClientTemplatesClientScopeIdPathParams = {
   /**
@@ -2655,7 +2880,12 @@ export const putAdminRealmsRealmClientTemplatesClientScopeId = (
     {},
     {},
     PutAdminRealmsRealmClientTemplatesClientScopeIdPathParams
-  >({ url: '/admin/realms/{realm}/client-templates/{clientScopeId}', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/client-templates/{clientScopeId}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmClientTemplatesClientScopeIdPathParams = {
   /**
@@ -2682,7 +2912,12 @@ export const deleteAdminRealmsRealmClientTemplatesClientScopeId = (
     {},
     {},
     DeleteAdminRealmsRealmClientTemplatesClientScopeIdPathParams
-  >({ url: '/admin/realms/{realm}/client-templates/{clientScopeId}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/client-templates/{clientScopeId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmClientTemplatesClientScopeIdProtocolMappersAddModelsPathParams = {
   /**
@@ -3386,7 +3621,12 @@ export const getAdminRealmsRealmClientTypes = (
     {},
     {},
     GetAdminRealmsRealmClientTypesPathParams
-  >({ url: '/admin/realms/{realm}/client-types', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/client-types',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmClientTypesPathParams = {
   /**
@@ -3416,7 +3656,12 @@ export const putAdminRealmsRealmClientTypes = (
     {},
     {},
     PutAdminRealmsRealmClientTypesPathParams
-  >({ url: '/admin/realms/{realm}/client-types', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/client-types',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientsPathParams = {
   /**
@@ -3477,7 +3722,12 @@ export const getAdminRealmsRealmClients = (variables: GetAdminRealmsRealmClients
     {},
     GetAdminRealmsRealmClientsQueryParams,
     GetAdminRealmsRealmClientsPathParams
-  >({ url: '/admin/realms/{realm}/clients', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmClientsPathParams = {
   /**
@@ -3501,7 +3751,12 @@ export const postAdminRealmsRealmClients = (variables: PostAdminRealmsRealmClien
     {},
     {},
     PostAdminRealmsRealmClientsPathParams
-  >({ url: '/admin/realms/{realm}/clients', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientsInitialAccessPathParams = {
   /**
@@ -3529,7 +3784,12 @@ export const getAdminRealmsRealmClientsInitialAccess = (
     {},
     {},
     GetAdminRealmsRealmClientsInitialAccessPathParams
-  >({ url: '/admin/realms/{realm}/clients-initial-access', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients-initial-access',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmClientsInitialAccessPathParams = {
   /**
@@ -3556,7 +3816,12 @@ export const postAdminRealmsRealmClientsInitialAccess = (
     {},
     {},
     PostAdminRealmsRealmClientsInitialAccessPathParams
-  >({ url: '/admin/realms/{realm}/clients-initial-access', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients-initial-access',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmClientsInitialAccessIdPathParams = {
   /**
@@ -3583,7 +3848,12 @@ export const deleteAdminRealmsRealmClientsInitialAccessId = (
     {},
     {},
     DeleteAdminRealmsRealmClientsInitialAccessIdPathParams
-  >({ url: '/admin/realms/{realm}/clients-initial-access/{id}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients-initial-access/{id}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidPathParams = {
   /**
@@ -3613,7 +3883,12 @@ export const getAdminRealmsRealmClientsClientUuid = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmClientsClientUuidPathParams = {
   /**
@@ -3644,7 +3919,12 @@ export const putAdminRealmsRealmClientsClientUuid = (
     {},
     {},
     PutAdminRealmsRealmClientsClientUuidPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmClientsClientUuidPathParams = {
   /**
@@ -3674,7 +3954,12 @@ export const deleteAdminRealmsRealmClientsClientUuid = (
     {},
     {},
     DeleteAdminRealmsRealmClientsClientUuidPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPathParams = {
   /**
@@ -3704,7 +3989,12 @@ export const getAdminRealmsRealmClientsClientUuidAuthzResourceServer = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidAuthzResourceServerPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmClientsClientUuidAuthzResourceServerPathParams = {
   /**
@@ -3735,7 +4025,12 @@ export const putAdminRealmsRealmClientsClientUuidAuthzResourceServer = (
     {},
     {},
     PutAdminRealmsRealmClientsClientUuidAuthzResourceServerPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/authz/resource-server',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmClientsClientUuidAuthzResourceServerImportPathParams = {
   /**
@@ -5108,7 +5403,12 @@ export const getAdminRealmsRealmClientsClientUuidCertificatesAttr = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidCertificatesAttrPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/certificates/{attr}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/certificates/{attr}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmClientsClientUuidCertificatesAttrDownloadPathParams = {
   /**
@@ -5322,7 +5622,12 @@ export const getAdminRealmsRealmClientsClientUuidClientSecret = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidClientSecretPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/client-secret', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/client-secret',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmClientsClientUuidClientSecretPathParams = {
   /**
@@ -5352,7 +5657,12 @@ export const postAdminRealmsRealmClientsClientUuidClientSecret = (
     {},
     {},
     PostAdminRealmsRealmClientsClientUuidClientSecretPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/client-secret', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/client-secret',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidClientSecretRotatedPathParams = {
   /**
@@ -5382,7 +5692,12 @@ export const getAdminRealmsRealmClientsClientUuidClientSecretRotated = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidClientSecretRotatedPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/client-secret/rotated', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/client-secret/rotated',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmClientsClientUuidClientSecretRotatedPathParams = {
   /**
@@ -5449,7 +5764,12 @@ export const getAdminRealmsRealmClientsClientUuidDefaultClientScopes = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidDefaultClientScopesPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/default-client-scopes', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/default-client-scopes',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmClientsClientUuidDefaultClientScopesClientScopeIdPathParams = {
   /**
@@ -5864,7 +6184,12 @@ export const getAdminRealmsRealmClientsClientUuidManagementPermissions = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidManagementPermissionsPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/management/permissions', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/management/permissions',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmClientsClientUuidManagementPermissionsPathParams = {
   /**
@@ -5895,7 +6220,12 @@ export const putAdminRealmsRealmClientsClientUuidManagementPermissions = (
     {},
     {},
     PutAdminRealmsRealmClientsClientUuidManagementPermissionsPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/management/permissions', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/management/permissions',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmClientsClientUuidNodesPathParams = {
   /**
@@ -5930,7 +6260,12 @@ export const postAdminRealmsRealmClientsClientUuidNodes = (
     {},
     {},
     PostAdminRealmsRealmClientsClientUuidNodesPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/nodes', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/nodes',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmClientsClientUuidNodesNodePathParams = {
   /**
@@ -5961,7 +6296,12 @@ export const deleteAdminRealmsRealmClientsClientUuidNodesNode = (
     {},
     {},
     DeleteAdminRealmsRealmClientsClientUuidNodesNodePathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/nodes/{node}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/nodes/{node}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidOfflineSessionCountPathParams = {
   /**
@@ -5995,7 +6335,12 @@ export const getAdminRealmsRealmClientsClientUuidOfflineSessionCount = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidOfflineSessionCountPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/offline-session-count', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/offline-session-count',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidOfflineSessionsPathParams = {
   /**
@@ -6043,7 +6388,12 @@ export const getAdminRealmsRealmClientsClientUuidOfflineSessions = (
     {},
     GetAdminRealmsRealmClientsClientUuidOfflineSessionsQueryParams,
     GetAdminRealmsRealmClientsClientUuidOfflineSessionsPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/offline-sessions', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/offline-sessions',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidOptionalClientScopesPathParams = {
   /**
@@ -6075,7 +6425,12 @@ export const getAdminRealmsRealmClientsClientUuidOptionalClientScopes = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidOptionalClientScopesPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/optional-client-scopes', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/optional-client-scopes',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmClientsClientUuidOptionalClientScopesClientScopeIdPathParams = {
   /**
@@ -6220,7 +6575,12 @@ export const getAdminRealmsRealmClientsClientUuidProtocolMappersModels = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidProtocolMappersModelsPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/protocol-mappers/models', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/protocol-mappers/models',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmClientsClientUuidProtocolMappersModelsPathParams = {
   /**
@@ -6443,7 +6803,12 @@ export const postAdminRealmsRealmClientsClientUuidPushRevocation = (
     {},
     {},
     PostAdminRealmsRealmClientsClientUuidPushRevocationPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/push-revocation', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/push-revocation',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmClientsClientUuidRegistrationAccessTokenPathParams = {
   /**
@@ -6530,7 +6895,12 @@ export const getAdminRealmsRealmClientsClientUuidRoles = (
     {},
     GetAdminRealmsRealmClientsClientUuidRolesQueryParams,
     GetAdminRealmsRealmClientsClientUuidRolesPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/roles', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/roles',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmClientsClientUuidRolesPathParams = {
   /**
@@ -6561,7 +6931,12 @@ export const postAdminRealmsRealmClientsClientUuidRoles = (
     {},
     {},
     PostAdminRealmsRealmClientsClientUuidRolesPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/roles', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/roles',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidRolesRoleNamePathParams = {
   /**
@@ -6595,7 +6970,12 @@ export const getAdminRealmsRealmClientsClientUuidRolesRoleName = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidRolesRoleNamePathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmClientsClientUuidRolesRoleNamePathParams = {
   /**
@@ -6630,7 +7010,12 @@ export const putAdminRealmsRealmClientsClientUuidRolesRoleName = (
     {},
     {},
     PutAdminRealmsRealmClientsClientUuidRolesRoleNamePathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmClientsClientUuidRolesRoleNamePathParams = {
   /**
@@ -6664,7 +7049,12 @@ export const deleteAdminRealmsRealmClientsClientUuidRolesRoleName = (
     {},
     {},
     DeleteAdminRealmsRealmClientsClientUuidRolesRoleNamePathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameCompositesPathParams = {
   /**
@@ -6928,7 +7318,12 @@ export const getAdminRealmsRealmClientsClientUuidRolesRoleNameGroups = (
     {},
     GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsQueryParams,
     GetAdminRealmsRealmClientsClientUuidRolesRoleNameGroupsPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/groups', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/groups',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidRolesRoleNameManagementPermissionsPathParams = {
   /**
@@ -7059,7 +7454,12 @@ export const getAdminRealmsRealmClientsClientUuidRolesRoleNameUsers = (
     {},
     GetAdminRealmsRealmClientsClientUuidRolesRoleNameUsersQueryParams,
     GetAdminRealmsRealmClientsClientUuidRolesRoleNameUsersPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/users', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/roles/{roleName}/users',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidScopeMappingsPathParams = {
   /**
@@ -7089,7 +7489,12 @@ export const getAdminRealmsRealmClientsClientUuidScopeMappings = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidScopeMappingsPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/scope-mappings', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/scope-mappings',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidScopeMappingsClientsClientPathParams = {
   /**
@@ -7327,7 +7732,12 @@ export const getAdminRealmsRealmClientsClientUuidScopeMappingsRealm = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/realm', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/realm',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmClientsClientUuidScopeMappingsRealmPathParams = {
   /**
@@ -7360,7 +7770,12 @@ export const postAdminRealmsRealmClientsClientUuidScopeMappingsRealm = (
     {},
     {},
     PostAdminRealmsRealmClientsClientUuidScopeMappingsRealmPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/realm', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/realm',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmClientsClientUuidScopeMappingsRealmPathParams = {
   /**
@@ -7393,7 +7808,12 @@ export const deleteAdminRealmsRealmClientsClientUuidScopeMappingsRealm = (
     {},
     {},
     DeleteAdminRealmsRealmClientsClientUuidScopeMappingsRealmPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/realm', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/scope-mappings/realm',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidScopeMappingsRealmAvailablePathParams = {
   /**
@@ -7510,7 +7930,12 @@ export const getAdminRealmsRealmClientsClientUuidServiceAccountUser = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidServiceAccountUserPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/service-account-user', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/service-account-user',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidSessionCountPathParams = {
   /**
@@ -7544,7 +7969,12 @@ export const getAdminRealmsRealmClientsClientUuidSessionCount = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidSessionCountPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/session-count', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/session-count',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidTestNodesAvailablePathParams = {
   /**
@@ -7574,7 +8004,12 @@ export const getAdminRealmsRealmClientsClientUuidTestNodesAvailable = (
     {},
     {},
     GetAdminRealmsRealmClientsClientUuidTestNodesAvailablePathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/test-nodes-available', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/test-nodes-available',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmClientsClientUuidUserSessionsPathParams = {
   /**
@@ -7622,7 +8057,12 @@ export const getAdminRealmsRealmClientsClientUuidUserSessions = (
     {},
     GetAdminRealmsRealmClientsClientUuidUserSessionsQueryParams,
     GetAdminRealmsRealmClientsClientUuidUserSessionsPathParams
-  >({ url: '/admin/realms/{realm}/clients/{clientUuid}/user-sessions', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/clients/{clientUuid}/user-sessions',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmComponentsPathParams = {
   /**
@@ -7657,7 +8097,12 @@ export const getAdminRealmsRealmComponents = (
     {},
     GetAdminRealmsRealmComponentsQueryParams,
     GetAdminRealmsRealmComponentsPathParams
-  >({ url: '/admin/realms/{realm}/components', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/components',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmComponentsPathParams = {
   /**
@@ -7684,7 +8129,12 @@ export const postAdminRealmsRealmComponents = (
     {},
     {},
     PostAdminRealmsRealmComponentsPathParams
-  >({ url: '/admin/realms/{realm}/components', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/components',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmComponentsIdPathParams = {
   /**
@@ -7711,7 +8161,12 @@ export const getAdminRealmsRealmComponentsId = (
     {},
     {},
     GetAdminRealmsRealmComponentsIdPathParams
-  >({ url: '/admin/realms/{realm}/components/{id}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/components/{id}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmComponentsIdPathParams = {
   /**
@@ -7739,7 +8194,12 @@ export const putAdminRealmsRealmComponentsId = (
     {},
     {},
     PutAdminRealmsRealmComponentsIdPathParams
-  >({ url: '/admin/realms/{realm}/components/{id}', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/components/{id}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmComponentsIdPathParams = {
   /**
@@ -7766,7 +8226,12 @@ export const deleteAdminRealmsRealmComponentsId = (
     {},
     {},
     DeleteAdminRealmsRealmComponentsIdPathParams
-  >({ url: '/admin/realms/{realm}/components/{id}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/components/{id}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmComponentsIdSubComponentTypesPathParams = {
   /**
@@ -7800,7 +8265,12 @@ export const getAdminRealmsRealmComponentsIdSubComponentTypes = (
     {},
     GetAdminRealmsRealmComponentsIdSubComponentTypesQueryParams,
     GetAdminRealmsRealmComponentsIdSubComponentTypesPathParams
-  >({ url: '/admin/realms/{realm}/components/{id}/sub-component-types', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/components/{id}/sub-component-types',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmCredentialRegistratorsPathParams = {
   /**
@@ -7828,7 +8298,12 @@ export const getAdminRealmsRealmCredentialRegistrators = (
     {},
     {},
     GetAdminRealmsRealmCredentialRegistratorsPathParams
-  >({ url: '/admin/realms/{realm}/credential-registrators', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/credential-registrators',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmDefaultDefaultClientScopesPathParams = {
   /**
@@ -7856,7 +8331,12 @@ export const getAdminRealmsRealmDefaultDefaultClientScopes = (
     {},
     {},
     GetAdminRealmsRealmDefaultDefaultClientScopesPathParams
-  >({ url: '/admin/realms/{realm}/default-default-client-scopes', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/default-default-client-scopes',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmDefaultDefaultClientScopesClientScopeIdPathParams = {
   /**
@@ -7948,7 +8428,12 @@ export const getAdminRealmsRealmDefaultGroups = (
     {},
     {},
     GetAdminRealmsRealmDefaultGroupsPathParams
-  >({ url: '/admin/realms/{realm}/default-groups', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/default-groups',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmDefaultGroupsGroupIdPathParams = {
   /**
@@ -7975,7 +8460,12 @@ export const putAdminRealmsRealmDefaultGroupsGroupId = (
     {},
     {},
     PutAdminRealmsRealmDefaultGroupsGroupIdPathParams
-  >({ url: '/admin/realms/{realm}/default-groups/{groupId}', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/default-groups/{groupId}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmDefaultGroupsGroupIdPathParams = {
   /**
@@ -8002,7 +8492,12 @@ export const deleteAdminRealmsRealmDefaultGroupsGroupId = (
     {},
     {},
     DeleteAdminRealmsRealmDefaultGroupsGroupIdPathParams
-  >({ url: '/admin/realms/{realm}/default-groups/{groupId}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/default-groups/{groupId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmDefaultOptionalClientScopesPathParams = {
   /**
@@ -8030,7 +8525,12 @@ export const getAdminRealmsRealmDefaultOptionalClientScopes = (
     {},
     {},
     GetAdminRealmsRealmDefaultOptionalClientScopesPathParams
-  >({ url: '/admin/realms/{realm}/default-optional-client-scopes', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/default-optional-client-scopes',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmDefaultOptionalClientScopesClientScopeIdPathParams = {
   /**
@@ -8163,7 +8663,12 @@ export const getAdminRealmsRealmEvents = (variables: GetAdminRealmsRealmEventsVa
     {},
     GetAdminRealmsRealmEventsQueryParams,
     GetAdminRealmsRealmEventsPathParams
-  >({ url: '/admin/realms/{realm}/events', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/events',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmEventsPathParams = {
   /**
@@ -8210,7 +8715,12 @@ export const getAdminRealmsRealmEventsConfig = (
     {},
     {},
     GetAdminRealmsRealmEventsConfigPathParams
-  >({ url: '/admin/realms/{realm}/events/config', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/events/config',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmEventsConfigPathParams = {
   /**
@@ -8240,7 +8750,12 @@ export const putAdminRealmsRealmEventsConfig = (
     {},
     {},
     PutAdminRealmsRealmEventsConfigPathParams
-  >({ url: '/admin/realms/{realm}/events/config', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/events/config',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmGroupByPathPathPathParams = {
   /**
@@ -8270,7 +8785,12 @@ export const getAdminRealmsRealmGroupByPathPath = (
     {},
     {},
     GetAdminRealmsRealmGroupByPathPathPathParams
-  >({ url: '/admin/realms/{realm}/group-by-path/{path}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/group-by-path/{path}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmGroupsPathParams = {
   /**
@@ -8327,7 +8847,12 @@ export const getAdminRealmsRealmGroups = (variables: GetAdminRealmsRealmGroupsVa
     {},
     GetAdminRealmsRealmGroupsQueryParams,
     GetAdminRealmsRealmGroupsPathParams
-  >({ url: '/admin/realms/{realm}/groups', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/groups',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmGroupsPathParams = {
   /**
@@ -8354,7 +8879,12 @@ export const postAdminRealmsRealmGroups = (variables: PostAdminRealmsRealmGroups
     {},
     {},
     PostAdminRealmsRealmGroupsPathParams
-  >({ url: '/admin/realms/{realm}/groups', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/groups',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmGroupsCountPathParams = {
   /**
@@ -8393,7 +8923,12 @@ export const getAdminRealmsRealmGroupsCount = (
     {},
     GetAdminRealmsRealmGroupsCountQueryParams,
     GetAdminRealmsRealmGroupsCountPathParams
-  >({ url: '/admin/realms/{realm}/groups/count', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/groups/count',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmGroupsGroupIdPathParams = {
   /**
@@ -8420,7 +8955,12 @@ export const getAdminRealmsRealmGroupsGroupId = (
     {},
     {},
     GetAdminRealmsRealmGroupsGroupIdPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/groups/{groupId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmGroupsGroupIdPathParams = {
   /**
@@ -8448,7 +8988,12 @@ export const putAdminRealmsRealmGroupsGroupId = (
     {},
     {},
     PutAdminRealmsRealmGroupsGroupIdPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/groups/{groupId}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmGroupsGroupIdPathParams = {
   /**
@@ -8475,7 +9020,12 @@ export const deleteAdminRealmsRealmGroupsGroupId = (
     {},
     {},
     DeleteAdminRealmsRealmGroupsGroupIdPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/groups/{groupId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmGroupsGroupIdChildrenPathParams = {
   /**
@@ -8542,7 +9092,12 @@ export const getAdminRealmsRealmGroupsGroupIdChildren = (
     {},
     GetAdminRealmsRealmGroupsGroupIdChildrenQueryParams,
     GetAdminRealmsRealmGroupsGroupIdChildrenPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}/children', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/groups/{groupId}/children',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmGroupsGroupIdChildrenPathParams = {
   /**
@@ -8573,7 +9128,12 @@ export const postAdminRealmsRealmGroupsGroupIdChildren = (
     {},
     {},
     PostAdminRealmsRealmGroupsGroupIdChildrenPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}/children', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/groups/{groupId}/children',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmGroupsGroupIdManagementPermissionsPathParams = {
   /**
@@ -8600,7 +9160,12 @@ export const getAdminRealmsRealmGroupsGroupIdManagementPermissions = (
     {},
     {},
     GetAdminRealmsRealmGroupsGroupIdManagementPermissionsPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}/management/permissions', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/groups/{groupId}/management/permissions',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmGroupsGroupIdManagementPermissionsPathParams = {
   /**
@@ -8628,7 +9193,12 @@ export const putAdminRealmsRealmGroupsGroupIdManagementPermissions = (
     {},
     {},
     PutAdminRealmsRealmGroupsGroupIdManagementPermissionsPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}/management/permissions', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/groups/{groupId}/management/permissions',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmGroupsGroupIdMembersPathParams = {
   /**
@@ -8677,7 +9247,12 @@ export const getAdminRealmsRealmGroupsGroupIdMembers = (
     {},
     GetAdminRealmsRealmGroupsGroupIdMembersQueryParams,
     GetAdminRealmsRealmGroupsGroupIdMembersPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}/members', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/groups/{groupId}/members',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsPathParams = {
   /**
@@ -8704,7 +9279,12 @@ export const getAdminRealmsRealmGroupsGroupIdRoleMappings = (
     {},
     {},
     GetAdminRealmsRealmGroupsGroupIdRoleMappingsPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}/role-mappings', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/groups/{groupId}/role-mappings',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsClientsClientIdPathParams = {
   /**
@@ -8935,7 +9515,12 @@ export const getAdminRealmsRealmGroupsGroupIdRoleMappingsRealm = (
     {},
     {},
     GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}/role-mappings/realm', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/groups/{groupId}/role-mappings/realm',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmGroupsGroupIdRoleMappingsRealmPathParams = {
   /**
@@ -8965,7 +9550,12 @@ export const postAdminRealmsRealmGroupsGroupIdRoleMappingsRealm = (
     {},
     {},
     PostAdminRealmsRealmGroupsGroupIdRoleMappingsRealmPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}/role-mappings/realm', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/groups/{groupId}/role-mappings/realm',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsRealmPathParams = {
   /**
@@ -8995,7 +9585,12 @@ export const deleteAdminRealmsRealmGroupsGroupIdRoleMappingsRealm = (
     {},
     {},
     DeleteAdminRealmsRealmGroupsGroupIdRoleMappingsRealmPathParams
-  >({ url: '/admin/realms/{realm}/groups/{groupId}/role-mappings/realm', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/groups/{groupId}/role-mappings/realm',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmGroupsGroupIdRoleMappingsRealmAvailablePathParams = {
   /**
@@ -9111,7 +9706,12 @@ export const postAdminRealmsRealmIdentityProviderImportConfig = (
     {},
     {},
     PostAdminRealmsRealmIdentityProviderImportConfigPathParams
-  >({ url: '/admin/realms/{realm}/identity-provider/import-config', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/identity-provider/import-config',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmIdentityProviderInstancesPathParams = {
   /**
@@ -9167,7 +9767,12 @@ export const getAdminRealmsRealmIdentityProviderInstances = (
     {},
     GetAdminRealmsRealmIdentityProviderInstancesQueryParams,
     GetAdminRealmsRealmIdentityProviderInstancesPathParams
-  >({ url: '/admin/realms/{realm}/identity-provider/instances', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/identity-provider/instances',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmIdentityProviderInstancesPathParams = {
   /**
@@ -9194,7 +9799,12 @@ export const postAdminRealmsRealmIdentityProviderInstances = (
     {},
     {},
     PostAdminRealmsRealmIdentityProviderInstancesPathParams
-  >({ url: '/admin/realms/{realm}/identity-provider/instances', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/identity-provider/instances',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmIdentityProviderInstancesAliasPathParams = {
   /**
@@ -9221,7 +9831,12 @@ export const getAdminRealmsRealmIdentityProviderInstancesAlias = (
     {},
     {},
     GetAdminRealmsRealmIdentityProviderInstancesAliasPathParams
-  >({ url: '/admin/realms/{realm}/identity-provider/instances/{alias}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/identity-provider/instances/{alias}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmIdentityProviderInstancesAliasPathParams = {
   /**
@@ -9249,7 +9864,12 @@ export const putAdminRealmsRealmIdentityProviderInstancesAlias = (
     {},
     {},
     PutAdminRealmsRealmIdentityProviderInstancesAliasPathParams
-  >({ url: '/admin/realms/{realm}/identity-provider/instances/{alias}', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/identity-provider/instances/{alias}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmIdentityProviderInstancesAliasPathParams = {
   /**
@@ -9276,7 +9896,12 @@ export const deleteAdminRealmsRealmIdentityProviderInstancesAlias = (
     {},
     {},
     DeleteAdminRealmsRealmIdentityProviderInstancesAliasPathParams
-  >({ url: '/admin/realms/{realm}/identity-provider/instances/{alias}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/identity-provider/instances/{alias}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmIdentityProviderInstancesAliasExportPathParams = {
   /**
@@ -9311,7 +9936,12 @@ export const getAdminRealmsRealmIdentityProviderInstancesAliasExport = (
     {},
     GetAdminRealmsRealmIdentityProviderInstancesAliasExportQueryParams,
     GetAdminRealmsRealmIdentityProviderInstancesAliasExportPathParams
-  >({ url: '/admin/realms/{realm}/identity-provider/instances/{alias}/export', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/identity-provider/instances/{alias}/export',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmIdentityProviderInstancesAliasManagementPermissionsPathParams = {
   /**
@@ -9444,7 +10074,12 @@ export const getAdminRealmsRealmIdentityProviderInstancesAliasMappers = (
     {},
     {},
     GetAdminRealmsRealmIdentityProviderInstancesAliasMappersPathParams
-  >({ url: '/admin/realms/{realm}/identity-provider/instances/{alias}/mappers', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/identity-provider/instances/{alias}/mappers',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmIdentityProviderInstancesAliasMappersPathParams = {
   /**
@@ -9472,7 +10107,12 @@ export const postAdminRealmsRealmIdentityProviderInstancesAliasMappers = (
     {},
     {},
     PostAdminRealmsRealmIdentityProviderInstancesAliasMappersPathParams
-  >({ url: '/admin/realms/{realm}/identity-provider/instances/{alias}/mappers', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/identity-provider/instances/{alias}/mappers',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmIdentityProviderInstancesAliasMappersIdPathParams = {
   /**
@@ -9640,7 +10280,12 @@ export const getAdminRealmsRealmIdentityProviderProvidersProviderId = (
     {},
     {},
     GetAdminRealmsRealmIdentityProviderProvidersProviderIdPathParams
-  >({ url: '/admin/realms/{realm}/identity-provider/providers/{providerId}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/identity-provider/providers/{providerId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmKeysPathParams = {
   /**
@@ -9691,7 +10336,12 @@ export const getAdminRealmsRealmLocalization = (
     {},
     {},
     GetAdminRealmsRealmLocalizationPathParams
-  >({ url: '/admin/realms/{realm}/localization', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/localization',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmLocalizationLocalePathParams = {
   /**
@@ -9727,7 +10377,12 @@ export const getAdminRealmsRealmLocalizationLocale = (
     {},
     GetAdminRealmsRealmLocalizationLocaleQueryParams,
     GetAdminRealmsRealmLocalizationLocalePathParams
-  >({ url: '/admin/realms/{realm}/localization/{locale}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/localization/{locale}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmLocalizationLocalePathParams = {
   /**
@@ -9759,7 +10414,12 @@ export const postAdminRealmsRealmLocalizationLocale = (
     {},
     {},
     PostAdminRealmsRealmLocalizationLocalePathParams
-  >({ url: '/admin/realms/{realm}/localization/{locale}', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/localization/{locale}',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmLocalizationLocalePathParams = {
   /**
@@ -9786,7 +10446,12 @@ export const deleteAdminRealmsRealmLocalizationLocale = (
     {},
     {},
     DeleteAdminRealmsRealmLocalizationLocalePathParams
-  >({ url: '/admin/realms/{realm}/localization/{locale}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/localization/{locale}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmLocalizationLocaleKeyPathParams = {
   /**
@@ -9814,7 +10479,12 @@ export const getAdminRealmsRealmLocalizationLocaleKey = (
     {},
     {},
     GetAdminRealmsRealmLocalizationLocaleKeyPathParams
-  >({ url: '/admin/realms/{realm}/localization/{locale}/{key}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/localization/{locale}/{key}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmLocalizationLocaleKeyPathParams = {
   /**
@@ -9842,7 +10512,12 @@ export const putAdminRealmsRealmLocalizationLocaleKey = (
     {},
     {},
     PutAdminRealmsRealmLocalizationLocaleKeyPathParams
-  >({ url: '/admin/realms/{realm}/localization/{locale}/{key}', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/localization/{locale}/{key}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmLocalizationLocaleKeyPathParams = {
   /**
@@ -9870,7 +10545,12 @@ export const deleteAdminRealmsRealmLocalizationLocaleKey = (
     {},
     {},
     DeleteAdminRealmsRealmLocalizationLocaleKeyPathParams
-  >({ url: '/admin/realms/{realm}/localization/{locale}/{key}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/localization/{locale}/{key}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmLogoutAllPathParams = {
   /**
@@ -9899,7 +10579,12 @@ export const postAdminRealmsRealmLogoutAll = (
     {},
     {},
     PostAdminRealmsRealmLogoutAllPathParams
-  >({ url: '/admin/realms/{realm}/logout-all', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/logout-all',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmOrganizationsPathParams = {
   /**
@@ -9963,7 +10648,12 @@ export const getAdminRealmsRealmOrganizations = (
     {},
     GetAdminRealmsRealmOrganizationsQueryParams,
     GetAdminRealmsRealmOrganizationsPathParams
-  >({ url: '/admin/realms/{realm}/organizations', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/organizations',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmOrganizationsPathParams = {
   /**
@@ -9990,7 +10680,12 @@ export const postAdminRealmsRealmOrganizations = (
     {},
     {},
     PostAdminRealmsRealmOrganizationsPathParams
-  >({ url: '/admin/realms/{realm}/organizations', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/organizations',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmOrganizationsCountPathParams = {
   /**
@@ -10032,7 +10727,12 @@ export const getAdminRealmsRealmOrganizationsCount = (
     {},
     GetAdminRealmsRealmOrganizationsCountQueryParams,
     GetAdminRealmsRealmOrganizationsCountPathParams
-  >({ url: '/admin/realms/{realm}/organizations/count', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/organizations/count',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmOrganizationsMembersMemberIdOrganizationsPathParams = {
   /**
@@ -10103,7 +10803,12 @@ export const getAdminRealmsRealmOrganizationsOrgId = (
     {},
     {},
     GetAdminRealmsRealmOrganizationsOrgIdPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/organizations/{orgId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmOrganizationsOrgIdPathParams = {
   /**
@@ -10131,7 +10836,12 @@ export const putAdminRealmsRealmOrganizationsOrgId = (
     {},
     {},
     PutAdminRealmsRealmOrganizationsOrgIdPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/organizations/{orgId}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmOrganizationsOrgIdPathParams = {
   /**
@@ -10158,7 +10868,12 @@ export const deleteAdminRealmsRealmOrganizationsOrgId = (
     {},
     {},
     DeleteAdminRealmsRealmOrganizationsOrgIdPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/organizations/{orgId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersPathParams = {
   /**
@@ -10187,7 +10902,12 @@ export const getAdminRealmsRealmOrganizationsOrgIdIdentityProviders = (
     {},
     {},
     GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}/identity-providers', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/organizations/{orgId}/identity-providers',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmOrganizationsOrgIdIdentityProvidersPathParams = {
   /**
@@ -10218,7 +10938,12 @@ export const postAdminRealmsRealmOrganizationsOrgIdIdentityProviders = (
     {},
     {},
     PostAdminRealmsRealmOrganizationsOrgIdIdentityProvidersPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}/identity-providers', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/organizations/{orgId}/identity-providers',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmOrganizationsOrgIdIdentityProvidersAliasPathParams = {
   /**
@@ -10349,7 +11074,12 @@ export const getAdminRealmsRealmOrganizationsOrgIdMembers = (
     {},
     GetAdminRealmsRealmOrganizationsOrgIdMembersQueryParams,
     GetAdminRealmsRealmOrganizationsOrgIdMembersPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}/members', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/organizations/{orgId}/members',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmOrganizationsOrgIdMembersPathParams = {
   /**
@@ -10380,7 +11110,12 @@ export const postAdminRealmsRealmOrganizationsOrgIdMembers = (
     {},
     {},
     PostAdminRealmsRealmOrganizationsOrgIdMembersPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}/members', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/organizations/{orgId}/members',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmOrganizationsOrgIdMembersCountPathParams = {
   /**
@@ -10407,7 +11142,12 @@ export const getAdminRealmsRealmOrganizationsOrgIdMembersCount = (
     {},
     {},
     GetAdminRealmsRealmOrganizationsOrgIdMembersCountPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}/members/count', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/organizations/{orgId}/members/count',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmOrganizationsOrgIdMembersInviteExistingUserPathParams = {
   /**
@@ -10469,7 +11209,12 @@ export const postAdminRealmsRealmOrganizationsOrgIdMembersInviteUser = (
     {},
     {},
     PostAdminRealmsRealmOrganizationsOrgIdMembersInviteUserPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}/members/invite-user', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/organizations/{orgId}/members/invite-user',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdPathParams = {
   /**
@@ -10500,7 +11245,12 @@ export const getAdminRealmsRealmOrganizationsOrgIdMembersMemberId = (
     {},
     {},
     GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}/members/{memberId}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/organizations/{orgId}/members/{memberId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmOrganizationsOrgIdMembersMemberIdPathParams = {
   /**
@@ -10531,7 +11281,12 @@ export const deleteAdminRealmsRealmOrganizationsOrgIdMembersMemberId = (
     {},
     {},
     DeleteAdminRealmsRealmOrganizationsOrgIdMembersMemberIdPathParams
-  >({ url: '/admin/realms/{realm}/organizations/{orgId}/members/{memberId}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/organizations/{orgId}/members/{memberId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmOrganizationsOrgIdMembersMemberIdOrganizationsPathParams = {
   /**
@@ -10609,7 +11364,12 @@ export const postAdminRealmsRealmPartialExport = (
     {},
     PostAdminRealmsRealmPartialExportQueryParams,
     PostAdminRealmsRealmPartialExportPathParams
-  >({ url: '/admin/realms/{realm}/partial-export', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/partial-export',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmPartialImportPathParams = {
   /**
@@ -10636,7 +11396,12 @@ export const postAdminRealmsRealmPartialImport = (
     {},
     {},
     PostAdminRealmsRealmPartialImportPathParams
-  >({ url: '/admin/realms/{realm}/partialImport', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/partialImport',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmPushRevocationPathParams = {
   /**
@@ -10662,7 +11427,12 @@ export const postAdminRealmsRealmPushRevocation = (
     {},
     {},
     PostAdminRealmsRealmPushRevocationPathParams
-  >({ url: '/admin/realms/{realm}/push-revocation', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/push-revocation',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmRolesPathParams = {
   /**
@@ -10707,7 +11477,12 @@ export const getAdminRealmsRealmRoles = (variables: GetAdminRealmsRealmRolesVari
     {},
     GetAdminRealmsRealmRolesQueryParams,
     GetAdminRealmsRealmRolesPathParams
-  >({ url: '/admin/realms/{realm}/roles', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmRolesPathParams = {
   /**
@@ -10731,7 +11506,12 @@ export const postAdminRealmsRealmRoles = (variables: PostAdminRealmsRealmRolesVa
     {},
     {},
     PostAdminRealmsRealmRolesPathParams
-  >({ url: '/admin/realms/{realm}/roles', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmRolesByIdRoleIdPathParams = {
   /**
@@ -10761,7 +11541,12 @@ export const getAdminRealmsRealmRolesByIdRoleId = (
     {},
     {},
     GetAdminRealmsRealmRolesByIdRoleIdPathParams
-  >({ url: '/admin/realms/{realm}/roles-by-id/{roleId}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles-by-id/{roleId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmRolesByIdRoleIdPathParams = {
   /**
@@ -10792,7 +11577,12 @@ export const putAdminRealmsRealmRolesByIdRoleId = (
     {},
     {},
     PutAdminRealmsRealmRolesByIdRoleIdPathParams
-  >({ url: '/admin/realms/{realm}/roles-by-id/{roleId}', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles-by-id/{roleId}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmRolesByIdRoleIdPathParams = {
   /**
@@ -10822,7 +11612,12 @@ export const deleteAdminRealmsRealmRolesByIdRoleId = (
     {},
     {},
     DeleteAdminRealmsRealmRolesByIdRoleIdPathParams
-  >({ url: '/admin/realms/{realm}/roles-by-id/{roleId}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles-by-id/{roleId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmRolesByIdRoleIdCompositesPathParams = {
   /**
@@ -10864,7 +11659,12 @@ export const getAdminRealmsRealmRolesByIdRoleIdComposites = (
     {},
     GetAdminRealmsRealmRolesByIdRoleIdCompositesQueryParams,
     GetAdminRealmsRealmRolesByIdRoleIdCompositesPathParams
-  >({ url: '/admin/realms/{realm}/roles-by-id/{roleId}/composites', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles-by-id/{roleId}/composites',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmRolesByIdRoleIdCompositesPathParams = {
   /**
@@ -10894,7 +11694,12 @@ export const postAdminRealmsRealmRolesByIdRoleIdComposites = (
     {},
     {},
     PostAdminRealmsRealmRolesByIdRoleIdCompositesPathParams
-  >({ url: '/admin/realms/{realm}/roles-by-id/{roleId}/composites', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles-by-id/{roleId}/composites',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmRolesByIdRoleIdCompositesPathParams = {
   /**
@@ -10927,7 +11732,12 @@ export const deleteAdminRealmsRealmRolesByIdRoleIdComposites = (
     {},
     {},
     DeleteAdminRealmsRealmRolesByIdRoleIdCompositesPathParams
-  >({ url: '/admin/realms/{realm}/roles-by-id/{roleId}/composites', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles-by-id/{roleId}/composites',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmRolesByIdRoleIdCompositesClientsClientUuidPathParams = {
   /**
@@ -10991,7 +11801,12 @@ export const getAdminRealmsRealmRolesByIdRoleIdCompositesRealm = (
     {},
     {},
     GetAdminRealmsRealmRolesByIdRoleIdCompositesRealmPathParams
-  >({ url: '/admin/realms/{realm}/roles-by-id/{roleId}/composites/realm', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles-by-id/{roleId}/composites/realm',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmRolesByIdRoleIdManagementPermissionsPathParams = {
   /**
@@ -11018,7 +11833,12 @@ export const getAdminRealmsRealmRolesByIdRoleIdManagementPermissions = (
     {},
     {},
     GetAdminRealmsRealmRolesByIdRoleIdManagementPermissionsPathParams
-  >({ url: '/admin/realms/{realm}/roles-by-id/{roleId}/management/permissions', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles-by-id/{roleId}/management/permissions',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmRolesByIdRoleIdManagementPermissionsPathParams = {
   /**
@@ -11046,7 +11866,12 @@ export const putAdminRealmsRealmRolesByIdRoleIdManagementPermissions = (
     {},
     {},
     PutAdminRealmsRealmRolesByIdRoleIdManagementPermissionsPathParams
-  >({ url: '/admin/realms/{realm}/roles-by-id/{roleId}/management/permissions', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles-by-id/{roleId}/management/permissions',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmRolesRoleNamePathParams = {
   /**
@@ -11076,7 +11901,12 @@ export const getAdminRealmsRealmRolesRoleName = (
     {},
     {},
     GetAdminRealmsRealmRolesRoleNamePathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles/{roleName}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmRolesRoleNamePathParams = {
   /**
@@ -11107,7 +11937,12 @@ export const putAdminRealmsRealmRolesRoleName = (
     {},
     {},
     PutAdminRealmsRealmRolesRoleNamePathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles/{roleName}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmRolesRoleNamePathParams = {
   /**
@@ -11137,7 +11972,12 @@ export const deleteAdminRealmsRealmRolesRoleName = (
     {},
     {},
     DeleteAdminRealmsRealmRolesRoleNamePathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles/{roleName}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmRolesRoleNameCompositesPathParams = {
   /**
@@ -11169,7 +12009,12 @@ export const getAdminRealmsRealmRolesRoleNameComposites = (
     {},
     {},
     GetAdminRealmsRealmRolesRoleNameCompositesPathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}/composites', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles/{roleName}/composites',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmRolesRoleNameCompositesPathParams = {
   /**
@@ -11202,7 +12047,12 @@ export const postAdminRealmsRealmRolesRoleNameComposites = (
     {},
     {},
     PostAdminRealmsRealmRolesRoleNameCompositesPathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}/composites', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles/{roleName}/composites',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmRolesRoleNameCompositesPathParams = {
   /**
@@ -11235,7 +12085,12 @@ export const deleteAdminRealmsRealmRolesRoleNameComposites = (
     {},
     {},
     DeleteAdminRealmsRealmRolesRoleNameCompositesPathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}/composites', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles/{roleName}/composites',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmRolesRoleNameCompositesClientsClientUuidPathParams = {
   /**
@@ -11305,7 +12160,12 @@ export const getAdminRealmsRealmRolesRoleNameCompositesRealm = (
     {},
     {},
     GetAdminRealmsRealmRolesRoleNameCompositesRealmPathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}/composites/realm', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles/{roleName}/composites/realm',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmRolesRoleNameGroupsPathParams = {
   /**
@@ -11359,7 +12219,12 @@ export const getAdminRealmsRealmRolesRoleNameGroups = (
     {},
     GetAdminRealmsRealmRolesRoleNameGroupsQueryParams,
     GetAdminRealmsRealmRolesRoleNameGroupsPathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}/groups', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles/{roleName}/groups',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmRolesRoleNameManagementPermissionsPathParams = {
   /**
@@ -11386,7 +12251,12 @@ export const getAdminRealmsRealmRolesRoleNameManagementPermissions = (
     {},
     {},
     GetAdminRealmsRealmRolesRoleNameManagementPermissionsPathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}/management/permissions', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles/{roleName}/management/permissions',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmRolesRoleNameManagementPermissionsPathParams = {
   /**
@@ -11414,7 +12284,12 @@ export const putAdminRealmsRealmRolesRoleNameManagementPermissions = (
     {},
     {},
     PutAdminRealmsRealmRolesRoleNameManagementPermissionsPathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}/management/permissions', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles/{roleName}/management/permissions',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmRolesRoleNameUsersPathParams = {
   /**
@@ -11466,7 +12341,12 @@ export const getAdminRealmsRealmRolesRoleNameUsers = (
     {},
     GetAdminRealmsRealmRolesRoleNameUsersQueryParams,
     GetAdminRealmsRealmRolesRoleNameUsersPathParams
-  >({ url: '/admin/realms/{realm}/roles/{roleName}/users', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/roles/{roleName}/users',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmSessionsSessionPathParams = {
   /**
@@ -11504,7 +12384,12 @@ export const deleteAdminRealmsRealmSessionsSession = (
     {},
     DeleteAdminRealmsRealmSessionsSessionQueryParams,
     DeleteAdminRealmsRealmSessionsSessionPathParams
-  >({ url: '/admin/realms/{realm}/sessions/{session}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/sessions/{session}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmTestSMTPConnectionPathParams = {
   /**
@@ -11535,7 +12420,12 @@ export const postAdminRealmsRealmTestSMTPConnection = (
     {},
     {},
     PostAdminRealmsRealmTestSMTPConnectionPathParams
-  >({ url: '/admin/realms/{realm}/testSMTPConnection', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/testSMTPConnection',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmUsersPathParams = {
   /**
@@ -11624,7 +12514,12 @@ export const getAdminRealmsRealmUsers = (variables: GetAdminRealmsRealmUsersVari
     {},
     GetAdminRealmsRealmUsersQueryParams,
     GetAdminRealmsRealmUsersPathParams
-  >({ url: '/admin/realms/{realm}/users', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmUsersPathParams = {
   /**
@@ -11648,7 +12543,12 @@ export const postAdminRealmsRealmUsers = (variables: PostAdminRealmsRealmUsersVa
     {},
     {},
     PostAdminRealmsRealmUsersPathParams
-  >({ url: '/admin/realms/{realm}/users', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmUsersManagementPermissionsPathParams = {
   /**
@@ -11674,7 +12574,12 @@ export const getAdminRealmsRealmUsersManagementPermissions = (
     {},
     {},
     GetAdminRealmsRealmUsersManagementPermissionsPathParams
-  >({ url: '/admin/realms/{realm}/users-management-permissions', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users-management-permissions',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmUsersManagementPermissionsPathParams = {
   /**
@@ -11701,7 +12606,12 @@ export const putAdminRealmsRealmUsersManagementPermissions = (
     {},
     {},
     PutAdminRealmsRealmUsersManagementPermissionsPathParams
-  >({ url: '/admin/realms/{realm}/users-management-permissions', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users-management-permissions',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmUsersCountPathParams = {
   /**
@@ -11760,7 +12670,12 @@ export const getAdminRealmsRealmUsersCount = (
     {},
     GetAdminRealmsRealmUsersCountQueryParams,
     GetAdminRealmsRealmUsersCountPathParams
-  >({ url: '/admin/realms/{realm}/users/count', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/count',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmUsersProfilePathParams = {
   /**
@@ -11789,7 +12704,12 @@ export const getAdminRealmsRealmUsersProfile = (
     {},
     {},
     GetAdminRealmsRealmUsersProfilePathParams
-  >({ url: '/admin/realms/{realm}/users/profile', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/profile',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmUsersProfilePathParams = {
   /**
@@ -11819,7 +12739,12 @@ export const putAdminRealmsRealmUsersProfile = (
     {},
     {},
     PutAdminRealmsRealmUsersProfilePathParams
-  >({ url: '/admin/realms/{realm}/users/profile', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/profile',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmUsersProfileMetadataPathParams = {
   /**
@@ -11848,7 +12773,12 @@ export const getAdminRealmsRealmUsersProfileMetadata = (
     {},
     {},
     GetAdminRealmsRealmUsersProfileMetadataPathParams
-  >({ url: '/admin/realms/{realm}/users/profile/metadata', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/profile/metadata',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmUsersUserIdPathParams = {
   /**
@@ -11883,7 +12813,12 @@ export const getAdminRealmsRealmUsersUserId = (
     {},
     GetAdminRealmsRealmUsersUserIdQueryParams,
     GetAdminRealmsRealmUsersUserIdPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmUsersUserIdPathParams = {
   /**
@@ -11911,7 +12846,12 @@ export const putAdminRealmsRealmUsersUserId = (
     {},
     {},
     PutAdminRealmsRealmUsersUserIdPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmUsersUserIdPathParams = {
   /**
@@ -11938,7 +12878,12 @@ export const deleteAdminRealmsRealmUsersUserId = (
     {},
     {},
     DeleteAdminRealmsRealmUsersUserIdPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmUsersUserIdConfiguredUserStorageCredentialTypesPathParams = {
   /**
@@ -12006,7 +12951,12 @@ export const getAdminRealmsRealmUsersUserIdConsents = (
     {},
     {},
     GetAdminRealmsRealmUsersUserIdConsentsPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/consents', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/consents',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmUsersUserIdConsentsClientPathParams = {
   /**
@@ -12037,7 +12987,12 @@ export const deleteAdminRealmsRealmUsersUserIdConsentsClient = (
     {},
     {},
     DeleteAdminRealmsRealmUsersUserIdConsentsClientPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/consents/{client}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/consents/{client}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmUsersUserIdCredentialsPathParams = {
   /**
@@ -12066,7 +13021,12 @@ export const getAdminRealmsRealmUsersUserIdCredentials = (
     {},
     {},
     GetAdminRealmsRealmUsersUserIdCredentialsPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/credentials', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/credentials',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmUsersUserIdCredentialsCredentialIdPathParams = {
   /**
@@ -12094,7 +13054,12 @@ export const deleteAdminRealmsRealmUsersUserIdCredentialsCredentialId = (
     {},
     {},
     DeleteAdminRealmsRealmUsersUserIdCredentialsCredentialIdPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/credentials/{credentialId}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/credentials/{credentialId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmUsersUserIdCredentialsCredentialIdMoveAfterNewPreviousCredentialIdPathParams = {
   /**
@@ -12234,7 +13199,12 @@ export const putAdminRealmsRealmUsersUserIdDisableCredentialTypes = (
     {},
     {},
     PutAdminRealmsRealmUsersUserIdDisableCredentialTypesPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/disable-credential-types', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/disable-credential-types',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmUsersUserIdExecuteActionsEmailPathParams = {
   /**
@@ -12285,7 +13255,12 @@ export const putAdminRealmsRealmUsersUserIdExecuteActionsEmail = (
     {},
     PutAdminRealmsRealmUsersUserIdExecuteActionsEmailQueryParams,
     PutAdminRealmsRealmUsersUserIdExecuteActionsEmailPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/execute-actions-email', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/execute-actions-email',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmUsersUserIdFederatedIdentityPathParams = {
   /**
@@ -12314,7 +13289,12 @@ export const getAdminRealmsRealmUsersUserIdFederatedIdentity = (
     {},
     {},
     GetAdminRealmsRealmUsersUserIdFederatedIdentityPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/federated-identity', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/federated-identity',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmUsersUserIdFederatedIdentityProviderPathParams = {
   /**
@@ -12432,7 +13412,12 @@ export const getAdminRealmsRealmUsersUserIdGroups = (
     {},
     GetAdminRealmsRealmUsersUserIdGroupsQueryParams,
     GetAdminRealmsRealmUsersUserIdGroupsPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/groups', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/groups',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmUsersUserIdGroupsCountPathParams = {
   /**
@@ -12468,7 +13453,12 @@ export const getAdminRealmsRealmUsersUserIdGroupsCount = (
     {},
     GetAdminRealmsRealmUsersUserIdGroupsCountQueryParams,
     GetAdminRealmsRealmUsersUserIdGroupsCountPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/groups/count', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/groups/count',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmUsersUserIdGroupsGroupIdPathParams = {
   /**
@@ -12496,7 +13486,12 @@ export const putAdminRealmsRealmUsersUserIdGroupsGroupId = (
     {},
     {},
     PutAdminRealmsRealmUsersUserIdGroupsGroupIdPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/groups/{groupId}', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/groups/{groupId}',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmUsersUserIdGroupsGroupIdPathParams = {
   /**
@@ -12524,7 +13519,12 @@ export const deleteAdminRealmsRealmUsersUserIdGroupsGroupId = (
     {},
     {},
     DeleteAdminRealmsRealmUsersUserIdGroupsGroupIdPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/groups/{groupId}', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/groups/{groupId}',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmUsersUserIdImpersonationPathParams = {
   /**
@@ -12558,7 +13558,12 @@ export const postAdminRealmsRealmUsersUserIdImpersonation = (
     {},
     {},
     PostAdminRealmsRealmUsersUserIdImpersonationPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/impersonation', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/impersonation',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmUsersUserIdLogoutPathParams = {
   /**
@@ -12585,7 +13590,12 @@ export const postAdminRealmsRealmUsersUserIdLogout = (
     {},
     {},
     PostAdminRealmsRealmUsersUserIdLogoutPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/logout', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/logout',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmUsersUserIdOfflineSessionsClientUuidPathParams = {
   /**
@@ -12615,7 +13625,12 @@ export const getAdminRealmsRealmUsersUserIdOfflineSessionsClientUuid = (
     {},
     {},
     GetAdminRealmsRealmUsersUserIdOfflineSessionsClientUuidPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/offline-sessions/{clientUuid}', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/offline-sessions/{clientUuid}',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmUsersUserIdResetPasswordPathParams = {
   /**
@@ -12643,7 +13658,12 @@ export const putAdminRealmsRealmUsersUserIdResetPassword = (
     {},
     {},
     PutAdminRealmsRealmUsersUserIdResetPasswordPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/reset-password', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/reset-password',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmUsersUserIdResetPasswordEmailPathParams = {
   /**
@@ -12685,7 +13705,12 @@ export const putAdminRealmsRealmUsersUserIdResetPasswordEmail = (
     {},
     PutAdminRealmsRealmUsersUserIdResetPasswordEmailQueryParams,
     PutAdminRealmsRealmUsersUserIdResetPasswordEmailPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/reset-password-email', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/reset-password-email',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmUsersUserIdRoleMappingsPathParams = {
   /**
@@ -12712,7 +13737,12 @@ export const getAdminRealmsRealmUsersUserIdRoleMappings = (
     {},
     {},
     GetAdminRealmsRealmUsersUserIdRoleMappingsPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/role-mappings', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/role-mappings',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmUsersUserIdRoleMappingsClientsClientIdPathParams = {
   /**
@@ -12943,7 +13973,12 @@ export const getAdminRealmsRealmUsersUserIdRoleMappingsRealm = (
     {},
     {},
     GetAdminRealmsRealmUsersUserIdRoleMappingsRealmPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/role-mappings/realm', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/role-mappings/realm',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PostAdminRealmsRealmUsersUserIdRoleMappingsRealmPathParams = {
   /**
@@ -12973,7 +14008,12 @@ export const postAdminRealmsRealmUsersUserIdRoleMappingsRealm = (
     {},
     {},
     PostAdminRealmsRealmUsersUserIdRoleMappingsRealmPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/role-mappings/realm', method: 'post', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/role-mappings/realm',
+    method: 'post',
+    ...variables,
+    signal
+  });
 
 export type DeleteAdminRealmsRealmUsersUserIdRoleMappingsRealmPathParams = {
   /**
@@ -13003,7 +14043,12 @@ export const deleteAdminRealmsRealmUsersUserIdRoleMappingsRealm = (
     {},
     {},
     DeleteAdminRealmsRealmUsersUserIdRoleMappingsRealmPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/role-mappings/realm', method: 'delete', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/role-mappings/realm',
+    method: 'delete',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmAvailablePathParams = {
   /**
@@ -13032,7 +14077,12 @@ export const getAdminRealmsRealmUsersUserIdRoleMappingsRealmAvailable = (
     {},
     {},
     GetAdminRealmsRealmUsersUserIdRoleMappingsRealmAvailablePathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/role-mappings/realm/available', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/role-mappings/realm/available',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositePathParams = {
   /**
@@ -13071,7 +14121,12 @@ export const getAdminRealmsRealmUsersUserIdRoleMappingsRealmComposite = (
     {},
     GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositeQueryParams,
     GetAdminRealmsRealmUsersUserIdRoleMappingsRealmCompositePathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/role-mappings/realm/composite', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/role-mappings/realm/composite',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type PutAdminRealmsRealmUsersUserIdSendVerifyEmailPathParams = {
   /**
@@ -13119,7 +14174,12 @@ export const putAdminRealmsRealmUsersUserIdSendVerifyEmail = (
     {},
     PutAdminRealmsRealmUsersUserIdSendVerifyEmailQueryParams,
     PutAdminRealmsRealmUsersUserIdSendVerifyEmailPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/send-verify-email', method: 'put', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/send-verify-email',
+    method: 'put',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmUsersUserIdSessionsPathParams = {
   /**
@@ -13148,7 +14208,12 @@ export const getAdminRealmsRealmUsersUserIdSessions = (
     {},
     {},
     GetAdminRealmsRealmUsersUserIdSessionsPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/sessions', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/sessions',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export type GetAdminRealmsRealmUsersUserIdUnmanagedAttributesPathParams = {
   /**
@@ -13179,7 +14244,12 @@ export const getAdminRealmsRealmUsersUserIdUnmanagedAttributes = (
     {},
     {},
     GetAdminRealmsRealmUsersUserIdUnmanagedAttributesPathParams
-  >({ url: '/admin/realms/{realm}/users/{userId}/unmanagedAttributes', method: 'get', ...variables, signal });
+  >({
+    url: '/admin/realms/{realm}/users/{userId}/unmanagedAttributes',
+    method: 'get',
+    ...variables,
+    signal
+  });
 
 export const operationsByTag = {
   realmsAdmin: {
@@ -13275,7 +14345,9 @@ export const operationsByTag = {
     postAdminRealmsRealmAuthenticationRequiredActionsAliasRaisePriority,
     getAdminRealmsRealmAuthenticationUnregisteredRequiredActions
   },
-  clientRegistrationPolicy: { getAdminRealmsRealmClientRegistrationPolicyProviders },
+  clientRegistrationPolicy: {
+    getAdminRealmsRealmClientRegistrationPolicyProviders
+  },
   clientScopes: {
     getAdminRealmsRealmClientScopes,
     postAdminRealmsRealmClientScopes,
