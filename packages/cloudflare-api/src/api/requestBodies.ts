@@ -83,7 +83,7 @@ export type ApiShieldSchemaCreate = {
   /**
    * An indicator if this schema is enabled
    */
-  validation_enabled?: boolean;
+  validation_enabled: boolean;
 };
 
 export type ApiShieldSchemaEdit = {

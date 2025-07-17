@@ -101,6 +101,10 @@ export type ApiShieldSchemasListSuccess = Schemas.ApiShieldApiResponseCollection
   result: Schemas.ApiShieldSchemasPublicSchema[];
 };
 
+export type BrandProtectionApiDEFAULTERROR = Schemas.BrandProtectionApiError;
+
+export type BrandProtectionApiUNPROCESSABLECONTENT = Schemas.BrandProtectionApiError;
+
 export type EmailSecurityClientError = {
   /**
    * @example {"code":7003,"message":"No route for the URI"}
