@@ -5092,24 +5092,26 @@ export type MeetingRTMSStatusUpdateError = Fetcher.ErrorWrapper<undefined>;
 export type MeetingRTMSStatusUpdateRequestBody = {
   /**
    * The participant's RTMS app status.
-   * * `start` - Start an RTMS.
-   * * `stop` - Stop an ongoing RTMS.
+   * * `start` - Start an RTMS app.
+   * * `stop` - Stop an ongoing RTMS app.
+   * * `pause` - Pause an ongoing RTMS app.
+   * * `resume` - Resume a paused RTMS app.
    *
    * @example start
    */
-  action?: 'start' | 'stop';
+  action?: 'start' | 'stop' | 'pause' | 'resume';
   /**
    * The participant's RTMS app settings.
    */
   settings?: {
     /**
-     * The participant's user ID. This field is optional. If not provided, the user ID will be automatically obtained from the authentication token. This value matches the `id` field in the [**Get a user**](/docs/api/users/#tag/users/GET/users/{userId}) API response. Use this field if you pass the `start` or `stop` value for the `action` field.
+     * The participant's user ID. This field is optional. If not provided, the user ID will be automatically obtained from the authentication token. This value matches the `id` field in the [**Get a user**](/docs/api/users/#tag/users/GET/users/{userId}) API response. Use this field if you pass the `start`, `stop`, `pause` or `resume` value for the `action` field.
      *
      * @example 30R7kT7bTIKSNUFEuH_Qlg
      */
     participant_user_id?: string;
     /**
-     * The unique identifier of the authorized app, configured in the Account Settings under **Allow apps to access meeting content**. This app must have host approval to access in-meeting content. Use this field if you pass the `start` or `stop` value for the `action` field.
+     * The unique identifier of the authorized app, configured in the Account Settings under **Allow apps to access meeting content**. This app must have host approval to access in-meeting content. Use this field if you pass the `start`, `stop`, `pause` or `resume` value for the `action` field.
      *
      * @example a_Zu0X_FVBUycmEi9ms5hg
      */
@@ -5294,12 +5296,13 @@ export type ListmeetingsummariesVariables = {
 } & FetcherExtraProps;
 
 /**
- * Generates a list of all meeting summaries for an account.
+ * Retrieve a list of all meeting or webinar summaries available for an account.
  *
  * **Prerequisites**
- * * Host user type must be Pro or higher plan.
- * * The Meeting Summary with AI Companion feature enabled in the host's account.
- * * E2ee meetings do not have summary feature enabled.
+ * * The host must have a Pro, Business, or higher subscription plan.
+ * * For meetings - the host's **Meeting Summary with AI Companion** user setting must be enabled.
+ * * For webinars - the host's **Webinar Summary with AI Companion** user setting must be enabled.
+ * * End-to-End Encrypted (E2EE) meetings do not support summaries.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_summary:read:admin`
  *
@@ -6175,7 +6178,7 @@ export type MeetingResponse = {
       internal_user?: boolean;
     }[];
     /**
-     * Information about the **Enable continuous meeting chat** feature.
+     * Information about the **Enable continuous meeting chat** feature. This setting only applies to scheduled and recurring meetings, types `2`, `3`, or `8`. It is **not supported** for type `1` instant meetings or type `10` screen share only meetings.
      */
     continuous_meeting_chat?: {
       /**
@@ -6546,15 +6549,17 @@ export type MeetingUpdateRequestBody = {
    */
   agenda?: string;
   /**
-   * Meeting duration in minutes. Used for scheduled meetings only.
+   * The meeting's scheduled duration, in minutes. This field is used for type `2` scheduled meetings and type `8` recurring meetings with a fixed time. The value must be between 1 and 1440 minutes, which equates to 24 hours.
    *
+   * @maximum 1440
+   * @minimum 1
    * @example 60
    */
   duration?: number;
   /**
    * The passcode required to join the meeting. By default, a passcode can **only** have a maximum length of 10 characters and only contain alphanumeric characters and the `@`, `-`, `_`, and `*` characters.
    *
-   * **Note:**
+   * **Note**
    * * If the account owner or administrator has configured [minimum passcode requirement settings](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604), the passcode **must** meet those requirements.
    * * If passcode requirements are enabled, use the [**Get user settings**](/docs/api/users/#tag/users/GET/users/{userId}/settings) API or the [**Get account settings**](/docs/api/accounts/#tag/accounts/GET/accounts/{accountId}/settings) API to get the requirements.
    * * If the **Require a passcode when scheduling new meetings** account setting is enabled and locked, a passcode will be automatically generated if one is not provided.
@@ -7265,7 +7270,7 @@ export type MeetingUpdateRequestBody = {
      */
     internal_meeting?: boolean;
     /**
-     * Information about the **Enable continuous meeting chat** feature.
+     * Information about the **Enable continuous meeting chat** feature. This setting only applies to scheduled and recurring meetings, type `2`, `3`, and `8`. It is **not supported** for type `1` instant meetings or type `10` screen share only meetings.
      */
     continuous_meeting_chat?: {
       /**
@@ -8841,12 +8846,13 @@ export type GetameetingsummaryVariables = {
 } & FetcherExtraProps;
 
 /**
- * Display information about a meeting summary.
+ * Retrieve the summary of a meeting or webinar.
  *
  * **Prerequisites**
- * * Host user type must have a Pro or higher plan.
- * * Enable the **Meeting Summary with AI Companion** feature in the host's account.
- * * E2ee meetings do not have summary feature enabled.
+ * - The host must have a Pro, Business, or higher subscription plan.
+ * - For meetings - the host's **Meeting Summary with AI Companion** user setting must be enabled.
+ * - For webinars - the host's **Webinar Summary with AI Companion** user setting must be enabled.
+ * - End-to-End Encrypted (E2EE) meetings do not support summaries.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_summary:read`,`meeting_summary:read:admin`
  *
@@ -8858,6 +8864,47 @@ export const getameetingsummary = (variables: GetameetingsummaryVariables, signa
   fetch<GetameetingsummaryResponse, GetameetingsummaryError, undefined, {}, {}, GetameetingsummaryPathParams>({
     url: '/meetings/{meetingId}/meeting_summary',
     method: 'get',
+    ...variables,
+    signal
+  });
+
+export type DeletemeetingorwebinarsummaryPathParams = {
+  /**
+   * The meeting's universally unique ID (UUID). When you provide a meeting UUID that begins with a `/` character or contains the `//` characters, you **must** double-encode the meeting UUID before making an API request.
+   *
+   * @example aDYlohsHRtCd4ii1uC2+hA==
+   */
+  meetingId: string;
+};
+
+export type DeletemeetingorwebinarsummaryError = Fetcher.ErrorWrapper<undefined>;
+
+export type DeletemeetingorwebinarsummaryVariables = {
+  pathParams: DeletemeetingorwebinarsummaryPathParams;
+} & FetcherExtraProps;
+
+/**
+ * Delete the summary of a meeting or webinar.
+ *
+ * **Prerequisites**
+ * * The host must have a Pro, Business, or higher subscription plan.
+ * * For meetings - the host's **Meeting Summary with AI Companion** user setting must be enabled.
+ * * For webinars - the host's **Webinar Summary with AI Companion** user setting must be enabled.
+ * * End-to-End Encrypted (E2EE) meetings do not support summaries.
+ *
+ * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting_summary:write`,`meeting_summary:write:admin`
+ *
+ * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:delete:summary`,`meeting:delete:summary:admin`
+ *
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `LIGHT`
+ */
+export const deletemeetingorwebinarsummary = (
+  variables: DeletemeetingorwebinarsummaryVariables,
+  signal?: AbortSignal
+) =>
+  fetch<undefined, DeletemeetingorwebinarsummaryError, undefined, {}, {}, DeletemeetingorwebinarsummaryPathParams>({
+    url: '/meetings/{meetingId}/meeting_summary',
+    method: 'delete',
     ...variables,
     signal
   });
@@ -12289,6 +12336,8 @@ export type PastMeetingParticipantsPathParams = {
    * The meeting's ID or universally unique ID (UUID).
    * * If you provide a meeting ID, the API will return a response for the latest meeting instance.
    * * If you provide a meeting UUID that begins with a `/` character or contains the `//` characters, you **must** double-encode the meeting UUID before making an API request.
+   *
+   * @example ABCDE12345
    */
   meetingId: string;
 };
@@ -12436,6 +12485,7 @@ export type PastMeetingParticipantsVariables = {
  *
  *    **Note**: Please double encode your UUID when using this API if the UUID begins with a '/'or contains '//' in it.
  *
+ * **NOTE:** After meetings with hundreds of participants, the attendance data takes some time to be generated. If you receive a duration of 0 for users' time in the meeting, you may have called the endpoint before the data is fully processed. Implement a short delay or retry logic before fetching participant data.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `meeting:read:admin`,`meeting:read`
  *
@@ -13012,6 +13062,8 @@ export const meetings = (variables: MeetingsVariables, signal?: AbortSignal) =>
 export type MeetingCreatePathParams = {
   /**
    * The user's user ID or email address. For user-level apps, pass the `me` value.
+   *
+   * @example 30R7kT7bTIKSNUFEuH_Qlg
    */
   userId: string;
 };
@@ -13833,7 +13885,7 @@ export type MeetingCreateResponse = {
       email?: string;
     }[];
     /**
-     * Information about the **Enable continuous meeting chat** feature.
+     * Information about the **Enable continuous meeting chat** feature. This setting only applies to scheduled and recurring meetings (type `2`, `3`, and `8`). It is **not supported** for type `1` instant meetings or type `10` screen share only meetings.
      */
     continuous_meeting_chat?: {
       /**
@@ -14082,9 +14134,12 @@ export type MeetingCreateRequestBody = {
    */
   default_password?: boolean;
   /**
-   * The meeting's scheduled duration, in minutes. This field is only used for scheduled meetings (`2`).
+   * The meeting's scheduled duration, in minutes. This field is used for `2` scheduled meetings and `8` recurring meetings with a fixed time. The value must be between 1 and 1440 minutes, wuich is equivalent to 24 hours.
    *
+   * @maximum 1440
+   * @minimum 1
    * @example 60
+   * @default 60
    */
   duration?: number;
   /**
@@ -14100,7 +14155,7 @@ export type MeetingCreateRequestBody = {
    */
   password?: string;
   /**
-   * Whether to create a prescheduled meeting via the [GSuite app](https://support.zoom.us/hc/en-us/articles/360020187492-Zoom-for-GSuite-add-on). This **only** supports the meeting `type` value of `2` (scheduled meetings) and `3` (recurring meetings with no fixed time).
+   * Whether to create a prescheduled meeting via the [GSuite app](https://support.zoom.us/hc/en-us/articles/360020187492-Zoom-for-GSuite-add-on). This **only** supports the meeting `type` value of `2` scheduled meetings and `3` recurring meetings with no fixed time.
    * * `true` - Create a prescheduled meeting.
    * * `false` - Create a regular meeting.
    *
@@ -14713,7 +14768,7 @@ export type MeetingCreateRequestBody = {
      */
     internal_meeting?: boolean;
     /**
-     * Information about the **Enable continuous meeting chat** feature.
+     * Information about the **Enable continuous meeting chat** feature. This setting only applies to scheduled and recurring meetings, types `2`, `3`, and `8`. It is **not supported** for type `1` instant meetings or type `10` screen share only meetings.
      */
     continuous_meeting_chat?: {
       /**
@@ -15047,6 +15102,12 @@ export type ListUpcomingMeetingResponse = {
      * @example false
      */
     use_pmi?: boolean;
+    /**
+     * Whether the current user is the host of the meeting.
+     *
+     * @example true
+     */
+    is_host?: boolean;
   }[];
 };
 
@@ -16454,6 +16515,8 @@ export type ReportMeetingParticipantsPathParams = {
    * The meeting's ID or universally unique ID (UUID).
    * * If you provide a meeting ID, the API will return a response for the latest meeting instance.
    * * If you provide a meeting UUID that begins with a `/` character or contains the `//` characters, you **must** double-encode the meeting UUID before making an API request.
+   *
+   * @example 4444AAAiAAAAAiAiAiiAii==
    */
   meetingId: string;
 };
@@ -16616,13 +16679,12 @@ export type ReportMeetingParticipantsVariables = {
 } & FetcherExtraProps;
 
 /**
- * Return a report of a past meeting with two or more participants, including the host. To return a report for past meeting with only **one** participant, use the [**List meeting participants**](/docs/api-reference/zoom-api/ma#operation/dashboardMeetingParticipants) API.
+ * Return a report of a past meeting with two or more participants, including the host. To return a report for past meeting with only **one** participant, use the [**List meeting participants**](/docs/api/accounts/#tag/dashboards/GET/metrics/meetings/{meetingId}/participants) API.
  *
  * **Note:**
  *
  * This API may return empty values for participants' `user_name`, `ip_address`, `location`, and `email` responses when the account calling this API:
- * * Does **not** have a signed HIPAA business associate agreement (BAA).
- * * Is a [**legacy** HIPAA BAA account](/docs/api-reference/other-references/legacy-business-associate-agreements).
+ * * Is a [**legacy** HIPAA BAA account](/docs/api/references/legacy-business-associate-agreements/).
  *
  * **Prerequisites:**
  * * A Pro or a higher plan.
@@ -17067,14 +17129,14 @@ export const reportMeetingSurvey = (variables: ReportMeetingSurveyVariables, sig
 
 export type ReportOperationLogsQueryParams = {
   /**
-   * Start date in 'yyyy-mm-dd' format. The date range defined by the &quot;from&quot; and &quot;to&quot; parameters should only be one month as the report includes only one month worth of data at once.
+   * Start date in 'yyyy-mm-dd' or 'yyyy-MM-dd HH:mm' format. The date range defined by the `from` and `to` parameters should only be one month as the report includes only one month worth of data at once.
    *
    * @format date
    * @example 2022-01-01
    */
   from: string;
   /**
-   * End date.
+   * End date in 'yyyy-mm-dd' or 'yyyy-MM-dd HH:mm' format.
    *
    * @format date
    * @example 2022-01-28
@@ -17201,7 +17263,7 @@ export type ReportOperationLogsVariables = {
  *
  * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `report:read:operation_logs:admin`
  *
- * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `Heavy`
+ * **[Rate Limit Label](https://marketplace.zoom.us/docs/api-reference/rate-limits#rate-limits):** `HEAVY`
  */
 export const reportOperationLogs = (variables: ReportOperationLogsVariables, signal?: AbortSignal) =>
   fetch<ReportOperationLogsResponse, ReportOperationLogsError, undefined, {}, ReportOperationLogsQueryParams, {}>({
@@ -20299,15 +20361,18 @@ export type TspResponse = {
    * @example false
    */
   dial_in_number_unrestricted?: boolean;
+  /**
+   * List of dial in numbers.
+   */
   dial_in_numbers?: {
     /**
-     * Country Code
+     * Country code.
      *
      * @example 1
      */
     code?: string;
     /**
-     * Dial-in number, length is less than 16
+     * Dial-in number. Length is less than 16.
      *
      * @maxLength 16
      * @example +1 1000200200
@@ -20351,7 +20416,7 @@ export type TspResponse = {
    */
   tsp_enabled?: boolean;
   /**
-   * Telephony Service Provider.
+   * Telephony service provider.
    *
    * @example someprovidername
    */
@@ -20361,12 +20426,11 @@ export type TspResponse = {
 export type TspVariables = FetcherExtraProps;
 
 /**
- * Get information on Telephony Service Provider on an account level.
+ * Get information on Telephony Service Provider (TSP) on an account level.
  *
- *
- * **Prerequisites:**
- *
- * * A Pro or a higher plan.
+ * **Prerequisites**
+ * * TSP audio must be enabled on the Zoom account before using this API.
+ * * The Zoom account must have a Pro or higher subscription plan to enable TSP.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:read:admin`
  *
@@ -20431,11 +20495,9 @@ export type TspUpdateVariables = {
 /**
  * Update information of the Telephony Service Provider (TSP) set up on an account.
  *
- * **Prerequisites**:
- *
- * TSP account option should be enabled.
- *
- *
+ * **Prerequisites**
+ * * Enable TSP on the Zoom account before using this API.
+ * * A Pro or higher subscription plan to enable TSP.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:write:admin`
  *
@@ -20454,6 +20516,8 @@ export const tspUpdate = (variables: TspUpdateVariables, signal?: AbortSignal) =
 export type UserTSPsPathParams = {
   /**
    * The user ID or email address of the user. For user-level apps, pass the `me` value.
+   *
+   * @example 30R7kT7bTIKSNUFEuH_Qlg
    */
   userId: string;
 };
@@ -20461,6 +20525,9 @@ export type UserTSPsPathParams = {
 export type UserTSPsError = Fetcher.ErrorWrapper<undefined>;
 
 export type UserTSPsResponse = {
+  /**
+   * List of the user's TSP accounts.
+   */
   tsp_accounts?: {
     /**
      * Conference code: numeric value, length is less than 16.
@@ -20537,6 +20604,10 @@ export type UserTSPsVariables = {
 /**
  * List all of a user's TSP accounts. A user can have a maximum of two TSP accounts.
  *
+ * **Prerequisites**
+ * * TSP (Telephony Service Provider) audio must be enabled on the Zoom account before using this API.
+ * * The Zoom account must have a Pro or higher subscription plan to enable TSP.
+ *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:read:admin`,`tsp:read`
  *
  * **[Granular Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:read:list_tsp_accounts`,`tsp:read:list_tsp_accounts:admin`
@@ -20554,6 +20625,8 @@ export const userTSPs = (variables: UserTSPsVariables, signal?: AbortSignal) =>
 export type UserTSPCreatePathParams = {
   /**
    * The user's user ID or email address. For user-level apps, pass the `me` value.
+   *
+   * @example 30R7kT7bTIKSNUFEuH_Qlg
    */
   userId: string;
 };
@@ -20698,8 +20771,9 @@ export type UserTSPCreateVariables = {
 /**
  * Add a user's TSP account.
  *
- *
- *
+ * **Prerequisites**
+ * * TSP (Telephony Service Provider) audio must be enabled on the Zoom account before using this API.
+ * * The Zoom account must have a Pro or higher subscription plan to enable TSP.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:write:admin`,`tsp:write`
  *
@@ -20742,8 +20816,11 @@ export type TspUrlUpdateVariables = {
 } & FetcherExtraProps;
 
 /**
- * A global dial-in page can provide a list of global access numbers to use to conduct audio conferencing. Call this API to set the URL for a global dial-in page of a user whose Zoom account has TSP and special TSP with third-party audio conferencing options enabled.
+ * Set the URL for a global dial-in page of a user whose Zoom account has TSP and special TSP with third-party audio conferencing options enabled. A global dial-in page can provide a list of global access numbers to use to conduct audio conferencing.
  *
+ * **Prerequisites**
+ * * TSP (Telephony Service Provider) audio must be enabled on the Zoom account before using this API.
+ * * The Zoom account must have a Pro or higher subscription plan to enable TSP.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:write:admin`,`tsp:write`
  *
@@ -20762,6 +20839,8 @@ export const tspUrlUpdate = (variables: TspUrlUpdateVariables, signal?: AbortSig
 export type UserTSPPathParams = {
   /**
    * The user ID or email address of the user. For user-level apps, pass the `me` value.
+   *
+   * @example 30R7kT7bTIKSNUFEuH_Qlg
    */
   userId: string;
   /**
@@ -20846,11 +20925,11 @@ export type UserTSPVariables = {
 } & FetcherExtraProps;
 
 /**
- * Retrieve details of a specific TSP account enabled for a specific user.
+ * Retrieve details of a specific TSP account enabled for a specific user. Each user can have a maximum of two TSP accounts.
  *
- * Each user can have a maximum of two TSP accounts.
- *
- *
+ * **Prerequisites**
+ * * TSP (Telephony Service Provider) audio must be enabled on the Zoom account before using this API.
+ * * The Zoom account must have a Pro or higher subscription plan to enable TSP.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:read:admin`,`tsp:read`
  *
@@ -20869,6 +20948,8 @@ export const userTSP = (variables: UserTSPVariables, signal?: AbortSignal) =>
 export type UserTSPDeletePathParams = {
   /**
    * The user's user ID or email address. For user-level apps, pass the `me` value.
+   *
+   * @example 30R7kT7bTIKSNUFEuH_Qlg
    */
   userId: string;
   /**
@@ -20888,8 +20969,9 @@ export type UserTSPDeleteVariables = {
 /**
  * Delete a user's TSP account.
  *
- *
- *
+ * **Prerequisites**
+ * * TSP (Telephony Service Provider) audio must be enabled on the Zoom account before using this API.
+ * * The Zoom account must have a Pro or higher subscription plan to enable TSP.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:write:admin`,`tsp:write`
  *
@@ -20908,6 +20990,8 @@ export const userTSPDelete = (variables: UserTSPDeleteVariables, signal?: AbortS
 export type UserTSPUpdatePathParams = {
   /**
    * The user ID or email address of the user. For user-level apps, pass the `me` value.
+   *
+   * @example 30R7kT7bTIKSNUFEuH_Qlg
    */
   userId: string;
   /**
@@ -20922,7 +21006,7 @@ export type UserTSPUpdateError = Fetcher.ErrorWrapper<undefined>;
 
 export type UserTSPUpdateRequestBody = {
   /**
-   * Conference code: numeric value, length is less than 16.
+   * Conference code. Numeric value. Length is less than 16.
    *
    * @maxLength 16
    * @minLength 1
@@ -20941,14 +21025,14 @@ export type UserTSPUpdateRequestBody = {
      */
     code?: string;
     /**
-     * Country Label, if passed, will display in place of code.
+     * Country label, if passed, will display in place of code.
      *
      * @maxLength 10
      * @example America
      */
     country_label?: string;
     /**
-     * Dial-in number: length is less than 16.
+     * Dial-in number. Length is less than 16.
      *
      * @maxLength 16
      * @minLength 1
@@ -20956,7 +21040,7 @@ export type UserTSPUpdateRequestBody = {
      */
     number?: string;
     /**
-     * Dial-in number types:
+     * Dial-in number types.
      *  `toll` - Toll number.
      *  `tollfree` -Toll free number.
      *  `media_link` - Media Link Phone Number. It is used for PSTN integration instead of paid bridge number.
@@ -20966,7 +21050,7 @@ export type UserTSPUpdateRequestBody = {
     type?: 'toll' | 'tollfree' | 'media_link';
   }[];
   /**
-   * Leader PIN: numeric value, length is less than 16.
+   * Leader PIN. Numeric value. Length is less than 16.
    *
    * @maxLength 16
    * @minLength 1
@@ -20974,7 +21058,7 @@ export type UserTSPUpdateRequestBody = {
    */
   leader_pin: string;
   /**
-   * Telephony bridge
+   * Telephony bridge.
    *
    * @example US_TSP_TB
    */
@@ -20987,10 +21071,11 @@ export type UserTSPUpdateVariables = {
 } & FetcherExtraProps;
 
 /**
- * Update a user's TSP account.
+ * Update a user's Telephony Service Provider (TSP) account.
  *
- *
- *
+ * **Prerequisites**
+ * * TSP audio enabled on the Zoom account before using this API.
+ * * A Pro or higher subscription plan to enable TSP.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `tsp:write:admin`,`tsp:write`
  *
@@ -21758,6 +21843,9 @@ export type ListWebinarParticipantsResponse = {
    * @default 30
    */
   page_size?: number;
+  /**
+   * Array of webinar participant objects.
+   */
   participants?: {
     /**
      * The participant's unique identifier.
@@ -21852,6 +21940,8 @@ export type ListWebinarParticipantsVariables = {
  *
  * **Prerequisites:**
  * * A Pro or higher plan with a webinar add-on.
+ *
+ * **NOTE:** After meetings with hundreds of participants, the attendance data takes some time to be generated. If you receive a duration of 0 for users' time in the meeting, you may have called the endpoint before the data is fully processed. Implement a short delay or retry logic before fetching participant data.
  *
  * **[Scopes](https://developers.zoom.us/docs/integrations/oauth-scopes-overview/):** `webinar:read:admin`,`webinar:read`
  *
@@ -22435,7 +22525,7 @@ export type WebinarCreateResponse = {
    */
   registrants_confirmation_email?: boolean;
   /**
-   * Unique identifier of the webinar template. Use this field only if you would like to [schedule the webinar using an existing template](https://support.zoom.us/hc/en-us/articles/115001079746-Webinar-Templates#schedule). The value of this field can be retrieved from [**List webinar templates**](https://developers.zoom.us/docs/api/rest/reference/zoom-api/methods#operation/listWebinarTemplates) API.
+   * Unique identifier of the webinar template. Use this field only if you would like to [schedule the webinar using an existing template](https://support.zoom.us/hc/en-us/articles/115001079746-Webinar-Templates#schedule). The value of this field can be retrieved from [**List webinar templates**](/docs/api/rest/reference/zoom-api/methods#operation/listWebinarTemplates) API.
    * You must provide the user ID of the host instead of the email address in the `userId` path parameter in order to use a template for scheduling a Webinar.
    *
    * @example ull6574eur
@@ -22505,13 +22595,7 @@ export type WebinarCreateResponse = {
     status?: 'available' | 'deleted';
   }[];
   /**
-   * Webinar passcode. Passcode may only contain the characters [a-z A-Z 0-9 @ - _ * !]. Maximum of 10 characters.
-   *
-   * If **Webinar Passcode** setting has been **enabled** **and** [locked](https://support.zoom.us/hc/en-us/articles/115005269866-Using-Tiered-Settings#locked) for the user, the passcode field will be autogenerated for the Webinar in the response even if it is not provided in the API request.
-   *
-   *  **Note:** If the account owner or the admin has configured [minimum passcode requirement settings](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604), the passcode value provided here must meet those requirements.
-   *
-   *  If the requirements are enabled, you can view those requirements by calling the [**Get account settings**](/docs/api/rest/reference/account/methods/#operation/accountSettings) API.
+   * The webinar passcode. By default, it can be up to 10 characters in length and may contain alphanumeric characters as well as special characters such as !, @, #, etc.
    *
    * @maxLength 10
    * @example 123456
@@ -22846,7 +22930,7 @@ export type WebinarCreateResponse = {
      */
     language_interpretation?: {
       /**
-       * Whether to enable [language interpretation](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064768) for the webinar.
+       * Whether to enable [language interpretation](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064768) for the webinar. If not provided, the default value will be based on the user's setting.
        *
        * @example true
        */
@@ -22896,7 +22980,7 @@ export type WebinarCreateResponse = {
      */
     sign_language_interpretation?: {
       /**
-       * Whether to enable [sign language interpretation](https://support.zoom.us/hc/en-us/articles/9644962487309-Using-sign-language-interpretation-in-a-meeting-or-webinar) for the webinar.
+       * Whether to enable [sign language interpretation](https://support.zoom.us/hc/en-us/articles/9644962487309-Using-sign-language-interpretation-in-a-meeting-or-webinar) for the webinar. If not provided, the default value will be based on the user's setting.
        *
        * @example true
        */
@@ -22917,7 +23001,7 @@ export type WebinarCreateResponse = {
         /**
          * The interpreter's sign language.
          *
-         *  To get this value, use the `sign_language_interpretation` object's `languages` and `custom_languages` values in the [**Get user settings**](https://developers.zoom.us/docs/api/rest/reference/zoom-api/methods#operation/userSettings) API response.
+         *  To get this value, use the `sign_language_interpretation` object's `languages` and `custom_languages` values in the [**Get user settings**](/docs/api/rest/reference/zoom-api/methods#operation/userSettings) API response.
          *
          * @example American
          */
@@ -22925,7 +23009,7 @@ export type WebinarCreateResponse = {
       }[];
     };
     /**
-     * Require panelists to authenticate to join
+     * Require panelists to authenticate to join. If not provided, the default value will be based on the user's setting.
      *
      * @example true
      */
@@ -22937,13 +23021,13 @@ export type WebinarCreateResponse = {
      */
     meeting_authentication?: boolean;
     /**
-     * Add watermark that identifies the viewing participant.
+     * Add watermark that identifies the viewing participant. If not provided, the default value will be based on the user's setting.
      *
      * @example true
      */
     add_watermark?: boolean;
     /**
-     * Add audio watermark that identifies the participants.
+     * Add audio watermark that identifies the participants. If not provided, the default value will be based on the user's setting.
      *
      * @example true
      */
@@ -23051,7 +23135,7 @@ export type WebinarCreateResponse = {
       /**
        * * `true`: Enable [Q&amp;A](https://support.zoom.us/hc/en-us/articles/203686015-Using-Q-A-as-the-webinar-host#:~:text=Overview,and%20upvote%20each%20other's%20questions.) for webinar.
        *
-       * * `false`: Disable Q&amp;A for webinar.
+       * * `false`: Disable Q&amp;A for webinar. If not provided, the default value will be based on the user's setting.
        *
        * @example true
        */
@@ -23114,10 +23198,9 @@ export type WebinarCreateResponse = {
      */
     enable_session_branding?: boolean;
     /**
-     * Whether to allow host and co-hosts to fully control the mute state of participants.
+     * Whether to allow host and co-hosts to fully control the mute state of participants. Not supported for simulive webinar. If not provided, the default value will be based on the user's setting.
      *
      * @example false
-     * @default false
      */
     allow_host_control_participant_mute_state?: boolean;
     /**
@@ -23137,11 +23220,11 @@ export type WebinarCreateResponse = {
   /**
    * The `start_url` of a webinar is a URL using which a host or an alternative host can start the webinar. This URL should only be used by the host of the meeting and should not be shared with anyone other than the host of the webinar.
    *
-   * The expiration time for the `start_url` field listed in the response of the [**Create a webinar**](https://developers.zoom.us/docs/api/rest/reference/zoom-api/methods#operation/webinarCreate) API is two hours for all regular users.
+   * The expiration time for the `start_url` field listed in the response of the [**Create a webinar**](/docs/api/rest/reference/zoom-api/methods#operation/webinarCreate) API is two hours for all regular users.
    *
-   * For users created using the `custCreate` option via the [**Create users**](https://developers.zoom.us/docs/api/rest/reference/zoom-api/methods#operation/userCreate) API, the expiration time of the `start_url` field is 90 days.
+   * For users created using the `custCreate` option via the [**Create users**](/docs/api/rest/reference/zoom-api/methods#operation/userCreate) API, the expiration time of the `start_url` field is 90 days.
    *
-   * For security reasons, to retrieve the latest value for the `start_url` field programmatically after expiry, call the [**Get a webinar**](https://developers.zoom.us/docs/api/rest/reference/zoom-api/methods#operation/webinar) API and refer to the value of the `start_url` field in the response.
+   * For security reasons, to retrieve the latest value for the `start_url` field programmatically after expiry, call the [**Get a webinar**](/docs/api/rest/reference/zoom-api/methods#operation/webinar) API and refer to the value of the `start_url` field in the response.
    *
    * @example https://example.com/s/11111
    */
@@ -23229,23 +23312,22 @@ export type WebinarCreateRequestBody = {
    */
   duration?: number;
   /**
-   * Webinar passcode. Passcode may only contain the characters [a-z A-Z 0-9 @ - _ * !]. Maximum of 10 characters.
+   * The webinar passcode. By default, it can be up to 10 characters in length and may contain alphanumeric characters as well as special characters like !, @, #, and others..
    *
-   * If **Webinar Passcode** setting has been **enabled** **and** [locked](https://support.zoom.us/hc/en-us/articles/115005269866-Using-Tiered-Settings#locked) for the user, the passcode field will be autogenerated for the Webinar in the response even if it is not provided in the API request.
-   *
-   *  **Note:** If the account owner or the admin has configured [minimum passcode requirement settings](https://support.zoom.us/hc/en-us/articles/360033559832-Meeting-and-webinar-passwords#h_a427384b-e383-4f80-864d-794bf0a37604), the passcode value provided here must meet those requirements.
-   *
-   *  If the requirements are enabled, you can view those requirements by calling the [**Get account settings**](/docs/api/rest/reference/account/methods/#operation/accountSettings) API.
+   * **Note**:
+   * - If the account owner or administrator has configured [Passcode Requirement](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0063160#h_a427384b-e383-4f80-864d-794bf0a37604), the passcode **must** meet those requirements. You can retrieve the requirements using the [**Get user settings**](/docs/api/users/#tag/users/GET/users/{userId}/settings) API or the [**Get account settings**](/docs/api/accounts/#tag/accounts/GET/accounts/{accountId}/settings) API.
+   * - If the **Passcode** user setting is enabled and `default_passcode` is not explicitly set to `false`, a passcode will be automatically generated when one is not provided.
+   * - If the **Passcode** setting is enabled and [locked](https://support.zoom.us/hc/en-us/articles/115005269866-Using-Tiered-Settings#locked) for the user, a passcode will be automatically generated when one is not provided.
    *
    * @maxLength 10
    * @example 123456
    */
   password?: string;
   /**
-   * Whether to generate a default passcode using the user's settings. This value defaults to `false`.
+   * Determines whether to automatically generate a passcode for the webinar when no passcode is provided and the user's **Passcode** setting is enabled. Defaults to `true`. When set to `false`, webinars will only have a passcode if one is explicitly provided.
    *
-   * @example false
-   * @default false
+   * @example true
+   * @default true
    */
   default_passcode?: boolean;
   /**
@@ -23422,7 +23504,7 @@ export type WebinarCreateRequestBody = {
      */
     authentication_domains?: string;
     /**
-     * Specify the authentication type for users to join a Webinar with`meeting_authentication` setting set to `true`. The value of this field can be retrieved from the `id` field within `authentication_options` array in the response of [**Get user settings**](https://developers.zoom.us/docs/api/rest/reference/zoom-api/methods#operation/userSettings) API.
+     * Specify the authentication type for users to join a Webinar with`meeting_authentication` setting set to `true`. The value of this field can be retrieved from the `id` field within `authentication_options` array in the response of [**Get user settings**](/docs/api/rest/reference/zoom-api/methods#operation/userSettings) API.
      *
      * @example signIn_D8cJuqWVQ623CI4Q8yQK0Q
      */
@@ -23568,7 +23650,7 @@ export type WebinarCreateRequestBody = {
      */
     language_interpretation?: {
       /**
-       * Whether to enable [language interpretation](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064768) for the webinar.
+       * Whether to enable [language interpretation](https://support.zoom.com/hc/en/article?id=zm_kb&sysparm_article=KB0064768) for the webinar. If not provided, the default value will be based on the user's setting.
        *
        * @example true
        */
@@ -23598,7 +23680,7 @@ export type WebinarCreateRequestBody = {
         /**
          * A comma-separated list of the interpreter's languages. The string must contain exactly two languages.
          *
-         * To get this value, use the `language_interpretation` object's `languages` and `custom_languages` values in the [**Get user settings**](https://developers.zoom.us/docs/api/users/#tag/users/GET/users/{userId}/settings) API response.
+         * To get this value, use the `language_interpretation` object's `languages` and `custom_languages` values in the [**Get user settings**](/docs/api/users/#tag/users/GET/users/{userId}/settings) API response.
          *
          * **languages**: System-supported languages include `English`, `Chinese`, `Japanese`, `German`, `French`, `Russian`, `Portuguese`, `Spanish`, and `Korean`.
          *
@@ -23618,7 +23700,7 @@ export type WebinarCreateRequestBody = {
      */
     sign_language_interpretation?: {
       /**
-       * Whether to enable [sign language interpretation](https://support.zoom.us/hc/en-us/articles/9644962487309-Using-sign-language-interpretation-in-a-meeting-or-webinar) for the webinar.
+       * Whether to enable [sign language interpretation](https://support.zoom.us/hc/en-us/articles/9644962487309-Using-sign-language-interpretation-in-a-meeting-or-webinar) for the webinar. If not provided, the default value will be based on the user's setting.
        *
        * @example true
        */
@@ -23639,7 +23721,7 @@ export type WebinarCreateRequestBody = {
         /**
          * The interpreter's sign language.
          *
-         *  To get this value, use the `sign_language_interpretation` object's `languages` and `custom_languages` values in the [**Get user settings**](https://developers.zoom.us/docs/api/rest/reference/zoom-api/methods#operation/userSettings) API response.
+         *  To get this value, use the `sign_language_interpretation` object's `languages` and `custom_languages` values in the [**Get user settings**](/docs/api/rest/reference/zoom-api/methods#operation/userSettings) API response.
          *
          * @example American
          */
@@ -23647,7 +23729,7 @@ export type WebinarCreateRequestBody = {
       }[];
     };
     /**
-     * Require panelists to authenticate to join
+     * Require panelists to authenticate to join. If not provided, the default value will be based on the user's setting.
      *
      * @example true
      */
@@ -23659,13 +23741,13 @@ export type WebinarCreateRequestBody = {
      */
     meeting_authentication?: boolean;
     /**
-     * Add watermark that identifies the viewing participant. Not supported for simulive webinar.
+     * Add watermark that identifies the viewing participant. Not supported for simulive webinar. If not provided, the default value will be based on the user's setting.
      *
      * @example true
      */
     add_watermark?: boolean;
     /**
-     * Add audio watermark that identifies the participants. Not supported for simulive webinar.
+     * Add audio watermark that identifies the participants. Not supported for simulive webinar. If not provided, the default value will be based on the user's setting.
      *
      * @example true
      */
@@ -23767,7 +23849,7 @@ export type WebinarCreateRequestBody = {
       /**
        * * `true` - Enable [Q&amp;A](https://support.zoom.us/hc/en-us/articles/203686015-Using-Q-A-as-the-webinar-host#:~:text=Overview,and%20upvote%20each%20other's%20questions.) for webinar.
        *
-       * * `false` - Disable Q&amp;A for webinar.
+       * * `false` - Disable Q&amp;A for webinar. If not provided, the default value will be based on the user's setting.
        *
        * @example true
        */
@@ -23824,10 +23906,9 @@ export type WebinarCreateRequestBody = {
      */
     enable_session_branding?: boolean;
     /**
-     * Whether to allow the host and co-hosts to fully control the mute state of participants.
+     * Whether to allow the host and co-hosts to fully control the mute state of participants. Not supported for simulive webinar. If not provided, the default value will be based on the user's setting.
      *
      * @example false
-     * @default false
      */
     allow_host_control_participant_mute_state?: boolean;
     /**
@@ -23843,7 +23924,7 @@ export type WebinarCreateRequestBody = {
    *
    * To set time as GMT the format should be `yyyy-MM-dd`T`HH:mm:ssZ`.
    *
-   * To set time using a specific timezone, use `yyyy-MM-dd`T`HH:mm:ss` format and specify the timezone [ID](https://developers.zoom.us/docs/api/rest/other-references/abbreviation-lists/#timezones) in the `timezone` field OR leave it blank and the timezone set on your Zoom account will be used. You can also set the time as UTC as the timezone field.
+   * To set time using a specific timezone, use `yyyy-MM-dd`T`HH:mm:ss` format and specify the timezone [ID](/docs/api/references/abbreviations/#timezones) in the `timezone` field OR leave it blank and the timezone set on your Zoom account will be used. You can also set the time as UTC as the timezone field.
    *
    * The `start_time` should only be used for scheduled and / or recurring webinars with fixed time.
    *
@@ -23852,7 +23933,7 @@ export type WebinarCreateRequestBody = {
    */
   start_time?: string;
   /**
-   * The webinar template ID to schedule a webinar using a [webinar template](https://support.zoom.us/hc/en-us/articles/115001079746-Webinar-Templates) or a [admin webinar template](https://support.zoom.us/hc/en-us/articles/8137753618957-Configuring-admin-webinar-templates). For a list of webinar templates, use the [**List webinar templates**](https://developers.zoom.us/docs/api/rest/reference/zoom-api/methods#operation/listWebinarTemplates) API.
+   * The webinar template ID to schedule a webinar using a [webinar template](https://support.zoom.us/hc/en-us/articles/115001079746-Webinar-Templates) or a [admin webinar template](https://support.zoom.us/hc/en-us/articles/8137753618957-Configuring-admin-webinar-templates). For a list of webinar templates, use the [**List webinar templates**](/docs/api/rest/reference/zoom-api/methods#operation/listWebinarTemplates) API.
    *
    * @example 5Cj3ceXoStO6TGOVvIOVPA==
    */
@@ -23860,7 +23941,7 @@ export type WebinarCreateRequestBody = {
   /**
    * The timezone to assign to the `start_time` value. This field is only used for scheduled or recurring webinars with a fixed time.
    *
-   * For a list of supported timezones and their formats, see our [timezone list](https://developers.zoom.us/docs/api/rest/other-references/abbreviation-lists/#timezones).
+   * For a list of supported timezones and their formats, see our [timezone list](/docs/api/references/abbreviations/#timezones).
    *
    * @example America/Los_Angeles
    */
@@ -23924,7 +24005,7 @@ export type WebinarCreateVariables = {
 } & FetcherExtraProps;
 
 /**
- * Schedule a webinar for a user who is a webinar host. For user-level apps, pass [the `me` value](https://developers.zoom.us/docs/api/rest/using-zoom-apis/#the-me-keyword) instead of the `userId` parameter.
+ * Schedule a webinar for a user who is a webinar host. For user-level apps, pass [the `me` value](/docs/api/using-zoom-apis/#the-me-keyword) instead of the `userId` parameter.
  *
  *  Webinars allow a host to broadcast a Zoom meeting to up to 10,000 attendees.
  *
@@ -30502,6 +30583,7 @@ export const operationsByTag = {
     meetingLiveStreamUpdate,
     meetingLiveStreamStatusUpdate,
     getameetingsummary,
+    deletemeetingorwebinarsummary,
     meetingAppAdd,
     meetingAppDelete,
     meetingPolls,
