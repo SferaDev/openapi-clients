@@ -1,0 +1,46 @@
+{
+  "name": "v0-api",
+  "version": "0.0.1",
+  "description": "Vercel v0 auto-generated type-safe API client",
+  "author": "SferaDev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SferaDev/openapi-clients/issues"
+  },
+  "homepage": "https://github.com/SferaDev/openapi-clients#readme",
+  "zshy": "./src/index.ts",
+  "scripts": {
+    "tsc": "tsc --noEmit",
+    "build": "zshy",
+    "generate": "rimraf ./src/generated && kubb generate"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SferaDev/openapi-clients.git"
+  },
+  "devDependencies": {
+    "@kubb/cli": "^3.16.0",
+    "@kubb/core": "^3.16.0",
+    "@modelcontextprotocol/sdk": "^1.15.1",
+    "openapi-utils": "workspace:*"
+  },
+  "peerDependencies": {
+    "@modelcontextprotocol/sdk": "^1.15.1"
+  },
+  "dependencies": {
+    "zod": "^4.0.5"
+  },
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  }
+}
